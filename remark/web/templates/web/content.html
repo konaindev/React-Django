@@ -1,0 +1,21 @@
+{# Base layout for all content (aka non-react-rendered) pages. Includes header and footer. #}
+{% extends 'web/base.html' %}
+
+{% block body %}
+    <div id="page-wrapper">
+        {% block header %}
+        {% include 'web/header.html' %}
+        {% endblock %}
+        {% block content %}
+            <section id="main">
+                <div class="inner">
+                    {% block detail %}{% endblock %}
+                </div>
+            </section>        
+        {% endblock %}
+        {% block footer %}
+        {% include 'web/footer.html' %}
+        {% endblock footer %}
+    </div>
+{% endblock %}
+

@@ -1,0 +1,11 @@
+{# The base template for all pages that are fully managed by react. #}
+{% extends "web/base.html" %}
+
+{% block body %}
+{# Allow our react javascript to find the appropriate page component. #}
+<div id="root" data-page="{{ page_class|default:"Page" }}">
+</div>
+
+{# Use the fancy new json_script template filter in Django 2.1 to inject our page props. #}
+{{ page_props|json_script:"page-props" }}
+{% endblock %}

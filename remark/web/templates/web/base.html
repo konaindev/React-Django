@@ -1,0 +1,38 @@
+{# The base template for all Remarkably pages; provides nothing but an HTML5 skeleton #}
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    {% block meta %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="shortcut icon" href="{% static "favicon.ico" %}">
+    {% endblock %}
+
+    {% block vendor_css %}
+    {% endblock %}
+    {% block css %}
+    <link rel="stylesheet" href="{% static "css/main.css" %}">
+    {% endblock %}
+
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  {% block body_tag %}<body>{% endblock %}
+    {% block body %}
+    {% endblock %}
+
+    {% block csrf %}
+    <div style="display: none">{% csrf_token %}</div>
+    {% endblock %}
+    {% block vendor_js %}
+    <script src="{% static "js/vendor.js" %}"></script>
+    {% endblock %}
+    {% block js %}
+    <script src="{% static "js/index.js" %}" type="text/javascript"></script>
+    <script src="{% url "js_reverse" %}" type="text/javascript"></script>
+    {% endblock %}
+    {% block analytics %}
+    {% include "web/analytics.html" %}
+    {% endblock %}
+  </body>
+</html>
