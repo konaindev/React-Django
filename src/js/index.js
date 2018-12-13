@@ -47,7 +47,6 @@ const getPageClass = () => {
     return null;
   }
   const pageName = root ? root.dataset.page : null;
-  console.log(pageName);
   const pageClass = pageName ? pages[pageName] : Page;
   return pageClass;
 };

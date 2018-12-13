@@ -1,7 +1,8 @@
 #!/bin/sh
 
 # Run Django's local development server, along with parceljs in watch
-# mode, and browser-sync for ultimate fanciness.
+# mode, and browser-sync for ultimate fanciness -- and expose it all to
+# remarkably.ngrok.io. :-)
 
 trap killchildren SIGINT
 
@@ -19,6 +20,10 @@ yarn parcel watch src/js/index.js --no-hmr &
 ./manage.py runserver &
 
 # Run the browser-sync fancy proxy *around* said django dev server
-yarn browser-sync start --proxy http://localhost:8000 --files 'dist' --files 'remark' &
+yarn browser-sync start --config './scripts/bs-ngrok-config.js' --no-open &
+
+# Run ngrok outward
+ngrok http --subdomain=remarkably --log=stdout 3000 > /dev/null &
 
 wait
+
