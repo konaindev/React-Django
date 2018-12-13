@@ -50,6 +50,6 @@ Warning: this is fancy magic. I imagine it is fragile. -Dave
 
 ## Sharp edges
 
-### Known techical debt
+### Known technical debt
 
 Hey! We just started this app. Assume it's 100% technical debt. :-) -Dave
