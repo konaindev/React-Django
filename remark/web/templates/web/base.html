@@ -12,7 +12,7 @@
     {% block vendor_css %}
     {% endblock %}
     {% block css %}
-    <link rel="stylesheet" href="{% static "css/main.css" %}">
+    <link rel="stylesheet" href="{% static "main.postcss.css" %}">
     {% endblock %}
 
     <title>{% block title %}{% endblock %}</title>
@@ -25,10 +25,9 @@
     <div style="display: none">{% csrf_token %}</div>
     {% endblock %}
     {% block vendor_js %}
-    <script src="{% static "js/vendor.js" %}"></script>
     {% endblock %}
     {% block js %}
-    <script src="{% static "js/index.js" %}" type="text/javascript"></script>
+    <script src="{% static "index.js" %}" type="text/javascript"></script>
     <script src="{% url "js_reverse" %}" type="text/javascript"></script>
     {% endblock %}
     {% block analytics %}
