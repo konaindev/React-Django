@@ -29,6 +29,7 @@ from .admin import admin_site
 
 urlpatterns = [
     path("admin/", admin_site.urls),
+    # Make our URL patterns available in the javascript context.
     path(
         "jsreverse/",
         cache_page(3600)(urls_js) if settings.CACHE_JS_REVERSE else urls_js,
