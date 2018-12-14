@@ -1,0 +1,14 @@
+{% autoescape off %}
+{% comment %} {% block subject %}{{ subject }}{% endblock %} {% endcomment %}
+{% block message %}{% endblock %}
+{% block signature %}- The Remarkably Team{% endblock signature %}
+
+{% block links %}{% endblock %}
+
+{% block footer %}
+---
+Remarkably is based in beautiful Seattle, WA. 
+
+We're sending this email because you signed up at https://remarkably.io/
+{% endblock footer %}
+{% endautoescape %}
