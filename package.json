@@ -5,7 +5,7 @@
   "license": "copyright",
   "scripts": {
     "build": "parcel build src/css/main.postcss.scss --no-hmr; parcel build src/js/index.js --no-hmr",
-    "heroku-postbuild": "parcel build src/css/main.postcss.scss --no-hmr; parcel build src/js/index.js --no-hmr"
+    "heroku-postbuild": "parcel build src/css/main.postcss.scss; parcel build src/js/index.js"
   },
   "devDependencies": {
     "@babel/core": "^7",
