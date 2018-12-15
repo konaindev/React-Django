@@ -60,6 +60,7 @@ let colors = {
   "remark-blue-light": "#d9e4ff",
   "remark-blue-lightest": "#eaf5ff",
   "remark-blue-alt": "#4f47f4",
+  "remark-blue-dark": "#272f50",
   "remark-blue-darker": "#192245",
   "remark-blue-darkest": "#0e0d2c",
 
@@ -67,7 +68,7 @@ let colors = {
   "remark-ui-darkest": "#0e1228",
   "remark-ui-darker": "#1315cb",
   "remark-ui": "#192245", // same as remark-blue-darker
-  "remark-ui-light": "#272f50",
+  "remark-ui-light": "#272f50", // same as remark-blue-dark
 
   // An enjoyable highlight color
   "remark-salmon": "#ff8972"

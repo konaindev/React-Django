@@ -88,6 +88,46 @@
 
 // Put our custom component classes here.
 
+// The app-wide site header
+.k-header {
+    @apply flex items-center justify-between;
+    @apply h-16 w-full;
+    @apply bg-remark-blue-dark;
+    @apply p-4;
+
+    h1 {
+        @apply font-normal text-xl;
+    }
+
+    nav {
+    }
+
+    a {
+        @apply text-remark-blue-light no-underline;
+
+        &:hover {
+            @apply underline;
+        }
+    }
+}
+
+.k-footer {
+    @apply text-sm text-center;
+    @apply block h-16 w-full p-4;
+    @apply absolute pin-b; // for now
+}
+
+// the outer content container
+.k-outer {
+    margin: 0 auto;
+    @apply max-w-2xl;
+}
+
+// the inner content container
+.k-inner {
+    @apply p-16;
+}
+
 // Load tailwind's utility classes
 @tailwind utilities;
 
@@ -103,4 +143,9 @@ h4,
 h5,
 h6 {
     @apply font-headline;
+}
+
+ul,
+li {
+    list-style-type: none;
 }

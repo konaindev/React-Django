@@ -22,7 +22,7 @@
             {% for visible_field in form.visible_fields %}
             <div>
                 {{ visible_field.errors }}
-                {{ visible_field.as_p }}
+                {{ visible_field.label_tag }} {{ visible_field }}
             </div>
             {% endfor %}
 
