@@ -19,6 +19,6 @@ yarn parcel watch src/js/index.js --no-hmr &
 ./manage.py runserver &
 
 # Run the browser-sync fancy proxy *around* said django dev server
-yarn browser-sync start --proxy http://localhost:8000 --files 'dist' --files 'remark' &
+yarn browser-sync start --proxy http://localhost:8000 --files 'dist' --files 'remark' --no-open &
 
 wait

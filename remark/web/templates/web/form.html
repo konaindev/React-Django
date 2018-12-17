@@ -2,39 +2,42 @@
 {% extends 'web/content.html' %}
 
 {% block detail %}
+    <div class="k-form-container">
+      <div class="k-form-container-inner">
+        <h1>{% block form_name %}{% endblock %}</h1>
 
-    <h2>{% block form_name %}{% endblock %}</h2>
+        {% for error in form.non_field_errors %}
+        <p>{{ error }}</p>
+        {% endfor %}
 
-    {% for error in form.non_field_errors %}
-    <p>{{ error }}</p>
-    {% endfor %}
+        {% block nonfield_extras %}{% endblock %}
 
-    {% block nonfield_extras %}{% endblock %}
+        <form method="post" action="{% block action %}#{% endblock %}">
+            {% csrf_token %}
 
-    <form method="post" action="{% block action %}#{% endblock %}">
-        {% csrf_token %}
-
-        {% for hidden_field in form.hidden_fields %}
-            {{ hidden_field }}
-        {% endfor %}        
-
-        <div>
-            {% for visible_field in form.visible_fields %}
-            <div>
-                {{ visible_field.errors }}
-                {{ visible_field.label_tag }} {{ visible_field }}
-            </div>
-            {% endfor %}
+            {% for hidden_field in form.hidden_fields %}
+                {{ hidden_field }}
+            {% endfor %}        
 
             <div>
-                <ul class="actions">
-                    <li><input type="submit" value="{% block submit %}Submit{% endblock %}" class="primary" /></li>
-                </ul>
-            </div>
-        </div>
-    </form>
+                {% for visible_field in form.visible_fields %}
+                <div>
+                    {{ visible_field.errors }}
+                    {{ visible_field.label_tag }} {{ visible_field }}
+                </div>
+                {% endfor %}
 
-    {% block form_extra %}{% endblock %}
+                <div>
+                    <ul class="actions">
+                        <li><input type="submit" value="{% block submit %}Submit{% endblock %}" class="primary" /></li>
+                    </ul>
+                </div>
+            </div>
+        </form>
+
+        {% block form_extra %}{% endblock %}
+      </div>
+    </div>
 
 {% endblock %}
 

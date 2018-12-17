@@ -66,9 +66,10 @@ let colors = {
 
   // UI colors (as suggested by our current marketing site)
   "remark-ui-darkest": "#0e1228",
-  "remark-ui-darker": "#1315cb",
+  "remark-ui-darker": "#151c3b",
   "remark-ui": "#192245", // same as remark-blue-darker
   "remark-ui-light": "#272f50", // same as remark-blue-dark
+  "remark-ui-lighter": "#4f47f4", // same as remark-blue-alt
 
   // An enjoyable highlight color
   "remark-salmon": "#ff8972"
