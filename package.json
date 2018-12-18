@@ -4,7 +4,7 @@
   "private": true,
   "license": "copyright",
   "scripts": {
-    "build": "parcel build src/css/main.postcss.scss --no-hmr; parcel build src/js/index.js --no-hmr",
+    "build": "parcel build src/css/main.postcss.scss; parcel build src/js/index.js",
     "heroku-postbuild": "parcel build src/css/main.postcss.scss; parcel build src/js/index.js"
   },
   "devDependencies": {
