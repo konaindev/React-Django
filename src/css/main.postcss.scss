@@ -136,9 +136,52 @@
     }
 
     .k-form-container-inner {
-        @apply leading-loose text-lg;
+        @apply leading-normal text-lg;
         @apply px-6 pb-6 pt-2;
         @apply border-4 border-solid border-remark-ui-darkest rounded-lg;
+    }
+
+    .k-form-messages {
+        @apply leading-normal;
+        @apply pt-6 pb-4;
+    }
+
+    .k-form-fields {
+        @apply leading-loose;
+    }
+
+    .k-form-field {
+        @apply w-full flex;
+        @apply my-4;
+
+        label {
+            @apply w-1/5;
+        }
+
+        input {
+            @apply w-4/5;
+        }
+    }
+
+    .k-form-actions {
+        @apply mt-8 mb-4;
+
+        ul {
+            @apply flex;
+            @apply justify-end;
+            @apply p-0;
+
+            li {
+            }
+        }
+    }
+
+    .k-form-extras {
+        @apply text-sm text-grey-dark;
+
+        a {
+            @apply text-grey-dark;
+        }
     }
 }
 
@@ -165,7 +208,22 @@ li {
 }
 
 input[type="text"],
+input[type="email"],
 input[type="password"] {
     @apply rounded;
+    @apply px-2 py-1;
+    @apply leading-loose;
     @apply bg-transparent border border-solid border-remark-ui-lighter;
+    @apply text-remark-blue-light;
+}
+
+input[type="submit"] {
+    @apply bg-remark-ui-lighter;
+    @apply rounded-full border border-solid border-remark-ui-lighter;
+    @apply text-remark-blue-light;
+    @apply px-8 py-3;
+
+    &:hover {
+        @apply bg-remark-ui-lightest;
+    }
 }

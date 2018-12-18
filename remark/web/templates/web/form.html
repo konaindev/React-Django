@@ -6,11 +6,13 @@
       <div class="k-form-container-inner">
         <h1>{% block form_name %}{% endblock %}</h1>
 
-        {% for error in form.non_field_errors %}
-        <p>{{ error }}</p>
-        {% endfor %}
+        <div class="k-form-messages">
+          {% for error in form.non_field_errors %}
+          <p>{{ error }}</p>
+          {% endfor %}
 
         {% block nonfield_extras %}{% endblock %}
+        </div>
 
         <form method="post" action="{% block action %}#{% endblock %}">
             {% csrf_token %}
@@ -19,23 +21,23 @@
                 {{ hidden_field }}
             {% endfor %}        
 
-            <div>
+            <div class="k-form-fields">
                 {% for visible_field in form.visible_fields %}
-                <div>
+                <div class="k-form-field">
                     {{ visible_field.errors }}
                     {{ visible_field.label_tag }} {{ visible_field }}
                 </div>
                 {% endfor %}
 
-                <div>
-                    <ul class="actions">
+                <div class="k-form-actions">
+                    <ul>
                         <li><input type="submit" value="{% block submit %}Submit{% endblock %}" class="primary" /></li>
                     </ul>
                 </div>
             </div>
         </form>
 
-        {% block form_extra %}{% endblock %}
+        <div class="k-form-extras">{% block form_extra %}{% endblock %}</div>
       </div>
     </div>
 

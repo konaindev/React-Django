@@ -70,6 +70,8 @@ let colors = {
   "remark-ui": "#192245", // same as remark-blue-darker
   "remark-ui-light": "#272f50", // same as remark-blue-dark
   "remark-ui-lighter": "#4f47f4", // same as remark-blue-alt
+  "remark-ui-lightest": "#6258ff",
+  "remark-ui-accent": "#ff8972", // same as remark-salmon
 
   // An enjoyable highlight color
   "remark-salmon": "#ff8972"
