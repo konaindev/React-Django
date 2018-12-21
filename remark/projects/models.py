@@ -3,7 +3,9 @@ import math
 
 from django.db import models
 
-from remark.lib.math import d_div
+from remark.lib.math import d_div, d_quant_perc, d_quant_currency
+
+
 from remark.lib.tokens import public_id
 
 from .reports import Report
@@ -180,27 +182,27 @@ class Period(models.Model):
     @property
     def lease_rate(self):
         """The percentage of leasable units that are actually leased at end of period."""
-        return d_div(self.leased_units, self.leasable_units)
+        return d_quant_perc(d_div(self.leased_units, self.leasable_units))
 
     @property
     def usvs_to_inquiries_percent(self):
         """The conversation rate from usvs to inquiries."""
-        return d_div(self.inquiries, self.usvs)
+        return d_quant_perc(d_div(self.inquiries, self.usvs))
 
     @property
     def inquiries_to_tours_percent(self):
         """The conversion rate from inquiries to tours."""
-        return d_div(self.tours, self.inquiries)
+        return d_quant_perc(d_div(self.tours, self.inquiries))
 
     @property
     def tours_to_lease_applications_percent(self):
         """The conversion rate from lease applications to tours."""
-        return d_div(self.lease_applications, self.tours)
+        return d_quant_perc(d_div(self.lease_applications, self.tours))
 
     @property
     def lease_applications_to_lease_executions_percent(self):
         """The conversion rate from lease executions to tours."""
-        return d_div(self.lease_executions, self.lease_applications)
+        return d_quant_perc(d_div(self.lease_executions, self.lease_applications))
 
     # --------------------------------------------------------------------------
     # Retention funnel (entered)
@@ -341,37 +343,43 @@ class Period(models.Model):
     @property
     def cost_per_usv(self):
         """Return the estimated cost to obtain a unique site visitor in this period."""
-        return d_div(
-            self.investment_reputation_building
-            + self.investment_demand_creation
-            + self.investment_market_intelligence,
-            self.usvs,
+        return d_quant_currency(
+            d_div(
+                self.investment_reputation_building
+                + self.investment_demand_creation
+                + self.investment_market_intelligence,
+                self.usvs,
+            )
         )
 
     @property
     def cost_per_inquiry(self):
         """Return the estimated cost to obtain an inbound inquiry in this period."""
-        return d_div(
-            self.investment_reputation_building
-            + self.investment_demand_creation
-            + self.investment_market_intelligence,
-            self.inquiries,
+        return d_quant_currency(
+            d_div(
+                self.investment_reputation_building
+                + self.investment_demand_creation
+                + self.investment_market_intelligence,
+                self.inquiries,
+            )
         )
 
     @property
     def cost_per_tour(self):
         """Return the estimated cost to obtain an inbound tour in this period."""
-        return d_div(self.marketing_investment, self.tours)
+        return d_quant_currency(d_div(self.marketing_investment, self.tours))
 
     @property
     def cost_per_lease_application(self):
         """Return the estimated cost to obtain a lease application in this period."""
-        return d_div(self.marketing_investment, self.lease_applications)
+        return d_quant_currency(
+            d_div(self.marketing_investment, self.lease_applications)
+        )
 
     @property
     def cost_per_lease_execution(self):
         """Return the estimated cost to obtain a lease application in this period."""
-        return d_div(self.marketing_investment, self.lease_executions)
+        return d_quant_currency(d_div(self.marketing_investment, self.lease_executions))
 
     def __str__(self):
         return "<Period: {}-{} ({})>".format(self.start, self.end, self.project)
