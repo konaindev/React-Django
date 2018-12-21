@@ -109,6 +109,9 @@ class Period(models.Model):
     # anything" down the road. NULL is the right answer here, but it obviously complicates
     # computations that flow through the system... so I've punted for now. -Dave
 
+    # TODO the use of d_quant_perc(...) and d_quant_currency(...) may be better
+    # moved to a view layer -- particularly if we're chaining computations. -Dave
+
     # TODO if we demand contiguous periods, this trivially carries over from the
     # previous period. -Dave
     leased_units_start = models.IntegerField(
