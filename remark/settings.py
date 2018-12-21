@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_js_reverse",
     "remark.users",
+    "remark.projects",
     "remark.web",
 ]
 
@@ -147,7 +148,7 @@ INTERNAL_IPS = ["127.0.0.1"]
 AUTH_USER_MODEL = "users.User"
 
 # Login and logout
-LOGIN_REDIRECT_URL = "/home/"
+LOGIN_REDIRECT_URL = "/admin/"
 LOGIN_URL = "/users/login/"
 LOGOUT_REDIRECT_URL = "/"
 
