@@ -4,8 +4,6 @@ import math
 from django.db import models
 
 from remark.lib.math import d_div, d_quant_perc, d_quant_currency
-
-
 from remark.lib.tokens import public_id
 
 from .reports import Report

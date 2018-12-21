@@ -1,4 +1,4 @@
-from decimal import localcontext, Context, Decimal, ROUND_HALF_EVEN, ROUND_HALF_UP
+from decimal import Decimal, ROUND_HALF_EVEN, ROUND_HALF_UP
 
 # TODO this is a grab bag of trivial tools. They probably belong elsewhere,
 # or should be entirely redesigned, etc. YMMV. -Dave
@@ -8,7 +8,7 @@ def d_div(a, b):
     """
     Return a/b as a Python decimal.
 
-    Operations are applied in the default Decimal context for this thread.
+    Operations are applied in the default decimal.Context for this thread.
 
     Example: d_div(6, 3) = Decimal("2")
 
@@ -32,4 +32,5 @@ def d_quant_perc(d):
 
     Round in a fashion appropriate for percentages.
     """
+    # TODO is ROUND_HALF_EVEN what we want? Maybe ROUND_HALF_UP is preferable?
     return Decimal(d).quantize(Decimal("0.001"), rounding=ROUND_HALF_EVEN)
