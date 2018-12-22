@@ -66,8 +66,7 @@ class Project(models.Model):
 
 
 class PeriodManager(models.Model):
-    def for_dates(self, start=None, end=None):
-        pass
+    pass
 
 
 class Period(models.Model):
