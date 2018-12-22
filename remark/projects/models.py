@@ -62,7 +62,7 @@ class Project(models.Model):
         pass
 
     def __str__(self):
-        return "<Project: {} {}>".format(self.name, self.public_id)
+        return "{} ({})".format(self.name, self.public_id)
 
 
 class PeriodManager(models.Model):
@@ -150,7 +150,7 @@ class Period(models.Model):
         default=decimal.Decimal(0),
         max_digits=4,
         decimal_places=3,
-        help_text="The target percentage of leasable units that we would like to actually lease.",
+        help_text="The target percentage of leasable units that we would like to actually lease. (Enter 0.9 for 90%)",
     )
 
     # TODO The distinction between "leases" and "occupied" is clear: leases are about
@@ -383,7 +383,7 @@ class Period(models.Model):
         return d_quant_currency(d_div(self.marketing_investment, self.lease_executions))
 
     def __str__(self):
-        return "<Period: {}-{} ({})>".format(self.start, self.end, self.project)
+        return "from {} to {}".format(self.start, self.end)
 
     class Meta:
         # Always sort Periods with the earliest period first.

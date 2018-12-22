@@ -55,7 +55,7 @@ Warning: this is fancy magic. I imagine it is fragile. -Dave
 
 This is a young app, so there's both very little technical debt, and the assumption (for now) that _all_ of it is debt. -Dave
 
-### Things to contemplate
+### Things to contemplate 1: where data and schema lives
 
 Eventually, we'll want our schema, and our computations, to be a dynamic property of the service. Or, at least, I suspect we will?
 
