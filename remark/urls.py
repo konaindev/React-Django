@@ -37,6 +37,8 @@ urlpatterns = [
     ),
     # User authentication
     path("users/", include("remark.users.urls")),
+    # Projects, for now
+    path("projects/", include("remark.projects.urls")),
     # Misc. site-wide pages (about/company/privacy policy/refund policy/etc)
     path("", include("remark.web.urls")),
 ]

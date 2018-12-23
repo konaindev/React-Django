@@ -8,10 +8,12 @@ import ReactDOM from "react-dom";
  */
 import Page from "./pages/Page.js";
 import HomePage from "./pages/HomePage.js";
+import ProjectPage from "./pages/ProjectPage.js";
 
 const pages = {
   Page,
-  HomePage
+  HomePage,
+  ProjectPage
 };
 
 /*

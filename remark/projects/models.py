@@ -51,15 +51,26 @@ class Project(models.Model):
 
     def baseline_report(self):
         """Generate a Report for the baseline period."""
-        return Report([self.baseline_period()])
+        # TODO: make this smarter. A report must ultimately take more than just
+        # a single period. At the very least, it needs to take a previous period
+        # to compute deltas. At most, I suspect the entire set of periods
+        # may matter, regardless of the time span under consideration for a given
+        # report. -Dave
+        return Report(self.baseline_period())
+
+    def current_period_report(self):
+        """Generate a Report for the current period."""
+        # TODO: make this smarter. A report must ultimately take more than just
+        # a single period. At the very least, it needs to take a previous period
+        # to compute deltas. At most, I suspect the entire set of periods
+        # may matter, regardless of the time span under consideration for a given
+        # report. -Dave
+        return Report(self.current_period())
 
     def cumulative_report(self):
         """Generate a Report for the full length of this project."""
-        return Report(self.periods.all())
-
-    def report(self, start, end):
-        """Generate a report for an arbitrary date range."""
-        pass
+        # TODO Something? -Dave
+        raise NotImplementedError()
 
     def __str__(self):
         return "{} ({})".format(self.name, self.public_id)
@@ -109,7 +120,7 @@ class Period(models.Model):
     # computations that flow through the system... so I've punted for now. -Dave
 
     # TODO the use of d_quant_perc(...) and d_quant_currency(...) may be better
-    # moved to a view layer -- particularly if we're chaining computations. -Dave
+    # moved to the Report layer -- particularly if we're chaining computations. -Dave
 
     # TODO if we demand contiguous periods, this trivially carries over from the
     # previous period. -Dave

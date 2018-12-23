@@ -1,3 +1,66 @@
 class Report:
-    # TODO implement a report for an arbitrary number of periods.
-    pass
+    def __init__(self, period):
+        # TODO ultimately, the intent of a "Report" is to take an arbitrary
+        # number of periods, and an arbitrary "time span" for the report,
+        # and generate outputs that drive a view.
+        #
+        # As a result, this seems very likely to need to accept an iterable
+        # of Periods and two separate dates.
+        # of periods and a potentially unrelated report-based "time span".
+        self.period = period
+
+    def to_jsonable(self):
+        """
+        Return a structure that can be converted to a JSON string.
+
+        (I call such things 'jsonables' to distinguish them from json strings
+        themselves, but your milage may vary. :-)
+        """
+        # TODO maybe this is strictly a Django View consideration? Maybe a Report
+        # is sort-of a model view? I dunno yet. -Dave
+        #
+        # TODO also, consider how something like the Django REST Framework's
+        # Serializer abstraction might fit in here. -Dave
+        #
+        # TODO also, maybe use camelCase keys here instead of snake_case, since
+        # we're heading towards javascript land? -Dave
+        return {
+            "start": self.period.start.isoformat(),
+            "end": self.period.end.isoformat(),
+            "leased_units_start": self.period.leased_units_start,
+            "usvs": self.period.usvs,
+            "inquiries": self.period.inquiries,
+            "tours": self.period.tours,
+            "lease_applications": self.period.lease_applications,
+            "lease_executions": self.period.lease_executions,
+            "leasable_units": self.period.leasable_units,
+            "target_lease_percent": self.period.target_lease_percent,
+            "move_ins": self.period.move_ins,
+            "net_new_leases": self.period.net_new_leases,
+            "leased_units": self.period.leased_units,
+            "target_leased_units": self.period.target_leased_units,
+            "lease_rate": self.period.lease_rate,
+            "usvs_to_inquiries_percent": self.period.usvs_to_inquiries_percent,
+            "inquiries_to_tours_percent": self.period.inquiries_to_tours_percent,
+            "tours_to_lease_applications_percent": self.period.tours_to_lease_applications_percent,
+            "lease_applications_to_lease_executions_percent": self.period.lease_applications_to_lease_executions_percent,
+            "lease_terminations": self.period.lease_terminations,
+            "renewals": self.period.renewals,
+            "occupied_units": self.period.occupied_units,
+            "move_outs": self.period.move_outs,
+            "investment_reputation_building": self.period.investment_reputation_building,
+            "investment_demand_creation": self.period.investment_demand_creation,
+            "investment_leasing_enablement": self.period.investment_leasing_enablement,
+            "investment_market_intelligence": self.period.investment_market_intelligence,
+            "investment_other": self.period.investment_other,
+            "monthly_average_rent": self.period.monthly_average_rent,
+            "marketing_investment": self.period.marketing_investment,
+            "estimated_monthly_revenue_change": self.period.estimated_monthly_revenue_change,
+            "estimated_annual_revenue_change": self.period.estimated_annual_revenue_change,
+            "return_on_marketing_investment": self.period.return_on_marketing_investment,
+            "cost_per_usv": self.period.cost_per_usv,
+            "cost_per_inquiry": self.period.cost_per_inquiry,
+            "cost_per_tour": self.period.cost_per_tour,
+            "cost_per_lease_application": self.period.cost_per_lease_application,
+            "cost_per_lease_execution": self.period.cost_per_lease_execution,
+        }
