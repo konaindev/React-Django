@@ -28,6 +28,7 @@ from .admin import admin_site
 
 
 urlpatterns = [
+    path("admin/doc/", include('django.contrib.admindocs.urls')),
     path("admin/", admin_site.urls),
     # Make our URL patterns available in the javascript context.
     path(

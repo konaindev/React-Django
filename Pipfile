@@ -14,6 +14,7 @@ python-dotenv = "*"
 django = "*"
 psycopg2-binary = "*"
 django-js-reverse = "*"
+docutils = "*"
 
 [requires]
 python_version = "3.7"

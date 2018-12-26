@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "django.contrib.admindocs",
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     "django_js_reverse",
