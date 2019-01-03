@@ -188,3 +188,6 @@ dump.rdb
 
 # macOS
 .DS_Store
+
+# vi swp
+*.swp

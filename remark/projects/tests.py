@@ -19,8 +19,8 @@ class DefaultPeriodTestCase(TestCase):
             end=datetime.date(year=2018, month=12, day=19),
         )
 
-    def test_net_new_leases(self):
-        self.assertEqual(self.period.net_new_leases, 0)
+    def test_net_lease_change(self):
+        self.assertEqual(self.period.net_lease_change, 0)
 
     def test_leased_units(self):
         self.assertEqual(self.period.leased_units, 0)
@@ -29,7 +29,7 @@ class DefaultPeriodTestCase(TestCase):
         self.assertEqual(self.period.target_leased_units, 0)
 
     def test_lease_rate(self):
-        self.assertEqual(self.period.lease_rate, 0)
+        self.assertEqual(self.period.leased_rate, 0)
 
     def test_usvs_to_inquiries_percent(self):
         self.assertEqual(self.period.usvs_to_inquiries_percent, 0)
@@ -40,8 +40,8 @@ class DefaultPeriodTestCase(TestCase):
     def test_tours_to_lease_applications_percent(self):
         self.assertEqual(self.period.tours_to_lease_applications_percent, 0)
 
-    def test_lease_applications_to_lease_executions_percent(self):
-        self.assertEqual(self.period.lease_applications_to_lease_executions_percent, 0)
+    def test_lease_applications_to_leases_executed_percent(self):
+        self.assertEqual(self.period.lease_applications_to_leases_executed_percent, 0)
 
     def test_marketing_investment(self):
         self.assertEqual(self.period.marketing_investment, 0)
@@ -85,11 +85,11 @@ class LincolnTowerPeriodTestCase(TestCase):
             inquiries=51,
             tours=37,
             lease_applications=8,
-            lease_executions=6,
+            leases_executed=6,
             leasable_units=218,
             target_lease_percent=decimal.Decimal("0.9"),
-            lease_terminations=3,
-            renewals=0,
+            leases_ended=3,
+            leases_renewed=0,
             investment_reputation_building=decimal.Decimal("28000"),
             investment_demand_creation=decimal.Decimal("21000"),
             investment_leasing_enablement=decimal.Decimal("11000"),
@@ -97,8 +97,8 @@ class LincolnTowerPeriodTestCase(TestCase):
             monthly_average_rent=decimal.Decimal("7278"),
         )
 
-    def test_net_new_leases(self):
-        self.assertEqual(self.period.net_new_leases, 3)
+    def test_net_lease_change(self):
+        self.assertEqual(self.period.net_lease_change, 3)
 
     def test_leased_units(self):
         self.assertEqual(self.period.leased_units, 107)
@@ -106,8 +106,8 @@ class LincolnTowerPeriodTestCase(TestCase):
     def test_target_leased_units(self):
         self.assertEqual(self.period.target_leased_units, 196)
 
-    def test_lease_rate(self):
-        self.assertEqual(self.period.lease_rate, decimal.Decimal("0.491"))
+    def test_leased_rate(self):
+        self.assertEqual(self.period.leased_rate, decimal.Decimal("0.491"))
 
     def test_usvs_to_inquiries_percent(self):
         self.assertEqual(
@@ -124,9 +124,9 @@ class LincolnTowerPeriodTestCase(TestCase):
             self.period.tours_to_lease_applications_percent, decimal.Decimal("0.216")
         )
 
-    def test_lease_applications_to_lease_executions_percent(self):
+    def test_lease_applications_to_leases_executed_percent(self):
         self.assertEqual(
-            self.period.lease_applications_to_lease_executions_percent,
+            self.period.lease_applications_to_leases_executed_percent,
             decimal.Decimal("0.750"),
         )
 

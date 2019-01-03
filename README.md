@@ -23,7 +23,7 @@ For back-end code, we use `flake8` to validate code, and `python black` to enfor
 ## Running the project locally
 
 - Run `pipenv install` and `pipenv shell` to get the back-end requirements installed.
-- Run `yarn install` to get the front-end requirements installed.
+- Run `yarn install` to get the front-end requirements inst alled.
 - Then run `./manage.py test` to make sure there is sanity.
 - Set up a local dev-only `.env` file; here's mine:
 
@@ -37,6 +37,8 @@ EMAIL_USE_TLS=NO
 ```
 
 - Run a build of the front-end assets: `yarn build`.
+- Set up database: `./manage.py migrate`
+- Load sample data: `./manage.py loaddata scripts/dumpdata.json`
 - Run the django dev server: `./manage.py runserver`.
 
 (TODO: `heroku local` will be the way forward, eventually)

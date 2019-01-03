@@ -129,6 +129,41 @@ class Period(models.Model):
         help_text="The absolute number of leased units at the start of this period.",
     )
 
+    # TODO "notices to vacate" and "lease terminations" aren't the same thing, given
+    # that you might issue a notice on day 1 and terminate on day 30. You'll probably move out
+    # somewhere in between (so occupancy itself is yet *another* matter).
+    # At least today, as with many of our funnel metrics, we don't account for time in a
+    # particularly cogent fashion. Today, we can call these numbers the same thing. Shortly down
+    # the road? No way. -Dave
+    # lease_terminations -> leases_ended
+
+    leases_executed = models.IntegerField(
+        default=0, help_text="The number of new leases executed during this period."
+    )
+
+    leases_renewed = models.IntegerField(
+        default=0, help_text="The number of lease renewals signed in the period."
+    )
+
+    leases_ended = models.IntegerField(
+        default=0,
+        help_text="The number of ended (expired) during this period.",
+    )
+
+    # TODO consider moving this to project -Dave
+    target_lease_percent = models.DecimalField(
+        default=decimal.Decimal(0),
+        max_digits=4,
+        decimal_places=3,
+        help_text="The target percentage of leasable units that we would like to actually lease. (Enter 0.9 for 90%)",
+    )
+
+    # TODO consider moving this to project -Dave
+    leasable_units = models.IntegerField(
+        default=0,
+        help_text="The number of units that *are* or *can* be leased at the end of this period.",
+    )
+
     usvs = models.IntegerField(
         default=0, help_text="The number of unique site visitors during this period."
     )
@@ -145,30 +180,11 @@ class Period(models.Model):
         default=0, help_text="The number of lease applications during this period."
     )
 
-    lease_executions = models.IntegerField(
-        default=0, help_text="The number of new leases executed during this period."
-    )
-
-    # TODO consider moving this to project -Dave
-    leasable_units = models.IntegerField(
-        default=0,
-        help_text="The number of units that *are* or *can* be leased at the end of this period.",
-    )
-
-    # TODO consider moving this to project -Dave
-    target_lease_percent = models.DecimalField(
+    previous_leased_rate = models.DecimalField(
         default=decimal.Decimal(0),
         max_digits=4,
         decimal_places=3,
-        help_text="The target percentage of leasable units that we would like to actually lease. (Enter 0.9 for 90%)",
-    )
-
-    # TODO The distinction between "leases" and "occupied" is clear: leases are about
-    # contracts; occupancy is about people in units. Unfortunately, at least for now, we
-    # don't always properly capture this distinction. The good news is that
-    # occupancy-related values, like move_ins, don't tend to drive computations... yet. -Dave
-    move_ins = models.IntegerField(
-        default=0, help_text="The number of units moved into during this period."
+        help_text="The leased rate as percentage of leasable for the previous period. (Enter 0.9 for 90%)",
     )
 
     # --------------------------------------------------------------------------
@@ -176,24 +192,32 @@ class Period(models.Model):
     # --------------------------------------------------------------------------
 
     @property
-    def net_new_leases(self):
+    def net_lease_change(self):
         """The net number of new leases during this period."""
-        return self.lease_executions - self.lease_terminations
+        return self.leases_executed - self.leases_ended
 
     @property
     def leased_units(self):
         """The total number of leases in effect at the end of the period."""
-        return self.leased_units_start + self.net_new_leases
+        return self.leased_units_start + self.net_lease_change
 
     @property
     def target_leased_units(self):
         """The target number of leased units we'd like to achieve."""
-        return math.floor(self.target_lease_percent * self.leasable_units)
+        return decimal.Decimal(
+            self.target_lease_percent 
+                * self.leasable_units).quantize(
+                    decimal.Decimal(1), rounding=decimal.ROUND_HALF_UP)
 
     @property
-    def lease_rate(self):
+    def leased_rate(self):
         """The percentage of leasable units that are actually leased at end of period."""
         return d_quant_perc(d_div(self.leased_units, self.leasable_units))
+
+    @property
+    def leased_rate_change(self):
+        """The change in leased rate as compared to the previous period."""
+        return self.leased_rate - self.previous_leased_rate
 
     @property
     def usvs_to_inquiries_percent(self):
@@ -211,35 +235,31 @@ class Period(models.Model):
         return d_quant_perc(d_div(self.lease_applications, self.tours))
 
     @property
-    def lease_applications_to_lease_executions_percent(self):
+    def lease_applications_to_leases_executed_percent(self):
         """The conversion rate from lease executions to tours."""
-        return d_quant_perc(d_div(self.lease_executions, self.lease_applications))
+        return d_quant_perc(d_div(self.leases_executed, self.lease_applications))
 
     # --------------------------------------------------------------------------
     # Retention funnel (entered)
     # --------------------------------------------------------------------------
 
-    # TODO "notices to vacate" and "lease terminations" aren't the same thing, given
-    # that you might issue a notice on day 1 and terminate on day 30. You'll probably move out
-    # somewhere in between (so occupancy itself is yet *another* matter).
-    # At least today, as with many of our funnel metrics, we don't account for time in a
-    # particularly cogent fashion. Today, we can call these numbers the same thing. Shortly down
-    # the road? No way. -Dave
-    lease_terminations = models.IntegerField(
-        default=0, help_text="The number of leases terminated during this period."
-    )
+    # TODO The distinction between "leases" and "occupied" is clear: leases are about
+    # contracts; occupancy is about people in units. Unfortunately, at least for now, we
+    # don't always properly capture this distinction. The good news is that
+    # occupancy-related values, like move_ins, don't tend to drive computations... yet. -Dave
 
-    renewals = models.IntegerField(
-        default=0, help_text="The number of lease renewals signed in the period."
-    )
+    # Commenting these out as use of these is deferred to P1 or later
+    # move_ins = models.IntegerField(
+    #     default=0, help_text="The number of units moved into during this period."
+    # )
 
-    occupied_units = models.IntegerField(
-        default=0, help_text="The number of units occupied at the end of this period."
-    )
+    # occupied_units = models.IntegerField(
+    #     default=0, help_text="The number of units occupied at the end of this period."
+    # )
 
-    move_outs = models.IntegerField(
-        default=0, help_text="The number of units moved out from during this period."
-    )
+    # move_outs = models.IntegerField(
+    #     default=0, help_text="The number of units moved out from during this period."
+    # )
 
     # --------------------------------------------------------------------------
     # Marketing investment and return (entered)
@@ -273,11 +293,11 @@ class Period(models.Model):
         help_text="The dollar amount invested in market intelligence during this period.",
     )
 
-    investment_other = models.DecimalField(
+    investment_resident_retention = models.DecimalField(
         default=decimal.Decimal(0),
         max_digits=10,
         decimal_places=2,
-        help_text="The dollar amount invested in other marketing during this period.",
+        help_text="The dollar amount invested in resident retention during this period.",
     )
 
     # TODO this number is messy. It requires clarification about timeframes. -Dave
@@ -300,7 +320,7 @@ class Period(models.Model):
             + self.investment_demand_creation
             + self.investment_leasing_enablement
             + self.investment_market_intelligence
-            + self.investment_other
+            + self.investment_resident_retention
         )
 
     @property
@@ -309,7 +329,7 @@ class Period(models.Model):
         Return an estimate of how much new monthly revenue will be obtained on the 
         basis of this period's inbound funnel outcomes.
         """
-        return self.net_new_leases * self.monthly_average_rent
+        return self.net_lease_change * self.monthly_average_rent
 
     @property
     def estimated_annual_revenue_change(self):
@@ -341,10 +361,8 @@ class Period(models.Model):
         # (inbound or retention) and then use only inbound dollars here. -Dave
 
         # TODO maybe make the int(round(...)) bit a view-layer consideration? -Dave
-        return int(
-            round(
-                d_div(self.estimated_annual_revenue_change, self.marketing_investment)
-            )
+        return round(
+            d_div(self.estimated_annual_revenue_change, self.marketing_investment)
         )
 
     # --------------------------------------------------------------------------
@@ -357,8 +375,8 @@ class Period(models.Model):
         return d_quant_currency(
             d_div(
                 self.investment_reputation_building
-                + self.investment_demand_creation
-                + self.investment_market_intelligence,
+                    + self.investment_demand_creation
+                    + self.investment_market_intelligence,
                 self.usvs,
             )
         )
@@ -369,8 +387,8 @@ class Period(models.Model):
         return d_quant_currency(
             d_div(
                 self.investment_reputation_building
-                + self.investment_demand_creation
-                + self.investment_market_intelligence,
+                    + self.investment_demand_creation
+                    + self.investment_market_intelligence,
                 self.inquiries,
             )
         )
@@ -378,7 +396,9 @@ class Period(models.Model):
     @property
     def cost_per_tour(self):
         """Return the estimated cost to obtain an inbound tour in this period."""
-        return d_quant_currency(d_div(self.marketing_investment, self.tours))
+        return d_quant_currency(
+            d_div(self.marketing_investment, self.tours)
+        )
 
     @property
     def cost_per_lease_application(self):
@@ -390,7 +410,9 @@ class Period(models.Model):
     @property
     def cost_per_lease_execution(self):
         """Return the estimated cost to obtain a lease application in this period."""
-        return d_quant_currency(d_div(self.marketing_investment, self.lease_executions))
+        return d_quant_currency(
+            d_div(self.marketing_investment, self.leases_executed)
+        )
 
     def __str__(self):
         return "from {} to {}".format(self.start, self.end)
