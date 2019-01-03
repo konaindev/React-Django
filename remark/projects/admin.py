@@ -17,14 +17,15 @@ class PeriodInline(admin.StackedInline):
     # TODO consider providing nicer values for calculated percents, and accepting nicer values for inputs
     # TODO consider providing nicer values with dollar signs for, well, dollar amounts
     readonly_fields = [
-        "net_new_leases",
+        "net_lease_change",
         "leased_units",
         "target_leased_units",
-        "lease_rate",
+        "leased_rate",
+        "leased_rate_change",
         "usvs_to_inquiries_percent",
         "inquiries_to_tours_percent",
         "tours_to_lease_applications_percent",
-        "lease_applications_to_lease_executions_percent",
+        "lease_applications_to_leases_executed_percent",
         "marketing_investment",
         "estimated_monthly_revenue_change",
         "estimated_annual_revenue_change",

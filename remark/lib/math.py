@@ -32,5 +32,4 @@ def d_quant_perc(d):
 
     Round in a fashion appropriate for percentages.
     """
-    # TODO is ROUND_HALF_EVEN what we want? Maybe ROUND_HALF_UP is preferable?
-    return Decimal(d).quantize(Decimal("0.001"), rounding=ROUND_HALF_EVEN)
+    return Decimal(d).quantize(Decimal("0.001"), rounding=ROUND_HALF_UP)
