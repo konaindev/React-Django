@@ -4,6 +4,7 @@ import decimal
 from django.test import TestCase
 
 from .models import Period, Project
+from .reports import Report
 
 
 class DefaultPeriodTestCase(TestCase):
@@ -164,3 +165,8 @@ class LincolnTowerPeriodTestCase(TestCase):
         self.assertEqual(
             self.period.cost_per_lease_execution, decimal.Decimal("11166.67")
         )
+
+    def test_report_jsonable(self):
+        # CONSIDER moving this to a separate location
+        report = Report(self.period)
+        self.assertTrue(report.to_jsonable())
