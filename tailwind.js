@@ -64,14 +64,22 @@ let colors = {
   "remark-blue-darker": "#192245",
   "remark-blue-darkest": "#0e0d2c",
 
-  // UI colors (as suggested by our current marketing site)
-  "remark-ui-darkest": "#0e1228",
-  "remark-ui-darker": "#151c3b",
-  "remark-ui": "#192245", // same as remark-blue-darker
-  "remark-ui-light": "#272f50", // same as remark-blue-dark
-  "remark-ui-lighter": "#4f47f4", // same as remark-blue-alt
-  "remark-ui-lightest": "#6258ff",
-  "remark-ui-accent": "#ff8972", // same as remark-salmon
+  // Modern UI colors
+  "remark-ui-dark": "#1b202e",
+  "remark-ui-darker": "#131926",
+  "remark-ui-darkest": "#0d111a",
+  "remark-ui-text-lightest": "#ffffff",
+  "remark-ui-text-light": "#eeeeee",
+  "remark-ui-text": "#697285",
+
+  // XXX OLD UI colors (as suggested by our current marketing site)
+  "remark-old-ui-darkest": "#0e1228",
+  "remark-old-ui-darker": "#151c3b",
+  "remark-old-ui": "#192245", // same as remark-blue-darker
+  "remark-old-ui-light": "#272f50", // same as remark-blue-dark
+  "remark-old-ui-lighter": "#4f47f4", // same as remark-blue-alt
+  "remark-old-ui-lightest": "#6258ff",
+  "remark-old-ui-accent": "#ff8972", // same as remark-salmon
 
   // An enjoyable highlight color
   "remark-salmon": "#ff8972"
@@ -207,7 +215,9 @@ module.exports = {
     "2xl": "1.5rem", // 24px
     "3xl": "1.875rem", // 30px
     "4xl": "2.25rem", // 36px
-    "5xl": "3rem" // 48px
+    "5xl": "3rem", // 48px
+    "6xl": "4rem",
+    "7xl": "6rem"
   },
 
   /*

@@ -128,7 +128,7 @@
 // a default form presentation
 .k-form-container {
     @apply text-remark-blue-light;
-    @apply bg-remark-ui rounded-lg;
+    @apply bg-remark-old-ui rounded-lg;
     @apply mx-16 p-2;
 
     a {
@@ -138,7 +138,7 @@
     .k-form-container-inner {
         @apply leading-normal text-lg;
         @apply px-6 pb-6 pt-2;
-        @apply border-4 border-solid border-remark-ui-darkest rounded-lg;
+        @apply border-4 border-solid border-remark-old-ui-darkest rounded-lg;
     }
 
     .k-form-messages {
@@ -190,7 +190,7 @@
 
 // Misc high-pri overrides go here
 body {
-    @apply m-0 p-0 bg-remark-blue font-sans text-remark-blue-light;
+    @apply m-0 p-0 bg-remark-ui-darker font-sans text-remark-blue-light;
 }
 
 h1,
@@ -213,17 +213,17 @@ input[type="password"] {
     @apply rounded;
     @apply px-2 py-1;
     @apply leading-loose;
-    @apply bg-transparent border border-solid border-remark-ui-lighter;
+    @apply bg-transparent border border-solid border-remark-old-ui-lighter;
     @apply text-remark-blue-light;
 }
 
 input[type="submit"] {
-    @apply bg-remark-ui-lighter;
-    @apply rounded-full border border-solid border-remark-ui-lighter;
+    @apply bg-remark-old-ui-lighter;
+    @apply rounded-full border border-solid border-remark-old-ui-lighter;
     @apply text-remark-blue-light;
     @apply px-8 py-3;
 
     &:hover {
-        @apply bg-remark-ui-lightest;
+        @apply bg-remark-old-ui-lightest;
     }
 }
