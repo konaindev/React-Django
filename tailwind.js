@@ -83,7 +83,11 @@ let colors = {
   "remark-old-ui-accent": "#ff8972", // same as remark-salmon
 
   // An enjoyable highlight color
-  "remark-salmon": "#ff8972"
+  "remark-salmon": "#ff8972",
+  // Colors for status indicators
+  "remark-ui-green": "#74EC98",
+  "remark-ui-yellow": "#FFD28C",
+  "remark-ui-red": "#F74568",
 };
 
 module.exports = {
