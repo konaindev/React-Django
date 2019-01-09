@@ -342,12 +342,11 @@ class Report extends Component {
   render() {
     // TODO: actual rendering code goes here. -Dave
     return (
-      <div className="page">
-        <h1>Remarkably</h1>
+      <>
         {this.renderPropertySection()}
         {this.renderResidentAcquisitionFunnelSection()}
         {this.renderEstimatedMarketingInvestmentAndReturnSection()}
-      </div>
+      </>
     );
   }
 }
@@ -363,6 +362,11 @@ export default class ProjectPage extends Component {
   };
 
   render() {
-    return <Report report={this.props.reports.current_period} />;
+    return (
+      <div className="page">
+        <h1>Remarkably</h1>
+        <Report report={this.props.reports.current_period} />{" "}
+      </div>
+    );
   }
 }
