@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { VictoryPie } from "victory";
 
 const formatPercent = p => {
   return `${p * 100}%`;
@@ -14,7 +15,7 @@ const formatCurrencyHuman = c => {};
 const VALUE_BOX_PROP_TYPES = {
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  help: PropTypes.string
+  help: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
 };
 
 /**
@@ -151,48 +152,56 @@ export default class ProjectPage extends Component {
     return (
       <ReportSection name="Resident Acquisition Funnel">
         <table className="k-report-table w-full" cellSpacing="8">
-          <tr>
-            <td>Name</td>
-            <td>Actual</td>
-            <td>Converted</td>
-            <td>Cost Per</td>
-          </tr>
-          <tr className="k-rectangle">
-            <td>Unique Website Visitors</td>
-            <td>{this.report().usvs}</td>
-            <td>&nbsp;</td>
-            <td>{formatCurrency(this.report().cost_per_usv)}</td>
-          </tr>
-          <tr className="k-rectangle">
-            <td>Inquiries</td>
-            <td>{this.report().inquiries}</td>
-            <td>{formatPercent(this.report().usvs_to_inquiries_percent)}</td>
-            <td>{formatCurrency(this.report().cost_per_inquiry)}</td>
-          </tr>
-          <tr className="k-rectangle">
-            <td>Tours</td>
-            <td>{this.report().tours}</td>
-            <td>{formatPercent(this.report().inquiries_to_tours_percent)}</td>
-            <td>{formatCurrency(this.report().cost_per_tour)}</td>
-          </tr>
-          <tr className="k-rectangle">
-            <td>Lease Applications</td>
-            <td>{this.report().lease_applications}</td>
-            <td>
-              {formatPercent(this.report().tours_to_lease_applications_percent)}
-            </td>
-            <td>{formatCurrency(this.report().cost_per_lease_application)}</td>
-          </tr>
-          <tr className="k-rectangle">
-            <td>Lease Executions</td>
-            <td>{this.report().leases_executed}</td>
-            <td>
-              {formatPercent(
-                this.report().lease_applications_to_leases_executed_percent
-              )}
-            </td>
-            <td>{formatCurrency(this.report().cost_per_lease_execution)}</td>
-          </tr>
+          <thead>
+            <tr>
+              <td>Name</td>
+              <td>Actual</td>
+              <td>Converted</td>
+              <td>Cost Per</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr className="k-rectangle">
+              <td>Unique Website Visitors</td>
+              <td>{this.report().usvs}</td>
+              <td>&nbsp;</td>
+              <td>{formatCurrency(this.report().cost_per_usv)}</td>
+            </tr>
+            <tr className="k-rectangle">
+              <td>Inquiries</td>
+              <td>{this.report().inquiries}</td>
+              <td>{formatPercent(this.report().usvs_to_inquiries_percent)}</td>
+              <td>{formatCurrency(this.report().cost_per_inquiry)}</td>
+            </tr>
+            <tr className="k-rectangle">
+              <td>Tours</td>
+              <td>{this.report().tours}</td>
+              <td>{formatPercent(this.report().inquiries_to_tours_percent)}</td>
+              <td>{formatCurrency(this.report().cost_per_tour)}</td>
+            </tr>
+            <tr className="k-rectangle">
+              <td>Lease Applications</td>
+              <td>{this.report().lease_applications}</td>
+              <td>
+                {formatPercent(
+                  this.report().tours_to_lease_applications_percent
+                )}
+              </td>
+              <td>
+                {formatCurrency(this.report().cost_per_lease_application)}
+              </td>
+            </tr>
+            <tr className="k-rectangle">
+              <td>Lease Executions</td>
+              <td>{this.report().leases_executed}</td>
+              <td>
+                {formatPercent(
+                  this.report().lease_applications_to_leases_executed_percent
+                )}
+              </td>
+              <td>{formatCurrency(this.report().cost_per_lease_execution)}</td>
+            </tr>
+          </tbody>
         </table>
         {/* And away we go! */}
       </ReportSection>
@@ -200,6 +209,31 @@ export default class ProjectPage extends Component {
   }
 
   renderEstimatedMarketingInvestmentAndReturnSection() {
+    const investmentData = [
+      {
+        x: "Reputation Building",
+        y: this.report().investment_reputation_building
+      },
+      {
+        x: "Demand Creation",
+        y: this.report().investment_demand_creation
+      },
+      {
+        x: "Leasing Enablement",
+        y: this.report().investment_leasing_enablement
+      },
+      {
+        x: "Market Intelligence",
+        y: this.report().investment_market_intelligence
+      },
+      {
+        x: "Resident Retention",
+        y: this.report().investment_resident_retention
+      }
+    ];
+
+    const colors = ["#4035f4", "#5147ff", "#867ffe", "#675efc", "#A09afd"];
+
     return (
       <ReportSection name="Estimated Marketing Investment And Return">
         <div className="flex -m-4">
@@ -220,8 +254,17 @@ export default class ProjectPage extends Component {
               }
             />
           </div>
-          <div className="m-4 flex-grow">
-            <p>Chart goes here!</p>
+          <div className="m-4 flex-grow h-96">
+            <VictoryPie
+              data={investmentData}
+              innerRadius={100}
+              colorScale={colors}
+              style={{
+                labels: {
+                  fill: "#ffffff"
+                }
+              }}
+            />
           </div>
           <div className="w-1/4 m-4">
             <PrimaryValueBox
