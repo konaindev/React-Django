@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { VictoryPie } from "victory";
+import { VictoryPie, Text } from "victory";
 
 import {
   formatPercent,
@@ -28,7 +28,7 @@ class PrimaryValueBox extends Component {
         <span className="text-remark-ui-text-light text-base">
           {this.props.name}
         </span>
-        <span className="text-remark-ui-text-lightest text-6xl font-mono">
+        <span className="text-remark-ui-text-lightest text-6xl">
           {this.props.value}
         </span>
         <span className="text-remark-ui-text text-sm">{this.props.help}</span>
@@ -48,7 +48,7 @@ class SecondaryValueBox extends Component {
       <div className="flex flex-row py-6 k-rectangle">
         {/* Container for the value itself */}
         <div className="text-6xl w-1/3 text-center flex-none leading-compressed">
-          <span className="text-remark-ui-text-lightest font-mono">
+          <span className="text-remark-ui-text-lightest">
             {this.props.value}
           </span>
         </div>
@@ -78,6 +78,30 @@ class ReportSection extends Component {
         </span>
         {this.props.children}
       </div>
+    );
+  }
+}
+
+class DonutLabel extends Component {
+  render() {
+    // remove unwanted props to pass to SVG <text /> element
+    const { verticalAnchor, marketingInvestment, ...cleanProps } = this.props;
+    console.log(cleanProps);
+    const description = `${formatCurrencyShorthand(
+      this.props.datum.investment
+    )} (${formatPercent(
+      Number(this.props.datum.investment) /
+        Number(this.props.marketingInvestment)
+    )})`;
+    return (
+      <g>
+        <text {...cleanProps}>
+          <tspan fill="#CCCCCC">{this.props.datum.category}</tspan>
+          <tspan x={this.props.x} dy="1.25rem" fill="#68788C">
+            {description}
+          </tspan>
+        </text>
+      </g>
     );
   }
 }
@@ -216,28 +240,31 @@ export default class ProjectPage extends Component {
   renderEstimatedMarketingInvestmentAndReturnSection() {
     const investmentData = [
       {
-        x: "Reputation Building",
-        y: this.report().investment_reputation_building
+        category: "Reputation Building",
+        investment: this.report().investment_reputation_building,
+        color: "#4035f4"
       },
       {
-        x: "Demand Creation",
-        y: this.report().investment_demand_creation
+        category: "Demand Creation",
+        investment: this.report().investment_demand_creation,
+        color: "#5147ff"
       },
       {
-        x: "Leasing Enablement",
-        y: this.report().investment_leasing_enablement
+        category: "Leasing Enablement",
+        investment: this.report().investment_leasing_enablement,
+        color: "#867ffe"
       },
       {
-        x: "Market Intelligence",
-        y: this.report().investment_market_intelligence
+        category: "Market Intelligence",
+        investment: this.report().investment_market_intelligence,
+        color: "#675efc"
       },
       {
-        x: "Resident Retention",
-        y: this.report().investment_resident_retention
+        category: "Resident Retention",
+        investment: this.report().investment_resident_retention,
+        color: "#A09afd"
       }
     ];
-
-    const colors = ["#4035f4", "#5147ff", "#867ffe", "#675efc", "#A09afd"];
 
     return (
       <ReportSection name="Estimated Marketing Investment And Return">
@@ -254,10 +281,22 @@ export default class ProjectPage extends Component {
             <VictoryPie
               data={investmentData}
               innerRadius={100}
-              colorScale={colors}
+              labelComponent={
+                <DonutLabel
+                  marketingInvestment={this.report().marketing_investment}
+                />
+              }
+              x="category"
+              y="investment"
               style={{
+                data: {
+                  fill: datum => datum.color
+                },
                 labels: {
-                  fill: "#ffffff"
+                  fontFamily: "formular",
+                  fontWeight: "400",
+                  fontSize: "1rem",
+                  fill: "#cccccc"
                 }
               }}
             />
