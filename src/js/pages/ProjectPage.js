@@ -2,15 +2,12 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { VictoryPie } from "victory";
 
-const formatPercent = p => {
-  return `${p * 100}%`;
-};
-
-const formatCurrency = c => {
-  return `$${c}`;
-};
-
-const formatCurrencyHuman = c => {};
+import {
+  formatPercent,
+  formatNumber,
+  formatCurrency,
+  formatCurrencyShorthand
+} from "../utils/formatters";
 
 const VALUE_BOX_PROP_TYPES = {
   name: PropTypes.string.isRequired,
@@ -31,7 +28,7 @@ class PrimaryValueBox extends Component {
         <span className="text-remark-ui-text-light text-base">
           {this.props.name}
         </span>
-        <span className="text-remark-ui-text-lightest text-6xl">
+        <span className="text-remark-ui-text-lightest text-6xl font-mono">
           {this.props.value}
         </span>
         <span className="text-remark-ui-text text-sm">{this.props.help}</span>
@@ -51,7 +48,7 @@ class SecondaryValueBox extends Component {
       <div className="flex flex-row py-6 k-rectangle">
         {/* Container for the value itself */}
         <div className="text-6xl w-1/3 text-center flex-none leading-compressed">
-          <span className="text-remark-ui-text-lightest">
+          <span className="text-remark-ui-text-lightest font-mono">
             {this.props.value}
           </span>
         </div>
@@ -121,25 +118,25 @@ export default class ProjectPage extends Component {
             <div className="w-1/5 m-4">
               <SecondaryValueBox
                 name="Leases Executed"
-                value={this.report().leases_executed}
+                value={formatNumber(this.report().leases_executed)}
               />
             </div>
             <div className="w-1/5 m-4">
               <SecondaryValueBox
                 name="Renewals"
-                value={this.report().leases_renewed}
+                value={formatNumber(this.report().leases_renewed)}
               />
             </div>
             <div className="w-1/5 m-4">
               <SecondaryValueBox
                 name="Leases Ended"
-                value={this.report().leases_ended}
+                value={formatNumber(this.report().leases_ended)}
               />
             </div>
             <div className="w-1/5 m-4">
               <SecondaryValueBox
                 name="Net Lease Change"
-                value={this.report().net_lease_change}
+                value={formatNumber(this.report().net_lease_change)}
               />
             </div>
           </div>
@@ -154,52 +151,60 @@ export default class ProjectPage extends Component {
         <table className="k-report-table w-full" cellSpacing="8">
           <thead>
             <tr>
-              <td>Name</td>
-              <td>Actual</td>
-              <td>Converted</td>
-              <td>Cost Per</td>
+              <th>Name</th>
+              <th>Actual</th>
+              <th>Converted</th>
+              <th>Cost Per</th>
             </tr>
           </thead>
           <tbody>
             <tr className="k-rectangle">
-              <td>Unique Website Visitors</td>
-              <td>{this.report().usvs}</td>
+              <th>Unique Website Visitors</th>
+              <td>{formatNumber(this.report().usvs)}</td>
               <td>&nbsp;</td>
-              <td>{formatCurrency(this.report().cost_per_usv)}</td>
+              <td>{formatCurrency(this.report().cost_per_usv, true)}</td>
             </tr>
             <tr className="k-rectangle">
-              <td>Inquiries</td>
-              <td>{this.report().inquiries}</td>
-              <td>{formatPercent(this.report().usvs_to_inquiries_percent)}</td>
-              <td>{formatCurrency(this.report().cost_per_inquiry)}</td>
+              <th>Inquiries</th>
+              <td>{formatNumber(this.report().inquiries)}</td>
+              <td>
+                {formatPercent(this.report().usvs_to_inquiries_percent, 1)}
+              </td>
+              <td>{formatCurrency(this.report().cost_per_inquiry, true)}</td>
             </tr>
             <tr className="k-rectangle">
-              <td>Tours</td>
-              <td>{this.report().tours}</td>
-              <td>{formatPercent(this.report().inquiries_to_tours_percent)}</td>
-              <td>{formatCurrency(this.report().cost_per_tour)}</td>
+              <th>Tours</th>
+              <td>{formatNumber(this.report().tours)}</td>
+              <td>
+                {formatPercent(this.report().inquiries_to_tours_percent, 1)}
+              </td>
+              <td>{formatCurrency(this.report().cost_per_tour, true)}</td>
             </tr>
             <tr className="k-rectangle">
-              <td>Lease Applications</td>
-              <td>{this.report().lease_applications}</td>
+              <th>Lease Applications</th>
+              <td>{formatNumber(this.report().lease_applications)}</td>
               <td>
                 {formatPercent(
-                  this.report().tours_to_lease_applications_percent
+                  this.report().tours_to_lease_applications_percent,
+                  1
                 )}
               </td>
               <td>
-                {formatCurrency(this.report().cost_per_lease_application)}
+                {formatCurrency(this.report().cost_per_lease_application, true)}
               </td>
             </tr>
             <tr className="k-rectangle">
-              <td>Lease Executions</td>
-              <td>{this.report().leases_executed}</td>
+              <th>Lease Executions</th>
+              <td>{formatNumber(this.report().leases_executed)}</td>
               <td>
                 {formatPercent(
-                  this.report().lease_applications_to_leases_executed_percent
+                  this.report().lease_applications_to_leases_executed_percent,
+                  1
                 )}
               </td>
-              <td>{formatCurrency(this.report().cost_per_lease_execution)}</td>
+              <td>
+                {formatCurrency(this.report().cost_per_lease_execution, true)}
+              </td>
             </tr>
           </tbody>
         </table>
@@ -240,18 +245,9 @@ export default class ProjectPage extends Component {
           <div className="w-1/4 m-4">
             <PrimaryValueBox
               name="Invested"
-              value={formatCurrency(this.report().marketing_investment)}
-              help={
-                <span>
-                  {`${this.report().leased_units} of ${
-                    this.report().leasable_units
-                  } Leasable Units`}
-                  <br />
-                  {`Target ${
-                    this.report().target_leased_units
-                  } (${formatPercent(this.report().target_lease_percent)})`}
-                </span>
-              }
+              value={formatCurrencyShorthand(
+                this.report().marketing_investment
+              )}
             />
           </div>
           <div className="m-4 flex-grow h-96">
@@ -270,6 +266,9 @@ export default class ProjectPage extends Component {
             <PrimaryValueBox
               name="ROMI"
               value={`${this.report().return_on_marketing_investment}x`}
+              help={`Estimated annual revenue gain: ${formatCurrencyShorthand(
+                this.report().estimated_annual_revenue_change
+              )}`}
             />
           </div>
         </div>

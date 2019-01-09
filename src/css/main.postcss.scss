@@ -195,8 +195,17 @@
     border-collapse: separate;
     border-spacing: 0 0.5em;
 
+    tr > th {
+        @apply p-2;
+        @apply font-sans font-normal text-right;
+        &:first-child {
+            @apply text-left;
+        }
+    }
+
     tr > td {
         @apply p-2;
+        @apply font-mono text-right;
     }
 }
 
