@@ -9,6 +9,8 @@ const formatCurrency = c => {
   return `$${c}`;
 };
 
+const formatCurrencyHuman = c => {};
+
 const VALUE_BOX_PROP_TYPES = {
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -197,6 +199,41 @@ export default class ProjectPage extends Component {
     );
   }
 
+  renderEstimatedMarketingInvestmentAndReturnSection() {
+    return (
+      <ReportSection name="Estimated Marketing Investment And Return">
+        <div className="flex -m-4">
+          <div className="w-1/4 m-4">
+            <PrimaryValueBox
+              name="Invested"
+              value={formatCurrency(this.report().marketing_investment)}
+              help={
+                <span>
+                  {`${this.report().leased_units} of ${
+                    this.report().leasable_units
+                  } Leasable Units`}
+                  <br />
+                  {`Target ${
+                    this.report().target_leased_units
+                  } (${formatPercent(this.report().target_lease_percent)})`}
+                </span>
+              }
+            />
+          </div>
+          <div className="m-4 flex-grow">
+            <p>Chart goes here!</p>
+          </div>
+          <div className="w-1/4 m-4">
+            <PrimaryValueBox
+              name="ROMI"
+              value={`${this.report().return_on_marketing_investment}x`}
+            />
+          </div>
+        </div>
+      </ReportSection>
+    );
+  }
+
   render() {
     // TODO: actual rendering code goes here. -Dave
     return (
@@ -204,6 +241,7 @@ export default class ProjectPage extends Component {
         <h1>Remarkably</h1>
         {this.renderPropertySection()}
         {this.renderResidentAcquisitionFunnelSection()}
+        {this.renderEstimatedMarketingInvestmentAndReturnSection()}
       </div>
     );
   }
