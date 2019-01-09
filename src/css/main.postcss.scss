@@ -185,6 +185,12 @@
     }
 }
 
+.k-rectangle {
+    @apply bg-remark-ui-dark;
+    @apply rounded-lg border-remark-ui-border-dark border-solid border;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+}
+
 // Load tailwind's utility classes
 @tailwind utilities;
 

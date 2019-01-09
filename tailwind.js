@@ -65,12 +65,13 @@ let colors = {
   "remark-blue-darkest": "#0e0d2c",
 
   // Modern UI colors
-  "remark-ui-dark": "#1b202e",
-  "remark-ui-darker": "#131926",
-  "remark-ui-darkest": "#0d111a",
-  "remark-ui-text-lightest": "#ffffff",
-  "remark-ui-text-light": "#eeeeee",
-  "remark-ui-text": "#697285",
+  "remark-ui-dark": "#1A202E",
+  "remark-ui-border-dark": "#161C29",
+  "remark-ui-darker": "#1D1723",
+  "remark-ui-darkest": "#0D111A",
+  "remark-ui-text-lightest": "#FFFFFF",
+  "remark-ui-text-light": "#cccccc",
+  "remark-ui-text": "#68788C",
 
   // XXX OLD UI colors (as suggested by our current marketing site)
   "remark-old-ui-darkest": "#0e1228",
@@ -259,6 +260,7 @@ module.exports = {
   */
 
   leading: {
+    compressed: 0.75,
     none: 1,
     tight: 1.25,
     normal: 1.5,
