@@ -67,7 +67,7 @@ let colors = {
   // Modern UI colors
   "remark-ui-dark": "#1A202E",
   "remark-ui-border-dark": "#161C29",
-  "remark-ui-darker": "#1D1723",
+  "remark-ui-darker": "#121723",
   "remark-ui-darkest": "#0D111A",
   "remark-ui-text-lightest": "#FFFFFF",
   "remark-ui-text-light": "#cccccc",
