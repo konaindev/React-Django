@@ -9,6 +9,9 @@ import {
   formatCurrencyShorthand
 } from "../utils/formatters";
 
+/**
+ * @description Property shape expected of all value boxes
+ */
 const VALUE_BOX_PROP_TYPES = {
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -64,6 +67,9 @@ class SecondaryValueBox extends Component {
   }
 }
 
+/**
+ * @description A named, grouped section of a report
+ */
 class ReportSection extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
@@ -82,7 +88,10 @@ class ReportSection extends Component {
   }
 }
 
-class DonutLabel extends Component {
+/**
+ * @description A custom label for the marketing investment pie chart
+ */
+class MarketingInvestmentChartLabel extends Component {
   render() {
     // remove unwanted props to pass to SVG <text /> element
     const { verticalAnchor, marketingInvestment, ...cleanProps } = this.props;
@@ -106,13 +115,11 @@ class DonutLabel extends Component {
   }
 }
 
-export default class ProjectPage extends Component {
-  // TODO: define propTypes, maybe? -Dave
-
-  report() {
-    // XXX TODO this is stupid.
-    return this.props.reports.current_period;
-  }
+/**
+ * @description A fully rendered report
+ */
+class Report extends Component {
+  static propTypes = { report: PropTypes.object.isRequired };
 
   renderPropertySection() {
     return (
@@ -122,16 +129,16 @@ export default class ProjectPage extends Component {
           <div className="w-1/4 m-4">
             <PrimaryValueBox
               name="Leased"
-              value={formatPercent(this.report().leased_rate)}
+              value={formatPercent(this.props.report.leased_rate)}
               help={
                 <span>
-                  {`${this.report().leased_units} of ${
-                    this.report().leasable_units
+                  {`${this.props.report.leased_units} of ${
+                    this.props.report.leasable_units
                   } Leasable Units`}
                   <br />
                   {`Target ${
-                    this.report().target_leased_units
-                  } (${formatPercent(this.report().target_lease_percent)})`}
+                    this.props.report.target_leased_units
+                  } (${formatPercent(this.props.report.target_lease_percent)})`}
                 </span>
               }
             />
@@ -142,25 +149,25 @@ export default class ProjectPage extends Component {
             <div className="w-1/5 m-4">
               <SecondaryValueBox
                 name="Leases Executed"
-                value={formatNumber(this.report().leases_executed)}
+                value={formatNumber(this.props.report.leases_executed)}
               />
             </div>
             <div className="w-1/5 m-4">
               <SecondaryValueBox
                 name="Renewals"
-                value={formatNumber(this.report().leases_renewed)}
+                value={formatNumber(this.props.report.leases_renewed)}
               />
             </div>
             <div className="w-1/5 m-4">
               <SecondaryValueBox
                 name="Leases Ended"
-                value={formatNumber(this.report().leases_ended)}
+                value={formatNumber(this.props.report.leases_ended)}
               />
             </div>
             <div className="w-1/5 m-4">
               <SecondaryValueBox
                 name="Net Lease Change"
-                value={formatNumber(this.report().net_lease_change)}
+                value={formatNumber(this.props.report.net_lease_change)}
               />
             </div>
           </div>
@@ -184,50 +191,59 @@ export default class ProjectPage extends Component {
           <tbody>
             <tr className="k-rectangle">
               <th>Unique Website Visitors</th>
-              <td>{formatNumber(this.report().usvs)}</td>
+              <td>{formatNumber(this.props.report.usvs)}</td>
               <td>&nbsp;</td>
-              <td>{formatCurrency(this.report().cost_per_usv, true)}</td>
+              <td>{formatCurrency(this.props.report.cost_per_usv, true)}</td>
             </tr>
             <tr className="k-rectangle">
               <th>Inquiries</th>
-              <td>{formatNumber(this.report().inquiries)}</td>
+              <td>{formatNumber(this.props.report.inquiries)}</td>
               <td>
-                {formatPercent(this.report().usvs_to_inquiries_percent, 1)}
+                {formatPercent(this.props.report.usvs_to_inquiries_percent, 1)}
               </td>
-              <td>{formatCurrency(this.report().cost_per_inquiry, true)}</td>
+              <td>
+                {formatCurrency(this.props.report.cost_per_inquiry, true)}
+              </td>
             </tr>
             <tr className="k-rectangle">
               <th>Tours</th>
-              <td>{formatNumber(this.report().tours)}</td>
+              <td>{formatNumber(this.props.report.tours)}</td>
               <td>
-                {formatPercent(this.report().inquiries_to_tours_percent, 1)}
+                {formatPercent(this.props.report.inquiries_to_tours_percent, 1)}
               </td>
-              <td>{formatCurrency(this.report().cost_per_tour, true)}</td>
+              <td>{formatCurrency(this.props.report.cost_per_tour, true)}</td>
             </tr>
             <tr className="k-rectangle">
               <th>Lease Applications</th>
-              <td>{formatNumber(this.report().lease_applications)}</td>
+              <td>{formatNumber(this.props.report.lease_applications)}</td>
               <td>
                 {formatPercent(
-                  this.report().tours_to_lease_applications_percent,
+                  this.props.report.tours_to_lease_applications_percent,
                   1
                 )}
               </td>
               <td>
-                {formatCurrency(this.report().cost_per_lease_application, true)}
+                {formatCurrency(
+                  this.props.report.cost_per_lease_application,
+                  true
+                )}
               </td>
             </tr>
             <tr className="k-rectangle">
               <th>Lease Executions</th>
-              <td>{formatNumber(this.report().leases_executed)}</td>
+              <td>{formatNumber(this.props.report.leases_executed)}</td>
               <td>
                 {formatPercent(
-                  this.report().lease_applications_to_leases_executed_percent,
+                  this.props.report
+                    .lease_applications_to_leases_executed_percent,
                   1
                 )}
               </td>
               <td>
-                {formatCurrency(this.report().cost_per_lease_execution, true)}
+                {formatCurrency(
+                  this.props.report.cost_per_lease_execution,
+                  true
+                )}
               </td>
             </tr>
           </tbody>
@@ -241,27 +257,27 @@ export default class ProjectPage extends Component {
     const investmentData = [
       {
         category: "Reputation Building",
-        investment: this.report().investment_reputation_building,
+        investment: this.props.report.investment_reputation_building,
         color: "#4035f4"
       },
       {
         category: "Demand Creation",
-        investment: this.report().investment_demand_creation,
+        investment: this.props.report.investment_demand_creation,
         color: "#5147ff"
       },
       {
         category: "Leasing Enablement",
-        investment: this.report().investment_leasing_enablement,
+        investment: this.props.report.investment_leasing_enablement,
         color: "#867ffe"
       },
       {
         category: "Market Intelligence",
-        investment: this.report().investment_market_intelligence,
+        investment: this.props.report.investment_market_intelligence,
         color: "#675efc"
       },
       {
         category: "Resident Retention",
-        investment: this.report().investment_resident_retention,
+        investment: this.props.report.investment_resident_retention,
         color: "#A09afd"
       }
     ];
@@ -273,7 +289,7 @@ export default class ProjectPage extends Component {
             <PrimaryValueBox
               name="Invested"
               value={formatCurrencyShorthand(
-                this.report().marketing_investment
+                this.props.report.marketing_investment
               )}
             />
           </div>
@@ -281,9 +297,17 @@ export default class ProjectPage extends Component {
             <VictoryPie
               data={investmentData}
               innerRadius={100}
+              custom
+              label
+              for
+              the
+              marketing
+              investment
+              pie
+              chart
               labelComponent={
-                <DonutLabel
-                  marketingInvestment={this.report().marketing_investment}
+                <MarketingInvestmentChartLabel
+                  marketingInvestment={this.props.report.marketing_investment}
                 />
               }
               x="category"
@@ -304,9 +328,9 @@ export default class ProjectPage extends Component {
           <div className="w-1/4 m-4">
             <PrimaryValueBox
               name="ROMI"
-              value={`${this.report().return_on_marketing_investment}x`}
+              value={`${this.props.report.return_on_marketing_investment}x`}
               help={`Estimated annual revenue gain: ${formatCurrencyShorthand(
-                this.report().estimated_annual_revenue_change
+                this.props.report.estimated_annual_revenue_change
               )}`}
             />
           </div>
@@ -325,5 +349,20 @@ export default class ProjectPage extends Component {
         {this.renderEstimatedMarketingInvestmentAndReturnSection()}
       </div>
     );
+  }
+}
+
+/**
+ * @description The full landing page for a single project
+ */
+export default class ProjectPage extends Component {
+  // TODO further define the shape of a report
+  static propTypes = {
+    reports: PropTypes.shape({ current_period: PropTypes.object.isRequired })
+      .isRequired
+  };
+
+  render() {
+    return <Report report={this.props.reports.current_period} />;
   }
 }
