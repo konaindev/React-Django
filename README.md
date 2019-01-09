@@ -72,3 +72,15 @@ Eventually, we'll want our schema, and our computations, to be a dynamic propert
 Engagements with customers are a moving target; the set of questions we ask of each customer, and the specifics of each visualization we produce, are (at least today) in flux. I'm fine with the engineering response to "hey, we should ask two new questions of each client" in months 1-N (for small values of N) to be "no problem, we'll just make a change" (updates code, migrates, deploys to heroku).
 
 But somewhere down the road, it should be "no problem, you can make this change yourself". How far this goes in the context of Remarkably, I'm not sure. Does it go to visualization computations? Layout and design? Does that seem too far? -Dave
+
+## Documentation Links
+
+### Django
+The web framework.
+https://docs.djangoproject.com/en/2.1/
+
+### Tailwind CSS
+CSS layout framework.
+https://tailwindcss.com/docs/what-is-tailwind/
+
+

@@ -26,12 +26,14 @@ class PrimaryValueBox extends Component {
 
   render() {
     return (
-      <div className="flex flex-col p-6 k-rectangle content-center">
-        {/* Container for the value itself */}
+      <div className="flex flex-col p-6 h-48 k-rectangle items-center text-center justify-center">
+        {/* Container for the value itself.
+            Counter-intuitively items- and text- center the rows and row content
+            while justif- centers the rows vertically within the box. */}
         <span className="text-remark-ui-text-light text-base">
           {this.props.name}
         </span>
-        <span className="text-remark-ui-text-lightest text-6xl">
+        <span className="text-remark-ui-text-lightest text-6xl font-hairline py-2">
           {this.props.value}
         </span>
         <span className="text-remark-ui-text text-sm">{this.props.help}</span>
