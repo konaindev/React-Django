@@ -5,6 +5,10 @@ const formatPercent = p => {
   return `${p * 100}%`;
 };
 
+const formatCurrency = c => {
+  return `$${c}`;
+};
+
 const VALUE_BOX_PROP_TYPES = {
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -141,7 +145,57 @@ export default class ProjectPage extends Component {
     );
   }
 
-  renderResidentAcquisitionFunnelSection() {}
+  renderResidentAcquisitionFunnelSection() {
+    return (
+      <ReportSection name="Resident Acquisition Funnel">
+        <table className="k-report-table w-full" cellSpacing="8">
+          <tr>
+            <td>Name</td>
+            <td>Actual</td>
+            <td>Converted</td>
+            <td>Cost Per</td>
+          </tr>
+          <tr className="k-rectangle">
+            <td>Unique Website Visitors</td>
+            <td>{this.report().usvs}</td>
+            <td>&nbsp;</td>
+            <td>{formatCurrency(this.report().cost_per_usv)}</td>
+          </tr>
+          <tr className="k-rectangle">
+            <td>Inquiries</td>
+            <td>{this.report().inquiries}</td>
+            <td>{formatPercent(this.report().usvs_to_inquiries_percent)}</td>
+            <td>{formatCurrency(this.report().cost_per_inquiry)}</td>
+          </tr>
+          <tr className="k-rectangle">
+            <td>Tours</td>
+            <td>{this.report().tours}</td>
+            <td>{formatPercent(this.report().inquiries_to_tours_percent)}</td>
+            <td>{formatCurrency(this.report().cost_per_tour)}</td>
+          </tr>
+          <tr className="k-rectangle">
+            <td>Lease Applications</td>
+            <td>{this.report().lease_applications}</td>
+            <td>
+              {formatPercent(this.report().tours_to_lease_applications_percent)}
+            </td>
+            <td>{formatCurrency(this.report().cost_per_lease_application)}</td>
+          </tr>
+          <tr className="k-rectangle">
+            <td>Lease Executions</td>
+            <td>{this.report().leases_executed}</td>
+            <td>
+              {formatPercent(
+                this.report().lease_applications_to_leases_executed_percent
+              )}
+            </td>
+            <td>{formatCurrency(this.report().cost_per_lease_execution)}</td>
+          </tr>
+        </table>
+        {/* And away we go! */}
+      </ReportSection>
+    );
+  }
 
   render() {
     // TODO: actual rendering code goes here. -Dave

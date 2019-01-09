@@ -191,6 +191,15 @@
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
 }
 
+.k-report-table {
+    border-collapse: separate;
+    border-spacing: 0 0.5em;
+
+    tr > td {
+        @apply p-2;
+    }
+}
+
 // Load tailwind's utility classes
 @tailwind utilities;
 
