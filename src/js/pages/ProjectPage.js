@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { VictoryPie, Text } from "victory";
 
+import Header from "../components/Header";
+
 import {
   formatPercent,
   formatNumber,
@@ -15,7 +17,7 @@ import {
 const VALUE_BOX_PROP_TYPES = {
   name: PropTypes.string.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
-  help: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+  detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
 };
 
 /**
@@ -36,7 +38,7 @@ class PrimaryValueBox extends Component {
         <span className="text-remark-ui-text-lightest text-6xl font-hairline py-2">
           {this.props.value}
         </span>
-        <span className="text-remark-ui-text text-sm">{this.props.help}</span>
+        <span className="text-remark-ui-text text-sm">{this.props.detail}</span>
       </div>
     );
   }
@@ -62,7 +64,9 @@ class SecondaryValueBox extends Component {
           <span className="text-remark-ui-text-light text-base">
             {this.props.name}
           </span>
-          <span className="text-remark-ui-text text-sm">{this.props.help}</span>
+          <span className="text-remark-ui-text text-sm">
+            {this.props.detail}
+          </span>
         </div>
       </div>
     );
@@ -75,16 +79,26 @@ class SecondaryValueBox extends Component {
 class ReportSection extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    children: PropTypes.element.isRequired
+    children: PropTypes.element.isRequired,
+    bottomBoundary: PropTypes.bool
+  };
+
+  static defaultProps = {
+    bottomBoundary: false
   };
 
   render() {
+    const bottomBoundary = this.props.bottomBoundary ? (
+      <hr className="k-divider m-0 pt-8 pb-4" />
+    ) : null;
+
     return (
       <div className="p-8">
         <span className="text-remark-ui-text uppercase text-xs block mb-8">
           {this.props.name}
         </span>
         {this.props.children}
+        {bottomBoundary}
       </div>
     );
   }
@@ -125,14 +139,14 @@ class Report extends Component {
 
   renderPropertySection() {
     return (
-      <ReportSection name="Property">
+      <ReportSection name="Property" bottomBoundary={true}>
         <div className="flex -m-4">
           {/* Primary metric */}
           <div className="w-1/4 m-4">
             <PrimaryValueBox
               name="Leased"
               value={formatPercent(this.props.report.leased_rate)}
-              help={
+              detail={
                 <span>
                   {`${this.props.report.leased_units} of ${
                     this.props.report.leasable_units
@@ -186,7 +200,7 @@ class Report extends Component {
 
   renderResidentAcquisitionFunnelSection() {
     return (
-      <ReportSection name="Resident Acquisition Funnel">
+      <ReportSection name="Resident Acquisition Funnel" bottomBoundary={true}>
         <table className="k-report-table w-full" cellSpacing="8">
           <thead>
             <tr>
@@ -337,7 +351,7 @@ class Report extends Component {
             <PrimaryValueBox
               name="ROMI"
               value={`${this.props.report.return_on_marketing_investment}x`}
-              help={`Estimated annual revenue gain: ${formatCurrencyShorthand(
+              detail={`Estimated annual revenue gain: ${formatCurrencyShorthand(
                 this.props.report.estimated_annual_revenue_change
               )}`}
             />
@@ -360,6 +374,24 @@ class Report extends Component {
 }
 
 /**
+ * @description Top-level project tabs
+ */
+class ProjectTabs extends Component {
+  render() {
+    return (
+      <div className="k-tabs-container">
+        <ul>
+          <li className="selected">Performance</li>
+          <li>Baseline</li>
+          <li>Team</li>
+        </ul>
+        <hr className="k-divider k-pin-above-top" />
+      </div>
+    );
+  }
+}
+
+/**
  * @description The full landing page for a single project
  */
 export default class ProjectPage extends Component {
@@ -372,8 +404,12 @@ export default class ProjectPage extends Component {
   render() {
     return (
       <div className="page">
-        <h1>Remarkably</h1>
-        <Report report={this.props.reports.current_period} />{" "}
+        <Header>
+          <>
+            <ProjectTabs />
+            <Report report={this.props.reports.current_period} />
+          </>
+        </Header>
       </div>
     );
   }

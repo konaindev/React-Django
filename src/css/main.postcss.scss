@@ -209,6 +209,43 @@
     }
 }
 
+.k-divider {
+    border-bottom: solid 1px #586073;
+    opacity: 0.18;
+}
+
+.k-pin-above-top {
+    @apply m-0 p-0;
+    position: relative;
+    top: -1px;
+}
+
+.k-tabs-container {
+    @apply p-0 mt-12 mb-8;
+
+    ul {
+        @apply inline-block text-center;
+        list-style-position: inside;
+        @apply -ml-4;
+
+        li {
+            @apply inline-block;
+            @apply mx-4;
+            @apply pb-4;
+            @apply text-remark-ui-text;
+        }
+
+        li.selected {
+            @apply text-remark-ui-text-lightest;
+            border-bottom: solid 1px #3188ff;
+        }
+
+        li:hover {
+            @apply text-remark-ui-text-light;
+        }
+    }
+}
+
 // Load tailwind's utility classes
 @tailwind utilities;
 
