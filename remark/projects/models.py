@@ -138,7 +138,7 @@ class Period(models.Model):
     # lease_terminations -> leases_ended
 
     leases_executed = models.IntegerField(
-        default=0, help_text="The number of new leases executed during this period."
+        default=0, help_text="The number of new leases (not applications) executed during this period."
     )
 
     leases_renewed = models.IntegerField(
@@ -147,15 +147,7 @@ class Period(models.Model):
 
     leases_ended = models.IntegerField(
         default=0,
-        help_text="The number of ended (expired) during this period.",
-    )
-
-    # TODO consider moving this to project -Dave
-    target_lease_percent = models.DecimalField(
-        default=decimal.Decimal(0),
-        max_digits=4,
-        decimal_places=3,
-        help_text="The target percentage of leasable units that we would like to actually lease. (Enter 0.9 for 90%)",
+        help_text="The number of leases ended (expired) during this period.",
     )
 
     # TODO consider moving this to project -Dave
@@ -416,6 +408,101 @@ class Period(models.Model):
 
     def __str__(self):
         return "from {} to {}".format(self.start, self.end)
+
+    # --------------------------------------------------------------------------
+    # Goals
+    # --------------------------------------------------------------------------
+
+    target_lease_percent = models.DecimalField(
+        default=decimal.Decimal(0),
+        max_digits=4,
+        decimal_places=3,
+        help_text="The target percentage of leasable units that we would like to actually lease. (Enter 0.9 for 90%)",
+    )
+
+    leases_executed_goal = models.IntegerField(
+        default=0, help_text="The period goal for number of new leases executed during this period."
+    )
+
+    leases_renewed_goal = models.IntegerField(
+        default=0, help_text="The period goal for number of lease renewals signed in the period."
+    )
+
+    leases_ended_goal = models.IntegerField(
+        default=0,
+        help_text="The period goal for number of leases ended (expired) during this period.",
+    )
+
+    net_lease_change_goal = models.IntegerField(
+        default=0,
+        help_text="The net number of new leases during this period.",
+    )
+
+    usvs_goal = models.IntegerField(
+        default=0, help_text="The goal for number of unique site visitors during this period."
+    )
+
+    inquiries_goal = models.IntegerField(
+        default=0, help_text="The goal for number of site inquiries during this period."
+    )
+
+    tours_goal = models.IntegerField(
+        default=0, help_text="The goal for number of tours during this period."
+    )
+
+    lease_applications_goal = models.IntegerField(
+        default=0, help_text="The goal_for number of lease applications during this period."
+    )
+
+    usvs_to_inquiries_percent_goal = models.DecimalField(
+        default=0,
+        max_digits=10,
+        decimal_places=2,
+        help_text="The goal for conversation rate from usvs to inquiries.",
+    )
+
+    inquiries_to_tours_percent_goal = models.DecimalField(
+        default=0,
+        max_digits=10,
+        decimal_places=2,
+        help_text="The goal for conversion rate from inquiries to tours.",
+    )
+
+    tours_to_lease_applications_percent_goal = models.DecimalField(
+        default=0,
+        max_digits=10,
+        decimal_places=2,
+        help_text="The goal for conversion rate from lease applications to tours.",
+    )
+
+    lease_applications_to_leases_executed_percent_goal = models.DecimalField(
+        default=0,
+        max_digits=10,
+        decimal_places=2,
+        help_text="The goal for conversion rate from lease executions to tours.",
+    )
+
+    marketing_investment_goal = models.DecimalField(
+        default=0,
+        max_digits=10,
+        decimal_places=2,
+        help_text="Return the total marketing investment in this period, across all categories.",
+    )
+
+    return_on_marketing_investment_goal = models.DecimalField(
+        default=0,
+        max_digits=10,
+        decimal_places=2,
+        help_text="Goal for return on marketing investment.",
+    )
+
+    estimated_annual_revenue_change_goal = models.DecimalField(
+        default=0,
+        max_digits=10,
+        decimal_places=2,
+        help_text="Goal for estimated annual revenue change",
+    )
+
 
     class Meta:
         # Always sort Periods with the earliest period first.
