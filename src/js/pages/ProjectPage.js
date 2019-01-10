@@ -26,7 +26,7 @@ class PrimaryValueBox extends Component {
 
   render() {
     return (
-      <div className="flex flex-col p-6 h-48 k-rectangle items-center text-center justify-center">
+      <div className="flex flex-col p-6 h-64 k-rectangle items-center text-center justify-center">
         {/* Container for the value itself.
             Counter-intuitively items- and text- center the rows and row content
             while justif- centers the rows vertically within the box. */}
@@ -50,7 +50,7 @@ class SecondaryValueBox extends Component {
 
   render() {
     return (
-      <div className="flex flex-row py-6 k-rectangle">
+      <div className="flex flex-row h-full py-6 k-rectangle">
         {/* Container for the value itself */}
         <div className="text-6xl w-1/3 text-center flex-none leading-compressed">
           <span className="text-remark-ui-text-lightest">
@@ -147,30 +147,36 @@ class Report extends Component {
           </div>
 
           {/* Secondary metrics flex -- the -m-4 we'd normally put here negates the m-4 for the box*/}
-          <div className="flex flex-grow">
-            <div className="w-1/5 m-4">
-              <SecondaryValueBox
-                name="Leases Executed"
-                value={formatNumber(this.props.report.leases_executed)}
-              />
+          <div className="flex flex-col flex-grow items-stretch">
+            {/* row */}
+            <div className="flex flex-row flex-grow items-stretch">
+              <div className="w-1/2 m-4">
+                <SecondaryValueBox
+                  name="Leases Executed"
+                  value={formatNumber(this.props.report.leases_executed)}
+                />
+              </div>
+              <div className="w-1/2 m-4">
+                <SecondaryValueBox
+                  name="Renewals"
+                  value={formatNumber(this.props.report.leases_renewed)}
+                />
+              </div>
             </div>
-            <div className="w-1/5 m-4">
-              <SecondaryValueBox
-                name="Renewals"
-                value={formatNumber(this.props.report.leases_renewed)}
-              />
-            </div>
-            <div className="w-1/5 m-4">
-              <SecondaryValueBox
-                name="Leases Ended"
-                value={formatNumber(this.props.report.leases_ended)}
-              />
-            </div>
-            <div className="w-1/5 m-4">
-              <SecondaryValueBox
-                name="Net Lease Change"
-                value={formatNumber(this.props.report.net_lease_change)}
-              />
+            {/* row */}
+            <div className="flex flex-row flex-grow">
+              <div className="w-1/2 m-4">
+                <SecondaryValueBox
+                  name="Leases Ended"
+                  value={formatNumber(this.props.report.leases_ended)}
+                />
+              </div>
+              <div className="w-1/2 m-4">
+                <SecondaryValueBox
+                  name="Net Lease Change"
+                  value={formatNumber(this.props.report.net_lease_change)}
+                />
+              </div>
             </div>
           </div>
         </div>
