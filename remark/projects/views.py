@@ -15,5 +15,5 @@ class ProjectPageView(ReactView):
         current_period_report = project.current_period_report()
         # TODO something smarter here -Dave
         reports = {"current_period": current_period_report.to_jsonable()}
-        return self.render(reports=reports)
+        return self.render(reports=reports, project_name=project.name)
 

@@ -10,14 +10,14 @@ export default class Header extends Component {
 
   render() {
     const navSection = this.props.navigation ? (
-      <nav>{this.props.navigation}</nav>
+      <nav className="float-right pr-4 h-16">{this.props.navigation}</nav>
     ) : null;
 
     return (
       <div>
         <header className="text-headline bg-remark-ui-darkest h-16 p-4 leading-tight">
-          <h2>Remarkably</h2>
           {navSection}
+          <h2>Remarkably</h2>
         </header>
         <div>{this.props.children}</div>
       </div>

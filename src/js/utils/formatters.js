@@ -84,3 +84,16 @@ export const formatCurrencyShorthand = (value, currency = "USD") => {
   // return the result with appropriate dollar value
   return `${formatter.format(number)}${level}`;
 };
+
+/**
+ * @description Format a date like it's the USA!
+ */
+export const formatDateShorthand = (value, year = true) => {
+  const options = { month: "numeric", day: "numeric" };
+  if (year) {
+    options.year = "2-digit";
+  }
+  const formatter = Intl.DateTimeFormat("en-US", options);
+  const d = new Date(value);
+  return formatter.format(d);
+};

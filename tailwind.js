@@ -69,6 +69,7 @@ let colors = {
   "remark-ui-border-dark": "#161C29",
   "remark-ui-darker": "#131926",
   "remark-ui-darkest": "#0D111A",
+  "remark-ui-border": "#212734",
   "remark-ui-text-lightest": "#FFFFFF",
   "remark-ui-text-light": "#cccccc",
   "remark-ui-text": "#68788C",

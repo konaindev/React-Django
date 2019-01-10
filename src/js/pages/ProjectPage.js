@@ -8,7 +8,8 @@ import {
   formatPercent,
   formatNumber,
   formatCurrency,
-  formatCurrencyShorthand
+  formatCurrencyShorthand,
+  formatDateShorthand
 } from "../utils/formatters";
 
 /**
@@ -398,13 +399,56 @@ export default class ProjectPage extends Component {
   // TODO further define the shape of a report
   static propTypes = {
     reports: PropTypes.shape({ current_period: PropTypes.object.isRequired })
-      .isRequired
+      .isRequired,
+    project_name: PropTypes.string.isRequired
   };
 
+  renderNavigationBarItems() {
+    // TODO XXX all the positioning/CSS here is conceptual nonsense, I suspect. -Dave
+    return (
+      <ul className="block h-16 text-sans -mt-4 p-0" style={{ columns: 2 }}>
+        <li className="block h-16 border-r border-solid border-remark-ui-border pt-4 px-4">
+          <span
+            className="bg-grey rounded inline-block"
+            style={{
+              minWidth: "2rem",
+              minHeight: "2rem",
+              width: "2rem",
+              height: "2rem"
+            }}
+          >
+            &nbsp;
+          </span>
+          <span className="cursor-pointer inline-block px-4 mt-1 align-middle">
+            {this.props.project_name} ∨
+          </span>
+        </li>
+        <li className="block h-16 pt-4 pl-4">
+          <span className="inline-block align-middle mt-1 text-sm text-remark-ui-text mr-8">
+            {formatDateShorthand(
+              this.props.reports.current_period.start,
+              false
+            )}{" "}
+            -{" "}
+            {formatDateShorthand(this.props.reports.current_period.end, false)}
+          </span>
+          <span
+            className="cursor-pointer inline-block align-middle -mx-4 -mt-1 -mb-2 px-4 py-2 rounded"
+            style={{ backgroundColor: "#232837" }}
+          >
+            Last Week ∨
+          </span>
+        </li>
+      </ul>
+    );
+  }
+
   render() {
+    const navigation = this.renderNavigationBarItems();
+
     return (
       <div className="page">
-        <Header>
+        <Header navigation={navigation}>
           <>
             <ProjectTabs />
             <Report report={this.props.reports.current_period} />
