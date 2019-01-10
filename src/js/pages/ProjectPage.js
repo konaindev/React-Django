@@ -50,12 +50,12 @@ class SecondaryValueBox extends Component {
 
   render() {
     return (
-      <div className="flex flex-row h-full py-6 k-rectangle">
+      <div className="flex flex-row h-full py-8 k-rectangle">
         {/* Container for the value itself */}
-        <div className="text-6xl w-1/3 text-center flex-none leading-compressed">
-          <span className="text-remark-ui-text-lightest">
+        <div className="text-6xl w-1/3 flex flex-col leading-compressed justify-center content-center">
+          <div className="text-remark-ui-text-lightest font-hairline text-center">
             {this.props.value}
-          </span>
+          </div>
         </div>
         {/* Container for the label and help text */}
         <div className="flex flex-col flex-auto justify-between">
@@ -126,9 +126,9 @@ class Report extends Component {
   renderPropertySection() {
     return (
       <ReportSection name="Property">
-        <div className="flex -m-4">
+        <div className="flex -m-2">
           {/* Primary metric */}
-          <div className="w-1/4 m-4">
+          <div className="w-1/4 m-2">
             <PrimaryValueBox
               name="Leased"
               value={formatPercent(this.props.report.leased_rate)}
@@ -146,17 +146,17 @@ class Report extends Component {
             />
           </div>
 
-          {/* Secondary metrics flex -- the -m-4 we'd normally put here negates the m-4 for the box*/}
+          {/* Secondary metrics flex -- the -m-2 we'd normally put here negates the m-2 for the box*/}
           <div className="flex flex-col flex-grow items-stretch">
             {/* row */}
             <div className="flex flex-row flex-grow items-stretch">
-              <div className="w-1/2 m-4">
+              <div className="w-1/2 m-2">
                 <SecondaryValueBox
                   name="Leases Executed"
                   value={formatNumber(this.props.report.leases_executed)}
                 />
               </div>
-              <div className="w-1/2 m-4">
+              <div className="w-1/2 m-2">
                 <SecondaryValueBox
                   name="Renewals"
                   value={formatNumber(this.props.report.leases_renewed)}
@@ -165,13 +165,13 @@ class Report extends Component {
             </div>
             {/* row */}
             <div className="flex flex-row flex-grow">
-              <div className="w-1/2 m-4">
+              <div className="w-1/2 m-2">
                 <SecondaryValueBox
                   name="Leases Ended"
                   value={formatNumber(this.props.report.leases_ended)}
                 />
               </div>
-              <div className="w-1/2 m-4">
+              <div className="w-1/2 m-2">
                 <SecondaryValueBox
                   name="Net Lease Change"
                   value={formatNumber(this.props.report.net_lease_change)}
