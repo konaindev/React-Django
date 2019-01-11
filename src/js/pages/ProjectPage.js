@@ -112,13 +112,26 @@ class MarketingInvestmentChartLabel extends Component {
   render() {
     // remove unwanted props to pass to SVG <text /> element
     const { verticalAnchor, marketingInvestment, ...cleanProps } = this.props;
-    console.log(cleanProps);
+
+    // build the description
     const description = `${formatCurrencyShorthand(
       this.props.datum.investment
     )} (${formatPercent(
       Number(this.props.datum.investment) /
         Number(this.props.marketingInvestment)
     )})`;
+
+    // compute a transform along the current angle
+    // XXX this computation is wrong, because the angle has the origin as the
+    // center of the donut, but we *want* an angle relative to the SVG viewbox origin. -Dave
+    const DISTANCE = 100;
+    const angle =
+      (this.props.slice.startAngle + this.props.slice.endAngle) / 2.0;
+    const dx = Math.cos(angle) * DISTANCE;
+    const dy = Math.sin(angle) * DISTANCE;
+    console.log(angle, this.props);
+
+    // build and return the full label
     return (
       <g>
         <text {...cleanProps}>
@@ -341,14 +354,7 @@ class Report extends Component {
             <VictoryPie
               data={investmentData}
               innerRadius={100}
-              custom
-              label
-              for
-              the
-              marketing
-              investment
-              pie
-              chart
+              labelRadius={180}
               labelComponent={
                 <MarketingInvestmentChartLabel
                   marketingInvestment={this.props.report.marketing_investment}
