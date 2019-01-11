@@ -276,35 +276,55 @@ class Report extends Component {
     );
   }
 
-  renderEstimatedMarketingInvestmentAndReturnSection() {
-    // TODO handle Number(foo) == 0
-    const investmentData = [
-      {
-        category: "Reputation Building",
-        investment: Number(this.props.report.investment_reputation_building),
-        color: "#4035f4"
-      },
-      {
-        category: "Demand Creation",
-        investment: Number(this.props.report.investment_demand_creation),
-        color: "#5147ff"
-      },
-      {
-        category: "Leasing Enablement",
-        investment: Number(this.props.report.investment_leasing_enablement),
-        color: "#867ffe"
-      },
-      {
-        category: "Market Intelligence",
-        investment: Number(this.props.report.investment_market_intelligence),
-        color: "#675efc"
-      },
-      {
-        category: "Resident Retention",
-        investment: Number(this.props.report.investment_resident_retention),
-        color: "#A09afd"
-      }
+  /**
+   * @description Return marketing investment data in a structure suitable for Victory charts.
+   */
+  getInvestmentData() {
+    const reputationBuilding = {
+      category: "Reputation Building",
+      investment: Number(this.props.report.investment_reputation_building),
+      color: "#4035f4"
+    };
+
+    const demandCreation = {
+      category: "Demand Creation",
+      investment: Number(this.props.report.investment_demand_creation),
+      color: "#5147ff"
+    };
+
+    const leasingEnablement = {
+      category: "Leasing Enablement",
+      investment: Number(this.props.report.investment_leasing_enablement),
+      color: "#867ffe"
+    };
+
+    const marketIntelligence = {
+      category: "Market Intelligence",
+      investment: Number(this.props.report.investment_market_intelligence),
+      color: "#675efc"
+    };
+
+    const residentRetention = {
+      category: "Resident Retention",
+      investment: Number(this.props.report.investment_resident_retention),
+      color: "#A09afd"
+    };
+
+    // all categories
+    const categories = [
+      reputationBuilding,
+      demandCreation,
+      leasingEnablement,
+      marketIntelligence,
+      residentRetention
     ];
+
+    // drop any category with $0 investment and return
+    return categories.filter(datum => datum.investment);
+  }
+
+  renderEstimatedMarketingInvestmentAndReturnSection() {
+    const investmentData = this.getInvestmentData();
 
     return (
       <ReportSection name="Estimated Marketing Investment And Return">
