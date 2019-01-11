@@ -88,7 +88,7 @@ export const formatCurrencyShorthand = (value, currency = "USD") => {
 /**
  * @description Format a date like it's the USA!
  */
-export const formatDateShorthand = (value, year = true) => {
+export const formatDate = (value, year = true) => {
   const options = { month: "numeric", day: "numeric" };
   if (year) {
     options.year = "2-digit";

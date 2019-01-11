@@ -9,7 +9,7 @@ import {
   formatNumber,
   formatCurrency,
   formatCurrencyShorthand,
-  formatDateShorthand
+  formatDate
 } from "../utils/formatters";
 
 /**
@@ -277,30 +277,31 @@ class Report extends Component {
   }
 
   renderEstimatedMarketingInvestmentAndReturnSection() {
+    // TODO handle Number(foo) == 0
     const investmentData = [
       {
         category: "Reputation Building",
-        investment: this.props.report.investment_reputation_building,
+        investment: Number(this.props.report.investment_reputation_building),
         color: "#4035f4"
       },
       {
         category: "Demand Creation",
-        investment: this.props.report.investment_demand_creation,
+        investment: Number(this.props.report.investment_demand_creation),
         color: "#5147ff"
       },
       {
         category: "Leasing Enablement",
-        investment: this.props.report.investment_leasing_enablement,
+        investment: Number(this.props.report.investment_leasing_enablement),
         color: "#867ffe"
       },
       {
         category: "Market Intelligence",
-        investment: this.props.report.investment_market_intelligence,
+        investment: Number(this.props.report.investment_market_intelligence),
         color: "#675efc"
       },
       {
         category: "Resident Retention",
-        investment: this.props.report.investment_resident_retention,
+        investment: Number(this.props.report.investment_resident_retention),
         color: "#A09afd"
       }
     ];
@@ -425,12 +426,8 @@ export default class ProjectPage extends Component {
         </li>
         <li className="block h-16 pt-4 pl-4">
           <span className="inline-block align-middle mt-1 text-sm text-remark-ui-text mr-8">
-            {formatDateShorthand(
-              this.props.reports.current_period.start,
-              false
-            )}{" "}
-            -{" "}
-            {formatDateShorthand(this.props.reports.current_period.end, false)}
+            {formatDate(this.props.reports.current_period.start, false)} -{" "}
+            {formatDate(this.props.reports.current_period.end, false)}
           </span>
           <span
             className="cursor-pointer inline-block align-middle -mx-4 -mt-1 -mb-2 px-4 py-2 rounded"
