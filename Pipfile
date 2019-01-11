@@ -6,6 +6,10 @@ verify_ssl = true
 [dev-packages]
 flake8 = "*"
 black = "*"
+rope = "*"
+python-language-server = {extras = ["all"],version = "*"}
+pyls-black = "*"
+pyls-mypy = "*"
 
 [packages]
 django-heroku = "*"
