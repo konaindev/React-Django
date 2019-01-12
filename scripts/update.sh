@@ -8,13 +8,14 @@ fi
 
 pipenv install --dev
 if [ -f '/tmp/remark.sqlite' ]; then
-  NEW_DB=1
-else
   NEW_DB=0
+else
+  NEW_DB=1
 fi
 pipenv run ./manage.py migrate
 pipenv run ./manage.py test
-if [ "$NEW_DB" == '1' ]; then
+if [ "$NEW_DB" -eq '1' ]; then
+  echo 'Loading fixture data.'
   pipenv run ./manage.py loaddata scripts/data/2-lincoln-single-period.json
 fi
 pipenv run yarn install

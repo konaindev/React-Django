@@ -52,6 +52,13 @@ class SecondaryValueBox extends Component {
   static propTypes = VALUE_BOX_PROP_TYPES;
 
   render() {
+    var showGoal = false;
+    var goal = Number(this.props.goal);
+    if (goal != 0) {
+      showGoal = true;
+      pctOfGoal = Math.round(100.0 * Number(this.props.value) / goal);
+    }
+
     return (
       <div className="flex flex-row h-full py-8 k-rectangle">
         {/* Container for the value itself */}
@@ -67,6 +74,7 @@ class SecondaryValueBox extends Component {
           </span>
           <span className="text-remark-ui-text text-sm">
             {this.props.detail}
+            Target: {goal}
           </span>
         </div>
       </div>
@@ -182,12 +190,14 @@ class Report extends Component {
                 <SecondaryValueBox
                   name="Leases Executed"
                   value={formatNumber(this.props.report.leases_executed)}
+                  goal={this.props.report.leases_executed_goal}
                 />
               </div>
               <div className="w-1/2 m-2">
                 <SecondaryValueBox
                   name="Renewals"
                   value={formatNumber(this.props.report.leases_renewed)}
+                  goal={this.props.report.leases_renewed_goal}
                 />
               </div>
             </div>
@@ -197,12 +207,14 @@ class Report extends Component {
                 <SecondaryValueBox
                   name="Leases Ended"
                   value={formatNumber(this.props.report.leases_ended)}
+                  goal={this.props.report.leases_ended_goal}
                 />
               </div>
               <div className="w-1/2 m-2">
                 <SecondaryValueBox
                   name="Net Lease Change"
                   value={formatNumber(this.props.report.net_lease_change)}
+                  goal={this.props.report.net_lease_change_goal}
                 />
               </div>
             </div>
@@ -220,6 +232,7 @@ class Report extends Component {
             <tr>
               <th>Name</th>
               <th>Actual</th>
+              <th>Target</th>
               <th>Converted</th>
               <th>Cost Per</th>
             </tr>
@@ -228,12 +241,14 @@ class Report extends Component {
             <tr className="k-rectangle">
               <th>Unique Website Visitors</th>
               <td>{formatNumber(this.props.report.usvs)}</td>
+              <td>{formatNumber(this.props.report.usvs_goal)}</td>
               <td>&nbsp;</td>
               <td>{formatCurrency(this.props.report.cost_per_usv, true)}</td>
             </tr>
             <tr className="k-rectangle">
               <th>Inquiries</th>
               <td>{formatNumber(this.props.report.inquiries)}</td>
+              <td>{formatNumber(this.props.report.inquiries_goal)}</td>
               <td>
                 {formatPercent(this.props.report.usvs_to_inquiries_percent, 1)}
               </td>
@@ -244,6 +259,7 @@ class Report extends Component {
             <tr className="k-rectangle">
               <th>Tours</th>
               <td>{formatNumber(this.props.report.tours)}</td>
+              <td>{formatNumber(this.props.report.tours_goal)}</td>
               <td>
                 {formatPercent(this.props.report.inquiries_to_tours_percent, 1)}
               </td>
@@ -252,6 +268,7 @@ class Report extends Component {
             <tr className="k-rectangle">
               <th>Lease Applications</th>
               <td>{formatNumber(this.props.report.lease_applications)}</td>
+              <td>{formatNumber(this.props.report.lease_applications_goal)}</td>
               <td>
                 {formatPercent(
                   this.props.report.tours_to_lease_applications_percent,
@@ -268,6 +285,7 @@ class Report extends Component {
             <tr className="k-rectangle">
               <th>Lease Executions</th>
               <td>{formatNumber(this.props.report.leases_executed)}</td>
+              <td>{formatNumber(this.props.report.leases_executed_goal)}</td>
               <td>
                 {formatPercent(
                   this.props.report
@@ -348,6 +366,10 @@ class Report extends Component {
               value={formatCurrencyShorthand(
                 this.props.report.marketing_investment
               )}
+              detail={`
+                ${Math.round(Number(this.props.report.marketing_investment)/Number(this.props.report.marketing_investment_goal)*100)}% of
+                ${Math.round(Number(this.props.report.marketing_investment_goal)/1000)}k (Budget Target)
+              `}
             />
           </div>
           <div className="m-4 flex-grow h-96">
@@ -379,15 +401,32 @@ class Report extends Component {
             <PrimaryValueBox
               name="ROMI"
               value={`${this.props.report.return_on_marketing_investment}x`}
-              detail={`Estimated annual revenue gain: ${formatCurrencyShorthand(
-                this.props.report.estimated_annual_revenue_change
-              )}`}
+              detail={`
+                Goal: ${this.props.report.return_on_marketing_investment_goal}x
+              `}
             />
+          </div>
+        </div>
+        <div className="text-center">
+          <div className="text-remark-ui-text text-sm">
+            Estimated annual revenue gain
+          </div>
+          <div className="text-remark-ui-text-lightest text-6xl font-hairline py-2">
+            {formatCurrencyShorthand(
+              this.props.report.estimated_annual_revenue_change
+            )}
+          <div className="text-remark-ui-text text-sm">
+            Goal: {formatCurrencyShorthand(
+              this.props.report.estimated_annual_revenue_change_goal
+            )}
+
+          </div>
           </div>
         </div>
       </ReportSection>
     );
   }
+
 
   render() {
     // TODO: actual rendering code goes here. -Dave
