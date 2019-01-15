@@ -3,6 +3,11 @@
 # Run Django's local development server, along with parceljs in watch
 # mode, and browser-sync for ultimate fanciness.
 
+if [ "$DEBUG" == "" ]; then
+    echo "It doesn't look like you are in a dev shell."
+    exit 1
+fi
+
 trap killchildren SIGINT
 
 killchildren() {
