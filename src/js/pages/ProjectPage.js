@@ -56,7 +56,7 @@ class SecondaryValueBox extends Component {
     var goal = Number(this.props.goal);
     if (goal != 0) {
       showGoal = true;
-      pctOfGoal = Math.round(100.0 * Number(this.props.value) / goal);
+      pctOfGoal = Math.round((100.0 * Number(this.props.value)) / goal);
     }
 
     return (
@@ -357,76 +357,89 @@ class Report extends Component {
   renderEstimatedMarketingInvestmentAndReturnSection() {
     const investmentData = this.getInvestmentData();
 
+    // Compute goal and target strings
+    const investedBoxDetail = Number(
+      this.props.report.marketing_investment_goal
+    )
+      ? `${formatPercent(
+          Number(this.props.report.marketing_investment) /
+            Number(this.props.report.marketing_investment_goal)
+        )} of ${formatCurrencyShorthand(
+          this.props.report.marketing_investment_goal
+        )} (Budget Target)`
+      : "No budget target set";
+
+    const romiBoxDetail = Number(
+      this.props.report.return_on_marketing_investment_goal
+    )
+      ? `Goal: ${this.props.report.return_on_marketing_investment_goal}x`
+      : `No goal set`;
+
+    const estRevenueBoxDetail = Number(
+      this.props.report.estimated_annual_revenue_change_goal
+    )
+      ? `Goal: ${formatCurrencyShorthand(
+          this.props.report.estimated_annual_revenue_change_goal
+        )}`
+      : `No goal set`;
+
     return (
       <ReportSection name="Estimated Marketing Investment And Return">
+        <div className="m-4 flex-grow h-96">
+          <VictoryPie
+            data={investmentData}
+            innerRadius={100}
+            labelRadius={180}
+            labelComponent={
+              <MarketingInvestmentChartLabel
+                marketingInvestment={this.props.report.marketing_investment}
+              />
+            }
+            x="category"
+            y="investment"
+            style={{
+              data: {
+                fill: datum => datum.color
+              },
+              labels: {
+                fontFamily: "formular",
+                fontWeight: "400",
+                fontSize: "1rem",
+                fill: "#cccccc"
+              }
+            }}
+          />
+        </div>
         <div className="flex -m-4">
-          <div className="w-1/4 m-4">
+          <div className="w-1/3 m-4">
             <PrimaryValueBox
               name="Invested"
               value={formatCurrencyShorthand(
                 this.props.report.marketing_investment
               )}
-              detail={`
-                ${Math.round(Number(this.props.report.marketing_investment)/Number(this.props.report.marketing_investment_goal)*100)}% of
-                ${Math.round(Number(this.props.report.marketing_investment_goal)/1000)}k (Budget Target)
-              `}
+              detail={investedBoxDetail}
             />
           </div>
-          <div className="m-4 flex-grow h-96">
-            <VictoryPie
-              data={investmentData}
-              innerRadius={100}
-              labelRadius={180}
-              labelComponent={
-                <MarketingInvestmentChartLabel
-                  marketingInvestment={this.props.report.marketing_investment}
-                />
-              }
-              x="category"
-              y="investment"
-              style={{
-                data: {
-                  fill: datum => datum.color
-                },
-                labels: {
-                  fontFamily: "formular",
-                  fontWeight: "400",
-                  fontSize: "1rem",
-                  fill: "#cccccc"
-                }
-              }}
-            />
-          </div>
-          <div className="w-1/4 m-4">
+          <div className="w-1/3 m-4">
             <PrimaryValueBox
               name="ROMI"
               value={`${this.props.report.return_on_marketing_investment}x`}
-              detail={`
-                Goal: ${this.props.report.return_on_marketing_investment_goal}x
-              `}
+              detail={romiBoxDetail}
             />
           </div>
-        </div>
-        <div className="text-center">
-          <div className="text-remark-ui-text text-sm">
-            Estimated annual revenue gain
-          </div>
-          <div className="text-remark-ui-text-lightest text-6xl font-hairline py-2">
-            {formatCurrencyShorthand(
-              this.props.report.estimated_annual_revenue_change
-            )}
-          <div className="text-remark-ui-text text-sm">
-            Goal: {formatCurrencyShorthand(
-              this.props.report.estimated_annual_revenue_change_goal
-            )}
-
-          </div>
+          <div className="w-1/3 m-4">
+            <PrimaryValueBox
+              name="Est. Revenue Gain"
+              value={formatCurrencyShorthand(
+                this.props.report.estimated_annual_revenue_change
+              )}
+              detail={estRevenueBoxDetail}
+            />
           </div>
         </div>
       </ReportSection>
     );
   }
-
 
   render() {
     // TODO: actual rendering code goes here. -Dave
