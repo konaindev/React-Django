@@ -4,13 +4,13 @@ import PropTypes from "prop-types";
 // TODO figure out how this relates to navigation.
 export default class Header extends Component {
   static propTypes = {
-    navigation: PropTypes.element,
+    navigationItems: PropTypes.element,
     children: PropTypes.element.isRequired
   };
 
   render() {
-    const navSection = this.props.navigation ? (
-      <nav className="float-right pr-4 h-16">{this.props.navigation}</nav>
+    const navSection = this.props.navigationItems ? (
+      <nav className="float-right pr-4 h-16">{this.props.navigationItems}</nav>
     ) : null;
 
     return (

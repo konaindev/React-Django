@@ -15,10 +15,10 @@ pyls-mypy = "*"
 django-heroku = "*"
 gunicorn = "*"
 python-dotenv = "*"
-django = "*"
 psycopg2-binary = "*"
 django-js-reverse = "*"
 docutils = "*"
+django = "==2.1.*"
 
 [requires]
 python_version = "3.7"

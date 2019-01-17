@@ -9,11 +9,13 @@ import ReactDOM from "react-dom";
 import Page from "./pages/Page.js";
 import HomePage from "./pages/HomePage.js";
 import ProjectPage from "./pages/ProjectPage.js";
+import ReportPage from "./pages/ReportPage.js";
 
 const pages = {
   Page,
   HomePage,
-  ProjectPage
+  ProjectPage,
+  ReportPage
 };
 
 /*

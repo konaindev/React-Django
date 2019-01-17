@@ -1,12 +1,9 @@
 import decimal
-import math
 
 from django.db import models
 
 from remark.lib.math import d_div, d_quant_perc, d_quant_currency
 from remark.lib.tokens import public_id
-
-from .reports import Report
 
 
 def pro_public_id():
@@ -49,28 +46,9 @@ class Project(models.Model):
         """Return the most recent reported period for this project."""
         return self.periods.last()
 
-    def baseline_report(self):
-        """Generate a Report for the baseline period."""
-        # TODO: make this smarter. A report must ultimately take more than just
-        # a single period. At the very least, it needs to take a previous period
-        # to compute deltas. At most, I suspect the entire set of periods
-        # may matter, regardless of the time span under consideration for a given
-        # report. -Dave
-        return Report(self.baseline_period())
-
-    def current_period_report(self):
-        """Generate a Report for the current period."""
-        # TODO: make this smarter. A report must ultimately take more than just
-        # a single period. At the very least, it needs to take a previous period
-        # to compute deltas. At most, I suspect the entire set of periods
-        # may matter, regardless of the time span under consideration for a given
-        # report. -Dave
-        return Report(self.current_period())
-
-    def cumulative_report(self):
-        """Generate a Report for the full length of this project."""
-        # TODO Something? -Dave
-        raise NotImplementedError()
+    def to_jsonable(self):
+        """Return a representation that can be converted to a JSON string."""
+        return {"public_id": self.public_id, "name": self.name}
 
     def __str__(self):
         return "{} ({})".format(self.name, self.public_id)
@@ -138,7 +116,8 @@ class Period(models.Model):
     # lease_terminations -> leases_ended
 
     leases_executed = models.IntegerField(
-        default=0, help_text="The number of new leases (not applications) executed during this period."
+        default=0,
+        help_text="The number of new leases (not applications) executed during this period.",
     )
 
     leases_renewed = models.IntegerField(
@@ -146,8 +125,7 @@ class Period(models.Model):
     )
 
     leases_ended = models.IntegerField(
-        default=0,
-        help_text="The number of leases ended (expired) during this period.",
+        default=0, help_text="The number of leases ended (expired) during this period."
     )
 
     # TODO consider moving this to project -Dave
@@ -197,9 +175,8 @@ class Period(models.Model):
     def target_leased_units(self):
         """The target number of leased units we'd like to achieve."""
         return decimal.Decimal(
-            self.target_lease_percent 
-                * self.leasable_units).quantize(
-                    decimal.Decimal(1), rounding=decimal.ROUND_HALF_UP)
+            self.target_lease_percent * self.leasable_units
+        ).quantize(decimal.Decimal(1), rounding=decimal.ROUND_HALF_UP)
 
     @property
     def leased_rate(self):
@@ -367,8 +344,8 @@ class Period(models.Model):
         return d_quant_currency(
             d_div(
                 self.investment_reputation_building
-                    + self.investment_demand_creation
-                    + self.investment_market_intelligence,
+                + self.investment_demand_creation
+                + self.investment_market_intelligence,
                 self.usvs,
             )
         )
@@ -379,8 +356,8 @@ class Period(models.Model):
         return d_quant_currency(
             d_div(
                 self.investment_reputation_building
-                    + self.investment_demand_creation
-                    + self.investment_market_intelligence,
+                + self.investment_demand_creation
+                + self.investment_market_intelligence,
                 self.inquiries,
             )
         )
@@ -388,9 +365,7 @@ class Period(models.Model):
     @property
     def cost_per_tour(self):
         """Return the estimated cost to obtain an inbound tour in this period."""
-        return d_quant_currency(
-            d_div(self.marketing_investment, self.tours)
-        )
+        return d_quant_currency(d_div(self.marketing_investment, self.tours))
 
     @property
     def cost_per_lease_application(self):
@@ -402,9 +377,7 @@ class Period(models.Model):
     @property
     def cost_per_lease_execution(self):
         """Return the estimated cost to obtain a lease application in this period."""
-        return d_quant_currency(
-            d_div(self.marketing_investment, self.leases_executed)
-        )
+        return d_quant_currency(d_div(self.marketing_investment, self.leases_executed))
 
     def __str__(self):
         return "from {} to {}".format(self.start, self.end)
@@ -421,11 +394,13 @@ class Period(models.Model):
     )
 
     leases_executed_goal = models.IntegerField(
-        default=0, help_text="The period goal for number of new leases executed during this period."
+        default=0,
+        help_text="The period goal for number of new leases executed during this period.",
     )
 
     leases_renewed_goal = models.IntegerField(
-        default=0, help_text="The period goal for number of lease renewals signed in the period."
+        default=0,
+        help_text="The period goal for number of lease renewals signed in the period.",
     )
 
     leases_ended_goal = models.IntegerField(
@@ -434,12 +409,12 @@ class Period(models.Model):
     )
 
     net_lease_change_goal = models.IntegerField(
-        default=0,
-        help_text="The net number of new leases during this period.",
+        default=0, help_text="The net number of new leases during this period."
     )
 
     usvs_goal = models.IntegerField(
-        default=0, help_text="The goal for number of unique site visitors during this period."
+        default=0,
+        help_text="The goal for number of unique site visitors during this period.",
     )
 
     inquiries_goal = models.IntegerField(
@@ -451,7 +426,8 @@ class Period(models.Model):
     )
 
     lease_applications_goal = models.IntegerField(
-        default=0, help_text="The goal_for number of lease applications during this period."
+        default=0,
+        help_text="The goal_for number of lease applications during this period.",
     )
 
     usvs_to_inquiries_percent_goal = models.DecimalField(
@@ -502,7 +478,6 @@ class Period(models.Model):
         decimal_places=2,
         help_text="Goal for estimated annual revenue change",
     )
-
 
     class Meta:
         # Always sort Periods with the earliest period first.

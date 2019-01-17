@@ -1,4 +1,14 @@
 class Report:
+    @classmethod
+    def from_date_span(cls, project, start, end):
+        # TODO for now, "start" and "end" must precisely match the dates
+        # of a single period.
+        report = None
+        period = project.periods.filter(start=start, end=end).first()
+        if period is not None:
+            report = cls(period)
+        return report
+
     def __init__(self, period):
         # TODO ultimately, the intent of a "Report" is to take an arbitrary
         # number of periods, and an arbitrary "time span" for the report,

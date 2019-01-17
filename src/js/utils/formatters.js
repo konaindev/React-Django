@@ -66,7 +66,7 @@ export const formatCurrencyShorthand = (value, currency = "USD") => {
   // reduce value down to dollars, thousands, or millions of dollars
   let number = Number(value);
   let levelIndex = 0;
-  while (number >= 1000) {
+  while (Math.abs(number) >= 1000) {
     number = number / 1000.0;
     levelIndex += 1;
   }
@@ -94,6 +94,12 @@ export const formatDate = (value, year = true) => {
     options.year = "2-digit";
   }
   const formatter = Intl.DateTimeFormat("en-US", options);
-  const d = new Date(value);
+
+  // I *loathe* Javascript dates. I never get things right the first time.
+  // This is a fix:
+  const rawDate = new Date(value);
+  const timezoneOffset = rawDate.getTimezoneOffset() * 60000;
+  const d = new Date(rawDate.getTime() + timezoneOffset);
+
   return formatter.format(d);
 };

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import ProjectPageView
+from .views import ProjectPageView, ReportPageView
 
 
 urlpatterns = [
@@ -16,5 +16,6 @@ urlpatterns = [
     # Option 3: ?
     #
     # -Dave
-    path("<project_id>/", ProjectPageView.as_view(), name="project")
+    path("<project_id>/", ProjectPageView.as_view(), name="project"),
+    path("<project_id>/report/<report_span>/", ReportPageView.as_view(), name="report"),
 ]
