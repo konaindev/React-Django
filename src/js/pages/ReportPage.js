@@ -137,19 +137,26 @@ class MarketingInvestmentChartLabel extends Component {
     // compute a transform along the current angle
     // XXX this computation is wrong, because the angle has the origin as the
     // center of the donut, but we *want* an angle relative to the SVG viewbox origin. -Dave
-    const DISTANCE = 100;
-    const angle =
-      (this.props.slice.startAngle + this.props.slice.endAngle) / 2.0;
-    const dx = Math.cos(angle) * DISTANCE;
-    const dy = Math.sin(angle) * DISTANCE;
-    console.log(angle, this.props);
+    // const DISTANCE = 100;
+    // const angle =
+    //   (this.props.slice.startAngle + this.props.slice.endAngle) / 2.0;
+    // const dx = Math.cos(angle) * DISTANCE;
+    // const dy = Math.sin(angle) * DISTANCE;
+    // console.log(angle, this.props);
+
+    // compute REMs in javascript. safari's SVG handling doesn't like the "dy"
+    // attribute so we have to set an explicit y={} property.
+    const remsToPixels = rems =>
+      rems * parseFloat(getComputedStyle(document.documentElement).fontSize);
+    const dyPixels = remsToPixels(1.25);
+    const nextY = this.props.y + dyPixels;
 
     // build and return the full label
     return (
       <g>
         <text {...cleanProps}>
           <tspan fill="#CCCCCC">{this.props.datum.category}</tspan>
-          <tspan x={this.props.x} dy="1.25rem" fill="#68788C">
+          <tspan x={this.props.x} y={nextY} fill="#68788C">
             {description}
           </tspan>
         </text>
