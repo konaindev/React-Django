@@ -16,7 +16,7 @@ pipenv run ./manage.py migrate
 pipenv run ./manage.py test
 if [ "$NEW_DB" -eq '1' ]; then
   echo 'Loading fixture data.'
-  pipenv run ./manage.py loaddata scripts/data/2-lincoln-single-period.json
+  pipenv run ./manage.py loaddata scripts/data/2-lincoln.json
 fi
 pipenv run yarn install
 pipenv run yarn build
