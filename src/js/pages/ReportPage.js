@@ -26,6 +26,10 @@ const VALUE_BOX_PROP_TYPES = {
   detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
 };
 
+class Comment extends Component {
+  render() { return null };
+}
+
 /**
  * @description A primary value box focused on a single metric
  */
@@ -44,7 +48,12 @@ class PrimaryValueBox extends Component {
         <span className="text-remark-ui-text-lightest text-6xl font-hairline py-2">
           {this.props.value}
         </span>
-        <span className="text-remark-ui-text text-sm">{this.props.detail}</span>
+        <span className="text-remark-ui-text text-sm">
+          {this.props.detail1}
+        </span>
+        <span className="text-remark-ui-text text-sm">
+          {this.props.detail2}
+        </span>
       </div>
     );
   }
@@ -58,10 +67,10 @@ class SecondaryValueBox extends Component {
 
   render() {
     var showGoal = false;
-    var goal = Number(this.props.goal);
-    if (goal != 0) {
-      showGoal = true;
-      pctOfGoal = Math.round((100.0 * Number(this.props.value)) / goal);
+    var goal = this.props.goal;
+    if (goal != 0) {  // CHOONG: does this even make sense?
+      var showGoal = true;
+      var pctOfGoal = Math.round((100.0 * Number(this.props.value)) / goal);
     }
 
     return (
@@ -78,7 +87,6 @@ class SecondaryValueBox extends Component {
             {this.props.name}
           </span>
           <span className="text-remark-ui-text text-sm">
-            {this.props.detail}
             Target: {goal}
           </span>
         </div>
@@ -171,154 +179,6 @@ class MarketingInvestmentChartLabel extends Component {
 class Report extends Component {
   static propTypes = { report: PropTypes.object.isRequired };
 
-  renderPropertySection() {
-    return (
-      <ReportSection name="Property" bottomBoundary={true}>
-        <div className="flex -m-2">
-          {/* Primary metric */}
-          <div className="w-1/4 m-2">
-            <PrimaryValueBox
-              name="Leased"
-              value={formatPercent(this.props.report.leased_rate)}
-              detail={
-                <span>
-                  {`${this.props.report.leased_units} of ${
-                    this.props.report.leasable_units
-                  } Leasable Units`}
-                  <br />
-                  {`Target ${
-                    this.props.report.target_leased_units
-                  } (${formatPercent(this.props.report.target_lease_percent)})`}
-                </span>
-              }
-            />
-          </div>
-
-          {/* Secondary metrics flex -- the -m-2 we'd normally put here negates the m-2 for the box*/}
-          <div className="flex flex-col flex-grow items-stretch">
-            {/* row */}
-            <div className="flex flex-row flex-grow items-stretch">
-              <div className="w-1/2 m-2">
-                <SecondaryValueBox
-                  name="Leases Executed"
-                  value={formatNumber(this.props.report.leases_executed)}
-                  goal={this.props.report.leases_executed_goal}
-                />
-              </div>
-              <div className="w-1/2 m-2">
-                <SecondaryValueBox
-                  name="Renewals"
-                  value={formatNumber(this.props.report.leases_renewed)}
-                  goal={this.props.report.leases_renewed_goal}
-                />
-              </div>
-            </div>
-            {/* row */}
-            <div className="flex flex-row flex-grow">
-              <div className="w-1/2 m-2">
-                <SecondaryValueBox
-                  name="Leases Ended"
-                  value={formatNumber(this.props.report.leases_ended)}
-                  goal={this.props.report.leases_ended_goal}
-                />
-              </div>
-              <div className="w-1/2 m-2">
-                <SecondaryValueBox
-                  name="Net Lease Change"
-                  value={formatNumber(this.props.report.net_lease_change)}
-                  goal={this.props.report.net_lease_change_goal}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </ReportSection>
-    );
-  }
-
-  renderResidentAcquisitionFunnelSection() {
-    return (
-      <ReportSection name="Resident Acquisition Funnel" bottomBoundary={true}>
-        <table className="k-report-table w-full" cellSpacing="8">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Actual</th>
-              <th>Target</th>
-              <th>Converted</th>
-              <th>Cost Per</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr className="k-rectangle">
-              <th>Unique Website Visitors</th>
-              <td>{formatNumber(this.props.report.usvs)}</td>
-              <td>{formatNumber(this.props.report.usvs_goal)}</td>
-              <td>&nbsp;</td>
-              <td>{formatCurrency(this.props.report.cost_per_usv, true)}</td>
-            </tr>
-            <tr className="k-rectangle">
-              <th>Inquiries</th>
-              <td>{formatNumber(this.props.report.inquiries)}</td>
-              <td>{formatNumber(this.props.report.inquiries_goal)}</td>
-              <td>
-                {formatPercent(this.props.report.usvs_to_inquiries_percent, 1)}
-              </td>
-              <td>
-                {formatCurrency(this.props.report.cost_per_inquiry, true)}
-              </td>
-            </tr>
-            <tr className="k-rectangle">
-              <th>Tours</th>
-              <td>{formatNumber(this.props.report.tours)}</td>
-              <td>{formatNumber(this.props.report.tours_goal)}</td>
-              <td>
-                {formatPercent(this.props.report.inquiries_to_tours_percent, 1)}
-              </td>
-              <td>{formatCurrency(this.props.report.cost_per_tour, true)}</td>
-            </tr>
-            <tr className="k-rectangle">
-              <th>Lease Applications</th>
-              <td>{formatNumber(this.props.report.lease_applications)}</td>
-              <td>{formatNumber(this.props.report.lease_applications_goal)}</td>
-              <td>
-                {formatPercent(
-                  this.props.report.tours_to_lease_applications_percent,
-                  1
-                )}
-              </td>
-              <td>
-                {formatCurrency(
-                  this.props.report.cost_per_lease_application,
-                  true
-                )}
-              </td>
-            </tr>
-            <tr className="k-rectangle">
-              <th>Lease Executions</th>
-              <td>{formatNumber(this.props.report.leases_executed)}</td>
-              <td>{formatNumber(this.props.report.leases_executed_goal)}</td>
-              <td>
-                {formatPercent(
-                  this.props.report
-                    .lease_applications_to_leases_executed_percent,
-                  1
-                )}
-              </td>
-              <td>
-                {formatCurrency(
-                  this.props.report.cost_per_lease_execution,
-                  true
-                )}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        {/* And away we go! */}
-      </ReportSection>
-    );
-  }
-
   /**
    * @description Return marketing investment data in a structure suitable for Victory charts.
    */
@@ -366,106 +226,206 @@ class Report extends Component {
     return categories.filter(datum => datum.investment);
   }
 
-  renderEstimatedMarketingInvestmentAndReturnSection() {
-    const investmentData = this.getInvestmentData();
-
-    // Compute goal and target strings
-    const investedBoxDetail = Number(
-      this.props.report.marketing_investment_goal
-    )
-      ? `${formatPercent(
-          Number(this.props.report.marketing_investment) /
-            Number(this.props.report.marketing_investment_goal)
-        )} of ${formatCurrencyShorthand(
-          this.props.report.marketing_investment_goal
-        )} (Budget Target)`
-      : "No budget target set";
-
-    const romiBoxDetail = Number(
-      this.props.report.return_on_marketing_investment_goal
-    )
-      ? `Goal: ${this.props.report.return_on_marketing_investment_goal}x`
-      : `No goal set`;
-
-    const estRevenueBoxDetail = Number(
-      this.props.report.estimated_annual_revenue_change_goal
-    )
-      ? `Goal: ${formatCurrencyShorthand(
-          this.props.report.estimated_annual_revenue_change_goal
-        )}`
-      : `No goal set`;
-
+  render() {
+    let r = this.props.report;
     return (
-      <ReportSection name="Estimated Marketing Investment And Return">
-        <div>
-          <div className="m-4 flex-grow h-96">
-            <VictoryPie
-              data={investmentData}
-              innerRadius={100}
-              labelRadius={180}
-              labelComponent={
-                <MarketingInvestmentChartLabel
-                  marketingInvestment={this.props.report.marketing_investment}
-                />
-              }
-              x="category"
-              y="investment"
-              style={{
-                data: {
-                  fill: datum => datum.color
-                },
-                /* stylelint-disable */
-                /* this is victory specific styling; stylelint is maybe right to complain */
-                labels: {
-                  fontFamily: "formular",
-                  fontWeight: "400",
-                  fontSize: "1rem",
-                  fill: "#cccccc"
-                }
-                /* stylelint-enable */
-              }}
+      <span>
+
+      <ReportSection name="Leasing Performance" bottomBoundary={true}>
+        {/* Headline performance numbers for the property. */}
+        <div className="flex flex-row flex-grow items-stretch">
+          <div className="w-1/3 m-2">
+            <PrimaryValueBox
+              name="Leased"
+              value={formatPercent(r.leased_rate)}
+              detail1={`${r.leased_units} Executed Leases (Out
+                          of ${r.leasable_units})`}
+              detail2={`Target: ${formatPercent(r.target_lease_percent)}`}
             />
           </div>
-          <div className="flex -m-4">
-            <div className="w-1/3 m-4">
-              <PrimaryValueBox
-                name="Invested"
-                value={formatCurrencyShorthand(
-                  this.props.report.marketing_investment
-                )}
-                detail={investedBoxDetail}
-              />
-            </div>
-            <div className="w-1/3 m-4">
-              <PrimaryValueBox
-                name="ROMI"
-                value={`${this.props.report.return_on_marketing_investment}x`}
-                detail={romiBoxDetail}
-              />
-            </div>
-            <div className="w-1/3 m-4">
-              <PrimaryValueBox
-                name="Est. Revenue Gain"
-                value={formatCurrencyShorthand(
-                  this.props.report.estimated_annual_revenue_change
-                )}
-                detail={estRevenueBoxDetail}
-              />
-            </div>
+          <div className="w-1/3 m-2">
+            <PrimaryValueBox
+              name="Retention"
+              value={`XX%`}
+              detail1={`X of Y Resident Decisions (Out of total leases)"`}
+              detail2={`Target: XX%"`}
+            />
+          </div>
+          <div className="w-1/3 m-2">  
+            <PrimaryValueBox
+              name="Occupied"
+              value={`XX`}
+              detail1={`X Occupied Units (Out of ${r.leasable_units})`}
+              detail2={`Target: XX%`}
+            />
+          </div>
+        </div>
+        {/* Performance detail. */}
+        <div className="flex flex-row flex-grow items-stretch">
+          {/* Row */}
+          <div className="w-1/3 m-2">
+            <SecondaryValueBox
+              name="Lease Applications"
+              value={r.lease_applications}
+              goal={r.lease_applications_goal}
+            />
+          </div>
+          <div className="w-1/3 m-2">
+            <SecondaryValueBox
+              name="Notices to Renew"
+              value={formatPercent(r.leases_renewed)}
+              goal={formatPercent(r.leases_renewed_goal)}
+            />
+          </div>
+          <div className="w-1/3 m-2">  
+            <SecondaryValueBox
+              name="Move Ins"
+              value={`XX`}
+              goal={`XX`}
+            />
+          </div>
+        </div>
+        <div className="flex flex-row flex-grow items-stretch">
+          {/* Row */}
+          <div className="w-1/3 m-2">
+            <SecondaryValueBox
+              name="Cancellations & Denials"
+              value={`XX`}
+              goal={`XX`}
+            />
+          </div>
+          <div className="w-1/3 m-2">
+            <SecondaryValueBox
+              name="Notices to Vacate"
+              value={r.leases_ended}
+              goal={r.leases_ended_goal}
+            />
+          </div>
+          <div className="w-1/3 m-2">
+            <SecondaryValueBox
+              name="Move Outs"
+              value={`XX`}
+              goal={`XX`}
+            />
           </div>
         </div>
       </ReportSection>
-    );
-  }
 
-  render() {
-    // TODO: actual rendering code goes here. -Dave
-    return (
-      <>
-        {this.renderPropertySection()}
-        {this.renderResidentAcquisitionFunnelSection()}
-        {this.renderEstimatedMarketingInvestmentAndReturnSection()}
-      </>
+      <ReportSection name="Campaign Investment" bottomBoundary={true}>
+        {/* Headline performance numbers for the property. */}
+        <div className="flex flex-row flex-grow items-stretch">
+          <div className="w-1/3 m-2">
+            <PrimaryValueBox
+              name="Campaign Investment"
+              value={formatCurrencyShorthand(r.marketing_investment)}
+              detail1={`Target: ${formatCurrencyShorthand(r.marketing_investment_goal)}`}
+            />
+          </div>
+          <div className="w-1/3 m-2">
+            <PrimaryValueBox
+              name="Est. Revenue Change"
+              value={formatCurrencyShorthand(r.estimated_annual_revenue_change)}
+              detail1={`Target: $XXk`}
+            />
+          </div>
+          <div className="w-1/3 m-2">  
+            <PrimaryValueBox
+              name="Campaign Return on Marketing Investment (ROMI)"
+              value={`${r.return_on_marketing_investment}X`}
+              detail1={`Target: XXX`}
+            />
+          </div>
+        </div>
+      </ReportSection>
+
+      <div className="flex flex-row">
+        <div className="w-1/2 flex flex-col">
+          <ReportSection name="Acquisition" bottomBoundary={true}>
+            <SecondaryValueBox
+              name="Leased Unit Change"
+              value={r.net_lease_change}
+              goal={r.net_lease_change_goal}
+            />
+            <SecondaryValueBox
+              name="Acquisition Investment"
+              value="XX"
+              goal="XX"
+            />
+            <SecondaryValueBox
+              name="Est. Acquired Leasing Revenue"
+              value={formatCurrencyShorthand(r.estimated_annual_revenue_change)}
+              goal={formatCurrencyShorthand(r.estimated_annual_revenue_change_goal)}
+            />
+            <SecondaryValueBox
+              name="Acquisition ROMI"
+              value={`${r.return_on_marketing_investment}x`}
+              goal={`${r.return_on_marketing_investment_goal}x`}
+            />
+          </ReportSection>
+          <ReportSection name="Acquisition Investment Allocations" bottomBoundary={true}>
+            XYZ
+          </ReportSection>
+        </div>
+
+        <div className="w-1/2 flex flex-col">
+          <ReportSection name="Retention" bottomBoundary={true}>
+            <SecondaryValueBox
+              name="Lease Renewals"
+              value={r.leases_renewed}
+              goal={r.leases_renewed_goal}
+            />
+            <SecondaryValueBox
+              name="Retention Investment"
+              value="XX"
+              goal="XX"
+            />
+            <SecondaryValueBox
+              name="Est. Retained Leasing Revenue"
+              value="XX"
+              goal="XX"
+            />
+            <SecondaryValueBox
+              name="Retention ROMI"
+              value="XX"
+              goal="XX"
+            />
+          </ReportSection>
+          <ReportSection name="Retention Investment Allocations" bottomBoundary={true}>
+            XYZ
+          </ReportSection>
+        </div>
+      </div>
+
+
+      <ReportSection name="Acquisition Funnel" bottomBoundary={true}>
+        {/* Headline numbers for the acquisition funnel. */}
+        <div className="flex flex-row flex-grow items-stretch">
+          <div className="w-1/3 m-2">
+            <PrimaryValueBox
+              name="USV > EXE"
+              value={`XX%`}
+              detail1={`Target: XX%`}
+            />
+          </div>
+          <div className="w-1/3 m-2">
+            <PrimaryValueBox
+              name="Cancellation & Denial Rate"
+              value={`XX%`}
+              detail1={`Target: XX%`}
+            />
+          </div>
+          <div className="w-1/3 m-2">  
+            <PrimaryValueBox
+              name="Cost Per EXE / Lowest Monthly Rent"
+              value={`XX%`}
+              detail1={`Target: XX%`}
+            />
+          </div>
+        </div>
+        TODO funnel table thing
+      </ReportSection>
+
+      </span>
     );
   }
 }
