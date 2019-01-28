@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { VictoryPie, Text } from "victory";
+import { VictoryChart, VictoryBar, VictoryTheme, Text } from "victory";
 
 import Header from "../components/Header";
 import {
@@ -122,53 +122,6 @@ class ReportSection extends Component {
         {this.props.children}
         {bottomBoundary}
       </div>
-    );
-  }
-}
-
-/**
- * @description A custom label for the marketing investment pie chart
- */
-class MarketingInvestmentChartLabel extends Component {
-  render() {
-    // remove unwanted props to pass to SVG <text /> element
-    const { verticalAnchor, marketingInvestment, ...cleanProps } = this.props;
-
-    // build the description
-    const description = `${formatCurrencyShorthand(
-      this.props.datum.investment
-    )} (${formatPercent(
-      Number(this.props.datum.investment) /
-        Number(this.props.marketingInvestment)
-    )})`;
-
-    // compute a transform along the current angle
-    // XXX this computation is wrong, because the angle has the origin as the
-    // center of the donut, but we *want* an angle relative to the SVG viewbox origin. -Dave
-    // const DISTANCE = 100;
-    // const angle =
-    //   (this.props.slice.startAngle + this.props.slice.endAngle) / 2.0;
-    // const dx = Math.cos(angle) * DISTANCE;
-    // const dy = Math.sin(angle) * DISTANCE;
-    // console.log(angle, this.props);
-
-    // compute REMs in javascript. safari's SVG handling doesn't like the "dy"
-    // attribute so we have to set an explicit y={} property.
-    const remsToPixels = rems =>
-      rems * parseFloat(getComputedStyle(document.documentElement).fontSize);
-    const dyPixels = remsToPixels(1.25);
-    const nextY = this.props.y + dyPixels;
-
-    // build and return the full label
-    return (
-      <g>
-        <text {...cleanProps}>
-          <tspan fill="#CCCCCC">{this.props.datum.category}</tspan>
-          <tspan x={this.props.x} y={nextY} fill="#68788C">
-            {description}
-          </tspan>
-        </text>
-      </g>
     );
   }
 }
@@ -363,7 +316,25 @@ class Report extends Component {
             />
           </ReportSection>
           <ReportSection name="Acquisition Investment Allocations" bottomBoundary={true}>
-            XYZ
+            TODO: acquisition/retention split, fix styling
+            <VictoryChart>
+              <VictoryBar
+                data={this.getInvestmentData()}
+                x="category"
+                y="investment"
+                style={{
+                  /* stylelint-disable */
+                  /* this is victory specific styling; stylelint is maybe right to complain */
+                  data: {
+                    fill: datum => datum.color
+                  },
+                  labels: {
+                    fill: "white",
+                  },
+                  /* stylelint-enable */
+                }}
+              />
+            </VictoryChart>
           </ReportSection>
         </div>
 
@@ -391,11 +362,27 @@ class Report extends Component {
             />
           </ReportSection>
           <ReportSection name="Retention Investment Allocations" bottomBoundary={true}>
-            XYZ
+            <VictoryChart>
+              <VictoryBar
+                data={this.getInvestmentData()}
+                x="category"
+                y="investment"
+                style={{
+                  /* stylelint-disable */
+                  /* this is victory specific styling; stylelint is maybe right to complain */
+                  data: {
+                    fill: datum => datum.color
+                  },
+                  labels: {
+                    fill: "white",
+                  },
+                  /* stylelint-enable */
+                }}
+              />
+            </VictoryChart>
           </ReportSection>
         </div>
       </div>
-
 
       <ReportSection name="Acquisition Funnel" bottomBoundary={true}>
         {/* Headline numbers for the acquisition funnel. */}
