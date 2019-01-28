@@ -209,6 +209,30 @@
     }
 }
 
+.k-funnel-label {
+    /* container for layout (matching row height */
+    @apply h-32;
+    @apply flex flex-col items-center;
+    @apply content-start;
+    background: none;
+}
+.k-funnel-label>div:first-child {
+    /* rounded corner container */
+    @apply h-24;
+    @apply w-full;
+    @apply rounded-lg border-remark-ui-border-dark border-solid border;
+    @apply flex flex-row items-center;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+}
+.k-funnel-label>div:first-child>div {
+    /* label text */
+    @apply text-center;
+    @apply w-full;
+}
+.k-funnel-label>div:last-child {
+    margin-top: 0.5em; /* TODO there's probably a better way to do this */
+}
+
 .k-divider {
     border-bottom: solid 1px #586073;
     opacity: 0.18;

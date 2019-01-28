@@ -96,6 +96,58 @@ class SecondaryValueBox extends Component {
 }
 
 /**
+ * @description A value box focused on a single metric for the funnel grid
+ */
+class FunnelValueBox extends Component {
+  static propTypes = VALUE_BOX_PROP_TYPES;
+  formatter = String;
+
+  formatValue(v) {
+    if (isNaN(Number(v))) {
+      return v; // Pass strings through to make XX placeholders more obvious
+    }
+    return this.formatter(v);
+  }
+
+  render() {
+    var showGoal = false;
+    var goal = this.props.goal;
+    if (goal != 0) {  // CHOONG: does this even make sense?
+      var showGoal = true;
+      var pctOfGoal = Math.round((100.0 * Number(this.props.value)) / goal);
+    }
+
+    return (
+      <div className="flex flex-row h-32 py-8 k-rectangle">
+        {/* Container for the value itself */}
+        <div className="text-6xl w-1/3 flex flex-col leading-compressed justify-center content-center">
+          <div className="text-remark-ui-text-lightest font-hairline text-center">
+            {this.formatValue(this.props.value)}
+          </div>
+        </div>
+        {/* Container for the label and help text */}
+        <div className="flex flex-col flex-auto justify-between">
+          <span className="text-remark-ui-text-light text-base">
+            {this.props.name}
+          </span>
+          <span className="text-remark-ui-text text-sm">
+            Target: {this.formatValue(goal)}
+          </span>
+        </div>
+      </div>
+    );
+  }
+}
+
+class FunnelValueBoxDollars extends FunnelValueBox {
+  formatter = formatCurrency;
+}
+
+class FunnelValueBoxPercentage extends FunnelValueBox {
+  formatter = formatPercent;
+}
+
+/**
  * @description A named, grouped section of a report
  */
 class ReportSection extends Component {
@@ -409,7 +461,82 @@ class Report extends Component {
             />
           </div>
         </div>
-        TODO funnel table thing
+
+        <div className="flex flex-row flex-grow items-stretch">
+          <div className="w-1/6 flex flex-col">
+            <div className="k-funnel-label">
+              <div className="bg-remark-funnel-1"><div>Unique Site Visitors (USV)</div></div>
+              <div className="text-remark-funnel-2">↓</div>
+            </div>
+            <div className="k-funnel-label">
+              <div className="bg-remark-funnel-2"><div>Inquiries (INQ)</div></div>
+              <div className="text-remark-funnel-3">↓</div>
+            </div>
+            <div className="k-funnel-label">
+              <div className="bg-remark-funnel-3"><div>Tours (TOU)</div></div>
+              <div className="text-remark-funnel-4">↓</div>
+            </div>
+            <div className="k-funnel-label">
+              <div className="bg-remark-funnel-4"><div>Lease Applications (APP)</div></div>
+              <div className="text-remark-funnel-5">↓</div>
+            </div>
+            <div className="k-funnel-label">
+              <div className="bg-remark-funnel-5"><div>Lease Executions (EXE)</div></div>
+              <div>&nbsp;</div>
+            </div>
+          </div>
+          <div className="w-5/6 flex flex-row flex-grow items-stretch">
+            <div className="w-1/3 flex flex-col items">
+              <FunnelValueBox name="Volume of USV"
+                              value={r.usvs}
+                              goal={r.usvs_goal} />
+              <FunnelValueBox name="Volume of INQ"
+                              value={r.inquiries}
+                              goal={r.inquiries_goal} />
+              <FunnelValueBox name="Volume of TOU"
+                              value={r.tours}
+                              goal={r.tours_goal} />
+              <FunnelValueBox name="Volume of APP"
+                              value={r.lease_applications}
+                              goal={r.lease_applications_goal} />
+              <FunnelValueBox name="Volume of EXE"
+                              value={r.leases_executed}
+                              goal={r.leases_executed_goal} />
+            </div>
+            <div className="w-1/3 flex flex-col">
+              <FunnelValueBoxPercentage name="USV > INQ"
+                              value={r.usvs_to_inquiries_percent}
+                              goal={r.usvs_to_inquiries_percent_goal} />
+              <FunnelValueBoxPercentage name="INQ > TOU"
+                              value={r.inquiries_to_tours_percent}
+                              goal={r.inquiries_to_tours_percent_goal} />
+              <FunnelValueBoxPercentage name="TOU > APP"
+                              value={r.tours_to_lease_applications_percent}
+                              goal={r.tours_to_lease_applications_percent_goal} />
+              <FunnelValueBoxPercentage name="APP > EXE"
+                              value={r.lease_applications_to_leases_executed_percent}
+                              goal={r.lease_applications_to_leases_executed_percent_goal} />
+            </div>
+            <div className="w-1/3 flex flex-col">
+              <FunnelValueBoxDollars name="Cost per USV"
+                                     value={r.cost_per_usv}
+                                     goal="XX" />
+              <FunnelValueBoxDollars name="Cost per INQ"
+                                     value={r.cost_per_inquiry}
+                                     goal="XX" />
+              <FunnelValueBoxDollars name="Cost per TOU"
+                                     value={r.cost_per_tour}
+                                     goal="XX" />
+              <FunnelValueBoxDollars name="Cost per APP"
+                                     value={r.cost_per_lease_application}
+                                     goal="XX" />
+              <FunnelValueBoxDollars name="Cost per EXE"
+                                     value={r.cost_per_lease_execution}
+                                     goal="XX" />
+            </div>
+          </div>
+        </div>
+
       </ReportSection>
 
       </span>

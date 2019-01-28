@@ -74,6 +74,13 @@ let colors = {
   "remark-ui-text-light": "#cccccc",
   "remark-ui-text": "#68788C",
 
+  // Funnel colors
+  "remark-funnel-1": "#A09AFD",
+  "remark-funnel-2": "#867FFE",
+  "remark-funnel-3": "#675EFC",
+  "remark-funnel-4": "#5147FF",
+  "remark-funnel-5": "#4035F4",
+
   // XXX OLD UI colors (as suggested by our current marketing site)
   "remark-old-ui-darkest": "#0e1228",
   "remark-old-ui-darker": "#151c3b",
