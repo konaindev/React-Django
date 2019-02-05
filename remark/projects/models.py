@@ -4,6 +4,7 @@ from django.db import models
 
 from remark.lib.math import d_div, d_quant_perc, d_quant_currency
 from remark.lib.tokens import public_id
+from .metrics import Metric, MetricModelBase, Behavior
 
 
 def pro_public_id():
@@ -58,7 +59,7 @@ class PeriodManager(models.Model):
     pass
 
 
-class Period(models.Model):
+class Period(models.Model, metaclass=MetricModelBase):
     """
     Represents a snapshot of a property's performance over a period of time.
     """
@@ -119,14 +120,17 @@ class Period(models.Model):
         default=0,
         help_text="The number of new leases (not applications) executed during this period.",
     )
+    leases_executed.metric = Metric(behavior=Behavior.INTERVAL_SUM_AMORTIZE)
 
     leases_renewed = models.IntegerField(
         default=0, help_text="The number of lease renewals signed in the period."
     )
+    leases_renewed.metric = Metric(behavior=Behavior.INTERVAL_SUM_AMORTIZE)
 
     leases_ended = models.IntegerField(
         default=0, help_text="The number of leases ended (expired) during this period."
     )
+    leases_renewed.metric = Metric(behavior=Behavior.INTERVAL_SUM_AMORTIZE)
 
     # TODO consider moving this to project -Dave
     leasable_units = models.IntegerField(
