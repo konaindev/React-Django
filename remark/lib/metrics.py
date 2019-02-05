@@ -1,7 +1,6 @@
 from decimal import Decimal
 
 from django.db.models.fields import IntegerField, DecimalField, FloatField
-from django.db.models.base import ModelBase
 
 
 def sum_or_none(values):
@@ -138,7 +137,7 @@ class SeparateMethod:
     AMORTIZE = 1  # Compute a time-based amortization of the value for each side
 
 
-class BaseMetric:
+class MetricBase:
     """
     Defines a single metric (like `lease_expirations`) along with information about
     both the type of its value, and the behavior of the metric under merged and separated
@@ -189,7 +188,7 @@ class BaseMetric:
         return f"{self.name} {Kind.description(self.kind)} {Behavior.description(self.behavior)}"
 
 
-class BaseValue:
+class ValueBase:
     """
     A single value for a metric.
     """
@@ -397,10 +396,10 @@ class BaseValue:
         return f"{self.metric.name} {self.start.isoformat() if self.start else None} {self.end.isoformat() if self.end else None} {self.value}"
 
 
-class BareMetric(BaseMetric):
+class Metric(MetricBase):
     """
     A Metric implementation with no backing store.
-    (Compare with models.Metric)
+    (One could imagine deriving a models.Model from MetricBase, too.)
     """
 
     def __init__(self, name, kind, behavior):
@@ -410,21 +409,13 @@ class BareMetric(BaseMetric):
         super().__init__()
 
     def __repr__(self):
-        return f"<BareMetric: {self}>"
+        return f"<Metric: {self}>"
 
 
-class Metric(BareMetric):
-    def __init__(self, behavior):
-        super().__init__(name=None, kind=None, behavior=behavior)
-
-    def __repr__(self):
-        return f"<Modeletric: {self}>"
-
-
-class BareValue(BaseValue):
+class Value(ValueBase):
     """
     A Value implementation with no backing store.
-    (Compare with models.Value)
+    (One could imagine deriving a models.Model from ValueBase, too.)
     """
 
     def __init__(self, metric, start, end, value):
@@ -435,35 +426,101 @@ class BareValue(BaseValue):
         super().__init__()
 
     def __repr__(self):
-        return f"<BareValue: {self}>"
+        return f"<Value: {self}>"
 
 
-class MetricModelBase(ModelBase):
-    def __new__(cls, *args, **kwargs):
-        new_class = super().__new__(cls, *args, **kwargs)
+class PeriodBase:
+    """
+    A Period represents a set of Values (and therefore a related set of metrics)
+    that share a common time span.
+    """
 
-        new_class._meta.metric_fields = {
-            field: field.metric
-            for field in new_class._meta.get_fields()
-            if hasattr(field, "metric")
-        }
+    pass
 
-        for field, metric in new_class._meta.metric_fields.items():
-            metric.name = field.name
+
+class PeriodSetBase:
+    """
+    A PeriodSet represents a collection of Periods that is contiguous in time.
+    """
+
+    pass
+
+
+class ModelPeriodBase(PeriodBase):
+    def _build_metrics(self):
+        """
+        Build a mapping from field name to Metric.
+        """
+
+        def metric_for_field(field):
             if isinstance(field, IntegerField):
-                metric.kind = Kind.INTEGER
+                kind = Kind.INTEGER
             elif isinstance(field, DecimalField):
-                metric.kind = Kind.DECIMAL
+                kind = Kind.DECIMAL
             elif isinstance(field, FloatField):
-                metric.kind = Kind.FLOAT
+                kind = Kind.FLOAT
+            return Metric(name=field.name, kind=kind, behavior=field.behavior)
 
-        new_class._meta.metric_names_fields = {
-            metric.name: metric for _, metric in new_class._meta.metric_fields.items()
+        self._metrics = {
+            field.name: metric_for_field(field)
+            for field in self._meta.get_fields()
+            if hasattr(field, "behavior")
         }
 
-        return new_class
+    def _ensure_metrics(self):
+        if not hasattr(self, "_metrics"):
+            self._build_metrics()
+
+    def _build_values(self):
+        """
+        Build a mapping from field name to Value.
+        """
+        self._ensure_metrics()
+
+        def value_for_field_name(name):
+            return Value(
+                metric=self._metrics[name],
+                start=self.get_value_start(),
+                end=self.get_value_end(),
+                value=getattr(self, name),
+            )
+
+        self._values = {
+            name: value_for_field_name(name) for name in self._metrics.keys()
+        }
+
+    def _ensure_values(self):
+        if not hasattr(self, "_values"):
+            self._build_values()
+
+    def get_value_start(self):
+        """
+        Return the start time of a value. Can be overridden in derived classes.
+        """
+        return self.start
+
+    def get_value_end(self):
+        """
+        Return the end of a value.
+        """
+        return self.end
+
+    def get_metrics(self):
+        self._ensure_metrics()
+        return self._metrics
 
     def get_metric(self, name):
-        print(name)
-        return self.metric_names_fields.get(name)
+        self._ensure_metrics()
+        return self._metrics.get(name)
 
+    def get_values(self):
+        self._ensure_values()
+        return self._values
+
+    def get_value(self, name):
+        self._ensure_values()
+        return self._values.get(name)
+
+
+class ModelPeriodSetBase(PeriodSetBase):
+    pass

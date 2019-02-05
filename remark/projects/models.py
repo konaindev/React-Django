@@ -4,7 +4,7 @@ from django.db import models
 
 from remark.lib.math import d_div, d_quant_perc, d_quant_currency
 from remark.lib.tokens import public_id
-from .metrics import Metric, MetricModelBase, Behavior
+from remark.lib.metrics import Behavior, ModelPeriodBase, ModelPeriodSetBase
 
 
 def pro_public_id():
@@ -55,13 +55,13 @@ class Project(models.Model):
         return "{} ({})".format(self.name, self.public_id)
 
 
-class PeriodManager(models.Model):
+class PeriodManager(ModelPeriodSetBase, models.Model):
     pass
 
 
-class Period(models.Model, metaclass=MetricModelBase):
+class Period(ModelPeriodBase, models.Model):
     """
-    Represents a snapshot of a property's performance over a period of time.
+    Represents a snapshot of a property's basic activity over a period of time.
     """
 
     objects = PeriodManager()
@@ -70,90 +70,90 @@ class Period(models.Model, metaclass=MetricModelBase):
         Project, on_delete=models.CASCADE, related_name="periods"
     )
 
-    # TODO. Lots of things to consider.
-    #
-    # 1. I dislike both start and end dates being inclusive. But which side is more
-    # naturally exclusive?
-    #
-    # 2. How should we enforce no overlapping date ranges across all periods in a Project?
-    #
-    # 3. Consider how best to enforce contiguity of ranges? Is this desirable?
-    #
-    # -Dave
     start = models.DateField(
         db_index=True, help_text="The first date, inclusive, that this period tracks."
     )
 
     end = models.DateField(
-        db_index=True, help_text="The final date, inclusive, that this period tracks."
+        db_index=True, help_text="The final date, exclusive, that this period tracks."
     )
 
-    # --------------------------------------------------------------------------
-    # Inbound funnel (entered)
-    # --------------------------------------------------------------------------
+    # ------------------------------------------------------
+    # Property activity
+    # ------------------------------------------------------
 
-    # TODO For manual entry values aside from dates, we need to be tolerant of them
-    # not being entered. For now, I provide default values (usually, zero), but
-    # we may well wish to distinguish between "they entered zero" and "they didn't enter
-    # anything" down the road. NULL is the right answer here, but it obviously complicates
-    # computations that flow through the system... so I've punted for now. -Dave
+    occupiable_units_start = models.IntegerField(
+        default=0,
+        help_text="The number of units that can be occupied at the start of this period.",
+    )
+    occupiable_units_start.behavior = Behavior.POINT_IN_TIME_EARLIEST_KEEP
 
-    # TODO the use of d_quant_perc(...) and d_quant_currency(...) may be better
-    # moved to the Report layer -- particularly if we're chaining computations. -Dave
-
-    # TODO if we demand contiguous periods, this trivially carries over from the
-    # previous period. -Dave
     leased_units_start = models.IntegerField(
         default=0,
         help_text="The absolute number of leased units at the start of this period.",
     )
+    leased_units_start.behavior = Behavior.POINT_IN_TIME_EARLIEST_KEEP
 
-    # TODO "notices to vacate" and "lease terminations" aren't the same thing, given
-    # that you might issue a notice on day 1 and terminate on day 30. You'll probably move out
-    # somewhere in between (so occupancy itself is yet *another* matter).
-    # At least today, as with many of our funnel metrics, we don't account for time in a
-    # particularly cogent fashion. Today, we can call these numbers the same thing. Shortly down
-    # the road? No way. -Dave
-    # lease_terminations -> leases_ended
+    leases_ended = models.IntegerField(
+        default=0, help_text="The number of leases ended (expired) during this period."
+    )
+    leases_ended.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
     leases_executed = models.IntegerField(
         default=0,
         help_text="The number of new leases (not applications) executed during this period.",
     )
-    leases_executed.metric = Metric(behavior=Behavior.INTERVAL_SUM_AMORTIZE)
+    leases_executed.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    lease_applications = models.IntegerField(
+        default=0, help_text="The number of lease applications during this period."
+    )
+    lease_applications.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    target_lease_percent = models.DecimalField(
+        default=decimal.Decimal(0),
+        max_digits=4,
+        decimal_places=3,
+        help_text="The target percentage of leasable units that we would like to actually lease. (Enter 0.9 for 90%)",
+    )
+    target_lease_percent.behavior = Behavior.INTERVAL_AVERAGE_KEEP
+
+    # ------------------------------------------------------
+    # GOALS: property activity
+    # ------------------------------------------------------
+
+    # ------------------------------------------------------
+    # XXX UNKNOWN BELOW HERE...
+    # ------------------------------------------------------
 
     leases_renewed = models.IntegerField(
         default=0, help_text="The number of lease renewals signed in the period."
     )
-    leases_renewed.metric = Metric(behavior=Behavior.INTERVAL_SUM_AMORTIZE)
-
-    leases_ended = models.IntegerField(
-        default=0, help_text="The number of leases ended (expired) during this period."
-    )
-    leases_renewed.metric = Metric(behavior=Behavior.INTERVAL_SUM_AMORTIZE)
+    leases_renewed.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
     # TODO consider moving this to project -Dave
     leasable_units = models.IntegerField(
         default=0,
         help_text="The number of units that *are* or *can* be leased at the end of this period.",
     )
+    leasable_units.behavior = Behavior.POINT_IN_TIME_LATEST_KEEP
 
     usvs = models.IntegerField(
         default=0, help_text="The number of unique site visitors during this period."
     )
+    usvs.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
     inquiries = models.IntegerField(
         default=0, help_text="The number of site inquiries during this period."
     )
+    inquiries.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
     tours = models.IntegerField(
         default=0, help_text="The number of tours during this period."
     )
+    tours.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
-    lease_applications = models.IntegerField(
-        default=0, help_text="The number of lease applications during this period."
-    )
-
+    # TODO DAVEPECK FIXME -- this belongs away from period.
     previous_leased_rate = models.DecimalField(
         default=decimal.Decimal(0),
         max_digits=4,
@@ -244,6 +244,7 @@ class Period(models.Model, metaclass=MetricModelBase):
         decimal_places=2,
         help_text="The dollar amount invested in reputation building during this period.",
     )
+    investment_reputation_building.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
     investment_demand_creation = models.DecimalField(
         default=decimal.Decimal(0),
@@ -251,6 +252,7 @@ class Period(models.Model, metaclass=MetricModelBase):
         decimal_places=2,
         help_text="The dollar amount invested in demand creation during this period.",
     )
+    investment_demand_creation.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
     investment_leasing_enablement = models.DecimalField(
         default=decimal.Decimal(0),
@@ -258,6 +260,7 @@ class Period(models.Model, metaclass=MetricModelBase):
         decimal_places=2,
         help_text="The dollar amount invested in leasing enablement during this period.",
     )
+    investment_leasing_enablement.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
     investment_market_intelligence = models.DecimalField(
         default=decimal.Decimal(0),
@@ -265,6 +268,7 @@ class Period(models.Model, metaclass=MetricModelBase):
         decimal_places=2,
         help_text="The dollar amount invested in market intelligence during this period.",
     )
+    investment_market_intelligence.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
     investment_resident_retention = models.DecimalField(
         default=decimal.Decimal(0),
@@ -272,6 +276,7 @@ class Period(models.Model, metaclass=MetricModelBase):
         decimal_places=2,
         help_text="The dollar amount invested in resident retention during this period.",
     )
+    investment_resident_retention.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
     # TODO this number is messy. It requires clarification about timeframes. -Dave
     monthly_average_rent = models.DecimalField(
@@ -280,6 +285,7 @@ class Period(models.Model, metaclass=MetricModelBase):
         default=decimal.Decimal(1),
         help_text="The average rent tenants pay in any given month.",
     )
+    monthly_average_rent.behavior = Behavior.POINT_IN_TIME_EARLIEST_KEEP
 
     # --------------------------------------------------------------------------
     # Marketing investment and return (computed)
@@ -390,49 +396,51 @@ class Period(models.Model, metaclass=MetricModelBase):
     # Goals
     # --------------------------------------------------------------------------
 
-    target_lease_percent = models.DecimalField(
-        default=decimal.Decimal(0),
-        max_digits=4,
-        decimal_places=3,
-        help_text="The target percentage of leasable units that we would like to actually lease. (Enter 0.9 for 90%)",
-    )
-
     leases_executed_goal = models.IntegerField(
         default=0,
         help_text="The period goal for number of new leases executed during this period.",
     )
+    leases_executed_goal.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
     leases_renewed_goal = models.IntegerField(
         default=0,
         help_text="The period goal for number of lease renewals signed in the period.",
     )
+    leases_renewed_goal.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
     leases_ended_goal = models.IntegerField(
         default=0,
         help_text="The period goal for number of leases ended (expired) during this period.",
     )
+    leases_ended_goal.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
     net_lease_change_goal = models.IntegerField(
-        default=0, help_text="The net number of new leases during this period."
+        default=0,
+        help_text="The period goal for net number of new leases during this period.",
     )
+    net_lease_change_goal.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
     usvs_goal = models.IntegerField(
         default=0,
         help_text="The goal for number of unique site visitors during this period.",
     )
+    usvs_goal.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
     inquiries_goal = models.IntegerField(
         default=0, help_text="The goal for number of site inquiries during this period."
     )
+    inquiries_goal.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
     tours_goal = models.IntegerField(
         default=0, help_text="The goal for number of tours during this period."
     )
+    tours_goal.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
     lease_applications_goal = models.IntegerField(
         default=0,
         help_text="The goal_for number of lease applications during this period.",
     )
+    lease_applications_goal.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
     usvs_to_inquiries_percent_goal = models.DecimalField(
         default=0,
