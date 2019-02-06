@@ -2,7 +2,6 @@ import decimal
 
 from django.db import models
 
-from remark.lib.math import d_div, d_quant_perc, d_quant_currency
 from remark.lib.tokens import public_id
 from remark.lib.metrics import Behavior, ModelPeriodBase, ModelPeriodSetBase
 
@@ -79,64 +78,259 @@ class Period(ModelPeriodBase, models.Model):
     )
 
     # ------------------------------------------------------
-    # Property activity
+    # Logical activity (lease)
     # ------------------------------------------------------
 
-    occupiable_units_start = models.IntegerField(
-        default=0,
-        help_text="The number of units that can be occupied at the start of this period.",
-    )
-    occupiable_units_start.behavior = Behavior.POINT_IN_TIME_EARLIEST_KEEP
-
     leased_units_start = models.IntegerField(
-        default=0,
-        help_text="The absolute number of leased units at the start of this period.",
+        default=0, help_text="Number of leased units at period start"
     )
     leased_units_start.behavior = Behavior.POINT_IN_TIME_EARLIEST_KEEP
 
     leases_ended = models.IntegerField(
-        default=0, help_text="The number of leases ended (expired) during this period."
+        default=0, help_text="Number of leases ended (roughly: move outs)"
     )
     leases_ended.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
-    leases_executed = models.IntegerField(
-        default=0,
-        help_text="The number of new leases (not applications) executed during this period.",
-    )
-    leases_executed.behavior = Behavior.INTERVAL_SUM_AMORTIZE
-
     lease_applications = models.IntegerField(
-        default=0, help_text="The number of lease applications during this period."
+        default=0, help_text="Number of lease applications"
     )
     lease_applications.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
+    leases_executed = models.IntegerField(
+        default=0, help_text="Number of new leases executed"
+    )
+    leases_executed.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    lease_cds = models.IntegerField(
+        default=0, help_text="Number of lease cancellations and denials"
+    )
+    lease_cds.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    leases_due_to_expire = models.IntegerField(
+        default=0, help_text="Number of leases due to expire in period"
+    )
+    leases_due_to_expire = Behavior.INTERVAL_SUM_AMORTIZE
+
+    lease_renewal_notices = models.IntegerField(
+        default=0, help_text="Number of lease renewals signed"
+    )
+    lease_renewal_notices.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    lease_renewals = models.IntegerField(
+        default=0, help_text="Number of lease renewals that took effect"
+    )
+    lease_renewals.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    lease_vacation_notices = models.IntegerField(
+        default=0, help_text="Number of notices to vacate leases"
+    )
+    lease_vacation_notices.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    # ------------------------------------------------------
+    # TARGETS: logical activity (lease)
+    # ------------------------------------------------------
+
     target_lease_percent = models.DecimalField(
+        null=False,
+        blank=False,
         default=decimal.Decimal(0),
         max_digits=4,
         decimal_places=3,
-        help_text="The target percentage of leasable units that we would like to actually lease. (Enter 0.9 for 90%)",
+        help_text="Target: lease percentage (like 0.9)",
     )
     target_lease_percent.behavior = Behavior.INTERVAL_AVERAGE_KEEP
 
-    # ------------------------------------------------------
-    # GOALS: property activity
-    # ------------------------------------------------------
-
-    # ------------------------------------------------------
-    # XXX UNKNOWN BELOW HERE...
-    # ------------------------------------------------------
-
-    leases_renewed = models.IntegerField(
-        default=0, help_text="The number of lease renewals signed in the period."
+    target_lease_applications = models.IntegerField(
+        null=True, blank=True, default=None, help_text="Target: lease applications"
     )
-    leases_renewed.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    target_lease_applications.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
-    # TODO consider moving this to project -Dave
-    leasable_units = models.IntegerField(
+    target_leases_executed = models.IntegerField(
+        null=True, blank=True, default=None, help_text="Target: leases execfuted"
+    )
+    target_leases_executed.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    target_lease_renewal_notices = models.IntegerField(
+        null=True, blank=True, default=None, help_text="Target: lease renewal notices"
+    )
+    target_lease_renewal_notices.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    target_lease_renewals = models.IntegerField(
+        null=True, blank=True, default=None, help_text="Target: lease renewals"
+    )
+    target_lease_renewals.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    target_lease_vacation_notices = models.IntegerField(
+        null=True, blank=True, default=None, help_text="Target: lease vacation notices"
+    )
+    target_lease_vacation_notices.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    target_delta_leases = models.IntegerField(
+        null=True, blank=True, default=None, help_text="Target: delta: leases"
+    )
+    target_delta_leases.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    # ------------------------------------------------------
+    # Physical activity (occupancy)
+    # ------------------------------------------------------
+
+    occupiable_units = models.IntegerField(
         default=0,
-        help_text="The number of units that *are* or *can* be leased at the end of this period.",
+        help_text="Number of units that can possibly be occupied at period end",
     )
-    leasable_units.behavior = Behavior.POINT_IN_TIME_LATEST_KEEP
+    occupiable_units.behavior = Behavior.POINT_IN_TIME_LATEST_KEEP
+
+    occupied_units_start = models.IntegerField(
+        default=0, help_text="Number of units occupied at period start"
+    )
+    occupied_units_start.behavior = Behavior.POINT_IN_TIME_EARLIEST_KEEP
+
+    move_ins = models.IntegerField(default=0, help_text="Number of units moved into")
+    move_ins.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    move_outs = models.IntegerField(default=0, help_text="Number of units moved out of")
+    move_outs.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    # ------------------------------------------------------
+    # TARGETS: Physical activity (occupancy)
+    # ------------------------------------------------------
+
+    target_move_ins = models.IntegerField(
+        null=True, blank=True, default=None, help_text="Target: move ins"
+    )
+    target_move_ins.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    target_move_outs = models.IntegerField(
+        null=True, blank=True, default=None, help_text="Target: move outs"
+    )
+    target_move_outs.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    # ------------------------------------------------------
+    # Acquisition Investment
+    # ------------------------------------------------------
+
+    acq_reputation_building = models.DecimalField(
+        default=decimal.Decimal(0),
+        max_digits=10,
+        decimal_places=2,
+        help_text="Amount invested in acquisition reputation building",
+    )
+    acq_reputation_building.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    acq_demand_creation = models.DecimalField(
+        default=decimal.Decimal(0),
+        max_digits=10,
+        decimal_places=2,
+        help_text="Amount invested in acquisition demand creation",
+    )
+    acq_demand_creation.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    acq_leasing_enablement = models.DecimalField(
+        default=decimal.Decimal(0),
+        max_digits=10,
+        decimal_places=2,
+        help_text="Amount invested in acquisition leasing enablement",
+    )
+    acq_leasing_enablement.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    acq_market_intelligence = models.DecimalField(
+        default=decimal.Decimal(0),
+        max_digits=10,
+        decimal_places=2,
+        help_text="Amount invested in acquisition market intelligence",
+    )
+    acq_market_intelligence.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    acq_resident_retention = models.DecimalField(
+        default=decimal.Decimal(0),
+        max_digits=10,
+        decimal_places=2,
+        help_text="Amount invested in acquisition resident retention",
+    )
+    acq_resident_retention.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    # TODO this number is messy. It requires clarification about timeframes. -Dave
+    monthly_average_rent = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=decimal.Decimal(1),
+        help_text="Average rent tenants pay in the month including this period",
+    )
+    monthly_average_rent.behavior = Behavior.POINT_IN_TIME_EARLIEST_KEEP
+
+    # ------------------------------------------------------
+    # TARGETS: Acquisition Investment
+    # ------------------------------------------------------
+
+    target_acq_investment = models.DecimalField(
+        null=True,
+        default=None,
+        max_digits=10,
+        decimal_places=2,
+        help_text="Target: total acquisition investment",
+    )
+    target_acq_investment.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    # ------------------------------------------------------
+    # Retention Investment
+    # ------------------------------------------------------
+
+    ret_reputation_building = models.DecimalField(
+        default=decimal.Decimal(0),
+        max_digits=10,
+        decimal_places=2,
+        help_text="Amount invested in retention reputation building",
+    )
+    ret_reputation_building.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    ret_demand_creation = models.DecimalField(
+        default=decimal.Decimal(0),
+        max_digits=10,
+        decimal_places=2,
+        help_text="Amount invested in retention demand creation",
+    )
+    ret_demand_creation.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    ret_leasing_enablement = models.DecimalField(
+        default=decimal.Decimal(0),
+        max_digits=10,
+        decimal_places=2,
+        help_text="Amount invested in retention leasing enablement",
+    )
+    ret_leasing_enablement.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    ret_market_intelligence = models.DecimalField(
+        default=decimal.Decimal(0),
+        max_digits=10,
+        decimal_places=2,
+        help_text="Amount invested in retention market intelligence",
+    )
+    ret_market_intelligence.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    ret_resident_retention = models.DecimalField(
+        default=decimal.Decimal(0),
+        max_digits=10,
+        decimal_places=2,
+        help_text="Amount invested in retention resident retention",
+    )
+    ret_resident_retention.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    # ------------------------------------------------------
+    # TARGETS: Retention Investment
+    # ------------------------------------------------------
+
+    target_ret_investment = models.DecimalField(
+        null=True,
+        default=None,
+        max_digits=10,
+        decimal_places=2,
+        help_text="Target: total retention investment",
+    )
+    target_acq_investment.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    # ------------------------------------------------------
+    # Acquisition Funnel
+    # ------------------------------------------------------
 
     usvs = models.IntegerField(
         default=0, help_text="The number of unique site visitors during this period."
@@ -153,343 +347,24 @@ class Period(ModelPeriodBase, models.Model):
     )
     tours.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
-    # TODO DAVEPECK FIXME -- this belongs away from period.
-    previous_leased_rate = models.DecimalField(
-        default=decimal.Decimal(0),
-        max_digits=4,
-        decimal_places=3,
-        help_text="The leased rate as percentage of leasable for the previous period. (Enter 0.9 for 90%)",
+    # ------------------------------------------------------
+    # TARGETS: Acquisition Funnel
+    # ------------------------------------------------------
+
+    target_usvs = models.IntegerField(
+        null=True, blank=True, default=None, help_text="Target: USVs"
     )
+    target_usvs.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
-    # --------------------------------------------------------------------------
-    # Inbound funnel (computed)
-    # --------------------------------------------------------------------------
-
-    @property
-    def net_lease_change(self):
-        """The net number of new leases during this period."""
-        return self.leases_executed - self.leases_ended
-
-    @property
-    def leased_units(self):
-        """The total number of leases in effect at the end of the period."""
-        return self.leased_units_start + self.net_lease_change
-
-    @property
-    def target_leased_units(self):
-        """The target number of leased units we'd like to achieve."""
-        return decimal.Decimal(
-            self.target_lease_percent * self.leasable_units
-        ).quantize(decimal.Decimal(1), rounding=decimal.ROUND_HALF_UP)
-
-    @property
-    def leased_rate(self):
-        """The percentage of leasable units that are actually leased at end of period."""
-        return d_quant_perc(d_div(self.leased_units, self.leasable_units))
-
-    @property
-    def leased_rate_change(self):
-        """The change in leased rate as compared to the previous period."""
-        return self.leased_rate - self.previous_leased_rate
-
-    @property
-    def usvs_to_inquiries_percent(self):
-        """The conversation rate from usvs to inquiries."""
-        return d_quant_perc(d_div(self.inquiries, self.usvs))
-
-    @property
-    def inquiries_to_tours_percent(self):
-        """The conversion rate from inquiries to tours."""
-        return d_quant_perc(d_div(self.tours, self.inquiries))
-
-    @property
-    def tours_to_lease_applications_percent(self):
-        """The conversion rate from lease applications to tours."""
-        return d_quant_perc(d_div(self.lease_applications, self.tours))
-
-    @property
-    def lease_applications_to_leases_executed_percent(self):
-        """The conversion rate from lease executions to tours."""
-        return d_quant_perc(d_div(self.leases_executed, self.lease_applications))
-
-    # --------------------------------------------------------------------------
-    # Retention funnel (entered)
-    # --------------------------------------------------------------------------
-
-    # TODO The distinction between "leases" and "occupied" is clear: leases are about
-    # contracts; occupancy is about people in units. Unfortunately, at least for now, we
-    # don't always properly capture this distinction. The good news is that
-    # occupancy-related values, like move_ins, don't tend to drive computations... yet. -Dave
-
-    # Commenting these out as use of these is deferred to P1 or later
-    # move_ins = models.IntegerField(
-    #     default=0, help_text="The number of units moved into during this period."
-    # )
-
-    # occupied_units = models.IntegerField(
-    #     default=0, help_text="The number of units occupied at the end of this period."
-    # )
-
-    # move_outs = models.IntegerField(
-    #     default=0, help_text="The number of units moved out from during this period."
-    # )
-
-    # --------------------------------------------------------------------------
-    # Marketing investment and return (entered)
-    # --------------------------------------------------------------------------
-
-    investment_reputation_building = models.DecimalField(
-        default=decimal.Decimal(0),
-        max_digits=10,
-        decimal_places=2,
-        help_text="The dollar amount invested in reputation building during this period.",
+    target_inquiries = models.IntegerField(
+        null=True, blank=True, default=None, help_text="Target: INQs"
     )
-    investment_reputation_building.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    target_inquiries.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
-    investment_demand_creation = models.DecimalField(
-        default=decimal.Decimal(0),
-        max_digits=10,
-        decimal_places=2,
-        help_text="The dollar amount invested in demand creation during this period.",
+    target_tours = models.IntegerField(
+        null=True, blank=True, default=None, help_text="Target: tours"
     )
-    investment_demand_creation.behavior = Behavior.INTERVAL_SUM_AMORTIZE
-
-    investment_leasing_enablement = models.DecimalField(
-        default=decimal.Decimal(0),
-        max_digits=10,
-        decimal_places=2,
-        help_text="The dollar amount invested in leasing enablement during this period.",
-    )
-    investment_leasing_enablement.behavior = Behavior.INTERVAL_SUM_AMORTIZE
-
-    investment_market_intelligence = models.DecimalField(
-        default=decimal.Decimal(0),
-        max_digits=10,
-        decimal_places=2,
-        help_text="The dollar amount invested in market intelligence during this period.",
-    )
-    investment_market_intelligence.behavior = Behavior.INTERVAL_SUM_AMORTIZE
-
-    investment_resident_retention = models.DecimalField(
-        default=decimal.Decimal(0),
-        max_digits=10,
-        decimal_places=2,
-        help_text="The dollar amount invested in resident retention during this period.",
-    )
-    investment_resident_retention.behavior = Behavior.INTERVAL_SUM_AMORTIZE
-
-    # TODO this number is messy. It requires clarification about timeframes. -Dave
-    monthly_average_rent = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
-        default=decimal.Decimal(1),
-        help_text="The average rent tenants pay in any given month.",
-    )
-    monthly_average_rent.behavior = Behavior.POINT_IN_TIME_EARLIEST_KEEP
-
-    # --------------------------------------------------------------------------
-    # Marketing investment and return (computed)
-    # --------------------------------------------------------------------------
-
-    @property
-    def marketing_investment(self):
-        """Return the total marketing investment in this period, across all categories."""
-        return (
-            self.investment_reputation_building
-            + self.investment_demand_creation
-            + self.investment_leasing_enablement
-            + self.investment_market_intelligence
-            + self.investment_resident_retention
-        )
-
-    @property
-    def estimated_monthly_revenue_change(self):
-        """
-        Return an estimate of how much new monthly revenue will be obtained on the 
-        basis of this period's inbound funnel outcomes.
-        """
-        return self.net_lease_change * self.monthly_average_rent
-
-    @property
-    def estimated_annual_revenue_change(self):
-        """
-        Return an estimate of how much new annual revenue will be obtained on the 
-        basis of this period's inbound funnel outcomes.
-        """
-        return self.estimated_monthly_revenue_change * 12
-
-    @property
-    def return_on_marketing_investment(self):
-        """
-        Return an estimate of how effective marketing spend is, as a rough
-        integer multiple of current investment.
-
-        Returns 0 if the marketing investment in this period is $0.
-        """
-        # TODO CONSIDER this multiple comes from un-like timeframes: the
-        # investment dollars considered are for a single period, but the
-        # return is for a full year. This might make sense given that leases
-        # are rarely terminated in their first year, but it also might provide
-        # misleadingly large numbers. -Dave
-
-        # TODO CONSIDER as currently defined, this multiple considers *net*
-        # leases in any given period. But it should *perhaps* only consider
-        # *new* leases executed, since currently our marketing dollars are
-        # entirely spent on the inbound funnel. In addition, perhaps we need
-        # to categorize marketing dollars as applicable to a given funnel
-        # (inbound or retention) and then use only inbound dollars here. -Dave
-
-        # TODO maybe make the int(round(...)) bit a view-layer consideration? -Dave
-        return round(
-            d_div(self.estimated_annual_revenue_change, self.marketing_investment)
-        )
-
-    # --------------------------------------------------------------------------
-    # Cost Pers (computed)
-    # --------------------------------------------------------------------------
-
-    @property
-    def cost_per_usv(self):
-        """Return the estimated cost to obtain a unique site visitor in this period."""
-        return d_quant_currency(
-            d_div(
-                self.investment_reputation_building
-                + self.investment_demand_creation
-                + self.investment_market_intelligence,
-                self.usvs,
-            )
-        )
-
-    @property
-    def cost_per_inquiry(self):
-        """Return the estimated cost to obtain an inbound inquiry in this period."""
-        return d_quant_currency(
-            d_div(
-                self.investment_reputation_building
-                + self.investment_demand_creation
-                + self.investment_market_intelligence,
-                self.inquiries,
-            )
-        )
-
-    @property
-    def cost_per_tour(self):
-        """Return the estimated cost to obtain an inbound tour in this period."""
-        return d_quant_currency(d_div(self.marketing_investment, self.tours))
-
-    @property
-    def cost_per_lease_application(self):
-        """Return the estimated cost to obtain a lease application in this period."""
-        return d_quant_currency(
-            d_div(self.marketing_investment, self.lease_applications)
-        )
-
-    @property
-    def cost_per_lease_execution(self):
-        """Return the estimated cost to obtain a lease application in this period."""
-        return d_quant_currency(d_div(self.marketing_investment, self.leases_executed))
-
-    def __str__(self):
-        return "from {} to {}".format(self.start, self.end)
-
-    # --------------------------------------------------------------------------
-    # Goals
-    # --------------------------------------------------------------------------
-
-    leases_executed_goal = models.IntegerField(
-        default=0,
-        help_text="The period goal for number of new leases executed during this period.",
-    )
-    leases_executed_goal.behavior = Behavior.INTERVAL_SUM_AMORTIZE
-
-    leases_renewed_goal = models.IntegerField(
-        default=0,
-        help_text="The period goal for number of lease renewals signed in the period.",
-    )
-    leases_renewed_goal.behavior = Behavior.INTERVAL_SUM_AMORTIZE
-
-    leases_ended_goal = models.IntegerField(
-        default=0,
-        help_text="The period goal for number of leases ended (expired) during this period.",
-    )
-    leases_ended_goal.behavior = Behavior.INTERVAL_SUM_AMORTIZE
-
-    net_lease_change_goal = models.IntegerField(
-        default=0,
-        help_text="The period goal for net number of new leases during this period.",
-    )
-    net_lease_change_goal.behavior = Behavior.INTERVAL_SUM_AMORTIZE
-
-    usvs_goal = models.IntegerField(
-        default=0,
-        help_text="The goal for number of unique site visitors during this period.",
-    )
-    usvs_goal.behavior = Behavior.INTERVAL_SUM_AMORTIZE
-
-    inquiries_goal = models.IntegerField(
-        default=0, help_text="The goal for number of site inquiries during this period."
-    )
-    inquiries_goal.behavior = Behavior.INTERVAL_SUM_AMORTIZE
-
-    tours_goal = models.IntegerField(
-        default=0, help_text="The goal for number of tours during this period."
-    )
-    tours_goal.behavior = Behavior.INTERVAL_SUM_AMORTIZE
-
-    lease_applications_goal = models.IntegerField(
-        default=0,
-        help_text="The goal_for number of lease applications during this period.",
-    )
-    lease_applications_goal.behavior = Behavior.INTERVAL_SUM_AMORTIZE
-
-    usvs_to_inquiries_percent_goal = models.DecimalField(
-        default=0,
-        max_digits=10,
-        decimal_places=2,
-        help_text="The goal for conversation rate from usvs to inquiries.",
-    )
-
-    inquiries_to_tours_percent_goal = models.DecimalField(
-        default=0,
-        max_digits=10,
-        decimal_places=2,
-        help_text="The goal for conversion rate from inquiries to tours.",
-    )
-
-    tours_to_lease_applications_percent_goal = models.DecimalField(
-        default=0,
-        max_digits=10,
-        decimal_places=2,
-        help_text="The goal for conversion rate from lease applications to tours.",
-    )
-
-    lease_applications_to_leases_executed_percent_goal = models.DecimalField(
-        default=0,
-        max_digits=10,
-        decimal_places=2,
-        help_text="The goal for conversion rate from lease executions to tours.",
-    )
-
-    marketing_investment_goal = models.DecimalField(
-        default=0,
-        max_digits=10,
-        decimal_places=2,
-        help_text="Return the total marketing investment in this period, across all categories.",
-    )
-
-    return_on_marketing_investment_goal = models.DecimalField(
-        default=0,
-        max_digits=10,
-        decimal_places=2,
-        help_text="Goal for return on marketing investment.",
-    )
-
-    estimated_annual_revenue_change_goal = models.DecimalField(
-        default=0,
-        max_digits=10,
-        decimal_places=2,
-        help_text="Goal for estimated annual revenue change",
-    )
+    target_tours.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
     class Meta:
         # Always sort Periods with the earliest period first.
