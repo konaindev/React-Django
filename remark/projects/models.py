@@ -3,7 +3,7 @@ import decimal
 from django.db import models
 
 from remark.lib.tokens import public_id
-from remark.lib.metrics import Behavior, ModelPeriodBase, ModelPeriodSetBase
+from remark.lib.metrics import Behavior, ModelPeriod, ModelPeriodSet
 
 
 def pro_public_id():
@@ -54,11 +54,11 @@ class Project(models.Model):
         return "{} ({})".format(self.name, self.public_id)
 
 
-class PeriodManager(ModelPeriodSetBase, models.Model):
+class PeriodManager(ModelPeriodSet, models.Model):
     pass
 
 
-class Period(ModelPeriodBase, models.Model):
+class Period(ModelPeriod, models.Model):
     """
     Represents a snapshot of a property's basic activity over a period of time.
     """
@@ -365,6 +365,10 @@ class Period(ModelPeriodBase, models.Model):
         null=True, blank=True, default=None, help_text="Target: tours"
     )
     target_tours.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+
+    # ------------------------------------------------------
+    # Misc implementation
+    # ------------------------------------------------------
 
     class Meta:
         # Always sort Periods with the earliest period first.

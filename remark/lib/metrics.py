@@ -435,21 +435,119 @@ class PeriodBase:
     that share a common time span.
     """
 
-    pass
+    def name_from_metric_or_name(self, metric_or_name):
+        """
+        Given a metric *or* the name of a metric, return just the name
+        """
+        # Use a clever little hack to accomplish this in one fell swoop.
+        return getattr(metric_or_name, "name", metric_or_name)
+
+    def get_start(self):
+        """
+        Return the start time (inclusive) for this Period.
+
+        Derived classes can implement this as they see fit.
+        """
+        raise NotImplementedError()
+
+    def get_end(self):
+        """
+        Return the end time (exclusive) for this Period.
+
+        Derived classes can implement this as they see fit.
+        """
+        raise NotImplementedError()
+
+    def get_metric_names(self):
+        """
+        Return an iterable of all metric names in this period.
+        """
+        raise NotImplementedError()
+
+    def get_metric(self, metric_name):
+        """
+        Return a (capital) Metric that has the specified name.
+
+        If no such Metric applies to the period, return None.
+        """
+        raise NotImplementedError()
+
+    def get_values(self):
+        """
+        Return a dictionary mapping from metric name to value.
+        """
+        raise NotImplementedError()
+
+    def get_value(self, metric_or_name):
+        """
+        Return a (capital) Value for the specified metric (or name).
+
+        If no such Value exists for this period, return None
+        """
+        raise NotImplementedError()
 
 
-class PeriodSetBase:
-    """
-    A PeriodSet represents a collection of Periods that is contiguous in time.
-    """
+class BarePeriod(PeriodBase):
+    def __init__(self, start, end, values):
+        """
+        Construct a period with a set of values that 'impact' the given 
+        time span.
+        """
+        self.start = start
+        self.end = end
+        self._all_values = values
 
-    pass
+    def _build_metrics(self):
+        """
+        Build a mapping from metric name to Metric.
+        """
+        self._metrics = {value.metric.name: value.metric for value in self._all_values}
+
+    def _ensure_metrics(self):
+        if not hasattr(self, "_metrics"):
+            self._build_metrics()
+
+    def _build_values(self):
+        """
+        Build a mapping from metric name to the Value for that name.
+        """
+        self._ensure_metrics()
+        self._values = {value.metric.name: value for value in self._all_values}
+
+    def _ensure_values(self):
+        if not hasattr(self, "_values"):
+            self._build_values()
+
+    def get_start(self):
+        return self.start
+
+    def get_end(self):
+        return self.end
+
+    def get_metric_names(self):
+        self._ensure_metrics()
+        return self._metrics.keys()
+
+    def get_metric(self, metric_name):
+        self._ensure_metrics()
+        return self._metrics.get(metric_name)
+
+    def get_values(self):
+        self._ensure_values()
+        return dict(self._values)
+
+    def get_value(self, metric_or_name):
+        self._ensure_values()
+        return self._values.get(self.name_from_metric_or_name(metric_or_name))
 
 
-class ModelPeriodBase(PeriodBase):
+class ModelPeriod(PeriodBase):
     def _build_metrics(self):
         """
         Build a mapping from field name to Metric.
+
+        We assume that any field that has been annotated with a `behavior`
+        attribute wants to have an affiliated Metric.
         """
 
         def metric_for_field(field):
@@ -480,8 +578,8 @@ class ModelPeriodBase(PeriodBase):
         def value_for_field_name(name):
             return Value(
                 metric=self._metrics[name],
-                start=self.get_value_start(),
-                end=self.get_value_end(),
+                start=self.get_start(),
+                end=self.get_end(),
                 value=getattr(self, name),
             )
 
@@ -493,34 +591,40 @@ class ModelPeriodBase(PeriodBase):
         if not hasattr(self, "_values"):
             self._build_values()
 
-    def get_value_start(self):
-        """
-        Return the start time of a value. Can be overridden in derived classes.
-        """
+    def get_start(self):
         return self.start
 
-    def get_value_end(self):
-        """
-        Return the end of a value.
-        """
+    def get_end(self):
         return self.end
 
-    def get_metrics(self):
+    def get_metric_names(self):
         self._ensure_metrics()
-        return self._metrics
+        return self._metrics.keys()
 
-    def get_metric(self, name):
+    def get_metric(self, metric_name):
         self._ensure_metrics()
-        return self._metrics.get(name)
+        return self._metrics.get(metric_name)
 
     def get_values(self):
         self._ensure_values()
-        return self._values
+        return dict(self._values)
 
-    def get_value(self, name):
+    def get_value(self, metric_or_name):
         self._ensure_values()
-        return self._values.get(name)
+        return self._values.get(self.name_from_metric_or_name(metric_or_name))
 
 
-class ModelPeriodSetBase(PeriodSetBase):
+class PeriodSetBase:
+    """
+    A PeriodSet represents a collection of Periods that are contiguous in time.
+    """
+
+    pass
+
+
+class BarePeriodSet(PeriodSetBase):
+    pass
+
+
+class ModelPeriodSet(PeriodSetBase):
     pass
