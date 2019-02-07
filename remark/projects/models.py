@@ -354,19 +354,13 @@ class Period(ModelPeriod, models.Model):
     # Meta, etc.
     # ------------------------------------------------------
 
-    def to_jsonable(self):
-        """
-        Return a jsonable version of our fields.
-        """
-        # HACK HACK we'll want to really do something smarter/less scary here. -Dave
-        exclude_fields = set(["id", "project"])
-        jsonable = {
-            field.name: getattr(self, field.name)
-            for field in self._meta.get_fields()
-            if field.name not in exclude_fields
-        }
-        return jsonable
-
     class Meta:
         # Always sort Periods with the earliest period first.
         ordering = ["start"]
+
+    def to_jsonable(self):
+        """
+        Return a jsonable version of all metrics and values, plus
+        the period start/end.
+        """
+        return dict(start=self.get_start(), end=self.get_end(), **self.get_raw_values())

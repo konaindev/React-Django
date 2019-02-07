@@ -19,7 +19,7 @@ class DefaultComputedPeriodTestCase(TestCase):
         period = Period.objects.create(
             project=project,
             start=datetime.date(year=2018, month=12, day=19),
-            end=datetime.date(year=2018, month=12, day=19),
+            end=datetime.date(year=2018, month=12, day=26),
         )
         self.period = ComputedPeriod(period)
 
@@ -156,7 +156,7 @@ class DefaultReportTestCase(TestCase):
         period = Period.objects.create(
             project=project,
             start=datetime.date(year=2018, month=12, day=19),
-            end=datetime.date(year=2018, month=12, day=19),
+            end=datetime.date(year=2018, month=12, day=26),
         )
         self.report = Report(period)
 

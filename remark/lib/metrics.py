@@ -1,3 +1,4 @@
+import functools
 from decimal import Decimal
 
 from django.db.models.fields import IntegerField, DecimalField, FloatField
@@ -455,17 +456,34 @@ class PeriodBase:
 
     def get_values(self):
         """
-        Return a dictionary mapping from metric name to value.
+        Return a dictionary mapping from metric name to (capital) Value.
         """
         raise NotImplementedError()
 
     def get_value(self, metric_or_name):
         """
-        Return a (capital) Value for the specified metric (or name).
+        Return a (capital) Value for the specified Metric (or name).
 
         If no such Value exists for this period, return None
         """
         raise NotImplementedError()
+
+    def get_raw_values(self):
+        """
+        Return a dictionary mapping from metric name to (lowercase) value.
+        """
+        return {
+            metric_name: value.value for metric_name, value in self.get_values().items()
+        }
+
+    def get_raw_value(self, metric_or_name):
+        """
+        Return a (lowercase) value for the specified Metric (or name).
+
+        If no Value exists for this period, return None
+        """
+        value = self.get_value(metric_or_name)
+        return value.value if value else None
 
 
 class BarePeriod(PeriodBase):
@@ -557,10 +575,18 @@ class ModelPeriod(PeriodBase):
         self._ensure_metrics()
 
         def value_for_field_name(name):
+            metric = self._metrics[name]
+            if metric.behavior == Behavior.POINT_IN_TIME_EARLIEST_KEEP:
+                start = end = self.get_start()
+            elif metric.behavior == Behavior.POINT_IN_TIME_LATEST_KEEP:
+                start = end = self.get_end()
+            else:
+                start = self.get_start()
+                end = self.get_end()
             return Value(
                 metric=self._metrics[name],
-                start=self.get_start(),
-                end=self.get_end(),
+                start=start,
+                end=end,
                 value=getattr(self, name),
             )
 
@@ -609,3 +635,4 @@ class BarePeriodSet(PeriodSetBase):
 
 class ModelPeriodSet(PeriodSetBase):
     pass
+

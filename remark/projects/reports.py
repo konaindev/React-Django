@@ -1,7 +1,6 @@
 import decimal
 
-from remark.lib.decorators import computed_property
-from remark.lib.metrics import PeriodBase
+from remark.lib.computed import computed_property, ComputedPropertyMixin
 from remark.lib.math import (
     sum_or_0,
     sum_or_none,
@@ -15,7 +14,7 @@ from remark.lib.math import (
 )
 
 
-class ComputedPeriod(PeriodBase):
+class ComputedPeriod(ComputedPropertyMixin):
     """
     Implements all computed properties for a single project Period.
 
@@ -354,7 +353,7 @@ class ComputedPeriod(PeriodBase):
 
     def __getattr__(self, name):
         """
-        For convenience, return all attributes on the period itself.
+        For convenience, return all attributes on the underlying period.
 
         Raise an exception if *that* isn't found.
         """
@@ -366,34 +365,10 @@ class ComputedPeriod(PeriodBase):
     def get_end(self):
         return self.period.get_end()
 
-    def get_metric_names(self):
-        return self.period.get_metric_names()
-
-    def get_metric(self, metric_name):
-        return self.period.get_metric(metric_name)
-
-    def get_values(self):
-        return self.period.get_values()
-
-    def get_value(self, metric_or_name):
-        return self.period.get_value(metric_or_name)
-
     def to_jsonable(self):
-        # HACK HACK we'll want to really do something smarter/less scary here. -Dave
-        period_jsonable = self.period.to_jsonable()
-
-        def exclude_attr(name):
-            return (
-                name.startswith("__")
-                or name.startswith("get_")
-                or name in set(["period", "name_from_metric_or_name", "to_jsonable"])
-            )
-
-        computed_jsonable = {
-            name: getattr(self, name) for name in dir(self) if not exclude_attr(name)
-        }
-
-        return dict(**period_jsonable, **computed_jsonable)
+        underlying_jsonable = self.period.to_jsonable()
+        computed_jsonable = self.get_computed_properties()
+        return dict(**underlying_jsonable, **computed_jsonable)
 
 
 class Report:
