@@ -161,8 +161,11 @@ class DefaultReportTestCase(TestCase):
         self.report = Report(period)
 
     def test_report_jsonable(self):
-        # CONSIDER moving this to a separate location
-        self.assertTrue(self.report.to_jsonable())
+        from django.core.serializers.json import DjangoJSONEncoder
+
+        jsonable = self.report.to_jsonable()
+        json = DjangoJSONEncoder().encode(jsonable)
+        self.assertTrue(json)
 
 
 @skip("Temporarily skipping until surgery is complete. -Dave")
