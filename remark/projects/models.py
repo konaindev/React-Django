@@ -131,9 +131,9 @@ class Period(ModelPeriod, models.Model):
     # ------------------------------------------------------
 
     target_lease_percent = models.DecimalField(
-        null=False,
-        blank=False,
-        default=decimal.Decimal(0),
+        null=True,
+        blank=True,
+        default=None,
         max_digits=4,
         decimal_places=3,
         help_text="Target: lease percentage (like 0.9)",
@@ -241,15 +241,7 @@ class Period(ModelPeriod, models.Model):
     )
     acq_market_intelligence.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
-    acq_resident_retention = models.DecimalField(
-        default=decimal.Decimal(0),
-        max_digits=10,
-        decimal_places=2,
-        help_text="Amount invested in acquisition resident retention",
-    )
-    acq_resident_retention.behavior = Behavior.INTERVAL_SUM_AMORTIZE
-
-    # TODO this number is messy. It requires clarification about timeframes. -Dave
+    # XXX This number is a mess. It requires clarification about timeframes. -Dave
     monthly_average_rent = models.DecimalField(
         max_digits=10,
         decimal_places=2,
@@ -307,14 +299,6 @@ class Period(ModelPeriod, models.Model):
     )
     ret_market_intelligence.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
-    ret_resident_retention = models.DecimalField(
-        default=decimal.Decimal(0),
-        max_digits=10,
-        decimal_places=2,
-        help_text="Amount invested in retention resident retention",
-    )
-    ret_resident_retention.behavior = Behavior.INTERVAL_SUM_AMORTIZE
-
     # ------------------------------------------------------
     # TARGETS: Retention Investment
     # ------------------------------------------------------
@@ -367,7 +351,7 @@ class Period(ModelPeriod, models.Model):
     target_tours.behavior = Behavior.INTERVAL_SUM_AMORTIZE
 
     # ------------------------------------------------------
-    # Misc implementation
+    # Meta, etc.
     # ------------------------------------------------------
 
     class Meta:

@@ -5,73 +5,149 @@ from unittest import skip
 from django.test import TestCase
 
 from .models import Period, Project
-from .reports import Report
+from .reports import ComputedPeriod, Report
 
 
-@skip("Temporarily skipping until surgery is complete. -Dave")
-class DefaultPeriodTestCase(TestCase):
+class DefaultComputedPeriodTestCase(TestCase):
     """
-    Test basic period model computed properties on a default Period.
+    Test that all computed properties on a default Period instance
+    return sane values.
     """
 
     def setUp(self):
         project = Project.objects.create(name="test")
-        self.period = Period.objects.create(
+        period = Period.objects.create(
             project=project,
             start=datetime.date(year=2018, month=12, day=19),
             end=datetime.date(year=2018, month=12, day=19),
         )
+        self.period = ComputedPeriod(period)
 
-    def test_net_lease_change(self):
-        self.assertEqual(self.period.net_lease_change, 0)
+    def test_leased_unit_change(self):
+        self.assertEqual(self.period.leased_unit_change, 0)
 
     def test_leased_units(self):
         self.assertEqual(self.period.leased_units, 0)
 
-    def test_target_leased_units(self):
-        self.assertEqual(self.period.target_leased_units, 0)
-
-    def test_lease_rate(self):
+    def test_leased_rate(self):
         self.assertEqual(self.period.leased_rate, 0)
 
-    def test_usvs_to_inquiries_percent(self):
-        self.assertEqual(self.period.usvs_to_inquiries_percent, 0)
+    def test_renewal_rate(self):
+        self.assertEqual(self.period.renewal_rate, 0)
 
-    def test_inquiries_to_tours_percent(self):
-        self.assertEqual(self.period.inquiries_to_tours_percent, 0)
+    def test_lease_cd_rate(self):
+        self.assertEqual(self.period.lease_cd_rate, 0)
 
-    def test_tours_to_lease_applications_percent(self):
-        self.assertEqual(self.period.tours_to_lease_applications_percent, 0)
+    def test_target_leased_units(self):
+        self.assertEqual(self.period.target_leased_units, None)
 
-    def test_lease_applications_to_leases_executed_percent(self):
-        self.assertEqual(self.period.lease_applications_to_leases_executed_percent, 0)
+    def test_occupied_units(self):
+        self.assertEqual(self.period.occupied_units, 0)
 
-    def test_marketing_investment(self):
-        self.assertEqual(self.period.marketing_investment, 0)
+    def test_occupancy_rate(self):
+        self.assertEqual(self.period.occupancy_rate, 0)
 
-    def test_estimated_monthly_revenue_change(self):
-        self.assertEqual(self.period.estimated_monthly_revenue_change, 0)
+    def test_acq_investment(self):
+        self.assertEqual(self.period.acq_investment, 0)
 
-    def test_estimated_annual_revenue_change(self):
-        self.assertEqual(self.period.estimated_annual_revenue_change, 0)
+    def test_ret_investment(self):
+        self.assertEqual(self.period.ret_investment, 0)
 
-    def test_return_on_marketing_investment(self):
-        self.assertEqual(self.period.return_on_marketing_investment, 0)
+    def test_investment(self):
+        self.assertEqual(self.period.investment, 0)
+
+    def test_estimated_acq_revenue_gain(self):
+        self.assertEqual(self.period.estimated_acq_revenue_gain, 0)
+
+    def test_estimated_ret_revenue_gain(self):
+        self.assertEqual(self.period.estimated_ret_revenue_gain, 0)
+
+    def test_acq_romi(self):
+        self.assertEqual(self.period.acq_romi, 0)
+
+    def test_ret_romi(self):
+        self.assertEqual(self.period.ret_romi, 0)
+
+    def test_romi(self):
+        self.assertEqual(self.period.romi, 0)
+
+    def test_target_investment(self):
+        self.assertEqual(self.period.target_investment, None)
+
+    def test_target_estimated_acq_revenue_gain(self):
+        self.assertEqual(self.period.target_estimated_acq_revenue_gain, None)
+
+    def test_target_estimated_ret_revenue_gain(self):
+        self.assertEqual(self.period.target_estimated_ret_revenue_gain, None)
+
+    def test_target_acq_romi(self):
+        self.assertEqual(self.period.target_acq_romi, None)
+
+    def test_target_ret_romi(self):
+        self.assertEqual(self.period.target_ret_romi, None)
+
+    def test_target_romi(self):
+        self.assertEqual(self.period.target_romi, None)
+
+    def test_usv_inq_perc(self):
+        self.assertEqual(self.period.usv_inq_perc, 0)
+
+    def test_inq_tou_perc(self):
+        self.assertEqual(self.period.inq_tou_perc, 0)
+
+    def test_tou_app_perc(self):
+        self.assertEqual(self.period.tou_app_perc, 0)
+
+    def test_app_exe_perc(self):
+        self.assertEqual(self.period.app_exe_perc, 0)
+
+    def test_usv_exe_perc(self):
+        self.assertEqual(self.period.usv_exe_perc, 0)
+
+    def test_target_usv_inq_perc(self):
+        self.assertEqual(self.period.target_usv_inq_perc, None)
+
+    def test_target_inq_tou_perc(self):
+        self.assertEqual(self.period.target_inq_tou_perc, None)
+
+    def test_target_tou_app_perc(self):
+        self.assertEqual(self.period.target_tou_app_perc, None)
+
+    def test_target_app_exe_perc(self):
+        self.assertEqual(self.period.target_app_exe_perc, None)
+
+    def test_target_usv_exe_perc(self):
+        self.assertEqual(self.period.target_usv_exe_perc, None)
 
     def test_cost_per_usv(self):
         self.assertEqual(self.period.cost_per_usv, 0)
 
-    def test_cost_per_inquiry(self):
-        self.assertEqual(self.period.cost_per_inquiry, 0)
+    def test_cost_per_inq(self):
+        self.assertEqual(self.period.cost_per_inq, 0)
 
-    def test_cost_per_tour(self):
-        self.assertEqual(self.period.cost_per_tour, 0)
+    def test_cost_per_tou(self):
+        self.assertEqual(self.period.cost_per_tou, 0)
 
-    def test_cost_per_lease_application(self):
-        self.assertEqual(self.period.cost_per_lease_application, 0)
+    def test_cost_per_app(self):
+        self.assertEqual(self.period.cost_per_app, 0)
 
-    def test_cost_per_lease_execution(self):
-        self.assertEqual(self.period.cost_per_lease_execution, 0)
+    def test_cost_per_exe(self):
+        self.assertEqual(self.period.cost_per_exe, 0)
+
+    def test_target_cost_per_usv(self):
+        self.assertEqual(self.period.target_cost_per_usv, None)
+
+    def test_target_cost_per_inq(self):
+        self.assertEqual(self.period.target_cost_per_inq, None)
+
+    def test_target_cost_per_tou(self):
+        self.assertEqual(self.period.target_cost_per_tou, None)
+
+    def test_target_cost_per_app(self):
+        self.assertEqual(self.period.target_cost_per_app, None)
+
+    def test_target_cost_per_exe(self):
+        self.assertEqual(self.period.target_cost_per_exe, None)
 
 
 @skip("Temporarily skipping until surgery is complete. -Dave")

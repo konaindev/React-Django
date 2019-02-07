@@ -2,26 +2,7 @@ from decimal import Decimal
 
 from django.db.models.fields import IntegerField, DecimalField, FloatField
 
-
-def sum_or_none(values):
-    """
-    Return the sum of values. If one of them is null (None),
-    propogate this outward.
-    """
-    a = 0
-    for v in values:
-        if v is None:
-            return None
-        a += v
-    return a
-
-
-def mult_or_none(a, b):
-    """
-    Return a*b, unless either is null (None), in which case
-    propogate this outward.
-    """
-    return None if ((a is None) or (b is None)) else (a * b)
+from remark.lib.math import sum_or_none, mult_or_none
 
 
 class InvalidMetricOperation(Exception):
@@ -276,7 +257,7 @@ class ValueBase:
             metric=metric,
             start=values[0].start,
             end=values[-1].end,
-            value=sum_or_none((v.value for v in values)),
+            value=sum_or_none(*[v.value for v in values]),
         )
 
     @classmethod
@@ -299,17 +280,17 @@ class ValueBase:
         # Time-weighted average.
         if metric.kind == Kind.INTEGER:
             total = sum_or_none(
-                mult_or_none(v.value, s) for (v, s) in zip(values, seconds)
+                *[mult_or_none(v.value, s) for (v, s) in zip(values, seconds)]
             )
             merge_value = None if total is None else round(total / total_seconds)
         elif metric.kind == Kind.FLOAT:
             total = sum_or_none(
-                mult_or_none(v.value, float(s)) for (v, s) in zip(values, seconds)
+                *[mult_or_none(v.value, float(s)) for (v, s) in zip(values, seconds)]
             )
             merge_value = None if total is None else (total / total_seconds)
         elif metric.kind == Kind.DECIMAL:
             total = sum_or_none(
-                mult_or_none(v.value, Decimal(s)) for (v, s) in zip(values, seconds)
+                *[mult_or_none(v.value, Decimal(s)) for (v, s) in zip(values, seconds)]
             )
             merge_value = None if total is None else (total / Decimal(total_seconds))
 
