@@ -150,6 +150,21 @@ class DefaultComputedPeriodTestCase(TestCase):
         self.assertEqual(self.period.target_cost_per_exe, None)
 
 
+class DefaultReportTestCase(TestCase):
+    def setUp(self):
+        project = Project.objects.create(name="test")
+        period = Period.objects.create(
+            project=project,
+            start=datetime.date(year=2018, month=12, day=19),
+            end=datetime.date(year=2018, month=12, day=19),
+        )
+        self.report = Report(period)
+
+    def test_report_jsonable(self):
+        # CONSIDER moving this to a separate location
+        self.assertTrue(self.report.to_jsonable())
+
+
 @skip("Temporarily skipping until surgery is complete. -Dave")
 class LincolnTowerPeriodTestCase(TestCase):
     """Test basic period model computed properties."""
