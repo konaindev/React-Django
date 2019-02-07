@@ -383,7 +383,11 @@ class ComputedPeriod(PeriodBase):
         period_jsonable = self.period.to_jsonable()
 
         def exclude_attr(name):
-            return name.startswith("__") or name.startswith("get_")
+            return (
+                name.startswith("__")
+                or name.startswith("get_")
+                or name in set(["period", "name_from_metric_or_name", "to_jsonable"])
+            )
 
         computed_jsonable = {
             name: getattr(self, name) for name in dir(self) if not exclude_attr(name)
