@@ -358,9 +358,3 @@ class Period(ModelPeriod, models.Model):
         # Always sort Periods with the earliest period first.
         ordering = ["start"]
 
-    def to_jsonable(self):
-        """
-        Return a jsonable version of all metrics and values, plus
-        the period start/end.
-        """
-        return dict(start=self.get_start(), end=self.get_end(), **self.get_raw_values())
