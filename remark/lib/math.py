@@ -31,6 +31,10 @@ def op_sum(a, b):
     return a + b
 
 
+def op_sub(a, b):
+    return a - b
+
+
 def op_mult(a, b):
     return a * b
 
@@ -42,18 +46,32 @@ def sum_or_0(*values):
     return reduce(swallow_none(op_sum, 0), values, 0)
 
 
-def mult_or_1(*values):
-    """
-    Multiply all values. If any of them is None, substitute 1 instead.
-    """
-    return reduce(swallow_none(op_mult, 1), values, 1)
-
-
 def sum_or_none(*values):
     """
     Sum all values. If any of them is None, return None.
     """
     return reduce(propagate_none(op_sum), values, 0)
+
+
+def sub_or_0(*values):
+    """
+    Subtract all values, in order. If any is None, substitute 0 instead.
+    """
+    return reduce(swallow_none(op_sub, 0), values)
+
+
+def sub_or_none(*values):
+    """
+    Subtract all values, in order. If any is None, substitie None instead.
+    """
+    return reduce(propagate_none(op_sub), values)
+
+
+def mult_or_1(*values):
+    """
+    Multiply all values. If any of them is None, substitute 1 instead.
+    """
+    return reduce(swallow_none(op_mult, 1), values, 1)
 
 
 def mult_or_none(*values):

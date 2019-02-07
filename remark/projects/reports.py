@@ -4,6 +4,7 @@ from remark.lib.computed import computed_property, ComputedPropertyMixin
 from remark.lib.math import (
     sum_or_0,
     sum_or_none,
+    sub_or_none,
     mult_or_none,
     d_div_or_0,
     d_div_or_none,
@@ -359,27 +360,90 @@ class ComputedPeriod(ComputedPropertyMixin):
         """
         return getattr(self.period, name)
 
+    # TODO these methods demonstrate that ComputedPeriod is kinda-sorta a PeriodBase.
+    # But PeriodBase requires exposure of Metric and Value instances, neither of
+    # which strictly makes sense for the @computed_properties. Maybe I need to loosen
+    # some restrictions? -Dave
+
     def get_start(self):
         return self.period.get_start()
 
     def get_end(self):
         return self.period.get_end()
 
-    def to_jsonable(self):
-        underlying_jsonable = self.period.to_jsonable()
-        computed_jsonable = self.get_computed_properties()
-        return dict(**underlying_jsonable, **computed_jsonable)
+    def get_raw_values(self):
+        """
+        Return a mapping from metric names to (lowercase) values.
+        """
+        underlying_raw_values = self.period.get_raw_values()
+        computed_raw_values = self.get_computed_properties()
+        return dict(**underlying_raw_values, **computed_raw_values)
+
+
+class PeriodDelta:
+    """
+    A delta between two underlying periods. The two periods must have
+    identical timespans. Metrics not found on both periods are ignored.
+    """
+
+    # TODO figure out how much of this actually belongs in lib/metrics.py. -Dave
+    def __init__(self, lhs, rhs):
+        lhs_span = lhs.get_end() - lhs.get_start()
+        rhs_span = rhs.get_end() - rhs.get_start()
+        if lhs_span != rhs_span:
+            raise RuntimeError(
+                "Cannot compute a period delta for two dissimilar periods."
+            )
+        self.lhs = lhs
+        self.rhs = rhs
+
+    def get_lhs_start(self):
+        return self.lhs.get_start()
+
+    def get_lhs_end(self):
+        return self.lhs.get_end()
+
+    def get_rhs_start(self):
+        return self.rhs.get_start()
+
+    def get_rhs_end(self):
+        return self.rhs.get_end()
+
+    def _build_raw_values(self):
+        """
+        Return a mapping from delta metric names to (lowercase) delta values.
+        """
+        lhs_raw_values = self.lhs.get_raw_values()
+        rhs_raw_values = self.rhs.get_raw_values()
+        names = set(lhs_raw_values.keys()) & set(rhs_raw_values.keys())
+        self._raw_values = {
+            f"delta_{name}": sub_or_none(lhs_raw_values[name], rhs_raw_values[name])
+            for name in names
+        }
+
+    def _ensure_raw_values(self):
+        if not hasattr(self, "_raw_values"):
+            self._build_raw_values()
+
+    def get_raw_values(self):
+        self._ensure_raw_values()
+        return dict(self._raw_values)
 
 
 class Report:
+    # XXX TODO this is nonsense (so far)
     def __init__(self, period):
         self.period = ComputedPeriod(period)
+        self.delta = PeriodDelta(self.period, self.period)
 
     def to_jsonable(self):
         """
         Return a structure that can be converted to a JSON string.
-
-        (I call such things 'jsonables' to distinguish them from json strings
-        themselves, but your milage may vary. :-)
         """
-        return self.period.to_jsonable()
+        return dict(
+            start=self.period.start,
+            end=self.period.end,
+            **self.period.get_raw_values(),
+            **self.delta.get_raw_values(),
+        )
+
