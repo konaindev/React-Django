@@ -27,7 +27,9 @@ const VALUE_BOX_PROP_TYPES = {
 };
 
 class Comment extends Component {
-  render() { return null };
+  render() {
+    return null;
+  }
 }
 
 /**
@@ -68,7 +70,8 @@ class SecondaryValueBox extends Component {
   render() {
     var showGoal = false;
     var goal = this.props.goal;
-    if (goal != 0) {  // CHOONG: does this even make sense?
+    if (goal != 0) {
+      // CHOONG: does this even make sense?
       var showGoal = true;
       var pctOfGoal = Math.round((100.0 * Number(this.props.value)) / goal);
     }
@@ -86,9 +89,7 @@ class SecondaryValueBox extends Component {
           <span className="text-remark-ui-text-light text-base">
             {this.props.name}
           </span>
-          <span className="text-remark-ui-text text-sm">
-            Target: {goal}
-          </span>
+          <span className="text-remark-ui-text text-sm">Target: {goal}</span>
         </div>
       </div>
     );
@@ -112,7 +113,8 @@ class FunnelValueBox extends Component {
   render() {
     var showGoal = false;
     var goal = this.props.goal;
-    if (goal != 0) {  // CHOONG: does this even make sense?
+    if (goal != 0) {
+      // CHOONG: does this even make sense?
       var showGoal = true;
       var pctOfGoal = Math.round((100.0 * Number(this.props.value)) / goal);
     }
@@ -235,310 +237,347 @@ class Report extends Component {
     let r = this.props.report;
     return (
       <span>
-
-      <ReportSection name="Leasing Performance" bottomBoundary={true}>
-        {/* Headline performance numbers for the property. */}
-        <div className="flex flex-row flex-grow items-stretch">
-          <div className="w-1/3 m-2">
-            <PrimaryValueBox
-              name="Leased"
-              value={formatPercent(r.leased_rate)}
-              detail1={`${r.leased_units} Executed Leases (Out
+        <ReportSection name="Leasing Performance" bottomBoundary={true}>
+          {/* Headline performance numbers for the property. */}
+          <div className="flex flex-row flex-grow items-stretch">
+            <div className="w-1/3 m-2">
+              <PrimaryValueBox
+                name="Leased"
+                value={formatPercent(r.leased_rate)}
+                detail1={`${r.leased_units} Executed Leases (Out
                           of ${r.leasable_units})`}
-              detail2={`Target: ${formatPercent(r.target_lease_percent)}`}
-            />
-          </div>
-          <div className="w-1/3 m-2">
-            <PrimaryValueBox
-              name="Retention"
-              value={`XX%`}
-              detail1={`X of Y Resident Decisions (Out of total leases)"`}
-              detail2={`Target: XX%"`}
-            />
-          </div>
-          <div className="w-1/3 m-2">  
-            <PrimaryValueBox
-              name="Occupied"
-              value={`XX`}
-              detail1={`X Occupied Units (Out of ${r.leasable_units})`}
-              detail2={`Target: XX%`}
-            />
-          </div>
-        </div>
-        {/* Performance detail. */}
-        <div className="flex flex-row flex-grow items-stretch">
-          {/* Row */}
-          <div className="w-1/3 m-2">
-            <SecondaryValueBox
-              name="Lease Applications"
-              value={r.lease_applications}
-              goal={r.lease_applications_goal}
-            />
-          </div>
-          <div className="w-1/3 m-2">
-            <SecondaryValueBox
-              name="Notices to Renew"
-              value={formatPercent(r.leases_renewed)}
-              goal={formatPercent(r.leases_renewed_goal)}
-            />
-          </div>
-          <div className="w-1/3 m-2">  
-            <SecondaryValueBox
-              name="Move Ins"
-              value={`XX`}
-              goal={`XX`}
-            />
-          </div>
-        </div>
-        <div className="flex flex-row flex-grow items-stretch">
-          {/* Row */}
-          <div className="w-1/3 m-2">
-            <SecondaryValueBox
-              name="Cancellations & Denials"
-              value={`XX`}
-              goal={`XX`}
-            />
-          </div>
-          <div className="w-1/3 m-2">
-            <SecondaryValueBox
-              name="Notices to Vacate"
-              value={r.leases_ended}
-              goal={r.leases_ended_goal}
-            />
-          </div>
-          <div className="w-1/3 m-2">
-            <SecondaryValueBox
-              name="Move Outs"
-              value={`XX`}
-              goal={`XX`}
-            />
-          </div>
-        </div>
-      </ReportSection>
-
-      <ReportSection name="Campaign Investment" bottomBoundary={true}>
-        {/* Headline performance numbers for the property. */}
-        <div className="flex flex-row flex-grow items-stretch">
-          <div className="w-1/3 m-2">
-            <PrimaryValueBox
-              name="Campaign Investment"
-              value={formatCurrencyShorthand(r.marketing_investment)}
-              detail1={`Target: ${formatCurrencyShorthand(r.marketing_investment_goal)}`}
-            />
-          </div>
-          <div className="w-1/3 m-2">
-            <PrimaryValueBox
-              name="Est. Revenue Change"
-              value={formatCurrencyShorthand(r.estimated_annual_revenue_change)}
-              detail1={`Target: $XXk`}
-            />
-          </div>
-          <div className="w-1/3 m-2">  
-            <PrimaryValueBox
-              name="Campaign Return on Marketing Investment (ROMI)"
-              value={`${r.return_on_marketing_investment}X`}
-              detail1={`Target: XXX`}
-            />
-          </div>
-        </div>
-      </ReportSection>
-
-      <div className="flex flex-row">
-        <div className="w-1/2 flex flex-col">
-          <ReportSection name="Acquisition" bottomBoundary={true}>
-            <SecondaryValueBox
-              name="Leased Unit Change"
-              value={r.net_lease_change}
-              goal={r.net_lease_change_goal}
-            />
-            <SecondaryValueBox
-              name="Acquisition Investment"
-              value="XX"
-              goal="XX"
-            />
-            <SecondaryValueBox
-              name="Est. Acquired Leasing Revenue"
-              value={formatCurrencyShorthand(r.estimated_annual_revenue_change)}
-              goal={formatCurrencyShorthand(r.estimated_annual_revenue_change_goal)}
-            />
-            <SecondaryValueBox
-              name="Acquisition ROMI"
-              value={`${r.return_on_marketing_investment}x`}
-              goal={`${r.return_on_marketing_investment_goal}x`}
-            />
-          </ReportSection>
-          <ReportSection name="Acquisition Investment Allocations" bottomBoundary={true}>
-            TODO: acquisition/retention split, fix styling
-            <VictoryChart>
-              <VictoryBar
-                data={this.getInvestmentData()}
-                x="category"
-                y="investment"
-                style={{
-                  /* stylelint-disable */
-                  /* this is victory specific styling; stylelint is maybe right to complain */
-                  data: {
-                    fill: datum => datum.color
-                  },
-                  labels: {
-                    fill: "white",
-                  },
-                  /* stylelint-enable */
-                }}
+                detail2={`Target: ${formatPercent(r.target_lease_percent)}`}
               />
-            </VictoryChart>
-          </ReportSection>
-        </div>
-
-        <div className="w-1/2 flex flex-col">
-          <ReportSection name="Retention" bottomBoundary={true}>
-            <SecondaryValueBox
-              name="Lease Renewals"
-              value={r.leases_renewed}
-              goal={r.leases_renewed_goal}
-            />
-            <SecondaryValueBox
-              name="Retention Investment"
-              value="XX"
-              goal="XX"
-            />
-            <SecondaryValueBox
-              name="Est. Retained Leasing Revenue"
-              value="XX"
-              goal="XX"
-            />
-            <SecondaryValueBox
-              name="Retention ROMI"
-              value="XX"
-              goal="XX"
-            />
-          </ReportSection>
-          <ReportSection name="Retention Investment Allocations" bottomBoundary={true}>
-            <VictoryChart>
-              <VictoryBar
-                data={this.getInvestmentData()}
-                x="category"
-                y="investment"
-                style={{
-                  /* stylelint-disable */
-                  /* this is victory specific styling; stylelint is maybe right to complain */
-                  data: {
-                    fill: datum => datum.color
-                  },
-                  labels: {
-                    fill: "white",
-                  },
-                  /* stylelint-enable */
-                }}
+            </div>
+            <div className="w-1/3 m-2">
+              <PrimaryValueBox
+                name="Retention"
+                value={`XX%`}
+                detail1={`X of Y Resident Decisions (Out of total leases)"`}
+                detail2={`Target: XX%"`}
               />
-            </VictoryChart>
-          </ReportSection>
+            </div>
+            <div className="w-1/3 m-2">
+              <PrimaryValueBox
+                name="Occupied"
+                value={`XX`}
+                detail1={`X Occupied Units (Out of ${r.leasable_units})`}
+                detail2={`Target: XX%`}
+              />
+            </div>
+          </div>
+          {/* Performance detail. */}
+          <div className="flex flex-row flex-grow items-stretch">
+            {/* Row */}
+            <div className="w-1/3 m-2">
+              <SecondaryValueBox
+                name="Lease Applications"
+                value={r.lease_applications}
+                goal={r.lease_applications_goal}
+              />
+            </div>
+            <div className="w-1/3 m-2">
+              <SecondaryValueBox
+                name="Notices to Renew"
+                value={formatPercent(r.leases_renewed)}
+                goal={formatPercent(r.leases_renewed_goal)}
+              />
+            </div>
+            <div className="w-1/3 m-2">
+              <SecondaryValueBox name="Move Ins" value={`XX`} goal={`XX`} />
+            </div>
+          </div>
+          <div className="flex flex-row flex-grow items-stretch">
+            {/* Row */}
+            <div className="w-1/3 m-2">
+              <SecondaryValueBox
+                name="Cancellations & Denials"
+                value={`XX`}
+                goal={`XX`}
+              />
+            </div>
+            <div className="w-1/3 m-2">
+              <SecondaryValueBox
+                name="Notices to Vacate"
+                value={r.leases_ended}
+                goal={r.leases_ended_goal}
+              />
+            </div>
+            <div className="w-1/3 m-2">
+              <SecondaryValueBox name="Move Outs" value={`XX`} goal={`XX`} />
+            </div>
+          </div>
+        </ReportSection>
+
+        <ReportSection name="Campaign Investment" bottomBoundary={true}>
+          {/* Headline performance numbers for the property. */}
+          <div className="flex flex-row flex-grow items-stretch">
+            <div className="w-1/3 m-2">
+              <PrimaryValueBox
+                name="Campaign Investment"
+                value={formatCurrencyShorthand(r.marketing_investment)}
+                detail1={`Target: ${formatCurrencyShorthand(
+                  r.marketing_investment_goal
+                )}`}
+              />
+            </div>
+            <div className="w-1/3 m-2">
+              <PrimaryValueBox
+                name="Est. Revenue Change"
+                value={formatCurrencyShorthand(
+                  r.estimated_annual_revenue_change
+                )}
+                detail1={`Target: $XXk`}
+              />
+            </div>
+            <div className="w-1/3 m-2">
+              <PrimaryValueBox
+                name="Campaign Return on Marketing Investment (ROMI)"
+                value={`${r.return_on_marketing_investment}X`}
+                detail1={`Target: XXX`}
+              />
+            </div>
+          </div>
+        </ReportSection>
+
+        <div className="flex flex-row">
+          <div className="w-1/2 flex flex-col">
+            <ReportSection name="Acquisition" bottomBoundary={true}>
+              <SecondaryValueBox
+                name="Leased Unit Change"
+                value={r.net_lease_change}
+                goal={r.net_lease_change_goal}
+              />
+              <SecondaryValueBox
+                name="Acquisition Investment"
+                value="XX"
+                goal="XX"
+              />
+              <SecondaryValueBox
+                name="Est. Acquired Leasing Revenue"
+                value={formatCurrencyShorthand(
+                  r.estimated_annual_revenue_change
+                )}
+                goal={formatCurrencyShorthand(
+                  r.estimated_annual_revenue_change_goal
+                )}
+              />
+              <SecondaryValueBox
+                name="Acquisition ROMI"
+                value={`${r.return_on_marketing_investment}x`}
+                goal={`${r.return_on_marketing_investment_goal}x`}
+              />
+            </ReportSection>
+            <ReportSection
+              name="Acquisition Investment Allocations"
+              bottomBoundary={true}
+            >
+              TODO: acquisition/retention split, fix styling
+              <VictoryChart>
+                <VictoryBar
+                  data={this.getInvestmentData()}
+                  x="category"
+                  y="investment"
+                  style={{
+                    /* stylelint-disable */
+                    /* this is victory specific styling; stylelint is maybe right to complain */
+                    data: {
+                      fill: datum => datum.color
+                    },
+                    labels: {
+                      fill: "white"
+                    }
+                    /* stylelint-enable */
+                  }}
+                />
+              </VictoryChart>
+            </ReportSection>
+          </div>
+
+          <div className="w-1/2 flex flex-col">
+            <ReportSection name="Retention" bottomBoundary={true}>
+              <SecondaryValueBox
+                name="Lease Renewals"
+                value={r.leases_renewed}
+                goal={r.leases_renewed_goal}
+              />
+              <SecondaryValueBox
+                name="Retention Investment"
+                value="XX"
+                goal="XX"
+              />
+              <SecondaryValueBox
+                name="Est. Retained Leasing Revenue"
+                value="XX"
+                goal="XX"
+              />
+              <SecondaryValueBox name="Retention ROMI" value="XX" goal="XX" />
+            </ReportSection>
+            <ReportSection
+              name="Retention Investment Allocations"
+              bottomBoundary={true}
+            >
+              <VictoryChart>
+                <VictoryBar
+                  data={this.getInvestmentData()}
+                  x="category"
+                  y="investment"
+                  style={{
+                    /* stylelint-disable */
+                    /* this is victory specific styling; stylelint is maybe right to complain */
+                    data: {
+                      fill: datum => datum.color
+                    },
+                    labels: {
+                      fill: "white"
+                    }
+                    /* stylelint-enable */
+                  }}
+                />
+              </VictoryChart>
+            </ReportSection>
+          </div>
         </div>
-      </div>
 
-      <ReportSection name="Acquisition Funnel" bottomBoundary={true}>
-        {/* Headline numbers for the acquisition funnel. */}
-        <div className="flex flex-row flex-grow items-stretch">
-          <div className="w-1/3 m-2">
-            <PrimaryValueBox
-              name="USV > EXE"
-              value={`XX%`}
-              detail1={`Target: XX%`}
-            />
+        <ReportSection name="Acquisition Funnel" bottomBoundary={true}>
+          {/* Headline numbers for the acquisition funnel. */}
+          <div className="flex flex-row flex-grow items-stretch">
+            <div className="w-1/3 m-2">
+              <PrimaryValueBox
+                name="USV > EXE"
+                value={`XX%`}
+                detail1={`Target: XX%`}
+              />
+            </div>
+            <div className="w-1/3 m-2">
+              <PrimaryValueBox
+                name="Cancellation & Denial Rate"
+                value={`XX%`}
+                detail1={`Target: XX%`}
+              />
+            </div>
+            <div className="w-1/3 m-2">
+              <PrimaryValueBox
+                name="Cost Per EXE / Lowest Monthly Rent"
+                value={`XX%`}
+                detail1={`Target: XX%`}
+              />
+            </div>
           </div>
-          <div className="w-1/3 m-2">
-            <PrimaryValueBox
-              name="Cancellation & Denial Rate"
-              value={`XX%`}
-              detail1={`Target: XX%`}
-            />
-          </div>
-          <div className="w-1/3 m-2">  
-            <PrimaryValueBox
-              name="Cost Per EXE / Lowest Monthly Rent"
-              value={`XX%`}
-              detail1={`Target: XX%`}
-            />
-          </div>
-        </div>
 
-        <div className="flex flex-row flex-grow items-stretch">
-          <div className="w-1/6 flex flex-col">
-            <div className="k-funnel-label">
-              <div className="bg-remark-funnel-1"><div>Unique Site Visitors (USV)</div></div>
-              <div className="text-remark-funnel-2">↓</div>
+          <div className="flex flex-row flex-grow items-stretch">
+            <div className="w-1/6 flex flex-col">
+              <div className="k-funnel-label">
+                <div className="bg-remark-funnel-1">
+                  <div>Unique Site Visitors (USV)</div>
+                </div>
+                <div className="text-remark-funnel-2">↓</div>
+              </div>
+              <div className="k-funnel-label">
+                <div className="bg-remark-funnel-2">
+                  <div>Inquiries (INQ)</div>
+                </div>
+                <div className="text-remark-funnel-3">↓</div>
+              </div>
+              <div className="k-funnel-label">
+                <div className="bg-remark-funnel-3">
+                  <div>Tours (TOU)</div>
+                </div>
+                <div className="text-remark-funnel-4">↓</div>
+              </div>
+              <div className="k-funnel-label">
+                <div className="bg-remark-funnel-4">
+                  <div>Lease Applications (APP)</div>
+                </div>
+                <div className="text-remark-funnel-5">↓</div>
+              </div>
+              <div className="k-funnel-label">
+                <div className="bg-remark-funnel-5">
+                  <div>Lease Executions (EXE)</div>
+                </div>
+                <div>&nbsp;</div>
+              </div>
             </div>
-            <div className="k-funnel-label">
-              <div className="bg-remark-funnel-2"><div>Inquiries (INQ)</div></div>
-              <div className="text-remark-funnel-3">↓</div>
-            </div>
-            <div className="k-funnel-label">
-              <div className="bg-remark-funnel-3"><div>Tours (TOU)</div></div>
-              <div className="text-remark-funnel-4">↓</div>
-            </div>
-            <div className="k-funnel-label">
-              <div className="bg-remark-funnel-4"><div>Lease Applications (APP)</div></div>
-              <div className="text-remark-funnel-5">↓</div>
-            </div>
-            <div className="k-funnel-label">
-              <div className="bg-remark-funnel-5"><div>Lease Executions (EXE)</div></div>
-              <div>&nbsp;</div>
+            <div className="w-5/6 flex flex-row flex-grow items-stretch">
+              <div className="w-1/3 flex flex-col items">
+                <FunnelValueBox
+                  name="Volume of USV"
+                  value={r.usvs}
+                  goal={r.usvs_goal}
+                />
+                <FunnelValueBox
+                  name="Volume of INQ"
+                  value={r.inquiries}
+                  goal={r.inquiries_goal}
+                />
+                <FunnelValueBox
+                  name="Volume of TOU"
+                  value={r.tours}
+                  goal={r.tours_goal}
+                />
+                <FunnelValueBox
+                  name="Volume of APP"
+                  value={r.lease_applications}
+                  goal={r.lease_applications_goal}
+                />
+                <FunnelValueBox
+                  name="Volume of EXE"
+                  value={r.leases_executed}
+                  goal={r.leases_executed_goal}
+                />
+              </div>
+              <div className="w-1/3 flex flex-col">
+                <FunnelValueBoxPercentage
+                  name="USV > INQ"
+                  value={r.usvs_to_inquiries_percent}
+                  goal={r.usvs_to_inquiries_percent_goal}
+                />
+                <FunnelValueBoxPercentage
+                  name="INQ > TOU"
+                  value={r.inquiries_to_tours_percent}
+                  goal={r.inquiries_to_tours_percent_goal}
+                />
+                <FunnelValueBoxPercentage
+                  name="TOU > APP"
+                  value={r.tours_to_lease_applications_percent}
+                  goal={r.tours_to_lease_applications_percent_goal}
+                />
+                <FunnelValueBoxPercentage
+                  name="APP > EXE"
+                  value={r.lease_applications_to_leases_executed_percent}
+                  goal={r.lease_applications_to_leases_executed_percent_goal}
+                />
+              </div>
+              <div className="w-1/3 flex flex-col">
+                <FunnelValueBoxDollars
+                  name="Cost per USV"
+                  value={r.cost_per_usv}
+                  goal="XX"
+                />
+                <FunnelValueBoxDollars
+                  name="Cost per INQ"
+                  value={r.cost_per_inquiry}
+                  goal="XX"
+                />
+                <FunnelValueBoxDollars
+                  name="Cost per TOU"
+                  value={r.cost_per_tour}
+                  goal="XX"
+                />
+                <FunnelValueBoxDollars
+                  name="Cost per APP"
+                  value={r.cost_per_lease_application}
+                  goal="XX"
+                />
+                <FunnelValueBoxDollars
+                  name="Cost per EXE"
+                  value={r.cost_per_lease_execution}
+                  goal="XX"
+                />
+              </div>
             </div>
           </div>
-          <div className="w-5/6 flex flex-row flex-grow items-stretch">
-            <div className="w-1/3 flex flex-col items">
-              <FunnelValueBox name="Volume of USV"
-                              value={r.usvs}
-                              goal={r.usvs_goal} />
-              <FunnelValueBox name="Volume of INQ"
-                              value={r.inquiries}
-                              goal={r.inquiries_goal} />
-              <FunnelValueBox name="Volume of TOU"
-                              value={r.tours}
-                              goal={r.tours_goal} />
-              <FunnelValueBox name="Volume of APP"
-                              value={r.lease_applications}
-                              goal={r.lease_applications_goal} />
-              <FunnelValueBox name="Volume of EXE"
-                              value={r.leases_executed}
-                              goal={r.leases_executed_goal} />
-            </div>
-            <div className="w-1/3 flex flex-col">
-              <FunnelValueBoxPercentage name="USV > INQ"
-                              value={r.usvs_to_inquiries_percent}
-                              goal={r.usvs_to_inquiries_percent_goal} />
-              <FunnelValueBoxPercentage name="INQ > TOU"
-                              value={r.inquiries_to_tours_percent}
-                              goal={r.inquiries_to_tours_percent_goal} />
-              <FunnelValueBoxPercentage name="TOU > APP"
-                              value={r.tours_to_lease_applications_percent}
-                              goal={r.tours_to_lease_applications_percent_goal} />
-              <FunnelValueBoxPercentage name="APP > EXE"
-                              value={r.lease_applications_to_leases_executed_percent}
-                              goal={r.lease_applications_to_leases_executed_percent_goal} />
-            </div>
-            <div className="w-1/3 flex flex-col">
-              <FunnelValueBoxDollars name="Cost per USV"
-                                     value={r.cost_per_usv}
-                                     goal="XX" />
-              <FunnelValueBoxDollars name="Cost per INQ"
-                                     value={r.cost_per_inquiry}
-                                     goal="XX" />
-              <FunnelValueBoxDollars name="Cost per TOU"
-                                     value={r.cost_per_tour}
-                                     goal="XX" />
-              <FunnelValueBoxDollars name="Cost per APP"
-                                     value={r.cost_per_lease_application}
-                                     goal="XX" />
-              <FunnelValueBoxDollars name="Cost per EXE"
-                                     value={r.cost_per_lease_execution}
-                                     goal="XX" />
-            </div>
-          </div>
-        </div>
-
-      </ReportSection>
-
+        </ReportSection>
       </span>
     );
   }
@@ -571,6 +610,10 @@ export default class ReportPage extends Component {
     report: PropTypes.object.isRequired,
     project: PropTypes.object.isRequired
   };
+
+  componentDidMount() {
+    console.log("ReportPage props: ", this.props);
+  }
 
   render() {
     const navigationItems = (
