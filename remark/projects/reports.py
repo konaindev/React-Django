@@ -1,5 +1,6 @@
 import decimal
 
+
 from remark.lib.computed import computed_value, ComputedValueMixin
 from remark.lib.math import (
     sum_or_0,
@@ -13,6 +14,8 @@ from remark.lib.math import (
     d_quant_currency,
     round_or_none,
 )
+
+from .models import Period
 
 
 class ComputedPeriod(ComputedValueMixin):
@@ -432,6 +435,11 @@ class PeriodDelta:
 
 class Report:
     # XXX TODO this is nonsense (so far)
+    @classmethod
+    def from_date_span(cls, project, start, end):
+        period = Period.objects.filter(project=project, start=start, end=end).first()
+        return cls(period) if period is not None else None
+
     def __init__(self, period):
         self.period = ComputedPeriod(period)
         self.delta = PeriodDelta(self.period, self.period)
