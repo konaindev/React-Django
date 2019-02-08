@@ -285,7 +285,7 @@ class Report extends Component {
               <PrimaryValueBox
                 name="Retention"
                 value={`TODO%`}
-                detail1={`X of Y Resident Decisions (Out of total leases)"`}
+                detail1={`TODO of TODO Resident Decisions (Out of total leases)"`}
                 detail2={`Target: TODO%"`}
               />
             </div>
@@ -293,7 +293,7 @@ class Report extends Component {
               <PrimaryValueBox
                 name="Occupied"
                 value={`TODO`}
-                detail1={`X Occupied Units (Out of ${r.occupiable_units})`}
+                detail1={`TODO Occupied Units (Out of ${r.occupiable_units})`}
                 detail2={`Target: TODO%`}
               />
             </div>
