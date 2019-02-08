@@ -37,14 +37,14 @@ class ComputedPeriod(ComputedValueMixin):
     # ------------------------------------------------------
 
     @computed_value
-    def leased_unit_change(self):
+    def delta_leases(self):
         """The net number of new leases obtained during the period."""
         return self.leases_executed - self.leases_ended
 
     @computed_value
     def leased_units(self):
         """The total number of leases in effect at the end of the period."""
-        return self.leased_units_start + self.leased_unit_change
+        return self.leased_units_start + self.delta_leases
 
     @computed_value
     def leased_rate(self):
@@ -134,7 +134,7 @@ class ComputedPeriod(ComputedValueMixin):
         Return an estimate of how much new annualk revenue will be obtained on the 
         basis of this period's acquisition funnel outcomes.
         """
-        return self.leased_unit_change * self.monthly_average_rent * 12
+        return self.delta_leases * self.monthly_average_rent * 12
 
     @computed_value
     def estimated_ret_revenue_gain(self):
@@ -143,6 +143,16 @@ class ComputedPeriod(ComputedValueMixin):
         basis of this period's acquisition funnel outcomes.
         """
         return self.lease_renewals * self.monthly_average_rent * 12
+
+    @computed_value
+    def estimated_revenue_gain(self):
+        """
+        Return an estimate of how much new annual revenue will be obtained
+        on the basis of this period's full investment.
+        """
+        return sum_or_0(
+            self.estimated_acq_revenue_gain, self.estimated_ret_revenue_gain
+        )
 
     @computed_value
     def acq_romi(self):
@@ -193,6 +203,14 @@ class ComputedPeriod(ComputedValueMixin):
     def target_estimated_ret_revenue_gain(self):
         """The target estimated ret leasing revenue gain."""
         return mult_or_none(self.target_lease_renewals, self.monthly_average_rent, 12)
+
+    @computed_value
+    def target_estimated_revenue_gain(self):
+        """The target estimated total leasing revenue gain."""
+        return sum_or_none(
+            self.target_estimated_acq_revenue_gain,
+            self.target_estimated_ret_revenue_gain,
+        )
 
     @computed_value
     def target_acq_romi(self):

@@ -105,7 +105,7 @@ class FunnelValueBox extends Component {
 
   formatValue(v) {
     if (isNaN(Number(v))) {
-      return v; // Pass strings through to make XX placeholders more obvious
+      return v; // Pass strings through to make TODO placeholders more obvious
     }
     return this.formatter(v);
   }
@@ -155,7 +155,6 @@ class FunnelValueBoxPercentage extends FunnelValueBox {
 class ReportSection extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    children: PropTypes.element.isRequired,
     bottomBoundary: PropTypes.bool
   };
 
@@ -187,37 +186,31 @@ class Report extends Component {
   static propTypes = { report: PropTypes.object.isRequired };
 
   /**
-   * @description Return marketing investment data in a structure suitable for Victory charts.
+   * @description Return acquisition investment data in a structure suitable for Victory charts.
    */
-  getInvestmentData() {
+  getAcquisitionInvestmentData() {
     const reputationBuilding = {
       category: "Reputation Building",
-      investment: Number(this.props.report.investment_reputation_building),
+      investment: Number(this.props.report.acq_reputation_building),
       color: "#4035f4"
     };
 
     const demandCreation = {
       category: "Demand Creation",
-      investment: Number(this.props.report.investment_demand_creation),
+      investment: Number(this.props.report.acq_demand_creation),
       color: "#5147ff"
     };
 
     const leasingEnablement = {
       category: "Leasing Enablement",
-      investment: Number(this.props.report.investment_leasing_enablement),
+      investment: Number(this.props.report.acq_leasing_enablement),
       color: "#867ffe"
     };
 
     const marketIntelligence = {
       category: "Market Intelligence",
-      investment: Number(this.props.report.investment_market_intelligence),
+      investment: Number(this.props.report.acq_market_intelligence),
       color: "#675efc"
-    };
-
-    const residentRetention = {
-      category: "Resident Retention",
-      investment: Number(this.props.report.investment_resident_retention),
-      color: "#A09afd"
     };
 
     // all categories
@@ -225,8 +218,47 @@ class Report extends Component {
       reputationBuilding,
       demandCreation,
       leasingEnablement,
-      marketIntelligence,
-      residentRetention
+      marketIntelligence
+    ];
+
+    // drop any category with $0 investment and return
+    return categories.filter(datum => datum.investment);
+  }
+
+  /**
+   * @description Return retention investment data in a structure suitable for Victory charts.
+   */
+  getRetentionInvestmentData() {
+    const reputationBuilding = {
+      category: "Reputation Building",
+      investment: Number(this.props.report.ret_reputation_building),
+      color: "#4035f4"
+    };
+
+    const demandCreation = {
+      category: "Demand Creation",
+      investment: Number(this.props.report.ret_demand_creation),
+      color: "#5147ff"
+    };
+
+    const leasingEnablement = {
+      category: "Leasing Enablement",
+      investment: Number(this.props.report.ret_leasing_enablement),
+      color: "#867ffe"
+    };
+
+    const marketIntelligence = {
+      category: "Market Intelligence",
+      investment: Number(this.props.report.ret_market_intelligence),
+      color: "#675efc"
+    };
+
+    // all categories
+    const categories = [
+      reputationBuilding,
+      demandCreation,
+      leasingEnablement,
+      marketIntelligence
     ];
 
     // drop any category with $0 investment and return
@@ -245,24 +277,24 @@ class Report extends Component {
                 name="Leased"
                 value={formatPercent(r.leased_rate)}
                 detail1={`${r.leased_units} Executed Leases (Out
-                          of ${r.leasable_units})`}
+                          of ${r.occupiable_units})`}
                 detail2={`Target: ${formatPercent(r.target_lease_percent)}`}
               />
             </div>
             <div className="w-1/3 m-2">
               <PrimaryValueBox
                 name="Retention"
-                value={`XX%`}
+                value={`TODO%`}
                 detail1={`X of Y Resident Decisions (Out of total leases)"`}
-                detail2={`Target: XX%"`}
+                detail2={`Target: TODO%"`}
               />
             </div>
             <div className="w-1/3 m-2">
               <PrimaryValueBox
                 name="Occupied"
-                value={`XX`}
-                detail1={`X Occupied Units (Out of ${r.leasable_units})`}
-                detail2={`Target: XX%`}
+                value={`TODO`}
+                detail1={`X Occupied Units (Out of ${r.occupiable_units})`}
+                detail2={`Target: TODO%`}
               />
             </div>
           </div>
@@ -273,18 +305,18 @@ class Report extends Component {
               <SecondaryValueBox
                 name="Lease Applications"
                 value={r.lease_applications}
-                goal={r.lease_applications_goal}
+                goal={r.target_lease_applications}
               />
             </div>
             <div className="w-1/3 m-2">
               <SecondaryValueBox
                 name="Notices to Renew"
-                value={formatPercent(r.leases_renewed)}
-                goal={formatPercent(r.leases_renewed_goal)}
+                value={formatPercent(r.lease_renewals)}
+                goal={formatPercent(r.target_lease_renewals)}
               />
             </div>
             <div className="w-1/3 m-2">
-              <SecondaryValueBox name="Move Ins" value={`XX`} goal={`XX`} />
+              <SecondaryValueBox name="Move Ins" value={`TODO`} goal={`TODO`} />
             </div>
           </div>
           <div className="flex flex-row flex-grow items-stretch">
@@ -292,19 +324,23 @@ class Report extends Component {
             <div className="w-1/3 m-2">
               <SecondaryValueBox
                 name="Cancellations & Denials"
-                value={`XX`}
-                goal={`XX`}
+                value={`TODO`}
+                goal={`TODO`}
               />
             </div>
             <div className="w-1/3 m-2">
               <SecondaryValueBox
                 name="Notices to Vacate"
                 value={r.leases_ended}
-                goal={r.leases_ended_goal}
+                goal={`TODO -- is there even a target_leases_ended field?`}
               />
             </div>
             <div className="w-1/3 m-2">
-              <SecondaryValueBox name="Move Outs" value={`XX`} goal={`XX`} />
+              <SecondaryValueBox
+                name="Move Outs"
+                value={`TODO`}
+                goal={`TODO`}
+              />
             </div>
           </div>
         </ReportSection>
@@ -315,26 +351,24 @@ class Report extends Component {
             <div className="w-1/3 m-2">
               <PrimaryValueBox
                 name="Campaign Investment"
-                value={formatCurrencyShorthand(r.marketing_investment)}
+                value={formatCurrencyShorthand(r.investment)}
                 detail1={`Target: ${formatCurrencyShorthand(
-                  r.marketing_investment_goal
+                  r.target_investment
                 )}`}
               />
             </div>
             <div className="w-1/3 m-2">
               <PrimaryValueBox
                 name="Est. Revenue Change"
-                value={formatCurrencyShorthand(
-                  r.estimated_annual_revenue_change
-                )}
-                detail1={`Target: $XXk`}
+                value={formatCurrencyShorthand(r.estimated_revenue_gain)}
+                detail1={`Target: $TODOk`}
               />
             </div>
             <div className="w-1/3 m-2">
               <PrimaryValueBox
                 name="Campaign Return on Marketing Investment (ROMI)"
-                value={`${r.return_on_marketing_investment}X`}
-                detail1={`Target: XXX`}
+                value={`${r.romi}X`}
+                detail1={`Target: TODO`}
               />
             </div>
           </div>
@@ -345,37 +379,35 @@ class Report extends Component {
             <ReportSection name="Acquisition" bottomBoundary={true}>
               <SecondaryValueBox
                 name="Leased Unit Change"
-                value={r.net_lease_change}
-                goal={r.net_lease_change_goal}
+                value={r.delta_leases}
+                goal={r.target_delta_leases}
               />
               <SecondaryValueBox
                 name="Acquisition Investment"
-                value="XX"
-                goal="XX"
+                value="TODO"
+                goal="TODO"
               />
               <SecondaryValueBox
                 name="Est. Acquired Leasing Revenue"
-                value={formatCurrencyShorthand(
-                  r.estimated_annual_revenue_change
-                )}
+                value={formatCurrencyShorthand(r.estimated_acq_revenue_gain)}
                 goal={formatCurrencyShorthand(
-                  r.estimated_annual_revenue_change_goal
+                  r.target_estimated_acq_revenue_gain
                 )}
               />
               <SecondaryValueBox
                 name="Acquisition ROMI"
-                value={`${r.return_on_marketing_investment}x`}
-                goal={`${r.return_on_marketing_investment_goal}x`}
+                value={`${r.acq_romi}x`}
+                goal={`${r.target_acq_romi}x`}
               />
             </ReportSection>
             <ReportSection
               name="Acquisition Investment Allocations"
               bottomBoundary={true}
             >
-              TODO: acquisition/retention split, fix styling
+              TODO: fix styling
               <VictoryChart>
                 <VictoryBar
-                  data={this.getInvestmentData()}
+                  data={this.getAcquisitionInvestmentData()}
                   x="category"
                   y="investment"
                   style={{
@@ -398,20 +430,26 @@ class Report extends Component {
             <ReportSection name="Retention" bottomBoundary={true}>
               <SecondaryValueBox
                 name="Lease Renewals"
-                value={r.leases_renewed}
-                goal={r.leases_renewed_goal}
+                value={r.lease_renewals}
+                goal={r.target_lease_renewals}
               />
               <SecondaryValueBox
                 name="Retention Investment"
-                value="XX"
-                goal="XX"
+                value={formatCurrencyShorthand(r.ret_investment)}
+                goal={`Target: ${formatCurrencyShorthand(
+                  r.target_ret_investment
+                )}`}
               />
               <SecondaryValueBox
                 name="Est. Retained Leasing Revenue"
-                value="XX"
-                goal="XX"
+                value={formatCurrencyShorthand(r.estimated_ret_revenue_gain)}
+                goal="TODO"
               />
-              <SecondaryValueBox name="Retention ROMI" value="XX" goal="XX" />
+              <SecondaryValueBox
+                name="Retention ROMI"
+                value="TODO"
+                goal="TODO"
+              />
             </ReportSection>
             <ReportSection
               name="Retention Investment Allocations"
@@ -419,7 +457,7 @@ class Report extends Component {
             >
               <VictoryChart>
                 <VictoryBar
-                  data={this.getInvestmentData()}
+                  data={this.getRetentionInvestmentData()}
                   x="category"
                   y="investment"
                   style={{
@@ -445,22 +483,22 @@ class Report extends Component {
             <div className="w-1/3 m-2">
               <PrimaryValueBox
                 name="USV > EXE"
-                value={`XX%`}
-                detail1={`Target: XX%`}
+                value={`TODO%`}
+                detail1={`Target: TODO%`}
               />
             </div>
             <div className="w-1/3 m-2">
               <PrimaryValueBox
                 name="Cancellation & Denial Rate"
-                value={`XX%`}
-                detail1={`Target: XX%`}
+                value={`TODO%`}
+                detail1={`Target: TODO%`}
               />
             </div>
             <div className="w-1/3 m-2">
               <PrimaryValueBox
                 name="Cost Per EXE / Lowest Monthly Rent"
-                value={`XX%`}
-                detail1={`Target: XX%`}
+                value={`TODO%`}
+                detail1={`Target: TODO%`}
               />
             </div>
           </div>
@@ -503,76 +541,76 @@ class Report extends Component {
                 <FunnelValueBox
                   name="Volume of USV"
                   value={r.usvs}
-                  goal={r.usvs_goal}
+                  goal={r.target_usvs}
                 />
                 <FunnelValueBox
                   name="Volume of INQ"
                   value={r.inquiries}
-                  goal={r.inquiries_goal}
+                  goal={r.target_inquiries}
                 />
                 <FunnelValueBox
                   name="Volume of TOU"
                   value={r.tours}
-                  goal={r.tours_goal}
+                  goal={r.target_tours}
                 />
                 <FunnelValueBox
                   name="Volume of APP"
                   value={r.lease_applications}
-                  goal={r.lease_applications_goal}
+                  goal={r.target_lease_applications}
                 />
                 <FunnelValueBox
                   name="Volume of EXE"
                   value={r.leases_executed}
-                  goal={r.leases_executed_goal}
+                  goal={r.target_leases_executed}
                 />
               </div>
               <div className="w-1/3 flex flex-col">
                 <FunnelValueBoxPercentage
                   name="USV > INQ"
-                  value={r.usvs_to_inquiries_percent}
-                  goal={r.usvs_to_inquiries_percent_goal}
+                  value={r.usv_inq_perc}
+                  goal={r.target_usv_inq_perc}
                 />
                 <FunnelValueBoxPercentage
                   name="INQ > TOU"
-                  value={r.inquiries_to_tours_percent}
-                  goal={r.inquiries_to_tours_percent_goal}
+                  value={r.inq_tou_perc}
+                  goal={r.target_inq_tou_perc}
                 />
                 <FunnelValueBoxPercentage
                   name="TOU > APP"
-                  value={r.tours_to_lease_applications_percent}
-                  goal={r.tours_to_lease_applications_percent_goal}
+                  value={r.tou_app_perc}
+                  goal={r.target_tou_app_perc}
                 />
                 <FunnelValueBoxPercentage
                   name="APP > EXE"
-                  value={r.lease_applications_to_leases_executed_percent}
-                  goal={r.lease_applications_to_leases_executed_percent_goal}
+                  value={r.app_exe_perc}
+                  goal={r.target_app_exe_perc}
                 />
               </div>
               <div className="w-1/3 flex flex-col">
                 <FunnelValueBoxDollars
                   name="Cost per USV"
                   value={r.cost_per_usv}
-                  goal="XX"
+                  goal="TODO"
                 />
                 <FunnelValueBoxDollars
                   name="Cost per INQ"
-                  value={r.cost_per_inquiry}
-                  goal="XX"
+                  value={r.cost_per_inq}
+                  goal="TODO"
                 />
                 <FunnelValueBoxDollars
                   name="Cost per TOU"
-                  value={r.cost_per_tour}
-                  goal="XX"
+                  value={r.cost_per_tou}
+                  goal="TODO"
                 />
                 <FunnelValueBoxDollars
                   name="Cost per APP"
-                  value={r.cost_per_lease_application}
-                  goal="XX"
+                  value={r.cost_per_app}
+                  goal="TODO"
                 />
                 <FunnelValueBoxDollars
                   name="Cost per EXE"
-                  value={r.cost_per_lease_execution}
-                  goal="XX"
+                  value={r.cost_per_exe}
+                  goal="TODO"
                 />
               </div>
             </div>
