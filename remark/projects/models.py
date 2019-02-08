@@ -3,7 +3,7 @@ import decimal
 from django.db import models
 
 from remark.lib.tokens import public_id
-from remark.lib.metrics import Behavior, ModelPeriod, ModelPeriodSet
+from remark.lib.metrics import Metric, Behavior, ModelPeriod, ModelPeriodSet
 
 
 def pro_public_id():
@@ -84,47 +84,47 @@ class Period(ModelPeriod, models.Model):
     leased_units_start = models.IntegerField(
         default=0, help_text="Number of leased units at period start"
     )
-    leased_units_start.behavior = Behavior.POINT_IN_TIME_EARLIEST_KEEP
+    leased_units_start.metric = Metric(Behavior.POINT_IN_TIME_EARLIEST_KEEP)
 
     leases_ended = models.IntegerField(
         default=0, help_text="Number of leases ended (roughly: move outs)"
     )
-    leases_ended.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    leases_ended.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     lease_applications = models.IntegerField(
         default=0, help_text="Number of lease applications"
     )
-    lease_applications.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    lease_applications.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     leases_executed = models.IntegerField(
         default=0, help_text="Number of new leases executed"
     )
-    leases_executed.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    leases_executed.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     lease_cds = models.IntegerField(
         default=0, help_text="Number of lease cancellations and denials"
     )
-    lease_cds.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    lease_cds.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     leases_due_to_expire = models.IntegerField(
         default=0, help_text="Number of leases due to expire in period"
     )
-    leases_due_to_expire = Behavior.INTERVAL_SUM_AMORTIZE
+    leases_due_to_expire.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     lease_renewal_notices = models.IntegerField(
         default=0, help_text="Number of lease renewals signed"
     )
-    lease_renewal_notices.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    lease_renewal_notices.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     lease_renewals = models.IntegerField(
         default=0, help_text="Number of lease renewals that took effect"
     )
-    lease_renewals.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    lease_renewals.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     lease_vacation_notices = models.IntegerField(
         default=0, help_text="Number of notices to vacate leases"
     )
-    lease_vacation_notices.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    lease_vacation_notices.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     # ------------------------------------------------------
     # TARGETS: logical activity (lease)
@@ -138,37 +138,37 @@ class Period(ModelPeriod, models.Model):
         decimal_places=3,
         help_text="Target: lease percentage (like 0.9)",
     )
-    target_lease_percent.behavior = Behavior.INTERVAL_AVERAGE_KEEP
+    target_lease_percent.metric = Metric(Behavior.INTERVAL_AVERAGE_KEEP)
 
     target_lease_applications = models.IntegerField(
         null=True, blank=True, default=None, help_text="Target: lease applications"
     )
-    target_lease_applications.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    target_lease_applications.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     target_leases_executed = models.IntegerField(
         null=True, blank=True, default=None, help_text="Target: leases execfuted"
     )
-    target_leases_executed.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    target_leases_executed.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     target_lease_renewal_notices = models.IntegerField(
         null=True, blank=True, default=None, help_text="Target: lease renewal notices"
     )
-    target_lease_renewal_notices.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    target_lease_renewal_notices.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     target_lease_renewals = models.IntegerField(
         null=True, blank=True, default=None, help_text="Target: lease renewals"
     )
-    target_lease_renewals.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    target_lease_renewals.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     target_lease_vacation_notices = models.IntegerField(
         null=True, blank=True, default=None, help_text="Target: lease vacation notices"
     )
-    target_lease_vacation_notices.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    target_lease_vacation_notices.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     target_delta_leases = models.IntegerField(
         null=True, blank=True, default=None, help_text="Target: delta: leases"
     )
-    target_delta_leases.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    target_delta_leases.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     # ------------------------------------------------------
     # Physical activity (occupancy)
@@ -178,18 +178,18 @@ class Period(ModelPeriod, models.Model):
         default=0,
         help_text="Number of units that can possibly be occupied at period end",
     )
-    occupiable_units.behavior = Behavior.POINT_IN_TIME_LATEST_KEEP
+    occupiable_units.metric = Metric(Behavior.POINT_IN_TIME_LATEST_KEEP)
 
     occupied_units_start = models.IntegerField(
         default=0, help_text="Number of units occupied at period start"
     )
-    occupied_units_start.behavior = Behavior.POINT_IN_TIME_EARLIEST_KEEP
+    occupied_units_start.metric = Metric(Behavior.POINT_IN_TIME_EARLIEST_KEEP)
 
     move_ins = models.IntegerField(default=0, help_text="Number of units moved into")
-    move_ins.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    move_ins.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     move_outs = models.IntegerField(default=0, help_text="Number of units moved out of")
-    move_outs.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    move_outs.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     # ------------------------------------------------------
     # TARGETS: Physical activity (occupancy)
@@ -198,12 +198,12 @@ class Period(ModelPeriod, models.Model):
     target_move_ins = models.IntegerField(
         null=True, blank=True, default=None, help_text="Target: move ins"
     )
-    target_move_ins.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    target_move_ins.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     target_move_outs = models.IntegerField(
         null=True, blank=True, default=None, help_text="Target: move outs"
     )
-    target_move_outs.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    target_move_outs.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     # ------------------------------------------------------
     # Acquisition Investment
@@ -215,7 +215,7 @@ class Period(ModelPeriod, models.Model):
         decimal_places=2,
         help_text="Amount invested in acquisition reputation building",
     )
-    acq_reputation_building.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    acq_reputation_building.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     acq_demand_creation = models.DecimalField(
         default=decimal.Decimal(0),
@@ -223,7 +223,7 @@ class Period(ModelPeriod, models.Model):
         decimal_places=2,
         help_text="Amount invested in acquisition demand creation",
     )
-    acq_demand_creation.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    acq_demand_creation.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     acq_leasing_enablement = models.DecimalField(
         default=decimal.Decimal(0),
@@ -231,7 +231,7 @@ class Period(ModelPeriod, models.Model):
         decimal_places=2,
         help_text="Amount invested in acquisition leasing enablement",
     )
-    acq_leasing_enablement.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    acq_leasing_enablement.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     acq_market_intelligence = models.DecimalField(
         default=decimal.Decimal(0),
@@ -239,7 +239,7 @@ class Period(ModelPeriod, models.Model):
         decimal_places=2,
         help_text="Amount invested in acquisition market intelligence",
     )
-    acq_market_intelligence.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    acq_market_intelligence.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     # XXX This number is a mess. It requires clarification about timeframes. -Dave
     monthly_average_rent = models.DecimalField(
@@ -248,7 +248,7 @@ class Period(ModelPeriod, models.Model):
         default=decimal.Decimal(1),
         help_text="Average rent tenants pay in the month including this period",
     )
-    monthly_average_rent.behavior = Behavior.POINT_IN_TIME_EARLIEST_KEEP
+    monthly_average_rent.metric = Metric(Behavior.POINT_IN_TIME_EARLIEST_KEEP)
 
     # ------------------------------------------------------
     # TARGETS: Acquisition Investment
@@ -261,7 +261,7 @@ class Period(ModelPeriod, models.Model):
         decimal_places=2,
         help_text="Target: total acquisition investment",
     )
-    target_acq_investment.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    target_acq_investment.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     # ------------------------------------------------------
     # Retention Investment
@@ -273,7 +273,7 @@ class Period(ModelPeriod, models.Model):
         decimal_places=2,
         help_text="Amount invested in retention reputation building",
     )
-    ret_reputation_building.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    ret_reputation_building.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     ret_demand_creation = models.DecimalField(
         default=decimal.Decimal(0),
@@ -281,7 +281,7 @@ class Period(ModelPeriod, models.Model):
         decimal_places=2,
         help_text="Amount invested in retention demand creation",
     )
-    ret_demand_creation.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    ret_demand_creation.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     ret_leasing_enablement = models.DecimalField(
         default=decimal.Decimal(0),
@@ -289,7 +289,7 @@ class Period(ModelPeriod, models.Model):
         decimal_places=2,
         help_text="Amount invested in retention leasing enablement",
     )
-    ret_leasing_enablement.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    ret_leasing_enablement.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     ret_market_intelligence = models.DecimalField(
         default=decimal.Decimal(0),
@@ -297,7 +297,7 @@ class Period(ModelPeriod, models.Model):
         decimal_places=2,
         help_text="Amount invested in retention market intelligence",
     )
-    ret_market_intelligence.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    ret_market_intelligence.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     # ------------------------------------------------------
     # TARGETS: Retention Investment
@@ -310,7 +310,7 @@ class Period(ModelPeriod, models.Model):
         decimal_places=2,
         help_text="Target: total retention investment",
     )
-    target_acq_investment.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    target_acq_investment.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     # ------------------------------------------------------
     # Acquisition Funnel
@@ -319,17 +319,17 @@ class Period(ModelPeriod, models.Model):
     usvs = models.IntegerField(
         default=0, help_text="The number of unique site visitors during this period."
     )
-    usvs.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    usvs.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     inquiries = models.IntegerField(
         default=0, help_text="The number of site inquiries during this period."
     )
-    inquiries.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    inquiries.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     tours = models.IntegerField(
         default=0, help_text="The number of tours during this period."
     )
-    tours.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    tours.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     # ------------------------------------------------------
     # TARGETS: Acquisition Funnel
@@ -338,17 +338,17 @@ class Period(ModelPeriod, models.Model):
     target_usvs = models.IntegerField(
         null=True, blank=True, default=None, help_text="Target: USVs"
     )
-    target_usvs.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    target_usvs.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     target_inquiries = models.IntegerField(
         null=True, blank=True, default=None, help_text="Target: INQs"
     )
-    target_inquiries.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    target_inquiries.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     target_tours = models.IntegerField(
         null=True, blank=True, default=None, help_text="Target: tours"
     )
-    target_tours.behavior = Behavior.INTERVAL_SUM_AMORTIZE
+    target_tours.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     # ------------------------------------------------------
     # Meta, etc.

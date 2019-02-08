@@ -1,6 +1,6 @@
 import decimal
 
-from remark.lib.computed import computed_property, ComputedPropertyMixin
+from remark.lib.computed import computed_value, ComputedValueMixin
 from remark.lib.math import (
     sum_or_0,
     sum_or_none,
@@ -15,7 +15,7 @@ from remark.lib.math import (
 )
 
 
-class ComputedPeriod(ComputedPropertyMixin):
+class ComputedPeriod(ComputedValueMixin):
     """
     Implements all computed properties for a single project Period.
 
@@ -33,22 +33,22 @@ class ComputedPeriod(ComputedPropertyMixin):
     # Logical activity (lease)
     # ------------------------------------------------------
 
-    @computed_property
+    @computed_value
     def leased_unit_change(self):
         """The net number of new leases obtained during the period."""
         return self.leases_executed - self.leases_ended
 
-    @computed_property
+    @computed_value
     def leased_units(self):
         """The total number of leases in effect at the end of the period."""
         return self.leased_units_start + self.leased_unit_change
 
-    @computed_property
+    @computed_value
     def leased_rate(self):
         """The percentage of leasable units that are actually leased at end of period."""
         return d_quant_perc(d_div_or_0(self.leased_units, self.occupiable_units))
 
-    @computed_property
+    @computed_value
     def renewal_rate(self):
         """The percentage of lease renewals as a total of leases due to expire."""
         # XXX I'm utterly unconvinced that this is a sensible metric, but it is
@@ -57,7 +57,7 @@ class ComputedPeriod(ComputedPropertyMixin):
             d_div_or_0(self.lease_renewal_notices, self.leases_due_to_expire)
         )
 
-    @computed_property
+    @computed_value
     def lease_cd_rate(self):
         """The percentage of lease cancellations as a total of lease applications."""
         # XXX this also seems like a nonsense number to me. -Dave
@@ -67,7 +67,7 @@ class ComputedPeriod(ComputedPropertyMixin):
     # TARGETS: Logical activity (lease)
     # ------------------------------------------------------
 
-    @computed_property
+    @computed_value
     def target_leased_units(self):
         """The target number of leased units we'd like to achieve."""
         return d_quant(
@@ -80,12 +80,12 @@ class ComputedPeriod(ComputedPropertyMixin):
     # Physical activity (occupancy)
     # ------------------------------------------------------
 
-    @computed_property
+    @computed_value
     def occupied_units(self):
         """The total occupancy in effect at the end of the period."""
         return self.occupied_units_start + self.move_ins - self.move_outs
 
-    @computed_property
+    @computed_value
     def occupancy_rate(self):
         """The percentage of occupiable units that are actually occupied at end of period."""
         return d_quant_perc(d_div_or_0(self.occupied_units, self.occupiable_units))
@@ -100,7 +100,7 @@ class ComputedPeriod(ComputedPropertyMixin):
     # Investment
     # ------------------------------------------------------
 
-    @computed_property
+    @computed_value
     def acq_investment(self):
         """The total acqusition investment (in dollars)."""
         return (
@@ -110,7 +110,7 @@ class ComputedPeriod(ComputedPropertyMixin):
             + self.acq_market_intelligence
         )
 
-    @computed_property
+    @computed_value
     def ret_investment(self):
         """The total retention investment (in dollars)."""
         return (
@@ -120,12 +120,12 @@ class ComputedPeriod(ComputedPropertyMixin):
             + self.ret_market_intelligence
         )
 
-    @computed_property
+    @computed_value
     def investment(self):
         """The total investment (in dollars)."""
         return self.acq_investment + self.ret_investment
 
-    @computed_property
+    @computed_value
     def estimated_acq_revenue_gain(self):
         """
         Return an estimate of how much new annualk revenue will be obtained on the 
@@ -133,7 +133,7 @@ class ComputedPeriod(ComputedPropertyMixin):
         """
         return self.leased_unit_change * self.monthly_average_rent * 12
 
-    @computed_property
+    @computed_value
     def estimated_ret_revenue_gain(self):
         """
         Return an estimate of how much new annual revenue will be obtained on the 
@@ -141,7 +141,7 @@ class ComputedPeriod(ComputedPropertyMixin):
         """
         return self.lease_renewals * self.monthly_average_rent * 12
 
-    @computed_property
+    @computed_value
     def acq_romi(self):
         """
         Return an estimate of how effective acquisition spend is, as a rough
@@ -151,7 +151,7 @@ class ComputedPeriod(ComputedPropertyMixin):
         """
         return round(d_div_or_0(self.estimated_acq_revenue_gain, self.acq_investment))
 
-    @computed_property
+    @computed_value
     def ret_romi(self):
         """
         Return an estimate of how effective retention spend is, as a rough
@@ -161,7 +161,7 @@ class ComputedPeriod(ComputedPropertyMixin):
         """
         return round(d_div_or_0(self.estimated_ret_revenue_gain, self.ret_investment))
 
-    @computed_property
+    @computed_value
     def romi(self):
         """
         Return an estimate of how effective marketing spend is, as a rough
@@ -176,22 +176,22 @@ class ComputedPeriod(ComputedPropertyMixin):
     # TARGETS: Investment
     # ------------------------------------------------------
 
-    @computed_property
+    @computed_value
     def target_investment(self):
         """The target total investment (in dollars)."""
         return sum_or_none(self.target_acq_investment, self.target_ret_investment)
 
-    @computed_property
+    @computed_value
     def target_estimated_acq_revenue_gain(self):
         """The target estimated acquisition leasing revenue gain."""
         return mult_or_none(self.target_delta_leases, self.monthly_average_rent, 12)
 
-    @computed_property
+    @computed_value
     def target_estimated_ret_revenue_gain(self):
         """The target estimated ret leasing revenue gain."""
         return mult_or_none(self.target_lease_renewals, self.monthly_average_rent, 12)
 
-    @computed_property
+    @computed_value
     def target_acq_romi(self):
         """The target acquisition ROMI"""
         d_target = d_div_or_none(
@@ -199,7 +199,7 @@ class ComputedPeriod(ComputedPropertyMixin):
         )
         return round_or_none(d_target)
 
-    @computed_property
+    @computed_value
     def target_ret_romi(self):
         """The target retention ROMI"""
         d_target = d_div_or_none(
@@ -207,7 +207,7 @@ class ComputedPeriod(ComputedPropertyMixin):
         )
         return round_or_none(d_target)
 
-    @computed_property
+    @computed_value
     def target_romi(self):
         """The overall target ROMI"""
         total_target_romi = sum_or_none(self.target_acq_romi, self.target_ret_romi)
@@ -218,27 +218,27 @@ class ComputedPeriod(ComputedPropertyMixin):
     # Acquisition Funnel
     # ------------------------------------------------------
 
-    @computed_property
+    @computed_value
     def usv_inq_perc(self):
         """The conversation rate from usvs to inquiries."""
         return d_quant_perc(d_div_or_0(self.inquiries, self.usvs))
 
-    @computed_property
+    @computed_value
     def inq_tou_perc(self):
         """The conversion rate from inquiries to tours."""
         return d_quant_perc(d_div_or_0(self.tours, self.inquiries))
 
-    @computed_property
+    @computed_value
     def tou_app_perc(self):
         """The conversion rate from tours to lease applications."""
         return d_quant_perc(d_div_or_0(self.lease_applications, self.tours))
 
-    @computed_property
+    @computed_value
     def app_exe_perc(self):
         """The conversion rate from lease applications to executions."""
         return d_quant_perc(d_div_or_0(self.leases_executed, self.lease_applications))
 
-    @computed_property
+    @computed_value
     def usv_exe_perc(self):
         """The conversation rate from usvs to lease executions."""
         return d_quant_perc(d_div_or_0(self.leases_executed, self.usvs))
@@ -247,31 +247,31 @@ class ComputedPeriod(ComputedPropertyMixin):
     # TARGETS: Acquisition Funnel
     # ------------------------------------------------------
 
-    @computed_property
+    @computed_value
     def target_usv_inq_perc(self):
         """The conversation rate from usvs to inquiries."""
         return d_quant_perc(d_div_or_none(self.target_inquiries, self.target_usvs))
 
-    @computed_property
+    @computed_value
     def target_inq_tou_perc(self):
         """The conversion rate from inquiries to tours."""
         return d_quant_perc(d_div_or_none(self.target_tours, self.target_inquiries))
 
-    @computed_property
+    @computed_value
     def target_tou_app_perc(self):
         """The conversion rate from tours to lease applications."""
         return d_quant_perc(
             d_div_or_none(self.target_lease_applications, self.target_tours)
         )
 
-    @computed_property
+    @computed_value
     def target_app_exe_perc(self):
         """The conversion rate from lease applications to executions."""
         return d_quant_perc(
             d_div_or_none(self.target_leases_executed, self.target_lease_applications)
         )
 
-    @computed_property
+    @computed_value
     def target_usv_exe_perc(self):
         """The conversation rate from usvs to lease executions."""
         return d_quant_perc(
@@ -282,29 +282,29 @@ class ComputedPeriod(ComputedPropertyMixin):
     # Funnel Costs
     # ------------------------------------------------------
 
-    @computed_property
+    @computed_value
     def cost_per_usv(self):
         """Return the estimated cost to obtain a unique site visitor in this period."""
         return d_quant_currency(d_div_or_0(self.acq_investment, self.usvs))
 
-    @computed_property
+    @computed_value
     def cost_per_inq(self):
         """Return the estimated cost to obtain an inbound inquiry in this period."""
         return d_quant_currency(d_div_or_0(self.acq_investment, self.inquiries))
 
-    @computed_property
+    @computed_value
     def cost_per_tou(self):
         """Return the estimated cost to obtain an inbound tour in this period."""
         return d_quant_currency(d_div_or_0(self.acq_investment, self.tours))
 
-    @computed_property
+    @computed_value
     def cost_per_app(self):
         """Return the estimated cost to obtain a lease application in this period."""
         return d_quant_currency(
             d_div_or_0(self.acq_investment, self.lease_applications)
         )
 
-    @computed_property
+    @computed_value
     def cost_per_exe(self):
         """Return the estimated cost to obtain a lease execution in this period."""
         return d_quant_currency(d_div_or_0(self.acq_investment, self.leases_executed))
@@ -313,35 +313,35 @@ class ComputedPeriod(ComputedPropertyMixin):
     # TARGETS: Funnel Costs
     # ------------------------------------------------------
 
-    @computed_property
+    @computed_value
     def target_cost_per_usv(self):
         """Return the target cost to obtain a unique site visitor in this period."""
         return d_quant_currency(
             d_div_or_none(self.target_acq_investment, self.target_usvs)
         )
 
-    @computed_property
+    @computed_value
     def target_cost_per_inq(self):
         """Return the estimated cost to obtain an inbound inquiry in this period."""
         return d_quant_currency(
             d_div_or_none(self.target_acq_investment, self.target_inquiries)
         )
 
-    @computed_property
+    @computed_value
     def target_cost_per_tou(self):
         """Return the estimated cost to obtain an inbound tour in this period."""
         return d_quant_currency(
             d_div_or_none(self.target_acq_investment, self.target_tours)
         )
 
-    @computed_property
+    @computed_value
     def target_cost_per_app(self):
         """Return the estimated cost to obtain a lease application in this period."""
         return d_quant_currency(
             d_div_or_none(self.target_acq_investment, self.target_lease_applications)
         )
 
-    @computed_property
+    @computed_value
     def target_cost_per_exe(self):
         """Return the estimated cost to obtain a lease execution in this period."""
         return d_quant_currency(
@@ -371,13 +371,13 @@ class ComputedPeriod(ComputedPropertyMixin):
     def get_end(self):
         return self.period.get_end()
 
-    def get_raw_values(self):
+    def get_values(self):
         """
         Return a mapping from metric names to (lowercase) values.
         """
-        underlying_raw_values = self.period.get_raw_values()
-        computed_raw_values = self.get_computed_properties()
-        return dict(**underlying_raw_values, **computed_raw_values)
+        underlying_values = self.period.get_values()
+        computed_values = self.get_computed_values()
+        return dict(**underlying_values, **computed_values)
 
 
 class PeriodDelta:
@@ -409,25 +409,25 @@ class PeriodDelta:
     def get_rhs_end(self):
         return self.rhs.get_end()
 
-    def _build_raw_values(self):
+    def _build_values(self):
         """
         Return a mapping from delta metric names to (lowercase) delta values.
         """
-        lhs_raw_values = self.lhs.get_raw_values()
-        rhs_raw_values = self.rhs.get_raw_values()
-        names = set(lhs_raw_values.keys()) & set(rhs_raw_values.keys())
-        self._raw_values = {
-            f"delta_{name}": sub_or_none(lhs_raw_values[name], rhs_raw_values[name])
+        lhs_values = self.lhs.get_values()
+        rhs_values = self.rhs.get_values()
+        names = set(lhs_values.keys()) & set(rhs_values.keys())
+        self._values = {
+            f"delta_{name}": sub_or_none(lhs_values[name], rhs_values[name])
             for name in names
         }
 
-    def _ensure_raw_values(self):
-        if not hasattr(self, "_raw_values"):
-            self._build_raw_values()
+    def _ensure_values(self):
+        if not hasattr(self, "_values"):
+            self._build_values()
 
-    def get_raw_values(self):
-        self._ensure_raw_values()
-        return dict(self._raw_values)
+    def get_values(self):
+        self._ensure_values()
+        return dict(self._values)
 
 
 class Report:
@@ -443,7 +443,7 @@ class Report:
         return dict(
             start=self.period.start,
             end=self.period.end,
-            **self.period.get_raw_values(),
-            **self.delta.get_raw_values(),
+            **self.period.get_values(),
+            **self.delta.get_values(),
         )
 
