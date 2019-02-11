@@ -18,6 +18,17 @@ import {
   formatDate
 } from "../utils/formatters";
 
+//
+// TODO
+//
+// At this point, I think we're far enough along that we could break this out
+// into a bunch of files and arrive at a happier place.
+//
+// Some of these top-level components, and even some of their subcomponents,
+// are probably pretty generic; others really are specific to the progress
+// report. -Dave
+//
+
 /**
  * @description Wrap a value formatter to properly format "Target: " strings.
  *
@@ -169,7 +180,7 @@ const withFormatter = (WrappedComponent, formatter) => {
   };
 };
 
-// Define LargeBoxLayoutes that take values and targets of various types.
+// Define LargeBoxLayouts that take values and targets of various types.
 const LargeMultipleBox = withFormatter(LargeBoxLayout, formatMultiple);
 const LargePercentBox = withFormatter(LargeBoxLayout, formatPercent);
 const LargeNumberBox = withFormatter(LargeBoxLayout, formatNumber);
@@ -180,7 +191,7 @@ const LargeCurrencyShorthandBox = withFormatter(
 );
 const LargeDateBox = withFormatter(LargeBoxLayout, formatDate);
 
-// Define SmallBoxLayoutes that take values and targets of various types.
+// Define SmallBoxLayouts that take values and targets of various types.
 const SmallMultipleBox = withFormatter(SmallBoxLayout, formatMultiple);
 const SmallPercentBox = withFormatter(SmallBoxLayout, formatPercent);
 const SmallNumberBox = withFormatter(SmallBoxLayout, formatNumber);
@@ -191,7 +202,7 @@ const SmallCurrencyShorthandBox = withFormatter(
 );
 const SmallDateBox = withFormatter(SmallBoxLayout, formatDate);
 
-// Define FunnelBoxLayoutes that take values and targets of various types.
+// Define FunnelBoxLayouts that take values and targets of various types.
 const FunnelMultipleBox = withFormatter(FunnelBoxLayout, formatMultiple);
 const FunnelPercentBox = withFormatter(FunnelBoxLayout, formatPercent);
 const FunnelNumberBox = withFormatter(FunnelBoxLayout, formatNumber);
@@ -652,157 +663,190 @@ class CampaignInvestmentReport extends Component {
  * @classdesc Render the acquisition funnel table
  */
 class AcquisitionFunnelReport extends Component {
+  /**
+   * @name AcquisitionFunnelReport.HeadlineNumbers
+   * @description Component that renders headline acquisition funnel numbers
+   */
+  static HeadlineNumbers = props => {
+    const r = props.report;
+
+    return (
+      <BoxRow>
+        <LargePercentBox
+          name="USV > EXE"
+          value={r.usv_exe_perc}
+          target={r.target_usv_exe_perc}
+        />
+        <LargePercentBox
+          name="Cancellation & Denial Rate"
+          value={r.lease_cd_rate}
+          target={r.target_lease_cd_rate}
+        />
+        <LargePercentBox
+          name="Cost Per EXE / Average Monthly Rent"
+          value={r.cost_per_exe_vs_monthly_average_rent}
+          detail={r.target_cost_per_exe_vs_monthly_average_rent}
+        />
+      </BoxRow>
+    );
+  };
+
+  /**
+   * @name AcquisitionFunnelReport.FunnelTable
+   * @description Component that lays out the table header and content columns
+   */
+  static FunnelTable = props => {
+    return (
+      <div className="flex flex-row flex-grow items-stretch">
+        <div className="w-1/6">{props.header}</div>
+        <div className="w-5/6 flex flex-row flex-grow items-stretch">
+          {props.content}
+        </div>
+      </div>
+    );
+  };
+
+  static FunnelHeaderBox = props => {
+    return (
+      <div className="k-funnel-label">
+        <div className={`bg-remark-funnel-${props.number}`}>
+          <div>{props.name}</div>
+        </div>
+        <div className={`text-remark-funnel-${props.number + 1}`}>
+          {props.more ? "↓" : ""}
+        </div>
+      </div>
+    );
+  };
+
+  static FunnelHeader = props => {
+    return (
+      <StackedBox>
+        <AcquisitionFunnelReport.FunnelHeaderBox
+          number={1}
+          name="Unique Site Visitors (USV)"
+          more={true}
+        />
+        <AcquisitionFunnelReport.FunnelHeaderBox
+          number={2}
+          name="Inquiries (INQ)"
+          more={true}
+        />
+        <AcquisitionFunnelReport.FunnelHeaderBox
+          number={3}
+          name="Tours (TOU)"
+          more={true}
+        />
+        <AcquisitionFunnelReport.FunnelHeaderBox
+          number={4}
+          name="Lease Applications (APP)"
+          more={true}
+        />
+        <AcquisitionFunnelReport.FunnelHeaderBox
+          number={5}
+          name="Lease Executions (EXE)"
+          more={false}
+        />
+      </StackedBox>
+    );
+  };
+
+  static FunnelContent = props => {
+    const r = props.report;
+    return (
+      <BoxRow>
+        <StackedBox>
+          <FunnelNumberBox
+            name="Volume of USV"
+            value={r.usvs}
+            target={r.target_usvs}
+          />
+          <FunnelNumberBox
+            name="Volume of INQ"
+            value={r.inquiries}
+            target={r.target_inquiries}
+          />
+          <FunnelNumberBox
+            name="Volume of TOU"
+            value={r.tours}
+            target={r.target_tours}
+          />
+          <FunnelNumberBox
+            name="Volume of APP"
+            value={r.lease_applications}
+            target={r.target_lease_applications}
+          />
+          <FunnelNumberBox
+            name="Volume of EXE"
+            value={r.leases_executed}
+            target={r.target_leases_executed}
+          />
+        </StackedBox>
+
+        <StackedBox>
+          <FunnelPercentBox
+            name="USV > INQ"
+            value={r.usv_inq_perc}
+            target={r.target_usv_inq_perc}
+          />
+          <FunnelPercentBox
+            name="INQ > TOU"
+            value={r.inq_tou_perc}
+            target={r.target_inq_tou_perc}
+          />
+          <FunnelPercentBox
+            name="TOU > APP"
+            value={r.tou_app_perc}
+            target={r.target_tou_app_perc}
+          />
+          <FunnelPercentBox
+            name="APP > EXE"
+            value={r.app_exe_perc}
+            target={r.target_app_exe_perc}
+          />
+        </StackedBox>
+
+        <StackedBox>
+          <FunnelCurrencyBox
+            name="Cost per USV"
+            value={r.cost_per_usv}
+            target={r.target_cost_per_usv}
+          />
+          <FunnelCurrencyBox
+            name="Cost per INQ"
+            value={r.cost_per_inq}
+            target={r.target_cost_per_inq}
+          />
+          <FunnelCurrencyBox
+            name="Cost per TOU"
+            value={r.cost_per_tou}
+            target={r.target_cost_per_tou}
+          />
+          <FunnelCurrencyBox
+            name="Cost per APP"
+            value={r.cost_per_app}
+            target={r.target_cost_per_app}
+          />
+          <FunnelCurrencyBox
+            name="Cost per EXE"
+            value={r.cost_per_exe}
+            target={r.target_cost_per_exe}
+          />
+        </StackedBox>
+      </BoxRow>
+    );
+  };
+
   render() {
-    // TODO: this could really use some cleanup. -Dave
-    const r = this.props.report;
     return (
       <ReportSection name="Acquisition Funnel" bottomBoundary={true}>
-        {/* Headline numbers for the acquisition funnel. */}
-        <div className="flex flex-row flex-grow items-stretch">
-          <div className="w-1/3 m-2">
-            <LargePercentBox
-              name="USV > EXE"
-              value={r.usv_exe_perc}
-              target={r.target_usv_exe_perc}
-            />
-          </div>
-          <div className="w-1/3 m-2">
-            <LargePercentBox
-              name="Cancellation & Denial Rate"
-              value={r.lease_cd_rate}
-              target={r.target_lease_cd_rate}
-            />
-          </div>
-          <div className="w-1/3 m-2">
-            <LargePercentBox
-              name="Cost Per EXE / Average Monthly Rent"
-              value={r.cost_per_exe_vs_monthly_average_rent}
-              detail={r.target_cost_per_exe_vs_monthly_average_rent}
-            />
-          </div>
-        </div>
-
-        {/* Table: header column */}
-        <div className="flex flex-row flex-grow items-stretch">
-          <div className="w-1/6 flex flex-col">
-            <div className="k-funnel-label">
-              <div className="bg-remark-funnel-1">
-                <div>Unique Site Visitors (USV)</div>
-              </div>
-              <div className="text-remark-funnel-2">↓</div>
-            </div>
-            <div className="k-funnel-label">
-              <div className="bg-remark-funnel-2">
-                <div>Inquiries (INQ)</div>
-              </div>
-              <div className="text-remark-funnel-3">↓</div>
-            </div>
-            <div className="k-funnel-label">
-              <div className="bg-remark-funnel-3">
-                <div>Tours (TOU)</div>
-              </div>
-              <div className="text-remark-funnel-4">↓</div>
-            </div>
-            <div className="k-funnel-label">
-              <div className="bg-remark-funnel-4">
-                <div>Lease Applications (APP)</div>
-              </div>
-              <div className="text-remark-funnel-5">↓</div>
-            </div>
-            <div className="k-funnel-label">
-              <div className="bg-remark-funnel-5">
-                <div>Lease Executions (EXE)</div>
-              </div>
-              <div>&nbsp;</div>
-            </div>
-          </div>
-
-          {/* Table: container for all further columns */}
-          <div className="w-5/6 flex flex-row flex-grow items-stretch">
-            {/* Table: absolute numbers column */}
-            <div className="w-1/3 flex flex-col items">
-              <FunnelNumberBox
-                name="Volume of USV"
-                value={r.usvs}
-                target={r.target_usvs}
-              />
-              <FunnelNumberBox
-                name="Volume of INQ"
-                value={r.inquiries}
-                target={r.target_inquiries}
-              />
-              <FunnelNumberBox
-                name="Volume of TOU"
-                value={r.tours}
-                target={r.target_tours}
-              />
-              <FunnelNumberBox
-                name="Volume of APP"
-                value={r.lease_applications}
-                target={r.target_lease_applications}
-              />
-              <FunnelNumberBox
-                name="Volume of EXE"
-                value={r.leases_executed}
-                target={r.target_leases_executed}
-              />
-            </div>
-
-            {/* Table: percentages column */}
-
-            <div className="w-1/3 flex flex-col">
-              <FunnelPercentBox
-                name="USV > INQ"
-                value={r.usv_inq_perc}
-                target={r.target_usv_inq_perc}
-              />
-              <FunnelPercentBox
-                name="INQ > TOU"
-                value={r.inq_tou_perc}
-                target={r.target_inq_tou_perc}
-              />
-              <FunnelPercentBox
-                name="TOU > APP"
-                value={r.tou_app_perc}
-                target={r.target_tou_app_perc}
-              />
-              <FunnelPercentBox
-                name="APP > EXE"
-                value={r.app_exe_perc}
-                target={r.target_app_exe_perc}
-              />
-            </div>
-
-            {/* Table: cost-pers column */}
-            <div className="w-1/3 flex flex-col">
-              <FunnelCurrencyBox
-                name="Cost per USV"
-                value={r.cost_per_usv}
-                target={r.target_cost_per_usv}
-              />
-              <FunnelCurrencyBox
-                name="Cost per INQ"
-                value={r.cost_per_inq}
-                target={r.target_cost_per_inq}
-              />
-              <FunnelCurrencyBox
-                name="Cost per TOU"
-                value={r.cost_per_tou}
-                target={r.target_cost_per_tou}
-              />
-              <FunnelCurrencyBox
-                name="Cost per APP"
-                value={r.cost_per_app}
-                target={r.target_cost_per_app}
-              />
-              <FunnelCurrencyBox
-                name="Cost per EXE"
-                value={r.cost_per_exe}
-                target={r.target_cost_per_exe}
-              />
-            </div>
-          </div>
-        </div>
+        <AcquisitionFunnelReport.HeadlineNumbers report={this.props.report} />
+        <AcquisitionFunnelReport.FunnelTable
+          header={<AcquisitionFunnelReport.FunnelHeader />}
+          content={
+            <AcquisitionFunnelReport.FunnelContent report={this.props.report} />
+          }
+        />
       </ReportSection>
     );
   }
