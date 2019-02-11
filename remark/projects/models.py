@@ -155,6 +155,11 @@ class Period(ModelPeriod, models.Model):
     )
     target_lease_renewal_notices.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
+    target_leases_due_to_expire = models.IntegerField(
+        null=True, blank=True, default=None, help_text="Target: leases due to expire"
+    )
+    target_leases_due_to_expire.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+
     target_lease_renewals = models.IntegerField(
         null=True, blank=True, default=None, help_text="Target: lease renewals"
     )
@@ -164,6 +169,14 @@ class Period(ModelPeriod, models.Model):
         null=True, blank=True, default=None, help_text="Target: lease vacation notices"
     )
     target_lease_vacation_notices.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+
+    target_lease_cds = models.IntegerField(
+        null=True,
+        blank=True,
+        default=None,
+        help_text="Target: lease cancellations and denials",
+    )
+    target_lease_cds.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     target_delta_leases = models.IntegerField(
         null=True, blank=True, default=None, help_text="Target: delta: leases"

@@ -7,6 +7,17 @@ const getLanguage = () =>
   (navigator.languages || ["en-US"])[0];
 
 /**
+ * @description Format a multiple by putting the letter x next to it.
+ *
+ * @param {number|string} value A value to format
+ *
+ * @note This could probably use some smarts.
+ */
+export const formatMultiple = value => {
+  return `${value}x`;
+};
+
+/**
  * @description Convert a value (like 0.25) to a display string (25%)
  *
  * @param {number|string} value A percentage value out of 1.0 to format

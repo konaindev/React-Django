@@ -79,6 +79,15 @@ class ComputedPeriod(ComputedValueMixin):
             decimal.ROUND_HALF_UP,
         )
 
+    @computed_value
+    def target_renewal_rate(self):
+        """The target number of leased units we'd like to achieve."""
+        return d_quant_perc(
+            d_div_or_none(
+                self.target_lease_renewal_notices, self.target_leases_due_to_expire
+            )
+        )
+
     # ------------------------------------------------------
     # Physical activity (occupancy)
     # ------------------------------------------------------
@@ -97,7 +106,18 @@ class ComputedPeriod(ComputedValueMixin):
     # TARGETS: Physical activity (occupancy)
     # ------------------------------------------------------
 
-    # No computed targets at the moment
+    @computed_value
+    def target_occupied_units(self):
+        """Return the target number of occupiable units."""
+        # NOTE for now, we simply assume this is the same as the target leased units.
+        return self.target_leased_units
+
+    @computed_value
+    def target_occupancy_rate(self):
+        """The target percentage of occupiable units that are actually occupied at end of period."""
+        return d_quant_perc(
+            d_div_or_none(self.target_occupied_units, self.occupiable_units)
+        )
 
     # ------------------------------------------------------
     # Investment
@@ -330,6 +350,11 @@ class ComputedPeriod(ComputedValueMixin):
         """Return the estimated cost to obtain a lease execution in this period."""
         return d_quant_currency(d_div_or_0(self.acq_investment, self.leases_executed))
 
+    @computed_value
+    def cost_per_exe_vs_monthly_average_rent(self):
+        """Return the percentage of the monthly rent required to get a lease execution."""
+        return d_quant_perc(d_div_or_0(self.cost_per_exe, self.monthly_average_rent))
+
     # ------------------------------------------------------
     # TARGETS: Funnel Costs
     # ------------------------------------------------------
@@ -367,6 +392,13 @@ class ComputedPeriod(ComputedValueMixin):
         """Return the estimated cost to obtain a lease execution in this period."""
         return d_quant_currency(
             d_div_or_none(self.target_acq_investment, self.target_leases_executed)
+        )
+
+    @computed_value
+    def target_cost_per_exe_vs_monthly_average_rent(self):
+        """Return the target percentage of the monthly rent required to get a lease execution."""
+        return d_quant_perc(
+            d_div_or_none(self.target_cost_per_exe, self.monthly_average_rent)
         )
 
     # ------------------------------------------------------
