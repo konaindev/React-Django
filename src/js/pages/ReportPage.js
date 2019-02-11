@@ -44,8 +44,7 @@ const formatTargetDate = targetFormatter(formatDate);
 class LargeBoxLayout extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    content: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-      .isRequired,
+    content: PropTypes.string.isRequired,
     detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     detail2: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
   };
@@ -82,8 +81,7 @@ class LargeBoxLayout extends Component {
 class SmallBoxLayout extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    content: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-      .isRequired,
+    content: PropTypes.string.isRequired,
     detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
   };
 
@@ -120,8 +118,7 @@ class SmallBoxLayout extends Component {
 class FunnelBoxLayout extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    content: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-      .isRequired,
+    content: PropTypes.string.isRequired,
     detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
   };
 
@@ -322,10 +319,12 @@ class LeasingPerformanceReport extends Component {
   static propTypes = { report: PropTypes.object.isRequired };
 
   /**
-   * @description Render the most important leasing performance numbers.
+   * @name LeasingPerformanceReport.HeadlineNumbers
+   * @description Component that renders the most important leasing performance numbers.
    */
-  renderHeadlineNumbers() {
-    const r = this.props.report;
+  static HeadlineNumbers = props => {
+    const r = props.report;
+
     return (
       <BoxRow>
         <LargeBoxLayout
@@ -354,13 +353,14 @@ class LeasingPerformanceReport extends Component {
         />
       </BoxRow>
     );
-  }
+  };
 
   /**
-   * @description Render the secondary leasing performance numbers.
+   * @name LeasingPerformanceReport.DetailNumbers
+   * @description Component that renders the secondary leasing performance numbers.
    */
-  renderDetailNumbers() {
-    const r = this.props.report;
+  static DetailNumbers = props => {
+    const r = props.report;
     return (
       <BoxTable>
         <BoxRow>
@@ -399,7 +399,7 @@ class LeasingPerformanceReport extends Component {
         </BoxRow>
       </BoxTable>
     );
-  }
+  };
 
   /**
    * @description Render the leasing performance report section
@@ -407,8 +407,8 @@ class LeasingPerformanceReport extends Component {
   render() {
     return (
       <ReportSection name="Leasing Performance" bottomBoundary={true}>
-        {this.renderHeadlineNumbers()}
-        {this.renderDetailNumbers()}
+        <LeasingPerformanceReport.HeadlineNumbers report={this.props.report} />
+        <LeasingPerformanceReport.DetailNumbers report={this.props.report} />
       </ReportSection>
     );
   }
@@ -433,58 +433,11 @@ class CampaignInvestmentReport extends Component {
   static propTypes = { report: PropTypes.object.isRequired };
 
   /**
-   * @description Return victoryjs-style chart data from arbitrary investment fields.
+   * @name CampaignInvestmentReport.HeadlineNumbers
+   * @description Component that rendersheadline numbers for the investment report
    */
-  getChartData = data => [
-    {
-      category: "Reputation Building",
-      investment: Number(data.reputation_building),
-      color: "#4035f4"
-    },
-    {
-      category: "Demand Creation",
-      investment: Number(data.demand_creation),
-      color: "#5147ff"
-    },
-    {
-      category: "Leasing Enablement",
-      investment: Number(data.leasing_enablement),
-      color: "#867ffe"
-    },
-    {
-      category: "Market Intelligence",
-      investment: Number(data.market_intelligence),
-      color: "#675efc"
-    }
-  ];
-
-  /**
-   * @description Return victoryjs-style chart data from acq_investment fields.
-   */
-  getAcqChartData = () =>
-    this.getChartData({
-      reputation_building: this.props.report.acq_reputation_building,
-      demand_creation: this.props.report.acq_demand_creation,
-      leasing_enablement: this.props.report.acq_leasing_enablement,
-      market_intelligence: this.props.report.acq_market_intelligence
-    });
-
-  /**
-   * @description Return victoryjs-style chart data from ret_investment fields.
-   */
-  getRetChartData = () =>
-    this.getChartData({
-      reputation_building: this.props.report.ret_reputation_building,
-      demand_creation: this.props.report.ret_demand_creation,
-      leasing_enablement: this.props.report.ret_leasing_enablement,
-      market_intelligence: this.props.report.ret_market_intelligence
-    });
-
-  /**
-   * @description Render the headline numbers for the campaign investment report
-   */
-  renderHeadlineNumbers() {
-    const r = this.props.report;
+  static HeadlineNumbers = props => {
+    const r = props.report;
     return (
       <BoxRow>
         <LargeCurrencyShorthandBox
@@ -504,13 +457,68 @@ class CampaignInvestmentReport extends Component {
         />
       </BoxRow>
     );
-  }
+  };
 
   /**
-   * @description Render campaign acq_investment detail numbers
+   * @name CampaignInvestmentReport.InvestmentChart
+   * @description Component that renders a single investment breakdown bar chart
    */
-  renderAcqDetails() {
-    const r = this.props.report;
+  static InvestmentChart = props => {
+    // gin up victoryjs style data from the raw props
+    const data = [
+      {
+        category: "Reputation Building",
+        investment: Number(props.reputation_building),
+        color: "#4035f4"
+      },
+      {
+        category: "Demand Creation",
+        investment: Number(props.demand_creation),
+        color: "#5147ff"
+      },
+      {
+        category: "Leasing Enablement",
+        investment: Number(props.leasing_enablement),
+        color: "#867ffe"
+      },
+      {
+        category: "Market Intelligence",
+        investment: Number(props.market_intelligence),
+        color: "#675efc"
+      }
+    ];
+
+    // render the bar chart
+    return (
+      <ReportSection name={props.name} bottomBoundary={false}>
+        <VictoryChart>
+          <VictoryBar
+            data={data}
+            x="category"
+            y="investment"
+            style={{
+              /* stylelint-disable */
+              /* this is victory specific styling; stylelint is maybe right to complain */
+              data: {
+                fill: datum => datum.color
+              },
+              labels: {
+                fill: "white"
+              }
+              /* stylelint-enable */
+            }}
+          />
+        </VictoryChart>
+      </ReportSection>
+    );
+  };
+
+  /**
+   * @name CampaignInvestmentReport.AcquisitionDetails
+   * @description Component to render campaign acq_investment detail numbers
+   */
+  static AcquisitionDetails = props => {
+    const r = props.report;
     return (
       <ReportSection name="Acquisition" bottomBoundary={false}>
         <BoxRow>
@@ -539,62 +547,36 @@ class CampaignInvestmentReport extends Component {
         </BoxRow>
       </ReportSection>
     );
-  }
-
-  /**
-   * @description Render an arbitrary campaign investment chart
-   */
-  renderChart = (name, data) => {
-    return (
-      <ReportSection name={name} bottomBoundary={false}>
-        <VictoryChart>
-          <VictoryBar
-            data={data}
-            x="category"
-            y="investment"
-            style={{
-              /* stylelint-disable */
-              /* this is victory specific styling; stylelint is maybe right to complain */
-              data: {
-                fill: datum => datum.color
-              },
-              labels: {
-                fill: "white"
-              }
-              /* stylelint-enable */
-            }}
-          />
-        </VictoryChart>
-      </ReportSection>
-    );
   };
-
-  /**
-   * @description Render campaign acq_investment chart
-   */
-  renderAcqChart = () =>
-    this.renderChart(
-      "Acquisition Investment Allocations",
-      this.getAcqChartData()
-    );
 
   /**
    * @description Render acqusition report section.
    */
-  renderAcq() {
+  static Acquisition = props => {
+    const acqChartData = {
+      reputation_building: props.report.acq_reputation_building,
+      demand_creation: props.report.acq_demand_creation,
+      leasing_enablement: props.report.acq_leasing_enablement,
+      market_intelligence: props.report.acq_market_intelligence
+    };
+
     return (
       <StackedBox>
-        {this.renderAcqDetails()}
-        {this.renderAcqChart()}
+        <CampaignInvestmentReport.AcquisitionDetails report={props.report} />
+        <CampaignInvestmentReport.InvestmentChart
+          name="Acquisition Investment Allocations"
+          {...acqChartData}
+        />
       </StackedBox>
     );
-  }
+  };
 
   /**
-   * @description Render campaign ret_investment detail numbers
+   * @name CampaignInvestmentReport.RetentionDetails
+   * @description Component to render campaign ret_investment detail numbers
    */
-  renderRetDetails() {
-    const r = this.props.report;
+  static RetentionDetails = props => {
+    const r = props.report;
     return (
       <ReportSection name="Retention" bottomBoundary={false}>
         <BoxRow>
@@ -623,28 +605,30 @@ class CampaignInvestmentReport extends Component {
         </BoxRow>
       </ReportSection>
     );
-  }
+  };
 
   /**
-   * @description Render campaign ret_investment chart
+   * @name CampaignInvestmentReport.Retention
+   * @description Component that renders the retention report section.
    */
-  renderRetChart = () =>
-    this.renderChart(
-      "Retention Investment Allocations",
-      this.getRetChartData()
-    );
+  static Retention = props => {
+    const retChartData = {
+      reputation_building: props.report.ret_reputation_building,
+      demand_creation: props.report.ret_demand_creation,
+      leasing_enablement: props.report.ret_leasing_enablement,
+      market_intelligence: props.report.ret_market_intelligence
+    };
 
-  /**
-   * @description Render retention report section.
-   */
-  renderRet() {
     return (
       <StackedBox>
-        {this.renderRetDetails()}
-        {this.renderRetChart()}
+        <CampaignInvestmentReport.RetentionDetails report={props.report} />
+        <CampaignInvestmentReport.InvestmentChart
+          name="Retention Investment Allocations"
+          {...retChartData}
+        />
       </StackedBox>
     );
-  }
+  };
 
   /**
    * @description Render the campaign investment report section
@@ -652,10 +636,10 @@ class CampaignInvestmentReport extends Component {
   render() {
     return (
       <ReportSection name="Campaign Investment" bottomBoundary={true}>
-        {this.renderHeadlineNumbers()}
+        <CampaignInvestmentReport.HeadlineNumbers report={this.props.report} />
         <BoxRow>
-          {this.renderAcq()}
-          {this.renderRet()}
+          <CampaignInvestmentReport.Acquisition report={this.props.report} />
+          <CampaignInvestmentReport.Retention report={this.props.report} />
         </BoxRow>
       </ReportSection>
     );
