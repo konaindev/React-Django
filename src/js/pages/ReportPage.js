@@ -34,14 +34,14 @@ const formatTargetCurrencyShorthand = targetFormatter(formatCurrencyShorthand);
 const formatTargetDate = targetFormatter(formatDate);
 
 /**
- * @class LargeValueBox
+ * @class LargeBox
  *
  * @classdesc A simple layout intended to emphasize a single metric. Uses large
  * text sizing, bright colors, and lots of white space.
  *
  * @note This provides layout; it shouldn't concern itself with value semantics.
  */
-class LargeValueBox extends Component {
+class LargeBox extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -71,14 +71,14 @@ class LargeValueBox extends Component {
 }
 
 /**
- * @class SmallValueBox
+ * @class SmallBox
  *
  * @classdesc A simple layout intended to display a secondary metric. Uses
  * smaller text sizing, dimmer colors, and a little less white space.
  *
  * @note This provides layout; it shouldn't concern itself with value semantics.
  */
-class SmallValueBox extends Component {
+class SmallBox extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -109,13 +109,13 @@ class SmallValueBox extends Component {
 }
 
 /**
- * @class FunnelValueBox
+ * @class FunnelBox
  *
  * @classdesc A simple layout intended to metrics in a funnel grid/table.
  *
  * @note This provides layout; it shouldn't concern itself with value semantics.
  */
-class FunnelValueBox extends Component {
+class FunnelBox extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
@@ -146,10 +146,67 @@ class FunnelValueBox extends Component {
 }
 
 /**
- * @description Return a style object that partitions width into N.
+ * @description Wraps an arbitrary Box Component with desired formatting.
+ *
+ * @note This is where layout and semantics are tied together;
+ * unless you have custom needs, you'll probably want to use one of the
+ * *Box components defined using `withFormatter(...)`, below.
+ */
+const withFormatter = (WrappedComponent, formatter) => {
+  const formatterForTarget = targetFormatter(formatter);
+
+  return class extends React.Component {
+    render() {
+      let { value, target, ...remaining } = this.props;
+      return (
+        <WrappedComponent
+          value={formatter(value)}
+          detail={formatterForTarget(target)}
+          {...remaining}
+        />
+      );
+    }
+  };
+};
+
+// Define LargeBoxes that take values and targets of various types.
+const LargeMultipleBox = withFormatter(LargeBox, formatMultiple);
+const LargePercentBox = withFormatter(LargeBox, formatPercent);
+const LargeNumberBox = withFormatter(LargeBox, formatNumber);
+const LargeCurrencyBox = withFormatter(LargeBox, formatCurrency);
+const LargeCurrencyShorthandBox = withFormatter(
+  LargeBox,
+  formatCurrencyShorthand
+);
+const LargeDateBox = withFormatter(LargeBox, formatDate);
+
+// Define SmallBoxes that take values and targets of various types.
+const SmallMultipleBox = withFormatter(SmallBox, formatMultiple);
+const SmallPercentBox = withFormatter(SmallBox, formatPercent);
+const SmallNumberBox = withFormatter(SmallBox, formatNumber);
+const SmallCurrencyBox = withFormatter(SmallBox, formatCurrency);
+const SmallCurrencyShorthandBox = withFormatter(
+  SmallBox,
+  formatCurrencyShorthand
+);
+const SmallDateBox = withFormatter(SmallBox, formatDate);
+
+// Define FunnelBoxes that take values and targets of various types.
+const FunnelMultipleBox = withFormatter(FunnelBox, formatMultiple);
+const FunnelPercentBox = withFormatter(FunnelBox, formatPercent);
+const FunnelNumberBox = withFormatter(FunnelBox, formatNumber);
+const FunnelCurrencyBox = withFormatter(FunnelBox, formatCurrency);
+const FunnelCurrencyShorthandBox = withFormatter(
+  FunnelBox,
+  formatCurrencyShorthand
+);
+const FunnelDateBox = withFormatter(FunnelBox, formatDate);
+
+/**
+ * @description Utility to return a style object that partitions width into N.
  *
  * @note We simply divide the width into (100/n)% where n is the number
- * of partitions we would like. We use toPrecision(...) to match the
+ * of partitions we would like. We use `toPrecision(...)` to match the
  * precision of tailwinds' `w-*` utility classes.
  */
 const equalWidthStyle = partitions => ({
@@ -268,7 +325,7 @@ class LeasingPerformanceReport extends Component {
     const r = this.props.report;
     return (
       <BoxRow>
-        <LargeValueBox
+        <LargeBox
           name="Leased"
           value={formatPercent(r.leased_rate)}
           detail={`${formatNumber(
@@ -276,7 +333,7 @@ class LeasingPerformanceReport extends Component {
           )} Executed Leases (Out of ${formatNumber(r.occupiable_units)})`}
           detail2={formatTargetPercent(r.target_lease_percent)}
         />
-        <LargeValueBox
+        <LargeBox
           name="Retention"
           value={formatPercent(r.renewal_rate)}
           detail={`${formatNumber(
@@ -284,7 +341,7 @@ class LeasingPerformanceReport extends Component {
           )} Notices to Renew (Out of ${r.leases_due_to_expire} Due To Expire)`}
           detail2={formatTargetPercent(r.target_renewal_rate)}
         />
-        <LargeValueBox
+        <LargeBox
           name="Occupied"
           value={formatPercent(r.occupancy_rate)}
           detail={`${formatNumber(
@@ -304,37 +361,37 @@ class LeasingPerformanceReport extends Component {
     return (
       <BoxTable>
         <BoxRow>
-          <SmallValueBox
+          <SmallNumberBox
             name="Lease Applications"
-            value={formatNumber(r.lease_applications)}
-            detail={formatTargetNumber(r.target_lease_applications)}
+            value={r.lease_applications}
+            target={r.target_lease_applications}
           />
-          <SmallValueBox
+          <SmallPercentBox
             name="Notices to Renew"
-            value={formatPercent(r.lease_renewals)}
-            detail={formatTargetPercent(r.target_lease_renewals)}
+            value={r.lease_renewals}
+            target={r.target_lease_renewals}
           />
-          <SmallValueBox
+          <SmallNumberBox
             name="Move Ins"
-            value={formatNumber(r.move_ins)}
-            detail={formatTargetNumber(r.target_move_ins)}
+            value={r.move_ins}
+            target={r.target_move_ins}
           />
         </BoxRow>
         <BoxRow>
-          <SmallValueBox
+          <SmallNumberBox
             name="Cancellations and Denials"
-            value={formatNumber(r.lease_cds)}
-            detail={formatTargetNumber(r.target_lease_cds)}
+            value={r.lease_cds}
+            target={r.target_lease_cds}
           />
-          <SmallValueBox
+          <SmallNumberBox
             name="Notices to Vacate"
-            value={formatNumber(r.lease_vacation_notices)}
-            detail={formatTargetNumber(r.target_lease_vacation_notices)}
+            value={r.lease_vacation_notices}
+            target={r.target_lease_vacation_notices}
           />
-          <SmallValueBox
+          <SmallNumberBox
             name="Move Outs"
-            value={formatNumber(r.move_outs)}
-            detail={formatTargetNumber(r.target_move_outs)}
+            value={r.move_outs}
+            detail={r.target_move_outs}
           />
         </BoxRow>
       </BoxTable>
@@ -427,22 +484,20 @@ class CampaignInvestmentReport extends Component {
     const r = this.props.report;
     return (
       <BoxRow>
-        <LargeValueBox
+        <LargeCurrencyShorthandBox
           name="Campaign Investment"
-          value={formatCurrencyShorthand(r.investment)}
-          detail={`Target: ${formatCurrencyShorthand(r.target_investment)}`}
+          value={r.investment}
+          target={r.target_investment}
         />
-        <LargeValueBox
+        <LargeCurrencyShorthandBox
           name="Est. Revenue Change"
-          value={formatCurrencyShorthand(r.estimated_revenue_gain)}
-          detail={formatTargetCurrencyShorthand(
-            r.target_estimated_revenue_gain
-          )}
+          value={r.estimated_revenue_gain}
+          target={r.target_estimated_revenue_gain}
         />
-        <LargeValueBox
+        <LargeMultipleBox
           name="Campaign Return on Marketing Investment (ROMI)"
-          value={formatMultiple(r.romi)}
-          detail={formatTargetMultiple(r.target_romi)}
+          value={r.romi}
+          target={r.target_romi}
         />
       </BoxRow>
     );
@@ -456,29 +511,27 @@ class CampaignInvestmentReport extends Component {
     return (
       <ReportSection name="Acquisition" bottomBoundary={false}>
         <BoxRow>
-          <SmallValueBox
+          <SmallNumberBox
             name="Leased Unit Change"
-            value={formatNumber(r.delta_leases)}
-            detail={formatTargetNumber(r.target_delta_leases)}
+            value={r.delta_leases}
+            target={r.target_delta_leases}
           />
-          <SmallValueBox
+          <SmallCurrencyShorthandBox
             name="Est. Acquired Leasing Revenue"
-            value={formatCurrencyShorthand(r.estimated_acq_revenue_gain)}
-            detail={formatTargetCurrencyShorthand(
-              r.target_estimated_acq_revenue_gain
-            )}
+            value={r.estimated_acq_revenue_gain}
+            target={r.target_estimated_acq_revenue_gain}
           />
         </BoxRow>
         <BoxRow>
-          <SmallValueBox
+          <SmallCurrencyShorthandBox
             name="Acquisition Investment"
-            value={formatCurrencyShorthand(r.acq_investment)}
-            detail={formatTargetCurrencyShorthand(r.target_acq_investment)}
+            value={r.acq_investment}
+            target={r.target_acq_investment}
           />
-          <SmallValueBox
+          <SmallMultipleBox
             name="Acquisition ROMI"
-            value={formatMultiple(r.acq_romi)}
-            detail={formatTargetMultiple(r.target_acq_romi)}
+            value={r.acq_romi}
+            target={r.target_acq_romi}
           />
         </BoxRow>
       </ReportSection>
@@ -542,29 +595,27 @@ class CampaignInvestmentReport extends Component {
     return (
       <ReportSection name="Retention" bottomBoundary={false}>
         <BoxRow>
-          <SmallValueBox
+          <SmallNumberBox
             name="Lease Renewals"
-            value={formatNumber(r.lease_renewals)}
-            detail={formatTargetNumber(r.target_lease_renewals)}
+            value={r.lease_renewals}
+            target={r.target_lease_renewals}
           />
-          <SmallValueBox
+          <SmallCurrencyShorthandBox
             name="Est. Retained Leasing Revenue"
-            value={formatCurrencyShorthand(r.estimated_ret_revenue_gain)}
-            detail={formatTargetCurrencyShorthand(
-              r.target_estimated_ret_revenue_gain
-            )}
+            value={r.estimated_ret_revenue_gain}
+            target={r.target_estimated_ret_revenue_gain}
           />
         </BoxRow>
         <BoxRow>
-          <SmallValueBox
+          <SmallCurrencyShorthandBox
             name="Retention Investment"
-            value={formatCurrencyShorthand(r.ret_investment)}
-            detail={formatTargetCurrencyShorthand(r.target_ret_investment)}
+            value={r.ret_investment}
+            target={r.target_ret_investment}
           />
-          <SmallValueBox
+          <SmallMultipleBox
             name="Retention ROMI"
-            value={formatMultiple(r.ret_romi)}
-            detail={formatTargetMultiple(r.target_ret_romi)}
+            value={r.ret_romi}
+            target={r.target_ret_romi}
           />
         </BoxRow>
       </ReportSection>
@@ -622,26 +673,24 @@ class AcquisitionFunnelReport extends Component {
         {/* Headline numbers for the acquisition funnel. */}
         <div className="flex flex-row flex-grow items-stretch">
           <div className="w-1/3 m-2">
-            <LargeValueBox
+            <LargePercentBox
               name="USV > EXE"
-              value={formatPercent(r.usv_exe_perc)}
-              detail={formatTargetPercent(r.target_usv_exe_perc)}
+              value={r.usv_exe_perc}
+              target={r.target_usv_exe_perc}
             />
           </div>
           <div className="w-1/3 m-2">
-            <LargeValueBox
+            <LargePercentBox
               name="Cancellation & Denial Rate"
-              value={formatPercent(r.lease_cd_rate)}
-              detail={formatTargetPercent(r.target_lease_cd_rate)}
+              value={r.lease_cd_rate}
+              target={r.target_lease_cd_rate}
             />
           </div>
           <div className="w-1/3 m-2">
-            <LargeValueBox
+            <LargePercentBox
               name="Cost Per EXE / Average Monthly Rent"
-              value={formatPercent(r.cost_per_exe_vs_monthly_average_rent)}
-              detail={formatTargetPercent(
-                r.target_cost_per_exe_vs_monthly_average_rent
-              )}
+              value={r.cost_per_exe_vs_monthly_average_rent}
+              detail={r.target_cost_per_exe_vs_monthly_average_rent}
             />
           </div>
         </div>
@@ -685,85 +734,84 @@ class AcquisitionFunnelReport extends Component {
           <div className="w-5/6 flex flex-row flex-grow items-stretch">
             {/* Table: absolute numbers column */}
             <div className="w-1/3 flex flex-col items">
-              <FunnelValueBox
+              <FunnelNumberBox
                 name="Volume of USV"
-                value={formatNumber(r.usvs)}
-                detail={formatTargetNumber(r.target_usvs)}
+                value={r.usvs}
+                target={r.target_usvs}
               />
-              <FunnelValueBox
+              <FunnelNumberBox
                 name="Volume of INQ"
-                value={formatNumber(r.inquiries)}
-                detail={formatTargetNumber(r.target_inquiries)}
+                value={r.inquiries}
+                target={r.target_inquiries}
               />
-              <FunnelValueBox
+              <FunnelNumberBox
                 name="Volume of TOU"
-                value={formatNumber(r.tours)}
-                detail={formatTargetNumber(r.target_tours)}
+                value={r.tours}
+                target={r.target_tours}
               />
-              <FunnelValueBox
+              <FunnelNumberBox
                 name="Volume of APP"
-                value={formatNumber(r.lease_applications)}
-                detail={formatTargetNumber(r.target_lease_applications)}
+                value={r.lease_applications}
+                target={r.target_lease_applications}
               />
-              <FunnelValueBox
+              <FunnelNumberBox
                 name="Volume of EXE"
-                value={formatNumber(r.leases_executed)}
-                detail={formatTargetNumber(r.target_leases_executed)}
+                value={r.leases_executed}
+                target={r.target_leases_executed}
               />
             </div>
 
             {/* Table: percentages column */}
 
             <div className="w-1/3 flex flex-col">
-              <FunnelValueBox
+              <FunnelPercentBox
                 name="USV > INQ"
-                value={formatPercent(r.usv_inq_perc)}
-                detail={formatTargetPercent(r.target_usv_inq_perc)}
+                value={r.usv_inq_perc}
+                target={r.target_usv_inq_perc}
               />
-              <FunnelValueBox
+              <FunnelPercentBox
                 name="INQ > TOU"
-                value={formatPercent(r.inq_tou_perc)}
-                detail={formatTargetPercent(r.target_inq_tou_perc)}
+                value={r.inq_tou_perc}
+                target={r.target_inq_tou_perc}
               />
-              <FunnelValueBox
+              <FunnelPercentBox
                 name="TOU > APP"
-                value={formatPercent(r.tou_app_perc)}
-                detail={formatTargetPercent(r.target_tou_app_perc)}
+                value={r.tou_app_perc}
+                target={r.target_tou_app_perc}
               />
-              <FunnelValueBox
+              <FunnelPercentBox
                 name="APP > EXE"
-                value={formatPercent(r.app_exe_perc)}
-                detail={formatTargetPercent(r.target_app_exe_perc)}
+                value={r.app_exe_perc}
+                target={r.target_app_exe_perc}
               />
             </div>
 
             {/* Table: cost-pers column */}
-
             <div className="w-1/3 flex flex-col">
-              <FunnelValueBox
+              <FunnelCurrencyBox
                 name="Cost per USV"
-                value={formatCurrency(r.cost_per_usv)}
-                detail={formatTargetCurrency(r.target_cost_per_usv)}
+                value={r.cost_per_usv}
+                target={r.target_cost_per_usv}
               />
-              <FunnelValueBox
+              <FunnelCurrencyBox
                 name="Cost per INQ"
-                value={formatCurrency(r.cost_per_inq)}
-                detail={formatTargetCurrency(r.target_cost_per_inq)}
+                value={r.cost_per_inq}
+                target={r.target_cost_per_inq}
               />
-              <FunnelValueBox
+              <FunnelCurrencyBox
                 name="Cost per TOU"
-                value={formatCurrency(r.cost_per_tou)}
-                detail={formatTargetCurrency(r.target_cost_per_tou)}
+                value={r.cost_per_tou}
+                target={r.target_cost_per_tou}
               />
-              <FunnelValueBox
+              <FunnelCurrencyBox
                 name="Cost per APP"
-                value={formatCurrency(r.cost_per_app)}
-                detail={formatTargetCurrency(r.target_cost_per_app)}
+                value={r.cost_per_app}
+                target={r.target_cost_per_app}
               />
-              <FunnelValueBox
+              <FunnelCurrencyBox
                 name="Cost per EXE"
-                value={formatCurrency(r.cost_per_exe)}
-                detail={formatTargetCurrency(r.target_cost_per_exe)}
+                value={r.cost_per_exe}
+                target={r.target_cost_per_exe}
               />
             </div>
           </div>
