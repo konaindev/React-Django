@@ -34,17 +34,18 @@ const formatTargetCurrencyShorthand = targetFormatter(formatCurrencyShorthand);
 const formatTargetDate = targetFormatter(formatDate);
 
 /**
- * @class LargeBox
+ * @class LargeBoxLayout
  *
  * @classdesc A simple layout intended to emphasize a single metric. Uses large
  * text sizing, bright colors, and lots of white space.
  *
  * @note This provides layout; it shouldn't concern itself with value semantics.
  */
-class LargeBox extends Component {
+class LargeBoxLayout extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    content: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      .isRequired,
     detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     detail2: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
   };
@@ -52,14 +53,14 @@ class LargeBox extends Component {
   render() {
     return (
       <div className="flex flex-col p-6 h-64 k-rectangle items-center text-center justify-center">
-        {/* Container for the value itself.
+        {/* Container for the content itself.
             Counter-intuitively items- and text- center the rows and row content
             while justif- centers the rows vertically within the box. */}
         <span className="text-remark-ui-text-light text-base">
           {this.props.name}
         </span>
         <span className="text-remark-ui-text-lightest text-6xl font-hairline py-2">
-          {this.props.value}
+          {this.props.content}
         </span>
         <span className="text-remark-ui-text text-sm">{this.props.detail}</span>
         <span className="text-remark-ui-text text-sm">
@@ -71,30 +72,31 @@ class LargeBox extends Component {
 }
 
 /**
- * @class SmallBox
+ * @class SmallBoxLayout
  *
  * @classdesc A simple layout intended to display a secondary metric. Uses
  * smaller text sizing, dimmer colors, and a little less white space.
  *
  * @note This provides layout; it shouldn't concern itself with value semantics.
  */
-class SmallBox extends Component {
+class SmallBoxLayout extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    content: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      .isRequired,
     detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
   };
 
   render() {
     return (
       <div className="flex flex-row h-full py-8 k-rectangle">
-        {/* Container for the value itself */}
+        {/* Container for the content itself */}
         <div className="text-6xl w-1/3 flex flex-col leading-compressed justify-center content-center">
           <div className="text-remark-ui-text-lightest font-hairline text-center">
-            {this.props.value}
+            {this.props.content}
           </div>
         </div>
-        {/* Container for the label and help text */}
+        {/* Container for the label and detail text */}
         <div className="flex flex-col flex-auto justify-between">
           <span className="text-remark-ui-text-light text-base">
             {this.props.name}
@@ -109,29 +111,30 @@ class SmallBox extends Component {
 }
 
 /**
- * @class FunnelBox
+ * @class FunnelBoxLayout
  *
  * @classdesc A simple layout intended to metrics in a funnel grid/table.
  *
  * @note This provides layout; it shouldn't concern itself with value semantics.
  */
-class FunnelBox extends Component {
+class FunnelBoxLayout extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    content: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      .isRequired,
     detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
   };
 
   render() {
     return (
       <div className="flex flex-row h-32 py-8 k-rectangle">
-        {/* Container for the value itself */}
+        {/* Container for the content itself */}
         <div className="text-6xl w-1/3 flex flex-col leading-compressed justify-center content-center">
           <div className="text-remark-ui-text-lightest font-hairline text-center">
-            {this.props.value}
+            {this.props.content}
           </div>
         </div>
-        {/* Container for the label and help text */}
+        {/* Container for the label and detail text */}
         <div className="flex flex-col flex-auto justify-between">
           <span className="text-remark-ui-text-light text-base">
             {this.props.name}
@@ -160,7 +163,7 @@ const withFormatter = (WrappedComponent, formatter) => {
       let { value, target, ...remaining } = this.props;
       return (
         <WrappedComponent
-          value={formatter(value)}
+          content={formatter(value)}
           detail={formatterForTarget(target)}
           {...remaining}
         />
@@ -169,38 +172,38 @@ const withFormatter = (WrappedComponent, formatter) => {
   };
 };
 
-// Define LargeBoxes that take values and targets of various types.
-const LargeMultipleBox = withFormatter(LargeBox, formatMultiple);
-const LargePercentBox = withFormatter(LargeBox, formatPercent);
-const LargeNumberBox = withFormatter(LargeBox, formatNumber);
-const LargeCurrencyBox = withFormatter(LargeBox, formatCurrency);
+// Define LargeBoxLayoutes that take values and targets of various types.
+const LargeMultipleBox = withFormatter(LargeBoxLayout, formatMultiple);
+const LargePercentBox = withFormatter(LargeBoxLayout, formatPercent);
+const LargeNumberBox = withFormatter(LargeBoxLayout, formatNumber);
+const LargeCurrencyBox = withFormatter(LargeBoxLayout, formatCurrency);
 const LargeCurrencyShorthandBox = withFormatter(
-  LargeBox,
+  LargeBoxLayout,
   formatCurrencyShorthand
 );
-const LargeDateBox = withFormatter(LargeBox, formatDate);
+const LargeDateBox = withFormatter(LargeBoxLayout, formatDate);
 
-// Define SmallBoxes that take values and targets of various types.
-const SmallMultipleBox = withFormatter(SmallBox, formatMultiple);
-const SmallPercentBox = withFormatter(SmallBox, formatPercent);
-const SmallNumberBox = withFormatter(SmallBox, formatNumber);
-const SmallCurrencyBox = withFormatter(SmallBox, formatCurrency);
+// Define SmallBoxLayoutes that take values and targets of various types.
+const SmallMultipleBox = withFormatter(SmallBoxLayout, formatMultiple);
+const SmallPercentBox = withFormatter(SmallBoxLayout, formatPercent);
+const SmallNumberBox = withFormatter(SmallBoxLayout, formatNumber);
+const SmallCurrencyBox = withFormatter(SmallBoxLayout, formatCurrency);
 const SmallCurrencyShorthandBox = withFormatter(
-  SmallBox,
+  SmallBoxLayout,
   formatCurrencyShorthand
 );
-const SmallDateBox = withFormatter(SmallBox, formatDate);
+const SmallDateBox = withFormatter(SmallBoxLayout, formatDate);
 
-// Define FunnelBoxes that take values and targets of various types.
-const FunnelMultipleBox = withFormatter(FunnelBox, formatMultiple);
-const FunnelPercentBox = withFormatter(FunnelBox, formatPercent);
-const FunnelNumberBox = withFormatter(FunnelBox, formatNumber);
-const FunnelCurrencyBox = withFormatter(FunnelBox, formatCurrency);
+// Define FunnelBoxLayoutes that take values and targets of various types.
+const FunnelMultipleBox = withFormatter(FunnelBoxLayout, formatMultiple);
+const FunnelPercentBox = withFormatter(FunnelBoxLayout, formatPercent);
+const FunnelNumberBox = withFormatter(FunnelBoxLayout, formatNumber);
+const FunnelCurrencyBox = withFormatter(FunnelBoxLayout, formatCurrency);
 const FunnelCurrencyShorthandBox = withFormatter(
-  FunnelBox,
+  FunnelBoxLayout,
   formatCurrencyShorthand
 );
-const FunnelDateBox = withFormatter(FunnelBox, formatDate);
+const FunnelDateBox = withFormatter(FunnelBoxLayout, formatDate);
 
 /**
  * @description Utility to return a style object that partitions width into N.
@@ -325,25 +328,25 @@ class LeasingPerformanceReport extends Component {
     const r = this.props.report;
     return (
       <BoxRow>
-        <LargeBox
+        <LargeBoxLayout
           name="Leased"
-          value={formatPercent(r.leased_rate)}
+          content={formatPercent(r.leased_rate)}
           detail={`${formatNumber(
             r.leased_units
           )} Executed Leases (Out of ${formatNumber(r.occupiable_units)})`}
           detail2={formatTargetPercent(r.target_lease_percent)}
         />
-        <LargeBox
+        <LargeBoxLayout
           name="Retention"
-          value={formatPercent(r.renewal_rate)}
+          content={formatPercent(r.renewal_rate)}
           detail={`${formatNumber(
             r.lease_renewal_notices
           )} Notices to Renew (Out of ${r.leases_due_to_expire} Due To Expire)`}
           detail2={formatTargetPercent(r.target_renewal_rate)}
         />
-        <LargeBox
+        <LargeBoxLayout
           name="Occupied"
-          value={formatPercent(r.occupancy_rate)}
+          content={formatPercent(r.occupancy_rate)}
           detail={`${formatNumber(
             r.occupied_units
           )} Occupied Units (Out of ${formatNumber(r.occupiable_units)})`}
