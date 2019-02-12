@@ -715,7 +715,7 @@ class AcquisitionFunnelReport extends Component {
    */
   static FunnelTable = props => {
     return (
-      <div className="flex flex-row flex-grow items-stretch">
+      <div className="flex flex-row flex-grow items-stretch pt-8">
         <div className="w-1/6">{props.header}</div>
         <div className="w-5/6 flex flex-row flex-grow items-stretch">
           {props.content}
