@@ -400,7 +400,7 @@ class LeasingPerformanceReport extends Component {
             />
           </BoxColumn>
           <BoxColumn>
-            <SmallPercentBox
+            <SmallNumberBox
               name="Notices to Renew"
               value={r.lease_renewals}
               target={r.target_lease_renewals}
