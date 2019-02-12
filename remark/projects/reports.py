@@ -488,20 +488,32 @@ class Report:
     @classmethod
     def from_date_span(cls, project, start, end):
         period = Period.objects.filter(project=project, start=start, end=end).first()
-        return cls(period) if period is not None else None
+        previous_period = (
+            Period.objects.filter(project=project, end__lte=start)
+            .order_by("-start")
+            .first()
+        )
+        return cls(period, previous_period) if period is not None else None
 
-    def __init__(self, period):
+    def __init__(self, period, previous_period):
         self.period = ComputedPeriod(period)
-        self.delta = PeriodDelta(self.period, self.period)
+        if previous_period:
+            previous_period = ComputedPeriod(previous_period)
+            self.delta = PeriodDelta(self.period, previous_period)
+        else:
+            self.delta = None
 
     def to_jsonable(self):
         """
         Return a structure that can be converted to a JSON string.
         """
+        period_values = self.period.get_values()
+        delta_values = {} if self.delta is None else self.delta.get_values()
+
         return dict(
             start=self.period.start,
             end=self.period.end,
-            **self.period.get_values(),
-            **self.delta.get_values(),
+            **period_values,
+            **delta_values,
         )
 

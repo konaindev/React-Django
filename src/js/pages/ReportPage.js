@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { VictoryChart, VictoryBar, VictoryTheme, Text } from "victory";
+import { VictoryChart, VictoryBar, VictoryAxis } from "victory";
+
+import { remarkablyChartTheme } from "../utils/victoryTheme";
 
 import Header from "../components/Header";
 import {
@@ -35,7 +37,11 @@ import {
  * @note If the underlying target value is null, we return an empty string.
  */
 const targetFormatter = formatter => targetValue =>
-  targetValue == null ? "" : `Target: ${formatter(targetValue)}`;
+  targetValue == null ? (
+    <span>&nbsp;</span>
+  ) : (
+    `Target: ${formatter(targetValue)}`
+  );
 
 const formatTargetMultiple = targetFormatter(formatMultiple);
 const formatTargetPercent = targetFormatter(formatPercent);
@@ -69,7 +75,7 @@ class LargeBoxLayout extends Component {
         <span className="text-remark-ui-text-light text-base">
           {this.props.name}
         </span>
-        <span className="text-remark-ui-text-lightest text-6xl font-hairline py-2">
+        <span className="text-remark-ui-text-lightest font-mono text-6xl font-hairline py-2">
           {this.props.content}
         </span>
         <span className="text-remark-ui-text text-sm">{this.props.detail}</span>
@@ -92,27 +98,28 @@ class LargeBoxLayout extends Component {
 class SmallBoxLayout extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
+    content: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+      .isRequired,
     detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
   };
 
   render() {
     return (
-      <div className="flex flex-row h-full py-8 k-rectangle">
-        {/* Container for the content itself */}
-        <div className="text-6xl w-1/3 flex flex-col leading-compressed justify-center content-center">
-          <div className="text-remark-ui-text-lightest font-hairline text-center">
-            {this.props.content}
-          </div>
-        </div>
+      <div className="flex flex-row h-full my-4 py-6 k-rectangle">
         {/* Container for the label and detail text */}
         <div className="flex flex-col flex-auto justify-between">
-          <span className="text-remark-ui-text-light text-base">
+          <span className="text-remark-ui-text-light text-base pl-8">
             {this.props.name}
           </span>
-          <span className="text-remark-ui-text text-sm">
+          <span className="text-remark-ui-text text-sm pl-8 mt-2">
             {this.props.detail}
           </span>
+        </div>
+        {/* Container for the content itself */}
+        <div className="text-5xl w-1/2 flex flex-col leading-compressed justify-center content-center">
+          <div className="text-remark-ui-text-lightest font-hairline font-mono text-right pr-8">
+            {this.props.content}
+          </div>
         </div>
       </div>
     );
@@ -135,21 +142,21 @@ class FunnelBoxLayout extends Component {
 
   render() {
     return (
-      <div className="flex flex-row h-32 py-8 k-rectangle">
-        {/* Container for the content itself */}
-        <div className="text-6xl w-1/3 flex flex-col leading-compressed justify-center content-center">
-          <div className="text-remark-ui-text-lightest font-hairline text-center">
-            {this.props.content}
-          </div>
-        </div>
+      <div className="flex flex-row h-24 my-2 py-6 k-rectangle">
         {/* Container for the label and detail text */}
         <div className="flex flex-col flex-auto justify-between">
-          <span className="text-remark-ui-text-light text-base">
+          <span className="text-remark-ui-text-light text-base pl-8">
             {this.props.name}
           </span>
-          <span className="text-remark-ui-text text-sm">
+          <span className="text-remark-ui-text text-sm pl-8">
             {this.props.detail}
           </span>
+        </div>
+        {/* Container for the content itself */}
+        <div className="text-4xl w-1/2 flex flex-col leading-compressed justify-center content-center">
+          <div className="text-remark-ui-text-lightest font-hairline font-mono text-right pr-8">
+            {this.props.content}
+          </div>
         </div>
       </div>
     );
@@ -232,15 +239,22 @@ const equalWidthStyle = partitions => ({
  * @note This provides layout; it shouldn't concern itself with value semantics.
  */
 class BoxRow extends Component {
-  static propTypes = {};
+  static propTypes = { externalMargin: PropTypes.bool.isRequired };
+
+  static defaultProps = { externalMargin: true };
 
   render() {
+    const baseClassNames = "flex flex-row flex-grow items-stretch";
+    const classNames = this.props.externalMargin
+      ? `${baseClassNames} -m-4`
+      : baseClassNames;
+
     return (
-      <div className="flex flex-row flex-grow items-stretch">
+      <div className={classNames}>
         {this.props.children.map((child, i) => (
           <div
             key={i}
-            className="m-2"
+            className="m-4"
             style={equalWidthStyle(this.props.children.length)}
           >
             {child}
@@ -252,11 +266,11 @@ class BoxRow extends Component {
 }
 
 /**
- * @class StackedBox
+ * @class BoxColumn
  *
  * @classdesc A special-purpose layout placing a column of boxes downward.
  */
-class StackedBox extends Component {
+class BoxColumn extends Component {
   static propTypes = {};
 
   render() {
@@ -297,25 +311,23 @@ class BoxTable extends Component {
 class ReportSection extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    bottomBoundary: PropTypes.bool
+    horizontalPadding: PropTypes.bool.isRequired
   };
 
   static defaultProps = {
-    bottomBoundary: false
+    horizontalPadding: true
   };
 
   render() {
-    const bottomBoundary = this.props.bottomBoundary ? (
-      <hr className="k-divider m-0 pt-8 pb-4" />
-    ) : null;
+    const className = this.props.horizontalPadding ? "p-8" : "py-8";
 
     return (
-      <div className="p-8">
-        <span className="text-remark-ui-text uppercase text-xs block mb-8">
+      <div className={className}>
+        <span className="mx-4 text-remark-ui-text uppercase block tracking-wide">
           {this.props.name}
         </span>
+        <hr className="k-divider mt-8 mb-12 mx-0" />
         {this.props.children}
-        {bottomBoundary}
       </div>
     );
   }
@@ -375,38 +387,42 @@ class LeasingPerformanceReport extends Component {
     return (
       <BoxTable>
         <BoxRow>
-          <SmallNumberBox
-            name="Lease Applications"
-            value={r.lease_applications}
-            target={r.target_lease_applications}
-          />
-          <SmallPercentBox
-            name="Notices to Renew"
-            value={r.lease_renewals}
-            target={r.target_lease_renewals}
-          />
-          <SmallNumberBox
-            name="Move Ins"
-            value={r.move_ins}
-            target={r.target_move_ins}
-          />
-        </BoxRow>
-        <BoxRow>
-          <SmallNumberBox
-            name="Cancellations and Denials"
-            value={r.lease_cds}
-            target={r.target_lease_cds}
-          />
-          <SmallNumberBox
-            name="Notices to Vacate"
-            value={r.lease_vacation_notices}
-            target={r.target_lease_vacation_notices}
-          />
-          <SmallNumberBox
-            name="Move Outs"
-            value={r.move_outs}
-            detail={r.target_move_outs}
-          />
+          <BoxColumn>
+            <SmallNumberBox
+              name="Lease Applications"
+              value={r.lease_applications}
+              target={r.target_lease_applications}
+            />
+            <SmallNumberBox
+              name="Cancellations and Denials"
+              value={r.lease_cds}
+              target={r.target_lease_cds}
+            />
+          </BoxColumn>
+          <BoxColumn>
+            <SmallPercentBox
+              name="Notices to Renew"
+              value={r.lease_renewals}
+              target={r.target_lease_renewals}
+            />
+            <SmallNumberBox
+              name="Notices to Vacate"
+              value={r.lease_vacation_notices}
+              target={r.target_lease_vacation_notices}
+            />
+          </BoxColumn>
+          <BoxColumn>
+            <SmallNumberBox
+              name="Move Ins"
+              value={r.move_ins}
+              target={r.target_move_ins}
+            />
+            <SmallNumberBox
+              name="Move Outs"
+              value={r.move_outs}
+              target={r.target_move_outs}
+            />
+          </BoxColumn>
         </BoxRow>
       </BoxTable>
     );
@@ -417,23 +433,13 @@ class LeasingPerformanceReport extends Component {
    */
   render() {
     return (
-      <ReportSection name="Leasing Performance" bottomBoundary={true}>
+      <ReportSection name="Leasing Performance">
         <LeasingPerformanceReport.HeadlineNumbers report={this.props.report} />
         <LeasingPerformanceReport.DetailNumbers report={this.props.report} />
       </ReportSection>
     );
   }
 }
-
-/**
- * @class CampaignInvestmentReportSection
- *
- * @classdesc A specialized layout for the more complex campaign investment
- * portion of the report.
- *
- * @note This is intended only to be a layout and should not concern itself
- * with values or semantics.
- */
 
 /**
  * @class CampaignInvestmentReport
@@ -475,51 +481,69 @@ class CampaignInvestmentReport extends Component {
    * @description Component that renders a single investment breakdown bar chart
    */
   static InvestmentChart = props => {
+    const div_or_0 = (a, b) => {
+      const a_num = Number(a);
+      const b_num = Number(b);
+      return b_num == 0 ? 0 : a_num / b_num;
+    };
     // gin up victoryjs style data from the raw props
     const data = [
       {
         category: "Reputation Building",
-        investment: Number(props.reputation_building),
+        investment: formatCurrencyShorthand(props.reputation_building),
+        percent: div_or_0(props.reputation_building, props.investment),
         color: "#4035f4"
       },
       {
         category: "Demand Creation",
-        investment: Number(props.demand_creation),
+        investment: formatCurrencyShorthand(props.demand_creation),
+        percent: div_or_0(props.demand_creation, props.investment),
         color: "#5147ff"
       },
       {
         category: "Leasing Enablement",
-        investment: Number(props.leasing_enablement),
+        investment: formatCurrencyShorthand(props.leasing_enablement),
+        percent: div_or_0(props.leasing_enablement, props.investment),
         color: "#867ffe"
       },
       {
         category: "Market Intelligence",
-        investment: Number(props.market_intelligence),
+        investment: formatCurrencyShorthand(props.market_intelligence),
+        percent: div_or_0(props.market_intelligence, props.investment),
         color: "#675efc"
       }
     ];
 
+    console.log(data);
+
     // render the bar chart
     return (
-      <ReportSection name={props.name} bottomBoundary={false}>
-        <VictoryChart>
-          <VictoryBar
-            data={data}
-            x="category"
-            y="investment"
-            style={{
-              /* stylelint-disable */
-              /* this is victory specific styling; stylelint is maybe right to complain */
-              data: {
-                fill: datum => datum.color
-              },
-              labels: {
-                fill: "white"
-              }
-              /* stylelint-enable */
-            }}
-          />
-        </VictoryChart>
+      <ReportSection name={props.name} horizontalPadding={false}>
+        <div className="k-rectangle p-4">
+          <VictoryChart
+            theme={remarkablyChartTheme}
+            domain={{ y: [0, 1] }}
+            domainPadding={{ x: 14 }}
+          >
+            <VictoryAxis
+              dependentAxis
+              orientation="left"
+              tickFormat={t => formatPercent(t)}
+            />
+            <VictoryAxis orientation="bottom" />
+            <VictoryBar
+              data={data}
+              x="category"
+              y="percent"
+              labels={d => d.investment}
+              style={{
+                data: {
+                  fill: datum => datum.color
+                }
+              }}
+            />
+          </VictoryChart>
+        </div>
       </ReportSection>
     );
   };
@@ -531,31 +555,27 @@ class CampaignInvestmentReport extends Component {
   static AcquisitionDetails = props => {
     const r = props.report;
     return (
-      <ReportSection name="Acquisition" bottomBoundary={false}>
-        <BoxRow>
-          <SmallNumberBox
-            name="Leased Unit Change"
-            value={r.delta_leases}
-            target={r.target_delta_leases}
-          />
-          <SmallCurrencyShorthandBox
-            name="Est. Acquired Leasing Revenue"
-            value={r.estimated_acq_revenue_gain}
-            target={r.target_estimated_acq_revenue_gain}
-          />
-        </BoxRow>
-        <BoxRow>
-          <SmallCurrencyShorthandBox
-            name="Acquisition Investment"
-            value={r.acq_investment}
-            target={r.target_acq_investment}
-          />
-          <SmallMultipleBox
-            name="Acquisition ROMI"
-            value={r.acq_romi}
-            target={r.target_acq_romi}
-          />
-        </BoxRow>
+      <ReportSection name="Acquisition" horizontalPadding={false}>
+        <SmallNumberBox
+          name="Leased Unit Change"
+          value={r.delta_leases}
+          target={r.target_delta_leases}
+        />
+        <SmallCurrencyShorthandBox
+          name="Acquisition Investment"
+          value={r.acq_investment}
+          target={r.target_acq_investment}
+        />
+        <SmallCurrencyShorthandBox
+          name="Est. Acquired Leasing Revenue"
+          value={r.estimated_acq_revenue_gain}
+          target={r.target_estimated_acq_revenue_gain}
+        />
+        <SmallMultipleBox
+          name="Acquisition ROMI"
+          value={r.acq_romi}
+          target={r.target_acq_romi}
+        />
       </ReportSection>
     );
   };
@@ -565,6 +585,7 @@ class CampaignInvestmentReport extends Component {
    */
   static Acquisition = props => {
     const acqChartData = {
+      investment: props.report.acq_investment,
       reputation_building: props.report.acq_reputation_building,
       demand_creation: props.report.acq_demand_creation,
       leasing_enablement: props.report.acq_leasing_enablement,
@@ -572,13 +593,13 @@ class CampaignInvestmentReport extends Component {
     };
 
     return (
-      <StackedBox>
+      <BoxColumn>
         <CampaignInvestmentReport.AcquisitionDetails report={props.report} />
         <CampaignInvestmentReport.InvestmentChart
           name="Acquisition Investment Allocations"
           {...acqChartData}
         />
-      </StackedBox>
+      </BoxColumn>
     );
   };
 
@@ -589,31 +610,27 @@ class CampaignInvestmentReport extends Component {
   static RetentionDetails = props => {
     const r = props.report;
     return (
-      <ReportSection name="Retention" bottomBoundary={false}>
-        <BoxRow>
-          <SmallNumberBox
-            name="Lease Renewals"
-            value={r.lease_renewals}
-            target={r.target_lease_renewals}
-          />
-          <SmallCurrencyShorthandBox
-            name="Est. Retained Leasing Revenue"
-            value={r.estimated_ret_revenue_gain}
-            target={r.target_estimated_ret_revenue_gain}
-          />
-        </BoxRow>
-        <BoxRow>
-          <SmallCurrencyShorthandBox
-            name="Retention Investment"
-            value={r.ret_investment}
-            target={r.target_ret_investment}
-          />
-          <SmallMultipleBox
-            name="Retention ROMI"
-            value={r.ret_romi}
-            target={r.target_ret_romi}
-          />
-        </BoxRow>
+      <ReportSection name="Retention" horizontalPadding={false}>
+        <SmallNumberBox
+          name="Lease Renewals"
+          value={r.lease_renewals}
+          target={r.target_lease_renewals}
+        />
+        <SmallCurrencyShorthandBox
+          name="Retention Investment"
+          value={r.ret_investment}
+          target={r.target_ret_investment}
+        />
+        <SmallCurrencyShorthandBox
+          name="Est. Retained Leasing Revenue"
+          value={r.estimated_ret_revenue_gain}
+          target={r.target_estimated_ret_revenue_gain}
+        />
+        <SmallMultipleBox
+          name="Retention ROMI"
+          value={r.ret_romi}
+          target={r.target_ret_romi}
+        />
       </ReportSection>
     );
   };
@@ -624,6 +641,7 @@ class CampaignInvestmentReport extends Component {
    */
   static Retention = props => {
     const retChartData = {
+      investment: props.report.ret_investment,
       reputation_building: props.report.ret_reputation_building,
       demand_creation: props.report.ret_demand_creation,
       leasing_enablement: props.report.ret_leasing_enablement,
@@ -631,13 +649,13 @@ class CampaignInvestmentReport extends Component {
     };
 
     return (
-      <StackedBox>
+      <BoxColumn>
         <CampaignInvestmentReport.RetentionDetails report={props.report} />
         <CampaignInvestmentReport.InvestmentChart
           name="Retention Investment Allocations"
           {...retChartData}
         />
-      </StackedBox>
+      </BoxColumn>
     );
   };
 
@@ -646,7 +664,7 @@ class CampaignInvestmentReport extends Component {
    */
   render() {
     return (
-      <ReportSection name="Campaign Investment" bottomBoundary={true}>
+      <ReportSection name="Campaign Investment">
         <CampaignInvestmentReport.HeadlineNumbers report={this.props.report} />
         <BoxRow>
           <CampaignInvestmentReport.Acquisition report={this.props.report} />
@@ -713,7 +731,7 @@ class AcquisitionFunnelReport extends Component {
           <div>{props.name}</div>
         </div>
         <div className={`text-remark-funnel-${props.number + 1}`}>
-          {props.more ? "↓" : ""}
+          {props.more ? "↓" : <span>&nbsp;</span>}
         </div>
       </div>
     );
@@ -721,7 +739,7 @@ class AcquisitionFunnelReport extends Component {
 
   static FunnelHeader = props => {
     return (
-      <StackedBox>
+      <BoxColumn>
         <AcquisitionFunnelReport.FunnelHeaderBox
           number={1}
           name="Unique Site Visitors (USV)"
@@ -747,15 +765,15 @@ class AcquisitionFunnelReport extends Component {
           name="Lease Executions (EXE)"
           more={false}
         />
-      </StackedBox>
+      </BoxColumn>
     );
   };
 
   static FunnelContent = props => {
     const r = props.report;
     return (
-      <BoxRow>
-        <StackedBox>
+      <BoxRow externalMargin={false}>
+        <BoxColumn>
           <FunnelNumberBox
             name="Volume of USV"
             value={r.usvs}
@@ -781,9 +799,9 @@ class AcquisitionFunnelReport extends Component {
             value={r.leases_executed}
             target={r.target_leases_executed}
           />
-        </StackedBox>
+        </BoxColumn>
 
-        <StackedBox>
+        <BoxColumn>
           <FunnelPercentBox
             name="USV > INQ"
             value={r.usv_inq_perc}
@@ -804,9 +822,9 @@ class AcquisitionFunnelReport extends Component {
             value={r.app_exe_perc}
             target={r.target_app_exe_perc}
           />
-        </StackedBox>
+        </BoxColumn>
 
-        <StackedBox>
+        <BoxColumn>
           <FunnelCurrencyBox
             name="Cost per USV"
             value={r.cost_per_usv}
@@ -832,14 +850,14 @@ class AcquisitionFunnelReport extends Component {
             value={r.cost_per_exe}
             target={r.target_cost_per_exe}
           />
-        </StackedBox>
+        </BoxColumn>
       </BoxRow>
     );
   };
 
   render() {
     return (
-      <ReportSection name="Acquisition Funnel" bottomBoundary={true}>
+      <ReportSection name="Acquisition Funnel">
         <AcquisitionFunnelReport.HeadlineNumbers report={this.props.report} />
         <AcquisitionFunnelReport.FunnelTable
           header={<AcquisitionFunnelReport.FunnelHeader />}
@@ -900,7 +918,7 @@ export default class ReportPage extends Component {
   };
 
   componentDidMount() {
-    console.log("ReportPage props: ", this.props);
+    console.log("Report data", this.props.report);
   }
 
   render() {

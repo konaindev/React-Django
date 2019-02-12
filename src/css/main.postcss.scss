@@ -211,12 +211,12 @@
 
 .k-funnel-label {
     /* container for layout (matching row height */
-    @apply h-32;
+    @apply h-24 mt-8 -mb-4;
     @apply flex flex-col items-center;
     @apply content-start;
     background: none;
 }
-.k-funnel-label>div:first-child {
+.k-funnel-label > div:first-child {
     /* rounded corner container */
     @apply h-24;
     @apply w-full;
@@ -224,13 +224,13 @@
     @apply flex flex-row items-center;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
 }
-.k-funnel-label>div:first-child>div {
+.k-funnel-label > div:first-child > div {
     /* label text */
     @apply text-center;
     @apply w-full;
 }
-.k-funnel-label>div:last-child {
-    margin-top: 0.5em; /* TODO there's probably a better way to do this */
+.k-funnel-label > div:last-child {
+    @apply pt-2;
 }
 
 .k-divider {
