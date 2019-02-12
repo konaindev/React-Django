@@ -74,6 +74,11 @@ let colors = {
   "remark-ui-text-light": "#cccccc",
   "remark-ui-text": "#68788C",
 
+  // Trend colors
+  "remark-trend-up": "#74eb98",
+  "remark-trend-down": "#f74568",
+  "remark-trend-flat": "#ffd28b",
+
   // Funnel colors
   "remark-funnel-1": "#A09AFD",
   "remark-funnel-2": "#867FFE",

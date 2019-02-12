@@ -51,6 +51,13 @@ const formatTargetCurrencyShorthand = targetFormatter(formatCurrencyShorthand);
 const formatTargetDate = targetFormatter(formatDate);
 
 /**
+ * @description Format a difference between two percentages as points.
+ */
+const formatDeltaPercent = value => {
+  return `${formatNumber(value * 100, 0, 1)}pts`;
+};
+
+/**
  * @class LargeBoxLayout
  *
  * @classdesc A simple layout intended to emphasize a single metric. Uses large
@@ -61,7 +68,8 @@ const formatTargetDate = targetFormatter(formatDate);
 class LargeBoxLayout extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
+    content: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+      .isRequired,
     detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     detail2: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
   };
@@ -116,7 +124,7 @@ class SmallBoxLayout extends Component {
           </span>
         </div>
         {/* Container for the content itself */}
-        <div className="text-5xl w-1/2 flex flex-col leading-compressed justify-center content-center">
+        <div className="text-5xl flex flex-col leading-compressed justify-center content-center">
           <div className="text-remark-ui-text-lightest font-hairline font-mono text-right pr-8">
             {this.props.content}
           </div>
@@ -136,7 +144,8 @@ class SmallBoxLayout extends Component {
 class FunnelBoxLayout extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    content: PropTypes.string.isRequired,
+    content: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+      .isRequired,
     detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
   };
 
@@ -153,7 +162,7 @@ class FunnelBoxLayout extends Component {
           </span>
         </div>
         {/* Container for the content itself */}
-        <div className="text-4xl w-1/2 flex flex-col leading-compressed justify-center content-center">
+        <div className="text-4xl flex flex-col leading-compressed justify-center content-center">
           <div className="text-remark-ui-text-lightest font-hairline font-mono text-right pr-8">
             {this.props.content}
           </div>
@@ -164,21 +173,79 @@ class FunnelBoxLayout extends Component {
 }
 
 /**
- * @description Wraps an arbitrary Box Component with desired formatting.
+ * @class DeltaLayout
+ *
+ * @classdesc Lays out a value and its delta, including primary, arrow, and colors.
+ *
+ * @note This provides layout only; it is not concerned with semantics.
+ */
+class DeltaLayout extends Component {
+  static DIRECTION_UP = 1;
+  static DIRECTION_FLAT = 0;
+  static DIRECTION_DOWN = -1;
+
+  static propTypes = {
+    value: PropTypes.any.isRequired,
+    delta: PropTypes.any.isRequired,
+    direction: PropTypes.oneOf([
+      DeltaLayout.DIRECTION_UP,
+      DeltaLayout.DIRECTION_FLAT,
+      DeltaLayout.DIRECTION_DOWN
+    ]).isRequired
+  };
+
+  render() {
+    const deltaArrow =
+      this.props.direction > 0 ? "▲" : this.props.direction < 0 ? "▼" : "▶";
+    const deltaColor =
+      this.props.direction > 0
+        ? "text-remark-trend-up"
+        : this.props.direction < 0
+        ? "text-remark-trend-down"
+        : "text-remark-trend-flat";
+
+    return (
+      <span>
+        <span>{this.props.value}</span>
+        <span className="text-lg">
+          <span className={`${deltaColor} pl-2 pr-1`}>{deltaArrow}</span>
+          <span className="text-remark-ui-text">{this.props.delta}</span>
+        </span>
+      </span>
+    );
+  }
+}
+
+/**
+ * @description Wraps an arbitrary Box Component with desired formatting,
+ * including formatting for the primary value, the target, and any deltas.
  *
  * @note This is where layout and semantics are tied together;
  * unless you have custom needs, you'll probably want to use one of the
- * *Box components defined using `withFormatter(...)`, below.
+ * *Box components defined using `withFormatters(...)`, below.
  */
-const withFormatter = (WrappedComponent, formatter) => {
+const withFormatters = (WrappedComponent, formatter, deltaFormatter = null) => {
   const formatterForTarget = targetFormatter(formatter);
+  const formatterForDelta = deltaFormatter || formatter;
 
   return class extends React.Component {
     render() {
-      let { value, target, ...remaining } = this.props;
+      let { value, target, delta, reverseArrow, ...remaining } = this.props;
+      const reverseSign = reverseArrow == true ? -1 : 1;
+      const content =
+        delta == null ? (
+          formatter(value)
+        ) : (
+          <DeltaLayout
+            value={formatter(value)}
+            delta={formatterForDelta(delta)}
+            direction={reverseSign * Math.sign(delta)}
+          />
+        );
+
       return (
         <WrappedComponent
-          content={formatter(value)}
+          content={content}
           detail={formatterForTarget(target)}
           {...remaining}
         />
@@ -188,37 +255,49 @@ const withFormatter = (WrappedComponent, formatter) => {
 };
 
 // Define LargeBoxLayouts that take values and targets of various types.
-const LargeMultipleBox = withFormatter(LargeBoxLayout, formatMultiple);
-const LargePercentBox = withFormatter(LargeBoxLayout, formatPercent);
-const LargeNumberBox = withFormatter(LargeBoxLayout, formatNumber);
-const LargeCurrencyBox = withFormatter(LargeBoxLayout, formatCurrency);
-const LargeCurrencyShorthandBox = withFormatter(
+const LargeMultipleBox = withFormatters(LargeBoxLayout, formatMultiple);
+const LargePercentBox = withFormatters(
+  LargeBoxLayout,
+  formatPercent,
+  formatDeltaPercent
+);
+const LargeNumberBox = withFormatters(LargeBoxLayout, formatNumber);
+const LargeCurrencyBox = withFormatters(LargeBoxLayout, formatCurrency);
+const LargeCurrencyShorthandBox = withFormatters(
   LargeBoxLayout,
   formatCurrencyShorthand
 );
-const LargeDateBox = withFormatter(LargeBoxLayout, formatDate);
+const LargeDateBox = withFormatters(LargeBoxLayout, formatDate);
 
 // Define SmallBoxLayouts that take values and targets of various types.
-const SmallMultipleBox = withFormatter(SmallBoxLayout, formatMultiple);
-const SmallPercentBox = withFormatter(SmallBoxLayout, formatPercent);
-const SmallNumberBox = withFormatter(SmallBoxLayout, formatNumber);
-const SmallCurrencyBox = withFormatter(SmallBoxLayout, formatCurrency);
-const SmallCurrencyShorthandBox = withFormatter(
+const SmallMultipleBox = withFormatters(SmallBoxLayout, formatMultiple);
+const SmallPercentBox = withFormatters(
+  SmallBoxLayout,
+  formatPercent,
+  formatDeltaPercent
+);
+const SmallNumberBox = withFormatters(SmallBoxLayout, formatNumber);
+const SmallCurrencyBox = withFormatters(SmallBoxLayout, formatCurrency);
+const SmallCurrencyShorthandBox = withFormatters(
   SmallBoxLayout,
   formatCurrencyShorthand
 );
-const SmallDateBox = withFormatter(SmallBoxLayout, formatDate);
+const SmallDateBox = withFormatters(SmallBoxLayout, formatDate);
 
 // Define FunnelBoxLayouts that take values and targets of various types.
-const FunnelMultipleBox = withFormatter(FunnelBoxLayout, formatMultiple);
-const FunnelPercentBox = withFormatter(FunnelBoxLayout, formatPercent);
-const FunnelNumberBox = withFormatter(FunnelBoxLayout, formatNumber);
-const FunnelCurrencyBox = withFormatter(FunnelBoxLayout, formatCurrency);
-const FunnelCurrencyShorthandBox = withFormatter(
+const FunnelMultipleBox = withFormatters(FunnelBoxLayout, formatMultiple);
+const FunnelPercentBox = withFormatters(
+  FunnelBoxLayout,
+  formatPercent,
+  formatDeltaPercent
+);
+const FunnelNumberBox = withFormatters(FunnelBoxLayout, formatNumber);
+const FunnelCurrencyBox = withFormatters(FunnelBoxLayout, formatCurrency);
+const FunnelCurrencyShorthandBox = withFormatters(
   FunnelBoxLayout,
   formatCurrencyShorthand
 );
-const FunnelDateBox = withFormatter(FunnelBoxLayout, formatDate);
+const FunnelDateBox = withFormatters(FunnelBoxLayout, formatDate);
 
 /**
  * @description Utility to return a style object that partitions width into N.
@@ -392,11 +471,13 @@ class LeasingPerformanceReport extends Component {
               name="Lease Applications"
               value={r.lease_applications}
               target={r.target_lease_applications}
+              delta={r.delta_lease_applications}
             />
             <SmallNumberBox
               name="Cancellations and Denials"
               value={r.lease_cds}
               target={r.target_lease_cds}
+              delta={r.delta_lease_cds}
             />
           </BoxColumn>
           <BoxColumn>
@@ -404,11 +485,13 @@ class LeasingPerformanceReport extends Component {
               name="Notices to Renew"
               value={r.lease_renewals}
               target={r.target_lease_renewals}
+              delta={r.delta_lease_renewals}
             />
             <SmallNumberBox
               name="Notices to Vacate"
               value={r.lease_vacation_notices}
               target={r.target_lease_vacation_notices}
+              delta={r.delta_lease_vacation_notices}
             />
           </BoxColumn>
           <BoxColumn>
@@ -416,11 +499,13 @@ class LeasingPerformanceReport extends Component {
               name="Move Ins"
               value={r.move_ins}
               target={r.target_move_ins}
+              delta={r.delta_move_ins}
             />
             <SmallNumberBox
               name="Move Outs"
               value={r.move_outs}
               target={r.target_move_outs}
+              delta={r.delta_move_outs}
             />
           </BoxColumn>
         </BoxRow>
@@ -461,6 +546,7 @@ class CampaignInvestmentReport extends Component {
           name="Campaign Investment"
           value={r.investment}
           target={r.target_investment}
+          delta={r.delta_investment}
         />
         <LargeCurrencyShorthandBox
           name="Est. Revenue Change"
@@ -486,6 +572,7 @@ class CampaignInvestmentReport extends Component {
       const b_num = Number(b);
       return b_num == 0 ? 0 : a_num / b_num;
     };
+
     // gin up victoryjs style data from the raw props
     const data = [
       {
@@ -513,8 +600,6 @@ class CampaignInvestmentReport extends Component {
         color: "#675efc"
       }
     ];
-
-    console.log(data);
 
     // render the bar chart
     return (
@@ -565,6 +650,7 @@ class CampaignInvestmentReport extends Component {
           name="Acquisition Investment"
           value={r.acq_investment}
           target={r.target_acq_investment}
+          delta={r.delta_acq_investment}
         />
         <SmallCurrencyShorthandBox
           name="Est. Acquired Leasing Revenue"
@@ -615,11 +701,13 @@ class CampaignInvestmentReport extends Component {
           name="Lease Renewals"
           value={r.lease_renewals}
           target={r.target_lease_renewals}
+          delta={r.delta_lease_renewals}
         />
         <SmallCurrencyShorthandBox
           name="Retention Investment"
           value={r.ret_investment}
           target={r.target_ret_investment}
+          delta={r.delta_ret_investment}
         />
         <SmallCurrencyShorthandBox
           name="Est. Retained Leasing Revenue"
@@ -694,16 +782,21 @@ class AcquisitionFunnelReport extends Component {
           name="USV > EXE"
           value={r.usv_exe_perc}
           target={r.target_usv_exe_perc}
+          delta={r.delta_usv_exe_perc}
         />
         <LargePercentBox
           name="Cancellation & Denial Rate"
           value={r.lease_cd_rate}
           target={r.target_lease_cd_rate}
+          delta={r.delta_lease_cd_rate}
         />
+        {/* we reverse the arrow here because declining percentages are *good* */}
         <LargePercentBox
           name="Cost Per EXE / Average Monthly Rent"
           value={r.cost_per_exe_vs_monthly_average_rent}
           detail={r.target_cost_per_exe_vs_monthly_average_rent}
+          delta={r.delta_cost_per_exe_vs_monthly_average_rent}
+          reverseArrow={true}
         />
       </BoxRow>
     );
@@ -778,26 +871,31 @@ class AcquisitionFunnelReport extends Component {
             name="Volume of USV"
             value={r.usvs}
             target={r.target_usvs}
+            delta={r.delta_usvs}
           />
           <FunnelNumberBox
             name="Volume of INQ"
             value={r.inquiries}
             target={r.target_inquiries}
+            delta={r.delta_inquiries}
           />
           <FunnelNumberBox
             name="Volume of TOU"
             value={r.tours}
             target={r.target_tours}
+            delta={r.delta_tours}
           />
           <FunnelNumberBox
             name="Volume of APP"
             value={r.lease_applications}
             target={r.target_lease_applications}
+            delta={r.delta_lease_applications}
           />
           <FunnelNumberBox
             name="Volume of EXE"
             value={r.leases_executed}
             target={r.target_leases_executed}
+            delta={r.delta_leases_executed}
           />
         </BoxColumn>
 
@@ -806,21 +904,25 @@ class AcquisitionFunnelReport extends Component {
             name="USV > INQ"
             value={r.usv_inq_perc}
             target={r.target_usv_inq_perc}
+            delta={r.delta_usv_inq_perc}
           />
           <FunnelPercentBox
             name="INQ > TOU"
             value={r.inq_tou_perc}
             target={r.target_inq_tou_perc}
+            delta={r.delta_inq_tou_perc}
           />
           <FunnelPercentBox
             name="TOU > APP"
             value={r.tou_app_perc}
             target={r.target_tou_app_perc}
+            delta={r.delta_tou_app_perc}
           />
           <FunnelPercentBox
             name="APP > EXE"
             value={r.app_exe_perc}
             target={r.target_app_exe_perc}
+            delta={r.delta_app_exe_perc}
           />
         </BoxColumn>
 
@@ -829,26 +931,31 @@ class AcquisitionFunnelReport extends Component {
             name="Cost per USV"
             value={r.cost_per_usv}
             target={r.target_cost_per_usv}
+            delta={r.delta_cost_per_usv}
           />
           <FunnelCurrencyBox
             name="Cost per INQ"
             value={r.cost_per_inq}
             target={r.target_cost_per_inq}
+            delta={r.delta_cost_per_inq}
           />
           <FunnelCurrencyBox
             name="Cost per TOU"
             value={r.cost_per_tou}
             target={r.target_cost_per_tou}
+            delta={r.delta_cost_per_tou}
           />
           <FunnelCurrencyBox
             name="Cost per APP"
             value={r.cost_per_app}
             target={r.target_cost_per_app}
+            delta={r.delta_cost_per_app}
           />
           <FunnelCurrencyBox
             name="Cost per EXE"
             value={r.cost_per_exe}
             target={r.target_cost_per_exe}
+            delta={r.delta_cost_per_exe}
           />
         </BoxColumn>
       </BoxRow>

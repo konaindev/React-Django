@@ -36,12 +36,13 @@ export const formatPercent = (value, decimals = 0) => {
  * @description Convert a value (like 4500) to a display string (4,500)
  *
  * @param {number|string} value A numerical value to format
- * @param {number} decimals The number of decimal places to include
+ * @param {number} minDecimals The minimum number of decimal places to include
+ * @param {number} maxDecimals The maximum number of decimal places to include
  */
-export const formatNumber = (value, decimals = 0) => {
+export const formatNumber = (value, minDecimals = 0, maxDecimals = 0) => {
   const formatter = Intl.NumberFormat(getLanguage(), {
-    minimumFractionDigits: decimals,
-    maximumFractionDigits: decimals
+    minimumFractionDigits: minDecimals,
+    maximumFractionDigits: maxDecimals
   });
   return formatter.format(value);
 };
