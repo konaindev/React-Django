@@ -17,7 +17,8 @@ import {
   formatNumber,
   formatCurrency,
   formatCurrencyShorthand,
-  formatDate
+  formatDate,
+  formatDeltaPercent
 } from "../utils/formatters";
 
 //
@@ -43,19 +44,7 @@ const targetFormatter = formatter => targetValue =>
     `Target: ${formatter(targetValue)}`
   );
 
-const formatTargetMultiple = targetFormatter(formatMultiple);
 const formatTargetPercent = targetFormatter(formatPercent);
-const formatTargetNumber = targetFormatter(formatNumber);
-const formatTargetCurrency = targetFormatter(formatCurrency);
-const formatTargetCurrencyShorthand = targetFormatter(formatCurrencyShorthand);
-const formatTargetDate = targetFormatter(formatDate);
-
-/**
- * @description Format a difference between two percentages as points.
- */
-const formatDeltaPercent = value => {
-  return `${formatNumber(value * 100, 0, 1)}pts`;
-};
 
 /**
  * @class LargeBoxLayout
@@ -424,9 +413,7 @@ class LeasingPerformanceReport extends Component {
    * @name LeasingPerformanceReport.HeadlineNumbers
    * @description Component that renders the most important leasing performance numbers.
    */
-  static HeadlineNumbers = props => {
-    const r = props.report;
-
+  static HeadlineNumbers = ({ report: r }) => {
     return (
       <BoxRow>
         <LargeBoxLayout
@@ -461,8 +448,7 @@ class LeasingPerformanceReport extends Component {
    * @name LeasingPerformanceReport.DetailNumbers
    * @description Component that renders the secondary leasing performance numbers.
    */
-  static DetailNumbers = props => {
-    const r = props.report;
+  static DetailNumbers = ({ report: r }) => {
     return (
       <BoxTable>
         <BoxRow>
@@ -538,8 +524,7 @@ class CampaignInvestmentReport extends Component {
    * @name CampaignInvestmentReport.HeadlineNumbers
    * @description Component that rendersheadline numbers for the investment report
    */
-  static HeadlineNumbers = props => {
-    const r = props.report;
+  static HeadlineNumbers = ({ report: r }) => {
     return (
       <BoxRow>
         <LargeCurrencyShorthandBox
@@ -566,7 +551,14 @@ class CampaignInvestmentReport extends Component {
    * @name CampaignInvestmentReport.InvestmentChart
    * @description Component that renders a single investment breakdown bar chart
    */
-  static InvestmentChart = props => {
+  static InvestmentChart = ({
+    name,
+    reputation_building,
+    demand_creation,
+    leasing_enablement,
+    market_intelligence,
+    investment
+  }) => {
     const div_or_0 = (a, b) => {
       const a_num = Number(a);
       const b_num = Number(b);
@@ -577,33 +569,33 @@ class CampaignInvestmentReport extends Component {
     const data = [
       {
         category: "Reputation Building",
-        investment: formatCurrencyShorthand(props.reputation_building),
-        percent: div_or_0(props.reputation_building, props.investment),
+        investment: formatCurrencyShorthand(reputation_building),
+        percent: div_or_0(reputation_building, investment),
         color: "#4035f4"
       },
       {
         category: "Demand Creation",
-        investment: formatCurrencyShorthand(props.demand_creation),
-        percent: div_or_0(props.demand_creation, props.investment),
+        investment: formatCurrencyShorthand(demand_creation),
+        percent: div_or_0(demand_creation, investment),
         color: "#5147ff"
       },
       {
         category: "Leasing Enablement",
-        investment: formatCurrencyShorthand(props.leasing_enablement),
-        percent: div_or_0(props.leasing_enablement, props.investment),
+        investment: formatCurrencyShorthand(leasing_enablement),
+        percent: div_or_0(leasing_enablement, investment),
         color: "#867ffe"
       },
       {
         category: "Market Intelligence",
-        investment: formatCurrencyShorthand(props.market_intelligence),
-        percent: div_or_0(props.market_intelligence, props.investment),
+        investment: formatCurrencyShorthand(market_intelligence),
+        percent: div_or_0(market_intelligence, investment),
         color: "#675efc"
       }
     ];
 
     // render the bar chart
     return (
-      <ReportSection name={props.name} horizontalPadding={false}>
+      <ReportSection name={name} horizontalPadding={false}>
         <div className="k-rectangle p-4">
           <VictoryChart
             theme={remarkablyChartTheme}
@@ -637,8 +629,7 @@ class CampaignInvestmentReport extends Component {
    * @name CampaignInvestmentReport.AcquisitionDetails
    * @description Component to render campaign acq_investment detail numbers
    */
-  static AcquisitionDetails = props => {
-    const r = props.report;
+  static AcquisitionDetails = ({ report: r }) => {
     return (
       <ReportSection name="Acquisition" horizontalPadding={false}>
         <SmallNumberBox
@@ -669,18 +660,18 @@ class CampaignInvestmentReport extends Component {
   /**
    * @description Render acqusition report section.
    */
-  static Acquisition = props => {
+  static Acquisition = ({ report: r }) => {
     const acqChartData = {
-      investment: props.report.acq_investment,
-      reputation_building: props.report.acq_reputation_building,
-      demand_creation: props.report.acq_demand_creation,
-      leasing_enablement: props.report.acq_leasing_enablement,
-      market_intelligence: props.report.acq_market_intelligence
+      investment: r.acq_investment,
+      reputation_building: r.acq_reputation_building,
+      demand_creation: r.acq_demand_creation,
+      leasing_enablement: r.acq_leasing_enablement,
+      market_intelligence: r.acq_market_intelligence
     };
 
     return (
       <BoxColumn>
-        <CampaignInvestmentReport.AcquisitionDetails report={props.report} />
+        <CampaignInvestmentReport.AcquisitionDetails report={r} />
         <CampaignInvestmentReport.InvestmentChart
           name="Acquisition Investment Allocations"
           {...acqChartData}
@@ -693,8 +684,7 @@ class CampaignInvestmentReport extends Component {
    * @name CampaignInvestmentReport.RetentionDetails
    * @description Component to render campaign ret_investment detail numbers
    */
-  static RetentionDetails = props => {
-    const r = props.report;
+  static RetentionDetails = ({ report: r }) => {
     return (
       <ReportSection name="Retention" horizontalPadding={false}>
         <SmallNumberBox
@@ -727,18 +717,18 @@ class CampaignInvestmentReport extends Component {
    * @name CampaignInvestmentReport.Retention
    * @description Component that renders the retention report section.
    */
-  static Retention = props => {
+  static Retention = ({ report: r }) => {
     const retChartData = {
-      investment: props.report.ret_investment,
-      reputation_building: props.report.ret_reputation_building,
-      demand_creation: props.report.ret_demand_creation,
-      leasing_enablement: props.report.ret_leasing_enablement,
-      market_intelligence: props.report.ret_market_intelligence
+      investment: r.ret_investment,
+      reputation_building: r.ret_reputation_building,
+      demand_creation: r.ret_demand_creation,
+      leasing_enablement: r.ret_leasing_enablement,
+      market_intelligence: r.ret_market_intelligence
     };
 
     return (
       <BoxColumn>
-        <CampaignInvestmentReport.RetentionDetails report={props.report} />
+        <CampaignInvestmentReport.RetentionDetails report={r} />
         <CampaignInvestmentReport.InvestmentChart
           name="Retention Investment Allocations"
           {...retChartData}
@@ -773,9 +763,7 @@ class AcquisitionFunnelReport extends Component {
    * @name AcquisitionFunnelReport.HeadlineNumbers
    * @description Component that renders headline acquisition funnel numbers
    */
-  static HeadlineNumbers = props => {
-    const r = props.report;
-
+  static HeadlineNumbers = ({ report: r }) => {
     return (
       <BoxRow>
         <LargePercentBox
@@ -806,31 +794,31 @@ class AcquisitionFunnelReport extends Component {
    * @name AcquisitionFunnelReport.FunnelTable
    * @description Component that lays out the table header and content columns
    */
-  static FunnelTable = props => {
+  static FunnelTable = ({ header, content }) => {
     return (
       <div className="flex flex-row flex-grow items-stretch pt-8">
-        <div className="w-1/6">{props.header}</div>
+        <div className="w-1/6">{header}</div>
         <div className="w-5/6 flex flex-row flex-grow items-stretch">
-          {props.content}
+          {content}
         </div>
       </div>
     );
   };
 
-  static FunnelHeaderBox = props => {
+  static FunnelHeaderBox = ({ number, name, more }) => {
     return (
       <div className="k-funnel-label">
-        <div className={`bg-remark-funnel-${props.number}`}>
-          <div>{props.name}</div>
+        <div className={`bg-remark-funnel-${number}`}>
+          <div>{name}</div>
         </div>
-        <div className={`text-remark-funnel-${props.number + 1}`}>
-          {props.more ? "↓" : <span>&nbsp;</span>}
+        <div className={`text-remark-funnel-${number + 1}`}>
+          {more ? "↓" : <span>&nbsp;</span>}
         </div>
       </div>
     );
   };
 
-  static FunnelHeader = props => {
+  static FunnelHeader = () => {
     return (
       <BoxColumn>
         <AcquisitionFunnelReport.FunnelHeaderBox
@@ -862,8 +850,7 @@ class AcquisitionFunnelReport extends Component {
     );
   };
 
-  static FunnelContent = props => {
-    const r = props.report;
+  static FunnelContent = ({ report: r }) => {
     return (
       <BoxRow externalMargin={false}>
         <BoxColumn>

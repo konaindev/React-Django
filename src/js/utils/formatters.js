@@ -7,17 +7,6 @@ const getLanguage = () =>
   (navigator.languages || ["en-US"])[0];
 
 /**
- * @description Format a multiple by putting the letter x next to it.
- *
- * @param {number|string} value A value to format
- *
- * @note This could probably use some smarts.
- */
-export const formatMultiple = value => {
-  return `${value}x`;
-};
-
-/**
  * @description Convert a value (like 0.25) to a display string (25%)
  *
  * @param {number|string} value A percentage value out of 1.0 to format
@@ -36,13 +25,12 @@ export const formatPercent = (value, decimals = 0) => {
  * @description Convert a value (like 4500) to a display string (4,500)
  *
  * @param {number|string} value A numerical value to format
- * @param {number} minDecimals The minimum number of decimal places to include
- * @param {number} maxDecimals The maximum number of decimal places to include
+ * @param {number} decimals The number of decimal places to include
  */
-export const formatNumber = (value, minDecimals = 0, maxDecimals = 0) => {
+export const formatNumber = (value, decimals = 0) => {
   const formatter = Intl.NumberFormat(getLanguage(), {
-    minimumFractionDigits: minDecimals,
-    maximumFractionDigits: maxDecimals
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals
   });
   return formatter.format(value);
 };
@@ -114,4 +102,28 @@ export const formatDate = (value, year = true) => {
   const d = new Date(rawDate.getTime() + timezoneOffset);
 
   return formatter.format(d);
+};
+
+/**
+ * @description Format a multiple by putting the letter x next to it.
+ *
+ * @param {number|string} value A value to format
+ *
+ * @note This could probably use some smarts.
+ */
+export const formatMultiple = value => {
+  return `${value}x`;
+};
+
+/**
+ * @description Format the difference between two percentages as "points"
+ *
+ * @param {number|string} value A number of points, divided by 100, to format
+ *
+ * @note The `value` parameter is intended to be
+ */
+export const formatDeltaPercent = value => {
+  const number = Number(value) * 100;
+  const digits = Math.abs(number) < 1 ? 1 : 0;
+  return `${formatNumber(number, digits)}pts`;
 };
