@@ -82,7 +82,10 @@ class Period(ModelPeriod, models.Model):
     # ------------------------------------------------------
 
     leased_units_start = models.IntegerField(
-        default=0, help_text="Number of leased units at period start"
+        default=None,
+        null=True,
+        blank=True,
+        help_text="Number of leased units at period start. If not specified, will be pulled from a previous period.",
     )
     leased_units_start.metric = Metric(Behavior.POINT_IN_TIME_EARLIEST_KEEP)
 
@@ -187,14 +190,19 @@ class Period(ModelPeriod, models.Model):
     # Physical activity (occupancy)
     # ------------------------------------------------------
 
-    occupiable_units = models.IntegerField(
-        default=0,
-        help_text="Number of units that can possibly be occupied at period end",
+    occupiable_units_start = models.IntegerField(
+        default=None,
+        null=True,
+        blank=True,
+        help_text="Number of units that can possibly be at period start. If not specified, will be pulled from a previous period.",
     )
-    occupiable_units.metric = Metric(Behavior.POINT_IN_TIME_LATEST_KEEP)
+    occupiable_units_start.metric = Metric(Behavior.POINT_IN_TIME_EARLIEST_KEEP)
 
     occupied_units_start = models.IntegerField(
-        default=0, help_text="Number of units occupied at period start"
+        default=0,
+        null=True,
+        blank=True,
+        help_text="Number of units occupied at period start. If not specified, will be pulled from a previous period.",
     )
     occupied_units_start.metric = Metric(Behavior.POINT_IN_TIME_EARLIEST_KEEP)
 
@@ -258,8 +266,10 @@ class Period(ModelPeriod, models.Model):
     monthly_average_rent = models.DecimalField(
         max_digits=10,
         decimal_places=2,
-        default=decimal.Decimal(1),
-        help_text="Average rent tenants pay in the month including this period",
+        default=None,
+        null=True,
+        blank=True,
+        help_text="Average rent tenants pay in the month including this period. If not specified, it will be pulled from an earlier period.",
     )
     monthly_average_rent.metric = Metric(Behavior.POINT_IN_TIME_EARLIEST_KEEP)
 

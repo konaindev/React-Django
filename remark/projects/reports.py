@@ -6,6 +6,7 @@ from remark.lib.math import (
     sum_or_0,
     sum_or_none,
     sub_or_none,
+    mult_or_0,
     mult_or_none,
     d_div_or_0,
     d_div_or_none,
@@ -42,9 +43,15 @@ class ComputedPeriod(ComputedValueMixin):
         return self.leases_executed - self.leases_ended
 
     @computed_value
+    def occupiable_units(self):
+        """The total number of occupiable units in effect at the end of the period."""
+        # This doesn't change throughout the period.
+        return self.occupiable_units_start
+
+    @computed_value
     def leased_units(self):
         """The total number of leases in effect at the end of the period."""
-        return self.leased_units_start + self.delta_leases
+        return sum_or_0(self.leased_units_start, self.delta_leases)
 
     @computed_value
     def leased_rate(self):
@@ -154,7 +161,7 @@ class ComputedPeriod(ComputedValueMixin):
         Return an estimate of how much new annualk revenue will be obtained on the 
         basis of this period's acquisition funnel outcomes.
         """
-        return self.delta_leases * self.monthly_average_rent * 12
+        return mult_or_0(self.delta_leases, self.monthly_average_rent, 12)
 
     @computed_value
     def estimated_ret_revenue_gain(self):
@@ -162,7 +169,7 @@ class ComputedPeriod(ComputedValueMixin):
         Return an estimate of how much new annual revenue will be obtained on the 
         basis of this period's acquisition funnel outcomes.
         """
-        return self.lease_renewals * self.monthly_average_rent * 12
+        return mult_or_0(self.lease_renewals, self.monthly_average_rent, 12)
 
     @computed_value
     def estimated_revenue_gain(self):
@@ -495,7 +502,7 @@ class Report:
         )
         return cls(period, previous_period) if period is not None else None
 
-    def __init__(self, period, previous_period):
+    def __init__(self, period, previous_period=None):
         self.period = ComputedPeriod(period)
         if previous_period:
             previous_period = ComputedPeriod(previous_period)

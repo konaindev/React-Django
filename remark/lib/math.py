@@ -67,6 +67,13 @@ def sub_or_none(*values):
     return reduce(propagate_none(op_sub), values)
 
 
+def mult_or_0(*values):
+    """
+    Multiple all values. If any of them is None, substitute 0 instead.
+    """
+    return reduce(swallow_none(op_mult, 0), values, 1)
+
+
 def mult_or_1(*values):
     """
     Multiply all values. If any of them is None, substitute 1 instead.
