@@ -72,11 +72,13 @@ export const formatCurrencyShorthand = (value, currency = "USD") => {
   }
   const level = levels[levelIndex];
 
+  const maximumDigits = Math.abs(number) < 1 ? 1 : 0;
+
   // format the result as a dollar value
   const formatter = Intl.NumberFormat("en-US", {
     style: "currency",
     minimumFractionDigits: 0,
-    maximumFractionDigits: 1,
+    maximumFractionDigits: maximumDigits,
     useGrouping: false,
     currency
   });

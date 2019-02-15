@@ -1,7 +1,10 @@
+import datetime
+
 from collections import namedtuple
 from enum import Enum, auto
 from decimal import Decimal
 
+from remark.lib.collections import SortedList
 from remark.lib.math import sum_or_none, mult_or_none
 
 
@@ -111,6 +114,224 @@ class Behavior(Enum):
 TimeValue = namedtuple("TimeValue", ["start", "end", "value"])
 
 
+class TimeValueCollection:
+    """
+    Holds on to a collection of time values and provides efficient in-memory 
+    operations for idnexing them.
+    """
+
+    # TODO Pandas provides a number of useful time series utilities, including
+    # indexing data structures, but they do not appear to deal well with
+    # *non*regular periods of time, which we definitely *do* have to think about
+    # here. Worth investigating in the near future. -Dave
+
+    def __init__(self, time_values=None, starts=None, ends=None):
+        """
+        Construct a collection. For efficiency, there are multiple ways
+        to supply collection content:
+
+        - time_values: a (possibly unordered) list of time values
+        - starts: a remark.lib.collections.SortedList keyed by start
+        - ends: a remark.lib.collections.SortedList keyed by end
+
+        You *must* supply at least one parameter. You *may* supply more
+        than one, provided that they agree. (No attempt is made to check
+        that they agree!)
+        """
+        if (time_values is None) and (starts is None) and (ends is None):
+            raise InvalidMetricOperation(
+                "Cannot construct a TimeValueCollection without time_values."
+            )
+        self._time_values = list(time_values) if time_values is not None else None
+        self._starts = starts
+        self._ends = ends
+
+    def _any_list(self):
+        """
+        Return whichever of _time_values, _starts, and _ends is available.
+
+        Typically used by callers that want to perfom basic operations without
+        calling _ensure_...
+        """
+        if self._starts is not None:
+            return self._starts
+        if self._ends is not None:
+            return self._ends
+        if self._time_values is not None:
+            return self._time_values
+        return []
+
+    def __len__(self):
+        """Return length of collection without doing further work."""
+        return len(self._any_list())
+
+    def __contains__(self, value):
+        """Return True if value is in our collection."""
+        return value in self._any_list()
+
+    def __iter__(self):
+        """Return an iterator over the default ordering."""
+        self._ensure_time_values()
+        return self._time_values.__iter__()
+
+    def __getitem__(self, val):
+        """Return items based on the default ordering."""
+        self._ensure_time_values()
+        return self._time_values.__getitem__(val)
+
+    def _ensure_time_values(self):
+        """Ensure we have a local default ordering."""
+        if self._time_values is None:
+            # Create the _time_values list from one of our lists; prefer the _starts
+            # if it was provided.
+            self._time_values = (
+                list(self._starts) if self._starts is not None else list(self._ends)
+            )
+
+    def _ensure_starts(self):
+        """Ensure we have a local start-first ordering."""
+        if self._starts is None:
+            self._ensure_time_values()
+            # Create the _starts index from our time_values list.
+            self._starts = SortedList(
+                self._time_values, key=lambda time_value: time_value.start
+            )
+
+    def _ensure_ends(self):
+        """Ensure we have a local end-first ordering."""
+        if self._ends is None:
+            self._ensure_time_values()
+            # Create the _ends index from our time_values list.
+            self._ends = SortedList(
+                self._time_values, key=lambda time_value: time_value.end
+            )
+
+    def first(self):
+        """Return first item in collection, or None if collection is empty."""
+        return self[0] if len(self) > 0 else None
+
+    def last(self):
+        """Return last item in collection, or None if collection is empty."""
+        return self[-1] if len(self) > 0 else None
+
+    def order_by_start(self):
+        """
+        Return a TimeValueCollection whose default ordering is by start.
+        """
+        self._ensure_starts()
+        return TimeValueCollection(starts=self._starts)
+
+    def order_by_end(self):
+        """
+        Return a TimeValueCollection whose default ordering is by end.
+        """
+        self._ensure_ends()
+        return TimeValueCollection(ends=self._ends)
+
+    def _process_filter_kwargs(self, kwargs):
+        """
+        Break out filter kwargs of the form accepted by filter(...) into
+        the start/end param dicts for SortedList.irange_key()   
+
+        Returns a tuple of start_filters and end_filters
+        """
+        start_filters = []
+        end_filters = []
+
+        # Break out filters into start/end param dicts for SortedList.irange_key()
+        for arg, v in kwargs.items():
+            a = arg
+
+            # Determine which side of the date range we're filtering.
+            if a.startswith("start__"):
+                target_filters = start_filters
+                a = a[len("start__") :]
+            elif a.startswith("end__"):
+                target_filters = end_filters
+                a = a[len("end__") :]
+            else:
+                raise TypeError(
+                    f"TimeValueCollection.filter() got an unexpected keyword argument '{arg}'"
+                )
+
+            if a == "gt":
+                target_filters.append(dict(min_key=v, inclusive=(False, None)))
+            elif a == "gte":
+                target_filters.append(dict(min_key=v, inclusive=(True, None)))
+            elif a == "lt":
+                target_filters.append(dict(max_key=v, inclusive=(None, False)))
+            elif a == "lte":
+                target_filters.append(dict(max_key=v, inclusive=(None, True)))
+            elif a == "eq":
+                target_filters.append(
+                    dict(min_key=v, max_key=v, inclusive=(True, True))
+                )
+            else:
+                raise TypeError(
+                    f"TimeValueCollection.filter() got an unexpected keyword argument '{arg}'"
+                )
+
+        return (start_filters, end_filters)
+
+    def _filter_values(self, filters, sorted_list):
+        """
+        Execute multiple filters on a SortedList.
+        """
+        filtered = sorted_list
+        for f in filters:
+            filtered = SortedList(filtered.irange_key(**f), key=sorted_list.key)
+        return filtered
+
+    def filter(self, **kwargs):
+        """
+        Provide a queryset-like filtering interface that allows for the following
+        keywords: 
+
+        start__gt, start__gte, start__lt, start__lte, start__eq,
+        end__gt, end__gte, end__lt, end__lte, end__eq,
+
+        Returns a new TimeValueCollection filtered to just the matching values.
+        """
+        start_filters, end_filters = self._process_filter_kwargs(kwargs)
+
+        # Filter starts if requested
+        starts = None
+        if start_filters:
+            self._ensure_starts()
+            starts = self._filter_values(start_filters, self._starts)
+
+        # Filter ends if requested
+        ends = None
+        if end_filters:
+            self._ensure_ends()
+            ends = self._filter_values(end_filters, self._ends)
+
+        # If necessary, join the results across filters.
+        # Attempt to preserve ordering if already established.
+        if (starts is not None) and (ends is not None):
+            result = TimeValueCollection(time_values=set(starts) & set(ends))
+        elif starts is not None:
+            result = TimeValueCollection(starts=starts)
+        elif ends is not None:
+            result = TimeValueCollection(ends=ends)
+        else:
+            self._ensure_time_values()
+            result = TimeValueCollection(self._time_values)
+
+        return result
+
+    def overlaps(self, start, end):
+        """
+        Return a TimeValueCollection filtered down to just those time values
+        whose span overlaps the given date range; that is, any time value
+        that has part or all of its date range within the requested range.
+
+        This is morally equivalent to postgres's notion of OVERLAPS for 
+        half-open ranges.
+        """
+        return self.filter(start__lt=end, end__gt=start)
+
+
 class Metric:
     def __init__(self, behavior):
         self.behavior = behavior
@@ -140,14 +361,26 @@ class Metric:
         Returns a TimeValue, which contains a start and end date along with the
         raw underlying value.
 
+        If sorted is True, we assume the time_values are already sorted by their start time;
+        otherwise, we may internally sort ourselves.
+
         Raises an InvalidMetricOperation if preconditions are not met.
         """
-        # Sort the values based on their start dates
-        time_values = list(sorted(time_values, key=lambda time_value: time_value.start))
+        time_value_collection = TimeValueCollection(time_values)
+        return self.merge_collection(time_value_collection)
+
+    def merge_collection(self, time_value_collection):
+        # Return nothing if there are no values...
+        if len(time_value_collection) == 0:
+            return None
 
         # Nothing to merge if there's only one value...
-        if len(time_values) == 1:
-            return time_values[0]
+        if len(time_value_collection) == 1:
+            return time_value_collection[0]
+
+        # Ensure a sort order by start. (This is a no-op if the collection is
+        # already so ordered).
+        time_values = time_value_collection.order_by_start()
 
         # CONSIDER: semantically, it probably makes sense for merge(...) to enforce
         # that date ranges are contiguous for intervallic merges. In practice,
@@ -329,6 +562,88 @@ class Metric:
 
         return (left, right)
 
+    def unify(self, start, end, *time_values):
+        """
+        Combine an arbitrary set of TimeValues according to the metric's behavior.
+
+        Returns a TimeValue, which contains the *precise* specified start and
+        end date along with the raw underlying value. (Compare with merge(...), 
+        whose start and end dates are explicitly determined by those of the provided
+        time values.)
+
+        Raises an InvalidMetricOperation if preconditions are not met.
+        """
+        time_value_collection = TimeValueCollection(time_values)
+        return self.unify_collection(start, end, time_value_collection)
+
+    def unify_collection(self, start, end, time_value_collection):
+        """
+        See definition of unify above; this method expects a TimeValueCollection.
+        """
+        if self.behavior.is_point_in_time():
+            result = self._unify_pit(start, end, time_value_collection)
+        else:
+            result = self._unify_interval(start, end, time_value_collection)
+        return result
+
+    def _unify_pit(self, start, end, time_value_collection):
+        # Under unification, the PIT TimeValue is the value that occurs
+        # at or immediately before (EARLIEST), or immediately after (LATEST)
+        # the timespan.
+
+        # CONSIDER: Should we always return a TimeValue, and have its underlying
+        # value be the metric's default? (We'd have to define a default.) Or is
+        # returning None the right expected behavior?
+
+        # CONSIDER: Should we return a TimeValue whose start/end match the
+        # provided unification span's start/end? Or should we keep the original
+        # start/end? What's the right expected behavior?
+        if self.behavior.is_merge_earliest():
+            time_value = (
+                time_value_collection.filter(start__lte=start).order_by_start().last()
+            )
+        else:
+            time_value = (
+                time_value_collection.filter(start__gte=end).order_by_start().first()
+            )
+        return TimeValue(*time_value) if time_value else None
+
+    def _unify_interval(self, start, end, time_value_collection):
+        # Under unification, we must (1) find all time values that intersect the
+        # target span, (2) suture the first and last, (3) merge what remains.
+        # There are a few special cases here, particularly if there's only
+        # one period the overlaps.
+        time_value_collection = time_value_collection.overlaps(
+            start, end
+        ).order_by_start()
+
+        merge_time_values = []
+
+        if len(time_value_collection) == 1:
+            # Zero, one, or both ends of our single value may need to be separated.
+            time_value = time_value_collection[0]
+            if start >= time_value.start and start < time_value.end:
+                _, time_value = self.separate(start, time_value)
+            if end >= time_value.start and end < time_value.end:
+                time_value, _ = self.separate(end, time_value)
+            merge_time_values = [time_value]
+        elif len(time_value_collection) > 1:
+            # Zero or one ends of our first value may need to be separated.
+            first_time_value = time_value_collection.first()
+            if start >= first_time_value.start and start < first_time_value.end:
+                _, first_time_value = self.separate(start, first_time_value)
+
+            # Zero or one ends of our last value may need to be separated.
+            last_time_value = time_value_collection.last()
+            if end >= last_time_value.start and end < last_time_value.end:
+                last_time_value, _ = self.separate(end, last_time_value)
+
+            merge_time_values = (
+                [first_time_value] + time_value_collection[1:-1] + [last_time_value]
+            )
+
+        return self.merge(*merge_time_values)
+
 
 class PeriodBase:
     """
@@ -376,9 +691,43 @@ class PeriodBase:
         """
         Return a value for the specified name.
 
-        If no such Value exists for this period, return None.
+        If no such Value exists for this period, raise an exception.
         """
         raise NotImplementedError()
+
+
+class BarePeriod(PeriodBase):
+    """
+    A Period implementation that holds its values in memory.
+    """
+
+    def __init__(self, start, end, metrics, values):
+        """
+        Construct a BarePeriod with explicit start and end date,
+        a mapping from metric names to Metric instances, and a separate
+        mapping from metric names to underlying values.
+        """
+        self._start = start
+        self._end = end
+        self._values = values
+
+    def get_start(self):
+        return self._start
+
+    def get_end(self):
+        return self._end
+
+    def get_metric_names(self):
+        return self._metrics.keys()
+
+    def get_metric(self, name):
+        return self._metrics.get(name)
+
+    def get_values(self):
+        return dict(self._values)
+
+    def get_value(self, name):
+        return self._values[name]
 
 
 class ModelPeriod(PeriodBase):
@@ -424,30 +773,197 @@ class ModelPeriod(PeriodBase):
         return getattr(self, name)
 
 
-class PeriodSetBase:
+class MultiPeriodBase:
     """
-    A PeriodSet represents a collection of Periods that are contiguous in time.
+    A MultiPeriod represents a set of named values whose timespans
+    intersect with the MultiPeriod's timespan. In each MultiPeriod, there
+    may be multiple values, represented as a TimeValueCollection, for a given Metric.
     """
 
-    @classmethod
-    def from_equal_periods(cls, period, length):
+    def get_start(self):
         """
-        Given a period that spans *at least* the length specified, split it
-        into a set of periods of equal length (provided as a timedelta)
+        Return the start time (inclusive) for this MultiPeriod.
+
+        Derived classes can implement this as they see fit.
+        """
+        raise NotImplementedError()
+
+    def get_end(self):
+        """
+        Return the end time (exclusive) for this MultiPeriod.
+
+        Derived classes can implement this as they see fit.
+        """
+        raise NotImplementedError()
+
+    def get_metric_names(self):
+        """
+        Return an iterable of all metric names in this multiperiod.
+        """
+        raise NotImplementedError()
+
+    def get_metric(self, name):
+        """
+        Return a (capital) Metric for the specified name.
+
+        If no such Metric applies to the multiperiod, return None.
+        """
+        raise NotImplementedError()
+
+    def get_all_time_value_collections(self):
+        """
+        Return an dictionary mapping each known metric names to a
+        TimeValueCollection.
+        """
+        raise NotImplementedError()
+
+    def get_time_value_collection(self, name):
+        """
+        Return a TimeValueCollection for the specified metric name.
+
+        If no such TimeValueCollection exists for this multiperiod, raise an exception.
+        """
+        raise NotImplementedError()
+
+    def get_periods(self, time_delta):
+        """
+        Return an iterable of (non-multi) periods with each period exactly
+        time_delta in length.
+
+        The first period will begin at the multiperiod's start; the last period 
+        will end no later than the multiperiod's end.
+        """
+        raise NotImplementedError()
+
+    def get_week_periods(self):
+        return self.get_periods(time_delta=datetime.timedelta(days=7))
+
+    def get_month_periods(self):
+        """
+        Return an iterable of (non-multi) periods with each period exactly 
+        one month in length.
+
+        The first period will start on the first of the month at or after the 
+        multiperiod's start; the last period will end on the last of the month
+        before the multiperiod's end.
+        """
+        raise NotImplementedError()
+
+    def get_year_periods(self):
+        """
+        Return an iterable of (non-multi) periods with each period exactly
+        one year in length.
+
+        The first period will start on the first of the year at or after the
+        multiperiod's start; the last period will end on the last of the year
+        before the multiperiod's end.
+        """
+        raise NotImplementedError()
+
+    def get_cumulative_period(self):
+        """
+        Return a single (non-multi) period that summarizes all values across
+        this period's timespan.
         """
         raise NotImplementedError()
 
 
-class BarePeriodSet(PeriodSetBase):
-    def __init__(self, periods):
-        self.periods = periods
+class BareMultiPeriod(MultiPeriodBase):
+    """
+    An in-memory implementation of a MultiPeriod
+    """
 
-    @classmethod
-    def from_equal_periods(cls, period, length):
+    def __init__(self, start, end, metrics, time_values):
+        """
+        Construct a BareMultiPeriod with a:
 
-        pass
+            - start date (inclusive) 
+            - end date (exclusive)
+            - dictionary mapping metric name to Metric instance
+            - dictionary mapping metric name to iterable of TimeValues
+
+        As a general rule, you should let other code, like the MultiPeriodManagerMixin,
+        handle the actual construction of BareMultiPeriod.
+        """
+        self._start = start
+        self._end = end
+        self._metrics = dict(metrics)
+        self._time_values = {
+            name: TimeValueCollection(value_list)
+            for name, value_list in time_values.items()
+        }
+
+    def get_start(self):
+        return self._start
+
+    def get_end(self):
+        return self._end
+
+    def get_metric_names(self):
+        return self._metrics.keys()
+
+    def get_metric(self, name):
+        return self._metrics.get(name)
+
+    def get_all_time_values(self):
+        return self._time_values
+
+    def get_time_values(self, name):
+        return self._time_values[name]
 
 
-class ModelPeriodSet(PeriodSetBase):
-    pass
+class MultiPeriodManagerMixin:
+    """
+    A utility mixin for Django models.Manager instances to provide the ability
+    to produce a MultiPeriod from a current query.
+
+    In order to be useful, the Manager instances must manage a Model that derives
+    from ModelPeriod.
+    """
+
+    def multi_period(self, start, end):
+        """
+        Return a MultiPeriod with all values that apply to the given date
+        range (and other previously applied filters).
+
+        Returns None if no periods apply to the date range.
+        """
+        # XXX TODO this isn't the `metrics` branch; for now, we have to load
+        # all applicable periods into memory because we don't know which
+        # period will have meaningful PIT_EARLIEST or PIT_LATEST values.
+        # (The `metrics` branch can easily solve this dilemma since each
+        # value is broken out separately; I suppose we *could* query to
+        # limit how far back/forward in time we go outside of the specified
+        # date range, but given the small size of our data at the moment and
+        # the likely need for us to revisit this very soon, I'm punting for now.)
+        # -Dave
+
+        # Grab the underlying periods
+        periods = list(self.order_by("start"))
+        if not periods:
+            return None
+
+        # All periods are presumed parallel; grab their metrics
+        metric_names = periods[0].get_metric_names()
+        metrics = {
+            metric_name: periods[0].get_metric(metric_name)
+            for metric_name in metric_names
+        }
+
+        # Build a mapping from metric name to a list of time values
+        values = {}
+
+        for period in periods:
+            start = period.get_start()
+            end = period.get_end()
+            period_values = period.get_values()
+            period_time_values = {
+                metric_name: TimeValue(start, end, value)
+                for metric_name, value in period_values.items()
+            }
+            for metric_name, time_value in period_time_values.items():
+                value_list = values.get(metric_name, [])
+                value_list.add(time_value)
+
+        return BareMultiPeriod(start, end, metrics, values)
 
