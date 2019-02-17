@@ -20,6 +20,7 @@ django-js-reverse = "*"
 docutils = "*"
 django = "==2.1.*"
 sortedcontainers = "*"
+python-dateutil = "*"
 
 [requires]
 python_version = "3.7"

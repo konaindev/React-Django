@@ -4,11 +4,14 @@ import decimal
 from django.test import TestCase
 
 from .metrics import (
+    BareMultiPeriod,
+    Behavior,
+    DateSequence,
+    InvalidMetricOperation,
     Metric,
     TimeValue,
     TimeValueCollection,
-    Behavior,
-    InvalidMetricOperation,
+    Weekday
 )
 
 
@@ -398,7 +401,7 @@ class UnifyTestCase(TestCase):
         v1 = TimeValue(DATE_B, DATE_B, 1)
         v2 = TimeValue(DATE_C, DATE_C, 2)
         value = metric.unify(DATE_BC, DATE_CD, v1, v2)
-        self.assertEqual(value, v1)
+        self.assertEqual(value, 1)
 
     def test_pit_earliest_2(self):
         metric = Metric(Behavior.POINT_IN_TIME_EARLIEST_KEEP)
@@ -424,7 +427,7 @@ class UnifyTestCase(TestCase):
         v1 = TimeValue(DATE_B, DATE_B, 1)
         v2 = TimeValue(DATE_C, DATE_C, 2)
         value = metric.unify(DATE_A, DATE_BC, v1, v2)
-        self.assertEqual(value, v2)
+        self.assertEqual(value, 2)
 
     def test_pit_latest_no_values(self):
         metric = Metric(Behavior.POINT_IN_TIME_LATEST_KEEP)
@@ -441,54 +444,42 @@ class UnifyTestCase(TestCase):
         metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
         v1 = TimeValue(DATE_B, DATE_C, 1)
         value = metric.unify(DATE_A, DATE_D, v1)
-        self.assertEqual(value.start, DATE_B)
-        self.assertEqual(value.end, DATE_C)
-        self.assertEqual(value.value, 1)
+        self.assertEqual(value, 1)
 
     def test_interval_2(self):
         # Single value, ends within timeframe
         metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
         v1 = TimeValue(DATE_B, DATE_C, 10)
         value = metric.unify(DATE_BC, DATE_D, v1)
-        self.assertEqual(value.start, DATE_BC)
-        self.assertEqual(value.end, DATE_C)
-        self.assertEqual(value.value, 4)
+        self.assertEqual(value, 4)
 
     def test_interval_3(self):
         # Single value, starts within timeframe
         metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
         v1 = TimeValue(DATE_C, DATE_E, 10)
         value = metric.unify(DATE_BC, DATE_D, v1)
-        self.assertEqual(value.start, DATE_C)
-        self.assertEqual(value.end, DATE_D)
-        self.assertEqual(value.value, 5)
+        self.assertEqual(value, 5)
 
     def test_interval_4(self):
         # Single value, contained within timeframe
         metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
         v1 = TimeValue(DATE_C, DATE_D, 10)
         value = metric.unify(DATE_BC, DATE_DE, v1)
-        self.assertEqual(value.start, DATE_C)
-        self.assertEqual(value.end, DATE_D)
-        self.assertEqual(value.value, 10)
+        self.assertEqual(value, 10)
 
     def test_interval_5(self):
         # Single value, starts before and ends after timeframe
         metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
         v1 = TimeValue(DATE_A, DATE_D, 10)
         value = metric.unify(DATE_BC, DATE_CD, v1)
-        self.assertEqual(value.start, DATE_BC)
-        self.assertEqual(value.end, DATE_CD)
-        self.assertEqual(value.value, 4)
+        self.assertEqual(value, 4)
 
     def test_interval_6(self):
         # Single value, starts before and ends after timeframe
         metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
         v1 = TimeValue(DATE_A, DATE_D, 10)
         value = metric.unify(DATE_BC, DATE_CD, v1)
-        self.assertEqual(value.start, DATE_BC)
-        self.assertEqual(value.end, DATE_CD)
-        self.assertEqual(value.value, 4)
+        self.assertEqual(value, 4)
 
     def test_interval_7(self):
         # Multiple values, intersecting timeframe
@@ -497,9 +488,7 @@ class UnifyTestCase(TestCase):
         v2 = TimeValue(DATE_B, DATE_C, 10)
         v3 = TimeValue(DATE_C, DATE_D, 10)
         value = metric.unify(DATE_AB, DATE_CD, v1, v2, v3)
-        self.assertEqual(value.start, DATE_AB)
-        self.assertEqual(value.end, DATE_CD)
-        self.assertEqual(value.value, 22)
+        self.assertEqual(value, 22)
 
 
 class TimeValueCollectionTestCase(TestCase):
@@ -627,4 +616,205 @@ class TimeValueCollectionTestCase(TestCase):
         tvc = TimeValueCollection([v1, v2, v3, v4, v5, v6])
         tvc_overlaps = tvc.overlaps(start, end).order_by_start()
         self.assertEqual(list(tvc_overlaps), [v6, v2, v3, v4])
+
+
+class BareMultiPeriodTestCase(TestCase):
+    """Test basic aspects of BareMultiPeriod"""
+
+    def test_start(self):
+        mp = BareMultiPeriod(start=1, end=None, metrics={}, time_values={})
+        self.assertEqual(mp.get_start(), 1)
+
+    def test_end(self):
+        mp = BareMultiPeriod(start=None, end=2, metrics={}, time_values={})
+        self.assertEqual(mp.get_end(), 2)
+
+    def test_get_metric_names(self):
+        mp = BareMultiPeriod(start=None, end=None, metrics={"a": 1}, time_values={})
+        self.assertEqual(mp.get_metric_names(), ["a"])
+
+    def test_get_metrics(self):
+        mp = BareMultiPeriod(start=None, end=None, metrics={"a": 1}, time_values={})
+        self.assertEqual(mp.get_metrics(), {'a': 1})
+
+    def test_get_metric(self):
+        mp = BareMultiPeriod(start=None, end=None, metrics={"a": 1}, time_values={})
+        self.assertEqual(mp.get_metric("a"), 1)
+
+    def test_get_metric_none(self):
+        mp = BareMultiPeriod(start=None, end=None, metrics={"a": 1}, time_values={})
+        self.assertEqual(mp.get_metric("b"), None)
+
+    def test_get_all_time_value_collections(self):
+        mp = BareMultiPeriod(
+            start=None, end=None, metrics={}, time_values={"a": [1, 2]}
+        )
+        self.assertEqual(
+            mp.get_all_time_value_collections(), {"a": TimeValueCollection([1, 2])}
+        )
+
+    def test_get_time_value_collection(self):
+        mp = BareMultiPeriod(
+            start=None, end=None, metrics={}, time_values={"a": [1, 2]}
+        )
+        self.assertEqual(mp.get_time_value_collection("a"), TimeValueCollection([1, 2]))
+
+    def test_get_time_value_collection_none(self):
+        mp = BareMultiPeriod(
+            start=None, end=None, metrics={}, time_values={"a": [1, 2]}
+        )
+        with self.assertRaises(Exception):
+            mp.get_time_value_collection("b")
+
+
+class DateSequenceTestCase(TestCase):
+    def test_for_time_delta(self):
+        dates = DateSequence.for_time_delta(DATE_B, DATE_BC, datetime.timedelta(days=3))
+        dates = list(dates)
+        self.assertEqual(len(dates), 3)
+        self.assertEqual(dates, [datetime.date(year=2019, month=1, day=8), datetime.date(year=2019, month=1, day=11), datetime.date(year=2019, month=1, day=14)])
+
+    def test_for_time_delta_no_after_end(self):
+        dates = DateSequence.for_time_delta(DATE_B, DATE_BC, datetime.timedelta(days=3), after_end=False)
+        dates = list(dates)
+        self.assertEqual(len(dates), 2)
+        self.assertEqual(dates, [datetime.date(year=2019, month=1, day=8), datetime.date(year=2019, month=1, day=11)])
+
+    def test_for_weeks(self):
+        dates = DateSequence.for_weeks(DATE_B, DATE_D)
+        dates = list(dates)
+        self.assertEqual(len(dates), 3)
+        self.assertEqual(dates, [DATE_B, DATE_C, DATE_D])
+    
+    def test_for_weeks_no_after_end(self):
+        dates = DateSequence.for_weeks(DATE_B, DATE_D, after_end=False)
+        dates = list(dates)
+        self.assertEqual(len(dates), 2)
+        self.assertEqual(dates, [DATE_B, DATE_C])
+    
+    def test_for_weeks_weekday(self):
+        dates = DateSequence.for_weeks(DATE_B, DATE_C, weekday=Weekday.SUNDAY)
+        dates = list(dates)
+        self.assertEqual(len(dates), 3)
+        self.assertEqual(dates, [datetime.date(year=2019, month=1, day=6), datetime.date(year=2019, month=1, day=13), datetime.date(year=2019, month=1, day=20)])
+
+    def test_for_weeks_weekday_no_before_start(self):
+        dates = DateSequence.for_weeks(DATE_B, DATE_C, weekday=Weekday.SUNDAY, before_start=False)
+        dates = list(dates)
+        self.assertEqual(len(dates), 2)
+        self.assertEqual(dates, [datetime.date(year=2019, month=1, day=13), datetime.date(year=2019, month=1, day=20)])
+
+    def test_for_calendar_months(self):
+        dates = DateSequence.for_calendar_months(DATE_B, DATE_F)
+        dates = list(dates)
+        self.assertEqual(len(dates), 3)
+        self.assertEqual(dates, [datetime.date(year=2019, month=1, day=1), datetime.date(year=2019, month=2, day=1), datetime.date(year=2019, month=3, day=1)])
+    
+    def test_for_calendar_months_no_after_end(self):
+        dates = DateSequence.for_calendar_months(DATE_B, DATE_F, after_end=False)
+        dates = list(dates)
+        self.assertEqual(len(dates), 2)
+        self.assertEqual(dates, [datetime.date(year=2019, month=1, day=1), datetime.date(year=2019, month=2, day=1)])
+    
+    def test_for_calendar_months_no_before_start(self):
+        dates = DateSequence.for_calendar_months(DATE_B, DATE_F, before_start=False)
+        dates = list(dates)
+        self.assertEqual(len(dates), 2)
+        self.assertEqual(dates, [datetime.date(year=2019, month=2, day=1), datetime.date(year=2019, month=3, day=1)])
+
+
+class MultiPeriodTestCase(TestCase):
+    """Test key functionality in the MultiPeriodBase implementation."""
+
+    def setUp(self):
+        """
+        Craft a bunch of useful test data.
+        """
+        super().setUp()
+
+        self.start = DATE_AB
+        self.end = DATE_DE
+
+        self.m_e = Metric(Behavior.POINT_IN_TIME_EARLIEST_KEEP)
+        self.v_e1 = TimeValue(DATE_A, DATE_A, 1)
+        self.v_e2 = TimeValue(DATE_C, DATE_C, 2)
+        self.v_e3 = TimeValue(DATE_E, DATE_E, 3)
+
+        self.m_l = Metric(Behavior.POINT_IN_TIME_LATEST_KEEP)
+        self.v_l1 = TimeValue(DATE_A, DATE_A, 10)
+        self.v_l2 = TimeValue(DATE_C, DATE_C, 20)
+        self.v_l3 = TimeValue(DATE_E, DATE_E, 30)
+
+        self.m_i = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+        self.v_i1 = TimeValue(DATE_A, DATE_B, 100)
+        self.v_i2 = TimeValue(DATE_B, DATE_C, 200)
+        self.v_i3 = TimeValue(DATE_C, DATE_D, 300)
+        self.v_i4 = TimeValue(DATE_D, DATE_E, 400)
+
+        self.metrics = {"m_e": self.m_e, "m_l": self.m_l, "m_i": self.m_i}
+        self.values = {
+            "m_e": [self.v_e1, self.v_e2, self.v_e3],
+            "m_l": [self.v_l1, self.v_l2, self.v_l3],
+            "m_i": [self.v_i1, self.v_i2, self.v_i3, self.v_i4],
+        }
+
+        self.mp = BareMultiPeriod(self.start, self.end, self.metrics, self.values)
+
+    def test_get_periods_too_few_breaks(self):
+        with self.assertRaises(InvalidMetricOperation):
+            self.mp.get_periods(DATE_C)
+
+    def test_get_periods_before_start(self):
+        periods = self.mp.get_periods(DATE_A, DATE_B)
+        self.assertEqual(len(periods), 1)
+
+    def test_get_periods_after_end(self):
+        periods = self.mp.get_periods(DATE_B, DATE_E)
+        self.assertEqual(len(periods), 1)
+
+    def test_get_periods_single(self):
+        periods = self.mp.get_periods(self.start, self.end)
+        self.assertEqual(len(periods), 1)
+        self.assertEqual(periods[0].get_start(), self.start)
+        self.assertEqual(periods[0].get_end(), self.end)
+        self.assertEqual(periods[0].get_value('m_e'), 1)
+        self.assertEqual(periods[0].get_value('m_l'), 30)
+        self.assertEqual(periods[0].get_value('m_i'), 728)
+
+    def test_get_periods_multiple(self):
+        periods = self.mp.get_periods(DATE_AB, DATE_BC, DATE_CD, DATE_DE)
+        self.assertEqual(len(periods), 3)
+        # The sum of the m_i values should be 728
+        self.assertEqual(periods[0].get_start(), DATE_AB)
+        self.assertEqual(periods[0].get_end(), DATE_BC)
+        self.assertEqual(periods[0].get_value('m_e'), 1)
+        self.assertEqual(periods[0].get_value('m_l'), 20)
+        self.assertEqual(periods[0].get_value('m_i'), 171)
+        self.assertEqual(periods[1].get_start(), DATE_BC)
+        self.assertEqual(periods[1].get_end(), DATE_CD)
+        self.assertEqual(periods[1].get_value('m_e'), 1)
+        self.assertEqual(periods[1].get_value('m_l'), 30)
+        self.assertEqual(periods[1].get_value('m_i'), 257)
+        self.assertEqual(periods[2].get_start(), DATE_CD)
+        self.assertEqual(periods[2].get_end(), DATE_DE)
+        self.assertEqual(periods[2].get_value('m_e'), 2)
+        self.assertEqual(periods[2].get_value('m_l'), 30)
+        self.assertEqual(periods[2].get_value('m_i'), 300)
+
+    def test_get_delta_periods(self):
+        periods = self.mp.get_delta_periods(time_delta=datetime.timedelta(days=2))
+        self.assertEqual(len(periods), 11)
+        
+    def test_get_week_periods(self):
+        periods = self.mp.get_week_periods()
+        self.assertEqual(len(periods), 3)
+
+    def test_get_calendar_month_periods(self):
+        periods = self.mp.get_calendar_month_periods()
+        self.assertEqual(len(periods), 1)
+    
+    def test_get_cumulative_period(self):
+        period = self.mp.get_cumulative_period()
+        self.assertEqual(period.get_start(), self.start)
+        self.assertEqual(period.get_end(), self.end)
 

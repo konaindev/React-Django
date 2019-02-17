@@ -4,6 +4,8 @@ from collections import namedtuple
 from enum import Enum, auto
 from decimal import Decimal
 
+from dateutil import relativedelta
+
 from remark.lib.collections import SortedList
 from remark.lib.math import sum_or_none, mult_or_none
 
@@ -164,6 +166,12 @@ class TimeValueCollection:
     def __len__(self):
         """Return length of collection without doing further work."""
         return len(self._any_list())
+
+    def __eq__(self, other):
+        """Return true if the collections are equivalent."""
+        if not isinstance(other, TimeValueCollection):
+            return False
+        return self._any_list().__eq__(other._any_list())
 
     def __contains__(self, value):
         """Return True if value is in our collection."""
@@ -566,10 +574,10 @@ class Metric:
         """
         Combine an arbitrary set of TimeValues according to the metric's behavior.
 
-        Returns a TimeValue, which contains the *precise* specified start and
-        end date along with the raw underlying value. (Compare with merge(...), 
-        whose start and end dates are explicitly determined by those of the provided
-        time values.)
+        Returns a raw value, which corresponds with the *precise* specified 
+        start and end date. (Compare with merge(...), whose start and end dates
+        are implicitly determined by the provided time_values, and which returns
+        a TimeValue rather than a raw value).
 
         Raises an InvalidMetricOperation if preconditions are not met.
         """
@@ -590,14 +598,6 @@ class Metric:
         # Under unification, the PIT TimeValue is the value that occurs
         # at or immediately before (EARLIEST), or immediately after (LATEST)
         # the timespan.
-
-        # CONSIDER: Should we always return a TimeValue, and have its underlying
-        # value be the metric's default? (We'd have to define a default.) Or is
-        # returning None the right expected behavior?
-
-        # CONSIDER: Should we return a TimeValue whose start/end match the
-        # provided unification span's start/end? Or should we keep the original
-        # start/end? What's the right expected behavior?
         if self.behavior.is_merge_earliest():
             time_value = (
                 time_value_collection.filter(start__lte=start).order_by_start().last()
@@ -606,7 +606,7 @@ class Metric:
             time_value = (
                 time_value_collection.filter(start__gte=end).order_by_start().first()
             )
-        return TimeValue(*time_value) if time_value else None
+        return time_value.value if time_value else None
 
     def _unify_interval(self, start, end, time_value_collection):
         # Under unification, we must (1) find all time values that intersect the
@@ -642,7 +642,8 @@ class Metric:
                 [first_time_value] + time_value_collection[1:-1] + [last_time_value]
             )
 
-        return self.merge(*merge_time_values)
+        time_value = self.merge(*merge_time_values)
+        return time_value.value if time_value else None
 
 
 class PeriodBase:
@@ -670,6 +671,12 @@ class PeriodBase:
     def get_metric_names(self):
         """
         Return an iterable of all metric names in this period.
+        """
+        raise NotImplementedError()
+
+    def get_metrics(self):
+        """
+        Return a dictionary mapping all metric names to Metrics.
         """
         raise NotImplementedError()
 
@@ -709,6 +716,7 @@ class BarePeriod(PeriodBase):
         """
         self._start = start
         self._end = end
+        self._metrics = metrics
         self._values = values
 
     def get_start(self):
@@ -718,7 +726,10 @@ class BarePeriod(PeriodBase):
         return self._end
 
     def get_metric_names(self):
-        return self._metrics.keys()
+        return list(self._metrics.keys())
+
+    def get_metrics(self):
+        return self._metrics
 
     def get_metric(self, name):
         return self._metrics.get(name)
@@ -760,7 +771,11 @@ class ModelPeriod(PeriodBase):
 
     def get_metric_names(self):
         self._ensure_metrics()
-        return self._metrics.keys()
+        return list(self._metrics.keys())
+
+    def get_metrics(self):
+        self._ensure_metrics()
+        return self._metrics
 
     def get_metric(self, name):
         self._ensure_metrics()
@@ -771,6 +786,97 @@ class ModelPeriod(PeriodBase):
 
     def get_value(self, name):
         return getattr(self, name)
+
+
+class Weekday:
+    MONDAY = 0
+    TUESDAY = 1
+    WEDNESDAY = 2
+    THURSDAY = 3
+    FRIDAY = 4
+    SATURDAY = 5
+    SUNDAY = 6
+
+    # i_am = MONDAY, i_want = MONDAY, delta = -7 (MONDAY - MONDAY or -7)
+    # i_am = TUESDAY, i_want= MONDAY, delta = -1 (MONDAY - TUESDAY or -7)
+    # i_am = TUESDAY, i_want= TUESDAY,delta = -7 (TUESDAY - TUESDAY or -7)
+    # i_am = MONDAY, i_want=SUNDAY,   delta = -1 (SUNDAY - MONDAY) - 7
+
+
+class DateSequence:
+    """
+    A simple generator of date sequences based on specified criterion.
+    """
+
+    # NOTE that pandas has a *very* sophisticated set of tools for generating
+    # date sequences. We may wish to adopt it wholesale. Pandas is a heavyweight
+    # deependency, so I'm punting for now. This... is simpler;
+    # it's also more directly in line with our needs now. That may change. -Dave
+
+    @classmethod
+    def for_time_delta(cls, start, end, time_delta, after_end=True):
+        """
+        Return an iterable of dates spaced apart by time_delta.
+
+        The first date will be start; the last date will be the earliest date
+        that occurs at or after end. (If after_end is false, all dates will
+        be within range.)
+        """
+        d = start
+        while d < end:
+            yield d
+            d += time_delta
+        if after_end:
+            yield d
+
+    @classmethod
+    def for_weeks(cls, start, end, weekday=None, before_start=True, after_end=True):
+        """
+        Return an iterable of dates spaced apart by a week.
+
+        If no weekday is specified, the first date will be the start; otherwise,
+        it will be the first date (agreeing with before_start)
+
+        The last date will be the earliest date that occurs at or after 
+        the end. (If after_end is false, all dates will be within range.)
+        """
+        week = datetime.timedelta(days=7)
+
+        d = start
+
+        # Adjust starting date to match desired weekday, if provided
+        if weekday is not None:
+            days = weekday - start.weekday()
+            days = days if days < 0 else days - 7
+            d = start + datetime.timedelta(days=days)
+
+        # Drop first week if it's before bounds
+        if d < start and not before_start:
+            d += week
+
+        return cls.for_time_delta(d, end, week, after_end=after_end)
+
+    @classmethod
+    def for_calendar_months(cls, start, end, before_start=True, after_end=True):
+        """
+        Return an iterable of the first days of calendar months.
+
+        The first date will be the latest 1st date that occurs at or before
+        the start. (After it, if before_start is False)
+
+        The last date will be the latest 1st date that occurs at or after
+        the end. (Before it, if after_end is False)
+        """
+        month = relativedelta.relativedelta(months=1)
+
+        # Adjust starting date to be start of month
+        d = start.replace(day=1)
+
+        # Drop first month if it's before bounds
+        if d < start and not before_start:
+            d += month
+
+        return cls.for_time_delta(d, end, month, after_end=after_end)
 
 
 class MultiPeriodBase:
@@ -802,6 +908,12 @@ class MultiPeriodBase:
         """
         raise NotImplementedError()
 
+    def get_metrics(self):
+        """
+        Return a dictionary mapping names to (capital) Metrics
+        """
+        raise NotImplementedError()
+
     def get_metric(self, name):
         """
         Return a (capital) Metric for the specified name.
@@ -825,47 +937,89 @@ class MultiPeriodBase:
         """
         raise NotImplementedError()
 
-    def get_periods(self, time_delta):
+    def get_periods(self, *break_times):
+        """
+        Return a time-ordered list of (non-multi) periods based on the provided
+        break times.
+
+        The provided break_times must be ordered from earliest to latest. 
+        There must be at least two break_times, indicating a single period's duration.
+        """
+        # Use the MultiPeriodBase accessors to grab our fundamentals;
+        # CONSIDER I'm not sure if we need to have the divide between
+        # MultiPeriodBase and (say) BareMultiPeriod, since probably all of
+        # this will live in memory for now. -Dave
+        metrics = self.get_metrics()
+        time_value_collections = self.get_all_time_value_collections()
+
+        # Check precondition: at lease two break times must be supplied.
+        if len(break_times) < 2:
+            raise InvalidMetricOperation("You must supply a minimum of 2 break times.")
+
+        def _unify_for_metric(start, end, name, metric):
+            time_value_collection = time_value_collections[name]
+            return metric.unify_collection(start, end, time_value_collection)
+
+        def _bare_period(start, end):
+            period_values = {
+                name: _unify_for_metric(start, end, name, metric)
+                for name, metric in self._metrics.items()
+            }
+            return BarePeriod(start, end, metrics, period_values)
+
+        # Build our periods list; this could also be done as a generator.
+        periods = []
+        start = break_times[0]
+        for break_time in break_times[1:]:
+            end = break_time
+            periods.append(_bare_period(start, end))
+            start = end
+
+        return periods
+
+    def get_delta_periods(self, time_delta, after_end=True):
         """
         Return an iterable of (non-multi) periods with each period exactly
         time_delta in length.
-
-        The first period will begin at the multiperiod's start; the last period 
-        will end no later than the multiperiod's end.
         """
-        raise NotImplementedError()
+        break_times = DateSequence.for_time_delta(
+            self.get_start(), self.get_end(), time_delta, after_end=after_end
+        )
+        return self.get_periods(*list(break_times))
 
-    def get_week_periods(self):
-        return self.get_periods(time_delta=datetime.timedelta(days=7))
-
-    def get_month_periods(self):
+    def get_week_periods(self, weekday=None, before_start=True, after_end=True):
         """
-        Return an iterable of (non-multi) periods with each period exactly 
-        one month in length.
-
-        The first period will start on the first of the month at or after the 
-        multiperiod's start; the last period will end on the last of the month
-        before the multiperiod's end.
+        Return an iterable of (non-multi) periods with each period spaced
+        a week apart, optionally aligned to the weekday.
         """
-        raise NotImplementedError()
+        break_times = DateSequence.for_weeks(
+            self.get_start(),
+            self.get_end(),
+            weekday=weekday,
+            before_start=before_start,
+            after_end=after_end,
+        )
+        return self.get_periods(*list(break_times))
 
-    def get_year_periods(self):
+    def get_calendar_month_periods(self, before_start=True, after_end=True):
         """
-        Return an iterable of (non-multi) periods with each period exactly
-        one year in length.
-
-        The first period will start on the first of the year at or after the
-        multiperiod's start; the last period will end on the last of the year
-        before the multiperiod's end.
+        Return an iterable of (non-multi) periods with each period starting
+        at the beginning of the month.
         """
-        raise NotImplementedError()
+        break_times = DateSequence.for_calendar_months(
+            self.get_start(),
+            self.get_end(),
+            before_start=before_start,
+            after_end=after_end,
+        )
+        return self.get_periods(*list(break_times))
 
     def get_cumulative_period(self):
         """
         Return a single (non-multi) period that summarizes all values across
         this period's timespan.
         """
-        raise NotImplementedError()
+        return self.get_periods(self.get_start(), self.get_end())[0]
 
 
 class BareMultiPeriod(MultiPeriodBase):
@@ -900,15 +1054,18 @@ class BareMultiPeriod(MultiPeriodBase):
         return self._end
 
     def get_metric_names(self):
-        return self._metrics.keys()
+        return list(self._metrics.keys())
+
+    def get_metrics(self):
+        return self._metrics
 
     def get_metric(self, name):
         return self._metrics.get(name)
 
-    def get_all_time_values(self):
+    def get_all_time_value_collections(self):
         return self._time_values
 
-    def get_time_values(self, name):
+    def get_time_value_collection(self, name):
         return self._time_values[name]
 
 
