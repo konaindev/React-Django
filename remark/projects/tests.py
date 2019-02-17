@@ -1,6 +1,5 @@
 import datetime
 import decimal
-from unittest import skip
 
 from django.test import TestCase
 
@@ -171,7 +170,7 @@ class DefaultReportTestCase(TestCase):
 
 
 class LincolnTowerPeriodTestCase(TestCase):
-    """Test basic period model computed properties."""
+    """Test an example Lincoln Tower period model with computed properties."""
 
     def setUp(self):
         project = Project.objects.create(name="test")

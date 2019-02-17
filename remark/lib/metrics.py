@@ -958,7 +958,7 @@ class MultiPeriodBase:
         def _bare_period(start, end):
             period_values = {
                 name: _unify_for_metric(start, end, name, metric)
-                for name, metric in self._metrics.items()
+                for name, metric in metrics.items()
             }
             return BarePeriod(start, end, metrics, period_values)
 
@@ -1064,21 +1064,22 @@ class BareMultiPeriod(MultiPeriodBase):
         return self._time_values[name]
 
 
-class MultiPeriodManagerMixin:
+class MultiPeriodQuerySetMixin:
     """
-    A utility mixin for Django models.Manager instances to provide the ability
-    to produce a MultiPeriod from a current query.
+    A utility mixin for Django models.QuerySet instances to provide the ability
+    to produce a MultiPeriod from a current queryset.
 
-    In order to be useful, the Manager instances must manage a Model that derives
+    In order to be useful, the QuerySet instances must surface a Model that derives
     from ModelPeriod.
     """
 
-    def multi_period(self, start, end):
+    def multi_period(self):
         """
-        Return a MultiPeriod with all values that apply to the given date
-        range (and other previously applied filters).
+        Return a MultiPeriod for the current queryset. The start date of the
+        multiperiod will be the start date of the earliest value; the end 
+        date will be the end date of the latest value.
 
-        Returns None if no periods apply to the date range.
+        Returns None if there are no periods. (CONSIDER: maybe return empty?)
         """
         # XXX TODO this isn't the `metrics` branch; for now, we have to load
         # all applicable periods into memory because we don't know which
@@ -1105,6 +1106,9 @@ class MultiPeriodManagerMixin:
         # Build a mapping from metric name to a list of time values
         values = {}
 
+        earliest_start = None
+        latest_end = None
+
         for period in periods:
             start = period.get_start()
             end = period.get_end()
@@ -1115,7 +1119,11 @@ class MultiPeriodManagerMixin:
             }
             for metric_name, time_value in period_time_values.items():
                 value_list = values.get(metric_name, [])
-                value_list.add(time_value)
+                values[metric_name] = value_list + [time_value]
+            if (earliest_start is None) or (start < earliest_start):
+                earliest_start = start
+            if (latest_end is None) or (end > latest_end):
+                latest_end = end
 
-        return BareMultiPeriod(start, end, metrics, values)
+        return BareMultiPeriod(earliest_start, latest_end, metrics, values)
 

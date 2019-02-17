@@ -3,7 +3,7 @@ import decimal
 from django.db import models
 
 from remark.lib.tokens import public_id
-from remark.lib.metrics import Metric, Behavior, ModelPeriod, MultiPeriodManagerMixin
+from remark.lib.metrics import Metric, Behavior, ModelPeriod, MultiPeriodQuerySetMixin
 
 
 def pro_public_id():
@@ -54,7 +54,7 @@ class Project(models.Model):
         return "{} ({})".format(self.name, self.public_id)
 
 
-class PeriodManager(MultiPeriodManagerMixin, models.Model):
+class PeriodQuerySet(MultiPeriodQuerySetMixin, models.QuerySet):
     pass
 
 
@@ -63,7 +63,7 @@ class Period(ModelPeriod, models.Model):
     Represents a snapshot of a property's basic activity over a period of time.
     """
 
-    objects = PeriodManager()
+    objects = PeriodQuerySet.as_manager()
 
     project = models.ForeignKey(
         Project, on_delete=models.CASCADE, related_name="periods"
@@ -333,7 +333,7 @@ class Period(ModelPeriod, models.Model):
         decimal_places=2,
         help_text="Target: total retention investment",
     )
-    target_acq_investment.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+    target_ret_investment.metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
 
     # ------------------------------------------------------
     # Acquisition Funnel

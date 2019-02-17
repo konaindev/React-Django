@@ -416,11 +416,11 @@ class ComputedPeriod(ComputedValueMixin):
 
     def __getattr__(self, name):
         """
-        For convenience, return all attributes on the underlying period.
+        For convenience, return all values on the underlying period.
 
         Raise an exception if *that* isn't found.
         """
-        return getattr(self.period, name)
+        return self.period.get_value(name)
 
     # TODO these methods demonstrate that ComputedPeriod is kinda-sorta a PeriodBase.
     # But PeriodBase requires exposure of Metric and Value instances, neither of
@@ -450,12 +450,6 @@ class PeriodDelta:
 
     # TODO figure out how much of this actually belongs in lib/metrics.py. -Dave
     def __init__(self, lhs, rhs):
-        lhs_span = lhs.get_end() - lhs.get_start()
-        rhs_span = rhs.get_end() - rhs.get_start()
-        if lhs_span != rhs_span:
-            raise RuntimeError(
-                "Cannot compute a period delta for two dissimilar periods."
-            )
         self.lhs = lhs
         self.rhs = rhs
 
@@ -520,8 +514,8 @@ class Report:
         delta_values = {} if self.delta is None else self.delta.get_values()
 
         return dict(
-            start=self.period.start,
-            end=self.period.end,
+            start=self.period.get_start(),
+            end=self.period.get_end(),
             **period_values,
             **delta_values,
         )
