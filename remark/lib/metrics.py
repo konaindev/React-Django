@@ -462,7 +462,7 @@ class Metric:
         merge_value = None
 
         # Sniff the underlying value type to ensure we perform the best
-        # possible computation for the type.
+        # possible computation for the type. (CONSIDER make this explicit?)
         kind = self._get_likely_type(time_values)
         if kind == int:
             total = sum_or_none(
@@ -796,11 +796,6 @@ class Weekday:
     FRIDAY = 4
     SATURDAY = 5
     SUNDAY = 6
-
-    # i_am = MONDAY, i_want = MONDAY, delta = -7 (MONDAY - MONDAY or -7)
-    # i_am = TUESDAY, i_want= MONDAY, delta = -1 (MONDAY - TUESDAY or -7)
-    # i_am = TUESDAY, i_want= TUESDAY,delta = -7 (TUESDAY - TUESDAY or -7)
-    # i_am = MONDAY, i_want=SUNDAY,   delta = -1 (SUNDAY - MONDAY) - 7
 
 
 class DateSequence:

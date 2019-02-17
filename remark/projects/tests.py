@@ -170,13 +170,12 @@ class DefaultReportTestCase(TestCase):
         self.assertTrue(json)
 
 
-@skip("Temporarily skipping until surgery is complete. -Dave")
 class LincolnTowerPeriodTestCase(TestCase):
     """Test basic period model computed properties."""
 
     def setUp(self):
         project = Project.objects.create(name="test")
-        self.period = Period.objects.create(
+        self.raw_period = Period.objects.create(
             project=project,
             start=datetime.date(year=2018, month=12, day=19),
             end=datetime.date(year=2018, month=12, day=19),
@@ -186,7 +185,7 @@ class LincolnTowerPeriodTestCase(TestCase):
             tours=37,
             lease_applications=8,
             leases_executed=6,
-            occupiable_units=218,
+            occupiable_units_start=218,
             target_lease_percent=decimal.Decimal("0.9"),
             leases_ended=3,
             lease_renewal_notices=0,
@@ -196,9 +195,10 @@ class LincolnTowerPeriodTestCase(TestCase):
             acq_market_intelligence=decimal.Decimal("7000"),
             monthly_average_rent=decimal.Decimal("7278"),
         )
+        self.period = ComputedPeriod(self.raw_period)
 
-    def test_net_lease_change(self):
-        self.assertEqual(self.period.net_lease_change, 3)
+    def test_delta_leases(self):
+        self.assertEqual(self.period.delta_leases, 3)
 
     def test_leased_units(self):
         self.assertEqual(self.period.leased_units, 107)
@@ -209,64 +209,44 @@ class LincolnTowerPeriodTestCase(TestCase):
     def test_leased_rate(self):
         self.assertEqual(self.period.leased_rate, decimal.Decimal("0.491"))
 
-    def test_usvs_to_inquiries_percent(self):
-        self.assertEqual(
-            self.period.usvs_to_inquiries_percent, decimal.Decimal("0.012")
-        )
+    def test_usv_inq_perc(self):
+        self.assertEqual(self.period.usv_inq_perc, decimal.Decimal("0.012"))
 
-    def test_inquiries_to_tours_percent(self):
-        self.assertEqual(
-            self.period.inquiries_to_tours_percent, decimal.Decimal("0.725")
-        )
+    def test_inq_tou_perc(self):
+        self.assertEqual(self.period.inq_tou_perc, decimal.Decimal("0.725"))
 
-    def test_tours_to_lease_applications_percent(self):
-        self.assertEqual(
-            self.period.tours_to_lease_applications_percent, decimal.Decimal("0.216")
-        )
+    def test_tou_app_perc(self):
+        self.assertEqual(self.period.tou_app_perc, decimal.Decimal("0.216"))
 
-    def test_lease_applications_to_leases_executed_percent(self):
-        self.assertEqual(
-            self.period.lease_applications_to_leases_executed_percent,
-            decimal.Decimal("0.750"),
-        )
+    def test_app_exe_perc(self):
+        self.assertEqual(self.period.app_exe_perc, decimal.Decimal("0.750"))
 
-    def test_marketing_investment(self):
-        self.assertEqual(self.period.marketing_investment, decimal.Decimal("67000"))
+    def test_investment(self):
+        self.assertEqual(self.period.investment, decimal.Decimal("67000"))
 
-    def test_estimated_monthly_revenue_change(self):
-        self.assertEqual(
-            self.period.estimated_monthly_revenue_change, decimal.Decimal("21834")
-        )
+    def test_estimated_revenue_gain(self):
+        self.assertEqual(self.period.estimated_revenue_gain, decimal.Decimal("262008"))
 
-    def test_estimated_annual_revenue_change(self):
-        self.assertEqual(
-            self.period.estimated_annual_revenue_change, decimal.Decimal("262008")
-        )
-
-    def test_return_on_marketing_investment(self):
-        self.assertEqual(self.period.return_on_marketing_investment, 4)
+    def test_romi(self):
+        self.assertEqual(self.period.romi, 4)
 
     def test_cost_per_usv(self):
-        self.assertEqual(self.period.cost_per_usv, decimal.Decimal("13.71"))
+        self.assertEqual(self.period.cost_per_usv, decimal.Decimal("16.40"))
 
-    def test_cost_per_inquiry(self):
-        self.assertEqual(self.period.cost_per_inquiry, decimal.Decimal("1098.04"))
+    def test_cost_per_inq(self):
+        self.assertEqual(self.period.cost_per_inq, decimal.Decimal("1313.73"))
 
-    def test_cost_per_tour(self):
-        self.assertEqual(self.period.cost_per_tour, decimal.Decimal("1810.81"))
+    def test_cost_per_tou(self):
+        self.assertEqual(self.period.cost_per_tou, decimal.Decimal("1810.81"))
 
-    def test_cost_per_lease_application(self):
-        self.assertEqual(
-            self.period.cost_per_lease_application, decimal.Decimal("8375.00")
-        )
+    def test_cost_per_app(self):
+        self.assertEqual(self.period.cost_per_app, decimal.Decimal("8375.00"))
 
-    def test_cost_per_lease_execution(self):
-        self.assertEqual(
-            self.period.cost_per_lease_execution, decimal.Decimal("11166.67")
-        )
+    def test_cost_per_exe(self):
+        self.assertEqual(self.period.cost_per_exe, decimal.Decimal("11166.67"))
 
     def test_report_jsonable(self):
         # CONSIDER moving this to a separate location
-        report = Report(self.period)
+        report = Report(self.raw_period)
         self.assertTrue(report.to_jsonable())
 

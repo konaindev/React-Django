@@ -3,7 +3,7 @@ import decimal
 from django.db import models
 
 from remark.lib.tokens import public_id
-from remark.lib.metrics import Metric, Behavior, ModelPeriod
+from remark.lib.metrics import Metric, Behavior, ModelPeriod, MultiPeriodManagerMixin
 
 
 def pro_public_id():
@@ -54,7 +54,7 @@ class Project(models.Model):
         return "{} ({})".format(self.name, self.public_id)
 
 
-class PeriodManager(models.Model):
+class PeriodManager(MultiPeriodManagerMixin, models.Model):
     pass
 
 
