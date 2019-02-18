@@ -12,6 +12,33 @@ export default class ProjectPage extends Component {
     project: PropTypes.object.isRequired
   };
 
+  renderPeriodLinks(periods) {
+    return periods.map(period => (
+      <li key={period.url}>
+        <a href={period.url} className="text-remark-ui-text-light">
+          {period.description}
+        </a>
+      </li>
+    ));
+  }
+
+  renderSection(section) {
+    return (
+      <div className="p-8">
+        <h2>{section.name}</h2>
+        <ul className="py-4 leading-normal">
+          {this.renderPeriodLinks(section.periods)}
+        </ul>
+      </div>
+    );
+  }
+
+  renderSections(sections) {
+    return sections.map((section, i) => (
+      <div key={i}>{this.renderSection(section)}</div>
+    ));
+  }
+
   render() {
     const navigationItems = (
       <NavigationItems>
@@ -19,25 +46,10 @@ export default class ProjectPage extends Component {
       </NavigationItems>
     );
 
-    // TODO for now, simply render links to each time frame
-    const items = this.props.report_links.map(report_link => {
-      const [start, end, url] = report_link;
-      return (
-        <li key={url}>
-          <a href={url} className="text-remark-ui-text-light">
-            {start} - {end}
-          </a>
-        </li>
-      );
-    });
-
     return (
       <div className="page">
         <Header navigationItems={navigationItems}>
-          <div className="p-8">
-            <h2>All available periods:</h2>
-            <ul className="py-4 leading-normal">{items}</ul>
-          </div>
+          <div>{this.renderSections(this.props.report_links)}</div>
         </Header>
       </div>
     );

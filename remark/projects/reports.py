@@ -1,3 +1,4 @@
+import datetime
 import decimal
 
 from remark.lib.computed import computed_value, ComputedValueMixin
@@ -14,8 +15,7 @@ from remark.lib.math import (
     d_quant_currency,
     round_or_none,
 )
-
-from .models import Period
+from remark.lib.metrics import BareMultiPeriod
 
 
 class ComputedPeriod(ComputedValueMixin):
@@ -487,16 +487,65 @@ class PeriodDelta:
 
 
 class Report:
-    # XXX TODO this is nonsense (so far)
     @classmethod
-    def from_date_span(cls, project, start, end):
-        period = Period.objects.filter(project=project, start=start, end=end).first()
-        previous_period = (
-            Period.objects.filter(project=project, end__lte=start)
-            .order_by("-start")
-            .first()
+    def for_baseline(cls, project):
+        """
+        Return a Report that strictly covers the project's baseline period.
+        """
+        period = project.get_baseline_period()
+        return cls(period)
+
+    @classmethod
+    def for_time_delta_from_end(cls, project, time_delta, end=None):
+        """
+        Return a Report that covers the a time_delta span of time ending
+        at the provided end date. If no end date is provided, the natural
+        end date for the project is used.
+        """
+        all_periods = project.get_periods()
+        multiperiod = BareMultiPeriod.from_periods(all_periods)
+        end = end or multiperiod.get_end()
+
+        # Get the period under question (this will always be constructed)
+        break_times = [end - time_delta, end]
+        period = multiperiod.get_periods(*break_times)[0]
+
+        # If the previous period lives within a sane tineframe, create it.
+        previous_period = None
+        previous_start = end - time_delta - time_delta
+        if previous_start >= multiperiod.get_start():
+            break_times = [previous_start, end - time_delta]
+            previous_period = multiperiod.get_periods(*break_times)[0]
+
+        return cls(period, previous_period)
+
+    @classmethod
+    def for_last_weeks(cls, project, weeks):
+        """
+        Return a Report that covers the project's last N weeks. This is the
+        final weeks preceeding the end of the project's available period data.
+        """
+        return cls.for_time_delta_from_end(
+            project, time_delta=datetime.timedelta(weeks=weeks)
         )
-        return cls(period, previous_period) if period is not None else None
+
+    @classmethod
+    def for_dates(cls, project, start, end):
+        """
+        Return a Report for an arbitrary set of dates.
+        """
+        return cls.for_time_delta_from_end(project, time_delta=end - start, end=end)
+
+    @classmethod
+    def for_campaign_to_date(cls, project):
+        """
+        Return a Report that covers the project's entire campaign duration.
+        """
+        all_periods = project.get_periods()
+        multiperiod = BareMultiPeriod.from_periods(all_periods)
+        break_times = [project.get_campaign_start(), project.get_campaign_end()]
+        period = multiperiod.get_periods(*break_times)
+        return cls(period)
 
     def __init__(self, period, previous_period=None):
         self.period = ComputedPeriod(period)

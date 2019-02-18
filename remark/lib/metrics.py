@@ -834,7 +834,7 @@ class DateSequence:
         The last date will be the earliest date that occurs at or after 
         the end. (If after_end is false, all dates will be within range.)
         """
-        week = datetime.timedelta(days=7)
+        week = datetime.timedelta(weeks=1)
 
         d = start
 
@@ -1025,6 +1025,9 @@ class BareMultiPeriod(MultiPeriodBase):
     def from_periods(cls, periods):
         """
         Construct a BareMultiPeriod with a collection of periods.
+
+        The 'extent' of the multiperiod will be the discovered extent of the 
+        underlying periods.
         """
 
         # All periods are presumed parallel; grab their metrics
@@ -1099,37 +1102,3 @@ class BareMultiPeriod(MultiPeriodBase):
     def get_time_value_collection(self, name):
         return self._time_values[name]
 
-
-class MultiPeriodQuerySetMixin:
-    """
-    A utility mixin for Django models.QuerySet instances to provide the ability
-    to produce a MultiPeriod from a current queryset.
-
-    In order to be useful, the QuerySet instances must surface a Model that derives
-    from ModelPeriod.
-    """
-
-    def multi_period(self):
-        """
-        Return a MultiPeriod for the current queryset. The start date of the
-        multiperiod will be the start date of the earliest value; the end 
-        date will be the end date of the latest value.
-
-        Returns None if there are no periods. (CONSIDER: maybe return empty?)
-        """
-        # XXX TODO this isn't the `metrics` branch; for now, we have to load
-        # all applicable periods into memory because we don't know which
-        # period will have meaningful PIT_EARLIEST or PIT_LATEST values.
-        # (The `metrics` branch can easily solve this dilemma since each
-        # value is broken out separately; I suppose we *could* query to
-        # limit how far back/forward in time we go outside of the specified
-        # date range, but given the small size of our data at the moment and
-        # the likely need for us to revisit this very soon, I'm punting for now.)
-        # -Dave
-
-        # Grab the underlying periods
-        periods = list(self.order_by("start"))
-        if not periods:
-            return None
-
-        return BareMultiPeriod.from_periods(periods)

@@ -3,7 +3,7 @@ import decimal
 from django.db import models
 
 from remark.lib.tokens import public_id
-from remark.lib.metrics import Metric, Behavior, ModelPeriod, MultiPeriodQuerySetMixin
+from remark.lib.metrics import Metric, Behavior, ModelPeriod
 
 
 def pro_public_id():
@@ -36,15 +36,52 @@ class Project(models.Model):
         max_length=255, help_text="The user-facing name of the project."
     )
 
-    def baseline_period(self):
-        """Return the baseline period for this project."""
-        # TODO CONSIDER for now, we assume the baseline period is the first
-        # period on any project. Alternatively, we could explicitly flag it?
+    def get_periods(self):
+        """
+        Return a queryset of all periods, including the baseline.
+        """
+        return self.periods.all()
+
+    def get_baseline_period(self):
+        """
+        Return the baseline period for this project.
+        """
+        # CONSIDER for now, this is always the first. Maybe this should change?
         return self.periods.first()
 
-    def current_period(self):
-        """Return the most recent reported period for this project."""
-        return self.periods.last()
+    def get_baseline_start(self):
+        """
+        Return the start date (inclusive) of the baseline period.
+        """
+        return self.get_baseline_period().get_start()
+
+    def get_baseline_end(self):
+        """
+        Return the end date (exclusive) of the baseline period.
+        """
+        return self.get_baseline_period().get_end()
+
+    def get_campaign_periods(self):
+        """
+        Return the campaign periods for this project -- aka all periods except
+        the baseline.
+        """
+        # CONSIDER: for now, this is the rest. Maybe this should change?
+        return self.periods.all()[1:]
+
+    def get_campaign_start(self):
+        """
+        Return the start date (inclusive) of the campaign.
+        """
+        first_campaign_period = self.periods.all()[1:].first()
+        return first_campaign_period.get_start()
+
+    def get_campaign_end(self):
+        """
+        Return the end date (exclusive) of the campaign.
+        """
+        last_campaign_period = self.periods.order_by("-start")[1:].first()
+        return last_campaign_period.get_end()
 
     def to_jsonable(self):
         """Return a representation that can be converted to a JSON string."""
@@ -54,7 +91,7 @@ class Project(models.Model):
         return "{} ({})".format(self.name, self.public_id)
 
 
-class PeriodQuerySet(MultiPeriodQuerySetMixin, models.QuerySet):
+class PeriodManager(models.Manager):
     pass
 
 
@@ -63,7 +100,7 @@ class Period(ModelPeriod, models.Model):
     Represents a snapshot of a property's basic activity over a period of time.
     """
 
-    objects = PeriodQuerySet.as_manager()
+    objects = PeriodManager()
 
     project = models.ForeignKey(
         Project, on_delete=models.CASCADE, related_name="periods"
