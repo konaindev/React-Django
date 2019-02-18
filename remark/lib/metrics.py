@@ -381,11 +381,11 @@ class Metric:
         
         separate(when, time_value):
 
-            Given a single time_value and a time within that time value,
+            Given a single TimeValue and a time within that time value,
             split the time_value into two.
 
             The default Metric class implements a single separate technique
-            for point-in-time values: it seemly leaves them untouched.
+            for point-in-time values: it simply leaves them untouched.
 
             The default Metric class implements two techniques for intervallic
             values: either it leaves them untouched, or it splits them evenly
@@ -393,8 +393,11 @@ class Metric:
 
             The choice of separate behavior comes from the underlying Metric.behavior value.
 
+            Like merge(...), derived Metrics classes can implement separation
+            however they please.
+
     There is a third critical operation on Metric that builds on *top*
-    of merge(...) and separate():
+    of merge(...) and separate(...):
 
         unify(start, end, time_values):
 
@@ -407,6 +410,9 @@ class Metric:
 
             Derived Metrics can certainly bring their own implementation, 
             although it may not be necessary in the common case.
+
+    The MultiPeriod classes use unify(...) extensively in order to generate
+    successive periods with precisely determined start and end points.
     """
 
     def __init__(self, behavior):
