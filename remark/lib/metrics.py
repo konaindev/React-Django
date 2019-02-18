@@ -341,6 +341,74 @@ class TimeValueCollection:
 
 
 class Metric:
+    """
+    A Metric is a class that defines how to manipulate a value in time. 
+
+    In this library, values in time are represented by TimeValue, which is simply
+    a tuple that contains a start date (inclusive), an end date (exclusive), 
+    and a raw value that applies to that time span. If the start and end dates
+    are the same, the TimeValue is considered to be point-in-time rather than
+    intervallic.
+
+    Every Metric must provide implementations of two key operations on TimeValues:
+
+        merge(time_values):
+
+            Given a potentially unordered collection of time_values, return a single
+            time_value whose extents are determined by the earliest and latest of
+            the included time values, and whose value is determined by the Metric's
+            merge technique.
+
+            The default Metric class implements two merge techniques for
+            point-in-time values: either pick the earliest, or pick the latest.
+
+            The default Metric class implements two merge techniques for
+            intervallic values: either add them together, or average them. 
+            Addition is irrespective of time frames; averages are weighted equally by
+            the relative amount of time each TimeValue represents.
+
+            The choice of merge behavior comes from the underlying Metric.behavior value.
+
+            If you'd like to define your own behaviors, you can derive from
+            Metric and override merge(...). You might do this for special value
+            types (Metric only handles int, float, and Decimal by default). You
+            might also do this if you want to implement more sophisticated 
+            assumptions about the distribution of a given TimeValue in time:
+            the base class makes an assumption that values are distributed
+            evenly over their time span, but a smarter Metric might implement
+            daily, weekly, or seasonal assumptions. The sky is the limit for
+            what a Metric, in the abstract, can do.
+        
+        separate(when, time_value):
+
+            Given a single time_value and a time within that time value,
+            split the time_value into two.
+
+            The default Metric class implements a single separate technique
+            for point-in-time values: it seemly leaves them untouched.
+
+            The default Metric class implements two techniques for intervallic
+            values: either it leaves them untouched, or it splits them evenly
+            across the split timeframe.
+
+            The choice of separate behavior comes from the underlying Metric.behavior value.
+
+    There is a third critical operation on Metric that builds on *top*
+    of merge(...) and separate():
+
+        unify(start, end, time_values):
+
+            Given a desired start and end date, and a (potentially unordered)
+            collection of TimeValues, return a *single* value for the requested
+            span.
+
+            Under the hood, this simply makes multiple calls to merge(...)
+            and separate(...) as necessary.
+
+            Derived Metrics can certainly bring their own implementation, 
+            although it may not be necessary in the common case.
+    """
+
     def __init__(self, behavior):
         self.behavior = behavior
 
