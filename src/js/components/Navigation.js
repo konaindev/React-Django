@@ -34,32 +34,6 @@ export class ProjectNavigationItem extends Component {
 }
 
 /**
- * @description A navigation item that allows for selection of specific report periods
- */
-export class ReportNavigationItem extends Component {
-  static propTypes = {
-    report: PropTypes.object.isRequired
-  };
-
-  render() {
-    return (
-      <>
-        <span className="inline-block align-middle mt-1 text-sm text-remark-ui-text mr-8">
-          {formatDate(this.props.report.start, false)} -{" "}
-          {formatDate(this.props.report.end, false)}
-        </span>
-        <span
-          className="cursor-pointer inline-block align-middle -mx-4 -mt-1 -mb-2 px-4 py-2 rounded"
-          style={{ backgroundColor: "#232837" }}
-        >
-          Last Week ∨
-        </span>
-      </>
-    );
-  }
-}
-
-/**
  * @description A wrapper for multiple navigation items
  */
 export class NavigationItems extends Component {

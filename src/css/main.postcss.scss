@@ -209,6 +209,13 @@
     }
 }
 
+.k-dropdown {
+    /* custom styled dropdown */
+    @apply m-0 p-0;
+    background: transparent;
+    @apply text-remark-ui-text-light;
+}
+
 .k-funnel-label {
     /* container for layout (matching row height */
     @apply h-24 mt-8 -mb-4;

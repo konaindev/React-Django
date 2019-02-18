@@ -7,8 +7,7 @@ import { remarkablyChartTheme } from "../utils/victoryTheme";
 import Header from "../components/Header";
 import {
   NavigationItems,
-  ProjectNavigationItem,
-  ReportNavigationItem
+  ProjectNavigationItem
 } from "../components/Navigation";
 
 import {
@@ -984,16 +983,77 @@ class Report extends Component {
 }
 
 /**
+ * @description A dropdown menu that lets us change the visible span.
+ */
+class ReportSpanDropdown extends Component {
+  static propTypes = {
+    current_report_link: PropTypes.object.isRequired,
+    report_links: PropTypes.arrayOf(PropTypes.object).isRequired
+  };
+
+  onChange = event => {
+    // TODO what should we do here?
+    document.location = event.target.value;
+  };
+
+  renderOptions() {
+    let options = [];
+    for (let section of this.props.report_links) {
+      // ignore section.name for now?
+      for (let link of section.periods) {
+        options.push(
+          <option key={link.url} value={link.url}>
+            {link.description}
+          </option>
+        );
+      }
+    }
+    return options;
+  }
+
+  render() {
+    return (
+      <>
+        <span
+          className="cursor-pointer inline-block align-middle mx-4 -my-4 px-4 py-2 rounded"
+          style={{ backgroundColor: "#232837" }}
+        >
+          <select
+            className="k-dropdown"
+            defaultValue={this.props.current_report_link.url}
+            onChange={this.onChange}
+          >
+            {this.renderOptions()}
+          </select>
+        </span>
+      </>
+    );
+  }
+}
+
+/**
  * @description Top-level project tabs
  */
 class ProjectTabs extends Component {
+  static propTypes = {
+    current_report_link: PropTypes.object.isRequired,
+    report_links: PropTypes.arrayOf(PropTypes.object).isRequired
+  };
+
   render() {
     return (
       <div className="k-tabs-container">
         <ul>
           <li className="selected">Performance</li>
-          <li>Baseline</li>
+          <li>Model</li>
+          <li>Market</li>
           <li>Team</li>
+          <li className="absolute pin-r">
+            <ReportSpanDropdown
+              current_report_link={this.props.current_report_link}
+              report_links={this.props.report_links}
+            />
+          </li>
         </ul>
         <hr className="k-divider k-pin-above-top" />
       </div>
@@ -1019,7 +1079,6 @@ export default class ReportPage extends Component {
     const navigationItems = (
       <NavigationItems>
         <ProjectNavigationItem project={this.props.project} />
-        <ReportNavigationItem report={this.props.report} />
       </NavigationItems>
     );
 
@@ -1027,7 +1086,10 @@ export default class ReportPage extends Component {
       <div className="page">
         <Header navigationItems={navigationItems}>
           <>
-            <ProjectTabs />
+            <ProjectTabs
+              current_report_link={this.props.current_report_link}
+              report_links={this.props.report_links}
+            />
             <Report report={this.props.report} />
           </>
         </Header>

@@ -164,6 +164,10 @@ class ReportSpan:
             description = f"{custom_description} ({description})"
         return description
 
+    def get_link(self):
+        """Return a link dictionary suitable for use in the frontend."""
+        return {"url": self.get_url(), "description": self.get_description()}
+
     def get_report(self):
         """
         Return a Report covering the requested timespan.
@@ -182,46 +186,34 @@ class ReportSpan:
         return report
 
 
-class ProjectPageView(ReactView):
-    """Render a page that shows information about the overall project."""
-
-    page_class = "ProjectPage"
+class ReportSpanLinksMixin:
+    """
+    View-specific utilities for building report spans links.
+    """
 
     def _build_special_period_links(self, project):
         """
         Build a mapping of special periods to a report URL for that period.
         """
-        links = []
-        for custom_span in ReportSpan.CUSTOM_SPANS:
-            report_span = ReportSpan(project, custom_span)
-            links.append(
-                {
-                    "description": report_span.get_description(),
-                    "url": report_span.get_url(),
-                }
-            )
-        return links
+        return [
+            ReportSpan(project, custom_span).get_link()
+            for custom_span in ReportSpan.CUSTOM_SPANS
+        ]
 
     def _build_campaign_period_links(self, project):
         """
         Build a mapping of campaign periods to a report URL for that period.
         """
-        links = []
-        for period in project.get_campaign_periods():
-            report_span = ReportSpan.for_dates(
-                project, period.get_start(), period.get_end()
-            )
-            links.append(
-                {
-                    "description": report_span.get_description(),
-                    "url": report_span.get_url(),
-                }
-            )
-        return links
+        return [
+            ReportSpan.for_dates(project, start, end).get_link()
+            for start, end in project.get_campaign_period_dates()
+        ]
 
-    def get(self, request, project_id):
-        project = get_object_or_404(Project, public_id=project_id)
-        report_links = [
+    def get_report_span_links(self, project):
+        """
+        Return a simple link structure of all report spans our front-end views.
+        """
+        return [
             {
                 "name": "Special Periods",
                 "periods": self._build_special_period_links(project),
@@ -231,10 +223,22 @@ class ProjectPageView(ReactView):
                 "periods": self._build_campaign_period_links(project),
             },
         ]
-        return self.render(project=project.to_jsonable(), report_links=report_links)
 
 
-class ReportPageView(ReactView):
+class ProjectPageView(ReportSpanLinksMixin, ReactView):
+    """Render a page that shows information about the overall project."""
+
+    page_class = "ProjectPage"
+
+    def get(self, request, project_id):
+        project = get_object_or_404(Project, public_id=project_id)
+        return self.render(
+            project=project.to_jsonable(),
+            report_links=self.get_report_span_links(project),
+        )
+
+
+class ReportPageView(ReportSpanLinksMixin, ReactView):
     """Render a page that shows information about a specific period in time."""
 
     # This is the name of the class in our front-end code; see
@@ -253,4 +257,10 @@ class ReportPageView(ReactView):
         if report is None:
             raise Http404
 
-        return self.render(report=report.to_jsonable(), project=project.to_jsonable())
+        return self.render(
+            report=report.to_jsonable(),
+            current_report_link=report_span.get_link(),
+            report_links=self.get_report_span_links(project),
+            project=project.to_jsonable(),
+        )
+

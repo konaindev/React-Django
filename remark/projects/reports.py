@@ -544,7 +544,7 @@ class Report:
         all_periods = project.get_periods()
         multiperiod = BareMultiPeriod.from_periods(all_periods)
         break_times = [project.get_campaign_start(), project.get_campaign_end()]
-        period = multiperiod.get_periods(*break_times)
+        period = multiperiod.get_periods(*break_times)[0]
         return cls(period)
 
     def __init__(self, period, previous_period=None):

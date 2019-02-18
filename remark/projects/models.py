@@ -53,13 +53,13 @@ class Project(models.Model):
         """
         Return the start date (inclusive) of the baseline period.
         """
-        return self.get_baseline_period().get_start()
+        return self.periods.values_list("start", flat=True).first()
 
     def get_baseline_end(self):
         """
         Return the end date (exclusive) of the baseline period.
         """
-        return self.get_baseline_period().get_end()
+        return self.periods.values_list("end", flat=True).first()
 
     def get_campaign_periods(self):
         """
@@ -69,19 +69,23 @@ class Project(models.Model):
         # CONSIDER: for now, this is the rest. Maybe this should change?
         return self.periods.all()[1:]
 
+    def get_campaign_period_dates(self):
+        """
+        Return tuples containing start and end dates for all campaign periods.
+        """
+        return self.periods.values_list("start", "end")[1:]
+
     def get_campaign_start(self):
         """
         Return the start date (inclusive) of the campaign.
         """
-        first_campaign_period = self.periods.all()[1:].first()
-        return first_campaign_period.get_start()
+        return self.periods.values_list("start", flat=True)[1:].first()
 
     def get_campaign_end(self):
         """
         Return the end date (exclusive) of the campaign.
         """
-        last_campaign_period = self.periods.order_by("-start")[1:].first()
-        return last_campaign_period.get_end()
+        return self.periods.order_by("-start").values_list("end", flat=True).first()
 
     def to_jsonable(self):
         """Return a representation that can be converted to a JSON string."""
