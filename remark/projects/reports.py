@@ -212,7 +212,7 @@ class ComputedPeriod(ComputedValueMixin):
         ret_weight = decimal.Decimal(1) - acq_weight
         weighted_acq_romi = mult_or_0(self.acq_romi, acq_weight)
         weighted_ret_romi = mult_or_0(self.ret_romi, ret_weight)
-        return sum_or_0(weighted_acq_romi, weighted_ret_romi)
+        return round(sum_or_0(weighted_acq_romi, weighted_ret_romi))
 
     # ------------------------------------------------------
     # TARGETS: Investment

@@ -813,9 +813,8 @@ class DateSequence:
         """
         Return an iterable of dates spaced apart by time_delta.
 
-        The first date will be start; the last date will be the earliest date
-        that occurs at or after end. (If after_end is false, all dates will
-        be within range.)
+        The first date will be start; if after_end is 0, the last date will
+        be the 
         """
         d = start
         while d < end:
@@ -842,7 +841,7 @@ class DateSequence:
         # Adjust starting date to match desired weekday, if provided
         if weekday is not None:
             days = weekday - start.weekday()
-            days = days if days < 0 else days - 7
+            days = days if days <= 0 else days - 7
             d = start + datetime.timedelta(days=days)
 
         # Drop first week if it's before bounds
@@ -1022,6 +1021,43 @@ class BareMultiPeriod(MultiPeriodBase):
     An in-memory implementation of a MultiPeriod
     """
 
+    @classmethod
+    def from_periods(cls, periods):
+        """
+        Construct a BareMultiPeriod with a collection of periods.
+        """
+
+        # All periods are presumed parallel; grab their metrics
+        metric_names = periods[0].get_metric_names()
+        metrics = {
+            metric_name: periods[0].get_metric(metric_name)
+            for metric_name in metric_names
+        }
+
+        # Build a mapping from metric name to a list of time values
+        values = {}
+
+        earliest_start = None
+        latest_end = None
+
+        for period in periods:
+            start = period.get_start()
+            end = period.get_end()
+            period_values = period.get_values()
+            period_time_values = {
+                metric_name: TimeValue(start, end, value)
+                for metric_name, value in period_values.items()
+            }
+            for metric_name, time_value in period_time_values.items():
+                value_list = values.get(metric_name, [])
+                values[metric_name] = value_list + [time_value]
+            if (earliest_start is None) or (start < earliest_start):
+                earliest_start = start
+            if (latest_end is None) or (end > latest_end):
+                latest_end = end
+
+        return cls(earliest_start, latest_end, metrics, values)
+
     def __init__(self, start, end, metrics, time_values):
         """
         Construct a BareMultiPeriod with a:
@@ -1096,34 +1132,4 @@ class MultiPeriodQuerySetMixin:
         if not periods:
             return None
 
-        # All periods are presumed parallel; grab their metrics
-        metric_names = periods[0].get_metric_names()
-        metrics = {
-            metric_name: periods[0].get_metric(metric_name)
-            for metric_name in metric_names
-        }
-
-        # Build a mapping from metric name to a list of time values
-        values = {}
-
-        earliest_start = None
-        latest_end = None
-
-        for period in periods:
-            start = period.get_start()
-            end = period.get_end()
-            period_values = period.get_values()
-            period_time_values = {
-                metric_name: TimeValue(start, end, value)
-                for metric_name, value in period_values.items()
-            }
-            for metric_name, time_value in period_time_values.items():
-                value_list = values.get(metric_name, [])
-                values[metric_name] = value_list + [time_value]
-            if (earliest_start is None) or (start < earliest_start):
-                earliest_start = start
-            if (latest_end is None) or (end > latest_end):
-                latest_end = end
-
-        return BareMultiPeriod(earliest_start, latest_end, metrics, values)
-
+        return BareMultiPeriod.from_periods(periods)

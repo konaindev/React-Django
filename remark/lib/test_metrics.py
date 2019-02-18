@@ -1,10 +1,13 @@
 import datetime
 import decimal
+import json
+import os.path
 
 from django.test import TestCase
 
 from .metrics import (
     BareMultiPeriod,
+    BarePeriod,
     Behavior,
     DateSequence,
     InvalidMetricOperation,
@@ -724,7 +727,7 @@ class DateSequenceTestCase(TestCase):
 
 
 class MultiPeriodTestCase(TestCase):
-    """Test key functionality in the MultiPeriodBase implementation."""
+    """Test basic functionality in the MultiPeriodBase implementation."""
 
     def setUp(self):
         """
@@ -817,4 +820,81 @@ class MultiPeriodTestCase(TestCase):
         period = self.mp.get_cumulative_period()
         self.assertEqual(period.get_start(), self.start)
         self.assertEqual(period.get_end(), self.end)
+
+
+class TestDataTestCase(TestCase):
+    """
+    A set of test cases that look much closer to 'integration'-style
+    tests than they do to unit tests. They typically load a large body
+    of data across a wide timespan and then perform complex manipulations
+    to ensure sanity prevails.
+    """
+    # These tests are all based on the content found in metrics_test_data.json.
+    #
+    # The metrics_test_data file is a custom format: it's not a dumpdata, 
+    # because we want our data to remain independent of the database
+    # (the metrics library is quite happy as an in-memory-only library);
+    # it's not pickle because I feel that things are still shifting underfoot.
+    TEST_DATA_FILE_NAME = os.path.join(os.path.dirname(os.path.abspath(__file__)), "metrics_test_data.json")
+
+    def _load_test_data(self, file_name=TEST_DATA_FILE_NAME):
+        # CONSIDER whether we want to promote this, or something like it,
+        # out of test and into lib/metrics itself?
+        from pydoc import locate
+        with open(file_name, "rt") as test_data_file:
+            jsonable = json.load(test_data_file)
+        metrics = {name: Metric(behavior=Behavior[behavior_name]) for name, behavior_name in jsonable.get("metrics", {}).items()}
+        metric_types = {name: locate(type_name) for name, type_name in jsonable.get("metric_types", {}).items()}
+
+        def _make_period(period_jsonable):
+            start = datetime.datetime.strptime(period_jsonable["start"], "%Y-%m-%d").date()
+            end = datetime.datetime.strptime(period_jsonable["end"], "%Y-%m-%d").date()
+            values = {name: metric_types[name](jsonable_value) if jsonable_value is not None else None for name, jsonable_value in period_jsonable.get("values", {}).items()}
+            return BarePeriod(start, end, metrics, values)
+        
+        # Remember the 'original' periods for test purposes
+        periods = [_make_period(period_jsonable) for period_jsonable in jsonable.get("periods", [])]
+        self.periods = sorted(periods, key=lambda period: period.get_start())
+        
+        # Create a multiperiod with the baseline and all updates
+        self.mp = BareMultiPeriod.from_periods(self.periods)
+
+        # Create a multiperiod without the baseline
+        self.mp2 = BareMultiPeriod.from_periods(self.periods[1:])
+
+    def setUp(self):
+        super().setUp()
+        self._load_test_data()
+    
+    def test_week_preservation(self):
+        """
+        Ensure that, when requesting week periods from the multiperiod,
+        we get the precise values that went *into* the multiperiod.
+
+        This requires us to know something about the underlying test data
+        (namely, that it contains a bunch of week periods starting on a Monday)
+        but I've decided that's kosher in the context of these tests.
+        """
+        week_periods = self.mp2.get_week_periods(weekday=Weekday.MONDAY)
+        self.assertEqual(len(week_periods), len(self.periods) - 1)
+        for bare_period, week_period in zip(self.periods[1:], week_periods):
+            self.assertEqual(bare_period.get_start(), week_period.get_start())
+            self.assertEqual(bare_period.get_end(), week_period.get_end())
+            self.assertEqual(bare_period.get_values(), week_period.get_values())
+    
+    def test_months(self):
+        """
+        Ensure that we get the expected number of month periods.
+        """
+        month_periods = self.mp.get_calendar_month_periods()
+        self.assertEqual(len(month_periods), 24)
+    
+    def test_cumulative(self):
+        """
+        Ensure that we can build a cumulative period that makes sense.
+        """
+        cumulative_period = self.mp.get_cumulative_period()
+        self.assertEqual(cumulative_period.get_start(), self.mp.get_start())
+        self.assertEqual(cumulative_period.get_end(), self.mp.get_end())
+
 
