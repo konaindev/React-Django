@@ -342,7 +342,7 @@ class TimeValueCollection:
 
 class Metric:
     """
-    A Metric is a class that defines how to manipulate a value in time. 
+    A Metric is an object that provides manipualtions for values in time.
 
     In this library, values in time are represented by TimeValue, which is simply
     a tuple that contains a start date (inclusive), an end date (exclusive), 
