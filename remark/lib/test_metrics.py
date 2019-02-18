@@ -669,6 +669,13 @@ class BareMultiPeriodTestCase(TestCase):
         with self.assertRaises(Exception):
             mp.get_time_value_collection("b")
 
+    def test_only(self):
+        mp = BareMultiPeriod(
+            start=None, end=None, metrics={"a": "a metric", "b": "b metric", "c": "c metric"}, time_values={"a": [1, 2], "b": [10, 20], "c": [100, 200]}
+        )
+        mp_only = mp.only("a", "c")
+        self.assertEquals(set(mp_only.get_metric_names()), set(["a", "c"]))
+
 
 class DateSequenceTestCase(TestCase):
     def test_for_time_delta(self):

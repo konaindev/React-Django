@@ -426,6 +426,7 @@ class ComputedPeriod(ComputedValueMixin):
     # But PeriodBase requires exposure of Metric and Value instances, neither of
     # which strictly makes sense for the @computed_properties. Maybe I need to loosen
     # some restrictions? -Dave
+    # XXX maybe computed period shouldn't wrap an underlying period?
 
     def get_start(self):
         return self.period.get_start()
@@ -486,7 +487,95 @@ class PeriodDelta:
         return dict(self._values)
 
 
+class WhiskerSeries:
+    """
+    Utility class for generating a named time series used in a whisker plot.
+    """
+
+    # TODO This whisker stuff will need a lot more thought in the near-term. -Dave
+
+    # Mapping from the target metric name to the name of its dependencies.
+    # This is primarily used for performance; we can kill it if it's annoying.
+    # TODO can we generate this automagically in the future? -Dave
+    WHISKER_METRICS = {
+        "leased_rate": [
+            "leased_units_start",
+            "occupiable_units_start",
+            "leases_executed",
+            "leases_ended",
+        ],
+        "renewal_rate": ["lease_renewal_notices", "leases_due_to_expire"],
+        "occupancy_rate": [
+            "occupied_units_start",
+            "move_ins",
+            "move_outs",
+            "occupiable_units_start",
+        ],
+        "investment": [
+            "acq_reputation_building",
+            "acq_demand_creation",
+            "acq_leasing_enablement",
+            "acq_market_intelligence",
+            "ret_reputation_building",
+            "ret_demand_creation",
+            "ret_leasing_enablement",
+            "ret_market_intelligence",
+        ],
+        "usv_exe_perc": ["leases_executed", "usvs"],
+        "lease_cd_rate": ["lease_cds", "lease_applications"],
+        "cost_per_exe_vs_monthly_average_rent": [
+            "acq_reputation_building",
+            "acq_demand_creation",
+            "acq_leasing_enablement",
+            "acq_market_intelligence",
+            "monthly_average_rent",
+            "leases_executed",
+        ],
+    }
+
+    WHISKER_SOURCE_METRICS = list(
+        set(
+            [
+                source_metric
+                for target_metric, source_metrics in WHISKER_METRICS.items()
+                for source_metric in source_metrics
+            ]
+        )
+    )
+
+    @classmethod
+    def build_weekly_series(cls, project, mutliperiod, end):
+        """
+        Return a dictionary mapping a target metric name to a time-ordered series of values
+        for that target metric.
+        """
+        # XXX this whole WhiskerSeries class exposes totally weird API at the moment.
+        # I dunno what it should *actually* look like, but this doesn't feel like it! -Dave
+        campaign_start = project.get_campaign_start()
+        whisker_mp = mutliperiod.only(*cls.WHISKER_SOURCE_METRICS)
+        whisker_periods = whisker_mp.get_week_periods()
+        computed_periods = [
+            ComputedPeriod(whisker_period)
+            for whisker_period in whisker_periods
+            if whisker_period.get_start() >= campaign_start
+        ]
+        weekly_series = {
+            target_metric: [
+                getattr(computed_period, target_metric)
+                for computed_period in computed_periods
+            ]
+            for target_metric in cls.WHISKER_METRICS.keys()
+        }
+        return weekly_series
+
+
 class Report:
+    """
+    The primary class for creating and representing a performance (or baseline)
+    report. Builds on top of all other mechanisms (Metrics, ComputedPeriods, etc.) 
+    in order to generate valid, complete data.
+    """
+
     @classmethod
     def for_baseline(cls, project):
         """
@@ -517,7 +606,9 @@ class Report:
             break_times = [previous_start, end - time_delta]
             previous_period = multiperiod.get_periods(*break_times)[0]
 
-        return cls(period, previous_period)
+        whiskers = WhiskerSeries.build_weekly_series(project, multiperiod, end)
+
+        return cls(period, previous_period, whiskers)
 
     @classmethod
     def for_last_weeks(cls, project, weeks):
@@ -545,10 +636,11 @@ class Report:
         multiperiod = BareMultiPeriod.from_periods(all_periods)
         break_times = [project.get_campaign_start(), project.get_campaign_end()]
         period = multiperiod.get_periods(*break_times)[0]
-        return cls(period)
+        return cls(period, previous_period=None, whiskers=None)
 
-    def __init__(self, period, previous_period=None):
+    def __init__(self, period, previous_period=None, whiskers=None):
         self.period = ComputedPeriod(period)
+        self.whiskers = whiskers or {}
         if previous_period:
             previous_period = ComputedPeriod(previous_period)
             self.delta = PeriodDelta(self.period, previous_period)
@@ -565,6 +657,7 @@ class Report:
         return dict(
             start=self.period.get_start(),
             end=self.period.get_end(),
+            whiskers=self.whiskers,
             **period_values,
             **delta_values,
         )

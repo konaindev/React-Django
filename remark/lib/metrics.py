@@ -931,6 +931,14 @@ class MultiPeriodBase:
         """
         raise NotImplementedError()
 
+    def only(self, *names):
+        """
+        Return a new MultiPeriodBase that contains *only* the values associated
+        with the provided names. This is particularly useful if one is about
+        to perform an expensive computation with a multiperiod.
+        """
+        raise NotImplementedError()
+
     def get_periods(self, *break_times):
         """
         Return a time-ordered list of (non-multi) periods based on the provided
@@ -1077,7 +1085,9 @@ class BareMultiPeriod(MultiPeriodBase):
         self._end = end
         self._metrics = dict(metrics)
         self._time_values = {
-            name: TimeValueCollection(value_list)
+            name: value_list
+            if isinstance(value_list, TimeValueCollection)
+            else TimeValueCollection(value_list)
             for name, value_list in time_values.items()
         }
 
@@ -1101,4 +1111,27 @@ class BareMultiPeriod(MultiPeriodBase):
 
     def get_time_value_collection(self, name):
         return self._time_values[name]
+
+    def only(self, *names):
+        """
+        Return a new BareMultiPeriod that contains *only* the values associated
+        with the provided names. This is particularly useful if one is about
+        to perform an expensive computation with a multiperiod.
+        """
+        # CONSIDER maybe belongs on the MultiPeriodBase? Maybe not? I dunno. -Dave
+        names = frozenset(names)
+        filtered_metrics = {
+            name: metric for name, metric in self.get_metrics().items() if name in names
+        }
+        filtered_time_value_collections = {
+            name: time_value_collection
+            for name, time_value_collection in self.get_all_time_value_collections().items()
+            if name in names
+        }
+        return BareMultiPeriod(
+            start=self.get_start(),
+            end=self.get_end(),
+            metrics=filtered_metrics,
+            time_values=filtered_time_value_collections,
+        )
 
