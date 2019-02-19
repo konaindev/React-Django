@@ -38,7 +38,7 @@ EMAIL_USE_TLS=NO
 
 - Run a build of the front-end assets: `yarn build`.
 - Set up database: `./manage.py migrate`
-- Load sample data: `./manage.py loaddata scripts/data/2-lincoln.json`
+- Load sample data: `./manage.py loaddata data/dumped/2-lincoln.json`
 - Run the django dev server: `./manage.py runserver`.
 
 (TODO: `heroku local` will be the way forward, eventually)
@@ -76,11 +76,11 @@ But somewhere down the road, it should be "no problem, you can make this change 
 ## Documentation Links
 
 ### Django
+
 The web framework.
 https://docs.djangoproject.com/en/2.1/
 
 ### Tailwind CSS
+
 CSS layout framework.
 https://tailwindcss.com/docs/what-is-tailwind/
-
-
