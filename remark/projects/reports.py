@@ -291,7 +291,9 @@ class ComputedPeriod(ComputedValueMixin):
     @computed_value
     def usv_exe_perc(self):
         """The conversation rate from usvs to lease executions."""
-        return d_quant_perc(d_div_or_0(self.leases_executed, self.usvs))
+        return d_quant(
+            d_div_or_0(self.leases_executed, self.usvs), form=decimal.Decimal("0.00001")
+        )
 
     # ------------------------------------------------------
     # TARGETS: Acquisition Funnel
@@ -553,7 +555,9 @@ class WhiskerSeries:
         # I dunno what it should *actually* look like, but this doesn't feel like it! -Dave
         campaign_start = project.get_campaign_start()
         whisker_mp = mutliperiod.only(*cls.WHISKER_SOURCE_METRICS)
-        whisker_periods = whisker_mp.get_week_periods()
+        whisker_periods = whisker_mp.get_delta_periods(
+            time_delta=datetime.timedelta(weeks=4)
+        )
         computed_periods = [
             ComputedPeriod(whisker_period)
             for whisker_period in whisker_periods

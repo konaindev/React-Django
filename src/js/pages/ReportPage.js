@@ -286,6 +286,11 @@ const LargePercentBox = withFormatters(
   formatPercent,
   formatDeltaPercent
 );
+const LargeDetailPercentBox = withFormatters(
+  LargeBoxLayout,
+  value => formatPercent(value, 1),
+  formatDeltaPercent
+);
 const LargeNumberBox = withFormatters(LargeBoxLayout, formatNumber);
 const LargeCurrencyBox = withFormatters(LargeBoxLayout, formatCurrency);
 const LargeCurrencyShorthandBox = withFormatters(
@@ -891,7 +896,7 @@ class AcquisitionFunnelReport extends Component {
   static HeadlineNumbers = ({ report: r }) => {
     return (
       <BoxRow>
-        <LargePercentBox
+        <LargeDetailPercentBox
           name="USV > EXE"
           value={r.usv_exe_perc}
           target={r.target_usv_exe_perc}
@@ -914,7 +919,6 @@ class AcquisitionFunnelReport extends Component {
           innerBox={WhiskerPlot.maybe(
             r.whiskers.cost_per_exe_vs_monthly_average_rent
           )}
-          reverseArrow={true}
         />
       </BoxRow>
     );
@@ -1176,9 +1180,9 @@ class ProjectTabs extends Component {
       <div className="k-tabs-container">
         <ul>
           <li className="selected">Performance</li>
-          <li>Model</li>
+          {/* <li>Model</li>
           <li>Market</li>
-          <li>Team</li>
+          <li>Team</li> */}
           <li className="absolute pin-r">
             <ReportSpanDropdown
               current_report_link={this.props.current_report_link}

@@ -164,7 +164,7 @@ def d_quant_perc(d):
     )
 
 
-def d_quant(d, form, rounding):
+def d_quant(d, form, rounding=ROUND_HALF_UP):
     """
     Return d as a Python decimal with arbitrary rounding based on the 
     `form` (a Decimal) and a `rounding` constant.
