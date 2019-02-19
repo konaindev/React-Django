@@ -1,6 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { VictoryChart, VictoryBar, VictoryAxis } from "victory";
+import {
+  VictoryChart,
+  VictoryBar,
+  VictoryGroup,
+  VictoryArea,
+  VictoryAxis
+} from "victory";
 
 import { remarkablyChartTheme } from "../utils/victoryTheme";
 
@@ -59,8 +65,19 @@ class LargeBoxLayout extends Component {
     content: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
       .isRequired,
     detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-    detail2: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+    detail2: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+    innerBox: PropTypes.element
   };
+
+  renderInnerBox() {
+    return this.props.innerBox ? (
+      <div className="w-48 h-48 bg-transparent overflow-hidden">
+        {this.props.innerBox}
+      </div>
+    ) : (
+      <></>
+    );
+  }
 
   render() {
     return (
@@ -71,9 +88,12 @@ class LargeBoxLayout extends Component {
         <span className="text-remark-ui-text-light text-base">
           {this.props.name}
         </span>
-        <span className="text-remark-ui-text-lightest font-mono text-6xl font-hairline py-2">
-          {this.props.content}
-        </span>
+        <div className="flex items-center text-center justify-center">
+          <span className="text-remark-ui-text-lightest font-mono text-6xl font-hairline py-2 w-full">
+            {this.props.content}
+          </span>
+          {this.renderInnerBox()}
+        </div>
         <span className="text-remark-ui-text text-sm">{this.props.detail}</span>
         <span className="text-remark-ui-text text-sm">
           {this.props.detail2}
@@ -401,6 +421,65 @@ class ReportSection extends Component {
 }
 
 /**
+ * @class WhiskerPlot
+ *
+ * @classdesc A simple bar chart with area gradient that plots a whisker series.
+ */
+class WhiskerPlot extends Component {
+  static propTypes = {
+    series: PropTypes.arrayOf(
+      PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+    ).isRequired
+  };
+
+  static maybe = maybeSeries => {
+    return maybeSeries ? <WhiskerPlot series={maybeSeries} /> : null;
+  };
+
+  constructor(props) {
+    super(props);
+    this.chartData = this.props.series.map((raw, i) => ({
+      x: i,
+      y: Number(raw)
+    }));
+    // Here's some wacky javascript for you to contemplate. :-)
+    this.randomName = (((1 + Math.random()) * 0x10000) | 0).toString(16);
+  }
+
+  render() {
+    return (
+      <VictoryGroup
+        padding={0}
+        data={this.chartData}
+        style={{
+          data: {
+            stroke: "#74EC98",
+            strokeWidth: "5px",
+            fill: `url(#${this.randomName})`
+          }
+        }}
+      >
+        {/* XXX TODO this causes a ton of very mysterious console error spew. FIXME -Dave */}
+        <defs>
+          <linearGradient
+            id={this.randomName}
+            x1="0%"
+            y1="0%"
+            x2="0%"
+            y2="100%"
+          >
+            <stop offset="0%" stopColor="#74EC98" stopOpacity={1.0} />
+            <stop offset="50%" stopColor="#74EC98" stopOpacity={0.15} />
+            <stop offset="100%" stopColor="#74EC98" stopOpacity={0.0} />
+          </linearGradient>
+        </defs>
+        <VictoryArea interpolation="natural" />
+      </VictoryGroup>
+    );
+  }
+}
+
+/**
  * @class LeasingPerformanceReport
  *
  * @classdesc Render the leasing performance section of a full `report`.
@@ -422,6 +501,7 @@ class LeasingPerformanceReport extends Component {
             r.leased_units
           )} Executed Leases (Out of ${formatNumber(r.occupiable_units)})`}
           detail2={formatTargetPercent(r.target_lease_percent)}
+          innerBox={WhiskerPlot.maybe(r.whiskers.leased_rate)}
         />
         <LargeBoxLayout
           name="Retention"
@@ -430,6 +510,7 @@ class LeasingPerformanceReport extends Component {
             r.lease_renewal_notices
           )} Notices to Renew (Out of ${r.leases_due_to_expire} Due To Expire)`}
           detail2={formatTargetPercent(r.target_renewal_rate)}
+          innerBox={WhiskerPlot.maybe(r.whiskers.renewal_rate)}
         />
         <LargeBoxLayout
           name="Occupied"
@@ -438,6 +519,7 @@ class LeasingPerformanceReport extends Component {
             r.occupied_units
           )} Occupied Units (Out of ${formatNumber(r.occupiable_units)})`}
           detail2={formatTargetPercent(r.target_occupancy_rate)}
+          innerBox={WhiskerPlot.maybe(r.whiskers.occupancy_rate)}
         />
       </BoxRow>
     );
@@ -531,6 +613,7 @@ class CampaignInvestmentReport extends Component {
           value={r.investment}
           target={r.target_investment}
           delta={r.delta_investment}
+          innerBox={WhiskerPlot.maybe(r.whiskers.investment)}
         />
         <LargeCurrencyShorthandBox
           name="Est. Revenue Change"
@@ -770,12 +853,14 @@ class AcquisitionFunnelReport extends Component {
           value={r.usv_exe_perc}
           target={r.target_usv_exe_perc}
           delta={r.delta_usv_exe_perc}
+          innerBox={WhiskerPlot.maybe(r.whiskers.usv_exe_perc)}
         />
         <LargePercentBox
           name="Cancellation & Denial Rate"
           value={r.lease_cd_rate}
           target={r.target_lease_cd_rate}
           delta={r.delta_lease_cd_rate}
+          innerBox={WhiskerPlot.maybe(r.whiskers.lease_cd_rate)}
         />
         {/* we reverse the arrow here because declining percentages are *good* */}
         <LargePercentBox
@@ -783,6 +868,9 @@ class AcquisitionFunnelReport extends Component {
           value={r.cost_per_exe_vs_monthly_average_rent}
           detail={r.target_cost_per_exe_vs_monthly_average_rent}
           delta={r.delta_cost_per_exe_vs_monthly_average_rent}
+          innerBox={WhiskerPlot.maybe(
+            r.whiskers.cost_per_exe_vs_monthly_average_rent
+          )}
           reverseArrow={true}
         />
       </BoxRow>

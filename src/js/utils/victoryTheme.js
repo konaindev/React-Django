@@ -49,17 +49,27 @@ const strokeLinejoin = "round";
 
 // A full theme
 export const remarkablyChartTheme = {
-  area: assign(
-    {
-      style: {
-        data: {
-          fill: lightGrey
-        },
-        labels: centeredLabelStyles
+  area: assign({
+    style: {
+      data: {
+        stroke: "#74EC98",
+        fill: "#74EC98",
+        strokeWidth: "5px"
+      },
+      axis: {
+        fill: "transparent",
+        stroke: "transparent"
+      },
+      axisLabel: {
+        padding: 0,
+        fill: "transparent",
+        stroke: "transparent",
+        color: "transparent",
+        fontSize: 0
       }
     },
     baseProps
-  ),
+  }),
   axis: assign(
     {
       style: {
