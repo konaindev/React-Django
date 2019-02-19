@@ -558,6 +558,7 @@ class WhiskerSeries:
             ComputedPeriod(whisker_period)
             for whisker_period in whisker_periods
             if whisker_period.get_start() >= campaign_start
+            and whisker_period.get_end() <= end
         ]
         weekly_series = {
             target_metric: [
@@ -636,7 +637,10 @@ class Report:
         multiperiod = BareMultiPeriod.from_periods(all_periods)
         break_times = [project.get_campaign_start(), project.get_campaign_end()]
         period = multiperiod.get_periods(*break_times)[0]
-        return cls(period, previous_period=None, whiskers=None)
+        whiskers = WhiskerSeries.build_weekly_series(
+            project, multiperiod, break_times[-1]
+        )
+        return cls(period, previous_period=None, whiskers=whiskers)
 
     def __init__(self, period, previous_period=None, whiskers=None):
         self.period = ComputedPeriod(period)

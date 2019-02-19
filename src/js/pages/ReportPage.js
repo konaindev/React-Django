@@ -194,12 +194,23 @@ class DeltaLayout extends Component {
 
   static propTypes = {
     value: PropTypes.any.isRequired,
-    delta: PropTypes.any.isRequired,
+    delta: PropTypes.any,
     direction: PropTypes.oneOf([
       DeltaLayout.DIRECTION_UP,
       DeltaLayout.DIRECTION_FLAT,
       DeltaLayout.DIRECTION_DOWN
     ]).isRequired
+  };
+
+  static build = (value, delta, formatter, formatterForDelta, reverseArrow) => {
+    const reverseSign = reverseArrow == true ? -1 : 1;
+    return (
+      <DeltaLayout
+        value={formatter(value)}
+        delta={delta == null ? null : formatterForDelta(delta)}
+        direction={reverseSign * Math.sign(delta)}
+      />
+    );
   };
 
   render() {
@@ -212,13 +223,23 @@ class DeltaLayout extends Component {
         ? "text-remark-trend-down"
         : "text-remark-trend-flat";
 
-    return (
-      <span>
-        <span>{this.props.value}</span>
-        <span className="text-lg">
+    const deltaSection =
+      this.props.delta == null ? (
+        <>
+          <span className={`${deltaColor} pl-2 pr-1`}>&nbsp;</span>
+          <span className="text-remark-ui-text">&nbsp;</span>
+        </>
+      ) : (
+        <>
           <span className={`${deltaColor} pl-2 pr-1`}>{deltaArrow}</span>
           <span className="text-remark-ui-text">{this.props.delta}</span>
-        </span>
+        </>
+      );
+
+    return (
+      <span className="flex flex-col leading-tight">
+        <span>{this.props.value}</span>
+        <span className="text-base">{deltaSection}</span>
       </span>
     );
   }
@@ -239,17 +260,13 @@ const withFormatters = (WrappedComponent, formatter, deltaFormatter = null) => {
   return class extends React.Component {
     render() {
       let { value, target, delta, reverseArrow, ...remaining } = this.props;
-      const reverseSign = reverseArrow == true ? -1 : 1;
-      const content =
-        delta == null ? (
-          formatter(value)
-        ) : (
-          <DeltaLayout
-            value={formatter(value)}
-            delta={formatterForDelta(delta)}
-            direction={reverseSign * Math.sign(delta)}
-          />
-        );
+      const content = DeltaLayout.build(
+        value,
+        delta,
+        formatter,
+        formatterForDelta,
+        reverseArrow
+      );
 
       return (
         <WrappedComponent
@@ -454,7 +471,7 @@ class WhiskerPlot extends Component {
         style={{
           data: {
             stroke: "#74EC98",
-            strokeWidth: "5px",
+            strokeWidth: "7px",
             fill: `url(#${this.randomName})`
           }
         }}
@@ -469,11 +486,22 @@ class WhiskerPlot extends Component {
             y2="100%"
           >
             <stop offset="0%" stopColor="#74EC98" stopOpacity={1.0} />
-            <stop offset="50%" stopColor="#74EC98" stopOpacity={0.15} />
+            <stop offset="19%" stopColor="#74EC98" stopOpacity={0.738} />
+            <stop offset="34%" stopColor="#74EC98" stopOpacity={0.541} />
+            <stop offset="47%" stopColor="#74EC98" stopOpacity={0.382} />
+            <stop offset="57%" stopColor="#74EC98" stopOpacity={0.278} />
+            <stop offset="65%" stopColor="#74EC98" stopOpacity={0.194} />
+            <stop offset="73%" stopColor="#74EC98" stopOpacity={0.126} />
+            <stop offset="80%" stopColor="#74EC98" stopOpacity={0.075} />
+            <stop offset="86%" stopColor="#74EC98" stopOpacity={0.042} />
+            <stop offset="91%" stopColor="#74EC98" stopOpacity={0.021} />
+            <stop offset="95%" stopColor="#74EC98" stopOpacity={0.008} />
+            <stop offset="98%" stopColor="#74EC98" stopOpacity={0.002} />
             <stop offset="100%" stopColor="#74EC98" stopOpacity={0.0} />
           </linearGradient>
         </defs>
-        <VictoryArea interpolation="natural" />
+        {/* I don't really know what interpolation we'll like best. This looks nice for now. */}
+        <VictoryArea interpolation="basis" />
       </VictoryGroup>
     );
   }
@@ -496,7 +524,12 @@ class LeasingPerformanceReport extends Component {
       <BoxRow>
         <LargeBoxLayout
           name="Leased"
-          content={formatPercent(r.leased_rate)}
+          content={DeltaLayout.build(
+            r.leased_rate,
+            r.delta_leased_rate,
+            formatPercent,
+            formatDeltaPercent
+          )}
           detail={`${formatNumber(
             r.leased_units
           )} Executed Leases (Out of ${formatNumber(r.occupiable_units)})`}
@@ -505,7 +538,12 @@ class LeasingPerformanceReport extends Component {
         />
         <LargeBoxLayout
           name="Retention"
-          content={formatPercent(r.renewal_rate)}
+          content={DeltaLayout.build(
+            r.renewal_rate,
+            r.delta_renewal_rate,
+            formatPercent,
+            formatDeltaPercent
+          )}
           detail={`${formatNumber(
             r.lease_renewal_notices
           )} Notices to Renew (Out of ${r.leases_due_to_expire} Due To Expire)`}
@@ -514,7 +552,12 @@ class LeasingPerformanceReport extends Component {
         />
         <LargeBoxLayout
           name="Occupied"
-          content={formatPercent(r.occupancy_rate)}
+          content={DeltaLayout.build(
+            r.occupancy_rate,
+            r.delta_occupancy_rate,
+            formatPercent,
+            formatDeltaPercent
+          )}
           detail={`${formatNumber(
             r.occupied_units
           )} Occupied Units (Out of ${formatNumber(r.occupiable_units)})`}
