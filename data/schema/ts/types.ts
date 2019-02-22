@@ -15,6 +15,8 @@ export type Targets<T> = {
   [P in keyof T]: T[P] extends object ? Targets<T[P]> : T[P] | null
 };
 
+/**  */
+
 //
 // Provide a common set of simple types for our schema to adopt.
 //

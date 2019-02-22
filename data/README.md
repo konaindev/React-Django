@@ -14,6 +14,8 @@ But, of course, we don't use the TypeScript to _validate_ the schema. That's whe
 
 (One possible side advantage of implementing our schema in TypeScript is that TypeScript is just JavaScript; in the future, I could imagine us actually using the definitions elsewhere in our front-end code, rather than just as a source.)
 
+In theory, the `data/schema/jsonschema/*.schema.json` files should not be checked in, because they are build products. In practice: shrug. Let's check 'em in for simplicity right now.
+
 ## data/dumped/
 
 Data that can be loaded with `manage.py loaddata data/dumped/foo.json`

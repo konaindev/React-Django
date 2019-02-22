@@ -65,6 +65,51 @@ interface MarketSize {
   segment_population: t.integer;
 }
 
+/** Rent-to-income category names */
+enum RentToIncomeCategoryName {
+  low = "Low",
+  moderately_low = "Moderately Low",
+  target = "Target",
+  moderately_high = "Moderately High",
+  high = "High"
+}
+
+/** Describes a single rent-to-income ratio category */
+interface RentToIncomeCategory {
+  /** The name of the category */
+  name: RentToIncomeCategoryName;
+
+  /** The low threshold value for the category, inclusive */
+  low: t.percent;
+
+  /** The high threshold value for the category, exclusive */
+  high: t.percent;
+}
+
+/** Describes rent to income in relevant brackets */
+interface RentToIncome {
+  /** Rent-to-income ratio categories */
+  categories: RentToIncomeCategory[];
+
+  /** X-axis: annual incomes */
+  incomes: t.currency[];
+
+  /** Y-axis: monthly rental rates */
+  rental_rates: t.currency[];
+
+  /**
+   * Two dimensional array of analysis percentages
+   *
+   * A data point can be null if the value is out of the expected threshold ranges.
+   *
+   * The matrix is (incomes.length * rental_rates.length) in size.
+   * It is income major, aka it should be indexed as:
+   *
+   *    data\[income_index]\[rental_rate_index]
+   */
+  data: (t.percent | null)[][];
+}
+
 export interface MarketAnalysis {
   /** The total population across all segments */
   total_population: t.integer;
@@ -77,4 +122,7 @@ export interface MarketAnalysis {
   // from each segment; the frontend shouldn't really do that selection.
   /** Market size overview */
   market_sizes: MarketSize[];
+
+  /** Provides an analysis of rent to income in the relevant brackets */
+  rent_to_income: RentToIncome;
 }

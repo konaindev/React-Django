@@ -59,6 +59,10 @@
                     },
                     "type": "array"
                 },
+                "rent_to_income": {
+                    "$ref": "#/definitions/RentToIncome",
+                    "description": "Provides an analysis of rent to income in the relevant brackets"
+                },
                 "segments": {
                     "description": "All segments under consideration",
                     "items": {
@@ -73,6 +77,7 @@
             },
             "required": [
                 "market_sizes",
+                "rent_to_income",
                 "segments",
                 "total_population"
             ],
@@ -126,6 +131,86 @@
                 "segment_population"
             ],
             "type": "object"
+        },
+        "RentToIncome": {
+            "description": "Describes rent to income in relevant brackets",
+            "properties": {
+                "categories": {
+                    "description": "Rent-to-income ratio categories",
+                    "items": {
+                        "$ref": "#/definitions/RentToIncomeCategory"
+                    },
+                    "type": "array"
+                },
+                "data": {
+                    "description": "Two dimensional array of analysis percentages\n\nA data point can be null if the value is out of the expected threshold ranges.\n\nThe matrix is (incomes.length * rental_rates.length) in size.\nIt is income major, aka it should be indexed as:\n\n    data\\[income_index]\\[rental_rate_index]",
+                    "items": {
+                        "items": {
+                            "type": [
+                                "null",
+                                "number"
+                            ]
+                        },
+                        "type": "array"
+                    },
+                    "type": "array"
+                },
+                "incomes": {
+                    "description": "X-axis: annual incomes",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rental_rates": {
+                    "description": "Y-axis: monthly rental rates",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "categories",
+                "data",
+                "incomes",
+                "rental_rates"
+            ],
+            "type": "object"
+        },
+        "RentToIncomeCategory": {
+            "description": "Describes a single rent-to-income ratio category",
+            "properties": {
+                "high": {
+                    "description": "The high threshold value for the category, exclusive",
+                    "type": "number"
+                },
+                "low": {
+                    "description": "The low threshold value for the category, inclusive",
+                    "type": "number"
+                },
+                "name": {
+                    "$ref": "#/definitions/RentToIncomeCategoryName",
+                    "description": "The name of the category"
+                }
+            },
+            "required": [
+                "high",
+                "low",
+                "name"
+            ],
+            "type": "object"
+        },
+        "RentToIncomeCategoryName": {
+            "description": "Rent-to-income category names",
+            "enum": [
+                "High",
+                "Low",
+                "Moderately High",
+                "Moderately Low",
+                "Target"
+            ],
+            "type": "string"
         },
         "SubPopulation": {
             "description": "Defines income for a single subpopulation",
