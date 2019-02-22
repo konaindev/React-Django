@@ -11,10 +11,10 @@ SOURCES = $(wildcard $(SRC)/*.json)
 SCHEMA_TYPES = $(patsubst %.json, %, $(SOURCES))
 
 # Not real
-.PHONY: build validate test
+.PHONY: validate test
 
 # Build stuff, and also validate it
-all: build test
+all: test
 
 # Test is an alias for validate.
 test: validate
@@ -22,12 +22,9 @@ test: validate
 # Validate all schema types
 validate: $(SCHEMA_TYPES)
 
-# Validate a specific schema type
+# Validate a specific schema type (and also ensure it has up-to-date jsonschema)
 %: $(SRC)/%.json
+	@cd ../schema && make $@
 	@echo "Validating $@ example against schema."
 	@$(VALIDATOR) -s data/schema/jsonschema/$@.schema.json -d data/examples/$(SRC)/$@.json
-
-# Build the latest JSON schemas
-build: 
-	@cd ../schema && make 
 
