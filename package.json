@@ -12,6 +12,7 @@
     "@babel/plugin-transform-runtime": "^7",
     "@babel/preset-env": "^7",
     "@babel/preset-react": "^7",
+    "ajv-cli": "^3.0.0",
     "babel-eslint": "^10",
     "babel-plugin-transform-class-properties": "^6",
     "browser-sync": "^2",
@@ -20,13 +21,17 @@
     "eslint-plugin-babel": "^5",
     "eslint-plugin-prettier": "^2",
     "eslint-plugin-react": "^7",
+    "graphql-to-json-schema": "^1.0.0",
     "parcel-bundler": "^1",
     "prettier": "^1",
     "prettier-eslint": "^8",
     "sass": "^1.15.2",
     "stylelint": "^9",
     "stylelint-config-recommended": "^2.1.0",
-    "tailwindcss": ">=0.7.2"
+    "tailwindcss": ">=0.7.2",
+    "tslint": "^5.12.1",
+    "typescript": "^3.3.3",
+    "typescript-json-schema": "^0.36.0"
   },
   "dependencies": {
     "parcel": "^1.11.0",

@@ -1,0 +1,120 @@
+{
+  "total_population": 120448,
+  "segments": [
+    {
+      "age_group": "18-24",
+      "segment_population": 10368,
+      "income_groups": [
+        {
+          "income": "50000.00",
+          "group_population": 3452,
+          "home_owners": {
+            "total": 231,
+            "family": 114,
+            "nonfamily": 117
+          },
+          "renters": {
+            "total": 3311,
+            "family": 517,
+            "nonfamily": 2794
+          },
+          "active_populations": ["renters.nonfamily"],
+          "market_size": 2794
+        },
+        {
+          "income": "75000.00",
+          "group_population": 3188,
+          "home_owners": {
+            "total": 249,
+            "family": 123,
+            "nonfamily": 126
+          },
+          "renters": {
+            "total": 2940,
+            "family": 459,
+            "nonfamily": 2481
+          },
+          "market_size": 2481,
+          "active_populations": ["renters.nonfamily"]
+        },
+        {
+          "income": "100000.00",
+          "group_population": 1587,
+          "home_owners": {
+            "total": 164,
+            "family": 81,
+            "nonfamily": 83
+          },
+          "renters": {
+            "total": 1423,
+            "family": 83,
+            "nonfamily": 1201
+          },
+          "market_size": 1201,
+          "active_populations": ["renters.nonfamily"]
+        }
+      ]
+    }
+  ],
+  "market_sizes": [
+    { "age_group": "18-24", "market_size": 2794, "segment_population": 10369 },
+    { "age_group": "25-34", "market_size": 9376, "segment_population": 32219 },
+    { "age_group": "35-44", "market_size": 3670, "segment_population": 20033 },
+    { "age_group": "45-54", "market_size": 3621, "segment_population": 14257 },
+    { "age_group": "55-64", "market_size": 3567, "segment_population": 14782 },
+    { "age_group": "65+", "market_size": 7312, "segment_population": 15979 }
+  ],
+  "rent_to_income": {
+    "categories": [
+      {
+        "name": "Low",
+        "low": 0.0,
+        "high": 0.12
+      },
+      {
+        "name": "Moderately Low",
+        "low": 0.12,
+        "high": 0.24
+      },
+      {
+        "name": "Target",
+        "low": 0.24,
+        "high": 0.35
+      },
+      {
+        "name": "Moderately High",
+        "low": 0.35,
+        "high": 0.45
+      },
+      {
+        "name": "High",
+        "low": 0.45,
+        "high": 0.55
+      }
+    ],
+    "incomes": [
+      "50000.00",
+      "100000.00",
+      "200000.00",
+      "300000.00",
+      "400000.00",
+      "500000.00"
+    ],
+    "rental_rates": [
+      "1000.00",
+      "2000.00",
+      "3000.00",
+      "4000.00",
+      "5000.00",
+      "6000.00"
+    ],
+    "data": [
+      [0.24, 0.48, null, null, null, null],
+      [0.12, 0.24, 0.36, 0.48, null, null],
+      [0.06, 0.12, 0.18, 0.24, 0.3, 0.36],
+      [0.04, 0.08, 0.12, 0.16, 0.2, 0.24],
+      [0.03, 0.06, 0.09, 0.12, 0.15, 0.18],
+      [0.02, 0.05, 0.07, 0.1, 0.12, 0.14]
+    ]
+  }
+}

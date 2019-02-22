@@ -1,0 +1,240 @@
+{
+    "$ref": "#/definitions/MarketAnalysis",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "IncomeGroup": {
+            "description": "Defines a single income group in a market segment",
+            "properties": {
+                "active_populations": {
+                    "description": "List of population names under active consideration",
+                    "items": {
+                        "description": "Names of specific sub-populations we concern ourselves with in market analysis",
+                        "enum": [
+                            "home_owners.family",
+                            "home_owners.nonfamily",
+                            "renters.family",
+                            "renters.nonfamily"
+                        ],
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "group_population": {
+                    "description": "Total population for this income group in its segment",
+                    "type": "integer"
+                },
+                "home_owners": {
+                    "$ref": "#/definitions/SubPopulation",
+                    "description": "Breakdown of population by home owners"
+                },
+                "income": {
+                    "description": "An income range, for instance \"75000.00\" means > $75k",
+                    "type": "string"
+                },
+                "market_size": {
+                    "description": "The total estimated market size in this income group @computed",
+                    "type": "integer"
+                },
+                "renters": {
+                    "$ref": "#/definitions/SubPopulation",
+                    "description": "Breakdown of population by renters"
+                }
+            },
+            "required": [
+                "active_populations",
+                "group_population",
+                "home_owners",
+                "income",
+                "market_size",
+                "renters"
+            ],
+            "type": "object"
+        },
+        "MarketAnalysis": {
+            "properties": {
+                "market_sizes": {
+                    "description": "Market size overview",
+                    "items": {
+                        "$ref": "#/definitions/MarketSize"
+                    },
+                    "type": "array"
+                },
+                "rent_to_income": {
+                    "$ref": "#/definitions/RentToIncome",
+                    "description": "Provides an analysis of rent to income in the relevant brackets"
+                },
+                "segments": {
+                    "description": "All segments under consideration",
+                    "items": {
+                        "$ref": "#/definitions/MarketSegment"
+                    },
+                    "type": "array"
+                },
+                "total_population": {
+                    "description": "The total population across all segments",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "market_sizes",
+                "rent_to_income",
+                "segments",
+                "total_population"
+            ],
+            "type": "object"
+        },
+        "MarketSegment": {
+            "description": "Defines a single market segment",
+            "properties": {
+                "age_group": {
+                    "description": "A named age group, typically census-driven, like '18-24'",
+                    "type": "string"
+                },
+                "income_groups": {
+                    "description": "The income groups under examination for this segment",
+                    "items": {
+                        "$ref": "#/definitions/IncomeGroup"
+                    },
+                    "type": "array"
+                },
+                "segment_population": {
+                    "description": "The population for this segment @computed",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "age_group",
+                "income_groups",
+                "segment_population"
+            ],
+            "type": "object"
+        },
+        "MarketSize": {
+            "description": "Defines an overview of estimated market sizes",
+            "properties": {
+                "age_group": {
+                    "description": "A named age group, typically census-driven, like '18-24'",
+                    "type": "string"
+                },
+                "market_size": {
+                    "description": "The total estimated market size in this age segment",
+                    "type": "integer"
+                },
+                "segment_population": {
+                    "description": "The total population in this age segment",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "age_group",
+                "market_size",
+                "segment_population"
+            ],
+            "type": "object"
+        },
+        "RentToIncome": {
+            "description": "Describes rent to income in relevant brackets",
+            "properties": {
+                "categories": {
+                    "description": "Rent-to-income ratio categories",
+                    "items": {
+                        "$ref": "#/definitions/RentToIncomeCategory"
+                    },
+                    "type": "array"
+                },
+                "data": {
+                    "description": "Two dimensional array of analysis percentages\n\nA data point can be null if the value is out of the expected threshold ranges.\n\nThe matrix is (incomes.length * rental_rates.length) in size.\nIt is income major, aka it should be indexed as:\n\n    data\\[income_index]\\[rental_rate_index]",
+                    "items": {
+                        "items": {
+                            "type": [
+                                "null",
+                                "number"
+                            ]
+                        },
+                        "type": "array"
+                    },
+                    "type": "array"
+                },
+                "incomes": {
+                    "description": "X-axis: annual incomes",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rental_rates": {
+                    "description": "Y-axis: monthly rental rates",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "categories",
+                "data",
+                "incomes",
+                "rental_rates"
+            ],
+            "type": "object"
+        },
+        "RentToIncomeCategory": {
+            "description": "Describes a single rent-to-income ratio category",
+            "properties": {
+                "high": {
+                    "description": "The high threshold value for the category, exclusive",
+                    "type": "number"
+                },
+                "low": {
+                    "description": "The low threshold value for the category, inclusive",
+                    "type": "number"
+                },
+                "name": {
+                    "$ref": "#/definitions/RentToIncomeCategoryName",
+                    "description": "The name of the category"
+                }
+            },
+            "required": [
+                "high",
+                "low",
+                "name"
+            ],
+            "type": "object"
+        },
+        "RentToIncomeCategoryName": {
+            "description": "Rent-to-income category names",
+            "enum": [
+                "High",
+                "Low",
+                "Moderately High",
+                "Moderately Low",
+                "Target"
+            ],
+            "type": "string"
+        },
+        "SubPopulation": {
+            "description": "Defines income for a single subpopulation",
+            "properties": {
+                "family": {
+                    "description": "Family members in this subpopulation",
+                    "type": "integer"
+                },
+                "nonfamily": {
+                    "description": "Nonfamily members in this subpopulation",
+                    "type": "integer"
+                },
+                "total": {
+                    "description": "Total size of this subpopulation @computed",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "family",
+                "nonfamily",
+                "total"
+            ],
+            "type": "object"
+        }
+    }
+}
+
