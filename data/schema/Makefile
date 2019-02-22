@@ -8,10 +8,12 @@ DST = jsonschema
 # you've run yarn install at the top level of this repository. See
 # https://github.com/YousefED/typescript-json-schema
 # for lots more details on typescript-json-schema itself.
-TSTOJS = yarn typescript-json-schema
+TSTOJS = yarn --silent typescript-json-schema
 
-# Grab all typescript files in the source (ts) directory.
-SOURCES = $(filter-out $(SRC)/types.ts, $(wildcard $(SRC)/*.ts))
+# Grab all typescript files starting with a capital letter in
+# the source (ts) directory. (Lowercase letter files are presumed to be
+# utilities/libraries.)
+SOURCES = $(wildcard $(SRC)/[A-Z]*.ts)
 
 # Come up with a destination name for each source.
 # For simplicity, we demand that the name of the typescript file is *also*
@@ -27,7 +29,8 @@ all: $(DESTINATIONS)
 
 # How to build an thing.
 %: $(SRC)/%.ts
-	$(TSTOJS) data/schema/$^ $@ --topRef -o data/schema/$(DST)/$@.json
+	@echo "Building $@ schema."
+	@$(TSTOJS) data/schema/$^ $@ --topRef --strictNullChecks --required -o data/schema/$(DST)/$@.schema.json
 
 # Because sometimes it's nice.
 clean:
