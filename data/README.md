@@ -23,7 +23,3 @@ Data that can be loaded with `manage.py loaddata data/dumped/foo.json`
 The most interesting data here is basline and performance input data for Two Linoln Towers (`data/dumped/2-lincoln.json`). We should make sure to keep this up to date as we migrate our schema.
 
 All dumpdata files include a Django superuser with email `test@psl.com` and password `test1234`.
-
-## data/sources/
-
-Raw source data, in various forms (CSVs, XLSs, etc) that were used to load our database for test purposes.
