@@ -108,6 +108,10 @@
         },
         "MarketAnalysis": {
             "properties": {
+                "average": {
+                    "$ref": "#/definitions/SegmentAverages",
+                    "description": "Average values across all market segments under consideration"
+                },
                 "estimated_population": {
                     "anyOf": [
                         {
@@ -117,15 +121,19 @@
                             "$ref": "#/definitions/EstimatedPopulationZipCodes"
                         }
                     ],
-                    "description": "An estimated population value and technique"
+                    "description": "Estimated population and detailed geographic information for the analysis"
                 },
-                "market_overview": {
-                    "$ref": "#/definitions/MarketOverview",
-                    "description": "Market size overview"
+                "future_year": {
+                    "description": "A year (like 2022) for which all future_size estimates apply",
+                    "type": "integer"
+                },
+                "location": {
+                    "description": "The human readable location for this analysis (like 'Portland, OR')",
+                    "type": "string"
                 },
                 "rent_to_income": {
                     "$ref": "#/definitions/RentToIncome",
-                    "description": "Provides an analysis of rent to income in the relevant brackets"
+                    "description": "An analysis of rent to income in the relevant brackets"
                 },
                 "segments": {
                     "description": "All segments under consideration",
@@ -134,91 +142,24 @@
                     },
                     "type": "array"
                 },
-                "total_population": {
-                    "description": "The total population across all segments",
-                    "type": "integer"
-                }
-            },
-            "required": [
-                "estimated_population",
-                "market_overview",
-                "rent_to_income",
-                "segments",
-                "total_population"
-            ],
-            "type": "object"
-        },
-        "MarketOverview": {
-            "description": "Defines an overview of estimated market size",
-            "properties": {
-                "average": {
-                    "description": "Averages across all segments under consideration",
-                    "properties": {
-                        "age": {
-                            "description": "Average tenant age",
-                            "type": "integer"
-                        },
-                        "growth": {
-                            "description": "Average market growth",
-                            "type": "number"
-                        }
-                    },
-                    "required": [
-                        "age",
-                        "growth"
-                    ],
-                    "type": "object"
-                },
-                "city": {
-                    "description": "Name of the city in question (like 'Portland, OR')",
-                    "type": "string"
-                },
-                "future_year": {
-                    "description": "A year (like 2022) for which all future_size estimates apply",
-                    "type": "integer"
-                },
-                "market_sizes": {
-                    "description": "Market size information for various age groups",
-                    "items": {
-                        "$ref": "#/definitions/MarketOverviewSegment"
-                    },
-                    "type": "array"
-                },
                 "total": {
-                    "description": "Totals across all segments under consideration",
-                    "properties": {
-                        "future_size": {
-                            "description": "Estimated future market size (future date set in containing structure)",
-                            "type": "integer"
-                        },
-                        "market_size": {
-                            "description": "Total estimated market size",
-                            "type": "integer"
-                        },
-                        "usv": {
-                            "description": "Estimated unique site visitors",
-                            "type": "integer"
-                        }
-                    },
-                    "required": [
-                        "future_size",
-                        "market_size",
-                        "usv"
-                    ],
-                    "type": "object"
+                    "$ref": "#/definitions/SegmentTotals",
+                    "description": "Total values across all market segments under consideration"
                 }
             },
             "required": [
                 "average",
-                "city",
+                "estimated_population",
                 "future_year",
-                "market_sizes",
+                "location",
+                "rent_to_income",
+                "segments",
                 "total"
             ],
             "type": "object"
         },
-        "MarketOverviewSegment": {
-            "description": "Defines an overview of estimated market size in an age group",
+        "MarketSegment": {
+            "description": "Defines a single market segment",
             "properties": {
                 "age_group": {
                     "description": "A named age group, typically census-driven, like '18-24'",
@@ -232,12 +173,19 @@
                     "description": "Estimated market growth rate (XXX what timeframe?)",
                     "type": "number"
                 },
+                "income_groups": {
+                    "description": "The income groups under examination for this segment",
+                    "items": {
+                        "$ref": "#/definitions/IncomeGroup"
+                    },
+                    "type": "array"
+                },
                 "market_size": {
-                    "description": "The estimated market size (aka addressable population)",
+                    "description": "The total market size (aka addressable population) in this segment",
                     "type": "integer"
                 },
                 "segment_population": {
-                    "description": "The total segment population",
+                    "description": "The population for this segment @computed",
                     "type": "integer"
                 },
                 "usv": {
@@ -249,35 +197,10 @@
                 "age_group",
                 "future_size",
                 "growth",
+                "income_groups",
                 "market_size",
                 "segment_population",
                 "usv"
-            ],
-            "type": "object"
-        },
-        "MarketSegment": {
-            "description": "Defines a single market segment",
-            "properties": {
-                "age_group": {
-                    "description": "A named age group, typically census-driven, like '18-24'",
-                    "type": "string"
-                },
-                "income_groups": {
-                    "description": "The income groups under examination for this segment",
-                    "items": {
-                        "$ref": "#/definitions/IncomeGroup"
-                    },
-                    "type": "array"
-                },
-                "segment_population": {
-                    "description": "The population for this segment @computed",
-                    "type": "integer"
-                }
-            },
-            "required": [
-                "age_group",
-                "income_groups",
-                "segment_population"
             ],
             "type": "object"
         },
@@ -872,6 +795,52 @@
                 "Target"
             ],
             "type": "string"
+        },
+        "SegmentAverages": {
+            "description": "Average values across all segments under consideration",
+            "properties": {
+                "age": {
+                    "description": "Average tenant age",
+                    "type": "integer"
+                },
+                "growth": {
+                    "description": "Average market growth",
+                    "type": "number"
+                }
+            },
+            "required": [
+                "age",
+                "growth"
+            ],
+            "type": "object"
+        },
+        "SegmentTotals": {
+            "description": "Total values across all segments under consideration",
+            "properties": {
+                "future_size": {
+                    "description": "Estimated future market size (future date set in containing structure)",
+                    "type": "integer"
+                },
+                "market_size": {
+                    "description": "Estimated market size (aka addressible market) across all segments",
+                    "type": "integer"
+                },
+                "segment_population": {
+                    "description": "Total population across all segments",
+                    "type": "integer"
+                },
+                "usv": {
+                    "description": "Estimated unique site visitors",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "future_size",
+                "market_size",
+                "segment_population",
+                "usv"
+            ],
+            "type": "object"
         },
         "SubPopulation": {
             "description": "Defines income for a single subpopulation",

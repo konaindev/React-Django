@@ -1,9 +1,75 @@
 {
-  "total_population": 120448,
+  "location": "Portland, OR",
+  "estimated_population": {
+    "center": {
+      "type": "Point",
+      "coordinates": [45.52, 122.68194444]
+    },
+    "population": 120448,
+    "radius": 3.1,
+    "units": "mi"
+  },
+  "rent_to_income": {
+    "categories": [
+      {
+        "name": "Low",
+        "low": 0.0,
+        "high": 0.12
+      },
+      {
+        "name": "Moderately Low",
+        "low": 0.12,
+        "high": 0.24
+      },
+      {
+        "name": "Target",
+        "low": 0.24,
+        "high": 0.35
+      },
+      {
+        "name": "Moderately High",
+        "low": 0.35,
+        "high": 0.45
+      },
+      {
+        "name": "High",
+        "low": 0.45,
+        "high": 0.55
+      }
+    ],
+    "incomes": [
+      "50000.00",
+      "100000.00",
+      "200000.00",
+      "300000.00",
+      "400000.00",
+      "500000.00"
+    ],
+    "rental_rates": [
+      "1000.00",
+      "2000.00",
+      "3000.00",
+      "4000.00",
+      "5000.00",
+      "6000.00"
+    ],
+    "data": [
+      [0.24, 0.48, null, null, null, null],
+      [0.12, 0.24, 0.36, 0.48, null, null],
+      [0.06, 0.12, 0.18, 0.24, 0.3, 0.36],
+      [0.04, 0.08, 0.12, 0.16, 0.2, 0.24],
+      [0.03, 0.06, 0.09, 0.12, 0.15, 0.18],
+      [0.02, 0.05, 0.07, 0.1, 0.12, 0.14]
+    ]
+  },
   "segments": [
     {
       "age_group": "18-24",
-      "segment_population": 10368,
+      "market_size": 2794,
+      "segment_population": 10369,
+      "usv": 3561,
+      "growth": -0.011,
+      "future_size": 2703,
       "income_groups": [
         {
           "income": "50000.00",
@@ -57,7 +123,11 @@
     },
     {
       "age_group": "25-34",
+      "market_size": 9376,
       "segment_population": 32219,
+      "usv": 5949,
+      "growth": 0.037,
+      "future_size": 10456,
       "income_groups": [
         {
           "income": "50000.00",
@@ -111,7 +181,11 @@
     },
     {
       "age_group": "35-44",
+      "market_size": 3670,
       "segment_population": 20033,
+      "usv": 4226,
+      "growth": 0.047,
+      "future_size": 4212,
       "income_groups": [
         {
           "income": "50000.00",
@@ -163,10 +237,13 @@
         }
       ]
     },
-
     {
       "age_group": "45-54",
+      "market_size": 3621,
       "segment_population": 14257,
+      "usv": 2973,
+      "growth": 0.005,
+      "future_size": 3676,
       "income_groups": [
         {
           "income": "50000.00",
@@ -220,7 +297,11 @@
     },
     {
       "age_group": "55-64",
+      "market_size": 3567,
       "segment_population": 14782,
+      "usv": 2253,
+      "growth": 0.027,
+      "future_size": 3864,
       "income_groups": [
         {
           "income": "50000.00",
@@ -274,7 +355,11 @@
     },
     {
       "age_group": "65+",
+      "market_size": 7312,
       "segment_population": 15979,
+      "usv": 659,
+      "growth": 0.0397,
+      "future_size": 8218,
       "income_groups": [
         {
           "income": "50000.00",
@@ -342,129 +427,15 @@
       ]
     }
   ],
-  "market_overview": {
-    "city": "Portland, OR",
-    "market_sizes": [
-      {
-        "age_group": "18-24",
-        "market_size": 2794,
-        "segment_population": 10369,
-        "usv": 3561,
-        "growth": -0.011,
-        "future_size": 2703
-      },
-      {
-        "age_group": "25-34",
-        "market_size": 9376,
-        "segment_population": 32219,
-        "usv": 5949,
-        "growth": 0.037,
-        "future_size": 10456
-      },
-      {
-        "age_group": "35-44",
-        "market_size": 3670,
-        "segment_population": 20033,
-        "usv": 4226,
-        "growth": 0.047,
-        "future_size": 4212
-      },
-      {
-        "age_group": "45-54",
-        "market_size": 3621,
-        "segment_population": 14257,
-        "usv": 2973,
-        "growth": 0.005,
-        "future_size": 3676
-      },
-      {
-        "age_group": "55-64",
-        "market_size": 3567,
-        "segment_population": 14782,
-        "usv": 2253,
-        "growth": 0.027,
-        "future_size": 3864
-      },
-      {
-        "age_group": "65+",
-        "market_size": 7312,
-        "segment_population": 15979,
-        "usv": 659,
-        "growth": 0.0397,
-        "future_size": 8218
-      }
-    ],
-    "future_year": 2022,
-    "average": {
-      "age": 34,
-      "growth": 0.024
-    },
-    "total": {
-      "market_size": 30340,
-      "usv": 19621,
-      "future_size": 33129
-    }
+  "future_year": 2022,
+  "total": {
+    "segment_population": 120448,
+    "market_size": 30340,
+    "usv": 19621,
+    "future_size": 33129
   },
-  "rent_to_income": {
-    "categories": [
-      {
-        "name": "Low",
-        "low": 0.0,
-        "high": 0.12
-      },
-      {
-        "name": "Moderately Low",
-        "low": 0.12,
-        "high": 0.24
-      },
-      {
-        "name": "Target",
-        "low": 0.24,
-        "high": 0.35
-      },
-      {
-        "name": "Moderately High",
-        "low": 0.35,
-        "high": 0.45
-      },
-      {
-        "name": "High",
-        "low": 0.45,
-        "high": 0.55
-      }
-    ],
-    "incomes": [
-      "50000.00",
-      "100000.00",
-      "200000.00",
-      "300000.00",
-      "400000.00",
-      "500000.00"
-    ],
-    "rental_rates": [
-      "1000.00",
-      "2000.00",
-      "3000.00",
-      "4000.00",
-      "5000.00",
-      "6000.00"
-    ],
-    "data": [
-      [0.24, 0.48, null, null, null, null],
-      [0.12, 0.24, 0.36, 0.48, null, null],
-      [0.06, 0.12, 0.18, 0.24, 0.3, 0.36],
-      [0.04, 0.08, 0.12, 0.16, 0.2, 0.24],
-      [0.03, 0.06, 0.09, 0.12, 0.15, 0.18],
-      [0.02, 0.05, 0.07, 0.1, 0.12, 0.14]
-    ]
-  },
-  "estimated_population": {
-    "center": {
-      "type": "Point",
-      "coordinates": [45.52, 122.68194444]
-    },
-    "population": 120448,
-    "radius": 3.1,
-    "units": "mi"
+  "average": {
+    "age": 34,
+    "growth": 0.024
   }
 }

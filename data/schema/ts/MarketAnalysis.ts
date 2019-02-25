@@ -47,24 +47,10 @@ interface MarketSegment {
   /** A named age group, typically census-driven, like '18-24' */
   age_group: string;
 
-  /** The population for this segment @computed */
-  segment_population: t.integer;
-
-  /** The income groups under examination for this segment */
-  income_groups: IncomeGroup[];
-}
-
-// CONSIDER: this, and MarketSegment, are *really* close in some
-// respects, and quite different in others. We should maybe unify them?
-/** Defines an overview of estimated market size in an age group */
-interface MarketOverviewSegment {
-  /** A named age group, typically census-driven, like '18-24' */
-  age_group: string;
-
-  /** The estimated market size (aka addressable population) */
+  /** The total market size (aka addressable population) in this segment */
   market_size: t.integer;
 
-  /** The total segment population */
+  /** The population for this segment @computed */
   segment_population: t.integer;
 
   /** Estimated unique site visitors */
@@ -75,39 +61,9 @@ interface MarketOverviewSegment {
 
   /** Estimated future market size (future date set in containing structure) */
   future_size: t.integer;
-}
 
-/** Defines an overview of estimated market size */
-interface MarketOverview {
-  /** Name of the city in question (like 'Portland, OR') */
-  city: string;
-
-  /** Market size information for various age groups */
-  market_sizes: MarketOverviewSegment[];
-
-  /** A year (like 2022) for which all future_size estimates apply */
-  future_year: t.integer;
-
-  /** Averages across all segments under consideration */
-  average: {
-    /** Average tenant age */
-    age: t.integer;
-
-    /** Average market growth */
-    growth: t.percent;
-  };
-
-  /** Totals across all segments under consideration */
-  total: {
-    /** Total estimated market size */
-    market_size: t.integer;
-
-    /** Estimated unique site visitors */
-    usv: t.integer;
-
-    /** Estimated future market size (future date set in containing structure) */
-    future_size: t.integer;
-  };
+  /** The income groups under examination for this segment */
+  income_groups: IncomeGroup[];
 }
 
 /** Rent-to-income category names */
@@ -193,21 +149,49 @@ interface EstimatedPopulationZipCodes extends EstimatedPopulation {
   zip_codes: PopulationZipCode[];
 }
 
-export interface MarketAnalysis {
-  /** The total population across all segments */
-  total_population: t.integer;
+/** Total values across all segments under consideration */
+interface SegmentTotals {
+  /** Estimated market size (aka addressible market) across all segments */
+  market_size: t.integer;
 
-  // TODO dave -- collapse MarketSegment and MarketOverviewSegment
+  /** Total population across all segments */
+  segment_population: t.integer;
+
+  /** Estimated unique site visitors */
+  usv: t.integer;
+
+  /** Estimated future market size (future date set in containing structure) */
+  future_size: t.integer;
+}
+
+/** Average values across all segments under consideration */
+interface SegmentAverages {
+  /** Average tenant age */
+  age: t.integer;
+
+  /** Average market growth */
+  growth: t.percent;
+}
+
+export interface MarketAnalysis {
+  /** The human readable location for this analysis (like 'Portland, OR') */
+  location: string;
+
+  /** Estimated population and detailed geographic information for the analysis */
+  estimated_population: EstimatedPopulationRange | EstimatedPopulationZipCodes;
+
+  /** An analysis of rent to income in the relevant brackets */
+  rent_to_income: RentToIncome;
 
   /** All segments under consideration */
   segments: MarketSegment[];
 
-  /** Market size overview */
-  market_overview: MarketOverview;
+  /** A year (like 2022) for which all future_size estimates apply */
+  future_year: t.integer;
 
-  /** Provides an analysis of rent to income in the relevant brackets */
-  rent_to_income: RentToIncome;
+  /** Total values across all market segments under consideration */
+  total: SegmentTotals;
 
-  /** An estimated population value and technique */
-  estimated_population: EstimatedPopulationRange | EstimatedPopulationZipCodes;
+  /** Average values across all market segments under consideration */
+  average: SegmentAverages;
 }
