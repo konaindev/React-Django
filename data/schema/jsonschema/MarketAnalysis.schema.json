@@ -119,12 +119,9 @@
                     ],
                     "description": "An estimated population value and technique"
                 },
-                "market_sizes": {
-                    "description": "Market size overview",
-                    "items": {
-                        "$ref": "#/definitions/MarketSize"
-                    },
-                    "type": "array"
+                "market_overview": {
+                    "$ref": "#/definitions/MarketOverview",
+                    "description": "Market size overview"
                 },
                 "rent_to_income": {
                     "$ref": "#/definitions/RentToIncome",
@@ -144,10 +141,117 @@
             },
             "required": [
                 "estimated_population",
-                "market_sizes",
+                "market_overview",
                 "rent_to_income",
                 "segments",
                 "total_population"
+            ],
+            "type": "object"
+        },
+        "MarketOverview": {
+            "description": "Defines an overview of estimated market size",
+            "properties": {
+                "average": {
+                    "description": "Averages across all segments under consideration",
+                    "properties": {
+                        "age": {
+                            "description": "Average tenant age",
+                            "type": "integer"
+                        },
+                        "growth": {
+                            "description": "Average market growth",
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "age",
+                        "growth"
+                    ],
+                    "type": "object"
+                },
+                "city": {
+                    "description": "Name of the city in question (like 'Portland, OR')",
+                    "type": "string"
+                },
+                "future_year": {
+                    "description": "A year (like 2022) for which all future_size estimates apply",
+                    "type": "integer"
+                },
+                "market_sizes": {
+                    "description": "Market size information for various age groups",
+                    "items": {
+                        "$ref": "#/definitions/MarketOverviewSegment"
+                    },
+                    "type": "array"
+                },
+                "total": {
+                    "description": "Totals across all segments under consideration",
+                    "properties": {
+                        "future_size": {
+                            "description": "Estimated future market size (future date set in containing structure)",
+                            "type": "integer"
+                        },
+                        "market_size": {
+                            "description": "Total estimated market size",
+                            "type": "integer"
+                        },
+                        "usv": {
+                            "description": "Estimated unique site visitors",
+                            "type": "integer"
+                        }
+                    },
+                    "required": [
+                        "future_size",
+                        "market_size",
+                        "usv"
+                    ],
+                    "type": "object"
+                }
+            },
+            "required": [
+                "average",
+                "city",
+                "future_year",
+                "market_sizes",
+                "total"
+            ],
+            "type": "object"
+        },
+        "MarketOverviewSegment": {
+            "description": "Defines an overview of estimated market size in an age group",
+            "properties": {
+                "age_group": {
+                    "description": "A named age group, typically census-driven, like '18-24'",
+                    "type": "string"
+                },
+                "future_size": {
+                    "description": "Estimated future market size (future date set in containing structure)",
+                    "type": "integer"
+                },
+                "growth": {
+                    "description": "Estimated market growth rate (XXX what timeframe?)",
+                    "type": "number"
+                },
+                "market_size": {
+                    "description": "The estimated market size (aka addressable population)",
+                    "type": "integer"
+                },
+                "segment_population": {
+                    "description": "The total segment population",
+                    "type": "integer"
+                },
+                "usv": {
+                    "description": "Estimated unique site visitors",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "age_group",
+                "future_size",
+                "growth",
+                "market_size",
+                "segment_population",
+                "usv"
             ],
             "type": "object"
         },
@@ -173,29 +277,6 @@
             "required": [
                 "age_group",
                 "income_groups",
-                "segment_population"
-            ],
-            "type": "object"
-        },
-        "MarketSize": {
-            "description": "Defines an overview of estimated market sizes",
-            "properties": {
-                "age_group": {
-                    "description": "A named age group, typically census-driven, like '18-24'",
-                    "type": "string"
-                },
-                "market_size": {
-                    "description": "The total estimated market size in this age segment",
-                    "type": "integer"
-                },
-                "segment_population": {
-                    "description": "The total population in this age segment",
-                    "type": "integer"
-                }
-            },
-            "required": [
-                "age_group",
-                "market_size",
                 "segment_population"
             ],
             "type": "object"

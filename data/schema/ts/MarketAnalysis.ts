@@ -54,16 +54,60 @@ interface MarketSegment {
   income_groups: IncomeGroup[];
 }
 
-/** Defines an overview of estimated market sizes */
-interface MarketSize {
+// CONSIDER: this, and MarketSegment, are *really* close in some
+// respects, and quite different in others. We should maybe unify them?
+/** Defines an overview of estimated market size in an age group */
+interface MarketOverviewSegment {
   /** A named age group, typically census-driven, like '18-24' */
   age_group: string;
 
-  /** The total estimated market size in this age segment */
+  /** The estimated market size (aka addressable population) */
   market_size: t.integer;
 
-  /** The total population in this age segment */
+  /** The total segment population */
   segment_population: t.integer;
+
+  /** Estimated unique site visitors */
+  usv: t.integer;
+
+  /** Estimated market growth rate (XXX what timeframe?) */
+  growth: t.percent;
+
+  /** Estimated future market size (future date set in containing structure) */
+  future_size: t.integer;
+}
+
+/** Defines an overview of estimated market size */
+interface MarketOverview {
+  /** Name of the city in question (like 'Portland, OR') */
+  city: string;
+
+  /** Market size information for various age groups */
+  market_sizes: MarketOverviewSegment[];
+
+  /** A year (like 2022) for which all future_size estimates apply */
+  future_year: t.integer;
+
+  /** Averages across all segments under consideration */
+  average: {
+    /** Average tenant age */
+    age: t.integer;
+
+    /** Average market growth */
+    growth: t.percent;
+  };
+
+  /** Totals across all segments under consideration */
+  total: {
+    /** Total estimated market size */
+    market_size: t.integer;
+
+    /** Estimated unique site visitors */
+    usv: t.integer;
+
+    /** Estimated future market size (future date set in containing structure) */
+    future_size: t.integer;
+  };
 }
 
 /** Rent-to-income category names */
@@ -156,11 +200,8 @@ export interface MarketAnalysis {
   /** All segments under consideration */
   segments: MarketSegment[];
 
-  // CONSIDER this is *nearly* duplicative data, but the important thing
-  // to understand is that it selects the correct `market_size` value
-  // from each segment; the frontend shouldn't really perform that selection.
   /** Market size overview */
-  market_sizes: MarketSize[];
+  market_overview: MarketOverview;
 
   /** Provides an analysis of rent to income in the relevant brackets */
   rent_to_income: RentToIncome;
