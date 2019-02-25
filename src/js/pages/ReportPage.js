@@ -10,11 +10,11 @@ import {
 
 import { remarkablyChartTheme } from "../utils/victoryTheme";
 
-import Header from "../components/Header";
+import Header from "../components/header";
 import {
   NavigationItems,
   ProjectNavigationItem
-} from "../components/Navigation";
+} from "../components/navigation";
 
 import {
   formatMultiple,

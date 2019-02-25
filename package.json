@@ -5,7 +5,9 @@
   "license": "copyright",
   "scripts": {
     "build": "parcel build src/css/main.postcss.scss; parcel build src/js/index.js",
-    "heroku-postbuild": "parcel build src/css/main.postcss.scss; parcel build src/js/index.js"
+    "heroku-postbuild": "parcel build src/css/main.postcss.scss; parcel build src/js/index.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "devDependencies": {
     "@babel/core": "^7",
@@ -26,7 +28,12 @@
     "sass": "^1.15.2",
     "stylelint": "^9",
     "stylelint-config-recommended": "^2.1.0",
-    "tailwindcss": ">=0.7.2"
+    "tailwindcss": ">=0.7.2",
+    "@storybook/react": "^4.1.13",
+    "@storybook/addon-actions": "^4.1.13",
+    "@storybook/addon-links": "^4.1.13",
+    "@storybook/addons": "^4.1.13",
+    "babel-loader": "^8.0.5"
   },
   "dependencies": {
     "parcel": "^1.11.0",

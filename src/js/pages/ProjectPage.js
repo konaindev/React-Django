@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import Header from "../components/Header";
+import Header from "../components/header";
 import {
   NavigationItems,
   ProjectNavigationItem
-} from "../components/Navigation";
+} from "../components/navigation";
 
 export default class ProjectPage extends Component {
   static propTypes = {
