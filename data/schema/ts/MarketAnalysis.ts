@@ -197,6 +197,8 @@ export interface MarketAnalysis {
   /** The total population across all segments */
   total_population: t.integer;
 
+  // TODO dave -- collapse MarketSegment and MarketOverviewSegment
+
   /** All segments under consideration */
   segments: MarketSegment[];
 
