@@ -86,15 +86,6 @@
       "estimated_revenue_gain": "354000.00"
     }
   },
-  "whiskers": {
-    "leased_rate": null,
-    "renewal_rate": null,
-    "occupancy_rate": null,
-    "investment": null,
-    "usv_exe": null,
-    "lease_cd_rate": null,
-    "cost_per_exe_vs_rent": null
-  },
   "targets": {
     "property": {
       "monthly_average_rent": "7278.00",

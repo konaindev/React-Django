@@ -597,8 +597,7 @@
                 "investment",
                 "property",
                 "property_name",
-                "targets",
-                "whiskers"
+                "targets"
             ],
             "type": "object"
         },
@@ -1114,134 +1113,76 @@
             "description": "Whisker plots for the baseline",
             "properties": {
                 "cost_per_exe_vs_rent": {
-                    "anyOf": [
-                        {
-                            "items": {
-                                "type": [
-                                    "string",
-                                    "number"
-                                ]
-                            },
-                            "type": "array"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "A series for costs vs rent rate over time @computed"
+                    "description": "A series for costs vs rent rate over time @computed",
+                    "items": {
+                        "type": [
+                            "string",
+                            "number"
+                        ]
+                    },
+                    "type": "array"
                 },
                 "investment": {
-                    "anyOf": [
-                        {
-                            "items": {
-                                "type": [
-                                    "string",
-                                    "number"
-                                ]
-                            },
-                            "type": "array"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "A series for capaign investment over time @computed"
+                    "description": "A series for capaign investment over time @computed",
+                    "items": {
+                        "type": [
+                            "string",
+                            "number"
+                        ]
+                    },
+                    "type": "array"
                 },
                 "lease_cd_rate": {
-                    "anyOf": [
-                        {
-                            "items": {
-                                "type": [
-                                    "string",
-                                    "number"
-                                ]
-                            },
-                            "type": "array"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "A series for cancellation/denial rate over time @computed"
+                    "description": "A series for cancellation/denial rate over time @computed",
+                    "items": {
+                        "type": [
+                            "string",
+                            "number"
+                        ]
+                    },
+                    "type": "array"
                 },
                 "leased_rate": {
-                    "anyOf": [
-                        {
-                            "items": {
-                                "type": [
-                                    "string",
-                                    "number"
-                                ]
-                            },
-                            "type": "array"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "A series for lease rate over time @computed"
+                    "description": "A series for lease rate over time @computed",
+                    "items": {
+                        "type": [
+                            "string",
+                            "number"
+                        ]
+                    },
+                    "type": "array"
                 },
                 "occupancy_rate": {
-                    "anyOf": [
-                        {
-                            "items": {
-                                "type": [
-                                    "string",
-                                    "number"
-                                ]
-                            },
-                            "type": "array"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "A series for occupancy percentage over time @computed"
+                    "description": "A series for occupancy percentage over time @computed",
+                    "items": {
+                        "type": [
+                            "string",
+                            "number"
+                        ]
+                    },
+                    "type": "array"
                 },
                 "renewal_rate": {
-                    "anyOf": [
-                        {
-                            "items": {
-                                "type": [
-                                    "string",
-                                    "number"
-                                ]
-                            },
-                            "type": "array"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "A series for retention percentage over time @computed"
+                    "description": "A series for retention percentage over time @computed",
+                    "items": {
+                        "type": [
+                            "string",
+                            "number"
+                        ]
+                    },
+                    "type": "array"
                 },
                 "usv_exe": {
-                    "anyOf": [
-                        {
-                            "items": {
-                                "type": [
-                                    "string",
-                                    "number"
-                                ]
-                            },
-                            "type": "array"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "A series for usv > exe percentage over time @computed"
+                    "description": "A series for usv > exe percentage over time @computed",
+                    "items": {
+                        "type": [
+                            "string",
+                            "number"
+                        ]
+                    },
+                    "type": "array"
                 }
             },
-            "required": [
-                "cost_per_exe_vs_rent",
-                "investment",
-                "lease_cd_rate",
-                "leased_rate",
-                "occupancy_rate",
-                "renewal_rate",
-                "usv_exe"
-            ],
             "type": "object"
         }
     }
