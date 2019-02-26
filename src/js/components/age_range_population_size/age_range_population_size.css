@@ -1,0 +1,29 @@
+.age-range-population-size {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.age-range-population-size span:first-child {
+  /*font-size: 0.875rem;*/
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 26px;
+  letter-spacing: 0.5px;
+  color: #FFF;
+}
+
+.age-range-population-size span:nth-child(2) {
+  /*font-size: 2.75rem;*/
+  font-size: 44px;
+  margin: 16px 0 14px 0;
+  color: #FFF;
+}
+
+.age-range-population-size span:nth-child(3) {
+  /*font-size: 0.875rem;*/
+  font-size: 14px;
+  line-height: 26px;
+  color: #6D778D; /*color not defined in theme*/
+}
