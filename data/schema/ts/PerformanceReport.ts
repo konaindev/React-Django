@@ -20,11 +20,11 @@ interface PerformanceTargets {
 
 /** Target structure for performance deltas */
 interface PerformanceDeltas {
-  property: Property;
+  property?: t.Deltas<Property>;
 
-  funnel: AcquisitionFunnel;
+  funnel?: t.Deltas<AcquisitionFunnel>;
 
-  investment: Investment;
+  investment?: t.Deltas<Investment>;
 }
 
 /** A whisker series with arbitrary x axis */

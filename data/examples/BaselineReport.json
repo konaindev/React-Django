@@ -54,10 +54,10 @@
   "investment": {
     "acquisition": {
       "expenses": {
-        "demand_creation": "20000.00",
-        "leasing_enablement": "48000.00",
+        "demand_creation": "48000.00",
+        "leasing_enablement": "0.00",
         "market_intelligence": "0.00",
-        "reputation_building": "0.00"
+        "reputation_building": "20000.00"
       },
       "total": "68000.00",
       "romi": 10,
@@ -66,8 +66,8 @@
     "retention": {
       "expenses": {
         "demand_creation": "0.00",
-        "leasing_enablement": "0.00",
-        "market_intelligence": "6000.00",
+        "leasing_enablement": "6000.00",
+        "market_intelligence": "0.00",
         "reputation_building": "0.00"
       },
       "total": "6000.00",
@@ -76,10 +76,10 @@
     },
     "total": {
       "expenses": {
-        "demand_creation": "20000.00",
-        "leasing_enablement": "48000.00",
-        "market_intelligence": "6000.00",
-        "reputation_building": "0.00"
+        "demand_creation": "48000.00",
+        "leasing_enablement": "6000.00",
+        "market_intelligence": "0.00",
+        "reputation_building": "20000.00"
       },
       "total": "74000.00",
       "romi": 38,

@@ -11,9 +11,16 @@ export type integer = number;
 export type percent = number;
 export type float = number;
 
+// equivalent to RecursiveNullable<T>
 /** Target values must match the underlying type, or explicitly be null */
 export type Targets<T> = {
   [P in keyof T]: T[P] extends object ? Targets<T[P]> : T[P] | null
+};
+
+// equivalent to RecursivePartial<T>
+/** Target values must match the underlying type, but can be non-present */
+export type Deltas<T> = {
+  [P in keyof T]?: T[P] extends object ? Deltas<T[P]> : T[P]
 };
 
 //
