@@ -3,6 +3,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 
 import AgeRangePopulationSize from './index';
+import '../../../../dist/main.postcss.css'; // @FIXME
 
 const props = {
   age_group: '18-24',
