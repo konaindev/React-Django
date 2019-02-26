@@ -15,16 +15,12 @@
       "renewals": 94,
       "vacation_notices": 38,
       "rate": 0.74,
-      "units_start": 160,
-      "units": 192,
-      "due_to_expire": 132,
-      "ended": 7
+      "units": 192
     },
     "occupancy": {
       "move_ins": 72,
       "move_outs": 36,
       "rate": 0.71,
-      "units_start": 149,
       "units": 185
     }
   },
@@ -75,12 +71,6 @@
       "estimated_revenue_gain": "2080000.00"
     },
     "total": {
-      "expenses": {
-        "demand_creation": "48000.00",
-        "leasing_enablement": "6000.00",
-        "market_intelligence": "0.00",
-        "reputation_building": "20000.00"
-      },
       "total": "74000.00",
       "romi": 38,
       "estimated_revenue_gain": "2800000.00"

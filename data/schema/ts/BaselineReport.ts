@@ -23,17 +23,8 @@ interface Leasing {
   /** Lease rate as a function of occupiable units @computed */
   rate: t.percent;
 
-  /** Number of leased units at start of report period */
-  units_start: t.integer;
-
   /** Number of leased units at end of report period @computed */
   units: t.integer;
-
-  /** Number of leases that will expire soon (XXX what even is this?) */
-  due_to_expire: t.integer;
-
-  /** Number of leases ended during report period */
-  ended: t.integer;
 }
 
 /** Occupancy -- the "physical" side of renting */
@@ -46,9 +37,6 @@ interface Occupancy {
 
   /** Ratio of occupied to occupiable units @computed */
   rate: t.percent;
-
-  /** Number of occupiable units at start of report period */
-  units_start: t.integer;
 
   /** Number of occupiable units at end of report period @computed */
   units: t.integer;
@@ -64,9 +52,6 @@ interface InvestmentExpenses {
 
 /** Per-category investment breakdown */
 interface InvestmentCategory {
-  /** Breakdown of money spent on marketing */
-  expenses: InvestmentExpenses;
-
   /** The total spent across all buckets @computed */
   total: t.currency;
 
@@ -77,13 +62,18 @@ interface InvestmentCategory {
   estimated_revenue_gain: t.currency;
 }
 
+interface InvestmentCategoryWithExpenses extends InvestmentCategory {
+  /** Breakdown of marketing expenses into sub-buckets */
+  expenses: InvestmentExpenses;
+}
+
 /** All marketing investment categories */
 export interface Investment {
   /** Investment and returns for the acquisition funnel */
-  acquisition: InvestmentCategory;
+  acquisition: InvestmentCategoryWithExpenses;
 
   /** Investment and returns for the retention funnel */
-  retention: InvestmentCategory;
+  retention: InvestmentCategoryWithExpenses;
 
   /** Total investment and returns across all funnels @computed */
   total: InvestmentCategory;

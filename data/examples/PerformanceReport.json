@@ -15,16 +15,12 @@
       "renewals": 7,
       "vacation_notices": 5,
       "rate": 0.87,
-      "units_start": 218,
-      "units": 227,
-      "due_to_expire": 0,
-      "ended": 4
+      "units": 227
     },
     "occupancy": {
       "move_ins": 13,
       "move_outs": 4,
       "rate": 0.85,
-      "units_start": 211,
       "units": 220
     }
   },
@@ -75,12 +71,6 @@
       "estimated_revenue_gain": "155100.00"
     },
     "total": {
-      "expenses": {
-        "demand_creation": "10000.00",
-        "leasing_enablement": "3000.00",
-        "market_intelligence": "2000.00",
-        "reputation_building": "1000.00"
-      },
       "total": "16000.00",
       "romi": 22,
       "estimated_revenue_gain": "354000.00"
@@ -98,16 +88,12 @@
         "renewals": 10,
         "vacation_notices": 3,
         "rate": 0.95,
-        "units_start": null,
-        "units": null,
-        "due_to_expire": null,
-        "ended": null
+        "units": null
       },
       "occupancy": {
         "move_ins": 15,
         "move_outs": 3,
         "rate": 0.93,
-        "units_start": null,
         "units": null
       }
     },
@@ -158,12 +144,6 @@
         "estimated_revenue_gain": "266600.00"
       },
       "total": {
-        "expenses": {
-          "demand_creation": null,
-          "leasing_enablement": null,
-          "market_intelligence": null,
-          "reputation_building": null
-        },
         "total": "17000.00",
         "romi": 14,
         "estimated_revenue_gain": "495200.00"

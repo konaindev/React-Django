@@ -166,11 +166,11 @@
             "description": "All marketing investment categories",
             "properties": {
                 "acquisition": {
-                    "$ref": "#/definitions/InvestmentCategory",
+                    "$ref": "#/definitions/InvestmentCategoryWithExpenses",
                     "description": "Investment and returns for the acquisition funnel"
                 },
                 "retention": {
-                    "$ref": "#/definitions/InvestmentCategory",
+                    "$ref": "#/definitions/InvestmentCategoryWithExpenses",
                     "description": "Investment and returns for the retention funnel"
                 },
                 "total": {
@@ -192,9 +192,31 @@
                     "description": "The estimated revenue gain as a function of monthly rent @computed",
                     "type": "string"
                 },
+                "romi": {
+                    "description": "The return on investment @computed",
+                    "type": "integer"
+                },
+                "total": {
+                    "description": "The total spent across all buckets @computed",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "estimated_revenue_gain",
+                "romi",
+                "total"
+            ],
+            "type": "object"
+        },
+        "InvestmentCategoryWithExpenses": {
+            "properties": {
+                "estimated_revenue_gain": {
+                    "description": "The estimated revenue gain as a function of monthly rent @computed",
+                    "type": "string"
+                },
                 "expenses": {
                     "$ref": "#/definitions/InvestmentExpenses",
-                    "description": "Breakdown of money spent on marketing"
+                    "description": "Breakdown of marketing expenses into sub-buckets"
                 },
                 "romi": {
                     "description": "The return on investment @computed",
@@ -252,14 +274,6 @@
                     "description": "Net change in number of leases during this period @computed",
                     "type": "integer"
                 },
-                "due_to_expire": {
-                    "description": "Number of leases that will expire soon (XXX what even is this?)",
-                    "type": "integer"
-                },
-                "ended": {
-                    "description": "Number of leases ended during report period",
-                    "type": "integer"
-                },
                 "rate": {
                     "description": "Lease rate as a function of occupiable units @computed",
                     "type": "number"
@@ -276,10 +290,6 @@
                     "description": "Number of leased units at end of report period @computed",
                     "type": "integer"
                 },
-                "units_start": {
-                    "description": "Number of leased units at start of report period",
-                    "type": "integer"
-                },
                 "vacation_notices": {
                     "description": "Number of notices to vacate",
                     "type": "integer"
@@ -289,13 +299,10 @@
                 "cd_rate",
                 "cds",
                 "change",
-                "due_to_expire",
-                "ended",
                 "rate",
                 "renewal_notices",
                 "renewals",
                 "units",
-                "units_start",
                 "vacation_notices"
             ],
             "type": "object"
@@ -318,18 +325,13 @@
                 "units": {
                     "description": "Number of occupiable units at end of report period @computed",
                     "type": "integer"
-                },
-                "units_start": {
-                    "description": "Number of occupiable units at start of report period",
-                    "type": "integer"
                 }
             },
             "required": [
                 "move_ins",
                 "move_outs",
                 "rate",
-                "units",
-                "units_start"
+                "units"
             ],
             "type": "object"
         },
