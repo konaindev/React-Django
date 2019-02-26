@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import Header from "../components/header";
-import {
-  NavigationItems,
-  ProjectNavigationItem
-} from "../components/navigation";
+import Header from "../header";
+import { NavigationItems, ProjectNavigationItem } from "../navigation";
 
 /**
  * @description The full landing page for a single project report
