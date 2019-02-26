@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+import { formatNumber } from '../../utils/formatters';
 import './age_range_population_size.css';
 
 
@@ -8,8 +9,8 @@ export function AgeRangePopulationSize({ age_group, market_size, segment_populat
   return (
     <div className="age-range-population-size">
       <span>{age_group}</span>
-      <span>{market_size}</span>
-      <span>Out of {segment_population}</span>
+      <span>{formatNumber(market_size)}</span>
+      <span>Out of {formatNumber(segment_population)}</span>
     </div>
   );
 }
