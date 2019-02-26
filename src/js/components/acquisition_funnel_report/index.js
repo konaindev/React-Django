@@ -1,11 +1,17 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import BoxRow from '../box_row';
-import BoxColumn from '../box_column';
-import { LargeDetailPercentBox, LargePercentBox } from '../large_box_layout';
+import BoxRow from "../box_row";
+import BoxColumn from "../box_column";
+import ReportSection from "../report_section";
+import WhiskerPlot from "../whisker_plot";
+import { LargeDetailPercentBox, LargePercentBox } from "../large_box_layout";
 
-import { FunnelNumberBox, FunnelPercentBox, FunnelCurrencyBox } from '../funnel_box_layout';
+import {
+  FunnelNumberBox,
+  FunnelPercentBox,
+  FunnelCurrencyBox
+} from "../funnel_box_layout";
 
 /**
  * @class AcqusitionFunnelReport

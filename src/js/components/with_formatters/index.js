@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { targetFormatter } from '../../utils/formatters';
+import DeltaLayout from "../delta_layout";
+import { targetFormatter } from "../../utils/formatters";
 
 /**
  * @description Wraps an arbitrary Box Component with desired formatting,

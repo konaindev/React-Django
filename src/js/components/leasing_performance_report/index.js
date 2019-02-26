@@ -10,6 +10,13 @@ import WhiskerPlot from "../whisker_plot";
 import DeltaLayout from "../delta_layout";
 import ReportSection from "../report_section";
 
+import {
+  formatPercent,
+  formatDeltaPercent,
+  formatNumber,
+  formatTargetPercent
+} from "../../utils/formatters.js";
+
 /**
  * @class LeasingPerformanceReport
  *

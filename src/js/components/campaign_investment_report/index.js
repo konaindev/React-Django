@@ -14,12 +14,19 @@ import {
   LargeMultipleBox
 } from "../large_box_layout";
 import BoxRow from "../box_row";
+import BoxColumn from "../box_column";
 import ReportSection from "../report_section";
 import {
   SmallNumberBox,
   SmallCurrencyShorthandBox,
   SmallMultipleBox
 } from "../small_box_layout";
+import WhiskerPlot from "../whisker_plot";
+import {
+  formatCurrencyShorthand,
+  formatPercent
+} from "../../utils/formatters.js";
+import { remarkablyChartTheme } from "../../utils/victoryTheme.js";
 
 /**
  * @class CampaignInvestmentReport

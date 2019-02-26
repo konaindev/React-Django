@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import { equalWidthStyle } from "../../utils/style.js";
+
 /**
  * @class BoxRow
  *
