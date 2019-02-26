@@ -8,7 +8,7 @@ import './age_range_population_size.css';
 export function AgeRangePopulationSize({ age_group, market_size, segment_population }) {
   return (
     <div className="age-range-population-size">
-      <span>{age_group}</span>
+      <span>Ages {age_group}</span>
       <span>{formatNumber(market_size)}</span>
       <span>Out of {formatNumber(segment_population)}</span>
     </div>
