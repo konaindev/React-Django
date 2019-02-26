@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 
 import Header from "../header";
 import { NavigationItems, ProjectNavigationItem } from "../navigation";
+import { ProjectTabs } from "../project_tabs";
 
-import Report from '../report';
+import Report from "../report";
 
 /**
  * @description The full landing page for a single project report

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import withFormatters from '../with_formatters';
+import withFormatters from "../with_formatters";
 import {
   formatMultiple,
   formatPercent,
@@ -10,7 +10,7 @@ import {
   formatCurrency,
   formatCurrencyShorthand,
   formatDate
-} from '../../utils/formatters';
+} from "../../utils/formatters";
 
 /**
  * @class LargeBoxLayout
@@ -20,7 +20,7 @@ import {
  *
  * @note This provides layout; it shouldn't concern itself with value semantics.
  */
-class LargeBoxLayout extends Component {
+export class LargeBoxLayout extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     content: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
@@ -65,32 +65,21 @@ class LargeBoxLayout extends Component {
 }
 
 // Define LargeBoxLayouts that take values and targets of various types.
-const LargeMultipleBox = withFormatters(LargeBoxLayout, formatMultiple);
-const LargePercentBox = withFormatters(
+export const LargeMultipleBox = withFormatters(LargeBoxLayout, formatMultiple);
+export const LargePercentBox = withFormatters(
   LargeBoxLayout,
   formatPercent,
   formatDeltaPercent
 );
-const LargeDetailPercentBox = withFormatters(
+export const LargeDetailPercentBox = withFormatters(
   LargeBoxLayout,
   value => formatPercent(value, 1),
   formatDeltaPercent
 );
-const LargeNumberBox = withFormatters(LargeBoxLayout, formatNumber);
-const LargeCurrencyBox = withFormatters(LargeBoxLayout, formatCurrency);
-const LargeCurrencyShorthandBox = withFormatters(
+export const LargeNumberBox = withFormatters(LargeBoxLayout, formatNumber);
+export const LargeCurrencyBox = withFormatters(LargeBoxLayout, formatCurrency);
+export const LargeCurrencyShorthandBox = withFormatters(
   LargeBoxLayout,
   formatCurrencyShorthand
 );
-const LargeDateBox = withFormatters(LargeBoxLayout, formatDate);
-
-export {
-  LargeBoxLayout,
-  LargeMultipleBox,
-  LargePercentBox,
-  LargeDetailPercentBox,
-  LargeNumberBox,
-  LargeCurrencyBox,
-  LargeCurrencyShorthandBox,
-  LargeDateBox
-};
+export const LargeDateBox = withFormatters(LargeBoxLayout, formatDate);

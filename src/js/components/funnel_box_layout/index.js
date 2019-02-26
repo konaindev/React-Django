@@ -11,7 +11,7 @@ import {
   formatDeltaPercent
 } from "../../utils/formatters";
 
-import withFormatters from '../with_formatters';
+import withFormatters from "../with_formatters";
 
 /**
  * @class FunnelBoxLayout
@@ -20,7 +20,7 @@ import withFormatters from '../with_formatters';
  *
  * @note This provides layout; it shouldn't concern itself with value semantics.
  */
-class FunnelBoxLayout extends Component {
+export class FunnelBoxLayout extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     content: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
@@ -52,26 +52,22 @@ class FunnelBoxLayout extends Component {
 }
 
 // Define FunnelBoxLayouts that take values and targets of various types.
-const FunnelMultipleBox = withFormatters(FunnelBoxLayout, formatMultiple);
-const FunnelPercentBox = withFormatters(
+export const FunnelMultipleBox = withFormatters(
+  FunnelBoxLayout,
+  formatMultiple
+);
+export const FunnelPercentBox = withFormatters(
   FunnelBoxLayout,
   formatPercent,
   formatDeltaPercent
 );
-const FunnelNumberBox = withFormatters(FunnelBoxLayout, formatNumber);
-const FunnelCurrencyBox = withFormatters(FunnelBoxLayout, formatCurrency);
-const FunnelCurrencyShorthandBox = withFormatters(
+export const FunnelNumberBox = withFormatters(FunnelBoxLayout, formatNumber);
+export const FunnelCurrencyBox = withFormatters(
+  FunnelBoxLayout,
+  formatCurrency
+);
+export const FunnelCurrencyShorthandBox = withFormatters(
   FunnelBoxLayout,
   formatCurrencyShorthand
 );
-const FunnelDateBox = withFormatters(FunnelBoxLayout, formatDate);
-
-export {
-  FunnelBoxLayout,
-  FunnelMultipleBox,
-  FunnelPercentBox,
-  FunnelNumberBox,
-  FunnelCurrencyBox,
-  FunnelCurrencyShorthandBox,
-  FunnelDateBox
-}
+export const FunnelDateBox = withFormatters(FunnelBoxLayout, formatDate);

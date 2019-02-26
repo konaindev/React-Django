@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import {
@@ -12,15 +12,14 @@ import {
 import {
   LargeCurrencyShorthandBox,
   LargeMultipleBox
-} from '../large_box_layout';
-import BoxRow from '../box_row';
-import ReportSection from '../report_section';
+} from "../large_box_layout";
+import BoxRow from "../box_row";
+import ReportSection from "../report_section";
 import {
   SmallNumberBox,
   SmallCurrencyShorthandBox,
   SmallMultipleBox
-} from '../small_box_layout';
-
+} from "../small_box_layout";
 
 /**
  * @class CampaignInvestmentReport
