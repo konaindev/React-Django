@@ -14,8 +14,8 @@ export function EstimatedMarketSizeOverview({ market_sizes }) {
       </div>
 
       <div className="estimated-market-size-overview__list">
-        {market_sizes.map(sizeProps => (
-          <AgeRangePopulationSize {...sizeProps} />
+        {market_sizes.map((sizeProps, index) => (
+          <AgeRangePopulationSize key={index} {...sizeProps} />
         ))}
       </div>
     </div>
