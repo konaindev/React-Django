@@ -1,6 +1,6 @@
 import * as t from "./types";
 import {
-  BaselineReport,
+  PropertyReport,
   Property,
   AcquisitionFunnel,
   Investment
@@ -20,43 +20,45 @@ interface PerformanceTargets {
 
 /** Target structure for performance deltas */
 interface PerformanceDeltas {
-  property: Property;
+  property?: t.Deltas<Property>;
 
-  funnel: AcquisitionFunnel;
+  funnel?: t.Deltas<AcquisitionFunnel>;
 
-  investment: Investment;
+  investment?: t.Deltas<Investment>;
 }
 
 /** A whisker series with arbitrary x axis */
 type WhiskerSeries = (t.currency | t.percent | t.integer)[];
-type NullableWhiskerSeries = WhiskerSeries | null;
 
 /** Whisker plots for the baseline */
 interface WhiskerPlots {
   /** A series for lease rate over time @computed */
-  leased_rate: NullableWhiskerSeries;
+  leased_rate?: WhiskerSeries;
 
   /** A series for retention percentage over time @computed */
-  renewal_rate: NullableWhiskerSeries;
+  renewal_rate?: WhiskerSeries;
 
   /** A series for occupancy percentage over time @computed */
-  occupancy_rate: NullableWhiskerSeries;
+  occupancy_rate?: WhiskerSeries;
 
   /** A series for capaign investment over time @computed */
-  investment: NullableWhiskerSeries;
+  investment?: WhiskerSeries;
 
   /** A series for usv > exe percentage over time @computed */
-  usv_exe: NullableWhiskerSeries;
+  usv_exe?: WhiskerSeries;
 
   /** A series for cancellation/denial rate over time @computed */
-  lease_cd_rate: NullableWhiskerSeries;
+  lease_cd_rate?: WhiskerSeries;
 
   /** A series for costs vs rent rate over time @computed */
-  cost_per_exe_vs_rent: NullableWhiskerSeries;
+  cost_per_exe_vs_rent?: WhiskerSeries;
 }
 
 /** A full performance report */
-export interface PerformanceReport extends BaselineReport {
+export interface PerformanceReport extends PropertyReport {
+  /** Property name */
+  property_name: string;
+
   /** Nullable target values for the report */
   targets: PerformanceTargets;
 
@@ -64,5 +66,5 @@ export interface PerformanceReport extends BaselineReport {
   deltas?: PerformanceDeltas;
 
   /** Whisker plots, all categories */
-  whiskers: WhiskerPlots;
+  whiskers?: WhiskerPlots;
 }
