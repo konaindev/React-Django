@@ -1,0 +1,33 @@
+.segment-overview-by-age {
+  border: 1px solid #161C29;
+  border-radius: 6px;
+  background-color: #1A202E;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.15);
+  padding: 40px 60px;
+}
+
+.segment-overview-by-age__heading {
+  padding-bottom: 40px;
+  color: #ffffff;
+  border-bottom: 1px solid #2c3646;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.segment-overview-by-age__heading-left {
+  font-size: 1rem;
+}
+
+.segment-overview-by-age__heading-right {
+  font-size: 0.875rem;
+}
+
+.segment-overview-by-age__total-pop {
+  color: #566278;
+}
+
+.segment-overview-by-age__content {
+  display: flex;
+  margin: 0 -48px;
+}
