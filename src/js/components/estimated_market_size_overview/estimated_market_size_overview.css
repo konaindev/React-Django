@@ -1,0 +1,26 @@
+.estimated-market-size-overview {
+  background-color: #1A202E; /* remark-ui-dark */
+  border: 1px solid #161C29; /* remark-ui-border-dark */
+  border-radius: 6px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+  padding: 20px 60px;
+}
+
+.estimated-market-size-overview__heading > h4 {
+  color: #FFFFFF; /* remark-ui-text-lightest */
+  margin-top: 24px;
+  margin-bottom: 40px;
+}
+
+.estimated-market-size-overview__heading > hr {
+  opacity: 0.3;
+  height: 1px;
+  background-color: #3D4555;
+}
+
+.estimated-market-size-overview__list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 20px -20px;
+}
