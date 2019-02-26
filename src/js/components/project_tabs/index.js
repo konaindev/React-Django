@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import ReportSpanDropdown from '../report_span_dropdown';
+import ReportSpanDropdown from "../report_span_dropdown";
 
 /**
  * @description Top-level project tabs
  */
-class ProjectTabs extends Component {
+export class ProjectTabs extends Component {
   static propTypes = {
     current_report_link: PropTypes.object.isRequired,
     report_links: PropTypes.arrayOf(PropTypes.object).isRequired
