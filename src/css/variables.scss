@@ -1,9 +1,65 @@
+//----------------------------------------------------------
+// Color Palette
+//----------------------------------------------------------
 
-// Colors
-$background-color: #161C29;
+// This is a collection of colors we like to use.
+//
+// As a rule, you shouldn't reference these variables directly
+// in your CSS. Instead, define a *semantic* variable that references
+// a raw color. For instance:
+//
+// $dashboard-panel-background: $blue-darkest;
+//
+// .dashboard-panel {
+//    background-color: $dashboard-panel-background;
+// }
+
+// Greyscale palette (Generically usable)
+$black: #22292f;
+$grey-darkest: #3d4852;
+$grey-darker: #606f7b;
+$grey-dark: #8795a1;
+$grey: #b8c2cc;
+$grey-light: #dae1e7;
+$grey-lighter: #f1f5f8;
+$grey-lightest: #f8fafc;
+$white: #ffffff;
+
+// Blue palette (typically used in chrome, etc)
+$blue-darkest: #0e0d2c;
+$blue-darker: #192245;
+$blue-dark: #272f50;
+$blue-alt: #4f47f4;
+$blue: #5147ff;
+$blue-light: #d9e4ff;
+$blue-lightest: #eaf5ff;
+
+// Bluegray palette (typically used in UI)
+$bluegrey-dark: #1a202e;
+$bluegrey-border-dark: #161c29;
+$bluegrey-darker: #131926;
+$bluegrey-darkest: #0d111a;
+$bluegrey-border: #212734;
+$bluegrey-text-lightest: #ffffff;
+$bluegrey-text-light: #cccccc;
+$bluegrey-text: #68788c;
+
+// Highlight bluegrey colors
+$highlight-bluegrey-1: #a09afd;
+$highlight-bluegrey-2: #867ffe;
+$highlight-bluegrey-3: #675efc;
+$highlight-bluegrey-4: #5147ff;
+$highlight-bluegrey-5: #4035f4;
+
+// Primary colors
+$primary-green: #74eb98;
+$primary-yellow: #f74568;
+$primary-red: #ffd28b;
+
+$background-color: #161c29;
 
 // This is the styling for the KPI panels of the baseline report
-$panel-background-color: #1A202E;
-$panel-border: 1px solid #161C29;
+$panel-background-color: #1a202e;
+$panel-border: 1px solid #161c29;
 $panel-border-radius: 6px;
-$panel-box-shadow: 0 2px 4px 0 rgba(0,0,0,0.15);
+$panel-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);

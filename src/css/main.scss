@@ -1,92 +1,5 @@
-// Our fonts
-@font-face {
-    font-family: "formular-mono";
-    src: url("../fonts/formular-mono.ttf") format("truetype");
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "u8";
-    src: url("../fonts/u8-trial-regular.otf") format("opentype");
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "formular";
-    src: url("../fonts/formular-regular.otf") format("opentype");
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "formular";
-    src: url("../fonts/formular-medium.otf") format("opentype");
-    font-weight: 500;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "formular";
-    src: url("../fonts/formular-bold.otf") format("opentype");
-    font-weight: 700;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "formular";
-    src: url("../fonts/formular-italic.otf") format("opentype");
-    font-weight: 400;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: "formular";
-    src: url("../fonts/formular-medium-italic.otf") format("opentype");
-    font-weight: 500;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: "formular";
-    src: url("../fonts/formular-bold-italic.otf") format("opentype");
-    font-weight: 700;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: "formular";
-    src: url("../fonts/formular-black.otf") format("opentype");
-    font-weight: 900;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "formular";
-    src: url("../fonts/formular-light.otf") format("opentype");
-    font-weight: 300;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "formular";
-    src: url("../fonts/formular-light-italic.otf") format("opentype");
-    font-weight: 300;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: "formular";
-    src: url("../fonts/formular-black-italic.otf") format("opentype");
-    font-weight: 900;
-    font-style: italic;
-}
-
-// Tailwind's base styles.
-@tailwind preflight;
-
-// Put our custom component classes here.
+@import "./fonts.scss";
+@import "./variables.scss";
 
 // The app-wide site header
 .k-header {
@@ -277,9 +190,6 @@
         }
     }
 }
-
-// Load tailwind's utility classes
-@tailwind utilities;
 
 // Misc high-pri overrides go here
 body {

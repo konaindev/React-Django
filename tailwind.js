@@ -43,64 +43,6 @@ let defaultConfig = require("tailwindcss/defaultConfig")();
 */
 
 let colors = {
-  transparent: "transparent",
-
-  black: "#22292f",
-  "grey-darkest": "#3d4852",
-  "grey-darker": "#606f7b",
-  "grey-dark": "#8795a1",
-  grey: "#b8c2cc",
-  "grey-light": "#dae1e7",
-  "grey-lighter": "#f1f5f8",
-  "grey-lightest": "#f8fafc",
-  white: "#ffffff",
-
-  // brand/content colors
-  "remark-blue": "#5147ff",
-  "remark-blue-light": "#d9e4ff",
-  "remark-blue-lightest": "#eaf5ff",
-  "remark-blue-alt": "#4f47f4",
-  "remark-blue-dark": "#272f50",
-  "remark-blue-darker": "#192245",
-  "remark-blue-darkest": "#0e0d2c",
-
-  // Modern UI colors
-  "remark-ui-dark": "#1A202E",
-  "remark-ui-border-dark": "#161C29",
-  "remark-ui-darker": "#131926",
-  "remark-ui-darkest": "#0D111A",
-  "remark-ui-border": "#212734",
-  "remark-ui-text-lightest": "#FFFFFF",
-  "remark-ui-text-light": "#cccccc",
-  "remark-ui-text": "#68788C",
-
-  // Trend colors
-  "remark-trend-up": "#74eb98",
-  "remark-trend-down": "#f74568",
-  "remark-trend-flat": "#ffd28b",
-
-  // Funnel colors
-  "remark-funnel-1": "#A09AFD",
-  "remark-funnel-2": "#867FFE",
-  "remark-funnel-3": "#675EFC",
-  "remark-funnel-4": "#5147FF",
-  "remark-funnel-5": "#4035F4",
-
-  // XXX OLD UI colors (as suggested by our current marketing site)
-  "remark-old-ui-darkest": "#0e1228",
-  "remark-old-ui-darker": "#151c3b",
-  "remark-old-ui": "#192245", // same as remark-blue-darker
-  "remark-old-ui-light": "#272f50", // same as remark-blue-dark
-  "remark-old-ui-lighter": "#4f47f4", // same as remark-blue-alt
-  "remark-old-ui-lightest": "#6258ff",
-  "remark-old-ui-accent": "#ff8972", // same as remark-salmon
-
-  // An enjoyable highlight color
-  "remark-salmon": "#ff8972",
-  // Colors for status indicators
-  "remark-ui-green": "#74EC98",
-  "remark-ui-yellow": "#FFD28C",
-  "remark-ui-red": "#F74568"
 };
 
 module.exports = {
