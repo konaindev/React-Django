@@ -152,8 +152,8 @@ export interface Property {
   occupancy: Occupancy;
 }
 
-/** A full baseline report */
-export interface BaselineReport {
+/** A full property report */
+export interface PropertyReport {
   /** Dates for the report */
   dates: t.TimeSpan;
 
@@ -168,4 +168,19 @@ export interface BaselineReport {
 
   /** Investment expenses and outcomes, all categories */
   investment: Investment;
+}
+
+/** A full property report with 4-week funnel averages */
+export interface PropertyReportWithFunnelAverages {
+  /** Four-week details for the acquisition funnel */
+  four_week_funnel_averages: AcquisitionCategories<t.integer>;
+}
+
+/** A baseline report is a property report with further details */
+export interface BaselineReport extends PropertyReportWithFunnelAverages {
+  // TODO in the future:
+  // funnel performance analysis (monthly and weekly)
+  // funnel duration analysis
+  // funnel duration insights
+  // baseline comparison matrix
 }

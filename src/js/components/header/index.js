@@ -14,7 +14,7 @@ export default class Header extends Component {
     ) : null;
 
     return (
-      <div>
+      <div id="foobar">
         <header className="text-headline bg-remark-ui-darkest h-16 p-4 leading-tight">
           {navSection}
           <h2>Remarkably</h2>

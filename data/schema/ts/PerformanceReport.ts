@@ -1,6 +1,6 @@
 import * as t from "./types";
 import {
-  BaselineReport,
+  PropertyReport,
   Property,
   AcquisitionFunnel,
   Investment
@@ -56,7 +56,7 @@ interface WhiskerPlots {
 }
 
 /** A full performance report */
-export interface PerformanceReport extends BaselineReport {
+export interface PerformanceReport extends PropertyReport {
   /** Nullable target values for the report */
   targets: PerformanceTargets;
 
