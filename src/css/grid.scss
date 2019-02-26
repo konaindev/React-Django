@@ -1,0 +1,6 @@
+.std-grid {
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  grid-gap: 0px;
+  grid-auto-rows: auto;
+}
