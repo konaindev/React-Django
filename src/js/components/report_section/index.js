@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
  *
  * @note This provides layout; it shouldn't concern itself with value semantics.
  */
-class ReportSection extends Component {
+export default class ReportSection extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     horizontalPadding: PropTypes.bool.isRequired

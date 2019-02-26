@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 /**
  * @description A dropdown menu that lets us change the visible span.
  */
-class ReportSpanDropdown extends Component {
+export default class ReportSpanDropdown extends Component {
   static propTypes = {
     current_report_link: PropTypes.object.isRequired,
     report_links: PropTypes.arrayOf(PropTypes.object).isRequired

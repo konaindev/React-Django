@@ -8,7 +8,7 @@ import {
   VictoryAxis
 } from "victory";
 
-import { remarkablyChartTheme } from "../utils/victoryTheme";
+import { remarkablyChartTheme } from "../../utils/victoryTheme";
 
 /**
  * @class WhiskerPlot
