@@ -7,6 +7,8 @@ import {
   ProjectNavigationItem
 } from "../components/navigation";
 
+import Report from '../report';
+
 /**
  * @description The full landing page for a single project report
  */

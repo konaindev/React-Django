@@ -9,7 +9,9 @@ import {
   formatCurrencyShorthand,
   formatDate,
   formatDeltaPercent
-} from "../utils/formatters";
+} from "../../utils/formatters";
+
+import withFormatters from '../with_formatters';
 
 /**
  * @class FunnelBoxLayout
@@ -63,3 +65,13 @@ const FunnelCurrencyShorthandBox = withFormatters(
   formatCurrencyShorthand
 );
 const FunnelDateBox = withFormatters(FunnelBoxLayout, formatDate);
+
+export {
+  FunnelBoxLayout,
+  FunnelMultipleBox,
+  FunnelPercentBox,
+  FunnelNumberBox,
+  FunnelCurrencyBox,
+  FunnelCurrencyShorthandBox,
+  FunnelDateBox
+}

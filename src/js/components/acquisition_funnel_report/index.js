@@ -1,10 +1,18 @@
+import React from "react";
+import PropTypes from "prop-types";
+
+import BoxRow from '../box_row';
+import BoxColumn from '../box_column';
+import { LargeDetailPercentBox, LargePercentBox } from '../large_box_layout';
+
+import { FunnelNumberBox, FunnelPercentBox, FunnelCurrencyBox } from '../funnel_box_layout';
 
 /**
  * @class AcqusitionFunnelReport
  *
  * @classdesc Render the acquisition funnel table
  */
-class AcquisitionFunnelReport extends Component {
+export default class AcquisitionFunnelReport extends Component {
   /**
    * @name AcquisitionFunnelReport.HeadlineNumbers
    * @description Component that renders headline acquisition funnel numbers

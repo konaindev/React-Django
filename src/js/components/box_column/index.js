@@ -1,9 +1,12 @@
+import React from "react";
+import PropTypes from "prop-types";
+
 /**
  * @class BoxColumn
  *
  * @classdesc A special-purpose layout placing a column of boxes downward.
  */
-class BoxColumn extends Component {
+export default class BoxColumn extends Component {
   static propTypes = {};
 
   render() {

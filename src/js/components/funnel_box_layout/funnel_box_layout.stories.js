@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 
-import FunnelBoxLayout from './index';
+import { FunnelBoxLayout } from './index';
 
 const props = {
   name: 'Test name',

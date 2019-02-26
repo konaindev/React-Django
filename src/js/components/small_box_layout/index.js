@@ -1,6 +1,17 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import withFormatters from '../with_formatters';
+import {
+  formatMultiple,
+  formatPercent,
+  formatDeltaPercent,
+  formatNumber,
+  formatCurrency,
+  formatCurrencyShorthand,
+  formatDate
+} from '../../utils/formatters';
+
 /**
  * @class SmallBoxLayout
  *
@@ -54,3 +65,13 @@ const SmallCurrencyShorthandBox = withFormatters(
   formatCurrencyShorthand
 );
 const SmallDateBox = withFormatters(SmallBoxLayout, formatDate);
+
+export {
+  SmallBoxLayout,
+  SmallMultipleBox,
+  SmallPercentBox,
+  SmallNumberBox,
+  SmallCurrencyBox,
+  SmallCurrencyShorthandBox,
+  SmallDateBox
+};

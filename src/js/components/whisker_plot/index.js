@@ -15,7 +15,7 @@ import { remarkablyChartTheme } from "../utils/victoryTheme";
  *
  * @classdesc A simple bar chart with area gradient that plots a whisker series.
  */
-class WhiskerPlot extends Component {
+export default class WhiskerPlot extends Component {
   static propTypes = {
     series: PropTypes.arrayOf(
       PropTypes.oneOfType([PropTypes.number, PropTypes.string])

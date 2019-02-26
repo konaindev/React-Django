@@ -135,11 +135,11 @@ export const formatDeltaPercent = value => {
  *
  * @note If the underlying target value is null, we return an empty string.
  */
-const targetFormatter = formatter => targetValue =>
+export const targetFormatter = formatter => targetValue =>
   targetValue == null ? (
     <span>&nbsp;</span>
   ) : (
     `Target: ${formatter(targetValue)}`
   );
 
-const formatTargetPercent = targetFormatter(formatPercent);
+export const formatTargetPercent = targetFormatter(formatPercent);

@@ -1,10 +1,33 @@
+import React from "react";
+import PropTypes from "prop-types";
+
+import {
+  VictoryChart,
+  VictoryBar,
+  VictoryGroup,
+  VictoryArea,
+  VictoryAxis
+} from "victory";
+
+import {
+  LargeCurrencyShorthandBox,
+  LargeMultipleBox
+} from '../large_box_layout';
+import BoxRow from '../box_row';
+import ReportSection from '../report_section';
+import {
+  SmallNumberBox,
+  SmallCurrencyShorthandBox,
+  SmallMultipleBox
+} from '../small_box_layout';
+
 
 /**
  * @class CampaignInvestmentReport
  *
  * @classdesc Renders all metrics and graphs related to investment
  */
-class CampaignInvestmentReport extends Component {
+export default class CampaignInvestmentReport extends Component {
   static propTypes = { report: PropTypes.object.isRequired };
 
   /**

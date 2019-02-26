@@ -1,3 +1,6 @@
+import React from "react";
+import PropTypes from "prop-types";
+
 /**
  * @class BoxRow
  *
@@ -5,7 +8,7 @@
  *
  * @note This provides layout; it shouldn't concern itself with value semantics.
  */
-class BoxRow extends Component {
+export default class BoxRow extends Component {
   static propTypes = { externalMargin: PropTypes.bool.isRequired };
 
   static defaultProps = { externalMargin: true };

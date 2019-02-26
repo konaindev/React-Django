@@ -8,7 +8,7 @@ import PropTypes from "prop-types";
  *
  * @note This provides layout only; it is not concerned with semantics.
  */
-class DeltaLayout extends Component {
+export default class DeltaLayout extends Component {
   static DIRECTION_UP = 1;
   static DIRECTION_FLAT = 0;
   static DIRECTION_DOWN = -1;

@@ -1,3 +1,15 @@
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+
+import BoxRow from '../box_row';
+import BoxColumn from '../box_column';
+import BoxTable from '../box_table';
+import { LargeBoxLayout } from '../large_box_layout';
+import { SmallNumberBox } from '../small_box_layout';
+import WhiskerPlot from '../whisker_plot';
+import DeltaLayout from '../delta_layout';
+import ReportSection from '../report_section';
+
 /**
  * @class LeasingPerformanceReport
  *

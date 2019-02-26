@@ -1,3 +1,6 @@
+import React from "react";
+import PropTypes from "prop-types";
+
 /**
  * @class BoxTable
  *
@@ -7,7 +10,7 @@
  * future, it could demand that each child is a `BoxRow` and wrap them
  * as desired.
  */
-class BoxTable extends Component {
+export default class BoxTable extends Component {
   render() {
     return <>{this.props.children}</>;
   }

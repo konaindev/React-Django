@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import { targetFormatter } from '../../utils/formatters';
+
 /**
  * @description Wraps an arbitrary Box Component with desired formatting,
  * including formatting for the primary value, the target, and any deltas.
@@ -34,3 +36,5 @@ const withFormatters = (WrappedComponent, formatter, deltaFormatter = null) => {
     }
   };
 };
+
+export default withFormatters;

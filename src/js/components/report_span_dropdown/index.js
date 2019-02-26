@@ -1,3 +1,7 @@
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+
+
 /**
  * @description A dropdown menu that lets us change the visible span.
  */

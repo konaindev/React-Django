@@ -1,6 +1,17 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import withFormatters from '../with_formatters';
+import {
+  formatMultiple,
+  formatPercent,
+  formatDeltaPercent,
+  formatNumber,
+  formatCurrency,
+  formatCurrencyShorthand,
+  formatDate
+} from '../../utils/formatters';
+
 /**
  * @class LargeBoxLayout
  *
@@ -72,3 +83,14 @@ const LargeCurrencyShorthandBox = withFormatters(
   formatCurrencyShorthand
 );
 const LargeDateBox = withFormatters(LargeBoxLayout, formatDate);
+
+export {
+  LargeBoxLayout,
+  LargeMultipleBox,
+  LargePercentBox,
+  LargeDetailPercentBox,
+  LargeNumberBox,
+  LargeCurrencyBox,
+  LargeCurrencyShorthandBox,
+  LargeDateBox
+};
