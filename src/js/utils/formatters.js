@@ -129,3 +129,17 @@ export const formatDeltaPercent = value => {
   const digits = Math.abs(number) < 1 ? 1 : 0;
   return `${formatNumber(number, digits)}pts`;
 };
+
+/**
+ * @description Wrap a value formatter to properly format "Target: " strings.
+ *
+ * @note If the underlying target value is null, we return an empty string.
+ */
+const targetFormatter = formatter => targetValue =>
+  targetValue == null ? (
+    <span>&nbsp;</span>
+  ) : (
+    `Target: ${formatter(targetValue)}`
+  );
+
+const formatTargetPercent = targetFormatter(formatPercent);
