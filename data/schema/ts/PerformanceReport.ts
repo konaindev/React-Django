@@ -56,6 +56,9 @@ interface WhiskerPlots {
 
 /** A full performance report */
 export interface PerformanceReport extends PropertyReport {
+  /** Property name */
+  property_name: string;
+
   /** Nullable target values for the report */
   targets: PerformanceTargets;
 

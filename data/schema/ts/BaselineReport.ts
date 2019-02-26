@@ -157,9 +157,6 @@ export interface PropertyReport {
   /** Dates for the report */
   dates: t.TimeSpan;
 
-  /** Property name */
-  property_name: string;
-
   /** Property details for the report */
   property: Property;
 
@@ -171,13 +168,16 @@ export interface PropertyReport {
 }
 
 /** A full property report with 4-week funnel averages */
-export interface PropertyReportWithFunnelAverages {
+export interface PropertyReportWithFunnelAverages extends PropertyReport {
   /** Four-week details for the acquisition funnel */
   four_week_funnel_averages: AcquisitionCategories<t.integer>;
 }
 
 /** A baseline report is a property report with further details */
 export interface BaselineReport extends PropertyReportWithFunnelAverages {
+  /** Property name */
+  property_name: string;
+
   // TODO in the future:
   // funnel performance analysis (monthly and weekly)
   // funnel duration analysis

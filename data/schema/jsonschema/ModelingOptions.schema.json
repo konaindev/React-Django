@@ -1,5 +1,5 @@
 {
-    "$ref": "#/definitions/BaselineReport",
+    "$ref": "#/definitions/ModelingOptions",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
         "AcquisitionCategories<number>": {
@@ -121,44 +121,6 @@
                 "conversions",
                 "costs",
                 "volumes"
-            ],
-            "type": "object"
-        },
-        "BaselineReport": {
-            "description": "A baseline report is a property report with further details",
-            "properties": {
-                "dates": {
-                    "$ref": "#/definitions/TimeSpan",
-                    "description": "Dates for the report"
-                },
-                "four_week_funnel_averages": {
-                    "$ref": "#/definitions/AcquisitionCategories<number>",
-                    "description": "Four-week details for the acquisition funnel"
-                },
-                "funnel": {
-                    "$ref": "#/definitions/AcquisitionFunnel",
-                    "description": "The acqusition funnel"
-                },
-                "investment": {
-                    "$ref": "#/definitions/Investment",
-                    "description": "Investment expenses and outcomes, all categories"
-                },
-                "property": {
-                    "$ref": "#/definitions/Property",
-                    "description": "Property details for the report"
-                },
-                "property_name": {
-                    "description": "Property name",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "dates",
-                "four_week_funnel_averages",
-                "funnel",
-                "investment",
-                "property",
-                "property_name"
             ],
             "type": "object"
         },
@@ -297,6 +259,65 @@
                 "units",
                 "units_start",
                 "vacation_notices"
+            ],
+            "type": "object"
+        },
+        "ModelingOption": {
+            "description": "Defines a single potential modeling option under consideration.",
+            "properties": {
+                "dates": {
+                    "$ref": "#/definitions/TimeSpan",
+                    "description": "Dates for the report"
+                },
+                "four_week_funnel_averages": {
+                    "$ref": "#/definitions/AcquisitionCategories<number>",
+                    "description": "Four-week details for the acquisition funnel"
+                },
+                "funnel": {
+                    "$ref": "#/definitions/AcquisitionFunnel",
+                    "description": "The acqusition funnel"
+                },
+                "investment": {
+                    "$ref": "#/definitions/Investment",
+                    "description": "Investment expenses and outcomes, all categories"
+                },
+                "name": {
+                    "description": "A description of this option, like \"Schedule Driven\"",
+                    "type": "string"
+                },
+                "property": {
+                    "$ref": "#/definitions/Property",
+                    "description": "Property details for the report"
+                }
+            },
+            "required": [
+                "dates",
+                "four_week_funnel_averages",
+                "funnel",
+                "investment",
+                "name",
+                "property"
+            ],
+            "type": "object"
+        },
+        "ModelingOptions": {
+            "description": "A collection of modeling options.",
+            "properties": {
+                "options": {
+                    "description": "An ordered list of modeling options to consider",
+                    "items": {
+                        "$ref": "#/definitions/ModelingOption"
+                    },
+                    "type": "array"
+                },
+                "property_name": {
+                    "description": "The property name under consideration",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "options",
+                "property_name"
             ],
             "type": "object"
         },
