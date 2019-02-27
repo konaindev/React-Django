@@ -1,0 +1,25 @@
+.market-size-growth-reach {
+}
+
+.market-size-growth-reach__heading p {
+  margin: 30px 15px;
+  color: #747F95;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.market-size-growth-reach__heading hr {
+  opacity: 0.6;
+  height: 1px;
+  background-color: #586073;
+}
+
+.market-size-growth-reach__content {
+  margin: 36px 0;
+  border: 1px solid #161C29; /* remark-ui-border-dark */
+  border-radius: 6px;
+  background-color: #1A202E; /* remark-ui-dark */
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+}
