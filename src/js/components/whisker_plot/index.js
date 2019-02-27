@@ -1,14 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import {
-  VictoryChart,
-  VictoryBar,
-  VictoryGroup,
-  VictoryArea,
-  VictoryAxis
-} from "victory";
-
-import { remarkablyChartTheme } from "../../utils/victoryTheme";
+import { VictoryGroup, VictoryArea } from "victory";
 
 /**
  * @class WhiskerPlot
@@ -49,7 +41,6 @@ export default class WhiskerPlot extends Component {
           }
         }}
       >
-        {/* XXX TODO this causes a ton of very mysterious console error spew. FIXME -Dave */}
         <defs>
           <linearGradient
             id={this.randomName}
@@ -70,10 +61,9 @@ export default class WhiskerPlot extends Component {
             <stop offset="91%" stopColor="#74EC98" stopOpacity={0.021} />
             <stop offset="95%" stopColor="#74EC98" stopOpacity={0.008} />
             <stop offset="98%" stopColor="#74EC98" stopOpacity={0.002} />
-            <stop offset="100%" stopColor="#74EC98" stopOpacity={0.0} />
+            <stop offset="100%" stopColor="#74EC98" stopOpacity={0} />
           </linearGradient>
         </defs>
-        {/* I don't really know what interpolation we'll like best. This looks nice for now. */}
         <VictoryArea interpolation="basis" />
       </VictoryGroup>
     );

@@ -25,11 +25,15 @@ export default class DeltaLayout extends Component {
 
   static build = (value, delta, formatter, formatterForDelta, reverseArrow) => {
     const reverseSign = reverseArrow == true ? -1 : 1;
+    const direction =
+      delta == null
+        ? DeltaLayout.DIRECTION_FLAT
+        : reverseSign * Math.sign(delta);
     return (
       <DeltaLayout
         value={formatter(value)}
         delta={delta == null ? null : formatterForDelta(delta)}
-        direction={reverseSign * Math.sign(delta)}
+        direction={direction}
       />
     );
   };
