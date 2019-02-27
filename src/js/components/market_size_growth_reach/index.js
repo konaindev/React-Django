@@ -65,7 +65,7 @@ export function MarketSizeGrowthReach({
           <div className="summary__box">
             <span>Average</span>
             <span>Market Growth</span>
-            <span>{formatPercent(growth, 1)}</span>
+            <span>{formatPercent(growth, 2)}</span>
           </div>
           <div className="summary__box">
             <span>Est. Total {future_year}</span>
