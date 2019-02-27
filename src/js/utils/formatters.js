@@ -14,11 +14,16 @@ const getLanguage = () =>
  * @param {number|string} value A percentage value out of 1.0 to format
  * @param {number} decimals The number of decimal places to include
  */
-export const formatPercent = (value, decimals = 0) => {
+export const formatPercent = (value, maxFractionDigits = 0, minFractionDigits) => {
+
+  if (minFractionDigits === undefined) {
+    minFractionDigits = maxFractionDigits;
+  }
+
   const formatter = Intl.NumberFormat(getLanguage(), {
     style: "percent",
-    minimumFractionDigits: decimals,
-    maximumFractionDigits: decimals
+    minimumFractionDigits: minFractionDigits,
+    maximumFractionDigits: maxFractionDigits
   });
   return formatter.format(value);
 };
