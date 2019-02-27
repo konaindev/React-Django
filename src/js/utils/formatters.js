@@ -1,3 +1,5 @@
+import React from "react";
+
 /**
  * @description Return the BCP language identifier for the current user
  */
@@ -129,3 +131,19 @@ export const formatDeltaPercent = value => {
   const digits = Math.abs(number) < 1 ? 1 : 0;
   return `${formatNumber(number, digits)}pts`;
 };
+
+// XXX move this somewhere else @FIXME since it implicitly depends on React
+
+/**
+ * @description Wrap a value formatter to properly format "Target: " strings.
+ *
+ * @note If the underlying target value is null, we return an empty string.
+ */
+export const targetFormatter = formatter => targetValue =>
+  targetValue == null ? (
+    <span>&nbsp;</span>
+  ) : (
+    `Target: ${formatter(targetValue)}`
+  );
+
+export const formatTargetPercent = targetFormatter(formatPercent);

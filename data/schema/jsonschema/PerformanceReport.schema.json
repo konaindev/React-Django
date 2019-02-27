@@ -124,15 +124,258 @@
             ],
             "type": "object"
         },
+        "Deltas<AcquisitionCategories<number>>": {
+            "properties": {
+                "app": {
+                    "description": "Lease applications",
+                    "type": "number"
+                },
+                "exe": {
+                    "description": "Lease executions",
+                    "type": "number"
+                },
+                "inq": {
+                    "description": "Inquiries",
+                    "type": "number"
+                },
+                "tou": {
+                    "description": "Tours",
+                    "type": "number"
+                },
+                "usv": {
+                    "description": "Unique site visitors",
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "Deltas<AcquisitionCategories<string>>": {
+            "properties": {
+                "app": {
+                    "description": "Lease applications",
+                    "type": "string"
+                },
+                "exe": {
+                    "description": "Lease executions",
+                    "type": "string"
+                },
+                "inq": {
+                    "description": "Inquiries",
+                    "type": "string"
+                },
+                "tou": {
+                    "description": "Tours",
+                    "type": "string"
+                },
+                "usv": {
+                    "description": "Unique site visitors",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Deltas<AcquisitionConversions>": {
+            "properties": {
+                "app_exe": {
+                    "description": "APP > EXE conversion percentage @computed",
+                    "type": "number"
+                },
+                "inq_tou": {
+                    "description": "INQ > TOU conversion percentage @computed",
+                    "type": "number"
+                },
+                "tou_app": {
+                    "description": "TOU > APP conversion percentage @computed",
+                    "type": "number"
+                },
+                "usv_exe": {
+                    "description": "USV > EXE conversion percentage @computed",
+                    "type": "number"
+                },
+                "usv_inq": {
+                    "description": "USV > INQ conversion percentage @computed",
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "Deltas<AcquisitionFunnel>": {
+            "properties": {
+                "conversions": {
+                    "$ref": "#/definitions/Deltas<AcquisitionConversions>",
+                    "description": "Conversion rates in the acquisition funnel @computed"
+                },
+                "costs": {
+                    "$ref": "#/definitions/Deltas<AcquisitionCategories<string>>",
+                    "description": "Cost-pers in the acquisition funnel @computed"
+                },
+                "volumes": {
+                    "$ref": "#/definitions/Deltas<AcquisitionCategories<number>>",
+                    "description": "Absolute volumes in the acquisition funnel"
+                }
+            },
+            "type": "object"
+        },
+        "Deltas<Investment>": {
+            "properties": {
+                "acquisition": {
+                    "$ref": "#/definitions/Deltas<InvestmentCategoryWithExpenses>",
+                    "description": "Investment and returns for the acquisition funnel"
+                },
+                "retention": {
+                    "$ref": "#/definitions/Deltas<InvestmentCategoryWithExpenses>",
+                    "description": "Investment and returns for the retention funnel"
+                },
+                "total": {
+                    "$ref": "#/definitions/Deltas<InvestmentCategory>",
+                    "description": "Total investment and returns across all funnels @computed"
+                }
+            },
+            "type": "object"
+        },
+        "Deltas<InvestmentCategory>": {
+            "properties": {
+                "estimated_revenue_gain": {
+                    "description": "The estimated revenue gain as a function of monthly rent @computed",
+                    "type": "string"
+                },
+                "romi": {
+                    "description": "The return on investment @computed",
+                    "type": "number"
+                },
+                "total": {
+                    "description": "The total spent across all buckets @computed",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Deltas<InvestmentCategoryWithExpenses>": {
+            "properties": {
+                "estimated_revenue_gain": {
+                    "description": "The estimated revenue gain as a function of monthly rent @computed",
+                    "type": "string"
+                },
+                "expenses": {
+                    "$ref": "#/definitions/Deltas<InvestmentExpenses>",
+                    "description": "Breakdown of marketing expenses into sub-buckets"
+                },
+                "romi": {
+                    "description": "The return on investment @computed",
+                    "type": "number"
+                },
+                "total": {
+                    "description": "The total spent across all buckets @computed",
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Deltas<InvestmentExpenses>": {
+            "properties": {
+                "demand_creation": {
+                    "type": "string"
+                },
+                "leasing_enablement": {
+                    "type": "string"
+                },
+                "market_intelligence": {
+                    "type": "string"
+                },
+                "reputation_building": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Deltas<Leasing>": {
+            "properties": {
+                "cd_rate": {
+                    "description": "Cancellations/denials as percentage of lease application @computed",
+                    "type": "number"
+                },
+                "cds": {
+                    "description": "Number of cancellations AND denials",
+                    "type": "number"
+                },
+                "change": {
+                    "description": "Net change in number of leases during this period @computed",
+                    "type": "number"
+                },
+                "rate": {
+                    "description": "Lease rate as a function of occupiable units @computed",
+                    "type": "number"
+                },
+                "renewal_notices": {
+                    "description": "Number of new notices to renew",
+                    "type": "number"
+                },
+                "renewals": {
+                    "description": "Number of renewals actually effected in timeframe",
+                    "type": "number"
+                },
+                "units": {
+                    "description": "Number of leased units at end of report period @computed",
+                    "type": "number"
+                },
+                "vacation_notices": {
+                    "description": "Number of notices to vacate",
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "Deltas<Occupancy>": {
+            "properties": {
+                "move_ins": {
+                    "description": "Number of units moved into during period",
+                    "type": "number"
+                },
+                "move_outs": {
+                    "description": "Number of units moved out of during period",
+                    "type": "number"
+                },
+                "rate": {
+                    "description": "Ratio of occupied to occupiable units @computed",
+                    "type": "number"
+                },
+                "units": {
+                    "description": "Number of occupiable units at end of report period @computed",
+                    "type": "number"
+                }
+            },
+            "type": "object"
+        },
+        "Deltas<Property>": {
+            "properties": {
+                "cost_per_exe_vs_rent": {
+                    "description": "The cost per exe vs the monthly average rent during this period",
+                    "type": "number"
+                },
+                "leasing": {
+                    "$ref": "#/definitions/Deltas<Leasing>",
+                    "description": "Basic leasing information for the period"
+                },
+                "monthly_average_rent": {
+                    "description": "The average rent, across all units, during this period",
+                    "type": "string"
+                },
+                "occupancy": {
+                    "$ref": "#/definitions/Deltas<Occupancy>",
+                    "description": "Basic occupancy information for the period"
+                }
+            },
+            "type": "object"
+        },
         "Investment": {
             "description": "All marketing investment categories",
             "properties": {
                 "acquisition": {
-                    "$ref": "#/definitions/InvestmentCategory",
+                    "$ref": "#/definitions/InvestmentCategoryWithExpenses",
                     "description": "Investment and returns for the acquisition funnel"
                 },
                 "retention": {
-                    "$ref": "#/definitions/InvestmentCategory",
+                    "$ref": "#/definitions/InvestmentCategoryWithExpenses",
                     "description": "Investment and returns for the retention funnel"
                 },
                 "total": {
@@ -154,9 +397,31 @@
                     "description": "The estimated revenue gain as a function of monthly rent @computed",
                     "type": "string"
                 },
+                "romi": {
+                    "description": "The return on investment @computed",
+                    "type": "integer"
+                },
+                "total": {
+                    "description": "The total spent across all buckets @computed",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "estimated_revenue_gain",
+                "romi",
+                "total"
+            ],
+            "type": "object"
+        },
+        "InvestmentCategoryWithExpenses": {
+            "properties": {
+                "estimated_revenue_gain": {
+                    "description": "The estimated revenue gain as a function of monthly rent @computed",
+                    "type": "string"
+                },
                 "expenses": {
                     "$ref": "#/definitions/InvestmentExpenses",
-                    "description": "Breakdown of money spent on marketing"
+                    "description": "Breakdown of marketing expenses into sub-buckets"
                 },
                 "romi": {
                     "description": "The return on investment @computed",
@@ -214,14 +479,6 @@
                     "description": "Net change in number of leases during this period @computed",
                     "type": "integer"
                 },
-                "due_to_expire": {
-                    "description": "Number of leases that will expire soon (XXX what even is this?)",
-                    "type": "integer"
-                },
-                "ended": {
-                    "description": "Number of leases ended during report period",
-                    "type": "integer"
-                },
                 "rate": {
                     "description": "Lease rate as a function of occupiable units @computed",
                     "type": "number"
@@ -238,10 +495,6 @@
                     "description": "Number of leased units at end of report period @computed",
                     "type": "integer"
                 },
-                "units_start": {
-                    "description": "Number of leased units at start of report period",
-                    "type": "integer"
-                },
                 "vacation_notices": {
                     "description": "Number of notices to vacate",
                     "type": "integer"
@@ -251,13 +504,10 @@
                 "cd_rate",
                 "cds",
                 "change",
-                "due_to_expire",
-                "ended",
                 "rate",
                 "renewal_notices",
                 "renewals",
                 "units",
-                "units_start",
                 "vacation_notices"
             ],
             "type": "object"
@@ -280,18 +530,13 @@
                 "units": {
                     "description": "Number of occupiable units at end of report period @computed",
                     "type": "integer"
-                },
-                "units_start": {
-                    "description": "Number of occupiable units at start of report period",
-                    "type": "integer"
                 }
             },
             "required": [
                 "move_ins",
                 "move_outs",
                 "rate",
-                "units",
-                "units_start"
+                "units"
             ],
             "type": "object"
         },
@@ -299,20 +544,18 @@
             "description": "Target structure for performance deltas",
             "properties": {
                 "funnel": {
-                    "$ref": "#/definitions/AcquisitionFunnel"
+                    "$ref": "#/definitions/Deltas<AcquisitionFunnel>",
+                    "description": "Target values must match the underlying type, but can be non-present"
                 },
                 "investment": {
-                    "$ref": "#/definitions/Investment"
+                    "$ref": "#/definitions/Deltas<Investment>",
+                    "description": "Target values must match the underlying type, but can be non-present"
                 },
                 "property": {
-                    "$ref": "#/definitions/Property"
+                    "$ref": "#/definitions/Deltas<Property>",
+                    "description": "Target values must match the underlying type, but can be non-present"
                 }
             },
-            "required": [
-                "funnel",
-                "investment",
-                "property"
-            ],
             "type": "object"
         },
         "PerformanceReport": {
@@ -357,8 +600,7 @@
                 "investment",
                 "property",
                 "property_name",
-                "targets",
-                "whiskers"
+                "targets"
             ],
             "type": "object"
         },
@@ -584,11 +826,11 @@
             "description": "Target values must match the underlying type, or explicitly be null",
             "properties": {
                 "acquisition": {
-                    "$ref": "#/definitions/Targets<InvestmentCategory>",
+                    "$ref": "#/definitions/Targets<InvestmentCategoryWithExpenses>",
                     "description": "Investment and returns for the acquisition funnel"
                 },
                 "retention": {
-                    "$ref": "#/definitions/Targets<InvestmentCategory>",
+                    "$ref": "#/definitions/Targets<InvestmentCategoryWithExpenses>",
                     "description": "Investment and returns for the retention funnel"
                 },
                 "total": {
@@ -613,9 +855,40 @@
                         "string"
                     ]
                 },
+                "romi": {
+                    "description": "The return on investment @computed",
+                    "type": [
+                        "null",
+                        "number"
+                    ]
+                },
+                "total": {
+                    "description": "The total spent across all buckets @computed",
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            },
+            "required": [
+                "estimated_revenue_gain",
+                "romi",
+                "total"
+            ],
+            "type": "object"
+        },
+        "Targets<InvestmentCategoryWithExpenses>": {
+            "properties": {
+                "estimated_revenue_gain": {
+                    "description": "The estimated revenue gain as a function of monthly rent @computed",
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
                 "expenses": {
                     "$ref": "#/definitions/Targets<InvestmentExpenses>",
-                    "description": "Breakdown of money spent on marketing"
+                    "description": "Breakdown of marketing expenses into sub-buckets"
                 },
                 "romi": {
                     "description": "The return on investment @computed",
@@ -700,20 +973,6 @@
                         "number"
                     ]
                 },
-                "due_to_expire": {
-                    "description": "Number of leases that will expire soon (XXX what even is this?)",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
-                },
-                "ended": {
-                    "description": "Number of leases ended during report period",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
-                },
                 "rate": {
                     "description": "Lease rate as a function of occupiable units @computed",
                     "type": [
@@ -742,13 +1001,6 @@
                         "number"
                     ]
                 },
-                "units_start": {
-                    "description": "Number of leased units at start of report period",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
-                },
                 "vacation_notices": {
                     "description": "Number of notices to vacate",
                     "type": [
@@ -761,13 +1013,10 @@
                 "cd_rate",
                 "cds",
                 "change",
-                "due_to_expire",
-                "ended",
                 "rate",
                 "renewal_notices",
                 "renewals",
                 "units",
-                "units_start",
                 "vacation_notices"
             ],
             "type": "object"
@@ -802,21 +1051,13 @@
                         "null",
                         "number"
                     ]
-                },
-                "units_start": {
-                    "description": "Number of occupiable units at start of report period",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
                 }
             },
             "required": [
                 "move_ins",
                 "move_outs",
                 "rate",
-                "units",
-                "units_start"
+                "units"
             ],
             "type": "object"
         },
@@ -874,134 +1115,76 @@
             "description": "Whisker plots for the baseline",
             "properties": {
                 "cost_per_exe_vs_rent": {
-                    "anyOf": [
-                        {
-                            "items": {
-                                "type": [
-                                    "string",
-                                    "number"
-                                ]
-                            },
-                            "type": "array"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "A series for costs vs rent rate over time @computed"
+                    "description": "A series for costs vs rent rate over time @computed",
+                    "items": {
+                        "type": [
+                            "string",
+                            "number"
+                        ]
+                    },
+                    "type": "array"
                 },
                 "investment": {
-                    "anyOf": [
-                        {
-                            "items": {
-                                "type": [
-                                    "string",
-                                    "number"
-                                ]
-                            },
-                            "type": "array"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "A series for capaign investment over time @computed"
+                    "description": "A series for capaign investment over time @computed",
+                    "items": {
+                        "type": [
+                            "string",
+                            "number"
+                        ]
+                    },
+                    "type": "array"
                 },
                 "lease_cd_rate": {
-                    "anyOf": [
-                        {
-                            "items": {
-                                "type": [
-                                    "string",
-                                    "number"
-                                ]
-                            },
-                            "type": "array"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "A series for cancellation/denial rate over time @computed"
+                    "description": "A series for cancellation/denial rate over time @computed",
+                    "items": {
+                        "type": [
+                            "string",
+                            "number"
+                        ]
+                    },
+                    "type": "array"
                 },
                 "leased_rate": {
-                    "anyOf": [
-                        {
-                            "items": {
-                                "type": [
-                                    "string",
-                                    "number"
-                                ]
-                            },
-                            "type": "array"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "A series for lease rate over time @computed"
+                    "description": "A series for lease rate over time @computed",
+                    "items": {
+                        "type": [
+                            "string",
+                            "number"
+                        ]
+                    },
+                    "type": "array"
                 },
                 "occupancy_rate": {
-                    "anyOf": [
-                        {
-                            "items": {
-                                "type": [
-                                    "string",
-                                    "number"
-                                ]
-                            },
-                            "type": "array"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "A series for occupancy percentage over time @computed"
+                    "description": "A series for occupancy percentage over time @computed",
+                    "items": {
+                        "type": [
+                            "string",
+                            "number"
+                        ]
+                    },
+                    "type": "array"
                 },
                 "renewal_rate": {
-                    "anyOf": [
-                        {
-                            "items": {
-                                "type": [
-                                    "string",
-                                    "number"
-                                ]
-                            },
-                            "type": "array"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "A series for retention percentage over time @computed"
+                    "description": "A series for retention percentage over time @computed",
+                    "items": {
+                        "type": [
+                            "string",
+                            "number"
+                        ]
+                    },
+                    "type": "array"
                 },
                 "usv_exe": {
-                    "anyOf": [
-                        {
-                            "items": {
-                                "type": [
-                                    "string",
-                                    "number"
-                                ]
-                            },
-                            "type": "array"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "A series for usv > exe percentage over time @computed"
+                    "description": "A series for usv > exe percentage over time @computed",
+                    "items": {
+                        "type": [
+                            "string",
+                            "number"
+                        ]
+                    },
+                    "type": "array"
                 }
             },
-            "required": [
-                "cost_per_exe_vs_rent",
-                "investment",
-                "lease_cd_rate",
-                "leased_rate",
-                "occupancy_rate",
-                "renewal_rate",
-                "usv_exe"
-            ],
             "type": "object"
         }
     }

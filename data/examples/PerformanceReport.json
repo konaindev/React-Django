@@ -1,265 +1,193 @@
 {
   "dates": {
-    "start": "2017-01-01",
-    "end": "2018-05-07"
+    "start": "2018-09-24",
+    "end": "2018-10-22"
   },
-  "property_name": "Two Lincoln Towers",
+  "property_name": "Portland Multi Family",
   "property": {
-    "monthly_average_rent": "7278.00",
-    "cost_per_exe_vs_rent": 0.336,
+    "monthly_average_rent": "1856.00",
+    "cost_per_exe_vs_rent": 0.58,
     "leasing": {
-      "change": 20,
-      "cds": 0,
-      "cd_rate": 0.0,
-      "renewal_notices": 0,
-      "renewals": 0,
-      "vacation_notices": 0,
-      "rate": 0.422,
-      "units_start": 72,
-      "units": 92,
-      "due_to_expire": 0,
-      "ended": 7
+      "change": 9,
+      "cds": 3,
+      "cd_rate": 0.2,
+      "renewal_notices": 7,
+      "renewals": 7,
+      "vacation_notices": 5,
+      "rate": 0.87,
+      "units": 227
     },
     "occupancy": {
-      "move_ins": 0,
-      "move_outs": 0,
-      "rate": 0.0,
-      "units_start": 218,
-      "units": 218
+      "move_ins": 13,
+      "move_outs": 4,
+      "rate": 0.85,
+      "units": 220
     }
   },
   "funnel": {
     "volumes": {
-      "usv": 10786,
-      "inq": 487,
-      "tou": 269,
-      "app": 30,
-      "exe": 27
+      "usv": 3008,
+      "inq": 150,
+      "tou": 57,
+      "app": 16,
+      "exe": 13
     },
     "costs": {
-      "usv": "6.12",
-      "inq": "135.52",
-      "tou": "245.35",
-      "app": "2200.00",
-      "exe": "2444.44"
+      "usv": "4.32",
+      "inq": "86.67",
+      "tou": "246.00",
+      "app": "875.00",
+      "exe": "1077.44"
     },
     "conversions": {
-      "usv_inq": 0.045,
-      "inq_tou": 0.552,
-      "tou_app": 0.112,
-      "app_exe": 0.9,
-      "usv_exe": 0.003
+      "usv_inq": 0.05,
+      "inq_tou": 0.38,
+      "tou_app": 0.28,
+      "app_exe": 0.8,
+      "usv_exe": 0.004
     }
   },
   "investment": {
     "acquisition": {
       "expenses": {
-        "demand_creation": "46000.00",
-        "leasing_enablement": "0.00",
-        "market_intelligence": "0.00",
-        "reputation_building": "20000.00"
+        "demand_creation": "10000.00",
+        "leasing_enablement": "1000.00",
+        "market_intelligence": "2000.00",
+        "reputation_building": "1000.00"
       },
-      "total": "66000.00",
-      "romi": 26,
-      "estimated_revenue_gain": "1746720.00"
+      "total": "14000.00",
+      "romi": 14,
+      "estimated_revenue_gain": "199000.00"
     },
     "retention": {
       "expenses": {
         "demand_creation": "0.00",
-        "leasing_enablement": "0.00",
+        "leasing_enablement": "2000.00",
         "market_intelligence": "0.00",
         "reputation_building": "0.00"
       },
-      "total": "0.00",
-      "romi": 0,
-      "estimated_revenue_gain": "0.00"
+      "total": "2000.00",
+      "romi": 78,
+      "estimated_revenue_gain": "155100.00"
     },
     "total": {
-      "expenses": {
-        "demand_creation": "46000.00",
-        "leasing_enablement": "0.00",
-        "market_intelligence": "0.00",
-        "reputation_building": "20000.00"
-      },
-      "total": "66000.00",
-      "romi": 26,
-      "estimated_revenue_gain": "1746720.00"
+      "total": "16000.00",
+      "romi": 22,
+      "estimated_revenue_gain": "354000.00"
     }
-  },
-  "whiskers": {
-    "leased_rate": null,
-    "renewal_rate": null,
-    "occupancy_rate": null,
-    "investment": null,
-    "usv_exe": null,
-    "lease_cd_rate": null,
-    "cost_per_exe_vs_rent": null
   },
   "targets": {
     "property": {
       "monthly_average_rent": "7278.00",
-      "cost_per_exe_vs_rent": 0.336,
+      "cost_per_exe_vs_rent": 1.03,
       "leasing": {
-        "change": 20,
-        "cds": 0,
-        "cd_rate": 0.0,
-        "renewal_notices": 0,
-        "renewals": 0,
-        "vacation_notices": 0,
-        "rate": 0.422,
-        "units_start": 72,
-        "units": 92,
-        "due_to_expire": 0,
-        "ended": 7
+        "change": 11,
+        "cds": 4,
+        "cd_rate": 0.2,
+        "renewal_notices": 6,
+        "renewals": 10,
+        "vacation_notices": 3,
+        "rate": 0.95,
+        "units": null
       },
       "occupancy": {
-        "move_ins": 0,
-        "move_outs": 0,
-        "rate": 0.0,
-        "units_start": 218,
-        "units": 218
+        "move_ins": 15,
+        "move_outs": 3,
+        "rate": 0.93,
+        "units": null
       }
     },
     "funnel": {
       "volumes": {
-        "usv": 10786,
-        "inq": 487,
-        "tou": 269,
-        "app": 30,
-        "exe": 27
+        "usv": 2136,
+        "inq": 128,
+        "tou": 52,
+        "app": 19,
+        "exe": 16
       },
       "costs": {
-        "usv": "6.12",
-        "inq": "135.52",
-        "tou": "245.35",
-        "app": "2200.00",
-        "exe": "2444.44"
+        "usv": "9.90",
+        "inq": "165.00",
+        "tou": "413.00",
+        "app": "1515.00",
+        "exe": "1909.00"
       },
       "conversions": {
-        "usv_inq": 0.045,
-        "inq_tou": 0.552,
-        "tou_app": 0.112,
-        "app_exe": 0.9,
-        "usv_exe": 0.003
+        "usv_inq": 0.06,
+        "inq_tou": 0.4,
+        "tou_app": 0.36,
+        "app_exe": 0.8,
+        "usv_exe": 0.007
       }
     },
     "investment": {
       "acquisition": {
         "expenses": {
-          "demand_creation": "46000.00",
-          "leasing_enablement": "0.00",
-          "market_intelligence": "0.00",
-          "reputation_building": "20000.00"
+          "demand_creation": null,
+          "leasing_enablement": null,
+          "market_intelligence": null,
+          "reputation_building": null
         },
-        "total": "66000.00",
-        "romi": 26,
-        "estimated_revenue_gain": "1746720.00"
+        "total": "15000.00",
+        "romi": 7,
+        "estimated_revenue_gain": "228500.00"
       },
       "retention": {
         "expenses": {
-          "demand_creation": "0.00",
-          "leasing_enablement": "0.00",
-          "market_intelligence": "0.00",
-          "reputation_building": "0.00"
+          "demand_creation": null,
+          "leasing_enablement": null,
+          "market_intelligence": null,
+          "reputation_building": null
         },
-        "total": "0.00",
-        "romi": 0,
-        "estimated_revenue_gain": "0.00"
+        "total": "2000.00",
+        "romi": 142,
+        "estimated_revenue_gain": "266600.00"
       },
       "total": {
-        "expenses": {
-          "demand_creation": "46000.00",
-          "leasing_enablement": "0.00",
-          "market_intelligence": "0.00",
-          "reputation_building": "20000.00"
-        },
-        "total": "66000.00",
-        "romi": 26,
-        "estimated_revenue_gain": "1746720.00"
+        "total": "17000.00",
+        "romi": 14,
+        "estimated_revenue_gain": "495200.00"
       }
     }
   },
   "deltas": {
     "property": {
-      "monthly_average_rent": "7278.00",
-      "cost_per_exe_vs_rent": 0.336,
+      "cost_per_exe_vs_rent": -0.2,
       "leasing": {
-        "change": 20,
-        "cds": 0,
-        "cd_rate": 0.0,
-        "renewal_notices": 0,
-        "renewals": 0,
-        "vacation_notices": 0,
-        "rate": 0.422,
-        "units_start": 72,
-        "units": 92,
-        "due_to_expire": 0,
-        "ended": 7
+        "cds": -1,
+        "cd_rate": 0.03,
+        "renewal_notices": 2,
+        "renewals": 2,
+        "vacation_notices": -1,
+        "rate": 0.02
       },
       "occupancy": {
         "move_ins": 0,
-        "move_outs": 0,
-        "rate": 0.0,
-        "units_start": 218,
-        "units": 218
+        "move_outs": 1,
+        "rate": 0.04
       }
     },
     "funnel": {
       "volumes": {
-        "usv": 10786,
-        "inq": 487,
-        "tou": 269,
-        "app": 30,
-        "exe": 27
+        "usv": 423,
+        "inq": -19,
+        "tou": 2,
+        "app": -2,
+        "exe": -1
       },
       "costs": {
-        "usv": "6.12",
-        "inq": "135.52",
-        "tou": "245.35",
-        "app": "2200.00",
-        "exe": "2444.44"
+        "usv": "1.67",
+        "inq": "24.76",
+        "tou": "-120.00",
+        "app": "-202.00",
+        "exe": "-539.00"
       },
       "conversions": {
-        "usv_inq": 0.045,
-        "inq_tou": 0.552,
-        "tou_app": 0.112,
-        "app_exe": 0.9,
-        "usv_exe": 0.003
-      }
-    },
-    "investment": {
-      "acquisition": {
-        "expenses": {
-          "demand_creation": "46000.00",
-          "leasing_enablement": "0.00",
-          "market_intelligence": "0.00",
-          "reputation_building": "20000.00"
-        },
-        "total": "66000.00",
-        "romi": 26,
-        "estimated_revenue_gain": "1746720.00"
-      },
-      "retention": {
-        "expenses": {
-          "demand_creation": "0.00",
-          "leasing_enablement": "0.00",
-          "market_intelligence": "0.00",
-          "reputation_building": "0.00"
-        },
-        "total": "0.00",
-        "romi": 0,
-        "estimated_revenue_gain": "0.00"
-      },
-      "total": {
-        "expenses": {
-          "demand_creation": "46000.00",
-          "leasing_enablement": "0.00",
-          "market_intelligence": "0.00",
-          "reputation_building": "20000.00"
-        },
-        "total": "66000.00",
-        "romi": 26,
-        "estimated_revenue_gain": "1746720.00"
+        "usv_inq": -0.01,
+        "inq_tou": 0.01,
+        "tou_app": -0.02,
+        "app_exe": 0.02,
+        "usv_exe": -0.001
       }
     }
   }

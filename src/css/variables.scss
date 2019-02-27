@@ -2,6 +2,7 @@
 // Color Palette
 //----------------------------------------------------------
 
+<<<<<<<HEAD
 // This is a collection of colors we like to use.
 //
 // As a rule, you shouldn't reference these variables directly
@@ -58,8 +59,21 @@ $primary-red: #ffd28b;
 
 $background-color: #161c29;
 
+// Colors
+$main-background-color: #161c29;
+$kpi-font-color: #fff;
+$header-font-color: #747f95;
+
 // This is the styling for the KPI panels of the baseline report
 $panel-background-color: #1a202e;
 $panel-border: 1px solid #161c29;
 $panel-border-radius: 6px;
+
 $panel-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+$panel-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+
+// Top KPI in the baseline report styling
+$kpi-color: #fff;
+$kpi-font-family: Formular;
+$kpi-font-size: 12px;
+$kpi-font-weight: bold;
