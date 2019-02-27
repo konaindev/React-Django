@@ -14,7 +14,7 @@
 //    background-color: $dashboard-panel-background;
 // }
 
-// Greyscale palette (Generically usable)
+// Grayscale palette (Generically usable)
 $black: #000000;
 $gray-darkerest: #22292f; // LOL
 $gray-darkest: #3d4852;
@@ -58,7 +58,7 @@ $primary-yellow: #f74568;
 $primary-red: #ffd28b;
 
 //----------------------------------------------------------
-// Font Stack
+// Typography
 //----------------------------------------------------------
 
 // (see also fonts.css)
@@ -70,10 +70,6 @@ $font-headline: "u8", "system-ui", "BlinkMacSystemFont", "-apple-system",
     "Droid Sans", "Helvetica Neue", "sans-serif";
 $font-mono: "formular-mono", "Menlo", "Monaco", "Consolas", "Liberation Mono",
     "Courier New", "monospace";
-
-//----------------------------------------------------------
-// Text Size Hierarchy
-//----------------------------------------------------------
 
 $text-xs: 0.75rem; // 12px
 $text-sm: 0.875rem; // 14px
@@ -87,15 +83,25 @@ $text-5xl: 3rem;
 $text-6xl: 4rem;
 $text-7xl: 6rem;
 
-$leading-compressed: 0.75;
-$leading-none: 1;
-$leading-tight: 1.25;
-$leading-normnal: 1.5;
-$leading-loose: 2;
+$line-height-compressed: 0.75;
+$line-height-none: 1;
+$line-height-tight: 1.25;
+$line-height-normal: 1.5;
+$line-height-loose: 2;
 
-$tracking-tight: -0.05em;
-$tracking-normal: 0;
-$tracking-wide: 0.05em;
+$letter-spacing-tight: -0.05em;
+$letter-spacing-normal: 0;
+$letter-spacing-wide: 0.05em;
+
+$weight-hairline: 100;
+$weight-thin: 200;
+$weight-light: 300;
+$weight-normal: 400;
+$weight-medium: 500;
+$weight-semibold: 600;
+$weight-bold: 700;
+$weight-extrabold: 800;
+$weight-black: 900;
 
 //----------------------------------------------------------
 // Various visual variables
@@ -141,8 +147,13 @@ $kpi-font-size: 12px;
 $kpi-font-weight: bold;
 
 // Various other colors
-$background-color: $bluegray-dark-alt;
-$main-background-color: $background-color;
+$default-background-color: $bluegray-darker;
+$lighter-background-color: $bluegray-lighter;
+$lightest-background-color: $bluegray-lightest;
+$default-text-color: $blue-light;
+$default-ui-text-color: $bluegray-light;
+$lighter-ui-text-color: $bluegray-lighter;
+$lightest-ui-text-color: $bluegray-lightest;
 $kpi-font-color: $white;
 $heading-font-color: #747f95;
 $heading-border: 1px solid rgba(88, 96, 115, 0.6); /* #586073 */

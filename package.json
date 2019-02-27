@@ -4,8 +4,8 @@
   "private": true,
   "license": "copyright",
   "scripts": {
-    "build": "parcel build src/css/main.scss src/js/index.js",
-    "heroku-postbuild": "parcel build src/css/main.scss src/js/index.js",
+    "build": "parcel build src/css/main.scss; parcel build src/js/index.js",
+    "heroku-postbuild": "parcel build src/css/main.scss; parcel build src/js/index.js",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },

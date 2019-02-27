@@ -1,88 +1,116 @@
+@import "./normalize.scss";
 @import "./fonts.scss";
 @import "./variables.scss";
 
 // The app-wide site header
+$header-bg-color: $blue;
+$header-link-color: $blue-light;
+
 .k-header {
-    @apply flex items-center justify-between;
-    @apply h-16 w-full;
-    @apply bg-remark-blue;
-    @apply p-8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: $spacing-8;
+    height: $spacing-16;
+    width: 100%;
+
+    background-color: $header-bg-color;
 
     h1 {
-        @apply font-normal text-xl;
+        font-size: $text-xl;
+        font-weight: $weight-normal;
     }
 
     a.nav-link {
-        @apply text-remark-blue-light no-underline;
+        color: $header-link-color;
+        text-decoration: none;
 
         &:hover {
-            @apply underline;
+            text-decoration: underline;
         }
     }
 }
 
 .k-footer {
-    @apply text-sm text-center;
-    @apply block h-16 w-full p-4;
-    @apply absolute pin-b; // for now
+    display: block;
+    position: absolute;
+    bottom: 0;
+    height: $spacing-16;
+    padding: $spacing-4;
+    width: 100%;
+    font-size: $text-sm;
+    text-align: center;
 }
 
 // the outer content container
 .k-outer {
     margin: 0 auto;
-    @apply max-w-2xl;
+    max-width: 70rem;
 }
 
 // the inner content container
 .k-inner {
-    @apply p-16;
+    padding: $spacing-16;
 }
 
 // a default form presentation
 .k-form-container {
-    @apply text-remark-blue-light;
-    @apply bg-remark-old-ui rounded-lg;
-    @apply mx-16 p-2;
+    color: $default-text-color;
+    background-color: $default-background-color;
+    border-radius: $border-radius-lg;
+    margin-left: $spacing-16;
+    margin-right: $spacing-16;
+    padding: $spacing-2;
 
     a {
-        @apply text-remark-blue-light;
+        color: $default-text-color;
     }
 
     .k-form-container-inner {
-        @apply leading-normal text-lg;
-        @apply px-6 pb-6 pt-2;
-        @apply border-4 border-solid border-remark-old-ui-darkest rounded-lg;
+        font-size: $text-lg;
+        line-height: $line-height-normal;
+        padding-left: $spacing-6;
+        padding-right: $spacing-6;
+        padding-top: $spacing-2;
+        padding-bottom: $spacing-6;
+        border-radius: $border-radius-lg;
+        border: solid 4px $bluegray-darkest;
     }
 
     .k-form-messages {
-        @apply leading-normal;
-        @apply pt-6 pb-4;
+        line-height: $line-height-normal;
+        padding-top: $spacing-6;
+        padding-bottom: $spacing-4;
     }
 
     .k-form-fields {
-        @apply leading-loose;
+        line-height: $line-height-loose;
     }
 
     .k-form-field {
-        @apply w-full flex;
-        @apply my-4;
+        display: flex;
+        width: 100%;
+        margin-top: $spacing-4;
+        margin-bottom: $spacing-4;
 
         label {
-            @apply w-1/5;
+            width: 20%;
         }
 
         input {
-            @apply w-4/5;
+            width: 80%;
         }
     }
 
     .k-form-actions {
-        @apply mt-8 mb-4;
+        margin-top: $spacing-8;
+        margin-bottom: $spacing-4;
 
         ul {
-            @apply flex;
-            @apply justify-end;
-            @apply p-0;
+            display: flex;
+            justify-content: flex-end;
+            padding: 0;
 
             li {
             }
@@ -90,17 +118,18 @@
     }
 
     .k-form-extras {
-        @apply text-sm text-grey-dark;
+        font-size: $text-sm;
+        color: $gray-dark;
 
         a {
-            @apply text-grey-dark;
+            color: $gray-dark;
         }
     }
 }
 
 .k-rectangle {
-    @apply bg-remark-ui-dark;
-    @apply rounded-lg border-remark-ui-border-dark border-solid border;
+    background-color: $bluegray-dark;
+    border: solid 1px $bluegray-dark;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
 }
 
@@ -109,48 +138,61 @@
     border-spacing: 0 0.5em;
 
     tr > th {
-        @apply p-2;
-        @apply font-sans font-normal text-right;
+        padding: $spacing-2;
+        font-family: $font-sans;
+        font-weight: $weight-normal;
+        text-align: right;
+
         &:first-child {
-            @apply text-left;
+            text-align: left;
         }
     }
 
     tr > td {
-        @apply p-2;
-        @apply font-mono text-right;
+        padding: $spacing-2;
+        font-family: $font-mono;
+        text-align: right;
     }
 }
 
 .k-dropdown {
     /* custom styled dropdown */
-    @apply m-0 p-0;
+    margin: 0;
+    padding: 0;
     background: transparent;
-    @apply text-remark-ui-text-light;
+    color: $default-text-color;
 }
 
 .k-funnel-label {
-    /* container for layout (matching row height */
-    @apply h-24 mt-8 -mb-4;
-    @apply flex flex-col items-center;
-    @apply content-start;
+    /* container for layout (matching row height) */
+    height: $spacing-24;
+    margin-top: $spacing-8;
+    margin-bottom: -$spacing-4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background: none;
 }
 .k-funnel-label > div:first-child {
     /* rounded corner container */
-    @apply h-24;
-    @apply w-full;
-    @apply rounded-lg border-remark-ui-border-dark border-solid border;
-    @apply flex flex-row items-center;
+    height: $spacing-24;
+    width: 100%;
+    border-radius: $border-radius-lg;
+    border: solid 1px $bluegray-dark;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
 }
+
 .k-funnel-label > div:first-child > div {
     /* label text */
-    @apply text-center;
-    @apply w-full;
+    text-align: center;
+    width: 100%;
 }
+
 .k-funnel-label > div:last-child {
-    @apply pt-2;
+    padding-top: $spacing-2;
 }
 
 .k-divider {
@@ -159,41 +201,50 @@
 }
 
 .k-pin-above-top {
-    @apply m-0 p-0;
+    margin: 0;
+    padding: 0;
     position: relative;
     top: -1px;
 }
 
 .k-tabs-container {
-    @apply p-0 mt-12 mb-8;
+    padding: 0;
+    margin-top: $spacing-12;
+    margin-bottom: $spacing-8;
 
     ul {
-        @apply inline-block text-center;
+        display: inline-block;
+        text-align: center;
         list-style-position: inside;
-        @apply -ml-4;
+        margin-left: -$spacing-4;
 
         li {
-            @apply cursor-pointer;
-            @apply inline-block;
-            @apply mx-4;
-            @apply pb-4;
-            @apply text-remark-ui-text;
+            cursor: pointer;
+            display: inline-block;
+            margin-left: $spacing-4;
+            margin-right: $spacing-4;
+            padding-bottom: $spacing-4;
+            color: $default-ui-text-color;
         }
 
         li.selected {
-            @apply text-remark-ui-text-lightest;
+            color: $lightest-ui-text-color;
             border-bottom: solid 1px #3188ff;
         }
 
         li:hover {
-            @apply text-remark-ui-text-light;
+            color: $default-ui-text-color;
         }
     }
 }
 
 // Misc high-pri overrides go here
+
 body {
-    @apply m-0 p-0 bg-remark-ui-darker font-sans text-remark-blue-light;
+    margin: 0;
+    padding: 0;
+    background-color: $default-background-color;
+    font-family: $font-sans;
 }
 
 h1,
@@ -202,7 +253,8 @@ h3,
 h4,
 h5,
 h6 {
-    @apply font-headline font-normal;
+    font-family: $font-headline;
+    font-weight: $weight-normal;
 }
 
 ul,
@@ -210,23 +262,31 @@ li {
     list-style-type: none;
 }
 
+$input-border: 1px solid $bluegray-lighter;
+
 input[type="text"],
 input[type="email"],
 input[type="password"] {
-    @apply rounded;
-    @apply px-2 py-1;
-    @apply leading-loose;
-    @apply bg-transparent border border-solid border-remark-old-ui-lighter;
-    @apply text-remark-blue-light;
+    padding-left: $spacing-2;
+    padding-top: $spacing-1;
+    line-height: $line-height-loose;
+    color: $default-text-color;
+    background: transparent;
+    border: $input-border;
+    border-radius: $border-radius-default;
 }
 
 input[type="submit"] {
-    @apply bg-remark-old-ui-lighter;
-    @apply rounded-full border border-solid border-remark-old-ui-lighter;
-    @apply text-remark-blue-light;
-    @apply px-8 py-3;
+    background: $lighter-background-color;
+    border-radius: $border-radius-full;
+    border: solid 1px $lighter-background-color;
+    color: $default-text-color;
+    padding-left: $spacing-8;
+    padding-right: $spacing-8;
+    padding-top: $spacing-3;
+    padding-bottom: $spacing-3;
 
     &:hover {
-        @apply bg-remark-old-ui-lightest;
+        background: $lightest-background-color;
     }
 }

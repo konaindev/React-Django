@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
 import { linkTo } from '@storybook/addon-links';
 import MarketSizeByIncome from './index';
-import '../../../../dist/main.postcss.css'; // TODO: imported for loading fonts in storybook
+import '../../../../dist/main.css'; // TODO: imported for loading fonts in storybook
 
 const props = {
   income: "75000.00",
