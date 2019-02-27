@@ -1,7 +1,7 @@
 @import "../../../css/variables.scss";
 
 .market-size-growth-reach {
-  .growth-reach__heading {
+  .section__header {
     p {
       margin: 30px 15px;
       color: $header-font-color;
@@ -19,7 +19,7 @@
     }
   }
 
-  .growth-reach__content {
+  .section__panel {
     margin: 36px 0;
     border: $panel-border;
     border-radius: $panel-border-radius;
@@ -27,5 +27,32 @@
     box-shadow: $panel-box-shadow;
   }
 
-  
+  .panel__summary {
+    padding: 0 60px 18px 60px;
+  }
+
+  .summary__grid {
+    margin: 0 -32px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .grid__box {
+    padding: 32px;
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+
+    span:first-child, span:nth-child(2) {
+      color: #6D778D;
+      font-size: 14px;
+    }
+
+    span:nth-child(3) {
+      color: #FFFFFF;
+      font-size: 26px;
+      margin-top: 16px;
+    }
+  }
 }
