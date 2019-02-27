@@ -1,0 +1,62 @@
+// This file contains all our site-wide variables and defaults,
+// but no components. main.scss derives from this and includes
+// extras. If you're importing from a component-specific SCSS
+// file, this is the one you want to import.
+
+@import "./normalize.scss";
+@import "./fonts.scss";
+@import "./variables.scss";
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: $default-background-color;
+    color: $default-text-color;
+    font-family: $font-sans;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $font-headline;
+    font-weight: $weight-normal;
+}
+
+ul,
+li {
+    list-style-type: none;
+}
+
+$input-border: 1px solid $blue-alt;
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    padding-left: $spacing-2;
+    padding-right: $spacing-2;
+    padding-top: $spacing-1;
+    padding-bottom: $spacing-1;
+    line-height: $line-height-loose;
+    color: $default-text-color;
+    background: transparent;
+    border: $input-border;
+    border-radius: $border-radius-default;
+}
+
+input[type="submit"] {
+    background: $alt-lighter-background-color;
+    border-radius: $border-radius-full;
+    border: solid 1px $alt-lighter-background-color;
+    color: $default-text-color;
+    padding-left: $spacing-8;
+    padding-right: $spacing-8;
+    padding-top: $spacing-3;
+    padding-bottom: $spacing-3;
+
+    &:hover {
+        background: $blue;
+    }
+}
