@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import './market_size_growth_reach.css';
+import './market_size_growth_reach.scss';
 
 
 export function MarketSizeGrowthReach({ city }) {
@@ -13,7 +13,7 @@ export function MarketSizeGrowthReach({ city }) {
       </div>
 
       <div className="market-size-growth-reach__content">
-        
+
       </div>
     </div>
   );
