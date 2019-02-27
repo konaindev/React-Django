@@ -2,7 +2,6 @@
 // Color Palette
 //----------------------------------------------------------
 
-<<<<<<<HEAD
 // This is a collection of colors we like to use.
 //
 // As a rule, you shouldn't reference these variables directly
@@ -16,7 +15,8 @@
 // }
 
 // Greyscale palette (Generically usable)
-$black: #22292f;
+$black: #000000;
+$grey-darkerest: #22292f; // LOL
 $grey-darkest: #3d4852;
 $grey-darker: #606f7b;
 $grey-dark: #8795a1;
@@ -36,14 +36,14 @@ $blue-light: #d9e4ff;
 $blue-lightest: #eaf5ff;
 
 // Bluegray palette (typically used in UI)
-$bluegrey-dark: #1a202e;
-$bluegrey-border-dark: #161c29;
-$bluegrey-darker: #131926;
 $bluegrey-darkest: #0d111a;
+$bluegrey-darker: #131926;
+$bluegrey-dark: #1a202e;
+$bluegrey-dark-alt: #161c29;
 $bluegrey-border: #212734;
-$bluegrey-text-lightest: #ffffff;
-$bluegrey-text-light: #cccccc;
-$bluegrey-text: #68788c;
+$bluegrey-light: #68788c; // text
+$bluegrey-lighter: #cccccc; // text-lighter
+$bluegrey-lightest: $white;
 
 // Highlight bluegrey colors
 $highlight-bluegrey-1: #a09afd;
@@ -57,19 +57,46 @@ $primary-green: #74eb98;
 $primary-yellow: #f74568;
 $primary-red: #ffd28b;
 
-$background-color: #161c29;
+//----------------------------------------------------------
+// Font Stack
+//----------------------------------------------------------
 
-// Colors
-$main-background-color: #161c29;
-$kpi-font-color: #fff;
-$header-font-color: #747f95;
+// (see also fonts.css)
+$font-sans: "formular", "system-ui", "BlinkMacSystemFont", "-apple-system",
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", "sans-serif";
+$font-headline: "u8", "system-ui", "BlinkMacSystemFont", "-apple-system",
+    "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", "sans-serif";
+$font-mono: "formular-mono", "Menlo", "Monaco", "Consolas", "Liberation Mono",
+    "Courier New", "monospace";
+
+//----------------------------------------------------------
+// Text Size Hierarchy
+//----------------------------------------------------------
+
+$text-xs: 0.75rem; // 12px
+$text-sm: 0.875rem; // 14px
+$text-base: 1rem; // 16px
+$text-lg: 1.125rem; // 18px
+$text-xl: 1.25rem; // 20px
+$text-2xl: 1.5rem; // 24px
+$text-3xl: 1.875rem; // 30px
+$text-4xl: 2.25rem; // 48px
+$text-5xl: 3rem;
+$text-6xl: 4rem;
+$text-7xl: 6rem;
+
+//----------------------------------------------------------
+// Panels
+//----------------------------------------------------------
+
+// Variables common to all visualization panels
 
 // This is the styling for the KPI panels of the baseline report
-$panel-background-color: #1a202e;
-$panel-border: 1px solid #161c29;
+$panel-background-color: $bluegrey-dark;
+$panel-border: 1px solid $bluegrey-dark-alt;
 $panel-border-radius: 6px;
-
-$panel-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
 $panel-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
 
 // Top KPI in the baseline report styling
@@ -77,3 +104,9 @@ $kpi-color: #fff;
 $kpi-font-family: Formular;
 $kpi-font-size: 12px;
 $kpi-font-weight: bold;
+
+// Various other colors
+$background-color: $bluegray-dark-alt;
+$main-background-color: $background-color;
+$kpi-font-color: $white;
+$header-font-color: #747f95;
