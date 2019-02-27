@@ -6,7 +6,7 @@ import ReportSpanDropdown from "../report_span_dropdown";
 /**
  * @description Top-level project tabs
  */
-export class ProjectTabs extends Component {
+export default class ProjectTabs extends Component {
   static propTypes = {
     current_report_link: PropTypes.object.isRequired,
     report_links: PropTypes.arrayOf(PropTypes.object).isRequired
