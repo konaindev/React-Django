@@ -22,12 +22,12 @@ export function MarketSizeGrowthReach({
 
   return (
     <div className="market-size-growth-reach">
-      <div className="section__heading">
+      <div className="market-size-growth-reach__heading">
         <p>Est. Market Size, Growth & Reach : {city}</p>
       </div>
 
-      <div className="section__panel">
-        <div className="panel__table">
+      <div className="market-size-growth-reach__panel">
+        <div className="market-size-growth-reach__table">
           <div className="table__row table__row--head">
             <span>Target Segment</span>
             <span>Est. Market Size</span>
@@ -46,28 +46,28 @@ export function MarketSizeGrowthReach({
           )}
         </div>
 
-        <div className="panel__summary">
-          <div className="grid__box text-left">
+        <div className="market-size-growth-reach__summary">
+          <div className="summary__box">
             <span>Average</span>
             <span>Tenant Age</span>
             <span>{age}</span>
           </div>
-          <div className="grid__box text-right">
+          <div className="summary__box">
             <span>Est. Total</span>
             <span>Market Size</span>
             <span>{formatNumber(market_size)}</span>
           </div>
-          <div className="grid__box text-right">
+          <div className="summary__box">
             <span>Total Unique</span>
             <span>Site Visitors</span>
             <span>{formatNumber(usv)}</span>
           </div>
-          <div className="grid__box text-right">
+          <div className="summary__box">
             <span>Average</span>
             <span>Market Growth</span>
             <span>{formatPercent(growth, 1)}</span>
           </div>
-          <div className="grid__box text-right">
+          <div className="summary__box">
             <span>Est. Total {future_year}</span>
             <span>Market Size</span>
             <span>{formatNumber(future_size)}</span>
