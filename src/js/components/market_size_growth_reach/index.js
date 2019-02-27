@@ -7,6 +7,7 @@ import { formatNumber, formatPercent } from "../../utils/formatters";
 
 export function MarketSizeGrowthReach({
   city,
+  market_sizes,
   future_year,
   average: {
     age,
@@ -27,6 +28,30 @@ export function MarketSizeGrowthReach({
       </div>
 
       <div className="section__panel">
+        <div className="panel__table">
+          <table>
+            <thead>
+              <tr>
+                <th>Target Segment</th>
+                <th>Est. Market Size</th>
+                <th>Unique Site Visitors</th>
+                <th>Est. Market Growth</th>
+                <th>Est. {future_year} Market Size</th>
+               </tr>
+            </thead>
+            <tbody>
+              {market_sizes.map((size, index) =>
+                <tr key={index}>
+                  <td>Ages {size.age_group.split('-').join(' - ')}</td>
+                  <td>{formatNumber(size.market_size)}</td>
+                  <td>{formatNumber(size.usv)}</td>
+                  <td>{formatPercent(size.growth, 2)}</td>
+                  <td>{formatNumber(size.future_size)}</td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+        </div>
 
         <div className="panel__summary">
           <div className="summary__grid">

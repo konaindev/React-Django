@@ -6,7 +6,7 @@
       margin: 30px 15px;
       color: $header-font-color;
       font-size: 14px;
-      font-weight: bold;
+      font-weight: 500;
       line-height: 18px;
       letter-spacing: 1px;
       text-transform: uppercase;
@@ -27,8 +27,49 @@
     box-shadow: $panel-box-shadow;
   }
 
+  .panel__table table {
+    width: 100%;
+    font-size: 14px;
+
+    thead > tr > th {
+      color: #FFFFFF;
+      font-weight: 500;
+      line-height: 26px;
+      padding: 20px 40px 16px 40px;
+      text-align: right;
+
+      &:first-child {
+        text-align: left;
+        padding-left: 60px;
+      }
+
+      &:last-child {
+        padding-right: 60px;
+      }
+    }
+
+    tbody > tr > td {
+      color: #6D778D;
+      border: 1px solid $table-border-color;
+      line-height: 24px;
+      padding: 10px 40px 12px 40px;
+      text-align: right;
+
+      &:first-child {
+        text-align: left;
+        padding-left: 60px;
+        border-left: 0;
+      }
+
+      &:last-child {
+        padding-right: 60px;
+        border-right: 0;
+      }
+    }
+  }
+
   .panel__summary {
-    padding: 0 60px 18px 60px;
+    padding: 0 60px 12px 60px;
   }
 
   .summary__grid {
@@ -41,18 +82,20 @@
   .grid__box {
     padding: 32px;
     font-weight: 300;
+    flex: 1;
     display: flex;
     flex-direction: column;
 
     span:first-child, span:nth-child(2) {
       color: #6D778D;
       font-size: 14px;
+      line-height: 20px;
     }
 
     span:nth-child(3) {
       color: #FFFFFF;
       font-size: 26px;
-      margin-top: 16px;
+      margin-top: 12px;
     }
   }
 }
