@@ -22,9 +22,8 @@ export function MarketSizeGrowthReach({
 
   return (
     <div className="market-size-growth-reach">
-      <div className="section__header">
+      <div className="section__heading">
         <p>Est. Market Size, Growth & Reach : {city}</p>
-        <hr />
       </div>
 
       <div className="section__panel">

@@ -1,3 +1,5 @@
+@import "../../../css/variables.scss";
+
 .estimated-market-size-overview {
   background-color: #1A202E; /* remark-ui-dark */
   border: 1px solid #161C29; /* remark-ui-border-dark */
@@ -6,16 +8,10 @@
   padding: 20px 60px;
 }
 
-.estimated-market-size-overview__heading > h4 {
+.estimated-market-size-overview__heading {
   color: #FFFFFF; /* remark-ui-text-lightest */
-  margin-top: 24px;
-  margin-bottom: 40px;
-}
-
-.estimated-market-size-overview__heading > hr {
-  opacity: 0.3;
-  height: 1px;
-  background-color: #3D4555;
+  border-bottom: 1px solid $table-border-color; /* #3D4555 */
+  padding: 24px 0 40px 0;
 }
 
 .estimated-market-size-overview__list {

@@ -1,21 +1,16 @@
 @import "../../../css/variables.scss";
 
 .market-size-growth-reach {
-  .section__header {
+  .section__heading {
     p {
-      margin: 30px 15px;
-      color: $header-font-color;
+      padding: 30px 15px;
+      color: $heading-font-color;
+      border-bottom: $heading-border;
       font-size: 14px;
       font-weight: 500;
       line-height: 18px;
       letter-spacing: 1px;
       text-transform: uppercase;
-    }
-
-    hr {
-      opacity: 0.6;
-      height: 1px;
-      background-color: #586073;
     }
   }
 
@@ -48,25 +43,25 @@
           padding-right: 60px;
         }
       }
+    }
 
-      &--head span {
-        color: #FFFFFF;
-        font-weight: 500;
-        line-height: 26px;
-        border-bottom: 1px solid $table-border-color;
-      }
+    .table__row--head span {
+      color: #FFFFFF;
+      font-weight: 500;
+      line-height: 26px;
+      border-bottom: 1px solid $table-border-color;
+    }
 
-      &--body span {
-        color: #6D778D;
-        border-style: solid;
-        border-color: $table-border-color;
-        border-right-width: 1px;
-        border-bottom-width: 1px;
-        line-height: 24px;
+    .table__row--body span {
+      color: #6D778D;
+      border-style: solid;
+      border-color: $table-border-color;
+      border-right-width: 1px;
+      border-bottom-width: 1px;
+      line-height: 24px;
 
-        &:last-child {
-          border-right-width: 0;
-        }
+      &:last-child {
+        border-right-width: 0;
       }
     }
   }
