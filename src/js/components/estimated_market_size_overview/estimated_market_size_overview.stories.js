@@ -1,9 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import { storiesOf } from '@storybook/react';
+import { storiesOf } from "@storybook/react";
 
-import EstimatedMarketSizeOverview from './index';
-import '../../../../dist/main.postcss.css'; // @FIXME
+import EstimatedMarketSizeOverview from "./index";
 
 const props = {
   market_sizes: [

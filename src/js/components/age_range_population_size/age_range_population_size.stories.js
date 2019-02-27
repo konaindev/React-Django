@@ -1,9 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import { storiesOf } from '@storybook/react';
+import { storiesOf } from "@storybook/react";
 
-import AgeRangePopulationSize from './index';
-import '../../../../dist/main.postcss.css'; // @FIXME
+import AgeRangePopulationSize from "./index";
 
 const props = {
   age_group: '18-24',
