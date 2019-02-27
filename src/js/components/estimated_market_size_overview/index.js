@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import AgeRangePopulationSize from '../age_range_population_size';
-import './estimated_market_size_overview.css';
+import AgeRangePopulationSize from "../age_range_population_size";
+import "./estimated_market_size_overview.css";
 
 
 export function EstimatedMarketSizeOverview({ market_sizes }) {
@@ -10,7 +10,6 @@ export function EstimatedMarketSizeOverview({ market_sizes }) {
     <div className="estimated-market-size-overview">
       <div className="estimated-market-size-overview__heading">
         <h4>Est. Market Size Overview</h4>
-        <hr />
       </div>
 
       <div className="estimated-market-size-overview__list">

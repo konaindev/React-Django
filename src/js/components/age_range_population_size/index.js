@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { formatNumber } from '../../utils/formatters';
-import './age_range_population_size.css';
+import { formatNumber } from "../../utils/formatters";
+import "./age_range_population_size.css";
 
 
 export function AgeRangePopulationSize({ age_group, market_size, segment_population }) {
