@@ -1,0 +1,13 @@
+@mixin grid($columns, $gap) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  grid-gap: $gap;
+  grid-auto-rows: auto;
+  -ms-grid-template-columns: repeat($columns, 1fr);
+  -ms-grid-gap: $gap;
+  -ms-grid-auto-rows: auto;
+}
+
+.std-grid {
+  @include grid(16, 0px);
+}

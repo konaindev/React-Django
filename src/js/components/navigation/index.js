@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { formatDate } from "../../utils/formatters";
-
 /**
  * @description A navigation item that allows for selection of different projects
  */
