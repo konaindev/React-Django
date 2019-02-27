@@ -2,6 +2,60 @@
 @import "./fonts.scss";
 @import "./variables.scss";
 
+body {
+    margin: 0;
+    padding: 0;
+    background-color: $default-background-color;
+    color: $default-text-color;
+    font-family: $font-sans;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $font-headline;
+    font-weight: $weight-normal;
+}
+
+ul,
+li {
+    list-style-type: none;
+}
+
+$input-border: 1px solid $blue-alt;
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    padding-left: $spacing-2;
+    padding-right: $spacing-2;
+    padding-top: $spacing-1;
+    padding-bottom: $spacing-1;
+    line-height: $line-height-loose;
+    color: $default-text-color;
+    background: transparent;
+    border: $input-border;
+    border-radius: $border-radius-default;
+}
+
+input[type="submit"] {
+    background: $alt-lighter-background-color;
+    border-radius: $border-radius-full;
+    border: solid 1px $alt-lighter-background-color;
+    color: $default-text-color;
+    padding-left: $spacing-8;
+    padding-right: $spacing-8;
+    padding-top: $spacing-3;
+    padding-bottom: $spacing-3;
+
+    &:hover {
+        background: $blue;
+    }
+}
+
 // The app-wide site header
 $header-bg-color: $blue;
 $header-link-color: $blue-light;
@@ -54,10 +108,122 @@ $header-link-color: $blue-light;
     padding: $spacing-16;
 }
 
+.k-rectangle {
+    background-color: $bluegray-dark;
+    border: solid 1px $bluegray-dark;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+}
+
+.k-report-table {
+    border-collapse: separate;
+    border-spacing: 0 0.5em;
+
+    tr > th {
+        padding: $spacing-2;
+        font-family: $font-sans;
+        font-weight: $weight-normal;
+        text-align: right;
+
+        &:first-child {
+            text-align: left;
+        }
+    }
+
+    tr > td {
+        padding: $spacing-2;
+        font-family: $font-mono;
+        text-align: right;
+    }
+}
+
+.k-dropdown {
+    /* custom styled dropdown */
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    color: $default-text-color;
+}
+
+.k-funnel-label {
+    /* container for layout (matching row height) */
+    height: $spacing-24;
+    margin-top: $spacing-8;
+    margin-bottom: -$spacing-4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: none;
+}
+
+.k-funnel-label > div:first-child {
+    /* rounded corner container */
+    height: $spacing-24;
+    width: 100%;
+    border-radius: $border-radius-lg;
+    border: solid 1px $bluegray-dark;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+}
+
+.k-funnel-label > div:last-child {
+    padding-top: $spacing-2;
+}
+
+.k-funnel-label > div:first-child > div {
+    /* label text */
+    text-align: center;
+    width: 100%;
+}
+
+.k-divider {
+    border-bottom: solid 1px #586073;
+    opacity: 0.18;
+}
+
+.k-pin-above-top {
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: -1px;
+}
+
+.k-tabs-container {
+    padding: 0;
+    margin-top: $spacing-12;
+    margin-bottom: $spacing-8;
+
+    ul {
+        display: inline-block;
+        text-align: center;
+        list-style-position: inside;
+        margin-left: -$spacing-4;
+
+        li {
+            cursor: pointer;
+            display: inline-block;
+            margin-left: $spacing-4;
+            margin-right: $spacing-4;
+            padding-bottom: $spacing-4;
+            color: $default-ui-text-color;
+        }
+
+        li.selected {
+            color: $lightest-ui-text-color;
+            border-bottom: solid 1px #3188ff;
+        }
+
+        li:hover {
+            color: $default-ui-text-color;
+        }
+    }
+}
+
 // a default form presentation
 .k-form-container {
     color: $default-text-color;
-    background-color: $default-background-color;
+    background-color: $alt-default-background-color;
     border-radius: $border-radius-lg;
     margin-left: $spacing-16;
     margin-right: $spacing-16;
@@ -124,169 +290,5 @@ $header-link-color: $blue-light;
         a {
             color: $gray-dark;
         }
-    }
-}
-
-.k-rectangle {
-    background-color: $bluegray-dark;
-    border: solid 1px $bluegray-dark;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
-}
-
-.k-report-table {
-    border-collapse: separate;
-    border-spacing: 0 0.5em;
-
-    tr > th {
-        padding: $spacing-2;
-        font-family: $font-sans;
-        font-weight: $weight-normal;
-        text-align: right;
-
-        &:first-child {
-            text-align: left;
-        }
-    }
-
-    tr > td {
-        padding: $spacing-2;
-        font-family: $font-mono;
-        text-align: right;
-    }
-}
-
-.k-dropdown {
-    /* custom styled dropdown */
-    margin: 0;
-    padding: 0;
-    background: transparent;
-    color: $default-text-color;
-}
-
-.k-funnel-label {
-    /* container for layout (matching row height) */
-    height: $spacing-24;
-    margin-top: $spacing-8;
-    margin-bottom: -$spacing-4;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: none;
-}
-.k-funnel-label > div:first-child {
-    /* rounded corner container */
-    height: $spacing-24;
-    width: 100%;
-    border-radius: $border-radius-lg;
-    border: solid 1px $bluegray-dark;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
-}
-
-.k-funnel-label > div:first-child > div {
-    /* label text */
-    text-align: center;
-    width: 100%;
-}
-
-.k-funnel-label > div:last-child {
-    padding-top: $spacing-2;
-}
-
-.k-divider {
-    border-bottom: solid 1px #586073;
-    opacity: 0.18;
-}
-
-.k-pin-above-top {
-    margin: 0;
-    padding: 0;
-    position: relative;
-    top: -1px;
-}
-
-.k-tabs-container {
-    padding: 0;
-    margin-top: $spacing-12;
-    margin-bottom: $spacing-8;
-
-    ul {
-        display: inline-block;
-        text-align: center;
-        list-style-position: inside;
-        margin-left: -$spacing-4;
-
-        li {
-            cursor: pointer;
-            display: inline-block;
-            margin-left: $spacing-4;
-            margin-right: $spacing-4;
-            padding-bottom: $spacing-4;
-            color: $default-ui-text-color;
-        }
-
-        li.selected {
-            color: $lightest-ui-text-color;
-            border-bottom: solid 1px #3188ff;
-        }
-
-        li:hover {
-            color: $default-ui-text-color;
-        }
-    }
-}
-
-// Misc high-pri overrides go here
-
-body {
-    margin: 0;
-    padding: 0;
-    background-color: $default-background-color;
-    font-family: $font-sans;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    font-family: $font-headline;
-    font-weight: $weight-normal;
-}
-
-ul,
-li {
-    list-style-type: none;
-}
-
-$input-border: 1px solid $bluegray-lighter;
-
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    padding-left: $spacing-2;
-    padding-top: $spacing-1;
-    line-height: $line-height-loose;
-    color: $default-text-color;
-    background: transparent;
-    border: $input-border;
-    border-radius: $border-radius-default;
-}
-
-input[type="submit"] {
-    background: $lighter-background-color;
-    border-radius: $border-radius-full;
-    border: solid 1px $lighter-background-color;
-    color: $default-text-color;
-    padding-left: $spacing-8;
-    padding-right: $spacing-8;
-    padding-top: $spacing-3;
-    padding-bottom: $spacing-3;
-
-    &:hover {
-        background: $lightest-background-color;
     }
 }
