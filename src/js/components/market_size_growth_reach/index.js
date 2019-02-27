@@ -40,7 +40,7 @@ export function MarketSizeGrowthReach({
               <span>Ages {size.age_group.split('-').join(' - ')}</span>
               <span>{formatNumber(size.market_size)}</span>
               <span>{formatNumber(size.usv)}</span>
-              <span>{formatPercent(size.growth, 2)}</span>
+              <span>{formatPercent(size.growth, 2, 0)}</span>
               <span>{formatNumber(size.future_size)}</span>
             </div>
           )}
@@ -65,7 +65,7 @@ export function MarketSizeGrowthReach({
           <div className="summary__box">
             <span>Average</span>
             <span>Market Growth</span>
-            <span>{formatPercent(growth, 2)}</span>
+            <span>{formatPercent(growth, 2, 0)}</span>
           </div>
           <div className="summary__box">
             <span>Est. Total {future_year}</span>
