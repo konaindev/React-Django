@@ -57,14 +57,6 @@ Warning: this is fancy magic. I imagine it is fragile. -Dave
 
 This is a young app, so there's both very little technical debt, and the assumption (for now) that _all_ of it is debt. -Dave
 
-**I'm not sure at all about Tailwinds CSS**.
-
-For a primer on _why_ Tailwinds might be a good idea, see: https://adamwathan.me/css-utility-classes-and-separation-of-concerns/ &mdash; I'm pretty bought in on a bunch of the ideas here. One idea I'm fully sold on is utility classes. (Like: `m-4` meaning "margins, all sides, width level 4", where "width level 4" is defined elsewhere and _consistent throughout the project_. This helps engineers keep a visual rhythm on their pages.)
-
-But! Tailwinds leads to all sorts of weirdness so far. Maybe I just don't know how to use it right.
-
-First, there's all the `@apply` magic in `main.postcss.scss`. And also, there's some stuff that only makes sense to include in the HTML directly, including responsive/size class stuff (like `m-4 lg:m-8` &mdash; that works fine a `class="..."` attribute in HTML, but as far as I can tell, it's not possible to `@apply lg:m-8` inside our SCSS).
-
 ### Things to contemplate 2: where data and schema lives
 
 Eventually, we'll want our schema, and our computations, to be a dynamic property of the service. Or, at least, I suspect we will?

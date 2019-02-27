@@ -18,8 +18,7 @@ killchildren() {
 # In an ideal world, we'd have one invocation of parcel watch.
 # But, see: https://github.com/parcel-bundler/parcel/issues/2407
 # TODO figure out how to convince parcel to watch a dependent file it may not know exists
-yarn parcel watch src/css/main.postcss.scss --no-hmr --no-cache &
-yarn parcel watch src/js/index.js --no-hmr --no-cache &
+yarn parcel watch src/css/main.scss src/js/index.js --no-hmr --no-cache &
 
 # Run the django dev server (on 8000)
 ./manage.py runserver &
