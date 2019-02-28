@@ -19,6 +19,9 @@ export default class ProjectTabs extends Component {
       <div className="project-tabs">
         <ul>
           <li className="selected">Performance</li>
+          <li>Model</li>
+          <li>Market</li>
+          <li>Team</li>
           {/* TODO these should be named children, etc.
           <li>Model</li>
           <li>Market</li>
