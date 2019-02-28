@@ -7,10 +7,10 @@ $category-color-3: #5147FF;
 $category-color-4: #4035F4;
 
 .rent-to-income-analysis {
+  $this: &;
+
   padding: 20px 0;
   margin-bottom: 20px;
-
-  /* @FIXME Following properties can be inheritied from parent elements */
 
   &__title {
     color: $heading-font-color;
@@ -52,6 +52,7 @@ $category-color-4: #4035F4;
     line-height: 16px;
     text-transform: uppercase;
     margin-bottom: 32px;
+    white-space: nowrap;
   }
 
   &__categories {
@@ -64,6 +65,7 @@ $category-color-4: #4035F4;
     font-size: 14px;
     line-height: 16px;
     color: #6D778D;
+    white-space: nowrap;
 
     &-color {
       width: 32px;
@@ -149,7 +151,8 @@ $category-color-4: #4035F4;
       flex: 1;
 
       &--yaxis {
-        flex: 0.6;
+        max-width: 65px;
+        width: 65px;
       }
     }
 
@@ -168,6 +171,45 @@ $category-color-4: #4035F4;
       &--xaxis, &--yaxis {
         color: #ffffff;
         font-size: 12px;
+      }
+    }
+  }
+
+  &--flip {
+    #{$this}__panel {
+      display: block;
+
+      &-left {
+        display: flex;
+        max-width: 100%;
+        margin-bottom: 32px;
+      }
+    }
+
+    #{$this}__categories {
+      flex-direction: row-reverse;
+    }
+
+    #{$this}__category {
+      margin: 0 32px 0 0;
+    }
+
+    #{$this}__ratio {
+      margin: 0 32px 0 0;
+    }
+
+    #{$this}-chart {
+      &__vertical-caption {
+        right: initial;
+        top: initial;
+        left: 0;
+        bottom: 44px;
+        transform-origin: left top;
+      }
+
+      &__horizontal-caption {
+        right: initial;
+        left: 80px;
       }
     }
   }
