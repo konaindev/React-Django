@@ -1,0 +1,38 @@
+@import "../../../css/variables.scss";
+
+.estimated-population {
+  border: $panel-border;
+  border-radius: $panel-border-radius;
+  background-color: $panel-background-color;
+  box-shadow: $panel-box-shadow;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 80px;
+  align-self: stretch;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  &__title {
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    line-height: 15px;
+    margin-bottom: 11px;
+    text-transform: uppercase;
+  }
+
+  &__figure {
+    font-family: 'formular-mono';
+    font-size: 62px;
+    letter-spacing: -2px;
+    line-height: 76px;
+    margin-bottom: 16px;
+  }
+
+  &__text {
+    font-size: 14px;
+    line-height: 24px;
+  }
+}
