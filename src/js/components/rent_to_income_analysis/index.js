@@ -41,6 +41,12 @@ export const RentToIncomeAnalysis = ({
       </div>
       <div className="rent-to-income-analysis__panel-right">
         <div className="rent-to-income-analysis-chart">
+          <div className="rent-to-income-analysis-chart__vertical-caption">
+            Monthly Rental (USD)
+          </div>
+          <div className="rent-to-income-analysis-chart__horizontal-caption">
+            Annual Income (USD)
+          </div>
           <div className="rent-to-income-analysis-chart__body">
             <div className="rent-to-income-analysis-chart__group rent-to-income-analysis-chart__group--yaxis">
               <div className="rent-to-income-analysis-chart__cell">{' '}</div>
@@ -54,7 +60,7 @@ export const RentToIncomeAnalysis = ({
             </div>
             {data.map((group, groupIndex) => (
               <div key={groupIndex} className="rent-to-income-analysis-chart__group">
-                <div className="rent-to-income-analysis-chart__cell">
+                <div className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--xaxis">
                   {formatCurrencyShorthand(incomes[groupIndex])}
                 </div>
                 {group.map((rate, rateIndex) => (
