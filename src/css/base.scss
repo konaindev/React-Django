@@ -1,6 +1,6 @@
 // This file contains all our site-wide variables and defaults,
 // but no components. main.scss derives from this and includes
-// extras. If you're importing from a component-specific SCSS
+// extra definitions. If you're importing from a component-specific SCSS
 // file, this is the one you want to import.
 
 @import "./normalize.scss";
