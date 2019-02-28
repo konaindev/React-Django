@@ -9,8 +9,8 @@ $header-link-color: $blue-light;
     align-items: center;
     justify-content: space-between;
 
-    padding: $spacing-8;
-    height: $spacing-16;
+    padding: $s8;
+    height: $s16;
     width: 100%;
 
     background-color: $header-bg-color;
@@ -34,8 +34,8 @@ $header-link-color: $blue-light;
     display: block;
     position: absolute;
     bottom: 0;
-    height: $spacing-16;
-    padding: $spacing-4;
+    height: $s16;
+    padding: $s4;
     width: 100%;
     font-size: $text-sm;
     text-align: center;
@@ -49,7 +49,7 @@ $header-link-color: $blue-light;
 
 // the inner content container
 .k-inner {
-    padding: $spacing-16;
+    padding: $s16;
 }
 
 .k-rectangle {
@@ -63,7 +63,7 @@ $header-link-color: $blue-light;
     border-spacing: 0 0.5em;
 
     tr > th {
-        padding: $spacing-2;
+        padding: $s2;
         font-family: $font-sans;
         font-weight: $weight-normal;
         text-align: right;
@@ -74,7 +74,7 @@ $header-link-color: $blue-light;
     }
 
     tr > td {
-        padding: $spacing-2;
+        padding: $s2;
         font-family: $font-mono;
         text-align: right;
     }
@@ -90,9 +90,9 @@ $header-link-color: $blue-light;
 
 .k-funnel-label {
     /* container for layout (matching row height) */
-    height: $spacing-24;
-    margin-top: $spacing-8;
-    margin-bottom: -$spacing-4;
+    height: $s24;
+    margin-top: $s8;
+    margin-bottom: -$s4;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -101,7 +101,7 @@ $header-link-color: $blue-light;
 
 .k-funnel-label > div:first-child {
     /* rounded corner container */
-    height: $spacing-24;
+    height: $s24;
     width: 100%;
     border-radius: $border-radius-lg;
     border: solid 1px $bluegray-dark;
@@ -112,7 +112,7 @@ $header-link-color: $blue-light;
 }
 
 .k-funnel-label > div:last-child {
-    padding-top: $spacing-2;
+    padding-top: $s2;
 }
 
 .k-funnel-label > div:first-child > div {
@@ -135,21 +135,20 @@ $header-link-color: $blue-light;
 
 .k-tabs-container {
     padding: 0;
-    margin-top: $spacing-12;
-    margin-bottom: $spacing-8;
+    margin-top: $s12;
+    margin-bottom: $s8;
 
     ul {
         display: inline-block;
         text-align: center;
         list-style-position: inside;
-        margin-left: -$spacing-4;
+        margin-left: -$s4;
 
         li {
             cursor: pointer;
             display: inline-block;
-            margin-left: $spacing-4;
-            margin-right: $spacing-4;
-            padding-bottom: $spacing-4;
+            margin: 0 $s4;
+            padding-bottom: $s4;
             color: $default-ui-text-color;
         }
 
@@ -169,9 +168,8 @@ $header-link-color: $blue-light;
     color: $default-text-color;
     background-color: $alt-default-background-color;
     border-radius: $border-radius-lg;
-    margin-left: $spacing-16;
-    margin-right: $spacing-16;
-    padding: $spacing-2;
+    margin: 0 $s16;
+    padding: $s2;
 
     a {
         color: $default-text-color;
@@ -180,18 +178,15 @@ $header-link-color: $blue-light;
     .k-form-container-inner {
         font-size: $text-lg;
         line-height: $line-height-normal;
-        padding-left: $spacing-6;
-        padding-right: $spacing-6;
-        padding-top: $spacing-2;
-        padding-bottom: $spacing-6;
+        padding: $s2 $s6 $s6 $s6;
         border-radius: $border-radius-lg;
         border: solid 4px $bluegray-darkest;
     }
 
     .k-form-messages {
         line-height: $line-height-normal;
-        padding-top: $spacing-6;
-        padding-bottom: $spacing-4;
+        padding-top: $s6;
+        padding-bottom: $s4;
     }
 
     .k-form-fields {
@@ -201,8 +196,7 @@ $header-link-color: $blue-light;
     .k-form-field {
         display: flex;
         width: 100%;
-        margin-top: $spacing-4;
-        margin-bottom: $spacing-4;
+        margin: $s4 0;
 
         label {
             width: 20%;
@@ -214,8 +208,8 @@ $header-link-color: $blue-light;
     }
 
     .k-form-actions {
-        margin-top: $spacing-8;
-        margin-bottom: $spacing-4;
+        margin-top: $s8;
+        margin-bottom: $s4;
 
         ul {
             display: flex;

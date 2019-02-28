@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import "./header.scss";
 
 // TODO figure out how this relates to navigation.
 export default class Header extends Component {
@@ -10,12 +11,12 @@ export default class Header extends Component {
 
   render() {
     const navSection = this.props.navigationItems ? (
-      <nav className="float-right pr-4 h-16">{this.props.navigationItems}</nav>
+      <nav className="nav-items">{this.props.navigationItems}</nav>
     ) : null;
 
     return (
-      <div id="foobar">
-        <header className="text-headline bg-remark-ui-darkest h-16 p-4 leading-tight">
+      <div className="remarkably-header-container">
+        <header className="remarkably-header">
           {navSection}
           <h2>Remarkably</h2>
         </header>

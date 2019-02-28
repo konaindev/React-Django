@@ -13,7 +13,7 @@ export default class ProjectPage extends Component {
   renderPeriodLinks(periods) {
     return periods.map(period => (
       <li key={period.url}>
-        <a href={period.url} className="text-remark-ui-text-light">
+        <a href={period.url} className="period-link">
           {period.description}
         </a>
       </li>
@@ -22,9 +22,9 @@ export default class ProjectPage extends Component {
 
   renderSection(section) {
     return (
-      <div className="p-8">
+      <div className="report-section">
         <h2>{section.name}</h2>
-        <ul className="py-4 leading-normal">
+        <ul className="period-links">
           {this.renderPeriodLinks(section.periods)}
         </ul>
       </div>
@@ -45,7 +45,7 @@ export default class ProjectPage extends Component {
     );
 
     return (
-      <div className="page">
+      <div className="page project-page">
         <Header navigationItems={navigationItems}>
           <div>{this.renderSections(this.props.report_links)}</div>
         </Header>

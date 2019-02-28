@@ -107,20 +107,20 @@ $weight-black: 900;
 // Various visual variables
 //----------------------------------------------------------
 
-$spacing-0: 0;
-$spacing-1: 0.25rem;
-$spacing-2: 0.5rem;
-$spacing-3: 0.75rem;
-$spacing-4: 1rem;
-$spacing-5: 1.25rem;
-$spacing-6: 1.5rem;
-$spacing-8: 2rem;
-$spacing-10: 2.5rem;
-$spacing-12: 3rem;
-$spacing-16: 4rem;
-$spacing-20: 5rem;
-$spacing-24: 6rem;
-$spacing-32: 8rem;
+$s0: 0;
+$s1: 0.25rem;
+$s2: 0.5rem;
+$s3: 0.75rem;
+$s4: 1rem;
+$s5: 1.25rem;
+$s6: 1.5rem;
+$s8: 2rem;
+$s10: 2.5rem;
+$s12: 3rem;
+$s16: 4rem;
+$s20: 5rem;
+$s24: 6rem;
+$s32: 8rem;
 
 $border-radius-none: 0;
 $border-radius-sm: 0.125rem;
@@ -131,6 +131,10 @@ $border-radius-full: 9999px;
 //----------------------------------------------------------
 // Panels
 //----------------------------------------------------------
+
+// TODO this will become a mess quickly if we don't break it out
+// some of it might apply site-wide, and belong in something like panels.scss;
+// some of it seems component-specific. DDave
 
 // Variables common to all visualization panels
 
@@ -153,7 +157,7 @@ $lighter-background-color: $bluegray-lighter;
 $alt-lighter-background-color: $blue-alt;
 $lightest-background-color: $bluegray-lightest;
 $default-text-color: $blue-light;
-$default-ui-text-color: $bluegray-light;
+$default-ui-text-color: #ccc;
 $lighter-ui-text-color: $bluegray-lighter;
 $lightest-ui-text-color: $bluegray-lightest;
 $kpi-font-color: $white;

@@ -1,0 +1,15 @@
+@import "css/base.scss";
+
+.remarkably-header {
+    background-color: $bluegray-darkest;
+    font-family: $font-headline;
+    height: $s16;
+    padding: $s4;
+    line-height: $line-height-tight;
+}
+
+.remarkably-header .nav-items {
+    float: right;
+    padding-right: $s4;
+    height: $s16;
+}
