@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import withFormatters from '../with_formatters';
+import withFormatters from "../with_formatters";
 import {
   formatMultiple,
   formatPercent,
@@ -10,7 +10,7 @@ import {
   formatCurrency,
   formatCurrencyShorthand,
   formatDate
-} from '../../utils/formatters';
+} from "../../utils/formatters";
 
 /**
  * @class SmallBoxLayout
@@ -30,7 +30,7 @@ class SmallBoxLayout extends Component {
 
   render() {
     return (
-      <div className="flex flex-row h-full my-4 py-6 k-rectangle">
+      <div className="flex flex-row h-full my-4 py-6 panel-rounded-rect">
         {/* Container for the label and detail text */}
         <div className="flex flex-col flex-auto justify-between">
           <span className="text-remark-ui-text-light text-base pl-8">

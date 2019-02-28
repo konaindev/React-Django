@@ -13,6 +13,8 @@ import {
   FunnelCurrencyBox
 } from "../funnel_box_layout";
 
+import "./acquisition_funnel_report.scss";
+
 /**
  * @class AcqusitionFunnelReport
  *
@@ -60,22 +62,20 @@ export default class AcquisitionFunnelReport extends Component {
    */
   static FunnelTable = ({ header, content }) => {
     return (
-      <div className="flex flex-row flex-grow items-stretch pt-8">
-        <div className="w-1/6">{header}</div>
-        <div className="w-5/6 flex flex-row flex-grow items-stretch">
-          {content}
-        </div>
+      <div className="acquisition-funnel-table">
+        <div className="header-container">{header}</div>
+        <div className="content-container">{content}</div>
       </div>
     );
   };
 
   static FunnelHeaderBox = ({ number, name, more }) => {
     return (
-      <div className="k-funnel-label">
-        <div className={`bg-remark-funnel-${number}`}>
+      <div className="acquisition-funnel-label">
+        <div className={`name-${number}`}>
           <div>{name}</div>
         </div>
-        <div className={`text-remark-funnel-${number + 1}`}>
+        <div className={`arrow-${number + 1}`}>
           {more ? "↓" : <span>&nbsp;</span>}
         </div>
       </div>

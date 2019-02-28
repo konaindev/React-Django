@@ -6,6 +6,7 @@ import { NavigationItems, ProjectNavigationItem } from "../navigation";
 import ProjectTabs from "../project_tabs";
 
 import Report from "../report";
+import "./report_page.scss";
 
 /**
  * @description The full landing page for a single project report
@@ -29,7 +30,7 @@ export default class ReportPage extends Component {
     );
 
     return (
-      <div className="page">
+      <div className="page report-page">
         <Header navigationItems={navigationItems}>
           <>
             <ProjectTabs

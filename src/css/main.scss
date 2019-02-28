@@ -1,10 +1,57 @@
 @import "./base.scss";
 
-// The app-wide site header
+//-----------------------------------------------------------------------------
+// Utility Classes (for all pages, content and react)
+//-----------------------------------------------------------------------------
+
+// A very subtle divider
+.horizontal-divider {
+    border-bottom: solid 1px #586073;
+    opacity: 0.18;
+}
+
+// The typical background and shadowing of a panel
+.panel-rounded-rect {
+    background-color: $bluegray-dark;
+    border: solid 1px $bluegray-dark;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+}
+
+//
+// TODO MOVE ME
+//
+
+.k-report-table {
+    border-collapse: separate;
+    border-spacing: 0 0.5em;
+
+    tr > th {
+        padding: $s2;
+        font-family: $font-sans;
+        font-weight: $weight-normal;
+        text-align: right;
+
+        &:first-child {
+            text-align: left;
+        }
+    }
+
+    tr > td {
+        padding: $s2;
+        font-family: $font-mono;
+        text-align: right;
+    }
+}
+
+//-----------------------------------------------------------------------------
+// Content Page Classes (for non-react-rooted pages)
+//-----------------------------------------------------------------------------
+
+// The app-wide site header for *content* pages (see web/content.html and web/header.html)
 $header-bg-color: $blue;
 $header-link-color: $blue-light;
 
-.k-header {
+.content-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -30,7 +77,7 @@ $header-link-color: $blue-light;
     }
 }
 
-.k-footer {
+.content-footer {
     display: block;
     position: absolute;
     bottom: 0;
@@ -42,129 +89,18 @@ $header-link-color: $blue-light;
 }
 
 // the outer content container
-.k-outer {
+.content-outer {
     margin: 0 auto;
     max-width: 70rem;
 }
 
 // the inner content container
-.k-inner {
+.content-inner {
     padding: $s16;
 }
 
-.k-rectangle {
-    background-color: $bluegray-dark;
-    border: solid 1px $bluegray-dark;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
-}
-
-.k-report-table {
-    border-collapse: separate;
-    border-spacing: 0 0.5em;
-
-    tr > th {
-        padding: $s2;
-        font-family: $font-sans;
-        font-weight: $weight-normal;
-        text-align: right;
-
-        &:first-child {
-            text-align: left;
-        }
-    }
-
-    tr > td {
-        padding: $s2;
-        font-family: $font-mono;
-        text-align: right;
-    }
-}
-
-.k-dropdown {
-    /* custom styled dropdown */
-    margin: 0;
-    padding: 0;
-    background: transparent;
-    color: $default-text-color;
-}
-
-.k-funnel-label {
-    /* container for layout (matching row height) */
-    height: $s24;
-    margin-top: $s8;
-    margin-bottom: -$s4;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: none;
-}
-
-.k-funnel-label > div:first-child {
-    /* rounded corner container */
-    height: $s24;
-    width: 100%;
-    border-radius: $border-radius-lg;
-    border: solid 1px $bluegray-dark;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
-}
-
-.k-funnel-label > div:last-child {
-    padding-top: $s2;
-}
-
-.k-funnel-label > div:first-child > div {
-    /* label text */
-    text-align: center;
-    width: 100%;
-}
-
-.k-divider {
-    border-bottom: solid 1px #586073;
-    opacity: 0.18;
-}
-
-.k-pin-above-top {
-    margin: 0;
-    padding: 0;
-    position: relative;
-    top: -1px;
-}
-
-.k-tabs-container {
-    padding: 0;
-    margin-top: $s12;
-    margin-bottom: $s8;
-
-    ul {
-        display: inline-block;
-        text-align: center;
-        list-style-position: inside;
-        margin-left: -$s4;
-
-        li {
-            cursor: pointer;
-            display: inline-block;
-            margin: 0 $s4;
-            padding-bottom: $s4;
-            color: $default-ui-text-color;
-        }
-
-        li.selected {
-            color: $lightest-ui-text-color;
-            border-bottom: solid 1px #3188ff;
-        }
-
-        li:hover {
-            color: $default-ui-text-color;
-        }
-    }
-}
-
 // a default form presentation
-.k-form-container {
+.content-form-container {
     color: $default-text-color;
     background-color: $alt-default-background-color;
     border-radius: $border-radius-lg;
@@ -175,7 +111,7 @@ $header-link-color: $blue-light;
         color: $default-text-color;
     }
 
-    .k-form-container-inner {
+    .content-form-container-inner {
         font-size: $text-lg;
         line-height: $line-height-normal;
         padding: $s2 $s6 $s6 $s6;
@@ -183,17 +119,17 @@ $header-link-color: $blue-light;
         border: solid 4px $bluegray-darkest;
     }
 
-    .k-form-messages {
+    .content-form-messages {
         line-height: $line-height-normal;
         padding-top: $s6;
         padding-bottom: $s4;
     }
 
-    .k-form-fields {
+    .content-form-fields {
         line-height: $line-height-loose;
     }
 
-    .k-form-field {
+    .content-form-field {
         display: flex;
         width: 100%;
         margin: $s4 0;
@@ -207,7 +143,7 @@ $header-link-color: $blue-light;
         }
     }
 
-    .k-form-actions {
+    .content-form-actions {
         margin-top: $s8;
         margin-bottom: $s4;
 
@@ -221,7 +157,7 @@ $header-link-color: $blue-light;
         }
     }
 
-    .k-form-extras {
+    .content-form-extras {
         font-size: $text-sm;
         color: $gray-dark;
 

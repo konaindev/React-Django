@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import "./report_span_dropdown.scss";
 
 /**
  * @description A dropdown menu that lets us change the visible span.
@@ -34,12 +35,8 @@ export default class ReportSpanDropdown extends Component {
   render() {
     return (
       <>
-        <span
-          className="cursor-pointer inline-block align-middle mx-4 -my-4 px-4 py-2 rounded"
-          style={{ backgroundColor: "#232837" }}
-        >
+        <span className="report-span-dropdown">
           <select
-            className="k-dropdown"
             defaultValue={this.props.current_report_link.url}
             onChange={this.onChange}
           >

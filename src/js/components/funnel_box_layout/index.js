@@ -30,7 +30,7 @@ export class FunnelBoxLayout extends Component {
 
   render() {
     return (
-      <div className="flex flex-row h-24 my-2 py-6 k-rectangle">
+      <div className="flex flex-row h-24 my-2 py-6 panel-rounded-rect">
         {/* Container for the label and detail text */}
         <div className="flex flex-col flex-auto justify-between">
           <span className="text-remark-ui-text-light text-base pl-8">

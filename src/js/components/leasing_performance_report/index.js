@@ -17,6 +17,8 @@ import {
   formatTargetPercent
 } from "../../utils/formatters.js";
 
+import "./leasing_performance_report.scss";
+
 /**
  * @class LeasingPerformanceReport
  *

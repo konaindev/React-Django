@@ -28,6 +28,8 @@ import {
 } from "../../utils/formatters.js";
 import { remarkablyChartTheme } from "../../utils/victoryTheme.js";
 
+import "./campaign_investment_report.scss";
+
 /**
  * @class CampaignInvestmentReport
  *
@@ -113,7 +115,7 @@ export default class CampaignInvestmentReport extends Component {
     // render the bar chart
     return (
       <ReportSection name={name} horizontalPadding={false}>
-        <div className="k-rectangle p-4">
+        <div className="bar-chart panel-rounded-rect">
           <VictoryChart
             theme={remarkablyChartTheme}
             domain={{ y: [0, 1] }}
@@ -259,7 +261,10 @@ export default class CampaignInvestmentReport extends Component {
    */
   render() {
     return (
-      <ReportSection name="Campaign Investment">
+      <ReportSection
+        className="campaign-investment-report"
+        name="Campaign Investment"
+      >
         <CampaignInvestmentReport.HeadlineNumbers report={this.props.report} />
         <BoxRow>
           <CampaignInvestmentReport.Acquisition report={this.props.report} />

@@ -42,7 +42,7 @@ export class LargeBoxLayout extends Component {
 
   render() {
     return (
-      <div className="flex flex-col p-6 h-64 k-rectangle items-center text-center justify-center">
+      <div className="flex flex-col p-6 h-64 panel-rounded-rect items-center text-center justify-center">
         {/* Container for the content itself.
             Counter-intuitively items- and text- center the rows and row content
             while justif- centers the rows vertically within the box. */}
