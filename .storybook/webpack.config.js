@@ -5,7 +5,26 @@ module.exports = {
     rules: [
       {
         test: /\.(css|scss)$/,
-        loaders: ["style-loader", "css-loader", "sass-loader"],
+
+        use: [
+          {
+            loader: "style-loader"
+          },
+          {
+            loader: "css-loader"
+          },
+          {
+            loader: "resolve-url-loader"
+          },
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true,
+              sourceMapContents: false,
+              includePaths: [path.resolve(__dirname, "../src")]
+            }
+          }
+        ],
         include: path.resolve(__dirname, "../")
       },
       {

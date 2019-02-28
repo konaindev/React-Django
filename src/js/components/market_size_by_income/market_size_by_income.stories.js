@@ -1,10 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { linkTo } from '@storybook/addon-links';
-import MarketSizeByIncome from './index';
-import '../../../../dist/main.css'; // TODO: imported for loading fonts in storybook
+import { storiesOf } from "@storybook/react";
+import { action } from "@storybook/addon-actions";
+import { linkTo } from "@storybook/addon-links";
+import MarketSizeByIncome from "./index";
 
 const props = {
   income: "75000.00",
@@ -24,8 +23,8 @@ const props = {
   active_populations: ["renters.nonfamily"]
 };
 
-storiesOf('MarketSizeByIncome', module).add('default', () => (
-  <div style={{ width: 400, margin: '0 auto' }}>
+storiesOf("MarketSizeByIncome", module).add("default", () => (
+  <div style={{ width: 400, margin: "0 auto" }}>
     <MarketSizeByIncome {...props} />
   </div>
 ));
