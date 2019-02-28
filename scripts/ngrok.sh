@@ -12,7 +12,7 @@ killchildren() {
 }
 
 # Build our frontend assets
-yarn parcel watch src/js/index.js --no-hmr &
+yarn webpack --progress --color --hide-modules --config=webpack.dev.js --watch &
 
 # Run the django dev server (on 8000)
 ./manage.py runserver &

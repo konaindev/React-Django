@@ -15,8 +15,8 @@ killchildren() {
     kill -15 0
 }
 
-# TODO figure out how to convince parcel to watch a dependent file it may not know exists
-yarn parcel watch src/js/index.js --no-hmr --no-cache &
+# Build our frontend assets
+yarn webpack --progress --color --hide-modules --config=webpack.dev.js --watch &
 
 # Run the django dev server (on 8000)
 ./manage.py runserver &

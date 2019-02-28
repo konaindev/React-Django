@@ -4,7 +4,7 @@ import ReactDOM from "react-dom";
 /**
  * Import our master CSS to force our bundler to build it
  */
-import "../css/main.scss";
+import "css/main.scss";
 
 /*
  * Import all pages here.
