@@ -1,16 +1,14 @@
 @import "css/base.scss";
 
-.project-page {
-    .report-section {
-        padding: $s8;
+.report-section {
+    padding: $s8;
+}
 
-        .period-links {
-            line-height: $line-height-normal;
-            padding: $s4 0 $s4 $s10;
+.report-section .period-links {
+    line-height: $line-height-normal;
+    padding: $s4 0 $s4 $s10;
+}
 
-            .period-link {
-                color: $default-ui-text-color;
-            }
-        }
-    }
+.report-section .period-link {
+    color: $default-ui-text-color;
 }
