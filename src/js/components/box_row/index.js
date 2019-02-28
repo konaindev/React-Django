@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import cn from "classnames";
 
 import { equalWidthStyle } from "../../utils/style.js";
+import "./box_row.scss";
 
 /**
  * @class BoxRow
@@ -11,22 +13,22 @@ import { equalWidthStyle } from "../../utils/style.js";
  * @note This provides layout; it shouldn't concern itself with value semantics.
  */
 export default class BoxRow extends Component {
+  // TODO XXX FIXME externalMargin looks like a hack to me. -Dave
   static propTypes = { externalMargin: PropTypes.bool.isRequired };
 
   static defaultProps = { externalMargin: true };
 
   render() {
-    const baseClassNames = "flex flex-row flex-grow items-stretch";
-    const classNames = this.props.externalMargin
-      ? `${baseClassNames} -m-4`
-      : baseClassNames;
-
     return (
-      <div className={classNames}>
+      <div
+        className={cn("box-row", {
+          "external-margin": this.props.externalMargin
+        })}
+      >
         {this.props.children.map((child, i) => (
           <div
             key={i}
-            className="m-4"
+            className="child-wrapper"
             style={equalWidthStyle(this.props.children.length)}
           >
             {child}

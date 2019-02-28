@@ -12,6 +12,8 @@ import {
   formatDate
 } from "../../utils/formatters";
 
+import "./small_box_layout.scss";
+
 /**
  * @class SmallBoxLayout
  *
@@ -30,21 +32,15 @@ class SmallBoxLayout extends Component {
 
   render() {
     return (
-      <div className="flex flex-row h-full my-4 py-6 panel-rounded-rect">
+      <div className="small-box panel-rounded-rect">
         {/* Container for the label and detail text */}
-        <div className="flex flex-col flex-auto justify-between">
-          <span className="text-remark-ui-text-light text-base pl-8">
-            {this.props.name}
-          </span>
-          <span className="text-remark-ui-text text-sm pl-8 mt-2">
-            {this.props.detail}
-          </span>
+        <div className="small-box__labels">
+          <span className="small-box__labels__name">{this.props.name}</span>
+          <span className="small-box__labels__detail">{this.props.detail}</span>
         </div>
         {/* Container for the content itself */}
-        <div className="text-5xl flex flex-col leading-compressed justify-center content-center">
-          <div className="text-remark-ui-text-lightest font-hairline font-mono text-right pr-8">
-            {this.props.content}
-          </div>
+        <div className="small-box__outer-content">
+          <div className="small-box__inner-content">{this.props.content}</div>
         </div>
       </div>
     );

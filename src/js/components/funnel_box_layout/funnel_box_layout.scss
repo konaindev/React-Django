@@ -1,0 +1,45 @@
+@import "css/base.scss";
+
+.funnel-box {
+    display: flex;
+    flex-direction: row;
+    height: $s24;
+    margin: $s2 0;
+    padding: $s6 0;
+}
+
+.funnel-box__labels {
+    display: flex;
+    flex-direction: column;
+    flex: auto;
+    justify-content: space-between;
+}
+
+.funnel-box__labels__name {
+    color: $lighter-ui-text-color;
+    font-size: $text-base;
+    padding-left: $s8;
+}
+
+.funnel-box__labels__detail {
+    color: $default-ui-text-color;
+    font-size: $text-sm;
+    padding-left: $s8;
+}
+
+.funnel-box__outer-content {
+    display: flex;
+    flex-direction: column;
+    font-size: $text-4xl;
+    line-height: $line-height-compressed;
+    justify-content: center;
+    align-content: center;
+}
+
+.funnel-box__inner-content {
+    color: $lightest-ui-text-color;
+    font-weight: $weight-hairline;
+    font-family: $font-mono;
+    text-align: right;
+    padding-right: $s8;
+}

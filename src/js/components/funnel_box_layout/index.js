@@ -13,6 +13,8 @@ import {
 
 import withFormatters from "../with_formatters";
 
+import "./funnel_box_layout.scss";
+
 /**
  * @class FunnelBoxLayout
  *
@@ -30,21 +32,17 @@ export class FunnelBoxLayout extends Component {
 
   render() {
     return (
-      <div className="flex flex-row h-24 my-2 py-6 panel-rounded-rect">
+      <div className="funnel-box panel-rounded-rect">
         {/* Container for the label and detail text */}
-        <div className="flex flex-col flex-auto justify-between">
-          <span className="text-remark-ui-text-light text-base pl-8">
-            {this.props.name}
-          </span>
-          <span className="text-remark-ui-text text-sm pl-8">
+        <div className="funnel-box__labels">
+          <span className="funnel-box__labels__name">{this.props.name}</span>
+          <span className="funnel-box__labels__detail">
             {this.props.detail}
           </span>
         </div>
         {/* Container for the content itself */}
-        <div className="text-4xl flex flex-col leading-compressed justify-center content-center">
-          <div className="text-remark-ui-text-lightest font-hairline font-mono text-right pr-8">
-            {this.props.content}
-          </div>
+        <div className="funnel-box__outer-content">
+          <div className="funnel-box__inner-content">{this.props.content}</div>
         </div>
       </div>
     );

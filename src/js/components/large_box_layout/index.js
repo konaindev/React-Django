@@ -12,6 +12,8 @@ import {
   formatDate
 } from "../../utils/formatters";
 
+import "./large_box_layout.scss";
+
 /**
  * @class LargeBoxLayout
  *
@@ -32,9 +34,7 @@ export class LargeBoxLayout extends Component {
 
   renderInnerBox() {
     return this.props.innerBox ? (
-      <div className="w-48 h-48 bg-transparent overflow-hidden">
-        {this.props.innerBox}
-      </div>
+      <div className="large-box__inner-box">{this.props.innerBox}</div>
     ) : (
       <></>
     );
@@ -42,23 +42,17 @@ export class LargeBoxLayout extends Component {
 
   render() {
     return (
-      <div className="flex flex-col p-6 h-64 panel-rounded-rect items-center text-center justify-center">
+      <div className="large-box panel-rounded-rect">
         {/* Container for the content itself.
             Counter-intuitively items- and text- center the rows and row content
             while justif- centers the rows vertically within the box. */}
-        <span className="text-remark-ui-text-light text-base">
-          {this.props.name}
-        </span>
-        <div className="flex items-center text-center justify-center">
-          <span className="text-remark-ui-text-lightest font-mono text-6xl font-hairline py-2 w-full">
-            {this.props.content}
-          </span>
+        <span className="large-box__name">{this.props.name}</span>
+        <div className="large-box__outer-content">
+          <span className="large-box__inner-content">{this.props.content}</span>
           {this.renderInnerBox()}
         </div>
-        <span className="text-remark-ui-text text-sm">{this.props.detail}</span>
-        <span className="text-remark-ui-text text-sm">
-          {this.props.detail2}
-        </span>
+        <span className="large-box__detail">{this.props.detail}</span>
+        <span className="large-box__detail">{this.props.detail2}</span>
       </div>
     );
   }

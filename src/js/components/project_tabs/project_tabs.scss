@@ -18,7 +18,7 @@
     display: inline-block;
     margin: 0 $s4;
     padding-bottom: $s4;
-    color: $default-ui-text-color;
+    color: $lighter-ui-text-color;
 }
 
 .project-tabs li.selected {
@@ -27,7 +27,7 @@
 }
 
 .project-tabs li:hover {
-    color: $default-ui-text-color;
+    color: $white;
 }
 
 .project-tabs .rightmost {

@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import cn from "classnames";
+
+import "./delta_layout.scss";
 
 /**
  * @class DeltaLayout
@@ -43,28 +46,29 @@ export default class DeltaLayout extends Component {
       this.props.direction > 0 ? "▲" : this.props.direction < 0 ? "▼" : "▶";
     const deltaColor =
       this.props.direction > 0
-        ? "text-remark-trend-up"
+        ? "trend-up"
         : this.props.direction < 0
-        ? "text-remark-trend-down"
-        : "text-remark-trend-flat";
+        ? "trend-down"
+        : "trend-flat";
+    const arrowClass = cn(deltaColor, "delta-layout__arrow");
 
     const deltaSection =
       this.props.delta == null ? (
         <>
-          <span className={`${deltaColor} pl-2 pr-1`}>&nbsp;</span>
-          <span className="text-remark-ui-text">&nbsp;</span>
+          <span className={arrowClass}>&nbsp;</span>
+          <span className="delta-layout__delta">&nbsp;</span>
         </>
       ) : (
         <>
-          <span className={`${deltaColor} pl-2 pr-1`}>{deltaArrow}</span>
-          <span className="text-remark-ui-text">{this.props.delta}</span>
+          <span className={arrowClass}>{deltaArrow}</span>
+          <span className="delta-layout__delta">{this.props.delta}</span>
         </>
       );
 
     return (
-      <span className="flex flex-col leading-tight">
+      <span className="delta-layout">
         <span>{this.props.value}</span>
-        <span className="text-base">{deltaSection}</span>
+        <span className="delta-layout__section">{deltaSection}</span>
       </span>
     );
   }

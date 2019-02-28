@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import "./box_column.scss";
+
 /**
  * @class BoxColumn
  *
@@ -13,7 +15,7 @@ export default class BoxColumn extends Component {
     return (
       <>
         {this.props.children.map((child, i) => (
-          <div key={i} className="flex flex-col">
+          <div key={i} className="box-column__child-wrapper">
             {child}
           </div>
         ))}

@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import cn from "classnames";
+
+import "./report_section.scss";
 
 /**
  * @class ReportSection
@@ -15,18 +18,19 @@ export default class ReportSection extends Component {
   };
 
   static defaultProps = {
+    // TODO this prop looks like a hack
     horizontalPadding: true
   };
 
   render() {
-    const className = this.props.horizontalPadding ? "p-8" : "py-8";
-
     return (
-      <div className={className}>
-        <span className="mx-4 text-remark-ui-text uppercase block tracking-wide">
-          {this.props.name}
-        </span>
-        <hr className="k-divider mt-8 mb-12 mx-0" />
+      <div
+        className={cn("report-section", {
+          "horizontal-padding": this.props.horizontalPadding
+        })}
+      >
+        <span className="report-section__name">{this.props.name}</span>
+        <hr className="horizontal-divider report-section__divider" />
         {this.props.children}
       </div>
     );
