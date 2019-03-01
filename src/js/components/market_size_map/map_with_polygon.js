@@ -13,13 +13,15 @@ export class MapWithPolygon extends Component {
 }
 
 MapWithPolygon.propTypes = {
-  zip_codes: PropTypes.arrayOf({
-    zip: PropTypes.string.isRequired,
-    outline: PropTypes.shape({
-      type: PropTypes.string,
-      coordinates: PropTypes.array,
+  zip_codes: PropTypes.arrayOf(
+    PropTypes.shape({
+      zip: PropTypes.string.isRequired,
+      outline: PropTypes.shape({
+        type: PropTypes.string,
+        coordinates: PropTypes.array,
+      })
     })
-  }).isRequired,
+  ).isRequired,
 };
 
 export default MapWithPolygon;
