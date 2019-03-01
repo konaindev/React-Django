@@ -3,6 +3,9 @@ import datetime
 from .periods import ComputedPeriod
 
 
+# TODO this should be considered temporary/scratch code
+
+
 class WhiskerSeries:
     """
     Utility class for generating a named time series used in a whisker plot.
