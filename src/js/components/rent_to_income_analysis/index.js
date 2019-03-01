@@ -16,7 +16,7 @@ export const RentToIncomeAnalysis = ({
   rental_rates,
   data
 }) => {
-  const flipMode = ncomes.length >= THREASHOLD_COLUMNS;
+  const flipMode = incomes.length >= THREASHOLD_COLUMNS;
   return (
     <div
       className={cn('rent-to-income-analysis', {
