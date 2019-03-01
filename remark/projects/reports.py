@@ -7,6 +7,10 @@ from .whiskers import WhiskerSeries
 
 # Map from our internal flat values structure to the outward
 # schema defined in BaslineReport.ts, etc, and expected props.
+#
+# CONSIDER stuff like this makes the mismatch between our backend
+# very flat storage and our frontend visualization needs painfully
+# apparent. Does it always need to be thus? -Dave
 SCHEMA_MAP = {
     "property": {
         "monthly_average_rent": "monthly_average_rent",
@@ -89,26 +93,36 @@ def recursive_map(d, fn):
     on each leaf value.
     """
 
-    def _map(target, source):
-        if isinstance(source, dict):
-            mapped_value = recursive_map(source, fn)
+    def _map(name, value):
+        if isinstance(value, dict):
+            mapped_value = recursive_map(value, fn)
         else:
-            mapped_value = fn(source)
+            mapped_value = fn(value)
         return mapped_value
 
-    return {target: _map(target, source) for target, source in d.items()}
+    return {name: _map(name, value) for name, value in d.items()}
 
 
+# Map from our internal flat target_* values structure to the outward
+# schema defined in BaslineReport.ts, etc, and expected props.
 TARGET_SCHEMA_MAP = recursive_map(SCHEMA_MAP, lambda source: f"target_{source}")
 
 
 def unflatten(schema_map, flat):
-    """Take a flattened period dictionary and explode it out into a schema."""
+    """
+    Take a flattened period dictionary and explode it out into a schema.
+
+    If a value is not found, raise an exception.    
+    """
     return recursive_map(schema_map, lambda source: flat[source])
 
 
 def unflatten_none(schema_map, flat):
-    """Take a flattened period dictionary and explode it out into a schema."""
+    """
+    Take a flattened period dictionary and explode it out into a schema.
+    
+    If a value is not found, replace it with None
+    """
     return recursive_map(schema_map, lambda source: flat.get(source, None))
 
 
