@@ -14,20 +14,23 @@ class WhiskerSeries:
     # This is primarily used for performance; we can kill it if it's annoying.
     # TODO can we generate this automagically in the future? -Dave
     WHISKER_METRICS = {
-        "leased_rate": [
+        ("leased_rate", "leased_rate"): [
             "leased_units_start",
             "occupiable_units_start",
             "leases_executed",
             "leases_ended",
         ],
-        "renewal_rate": ["lease_renewal_notices", "leases_due_to_expire"],
-        "occupancy_rate": [
+        ("renewal_rate", "renewal_rate"): [
+            "lease_renewal_notices",
+            "leases_due_to_expire",
+        ],
+        ("occupancy_rate", "occupancy_rate"): [
             "occupied_units_start",
             "move_ins",
             "move_outs",
             "occupiable_units_start",
         ],
-        "investment": [
+        ("investment", "investment"): [
             "acq_reputation_building",
             "acq_demand_creation",
             "acq_leasing_enablement",
@@ -37,9 +40,9 @@ class WhiskerSeries:
             "ret_leasing_enablement",
             "ret_market_intelligence",
         ],
-        "usv_exe_perc": ["leases_executed", "usvs"],
-        "lease_cd_rate": ["lease_cds", "lease_applications"],
-        "cost_per_exe_vs_monthly_average_rent": [
+        ("usv_exe_perc", "usv_exe"): ["leases_executed", "usvs"],
+        ("lease_cd_rate", "lease_cd_rate"): ["lease_cds", "lease_applications"],
+        ("cost_per_exe_vs_monthly_average_rent", "cost_per_exe_vs_rent"): [
             "acq_reputation_building",
             "acq_demand_creation",
             "acq_leasing_enablement",
@@ -53,7 +56,7 @@ class WhiskerSeries:
         set(
             [
                 source_metric
-                for target_metric, source_metrics in WHISKER_METRICS.items()
+                for _, source_metrics in WHISKER_METRICS.items()
                 for source_metric in source_metrics
             ]
         )
@@ -79,11 +82,11 @@ class WhiskerSeries:
             and whisker_period.get_end() <= end
         ]
         weekly_series = {
-            target_metric: [
-                getattr(computed_period, target_metric)
+            public_target: [
+                getattr(computed_period, attr_target_metric)
                 for computed_period in computed_periods
             ]
-            for target_metric in cls.WHISKER_METRICS.keys()
+            for attr_target_metric, public_target in cls.WHISKER_METRICS.keys()
         }
         return weekly_series
 
