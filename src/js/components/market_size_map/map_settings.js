@@ -1,3 +1,5 @@
+export const GOOGLE_MAP_API_KEY = 'AIzaSyBu4HU8t3rRXnfdkNjSV1_PIhzzrFFlVTs';
+
 export const stylesForNightMode = [
   {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
   {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
