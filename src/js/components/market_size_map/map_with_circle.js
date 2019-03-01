@@ -29,6 +29,9 @@ export class MapWithCircle extends Component {
       radius,
     } = this.props;
 
+    const centerLatLng = new maps.LatLng(lat, lng);
+    const radiusInMeter = radius * 1609.34;
+
     let circle = new maps.Circle({
       strokeColor: '#5147FF',
       strokeOpacity: 1,
@@ -36,23 +39,56 @@ export class MapWithCircle extends Component {
       fillColor: '#6760e6',  // rgba(103,96,230,0.1);
       fillOpacity: 0.1,
       map: map,
-      center: { lat, lng },
-      radius: radius * 1609.34
+      center: centerLatLng,
+      radius: radiusInMeter
     })
+    // map.fitBounds(circle.getBounds());
 
     let centerMarker = new maps.Marker({
-      position: { lat, lng },
+      position: centerLatLng,
       map: map,
       icon: {
         path: maps.SymbolPath.CIRCLE,
-        scale: 8,
+        scale: 6,
         fillColor: "#FFF",
         fillOpacity: 1,
         strokeOpacity: 0,
       }
     })
 
-    // map.fitBounds(circle.getBounds());
+    const pointOnBorderLatLng = maps.geometry.spherical.computeOffset(centerLatLng, radiusInMeter, 135)
+    // const pointOnMiddle = maps.geometry.spherical.computeOffset(centerLatLng, radiusInMeter / 2, 135)
+
+    let borderMarker = new maps.Marker({
+      position: pointOnBorderLatLng,
+      map: map,
+      icon: {
+        path: maps.SymbolPath.CIRCLE,
+        scale: 6,
+        fillColor: '#FFF',
+        fillOpacity: 1,
+        strokeOpacity: 0,
+      }
+    })
+
+    const dashedLineSymbol = {
+      path: 'M 0,-1 0,1',
+      strokeOpacity: 1,
+      strokeWidth: 0.77,
+      scale: 1
+    };
+
+    const line = new google.maps.Polyline({
+      path: [ centerLatLng, pointOnBorderLatLng ],
+      map: map,
+      strokeColor: '#FFF',
+      strokeOpacity: 0,
+      icons: [{
+        icon: dashedLineSymbol,
+        offset: '0',
+        repeat: '6px'
+      }],
+    });
   }
 
   getCircle(center, radius) {
