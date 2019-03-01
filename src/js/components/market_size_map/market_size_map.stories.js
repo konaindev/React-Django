@@ -36,7 +36,7 @@ storiesOf('MarketSizeMap', module).add('default', () => (
       <MarketSizeMap {...props_radius} />
     </div>
     <div style={{ width: 870, margin: '80px auto' }}>
-      <MarketSizeMap {...props_radius} />
+      <MarketSizeMap {...props_zips} />
     </div>
   </Fragment>
 ));
