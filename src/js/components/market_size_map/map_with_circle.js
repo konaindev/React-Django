@@ -12,10 +12,22 @@ function createMapOptions(maps) {
   };
 }
 
+const CircleRadiusLabel = function({ radius, units }) {
+  return (
+    <div className="circle-radius-label">
+      {`${radius} ${units}`}
+    </div>
+  )
+}
+
 export class MapWithCircle extends Component {
 
   constructor(props) {
     super(props);
+
+    this.state = {
+      textPositionLatLng: null
+    };
   }
 
   onGoogleApiLoaded = ({ map, maps }) => {
@@ -41,7 +53,7 @@ export class MapWithCircle extends Component {
       map: map,
       center: centerLatLng,
       radius: radiusInMeter
-    })
+    });
     // map.fitBounds(circle.getBounds());
 
     let centerMarker = new maps.Marker({
@@ -49,27 +61,31 @@ export class MapWithCircle extends Component {
       map: map,
       icon: {
         path: maps.SymbolPath.CIRCLE,
-        scale: 6,
+        scale: 8,
         fillColor: "#FFF",
         fillOpacity: 1,
         strokeOpacity: 0,
       }
-    })
+    });
 
-    const pointOnBorderLatLng = maps.geometry.spherical.computeOffset(centerLatLng, radiusInMeter, 135)
-    // const pointOnMiddle = maps.geometry.spherical.computeOffset(centerLatLng, radiusInMeter / 2, 135)
+    const pointOnBorderLatLng = maps.geometry.spherical.computeOffset(centerLatLng, radiusInMeter, 135);
+    const pointOnMiddleLatLng = maps.geometry.spherical.computeOffset(centerLatLng, radiusInMeter / 2, 135);
+
+    this.setState({
+      textPositionLatLng: pointOnMiddleLatLng
+    });
 
     let borderMarker = new maps.Marker({
       position: pointOnBorderLatLng,
       map: map,
       icon: {
         path: maps.SymbolPath.CIRCLE,
-        scale: 6,
+        scale: 8,
         fillColor: '#FFF',
         fillOpacity: 1,
         strokeOpacity: 0,
       }
-    })
+    });
 
     const dashedLineSymbol = {
       path: 'M 0,-1 0,1',
@@ -108,20 +124,26 @@ export class MapWithCircle extends Component {
       units,
     } = this.props;
 
-    const centerLatLng = { lat, lng };
-    // const circle = this.getCircle(centerLatLng, radius);
-    // console.log('*******', circle)
+    const { textPositionLatLng } = this.state;
 
     return (
       <div className="market-size-map">
         <GoogleMap
           bootstrapURLKeys={{ key: GOOGLE_MAP_API_KEY }}
-          center={centerLatLng}
+          center={{ lat, lng }}
           zoom={12}
           options={createMapOptions}
           yesIWantToUseGoogleMapApiInternals={true}
           onGoogleApiLoaded={this.onGoogleApiLoaded}
         >
+          { textPositionLatLng &&
+            <CircleRadiusLabel
+              lat={textPositionLatLng.lat()}
+              lng={textPositionLatLng.lng()}
+              radius={radius}
+              units={units}
+            />
+          }
         </GoogleMap>
       </div>
     );

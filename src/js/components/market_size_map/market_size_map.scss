@@ -4,4 +4,12 @@
   width: 100%;
   height: 452px;
   background-color: #1A202E;
+
+  .circle-radius-label {
+    width: 60px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #FFF;
+    transform: rotate(45deg);
+  }
 }
