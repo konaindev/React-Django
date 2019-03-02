@@ -1,15 +1,28 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import GoogleMap from 'google-map-react';
+import { fitBounds } from 'google-map-react/utils';
 
-import { GOOGLE_MAP_API_KEY, stylesForNightMode } from './map_settings';
+import { GOOGLE_MAP_API_KEY, DEFAULT_ZOOM, stylesForNightMode } from './map_settings';
 import "./market_size_map.scss";
 
 
 function createMapOptions(maps) {
   return {
-    styles: stylesForNightMode
+    styles: stylesForNightMode,
+    zoomControl: false,
+    scrollwheel: false,
+    fullscreenControl: false,
+    scaleControl: false,
   };
+}
+
+function RadiusTextMarker({ radius, units }) {
+  return (
+    <div className="radius-unit-text">
+      {`${radius} ${units}`}
+    </div>
+  );
 }
 
 export class MapWithCircle extends Component {
@@ -18,7 +31,8 @@ export class MapWithCircle extends Component {
     super(props);
 
     this.state = {
-      radiusTextLatLng: null
+      radiusTextLatLng: null,
+      zoom: DEFAULT_ZOOM,
     };
   }
 
@@ -38,10 +52,6 @@ export class MapWithCircle extends Component {
     const borderLatLng = maps.geometry.spherical.computeOffset(centerLatLng, radiusInMeter, 135);
     const middleLatLng = maps.geometry.spherical.computeOffset(centerLatLng, radiusInMeter / 2, 135);
 
-    this.setState({
-      radiusTextLatLng: middleLatLng,
-    })
-
     let circle = new maps.Circle({
       strokeColor: '#5147FF',
       strokeOpacity: 1,
@@ -52,7 +62,16 @@ export class MapWithCircle extends Component {
       center: centerLatLng,
       radius: radiusInMeter
     });
-    // map.fitBounds(circle.getBounds());
+
+    console.log('*********', map.zoom, maps);
+    map.fitBounds(circle.getBounds());
+
+    console.log('*********', map.zoom, maps);
+    this.setState({
+      radiusTextLatLng: middleLatLng,
+      zoom: map.zoom,
+      // zoom: map.zoom + 1.01,
+    })
 
     let centerMarker = new maps.Marker({
       position: centerLatLng,
@@ -108,26 +127,26 @@ export class MapWithCircle extends Component {
       units,
     } = this.props;
 
-    const { radiusTextLatLng } = this.state;
+    const { zoom, radiusTextLatLng } = this.state;
 
     return (
       <div className="market-size-map">
         <GoogleMap
           bootstrapURLKeys={{ key: GOOGLE_MAP_API_KEY, libraries: 'geometry' }}
           center={{ lat, lng }}
-          zoom={12}
+          zoom={zoom}
           options={createMapOptions}
           yesIWantToUseGoogleMapApiInternals={true}
           onGoogleApiLoaded={this.onGoogleApiLoaded}
         >
           { radiusTextLatLng &&
-            <div
-              className="radius-unit-text"
+            <RadiusTextMarker
               lat={radiusTextLatLng.lat()}
               lng={radiusTextLatLng.lng()}
+              radius={radius}
+              units={units}
             >
-              {`${radius} ${units}`}
-            </div>
+            </RadiusTextMarker>
           }
         </GoogleMap>
       </div>
