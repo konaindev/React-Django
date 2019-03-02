@@ -20,8 +20,9 @@ class DefaultComputedPeriodTestCase(TestCase):
             project=project,
             start=datetime.date(year=2018, month=12, day=19),
             end=datetime.date(year=2018, month=12, day=26),
-            monthly_average_rent=0,
+            monthly_average_rent=decimal.Decimal(0),
             leased_units_start=0,
+            occupiable_units_start=0,
         )
         self.period = ComputedPeriod(period)
 
@@ -160,6 +161,7 @@ class DefaultReportTestCase(TestCase):
             start=datetime.date(year=2018, month=12, day=19),
             end=datetime.date(year=2018, month=12, day=26),
             monthly_average_rent=decimal.Decimal("0"),
+            occupiable_units_start=0,
         )
         self.report = Report(project, period)
 

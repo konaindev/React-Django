@@ -310,8 +310,16 @@
                     "description": "Number of new notices to renew",
                     "type": "number"
                 },
+                "renewal_rate": {
+                    "description": "Renewal rate @computed",
+                    "type": "number"
+                },
                 "renewals": {
                     "description": "Number of renewals actually effected in timeframe",
+                    "type": "number"
+                },
+                "resident_decisions": {
+                    "description": "Number of resident decisions (typically, due to expire leases)",
                     "type": "number"
                 },
                 "units": {
@@ -335,12 +343,16 @@
                     "description": "Number of units moved out of during period",
                     "type": "number"
                 },
+                "occupiable": {
+                    "description": "Number of occupiable units at the end of report period",
+                    "type": "number"
+                },
                 "rate": {
                     "description": "Ratio of occupied to occupiable units @computed",
                     "type": "number"
                 },
                 "units": {
-                    "description": "Number of occupiable units at end of report period @computed",
+                    "description": "Number of occupied units at end of report period @computed",
                     "type": "number"
                 }
             },
@@ -487,8 +499,16 @@
                     "description": "Number of new notices to renew",
                     "type": "integer"
                 },
+                "renewal_rate": {
+                    "description": "Renewal rate @computed",
+                    "type": "number"
+                },
                 "renewals": {
                     "description": "Number of renewals actually effected in timeframe",
+                    "type": "integer"
+                },
+                "resident_decisions": {
+                    "description": "Number of resident decisions (typically, due to expire leases)",
                     "type": "integer"
                 },
                 "units": {
@@ -506,7 +526,9 @@
                 "change",
                 "rate",
                 "renewal_notices",
+                "renewal_rate",
                 "renewals",
+                "resident_decisions",
                 "units",
                 "vacation_notices"
             ],
@@ -523,18 +545,23 @@
                     "description": "Number of units moved out of during period",
                     "type": "integer"
                 },
+                "occupiable": {
+                    "description": "Number of occupiable units at the end of report period",
+                    "type": "integer"
+                },
                 "rate": {
                     "description": "Ratio of occupied to occupiable units @computed",
                     "type": "number"
                 },
                 "units": {
-                    "description": "Number of occupiable units at end of report period @computed",
+                    "description": "Number of occupied units at end of report period @computed",
                     "type": "integer"
                 }
             },
             "required": [
                 "move_ins",
                 "move_outs",
+                "occupiable",
                 "rate",
                 "units"
             ],
@@ -987,8 +1014,22 @@
                         "number"
                     ]
                 },
+                "renewal_rate": {
+                    "description": "Renewal rate @computed",
+                    "type": [
+                        "null",
+                        "number"
+                    ]
+                },
                 "renewals": {
                     "description": "Number of renewals actually effected in timeframe",
+                    "type": [
+                        "null",
+                        "number"
+                    ]
+                },
+                "resident_decisions": {
+                    "description": "Number of resident decisions (typically, due to expire leases)",
                     "type": [
                         "null",
                         "number"
@@ -1015,7 +1056,9 @@
                 "change",
                 "rate",
                 "renewal_notices",
+                "renewal_rate",
                 "renewals",
+                "resident_decisions",
                 "units",
                 "vacation_notices"
             ],
@@ -1038,6 +1081,13 @@
                         "number"
                     ]
                 },
+                "occupiable": {
+                    "description": "Number of occupiable units at the end of report period",
+                    "type": [
+                        "null",
+                        "number"
+                    ]
+                },
                 "rate": {
                     "description": "Ratio of occupied to occupiable units @computed",
                     "type": [
@@ -1046,7 +1096,7 @@
                     ]
                 },
                 "units": {
-                    "description": "Number of occupiable units at end of report period @computed",
+                    "description": "Number of occupied units at end of report period @computed",
                     "type": [
                         "null",
                         "number"
@@ -1056,6 +1106,7 @@
             "required": [
                 "move_ins",
                 "move_outs",
+                "occupiable",
                 "rate",
                 "units"
             ],

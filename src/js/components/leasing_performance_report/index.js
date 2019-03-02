@@ -37,29 +37,33 @@ export default class LeasingPerformanceReport extends Component {
         <LargeBoxLayout
           name="Leased"
           content={DeltaLayout.build(
-            r.leased_rate,
-            r.delta_leased_rate,
+            r.property.leasing.rate,
+            r.deltas?.property?.leasing?.rate,
             formatPercent,
             formatDeltaPercent
           )}
           detail={`${formatNumber(
-            r.leased_units
-          )} Executed Leases (Out of ${formatNumber(r.occupiable_units)})`}
-          detail2={formatTargetPercent(r.target_lease_percent)}
-          innerBox={WhiskerPlot.maybe(r.whiskers.leased_rate)}
+            r.property.leasing.units
+          )} Executed Leases (Out of ${formatNumber(
+            r.property.occupancy.occupiable
+          )})`}
+          detail2={formatTargetPercent(r.targets.property.leasing.rate)}
+          innerBox={WhiskerPlot.maybe(r.whiskers?.leased_rate)}
         />
         <LargeBoxLayout
           name="Retention"
           content={DeltaLayout.build(
             r.renewal_rate,
-            r.delta_renewal_rate,
+            r.deltas?.property?.leasing?.renewal_rate,
             formatPercent,
             formatDeltaPercent
           )}
           detail={`${formatNumber(
-            r.lease_renewal_notices
-          )} Notices to Renew (Out of ${r.leases_due_to_expire} Due To Expire)`}
-          detail2={formatTargetPercent(r.target_renewal_rate)}
+            r.property.leasing.renewal_notices
+          )} Notices to Renew (Out of ${
+            r.property.leasing.resident_decisions
+          } Resident Decisions)`}
+          detail2={formatTargetPercent(r.targets.property.leasing.renewal_rate)}
           innerBox={WhiskerPlot.maybe(r.whiskers.renewal_rate)}
         />
         <LargeBoxLayout

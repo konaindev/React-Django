@@ -13,6 +13,8 @@
       "cd_rate": 0.2,
       "renewal_notices": 7,
       "renewals": 7,
+      "renewal_rate": 0.6,
+      "resident_decisions": 11,
       "vacation_notices": 5,
       "rate": 0.87,
       "units": 227
@@ -21,7 +23,8 @@
       "move_ins": 13,
       "move_outs": 4,
       "rate": 0.85,
-      "units": 220
+      "units": 220,
+      "occupiable": 260
     }
   },
   "funnel": {
@@ -86,6 +89,8 @@
         "cd_rate": 0.2,
         "renewal_notices": 6,
         "renewals": 10,
+        "renewal_rate": 0.63,
+        "resident_decisions": null,
         "vacation_notices": 3,
         "rate": 0.95,
         "units": null
@@ -94,7 +99,8 @@
         "move_ins": 15,
         "move_outs": 3,
         "rate": 0.93,
-        "units": null
+        "units": null,
+        "occupiable": null
       }
     },
     "funnel": {

@@ -17,6 +17,12 @@ interface Leasing {
   /** Number of renewals actually effected in timeframe  */
   renewals: t.integer;
 
+  /** Renewal rate @computed */
+  renewal_rate: t.percent;
+
+  /** Number of resident decisions (typically, due to expire leases) */
+  resident_decisions: t.integer;
+
   /** Number of notices to vacate */
   vacation_notices: t.integer;
 
@@ -38,8 +44,11 @@ interface Occupancy {
   /** Ratio of occupied to occupiable units @computed */
   rate: t.percent;
 
-  /** Number of occupiable units at end of report period @computed */
+  /** Number of occupied units at end of report period @computed */
   units: t.integer;
+
+  /** Number of occupiable units at the end of report period */
+  occupiable: t.integer;
 }
 
 /** Marketing investment expense buckets */
