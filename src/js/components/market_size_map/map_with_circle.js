@@ -129,7 +129,7 @@ export class MapWithCircle extends Component {
     return (
       <div className="market-size-map">
         <GoogleMap
-          bootstrapURLKeys={{ key: GOOGLE_MAP_API_KEY }}
+          bootstrapURLKeys={{ key: GOOGLE_MAP_API_KEY, libraries: 'geometry' }}
           center={{ lat, lng }}
           zoom={12}
           options={createMapOptions}
