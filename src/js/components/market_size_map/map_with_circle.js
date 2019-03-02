@@ -12,21 +12,13 @@ function createMapOptions(maps) {
   };
 }
 
-const CircleRadiusLabel = function({ radius, units }) {
-  return (
-    <div className="circle-radius-label">
-      {`${radius} ${units}`}
-    </div>
-  )
-}
-
 export class MapWithCircle extends Component {
 
   constructor(props) {
     super(props);
 
     this.state = {
-      textPositionLatLng: null
+      radiusTextLatLng: null
     };
   }
 
@@ -41,8 +33,14 @@ export class MapWithCircle extends Component {
       radius,
     } = this.props;
 
-    const centerLatLng = new maps.LatLng(lat, lng);
     const radiusInMeter = radius * 1609.34;
+    const centerLatLng = new maps.LatLng(lat, lng);
+    const borderLatLng = maps.geometry.spherical.computeOffset(centerLatLng, radiusInMeter, 135);
+    const middleLatLng = maps.geometry.spherical.computeOffset(centerLatLng, radiusInMeter / 2, 135);
+
+    this.setState({
+      radiusTextLatLng: middleLatLng,
+    })
 
     let circle = new maps.Circle({
       strokeColor: '#5147FF',
@@ -68,51 +66,37 @@ export class MapWithCircle extends Component {
       }
     });
 
-    const pointOnBorderLatLng = maps.geometry.spherical.computeOffset(centerLatLng, radiusInMeter, 135);
-    const pointOnMiddleLatLng = maps.geometry.spherical.computeOffset(centerLatLng, radiusInMeter / 2, 135);
-
-    this.setState({
-      textPositionLatLng: pointOnMiddleLatLng
-    });
 
     let borderMarker = new maps.Marker({
-      position: pointOnBorderLatLng,
+      position: borderLatLng,
       map: map,
       icon: {
         path: maps.SymbolPath.CIRCLE,
-        scale: 8,
+        scale: 6,
         fillColor: '#FFF',
         fillOpacity: 1,
         strokeOpacity: 0,
       }
     });
 
-    const dashedLineSymbol = {
+    const dashSymbol = {
       path: 'M 0,-1 0,1',
       strokeOpacity: 1,
       strokeWidth: 0.77,
       scale: 1
     };
 
-    const line = new google.maps.Polyline({
-      path: [ centerLatLng, pointOnBorderLatLng ],
+    const radiusLine = new google.maps.Polyline({
+      path: [ centerLatLng, borderLatLng ],
       map: map,
       strokeColor: '#FFF',
       strokeOpacity: 0,
       icons: [{
-        icon: dashedLineSymbol,
+        icon: dashSymbol,
         offset: '0',
         repeat: '6px'
       }],
     });
-  }
-
-  getCircle(center, radius) {
-    if (!this.maps) {
-      return null;
-    }
-
-    return 
   }
 
   render() {
@@ -124,7 +108,7 @@ export class MapWithCircle extends Component {
       units,
     } = this.props;
 
-    const { textPositionLatLng } = this.state;
+    const { radiusTextLatLng } = this.state;
 
     return (
       <div className="market-size-map">
@@ -136,13 +120,14 @@ export class MapWithCircle extends Component {
           yesIWantToUseGoogleMapApiInternals={true}
           onGoogleApiLoaded={this.onGoogleApiLoaded}
         >
-          { textPositionLatLng &&
-            <CircleRadiusLabel
-              lat={textPositionLatLng.lat()}
-              lng={textPositionLatLng.lng()}
-              radius={radius}
-              units={units}
-            />
+          { radiusTextLatLng &&
+            <div
+              className="radius-unit-text"
+              lat={radiusTextLatLng.lat()}
+              lng={radiusTextLatLng.lng()}
+            >
+              {`${radius} ${units}`}
+            </div>
           }
         </GoogleMap>
       </div>

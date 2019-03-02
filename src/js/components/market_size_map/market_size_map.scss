@@ -5,11 +5,17 @@
   height: 452px;
   background-color: #1A202E;
 
-  .circle-radius-label {
-    width: 60px;
+  .radius-unit-text {
+    width: 188px;
+    height: 24px;
     font-size: 14px;
     font-weight: 500;
     color: #FFF;
+    text-align: center;
     transform: rotate(45deg);
+    transform-origin: 76px -100px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 }
