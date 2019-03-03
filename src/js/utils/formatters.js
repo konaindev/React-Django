@@ -152,3 +152,13 @@ export const targetFormatter = formatter => targetValue =>
   );
 
 export const formatTargetPercent = targetFormatter(formatPercent);
+
+export const convertDistanceToMeter = (distance, unit) => {
+  if (unit === 'mi') {
+    return distance * 1609.34;
+  }
+  if (unit === 'km') {
+    return distance * 1000;
+  }
+  return distance;
+}
