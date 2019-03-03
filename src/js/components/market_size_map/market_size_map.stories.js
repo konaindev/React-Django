@@ -7,7 +7,7 @@ import React, { Fragment } from 'react';
  const props_radius = {
   center: {
     type: "Point",
-    coordinates: [45.52, 122.68194444]
+    coordinates: [45.5202471, -122.6741949]
   },
   radius: 3.1,
   units: "mi" // both miles and kilometers should be supported

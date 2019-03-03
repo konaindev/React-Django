@@ -5,17 +5,22 @@
   height: 452px;
   background-color: #1A202E;
 
-  .radius-unit-text {
-    width: 188px;
+  .radius-text-rotated {
+    width: 190px;
     height: 24px;
     font-size: 14px;
     font-weight: 500;
     color: #FFF;
     text-align: center;
-    transform: rotate(45deg);
-    transform-origin: 76px -100px;
+    transform: rotate(40deg);
+    transform-origin: 80px -120px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
   }
+
+  // hide "Map data @2019" and "Terms of Use"
+  // .gmnoprint {
+  //   display: none;
+  // }
 }

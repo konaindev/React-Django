@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 import GoogleMap from 'google-map-react';
 import { fitBounds } from 'google-map-react/utils';
 
-import { GOOGLE_MAP_API_KEY, DEFAULT_ZOOM, stylesForNightMode } from './map_settings';
 import "./market_size_map.scss";
+import { GOOGLE_MAP_API_KEY, DEFAULT_ZOOM, stylesForNightMode } from './map_settings';
+import { formatNumber, formatPercent, convertDistanceToMeter } from "../../utils/formatters";
 
 
 function createMapOptions(maps) {
@@ -17,9 +18,9 @@ function createMapOptions(maps) {
   };
 }
 
-function RadiusTextMarker({ radius, units }) {
+function RadiusTextRotated({ radius, units }) {
   return (
-    <div className="radius-unit-text">
+    <div className="radius-text-rotated">
       {`${radius} ${units}`}
     </div>
   );
@@ -30,74 +31,96 @@ export class MapWithCircle extends Component {
   constructor(props) {
     super(props);
 
+    this.google = null;
+
     this.state = {
-      radiusTextLatLng: null,
-      zoom: DEFAULT_ZOOM,
+      currentZoom: DEFAULT_ZOOM,
+      currentCenter: { lat: 0, lng: 0 },
+      isGoogleMapLoaded: false,
     };
   }
+ 
+   // google: Object { map, maps }
+  onGoogleApiLoaded = (google) => {
+    this.google = google;
 
-  onGoogleApiLoaded = ({ map, maps }) => {
-    this.map = map;
-    this.maps = maps;
+    this.setState({
+      isGoogleMapLoaded: true
+    });
 
-    const {
-      center: {
-        coordinates: [ lat, lng ]
-      },
-      radius,
-    } = this.props;
+    this.drawCircleAndDashedPoints();
+  }
 
-    const radiusInMeter = radius * 1609.34;
-    const centerLatLng = new maps.LatLng(lat, lng);
-    const borderLatLng = maps.geometry.spherical.computeOffset(centerLatLng, radiusInMeter, 135);
-    const middleLatLng = maps.geometry.spherical.computeOffset(centerLatLng, radiusInMeter / 2, 135);
+  getCenterLatLng() {
+    if (false === this.state.isGoogleMapLoaded) {
+      return null;
+    }
 
-    let circle = new maps.Circle({
+    const { center: { coordinates: [ lat, lng ] } } = this.props;
+    return new this.google.maps.LatLng(lat, lng);
+  }
+
+  getRadiusInMeter() {
+    const { radius, units } = this.props;
+    return convertDistanceToMeter(radius, units);
+  }
+
+  drawCircleAndDashedPoints() {
+    if (false === this.state.isGoogleMapLoaded) {
+      return;
+    }
+
+    const { google } = this;
+    const radiusInMeter = this.getRadiusInMeter();
+    const centerLatLng = this.getCenterLatLng();
+    const borderLatLng = google.maps.geometry.spherical.computeOffset(centerLatLng, radiusInMeter, 130);
+
+    // circle with blue border and opacity filled
+    let circle = new google.maps.Circle({
       strokeColor: '#5147FF',
       strokeOpacity: 1,
       strokeWeight: 1.54,
       fillColor: '#6760e6',  // rgba(103,96,230,0.1);
       fillOpacity: 0.1,
-      map: map,
+      map: google.map,
       center: centerLatLng,
       radius: radiusInMeter
     });
 
-    console.log('*********', map.zoom, maps);
-    map.fitBounds(circle.getBounds());
+    // resize map so that circle is drawn in proper size
+    google.map.fitBounds(circle.getBounds(), 0);
 
-    console.log('*********', map.zoom, maps);
     this.setState({
-      radiusTextLatLng: middleLatLng,
-      zoom: map.zoom,
-      // zoom: map.zoom + 1.01,
-    })
+      currentZoom: google.map.zoom,
+      currentCenter: {
+        lat: google.map.center.lat(),
+        lng: google.map.center.lng(),
+      }
+    });
 
-    let centerMarker = new maps.Marker({
+    const pointSymbol = {
+      path: google.maps.SymbolPath.CIRCLE,
+      scale: 6,
+      fillColor: "#FFF",
+      fillOpacity: 1,
+      strokeOpacity: 0,
+    };
+
+    // white point in the center of the circle
+    let centerMarker = new google.maps.Marker({
       position: centerLatLng,
-      map: map,
-      icon: {
-        path: maps.SymbolPath.CIRCLE,
-        scale: 8,
-        fillColor: "#FFF",
-        fillOpacity: 1,
-        strokeOpacity: 0,
-      }
+      map: google.map,
+      icon: pointSymbol
     });
 
-
-    let borderMarker = new maps.Marker({
+    // white point on the border of the circle
+    let borderMarker = new google.maps.Marker({
       position: borderLatLng,
-      map: map,
-      icon: {
-        path: maps.SymbolPath.CIRCLE,
-        scale: 6,
-        fillColor: '#FFF',
-        fillOpacity: 1,
-        strokeOpacity: 0,
-      }
+      map: google.map,
+      icon: pointSymbol
     });
 
+    // white dashed line connecting these two markers above
     const dashSymbol = {
       path: 'M 0,-1 0,1',
       strokeOpacity: 1,
@@ -105,9 +128,9 @@ export class MapWithCircle extends Component {
       scale: 1
     };
 
-    const radiusLine = new google.maps.Polyline({
+    let radiusLine = new google.maps.Polyline({
       path: [ centerLatLng, borderLatLng ],
-      map: map,
+      map: google.map,
       strokeColor: '#FFF',
       strokeOpacity: 0,
       icons: [{
@@ -118,36 +141,43 @@ export class MapWithCircle extends Component {
     });
   }
 
-  render() {
-    const {
-      center: {
-        coordinates: [ lat, lng ]
-      },
-      radius,
-      units,
-    } = this.props;
+  getRadiusTextRotated() {
+    if (false === this.state.isGoogleMapLoaded) {
+      return null;
+    }
 
-    const { zoom, radiusTextLatLng } = this.state;
+    const { google } = this;
+    const { radius, units } = this.props;
+    const radiusInMeter = this.getRadiusInMeter();
+    const centerLatLng = this.getCenterLatLng();
+    const middleLatLng = google.maps.geometry.spherical.computeOffset(centerLatLng, radiusInMeter / 2, 130);
+
+    return (
+      <RadiusTextRotated
+        lat={middleLatLng.lat()}
+        lng={middleLatLng.lng()}
+        radius={radius}
+        units={units}
+      />
+    )
+  }
+
+
+  render() {
+    const { currentCenter, currentZoom } = this.state;
+    const customMarkers = this.getRadiusTextRotated();
 
     return (
       <div className="market-size-map">
         <GoogleMap
           bootstrapURLKeys={{ key: GOOGLE_MAP_API_KEY, libraries: 'geometry' }}
-          center={{ lat, lng }}
-          zoom={zoom}
+          center={currentCenter}
+          zoom={currentZoom}
           options={createMapOptions}
           yesIWantToUseGoogleMapApiInternals={true}
           onGoogleApiLoaded={this.onGoogleApiLoaded}
         >
-          { radiusTextLatLng &&
-            <RadiusTextMarker
-              lat={radiusTextLatLng.lat()}
-              lng={radiusTextLatLng.lng()}
-              radius={radius}
-              units={units}
-            >
-            </RadiusTextMarker>
-          }
+          { customMarkers }
         </GoogleMap>
       </div>
     );
