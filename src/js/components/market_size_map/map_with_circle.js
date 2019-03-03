@@ -1,30 +1,25 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import GoogleMap from 'google-map-react';
-import { fitBounds } from 'google-map-react/utils';
 
 import "./market_size_map.scss";
 import { GOOGLE_MAP_API_KEY, DEFAULT_ZOOM, stylesForNightMode } from './map_settings';
-import { formatNumber, formatPercent, convertDistanceToMeter } from "../../utils/formatters";
+import { convertDistanceToMeter } from "../../utils/formatters";
 
 
-function createMapOptions(maps) {
-  return {
-    styles: stylesForNightMode,
-    zoomControl: false,
-    scrollwheel: false,
-    fullscreenControl: false,
-    scaleControl: false,
-  };
-}
+const createMapOptions = (maps) => ({
+  styles: stylesForNightMode,
+  zoomControl: false,
+  scrollwheel: false,
+  fullscreenControl: false,
+  scaleControl: false,
+});
 
-function RadiusTextRotated({ radius, units }) {
-  return (
-    <div className="radius-text-rotated">
-      {`${radius} ${units}`}
-    </div>
-  );
-}
+const RadiusTextRotated = ({ radius, units }) => (
+  <div className="radius-text-rotated">
+    {`${radius} ${units}`}
+  </div>
+);
 
 export class MapWithCircle extends Component {
 
@@ -77,14 +72,14 @@ export class MapWithCircle extends Component {
 
     // circle with blue border and opacity filled
     let circle = new google.maps.Circle({
+      map: google.map,
+      center: centerLatLng,
+      radius: radiusInMeter,
       strokeColor: '#5147FF',
       strokeOpacity: 1,
       strokeWeight: 1.54,
       fillColor: '#6760e6',  // rgba(103,96,230,0.1);
       fillOpacity: 0.1,
-      map: google.map,
-      center: centerLatLng,
-      radius: radiusInMeter
     });
 
     // resize map so that circle is drawn in proper size
