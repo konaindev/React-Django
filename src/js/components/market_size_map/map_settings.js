@@ -1,85 +1,47 @@
-export const GOOGLE_MAP_API_KEY = 'AIzaSyBu4HU8t3rRXnfdkNjSV1_PIhzzrFFlVTs';
+export const GOOGLE_MAP_API_KEY = "AIzaSyBu4HU8t3rRXnfdkNjSV1_PIhzzrFFlVTs";
 
 export const DEFAULT_ZOOM = 1;
 
 export const stylesForNightMode = [
-  {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
-  {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
-  {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
   {
-    featureType: 'administrative.locality',
-    elementType: 'labels.text.fill',
-    stylers: [{color: '#d59563'}]
+    featureType: "all",
+    elementType: "geometry",
+    stylers: [{ color: "#1a202e" }] // $bluegray-dark
   },
   {
-    featureType: 'poi',
-    elementType: 'labels.text.fill',
-    stylers: [{color: '#d59563'}]
+    featureType: "all",
+    elementType: "labels.text.stroke",
+    stylers: [{ color: "#1a202e" }] // $bluegray-dark
   },
   {
-    featureType: 'poi.park',
-    elementType: 'geometry',
-    stylers: [{color: '#263c3f'}]
+    featureType: "all",
+    elementType: "labels.text.fill",
+    stylers: [{ color: "#747F95" }] // $heading-font-color
   },
   {
-    featureType: 'poi.park',
-    elementType: 'labels.text.fill',
-    stylers: [{color: '#6b9a76'}]
+    featureType: "poi",
+    elementType: "all",
+    stylers: [{ "visibility": "off" }]
   },
   {
-    featureType: 'road',
-    elementType: 'geometry',
-    stylers: [{color: '#38414e'}]
+    featureType: "road",
+    elementType: "all",
+    stylers: [{ color: "#292F3D" }] // road color
   },
   {
-    featureType: 'road',
-    elementType: 'geometry.stroke',
-    stylers: [{color: '#212a37'}]
+    featureType: "transit",
+    elementType: "all",
+    stylers: [{ "visibility": "off" }]
   },
   {
-    featureType: 'road',
-    elementType: 'labels.text.fill',
-    stylers: [{color: '#9ca5b3'}]
+    featureType: "water",
+    elementType: "geometry",
+    stylers: [{ color: "#161c29" }] // $bluegray-dark-alt
   },
   {
-    featureType: 'road.highway',
-    elementType: 'geometry',
-    stylers: [{color: '#746855'}]
-  },
-  {
-    featureType: 'road.highway',
-    elementType: 'geometry.stroke',
-    stylers: [{color: '#1f2835'}]
-  },
-  {
-    featureType: 'road.highway',
-    elementType: 'labels.text.fill',
-    stylers: [{color: '#f3d19c'}]
-  },
-  {
-    featureType: 'transit',
-    elementType: 'geometry',
-    stylers: [{color: '#2f3948'}]
-  },
-  {
-    featureType: 'transit.station',
-    elementType: 'labels.text.fill',
-    stylers: [{color: '#d59563'}]
-  },
-  {
-    featureType: 'water',
-    elementType: 'geometry',
-    stylers: [{color: '#17263c'}]
-  },
-  {
-    featureType: 'water',
-    elementType: 'labels.text.fill',
-    stylers: [{color: '#515c6d'}]
-  },
-  {
-    featureType: 'water',
-    elementType: 'labels.text.stroke',
-    stylers: [{color: '#17263c'}]
+    featureType: "water",
+    elementType: "labels.text",
+    stylers: [{ "visibility": "off" }]
   }
 ];
 
@@ -88,5 +50,5 @@ export const stylesForRegionFill = {
   strokeOpacity: 1,
   strokeWeight: 1.54,
   fillColor: '#6760e6',  // rgba(103,96,230,0.1);
-  fillOpacity: 0.1,
+  fillOpacity: 0.35,
 };
