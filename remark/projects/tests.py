@@ -1,5 +1,6 @@
 import datetime
 import decimal
+import os.path
 
 from django.test import TestCase
 
@@ -19,8 +20,9 @@ class DefaultComputedPeriodTestCase(TestCase):
             project=project,
             start=datetime.date(year=2018, month=12, day=19),
             end=datetime.date(year=2018, month=12, day=26),
-            monthly_average_rent=0,
+            monthly_average_rent=decimal.Decimal(0),
             leased_units_start=0,
+            occupiable_units_start=0,
         )
         self.period = ComputedPeriod(period)
 
@@ -158,24 +160,44 @@ class DefaultReportTestCase(TestCase):
             project=project,
             start=datetime.date(year=2018, month=12, day=19),
             end=datetime.date(year=2018, month=12, day=26),
+            monthly_average_rent=decimal.Decimal("0"),
+            occupiable_units_start=0,
         )
-        self.report = Report(period)
+        self.report = Report(project, period)
 
     def test_report_jsonable(self):
         from django.core.serializers.json import DjangoJSONEncoder
 
         jsonable = self.report.to_jsonable()
-        json = DjangoJSONEncoder().encode(jsonable)
-        self.assertTrue(json)
+        json_string = DjangoJSONEncoder().encode(jsonable)
+        self.assertTrue(json_string)
+
+    def test_report_jsonable_is_schema_valid(self):
+        import json
+        import jsonschema
+        from django.core.serializers.json import DjangoJSONEncoder
+
+        schema_location = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)),
+            "./PerformanceReport.schema.json",
+        )
+
+        with open(schema_location, "rt") as schema_file:
+            schema = json.load(schema_file)
+
+        jsonable = self.report.to_jsonable()
+        json_string = DjangoJSONEncoder().encode(jsonable)
+        decoded_jsonable = json.loads(json_string)
+        jsonschema.validate(instance=decoded_jsonable, schema=schema)
 
 
 class LincolnTowerPeriodTestCase(TestCase):
     """Test an example Lincoln Tower period model with computed properties."""
 
     def setUp(self):
-        project = Project.objects.create(name="test")
+        self.project = Project.objects.create(name="test")
         self.raw_period = Period.objects.create(
-            project=project,
+            project=self.project,
             start=datetime.date(year=2018, month=12, day=19),
             end=datetime.date(year=2018, month=12, day=19),
             leased_units_start=104,
@@ -206,19 +228,19 @@ class LincolnTowerPeriodTestCase(TestCase):
         self.assertEqual(self.period.target_leased_units, 196)
 
     def test_leased_rate(self):
-        self.assertEqual(self.period.leased_rate, decimal.Decimal("0.491"))
+        self.assertEqual(self.period.leased_rate, 0.4908256880733945)
 
     def test_usv_inq_perc(self):
-        self.assertEqual(self.period.usv_inq_perc, decimal.Decimal("0.012"))
+        self.assertEqual(self.period.usv_inq_perc, 0.012481644640234948)
 
     def test_inq_tou_perc(self):
-        self.assertEqual(self.period.inq_tou_perc, decimal.Decimal("0.725"))
+        self.assertEqual(self.period.inq_tou_perc, 0.7254901960784313)
 
     def test_tou_app_perc(self):
-        self.assertEqual(self.period.tou_app_perc, decimal.Decimal("0.216"))
+        self.assertEqual(self.period.tou_app_perc, 0.21621621621621623)
 
     def test_app_exe_perc(self):
-        self.assertEqual(self.period.app_exe_perc, decimal.Decimal("0.750"))
+        self.assertEqual(self.period.app_exe_perc, 0.75)
 
     def test_investment(self):
         self.assertEqual(self.period.investment, decimal.Decimal("67000"))
@@ -246,6 +268,6 @@ class LincolnTowerPeriodTestCase(TestCase):
 
     def test_report_jsonable(self):
         # CONSIDER moving this to a separate location
-        report = Report(self.raw_period)
+        report = Report(self.project, self.raw_period)
         self.assertTrue(report.to_jsonable())
 

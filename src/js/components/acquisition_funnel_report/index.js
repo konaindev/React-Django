@@ -30,27 +30,25 @@ export default class AcquisitionFunnelReport extends Component {
       <BoxRow>
         <LargeDetailPercentBox
           name="USV > EXE"
-          value={r.usv_exe_perc}
-          target={r.target_usv_exe_perc}
-          delta={r.delta_usv_exe_perc}
-          innerBox={WhiskerPlot.maybe(r.whiskers.usv_exe_perc)}
+          value={r.funnel.conversions.usv_exe}
+          target={r.targets.funnel.conversions.usv_exe}
+          delta={r.deltas?.funnel?.conversions?.usv_exe}
+          innerBox={WhiskerPlot.maybe(r.whiskers?.usv_exe)}
         />
         <LargePercentBox
           name="Cancellation & Denial Rate"
-          value={r.lease_cd_rate}
-          target={r.target_lease_cd_rate}
-          delta={r.delta_lease_cd_rate}
-          innerBox={WhiskerPlot.maybe(r.whiskers.lease_cd_rate)}
+          value={r.property.leasing.cd_rate}
+          target={r.targets.property.leasing.cd_rate}
+          delta={r.deltas?.property?.leasing?.cd_rate}
+          innerBox={WhiskerPlot.maybe(r.whiskers?.lease_cd_rate)}
         />
         {/* we reverse the arrow here because declining percentages are *good* */}
         <LargePercentBox
           name="Cost Per EXE / Average Monthly Rent"
-          value={r.cost_per_exe_vs_monthly_average_rent}
-          detail={r.target_cost_per_exe_vs_monthly_average_rent}
-          delta={r.delta_cost_per_exe_vs_monthly_average_rent}
-          innerBox={WhiskerPlot.maybe(
-            r.whiskers.cost_per_exe_vs_monthly_average_rent
-          )}
+          value={r.property.cost_per_exe_vs_rent}
+          detail={r.targets.property.cost_per_exe_vs_rent}
+          delta={r.deltas?.property?.cost_per_exe_vs_rent}
+          innerBox={WhiskerPlot.maybe(r.whiskers?.cost_per_exe_vs_rent)}
         />
       </BoxRow>
     );
@@ -120,93 +118,93 @@ export default class AcquisitionFunnelReport extends Component {
         <BoxColumn>
           <FunnelNumberBox
             name="Volume of USV"
-            value={r.usvs}
-            target={r.target_usvs}
-            delta={r.delta_usvs}
+            value={r.funnel.volumes.usv}
+            target={r.targets.funnel.volumes.usv}
+            delta={r.deltas?.funnel?.volumes?.usv}
           />
           <FunnelNumberBox
             name="Volume of INQ"
-            value={r.inquiries}
-            target={r.target_inquiries}
-            delta={r.delta_inquiries}
+            value={r.funnel.volumes.inq}
+            target={r.targets.funnel.volumes.inq}
+            delta={r.deltas?.funnel?.volumes?.inq}
           />
           <FunnelNumberBox
             name="Volume of TOU"
-            value={r.tours}
-            target={r.target_tours}
-            delta={r.delta_tours}
+            value={r.funnel.volumes.tou}
+            target={r.targets.funnel.volumes.tou}
+            delta={r.deltas?.funnel?.volumes?.tou}
           />
           <FunnelNumberBox
             name="Volume of APP"
-            value={r.lease_applications}
-            target={r.target_lease_applications}
-            delta={r.delta_lease_applications}
+            value={r.funnel.volumes.app}
+            target={r.targets.funnel.volumes.app}
+            delta={r.deltas?.funnel?.volumes?.app}
           />
           <FunnelNumberBox
             name="Volume of EXE"
-            value={r.leases_executed}
-            target={r.target_leases_executed}
-            delta={r.delta_leases_executed}
+            value={r.funnel.volumes.exe}
+            target={r.targets.funnel.volumes.exe}
+            delta={r.deltas?.funnel?.volumes?.exe}
           />
         </BoxColumn>
 
         <BoxColumn>
           <FunnelPercentBox
             name="USV > INQ"
-            value={r.usv_inq_perc}
-            target={r.target_usv_inq_perc}
-            delta={r.delta_usv_inq_perc}
+            value={r.funnel.conversions.usv_inq}
+            target={r.targets.funnel.conversions.usv_inq}
+            delta={r.deltas?.funnel?.conversions?.usv_inq}
           />
           <FunnelPercentBox
             name="INQ > TOU"
-            value={r.inq_tou_perc}
-            target={r.target_inq_tou_perc}
-            delta={r.delta_inq_tou_perc}
+            value={r.funnel.conversions.inq_tou}
+            target={r.targets.funnel.conversions.inq_tou}
+            delta={r.deltas?.funnel?.conversions?.inq_tou}
           />
           <FunnelPercentBox
             name="TOU > APP"
-            value={r.tou_app_perc}
-            target={r.target_tou_app_perc}
-            delta={r.delta_tou_app_perc}
+            value={r.funnel.conversions.tou_app}
+            target={r.targets.funnel.conversions.tou_app}
+            delta={r.deltas?.funnel?.conversions?.tou_app}
           />
           <FunnelPercentBox
             name="APP > EXE"
-            value={r.app_exe_perc}
-            target={r.target_app_exe_perc}
-            delta={r.delta_app_exe_perc}
+            value={r.funnel.conversions.app_exe}
+            target={r.targets.funnel.conversions.app_exe}
+            delta={r.deltas?.funnel?.conversions?.app_exe}
           />
         </BoxColumn>
 
         <BoxColumn>
           <FunnelCurrencyBox
             name="Cost per USV"
-            value={r.cost_per_usv}
-            target={r.target_cost_per_usv}
-            delta={r.delta_cost_per_usv}
+            value={r.funnel.costs.usv}
+            target={r.targets.funnel.costs.usv}
+            delta={r.deltas?.funnel?.costs?.usv}
           />
           <FunnelCurrencyBox
             name="Cost per INQ"
-            value={r.cost_per_inq}
-            target={r.target_cost_per_inq}
-            delta={r.delta_cost_per_inq}
+            value={r.funnel.costs.inq}
+            target={r.targets.funnel.costs.inq}
+            delta={r.deltas?.funnel?.costs?.inq}
           />
           <FunnelCurrencyBox
             name="Cost per TOU"
-            value={r.cost_per_tou}
-            target={r.target_cost_per_tou}
-            delta={r.delta_cost_per_tou}
+            value={r.funnel.costs.tou}
+            target={r.targets.funnel.costs.tou}
+            delta={r.deltas?.funnel?.costs?.tou}
           />
           <FunnelCurrencyBox
             name="Cost per APP"
-            value={r.cost_per_app}
-            target={r.target_cost_per_app}
-            delta={r.delta_cost_per_app}
+            value={r.funnel.costs.app}
+            target={r.targets.funnel.costs.app}
+            delta={r.deltas?.funnel?.costs?.app}
           />
           <FunnelCurrencyBox
             name="Cost per EXE"
-            value={r.cost_per_exe}
-            target={r.target_cost_per_exe}
-            delta={r.delta_cost_per_exe}
+            value={r.funnel.costs.exe}
+            target={r.targets.funnel.costs.exe}
+            delta={r.deltas?.funnel?.costs?.exe}
           />
         </BoxColumn>
       </BoxRow>

@@ -47,20 +47,20 @@ export default class CampaignInvestmentReport extends Component {
       <BoxRow>
         <LargeCurrencyShorthandBox
           name="Campaign Investment"
-          value={r.investment}
-          target={r.target_investment}
-          delta={r.delta_investment}
-          innerBox={WhiskerPlot.maybe(r.whiskers.investment)}
+          value={r.investment.total.total}
+          target={r.targets.investment.total.total}
+          delta={r.deltas?.investment?.total?.total}
+          innerBox={WhiskerPlot.maybe(r.whiskers?.investment)}
         />
         <LargeCurrencyShorthandBox
           name="Est. Revenue Change"
-          value={r.estimated_revenue_gain}
-          target={r.target_estimated_revenue_gain}
+          value={r.investment.total.estimated_revenue_gain}
+          target={r.targets.investment.total.estimated_revenue_gain}
         />
         <LargeMultipleBox
           name="Campaign Return on Marketing Investment (ROMI)"
-          value={r.romi}
-          target={r.target_romi}
+          value={r.investment.total.romi}
+          target={r.targets.investment.total.romi}
         />
       </BoxRow>
     );
@@ -153,24 +153,24 @@ export default class CampaignInvestmentReport extends Component {
       <ReportSection name="Acquisition" horizontalPadding={false}>
         <SmallNumberBox
           name="Leased Unit Change"
-          value={r.delta_leases}
-          target={r.target_delta_leases}
+          value={r.property.leasing.change}
+          target={r.targets.property.leasing.change}
         />
         <SmallCurrencyShorthandBox
           name="Acquisition Investment"
-          value={r.acq_investment}
-          target={r.target_acq_investment}
-          delta={r.delta_acq_investment}
+          value={r.investment.acquisition.total}
+          target={r.targets.investment.acquisition.total}
+          delta={r.deltas?.investment?.acquisition?.total}
         />
         <SmallCurrencyShorthandBox
           name="Est. Acquired Leasing Revenue"
-          value={r.estimated_acq_revenue_gain}
-          target={r.target_estimated_acq_revenue_gain}
+          value={r.investment.acquisition.estimated_revenue_gain}
+          target={r.targets.investment.acquisition.estimated_revenue_gain}
         />
         <SmallMultipleBox
           name="Acquisition ROMI"
-          value={r.acq_romi}
-          target={r.target_acq_romi}
+          value={r.investment.acquisition.romi}
+          target={r.targets.investment.acquisition.romi}
         />
       </ReportSection>
     );
@@ -181,11 +181,12 @@ export default class CampaignInvestmentReport extends Component {
    */
   static Acquisition = ({ report: r }) => {
     const acqChartData = {
-      investment: r.acq_investment,
-      reputation_building: r.acq_reputation_building,
-      demand_creation: r.acq_demand_creation,
-      leasing_enablement: r.acq_leasing_enablement,
-      market_intelligence: r.acq_market_intelligence
+      investment: r.investment.acquisition.total,
+      reputation_building:
+        r.investment.acquisition.expenses.reputation_building,
+      demand_creation: r.investment.acquisition.expenses.demand_creation,
+      leasing_enablement: r.investment.acquisition.expenses.leasing_enablement,
+      market_intelligence: r.investment.acquisition.expenses.market_intelligence
     };
 
     return (
@@ -208,25 +209,25 @@ export default class CampaignInvestmentReport extends Component {
       <ReportSection name="Retention" horizontalPadding={false}>
         <SmallNumberBox
           name="Lease Renewals"
-          value={r.lease_renewals}
-          target={r.target_lease_renewals}
-          delta={r.delta_lease_renewals}
+          value={r.property.leasing.renewals}
+          target={r.targets.property.leasing.renewals}
+          delta={r.deltas?.property?.leasing?.renewals}
         />
         <SmallCurrencyShorthandBox
           name="Retention Investment"
-          value={r.ret_investment}
-          target={r.target_ret_investment}
-          delta={r.delta_ret_investment}
+          value={r.investment.retention.total}
+          target={r.targets.investment.retention.total}
+          delta={r.deltas?.investment?.retention?.total}
         />
         <SmallCurrencyShorthandBox
           name="Est. Retained Leasing Revenue"
-          value={r.estimated_ret_revenue_gain}
-          target={r.target_estimated_ret_revenue_gain}
+          value={r.investment.retention.estimated_revenue_gain}
+          target={r.targets.investment.retention.estimated_revenue_gain}
         />
         <SmallMultipleBox
           name="Retention ROMI"
-          value={r.ret_romi}
-          target={r.target_ret_romi}
+          value={r.investment.retention.romi}
+          target={r.targets.investment.retention.romi}
         />
       </ReportSection>
     );
@@ -238,11 +239,11 @@ export default class CampaignInvestmentReport extends Component {
    */
   static Retention = ({ report: r }) => {
     const retChartData = {
-      investment: r.ret_investment,
-      reputation_building: r.ret_reputation_building,
-      demand_creation: r.ret_demand_creation,
-      leasing_enablement: r.ret_leasing_enablement,
-      market_intelligence: r.ret_market_intelligence
+      investment: r.investment.retention.total,
+      reputation_building: r.investment.retention.expenses.reputation_building,
+      demand_creation: r.investment.retention.expenses.demand_creation,
+      leasing_enablement: r.investment.retention.expenses.leasing_enablement,
+      market_intelligence: r.investment.retention.expenses.market_intelligence
     };
 
     return (

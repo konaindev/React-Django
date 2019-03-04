@@ -13,6 +13,8 @@
       "cd_rate": 0.29,
       "renewal_notices": 94,
       "renewals": 94,
+      "renewal_rate": 0.71,
+      "resident_decisions": 132,
       "vacation_notices": 38,
       "rate": 0.74,
       "units": 192
@@ -21,7 +23,8 @@
       "move_ins": 72,
       "move_outs": 36,
       "rate": 0.71,
-      "units": 185
+      "units": 185,
+      "occupiable": 260
     }
   },
   "funnel": {
