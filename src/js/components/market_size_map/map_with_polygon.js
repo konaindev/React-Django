@@ -14,6 +14,12 @@ const createMapOptions = (maps) => ({
   scaleControl: false,
 });
 
+const ZipCodeLabel = ({ zipCode }) => (
+  <div className="zip-code-label">
+    {zipCode}
+  </div>
+);
+
 export class MapWithPolygon extends Component {
 
   constructor(props) {
@@ -47,6 +53,7 @@ export class MapWithPolygon extends Component {
     const { google } = this;
     const bounds = new google.maps.LatLngBounds();
 
+    // draw each zip code area as polygon
     this.props.zip_codes.forEach(zipCode => {
       const { zip, outline: { type, coordinates } } = zipCode;
 
@@ -82,8 +89,27 @@ export class MapWithPolygon extends Component {
 
   getZipCodeLabels() {
     if (false === this.state.isGoogleMapLoaded) {
-      return null;
+      return [];
     }
+
+    const { google } = this;
+
+    return this.props.zip_codes.map(zipCode => {
+      const { zip, outline: { type, coordinates } } = zipCode;
+      const bounds = new google.maps.LatLngBounds();
+
+      const paths = coordinates.map(([lat, lng]) => new google.maps.LatLng(lat, lng));
+      paths.forEach(point => { bounds.extend(point) });
+      const zipAreaCenter = bounds.getCenter();
+
+      return (
+        <ZipCodeLabel
+          lat={zipAreaCenter.lat()}
+          lng={zipAreaCenter.lng()}
+          zipCode={zip}
+        />
+      );
+    });
   }
 
 
