@@ -9,7 +9,7 @@ export function EstimatedMarketSizeOverview({ market_sizes }) {
   return (
     <div className="estimated-market-size-overview">
       <div className="estimated-market-size-overview__heading">
-        <h4>Est. Market Size Overview</h4>
+        <p>Est. Market Size Overview</p>
       </div>
 
       <div className="estimated-market-size-overview__list">
