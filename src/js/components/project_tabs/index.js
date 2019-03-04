@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+// TODO remove me entirely.
+
 // XXX FIXME TODO etc -- we should *not* be pulling ReportSpanDropdown in here.
 import ReportSpanDropdown from "../report_span_dropdown";
 import "./project_tabs.scss";
