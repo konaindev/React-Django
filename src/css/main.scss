@@ -1,23 +1,6 @@
 @import "./base.scss";
 
 //-----------------------------------------------------------------------------
-// Utility Classes (for all pages, content and react)
-//-----------------------------------------------------------------------------
-
-// A very subtle divider
-.horizontal-divider {
-    border-bottom: solid 1px #586073;
-    opacity: 0.18;
-}
-
-// The typical background and shadowing of a panel
-.panel-rounded-rect {
-    background-color: $bluegray-dark;
-    border: solid 1px $bluegray-dark;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
-}
-
-//-----------------------------------------------------------------------------
 // Content Page Classes (for non-react-rooted pages)
 //-----------------------------------------------------------------------------
 
