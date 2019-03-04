@@ -42,7 +42,13 @@ class PeriodInline(admin.StackedInline):
 @admin.register(Project, site=admin_site)
 class ProjectAdmin(admin.ModelAdmin):
     inlines = (PeriodInline,)
-    list_display = ["name", "public_id", "number_of_periods"]
+    list_display = [
+        "name",
+        "public_id",
+        "number_of_periods",
+        "baseline_start",
+        "baseline_end",
+    ]
 
     def number_of_periods(self, obj):
         return obj.periods.all().count()

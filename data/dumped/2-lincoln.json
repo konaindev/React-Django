@@ -47,7 +47,11 @@
   {
     "model": "projects.project",
     "pk": "pro_eekgau8mfkbc34iq",
-    "fields": { "name": "Two Lincoln Tower" }
+    "fields": {
+      "name": "Two Lincoln Tower",
+      "baseline_start": "2017-01-01",
+      "baseline_end": "2018-05-07"
+    }
   },
   {
     "model": "projects.period",

@@ -15,7 +15,11 @@ class DefaultComputedPeriodTestCase(TestCase):
     """
 
     def setUp(self):
-        project = Project.objects.create(name="test")
+        project = Project.objects.create(
+            name="test",
+            baseline_start=datetime.date(year=2018, month=11, day=19),
+            baseline_end=datetime.date(year=2018, month=12, day=19),
+        )
         period = Period.objects.create(
             project=project,
             start=datetime.date(year=2018, month=12, day=19),
@@ -155,7 +159,11 @@ class DefaultComputedPeriodTestCase(TestCase):
 
 class DefaultReportTestCase(TestCase):
     def setUp(self):
-        project = Project.objects.create(name="test")
+        project = Project.objects.create(
+            name="test",
+            baseline_start=datetime.date(year=2018, month=11, day=19),
+            baseline_end=datetime.date(year=2018, month=12, day=19),
+        )
         period = Period.objects.create(
             project=project,
             start=datetime.date(year=2018, month=12, day=19),
@@ -195,7 +203,11 @@ class LincolnTowerPeriodTestCase(TestCase):
     """Test an example Lincoln Tower period model with computed properties."""
 
     def setUp(self):
-        self.project = Project.objects.create(name="test")
+        self.project = Project.objects.create(
+            name="test",
+            baseline_start=datetime.date(year=2018, month=11, day=19),
+            baseline_end=datetime.date(year=2018, month=12, day=19),
+        )
         self.raw_period = Period.objects.create(
             project=self.project,
             start=datetime.date(year=2018, month=12, day=19),

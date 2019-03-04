@@ -36,50 +36,44 @@ class Project(models.Model):
         max_length=255, help_text="The user-facing name of the project."
     )
 
+    baseline_start = models.DateField(
+        help_text="The first date, inclusive, for the baseline period."
+    )
+
+    baseline_end = models.DateField(
+        help_text="The final date, exclusive, for the baseline period."
+    )
+
     def get_periods(self):
         """
         Return a queryset of all periods, including the baseline.
         """
         return self.periods.all()
 
-    def get_baseline_period(self):
+    def get_baseline_periods(self):
         """
-        Return the baseline period for this project.
+        Return the baseline periods for this project.
         """
-        # CONSIDER for now, this is always the first. Maybe this should change?
-        return self.periods.first()
-
-    def get_baseline_start(self):
-        """
-        Return the start date (inclusive) of the baseline period.
-        """
-        return self.periods.values_list("start", flat=True).first()
-
-    def get_baseline_end(self):
-        """
-        Return the end date (exclusive) of the baseline period.
-        """
-        return self.periods.values_list("end", flat=True).first()
+        return self.periods.filter(end__lte=self.baseline_end)
 
     def get_campaign_periods(self):
         """
         Return the campaign periods for this project -- aka all periods except
         the baseline.
         """
-        # CONSIDER: for now, this is the rest. Maybe this should change?
-        return self.periods.all()[1:]
+        return self.periods.filter(start__gte=self.baseline_end)
 
     def get_campaign_period_dates(self):
         """
         Return tuples containing start and end dates for all campaign periods.
         """
-        return self.periods.values_list("start", "end")[1:]
+        return self.get_campaign_periods().values_list("start", "end")
 
     def get_campaign_start(self):
         """
         Return the start date (inclusive) of the campaign.
         """
-        return self.periods.values_list("start", flat=True)[1:].first()
+        return self.baseline_end
 
     def get_campaign_end(self):
         """

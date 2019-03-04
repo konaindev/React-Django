@@ -128,7 +128,7 @@ class ReportSpan:
             start = self._start
         # Handle custom span types.
         elif self._report_span == self.BASELINE:
-            start = self._project.get_baseline_start()
+            start = self._project.baseline_start
         elif self._report_span == self.CAMPAIGN_TO_DATE:
             start = self._project.get_campaign_start()
         else:
@@ -145,7 +145,7 @@ class ReportSpan:
             end = self._end
         # Handle custom span types
         elif self._report_span == self.BASELINE:
-            end = self._project.get_baseline_end()
+            end = self._project.baseline_end
         else:
             # Covers campaign *and* last N weeks.
             end = self._project.get_campaign_end()

@@ -93,7 +93,9 @@ SCHEMA_MAP = {
 def recursive_map(d, fn):
     """
     Walk down a dictionary hierarchy recursively, calling the mapping function 
-    on each leaf value.
+    on each leaf value. If the mapping function returns recrusive_map.DONT_INCLUDE,
+    we don't include the key in the resulting dictionary at all. All other
+    return values are included.
     """
 
     def _map(name, value):
@@ -103,7 +105,15 @@ def recursive_map(d, fn):
             mapped_value = fn(value)
         return mapped_value
 
-    return {name: _map(name, value) for name, value in d.items()}
+    result = {}
+    for name, value in d.items():
+        mapped = _map(name, value)
+        if mapped != recursive_map.DONT_INCLUDE:
+            result[name] = mapped
+    return result
+
+
+recursive_map.DONT_INCLUDE = "__DONT_INCLUDE__"
 
 
 # Map from our internal flat target_* values structure to the outward
@@ -120,13 +130,18 @@ def unflatten(schema_map, flat):
     return recursive_map(schema_map, lambda source: flat[source])
 
 
-def unflatten_none(schema_map, flat):
+def unflatten_optional(schema_map, flat):
     """
     Take a flattened period dictionary and explode it out into a schema.
     
-    If a value is not found, replace it with None
+    If a value is not found, don't include it
     """
-    return recursive_map(schema_map, lambda source: flat.get(source, None))
+
+    def _map(source):
+        raw = flat.get(source, None)
+        return recursive_map.DONT_INCLUDE if raw is None else raw
+
+    return recursive_map(schema_map, _map)
 
 
 class Report:
@@ -141,8 +156,10 @@ class Report:
         """
         Return a Report that strictly covers the project's baseline period.
         """
-        period = project.get_baseline_period()
-        return cls(project, period)
+        baseline_periods = project.get_baseline_periods()
+        multiperiod = BareMultiPeriod.from_periods(baseline_periods)
+        baseline_period = multiperiod.get_cumulative_period()
+        return cls(project, baseline_period)
 
     @classmethod
     def for_time_delta_from_end(cls, project, time_delta, end=None):
@@ -225,13 +242,13 @@ class Report:
         # TODO implement this
         four_week_funnel_averages = {"usv": 0, "inq": 0, "tou": 0, "app": 0, "exe": 0}
 
-        targets = unflatten_none(TARGET_SCHEMA_MAP, flat_period_values)
+        targets = unflatten_optional(TARGET_SCHEMA_MAP, flat_period_values)
 
         if self.delta is None:
             deltas = {}
         else:
             flat_delta_values = self.delta.get_values()
-            deltas = unflatten(SCHEMA_MAP, flat_delta_values)
+            deltas = unflatten_optional(SCHEMA_MAP, flat_delta_values)
 
         return dict(
             dates=dates,
