@@ -90,17 +90,13 @@
         "renewal_notices": 6,
         "renewals": 10,
         "renewal_rate": 0.63,
-        "resident_decisions": null,
         "vacation_notices": 3,
-        "rate": 0.95,
-        "units": null
+        "rate": 0.95
       },
       "occupancy": {
         "move_ins": 15,
         "move_outs": 3,
-        "rate": 0.93,
-        "units": null,
-        "occupiable": null
+        "rate": 0.93
       }
     },
     "funnel": {
@@ -128,23 +124,11 @@
     },
     "investment": {
       "acquisition": {
-        "expenses": {
-          "demand_creation": null,
-          "leasing_enablement": null,
-          "market_intelligence": null,
-          "reputation_building": null
-        },
         "total": "15000.00",
         "romi": 7,
         "estimated_revenue_gain": "228500.00"
       },
       "retention": {
-        "expenses": {
-          "demand_creation": null,
-          "leasing_enablement": null,
-          "market_intelligence": null,
-          "reputation_building": null
-        },
         "total": "2000.00",
         "romi": 142,
         "estimated_revenue_gain": "266600.00"

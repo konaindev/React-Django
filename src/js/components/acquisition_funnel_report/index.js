@@ -31,14 +31,14 @@ export default class AcquisitionFunnelReport extends Component {
         <LargeDetailPercentBox
           name="USV > EXE"
           value={r.funnel.conversions.usv_exe}
-          target={r.targets.funnel.conversions.usv_exe}
+          target={r.targets?.funnel?.conversions?.usv_exe}
           delta={r.deltas?.funnel?.conversions?.usv_exe}
           innerBox={WhiskerPlot.maybe(r.whiskers?.usv_exe)}
         />
         <LargePercentBox
           name="Cancellation & Denial Rate"
           value={r.property.leasing.cd_rate}
-          target={r.targets.property.leasing.cd_rate}
+          target={r.targets?.property?.leasing?.cd_rate}
           delta={r.deltas?.property?.leasing?.cd_rate}
           innerBox={WhiskerPlot.maybe(r.whiskers?.lease_cd_rate)}
         />
@@ -46,7 +46,7 @@ export default class AcquisitionFunnelReport extends Component {
         <LargePercentBox
           name="Cost Per EXE / Average Monthly Rent"
           value={r.property.cost_per_exe_vs_rent}
-          detail={r.targets.property.cost_per_exe_vs_rent}
+          target={r.targets?.property?.cost_per_exe_vs_rent}
           delta={r.deltas?.property?.cost_per_exe_vs_rent}
           innerBox={WhiskerPlot.maybe(r.whiskers?.cost_per_exe_vs_rent)}
         />
@@ -119,31 +119,31 @@ export default class AcquisitionFunnelReport extends Component {
           <FunnelNumberBox
             name="Volume of USV"
             value={r.funnel.volumes.usv}
-            target={r.targets.funnel.volumes.usv}
+            target={r.targets?.funnel?.volumes?.usv}
             delta={r.deltas?.funnel?.volumes?.usv}
           />
           <FunnelNumberBox
             name="Volume of INQ"
             value={r.funnel.volumes.inq}
-            target={r.targets.funnel.volumes.inq}
+            target={r.targets?.funnel?.volumes?.inq}
             delta={r.deltas?.funnel?.volumes?.inq}
           />
           <FunnelNumberBox
             name="Volume of TOU"
             value={r.funnel.volumes.tou}
-            target={r.targets.funnel.volumes.tou}
+            target={r.targets?.funnel?.volumes?.tou}
             delta={r.deltas?.funnel?.volumes?.tou}
           />
           <FunnelNumberBox
             name="Volume of APP"
             value={r.funnel.volumes.app}
-            target={r.targets.funnel.volumes.app}
+            target={r.targets?.funnel?.volumes?.app}
             delta={r.deltas?.funnel?.volumes?.app}
           />
           <FunnelNumberBox
             name="Volume of EXE"
             value={r.funnel.volumes.exe}
-            target={r.targets.funnel.volumes.exe}
+            target={r.targets?.funnel?.volumes?.exe}
             delta={r.deltas?.funnel?.volumes?.exe}
           />
         </BoxColumn>
@@ -152,25 +152,25 @@ export default class AcquisitionFunnelReport extends Component {
           <FunnelPercentBox
             name="USV > INQ"
             value={r.funnel.conversions.usv_inq}
-            target={r.targets.funnel.conversions.usv_inq}
+            target={r.targets?.funnel?.conversions?.usv_inq}
             delta={r.deltas?.funnel?.conversions?.usv_inq}
           />
           <FunnelPercentBox
             name="INQ > TOU"
             value={r.funnel.conversions.inq_tou}
-            target={r.targets.funnel.conversions.inq_tou}
+            target={r.targets?.funnel?.conversions?.inq_tou}
             delta={r.deltas?.funnel?.conversions?.inq_tou}
           />
           <FunnelPercentBox
             name="TOU > APP"
             value={r.funnel.conversions.tou_app}
-            target={r.targets.funnel.conversions.tou_app}
+            target={r.targets?.funnel?.conversions?.tou_app}
             delta={r.deltas?.funnel?.conversions?.tou_app}
           />
           <FunnelPercentBox
             name="APP > EXE"
             value={r.funnel.conversions.app_exe}
-            target={r.targets.funnel.conversions.app_exe}
+            target={r.targets?.funnel?.conversions?.app_exe}
             delta={r.deltas?.funnel?.conversions?.app_exe}
           />
         </BoxColumn>
@@ -179,31 +179,31 @@ export default class AcquisitionFunnelReport extends Component {
           <FunnelCurrencyBox
             name="Cost per USV"
             value={r.funnel.costs.usv}
-            target={r.targets.funnel.costs.usv}
+            target={r.targets?.funnel?.costs?.usv}
             delta={r.deltas?.funnel?.costs?.usv}
           />
           <FunnelCurrencyBox
             name="Cost per INQ"
-            value={r.funnel.costs.inq}
-            target={r.targets.funnel.costs.inq}
+            value={r.funnel?.costs?.inq}
+            target={r.targets?.funnel?.costs?.inq}
             delta={r.deltas?.funnel?.costs?.inq}
           />
           <FunnelCurrencyBox
             name="Cost per TOU"
             value={r.funnel.costs.tou}
-            target={r.targets.funnel.costs.tou}
+            target={r.targets?.funnel?.costs?.tou}
             delta={r.deltas?.funnel?.costs?.tou}
           />
           <FunnelCurrencyBox
             name="Cost per APP"
             value={r.funnel.costs.app}
-            target={r.targets.funnel.costs.app}
+            target={r.targets?.funnel?.costs?.app}
             delta={r.deltas?.funnel?.costs?.app}
           />
           <FunnelCurrencyBox
             name="Cost per EXE"
             value={r.funnel.costs.exe}
-            target={r.targets.funnel.costs.exe}
+            target={r.targets?.funnel?.costs?.exe}
             delta={r.deltas?.funnel?.costs?.exe}
           />
         </BoxColumn>

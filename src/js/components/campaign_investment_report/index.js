@@ -48,19 +48,19 @@ export default class CampaignInvestmentReport extends Component {
         <LargeCurrencyShorthandBox
           name="Campaign Investment"
           value={r.investment.total.total}
-          target={r.targets.investment.total.total}
+          target={r.targets?.investment?.total?.total}
           delta={r.deltas?.investment?.total?.total}
           innerBox={WhiskerPlot.maybe(r.whiskers?.investment)}
         />
         <LargeCurrencyShorthandBox
           name="Est. Revenue Change"
           value={r.investment.total.estimated_revenue_gain}
-          target={r.targets.investment.total.estimated_revenue_gain}
+          target={r.targets?.investment?.total?.estimated_revenue_gain}
         />
         <LargeMultipleBox
           name="Campaign Return on Marketing Investment (ROMI)"
           value={r.investment.total.romi}
-          target={r.targets.investment.total.romi}
+          target={r.targets?.investment?.total?.romi}
         />
       </BoxRow>
     );
@@ -154,23 +154,23 @@ export default class CampaignInvestmentReport extends Component {
         <SmallNumberBox
           name="Leased Unit Change"
           value={r.property.leasing.change}
-          target={r.targets.property.leasing.change}
+          target={r.targets?.property?.leasing?.change}
         />
         <SmallCurrencyShorthandBox
           name="Acquisition Investment"
           value={r.investment.acquisition.total}
-          target={r.targets.investment.acquisition.total}
+          target={r.targets?.investment?.acquisition?.total}
           delta={r.deltas?.investment?.acquisition?.total}
         />
         <SmallCurrencyShorthandBox
           name="Est. Acquired Leasing Revenue"
           value={r.investment.acquisition.estimated_revenue_gain}
-          target={r.targets.investment.acquisition.estimated_revenue_gain}
+          target={r.targets?.investment?.acquisition?.estimated_revenue_gain}
         />
         <SmallMultipleBox
           name="Acquisition ROMI"
           value={r.investment.acquisition.romi}
-          target={r.targets.investment.acquisition.romi}
+          target={r.targets?.investment?.acquisition?.romi}
         />
       </ReportSection>
     );
@@ -210,24 +210,24 @@ export default class CampaignInvestmentReport extends Component {
         <SmallNumberBox
           name="Lease Renewals"
           value={r.property.leasing.renewals}
-          target={r.targets.property.leasing.renewals}
+          target={r.targets?.property?.leasing?.renewals}
           delta={r.deltas?.property?.leasing?.renewals}
         />
         <SmallCurrencyShorthandBox
           name="Retention Investment"
           value={r.investment.retention.total}
-          target={r.targets.investment.retention.total}
+          target={r.targets?.investment?.retention?.total}
           delta={r.deltas?.investment?.retention?.total}
         />
         <SmallCurrencyShorthandBox
           name="Est. Retained Leasing Revenue"
           value={r.investment.retention.estimated_revenue_gain}
-          target={r.targets.investment.retention.estimated_revenue_gain}
+          target={r.targets?.investment?.retention?.estimated_revenue_gain}
         />
         <SmallMultipleBox
           name="Retention ROMI"
           value={r.investment.retention.romi}
-          target={r.targets.investment.retention.romi}
+          target={r.targets?.investment?.retention?.romi}
         />
       </ReportSection>
     );

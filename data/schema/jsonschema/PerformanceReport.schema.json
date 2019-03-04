@@ -124,261 +124,6 @@
             ],
             "type": "object"
         },
-        "Deltas<AcquisitionCategories<number>>": {
-            "properties": {
-                "app": {
-                    "description": "Lease applications",
-                    "type": "number"
-                },
-                "exe": {
-                    "description": "Lease executions",
-                    "type": "number"
-                },
-                "inq": {
-                    "description": "Inquiries",
-                    "type": "number"
-                },
-                "tou": {
-                    "description": "Tours",
-                    "type": "number"
-                },
-                "usv": {
-                    "description": "Unique site visitors",
-                    "type": "number"
-                }
-            },
-            "type": "object"
-        },
-        "Deltas<AcquisitionCategories<string>>": {
-            "properties": {
-                "app": {
-                    "description": "Lease applications",
-                    "type": "string"
-                },
-                "exe": {
-                    "description": "Lease executions",
-                    "type": "string"
-                },
-                "inq": {
-                    "description": "Inquiries",
-                    "type": "string"
-                },
-                "tou": {
-                    "description": "Tours",
-                    "type": "string"
-                },
-                "usv": {
-                    "description": "Unique site visitors",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "Deltas<AcquisitionConversions>": {
-            "properties": {
-                "app_exe": {
-                    "description": "APP > EXE conversion percentage @computed",
-                    "type": "number"
-                },
-                "inq_tou": {
-                    "description": "INQ > TOU conversion percentage @computed",
-                    "type": "number"
-                },
-                "tou_app": {
-                    "description": "TOU > APP conversion percentage @computed",
-                    "type": "number"
-                },
-                "usv_exe": {
-                    "description": "USV > EXE conversion percentage @computed",
-                    "type": "number"
-                },
-                "usv_inq": {
-                    "description": "USV > INQ conversion percentage @computed",
-                    "type": "number"
-                }
-            },
-            "type": "object"
-        },
-        "Deltas<AcquisitionFunnel>": {
-            "properties": {
-                "conversions": {
-                    "$ref": "#/definitions/Deltas<AcquisitionConversions>",
-                    "description": "Conversion rates in the acquisition funnel @computed"
-                },
-                "costs": {
-                    "$ref": "#/definitions/Deltas<AcquisitionCategories<string>>",
-                    "description": "Cost-pers in the acquisition funnel @computed"
-                },
-                "volumes": {
-                    "$ref": "#/definitions/Deltas<AcquisitionCategories<number>>",
-                    "description": "Absolute volumes in the acquisition funnel"
-                }
-            },
-            "type": "object"
-        },
-        "Deltas<Investment>": {
-            "properties": {
-                "acquisition": {
-                    "$ref": "#/definitions/Deltas<InvestmentCategoryWithExpenses>",
-                    "description": "Investment and returns for the acquisition funnel"
-                },
-                "retention": {
-                    "$ref": "#/definitions/Deltas<InvestmentCategoryWithExpenses>",
-                    "description": "Investment and returns for the retention funnel"
-                },
-                "total": {
-                    "$ref": "#/definitions/Deltas<InvestmentCategory>",
-                    "description": "Total investment and returns across all funnels @computed"
-                }
-            },
-            "type": "object"
-        },
-        "Deltas<InvestmentCategory>": {
-            "properties": {
-                "estimated_revenue_gain": {
-                    "description": "The estimated revenue gain as a function of monthly rent @computed",
-                    "type": "string"
-                },
-                "romi": {
-                    "description": "The return on investment @computed",
-                    "type": "number"
-                },
-                "total": {
-                    "description": "The total spent across all buckets @computed",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "Deltas<InvestmentCategoryWithExpenses>": {
-            "properties": {
-                "estimated_revenue_gain": {
-                    "description": "The estimated revenue gain as a function of monthly rent @computed",
-                    "type": "string"
-                },
-                "expenses": {
-                    "$ref": "#/definitions/Deltas<InvestmentExpenses>",
-                    "description": "Breakdown of marketing expenses into sub-buckets"
-                },
-                "romi": {
-                    "description": "The return on investment @computed",
-                    "type": "number"
-                },
-                "total": {
-                    "description": "The total spent across all buckets @computed",
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "Deltas<InvestmentExpenses>": {
-            "properties": {
-                "demand_creation": {
-                    "type": "string"
-                },
-                "leasing_enablement": {
-                    "type": "string"
-                },
-                "market_intelligence": {
-                    "type": "string"
-                },
-                "reputation_building": {
-                    "type": "string"
-                }
-            },
-            "type": "object"
-        },
-        "Deltas<Leasing>": {
-            "properties": {
-                "cd_rate": {
-                    "description": "Cancellations/denials as percentage of lease application @computed",
-                    "type": "number"
-                },
-                "cds": {
-                    "description": "Number of cancellations AND denials",
-                    "type": "number"
-                },
-                "change": {
-                    "description": "Net change in number of leases during this period @computed",
-                    "type": "number"
-                },
-                "rate": {
-                    "description": "Lease rate as a function of occupiable units @computed",
-                    "type": "number"
-                },
-                "renewal_notices": {
-                    "description": "Number of new notices to renew",
-                    "type": "number"
-                },
-                "renewal_rate": {
-                    "description": "Renewal rate @computed",
-                    "type": "number"
-                },
-                "renewals": {
-                    "description": "Number of renewals actually effected in timeframe",
-                    "type": "number"
-                },
-                "resident_decisions": {
-                    "description": "Number of resident decisions (typically, due to expire leases)",
-                    "type": "number"
-                },
-                "units": {
-                    "description": "Number of leased units at end of report period @computed",
-                    "type": "number"
-                },
-                "vacation_notices": {
-                    "description": "Number of notices to vacate",
-                    "type": "number"
-                }
-            },
-            "type": "object"
-        },
-        "Deltas<Occupancy>": {
-            "properties": {
-                "move_ins": {
-                    "description": "Number of units moved into during period",
-                    "type": "number"
-                },
-                "move_outs": {
-                    "description": "Number of units moved out of during period",
-                    "type": "number"
-                },
-                "occupiable": {
-                    "description": "Number of occupiable units at the end of report period",
-                    "type": "number"
-                },
-                "rate": {
-                    "description": "Ratio of occupied to occupiable units @computed",
-                    "type": "number"
-                },
-                "units": {
-                    "description": "Number of occupied units at end of report period @computed",
-                    "type": "number"
-                }
-            },
-            "type": "object"
-        },
-        "Deltas<Property>": {
-            "properties": {
-                "cost_per_exe_vs_rent": {
-                    "description": "The cost per exe vs the monthly average rent during this period",
-                    "type": "number"
-                },
-                "leasing": {
-                    "$ref": "#/definitions/Deltas<Leasing>",
-                    "description": "Basic leasing information for the period"
-                },
-                "monthly_average_rent": {
-                    "description": "The average rent, across all units, during this period",
-                    "type": "string"
-                },
-                "occupancy": {
-                    "$ref": "#/definitions/Deltas<Occupancy>",
-                    "description": "Basic occupancy information for the period"
-                }
-            },
-            "type": "object"
-        },
         "Investment": {
             "description": "All marketing investment categories",
             "properties": {
@@ -571,16 +316,16 @@
             "description": "Target structure for performance deltas",
             "properties": {
                 "funnel": {
-                    "$ref": "#/definitions/Deltas<AcquisitionFunnel>",
-                    "description": "Target values must match the underlying type, but can be non-present"
+                    "$ref": "#/definitions/RecursivePartial<AcquisitionFunnel>",
+                    "description": "Delta values are optional; if no present, they are not set."
                 },
                 "investment": {
-                    "$ref": "#/definitions/Deltas<Investment>",
-                    "description": "Target values must match the underlying type, but can be non-present"
+                    "$ref": "#/definitions/RecursivePartial<Investment>",
+                    "description": "Delta values are optional; if no present, they are not set."
                 },
                 "property": {
-                    "$ref": "#/definitions/Deltas<Property>",
-                    "description": "Target values must match the underlying type, but can be non-present"
+                    "$ref": "#/definitions/RecursivePartial<Property>",
+                    "description": "Delta values are optional; if no present, they are not set."
                 }
             },
             "type": "object"
@@ -635,15 +380,15 @@
             "description": "Target structure for a performance report",
             "properties": {
                 "funnel": {
-                    "$ref": "#/definitions/Targets<AcquisitionFunnel>",
+                    "$ref": "#/definitions/RecursivePartial<AcquisitionFunnel>",
                     "description": "Target values for the marketing acquisition funnel"
                 },
                 "investment": {
-                    "$ref": "#/definitions/Targets<Investment>",
+                    "$ref": "#/definitions/RecursivePartial<Investment>",
                     "description": "Target values for marketing investments and outcomes"
                 },
                 "property": {
-                    "$ref": "#/definitions/Targets<Property>",
+                    "$ref": "#/definitions/RecursivePartial<Property>",
                     "description": "Target values for the property"
                 }
             },
@@ -682,468 +427,262 @@
             ],
             "type": "object"
         },
-        "Targets<AcquisitionCategories<number>>": {
-            "description": "Acquisition funnel categories",
+        "RecursivePartial<AcquisitionCategories<number>>": {
             "properties": {
                 "app": {
                     "description": "Lease applications",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "exe": {
                     "description": "Lease executions",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "inq": {
                     "description": "Inquiries",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "tou": {
                     "description": "Tours",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "usv": {
                     "description": "Unique site visitors",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 }
             },
-            "required": [
-                "app",
-                "exe",
-                "inq",
-                "tou",
-                "usv"
-            ],
             "type": "object"
         },
-        "Targets<AcquisitionCategories<string>>": {
-            "description": "Acquisition funnel categories",
+        "RecursivePartial<AcquisitionCategories<string>>": {
             "properties": {
                 "app": {
                     "description": "Lease applications",
-                    "type": [
-                        "null",
-                        "string"
-                    ]
+                    "type": "string"
                 },
                 "exe": {
                     "description": "Lease executions",
-                    "type": [
-                        "null",
-                        "string"
-                    ]
+                    "type": "string"
                 },
                 "inq": {
                     "description": "Inquiries",
-                    "type": [
-                        "null",
-                        "string"
-                    ]
+                    "type": "string"
                 },
                 "tou": {
                     "description": "Tours",
-                    "type": [
-                        "null",
-                        "string"
-                    ]
+                    "type": "string"
                 },
                 "usv": {
                     "description": "Unique site visitors",
-                    "type": [
-                        "null",
-                        "string"
-                    ]
+                    "type": "string"
                 }
             },
-            "required": [
-                "app",
-                "exe",
-                "inq",
-                "tou",
-                "usv"
-            ],
             "type": "object"
         },
-        "Targets<AcquisitionConversions>": {
-            "description": "Acquisition conversions",
+        "RecursivePartial<AcquisitionConversions>": {
             "properties": {
                 "app_exe": {
                     "description": "APP > EXE conversion percentage @computed",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "inq_tou": {
                     "description": "INQ > TOU conversion percentage @computed",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "tou_app": {
                     "description": "TOU > APP conversion percentage @computed",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "usv_exe": {
                     "description": "USV > EXE conversion percentage @computed",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "usv_inq": {
                     "description": "USV > INQ conversion percentage @computed",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 }
             },
-            "required": [
-                "app_exe",
-                "inq_tou",
-                "tou_app",
-                "usv_exe",
-                "usv_inq"
-            ],
             "type": "object"
         },
-        "Targets<AcquisitionFunnel>": {
-            "description": "Target values must match the underlying type, or explicitly be null",
+        "RecursivePartial<AcquisitionFunnel>": {
+            "description": "Target values are optional; if not present, they are not set.",
             "properties": {
                 "conversions": {
-                    "$ref": "#/definitions/Targets<AcquisitionConversions>",
+                    "$ref": "#/definitions/RecursivePartial<AcquisitionConversions>",
                     "description": "Conversion rates in the acquisition funnel @computed"
                 },
                 "costs": {
-                    "$ref": "#/definitions/Targets<AcquisitionCategories<string>>",
+                    "$ref": "#/definitions/RecursivePartial<AcquisitionCategories<string>>",
                     "description": "Cost-pers in the acquisition funnel @computed"
                 },
                 "volumes": {
-                    "$ref": "#/definitions/Targets<AcquisitionCategories<number>>",
+                    "$ref": "#/definitions/RecursivePartial<AcquisitionCategories<number>>",
                     "description": "Absolute volumes in the acquisition funnel"
                 }
             },
-            "required": [
-                "conversions",
-                "costs",
-                "volumes"
-            ],
             "type": "object"
         },
-        "Targets<Investment>": {
-            "description": "Target values must match the underlying type, or explicitly be null",
+        "RecursivePartial<Investment>": {
+            "description": "Target values are optional; if not present, they are not set.",
             "properties": {
                 "acquisition": {
-                    "$ref": "#/definitions/Targets<InvestmentCategoryWithExpenses>",
+                    "$ref": "#/definitions/RecursivePartial<InvestmentCategoryWithExpenses>",
                     "description": "Investment and returns for the acquisition funnel"
                 },
                 "retention": {
-                    "$ref": "#/definitions/Targets<InvestmentCategoryWithExpenses>",
+                    "$ref": "#/definitions/RecursivePartial<InvestmentCategoryWithExpenses>",
                     "description": "Investment and returns for the retention funnel"
                 },
                 "total": {
-                    "$ref": "#/definitions/Targets<InvestmentCategory>",
+                    "$ref": "#/definitions/RecursivePartial<InvestmentCategory>",
                     "description": "Total investment and returns across all funnels @computed"
                 }
             },
-            "required": [
-                "acquisition",
-                "retention",
-                "total"
-            ],
             "type": "object"
         },
-        "Targets<InvestmentCategory>": {
-            "description": "Per-category investment breakdown",
+        "RecursivePartial<InvestmentCategory>": {
             "properties": {
                 "estimated_revenue_gain": {
                     "description": "The estimated revenue gain as a function of monthly rent @computed",
-                    "type": [
-                        "null",
-                        "string"
-                    ]
+                    "type": "string"
                 },
                 "romi": {
                     "description": "The return on investment @computed",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "total": {
                     "description": "The total spent across all buckets @computed",
-                    "type": [
-                        "null",
-                        "string"
-                    ]
+                    "type": "string"
                 }
             },
-            "required": [
-                "estimated_revenue_gain",
-                "romi",
-                "total"
-            ],
             "type": "object"
         },
-        "Targets<InvestmentCategoryWithExpenses>": {
+        "RecursivePartial<InvestmentCategoryWithExpenses>": {
             "properties": {
                 "estimated_revenue_gain": {
                     "description": "The estimated revenue gain as a function of monthly rent @computed",
-                    "type": [
-                        "null",
-                        "string"
-                    ]
+                    "type": "string"
                 },
                 "expenses": {
-                    "$ref": "#/definitions/Targets<InvestmentExpenses>",
+                    "$ref": "#/definitions/RecursivePartial<InvestmentExpenses>",
                     "description": "Breakdown of marketing expenses into sub-buckets"
                 },
                 "romi": {
                     "description": "The return on investment @computed",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "total": {
                     "description": "The total spent across all buckets @computed",
-                    "type": [
-                        "null",
-                        "string"
-                    ]
+                    "type": "string"
                 }
             },
-            "required": [
-                "estimated_revenue_gain",
-                "expenses",
-                "romi",
-                "total"
-            ],
             "type": "object"
         },
-        "Targets<InvestmentExpenses>": {
-            "description": "Marketing investment expense buckets",
+        "RecursivePartial<InvestmentExpenses>": {
             "properties": {
                 "demand_creation": {
-                    "type": [
-                        "null",
-                        "string"
-                    ]
+                    "type": "string"
                 },
                 "leasing_enablement": {
-                    "type": [
-                        "null",
-                        "string"
-                    ]
+                    "type": "string"
                 },
                 "market_intelligence": {
-                    "type": [
-                        "null",
-                        "string"
-                    ]
+                    "type": "string"
                 },
                 "reputation_building": {
-                    "type": [
-                        "null",
-                        "string"
-                    ]
+                    "type": "string"
                 }
             },
-            "required": [
-                "demand_creation",
-                "leasing_enablement",
-                "market_intelligence",
-                "reputation_building"
-            ],
             "type": "object"
         },
-        "Targets<Leasing>": {
-            "description": "Leasing -- the \"logical\" side of renting",
+        "RecursivePartial<Leasing>": {
             "properties": {
                 "cd_rate": {
                     "description": "Cancellations/denials as percentage of lease application @computed",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "cds": {
                     "description": "Number of cancellations AND denials",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "change": {
                     "description": "Net change in number of leases during this period @computed",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "rate": {
                     "description": "Lease rate as a function of occupiable units @computed",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "renewal_notices": {
                     "description": "Number of new notices to renew",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "renewal_rate": {
                     "description": "Renewal rate @computed",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "renewals": {
                     "description": "Number of renewals actually effected in timeframe",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "resident_decisions": {
                     "description": "Number of resident decisions (typically, due to expire leases)",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "units": {
                     "description": "Number of leased units at end of report period @computed",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "vacation_notices": {
                     "description": "Number of notices to vacate",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 }
             },
-            "required": [
-                "cd_rate",
-                "cds",
-                "change",
-                "rate",
-                "renewal_notices",
-                "renewal_rate",
-                "renewals",
-                "resident_decisions",
-                "units",
-                "vacation_notices"
-            ],
             "type": "object"
         },
-        "Targets<Occupancy>": {
-            "description": "Occupancy -- the \"physical\" side of renting",
+        "RecursivePartial<Occupancy>": {
             "properties": {
                 "move_ins": {
                     "description": "Number of units moved into during period",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "move_outs": {
                     "description": "Number of units moved out of during period",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "occupiable": {
                     "description": "Number of occupiable units at the end of report period",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "rate": {
                     "description": "Ratio of occupied to occupiable units @computed",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "units": {
                     "description": "Number of occupied units at end of report period @computed",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 }
             },
-            "required": [
-                "move_ins",
-                "move_outs",
-                "occupiable",
-                "rate",
-                "units"
-            ],
             "type": "object"
         },
-        "Targets<Property>": {
-            "description": "Target values must match the underlying type, or explicitly be null",
+        "RecursivePartial<Property>": {
+            "description": "Target values are optional; if not present, they are not set.",
             "properties": {
                 "cost_per_exe_vs_rent": {
                     "description": "The cost per exe vs the monthly average rent during this period",
-                    "type": [
-                        "null",
-                        "number"
-                    ]
+                    "type": "number"
                 },
                 "leasing": {
-                    "$ref": "#/definitions/Targets<Leasing>",
+                    "$ref": "#/definitions/RecursivePartial<Leasing>",
                     "description": "Basic leasing information for the period"
                 },
                 "monthly_average_rent": {
                     "description": "The average rent, across all units, during this period",
-                    "type": [
-                        "null",
-                        "string"
-                    ]
+                    "type": "string"
                 },
                 "occupancy": {
-                    "$ref": "#/definitions/Targets<Occupancy>",
+                    "$ref": "#/definitions/RecursivePartial<Occupancy>",
                     "description": "Basic occupancy information for the period"
                 }
             },
-            "required": [
-                "cost_per_exe_vs_rent",
-                "leasing",
-                "monthly_average_rent",
-                "occupancy"
-            ],
             "type": "object"
         },
         "TimeSpan": {

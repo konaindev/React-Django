@@ -47,7 +47,7 @@ export default class LeasingPerformanceReport extends Component {
           )} Executed Leases (Out of ${formatNumber(
             r.property.occupancy.occupiable
           )})`}
-          detail2={formatTargetPercent(r.targets.property.leasing.rate)}
+          detail2={formatTargetPercent(r.targets?.property?.leasing?.rate)}
           innerBox={WhiskerPlot.maybe(r.whiskers?.leased_rate)}
         />
         <LargeBoxLayout
@@ -63,7 +63,9 @@ export default class LeasingPerformanceReport extends Component {
           )} Notices to Renew (Out of ${
             r.property.leasing.resident_decisions
           } Resident Decisions)`}
-          detail2={formatTargetPercent(r.targets.property.leasing.renewal_rate)}
+          detail2={formatTargetPercent(
+            r.targets?.property?.leasing?.renewal_rate
+          )}
           innerBox={WhiskerPlot.maybe(r.whiskers?.renewal_rate)}
         />
         <LargeBoxLayout
@@ -79,7 +81,7 @@ export default class LeasingPerformanceReport extends Component {
           )} Occupied Units (Out of ${formatNumber(
             r.property.occupancy.occupiable
           )})`}
-          detail2={formatTargetPercent(r.targets.property.occupancy.rate)}
+          detail2={formatTargetPercent(r.targets?.property?.occupancy?.rate)}
           innerBox={WhiskerPlot.maybe(r.whiskers?.occupancy_rate)}
         />
       </BoxRow>
@@ -98,13 +100,13 @@ export default class LeasingPerformanceReport extends Component {
             <SmallNumberBox
               name="Lease Applications"
               value={r.funnel.volumes.app}
-              target={r.targets.funnel.volumes.app}
+              target={r.targets?.funnel?.volumes?.app}
               delta={r.deltas?.funnel?.volumes?.app}
             />
             <SmallNumberBox
               name="Cancellations and Denials"
               value={r.property.leasing.cds}
-              target={r.targets.property.leasing.cds}
+              target={r.targets?.property?.leasing?.cds}
               delta={r.deltas?.property?.leasing?.cds}
             />
           </BoxColumn>
@@ -112,13 +114,13 @@ export default class LeasingPerformanceReport extends Component {
             <SmallNumberBox
               name="Notices to Renew"
               value={r.property.leasing.renewal_notices}
-              target={r.targets.property.leasing.renewal_notices}
+              target={r.targets?.property?.leasing?.renewal_notices}
               delta={r.deltas?.property?.leasing?.renewal_notices}
             />
             <SmallNumberBox
               name="Notices to Vacate"
               value={r.property.leasing.vacation_notices}
-              target={r.targets.property.leasing.vacation_notices}
+              target={r.targets?.property?.leasing?.vacation_notices}
               delta={r.deltas?.property?.leasing?.vacation_notices}
             />
           </BoxColumn>
@@ -126,13 +128,13 @@ export default class LeasingPerformanceReport extends Component {
             <SmallNumberBox
               name="Move Ins"
               value={r.property.occupancy.move_ins}
-              target={r.targets.property.occupancy.move_ins}
+              target={r.targets?.property?.occupancy.move_ins}
               delta={r.deltas?.property?.occupancy?.move_ins}
             />
             <SmallNumberBox
               name="Move Outs"
               value={r.property.occupancy.move_outs}
-              target={r.targets.property.occupancy.move_outs}
+              target={r.targets?.property?.occupancy?.move_outs}
               delta={r.deltas?.property?.occupancy?.move_outs}
             />
           </BoxColumn>
