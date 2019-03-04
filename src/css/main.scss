@@ -17,32 +17,6 @@
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
 }
 
-//
-// TODO MOVE ME
-//
-
-.k-report-table {
-    border-collapse: separate;
-    border-spacing: 0 0.5em;
-
-    tr > th {
-        padding: $s2;
-        font-family: $font-sans;
-        font-weight: $weight-normal;
-        text-align: right;
-
-        &:first-child {
-            text-align: left;
-        }
-    }
-
-    tr > td {
-        padding: $s2;
-        font-family: $font-mono;
-        text-align: right;
-    }
-}
-
 //-----------------------------------------------------------------------------
 // Content Page Classes (for non-react-rooted pages)
 //-----------------------------------------------------------------------------
