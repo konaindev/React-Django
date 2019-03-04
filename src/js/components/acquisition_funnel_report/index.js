@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import BoxRow from "../box_row";
 import BoxColumn from "../box_column";
 import ReportSection from "../report_section";
+import PercentageGraphBox from "../percentage_graph_box";
 import WhiskerPlot from "../whisker_plot";
 import { LargeDetailPercentBox, LargePercentBox } from "../large_box_layout";
 
@@ -28,27 +29,27 @@ export default class AcquisitionFunnelReport extends Component {
   static HeadlineNumbers = ({ report: r }) => {
     return (
       <BoxRow>
-        <LargeDetailPercentBox
+        <PercentageGraphBox
           name="USV > EXE"
           value={r.funnel.conversions.usv_exe}
           target={r.targets?.funnel?.conversions?.usv_exe}
           delta={r.deltas?.funnel?.conversions?.usv_exe}
-          innerBox={WhiskerPlot.maybe(r.whiskers?.usv_exe)}
+          series={r.whiskers?.usv_exe}
         />
-        <LargePercentBox
+        <PercentageGraphBox
           name="Cancellation & Denial Rate"
           value={r.property.leasing.cd_rate}
           target={r.targets?.property?.leasing?.cd_rate}
           delta={r.deltas?.property?.leasing?.cd_rate}
-          innerBox={WhiskerPlot.maybe(r.whiskers?.lease_cd_rate)}
+          series={r.whiskers?.lease_cd_rate}
         />
         {/* we reverse the arrow here because declining percentages are *good* */}
-        <LargePercentBox
-          name="Cost Per EXE / Average Monthly Rent"
+        <PercentageGraphBox
+          name="Cost per Exe / Lowest Monthly Rent"
           value={r.property.cost_per_exe_vs_rent}
           target={r.targets?.property?.cost_per_exe_vs_rent}
           delta={r.deltas?.property?.cost_per_exe_vs_rent}
-          innerBox={WhiskerPlot.maybe(r.whiskers?.cost_per_exe_vs_rent)}
+          series={r.whiskers?.cost_per_exe_vs_rent}
         />
       </BoxRow>
     );
@@ -212,13 +213,15 @@ export default class AcquisitionFunnelReport extends Component {
   };
 
   render() {
+    const { report } = this.props;
+
     return (
       <ReportSection name="Acquisition Funnel">
-        <AcquisitionFunnelReport.HeadlineNumbers report={this.props.report} />
+        {<AcquisitionFunnelReport.HeadlineNumbers report={report} />}
         <AcquisitionFunnelReport.FunnelTable
           header={<AcquisitionFunnelReport.FunnelHeader />}
           content={
-            <AcquisitionFunnelReport.FunnelContent report={this.props.report} />
+            <AcquisitionFunnelReport.FunnelContent report={report} />
           }
         />
       </ReportSection>
