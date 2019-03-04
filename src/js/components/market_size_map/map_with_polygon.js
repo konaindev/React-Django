@@ -28,8 +28,6 @@ export class MapWithPolygon extends Component {
     this.google = null;
 
     this.state = {
-      currentZoom: DEFAULT_ZOOM,
-      currentCenter: { lat: 0, lng: 0 },
       isGoogleMapLoaded: false,
     };
   }
@@ -77,14 +75,6 @@ export class MapWithPolygon extends Component {
 
     // resize map
     google.map.fitBounds(bounds, 0);
-
-    this.setState({
-      currentZoom: google.map.zoom,
-      currentCenter: {
-        lat: google.map.center.lat(),
-        lng: google.map.center.lng(),
-      }
-    });
   }
 
   getZipCodeLabels() {
@@ -104,6 +94,7 @@ export class MapWithPolygon extends Component {
 
       return (
         <ZipCodeLabel
+          key={zip}
           lat={zipAreaCenter.lat()}
           lng={zipAreaCenter.lng()}
           zipCode={zip}
@@ -114,15 +105,14 @@ export class MapWithPolygon extends Component {
 
 
   render() {
-    const { currentCenter, currentZoom } = this.state;
     const customMarkers = this.getZipCodeLabels();
 
     return (
       <div className="market-size-map">
         <GoogleMap
           bootstrapURLKeys={{ key: GOOGLE_MAP_API_KEY, libraries: 'geometry' }}
-          center={currentCenter}
-          zoom={currentZoom}
+          defaultCenter={{ lat: 0, lng: 0 }}
+          defaultZoom={DEFAULT_ZOOM}
           options={createMapOptions}
           yesIWantToUseGoogleMapApiInternals={true}
           onGoogleApiLoaded={this.onGoogleApiLoaded}

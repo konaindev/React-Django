@@ -29,8 +29,6 @@ export class MapWithCircle extends Component {
     this.google = null;
 
     this.state = {
-      currentZoom: DEFAULT_ZOOM,
-      currentCenter: { lat: 0, lng: 0 },
       isGoogleMapLoaded: false,
     };
   }
@@ -84,14 +82,6 @@ export class MapWithCircle extends Component {
 
     // resize map so that circle is drawn in proper size
     google.map.fitBounds(circle.getBounds(), 0);
-
-    this.setState({
-      currentZoom: google.map.zoom,
-      currentCenter: {
-        lat: google.map.center.lat(),
-        lng: google.map.center.lng(),
-      }
-    });
 
     const pointSymbol = {
       path: google.maps.SymbolPath.CIRCLE,
@@ -159,15 +149,14 @@ export class MapWithCircle extends Component {
 
 
   render() {
-    const { currentCenter, currentZoom } = this.state;
     const customMarkers = this.getRadiusTextRotated();
 
     return (
       <div className="market-size-map">
         <GoogleMap
           bootstrapURLKeys={{ key: GOOGLE_MAP_API_KEY, libraries: 'geometry' }}
-          center={currentCenter}
-          zoom={currentZoom}
+          defaultCenter={{ lat: 0, lng: 0 }}
+          defaultZoom={DEFAULT_ZOOM}
           options={createMapOptions}
           yesIWantToUseGoogleMapApiInternals={true}
           onGoogleApiLoaded={this.onGoogleApiLoaded}
