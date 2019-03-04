@@ -142,6 +142,9 @@ jspm_packages/
 # TypeScript v1 declaration files
 typings/
 
+# Storybook build directory
+.out/
+
 # Optional npm cache directory
 .npm
 
