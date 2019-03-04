@@ -53,7 +53,7 @@ export default class LeasingPerformanceReport extends Component {
         <LargeBoxLayout
           name="Retention"
           content={DeltaLayout.build(
-            r.renewal_rate,
+            r.property.leasing.renewal_rate,
             r.deltas?.property?.leasing?.renewal_rate,
             formatPercent,
             formatDeltaPercent
@@ -64,21 +64,23 @@ export default class LeasingPerformanceReport extends Component {
             r.property.leasing.resident_decisions
           } Resident Decisions)`}
           detail2={formatTargetPercent(r.targets.property.leasing.renewal_rate)}
-          innerBox={WhiskerPlot.maybe(r.whiskers.renewal_rate)}
+          innerBox={WhiskerPlot.maybe(r.whiskers?.renewal_rate)}
         />
         <LargeBoxLayout
           name="Occupied"
           content={DeltaLayout.build(
-            r.occupancy_rate,
-            r.delta_occupancy_rate,
+            r.property.occupancy.rate,
+            r.deltas?.property?.occupancy?.rate,
             formatPercent,
             formatDeltaPercent
           )}
           detail={`${formatNumber(
-            r.occupied_units
-          )} Occupied Units (Out of ${formatNumber(r.occupiable_units)})`}
-          detail2={formatTargetPercent(r.target_occupancy_rate)}
-          innerBox={WhiskerPlot.maybe(r.whiskers.occupancy_rate)}
+            r.property.occupancy.units
+          )} Occupied Units (Out of ${formatNumber(
+            r.property.occupancy.occupiable
+          )})`}
+          detail2={formatTargetPercent(r.targets.property.occupancy.rate)}
+          innerBox={WhiskerPlot.maybe(r.whiskers?.occupancy_rate)}
         />
       </BoxRow>
     );
@@ -95,43 +97,43 @@ export default class LeasingPerformanceReport extends Component {
           <BoxColumn>
             <SmallNumberBox
               name="Lease Applications"
-              value={r.lease_applications}
-              target={r.target_lease_applications}
-              delta={r.delta_lease_applications}
+              value={r.funnel.volumes.app}
+              target={r.targets.funnel.volumes.app}
+              delta={r.deltas?.funnel?.volumes?.app}
             />
             <SmallNumberBox
               name="Cancellations and Denials"
-              value={r.lease_cds}
-              target={r.target_lease_cds}
-              delta={r.delta_lease_cds}
+              value={r.property.leasing.cds}
+              target={r.targets.property.leasing.cds}
+              delta={r.deltas?.property?.leasing?.cds}
             />
           </BoxColumn>
           <BoxColumn>
             <SmallNumberBox
               name="Notices to Renew"
-              value={r.lease_renewals}
-              target={r.target_lease_renewals}
-              delta={r.delta_lease_renewals}
+              value={r.property.leasing.renewal_notices}
+              target={r.targets.property.leasing.renewal_notices}
+              delta={r.deltas?.property?.leasing?.renewal_notices}
             />
             <SmallNumberBox
               name="Notices to Vacate"
-              value={r.lease_vacation_notices}
-              target={r.target_lease_vacation_notices}
-              delta={r.delta_lease_vacation_notices}
+              value={r.property.leasing.vacation_notices}
+              target={r.targets.property.leasing.vacation_notices}
+              delta={r.deltas?.property?.leasing?.vacation_notices}
             />
           </BoxColumn>
           <BoxColumn>
             <SmallNumberBox
               name="Move Ins"
-              value={r.move_ins}
-              target={r.target_move_ins}
-              delta={r.delta_move_ins}
+              value={r.property.occupancy.move_ins}
+              target={r.targets.property.occupancy.move_ins}
+              delta={r.deltas?.property?.occupancy?.move_ins}
             />
             <SmallNumberBox
               name="Move Outs"
-              value={r.move_outs}
-              target={r.target_move_outs}
-              delta={r.delta_move_outs}
+              value={r.property.occupancy.move_outs}
+              target={r.targets.property.occupancy.move_outs}
+              delta={r.deltas?.property?.occupancy?.move_outs}
             />
           </BoxColumn>
         </BoxRow>
