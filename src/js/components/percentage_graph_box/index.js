@@ -28,7 +28,7 @@ export class PercentageGraphBox extends Component {
             {formatPercent(value)}
           </span>
           <div className="percentage-graph-box__graph-delta">
-            {series && WhiskerPlot.maybe(series)}
+            {series && WhiskerPlot.maybe(series, delta >= 0 ? 'up' : 'down')}
             <DeltaIndicator delta={delta} indicatorPos="right" />
           </div>
         </div>
