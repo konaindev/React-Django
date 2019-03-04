@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 import GoogleMap from 'google-map-react';
 
 import "./market_size_map.scss";
-import { GOOGLE_MAP_API_KEY, DEFAULT_ZOOM, stylesForNightMode } from './map_settings';
+import {
+  GOOGLE_MAP_API_KEY,
+  DEFAULT_ZOOM,
+  stylesForNightMode,
+  stylesForRegionFill,
+} from './map_settings';
 
 
 const createMapOptions = (maps) => ({
@@ -31,7 +36,7 @@ export class MapWithPolygon extends Component {
       isGoogleMapLoaded: false,
     };
   }
- 
+
    // google: Object { map, maps }
   onGoogleApiLoaded = (google) => {
     this.google = google;
@@ -65,11 +70,7 @@ export class MapWithPolygon extends Component {
       let polygon = new google.maps.Polygon({
         map: google.map,
         paths: paths,
-        strokeColor: '#5147FF',
-        strokeOpacity: 1,
-        strokeWeight: 1.54,
-        fillColor: '#6760e6',  // rgba(103,96,230,0.1);
-        fillOpacity: 0.1,
+        ...stylesForRegionFill,
       });
     });
 

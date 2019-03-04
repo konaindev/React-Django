@@ -3,7 +3,12 @@ import PropTypes from "prop-types";
 import GoogleMap from 'google-map-react';
 
 import "./market_size_map.scss";
-import { GOOGLE_MAP_API_KEY, DEFAULT_ZOOM, stylesForNightMode } from './map_settings';
+import {
+  GOOGLE_MAP_API_KEY,
+  DEFAULT_ZOOM,
+  stylesForNightMode,
+  stylesForRegionFill,
+} from './map_settings';
 import { convertDistanceToMeter } from "../../utils/formatters";
 
 
@@ -73,11 +78,7 @@ export class MapWithCircle extends Component {
       map: google.map,
       center: centerLatLng,
       radius: radiusInMeter,
-      strokeColor: '#5147FF',
-      strokeOpacity: 1,
-      strokeWeight: 1.54,
-      fillColor: '#6760e6',  // rgba(103,96,230,0.1);
-      fillOpacity: 0.1,
+      ...stylesForRegionFill,
     });
 
     // resize map so that circle is drawn in proper size

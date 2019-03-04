@@ -82,3 +82,11 @@ export const stylesForNightMode = [
     stylers: [{color: '#17263c'}]
   }
 ];
+
+export const stylesForRegionFill = {
+  strokeColor: '#5147FF',
+  strokeOpacity: 1,
+  strokeWeight: 1.54,
+  fillColor: '#6760e6',  // rgba(103,96,230,0.1);
+  fillOpacity: 0.1,
+};
