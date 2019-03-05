@@ -1,6 +1,8 @@
 const path = require("path");
+const StyleLintPlugin = require("stylelint-webpack-plugin");
 
 module.exports = {
+  plugins: [new StyleLintPlugin()],
   module: {
     rules: [
       {
