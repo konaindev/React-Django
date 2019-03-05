@@ -24,7 +24,8 @@ class DefaultComputedPeriodTestCase(TestCase):
             project=project,
             start=datetime.date(year=2018, month=12, day=19),
             end=datetime.date(year=2018, month=12, day=26),
-            monthly_average_rent=decimal.Decimal(0),
+            monthly_average_rent=decimal.Decimal("0"),
+            lowest_monthly_rent=decimal.Decimal("0"),
             leased_units_start=0,
             occupiable_units_start=0,
         )
@@ -169,6 +170,7 @@ class DefaultReportTestCase(TestCase):
             start=datetime.date(year=2018, month=12, day=19),
             end=datetime.date(year=2018, month=12, day=26),
             monthly_average_rent=decimal.Decimal("0"),
+            lowest_monthly_rent=decimal.Decimal("0"),
             occupiable_units_start=0,
         )
         self.report = Report(project, period)
@@ -227,6 +229,7 @@ class LincolnTowerPeriodTestCase(TestCase):
             acq_leasing_enablement=decimal.Decimal("11000"),
             acq_market_intelligence=decimal.Decimal("7000"),
             monthly_average_rent=decimal.Decimal("7278"),
+            lowest_monthly_rent=decimal.Decimal("7278"),
         )
         self.period = ComputedPeriod(self.raw_period)
 

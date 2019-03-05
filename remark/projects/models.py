@@ -308,6 +308,17 @@ class Period(ModelPeriod, models.Model):
     )
     monthly_average_rent.metric = Metric(Behavior.POINT_IN_TIME_EARLIEST_KEEP)
 
+    # XXX It's not clear to me this number is better. -Dave
+    lowest_monthly_rent = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=None,
+        null=True,
+        blank=True,
+        help_text="Lowest rent tenants pay in the month including this period. If not specified, it will be pulled from an earlier period.",
+    )
+    lowest_monthly_rent.metric = Metric(Behavior.POINT_IN_TIME_EARLIEST_KEEP)
+
     # ------------------------------------------------------
     # TARGETS: Acquisition Investment
     # ------------------------------------------------------

@@ -14,7 +14,8 @@ from .whiskers import WhiskerSeries
 SCHEMA_MAP = {
     "property": {
         "monthly_average_rent": "monthly_average_rent",
-        "cost_per_exe_vs_rent": "cost_per_exe_vs_monthly_average_rent",
+        "lowest_monthly_rent": "lowest_monthly_rent",
+        "cost_per_exe_vs_rent": "cost_per_exe_vs_lowest_monthly_rent",
         "leasing": {
             "change": "delta_leases",
             "cds": "lease_cds",
