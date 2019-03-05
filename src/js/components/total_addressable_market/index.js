@@ -2,8 +2,9 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import "./total_addressable_market.scss";
-import SectionHeader from '../section_header'
+import SectionHeader from "../section_header";
 import RentToIncomeAnalysis from "../rent_to_income_analysis";
+import EstimatedPopulation from "../estimated_population";
 import EstimatedMarketSizeOverview from "../estimated_market_size_overview";
 import SegmentOverviewByAge from "../segment_overview_by_age";
 import MarketSizeGrowthReach from "../market_size_growth_reach";
@@ -22,6 +23,9 @@ export function TotalAddressableMarket({
   return (
     <div className="total-addressable-market">
       <RentToIncomeAnalysis {...rent_to_income} />
+
+      <SectionHeader title={`Estimated Population: ${location}`} />
+      <EstimatedPopulation {...estimated_population} />
 
       <SectionHeader title={`Detailed market sizing: ${location}`} />
       <EstimatedMarketSizeOverview market_sizes={segments} />

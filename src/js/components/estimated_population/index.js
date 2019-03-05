@@ -8,7 +8,7 @@ export const EstimatedPopulation = ({ population, radius, units, zip_codes }) =>
   const roundedPop = formatNumber(Math.round(population / 1000) * 1000);
   return (
     <div className="estimated-population">
-      <div className="estimated-population__head">
+      <div className="estimated-population__title">
         Est. Population
       </div>
 
