@@ -69,6 +69,11 @@ class ComputedPeriod(ComputedValueMixin):
         # XXX this also seems like a nonsense number to me. -Dave
         return div_or_0(self.lease_cds, self.lease_applications)
 
+    @computed_value
+    def resident_decisions(self):
+        """The total number of notices to renew and vacate"""
+        return sum_or_0(self.lease_renewal_notices, self.lease_vacation_notices)
+
     # ------------------------------------------------------
     # TARGETS: Logical activity (lease)
     # ------------------------------------------------------
@@ -87,6 +92,13 @@ class ComputedPeriod(ComputedValueMixin):
         """The target number of leased units we'd like to achieve."""
         return div_or_none(
             self.target_lease_renewal_notices, self.target_leases_due_to_expire
+        )
+
+    @computed_value
+    def target_resident_decisions(self):
+        """The target number of resident decisions we'd like to achieve."""
+        return sum_or_none(
+            self.target_lease_renewal_notices, self.target_lease_vacation_notices
         )
 
     # ------------------------------------------------------

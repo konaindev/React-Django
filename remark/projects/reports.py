@@ -22,7 +22,7 @@ SCHEMA_MAP = {
             "renewal_notices": "lease_renewal_notices",
             "renewals": "lease_renewals",
             "renewal_rate": "renewal_rate",
-            "resident_decisions": "leases_due_to_expire",
+            "resident_decisions": "resident_decisions",
             "vacation_notices": "lease_vacation_notices",
             "rate": "leased_rate",
             "units": "leased_units",
