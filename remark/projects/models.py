@@ -79,7 +79,12 @@ class Project(models.Model):
         """
         Return the end date (exclusive) of the campaign.
         """
-        return self.periods.order_by("-start").values_list("end", flat=True).first()
+        return (
+            self.get_campaign_periods()
+            .order_by("-start")
+            .values_list("end", flat=True)
+            .first()
+        )
 
     def to_jsonable(self):
         """Return a representation that can be converted to a JSON string."""
