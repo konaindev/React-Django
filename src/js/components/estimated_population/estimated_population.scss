@@ -1,56 +1,56 @@
 @import "css/base.scss";
 
 .estimated-population {
-  display: flex;
-  justify-content: space-between;
-  margin: $panel-spacing;
+    display: flex;
+    justify-content: space-between;
+    margin: $panel-spacing;
 }
 
 .estimated-population__figure-wrapper {
-  flex: 1 1 30%;
-  max-width: 420px;
-  margin-right: 32px;
+    flex: 1 1 30%;
+    max-width: 420px;
+    margin-right: 32px;
 }
 
 .estimated-population__map-wrapper {
-  flex: 1 1 70%;
-  max-width: 868px;
-  height: 452px;
+    flex: 1 1 70%;
+    max-width: 868px;
+    height: 452px;
 }
 
 .estimated-population__figure {
-  height: 100%;
-  border: $panel-border;
-  border-radius: $panel-border-radius;
-  background-color: $panel-background-color;
-  box-shadow: $panel-box-shadow;
-  color: #FFFFFF;
-  text-align: center;
-  padding: 80px;
-  align-self: stretch;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+    height: 100%;
+    border: $panel-border;
+    border-radius: $panel-border-radius;
+    background-color: $panel-background-color;
+    box-shadow: $panel-box-shadow;
+    color: #FFFFFF;
+    text-align: center;
+    padding: 80px;
+    align-self: stretch;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 
-  .figure__label {
-    font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 1px;
-    line-height: 15px;
-    margin-bottom: 11px;
-    text-transform: uppercase;
-  }
+    .figure__label {
+        font-size: 12px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        line-height: 15px;
+        margin-bottom: 11px;
+        text-transform: uppercase;
+    }
 
-  .figure__value {
-    font-family: 'formular-mono';
-    font-size: 62px;
-    letter-spacing: -2px;
-    line-height: 76px;
-    margin-bottom: 16px;
-  }
+    .figure__value {
+        font-family: $font-mono;
+        font-size: 62px;
+        letter-spacing: -2px;
+        line-height: 76px;
+        margin-bottom: 16px;
+    }
 
-  .figure__description {
-    font-size: 14px;
-    line-height: 24px;
-  }
+    .figure__description {
+        font-size: 14px;
+        line-height: 24px;
+    }
 }
