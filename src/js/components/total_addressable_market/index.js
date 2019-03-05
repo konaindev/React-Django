@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import "./total_addressable_market.scss";
+import Container from "../container";
 import SectionHeader from "../section_header";
 import RentToIncomeAnalysis from "../rent_to_income_analysis";
 import EstimatedPopulation from "../estimated_population";
@@ -19,7 +20,7 @@ export function TotalAddressableMarket({
   average
 }) {
   return (
-    <div className="total-addressable-market">
+    <Container className="total-addressable-market">
       <SectionHeader title={`Rent To Income Analysis`} smallMarginTop={true} />
       <RentToIncomeAnalysis {...rent_to_income} />
 
@@ -45,7 +46,7 @@ export function TotalAddressableMarket({
         average={average}
         market_sizes={segments}
       />
-    </div>
+    </Container>
   );
 }
 
