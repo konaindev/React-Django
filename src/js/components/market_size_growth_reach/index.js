@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import "./market_size_growth_reach.scss";
 import { formatNumber, formatPercent } from "../../utils/formatters";
 
-
 export function MarketSizeGrowthReach({
   market_sizes,
   future_year,
@@ -21,15 +20,15 @@ export function MarketSizeGrowthReach({
           <span>Est. Market Growth</span>
           <span>Est. {future_year} Market Size</span>
         </div>
-        {market_sizes.map((size, index) =>
+        {market_sizes.map((size, index) => (
           <div key={index} className="table__row table__row--body">
-            <span>Ages {size.age_group.split('-').join(' - ')}</span>
+            <span>Ages {size.age_group.split("-").join(" - ")}</span>
             <span>{formatNumber(size.market_size)}</span>
             <span>{formatNumber(size.usv)}</span>
             <span>{formatPercent(size.growth, 2, 0)}</span>
             <span>{formatNumber(size.future_size)}</span>
           </div>
-        )}
+        ))}
       </div>
 
       <div className="market-size-growth-reach__summary">

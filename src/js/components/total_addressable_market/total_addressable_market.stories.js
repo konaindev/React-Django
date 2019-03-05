@@ -1,12 +1,12 @@
-import React from 'react';
+import React from "react";
 
- import { storiesOf } from '@storybook/react';
+import { storiesOf } from "@storybook/react";
 
-import props from './MarketAnalysis.js';
-import TotalAddressableMarket from './index';
+import props from "./MarketAnalysis.js";
+import TotalAddressableMarket from "./index";
 
-storiesOf('TotalAddressableMarket', module).add('default', () => (
-  <div style={{ width: 1320, margin: '80px auto' }}>
+storiesOf("TotalAddressableMarket", module).add("default", () => (
+  <div style={{ width: 1320, margin: "80px auto" }}>
     <TotalAddressableMarket {...props} />
   </div>
 ));

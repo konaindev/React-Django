@@ -6,7 +6,6 @@ import MarketSizeMap from "../market_size_map";
 
 import "./estimated_population.scss";
 
-
 export function EstimatedPopulation(props) {
   return (
     <div className="estimated-population">
@@ -27,31 +26,27 @@ export function InfoBox({ population, radius, units, zip_codes }) {
 
   return (
     <div className="estimated-population__figure">
-      <div className="figure__label">
-        Est. Population
-      </div>
+      <div className="figure__label">Est. Population</div>
 
-      <div className="figure__value">
-        {formatNumber(population)}
-      </div>
+      <div className="figure__value">{formatNumber(population)}</div>
 
       <div className="figure__description">
         {isCircleMode ? (
           <>
-            Figures obtained through the latest US Census show that the immediate {radius}{' '}
-            {units} area around the site has approx. {roundedPopulation}{' '}
-            total inhabitants.
+            Figures obtained through the latest US Census show that the
+            immediate {radius} {units} area around the site has approx.{" "}
+            {roundedPopulation} total inhabitants.
           </>
         ) : (
           <>
-            Figures obtained through the latest US Census show that the selected zip codes have approx.{' '}
-            {roundedPopulation} total inhabitants.
+            Figures obtained through the latest US Census show that the selected
+            zip codes have approx. {roundedPopulation} total inhabitants.
           </>
         )}
       </div>
     </div>
   );
-};
+}
 
 EstimatedPopulation.propTypes = {
   population: PropTypes.number.isRequired,

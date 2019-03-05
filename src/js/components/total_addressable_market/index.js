@@ -9,7 +9,6 @@ import EstimatedMarketSizeOverview from "../estimated_market_size_overview";
 import SegmentOverviewByAge from "../segment_overview_by_age";
 import MarketSizeGrowthReach from "../market_size_growth_reach";
 
-
 export function TotalAddressableMarket({
   location,
   estimated_population,
@@ -17,9 +16,8 @@ export function TotalAddressableMarket({
   segments,
   future_year,
   total,
-  average,
+  average
 }) {
-
   return (
     <div className="total-addressable-market">
       <SectionHeader title={`Rent To Income Analysis`} smallMarginTop={true} />
@@ -31,7 +29,7 @@ export function TotalAddressableMarket({
       <SectionHeader title={`Detailed market sizing: ${location}`} />
       <EstimatedMarketSizeOverview market_sizes={segments} />
 
-      { segments.map((segment, index) => (
+      {segments.map((segment, index) => (
         <SegmentOverviewByAge
           key={index}
           {...segment}
@@ -56,7 +54,7 @@ TotalAddressableMarket.propTypes = {
   estimated_population: PropTypes.object.isRequired,
   segments: PropTypes.array.isRequired,
   total: PropTypes.object.isRequired,
-  average: PropTypes.object.isRequired,
+  average: PropTypes.object.isRequired
 };
 
 export default TotalAddressableMarket;

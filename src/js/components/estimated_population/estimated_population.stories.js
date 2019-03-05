@@ -28,7 +28,7 @@ export const props_zips = {
           [45.513983, -122.672918],
           [45.504635, -122.667419],
           [45.476042, -122.669619],
-          [45.476042, -122.713058],
+          [45.476042, -122.713058]
         ]
       }
     },
@@ -41,7 +41,7 @@ export const props_zips = {
           [45.522781, -122.66577],
           [45.534878, -122.666869],
           [45.534878, -122.62013],
-          [45.522781, -122.619031],
+          [45.522781, -122.619031]
         ]
       }
     },
@@ -55,7 +55,7 @@ export const props_zips = {
           [45.505185, -122.617931],
           [45.505185, -122.619031],
           [45.523331, -122.617381],
-          [45.522781, -122.57889],
+          [45.522781, -122.57889]
         ]
       }
     }
@@ -63,13 +63,13 @@ export const props_zips = {
 };
 
 storiesOf("EstimatedPopulation", module).add("circle with radius", () => (
-  <div style={{ width: 1320, margin: '80px auto' }}>
+  <div style={{ width: 1320, margin: "80px auto" }}>
     <EstimatedPopulation {...props_radius} />
   </div>
 ));
 
 storiesOf("EstimatedPopulation", module).add("zip code polygons", () => (
-  <div style={{ width: 1320, margin: '80px auto' }}>
+  <div style={{ width: 1320, margin: "80px auto" }}>
     <EstimatedPopulation {...props_zips} />
   </div>
 ));
