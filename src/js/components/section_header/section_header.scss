@@ -4,11 +4,16 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: $s6 0;
+    padding: 24px 0;
+    margin-top: 64px;
     margin-bottom: 36px;
     border-bottom: $heading-border;
     color: $heading-font-color;
     opacity: 0.6;
+
+    &--mt-sm {
+        margin-top: 32px;
+    }
 
     &__title {
         letter-spacing: 1px;

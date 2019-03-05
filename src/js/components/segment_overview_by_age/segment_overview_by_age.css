@@ -1,9 +1,12 @@
+@import "../../../css/variables.scss";
+
 .segment-overview-by-age {
   border: 1px solid #161C29;
   border-radius: 6px;
   background-color: #1A202E;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.15);
   padding: 40px 60px;
+  margin: $panel-spacing;
 }
 
 .segment-overview-by-age__heading {

@@ -30,9 +30,9 @@ export class SegmentOverviewByAge extends Component {
             Segment {segment_number} | Ages {age_group}
           </div>
           <div className="segment-overview-by-age__heading-right">
-            Est. Segment Population {formatNumber(segment_population)} /{" "}
+            Est. Segment Population {formatNumber(segment_population)}
             <span className="segment-overview-by-age__total-pop">
-              {formatNumber(total_population)}
+              {` / ${formatNumber(total_population)}`}
             </span>
           </div>
         </div>
