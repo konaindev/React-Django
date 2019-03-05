@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import "./report.scss";
 
 import LeasingPerformanceReport from "../leasing_performance_report";
 import CampaignInvestmentReport from "../campaign_investment_report";

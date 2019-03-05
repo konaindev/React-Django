@@ -1,10 +1,10 @@
-@import "../../../css/variables.scss";
+@import "css/base.scss";
 
 $category-color-0: #273042;
-$category-color-1: #867FFE;
-$category-color-2: #675EFC;
-$category-color-3: #5147FF;
-$category-color-4: #4035F4;
+$category-color-1: #867ffe;
+$category-color-2: #675efc;
+$category-color-3: #5147ff;
+$category-color-4: #4035f4;
 
 .rent-to-income-analysis {
   $this: &;
@@ -170,31 +170,164 @@ $category-color-4: #4035F4;
       margin-bottom: 32px;
     }
 
-    #{$this}__categories {
-      flex-direction: row-reverse;
+    &__categories {
+        display: flex;
+        flex-direction: column-reverse;
     }
 
-    #{$this}__category {
-      margin: 0 32px 0 0;
+    &__category {
+        margin: 10px 0;
+        font-size: 14px;
+        line-height: 16px;
+        color: #6d778d;
+        white-space: nowrap;
+
+        &-color {
+            width: 32px;
+            height: 20px;
+            margin-right: 16px;
+            display: inline-block;
+            vertical-align: middle;
+
+            &--0 {
+                color: #6d778d;
+                background-color: $category-color-0;
+            }
+
+            &--1 {
+                background-color: $category-color-1;
+                color: #ffffff;
+            }
+
+            &--2 {
+                background-color: $category-color-2;
+                color: #ffffff;
+            }
+
+            &--3 {
+                background-color: $category-color-3;
+                color: #ffffff;
+            }
+
+            &--4 {
+                background-color: $category-color-4;
+                color: #ffffff;
+            }
+        }
+
+        &-name {
+            display: inline-block;
+            vertical-align: middle;
+        }
     }
 
-    #{$this}__ratio {
-      margin: 0 32px 0 0;
+    &-chart {
+        position: relative;
+        padding-left: 15px;
+        padding-bottom: 15px;
+
+        &__vertical-caption {
+            font-size: 12px;
+            letter-spacing: 1px;
+            line-height: 15px;
+            text-align: right;
+            text-transform: uppercase;
+            transform: rotate(-90deg);
+            transform-origin: right top;
+            position: absolute;
+            right: 100%;
+            top: 0;
+            white-space: nowrap;
+            color: #6d778d;
+        }
+
+        &__horizontal-caption {
+            font-size: 12px;
+            letter-spacing: 1px;
+            line-height: 15px;
+            text-align: right;
+            text-transform: uppercase;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            white-space: nowrap;
+            color: #6d778d;
+        }
+
+        &__body {
+            display: flex;
+            width: 100%;
+            flex-direction: row;
+            text-transform: uppercase;
+        }
+
+        &__group {
+            display: flex;
+            flex-direction: column-reverse;
+            flex: 1;
+
+            &--yaxis {
+                max-width: 65px;
+                width: 65px;
+            }
+        }
+
+        &__cell {
+            height: 44px;
+            line-height: 44px;
+            text-align: center;
+            font-size: 14px;
+
+            &--yaxis {
+                border-right: 1px solid rgba(61, 69, 85, 0.3);
+                text-align: right;
+                padding-right: 16px;
+            }
+
+            &--xaxis,
+            &--yaxis {
+                color: #ffffff;
+                font-size: 12px;
+            }
+        }
     }
 
-    #{$this}-chart {
-      &__vertical-caption {
-        right: initial;
-        top: initial;
-        left: 0;
-        bottom: 44px;
-        transform-origin: left top;
-      }
+    &--flip {
+        #{$this}__panel {
+            display: block;
 
-      &__horizontal-caption {
-        right: initial;
-        left: 80px;
-      }
+            &-left {
+                display: flex;
+                max-width: 100%;
+                margin-bottom: 32px;
+            }
+        }
+
+        #{$this}__categories {
+            flex-direction: row-reverse;
+        }
+
+        #{$this}__category {
+            margin: 0 32px 0 0;
+        }
+
+        #{$this}__ratio {
+            margin: 0 32px 0 0;
+        }
+
+        #{$this}-chart {
+            &__vertical-caption {
+                right: initial;
+                top: initial;
+                left: 0;
+                bottom: 44px;
+                transform-origin: left top;
+            }
+
+            &__horizontal-caption {
+                right: initial;
+                left: 80px;
+            }
+        }
     }
-  }
 }

@@ -1,7 +1,14 @@
 {
   "extends": "stylelint-config-recommended",
-  "ignoreFiles": ["**/spectral.scss"],
+  "ignoreAtRules": ["mixin", "include"],
+  "ignoreFiles": ["**/normalize.scss"],
   "rules": {
+    "at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": ["mixin", "include"]
+      }
+    ],
     "block-no-empty": null,
     "unit-whitelist": ["em", "rem", "s", "%", "deg", "px", "vh", "fr"]
   }

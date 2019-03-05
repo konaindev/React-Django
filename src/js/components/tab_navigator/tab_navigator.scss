@@ -1,43 +1,43 @@
-@import "../../../css/variables.scss";
+@import "css/base.scss";
 
 .tab-navigator {
-  &__navs {
-    display: flex;
-  }
-
-  &__nav-item {
-    $item: &;
-    font-size: $text-base;
-    letter-spacing: 0.5px;
-    line-height: $line-height-tight;
-    padding: $s4 0;
-    margin: 0 $s6;
-    color: $gray-lighter;
-    text-decoration: none;
-    position: relative;
-
-    &:hover:not(#{$item}--active) {
-      color: $gray;
+    &__navs {
+        display: flex;
     }
 
-    &--active {
-      cursor: default;
-      &:after {
-        content: '';
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: -1px;
-        border-bottom: 1px solid $highlight-bluegray-4;
-      }
+    &__nav-item {
+        $item: &;
+        font-size: $text-base;
+        letter-spacing: 0.5px;
+        line-height: $line-height-tight;
+        padding: $s4 0;
+        margin: 0 $s6;
+        color: $gray-lighter;
+        text-decoration: none;
+        position: relative;
+
+        &:hover:not(#{$item}--active) {
+            color: $gray;
+        }
+
+        &--active {
+            cursor: default;
+            &:after {
+                content: "";
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: -1px;
+                border-bottom: 1px solid $highlight-bluegray-4;
+            }
+        }
     }
-  }
 
-  &__divider {
-    border-bottom: $heading-border;
-  }
+    &__divider {
+        border-bottom: $heading-border;
+    }
 
-  &__content {
-    padding-top: $s4;
-  }
+    &__content {
+        padding-top: $s4;
+    }
 }

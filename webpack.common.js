@@ -1,5 +1,6 @@
 const path = require("path");
 const miniCSS = require("mini-css-extract-plugin");
+const StyleLintPlugin = require("stylelint-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -54,7 +55,10 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     publicPath: "/"
   },
-  plugins: [new miniCSS({ filename: "index.css", chunkFilename: "[id].css" })],
+  plugins: [
+    new miniCSS({ filename: "index.css", chunkFilename: "[id].css" }),
+    new StyleLintPlugin()
+  ],
   profile: true,
   resolve: {
     extensions: [".js", ".jsx"],
