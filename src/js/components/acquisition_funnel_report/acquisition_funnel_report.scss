@@ -23,12 +23,9 @@
 
     &-inner {
       height: 100%;
-      background-color: $bluegray-dark;
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      box-shadow: $panel-box-shadow;
-      border-radius: $border-radius-default;
     }
 
     &-header {

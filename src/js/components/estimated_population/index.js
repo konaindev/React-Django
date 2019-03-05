@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { formatNumber } from '../../utils/formatters';
 
+import Panel from "../panel";
 import './estimated_population.scss';
 
 export const EstimatedPopulation = ({ population, radius, units, zip_codes }) => {
   const roundedPop = formatNumber(Math.round(population / 1000) * 1000);
   return (
-    <div className="estimated-population">
+    <Panel className="estimated-population">
       <div className="estimated-population__head">
         Est. Population
       </div>
@@ -30,7 +31,7 @@ export const EstimatedPopulation = ({ population, radius, units, zip_codes }) =>
           </>
         )}
       </div>
-    </div>
+    </Panel>
   );
 }
 

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import DeltaIndicator from "../delta_indicator";
+import Panel from "../panel";
 import WhiskerPlot from "../whisker_plot";
 import { formatPercent } from "../../utils/formatters";
 import "./percentage_graph_box.scss";
@@ -21,7 +22,7 @@ export class PercentageGraphBox extends Component {
   render() {
     const { name, value, delta, target, series, extraContent } = this.props;
     return (
-      <div className="percentage-graph-box">
+      <Panel className="percentage-graph-box">
         <span className="percentage-graph-box__name">{name}</span>
         <div className="percentage-graph-box__content">
           <span className="percentage-graph-box__value">
@@ -38,7 +39,7 @@ export class PercentageGraphBox extends Component {
         <div className="percentage-graph-box__target">
           Target: {formatPercent(target)}
         </div>
-      </div>
+      </Panel>
     );
   }
 }

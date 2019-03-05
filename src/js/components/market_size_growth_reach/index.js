@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import "./market_size_growth_reach.scss";
 import { formatNumber, formatPercent } from "../../utils/formatters";
+import Panel from "../panel";
 import SectionHeader from "../section_header";
 
 export function MarketSizeGrowthReach({
@@ -23,7 +24,7 @@ export function MarketSizeGrowthReach({
   return (
     <div className="market-size-growth-reach">
       <SectionHeader title={`Est. Market Size, Growth & Reach : ${city}`} />
-      <div className="market-size-growth-reach__panel">
+      <Panel className="market-size-growth-reach__panel">
         <div className="market-size-growth-reach__table">
           <div className="table__row table__row--head">
             <span>Target Segment</span>
@@ -70,7 +71,7 @@ export function MarketSizeGrowthReach({
             <span>{formatNumber(future_size)}</span>
           </div>
         </div>
-      </div>
+      </Panel>
     </div>
   );
 }

@@ -3,6 +3,7 @@ import cn from 'classnames';
 import PropTypes from 'prop-types';
 import { formatCurrencyShorthand, formatPercent } from '../../utils/formatters';
 
+import Panel from '../panel';
 import './rent_to_income_analysis.scss';
 
 const THREASHOLD_COLUMNS = 10;
@@ -25,7 +26,7 @@ export const RentToIncomeAnalysis = ({
       <div className="rent-to-income-analysis__title">
         Rent To Income Analysis
       </div>
-      <div className="rent-to-income-analysis__panel">
+      <Panel className="rent-to-income-analysis__panel">
         <div className="rent-to-income-analysis__panel-left">
           <div className="rent-to-income-analysis__ratio">
             Rent to Income Ratio:
@@ -85,7 +86,7 @@ export const RentToIncomeAnalysis = ({
             </div>
           </div>
         </div>
-      </div>
+      </Panel>
     </div>
   );
 };

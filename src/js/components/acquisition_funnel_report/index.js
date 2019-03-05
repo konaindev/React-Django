@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import BoxRow from "../box_row";
 import BoxColumn from "../box_column";
 import ReportSection from "../report_section";
+import Panel from "../panel";
 import PercentageGraphBox from "../percentage_graph_box";
 import WhiskerPlot from "../whisker_plot";
 import { LargeDetailPercentBox, LargePercentBox } from "../large_box_layout";
@@ -68,9 +69,9 @@ export default class AcquisitionFunnelReport extends Component {
 
   static FunnelColumn = ({ children }) => (
     <div className="acquisition-funnel__column">
-      <div className="acquisition-funnel__column-inner">
+      <Panel className="acquisition-funnel__column-inner">
         {children}
-      </div>
+      </Panel>
     </div>
   );
 
