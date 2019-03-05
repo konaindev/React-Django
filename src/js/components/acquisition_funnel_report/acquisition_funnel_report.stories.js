@@ -53,42 +53,6 @@ const WHISKERS = {
   ]
 };
 
-const BASELINE_REPORT = {
-  // the funnel itself
-  funnel: {
-    volumes: {
-      usv: 19621,
-      inq: 785,
-      tou: 259,
-      app: 96,
-      exe: 68
-    },
-    costs: {
-      usv: "3.47",
-      inq: "86.62",
-      tou: "262.00",
-      app: "708.00",
-      exe: "1000.00"
-    },
-    conversions: {
-      usv_inq: 0.04,
-      inq_tou: 0.33,
-      tou_app: 0.37,
-      app_exe: 0.71,
-      usv_exe: 0.003
-    }
-  },
-
-  // XXX extra stuff displayed directly under the words "ACQUISITION FUNNEL"
-  // but that probably shouldn't be part of this react component?
-  property: {
-    cost_per_exe_vs_rent: 0.54,
-    leasing: {
-      cd_rate: 0.29
-    }
-  }
-};
-
 const PERFORMANCE_REPORT = {
   funnel: {
     volumes: {
@@ -184,18 +148,10 @@ const PERFORMANCE_REPORT = {
   whiskers: WHISKERS
 };
 
-const props_baseline = {
-  report: BASELINE_REPORT
-};
-
-storiesOf("AcquisitionFunnelReport", module).add("baseline", () => (
-  <AcquisitionFunnelReport {...props_baseline} />
-));
-
 const props_performance = {
   report: PERFORMANCE_REPORT
 };
 
-storiesOf("AcquisitionFunnelReport", module).add("performance", () => (
+storiesOf("AcquisitionFunnelReport", module).add("default", () => (
   <AcquisitionFunnelReport {...props_performance} />
 ));

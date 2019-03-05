@@ -56,158 +56,147 @@ export default class AcquisitionFunnelReport extends Component {
 
   /**
    * @name AcquisitionFunnelReport.FunnelTable
-   * @description Component that lays out the table header and content columns
+   * @description Component that lays out the table content columns
    */
-  static FunnelTable = ({ header, content }) => {
+  static FunnelTable = ({ children }) => {
     return (
-      <div className="acquisition-funnel-table">
-        <div className="header-container">{header}</div>
-        <div className="content-container">{content}</div>
+      <div className="acquisition-funnel__table">
+        {children}
       </div>
     );
   };
 
-  static FunnelHeaderBox = ({ number, name, more }) => {
-    return (
-      <div className="acquisition-funnel-label">
-        <div className={`name-${number}`}>
-          <div>{name}</div>
-        </div>
-        <div className={`arrow-${number + 1}`}>
-          {more ? "↓" : <span>&nbsp;</span>}
-        </div>
+  static FunnelColumn = ({ children }) => (
+    <div className="acquisition-funnel__column">
+      <div className="acquisition-funnel__column-inner">
+        {children}
       </div>
-    );
-  };
+    </div>
+  );
 
-  static FunnelHeader = () => {
-    return (
-      <BoxColumn>
-        <AcquisitionFunnelReport.FunnelHeaderBox
-          number={1}
-          name="Unique Site Visitors (USV)"
-          more={true}
-        />
-        <AcquisitionFunnelReport.FunnelHeaderBox
-          number={2}
-          name="Inquiries (INQ)"
-          more={true}
-        />
-        <AcquisitionFunnelReport.FunnelHeaderBox
-          number={3}
-          name="Tours (TOU)"
-          more={true}
-        />
-        <AcquisitionFunnelReport.FunnelHeaderBox
-          number={4}
-          name="Lease Applications (APP)"
-          more={true}
-        />
-        <AcquisitionFunnelReport.FunnelHeaderBox
-          number={5}
-          name="Lease Executions (EXE)"
-          more={false}
-        />
-      </BoxColumn>
-    );
-  };
+  static FunnelRow = ({ children }) => (
+    <div className="acquisition-funnel__row">
+      {children}
+    </div>
+  );
+
+  static FunnelColumnHeader = ({ name }) => (
+    <div className="acquisition-funnel__column-header">
+      {name}
+    </div>
+  );
+
+  static FunnelColumnContent = ({ children }) => (
+    <div className="acquisition-funnel__column-content">
+      {children}
+    </div>
+  )
 
   static FunnelContent = ({ report: r }) => {
     return (
-      <BoxRow externalMargin={false}>
-        <BoxColumn>
-          <FunnelNumberBox
-            name="Volume of USV"
-            value={r.funnel.volumes.usv}
-            target={r.targets?.funnel?.volumes?.usv}
-            delta={r.deltas?.funnel?.volumes?.usv}
-          />
-          <FunnelNumberBox
-            name="Volume of INQ"
-            value={r.funnel.volumes.inq}
-            target={r.targets?.funnel?.volumes?.inq}
-            delta={r.deltas?.funnel?.volumes?.inq}
-          />
-          <FunnelNumberBox
-            name="Volume of TOU"
-            value={r.funnel.volumes.tou}
-            target={r.targets?.funnel?.volumes?.tou}
-            delta={r.deltas?.funnel?.volumes?.tou}
-          />
-          <FunnelNumberBox
-            name="Volume of APP"
-            value={r.funnel.volumes.app}
-            target={r.targets?.funnel?.volumes?.app}
-            delta={r.deltas?.funnel?.volumes?.app}
-          />
-          <FunnelNumberBox
-            name="Volume of EXE"
-            value={r.funnel.volumes.exe}
-            target={r.targets?.funnel?.volumes?.exe}
-            delta={r.deltas?.funnel?.volumes?.exe}
-          />
-        </BoxColumn>
+      <AcquisitionFunnelReport.FunnelRow>
+        <AcquisitionFunnelReport.FunnelColumn>
+          <AcquisitionFunnelReport.FunnelColumnHeader name="Volume of Activity" />
+          <AcquisitionFunnelReport.FunnelColumnContent>
+            <FunnelNumberBox
+              name="Volume of USV"
+              value={r.funnel.volumes.usv}
+              target={r.targets?.funnel?.volumes?.usv}
+              delta={r.deltas?.funnel?.volumes?.usv}
+            />
+            <FunnelNumberBox
+              name="Volume of INQ"
+              value={r.funnel.volumes.inq}
+              target={r.targets?.funnel?.volumes?.inq}
+              delta={r.deltas?.funnel?.volumes?.inq}
+            />
+            <FunnelNumberBox
+              name="Volume of TOU"
+              value={r.funnel.volumes.tou}
+              target={r.targets?.funnel?.volumes?.tou}
+              delta={r.deltas?.funnel?.volumes?.tou}
+            />
+            <FunnelNumberBox
+              name="Volume of APP"
+              value={r.funnel.volumes.app}
+              target={r.targets?.funnel?.volumes?.app}
+              delta={r.deltas?.funnel?.volumes?.app}
+            />
+            <FunnelNumberBox
+              name="Volume of EXE"
+              value={r.funnel.volumes.exe}
+              target={r.targets?.funnel?.volumes?.exe}
+              delta={r.deltas?.funnel?.volumes?.exe}
+            />
+          </AcquisitionFunnelReport.FunnelColumnContent>
+        </AcquisitionFunnelReport.FunnelColumn>
 
-        <BoxColumn>
-          <FunnelPercentBox
-            name="USV > INQ"
-            value={r.funnel.conversions.usv_inq}
-            target={r.targets?.funnel?.conversions?.usv_inq}
-            delta={r.deltas?.funnel?.conversions?.usv_inq}
-          />
-          <FunnelPercentBox
-            name="INQ > TOU"
-            value={r.funnel.conversions.inq_tou}
-            target={r.targets?.funnel?.conversions?.inq_tou}
-            delta={r.deltas?.funnel?.conversions?.inq_tou}
-          />
-          <FunnelPercentBox
-            name="TOU > APP"
-            value={r.funnel.conversions.tou_app}
-            target={r.targets?.funnel?.conversions?.tou_app}
-            delta={r.deltas?.funnel?.conversions?.tou_app}
-          />
-          <FunnelPercentBox
-            name="APP > EXE"
-            value={r.funnel.conversions.app_exe}
-            target={r.targets?.funnel?.conversions?.app_exe}
-            delta={r.deltas?.funnel?.conversions?.app_exe}
-          />
-        </BoxColumn>
+        <AcquisitionFunnelReport.FunnelColumn>
+          <AcquisitionFunnelReport.FunnelColumnHeader name="Conversion Rate" />
+          <AcquisitionFunnelReport.FunnelColumnContent>
+            <FunnelPercentBox
+              name="USV → INQ"
+              value={r.funnel.conversions.usv_inq}
+              target={r.targets?.funnel?.conversions?.usv_inq}
+              delta={r.deltas?.funnel?.conversions?.usv_inq}
+            />
+            <FunnelPercentBox
+              name="INQ → TOU"
+              value={r.funnel.conversions.inq_tou}
+              target={r.targets?.funnel?.conversions?.inq_tou}
+              delta={r.deltas?.funnel?.conversions?.inq_tou}
+            />
+            <FunnelPercentBox
+              name="TOU → APP"
+              value={r.funnel.conversions.tou_app}
+              target={r.targets?.funnel?.conversions?.tou_app}
+              delta={r.deltas?.funnel?.conversions?.tou_app}
+            />
+            <FunnelPercentBox
+              name="APP → EXE"
+              value={r.funnel.conversions.app_exe}
+              target={r.targets?.funnel?.conversions?.app_exe}
+              delta={r.deltas?.funnel?.conversions?.app_exe}
+            />
+          </AcquisitionFunnelReport.FunnelColumnContent>
+        </AcquisitionFunnelReport.FunnelColumn>
 
-        <BoxColumn>
-          <FunnelCurrencyBox
-            name="Cost per USV"
-            value={r.funnel.costs.usv}
-            target={r.targets?.funnel?.costs?.usv}
-            delta={r.deltas?.funnel?.costs?.usv}
-          />
-          <FunnelCurrencyBox
-            name="Cost per INQ"
-            value={r.funnel?.costs?.inq}
-            target={r.targets?.funnel?.costs?.inq}
-            delta={r.deltas?.funnel?.costs?.inq}
-          />
-          <FunnelCurrencyBox
-            name="Cost per TOU"
-            value={r.funnel.costs.tou}
-            target={r.targets?.funnel?.costs?.tou}
-            delta={r.deltas?.funnel?.costs?.tou}
-          />
-          <FunnelCurrencyBox
-            name="Cost per APP"
-            value={r.funnel.costs.app}
-            target={r.targets?.funnel?.costs?.app}
-            delta={r.deltas?.funnel?.costs?.app}
-          />
-          <FunnelCurrencyBox
-            name="Cost per EXE"
-            value={r.funnel.costs.exe}
-            target={r.targets?.funnel?.costs?.exe}
-            delta={r.deltas?.funnel?.costs?.exe}
-          />
-        </BoxColumn>
-      </BoxRow>
+        <AcquisitionFunnelReport.FunnelColumn>
+          <AcquisitionFunnelReport.FunnelColumnHeader name="Cost per Activity" />
+          <AcquisitionFunnelReport.FunnelColumnContent>
+            <FunnelCurrencyBox
+              name="Cost per USV"
+              value={r.funnel.costs.usv}
+              target={r.targets?.funnel?.costs?.usv}
+              delta={r.deltas?.funnel?.costs?.usv}
+            />
+            <FunnelCurrencyBox
+              name="Cost per INQ"
+              value={r.funnel?.costs?.inq}
+              target={r.targets?.funnel?.costs?.inq}
+              delta={r.deltas?.funnel?.costs?.inq}
+            />
+            <FunnelCurrencyBox
+              name="Cost per TOU"
+              value={r.funnel.costs.tou}
+              target={r.targets?.funnel?.costs?.tou}
+              delta={r.deltas?.funnel?.costs?.tou}
+            />
+            <FunnelCurrencyBox
+              name="Cost per APP"
+              value={r.funnel.costs.app}
+              target={r.targets?.funnel?.costs?.app}
+              delta={r.deltas?.funnel?.costs?.app}
+            />
+            <FunnelCurrencyBox
+              name="Cost per EXE"
+              value={r.funnel.costs.exe}
+              target={r.targets?.funnel?.costs?.exe}
+              delta={r.deltas?.funnel?.costs?.exe}
+            />
+          </AcquisitionFunnelReport.FunnelColumnContent>
+        </AcquisitionFunnelReport.FunnelColumn>
+      </AcquisitionFunnelReport.FunnelRow>
     );
   };
 
@@ -216,13 +205,10 @@ export default class AcquisitionFunnelReport extends Component {
 
     return (
       <ReportSection name="Acquisition Funnel">
-        {<AcquisitionFunnelReport.HeadlineNumbers report={report} />}
-        <AcquisitionFunnelReport.FunnelTable
-          header={<AcquisitionFunnelReport.FunnelHeader />}
-          content={
-            <AcquisitionFunnelReport.FunnelContent report={report} />
-          }
-        />
+        <AcquisitionFunnelReport.HeadlineNumbers report={report} />
+        <AcquisitionFunnelReport.FunnelTable>
+          <AcquisitionFunnelReport.FunnelContent report={report} />
+        </AcquisitionFunnelReport.FunnelTable>
       </ReportSection>
     );
   }
