@@ -12,18 +12,6 @@ $category-color-4: #4035F4;
   padding: 20px 0;
   margin-bottom: 20px;
 
-  &__title {
-    color: $heading-font-color;
-    font-size: 14px;
-    line-height: 17px;
-    letter-spacing: 1px;
-    font-weight: 500;
-    padding-bottom: 29px;
-    border-bottom: 1px solid #586073;
-    margin-bottom: 35px;
-    text-transform: uppercase;
-  }
-
   &__panel {
     padding: 70px;
     border: $panel-border;

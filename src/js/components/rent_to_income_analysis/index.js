@@ -1,9 +1,11 @@
 import React from 'react';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
+
+import SectionHeader from '../section_header'
+import './rent_to_income_analysis.scss';
 import { formatCurrencyShorthand, formatPercent } from '../../utils/formatters';
 
-import './rent_to_income_analysis.scss';
 
 const THREASHOLD_COLUMNS = 10;
 
@@ -22,9 +24,9 @@ export const RentToIncomeAnalysis = ({
       className={cn('rent-to-income-analysis', {
         'rent-to-income-analysis--flip': flipMode
       })}>
-      <div className="rent-to-income-analysis__title">
-        Rent To Income Analysis
-      </div>
+
+      <SectionHeader title={`Rent To Income Analysis`} />
+
       <div className="rent-to-income-analysis__panel">
         <div className="rent-to-income-analysis__panel-left">
           <div className="rent-to-income-analysis__ratio">

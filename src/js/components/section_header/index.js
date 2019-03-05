@@ -12,7 +12,7 @@ export class SectionHeader extends Component {
     const { children, title } = this.props;
     return (
       <div className="section-header">
-        <h2 className="section-header__title">{title}</h2>
+        <p className="section-header__title">{title}</p>
         {children && <div className="section-header__extra">{this.props.children}</div>}
       </div>
     );
