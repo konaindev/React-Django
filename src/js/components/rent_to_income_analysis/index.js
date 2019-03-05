@@ -1,15 +1,19 @@
-import React from 'react';
-import cn from 'classnames';
-import PropTypes from 'prop-types';
+import React from "react";
+import cn from "classnames";
+import PropTypes from "prop-types";
+import { formatCurrencyShorthand, formatPercent } from "../../utils/formatters";
 
-import './rent_to_income_analysis.scss';
-import { formatCurrencyShorthand, formatPercent } from '../../utils/formatters';
+import "./rent_to_income_analysis.scss";
 
 
 const THREASHOLD_COLUMNS = 10;
 
 const getCategoryIndexOfRate = (categories, rate) =>
-  rate ? categories.findIndex((category) => category.low <= rate && category.high > rate) : -1;
+  rate
+    ? categories.findIndex(
+        category => category.low <= rate && category.high > rate
+      )
+    : -1;
 
 export const RentToIncomeAnalysis = ({
   categories,
@@ -89,19 +93,19 @@ export const RentToIncomeAnalysis = ({
 };
 
 RentToIncomeAnalysis.propTypes = {
-  categories: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string,
-    low: PropTypes.number,
-    high: PropTypes.number
-  })),
-  incomes: PropTypes.arrayOf(PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string
-  ])).isRequired,
-  rental_rates: PropTypes.arrayOf(PropTypes.oneOfType([
-    PropTypes.number,
-    PropTypes.string
-  ])).isRequired,
+  categories: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string,
+      low: PropTypes.number,
+      high: PropTypes.number
+    })
+  ),
+  incomes: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  ).isRequired,
+  rental_rates: PropTypes.arrayOf(
+    PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  ).isRequired,
   data: PropTypes.arrayOf(PropTypes.array).isRequired
 };
 

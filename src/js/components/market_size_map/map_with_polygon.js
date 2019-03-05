@@ -1,44 +1,40 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import GoogleMap from 'google-map-react';
+import GoogleMap from "google-map-react";
 
 import "./market_size_map.scss";
 import {
   GOOGLE_MAP_API_KEY,
   DEFAULT_ZOOM,
   stylesForNightMode,
-  stylesForRegionFill,
-} from './map_settings';
+  stylesForRegionFill
+} from "./map_settings";
 
-
-const createMapOptions = (maps) => ({
+const createMapOptions = maps => ({
   styles: stylesForNightMode,
   zoomControl: false,
   scrollwheel: false,
   fullscreenControl: false,
-  scaleControl: false,
+  scaleControl: false
 });
 
 const ZipCodeLabel = ({ zipCode }) => (
-  <div className="zip-code-label">
-    {zipCode}
-  </div>
+  <div className="zip-code-label">{zipCode}</div>
 );
 
 export class MapWithPolygon extends Component {
-
   constructor(props) {
     super(props);
 
     this.google = null;
 
     this.state = {
-      isGoogleMapLoaded: false,
+      isGoogleMapLoaded: false
     };
   }
 
-   // google: Object { map, maps }
-  onGoogleApiLoaded = (google) => {
+  // google: Object { map, maps }
+  onGoogleApiLoaded = google => {
     this.google = google;
 
     this.setState({
@@ -46,7 +42,7 @@ export class MapWithPolygon extends Component {
     });
 
     this.drawZipCodeAreas();
-  }
+  };
 
   drawZipCodeAreas() {
     if (false === this.state.isGoogleMapLoaded) {
@@ -58,19 +54,26 @@ export class MapWithPolygon extends Component {
 
     // draw each zip code area as polygon
     this.props.zip_codes.forEach(zipCode => {
-      const { zip, outline: { type, coordinates } } = zipCode;
+      const {
+        zip,
+        outline: { type, coordinates }
+      } = zipCode;
 
-      if (type !== 'Polygon') {
+      if (type !== "Polygon") {
         return;
       }
 
-      const paths = coordinates.map(([lat, lng]) => new google.maps.LatLng(lat, lng));
-      paths.forEach(point => { bounds.extend(point) });
+      const paths = coordinates.map(
+        ([lat, lng]) => new google.maps.LatLng(lat, lng)
+      );
+      paths.forEach(point => {
+        bounds.extend(point);
+      });
 
       let polygon = new google.maps.Polygon({
         map: google.map,
         paths: paths,
-        ...stylesForRegionFill,
+        ...stylesForRegionFill
       });
     });
 
@@ -86,11 +89,18 @@ export class MapWithPolygon extends Component {
     const { google } = this;
 
     return this.props.zip_codes.map(zipCode => {
-      const { zip, outline: { type, coordinates } } = zipCode;
+      const {
+        zip,
+        outline: { type, coordinates }
+      } = zipCode;
       const bounds = new google.maps.LatLngBounds();
 
-      const paths = coordinates.map(([lat, lng]) => new google.maps.LatLng(lat, lng));
-      paths.forEach(point => { bounds.extend(point) });
+      const paths = coordinates.map(
+        ([lat, lng]) => new google.maps.LatLng(lat, lng)
+      );
+      paths.forEach(point => {
+        bounds.extend(point);
+      });
       const zipAreaCenter = bounds.getCenter();
 
       return (
@@ -104,21 +114,20 @@ export class MapWithPolygon extends Component {
     });
   }
 
-
   render() {
     const customMarkers = this.getZipCodeLabels();
 
     return (
       <div className="market-size-map">
         <GoogleMap
-          bootstrapURLKeys={{ key: GOOGLE_MAP_API_KEY, libraries: 'geometry' }}
+          bootstrapURLKeys={{ key: GOOGLE_MAP_API_KEY, libraries: "geometry" }}
           defaultCenter={{ lat: 0, lng: 0 }}
           defaultZoom={DEFAULT_ZOOM}
           options={createMapOptions}
           yesIWantToUseGoogleMapApiInternals={true}
           onGoogleApiLoaded={this.onGoogleApiLoaded}
         >
-          { customMarkers }
+          {customMarkers}
         </GoogleMap>
       </div>
     );
@@ -131,10 +140,10 @@ MapWithPolygon.propTypes = {
       zip: PropTypes.string.isRequired,
       outline: PropTypes.shape({
         type: PropTypes.string,
-        coordinates: PropTypes.array,
+        coordinates: PropTypes.array
       })
     })
-  ).isRequired,
+  ).isRequired
 };
 
 export default MapWithPolygon;

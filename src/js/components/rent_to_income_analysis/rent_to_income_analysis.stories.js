@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 
-import { storiesOf } from '@storybook/react';
+import { storiesOf } from "@storybook/react";
 
-import RentToIncomeAnalysis from './index';
+import RentToIncomeAnalysis from "./index";
 
 const props_small = {
   categories: [
@@ -98,7 +98,7 @@ const props_large = {
     "800000.00",
     "900000.00",
     "1000000.00",
-    "1100000.00",
+    "1100000.00"
   ],
   rental_rates: [
     "1000.00",
@@ -112,26 +112,28 @@ const props_large = {
     "9000.00",
     "10000.00",
     "11000.00",
-    "12000.00",
+    "12000.00"
   ],
   data: [
     [0.24, 0.48, null, null, null, null, null, null, null, null, null, null],
     [0.12, 0.24, 0.36, 0.48, null, null, null, null, null, null, null, null],
     [0.06, 0.12, 0.18, 0.24, 0.3, 0.36, 0.42, 0.48, 0.54, null, null, null],
-    [0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 0.36, 0.40, 0.44, 0.48],
-    [0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.30, 0.33, 0.36],
+    [0.04, 0.08, 0.12, 0.16, 0.2, 0.24, 0.28, 0.32, 0.36, 0.4, 0.44, 0.48],
+    [0.03, 0.06, 0.09, 0.12, 0.15, 0.18, 0.21, 0.24, 0.27, 0.3, 0.33, 0.36],
     [0.02, 0.05, 0.07, 0.1, 0.12, 0.14, 0.17, 0.19, 0.22, 0.24, 0.26, 0.29]
   ]
 };
 
-storiesOf('RentToIncomeAnalysis', module).add('small', () => (
-  <div style={{ width: 1320, margin: '80px auto' }}>
-    <RentToIncomeAnalysis {...props_small} />
-  </div>
-)).add('large', () => (
-  <div style={{ width: 1320, margin: '80px auto' }}>
-    <RentToIncomeAnalysis {...props_large} />
-  </div>
-));
+storiesOf("RentToIncomeAnalysis", module)
+  .add("small", () => (
+    <div style={{ width: 1320, margin: "80px auto" }}>
+      <RentToIncomeAnalysis {...props_small} />
+    </div>
+  ))
+  .add("large", () => (
+    <div style={{ width: 1320, margin: "80px auto" }}>
+      <RentToIncomeAnalysis {...props_large} />
+    </div>
+  ));
 
 export default RentToIncomeAnalysis;

@@ -8,17 +8,9 @@ import { formatNumber, formatPercent } from "../../utils/formatters";
 export function MarketSizeGrowthReach({
   market_sizes,
   future_year,
-  average: {
-    age,
-    growth,
-  },
-  total: {
-    market_size,
-    usv,
-    future_size,
-  }
+  average: { age, growth },
+  total: { market_size, usv, future_size }
 }) {
-
   return (
     <div className="market-size-growth-reach">
       <div className="market-size-growth-reach__table">
@@ -78,19 +70,19 @@ MarketSizeGrowthReach.propTypes = {
       market_size: PropTypes.number,
       usv: PropTypes.number,
       growth: PropTypes.number,
-      future_size: PropTypes.number,
+      future_size: PropTypes.number
     })
   ).isRequired,
   future_year: PropTypes.number.isRequired,
   average: PropTypes.shape({
     age: PropTypes.number,
-    growth: PropTypes.number,
+    growth: PropTypes.number
   }).isRequired,
   total: PropTypes.shape({
     market_size: PropTypes.number,
     usv: PropTypes.number,
-    future_size: PropTypes.number,
-  }).isRequired,
+    future_size: PropTypes.number
+  }).isRequired
 };
 
 export default MarketSizeGrowthReach;

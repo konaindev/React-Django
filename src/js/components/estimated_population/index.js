@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import "./estimated_population.scss";
-import MarketSizeMap from "../market_size_map";
 import { formatNumber } from "../../utils/formatters";
+import MarketSizeMap from "../market_size_map";
+
+import "./estimated_population.scss";
 
 
 export function EstimatedPopulation(props) {
@@ -50,13 +51,13 @@ export function InfoBox({ population, radius, units, zip_codes }) {
       </div>
     </div>
   );
-}
+};
 
 EstimatedPopulation.propTypes = {
   population: PropTypes.number.isRequired,
   radius: PropTypes.number,
   units: PropTypes.string,
-  zip_codes: PropTypes.array,
+  zip_codes: PropTypes.array
 };
 
 export default EstimatedPopulation;

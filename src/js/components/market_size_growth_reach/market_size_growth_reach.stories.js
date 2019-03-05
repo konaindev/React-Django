@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
- import { storiesOf } from '@storybook/react';
+import { storiesOf } from "@storybook/react";
 
- import MarketSizeGrowthReach from './index';
+import MarketSizeGrowthReach from "./index";
 
- const props = {
+const props = {
   city: "Portland, OR",
   market_sizes: [
     {
@@ -62,8 +62,8 @@ import React from 'react';
   }
 };
 
-storiesOf('MarketSizeGrowthReach', module).add('default', () => (
-  <div style={{ width: 1320, margin: '80px auto' }}>
+storiesOf("MarketSizeGrowthReach", module).add("default", () => (
+  <div style={{ width: 1320, margin: "80px auto" }}>
     <MarketSizeGrowthReach {...props} />
   </div>
 ));

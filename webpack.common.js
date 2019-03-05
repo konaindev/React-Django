@@ -1,5 +1,3 @@
-"use strict";
-
 const path = require("path");
 const miniCSS = require("mini-css-extract-plugin");
 
@@ -12,9 +10,16 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx|mjs)$/,
-        loader: "babel-loader",
         exclude: /node_modules/,
-        options: { babelrc: true }
+        use: [
+          {
+            loader: "babel-loader",
+            options: { babelrc: true }
+          },
+          {
+            loader: "eslint-loader"
+          }
+        ]
       },
       {
         test: /\.(css|scss)$/,

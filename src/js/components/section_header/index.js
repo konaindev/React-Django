@@ -19,7 +19,9 @@ export class SectionHeader extends Component {
         'section-header--mt-sm': smallMarginTop
       })}>
         <p className="section-header__title">{title}</p>
-        {children && <div className="section-header__extra">{this.props.children}</div>}
+        {children && (
+          <div className="section-header__extra">{this.props.children}</div>
+        )}
       </div>
     );
   }
