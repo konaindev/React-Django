@@ -3,6 +3,7 @@
 .estimated-population {
   display: flex;
   justify-content: space-between;
+  margin: $panel-spacing;
 }
 
 .estimated-population__figure-wrapper {

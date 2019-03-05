@@ -1,8 +1,7 @@
-import React from 'react';
+import React from "react";
+ import { storiesOf } from "@storybook/react";
 
- import { storiesOf } from '@storybook/react';
-
- import MarketSizeMap from './index';
+ import MarketSizeMap from "./index";
 
  const props_radius = {
   center: {

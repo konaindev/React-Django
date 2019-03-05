@@ -1,10 +1,9 @@
 import React from "react";
-
 import { storiesOf } from "@storybook/react";
 
 import EstimatedPopulation from "./index";
 
- const props_radius = {
+export const props_radius = {
   population: 120448,
   center: {
     type: "Point",
@@ -14,7 +13,7 @@ import EstimatedPopulation from "./index";
   units: "mi" // both miles and kilometers should be supported
 };
 
-const props_zips = {
+export const props_zips = {
   population: 120448,
   zip_codes: [
     {

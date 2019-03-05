@@ -22,6 +22,7 @@ export function TotalAddressableMarket({
 
   return (
     <div className="total-addressable-market">
+      <SectionHeader title={`Rent To Income Analysis`} smallMarginTop={true} />
       <RentToIncomeAnalysis {...rent_to_income} />
 
       <SectionHeader title={`Estimated Population: ${location}`} />
@@ -39,8 +40,8 @@ export function TotalAddressableMarket({
         />
       ))}
 
+      <SectionHeader title={`Est. Market Size, Growth & Reach: ${location}`} />
       <MarketSizeGrowthReach
-        city={location}
         future_year={future_year}
         total={total}
         average={average}

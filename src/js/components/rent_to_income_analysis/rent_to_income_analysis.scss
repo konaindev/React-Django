@@ -9,7 +9,7 @@ $category-color-4: #4035F4;
 .rent-to-income-analysis {
   $this: &;
 
-  margin: 28px 0;
+  margin: $panel-spacing;
   padding: 70px;
   border: $panel-border;
   border-radius: $panel-border-radius;

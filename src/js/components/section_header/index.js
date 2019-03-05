@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import cn from "classnames";
+
+
 import "./section_header.scss";
 
 export class SectionHeader extends Component {
@@ -9,9 +12,12 @@ export class SectionHeader extends Component {
   };
 
   render() {
-    const { children, title } = this.props;
+    const { children, title, smallMarginTop } = this.props;
+
     return (
-      <div className="section-header">
+      <div className={cn('section-header', {
+        'section-header--mt-sm': smallMarginTop
+      })}>
         <p className="section-header__title">{title}</p>
         {children && <div className="section-header__extra">{this.props.children}</div>}
       </div>
