@@ -9,29 +9,25 @@ $category-color-4: #4035F4;
 .rent-to-income-analysis {
   $this: &;
 
-  padding: 20px 0;
-  margin-bottom: 20px;
+  margin: 28px 0;
+  padding: 70px;
+  border: $panel-border;
+  border-radius: $panel-border-radius;
+  background-color: $panel-background-color;
+  box-shadow: $panel-box-shadow;
+  display: flex;
+  flex-direction: row;
 
-  &__panel {
-    padding: 70px;
-    border: $panel-border;
-    border-radius: $panel-border-radius;
-    background-color: $panel-background-color;
-    box-shadow: $panel-box-shadow;
-    display: flex;
-    flexDirection: row;
+  &__legends-wrapper {
+    flex-grow: 0;
+    max-width: 33.3333%;
+    flex-basis: 33.3333%;
+  }
 
-    &-left {
-      flex-grow: 0;
-      max-width: 33.3333%;
-      flex-basis: 33.3333%;
-    }
-
-    &-right {
-      flex-grow: 0;
-      flex-basis: 66.6666%;
-      flex-basis: 66.6666%;
-    }
+  &__chart-wrapper {
+    flex-grow: 0;
+    flex-basis: 66.6666%;
+    flex-basis: 66.6666%;
   }
 
   &__ratio {
@@ -39,6 +35,7 @@ $category-color-4: #4035F4;
     letter-spacing: 0.4px;
     line-height: 16px;
     text-transform: uppercase;
+    color: $bluegray-lightest;
     margin-bottom: 32px;
     white-space: nowrap;
   }
@@ -165,14 +162,12 @@ $category-color-4: #4035F4;
   }
 
   &--flip {
-    #{$this}__panel {
-      display: block;
+    display: block;
 
-      &-left {
-        display: flex;
-        max-width: 100%;
-        margin-bottom: 32px;
-      }
+    #{$this}__legends-wrapper {
+      display: flex;
+      max-width: 100%;
+      margin-bottom: 32px;
     }
 
     #{$this}__categories {

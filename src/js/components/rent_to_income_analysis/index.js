@@ -2,7 +2,6 @@ import React from 'react';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
 
-import SectionHeader from '../section_header'
 import './rent_to_income_analysis.scss';
 import { formatCurrencyShorthand, formatPercent } from '../../utils/formatters';
 
@@ -25,66 +24,63 @@ export const RentToIncomeAnalysis = ({
         'rent-to-income-analysis--flip': flipMode
       })}>
 
-      <SectionHeader title={`Rent To Income Analysis`} />
-
-      <div className="rent-to-income-analysis__panel">
-        <div className="rent-to-income-analysis__panel-left">
-          <div className="rent-to-income-analysis__ratio">
-            Rent to Income Ratio:
-          </div>
-          <div className="rent-to-income-analysis__categories">
-            {categories.map((category, index) => (
-              <div key={index} className="rent-to-income-analysis__category">
-                <span
-                  className={cn(
-                    'rent-to-income-analysis__category-color',
-                    `rent-to-income-analysis__category-color--${index}`
-                  )}
-                />
-                <span className="rent-to-income-analysis__category-name">
-                  {category.name}
-                </span>
-              </div>
-            ))}
-          </div>
+      <div className="rent-to-income-analysis__legends-wrapper">
+        <div className="rent-to-income-analysis__ratio">
+          Rent to Income Ratio:
         </div>
-        <div className="rent-to-income-analysis__panel-right">
-          <div className="rent-to-income-analysis-chart">
-            <div className="rent-to-income-analysis-chart__vertical-caption">
-              Monthly Rental (USD)
+        <div className="rent-to-income-analysis__categories">
+          {categories.map((category, index) => (
+            <div key={index} className="rent-to-income-analysis__category">
+              <span
+                className={cn(
+                  'rent-to-income-analysis__category-color',
+                  `rent-to-income-analysis__category-color--${index}`
+                )}
+              />
+              <span className="rent-to-income-analysis__category-name">
+                {category.name}
+              </span>
             </div>
-            <div className="rent-to-income-analysis-chart__horizontal-caption">
-              Annual Income (USD)
-            </div>
-            <div className="rent-to-income-analysis-chart__body">
-              <div className="rent-to-income-analysis-chart__group rent-to-income-analysis-chart__group--yaxis">
-                <div className="rent-to-income-analysis-chart__cell">{' '}</div>
-                {rental_rates.map((rentalRate, rateIndex) => (
-                  <div
-                    key={rateIndex}
-                    className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--yaxis">
-                    {formatCurrencyShorthand(rentalRate)}
-                  </div>
-                ))}
-              </div>
-              {data.map((group, groupIndex) => (
-                <div key={groupIndex} className="rent-to-income-analysis-chart__group">
-                  <div className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--xaxis">
-                    {formatCurrencyShorthand(incomes[groupIndex])}
-                  </div>
-                  {group.map((rate, rateIndex) => (
-                    <div
-                      key={`${groupIndex}-${rateIndex}`}
-                      className={cn(
-                        'rent-to-income-analysis-chart__cell',
-                        `rent-to-income-analysis__category-color--${getCategoryIndexOfRate(categories, rate)}`
-                      )}>
-                      {rate && formatPercent(rate)}
-                    </div>
-                  ))}
+          ))}
+        </div>
+      </div>
+
+      <div className="rent-to-income-analysis__chart-wrapper">
+        <div className="rent-to-income-analysis-chart">
+          <div className="rent-to-income-analysis-chart__vertical-caption">
+            Monthly Rental (USD)
+          </div>
+          <div className="rent-to-income-analysis-chart__horizontal-caption">
+            Annual Income (USD)
+          </div>
+          <div className="rent-to-income-analysis-chart__body">
+            <div className="rent-to-income-analysis-chart__group rent-to-income-analysis-chart__group--yaxis">
+              <div className="rent-to-income-analysis-chart__cell">{' '}</div>
+              {rental_rates.map((rentalRate, rateIndex) => (
+                <div
+                  key={rateIndex}
+                  className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--yaxis">
+                  {formatCurrencyShorthand(rentalRate)}
                 </div>
               ))}
             </div>
+            {data.map((group, groupIndex) => (
+              <div key={groupIndex} className="rent-to-income-analysis-chart__group">
+                <div className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--xaxis">
+                  {formatCurrencyShorthand(incomes[groupIndex])}
+                </div>
+                {group.map((rate, rateIndex) => (
+                  <div
+                    key={`${groupIndex}-${rateIndex}`}
+                    className={cn(
+                      'rent-to-income-analysis-chart__cell',
+                      `rent-to-income-analysis__category-color--${getCategoryIndexOfRate(categories, rate)}`
+                    )}>
+                    {rate && formatPercent(rate)}
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </div>
