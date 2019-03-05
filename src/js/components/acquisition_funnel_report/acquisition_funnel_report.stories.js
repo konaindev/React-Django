@@ -82,6 +82,7 @@ const BASELINE_REPORT = {
   // XXX extra stuff displayed directly under the words "ACQUISITION FUNNEL"
   // but that probably shouldn't be part of this react component?
   property: {
+    lowest_monthly_rent: "1847.00",
     cost_per_exe_vs_rent: 0.54,
     leasing: {
       cd_rate: 0.29
@@ -114,6 +115,7 @@ const PERFORMANCE_REPORT = {
     }
   },
   property: {
+    lowest_monthly_rent: "1856.90",
     cost_per_exe_vs_rent: 0.58,
     leasing: {
       cd_rate: 0.2

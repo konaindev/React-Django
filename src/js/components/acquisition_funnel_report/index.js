@@ -5,13 +5,25 @@ import BoxRow from "../box_row";
 import BoxColumn from "../box_column";
 import ReportSection from "../report_section";
 import WhiskerPlot from "../whisker_plot";
-import { LargeDetailPercentBox, LargePercentBox } from "../large_box_layout";
+import {
+  LargeBoxLayout,
+  LargeDetailPercentBox,
+  LargePercentBox
+} from "../large_box_layout";
+import DeltaLayout from "../delta_layout";
 
 import {
   FunnelNumberBox,
   FunnelPercentBox,
   FunnelCurrencyBox
 } from "../funnel_box_layout";
+
+import {
+  formatCurrency,
+  formatPercent,
+  formatDeltaPercent,
+  formatTargetPercent
+} from "../../utils/formatters.js";
 
 import "./acquisition_funnel_report.scss";
 
@@ -42,12 +54,20 @@ export default class AcquisitionFunnelReport extends Component {
           delta={r.deltas?.property?.leasing?.cd_rate}
           innerBox={WhiskerPlot.maybe(r.whiskers?.lease_cd_rate)}
         />
-        {/* we reverse the arrow here because declining percentages are *good* */}
-        <LargePercentBox
-          name="Cost Per EXE / Average Monthly Rent"
-          value={r.property.cost_per_exe_vs_rent}
-          target={r.targets?.property?.cost_per_exe_vs_rent}
-          delta={r.deltas?.property?.cost_per_exe_vs_rent}
+        <LargeBoxLayout
+          name="Cost Per EXE / Lowest Monthly Rent"
+          content={DeltaLayout.build(
+            r.property.cost_per_exe_vs_rent,
+            r.deltas?.property?.cost_per_exe_vs_rent,
+            formatPercent,
+            formatDeltaPercent
+          )}
+          detail={`${formatCurrency(r.funnel.costs.exe)} / ${formatCurrency(
+            r.property.lowest_monthly_rent
+          )}`}
+          detail2={formatTargetPercent(
+            r.targets?.property?.cost_per_exe_vs_rent
+          )}
           innerBox={WhiskerPlot.maybe(r.whiskers?.cost_per_exe_vs_rent)}
         />
       </BoxRow>
