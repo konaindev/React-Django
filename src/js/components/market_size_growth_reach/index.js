@@ -9,17 +9,9 @@ export function MarketSizeGrowthReach({
   city,
   market_sizes,
   future_year,
-  average: {
-    age,
-    growth,
-  },
-  total: {
-    market_size,
-    usv,
-    future_size,
-  }
+  average: { age, growth },
+  total: { market_size, usv, future_size }
 }) {
-
   return (
     <div className="market-size-growth-reach">
       <SectionHeader title={`Est. Market Size, Growth & Reach : ${city}`} />
@@ -32,15 +24,15 @@ export function MarketSizeGrowthReach({
             <span>Est. Market Growth</span>
             <span>Est. {future_year} Market Size</span>
           </div>
-          {market_sizes.map((size, index) =>
+          {market_sizes.map((size, index) => (
             <div key={index} className="table__row table__row--body">
-              <span>Ages {size.age_group.split('-').join(' - ')}</span>
+              <span>Ages {size.age_group.split("-").join(" - ")}</span>
               <span>{formatNumber(size.market_size)}</span>
               <span>{formatNumber(size.usv)}</span>
               <span>{formatPercent(size.growth, 2, 0)}</span>
               <span>{formatNumber(size.future_size)}</span>
             </div>
-          )}
+          ))}
         </div>
 
         <div className="market-size-growth-reach__summary">
@@ -83,19 +75,19 @@ MarketSizeGrowthReach.propTypes = {
       market_size: PropTypes.number,
       usv: PropTypes.number,
       growth: PropTypes.number,
-      future_size: PropTypes.number,
+      future_size: PropTypes.number
     })
   ).isRequired,
   future_year: PropTypes.number.isRequired,
   average: PropTypes.shape({
     age: PropTypes.number,
-    growth: PropTypes.number,
+    growth: PropTypes.number
   }).isRequired,
   total: PropTypes.shape({
     market_size: PropTypes.number,
     usv: PropTypes.number,
-    future_size: PropTypes.number,
-  }).isRequired,
+    future_size: PropTypes.number
+  }).isRequired
 };
 
 export default MarketSizeGrowthReach;

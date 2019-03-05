@@ -4,6 +4,20 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(js|jsx|mjs)$/,
+        exclude: /node_modules/,
+        use: [
+          {
+            loader: "babel-loader",
+            options: { babelrc: true }
+          },
+          {
+            loader: "eslint-loader"
+          }
+        ],
+        include: path.resolve(__dirname, "../")
+      },
+      {
         test: /\.(css|scss)$/,
         use: [
           {

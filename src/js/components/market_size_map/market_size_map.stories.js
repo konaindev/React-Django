@@ -1,10 +1,10 @@
-import React from 'react';
+import React from "react";
 
- import { storiesOf } from '@storybook/react';
+import { storiesOf } from "@storybook/react";
 
- import MarketSizeMap from './index';
+import MarketSizeMap from "./index";
 
- const props_radius = {
+const props_radius = {
   center: {
     type: "Point",
     coordinates: [45.52, -122.68194444]
@@ -27,7 +27,7 @@ const props_zips = {
           [45.513983, -122.672918],
           [45.504635, -122.667419],
           [45.476042, -122.669619],
-          [45.476042, -122.713058],
+          [45.476042, -122.713058]
         ]
       }
     },
@@ -40,7 +40,7 @@ const props_zips = {
           [45.522781, -122.66577],
           [45.534878, -122.666869],
           [45.534878, -122.62013],
-          [45.522781, -122.619031],
+          [45.522781, -122.619031]
         ]
       }
     },
@@ -54,22 +54,21 @@ const props_zips = {
           [45.505185, -122.617931],
           [45.505185, -122.619031],
           [45.523331, -122.617381],
-          [45.522781, -122.57889],
+          [45.522781, -122.57889]
         ]
       }
     }
   ]
 };
 
-
-storiesOf('MarketSizeMap', module)
-  .add('circle with radius', () => (
-    <div style={{ width: 870, margin: '80px auto' }}>
+storiesOf("MarketSizeMap", module)
+  .add("circle with radius", () => (
+    <div style={{ width: 870, margin: "80px auto" }}>
       <MarketSizeMap {...props_radius} />
     </div>
   ))
-  .add('zip code polygons', () => (
-    <div style={{ width: 870, margin: '80px auto' }}>
+  .add("zip code polygons", () => (
+    <div style={{ width: 870, margin: "80px auto" }}>
       <MarketSizeMap {...props_zips} />
     </div>
-  ))
+  ));

@@ -21,7 +21,7 @@ export const stylesForNightMode = [
   {
     featureType: "poi",
     elementType: "all",
-    stylers: [{ "visibility": "off" }]
+    stylers: [{ visibility: "off" }]
   },
   {
     featureType: "road",
@@ -31,7 +31,7 @@ export const stylesForNightMode = [
   {
     featureType: "transit",
     elementType: "all",
-    stylers: [{ "visibility": "off" }]
+    stylers: [{ visibility: "off" }]
   },
   {
     featureType: "water",
@@ -41,14 +41,14 @@ export const stylesForNightMode = [
   {
     featureType: "water",
     elementType: "labels.text",
-    stylers: [{ "visibility": "off" }]
+    stylers: [{ visibility: "off" }]
   }
 ];
 
 export const stylesForRegionFill = {
-  strokeColor: '#5147FF',
+  strokeColor: "#5147FF",
   strokeOpacity: 1,
   strokeWeight: 1.54,
-  fillColor: '#6760e6',  // rgba(103,96,230,0.1);
-  fillOpacity: 0.35,
+  fillColor: "#6760e6", // rgba(103,96,230,0.1);
+  fillOpacity: 0.35
 };

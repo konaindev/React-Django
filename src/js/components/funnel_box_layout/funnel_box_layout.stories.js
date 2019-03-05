@@ -1,15 +1,17 @@
-import React from 'react';
+import React from "react";
 
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { linkTo } from '@storybook/addon-links';
+import { storiesOf } from "@storybook/react";
+import { action } from "@storybook/addon-actions";
+import { linkTo } from "@storybook/addon-links";
 
-import { FunnelBoxLayout } from './index';
+import { FunnelBoxLayout } from "./index";
 
 const props = {
-  name: 'Test name',
-  content: 'Test content',
-  detail: 'This is details',
+  name: "Test name",
+  content: "Test content",
+  detail: "This is details"
 };
 
-storiesOf('FunnelBoxLayout', module).add('default', () => <FunnelBoxLayout {...props} />);
+storiesOf("FunnelBoxLayout", module).add("default", () => (
+  <FunnelBoxLayout {...props} />
+));
