@@ -314,6 +314,7 @@ class Period(ModelPeriod, models.Model):
 
     target_acq_investment = models.DecimalField(
         null=True,
+        blank=True,
         default=None,
         max_digits=10,
         decimal_places=2,
@@ -363,6 +364,7 @@ class Period(ModelPeriod, models.Model):
 
     target_ret_investment = models.DecimalField(
         null=True,
+        blank=True,
         default=None,
         max_digits=10,
         decimal_places=2,

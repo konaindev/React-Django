@@ -1,36 +1,36 @@
 @import "css/variables.scss";
 
 .market-size-map {
-  width: 100%;
-  height: 100%;
-  background-color: $bluegray-dark;
+    width: 100%;
+    height: 100%;
+    background-color: $bluegray-dark;
 
-  .radius-text-rotated {
-    width: 190px;
-    font-size: 14px;
-    font-weight: 500;
-    color: $white;
-    text-align: center;
-    transform: rotate(40deg);
-    transform-origin: 80px -115px;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
+    .radius-text-rotated {
+        width: 190px;
+        font-size: 14px;
+        font-weight: 500;
+        color: $white;
+        text-align: center;
+        transform: rotate(40deg);
+        transform-origin: 80px -115px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
 
-  .zip-code-label {
-    width: 60px;
-    font-size: 14px;
-    font-weight: 500;
-    color: $white;
-    text-align: center;
-    position: absolute;
-    left: -30px;
-    top: -8px;
-  }
+    .zip-code-label {
+        width: 60px;
+        font-size: 14px;
+        font-weight: 500;
+        color: $white;
+        text-align: center;
+        position: absolute;
+        left: -30px;
+        top: -8px;
+    }
 
-  // hide "Map data @2019" and "Terms of Use"
-  // .gmnoprint {
-  //   display: none;
-  // }
+    // hide "Map data @2019" and "Terms of Use"
+    // .gmnoprint {
+    //   display: none;
+    // }
 }
