@@ -1,71 +1,68 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import DeltaIndicator from "../delta_indicator";
 import {
-  formatMultiple,
-  formatPercent,
-  formatNumber,
   formatCurrency,
-  formatCurrencyShorthand,
-  formatDate,
-  formatDeltaPercent
+  formatDeltaPercent,
+  formatNumber,
+  formatPercent
 } from "../../utils/formatters";
-
-import withFormatters from "../with_formatters";
-
 import "./funnel_box_layout.scss";
 
-/**
- * @class FunnelBoxLayout
- *
- * @classdesc A simple layout intended to metrics in a funnel grid/table.
- *
- * @note This provides layout; it shouldn't concern itself with value semantics.
- */
-export class FunnelBoxLayout extends Component {
+class FunnelBaseBox extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    content: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
-      .isRequired,
-    detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+    value: PropTypes.number.isRequired,
+    target: PropTypes.number.isRequired,
+    delta: PropTypes.number.isRequired,
+    formatter: PropTypes.func.isRequired,
+    deltaFormatter: PropTypes.func.isRequired,
   };
 
   render() {
+    const { name, value, target, delta, formatter, deltaFormatter } = this.props;
     return (
-      <div className="funnel-box panel-rounded-rect">
-        {/* Container for the label and detail text */}
-        <div className="funnel-box__labels">
-          <span className="funnel-box__labels__name">{this.props.name}</span>
-          <span className="funnel-box__labels__detail">
-            {this.props.detail}
-          </span>
+      <div className="funnel-box-layout">
+        <div className="funnel-box-layout__left">
+          <div className="funnel-box-layout__name">{name}</div>
+          <div className="funnel-box-layout__target">
+            Target: {formatter(target)}
+          </div>
         </div>
-        {/* Container for the content itself */}
-        <div className="funnel-box__outer-content">
-          <div className="funnel-box__inner-content">{this.props.content}</div>
+        <div className="funnel-box-layout__right">
+          <div className="funnel-box-layout__value">
+            {formatter(value)}
+          </div>
+          <div className="funnel-box-layout__delta">
+            <DeltaIndicator delta={delta} indicatorPos="right" formatter={deltaFormatter} />
+          </div>
         </div>
       </div>
     );
   }
 }
 
-// Define FunnelBoxLayouts that take values and targets of various types.
-export const FunnelMultipleBox = withFormatters(
-  FunnelBoxLayout,
-  formatMultiple
+export const FunnelNumberBox = props => (
+  <FunnelBaseBox
+    {...props}
+    formatter={formatNumber}
+    deltaFormatter={formatNumber}
+  />
 );
-export const FunnelPercentBox = withFormatters(
-  FunnelBoxLayout,
-  formatPercent,
-  formatDeltaPercent
+
+export const FunnelPercentBox = props => (
+  <FunnelBaseBox
+    {...props}
+    formatter={formatPercent}
+    deltaFormatter={formatDeltaPercent}
+  />
 );
-export const FunnelNumberBox = withFormatters(FunnelBoxLayout, formatNumber);
-export const FunnelCurrencyBox = withFormatters(
-  FunnelBoxLayout,
-  formatCurrency
+
+export const FunnelCurrencyBox = props => (
+  <FunnelBaseBox
+    {...props}
+    formatter={formatCurrency}
+    deltaFormatter={formatCurrency}
+  />
 );
-export const FunnelCurrencyShorthandBox = withFormatters(
-  FunnelBoxLayout,
-  formatCurrencyShorthand
-);
-export const FunnelDateBox = withFormatters(FunnelBoxLayout, formatDate);

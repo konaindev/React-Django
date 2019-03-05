@@ -7,7 +7,6 @@ import ReportSection from "../report_section";
 import PercentageGraphBox from "../percentage_graph_box";
 import WhiskerPlot from "../whisker_plot";
 import { LargeDetailPercentBox, LargePercentBox } from "../large_box_layout";
-
 import {
   FunnelNumberBox,
   FunnelPercentBox,
