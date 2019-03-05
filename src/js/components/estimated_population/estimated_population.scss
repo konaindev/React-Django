@@ -1,20 +1,38 @@
 @import "css/base.scss";
 
 .estimated-population {
+    display: flex;
+    justify-content: space-between;
+    margin: $panel-spacing;
+}
+
+.estimated-population__figure-wrapper {
+    flex: 1 1 30%;
+    max-width: 420px;
+    margin-right: 32px;
+}
+
+.estimated-population__map-wrapper {
+    flex: 1 1 70%;
+    max-width: 868px;
+    height: 452px;
+}
+
+.estimated-population__figure {
+    height: 100%;
     border: $panel-border;
     border-radius: $panel-border-radius;
     background-color: $panel-background-color;
     box-shadow: $panel-box-shadow;
-    color: #ffffff;
+    color: #FFFFFF;
     text-align: center;
     padding: 80px;
     align-self: stretch;
-    height: 100%;
     display: flex;
     justify-content: center;
     flex-direction: column;
 
-    &__title {
+    .figure__label {
         font-size: 12px;
         font-weight: bold;
         letter-spacing: 1px;
@@ -23,7 +41,7 @@
         text-transform: uppercase;
     }
 
-    &__figure {
+    .figure__value {
         font-family: $font-mono;
         font-size: 62px;
         letter-spacing: -2px;
@@ -31,7 +49,7 @@
         margin-bottom: 16px;
     }
 
-    &__text {
+    .figure__description {
         font-size: 14px;
         line-height: 24px;
     }
