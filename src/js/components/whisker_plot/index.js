@@ -9,18 +9,20 @@ import { VictoryGroup, VictoryArea } from "victory";
  */
 export default class WhiskerPlot extends Component {
   static propTypes = {
-    direction: PropTypes.oneOf(['up', 'down']),
+    direction: PropTypes.oneOf(["up", "down"]),
     series: PropTypes.arrayOf(
       PropTypes.oneOfType([PropTypes.number, PropTypes.string])
     ).isRequired
   };
 
   static defaultProps = {
-    direction: 'up'
+    direction: "up"
   };
 
-  static maybe = (maybeSeries, direction = 'up') => {
-    return maybeSeries ? <WhiskerPlot series={maybeSeries} direction={direction} /> : null;
+  static maybe = (maybeSeries, direction = "up") => {
+    return maybeSeries ? (
+      <WhiskerPlot series={maybeSeries} direction={direction} />
+    ) : null;
   };
 
   constructor(props) {
@@ -29,7 +31,7 @@ export default class WhiskerPlot extends Component {
       x: i,
       y: Number(raw)
     }));
-    // Here's some wacky javascript for you to contemplate. :-)
+    // Here"s some wacky javascript for you to contemplate. :-)
     this.randomName = (((1 + Math.random()) * 0x10000) | 0).toString(16);
   }
 

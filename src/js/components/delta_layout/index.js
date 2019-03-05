@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
 
-import DeltaIndicator from '../delta_indicator';
+import DeltaIndicator from "../delta_indicator";
 import "./delta_layout.scss";
 
 /**

@@ -60,38 +60,26 @@ export default class AcquisitionFunnelReport extends Component {
    * @description Component that lays out the table content columns
    */
   static FunnelTable = ({ children }) => {
-    return (
-      <div className="acquisition-funnel__table">
-        {children}
-      </div>
-    );
+    return <div className="acquisition-funnel__table">{children}</div>;
   };
 
   static FunnelColumn = ({ children }) => (
     <div className="acquisition-funnel__column">
-      <Panel className="acquisition-funnel__column-inner">
-        {children}
-      </Panel>
+      <Panel className="acquisition-funnel__column-inner">{children}</Panel>
     </div>
   );
 
   static FunnelRow = ({ children }) => (
-    <div className="acquisition-funnel__row">
-      {children}
-    </div>
+    <div className="acquisition-funnel__row">{children}</div>
   );
 
   static FunnelColumnHeader = ({ name }) => (
-    <div className="acquisition-funnel__column-header">
-      {name}
-    </div>
+    <div className="acquisition-funnel__column-header">{name}</div>
   );
 
   static FunnelColumnContent = ({ children }) => (
-    <div className="acquisition-funnel__column-content">
-      {children}
-    </div>
-  )
+    <div className="acquisition-funnel__column-content">{children}</div>
+  );
 
   static FunnelContent = ({ report: r }) => {
     return (

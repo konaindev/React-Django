@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import cn from 'classnames';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import cn from "classnames";
+import PropTypes from "prop-types";
 
-import { formatNumber } from '../../utils/formatters';
-import MarketSizeByIncome from '../market_size_by_income';
-import Panel from '../panel';
-import './segment_overview_by_age.css';
+import { formatNumber } from "../../utils/formatters";
+import Panel from "../panel";
+import MarketSizeByIncome from "../market_size_by_income";
+import "./segment_overview_by_age.css";
 
 export class SegmentOverviewByAge extends Component {
   static propTypes = {
@@ -13,7 +13,7 @@ export class SegmentOverviewByAge extends Component {
     income_groups: PropTypes.array.isRequired,
     segment_number: PropTypes.number.isRequired,
     segment_population: PropTypes.number.isRequired,
-    total_population: PropTypes.number.isRequired,
+    total_population: PropTypes.number.isRequired
   };
 
   render() {
@@ -31,7 +31,7 @@ export class SegmentOverviewByAge extends Component {
             Segment {segment_number} | Ages {age_group}
           </div>
           <div className="segment-overview-by-age__heading-right">
-            Est. Segment Population {formatNumber(segment_population)} /{' '}
+            Est. Segment Population {formatNumber(segment_population)} /{" "}
             <span className="segment-overview-by-age__total-pop">
               {formatNumber(total_population)}
             </span>
@@ -39,7 +39,11 @@ export class SegmentOverviewByAge extends Component {
         </div>
         <div className="segment-overview-by-age__content">
           {income_groups.map((item, index) => (
-            <MarketSizeByIncome key={index} {...item} segment_population={segment_population} />
+            <MarketSizeByIncome
+              key={index}
+              {...item}
+              segment_population={segment_population}
+            />
           ))}
         </div>
       </Panel>

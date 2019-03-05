@@ -16,7 +16,7 @@ export class PercentageGraphBox extends Component {
       PropTypes.oneOfType([PropTypes.number, PropTypes.string])
     ),
     target: PropTypes.number.isRequired,
-    value: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired
   };
 
   render() {
@@ -29,13 +29,11 @@ export class PercentageGraphBox extends Component {
             {formatPercent(value)}
           </span>
           <div className="percentage-graph-box__graph-delta">
-            {series && WhiskerPlot.maybe(series, delta >= 0 ? 'up' : 'down')}
+            {series && WhiskerPlot.maybe(series, delta >= 0 ? "up" : "down")}
             <DeltaIndicator delta={delta} indicatorPos="right" />
           </div>
         </div>
-        <div className="percentage-graph-box__extra">
-          {extraContent}
-        </div>
+        <div className="percentage-graph-box__extra">{extraContent}</div>
         <div className="percentage-graph-box__target">
           Target: {formatPercent(target)}
         </div>

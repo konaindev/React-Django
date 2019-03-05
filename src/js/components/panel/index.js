@@ -15,19 +15,27 @@ export default class Panel extends Component {
     component: PropTypes.oneOfType([PropTypes.Component, PropTypes.string]),
     className: PropTypes.string,
     children: PropTypes.element.isRequired,
-    size: PropTypes.oneOf(['small', 'default']),
+    size: PropTypes.oneOf(["small", "default"])
   };
 
   static defaultProps = {
-    component: 'div',
-    size: 'default',
+    component: "div",
+    size: "default"
   };
 
   render() {
-    const { className, component: WrapperComponent, size, ...props } = this.props;
+    const {
+      className,
+      component: WrapperComponent,
+      size,
+      ...props
+    } = this.props;
 
     return (
-      <WrapperComponent className={cn("panel", `panel--${size}`, className)} {...props} />
+      <WrapperComponent
+        className={cn("panel", `panel--${size}`, className)}
+        {...props}
+      />
     );
   }
 }

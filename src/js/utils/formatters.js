@@ -14,8 +14,11 @@ const getLanguage = () =>
  * @param {number|string} value A percentage value out of 1.0 to format
  * @param {number} decimals The number of decimal places to include
  */
-export const formatPercent = (value, maxFractionDigits = 0, minFractionDigits) => {
-
+export const formatPercent = (
+  value,
+  maxFractionDigits = 0,
+  minFractionDigits
+) => {
   if (minFractionDigits === undefined) {
     minFractionDigits = maxFractionDigits;
   }
@@ -154,11 +157,11 @@ export const targetFormatter = formatter => targetValue =>
 export const formatTargetPercent = targetFormatter(formatPercent);
 
 export const convertDistanceToMeter = (distance, unit) => {
-  if (unit === 'mi') {
+  if (unit === "mi") {
     return distance * 1609.34;
   }
-  if (unit === 'km') {
+  if (unit === "km") {
     return distance * 1000;
   }
   return distance;
-}
+};

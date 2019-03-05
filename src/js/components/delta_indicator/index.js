@@ -18,7 +18,7 @@ export default class DeltaIndicator extends Component {
       DeltaIndicator.DIRECTION_DOWN
     ]),
     formatter: PropTypes.func,
-    indicatorPos: PropTypes.oneOf(["left", "right"]),
+    indicatorPos: PropTypes.oneOf(["left", "right"])
   };
 
   static defaultProps = {
@@ -33,7 +33,7 @@ export default class DeltaIndicator extends Component {
     const arrowClass = cn("delta-indicator__arrow", {
       "delta-indicator__trend-up": direction > 0,
       "delta-indicator__trend-down": direction < 0,
-      "delta-indicator__trend-flat": direction === 0,
+      "delta-indicator__trend-flat": direction === 0
     });
 
     return delta == null ? (

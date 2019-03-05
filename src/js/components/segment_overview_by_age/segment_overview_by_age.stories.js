@@ -1,9 +1,9 @@
-import React from 'react';
+import React from "react";
 
-import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { linkTo } from '@storybook/addon-links';
-import SegmentOverviewByAge from './index';
+import { storiesOf } from "@storybook/react";
+import { action } from "@storybook/addon-actions";
+import { linkTo } from "@storybook/addon-links";
+import SegmentOverviewByAge from "./index";
 
 const props = {
   age_group: "18-24",
@@ -61,6 +61,6 @@ const props = {
   ]
 };
 
-storiesOf('SegmentOverviewByAge', module).add('default', () => (
+storiesOf("SegmentOverviewByAge", module).add("default", () => (
   <SegmentOverviewByAge {...props} segment_number={1} />
 ));

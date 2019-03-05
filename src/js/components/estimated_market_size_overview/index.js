@@ -5,7 +5,6 @@ import AgeRangePopulationSize from "../age_range_population_size";
 import Panel from "../panel";
 import "./estimated_market_size_overview.css";
 
-
 export function EstimatedMarketSizeOverview({ market_sizes }) {
   return (
     <Panel className="estimated-market-size-overview">
@@ -27,9 +26,9 @@ EstimatedMarketSizeOverview.propTypes = {
     PropTypes.shape({
       age_group: PropTypes.string.isRequired,
       market_size: PropTypes.number.isRequired,
-      segment_population: PropTypes.number.isRequired,
+      segment_population: PropTypes.number.isRequired
     })
-  ).isRequired,
+  ).isRequired
 };
 
 export default EstimatedMarketSizeOverview;
