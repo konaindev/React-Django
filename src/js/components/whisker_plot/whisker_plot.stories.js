@@ -6,8 +6,16 @@ import { linkTo } from '@storybook/addon-links';
 
 import WhiskerPlot from './index';
 
-const props = {
+const props1 = {
   series: [1,2,3,4,5,4,3,3,1],
+  direction: 'up'
 };
 
-storiesOf('WhiskerPlot', module).add('default', () => <WhiskerPlot {...props} />);
+const props2 = {
+  series: [3,5,2,4,5,4,1,3,1],
+  direction: 'down'
+};
+
+storiesOf('WhiskerPlot', module)
+  .add('up', () => <WhiskerPlot {...props1} />)
+  .add('down', () => <WhiskerPlot {...props2} />);
