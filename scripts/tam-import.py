@@ -237,18 +237,6 @@ class TAMImporter():
 
         jsonschema.validate(instance=report, schema=schema)
 
-
-def main(fname):
-    # load & compile the file to a graph
-    excel = ExcelCompiler(filename=fname)
-
-    # test evaluation
-    print("Should be 51 is %s" % excel.evaluate('Deadline Based Model!R24'))
-
-    d = excel.evaluate('Deadline Based Model!O24')
-    print("Should be 2020/6/1 is %d/%d/%d" % date_from_int(d))
-
-
 if __name__ == '__main__':
     pycel_logging_to_console()
 
