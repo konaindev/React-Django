@@ -10,31 +10,34 @@ export default class ProjectPage extends Component {
     project: PropTypes.object.isRequired
   };
 
-  renderPeriodLinks(periods) {
-    return periods.map(period => (
-      <li key={period.url}>
-        <a href={period.url} className="period-link">
-          {period.description}
+  renderLink(link) {
+    return (
+      <li key={link.url}>
+        <a href={link.url} className="report-link">
+          {link.description}
         </a>
       </li>
-    ));
-  }
-
-  renderSection(section) {
-    return (
-      <div className="report-section">
-        <h2>{section.name}</h2>
-        <ul className="period-links">
-          {this.renderPeriodLinks(section.periods)}
-        </ul>
-      </div>
     );
   }
 
-  renderSections(sections) {
-    return sections.map((section, i) => (
-      <div key={i}>{this.renderSection(section)}</div>
-    ));
+  renderLinks(links) {
+    console.log("ATTEMPTING TO RENDER: ", links);
+    return links == null ? (
+      <li>(no reports)</li>
+    ) : links.length == null ? (
+      this.renderLink(links)
+    ) : (
+      links.map(link => this.renderLink(link))
+    );
+  }
+
+  renderSection(links, name) {
+    return (
+      <div className="report-section">
+        <h2>{name}</h2>
+        <ul className="report-links">{this.renderLinks(links)}</ul>
+      </div>
+    );
   }
 
   render() {
@@ -47,7 +50,30 @@ export default class ProjectPage extends Component {
     return (
       <div className="page project-page">
         <Header navigationItems={navigationItems}>
-          <div>{this.renderSections(this.props.report_links)}</div>
+          <div>
+            {this.renderSection(
+              this.props.report_links.baseline,
+              "Baseline Report"
+            )}
+          </div>
+          <div>
+            {this.renderSection(
+              this.props.report_links.performance,
+              "Performance Reports"
+            )}
+          </div>
+          <div>
+            {this.renderSection(
+              this.props.report_links.modeling,
+              "Modeling Report"
+            )}
+          </div>
+          <div>
+            {this.renderSection(
+              this.props.report_links.market,
+              "Market Report"
+            )}
+          </div>
         </Header>
       </div>
     );
