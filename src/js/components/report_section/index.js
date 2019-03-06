@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import cn from "classnames";
 
 import Container from "../container";
 import SectionHeader from "../section_header";
@@ -15,25 +14,15 @@ import "./report_section.scss";
  */
 export default class ReportSection extends Component {
   static propTypes = {
-    name: PropTypes.string.isRequired,
-    horizontalPadding: PropTypes.bool.isRequired
-  };
-
-  static defaultProps = {
-    // TODO this prop looks like a hack
-    horizontalPadding: true
+    name: PropTypes.string.isRequired
   };
 
   render() {
     return (
-      <Container
-        className={cn("report-section", {
-          "horizontal-padding": this.props.horizontalPadding
-        })}
-      >
+      <div className="report-section">
         <SectionHeader title={this.props.name} />
         {this.props.children}
-      </Container>
+      </div>
     );
   }
 }
