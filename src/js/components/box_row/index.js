@@ -14,22 +14,23 @@ import "./box_row.scss";
  */
 export default class BoxRow extends Component {
   // TODO XXX FIXME externalMargin looks like a hack to me. -Dave
-  static propTypes = { externalMargin: PropTypes.bool.isRequired };
+  static propTypes = {
+    spacing: PropTypes.oneOf(["none", "normal", "wide"]).isRequired
+  };
 
-  static defaultProps = { externalMargin: true };
+  static defaultProps = {
+    spacing: "normal"
+  };
 
   render() {
+    const { children, spacing } = this.props;
     return (
-      <div
-        className={cn("box-row", {
-          "external-margin": this.props.externalMargin
-        })}
-      >
-        {this.props.children.map((child, i) => (
+      <div className={cn("box-row", `box-row--${spacing}`)}>
+        {children.map((child, i) => (
           <div
             key={i}
             className="child-wrapper"
-            style={equalWidthStyle(this.props.children.length)}
+            style={equalWidthStyle(children.length)}
           >
             {child}
           </div>
