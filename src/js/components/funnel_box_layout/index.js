@@ -6,7 +6,8 @@ import {
   formatCurrency,
   formatDeltaPercent,
   formatNumber,
-  formatPercent
+  formatPercent,
+  formatTargetPercent
 } from "../../utils/formatters";
 import "./funnel_box_layout.scss";
 
@@ -34,7 +35,7 @@ class FunnelBaseBox extends Component {
         <div className="funnel-box-layout__left">
           <div className="funnel-box-layout__name">{name}</div>
           <div className="funnel-box-layout__target">
-            Target: {formatter(target)}
+            {formatTargetPercent(target)}
           </div>
         </div>
         <div className="funnel-box-layout__right">

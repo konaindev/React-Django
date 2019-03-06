@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import DeltaIndicator from "../delta_indicator";
 import Panel from "../panel";
 import WhiskerPlot from "../whisker_plot";
-import { formatPercent } from "../../utils/formatters";
+import { formatPercent, formatTargetPercent } from "../../utils/formatters";
 import "./percentage_graph_box.scss";
 
 export class PercentageGraphBox extends Component {
@@ -35,7 +35,7 @@ export class PercentageGraphBox extends Component {
         </div>
         <div className="percentage-graph-box__extra">{extraContent}</div>
         <div className="percentage-graph-box__target">
-          Target: {formatPercent(target)}
+          {formatTargetPercent(target)}
         </div>
       </Panel>
     );
