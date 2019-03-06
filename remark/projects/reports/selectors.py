@@ -4,7 +4,10 @@ valid links to the underlying views.
 """
 import datetime
 from django.urls import reverse
-from .reports import Report
+from .baseline import BaselineReport
+from .performance import PerformanceReport
+from .market import MarketReport
+from .modeling import ModelingReport
 
 
 class DateRange:
@@ -76,10 +79,15 @@ class ReportSelectorBase:
         # Derived classes must implement
         raise NotImplementedError()
 
-    def get_report_data(self):
-        """Return the underlying report data, in JSON-able format."""
+    def get_report(self):
+        """Return the underlying ReportBase instance, or None."""
         # Derived classes must implement
         raise NotImplementedError()
+
+    def get_report_data(self):
+        """Return the underlying report data, in JSON-able format."""
+        report = self.get_report()
+        return report.to_jsonable() if report is not None else None
 
 
 class BaselineReportSelector(ReportSelectorBase):
@@ -109,13 +117,10 @@ class BaselineReportSelector(ReportSelectorBase):
         return f"Baseline Period ({dates.description()})"
 
     def has_report_data(self):
-        return Report.has_baseline(self.project)
+        return BaselineReport.has_baseline(self.project)
 
     def get_report(self):
-        return Report.for_baseline(self.project)
-
-    def get_report_data(self):
-        return self.get_report().to_jsonable()
+        return BaselineReport.for_baseline(self.project)
 
 
 class PerformanceReportSelector(ReportSelectorBase):
@@ -267,33 +272,25 @@ class PerformanceReportSelector(ReportSelectorBase):
     def has_report_data(self):
         """Return True if report data for this timespan actually exists."""
         if self.start is not None:
-            exists = Report.has_dates(self.project, self.start, self.end)
+            exists = PerformanceReport.has_dates(self.project, self.start, self.end)
         elif self.report_span == self.CAMPAIGN_TO_DATE:
-            exists = Report.has_campaign_to_date(self.project)
+            exists = PerformanceReport.has_campaign_to_date(self.project)
         else:
-            exists = Report.has_last_weeks(self.project, self.get_weeks())
+            exists = PerformanceReport.has_last_weeks(self.project, self.get_weeks())
 
         return exists
-
-    def get_link(self):
-        """Return a link dictionary suitable for use in the frontend."""
-        return {"url": self.get_url(), "description": self.get_description()}
 
     def get_report(self):
         """
         Return a Report covering the requested timespan.
         """
         if self.start is not None:
-            report = Report.for_dates(self.project)
+            report = PerformanceReport.for_dates(self.project)
         elif self.report_span == self.CAMPAIGN_TO_DATE:
-            report = Report.for_campaign_to_date(self.project)
+            report = PerformanceReport.for_campaign_to_date(self.project)
         else:
-            report = Report.for_last_weeks(self.project, self.get_weeks())
+            report = PerformanceReport.for_last_weeks(self.project, self.get_weeks())
         return report
-
-    def get_report_data(self):
-        """Return the underlying report data, in JSON-able format."""
-        return self.get_report().to_jsonable()
 
 
 class MarketReportSelector(ReportSelectorBase):
@@ -322,11 +319,11 @@ class MarketReportSelector(ReportSelectorBase):
 
     def has_report_data(self):
         """Return True if data exists for this type of report."""
-        return self.project.tmp_market_analysis_json is not None
+        return MarketReport.exists(self.project)
 
-    def get_report_data(self):
-        """Return the underlying report data, in JSON-able format."""
-        return self.project.tmp_market_analysis_json
+    def get_report(self):
+        """Return the underlying report."""
+        return MarketReport.for_project(self.project)
 
 
 class ModelingReportSelector(ReportSelectorBase):
@@ -355,11 +352,11 @@ class ModelingReportSelector(ReportSelectorBase):
 
     def has_report_data(self):
         """Return True if data exists for this type of report."""
-        return self.project.tmp_model_options_json is not None
+        return ModelingReport.exists(self.project)
 
-    def get_report_data(self):
-        """Return the underlying report data, in JSON-able format."""
-        return self.project.tmp_model_options_json
+    def get_report(self):
+        """Return the underlying report."""
+        return ModelingReport.for_project(self.project)
 
 
 class ReportLinks:

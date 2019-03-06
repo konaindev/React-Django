@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 
 from remark.lib.views import ReactView
 
-from .report_selectors import (
+from .reports.selectors import (
     BaselineReportSelector,
     PerformanceReportSelector,
     MarketReportSelector,

@@ -49,7 +49,7 @@ class Project(models.Model):
 
     # A temporary field, for the current sprint, that holds our computed
     # TAM reporting data.
-    tmp_market_analysis_json = JSONField(
+    tmp_market_report_json = JSONField(
         default=None,
         null=True,
         blank=True,
@@ -60,7 +60,7 @@ class Project(models.Model):
 
     # A temporary field, for the current sprint, that holds our computed
     # model options data
-    tmp_model_options_json = JSONField(
+    tmp_modeling_report_json = JSONField(
         default=None,
         null=True,
         blank=True,
