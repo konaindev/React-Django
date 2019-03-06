@@ -4,6 +4,7 @@ from remark.lib.computed import computed_value, ComputedValueMixin
 from remark.lib.math import (
     sum_or_0,
     sum_or_none,
+    sub_or_0,
     sub_or_none,
     mult_or_0,
     mult_or_none,
@@ -108,7 +109,8 @@ class ComputedPeriod(ComputedValueMixin):
     @computed_value
     def occupied_units(self):
         """The total occupancy in effect at the end of the period."""
-        return self.occupied_units_start + self.move_ins - self.move_outs
+        moved_in = sum_or_0(self.occupied_units_start, self.move_ins)
+        return sub_or_0(moved_in, self.move_outs)
 
     @computed_value
     def occupancy_rate(self):
