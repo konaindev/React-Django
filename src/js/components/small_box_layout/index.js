@@ -31,16 +31,19 @@ class SmallBoxLayout extends Component {
   };
 
   render() {
+    const { content, detail, name } = this.props;
     return (
       <div className="small-box panel-rounded-rect">
         {/* Container for the label and detail text */}
         <div className="small-box__labels">
-          <span className="small-box__labels__name">{this.props.name}</span>
-          <span className="small-box__labels__detail">{this.props.detail}</span>
+          <span className="small-box__labels__name">{name}</span>
+          {detail && (
+            <span className="small-box__labels__detail">{detail}</span>
+          )}
         </div>
         {/* Container for the content itself */}
         <div className="small-box__outer-content">
-          <div className="small-box__inner-content">{this.props.content}</div>
+          <div className="small-box__inner-content">{content}</div>
         </div>
       </div>
     );
