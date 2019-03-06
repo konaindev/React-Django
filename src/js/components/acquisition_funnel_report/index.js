@@ -14,6 +14,13 @@ import {
   FunnelCurrencyBox
 } from "../funnel_box_layout";
 
+import {
+  formatCurrency,
+  formatPercent,
+  formatDeltaPercent,
+  formatTargetPercent
+} from "../../utils/formatters.js";
+
 import "./acquisition_funnel_report.scss";
 
 /**

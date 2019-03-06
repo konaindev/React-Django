@@ -1,5 +1,8 @@
+@import "../../../css/variables.scss";
+
 .segment-overview-by-age {
   padding: 40px 60px;
+  margin: $panel-spacing;
 }
 
 .segment-overview-by-age__heading {

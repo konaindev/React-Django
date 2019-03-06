@@ -69,6 +69,11 @@ class ComputedPeriod(ComputedValueMixin):
         # XXX this also seems like a nonsense number to me. -Dave
         return div_or_0(self.lease_cds, self.lease_applications)
 
+    @computed_value
+    def resident_decisions(self):
+        """The total number of notices to renew and vacate"""
+        return sum_or_0(self.lease_renewal_notices, self.lease_vacation_notices)
+
     # ------------------------------------------------------
     # TARGETS: Logical activity (lease)
     # ------------------------------------------------------
@@ -87,6 +92,13 @@ class ComputedPeriod(ComputedValueMixin):
         """The target number of leased units we'd like to achieve."""
         return div_or_none(
             self.target_lease_renewal_notices, self.target_leases_due_to_expire
+        )
+
+    @computed_value
+    def target_resident_decisions(self):
+        """The target number of resident decisions we'd like to achieve."""
+        return sum_or_none(
+            self.target_lease_renewal_notices, self.target_lease_vacation_notices
         )
 
     # ------------------------------------------------------
@@ -347,9 +359,9 @@ class ComputedPeriod(ComputedValueMixin):
         return d_quant_currency(d_div_or_0(self.acq_investment, self.leases_executed))
 
     @computed_value
-    def cost_per_exe_vs_monthly_average_rent(self):
+    def cost_per_exe_vs_lowest_monthly_rent(self):
         """Return the percentage of the monthly rent required to get a lease execution."""
-        return float(div_or_0(self.cost_per_exe, self.monthly_average_rent))
+        return float(div_or_0(self.cost_per_exe, self.lowest_monthly_rent))
 
     # ------------------------------------------------------
     # TARGETS: Funnel Costs
@@ -391,9 +403,9 @@ class ComputedPeriod(ComputedValueMixin):
         )
 
     @computed_value
-    def target_cost_per_exe_vs_monthly_average_rent(self):
+    def target_cost_per_exe_vs_lowest_monthly_rent(self):
         """Return the target percentage of the monthly rent required to get a lease execution."""
-        return div_or_none(self.target_cost_per_exe, self.monthly_average_rent)
+        return div_or_none(self.target_cost_per_exe, self.lowest_monthly_rent)
 
     # ------------------------------------------------------
     # Forwarding implementations to the underlying Period

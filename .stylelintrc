@@ -3,6 +3,7 @@
   "ignoreAtRules": ["mixin", "include"],
   "ignoreFiles": ["**/normalize.scss"],
   "rules": {
+    "indentation": 4,
     "at-rule-no-unknown": [
       true,
       {

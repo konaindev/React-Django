@@ -40,27 +40,39 @@ class ReportSpan:
     DATE_FORMAT = "%b %d %Y"
 
     @classmethod
-    def basline(cls, project):
+    def baseline(cls, project):
+        """Return a ReportSpan for the baseline period."""
         return cls(project, cls.BASELINE)
 
     @classmethod
     def last_week(cls, project):
+        """Return a ReportSpan for the last week of perf."""
         return cls(project, cls.LAST_WEEK)
 
     @classmethod
     def last_two_weeks(cls, project):
+        """Return a ReportSpan for the last two weeks of perf."""
         return cls(project, cls.LAST_TWO_WEEKS)
 
     @classmethod
     def last_four_weeks(cls, project):
+        """Return a ReportSpan for the last four weeks of perf."""
         return cls(project, cls.LAST_FOUR_WEEKS)
 
     @classmethod
     def campaign_to_date(cls, project):
+        """
+        Return a ReportSpan for all perf periods."""
         return cls(project, cls.CAMPAIGN_TO_DATE)
 
     @classmethod
+    def for_custom_span(cls, project, custom_span):
+        """Return a ReportSpan for a custom span."""
+        return cls(project, custom_span)
+
+    @classmethod
     def for_dates(cls, project, start, end):
+        """Return a ReportSpan for a given set of perf dates."""
         # This is silly, in the sense that we immediately turn around and
         # re-parse the string, but it makes sense in the context of an API
         # intended to service views that need to pass around strings.
@@ -164,6 +176,21 @@ class ReportSpan:
             description = f"{custom_description} ({description})"
         return description
 
+    def has_report_data(self):
+        """Return True if report data for this timespan actually exists."""
+        exists = False
+
+        # Custom time frame.
+        if self._start is not None:
+            exists = Report.has_dates(self._project, self._start, self._end)
+        elif self._report_span == self.BASELINE:
+            exists = Report.has_baseline(self._project)
+        elif self._report_span == self.CAMPAIGN_TO_DATE:
+            exists = Report.has_campaign_to_date(self._project)
+        else:
+            exists = Report.has_last_weeks(self._project, self._get_weeks())
+        return exists
+
     def get_link(self):
         """Return a link dictionary suitable for use in the frontend."""
         return {"url": self.get_url(), "description": self.get_description()}
@@ -195,19 +222,25 @@ class ReportSpanLinksMixin:
         """
         Build a mapping of special periods to a report URL for that period.
         """
-        return [
-            ReportSpan(project, custom_span).get_link()
-            for custom_span in ReportSpan.CUSTOM_SPANS
-        ]
+        links = []
+        for custom_span in ReportSpan.CUSTOM_SPANS:
+            span = ReportSpan.for_custom_span(project, custom_span)
+            # Don't include links to spans we don't have data for
+            if span.has_report_data():
+                links.append(span.get_link())
+        return links
 
     def _build_campaign_period_links(self, project):
         """
         Build a mapping of campaign periods to a report URL for that period.
         """
-        return [
-            ReportSpan.for_dates(project, start, end).get_link()
-            for start, end in project.get_campaign_period_dates()
-        ]
+        links = []
+        for start, end in project.get_campaign_period_dates():
+            span = ReportSpan.for_dates(project, start, end)
+            # Don't include links to spans we don't have data for
+            if span.has_report_data():
+                links.append(span.get_link())
+        return links
 
     def get_report_span_links(self, project):
         """

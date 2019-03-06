@@ -9,6 +9,7 @@
       },
       "property": {
         "monthly_average_rent": "1847.00",
+        "lowest_monthly_rent": "1847.00",
         "cost_per_exe_vs_rent": 1.03,
         "leasing": {
           "change": 55,
@@ -99,6 +100,7 @@
       },
       "property": {
         "monthly_average_rent": "1847.00",
+        "lowest_monthly_rent": "1847.00",
         "cost_per_exe_vs_rent": 0.72,
         "leasing": {
           "change": 55,
@@ -190,6 +192,7 @@
       },
       "property": {
         "monthly_average_rent": "1847.00",
+        "lowest_monthly_rent": "1847.00",
         "cost_per_exe_vs_rent": 0.48,
         "leasing": {
           "change": 55,

@@ -9,36 +9,21 @@ $category-color-4: #4035f4;
 .rent-to-income-analysis {
     $this: &;
 
-    padding: 20px 0;
-    margin-bottom: 20px;
+    margin: $panel-spacing;
+    padding: 70px;
+    display: flex;
+    flex-direction: row;
 
-    &__title {
-        color: $heading-font-color;
-        font-size: 14px;
-        line-height: 17px;
-        letter-spacing: 1px;
-        font-weight: 500;
-        padding-bottom: 29px;
-        border-bottom: 1px solid #586073;
-        margin-bottom: 35px;
-        text-transform: uppercase;
+    &__legends-wrapper {
+        flex-grow: 0;
+        max-width: 33.3333%;
+        flex-basis: 33.3333%;
     }
 
-    &__panel {
-        padding: 70px;
-        display: flex;
-        flex-direction: row;
-
-        &-left {
-            flex-grow: 0;
-            max-width: 33.3333%;
-            flex-basis: 33.3333%;
-        }
-
-        &-right {
-            flex-grow: 0;
-            flex-basis: 66.6666%;
-        }
+    &__chart-wrapper {
+        flex-grow: 0;
+        max-width: 66.6666%;
+        flex-basis: 66.6666%;
     }
 
     &__ratio {
@@ -46,6 +31,7 @@ $category-color-4: #4035f4;
         letter-spacing: 0.4px;
         line-height: 16px;
         text-transform: uppercase;
+        color: $bluegray-lightest;
         margin-bottom: 32px;
         white-space: nowrap;
     }
@@ -173,14 +159,16 @@ $category-color-4: #4035f4;
     }
 
     &--flip {
-        #{$this}__panel {
-            display: block;
+        display: block;
 
-            &-left {
-                display: flex;
-                max-width: 100%;
-                margin-bottom: 32px;
-            }
+        #{$this}__legends-wrapper {
+            display: flex;
+            max-width: 100%;
+            margin-bottom: 32px;
+        }
+
+        #{$this}__chart-wrapper {
+            max-width: 100%;
         }
 
         #{$this}__categories {

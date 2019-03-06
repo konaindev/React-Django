@@ -45,12 +45,12 @@ class WhiskerSeries:
         ],
         ("usv_exe_perc", "usv_exe"): ["leases_executed", "usvs"],
         ("lease_cd_rate", "lease_cd_rate"): ["lease_cds", "lease_applications"],
-        ("cost_per_exe_vs_monthly_average_rent", "cost_per_exe_vs_rent"): [
+        ("cost_per_exe_vs_lowest_monthly_rent", "cost_per_exe_vs_rent"): [
             "acq_reputation_building",
             "acq_demand_creation",
             "acq_leasing_enablement",
             "acq_market_intelligence",
-            "monthly_average_rent",
+            "lowest_monthly_rent",
             "leases_executed",
         ],
     }

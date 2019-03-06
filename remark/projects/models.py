@@ -79,7 +79,12 @@ class Project(models.Model):
         """
         Return the end date (exclusive) of the campaign.
         """
-        return self.periods.order_by("-start").values_list("end", flat=True).first()
+        return (
+            self.get_campaign_periods()
+            .order_by("-start")
+            .values_list("end", flat=True)
+            .first()
+        )
 
     def to_jsonable(self):
         """Return a representation that can be converted to a JSON string."""
@@ -308,12 +313,24 @@ class Period(ModelPeriod, models.Model):
     )
     monthly_average_rent.metric = Metric(Behavior.POINT_IN_TIME_EARLIEST_KEEP)
 
+    # XXX It's not clear to me this number is better. -Dave
+    lowest_monthly_rent = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=None,
+        null=True,
+        blank=True,
+        help_text="Lowest rent tenants pay in the month including this period. If not specified, it will be pulled from an earlier period.",
+    )
+    lowest_monthly_rent.metric = Metric(Behavior.POINT_IN_TIME_EARLIEST_KEEP)
+
     # ------------------------------------------------------
     # TARGETS: Acquisition Investment
     # ------------------------------------------------------
 
     target_acq_investment = models.DecimalField(
         null=True,
+        blank=True,
         default=None,
         max_digits=10,
         decimal_places=2,
@@ -363,6 +380,7 @@ class Period(ModelPeriod, models.Model):
 
     target_ret_investment = models.DecimalField(
         null=True,
+        blank=True,
         default=None,
         max_digits=10,
         decimal_places=2,

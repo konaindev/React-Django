@@ -1,23 +1,75 @@
 import React from "react";
-
 import { storiesOf } from "@storybook/react";
 
 import EstimatedPopulation from "./index";
 
-const props_radius = { population: 120448, radius: 3.1, units: "mi" };
-const props_zips = {
+export const props_radius = {
   population: 120448,
-  zip_codes: ["20910", "20911", "20912"]
+  center: {
+    type: "Point",
+    coordinates: [45.52, -122.68194444]
+  },
+  radius: 3.1,
+  units: "mi" // both miles and kilometers should be supported
 };
 
-storiesOf("EstimatedPopulation", module).add("default", () => (
-  <div style={{ height: 452, width: 420, display: "flex", padding: 15 }}>
+export const props_zips = {
+  population: 120448,
+  zip_codes: [
+    {
+      zip: "97201",
+      outline: {
+        type: "Polygon",
+        coordinates: [
+          [45.476042, -122.713058],
+          [45.520582, -122.720757],
+          [45.523881, -122.700411],
+          [45.515083, -122.680616],
+          [45.513983, -122.672918],
+          [45.504635, -122.667419],
+          [45.476042, -122.669619],
+          [45.476042, -122.713058]
+        ]
+      }
+    },
+    {
+      zip: "97232",
+      outline: {
+        type: "Polygon",
+        coordinates: [
+          [45.522781, -122.619031],
+          [45.522781, -122.66577],
+          [45.534878, -122.666869],
+          [45.534878, -122.62013],
+          [45.522781, -122.619031]
+        ]
+      }
+    },
+    {
+      zip: "97215",
+      outline: {
+        type: "Polygon",
+        coordinates: [
+          [45.522781, -122.57889],
+          [45.504635, -122.57889],
+          [45.505185, -122.617931],
+          [45.505185, -122.619031],
+          [45.523331, -122.617381],
+          [45.522781, -122.57889]
+        ]
+      }
+    }
+  ]
+};
+
+storiesOf("EstimatedPopulation", module).add("circle with radius", () => (
+  <div style={{ width: 1320, margin: "80px auto" }}>
     <EstimatedPopulation {...props_radius} />
   </div>
 ));
 
-storiesOf("EstimatedPopulation", module).add("zip_codes", () => (
-  <div style={{ height: 452, width: 420, display: "flex", padding: 15 }}>
+storiesOf("EstimatedPopulation", module).add("zip code polygons", () => (
+  <div style={{ width: 1320, margin: "80px auto" }}>
     <EstimatedPopulation {...props_zips} />
   </div>
 ));

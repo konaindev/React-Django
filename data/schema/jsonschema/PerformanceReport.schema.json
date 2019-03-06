@@ -410,6 +410,10 @@
                     "$ref": "#/definitions/Leasing",
                     "description": "Basic leasing information for the period"
                 },
+                "lowest_monthly_rent": {
+                    "description": "The lowest rent, across all units, during this period",
+                    "type": "string"
+                },
                 "monthly_average_rent": {
                     "description": "The average rent, across all units, during this period",
                     "type": "string"
@@ -422,6 +426,7 @@
             "required": [
                 "cost_per_exe_vs_rent",
                 "leasing",
+                "lowest_monthly_rent",
                 "monthly_average_rent",
                 "occupancy"
             ],
@@ -673,6 +678,10 @@
                 "leasing": {
                     "$ref": "#/definitions/RecursivePartial<Leasing>",
                     "description": "Basic leasing information for the period"
+                },
+                "lowest_monthly_rent": {
+                    "description": "The lowest rent, across all units, during this period",
+                    "type": "string"
                 },
                 "monthly_average_rent": {
                     "description": "The average rent, across all units, during this period",

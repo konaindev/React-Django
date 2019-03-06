@@ -2,6 +2,7 @@
 
 .estimated-market-size-overview {
   padding: 20px 60px;
+  margin: $panel-spacing;
 }
 
 .estimated-market-size-overview__heading {
