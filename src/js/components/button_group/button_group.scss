@@ -1,0 +1,20 @@
+@import "css/base.scss";
+
+.button-group {
+    display: flex;
+
+    &__item {
+        flex: 1;
+
+        &:not(:first-child) {
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+        }
+
+        &:not(:last-child) {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border-right: 1px solid $gray-darkest;
+        }
+    }
+}
