@@ -3,6 +3,7 @@ import cn from "classnames";
 import PropTypes from "prop-types";
 import { formatCurrencyShorthand, formatPercent } from "../../utils/formatters";
 
+import Panel from "../panel";
 import "./rent_to_income_analysis.scss";
 
 const THREASHOLD_COLUMNS = 10;
@@ -22,7 +23,7 @@ export const RentToIncomeAnalysis = ({
 }) => {
   const flipMode = incomes.length >= THREASHOLD_COLUMNS;
   return (
-    <div
+    <Panel
       className={cn("rent-to-income-analysis", {
         "rent-to-income-analysis--flip": flipMode
       })}
@@ -47,7 +48,6 @@ export const RentToIncomeAnalysis = ({
           ))}
         </div>
       </div>
-
       <div className="rent-to-income-analysis__chart-wrapper">
         <div className="rent-to-income-analysis-chart">
           <div className="rent-to-income-analysis-chart__vertical-caption">
@@ -95,7 +95,7 @@ export const RentToIncomeAnalysis = ({
           </div>
         </div>
       </div>
-    </div>
+    </Panel>
   );
 };
 

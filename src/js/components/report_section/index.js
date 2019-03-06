@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
 
+import Container from "../container";
+import SectionHeader from "../section_header";
 import "./report_section.scss";
 
 /**
@@ -24,15 +26,14 @@ export default class ReportSection extends Component {
 
   render() {
     return (
-      <div
+      <Container
         className={cn("report-section", {
           "horizontal-padding": this.props.horizontalPadding
         })}
       >
-        <span className="report-section__name">{this.props.name}</span>
-        <hr className="horizontal-divider report-section__divider" />
+        <SectionHeader title={this.props.name} />
         {this.props.children}
-      </div>
+      </Container>
     );
   }
 }

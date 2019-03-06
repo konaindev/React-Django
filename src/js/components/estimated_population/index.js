@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { formatNumber } from "../../utils/formatters";
 import MarketSizeMap from "../market_size_map";
 
+import Panel from "../panel";
 import "./estimated_population.scss";
 
 export function EstimatedPopulation(props) {
@@ -25,7 +26,7 @@ export function InfoBox({ population, radius, units, zip_codes }) {
   const isCircleMode = zip_codes === undefined;
 
   return (
-    <div className="estimated-population__figure">
+    <Panel className="estimated-population__figure">
       <div className="figure__label">Est. Population</div>
 
       <div className="figure__value">{formatNumber(population)}</div>
@@ -44,7 +45,7 @@ export function InfoBox({ population, radius, units, zip_codes }) {
           </>
         )}
       </div>
-    </div>
+    </Panel>
   );
 }
 

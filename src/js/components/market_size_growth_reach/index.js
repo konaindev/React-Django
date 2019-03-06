@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import "./market_size_growth_reach.scss";
+import Panel from "../panel";
 import { formatNumber, formatPercent } from "../../utils/formatters";
 
 export function MarketSizeGrowthReach({
@@ -11,7 +12,7 @@ export function MarketSizeGrowthReach({
   total: { market_size, usv, future_size }
 }) {
   return (
-    <div className="market-size-growth-reach">
+    <Panel className="market-size-growth-reach">
       <div className="market-size-growth-reach__table">
         <div className="table__row table__row--head">
           <span>Target Segment</span>
@@ -58,7 +59,7 @@ export function MarketSizeGrowthReach({
           <span>{formatNumber(future_size)}</span>
         </div>
       </div>
-    </div>
+    </Panel>
   );
 }
 

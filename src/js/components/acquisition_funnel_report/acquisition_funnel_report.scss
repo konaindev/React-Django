@@ -1,100 +1,52 @@
 @import "css/base.scss";
 
-.acquisition-funnel-label {
-    /* container for layout (matching row height) */
-    height: $s24;
-    margin-top: $s8;
-    margin-bottom: -$s4;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: none;
-}
+.acquisition-funnel {
+    &__table {
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        align-items: stretch;
+        padding-top: $s8;
+    }
 
-.acquisition-funnel-label > div:first-child {
-    /* rounded corner container */
-    height: $s24;
-    width: 100%;
-    border-radius: $border-radius-lg;
-    border: solid 1px $bluegray-dark;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
-}
+    &__row {
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        align-items: stretch;
+        margin: -$s4;
+    }
 
-.acquisition-funnel-label > div:last-child {
-    padding-top: $s2;
-}
+    &__column {
+        width: 33.33%;
+        padding: $s4;
 
-.acquisition-funnel-label > div:first-child > div {
-    /* label text */
-    text-align: center;
-    width: 100%;
-}
+        &-inner {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
 
-$funnel1: #a09afd;
-$funnel2: #867ffe;
-$funnel3: #675efc;
-$funnel4: #5147ff;
-$funnel5: #4035f4;
+        &-header {
+            height: 107px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $gray-lightest;
+            font-size: $text-xs;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-align: center;
+            text-transform: uppercase;
+        }
 
-.acquisition-funnel-label > .name-1 {
-    background-color: $funnel1;
-}
-
-.acquisition-funnel-label > .name-2 {
-    background-color: $funnel2;
-}
-
-.acquisition-funnel-label > .name-3 {
-    background-color: $funnel3;
-}
-
-.acquisition-funnel-label > .name-4 {
-    background-color: $funnel4;
-}
-
-.acquisition-funnel-label > .name-5 {
-    background-color: $funnel5;
-}
-
-.acquisition-funnel-label > .arrow-1 {
-    color: $funnel1;
-}
-
-.acquisition-funnel-label > .arrow-2 {
-    color: $funnel2;
-}
-
-.acquisition-funnel-label > .arrow-3 {
-    color: $funnel3;
-}
-
-.acquisition-funnel-label > .arrow-4 {
-    color: $funnel4;
-}
-
-.acquisition-funnel-label > .arrow-5 {
-    color: $funnel5;
-}
-
-.acquisition-funnel-table {
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-    align-items: stretch;
-    padding-top: $s8;
-}
-
-.acquisition-funnel-table .header-container {
-    width: 16.66666667%;
-}
-
-.acquisition-funnel-table .content-container {
-    width: 83.33333333%;
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-    align-items: stretch;
+        &-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: -1px 0;
+        }
+    }
 }

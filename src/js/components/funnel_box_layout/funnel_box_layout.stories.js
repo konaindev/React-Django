@@ -1,17 +1,31 @@
 import React from "react";
 
 import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
 
-import { FunnelBoxLayout } from "./index";
+import { FunnelNumberBox, FunnelPercentBox, FunnelCurrencyBox } from "./index";
 
-const props = {
-  name: "Test name",
-  content: "Test content",
-  detail: "This is details"
+const props1 = {
+  name: "Volume of EXE",
+  value: 3008,
+  target: 2136,
+  delta: 423
 };
 
-storiesOf("FunnelBoxLayout", module).add("default", () => (
-  <FunnelBoxLayout {...props} />
-));
+const props2 = {
+  name: "USV > INQ",
+  value: 0.32,
+  target: 0.216,
+  delta: 0.023
+};
+
+const props3 = {
+  name: "Volume of EXE",
+  value: 3008,
+  target: 2136,
+  delta: 423
+};
+
+storiesOf("FunnelBoxLayout", module)
+  .add("number", () => <FunnelNumberBox {...props1} />)
+  .add("percentage", () => <FunnelPercentBox {...props2} />)
+  .add("currency", () => <FunnelCurrencyBox {...props3} />);
