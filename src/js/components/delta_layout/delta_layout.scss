@@ -1,9 +1,5 @@
 @import "css/base.scss";
 
-$trend-up: $primary-green;
-$trend-down: $primary-red;
-$trend-flat: $primary-yellow;
-
 .delta-layout {
     display: flex;
     flex-direction: column;
@@ -12,25 +8,4 @@ $trend-flat: $primary-yellow;
 
 .delta-layout__section {
     font-size: $text-base;
-}
-
-.trend-up {
-    color: $trend-up;
-}
-
-.trend-down {
-    color: $trend-down;
-}
-
-.trend-flat {
-    color: $trend-flat;
-}
-
-.delta-layout__arrow {
-    padding-left: $s2;
-    padding-right: $s1;
-}
-
-.delta-layout__delta {
-    color: $default-ui-text-color;
 }

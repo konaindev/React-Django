@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
 
+import DeltaIndicator from "../delta_indicator";
 import "./delta_layout.scss";
 
 /**
@@ -35,40 +36,24 @@ export default class DeltaLayout extends Component {
     return (
       <DeltaLayout
         value={formatter(value)}
-        delta={delta == null ? null : formatterForDelta(delta)}
+        delta={delta}
+        formatter={formatterForDelta}
         direction={direction}
       />
     );
   };
 
   render() {
-    const deltaArrow =
-      this.props.direction > 0 ? "▲" : this.props.direction < 0 ? "▼" : "▶";
-    const deltaColor =
-      this.props.direction > 0
-        ? "trend-up"
-        : this.props.direction < 0
-        ? "trend-down"
-        : "trend-flat";
-    const arrowClass = cn(deltaColor, "delta-layout__arrow");
-
-    const deltaSection =
-      this.props.delta == null ? (
-        <>
-          <span className={arrowClass}>&nbsp;</span>
-          <span className="delta-layout__delta">&nbsp;</span>
-        </>
-      ) : (
-        <>
-          <span className={arrowClass}>{deltaArrow}</span>
-          <span className="delta-layout__delta">{this.props.delta}</span>
-        </>
-      );
-
     return (
       <span className="delta-layout">
         <span>{this.props.value}</span>
-        <span className="delta-layout__section">{deltaSection}</span>
+        <span className="delta-layout__section">
+          <DeltaIndicator
+            delta={this.props.delta}
+            direction={this.props.direction}
+            indicatorPos="left"
+          />
+        </span>
       </span>
     );
   }

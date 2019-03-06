@@ -1,10 +1,6 @@
 @import "css/base.scss";
 
 .estimated-market-size-overview {
-  background-color: #1a202e; /* remark-ui-dark */
-  border: 1px solid #161c29; /* remark-ui-border-dark */
-  border-radius: 6px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
   padding: 20px 60px;
   margin: $panel-spacing;
 }

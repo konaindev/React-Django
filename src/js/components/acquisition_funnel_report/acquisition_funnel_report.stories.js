@@ -198,6 +198,6 @@ const props_performance = {
   report: PERFORMANCE_REPORT
 };
 
-storiesOf("AcquisitionFunnelReport", module).add("performance", () => (
+storiesOf("AcquisitionFunnelReport", module).add("default", () => (
   <AcquisitionFunnelReport {...props_performance} />
 ));

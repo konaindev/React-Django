@@ -1,45 +1,53 @@
 @import "css/base.scss";
 
-.funnel-box {
+.funnel-box-layout {
     display: flex;
-    flex-direction: row;
-    height: $s24;
-    margin: $s2 0;
-    padding: $s6 0;
-}
+    width: 100%;
+    align-items: center;
+    padding: $s5 $s8;
+    border-bottom: 1px solid #242B39;
 
-.funnel-box__labels {
-    display: flex;
-    flex-direction: column;
-    flex: auto;
-    justify-content: space-between;
-}
+    &:first-child {
+        border-top: 1px solid #242B39;
+    }
 
-.funnel-box__labels__name {
-    color: $lighter-ui-text-color;
-    font-size: $text-base;
-    padding-left: $s8;
-}
+    &__left {
+        flex: 1;
+    }
 
-.funnel-box__labels__detail {
-    color: $default-ui-text-color;
-    font-size: $text-sm;
-    padding-left: $s8;
-}
+    &__right {
+        flex: 1;
+        text-align: right;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+    }
 
-.funnel-box__outer-content {
-    display: flex;
-    flex-direction: column;
-    font-size: $text-4xl;
-    line-height: $line-height-compressed;
-    justify-content: center;
-    align-content: center;
-}
+    &__name {
+        color: $gray-lightest;
+        font-size: $text-base;
+        line-height: $line-height-tight;
+        margin-bottom: $s1;
+    }
 
-.funnel-box__inner-content {
-    color: $lightest-ui-text-color;
-    font-weight: $weight-hairline;
-    font-family: $font-mono;
-    text-align: right;
-    padding-right: $s8;
+    &__target {
+        color: $gray-dark;
+        font-size: $text-sm;
+        font-weight: 300;
+        line-height: $line-height-tight;
+    }
+
+    &__value {
+        color: $gray-lightest;
+        font-size: 1.75rem;
+        line-height: 1;
+        text-align: right;
+    }
+
+    &__delta {
+        font-size: $text-xs;
+        line-height: $line-height-tight;
+        text-align: right;
+        width: 60px;
+    }
 }

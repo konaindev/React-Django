@@ -1,0 +1,16 @@
+@import "css/base.scss";
+
+.panel {
+    background-color: $panel-background-color;
+    box-shadow: $panel-box-shadow;
+    border: $panel-border;
+    border-radius: $panel-border-radius;
+
+    &--default {
+        border-radius: $panel-border-radius;
+    }
+
+    &--small {
+        border-radius: $border-radius-default;
+    }
+}
