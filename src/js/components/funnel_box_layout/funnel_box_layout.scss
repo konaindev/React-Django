@@ -3,6 +3,7 @@
 .funnel-box-layout {
     display: flex;
     width: 100%;
+    min-height: $s20;
     align-items: center;
     padding: $s5 $s8;
     border-bottom: 1px solid #242B39;
@@ -34,7 +35,7 @@
         color: $gray-dark;
         font-size: $text-sm;
         font-weight: 300;
-        line-height: $line-height-tight;
+        line-height: $line-height-normal;
     }
 
     &__value {

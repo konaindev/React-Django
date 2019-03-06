@@ -16,12 +16,20 @@ import {
 
 import {
   formatCurrency,
+  formatNumber,
   formatPercent,
   formatDeltaPercent,
   formatTargetPercent
 } from "../../utils/formatters.js";
 
 import "./acquisition_funnel_report.scss";
+
+export const format4WeekAverage = averageValue =>
+  averageValue == null ? (
+    <span>&nbsp;</span>
+  ) : (
+    `4-Week Average: ${formatNumber(averageValue)}`
+  );
 
 /**
  * @class AcqusitionFunnelReport
@@ -89,6 +97,9 @@ export default class AcquisitionFunnelReport extends Component {
   );
 
   static FunnelContent = ({ report: r }) => {
+    const targetFormatter = r.targets
+      ? formatTargetPercent
+      : format4WeekAverage;
     return (
       <AcquisitionFunnelReport.FunnelRow>
         <AcquisitionFunnelReport.FunnelColumn>
@@ -97,32 +108,52 @@ export default class AcquisitionFunnelReport extends Component {
             <FunnelNumberBox
               name="Volume of USV"
               value={r.funnel.volumes.usv}
-              target={r.targets?.funnel?.volumes?.usv}
+              target={
+                r.targets?.funnel?.volumes?.usv ||
+                r.four_week_funnel_averages?.usv
+              }
               delta={r.deltas?.funnel?.volumes?.usv}
+              targetFormatter={targetFormatter}
             />
             <FunnelNumberBox
               name="Volume of INQ"
               value={r.funnel.volumes.inq}
-              target={r.targets?.funnel?.volumes?.inq}
+              target={
+                r.targets?.funnel?.volumes?.inq ||
+                r.four_week_funnel_averages?.inq
+              }
               delta={r.deltas?.funnel?.volumes?.inq}
+              targetFormatter={targetFormatter}
             />
             <FunnelNumberBox
               name="Volume of TOU"
               value={r.funnel.volumes.tou}
-              target={r.targets?.funnel?.volumes?.tou}
+              target={
+                r.targets?.funnel?.volumes?.tou ||
+                r.four_week_funnel_averages?.tou
+              }
               delta={r.deltas?.funnel?.volumes?.tou}
+              targetFormatter={targetFormatter}
             />
             <FunnelNumberBox
               name="Volume of APP"
               value={r.funnel.volumes.app}
-              target={r.targets?.funnel?.volumes?.app}
+              target={
+                r.targets?.funnel?.volumes?.app ||
+                r.four_week_funnel_averages?.app
+              }
               delta={r.deltas?.funnel?.volumes?.app}
+              targetFormatter={targetFormatter}
             />
             <FunnelNumberBox
               name="Volume of EXE"
               value={r.funnel.volumes.exe}
-              target={r.targets?.funnel?.volumes?.exe}
+              target={
+                r.targets?.funnel?.volumes?.exe ||
+                r.four_week_funnel_averages?.exe
+              }
               delta={r.deltas?.funnel?.volumes?.exe}
+              targetFormatter={targetFormatter}
             />
           </AcquisitionFunnelReport.FunnelColumnContent>
         </AcquisitionFunnelReport.FunnelColumn>

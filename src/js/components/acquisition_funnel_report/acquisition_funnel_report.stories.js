@@ -78,7 +78,13 @@ const BASELINE_REPORT = {
       usv_exe: 0.003
     }
   },
-
+  four_week_funnel_averages: {
+    usv: 2136,
+    inq: 128,
+    tou: 52,
+    app: 19,
+    exe: 16
+  },
   // XXX extra stuff displayed directly under the words "ACQUISITION FUNNEL"
   // but that probably shouldn't be part of this react component?
   property: {
