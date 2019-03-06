@@ -54,7 +54,7 @@ class ReportSelectorBase:
         Yield all links available for this selector type for the given project.
         """
         for report_selector in cls.selectors_for_project(project):
-            yield report_selector.link()
+            yield report_selector.get_link()
 
     def __init__(self, project):
         self.project = project
@@ -153,7 +153,7 @@ class PerformanceReportSelector(ReportSelectorBase):
     LAST_FOUR_WEEKS = "last-four-weeks"
     CAMPAIGN_TO_DATE = "campaign"
 
-    NAMED_SPAN_DESCRIPTONS = {
+    NAMED_SPAN_DESCRIPTIONS = {
         LAST_WEEK: "Last Week",
         LAST_TWO_WEEKS: "Last Two Weeks",
         LAST_FOUR_WEEKS: "Last Four Weeks",
@@ -285,7 +285,7 @@ class PerformanceReportSelector(ReportSelectorBase):
         Return a Report covering the requested timespan.
         """
         if self.start is not None:
-            report = PerformanceReport.for_dates(self.project)
+            report = PerformanceReport.for_dates(self.project, self.start, self.end)
         elif self.report_span == self.CAMPAIGN_TO_DATE:
             report = PerformanceReport.for_campaign_to_date(self.project)
         else:

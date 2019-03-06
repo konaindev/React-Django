@@ -19,15 +19,12 @@ export default class ReportSpanDropdown extends Component {
 
   renderOptions() {
     let options = [];
-    for (let section of this.props.report_links) {
-      // ignore section.name for now?
-      for (let link of section.periods) {
-        options.push(
-          <option key={link.url} value={link.url}>
-            {link.description}
-          </option>
-        );
-      }
+    for (let link of this.props.report_links) {
+      options.push(
+        <option key={link.url} value={link.url}>
+          {link.description}
+        </option>
+      );
     }
     return options;
   }

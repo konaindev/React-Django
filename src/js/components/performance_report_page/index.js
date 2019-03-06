@@ -36,7 +36,7 @@ export default class PerformanceReportPage extends Component {
           <>
             <ProjectTabs
               current_report_link={this.props.current_report_link}
-              report_links={this.props.report_links}
+              report_links={this.props.report_links.performance}
             />
             <CommonReport report={this.props.report} />
           </>

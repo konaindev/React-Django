@@ -32,11 +32,11 @@ class ReportPageViewBase(ReactView):
 
     selector_class = None
 
-    def get(self, request, project_id, *args):
+    def get(self, request, project_id, *args, **kwargs):
         project = get_object_or_404(Project, public_id=project_id)
 
         try:
-            selector = self.selector_class(project, *args)
+            selector = self.selector_class(project, *args, **kwargs)
         except Exception:
             selector = None
             raise Http404

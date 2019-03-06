@@ -34,10 +34,7 @@ export default class BaselineReportPage extends Component {
       <div className="page report-page">
         <Header navigationItems={navigationItems}>
           <>
-            <ProjectTabs
-              current_report_link={this.props.current_report_link}
-              report_links={this.props.report_links}
-            />
+            <ProjectTabs />
             <CommonReport report={this.props.report} />
           </>
         </Header>
