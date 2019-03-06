@@ -1,52 +1,52 @@
 @import "css/base.scss";
 
 .acquisition-funnel {
-  &__table {
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-    align-items: stretch;
-    padding-top: $s8;
-  }
-
-  &__row {
-    display: flex;
-    flex-direction: row;
-    flex-grow: 1;
-    align-items: stretch;
-    margin: -$s4;
-  }
-
-  &__column {
-    width: 33.33%;
-    padding: $s4;
-
-    &-inner {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
+    &__table {
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        align-items: stretch;
+        padding-top: $s8;
     }
 
-    &-header {
-      height: 107px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: $gray-lightest;
-      font-size: $text-xs;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-align: center;
-      text-transform: uppercase;
+    &__row {
+        display: flex;
+        flex-direction: row;
+        flex-grow: 1;
+        align-items: stretch;
+        margin: -$s4;
     }
 
-    &-content {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      margin: -1px 0;
+    &__column {
+        width: 33.33%;
+        padding: $s4;
+
+        &-inner {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        &-header {
+            height: 107px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $gray-lightest;
+            font-size: $text-xs;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        &-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: -1px 0;
+        }
     }
-  }
 }

@@ -1,53 +1,53 @@
 @import "css/base.scss";
 
 .funnel-box-layout {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  padding: $s5 $s8;
-  border-bottom: 1px solid #242B39;
-
-  &:first-child {
-    border-top: 1px solid #242B39;
-  }
-
-  &__left {
-    flex: 1;
-  }
-
-  &__right {
-    flex: 1;
-    text-align: right;
     display: flex;
-    align-items: flex-end;
-    justify-content: flex-end;
-  }
+    width: 100%;
+    align-items: center;
+    padding: $s5 $s8;
+    border-bottom: 1px solid #242B39;
 
-  &__name {
-    color: $gray-lightest;
-    font-size: $text-base;
-    line-height: $line-height-tight;
-    margin-bottom: $s1;
-  }
+    &:first-child {
+        border-top: 1px solid #242B39;
+    }
 
-  &__target {
-    color: $gray-dark;
-    font-size: $text-sm;
-    font-weight: 300;
-    line-height: $line-height-tight;
-  }
+    &__left {
+        flex: 1;
+    }
 
-  &__value {
-    color: $gray-lightest;
-    font-size: 1.75rem;
-    line-height: 1;
-    text-align: right;
-  }
+    &__right {
+        flex: 1;
+        text-align: right;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+    }
 
-  &__delta {
-    font-size: $text-xs;
-    line-height: $line-height-tight;
-    text-align: right;
-    width: 60px;
-  }
+    &__name {
+        color: $gray-lightest;
+        font-size: $text-base;
+        line-height: $line-height-tight;
+        margin-bottom: $s1;
+    }
+
+    &__target {
+        color: $gray-dark;
+        font-size: $text-sm;
+        font-weight: 300;
+        line-height: $line-height-tight;
+    }
+
+    &__value {
+        color: $gray-lightest;
+        font-size: 1.75rem;
+        line-height: 1;
+        text-align: right;
+    }
+
+    &__delta {
+        font-size: $text-xs;
+        line-height: $line-height-tight;
+        text-align: right;
+        width: 60px;
+    }
 }
