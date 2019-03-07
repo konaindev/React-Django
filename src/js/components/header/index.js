@@ -5,8 +5,8 @@ import "./header.scss";
 // TODO figure out how this relates to navigation.
 export default class Header extends Component {
   static propTypes = {
-    navigationItems: PropTypes.element,
-    children: PropTypes.element.isRequired
+    navigationItems: PropTypes.node,
+    children: PropTypes.node.isRequired
   };
 
   render() {

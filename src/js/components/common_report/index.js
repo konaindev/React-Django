@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import LeasingPerformanceReport from "../leasing_performance_report";
-import CampaignInvestmentReport from "../campaign_investment_report";
 import AcquisitionFunnelReport from "../acquisition_funnel_report";
+import CampaignInvestmentReport from "../campaign_investment_report";
+import Container from "../container";
+import LeasingPerformanceReport from "../leasing_performance_report";
 
 /**
  * @class CommonReport
@@ -17,12 +18,13 @@ export default class CommonReport extends Component {
   static propTypes = { report: PropTypes.object.isRequired };
 
   render() {
+    const { report } = this.props;
     return (
-      <span>
-        <LeasingPerformanceReport report={this.props.report} />
-        <CampaignInvestmentReport report={this.props.report} />
-        <AcquisitionFunnelReport report={this.props.report} />
-      </span>
+      <Container>
+        <LeasingPerformanceReport report={report} />
+        <CampaignInvestmentReport report={report} />
+        <AcquisitionFunnelReport report={report} />
+      </Container>
     );
   }
 }

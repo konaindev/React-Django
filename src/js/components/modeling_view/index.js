@@ -1,57 +1,64 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import CommonReport from "../common_report";
-import Container from "../container";
-import SectionHeader from "../section_header";
 import ButtonGroup from "../button_group";
+import Container from "../container";
+import Header from "../header";
+import CommonReport from "../common_report";
+import ProjectTabs from "../project_tabs";
+import { NavigationItems, ProjectNavigationItem } from "../navigation";
 import "./modeling_view.scss";
 
-export default class ModelingView extends Component {
-  static propTypes = { report: PropTypes.object.isRequired };
-
-  buttonGroupProps() {
-    return {
-      value: "investment-driven",
-      options: [
-        {
-          value: "schedule-driven",
-          label: "Schedule Driven"
-        },
-        {
-          value: "investment-driven",
-          label: "Investment Driven"
-        },
-        {
-          value: "run-rate",
-          label: "Run Rate"
-        },
-        {
-          value: "compare-models",
-          label: "Compare Models"
-        }
-      ]
+export class ModelingView extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeReport: 0
     };
   }
 
-  activeView() {
-    return <CommonReport report={this.props.options[0]} />;
-  }
-
-  onClick(value) {
-    this.setState("selectedView", value);
-  }
+  handleSetActiveReport = index => {
+    this.setState({ activeReport: index });
+  };
 
   render() {
-    return (
-      <Container>
-        <ButtonGroup
-          {...this.buttonGroupProps()}
-          onClick={this.onClick.bind(this)}
-        />
+    const { property_name, options } = this.props;
+    const { activeReport } = this.state;
 
-        {this.activeView()}
-      </Container>
+    const navigationItems = (
+      <NavigationItems>
+        <ProjectNavigationItem
+          project={{ project: this.props.property_name }}
+        />
+      </NavigationItems>
+    );
+
+    const subnavOptions = options.map((report, index) => ({
+      label: report.name,
+      value: index
+    }));
+
+    return (
+      <div className="page modeling-view">
+        <Header navigationItems={navigationItems}>
+          {/*<ProjectTabs
+            current_report_link={this.props.current_report_link}
+            report_links={this.props.report_links}
+          />*/}
+          <Container>
+            <div className="modeling-view__subnav">
+              <ButtonGroup
+                onChange={this.handleSetActiveReport}
+                value={activeReport}
+                options={subnavOptions}
+              />
+            </div>
+          </Container>
+          <CommonReport report={options[activeReport]} />
+        </Header>
+      </div>
     );
   }
 }
+
+export default ModelingView;

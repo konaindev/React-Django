@@ -1,5 +1,8 @@
 @import "css/base.scss";
 
-.modeling_view {
-
+.modeling-view {
+    &__subnav {
+        margin-top: $s10;
+        max-width: 60%;
+    }
 }
