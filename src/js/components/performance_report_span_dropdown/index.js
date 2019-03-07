@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import "./report_span_dropdown.scss";
+import "./performance_report_span_dropdown.scss";
 
 /**
- * @description A dropdown menu that lets us change the visible span.
+ * @class PerformanceReportSpanDropdown
+ *
+ * @classname A dropdown menu that lets us change the visible performance report span.
  */
-export default class ReportSpanDropdown extends Component {
+export default class PerformanceReportSpanDropdown extends Component {
   static propTypes = {
     current_report_link: PropTypes.object.isRequired,
     report_links: PropTypes.arrayOf(PropTypes.object).isRequired
