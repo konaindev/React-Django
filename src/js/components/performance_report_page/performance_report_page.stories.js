@@ -4,6 +4,7 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 
+import { project, report_links } from "../project_page/project_page.stories.js";
 import PerformanceReportPage from "./index";
 
 // dummy data
@@ -53,7 +54,7 @@ const WHISKERS = {
   ]
 };
 
-const PERFORMANCE_REPORT = {
+const report = {
   dates: {
     start: "2018-09-24",
     end: "2018-10-22"
@@ -240,44 +241,12 @@ const PERFORMANCE_REPORT = {
   whiskers: WHISKERS
 };
 
-const COMMON_PROPS = {
-  project: {
-    name: "Portland Multi Family"
-  },
-  current_report_link: { name: "Some Report", link: "/some/url" },
-  report_links: [
-    {
-      name: "Special Periods",
-      periods: [
-        {
-          url: "/projects/pro_eekgau8mfkbc34iq/report/baseline/",
-          description: "Baseline Period (Jan 01 2017 - May 07 2018)"
-        },
-        {
-          url: "/projects/pro_eekgau8mfkbc34iq/report/last-week/",
-          description: "Last Week (Dec 24 2018 - Dec 31 2018)"
-        },
-        {
-          url: "/projects/pro_eekgau8mfkbc34iq/report/last-two-weeks/",
-          description: "Last Two Weeks (Dec 17 2018 - Dec 31 2018)"
-        },
-        {
-          url: "/projects/pro_eekgau8mfkbc34iq/report/last-four-weeks/",
-          description: "Last Four Weeks (Dec 03 2018 - Dec 31 2018)"
-        },
-        {
-          url: "/projects/pro_eekgau8mfkbc34iq/report/campaign/",
-          description: "Campaign To Date (May 07 2018 - Dec 31 2018)"
-        }
-      ]
-    }
-  ]
+const current_report_link = {
+  url: "/projects/pro_example/performance/last-four-weeks/",
+  description: "Last Four Weeks (Dec 03 2018 - Dec 31 2018)"
 };
 
-const props = {
-  ...COMMON_PROPS,
-  report: PERFORMANCE_REPORT
-};
+const props = { project, report, report_links, current_report_link };
 
 storiesOf("PerformanceReportPage", module).add("default", () => (
   <PerformanceReportPage {...props} />

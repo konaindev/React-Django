@@ -6,7 +6,10 @@ import { linkTo } from "@storybook/addon-links";
 
 import ProjectPage from "./index";
 
-export const project = { public_id: "pro_example", name: "Example Project" };
+export const project = {
+  public_id: "pro_example",
+  name: "Portland Multi Family"
+};
 
 // see data/schemas/ts/ReportLinks.ts and data/examples/ReportLinks.json
 export const report_links = {
