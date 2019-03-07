@@ -6,11 +6,14 @@ import CampaignInvestmentReport from "../campaign_investment_report";
 import AcquisitionFunnelReport from "../acquisition_funnel_report";
 
 /**
- * @class Report
+ * @class CommonReport
  *
- * @classdesc Renders a full progress report from the underlying `report` data
+ * @classdesc Renders a full common report from the underlying `report` data
+ * A "common" report contains the leasing, campaign, and acquisition funnel
+ * sections that are expected in baseline reports, performance reports,
+ * and modeling reports.
  */
-export default class Report extends Component {
+export default class CommonReport extends Component {
   static propTypes = { report: PropTypes.object.isRequired };
 
   render() {

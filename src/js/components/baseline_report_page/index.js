@@ -5,13 +5,14 @@ import Header from "../header";
 import { NavigationItems, ProjectNavigationItem } from "../navigation";
 import ProjectTabs from "../project_tabs";
 
-import Report from "../report";
-import "./report_page.scss";
+import CommonReport from "../common_report";
+
+// TODO @davepeck @leo -- this is copied code; we should fix this.
 
 /**
  * @description The full landing page for a single project report
  */
-export default class ReportPage extends Component {
+export default class BaselineReportPage extends Component {
   // TODO further define the shape of a report and a project...
   static propTypes = {
     report: PropTypes.object.isRequired,
@@ -33,11 +34,8 @@ export default class ReportPage extends Component {
       <div className="page report-page">
         <Header navigationItems={navigationItems}>
           <>
-            <ProjectTabs
-              current_report_link={this.props.current_report_link}
-              report_links={this.props.report_links}
-            />
-            <Report report={this.props.report} />
+            <ProjectTabs />
+            <CommonReport report={this.props.report} />
           </>
         </Header>
       </div>

@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 
-import ReportPage from "./index";
+import CommonReport from "./index";
 
 // dummy data
 const WHISKERS = {
@@ -60,8 +60,8 @@ const BASELINE_REPORT = {
   },
   property_name: "Portland Multi-Family",
   property: {
-    monthly_average_rent: "1847.00",
     lowest_monthly_rent: "1847.00",
+    monthly_average_rent: "1847.00",
     cost_per_exe_vs_rent: 0.54,
     leasing: {
       change: 36,
@@ -331,54 +331,18 @@ const PERFORMANCE_REPORT = {
   whiskers: WHISKERS
 };
 
-const COMMON_PROPS = {
-  project: {
-    name: "Portland Multi Family"
-  },
-  current_report_link: { name: "Some Report", link: "/some/url" },
-  report_links: [
-    {
-      name: "Special Periods",
-      periods: [
-        {
-          url: "/projects/pro_eekgau8mfkbc34iq/report/baseline/",
-          description: "Baseline Period (Jan 01 2017 - May 07 2018)"
-        },
-        {
-          url: "/projects/pro_eekgau8mfkbc34iq/report/last-week/",
-          description: "Last Week (Dec 24 2018 - Dec 31 2018)"
-        },
-        {
-          url: "/projects/pro_eekgau8mfkbc34iq/report/last-two-weeks/",
-          description: "Last Two Weeks (Dec 17 2018 - Dec 31 2018)"
-        },
-        {
-          url: "/projects/pro_eekgau8mfkbc34iq/report/last-four-weeks/",
-          description: "Last Four Weeks (Dec 03 2018 - Dec 31 2018)"
-        },
-        {
-          url: "/projects/pro_eekgau8mfkbc34iq/report/campaign/",
-          description: "Campaign To Date (May 07 2018 - Dec 31 2018)"
-        }
-      ]
-    }
-  ]
-};
-
 const props_baseline = {
-  ...COMMON_PROPS,
   report: BASELINE_REPORT
 };
 
 const props_performance = {
-  ...COMMON_PROPS,
   report: PERFORMANCE_REPORT
 };
 
-storiesOf("ReportPage", module).add("baseline", () => (
-  <ReportPage {...props_baseline} />
+storiesOf("CommonReport", module).add("baseline", () => (
+  <CommonReport {...props_baseline} />
 ));
 
-storiesOf("ReportPage", module).add("performance", () => (
-  <ReportPage {...props_performance} />
+storiesOf("CommonReport", module).add("performance", () => (
+  <CommonReport {...props_performance} />
 ));
