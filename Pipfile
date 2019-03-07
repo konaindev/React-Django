@@ -10,6 +10,7 @@ rope = "*"
 python-language-server = {extras = ["all"],version = "*"}
 pyls-black = "*"
 pyls-mypy = "*"
+pycel = "*"
 
 [packages]
 django-heroku = "*"
