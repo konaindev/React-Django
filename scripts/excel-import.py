@@ -31,7 +31,9 @@ MAX_ROW = 500
 ALPHA = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M']
 
 def convertToCurrencyString(num):
-    return "{0:0=2f}".format(num)
+    if type(num) is str:
+        return num
+    return "{0:0=2d}".format(num)
 
 def convertArrayToCurrencyStrings(ary):
     result = []
@@ -114,9 +116,9 @@ class ExcelImporter():
         result = []
         i = ALPHA.index(col)
         myAlpha = ALPHA[i:]
-        for x in range(row, MAX_ROW):
+        for y in myAlpha:
             subresult = []
-            for y in myAlpha:
+            for x in range(row + 1, MAX_ROW):
                 item = self.eval(sheet, y, x)
                 if item is None or item == '':
                     break
@@ -201,7 +203,8 @@ class TAMImporter(ExcelImporter):
         myAlpha = ALPHA[i:]
         groups = []
         for col in myAlpha:
-            income_group = self.eval('Output', col, top_row)
+            income_group = convertToCurrencyString(
+                self.eval('Output', col, top_row))
             if income_group == 'All':
                 break
             groups.append({
