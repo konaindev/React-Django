@@ -50,6 +50,7 @@ export default class AcquisitionFunnelReport extends Component {
           target={r.targets?.funnel?.conversions?.usv_exe}
           delta={r.deltas?.funnel?.conversions?.usv_exe}
           series={r.whiskers?.usv_exe}
+          digits={2}
         />
         <PercentageGraphBox
           name="Cancellation & Denial Rate"

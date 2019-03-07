@@ -33,6 +33,8 @@ ALPHA = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M']
 def convertToCurrencyString(num):
     if type(num) is str:
         return num
+    if type(num) is float:
+        return "{0:0=2f}".format(num)
     return "{0:0=2d}".format(num)
 
 def convertArrayToCurrencyStrings(ary):
