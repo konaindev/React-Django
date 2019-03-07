@@ -161,3 +161,29 @@ export const convertDistanceToMeter = (distance, unit) => {
   }
   return distance;
 };
+
+/**
+ * @description get date difference in specified unit
+ * FIXME: consider using moment - Leo
+ */
+export const formatDateDiff = (date1, date2, unit = "month") => {
+  const rawDate1 = new Date(date1);
+  const rawDate2 = new Date(date2);
+  const diffInMilliSec = rawDate1 - rawDate2;
+  switch (unit) {
+    case "second":
+      return `${Math.ceil(diffInMilliSec / 1000)} secs.`;
+    case "minute":
+      return `${Math.ceil(diffInMilliSec / (1000 * 60))} min.`;
+    case "hour":
+      return `${Math.ceil(diffInMilliSec / (1000 * 60 * 60))} hrs.`;
+    case "day":
+      return `${Math.ceil(diffInMilliSec / (1000 * 60 * 60 * 24))} days.`;
+    case "month":
+      return `${Math.ceil(diffInMilliSec / (1000 * 60 * 60 * 24 * 30))} mo.`;
+    case "year":
+      return `${Math.ceil(diffInMilliSec / (1000 * 60 * 60 * 24 * 365))} yr.`;
+    default:
+      return diffInMilliSec;
+  }
+};

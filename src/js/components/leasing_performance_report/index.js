@@ -147,9 +147,12 @@ export default class LeasingPerformanceReport extends Component {
    * @description Render the leasing performance report section
    */
   render() {
-    const { report } = this.props;
+    const {
+      report,
+      report: { name, dates }
+    } = this.props;
     return (
-      <ReportSection name="Leasing Performance">
+      <ReportSection name="Leasing Performance" reportInfo={{ name, dates }}>
         <LeasingPerformanceReport.HeadlineNumbers report={report} />
         <LeasingPerformanceReport.DetailNumbers report={report} />
       </ReportSection>
