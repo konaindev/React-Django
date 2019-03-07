@@ -12,7 +12,7 @@ import "./panel.scss";
  */
 export default class Panel extends Component {
   static propTypes = {
-    component: PropTypes.oneOfType([PropTypes.Component, PropTypes.string]),
+    component: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
     className: PropTypes.string,
     children: PropTypes.element.isRequired,
     size: PropTypes.oneOf(["small", "default"])

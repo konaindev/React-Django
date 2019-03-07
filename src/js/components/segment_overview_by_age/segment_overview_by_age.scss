@@ -1,0 +1,34 @@
+@import "css/base.scss";
+
+// TODO FIXME use the contents of variables.scss for colors etc.
+
+.segment-overview-by-age {
+    padding: 40px 60px;
+    margin: $panel-spacing;
+}
+
+.segment-overview-by-age__heading {
+    padding-bottom: 40px;
+    color: #ffffff;
+    border-bottom: 1px solid #2c3646;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.segment-overview-by-age__heading-left {
+    font-size: 1rem;
+}
+
+.segment-overview-by-age__heading-right {
+    font-size: 0.875rem;
+}
+
+.segment-overview-by-age__total-pop {
+    color: #566278;
+}
+
+.segment-overview-by-age__content {
+    display: flex;
+    margin: 0 -48px;
+}

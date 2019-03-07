@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 
+import { TotalAddressableMarket } from "../total_addressable_market";
+
 export default class ModelingReportPage extends Component {
   render() {
-    return <h1>Modeling report page -- TODO @davepeck TODO @leo</h1>;
+    // TODO ADD PAGE CHROME!
+    return <TotalAddressableMarket {...this.props.report} />;
   }
 }
