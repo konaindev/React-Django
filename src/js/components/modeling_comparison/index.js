@@ -1,16 +1,45 @@
 import React from "react";
 import { string, number, object, arrayOf, shape } from "prop-types";
+import Table from "rc-table";
 
 import serialize from "./serializer";
 import "./modeling_comparison.scss";
 
 export function ModelingComparison({ property_name, options }) {
-  const tableRows = serialize(options);
+  const { rows } = serialize(options);
+
+  console.log(rows);
+
+  let columns = [
+    {
+      title: "",
+      dataIndex: "label",
+      key: "label"
+    },
+    {
+      title: "Run Rate",
+      dataIndex: "Run Rate",
+      key: "run-rate"
+    },
+    {
+      title: "Schedule Driven",
+      dataIndex: "Schedule Driven",
+      key: "schedule-driven"
+    },
+    {
+      title: "Investment Driven",
+      dataIndex: "Investment Driven",
+      key: "investment-driven"
+    }
+  ];
 
   return (
-    <Container className="modeling-comparison">
-      <div />
-    </Container>
+    <Table
+      expandIconAsCell
+      columns={columns}
+      data={rows}
+      rowKey={record => record.id}
+    />
   );
 }
 
@@ -22,31 +51,34 @@ ModelingComparison.propTypes = {
       dates: shape({
         start: string,
         end: string
-      }),
-      four_week_funnel_averages: shape({
-        app: number,
-        exe: number,
-        inq: number,
-        tou: number,
-        usv: number
-      }),
+      }).isRequired,
       funnel: shape({
-        conversions: object,
-        costs: object,
-        volumes: object
-      }),
+        conversions: object.isRequired,
+        costs: object.isRequired,
+        volumes: object.isRequired
+      }).isRequired,
       investment: shape({
-        acquisition: object,
-        retention: object,
-        total: object
-      }),
+        acquisition: shape({
+          estimated_revenue_gain: string,
+          expenses: object.isRequired,
+          romi: number,
+          total: string
+        }).isRequired,
+        retention: shape({
+          estimated_revenue_gain: string,
+          expenses: object.isRequired,
+          romi: number,
+          total: string
+        }).isRequired,
+        total: object.isRequired
+      }).isRequired,
       property: shape({
         cost_per_exe_vs_rent: number,
-        leasing: object,
+        leasing: object.isRequired,
         lowest_monthly_rent: string,
         monthly_average_rent: string,
-        occupancy: object
-      })
+        occupancy: object.isRequired
+      }).isRequired
     })
   ).isRequired
 };
