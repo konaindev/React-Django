@@ -40,22 +40,16 @@ export class ModelingView extends Component {
 
     return (
       <div className="page modeling-view">
-        <Header navigationItems={navigationItems}>
-          {/*<ProjectTabs
-            current_report_link={this.props.current_report_link}
-            report_links={this.props.report_links}
-          />*/}
-          <Container>
-            <div className="modeling-view__subnav">
-              <ButtonGroup
-                onChange={this.handleSetActiveReport}
-                value={activeReport}
-                options={subnavOptions}
-              />
-            </div>
-          </Container>
-          <CommonReport report={options[activeReport]} />
-        </Header>
+        <Container>
+          <div className="modeling-view__subnav">
+            <ButtonGroup
+              onChange={this.handleSetActiveReport}
+              value={activeReport}
+              options={subnavOptions}
+            />
+          </div>
+        </Container>
+        <CommonReport report={options[activeReport]} />
       </div>
     );
   }
