@@ -15,6 +15,10 @@ export default class ReportLinks extends Component {
     report_links: PropTypes.object.isRequired
   };
 
+  handleClick = e => {
+    document.location = e.target.dataset.url;
+  };
+
   renderLink(report_friendly_name, report_name, optional_report_link) {
     const names = cn(
       {
@@ -22,7 +26,15 @@ export default class ReportLinks extends Component {
       },
       optional_report_link == null ? "disabled" : "enabled"
     );
-    return <li className={names}>{report_friendly_name}</li>;
+    return (
+      <li
+        className={names}
+        data-url={optional_report_link?.url || "#"}
+        onClick={this.handleClick}
+      >
+        {report_friendly_name}
+      </li>
+    );
   }
 
   render() {
