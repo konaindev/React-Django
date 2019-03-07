@@ -7,18 +7,15 @@ import CommonReport from "../common_report";
 import "./baseline_report_page.scss";
 
 /**
- * @description The full landing page for a single project report
+ * @class BaselineReportPage
+ *
+ * @classdesc Renders page chrome and contents for a single baseline report
  */
 export default class BaselineReportPage extends Component {
-  // TODO further define the shape of a report and a project...
   static propTypes = {
     report: PropTypes.object.isRequired,
     project: PropTypes.object.isRequired
   };
-
-  componentDidMount() {
-    console.log("Report data", this.props.report);
-  }
 
   render() {
     return (

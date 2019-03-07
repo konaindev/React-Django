@@ -10,14 +10,54 @@ import "./page_chrome.scss";
  * @class TopChrome
  *
  * @classdesc Container for all fixed-position chrome (header, tabs, etc)
+ * Provides live sizing code to ensure that content that follows is properly spaced
+ * so that it initially renders fully visible, unblocked by the fixed content.
  */
 class TopChrome extends Component {
+  static DEFAULT_TOP_AREA_HEIGHT = 76;
+
   static propTypes = {
     children: PropTypes.node.isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.spacingRef = React.createRef();
+    this.state = { topAreaHeight: 0 };
+  }
+
+  computeTopAreaHeight = () =>
+    this.spacingRef.current?.offsetHeight || TopChrome.DEFAULT_TOP_AREA_HEIGHT;
+
+  updateDimensions = () => {
+    this.setState({ topAreaHeight: this.computeTopAreaHeight() });
+  };
+
+  componentDidMount() {
+    this.updateDimensions();
+    window.addEventListener("resize", this.updateDimensions);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions);
+  }
+
   render() {
-    return <div className="top-chrome">{this.props.children}</div>;
+    return (
+      <div className="page-chrome__top-chrome">
+        {/* The fixed-position top content */}
+        <div ref={this.spacingRef} className="page-chrome__top-chrome__content">
+          {this.props.children}
+        </div>
+        {/* A spacing div that is part of normal CSS flow and ensures content will be seen */}
+        <div
+          className="page-chrome__top-chrome__spacing-fix"
+          style={{ height: this.state.topAreaHeight }}
+        >
+          &nbsp;
+        </div>
+      </div>
+    );
   }
 }
 

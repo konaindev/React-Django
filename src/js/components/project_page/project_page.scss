@@ -1,14 +1,14 @@
 @import "css/base.scss";
 
-.project-page .report-section {
+.project-page__report-section {
     padding: $s8;
 }
 
-.project-page .report-section .report-links {
+.project-page__report-section__links {
     line-height: $line-height-normal;
     padding: $s4 0 $s4 $s10;
 }
 
-.project-page .report-section .report-link {
+.project-page__report-section__link {
     color: $lighter-ui-text-color;
 }
