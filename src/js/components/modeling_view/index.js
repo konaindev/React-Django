@@ -1,19 +1,57 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import AcquisitionFunnelReport from "../acquisition_funnel_report";
-import CampaignInvestmentReport from "../campaign_investment_report";
+import Report from "../report";
 import Container from "../container";
-import LeasingPerformanceReport from "../leasing_performance_report";
 import SectionHeader from "../section_header";
+import ButtonGroup from "../button_group";
 import "./modeling_view.scss";
 
-export const ModelingView = ({ report }) => (
-  <Container className="modeling-view">
-    <LeasingPerformanceReport report={report} />
-    <CampaignInvestmentReport report={report} />
-    <AcquisitionFunnelReport report={report} />
-  </Container>
-);
+export default class ModelingView extends Component {
+  static propTypes = { report: PropTypes.object.isRequired };
 
-export default ModelingView;
+  buttonGroupProps() {
+    return {
+      value: "investment-driven",
+      options: [
+        {
+          value: "schedule-driven",
+          label: "Schedule Driven"
+        },
+        {
+          value: "investment-driven",
+          label: "Investment Driven"
+        },
+        {
+          value: "run-rate",
+          label: "Run Rate"
+        },
+        {
+          value: "compare-models",
+          label: "Compare Models"
+        }
+      ]
+    };
+  }
+
+  activeView() {
+    return <Report report={this.props.options[0]} />;
+  }
+
+  onClick(value) {
+    this.setState("selectedView", value);
+  }
+
+  render() {
+    return (
+      <Container>
+        <ButtonGroup
+          {...this.buttonGroupProps()}
+          onClick={this.onClick.bind(this)}
+        />
+
+        {this.activeView()}
+      </Container>
+    );
+  }
+}
