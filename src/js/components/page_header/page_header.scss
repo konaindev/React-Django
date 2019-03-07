@@ -1,0 +1,34 @@
+@import "css/base.scss";
+
+$header-height: 76px; // was $s16
+$header-quarter-height: 19px; // was $s4
+$header-inset: 60px;
+$header-half-inset: 36px;
+
+.page-header-inner {
+    background-color: $bluegray-darkest;
+    font-family: $font-headline;
+    height: $header-height;
+    padding: $header-quarter-height $header-inset;
+    line-height: $line-height-tight;
+}
+
+.page-header__items-outer {
+    float: right;
+    height: $header-height;
+}
+
+.page-header__items-inner {
+    display: block;
+    height: $header-height;
+    font-family: $font-sans;
+    margin-top: -$header-quarter-height;
+    padding: 0;
+}
+
+.page-header__item {
+    display: block;
+    height: $header-height;
+    padding: $header-quarter-height 0 0 $header-half-inset;
+    border-left: solid 1px $bluegray-border;
+}

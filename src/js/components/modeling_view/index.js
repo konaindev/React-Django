@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 
 import ButtonGroup from "../button_group";
 import Container from "../container";
-import Header from "../header";
 import CommonReport from "../common_report";
-import ReportLinks from "../report_links";
 import "./modeling_view.scss";
 
 export class ModelingView extends Component {

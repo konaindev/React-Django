@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import Header from "../header";
 import ProjectDropDown from "../project_drop_down";
 import ReportLinks from "../report_links";
 

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import Header from "../header";
 import ProjectDropDown from "../project_drop_down";
 import "./project_page.scss";
 
@@ -48,35 +47,35 @@ export default class ProjectPage extends Component {
     // );
     const navigationItems = <></>;
 
-    return (
-      <div className="page project-page">
-        <Header navigationItems={navigationItems}>
-          <div>
-            {this.renderSection(
-              this.props.report_links.baseline,
-              "Baseline Report"
-            )}
-          </div>
-          <div>
-            {this.renderSection(
-              this.props.report_links.performance,
-              "Performance Reports"
-            )}
-          </div>
-          <div>
-            {this.renderSection(
-              this.props.report_links.modeling,
-              "Modeling Report"
-            )}
-          </div>
-          <div>
-            {this.renderSection(
-              this.props.report_links.market,
-              "Market Report"
-            )}
-          </div>
-        </Header>
-      </div>
-    );
+    // return (
+    //   <div className="page project-page">
+    //     <Header navigationItems={navigationItems}>
+    //       <div>
+    //         {this.renderSection(
+    //           this.props.report_links.baseline,
+    //           "Baseline Report"
+    //         )}
+    //       </div>
+    //       <div>
+    //         {this.renderSection(
+    //           this.props.report_links.performance,
+    //           "Performance Reports"
+    //         )}
+    //       </div>
+    //       <div>
+    //         {this.renderSection(
+    //           this.props.report_links.modeling,
+    //           "Modeling Report"
+    //         )}
+    //       </div>
+    //       <div>
+    //         {this.renderSection(
+    //           this.props.report_links.market,
+    //           "Market Report"
+    //         )}
+    //       </div>
+    //     </Header>
+    //   </div>
+    // );
   }
 }
