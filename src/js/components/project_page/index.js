@@ -21,7 +21,6 @@ export default class ProjectPage extends Component {
   }
 
   renderLinks(links) {
-    console.log("ATTEMPTING TO RENDER: ", links);
     return links == null ? (
       <li>(no reports)</li>
     ) : links.length == null ? (

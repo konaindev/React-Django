@@ -6,10 +6,10 @@ import { linkTo } from "@storybook/addon-links";
 
 import ProjectPage from "./index";
 
-const project = { public_id: "pro_example", name: "Example Project" };
+export const project = { public_id: "pro_example", name: "Example Project" };
 
 // see data/schemas/ts/ReportLinks.ts and data/examples/ReportLinks.json
-const report_links = {
+export const report_links = {
   baseline: {
     url: "/projects/pro_example/baseline/",
     description: "Baseline Period (Jan 01 2017 - May 07 2018)"

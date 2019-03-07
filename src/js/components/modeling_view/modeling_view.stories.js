@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 
 import ModelingView from "./index";
 
-const props = {
+export const props = {
   property_name: "Portland Multi Family",
   options: [
     {
