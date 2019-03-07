@@ -4,6 +4,8 @@ import Table from "rc-table";
 
 import serialize from "./serializer";
 import "./modeling_comparison.scss";
+import Container from "../container";
+import "rc-table/assets/index.css";
 
 export function ModelingComparison({ property_name, options }) {
   const { rows } = serialize(options);
@@ -34,12 +36,18 @@ export function ModelingComparison({ property_name, options }) {
   ];
 
   return (
-    <Table
-      expandIconAsCell
-      columns={columns}
-      data={rows}
-      rowKey={record => record.id}
-    />
+    <Container style={{ height: "25rem" }}>
+      <Table
+        expandIconAsCell
+        defaultExpandAllRows
+        columns={columns}
+        data={rows}
+        className="remarkably-table"
+        rowKey={record => record.id}
+        useFixedHeader
+        scroll={{ y: 480 }}
+      />
+    </Container>
   );
 }
 
