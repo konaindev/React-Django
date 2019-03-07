@@ -6,10 +6,10 @@
     min-height: $s20;
     align-items: center;
     padding: $s5 $s8;
-    border-bottom: 1px solid #242B39;
+    border-bottom: 1px solid #242b39;
 
     &:first-child {
-        border-top: 1px solid #242B39;
+        border-top: 1px solid #242b39;
     }
 
     &__left {
@@ -32,7 +32,7 @@
     }
 
     &__target {
-        color: $gray-dark;
+        color: $bluegray-lighter;
         font-size: $text-sm;
         font-weight: 300;
         line-height: $line-height-normal;
