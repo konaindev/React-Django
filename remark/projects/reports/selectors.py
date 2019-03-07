@@ -310,7 +310,7 @@ class MarketReportSelector(ReportSelectorBase):
     def get_url(self):
         """Return a relative URL linking to this report."""
         kwargs = {"project_id": self.project.public_id}
-        url = reverse("total_addressable_market_report", kwargs=kwargs)
+        url = reverse("market_report", kwargs=kwargs)
         return url
 
     def get_description(self):
