@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import FormattedMultiple from "../formatted_multiple";
 import withFormatters from "../with_formatters";
 import {
   formatMultiple,
@@ -51,7 +52,9 @@ class SmallBoxLayout extends Component {
 }
 
 // Define SmallBoxLayouts that take values and targets of various types.
-const SmallMultipleBox = withFormatters(SmallBoxLayout, formatMultiple);
+const SmallMultipleBox = withFormatters(SmallBoxLayout, value => (
+  <FormattedMultiple value={value} />
+));
 const SmallPercentBox = withFormatters(
   SmallBoxLayout,
   formatPercent,
