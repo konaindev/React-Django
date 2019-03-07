@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 
+import { TotalAddressableMarket } from "../total_addressable_market";
+
 export default class MarketReportPage extends Component {
   render() {
-    return <h1>Market report page -- TODO @davepeck TODO @leo</h1>;
+    // TODO ADD PAGE CHROME!
+    return <TotalAddressableMarket {...this.props.report} />;
   }
 }

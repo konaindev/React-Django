@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import Report from "../report";
+import CommonReport from "../common_report";
 import Container from "../container";
 import SectionHeader from "../section_header";
 import ButtonGroup from "../button_group";
@@ -35,7 +35,7 @@ export default class ModelingView extends Component {
   }
 
   activeView() {
-    return <Report report={this.props.options[0]} />;
+    return <CommonReport report={this.props.options[0]} />;
   }
 
   onClick(value) {
