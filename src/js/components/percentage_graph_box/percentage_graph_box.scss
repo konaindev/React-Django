@@ -42,9 +42,10 @@
         font-size: $text-xs;
     }
 
-    &__target, &__extra {
+    &__target,
+    &__extra {
         margin-top: $s1;
-        color: $gray-dark;
+        color: $bluegray-light;
         font-weight: 300;
         font-size: $text-sm;
         line-height: $text-xl;
