@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import Header from "../header";
-import { NavigationItems, ProjectNavigationItem } from "../navigation";
-import ProjectTabs from "../project_tabs";
+import ProjectDropDown from "../project_drop_down";
+import ReportLinks from "../report_links";
 
 import CommonReport from "../common_report";
 
@@ -24,17 +24,19 @@ export default class PerformanceReportPage extends Component {
   }
 
   render() {
-    const navigationItems = (
-      <NavigationItems>
-        <ProjectNavigationItem project={this.props.project} />
-      </NavigationItems>
-    );
+    // TODO CHROME DAVEPECK
+    // const navigationItems = (
+    //   <NavigationItems>
+    //     <ProjectNavigationItem project={this.props.project} />
+    //   </NavigationItems>
+    // );
+    const navigationItems = <></>;
 
     return (
       <div className="page report-page">
         <Header navigationItems={navigationItems}>
           <>
-            <ProjectTabs
+            <ReportLinks
               current_report_link={this.props.current_report_link}
               report_links={this.props.report_links.performance}
             />

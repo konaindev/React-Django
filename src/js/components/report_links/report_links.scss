@@ -1,0 +1,44 @@
+@import "css/base.scss";
+
+.project-report-links {
+    background-color: $default-background-color;
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    height: 76px;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.26);
+}
+
+.project-report-links ul {
+    position: absolute;
+    bottom: 0;
+    display: inline-block;
+    text-align: center;
+    list-style-position: inside;
+    margin-left: -$s4;
+}
+
+.project-report-links li {
+    cursor: pointer;
+    display: inline-block;
+    margin: 0 $s4;
+    padding-bottom: $s4;
+}
+
+.project-report-links li.disabled {
+    color: $gray-darkest;
+}
+
+.project-report-links li.enabled {
+    color: $default-ui-text-color;
+}
+
+.project-report-links li.selected {
+    color: $lightest-ui-text-color;
+    border-bottom: solid 1px #227eff;
+}
+
+.project-report-links li.enabled:hover {
+    color: $white;
+}

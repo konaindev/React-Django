@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import Header from "../header";
-import { NavigationItems, ProjectNavigationItem } from "../navigation";
+import ProjectDropDown from "../project_drop_down";
 import "./project_page.scss";
 
 export default class ProjectPage extends Component {
@@ -40,11 +40,13 @@ export default class ProjectPage extends Component {
   }
 
   render() {
-    const navigationItems = (
-      <NavigationItems>
-        <ProjectNavigationItem project={this.props.project} />
-      </NavigationItems>
-    );
+    // TODO CHROME DAVEPECK
+    // const navigationItems = (
+    //   <NavigationItems>
+    //     <ProjectNavigationItem project={this.props.project} />
+    //   </NavigationItems>
+    // );
+    const navigationItems = <></>;
 
     return (
       <div className="page project-page">
