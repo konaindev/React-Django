@@ -1,14 +1,15 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import BoxRow from "../box_row";
 import BoxColumn from "../box_column";
+import BoxRow from "../box_row";
 import BoxTable from "../box_table";
+import DeltaLayout from "../delta_layout";
+import PercentageGraphBox from "../percentage_graph_box";
+import ReportSection from "../report_section";
+import WhiskerPlot from "../whisker_plot";
 import { LargeBoxLayout } from "../large_box_layout";
 import { SmallNumberBox } from "../small_box_layout";
-import WhiskerPlot from "../whisker_plot";
-import DeltaLayout from "../delta_layout";
-import ReportSection from "../report_section";
 
 import {
   formatPercent,
@@ -34,55 +35,41 @@ export default class LeasingPerformanceReport extends Component {
   static HeadlineNumbers = ({ report: r }) => {
     return (
       <BoxRow>
-        <LargeBoxLayout
+        <PercentageGraphBox
           name="Leased"
-          content={DeltaLayout.build(
-            r.property.leasing.rate,
-            r.deltas?.property?.leasing?.rate,
-            formatPercent,
-            formatDeltaPercent
-          )}
-          detail={`${formatNumber(
+          value={r.property.leasing.rate}
+          delta={r.deltas?.property?.leasing?.rate}
+          series={r.whiskers?.leased_rate}
+          target={r.targets?.property?.leasing?.rate}
+          extraContent={`${formatNumber(
             r.property.leasing.units
           )} Executed Leases (Out of ${formatNumber(
             r.property.occupancy.occupiable
           )})`}
-          detail2={formatTargetPercent(r.targets?.property?.leasing?.rate)}
-          innerBox={WhiskerPlot.maybe(r.whiskers?.leased_rate)}
         />
-        <LargeBoxLayout
+        <PercentageGraphBox
           name="Retention"
-          content={DeltaLayout.build(
-            r.property.leasing.renewal_rate,
-            r.deltas?.property?.leasing?.renewal_rate,
-            formatPercent,
-            formatDeltaPercent
-          )}
-          detail={`${formatNumber(
+          value={r.property.leasing.renewal_rate}
+          delta={r.deltas?.property?.leasing?.renewal_rate}
+          series={r.whiskers?.renewal_rate}
+          target={r.targets?.property?.leasing?.renewal_rate}
+          extraContent={`${formatNumber(
             r.property.leasing.renewal_notices
           )} Notices to Renew (Out of ${
             r.property.leasing.resident_decisions
           } Resident Decisions)`}
-          detail2={formatTargetPercent(
-            r.targets?.property?.leasing?.renewal_rate
-          )}
-          innerBox={WhiskerPlot.maybe(r.whiskers?.renewal_rate)}
         />
-        <LargeBoxLayout
+        <PercentageGraphBox
           name="Occupied"
-          content={DeltaLayout.build(
-            r.property.occupancy.rate,
-            r.deltas?.property?.occupancy?.rate,
-            formatPercent,
-            formatDeltaPercent
-          )}
-          detail={`${formatNumber(
+          value={r.property.occupancy.rate}
+          delta={r.deltas?.property?.occupancy?.rate}
+          series={r.whiskers?.occupancy_rate}
+          target={r.targets?.property?.occupancy?.rate}
+          extraContent={`${formatNumber(
             r.property.occupancy.units
           )} Occupied Units (Out of ${formatNumber(
             r.property.occupancy.occupiable
           )})`}
-          detail2={formatTargetPercent(r.targets?.property?.occupancy?.rate)}
-          innerBox={WhiskerPlot.maybe(r.whiskers?.occupancy_rate)}
         />
       </BoxRow>
     );

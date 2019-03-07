@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import cn from "classnames";
 
 import DeltaIndicator from "../delta_indicator";
+import { formatNumber } from "../../utils/formatters";
 import "./delta_layout.scss";
 
 const isNil = value => typeof value === "undefined" || value === null;
@@ -55,7 +56,8 @@ export default class DeltaLayout extends Component {
             <DeltaIndicator
               delta={delta}
               direction={direction}
-              indicatorPos="left"
+              formatter={formatNumber}
+              indicatorPos="right"
             />
           </span>
         )}
