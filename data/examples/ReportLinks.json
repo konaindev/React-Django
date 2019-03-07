@@ -1,0 +1,21 @@
+{
+  "baseline": {
+    "url": "/projects/pro_1234/baseline/",
+    "description": "Baseline Period (Jan 1, 2017 - Jan 1, 2018)"
+  },
+  "performance": [
+    {
+      "url": "/projects/pro_1234/last-week/",
+      "description": "Last Week (Dec 21, 2018 - Jan 1, 2019)"
+    },
+    {
+      "url": "/projects/pro_1234/last-two-weeks/",
+      "description": "Last Two Weeks (Dec 14, 2018 - Jan 1, 2019)"
+    }
+  ],
+  "market": null,
+  "modeling": {
+    "url": "/projects/pro_1234/modeling/",
+    "description": "Modeling Options"
+  }
+}

@@ -4,15 +4,17 @@
     display: flex;
     flex-direction: column;
     padding: $s6;
-    height: $s64;
+    height: 236px;
     align-items: center;
     justify-content: center;
     text-align: center;
 }
 
 .large-box__name {
-    color: $lighter-ui-text-color;
-    font-size: $text-base;
+    color: $gray-lightest;
+    font-size: $text-xs;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 .large-box__detail {

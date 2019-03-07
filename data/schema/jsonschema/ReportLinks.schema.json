@@ -1,0 +1,84 @@
+{
+    "$ref": "#/definitions/ReportLinks",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "ReportLink": {
+            "description": "A named link to a single available project report",
+            "properties": {
+                "description": {
+                    "description": "A human-readable description of this specific report; can be ignored.",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "The relative link to the project report page",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "description",
+                "url"
+            ],
+            "type": "object"
+        },
+        "ReportLinks": {
+            "description": "The common structure used in all report pages to define available reports.",
+            "properties": {
+                "baseline": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/ReportLink"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "The available baseline report for this project, if any."
+                },
+                "market": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/ReportLink"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "The available total addressable market (TAM) report for this project, if any."
+                },
+                "modeling": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/ReportLink"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "The available modeling report for this project, if any."
+                },
+                "performance": {
+                    "anyOf": [
+                        {
+                            "items": {
+                                "$ref": "#/definitions/ReportLink"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "The available performance reports for this project, if any."
+                }
+            },
+            "required": [
+                "baseline",
+                "market",
+                "modeling",
+                "performance"
+            ],
+            "type": "object"
+        }
+    }
+}
+

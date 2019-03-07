@@ -5,13 +5,20 @@
     flex-direction: row;
     flex-grow: 1;
     align-items: stretch;
-}
 
-// TODO XXX FIXME this looks like a hack
-.box-row.external-margin {
-    margin: -$s4;
-}
+    &--normal {
+        margin: -$s4;
 
-.box-row .child-wrapper {
-    margin: $s4;
+        > .child-wrapper {
+            margin: $s4;
+        }
+    }
+
+    &--wide {
+        margin: -$s8;
+
+        > .child-wrapper {
+            margin: $s8;
+        }
+    }
 }

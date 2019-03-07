@@ -18,6 +18,7 @@ class FunnelBaseBox extends Component {
     target: PropTypes.number.isRequired,
     delta: PropTypes.number.isRequired,
     formatter: PropTypes.func.isRequired,
+    targetFormatter: PropTypes.func.isRequired,
     deltaFormatter: PropTypes.func.isRequired
   };
 
@@ -28,25 +29,30 @@ class FunnelBaseBox extends Component {
       target,
       delta,
       formatter,
-      deltaFormatter
+      deltaFormatter,
+      targetFormatter
     } = this.props;
     return (
       <div className="funnel-box-layout">
         <div className="funnel-box-layout__left">
           <div className="funnel-box-layout__name">{name}</div>
-          <div className="funnel-box-layout__target">
-            {formatTargetPercent(target)}
-          </div>
+          {target && (
+            <div className="funnel-box-layout__target">
+              {targetFormatter(target)}
+            </div>
+          )}
         </div>
         <div className="funnel-box-layout__right">
           <div className="funnel-box-layout__value">{formatter(value)}</div>
-          <div className="funnel-box-layout__delta">
-            <DeltaIndicator
-              delta={delta}
-              indicatorPos="right"
-              formatter={deltaFormatter}
-            />
-          </div>
+          {delta && (
+            <div className="funnel-box-layout__delta">
+              <DeltaIndicator
+                delta={delta}
+                indicatorPos="right"
+                formatter={deltaFormatter}
+              />
+            </div>
+          )}
         </div>
       </div>
     );
@@ -55,24 +61,27 @@ class FunnelBaseBox extends Component {
 
 export const FunnelNumberBox = props => (
   <FunnelBaseBox
-    {...props}
     formatter={formatNumber}
     deltaFormatter={formatNumber}
+    targetFormatter={formatTargetPercent}
+    {...props}
   />
 );
 
 export const FunnelPercentBox = props => (
   <FunnelBaseBox
-    {...props}
     formatter={formatPercent}
     deltaFormatter={formatDeltaPercent}
+    targetFormatter={formatTargetPercent}
+    {...props}
   />
 );
 
 export const FunnelCurrencyBox = props => (
   <FunnelBaseBox
-    {...props}
     formatter={formatCurrency}
     deltaFormatter={formatCurrency}
+    targetFormatter={formatTargetPercent}
+    {...props}
   />
 );

@@ -147,10 +147,11 @@ export default class LeasingPerformanceReport extends Component {
    * @description Render the leasing performance report section
    */
   render() {
+    const { report } = this.props;
     return (
       <ReportSection name="Leasing Performance">
-        <LeasingPerformanceReport.HeadlineNumbers report={this.props.report} />
-        <LeasingPerformanceReport.DetailNumbers report={this.props.report} />
+        <LeasingPerformanceReport.HeadlineNumbers report={report} />
+        <LeasingPerformanceReport.DetailNumbers report={report} />
       </ReportSection>
     );
   }

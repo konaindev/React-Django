@@ -17,6 +17,19 @@ export default class ProjectTabs extends Component {
   };
 
   render() {
+    let dropdown = <></>;
+
+    if (this.props.report_links != null) {
+      dropdown = (
+        <li className="rightmost">
+          <ReportSpanDropdown
+            current_report_link={this.props.current_report_link}
+            report_links={this.props.report_links}
+          />
+        </li>
+      );
+    }
+
     return (
       <div className="project-tabs">
         <ul>
@@ -31,12 +44,7 @@ export default class ProjectTabs extends Component {
           
           XXX this factoring is nonsense. FIXME TODO etc. -Dave
           */}
-          <li className="rightmost">
-            <ReportSpanDropdown
-              current_report_link={this.props.current_report_link}
-              report_links={this.props.report_links}
-            />
-          </li>
+          {dropdown}
         </ul>
         <hr className="horizontal-divider above-top" />
       </div>
