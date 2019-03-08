@@ -6,6 +6,7 @@ import "./market_size_map.scss";
 import {
   GOOGLE_MAP_API_KEY,
   DEFAULT_ZOOM,
+  createDefaultMapOptions,
   stylesForRegionFill
 } from "./map_settings";
 
