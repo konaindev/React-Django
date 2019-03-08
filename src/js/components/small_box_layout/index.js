@@ -51,7 +51,9 @@ class SmallBoxLayout extends Component {
 }
 
 // Define SmallBoxLayouts that take values and targets of various types.
-const SmallMultipleBox = withFormatters(SmallBoxLayout, formatMultiple);
+// @TODO: replace references of SmallMultipleBox with SmallNumberBox
+// just pass symbolType="multiple"
+const SmallMultipleBox = withFormatters(SmallBoxLayout, formatNumber);
 const SmallPercentBox = withFormatters(
   SmallBoxLayout,
   formatPercent,
