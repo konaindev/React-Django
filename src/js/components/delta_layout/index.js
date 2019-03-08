@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import cn from "classnames";
 
 import DeltaIndicator from "../delta_indicator";
+import FormattedValueWithSymbol from "../formatted_value_with_symbol";
 import { formatNumber } from "../../utils/formatters";
 import { isNil } from "../../utils/helpers";
 import "./delta_layout.scss";
@@ -29,15 +30,31 @@ export default class DeltaLayout extends Component {
     ]).isRequired
   };
 
-  static build = (value, delta, formatter, formatterForDelta, reverseArrow) => {
+  static build = (
+    value,
+    delta,
+    formatter,
+    formatterForDelta,
+    reverseArrow,
+    symbolType
+  ) => {
     const reverseSign = reverseArrow == true ? -1 : 1;
     const direction =
       delta == null
         ? DeltaLayout.DIRECTION_FLAT
         : reverseSign * Math.sign(delta);
+
+    const valueContent = (
+      <FormattedValueWithSymbol
+        formatter={formatter}
+        value={value}
+        symbolType={symbolType}
+      />
+    );
+
     return (
       <DeltaLayout
-        value={formatter(value)}
+        valueContent={valueContent}
         delta={delta}
         formatter={formatterForDelta}
         direction={direction}
@@ -46,10 +63,11 @@ export default class DeltaLayout extends Component {
   };
 
   render() {
-    const { delta, direction, value } = this.props;
+    const { delta, direction, valueContent } = this.props;
     return (
       <span className="delta-layout">
-        <span>{value}</span>
+        {valueContent}
+
         {!isNil(delta) && (
           <span className="delta-layout__section">
             <DeltaIndicator

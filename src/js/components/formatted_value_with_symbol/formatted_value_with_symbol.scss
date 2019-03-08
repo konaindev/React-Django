@@ -1,0 +1,9 @@
+@import "css/base.scss";
+
+$formatted-symbol-color: #3188ff;
+
+.formatted-value-with-symbol {
+    .symbol {
+        color: $formatted-symbol-color;
+    }
+}

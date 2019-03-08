@@ -1,0 +1,18 @@
+@import "css/base.scss";
+
+.report-date-span {
+    position: relative;
+
+    &__content {
+        border-radius: $border-radius-default;
+        padding: $s3 $s4;
+        border: 1px solid $gray-darkest;
+        font-size: $text-sm;
+
+        &-name {
+            font-weight: 700;
+            color: $gray-lightest;
+            margin-right: $s3;
+        }
+    }
+}

@@ -63,12 +63,12 @@ const props_zips = {
 
 storiesOf("MarketSizeMap", module)
   .add("circle with radius", () => (
-    <div style={{ width: 870, margin: "80px auto" }}>
+    <div style={{ width: 870, height: 452, margin: "80px auto" }}>
       <MarketSizeMap {...props_radius} />
     </div>
   ))
   .add("zip code polygons", () => (
-    <div style={{ width: 870, margin: "80px auto" }}>
+    <div style={{ width: 870, height: 452, margin: "80px auto" }}>
       <MarketSizeMap {...props_zips} />
     </div>
   ));

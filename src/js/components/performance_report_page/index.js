@@ -16,6 +16,15 @@ export default class PerformanceReportPage extends Component {
     project: PropTypes.object.isRequired
   };
 
+  renderDateSpan() {
+    return (
+      <PerformanceReportSpanDropdown
+        current_report_link={this.props.current_report_link}
+        report_links={this.props.report_links.performance}
+      />
+    );
+  }
+
   render() {
     return (
       <ReportPageChrome
@@ -23,12 +32,11 @@ export default class PerformanceReportPage extends Component {
         current_report_name="performance"
         report_links={this.props.report_links}
       >
-        {/* TODO CHROME FIXME move this somewhere deeper -- I guess into the common report itself? */}
-        <PerformanceReportSpanDropdown
-          current_report_link={this.props.current_report_link}
-          report_links={this.props.report_links.performance}
+        <CommonReport
+          report={this.props.report}
+          dateSpan={this.renderDateSpan()}
+          type="performance"
         />
-        <CommonReport report={this.props.report} type="performance" />
       </ReportPageChrome>
     );
   }

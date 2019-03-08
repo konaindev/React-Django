@@ -6,17 +6,9 @@ import "./market_size_map.scss";
 import {
   GOOGLE_MAP_API_KEY,
   DEFAULT_ZOOM,
-  stylesForNightMode,
+  createDefaultMapOptions,
   stylesForRegionFill
 } from "./map_settings";
-
-const createMapOptions = maps => ({
-  styles: stylesForNightMode,
-  zoomControl: false,
-  scrollwheel: false,
-  fullscreenControl: false,
-  scaleControl: false
-});
 
 const ZipCodeLabel = ({ zipCode }) => (
   <div className="zip-code-label">{zipCode}</div>
@@ -123,7 +115,7 @@ export class MapWithPolygon extends Component {
           bootstrapURLKeys={{ key: GOOGLE_MAP_API_KEY, libraries: "geometry" }}
           defaultCenter={{ lat: 0, lng: 0 }}
           defaultZoom={DEFAULT_ZOOM}
-          options={createMapOptions}
+          options={createDefaultMapOptions}
           yesIWantToUseGoogleMapApiInternals={true}
           onGoogleApiLoaded={this.onGoogleApiLoaded}
         >
