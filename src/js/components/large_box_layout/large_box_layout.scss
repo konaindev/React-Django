@@ -11,15 +11,19 @@
 }
 
 .large-box__name {
-    color: $gray-lightest;
+    color: $lightest-ui-text-color;
     font-size: $text-xs;
     font-weight: 700;
+    line-height: $text-xl;
+    letter-spacing: 1px;
     text-transform: uppercase;
+    max-width: 15rem;
 }
 
 .large-box__detail {
-    color: $default-ui-text-color;
+    color: $lighter-ui-text-color;
     font-size: $text-sm;
+    font-weight: $weight-light;
 }
 
 .large-box__outer-content {
