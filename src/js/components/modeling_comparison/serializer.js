@@ -70,8 +70,8 @@ export default function(modelingOptions = []) {
       name
     } = option;
 
-    const duration_in_weeks = 121; // calculate from dates.start, dates.end
-    setValue(rows, "1", column, `${121} Weeks`);
+    const duration_in_weeks = calcDiffInWeek(dates.start, dates.end); // calculate from dates.start, dates.end
+    setValue(rows, "1", column, `${duration_in_weeks} Weeks`);
     setValue(rows, "2", column, formatDate(dates.end));
     setValue(rows, "3", column, formatCurrency(investment.total.total));
     setValue(
@@ -204,4 +204,9 @@ function setValue(rows = [], id, column, value) {
   if (row) {
     row[column] = value;
   }
+}
+
+function calcDiffInWeek(date1, date2) {
+  const diffInMilliSec = new Date(date2) - new Date(date1);
+  return Math.ceil(diffInMilliSec / (1000 * 60 * 60 * 24 * 7));
 }
