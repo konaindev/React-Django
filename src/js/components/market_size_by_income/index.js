@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import PopulationChart from "../population_chart";
 import { formatCurrencyShorthand, formatNumber } from "../../utils/formatters";
-import "./market_size_by_income.css";
+import "./market_size_by_income.scss";
 
 export default class MarketSizeByIncome extends Component {
   static propTypes = {

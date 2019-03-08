@@ -1,0 +1,19 @@
+@import "css/base.scss";
+
+.project-drop-down__image {
+    display: inline-block;
+    background-color: $gray;
+    border-radius: $border-radius-default;
+    min-width: $s8;
+    min-height: $s8;
+    width: $s8;
+    height: $s8;
+}
+
+.project-drop-down__text {
+    cursor: pointer;
+    display: inline-block;
+    padding: 0 $s4;
+    margin-top: $s1;
+    vertical-align: middle;
+}

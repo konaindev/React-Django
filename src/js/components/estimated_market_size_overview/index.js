@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import AgeRangePopulationSize from "../age_range_population_size";
 import Panel from "../panel";
-import "./estimated_market_size_overview.css";
+import "./estimated_market_size_overview.scss";
 
 export function EstimatedMarketSizeOverview({ market_sizes }) {
   return (

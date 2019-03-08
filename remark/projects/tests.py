@@ -5,7 +5,8 @@ import os.path
 from django.test import TestCase
 
 from .models import Period, Project
-from .reports import ComputedPeriod, Report
+from .reports.periods import ComputedPeriod
+from .reports.performance import PerformanceReport
 
 
 class DefaultComputedPeriodTestCase(TestCase):
@@ -173,7 +174,7 @@ class DefaultReportTestCase(TestCase):
             lowest_monthly_rent=decimal.Decimal("0"),
             occupiable_units_start=0,
         )
-        self.report = Report(project, period)
+        self.report = PerformanceReport(project, period)
 
     def test_report_jsonable(self):
         from django.core.serializers.json import DjangoJSONEncoder
@@ -283,6 +284,6 @@ class LincolnTowerPeriodTestCase(TestCase):
 
     def test_report_jsonable(self):
         # CONSIDER moving this to a separate location
-        report = Report(self.project, self.raw_period)
+        report = PerformanceReport(self.project, self.raw_period)
         self.assertTrue(report.to_jsonable())
 

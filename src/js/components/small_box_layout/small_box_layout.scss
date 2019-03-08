@@ -5,7 +5,8 @@
     flex-direction: row;
     height: 100%;
     margin: $s4 0;
-    padding: $s6 0;
+    padding: $s5 0;
+    align-items: center;
 }
 
 .small-box__labels {
@@ -42,5 +43,5 @@
     font-weight: $weight-hairline;
     font-family: $font-mono;
     text-align: right;
-    padding-right: $s8;
+    padding-right: $s6;
 }

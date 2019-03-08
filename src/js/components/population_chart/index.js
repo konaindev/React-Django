@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { formatNumber } from "../../utils/formatters";
-import "./population_chart.css";
+import "./population_chart.scss";
 
 export class PopulationChart extends Component {
   static propTypes = {

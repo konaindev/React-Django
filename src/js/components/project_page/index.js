@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import Header from "../header";
-import { NavigationItems, ProjectNavigationItem } from "../navigation";
+import ProjectPageChrome from "../project_page_chrome";
+
 import "./project_page.scss";
 
 export default class ProjectPage extends Component {
@@ -10,46 +10,62 @@ export default class ProjectPage extends Component {
     project: PropTypes.object.isRequired
   };
 
-  renderPeriodLinks(periods) {
-    return periods.map(period => (
-      <li key={period.url}>
-        <a href={period.url} className="period-link">
-          {period.description}
+  renderLink(link) {
+    return (
+      <li key={link.url}>
+        <a href={link.url} className="project-page__report-section__link">
+          {link.description}
         </a>
       </li>
-    ));
+    );
   }
 
-  renderSection(section) {
+  renderLinks(links) {
+    return links == null ? (
+      <li>(no reports)</li>
+    ) : links.length == null ? (
+      this.renderLink(links)
+    ) : (
+      links.map(link => this.renderLink(link))
+    );
+  }
+
+  renderSection(links, name) {
     return (
-      <div className="report-section">
-        <h2>{section.name}</h2>
-        <ul className="period-links">
-          {this.renderPeriodLinks(section.periods)}
+      <div className="project-page__report-section">
+        <h2>{name}</h2>
+        <ul className="project-page__report-section__links">
+          {this.renderLinks(links)}
         </ul>
       </div>
     );
   }
 
-  renderSections(sections) {
-    return sections.map((section, i) => (
-      <div key={i}>{this.renderSection(section)}</div>
-    ));
-  }
-
   render() {
-    const navigationItems = (
-      <NavigationItems>
-        <ProjectNavigationItem project={this.props.project} />
-      </NavigationItems>
-    );
-
     return (
-      <div className="page project-page">
-        <Header navigationItems={navigationItems}>
-          <div>{this.renderSections(this.props.report_links)}</div>
-        </Header>
-      </div>
+      <ProjectPageChrome project={this.props.project}>
+        <div>
+          {this.renderSection(
+            this.props.report_links.baseline,
+            "Baseline Report"
+          )}
+        </div>
+        <div>
+          {this.renderSection(
+            this.props.report_links.performance,
+            "Performance Reports"
+          )}
+        </div>
+        <div>
+          {this.renderSection(
+            this.props.report_links.modeling,
+            "Modeling Report"
+          )}
+        </div>
+        <div>
+          {this.renderSection(this.props.report_links.market, "Market Report")}
+        </div>
+      </ProjectPageChrome>
     );
   }
 }

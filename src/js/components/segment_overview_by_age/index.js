@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { formatNumber } from "../../utils/formatters";
 import Panel from "../panel";
 import MarketSizeByIncome from "../market_size_by_income";
-import "./segment_overview_by_age.css";
+import "./segment_overview_by_age.scss";
 
 export class SegmentOverviewByAge extends Component {
   static propTypes = {

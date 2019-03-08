@@ -1,12 +1,18 @@
 @import "css/base.scss";
 
 .report-section {
-    padding-top: $s8;
-    padding-bottom: $s8;
-}
+    position: relative;
 
-// TODO this looks like a hack
-.report-section.horizontal-padding {
-    padding-left: $s8;
-    padding-right: $s8;
+    &__content {
+        border-radius: $border-radius-default;
+        padding: $s3 $s4;
+        border: 1px solid $gray-darkest;
+        font-size: $text-sm;
+
+        &-name {
+            font-weight: 700;
+            color: $gray-lightest;
+            margin-right: $s3;
+        }
+    }
 }

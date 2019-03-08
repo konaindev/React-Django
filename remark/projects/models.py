@@ -1,6 +1,9 @@
+import collections
 import decimal
 
 from django.db import models
+
+from jsonfield import JSONField
 
 from remark.lib.tokens import public_id
 from remark.lib.metrics import Metric, Behavior, ModelPeriod
@@ -42,6 +45,28 @@ class Project(models.Model):
 
     baseline_end = models.DateField(
         help_text="The final date, exclusive, for the baseline period."
+    )
+
+    # A temporary field, for the current sprint, that holds our computed
+    # TAM reporting data.
+    tmp_market_report_json = JSONField(
+        default=None,
+        null=True,
+        blank=True,
+        # Ensure loaded data retains JSON object key ordering
+        load_kwargs={"object_pairs_hook": collections.OrderedDict},
+        help_text="Total Addressable Market (TAM) report JSON data. Must conform to the schema defined in MarketAnalysis.ts",
+    )
+
+    # A temporary field, for the current sprint, that holds our computed
+    # model options data
+    tmp_modeling_report_json = JSONField(
+        default=None,
+        null=True,
+        blank=True,
+        # Ensure loaded data retains JSON object key ordering
+        load_kwargs={"object_pairs_hook": collections.OrderedDict},
+        help_text="Modeling JSON data. Must conform to the schema defined in ModelingOptions.ts",
     )
 
     def get_periods(self):

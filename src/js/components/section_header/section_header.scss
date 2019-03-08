@@ -9,7 +9,6 @@
     margin-bottom: 36px;
     border-bottom: $heading-border;
     color: $heading-font-color;
-    opacity: 0.6;
 
     &--mt-sm {
         margin-top: 32px;
@@ -19,6 +18,7 @@
         letter-spacing: 1px;
         line-height: $line-height-tight;
         font-size: $text-sm;
+        font-weight: 500;
         text-transform: uppercase;
         padding: 6px 14px;
     }

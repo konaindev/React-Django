@@ -7,7 +7,7 @@
     "build": "webpack --progress --colors --hide-modules --config=webpack.dev.js",
     "build:prod": "webpack --progress --colors --hide-modules --config=webpack.prod.js",
     "heroku-postbuild": "webpack --progress --config=webpack.prod.js",
-    "storybook": "start-storybook -p 6006",
+    "storybook": "start-storybook -p 6006 --ci",
     "build-storybook": "build-storybook -o .out",
     "deploy-storybook": "rm -rf .out && build-storybook -o .out && echo 'storybook.remarkably.io' > '.out/CNAME' && storybook-to-ghpages --existing-output-dir=.out"
   },

@@ -1,0 +1,22 @@
+@import "css/base.scss";
+
+$report-span-dropdown-background: #232837;
+
+.report-span-dropdown {
+    float: right;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+    padding: $s2 $s4;
+    border-radius: $border-radius-default;
+    background-color: $report-span-dropdown-background;
+}
+
+.report-span-dropdown select {
+    /* custom styled dropdown */
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    color: $lighter-ui-text-color;
+}

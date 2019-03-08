@@ -58,7 +58,12 @@ export default class CampaignInvestmentReport extends Component {
           target={r.targets?.investment?.total?.estimated_revenue_gain}
         />
         <LargeMultipleBox
-          name="Campaign Return on Marketing Investment (ROMI)"
+          name={
+            <>
+              Campaign Return on <br />
+              Marketing Investment (ROMI)
+            </>
+          }
           value={r.investment.total.romi}
           target={r.targets?.investment?.total?.romi}
         />
@@ -114,7 +119,7 @@ export default class CampaignInvestmentReport extends Component {
 
     // render the bar chart
     return (
-      <ReportSection name={name} horizontalPadding={false}>
+      <ReportSection name={name}>
         <div className="bar-chart panel-rounded-rect">
           <VictoryChart
             theme={remarkablyChartTheme}
@@ -150,7 +155,7 @@ export default class CampaignInvestmentReport extends Component {
    */
   static AcquisitionDetails = ({ report: r }) => {
     return (
-      <ReportSection name="Acquisition" horizontalPadding={false}>
+      <ReportSection name="Acquisition">
         <SmallNumberBox
           name="Leased Unit Change"
           value={r.property.leasing.change}
@@ -206,7 +211,7 @@ export default class CampaignInvestmentReport extends Component {
    */
   static RetentionDetails = ({ report: r }) => {
     return (
-      <ReportSection name="Retention" horizontalPadding={false}>
+      <ReportSection name="Retention">
         <SmallNumberBox
           name="Lease Renewals"
           value={r.property.leasing.renewals}
@@ -267,7 +272,7 @@ export default class CampaignInvestmentReport extends Component {
         name="Campaign Investment"
       >
         <CampaignInvestmentReport.HeadlineNumbers report={this.props.report} />
-        <BoxRow>
+        <BoxRow spacing="wide">
           <CampaignInvestmentReport.Acquisition report={this.props.report} />
           <CampaignInvestmentReport.Retention report={this.props.report} />
         </BoxRow>
