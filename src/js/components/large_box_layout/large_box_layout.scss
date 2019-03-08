@@ -14,10 +14,10 @@
     color: $lightest-ui-text-color;
     font-size: $text-xs;
     font-weight: 700;
-    line-height: $text-xl;
     letter-spacing: 1px;
     text-transform: uppercase;
     max-width: 15rem;
+    line-height: $line-height-loose;
 }
 
 .large-box__detail {

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import FormattedMultiple from "../formatted_multiple";
 import withFormatters from "../with_formatters";
 import {
   formatMultiple,
@@ -51,6 +52,7 @@ class SmallBoxLayout extends Component {
 }
 
 // Define SmallBoxLayouts that take values and targets of various types.
+
 // @TODO: replace references of SmallMultipleBox with SmallNumberBox
 // just pass symbolType="multiple"
 const SmallMultipleBox = withFormatters(SmallBoxLayout, formatNumber);

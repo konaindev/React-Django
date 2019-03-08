@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import FormattedMultiple from "../formatted_multiple";
 import withFormatters from "../with_formatters";
 import {
   formatMultiple,
@@ -24,7 +25,7 @@ import "./large_box_layout.scss";
  */
 export class LargeBoxLayout extends Component {
   static propTypes = {
-    name: PropTypes.string.isRequired,
+    name: PropTypes.node.isRequired,
     content: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
       .isRequired,
     detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
@@ -35,9 +36,7 @@ export class LargeBoxLayout extends Component {
   renderInnerBox() {
     return this.props.innerBox ? (
       <div className="large-box__inner-box">{this.props.innerBox}</div>
-    ) : (
-      <></>
-    );
+    ) : null;
   }
 
   render() {
