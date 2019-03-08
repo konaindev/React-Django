@@ -58,7 +58,12 @@ export default class CampaignInvestmentReport extends Component {
           target={r.targets?.investment?.total?.estimated_revenue_gain}
         />
         <LargeMultipleBox
-          name="Campaign Return on Marketing Investment (ROMI)"
+          name={
+            <>
+              Campaign Return on <br />
+              Marketing Investment (ROMI)
+            </>
+          }
           value={r.investment.total.romi}
           target={r.targets?.investment?.total?.romi}
         />

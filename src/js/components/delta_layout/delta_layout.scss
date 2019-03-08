@@ -2,10 +2,14 @@
 
 .delta-layout {
     display: flex;
-    flex-direction: column;
-    line-height: $line-height-tight;
+    flex-direction: row;
+    line-height: 1;
 }
 
 .delta-layout__section {
-    font-size: $text-base;
+    font-size: $text-xs;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    min-width: $s12;
 }
