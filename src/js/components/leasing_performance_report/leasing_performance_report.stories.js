@@ -54,11 +54,6 @@ const WHISKERS = {
 };
 
 const BASELINE_REPORT = {
-  name: "Schedule Driven",
-  dates: {
-    start: "2018-07-23",
-    end: "2018-12-17"
-  },
   property: {
     monthly_average_rent: "1847.00",
     cost_per_exe_vs_rent: 0.54,
@@ -94,11 +89,6 @@ const BASELINE_REPORT = {
 };
 
 const PERFORMANCE_REPORT = {
-  name: "Schedule Driven",
-  dates: {
-    start: "2018-07-23",
-    end: "2018-12-17"
-  },
   property: {
     monthly_average_rent: "1856.00",
     cost_per_exe_vs_rent: 0.58,

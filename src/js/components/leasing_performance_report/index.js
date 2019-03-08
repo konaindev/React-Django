@@ -141,7 +141,7 @@ export default class LeasingPerformanceReport extends Component {
     return (
       <ReportSection
         name="Leasing Performance"
-        reportInfo={{ name, dates }}
+        reportInfo={name && dates ? { name, dates } : null}
         smallMarginTop
       >
         <LeasingPerformanceReport.HeadlineNumbers report={report} />
