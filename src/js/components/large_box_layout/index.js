@@ -58,9 +58,10 @@ export class LargeBoxLayout extends Component {
 }
 
 // Define LargeBoxLayouts that take values and targets of various types.
-export const LargeMultipleBox = withFormatters(LargeBoxLayout, value => (
-  <FormattedMultiple value={value} />
-));
+
+// @TODO: replace references of LargeMultipleBox with LargeNumberBox
+// just pass symbolType="multiple"
+export const LargeMultipleBox = withFormatters(LargeBoxLayout, formatNumber);
 export const LargePercentBox = withFormatters(
   LargeBoxLayout,
   formatPercent,

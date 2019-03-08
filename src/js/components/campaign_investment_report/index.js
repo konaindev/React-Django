@@ -56,6 +56,7 @@ export default class CampaignInvestmentReport extends Component {
           name="Est. Revenue Change"
           value={r.investment.total.estimated_revenue_gain}
           target={r.targets?.investment?.total?.estimated_revenue_gain}
+          symbolType="sign"
         />
         <LargeMultipleBox
           name={
@@ -66,6 +67,7 @@ export default class CampaignInvestmentReport extends Component {
           }
           value={r.investment.total.romi}
           target={r.targets?.investment?.total?.romi}
+          symbolType="multiple"
         />
       </BoxRow>
     );
@@ -160,6 +162,7 @@ export default class CampaignInvestmentReport extends Component {
           name="Leased Unit Change"
           value={r.property.leasing.change}
           target={r.targets?.property?.leasing?.change}
+          symbolType="sign"
         />
         <SmallCurrencyShorthandBox
           name="Acquisition Investment"
@@ -171,11 +174,13 @@ export default class CampaignInvestmentReport extends Component {
           name="Est. Acquired Leasing Revenue"
           value={r.investment.acquisition.estimated_revenue_gain}
           target={r.targets?.investment?.acquisition?.estimated_revenue_gain}
+          symbolType="sign"
         />
         <SmallMultipleBox
           name="Acquisition ROMI"
           value={r.investment.acquisition.romi}
           target={r.targets?.investment?.acquisition?.romi}
+          symbolType="multiple"
         />
       </ReportSection>
     );
@@ -228,11 +233,13 @@ export default class CampaignInvestmentReport extends Component {
           name="Est. Retained Leasing Revenue"
           value={r.investment.retention.estimated_revenue_gain}
           target={r.targets?.investment?.retention?.estimated_revenue_gain}
+          symbolType="sign"
         />
         <SmallMultipleBox
           name="Retention ROMI"
           value={r.investment.retention.romi}
           target={r.targets?.investment?.retention?.romi}
+          symbolType="multiple"
         />
       </ReportSection>
     );
