@@ -68,7 +68,9 @@ class ExcelImporter():
         jsonschema.validate(instance=report, schema=schema)
 
     def eval(self, sheet, col, row):
-        return self.excel.evaluate("%s!%s%d" % (sheet, col, row))
+        ref = "%s!%s%d" % (sheet, col, row)
+        print("REF >> %s" % ref)
+        return self.excel.evaluate(ref)
 
     def lookup_row(self, sheet, col, match):
         for x in range(1, MAX_ROW):
