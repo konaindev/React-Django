@@ -17,31 +17,29 @@
 }
 
 .small-box__labels__name {
-    color: $lighter-ui-text-color;
+    color: $lightest-ui-text-color;
     font-size: $text-base;
-    padding-left: $s8;
+    padding-left: $s10;
 }
 
 .small-box__labels__detail {
-    color: $default-ui-text-color;
+    color: $lighter-ui-text-color;
     font-size: $text-sm;
-    padding-left: $s8;
+    padding-left: $s10;
     margin-top: $s2;
 }
 
 .small-box__outer-content {
     display: flex;
     flex-direction: column;
-    line-height: $line-height-compressed;
     justify-content: center;
     align-content: center;
-    font-size: $text-5xl;
+    font-size: 2.5rem;
 }
 
 .small-box__inner-content {
     color: $lightest-ui-text-color;
     font-weight: $weight-hairline;
-    font-family: $font-mono;
     text-align: right;
-    padding-right: $s6;
+    padding-right: 1.875rem;
 }

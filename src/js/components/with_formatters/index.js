@@ -18,13 +18,22 @@ const withFormatters = (WrappedComponent, formatter, deltaFormatter = null) => {
 
   return class extends React.Component {
     render() {
-      let { value, target, delta, reverseArrow, ...remaining } = this.props;
+      let {
+        value,
+        target,
+        delta,
+        reverseArrow,
+        symbolType,
+        ...remaining
+      } = this.props;
+
       const content = DeltaLayout.build(
         value,
         delta,
         formatter,
         formatterForDelta,
-        reverseArrow
+        reverseArrow,
+        symbolType
       );
 
       return (
