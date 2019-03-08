@@ -117,6 +117,15 @@ export const formatDate = (value, year = true) => {
 };
 
 /**
+ * @description returns in format of "Nov 15, 2010"
+ */
+export const formatDate2 = v => {
+  const options = { year: "numeric", month: "short", day: "numeric" };
+  const formatter = Intl.DateTimeFormat("en-US", options);
+  return formatter.format(new Date(v));
+};
+
+/**
  * @description Format a multiple by putting the letter x next to it.
  *
  * @param {number|string} value A value to format

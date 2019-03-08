@@ -32,10 +32,10 @@ export function ModelingComparison({ property_name, options }) {
       Header: "",
       accessor: "label",
       Cell: row => (
-        <>
+        <span>
           {row.original.isChildren && <span>{"¬ "}</span>}
           {row.value}
-        </>
+        </span>
       )
     },
     {

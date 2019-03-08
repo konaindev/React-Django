@@ -1,9 +1,9 @@
 import { _get, calcDiffInWeeks } from "../../utils/misc";
 import {
   formatCurrency,
-  formatDate,
   formatMultiple,
   formatNumber,
+  formatDate2,
   formatPercent
 } from "../../utils/formatters";
 
@@ -24,7 +24,7 @@ export default function(modelingOptions = []) {
     {
       label: "95% Leased Date",
       highlight: true,
-      formatter: formatDate,
+      formatter: formatDate2,
       path: "dates.end"
     },
     {
