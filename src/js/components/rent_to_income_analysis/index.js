@@ -22,6 +22,8 @@ export const RentToIncomeAnalysis = ({
   data
 }) => {
   const flipMode = incomes.length >= THREASHOLD_COLUMNS;
+  const minRate = categories[0].low;
+  const maxRate = categories[categories.length - 1].high;
   return (
     <Panel
       className={cn("rent-to-income-analysis", {
@@ -87,7 +89,10 @@ export const RentToIncomeAnalysis = ({
                       )}`
                     )}
                   >
-                    {rate && formatPercent(rate)}
+                    {rate &&
+                      rate <= maxRate &&
+                      rate >= minRate &&
+                      formatPercent(rate)}
                   </div>
                 ))}
               </div>
