@@ -56,9 +56,9 @@
     "classnames": "^2.2.6",
     "google-map-react": "^1.1.2",
     "prop-types": "^15",
-    "rc-table": "^6.4.3",
     "react": "^16",
     "react-dom": "^16",
+    "react-table": "^6.9.2",
     "resolve-url-loader": "^3.0.1",
     "victory": "^31.1.0"
   }
