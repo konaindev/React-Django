@@ -33,7 +33,7 @@ export function ModelingComparison({ property_name, options }) {
       accessor: "label",
       Cell: row => (
         <>
-          {row.original.isChildren && <span>{"= "}</span>}
+          {row.original.isChildren && <span>{"¬ "}</span>}
           {row.value}
         </>
       )

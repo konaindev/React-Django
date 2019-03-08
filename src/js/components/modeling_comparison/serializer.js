@@ -1,3 +1,4 @@
+import { _get, calcDiffInWeeks } from "../../utils/misc";
 import {
   formatCurrency,
   formatDate,
@@ -6,207 +7,266 @@ import {
   formatPercent
 } from "../../utils/formatters";
 
+const formatCurrencyWithFraction = v => formatCurrency(v, true);
+
 export default function(modelingOptions = []) {
   let columns = modelingOptions.map(o => o.name);
-  let optionsByName = {};
 
-  for (let { name, ...rest } of modelingOptions) {
-    optionsByName[name] = rest;
-  }
+  let rowsConfig = [
+    {
+      label: "Duration (Weeks)",
+      highlight: true,
+      formatter: report => {
+        const duration = calcDiffInWeeks(report.dates.start, report.dates.end);
+        return `${duration} Weeks`;
+      }
+    },
+    {
+      label: "95% Leased Date",
+      highlight: true,
+      formatter: formatDate,
+      path: "dates.end"
+    },
+    {
+      label: "Campaign Investment",
+      highlight: true,
+      formatter: formatCurrency,
+      path: "investment.total.total"
+    },
+    {
+      label: "Est. Revenue Change",
+      highlight: true,
+      formatter: formatCurrency,
+      path: "investment.total.estimated_revenue_gain"
+    },
+    {
+      label: "Weekly Est. Revenue Change",
+      highlight: true,
+      formatter: report => {
+        const duration = calcDiffInWeeks(report.dates.start, report.dates.end);
+        const value = _get(report, "investment.total.estimated_revenue_gain");
 
-  let rows = [
-    { id: "1", label: "Duration (Weeks)", highlight: true },
-    { id: "2", label: "95% Leased Date", highlight: true },
-    { id: "3", label: "Campaign Investment", highlight: true },
-    { id: "4", label: "Est. Revenue Change", highlight: true },
-    { id: "5", label: "Weekly Est. Revenue Change", highlight: true },
-    { id: "6", label: "ROMI", highlight: true },
-    { id: "7", label: "Leased Rate" },
-    { id: "8", label: "Retention Rate" },
-    { id: "9", label: "Occupancy Rate" },
-    { id: "10", label: "Cancellations & Denials" },
-    { id: "11", label: "Notices to Renew" },
-    { id: "12", label: "Notices to Vacate" },
-    { id: "13", label: "Move Ins" },
-    { id: "14", label: "Move Outs" },
-    { id: "15", label: "Acquisition Investment" },
-    { id: "15.1", label: "Reputation Building", isChildren: true },
-    { id: "15.2", label: "Demand Creation", isChildren: true },
-    { id: "15.3", label: "Leasing Enablement", isChildren: true },
-    { id: "15.4", label: "Market Intelligence", isChildren: true },
-    { id: "15.5", label: "Est. Acquired Leasing Revenue", isChildren: true },
-    { id: "15.6", label: "Acquisition ROMI", isChildren: true },
-    { id: "16", label: "Retention Investment" },
-    { id: "16.1", label: "Reputation Building", isChildren: true },
-    { id: "16.2", label: "Demand Creation", isChildren: true },
-    { id: "16.3", label: "Leasing Enablement", isChildren: true },
-    { id: "16.4", label: "Market Intelligence", isChildren: true },
-    { id: "16.5", label: "Est. Retained Leasing Revenue", isChildren: true },
-    { id: "16.6", label: "Retention ROMI", isChildren: true },
-    { id: "17", label: "Unique Site Visitors (USV)" },
-    { id: "18", label: "Inquiries (INQ)" },
-    { id: "19", label: "Tours (TOU)" },
-    { id: "20", label: "Lease Applications (INQ)" },
-    { id: "21", label: "Lease Executions (EXE)" },
-    { id: "22", label: "USVs > INQ Conversion" },
-    { id: "23", label: "INQ > TOU Conversion" },
-    { id: "24", label: "TOU > APP Conversion" },
-    { id: "25", label: "APP > EXE Conversion" },
-    { id: "26", label: "Cost per USV" },
-    { id: "27", label: "Cost per INQ" },
-    { id: "28", label: "Cost per TOU" },
-    { id: "29", label: "Cost per APP" },
-    { id: "30", label: "Cost per EXE" }
+        return duration !== 0 && formatCurrency(value / duration);
+      }
+    },
+    {
+      label: "ROMI",
+      highlight: true,
+      formatter: formatMultiple,
+      path: "investment.total.romi"
+    },
+    {
+      label: "Leased Rate",
+      formatter: formatPercent,
+      path: "property.leasing.rate"
+    },
+    {
+      label: "Retention Rate",
+      formatter: formatPercent,
+      path: "property.leasing.renewal_rate"
+    },
+    {
+      label: "Occupancy Rate",
+      formatter: formatPercent,
+      path: "property.occupancy.rate"
+    },
+    {
+      label: "Cancellations & Denials",
+      path: "property.leasing.cds"
+    },
+    {
+      label: "Notices to Renew",
+      path: "property.leasing.renewal_notices"
+    },
+    {
+      label: "Notices to Vacate",
+      path: "property.leasing.vacation_notices"
+    },
+    {
+      label: "Move Ins",
+      path: "property.occupancy.move_ins"
+    },
+    {
+      label: "Move Outs",
+      path: "property.occupancy.move_outs"
+    },
+    {
+      label: "Acquisition Investment",
+      formatter: formatCurrency,
+      path: "investment.acquisition.total"
+    },
+    {
+      label: "Reputation Building",
+      isChildren: true,
+      formatter: formatCurrency,
+      path: "investment.acquisition.expenses.reputation_building"
+    },
+    {
+      label: "Demand Creation",
+      isChildren: true,
+      formatter: formatCurrency,
+      path: "investment.acquisition.expenses.demand_creation"
+    },
+    {
+      label: "Leasing Enablement",
+      isChildren: true,
+      formatter: formatCurrency,
+      path: "investment.acquisition.expenses.leasing_enablement"
+    },
+    {
+      label: "Market Intelligence",
+      isChildren: true,
+      formatter: formatCurrency,
+      path: "investment.acquisition.expenses.market_intelligence"
+    },
+    {
+      label: "Est. Acquired Leasing Revenue",
+      isChildren: true,
+      formatter: formatCurrency,
+      path: "investment.acquisition.estimated_revenue_gain"
+    },
+    {
+      label: "Acquisition ROMI",
+      isChildren: true,
+      formatter: v => formatMultiple(formatNumber(v)),
+      path: "investment.acquisition.romi"
+    },
+    {
+      label: "Retention Investment",
+      formatter: formatCurrency,
+      path: "investment.retention.total"
+    },
+    {
+      label: "Reputation Building",
+      isChildren: true,
+      formatter: formatCurrency,
+      path: "investment.retention.expenses.reputation_building"
+    },
+    {
+      label: "Demand Creation",
+      isChildren: true,
+      formatter: formatCurrency,
+      path: "investment.retention.expenses.demand_creation"
+    },
+    {
+      label: "Leasing Enablement",
+      isChildren: true,
+      formatter: formatCurrency,
+      path: "investment.retention.expenses.leasing_enablement"
+    },
+    {
+      label: "Market Intelligence",
+      isChildren: true,
+      formatter: formatCurrency,
+      path: "investment.retention.expenses.market_intelligence"
+    },
+    {
+      label: "Est. Retained Leasing Revenue",
+      isChildren: true,
+      formatter: formatCurrency,
+      path: "investment.retention.estimated_revenue_gain"
+    },
+    {
+      label: "Retention ROMI",
+      isChildren: true,
+      formatter: v => formatMultiple(formatNumber(v)),
+      path: "investment.retention.romi"
+    },
+    {
+      label: "Unique Site Visitors (USV)",
+      formatter: formatNumber,
+      path: "funnel.volumes.usv"
+    },
+    {
+      label: "Inquiries (INQ)",
+      formatter: formatNumber,
+      path: "funnel.volumes.inq"
+    },
+    {
+      label: "Tours (TOU)",
+      formatter: formatNumber,
+      path: "funnel.volumes.tou"
+    },
+    {
+      label: "Lease Applications (APP)",
+      formatter: formatNumber,
+      path: "funnel.volumes.app"
+    },
+    {
+      label: "Lease Executions (EXE)",
+      formatter: formatNumber,
+      path: "funnel.volumes.exe"
+    },
+    {
+      label: "USVs > INQ Conversion",
+      formatter: formatPercent,
+      path: "funnel.conversions.usv_inq"
+    },
+    {
+      label: "INQ > TOU Conversion",
+      formatter: formatPercent,
+      path: "funnel.conversions.inq_tou"
+    },
+    {
+      label: "TOU > APP Conversion",
+      formatter: formatPercent,
+      path: "funnel.conversions.tou_app"
+    },
+    {
+      label: "APP > EXE Conversion",
+      formatter: formatPercent,
+      path: "funnel.conversions.app_exe"
+    },
+    {
+      label: "Cost per USV",
+      formatter: formatCurrencyWithFraction,
+      path: "funnel.costs.usv"
+    },
+    {
+      label: "Cost per INQ",
+      formatter: formatCurrencyWithFraction,
+      path: "funnel.costs.inq"
+    },
+    {
+      label: "Cost per TOU",
+      formatter: formatCurrencyWithFraction,
+      path: "funnel.costs.tou"
+    },
+    {
+      label: "Cost per APP",
+      formatter: formatCurrencyWithFraction,
+      path: "funnel.costs.app"
+    },
+    {
+      label: "Cost per EXE",
+      formatter: formatCurrencyWithFraction,
+      path: "funnel.costs.exe"
+    }
   ];
 
-  for (let column of columns) {
-    let option = optionsByName[column];
-    let {
-      dates,
-      four_week_funnel_averages,
-      funnel,
-      investment,
-      property,
-      name
-    } = option;
+  for (let report of modelingOptions) {
+    for (let row of rowsConfig) {
+      let value;
+      let formatter = row.formatter;
 
-    const duration_in_weeks = calcDiffInWeek(dates.start, dates.end); // calculate from dates.start, dates.end
-    setValue(rows, "1", column, `${duration_in_weeks} Weeks`);
-    setValue(rows, "2", column, formatDate(dates.end));
-    setValue(rows, "3", column, formatCurrency(investment.total.total));
-    setValue(
-      rows,
-      "4",
-      column,
-      formatCurrency(investment.total.estimated_revenue_gain)
-    );
-    setValue(
-      rows,
-      "4",
-      column,
-      formatCurrency(investment.total.estimated_revenue_gain)
-    );
-    setValue(
-      rows,
-      "5",
-      column,
-      formatCurrency(
-        investment.total.estimated_revenue_gain / duration_in_weeks
-      )
-    );
-    setValue(rows, "6", column, formatMultiple(investment.total.romi));
-    setValue(rows, "7", column, formatPercent(property.leasing.rate));
-    setValue(rows, "8", column, formatPercent(property.leasing.renewal_rate));
-    setValue(rows, "9", column, formatPercent(property.occupancy.rate));
-    setValue(rows, "10", column, property.leasing.cds);
-    setValue(rows, "11", column, property.leasing.renewal_notices);
-    setValue(rows, "12", column, property.leasing.vacation_notices);
-    setValue(rows, "13", column, property.occupancy.move_ins);
-    setValue(rows, "14", column, property.occupancy.move_outs);
+      if (row.path) {
+        value = _get(report, row.path, "");
 
-    setValue(rows, "15", column, formatCurrency(investment.acquisition.total));
-    setValue(
-      rows,
-      "15.1",
-      column,
-      formatCurrency(investment.acquisition.expenses.reputation_building)
-    );
-    setValue(
-      rows,
-      "15.2",
-      column,
-      formatCurrency(investment.acquisition.expenses.demand_creation)
-    );
-    setValue(
-      rows,
-      "15.3",
-      column,
-      formatCurrency(investment.acquisition.expenses.leasing_enablement)
-    );
-    setValue(
-      rows,
-      "15.4",
-      column,
-      formatCurrency(investment.acquisition.expenses.market_intelligence)
-    );
-    setValue(
-      rows,
-      "15.5",
-      column,
-      formatCurrency(investment.acquisition.estimated_revenue_gain)
-    );
-    setValue(
-      rows,
-      "15.6",
-      column,
-      formatMultiple(formatNumber(investment.acquisition.romi))
-    );
+        if (formatter) {
+          value = formatter(value);
+        }
+      } else {
+        value = formatter(report);
+      }
 
-    setValue(rows, "16", column, formatCurrency(investment.retention.total));
-    setValue(
-      rows,
-      "16.1",
-      column,
-      formatCurrency(investment.retention.expenses.reputation_building)
-    );
-    setValue(
-      rows,
-      "16.2",
-      column,
-      formatCurrency(investment.retention.expenses.demand_creation)
-    );
-    setValue(
-      rows,
-      "16.3",
-      column,
-      formatCurrency(investment.retention.expenses.leasing_enablement)
-    );
-    setValue(
-      rows,
-      "16.4",
-      column,
-      formatCurrency(investment.retention.expenses.market_intelligence)
-    );
-    setValue(
-      rows,
-      "16.5",
-      column,
-      formatCurrency(investment.retention.estimated_revenue_gain)
-    );
-    setValue(
-      rows,
-      "16.6",
-      column,
-      formatMultiple(formatNumber(investment.retention.romi))
-    );
-
-    setValue(rows, "17", column, formatNumber(funnel.volumes.usv));
-    setValue(rows, "18", column, formatNumber(funnel.volumes.inq));
-    setValue(rows, "19", column, formatNumber(funnel.volumes.tou));
-    setValue(rows, "20", column, formatNumber(funnel.volumes.app));
-    setValue(rows, "21", column, formatNumber(funnel.volumes.exe));
-    setValue(rows, "22", column, formatPercent(funnel.conversions.usv_inq));
-    setValue(rows, "23", column, formatPercent(funnel.conversions.inq_tou));
-    setValue(rows, "24", column, formatPercent(funnel.conversions.tou_app));
-    setValue(rows, "25", column, formatPercent(funnel.conversions.app_exe));
-    setValue(rows, "26", column, formatCurrency(funnel.costs.usv, true));
-    setValue(rows, "27", column, formatCurrency(funnel.costs.inq, true));
-    setValue(rows, "28", column, formatCurrency(funnel.costs.tou, true));
-    setValue(rows, "29", column, formatCurrency(funnel.costs.app, true));
-    setValue(rows, "30", column, formatCurrency(funnel.costs.exe, true));
+      row[report.name] = value;
+    }
   }
+
+  let rows = rowsConfig.map(o => {
+    let { path, formatter, ...rest } = o;
+    return rest;
+  });
 
   return { columns, rows };
-}
-
-function setValue(rows = [], id, column, value) {
-  const row = rows.find(r => r.id === id);
-  if (row) {
-    row[column] = value;
-  }
-}
-
-function calcDiffInWeek(date1, date2) {
-  const diffInMilliSec = new Date(date2) - new Date(date1);
-  return Math.ceil(diffInMilliSec / (1000 * 60 * 60 * 24 * 7));
 }
