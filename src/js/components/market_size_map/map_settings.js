@@ -52,3 +52,12 @@ export const stylesForRegionFill = {
   fillColor: "#6760e6", // rgba(103,96,230,0.1);
   fillOpacity: 0.35
 };
+
+export const createDefaultMapOptions = maps => ({
+  styles: stylesForNightMode,
+  draggable: false,
+  zoomControl: false,
+  scrollwheel: false,
+  fullscreenControl: false,
+  scaleControl: false
+});
