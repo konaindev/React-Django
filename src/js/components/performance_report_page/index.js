@@ -1,47 +1,35 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import Header from "../header";
-import { NavigationItems, ProjectNavigationItem } from "../navigation";
-import ProjectTabs from "../project_tabs";
-
+import ReportPageChrome from "../report_page_chrome";
+import PerformanceReportSpanDropdown from "../performance_report_span_dropdown";
 import CommonReport from "../common_report";
 
-// TODO @davepeck @leo -- this is copied code; we should fix this.
-
 /**
- * @description The full landing page for a single project report
+ * @class PerformanceReportPage
+ *
+ * @classdesc Renders page chrome and contents for a single performance report
  */
 export default class PerformanceReportPage extends Component {
-  // TODO further define the shape of a report and a project...
   static propTypes = {
     report: PropTypes.object.isRequired,
     project: PropTypes.object.isRequired
   };
 
-  componentDidMount() {
-    console.log("Report data", this.props.report);
-  }
-
   render() {
-    const navigationItems = (
-      <NavigationItems>
-        <ProjectNavigationItem project={this.props.project} />
-      </NavigationItems>
-    );
-
     return (
-      <div className="page report-page">
-        <Header navigationItems={navigationItems}>
-          <>
-            <ProjectTabs
-              current_report_link={this.props.current_report_link}
-              report_links={this.props.report_links.performance}
-            />
-            <CommonReport report={this.props.report} />
-          </>
-        </Header>
-      </div>
+      <ReportPageChrome
+        project={this.props.project}
+        current_report_name="performance"
+        report_links={this.props.report_links}
+      >
+        {/* TODO CHROME FIXME move this somewhere deeper -- I guess into the common report itself? */}
+        <PerformanceReportSpanDropdown
+          current_report_link={this.props.current_report_link}
+          report_links={this.props.report_links.performance}
+        />
+        <CommonReport report={this.props.report} />
+      </ReportPageChrome>
     );
   }
 }

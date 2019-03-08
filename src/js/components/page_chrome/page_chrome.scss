@@ -1,0 +1,20 @@
+@import "css/base.scss";
+
+.page-chrome__top-chrome {
+}
+
+.page-chrome__top-chrome__content {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.page-chrome__top-chrome__spacing-fix {
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background: transparent;
+}
