@@ -139,7 +139,11 @@ export default class LeasingPerformanceReport extends Component {
       report: { name, dates }
     } = this.props;
     return (
-      <ReportSection name="Leasing Performance" reportInfo={{ name, dates }}>
+      <ReportSection
+        name="Leasing Performance"
+        reportInfo={{ name, dates }}
+        smallMarginTop
+      >
         <LeasingPerformanceReport.HeadlineNumbers report={report} />
         <LeasingPerformanceReport.DetailNumbers report={report} />
       </ReportSection>

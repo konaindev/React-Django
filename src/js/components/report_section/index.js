@@ -19,14 +19,15 @@ export default class ReportSection extends Component {
     reportInfo: PropTypes.shape({
       name: PropTypes.string.isRequired,
       dates: PropTypes.object.isRequired
-    })
+    }),
+    smallMarginTop: PropTypes.bool
   };
 
   render() {
-    const { reportInfo } = this.props;
+    const { reportInfo, smallMarginTop } = this.props;
     return (
       <div className="report-section">
-        <SectionHeader title={this.props.name}>
+        <SectionHeader title={this.props.name} smallMarginTop={smallMarginTop}>
           {reportInfo && (
             <div className="report-section__content">
               <span className="report-section__content-name">
