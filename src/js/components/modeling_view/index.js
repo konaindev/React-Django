@@ -37,10 +37,6 @@ export class ModelingView extends Component {
               options={subnavOptions}
             />
           </div>
-          <div className="modeling-view__campaign-dates">
-            Campaign Period: {options[activeReport].dates.start} to{" "}
-            {options[activeReport].dates.end}
-          </div>
         </Container>
         <CommonReport report={options[activeReport]} />
       </div>
