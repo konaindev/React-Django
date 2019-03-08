@@ -1,51 +1,68 @@
 import React from "react";
 import { string, number, object, arrayOf, shape } from "prop-types";
-import Table from "rc-table";
+import ReactTable from "react-table";
+import "react-table/react-table.css";
 
 import serialize from "./serializer";
 import "./modeling_comparison.scss";
 import Container from "../container";
-import "rc-table/assets/index.css";
+
+const getTrProps = (state, { original: row }, column) => {
+  let classes = [];
+
+  if (row.highlight) {
+    classes.push("accent");
+  }
+  if (row.isChildren) {
+    classes.push("children");
+  }
+
+  return {
+    className: classes.join(" ")
+  };
+};
 
 export function ModelingComparison({ property_name, options }) {
   const { rows } = serialize(options);
 
   console.log(rows);
 
-  let columns = [
+  let reactTableColumns = [
     {
-      title: "",
-      dataIndex: "label",
-      key: "label"
+      Header: "",
+      accessor: "label",
+      Cell: row => (
+        <>
+          {row.original.isChildren && <span>{"= "}</span>}
+          {row.value}
+        </>
+      )
     },
     {
-      title: "Run Rate",
-      dataIndex: "Run Rate",
-      key: "run-rate"
+      Header: "Run Rate",
+      accessor: "Run Rate"
     },
     {
-      title: "Schedule Driven",
-      dataIndex: "Schedule Driven",
-      key: "schedule-driven"
+      Header: "Schedule Driven",
+      accessor: "Schedule Driven"
     },
     {
-      title: "Investment Driven",
-      dataIndex: "Investment Driven",
-      key: "investment-driven"
+      Header: "Investment Driven",
+      accessor: "Investment Driven"
     }
   ];
 
   return (
-    <Container style={{ height: "25rem" }}>
-      <Table
-        expandIconAsCell
-        defaultExpandAllRows
-        columns={columns}
+    <Container className="modeling-comparison" style={{ height: "100%" }}>
+      <ReactTable
         data={rows}
-        className="remarkably-table"
-        rowKey={record => record.id}
-        useFixedHeader
-        scroll={{ y: 480 }}
+        columns={reactTableColumns}
+        className=""
+        defaultPageSize={rows.length}
+        showPagination={false}
+        sortable={false}
+        resizable={false}
+        getTrProps={getTrProps}
       />
     </Container>
   );

@@ -8,5 +8,7 @@ import ModelingComparison from "./index";
 console.log(props);
 
 storiesOf("ModelingComparison", module).add("default", () => (
-  <ModelingComparison {...props} />
+  <div style={{ height: 560, margin: "16px auto" }}>
+    <ModelingComparison {...props} />
+  </div>
 ));

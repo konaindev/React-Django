@@ -15,12 +15,12 @@ export default function(modelingOptions = []) {
   }
 
   let rows = [
-    { id: "1", label: "Duration (Weeks)" },
-    { id: "2", label: "95% Leased Date" },
-    { id: "3", label: "Campaign Investment" },
-    { id: "4", label: "Est. Revenue Change" },
-    { id: "5", label: "Weekly Est. Revenue Change" },
-    { id: "6", label: "ROMI" },
+    { id: "1", label: "Duration (Weeks)", highlight: true },
+    { id: "2", label: "95% Leased Date", highlight: true },
+    { id: "3", label: "Campaign Investment", highlight: true },
+    { id: "4", label: "Est. Revenue Change", highlight: true },
+    { id: "5", label: "Weekly Est. Revenue Change", highlight: true },
+    { id: "6", label: "ROMI", highlight: true },
     { id: "7", label: "Leased Rate" },
     { id: "8", label: "Retention Rate" },
     { id: "9", label: "Occupancy Rate" },
@@ -29,30 +29,20 @@ export default function(modelingOptions = []) {
     { id: "12", label: "Notices to Vacate" },
     { id: "13", label: "Move Ins" },
     { id: "14", label: "Move Outs" },
-    {
-      id: "15",
-      label: "Acquisition Investment",
-      children: [
-        { id: "15.1", label: "Reputation Building" },
-        { id: "15.2", label: "Demand Creation" },
-        { id: "15.3", label: "Leasing Enablement" },
-        { id: "15.4", label: "Market Intelligence" },
-        { id: "15.5", label: "Est. Acquired Leasing Revenue" },
-        { id: "15.6", label: "Acquisition ROMI" }
-      ]
-    },
-    {
-      id: "16",
-      label: "Retention Investment",
-      children: [
-        { id: "16.1", label: "Reputation Building" },
-        { id: "16.2", label: "Demand Creation" },
-        { id: "16.3", label: "Leasing Enablement" },
-        { id: "16.4", label: "Market Intelligence" },
-        { id: "16.5", label: "Est. Retained Leasing Revenue" },
-        { id: "16.6", label: "Retention ROMI" }
-      ]
-    },
+    { id: "15", label: "Acquisition Investment" },
+    { id: "15.1", label: "Reputation Building", isChildren: true },
+    { id: "15.2", label: "Demand Creation", isChildren: true },
+    { id: "15.3", label: "Leasing Enablement", isChildren: true },
+    { id: "15.4", label: "Market Intelligence", isChildren: true },
+    { id: "15.5", label: "Est. Acquired Leasing Revenue", isChildren: true },
+    { id: "15.6", label: "Acquisition ROMI", isChildren: true },
+    { id: "16", label: "Retention Investment" },
+    { id: "16.1", label: "Reputation Building", isChildren: true },
+    { id: "16.2", label: "Demand Creation", isChildren: true },
+    { id: "16.3", label: "Leasing Enablement", isChildren: true },
+    { id: "16.4", label: "Market Intelligence", isChildren: true },
+    { id: "16.5", label: "Est. Retained Leasing Revenue", isChildren: true },
+    { id: "16.6", label: "Retention ROMI", isChildren: true },
     { id: "17", label: "Unique Site Visitors (USV)" },
     { id: "18", label: "Inquiries (INQ)" },
     { id: "19", label: "Tours (TOU)" },
@@ -113,8 +103,83 @@ export default function(modelingOptions = []) {
     setValue(rows, "12", column, property.leasing.vacation_notices);
     setValue(rows, "13", column, property.occupancy.move_ins);
     setValue(rows, "14", column, property.occupancy.move_outs);
+
     setValue(rows, "15", column, formatCurrency(investment.acquisition.total));
+    setValue(
+      rows,
+      "15.1",
+      column,
+      formatCurrency(investment.acquisition.expenses.reputation_building)
+    );
+    setValue(
+      rows,
+      "15.2",
+      column,
+      formatCurrency(investment.acquisition.expenses.demand_creation)
+    );
+    setValue(
+      rows,
+      "15.3",
+      column,
+      formatCurrency(investment.acquisition.expenses.leasing_enablement)
+    );
+    setValue(
+      rows,
+      "15.4",
+      column,
+      formatCurrency(investment.acquisition.expenses.market_intelligence)
+    );
+    setValue(
+      rows,
+      "15.5",
+      column,
+      formatCurrency(investment.acquisition.estimated_revenue_gain)
+    );
+    setValue(
+      rows,
+      "15.6",
+      column,
+      formatMultiple(formatNumber(investment.acquisition.romi))
+    );
+
     setValue(rows, "16", column, formatCurrency(investment.retention.total));
+    setValue(
+      rows,
+      "16.1",
+      column,
+      formatCurrency(investment.retention.expenses.reputation_building)
+    );
+    setValue(
+      rows,
+      "16.2",
+      column,
+      formatCurrency(investment.retention.expenses.demand_creation)
+    );
+    setValue(
+      rows,
+      "16.3",
+      column,
+      formatCurrency(investment.retention.expenses.leasing_enablement)
+    );
+    setValue(
+      rows,
+      "16.4",
+      column,
+      formatCurrency(investment.retention.expenses.market_intelligence)
+    );
+    setValue(
+      rows,
+      "16.5",
+      column,
+      formatCurrency(investment.retention.estimated_revenue_gain)
+    );
+    setValue(
+      rows,
+      "16.6",
+      column,
+      formatMultiple(formatNumber(investment.retention.romi))
+    );
+
     setValue(rows, "17", column, formatNumber(funnel.volumes.usv));
     setValue(rows, "18", column, formatNumber(funnel.volumes.inq));
     setValue(rows, "19", column, formatNumber(funnel.volumes.tou));
@@ -129,83 +194,6 @@ export default function(modelingOptions = []) {
     setValue(rows, "28", column, formatCurrency(funnel.costs.tou, true));
     setValue(rows, "29", column, formatCurrency(funnel.costs.app, true));
     setValue(rows, "30", column, formatCurrency(funnel.costs.exe, true));
-
-    const acquisitionRows = (rows.find(r => r.id === "15") || {}).children;
-    const retentionRows = (rows.find(r => r.id === "16") || {}).children;
-
-    setValue(
-      acquisitionRows,
-      "15.1",
-      column,
-      formatCurrency(investment.acquisition.expenses.reputation_building)
-    );
-    setValue(
-      acquisitionRows,
-      "15.2",
-      column,
-      formatCurrency(investment.acquisition.expenses.demand_creation)
-    );
-    setValue(
-      acquisitionRows,
-      "15.3",
-      column,
-      formatCurrency(investment.acquisition.expenses.leasing_enablement)
-    );
-    setValue(
-      acquisitionRows,
-      "15.4",
-      column,
-      formatCurrency(investment.acquisition.expenses.market_intelligence)
-    );
-    setValue(
-      acquisitionRows,
-      "15.5",
-      column,
-      formatCurrency(investment.acquisition.estimated_revenue_gain)
-    );
-    setValue(
-      acquisitionRows,
-      "15.6",
-      column,
-      formatMultiple(formatNumber(investment.acquisition.romi))
-    );
-
-    setValue(
-      retentionRows,
-      "16.1",
-      column,
-      formatCurrency(investment.retention.expenses.reputation_building)
-    );
-    setValue(
-      retentionRows,
-      "16.2",
-      column,
-      formatCurrency(investment.retention.expenses.demand_creation)
-    );
-    setValue(
-      retentionRows,
-      "16.3",
-      column,
-      formatCurrency(investment.retention.expenses.leasing_enablement)
-    );
-    setValue(
-      retentionRows,
-      "16.4",
-      column,
-      formatCurrency(investment.retention.expenses.market_intelligence)
-    );
-    setValue(
-      retentionRows,
-      "16.5",
-      column,
-      formatCurrency(investment.retention.estimated_revenue_gain)
-    );
-    setValue(
-      retentionRows,
-      "16.6",
-      column,
-      formatMultiple(formatNumber(investment.retention.romi))
-    );
   }
 
   return { columns, rows };
