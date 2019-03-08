@@ -15,15 +15,20 @@ import LeasingPerformanceReport from "../leasing_performance_report";
  * and modeling reports.
  */
 export default class CommonReport extends Component {
-  static propTypes = { report: PropTypes.object.isRequired };
+  static propTypes = {
+    report: PropTypes.object.isRequired,
+    dateSpan: PropTypes.node
+  };
 
   render() {
-    const { report } = this.props;
     return (
       <Container>
-        <LeasingPerformanceReport report={report} />
-        <CampaignInvestmentReport report={report} />
-        <AcquisitionFunnelReport report={report} />
+        <LeasingPerformanceReport
+          report={this.props.report}
+          sectionItems={this.props.dateSpan}
+        />
+        <CampaignInvestmentReport report={this.props.report} />
+        <AcquisitionFunnelReport report={this.props.report} />
       </Container>
     );
   }

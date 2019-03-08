@@ -339,10 +339,19 @@ const props_performance = {
   report: PERFORMANCE_REPORT
 };
 
+const props_date_span = {
+  dateSpan: <div>"MY DATE SPAN GOES HERE"</div>,
+  ...props_performance
+};
+
 storiesOf("CommonReport", module).add("baseline", () => (
   <CommonReport {...props_baseline} />
 ));
 
 storiesOf("CommonReport", module).add("performance", () => (
   <CommonReport {...props_performance} />
+));
+
+storiesOf("CommonReport", module).add("with date span", () => (
+  <CommonReport {...props_date_span} />
 ));
