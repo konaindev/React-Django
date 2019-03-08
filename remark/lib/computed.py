@@ -37,7 +37,7 @@ class ComputedValueMixin:
     Provides an implementation that exposes all @computed_property on the class.
     """
 
-    def _is_computed_value(self, name):
+    def is_computed_value(self, name):
         """
         Return true if a given attribute name is a computed_property.
         """
@@ -51,5 +51,5 @@ class ComputedValueMixin:
         return {
             name: getattr(self, name)
             for name in dir(self)
-            if self._is_computed_value(name)
+            if self.is_computed_value(name)
         }
