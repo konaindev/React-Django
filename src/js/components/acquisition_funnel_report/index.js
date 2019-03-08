@@ -41,7 +41,7 @@ const format4WeekAverage = averageValue =>
 export default class AcquisitionFunnelReport extends Component {
   static propTypes = {
     report: PropTypes.object.isRequired,
-    type: PropTypes.oneOf(["baseline, performance"]).isRequired
+    type: PropTypes.oneOf(["baseline", "performance"]).isRequired
   };
   /**
    * @name AcquisitionFunnelReport.HeadlineNumbers
