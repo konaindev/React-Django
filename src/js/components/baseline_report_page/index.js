@@ -1,44 +1,31 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import Header from "../header";
-import { NavigationItems, ProjectNavigationItem } from "../navigation";
-import ProjectTabs from "../project_tabs";
-
+import ReportPageChrome from "../report_page_chrome";
 import CommonReport from "../common_report";
 
-// TODO @davepeck @leo -- this is copied code; we should fix this.
+import "./baseline_report_page.scss";
 
 /**
- * @description The full landing page for a single project report
+ * @class BaselineReportPage
+ *
+ * @classdesc Renders page chrome and contents for a single baseline report
  */
 export default class BaselineReportPage extends Component {
-  // TODO further define the shape of a report and a project...
   static propTypes = {
     report: PropTypes.object.isRequired,
     project: PropTypes.object.isRequired
   };
 
-  componentDidMount() {
-    console.log("Report data", this.props.report);
-  }
-
   render() {
-    const navigationItems = (
-      <NavigationItems>
-        <ProjectNavigationItem project={this.props.project} />
-      </NavigationItems>
-    );
-
     return (
-      <div className="page report-page">
-        <Header navigationItems={navigationItems}>
-          <>
-            <ProjectTabs />
-            <CommonReport report={this.props.report} />
-          </>
-        </Header>
-      </div>
+      <ReportPageChrome
+        project={this.props.project}
+        current_report_name="baseline"
+        report_links={this.props.report_links}
+      >
+        <CommonReport report={this.props.report} />
+      </ReportPageChrome>
     );
   }
 }

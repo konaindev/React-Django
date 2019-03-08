@@ -1,0 +1,12 @@
+@import "css/base.scss";
+
+.remarkably-logo {
+    color: $white;
+}
+
+.remarkably-logo__tm {
+    color: $bluegray-light;
+    font-size: $text-base;
+    position: relative;
+    top: -2px;
+}

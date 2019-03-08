@@ -160,7 +160,7 @@ class PerformanceReportSelector(ReportSelectorBase):
         CAMPAIGN_TO_DATE: "Campaign To Date",
     }
 
-    NAMED_SPANS = [LAST_WEEK, LAST_TWO_WEEKS, LAST_FOUR_WEEKS, CAMPAIGN_TO_DATE]
+    NAMED_SPANS = [LAST_FOUR_WEEKS, LAST_TWO_WEEKS, LAST_WEEK, CAMPAIGN_TO_DATE]
 
     @classmethod
     def last_week(cls, project):

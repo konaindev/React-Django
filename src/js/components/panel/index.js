@@ -14,7 +14,7 @@ export default class Panel extends Component {
   static propTypes = {
     component: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
     className: PropTypes.string,
-    children: PropTypes.element.isRequired,
+    children: PropTypes.node.isRequired,
     size: PropTypes.oneOf(["small", "default"])
   };
 
