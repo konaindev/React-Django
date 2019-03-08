@@ -4,9 +4,8 @@ import cn from "classnames";
 
 import DeltaIndicator from "../delta_indicator";
 import { formatNumber } from "../../utils/formatters";
+import { isNil } from "../../utils/helpers";
 import "./delta_layout.scss";
-
-const isNil = value => typeof value === "undefined" || value === null;
 
 /**
  * @class DeltaLayout

@@ -332,11 +332,13 @@ const PERFORMANCE_REPORT = {
 };
 
 const props_baseline = {
-  report: BASELINE_REPORT
+  report: BASELINE_REPORT,
+  type: "baseline"
 };
 
 const props_performance = {
-  report: PERFORMANCE_REPORT
+  report: PERFORMANCE_REPORT,
+  type: "performance"
 };
 
 storiesOf("CommonReport", module).add("baseline", () => (

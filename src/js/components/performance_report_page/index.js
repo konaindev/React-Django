@@ -28,7 +28,7 @@ export default class PerformanceReportPage extends Component {
           current_report_link={this.props.current_report_link}
           report_links={this.props.report_links.performance}
         />
-        <CommonReport report={this.props.report} />
+        <CommonReport report={this.props.report} type="performance" />
       </ReportPageChrome>
     );
   }

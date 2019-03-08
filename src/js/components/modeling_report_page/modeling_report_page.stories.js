@@ -11,8 +11,6 @@ const current_report_link = report_links.modeling;
 
 const props = { project, report, report_links, current_report_link };
 
-console.log(props);
-
 storiesOf("ModelingReportPage", module).add("default", () => (
   <ModelingReportPage {...props} />
 ));

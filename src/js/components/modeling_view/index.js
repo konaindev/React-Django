@@ -38,7 +38,7 @@ export class ModelingView extends Component {
             />
           </div>
         </Container>
-        <CommonReport report={options[activeReport]} />
+        <CommonReport report={options[activeReport]} type="baseline" />
       </div>
     );
   }

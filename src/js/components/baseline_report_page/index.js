@@ -24,7 +24,7 @@ export default class BaselineReportPage extends Component {
         current_report_name="baseline"
         report_links={this.props.report_links}
       >
-        <CommonReport report={this.props.report} />
+        <CommonReport report={this.props.report} type="baseline" />
       </ReportPageChrome>
     );
   }

@@ -9,6 +9,7 @@ import {
   formatPercent,
   formatTargetPercent
 } from "../../utils/formatters";
+import { isNil } from "../../utils/helpers";
 import "./funnel_box_layout.scss";
 
 class FunnelBaseBox extends Component {
@@ -36,7 +37,7 @@ class FunnelBaseBox extends Component {
       <div className="funnel-box-layout">
         <div className="funnel-box-layout__left">
           <div className="funnel-box-layout__name">{name}</div>
-          {target && (
+          {!isNil(target) && (
             <div className="funnel-box-layout__target">
               {targetFormatter(target)}
             </div>
@@ -44,7 +45,7 @@ class FunnelBaseBox extends Component {
         </div>
         <div className="funnel-box-layout__right">
           <div className="funnel-box-layout__value">{formatter(value)}</div>
-          {delta && (
+          {!isNil(delta) && (
             <div className="funnel-box-layout__delta">
               <DeltaIndicator
                 delta={delta}
