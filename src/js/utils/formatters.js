@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 
 /**
  * @description Return the BCP language identifier for the current user
@@ -117,12 +118,12 @@ export const formatDate = (value, year = true) => {
 };
 
 /**
- * @description returns in format of "Nov 15, 2010"
+ * @description Format a date using moment.js
+ *
+ * momentFormatDate("2018-12-17", "MMM D, YYYY"); // Dec 17, 2018
  */
-export const formatDate2 = v => {
-  const options = { year: "numeric", month: "short", day: "numeric" };
-  const formatter = Intl.DateTimeFormat("en-US", options);
-  return formatter.format(new Date(v));
+export const momentFormatDate = (v, tokens) => {
+  return moment(v).format(tokens);
 };
 
 /**

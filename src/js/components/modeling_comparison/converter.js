@@ -4,11 +4,12 @@ import {
   formatCurrency,
   formatMultiple,
   formatNumber,
-  formatDate2,
+  momentFormatDate,
   formatPercent
 } from "../../utils/formatters";
 
 const formatCurrencyWithFraction = v => formatCurrency(v, true);
+const formatLeasedDate = v => momentFormatDate(v, "MMM D, YYYY");
 
 export default function(modelingOptions = []) {
   let rowsConfig = [
@@ -23,7 +24,7 @@ export default function(modelingOptions = []) {
     {
       label: "95% Leased Date",
       highlight: true,
-      formatter: formatDate2,
+      formatter: formatLeasedDate,
       path: "dates.end"
     },
     {
