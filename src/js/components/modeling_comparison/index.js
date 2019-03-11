@@ -4,8 +4,8 @@ import cn from "classnames";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
-import convertToTableRows from "./converter";
 import "./modeling_comparison.scss";
+import convertToTableRows from "./converter";
 import Container from "../container";
 
 const getTrProps = (state, row, column) => {
@@ -35,15 +35,15 @@ export function ModelingComparison({ property_name, options }) {
     },
     {
       Header: "Run Rate",
-      accessor: "Run Rate"
+      accessor: "run-rate"
     },
     {
       Header: "Schedule Driven",
-      accessor: "Schedule Driven"
+      accessor: "schedule-driven"
     },
     {
       Header: "Investment Driven",
-      accessor: "Investment Driven"
+      accessor: "investment-driven"
     }
   ];
 

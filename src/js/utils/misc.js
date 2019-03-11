@@ -15,3 +15,7 @@ export const calcDiffInWeeks = (date1, date2) => {
   const diffInMilliSec = new Date(date2) - new Date(date1);
   return Math.ceil(diffInMilliSec / (1000 * 60 * 60 * 24 * 7));
 };
+
+export const convertToKebabCase = (string = "") => {
+  return string.replace(/\s+/g, "-").toLowerCase();
+};

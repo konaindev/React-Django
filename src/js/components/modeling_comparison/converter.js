@@ -1,4 +1,5 @@
 import { _get, calcDiffInWeeks } from "../../utils/misc";
+import { convertToKebabCase } from "../../utils/misc";
 import {
   formatCurrency,
   formatMultiple,
@@ -243,12 +244,14 @@ export default function(modelingOptions = []) {
   ];
 
   for (let report of modelingOptions) {
-    for (let row of rowsConfig) {
-      let value;
-      let formatter = row.formatter;
+    const columnKey = convertToKebabCase(report.name);
 
-      if (row.path) {
-        value = _get(report, row.path, "");
+    for (let row of rowsConfig) {
+      const { path, formatter } = row;
+      let value;
+
+      if (path) {
+        value = _get(report, path, "");
 
         if (formatter) {
           value = formatter(value);
@@ -257,12 +260,12 @@ export default function(modelingOptions = []) {
         value = formatter(report);
       }
 
-      row[report.name] = value;
+      row[columnKey] = value;
     }
   }
 
-  let tableRows = rowsConfig.map(o => {
-    let { path, formatter, ...rest } = o;
+  let tableRows = rowsConfig.map(row => {
+    let { path, formatter, ...rest } = row;
     return rest;
   });
 
