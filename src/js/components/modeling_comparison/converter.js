@@ -1,15 +1,16 @@
-import { _get, calcDiffInWeeks } from "../../utils/misc";
-import { convertToKebabCase } from "../../utils/misc";
+import _get from "lodash/get";
+
+import { convertToKebabCase, calcDiffInWeeks } from "../../utils/misc";
 import {
   formatCurrency,
   formatMultiple,
   formatNumber,
-  momentFormatDate,
+  formatDateWithTokens,
   formatPercent
 } from "../../utils/formatters";
 
 const formatCurrencyWithFraction = v => formatCurrency(v, true);
-const formatLeasedDate = v => momentFormatDate(v, "MMM D, YYYY");
+const formatLeasedDate = v => formatDateWithTokens(v, "MMM D, YYYY");
 
 export default function(modelingOptions = []) {
   let rowsConfig = [

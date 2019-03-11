@@ -1,5 +1,5 @@
 import React from "react";
-import moment from "moment";
+import format from "date-fns/format";
 
 /**
  * @description Return the BCP language identifier for the current user
@@ -118,12 +118,12 @@ export const formatDate = (value, year = true) => {
 };
 
 /**
- * @description Format a date using moment.js
+ * @description Format a date using date-fns library
  *
- * momentFormatDate("2018-12-17", "MMM D, YYYY"); // Dec 17, 2018
+ * formatDateWithTokens("2018-12-17", "MMM D, YYYY"); // Dec 17, 2018
  */
-export const momentFormatDate = (v, tokens) => {
-  return moment(v).format(tokens);
+export const formatDateWithTokens = (v, tokens) => {
+  return format(new Date(v), tokens);
 };
 
 /**
