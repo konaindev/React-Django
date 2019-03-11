@@ -24,7 +24,7 @@ class PerformanceReport(CommonReport):
 
         # Make sure the project perf range starts *at or after* extant data.
         delta_start = end - time_delta
-        return project.get_campaign_periods().filter(start__gte=delta_start).exists()
+        return project.get_campaign_periods().filter(start__lte=delta_start).exists()
 
     @classmethod
     def for_time_delta_from_end(cls, project, time_delta, end=None):
@@ -37,6 +37,7 @@ class PerformanceReport(CommonReport):
         """
         if not cls.has_time_delta_from_end(project, time_delta, end=end):
             return None
+
         all_periods = project.get_periods()
         multiperiod = BareMultiPeriod.from_periods(all_periods)
         end = end or multiperiod.get_end()
