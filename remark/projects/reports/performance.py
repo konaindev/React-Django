@@ -37,7 +37,7 @@ class PerformanceReport(CommonReport):
         """
         if not cls.has_time_delta_from_end(project, time_delta, end=end):
             return None
-        all_periods = project.get_campaign_periods()
+        all_periods = project.get_periods()
         multiperiod = BareMultiPeriod.from_periods(all_periods)
         end = end or multiperiod.get_end()
 
@@ -109,7 +109,7 @@ class PerformanceReport(CommonReport):
         """
         if not cls.has_campaign_to_date(project):
             return None
-        all_periods = project.get_campaign_periods()
+        all_periods = project.get_periods()
         multiperiod = BareMultiPeriod.from_periods(all_periods)
         break_times = [project.get_campaign_start(), project.get_campaign_end()]
         period = multiperiod.get_periods(*break_times)[0]
