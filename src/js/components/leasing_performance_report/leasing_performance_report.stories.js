@@ -199,3 +199,12 @@ const props_performance = {
 storiesOf("LeasingPerformanceReport", module).add("performance", () => (
   <LeasingPerformanceReport {...props_performance} />
 ));
+
+const props_section_items = {
+  sectionItems: <div>"I AM SECTION ITEMS"</div>,
+  ...props_performance
+};
+
+storiesOf("LeasingPerformanceReport", module).add("with section items", () => (
+  <LeasingPerformanceReport {...props_section_items} />
+));

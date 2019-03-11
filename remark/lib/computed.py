@@ -1,7 +1,12 @@
 import functools
 
 
-COMPUTED_VALUE = "__computed_value__"
+class computed_property_descriptor(object):
+    def __init__(self, getter):
+        self.getter = getter
+
+    def __get__(self, obj, cls):
+        return self.getter(obj)
 
 
 def computed_value(f):
@@ -18,8 +23,6 @@ def computed_value(f):
     # implementation into RuntimeErrors; this prevents __getattr__(...)
     # from getting invoked on classes where there's a bug in the underlying
     # computed metric implementation. (Ask me how I learned this!)
-    setattr(f, COMPUTED_VALUE, True)
-
     @functools.wraps(f)
     def wrapped(*args, **kwargs):
         try:
@@ -29,7 +32,7 @@ def computed_value(f):
                 "{} failed with an AttributeError: {}".format(f.__name__, e)
             )
 
-    return property(wrapped)
+    return computed_property_descriptor(wrapped)
 
 
 class ComputedValueMixin:
@@ -37,12 +40,12 @@ class ComputedValueMixin:
     Provides an implementation that exposes all @computed_property on the class.
     """
 
-    def _is_computed_value(self, name):
+    def is_computed_value(self, name):
         """
         Return true if a given attribute name is a computed_property.
         """
         dict_entry = self.__class__.__dict__.get(name)
-        return getattr(getattr(dict_entry, "fget", None), COMPUTED_VALUE, False) is True
+        return isinstance(dict_entry, computed_property_descriptor)
 
     def get_computed_values(self):
         """
@@ -51,5 +54,5 @@ class ComputedValueMixin:
         return {
             name: getattr(self, name)
             for name in dir(self)
-            if self._is_computed_value(name)
+            if self.is_computed_value(name)
         }

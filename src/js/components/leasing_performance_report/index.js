@@ -26,7 +26,10 @@ import "./leasing_performance_report.scss";
  * @classdesc Render the leasing performance section of a full `report`.
  */
 export default class LeasingPerformanceReport extends Component {
-  static propTypes = { report: PropTypes.object.isRequired };
+  static propTypes = {
+    report: PropTypes.object.isRequired,
+    sectionItems: PropTypes.node
+  };
 
   /**
    * @name LeasingPerformanceReport.HeadlineNumbers
@@ -134,18 +137,14 @@ export default class LeasingPerformanceReport extends Component {
    * @description Render the leasing performance report section
    */
   render() {
-    const {
-      report,
-      report: { name, dates }
-    } = this.props;
     return (
       <ReportSection
         name="Leasing Performance"
-        reportInfo={{ name, dates }}
+        sectionItems={this.props.sectionItems}
         smallMarginTop
       >
-        <LeasingPerformanceReport.HeadlineNumbers report={report} />
-        <LeasingPerformanceReport.DetailNumbers report={report} />
+        <LeasingPerformanceReport.HeadlineNumbers report={this.props.report} />
+        <LeasingPerformanceReport.DetailNumbers report={this.props.report} />
       </ReportSection>
     );
   }

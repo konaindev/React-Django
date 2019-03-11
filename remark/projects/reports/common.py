@@ -157,13 +157,16 @@ class CommonReport(ReportBase):
 
     def __init__(self, project, period, previous_period=None, whiskers=None):
         self.project = project
-        self.period = ComputedPeriod(period)
+        self.period = self.build_computed_period(period)
         self.whiskers = whiskers or {}
         if previous_period:
             previous_period = ComputedPeriod(previous_period)
             self.delta = DeltaPeriod(self.period, previous_period)
         else:
             self.delta = None
+
+    def build_computed_period(self, period):
+        return ComputedPeriod(period)
 
     def to_jsonable(self):
         """

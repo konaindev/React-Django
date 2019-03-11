@@ -1,6 +1,17 @@
 from .common import CommonReport
+from .periods import ComputedPeriod
 
 from remark.lib.metrics import BareMultiPeriod
+
+
+HACK_BASELINE_OVERRIDES = {
+    # Meridian SLC -- override computed props
+    "pro_nqcu73oiinomuvn7": {"leased_units": 162},
+    # El Cortez
+    "pro_xujf7pnznggt5dny": {"leased_units": 113, "occupiable_units": 158},
+    # Lincoln Example
+    # "pro_eekgau8mfkbc34iq": {"leased_units": 456},
+}
 
 
 class BaselineReport(CommonReport):
@@ -8,6 +19,10 @@ class BaselineReport(CommonReport):
     Provides Baseline report data (and the ability to ask whether such data
     exists) for a project.
     """
+
+    def build_computed_period(self, period):
+        overrides = HACK_BASELINE_OVERRIDES.get(self.project.public_id)
+        return ComputedPeriod(period, overrides=overrides)
 
     @classmethod
     def has_baseline(cls, project):
@@ -29,3 +44,4 @@ class BaselineReport(CommonReport):
         multiperiod = BareMultiPeriod.from_periods(baseline_periods)
         baseline_period = multiperiod.get_cumulative_period()
         return cls(project, baseline_period)
+

@@ -4,25 +4,34 @@ import PropTypes from "prop-types";
 import ButtonGroup from "../button_group";
 import Container from "../container";
 import CommonReport from "../common_report";
+import ReportDateSpan from "../report_date_span";
 import "./modeling_view.scss";
 
 export class ModelingView extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeReport: 0
+      activeReportIndex: 0
     };
   }
 
-  handleSetActiveReport = index => {
-    this.setState({ activeReport: index });
+  handleSetActiveReportIndex = index => {
+    this.setState({ activeReportIndex: index });
   };
 
-  render() {
-    const { property_name, options } = this.props;
-    const { activeReport } = this.state;
+  getActiveReport() {
+    return this.props.options[this.state.activeReportIndex];
+  }
 
-    const subnavOptions = options.map((report, index) => ({
+  renderActiveDateSpan() {
+    const activeReport = this.getActiveReport();
+    return (
+      <ReportDateSpan name={activeReport.name} dates={activeReport.dates} />
+    );
+  }
+
+  render() {
+    const subnavOptions = this.props.options.map((report, index) => ({
       label: report.name,
       value: index
     }));
@@ -32,13 +41,16 @@ export class ModelingView extends Component {
         <Container>
           <div className="modeling-view__subnav">
             <ButtonGroup
-              onChange={this.handleSetActiveReport}
-              value={activeReport}
+              onChange={this.handleSetActiveReportIndex}
+              value={this.state.activeReportIndex}
               options={subnavOptions}
             />
           </div>
         </Container>
-        <CommonReport report={options[activeReport]} />
+        <CommonReport
+          report={this.getActiveReport()}
+          dateSpan={this.renderActiveDateSpan()}
+        />
       </div>
     );
   }
