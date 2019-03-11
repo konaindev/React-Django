@@ -9,7 +9,7 @@ import {
   createDefaultMapOptions,
   stylesForRegionFill
 } from "./map_settings";
-import { convertDistanceToMeter } from "../../utils/formatters";
+import { convertDistanceToMeter } from "../../utils/misc";
 
 const RadiusTextRotated = ({ radius, units }) => (
   <div className="radius-text-rotated">{`${radius} ${units}`}</div>

@@ -1,6 +1,6 @@
 import _get from "lodash/get";
 
-import { convertToKebabCase, calcDiffInWeeks } from "../../utils/misc";
+import { convertToKebabCase, getDateDiff } from "../../utils/misc";
 import {
   formatCurrency,
   formatMultiple,
@@ -18,7 +18,11 @@ export default function(modelingOptions = []) {
       label: "Duration (Weeks)",
       highlight: true,
       formatter: report => {
-        const duration = calcDiffInWeeks(report.dates.start, report.dates.end);
+        const duration = getDateDiff(
+          report.dates.start,
+          report.dates.end,
+          "week"
+        );
         return `${duration} Weeks`;
       }
     },
@@ -44,7 +48,11 @@ export default function(modelingOptions = []) {
       label: "Weekly Est. Revenue Change",
       highlight: true,
       formatter: report => {
-        const duration = calcDiffInWeeks(report.dates.start, report.dates.end);
+        const duration = getDateDiff(
+          report.dates.start,
+          report.dates.end,
+          "week"
+        );
         const value = _get(report, "investment.total.estimated_revenue_gain");
 
         return duration !== 0 && formatCurrency(value / duration);
