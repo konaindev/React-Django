@@ -4,23 +4,23 @@ import cn from "classnames";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
-import serialize from "./serializer";
+import convertToTableRows from "./converter";
 import "./modeling_comparison.scss";
 import Container from "../container";
 
-const getTrProps = (state, { original: row }, column) => {
+const getTrProps = (state, row, column) => {
   return {
     className: cn({
-      accent: row.highlight,
-      children: row.isChildren
+      accent: row.original.highlight,
+      children: row.original.isChildren
     })
   };
 };
 
 export function ModelingComparison({ property_name, options }) {
-  const { rows } = serialize(options);
+  const tableRows = convertToTableRows(options);
 
-  console.log(rows);
+  console.log(tableRows);
 
   let reactTableColumns = [
     {
@@ -50,10 +50,10 @@ export function ModelingComparison({ property_name, options }) {
   return (
     <Container className="modeling-comparison" style={{ height: "100%" }}>
       <ReactTable
-        data={rows}
+        data={tableRows}
         columns={reactTableColumns}
         className=""
-        defaultPageSize={rows.length}
+        defaultPageSize={tableRows.length}
         showPagination={false}
         sortable={false}
         resizable={false}

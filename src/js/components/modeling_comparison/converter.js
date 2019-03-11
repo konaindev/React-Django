@@ -10,8 +10,6 @@ import {
 const formatCurrencyWithFraction = v => formatCurrency(v, true);
 
 export default function(modelingOptions = []) {
-  let columns = modelingOptions.map(o => o.name);
-
   let rowsConfig = [
     {
       label: "Duration (Weeks)",
@@ -263,10 +261,10 @@ export default function(modelingOptions = []) {
     }
   }
 
-  let rows = rowsConfig.map(o => {
+  let tableRows = rowsConfig.map(o => {
     let { path, formatter, ...rest } = o;
     return rest;
   });
 
-  return { columns, rows };
+  return tableRows;
 }
