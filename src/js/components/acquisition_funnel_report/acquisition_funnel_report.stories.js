@@ -4,6 +4,7 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 
+import Container from "../container";
 import AcquisitionFunnelReport from "./index";
 
 // dummy data
@@ -198,7 +199,9 @@ const props_baseline = {
 };
 
 storiesOf("AcquisitionFunnelReport", module).add("baseline", () => (
-  <AcquisitionFunnelReport {...props_baseline} />
+  <Container>
+    <AcquisitionFunnelReport {...props_baseline} />
+  </Container>
 ));
 
 const props_performance = {
@@ -207,5 +210,7 @@ const props_performance = {
 };
 
 storiesOf("AcquisitionFunnelReport", module).add("performance", () => (
-  <AcquisitionFunnelReport {...props_performance} />
+  <Container>
+    <AcquisitionFunnelReport {...props_performance} />
+  </Container>
 ));
