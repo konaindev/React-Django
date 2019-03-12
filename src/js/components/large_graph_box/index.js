@@ -44,8 +44,10 @@ export class LargeGraphBox extends Component {
         <span className="large-graph-box__name">{name}</span>
         <div className="large-graph-box__content">
           <span className="large-graph-box__value">{formatValue(value)}</span>
-          <div className="large-graph-box__graph-delta">
+          <div className="large-graph-box__graph">
             {series && WhiskerPlot.maybe(series, delta >= 0 ? "up" : "down")}
+          </div>
+          <div className="large-graph-box__delta">
             <DeltaIndicator
               delta={delta}
               indicatorPos="right"
@@ -66,7 +68,7 @@ export const PercentageGraphBox = props => (
   <LargeGraphBox
     formatDelta={formatPercent}
     formatTarget={formatPercent}
-    formatValue={value => formatPercent(value, props.digits || 0)}
+    formatValue={value => formatPercent(value, props.digits || 0, 0)}
     {...props}
   />
 );
