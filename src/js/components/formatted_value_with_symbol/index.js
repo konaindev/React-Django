@@ -8,7 +8,8 @@ import "./formatted_value_with_symbol.scss";
 export function FormattedValueWithSymbol({ value, formatter, symbolType }) {
   const sign = Math.sign(+value) > 0 ? "+" : Math.sign(+value) < 0 ? "-" : "";
   const absValue = Math.abs(+value);
-  const shouldShowSign = ["sign", "multiple"].includes(symbolType);
+  let shouldShowSign =
+    symbolType === "sign" || (symbolType === "multiple" && sign === "-");
 
   return (
     <span className="formatted-value-with-symbol">
