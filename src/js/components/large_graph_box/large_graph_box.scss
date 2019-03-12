@@ -3,52 +3,62 @@
 .large-graph-box {
     display: flex;
     flex-direction: column;
-    padding: $s6;
-    height: 236px;
     align-items: center;
-    justify-content: center;
-    text-align: center;
+    padding: 1.5rem;
+    height: 236px;
 
     &__name {
         color: $white;
-        font-size: $text-xs;
+        font-size: 0.75rem;
         font-weight: 700;
         text-transform: uppercase;
+        letter-spacing: 1px;
+        line-height: 1rem;
+        margin-top: 1.75rem;
     }
 
     &__content {
-        display: flex;
-        align-items: center;
-        justify-content: center;
         text-align: center;
         position: relative;
+        margin: 0.5rem 0;
     }
 
     &__value {
         color: $lightest-ui-text-color;
         font-family: $font-mono;
-        font-size: $text-6xl;
-        font-weight: $weight-hairline;
-        padding: $s2 0;
+        font-size: 3.875rem;
+        font-weight: 100;
+        letter-spacing: -2px;
+        line-height: 5rem;
     }
 
-    &__graph-delta {
+    &__graph {
         position: absolute;
+        top: 0;
+        right: 0;
         left: 100%;
-        margin-left: $s8;
-        width: $s20;
-        background: transparent;
-        overflow: hidden;
-        font-size: $text-xs;
+        width: 4rem;
+        height: 3rem;
+        margin-left: 1.5rem;
+    }
+
+    &__delta {
+        position: absolute;
+        right: 0;
+        bottom: 0.5rem;
+        left: 100%;
+        width: 4rem;
+        font-size: 0.75rem;
+        text-align: center;
+        margin-left: 1.5rem;
     }
 
     &__target,
     &__extra {
-        margin-top: $s1;
         color: $bluegray-light;
         font-weight: 300;
-        font-size: $text-sm;
-        line-height: $text-xl;
+        font-size: 0.875rem;
+        line-height: 1.5rem;
         text-align: center;
     }
 }
