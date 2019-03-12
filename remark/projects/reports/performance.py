@@ -6,6 +6,15 @@ from .common import CommonReport
 from .whiskers import WhiskerSeries
 
 
+HACK_PERFORMANCE_FINAL_REPORT_OVERRIDES = {
+    # El Cortez, perf report starting 2019-03-01
+    ("pro_xujf7pnznggt5dny", "2019-03-01"): {
+        "deltas.property.leasing.rate": 0.0,
+        "deltas.property.occupancy.rate": 0.0,
+    }
+}
+
+
 class PerformanceReport(CommonReport):
     """
     Provides Performance Report data for both named and arbitrary timespans.
@@ -24,7 +33,7 @@ class PerformanceReport(CommonReport):
 
         # Make sure the project perf range starts *at or after* extant data.
         delta_start = end - time_delta
-        return project.get_campaign_periods().filter(start__gte=delta_start).exists()
+        return project.get_campaign_periods().filter(start__lte=delta_start).exists()
 
     @classmethod
     def for_time_delta_from_end(cls, project, time_delta, end=None):
@@ -37,7 +46,8 @@ class PerformanceReport(CommonReport):
         """
         if not cls.has_time_delta_from_end(project, time_delta, end=end):
             return None
-        all_periods = project.get_campaign_periods()
+
+        all_periods = project.get_periods()
         multiperiod = BareMultiPeriod.from_periods(all_periods)
         end = end or multiperiod.get_end()
 
@@ -109,7 +119,7 @@ class PerformanceReport(CommonReport):
         """
         if not cls.has_campaign_to_date(project):
             return None
-        all_periods = project.get_campaign_periods()
+        all_periods = project.get_periods()
         multiperiod = BareMultiPeriod.from_periods(all_periods)
         break_times = [project.get_campaign_start(), project.get_campaign_end()]
         period = multiperiod.get_periods(*break_times)[0]
@@ -117,3 +127,17 @@ class PerformanceReport(CommonReport):
             project, multiperiod, break_times[-1]
         )
         return cls(project, period, previous_period=None, whiskers=whiskers)
+
+    def to_jsonable(self):
+        report = super().to_jsonable()
+
+        override_key = (self.project.public_id, report["dates"]["start"].isoformat())
+        overrides = HACK_PERFORMANCE_FINAL_REPORT_OVERRIDES.get(override_key, {})
+        for o_path, o_value in overrides.items():
+            o_path_parts = o_path.split(".")
+            o_current = report
+            for o_path_part in o_path_parts[:-1]:
+                o_current = o_current[o_path_part]
+            o_current[o_path_parts[-1]] = o_value
+
+        return report

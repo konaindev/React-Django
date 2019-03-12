@@ -35,6 +35,7 @@ export default class PerformanceReportPage extends Component {
         <CommonReport
           report={this.props.report}
           dateSpan={this.renderDateSpan()}
+          type="performance"
         />
       </ReportPageChrome>
     );

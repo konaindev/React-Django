@@ -74,7 +74,7 @@ class ComputedPeriod(ComputedValueMixin):
         """The percentage of lease renewals as a total of leases due to expire."""
         # XXX I'm utterly unconvinced that this is a sensible metric, but it is
         # specified in Sprint 1. -Dave
-        return div_or_0(self.lease_renewal_notices, self.leases_due_to_expire)
+        return div_or_0(self.lease_renewal_notices, self.resident_decisions)
 
     @computed_value
     def lease_cd_rate(self):
@@ -104,7 +104,7 @@ class ComputedPeriod(ComputedValueMixin):
     def target_renewal_rate(self):
         """The target number of leased units we'd like to achieve."""
         return div_or_none(
-            self.target_lease_renewal_notices, self.target_leases_due_to_expire
+            self.target_lease_renewal_notices, self.target_resident_decisions
         )
 
     @computed_value

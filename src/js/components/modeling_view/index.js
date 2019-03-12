@@ -50,6 +50,7 @@ export class ModelingView extends Component {
         <CommonReport
           report={this.getActiveReport()}
           dateSpan={this.renderActiveDateSpan()}
+          type="baseline"
         />
       </div>
     );

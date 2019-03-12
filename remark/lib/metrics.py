@@ -218,8 +218,22 @@ class TimeValueCollection:
         """Return first item in collection, or None if collection is empty."""
         return self[0] if len(self) > 0 else None
 
+    def first_non_null(self):
+        """Return first non-null value in collection, or first if all are None."""
+        for i in range(0, len(self)):
+            if self[i].value is not None:
+                return self[i]
+        return self[0] if len(self) > 0 else None
+
     def last(self):
         """Return last item in collection, or None if collection is empty."""
+        return self[-1] if len(self) > 0 else None
+
+    def last_non_null(self):
+        """Return first non-null value in collection, or last if all are None."""
+        for i in range(len(self), 0, -1):
+            if self[i - 1].value is not None:
+                return self[i - 1]
         return self[-1] if len(self) > 0 else None
 
     def order_by_start(self):
@@ -674,11 +688,15 @@ class Metric:
         # the timespan.
         if self.behavior.is_merge_earliest():
             time_value = (
-                time_value_collection.filter(start__lte=start).order_by_start().last()
+                time_value_collection.filter(start__lte=start)
+                .order_by_start()
+                .last_non_null()
             )
         else:
             time_value = (
-                time_value_collection.filter(start__gte=end).order_by_start().first()
+                time_value_collection.filter(start__gte=end)
+                .order_by_start()
+                .first_non_null()
             )
         return time_value.value if time_value else None
 
