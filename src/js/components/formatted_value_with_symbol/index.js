@@ -24,7 +24,7 @@ export function FormattedValueWithSymbol({ value, formatter, symbolType }) {
 FormattedValueWithSymbol.propTypes = {
   value: PropTypes.any.isRequired,
   formatter: PropTypes.func,
-  symbolType: PropTypes.oneOf(["multiple", "sign", "none", undefined])
+  symbolType: PropTypes.oneOf(["multiple", "sign"])
 };
 
 FormattedValueWithSymbol.defaultProps = {
