@@ -4,12 +4,12 @@ import PropTypes from "prop-types";
 import DeltaIndicator from "../delta_indicator";
 import Panel from "../panel";
 import WhiskerPlot from "../whisker_plot";
+import { LargeBoxLayout } from "../large_box_layout";
 import {
   formatCurrencyShorthand,
   targetFormatter,
   formatPercent
 } from "../../utils/formatters";
-import "./large_graph_box.scss";
 
 export class LargeGraphBox extends Component {
   static propTypes = {
@@ -39,25 +39,34 @@ export class LargeGraphBox extends Component {
       formatValue,
       formatTarget
     } = this.props;
-    return (
-      <Panel className="large-graph-box">
-        <span className="large-graph-box__name">{name}</span>
-        <div className="large-graph-box__content">
-          <span className="large-graph-box__value">{formatValue(value)}</span>
-          <div className="large-graph-box__graph-delta">
-            {series && WhiskerPlot.maybe(series, delta >= 0 ? "up" : "down")}
+
+    const graphDeltaBox = (
+      <>
+        {series && (
+          <div className="large-box__content-graph">
+            {WhiskerPlot.maybe(series, delta >= 0 ? "up" : "down")}
+          </div>
+        )}
+        {delta && (
+          <div className="large-box__content-delta">
             <DeltaIndicator
               delta={delta}
               indicatorPos="right"
               formatter={formatDelta}
             />
           </div>
-        </div>
-        <div className="large-graph-box__extra">{extraContent}</div>
-        <div className="large-graph-box__target">
-          {targetFormatter(formatTarget)(target)}
-        </div>
-      </Panel>
+        )}
+      </>
+    );
+
+    return (
+      <LargeBoxLayout
+        name={name}
+        content={formatValue(value)}
+        detail={extraContent}
+        detail2={targetFormatter(formatTarget)(target)}
+        innerBox={graphDeltaBox}
+      />
     );
   }
 }
@@ -66,7 +75,7 @@ export const PercentageGraphBox = props => (
   <LargeGraphBox
     formatDelta={formatPercent}
     formatTarget={formatPercent}
-    formatValue={value => formatPercent(value, props.digits || 0)}
+    formatValue={value => formatPercent(value, props.digits || 0, 0)}
     {...props}
   />
 );

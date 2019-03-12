@@ -7,7 +7,6 @@ import BoxTable from "../box_table";
 import DeltaLayout from "../delta_layout";
 import ReportSection from "../report_section";
 import WhiskerPlot from "../whisker_plot";
-import { LargeBoxLayout } from "../large_box_layout";
 import { SmallNumberBox } from "../small_box_layout";
 
 import {
