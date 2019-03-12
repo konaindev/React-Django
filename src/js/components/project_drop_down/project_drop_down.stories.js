@@ -6,7 +6,7 @@ import { linkTo } from "@storybook/addon-links";
 
 import ProjectDropDown from "./index";
 
-const project = { name: "Porland Multi Family", public_id: "pro_example" };
+const project = { name: "Portland Multi Family", public_id: "pro_example" };
 
 const props = { project };
 

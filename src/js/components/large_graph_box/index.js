@@ -7,6 +7,7 @@ import WhiskerPlot from "../whisker_plot";
 import { LargeBoxLayout } from "../large_box_layout";
 import {
   formatCurrencyShorthand,
+  formatDeltaPercent,
   targetFormatter,
   formatPercent
 } from "../../utils/formatters";
@@ -42,12 +43,12 @@ export class LargeGraphBox extends Component {
 
     const graphDeltaBox = (
       <>
-        {series && (
+        {series != null && (
           <div className="large-box__content-graph">
             {WhiskerPlot.maybe(series, delta >= 0 ? "up" : "down")}
           </div>
         )}
-        {delta && (
+        {delta != null && (
           <div className="large-box__content-delta">
             <DeltaIndicator
               delta={delta}
@@ -73,7 +74,7 @@ export class LargeGraphBox extends Component {
 
 export const PercentageGraphBox = props => (
   <LargeGraphBox
-    formatDelta={formatPercent}
+    formatDelta={formatDeltaPercent}
     formatTarget={formatPercent}
     formatValue={value => formatPercent(value, props.digits || 0, 0)}
     {...props}

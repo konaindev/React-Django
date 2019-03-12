@@ -4,7 +4,6 @@ import cn from "classnames";
 
 import DeltaIndicator from "../delta_indicator";
 import FormattedValueWithSymbol from "../formatted_value_with_symbol";
-import isNil from "lodash/isNil";
 import { formatNumber } from "../../utils/formatters";
 import "./delta_layout.scss";
 
@@ -69,7 +68,7 @@ export default class DeltaLayout extends Component {
       <span className="delta-layout">
         {valueContent}
 
-        {!isNil(delta) && (
+        {delta != null && (
           <span className="delta-layout__section">
             <DeltaIndicator
               delta={delta}
