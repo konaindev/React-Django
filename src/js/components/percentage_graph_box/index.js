@@ -9,13 +9,13 @@ import "./percentage_graph_box.scss";
 
 export class PercentageGraphBox extends Component {
   static propTypes = {
-    delta: PropTypes.number.isRequired,
+    delta: PropTypes.number,
     extraContent: PropTypes.node,
     name: PropTypes.string.isRequired,
     series: PropTypes.arrayOf(
       PropTypes.oneOfType([PropTypes.number, PropTypes.string])
     ),
-    target: PropTypes.number.isRequired,
+    target: PropTypes.number,
     value: PropTypes.number.isRequired,
     digits: PropTypes.number
   };

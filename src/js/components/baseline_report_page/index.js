@@ -32,6 +32,7 @@ export default class BaselineReportPage extends Component {
         <CommonReport
           report={this.props.report}
           dateSpan={this.renderDateSpan()}
+          type="baseline"
         />
       </ReportPageChrome>
     );

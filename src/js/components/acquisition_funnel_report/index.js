@@ -19,12 +19,14 @@ import {
   formatNumber,
   formatPercent,
   formatDeltaPercent,
-  formatTargetPercent
+  targetFormatter
 } from "../../utils/formatters.js";
 
 import "./acquisition_funnel_report.scss";
 
-export const format4WeekAverage = averageValue =>
+const formatTargetNumber = targetFormatter(formatNumber);
+
+const format4WeekAverage = averageValue =>
   averageValue == null ? (
     <span>&nbsp;</span>
   ) : (
@@ -37,6 +39,10 @@ export const format4WeekAverage = averageValue =>
  * @classdesc Render the acquisition funnel table
  */
 export default class AcquisitionFunnelReport extends Component {
+  static propTypes = {
+    report: PropTypes.object.isRequired,
+    type: PropTypes.oneOf(["baseline", "performance"]).isRequired
+  };
   /**
    * @name AcquisitionFunnelReport.HeadlineNumbers
    * @description Component that renders headline acquisition funnel numbers
@@ -97,10 +103,9 @@ export default class AcquisitionFunnelReport extends Component {
     <div className="acquisition-funnel__column-content">{children}</div>
   );
 
-  static FunnelContent = ({ report: r }) => {
-    const targetFormatter = r.targets
-      ? formatTargetPercent
-      : format4WeekAverage;
+  static FunnelContent = ({ report: r, type }) => {
+    const targetFormatter =
+      type === "performance" ? formatTargetNumber : format4WeekAverage;
     return (
       <AcquisitionFunnelReport.FunnelRow>
         <AcquisitionFunnelReport.FunnelColumn>
@@ -110,8 +115,9 @@ export default class AcquisitionFunnelReport extends Component {
               name="Volume of USV"
               value={r.funnel.volumes.usv}
               target={
-                r.targets?.funnel?.volumes?.usv ||
-                r.four_week_funnel_averages?.usv
+                type === "performance"
+                  ? r.targets?.funnel?.volumes?.usv
+                  : r.four_week_funnel_averages?.usv
               }
               delta={r.deltas?.funnel?.volumes?.usv}
               targetFormatter={targetFormatter}
@@ -120,8 +126,9 @@ export default class AcquisitionFunnelReport extends Component {
               name="Volume of INQ"
               value={r.funnel.volumes.inq}
               target={
-                r.targets?.funnel?.volumes?.inq ||
-                r.four_week_funnel_averages?.inq
+                type === "performance"
+                  ? r.targets?.funnel?.volumes?.inq
+                  : r.four_week_funnel_averages?.inq
               }
               delta={r.deltas?.funnel?.volumes?.inq}
               targetFormatter={targetFormatter}
@@ -130,8 +137,9 @@ export default class AcquisitionFunnelReport extends Component {
               name="Volume of TOU"
               value={r.funnel.volumes.tou}
               target={
-                r.targets?.funnel?.volumes?.tou ||
-                r.four_week_funnel_averages?.tou
+                type === "performance"
+                  ? r.targets?.funnel?.volumes?.tou
+                  : r.four_week_funnel_averages?.tou
               }
               delta={r.deltas?.funnel?.volumes?.tou}
               targetFormatter={targetFormatter}
@@ -140,8 +148,9 @@ export default class AcquisitionFunnelReport extends Component {
               name="Volume of APP"
               value={r.funnel.volumes.app}
               target={
-                r.targets?.funnel?.volumes?.app ||
-                r.four_week_funnel_averages?.app
+                type === "performance"
+                  ? r.targets?.funnel?.volumes?.app
+                  : r.four_week_funnel_averages?.app
               }
               delta={r.deltas?.funnel?.volumes?.app}
               targetFormatter={targetFormatter}
@@ -150,8 +159,9 @@ export default class AcquisitionFunnelReport extends Component {
               name="Volume of EXE"
               value={r.funnel.volumes.exe}
               target={
-                r.targets?.funnel?.volumes?.exe ||
-                r.four_week_funnel_averages?.exe
+                type === "performance"
+                  ? r.targets?.funnel?.volumes?.exe
+                  : r.four_week_funnel_averages?.exe
               }
               delta={r.deltas?.funnel?.volumes?.exe}
               targetFormatter={targetFormatter}
@@ -229,13 +239,13 @@ export default class AcquisitionFunnelReport extends Component {
   };
 
   render() {
-    const { report } = this.props;
+    const { report, type } = this.props;
 
     return (
       <ReportSection name="Acquisition Funnel">
         <AcquisitionFunnelReport.HeadlineNumbers report={report} />
         <AcquisitionFunnelReport.FunnelTable>
-          <AcquisitionFunnelReport.FunnelContent report={report} />
+          <AcquisitionFunnelReport.FunnelContent report={report} type={type} />
         </AcquisitionFunnelReport.FunnelTable>
       </ReportSection>
     );

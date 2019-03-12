@@ -193,6 +193,7 @@ const PERFORMANCE_REPORT = {
 };
 
 const props_baseline = {
+  type: "baseline",
   report: BASELINE_REPORT
 };
 
@@ -201,9 +202,10 @@ storiesOf("AcquisitionFunnelReport", module).add("baseline", () => (
 ));
 
 const props_performance = {
+  type: "performance",
   report: PERFORMANCE_REPORT
 };
 
-storiesOf("AcquisitionFunnelReport", module).add("default", () => (
+storiesOf("AcquisitionFunnelReport", module).add("performance", () => (
   <AcquisitionFunnelReport {...props_performance} />
 ));
