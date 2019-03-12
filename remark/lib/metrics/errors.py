@@ -1,0 +1,3 @@
+class InvalidMetricOperation(Exception):
+    pass
+
