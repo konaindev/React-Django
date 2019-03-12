@@ -6,7 +6,6 @@ import BoxColumn from "../box_column";
 import ReportSection from "../report_section";
 import Panel from "../panel";
 import WhiskerPlot from "../whisker_plot";
-import { LargeDetailPercentBox, LargePercentBox } from "../large_box_layout";
 import {
   FunnelNumberBox,
   FunnelPercentBox,
