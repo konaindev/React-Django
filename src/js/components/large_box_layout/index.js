@@ -58,9 +58,10 @@ export class LargeBoxLayout extends Component {
 
 // Define LargeBoxLayouts that take values and targets of various types.
 
-// @TODO: replace references of LargeMultipleBox with LargeNumberBox
-// just pass symbolType="multiple"
-export const LargeMultipleBox = withFormatters(LargeBoxLayout, formatNumber);
+// use this in case NOT to color "x" with blue
+// otherwise use LargeNumberBox with "symbolType" prop
+export const LargeMultipleBox = withFormatters(LargeBoxLayout, formatMultiple);
+
 export const LargePercentBox = withFormatters(
   LargeBoxLayout,
   formatPercent,

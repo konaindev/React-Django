@@ -9,10 +9,7 @@ import {
   VictoryAxis
 } from "victory";
 
-import {
-  LargeCurrencyShorthandBox,
-  LargeMultipleBox
-} from "../large_box_layout";
+import { LargeCurrencyShorthandBox, LargeNumberBox } from "../large_box_layout";
 import BoxRow from "../box_row";
 import BoxColumn from "../box_column";
 import ReportSection from "../report_section";
@@ -59,7 +56,7 @@ export default class CampaignInvestmentReport extends Component {
           target={r.targets?.investment?.total?.estimated_revenue_gain}
           symbolType="sign"
         />
-        <LargeMultipleBox
+        <LargeNumberBox
           name={
             <>
               Campaign Return on <br />
@@ -177,7 +174,7 @@ export default class CampaignInvestmentReport extends Component {
           target={r.targets?.investment?.acquisition?.estimated_revenue_gain}
           symbolType="sign"
         />
-        <SmallMultipleBox
+        <SmallNumberBox
           name="Acquisition ROMI"
           value={r.investment.acquisition.romi}
           target={r.targets?.investment?.acquisition?.romi}
@@ -236,7 +233,7 @@ export default class CampaignInvestmentReport extends Component {
           target={r.targets?.investment?.retention?.estimated_revenue_gain}
           symbolType="sign"
         />
-        <SmallMultipleBox
+        <SmallNumberBox
           name="Retention ROMI"
           value={r.investment.retention.romi}
           target={r.targets?.investment?.retention?.romi}
