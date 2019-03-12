@@ -4,8 +4,8 @@ import cn from "classnames";
 
 import DeltaIndicator from "../delta_indicator";
 import FormattedValueWithSymbol from "../formatted_value_with_symbol";
+import isNil from "lodash/isNil";
 import { formatNumber } from "../../utils/formatters";
-import { isNil } from "../../utils/helpers";
 import "./delta_layout.scss";
 
 /**
@@ -21,8 +21,9 @@ export default class DeltaLayout extends Component {
   static DIRECTION_DOWN = -1;
 
   static propTypes = {
-    value: PropTypes.any.isRequired,
+    valueContent: PropTypes.node.isRequired,
     delta: PropTypes.any,
+    formatter: PropTypes.func,
     direction: PropTypes.oneOf([
       DeltaLayout.DIRECTION_UP,
       DeltaLayout.DIRECTION_FLAT,
@@ -63,7 +64,7 @@ export default class DeltaLayout extends Component {
   };
 
   render() {
-    const { delta, direction, valueContent } = this.props;
+    const { delta, direction, formatter, valueContent } = this.props;
     return (
       <span className="delta-layout">
         {valueContent}
@@ -73,7 +74,7 @@ export default class DeltaLayout extends Component {
             <DeltaIndicator
               delta={delta}
               direction={direction}
-              formatter={formatNumber}
+              formatter={formatter}
               indicatorPos="right"
             />
           </span>

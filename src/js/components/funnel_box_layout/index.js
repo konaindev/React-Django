@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import DeltaIndicator from "../delta_indicator";
+import isNil from "lodash/isNil";
 import {
   formatCurrency,
   formatDeltaPercent,
@@ -9,7 +10,6 @@ import {
   formatPercent,
   formatTargetPercent
 } from "../../utils/formatters";
-import { isNil } from "../../utils/helpers";
 import "./funnel_box_layout.scss";
 
 class FunnelBaseBox extends Component {
