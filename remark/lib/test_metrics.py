@@ -58,16 +58,11 @@ class DispositionTestCase(TestCase):
         self.assertFalse(behavior.is_interval())
 
     def test_disposition_2(self):
-        behavior = Behavior.POINT_IN_TIME_LATEST_KEEP
-        self.assertTrue(behavior.is_point_in_time())
-        self.assertFalse(behavior.is_interval())
-
-    def test_disposition_3(self):
         behavior = Behavior.INTERVAL_SUM_AMORTIZE
         self.assertFalse(behavior.is_point_in_time())
         self.assertTrue(behavior.is_interval())
 
-    def test_disposition_4(self):
+    def test_disposition_3(self):
         behavior = Behavior.INTERVAL_AVERAGE_KEEP
         self.assertFalse(behavior.is_point_in_time())
         self.assertTrue(behavior.is_interval())
@@ -79,28 +74,18 @@ class MergeMethodTestCase(TestCase):
     def test_merge_method_1(self):
         behavior = Behavior.POINT_IN_TIME_EARLIEST_KEEP
         self.assertTrue(behavior.is_merge_earliest())
-        self.assertFalse(behavior.is_merge_latest())
         self.assertFalse(behavior.is_merge_sum())
         self.assertFalse(behavior.is_merge_average())
 
     def test_merge_method_2(self):
-        behavior = Behavior.POINT_IN_TIME_LATEST_KEEP
-        self.assertFalse(behavior.is_merge_earliest())
-        self.assertTrue(behavior.is_merge_latest())
-        self.assertFalse(behavior.is_merge_sum())
-        self.assertFalse(behavior.is_merge_average())
-
-    def test_merge_method_3(self):
         behavior = Behavior.INTERVAL_SUM_AMORTIZE
         self.assertFalse(behavior.is_merge_earliest())
-        self.assertFalse(behavior.is_merge_latest())
         self.assertTrue(behavior.is_merge_sum())
         self.assertFalse(behavior.is_merge_average())
 
-    def test_merge_method_4(self):
+    def test_merge_method_3(self):
         behavior = Behavior.INTERVAL_AVERAGE_KEEP
         self.assertFalse(behavior.is_merge_earliest())
-        self.assertFalse(behavior.is_merge_latest())
         self.assertFalse(behavior.is_merge_sum())
         self.assertTrue(behavior.is_merge_average())
 
@@ -114,16 +99,11 @@ class SeparateMethodTestCase(TestCase):
         self.assertFalse(behavior.is_separate_amortize())
 
     def test_separate_method_2(self):
-        behavior = Behavior.POINT_IN_TIME_LATEST_KEEP
-        self.assertTrue(behavior.is_separate_keep())
-        self.assertFalse(behavior.is_separate_amortize())
-
-    def test_separate_method_3(self):
         behavior = Behavior.INTERVAL_SUM_AMORTIZE
         self.assertFalse(behavior.is_separate_keep())
         self.assertTrue(behavior.is_separate_amortize())
 
-    def test_separate_method_4(self):
+    def test_separate_method_3(self):
         behavior = Behavior.INTERVAL_AVERAGE_KEEP
         self.assertTrue(behavior.is_separate_keep())
         self.assertFalse(behavior.is_separate_amortize())
@@ -237,41 +217,6 @@ class MergeEarliestTestCase(TestCase):
 
         self.assertEqual(value.start, DATE_A)
         self.assertEqual(value.end, DATE_A)
-        self.assertEqual(value.value, None)
-
-
-class MergeLatestTestCase(TestCase):
-    """Test the implementation of MergeMethod.LATEST under various conditions."""
-
-    def test_integer(self):
-        metric = Metric(Behavior.POINT_IN_TIME_LATEST_KEEP)
-        v1 = TimeValue(DATE_A, DATE_A, 1)
-        v2 = TimeValue(DATE_B, DATE_B, 2)
-        value = metric.merge(v1, v2)
-
-        self.assertEqual(value.start, DATE_B)
-        self.assertEqual(value.end, DATE_B)
-        self.assertEqual(value.value, 2)
-
-    def test_integer_many(self):
-        metric = Metric(Behavior.POINT_IN_TIME_LATEST_KEEP)
-        v1 = TimeValue(DATE_A, DATE_A, 1)
-        v2 = TimeValue(DATE_B, DATE_B, 2)
-        v3 = TimeValue(DATE_C, DATE_C, 42)
-        value = metric.merge(v1, v2, v3)
-
-        self.assertEqual(value.start, DATE_C)
-        self.assertEqual(value.end, DATE_C)
-        self.assertEqual(value.value, 42)
-
-    def test_integer_none(self):
-        metric = Metric(Behavior.POINT_IN_TIME_LATEST_KEEP)
-        v1 = TimeValue(DATE_A, DATE_A, 1)
-        v2 = TimeValue(DATE_B, DATE_B, None)
-        value = metric.merge(v1, v2)
-
-        self.assertEqual(value.start, DATE_B)
-        self.assertEqual(value.end, DATE_B)
         self.assertEqual(value.value, None)
 
 
@@ -415,25 +360,6 @@ class UnifyTestCase(TestCase):
 
     def test_pit_earliest_no_values(self):
         metric = Metric(Behavior.POINT_IN_TIME_EARLIEST_KEEP)
-        value = metric.unify(DATE_A, DATE_C)
-        self.assertEqual(value, None)
-
-    def test_pit_latest_1(self):
-        metric = Metric(Behavior.POINT_IN_TIME_LATEST_KEEP)
-        v1 = TimeValue(DATE_B, DATE_B, 1)
-        v2 = TimeValue(DATE_C, DATE_C, 2)
-        value = metric.unify(DATE_BC, DATE_CD, v1, v2)
-        self.assertEqual(value, None)
-
-    def test_pit_latest_2(self):
-        metric = Metric(Behavior.POINT_IN_TIME_LATEST_KEEP)
-        v1 = TimeValue(DATE_B, DATE_B, 1)
-        v2 = TimeValue(DATE_C, DATE_C, 2)
-        value = metric.unify(DATE_A, DATE_BC, v1, v2)
-        self.assertEqual(value, 2)
-
-    def test_pit_latest_no_values(self):
-        metric = Metric(Behavior.POINT_IN_TIME_LATEST_KEEP)
         value = metric.unify(DATE_A, DATE_C)
         self.assertEqual(value, None)
 
@@ -750,21 +676,15 @@ class MultiPeriodTestCase(TestCase):
         self.v_e2 = TimeValue(DATE_C, DATE_C, 2)
         self.v_e3 = TimeValue(DATE_E, DATE_E, 3)
 
-        self.m_l = Metric(Behavior.POINT_IN_TIME_LATEST_KEEP)
-        self.v_l1 = TimeValue(DATE_A, DATE_A, 10)
-        self.v_l2 = TimeValue(DATE_C, DATE_C, 20)
-        self.v_l3 = TimeValue(DATE_E, DATE_E, 30)
-
         self.m_i = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
         self.v_i1 = TimeValue(DATE_A, DATE_B, 100)
         self.v_i2 = TimeValue(DATE_B, DATE_C, 200)
         self.v_i3 = TimeValue(DATE_C, DATE_D, 300)
         self.v_i4 = TimeValue(DATE_D, DATE_E, 400)
 
-        self.metrics = {"m_e": self.m_e, "m_l": self.m_l, "m_i": self.m_i}
+        self.metrics = {"m_e": self.m_e, "m_i": self.m_i}
         self.values = {
             "m_e": [self.v_e1, self.v_e2, self.v_e3],
-            "m_l": [self.v_l1, self.v_l2, self.v_l3],
             "m_i": [self.v_i1, self.v_i2, self.v_i3, self.v_i4],
         }
 
@@ -788,7 +708,6 @@ class MultiPeriodTestCase(TestCase):
         self.assertEqual(periods[0].get_start(), self.start)
         self.assertEqual(periods[0].get_end(), self.end)
         self.assertEqual(periods[0].get_value('m_e'), 1)
-        self.assertEqual(periods[0].get_value('m_l'), 30)
         self.assertEqual(periods[0].get_value('m_i'), 728)
 
     def test_get_periods_multiple(self):
@@ -798,17 +717,14 @@ class MultiPeriodTestCase(TestCase):
         self.assertEqual(periods[0].get_start(), DATE_AB)
         self.assertEqual(periods[0].get_end(), DATE_BC)
         self.assertEqual(periods[0].get_value('m_e'), 1)
-        self.assertEqual(periods[0].get_value('m_l'), 20)
         self.assertEqual(periods[0].get_value('m_i'), 171)
         self.assertEqual(periods[1].get_start(), DATE_BC)
         self.assertEqual(periods[1].get_end(), DATE_CD)
         self.assertEqual(periods[1].get_value('m_e'), 1)
-        self.assertEqual(periods[1].get_value('m_l'), 30)
         self.assertEqual(periods[1].get_value('m_i'), 257)
         self.assertEqual(periods[2].get_start(), DATE_CD)
         self.assertEqual(periods[2].get_end(), DATE_DE)
         self.assertEqual(periods[2].get_value('m_e'), 2)
-        self.assertEqual(periods[2].get_value('m_l'), 30)
         self.assertEqual(periods[2].get_value('m_i'), 300)
 
     def test_get_delta_periods(self):

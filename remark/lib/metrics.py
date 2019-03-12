@@ -43,15 +43,12 @@ class Behavior(Enum):
     """
 
     POINT_IN_TIME_EARLIEST_KEEP = auto()
-    POINT_IN_TIME_LATEST_KEEP = auto()
     INTERVAL_SUM_AMORTIZE = auto()
     INTERVAL_AVERAGE_KEEP = auto()
 
     def describe(self):
         if self == self.POINT_IN_TIME_EARLIEST_KEEP:
             return "pit/early"
-        elif self == self.POINT_IN_TIME_LATEST_KEEP:
-            return "pit/late"
         elif self == self.INTERVAL_SUM_AMORTIZE:
             return "i/sum/amort"
         elif self == self.INTERVAL_AVERAGE_KEEP:
@@ -61,10 +58,7 @@ class Behavior(Enum):
         """
         Return True if the value should be interpreted as meaningful at a specific point in time.
         """
-        return (
-            self == self.POINT_IN_TIME_EARLIEST_KEEP
-            or self == self.POINT_IN_TIME_LATEST_KEEP
-        )
+        return self == self.POINT_IN_TIME_EARLIEST_KEEP
 
     def is_interval(self):
         """
@@ -77,12 +71,6 @@ class Behavior(Enum):
         Return True if, when two values are merged, the earliest should win.
         """
         return self == self.POINT_IN_TIME_EARLIEST_KEEP
-
-    def is_merge_latest(self):
-        """
-        Return True if, when two values are merged, the latest should win.
-        """
-        return self == self.POINT_IN_TIME_LATEST_KEEP
 
     def is_merge_sum(self):
         """
@@ -494,8 +482,6 @@ class Metric:
 
         if self.behavior.is_merge_earliest():
             result_time_value = self._merge_earliest(time_values)
-        elif self.behavior.is_merge_latest():
-            result_time_value = self._merge_latest(time_values)
         elif self.behavior.is_merge_sum():
             result_time_value = self._merge_sum(time_values)
         elif self.behavior.is_merge_average():
@@ -508,12 +494,6 @@ class Metric:
         Merge two values by choosing the earliest. (That's easy!)
         """
         return TimeValue(*time_values[0])
-
-    def _merge_latest(self, time_values):
-        """
-        Merge two values by choosing the latest. (Also easy!)
-        """
-        return TimeValue(*time_values[-1])
 
     def _merge_sum(self, time_values):
         """
@@ -684,20 +664,12 @@ class Metric:
 
     def _unify_pit(self, start, end, time_value_collection):
         # Under unification, the PIT TimeValue is the value that occurs
-        # at or immediately before (EARLIEST), or immediately after (LATEST)
-        # the timespan.
-        if self.behavior.is_merge_earliest():
-            time_value = (
-                time_value_collection.filter(start__lte=start)
-                .order_by_start()
-                .last_non_null()
-            )
-        else:
-            time_value = (
-                time_value_collection.filter(start__gte=end)
-                .order_by_start()
-                .first_non_null()
-            )
+        # at or immediately before the timespan.
+        time_value = (
+            time_value_collection.filter(start__lte=start)
+            .order_by_start()
+            .last_non_null()
+        )
         return time_value.value if time_value else None
 
     def _unify_interval(self, start, end, time_value_collection):
