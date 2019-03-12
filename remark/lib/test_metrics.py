@@ -8,10 +8,10 @@ from django.test import TestCase
 from .metrics import (
     BareMultiPeriod,
     BarePeriod,
-    Behavior,
     DateSequence,
     InvalidMetricOperation,
-    Metric,
+    PointMetric,
+    SumIntervalMetric,
     TimeValue,
     TimeValueCollection,
     Weekday
@@ -49,53 +49,12 @@ class AssertContainsMixin:
         self.assertContains(collection_list, items)
 
 
-class DispositionTestCase(TestCase):
-    """Test mapping of Behavior to time disposition"""
-
-    def test_disposition_1(self):
-        behavior = Behavior.POINT_IN_TIME_EARLIEST_KEEP
-        self.assertTrue(behavior.is_point_in_time())
-        self.assertFalse(behavior.is_interval())
-
-    def test_disposition_2(self):
-        behavior = Behavior.INTERVAL_SUM_AMORTIZE
-        self.assertFalse(behavior.is_point_in_time())
-        self.assertTrue(behavior.is_interval())
-
-
-class MergeMethodTestCase(TestCase):
-    """Test mapping of Behavior to merge method"""
-
-    def test_merge_method_1(self):
-        behavior = Behavior.POINT_IN_TIME_EARLIEST_KEEP
-        self.assertTrue(behavior.is_merge_earliest())
-        self.assertFalse(behavior.is_merge_sum())
-
-    def test_merge_method_2(self):
-        behavior = Behavior.INTERVAL_SUM_AMORTIZE
-        self.assertFalse(behavior.is_merge_earliest())
-        self.assertTrue(behavior.is_merge_sum())
-
-
-class SeparateMethodTestCase(TestCase):
-    """Test mapping of Behavior to separate method"""
-
-    def test_separate_method_1(self):
-        behavior = Behavior.POINT_IN_TIME_EARLIEST_KEEP
-        self.assertTrue(behavior.is_separate_keep())
-        self.assertFalse(behavior.is_separate_amortize())
-
-    def test_separate_method_2(self):
-        behavior = Behavior.INTERVAL_SUM_AMORTIZE
-        self.assertFalse(behavior.is_separate_keep())
-        self.assertTrue(behavior.is_separate_amortize())
-
 
 class SeparateKeepTestCase(TestCase):
     """Test the implementation of separate_keep under various conditions."""
 
     def test_separate_keep(self):
-        metric = Metric(Behavior.POINT_IN_TIME_EARLIEST_KEEP)
+        metric = PointMetric()
         value = TimeValue(DATE_A, DATE_A, 42)
         left, right = metric.separate(DATE_B, value)
         self.assertEqual(left, right)
@@ -108,7 +67,7 @@ class SeparateAmortizeTestCase(TestCase):
     """Test the implementation of SeparateMethod.AMORTIZE under various conditions."""
 
     def test_integer(self):
-        metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+        metric = SumIntervalMetric()
         value = TimeValue(DATE_A, DATE_C, 5)
         left, right = metric.separate(DATE_B, value)
 
@@ -121,7 +80,7 @@ class SeparateAmortizeTestCase(TestCase):
         self.assertEqual(right.value, 3)
 
     def test_float(self):
-        metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+        metric = SumIntervalMetric()
         value = TimeValue(DATE_A, DATE_C, 5.0)
         left, right = metric.separate(DATE_B, value)
 
@@ -134,7 +93,7 @@ class SeparateAmortizeTestCase(TestCase):
         self.assertEqual(right.value, 2.5)
 
     def test_decimal(self):
-        metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+        metric = SumIntervalMetric()
         value = TimeValue(DATE_A, DATE_C, decimal.Decimal("5"))
         left, right = metric.separate(DATE_B, value)
 
@@ -147,14 +106,14 @@ class SeparateAmortizeTestCase(TestCase):
         self.assertEqual(right.value, decimal.Decimal("2.5"))
 
     def test_invalid_dates(self):
-        metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+        metric = SumIntervalMetric()
         value = TimeValue(DATE_A, DATE_B, decimal.Decimal("5"))
 
         with self.assertRaises(InvalidMetricOperation):
             left, right = metric.separate(DATE_C, value)
 
     def test_null_values(self):
-        metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+        metric = SumIntervalMetric()
         value = TimeValue(DATE_A, DATE_C, None)
         left, right = metric.separate(DATE_B, value)
 
@@ -171,7 +130,7 @@ class MergeEarliestTestCase(TestCase):
     """Test the implementation of MergeMethod.EARLIEST under various conditions."""
 
     def test_integer(self):
-        metric = Metric(Behavior.POINT_IN_TIME_EARLIEST_KEEP)
+        metric = PointMetric()
         v1 = TimeValue(DATE_A, DATE_A, 1)
         v2 = TimeValue(DATE_B, DATE_B, 2)
         value = metric.merge(v1, v2)
@@ -181,7 +140,7 @@ class MergeEarliestTestCase(TestCase):
         self.assertEqual(value.value, 1)
 
     def test_integer_many(self):
-        metric = Metric(Behavior.POINT_IN_TIME_EARLIEST_KEEP)
+        metric = PointMetric()
         v1 = TimeValue(DATE_C, DATE_C, 1)
         v2 = TimeValue(DATE_B, DATE_B, 2)
         v3 = TimeValue(DATE_A, DATE_A, 42)
@@ -192,7 +151,7 @@ class MergeEarliestTestCase(TestCase):
         self.assertEqual(value.value, 42)
 
     def test_integer_none(self):
-        metric = Metric(Behavior.POINT_IN_TIME_EARLIEST_KEEP)
+        metric = PointMetric()
         v1 = TimeValue(DATE_A, DATE_A, None)
         v2 = TimeValue(DATE_B, DATE_B, 2)
         value = metric.merge(v1, v2)
@@ -206,7 +165,7 @@ class MergeSumTestCase(TestCase):
     """Test the implementation of MergeMethod.SUM under various conditions."""
 
     def test_integer(self):
-        metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+        metric = SumIntervalMetric()
         v1 = TimeValue(DATE_A, DATE_B, 1)
         v2 = TimeValue(DATE_B, DATE_C, 2)
         value = metric.merge(v1, v2)
@@ -216,7 +175,7 @@ class MergeSumTestCase(TestCase):
         self.assertEqual(value.value, 3)
 
     def test_integer_many(self):
-        metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+        metric = SumIntervalMetric()
         v1 = TimeValue(DATE_A, DATE_B, 1)
         v2 = TimeValue(DATE_B, DATE_C, 2)
         v3 = TimeValue(DATE_C, DATE_D, 3)
@@ -227,7 +186,7 @@ class MergeSumTestCase(TestCase):
         self.assertEqual(value.value, 6)
 
     def test_float(self):
-        metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+        metric = SumIntervalMetric()
         v1 = TimeValue(DATE_A, DATE_B, 1.1)
         v2 = TimeValue(DATE_B, DATE_C, 2.1)
         value = metric.merge(v1, v2)
@@ -237,7 +196,7 @@ class MergeSumTestCase(TestCase):
         self.assertEqual(value.value, 3.2)
 
     def test_decimal(self):
-        metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+        metric = SumIntervalMetric()
         v1 = TimeValue(DATE_A, DATE_B, decimal.Decimal("1.1"))
         v2 = TimeValue(DATE_B, DATE_C, decimal.Decimal("2.1"))
         value = metric.merge(v1, v2)
@@ -247,7 +206,7 @@ class MergeSumTestCase(TestCase):
         self.assertEqual(value.value, decimal.Decimal("3.2"))
 
     def test_none(self):
-        metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+        metric = SumIntervalMetric()
         v1 = TimeValue(DATE_A, DATE_B, 1)
         v2 = TimeValue(DATE_B, DATE_C, None)
         value = metric.merge(v1, v2)
@@ -261,7 +220,7 @@ class MergeErrorsTestCase(TestCase):
     """Test various expected preconditions for any merge."""
 
     def test_overlapping_date_ranges_interval(self):
-        metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+        metric = SumIntervalMetric()
         v1 = TimeValue(DATE_A, DATE_D, 0)
         v2 = TimeValue(DATE_C, DATE_D, 10)
         with self.assertRaises(InvalidMetricOperation):
@@ -272,74 +231,74 @@ class UnifyTestCase(TestCase):
     """Test the implementation of Metric.unify()"""
 
     def test_pit_earliest_1(self):
-        metric = Metric(Behavior.POINT_IN_TIME_EARLIEST_KEEP)
+        metric = PointMetric()
         v1 = TimeValue(DATE_B, DATE_B, 1)
         v2 = TimeValue(DATE_C, DATE_C, 2)
         value = metric.unify(DATE_BC, DATE_CD, v1, v2)
         self.assertEqual(value, 1)
 
     def test_pit_earliest_2(self):
-        metric = Metric(Behavior.POINT_IN_TIME_EARLIEST_KEEP)
+        metric = PointMetric()
         v1 = TimeValue(DATE_B, DATE_B, 1)
         v2 = TimeValue(DATE_C, DATE_C, 2)
         value = metric.unify(DATE_A, DATE_C, v1, v2)
         self.assertEqual(value, None)
 
     def test_pit_earliest_no_values(self):
-        metric = Metric(Behavior.POINT_IN_TIME_EARLIEST_KEEP)
+        metric = PointMetric()
         value = metric.unify(DATE_A, DATE_C)
         self.assertEqual(value, None)
 
     def test_interval_no_values(self):
-        metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+        metric = SumIntervalMetric()
         value = metric.unify(DATE_A, DATE_C)
         self.assertEqual(value, None)
 
     def test_interval_1(self):
         # Single value, fully within timeframe
-        metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+        metric = SumIntervalMetric()
         v1 = TimeValue(DATE_B, DATE_C, 1)
         value = metric.unify(DATE_A, DATE_D, v1)
         self.assertEqual(value, 1)
 
     def test_interval_2(self):
         # Single value, ends within timeframe
-        metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+        metric = SumIntervalMetric()
         v1 = TimeValue(DATE_B, DATE_C, 10)
         value = metric.unify(DATE_BC, DATE_D, v1)
         self.assertEqual(value, 4)
 
     def test_interval_3(self):
         # Single value, starts within timeframe
-        metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+        metric = SumIntervalMetric()
         v1 = TimeValue(DATE_C, DATE_E, 10)
         value = metric.unify(DATE_BC, DATE_D, v1)
         self.assertEqual(value, 5)
 
     def test_interval_4(self):
         # Single value, contained within timeframe
-        metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+        metric = SumIntervalMetric()
         v1 = TimeValue(DATE_C, DATE_D, 10)
         value = metric.unify(DATE_BC, DATE_DE, v1)
         self.assertEqual(value, 10)
 
     def test_interval_5(self):
         # Single value, starts before and ends after timeframe
-        metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+        metric = SumIntervalMetric()
         v1 = TimeValue(DATE_A, DATE_D, 10)
         value = metric.unify(DATE_BC, DATE_CD, v1)
         self.assertEqual(value, 4)
 
     def test_interval_6(self):
         # Single value, starts before and ends after timeframe
-        metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+        metric = SumIntervalMetric()
         v1 = TimeValue(DATE_A, DATE_D, 10)
         value = metric.unify(DATE_BC, DATE_CD, v1)
         self.assertEqual(value, 4)
 
     def test_interval_7(self):
         # Multiple values, intersecting timeframe
-        metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+        metric = SumIntervalMetric()
         v1 = TimeValue(DATE_A, DATE_B, 10)
         v2 = TimeValue(DATE_B, DATE_C, 10)
         v3 = TimeValue(DATE_C, DATE_D, 10)
@@ -598,12 +557,12 @@ class MultiPeriodTestCase(TestCase):
         self.start = DATE_AB
         self.end = DATE_DE
 
-        self.m_e = Metric(Behavior.POINT_IN_TIME_EARLIEST_KEEP)
+        self.m_e = PointMetric()
         self.v_e1 = TimeValue(DATE_A, DATE_A, 1)
         self.v_e2 = TimeValue(DATE_C, DATE_C, 2)
         self.v_e3 = TimeValue(DATE_E, DATE_E, 3)
 
-        self.m_i = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
+        self.m_i = SumIntervalMetric()
         self.v_i1 = TimeValue(DATE_A, DATE_B, 100)
         self.v_i2 = TimeValue(DATE_B, DATE_C, 200)
         self.v_i3 = TimeValue(DATE_C, DATE_D, 300)
@@ -690,10 +649,16 @@ class TestDataTestCase(TestCase):
     def _load_test_data(self, file_name=TEST_DATA_FILE_NAME):
         # CONSIDER whether we want to promote this, or something like it,
         # out of test and into lib/metrics itself?
+        def _metric(metric_class_name):
+            if metric_class_name == "PointMetric":
+                return PointMetric()
+            elif metric_class_name == "SumIntervalMetric":
+                return SumIntervalMetric()
+            return None
         from pydoc import locate
         with open(file_name, "rt") as test_data_file:
             jsonable = json.load(test_data_file)
-        metrics = {name: Metric(behavior=Behavior[behavior_name]) for name, behavior_name in jsonable.get("metrics", {}).items()}
+        metrics = {name: _metric(metric_class_name) for name, metric_class_name in jsonable.get("metrics", {}).items()}
         metric_types = {name: locate(type_name) for name, type_name in jsonable.get("metric_types", {}).items()}
 
         def _make_period(period_jsonable):

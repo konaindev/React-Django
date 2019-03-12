@@ -7,6 +7,21 @@ from .errors import InvalidMetricOperation
 TimeValue = namedtuple("TimeValue", ["start", "end", "value"])
 
 
+def likely_time_value_type(time_value=None):
+    """
+    Take a guess at the type of the underlying value for a set of
+    time_values, if possible.
+
+    Returns the type of the first value that isn't None; return None
+    if no type can be determined.
+    """
+    return (
+        None
+        if (time_value is None) or (time_value.value is None)
+        else type(time_value.value)
+    )
+
+
 class TimeValueCollection:
     """
     Holds on to a collection of time values and provides efficient in-memory 
