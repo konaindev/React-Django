@@ -9,7 +9,7 @@
     "lease_renewal_notices": "INTERVAL_SUM_AMORTIZE",
     "lease_renewals": "INTERVAL_SUM_AMORTIZE",
     "lease_vacation_notices": "INTERVAL_SUM_AMORTIZE",
-    "target_lease_percent": "INTERVAL_AVERAGE_KEEP",
+    "target_lease_percent": "POINT_IN_TIME_EARLIEST_KEEP",
     "target_lease_applications": "INTERVAL_SUM_AMORTIZE",
     "target_leases_executed": "INTERVAL_SUM_AMORTIZE",
     "target_lease_renewal_notices": "INTERVAL_SUM_AMORTIZE",

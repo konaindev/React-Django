@@ -206,7 +206,7 @@ class Period(ModelPeriod, models.Model):
         decimal_places=3,
         help_text="Target: lease percentage (like 0.9)",
     )
-    target_lease_percent.metric = Metric(Behavior.INTERVAL_AVERAGE_KEEP)
+    target_lease_percent.metric = Metric(Behavior.POINT_IN_TIME_EARLIEST_KEEP)
 
     target_lease_applications = models.IntegerField(
         null=True, blank=True, default=None, help_text="Target: lease applications"

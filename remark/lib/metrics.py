@@ -44,15 +44,12 @@ class Behavior(Enum):
 
     POINT_IN_TIME_EARLIEST_KEEP = auto()
     INTERVAL_SUM_AMORTIZE = auto()
-    INTERVAL_AVERAGE_KEEP = auto()
 
     def describe(self):
         if self == self.POINT_IN_TIME_EARLIEST_KEEP:
             return "pit/early"
         elif self == self.INTERVAL_SUM_AMORTIZE:
             return "i/sum/amort"
-        elif self == self.INTERVAL_AVERAGE_KEEP:
-            return "i/avg"
 
     def is_point_in_time(self):
         """
@@ -64,7 +61,7 @@ class Behavior(Enum):
         """
         Return True if the value should be interpreted as meaningful across a time span.
         """
-        return self == self.INTERVAL_SUM_AMORTIZE or self == self.INTERVAL_AVERAGE_KEEP
+        return self == self.INTERVAL_SUM_AMORTIZE
 
     def is_merge_earliest(self):
         """
@@ -77,13 +74,6 @@ class Behavior(Enum):
         Return True if, when two values are merged, they should be summed.
         """
         return self == self.INTERVAL_SUM_AMORTIZE
-
-    def is_merge_average(self):
-        """
-        Return True if, when two values are merged, they should be averaged
-        weighted on their relative timeframes.
-        """
-        return self == self.INTERVAL_AVERAGE_KEEP
 
     def is_separate_keep(self):
         """
@@ -484,8 +474,6 @@ class Metric:
             result_time_value = self._merge_earliest(time_values)
         elif self.behavior.is_merge_sum():
             result_time_value = self._merge_sum(time_values)
-        elif self.behavior.is_merge_average():
-            result_time_value = self._merge_average(time_values)
 
         return result_time_value
 
@@ -505,60 +493,6 @@ class Metric:
             start=time_values[0].start,
             end=time_values[-1].end,
             value=sum_or_none(*[time_value.value for time_value in time_values]),
-        )
-
-    def _merge_average(self, time_values):
-        """
-        Merge an arbitrary list of values by averaging them.
-
-        Weight the average based on the percentage of total time each value
-        spans.
-        """
-        # CONSIDER if the values are non-contiguous, we'll ignore the missing
-        # time entirely. -Dave
-        seconds = [
-            (time_value.end - time_value.start).total_seconds()
-            for time_value in time_values
-        ]
-        total_seconds = sum(seconds)
-
-        # Precondition: there needs to be time!
-        if total_seconds <= 0:
-            raise InvalidMetricOperation("Cannot merge: zero length timeframes.")
-
-        # Time-weighted average.
-        merge_value = None
-
-        # Sniff the underlying value type to ensure we perform the best
-        # possible computation for the type. (CONSIDER make this explicit?)
-        kind = self._get_likely_type(time_values)
-        if kind == int:
-            total = sum_or_none(
-                *[
-                    mult_or_none(time_value.value, s)
-                    for time_value, s in zip(time_values, seconds)
-                ]
-            )
-            merge_value = None if total is None else round(total / total_seconds)
-        elif kind == float:
-            total = sum_or_none(
-                *[
-                    mult_or_none(time_value.value, float(s))
-                    for time_value, s in zip(time_values, seconds)
-                ]
-            )
-            merge_value = None if total is None else (total / total_seconds)
-        elif kind == Decimal:
-            total = sum_or_none(
-                *[
-                    mult_or_none(time_value.value, Decimal(s))
-                    for time_value, s in zip(time_values, seconds)
-                ]
-            )
-            merge_value = None if total is None else (total / Decimal(total_seconds))
-
-        return TimeValue(
-            start=time_values[0].start, end=time_values[-1].end, value=merge_value
         )
 
     def separate(self, when, time_value):

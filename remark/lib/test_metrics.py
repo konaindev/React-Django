@@ -62,11 +62,6 @@ class DispositionTestCase(TestCase):
         self.assertFalse(behavior.is_point_in_time())
         self.assertTrue(behavior.is_interval())
 
-    def test_disposition_3(self):
-        behavior = Behavior.INTERVAL_AVERAGE_KEEP
-        self.assertFalse(behavior.is_point_in_time())
-        self.assertTrue(behavior.is_interval())
-
 
 class MergeMethodTestCase(TestCase):
     """Test mapping of Behavior to merge method"""
@@ -75,19 +70,11 @@ class MergeMethodTestCase(TestCase):
         behavior = Behavior.POINT_IN_TIME_EARLIEST_KEEP
         self.assertTrue(behavior.is_merge_earliest())
         self.assertFalse(behavior.is_merge_sum())
-        self.assertFalse(behavior.is_merge_average())
 
     def test_merge_method_2(self):
         behavior = Behavior.INTERVAL_SUM_AMORTIZE
         self.assertFalse(behavior.is_merge_earliest())
         self.assertTrue(behavior.is_merge_sum())
-        self.assertFalse(behavior.is_merge_average())
-
-    def test_merge_method_3(self):
-        behavior = Behavior.INTERVAL_AVERAGE_KEEP
-        self.assertFalse(behavior.is_merge_earliest())
-        self.assertFalse(behavior.is_merge_sum())
-        self.assertTrue(behavior.is_merge_average())
 
 
 class SeparateMethodTestCase(TestCase):
@@ -102,11 +89,6 @@ class SeparateMethodTestCase(TestCase):
         behavior = Behavior.INTERVAL_SUM_AMORTIZE
         self.assertFalse(behavior.is_separate_keep())
         self.assertTrue(behavior.is_separate_amortize())
-
-    def test_separate_method_3(self):
-        behavior = Behavior.INTERVAL_AVERAGE_KEEP
-        self.assertTrue(behavior.is_separate_keep())
-        self.assertFalse(behavior.is_separate_amortize())
 
 
 class SeparateKeepTestCase(TestCase):
@@ -268,61 +250,6 @@ class MergeSumTestCase(TestCase):
         metric = Metric(Behavior.INTERVAL_SUM_AMORTIZE)
         v1 = TimeValue(DATE_A, DATE_B, 1)
         v2 = TimeValue(DATE_B, DATE_C, None)
-        value = metric.merge(v1, v2)
-
-        self.assertEqual(value.start, DATE_A)
-        self.assertEqual(value.end, DATE_C)
-        self.assertEqual(value.value, None)
-
-
-class MergeAverageTestCase(TestCase):
-    """Test the implementation of MergeMethod.AVERAGE under various conditions."""
-
-    def test_integer(self):
-        metric = Metric(Behavior.INTERVAL_AVERAGE_KEEP)
-        v1 = TimeValue(DATE_A, DATE_B, 0)
-        v2 = TimeValue(DATE_B, DATE_C, 10)
-        value = metric.merge(v1, v2)
-
-        self.assertEqual(value.start, DATE_A)
-        self.assertEqual(value.end, DATE_C)
-        self.assertEqual(value.value, 5)
-
-    def test_integer_many(self):
-        metric = Metric(Behavior.INTERVAL_AVERAGE_KEEP)
-        v1 = TimeValue(DATE_A, DATE_B, 0)
-        v2 = TimeValue(DATE_B, DATE_C, 10)
-        v3 = TimeValue(DATE_C, DATE_D, 101)
-        value = metric.merge(v1, v2, v3)
-
-        self.assertEqual(value.start, DATE_A)
-        self.assertEqual(value.end, DATE_D)
-        self.assertEqual(value.value, 37)
-
-    def test_float(self):
-        metric = Metric(Behavior.INTERVAL_AVERAGE_KEEP)
-        v1 = TimeValue(DATE_A, DATE_B, 0.5)
-        v2 = TimeValue(DATE_B, DATE_C, 10.5)
-        value = metric.merge(v1, v2)
-
-        self.assertEqual(value.start, DATE_A)
-        self.assertEqual(value.end, DATE_C)
-        self.assertEqual(value.value, 5.5)
-
-    def test_decimal(self):
-        metric = Metric(Behavior.INTERVAL_AVERAGE_KEEP)
-        v1 = TimeValue(DATE_A, DATE_B, decimal.Decimal("0.5"))
-        v2 = TimeValue(DATE_B, DATE_C, decimal.Decimal("10.5"))
-        value = metric.merge(v1, v2)
-
-        self.assertEqual(value.start, DATE_A)
-        self.assertEqual(value.end, DATE_C)
-        self.assertEqual(value.value, decimal.Decimal("5.5"))
-
-    def test_none(self):
-        metric = Metric(Behavior.INTERVAL_AVERAGE_KEEP)
-        v1 = TimeValue(DATE_A, DATE_B, None)
-        v2 = TimeValue(DATE_B, DATE_C, 10)
         value = metric.merge(v1, v2)
 
         self.assertEqual(value.start, DATE_A)
