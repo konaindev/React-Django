@@ -53,9 +53,10 @@ class SmallBoxLayout extends Component {
 
 // Define SmallBoxLayouts that take values and targets of various types.
 
-// @TODO: replace references of SmallMultipleBox with SmallNumberBox
-// just pass symbolType="multiple"
-const SmallMultipleBox = withFormatters(SmallBoxLayout, formatNumber);
+// use this in case NOT to color "x" with blue
+// otherwise use LargeNumberBox with "symbolType" prop
+const SmallMultipleBox = withFormatters(SmallBoxLayout, formatMultiple);
+
 const SmallPercentBox = withFormatters(
   SmallBoxLayout,
   formatPercent,
