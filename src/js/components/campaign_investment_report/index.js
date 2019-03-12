@@ -13,8 +13,11 @@ import { LargeCurrencyShorthandBox, LargeNumberBox } from "../large_box_layout";
 import BoxRow from "../box_row";
 import BoxColumn from "../box_column";
 import ReportSection from "../report_section";
-import { SmallNumberBox, SmallCurrencyShorthandBox } from "../small_box_layout";
-import { PercentageGraphBox } from "../large_graph_box";
+import {
+  SmallNumberBox,
+  SmallCurrencyShorthandBox,
+  SmallMultipleBox
+} from "../small_box_layout";
 import WhiskerPlot from "../whisker_plot";
 import {
   formatCurrencyShorthand,

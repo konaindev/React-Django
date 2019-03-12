@@ -3,48 +3,62 @@
 .large-box {
     display: flex;
     flex-direction: column;
-    padding: $s6;
+    align-items: center;
+    padding: 1.5rem;
     height: 236px;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
 
-.large-box__name {
-    color: $lightest-ui-text-color;
-    font-size: $text-xs;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    max-width: 15rem;
-    line-height: $line-height-loose;
-}
+    &__top-line {
+        color: $white;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        line-height: 1.25rem;
+        height: 2.875rem;
+        text-align: center;
+        display: flex;
+        align-items: flex-end;
+    }
 
-.large-box__detail {
-    color: $lighter-ui-text-color;
-    font-size: $text-sm;
-    font-weight: $weight-light;
-}
+    &__bottom-line {
+        color: $bluegray-light;
+        font-weight: 300;
+        font-size: 0.875rem;
+        line-height: 1.5rem;
+        text-align: center;
+    }
 
-.large-box__outer-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
+    &__content {
+        text-align: center;
+        position: relative;
+        margin: 0.5rem 0;
+    }
 
-.large-box__inner-content {
-    color: $lightest-ui-text-color;
-    font-family: $font-mono;
-    font-size: $text-6xl;
-    font-weight: $weight-hairline;
-    padding: $s2 0;
-    width: 100%;
-}
+    &__content-value {
+        color: $lightest-ui-text-color;
+        font-family: $font-mono;
+        font-size: 3.875rem;
+        font-weight: 100;
+        letter-spacing: -2px;
+        line-height: 4.5rem;
+    }
 
-.large-box__inner-box {
-    width: $s48;
-    height: $s48;
-    background: transparent;
-    overflow: hidden;
+    &__content-extra {
+        position: absolute;
+        bottom: 0.5rem;
+        left: 100%;
+        width: 4rem;
+        margin-left: 1.5rem;
+    }
+
+    &__content-graph {
+        width: 4rem;
+        height: 3rem;
+    }
+
+    &__content-delta {
+        margin-top: 0.5rem;
+        font-size: 0.75rem;
+        text-align: center;
+    }    
 }
