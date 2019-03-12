@@ -132,9 +132,7 @@ class PerformanceReport(CommonReport):
         report = super().to_jsonable()
 
         override_key = (self.project.public_id, report["dates"]["start"].isoformat())
-        print(override_key)
         overrides = HACK_PERFORMANCE_FINAL_REPORT_OVERRIDES.get(override_key, {})
-        print(overrides)
         for o_path, o_value in overrides.items():
             o_path_parts = o_path.split(".")
             o_current = report
