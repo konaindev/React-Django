@@ -16,7 +16,6 @@ import {
 import BoxRow from "../box_row";
 import BoxColumn from "../box_column";
 import ReportSection from "../report_section";
-import { PercentageGraphBox } from "../large_graph_box";
 import {
   SmallNumberBox,
   SmallCurrencyShorthandBox,
