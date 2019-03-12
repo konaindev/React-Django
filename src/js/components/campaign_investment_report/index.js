@@ -14,12 +14,14 @@ import BoxRow from "../box_row";
 import BoxColumn from "../box_column";
 import ReportSection from "../report_section";
 import { SmallNumberBox, SmallCurrencyShorthandBox } from "../small_box_layout";
+import { PercentageGraphBox } from "../large_graph_box";
 import WhiskerPlot from "../whisker_plot";
 import {
   formatCurrencyShorthand,
   formatPercent
 } from "../../utils/formatters.js";
 import { remarkablyChartTheme } from "../../utils/victoryTheme.js";
+import { CurrencyShorthandGraphBox } from "../large_graph_box";
 
 import "./campaign_investment_report.scss";
 
@@ -38,12 +40,12 @@ export default class CampaignInvestmentReport extends Component {
   static HeadlineNumbers = ({ report: r }) => {
     return (
       <BoxRow>
-        <LargeCurrencyShorthandBox
+        <CurrencyShorthandGraphBox
           name="Campaign Investment"
           value={r.investment.total.total}
           target={r.targets?.investment?.total?.total}
           delta={r.deltas?.investment?.total?.total}
-          innerBox={WhiskerPlot.maybe(r.whiskers?.investment)}
+          series={r.whiskers?.investment}
         />
         <LargeCurrencyShorthandBox
           name="Est. Revenue Change"

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import FormattedMultiple from "../formatted_multiple";
+import Panel from "../panel";
 import withFormatters from "../with_formatters";
 import {
   formatMultiple,
@@ -41,7 +42,7 @@ export class LargeBoxLayout extends Component {
 
   render() {
     return (
-      <div className="large-box panel-rounded-rect">
+      <Panel className="large-box">
         {/* Container for the content itself.
             Counter-intuitively items- and text- center the rows and row content
             while justif- centers the rows vertically within the box. */}
@@ -52,7 +53,7 @@ export class LargeBoxLayout extends Component {
         </div>
         <span className="large-box__detail">{this.props.detail}</span>
         <span className="large-box__detail">{this.props.detail2}</span>
-      </div>
+      </Panel>
     );
   }
 }
