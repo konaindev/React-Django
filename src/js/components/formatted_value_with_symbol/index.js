@@ -7,12 +7,14 @@ import "./formatted_value_with_symbol.scss";
 
 export function FormattedValueWithSymbol({ value, formatter, symbolType }) {
   const sign = Math.sign(+value) > 0 ? "+" : Math.sign(+value) < 0 ? "-" : "";
+  const absValue = Math.abs(+value);
+  const shouldShowSign = ["sign", "multiple"].includes(symbolType);
 
   return (
     <span className="formatted-value-with-symbol">
-      {symbolType === "sign" && <span className="symbol">{sign}</span>}
+      {shouldShowSign && <span className="symbol">{sign}</span>}
 
-      {formatter(value)}
+      {formatter(shouldShowSign ? absValue : value)}
 
       {symbolType === "multiple" && <span className="symbol">{"x"}</span>}
     </span>
