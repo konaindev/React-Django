@@ -4,8 +4,8 @@ import cn from "classnames";
 
 import DeltaIndicator from "../delta_indicator";
 import FormattedValueWithSymbol from "../formatted_value_with_symbol";
+import isNil from "lodash/isNil";
 import { formatNumber } from "../../utils/formatters";
-import { isNil } from "../../utils/helpers";
 import "./delta_layout.scss";
 
 /**
