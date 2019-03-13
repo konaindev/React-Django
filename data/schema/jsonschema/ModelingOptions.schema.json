@@ -68,27 +68,27 @@
             ],
             "type": "object"
         },
-        "AcquisitionConversions": {
+        "AcquisitionConversions<number>": {
             "description": "Acquisition conversions",
             "properties": {
                 "app_exe": {
-                    "description": "APP > EXE conversion percentage @computed",
+                    "description": "APP > EXE conversion rate @computed",
                     "type": "number"
                 },
                 "inq_tou": {
-                    "description": "INQ > TOU conversion percentage @computed",
+                    "description": "INQ > TOU conversion rate @computed",
                     "type": "number"
                 },
                 "tou_app": {
-                    "description": "TOU > APP conversion percentage @computed",
+                    "description": "TOU > APP conversion rate @computed",
                     "type": "number"
                 },
                 "usv_exe": {
-                    "description": "USV > EXE conversion percentage @computed",
+                    "description": "USV > EXE conversion rate @computed",
                     "type": "number"
                 },
                 "usv_inq": {
-                    "description": "USV > INQ conversion percentage @computed",
+                    "description": "USV > INQ conversion rate @computed",
                     "type": "number"
                 }
             },
@@ -105,7 +105,7 @@
             "description": "Acquisition funnel",
             "properties": {
                 "conversions": {
-                    "$ref": "#/definitions/AcquisitionConversions",
+                    "$ref": "#/definitions/AcquisitionConversions<number>",
                     "description": "Conversion rates in the acquisition funnel @computed"
                 },
                 "costs": {
