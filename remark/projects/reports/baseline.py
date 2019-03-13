@@ -9,6 +9,8 @@ HACK_BASELINE_OVERRIDES = {
     "pro_nqcu73oiinomuvn7": {"leased_units": 162},
     # El Cortez
     "pro_xujf7pnznggt5dny": {"leased_units": 113, "occupiable_units": 158},
+    # Lincoln Example
+    # "pro_eekgau8mfkbc34iq": {"leased_units": 456},
 }
 
 

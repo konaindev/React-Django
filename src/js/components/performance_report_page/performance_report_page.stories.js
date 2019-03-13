@@ -204,6 +204,7 @@ const report = {
         cds: -1,
         cd_rate: 0.03,
         renewal_notices: 2,
+        renewal_rate: 0,
         renewals: 2,
         vacation_notices: -1,
         rate: 0.02
@@ -212,6 +213,11 @@ const report = {
         move_ins: 0,
         move_outs: 1,
         rate: 0.04
+      }
+    },
+    investment: {
+      total: {
+        total: "-1400.00"
       }
     },
     funnel: {

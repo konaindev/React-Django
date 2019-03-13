@@ -5,10 +5,8 @@ import BoxColumn from "../box_column";
 import BoxRow from "../box_row";
 import BoxTable from "../box_table";
 import DeltaLayout from "../delta_layout";
-import PercentageGraphBox from "../percentage_graph_box";
 import ReportSection from "../report_section";
 import WhiskerPlot from "../whisker_plot";
-import { LargeBoxLayout } from "../large_box_layout";
 import { SmallNumberBox } from "../small_box_layout";
 
 import {
@@ -17,6 +15,7 @@ import {
   formatNumber,
   formatTargetPercent
 } from "../../utils/formatters.js";
+import { PercentageGraphBox } from "../large_graph_box";
 
 import "./leasing_performance_report.scss";
 
