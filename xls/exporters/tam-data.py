@@ -333,30 +333,37 @@ def fill_computation_tab(worksheet, zipcodes):
         worksheet.cell(column=1, row=29+x, value=INCOME_GROUPS[x])
         worksheet.cell(column=2, row=29+x, value=cell_formulas[x])
 
+    # Total population
+    formula = []
+    for zip in zipcodes:
+        tab_name = ZIP_DATA_SHEET_NAME % zip
+        formula.append("'%s'!B1" % tab_name)
+    worksheet.cell(column=2, row=38, value="=%s" % "+".join(formula))
+
     # Add Household Types
-
-
-def fill_output_tab(worksheet, zipcodes):
-    # EST population
-
-    # Write Age Segement Labels
-
+    numerator = []
+    for zip in zipcodes:
+        tab_name = ZIP_DATA_SHEET_NAME % zip
+        numerator.append("(('%s'!B%d+'%s'!B%d+'%s'!B%d)*'%s'!B1)" % (tab_name, 30, tab_name, 31, tab_name, 32, tab_name))
+    final_formula = "=(%s)/'Computation'!B38" % "+".join(numerator)
+    worksheet.cell(column=2, row=34, value=final_formula)
 
 
 
 ZIP_CODES = [
-    84101,
-    84111,
-    84102,
-    84112,
-    84115,
-    84105,
+    85013
 ]
 
+# Meridian
+# Zip Codes: 84101,84111,84102,84112,84115,84105
+# Income Groups: 75000, 50000, 35000
+
+# El Cortez
+# Zip Codes: 85013
+# Income Groups: 25000, 45000, 60000
+
 INCOME_GROUPS = [
-    75000,
-    50000,
-    35000
+    25000, 45000, 60000
 ]
 
 def main():
@@ -379,11 +386,10 @@ def main():
 
     fill_computation_tab(workbook['Computation'], zipcodes)
 
+    # delete sample data tab
+    workbook.remove(workbook['Sample Zip Data'])
+
     workbook.save(filename="../../dist/remarkably-tam-test.xlsx")
-
-
-
-
 
 # fetch_zip_codes(latitude, longitude, radius * MILES_KILOMETERS_RATIO)
 # fetch_age_segements_by_zip('85013')
