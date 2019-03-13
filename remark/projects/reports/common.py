@@ -168,6 +168,9 @@ class CommonReport(ReportBase):
     def build_computed_period(self, period):
         return ComputedPeriod(period)
 
+    def build_four_week_averages(self):
+        return {"usv": 0, "inq": 0, "tou": 0, "app": 0, "exe": 0}
+
     def to_jsonable(self):
         """
         Return a structure that can be converted to a JSON string.
@@ -179,8 +182,7 @@ class CommonReport(ReportBase):
         flat_period_values = self.period.get_values()
         property_report = unflatten(SCHEMA_MAP, flat_period_values)
 
-        # TODO implement this
-        four_week_funnel_averages = {"usv": 0, "inq": 0, "tou": 0, "app": 0, "exe": 0}
+        four_week_funnel_averages = self.build_four_week_averages()
 
         targets = unflatten_optional(TARGET_SCHEMA_MAP, flat_period_values)
 
