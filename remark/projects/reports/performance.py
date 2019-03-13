@@ -137,7 +137,7 @@ class PerformanceReport(CommonReport):
             o_path_parts = o_path.split(".")
             o_current = report
             for o_path_part in o_path_parts[:-1]:
-                o_current = o_current[o_path_part]
+                o_current = o_current.get(o_path_part, {})
             o_current[o_path_parts[-1]] = o_value
 
         return report
