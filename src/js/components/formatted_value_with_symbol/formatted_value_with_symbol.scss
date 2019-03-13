@@ -1,9 +1,13 @@
 @import "css/base.scss";
 
-$formatted-symbol-color: #3188ff;
-
 .formatted-value-with-symbol {
-    .symbol {
-        color: $formatted-symbol-color;
+    &__plus {
+        color: $accent-up-color;
+    }
+    &__minus {
+        color: $accent-down-color;
+    }
+    &__times {
+        color: $accent-times-color;
     }
 }

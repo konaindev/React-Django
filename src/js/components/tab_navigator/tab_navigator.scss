@@ -12,12 +12,12 @@
         line-height: $line-height-tight;
         padding: $s4 0;
         margin: 0 $s6;
-        color: $gray-lighter;
+        color: $nav-link-color;
         text-decoration: none;
         position: relative;
 
         &:hover:not(#{$item}--active) {
-            color: $gray;
+            color: $nav-link-hover-color;
         }
 
         &--active {
@@ -28,7 +28,7 @@
                 left: 0;
                 right: 0;
                 bottom: -1px;
-                border-bottom: 1px solid $highlight-bluegray-4;
+                border-bottom: 1px solid $nav-link-active-border-color;
             }
         }
     }
