@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import DeltaIndicator from "../delta_indicator";
-import isNil from "lodash/isNil";
 import {
   formatCurrency,
   formatDeltaPercent,
@@ -37,7 +36,7 @@ class FunnelBaseBox extends Component {
       <div className="funnel-box-layout">
         <div className="funnel-box-layout__left">
           <div className="funnel-box-layout__name">{name}</div>
-          {!isNil(target) && (
+          {target != null && (
             <div className="funnel-box-layout__target">
               {targetFormatter(target)}
             </div>
@@ -45,7 +44,7 @@ class FunnelBaseBox extends Component {
         </div>
         <div className="funnel-box-layout__right">
           <div className="funnel-box-layout__value">{formatter(value)}</div>
-          {!isNil(delta) && (
+          {delta != null && (
             <div className="funnel-box-layout__delta">
               <DeltaIndicator
                 delta={delta}

@@ -169,6 +169,81 @@ const PERFORMANCE_REPORT = {
   whiskers: WHISKERS
 };
 
+const NEGATIVE_PERFORMANCE_REPORT = {
+  investment: {
+    acquisition: {
+      expenses: {
+        demand_creation: "10000.00",
+        leasing_enablement: "1000.00",
+        market_intelligence: "2000.00",
+        reputation_building: "1000.00"
+      },
+      total: "14000.00",
+      romi: -14,
+      estimated_revenue_gain: "-199000.00"
+    },
+    retention: {
+      expenses: {
+        demand_creation: "0.00",
+        leasing_enablement: "2000.00",
+        market_intelligence: "0.00",
+        reputation_building: "0.00"
+      },
+      total: "2000.00",
+      romi: 78,
+      estimated_revenue_gain: "-155100.00"
+    },
+    total: {
+      total: "16000.00",
+      romi: -22,
+      estimated_revenue_gain: "-354000.00"
+    }
+  },
+  property: {
+    leasing: {
+      change: -9,
+      renewals: 7
+    }
+  },
+
+  targets: {
+    investment: {
+      acquisition: {
+        total: "15000.00",
+        romi: 7,
+        estimated_revenue_gain: "228500.00"
+      },
+      retention: {
+        total: "2000.00",
+        romi: 142,
+        estimated_revenue_gain: "266600.00"
+      },
+      total: {
+        total: "17000.00",
+        romi: 14,
+        estimated_revenue_gain: "495200.00"
+      }
+    },
+
+    property: {
+      leasing: {
+        change: 11,
+        renewals: 10
+      }
+    }
+  },
+
+  deltas: {
+    property: {
+      leasing: {
+        renewals: 2
+      }
+    }
+  },
+
+  whiskers: WHISKERS
+};
+
 const props_baseline = {
   report: BASELINE_REPORT
 };
@@ -184,3 +259,12 @@ const props_performance = {
 storiesOf("CampaignInvestmentReport", module).add("performance", () => (
   <CampaignInvestmentReport {...props_performance} />
 ));
+
+const props_negative_performance = {
+  report: NEGATIVE_PERFORMANCE_REPORT
+};
+
+storiesOf("CampaignInvestmentReport", module).add(
+  "negative performance",
+  () => <CampaignInvestmentReport {...props_negative_performance} />
+);

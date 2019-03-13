@@ -5,15 +5,12 @@ import BoxRow from "../box_row";
 import BoxColumn from "../box_column";
 import ReportSection from "../report_section";
 import Panel from "../panel";
-import PercentageGraphBox from "../percentage_graph_box";
 import WhiskerPlot from "../whisker_plot";
-import { LargeDetailPercentBox, LargePercentBox } from "../large_box_layout";
 import {
   FunnelNumberBox,
   FunnelPercentBox,
   FunnelCurrencyBox
 } from "../funnel_box_layout";
-
 import {
   formatCurrency,
   formatNumber,
@@ -21,6 +18,7 @@ import {
   formatDeltaPercent,
   targetFormatter
 } from "../../utils/formatters.js";
+import { PercentageGraphBox } from "../large_graph_box";
 
 import "./acquisition_funnel_report.scss";
 
