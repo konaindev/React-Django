@@ -20,8 +20,6 @@ MILES_KILOMETERS_RATIO = 1.60934
 
 def memoize(label):
     def outer_cache(func):
-        print(func, label)
-
         def inner_cache(*args, **kwargs):
             filename = label
             for arg in args:
