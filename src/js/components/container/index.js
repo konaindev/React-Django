@@ -4,8 +4,10 @@ import cn from "classnames";
 
 import "./container.scss";
 
-export const Container = ({ children, className }) => (
-  <div className={cn("container", className)}>{children}</div>
+export const Container = ({ children, className, style }) => (
+  <div className={cn("container", className)} style={style}>
+    {children}
+  </div>
 );
 
 Container.propTypes = {

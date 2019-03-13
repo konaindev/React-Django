@@ -1,0 +1,62 @@
+@import "css/base.scss";
+
+// $table-color: #6D778D;
+$table-color: #8F9BB4;
+$table-border-color: rgba(61, 69, 85, 0.3);
+/* #3D4555 */
+$table-bg-active: rgba(33, 41, 58, 0.7);
+/* #21293A; */
+$table-bg-accent: $table-bg-active;
+$table-heading-color: $bluegray-lightest;
+
+.modeling-comparison {
+
+    .ReactTable {
+        height: 100%;
+        border: $panel-border;
+        border-radius: 6px;
+        background-color: $panel-background-color;
+        color: $table-color;
+
+        .rt-thead {
+            color: $table-heading-color;
+            font-size: 15px;
+            font-weight: bold;
+
+            .rt-th {
+                padding: 40px 32px;
+            }
+        }
+
+        .rt-tbody {
+            .rt-tr-group {
+                border-bottom-color: $table-border-color;
+            }
+
+            .rt-td {
+                padding: 16px 40px;
+                text-align: center;
+                border-color: $table-border-color;
+                border-right-width: 0;
+
+                &:first-child {
+                    color: $table-heading-color;
+                    text-align: left;
+                    border-right-width: 1px;
+                }
+            }
+
+            .rt-tr {
+                &.accent {
+                    background-color: $table-bg-accent;
+                }
+
+                &.children {
+                    .rt-td:first-child {
+                        color: $table-color;
+                    }
+                }
+            }
+        }
+    }
+}
