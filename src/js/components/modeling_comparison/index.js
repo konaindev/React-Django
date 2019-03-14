@@ -17,6 +17,8 @@ const getTrProps = (state, row, column) => {
   };
 };
 
+const CellRenderer = props => <div>{props.value}</div>;
+
 export function ModelingComparison({ property_name, options }) {
   const tableRows = convertToTableRows(options);
 
@@ -27,23 +29,26 @@ export function ModelingComparison({ property_name, options }) {
       Header: "",
       accessor: "label",
       Cell: row => (
-        <span>
-          {row.original.isChildren && <span>{"¬ "}</span>}
+        <div>
+          {row.original.isChildren && <span>L</span>}
           {row.value}
-        </span>
+        </div>
       )
     },
     {
       Header: "Run Rate",
-      accessor: "run-rate"
+      accessor: "run-rate",
+      Cell: CellRenderer
     },
     {
       Header: "Schedule Driven",
-      accessor: "schedule-driven"
+      accessor: "schedule-driven",
+      Cell: CellRenderer
     },
     {
       Header: "Investment Driven",
-      accessor: "investment-driven"
+      accessor: "investment-driven",
+      Cell: CellRenderer
     }
   ];
 
