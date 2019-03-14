@@ -70,9 +70,7 @@ export const RentToIncomeAnalysis = ({
                   key={rateIndex}
                   className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--yaxis"
                 >
-                  {rentalRate > 3000
-                    ? formatCurrencyShorthand(rentalRate)
-                    : formatCurrency(rentalRate)}
+                  {formatCurrency(rentalRate)}
                 </div>
               ))}
             </div>
