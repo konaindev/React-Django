@@ -1,55 +1,35 @@
 import _get from "lodash/get";
 
 export default function(funnelHistory = []) {
-  let volumeRows = [
-    { label: "Unique Site Visitors", path: "usv" },
-    { label: "Inquiries", path: "inq" },
-    { label: "Tours", path: "tou" },
-    { label: "Lease Applications", path: "app" },
-    { label: "Lease Executions", path: "exe" }
+  let allRows = [
+    { category: "volume", label: "Unique Site Visitors", path: "usv" },
+    { category: "volume", label: "Inquiries", path: "inq" },
+    { category: "volume", label: "Tours", path: "tou" },
+    { category: "volume", label: "Lease Applications", path: "app" },
+    { category: "volume", label: "Lease Executions", path: "exe" },
+    { category: "conversion", label: "USV &#8594; INQ", path: "usv_inq" },
+    { category: "conversion", label: "INQ &#8594; TOU", path: "inq_tou" },
+    { category: "conversion", label: "TOU &#8594; APP", path: "tou_app" },
+    { category: "conversion", label: "APP &#8594; EXE", path: "app_exe" }
   ];
 
-  let conversionRows = [
-    { label: "USV &#8594; INQ", path: "usv_inq" },
-    { label: "INQ &#8594; TOU", path: "inq_tou" },
-    { label: "TOU &#8594; APP", path: "tou_app" },
-    { label: "APP &#8594; EXE", path: "app_exe" }
-  ];
-
-  let columns = [];
+  let weekIndex = 0;
 
   // start of month iteration
   funnelHistory.forEach(monthData => {
-    let weekIndex = 0,
-      numberOfWeeks = 0;
+    let numberOfWeeks;
     let columnKey = monthData.month;
 
-    // start of volume rows iteration
-    volumeRows.forEach(row => {
-      const weekValues = _get(monthData, `weekly_volumes.${row.path}`, []);
-      numberOfWeeks = weekValues.length;
+    // start of rows iteration
+    allRows.forEach(row => {
+      const weeklyAccessor = `weekly_${row.category}s.${row.path}`;
+      const monthlyAccessor = `monthly_${row.category}s.${row.path}`;
+      const weekValues = _get(monthData, weeklyAccessor, []);
+      numberOfWeeks = numberOfWeeks || weekValues.length;
 
       row[columnKey] = {
         monthly: {
-          value: _get(monthData, `monthly_volumes.${row.path}`)
-        },
-        weekly: {
-          values: weekValues,
-          max: Math.max(...weekValues),
-          startIndex: weekIndex + 1,
-          endIndex: weekIndex + numberOfWeeks
-        }
-      };
-    });
-    // end of volume rows iteration
-
-    // start of conversion rows iteration
-    conversionRows.forEach(row => {
-      const weekValues = _get(monthData, `weekly_conversions.${row.path}`, []);
-
-      row[columnKey] = {
-        monthly: {
-          value: _get(monthData, `monthly_conversions.${row.path}`)
+          value: _get(monthData, monthlyAccessor)
         },
         weekly: {
           values: weekValues,
@@ -60,6 +40,7 @@ export default function(funnelHistory = []) {
         }
       };
     });
+    // end of rows iteration
 
     weekIndex = weekIndex + numberOfWeeks;
     // end of conversion rows iteration

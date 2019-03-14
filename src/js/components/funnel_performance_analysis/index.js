@@ -7,6 +7,8 @@ import Container from "../container";
 import SectionHeader from "../section_header";
 
 export function FunnelPerformanceAnalysis({ funnelHistory }) {
+  processData(funnelHistory);
+
   return (
     <Container className="funnel-performance-analysis">
       <SectionHeader title="Funnel Performance Analysis" />
