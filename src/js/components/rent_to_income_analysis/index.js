@@ -1,7 +1,11 @@
 import React from "react";
 import cn from "classnames";
 import PropTypes from "prop-types";
-import { formatCurrencyShorthand, formatPercent } from "../../utils/formatters";
+import {
+  formatCurrency,
+  formatCurrencyShorthand,
+  formatPercent
+} from "../../utils/formatters";
 
 import Panel from "../panel";
 import "./rent_to_income_analysis.scss";
@@ -66,7 +70,9 @@ export const RentToIncomeAnalysis = ({
                   key={rateIndex}
                   className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--yaxis"
                 >
-                  {formatCurrencyShorthand(rentalRate)}
+                  {rentalRate > 3000
+                    ? formatCurrencyShorthand(rentalRate)
+                    : formatCurrency(rentalRate)}
                 </div>
               ))}
             </div>
