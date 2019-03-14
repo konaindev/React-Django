@@ -1,35 +1,32 @@
 @import "css/base.scss";
 
-$button-default-bg: #273042;
-$button-selected-bg: $blue;
-
 .button {
-    background-color: $button-default-bg;
+    background-color: $button-default-bg-color;
     padding: $s3 $s4;
     border-radius: $border-radius-default;
-    color: $gray-dark;
+    color: $button-default-text-color;
     outline: none !important;
     font-size: $text-sm;
     font-weight: 500;
 
     &:hover, &:focus {
-        background-color: lighten($button-default-bg, 3%);
+        background-color: lighten($button-default-bg-color, 3%);
     }
 
     &:active {
-        background-color: darken($button-default-bg, 2%);
+        background-color: darken($button-default-bg-color, 2%);
     }
 
     &--selected {
-        background-color: $button-selected-bg;
-        color: $white;
+        background-color: $button-default-active-bg-color;
+        color: $button-default-active-text-color;
 
         &:hover, &:focus {
-            background-color: $button-selected-bg;
+            background-color: $button-default-active-bg-color;
         }
 
         &:active {
-            background-color: darken($button-selected-bg, 2%);
+            background-color: darken($button-default-active-bg-color, 2%);
         }
     }
 }

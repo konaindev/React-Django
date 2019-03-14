@@ -36,7 +36,10 @@ export default class WhiskerPlot extends Component {
   }
 
   render() {
-    const color = this.props.direction === "up" ? "#74EC98" : "#F74568";
+    const color =
+      this.props.direction === "up"
+        ? "#65FF00" // $accent-up-color
+        : "#FF7632"; // $accent-down-color
     return (
       <VictoryGroup
         padding={0}

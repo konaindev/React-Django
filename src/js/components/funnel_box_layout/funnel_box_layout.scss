@@ -6,10 +6,10 @@
     min-height: $s20;
     align-items: center;
     padding: $s5 $s8;
-    border-bottom: 1px solid #242b39;
+    border-bottom: 1px solid $table-border-color;
 
     &:first-child {
-        border-top: 1px solid #242b39;
+        border-top: 1px solid $table-border-color;
     }
 
     &__left {
@@ -25,21 +25,21 @@
     }
 
     &__name {
-        color: $gray-lightest;
+        color: $content-text-primary-color;
         font-size: $text-base;
         line-height: $line-height-tight;
         margin-bottom: $s1;
     }
 
     &__target {
-        color: $lighter-ui-text-color;
+        color: $content-text-secondary-color;
         font-size: $text-sm;
         font-weight: 300;
         line-height: $line-height-normal;
     }
 
     &__value {
-        color: $gray-lightest;
+        color: $hero-text-color;
         font-size: 1.75rem;
         line-height: 1;
         text-align: right;

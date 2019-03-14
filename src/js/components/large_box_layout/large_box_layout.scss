@@ -8,7 +8,7 @@
     height: 236px;
 
     &__top-line {
-        color: $white;
+        color: $title-small-color;
         font-size: 0.75rem;
         font-weight: 700;
         text-transform: uppercase;
@@ -21,7 +21,7 @@
     }
 
     &__bottom-line {
-        color: $bluegray-light;
+        color: $content-text-secondary-color;
         font-weight: 300;
         font-size: 0.875rem;
         line-height: 1.5rem;
@@ -35,7 +35,7 @@
     }
 
     &__content-value {
-        color: $lightest-ui-text-color;
+        color: $hero-text-color;
         font-family: $font-mono;
         font-size: 3.875rem;
         font-weight: 100;

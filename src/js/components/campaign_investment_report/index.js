@@ -12,6 +12,7 @@ import {
 import { LargeCurrencyShorthandBox, LargeNumberBox } from "../large_box_layout";
 import BoxRow from "../box_row";
 import BoxColumn from "../box_column";
+import Panel from "../panel";
 import ReportSection from "../report_section";
 import {
   SmallNumberBox,
@@ -120,7 +121,7 @@ export default class CampaignInvestmentReport extends Component {
     // render the bar chart
     return (
       <ReportSection name={name}>
-        <div className="bar-chart panel-rounded-rect">
+        <Panel className="bar-chart panel-rounded-rect">
           <VictoryChart
             theme={remarkablyChartTheme}
             domain={{ y: [0, 1] }}
@@ -144,7 +145,7 @@ export default class CampaignInvestmentReport extends Component {
               }}
             />
           </VictoryChart>
-        </div>
+        </Panel>
       </ReportSection>
     );
   };

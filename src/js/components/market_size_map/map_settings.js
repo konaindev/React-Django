@@ -6,17 +6,17 @@ export const stylesForNightMode = [
   {
     featureType: "all",
     elementType: "geometry",
-    stylers: [{ color: "#1a202e" }] // $bluegray-dark
+    stylers: [{ color: "#20272E" }] // $map-land-color
   },
   {
     featureType: "all",
     elementType: "labels.text.stroke",
-    stylers: [{ color: "#1a202e" }] // $bluegray-dark
+    stylers: [{ color: "#20272E" }] // $map-land-color
   },
   {
     featureType: "all",
     elementType: "labels.text.fill",
-    stylers: [{ color: "#747F95" }] // $heading-font-color
+    stylers: [{ color: "#798796" }] // $map-location-text-color
   },
   {
     featureType: "poi",
@@ -26,7 +26,7 @@ export const stylesForNightMode = [
   {
     featureType: "road",
     elementType: "all",
-    stylers: [{ color: "#292F3D" }] // road color
+    stylers: [{ color: "#181D23" }] // $map-road-color
   },
   {
     featureType: "transit",
@@ -36,7 +36,7 @@ export const stylesForNightMode = [
   {
     featureType: "water",
     elementType: "geometry",
-    stylers: [{ color: "#161c29" }] // $bluegray-dark-alt
+    stylers: [{ color: "#181D23" }] // $map-water-color
   },
   {
     featureType: "water",
@@ -46,10 +46,10 @@ export const stylesForNightMode = [
 ];
 
 export const stylesForRegionFill = {
-  strokeColor: "#5147FF",
+  strokeColor: "#0069FF", // $map-region-bg-color
   strokeOpacity: 1,
   strokeWeight: 1.54,
-  fillColor: "#6760e6", // rgba(103,96,230,0.1);
+  fillColor: "#0069FF", // $map-region-bg-color
   fillOpacity: 0.35
 };
 

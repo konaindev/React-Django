@@ -5,9 +5,6 @@
 //-----------------------------------------------------------------------------
 
 // The app-wide site header for *content* pages (see web/content.html and web/header.html)
-$header-bg-color: $blue;
-$header-link-color: $blue-light;
-
 .content-header {
     display: flex;
     align-items: center;
@@ -73,7 +70,6 @@ $header-link-color: $blue-light;
         line-height: $line-height-normal;
         padding: $s2 $s6 $s6 $s6;
         border-radius: $border-radius-lg;
-        border: solid 4px $bluegray-darkest;
     }
 
     .content-form-messages {
@@ -116,10 +112,10 @@ $header-link-color: $blue-light;
 
     .content-form-extras {
         font-size: $text-sm;
-        color: $gray-dark;
+        color: $content-text-secondary-color;
 
         a {
-            color: $gray-dark;
+            color: $content-text-primary-color;
         }
     }
 }

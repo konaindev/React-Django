@@ -1,10 +1,10 @@
 @import "css/base.scss";
 
-$category-color-0: #273042;
-$category-color-1: #867ffe;
-$category-color-2: #675efc;
-$category-color-3: #5147ff;
-$category-color-4: #4035f4;
+$category-color-0:          $blue-1;
+$category-color-1:          $blue-2;
+$category-color-2:          $blue-3;
+$category-color-3:          $blue-4;
+$category-color-4:          $blue-5;
 
 .rent-to-income-analysis {
     $this: &;
@@ -31,7 +31,7 @@ $category-color-4: #4035f4;
         letter-spacing: 0.4px;
         line-height: 16px;
         text-transform: uppercase;
-        color: $bluegray-lightest;
+        color: $table-heading-color;
         margin-bottom: 32px;
         white-space: nowrap;
     }
@@ -56,28 +56,28 @@ $category-color-4: #4035f4;
             vertical-align: middle;
 
             &--0 {
-                color: #6d778d;
-                background-color: $category-color-0;
+                background-color: $rtir-category-bg-color-0;
+                color: $rtir-category-text-color-0;
             }
 
             &--1 {
-                background-color: $category-color-1;
-                color: #ffffff;
+                background-color: $rtir-category-bg-color-1;
+                color: $rtir-category-text-color-1;
             }
 
             &--2 {
-                background-color: $category-color-2;
-                color: #ffffff;
+                background-color: $rtir-category-bg-color-2;
+                color: $rtir-category-text-color-2;
             }
 
             &--3 {
-                background-color: $category-color-3;
-                color: #ffffff;
+                background-color: $rtir-category-bg-color-3;
+                color: $rtir-category-text-color-3;
             }
 
             &--4 {
-                background-color: $category-color-4;
-                color: #ffffff;
+                background-color: $rtir-category-bg-color-4;
+                color: $rtir-category-text-color-4;
             }
         }
 

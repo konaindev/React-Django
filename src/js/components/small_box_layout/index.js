@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import FormattedMultiple from "../formatted_multiple";
+import Panel from "../panel";
 import withFormatters from "../with_formatters";
 import {
   formatMultiple,
@@ -34,7 +35,7 @@ class SmallBoxLayout extends Component {
   render() {
     const { content, detail, name } = this.props;
     return (
-      <div className="small-box panel-rounded-rect">
+      <Panel className="small-box">
         {/* Container for the label and detail text */}
         <div className="small-box__labels">
           <span className="small-box__labels__name">{name}</span>
@@ -46,7 +47,7 @@ class SmallBoxLayout extends Component {
         <div className="small-box__outer-content">
           <div className="small-box__inner-content">{content}</div>
         </div>
-      </div>
+      </Panel>
     );
   }
 }
