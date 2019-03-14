@@ -2,6 +2,7 @@ export const GOOGLE_MAP_API_KEY = "AIzaSyBu4HU8t3rRXnfdkNjSV1_PIhzzrFFlVTs";
 
 export const DEFAULT_ZOOM = 1;
 
+export const mapCirclePointColor = "#53F7DD"; // $map-circle-point-color
 export const stylesForNightMode = [
   {
     featureType: "all",
@@ -50,7 +51,7 @@ export const stylesForRegionFill = {
   strokeOpacity: 1,
   strokeWeight: 1.54,
   fillColor: "#0069FF", // $map-region-bg-color
-  fillOpacity: 0.35
+  fillOpacity: 0.1
 };
 
 export const createDefaultMapOptions = maps => ({

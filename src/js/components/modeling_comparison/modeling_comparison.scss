@@ -1,58 +1,87 @@
 @import "css/base.scss";
 
-// $table-color: #6D778D;
-$table-color: #8f9bb4;
-$table-border-color: rgba(61, 69, 85, 0.3);
-/* #3D4555 */
-$table-bg-active: rgba(33, 41, 58, 0.7);
-/* #21293A; */
-$table-bg-accent: $table-bg-active;
+$table-font-color: $highlight-gray-3;
+$table-border-color: $gray-4;
+$table-bg-accent: rgba($gray-4, 0.5);
 $table-heading-color: $gray-6;
 
 .modeling-comparison {
     .ReactTable {
         height: 100%;
-        border-radius: $panel-border-radius;
         background-color: $panel-background-color;
-        color: $table-color;
+        color: $table-font-color;
+        border-radius: $panel-border-radius;
+        box-shadow: $panel-box-shadow;
 
         .rt-thead {
             color: $table-heading-color;
-            font-size: 15px;
-            font-weight: bold;
+            border-color: $table-border-color;
+            border-bottom-width: 1px;
+            font-size: 12px;
+            font-weight: $weight-medium;
+            letter-spacing: 1px;
+            text-transform: uppercase;
 
             .rt-th {
-                padding: 40px 32px;
+                padding: 0;
+                text-align: right;
+
+                &>div {
+                    padding: 44px 20px 36px 20px;
+                }
+
+                &:last-child {
+                    &>div {
+                        padding-right: 80px;
+                    }
+                }
             }
         }
 
         .rt-tbody {
             .rt-tr-group {
-                border-bottom-color: $table-border-color;
+                border-bottom-width: 1px;
+                border-color: $table-border-color;
             }
 
             .rt-td {
-                padding: 16px 40px;
-                text-align: center;
+                padding: 0;
+                text-align: right;
+                font-size: $text-base;
+                font-weight: $weight-light;
+                line-height: 20px;
                 border-color: $table-border-color;
-                border-right-width: 0;
+
+                &>div {
+                    padding: 18px 20px;
+                }
 
                 &:first-child {
                     color: $table-heading-color;
+                    font-weight: $weight-normal;
                     text-align: left;
-                    border-right-width: 1px;
+                    line-height: 28px;
+
+                    &>div {
+                        display: flex;
+                        padding: 14px 20px 14px 60px;
+
+                        &>span {
+                            margin: -4px 8px 0 0;
+                        }
+                    }
+                }
+
+                &:last-child {
+                    &>div {
+                        padding-right: 80px;
+                    }
                 }
             }
 
             .rt-tr {
                 &.accent {
                     background-color: $table-bg-accent;
-                }
-
-                &.children {
-                    .rt-td:first-child {
-                        color: $table-color;
-                    }
                 }
             }
         }
