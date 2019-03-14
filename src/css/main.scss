@@ -14,7 +14,7 @@
     height: $s16;
     width: 100%;
 
-    background-color: $header-bg-color;
+    background-color: $page-header-bg-color;
 
     h1 {
         font-size: $text-xl;
@@ -22,7 +22,7 @@
     }
 
     a.nav-link {
-        color: $header-link-color;
+        color: $default-text-color;
         text-decoration: none;
 
         &:hover {

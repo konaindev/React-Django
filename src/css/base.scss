@@ -63,3 +63,15 @@ input[type="submit"] {
     border-bottom: solid 1px #586073;
     opacity: 0.18;
 }
+
+// the remarkably logo container
+.remarkably-logo {
+    display: block;
+    width: 189px;
+    min-width: 189px;
+    max-width: 189px;
+    height: 32px;
+    min-height: 32px;
+    max-height: 32px;
+    background-image: url(../images/remarkably-logo-green.svg);
+}
