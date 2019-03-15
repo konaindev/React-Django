@@ -1,5 +1,8 @@
 import _get from "lodash/get";
 
+import { formatDateWithTokens } from "../../utils/formatters";
+import { convertToKebabCase } from "../../utils/misc";
+
 export default function(funnelHistory = []) {
   let allRows = [
     { category: "volume", label: "Unique Site Visitors", path: "usv" },
@@ -16,20 +19,20 @@ export default function(funnelHistory = []) {
   let weekIndex = 0;
 
   // start of month iteration
-  funnelHistory.forEach(monthData => {
+  for (let monthFunnel of funnelHistory) {
     let numberOfWeeks;
-    let columnKey = monthData.month;
+    let columnKey = monthFunnel.month;
 
     // start of rows iteration
-    allRows.forEach(row => {
+    for (let row of allRows) {
       const weeklyAccessor = `weekly_${row.category}s.${row.path}`;
       const monthlyAccessor = `monthly_${row.category}s.${row.path}`;
-      const weekValues = _get(monthData, weeklyAccessor, []);
+      const weekValues = _get(monthFunnel, weeklyAccessor, []);
       numberOfWeeks = numberOfWeeks || weekValues.length;
 
       row[columnKey] = {
         monthly: {
-          value: _get(monthData, monthlyAccessor)
+          value: _get(monthFunnel, monthlyAccessor)
         },
         weekly: {
           values: weekValues,
@@ -39,11 +42,42 @@ export default function(funnelHistory = []) {
           endIndex: weekIndex + numberOfWeeks
         }
       };
-    });
+    }
     // end of rows iteration
 
     weekIndex = weekIndex + numberOfWeeks;
-    // end of conversion rows iteration
-  });
+  }
   // end of month iteration
+
+  let columns = funnelHistory.map(({ month }) => ({
+    key: month,
+    label: formatDateWithTokens(month, "MMM")
+  }));
+
+  // start of min/max evaluation
+  for (let row of allRows) {
+    const monthValues = columns.map(({ key }) =>
+      _get(row, `${key}.monthly.value`)
+    );
+    const weekValues = columns.reduce(
+      (a, { key }) => a.concat(_get(row, `${key}.weekly.values`)),
+      []
+    );
+
+    row.monthly = {
+      min: Math.min(...monthValues),
+      max: Math.max(...monthValues)
+    };
+
+    row.weekly = {
+      min: Math.min(...weekValues),
+      max: Math.max(...weekValues)
+    };
+
+    row.key = convertToKebabCase(row.label);
+  }
+  // end of min/max evaluation
+
+  console.log(allRows);
+  console.log(columns);
 }
