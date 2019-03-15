@@ -229,3 +229,12 @@ $border-radius-default: 0.25rem;
 $border-radius-lg: 0.5rem;
 $border-radius-full: 9999px;
 
+// the :export directive is the magic sauce for webpack
+:export {
+    mapCirclePointColor: $map-circle-point-color;
+    mapLandColor: $map-land-color;
+    mapLocationTextColor: $map-location-text-color;
+    mapRoadColor: $map-road-color;
+    mapWaterColor: $map-water-color;
+    mapRegionBgColor: $map-region-bg-color;
+}
