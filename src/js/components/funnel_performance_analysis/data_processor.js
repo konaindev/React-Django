@@ -3,6 +3,8 @@ import _get from "lodash/get";
 import { formatDateWithTokens } from "../../utils/formatters";
 import { convertToKebabCase } from "../../utils/misc";
 
+const sortNumber = (a, b) => a - b;
+
 export default function(funnelHistory = []) {
   let allRows = [
     { category: "volume", label: "Unique Site Visitors", path: "usv" },
@@ -50,12 +52,14 @@ export default function(funnelHistory = []) {
   // end of month iteration
 
   let columns = funnelHistory.map(({ month }) => ({
-    key: month,
-    label: formatDateWithTokens(month, "MMM")
+    accessor: month,
+    Header: formatDateWithTokens(month, "MMM")
   }));
 
   // start of min/max evaluation
   for (let row of allRows) {
+    row.key = convertToKebabCase(row.label);
+
     const monthValues = columns.map(({ key }) =>
       _get(row, `${key}.monthly.value`)
     );
@@ -66,18 +70,26 @@ export default function(funnelHistory = []) {
 
     row.monthly = {
       min: Math.min(...monthValues),
-      max: Math.max(...monthValues)
+      max: Math.max(...monthValues),
+      topThree: monthValues.sort(sortNumber).slice(-3)
     };
 
     row.weekly = {
       min: Math.min(...weekValues),
-      max: Math.max(...weekValues)
+      max: Math.max(...weekValues),
+      topThree: weekValues.sort(sortNumber).slice(-3)
     };
-
-    row.key = convertToKebabCase(row.label);
   }
   // end of min/max evaluation
 
-  console.log(allRows);
-  console.log(columns);
+  columns.unshift({
+    accessor: "label",
+    Header: ""
+  });
+
+  return {
+    columns,
+    volumeRows: allRows.filter(r => r.category === "volume"),
+    conversionRows: allRows.filter(r => r.category === "conversion")
+  };
 }

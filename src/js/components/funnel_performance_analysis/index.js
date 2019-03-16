@@ -1,19 +1,71 @@
 import React from "react";
 import { string, number, object, array, arrayOf, shape } from "prop-types";
+import ReactTable from "react-table";
 
 import "./funnel_performance_analysis.scss";
 import processData from "./data_processor";
 import Container from "../container";
 import SectionHeader from "../section_header";
 
-export function FunnelPerformanceAnalysis({ funnelHistory }) {
-  processData(funnelHistory);
+export class FunnelPerformanceAnalysis extends React.Component {
+  constructor(props) {
+    super(props);
 
-  return (
-    <Container className="funnel-performance-analysis">
-      <SectionHeader title="Funnel Performance Analysis" />
-    </Container>
-  );
+    const { columns, volumeRows, conversionRows } = processData(
+      props.funnelHistory
+    );
+
+    this.state = {
+      currentView: "monthly",
+      columns,
+      volumeRows,
+      conversionRows
+    };
+  }
+
+  static Table = ({ data, columns, className, currentView }) => {
+    let tableColumns = columns.map(c => ({
+      ...c,
+      Cell: CellRenderer
+    }));
+
+    return (
+      <ReactTable
+        data={data}
+        columns={tableColumns}
+        className={className}
+        defaultPageSize={data.length}
+        showPagination={false}
+        sortable={false}
+        resizable={false}
+        currentView={currentView}
+      />
+    );
+  };
+
+  render() {
+    const { currentView, columns, volumeRows, conversionRows } = this.state;
+
+    return (
+      <Container className="funnel-performance-analysis">
+        <SectionHeader title="Funnel Performance Analysis" />
+
+        <p>Volume of Activity</p>
+        <FunnelPerformanceAnalysis.Table
+          data={volumeRows}
+          columns={columns}
+          currentView={currentView}
+        />
+
+        <p>Conversion Rate</p>
+        <FunnelPerformanceAnalysis.Table
+          data={conversionRows}
+          columns={columns}
+          currentView={currentView}
+        />
+      </Container>
+    );
+  }
 }
 
 FunnelPerformanceAnalysis.propTypes = {
@@ -53,5 +105,9 @@ FunnelPerformanceAnalysis.propTypes = {
     })
   ).isRequired
 };
+
+function CellRenderer(props, a, b) {
+  return <span>{props?.value?.monthly?.value}</span>;
+}
 
 export default FunnelPerformanceAnalysis;
