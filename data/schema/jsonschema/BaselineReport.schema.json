@@ -35,6 +35,54 @@
             ],
             "type": "object"
         },
+        "AcquisitionCategories<number[]>": {
+            "description": "Acquisition funnel categories",
+            "properties": {
+                "app": {
+                    "description": "Lease applications",
+                    "items": {
+                        "type": "number"
+                    },
+                    "type": "array"
+                },
+                "exe": {
+                    "description": "Lease executions",
+                    "items": {
+                        "type": "number"
+                    },
+                    "type": "array"
+                },
+                "inq": {
+                    "description": "Inquiries",
+                    "items": {
+                        "type": "number"
+                    },
+                    "type": "array"
+                },
+                "tou": {
+                    "description": "Tours",
+                    "items": {
+                        "type": "number"
+                    },
+                    "type": "array"
+                },
+                "usv": {
+                    "description": "Unique site visitors",
+                    "items": {
+                        "type": "number"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "app",
+                "exe",
+                "inq",
+                "tou",
+                "usv"
+            ],
+            "type": "object"
+        },
         "AcquisitionCategories<string>": {
             "description": "Acquisition funnel categories",
             "properties": {
@@ -68,28 +116,124 @@
             ],
             "type": "object"
         },
-        "AcquisitionConversions": {
+        "AcquisitionCategories<string[]>": {
+            "description": "Acquisition funnel categories",
+            "properties": {
+                "app": {
+                    "description": "Lease applications",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "exe": {
+                    "description": "Lease executions",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "inq": {
+                    "description": "Inquiries",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "tou": {
+                    "description": "Tours",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "usv": {
+                    "description": "Unique site visitors",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "app",
+                "exe",
+                "inq",
+                "tou",
+                "usv"
+            ],
+            "type": "object"
+        },
+        "AcquisitionConversions<number>": {
             "description": "Acquisition conversions",
             "properties": {
                 "app_exe": {
-                    "description": "APP > EXE conversion percentage @computed",
+                    "description": "APP > EXE conversion rate @computed",
                     "type": "number"
                 },
                 "inq_tou": {
-                    "description": "INQ > TOU conversion percentage @computed",
+                    "description": "INQ > TOU conversion rate @computed",
                     "type": "number"
                 },
                 "tou_app": {
-                    "description": "TOU > APP conversion percentage @computed",
+                    "description": "TOU > APP conversion rate @computed",
                     "type": "number"
                 },
                 "usv_exe": {
-                    "description": "USV > EXE conversion percentage @computed",
+                    "description": "USV > EXE conversion rate @computed",
                     "type": "number"
                 },
                 "usv_inq": {
-                    "description": "USV > INQ conversion percentage @computed",
+                    "description": "USV > INQ conversion rate @computed",
                     "type": "number"
+                }
+            },
+            "required": [
+                "app_exe",
+                "inq_tou",
+                "tou_app",
+                "usv_exe",
+                "usv_inq"
+            ],
+            "type": "object"
+        },
+        "AcquisitionConversions<number[]>": {
+            "description": "Acquisition conversions",
+            "properties": {
+                "app_exe": {
+                    "description": "APP > EXE conversion rate @computed",
+                    "items": {
+                        "type": "number"
+                    },
+                    "type": "array"
+                },
+                "inq_tou": {
+                    "description": "INQ > TOU conversion rate @computed",
+                    "items": {
+                        "type": "number"
+                    },
+                    "type": "array"
+                },
+                "tou_app": {
+                    "description": "TOU > APP conversion rate @computed",
+                    "items": {
+                        "type": "number"
+                    },
+                    "type": "array"
+                },
+                "usv_exe": {
+                    "description": "USV > EXE conversion rate @computed",
+                    "items": {
+                        "type": "number"
+                    },
+                    "type": "array"
+                },
+                "usv_inq": {
+                    "description": "USV > INQ conversion rate @computed",
+                    "items": {
+                        "type": "number"
+                    },
+                    "type": "array"
                 }
             },
             "required": [
@@ -105,7 +249,7 @@
             "description": "Acquisition funnel",
             "properties": {
                 "conversions": {
-                    "$ref": "#/definitions/AcquisitionConversions",
+                    "$ref": "#/definitions/AcquisitionConversions<number>",
                     "description": "Conversion rates in the acquisition funnel @computed"
                 },
                 "costs": {
@@ -139,6 +283,13 @@
                     "$ref": "#/definitions/AcquisitionFunnel",
                     "description": "The acqusition funnel"
                 },
+                "funnel_history": {
+                    "description": "Funnel history",
+                    "items": {
+                        "$ref": "#/definitions/FunnelHistoryMonth"
+                    },
+                    "type": "array"
+                },
                 "investment": {
                     "$ref": "#/definitions/Investment",
                     "description": "Investment expenses and outcomes, all categories"
@@ -156,9 +307,53 @@
                 "dates",
                 "four_week_funnel_averages",
                 "funnel",
+                "funnel_history",
                 "investment",
                 "property",
                 "property_name"
+            ],
+            "type": "object"
+        },
+        "FunnelHistoryMonth": {
+            "description": "Desribes a single month of historical values for a baseline funnel",
+            "properties": {
+                "month": {
+                    "description": "The month, as an ISO 8601 string (like 2018-05)",
+                    "type": "string"
+                },
+                "monthly_conversions": {
+                    "$ref": "#/definitions/AcquisitionConversions<number>",
+                    "description": "Overall monthly conversion rates"
+                },
+                "monthly_costs": {
+                    "$ref": "#/definitions/AcquisitionCategories<string>",
+                    "description": "Overall monthly costs"
+                },
+                "monthly_volumes": {
+                    "$ref": "#/definitions/AcquisitionCategories<number>",
+                    "description": "Overall monthly volumes"
+                },
+                "weekly_conversions": {
+                    "$ref": "#/definitions/AcquisitionConversions<number[]>",
+                    "description": "Weekly conversion rates"
+                },
+                "weekly_costs": {
+                    "$ref": "#/definitions/AcquisitionCategories<string[]>",
+                    "description": "Weekly costs"
+                },
+                "weekly_volumes": {
+                    "$ref": "#/definitions/AcquisitionCategories<number[]>",
+                    "description": "Weekly volumes"
+                }
+            },
+            "required": [
+                "month",
+                "monthly_conversions",
+                "monthly_costs",
+                "monthly_volumes",
+                "weekly_conversions",
+                "weekly_costs",
+                "weekly_volumes"
             ],
             "type": "object"
         },

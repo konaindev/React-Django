@@ -1,22 +1,25 @@
+import scssVars from "../../../css/variables.scss";
+
 export const GOOGLE_MAP_API_KEY = "AIzaSyBu4HU8t3rRXnfdkNjSV1_PIhzzrFFlVTs";
 
 export const DEFAULT_ZOOM = 1;
 
+export const mapCirclePointColor = scssVars.mapCirclePointColor; // $map-circle-point-color
 export const stylesForNightMode = [
   {
     featureType: "all",
     elementType: "geometry",
-    stylers: [{ color: "#1a202e" }] // $bluegray-dark
+    stylers: [{ color: scssVars.mapLandColor }]
   },
   {
     featureType: "all",
     elementType: "labels.text.stroke",
-    stylers: [{ color: "#1a202e" }] // $bluegray-dark
+    stylers: [{ color: scssVars.mapLandColor }]
   },
   {
     featureType: "all",
     elementType: "labels.text.fill",
-    stylers: [{ color: "#747F95" }] // $heading-font-color
+    stylers: [{ color: scssVars.mapLocationTextColor }]
   },
   {
     featureType: "poi",
@@ -26,7 +29,7 @@ export const stylesForNightMode = [
   {
     featureType: "road",
     elementType: "all",
-    stylers: [{ color: "#292F3D" }] // road color
+    stylers: [{ color: scssVars.mapRoadColor }]
   },
   {
     featureType: "transit",
@@ -36,7 +39,7 @@ export const stylesForNightMode = [
   {
     featureType: "water",
     elementType: "geometry",
-    stylers: [{ color: "#161c29" }] // $bluegray-dark-alt
+    stylers: [{ color: scssVars.mapWaterColor }]
   },
   {
     featureType: "water",
@@ -46,11 +49,11 @@ export const stylesForNightMode = [
 ];
 
 export const stylesForRegionFill = {
-  strokeColor: "#5147FF",
+  strokeColor: scssVars.mapRegionBgColor,
   strokeOpacity: 1,
   strokeWeight: 1.54,
-  fillColor: "#6760e6", // rgba(103,96,230,0.1);
-  fillOpacity: 0.35
+  fillColor: scssVars.mapRegionBgColor,
+  fillOpacity: 0.1
 };
 
 export const createDefaultMapOptions = maps => ({

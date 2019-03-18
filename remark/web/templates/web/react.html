@@ -1,9 +1,11 @@
 {# The base template for all pages that are fully managed by react. #}
 {% extends "web/base.html" %}
 
+{% block title %}{% if page_title %}{{page_title}} :: {% endif %}Remarkably{% endblock %}
+
 {% block viewport %}
 {# Hack for now to "support" mobile devices #}
-<meta name="viewport" content="width=1200">
+<meta name="viewport" content="width=1440">
 {% endblock %}
 
 {% block body %}

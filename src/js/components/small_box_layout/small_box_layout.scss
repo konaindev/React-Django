@@ -17,13 +17,13 @@
 }
 
 .small-box__labels__name {
-    color: $lightest-ui-text-color;
+    color: $content-text-primary-color;
     font-size: $text-base;
     padding-left: $s10;
 }
 
 .small-box__labels__detail {
-    color: $lighter-ui-text-color;
+    color: $content-text-secondary-color;
     font-size: $text-sm;
     padding-left: $s10;
     margin-top: $s2;
@@ -38,7 +38,7 @@
 }
 
 .small-box__inner-content {
-    color: $lightest-ui-text-color;
+    color: $hero-text-color;
     font-weight: $weight-hairline;
     text-align: right;
     padding-right: 1.875rem;

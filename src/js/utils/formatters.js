@@ -1,4 +1,7 @@
 import React from "react";
+import dateFnformat from "date-fns/format";
+
+import { getDateDiff } from "./misc";
 
 /**
  * @description Return the BCP language identifier for the current user
@@ -117,6 +120,15 @@ export const formatDate = (value, year = true) => {
 };
 
 /**
+ * @description Format a date using date-fns library
+ *
+ * formatDateWithTokens("2018-12-17", "MMM D, YYYY"); // Dec 17, 2018
+ */
+export const formatDateWithTokens = (v, tokens) => {
+  return dateFnformat(new Date(v), tokens);
+};
+
+/**
  * @description Format a multiple by putting the letter x next to it.
  *
  * @param {number|string} value A value to format
@@ -152,41 +164,26 @@ export const targetFormatter = formatter => targetValue =>
 
 export const formatTargetPercent = targetFormatter(formatPercent);
 
-export const convertDistanceToMeter = (distance, unit) => {
-  if (unit === "mi") {
-    return distance * 1609.34;
-  }
-  if (unit === "km") {
-    return distance * 1000;
-  }
-  return distance;
-};
-
 /**
  * @description get date difference in specified unit
- * FIXME: consider using moment - Leo (Yes, let's! -Dave)
  */
-export const formatDateDiff = (date1, date2, unit = "month") => {
-  // FIXME as noted above, we should use a smarter library.
-  // "Month" means "calendar month", which can vary in length; momentjs
-  // can handle this.
-  const rawDate1 = new Date(date1);
-  const rawDate2 = new Date(date2);
-  const diffInMilliSec = rawDate1 - rawDate2;
-  switch (unit) {
-    case "second":
-      return `${Math.round(diffInMilliSec / 1000)} secs.`;
-    case "minute":
-      return `${Math.round(diffInMilliSec / (1000 * 60))} min.`;
-    case "hour":
-      return `${Math.round(diffInMilliSec / (1000 * 60 * 60))} hrs.`;
-    case "day":
-      return `${Math.round(diffInMilliSec / (1000 * 60 * 60 * 24))} days.`;
-    case "month":
-      return `${Math.round(diffInMilliSec / (1000 * 60 * 60 * 24 * 30))} mo.`;
-    case "year":
-      return `${Math.round(diffInMilliSec / (1000 * 60 * 60 * 24 * 365))} yr.`;
-    default:
-      return diffInMilliSec;
+export const formatDateDiff = (startDateStr, endDateStr, unit = "month") => {
+  const suffixesMap = {
+    second: "secs",
+    minute: "min",
+    hour: "hrs",
+    day: "days",
+    week: "weeks",
+    month: "mo",
+    year: "yr"
+  };
+
+  const value = getDateDiff(startDateStr, endDateStr, unit);
+  const suffix = suffixesMap[unit];
+
+  if (suffix) {
+    return `${value} ${suffix}.`;
+  } else {
+    return value;
   }
 };

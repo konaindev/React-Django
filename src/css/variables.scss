@@ -8,55 +8,152 @@
 // in your CSS. Instead, define a *semantic* variable that references
 // a raw color. For instance:
 //
-// $dashboard-panel-background: $blue-darkest;
-//
-// .dashboard-panel {
-//    background-color: $dashboard-panel-background;
-// }
 
-// Grayscale palette (Generically usable)
-$black: #000000;
-$gray-darkerest: #22292f; // LOL
-$gray-darkest: #3d4852;
-$gray-darker: #606f7b;
-$gray-dark: #8795a1;
-$gray: #b8c2cc;
-$gray-light: #dae1e7;
-$gray-lighter: #f1f5f8;
-$gray-lightest: #f8fafc;
-$white: #ffffff;
-
-// Blue palette (typically used in chrome, etc)
-$blue-darkest: #0e0d2c;
-$blue-darker: #192245;
-$blue-dark: #272f50;
-$blue-alt: #4f47f4;
-$blue: #5147ff;
-$blue-light: #d9e4ff;
-$blue-lightest: #eaf5ff;
-
-// Bluegray palette (typically used in UI)
-$bluegray-darkest: #0d111a;
-$bluegray-darker: #131926;
-$bluegray-dark: #1a202e;
-$bluegray-dark-alt: #161c29;
-$bluegray-border: #212734;
-$bluegray-light: #68788c; // text
-// $bluegray-lighter: #cccccc; // text-lighter
-$bluegray-lighter: #8f9bb4; // text-lighter
-$bluegray-lightest: $white;
+// Orange palette (used in piecharts)
+$orange-1: #c13e00;
+$orange-2: #ff5300;
+$orange-3: #ff7632;
+$orange-4: #ff9869;
+$orange-5: #ffbb9b;
 
 // Highlight bluegray colors
-$highlight-bluegray-1: #a09afd;
-$highlight-bluegray-2: #867ffe;
-$highlight-bluegray-3: #675efc;
-$highlight-bluegray-4: #5147ff;
-$highlight-bluegray-5: #4035f4;
+$highlight-gray-1: #8f9993;
+$highlight-gray-2: #bfccc4;
+$highlight-gray-3: #f5faf7;
 
-// Primary colors
-$primary-green: #74eb98;
-$primary-red: #f74568;
-$primary-yellow: #ffd28b;
+// Cyan palette (used in charts)
+$cyan-1: #2a7b6f;
+$cyan-2: #3ebaa6;
+$cyan-3: #53f7dd;
+$cyan-4: #77f9e4;
+$cyan-5: #9afaeb;
+$cyan-6: #bcfbf1;
+
+// Green palette
+$green-1: #338100;
+$green-2: #41c100;
+$green-3: #65ff00;
+$green-4: #85ff30;
+$green-5: #a4ff6b;
+$green-6: #c2ff9e;
+
+// Blue palette
+$blue-1: #003582;
+$blue-2: #004fc2;
+$blue-3: #0069ff;
+$blue-4: #2c88ff;
+$blue-5: #5da3ff;
+$blue-6: #97c4ff;
+
+// Turquoise palette
+$turquoise-1: #102324;
+$turquoise-2: #183535;
+$turquoise-3: #1f4647;
+$turquoise-4: #4c6b6c;
+$turquoise-5: #799091;
+$turquoise-6: #a6b5b5;
+
+// Grey palette
+$gray-1: #101417;
+$gray-2: #181d23;
+$gray-3: #20272e;
+$gray-4: #2b343d;
+$gray-5: #404e5d;
+$gray-6: #798796;
+$gray-7: #c2c6cb;
+$gray-8: #e1e3e5;
+
+//----------------------------------------------------------
+// Component colors
+//----------------------------------------------------------
+
+$hero-text-color: $highlight-gray-3;
+$title-large-color: $highlight-gray-3;
+$title-section-color: $gray-6;
+$title-small-color: $highlight-gray-3;
+$column-header-medium-color: $gray-6;
+$column-header-regular-color: $highlight-gray-3;
+$content-text-primary-color: $highlight-gray-3;
+$content-text-secondary-color: $gray-6;
+
+$delta-indicator-up-color: $green-3;
+$delta-indicator-down-color: $orange-3;
+$delta-indicator-flat-color: $gray-6;
+
+$nav-link-color: $highlight-gray-3;
+$nav-link-hover-color: $highlight-gray-2;
+$nav-link-disabled-color: $gray-6;
+$nav-link-border-color: $gray-3;
+$nav-link-active-border-color: $blue-3;
+
+$accent-up-color: $green-3;
+$accent-down-color: $orange-3;
+$accent-times-color: $blue-3;
+
+$table-border-color: $gray-4;
+$table-heading-color: $highlight-gray-3;
+$table-column-heading-color: $gray-6;
+$table-column-text-color: $highlight-gray-3;
+
+// Various other colors
+$default-background-color: $gray-2;
+$alt-default-background-color: $gray-3;
+$default-text-color: $gray-6;
+
+$input-border-color: $gray-4;
+$input-border: 1px solid $input-border-color;
+$input-text-color: $highlight-gray-3;
+$select-option-background-color: $gray-3;
+
+// Variables common to all visualization panels
+
+// This is the styling for the KPI panels of the baseline report
+$panel-background-color: $gray-3;
+$panel-border-radius: 6px;
+$panel-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+$panel-spacing: 28px 0;
+
+$button-default-bg-color: $gray-3;
+$button-default-active-bg-color: $blue-3;
+$button-default-text-color: $gray-6;
+$button-default-active-text-color: $highlight-gray-3;
+
+$button-primary-bg-color: $blue-3;
+$button-primary-active-bg-color: $blue-2;
+$button-primary-text-color: $highlight-gray-3;
+$button-primary-active-text-color: $highlight-gray-3;
+
+$button-group-line-color: $gray-4;
+
+$map-circle-point-color: $cyan-3;
+$map-zip-label-color: $highlight-gray-3;
+$map-region-bg-color: $blue-3;
+$map-background-color: $gray-2;
+$map-road-color: $gray-2;
+$map-water-color: $gray-2;
+$map-location-text-color: $gray-6;
+$map-land-color: $gray-3;
+
+$rtir-category-bg-color-0: $blue-1;
+$rtir-category-bg-color-1: $blue-2;
+$rtir-category-bg-color-2: $blue-3;
+$rtir-category-bg-color-3: $blue-4;
+$rtir-category-bg-color-4: $blue-5;
+$rtir-category-text-color-0: rgba($highlight-gray-3, 0.5);
+$rtir-category-text-color-1: rgba($highlight-gray-3, 0.5);
+$rtir-category-text-color-2: $highlight-gray-3;
+$rtir-category-text-color-3: rgba($highlight-gray-3, 0.5);
+$rtir-category-text-color-4: rgba($highlight-gray-3, 0.5);
+
+$msbi-border-color: $gray-5;
+$msbi-bar-fg-color: $cyan-3;
+$msbi-bar-bg-color: $gray-4;
+
+$page-header-bg-color: $gray-1;
+
+$header-bg-color: $blue-3;
+$header-link-color: $blue-4;
+$heading-border: 1px solid $gray-4;
 
 //----------------------------------------------------------
 // Typography
@@ -106,7 +203,7 @@ $weight-black: 900;
 
 //----------------------------------------------------------
 // Various visual variables
-//----------------------------------------------------------
+//c
 
 $s0: 0;
 $s1: 0.25rem;
@@ -131,40 +228,11 @@ $border-radius-default: 0.25rem;
 $border-radius-lg: 0.5rem;
 $border-radius-full: 9999px;
 
-//----------------------------------------------------------
-// Panels
-//----------------------------------------------------------
-
-// TODO this will become a mess quickly if we don't break it out
-// some of it might apply site-wide, and belong in something like panels.scss;
-// some of it seems component-specific. DDave
-
-// Variables common to all visualization panels
-
-// This is the styling for the KPI panels of the baseline report
-$panel-background-color: $bluegray-dark;
-$panel-border: 1px solid $bluegray-dark-alt;
-$panel-border-radius: 6px;
-$panel-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.15);
-$panel-spacing: 28px 0;
-
-// Top KPI in the baseline report styling
-$kpi-color: #fff;
-$kpi-font-family: $font-sans;
-$kpi-font-size: 12px;
-$kpi-font-weight: bold;
-
-// Various other colors
-$default-background-color: $bluegray-darker;
-$alt-default-background-color: $blue-darker;
-$lighter-background-color: $bluegray-lighter;
-$alt-lighter-background-color: $blue-alt;
-$lightest-background-color: $bluegray-lightest;
-$default-text-color: $blue-light;
-$default-ui-text-color: $bluegray-light;
-$lighter-ui-text-color: $bluegray-lighter;
-$lightest-ui-text-color: $bluegray-lightest;
-$kpi-font-color: $white;
-$heading-font-color: #747f95;
-$heading-border: 1px solid rgba(88, 96, 115, 0.6); /* #586073 */
-$table-border-color: rgba(61, 69, 85, 0.3); /* #3D4555 */
+:export {
+    mapCirclePointColor: $map-circle-point-color;
+    mapLandColor: $map-land-color;
+    mapLocationTextColor: $map-location-text-color;
+    mapRoadColor: $map-road-color;
+    mapWaterColor: $map-water-color;
+    mapRegionBgColor: $map-region-bg-color;
+}

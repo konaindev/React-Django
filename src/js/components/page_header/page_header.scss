@@ -2,14 +2,13 @@
 
 $header-height: 76px; // was $s16
 $header-quarter-height: 19px; // was $s4
-$header-inset: 60px;
 $header-half-inset: 36px;
 
 .page-header-inner {
-    background-color: $bluegray-darkest;
+    background-color: $page-header-bg-color;
     font-family: $font-headline;
     height: $header-height;
-    padding: 23px $header-inset 15px $header-inset;
+    padding: 23px 74px 15px 41px;
     line-height: $line-height-tight;
 }
 
@@ -30,5 +29,4 @@ $header-half-inset: 36px;
     display: block;
     height: $header-height;
     padding: $header-quarter-height 0 0 $header-half-inset;
-    border-left: solid 1px $bluegray-border;
 }

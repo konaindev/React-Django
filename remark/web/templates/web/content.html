@@ -1,6 +1,9 @@
 {# Base layout for all content (aka non-react-rendered) pages. Includes header and footer. #}
 {% extends 'web/base.html' %}
 
+{# Default title for fun and profit #}
+{% block title %}Remarkably{% endblock %}
+
 {% block body %}
     <div id="page-wrapper">
         {% block header %}

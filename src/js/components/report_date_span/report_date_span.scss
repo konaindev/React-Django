@@ -6,12 +6,12 @@
     &__content {
         border-radius: $border-radius-default;
         padding: $s3 $s4;
-        border: 1px solid $gray-darkest;
+        border: $input-border;
         font-size: $text-sm;
 
         &-name {
             font-weight: 700;
-            color: $gray-lightest;
+            color: $input-text-color;
             margin-right: $s3;
         }
     }

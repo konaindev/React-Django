@@ -11,17 +11,5 @@ module.exports = webpackMerge(commonConfig, {
   },
   devtool: "inline-source-map",
   mode: "development",
-  module: {
-    rules: [
-      {
-        test: /\.(less|css)$/,
-        use: [
-          { loader: "style-loader" },
-          { loader: "css-loader" },
-          { loader: "less-loader" }
-        ]
-      }
-    ]
-  },
   plugins: [new webpack.NamedModulesPlugin()]
 });

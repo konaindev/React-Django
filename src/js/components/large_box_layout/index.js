@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import FormattedMultiple from "../formatted_multiple";
+import Panel from "../panel";
 import withFormatters from "../with_formatters";
 import {
   formatMultiple,
@@ -33,35 +34,34 @@ export class LargeBoxLayout extends Component {
     innerBox: PropTypes.element
   };
 
-  renderInnerBox() {
-    return this.props.innerBox ? (
-      <div className="large-box__inner-box">{this.props.innerBox}</div>
-    ) : null;
-  }
-
   render() {
+    const { name, content, innerBox, detail, detail2 } = this.props;
+
     return (
-      <div className="large-box panel-rounded-rect">
+      <Panel className="large-box">
         {/* Container for the content itself.
             Counter-intuitively items- and text- center the rows and row content
             while justif- centers the rows vertically within the box. */}
-        <span className="large-box__name">{this.props.name}</span>
-        <div className="large-box__outer-content">
-          <span className="large-box__inner-content">{this.props.content}</span>
-          {this.renderInnerBox()}
+        <span className="large-box__top-line">{name}</span>
+        <div className="large-box__content">
+          <span className="large-box__content-value">{content}</span>
+          {innerBox && (
+            <div className="large-box__content-extra">{innerBox}</div>
+          )}
         </div>
-        <span className="large-box__detail">{this.props.detail}</span>
-        <span className="large-box__detail">{this.props.detail2}</span>
-      </div>
+        <span className="large-box__bottom-line">{detail}</span>
+        <span className="large-box__bottom-line">{detail2}</span>
+      </Panel>
     );
   }
 }
 
 // Define LargeBoxLayouts that take values and targets of various types.
 
-// @TODO: replace references of LargeMultipleBox with LargeNumberBox
-// just pass symbolType="multiple"
-export const LargeMultipleBox = withFormatters(LargeBoxLayout, formatNumber);
+// use this in case NOT to color "x" with blue
+// otherwise use LargeNumberBox with "symbolType" prop
+export const LargeMultipleBox = withFormatters(LargeBoxLayout, formatMultiple);
+
 export const LargePercentBox = withFormatters(
   LargeBoxLayout,
   formatPercent,

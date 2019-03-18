@@ -9,12 +9,10 @@ import {
   VictoryAxis
 } from "victory";
 
-import {
-  LargeCurrencyShorthandBox,
-  LargeMultipleBox
-} from "../large_box_layout";
+import { LargeCurrencyShorthandBox, LargeNumberBox } from "../large_box_layout";
 import BoxRow from "../box_row";
 import BoxColumn from "../box_column";
+import Panel from "../panel";
 import ReportSection from "../report_section";
 import {
   SmallNumberBox,
@@ -27,6 +25,7 @@ import {
   formatPercent
 } from "../../utils/formatters.js";
 import { remarkablyChartTheme } from "../../utils/victoryTheme.js";
+import { CurrencyShorthandGraphBox } from "../large_graph_box";
 
 import "./campaign_investment_report.scss";
 
@@ -45,12 +44,12 @@ export default class CampaignInvestmentReport extends Component {
   static HeadlineNumbers = ({ report: r }) => {
     return (
       <BoxRow>
-        <LargeCurrencyShorthandBox
+        <CurrencyShorthandGraphBox
           name="Campaign Investment"
           value={r.investment.total.total}
           target={r.targets?.investment?.total?.total}
           delta={r.deltas?.investment?.total?.total}
-          innerBox={WhiskerPlot.maybe(r.whiskers?.investment)}
+          series={r.whiskers?.investment}
         />
         <LargeCurrencyShorthandBox
           name="Est. Revenue Change"
@@ -58,7 +57,7 @@ export default class CampaignInvestmentReport extends Component {
           target={r.targets?.investment?.total?.estimated_revenue_gain}
           symbolType="sign"
         />
-        <LargeMultipleBox
+        <LargeNumberBox
           name={
             <>
               Campaign Return on <br />
@@ -122,7 +121,7 @@ export default class CampaignInvestmentReport extends Component {
     // render the bar chart
     return (
       <ReportSection name={name}>
-        <div className="bar-chart panel-rounded-rect">
+        <Panel className="bar-chart panel-rounded-rect">
           <VictoryChart
             theme={remarkablyChartTheme}
             domain={{ y: [0, 1] }}
@@ -146,7 +145,7 @@ export default class CampaignInvestmentReport extends Component {
               }}
             />
           </VictoryChart>
-        </div>
+        </Panel>
       </ReportSection>
     );
   };
@@ -176,7 +175,7 @@ export default class CampaignInvestmentReport extends Component {
           target={r.targets?.investment?.acquisition?.estimated_revenue_gain}
           symbolType="sign"
         />
-        <SmallMultipleBox
+        <SmallNumberBox
           name="Acquisition ROMI"
           value={r.investment.acquisition.romi}
           target={r.targets?.investment?.acquisition?.romi}
@@ -235,7 +234,7 @@ export default class CampaignInvestmentReport extends Component {
           target={r.targets?.investment?.retention?.estimated_revenue_gain}
           symbolType="sign"
         />
-        <SmallMultipleBox
+        <SmallNumberBox
           name="Retention ROMI"
           value={r.investment.retention.romi}
           target={r.targets?.investment?.retention?.romi}

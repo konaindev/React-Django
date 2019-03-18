@@ -107,21 +107,21 @@ interface AcquisitionCategories<T> {
 }
 
 /** Acquisition conversions */
-interface AcquisitionConversions {
-  /** USV > INQ conversion percentage @computed */
-  usv_inq: t.percent;
+interface AcquisitionConversions<T> {
+  /** USV > INQ conversion rate @computed */
+  usv_inq: T;
 
-  /** INQ > TOU conversion percentage @computed */
-  inq_tou: t.percent;
+  /** INQ > TOU conversion rate @computed */
+  inq_tou: T;
 
-  /** TOU > APP conversion percentage @computed */
-  tou_app: t.percent;
+  /** TOU > APP conversion rate @computed */
+  tou_app: T;
 
-  /** APP > EXE conversion percentage @computed */
-  app_exe: t.percent;
+  /** APP > EXE conversion rate @computed */
+  app_exe: T;
 
-  /** USV > EXE conversion percentage @computed */
-  usv_exe: t.percent;
+  /** USV > EXE conversion rate @computed */
+  usv_exe: T;
 }
 
 /** Acquisition funnel */
@@ -133,7 +133,7 @@ export interface AcquisitionFunnel {
   costs: AcquisitionCategories<t.currency>;
 
   /** Conversion rates in the acquisition funnel @computed */
-  conversions: AcquisitionConversions;
+  conversions: AcquisitionConversions<t.percent>;
 }
 
 /** Property-wide behavior */
@@ -175,10 +175,40 @@ export interface PropertyReportWithFunnelAverages extends PropertyReport {
   four_week_funnel_averages: AcquisitionCategories<t.integer>;
 }
 
+/** Desribes a single month of historical values for a baseline funnel */
+interface FunnelHistoryMonth {
+  /** The month, as an ISO 8601 string (like 2018-05) */
+  month: t.date;
+
+  /** Weekly volumes */
+  weekly_volumes: AcquisitionCategories<t.integer[]>;
+
+  /** Overall monthly volumes */
+  monthly_volumes: AcquisitionCategories<t.integer>;
+
+  /** Weekly conversion rates */
+  weekly_conversions: AcquisitionConversions<t.percent[]>;
+
+  /** Overall monthly conversion rates */
+  monthly_conversions: AcquisitionConversions<t.percent>;
+
+  /** Weekly costs */
+  weekly_costs: AcquisitionCategories<t.currency[]>;
+
+  /** Overall monthly costs */
+  monthly_costs: AcquisitionCategories<t.currency>;
+}
+
+/** Describes historical values for a baseline funnel */
+type FunnelHistory = FunnelHistoryMonth[];
+
 /** A baseline report is a property report with further details */
 export interface BaselineReport extends PropertyReportWithFunnelAverages {
   /** Property name */
   property_name: string;
+
+  /** Funnel history */
+  funnel_history: FunnelHistory;
 
   // TODO in the future:
   // funnel performance analysis (monthly and weekly)

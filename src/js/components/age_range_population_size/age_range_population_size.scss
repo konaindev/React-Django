@@ -1,7 +1,5 @@
 @import "css/base.scss";
 
-$age-range-population-size-bg-color: $bluegray-dark;
-
 .age-range-population-size {
     max-width: 160px;
     display: flex;
@@ -9,7 +7,7 @@ $age-range-population-size-bg-color: $bluegray-dark;
     justify-content: space-between;
     align-items: center;
     padding: 16px 20px;
-    background-color: $age-range-population-size-bg-color;
+    background-color: $panel-background-color;
 }
 
 .age-range-population-size span:first-child {
@@ -18,7 +16,7 @@ $age-range-population-size-bg-color: $bluegray-dark;
     font-weight: 500;
     line-height: 26px;
     letter-spacing: 0.5px;
-    color: $lightest-ui-text-color;
+    color: $content-text-primary-color;
     text-transform: uppercase;
 }
 
@@ -26,7 +24,7 @@ $age-range-population-size-bg-color: $bluegray-dark;
     /*font-size: 2.75rem;*/
     font-size: 44px;
     margin: 16px 0 14px 0;
-    color: $lightest-ui-text-color;
+    color: $content-text-primary-color;
 }
 
 .age-range-population-size span:nth-child(3) {

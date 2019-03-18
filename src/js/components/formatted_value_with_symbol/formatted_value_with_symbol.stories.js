@@ -17,7 +17,7 @@ const props2 = {
 };
 
 const props3 = {
-  value: 1000,
+  value: -34,
   formatter: formatNumber,
   symbolType: "multiple"
 };

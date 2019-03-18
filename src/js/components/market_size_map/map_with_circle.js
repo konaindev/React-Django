@@ -7,9 +7,10 @@ import {
   GOOGLE_MAP_API_KEY,
   DEFAULT_ZOOM,
   createDefaultMapOptions,
-  stylesForRegionFill
+  stylesForRegionFill,
+  mapCirclePointColor
 } from "./map_settings";
-import { convertDistanceToMeter } from "../../utils/formatters";
+import { convertDistanceToMeter } from "../../utils/misc";
 
 const RadiusTextRotated = ({ radius, units }) => (
   <div className="radius-text-rotated">{`${radius} ${units}`}</div>
@@ -82,8 +83,8 @@ export class MapWithCircle extends Component {
 
     const pointSymbol = {
       path: google.maps.SymbolPath.CIRCLE,
-      scale: 6,
-      fillColor: "#FFF",
+      scale: 8,
+      fillColor: mapCirclePointColor,
       fillOpacity: 1,
       strokeOpacity: 0
     };
@@ -106,14 +107,14 @@ export class MapWithCircle extends Component {
     const dashSymbol = {
       path: "M 0,-1 0,1",
       strokeOpacity: 1,
-      strokeWidth: 0.77,
+      strokeWeight: 2,
       scale: 1
     };
 
     let radiusLine = new google.maps.Polyline({
       path: [centerLatLng, borderLatLng],
       map: google.map,
-      strokeColor: "#FFF",
+      strokeColor: mapCirclePointColor,
       strokeOpacity: 0,
       icons: [
         {

@@ -14,7 +14,7 @@
         &:not(:last-child) {
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
-            border-right: 1px solid $gray-darkest;
+            border-right: 1px solid $button-group-line-color;
         }
     }
 }

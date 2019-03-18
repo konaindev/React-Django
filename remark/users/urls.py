@@ -4,11 +4,6 @@ from django.urls import path
 from django.views.generic.base import RedirectView
 
 urlpatterns = [
-    path(
-        "login/",
-        auth_views.LoginView.as_view(template_name="users/login.html"),
-        name="login",
-    ),
     # XXX SECURITY Django's logout view uses GET to perform the logout action,
     # which is pretty lame -- it's trivially cross-site scriptable. Not a huge
     # issue for now, but we'll want to fix it someday. -Dave
