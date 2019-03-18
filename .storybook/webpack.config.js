@@ -23,7 +23,8 @@ module.exports = {
         test: /\.(css|scss)$/,
         use: [
           {
-            loader: "style-loader"
+            // just for storybook, inject our styles directly into the DOM
+            loader: "style-loader",
           },
           {
             loader: "css-loader"
