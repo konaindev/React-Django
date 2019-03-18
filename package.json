@@ -38,10 +38,13 @@
     "lodash-webpack-plugin": "^0.11.5",
     "mini-css-extract-plugin": "^0.5.0",
     "node-sass": "^4.11.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
     "prettier": "^1",
     "prettier-eslint": "^8",
+    "resolve-url-loader": "^3.0.1",
     "sass": "^1.15.2",
     "sass-loader": "^7.1.0",
+    "style-loader": "~0.19.1",
     "stylelint": "^9",
     "stylelint-config-recommended": "^2.1.0",
     "stylelint-webpack-plugin": "^0.10.5",
@@ -63,7 +66,6 @@
     "react": "^16",
     "react-dom": "^16",
     "react-table": "^6.9.2",
-    "resolve-url-loader": "^3.0.1",
     "victory": "^31.1.0"
   }
 }

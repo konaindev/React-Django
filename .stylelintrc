@@ -11,7 +11,11 @@
       }
     ],
     "block-no-empty": null,
+    "unit-whitelist": ["em", "rem", "s", "%", "deg", "px", "vh", "fr"],
     "no-descending-specificity": null,
-    "unit-whitelist": ["em", "rem", "s", "%", "deg", "px", "vh", "fr"]
+    "selector-pseudo-class-no-unknown": [true, {
+      "ignorePseudoClasses": ["global", "export", "import", "local"]
+    }],
+    "property-no-unknown": null
   }
 }
