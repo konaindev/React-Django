@@ -7,8 +7,8 @@ import datetime
 import json
 import jsonschema
 import os
-import sys
 
+import click
 import openpyxl
 
 
@@ -289,7 +289,7 @@ class TAMImporter(ExcelImporter):
 
         self.validate(result)
 
-        return json.dumps(result)
+        return result
 
 
 class ModelingImporter(ExcelImporter):
@@ -480,21 +480,26 @@ class ModelingImporter(ExcelImporter):
 
         self.validate(result)
 
-        return json.dumps(result)
+        return result
+
+
+@click.command()
+@click.option(
+    "-k",
+    "--kind",
+    type=click.Choice(["tam", "modeling"]),
+    required=True,
+    help="The kind of spreadsheet to import.",
+)
+@click.argument("file_name", type=click.Path(exists=True))
+def import_excel(kind, file_name):
+    if kind == "tam":
+        importer = TAMImporter(file_name)
+    elif kind == "modeling":
+        importer = ModelingImporter(file_name)
+    output = importer.get_report()
+    print(json.dumps(output, indent=2))
 
 
 if __name__ == "__main__":
-    if len(sys.argv) <= 2:
-        raise Exception(
-            "You need to pass in the Excel File Type and the Excel file path"
-        )
-
-    if sys.argv[1] == "tam":
-        importer = TAMImporter(sys.argv[2])
-    elif sys.argv[1] == "modeling":
-        importer = ModelingImporter(sys.argv[2])
-
-    print("Excel Path: %s" % sys.argv[2])
-    output = importer.get_report()
-    print("Complete.")
-    print(output)
+    import_excel()

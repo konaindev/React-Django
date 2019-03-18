@@ -11,6 +11,7 @@ python-language-server = {extras = ["all"],version = "*"}
 pyls-black = "*"
 pyls-mypy = "*"
 beautifulsoup4 = "*"
+click = "*"
 
 [packages]
 django-heroku = "*"
