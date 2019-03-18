@@ -150,8 +150,8 @@ INTERNAL_IPS = ["127.0.0.1"]
 AUTH_USER_MODEL = "users.User"
 
 # Login and logout
-LOGIN_REDIRECT_URL = "/admin/"
-LOGIN_URL = "/users/login/"
+LOGIN_REDIRECT_URL = "/dashboard"
+LOGIN_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
 # Simplified static file serving.
