@@ -1,5 +1,6 @@
 import React from "react";
 import { string, number, object, array, arrayOf, shape } from "prop-types";
+import cx from "classnames";
 import ReactTable from "react-table";
 
 import "./funnel_performance_analysis.scss";
@@ -8,6 +9,7 @@ import Container from "../container";
 import SectionHeader from "../section_header";
 import Panel from "../panel";
 import ButtonGroup from "../button_group";
+import { formatNumber, formatPercent } from "../../utils/formatters";
 
 export class FunnelPerformanceAnalysis extends React.Component {
   constructor(props) {
@@ -148,7 +150,7 @@ function getCellMinWidth(accessor, viewMode) {
 
 function CellRenderer({ value, original, column, viewMode }) {
   if (column.id === "label") {
-    return <span>{value}</span>;
+    return <div dangerouslySetInnerHTML={{ __html: value }} />;
   }
 
   if (viewMode === "monthly") {
@@ -160,8 +162,34 @@ function CellRenderer({ value, original, column, viewMode }) {
   }
 }
 
-function MonthlyCell(props) {
-  return <span />;
+function MonthlyCell({ cellData, rowData }) {
+  const { value, highlight } = cellData;
+  const {
+    category,
+    monthly: { max }
+  } = rowData;
+  const circleSize = max > 0 ? (value / max) * 100 : 100;
+
+  return (
+    <div className="cell-monthly">
+      <div className="cell-monthly__circle-wrapper">
+        <div
+          className={cx("cell-monthly__circle", {
+            "cell-monthly__circle--highlight": highlight
+          })}
+          style={{ width: `${circleSize}%`, height: `${circleSize}%` }}
+        />
+      </div>
+      <div
+        className={cx("cell-monthly__value", {
+          "cell-monthly__value--highlight": highlight
+        })}
+      >
+        {category === "volume" && formatNumber(value, 0)}
+        {category === "conversion" && formatPercent(value, 0)}
+      </div>
+    </div>
+  );
 }
 
 function WeeklyCell(props) {
