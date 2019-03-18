@@ -1,4 +1,3 @@
-import sys
 import os
 import pickle
 import requests
@@ -27,6 +26,10 @@ def memoize(label):
                 filename += ":%s" % str(arg)
             filename += ".pkl"
             filepath = "../../data/zipcode/%s" % filename
+            filepath = os.path.join(
+                os.path.dirname(os.path.abspath(__file__)), filepath
+            )
+
             if os.path.exists(filepath):
                 print("Read from disk: %s" % filepath)
                 file_ref = open(filepath, "rb")
@@ -391,7 +394,11 @@ def main():
     # radius = float(sys.argv[3])
 
     zipcodes = ZIP_CODES  # fetch_zip_codes(latitude, longitude, radius)
-    workbook = load_workbook("../templates/tam-template.xlsx")
+    template_location = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)), "../templates/tam-template.xlsx"
+    )
+
+    workbook = load_workbook(template_location)
 
     # generate Zip Code Worksheet
     for zipcode in zipcodes:
@@ -408,7 +415,12 @@ def main():
     # delete sample data tab
     workbook.remove(workbook["Sample Zip Data"])
 
-    workbook.save(filename="../../dist/remarkably-tam-test.xlsx")
+    target_workbook_file_name = os.path.join(
+        os.path.dirname(os.path.abspath(__file__)),
+        "../../dist/remarkably-tam-test.xlsx",
+    )
+
+    workbook.save(filename=target_workbook_file_name)
 
 
 # fetch_zip_codes(latitude, longitude, radius * MILES_KILOMETERS_RATIO)
