@@ -6,21 +6,10 @@ then produces the final JSON
 import datetime
 import json
 import jsonschema
-import logging
 import os
 import sys
 
 import openpyxl
-
-
-def pycel_logging_to_console(enable=True):
-    if enable:
-        logger = logging.getLogger("pycel")
-        logger.setLevel("INFO")
-
-        console = logging.StreamHandler(sys.stdout)
-        console.setLevel(logging.INFO)
-        logger.addHandler(console)
 
 
 MAX_ROW = 500
@@ -495,8 +484,6 @@ class ModelingImporter(ExcelImporter):
 
 
 if __name__ == "__main__":
-    pycel_logging_to_console()
-
     if len(sys.argv) <= 2:
         raise Exception(
             "You need to pass in the Excel File Type and the Excel file path"
