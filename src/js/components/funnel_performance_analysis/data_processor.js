@@ -60,11 +60,11 @@ export default function(funnelHistory = []) {
   for (let row of allRows) {
     row.key = convertToKebabCase(row.label);
 
-    const monthValues = columns.map(({ key }) =>
-      _get(row, `${key}.monthly.value`)
+    const monthValues = columns.map(({ accessor }) =>
+      _get(row, `${accessor}.monthly.value`)
     );
     const weekValues = columns.reduce(
-      (a, { key }) => a.concat(_get(row, `${key}.weekly.values`)),
+      (a, { accessor }) => a.concat(_get(row, `${accessor}.weekly.values`)),
       []
     );
 

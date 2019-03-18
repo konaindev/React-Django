@@ -1,5 +1,29 @@
 @import "css/base.scss";
 
 .funnel-performance-analysis {
+    .panel {
+        padding: 60px 80px;
+    }
 
+    .analysis__panel-header {
+        display: flex;
+        justify-content: space-between;
+
+        .button-group {
+            &__item {
+                line-height: 1.25rem;
+                padding: 0.5rem 2.5rem;
+            }
+        }
+    }
+
+    .analysis__table-intro {
+        color: $highlight-gray-3;
+        font-size: $text-base;
+        margin-top: 3.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .analysis__table-wrapper {
+    }
 }

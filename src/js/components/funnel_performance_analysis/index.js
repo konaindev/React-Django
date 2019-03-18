@@ -6,6 +6,8 @@ import "./funnel_performance_analysis.scss";
 import processData from "./data_processor";
 import Container from "../container";
 import SectionHeader from "../section_header";
+import Panel from "../panel";
+import ButtonGroup from "../button_group";
 
 export class FunnelPerformanceAnalysis extends React.Component {
   constructor(props) {
@@ -16,53 +18,79 @@ export class FunnelPerformanceAnalysis extends React.Component {
     );
 
     this.state = {
-      currentView: "monthly",
+      viewMode: "monthly",
       columns,
       volumeRows,
       conversionRows
     };
+
+    this.buttonGroupOptions = [
+      {
+        value: "monthly",
+        label: "Monthly"
+      },
+      {
+        value: "weekly",
+        label: "Weekly"
+      }
+    ];
   }
 
-  static Table = ({ data, columns, className, currentView }) => {
+  static Table = ({ data, columns, viewMode }) => {
     let tableColumns = columns.map(c => ({
       ...c,
-      Cell: CellRenderer
+      minWidth: getCellMinWidth(c.accessor, viewMode),
+      Cell: props => <CellRenderer {...props} viewMode={viewMode} />
     }));
 
     return (
       <ReactTable
         data={data}
         columns={tableColumns}
-        className={className}
+        className="analysis__table-wrapper"
         defaultPageSize={data.length}
         showPagination={false}
         sortable={false}
         resizable={false}
-        currentView={currentView}
+        viewMode={viewMode}
       />
     );
   };
 
+  handleChangeViewMode = viewMode => {
+    this.setState({ viewMode });
+  };
+
   render() {
-    const { currentView, columns, volumeRows, conversionRows } = this.state;
+    const { viewMode, columns, volumeRows, conversionRows } = this.state;
 
     return (
       <Container className="funnel-performance-analysis">
         <SectionHeader title="Funnel Performance Analysis" />
 
-        <p>Volume of Activity</p>
-        <FunnelPerformanceAnalysis.Table
-          data={volumeRows}
-          columns={columns}
-          currentView={currentView}
-        />
+        <Panel>
+          <div className="analysis__panel-header">
+            <ButtonGroup
+              onChange={this.handleChangeViewMode}
+              value={viewMode}
+              options={this.buttonGroupOptions}
+            />
+          </div>
 
-        <p>Conversion Rate</p>
-        <FunnelPerformanceAnalysis.Table
-          data={conversionRows}
-          columns={columns}
-          currentView={currentView}
-        />
+          <p className="analysis__table-intro">Volume of Activity</p>
+          <FunnelPerformanceAnalysis.Table
+            data={volumeRows}
+            columns={columns}
+            viewMode={viewMode}
+          />
+
+          <p className="analysis__table-intro">Conversion Rate</p>
+          <FunnelPerformanceAnalysis.Table
+            data={conversionRows}
+            columns={columns}
+            viewMode={viewMode}
+          />
+        </Panel>
       </Container>
     );
   }
@@ -106,8 +134,38 @@ FunnelPerformanceAnalysis.propTypes = {
   ).isRequired
 };
 
-function CellRenderer(props, a, b) {
-  return <span>{props?.value?.monthly?.value}</span>;
+function getCellMinWidth(accessor, viewMode) {
+  if (accessor === "label") {
+    return 140;
+  }
+
+  if (viewMode === "monthly") {
+    return 84;
+  }
+
+  return 78;
+}
+
+function CellRenderer({ value, original, column, viewMode }) {
+  if (column.id === "label") {
+    return <span>{value}</span>;
+  }
+
+  if (viewMode === "monthly") {
+    return <MonthlyCell cellData={value.monthly} rowData={original} />;
+  }
+
+  if (viewMode === "weekly") {
+    return <WeeklyCell cellData={value.weekly} rowData={original} />;
+  }
+}
+
+function MonthlyCell(props) {
+  return <span />;
+}
+
+function WeeklyCell(props) {
+  return <span />;
 }
 
 export default FunnelPerformanceAnalysis;
