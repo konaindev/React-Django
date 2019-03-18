@@ -12,7 +12,7 @@ import "css/main.scss";
  * Be sure to add your Page to the pages object.
  */
 import BaselineReportPage from "./pages/BaselineReportPage.js";
-import HomePage from "./pages/HomePage.js";
+import DashboardPage from "./pages/HomePage.js";
 import MarketReportPage from "./pages/MarketReportPage.js";
 import ModelingReportPage from "./pages/ModelingReportPage.js";
 import Page from "./pages/Page.js";
@@ -21,7 +21,7 @@ import ProjectPage from "./pages/ProjectPage.js";
 
 const pages = {
   BaselineReportPage,
-  HomePage,
+  DashboardPage,
   MarketReportPage,
   ModelingReportPage,
   Page,
