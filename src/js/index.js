@@ -11,20 +11,18 @@ import "css/main.scss";
  *
  * Be sure to add your Page to the pages object.
  */
-import BaselineReportPage from "./pages/BaselineReportPage.js";
-import DashboardPage from "./pages/DashboardPage.js";
-import MarketReportPage from "./pages/MarketReportPage.js";
-import ModelingReportPage from "./pages/ModelingReportPage.js";
-import Page from "./pages/Page.js";
-import PerformanceReportPage from "./pages/PerformanceReportPage.js";
-import ProjectPage from "./pages/ProjectPage.js";
+import BaselineReportPage from "./components/baseline_report_page";
+import DashboardPage from "./components/dashboard_page";
+import MarketReportPage from "./components/market_report_page";
+import ModelingReportPage from "./components/modeling_report_page";
+import PerformanceReportPage from "./components/performance_report_page";
+import ProjectPage from "./components/project_page";
 
 const pages = {
   BaselineReportPage,
   DashboardPage,
   MarketReportPage,
   ModelingReportPage,
-  Page,
   PerformanceReportPage,
   ProjectPage
 };
