@@ -10,7 +10,6 @@ rope = "*"
 python-language-server = {extras = ["all"],version = "*"}
 pyls-black = "*"
 pyls-mypy = "*"
-pycel = "*"
 
 [packages]
 django-heroku = "*"
@@ -24,6 +23,7 @@ sortedcontainers = "*"
 python-dateutil = "*"
 jsonschema = "*"
 jsonfield = "*"
+openpyxl = "*"
 
 [requires]
 python_version = "3.7"
