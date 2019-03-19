@@ -1,8 +1,10 @@
 @import "css/base.scss";
 
 $monthly-circle-size: 36px;
-$monthly-circle-color: $gray-5;
-$monthly-circle-color-highlight: $blue-3;
+$weekly-bar-height: 40px;
+$weekly-bar-width: 8px;
+$cell-fill-color: $gray-5;
+$cell-fill-color-highlight: $blue-3;
 
 .funnel-performance-analysis {
     .panel {
@@ -28,7 +30,8 @@ $monthly-circle-color-highlight: $blue-3;
         margin-bottom: 1.5rem;
     }
 
-    .analysis__table-wrapper {
+    .analysis__table {
+        border: 0;
         background-color: $gray-3;
 
         .rt-thead {
@@ -76,11 +79,9 @@ $monthly-circle-color-highlight: $blue-3;
 
         .cell-monthly {
             height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
             color: $gray-6;
+            text-align: center;
+            overflow-y: hidden;
 
             &__circle-wrapper {
                 width: $monthly-circle-size;
@@ -88,17 +89,17 @@ $monthly-circle-color-highlight: $blue-3;
                 display: flex;
                 justify-content: center;
                 align-items: center;
-                margin-top: 18px;
+                margin: 18px auto 8px auto;
             }
 
             &__circle {
                 width: 100%;
                 height: 100%;
                 border-radius: 50%;
-                background-color: $monthly-circle-color;
+                background-color: $cell-fill-color;
 
                 &--highlight {
-                    background-color: $monthly-circle-color-highlight;
+                    background-color: $cell-fill-color-highlight;
                 }
             }
 
@@ -106,11 +107,66 @@ $monthly-circle-color-highlight: $blue-3;
                 font-size: $text-xs;
                 line-height: $text-xl;
                 letter-spacing: 0.5px;
-                text-align: center;
+                // text-align: center;
                 padding-bottom: 10px;
 
                 &--highlight {
+                    font-size: $text-xs;
+                    line-height: $text-xl;
                     color: $highlight-gray-3;
+                }
+            }
+        }
+
+        .cell-weekly {
+            height: 100%;
+
+            &__label, &__value {
+                color: $gray-6;
+                font-size: $text-xs;
+                line-height: $text-xl;
+                text-align: center;
+            }
+
+            &__value {
+                color: $highlight-gray-3;
+                letter-spacing: 0.5px;
+                margin: 4px 0 2px 0;
+            }
+
+            &__bars-wrapper {
+                height: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+
+                & > div {
+                    width: 8px;
+                    border-radius: 1px;
+                    background-color: $cell-fill-color;
+                    margin-right: 7px;
+
+                    &.highlight {
+                        background-color: $cell-fill-color-highlight;
+                    }
+
+                    &:last-child {
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    // weekly table has borders around each cell
+    .analysis__table--weekly {
+        .rt-tbody {
+            .rt-td {
+                border-color: $gray-4;
+                border-right-width: 1px;
+
+                &:first-child, &:last-child {
+                    border-right-width: 0;
                 }
             }
         }

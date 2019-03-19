@@ -49,7 +49,7 @@ export class FunnelPerformanceAnalysis extends React.Component {
       <ReactTable
         data={data}
         columns={tableColumns}
-        className="analysis__table-wrapper"
+        className={`analysis__table analysis__table--${viewMode}`}
         defaultPageSize={data.length}
         showPagination={false}
         sortable={false}
@@ -148,7 +148,10 @@ function getCellMinWidth(accessor, viewMode) {
   return 78;
 }
 
-function CellRenderer({ value, original, column, viewMode }) {
+function CellRenderer(props) {
+  const { value, original, column, viewMode } = props;
+  console.log("+++++++++", props);
+
   if (column.id === "label") {
     return <div dangerouslySetInnerHTML={{ __html: value }} />;
   }
@@ -168,6 +171,7 @@ function MonthlyCell({ cellData, rowData }) {
     category,
     monthly: { max }
   } = rowData;
+
   const circleSize = max > 0 ? (value / max) * 100 : 100;
 
   return (
@@ -192,8 +196,33 @@ function MonthlyCell({ cellData, rowData }) {
   );
 }
 
-function WeeklyCell(props) {
-  return <span />;
+function WeeklyCell({ cellData, rowData }) {
+  const { startIndex, endIndex, values } = cellData;
+  const {
+    category,
+    weekly: { max },
+    isFirstRow
+  } = rowData;
+
+  // console.log("+++++++++", cellData, rowData);
+
+  return (
+    <div className="cell-weekly">
+      {isFirstRow && (
+        <div className="cell-weekly__label">{`Week ${startIndex}-${endIndex}`}</div>
+      )}
+      <div className="cell-weekly__value">477</div>
+      <div className="cell-weekly__bars-wrapper">
+        {values.map((value, index) => (
+          <div
+            key={index}
+            style={{ height: `${(value / max) * 100}%` }}
+            className={true && "highlight"}
+          />
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default FunnelPerformanceAnalysis;
