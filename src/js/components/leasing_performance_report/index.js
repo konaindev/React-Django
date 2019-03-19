@@ -48,6 +48,7 @@ export default class LeasingPerformanceReport extends Component {
           )} Executed Leases (Out of ${formatNumber(
             r.property.occupancy.occupiable
           )})`}
+          digits={1}
         />
         <PercentageGraphBox
           name="Retention"
@@ -60,6 +61,7 @@ export default class LeasingPerformanceReport extends Component {
           )} Notices to Renew (Out of ${
             r.property.leasing.resident_decisions
           } Resident Decisions)`}
+          digits={1}
         />
         <PercentageGraphBox
           name="Occupied"
@@ -72,6 +74,7 @@ export default class LeasingPerformanceReport extends Component {
           )} Occupied Units (Out of ${formatNumber(
             r.property.occupancy.occupiable
           )})`}
+          digits={1}
         />
       </BoxRow>
     );
