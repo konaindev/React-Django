@@ -17,6 +17,28 @@
         background-color: darken($button-default-bg-color, 2%);
     }
 
+    &--block {
+        width: 100%;
+        display: block;
+    }
+
+    &--uppercase {
+        text-transform: uppercase;
+    }
+
+    &--primary {
+        background-color: $button-primary-bg-color;
+        color: $button-primary-text-color;
+
+        &:hover, &:focus {
+            background-color: lighten($button-primary-bg-color, 3%);
+        }
+
+        &:active {
+            background-color: darken($button-primary-bg-color, 2%);
+        }
+    }
+
     &--selected {
         background-color: $button-default-active-bg-color;
         color: $button-default-active-text-color;
