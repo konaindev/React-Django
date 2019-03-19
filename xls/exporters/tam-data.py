@@ -14,9 +14,9 @@ from openpyxl import load_workbook
 FREE_MAP_TOOLS_URL = "https://www.freemaptools.com/ajax/us/get-all-zip-codes-inside.php"
 FREE_MAP_REFERER = "https://www.freemaptools.com/find-zip-codes-inside-radius.htm"
 
-STAT_ATLAS_AGE_URL = "https://statisticalatlas.com/zip/%s/Age-and-Sex"
-STAT_ATLAS_HOUSEHOLD_URL = "https://statisticalatlas.com/zip/%s/Household-Types"
-STAT_ATLAS_HOUSEHOLD_INCOME_URL = "https://statisticalatlas.com/zip/%s/Household-Income"
+STAT_ATLAS_AGE_URL = "https://statisticalatlas.com/zip/{}/Age-and-Sex"
+STAT_ATLAS_HOUSEHOLD_URL = "https://statisticalatlas.com/zip/{}/Household-Types"
+STAT_ATLAS_HOUSEHOLD_INCOME_URL = "https://statisticalatlas.com/zip/{}/Household-Income"
 STAT_ATLAS_REFER = "https://statisticalatlas.com/United-States/Overview"
 
 USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36"
@@ -149,8 +149,7 @@ def find_households(el):
 
 @delay_file_memoize(cache_dir=CACHE_DIR)
 def fetch_population(zipcode):
-    url = STAT_ATLAS_AGE_URL % zipcode
-    print(url)
+    url = STAT_ATLAS_AGE_URL.format(zipcode)
     headers = {"user-agent": USER_AGENT, "referer": STAT_ATLAS_REFER}
     response = requests.get(url, headers=headers)
     soup = BeautifulSoup(response.text, features="html.parser")
@@ -173,7 +172,7 @@ def fetch_svg(base_url, zipcode, figure_id):
             return True
         return False
 
-    url = base_url % zipcode
+    url = base_url.format(zipcode)
     headers = {"user-agent": USER_AGENT, "referer": STAT_ATLAS_REFER}
     response = requests.get(url, headers=headers)
 
