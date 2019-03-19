@@ -38,6 +38,7 @@
     height: $s16;
     padding: $s4;
     width: 100%;
+    color: $footer-text-color;
     font-size: $text-sm;
     text-align: center;
 }
@@ -116,6 +117,150 @@
 
         a {
             color: $content-text-primary-color;
+        }
+    }
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+
+    @include mq($from: desktop) {
+        flex-direction: row-reverse;
+    }
+
+    &__side {
+        position: relative;
+        flex: 1;
+
+        @include mq($from: desktop) {
+            width: 50%;
+            flex: 1;
+            height: 100%;
+        }
+
+        &-bg {
+            background-image: url(../images/remarkably-auth-form-side.svg);
+            background-repeat: no-repeat;
+            background-position: center top;
+            background-size: cover;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            top: 0;
+
+            @include mq($from: desktop) {
+                top: 20%;
+            }
+        }
+    }
+
+    &__content {
+        min-height: 50vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+
+        @include mq($from: desktop) {
+            width: 50%;
+            flex: 1;
+        }
+
+        &-inner {
+            padding: $s10 $s6;
+            width: 100%;
+            @include mq($from: tablet) {
+                padding: 0;
+                width: $auth-form-width-tablet-up;
+            }
+        }
+    }
+
+    &__logo-wrap {
+        margin-bottom: $s12;
+
+        .remarkably-logo {
+            margin: 0 auto;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+
+            width: $auth-form-logo-width;
+            height: $auth-form-logo-height;
+            max-width: $auth-form-logo-width;
+            max-height: $auth-form-logo-height;
+
+            @include mq($from: tablet, $until: desktop) {
+                width: $auth-form-logo-width-tablet;
+                height: $auth-form-logo-height-tablet;
+                max-width: $auth-form-logo-width-tablet;
+                max-height: $auth-form-logo-height-tablet;
+                position: absolute;
+                left: $s10;
+                top: $s10;
+            }
+
+            @include mq($from: desktop) {
+                width: $auth-form-logo-width-desktop;
+                height: $auth-form-logo-height-desktop;
+                max-width: $auth-form-logo-width-desktop;
+                max-height: $auth-form-logo-height-desktop;
+            }
+        }
+    }
+
+    &__field {
+        margin-bottom: $s4;
+
+        label {
+            color: $input-label-color;
+            display: block;
+            line-height: $line-height-normal;
+            margin-bottom: $s2;
+            text-transform: uppercase;
+            font-size: $text-xxs;
+
+            @include mq($from: desktop) {
+                font-size: $text-xs;
+            }
+        }
+
+        input {
+            display: block;
+            width: 100%;
+        }
+    }
+
+    &__actions {
+        margin-top: $s6;
+    }
+
+    &__extras {
+        margin-top: $s6;
+        text-align: center;
+    }
+
+    a {
+        color: $anchor-color;
+    }
+
+    &, p {
+        font-size: $text-sm;
+    }
+
+    .content-footer {
+        color: $auth-footer-content-color;
+        padding: $s5 $s10;
+        @include mq($from: tablet) {
+            text-align: right;
+        }
+
+        @include mq($from: desktop) {
+            color: $auth-footer-content-color-desktop;
+            text-align: left;
         }
     }
 }

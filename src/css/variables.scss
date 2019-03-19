@@ -100,10 +100,12 @@ $default-background-color: $gray-2;
 $alt-default-background-color: $gray-3;
 $default-text-color: $gray-6;
 
-$input-border-color: $gray-4;
+$input-border-color: $gray-5;
 $input-border: 1px solid $input-border-color;
+$input-focus-border-color: $blue-3;
 $input-text-color: $highlight-gray-3;
 $select-option-background-color: $gray-3;
+$input-label-color: $highlight-gray-3;
 
 // Variables common to all visualization panels
 
@@ -169,6 +171,7 @@ $font-headline: "u8", "system-ui", "BlinkMacSystemFont", "-apple-system",
 $font-mono: "formular-mono", "Menlo", "Monaco", "Consolas", "Liberation Mono",
     "Courier New", "monospace";
 
+$text-xxs: 0.625rem; // 10px;
 $text-xs: 0.75rem; // 12px
 $text-sm: 0.875rem; // 14px
 $text-base: 1rem; // 16px
@@ -236,3 +239,27 @@ $border-radius-full: 9999px;
     mapWaterColor: $map-water-color;
     mapRegionBgColor: $map-region-bg-color;
 }
+
+$anchor-color: $blue-3;
+$footer-text-color: $turquoise-5;
+
+$auth-form-logo-width: 160px;
+$auth-form-logo-height: 27px;
+$auth-form-logo-width-tablet: 180px;
+$auth-form-logo-height-tablet: 31px;
+$auth-form-logo-width-desktop: 280px;
+$auth-form-logo-height-desktop: 48px;
+$auth-form-width-tablet-up: 360px;
+$auth-footer-content-color: $gray-8;
+$auth-footer-content-color-desktop: $gray-6;
+
+//----------------------------------------------------------
+// Device breakpoints
+//----------------------------------------------------------
+
+$mq-breakpoints: (
+    mobile:  320px,
+    tablet:  740px,
+    desktop: 980px,
+    wide:    1300px
+)

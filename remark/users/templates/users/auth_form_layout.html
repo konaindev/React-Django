@@ -1,0 +1,52 @@
+{# A base content page that renders a form. #}
+{% extends 'web/base.html' %}
+
+{% block body %}
+    <div class="auth-form">
+        <div class="auth-form__content">
+            <div class="auth-form__content-inner">
+                <div class="auth-form__logo-wrap">
+                    <div class="remarkably-logo">&nbsp;</div>
+                </div>
+                <div class="auth-form__messages">
+                    {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                    {% endfor %}
+
+                    {% block nonfield_extras %}{% endblock %}
+                </div>
+
+                <form method="post" action="{% block action %}#{% endblock %}">
+                    {% csrf_token %}
+
+                    {% for hidden_field in form.hidden_fields %}
+                        {{ hidden_field }}
+                    {% endfor %}        
+
+                    <div class="auth-form__fields">
+                        {% for visible_field in form.visible_fields %}
+                        <div class="auth-form__field">
+                            {{ visible_field.errors }}
+                            {{ visible_field.label_tag }} {{ visible_field }}
+                        </div>
+                        {% endfor %}
+
+                        <div class="auth-form__actions">
+                            <button type="submit" class="button button--primary button--block button--uppercase">
+                                {% block submit %}Submit{% endblock %}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="auth-form__extras">{% block form_extra %}{% endblock %}</div>
+            </div>
+        </div>
+        <div class="auth-form__side">
+            <div class="auth-form__side-bg">
+                {% include 'web/footer.html' %}
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
