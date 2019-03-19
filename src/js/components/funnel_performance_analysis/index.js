@@ -211,15 +211,17 @@ function WeeklyCell({ cellData, rowData }) {
       {isFirstRow && (
         <div className="cell-weekly__label">{`Week ${startIndex}-${endIndex}`}</div>
       )}
-      <div className="cell-weekly__value">477</div>
-      <div className="cell-weekly__bars-wrapper">
-        {values.map((value, index) => (
-          <div
-            key={index}
-            style={{ height: `${(value / max) * 100}%` }}
-            className={true && "highlight"}
-          />
-        ))}
+      <div className="cell-weekly__chart">
+        <div className="cell-weekly__value">{}</div>
+        <div className="cell-weekly__bars">
+          {values.map((value, index) => (
+            <div
+              key={index}
+              style={{ height: `${(value / max) * 100}%` }}
+              className={false && "highlight"}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -30,13 +30,14 @@ $cell-fill-color-highlight: $blue-3;
         margin-bottom: 1.5rem;
     }
 
-    .analysis__table {
+    .analysis__table.ReactTable {
         border: 0;
         background-color: $gray-3;
 
         .rt-thead {
             border-color: $gray-4;
             border-bottom-width: 1px;
+            box-shadow: none;
 
             .rt-th {
                 padding: 0;
@@ -54,8 +55,10 @@ $cell-fill-color-highlight: $blue-3;
 
         .rt-tbody {
             .rt-tr-group {
-                border-bottom-width: 1px;
-                border-color: $gray-4;
+                border-bottom: 1px solid $gray-4;
+                &:last-child {
+                    border-bottom: 1px solid $gray-4;
+                }
             }
 
             .rt-td {
@@ -120,12 +123,23 @@ $cell-fill-color-highlight: $blue-3;
 
         .cell-weekly {
             height: 100%;
+            overflow-y: hidden;
+            text-align: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
 
             &__label, &__value {
-                color: $gray-6;
                 font-size: $text-xs;
                 line-height: $text-xl;
-                text-align: center;
+            }
+
+            &__label {
+                position: absolute;
+                top: 0;
+                width: 100%;
+                color: $gray-6;
             }
 
             &__value {
@@ -134,11 +148,12 @@ $cell-fill-color-highlight: $blue-3;
                 margin: 4px 0 2px 0;
             }
 
-            &__bars-wrapper {
+            &__bars {
                 height: 40px;
                 display: flex;
                 justify-content: center;
                 align-items: flex-end;
+                margin-bottom: 6px;
 
                 & > div {
                     width: 8px;
