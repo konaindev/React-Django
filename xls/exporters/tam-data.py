@@ -1,8 +1,13 @@
+import functools
 import os
 import pickle
 import requests
+import tempfile
 import time
 import xml.etree.ElementTree as ET
+
+import click
+
 from bs4 import BeautifulSoup
 from openpyxl import load_workbook
 
@@ -18,37 +23,105 @@ USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36
 MILES_KILOMETERS_RATIO = 1.60934
 
 
-def memoize(label):
-    def outer_cache(func):
-        def inner_cache(*args, **kwargs):
-            filename = label
-            for arg in args:
-                filename += ":%s" % str(arg)
-            filename += ".pkl"
-            filepath = "../../data/zipcode/%s" % filename
-            filepath = os.path.join(
-                os.path.dirname(os.path.abspath(__file__)), filepath
-            )
-
-            if os.path.exists(filepath):
-                print("Read from disk: %s" % filepath)
-                file_ref = open(filepath, "rb")
-                return pickle.load(file_ref)
-            else:
-                print("Writing to disk: %s" % filepath)
-                result = func(*args)
-                file_ref = open(filepath, "wb")
-                pickle.dump(result, file_ref)
-                time.sleep(20)
-                print("Finished writing.")
-                return result
-
-        return inner_cache
-
-    return outer_cache
+CACHE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../data/cache")
+DEFAULT_TEMPLATE_PATH = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "../templates/tam-template.xlsx"
+)
+DEFAULT_OUTFILE_PATH = os.path.join(
+    os.path.dirname(os.path.abspath(__file__)), "../../dist/remarkably-tam-test.xlsx"
+)
 
 
-@memoize("fetch-zip-codes")
+class Memoizer:
+    """An abstract base decorator that implements generic memoization."""
+
+    def __init__(self):
+        """Initialize a memoizer, possibly with arguments in derived classes."""
+        pass
+
+    def get_key(self, args, kwargs):
+        """Get the cache key for a given func invocation."""
+        raise NotImplementedError()
+
+    def contains(self, key):
+        """Return True if key is in memoized cache."""
+        raise NotImplementedError()
+
+    def read(self, key):
+        """Return data for key if in cache, otherwise raise an exception."""
+        raise NotImplementedError()
+
+    def write(self, key, data):
+        """Write data for key to cache, overwriting extant data."""
+        raise NotImplementedError()
+
+    def memoize(self, func, args, kwargs):
+        """Return cached data, or invoke the underlying func if not."""
+        key = self.get_key(args, kwargs)
+        if self.contains(key):
+            data = self.read(key)
+        else:
+            print("Invoking ", func.__name__, args, kwargs)
+            data = func(*args, **kwargs)
+            self.write(key, data)
+        return data
+
+    def __call__(self, func):
+        # Since this class takes __init__ parameters, __call__ must wrap.
+        self.func = func
+
+        @functools.wraps(func)
+        def wrapper(*args, **kwargs):
+            return self.memoize(func, args, kwargs)
+
+        return wrapper
+
+
+class file_memoize(Memoizer):
+    """Memoizer that writes to a cache files directory."""
+
+    def __init__(self, cache_dir=None):
+        """
+        Initialize a memoizer with a given cache directory. 
+        """
+        super().__init__()
+        self.cache_dir = cache_dir or tempfile.mkdtemp()
+
+    def get_key(self, args, kwargs):
+        # The key is the file path
+        args_key = "_".join([f"{arg}" for arg in args])
+        kwargs_key = "_".join([f"{k}-{v}" for k, v in kwargs.items()])
+        file_name = f"{self.func.__name__}{'_' if args_key else ''}{args_key}{'_' if kwargs_key else ''}{kwargs_key}.pkl"
+        path = os.path.join(self.cache_dir, file_name)
+        return path
+
+    def contains(self, key):
+        return os.path.exists(key)
+
+    def read(self, key):
+        with open(key, "rb") as f:
+            data = pickle.load(f)
+        return data
+
+    def write(self, key, data):
+        with open(key, "wb") as f:
+            pickle.dump(data, f)
+
+
+class delay_file_memoize(file_memoize):
+    """Memoizer that writes to a cache files directory and also delays after each memoization."""
+
+    def __init__(self, cache_dir=None, delay=2):
+        super().__init__(cache_dir=cache_dir)
+        self.delay = delay
+
+    def memoize(self, func, args, kwargs):
+        result = super().memoize(func, args, kwargs)
+        time.sleep(self.delay)
+        return result
+
+
+@delay_file_memoize(cache_dir=CACHE_DIR)
 def fetch_zip_codes(latitude, longitude, radius):
     params = {
         "radius": radius,
@@ -74,21 +147,22 @@ def find_households(el):
     return el.has_attr("title") and el["title"] == "Households"
 
 
-@memoize("fetch-population")
+@delay_file_memoize(cache_dir=CACHE_DIR)
 def fetch_population(zipcode):
     url = STAT_ATLAS_AGE_URL % zipcode
+    print(url)
     headers = {"user-agent": USER_AGENT, "referer": STAT_ATLAS_REFER}
     response = requests.get(url, headers=headers)
     soup = BeautifulSoup(response.text, features="html.parser")
     pop_th = soup.find_all(find_population)[0]
     td_value = str(pop_th.td.text)
     population = int(td_value.replace(",", ""))
-    print("Population: %d" % population)
+    print(f"Population: {population}")
 
     house_th = soup.find_all(find_households)[0]
     td_value = str(house_th.td.text)
     households = int(td_value.replace(",", ""))
-    print("households: %d" % population)
+    print(f"households: {population}")
 
     return (population, households)
 
@@ -106,28 +180,27 @@ def fetch_svg(base_url, zipcode, figure_id):
     soup = BeautifulSoup(response.text, features="html.parser")
     figures = soup.find_all(find_figure)
     if len(figures) == 0:
-        ref = 'id="%s"' % figure_id
-        print("Searching for %s..." % ref)
-        print("Results: %d" % (response.text.find(ref)))
-        raise Exception("Could not find the following figure: %s" % figure_id)
+        ref = f'id="{figure_id}"'
+        print(f"Searching for {ref}...")
+        print(f"Results: {response.text.find(ref)}")
+        raise Exception(f"Could not find the following figure: {figure_id}")
 
     try:
         svg = figures[0].find_all("svg")[0]
     except Exception as e:
-        print("Exception: %s" % str(e))
-        print("Length: %d" % len(response.text))
+        print(f"Exception: {e}")
+        print(f"Length: {len(response.text)}")
         print(figures[0].find("svg"))
         raise e
     return svg
 
 
-@memoize("fetch-age-segments")
-def fetch_age_segements_by_zip(zipcode):
+@delay_file_memoize(cache_dir=CACHE_DIR)
+def fetch_age_segments_by_zip(zipcode):
     svg = fetch_svg(STAT_ATLAS_AGE_URL, zipcode, "figure/age-structure")
     gs = svg.g.find_all("g")
     result = []
     for x in range(len(gs)):
-        # print("%d: %s" % (x, gs[x]))
         if x >= 26 and x < 49:
             txt = gs[x].title.text
             value = float(txt.replace("%", ""))
@@ -136,13 +209,12 @@ def fetch_age_segements_by_zip(zipcode):
     return result
 
 
-@memoize("fetch-household-type")
+@delay_file_memoize(cache_dir=CACHE_DIR)
 def fetch_household_type(zipcode):
     svg = fetch_svg(STAT_ATLAS_HOUSEHOLD_URL, zipcode, "figure/household-types")
     gs = svg.g.find_all("g")
     result = []
     for x in range(len(gs)):
-        # print("%d: %s" % (x, gs[x]))
         if x >= 7:
             txt = gs[x].title.text
             value = float(txt.replace("%", ""))
@@ -150,7 +222,7 @@ def fetch_household_type(zipcode):
     return result
 
 
-@memoize("fetch-household-income")
+@delay_file_memoize(cache_dir=CACHE_DIR)
 def fetch_household_income(zipcode):
     svg = fetch_svg(
         STAT_ATLAS_HOUSEHOLD_INCOME_URL, zipcode, "figure/household-income-percentiles"
@@ -163,7 +235,7 @@ def fetch_household_income(zipcode):
     return result
 
 
-@memoize("fetch-household-income-dist")
+@delay_file_memoize(cache_dir=CACHE_DIR)
 def fetch_household_income_distribution(zipcode):
     svg = fetch_svg(
         STAT_ATLAS_HOUSEHOLD_INCOME_URL, zipcode, "figure/household-income-distribution"
@@ -247,13 +319,13 @@ INCOME_DIST_LABELS = [
     "< $10k",
 ]
 
-ZIP_DATA_SHEET_NAME = "Zip Data %s"
+ZIP_DATA_SHEET_NAME = "Zip Data {}"
 
 
 def fill_zip_worksheet(workbook, zipcode):
     # Fetch all data first - if a Zip Code doesn't work. Ignore it.
     population = fetch_population(zipcode)
-    age_segments = fetch_age_segements_by_zip(zipcode)
+    age_segments = fetch_age_segments_by_zip(zipcode)
     household_type = fetch_household_type(zipcode)
     # household_income = fetch_household_income(zipcode)
     income_dist = fetch_household_income_distribution(zipcode)
@@ -262,7 +334,7 @@ def fill_zip_worksheet(workbook, zipcode):
     print(population)
 
     # Create speadsheet
-    worksheet = workbook.create_sheet(title=ZIP_DATA_SHEET_NAME % zipcode)
+    worksheet = workbook.create_sheet(title=ZIP_DATA_SHEET_NAME.format(zipcode))
     write_label_item(worksheet, "Total Population", population[0], 1)
     write_label_item(worksheet, "Number of Households", population[1], 2)
     write_labeled_data(
@@ -284,17 +356,17 @@ def fill_zip_worksheet(workbook, zipcode):
     )
 
 
-def pop_formula(zipcodes, percent_values):
+def pop_formula(zip_codes, percent_values):
     formula = []
-    for zip in zipcodes:
+    for zip_code in zip_codes:
         subformula = []
-        tab_name = ZIP_DATA_SHEET_NAME % zip
+        tab_name = ZIP_DATA_SHEET_NAME.format(zip_code)
         for val in percent_values:
-            subformula.append("'%s'!B%s" % (tab_name, val))
-        sf = "('%s'!B1*(%s))" % (tab_name, "+".join(subformula))
+            subformula.append(f"'{tab_name}'!B{val}")
+        sf = f"('{tab_name}'!B1*({'+'.join(subformula)}))"
         formula.append(sf)
     result = "+".join(formula)
-    return "=ROUND(%s, 0)" % result
+    return f"=ROUND({result}, 0)"
 
 
 INCOME_DIST_LEVELS = (
@@ -317,8 +389,8 @@ INCOME_DIST_LEVELS = (
 )
 
 
-def fill_computation_tab(worksheet, zipcodes):
-    # Add ACS Population Reference Sumed across all zipcodes
+def fill_computation_tab(worksheet, zip_codes, income_groups):
+    # Add ACS Population Reference Sumed across all zip_codes
     age_group_pop_schema = (
         (3, ("23", "22", "21", "20")),  # 18-24
         (4, ("18", "19")),  # 25-34
@@ -328,54 +400,50 @@ def fill_computation_tab(worksheet, zipcodes):
         (8, ("10", "9", "8", "7", "6", "5")),  # 65+
     )
     for dest_row, percent_values in age_group_pop_schema:
-        formula = pop_formula(zipcodes, percent_values)
+        formula = pop_formula(zip_codes, percent_values)
         worksheet.cell(column=2, row=dest_row, value=formula)
 
     cell_formulas = []
     start_x = 0
-    for income_group in INCOME_GROUPS:
+    for income_group in income_groups:
         numerator = []
         denominator = []
         for x in range(start_x, len(INCOME_DIST_LEVELS)):
-            for zip in zipcodes:
-                tab_name = ZIP_DATA_SHEET_NAME % zip
+            for zip_code in zip_codes:
+                tab_name = ZIP_DATA_SHEET_NAME.format(zip_code)
                 numerator.append(
-                    "('%s'!B%d*'%s'!B1)"
-                    % (tab_name, INCOME_DIST_LEVELS[x][1], tab_name)
+                    f"('{tab_name}'!B{INCOME_DIST_LEVELS[x][1]}*'{tab_name}'!B1)"
                 )
 
-            denominator.append("'%s'!B1" % tab_name)
+            denominator.append(f"'{tab_name}'!B1")
 
             if income_group == INCOME_DIST_LEVELS[x][0]:
                 start_x = x + 1
                 break
-        final_formula = "=(%s)/(%s)" % ("+".join(numerator), "+".join(denominator))
+        final_formula = f"=({'+'.join(numerator)})/({'+'.join(denominator)})"
         cell_formulas.append(final_formula)
 
     for x in range(3):
-        worksheet.cell(column=1, row=29 + x, value=INCOME_GROUPS[x])
+        worksheet.cell(column=1, row=29 + x, value=income_groups[x])
         worksheet.cell(column=2, row=29 + x, value=cell_formulas[x])
 
     # Total population
     formula = []
-    for zip in zipcodes:
-        tab_name = ZIP_DATA_SHEET_NAME % zip
-        formula.append("'%s'!B1" % tab_name)
-    worksheet.cell(column=2, row=38, value="=%s" % "+".join(formula))
+    for zip_code in zip_codes:
+        tab_name = ZIP_DATA_SHEET_NAME.format(zip_code)
+        formula.append(f"'{tab_name}'!B1")
+    worksheet.cell(column=2, row=38, value=f"={'+'.join(formula)}")
 
     # Add Household Types
     numerator = []
-    for zip in zipcodes:
-        tab_name = ZIP_DATA_SHEET_NAME % zip
+    for zip_code in zip_codes:
+        tab_name = ZIP_DATA_SHEET_NAME.format(zip_code)
         numerator.append(
-            "(('%s'!B%d+'%s'!B%d+'%s'!B%d)*'%s'!B1)"
-            % (tab_name, 30, tab_name, 31, tab_name, 32, tab_name)
+            f"(('{tab_name}'!B30+'{tab_name}'!B31+'{tab_name}'!B32)*'{tab_name}'!B1)"
         )
-    final_formula = "=(%s)/'Computation'!B38" % "+".join(numerator)
+    final_formula = f"=({'+'.join(numerator)})/'Computation'!B38"
     worksheet.cell(column=2, row=34, value=final_formula)
 
-
-ZIP_CODES = [85013]
 
 # Meridian
 # Zip Codes: 84101,84111,84102,84112,84115,84105
@@ -385,47 +453,85 @@ ZIP_CODES = [85013]
 # Zip Codes: 85013
 # Income Groups: 25000, 45000, 60000
 
-INCOME_GROUPS = [25000, 45000, 60000]
 
-
-def main():
-    # latitude = sys.argv[1]
-    # longitude = sys.argv[2]
-    # radius = float(sys.argv[3])
-
-    zipcodes = ZIP_CODES  # fetch_zip_codes(latitude, longitude, radius)
-    template_location = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)), "../templates/tam-template.xlsx"
-    )
-
-    workbook = load_workbook(template_location)
-
+def build_tam_data_for_zip_codes(workbook, zip_codes, income_groups):
     # generate Zip Code Worksheet
-    for zipcode in zipcodes:
+    for zip_code in zip_codes:
         try:
-            print("Starting ZipCode: %s" % zipcode)
-            fill_zip_worksheet(workbook, zipcode)
-            print("Completed ZipCode: %s" % zipcode)
+            print(f"Starting zip: {zip_code}")
+            fill_zip_worksheet(workbook, zip_code)
+            print(f"Completed zip: {zip_code}")
         except Exception as e:
-            print("ZipCode Failed: %s" % zipcode)
+            print(f"FAILED zip: {zip_code}")
             raise e
 
-    fill_computation_tab(workbook["Computation"], zipcodes)
+    fill_computation_tab(workbook["Computation"], zip_codes, income_groups)
 
-    # delete sample data tab
+    # TODO what's all this, then?
+    # fetch_zip_codes(latitude, longitude, radius * MILES_KILOMETERS_RATIO)
+    # fetch_age_segments_by_zip('85013')
+    # parse_age_segments(STAT_ATLAS_AGE_CONTENT)
+    # fetch_household_income_distribution('85013')
+
+
+def build_tam_data_for_location(workbook, location, radius, income_groups):
+    zip_codes = fetch_zip_codes(
+        location[0], location[1], radius * MILES_KILOMETERS_RATIO
+    )
+    return build_tam_data_for_zip_codes(workbook, zip_codes, income_groups)
+
+
+@click.command()
+@click.option("--lat", type=float, help="The latitude.")
+@click.option("--lon", type=float, help="The longitude.")
+@click.option("-r", "--radius", type=float, help="A radius in miles.")
+@click.option(
+    "-z", "--zip", "zip_codes", type=int, multiple=True, help="A list of ZIP codes."
+)
+@click.option(
+    "-i",
+    "--income",
+    "income_groups",
+    type=int,
+    multiple=True,
+    required=True,
+    help="A list of income group codes.",
+)
+@click.option(
+    "-t",
+    "--templatefile",
+    default=DEFAULT_TEMPLATE_PATH,
+    type=click.Path(exists=True),
+    help="The TAM XLS template path.",
+)
+@click.option(
+    "-o",
+    "--outfile",
+    default=DEFAULT_OUTFILE_PATH,
+    type=click.Path(),
+    help="The output XLS filename",
+)
+def build_tam_data(zip_codes, lat, lon, radius, income_groups, templatefile, outfile):
+    # Load workbook
+    workbook = load_workbook(templatefile)
+
+    # Delete Sample Data tab
     workbook.remove(workbook["Sample Zip Data"])
 
-    target_workbook_file_name = os.path.join(
-        os.path.dirname(os.path.abspath(__file__)),
-        "../../dist/remarkably-tam-test.xlsx",
-    )
+    # Build the data into the workbook
+    if zip_codes:
+        build_tam_data_for_zip_codes(workbook, zip_codes, income_groups)
+    elif lat and lon and radius:
+        build_tam_data_for_location(workbook, (lat, lon), radius, income_groups)
+    else:
+        raise click.UsageError(
+            "You must specify either zip_codes *or* a location and radius."
+        )
 
-    workbook.save(filename=target_workbook_file_name)
+    # Save the resulting workbook
+    workbook.save(filename=outfile)
 
 
-# fetch_zip_codes(latitude, longitude, radius * MILES_KILOMETERS_RATIO)
-# fetch_age_segements_by_zip('85013')
-# parse_age_segments(STAT_ATLAS_AGE_CONTENT)
-# fetch_household_income_distribution('85013')
+if __name__ == "__main__":
+    build_tam_data()
 
-main()
