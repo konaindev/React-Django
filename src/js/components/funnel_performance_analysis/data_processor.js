@@ -1,9 +1,11 @@
 import _get from "lodash/get";
 
-import { formatDateWithTokens } from "../../utils/formatters";
+import {
+  formatNumber,
+  formatPercent,
+  formatDateWithTokens
+} from "../../utils/formatters";
 import { convertToKebabCase } from "../../utils/misc";
-
-const sortNumber = (a, b) => a - b;
 
 export default function(funnelHistory = []) {
   let allRows = [
@@ -37,7 +39,8 @@ export default function(funnelHistory = []) {
       category: "conversion",
       label: "USV &#8594; INQ",
       path: "usv_inq",
-      isFirstRow: true
+      isFirstRow: true,
+      fixedDigits: 1
     },
     {
       category: "conversion",
@@ -64,20 +67,37 @@ export default function(funnelHistory = []) {
     let columnKey = monthFunnel.month;
 
     // start of rows iteration
+    // sets month / week values to each row for a specified month column
     for (let row of allRows) {
-      const weeklyAccessor = `weekly_${row.category}s.${row.path}`;
-      const monthlyAccessor = `monthly_${row.category}s.${row.path}`;
-      const weekValues = _get(monthFunnel, weeklyAccessor, []);
+      const { category, path, fixedDigits } = row;
+      let monthValue = _get(monthFunnel, `monthly_${category}s.${path}`);
+      let weekValues = _get(monthFunnel, `weekly_${category}s.${path}`, []);
       numberOfWeeks = numberOfWeeks || weekValues.length;
+
+      const isPercent = category === "conversion";
+
+      // deal with "0.054" & "5.4%" resulted from "0.054384772263766146"
+      if (isPercent) {
+        monthValue = getRoundedValue(monthValue, fixedDigits);
+        weekValues = weekValues.map(v => getRoundedValue(v, fixedDigits));
+      }
+
+      let monthValueFormatted = isPercent
+        ? formatPercent(monthValue, fixedDigits)
+        : formatNumber(monthValue);
+      let weekValuesFormatted = weekValues.map(v =>
+        isPercent ? formatPercent(v, fixedDigits) : formatNumber(v)
+      );
 
       row[columnKey] = {
         monthly: {
-          value: _get(monthFunnel, monthlyAccessor)
+          value: monthValue,
+          valueFormatted: monthValueFormatted
         },
         weekly: {
           values: weekValues,
-          min: Math.min(...weekValues),
-          max: Math.max(...weekValues),
+          valuesFormatted: weekValuesFormatted,
+          count: numberOfWeeks,
           startIndex: weekIndex + 1,
           endIndex: weekIndex + numberOfWeeks
         }
@@ -94,7 +114,7 @@ export default function(funnelHistory = []) {
     Header: formatDateWithTokens(month, "MMM")
   }));
 
-  // start of min/max evaluation
+  // start of top three percent logic, calc max
   for (let row of allRows) {
     row.key = convertToKebabCase(row.label);
 
@@ -106,19 +126,17 @@ export default function(funnelHistory = []) {
       []
     );
 
-    row.monthly = {
-      min: Math.min(...monthValues),
+    row.aggMonthly = {
       max: Math.max(...monthValues),
-      topThree: monthValues.sort(sortNumber).slice(-3)
+      topThree: getTopThreePoints(monthValues)
     };
 
-    row.weekly = {
-      min: Math.min(...weekValues),
+    row.aggWeekly = {
       max: Math.max(...weekValues),
-      topThree: weekValues.sort(sortNumber).slice(-3)
+      topThree: getTopThreePoints(weekValues)
     };
   }
-  // end of min/max evaluation
+  // end of top three percent logic
 
   columns.unshift({
     accessor: "label",
@@ -130,4 +148,22 @@ export default function(funnelHistory = []) {
     volumeRows: allRows.filter(r => r.category === "volume"),
     conversionRows: allRows.filter(r => r.category === "conversion")
   };
+}
+
+function getRoundedValue(number, digits) {
+  return Number.parseFloat(number).toFixed(2 + (digits || 0));
+}
+
+/**
+  [1, 2, 3, 4, 5] => [3, 4, 5]
+  [1, 2, 2, 3, 3] => [2, 3]
+  [1, 1, 2, 2, 3, 3, 3] => [3]
+**/
+function getTopThreePoints(numbers) {
+  const topThree = numbers.sort((a, b) => a - b).slice(-3);
+  const uniqTopThree = topThree.filter(
+    (elem, pos, arr) => arr.indexOf(elem) === pos
+  );
+
+  return uniqTopThree;
 }
