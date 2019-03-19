@@ -1,0 +1,89 @@
+@import "css/base.scss";
+
+$table-font-color: $highlight-gray-3;
+$table-border-color: $gray-4;
+$table-bg-accent: rgba($gray-4, 0.5);
+$table-heading-color: $gray-6;
+
+.modeling-comparison {
+    .ReactTable {
+        height: 100%;
+        background-color: $panel-background-color;
+        color: $table-font-color;
+        border-radius: $panel-border-radius;
+        box-shadow: $panel-box-shadow;
+
+        .rt-thead {
+            color: $table-heading-color;
+            border-color: $table-border-color;
+            border-bottom-width: 1px;
+            font-size: 12px;
+            font-weight: $weight-medium;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+
+            .rt-th {
+                padding: 0;
+                text-align: right;
+
+                &>div {
+                    padding: 44px 20px 36px 20px;
+                }
+
+                &:last-child {
+                    &>div {
+                        padding-right: 80px;
+                    }
+                }
+            }
+        }
+
+        .rt-tbody {
+            .rt-tr-group {
+                border-bottom-width: 1px;
+                border-color: $table-border-color;
+            }
+
+            .rt-td {
+                padding: 0;
+                text-align: right;
+                font-size: $text-base;
+                font-weight: $weight-light;
+                line-height: 20px;
+                border-color: $table-border-color;
+
+                &>div {
+                    padding: 18px 20px;
+                }
+
+                &:first-child {
+                    color: $table-heading-color;
+                    font-weight: $weight-normal;
+                    text-align: left;
+                    line-height: 28px;
+
+                    &>div {
+                        display: flex;
+                        padding: 14px 20px 14px 60px;
+
+                        &>span {
+                            margin: -4px 8px 0 0;
+                        }
+                    }
+                }
+
+                &:last-child {
+                    &>div {
+                        padding-right: 80px;
+                    }
+                }
+            }
+
+            .rt-tr {
+                &.accent {
+                    background-color: $table-bg-accent;
+                }
+            }
+        }
+    }
+}

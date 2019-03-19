@@ -8,11 +8,11 @@
 
 .population-chart__bar {
     position: relative;
-    background-color: #253043;
+    background-color: $msbi-bar-bg-color;
 }
 
 .population-chart__bar-percent {
-    background-color: #563eff;
+    background-color: $msbi-bar-fg-color;
     height: 20px;
 }
 
@@ -27,13 +27,13 @@
 
 .population-chart__label-value {
     position: absolute;
-    background-color: #1a202e;
-    color: #fff;
+    background-color: $panel-background-color;
+    color: $content-text-primary-color;
 }
 
 .population-chart__dotted-lines {
     height: 40px;
-    border-left: 1px dashed #2c3646;
+    border-left: 1px dashed $msbi-border-color;
 }
 
 .population-chart__dotted-diagnoal {

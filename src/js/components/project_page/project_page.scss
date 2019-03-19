@@ -2,6 +2,7 @@
 
 .project-page__report-section {
     padding: $s8;
+    padding-left: 39px;
 }
 
 .project-page__report-section__links {
@@ -10,5 +11,5 @@
 }
 
 .project-page__report-section__link {
-    color: $lighter-ui-text-color;
+    color: $content-text-secondary-color;
 }

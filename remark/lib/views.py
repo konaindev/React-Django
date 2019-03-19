@@ -83,6 +83,7 @@ class ReactView(RemarkView):
 
     template_name = "web/react.html"
     ensure_csrf_cookie = True
+    page_title = None
 
     # The name of the javascript-side react component for the full page.
     page_class = None
@@ -94,6 +95,10 @@ class ReactView(RemarkView):
     # and in the index.js bootstrapping code. -Dave)
     page_props = None
 
+    def get_page_title(self):
+        """Return the title for this page. Can be overridden."""
+        return self.page_title
+
     def get_page_class(self):
         """Provide the page class for this view. Can be overridden."""
         return self.page_class
@@ -102,12 +107,19 @@ class ReactView(RemarkView):
         """Provide the page props for this view. Can be overridden."""
         return self.page_props
 
-    def render(self, template_name=None, page_class=None, **page_props):
+    def render(
+        self, template_name=None, page_class=None, page_title=None, **page_props
+    ):
         """Render a page that derives from react.html"""
         template_name = template_name or self.template_name
         page_class = page_class or self.get_page_class()
         page_props = page_props or self.get_page_props() or {}
-        context = {"page_class": page_class, "page_props": page_props}
+        page_title = page_title or self.get_page_title() or ""
+        context = {
+            "page_class": page_class,
+            "page_props": page_props,
+            "page_title": page_title,
+        }
         return render(self.request, template_name, context)
 
     def get(self, request):

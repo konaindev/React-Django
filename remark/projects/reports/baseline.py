@@ -1,6 +1,9 @@
+from datetime import timedelta
+
 from .common import CommonReport
 from .periods import ComputedPeriod
 
+from remark.lib.math import avg_or_0
 from remark.lib.metrics import BareMultiPeriod
 
 
@@ -20,9 +23,18 @@ class BaselineReport(CommonReport):
     exists) for a project.
     """
 
-    def build_computed_period(self, period):
-        overrides = HACK_BASELINE_OVERRIDES.get(self.project.public_id)
-        return ComputedPeriod(period, overrides=overrides)
+    def __init__(
+        self,
+        project,
+        period,
+        previous_period=None,
+        whiskers=None,
+        four_week_funnel_values=None,
+    ):
+        super().__init__(
+            project, period, previous_period=previous_period, whiskers=whiskers
+        )
+        self.four_week_funnel_values = four_week_funnel_values
 
     @classmethod
     def has_baseline(cls, project):
@@ -43,5 +55,31 @@ class BaselineReport(CommonReport):
         baseline_periods = project.get_baseline_periods()
         multiperiod = BareMultiPeriod.from_periods(baseline_periods)
         baseline_period = multiperiod.get_cumulative_period()
-        return cls(project, baseline_period)
+        only_funnel_multiperiod = multiperiod.only(
+            "usvs", "inquiries", "tours", "lease_applications", "leases_executed"
+        )
+        four_week_periods = only_funnel_multiperiod.get_delta_periods(
+            time_delta=timedelta(weeks=4), after_end=False
+        )
+        four_week_funnel_values = [fwp.get_values() for fwp in four_week_periods]
+        return cls(
+            project, baseline_period, four_week_funnel_values=four_week_funnel_values
+        )
 
+    def build_computed_period(self, period):
+        overrides = HACK_BASELINE_OVERRIDES.get(self.project.public_id)
+        return ComputedPeriod(period, overrides=overrides)
+
+    def build_four_week_averages(self):
+        def _avg(name):
+            return round(
+                avg_or_0([fwfv[name] for fwfv in self.four_week_funnel_values])
+            )
+
+        return {
+            "usv": _avg("usvs"),
+            "inq": _avg("inquiries"),
+            "tou": _avg("tours"),
+            "app": _avg("lease_applications"),
+            "exe": _avg("leases_executed"),
+        }

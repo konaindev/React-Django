@@ -1,20 +1,16 @@
 @import "css/base.scss";
 
-$trend-up: $primary-green;
-$trend-down: $primary-red;
-$trend-flat: $primary-yellow;
-
 .delta-indicator {
     &__trend-up {
-        color: $trend-up;
+        color: $delta-indicator-up-color;
     }
 
     &__trend-down {
-        color: $trend-down;
+        color: $delta-indicator-down-color;
     }
 
     &__trend-flat {
-        color: $trend-flat;
+        color: $delta-indicator-flat-color;
     }
 
     &__arrow {
@@ -23,7 +19,7 @@ $trend-flat: $primary-yellow;
     }
 
     &__delta {
-        color: $white;
+        color: $content-text-primary-color;
         letter-spacing: 1px;
         vertical-align: middle;
     }

@@ -18,5 +18,9 @@ $report-span-dropdown-background: #232837;
     margin: 0;
     padding: 0;
     background: transparent;
-    color: $gray-lighter;
+    color: $input-text-color;
+
+    option {
+        background-color: $select-option-background-color;
+    }
 }

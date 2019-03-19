@@ -18,10 +18,14 @@ class ProjectPageView(ReactView):
 
     page_class = "ProjectPage"
 
+    def get_page_title(self):
+        return f"{self.project.name} Reports"
+
     def get(self, request, project_id):
-        project = get_object_or_404(Project, public_id=project_id)
+        self.project = get_object_or_404(Project, public_id=project_id)
         return self.render(
-            project=project.to_jsonable(), report_links=ReportLinks.for_project(project)
+            project=self.project.to_jsonable(),
+            report_links=ReportLinks.for_project(self.project),
         )
 
 
@@ -32,23 +36,26 @@ class ReportPageViewBase(ReactView):
 
     selector_class = None
 
+    def get_page_title(self):
+        return f"{self.project.name} {self.page_title}"
+
     def get(self, request, project_id, *args, **kwargs):
-        project = get_object_or_404(Project, public_id=project_id)
+        self.project = get_object_or_404(Project, public_id=project_id)
 
         try:
-            selector = self.selector_class(project, *args, **kwargs)
+            self.selector = self.selector_class(self.project, *args, **kwargs)
         except Exception:
-            selector = None
+            self.selector = None
             raise Http404
 
-        if (selector is None) or (not selector.has_report_data()):
+        if (self.selector is None) or (not self.selector.has_report_data()):
             raise Http404
 
         return self.render(
-            report_links=ReportLinks.for_project(project),
-            project=project.to_jsonable(),
-            report=selector.get_report_data(),
-            current_report_link=selector.get_link(),
+            report_links=ReportLinks.for_project(self.project),
+            project=self.project.to_jsonable(),
+            report=self.selector.get_report_data(),
+            current_report_link=self.selector.get_link(),
         )
 
 
@@ -57,6 +64,7 @@ class BaselineReportPageView(ReportPageViewBase):
 
     selector_class = BaselineReportSelector
     page_class = "BaselineReportPage"
+    page_title = "Baseline Report"
 
 
 class PerformanceReportPageView(ReportPageViewBase):
@@ -64,6 +72,7 @@ class PerformanceReportPageView(ReportPageViewBase):
 
     selector_class = PerformanceReportSelector
     page_class = "PerformanceReportPage"
+    page_title = "Performance Report"
 
 
 class MarketReportPageView(ReportPageViewBase):
@@ -71,6 +80,7 @@ class MarketReportPageView(ReportPageViewBase):
 
     selector_class = MarketReportSelector
     page_class = "MarketReportPage"
+    page_title = "Market Analysis"
 
 
 class ModelingReportPageView(ReportPageViewBase):
@@ -78,4 +88,5 @@ class ModelingReportPageView(ReportPageViewBase):
 
     selector_class = ModelingReportSelector
     page_class = "ModelingReportPage"
+    page_title = "Modeling Report"
 

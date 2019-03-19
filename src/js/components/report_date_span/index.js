@@ -19,7 +19,7 @@ export default class ReportDateSpan extends Component {
       <div className="report-date-span__content">
         <span className="report-date-span__content-name">
           {this.props.name} (
-          {formatDateDiff(this.props.dates.end, this.props.dates.start)})
+          {formatDateDiff(this.props.dates.start, this.props.dates.end)})
         </span>
         <span className="report-date-span__content-dates">
           {formatDate(this.props.dates.start)} -{" "}

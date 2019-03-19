@@ -109,6 +109,14 @@ def div_or_none(a, b):
     return div_or_default(a, b, None)
 
 
+def avg_or_0(values):
+    return sum(values) / len(values) if values else 0
+
+
+def avg_or_none(values):
+    return sum(values) / len(values) if values else None
+
+
 def d_div_or_0(a, b):
     """
     Divide a and b as Python decimals. If either is None, or if b is 0, return 0.
