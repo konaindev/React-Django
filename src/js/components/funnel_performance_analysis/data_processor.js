@@ -64,7 +64,6 @@ export default function(funnelHistory = []) {
   // start of month iteration
   for (let monthFunnel of funnelHistory) {
     let numberOfWeeks;
-    let columnKey = monthFunnel.month;
 
     // start of rows iteration
     // sets month / week values to each row for a specified month column
@@ -85,22 +84,18 @@ export default function(funnelHistory = []) {
       let monthValueFormatted = isPercent
         ? formatPercent(monthValue, fixedDigits)
         : formatNumber(monthValue);
-      let weekValuesFormatted = weekValues.map(v =>
-        isPercent ? formatPercent(v, fixedDigits) : formatNumber(v)
-      );
+      let weeks = weekValues.map(v => ({
+        value: v,
+        formatted: isPercent ? formatPercent(v, fixedDigits) : formatNumber(v)
+      }));
 
-      row[columnKey] = {
-        monthly: {
-          value: monthValue,
-          valueFormatted: monthValueFormatted
-        },
-        weekly: {
-          values: weekValues,
-          valuesFormatted: weekValuesFormatted,
-          count: numberOfWeeks,
-          startIndex: weekIndex + 1,
-          endIndex: weekIndex + numberOfWeeks
-        }
+      row[monthFunnel.month] = {
+        monthValue,
+        monthValueFormatted,
+        weeks,
+        weeksCount: numberOfWeeks,
+        weekStart: weekIndex + 1,
+        weekEnd: weekIndex + numberOfWeeks
       };
     }
     // end of rows iteration
@@ -110,6 +105,7 @@ export default function(funnelHistory = []) {
   // end of month iteration
 
   let columns = funnelHistory.map(({ month }) => ({
+    month,
     accessor: month,
     Header: formatDateWithTokens(month, "MMM")
   }));
@@ -118,23 +114,41 @@ export default function(funnelHistory = []) {
   for (let row of allRows) {
     row.key = convertToKebabCase(row.label);
 
-    const monthValues = columns.map(({ accessor }) =>
-      _get(row, `${accessor}.monthly.value`)
-    );
+    const monthValues = columns.map(({ month }) => row[month].monthValue);
     const weekValues = columns.reduce(
-      (a, { accessor }) => a.concat(_get(row, `${accessor}.weekly.values`)),
+      (acc, { month }) => acc.concat(row[month].weeks.map(w => w.value)),
       []
     );
 
-    row.aggMonthly = {
-      max: Math.max(...monthValues),
-      topThree: getTopThreePoints(monthValues)
-    };
+    const monthMax = Math.max(...monthValues);
+    const monthTopThree = getTopThreePoints(monthValues);
+    const weekMax = Math.max(...weekValues);
+    const weekTopThree = getTopThreePoints(weekValues);
 
-    row.aggWeekly = {
-      max: Math.max(...weekValues),
-      topThree: getTopThreePoints(weekValues)
-    };
+    // each cell
+    for (let { month } of columns) {
+      const monthValue = row[month].monthValue;
+
+      row[month] = {
+        ...row[month],
+        monthCircle: `${(monthValue / monthMax) * 100}%`,
+        monthHighlight: monthTopThree.indexOf(monthValue) >= 0
+      };
+
+      // highlight eligible weeks to top three
+      // show only one value label per month, not enough space in cells
+      let foundHighlight = false;
+      for (let week of row[month].weeks) {
+        week.highlight = weekTopThree.indexOf(week.value) >= 0;
+        week.barHeight = `${(week.value / weekMax) * 100}%`;
+        week.showValue = false;
+
+        if (week.highlight && !foundHighlight) {
+          foundHighlight = true;
+          week.showValue = true;
+        }
+      }
+    }
   }
   // end of top three percent logic
 

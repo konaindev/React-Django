@@ -179,78 +179,68 @@ function getCellMinWidth(accessor, viewMode) {
 
 function CellRenderer(props) {
   const { value, original, column, viewMode } = props;
-  console.log("+++++++++", props);
+  // console.log("+++++++++", props);
 
   if (column.id === "label") {
     return <div dangerouslySetInnerHTML={{ __html: value }} />;
   }
 
   if (viewMode === "monthly") {
-    return <MonthlyCell cellData={value.monthly} rowData={original} />;
+    return <CellMonthView cellData={value} />;
   }
 
   if (viewMode === "weekly") {
-    return <WeeklyCell cellData={value.weekly} rowData={original} />;
+    return <CellWeekView cellData={value} rowData={original} />;
   }
 }
 
-function MonthlyCell({ cellData, rowData }) {
-  const { value, highlight } = cellData;
-  const {
-    category,
-    monthly: { max }
-  } = rowData;
-
-  const circleSize = max > 0 ? (value / max) * 100 : 100;
+function CellMonthView({ cellData }) {
+  const { monthValueFormatted, monthCircle, monthHighlight } = cellData;
 
   return (
     <div className="cell-monthly">
       <div className="cell-monthly__circle-wrapper">
         <div
           className={cx("cell-monthly__circle", {
-            "cell-monthly__circle--highlight": highlight
+            "cell-monthly__circle--highlight": monthHighlight
           })}
-          style={{ width: `${circleSize}%`, height: `${circleSize}%` }}
+          style={{ width: monthCircle, height: monthCircle }}
         />
       </div>
       <div
         className={cx("cell-monthly__value", {
-          "cell-monthly__value--highlight": highlight
+          "cell-monthly__value--highlight": monthHighlight
         })}
       >
-        {category === "volume" && formatNumber(value, 0)}
-        {category === "conversion" && formatPercent(value, 0)}
+        {monthValueFormatted}
       </div>
     </div>
   );
 }
 
-function WeeklyCell({ cellData, rowData }) {
-  const { startIndex, endIndex, values } = cellData;
-  const {
-    category,
-    weekly: { max },
-    isFirstRow
-  } = rowData;
-
-  // console.log("+++++++++", cellData, rowData);
+function CellWeekView({ cellData, rowData }) {
+  const { weekStart, weekEnd, weeks } = cellData;
+  const { isFirstRow } = rowData;
 
   return (
     <div className="cell-weekly">
       {isFirstRow && (
-        <div className="cell-weekly__label">{`Week ${startIndex}-${endIndex}`}</div>
+        <div className="cell-weekly__label">{`Week ${weekStart}-${weekEnd}`}</div>
       )}
-      <div className="cell-weekly__chart">
-        <div className="cell-weekly__value">{}</div>
-        <div className="cell-weekly__bars">
-          {values.map((value, index) => (
+      <div className="cell-weekly__bars">
+        {weeks.map((week, index) => {
+          return (
             <div
               key={index}
-              style={{ height: `${(value / max) * 100}%` }}
-              className={false && "highlight"}
-            />
-          ))}
-        </div>
+              style={{ height: week.barHeight }}
+              className={cx({ highlight: week.highlight })}
+            >
+              {week.showValue && (
+                <span className="cell-weekly__value">{week.formatted}</span>
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
