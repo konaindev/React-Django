@@ -186,4 +186,79 @@ $cell-fill-color-highlight: $blue-3;
             }
         }
     }
+
+    // legends on the right side of panel header
+    .analysis__legends {
+        display: flex;
+        align-items: center;
+        color: $gray-6;
+        font-size: 14px;
+
+        .legends__chart {
+            display: flex;
+            align-items: center;
+        }
+
+        .legends__chart--monthly {
+            margin: 0 8px;
+
+            span {
+                border-radius: 50%;
+                background-color: $cell-fill-color;
+                margin: 0 4px;
+
+                &:nth-child(1) {
+                    width: 10px;
+                    height: 10px;
+                }
+                &:nth-child(2) {
+                    width: 20px;
+                    height: 20px;
+                }
+                &:nth-child(3) {
+                    width: 28px;
+                    height: 28px;
+                }
+            }
+        }
+
+        .legends__chart--weekly {
+            display: flex;
+            align-items: flex-end;
+            margin: 0 9px 8px 9px;
+            height: 28px;
+
+            span {
+                background-color: $cell-fill-color;
+                margin: 0 4px;
+                width: 8px;
+
+                &:nth-child(1) {
+                    height: 7px;
+                }
+                &:nth-child(2) {
+                    height: 11px;
+                }
+                &:nth-child(3) {
+                    height: 17px;
+                }
+                &:nth-child(4) {
+                    height: 23px;
+                }
+                &:nth-child(5) {
+                    height: 28px;
+                }
+            }
+        }
+
+        .legends__top-label {
+            margin: 0 16px 0 54px;
+        }
+
+        .legends__top-box {
+            background-color: $cell-fill-color-highlight;
+            width: 18px;
+            height: 18px;
+        }
+    }
 }

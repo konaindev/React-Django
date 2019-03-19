@@ -38,6 +38,33 @@ export class FunnelPerformanceAnalysis extends React.Component {
     ];
   }
 
+  static Legends = ({ viewMode }) => {
+    return (
+      <div className="analysis__legends">
+        <span>Lower</span>
+        {viewMode === "monthly" && (
+          <div className="legends__chart legends__chart--monthly">
+            <span />
+            <span />
+            <span />
+          </div>
+        )}
+        {viewMode === "weekly" && (
+          <div className="legends__chart legends__chart--weekly">
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+        )}
+        <span>Higher</span>
+        <span className="legends__top-label">Top 3 Points</span>
+        <span className="legends__top-box" />
+      </div>
+    );
+  };
+
   static Table = ({ data, columns, viewMode }) => {
     let tableColumns = columns.map(c => ({
       ...c,
@@ -77,6 +104,8 @@ export class FunnelPerformanceAnalysis extends React.Component {
               value={viewMode}
               options={this.buttonGroupOptions}
             />
+
+            <FunnelPerformanceAnalysis.Legends viewMode={viewMode} />
           </div>
 
           <p className="analysis__table-intro">Volume of Activity</p>
