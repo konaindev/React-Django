@@ -25,7 +25,9 @@ module.exports = {
       {
         test: /\.(css|scss)$/,
         use: [
-          { loader: miniCSS.loader },
+          {
+            loader: miniCSS.loader
+          },
           {
             loader: "css-loader"
           },
