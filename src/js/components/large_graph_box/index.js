@@ -75,7 +75,7 @@ export class LargeGraphBox extends Component {
 export const PercentageGraphBox = props => (
   <LargeGraphBox
     formatDelta={formatDeltaPercent}
-    formatTarget={formatPercent}
+    formatTarget={value => formatPercent(value, props.digits || 0)}
     formatValue={value => formatPercent(value, props.digits || 0, 0)}
     {...props}
   />
