@@ -179,6 +179,11 @@
         }
     }
 
+    &__message {
+        margin-bottom: $s6;
+        color: $auth-form-message-color;
+    }
+
     &__logo-wrap {
         margin-bottom: $s12;
 
