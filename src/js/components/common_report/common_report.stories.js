@@ -330,8 +330,7 @@ const PERFORMANCE_REPORT = {
       }
     }
   },
-  whiskers: WHISKERS,
-  ...funnelHistoryProps
+  whiskers: WHISKERS
 };
 
 const props_baseline = {

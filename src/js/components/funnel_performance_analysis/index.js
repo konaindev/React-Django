@@ -19,6 +19,7 @@ export class FunnelPerformanceAnalysis extends React.Component {
     );
 
     this.state = {
+      dataNotAvailable: props.funnel_history == null,
       viewMode: "monthly",
       columns,
       volumeRows,
@@ -31,6 +32,10 @@ export class FunnelPerformanceAnalysis extends React.Component {
   };
 
   render() {
+    if (this.state.dataNotAvailable) {
+      return <div />;
+    }
+
     const { viewMode, columns, volumeRows, conversionRows } = this.state;
 
     return (
