@@ -164,6 +164,8 @@ export const targetFormatter = formatter => targetValue =>
 
 export const formatTargetPercent = targetFormatter(formatPercent);
 
+export const formatTargetCurrency = targetFormatter(formatCurrency);
+
 /**
  * @description get date difference in specified unit
  */
