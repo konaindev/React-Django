@@ -7,6 +7,10 @@
 @import "./fonts.scss";
 @import "./variables.scss";
 
+// node_modules
+@import "~react-table/react-table.css";
+
+
 body {
     margin: 0;
     padding: 0;
