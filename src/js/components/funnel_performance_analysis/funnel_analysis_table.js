@@ -5,9 +5,10 @@ import ReactTable from "react-table";
 export function FunnelAnalysisTable({ data, columns, viewMode }) {
   let tableColumns = columns.map(column => ({
     ...column,
+    getProps: getColumnProps,
     width: getColumnWidth(column),
     minWidth: getColumnMinWidth(column, viewMode),
-    Cell: props => <CellRenderer {...props} viewMode={viewMode} />
+    Cell: CellRenderer
   }));
 
   return (
@@ -20,8 +21,6 @@ export function FunnelAnalysisTable({ data, columns, viewMode }) {
       sortable={false}
       resizable={false}
       viewMode={viewMode}
-      getTheadThProps={getTdProps}
-      getTdProps={getTdProps}
     />
   );
 }
@@ -42,24 +41,20 @@ function getColumnMinWidth({ accessor, numberOfWeeks }, viewMode) {
   return numberOfWeeks > 4 ? 98 : 77;
 }
 
-function getTdProps(state, rowInfo, column) {
-  const { viewMode } = state;
-  const { numberOfWeeks } = column;
-  const isLabelColumn = column.id === "label";
-
+function getColumnProps({ viewMode }) {
   return {
-    className: cx({
-      "cell-row-label": isLabelColumn
-      // "cell-month": !isLabelColumn && viewMode === "monthly",
-      // "cell-week": !isLabelColumn && viewMode === "weekly",
-      // "cell-week--long":
-      //   !isLabelColumn && viewMode === "weekly" && numberOfWeeks === 5
-    })
+    extra: {
+      viewMode
+    }
   };
 }
 
-function CellRenderer(props, a, b) {
-  const { value, original, column, viewMode } = props;
+function CellRenderer({ value, original, column, columnProps }) {
+  const {
+    rest: {
+      extra: { viewMode }
+    }
+  } = columnProps;
 
   if (column.id === "label") {
     return <div dangerouslySetInnerHTML={{ __html: value }} />;
