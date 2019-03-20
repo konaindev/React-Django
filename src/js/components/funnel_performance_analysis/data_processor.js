@@ -7,6 +7,39 @@ import {
 } from "../../utils/formatters";
 import { convertToKebabCase } from "../../utils/misc";
 
+/**
+  exampleCell = {
+    monthCircle: "95%", // width & height of circle
+    monthHighlight: false, // highlight circle
+    monthValue: 1797, // original value used in top three logic
+    monthValueFormatted: "1,797", // value to display
+    weekEnd: 52, // label in weekly cell
+    weekStart: 48, // label in weekly cell
+    weeks: [{
+      value: 775, // original or level-1 formatted value used in top three logic
+      formatted: "775", // value to display
+      highlight: true, // highlight bar
+      showValue: true, // show value on top of bar
+      barHeight: "98%" // height of bar
+    }, {
+      ...
+    }]
+  }
+
+  resultRows = [{
+    category: "volume",
+    isFirstRow: true,     // show "Week 1-4" label in weekly view
+    key: "unique-site-visitors",
+    label: "Unique Site Visitors",
+    path: "usv" // accessor in the raw data
+    "2017-08": cell1,
+    "2017-09": cell2,
+    ...
+    "2018-07": exampleCell
+  }, {
+    ...
+  }]
+**/
 export default function(funnelHistory = []) {
   let allRows = [
     {
