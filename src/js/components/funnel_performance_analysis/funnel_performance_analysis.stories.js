@@ -2,11 +2,14 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 
+import Container from "../container";
 import props from "./FunnelProps";
 import FunnelPerformanceAnalysis from "./index";
 
 storiesOf("FunnelPerformanceAnalysis", module).add("default", () => (
   <div style={{ margin: "16px auto" }}>
-    <FunnelPerformanceAnalysis funnelHistory={props.funnel_history} />
+    <Container>
+      <FunnelPerformanceAnalysis {...props} />
+    </Container>
   </div>
 ));

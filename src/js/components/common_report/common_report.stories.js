@@ -5,6 +5,7 @@ import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 
 import CommonReport from "./index";
+import funnelHistoryProps from "../funnel_performance_analysis/FunnelProps";
 
 // dummy data
 const WHISKERS = {
@@ -141,7 +142,8 @@ const BASELINE_REPORT = {
     tou: 20,
     app: 7,
     exe: 5
-  }
+  },
+  ...funnelHistoryProps
 };
 
 const PERFORMANCE_REPORT = {
@@ -328,7 +330,8 @@ const PERFORMANCE_REPORT = {
       }
     }
   },
-  whiskers: WHISKERS
+  whiskers: WHISKERS,
+  ...funnelHistoryProps
 };
 
 const props_baseline = {

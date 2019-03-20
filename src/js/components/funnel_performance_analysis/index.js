@@ -6,7 +6,6 @@ import processData from "./data_processor";
 import FunnelPanelHeader from "./funnel_panel_header";
 import FunnelAnalysisTable from "./funnel_analysis_table";
 
-import Container from "../container";
 import SectionHeader from "../section_header";
 import Panel from "../panel";
 import { formatNumber, formatPercent } from "../../utils/formatters";
@@ -16,7 +15,7 @@ export class FunnelPerformanceAnalysis extends React.Component {
     super(props);
 
     const { columns, volumeRows, conversionRows } = processData(
-      props.funnelHistory
+      props.funnel_history
     );
 
     this.state = {
@@ -35,7 +34,7 @@ export class FunnelPerformanceAnalysis extends React.Component {
     const { viewMode, columns, volumeRows, conversionRows } = this.state;
 
     return (
-      <Container className="funnel-performance-analysis">
+      <div className="funnel-performance-analysis">
         <SectionHeader title="Funnel Performance Analysis" />
 
         <Panel>
@@ -58,13 +57,13 @@ export class FunnelPerformanceAnalysis extends React.Component {
             viewMode={viewMode}
           />
         </Panel>
-      </Container>
+      </div>
     );
   }
 }
 
 FunnelPerformanceAnalysis.propTypes = {
-  funnelHistory: arrayOf(
+  funnel_history: arrayOf(
     shape({
       month: string,
       monthly_volumes: shape({
