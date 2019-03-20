@@ -60,7 +60,7 @@ $cell-fill-color-highlight: $blue-3;
                     &>div {
                         display: flex;
                         align-items: center;
-                        padding: 24px 20px 20px 0;
+                        padding: 24px 24px 20px 0;
                         white-space: normal;
                         height: 5.75rem;
                     }
@@ -68,7 +68,7 @@ $cell-fill-color-highlight: $blue-3;
             }
         }
 
-        .cell-monthly {
+        .cell-month {
             height: 100%;
             color: $gray-6;
             text-align: center;
@@ -89,7 +89,7 @@ $cell-fill-color-highlight: $blue-3;
                 border-radius: 50%;
                 background-color: $cell-fill-color;
 
-                &--highlight {
+                &.highlight {
                     background-color: $cell-fill-color-highlight;
                 }
             }
@@ -98,10 +98,9 @@ $cell-fill-color-highlight: $blue-3;
                 font-size: $text-xs;
                 line-height: $text-xl;
                 letter-spacing: 0.5px;
-                // text-align: center;
                 padding-bottom: 10px;
 
-                &--highlight {
+                &.highlight {
                     font-size: $text-xs;
                     line-height: $text-xl;
                     color: $highlight-gray-3;
@@ -109,7 +108,7 @@ $cell-fill-color-highlight: $blue-3;
             }
         }
 
-        .cell-weekly {
+        .cell-week {
             height: 100%;
             overflow: hidden;
             text-align: center;
@@ -118,28 +117,27 @@ $cell-fill-color-highlight: $blue-3;
             flex-direction: column;
             justify-content: flex-end;
 
-            &__label, &__value {
-                font-size: $text-xs;
-                line-height: $text-xl;
-            }
-
-            &__label {
+            &__start-end {
                 position: absolute;
                 top: 0;
                 width: 100%;
+                font-size: $text-xs;
+                line-height: $text-xl;
                 color: $gray-6;
             }
 
-            &__value {
-                color: $highlight-gray-3;
-                letter-spacing: 0.5px;
+            &__bar-value {
                 position: absolute;
                 top: -22px;
                 transform: translateX(-50%);
+                font-size: $text-xs;
+                line-height: $text-xl;
+                color: $highlight-gray-3;
+                letter-spacing: 0.5px;
             }
 
             &__bars {
-                height: 40px;
+                height: $weekly-bar-height;
                 display: flex;
                 justify-content: center;
                 align-items: flex-end;

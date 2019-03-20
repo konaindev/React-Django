@@ -13,6 +13,7 @@ import { convertToKebabCase } from "../../utils/misc";
     monthHighlight: false, // highlight circle
     monthValue: 1797, // original value used in top three logic
     monthValueFormatted: "1,797", // value to display
+    weeksCount: 5,
     weekEnd: 52, // label in weekly cell
     weekStart: 48, // label in weekly cell
     weeks: [{
@@ -92,6 +93,12 @@ export default function(funnelHistory = []) {
     }
   ];
 
+  let columns = funnelHistory.map(({ month }) => ({
+    month,
+    accessor: month,
+    Header: formatDateWithTokens(month, "MMM")
+  }));
+
   let weekIndex = 0;
 
   // start of month iteration
@@ -133,15 +140,14 @@ export default function(funnelHistory = []) {
     }
     // end of rows iteration
 
+    const columnInfo = columns.find(c => c.month === monthFunnel.month);
+    if (columnInfo) {
+      columnInfo.numberOfWeeks = numberOfWeeks;
+    }
+
     weekIndex = weekIndex + numberOfWeeks;
   }
   // end of month iteration
-
-  let columns = funnelHistory.map(({ month }) => ({
-    month,
-    accessor: month,
-    Header: formatDateWithTokens(month, "MMM")
-  }));
 
   // start of top three percent logic, calc max
   for (let row of allRows) {
