@@ -11,18 +11,6 @@ $cell-fill-color-highlight: $blue-3;
         padding: 60px 80px;
     }
 
-    .analysis__panel-header {
-        display: flex;
-        justify-content: space-between;
-
-        .button-group {
-            &__item {
-                line-height: 1.25rem;
-                padding: 0.5rem 2.5rem;
-            }
-        }
-    }
-
     .analysis__table-intro {
         color: $highlight-gray-3;
         font-size: $text-base;
@@ -190,6 +178,20 @@ $cell-fill-color-highlight: $blue-3;
         }
     }
 
+
+    // header at the top of funnel analysis panel
+    .analysis__panel-header {
+        display: flex;
+        justify-content: space-between;
+
+        .button-group {
+            &__item {
+                line-height: 1.25rem;
+                padding: 0.5rem 2.5rem;
+            }
+        }
+    }
+
     // legends on the right side of panel header
     .analysis__legends {
         display: flex;
@@ -197,12 +199,9 @@ $cell-fill-color-highlight: $blue-3;
         color: $gray-6;
         font-size: 14px;
 
-        .legends__chart {
+        .legends__circles-list {
             display: flex;
             align-items: center;
-        }
-
-        .legends__chart--monthly {
             margin: 0 8px;
 
             span {
@@ -225,7 +224,7 @@ $cell-fill-color-highlight: $blue-3;
             }
         }
 
-        .legends__chart--weekly {
+        .legends__bars-list {
             display: flex;
             align-items: flex-end;
             margin: 0 9px 8px 9px;
@@ -254,11 +253,11 @@ $cell-fill-color-highlight: $blue-3;
             }
         }
 
-        .legends__top-label {
+        .legends__label-top-three {
             margin: 0 16px 0 54px;
         }
 
-        .legends__top-box {
+        .legends__rectangle {
             background-color: $cell-fill-color-highlight;
             width: 18px;
             height: 18px;

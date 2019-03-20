@@ -5,10 +5,10 @@ import ReactTable from "react-table";
 
 import "./funnel_performance_analysis.scss";
 import processData from "./data_processor";
+import FunnelPanelHeader from "./funnel_panel_header";
 import Container from "../container";
 import SectionHeader from "../section_header";
 import Panel from "../panel";
-import ButtonGroup from "../button_group";
 import { formatNumber, formatPercent } from "../../utils/formatters";
 
 export class FunnelPerformanceAnalysis extends React.Component {
@@ -25,45 +25,7 @@ export class FunnelPerformanceAnalysis extends React.Component {
       volumeRows,
       conversionRows
     };
-
-    this.buttonGroupOptions = [
-      {
-        value: "monthly",
-        label: "Monthly"
-      },
-      {
-        value: "weekly",
-        label: "Weekly"
-      }
-    ];
   }
-
-  static Legends = ({ viewMode }) => {
-    return (
-      <div className="analysis__legends">
-        <span>Lower</span>
-        {viewMode === "monthly" && (
-          <div className="legends__chart legends__chart--monthly">
-            <span />
-            <span />
-            <span />
-          </div>
-        )}
-        {viewMode === "weekly" && (
-          <div className="legends__chart legends__chart--weekly">
-            <span />
-            <span />
-            <span />
-            <span />
-            <span />
-          </div>
-        )}
-        <span>Higher</span>
-        <span className="legends__top-label">Top 3 Points</span>
-        <span className="legends__top-box" />
-      </div>
-    );
-  };
 
   static Table = ({ data, columns, viewMode }) => {
     let tableColumns = columns.map(c => ({
@@ -98,15 +60,10 @@ export class FunnelPerformanceAnalysis extends React.Component {
         <SectionHeader title="Funnel Performance Analysis" />
 
         <Panel>
-          <div className="analysis__panel-header">
-            <ButtonGroup
-              onChange={this.handleChangeViewMode}
-              value={viewMode}
-              options={this.buttonGroupOptions}
-            />
-
-            <FunnelPerformanceAnalysis.Legends viewMode={viewMode} />
-          </div>
+          <FunnelPanelHeader
+            viewMode={viewMode}
+            onChangeViewMode={this.handleChangeViewMode}
+          />
 
           <p className="analysis__table-intro">Volume of Activity</p>
           <FunnelPerformanceAnalysis.Table
