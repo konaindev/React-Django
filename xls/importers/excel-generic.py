@@ -67,7 +67,6 @@ def convert_date_to_string(d):
         return d.isoformat()
     assert False
 
-
 class ExcelImporter:
     def __init__(self, file_name, schema_file):
         self.excel = openpyxl.load_workbook(file_name, data_only=True)
@@ -323,8 +322,12 @@ class ModelingImporter(ExcelImporter):
                     "Cost per Exe vs Rent", sheet=option
                 ),
                 "leasing": {
-                    "change": self.get_field_by_label("Leasing Change", sheet=option),
-                    "cds": self.get_field_by_label("Cancels & Denials", sheet=option),
+                    "change": int(
+                        self.get_field_by_label("Leasing Change", sheet=option)
+                    ),
+                    "cds": int(
+                        self.get_field_by_label("Cancels & Denials", sheet=option)
+                    ),
                     "cd_rate": self.get_field_by_label("CD Rate", sheet=option),
                     "renewal_notices": self.get_field_by_label(
                         "Renewal Notices", sheet=option
@@ -340,16 +343,24 @@ class ModelingImporter(ExcelImporter):
                         "Vacation Notices", sheet=option
                     ),
                     "rate": self.get_field_by_label("Leasing Rate", sheet=option),
-                    "units": self.get_field_by_label("Lease Units", sheet=option),
+                    "units": int(
+                        self.get_field_by_label("Lease Units", sheet=option)
+                    ),
                 },
                 "occupancy": {
-                    "move_ins": self.get_field_by_label("Move Ins", sheet=option),
-                    "move_outs": self.get_field_by_label("Move Outs", sheet=option),
-                    "rate": self.get_field_by_label("Occupancy Rate", sheet=option),
-                    "units": self.get_field_by_label("Occupancy Units", sheet=option),
-                    "occupiable": self.get_field_by_label(
-                        "Occupiable Units", sheet=option
+                    "move_ins": int(
+                        self.get_field_by_label("Move Ins", sheet=option)
                     ),
+                    "move_outs": int(
+                        self.get_field_by_label("Move Outs", sheet=option)
+                    ),
+                    "rate": self.get_field_by_label("Occupancy Rate", sheet=option),
+                    "units": int(
+                        self.get_field_by_label("Occupancy Units", sheet=option)
+                    ),
+                    "occupiable": int(self.get_field_by_label(
+                        "Occupiable Units", sheet=option
+                    )),
                 },
             },
             "funnel": {
@@ -421,7 +432,9 @@ class ModelingImporter(ExcelImporter):
                     "total": convert_to_currency_string(
                         self.get_field_by_label("Acquisition Total", sheet=option)
                     ),
-                    "romi": self.get_field_by_label("Acquisition ROMI", sheet=option),
+                    "romi": int(
+                        self.get_field_by_label("Acquisition ROMI", sheet=option)
+                    ),
                     "estimated_revenue_gain": convert_to_currency_string(
                         self.get_field_by_label(
                             "Acquisition Revenue Gain", sheet=option
@@ -454,7 +467,9 @@ class ModelingImporter(ExcelImporter):
                     "total": convert_to_currency_string(
                         self.get_field_by_label("Retention Total", sheet=option)
                     ),
-                    "romi": self.get_field_by_label("Retention ROMI", sheet=option),
+                    "romi": int(
+                        self.get_field_by_label("Retention ROMI", sheet=option)
+                    ),
                     "estimated_revenue_gain": convert_to_currency_string(
                         self.get_field_by_label("Retention Revenue Gain", sheet=option)
                     ),
@@ -463,7 +478,9 @@ class ModelingImporter(ExcelImporter):
                     "total": convert_to_currency_string(
                         self.get_field_by_label("Total Total", sheet=option)
                     ),
-                    "romi": self.get_field_by_label("Total ROMI", sheet=option),
+                    "romi": int(
+                        self.get_field_by_label("Total ROMI", sheet=option)
+                    ),
                     "estimated_revenue_gain": convert_to_currency_string(
                         self.get_field_by_label("Total Revenue Gain", sheet=option)
                     ),
@@ -476,6 +493,7 @@ class ModelingImporter(ExcelImporter):
         result["options"] = []
         options = self.row_array("Output", "A", "B", "Models")
         for option in options:
+            print("Processing option %s" % option)
             result["options"].append(self.build_option(option))
 
         self.validate(result)
