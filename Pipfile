@@ -27,6 +27,7 @@ jsonschema = "*"
 jsonfield = "*"
 openpyxl = "*"
 requests = "*"
+django-click = "*"
 
 [requires]
 python_version = "3.7"
