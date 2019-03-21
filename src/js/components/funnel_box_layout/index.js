@@ -7,6 +7,7 @@ import {
   formatDeltaPercent,
   formatNumber,
   formatPercent,
+  formatTargetCurrency,
   formatTargetPercent
 } from "../../utils/formatters";
 import "./funnel_box_layout.scss";
@@ -81,7 +82,7 @@ export const FunnelCurrencyBox = props => (
   <FunnelBaseBox
     formatter={formatCurrency}
     deltaFormatter={formatCurrency}
-    targetFormatter={formatTargetPercent}
+    targetFormatter={formatTargetCurrency}
     {...props}
   />
 );

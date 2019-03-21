@@ -23,7 +23,8 @@ class DateRange:
 
     def description(self):
         """Return a human-readable date range."""
-        return f"{self.start.strftime(self.DATE_FORMAT)} - {self.end.strftime(self.DATE_FORMAT)}"
+        end_dt = self.end - datetime.timedelta(days=1)
+        return f"{self.start.strftime(self.DATE_FORMAT)} - {end_dt.strftime(self.DATE_FORMAT)}"
 
 
 class ReportSelectorBase:
