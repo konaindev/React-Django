@@ -63,6 +63,8 @@ $gray-6: #798796;
 $gray-7: #c2c6cb;
 $gray-8: #e1e3e5;
 
+$white: #ffffff;
+
 //----------------------------------------------------------
 // Component colors
 //----------------------------------------------------------
@@ -179,10 +181,10 @@ $text-lg: 1.125rem; // 18px
 $text-xl: 1.25rem; // 20px
 $text-2xl: 1.5rem; // 24px
 $text-3xl: 1.875rem; // 30px
-$text-4xl: 2.25rem; // 48px
-$text-5xl: 3rem;
-$text-6xl: 4rem;
-$text-7xl: 6rem;
+$text-4xl: 2.25rem; // 36px
+$text-5xl: 3rem; // 48px
+$text-6xl: 4rem; // 64px
+$text-7xl: 6rem; // 96px
 
 $line-height-compressed: 0.75;
 $line-height-none: 1;
@@ -253,6 +255,12 @@ $auth-form-width-tablet-up: 360px;
 $auth-form-message-color: $orange-3;
 $auth-footer-content-color: $gray-8;
 $auth-footer-content-color-desktop: $gray-6;
+
+$password-form-title-color: $blue-3;
+$password-form-width-tablet-up: 520px;
+$password-form-text-color: $gray-3;
+$password-form-message-color: $orange-3;
+$password-form-nav-back-color: $highlight-gray-3;
 
 //----------------------------------------------------------
 // Device breakpoints
