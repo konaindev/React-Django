@@ -864,3 +864,5 @@ const FUNNEL_HISTORY = [
 export default {
   funnel_history: FUNNEL_HISTORY
 };
+
+export const funnel_history = FUNNEL_HISTORY;
