@@ -129,9 +129,10 @@ $button-primary-active-text-color: $highlight-gray-3;
 
 $button-group-line-color: $gray-4;
 
-$map-circle-point-color: $cyan-3;
+$map-circle-point-color: $green-3;
 $map-zip-label-color: $highlight-gray-3;
-$map-region-bg-color: $blue-3;
+$map-region-bg-color: $green-3;
+$map-region-bg-opacity: 0.05;
 $map-background-color: $gray-2;
 $map-road-color: $gray-2;
 $map-water-color: $gray-2;
@@ -240,6 +241,7 @@ $border-radius-full: 9999px;
     mapRoadColor: $map-road-color;
     mapWaterColor: $map-water-color;
     mapRegionBgColor: $map-region-bg-color;
+    mapRegionBgOpacity: $map-region-bg-opacity;
 }
 
 $anchor-color: $blue-3;
