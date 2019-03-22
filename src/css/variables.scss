@@ -130,7 +130,8 @@ $button-primary-active-text-color: $highlight-gray-3;
 $button-group-line-color: $gray-4;
 
 $map-circle-point-color: $green-3;
-$map-zip-label-color: $highlight-gray-3;
+$map-zip-text-color: $highlight-gray-3;
+$map-radius-text-color: $gray-3;
 $map-region-bg-color: $green-3;
 $map-region-bg-opacity: 0.05;
 $map-background-color: $gray-2;
@@ -236,6 +237,8 @@ $border-radius-full: 9999px;
 
 :export {
     mapCirclePointColor: $map-circle-point-color;
+    mapZipTextColor: $map-zip-text-color;
+    mapRadiusTextColor: $map-radius-text-color;
     mapLandColor: $map-land-color;
     mapLocationTextColor: $map-location-text-color;
     mapRoadColor: $map-road-color;
