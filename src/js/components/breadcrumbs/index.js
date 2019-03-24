@@ -5,10 +5,12 @@ import "./breadcrumbs.scss";
 
 export class Breadcrumbs extends Component {
   static propTypes = {
-    breadcrumbs: PropTypes.arrayOf({
-      text: PropTypes.string,
-      link: PropTypes.string
-    }).isRequired
+    breadcrumbs: PropTypes.arrayOf(
+      PropTypes.shape({
+        text: PropTypes.string,
+        link: PropTypes.string
+      })
+    ).isRequired
   };
 
   render() {
@@ -17,7 +19,7 @@ export class Breadcrumbs extends Component {
     return (
       <div className="breadcrumbs">
         {breadcrumbs.map((item, index) => (
-          <span className="breadcrumbs__item">
+          <span className="breadcrumbs__item" key={index}>
             {item.link ? <a href={item.link}>{item.text}</a> : item.text}
           </span>
         ))}

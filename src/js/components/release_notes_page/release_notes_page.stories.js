@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 import ReleaseNotesPage from "./index";
 
 const props = {
-  releaseNotes: [
+  release_notes: [
     {
       id: 1,
       title: "Alderaan",

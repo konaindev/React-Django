@@ -6,16 +6,16 @@ import Panel from "../panel";
 import { formatDate } from "../../utils/formatters";
 import "./release_note_details.scss";
 
-export const ReleaseNoteDetails = ({ releaseNote }) => (
+export const ReleaseNoteDetails = ({ release_note }) => (
   <Panel className="release-note-details">
     <p className="release-note-details__title">
-      {releaseNote.version} Release {releaseNote.title}{" "}
+      {release_note.version} Release {release_note.title}{" "}
       <span className="release-note-details__title-date">
-        | {formatDate(releaseNote.date)}
+        | {formatDate(release_note.date)}
       </span>
     </p>
     <div className="release-note-details__content">
-      <ReactMarkdown source={releaseNote.content} />
+      <ReactMarkdown source={release_note.content} />
     </div>
     <div className="release-note-details__footer">
       <p>

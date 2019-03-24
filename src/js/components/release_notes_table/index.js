@@ -5,10 +5,10 @@ import Panel from "../panel";
 import { formatDate } from "../../utils/formatters";
 import "./release_notes_table.scss";
 
-export const ReleaseNotesTable = ({ releaseNotes }) => (
+export const release_notesTable = ({ release_notes }) => (
   <Panel>
     <table className="release-notes-table">
-      {releaseNotes.map(note => (
+      {release_notes.map(note => (
         <tr key={note.id} className="release-notes-table__row">
           <td className="release-notes-table__col release-notes-table__version">
             {note.version}
@@ -33,8 +33,8 @@ export const ReleaseNotesTable = ({ releaseNotes }) => (
   </Panel>
 );
 
-ReleaseNotesTable.propTypes = {
-  releaseNotes: PropTypes.array.isRequired
+release_notesTable.propTypes = {
+  release_notes: PropTypes.array.isRequired
 };
 
-export default ReleaseNotesTable;
+export default release_notesTable;

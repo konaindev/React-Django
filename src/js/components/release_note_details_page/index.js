@@ -7,29 +7,29 @@ import PageChrome from "../page_chrome";
 import ReleaseNoteDetails from "../release_note_details";
 import { formatDate } from "../../utils/formatters";
 
-const getBreadcrumbs = releaseNote => [
+const getBreadcrumbs = release_note => [
   {
     text: "Releases",
     link: "/releases"
   },
   {
-    text: `${releaseNote.version} Release: ${releaseNote.title} | ${formatDate(
-      releaseNote.date
-    )}`
+    text: `${release_note.version} Release: ${
+      release_note.title
+    } | ${formatDate(release_note.date)}`
   }
 ];
 
-export const ReleaseNoteDetailsPage = ({ releaseNote }) => (
+export const ReleaseNoteDetailsPage = ({ release_note }) => (
   <PageChrome>
     <Container>
-      <Breadcrumbs breadcrumbs={getBreadcrumbs(releaseNote)} />
-      <ReleaseNoteDetails releaseNote={releaseNote} />
+      <Breadcrumbs breadcrumbs={getBreadcrumbs(release_note)} />
+      <ReleaseNoteDetails release_note={release_note} />
     </Container>
   </PageChrome>
 );
 
 ReleaseNoteDetailsPage.propTypes = {
-  releaseNote: PropTypes.object.isRequired
+  release_note: PropTypes.object.isRequired
 };
 
 export default ReleaseNoteDetailsPage;

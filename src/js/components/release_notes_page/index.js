@@ -6,17 +6,17 @@ import PageChrome from "../page_chrome";
 import ReleaseNotesTable from "../release_notes_table";
 import SectionHeader from "../section_header";
 
-export const ReleaseNotesPage = ({ releaseNotes }) => (
+export const ReleaseNotesPage = ({ release_notes }) => (
   <PageChrome>
     <Container>
       <SectionHeader title="Releases" smallMarginTop />
-      <ReleaseNotesTable releaseNotes={releaseNotes} />
+      <ReleaseNotesTable release_notes={release_notes} />
     </Container>
   </PageChrome>
 );
 
 ReleaseNotesTable.propTypes = {
-  releaseNotes: PropTypes.array.isRequired
+  release_notes: PropTypes.array.isRequired
 };
 
 export default ReleaseNotesPage;
