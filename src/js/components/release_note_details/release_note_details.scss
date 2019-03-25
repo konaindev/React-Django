@@ -1,0 +1,67 @@
+@import "css/base.scss";
+
+.release-note-details {
+    padding: $s16;
+    margin-bottom: $s20;
+
+    &__title {
+        color: $title-large-color;
+        font-size: $text-2xl;
+        padding-bottom: $s10;
+        margin-bottom: $s8;
+        border-bottom: $heading-border;
+
+        &-date {
+            color: $title-section-color;
+        }
+    }
+
+    &__content {
+        font-weight: $weight-light;
+
+        h1, h2, h3, h4, h5, h6 {
+            color: $title-large-color;
+            font-size: $text-sm;
+            text-transform: uppercase;
+            font-weight: $weight-medium;
+            margin-bottom: $s4;
+            margin-top: $s10;
+
+            &:first-child {
+                margin-top: 0;
+            }
+        }
+
+        h1 {
+            font-size: $text-base;
+        }
+
+        ul, ol {
+            margin-bottom: $s10;
+            padding-left: $s5;
+            font-size: $text-base;
+        }
+
+        ul > li {
+            list-style-type: disc;
+        }
+
+        ol > li {
+            list-style-type: decimal;
+        }
+
+        li {
+            margin-bottom: $s2;
+        }
+
+        p {
+            margin-bottom: $s2;
+        }
+    }
+
+    &__footer {
+        color: $content-text-primary-color;
+        line-height: $line-height-loose;
+        margin-top: $s16;
+    }
+}

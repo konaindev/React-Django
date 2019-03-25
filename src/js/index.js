@@ -17,6 +17,8 @@ import MarketReportPage from "./components/market_report_page";
 import ModelingReportPage from "./components/modeling_report_page";
 import PerformanceReportPage from "./components/performance_report_page";
 import ProjectPage from "./components/project_page";
+import ReleaseNotesPage from "./components/release_notes_page";
+import ReleaseNoteDetailsPage from "./components/release_note_details_page";
 
 const pages = {
   BaselineReportPage,
@@ -24,7 +26,9 @@ const pages = {
   MarketReportPage,
   ModelingReportPage,
   PerformanceReportPage,
-  ProjectPage
+  ProjectPage,
+  ReleaseNotesPage,
+  ReleaseNoteDetailsPage
 };
 
 /*

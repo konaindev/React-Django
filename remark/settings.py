@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     "django_js_reverse",
     "remark.users",
     "remark.projects",
+    "remark.releases",
     "remark.web",
 ]
 
