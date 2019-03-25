@@ -67,6 +67,7 @@ def convert_date_to_string(d):
         return d.isoformat()
     assert False
 
+
 class ExcelImporter:
     def __init__(self, file_name, schema_file):
         self.excel = openpyxl.load_workbook(file_name, data_only=True)
@@ -343,14 +344,10 @@ class ModelingImporter(ExcelImporter):
                         "Vacation Notices", sheet=option
                     ),
                     "rate": self.get_field_by_label("Leasing Rate", sheet=option),
-                    "units": int(
-                        self.get_field_by_label("Lease Units", sheet=option)
-                    ),
+                    "units": int(self.get_field_by_label("Lease Units", sheet=option)),
                 },
                 "occupancy": {
-                    "move_ins": int(
-                        self.get_field_by_label("Move Ins", sheet=option)
-                    ),
+                    "move_ins": int(self.get_field_by_label("Move Ins", sheet=option)),
                     "move_outs": int(
                         self.get_field_by_label("Move Outs", sheet=option)
                     ),
@@ -358,9 +355,9 @@ class ModelingImporter(ExcelImporter):
                     "units": int(
                         self.get_field_by_label("Occupancy Units", sheet=option)
                     ),
-                    "occupiable": int(self.get_field_by_label(
-                        "Occupiable Units", sheet=option
-                    )),
+                    "occupiable": int(
+                        self.get_field_by_label("Occupiable Units", sheet=option)
+                    ),
                 },
             },
             "funnel": {
@@ -449,9 +446,11 @@ class ModelingImporter(ExcelImporter):
                             )
                         ),
                         "leasing_enablement": convert_to_currency_string(
-                            int(self.get_field_by_label(
-                                "Retention Leasing Enablement", sheet=option
-                            ))
+                            int(
+                                self.get_field_by_label(
+                                    "Retention Leasing Enablement", sheet=option
+                                )
+                            )
                         ),
                         "market_intelligence": convert_to_currency_string(
                             self.get_field_by_label(
@@ -478,9 +477,7 @@ class ModelingImporter(ExcelImporter):
                     "total": convert_to_currency_string(
                         self.get_field_by_label("Total Total", sheet=option)
                     ),
-                    "romi": int(
-                        self.get_field_by_label("Total ROMI", sheet=option)
-                    ),
+                    "romi": int(self.get_field_by_label("Total ROMI", sheet=option)),
                     "estimated_revenue_gain": convert_to_currency_string(
                         self.get_field_by_label("Total Revenue Gain", sheet=option)
                     ),
