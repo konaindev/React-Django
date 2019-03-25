@@ -63,6 +63,8 @@ $gray-6: #798796;
 $gray-7: #c2c6cb;
 $gray-8: #e1e3e5;
 
+$white: #ffffff;
+
 //----------------------------------------------------------
 // Component colors
 //----------------------------------------------------------
@@ -100,10 +102,12 @@ $default-background-color: $gray-2;
 $alt-default-background-color: $gray-3;
 $default-text-color: $gray-6;
 
-$input-border-color: $gray-4;
+$input-border-color: $gray-5;
 $input-border: 1px solid $input-border-color;
+$input-focus-border-color: $blue-3;
 $input-text-color: $highlight-gray-3;
 $select-option-background-color: $gray-3;
+$input-label-color: $highlight-gray-3;
 
 // Variables common to all visualization panels
 
@@ -125,9 +129,11 @@ $button-primary-active-text-color: $highlight-gray-3;
 
 $button-group-line-color: $gray-4;
 
-$map-circle-point-color: $cyan-3;
-$map-zip-label-color: $highlight-gray-3;
-$map-region-bg-color: $blue-3;
+$map-circle-point-color: $green-3;
+$map-zip-text-color: $highlight-gray-3;
+$map-radius-text-color: $gray-3;
+$map-region-bg-color: $green-3;
+$map-region-bg-opacity: 0.05;
 $map-background-color: $gray-2;
 $map-road-color: $gray-2;
 $map-water-color: $gray-2;
@@ -169,6 +175,7 @@ $font-headline: "u8", "system-ui", "BlinkMacSystemFont", "-apple-system",
 $font-mono: "formular-mono", "Menlo", "Monaco", "Consolas", "Liberation Mono",
     "Courier New", "monospace";
 
+$text-xxs: 0.625rem; // 10px;
 $text-xs: 0.75rem; // 12px
 $text-sm: 0.875rem; // 14px
 $text-base: 1rem; // 16px
@@ -176,10 +183,10 @@ $text-lg: 1.125rem; // 18px
 $text-xl: 1.25rem; // 20px
 $text-2xl: 1.5rem; // 24px
 $text-3xl: 1.875rem; // 30px
-$text-4xl: 2.25rem; // 48px
-$text-5xl: 3rem;
-$text-6xl: 4rem;
-$text-7xl: 6rem;
+$text-4xl: 2.25rem; // 36px
+$text-5xl: 3rem; // 48px
+$text-6xl: 4rem; // 64px
+$text-7xl: 6rem; // 96px
 
 $line-height-compressed: 0.75;
 $line-height-none: 1;
@@ -230,9 +237,43 @@ $border-radius-full: 9999px;
 
 :export {
     mapCirclePointColor: $map-circle-point-color;
+    mapZipTextColor: $map-zip-text-color;
+    mapRadiusTextColor: $map-radius-text-color;
     mapLandColor: $map-land-color;
     mapLocationTextColor: $map-location-text-color;
     mapRoadColor: $map-road-color;
     mapWaterColor: $map-water-color;
     mapRegionBgColor: $map-region-bg-color;
+    mapRegionBgOpacity: $map-region-bg-opacity;
 }
+
+$anchor-color: $blue-3;
+$footer-text-color: $turquoise-5;
+
+$auth-form-logo-width: 160px;
+$auth-form-logo-height: 27px;
+$auth-form-logo-width-tablet: 180px;
+$auth-form-logo-height-tablet: 31px;
+$auth-form-logo-width-desktop: 280px;
+$auth-form-logo-height-desktop: 48px;
+$auth-form-width-tablet-up: 360px;
+$auth-form-message-color: $orange-3;
+$auth-footer-content-color: $gray-8;
+$auth-footer-content-color-desktop: $gray-6;
+
+$password-form-title-color: $blue-3;
+$password-form-width-tablet-up: 520px;
+$password-form-text-color: $gray-3;
+$password-form-message-color: $orange-3;
+$password-form-nav-back-color: $highlight-gray-3;
+
+//----------------------------------------------------------
+// Device breakpoints
+//----------------------------------------------------------
+
+$mq-breakpoints: (
+    mobile:  320px,
+    tablet:  740px,
+    desktop: 980px,
+    wide:    1300px
+)
