@@ -34,6 +34,48 @@ const CIR_GREEN2 = "#41C100";
 const CIR_GREEN3 = "#BCFBF1";
 const CIR_GREEN4 = "#53F7DD";
 
+const getAquisitionChartBasicData = r => ({
+  reputation_building: r.investment.acquisition.expenses.reputation_building,
+  demand_creation: r.investment.acquisition.expenses.demand_creation,
+  leasing_enablement: r.investment.acquisition.expenses.leasing_enablement,
+  market_intelligence: r.investment.acquisition.expenses.market_intelligence
+});
+
+const getRetentionChartBasicData = r => ({
+  reputation_building: r.investment.retention.expenses.reputation_building,
+  demand_creation: r.investment.retention.expenses.demand_creation,
+  leasing_enablement: r.investment.retention.expenses.leasing_enablement,
+  market_intelligence: r.investment.retention.expenses.market_intelligence
+});
+
+const getAquisitionChartData = r => {
+  const data = getAquisitionChartBasicData(r);
+  return {
+    ...data,
+    yMax: Math.max(
+      ...[
+        ...Object.values(data),
+        ...Object.values(getRetentionChartBasicData(r))
+      ]
+    ),
+    investment: r.investment.acquisition.total
+  };
+};
+
+const getRetentionChartData = r => {
+  const data = getRetentionChartBasicData(r);
+  return {
+    ...data,
+    yMax: Math.max(
+      ...[
+        ...Object.values(data),
+        ...Object.values(getAquisitionChartBasicData(r))
+      ]
+    ),
+    investment: r.investment.retention.total
+  };
+};
+
 /**
  * @class CampaignInvestmentReport
  *
@@ -83,6 +125,7 @@ export default class CampaignInvestmentReport extends Component {
    */
   static InvestmentChart = ({
     name,
+    yMax,
     reputation_building,
     demand_creation,
     leasing_enablement,
@@ -122,13 +165,6 @@ export default class CampaignInvestmentReport extends Component {
         color: CIR_GREEN4
       }
     ];
-
-    const yMax = Math.max(
-      reputation_building,
-      demand_creation,
-      leasing_enablement,
-      market_intelligence
-    );
 
     // render the bar chart
     return (
@@ -201,14 +237,8 @@ export default class CampaignInvestmentReport extends Component {
    * @description Render acqusition report section.
    */
   static Acquisition = ({ report: r }) => {
-    const acqChartData = {
-      investment: r.investment.acquisition.total,
-      reputation_building:
-        r.investment.acquisition.expenses.reputation_building,
-      demand_creation: r.investment.acquisition.expenses.demand_creation,
-      leasing_enablement: r.investment.acquisition.expenses.leasing_enablement,
-      market_intelligence: r.investment.acquisition.expenses.market_intelligence
-    };
+    const acqChartData = getAquisitionChartData(r);
+    const retChartData = getRetentionChartData(r);
 
     return (
       <BoxColumn>
@@ -261,13 +291,7 @@ export default class CampaignInvestmentReport extends Component {
    * @description Component that renders the retention report section.
    */
   static Retention = ({ report: r }) => {
-    const retChartData = {
-      investment: r.investment.retention.total,
-      reputation_building: r.investment.retention.expenses.reputation_building,
-      demand_creation: r.investment.retention.expenses.demand_creation,
-      leasing_enablement: r.investment.retention.expenses.leasing_enablement,
-      market_intelligence: r.investment.retention.expenses.market_intelligence
-    };
+    const retChartData = getRetentionChartData(r);
 
     return (
       <BoxColumn>
