@@ -15,7 +15,7 @@ export class FunnelPerformanceAnalysis extends React.Component {
     super(props);
 
     const { columns, volumeRows, conversionRows } = processData(
-      props.funnel_history
+      props.funnel_history || []
     );
 
     this.state = {
