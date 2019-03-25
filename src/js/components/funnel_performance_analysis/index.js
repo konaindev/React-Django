@@ -102,7 +102,7 @@ FunnelPerformanceAnalysis.propTypes = {
       monthly_costs: object,
       weekly_costs: object
     })
-  ).isRequired
+  )
 };
 
 export default FunnelPerformanceAnalysis;
