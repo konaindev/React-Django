@@ -48,15 +48,27 @@ const getRetentionChartBasicData = r => ({
   market_intelligence: r.investment.retention.expenses.market_intelligence
 });
 
+const getYMax = val => {
+  let unit = Math.pow(10, parseInt(Math.log10(val), 10));
+  let slope = val / unit;
+  if (val / unit > 5) {
+    unit *= 2;
+    slope /= 2;
+  }
+  return unit * Math.ceil(slope);
+};
+
 const getAquisitionChartData = r => {
   const data = getAquisitionChartBasicData(r);
   return {
     ...data,
-    yMax: Math.max(
-      ...[
-        ...Object.values(data),
-        ...Object.values(getRetentionChartBasicData(r))
-      ]
+    yMax: getYMax(
+      Math.max(
+        ...[
+          ...Object.values(data),
+          ...Object.values(getRetentionChartBasicData(r))
+        ]
+      )
     ),
     investment: r.investment.acquisition.total
   };
@@ -178,6 +190,7 @@ export default class CampaignInvestmentReport extends Component {
             <VictoryAxis
               dependentAxis
               orientation="left"
+              tickCount={5}
               tickFormat={t => formatCurrencyShorthand(t)}
             />
             <VictoryAxis orientation="bottom" />
