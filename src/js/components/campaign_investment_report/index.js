@@ -29,6 +29,11 @@ import { CurrencyShorthandGraphBox } from "../large_graph_box";
 
 import "./campaign_investment_report.scss";
 
+const CIR_GREEN1 = "#338100";
+const CIR_GREEN2 = "#41C100";
+const CIR_GREEN3 = "#BCFBF1";
+const CIR_GREEN4 = "#53F7DD";
+
 /**
  * @class CampaignInvestmentReport
  *
@@ -94,29 +99,36 @@ export default class CampaignInvestmentReport extends Component {
     const data = [
       {
         category: "Reputation Building",
-        investment: formatCurrencyShorthand(reputation_building),
+        investment: Number(reputation_building),
         percent: div_or_0(reputation_building, investment),
-        color: "#4035f4"
+        color: CIR_GREEN1
       },
       {
         category: "Demand Creation",
-        investment: formatCurrencyShorthand(demand_creation),
+        investment: Number(demand_creation),
         percent: div_or_0(demand_creation, investment),
-        color: "#5147ff"
+        color: CIR_GREEN2
       },
       {
         category: "Leasing Enablement",
-        investment: formatCurrencyShorthand(leasing_enablement),
+        investment: Number(leasing_enablement),
         percent: div_or_0(leasing_enablement, investment),
-        color: "#867ffe"
+        color: CIR_GREEN3
       },
       {
         category: "Market Intelligence",
-        investment: formatCurrencyShorthand(market_intelligence),
+        investment: Number(market_intelligence),
         percent: div_or_0(market_intelligence, investment),
-        color: "#675efc"
+        color: CIR_GREEN4
       }
     ];
+
+    const yMax = Math.max(
+      reputation_building,
+      demand_creation,
+      leasing_enablement,
+      market_intelligence
+    );
 
     // render the bar chart
     return (
@@ -124,20 +136,20 @@ export default class CampaignInvestmentReport extends Component {
         <Panel className="bar-chart panel-rounded-rect">
           <VictoryChart
             theme={remarkablyChartTheme}
-            domain={{ y: [0, 1] }}
+            domain={{ y: [0, yMax] }}
             domainPadding={{ x: 14 }}
           >
             <VictoryAxis
               dependentAxis
               orientation="left"
-              tickFormat={t => formatPercent(t)}
+              tickFormat={t => formatCurrencyShorthand(t)}
             />
             <VictoryAxis orientation="bottom" />
             <VictoryBar
               data={data}
               x="category"
-              y="percent"
-              labels={d => d.investment}
+              y="investment"
+              labels={d => formatCurrencyShorthand(d.investment)}
               style={{
                 data: {
                   fill: datum => datum.color
