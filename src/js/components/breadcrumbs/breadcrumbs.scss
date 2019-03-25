@@ -1,0 +1,37 @@
+@import "css/base.scss";
+
+.breadcrumbs {
+    padding: $s8 0;
+    margin-top: $s8;
+    margin-bottom: $s8;
+    border-bottom: $heading-border;
+    color: $content-text-secondary-color;
+
+    &__item {
+        letter-spacing: 1px;
+        line-height: $line-height-tight;
+        font-size: $text-sm;
+        font-weight: $weight-medium;
+        text-transform: uppercase;
+        display: inline-block;
+
+        &:not(:last-child) {
+            &:after {
+                content: '›';
+                padding: 0 $s5;
+                font-size: 150%;
+                display: inline-block;
+                line-height: inherit;
+            }
+        }
+
+        > a {
+            color: $content-text-secondary-color;
+            text-decoration: none;
+
+            &:hover {
+                color: $content-text-primary-color;
+            }
+        }
+    }
+}

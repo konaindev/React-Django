@@ -46,7 +46,7 @@ module.exports = {
         include: path.resolve(__dirname, ".")
       },
       {
-        test: /\.(json|zip|png|jpg|jpeg|gif|otf|eot|svg|ttf|woff|woff2|wav)$/,
+        test: /\.(zip|png|jpg|jpeg|gif|otf|eot|svg|ttf|woff|woff2|wav)$/,
         type: "javascript/auto",
         loader: "file-loader"
       }

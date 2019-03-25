@@ -1,0 +1,53 @@
+@import "css/base.scss";
+
+.release-notes-table {
+    width: 100%;
+    margin-bottom: $s20;
+
+    &__row {
+        &:not(:last-child) {
+            border-bottom: 1px solid $table-border-color;
+        }
+    }
+
+    &__col {
+        font-size: $text-base;
+        padding: $s5;
+        color: $table-column-text-color;
+        vertical-align: middle;
+
+        &:first-child {
+            padding-left: $s12;
+        }
+
+        &:last-child {
+            padding-right: $s12;
+        }
+    }
+
+    &__version {
+        white-space: nowrap;
+    }
+
+    &__title {
+        white-space: nowrap;
+    }
+
+    &__date {
+        color: $content-text-secondary-color;
+        flex: 1;
+        width: 80%;
+    }
+
+    &__link {
+        white-space: nowrap;
+        width: 10%;
+        color: $release-note-link-color;
+        font-size: $text-xs;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
