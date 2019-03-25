@@ -6,24 +6,27 @@
     background-color: $map-background-color;
 
     .radius-text-rotated {
-        width: 190px;
-        font-family: $font-sans;
-        font-size: $text-xl;
-        font-weight: $weight-light;
-        color: $map-circle-point-color;
-        text-align: center;
-        transform: rotate(40deg);
-        transform-origin: 90px -115px;
+        position: absolute;
+        max-width: 120px;
+        padding: 4px 12px;
+        color: $map-radius-text-color;
+        font-size: $text-xs;
+        font-weight: $weight-medium;
+        line-height: $text-xs;
+        letter-spacing: 0.5px;
+        background-color: $map-circle-point-color;
+        border-radius: 11.55px;
+        transform: translateX(-50%) translateY(-50%) rotate(40deg);
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
     }
 
-    .zip-code-label {
+    .zip-code-text {
         width: 60px;
         font-size: $text-sm;
         font-weight: $weight-light;
-        color: $map-zip-label-color;
+        color: $map-zip-text-color;
         letter-spacing: 0.5px;
         text-align: center;
         position: absolute;
