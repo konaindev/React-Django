@@ -449,9 +449,9 @@ class ModelingImporter(ExcelImporter):
                             )
                         ),
                         "leasing_enablement": convert_to_currency_string(
-                            self.get_field_by_label(
+                            int(self.get_field_by_label(
                                 "Retention Leasing Enablement", sheet=option
-                            )
+                            ))
                         ),
                         "market_intelligence": convert_to_currency_string(
                             self.get_field_by_label(
