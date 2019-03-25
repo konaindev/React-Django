@@ -14,7 +14,14 @@ storiesOf("FunnelPerformanceAnalysis", module)
       </Container>
     </div>
   ))
-  .add("no data", () => (
+  .add("with []", () => (
+    <div style={{ margin: "16px auto" }}>
+      <Container>
+        <FunnelPerformanceAnalysis funnel_history={[]} />
+      </Container>
+    </div>
+  ))
+  .add("with null", () => (
     <div style={{ margin: "16px auto" }}>
       <Container>
         <FunnelPerformanceAnalysis funnel_history={null} />
