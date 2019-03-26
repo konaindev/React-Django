@@ -82,7 +82,7 @@ class file_memoize(Memoizer):
 
     def __init__(self, cache_dir=None):
         """
-        Initialize a memoizer with a given cache directory. 
+        Initialize a memoizer with a given cache directory.
         """
         super().__init__()
         self.cache_dir = cache_dir or tempfile.mkdtemp()
@@ -369,24 +369,23 @@ def pop_formula(zip_codes, percent_values):
 
 
 INCOME_DIST_LEVELS = (
-    (200000, 37),
-    (150000, 38),
-    (125000, 39),
-    (100000, 40),
-    (75000, 41),
-    (60000, 42),
-    (50000, 43),
-    (45000, 44),
-    (40000, 45),
-    (35000, 46),
-    (30000, 47),
-    (25000, 48),
-    (20000, 49),
-    (15000, 50),
-    (10000, 51),
     (0, 52),
+    (10000, 51),
+    (15000, 50),
+    (20000, 49),
+    (25000, 48),
+    (30000, 47),
+    (35000, 46),
+    (40000, 45),
+    (45000, 44),
+    (50000, 43),
+    (60000, 42),
+    (75000, 41),
+    (100000, 40),
+    (125000, 39),
+    (150000, 38),
+    (200000, 37),
 )
-
 
 def fill_computation_tab(worksheet, zip_codes, income_groups):
     # Add ACS Population Reference Sumed across all zip_codes
@@ -402,36 +401,46 @@ def fill_computation_tab(worksheet, zip_codes, income_groups):
         formula = pop_formula(zip_codes, percent_values)
         worksheet.cell(column=2, row=dest_row, value=formula)
 
-    cell_formulas = []
     start_x = 0
-    for income_group in income_groups:
+    for y in range(len(income_groups)):
+        income_group = income_groups[y]
+        if len(income_groups) - 1 == y:
+            next_income_group = None
+        else:
+            next_income_group = income_groups[y+1]
         numerator = []
         denominator = []
         for x in range(start_x, len(INCOME_DIST_LEVELS)):
-            for zip_code in zip_codes:
-                tab_name = ZIP_DATA_SHEET_NAME.format(zip_code)
-                numerator.append(
-                    f"('{tab_name}'!B{INCOME_DIST_LEVELS[x][1]}*'{tab_name}'!B1)"
-                )
+            if next_income_group is not None and next_income_group <= INCOME_DIST_LEVELS[x][0]:
+                print(f"Income Break: {income_group} <= {INCOME_DIST_LEVELS[x][0]}")
+                break
+            if income_group <= INCOME_DIST_LEVELS[x][0]:
+                for zip_code in zip_codes:
+                    tab_name = ZIP_DATA_SHEET_NAME.format(zip_code)
+                    numerator.append(
+                        f"('{tab_name}'!B{INCOME_DIST_LEVELS[x][1]}*'{tab_name}'!B1)"
+                    )
+            start_x = x + 1
 
+        for zip_code in zip_codes:
+            tab_name = ZIP_DATA_SHEET_NAME.format(zip_code)
             denominator.append(f"'{tab_name}'!B1")
 
-            if income_group == INCOME_DIST_LEVELS[x][0]:
-                start_x = x + 1
-                break
-        final_formula = f"=({'+'.join(numerator)})/({'+'.join(denominator)})"
-        cell_formulas.append(final_formula)
+        numerator_str = f"=({'+'.join(numerator)})"
+        denominator_str = f"=({'+'.join(denominator)})"
+        #final_formula = f"=({'+'.join(numerator)})/({'+'.join(denominator)})"
+        worksheet.cell(column=1, row=20 + y, value=income_groups[y])
+        # worksheet.cell(column=2, row=20 + y, value=final_formula)
+        worksheet.cell(column=3, row=20 + y, value=numerator_str)
+        worksheet.cell(column=4, row=20 + y, value=denominator_str)
 
-    for x in range(3):
-        worksheet.cell(column=1, row=29 + x, value=income_groups[x])
-        worksheet.cell(column=2, row=29 + x, value=cell_formulas[x])
 
     # Total population
     formula = []
     for zip_code in zip_codes:
         tab_name = ZIP_DATA_SHEET_NAME.format(zip_code)
         formula.append(f"'{tab_name}'!B1")
-    worksheet.cell(column=2, row=38, value=f"={'+'.join(formula)}")
+    worksheet.cell(column=2, row=29, value=f"={'+'.join(formula)}")
 
     # Add Household Types
     numerator = []
@@ -440,8 +449,8 @@ def fill_computation_tab(worksheet, zip_codes, income_groups):
         numerator.append(
             f"(('{tab_name}'!B30+'{tab_name}'!B31+'{tab_name}'!B32)*'{tab_name}'!B1)"
         )
-    final_formula = f"=({'+'.join(numerator)})/'Computation'!B38"
-    worksheet.cell(column=2, row=34, value=final_formula)
+    final_formula = f"=({'+'.join(numerator)})/'Computation'!B29"
+    worksheet.cell(column=2, row=25, value=final_formula)
 
 
 # Meridian
@@ -533,4 +542,3 @@ def build_tam_data(zip_codes, lat, lon, radius, income_groups, templatefile, out
 
 if __name__ == "__main__":
     build_tam_data()
-
