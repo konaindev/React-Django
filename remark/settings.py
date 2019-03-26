@@ -163,6 +163,39 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "dist")]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
 #
+# Storages for all other files
+#
+
+# Set me to storages.backends.s3boto3.S3Boto3Storage in production (the default)
+# or set me to 'django.core.files.storage.FileSystemStorage' locally.
+DEFAULT_FILE_STORAGE = os.getenv(
+    "DEFAULT_FILE_STORAGE", "storages.backends.s3boto3.S3Boto3Storage"
+)
+
+#
+# Storage on Amazon S3 -- used with S3Boto3Storage
+#
+
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID", None)
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY", None)
+AWS_STORAGE_BUCKET_NAME = os.getenv(
+    "AWS_STORAGE_BUCKET_NAME", "production-storage.remarkably.io"
+)
+AWS_DEFAULT_ACL = os.getenv("AWS_DEFAULT_ACL", "public-read")
+AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME", "us-east-1")
+# TODO CONSIDER: perhaps we should use querystring auth *for spreadsheets*
+# but not for other stuff, like building images? aka perhaps we need multiple
+# S3boto3Storage variants? -Dave
+AWS_QUERYSTRING_AUTH = False
+
+#
+# Media files
+#
+
+MEDIA_ROOT = os.getenv("MEDIA_ROOT", "")  # Must correspond with storage instance.
+MEDIA_URL = os.getenv("MEDIA_URL", "")  # See the top-level README for details.
+
+#
 # Javascript reversing.
 #
 
