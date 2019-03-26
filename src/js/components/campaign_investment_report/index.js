@@ -78,11 +78,13 @@ const getRetentionChartData = r => {
   const data = getRetentionChartBasicData(r);
   return {
     ...data,
-    yMax: Math.max(
-      ...[
-        ...Object.values(data),
-        ...Object.values(getAquisitionChartBasicData(r))
-      ]
+    yMax: getYMax(
+      Math.max(
+        ...[
+          ...Object.values(data),
+          ...Object.values(getAquisitionChartBasicData(r))
+        ]
+      )
     ),
     investment: r.investment.retention.total
   };
