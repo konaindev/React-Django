@@ -6,6 +6,11 @@
 @import "./normalize.scss";
 @import "./fonts.scss";
 @import "./variables.scss";
+@import "../../node_modules/sass-mq/mq";
+
+// node_modules
+@import "~react-table/react-table.css";
+
 
 body {
     margin: 0;
@@ -39,6 +44,11 @@ input[type="password"] {
     background: transparent;
     border: $input-border;
     border-radius: $border-radius-default;
+
+    &:focus {
+        outline: none;
+        border-color: $input-focus-border-color;
+    }
 }
 
 input[type="submit"] {

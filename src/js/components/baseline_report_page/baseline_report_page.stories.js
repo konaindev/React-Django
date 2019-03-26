@@ -5,6 +5,7 @@ import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 
 import { project, report_links } from "../project_page/project_page.stories.js";
+import { funnel_history } from "../funnel_performance_analysis/FunnelProps";
 import BaselineReportPage from "./index";
 
 const report = {
@@ -95,7 +96,8 @@ const report = {
     tou: 20,
     app: 7,
     exe: 5
-  }
+  },
+  funnel_history
 };
 
 const current_report_link = report_links.baseline;
