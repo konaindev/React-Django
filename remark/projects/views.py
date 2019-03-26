@@ -8,6 +8,7 @@ from .reports.selectors import (
     PerformanceReportSelector,
     MarketReportSelector,
     ModelingReportSelector,
+    CampaignPlanSelector,
     ReportLinks,
 )
 from .models import Project
@@ -90,3 +91,9 @@ class ModelingReportPageView(ReportPageViewBase):
     page_class = "ModelingReportPage"
     page_title = "Modeling Report"
 
+class CampaignPlanPageView(ReportPageViewBase):
+    """Return a campaign plan page"""
+
+    selector_class = CampaignPlanSelector
+    page_class = "CampaignPlanPage"
+    page_title = "Campaign Plan"

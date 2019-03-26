@@ -63,6 +63,11 @@ export default class ReportLinks extends Component {
             "performance",
             this.props.report_links.performance?.[0]
           )}
+          {this.renderLink(
+            "Campaign Plan",
+            "campaign_plan",
+            this.props.report_links.campaign_plan
+          )}
         </ul>
       </div>
     );
