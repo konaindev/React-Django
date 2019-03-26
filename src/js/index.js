@@ -19,6 +19,7 @@ import PerformanceReportPage from "./components/performance_report_page";
 import ProjectPage from "./components/project_page";
 import ReleaseNotesPage from "./components/release_notes_page";
 import ReleaseNoteDetailsPage from "./components/release_note_details_page";
+import CampaignPlanPage from "./components/campaign_plan_page";
 
 const pages = {
   BaselineReportPage,
@@ -28,7 +29,8 @@ const pages = {
   PerformanceReportPage,
   ProjectPage,
   ReleaseNotesPage,
-  ReleaseNoteDetailsPage
+  ReleaseNoteDetailsPage,
+  CampaignPlanPage
 };
 
 /*

@@ -32,7 +32,7 @@ class ReportSelectorBase:
     Base class for all report selectors, which are objects that help us:
 
     1. Enumerate all possible reports
-    2. Determine whether the data for a given report exists, and 
+    2. Determine whether the data for a given report exists, and
     3. Obtain proper URLs and link titles for each.
 
     Basically, they're handy swiss-army knife classes that tie our
@@ -359,6 +359,42 @@ class ModelingReportSelector(ReportSelectorBase):
         """Return the underlying report."""
         return ModelingReport.for_project(self.project)
 
+class CampaignPlanSelector(ReportSelectorBase):
+    """
+    Report Selector for campaign Plan
+    """
+
+    @classmethod
+    def selectors_for_project(cls, project):
+        campaign_plan_selector = cls(project)
+        if campaign_plan_selector.has_report_data():
+            yield campaign_plan_selector
+
+    @classmethod
+    def for_project(cls, project):
+        return cls(project)
+
+    def get_url(self):
+        """Return a relative URL linking to this report."""
+        kwargs = {"project_id": self.project.public_id}
+        url = reverse("campaign_plan", kwargs=kwargs)
+        return url
+
+    def get_description(self):
+        """Return a human-readable description of a custom span."""
+        return "Campaign Plan"
+
+    def has_report_data(self):
+        """This is a hack"""
+        allow_ids = [
+            "pro_eekgau8mfkbc34iq",
+            "pro_tdglra7vyt7wu311"
+        ]
+        return (self.project.public_id in allow_ids)
+
+    def get_report(self):
+        return BaselineReport.for_baseline(self.project)
+
 
 class ReportLinks:
     """
@@ -370,15 +406,15 @@ class ReportLinks:
         """
         Get a nested structure of report links.
 
-        It conforms to the schema defined in ReportLinks.ts, like so: 
+        It conforms to the schema defined in ReportLinks.ts, like so:
 
         {
-            "baseline": 
+            "baseline":
                 {
                     "url": "/projects/pro_1234/baseline/",
                     "description": "Baseline Period (Jan 1, 2017 - Jan 1, 2018)",
                 },
-            "performance": 
+            "performance":
                 [
                     {
                         "url": "/projects/pro_1234/last-week/",
@@ -387,7 +423,7 @@ class ReportLinks:
                     ...
                 ],
             "tam": {...},
-            "modeling": {...},            
+            "modeling": {...},
         }
         """
 
@@ -411,7 +447,7 @@ class ReportLinks:
             "performance": _many(PerformanceReportSelector.links_for_project(project)),
             "market": _1(MarketReportSelector.links_for_project(project)),
             "modeling": _1(ModelingReportSelector.links_for_project(project)),
+            "campaign_plan": _1(CampaignPlanSelector.links_for_project(project))
         }
 
         return links
-

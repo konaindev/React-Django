@@ -8,6 +8,10 @@
 @import "./variables.scss";
 @import "../../node_modules/sass-mq/mq";
 
+// node_modules
+@import "~react-table/react-table.css";
+
+
 body {
     margin: 0;
     padding: 0;

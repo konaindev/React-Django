@@ -2,7 +2,6 @@ import React from "react";
 import { string, number, object, arrayOf, shape } from "prop-types";
 import cn from "classnames";
 import ReactTable from "react-table";
-import "react-table/react-table.css";
 
 import "./modeling_comparison.scss";
 import convertToTableRows from "./converter";

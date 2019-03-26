@@ -28,6 +28,9 @@ jsonfield = "*"
 openpyxl = "*"
 requests = "*"
 django-click = "*"
+django-storages = "*"
+pillow = "*"
+boto3 = "*"
 
 [requires]
 python_version = "3.7"
