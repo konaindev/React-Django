@@ -10,8 +10,8 @@ import {
   stylesForRegionFill
 } from "./map_settings";
 
-const ZipCodeLabel = ({ zipCode }) => (
-  <div className="zip-code-label">{zipCode}</div>
+const ZipCodeText = ({ zipCode }) => (
+  <div className="zip-code-text">{zipCode}</div>
 );
 
 export class MapWithPolygon extends Component {
@@ -73,7 +73,7 @@ export class MapWithPolygon extends Component {
     google.map.fitBounds(bounds, 0);
   }
 
-  getZipCodeLabels() {
+  getZipCodeTexts() {
     if (false === this.state.isGoogleMapLoaded) {
       return [];
     }
@@ -96,7 +96,7 @@ export class MapWithPolygon extends Component {
       const zipAreaCenter = bounds.getCenter();
 
       return (
-        <ZipCodeLabel
+        <ZipCodeText
           key={zip}
           lat={zipAreaCenter.lat()}
           lng={zipAreaCenter.lng()}
@@ -107,7 +107,7 @@ export class MapWithPolygon extends Component {
   }
 
   render() {
-    const customMarkers = this.getZipCodeLabels();
+    const customMarkers = this.getZipCodeTexts();
 
     return (
       <div className="market-size-map">

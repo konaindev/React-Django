@@ -147,10 +147,7 @@ class Period(ModelPeriod, models.Model):
     # ------------------------------------------------------
 
     leased_units_start = models.IntegerField(
-        default=None,
-        null=True,
-        blank=True,
-        help_text="Number of leased units at period start. If not specified, will be pulled from a previous period.",
+        help_text="Number of leased units at period start."
     )
     leased_units_start.metric = PointMetric()
 
@@ -264,10 +261,7 @@ class Period(ModelPeriod, models.Model):
     occupiable_units_start.metric = PointMetric()
 
     occupied_units_start = models.IntegerField(
-        default=0,
-        null=True,
-        blank=True,
-        help_text="Number of units occupied at period start. If not specified, will be pulled from a previous period.",
+        help_text="Number of units occupied at period start."
     )
     occupied_units_start.metric = PointMetric()
 
