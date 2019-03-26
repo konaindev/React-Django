@@ -171,6 +171,9 @@ class CommonReport(ReportBase):
     def build_four_week_averages(self):
         return {"usv": 0, "inq": 0, "tou": 0, "app": 0, "exe": 0}
 
+    def build_funnel_history(self):
+        return None
+
     def to_jsonable(self):
         """
         Return a structure that can be converted to a JSON string.
@@ -183,6 +186,7 @@ class CommonReport(ReportBase):
         property_report = unflatten(SCHEMA_MAP, flat_period_values)
 
         four_week_funnel_averages = self.build_four_week_averages()
+        funnel_history = self.build_funnel_history()
 
         targets = unflatten_optional(TARGET_SCHEMA_MAP, flat_period_values)
 
@@ -198,6 +202,7 @@ class CommonReport(ReportBase):
             **property_report,
             targets=targets,
             four_week_funnel_averages=four_week_funnel_averages,
+            funnel_history=funnel_history,
             whiskers=self.whiskers,
             deltas=deltas,
         )

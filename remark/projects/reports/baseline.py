@@ -3,7 +3,7 @@ from datetime import timedelta
 from .common import CommonReport
 from .periods import ComputedPeriod
 
-from remark.lib.math import avg_or_0
+from remark.lib.math import avg_or_0, sum_or_0
 from remark.lib.metrics import BareMultiPeriod
 
 
@@ -30,11 +30,13 @@ class BaselineReport(CommonReport):
         previous_period=None,
         whiskers=None,
         four_week_funnel_values=None,
+        multiperiod=None,
     ):
         super().__init__(
             project, period, previous_period=previous_period, whiskers=whiskers
         )
         self.four_week_funnel_values = four_week_funnel_values
+        self.multiperiod = multiperiod
 
     @classmethod
     def has_baseline(cls, project):
@@ -62,8 +64,10 @@ class BaselineReport(CommonReport):
             time_delta=timedelta(weeks=4), after_end=False
         )
         four_week_funnel_values = [fwp.get_values() for fwp in four_week_periods]
+
         return cls(
-            project, baseline_period, four_week_funnel_values=four_week_funnel_values
+            project, baseline_period, four_week_funnel_values=four_week_funnel_values,
+            multiperiod=multiperiod
         )
 
     def build_computed_period(self, period):
@@ -83,3 +87,68 @@ class BaselineReport(CommonReport):
             "app": _avg("lease_applications"),
             "exe": _avg("leases_executed"),
         }
+
+    def build_funnel_history(self):
+        if self.multiperiod is None:
+            return None
+
+        week_periods = self.multiperiod.get_week_periods(weekday=0)
+
+        funnel_history = {}
+
+        keys_for_volume = {
+            "usv": "usvs",
+            "inq": "inquiries",
+            "tou": "tours",
+            "app": "lease_applications",
+            "exe": "leases_executed",
+        }
+        keys_for_conversion = {
+            "usv_inq": "usv_inq_perc",
+            "inq_tou": "inq_tou_perc",
+            "tou_app": "tou_app_perc",
+            "app_exe": "app_exe_perc",
+            "usv_exe": "usv_exe_perc"
+        }
+
+        for week_period in week_periods:
+            period = ComputedPeriod(week_period)
+            week_start = period.get_start()
+            period_values = period.get_values()
+            month = week_start.__format__("%Y-%m")
+
+            if month not in funnel_history:
+                funnel_history[month] = {
+                    "month": month,
+                    "weekly_volumes": {
+                        key: []
+                        for key in keys_for_volume
+                    },
+                    "weekly_conversions": {
+                        key: []
+                        for key in keys_for_conversion
+                    }
+                }
+
+            funnel = funnel_history[month]
+
+            for key, metric_name in keys_for_volume.items():
+                funnel["weekly_volumes"][key].append(
+                    period_values[metric_name]
+                )
+            for key, metric_name in keys_for_conversion.items():
+                funnel["weekly_conversions"][key].append(
+                    period_values[metric_name]
+                )
+
+        for month, funnel in funnel_history.items():
+            funnel["monthly_volumes"] = {
+                key: sum_or_0(*funnel["weekly_volumes"][key])
+                for key in keys_for_volume
+            }
+            funnel["monthly_conversions"] = {
+                key: sum_or_0(*funnel["weekly_conversions"][key])
+                for key in keys_for_conversion
+            }
+
+        return list(funnel_history.values())
