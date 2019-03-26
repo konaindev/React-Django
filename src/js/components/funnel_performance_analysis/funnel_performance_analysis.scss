@@ -1,0 +1,264 @@
+@import "css/base.scss";
+
+$monthly-circle-size: 36px;
+$weekly-bar-height: 40px;
+$weekly-bar-width: 8px;
+$cell-fill-color: $gray-5;
+$cell-fill-color-highlight: $blue-3;
+
+.funnel-performance-analysis {
+    .panel {
+        padding: 60px 80px;
+    }
+
+    .analysis__table-intro {
+        color: $highlight-gray-3;
+        font-size: $text-base;
+        margin-top: 3.75rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .analysis__table.ReactTable {
+        border: 0;
+        background-color: $gray-3;
+
+        .rt-thead {
+            border-color: $gray-4;
+            border-bottom-width: 1px;
+            box-shadow: none;
+
+            .rt-th {
+                padding: 0;
+                color: $highlight-gray-3;
+                font-size: $text-xs;
+                line-height: $text-xl;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+
+                &>div {
+                    padding: 15px 5px;
+                }
+            }
+        }
+
+        .rt-tbody {
+            .rt-tr-group {
+                border-bottom: 1px solid $gray-4;
+                &:last-child {
+                    border-bottom: 1px solid $gray-4;
+                }
+            }
+
+            .rt-td {
+                padding: 0;
+
+                &:first-child {
+                    color: $highlight-gray-3;
+                    font-size: $text-sm;
+                    line-height: $text-2xl;
+
+                    &>div {
+                        display: flex;
+                        align-items: center;
+                        padding: 24px 24px 20px 0;
+                        white-space: normal;
+                        height: 5.75rem;
+                    }
+                }
+            }
+        }
+
+        .cell-month {
+            height: 100%;
+            color: $gray-6;
+            text-align: center;
+            overflow: hidden;
+
+            &__circle-wrapper {
+                width: $monthly-circle-size;
+                height: $monthly-circle-size;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 18px auto 8px auto;
+            }
+
+            &__circle {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                background-color: $cell-fill-color;
+
+                &.highlight {
+                    background-color: $cell-fill-color-highlight;
+                }
+            }
+
+            &__value {
+                font-size: $text-xs;
+                line-height: $text-xl;
+                letter-spacing: 0.5px;
+                padding-bottom: 10px;
+
+                &.highlight {
+                    font-size: $text-xs;
+                    line-height: $text-xl;
+                    color: $highlight-gray-3;
+                }
+            }
+        }
+
+        .cell-week {
+            height: 100%;
+            overflow: hidden;
+            text-align: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+
+            &__start-end {
+                position: absolute;
+                top: 0;
+                width: 100%;
+                font-size: $text-xs;
+                line-height: $text-xl;
+                color: $gray-6;
+            }
+
+            &__bar-value {
+                position: absolute;
+                top: -22px;
+                transform: translateX(-50%);
+                font-size: $text-xs;
+                line-height: $text-xl;
+                color: $highlight-gray-3;
+                letter-spacing: 0.5px;
+            }
+
+            &__bars {
+                height: $weekly-bar-height;
+                display: flex;
+                justify-content: center;
+                align-items: flex-end;
+                margin-bottom: 6px;
+
+                & > div {
+                    position: relative;
+                    width: 8px;
+                    border-radius: 1px;
+                    background-color: $cell-fill-color;
+                    margin-right: 7px;
+
+                    &.highlight {
+                        background-color: $cell-fill-color-highlight;
+                    }
+
+                    &:last-child {
+                        margin-right: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    // weekly table has borders around each cell
+    .analysis__table--weekly {
+        .rt-tbody {
+            .rt-td {
+                border-color: $gray-4;
+                border-right-width: 1px;
+
+                &:first-child, &:last-child {
+                    border-right-width: 0;
+                }
+            }
+        }
+    }
+
+
+    // header at the top of funnel analysis panel
+    .analysis__panel-header {
+        display: flex;
+        justify-content: space-between;
+
+        .button-group {
+            &__item {
+                line-height: 1.25rem;
+                padding: 0.5rem 2.5rem;
+            }
+        }
+    }
+
+    // legends on the right side of panel header
+    .analysis__legends {
+        display: flex;
+        align-items: center;
+        color: $gray-6;
+        font-size: 14px;
+
+        .legends__circles-list {
+            display: flex;
+            align-items: center;
+            margin: 0 8px;
+
+            span {
+                border-radius: 50%;
+                background-color: $cell-fill-color;
+                margin: 0 4px;
+
+                &:nth-child(1) {
+                    width: 10px;
+                    height: 10px;
+                }
+                &:nth-child(2) {
+                    width: 20px;
+                    height: 20px;
+                }
+                &:nth-child(3) {
+                    width: 28px;
+                    height: 28px;
+                }
+            }
+        }
+
+        .legends__bars-list {
+            display: flex;
+            align-items: flex-end;
+            margin: 0 9px 8px 9px;
+            height: 28px;
+
+            span {
+                background-color: $cell-fill-color;
+                margin: 0 4px;
+                width: 8px;
+
+                &:nth-child(1) {
+                    height: 7px;
+                }
+                &:nth-child(2) {
+                    height: 11px;
+                }
+                &:nth-child(3) {
+                    height: 17px;
+                }
+                &:nth-child(4) {
+                    height: 23px;
+                }
+                &:nth-child(5) {
+                    height: 28px;
+                }
+            }
+        }
+
+        .legends__label-top-three {
+            margin: 0 16px 0 54px;
+        }
+
+        .legends__rectangle {
+            background-color: $cell-fill-color-highlight;
+            width: 18px;
+            height: 18px;
+        }
+    }
+}

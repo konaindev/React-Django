@@ -5,6 +5,7 @@ import AcquisitionFunnelReport from "../acquisition_funnel_report";
 import CampaignInvestmentReport from "../campaign_investment_report";
 import Container from "../container";
 import LeasingPerformanceReport from "../leasing_performance_report";
+import FunnelPerformanceAnalysis from "../funnel_performance_analysis";
 
 /**
  * @class CommonReport
@@ -28,6 +29,7 @@ export default class CommonReport extends Component {
         <LeasingPerformanceReport report={report} sectionItems={dateSpan} />
         <CampaignInvestmentReport report={report} />
         <AcquisitionFunnelReport report={report} type={type} />
+        <FunnelPerformanceAnalysis {...report} />
       </Container>
     );
   }

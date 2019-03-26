@@ -1,13 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import {
-  VictoryChart,
-  VictoryBar,
-  VictoryGroup,
-  VictoryArea,
-  VictoryAxis
-} from "victory";
+import { VictoryChart, VictoryBar, VictoryArea, VictoryAxis } from "victory";
 
 import { LargeCurrencyShorthandBox, LargeNumberBox } from "../large_box_layout";
 import BoxRow from "../box_row";
