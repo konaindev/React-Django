@@ -1,5 +1,6 @@
 import collections
 import decimal
+import os.path
 
 from django.db import models
 
@@ -12,6 +13,18 @@ from remark.lib.metrics import PointMetric, SumIntervalMetric, ModelPeriod
 def pro_public_id():
     """Public identifier for a project."""
     return public_id("pro")
+
+
+def building_image_media_path(instance, filename):
+    """
+    Given a Project instance, and the filename as supplied during upload,
+    determine where the uploaded building image should actually be placed.
+
+    See https://docs.djangoproject.com/en/2.1/ref/models/fields/#filefield
+    """
+    # We always target project/public_id/building_image.EXT
+    _, extension = os.path.splitext(filename)
+    return f"project/{instance.public_id}/building_image{extension}"
 
 
 class ProjectManager(models.Manager):
@@ -37,6 +50,14 @@ class Project(models.Model):
 
     name = models.CharField(
         max_length=255, help_text="The user-facing name of the project."
+    )
+
+    # TODO This is preliminary. We may wish to do a bunch of work.
+    building_image = models.ImageField(
+        blank=True,
+        default="",
+        upload_to=building_image_media_path,
+        help_text="A full-resolution user-supplied image of the building.",
     )
 
     baseline_start = models.DateField(
