@@ -32,10 +32,7 @@ export default class CampaignPlan extends Component {
       "https://imgur.com/mglPaZN.png",
       "https://imgur.com/2eKTmPn.png"
     ];
-    const styles = {
-      marginTop: "44px"
-    };
-    return <img src={options[this.state.buttonIndex]} style={styles} />;
+    return <img src={options[this.state.buttonIndex]} />;
   }
 
   render() {
