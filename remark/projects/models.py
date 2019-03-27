@@ -211,7 +211,11 @@ class Project(models.Model):
 
     def to_jsonable(self):
         """Return a representation that can be converted to a JSON string."""
-        return {"public_id": self.public_id, "name": self.name}
+        return {
+            "public_id": self.public_id,
+            "name": self.name,
+            "building_image_thumbnail": self.building_image_thumbnail,
+        }
 
     def __str__(self):
         return "{} ({})".format(self.name, self.public_id)
