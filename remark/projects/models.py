@@ -54,7 +54,8 @@ class Project(models.Model):
         max_length=255, help_text="The user-facing name of the project."
     )
 
-    # TODO This is preliminary. We may wish to do a bunch of work.
+    # ImageField to handle file upload on admin panel
+    # will be uploaded to original-version s3 file
     building_image = models.ImageField(
         blank=True,
         default="",
@@ -62,6 +63,7 @@ class Project(models.Model):
         help_text="A full-resolution user-supplied image of the building.",
     )
 
+    # full S3 URL of original version
     building_image_original = models.URLField(
         blank=True,
         default="",
@@ -69,6 +71,7 @@ class Project(models.Model):
         help_text="Original version of user-supplied image of the building",
     )
 
+    # full S3 URL of 180x180 version
     building_image_regular = models.URLField(
         blank=True,
         default="",
@@ -76,6 +79,7 @@ class Project(models.Model):
         help_text="180x180 version of user-supplied image of the building",
     )
 
+    # full S3 URL of 76x76 version
     building_image_thumbnail = models.URLField(
         blank=True,
         default="",
@@ -155,10 +159,12 @@ class Project(models.Model):
             .first()
         )
 
+    # best to overwrite save(), trigger thumbnail generation
     def save(self, *args, **kwargs):
         super(Project, self).save(*args, **kwargs)
         self.resize_and_save_building_image()
 
+    # resize, upload to s3 and save url to model
     def resize_and_save_building_image(self):
         if not self.building_image:
             self.building_image_original = ""
@@ -174,11 +180,11 @@ class Project(models.Model):
         s3_path_regular = f"{s3_path_prefix}__180x180{extension}"
         s3_path_thumb = f"{s3_path_prefix}__76x76{extension}"
 
+        # storage is "storages.backends.s3boto3.S3Boto3Storage", the DEFAULT one
         try:
-            # resize the original image and return url path of the thumbnail
             file = storage.open(filename, 'r')
 
-            image_regular = Image.open(file)
+            image_regular = Image.open(file) # load original image from s3
             image_regular.thumbnail((180, 180))
             s3_file_regular = storage.open(s3_path_regular, "w")
             image_regular.save(s3_file_regular, format=image_regular.format)
@@ -190,6 +196,7 @@ class Project(models.Model):
             image_thumb.save(s3_file_thumb, format=image_regular.format)
             s3_file_thumb.close()
 
+            # save S3 URL paths to building image url fields
             self.building_image_original = storage.url(s3_path_original)
             self.building_image_regular = storage.url(s3_path_regular)
             self.building_image_thumbnail = storage.url(s3_path_thumb)
@@ -201,8 +208,6 @@ class Project(models.Model):
             template = "An exception of type {0} occurred. Arguments:\n{1!r}"
             message = template.format(type(ex).__name__, ex.args)
             print(message)
-        # except :
-        #     return "Failed to upload 3 versions of building image to S3"
 
     def to_jsonable(self):
         """Return a representation that can be converted to a JSON string."""

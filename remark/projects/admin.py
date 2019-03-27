@@ -41,6 +41,7 @@ class PeriodInline(admin.TabularInline):
 
 @admin.register(Project, site=admin_site)
 class ProjectAdmin(admin.ModelAdmin):
+    save_on_top = True
     inlines = (PeriodInline,)
     list_display = [
         "name",
@@ -49,6 +50,8 @@ class ProjectAdmin(admin.ModelAdmin):
         "baseline_start",
         "baseline_end",
     ]
+
+    # change field order so that building image and its urls appear grouped
     fields = (
         "name",
         "baseline_start",
@@ -60,6 +63,7 @@ class ProjectAdmin(admin.ModelAdmin):
         "tmp_market_report_json",
         "tmp_modeling_report_json",
     )
+    # no need to edit building image urls
     readonly_fields = (
         "building_image_original",
         "building_image_regular",
