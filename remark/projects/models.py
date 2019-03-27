@@ -5,9 +5,14 @@ import os.path
 from django.db import models
 
 from jsonfield import JSONField
+from PIL import Image
+from django.core.files.storage import default_storage as storage
 
 from remark.lib.tokens import public_id
 from remark.lib.metrics import PointMetric, SumIntervalMetric, ModelPeriod
+
+IMAGE_REGULAR_SIZE = (180, 180)
+IMAGE_THUMBNAIL_SIZE = (76, 76)
 
 
 def pro_public_id():
@@ -22,9 +27,9 @@ def building_image_media_path(instance, filename):
 
     See https://docs.djangoproject.com/en/2.1/ref/models/fields/#filefield
     """
-    # We always target project/public_id/building_image.EXT
+    # We always target project/public_id/building_image__original.EXT
     _, extension = os.path.splitext(filename)
-    return f"project/{instance.public_id}/building_image{extension}"
+    return f"project/{instance.public_id}/building_image__original{extension}"
 
 
 class ProjectManager(models.Manager):
@@ -58,6 +63,27 @@ class Project(models.Model):
         default="",
         upload_to=building_image_media_path,
         help_text="A full-resolution user-supplied image of the building.",
+    )
+
+    building_image_original = models.CharField(
+        blank=True,
+        default="",
+        max_length=500,
+        help_text="Original version of user-supplied image of the building",
+    )
+
+    building_image_regular = models.CharField(
+        blank=True,
+        default="",
+        max_length=500,
+        help_text="180x180 version of user-supplied image of the building",
+    )
+
+    building_image_thumbnail = models.CharField(
+        blank=True,
+        default="",
+        max_length=500,
+        help_text="76x76 version of user-supplied image of the building",
     )
 
     baseline_start = models.DateField(
@@ -132,12 +158,75 @@ class Project(models.Model):
             .first()
         )
 
+    def save(self, *args, **kwargs):
+        super(Project, self).save(*args, **kwargs)
+        self.resize_and_save_building_image()
+
+    def resize_and_save_building_image(self):
+        if not self.building_image_original:
+            self.building_image_regular = ""
+            self.building_image_thumbnail = ""
+            super(Project, self).save()
+            return
+
+        file_path = self.building_image_original.name
+        _, file_ext = os.path.splitext(file_path)
+
+        asset_path_prefix = f"project/{self.public_id}/building_image__"
+        asset_path_suffix_1 = "original"
+        asset_path_suffix_2 = "x".join(str(d) for d in IMAGE_REGULAR_SIZE)
+        asset_path_suffix_3 = "x".join(str(d) for d in IMAGE_THUMBNAIL_SIZE)
+        asset_path_1 = f"{asset_path_prefix}{asset_path_suffix_1}{file_ext}"
+        asset_path_2 = f"{asset_path_prefix}{asset_path_suffix_2}{file_ext}"
+        asset_path_3 = f"{asset_path_prefix}{asset_path_suffix_3}{file_ext}"
+
+        try:
+            # resize the original image and return url path of the thumbnail
+            file = storage.open(file_path, 'r')
+            print("======== original =========")
+            print(file)
+            print(storage)
+
+            image_1 = Image.open(file)
+            print(image_1)
+            asset_file_1 = storage.open(asset_path_1, "w")
+            print(asset_file_1)
+            image_1.save(asset_file_1)
+            asset_file_1.close()
+
+            print("--------- regular ------------")
+            image_2 = Image.open(file)
+            asset_file_2 = storage.open(asset_path_2, "w")
+            image_2 = image_2.resize(IMAGE_REGULAR_SIZE, Image.ANTIALIAS)
+            image_2.save(asset_file_2)
+            asset_file_2.close()
+
+            image_3 = Image.open(file)
+            asset_file_3 = storage.open(asset_path_3, "w")
+            image_3 = image_3.resize(IMAGE_REGULAR_SIZE, Image.ANTIALIAS)
+            image_3.save(asset_file_3)
+            asset_file_3.close()
+
+            self.building_image_original = asset_path_1
+            self.building_image_regular = asset_path_2
+            self.building_image_thumbnail = asset_path_3
+            super(Project, self).save()
+            return "Successfully uploaded 3 versions of building image to S3"
+        except Exception as ex:
+            template = "An exception of type {0} occurred. Arguments:\n{1!r}"
+            message = template.format(type(ex).__name__, ex.args)
+            print(message)
+        # except :
+        #     return "Failed to upload 3 versions of building image to S3"
+
     def to_jsonable(self):
         """Return a representation that can be converted to a JSON string."""
         return {"public_id": self.public_id, "name": self.name}
 
     def __str__(self):
         return "{} ({})".format(self.name, self.public_id)
+
+    readonly_fields = ('building_image_regular', 'building_image_thumbnail')
 
 
 class PeriodManager(models.Manager):
