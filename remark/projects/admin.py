@@ -49,6 +49,22 @@ class ProjectAdmin(admin.ModelAdmin):
         "baseline_start",
         "baseline_end",
     ]
+    fields = (
+        "name",
+        "baseline_start",
+        "baseline_end",
+        "building_image",
+        "building_image_original",
+        "building_image_regular",
+        "building_image_thumbnail",
+        "tmp_market_report_json",
+        "tmp_modeling_report_json",
+    )
+    readonly_fields = (
+        "building_image_original",
+        "building_image_regular",
+        "building_image_thumbnail",
+    )
 
     def number_of_periods(self, obj):
         return obj.periods.all().count()
