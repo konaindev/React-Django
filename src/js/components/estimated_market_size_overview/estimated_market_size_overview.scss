@@ -3,13 +3,49 @@
 .estimated-market-size-overview {
     padding: 20px 60px;
     margin: $panel-spacing;
+
+    &__heading {
+        color: $title-large-color;
+        border-bottom: $heading-border;
+        padding: $s6 0 $s10 0;
+    }
+
+    &__content {
+        display: flex;
+        padding-top: $s10;
+        padding-bottom: $s6;
+        margin: 0 #{-$s5};
+
+        &-left {
+            flex-basis: 33.3333%;
+            padding: 0 $s5;
+            display: flex;
+            align-items: center;
+        }
+
+        &-right {
+            flex-basis: 66.6667%;
+            padding: 0 $s8;
+            display: flex;
+            flex-directon: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        &-col {
+            display: flex;
+            flex-direction: column;
+            padding: 0 $s6;
+            align-items: center;
+            flex: 1;
+
+            &:last-child {
+                flex-direction: column-reverse;
+            }
+        }
+    }
 }
 
-.estimated-market-size-overview__heading {
-    color: #ffffff; /* remark-ui-text-lightest */
-    border-bottom: 1px solid $table-border-color; /* #3D4555 */
-    padding: 24px 0 40px 0;
-}
 
 .estimated-market-size-overview__list {
     display: flex;

@@ -6,7 +6,7 @@ import { VictoryLabel, VictoryPie, VictoryTooltip, Flyout } from "victory";
 
 import "./market_segment_pie_chart.scss";
 
-const PIE_COLORS = [
+export const PIE_COLORS = [
   "#338100", // $green-1
   "#41C100", // $green-2
   "#A4FF6B", // $green-5
