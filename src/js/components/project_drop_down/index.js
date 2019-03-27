@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+
 import "./project_drop_down.scss";
+import DEFAULT_BUILDING_IMAGE from "../../../images/remarkably-project-building-neutral.svg";
 
 /**
  * @class ProjectDropDown
@@ -17,14 +19,17 @@ export default class ProjectDropDown extends Component {
   };
 
   render() {
+    const { name, building_image_thumbnail } = this.props.project;
+
     // For now, just render the name and a blank image.
     return (
-      <>
-        <span className="project-drop-down__image">&nbsp;</span>
-        <span className="project-drop-down__text">
-          {this.props.project.name}
-        </span>
-      </>
+      <div className="project-drop-down">
+        <img
+          className="project-drop-down__image"
+          src={building_image_thumbnail || DEFAULT_BUILDING_IMAGE}
+        />
+        <span className="project-drop-down__text">{name}</span>
+      </div>
     );
   }
 }
