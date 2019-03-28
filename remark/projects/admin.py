@@ -51,24 +51,5 @@ class ProjectAdmin(admin.ModelAdmin):
         "baseline_end",
     ]
 
-    # change field order so that building image and its urls appear grouped
-    fields = (
-        "name",
-        "baseline_start",
-        "baseline_end",
-        "building_image",
-        "building_image_original",
-        "building_image_regular",
-        "building_image_thumbnail",
-        "tmp_market_report_json",
-        "tmp_modeling_report_json",
-    )
-    # no need to edit building image urls
-    readonly_fields = (
-        "building_image_original",
-        "building_image_regular",
-        "building_image_thumbnail",
-    )
-
     def number_of_periods(self, obj):
         return obj.periods.all().count()

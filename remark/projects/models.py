@@ -5,8 +5,7 @@ import os.path
 from django.db import models
 
 from jsonfield import JSONField
-from PIL import Image
-from django.core.files.storage import default_storage as storage
+from stdimage.models import StdImageField
 
 from remark.lib.tokens import public_id
 from remark.lib.metrics import PointMetric, SumIntervalMetric, ModelPeriod
@@ -24,9 +23,9 @@ def building_image_media_path(instance, filename):
 
     See https://docs.djangoproject.com/en/2.1/ref/models/fields/#filefield
     """
-    # We always target project/public_id/building_image__original.EXT
+    # We always target project/public_id/building_image.EXT
     _, extension = os.path.splitext(filename)
-    return f"project/{instance.public_id}/building_image__original{extension}"
+    return f"project/{instance.public_id}/building_image{extension}"
 
 
 class ProjectManager(models.Manager):
@@ -54,37 +53,17 @@ class Project(models.Model):
         max_length=255, help_text="The user-facing name of the project."
     )
 
-    # ImageField to handle file upload on admin panel
-    # will be uploaded to original-version s3 file
-    building_image = models.ImageField(
+    # StdImageField works just like Django's own ImageField
+    # except that you can specify different sized variations.
+    building_image = StdImageField(
         blank=True,
         default="",
         upload_to=building_image_media_path,
-        help_text="A full-resolution user-supplied image of the building.",
-    )
-
-    # full S3 URL of original version
-    building_image_original = models.URLField(
-        blank=True,
-        default="",
-        max_length=500,
-        help_text="Original version of user-supplied image of the building",
-    )
-
-    # full S3 URL of 180x180 version
-    building_image_regular = models.URLField(
-        blank=True,
-        default="",
-        max_length=500,
-        help_text="180x180 version of user-supplied image of the building",
-    )
-
-    # full S3 URL of 76x76 version
-    building_image_thumbnail = models.URLField(
-        blank=True,
-        default="",
-        max_length=500,
-        help_text="76x76 version of user-supplied image of the building",
+        help_text="""A full-resolution user-supplied image of the building.<br/>Resized variants (180x180, 76x76) will also be created on Amazon S3.""",
+        variations={
+            "regular": (180, 180, True),
+            "thumbnail": (76, 76, True),
+        }
     )
 
     baseline_start = models.DateField(
@@ -159,62 +138,12 @@ class Project(models.Model):
             .first()
         )
 
-    # best to overwrite save(), trigger thumbnail generation
-    def save(self, *args, **kwargs):
-        super(Project, self).save(*args, **kwargs)
-        self.resize_and_save_building_image()
-
-    # resize, upload to s3 and save url to model
-    def resize_and_save_building_image(self):
-        if not self.building_image:
-            self.building_image_original = ""
-            self.building_image_regular = ""
-            self.building_image_thumbnail = ""
-            super(Project, self).save()
-            return
-
-        filename = self.building_image.name
-        _, extension = os.path.splitext(filename)
-        s3_path_prefix = f"project/{self.public_id}/building_image"
-        s3_path_original = f"{s3_path_prefix}__original{extension}"
-        s3_path_regular = f"{s3_path_prefix}__180x180{extension}"
-        s3_path_thumb = f"{s3_path_prefix}__76x76{extension}"
-
-        # storage is "storages.backends.s3boto3.S3Boto3Storage", the DEFAULT one
-        try:
-            file = storage.open(filename, 'r')
-
-            image_regular = Image.open(file) # load original image from s3
-            image_regular.thumbnail((180, 180))
-            s3_file_regular = storage.open(s3_path_regular, "w")
-            image_regular.save(s3_file_regular, format=image_regular.format)
-            s3_file_regular.close()
-
-            image_thumb = Image.open(file)
-            image_thumb.thumbnail((76, 76))
-            s3_file_thumb = storage.open(s3_path_thumb, "w")
-            image_thumb.save(s3_file_thumb, format=image_regular.format)
-            s3_file_thumb.close()
-
-            # save S3 URL paths to building image url fields
-            self.building_image_original = storage.url(s3_path_original)
-            self.building_image_regular = storage.url(s3_path_regular)
-            self.building_image_thumbnail = storage.url(s3_path_thumb)
-            super(Project, self).save()
-
-            print("Successfully uploaded 3 versions of building image to S3")
-            return
-        except Exception as ex:
-            template = "An exception of type {0} occurred. Arguments:\n{1!r}"
-            message = template.format(type(ex).__name__, ex.args)
-            print(message)
-
     def to_jsonable(self):
         """Return a representation that can be converted to a JSON string."""
         return {
             "public_id": self.public_id,
             "name": self.name,
-            "building_image_thumbnail": self.building_image_thumbnail,
+            "building_image_thumbnail": self.building_image.thumbnail.url,
         }
 
     def __str__(self):
