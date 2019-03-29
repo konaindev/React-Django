@@ -165,6 +165,29 @@ class ExcelImporter:
                 loc, f"expected value '{expected}', found '{cell.value}'"
             )
 
+    def row(self, schema, row, sheet=None):
+        """
+        Return the structured contents of a given row, based on the provided
+        schema definition.
+
+        A schema definition is simply a dictionary mapping a key name to
+        a (likely incomplete) _loc structure indicating where in a row to
+        find the data in question.
+        """
+        return {
+            key: self.value(_loc(sheet=sheet, row=row, loc=base_loc))
+            for key, base_loc in schema.items()
+        }
+
+    def table(self, schema, start_row, end_row, sheet=None):
+        """
+        Return an array of rows, starting with start_row and including
+        end_row.
+        """
+        return [
+            self.row(schema, row, sheet=sheet) for row in range(start_row, end_row + 1)
+        ]
+
     def is_valid(self):
         """Validate the spreadsheet; return False if not possible."""
         try:
@@ -216,4 +239,80 @@ class RemarkablyExcelImporter(ExcelImporter):
 class BaselinePerfImporter(RemarkablyExcelImporter):
     expected_type = "baseline_perf"
     expected_version = 1
+
+    PERIOD_SHEET = "output_periods"
+
+    PERIOD_SCHEMA = {
+        "start": _loc("A", dt=DataType.DATE),
+        "end": _loc("B", dt=DataType.DATE),
+        "leased_units_start": _loc("C", dt=DataType.NUMERIC),
+        "leases_ended": _loc("F", dt=DataType.NUMERIC),
+        "lease_applications": _loc("D", dt=DataType.NUMERIC),
+        "leases_executed": _loc("E", dt=DataType.NUMERIC),
+        "lease_cds": _loc("G", dt=DataType.NUMERIC),
+        "leases_due_to_expire": _loc("H", dt=DataType.NUMERIC),
+        "lease_renewal_notices": _loc("J", dt=DataType.NUMERIC),
+        "lease_renewals": _loc("I", dt=DataType.NUMERIC),
+        "lease_vacation_notices": _loc("K", dt=DataType.NUMERIC),
+        "target_lease_percent": _loc("AC", dt=DataType.NUMERIC),
+        "target_lease_applications": _loc("AE", dt=DataType.NUMERIC),
+        "target_leases_executed": _loc("AF", dt=DataType.NUMERIC),
+        "target_lease_renewal_notices": _loc("AJ", dt=DataType.NUMERIC),
+        "target_leases_due_to_expire": _loc("AH", dt=DataType.NUMERIC),
+        "target_lease_renewals": _loc("AI", dt=DataType.NUMERIC),
+        "target_lease_vacation_notices": _loc("AK", dt=DataType.NUMERIC),
+        "target_lease_cds": _loc("AG", dt=DataType.NUMERIC),
+        "target_delta_leases": _loc("AD", dt=DataType.NUMERIC),
+        "occupiable_units_start": _loc("M", dt=DataType.NUMERIC),
+        "occupied_units_start": _loc("L", dt=DataType.NUMERIC),
+        "move_ins": _loc("N", dt=DataType.NUMERIC),
+        "move_outs": _loc("O", dt=DataType.NUMERIC),
+        "target_move_ins": _loc("AL", dt=DataType.NUMERIC),
+        "target_move_outs": _loc("AM", dt=DataType.NUMERIC),
+        "acq_reputation_building": _loc("S", dt=DataType.NUMERIC),
+        "acq_demand_creation": _loc("T", dt=DataType.NUMERIC),
+        "acq_leasing_enablement": _loc("U", dt=DataType.NUMERIC),
+        "acq_market_intelligence": _loc("V", dt=DataType.NUMERIC),
+        "monthly_average_rent": _loc("AA", dt=DataType.NUMERIC),
+        "lowest_monthly_rent": _loc("AB", dt=DataType.NUMERIC),
+        "target_acq_investment": _loc("AN", dt=DataType.NUMERIC),
+        "ret_reputation_building": _loc("W", dt=DataType.NUMERIC),
+        "ret_demand_creation": _loc("X", dt=DataType.NUMERIC),
+        "ret_leasing_enablement": _loc("Y", dt=DataType.NUMERIC),
+        "ret_market_intelligence": _loc("Z", dt=DataType.NUMERIC),
+        "target_ret_investment": _loc("AO", dt=DataType.NUMERIC),
+        "usvs": _loc("P", dt=DataType.NUMERIC),
+        "inquiries": _loc("Q", dt=DataType.NUMERIC),
+        "tours": _loc("R", dt=DataType.NUMERIC),
+        "target_usvs": _loc("AP", dt=DataType.NUMERIC),
+        "target_inquiries": _loc("AQ", dt=DataType.NUMERIC),
+        "target_tours": _loc("AR", dt=DataType.NUMERIC),
+    }
+
+    def check_meta(self):
+        """
+        Validate that the basic contents of our META tab are valid.
+        """
+        self.check_value(_loc("META!B11", dt=DataType.STRING), "valid")
+        baseline_period_count = self.value(_loc("META!B5", dt=DataType.NUMERIC))
+        if baseline_period_count <= 0:
+            raise ExcelValidationError(_loc("META!B5"), "no baseline periods found")
+
+    def clean(self):
+        super().clean()
+        self.check_meta()
+        start_row = self.value(_loc("META!B1", dt=DataType.NUMERIC))
+        end_row = self.value(_loc("META!B4", dt=DataType.NUMERIC))
+        self.cleaned_data["periods"] = self.table(
+            schema=self.PERIOD_SCHEMA,
+            start_row=start_row,
+            end_row=end_row,
+            sheet=self.PERIOD_SHEET,
+        )
+        self.cleaned_data["baseline_start_date"] = self.value(
+            _loc("META!B7", dt=DataType.DATE)
+        )
+        self.cleaned_data["baseline_end_date"] = self.value(
+            _loc("META!B8", dt=DataType.DATE)
+        )
 

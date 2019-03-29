@@ -1,3 +1,4 @@
+import datetime
 import os.path
 
 from django.test import TestCase
@@ -100,3 +101,21 @@ class BaselinePerfTestCase(TestCase):
     def test_example_data(self):
         importer = BaselinePerfImporter(self.TEST_FILE_NAME)
         self.assertTrue(importer.is_valid())
+        self.assertEqual(
+            importer.cleaned_data["baseline_start_date"].date(),
+            datetime.date(year=2018, month=8, day=1),
+        )
+        self.assertEqual(
+            importer.cleaned_data["baseline_end_date"].date(),
+            datetime.date(year=2019, month=3, day=1),
+        )
+        self.assertEqual(len(importer.cleaned_data["periods"]), 9)
+        self.assertEqual(
+            importer.cleaned_data["periods"][-1]["start"].date(),
+            datetime.date(year=2019, month=3, day=8),
+        )
+        self.assertEqual(
+            importer.cleaned_data["periods"][-1]["end"].date(),
+            datetime.date(year=2019, month=3, day=15),
+        )
+
