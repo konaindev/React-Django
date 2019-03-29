@@ -14,7 +14,6 @@ const IconBase = React.forwardRef(function IconBase(props, ref) {
     height,
     ...other
   } = props;
-  console.log(size);
 
   return (
     <Component
