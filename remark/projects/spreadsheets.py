@@ -20,7 +20,7 @@ class DataType:
 class ExcelError(Exception):
     """Generic error for all code in this library."""
 
-    def __init__(loc, message):
+    def __init__(self, loc, message):
         super().__init__(f"'{loc}:: {message}")
 
 
