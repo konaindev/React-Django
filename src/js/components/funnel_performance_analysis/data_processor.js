@@ -213,10 +213,14 @@ function getRoundedValue(number, digits) {
   [1, 1, 2, 2, 3, 3, 3] => [3]
 **/
 function getTopThreePoints(numbers) {
-  const topThree = numbers.sort((a, b) => a - b).slice(-3);
-  const uniqTopThree = topThree.filter(
-    (elem, pos, arr) => arr.indexOf(elem) === pos
+  return (
+    numbers
+      .sort((a, b) => b - a)
+      // pick three in the sorted numbers
+      .slice(0, 3)
+      // remove duplicates among three
+      .filter((elem, pos, arr) => arr.indexOf(elem) === pos)
+      // remove zero or negative, just in case
+      .filter(v => v > 0)
   );
-
-  return uniqTopThree;
 }
