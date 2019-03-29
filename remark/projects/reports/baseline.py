@@ -129,27 +129,29 @@ class BaselineReport(CommonReport):
                 computed_period = ComputedPeriod(week_period)
                 week_values_list.append(computed_period.get_values())
 
-            month_funnel = dict(month=month)
-            month_funnel["monthly_volumes"] = {
-                renamed_key: month_values[metric_name]
-                for renamed_key, metric_name in key_map_for_volumes.items()
-            }
-            month_funnel["monthly_conversions"] = {
-                renamed_key: month_values[metric_name]
-                for renamed_key, metric_name in key_map_for_conversions.items()
-            }
-            month_funnel["weekly_volumes"] = {
-                renamed_key: [
-                    week_values[metric_name] for week_values in week_values_list
-                ]
-                for renamed_key, metric_name in key_map_for_volumes.items()
-            }
-            month_funnel["weekly_conversions"] = {
-                renamed_key: [
-                    week_values[metric_name] for week_values in week_values_list
-                ]
-                for renamed_key, metric_name in key_map_for_conversions.items()
-            }
+            month_funnel = dict(
+                month=month,
+                monthly_volumes={
+                    new_key: month_values[old_key]
+                    for new_key, old_key in key_map_for_volumes.items()
+                },
+                monthly_conversions={
+                    new_key: month_values[old_key]
+                    for new_key, old_key in key_map_for_conversions.items()
+                },
+                weekly_volumes={
+                    new_key: [
+                        week_values[old_key] for week_values in week_values_list
+                    ]
+                    for new_key, old_key in key_map_for_volumes.items()
+                },
+                weekly_conversions={
+                    new_key: [
+                        week_values[old_key] for week_values in week_values_list
+                    ]
+                    for new_key, old_key in key_map_for_conversions.items()
+                }
+            )
 
             funnel_history.append(month_funnel)
 

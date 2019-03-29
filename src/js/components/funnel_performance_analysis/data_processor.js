@@ -182,9 +182,13 @@ export default function(funnelHistory = []) {
         week.showValue = false;
       }
 
-      const fourWeekMax = Math.max(...row[month].weeks.map(w => w.value));
-      const weekWithMax = row[month].weeks.find(w => w.value == fourWeekMax);
-      weekWithMax.showValue = true;
+      let fourWeekMax = Math.max(...row[month].weeks.map(w => w.value));
+      let weekWithMax = row[month].weeks.find(
+        w => w.highlight && w.value == fourWeekMax
+      );
+      if (weekWithMax) {
+        weekWithMax.showValue = true;
+      }
     }
   }
   // end of top three percent logic
