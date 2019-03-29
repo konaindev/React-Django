@@ -1,3 +1,4 @@
+import itertools
 from datetime import timedelta
 
 from .common import CommonReport
@@ -92,10 +93,6 @@ class BaselineReport(CommonReport):
         if self.multiperiod is None:
             return []
 
-        week_periods = self.multiperiod.get_week_periods(weekday=0)
-
-        month_funnels = {}
-
         key_map_for_volumes = {
             "usv": "usvs",
             "inq": "inquiries",
@@ -111,46 +108,28 @@ class BaselineReport(CommonReport):
             "usv_exe": "usv_exe_perc"
         }
 
-        for week_period in week_periods:
-            computed_period = ComputedPeriod(week_period)
-            week_values = computed_period.get_values()
-            month = computed_period.get_start().__format__("%Y-%m")
-
-            if month not in month_funnels:
-                month_funnels[month] = {
-                    "month": month,
-                    "week_periods": [],
-                    "weekly_volumes": {
-                        renamed_key: []
-                        for renamed_key in key_map_for_volumes
-                    },
-                    "weekly_conversions": {
-                        renamed_key: []
-                        for renamed_key in key_map_for_conversions
-                    }
-                }
-
-            month_funnel = month_funnels[month]
-            month_funnel["week_periods"].append(week_period)
-
-            for renamed_key, metric_name in key_map_for_volumes.items():
-                month_funnel["weekly_volumes"][renamed_key].append(
-                    week_values[metric_name]
-                )
-            for renamed_key, metric_name in key_map_for_conversions.items():
-                month_funnel["weekly_conversions"][renamed_key].append(
-                    week_values[metric_name]
-                )
-
         funnel_history = []
 
-        for month, month_funnel in month_funnels.items():
-            week_periods = month_funnel["week_periods"]
+        week_periods = self.multiperiod.get_week_periods(weekday=0)
+        week_periods_by_month = itertools.groupby(
+            week_periods,
+            lambda period: period.get_start().__format__("%Y-%m")
+        )
+
+        for month, week_periods_grouper in week_periods_by_month:
+            week_periods = list(week_periods_grouper)
+
             month_period = BareMultiPeriod.from_periods(week_periods)
             cumulative_month_period = month_period.get_cumulative_period()
             computed_period = ComputedPeriod(cumulative_month_period)
             month_values = computed_period.get_values()
 
+            week_values_list = []
+            for week_period in week_periods:
+                computed_period = ComputedPeriod(week_period)
+                week_values_list.append(computed_period.get_values())
+
+            month_funnel = dict(month=month)
             month_funnel["monthly_volumes"] = {
                 renamed_key: month_values[metric_name]
                 for renamed_key, metric_name in key_map_for_volumes.items()
@@ -159,8 +138,19 @@ class BaselineReport(CommonReport):
                 renamed_key: month_values[metric_name]
                 for renamed_key, metric_name in key_map_for_conversions.items()
             }
+            month_funnel["weekly_volumes"] = {
+                renamed_key: [
+                    week_values[metric_name] for week_values in week_values_list
+                ]
+                for renamed_key, metric_name in key_map_for_volumes.items()
+            }
+            month_funnel["weekly_conversions"] = {
+                renamed_key: [
+                    week_values[metric_name] for week_values in week_values_list
+                ]
+                for renamed_key, metric_name in key_map_for_conversions.items()
+            }
 
-            month_funnel.pop("week_periods")
             funnel_history.append(month_funnel)
 
         return funnel_history

@@ -32,7 +32,7 @@ import { convertToKebabCase } from "../../utils/misc";
     isFirstRow: true,     // show "Week 1-4" label in weekly view
     key: "unique-site-visitors",
     label: "Unique Site Visitors",
-    path: "usv" // accessor in the raw data
+    metric: "usv" // accessor in the raw data
     "2017-08": cell1,
     "2017-09": cell2,
     ...
@@ -46,50 +46,50 @@ export default function(funnelHistory = []) {
     {
       category: "volume",
       label: "Unique Site Visitors",
-      path: "usv",
+      metric: "usv",
       isFirstRow: true
     },
     {
       category: "volume",
       label: "Inquiries",
-      path: "inq"
+      metric: "inq"
     },
     {
       category: "volume",
       label: "Tours",
-      path: "tou"
+      metric: "tou"
     },
     {
       category: "volume",
       label: "Lease Applications",
-      path: "app"
+      metric: "app"
     },
     {
       category: "volume",
       label: "Lease Executions",
-      path: "exe"
+      metric: "exe"
     },
     {
       category: "conversion",
       label: "USV &#8594; INQ",
-      path: "usv_inq",
+      metric: "usv_inq",
       isFirstRow: true,
       fixedDigits: 1
     },
     {
       category: "conversion",
       label: "INQ &#8594; TOU",
-      path: "inq_tou"
+      metric: "inq_tou"
     },
     {
       category: "conversion",
       label: "TOU &#8594; APP",
-      path: "tou_app"
+      metric: "tou_app"
     },
     {
       category: "conversion",
       label: "APP &#8594; EXE",
-      path: "app_exe"
+      metric: "app_exe"
     }
   ];
 
@@ -108,9 +108,9 @@ export default function(funnelHistory = []) {
     // start of rows iteration
     // sets month / week values to each row for a specified month column
     for (let row of allRows) {
-      const { category, path, fixedDigits } = row;
-      let monthValue = _get(monthFunnel, `monthly_${category}s.${path}`);
-      let weekValues = _get(monthFunnel, `weekly_${category}s.${path}`, []);
+      const { category, metric, fixedDigits } = row;
+      let monthValue = _get(monthFunnel, `monthly_${category}s.${metric}`, 0);
+      let weekValues = _get(monthFunnel, `weekly_${category}s.${metric}`, []);
       numberOfWeeks = numberOfWeeks || weekValues.length;
 
       const isPercent = category === "conversion";
