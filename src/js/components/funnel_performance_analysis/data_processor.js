@@ -153,16 +153,16 @@ export default function(funnelHistory = []) {
   for (let row of allRows) {
     row.key = convertToKebabCase(row.label);
 
-    const monthValues = columns.map(({ month }) => row[month].monthValue);
-    const weekValues = columns.reduce(
+    const periodMonthValues = columns.map(({ month }) => row[month].monthValue);
+    const periodWeekValues = columns.reduce(
       (acc, { month }) => acc.concat(row[month].weeks.map(w => w.value)),
       []
     );
 
-    const monthMax = Math.max(...monthValues);
-    const monthTopThree = getTopThreePoints(monthValues);
-    const weekMax = Math.max(...weekValues);
-    const weekTopThree = getTopThreePoints(weekValues);
+    const maxMonthValueInPeriod = Math.max(...periodMonthValues);
+    const topThreeMonthValues = getTopThreePoints(periodMonthValues);
+    const maxWeekValueInPeriod = Math.max(...periodWeekValues);
+    const topThreeWeekValues = getTopThreePoints(periodWeekValues);
 
     // each cell
     for (let { month } of columns) {
@@ -170,23 +170,21 @@ export default function(funnelHistory = []) {
 
       row[month] = {
         ...row[month],
-        monthCircle: `${(monthValue / monthMax) * 100}%`,
-        monthHighlight: monthTopThree.indexOf(monthValue) >= 0
+        monthCircle: `${(monthValue / maxMonthValueInPeriod) * 100}%`,
+        monthHighlight: topThreeMonthValues.indexOf(monthValue) >= 0
       };
 
       // highlight eligible weeks to top three
       // show only one value label per month, not enough space in cells
-      let foundHighlight = false;
       for (let week of row[month].weeks) {
-        week.highlight = weekTopThree.indexOf(week.value) >= 0;
-        week.barHeight = `${(week.value / weekMax) * 100}%`;
+        week.highlight = topThreeWeekValues.indexOf(week.value) >= 0;
+        week.barHeight = `${(week.value / maxWeekValueInPeriod) * 100}%`;
         week.showValue = false;
-
-        if (week.highlight && !foundHighlight) {
-          foundHighlight = true;
-          week.showValue = true;
-        }
       }
+
+      const fourWeekMax = Math.max(...row[month].weeks.map(w => w.value));
+      const weekWithMax = row[month].weeks.find(w => w.value == fourWeekMax);
+      weekWithMax.showValue = true;
     }
   }
   // end of top three percent logic
@@ -203,8 +201,8 @@ export default function(funnelHistory = []) {
   };
 }
 
-function getRoundedValue(number, digits) {
-  return Number.parseFloat(number).toFixed(2 + (digits || 0));
+function getRoundedValue(number, digits = 0) {
+  return +Number.parseFloat(number).toFixed(digits + 2);
 }
 
 /**
