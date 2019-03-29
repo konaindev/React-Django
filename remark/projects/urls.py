@@ -6,6 +6,7 @@ from .views import (
     PerformanceReportPageView,
     MarketReportPageView,
     ModelingReportPageView,
+    CampaignPlanPageView
 )
 
 
@@ -27,4 +28,9 @@ urlpatterns = [
         ModelingReportPageView.as_view(),
         name="modeling_report",
     ),
+    path(
+        "<project_id>/campaign_plan/",
+        CampaignPlanPageView.as_view(),
+        name="campaign_plan",
+    )
 ]

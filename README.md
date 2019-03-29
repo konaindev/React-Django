@@ -72,7 +72,41 @@ But somewhere down the road, it should be "no problem, you can make this change 
 The web framework.
 https://docs.djangoproject.com/en/2.1/
 
-### Tailwind CSS
+### Storage for images, excel spreadsheets, etc.
 
-CSS layout framework.
-https://tailwindcss.com/docs/what-is-tailwind/
+We use Django's FileField and ImageField to store references to uploaded files in our database.
+
+In production and staging, we use django-storages and Amazon S3 to store uploaded files. There are a number of settings that have to be "just right" for this all to work, including:
+
+- `DEFAULT_FILE_STORAGE`: identifies a `Storage` class in use by default, including for all `FileField` and `ImageField` by default. In production, this should be `storages.backends.s3boto3.S3Boto3Storage`.
+
+- `AWS_ACCESS_KEY_ID`: The public key for a AWS IAM user with read/write permissions to the target bucket. (Ideally, this user should not have permissions beyond those absolutely necessary to do its work.)
+
+- `AWS_SECRET_ACCESS_KEY`: The private key for the same AWS IAM user.
+
+- `AWS_STORAGE_BUCKET_NAME`: The fully-qualified target S3 bucket name.
+
+- `AWS_S3_REGION_NAME`: The region for the target S3 bucket, like `us-east-1`.
+
+- `MEDIA_ROOT`: The root, on the target filesystem, for all uploaded (media) files. By default, `django-storage`'s `S3Boto3Storage` uses `''`.
+
+- `MEDIA_URL`: The public base URL that corresponds to the `MEDIA_ROOT`. This is used by Django's storages system. (A `Storage` is a class that maps a filesystem, potentially a remote one, to a URL; see [here for details](https://davepeck.org/2015/02/06/django-storage-minutia/).) In the case of production, this could either be the public S3 URL (like https://s3.amazonaws.com/production-storage.remarkably.io/) or, if we like, we can place a Cloudfront distribution on top of it later; in that case, `MEDIA_URL` should refer to the distribution.
+
+What about for development?
+
+1. It's totally fine, and possible, to
+
+Our production _and_ development apps use django-storages
+
+Under the hood, Django relies on DEFAULT_FILE_STORAGE to make decisions.
+
+```
+>>> settings.DEFAULT_FILE_STORAGE
+'django.core.files.storage.FileSystemStorage'
+>>> settings.STATICFILES_STORAGE
+'whitenoise.storage.CompressedManifestStaticFilesStorage'
+```
+
+We use django-storages to tie our database to an S3 bucket. Some configuration is required.
+
+origin/excel-conversion

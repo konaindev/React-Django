@@ -24,6 +24,9 @@ sortedcontainers = "*"
 python-dateutil = "*"
 jsonschema = "*"
 jsonfield = "*"
+django-storages = "*"
+pillow = "*"
+boto3 = "*"
 
 [requires]
 python_version = "3.7"
