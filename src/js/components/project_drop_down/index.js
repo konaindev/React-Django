@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import "./project_drop_down.scss";
-import DEFAULT_BUILDING_IMAGE from "../../../images/remarkably-project-building-neutral.svg";
+import buildingImageDefault from "../../../images/remarkably-project-building-neutral.svg";
 
 /**
  * @class ProjectDropDown
@@ -26,7 +26,7 @@ export default class ProjectDropDown extends Component {
       <div className="project-drop-down">
         <img
           className="project-drop-down__image"
-          src={building_image_thumbnail || DEFAULT_BUILDING_IMAGE}
+          src={building_image_thumbnail || buildingImageDefault}
         />
         <span className="project-drop-down__text">{name}</span>
       </div>
