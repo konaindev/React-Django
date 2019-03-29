@@ -94,19 +94,6 @@ In production and staging, we use django-storages and Amazon S3 to store uploade
 
 What about for development?
 
-1. It's totally fine, and possible, to
+1. It's totally fine, and possible, to use a private `S3` bucket.
 
-Our production _and_ development apps use django-storages
-
-Under the hood, Django relies on DEFAULT_FILE_STORAGE to make decisions.
-
-```
->>> settings.DEFAULT_FILE_STORAGE
-'django.core.files.storage.FileSystemStorage'
->>> settings.STATICFILES_STORAGE
-'whitenoise.storage.CompressedManifestStaticFilesStorage'
-```
-
-We use django-storages to tie our database to an S3 bucket. Some configuration is required.
-
-origin/excel-conversion
+2. It's totally fine, and possible, to use Django's default `django.core.files.storage.FileSystemStorage`. You can configure this in your `.env` as desired.

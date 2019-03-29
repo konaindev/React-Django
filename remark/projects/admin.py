@@ -2,7 +2,8 @@ from django.contrib import admin
 
 from remark.admin import admin_site
 
-from .models import Project, Period
+from .forms import SpreadsheetForm
+from .models import Project, Period, Spreadsheet
 
 
 def _build_period_field_names_with_targets_last():
@@ -17,6 +18,38 @@ def _build_period_field_names_with_targets_last():
 
 
 PERIOD_FIELD_NAMES_TARGETS_LAST = _build_period_field_names_with_targets_last()
+
+
+@admin.register(Spreadsheet, site=admin_site)
+class SpreadsheetAdmin(admin.ModelAdmin):
+    form = SpreadsheetForm
+    list_display = ["project", "created", "user", "kind"]
+    pre_creation_readonly_fields = ["created"]
+    post_creation_readonly_fields = ["project", "created", "user", "file", "kind"]
+
+    def get_readonly_fields(self, request, obj=None):
+        """Allow for fields to be edited in admin only during creation time."""
+        return (
+            self.post_creation_readonly_fields
+            if obj is not None
+            else self.pre_creation_readonly_fields
+        )
+
+
+class SpreadsheetInline(admin.TabularInline):
+    model = Spreadsheet
+    form = SpreadsheetForm
+    list_display = ["project", "created", "user", "kind"]
+    pre_creation_readonly_fields = ["created"]
+    post_creation_readonly_fields = ["project", "created", "user", "file", "kind"]
+
+    def get_readonly_fields(self, request, obj=None):
+        """Allow for fields to be edited in admin only during creation time."""
+        return (
+            self.post_creation_readonly_fields
+            if obj is not None
+            else self.pre_creation_readonly_fields
+        )
 
 
 @admin.register(Period, site=admin_site)
@@ -41,7 +74,7 @@ class PeriodInline(admin.TabularInline):
 
 @admin.register(Project, site=admin_site)
 class ProjectAdmin(admin.ModelAdmin):
-    inlines = (PeriodInline,)
+    inlines = (SpreadsheetInline, PeriodInline)
     list_display = [
         "name",
         "public_id",
@@ -52,3 +85,4 @@ class ProjectAdmin(admin.ModelAdmin):
 
     def number_of_periods(self, obj):
         return obj.periods.all().count()
+
