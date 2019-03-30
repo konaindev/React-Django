@@ -138,12 +138,25 @@ class Project(models.Model):
             .first()
         )
 
+    def get_building_image(self):
+        """
+        Return building image's S3 resource urls for all variants
+        """
+        if (self.building_image):
+            return dict(
+                original=self.building_image.url,
+                regular=self.building_image.regular.url,
+                thumbnail=self.building_image.thumbnail.url
+            )
+        else:
+            return None
+
     def to_jsonable(self):
         """Return a representation that can be converted to a JSON string."""
         return {
             "public_id": self.public_id,
             "name": self.name,
-            "building_image_thumbnail": self.building_image.thumbnail.url,
+            "building_image": self.get_building_image(),
         }
 
     def __str__(self):
