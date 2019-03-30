@@ -9,6 +9,12 @@
         border-radius: $border-radius-default;
         width: 2.25rem;
         height: 2.25rem;
+        background-image: url(
+            '../../../images/remarkably-project-building-neutral.svg'
+        );
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
     }
 
     &__text {
