@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const IconBase = React.forwardRef(function IconBase(props, ref) {
+const IconBase = props => {
   const {
     children,
     className,
@@ -32,7 +32,7 @@ const IconBase = React.forwardRef(function IconBase(props, ref) {
       {titleAccess ? <title>{titleAccess}</title> : null}
     </Component>
   );
-});
+};
 
 IconBase.propTypes = {
   /**
