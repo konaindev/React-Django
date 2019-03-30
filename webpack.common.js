@@ -46,24 +46,9 @@ module.exports = {
         include: path.resolve(__dirname, ".")
       },
       {
-        test: /\.(otf|eot|ttf|woff|woff2)$/,
+        test: /\.(zip|png|jpg|jpeg|gif|otf|eot|svg|ttf|woff|woff2|wav)$/,
         type: "javascript/auto",
-        loader: "file-loader",
-        options: {
-          name: "[name].[ext]?[hash]",
-          outputPath: "fonts/",
-          publicPath: "/static/fonts"
-        }
-      },
-      {
-        test: /\.(png|jpg|jpeg|gif|svg)$/,
-        type: "javascript/auto",
-        loader: "file-loader",
-        options: {
-          name: "[name].[ext]?[hash]",
-          outputPath: "images/",
-          publicPath: "/static/images"
-        }
+        loader: "file-loader"
       }
     ]
   },
