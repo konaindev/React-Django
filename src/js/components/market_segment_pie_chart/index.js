@@ -17,13 +17,13 @@ export const PIE_COLORS = [
 
 const TOOLTIP_FLYOUT_STYLE = {
   borderColor: "none",
-  fill: "#2b343d" // $tooltip-bg-color
+  fill: scssVars.tooltipBgColor
 };
 
 const TOOLTIP_LABEL_STYLE = {
   padding: 24,
   fontWeight: 600,
-  fill: "#f5faf7" // $tooltip-text-color
+  fill: scssVars.tooltipTextColor
 };
 
 const getPieData = segments =>

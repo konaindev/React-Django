@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import { VictoryPie } from "victory";
 
 import { formatNumber } from "../../utils/formatters";
+import scssVars from "../../../css/variables.scss";
 import "./age_range_population_size.scss";
 
-const unallocatedColor = "#2B343D";
+const unallocatedColor = scssVars.pieColorUnallocated;
 
 const getPieData = (x, y) => [{ x, y }, { x: "", y: 1 - y }];
 
