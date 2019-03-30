@@ -47,5 +47,58 @@
       "leasing_enablement": "35000.00",
       "market_intelligence": "24000.00"
     }
+  },
+  "reputation_building": {
+    "tactics": [
+      {
+        "name": "Brand Strategy",
+        "tooltip": null,
+        "schedule": "2019-01-20",
+        "status": "complete",
+        "notes": null,
+        "base_cost": "15000.00",
+        "cost_category": "one_time",
+        "total_cost": "15000.00"
+      },
+      {
+        "name": "Messaging Matrix",
+        "tooltip": null,
+        "schedule": "2019-02-01",
+        "status": "complete",
+        "notes": null,
+        "base_cost": "5000.00",
+        "cost_category": "one_time",
+        "total_cost": "5000.00"
+      },
+      {
+        "name": "Website Enhancements",
+        "tooltip": null,
+        "schedule": "2019-02-01",
+        "status": "in_progress",
+        "notes": null,
+        "base_cost": "5000.00",
+        "cost_category": "one_time",
+        "total_cost": "5000.00"
+      },
+      {
+        "name": "Beach Lifestyle Photoshoot",
+        "tooltip": null,
+        "schedule": "2019-02-15",
+        "status": "not_started",
+        "notes": null,
+        "base_cost": "10000.00",
+        "cost_category": "one_time",
+        "total_cost": "10000.00"
+      }
+    ]
+  },
+  "demand_creation": {
+    "tactics": []
+  },
+  "leasing_enablement": {
+    "tactics": []
+  },
+  "market_intelligence": {
+    "tactics": []
   }
 }

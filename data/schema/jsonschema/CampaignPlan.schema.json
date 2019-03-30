@@ -4,12 +4,148 @@
     "definitions": {
         "CampaignPlan": {
             "properties": {
+                "demand_creation": {
+                    "$ref": "#/definitions/DemandCreation"
+                },
+                "leasing_enablement": {
+                    "$ref": "#/definitions/LeasingEnablement"
+                },
+                "market_intelligence": {
+                    "$ref": "#/definitions/MarketIntelligence"
+                },
                 "overview": {
                     "$ref": "#/definitions/Overview"
+                },
+                "reputation_building": {
+                    "$ref": "#/definitions/ReputationBuilding"
                 }
             },
             "required": [
-                "overview"
+                "demand_creation",
+                "leasing_enablement",
+                "market_intelligence",
+                "overview",
+                "reputation_building"
+            ],
+            "type": "object"
+        },
+        "CostCategory": {
+            "description": "Known cost categories",
+            "enum": [
+                "monthly",
+                "one_time"
+            ],
+            "type": "string"
+        },
+        "DemandCreation": {
+            "properties": {
+                "tactics": {
+                    "description": "List of tactics for this category",
+                    "items": {
+                        "$ref": "#/definitions/DemandCreationTactic"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "tactics"
+            ],
+            "type": "object"
+        },
+        "DemandCreationTactic": {
+            "properties": {
+                "base_cost": {
+                    "description": "The base cost for the tactic",
+                    "type": "string"
+                },
+                "cost_category": {
+                    "$ref": "#/definitions/CostCategory",
+                    "description": "The cost category"
+                },
+                "costs": {
+                    "$ref": "#/definitions/DemandCreationTargets<string>",
+                    "description": "Campaign plan target costs for demand creation"
+                },
+                "name": {
+                    "description": "The name of the tactic, ('Brand Strategy')",
+                    "type": "string"
+                },
+                "notes": {
+                    "description": "Notes about the tactic (arbitrary markdown)",
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "schedule": {
+                    "description": "The scheduled date",
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/definitions/ScheduleStatus",
+                    "description": "The current schedule status"
+                },
+                "tooltip": {
+                    "description": "Details about the tactic (shown in tooltip, typically)",
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "total_cost": {
+                    "description": "Total cost @computed",
+                    "type": "string"
+                },
+                "volumes": {
+                    "$ref": "#/definitions/DemandCreationTargets<number>",
+                    "description": "Campaign plan target volumes for demand creation"
+                }
+            },
+            "required": [
+                "base_cost",
+                "cost_category",
+                "costs",
+                "name",
+                "notes",
+                "schedule",
+                "status",
+                "tooltip",
+                "total_cost",
+                "volumes"
+            ],
+            "type": "object"
+        },
+        "DemandCreationTargets<number>": {
+            "properties": {
+                "inq": {
+                    "description": "Inquiries",
+                    "type": "number"
+                },
+                "usv": {
+                    "description": "Unique site visitors",
+                    "type": "number"
+                }
+            },
+            "required": [
+                "inq",
+                "usv"
+            ],
+            "type": "object"
+        },
+        "DemandCreationTargets<string>": {
+            "properties": {
+                "inq": {
+                    "description": "Inquiries",
+                    "type": "string"
+                },
+                "usv": {
+                    "description": "Unique site visitors",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "inq",
+                "usv"
             ],
             "type": "object"
         },
@@ -34,6 +170,36 @@
                 "leasing_enablement",
                 "market_intelligence",
                 "reputation_building"
+            ],
+            "type": "object"
+        },
+        "LeasingEnablement": {
+            "properties": {
+                "tactics": {
+                    "description": "List of tactics for this category",
+                    "items": {
+                        "$ref": "#/definitions/Tactic"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "tactics"
+            ],
+            "type": "object"
+        },
+        "MarketIntelligence": {
+            "properties": {
+                "tactics": {
+                    "description": "List of tactics for this category",
+                    "items": {
+                        "$ref": "#/definitions/Tactic"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "tactics"
             ],
             "type": "object"
         },
@@ -104,6 +270,83 @@
                 "target_investment",
                 "target_segments",
                 "theme"
+            ],
+            "type": "object"
+        },
+        "ReputationBuilding": {
+            "properties": {
+                "tactics": {
+                    "description": "List of tactics for this category",
+                    "items": {
+                        "$ref": "#/definitions/Tactic"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "tactics"
+            ],
+            "type": "object"
+        },
+        "ScheduleStatus": {
+            "description": "Allowable schedule statuses",
+            "enum": [
+                "complete",
+                "in_progress",
+                "not_started"
+            ],
+            "type": "string"
+        },
+        "Tactic": {
+            "properties": {
+                "base_cost": {
+                    "description": "The base cost for the tactic",
+                    "type": "string"
+                },
+                "cost_category": {
+                    "$ref": "#/definitions/CostCategory",
+                    "description": "The cost category"
+                },
+                "name": {
+                    "description": "The name of the tactic, ('Brand Strategy')",
+                    "type": "string"
+                },
+                "notes": {
+                    "description": "Notes about the tactic (arbitrary markdown)",
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "schedule": {
+                    "description": "The scheduled date",
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/definitions/ScheduleStatus",
+                    "description": "The current schedule status"
+                },
+                "tooltip": {
+                    "description": "Details about the tactic (shown in tooltip, typically)",
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "total_cost": {
+                    "description": "Total cost @computed",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "base_cost",
+                "cost_category",
+                "name",
+                "notes",
+                "schedule",
+                "status",
+                "tooltip",
+                "total_cost"
             ],
             "type": "object"
         },
