@@ -63,7 +63,7 @@
                     "description": "The cost category"
                 },
                 "costs": {
-                    "$ref": "#/definitions/DemandCreationTargets<string>",
+                    "$ref": "#/definitions/DemandCreationTargets<string|null>",
                     "description": "Campaign plan target costs for demand creation"
                 },
                 "name": {
@@ -132,15 +132,21 @@
             ],
             "type": "object"
         },
-        "DemandCreationTargets<string>": {
+        "DemandCreationTargets<string|null>": {
             "properties": {
                 "inq": {
                     "description": "Inquiries",
-                    "type": "string"
+                    "type": [
+                        "null",
+                        "string"
+                    ]
                 },
                 "usv": {
                     "description": "Unique site visitors",
-                    "type": "string"
+                    "type": [
+                        "null",
+                        "string"
+                    ]
                 }
             },
             "required": [

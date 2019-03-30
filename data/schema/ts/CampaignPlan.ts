@@ -95,7 +95,7 @@ interface DemandCreationTactic extends Tactic {
   volumes: DemandCreationTargets<t.integer>;
 
   /** Campaign plan target costs for demand creation */
-  costs: DemandCreationTargets<t.currency>;
+  costs: DemandCreationTargets<t.currency | null>;
 }
 
 interface CampaignCategory {
