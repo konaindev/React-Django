@@ -52,7 +52,7 @@ interface Occupancy {
 }
 
 /** Marketing investment expense buckets */
-interface InvestmentExpenses {
+export interface InvestmentExpenses {
   demand_creation: t.currency;
   leasing_enablement: t.currency;
   market_intelligence: t.currency;

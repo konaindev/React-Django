@@ -3,13 +3,14 @@
 // deeper expectations.
 //
 
-export type decimal = string;
 export type currency = decimal;
 export type date = string;
 export type datetime = string;
-export type integer = number;
-export type percent = number;
+export type decimal = string;
 export type float = number;
+export type integer = number;
+export type markdown = string;
+export type percent = number;
 
 /*
  * Given an object type T, defines a parallel type where every value that is
