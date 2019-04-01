@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+
 import "./project_drop_down.scss";
 
 /**
@@ -17,14 +18,19 @@ export default class ProjectDropDown extends Component {
   };
 
   render() {
+    const { name, building_image: buildingImage } = this.props.project;
+
+    let buildingImageStyle = {};
+    if (buildingImage) {
+      buildingImageStyle["backgroundImage"] = `url(${buildingImage.thumbnail})`;
+    }
+
     // For now, just render the name and a blank image.
     return (
-      <>
-        <span className="project-drop-down__image">&nbsp;</span>
-        <span className="project-drop-down__text">
-          {this.props.project.name}
-        </span>
-      </>
+      <div className="project-drop-down">
+        <span className="project-drop-down__image" style={buildingImageStyle} />
+        <span className="project-drop-down__text">{name}</span>
+      </div>
     );
   }
 }

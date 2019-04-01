@@ -27,6 +27,7 @@ jsonfield = "*"
 django-storages = "*"
 pillow = "*"
 boto3 = "*"
+django-stdimage = "*"
 
 [requires]
 python_version = "3.7"

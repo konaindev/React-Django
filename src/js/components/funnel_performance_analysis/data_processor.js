@@ -32,7 +32,7 @@ import { convertToKebabCase } from "../../utils/misc";
     isFirstRow: true,     // show "Week 1-4" label in weekly view
     key: "unique-site-visitors",
     label: "Unique Site Visitors",
-    path: "usv" // accessor in the raw data
+    metric: "usv" // accessor in the raw data
     "2017-08": cell1,
     "2017-09": cell2,
     ...
@@ -46,50 +46,50 @@ export default function(funnelHistory = []) {
     {
       category: "volume",
       label: "Unique Site Visitors",
-      path: "usv",
+      metric: "usv",
       isFirstRow: true
     },
     {
       category: "volume",
       label: "Inquiries",
-      path: "inq"
+      metric: "inq"
     },
     {
       category: "volume",
       label: "Tours",
-      path: "tou"
+      metric: "tou"
     },
     {
       category: "volume",
       label: "Lease Applications",
-      path: "app"
+      metric: "app"
     },
     {
       category: "volume",
       label: "Lease Executions",
-      path: "exe"
+      metric: "exe"
     },
     {
       category: "conversion",
       label: "USV &#8594; INQ",
-      path: "usv_inq",
+      metric: "usv_inq",
       isFirstRow: true,
       fixedDigits: 1
     },
     {
       category: "conversion",
       label: "INQ &#8594; TOU",
-      path: "inq_tou"
+      metric: "inq_tou"
     },
     {
       category: "conversion",
       label: "TOU &#8594; APP",
-      path: "tou_app"
+      metric: "tou_app"
     },
     {
       category: "conversion",
       label: "APP &#8594; EXE",
-      path: "app_exe"
+      metric: "app_exe"
     }
   ];
 
@@ -108,9 +108,9 @@ export default function(funnelHistory = []) {
     // start of rows iteration
     // sets month / week values to each row for a specified month column
     for (let row of allRows) {
-      const { category, path, fixedDigits } = row;
-      let monthValue = _get(monthFunnel, `monthly_${category}s.${path}`);
-      let weekValues = _get(monthFunnel, `weekly_${category}s.${path}`, []);
+      const { category, metric, fixedDigits } = row;
+      let monthValue = _get(monthFunnel, `monthly_${category}s.${metric}`, 0);
+      let weekValues = _get(monthFunnel, `weekly_${category}s.${metric}`, []);
       numberOfWeeks = numberOfWeeks || weekValues.length;
 
       const isPercent = category === "conversion";
@@ -153,16 +153,16 @@ export default function(funnelHistory = []) {
   for (let row of allRows) {
     row.key = convertToKebabCase(row.label);
 
-    const monthValues = columns.map(({ month }) => row[month].monthValue);
-    const weekValues = columns.reduce(
+    const periodMonthValues = columns.map(({ month }) => row[month].monthValue);
+    const periodWeekValues = columns.reduce(
       (acc, { month }) => acc.concat(row[month].weeks.map(w => w.value)),
       []
     );
 
-    const monthMax = Math.max(...monthValues);
-    const monthTopThree = getTopThreePoints(monthValues);
-    const weekMax = Math.max(...weekValues);
-    const weekTopThree = getTopThreePoints(weekValues);
+    const maxMonthValueInPeriod = Math.max(...periodMonthValues);
+    const topThreeMonthValues = getTopThreePoints(periodMonthValues);
+    const maxWeekValueInPeriod = Math.max(...periodWeekValues);
+    const topThreeWeekValues = getTopThreePoints(periodWeekValues);
 
     // each cell
     for (let { month } of columns) {
@@ -170,22 +170,24 @@ export default function(funnelHistory = []) {
 
       row[month] = {
         ...row[month],
-        monthCircle: `${(monthValue / monthMax) * 100}%`,
-        monthHighlight: monthTopThree.indexOf(monthValue) >= 0
+        monthCircle: `${(monthValue / maxMonthValueInPeriod) * 100}%`,
+        monthHighlight: topThreeMonthValues.indexOf(monthValue) >= 0
       };
 
       // highlight eligible weeks to top three
       // show only one value label per month, not enough space in cells
-      let foundHighlight = false;
       for (let week of row[month].weeks) {
-        week.highlight = weekTopThree.indexOf(week.value) >= 0;
-        week.barHeight = `${(week.value / weekMax) * 100}%`;
+        week.highlight = topThreeWeekValues.indexOf(week.value) >= 0;
+        week.barHeight = `${(week.value / maxWeekValueInPeriod) * 100}%`;
         week.showValue = false;
+      }
 
-        if (week.highlight && !foundHighlight) {
-          foundHighlight = true;
-          week.showValue = true;
-        }
+      let fourWeekMax = Math.max(...row[month].weeks.map(w => w.value));
+      let weekWithMax = row[month].weeks.find(
+        w => w.highlight && w.value == fourWeekMax
+      );
+      if (weekWithMax) {
+        weekWithMax.showValue = true;
       }
     }
   }
@@ -203,8 +205,8 @@ export default function(funnelHistory = []) {
   };
 }
 
-function getRoundedValue(number, digits) {
-  return Number.parseFloat(number).toFixed(2 + (digits || 0));
+function getRoundedValue(number, digits = 0) {
+  return +Number.parseFloat(number).toFixed(digits + 2);
 }
 
 /**
@@ -213,10 +215,14 @@ function getRoundedValue(number, digits) {
   [1, 1, 2, 2, 3, 3, 3] => [3]
 **/
 function getTopThreePoints(numbers) {
-  const topThree = numbers.sort((a, b) => a - b).slice(-3);
-  const uniqTopThree = topThree.filter(
-    (elem, pos, arr) => arr.indexOf(elem) === pos
+  return (
+    numbers
+      .sort((a, b) => b - a)
+      // pick three in the sorted numbers
+      .slice(0, 3)
+      // remove duplicates among three
+      .filter((elem, pos, arr) => arr.indexOf(elem) === pos)
+      // remove zero or negative, just in case
+      .filter(v => v > 0)
   );
-
-  return uniqTopThree;
 }
