@@ -191,7 +191,7 @@ $text-2xl: 1.5rem; // 24px
 $text-3xl: 1.875rem; // 30px
 $text-4xl: 2.25rem; // 36px
 $text-5xl: 3rem; // 48px
-$text-6xl: 4rem; // 64px
+$text-6xl: 3.75rem; // 60px
 $text-7xl: 6rem; // 96px
 
 $line-height-compressed: 0.75;
@@ -240,6 +240,9 @@ $border-radius-sm: 0.125rem;
 $border-radius-default: 0.25rem;
 $border-radius-lg: 0.5rem;
 $border-radius-full: 9999px;
+
+$box-space: 30px;
+$small-box-vertical-spacing: 10px;
 
 :export {
     mapCirclePointColor: $map-circle-point-color;

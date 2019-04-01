@@ -7,6 +7,8 @@ import Container from "../container";
 import LeasingPerformanceReport from "../leasing_performance_report";
 import FunnelPerformanceAnalysis from "../funnel_performance_analysis";
 
+import "./common_report.scss";
+
 /**
  * @class CommonReport
  *
@@ -25,7 +27,7 @@ export default class CommonReport extends Component {
   render() {
     const { dateSpan, report, type } = this.props;
     return (
-      <Container>
+      <Container className="common-report">
         <LeasingPerformanceReport report={report} sectionItems={dateSpan} />
         <CampaignInvestmentReport report={report} />
         <AcquisitionFunnelReport report={report} type={type} />

@@ -7,18 +7,18 @@
     align-items: stretch;
 
     &--normal {
-        margin: -$s4;
+        margin: -$box-space / 2;
 
         > .child-wrapper {
-            margin: $s4;
+            padding: $box-space / 2;
         }
     }
 
     &--wide {
-        margin: -$s8;
+        margin: -$box-space;
 
         > .child-wrapper {
-            margin: $s8;
+            padding: $box-space * 2;
         }
     }
 }
