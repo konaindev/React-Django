@@ -41,6 +41,7 @@ class PeriodInline(admin.TabularInline):
 
 @admin.register(Project, site=admin_site)
 class ProjectAdmin(admin.ModelAdmin):
+    save_on_top = True
     inlines = (PeriodInline,)
     list_display = [
         "name",

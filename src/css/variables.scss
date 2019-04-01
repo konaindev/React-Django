@@ -254,6 +254,17 @@ $small-box-vertical-spacing: 10px;
     mapWaterColor: $map-water-color;
     mapRegionBgColor: $map-region-bg-color;
     mapRegionBgOpacity: $map-region-bg-opacity;
+
+    pieColorUnallocated: $gray-4;
+    pieColor1: $green-1;
+    pieColor2: $green-2;
+    pieColor3: $green-5;
+    pieColor4: $cyan-1;
+    pieColor5: $cyan-3;
+    pieColor6: $cyan-6;
+
+    tooltipBgColor: $tooltip-bg-color;
+    tooltipTextColor: $tooltip-text-color;
 }
 
 $anchor-color: $blue-3;

@@ -8,8 +8,26 @@ import ProjectDropDown from "./index";
 
 const project = { name: "Portland Multi Family", public_id: "pro_example" };
 
-const props = { project };
+const propsWithoutImage = {
+  project: {
+    ...project,
+    building_image: null
+  }
+};
 
-storiesOf("ProjectDropDown", module).add("default", () => (
-  <ProjectDropDown {...props} />
+const propsWithImage = {
+  project: {
+    ...project,
+    building_image: {
+      thumbnail: "assets/remarkably-logo-green.svg"
+    }
+  }
+};
+
+storiesOf("ProjectDropDown", module).add("without building image", () => (
+  <ProjectDropDown {...propsWithoutImage} />
+));
+
+storiesOf("ProjectDropDown", module).add("with building image", () => (
+  <ProjectDropDown {...propsWithImage} />
 ));
