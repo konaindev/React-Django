@@ -5,8 +5,7 @@ from .common import CommonReport
 from .periods import ComputedPeriod
 
 from remark.lib.math import avg_or_0, sum_or_0
-from remark.lib.metrics import BareMultiPeriod
-
+from remark.lib.metrics import BareMultiPeriod, Weekday
 
 HACK_BASELINE_OVERRIDES = {
     # Meridian SLC -- override computed props
@@ -110,7 +109,7 @@ class BaselineReport(CommonReport):
 
         funnel_history = []
 
-        week_periods = self.multiperiod.get_week_periods(weekday=0)
+        week_periods = self.multiperiod.get_week_periods(weekday=Weekday.MONDAY)
         week_periods_by_month = itertools.groupby(
             week_periods,
             lambda period: period.get_start().__format__("%Y-%m")
