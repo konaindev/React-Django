@@ -27,6 +27,7 @@ export function ModelingComparison({ property_name, options }) {
     {
       Header: "",
       accessor: "label",
+      width: 400,
       Cell: row => (
         <div>
           {row.original.isChildren && <span>L</span>}

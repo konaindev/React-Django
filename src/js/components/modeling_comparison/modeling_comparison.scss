@@ -1,20 +1,17 @@
 @import "css/base.scss";
 
-$table-font-color: $highlight-gray-3;
-$table-border-color: $gray-4;
 $table-bg-accent: rgba($gray-4, 0.5);
-$table-heading-color: $gray-6;
 
 .modeling-comparison {
     .ReactTable {
         height: 100%;
         background-color: $panel-background-color;
-        color: $table-font-color;
+        color: $content-text-primary-color;
         border-radius: $panel-border-radius;
         box-shadow: $panel-box-shadow;
 
         .rt-thead {
-            color: $table-heading-color;
+            color: $content-text-secondary-color;
             border-color: $table-border-color;
             border-bottom-width: 1px;
             box-shadow: none;
@@ -58,14 +55,14 @@ $table-heading-color: $gray-6;
                 }
 
                 &:first-child {
-                    color: $table-heading-color;
+                    color: $content-text-secondary-color;
                     font-weight: $weight-normal;
                     text-align: left;
-                    line-height: 28px;
+                    line-height: 20px;
 
                     &>div {
                         display: flex;
-                        padding: 14px 20px 14px 60px;
+                        padding: 18px 20px 18px 60px;
 
                         &>span {
                             margin: -4px 8px 0 0;
