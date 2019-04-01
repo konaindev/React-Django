@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 import BoxColumn from "../box_column";
 import BoxRow from "../box_row";
-import DeltaLayout from "../delta_layout";
 import ReportSection from "../report_section";
 import WhiskerPlot from "../whisker_plot";
 import { SmallNumberBox } from "../small_box_layout";

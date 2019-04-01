@@ -12,7 +12,12 @@ import { targetFormatter } from "../../utils/formatters";
  * unless you have custom needs, you'll probably want to use one of the
  * *Box components defined using `withFormatters(...)`, below.
  */
-const withFormatters = (WrappedComponent, formatter, deltaFormatter = null) => {
+const withFormatters = (
+  WrappedComponent,
+  formatter,
+  deltaFormatter = null,
+  getDeltaDirection = null
+) => {
   const formatterForTarget = targetFormatter(formatter);
   const formatterForDelta = deltaFormatter || formatter;
 
@@ -24,6 +29,7 @@ const withFormatters = (WrappedComponent, formatter, deltaFormatter = null) => {
         delta,
         reverseArrow,
         symbolType,
+        getDeltaDirection,
         ...remaining
       } = this.props;
 
@@ -33,7 +39,8 @@ const withFormatters = (WrappedComponent, formatter, deltaFormatter = null) => {
         formatter,
         formatterForDelta,
         reverseArrow,
-        symbolType
+        symbolType,
+        getDeltaDirection
       );
 
       return (
