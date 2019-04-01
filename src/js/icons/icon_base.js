@@ -23,7 +23,6 @@ const IconBase = props => {
       color={color}
       aria-hidden={titleAccess ? "false" : "true"}
       role={titleAccess ? "img" : "presentation"}
-      ref={ref}
       width={size || width}
       height={size || height}
       {...other}
