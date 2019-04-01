@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import DeltaIndicator from "../delta_indicator";
 import Panel from "../panel";
 import WhiskerPlot from "../whisker_plot";
+import { getDefaultDirection, getPercentageDirection } from "../../utils/misc";
 import { LargeBoxLayout } from "../large_box_layout";
 import {
   formatCurrencyShorthand,
@@ -38,7 +39,8 @@ export class LargeGraphBox extends Component {
       extraContent,
       formatDelta,
       formatValue,
-      formatTarget
+      formatTarget,
+      getDeltaDirection
     } = this.props;
 
     const graphDeltaBox = (
@@ -52,6 +54,7 @@ export class LargeGraphBox extends Component {
           <div className="large-box__content-delta">
             <DeltaIndicator
               delta={delta}
+              direction={getDeltaDirection(delta)}
               indicatorPos="right"
               formatter={formatDelta}
             />
@@ -75,6 +78,7 @@ export class LargeGraphBox extends Component {
 export const PercentageGraphBox = props => (
   <LargeGraphBox
     formatDelta={formatDeltaPercent}
+    getDeltaDirection={getPercentageDirection}
     formatTarget={value => formatPercent(value, props.digits || 0)}
     formatValue={value => formatPercent(value, props.digits || 0, 0)}
     {...props}
@@ -84,6 +88,7 @@ export const PercentageGraphBox = props => (
 export const CurrencyShorthandGraphBox = props => (
   <LargeGraphBox
     formatDelta={formatCurrencyShorthand}
+    getDeltaDirection={getDefaultDirection}
     formatTarget={formatCurrencyShorthand}
     formatValue={formatCurrencyShorthand}
     {...props}

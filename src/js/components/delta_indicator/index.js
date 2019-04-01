@@ -7,6 +7,7 @@ import "./delta_indicator.scss";
 import ArrowDown from "../../icons/arrow_down";
 import ArrowSide from "../../icons/arrow_side";
 import ArrowUp from "../../icons/arrow_up";
+import { getDefaultDirection, getPercentageDirection } from "../../utils/misc";
 
 export default class DeltaIndicator extends Component {
   static DIRECTION_UP = 1;
@@ -31,7 +32,11 @@ export default class DeltaIndicator extends Component {
 
   render() {
     const { delta, formatter, indicatorPos } = this.props;
-    const direction = this.props.direction || Math.sign(delta);
+    const deltaDirection =
+      formatter === formatDeltaPercent
+        ? getPercentageDirection(delta)
+        : getDefaultDirection(delta);
+    const direction = this.props.direction || deltaDirection;
     const deltaArrow =
       direction > 0 ? (
         <ArrowUp width={10} height={5} />
