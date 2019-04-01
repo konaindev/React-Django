@@ -29,6 +29,7 @@
     "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-transform-class-properties": "^6",
     "browser-sync": "^2",
+    "clean-webpack-plugin": "^2.0.1",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
     "eslint": "^5.14.1",

@@ -5,6 +5,7 @@ import os.path
 from django.db import models
 
 from jsonfield import JSONField
+from stdimage.models import StdImageField
 
 from remark.lib.tokens import public_id
 from remark.lib.metrics import PointMetric, SumIntervalMetric, ModelPeriod
@@ -52,12 +53,17 @@ class Project(models.Model):
         max_length=255, help_text="The user-facing name of the project."
     )
 
-    # TODO This is preliminary. We may wish to do a bunch of work.
-    building_image = models.ImageField(
+    # StdImageField works just like Django's own ImageField
+    # except that you can specify different sized variations.
+    building_image = StdImageField(
         blank=True,
         default="",
         upload_to=building_image_media_path,
-        help_text="A full-resolution user-supplied image of the building.",
+        help_text="""A full-resolution user-supplied image of the building.<br/>Resized variants (180x180, 76x76) will also be created on Amazon S3.""",
+        variations={
+            "regular": (180, 180, True),
+            "thumbnail": (76, 76, True),
+        }
     )
 
     baseline_start = models.DateField(
@@ -143,9 +149,26 @@ class Project(models.Model):
             .first()
         )
 
+    def get_building_image(self):
+        """
+        Return building image's S3 resource urls for all variants
+        """
+        if (self.building_image):
+            return dict(
+                original=self.building_image.url,
+                regular=self.building_image.regular.url,
+                thumbnail=self.building_image.thumbnail.url
+            )
+        else:
+            return None
+
     def to_jsonable(self):
         """Return a representation that can be converted to a JSON string."""
-        return {"public_id": self.public_id, "name": self.name}
+        return {
+            "public_id": self.public_id,
+            "name": self.name,
+            "building_image": self.get_building_image(),
+        }
 
     def __str__(self):
         return "{} ({})".format(self.name, self.public_id)
