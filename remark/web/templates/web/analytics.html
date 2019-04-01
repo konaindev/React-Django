@@ -6,6 +6,11 @@
       gtag('js', new Date());
 
       gtag('config', '{{ GOOGLE_ANALYTICS_KEY }}');
+      {% if page_props.project %}
+      gtag('event', 'view_item', {
+        'value': '{{ page_props.project.public_id }}'
+      });
+      {% endif %}
     </script>    
 {% endif %}
 

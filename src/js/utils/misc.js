@@ -51,3 +51,8 @@ export const getDateDiff = (startDateStr, endDateStr, unit = "month") => {
 
   return differ(endDate, startDate);
 };
+
+export const getDefaultDirection = value => Math.sign(Math.round(value));
+
+export const getPercentageDirection = value =>
+  Math.sign(Math.round(value * 1000));

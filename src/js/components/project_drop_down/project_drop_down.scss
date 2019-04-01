@@ -1,19 +1,25 @@
 @import "css/base.scss";
 
-.project-drop-down__image {
-    display: inline-block;
-    background-color: $panel-background-color;
-    border-radius: $border-radius-default;
-    min-width: $s8;
-    min-height: $s8;
-    width: $s8;
-    height: $s8;
-}
+.project-drop-down {
+    display: flex;
+    align-items: center;
 
-.project-drop-down__text {
-    cursor: pointer;
-    display: inline-block;
-    padding: 0 $s4;
-    margin-top: $s1;
-    vertical-align: middle;
+    &__image {
+        background-color: $panel-background-color;
+        border-radius: $border-radius-default;
+        width: 2.25rem;
+        height: 2.25rem;
+        background-image: url(
+            '../../../images/remarkably-project-building-neutral.svg'
+        );
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    &__text {
+        cursor: pointer;
+        padding: 0 $s4;
+        color: $highlight-gray-3;
+    }
 }

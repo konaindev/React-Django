@@ -10,6 +10,7 @@ import {
   formatTargetCurrency,
   formatTargetPercent
 } from "../../utils/formatters";
+import { getDefaultDirection, getPercentageDirection } from "../../utils/misc";
 import "./funnel_box_layout.scss";
 
 class FunnelBaseBox extends Component {
@@ -31,6 +32,7 @@ class FunnelBaseBox extends Component {
       delta,
       formatter,
       deltaFormatter,
+      getDeltaDirection,
       targetFormatter
     } = this.props;
     return (
@@ -49,6 +51,7 @@ class FunnelBaseBox extends Component {
             <div className="funnel-box-layout__delta">
               <DeltaIndicator
                 delta={delta}
+                direction={getDeltaDirection(delta)}
                 indicatorPos="right"
                 formatter={deltaFormatter}
               />
@@ -64,6 +67,7 @@ export const FunnelNumberBox = props => (
   <FunnelBaseBox
     formatter={formatNumber}
     deltaFormatter={formatNumber}
+    getDeltaDirection={getDefaultDirection}
     targetFormatter={formatTargetPercent}
     {...props}
   />
@@ -73,6 +77,7 @@ export const FunnelPercentBox = props => (
   <FunnelBaseBox
     formatter={formatPercent}
     deltaFormatter={formatDeltaPercent}
+    getDeltaDirection={getPercentageDirection}
     targetFormatter={formatTargetPercent}
     {...props}
   />
@@ -82,6 +87,7 @@ export const FunnelCurrencyBox = props => (
   <FunnelBaseBox
     formatter={formatCurrency}
     deltaFormatter={formatCurrency}
+    getDeltaDirection={getDefaultDirection}
     targetFormatter={formatTargetCurrency}
     {...props}
   />

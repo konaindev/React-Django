@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     "django_js_reverse",
+    "stdimage",
     "remark.users",
     "remark.projects",
     "remark.releases",

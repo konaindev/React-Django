@@ -27,7 +27,7 @@ export function InfoBox({ population, radius, units, zip_codes }) {
 
   return (
     <Panel className="estimated-population__figure">
-      <div className="figure__label">Est. Population</div>
+      <div className="figure__label">Est. Total Population</div>
 
       <div className="figure__value">{formatNumber(population)}</div>
 

@@ -74,7 +74,8 @@ class PeriodInline(admin.TabularInline):
 
 @admin.register(Project, site=admin_site)
 class ProjectAdmin(admin.ModelAdmin):
-    inlines = (SpreadsheetInline, PeriodInline)
+    save_on_top = True
+    inlines = (SpreadsheetInline, PeriodInline,)
     list_display = [
         "name",
         "public_id",
@@ -85,4 +86,3 @@ class ProjectAdmin(admin.ModelAdmin):
 
     def number_of_periods(self, obj):
         return obj.periods.all().count()
-

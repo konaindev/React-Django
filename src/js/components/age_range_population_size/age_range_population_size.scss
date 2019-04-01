@@ -1,35 +1,38 @@
 @import "css/base.scss";
 
+$pie-chart-size: 70px;
+
 .age-range-population-size {
-    max-width: 160px;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     align-items: center;
-    padding: 16px 20px;
-    background-color: $panel-background-color;
-}
 
-.age-range-population-size span:first-child {
-    /*font-size: 0.875rem;*/
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 26px;
-    letter-spacing: 0.5px;
-    color: $content-text-primary-color;
-    text-transform: uppercase;
-}
+    &__chart {
+        width: $pie-chart-size;
+        margin-right: $s10;
+    }
 
-.age-range-population-size span:nth-child(2) {
-    /*font-size: 2.75rem;*/
-    font-size: 44px;
-    margin: 16px 0 14px 0;
-    color: $content-text-primary-color;
-}
+    &__info {
+        padding: $s4;
+    }
 
-.age-range-population-size span:nth-child(3) {
-    /*font-size: 0.875rem;*/
-    font-size: 14px;
-    line-height: 26px;
-    color: #6d778d; /*color not defined in theme*/
+    &__age-group {
+        font-size: $text-sm;
+        font-weight: $weight-medium;
+        line-height: $line-height-loose;
+        letter-spacing: 0.5px;
+        color: $content-text-primary-color;
+        text-transform: uppercase;
+    }
+
+    &__market-size {
+        font-size: $text-3xl;
+        margin: $s1 0;
+        color: $content-text-primary-color;
+    }
+
+    &__segment {
+        font-size: $text-sm;
+        line-height: $line-height-loose;
+        color: $content-text-secondary-color;
+    }
 }

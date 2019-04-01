@@ -6,7 +6,6 @@
 
 .market-size-growth-reach__table {
     width: 100%;
-    font-size: 14px;
 
     .table__row {
         display: flex;
@@ -18,21 +17,26 @@
     }
 
     .table__row--head span {
-        color: $table-column-heading-color;
-        font-weight: 500;
-        line-height: 26px;
+        color: $content-text-secondary-color;
+        font-size: 12px;
+        font-weight: $weight-medium;
+        line-height: 20px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
         border-bottom: 1px solid $table-border-color;
-        padding: 18px 40px 16px 40px;
+        padding: 44px 20px 35px 20px;
     }
 
     .table__row--body span {
-        color: $table-column-text-color;
+        color: $content-text-primary-color;
         border-style: solid;
         border-color: $table-border-color;
         border-right-width: 1px;
         border-bottom-width: 1px;
-        line-height: 24px;
-        padding: 12px 40px 10px 40px;
+        font-size: 16px;
+        font-weight: $weight-normal;
+        line-height: 20px;
+        padding: 18px 20px 17px 20px;
 
         &:last-child {
             border-right-width: 0;
@@ -45,21 +49,20 @@
     }
 
     .table__row span:last-child {
-        padding-right: 60px;
+        padding-right: 80px;
     }
 }
 
 .market-size-growth-reach__summary {
-    padding-bottom: 12px;
+    padding-bottom: 8px;
     display: flex;
     flex-direction: row;
 
     .summary__box {
-        font-weight: 300;
         flex: 1;
         display: flex;
         flex-direction: column;
-        padding: 32px 40px;
+        padding: 42px 20px;
         text-align: right;
 
         &:first-child {
@@ -68,22 +71,25 @@
         }
 
         &:last-child {
-            padding-right: 60px;
+            padding-right: 80px;
         }
 
         span:first-child,
         span:nth-child(2) {
-            color: $table-column-heading-color;
+            color: $content-text-secondary-color;
             text-transform: uppercase;
-            font-weight: 500;
             font-size: $text-xs;
-            line-height: $line-height-loose;
+            font-weight: $weight-medium;
+            line-height: 24px;
+            letter-spacing: 1px;
         }
 
         span:nth-child(3) {
-            color: $table-column-text-color;
-            font-size: 26px;
-            margin-top: 12px;
+            color: $content-text-primary-color;
+            font-size: 28px;
+            font-weight: $weight-normal;
+            line-height: 36px;
+            margin-top: 6px;
         }
     }
 }
