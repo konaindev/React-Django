@@ -4,29 +4,27 @@ $header-height: 76px; // was $s16
 $header-quarter-height: 19px; // was $s4
 $header-half-inset: 36px;
 
-.page-header-inner {
+.page-header {
     background-color: $page-header-bg-color;
     font-family: $font-headline;
-    height: $header-height;
-    padding: 23px 74px 15px 41px;
-    line-height: $line-height-tight;
-}
 
-.page-header__items-outer {
-    float: right;
-    height: $header-height;
-}
+    &__inner {
+        height: $header-height;
+        padding: $s5 0;
+        line-height: $line-height-tight;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
-.page-header__items-inner {
-    display: block;
-    height: $header-height;
-    font-family: $font-sans;
-    margin-top: -$header-quarter-height;
-    padding: 0;
-}
+    &__items-inner {
+        display: block;
+        font-family: $font-sans;
+        padding: 0;
+    }
 
-.page-header__item {
-    display: block;
-    height: $header-height;
-    padding: $header-quarter-height 0 0 $header-half-inset;
+    &__item {
+        display: block;
+        padding: 0 0 0 $header-half-inset;
+    }
 }

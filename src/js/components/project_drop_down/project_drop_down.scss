@@ -8,12 +8,12 @@
     min-height: $s8;
     width: $s8;
     height: $s8;
+    vertical-align: middle;
 }
 
 .project-drop-down__text {
     cursor: pointer;
     display: inline-block;
     padding: 0 $s4;
-    margin-top: $s1;
     vertical-align: middle;
 }

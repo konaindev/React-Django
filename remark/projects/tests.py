@@ -29,6 +29,7 @@ class DefaultComputedPeriodTestCase(TestCase):
             lowest_monthly_rent=decimal.Decimal("0"),
             leased_units_start=0,
             occupiable_units_start=0,
+            occupied_units_start=0,
         )
         self.period = ComputedPeriod(period)
 
@@ -172,7 +173,9 @@ class DefaultReportTestCase(TestCase):
             end=datetime.date(year=2018, month=12, day=26),
             monthly_average_rent=decimal.Decimal("0"),
             lowest_monthly_rent=decimal.Decimal("0"),
+            leased_units_start=0,
             occupiable_units_start=0,
+            occupied_units_start=0,
         )
         self.report = PerformanceReport(project, period)
 
@@ -222,6 +225,7 @@ class LincolnTowerPeriodTestCase(TestCase):
             lease_applications=8,
             leases_executed=6,
             occupiable_units_start=218,
+            occupied_units_start=218,
             target_lease_percent=decimal.Decimal("0.9"),
             leases_ended=3,
             lease_renewal_notices=0,
