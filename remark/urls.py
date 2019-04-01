@@ -15,6 +15,7 @@ Including another URLconf
 """
 
 from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path, include
 from django.views.decorators.cache import cache_page
 
@@ -28,7 +29,7 @@ from .admin import admin_site
 
 
 urlpatterns = [
-    path("admin/doc/", include('django.contrib.admindocs.urls')),
+    path("admin/doc/", include("django.contrib.admindocs.urls")),
     path("admin/", admin_site.urls),
     # Make our URL patterns available in the javascript context.
     path(
@@ -43,4 +44,4 @@ urlpatterns = [
     path("releases/", include("remark.releases.urls")),
     # Misc. site-wide pages (about/company/privacy policy/refund policy/etc)
     path("", include("remark.web.urls")),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
