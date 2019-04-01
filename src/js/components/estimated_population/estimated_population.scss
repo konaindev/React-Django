@@ -20,16 +20,17 @@
 
 .estimated-population__figure {
     height: 100%;
-    text-align: center;
     padding: 60px;
     display: flex;
     justify-content: center;
     flex-direction: column;
+    font-weight: $weight-normal;
+    text-align: center;
 
     .figure__label {
         color: $content-text-primary-color;
         font-size: 12px;
-        font-weight: bold;
+        font-weight: $weight-bold;
         letter-spacing: 1px;
         margin-bottom: 18px;
         text-transform: uppercase;
