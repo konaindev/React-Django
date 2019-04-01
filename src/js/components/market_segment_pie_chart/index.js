@@ -3,27 +3,27 @@ import cn from "classnames";
 import PropTypes from "prop-types";
 import { formatNumber, formatPercent } from "../../utils/formatters";
 import { VictoryLabel, VictoryPie, VictoryTooltip, Flyout } from "victory";
-
+import scssVars from "../../../css/variables.scss";
 import "./market_segment_pie_chart.scss";
 
-const PIE_COLORS = [
-  "#338100", // $green-1
-  "#41C100", // $green-2
-  "#A4FF6B", // $green-5
-  "#2A7B6F", // $cyan-1
-  "#53F7DD", // $cyan-3
-  "#BCFBF1" // $cyan-6
+export const PIE_COLORS = [
+  scssVars.pieColor1,
+  scssVars.pieColor2,
+  scssVars.pieColor3,
+  scssVars.pieColor4,
+  scssVars.pieColor5,
+  scssVars.pieColor6
 ];
 
 const TOOLTIP_FLYOUT_STYLE = {
   borderColor: "none",
-  fill: "#2b343d" // $tooltip-bg-color
+  fill: scssVars.tooltipBgColor
 };
 
 const TOOLTIP_LABEL_STYLE = {
   padding: 24,
   fontWeight: 600,
-  fill: "#f5faf7" // $tooltip-text-color
+  fill: scssVars.tooltipTextColor
 };
 
 const getPieData = segments =>
