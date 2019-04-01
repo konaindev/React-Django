@@ -63,10 +63,16 @@ $table-bg-accent: rgba($gray-4, 0.5);
                     &>div {
                         display: flex;
                         padding: 18px 20px 18px 60px;
+                    }
 
-                        &>span {
-                            margin: -4px 8px 0 0;
-                        }
+                    span.row-label-icon {
+                        margin: -4px 8px 0 0;
+                    }
+
+                    span.row-label-text {
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        overflow: hidden;
                     }
                 }
 

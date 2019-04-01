@@ -30,8 +30,8 @@ export function ModelingComparison({ property_name, options }) {
       width: 400,
       Cell: row => (
         <div>
-          {row.original.isChildren && <span>L</span>}
-          {row.value}
+          {row.original.isChildren && <span className="row-label-icon">L</span>}
+          <span className="row-label-text">{row.value}</span>
         </div>
       )
     },
