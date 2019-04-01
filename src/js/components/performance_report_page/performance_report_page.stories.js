@@ -207,7 +207,7 @@ const report = {
         renewal_rate: 0,
         renewals: 2,
         vacation_notices: -1,
-        rate: 0.02
+        rate: 0.000499
       },
       occupancy: {
         move_ins: 0,
@@ -229,7 +229,7 @@ const report = {
         exe: -1
       },
       costs: {
-        usv: "1.67",
+        usv: "0.049",
         inq: "24.76",
         tou: "-120.00",
         app: "-202.00",

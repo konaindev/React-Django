@@ -13,6 +13,7 @@ import {
   formatCurrencyShorthand,
   formatDate
 } from "../../utils/formatters";
+import { getDefaultDirection, getPercentageDirection } from "../../utils/misc";
 
 import "./large_box_layout.scss";
 
@@ -60,22 +61,40 @@ export class LargeBoxLayout extends Component {
 
 // use this in case NOT to color "x" with blue
 // otherwise use LargeNumberBox with "symbolType" prop
-export const LargeMultipleBox = withFormatters(LargeBoxLayout, formatMultiple);
-
+export const LargeMultipleBox = withFormatters(
+  LargeBoxLayout,
+  formatMultiple,
+  formatMultiple,
+  getDefaultDirection
+);
 export const LargePercentBox = withFormatters(
   LargeBoxLayout,
   formatPercent,
-  formatDeltaPercent
+  formatDeltaPercent,
+  getPercentageDirection
 );
 export const LargeDetailPercentBox = withFormatters(
   LargeBoxLayout,
   value => formatPercent(value, 1),
-  formatDeltaPercent
+  formatDeltaPercent,
+  getPercentageDirection
 );
-export const LargeNumberBox = withFormatters(LargeBoxLayout, formatNumber);
-export const LargeCurrencyBox = withFormatters(LargeBoxLayout, formatCurrency);
+export const LargeNumberBox = withFormatters(
+  LargeBoxLayout,
+  formatNumber,
+  formatNumber,
+  getDefaultDirection
+);
+export const LargeCurrencyBox = withFormatters(
+  LargeBoxLayout,
+  formatCurrency,
+  formatCurrency,
+  getDefaultDirection
+);
 export const LargeCurrencyShorthandBox = withFormatters(
   LargeBoxLayout,
-  formatCurrencyShorthand
+  formatCurrencyShorthand,
+  formatCurrencyShorthand,
+  getDefaultDirection
 );
 export const LargeDateBox = withFormatters(LargeBoxLayout, formatDate);

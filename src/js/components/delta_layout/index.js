@@ -36,12 +36,15 @@ export default class DeltaLayout extends Component {
     formatter,
     formatterForDelta,
     reverseArrow,
-    symbolType
+    symbolType,
+    getDeltaDirection
   ) => {
     const reverseSign = reverseArrow == true ? -1 : 1;
     const direction =
       delta == null
         ? DeltaLayout.DIRECTION_FLAT
+        : getDeltaDirection
+        ? reverseSign * getDeltaDirection(delta)
         : reverseSign * Math.sign(delta);
 
     const valueContent = (
