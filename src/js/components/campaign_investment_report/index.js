@@ -149,25 +149,25 @@ export default class CampaignInvestmentReport extends Component {
     // gin up victoryjs style data from the raw props
     const data = [
       {
-        category: "Reputation Building",
+        category: "Reputation\nBuilding",
         investment: Number(reputation_building),
         percent: div_or_0(reputation_building, investment),
         color: CIR_GREEN1
       },
       {
-        category: "Demand Creation",
+        category: "Demand\nCreation",
         investment: Number(demand_creation),
         percent: div_or_0(demand_creation, investment),
         color: CIR_GREEN2
       },
       {
-        category: "Leasing Enablement",
+        category: "Leasing\nEnablement",
         investment: Number(leasing_enablement),
         percent: div_or_0(leasing_enablement, investment),
         color: CIR_GREEN3
       },
       {
-        category: "Market Intelligence",
+        category: "Market\nIntelligence",
         investment: Number(market_intelligence),
         percent: div_or_0(market_intelligence, investment),
         color: CIR_GREEN4
@@ -323,7 +323,7 @@ export default class CampaignInvestmentReport extends Component {
         name="Campaign Investment"
       >
         <CampaignInvestmentReport.HeadlineNumbers report={this.props.report} />
-        <BoxRow spacing="wide">
+        <BoxRow>
           <CampaignInvestmentReport.Acquisition report={this.props.report} />
           <CampaignInvestmentReport.Retention report={this.props.report} />
         </BoxRow>

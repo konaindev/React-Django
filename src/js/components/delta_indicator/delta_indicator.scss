@@ -1,6 +1,8 @@
 @import "css/base.scss";
 
 .delta-indicator {
+    white-space: nowrap;
+
     &__trend-up {
         color: $delta-indicator-up-color;
     }
@@ -16,6 +18,10 @@
     &__arrow {
         font-size: 80%;
         vertical-align: middle;
+
+        svg {
+            vertical-align: middle;
+        }
     }
 
     &__delta {

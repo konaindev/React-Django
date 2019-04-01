@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import Container from "../container";
 import RemarkablyLogo from "../remarkably_logo";
 
 import "./page_header.scss";
@@ -39,11 +40,11 @@ export default class PageHeader extends Component {
 
   render() {
     return (
-      <div className="page-header-outer">
-        <header className="page-header-inner">
-          {this.renderChildren()}
+      <div className="page-header">
+        <Container className="page-header__inner">
           <RemarkablyLogo />
-        </header>
+          {this.renderChildren()}
+        </Container>
       </div>
     );
   }

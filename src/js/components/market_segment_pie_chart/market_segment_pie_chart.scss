@@ -1,0 +1,34 @@
+@import "css/base.scss";
+
+.market-segment-pie-chart {
+    position: relative;
+
+    &__stats {
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    &__title {
+        color: $title-small-color;
+        font-size: $text-xs;
+        text-transform: uppercase;
+        font-weight: $weight-medium;
+    }
+
+    &__market-size {
+        font-size: $text-3xl;
+        color: $hero-text-color;
+        margin-top: $s4;
+    }
+
+    &__total {
+        margin-top: $s3;
+    }
+}

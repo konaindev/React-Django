@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 import BoxColumn from "../box_column";
 import BoxRow from "../box_row";
-import BoxTable from "../box_table";
 import DeltaLayout from "../delta_layout";
 import ReportSection from "../report_section";
 import WhiskerPlot from "../whisker_plot";
@@ -83,7 +82,7 @@ export default class LeasingPerformanceReport extends Component {
    */
   static DetailNumbers = ({ report: r }) => {
     return (
-      <BoxTable>
+      <div className="lease-performance-report__detail-numbers">
         <BoxRow>
           <BoxColumn>
             <SmallNumberBox
@@ -128,7 +127,7 @@ export default class LeasingPerformanceReport extends Component {
             />
           </BoxColumn>
         </BoxRow>
-      </BoxTable>
+      </div>
     );
   };
 
