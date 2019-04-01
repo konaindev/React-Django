@@ -90,6 +90,17 @@ class Project(models.Model):
         help_text="Modeling JSON data. Must conform to the schema defined in ModelingOptions.ts",
     )
 
+    # A temporary field, for the current sprint, that holds our campaign plan
+    # report data
+    tmp_campaign_plan_json = JSONField(
+        default=None,
+        null=True,
+        blank=True,
+        # Ensure loaded data retains JSON object key ordering
+        load_kwargs={"object_pairs_hook": collections.OrderedDict},
+        help_text="Campaign Plan JSON data. Must conform to the schema defined in CampaignPlan.ts",
+    )
+
     def get_periods(self):
         """
         Return a queryset of all periods, including the baseline.

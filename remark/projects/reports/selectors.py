@@ -8,6 +8,7 @@ from .baseline import BaselineReport
 from .performance import PerformanceReport
 from .market import MarketReport
 from .modeling import ModelingReport
+from .campaign import CampaignPlan
 
 
 class DateRange:
@@ -359,6 +360,7 @@ class ModelingReportSelector(ReportSelectorBase):
         """Return the underlying report."""
         return ModelingReport.for_project(self.project)
 
+
 class CampaignPlanSelector(ReportSelectorBase):
     """
     Report Selector for campaign Plan
@@ -385,15 +387,12 @@ class CampaignPlanSelector(ReportSelectorBase):
         return "Campaign Plan"
 
     def has_report_data(self):
-        """This is a hack"""
-        allow_ids = [
-            "pro_eekgau8mfkbc34iq",
-            "pro_tdglra7vyt7wu311"
-        ]
-        return (self.project.public_id in allow_ids)
+        """Return True if data exists for this type of report."""
+        return CampaignPlan.exists(self.project)
 
     def get_report(self):
-        return BaselineReport.for_baseline(self.project)
+        """Return the underlying report."""
+        return CampaignPlan.for_project(self.project)
 
 
 class ReportLinks:
@@ -447,7 +446,7 @@ class ReportLinks:
             "performance": _many(PerformanceReportSelector.links_for_project(project)),
             "market": _1(MarketReportSelector.links_for_project(project)),
             "modeling": _1(ModelingReportSelector.links_for_project(project)),
-            "campaign_plan": _1(CampaignPlanSelector.links_for_project(project))
+            "campaign_plan": _1(CampaignPlanSelector.links_for_project(project)),
         }
 
         return links
