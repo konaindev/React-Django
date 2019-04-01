@@ -13,6 +13,7 @@ import {
   formatCurrencyShorthand,
   formatDate
 } from "../../utils/formatters";
+import { getDefaultDirection, getPercentageDirection } from "../../utils/misc";
 
 import "./small_box_layout.scss";
 
@@ -56,18 +57,36 @@ class SmallBoxLayout extends Component {
 
 // use this in case NOT to color "x" with blue
 // otherwise use LargeNumberBox with "symbolType" prop
-const SmallMultipleBox = withFormatters(SmallBoxLayout, formatMultiple);
+const SmallMultipleBox = withFormatters(
+  SmallBoxLayout,
+  formatMultiple,
+  formatMultiple,
+  getDefaultDirection
+);
 
 const SmallPercentBox = withFormatters(
   SmallBoxLayout,
   formatPercent,
-  formatDeltaPercent
+  formatDeltaPercent,
+  getPercentageDirection
 );
-const SmallNumberBox = withFormatters(SmallBoxLayout, formatNumber);
-const SmallCurrencyBox = withFormatters(SmallBoxLayout, formatCurrency);
+const SmallNumberBox = withFormatters(
+  SmallBoxLayout,
+  formatNumber,
+  formatNumber,
+  getDefaultDirection
+);
+const SmallCurrencyBox = withFormatters(
+  SmallBoxLayout,
+  formatCurrency,
+  formatCurrency,
+  getDefaultDirection
+);
 const SmallCurrencyShorthandBox = withFormatters(
   SmallBoxLayout,
-  formatCurrencyShorthand
+  formatCurrencyShorthand,
+  formatCurrencyShorthand,
+  getDefaultDirection
 );
 const SmallDateBox = withFormatters(SmallBoxLayout, formatDate);
 
