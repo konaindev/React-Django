@@ -54,7 +54,7 @@ const WHISKERS = {
   ]
 };
 
-const BASELINE_REPORT = {
+export const BASELINE_REPORT = {
   dates: {
     start: "2017-07-24",
     end: "2018-07-23"
@@ -146,7 +146,7 @@ const BASELINE_REPORT = {
   funnel_history
 };
 
-const PERFORMANCE_REPORT = {
+export const PERFORMANCE_REPORT = {
   dates: {
     start: "2018-09-24",
     end: "2018-10-22"

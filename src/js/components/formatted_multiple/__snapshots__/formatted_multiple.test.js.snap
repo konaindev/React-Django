@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormattedMultiple renders correctly 1`] = `
+Array [
+  "123",
+  <span
+    className="formatted-multiple"
+  >
+    x
+  </span>,
+]
+`;

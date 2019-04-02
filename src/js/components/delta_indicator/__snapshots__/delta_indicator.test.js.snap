@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DeltaIndicator renders left indicator correctly 1`] = `
+<div
+  className="delta-indicator"
+>
+  <span
+    className="delta-indicator__arrow delta-indicator__trend-up"
+  >
+    <svg
+      aria-hidden="true"
+      color="inherit"
+      focusable="false"
+      height={5}
+      role="presentation"
+      viewBox="0 0 10 5"
+      width={10}
+    >
+      <path
+        d="M5 0l5 5H0z"
+        fill="currentColor"
+        fillRule="evenodd"
+      />
+    </svg>
+  </span>
+   
+  <span
+    className="delta-indicator__delta"
+  >
+    20pts
+  </span>
+</div>
+`;
+
+exports[`DeltaIndicator renders right indicator correctly 1`] = `
+<div
+  className="delta-indicator"
+>
+  <span
+    className="delta-indicator__delta"
+  >
+    -50pts
+  </span>
+   
+  <span
+    className="delta-indicator__arrow delta-indicator__trend-down"
+  >
+    <svg
+      aria-hidden="true"
+      color="inherit"
+      focusable="false"
+      height={5}
+      role="presentation"
+      viewBox="0 0 10 5"
+      width={10}
+    >
+      <path
+        d="M5 5l5-5H0z"
+        fill="currentColor"
+        fillRule="evenodd"
+      />
+    </svg>
+  </span>
+</div>
+`;

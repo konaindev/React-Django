@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 
 import MarketSizeMap from "./index";
 
-const props_radius = {
+export const props_radius = {
   center: {
     type: "Point",
     coordinates: [45.52, -122.68194444]
@@ -13,7 +13,7 @@ const props_radius = {
   units: "mi" // both miles and kilometers should be supported
 };
 
-const props_zips = {
+export const props_zips = {
   zip_codes: [
     {
       zip: "97201",

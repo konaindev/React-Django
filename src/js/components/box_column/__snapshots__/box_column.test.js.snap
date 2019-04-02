@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BoxColumn renders correctly 1`] = `
+Array [
+  <div
+    className="box-column__child-wrapper"
+  >
+    <div>
+      1
+    </div>
+  </div>,
+  <div
+    className="box-column__child-wrapper"
+  >
+    <div>
+      2
+    </div>
+  </div>,
+  <div
+    className="box-column__child-wrapper"
+  >
+    <div>
+      3
+    </div>
+  </div>,
+]
+`;

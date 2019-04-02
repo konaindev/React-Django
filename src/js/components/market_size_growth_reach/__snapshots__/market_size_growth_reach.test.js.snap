@@ -1,0 +1,223 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MarketSizeGrowthReach renders correctly 1`] = `
+<div
+  className="panel panel--default market-size-growth-reach"
+>
+  <div
+    className="market-size-growth-reach__table"
+  >
+    <div
+      className="table__row table__row--head"
+    >
+      <span>
+        Target Segment
+      </span>
+      <span>
+        Est. Market Size
+      </span>
+      <span>
+        Unique Site Visitors
+      </span>
+      <span>
+        Est. Market Growth
+      </span>
+      <span>
+        Est. 
+        2022
+         Market Size
+      </span>
+    </div>
+    <div
+      className="table__row table__row--body"
+    >
+      <span>
+        Ages 
+        18 - 24
+      </span>
+      <span>
+        2,794
+      </span>
+      <span>
+        3,561
+      </span>
+      <span>
+        -1.1%
+      </span>
+      <span>
+        2,703
+      </span>
+    </div>
+    <div
+      className="table__row table__row--body"
+    >
+      <span>
+        Ages 
+        25 - 34
+      </span>
+      <span>
+        9,376
+      </span>
+      <span>
+        5,949
+      </span>
+      <span>
+        3.7%
+      </span>
+      <span>
+        10,456
+      </span>
+    </div>
+    <div
+      className="table__row table__row--body"
+    >
+      <span>
+        Ages 
+        35 - 44
+      </span>
+      <span>
+        3,670
+      </span>
+      <span>
+        4,226
+      </span>
+      <span>
+        4.7%
+      </span>
+      <span>
+        4,212
+      </span>
+    </div>
+    <div
+      className="table__row table__row--body"
+    >
+      <span>
+        Ages 
+        45 - 54
+      </span>
+      <span>
+        3,621
+      </span>
+      <span>
+        2,973
+      </span>
+      <span>
+        0.5%
+      </span>
+      <span>
+        3,676
+      </span>
+    </div>
+    <div
+      className="table__row table__row--body"
+    >
+      <span>
+        Ages 
+        55 - 64
+      </span>
+      <span>
+        3,567
+      </span>
+      <span>
+        2,253
+      </span>
+      <span>
+        2.7%
+      </span>
+      <span>
+        3,864
+      </span>
+    </div>
+    <div
+      className="table__row table__row--body"
+    >
+      <span>
+        Ages 
+        65+
+      </span>
+      <span>
+        7,312
+      </span>
+      <span>
+        659
+      </span>
+      <span>
+        3.97%
+      </span>
+      <span>
+        8,218
+      </span>
+    </div>
+  </div>
+  <div
+    className="market-size-growth-reach__summary"
+  >
+    <div
+      className="summary__box"
+    >
+      <span>
+        Average
+      </span>
+      <span>
+        Tenant Age
+      </span>
+      <span>
+        34
+      </span>
+    </div>
+    <div
+      className="summary__box"
+    >
+      <span>
+        Est. Total
+      </span>
+      <span>
+        Market Size
+      </span>
+      <span>
+        30,340
+      </span>
+    </div>
+    <div
+      className="summary__box"
+    >
+      <span>
+        Total Unique
+      </span>
+      <span>
+        Site Visitors
+      </span>
+      <span>
+        19,621
+      </span>
+    </div>
+    <div
+      className="summary__box"
+    >
+      <span>
+        Average
+      </span>
+      <span>
+        Market Growth
+      </span>
+      <span>
+        2.4%
+      </span>
+    </div>
+    <div
+      className="summary__box"
+    >
+      <span>
+        Est. Total 
+        2022
+      </span>
+      <span>
+        Market Size
+      </span>
+      <span>
+        33,129
+      </span>
+    </div>
+  </div>
+</div>
+`;
