@@ -92,8 +92,14 @@ In production and staging, we use django-storages and Amazon S3 to store uploade
 
 - `MEDIA_URL`: The public base URL that corresponds to the `MEDIA_ROOT`. This is used by Django's storages system. (A `Storage` is a class that maps a filesystem, potentially a remote one, to a URL; see [here for details](https://davepeck.org/2015/02/06/django-storage-minutia/).) In the case of production, this could either be the public S3 URL (like https://s3.amazonaws.com/production-storage.remarkably.io/) or, if we like, we can place a Cloudfront distribution on top of it later; in that case, `MEDIA_URL` should refer to the distribution.
 
-What about for development?
+### What about media storage for local development?
 
-1. It's totally fine, and possible, to use a private `S3` bucket.
+1. You can create your own S3 bucket if you like. (Mine is called `dave-dev-storage.remarkably.io`) You probably should create a new IAM user and group+policy to give you just read/write access to that bucket.
 
-2. It's totally fine, and possible, to use Django's default `django.core.files.storage.FileSystemStorage`. You can configure this in your `.env` as desired.
+2. You can just store stuff on the local filesystem. Update your `.env` as follows:
+
+- `DEFAULT_FILE_STORAGE=django.core.files.storage.FileSystemStorage`
+- `MEDIA_ROOT=/tmp/some-directory-you-create`
+- `MEDIA_URL=/media/`
+
+This will only work when `DEBUG=YES`.
