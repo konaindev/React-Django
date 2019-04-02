@@ -216,8 +216,9 @@ def fetch_household_type(zipcode):
     for x in range(len(gs)):
         if x >= 7:
             txt = gs[x].title.text
-            value = float(txt.replace("%", ""))
-            result.append(value / 100.0)
+            if txt.find("%") > -1:
+                value = float(txt.replace("%", "").replace(",", ""))
+                result.append(value / 100.0)
     return result
 
 
@@ -239,7 +240,6 @@ def fetch_household_income_distribution(zipcode):
     svg = fetch_svg(
         STAT_ATLAS_HOUSEHOLD_INCOME_URL, zipcode, "figure/household-income-distribution"
     )
-    print(svg)
     gs = svg.g.find_all("g")
     result = []
     for x in range(len(gs)):
@@ -252,6 +252,11 @@ def fetch_household_income_distribution(zipcode):
 
 
 def write_labeled_data(ws, title, labels, data, start_row):
+    if len(data) != len(labels):
+        print(labels)
+        print(data)
+        raise Exception(f"Data length and label length is not equal.")
+
     ws.cell(column=1, row=start_row, value=title)
     for x in range(len(data)):
         actual_row = x + 1 + start_row
@@ -316,6 +321,14 @@ INCOME_DIST_LABELS = [
     "$15-20k",
     "$10-15k",
     "< $10k",
+]
+AGE_SEGMENTS = [
+    "18-24",
+    "25-34",
+    "35-44",
+    "45-54",
+    "55-64",
+    "65+"
 ]
 
 ZIP_DATA_SHEET_NAME = "Zip Data {}"
@@ -453,6 +466,44 @@ def fill_computation_tab(worksheet, zip_codes, income_groups):
     worksheet.cell(column=2, row=25, value=final_formula)
 
 
+def write_labeled_property(worksheet, search_value, write_value, search_column=1, write_column=2):
+    for x in range(1, 500):
+        cell = worksheet.cell(column=search_column, row=x)
+        if cell.value == search_value:
+            return worksheet.cell(column=write_column, row=x, value=write_value)
+    raise Exception("Did not find required label for value.")
+
+
+def write_rti_info(worksheet, rti_income_groups, rti_rental_rates, rti_target):
+    for x in range(len(rti_income_groups)):
+        worksheet.cell(column=2+x, row=26, value=rti_income_groups[x])
+    for y in range(len(rti_rental_rates)):
+        worksheet.cell(column=1, row=27+y, value=rti_rental_rates[y])
+    write_labeled_property(worksheet, "Target RTI", rti_target)
+
+def write_tam_type(worksheet, lat, lon, tam_type, tam_data):
+    if tam_type not in ["zipcodes", "radius"]:
+        raise Exception("Tam Type is invalid")
+    worksheet.cell(column=2, row=4, value=tam_type)
+    if tam_type == "zipcodes":
+        for x in range(len(tam_data)):
+            worksheet.cell(column=3+x, row=4, value=tam_data[x])
+    elif tam_type == "radius":
+        worksheet.cell(column=3, row=4, value=tam_data)
+    write_labeled_property(worksheet, "Coordinates", lat)
+    write_labeled_property(worksheet, "Coordinates", lon, write_column=3)
+
+
+def write_output_properties(worksheet, loc, max_rent, avg_rent, min_rent, usvs):
+    write_labeled_property(worksheet, "City, State", loc)
+    write_labeled_property(worksheet, "Maximum Rent", max_rent)
+    write_labeled_property(worksheet, "Average Rent", avg_rent)
+    write_labeled_property(worksheet, "Minimum Rent", min_rent)
+    # Age Segment USVS
+    for x in range(len(AGE_SEGMENTS)):
+        write_labeled_property(worksheet, AGE_SEGMENTS[x], usvs[x], write_column=3)
+
+
 # Meridian
 # Zip Codes: 84101,84111,84102,84112,84115,84105
 # Income Groups: 75000, 50000, 35000
@@ -482,7 +533,7 @@ def build_tam_data_for_zip_codes(workbook, zip_codes, income_groups):
     # fetch_household_income_distribution('85013')
 
 
-def build_tam_data_for_location(workbook, location, radius, income_groups):
+def build_tam_data_for_location(workbook, location, radius, income_groups, rti_income_groups, rti_rental_rates):
     zip_codes = fetch_zip_codes(
         location[0], location[1], radius * MILES_KILOMETERS_RATIO
     )
@@ -490,8 +541,9 @@ def build_tam_data_for_location(workbook, location, radius, income_groups):
 
 
 @click.command()
-@click.option("--lat", type=float, help="The latitude.")
-@click.option("--lon", type=float, help="The longitude.")
+@click.option("--lat", type=float, required=True, help="The latitude.")
+@click.option("--lon", type=float, required=True, help="The longitude.")
+@click.option("--loc", type=str, required=True, help="The City and State of the location in {city},{state} format")
 @click.option("-r", "--radius", type=float, help="A radius in miles.")
 @click.option(
     "-z", "--zip", "zip_codes", type=int, multiple=True, help="A list of ZIP codes."
@@ -504,6 +556,70 @@ def build_tam_data_for_location(workbook, location, radius, income_groups):
     multiple=True,
     required=True,
     help="A list of income group codes.",
+)
+@click.option(
+    "-g",
+    "--rti-income",
+    "rti_income_groups",
+    type=int,
+    multiple=True,
+    required=True,
+    help="A list of RTI income limits"
+)
+@click.option(
+    "-m",
+    "--rti-rent",
+    "rti_rental_rates",
+    type=int,
+    multiple=True,
+    required=True,
+    help="A list of RTI rental rates"
+)
+@click.option(
+    "-e",
+    "--rti-target",
+    "rti_target",
+    type=float,
+    help="RTI target percent."
+)
+@click.option(
+    "-a",
+    "--age",
+    type=int,
+    required=True,
+    help="Average Tenant Age"
+)
+@click.option(
+    "-b",
+    "--max-rent",
+    "max_rent",
+    type=int,
+    required=True,
+    help="Maximum Rent"
+)
+@click.option(
+    "-c",
+    "--avg-rent",
+    "avg_rent",
+    type=int,
+    required=True,
+    help="Average Rent"
+)
+@click.option(
+    "-d",
+    "--min-rent",
+    "min_rent",
+    type=int,
+    required=True,
+    help="Minimum Rent"
+)
+@click.option(
+    "-u",
+    "--usvs",
+    type=int,
+    multiple=True,
+    required=True,
+    help="Unique Site Visitors. There must be 6 entries."
 )
 @click.option(
     "-t",
@@ -519,7 +635,21 @@ def build_tam_data_for_location(workbook, location, radius, income_groups):
     type=click.Path(),
     help="The output XLS filename",
 )
-def build_tam_data(zip_codes, lat, lon, radius, income_groups, templatefile, outfile):
+def build_tam_data(zip_codes, lat, lon, loc, radius, income_groups, rti_income_groups, rti_rental_rates, rti_target, age, max_rent, avg_rent, min_rent, usvs, templatefile, outfile):
+
+    # Must have 4+ rental rates
+    if len(rti_rental_rates) < 4:
+        raise Exception("Must have 4 or more RTI rental rates")
+
+    if len(rti_income_groups) < 4:
+        raise Exception("Must have 4 or more RTI income groups")
+
+    if len(usvs) != 6:
+        raise Exception("There must be six USV entries")
+
+    if rti_target is None:
+        rti_target = 0.3333
+
     # Load workbook
     workbook = load_workbook(templatefile)
 
@@ -529,12 +659,18 @@ def build_tam_data(zip_codes, lat, lon, radius, income_groups, templatefile, out
     # Build the data into the workbook
     if zip_codes:
         build_tam_data_for_zip_codes(workbook, zip_codes, income_groups)
+        write_tam_type(workbook["Output"], lat, lon, "zipcodes", zip_codes)
     elif lat and lon and radius:
         build_tam_data_for_location(workbook, (lat, lon), radius, income_groups)
+        write_tam_type(workbook["Output"], lat, lon, "radius", radius)
     else:
         raise click.UsageError(
             "You must specify either zip_codes *or* a location and radius."
         )
+
+    # Write Output tab Data
+    write_rti_info(workbook["Output"], rti_income_groups, rti_rental_rates, rti_target)
+    write_output_properties(workbook["Output"], loc, max_rent, avg_rent, min_rent, usvs)
 
     # Save the resulting workbook
     workbook.save(filename=outfile)
