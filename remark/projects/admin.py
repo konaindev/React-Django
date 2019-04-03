@@ -49,6 +49,7 @@ class ProjectAdmin(admin.ModelAdmin):
         "number_of_periods",
         "baseline_start",
         "baseline_end",
+        "average_tenant_age",
     ]
 
     def number_of_periods(self, obj):
