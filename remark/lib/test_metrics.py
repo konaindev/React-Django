@@ -502,6 +502,12 @@ class DateSequenceTestCase(TestCase):
         self.assertEqual(len(dates), 2)
         self.assertEqual(dates, [datetime.date(year=2019, month=1, day=8), datetime.date(year=2019, month=1, day=11)])
 
+    def test_for_time_delta_precise_end(self):
+        dates = DateSequence.for_time_delta(DATE_B, DATE_BC, datetime.timedelta(days=3), precise_end=True)
+        dates = list(dates)
+        self.assertEqual(len(dates), 3)
+        self.assertEqual(dates, [datetime.date(year=2019, month=1, day=8), datetime.date(year=2019, month=1, day=11), datetime.date(year=2019, month=1, day=12)])
+
     def test_for_weeks(self):
         dates = DateSequence.for_weeks(DATE_B, DATE_D)
         dates = list(dates)
@@ -513,7 +519,13 @@ class DateSequenceTestCase(TestCase):
         dates = list(dates)
         self.assertEqual(len(dates), 2)
         self.assertEqual(dates, [DATE_B, DATE_C])
-    
+
+    def test_for_weeks_precise_end(self):
+        dates = DateSequence.for_weeks(DATE_B, DATE_DE, precise_end=True)
+        dates = list(dates)
+        self.assertEqual(len(dates), 4)
+        self.assertEqual(dates, [DATE_B, DATE_C, DATE_D, DATE_DE])
+
     def test_for_weeks_weekday(self):
         dates = DateSequence.for_weeks(DATE_B, DATE_C, weekday=Weekday.SUNDAY)
         dates = list(dates)
@@ -526,6 +538,12 @@ class DateSequenceTestCase(TestCase):
         self.assertEqual(len(dates), 2)
         self.assertEqual(dates, [datetime.date(year=2019, month=1, day=13), datetime.date(year=2019, month=1, day=20)])
 
+    def test_for_weeks_weekday_precise_start(self):
+        dates = DateSequence.for_weeks(DATE_B, DATE_D, weekday=Weekday.SUNDAY, precise_start=True)
+        dates = list(dates)
+        self.assertEqual(len(dates), 4)
+        self.assertEqual(dates, [DATE_B, datetime.date(year=2019, month=1, day=13), datetime.date(year=2019, month=1, day=20), datetime.date(year=2019, month=1, day=27)])
+
     def test_for_calendar_months(self):
         dates = DateSequence.for_calendar_months(DATE_B, DATE_F)
         dates = list(dates)
@@ -537,13 +555,24 @@ class DateSequenceTestCase(TestCase):
         dates = list(dates)
         self.assertEqual(len(dates), 2)
         self.assertEqual(dates, [datetime.date(year=2019, month=1, day=1), datetime.date(year=2019, month=2, day=1)])
-    
+
+    def test_for_calendar_months_precise_end(self):
+        dates = DateSequence.for_calendar_months(DATE_B, DATE_F, precise_end=True)
+        dates = list(dates)
+        self.assertEqual(len(dates), 3)
+        self.assertEqual(dates, [datetime.date(year=2019, month=1, day=1), datetime.date(year=2019, month=2, day=1), datetime.date(year=2019, month=2, day=3)])
+
     def test_for_calendar_months_no_before_start(self):
         dates = DateSequence.for_calendar_months(DATE_B, DATE_F, before_start=False)
         dates = list(dates)
         self.assertEqual(len(dates), 2)
         self.assertEqual(dates, [datetime.date(year=2019, month=2, day=1), datetime.date(year=2019, month=3, day=1)])
 
+    def test_for_calendar_months_precise_start(self):
+        dates = DateSequence.for_calendar_months(DATE_B, DATE_F, precise_start=True)
+        dates = list(dates)
+        self.assertEqual(len(dates), 3)
+        self.assertEqual(dates, [datetime.date(year=2019, month=1, day=8), datetime.date(year=2019, month=2, day=1), datetime.date(year=2019, month=3, day=1)])
 
 class MultiPeriodTestCase(TestCase):
     """Test basic functionality in the MultiPeriodBase implementation."""
