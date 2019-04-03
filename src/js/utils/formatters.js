@@ -142,7 +142,7 @@ export const formatDate = (value, year = true) => {
  * formatDateWithTokens("2018-12-17", "MMM D, YYYY"); // Dec 17, 2018
  */
 export const formatDateWithTokens = (v, tokens) => {
-  return dateFnformat(new dfParse(v).toISOString(), tokens);
+  return dateFnformat(v, tokens);
 };
 
 /**

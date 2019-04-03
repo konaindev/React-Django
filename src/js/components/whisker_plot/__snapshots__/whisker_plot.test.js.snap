@@ -1,190 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`WhiskerPlot renders upward plot correctly 1`] = `
-<div
-  className="VictoryContainer"
-  style={
-    Object {
-      "height": "100%",
-      "pointerEvents": "none",
-      "position": "relative",
-      "touchAction": "none",
-      "width": "100%",
-    }
-  }
->
-  <svg
-    aria-labelledby="victory-container-1-title victory-container-1-desc"
-    height={300}
-    role="img"
-    style={
-      Object {
-        "height": "100%",
-        "pointerEvents": "all",
-        "width": "100%",
-      }
-    }
-    viewBox="0 0 450 300"
-    width={450}
-  >
-    <defs>
-      <linearGradient
-        id="1a54f"
-        x1="0%"
-        x2="0%"
-        y1="0%"
-        y2="100%"
-      >
-        <stop
-          offset="0%"
-          stopColor="#65FF00"
-          stopOpacity={1}
-        />
-        <stop
-          offset="19%"
-          stopColor="#65FF00"
-          stopOpacity={0.738}
-        />
-        <stop
-          offset="34%"
-          stopColor="#65FF00"
-          stopOpacity={0.541}
-        />
-        <stop
-          offset="47%"
-          stopColor="#65FF00"
-          stopOpacity={0.382}
-        />
-        <stop
-          offset="57%"
-          stopColor="#65FF00"
-          stopOpacity={0.278}
-        />
-        <stop
-          offset="65%"
-          stopColor="#65FF00"
-          stopOpacity={0.194}
-        />
-        <stop
-          offset="73%"
-          stopColor="#65FF00"
-          stopOpacity={0.126}
-        />
-        <stop
-          offset="80%"
-          stopColor="#65FF00"
-          stopOpacity={0.075}
-        />
-        <stop
-          offset="86%"
-          stopColor="#65FF00"
-          stopOpacity={0.042}
-        />
-        <stop
-          offset="91%"
-          stopColor="#65FF00"
-          stopOpacity={0.021}
-        />
-        <stop
-          offset="95%"
-          stopColor="#65FF00"
-          stopOpacity={0.008}
-        />
-        <stop
-          offset="98%"
-          stopColor="#65FF00"
-          stopOpacity={0.002}
-        />
-        <stop
-          offset="100%"
-          stopColor="#65FF00"
-          stopOpacity={0}
-        />
-      </linearGradient>
-    </defs>
-    <g
-      clipPath="url(#victory-clip-2)"
-      style={
-        Object {
-          "height": "100%",
-          "width": "100%",
-        }
-      }
-    >
-      <defs>
-        <clipPath
-          id="victory-clip-2"
-        >
-          <rect
-            height={300}
-            role="presentation"
-            shapeRendering="auto"
-            vectorEffect="non-scaling-stroke"
-            width={450}
-            x={0}
-            y={0}
-          />
-        </clipPath>
-      </defs>
-      <g>
-        <path
-          d="M0,240L9.375,230C18.75,220,37.5,200,56.25,180C75,160,93.75,140,112.5,120C131.25,100,150,80,168.75,60C187.5,40,206.25,20,225,20C243.75,20,262.5,40,281.25,60C300,80,318.75,100,337.5,110C356.25,120,375,120,393.75,140C412.5,160,431.25,200,440.625,220L450,240L450,300L440.625,300C431.25,300,412.5,300,393.75,300C375,300,356.25,300,337.5,300C318.75,300,300,300,281.25,300C262.5,300,243.75,300,225,300C206.25,300,187.5,300,168.75,300C150,300,131.25,300,112.5,300C93.75,300,75,300,56.25,300C37.5,300,18.75,300,9.375,300L0,300Z"
-          role="presentation"
-          shapeRendering="auto"
-          style={
-            Object {
-              "fill": "url(#1a54f)",
-              "stroke": "none",
-              "strokeWidth": "7px",
-              "width": 4,
-            }
-          }
-        />
-        <path
-          d="M0,240L9.375,230C18.75,220,37.5,200,56.25,180C75,160,93.75,140,112.5,120C131.25,100,150,80,168.75,60C187.5,40,206.25,20,225,20C243.75,20,262.5,40,281.25,60C300,80,318.75,100,337.5,110C356.25,120,375,120,393.75,140C412.5,160,431.25,200,440.625,220L450,240"
-          role="presentation"
-          shapeRendering="auto"
-          style={
-            Object {
-              "fill": "none",
-              "stroke": "#65FF00",
-              "strokeWidth": "7px",
-              "width": 4,
-            }
-          }
-        />
-      </g>
-    </g>
-  </svg>
-  <div
-    style={
-      Object {
-        "height": "100%",
-        "left": 0,
-        "position": "absolute",
-        "top": 0,
-        "width": "100%",
-        "zIndex": 99,
-      }
-    }
-  >
-    <svg
-      height={300}
-      style={
-        Object {
-          "height": "100%",
-          "overflow": "visible",
-          "width": "100%",
-        }
-      }
-      viewBox="0 0 450 300"
-      width={450}
-    />
-  </div>
-</div>
-`;
-
-exports[`WhiskerPlot renders upward plot correctly 2`] = `
+exports[`WhiskerPlot renders downward plot correctly 1`] = `
 <div
   className="VictoryContainer"
   style={
@@ -213,7 +29,7 @@ exports[`WhiskerPlot renders upward plot correctly 2`] = `
   >
     <defs>
       <linearGradient
-        id="19ba5"
+        id="-49270000"
         x1="0%"
         x2="0%"
         y1="0%"
@@ -317,7 +133,7 @@ exports[`WhiskerPlot renders upward plot correctly 2`] = `
           shapeRendering="auto"
           style={
             Object {
-              "fill": "url(#19ba5)",
+              "fill": "url(#-49270000)",
               "stroke": "none",
               "strokeWidth": "7px",
               "width": 4,
@@ -332,6 +148,190 @@ exports[`WhiskerPlot renders upward plot correctly 2`] = `
             Object {
               "fill": "none",
               "stroke": "#FF7632",
+              "strokeWidth": "7px",
+              "width": 4,
+            }
+          }
+        />
+      </g>
+    </g>
+  </svg>
+  <div
+    style={
+      Object {
+        "height": "100%",
+        "left": 0,
+        "position": "absolute",
+        "top": 0,
+        "width": "100%",
+        "zIndex": 99,
+      }
+    }
+  >
+    <svg
+      height={300}
+      style={
+        Object {
+          "height": "100%",
+          "overflow": "visible",
+          "width": "100%",
+        }
+      }
+      viewBox="0 0 450 300"
+      width={450}
+    />
+  </div>
+</div>
+`;
+
+exports[`WhiskerPlot renders upward plot correctly 1`] = `
+<div
+  className="VictoryContainer"
+  style={
+    Object {
+      "height": "100%",
+      "pointerEvents": "none",
+      "position": "relative",
+      "touchAction": "none",
+      "width": "100%",
+    }
+  }
+>
+  <svg
+    aria-labelledby="victory-container-1-title victory-container-1-desc"
+    height={300}
+    role="img"
+    style={
+      Object {
+        "height": "100%",
+        "pointerEvents": "all",
+        "width": "100%",
+      }
+    }
+    viewBox="0 0 450 300"
+    width={450}
+  >
+    <defs>
+      <linearGradient
+        id="-49270000"
+        x1="0%"
+        x2="0%"
+        y1="0%"
+        y2="100%"
+      >
+        <stop
+          offset="0%"
+          stopColor="#65FF00"
+          stopOpacity={1}
+        />
+        <stop
+          offset="19%"
+          stopColor="#65FF00"
+          stopOpacity={0.738}
+        />
+        <stop
+          offset="34%"
+          stopColor="#65FF00"
+          stopOpacity={0.541}
+        />
+        <stop
+          offset="47%"
+          stopColor="#65FF00"
+          stopOpacity={0.382}
+        />
+        <stop
+          offset="57%"
+          stopColor="#65FF00"
+          stopOpacity={0.278}
+        />
+        <stop
+          offset="65%"
+          stopColor="#65FF00"
+          stopOpacity={0.194}
+        />
+        <stop
+          offset="73%"
+          stopColor="#65FF00"
+          stopOpacity={0.126}
+        />
+        <stop
+          offset="80%"
+          stopColor="#65FF00"
+          stopOpacity={0.075}
+        />
+        <stop
+          offset="86%"
+          stopColor="#65FF00"
+          stopOpacity={0.042}
+        />
+        <stop
+          offset="91%"
+          stopColor="#65FF00"
+          stopOpacity={0.021}
+        />
+        <stop
+          offset="95%"
+          stopColor="#65FF00"
+          stopOpacity={0.008}
+        />
+        <stop
+          offset="98%"
+          stopColor="#65FF00"
+          stopOpacity={0.002}
+        />
+        <stop
+          offset="100%"
+          stopColor="#65FF00"
+          stopOpacity={0}
+        />
+      </linearGradient>
+    </defs>
+    <g
+      clipPath="url(#victory-clip-2)"
+      style={
+        Object {
+          "height": "100%",
+          "width": "100%",
+        }
+      }
+    >
+      <defs>
+        <clipPath
+          id="victory-clip-2"
+        >
+          <rect
+            height={300}
+            role="presentation"
+            shapeRendering="auto"
+            vectorEffect="non-scaling-stroke"
+            width={450}
+            x={0}
+            y={0}
+          />
+        </clipPath>
+      </defs>
+      <g>
+        <path
+          d="M0,240L9.375,230C18.75,220,37.5,200,56.25,180C75,160,93.75,140,112.5,120C131.25,100,150,80,168.75,60C187.5,40,206.25,20,225,20C243.75,20,262.5,40,281.25,60C300,80,318.75,100,337.5,110C356.25,120,375,120,393.75,140C412.5,160,431.25,200,440.625,220L450,240L450,300L440.625,300C431.25,300,412.5,300,393.75,300C375,300,356.25,300,337.5,300C318.75,300,300,300,281.25,300C262.5,300,243.75,300,225,300C206.25,300,187.5,300,168.75,300C150,300,131.25,300,112.5,300C93.75,300,75,300,56.25,300C37.5,300,18.75,300,9.375,300L0,300Z"
+          role="presentation"
+          shapeRendering="auto"
+          style={
+            Object {
+              "fill": "url(#-49270000)",
+              "stroke": "none",
+              "strokeWidth": "7px",
+              "width": 4,
+            }
+          }
+        />
+        <path
+          d="M0,240L9.375,230C18.75,220,37.5,200,56.25,180C75,160,93.75,140,112.5,120C131.25,100,150,80,168.75,60C187.5,40,206.25,20,225,20C243.75,20,262.5,40,281.25,60C300,80,318.75,100,337.5,110C356.25,120,375,120,393.75,140C412.5,160,431.25,200,440.625,220L450,240"
+          role="presentation"
+          shapeRendering="auto"
+          style={
+            Object {
+              "fill": "none",
+              "stroke": "#65FF00",
               "strokeWidth": "7px",
               "width": 4,
             }
