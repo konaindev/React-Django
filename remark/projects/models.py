@@ -60,10 +60,7 @@ class Project(models.Model):
         default="",
         upload_to=building_image_media_path,
         help_text="""A full-resolution user-supplied image of the building.<br/>Resized variants (180x180, 76x76) will also be created on Amazon S3.""",
-        variations={
-            "regular": (180, 180, True),
-            "thumbnail": (76, 76, True),
-        }
+        variations={"regular": (180, 180, True), "thumbnail": (76, 76, True)},
     )
 
     baseline_start = models.DateField(
@@ -105,6 +102,13 @@ class Project(models.Model):
         # Ensure loaded data retains JSON object key ordering
         load_kwargs={"object_pairs_hook": collections.OrderedDict},
         help_text="Campaign Plan JSON data. Must conform to the schema defined in CampaignPlan.ts",
+    )
+
+    average_tenant_age = models.FloatField(
+        null=True,
+        blank=True,
+        default=None,
+        help_text="The average tenant age for this project/property.",
     )
 
     def get_periods(self):
@@ -153,11 +157,11 @@ class Project(models.Model):
         """
         Return building image's S3 resource urls for all variants
         """
-        if (self.building_image):
+        if self.building_image:
             return dict(
                 original=self.building_image.url,
                 regular=self.building_image.regular.url,
-                thumbnail=self.building_image.thumbnail.url
+                thumbnail=self.building_image.thumbnail.url,
             )
         else:
             return None
