@@ -9,11 +9,12 @@ def migrate_rents(apps, schema_editor):
     Project = apps.get_model("projects", "Project")
     for project in Project.objects.all():
         first_period = project.periods.first()
-        project.average_monthly_rent = (
-            first_period.monthly_average_rent
-        )  # INTENTIONAL name change
-        project.lowest_monthly_rent = first_period.lowest_monthly_rent
-        project.save()
+        if first_period is not None:
+            project.average_monthly_rent = (
+                first_period.monthly_average_rent
+            )  # INTENTIONAL name change
+            project.lowest_monthly_rent = first_period.lowest_monthly_rent
+            project.save()
 
 
 class Migration(migrations.Migration):
