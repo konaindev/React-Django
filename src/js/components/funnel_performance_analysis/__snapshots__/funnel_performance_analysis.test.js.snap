@@ -121,25 +121,6 @@ exports[`FunnelPerformanceAnalysis renders default correctly 1`] = `
               <div
                 className=""
               >
-                Jul
-              </div>
-            </div>
-            <div
-              className="rt-th"
-              onClick={[Function]}
-              role="columnheader"
-              style={
-                Object {
-                  "flex": "84 0 auto",
-                  "maxWidth": null,
-                  "width": "84px",
-                }
-              }
-              tabIndex="-1"
-            >
-              <div
-                className=""
-              >
                 Aug
               </div>
             </div>
@@ -331,6 +312,25 @@ exports[`FunnelPerformanceAnalysis renders default correctly 1`] = `
                 className=""
               >
                 Jun
+              </div>
+            </div>
+            <div
+              className="rt-th"
+              onClick={[Function]}
+              role="columnheader"
+              style={
+                Object {
+                  "flex": "84 0 auto",
+                  "maxWidth": null,
+                  "width": "84px",
+                }
+              }
+              tabIndex="-1"
+            >
+              <div
+                className=""
+              >
+                Jul
               </div>
             </div>
           </div>
@@ -2990,25 +2990,6 @@ exports[`FunnelPerformanceAnalysis renders default correctly 1`] = `
               <div
                 className=""
               >
-                Jul
-              </div>
-            </div>
-            <div
-              className="rt-th"
-              onClick={[Function]}
-              role="columnheader"
-              style={
-                Object {
-                  "flex": "84 0 auto",
-                  "maxWidth": null,
-                  "width": "84px",
-                }
-              }
-              tabIndex="-1"
-            >
-              <div
-                className=""
-              >
                 Aug
               </div>
             </div>
@@ -3200,6 +3181,25 @@ exports[`FunnelPerformanceAnalysis renders default correctly 1`] = `
                 className=""
               >
                 Jun
+              </div>
+            </div>
+            <div
+              className="rt-th"
+              onClick={[Function]}
+              role="columnheader"
+              style={
+                Object {
+                  "flex": "84 0 auto",
+                  "maxWidth": null,
+                  "width": "84px",
+                }
+              }
+              tabIndex="-1"
+            >
+              <div
+                className=""
+              >
+                Jul
               </div>
             </div>
           </div>

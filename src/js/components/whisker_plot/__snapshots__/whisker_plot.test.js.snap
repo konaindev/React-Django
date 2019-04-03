@@ -29,7 +29,7 @@ exports[`WhiskerPlot renders upward plot correctly 1`] = `
   >
     <defs>
       <linearGradient
-        id="1f15c"
+        id="1a54f"
         x1="0%"
         x2="0%"
         y1="0%"
@@ -133,7 +133,7 @@ exports[`WhiskerPlot renders upward plot correctly 1`] = `
           shapeRendering="auto"
           style={
             Object {
-              "fill": "url(#1f15c)",
+              "fill": "url(#1a54f)",
               "stroke": "none",
               "strokeWidth": "7px",
               "width": 4,
@@ -213,7 +213,7 @@ exports[`WhiskerPlot renders upward plot correctly 2`] = `
   >
     <defs>
       <linearGradient
-        id="19d37"
+        id="19ba5"
         x1="0%"
         x2="0%"
         y1="0%"
@@ -317,7 +317,7 @@ exports[`WhiskerPlot renders upward plot correctly 2`] = `
           shapeRendering="auto"
           style={
             Object {
-              "fill": "url(#19d37)",
+              "fill": "url(#19ba5)",
               "stroke": "none",
               "strokeWidth": "7px",
               "width": 4,
