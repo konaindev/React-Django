@@ -220,8 +220,10 @@ class Project(models.Model):
 
 
 class SpreadsheetManager(models.Manager):
-    def latest_for_kind(self, kind):
-        return self.filter(kind=kind).order_by("-created").first()
+    def latest_for_kind(self, kind, subkind=None):
+        return (
+            self.filter(kind=kind, subkind=subkind or "").order_by("-created").first()
+        )
 
 
 class Spreadsheet(models.Model):
@@ -230,17 +232,15 @@ class Spreadsheet(models.Model):
     """
 
     KIND_PERIODS = "periods"  # Baseline and perf periods spreadsheet
-    KIND_MODELING_RUN_RATE = "modeling-run-rate"  # Modeling report (run rate)
-    KIND_MODELING_SCHEDULE = "modeling-schedule"  # Modeling report (schedule driven)
-    KIND_MODELING_INVESTMENT = "modeling-investment"  # Modeling report (investment)
+    KIND_MODELING = "modeling"  # Modeling report (any kind)
     KIND_MARKET = "market"  # TAM
+    KIND_CAMPAIGN = "campaign"  # Campaign Plan
 
     SPREADSHEET_KINDS = [
-        (KIND_PERIODS, "periods"),
-        (KIND_MODELING_RUN_RATE, "modeling (run rate)"),
-        (KIND_MODELING_SCHEDULE, "modeling (schedule driven)"),
-        (KIND_MODELING_INVESTMENT, "modeling (investment driven)"),
-        (KIND_MARKET, "market"),
+        (KIND_PERIODS, "Periods"),
+        (KIND_MODELING, "Modeling (must provide a subkind, too)"),
+        (KIND_MARKET, "Market Report"),
+        (KIND_CAMPAIGN, "Campaign Plan"),
     ]
 
     project = models.ForeignKey(
@@ -250,6 +250,7 @@ class Spreadsheet(models.Model):
     created = models.DateTimeField(
         auto_now_add=True,
         db_index=True,
+        editable=False,
         help_text="The creation date for this spreadsheet record.",
     )
 
@@ -262,12 +263,6 @@ class Spreadsheet(models.Model):
         help_text="The user that uploaded this version of the spreadsheet.",
     )
 
-    file = models.FileField(
-        blank=False,
-        upload_to=spreadsheet_media_path,
-        help_text="The underlying spreadsheet (probably .xlsx) file.",
-    )
-
     kind = models.CharField(
         blank=False,
         choices=SPREADSHEET_KINDS,
@@ -276,10 +271,35 @@ class Spreadsheet(models.Model):
         help_text="The kind of data this spreadsheet contains.",
     )
 
+    subkind = models.CharField(
+        blank=True,
+        default="",
+        db_index=True,
+        max_length=128,
+        help_text="The kind of Modeling spreadsheet (if applicable). Run Rate, Schedule Driven, etc",
+    )
+
+    file = models.FileField(
+        blank=False,
+        upload_to=spreadsheet_media_path,
+        help_text="The underlying spreadsheet (probably .xlsx) file.",
+    )
+
+    imported_data = JSONField(
+        default=None,
+        null=True,
+        blank=True,
+        editable=False,
+        help_text="Raw imported JSON data. Schema depends on spreadsheet kind.",
+    )
+
     class Meta:
         # Always sort spreadsheets with the most recent created first.
         ordering = ["-created"]
-        indexes = [models.Index(fields=["created", "kind"])]
+        indexes = [
+            models.Index(fields=["created", "kind"]),
+            models.Index(fields=["created", "kind", "subkind"]),
+        ]
 
 
 class PeriodManager(models.Manager):

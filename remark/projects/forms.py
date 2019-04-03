@@ -1,6 +1,8 @@
 from django import forms
+from django.core.exceptions import ValidationError
 
 from .models import Spreadsheet
+from .spreadsheets import get_importer
 
 
 class SpreadsheetForm(forms.ModelForm):
@@ -13,9 +15,21 @@ class SpreadsheetForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super().clean()
 
+        # Attempt to import and validate the spreadsheet contents
+        importer = get_importer(cleaned_data["kind"], cleaned_data["file"])
+        if importer is None:
+            raise ValidationError(
+                f"No spreadsheet importer available for {cleaned_data['kind']}"
+            )
+        if not importer.is_valid():
+            raise ValidationError(f"Could not validate spreadsheet: {importer.errors}")
+
+        # Success! We read the spreadsheet just fine.
+        cleaned_data["imported_data"] = importer.cleaned_data
+
         return cleaned_data
 
     class Meta:
         model = Spreadsheet
-        fields = "__all__"
+        fields = ["project", "kind", "subkind", "file"]
 

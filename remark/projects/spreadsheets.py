@@ -6,6 +6,8 @@ from collections import namedtuple
 
 import openpyxl
 
+from .models import Spreadsheet
+
 
 class DataType:
     STRING = openpyxl.cell.cell.TYPE_STRING
@@ -316,3 +318,11 @@ class BaselinePerfImporter(RemarkablyExcelImporter):
             _loc("META!B8", dt=DataType.DATE)
         )
 
+
+# TODO where should this go? -Dave
+IMPORTERS_FOR_KIND = {Spreadsheet.KIND_PERIODS: BaselinePerfImporter}
+
+
+def get_importer(kind, f):
+    importer_class = IMPORTERS_FOR_KIND.get(kind)
+    return importer_class(f) if importer_class is not None else None
