@@ -109,7 +109,12 @@ class BaselineReport(CommonReport):
 
         funnel_history = []
 
-        week_periods = self.multiperiod.get_week_periods(weekday=Weekday.MONDAY)
+        week_periods = self.multiperiod.get_week_periods(
+            weekday=Weekday.MONDAY,
+            before_start=False,
+            after_end=False
+        )
+
         week_periods_by_month = itertools.groupby(
             week_periods,
             lambda period: period.get_start().__format__("%Y-%m")
