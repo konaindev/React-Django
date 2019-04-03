@@ -111,8 +111,8 @@ class BaselineReport(CommonReport):
 
         week_periods = self.multiperiod.get_week_periods(
             weekday=Weekday.MONDAY,
-            before_start=False,
-            after_end=False
+            precise_start=True,
+            precise_end=True
         )
 
         week_periods_by_month = itertools.groupby(
