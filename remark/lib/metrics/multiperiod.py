@@ -110,17 +110,28 @@ class MultiPeriodBase:
 
         return periods
 
-    def get_delta_periods(self, time_delta, after_end=True):
+    def get_delta_periods(self, time_delta, after_end=True, precise_end=False):
         """
         Return an iterable of (non-multi) periods with each period exactly
         time_delta in length.
         """
         break_times = DateSequence.for_time_delta(
-            self.get_start(), self.get_end(), time_delta, after_end=after_end
+            self.get_start(),
+            self.get_end(),
+            time_delta,
+            after_end=after_end,
+            precise_end=precise_end,
         )
         return self.get_periods(*list(break_times))
 
-    def get_week_periods(self, weekday=None, before_start=True, after_end=True):
+    def get_week_periods(
+        self,
+        weekday=None,
+        before_start=True,
+        after_end=True,
+        precise_start=False,
+        precise_end=False,
+    ):
         """
         Return an iterable of (non-multi) periods with each period spaced
         a week apart, optionally aligned to the weekday.
@@ -131,10 +142,14 @@ class MultiPeriodBase:
             weekday=weekday,
             before_start=before_start,
             after_end=after_end,
+            precise_start=precise_start,
+            precise_end=precise_end,
         )
         return self.get_periods(*list(break_times))
 
-    def get_calendar_month_periods(self, before_start=True, after_end=True):
+    def get_calendar_month_periods(
+        self, before_start=True, after_end=True, precise_start=False, precise_end=False
+    ):
         """
         Return an iterable of (non-multi) periods with each period starting
         at the beginning of the month.
@@ -144,6 +159,8 @@ class MultiPeriodBase:
             self.get_end(),
             before_start=before_start,
             after_end=after_end,
+            precise_start=precise_start,
+            precise_end=precise_end,
         )
         return self.get_periods(*list(break_times))
 
