@@ -257,11 +257,6 @@ class Period(ModelPeriod, models.Model):
     )
     lease_cds.metric = SumIntervalMetric()
 
-    leases_due_to_expire = models.IntegerField(
-        default=0, help_text="Number of leases due to expire in period"
-    )
-    leases_due_to_expire.metric = SumIntervalMetric()
-
     lease_renewal_notices = models.IntegerField(
         default=0, help_text="Number of lease renewals signed"
     )
@@ -305,11 +300,6 @@ class Period(ModelPeriod, models.Model):
         null=True, blank=True, default=None, help_text="Target: lease renewal notices"
     )
     target_lease_renewal_notices.metric = SumIntervalMetric()
-
-    target_leases_due_to_expire = models.IntegerField(
-        null=True, blank=True, default=None, help_text="Target: leases due to expire"
-    )
-    target_leases_due_to_expire.metric = SumIntervalMetric()
 
     target_lease_renewals = models.IntegerField(
         null=True, blank=True, default=None, help_text="Target: lease renewals"
