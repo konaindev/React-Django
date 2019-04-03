@@ -548,6 +548,10 @@
         "Property": {
             "description": "Property-wide behavior",
             "properties": {
+                "average_monthly_rent": {
+                    "description": "The average rent, across all units, during this period",
+                    "type": "string"
+                },
                 "cost_per_exe_vs_rent": {
                     "description": "The cost per exe vs the monthly average rent during this period",
                     "type": "number"
@@ -560,20 +564,16 @@
                     "description": "The lowest rent, across all units, during this period",
                     "type": "string"
                 },
-                "monthly_average_rent": {
-                    "description": "The average rent, across all units, during this period",
-                    "type": "string"
-                },
                 "occupancy": {
                     "$ref": "#/definitions/Occupancy",
                     "description": "Basic occupancy information for the period"
                 }
             },
             "required": [
+                "average_monthly_rent",
                 "cost_per_exe_vs_rent",
                 "leasing",
                 "lowest_monthly_rent",
-                "monthly_average_rent",
                 "occupancy"
             ],
             "type": "object"

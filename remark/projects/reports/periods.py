@@ -179,7 +179,7 @@ class ComputedPeriod(ComputedValueMixin):
         Return an estimate of how much new annualk revenue will be obtained on the 
         basis of this period's acquisition funnel outcomes.
         """
-        return mult_or_0(self.delta_leases, self.monthly_average_rent, 12)
+        return mult_or_0(self.delta_leases, self.average_monthly_rent, 12)
 
     @computed_value
     def estimated_ret_revenue_gain(self):
@@ -187,7 +187,7 @@ class ComputedPeriod(ComputedValueMixin):
         Return an estimate of how much new annual revenue will be obtained on the 
         basis of this period's acquisition funnel outcomes.
         """
-        return mult_or_0(self.lease_renewals, self.monthly_average_rent, 12)
+        return mult_or_0(self.lease_renewals, self.average_monthly_rent, 12)
 
     @computed_value
     def estimated_revenue_gain(self):
@@ -245,12 +245,12 @@ class ComputedPeriod(ComputedValueMixin):
     @computed_value
     def target_estimated_acq_revenue_gain(self):
         """The target estimated acquisition leasing revenue gain."""
-        return mult_or_none(self.target_delta_leases, self.monthly_average_rent, 12)
+        return mult_or_none(self.target_delta_leases, self.average_monthly_rent, 12)
 
     @computed_value
     def target_estimated_ret_revenue_gain(self):
         """The target estimated ret leasing revenue gain."""
-        return mult_or_none(self.target_lease_renewals, self.monthly_average_rent, 12)
+        return mult_or_none(self.target_lease_renewals, self.average_monthly_rent, 12)
 
     @computed_value
     def target_estimated_revenue_gain(self):

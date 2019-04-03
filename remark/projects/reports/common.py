@@ -13,7 +13,7 @@ from .periods import ComputedPeriod, DeltaPeriod
 # apparent. Does it always need to be thus? -Dave
 SCHEMA_MAP = {
     "property": {
-        "monthly_average_rent": "monthly_average_rent",
+        "average_monthly_rent": "average_monthly_rent",
         "lowest_monthly_rent": "lowest_monthly_rent",
         "cost_per_exe_vs_rent": "cost_per_exe_vs_lowest_monthly_rent",
         "leasing": {

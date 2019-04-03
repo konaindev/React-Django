@@ -407,28 +407,6 @@ class Period(ModelPeriod, models.Model):
     )
     acq_market_intelligence.metric = SumIntervalMetric()
 
-    # XXX This number is a mess. It requires clarification about timeframes. -Dave
-    monthly_average_rent = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
-        default=None,
-        null=True,
-        blank=True,
-        help_text="Average rent tenants pay in the month including this period. If not specified, it will be pulled from an earlier period.",
-    )
-    monthly_average_rent.metric = PointMetric()
-
-    # XXX It's not clear to me this number is better. -Dave
-    lowest_monthly_rent = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
-        default=None,
-        null=True,
-        blank=True,
-        help_text="Lowest rent tenants pay in the month including this period. If not specified, it will be pulled from an earlier period.",
-    )
-    lowest_monthly_rent.metric = PointMetric()
-
     # ------------------------------------------------------
     # TARGETS: Acquisition Investment
     # ------------------------------------------------------
@@ -534,6 +512,21 @@ class Period(ModelPeriod, models.Model):
     # ------------------------------------------------------
     # Meta, etc.
     # ------------------------------------------------------
+
+    @property
+    def average_monthly_rent(self):
+        return self.project.average_monthly_rent
+
+    @property
+    def lowest_monthly_rent(self):
+        return self.project.lowest_monthly_rent
+
+    def _build_metrics(self):
+        # Manually insert average_monthly_rent and lowest_monthly_rent
+        # TODO consider better ways to do this... -Dave
+        super()._build_metrics()
+        self._metrics["average_monthly_rent"] = PointMetric()
+        self._metrics["lowest_monthly_rent"] = PointMetric()
 
     class Meta:
         # Always sort Periods with the earliest period first.
