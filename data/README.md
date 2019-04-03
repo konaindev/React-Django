@@ -20,6 +20,6 @@ In theory, the `data/schema/jsonschema/*.schema.json` files should not be checke
 
 Data that can be loaded with `manage.py loaddata data/dumped/foo.json`
 
-The most interesting data here is basline and performance input data for Two Linoln Towers (`data/dumped/2-lincoln.json`). We should make sure to keep this up to date as we migrate our schema.
+The most interesting data here is `data/dumped/latest.json` which is periodically updated to contain something like our actual production database, for testing purposes.
 
 All dumpdata files include a Django superuser with email `test@psl.com` and password `test1234`.
