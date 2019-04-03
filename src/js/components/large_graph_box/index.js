@@ -7,7 +7,7 @@ import WhiskerPlot from "../whisker_plot";
 import { getDefaultDirection, getPercentageDirection } from "../../utils/misc";
 import { LargeBoxLayout } from "../large_box_layout";
 import {
-  formatCurrencyShorthand,
+  formatCurrencyShorthandWithDigit,
   formatDeltaPercent,
   targetFormatter,
   formatPercent
@@ -87,10 +87,10 @@ export const PercentageGraphBox = props => (
 
 export const CurrencyShorthandGraphBox = props => (
   <LargeGraphBox
-    formatDelta={formatCurrencyShorthand}
+    formatDelta={formatCurrencyShorthandWithDigit}
     getDeltaDirection={getDefaultDirection}
-    formatTarget={formatCurrencyShorthand}
-    formatValue={formatCurrencyShorthand}
+    formatTarget={formatCurrencyShorthandWithDigit}
+    formatValue={formatCurrencyShorthandWithDigit}
     {...props}
   />
 );

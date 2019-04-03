@@ -1,0 +1,116 @@
+@import "css/base.scss";
+
+@mixin subheading() {
+    color: $content-text-primary-color;
+    font-size: $text-xs;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.campaign-plan-overview-tab {
+
+}
+
+/* stylelint-disable at-rule-no-unknown */
+.campaign-plan-overview-table {
+    font-size: $text-sm;
+    line-height: $text-xl;
+    color: $content-text-secondary-color;
+
+    .table__row {
+        display: flex;
+        border-bottom: 1px solid $table-border-color;
+
+        &--last {
+            border-bottom: none;
+        }
+    }
+
+    .row__label {
+        flex: 0 0 252px;
+        width: 252px;
+        padding: 24px 60px;
+        border-right: 1px solid $table-border-color;
+        color: $content-text-primary-color;
+    }
+
+    .row__content {
+        flex: 1 1 auto;
+        color: $content-text-secondary-color;
+        padding: 24px 40px;
+    }
+
+    .target-segments {
+        display: flex;
+        padding: 25px 0 24px 40px;
+    }
+
+    .target-segment-item {
+        flex: 1;
+        margin-right: 60px;
+
+        & > p:first-child {
+            @include subheading();
+            margin-bottom: 10px;
+        }
+    }
+
+    .objectives-markdown {
+        padding:0;
+    }
+
+    .objective-item {
+        padding: 24px 40px 20px 40px;
+        border-bottom: 1px solid $table-border-color;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        & > h1 {
+            @include subheading();
+            margin-bottom: 0.5rem;
+        }
+    }
+
+    .est-campaign-target {
+        h1 {
+            font-size: $text-4xl;
+            line-height: $text-5xl;
+            color: $content-text-primary-color;
+        }
+
+        p {
+            line-height: 28px;
+        }
+    }
+
+    .target-investments {
+        width: 280px;
+
+        & > p {
+            display: flex;
+            justify-content: space-between;
+
+            span:nth-child(2) {
+                flex: 1;
+                margin: 0.75rem 1rem 0 1rem;
+                border-top: 1px dashed $content-text-secondary-color;
+            }
+        }
+    }
+
+    .markdown-content {
+        line-height: 28px;
+
+        ul {
+            padding-left: 1rem;
+            margin-top: 1rem;
+
+            li {
+                list-style-type: disc;
+            }
+        }
+    }
+}
+/* stylelint-enable at-rule-no-unknown */
