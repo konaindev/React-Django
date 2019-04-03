@@ -139,7 +139,7 @@ export interface AcquisitionFunnel {
 /** Property-wide behavior */
 export interface Property {
   /** The average rent, across all units, during this period */
-  monthly_average_rent: t.currency;
+  average_monthly_rent: t.currency;
 
   /** The lowest rent, across all units, during this period */
   lowest_monthly_rent: t.currency;

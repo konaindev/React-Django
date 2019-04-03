@@ -15,7 +15,7 @@ const report = {
   },
   property_name: "Portland Multi-Family",
   property: {
-    monthly_average_rent: "1847.00",
+    average_monthly_rent: "1847.00",
     lowest_monthly_rent: "1847.00",
     cost_per_exe_vs_rent: 0.54,
     leasing: {
