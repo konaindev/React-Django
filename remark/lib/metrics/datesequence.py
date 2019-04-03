@@ -23,22 +23,36 @@ class DateSequence:
     # it's also more directly in line with our needs now. That may change. -Dave
 
     @classmethod
-    def for_time_delta(cls, start, end, time_delta, after_end=True):
+    def for_time_delta(cls, start, end, time_delta, after_end=True, precise_end=False):
         """
         Return an iterable of dates spaced apart by time_delta.
 
-        The first date will be start; if after_end is 0, the last date will
-        be the 
+        The first date will be start; if after_end is False, the last date will
+        be the end date after the time delta. Use precise_end to force the end date
+        to precisely align with the provided end date, even if this subdivides
+        time_delta.
         """
+        # Force after_end to be True if precise_end is True.
+        after_end = after_end or precise_end
+
         d = start
         while d < end:
             yield d
             d += time_delta
         if after_end:
-            yield d
+            yield end if precise_end else d
 
     @classmethod
-    def for_weeks(cls, start, end, weekday=None, before_start=True, after_end=True):
+    def for_weeks(
+        cls,
+        start,
+        end,
+        weekday=None,
+        before_start=True,
+        after_end=True,
+        precise_start=False,
+        precise_end=False,
+    ):
         """
         Return an iterable of dates spaced apart by a week.
 
@@ -47,7 +61,14 @@ class DateSequence:
 
         The last date will be the earliest date that occurs at or after 
         the end. (If after_end is false, all dates will be within range.)
+
+        Use precise_start and precise_end to force the first and last dates
+        to precisely align with the provided start and end dates; this may mean
+        that the start and end date ranges won't be precisely a week long.
         """
+        # Force before_start to be True if precise_start is True.
+        before_start = before_start or precise_start
+
         week = datetime.timedelta(weeks=1)
 
         d = start
@@ -62,10 +83,25 @@ class DateSequence:
         if d < start and not before_start:
             d += week
 
-        return cls.for_time_delta(d, end, week, after_end=after_end)
+        # There's probably a more compact way to write this, but at least
+        # it gets the point across. :-)
+        first = True
+        for generated in cls.for_time_delta(
+            d, end, week, after_end=after_end, precise_end=precise_end
+        ):
+            yield start if first and precise_start else generated
+            first = False
 
     @classmethod
-    def for_calendar_months(cls, start, end, before_start=True, after_end=True):
+    def for_calendar_months(
+        cls,
+        start,
+        end,
+        before_start=True,
+        after_end=True,
+        precise_start=False,
+        precise_end=False,
+    ):
         """
         Return an iterable of the first days of calendar months.
 
@@ -75,6 +111,9 @@ class DateSequence:
         The last date will be the latest 1st date that occurs at or after
         the end. (Before it, if after_end is False)
         """
+        # Force before_start to be True if precise_start is True.
+        before_start = before_start or precise_start
+
         month = relativedelta.relativedelta(months=1)
 
         # Adjust starting date to be start of month
@@ -84,5 +123,12 @@ class DateSequence:
         if d < start and not before_start:
             d += month
 
-        return cls.for_time_delta(d, end, month, after_end=after_end)
+        # There's probably a more compact way to write this, but at least
+        # it gets the point across. :-)
+        first = True
+        for generated in cls.for_time_delta(
+            d, end, month, after_end=after_end, precise_end=precise_end
+        ):
+            yield start if first and precise_start else generated
+            first = False
 
