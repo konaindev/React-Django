@@ -111,6 +111,33 @@ class Project(models.Model):
         help_text="The average tenant age for this project/property.",
     )
 
+    highest_monthly_rent = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=None,
+        null=True,
+        blank=True,
+        help_text="Highest rent tenants pay monthly. Applies for the duration of the project.",
+    )
+
+    average_monthly_rent = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=None,
+        null=True,
+        blank=True,
+        help_text="Average rent tenants pay monthly. Applies for the duration of the project.",
+    )
+
+    lowest_monthly_rent = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=None,
+        null=True,
+        blank=True,
+        help_text="Lowest rent tenants pay monthly. Applies for the duration of the project.",
+    )
+
     def get_periods(self):
         """
         Return a queryset of all periods, including the baseline.
