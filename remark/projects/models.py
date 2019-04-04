@@ -3,6 +3,7 @@ import decimal
 import os.path
 
 from django.db import models
+from django.conf import settings
 
 from jsonfield import JSONField
 from stdimage.models import StdImageField
@@ -16,16 +17,29 @@ def pro_public_id():
     return public_id("pro")
 
 
-def building_image_media_path(instance, filename):
+def building_image_media_path(project, filename):
     """
     Given a Project instance, and the filename as supplied during upload,
     determine where the uploaded building image should actually be placed.
 
     See https://docs.djangoproject.com/en/2.1/ref/models/fields/#filefield
     """
-    # We always target project/public_id/building_image.EXT
+    # We always target project/<public_id>/building_image<.ext>
     _, extension = os.path.splitext(filename)
-    return f"project/{instance.public_id}/building_image{extension}"
+    return f"project/{project.public_id}/building_image{extension}"
+
+
+def spreadsheet_media_path(spreadsheet, filename):
+    """
+    Given a Spreadsheet instance, and the filename as supplied during upload,
+    determine where the uploaded spreadsheet file should actually be placed.
+    """
+    # We always target project/<public_id>/<sheet_kind>_<upload_time><.ext>
+    _, extension = os.path.splitext(filename)
+    sheetname = "_".join(
+        [spreadsheet.kind, spreadsheet.created.strftime("%Y-%m-%d_%H-%M-%S")]
+    )
+    return f"project/{spreadsheet.project.public_id}/{sheetname}{extension}"
 
 
 class ProjectManager(models.Manager):
@@ -203,6 +217,97 @@ class Project(models.Model):
 
     def __str__(self):
         return "{} ({})".format(self.name, self.public_id)
+
+
+class SpreadsheetManager(models.Manager):
+    def latest_for_kind(self, kind, subkind=None):
+        return (
+            self.filter(kind=kind, subkind=subkind or "").order_by("-created").first()
+        )
+
+
+class Spreadsheet(models.Model):
+    """
+    Represents a single uploaded spreadsheet for a project.
+    """
+
+    objects = SpreadsheetManager()
+
+    KIND_PERIODS = "periods"  # Baseline and perf periods spreadsheet
+    KIND_MODELING = "modeling"  # Modeling report (any kind)
+    KIND_MARKET = "market"  # TAM
+    KIND_CAMPAIGN = "campaign"  # Campaign Plan
+
+    SPREADSHEET_KINDS = [
+        (KIND_PERIODS, "Periods"),
+        (KIND_MODELING, "Modeling (must provide a subkind, too)"),
+        (KIND_MARKET, "Market Report"),
+        (KIND_CAMPAIGN, "Campaign Plan"),
+    ]
+
+    project = models.ForeignKey(
+        Project, on_delete=models.CASCADE, related_name="spreadsheets"
+    )
+
+    created = models.DateTimeField(
+        auto_now_add=True,
+        db_index=True,
+        editable=False,
+        help_text="The creation date for this spreadsheet record.",
+    )
+
+    uploaded_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        null=True,
+        blank=True,
+        default=None,
+        on_delete=models.SET_NULL,  # We allow NULL so that even if an admin is deleted, we preserve history regardless.
+        help_text="The user that uploaded this spreadsheet.",
+    )
+
+    kind = models.CharField(
+        blank=False,
+        choices=SPREADSHEET_KINDS,
+        db_index=True,
+        max_length=128,
+        help_text="The kind of data this spreadsheet contains.",
+    )
+
+    subkind = models.CharField(
+        blank=True,
+        default="",
+        db_index=True,
+        max_length=128,
+        help_text="The kind of Modeling spreadsheet (if applicable). Run Rate, Schedule Driven, etc",
+    )
+
+    file = models.FileField(
+        blank=False,
+        upload_to=spreadsheet_media_path,
+        help_text="The underlying spreadsheet (probably .xlsx) file.",
+    )
+
+    imported_data = JSONField(
+        default=None,
+        null=True,
+        blank=True,
+        editable=False,
+        help_text="Raw imported JSON data. Schema depends on spreadsheet kind.",
+    )
+
+    def is_active(self):
+        """Return True if this spreadsheet is the latest for its kind and subkind."""
+        return (
+            Spreadsheet.objects.latest_for_kind(self.kind, self.subkind).id == self.id
+        )
+
+    class Meta:
+        # Always sort spreadsheets with the most recent created first.
+        ordering = ["-created"]
+        indexes = [
+            models.Index(fields=["created", "kind"]),
+            models.Index(fields=["created", "kind", "subkind"]),
+        ]
 
 
 class PeriodManager(models.Manager):
