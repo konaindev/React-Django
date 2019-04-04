@@ -15,6 +15,18 @@ class SpreadsheetForm(forms.ModelForm):
     def clean(self):
         cleaned_data = super().clean()
 
+        if (
+            cleaned_data["kind"] == Spreadsheet.KIND_MODELING
+            and not cleaned_data["subkind"]
+        ):
+            raise ValidationError(
+                "For Modeling spreadsheets, you must also specify a value for subkind (like 'Run Rate')"
+            )
+        elif cleaned_data["subkind"]:
+            raise ValidationError(
+                "For non-modeling spreadsheets, 'subkind' must be blank."
+            )
+
         # Attempt to import and validate the spreadsheet contents
         importer = get_importer(cleaned_data["kind"], cleaned_data["file"])
         if importer is None:
@@ -32,4 +44,3 @@ class SpreadsheetForm(forms.ModelForm):
     class Meta:
         model = Spreadsheet
         fields = ["project", "kind", "subkind", "file"]
-

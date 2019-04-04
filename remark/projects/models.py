@@ -231,6 +231,8 @@ class Spreadsheet(models.Model):
     Represents a single uploaded spreadsheet for a project.
     """
 
+    objects = SpreadsheetManager()
+
     KIND_PERIODS = "periods"  # Baseline and perf periods spreadsheet
     KIND_MODELING = "modeling"  # Modeling report (any kind)
     KIND_MARKET = "market"  # TAM
@@ -254,13 +256,13 @@ class Spreadsheet(models.Model):
         help_text="The creation date for this spreadsheet record.",
     )
 
-    user = models.ForeignKey(
+    uploaded_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         null=True,
         blank=True,
         default=None,
         on_delete=models.SET_NULL,  # We allow NULL so that even if an admin is deleted, we preserve history regardless.
-        help_text="The user that uploaded this version of the spreadsheet.",
+        help_text="The user that uploaded this spreadsheet.",
     )
 
     kind = models.CharField(
@@ -292,6 +294,12 @@ class Spreadsheet(models.Model):
         editable=False,
         help_text="Raw imported JSON data. Schema depends on spreadsheet kind.",
     )
+
+    def is_active(self):
+        """Return True if this spreadsheet is the latest for its kind and subkind."""
+        return (
+            Spreadsheet.objects.latest_for_kind(self.kind, self.subkind).id == self.id
+        )
 
     class Meta:
         # Always sort spreadsheets with the most recent created first.
