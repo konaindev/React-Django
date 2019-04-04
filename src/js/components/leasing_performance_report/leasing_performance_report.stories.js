@@ -53,7 +53,7 @@ const WHISKERS = {
   ]
 };
 
-const BASELINE_REPORT = {
+export const BASELINE_REPORT = {
   property: {
     average_monthly_rent: "1847.00",
     cost_per_exe_vs_rent: 0.54,
@@ -88,7 +88,7 @@ const BASELINE_REPORT = {
   }
 };
 
-const PERFORMANCE_REPORT = {
+export const PERFORMANCE_REPORT = {
   property: {
     average_monthly_rent: "1856.00",
     cost_per_exe_vs_rent: 0.58,

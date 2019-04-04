@@ -53,7 +53,7 @@ const WHISKERS = {
   ]
 };
 
-const BASELINE_REPORT = {
+export const BASELINE_REPORT = {
   investment: {
     acquisition: {
       expenses: {
@@ -94,7 +94,7 @@ const BASELINE_REPORT = {
   }
 };
 
-const PERFORMANCE_REPORT = {
+export const PERFORMANCE_REPORT = {
   investment: {
     acquisition: {
       expenses: {
@@ -169,7 +169,7 @@ const PERFORMANCE_REPORT = {
   whiskers: WHISKERS
 };
 
-const NEGATIVE_PERFORMANCE_REPORT = {
+export const NEGATIVE_PERFORMANCE_REPORT = {
   investment: {
     acquisition: {
       expenses: {

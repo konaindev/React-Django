@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ButtonGroup renders correctly 1`] = `
+<div
+  className="button-group"
+>
+  <button
+    className="button button-undefined button-group__item"
+    onClick={[Function]}
+  >
+    Schedule Driven
+  </button>
+  <button
+    className="button button--selected button-undefined button-group__item"
+    onClick={[Function]}
+  >
+    Investment Driven
+  </button>
+  <button
+    className="button button-undefined button-group__item"
+    onClick={[Function]}
+  >
+    Run Rate
+  </button>
+  <button
+    className="button button-undefined button-group__item"
+    onClick={[Function]}
+  >
+    Compare Models
+  </button>
+</div>
+`;

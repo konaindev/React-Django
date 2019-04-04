@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LargeBoxLayout renders correctly 1`] = `
+<div
+  className="panel panel--default large-box"
+>
+  <span
+    className="large-box__top-line"
+  >
+    Test name
+  </span>
+  <div
+    className="large-box__content"
+  >
+    <span
+      className="large-box__content-value"
+    >
+      Test content
+    </span>
+  </div>
+  <span
+    className="large-box__bottom-line"
+  >
+    This is details
+  </span>
+  <span
+    className="large-box__bottom-line"
+  >
+    This is more details
+  </span>
+</div>
+`;

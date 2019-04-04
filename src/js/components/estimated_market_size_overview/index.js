@@ -34,7 +34,10 @@ export function EstimatedMarketSizeOverview({ market_sizes }) {
         </div>
         <div className="estimated-market-size-overview__content-right">
           {chunkedMarketSizes.map((colItems, colIndex) => (
-            <div className="estimated-market-size-overview__content-col">
+            <div
+              key={colIndex}
+              className="estimated-market-size-overview__content-col"
+            >
               {colItems.map((sizeProps, index) => (
                 <AgeRangePopulationSize
                   key={index}

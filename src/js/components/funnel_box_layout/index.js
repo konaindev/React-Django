@@ -16,9 +16,9 @@ import "./funnel_box_layout.scss";
 class FunnelBaseBox extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    value: PropTypes.number.isRequired,
-    target: PropTypes.number.isRequired,
-    delta: PropTypes.number.isRequired,
+    value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    target: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    delta: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     formatter: PropTypes.func.isRequired,
     targetFormatter: PropTypes.func.isRequired,
     deltaFormatter: PropTypes.func.isRequired

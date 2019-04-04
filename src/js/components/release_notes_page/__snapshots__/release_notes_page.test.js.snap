@@ -1,0 +1,284 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReleaseNotesPage renders correctly 1`] = `
+<div
+  className="chrome"
+>
+  <div
+    className="page-chrome__top-chrome"
+  >
+    <div
+      className="page-chrome__top-chrome__content"
+    >
+      <div
+        className="page-header"
+      >
+        <div
+          className="container page-header__inner"
+        >
+          <div
+            className="remarkably-logo"
+          >
+             
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="page-chrome__top-chrome__spacing-fix"
+      style={
+        Object {
+          "height": 76,
+        }
+      }
+    >
+       
+    </div>
+  </div>
+  <div
+    className="container"
+  >
+    <div
+      className="section-header section-header--mt-sm"
+    >
+      <p
+        className="section-header__title"
+      >
+        Releases
+      </p>
+    </div>
+    <div
+      className="panel panel--default"
+    >
+      <table
+        className="release-notes-table"
+      >
+        <tr
+          className="release-notes-table__row"
+        >
+          <td
+            className="release-notes-table__col release-notes-table__version"
+          >
+            2.13.18
+          </td>
+          <td
+            className="release-notes-table__col release-notes-table__title"
+          >
+            Alderaan
+          </td>
+          <td
+            className="release-notes-table__col release-notes-table__date"
+          >
+            11/11/18
+          </td>
+          <td
+            className="release-notes-table__col"
+          >
+            <a
+              className="release-notes-table__link"
+              href="/releases/1"
+            >
+              NOTES 
+              <big>
+                ›
+              </big>
+            </a>
+          </td>
+        </tr>
+        <tr
+          className="release-notes-table__row"
+        >
+          <td
+            className="release-notes-table__col release-notes-table__version"
+          >
+            2.14.12
+          </td>
+          <td
+            className="release-notes-table__col release-notes-table__title"
+          >
+            Alderaan
+          </td>
+          <td
+            className="release-notes-table__col release-notes-table__date"
+          >
+            12/3/18
+          </td>
+          <td
+            className="release-notes-table__col"
+          >
+            <a
+              className="release-notes-table__link"
+              href="/releases/2"
+            >
+              NOTES 
+              <big>
+                ›
+              </big>
+            </a>
+          </td>
+        </tr>
+        <tr
+          className="release-notes-table__row"
+        >
+          <td
+            className="release-notes-table__col release-notes-table__version"
+          >
+            2.15.1
+          </td>
+          <td
+            className="release-notes-table__col release-notes-table__title"
+          >
+            Alderaan
+          </td>
+          <td
+            className="release-notes-table__col release-notes-table__date"
+          >
+            12/11/18
+          </td>
+          <td
+            className="release-notes-table__col"
+          >
+            <a
+              className="release-notes-table__link"
+              href="/releases/3"
+            >
+              NOTES 
+              <big>
+                ›
+              </big>
+            </a>
+          </td>
+        </tr>
+        <tr
+          className="release-notes-table__row"
+        >
+          <td
+            className="release-notes-table__col release-notes-table__version"
+          >
+            2.16.3
+          </td>
+          <td
+            className="release-notes-table__col release-notes-table__title"
+          >
+            Alderaan
+          </td>
+          <td
+            className="release-notes-table__col release-notes-table__date"
+          >
+            12/29/18
+          </td>
+          <td
+            className="release-notes-table__col"
+          >
+            <a
+              className="release-notes-table__link"
+              href="/releases/4"
+            >
+              NOTES 
+              <big>
+                ›
+              </big>
+            </a>
+          </td>
+        </tr>
+        <tr
+          className="release-notes-table__row"
+        >
+          <td
+            className="release-notes-table__col release-notes-table__version"
+          >
+            2.16.18
+          </td>
+          <td
+            className="release-notes-table__col release-notes-table__title"
+          >
+            Alderaan
+          </td>
+          <td
+            className="release-notes-table__col release-notes-table__date"
+          >
+            1/11/19
+          </td>
+          <td
+            className="release-notes-table__col"
+          >
+            <a
+              className="release-notes-table__link"
+              href="/releases/5"
+            >
+              NOTES 
+              <big>
+                ›
+              </big>
+            </a>
+          </td>
+        </tr>
+        <tr
+          className="release-notes-table__row"
+        >
+          <td
+            className="release-notes-table__col release-notes-table__version"
+          >
+            2.17.2
+          </td>
+          <td
+            className="release-notes-table__col release-notes-table__title"
+          >
+            Alderaan
+          </td>
+          <td
+            className="release-notes-table__col release-notes-table__date"
+          >
+            2/3/19
+          </td>
+          <td
+            className="release-notes-table__col"
+          >
+            <a
+              className="release-notes-table__link"
+              href="/releases/6"
+            >
+              NOTES 
+              <big>
+                ›
+              </big>
+            </a>
+          </td>
+        </tr>
+        <tr
+          className="release-notes-table__row"
+        >
+          <td
+            className="release-notes-table__col release-notes-table__version"
+          >
+            2.18.1
+          </td>
+          <td
+            className="release-notes-table__col release-notes-table__title"
+          >
+            Alderaan
+          </td>
+          <td
+            className="release-notes-table__col release-notes-table__date"
+          >
+            2/28/19
+          </td>
+          <td
+            className="release-notes-table__col"
+          >
+            <a
+              className="release-notes-table__link"
+              href="/releases/7"
+            >
+              NOTES 
+              <big>
+                ›
+              </big>
+            </a>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>
+`;

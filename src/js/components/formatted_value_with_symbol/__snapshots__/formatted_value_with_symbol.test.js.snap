@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormattedValueWithSymbol renders default correctly 1`] = `
+<span
+  className="formatted-value-with-symbol"
+>
+  $495k
+</span>
+`;
+
+exports[`FormattedValueWithSymbol renders multiple-x correctly 1`] = `
+<span
+  className="formatted-value-with-symbol"
+>
+  <span
+    className="formatted-value-with-symbol__minus"
+  >
+    -
+  </span>
+  34
+  <span
+    className="formatted-value-with-symbol__times"
+  >
+    x
+  </span>
+</span>
+`;
+
+exports[`FormattedValueWithSymbol renders plus/minus sign correctly 1`] = `
+<span
+  className="formatted-value-with-symbol"
+>
+  <span
+    className="formatted-value-with-symbol__plus"
+  >
+    +
+  </span>
+  $354k
+</span>
+`;

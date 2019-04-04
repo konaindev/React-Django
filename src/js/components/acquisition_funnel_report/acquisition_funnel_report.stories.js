@@ -8,7 +8,7 @@ import Container from "../container";
 import AcquisitionFunnelReport from "./index";
 
 // dummy data
-const WHISKERS = {
+export const WHISKERS = {
   leased_rate: [
     0.42660550458715596,
     0.43577981651376146,
@@ -54,7 +54,7 @@ const WHISKERS = {
   ]
 };
 
-const BASELINE_REPORT = {
+export const BASELINE_REPORT = {
   // the funnel itself
   funnel: {
     volumes: {
@@ -97,7 +97,7 @@ const BASELINE_REPORT = {
   }
 };
 
-const PERFORMANCE_REPORT = {
+export const PERFORMANCE_REPORT = {
   funnel: {
     volumes: {
       usv: 3008,

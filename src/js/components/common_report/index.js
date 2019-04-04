@@ -21,7 +21,7 @@ export default class CommonReport extends Component {
   static propTypes = {
     dateSpan: PropTypes.node,
     report: PropTypes.object.isRequired,
-    type: PropTypes.oneOf(["baseline, performance"]).isRequired
+    type: PropTypes.oneOf(["baseline", "performance"]).isRequired
   };
 
   render() {

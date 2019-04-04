@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BoxRow renders correctly 1`] = `
+<div
+  className="box-row box-row--normal"
+>
+  <div
+    className="child-wrapper"
+    style={
+      Object {
+        "width": "33.33333%",
+      }
+    }
+  >
+    <div>
+      1
+    </div>
+  </div>
+  <div
+    className="child-wrapper"
+    style={
+      Object {
+        "width": "33.33333%",
+      }
+    }
+  >
+    <div>
+      2
+    </div>
+  </div>
+  <div
+    className="child-wrapper"
+    style={
+      Object {
+        "width": "33.33333%",
+      }
+    }
+  >
+    <div>
+      3
+    </div>
+  </div>
+</div>
+`;

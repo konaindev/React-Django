@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BoxTable renders correctly 1`] = `
+Array [
+  <div>
+    1
+  </div>,
+  <div>
+    2
+  </div>,
+  <div>
+    3
+  </div>,
+]
+`;

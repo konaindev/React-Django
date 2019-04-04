@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 
 import ReleaseNoteDetailsPage from "./index";
 
-const props = {
+export const props = {
   release_note: {
     id: 1,
     title: "Alderaan",
