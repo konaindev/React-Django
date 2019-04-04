@@ -101,7 +101,7 @@ ModelingComparison.propTypes = {
         cost_per_exe_vs_rent: number,
         leasing: object.isRequired,
         lowest_monthly_rent: string,
-        monthly_average_rent: string,
+        average_monthly_rent: string,
         occupancy: object.isRequired
       }).isRequired
     })

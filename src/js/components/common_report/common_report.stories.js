@@ -62,7 +62,7 @@ const BASELINE_REPORT = {
   property_name: "Portland Multi-Family",
   property: {
     lowest_monthly_rent: "1847.00",
-    monthly_average_rent: "1847.00",
+    average_monthly_rent: "1847.00",
     cost_per_exe_vs_rent: 0.54,
     leasing: {
       change: 36,
@@ -154,7 +154,7 @@ const PERFORMANCE_REPORT = {
   property_name: "Portland Multi Family",
   property: {
     lowest_monthly_rent: "1856.90",
-    monthly_average_rent: "1856.90",
+    average_monthly_rent: "1856.90",
     cost_per_exe_vs_rent: 0.58,
     leasing: {
       change: 9,
@@ -230,7 +230,7 @@ const PERFORMANCE_REPORT = {
   },
   targets: {
     property: {
-      monthly_average_rent: "7278.00",
+      average_monthly_rent: "7278.00",
       cost_per_exe_vs_rent: 1.03,
       leasing: {
         change: 11,

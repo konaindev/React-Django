@@ -60,10 +60,7 @@ class Project(models.Model):
         default="",
         upload_to=building_image_media_path,
         help_text="""A full-resolution user-supplied image of the building.<br/>Resized variants (180x180, 76x76) will also be created on Amazon S3.""",
-        variations={
-            "regular": (180, 180, True),
-            "thumbnail": (76, 76, True),
-        }
+        variations={"regular": (180, 180, True), "thumbnail": (76, 76, True)},
     )
 
     baseline_start = models.DateField(
@@ -105,6 +102,40 @@ class Project(models.Model):
         # Ensure loaded data retains JSON object key ordering
         load_kwargs={"object_pairs_hook": collections.OrderedDict},
         help_text="Campaign Plan JSON data. Must conform to the schema defined in CampaignPlan.ts",
+    )
+
+    average_tenant_age = models.FloatField(
+        null=True,
+        blank=True,
+        default=None,
+        help_text="The average tenant age for this project/property.",
+    )
+
+    highest_monthly_rent = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=None,
+        null=True,
+        blank=True,
+        help_text="Highest rent tenants pay monthly. Applies for the duration of the project.",
+    )
+
+    average_monthly_rent = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=None,
+        null=True,
+        blank=True,
+        help_text="Average rent tenants pay monthly. Applies for the duration of the project.",
+    )
+
+    lowest_monthly_rent = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=None,
+        null=True,
+        blank=True,
+        help_text="Lowest rent tenants pay monthly. Applies for the duration of the project.",
     )
 
     def get_periods(self):
@@ -153,11 +184,11 @@ class Project(models.Model):
         """
         Return building image's S3 resource urls for all variants
         """
-        if (self.building_image):
+        if self.building_image:
             return dict(
                 original=self.building_image.url,
                 regular=self.building_image.regular.url,
-                thumbnail=self.building_image.thumbnail.url
+                thumbnail=self.building_image.thumbnail.url,
             )
         else:
             return None
@@ -226,11 +257,6 @@ class Period(ModelPeriod, models.Model):
     )
     lease_cds.metric = SumIntervalMetric()
 
-    leases_due_to_expire = models.IntegerField(
-        default=0, help_text="Number of leases due to expire in period"
-    )
-    leases_due_to_expire.metric = SumIntervalMetric()
-
     lease_renewal_notices = models.IntegerField(
         default=0, help_text="Number of lease renewals signed"
     )
@@ -274,11 +300,6 @@ class Period(ModelPeriod, models.Model):
         null=True, blank=True, default=None, help_text="Target: lease renewal notices"
     )
     target_lease_renewal_notices.metric = SumIntervalMetric()
-
-    target_leases_due_to_expire = models.IntegerField(
-        null=True, blank=True, default=None, help_text="Target: leases due to expire"
-    )
-    target_leases_due_to_expire.metric = SumIntervalMetric()
 
     target_lease_renewals = models.IntegerField(
         null=True, blank=True, default=None, help_text="Target: lease renewals"
@@ -375,28 +396,6 @@ class Period(ModelPeriod, models.Model):
         help_text="Amount invested in acquisition market intelligence",
     )
     acq_market_intelligence.metric = SumIntervalMetric()
-
-    # XXX This number is a mess. It requires clarification about timeframes. -Dave
-    monthly_average_rent = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
-        default=None,
-        null=True,
-        blank=True,
-        help_text="Average rent tenants pay in the month including this period. If not specified, it will be pulled from an earlier period.",
-    )
-    monthly_average_rent.metric = PointMetric()
-
-    # XXX It's not clear to me this number is better. -Dave
-    lowest_monthly_rent = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
-        default=None,
-        null=True,
-        blank=True,
-        help_text="Lowest rent tenants pay in the month including this period. If not specified, it will be pulled from an earlier period.",
-    )
-    lowest_monthly_rent.metric = PointMetric()
 
     # ------------------------------------------------------
     # TARGETS: Acquisition Investment
@@ -503,6 +502,21 @@ class Period(ModelPeriod, models.Model):
     # ------------------------------------------------------
     # Meta, etc.
     # ------------------------------------------------------
+
+    @property
+    def average_monthly_rent(self):
+        return self.project.average_monthly_rent
+
+    @property
+    def lowest_monthly_rent(self):
+        return self.project.lowest_monthly_rent
+
+    def _build_metrics(self):
+        # Manually insert average_monthly_rent and lowest_monthly_rent
+        # TODO consider better ways to do this... -Dave
+        super()._build_metrics()
+        self._metrics["average_monthly_rent"] = PointMetric()
+        self._metrics["lowest_monthly_rent"] = PointMetric()
 
     class Meta:
         # Always sort Periods with the earliest period first.

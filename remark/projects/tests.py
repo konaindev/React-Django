@@ -20,13 +20,13 @@ class DefaultComputedPeriodTestCase(TestCase):
             name="test",
             baseline_start=datetime.date(year=2018, month=11, day=19),
             baseline_end=datetime.date(year=2018, month=12, day=19),
+            average_monthly_rent=decimal.Decimal("0"),
+            lowest_monthly_rent=decimal.Decimal("0"),
         )
         period = Period.objects.create(
             project=project,
             start=datetime.date(year=2018, month=12, day=19),
             end=datetime.date(year=2018, month=12, day=26),
-            monthly_average_rent=decimal.Decimal("0"),
-            lowest_monthly_rent=decimal.Decimal("0"),
             leased_units_start=0,
             occupiable_units_start=0,
             occupied_units_start=0,
@@ -166,13 +166,13 @@ class DefaultReportTestCase(TestCase):
             name="test",
             baseline_start=datetime.date(year=2018, month=11, day=19),
             baseline_end=datetime.date(year=2018, month=12, day=19),
+            average_monthly_rent=decimal.Decimal("0"),
+            lowest_monthly_rent=decimal.Decimal("0"),
         )
         period = Period.objects.create(
             project=project,
             start=datetime.date(year=2018, month=12, day=19),
             end=datetime.date(year=2018, month=12, day=26),
-            monthly_average_rent=decimal.Decimal("0"),
-            lowest_monthly_rent=decimal.Decimal("0"),
             leased_units_start=0,
             occupiable_units_start=0,
             occupied_units_start=0,
@@ -213,6 +213,8 @@ class LincolnTowerPeriodTestCase(TestCase):
             name="test",
             baseline_start=datetime.date(year=2018, month=11, day=19),
             baseline_end=datetime.date(year=2018, month=12, day=19),
+            average_monthly_rent=decimal.Decimal("7278"),
+            lowest_monthly_rent=decimal.Decimal("7278"),
         )
         self.raw_period = Period.objects.create(
             project=self.project,
@@ -233,8 +235,6 @@ class LincolnTowerPeriodTestCase(TestCase):
             acq_demand_creation=decimal.Decimal("21000"),
             acq_leasing_enablement=decimal.Decimal("11000"),
             acq_market_intelligence=decimal.Decimal("7000"),
-            monthly_average_rent=decimal.Decimal("7278"),
-            lowest_monthly_rent=decimal.Decimal("7278"),
         )
         self.period = ComputedPeriod(self.raw_period)
 

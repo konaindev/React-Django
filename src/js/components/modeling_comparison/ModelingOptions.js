@@ -8,7 +8,7 @@ export default {
         end: "2018-12-17"
       },
       property: {
-        monthly_average_rent: "1847.00",
+        average_monthly_rent: "1847.00",
         lowest_monthly_rent: "1847.00",
         cost_per_exe_vs_rent: 1.03,
         leasing: {
@@ -99,7 +99,7 @@ export default {
         end: "2019-05-27"
       },
       property: {
-        monthly_average_rent: "1847.00",
+        average_monthly_rent: "1847.00",
         lowest_monthly_rent: "1847.00",
         cost_per_exe_vs_rent: 0.72,
         leasing: {
@@ -191,7 +191,7 @@ export default {
         end: "2020-11-16"
       },
       property: {
-        monthly_average_rent: "1847.00",
+        average_monthly_rent: "1847.00",
         lowest_monthly_rent: "1847.00",
         cost_per_exe_vs_rent: 0.48,
         leasing: {

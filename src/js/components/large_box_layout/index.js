@@ -10,7 +10,7 @@ import {
   formatDeltaPercent,
   formatNumber,
   formatCurrency,
-  formatCurrencyShorthand,
+  formatCurrencyShorthandWithDigit,
   formatDate
 } from "../../utils/formatters";
 import { getDefaultDirection, getPercentageDirection } from "../../utils/misc";
@@ -93,8 +93,8 @@ export const LargeCurrencyBox = withFormatters(
 );
 export const LargeCurrencyShorthandBox = withFormatters(
   LargeBoxLayout,
-  formatCurrencyShorthand,
-  formatCurrencyShorthand,
+  formatCurrencyShorthandWithDigit,
+  formatCurrencyShorthandWithDigit,
   getDefaultDirection
 );
 export const LargeDateBox = withFormatters(LargeBoxLayout, formatDate);
