@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { VictoryGroup, VictoryArea } from "victory";
 
+const Defs = ({ children }) => <defs>{children}</defs>;
+
 /**
  * @class WhiskerPlot
  *
@@ -52,7 +54,7 @@ export default class WhiskerPlot extends Component {
           }
         }}
       >
-        <defs>
+        <Defs>
           <linearGradient
             id={this.randomName}
             x1="0%"
@@ -74,7 +76,7 @@ export default class WhiskerPlot extends Component {
             <stop offset="98%" stopColor={color} stopOpacity={0.002} />
             <stop offset="100%" stopColor={color} stopOpacity={0} />
           </linearGradient>
-        </defs>
+        </Defs>
         <VictoryArea interpolation="basis" />
       </VictoryGroup>
     );

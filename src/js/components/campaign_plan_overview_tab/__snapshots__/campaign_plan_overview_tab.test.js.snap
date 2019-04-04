@@ -1,0 +1,294 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CampaignPlanOverviewTab renders correctly 1`] = `
+<div
+  className="container campaign-plan-overview-tab"
+>
+  <div
+    className="panel panel--default campaign-plan-overview-table"
+  >
+    <div
+      className="table__row"
+    >
+      <div
+        className="row__label"
+      >
+        Target Segments
+      </div>
+      <div
+        className="target-segments row__content"
+      >
+        <div
+          className="target-segment-item"
+        >
+          <p>
+            Primary
+          </p>
+          <p>
+            Young Professionals (25-34)
+          </p>
+        </div>
+        <div
+          className="target-segment-item"
+        >
+          <p>
+            Secondary
+          </p>
+          <p>
+            Young Entrepreneurs (25-34)
+          </p>
+        </div>
+        <div
+          className="target-segment-item"
+        >
+          <p>
+            Tertiary
+          </p>
+          <p>
+            Young Couples (35-40)
+          </p>
+        </div>
+        <div
+          className="target-segment-item"
+        >
+          <p>
+            Quarternary
+          </p>
+          <p>
+            Established Singles (35-44)
+          </p>
+        </div>
+      </div>
+    </div>
+    <div
+      className="table__row"
+    >
+      <div
+        className="row__label"
+      >
+        Goal
+      </div>
+      <div
+        className="row__content"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "Achieve 95% lease-up by 6/30/2019",
+          }
+        }
+      />
+    </div>
+    <div
+      className="table__row"
+    >
+      <div
+        className="row__label"
+      >
+        Objectives
+      </div>
+      <div
+        className="objectives-markdown row__content"
+      >
+        <div
+          className="objective-item"
+        >
+          <h1>
+            Reputation Building
+          </h1>
+          <div
+            className="markdown-content"
+          >
+            <p>
+              Grow reach and shape perceptions
+            </p>
+            <ul>
+              <li>
+                Attract 11,979 USV
+              </li>
+              <li>
+                Attract 1,000 social followers
+              </li>
+              <li>
+                Add 1,100 contacts to property database (email list)
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div
+          className="objective-item"
+        >
+          <h1>
+            Demand Creation
+          </h1>
+          <div
+            className="markdown-content"
+          >
+            <p>
+              Generate INQs and USVs:
+            </p>
+            <ul>
+              <li>
+                Convert 6% of USVs to INQs
+              </li>
+              <li>
+                Attract 696 Inquires (calls, emails, walk-ins, chats, texts)
+              </li>
+              <li>
+                Conduct 270 tours (at 40% INQ&gt;Tour conversion rate)
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div
+          className="objective-item"
+        >
+          <h1>
+            Leasing Enablement
+          </h1>
+          <div
+            className="markdown-content"
+          >
+            <p>
+              Equip leasing team with effective processes and tools that delight
+            </p>
+            <ul>
+              <li>
+                Provide highly responsive process for handling INQ and Tours
+              </li>
+              <li>
+                Capture 97 signed leases
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div
+          className="objective-item"
+        >
+          <h1>
+            Marketing Intelligence
+          </h1>
+          <div
+            className="markdown-content"
+          >
+            <p>
+              Capture resident and prospect data:
+            </p>
+            <ul>
+              <li>
+                Capture prospect data on website
+              </li>
+              <li>
+                Capture resident data about satisfaction and retention
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="table__row"
+    >
+      <div
+        className="row__label"
+      >
+        Assumptions
+      </div>
+      <div
+        className="row__content"
+      >
+        <div
+          className="markdown-content"
+        >
+          <ul>
+            <li>
+              Asset contains 260 units
+            </li>
+            <li>
+              20% C&D rate
+            </li>
+            <li>
+              Model based on predictions generated in Sept. 2018
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div
+      className="table__row"
+    >
+      <div
+        className="row__label"
+      >
+        Schedule
+      </div>
+      <div
+        className="row__content"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "Campaign begins in Feb. 2019 and finishes in July 2019",
+          }
+        }
+      />
+    </div>
+    <div
+      className="table__row table__row--last"
+    >
+      <div
+        className="row__label"
+      >
+        Est. Campaign Target
+      </div>
+      <div
+        className="est-campaign-target row__content"
+      >
+        <h1>
+          $180,000
+        </h1>
+        <p>
+          Based on Current Model
+        </p>
+        <br />
+        <div
+          className="target-investments"
+        >
+          <p>
+            <span>
+              Reputation Building
+            </span>
+            <span />
+            <span>
+              $35,000
+            </span>
+          </p>
+          <p>
+            <span>
+              Demand Creation
+            </span>
+            <span />
+            <span>
+              $86,000
+            </span>
+          </p>
+          <p>
+            <span>
+              Leasing Enablement
+            </span>
+            <span />
+            <span>
+              $35,000
+            </span>
+          </p>
+          <p>
+            <span>
+              Marketing Intelligence
+            </span>
+            <span />
+            <span>
+              $24,000
+            </span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

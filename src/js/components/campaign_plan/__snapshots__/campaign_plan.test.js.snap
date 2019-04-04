@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CampaignPlan renders correctly 1`] = `
+<div
+  className="page campaign_plan-view"
+>
+  <div
+    className="container"
+  >
+    <div
+      className="campaign_plan-view__subnav"
+    >
+      <div
+        className="button-group"
+      >
+        <button
+          className="button button--selected button-undefined button-group__item"
+          onClick={[Function]}
+        >
+          Overview
+        </button>
+        <button
+          className="button button-undefined button-group__item"
+          onClick={[Function]}
+        >
+          Reputation Building
+        </button>
+        <button
+          className="button button-undefined button-group__item"
+          onClick={[Function]}
+        >
+          Demand Creation
+        </button>
+        <button
+          className="button button-undefined button-group__item"
+          onClick={[Function]}
+        >
+          Leasing Enablement
+        </button>
+        <button
+          className="button button-undefined button-group__item"
+          onClick={[Function]}
+        >
+          Market Intelligence
+        </button>
+      </div>
+    </div>
+  </div>
+  <img
+    src="https://imgur.com/6pa134E.png"
+  />
+</div>
+`;

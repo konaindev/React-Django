@@ -1,0 +1,196 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EstimatedPopulation renders circle with radius correctly 1`] = `
+<div
+  className="estimated-population"
+>
+  <div
+    className="estimated-population__figure-wrapper"
+  >
+    <div
+      className="panel panel--default estimated-population__figure"
+    >
+      <div
+        className="figure__label"
+      >
+        Est. Total Population
+      </div>
+      <div
+        className="figure__value"
+      >
+        120,448
+      </div>
+      <div
+        className="figure__description"
+      >
+        Figures obtained through the latest US Census show that the immediate 
+        3.1
+         
+        mi
+         area around the site has approx.
+         
+        120,000
+         total inhabitants.
+      </div>
+    </div>
+  </div>
+  <div
+    className="estimated-population__map-wrapper"
+  >
+    <div
+      className="market-size-map"
+    >
+      <div
+        onClick={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseMove={[Function]}
+        style={
+          Object {
+            "height": "100%",
+            "margin": 0,
+            "padding": 0,
+            "position": "relative",
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "height": "100%",
+              "left": 0,
+              "margin": 0,
+              "padding": 0,
+              "position": "absolute",
+              "top": 0,
+              "width": "100%",
+            }
+          }
+        />
+        <div
+          style={
+            Object {
+              "height": "50%",
+              "left": "50%",
+              "margin": 0,
+              "padding": 0,
+              "position": "absolute",
+              "top": "50%",
+              "width": "50%",
+            }
+          }
+        >
+          <div
+            style={
+              Object {
+                "height": "100%",
+                "left": 0,
+                "margin": 0,
+                "padding": 0,
+                "position": "absolute",
+                "top": 0,
+                "width": "100%",
+              }
+            }
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`EstimatedPopulation renders zip code polygons correctly 1`] = `
+<div
+  className="estimated-population"
+>
+  <div
+    className="estimated-population__figure-wrapper"
+  >
+    <div
+      className="panel panel--default estimated-population__figure"
+    >
+      <div
+        className="figure__label"
+      >
+        Est. Total Population
+      </div>
+      <div
+        className="figure__value"
+      >
+        120,448
+      </div>
+      <div
+        className="figure__description"
+      >
+        Figures obtained through the latest US Census show that the selected zip codes have approx. 
+        120,000
+         total inhabitants.
+      </div>
+    </div>
+  </div>
+  <div
+    className="estimated-population__map-wrapper"
+  >
+    <div
+      className="market-size-map"
+    >
+      <div
+        onClick={[Function]}
+        onMouseDownCapture={[Function]}
+        onMouseMove={[Function]}
+        style={
+          Object {
+            "height": "100%",
+            "margin": 0,
+            "padding": 0,
+            "position": "relative",
+            "width": "100%",
+          }
+        }
+      >
+        <div
+          style={
+            Object {
+              "height": "100%",
+              "left": 0,
+              "margin": 0,
+              "padding": 0,
+              "position": "absolute",
+              "top": 0,
+              "width": "100%",
+            }
+          }
+        />
+        <div
+          style={
+            Object {
+              "height": "50%",
+              "left": "50%",
+              "margin": 0,
+              "padding": 0,
+              "position": "absolute",
+              "top": "50%",
+              "width": "50%",
+            }
+          }
+        >
+          <div
+            style={
+              Object {
+                "height": "100%",
+                "left": 0,
+                "margin": 0,
+                "padding": 0,
+                "position": "absolute",
+                "top": 0,
+                "width": "100%",
+              }
+            }
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

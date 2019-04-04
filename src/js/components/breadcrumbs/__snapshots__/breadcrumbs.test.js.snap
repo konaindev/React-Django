@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Breadcrumbs renders correctly 1`] = `
+<div
+  className="breadcrumbs"
+>
+  <span
+    className="breadcrumbs__item"
+  >
+    <a
+      href="/releases"
+    >
+      Releases
+    </a>
+  </span>
+  <span
+    className="breadcrumbs__item"
+  >
+    2.15.8 Release Title | 3/21/2019
+  </span>
+</div>
+`;

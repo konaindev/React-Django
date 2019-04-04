@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReportSection renders correctly 1`] = `
+<div
+  className="report-section"
+>
+  <div
+    className="section-header"
+  >
+    <p
+      className="section-header__title"
+    >
+      Test Name
+    </p>
+  </div>
+</div>
+`;
+
+exports[`ReportSection renders with report date span correctly 1`] = `
+<div
+  className="report-section"
+>
+  <div
+    className="section-header"
+  >
+    <p
+      className="section-header__title"
+    >
+      Test Name
+    </p>
+    <div
+      className="section-header__extra"
+    >
+      <div
+        className="report-date-span__content"
+      >
+        <span
+          className="report-date-span__content-name"
+        >
+          Report Span
+           (
+          1 mo.
+          )
+        </span>
+        <span
+          className="report-date-span__content-dates"
+        >
+          1/1/18
+           -
+           
+          2/1/18
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+`;

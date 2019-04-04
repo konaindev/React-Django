@@ -1,0 +1,907 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RentToIncomeAnalysis renders in large mode correctly 1`] = `
+<div
+  className="panel panel--default rent-to-income-analysis rent-to-income-analysis--flip"
+>
+  <div
+    className="rent-to-income-analysis__legends-wrapper"
+  >
+    <div
+      className="rent-to-income-analysis__ratio"
+    >
+      Rent to Income Ratio:
+    </div>
+    <div
+      className="rent-to-income-analysis__categories"
+    >
+      <div
+        className="rent-to-income-analysis__category"
+      >
+        <span
+          className="rent-to-income-analysis__category-color rent-to-income-analysis__category-color--0"
+        />
+        <span
+          className="rent-to-income-analysis__category-name"
+        >
+          Low
+        </span>
+      </div>
+      <div
+        className="rent-to-income-analysis__category"
+      >
+        <span
+          className="rent-to-income-analysis__category-color rent-to-income-analysis__category-color--1"
+        />
+        <span
+          className="rent-to-income-analysis__category-name"
+        >
+          Moderately Low
+        </span>
+      </div>
+      <div
+        className="rent-to-income-analysis__category"
+      >
+        <span
+          className="rent-to-income-analysis__category-color rent-to-income-analysis__category-color--2"
+        />
+        <span
+          className="rent-to-income-analysis__category-name"
+        >
+          Target
+        </span>
+      </div>
+      <div
+        className="rent-to-income-analysis__category"
+      >
+        <span
+          className="rent-to-income-analysis__category-color rent-to-income-analysis__category-color--3"
+        />
+        <span
+          className="rent-to-income-analysis__category-name"
+        >
+          Moderately High
+        </span>
+      </div>
+      <div
+        className="rent-to-income-analysis__category"
+      >
+        <span
+          className="rent-to-income-analysis__category-color rent-to-income-analysis__category-color--4"
+        />
+        <span
+          className="rent-to-income-analysis__category-name"
+        >
+          High
+        </span>
+      </div>
+    </div>
+  </div>
+  <div
+    className="rent-to-income-analysis__chart-wrapper"
+  >
+    <div
+      className="rent-to-income-analysis-chart"
+    >
+      <div
+        className="rent-to-income-analysis-chart__vertical-caption"
+      >
+        Monthly Rental (USD)
+      </div>
+      <div
+        className="rent-to-income-analysis-chart__horizontal-caption"
+      >
+        Annual Income (USD)
+      </div>
+      <div
+        className="rent-to-income-analysis-chart__body"
+      >
+        <div
+          className="rent-to-income-analysis-chart__group rent-to-income-analysis-chart__group--yaxis"
+        >
+          <div
+            className="rent-to-income-analysis-chart__cell"
+          >
+             
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--yaxis"
+          >
+            $1,000
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--yaxis"
+          >
+            $2,000
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--yaxis"
+          >
+            $3,000
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--yaxis"
+          >
+            $4,000
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--yaxis"
+          >
+            $5,000
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--yaxis"
+          >
+            $6,000
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--yaxis"
+          >
+            $7,000
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--yaxis"
+          >
+            $8,000
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--yaxis"
+          >
+            $9,000
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--yaxis"
+          >
+            $10,000
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--yaxis"
+          >
+            $11,000
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--yaxis"
+          >
+            $12,000
+          </div>
+        </div>
+        <div
+          className="rent-to-income-analysis-chart__group"
+        >
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--xaxis"
+          >
+            $50k
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--2"
+          >
+            24%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--4"
+          >
+            48%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+        </div>
+        <div
+          className="rent-to-income-analysis-chart__group"
+        >
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--xaxis"
+          >
+            $100k
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            12%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--2"
+          >
+            24%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--3"
+          >
+            36%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--4"
+          >
+            48%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+        </div>
+        <div
+          className="rent-to-income-analysis-chart__group"
+        >
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--xaxis"
+          >
+            $200k
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--0"
+          >
+            6%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            12%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            18%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--2"
+          >
+            24%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--2"
+          >
+            30%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--3"
+          >
+            36%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--3"
+          >
+            42%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--4"
+          >
+            48%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--4"
+          >
+            54%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+        </div>
+        <div
+          className="rent-to-income-analysis-chart__group"
+        >
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--xaxis"
+          >
+            $300k
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--0"
+          >
+            4%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--0"
+          >
+            8%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            12%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            16%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            20%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--2"
+          >
+            24%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--2"
+          >
+            28%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--2"
+          >
+            32%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--3"
+          >
+            36%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--3"
+          >
+            40%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--3"
+          >
+            44%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--4"
+          >
+            48%
+          </div>
+        </div>
+        <div
+          className="rent-to-income-analysis-chart__group"
+        >
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--xaxis"
+          >
+            $400k
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--0"
+          >
+            3%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--0"
+          >
+            6%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--0"
+          >
+            9%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            12%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            15%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            18%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            21%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--2"
+          >
+            24%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--2"
+          >
+            27%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--2"
+          >
+            30%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--2"
+          >
+            33%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--3"
+          >
+            36%
+          </div>
+        </div>
+        <div
+          className="rent-to-income-analysis-chart__group"
+        >
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--xaxis"
+          >
+            $500k
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--0"
+          >
+            2%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--0"
+          >
+            5%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--0"
+          >
+            7%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--0"
+          >
+            10%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            12%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            14%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            17%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            19%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            22%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--2"
+          >
+            24%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--2"
+          >
+            26%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--2"
+          >
+            29%
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`RentToIncomeAnalysis renders in small mode correctly 1`] = `
+<div
+  className="panel panel--default rent-to-income-analysis"
+>
+  <div
+    className="rent-to-income-analysis__legends-wrapper"
+  >
+    <div
+      className="rent-to-income-analysis__ratio"
+    >
+      Rent to Income Ratio:
+    </div>
+    <div
+      className="rent-to-income-analysis__categories"
+    >
+      <div
+        className="rent-to-income-analysis__category"
+      >
+        <span
+          className="rent-to-income-analysis__category-color rent-to-income-analysis__category-color--0"
+        />
+        <span
+          className="rent-to-income-analysis__category-name"
+        >
+          Low
+        </span>
+      </div>
+      <div
+        className="rent-to-income-analysis__category"
+      >
+        <span
+          className="rent-to-income-analysis__category-color rent-to-income-analysis__category-color--1"
+        />
+        <span
+          className="rent-to-income-analysis__category-name"
+        >
+          Moderately Low
+        </span>
+      </div>
+      <div
+        className="rent-to-income-analysis__category"
+      >
+        <span
+          className="rent-to-income-analysis__category-color rent-to-income-analysis__category-color--2"
+        />
+        <span
+          className="rent-to-income-analysis__category-name"
+        >
+          Target
+        </span>
+      </div>
+      <div
+        className="rent-to-income-analysis__category"
+      >
+        <span
+          className="rent-to-income-analysis__category-color rent-to-income-analysis__category-color--3"
+        />
+        <span
+          className="rent-to-income-analysis__category-name"
+        >
+          Moderately High
+        </span>
+      </div>
+      <div
+        className="rent-to-income-analysis__category"
+      >
+        <span
+          className="rent-to-income-analysis__category-color rent-to-income-analysis__category-color--4"
+        />
+        <span
+          className="rent-to-income-analysis__category-name"
+        >
+          High
+        </span>
+      </div>
+    </div>
+  </div>
+  <div
+    className="rent-to-income-analysis__chart-wrapper"
+  >
+    <div
+      className="rent-to-income-analysis-chart"
+    >
+      <div
+        className="rent-to-income-analysis-chart__vertical-caption"
+      >
+        Monthly Rental (USD)
+      </div>
+      <div
+        className="rent-to-income-analysis-chart__horizontal-caption"
+      >
+        Annual Income (USD)
+      </div>
+      <div
+        className="rent-to-income-analysis-chart__body"
+      >
+        <div
+          className="rent-to-income-analysis-chart__group rent-to-income-analysis-chart__group--yaxis"
+        >
+          <div
+            className="rent-to-income-analysis-chart__cell"
+          >
+             
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--yaxis"
+          >
+            $1,000
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--yaxis"
+          >
+            $2,000
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--yaxis"
+          >
+            $3,000
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--yaxis"
+          >
+            $4,000
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--yaxis"
+          >
+            $5,000
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--yaxis"
+          >
+            $6,000
+          </div>
+        </div>
+        <div
+          className="rent-to-income-analysis-chart__group"
+        >
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--xaxis"
+          >
+            $50k
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--2"
+          >
+            24%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--4"
+          >
+            48%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+        </div>
+        <div
+          className="rent-to-income-analysis-chart__group"
+        >
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--xaxis"
+          >
+            $100k
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            12%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--2"
+          >
+            24%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--3"
+          >
+            36%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--4"
+          >
+            48%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color---1"
+          />
+        </div>
+        <div
+          className="rent-to-income-analysis-chart__group"
+        >
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--xaxis"
+          >
+            $200k
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--0"
+          >
+            6%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            12%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            18%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--2"
+          >
+            24%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--2"
+          >
+            30%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--3"
+          >
+            36%
+          </div>
+        </div>
+        <div
+          className="rent-to-income-analysis-chart__group"
+        >
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--xaxis"
+          >
+            $300k
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--0"
+          >
+            4%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--0"
+          >
+            8%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            12%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            16%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            20%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--2"
+          >
+            24%
+          </div>
+        </div>
+        <div
+          className="rent-to-income-analysis-chart__group"
+        >
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--xaxis"
+          >
+            $400k
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--0"
+          >
+            3%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--0"
+          >
+            6%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--0"
+          >
+            9%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            12%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            15%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            18%
+          </div>
+        </div>
+        <div
+          className="rent-to-income-analysis-chart__group"
+        >
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis-chart__cell--xaxis"
+          >
+            $500k
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--0"
+          >
+            2%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--0"
+          >
+            5%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--0"
+          >
+            7%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--0"
+          >
+            10%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            12%
+          </div>
+          <div
+            className="rent-to-income-analysis-chart__cell rent-to-income-analysis__category-color--1"
+          >
+            14%
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
