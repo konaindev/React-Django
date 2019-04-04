@@ -13,6 +13,11 @@
     "test-ui": "jest",
     "test-ui-update-snapshots": "jest --updateSnapshot"
   },
+  "storybook-deployer": {
+    "gitUsername": "Storybook Deployer",
+    "gitEmail": "storybook.deployer@remarkably.io",
+    "commitMessage": "Deploy Storybook to GitHub Pages [skip ci]"
+  },
   "devDependencies": {
     "@babel/core": "^7",
     "@babel/plugin-proposal-optional-chaining": "^7.2.0",
