@@ -128,7 +128,7 @@ def col_range(start_col, end_col):
 SchemaItem = namedtuple("SchemaItem", ["getter", "data_type", "converter"])
 
 
-def base_getter(workbook, sheet=None, col=None, row=None):
+def base_getter(workbook, sheet, col, row):
     if workbook is None:
         raise ExcelProgrammingError(message="No workbook found")
     if (not sheet) or (not col) or (not row):
@@ -149,6 +149,91 @@ def loc(location=None, sheet=None, col=None, row=None):
 
     def getter(workbook, sheet, col, row):
         return base_getter(workbook, sheet or d_sheet, col or d_col, row or d_row)
+
+    return getter
+
+
+MATCHERS = {
+    "eq": lambda v, t: v == t,
+    "gt": lambda v, t: v > t,
+    "gte": lambda v, t: v >= t,
+    "lt": lambda v, t: v < t,
+    "lte": lambda v, t: v <= t,
+    "exact": lambda v, t: v == t,  # synonym for eq
+    "iexact": lambda v, t: v.casefold() == t.casefold(),
+    "startswith": lambda v, t: v.startswith(t),
+    "istartswith": lambda v, t: v.casefold().startswith(t.casefold()),
+    "contains": lambda v, t: t in v,
+    "icontains": lambda v, t: t.casefold() in v.casefold(),
+    "endswith": lambda v, t: v.endswith(t),
+    "iendswith": lambda v, t: v.casefold().endswith(t.casefold()),
+}
+
+
+def match(v, **query):
+    """
+    Returns True if the `v` matches the constraints provided in `query`.
+
+    The `query` parameters provide a set of simple but flexible matching options,
+    including:
+
+        eq, gt, gte, lt, lte, 
+        exact, iexact, startswith, istartswith, contains, icontains, endswith, iendswith
+
+    These are similar to value filters in Django querysets.
+    """
+    return all((MATCHERS[k](v, t) for k, t in query.items()))
+
+
+def matchp(**query):
+    """
+    Returns a predicate matcher method.
+    """
+    return lambda v: match(v, **query)
+
+
+def imatchp(t):
+    """
+    Convenience; return a predicate matcher that always uses icontains.
+    """
+    return matchp(icontains=t)
+
+
+def find_col(header_row, predicate, start_col="A", end_col="ZZ"):
+    """
+    Returns a getter method that locates a cell by looking for the column
+    that matches a given `predicate` in the provided `header_row`.
+
+    As a convenience, if `predicate` is a string, a match method is created
+    using an `icontains=predicate` query.
+
+    The `header_row` is scanned from `start_col` to `end_col`, which default
+    to "reasonable" values.
+    """
+    if isinstance(predicate, str):
+        predicate = matchp(icontains=predicate)
+
+    # We only want to perform the search once, so we cache the found
+    # column in the outer scope.
+    cached_col = None
+
+    def find(workbook, sheet):
+        """Perform the actual search."""
+        # Gin up a sequence of columns whose value in the header_row
+        # satisfy the predicate
+        seq = (
+            col
+            for col in col_range(start_col, end_col)
+            if predicate(base_getter(workbook, sheet, col, header_row).value)
+        )
+        # Return the first item in the sequence, or None
+        return next(seq, None)
+
+    def getter(workbook, sheet, col, row):
+        nonlocal cached_col
+        if cached_col is None:
+            cached_col = find(workbook, sheet)
+        return base_getter(workbook, sheet, cached_col or col, row)
 
     return getter
 
@@ -350,44 +435,79 @@ class BaselinePerfImporter(RemarkablyExcelImporter):
         loc("META!B8"), DataType.DATETIME, date_from_datetime
     )
 
+    HEADER_ROW = 2
+
     PERIOD_SHEET = "output_periods"
 
     PERIOD_ROW_SCHEMA = {
-        "start": SchemaItem(loc("A"), DataType.DATETIME, date_from_datetime),
-        "end": SchemaItem(loc("B"), DataType.DATETIME, date_from_datetime),
-        "leased_units_start": SchemaItem(loc("C"), DataType.NUMERIC, int),
-        "leases_ended": SchemaItem(loc("F"), DataType.NUMERIC, int),
-        "lease_applications": SchemaItem(loc("D"), DataType.NUMERIC, int),
-        "leases_executed": SchemaItem(loc("E"), DataType.NUMERIC, int),
-        "lease_cds": SchemaItem(loc("G"), DataType.NUMERIC, int),
-        "lease_renewal_notices": SchemaItem(loc("I"), DataType.NUMERIC, int),
-        "lease_renewals": SchemaItem(loc("H"), DataType.NUMERIC, int),
-        "lease_vacation_notices": SchemaItem(loc("J"), DataType.NUMERIC, int),
-        "occupiable_units_start": SchemaItem(loc("L"), DataType.NUMERIC, int),
-        "occupied_units_start": SchemaItem(loc("K"), DataType.NUMERIC, int),
-        "move_ins": SchemaItem(loc("M"), DataType.NUMERIC, int),
-        "move_outs": SchemaItem(loc("N"), DataType.NUMERIC, int),
-        "acq_reputation_building": SchemaItem(loc("R"), DataType.NUMERIC, int),
-        "acq_demand_creation": SchemaItem(loc("S"), DataType.NUMERIC, d_quant_currency),
+        "start": SchemaItem(
+            find_col(HEADER_ROW, "start date"), DataType.DATETIME, date_from_datetime
+        ),
+        "end": SchemaItem(
+            find_col(HEADER_ROW, "end date"), DataType.DATETIME, date_from_datetime
+        ),
+        "leased_units_start": SchemaItem(
+            find_col(HEADER_ROW, "leased units @ start"), DataType.NUMERIC, int
+        ),
+        "leases_ended": SchemaItem(
+            find_col(HEADER_ROW, "ended"), DataType.NUMERIC, int
+        ),
+        "lease_applications": SchemaItem(
+            find_col(HEADER_ROW, "APPs"), DataType.NUMERIC, int
+        ),
+        "leases_executed": SchemaItem(
+            find_col(HEADER_ROW, "EXEs"), DataType.NUMERIC, int
+        ),
+        "lease_cds": SchemaItem(find_col(HEADER_ROW, "CDs"), DataType.NUMERIC, int),
+        "lease_renewal_notices": SchemaItem(
+            find_col(HEADER_ROW, "Notices: Renewals"), DataType.NUMERIC, int
+        ),
+        "lease_renewals": SchemaItem(
+            # Use matchp(iexact=...) to disambiguate with "Notices: Renewals"
+            find_col(HEADER_ROW, matchp(iexact="Renewals")),
+            DataType.NUMERIC,
+            int,
+        ),
+        "lease_vacation_notices": SchemaItem(
+            find_col(HEADER_ROW, "Notices: Vacate"), DataType.NUMERIC, int
+        ),
+        "occupiable_units_start": SchemaItem(
+            find_col(HEADER_ROW, "occupiable units"), DataType.NUMERIC, int
+        ),
+        "occupied_units_start": SchemaItem(
+            find_col(HEADER_ROW, "occupied units"), DataType.NUMERIC, int
+        ),
+        "move_ins": SchemaItem(find_col(HEADER_ROW, "move ins"), DataType.NUMERIC, int),
+        "move_outs": SchemaItem(
+            find_col(HEADER_ROW, "move outs"), DataType.NUMERIC, int
+        ),
+        "acq_reputation_building": SchemaItem(
+            find_col(HEADER_ROW, "Reputation ACQ"), DataType.NUMERIC, int
+        ),
+        "acq_demand_creation": SchemaItem(
+            find_col(HEADER_ROW, "Demand ACQ"), DataType.NUMERIC, d_quant_currency
+        ),
         "acq_leasing_enablement": SchemaItem(
-            loc("T"), DataType.NUMERIC, d_quant_currency
+            find_col(HEADER_ROW, "Leasing ACQ"), DataType.NUMERIC, d_quant_currency
         ),
         "acq_market_intelligence": SchemaItem(
-            loc("U"), DataType.NUMERIC, d_quant_currency
+            find_col(HEADER_ROW, "Market ACQ"), DataType.NUMERIC, d_quant_currency
         ),
         "ret_reputation_building": SchemaItem(
-            loc("V"), DataType.NUMERIC, d_quant_currency
+            find_col(HEADER_ROW, "Reputation RET"), DataType.NUMERIC, d_quant_currency
         ),
-        "ret_demand_creation": SchemaItem(loc("W"), DataType.NUMERIC, d_quant_currency),
+        "ret_demand_creation": SchemaItem(
+            find_col(HEADER_ROW, "Demand RET"), DataType.NUMERIC, d_quant_currency
+        ),
         "ret_leasing_enablement": SchemaItem(
-            loc("X"), DataType.NUMERIC, d_quant_currency
+            find_col(HEADER_ROW, "Leasing RET"), DataType.NUMERIC, d_quant_currency
         ),
         "ret_market_intelligence": SchemaItem(
-            loc("Y"), DataType.NUMERIC, d_quant_currency
+            find_col(HEADER_ROW, "Market RET"), DataType.NUMERIC, d_quant_currency
         ),
-        "usvs": SchemaItem(loc("O"), DataType.NUMERIC, int),
-        "inquiries": SchemaItem(loc("P"), DataType.NUMERIC, int),
-        "tours": SchemaItem(loc("Q"), DataType.NUMERIC, int),
+        "usvs": SchemaItem(find_col(HEADER_ROW, "USVs"), DataType.NUMERIC, int),
+        "inquiries": SchemaItem(find_col(HEADER_ROW, "INQs"), DataType.NUMERIC, int),
+        "tours": SchemaItem(find_col(HEADER_ROW, "TOUs"), DataType.NUMERIC, int),
     }
 
     def check_meta(self):
