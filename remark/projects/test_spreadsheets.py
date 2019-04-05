@@ -99,8 +99,15 @@ class BaselinePerfTestCase(TestCase):
     )
 
     def test_example_data(self):
+        """
+        An integration test that ensures that both our checked-in
+        example baseline/perf spreadsheet *and* our importer are in
+        agreement. If they aren't... boom!
+        """
         importer = BaselinePerfImporter(self.TEST_FILE_NAME)
-        self.assertTrue(importer.is_valid())
+        if not importer.is_valid():
+            raise importer.errors[0]
+
         self.assertEqual(
             importer.cleaned_data["baseline_start_date"].date(),
             datetime.date(year=2018, month=8, day=1),
@@ -118,4 +125,5 @@ class BaselinePerfTestCase(TestCase):
             importer.cleaned_data["periods"][-1]["end"].date(),
             datetime.date(year=2019, month=3, day=15),
         )
+        self.assertEqual(importer.cleaned_data["periods"][1]["inquiries"], 73)
 
