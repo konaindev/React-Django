@@ -522,17 +522,17 @@ class BaselinePerfImporter(RemarkablyExcelImporter):
         self.check_meta()
         start_row = self.schema_value(self.START_ROW)
         end_row = self.schema_value(self.END_ROW)
-        self.cleaned_data["periods"] = self.row_table(
-            schema=self.PERIOD_ROW_SCHEMA,
-            start_row=start_row,
-            end_row=end_row,
-            sheet=self.PERIOD_SHEET,
-        )
         self.cleaned_data["baseline_start_date"] = self.schema_value(
             self.BASELINE_START_DATE
         )
         self.cleaned_data["baseline_end_date"] = self.schema_value(
             self.BASELINE_END_DATE
+        )
+        self.cleaned_data["periods"] = self.row_table(
+            schema=self.PERIOD_ROW_SCHEMA,
+            start_row=start_row,
+            end_row=end_row,
+            sheet=self.PERIOD_SHEET,
         )
 
 
