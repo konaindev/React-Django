@@ -110,8 +110,7 @@ def col_for_index(index):
     i = 0
     col = ""
     while q > 0 or i == 0:
-        r = (q - 1) % 26
-        q = (q - 1) // 26
+        q, r = divmod(q - 1, 26)
         i += 1
         col = chr(ord("A") + r) + col
     return col
