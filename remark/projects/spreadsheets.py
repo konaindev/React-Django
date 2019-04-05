@@ -105,13 +105,9 @@ def index_for_col(col):
 def col_for_index(index):
     """Given a column index with A = 1, return a name for it."""
     # This is base-10 to base-26 arithmetic, shifted by 1
-    assert index > 0
-    q = index
-    i = 0
     col = ""
-    while q > 0 or i == 0:
-        q, r = divmod(q - 1, 26)
-        i += 1
+    while index > 0:
+        index, r = divmod(index - 1, 26)
         col = chr(ord("A") + r) + col
     return col
 
