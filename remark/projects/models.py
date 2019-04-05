@@ -295,7 +295,7 @@ class Spreadsheet(models.Model):
         help_text="Raw imported JSON data. Schema depends on spreadsheet kind.",
     )
 
-    def is_active(self):
+    def is_latest_for_kind(self):
         """Return True if this spreadsheet is the latest for its kind and subkind."""
         return (
             Spreadsheet.objects.latest_for_kind(self.kind, self.subkind).id == self.id
