@@ -205,7 +205,8 @@ def find_col(header_row, predicate, start_col="A", end_col="ZZ"):
     that matches a given `predicate` in the provided `header_row`.
 
     As a convenience, if `predicate` is a string, a match method is created
-    using an `icontains=predicate` query.
+    using an `icontains=predicate` query. That's the form of query you
+    probably want most of the time.
 
     The `header_row` is scanned from `start_col` to `end_col`, which default
     to "reasonable" values.
@@ -234,6 +235,46 @@ def find_col(header_row, predicate, start_col="A", end_col="ZZ"):
         if cached_col is None:
             cached_col = find(workbook, sheet)
         return base_getter(workbook, sheet, cached_col or col, row)
+
+    return getter
+
+
+def find_row(header_col, predicate, start_row=1, end_row=100):
+    """
+    Returns a getter method that locates a cell by looking for the row
+    that matches a given `predicate` in the provided `header_col`.
+
+    As a convenience, if `predicate` is a string, a match method is created
+    using an `icontains=predicate` query. That's the form of query you
+    probably want most of the time.
+
+    The `header_col` is scanned from `start_row` to `end_row`, which default
+    to "reasonable" values.
+    """
+    if isinstance(predicate, str):
+        predicate = matchp(icontains=predicate)
+
+    # We only want to perform the search once, so we cache the found
+    # row in the outer scope.
+    cached_row = None
+
+    def find(workbook, sheet):
+        """Perform the actual search."""
+        # Gin up a sequence of rows whose value in the header_col
+        # satisfy the predicate
+        seq = (
+            row
+            for row in col_range(start_row, end_row)
+            if predicate(base_getter(workbook, sheet, header_col, row).value)
+        )
+        # Return the first item in the sequence, or None
+        return next(seq, None)
+
+    def getter(workbook, sheet, col, row):
+        nonlocal cached_row
+        if cached_row is None:
+            cached_row = find(workbook, sheet)
+        return base_getter(workbook, sheet, col, cached_row or row)
 
     return getter
 
