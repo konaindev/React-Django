@@ -2,6 +2,8 @@ import React from "react";
 import cx from "classnames";
 import ReactTable from "react-table";
 
+import { formatCurrency } from "../../utils/formatters.js";
+
 export function CampaignPlanGenericTable({ tabKey, tactics }) {
   return (
     <ReactTable
@@ -62,27 +64,32 @@ function getColumns(tabKey) {
     {
       Header: "Tactic",
       accessor: "name",
-      width: 470
+      width: 470,
+      Cell: renderTactic
     },
     {
       Header: "Schedule",
       accessor: "schedule",
-      width: 254
+      width: 254,
+      Cell: renderSchedule
     },
     {
       Header: "Status",
       accessor: "status",
-      width: 134
+      width: 134,
+      Cell: renderStatus
     },
     {
       Header: "Notes/Assumptions",
       accessor: "notes",
-      width: 304
+      width: 304,
+      Cell: renderNotes
     },
     {
       Header: "Cost",
-      accessor: "costs",
-      width: 156
+      accessor: "total_cost",
+      width: 156,
+      Cell: renderCost
     }
   ];
 
@@ -90,5 +97,20 @@ function getColumns(tabKey) {
     ? columnsForDemandCreation
     : columnsForGeneric;
 }
+
+const renderTactic = ({ value }) => <div>{value}</div>;
+const renderSchedule = ({ value }) => <div>{value}</div>;
+const renderStatus = ({ value }) => {
+  const statusLabels = {
+    not_started: "Not Started",
+    in_progress: "In Progress",
+    complete: "Complete"
+  };
+  return <div className={`cell-status ${value}`}>{statusLabels[value]}</div>;
+};
+const renderNotes = ({ value }) => <div>{value}</div>;
+const renderCost = ({ value }) => {
+  return <div>{formatCurrency(value)}</div>;
+};
 
 export default CampaignPlanGenericTable;

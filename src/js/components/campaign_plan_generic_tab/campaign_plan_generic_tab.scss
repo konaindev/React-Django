@@ -1,116 +1,107 @@
 @import "css/base.scss";
 
-@mixin subheading() {
+@mixin table_header_text() {
     color: $content-text-primary-color;
     font-size: $text-xs;
+    line-height: $text-xl;
     text-transform: uppercase;
     letter-spacing: 1px;
 }
 
-.campaign-plan-overview-tab {
-
-}
-
-/* stylelint-disable at-rule-no-unknown */
-.campaign-plan-overview-table {
-    font-size: $text-sm;
-    line-height: $text-xl;
+@mixin table_content_text() {
     color: $content-text-secondary-color;
+    font-size: $text-sm;
+    line-height: $text-2xl;
+}
 
-    .table__row {
-        display: flex;
-        border-bottom: 1px solid $table-border-color;
+$status_color_complete: $green-3;
+$status_color_in_progress: $blue-4;
+$status_color_not_started: $content-text-secondary-color;
 
-        &--last {
-            border-bottom: none;
-        }
-    }
+.campaign-plan-generic-tab {
 
-    .row__label {
-        flex: 0 0 252px;
-        width: 252px;
-        padding: 24px 60px;
-        border-right: 1px solid $table-border-color;
+}
+
+.campaign-plan-generic-table {
+    height: 100%;
+    background-color: $panel-background-color;
+
+    .rt-thead {
         color: $content-text-primary-color;
-    }
+        border-color: $table-border-color;
+        border-bottom-width: 1px;
+        box-shadow: none !important;
 
-    .row__content {
-        flex: 1 1 auto;
-        color: $content-text-secondary-color;
-        padding: 24px 40px;
-    }
+        @include table_header_text();
 
-    .target-segments {
-        display: flex;
-        padding: 25px 0 24px 40px;
-    }
+        .rt-th {
+            border: none;
 
-    .target-segment-item {
-        flex: 1;
-        margin-right: 60px;
+            &>div {
+                padding: 44px 20px 36px 20px;
+            }
 
-        & > p:first-child {
-            @include subheading();
-            margin-bottom: 10px;
-        }
-    }
+            &:first-child {
+                &>div {
+                    padding-left: 60px;
+                }
+            }
 
-    .objectives-markdown {
-        padding:0;
-    }
-
-    .objective-item {
-        padding: 24px 40px 20px 40px;
-        border-bottom: 1px solid $table-border-color;
-
-        &:last-child {
-            border-bottom: none;
-        }
-
-        & > h1 {
-            @include subheading();
-            margin-bottom: 0.5rem;
-        }
-    }
-
-    .est-campaign-target {
-        h1 {
-            font-size: $text-4xl;
-            line-height: $text-5xl;
-            color: $content-text-primary-color;
-        }
-
-        p {
-            line-height: 28px;
-        }
-    }
-
-    .target-investments {
-        width: 280px;
-
-        & > p {
-            display: flex;
-            justify-content: space-between;
-
-            span:nth-child(2) {
-                flex: 1;
-                margin: 0.75rem 1rem 0 1rem;
-                border-top: 1px dashed $content-text-secondary-color;
+            &:last-child {
+                &>div {
+                    padding-right: 60px;
+                }
             }
         }
     }
 
-    .markdown-content {
-        line-height: 28px;
+    .rt-tbody {
+        .rt-tr-group {
+            border-bottom-width: 1px;
+            border-color: $table-border-color;
+        }
 
-        ul {
-            padding-left: 1rem;
-            margin-top: 1rem;
+        .rt-td {
+            padding: 0;
+            border-color: $table-border-color;
+            @include table_content_text();
 
-            li {
-                list-style-type: disc;
+            &>div {
+                padding: 16px 20px;
+                white-space: normal;
             }
+
+            &:first-child {
+                &>div {
+                    padding-left: 60px;
+                }
+            }
+
+            &:last-child {
+                &>div {
+                    padding-right: 60px;
+                }
+            }
+        }
+    }
+
+    .cell-status {
+        &.not_started {
+            color: $status_color_not_started;
+        }
+        &.in_progress {
+            color: $status_color_in_progress;
+        }
+        &.complete {
+            color: $status_color_complete;
         }
     }
 }
-/* stylelint-enable at-rule-no-unknown */
+
+.table-column-text-left {
+    text-align: left;
+}
+
+.table-column-text-right {
+    text-align: right;
+}
