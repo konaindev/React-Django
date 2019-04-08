@@ -39,7 +39,7 @@ exports[`ReportSection renders with report date span correctly 1`] = `
         >
           Report Span
            (
-          1 mo.
+          4 wks.
           )
         </span>
         <span

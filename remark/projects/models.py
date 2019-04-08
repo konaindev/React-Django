@@ -9,7 +9,12 @@ from jsonfield import JSONField
 from stdimage.models import StdImageField
 
 from remark.lib.tokens import public_id
-from remark.lib.metrics import PointMetric, SumIntervalMetric, ModelPeriod
+from remark.lib.metrics import (
+    PointMetric,
+    EndPointMetric,
+    SumIntervalMetric,
+    ModelPeriod,
+)
 from .importers import get_importer_for_kind, SpreadsheetKind
 
 
@@ -389,7 +394,7 @@ class Period(ModelPeriod, models.Model):
         decimal_places=3,
         help_text="Target: lease percentage (like 0.9)",
     )
-    target_lease_percent.metric = PointMetric()
+    target_lease_percent.metric = EndPointMetric()
 
     target_lease_applications = models.IntegerField(
         null=True, blank=True, default=None, help_text="Target: lease applications"

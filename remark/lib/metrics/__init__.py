@@ -29,13 +29,14 @@ from .interval import SumIntervalMetric
 from .metric import MetricBase
 from .multiperiod import BareMultiPeriod, MultiPeriodBase
 from .period import BarePeriod, ModelPeriod, PeriodBase
-from .point import PointMetric
+from .point import PointMetric, EndPointMetric
 from .timevalue import TimeValue, TimeValueCollection
 
 __all__ = (
     BareMultiPeriod,
     BarePeriod,
     DateSequence,
+    EndPointMetric,
     InvalidMetricOperation,
     MetricBase,
     ModelPeriod,
