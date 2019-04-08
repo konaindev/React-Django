@@ -30,43 +30,50 @@ function getColumns(tabKey) {
       Header: "Tactic",
       accessor: "name",
       width: 300,
-      Cell: renderTactic
+      Cell: renderTactic,
+      headerClassName: "text-left"
     },
     {
       Header: "Schedule",
       accessor: "schedule",
       width: 160,
-      Cell: renderSchedule
+      Cell: renderSchedule,
+      headerClassName: "text-left"
     },
     {
       Header: "Status",
       accessor: "status",
       width: 120,
-      Cell: renderStatus
+      Cell: renderStatus,
+      headerClassName: "text-left"
     },
     {
       Header: "Notes/Assumptions",
       accessor: "notes",
       width: 248,
-      Cell: renderNotes
+      Cell: renderNotes,
+      headerClassName: "text-left"
     },
     {
       Header: "# Of USV",
       accessor: "volumes",
       width: 110,
-      Cell: renderNoUSV
+      Cell: renderNoUSV,
+      headerClassName: "text-right"
     },
     {
       Header: "# of INQ",
       accessor: "volumes",
       width: 120,
-      Cell: renderNoINQ
+      Cell: renderNoINQ,
+      headerClassName: "text-right"
     },
     {
       Header: "Cost",
       accessor: "costs",
       width: 260,
-      Cell: renderCostWithAvg
+      Cell: renderCostWithAvg,
+      headerClassName: "text-right"
     }
   ];
 
@@ -75,32 +82,36 @@ function getColumns(tabKey) {
       Header: "Tactic",
       accessor: "name",
       width: 470,
-      Cell: renderTactic
+      Cell: renderTactic,
+      headerClassName: "text-left"
     },
     {
       Header: "Schedule",
       accessor: "schedule",
       width: 254,
-      Cell: renderSchedule
+      Cell: renderSchedule,
+      headerClassName: "text-left"
     },
     {
       Header: "Status",
       accessor: "status",
       width: 134,
-      Cell: renderStatus
+      Cell: renderStatus,
+      headerClassName: "text-left"
     },
     {
       Header: "Notes/Assumptions",
       accessor: "notes",
       width: 304,
-      Cell: renderNotes
+      Cell: renderNotes,
+      headerClassName: "text-left"
     },
     {
       Header: "Cost",
       accessor: "total_cost",
       width: 156,
       Cell: renderCost,
-      className: "text-right"
+      headerClassName: "text-right"
     }
   ];
 
