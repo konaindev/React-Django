@@ -118,6 +118,13 @@ class Project(models.Model):
         help_text="Campaign Plan JSON data. Must conform to the schema defined in CampaignPlan.ts",
     )
 
+    total_units = models.IntegerField(
+        null=True,
+        blank=True,
+        default=None,
+        help_text="The total number of units in this project/property.",
+    )
+
     average_tenant_age = models.FloatField(
         null=True,
         blank=True,
@@ -616,10 +623,15 @@ class Period(ModelPeriod, models.Model):
     def lowest_monthly_rent(self):
         return self.project.lowest_monthly_rent
 
+    @property
+    def total_units(self):
+        return self.project.total_units
+
     def _build_metrics(self):
         # Manually insert average_monthly_rent and lowest_monthly_rent
         # TODO consider better ways to do this... -Dave
         super()._build_metrics()
+        self._metrics["total_units"] = PointMetric()
         self._metrics["average_monthly_rent"] = PointMetric()
         self._metrics["lowest_monthly_rent"] = PointMetric()
 
