@@ -27,7 +27,7 @@ class BaselinePerfImporter(ProjectExcelImporter):
 
     PERIOD_SHEET = "output_periods"
 
-    PERIOD_SROW = SchemaRow(
+    PERIOD_ROW_SCHEMA = SchemaRow(
         {
             "start": SchemaCell(
                 find_col(HEADER_ROW, "start date"), DataType.DATETIME, date_converter
@@ -131,7 +131,7 @@ class BaselinePerfImporter(ProjectExcelImporter):
             self.BASELINE_END_DATE
         )
         self.cleaned_data["periods"] = self.row_table(
-            schema=self.PERIOD_SROW,
+            schema=self.PERIOD_ROW_SCHEMA,
             start_row=start_row,
             end_row=end_row,
             sheet=self.PERIOD_SHEET,
