@@ -1,0 +1,138 @@
+{
+    "$ref": "#/definitions/ImportedBaselinePerfData",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "ImportedBaselinePerfData": {
+            "description": "The intermediate import structure used by the BaselinePerf excel spreadsheet importer",
+            "properties": {
+                "baseline_end_date": {
+                    "type": "string"
+                },
+                "baseline_start_date": {
+                    "type": "string"
+                },
+                "periods": {
+                    "items": {
+                        "$ref": "#/definitions/ImportedPeriod"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "baseline_end_date",
+                "baseline_start_date",
+                "periods"
+            ],
+            "type": "object"
+        },
+        "ImportedPeriod": {
+            "description": "A single intermediate period structure used by the BaselinePerf excel spreadsheet importer",
+            "properties": {
+                "acq_demand_creation": {
+                    "type": "string"
+                },
+                "acq_leasing_enablement": {
+                    "type": "string"
+                },
+                "acq_market_intelligence": {
+                    "type": "string"
+                },
+                "acq_reputation_building": {
+                    "type": "string"
+                },
+                "end": {
+                    "type": "string"
+                },
+                "inquiries": {
+                    "type": "integer"
+                },
+                "lease_applications": {
+                    "type": "integer"
+                },
+                "lease_cds": {
+                    "type": "integer"
+                },
+                "lease_renewal_notices": {
+                    "type": "integer"
+                },
+                "lease_renewals": {
+                    "type": "integer"
+                },
+                "lease_vacation_notices": {
+                    "type": "integer"
+                },
+                "leased_units_start": {
+                    "type": "integer"
+                },
+                "leases_ended": {
+                    "type": "integer"
+                },
+                "leases_executed": {
+                    "type": "integer"
+                },
+                "move_ins": {
+                    "type": "integer"
+                },
+                "move_outs": {
+                    "type": "integer"
+                },
+                "occupiable_units_start": {
+                    "type": "integer"
+                },
+                "occupied_units_start": {
+                    "type": "integer"
+                },
+                "ret_demand_creation": {
+                    "type": "string"
+                },
+                "ret_leasing_enablement": {
+                    "type": "string"
+                },
+                "ret_market_intelligence": {
+                    "type": "string"
+                },
+                "ret_reputation_building": {
+                    "type": "string"
+                },
+                "start": {
+                    "type": "string"
+                },
+                "tours": {
+                    "type": "integer"
+                },
+                "usvs": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "acq_demand_creation",
+                "acq_leasing_enablement",
+                "acq_market_intelligence",
+                "acq_reputation_building",
+                "end",
+                "inquiries",
+                "lease_applications",
+                "lease_cds",
+                "lease_renewal_notices",
+                "lease_renewals",
+                "lease_vacation_notices",
+                "leased_units_start",
+                "leases_ended",
+                "leases_executed",
+                "move_ins",
+                "move_outs",
+                "occupiable_units_start",
+                "occupied_units_start",
+                "ret_demand_creation",
+                "ret_leasing_enablement",
+                "ret_market_intelligence",
+                "ret_reputation_building",
+                "start",
+                "tours",
+                "usvs"
+            ],
+            "type": "object"
+        }
+    }
+}
+

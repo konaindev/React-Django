@@ -73,7 +73,9 @@ class BaselinePerfImporter(ProjectExcelImporter):
                 find_col(HEADER_ROW, "move outs"), DataType.NUMERIC, int
             ),
             "acq_reputation_building": SchemaCell(
-                find_col(HEADER_ROW, "Reputation ACQ"), DataType.NUMERIC, int
+                find_col(HEADER_ROW, "Reputation ACQ"),
+                DataType.NUMERIC,
+                currency_converter,
             ),
             "acq_demand_creation": SchemaCell(
                 find_col(HEADER_ROW, "Demand ACQ"), DataType.NUMERIC, currency_converter
