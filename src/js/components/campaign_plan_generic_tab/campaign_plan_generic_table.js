@@ -19,6 +19,8 @@ export function CampaignPlanGenericTable({ tabKey, tactics }) {
   );
 }
 
+export default CampaignPlanGenericTable;
+
 function getColumns(tabKey) {
   const columnsForDemandCreation = [
     {
@@ -105,7 +107,7 @@ function getColumns(tabKey) {
 }
 
 // Cell Renderers
-const renderTactic = ({ value, original }) => {
+function renderTactic({ value, original }) {
   const tooltip = original.tooltip;
 
   if (tooltip) {
@@ -119,21 +121,25 @@ const renderTactic = ({ value, original }) => {
   } else {
     return <div className="cell-tactic">{value}</div>;
   }
-};
+}
 
-const renderSchedule = ({ value }) => <div>{value}</div>;
+function renderSchedule({ value }) {
+  return <div>{value}</div>;
+}
 
-const renderNotes = ({ value }) => <div>{value}</div>;
+function renderNotes({ value }) {
+  return <div>{value}</div>;
+}
 
-const renderCost = ({ value }) => {
+function renderCost({ value }) {
   return (
     <div className="cell-metrics">
       <span>{formatCurrency(value)}</span>
     </div>
   );
-};
+}
 
-const renderCostWithAvg = ({ original }) => {
+function renderCostWithAvg({ original }) {
   const { cost_category, total_cost, base_cost } = original;
   const avgSuffixes = {
     monthly: "mo",
@@ -158,9 +164,9 @@ const renderCostWithAvg = ({ original }) => {
       </span>
     </div>
   );
-};
+}
 
-const renderNoUSV = ({ original }) => {
+function renderNoUSV({ original }) {
   const { volumes = {}, costs = {} } = original;
 
   return (
@@ -174,9 +180,9 @@ const renderNoUSV = ({ original }) => {
       )}
     </div>
   );
-};
+}
 
-const renderNoINQ = ({ original }) => {
+function renderNoINQ({ original }) {
   const { volumes = {}, costs = {} } = original;
 
   return (
@@ -190,17 +196,15 @@ const renderNoINQ = ({ original }) => {
       )}
     </div>
   );
-};
+}
 
-const renderStatus = ({ value }) => {
+function renderStatus({ value }) {
   const statusLabels = {
     not_started: "Not Started",
     in_progress: "In Progress",
     complete: "Complete"
   };
+
   return <div className={`cell-status ${value}`}>{statusLabels[value]}</div>;
-};
-
+}
 // End of Cell Renderers
-
-export default CampaignPlanGenericTable;
