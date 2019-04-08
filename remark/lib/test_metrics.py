@@ -9,6 +9,7 @@ from .metrics import (
     BareMultiPeriod,
     BarePeriod,
     DateSequence,
+    EndPointMetric,
     InvalidMetricOperation,
     PointMetric,
     SumIntervalMetric,
@@ -246,6 +247,32 @@ class UnifyTestCase(TestCase):
 
     def test_pit_earliest_no_values(self):
         metric = PointMetric()
+        value = metric.unify(DATE_A, DATE_C)
+        self.assertEqual(value, None)
+
+    def test_pit_end_1(self):
+        metric = EndPointMetric()
+        v1 = TimeValue(DATE_B, DATE_B, 1)
+        v2 = TimeValue(DATE_C, DATE_C, 2)
+        value = metric.unify(DATE_BC, DATE_CD, v1, v2)
+        self.assertEqual(value, 2)
+
+    def test_pit_end_2(self):
+        metric = EndPointMetric()
+        v1 = TimeValue(DATE_B, DATE_B, 1)
+        v2 = TimeValue(DATE_C, DATE_C, 2)
+        value = metric.unify(DATE_A, DATE_C, v1, v2)
+        self.assertEqual(value, 1)
+
+    def test_pit_end_3(self):
+        metric = EndPointMetric()
+        v1 = TimeValue(DATE_D, DATE_D, 1)
+        v2 = TimeValue(DATE_C, DATE_C, 2)
+        value = metric.unify(DATE_BC, DATE_C, v1, v2)
+        self.assertEqual(value, None)
+
+    def test_pit_end_no_values(self):
+        metric = EndPointMetric()
         value = metric.unify(DATE_A, DATE_C)
         self.assertEqual(value, None)
 
