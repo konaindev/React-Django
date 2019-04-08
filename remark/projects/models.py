@@ -10,7 +10,7 @@ from stdimage.models import StdImageField
 
 from remark.lib.tokens import public_id
 from remark.lib.metrics import PointMetric, SumIntervalMetric, ModelPeriod
-from .importers import BaselinePerfImporter
+from .importers import get_importer_for_kind, SpreadsheetKind
 
 
 def pro_public_id():
@@ -241,20 +241,6 @@ class Spreadsheet(models.Model):
 
     objects = SpreadsheetManager()
 
-    KIND_PERIODS = "periods"  # Baseline and perf periods spreadsheet
-    KIND_MODELING = "modeling"  # Modeling report (any kind)
-    KIND_MARKET = "market"  # TAM
-    KIND_CAMPAIGN = "campaign"  # Campaign Plan
-
-    SPREADSHEET_KINDS = [
-        (KIND_PERIODS, "Periods"),
-        (KIND_MODELING, "Modeling (must provide a subkind, too)"),
-        (KIND_MARKET, "Market Report"),
-        (KIND_CAMPAIGN, "Campaign Plan"),
-    ]
-
-    IMPORTER_CLASSES = {KIND_PERIODS: BaselinePerfImporter}
-
     project = models.ForeignKey(
         Project, on_delete=models.CASCADE, related_name="spreadsheets"
     )
@@ -277,7 +263,7 @@ class Spreadsheet(models.Model):
 
     kind = models.CharField(
         blank=False,
-        choices=SPREADSHEET_KINDS,
+        choices=SpreadsheetKind.CHOICES,
         db_index=True,
         max_length=128,
         help_text="The kind of data this spreadsheet contains.",
@@ -311,14 +297,9 @@ class Spreadsheet(models.Model):
             Spreadsheet.objects.latest_for_kind(self.kind, self.subkind).id == self.id
         )
 
-    def get_importer_class(self, kind=None):
-        """If an importer exists for this kind of spreadsheet, return it."""
-        return self.IMPORTER_CLASSES.get(kind or self.kind)
-
-    def get_importer(self, f, kind=None):
+    def get_importer(self, f):
         """Given a fileobj or the name of a file, return an importer (if any exists)."""
-        importer_class = self.get_importer_class(kind=kind)
-        return importer_class(f) if importer_class is not None else None
+        return get_importer_for_kind(self.kind, f)
 
     class Meta:
         # Always sort spreadsheets with the most recent created first.

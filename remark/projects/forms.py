@@ -2,6 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 from .models import Spreadsheet
+from .importers import get_importer_for_kind
 
 
 class SpreadsheetForm(forms.ModelForm):
@@ -27,9 +28,7 @@ class SpreadsheetForm(forms.ModelForm):
             )
 
         # Attempt to import and validate the spreadsheet contents
-        importer = self.instance.get_importer(
-            cleaned_data["file"], kind=cleaned_data["kind"]
-        )
+        importer = get_importer_for_kind(cleaned_data["kind"], cleaned_data["file"])
         if importer is None:
             raise ValidationError(
                 f"No spreadsheet importer available for {cleaned_data['kind']}"
