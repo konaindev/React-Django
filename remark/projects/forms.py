@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 from .models import Spreadsheet
-from .importers import get_importer_for_kind
+from .importers import get_importer_for_kind, SpreadsheetKind
 
 
 class SpreadsheetForm(forms.ModelForm):
@@ -16,7 +16,7 @@ class SpreadsheetForm(forms.ModelForm):
         cleaned_data = super().clean()
 
         if (
-            cleaned_data["kind"] == Spreadsheet.KIND_MODELING
+            cleaned_data["kind"] == SpreadsheetKind.MODELING
             and not cleaned_data["subkind"]
         ):
             raise ValidationError(

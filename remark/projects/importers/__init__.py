@@ -6,19 +6,19 @@ from .baseline_perf import BaselinePerfImporter
 
 
 class SpreadsheetKind:
-    KIND_PERIODS = "periods"  # Baseline and perf periods spreadsheet
-    KIND_MODELING = "modeling"  # Modeling report (any kind)
-    KIND_MARKET = "market"  # TAM
-    KIND_CAMPAIGN = "campaign"  # Campaign Plan
+    PERIODS = "periods"  # Baseline and perf periods spreadsheet
+    MODELING = "modeling"  # Modeling report (any kind)
+    MARKET = "market"  # TAM
+    CAMPAIGN = "campaign"  # Campaign Plan
 
     CHOICES = [
-        (KIND_PERIODS, "Periods"),
-        (KIND_MODELING, "Modeling (must provide a subkind, too)"),
-        (KIND_MARKET, "Market Report"),
-        (KIND_CAMPAIGN, "Campaign Plan"),
+        (PERIODS, "Periods"),
+        (MODELING, "Modeling (must provide a subkind, too)"),
+        (MARKET, "Market Report"),
+        (CAMPAIGN, "Campaign Plan"),
     ]
 
-    IMPORTERS = {KIND_PERIODS: BaselinePerfImporter}
+    IMPORTERS = {PERIODS: BaselinePerfImporter}
 
 
 def get_importer_for_kind(kind, f):
