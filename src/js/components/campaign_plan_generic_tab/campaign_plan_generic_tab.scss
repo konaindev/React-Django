@@ -119,3 +119,19 @@ $status-color-not-started: $content-text-secondary-color;
         }
     }
 }
+
+.campaign-plan-generic-footer {
+    padding: 40px 60px 50px 60px;
+    text-align: right;
+
+    .footer__total {
+        color: $content-text-primary-color;
+        font-size: $text-xxs * 2.8;
+        line-height: $text-xxs * 3.6;
+        margin-bottom: 0.5rem;
+    }
+
+    .footer__subtotal {
+        @include table_content_text();
+    }
+}

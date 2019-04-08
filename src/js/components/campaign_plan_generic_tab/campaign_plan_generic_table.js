@@ -1,5 +1,4 @@
 import React from "react";
-import cx from "classnames";
 import ReactTable from "react-table";
 
 import RMBTooltip from "../rmb_tooltip";

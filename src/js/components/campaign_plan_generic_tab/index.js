@@ -4,6 +4,7 @@ import cx from "classnames";
 
 import "./campaign_plan_generic_tab.scss";
 import CampaignPlanGenericTable from "./campaign_plan_generic_table";
+import CampaignPlanGenericFooter from "./campaign_plan_generic_footer";
 import Container from "../container";
 import Panel from "../panel";
 
@@ -12,6 +13,7 @@ export function CampaignPlanGenericTab(props) {
     <Container>
       <Panel className="campaign-plan-generic-tab">
         <CampaignPlanGenericTable {...props} />
+        <CampaignPlanGenericFooter {...props} />
       </Panel>
     </Container>
   );
