@@ -28,6 +28,10 @@ django-storages = "*"
 pillow = "*"
 boto3 = "*"
 django-stdimage = "*"
+google-api-python-client = "*"
+apiclient = "*"
+apiclient-discovery = "*"
+oauth2client = "*"
 
 [requires]
 python_version = "3.7"
