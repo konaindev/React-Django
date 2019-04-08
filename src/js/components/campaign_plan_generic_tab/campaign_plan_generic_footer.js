@@ -1,10 +1,11 @@
 import React from "react";
 import _get from "lodash/get";
 
+import { GENERIC_TABS } from "../campaign_plan/campaign_plan.constants";
 import { formatCurrency, formatNumber } from "../../utils/formatters.js";
 
 export function CampaignPlanGenericFooter({ tabKey, tactics }) {
-  const totalLabel = getTotalLabel(tabKey);
+  const totalLabel = GENERIC_TABS[tabKey];
 
   return (
     <div className="campaign-plan-generic-footer">
@@ -29,10 +30,6 @@ export function CampaignPlanGenericFooter({ tabKey, tactics }) {
   );
 }
 
-CampaignPlanGenericFooter.defaultProps = {
-  tactics: []
-};
-
 export default CampaignPlanGenericFooter;
 
 function getTotal(tactics) {
@@ -51,15 +48,4 @@ function getTotalINQ(tactics) {
     (acc, each) => acc + parseFloat(_get(each, "volumes.inq", 0)),
     0
   );
-}
-
-function getTotalLabel(tabKey) {
-  const labels = {
-    demand_creation: "Demand Creation",
-    market_intelligence: "Marketing Intelligence",
-    reputation_building: "Reputation Building",
-    leasing_enablement: "Leasing Enablement"
-  };
-
-  return labels[tabKey];
 }

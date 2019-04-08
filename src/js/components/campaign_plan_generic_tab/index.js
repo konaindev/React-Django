@@ -5,6 +5,10 @@ import cx from "classnames";
 import "./campaign_plan_generic_tab.scss";
 import CampaignPlanGenericTable from "./campaign_plan_generic_table";
 import CampaignPlanGenericFooter from "./campaign_plan_generic_footer";
+import {
+  GENERIC_TABS,
+  TACTIC_STATUSES
+} from "../campaign_plan/campaign_plan.constants";
 import Container from "../container";
 import Panel from "../panel";
 
@@ -20,18 +24,13 @@ export function CampaignPlanGenericTab(props) {
 }
 
 CampaignPlanGenericTab.propTypes = {
-  tabKey: oneOf([
-    "demand_creation",
-    "market_intelligence",
-    "reputation_building",
-    "leasing_enablement"
-  ]),
+  tabKey: oneOf(Object.keys(GENERIC_TABS)),
   tactics: arrayOf(
     shape({
       name: string,
       tooltip: string,
       schedule: string,
-      status: oneOf(["not_started", "in_progress", "complete"]),
+      status: oneOf(Object.keys(TACTIC_STATUSES)),
       notes: string,
       base_cost: string,
       cost_category: string,

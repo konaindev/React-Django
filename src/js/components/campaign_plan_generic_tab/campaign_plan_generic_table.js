@@ -2,6 +2,10 @@ import React from "react";
 import ReactTable from "react-table";
 
 import RMBTooltip from "../rmb_tooltip";
+import {
+  AVG_COST_SUFFIX,
+  TACTIC_STATUSES
+} from "../campaign_plan/campaign_plan.constants";
 import { formatCurrency, formatNumber } from "../../utils/formatters.js";
 
 export function CampaignPlanGenericTable({ tabKey, tactics }) {
@@ -140,10 +144,6 @@ function renderCost({ value }) {
 
 function renderCostWithAvg({ original }) {
   const { cost_category, total_cost, base_cost } = original;
-  const avgSuffixes = {
-    monthly: "mo",
-    weekly: "week"
-  };
 
   if (cost_category === "one_time") {
     return (
@@ -159,7 +159,7 @@ function renderCostWithAvg({ original }) {
       <span>
         {formatCurrency(base_cost)}
         {"/"}
-        {avgSuffixes[cost_category]}
+        {AVG_COST_SUFFIX[cost_category]}
       </span>
     </div>
   );
@@ -198,12 +198,6 @@ function renderNoINQ({ original }) {
 }
 
 function renderStatus({ value }) {
-  const statusLabels = {
-    not_started: "Not Started",
-    in_progress: "In Progress",
-    complete: "Complete"
-  };
-
-  return <div className={`cell-status ${value}`}>{statusLabels[value]}</div>;
+  return <div className={`cell-status ${value}`}>{TACTIC_STATUSES[value]}</div>;
 }
 // End of Cell Renderers
