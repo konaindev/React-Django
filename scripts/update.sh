@@ -20,4 +20,3 @@ if [ "$NEW_DB" -eq '1' ]; then
 fi
 pipenv run yarn install
 pipenv run yarn build
-

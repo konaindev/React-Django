@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 
 import RentToIncomeAnalysis from "./index";
 
-const props_small = {
+export const props_small = {
   categories: [
     {
       name: "Low",
@@ -58,7 +58,7 @@ const props_small = {
   ]
 };
 
-const props_large = {
+export const props_large = {
   categories: [
     {
       name: "Low",

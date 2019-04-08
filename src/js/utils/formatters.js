@@ -1,5 +1,6 @@
 import React from "react";
 import dateFnformat from "date-fns/format";
+import dfParse from "date-fns/parse";
 
 import { getDateDiff } from "./misc";
 
@@ -191,7 +192,7 @@ export const formatDateDiff = (startDateStr, endDateStr, unit = "month") => {
     minute: "min",
     hour: "hrs",
     day: "days",
-    week: "weeks",
+    week: "wks",
     month: "mo",
     year: "yr"
   };

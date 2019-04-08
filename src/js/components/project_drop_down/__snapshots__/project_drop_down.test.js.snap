@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProjectDropDown renders with building image correctly 1`] = `
+<div
+  className="project-drop-down"
+>
+  <span
+    className="project-drop-down__image"
+    style={Object {}}
+  />
+  <span
+    className="project-drop-down__text"
+  >
+    Portland Multi Family
+  </span>
+</div>
+`;
+
+exports[`ProjectDropDown renders without building image correctly 1`] = `
+<div
+  className="project-drop-down"
+>
+  <span
+    className="project-drop-down__image"
+    style={Object {}}
+  />
+  <span
+    className="project-drop-down__text"
+  >
+    Portland Multi Family
+  </span>
+</div>
+`;

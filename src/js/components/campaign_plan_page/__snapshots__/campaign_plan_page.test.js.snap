@@ -1,0 +1,159 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CampaignPlanPage renders correctly 1`] = `
+<div
+  className="chrome"
+>
+  <div
+    className="page-chrome__top-chrome"
+  >
+    <div
+      className="page-chrome__top-chrome__content"
+    >
+      <div
+        className="page-header"
+      >
+        <div
+          className="container page-header__inner"
+        >
+          <div
+            className="remarkably-logo"
+          >
+             
+          </div>
+          <nav
+            className="page-header__items-outer"
+          >
+            <ul
+              className="page-header__items-inner"
+              style={
+                Object {
+                  "columns": 1,
+                }
+              }
+            >
+              <li
+                className="page-header__item"
+              >
+                <div
+                  className="project-drop-down"
+                >
+                  <span
+                    className="project-drop-down__image"
+                    style={Object {}}
+                  />
+                  <span
+                    className="project-drop-down__text"
+                  >
+                    Portland Multi Family
+                  </span>
+                </div>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div
+        className="project-report-links"
+      >
+        <ul>
+          <li
+            className="enabled"
+            data-url="/projects/pro_example/baseline/"
+            onClick={[Function]}
+          >
+            Baseline
+          </li>
+          <li
+            className="enabled"
+            data-url="/projects/pro_example/market/"
+            onClick={[Function]}
+          >
+            Market Analysis
+          </li>
+          <li
+            className="disabled"
+            data-url="#"
+            onClick={[Function]}
+          >
+            Modeling
+          </li>
+          <li
+            className="enabled"
+            data-url="/projects/pro_example/performance/last-week/"
+            onClick={[Function]}
+          >
+            Performance
+          </li>
+          <li
+            className="selected disabled"
+            data-url="#"
+            onClick={[Function]}
+          >
+            Campaign Plan
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div
+      className="page-chrome__top-chrome__spacing-fix"
+      style={
+        Object {
+          "height": 76,
+        }
+      }
+    >
+       
+    </div>
+  </div>
+  <div
+    className="page campaign_plan-view"
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="campaign_plan-view__subnav"
+      >
+        <div
+          className="button-group"
+        >
+          <button
+            className="button button--selected button-undefined button-group__item"
+            onClick={[Function]}
+          >
+            Overview
+          </button>
+          <button
+            className="button button-undefined button-group__item"
+            onClick={[Function]}
+          >
+            Reputation Building
+          </button>
+          <button
+            className="button button-undefined button-group__item"
+            onClick={[Function]}
+          >
+            Demand Creation
+          </button>
+          <button
+            className="button button-undefined button-group__item"
+            onClick={[Function]}
+          >
+            Leasing Enablement
+          </button>
+          <button
+            className="button button-undefined button-group__item"
+            onClick={[Function]}
+          >
+            Market Intelligence
+          </button>
+        </div>
+      </div>
+    </div>
+    <img
+      src="https://imgur.com/6pa134E.png"
+    />
+  </div>
+</div>
+`;

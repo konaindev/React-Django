@@ -8,7 +8,7 @@ import { project, report_links } from "../project_page/project_page.stories.js";
 import { funnel_history } from "../funnel_performance_analysis/FunnelProps";
 import BaselineReportPage from "./index";
 
-const report = {
+export const report = {
   dates: {
     start: "2017-07-24",
     end: "2018-07-23"

@@ -1,0 +1,205 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReleaseNoteDetailsPage renders correctly 1`] = `
+<div
+  className="chrome"
+>
+  <div
+    className="page-chrome__top-chrome"
+  >
+    <div
+      className="page-chrome__top-chrome__content"
+    >
+      <div
+        className="page-header"
+      >
+        <div
+          className="container page-header__inner"
+        >
+          <div
+            className="remarkably-logo"
+          >
+             
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="page-chrome__top-chrome__spacing-fix"
+      style={
+        Object {
+          "height": 76,
+        }
+      }
+    >
+       
+    </div>
+  </div>
+  <div
+    className="container"
+  >
+    <div
+      className="breadcrumbs"
+    >
+      <span
+        className="breadcrumbs__item"
+      >
+        <a
+          href="/releases"
+        >
+          Releases
+        </a>
+      </span>
+      <span
+        className="breadcrumbs__item"
+      >
+        2.13.18 Release: Alderaan | 11/11/18
+      </span>
+    </div>
+    <div
+      className="panel panel--default release-note-details"
+    >
+      <p
+        className="release-note-details__title"
+      >
+        2.13.18
+         Release 
+        Alderaan
+         
+        <span
+          className="release-note-details__title-date"
+        >
+          | 
+          11/11/18
+        </span>
+      </p>
+      <div
+        className="release-note-details__content"
+      >
+        <h2>
+          Milestones
+        </h2>
+        <ul>
+          <li>
+            Onboarded our first two clients to the platform: El Cortez (Phoenix, AZ) & Meridian (Salt Lake City, UT)
+          </li>
+          <li>
+            Updated the web application to the new branding
+          </li>
+          <li>
+            Completed Total Addressable Market Analysis & Modeling web views
+          </li>
+        </ul>
+        <h2>
+          Features
+        </h2>
+        <ul>
+          <li>
+            UI Component: Market Size Map (ticket #164087086)
+          </li>
+          <li>
+            UI View: Total Addressable Market (ticket #164223104)
+          </li>
+          <li>
+            UI View Mod: Acquisition Funnel Re-Design (ticket #164176117)
+          </li>
+          <li>
+            UI View: Modeling (ticket #164088038)
+          </li>
+          <li>
+            Django Route: Load static TAM data from local file system (ticket #164127938)
+          </li>
+          <li>
+            Django Route: Loading static modeling data from local file system (ticket #164127939)
+          </li>
+          <li>
+            UI Component: Button Group (ticket #164182899)
+          </li>
+          <li>
+            Add meaningful 
+            &lt;title&gt;
+             for each page (ticket #164488236)
+          </li>
+          <li>
+            UI Component: Modeling Comparison (ticket #164088130)
+          </li>
+          <li>
+            UI View: Add '4-Week Average' to Acquisition Funnel, Volume of Activity (ticket #164502616)
+          </li>
+          <li>
+            Rebrand Work (ticket #164549346)
+          </li>
+          <li>
+            Cut DNS over to Route53 (ticket #164648812)
+          </li>
+        </ul>
+        <h2>
+          Bugs
+        </h2>
+        <ul>
+          <li>
+            UI View Mod: Rent to Income Ratio (ticket #164479371)
+          </li>
+          <li>
+            El Cortez - Change Leasable/Occupiable Units KPI to pull most recent entry (ticket #164478795)
+          </li>
+          <li>
+            El Cortez - Override Leased Units to = 113 (ticket #164478763)
+          </li>
+          <li>
+            UI View Mod: Limit Map Movement (Click and Drag) Function (ticket #164479394)
+          </li>
+          <li>
+            Acquisition funnel "Volume of app" primary data value and delta are mis-formatted (ticket #164559037)
+          </li>
+          <li>
+            Acquisition and retention investment amounts have improperly formatted deltas (ticket #164559010)
+          </li>
+          <li>
+            Campaign Investment box layout and numerical formatting is buggy (ticket #164558982)
+          </li>
+          <li>
+            Campaign URL leads to a Django Error page (ticket #164590391)
+          </li>
+          <li>
+            UI View Mod: Estimated Revenue Change '+' or '-' in Remarkably blue (ticket #164478961)
+          </li>
+          <li>
+            UI View Mod: ROMI 'X' in Remarkably blue (ticket #164478824)
+          </li>
+          <li>
+            UI View Mod: Remove '0' from Volume of Activity in Acquisition Funnel (ticket #164479154)
+          </li>
+          <li>
+            LeasingPerformanceReport: Cannot read property 'end' of undefined (ticket #164503330)
+          </li>
+          <li>
+            Retention Delta appears incorrect (ticket #164590434)
+          </li>
+          <li>
+            4-Week Average Figure Not Populating from Data (ticket #164586537)
+          </li>
+          <li>
+            Colored negative values don't always display correctly (ticket #164556186)
+          </li>
+          <li>
+            USV &gt; EXE Formatting (ticket #164558261)
+          </li>
+          <li>
+            Income to Rent Chart rounds Rents incorrectly (ticket #164613869)
+          </li>
+        </ul>
+      </div>
+      <div
+        className="release-note-details__footer"
+      >
+        <p>
+          Thanks!
+          <br />
+          The Remarkably Team
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+`;

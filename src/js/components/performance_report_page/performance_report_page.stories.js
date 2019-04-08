@@ -252,7 +252,7 @@ const current_report_link = {
   description: "Last Four Weeks (Dec 03 2018 - Dec 31 2018)"
 };
 
-const props = { project, report, report_links, current_report_link };
+export const props = { project, report, report_links, current_report_link };
 
 storiesOf("PerformanceReportPage", module).add("default", () => (
   <PerformanceReportPage {...props} />

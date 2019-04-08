@@ -15,14 +15,14 @@ import {
 
 export class LargeGraphBox extends Component {
   static propTypes = {
-    delta: PropTypes.number,
+    delta: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     extraContent: PropTypes.node,
     name: PropTypes.string.isRequired,
     series: PropTypes.arrayOf(
       PropTypes.oneOfType([PropTypes.number, PropTypes.string])
     ),
-    target: PropTypes.number,
-    value: PropTypes.number.isRequired,
+    target: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     digits: PropTypes.number,
     formatValue: PropTypes.func.isRequired,
     formatDelta: PropTypes.func.isRequired,
