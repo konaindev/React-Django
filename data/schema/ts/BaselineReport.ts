@@ -144,6 +144,9 @@ export interface Property {
   /** The lowest rent, across all units, during this period */
   lowest_monthly_rent: t.currency;
 
+  /** The total number of units in this property during this period (older buildings may not specify) */
+  total_units: t.integer | null;
+
   /** The cost per exe vs the monthly average rent during this period */
   cost_per_exe_vs_rent: t.percent;
 

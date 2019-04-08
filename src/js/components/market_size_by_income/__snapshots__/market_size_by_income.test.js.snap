@@ -1,0 +1,193 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MarketSizeByIncome renders correctly 1`] = `
+<div
+  className="market-size-by-income"
+>
+  <div
+    className="market-size-by-income__heading"
+  >
+    EST.INCOME &gt; 
+    $75k
+    /YR
+  </div>
+  <div
+    className="market-size-by-income__est-pop"
+  >
+    Est. Population
+  </div>
+  <div
+    className="population-chart"
+  >
+    <div
+      className="population-chart__labels"
+    >
+      <div
+        className="population-chart__label-start"
+      >
+        0
+      </div>
+      <div
+        className="population-chart__label-end"
+      >
+        10,368
+      </div>
+      <div
+        className="population-chart__label-value"
+        style={
+          Object {
+            "left": "30.748456790123456%",
+          }
+        }
+      >
+        3,188
+      </div>
+    </div>
+    <div
+      className="population-chart__bar"
+    >
+      <div
+        className="population-chart__bar-percent"
+        style={
+          Object {
+            "width": "30.748456790123456%",
+          }
+        }
+      />
+    </div>
+    <div
+      className="population-chart__dotted-lines"
+    >
+      <div
+        className="population-chart__dotted-diagnoal"
+        style={
+          Object {
+            "left": "30.748456790123456%",
+          }
+        }
+      >
+        <svg
+          height="40"
+          preserveAspectRatio="none"
+          viewBox="0 0 100 40"
+          width="100%"
+        >
+          <path
+            d="M0 0 L100 40"
+            stroke="#2c3646"
+            strokeDasharray="1"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div
+    className="market-size-by-income__tables"
+  >
+    <div
+      className="market-size-by-income__table"
+    >
+      <div
+        className="market-size-by-income__table-head"
+      >
+        <div
+          className="text-left"
+        >
+          Home Owners
+        </div>
+        <div
+          className="text-right"
+        >
+          249
+        </div>
+      </div>
+      <div
+        className="market-size-by-income__table-row"
+      >
+        <div
+          className="text-left"
+        >
+          Family
+        </div>
+        <div
+          className="text-right"
+        >
+          123
+        </div>
+      </div>
+      <div
+        className="market-size-by-income__table-row"
+      >
+        <div
+          className="text-left"
+        >
+          Non family
+        </div>
+        <div
+          className="text-right"
+        >
+          126
+        </div>
+      </div>
+    </div>
+    <div
+      className="market-size-by-income__table"
+    >
+      <div
+        className="market-size-by-income__table-head"
+      >
+        <div
+          className="text-left"
+        >
+          Renters
+        </div>
+        <div
+          className="text-right"
+        >
+          2,940
+        </div>
+      </div>
+      <div
+        className="market-size-by-income__table-row"
+      >
+        <div
+          className="text-left"
+        >
+          Family
+        </div>
+        <div
+          className="text-right"
+        >
+          459
+        </div>
+      </div>
+      <div
+        className="market-size-by-income__table-row"
+      >
+        <div
+          className="text-left"
+        >
+          Non Family
+        </div>
+        <div
+          className="text-right highlight"
+        >
+          2,481
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="market-size-by-income__footer"
+  >
+    <div>
+      Est. Market Size:
+    </div>
+    <div
+      className="market-size-by-income__market-size-value"
+    >
+      2,481
+    </div>
+  </div>
+</div>
+`;

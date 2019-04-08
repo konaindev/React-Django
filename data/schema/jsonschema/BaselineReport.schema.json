@@ -567,6 +567,13 @@
                 "occupancy": {
                     "$ref": "#/definitions/Occupancy",
                     "description": "Basic occupancy information for the period"
+                },
+                "total_units": {
+                    "description": "The total number of units in this property during this period (older buildings may not specify)",
+                    "type": [
+                        "null",
+                        "number"
+                    ]
                 }
             },
             "required": [
@@ -574,7 +581,8 @@
                 "cost_per_exe_vs_rent",
                 "leasing",
                 "lowest_monthly_rent",
-                "occupancy"
+                "occupancy",
+                "total_units"
             ],
             "type": "object"
         },

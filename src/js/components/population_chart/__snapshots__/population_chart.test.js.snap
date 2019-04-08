@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PopulationChart renders correctly 1`] = `
+<div
+  className="population-chart"
+>
+  <div
+    className="population-chart__labels"
+  >
+    <div
+      className="population-chart__label-start"
+    >
+      0
+    </div>
+    <div
+      className="population-chart__label-end"
+    >
+      10,368
+    </div>
+    <div
+      className="population-chart__label-value"
+      style={
+        Object {
+          "left": "30.748456790123456%",
+        }
+      }
+    >
+      3,188
+    </div>
+  </div>
+  <div
+    className="population-chart__bar"
+  >
+    <div
+      className="population-chart__bar-percent"
+      style={
+        Object {
+          "width": "30.748456790123456%",
+        }
+      }
+    />
+  </div>
+  <div
+    className="population-chart__dotted-lines"
+  >
+    <div
+      className="population-chart__dotted-diagnoal"
+      style={
+        Object {
+          "left": "30.748456790123456%",
+        }
+      }
+    >
+      <svg
+        height="40"
+        preserveAspectRatio="none"
+        viewBox="0 0 100 40"
+        width="100%"
+      >
+        <path
+          d="M0 0 L100 40"
+          stroke="#2c3646"
+          strokeDasharray="1"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;

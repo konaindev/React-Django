@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 
 import MarketSizeGrowthReach from "./index";
 
-const props = {
+export const props = {
   city: "Portland, OR",
   market_sizes: [
     {

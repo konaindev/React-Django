@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TabNavigator renders correctly 1`] = `
+<div
+  className="tab-navigator"
+>
+  <div
+    className="container tab-navigator__navs"
+  >
+    <a
+      className="tab-navigator__nav-item"
+      href="#"
+      onClick={[Function]}
+    >
+      Run Rate Model
+    </a>
+    <a
+      className="tab-navigator__nav-item tab-navigator__nav-item--active"
+      href="#"
+      onClick={[Function]}
+    >
+      Deadline-Driven Model
+    </a>
+  </div>
+  <div
+    className="tab-navigator__divider"
+  />
+  <div
+    className="container"
+  >
+    <div
+      className="tab-navigator__content"
+    >
+      Tab 2 Content here
+    </div>
+  </div>
+</div>
+`;

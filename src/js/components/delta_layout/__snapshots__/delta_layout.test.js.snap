@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DeltaLayout renders correctly 1`] = `
+<span
+  className="delta-layout"
+>
+  50
+  <span
+    className="delta-layout__section"
+  >
+    <div
+      className="delta-indicator"
+    >
+      <span
+        className="delta-indicator__delta"
+      >
+        200pts
+      </span>
+       
+      <span
+        className="delta-indicator__arrow delta-indicator__trend-up"
+      >
+        <svg
+          aria-hidden="true"
+          color="inherit"
+          focusable="false"
+          height={5}
+          role="presentation"
+          viewBox="0 0 10 5"
+          width={10}
+        >
+          <path
+            d="M5 0l5 5H0z"
+            fill="currentColor"
+            fillRule="evenodd"
+          />
+        </svg>
+      </span>
+    </div>
+  </span>
+</span>
+`;

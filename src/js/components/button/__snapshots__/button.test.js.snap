@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button renders default button correctly 1`] = `
+<button
+  className="button button-undefined"
+>
+  Default Button
+</button>
+`;
+
+exports[`Button renders selected button correctly 1`] = `
+<button
+  className="button button--selected button-undefined"
+>
+  Selected Button
+</button>
+`;
