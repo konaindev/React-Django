@@ -192,7 +192,7 @@ export const formatDateDiff = (startDateStr, endDateStr, unit = "month") => {
     minute: "min",
     hour: "hrs",
     day: "days",
-    week: "weeks",
+    week: "wks",
     month: "mo",
     year: "yr"
   };
