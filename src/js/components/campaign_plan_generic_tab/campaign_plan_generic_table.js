@@ -2,7 +2,8 @@ import React from "react";
 import cx from "classnames";
 import ReactTable from "react-table";
 
-import { formatCurrency } from "../../utils/formatters.js";
+import RMBTooltip from "../rmb_tooltip";
+import { formatCurrency, formatNumber } from "../../utils/formatters.js";
 
 export function CampaignPlanGenericTable({ tabKey, tactics }) {
   return (
@@ -23,40 +24,44 @@ function getColumns(tabKey) {
     {
       Header: "Tactic",
       accessor: "name",
-      width: 300
+      width: 300,
+      Cell: renderTactic
     },
     {
       Header: "Schedule",
       accessor: "schedule",
-      width: 160
+      width: 160,
+      Cell: renderSchedule
     },
     {
       Header: "Status",
       accessor: "status",
-      width: 116
+      width: 120,
+      Cell: renderStatus
     },
     {
       Header: "Notes/Assumptions",
       accessor: "notes",
-      width: 248
+      width: 248,
+      Cell: renderNotes
     },
     {
       Header: "# Of USV",
       accessor: "volumes",
       width: 110,
-      Cell: () => <div />
+      Cell: renderNoUSV
     },
     {
       Header: "# of INQ",
       accessor: "volumes",
       width: 120,
-      Cell: () => <div />
+      Cell: renderNoINQ
     },
     {
       Header: "Cost",
       accessor: "costs",
       width: 260,
-      Cell: () => <div />
+      Cell: renderCostWithAvg
     }
   ];
 
@@ -89,7 +94,8 @@ function getColumns(tabKey) {
       Header: "Cost",
       accessor: "total_cost",
       width: 156,
-      Cell: renderCost
+      Cell: renderCost,
+      className: "text-right"
     }
   ];
 
@@ -98,8 +104,94 @@ function getColumns(tabKey) {
     : columnsForGeneric;
 }
 
-const renderTactic = ({ value }) => <div>{value}</div>;
+// Cell Renderers
+const renderTactic = ({ value, original }) => {
+  const tooltip = original.tooltip;
+
+  if (tooltip) {
+    return (
+      <div className="cell-tactic">
+        <RMBTooltip placement="right" overlay={tooltip}>
+          <span>{value}</span>
+        </RMBTooltip>
+      </div>
+    );
+  } else {
+    return <div className="cell-tactic">{value}</div>;
+  }
+};
+
 const renderSchedule = ({ value }) => <div>{value}</div>;
+
+const renderNotes = ({ value }) => <div>{value}</div>;
+
+const renderCost = ({ value }) => {
+  return (
+    <div className="cell-metrics">
+      <span>{formatCurrency(value)}</span>
+    </div>
+  );
+};
+
+const renderCostWithAvg = ({ original }) => {
+  const { cost_category, total_cost, base_cost } = original;
+  const avgSuffixes = {
+    monthly: "mo",
+    weekly: "week"
+  };
+
+  if (cost_category === "one_time") {
+    return (
+      <div className="cell-metrics">
+        <span>{formatCurrency(total_cost)}</span>
+      </div>
+    );
+  }
+
+  return (
+    <div className="cell-metrics">
+      <span>{formatCurrency(total_cost)}</span>
+      <span>
+        {formatCurrency(base_cost)}
+        {"/"}
+        {avgSuffixes[cost_category]}
+      </span>
+    </div>
+  );
+};
+
+const renderNoUSV = ({ original }) => {
+  const { volumes = {}, costs = {} } = original;
+
+  return (
+    <div className="cell-metrics">
+      <span>{formatNumber(volumes.usv)}</span>
+      {costs.usv != null && (
+        <span>
+          {formatCurrency(costs.usv)}
+          {"/USV"}
+        </span>
+      )}
+    </div>
+  );
+};
+
+const renderNoINQ = ({ original }) => {
+  const { volumes = {}, costs = {} } = original;
+
+  return (
+    <div className="cell-metrics">
+      <span>{formatNumber(volumes.inq)}</span>
+      {costs.inq != null && (
+        <span>
+          {formatCurrency(costs.inq)}
+          {"/USV"}
+        </span>
+      )}
+    </div>
+  );
+};
+
 const renderStatus = ({ value }) => {
   const statusLabels = {
     not_started: "Not Started",
@@ -108,9 +200,7 @@ const renderStatus = ({ value }) => {
   };
   return <div className={`cell-status ${value}`}>{statusLabels[value]}</div>;
 };
-const renderNotes = ({ value }) => <div>{value}</div>;
-const renderCost = ({ value }) => {
-  return <div>{formatCurrency(value)}</div>;
-};
+
+// End of Cell Renderers
 
 export default CampaignPlanGenericTable;

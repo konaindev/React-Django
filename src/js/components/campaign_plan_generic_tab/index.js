@@ -39,8 +39,8 @@ CampaignPlanGenericTab.propTypes = {
         inq: number
       }),
       costs: shape({
-        usv: number,
-        inq: number
+        usv: string,
+        inq: string
       })
     })
   )
