@@ -18,7 +18,7 @@ class DataType:
 """
 A SchemaCell represents the expected schema for a given cell.
 
-The cell is obtained by calling the getter(...) method. See getters.py.
+The cell is obtained by calling the getter(...) method. See locators.py.
 
 The cell's expected excel data type is defined by data_type and must be
 one of the DataType.* values.

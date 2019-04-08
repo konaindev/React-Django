@@ -48,18 +48,18 @@ class ExcelImporter:
                 )
         return value
 
-    def cell(self, getter, sheet=None, col=None, row=None):
+    def schema_cell(self, schema_item, sheet=None, col=None, row=None):
         """
         Given a getter function, return the cell at the underlying location.
         """
-        return getter(self.workbook, sheet, col, row)
+        return schema_item.getter(self.workbook, sheet, col, row)
 
     def schema_value(self, schema_item, sheet=None, col=None, row=None):
         """
         Given a SchemaCell, return the python-converted value at the
         underlying location, validating it as necessary.
         """
-        cell = self.cell(schema_item.getter, sheet, col, row)
+        cell = self.schema_cell(schema_item, sheet, col, row)
         self.check_data_type(cell, schema_item.data_type)
         value = self.check_convert(cell, schema_item.converter)
         return value
@@ -74,7 +74,7 @@ class ExcelImporter:
         is provided, it is called with the converted value and must return
         True if the expectation is met.
         """
-        cell = self.cell(schema_item.getter, sheet, col, row)
+        cell = self.schema_cell(schema_item, sheet, col, row)
         self.check_data_type(cell, schema_item.data_type)
         value = self.check_convert(cell, schema_item.converter)
         value_matches = expected(value) if callable(expected) else expected == value
