@@ -6,7 +6,11 @@ import {
   AVG_COST_SUFFIX,
   TACTIC_STATUSES
 } from "../campaign_plan/campaign_plan.constants";
-import { formatCurrency, formatNumber } from "../../utils/formatters.js";
+import {
+  formatCurrency,
+  formatDateWithTokens,
+  formatNumber
+} from "../../utils/formatters.js";
 
 export function CampaignPlanGenericTable({ tabKey, tactics }) {
   return (
@@ -138,7 +142,7 @@ function renderTactic({ value, original }) {
 }
 
 function renderSchedule({ value }) {
-  return <div>{value}</div>;
+  return <div>{formatDateWithTokens(value, "MMM D, YYYY")}</div>;
 }
 
 function renderNotes({ value }) {
