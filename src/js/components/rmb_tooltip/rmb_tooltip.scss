@@ -1,0 +1,20 @@
+@import "css/base.scss";
+
+$tooltip-background-color: $gray-2;
+$tooltip-text-color: $content-text-primary-color;
+
+.rmb-tooltip {
+    font-size: $text-sm;
+    line-height: $text-2xl;
+    color: $tooltip-text-color;
+
+    .rc-tooltip-arrow {
+        border-right-color: $tooltip-background-color;
+    }
+
+    .rc-tooltip-inner {
+        background-color: $tooltip-background-color;
+        max-width: 360px;
+        white-space: normal;
+    }
+}
