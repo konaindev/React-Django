@@ -64,6 +64,7 @@ export const BASELINE_REPORT = {
     lowest_monthly_rent: "1847.00",
     average_monthly_rent: "1847.00",
     cost_per_exe_vs_rent: 0.54,
+    total_units: 201,
     leasing: {
       change: 36,
       cds: 28,
@@ -156,6 +157,7 @@ export const PERFORMANCE_REPORT = {
     lowest_monthly_rent: "1856.90",
     average_monthly_rent: "1856.90",
     cost_per_exe_vs_rent: 0.58,
+    total_units: 201,
     leasing: {
       change: 9,
       cds: 3,

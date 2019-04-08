@@ -18,6 +18,7 @@ export const report = {
     average_monthly_rent: "1847.00",
     lowest_monthly_rent: "1847.00",
     cost_per_exe_vs_rent: 0.54,
+    total_units: 201,
     leasing: {
       change: 36,
       cds: 28,

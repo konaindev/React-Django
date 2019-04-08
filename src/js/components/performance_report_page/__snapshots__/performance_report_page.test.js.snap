@@ -442,7 +442,17 @@ exports[`PerformanceReportPage renders correctly 1`] = `
             <span
               className="large-box__bottom-line"
             >
-              227 Executed Leases (Out of 260)
+              <div>
+                227
+                 Executed Leases (Out of
+                 
+                260
+                )
+              </div>
+              <div>
+                201
+                 Total Units
+              </div>
             </span>
             <span
               className="large-box__bottom-line"
@@ -960,7 +970,16 @@ exports[`PerformanceReportPage renders correctly 1`] = `
             <span
               className="large-box__bottom-line"
             >
-              220 Occupied Units (Out of 260)
+              <div>
+                220
+                 Occupied Units (Out of $
+                260
+                )
+              </div>
+              <div>
+                201
+                 Total Units
+              </div>
             </span>
             <span
               className="large-box__bottom-line"

@@ -16,6 +16,7 @@ export const props = {
         average_monthly_rent: "1847.00",
         lowest_monthly_rent: "1847.00",
         cost_per_exe_vs_rent: 1.03,
+        total_units: 201,
         leasing: {
           change: 55,
           cds: 19,

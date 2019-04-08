@@ -87,6 +87,7 @@ export const BASELINE_REPORT = {
   // XXX extra stuff displayed directly in this section but is really
   // a different part of the report structure. feels like a mismatch?
   property: {
+    total_units: 201,
     leasing: {
       change: 36,
       renewals: 94
@@ -125,6 +126,7 @@ export const PERFORMANCE_REPORT = {
     }
   },
   property: {
+    total_units: 201,
     leasing: {
       change: 9,
       renewals: 7
@@ -200,6 +202,7 @@ export const NEGATIVE_PERFORMANCE_REPORT = {
     }
   },
   property: {
+    total_units: 201,
     leasing: {
       change: -9,
       renewals: 7
