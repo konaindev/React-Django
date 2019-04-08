@@ -1,5 +1,6 @@
 from googleapiclient.discovery import build
-from oauth2client.service_account import ServiceAccountCredentials
+from google.oauth2 import service_account
+import json
 import os
 
 
@@ -20,10 +21,8 @@ def initialize_analytics_reporting():
     Returns:
     An authorized Analytics Reporting API V4 service object.
     """
-    credentials = ServiceAccountCredentials.from_json_keyfile_name(
-        os.environ.get("GOOGLE_APPLICATION_CREDENTIALS"),
-        SCOPES
-    )
+    service_account_info = json.loads(os.environ.get("GOOGLE_APPLICATION_CREDENTIALS"))
+    credentials = service_account.Credentials.from_service_account_info(service_account_info)
 
     # Build the service object.
     analytics = build("analyticsreporting", "v4", credentials=credentials)

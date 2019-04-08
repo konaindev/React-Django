@@ -34,7 +34,7 @@ BASE_URL=http://localhost:8000
 DEBUG_PRINT_LOGGER=YES
 EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
 EMAIL_USE_TLS=NO
-GOOGLE_APPLICATION_CREDENTIALS=path_to_google_service_account_key_file
+GOOGLE_APPLICATION_CREDENTIALS=content_of_google_service_account_key_file
 ```
 
 - Run a build of the front-end assets: `yarn build`.
