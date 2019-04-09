@@ -1,13 +1,14 @@
 from remark.lib.match import matchp
 from remark.lib.spreadsheets import (
     ChoiceCell,
+    CurrencyCell,
     DateCell,
     find_col,
     find_row,
     IntCell,
-    CurrencyCell,
     NullChoiceCell,
     NullStrCell,
+    rows_until_empty,
     StrCell,
 )
 
@@ -51,8 +52,9 @@ class CampaignPlanImporter(ProjectExcelImporter):
     }
 
     def build_category(self, category, sheet):
+        rows = rows_until_empty(self.workbook, start_row=2, sheet=sheet, col="A")
         self.cleaned_data[category] = self.row_table(
-            schema=self.CATEGORY_ROW_SCHEMA, start_row=2, end_row=3, sheet=sheet  # XXX
+            schema=self.CATEGORY_ROW_SCHEMA, rows=rows, sheet=sheet
         )
 
     def clean(self):

@@ -123,34 +123,38 @@ class ExcelImporter:
         sheet, col, _ = parse_location_or_default(location, sheet, col, None)
         if col is None:
             raise ExcelProgrammingError(
-                message="Location provided to row() must contain a column!"
+                message="Location provided to col() must contain a column!"
             )
         return {
             key: self.schema_value(schema_item, sheet=sheet, col=col)
             for key, schema_item in schema.items()
         }
 
-    def row_table(self, schema, start_row, end_row, location=None, sheet=None):
+    def row_table(
+        self, schema, rows=None, start_row=None, end_row=None, location=None, sheet=None
+    ):
         """
-        Return an array of rows, starting with start_row and including
-        end_row.
+        Return an array of row dictionaries based on the schema.
+
+        Rows can either be provided as an iterable (via `rows`) or with
+        explicit values, via `start_row` and `end_row`.
         """
         sheet, _, _ = parse_location_or_default(location, sheet, None, None)
+        rows = rows or row_range(start_row, end_row)
+        return [self.row(schema, sheet=sheet, row=row) for row in rows]
 
-        return [
-            self.row(schema, sheet=sheet, row=row)
-            for row in row_range(start_row, end_row)
-        ]
+    def col_table(
+        self, schema, cols=None, start_col=None, end_col=None, location=None, sheet=None
+    ):
+        """
+        Return an array of column dictionaries based on the schema.
 
-    def col_table(self, schema, start_col, end_col, location=None, sheet=None):
+        Columns can either be provided as an iterable (via `cols`) or with
+        explicit values, via `start_col` and `end_col`.
         """
-        Return an array of columns, starting with start_col and including
-        end_col.
-        """
-        return [
-            self.col(schema, sheet=sheet, col=col)
-            for col in col_range(start_col, end_col)
-        ]
+        sheet, _, _ = parse_location_or_default(location, sheet, None, None)
+        cols = cols or col_range(start_col, end_col)
+        return [self.col(schema, sheet=sheet, col=col) for col in cols]
 
     def is_valid(self):
         """Validate the spreadsheet; return False if not possible."""

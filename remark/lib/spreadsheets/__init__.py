@@ -6,7 +6,22 @@ from .getset import get_cell, set_cell
 from .importers import ExcelImporter
 from .locators import BaseLocator, loc, find_col, find_row
 from .parse import parse_location, unparse_location
-from .rowcol import row_range, index_for_col, col_for_index, next_col, col_range
+from .rowcol import (
+    col_for_index,
+    col_range,
+    cols_until_empty,
+    cols_until,
+    cols_while_empty,
+    cols_while,
+    index_for_col,
+    next_col,
+    next_row,
+    row_range,
+    rows_until_empty,
+    rows_until,
+    rows_while_empty,
+    rows_while,
+)
 from .schema import (
     ChoiceCell,
     CurrencyCell,
@@ -28,6 +43,10 @@ __all__ = (
     ChoiceCell,
     col_for_index,
     col_range,
+    cols_until_empty,
+    cols_until,
+    cols_while_empty,
+    cols_while,
     CurrencyCell,
     DataType,
     DateCell,
@@ -45,13 +64,18 @@ __all__ = (
     IntCell,
     loc,
     next_col,
+    next_row,
     NullChoiceCell,
     NullStrCell,
     parse_location,
     row_range,
-    set_cell,
+    rows_until_empty,
+    rows_until,
+    rows_while_empty,
+    rows_while,
     Schema,
     SchemaCell,
+    set_cell,
     StrCell,
     unparse_location,
 )
