@@ -52,42 +52,46 @@
     "tactics": [
       {
         "name": "Brand Strategy",
+        "audience": "Acquisition",
         "tooltip": null,
         "schedule": "2019-01-20",
-        "status": "complete",
+        "status": "Complete",
         "notes": null,
         "base_cost": "15000.00",
-        "cost_category": "one_time",
+        "cost_type": "One-Time",
         "total_cost": "15000.00"
       },
       {
         "name": "Messaging Matrix",
+        "audience": "Retention",
         "tooltip": null,
         "schedule": "2019-02-01",
-        "status": "complete",
+        "status": "Complete",
         "notes": null,
         "base_cost": "5000.00",
-        "cost_category": "one_time",
+        "cost_type": "One-Time",
         "total_cost": "5000.00"
       },
       {
         "name": "Website Enhancements",
+        "audience": null,
         "tooltip": null,
         "schedule": "2019-02-01",
-        "status": "in_progress",
+        "status": "In Progress",
         "notes": null,
         "base_cost": "5000.00",
-        "cost_category": "one_time",
+        "cost_type": "One-Time",
         "total_cost": "5000.00"
       },
       {
         "name": "Beach Lifestyle Photoshoot",
+        "audience": null,
         "tooltip": null,
         "schedule": "2019-02-15",
-        "status": "not_started",
+        "status": "Not Started",
         "notes": null,
         "base_cost": "10000.00",
-        "cost_category": "one_time",
+        "cost_type": "One-Time",
         "total_cost": "10000.00"
       }
     ]
@@ -96,12 +100,13 @@
     "tactics": [
       {
         "name": "Paid Search Advertising",
+        "audience": "Acquisition",
         "tooltip": "Google Search Ads",
         "schedule": "2019-07-02",
-        "status": "in_progress",
+        "status": "In Progress",
         "notes": null,
         "base_cost": "1000.00",
-        "cost_category": "monthly",
+        "cost_type": "Monthly",
         "total_cost": "5000.00",
         "volumes": {
           "usv": 1000,
@@ -114,12 +119,13 @@
       },
       {
         "name": "Paid Social Advertising",
+        "audience": "Retention",
         "tooltip": null,
         "schedule": "2019-07-03",
-        "status": "in_progress",
+        "status": "In Progress",
         "notes": null,
         "base_cost": "1000.00",
-        "cost_category": "monthly",
+        "cost_type": "Monthly",
         "total_cost": "5000.00",
         "volumes": {
           "usv": 1000,
@@ -132,12 +138,13 @@
       },
       {
         "name": "Retargeted Display Advertising",
+        "audience": null,
         "tooltip": null,
         "schedule": "2019-07-04",
-        "status": "in_progress",
+        "status": "In Progress",
         "notes": null,
         "base_cost": "1000.00",
-        "cost_category": "monthly",
+        "cost_type": "Monthly",
         "total_cost": "5000.00",
         "volumes": {
           "usv": 1000,
@@ -150,12 +157,13 @@
       },
       {
         "name": "Display Advertising",
+        "audience": null,
         "tooltip": null,
         "schedule": "2019-07-05",
-        "status": "in_progress",
+        "status": "In Progress",
         "notes": null,
         "base_cost": "1000.00",
-        "cost_category": "monthly",
+        "cost_type": "Monthly",
         "total_cost": "5000.00",
         "volumes": {
           "usv": 1000,
@@ -168,12 +176,13 @@
       },
       {
         "name": "Apartments.com Advertising",
+        "audience": null,
         "tooltip": null,
         "schedule": "2019-07-06",
-        "status": "in_progress",
+        "status": "In Progress",
         "notes": null,
         "base_cost": "1000.00",
-        "cost_category": "monthly",
+        "cost_type": "Monthly",
         "total_cost": "5000.00",
         "volumes": {
           "usv": 1000,
@@ -186,12 +195,13 @@
       },
       {
         "name": "Zillow.com Advertising",
+        "audience": null,
         "tooltip": null,
         "schedule": "2019-07-07",
-        "status": "in_progress",
+        "status": "In Progress",
         "notes": null,
         "base_cost": "1000.00",
-        "cost_category": "monthly",
+        "cost_type": "Monthly",
         "total_cost": "5000.00",
         "volumes": {
           "usv": 500,
@@ -204,12 +214,13 @@
       },
       {
         "name": "ApartmentList.com Advertising",
+        "audience": null,
         "tooltip": null,
         "schedule": "2019-07-08",
-        "status": "in_progress",
+        "status": "In Progress",
         "notes": null,
         "base_cost": "1000.00",
-        "cost_category": "monthly",
+        "cost_type": "Monthly",
         "total_cost": "5000.00",
         "volumes": {
           "usv": 500,
@@ -222,12 +233,13 @@
       },
       {
         "name": "Website Live Chat Implementation",
+        "audience": null,
         "tooltip": null,
         "schedule": "2019-02-22",
-        "status": "complete",
+        "status": "Complete",
         "notes": null,
         "base_cost": "2000.00",
-        "cost_category": "one_time",
+        "cost_type": "One-Time",
         "total_cost": "2000.00",
         "volumes": {
           "usv": 0,
@@ -240,12 +252,13 @@
       },
       {
         "name": "Website Live Chat Service",
+        "audience": null,
         "tooltip": "Sustain or improve USV>INQ rate",
         "schedule": "2019-07-08",
-        "status": "in_progress",
+        "status": "In Progress",
         "notes": null,
         "base_cost": "200.00",
-        "cost_category": "monthly",
+        "cost_type": "Monthly",
         "total_cost": "1000.00",
         "volumes": {
           "usv": 0,
@@ -262,32 +275,35 @@
     "tactics": [
       {
         "name": "Brochure Redesign & Print",
+        "audience": "Acquisition",
         "tooltip": null,
         "schedule": "2019-02-01",
-        "status": "complete",
+        "status": "Complete",
         "notes": null,
         "base_cost": "10000.00",
-        "cost_category": "one_time",
+        "cost_type": "One-Time",
         "total_cost": "10000.00"
       },
       {
         "name": "Tour Souvenirs",
+        "audience": "Retention",
         "tooltip": null,
         "schedule": "2019-02-15",
-        "status": "complete",
+        "status": "Complete",
         "notes": null,
         "base_cost": "10000.00",
-        "cost_category": "one_time",
+        "cost_type": "One-Time",
         "total_cost": "10000.00"
       },
       {
         "name": "Wayfinding Signage",
+        "audience": null,
         "tooltip": null,
         "schedule": "2019-05-01",
-        "status": "in_progress",
+        "status": "In Progress",
         "notes": null,
         "base_cost": "15000.00",
-        "cost_category": "one_time",
+        "cost_type": "One-Time",
         "total_cost": "15000.00"
       }
     ]
@@ -296,22 +312,24 @@
     "tactics": [
       {
         "name": "Remarkably",
+        "audience": "Acquisition",
         "tooltip": "Baseline, Modeling, and Campaign Plan",
         "schedule": "2019-01-01",
-        "status": "complete",
+        "status": "Complete",
         "notes": "Outsourced/Hard costs only",
         "base_cost": "4000.00",
-        "cost_category": "monthly",
+        "cost_type": "Monthly",
         "total_cost": "20000.00"
       },
       {
         "name": "Google and Social Analytics",
+        "audience": "Retention",
         "tooltip": "Tactical, deep-dive website traffic and social follower engagement data and insights",
         "schedule": "2019-06-30",
-        "status": "in_progress",
+        "status": "In Progress",
         "notes": "Implementing monitoring, tracking, and reporting",
         "base_cost": "500.00",
-        "cost_category": "monthly",
+        "cost_type": "Monthly",
         "total_cost": "2500.00"
       }
     ]

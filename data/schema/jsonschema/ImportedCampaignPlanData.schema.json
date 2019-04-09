@@ -2,11 +2,12 @@
     "$ref": "#/definitions/ImportedCampaignPlanData",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
-        "CostCategory": {
-            "description": "Known cost categories",
+        "CostType": {
+            "description": "Known cost types",
             "enum": [
-                "monthly",
-                "one_time"
+                "Monthly",
+                "One-Time",
+                "Weekly"
             ],
             "type": "string"
         },
@@ -27,13 +28,28 @@
         },
         "DemandCreationTactic": {
             "properties": {
+                "audience": {
+                    "anyOf": [
+                        {
+                            "enum": [
+                                "Acquisition",
+                                "Retention"
+                            ],
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "The target audience (if applicable)"
+                },
                 "base_cost": {
                     "description": "The base cost for the tactic",
                     "type": "string"
                 },
-                "cost_category": {
-                    "$ref": "#/definitions/CostCategory",
-                    "description": "The cost category"
+                "cost_type": {
+                    "$ref": "#/definitions/CostType",
+                    "description": "The cost type"
                 },
                 "costs": {
                     "$ref": "#/definitions/DemandCreationTargets<string|null>",
@@ -55,7 +71,7 @@
                     "type": "string"
                 },
                 "status": {
-                    "$ref": "#/definitions/ScheduleStatus",
+                    "$ref": "#/definitions/Status",
                     "description": "The current schedule status"
                 },
                 "tooltip": {
@@ -75,8 +91,9 @@
                 }
             },
             "required": [
+                "audience",
                 "base_cost",
-                "cost_category",
+                "cost_type",
                 "costs",
                 "name",
                 "notes",
@@ -140,6 +157,9 @@
                 "market_intelligence": {
                     "$ref": "#/definitions/MarketIntelligence"
                 },
+                "meta": {
+                    "$ref": "#/definitions/ImportedCampaignPlanMeta"
+                },
                 "overview": {
                     "$ref": "#/definitions/Overview"
                 },
@@ -151,8 +171,32 @@
                 "demand_creation",
                 "leasing_enablement",
                 "market_intelligence",
+                "meta",
                 "overview",
                 "reputation_building"
+            ],
+            "type": "object"
+        },
+        "ImportedCampaignPlanMeta": {
+            "description": "Metadata specific to the import, used in computations.",
+            "properties": {
+                "campaign_days": {
+                    "description": "The number of days in campaign",
+                    "type": "integer"
+                },
+                "campaign_months": {
+                    "description": "The number of campaign months",
+                    "type": "integer"
+                },
+                "campaign_weeks": {
+                    "description": "The number of weeks in campaign",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "campaign_days",
+                "campaign_months",
+                "campaign_weeks"
             ],
             "type": "object"
         },
@@ -295,24 +339,39 @@
             ],
             "type": "object"
         },
-        "ScheduleStatus": {
+        "Status": {
             "description": "Allowable schedule statuses",
             "enum": [
-                "complete",
-                "in_progress",
-                "not_started"
+                "Complete",
+                "In Progress",
+                "Not Started"
             ],
             "type": "string"
         },
         "Tactic": {
             "properties": {
+                "audience": {
+                    "anyOf": [
+                        {
+                            "enum": [
+                                "Acquisition",
+                                "Retention"
+                            ],
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "The target audience (if applicable)"
+                },
                 "base_cost": {
                     "description": "The base cost for the tactic",
                     "type": "string"
                 },
-                "cost_category": {
-                    "$ref": "#/definitions/CostCategory",
-                    "description": "The cost category"
+                "cost_type": {
+                    "$ref": "#/definitions/CostType",
+                    "description": "The cost type"
                 },
                 "name": {
                     "description": "The name of the tactic, ('Brand Strategy')",
@@ -330,7 +389,7 @@
                     "type": "string"
                 },
                 "status": {
-                    "$ref": "#/definitions/ScheduleStatus",
+                    "$ref": "#/definitions/Status",
                     "description": "The current schedule status"
                 },
                 "tooltip": {
@@ -346,8 +405,9 @@
                 }
             },
             "required": [
+                "audience",
                 "base_cost",
-                "cost_category",
+                "cost_type",
                 "name",
                 "notes",
                 "schedule",

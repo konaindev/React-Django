@@ -29,11 +29,12 @@
             ],
             "type": "object"
         },
-        "CostCategory": {
-            "description": "Known cost categories",
+        "CostType": {
+            "description": "Known cost types",
             "enum": [
-                "monthly",
-                "one_time"
+                "Monthly",
+                "One-Time",
+                "Weekly"
             ],
             "type": "string"
         },
@@ -54,13 +55,28 @@
         },
         "DemandCreationTactic": {
             "properties": {
+                "audience": {
+                    "anyOf": [
+                        {
+                            "enum": [
+                                "Acquisition",
+                                "Retention"
+                            ],
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "The target audience (if applicable)"
+                },
                 "base_cost": {
                     "description": "The base cost for the tactic",
                     "type": "string"
                 },
-                "cost_category": {
-                    "$ref": "#/definitions/CostCategory",
-                    "description": "The cost category"
+                "cost_type": {
+                    "$ref": "#/definitions/CostType",
+                    "description": "The cost type"
                 },
                 "costs": {
                     "$ref": "#/definitions/DemandCreationTargets<string|null>",
@@ -82,7 +98,7 @@
                     "type": "string"
                 },
                 "status": {
-                    "$ref": "#/definitions/ScheduleStatus",
+                    "$ref": "#/definitions/Status",
                     "description": "The current schedule status"
                 },
                 "tooltip": {
@@ -102,8 +118,9 @@
                 }
             },
             "required": [
+                "audience",
                 "base_cost",
-                "cost_category",
+                "cost_type",
                 "costs",
                 "name",
                 "notes",
@@ -294,24 +311,39 @@
             ],
             "type": "object"
         },
-        "ScheduleStatus": {
+        "Status": {
             "description": "Allowable schedule statuses",
             "enum": [
-                "complete",
-                "in_progress",
-                "not_started"
+                "Complete",
+                "In Progress",
+                "Not Started"
             ],
             "type": "string"
         },
         "Tactic": {
             "properties": {
+                "audience": {
+                    "anyOf": [
+                        {
+                            "enum": [
+                                "Acquisition",
+                                "Retention"
+                            ],
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "The target audience (if applicable)"
+                },
                 "base_cost": {
                     "description": "The base cost for the tactic",
                     "type": "string"
                 },
-                "cost_category": {
-                    "$ref": "#/definitions/CostCategory",
-                    "description": "The cost category"
+                "cost_type": {
+                    "$ref": "#/definitions/CostType",
+                    "description": "The cost type"
                 },
                 "name": {
                     "description": "The name of the tactic, ('Brand Strategy')",
@@ -329,7 +361,7 @@
                     "type": "string"
                 },
                 "status": {
-                    "$ref": "#/definitions/ScheduleStatus",
+                    "$ref": "#/definitions/Status",
                     "description": "The current schedule status"
                 },
                 "tooltip": {
@@ -345,8 +377,9 @@
                 }
             },
             "required": [
+                "audience",
                 "base_cost",
-                "cost_category",
+                "cost_type",
                 "name",
                 "notes",
                 "schedule",
