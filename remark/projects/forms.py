@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 
 from .models import Spreadsheet
-from .spreadsheets.importers import get_importer_for_kind, SpreadsheetKind
+from .spreadsheets import get_importer_for_kind, SpreadsheetKind
 
 
 class SpreadsheetForm(forms.ModelForm):

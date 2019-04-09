@@ -4,10 +4,7 @@ from django.core.files import File
 
 from remark.users.models import User
 from remark.projects.models import Project, Spreadsheet
-from remark.projects.spreadsheets.importers import (
-    get_importer_for_kind,
-    SpreadsheetKind,
-)
+from remark.projects.spreadsheets import get_importer_for_kind, SpreadsheetKind
 
 
 @click.command()

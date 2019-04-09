@@ -4,10 +4,7 @@ import djclick as click
 
 from django.core.serializers.json import DjangoJSONEncoder
 
-from remark.projects.spreadsheets.importers import (
-    get_importer_for_kind,
-    SpreadsheetKind,
-)
+from remark.projects.spreadsheets import get_importer_for_kind, SpreadsheetKind
 
 
 @click.command()
