@@ -15,7 +15,7 @@ from remark.lib.metrics import (
     SumIntervalMetric,
     ModelPeriod,
 )
-from .importers import get_importer_for_kind, SpreadsheetKind
+from .spreadsheets.importers import get_importer_for_kind, SpreadsheetKind
 
 
 def pro_public_id():

@@ -10,7 +10,7 @@ from .baseline_perf import BaselinePerfImporter
 class BaselinePerfTestCase(TestCase):
     TEST_FILE_NAME = os.path.join(
         os.path.abspath(os.path.dirname(__file__)),
-        "../../../xls/examples/elcortez-baseline-perf.xlsx",
+        "../../../../xls/examples/elcortez-baseline-perf.xlsx",
     )
 
     EXPECTED_FIRST_PERIOD = {
