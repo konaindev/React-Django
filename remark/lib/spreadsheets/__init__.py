@@ -1,35 +1,54 @@
 """
 A library for reading data from, and writing data to, excel spreadsheets.
 """
-from .converters import date_converter, currency_converter
 from .errors import ExcelError, ExcelValidationError, ExcelProgrammingError
 from .locators import BaseLocator, loc, find_col, find_row
 from .importers import ExcelImporter
 from .parse import parse_location, unparse_location
 from .rowcol import row_range, index_for_col, col_for_index, next_col, col_range
-from .schema import DataType, SchemaCell, SchemaCol, SchemaRow, Schema
+from .schema import (
+    ChoiceCell,
+    CurrencyCell,
+    DataType,
+    DateCell,
+    DateTimeCell,
+    DecimalCell,
+    FloatCell,
+    IntCell,
+    NullChoiceCell,
+    NullStrCell,
+    Schema,
+    SchemaCell,
+    StrCell,
+)
 
 __all__ = (
     BaseLocator,
+    ChoiceCell,
     col_for_index,
     col_range,
-    currency_converter,
+    CurrencyCell,
     DataType,
-    date_converter,
+    DateCell,
+    DateTimeCell,
+    DecimalCell,
     ExcelError,
     ExcelImporter,
     ExcelProgrammingError,
     ExcelValidationError,
     find_col,
     find_row,
+    FloatCell,
     index_for_col,
+    IntCell,
     loc,
     next_col,
+    NullChoiceCell,
+    NullStrCell,
     parse_location,
     row_range,
     Schema,
     SchemaCell,
-    SchemaCol,
-    SchemaRow,
+    StrCell,
     unparse_location,
 )

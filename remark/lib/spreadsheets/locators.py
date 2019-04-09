@@ -23,7 +23,7 @@ implementations.
 from remark.lib.match import matchp
 
 from .errors import ExcelProgrammingError
-from .parse import parse_location_or_default
+from .parse import parse_location, parse_location_or_default
 from .rowcol import col_range, row_range
 
 
@@ -110,14 +110,19 @@ class find_col(BaseLocator):
     seems to be the most common match style.
     """
 
-    def __init__(self, header_row, predicate, start_col="A", end_col="ZZ"):
-        self.header_row = header_row
+    def __init__(self, header_location, predicate, start_col="A", end_col="ZZ"):
+        self.header_sheet, _, self.header_row = parse_location(header_location)
+        if not self.header_row:
+            raise ExcelProgrammingError(
+                message=f"Invalid header_location '{header_location}' provided to find_row; at a minimum, it must contain a row."
+            )
 
         # If predicate is a string, automatically create a case-insensitive
         # string matcher from it.
         self.predicate = (
             matchp(icontains=predicate) if isinstance(predicate, str) else predicate
         )
+
         self.start_col = start_col
         self.end_col = end_col
 
@@ -150,8 +155,8 @@ class find_col(BaseLocator):
         Return a location where the default column is based on a match
         in the header row.
         """
-        found_col = self._find_cached(workbook, sheet, col, row)
-        return (sheet, col or found_col, row)
+        found_col = self._find_cached(workbook, sheet or self.header_sheet, col, row)
+        return (sheet or self.header_sheet, col or found_col, row)
 
 
 class find_row(BaseLocator):
@@ -168,8 +173,12 @@ class find_row(BaseLocator):
     seems to be the most common match style.
     """
 
-    def __init__(self, header_col, predicate, start_row=1, end_row=702):
-        self.header_col = header_col
+    def __init__(self, header_location, predicate, start_row=1, end_row=702):
+        self.header_sheet, self.header_col, _ = parse_location(header_location)
+        if not self.header_col:
+            raise ExcelProgrammingError(
+                message=f"Invalid header_location '{header_location}' provided to find_row; at a minimum, it must contain a column."
+            )
 
         # If predicate is a string, automatically create a case-insensitive
         # string matcher from it.
@@ -190,7 +199,11 @@ class find_row(BaseLocator):
         seq = (
             row
             for row in row_range(self.start_row, self.end_row)
-            if self.predicate(self.cell(workbook, sheet, self.header_col, row).value)
+            if self.predicate(
+                self.cell(
+                    workbook, sheet or self.header_sheet, self.header_col, row
+                ).value
+            )
         )
         # Return the first item in the sequence, or None
         return next(seq, None)
@@ -209,5 +222,5 @@ class find_row(BaseLocator):
         in the header column.
         """
         found_row = self._find_cached(workbook, sheet, col, row)
-        return (sheet, col, row or found_row)
+        return (sheet or self.header_sheet, col, row or found_row)
 

@@ -62,7 +62,7 @@ class FindColTestCase(TestCase):
     def test_correct_col(self):
         # Find the column in the header row whose cell contains the value "GOOD"
         locator = find_col(
-            header_row=1, predicate=lambda v: v == "GOOD", start_col="A", end_col="D"
+            1, predicate=lambda v: v == "GOOD", start_col="A", end_col="D"
         )
         workbook = {
             "test": {
@@ -79,9 +79,7 @@ class FindColTestCase(TestCase):
 class FindRowTestCase(TestCase):
     def test_correct_row(self):
         # Find the row in the header column whose cell contains the value "GOOD"
-        locator = find_row(
-            header_col="A", predicate=lambda v: v == "GOOD", start_row=1, end_row=4
-        )
+        locator = find_row("A", predicate=lambda v: v == "GOOD", start_row=1, end_row=4)
         workbook = {
             "test": {
                 "A1": TestCell("bad"),
