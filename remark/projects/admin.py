@@ -140,7 +140,7 @@ class ExistingSpreadsheetInline(admin.TabularInline):
         return False
 
     def is_active(self, obj):
-        return obj.is_active()
+        return obj.is_latest_for_kind()
 
     is_active.boolean = True
 

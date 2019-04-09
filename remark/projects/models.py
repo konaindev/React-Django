@@ -15,6 +15,7 @@ from remark.lib.metrics import (
     SumIntervalMetric,
     ModelPeriod,
 )
+from .spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
 
 
 def pro_public_id():
@@ -245,18 +246,6 @@ class Spreadsheet(models.Model):
 
     objects = SpreadsheetManager()
 
-    KIND_PERIODS = "periods"  # Baseline and perf periods spreadsheet
-    KIND_MODELING = "modeling"  # Modeling report (any kind)
-    KIND_MARKET = "market"  # TAM
-    KIND_CAMPAIGN = "campaign"  # Campaign Plan
-
-    SPREADSHEET_KINDS = [
-        (KIND_PERIODS, "Periods"),
-        (KIND_MODELING, "Modeling (must provide a subkind, too)"),
-        (KIND_MARKET, "Market Report"),
-        (KIND_CAMPAIGN, "Campaign Plan"),
-    ]
-
     project = models.ForeignKey(
         Project, on_delete=models.CASCADE, related_name="spreadsheets"
     )
@@ -279,7 +268,7 @@ class Spreadsheet(models.Model):
 
     kind = models.CharField(
         blank=False,
-        choices=SPREADSHEET_KINDS,
+        choices=SpreadsheetKind.CHOICES,
         db_index=True,
         max_length=128,
         help_text="The kind of data this spreadsheet contains.",
@@ -307,11 +296,28 @@ class Spreadsheet(models.Model):
         help_text="Raw imported JSON data. Schema depends on spreadsheet kind.",
     )
 
-    def is_active(self):
+    def has_imported_data(self):
+        """Return True if we have non-empty imported content."""
+        return bool(self.imported_data)
+
+    def is_latest_for_kind(self):
         """Return True if this spreadsheet is the latest for its kind and subkind."""
         return (
             Spreadsheet.objects.latest_for_kind(self.kind, self.subkind).id == self.id
         )
+
+    def get_activator(self):
+        return get_activator_for_spreadsheet(self)
+
+    def activate(self):
+        """
+        Activate the imported data *if* it's safe to do so; currently,
+        we consider it safe if this is the most recent spreadsheet of its kind
+        and we've successfully imported data.
+        """
+        if self.is_latest_for_kind() and self.has_imported_data():
+            activator = self.get_activator()
+            activator.activate()
 
     class Meta:
         # Always sort spreadsheets with the most recent created first.
