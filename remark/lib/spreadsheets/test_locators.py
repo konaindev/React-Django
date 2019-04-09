@@ -1,7 +1,6 @@
 from django.test import TestCase
 
-from .errors import ExcelError
-from .locators import BaseLocator, loc, find_col, find_row
+from .locators import loc, find_col, find_row
 
 
 class TestCell:
@@ -9,52 +8,30 @@ class TestCell:
         self.value = value
 
 
-class BaseLocatorTestCase(TestCase):
-    def setUp(self):
-        super().setUp()
-        self.locator = BaseLocator()
-
-    def test_cell_no_workbook(self):
-        with self.assertRaises(ExcelError):
-            self.locator.cell(None, None, None, None)
-
-    def test_cell_incomplete_location(self):
-        with self.assertRaises(ExcelError):
-            self.locator.cell({}, None, None, None)
-
-    def test_cell_sheet_not_found(self):
-        with self.assertRaises(ExcelError):
-            self.locator.cell({}, "not_found", "A", "7")
-
-    def test_gets_value(self):
-        workbook = {"sheet": {"A1": "hello"}}
-        self.assertEqual(self.locator.cell(workbook, "sheet", "A", 1), "hello")
-
-
 class LocTestCase(TestCase):
     def test_default_location(self):
-        locator = loc(location="A42")
-        location = locator.locate({}, "test", None, None)
+        locator = loc("A42")
+        location = locator({}, "test", None, None)
         self.assertEqual(location, ("test", "A", 42))
 
     def test_default_sheet(self):
-        locator = loc(sheet="test")
-        location = locator.locate({}, None, "A", 42)
+        locator = loc("test!")
+        location = locator({}, None, "A", 42)
         self.assertEqual(location, ("test", "A", 42))
 
     def test_default_col(self):
-        locator = loc(col="A")
-        location = locator.locate({}, "test", None, 42)
+        locator = loc("A")
+        location = locator({}, "test", None, 42)
         self.assertEqual(location, ("test", "A", 42))
 
     def test_default_row(self):
-        locator = loc(row=42)
-        location = locator.locate({}, "test", "A", None)
+        locator = loc(42)
+        location = locator({}, "test", "A", None)
         self.assertEqual(location, ("test", "A", 42))
 
-    def test_defaults_only(self):
+    def test_init_values_are_defaults_not_overrides(self):
         locator = loc("wild!Z99")
-        location = locator.locate({}, "test", "A", 42)
+        location = locator({}, "test", "A", 42)
         self.assertEqual(location, ("test", "A", 42))
 
 
@@ -72,7 +49,7 @@ class FindColTestCase(TestCase):
                 "D1": TestCell("cool"),
             }
         }
-        location = locator.locate(workbook, "test", None, 42)
+        location = locator(workbook, "test", None, 42)
         self.assertEqual(location, ("test", "C", 42))
 
 
@@ -88,6 +65,6 @@ class FindRowTestCase(TestCase):
                 "A4": TestCell("cool"),
             }
         }
-        location = locator.locate(workbook, "test", "ZZTOP", None)
+        location = locator(workbook, "test", "ZZTOP", None)
         self.assertEqual(location, ("test", "ZZTOP", 3))
 

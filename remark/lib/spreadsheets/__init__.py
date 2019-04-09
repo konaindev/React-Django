@@ -2,8 +2,9 @@
 A library for reading data from, and writing data to, excel spreadsheets.
 """
 from .errors import ExcelError, ExcelValidationError, ExcelProgrammingError
-from .locators import BaseLocator, loc, find_col, find_row
+from .getset import get_cell, set_cell
 from .importers import ExcelImporter
+from .locators import BaseLocator, loc, find_col, find_row
 from .parse import parse_location, unparse_location
 from .rowcol import row_range, index_for_col, col_for_index, next_col, col_range
 from .schema import (
@@ -39,6 +40,7 @@ __all__ = (
     find_col,
     find_row,
     FloatCell,
+    get_cell,
     index_for_col,
     IntCell,
     loc,
@@ -47,6 +49,7 @@ __all__ = (
     NullStrCell,
     parse_location,
     row_range,
+    set_cell,
     Schema,
     SchemaCell,
     StrCell,

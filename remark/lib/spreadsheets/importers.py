@@ -1,8 +1,9 @@
 import openpyxl
 
 from .errors import ExcelValidationError
-from .schema import DataType
+from .getset import get_cell
 from .rowcol import col_range, row_range
+from .schema import DataType
 
 
 class ExcelImporter:
@@ -52,7 +53,8 @@ class ExcelImporter:
         """
         Given a getter function, return the cell at the underlying location.
         """
-        return schema_item.getter(self.workbook, sheet, col, row)
+        sheet, col, row = schema_item.locator(self.workbook, sheet, col, row)
+        return get_cell(self.workbook, sheet, col, row)
 
     def schema_value(self, schema_item, sheet=None, col=None, row=None):
         """

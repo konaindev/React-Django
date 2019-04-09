@@ -1,68 +1,47 @@
 """
 Utilities for finding stuff in spreadsheets.
 
-A 'getter' is any callable that accepts an openpyxl workbook instance,
-along with the names of a sheet, column, and row, and returns an openpyxl
-Cell instance:
+A 'locator' is any callable that accepts an openpyxl workbook instance,
+along with the *optional* names of a sheet, column, and row, and which
+returns a *fully specified* location (sheet/col/row aren't None):
 
-def example_getter(workbook, sheet=None, col=None, row=None):
-    cell = get_an_openyxl_cell(...)
-    return cell
+def example_locator(workbook, sheet=None, col=None, row=None):
+    sheet, col, row = do_some_kind_of_magic(...)
+    return (sheet, col, row)
 
-The sheet, col, and row *may* be specified by the calling party, or they may
-be None. It's up to the getter to decide how to take those values and turn them
-into a *complete* location (fully specified sheet, col, and row). If the getter
-is unable to form a *complete* location 
+The classes in this library are locator *factories*: when you construct
+one of these classes, you get a callable back that performs location. This
+lets you parameterize the behavior of the locator, in arbitrarily complex ways.
 
-A 'locator' is any function that *returns* a getter function. Locators can
-be parameterized however you like -- with nothing, or with all sorts of 
-interesting parameters. This library is full of interesting locator 
-implementations.
+See the simple factory example, `loc`, and the more complex examples
+`find_col` and `find_row`.
 """
 
 from remark.lib.match import matchp
 
 from .errors import ExcelProgrammingError
+from .getset import get_cell
 from .parse import parse_location, parse_location_or_default
 from .rowcol import col_range, row_range
 
 
 class BaseLocator:
     """
-    Implement a class that is callable and whose call signature is a 'getter'.
+    Implement a class that is callable and whose call signature is a 'locator'.
 
-    From this perspective, the class __init__ is a 'locator' and the __call__
-    is a 'getter'. (See comments above).
+    From this perspective, the class __init__ is a 'locator factor' and the 
+    __call__ itself is a 'getter'. (See comments above). You could do this
+    with nested functions, but classes just seemed a little cleaner to me
+    (if a bit more verbose).
     """
 
     def __call__(self, workbook, sheet=None, col=None, row=None):
         """
-        Constructing a BaseLocator is like calling a locator, which means
-        __call__ is equivalent to a getter. (See comments above).
+        Constructing a BaseLocator is like calling a locator factory, 
+        which means __call__ is equivalent to a locator. (See comments above).
         """
         sheet, col, row = self.locate(workbook, sheet=sheet, col=col, row=row)
-        return self.cell(workbook, sheet, col, row)
-
-    def cell(self, workbook, sheet, col, row):
-        """
-        Return an openpyxl Cell given a workbook instance,
-        along with a *fully specified* sheet name, col, and row.
-
-        Fail if any parameter is missing or if the sheet doesn't exist.
-        """
-        # Workbook must be supplied
-        if workbook is None:
-            raise ExcelProgrammingError(message="No workbook found")
-
-        # Make sure a complete location is provided
-        if (not sheet) or (not col) or (not row):
-            raise ExcelProgrammingError((sheet, col, row), "incomplete location")
-
-        # Make sure sheet exists
-        if sheet not in workbook:
-            raise ExcelProgrammingError((sheet, col, row), "invalid sheet")
-
-        return workbook[sheet][f"{col}{row}"]
+        return (sheet, col, row)
 
     def locate(self, workbook, sheet, col, row):
         """
@@ -70,29 +49,22 @@ class BaseLocator:
         fully specified sheet, col, and row using whatever means are desired.
 
         Typically, if you'd like to implement a locator, you just need to
-        implement this.
+        derive from BaseLocator and implement this method.
         """
         raise NotImplementedError("Derived classes must implement locate()")
 
 
 class loc(BaseLocator):
     """
-    The simplest possible locator. It is initialized with an optional
-    sheet, col, and row; these are used as defaults in locate(...) if
-    the sheet/col/row are not provided directly.
-
-    As a bonus convenience, we also let you send a location string (like "A5"),
-    to the constructor.
+    The simplest possible locator. It is initialized with a location string,
+    which is used as default values if sheet/row/col aren't provided by
+    the calling party.
     """
 
-    def __init__(self, location=None, sheet=None, col=None, row=None):
-        self.sheet, self.col, self.row = parse_location_or_default(
-            location, sheet, col, row
-        )
+    def __init__(self, location):
+        self.sheet, self.col, self.row = parse_location(location)
 
     def locate(self, workbook, sheet, col, row):
-        # Return the values directly provided to locate(...), and default
-        # to the values provided in __init__(...) if not present.
         return (sheet or self.sheet, col or self.col, row or self.row)
 
 
@@ -156,7 +128,7 @@ class find_col(BaseLocator):
         seq = (
             col
             for col in col_range(self.start_col, self.end_col)
-            if self.predicate(self.cell(workbook, sheet, col, self.header_row).value)
+            if self.predicate(get_cell(workbook, sheet, col, self.header_row).value)
         )
         # Return the first item in the sequence, or None
         return next(seq, None)
@@ -239,7 +211,7 @@ class find_row(BaseLocator):
         seq = (
             row
             for row in row_range(self.start_row, self.end_row)
-            if self.predicate(self.cell(workbook, sheet, self.header_col, row).value)
+            if self.predicate(get_cell(workbook, sheet, self.header_col, row).value)
         )
         # Return the first item in the sequence, or None
         return next(seq, None)
