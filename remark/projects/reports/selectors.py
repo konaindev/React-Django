@@ -81,6 +81,11 @@ class ReportSelectorBase:
         # Derived classes must implement
         raise NotImplementedError()
 
+    def is_enabled(self):
+        """Return True if underlying report is enabled by *_enabled fields in project model."""
+        # Derived classes must implement
+        raise NotImplementedError()
+
     def get_report(self):
         """Return the underlying ReportBase instance, or None."""
         # Derived classes must implement
@@ -100,7 +105,7 @@ class BaselineReportSelector(ReportSelectorBase):
     @classmethod
     def selectors_for_project(cls, project):
         baseline_selector = cls(project)
-        if baseline_selector.has_report_data():
+        if baseline_selector.has_report_data() and baseline_selector.is_enabled():
             yield baseline_selector
 
     @classmethod
@@ -120,6 +125,9 @@ class BaselineReportSelector(ReportSelectorBase):
 
     def has_report_data(self):
         return BaselineReport.has_baseline(self.project)
+
+    def is_enabled(self):
+        return self.project.baseline_report_enabled
 
     def get_report(self):
         return BaselineReport.for_baseline(self.project)
@@ -282,6 +290,9 @@ class PerformanceReportSelector(ReportSelectorBase):
 
         return exists
 
+    def is_enabled(self):
+        return True
+
     def get_report(self):
         """
         Return a Report covering the requested timespan.
@@ -303,7 +314,7 @@ class MarketReportSelector(ReportSelectorBase):
     @classmethod
     def selectors_for_project(cls, project):
         tam_selector = cls(project)
-        if tam_selector.has_report_data():
+        if tam_selector.has_report_data() and tam_selector.is_enabled():
             yield tam_selector
 
     def __init__(self, project):
@@ -323,6 +334,9 @@ class MarketReportSelector(ReportSelectorBase):
         """Return True if data exists for this type of report."""
         return MarketReport.exists(self.project)
 
+    def is_enabled(self):
+        return self.project.tam_enabled
+
     def get_report(self):
         """Return the underlying report."""
         return MarketReport.for_project(self.project)
@@ -336,7 +350,7 @@ class ModelingReportSelector(ReportSelectorBase):
     @classmethod
     def selectors_for_project(cls, project):
         modeling_selector = cls(project)
-        if modeling_selector.has_report_data():
+        if modeling_selector.has_report_data() and modeling_selector.is_enabled():
             yield modeling_selector
 
     def __init__(self, project):
@@ -356,6 +370,9 @@ class ModelingReportSelector(ReportSelectorBase):
         """Return True if data exists for this type of report."""
         return ModelingReport.exists(self.project)
 
+    def is_enabled(self):
+        return self.project.modeling_enabled
+
     def get_report(self):
         """Return the underlying report."""
         return ModelingReport.for_project(self.project)
@@ -369,7 +386,7 @@ class CampaignPlanSelector(ReportSelectorBase):
     @classmethod
     def selectors_for_project(cls, project):
         campaign_plan_selector = cls(project)
-        if campaign_plan_selector.has_report_data():
+        if campaign_plan_selector.has_report_data() and campaign_plan_selector.is_enabled():
             yield campaign_plan_selector
 
     @classmethod
@@ -389,6 +406,9 @@ class CampaignPlanSelector(ReportSelectorBase):
     def has_report_data(self):
         """Return True if data exists for this type of report."""
         return CampaignPlan.exists(self.project)
+
+    def is_enabled(self):
+        return self.project.campaign_plan_enabled
 
     def get_report(self):
         """Return the underlying report."""
