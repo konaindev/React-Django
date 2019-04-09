@@ -96,6 +96,12 @@ class loc(BaseLocator):
         return (sheet or self.sheet, col or self.col, row or self.row)
 
 
+# CONSIDER: is there a clean way to unify find_col and find_row? They're so
+# similar, and yet *just* different enough that they have defied my first
+# attempt at unification; the result was less code, but it was much
+# more confusing to read. -Dave
+
+
 class find_col(BaseLocator):
     """
     A locator that finds a column based on a match in a header row.
@@ -110,12 +116,24 @@ class find_col(BaseLocator):
     seems to be the most common match style.
     """
 
-    def __init__(self, header_location, predicate, start_col="A", end_col="ZZ"):
-        self.header_sheet, _, self.header_row = parse_location(header_location)
+    def __init__(self, header, predicate, target=None, start_col="A", end_col="ZZ"):
+        # Parse the required header location.
+        # The column is ignored; the sheet and row are potentially used.
+        self.header_sheet, _, self.header_row = parse_location(header)
+
+        # At a minimum, our header must contain a row.
+        # (Otherwise, how do we know where to look for stuff that matches?!)
         if not self.header_row:
             raise ExcelProgrammingError(
-                message=f"Invalid header_location '{header_location}' provided to find_row; at a minimum, it must contain a row."
+                message=f"Invalid header location '{header}' provided to find_col; at a minimum, it must contain a row."
             )
+
+        # Parse the optional target location.
+        # The column is ignored; the sheet and row are potentially used.
+        # If no target is provided, we assume it's the same as the header.
+        self.target_sheet, _, self.target_row = parse_location_or_default(
+            target, self.header_sheet, None, self.header_row
+        )
 
         # If predicate is a string, automatically create a case-insensitive
         # string matcher from it.
@@ -123,16 +141,17 @@ class find_col(BaseLocator):
             matchp(icontains=predicate) if isinstance(predicate, str) else predicate
         )
 
+        # Remember our columns
         self.start_col = start_col
         self.end_col = end_col
 
-        # We only want to perform the search once, so we cache the found
-        # column in the outer scope.
+        # We only want to perform the search once; cache what we find.
         self._found_col = None
+        self._found_on_sheet = None
 
-    def _find(self, workbook, sheet, col, row):
+    def _find(self, workbook, sheet):
         """
-        Locate the cell in the header row.
+        Locate the cell in the header row of the provided sheet.
         """
         seq = (
             col
@@ -142,12 +161,16 @@ class find_col(BaseLocator):
         # Return the first item in the sequence, or None
         return next(seq, None)
 
-    def _find_cached(self, workbook, sheet, col, row):
+    def _find_cached(self, workbook, sheet):
         """
         Return a cached found cell, or find if no cache value is set.
         """
-        if self._found_col is None:
-            self._found_col = self._find(workbook, sheet, col, row)
+        # Cache the column for a single sheet; this is 'fast enough'
+        # for the common case.
+        if (self._found_col is None) or (sheet != self._found_on_sheet):
+            self._found_on_sheet = sheet
+            self._found_col = self._find(workbook, sheet)
+
         return self._found_col
 
     def locate(self, workbook, sheet, col, row):
@@ -155,8 +178,11 @@ class find_col(BaseLocator):
         Return a location where the default column is based on a match
         in the header row.
         """
-        found_col = self._find_cached(workbook, sheet or self.header_sheet, col, row)
-        return (sheet or self.header_sheet, col or found_col, row)
+        # Find a matching column in the header location
+        found_col = self._find_cached(workbook, sheet or self.header_sheet)
+
+        # Return a matching location in the target location
+        return (sheet or self.target_sheet, col or found_col, row or self.target_row)
 
 
 class find_row(BaseLocator):
@@ -173,47 +199,61 @@ class find_row(BaseLocator):
     seems to be the most common match style.
     """
 
-    def __init__(self, header_location, predicate, start_row=1, end_row=702):
-        self.header_sheet, self.header_col, _ = parse_location(header_location)
+    def __init__(self, header, predicate, target=None, start_row=1, end_row=702):
+        # Parse the required header location.
+        # The row is ignored; the sheet and col are potentially used.
+        self.header_sheet, self.header_col, _ = parse_location(header)
+
+        # At a minimum, our header must contain a col.
+        # (Otherwise, how do we know where to look for stuff that matches?!)
         if not self.header_col:
             raise ExcelProgrammingError(
-                message=f"Invalid header_location '{header_location}' provided to find_row; at a minimum, it must contain a column."
+                message=f"Invalid header location '{header}' provided to find_row; at a minimum, it must contain a col."
             )
+
+        # Parse the optional target location.
+        # The row is ignored; the sheet and col are potentially used.
+        # If no target is provided, we assume it's the same as the header.
+        self.target_sheet, self.target_col, _ = parse_location_or_default(
+            target, self.header_sheet, self.header_col, None
+        )
 
         # If predicate is a string, automatically create a case-insensitive
         # string matcher from it.
         self.predicate = (
             matchp(icontains=predicate) if isinstance(predicate, str) else predicate
         )
+
+        # Remember our rows
         self.start_row = start_row
         self.end_row = end_row
 
-        # We only want to perform the search once, so we cache the found
-        # row in the outer scope.
+        # We only want to perform the search once; cache what we find.
         self._found_row = None
+        self._found_on_sheet = None
 
-    def _find(self, workbook, sheet, col, row):
+    def _find(self, workbook, sheet):
         """
-        Locate the cell in the header column.
+        Locate the cell in the header column of the provided sheet.
         """
         seq = (
             row
             for row in row_range(self.start_row, self.end_row)
-            if self.predicate(
-                self.cell(
-                    workbook, sheet or self.header_sheet, self.header_col, row
-                ).value
-            )
+            if self.predicate(self.cell(workbook, sheet, self.header_col, row).value)
         )
         # Return the first item in the sequence, or None
         return next(seq, None)
 
-    def _find_cached(self, workbook, sheet, col, row):
+    def _find_cached(self, workbook, sheet):
         """
         Return a cached found cell, or find if no cache value is set.
         """
-        if self._found_row is None:
-            self._found_row = self._find(workbook, sheet, col, row)
+        # Cache the row for a single sheet; this is 'fast enough'
+        # for the common case.
+        if (self._found_row is None) or (sheet != self._found_on_sheet):
+            self._found_on_sheet = sheet
+            self._found_row = self._find(workbook, sheet)
+
         return self._found_row
 
     def locate(self, workbook, sheet, col, row):
@@ -221,6 +261,9 @@ class find_row(BaseLocator):
         Return a location where the default row is based on a match
         in the header column.
         """
-        found_row = self._find_cached(workbook, sheet, col, row)
-        return (sheet or self.header_sheet, col, row or found_row)
+        # Find a matching row in the header location
+        found_row = self._find_cached(workbook, sheet or self.header_sheet)
+
+        # Return a matching location in the target location
+        return (sheet or self.target_sheet, col or self.target_col, row or found_row)
 

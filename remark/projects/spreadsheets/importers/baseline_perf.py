@@ -12,8 +12,8 @@ from .base import ProjectExcelImporter
 
 
 def find_meta(predicate):
-    """Return a getter that scans the META!A column for header values."""
-    return find_row("META!A", predicate)
+    """Return a getter that scans the META!A column for header values and returns values in META!B."""
+    return find_row("META!A", predicate, target="B")
 
 
 def find_period(predicate):
@@ -65,22 +65,16 @@ class BaselinePerfImporter(ProjectExcelImporter):
         """
         Validate that the basic contents of our META tab are valid.
         """
-        self.check_schema_value(self.DATES_VALID, col="B", expected="valid")
-        self.check_schema_value(
-            self.BASELINE_PERIODS, col="B", expected=lambda value: value > 0
-        )
+        self.check_schema_value(self.DATES_VALID, expected="valid")
+        self.check_schema_value(self.BASELINE_PERIODS, expected=lambda value: value > 0)
 
     def clean(self):
         super().clean()
         self.check_meta()
-        start_row = self.schema_value(self.START_ROW, col="B")
-        end_row = self.schema_value(self.END_ROW, col="B")
-        self.cleaned_data["baseline_start"] = self.schema_value(
-            self.BASELINE_START, col="B"
-        )
-        self.cleaned_data["baseline_end"] = self.schema_value(
-            self.BASELINE_END, col="B"
-        )
+        start_row = self.schema_value(self.START_ROW)
+        end_row = self.schema_value(self.END_ROW)
+        self.cleaned_data["baseline_start"] = self.schema_value(self.BASELINE_START)
+        self.cleaned_data["baseline_end"] = self.schema_value(self.BASELINE_END)
         self.cleaned_data["periods"] = self.row_table(
             schema=self.PERIOD_ROW_SCHEMA, start_row=start_row, end_row=end_row
         )
