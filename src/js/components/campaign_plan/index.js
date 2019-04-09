@@ -65,3 +65,11 @@ export default class CampaignPlan extends Component {
     );
   }
 }
+
+CampaignPlan.propTypes = {
+  overview: PropTypes.object.isRequired,
+  reputation_building: PropTypes.object.isRequired,
+  demand_creation: PropTypes.object.isRequired,
+  leasing_enablement: PropTypes.object.isRequired,
+  market_intelligence: PropTypes.object.isRequired
+};
