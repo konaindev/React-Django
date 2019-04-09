@@ -29,8 +29,8 @@ class BaseLocator:
     """
     Implement a class that is callable and whose call signature is a 'locator'.
 
-    From this perspective, the class __init__ is a 'locator factor' and the 
-    __call__ itself is a 'getter'. (See comments above). You could do this
+    From this perspective, the class __init__ is a 'locator factory' and the 
+    __call__ itself is a 'locator'. (See comments above). You could do this
     with nested functions, but classes just seemed a little cleaner to me
     (if a bit more verbose).
     """

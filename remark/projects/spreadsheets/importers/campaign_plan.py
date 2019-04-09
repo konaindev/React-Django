@@ -15,12 +15,12 @@ from .base import ProjectExcelImporter
 
 
 def find_meta(predicate):
-    """Return a getter that scans the META!A column for header values."""
+    """Return a locator that scans the META!A column for header values."""
     return find_row("META!A", predicate)
 
 
 def find_cat(predicate):
-    """Return a getter that scans the 1st row of any sheet for header values."""
+    """Return a locator that scans the 1st row of any sheet for header values."""
     return find_col(1, predicate)
 
 

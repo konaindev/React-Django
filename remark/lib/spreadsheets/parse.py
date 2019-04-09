@@ -21,6 +21,9 @@ def parse_location(location):
         "C"
         "3"
     """
+    # shortcircuit in a common case.
+    if location is None:
+        return (None, None, None)
     sheet, col, row = list(_parse_re.match(str(location)).groups())
     return (sheet or None, col.upper() if col else None, int(row) if row else None)
 
@@ -30,9 +33,7 @@ def parse_location_or_default(location=None, sheet=None, col=None, row=None):
     Parse a location string, falling back to defaults it the location string
     does not explicitly provide them.
     """
-    _sheet, _col, _row = (
-        parse_location(location) if location is not None else (None, None, None)
-    )
+    _sheet, _col, _row = parse_location(location)
     return (_sheet or sheet, _col or col, _row or row)
 
 

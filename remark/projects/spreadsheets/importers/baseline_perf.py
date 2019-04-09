@@ -12,12 +12,12 @@ from .base import ProjectExcelImporter
 
 
 def find_meta(predicate):
-    """Return a getter that scans the META!A column for header values and returns values in META!B."""
+    """Return a locator that scans the META!A column for header values and returns values in META!B."""
     return find_row("META!A", predicate, target="B")
 
 
 def find_period(predicate):
-    """Return a getter that scans the second row of output_periods for header values."""
+    """Return a locator that scans the second row of output_periods for header values."""
     return find_col("output_periods!2", predicate)
 
 
