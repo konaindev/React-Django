@@ -10,7 +10,7 @@
     "storybook": "start-storybook -p 6006 --ci",
     "build-storybook": "build-storybook -o .out",
     "deploy-storybook": "rm -rf .out && build-storybook -o .out && echo 'storybook.remarkably.io' > '.out/CNAME' && storybook-to-ghpages --existing-output-dir=.out",
-    "test-ui": "jest",
+    "test-ui": "jest --runInBand --silent --ci",
     "test-ui-update-snapshots": "jest --updateSnapshot"
   },
   "storybook-deployer": {
