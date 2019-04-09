@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 
 import ReleaseNotesTable from "./index";
 
-const props = {
+export const props = {
   release_notes: [
     {
       id: 1,

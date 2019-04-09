@@ -7,7 +7,7 @@ import { linkTo } from "@storybook/addon-links";
 import DeltaLayout from "./index";
 
 const props = {
-  value: 50,
+  valueContent: 50,
   delta: 2,
   direction: DeltaLayout.DIRECTION_UP
 };

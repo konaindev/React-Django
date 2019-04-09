@@ -1,0 +1,2540 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModelingView renders correctly 1`] = `
+<div
+  className="page modeling-view"
+>
+  <div
+    className="container"
+  >
+    <div
+      className="modeling-view__subnav"
+    >
+      <div
+        className="button-group"
+      >
+        <button
+          className="button button--selected button-undefined button-group__item"
+          onClick={[Function]}
+        >
+          Schedule Driven
+        </button>
+        <button
+          className="button button-undefined button-group__item"
+          onClick={[Function]}
+        >
+          Investment Driven
+        </button>
+        <button
+          className="button button-undefined button-group__item"
+          onClick={[Function]}
+        >
+          Run Rate
+        </button>
+      </div>
+    </div>
+  </div>
+  <div
+    className="container common-report"
+  >
+    <div
+      className="report-section"
+    >
+      <div
+        className="section-header section-header--mt-sm"
+      >
+        <p
+          className="section-header__title"
+        >
+          Leasing Performance
+        </p>
+        <div
+          className="section-header__extra"
+        >
+          <div
+            className="report-date-span__content"
+          >
+            <span
+              className="report-date-span__content-name"
+            >
+              Schedule Driven
+               (
+              21 wks.
+              )
+            </span>
+            <span
+              className="report-date-span__content-dates"
+            >
+              7/23/18
+               -
+               
+              12/17/18
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        className="box-row box-row--normal"
+      >
+        <div
+          className="child-wrapper"
+          style={
+            Object {
+              "width": "33.33333%",
+            }
+          }
+        >
+          <div
+            className="panel panel--default large-box"
+          >
+            <span
+              className="large-box__top-line"
+            >
+              Leased
+            </span>
+            <div
+              className="large-box__content"
+            >
+              <span
+                className="large-box__content-value"
+              >
+                95%
+              </span>
+              <div
+                className="large-box__content-extra"
+              />
+            </div>
+            <span
+              className="large-box__bottom-line"
+            >
+              247 Executed Leases (Out of 260)
+            </span>
+            <span
+              className="large-box__bottom-line"
+            >
+              
+            </span>
+          </div>
+        </div>
+        <div
+          className="child-wrapper"
+          style={
+            Object {
+              "width": "33.33333%",
+            }
+          }
+        >
+          <div
+            className="panel panel--default large-box"
+          >
+            <span
+              className="large-box__top-line"
+            >
+              Retention
+            </span>
+            <div
+              className="large-box__content"
+            >
+              <span
+                className="large-box__content-value"
+              >
+                63%
+              </span>
+              <div
+                className="large-box__content-extra"
+              />
+            </div>
+            <span
+              className="large-box__bottom-line"
+            >
+              30 Notices to Renew (Out of 48 Resident Decisions)
+            </span>
+            <span
+              className="large-box__bottom-line"
+            >
+              
+            </span>
+          </div>
+        </div>
+        <div
+          className="child-wrapper"
+          style={
+            Object {
+              "width": "33.33333%",
+            }
+          }
+        >
+          <div
+            className="panel panel--default large-box"
+          >
+            <span
+              className="large-box__top-line"
+            >
+              Occupied
+            </span>
+            <div
+              className="large-box__content"
+            >
+              <span
+                className="large-box__content-value"
+              >
+                93%
+              </span>
+              <div
+                className="large-box__content-extra"
+              />
+            </div>
+            <span
+              className="large-box__bottom-line"
+            >
+              242 Occupied Units (Out of 260)
+            </span>
+            <span
+              className="large-box__bottom-line"
+            >
+              
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        className="lease-performance-report__detail-numbers"
+      >
+        <div
+          className="box-row box-row--normal"
+        >
+          <div
+            className="child-wrapper"
+            style={
+              Object {
+                "width": "33.33333%",
+              }
+            }
+          >
+            <div
+              className="box-column__child-wrapper"
+            >
+              <div
+                className="panel panel--default small-box"
+              >
+                <div
+                  className="small-box__labels"
+                >
+                  <span
+                    className="small-box__labels__name"
+                  >
+                    Lease Applications
+                  </span>
+                  
+                </div>
+                <div
+                  className="small-box__outer-content"
+                >
+                  <div
+                    className="small-box__inner-content"
+                  >
+                    <span
+                      className="delta-layout"
+                    >
+                      <span
+                        className="formatted-value-with-symbol"
+                      >
+                        97
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="box-column__child-wrapper"
+            >
+              <div
+                className="panel panel--default small-box"
+              >
+                <div
+                  className="small-box__labels"
+                >
+                  <span
+                    className="small-box__labels__name"
+                  >
+                    Cancellations and Denials
+                  </span>
+                  
+                </div>
+                <div
+                  className="small-box__outer-content"
+                >
+                  <div
+                    className="small-box__inner-content"
+                  >
+                    <span
+                      className="delta-layout"
+                    >
+                      <span
+                        className="formatted-value-with-symbol"
+                      >
+                        19
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="child-wrapper"
+            style={
+              Object {
+                "width": "33.33333%",
+              }
+            }
+          >
+            <div
+              className="box-column__child-wrapper"
+            >
+              <div
+                className="panel panel--default small-box"
+              >
+                <div
+                  className="small-box__labels"
+                >
+                  <span
+                    className="small-box__labels__name"
+                  >
+                    Notices to Renew
+                  </span>
+                  
+                </div>
+                <div
+                  className="small-box__outer-content"
+                >
+                  <div
+                    className="small-box__inner-content"
+                  >
+                    <span
+                      className="delta-layout"
+                    >
+                      <span
+                        className="formatted-value-with-symbol"
+                      >
+                        30
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="box-column__child-wrapper"
+            >
+              <div
+                className="panel panel--default small-box"
+              >
+                <div
+                  className="small-box__labels"
+                >
+                  <span
+                    className="small-box__labels__name"
+                  >
+                    Notices to Vacate
+                  </span>
+                  
+                </div>
+                <div
+                  className="small-box__outer-content"
+                >
+                  <div
+                    className="small-box__inner-content"
+                  >
+                    <span
+                      className="delta-layout"
+                    >
+                      <span
+                        className="formatted-value-with-symbol"
+                      >
+                        18
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="child-wrapper"
+            style={
+              Object {
+                "width": "33.33333%",
+              }
+            }
+          >
+            <div
+              className="box-column__child-wrapper"
+            >
+              <div
+                className="panel panel--default small-box"
+              >
+                <div
+                  className="small-box__labels"
+                >
+                  <span
+                    className="small-box__labels__name"
+                  >
+                    Move Ins
+                  </span>
+                  
+                </div>
+                <div
+                  className="small-box__outer-content"
+                >
+                  <div
+                    className="small-box__inner-content"
+                  >
+                    <span
+                      className="delta-layout"
+                    >
+                      <span
+                        className="formatted-value-with-symbol"
+                      >
+                        80
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="box-column__child-wrapper"
+            >
+              <div
+                className="panel panel--default small-box"
+              >
+                <div
+                  className="small-box__labels"
+                >
+                  <span
+                    className="small-box__labels__name"
+                  >
+                    Move Outs
+                  </span>
+                  
+                </div>
+                <div
+                  className="small-box__outer-content"
+                >
+                  <div
+                    className="small-box__inner-content"
+                  >
+                    <span
+                      className="delta-layout"
+                    >
+                      <span
+                        className="formatted-value-with-symbol"
+                      >
+                        20
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="report-section"
+    >
+      <div
+        className="section-header"
+      >
+        <p
+          className="section-header__title"
+        >
+          Campaign Investment
+        </p>
+      </div>
+      <div
+        className="box-row box-row--normal"
+      >
+        <div
+          className="child-wrapper"
+          style={
+            Object {
+              "width": "33.33333%",
+            }
+          }
+        >
+          <div
+            className="panel panel--default large-box"
+          >
+            <span
+              className="large-box__top-line"
+            >
+              Campaign Investment
+            </span>
+            <div
+              className="large-box__content"
+            >
+              <span
+                className="large-box__content-value"
+              >
+                $181k
+              </span>
+              <div
+                className="large-box__content-extra"
+              />
+            </div>
+            <span
+              className="large-box__bottom-line"
+            />
+            <span
+              className="large-box__bottom-line"
+            >
+              
+            </span>
+          </div>
+        </div>
+        <div
+          className="child-wrapper"
+          style={
+            Object {
+              "width": "33.33333%",
+            }
+          }
+        >
+          <div
+            className="panel panel--default large-box"
+          >
+            <span
+              className="large-box__top-line"
+            >
+              Est. Revenue Change
+            </span>
+            <div
+              className="large-box__content"
+            >
+              <span
+                className="large-box__content-value"
+              >
+                <span
+                  className="delta-layout"
+                >
+                  <span
+                    className="formatted-value-with-symbol"
+                  >
+                    <span
+                      className="formatted-value-with-symbol__plus"
+                    >
+                      +
+                    </span>
+                    $2.6m
+                  </span>
+                </span>
+              </span>
+            </div>
+            <span
+              className="large-box__bottom-line"
+            >
+              
+            </span>
+            <span
+              className="large-box__bottom-line"
+            />
+          </div>
+        </div>
+        <div
+          className="child-wrapper"
+          style={
+            Object {
+              "width": "33.33333%",
+            }
+          }
+        >
+          <div
+            className="panel panel--default large-box"
+          >
+            <span
+              className="large-box__top-line"
+            >
+              Campaign Return on 
+              <br />
+              Marketing Investment (ROMI)
+            </span>
+            <div
+              className="large-box__content"
+            >
+              <span
+                className="large-box__content-value"
+              >
+                <span
+                  className="delta-layout"
+                >
+                  <span
+                    className="formatted-value-with-symbol"
+                  >
+                    14
+                    <span
+                      className="formatted-value-with-symbol__times"
+                    >
+                      x
+                    </span>
+                  </span>
+                </span>
+              </span>
+            </div>
+            <span
+              className="large-box__bottom-line"
+            >
+              
+            </span>
+            <span
+              className="large-box__bottom-line"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="box-row box-row--normal"
+      >
+        <div
+          className="child-wrapper"
+          style={
+            Object {
+              "width": "50.00000%",
+            }
+          }
+        >
+          <div
+            className="box-column__child-wrapper"
+          >
+            <div
+              className="report-section"
+            >
+              <div
+                className="section-header"
+              >
+                <p
+                  className="section-header__title"
+                >
+                  Acquisition
+                </p>
+              </div>
+              <div
+                className="panel panel--default small-box"
+              >
+                <div
+                  className="small-box__labels"
+                >
+                  <span
+                    className="small-box__labels__name"
+                  >
+                    Leased Unit Change
+                  </span>
+                  
+                </div>
+                <div
+                  className="small-box__outer-content"
+                >
+                  <div
+                    className="small-box__inner-content"
+                  >
+                    <span
+                      className="delta-layout"
+                    >
+                      <span
+                        className="formatted-value-with-symbol"
+                      >
+                        <span
+                          className="formatted-value-with-symbol__plus"
+                        >
+                          +
+                        </span>
+                        55
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="panel panel--default small-box"
+              >
+                <div
+                  className="small-box__labels"
+                >
+                  <span
+                    className="small-box__labels__name"
+                  >
+                    Acquisition Investment
+                  </span>
+                  
+                </div>
+                <div
+                  className="small-box__outer-content"
+                >
+                  <div
+                    className="small-box__inner-content"
+                  >
+                    <span
+                      className="delta-layout"
+                    >
+                      <span
+                        className="formatted-value-with-symbol"
+                      >
+                        $171k
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="panel panel--default small-box"
+              >
+                <div
+                  className="small-box__labels"
+                >
+                  <span
+                    className="small-box__labels__name"
+                  >
+                    Est. Acquired Leasing Revenue
+                  </span>
+                  
+                </div>
+                <div
+                  className="small-box__outer-content"
+                >
+                  <div
+                    className="small-box__inner-content"
+                  >
+                    <span
+                      className="delta-layout"
+                    >
+                      <span
+                        className="formatted-value-with-symbol"
+                      >
+                        <span
+                          className="formatted-value-with-symbol__plus"
+                        >
+                          +
+                        </span>
+                        $1.2m
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="panel panel--default small-box"
+              >
+                <div
+                  className="small-box__labels"
+                >
+                  <span
+                    className="small-box__labels__name"
+                  >
+                    Acquisition ROMI
+                  </span>
+                  
+                </div>
+                <div
+                  className="small-box__outer-content"
+                >
+                  <div
+                    className="small-box__inner-content"
+                  >
+                    <span
+                      className="delta-layout"
+                    >
+                      <span
+                        className="formatted-value-with-symbol"
+                      >
+                        7
+                        <span
+                          className="formatted-value-with-symbol__times"
+                        >
+                          x
+                        </span>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="box-column__child-wrapper"
+          >
+            <div
+              className="report-section"
+            >
+              <div
+                className="section-header"
+              >
+                <p
+                  className="section-header__title"
+                >
+                  Acquisition Investment Allocations
+                </p>
+              </div>
+              <div
+                className="panel panel--default bar-chart panel-rounded-rect"
+              >
+                <div
+                  className="VictoryContainer"
+                  style={
+                    Object {
+                      "height": "100%",
+                      "pointerEvents": "none",
+                      "position": "relative",
+                      "touchAction": "none",
+                      "userSelect": "none",
+                      "width": "100%",
+                    }
+                  }
+                >
+                  <svg
+                    aria-labelledby="victory-container-1-title victory-container-1-desc"
+                    height={300}
+                    role="img"
+                    style={
+                      Object {
+                        "height": "100%",
+                        "pointerEvents": "all",
+                        "width": "100%",
+                      }
+                    }
+                    viewBox="0 0 450 300"
+                    width={450}
+                  >
+                    <g
+                      role="presentation"
+                    >
+                      <line
+                        role="presentation"
+                        shapeRendering="auto"
+                        style={
+                          Object {
+                            "fill": "transparent",
+                            "stroke": "#3d4852",
+                            "strokeLinecap": "round",
+                            "strokeLinejoin": "round",
+                            "strokeWidth": 1,
+                          }
+                        }
+                        vectorEffect="non-scaling-stroke"
+                        x1={NaN}
+                        x2={NaN}
+                        y1={0}
+                        y2={300}
+                      />
+                      <g
+                        role="presentation"
+                      >
+                        <line
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": "none",
+                              "pointerEvents": "painted",
+                              "stroke": "none",
+                            }
+                          }
+                          vectorEffect="non-scaling-stroke"
+                          x1={NaN}
+                          x2={NaN}
+                          y1={225}
+                          y2={225}
+                        />
+                        <line
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": "transparent",
+                              "size": 1,
+                              "stroke": "transparent",
+                            }
+                          }
+                          vectorEffect="non-scaling-stroke"
+                          x1={NaN}
+                          x2={NaN}
+                          y1={225}
+                          y2={225}
+                        />
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={NaN}
+                          x={NaN}
+                          y={225}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#cccccc",
+                                "fontFamily": "sans-serif",
+                                "fontSize": NaN,
+                                "letterSpacing": "normal",
+                                "padding": 10,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="end"
+                            x={NaN}
+                          >
+                            $20k
+                          </tspan>
+                        </text>
+                      </g>
+                      <g
+                        role="presentation"
+                      >
+                        <line
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": "none",
+                              "pointerEvents": "painted",
+                              "stroke": "none",
+                            }
+                          }
+                          vectorEffect="non-scaling-stroke"
+                          x1={NaN}
+                          x2={NaN}
+                          y1={150}
+                          y2={150}
+                        />
+                        <line
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": "transparent",
+                              "size": 1,
+                              "stroke": "transparent",
+                            }
+                          }
+                          vectorEffect="non-scaling-stroke"
+                          x1={NaN}
+                          x2={NaN}
+                          y1={150}
+                          y2={150}
+                        />
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={NaN}
+                          x={NaN}
+                          y={150}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#cccccc",
+                                "fontFamily": "sans-serif",
+                                "fontSize": NaN,
+                                "letterSpacing": "normal",
+                                "padding": 10,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="end"
+                            x={NaN}
+                          >
+                            $40k
+                          </tspan>
+                        </text>
+                      </g>
+                      <g
+                        role="presentation"
+                      >
+                        <line
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": "none",
+                              "pointerEvents": "painted",
+                              "stroke": "none",
+                            }
+                          }
+                          vectorEffect="non-scaling-stroke"
+                          x1={NaN}
+                          x2={NaN}
+                          y1={75}
+                          y2={75}
+                        />
+                        <line
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": "transparent",
+                              "size": 1,
+                              "stroke": "transparent",
+                            }
+                          }
+                          vectorEffect="non-scaling-stroke"
+                          x1={NaN}
+                          x2={NaN}
+                          y1={75}
+                          y2={75}
+                        />
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={NaN}
+                          x={NaN}
+                          y={75}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#cccccc",
+                                "fontFamily": "sans-serif",
+                                "fontSize": NaN,
+                                "letterSpacing": "normal",
+                                "padding": 10,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="end"
+                            x={NaN}
+                          >
+                            $60k
+                          </tspan>
+                        </text>
+                      </g>
+                      <g
+                        role="presentation"
+                      >
+                        <line
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": "none",
+                              "pointerEvents": "painted",
+                              "stroke": "none",
+                            }
+                          }
+                          vectorEffect="non-scaling-stroke"
+                          x1={NaN}
+                          x2={NaN}
+                          y1={0}
+                          y2={0}
+                        />
+                        <line
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": "transparent",
+                              "size": 1,
+                              "stroke": "transparent",
+                            }
+                          }
+                          vectorEffect="non-scaling-stroke"
+                          x1={NaN}
+                          x2={NaN}
+                          y1={0}
+                          y2={0}
+                        />
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={NaN}
+                          x={NaN}
+                          y={0}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#cccccc",
+                                "fontFamily": "sans-serif",
+                                "fontSize": NaN,
+                                "letterSpacing": "normal",
+                                "padding": 10,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="end"
+                            x={NaN}
+                          >
+                            $80k
+                          </tspan>
+                        </text>
+                      </g>
+                    </g>
+                    <g
+                      role="presentation"
+                    >
+                      <line
+                        role="presentation"
+                        shapeRendering="auto"
+                        style={
+                          Object {
+                            "stroke": "black",
+                          }
+                        }
+                        vectorEffect="non-scaling-stroke"
+                      />
+                    </g>
+                    <g
+                      role="presentation"
+                    >
+                      <path
+                        d="M NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+ z"
+                        role="presentation"
+                        shapeRendering="auto"
+                        style={
+                          Object {
+                            "fill": "#338100",
+                            "padding": 8,
+                            "stroke": "#338100",
+                            "strokeWidth": 0,
+                          }
+                        }
+                      />
+                      <path
+                        d="M NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+ z"
+                        role="presentation"
+                        shapeRendering="auto"
+                        style={
+                          Object {
+                            "fill": "#41C100",
+                            "padding": 8,
+                            "stroke": "#41C100",
+                            "strokeWidth": 0,
+                          }
+                        }
+                      />
+                      <path
+                        d="M NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+ z"
+                        role="presentation"
+                        shapeRendering="auto"
+                        style={
+                          Object {
+                            "fill": "#BCFBF1",
+                            "padding": 8,
+                            "stroke": "#BCFBF1",
+                            "strokeWidth": 0,
+                          }
+                        }
+                      />
+                      <path
+                        d="M NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+ z"
+                        role="presentation"
+                        shapeRendering="auto"
+                        style={
+                          Object {
+                            "fill": "#53F7DD",
+                            "padding": 8,
+                            "stroke": "#53F7DD",
+                            "strokeWidth": 0,
+                          }
+                        }
+                      />
+                      <text
+                        direction="inherit"
+                        dx={0}
+                        dy={NaN}
+                        x={NaN}
+                        y={NaN}
+                      >
+                        <tspan
+                          dx={0}
+                          style={
+                            Object {
+                              "fill": "#cccccc",
+                              "fontFamily": "sans-serif",
+                              "fontSize": NaN,
+                              "letterSpacing": "normal",
+                              "padding": 10,
+                              "stroke": "transparent",
+                            }
+                          }
+                          textAnchor="middle"
+                          x={NaN}
+                        >
+                          $35k
+                        </tspan>
+                      </text>
+                      <text
+                        direction="inherit"
+                        dx={0}
+                        dy={NaN}
+                        x={NaN}
+                        y={NaN}
+                      >
+                        <tspan
+                          dx={0}
+                          style={
+                            Object {
+                              "fill": "#cccccc",
+                              "fontFamily": "sans-serif",
+                              "fontSize": NaN,
+                              "letterSpacing": "normal",
+                              "padding": 10,
+                              "stroke": "transparent",
+                            }
+                          }
+                          textAnchor="middle"
+                          x={NaN}
+                        >
+                          $76k
+                        </tspan>
+                      </text>
+                      <text
+                        direction="inherit"
+                        dx={0}
+                        dy={NaN}
+                        x={NaN}
+                        y={NaN}
+                      >
+                        <tspan
+                          dx={0}
+                          style={
+                            Object {
+                              "fill": "#cccccc",
+                              "fontFamily": "sans-serif",
+                              "fontSize": NaN,
+                              "letterSpacing": "normal",
+                              "padding": 10,
+                              "stroke": "transparent",
+                            }
+                          }
+                          textAnchor="middle"
+                          x={NaN}
+                        >
+                          $35k
+                        </tspan>
+                      </text>
+                      <text
+                        direction="inherit"
+                        dx={0}
+                        dy={NaN}
+                        x={NaN}
+                        y={NaN}
+                      >
+                        <tspan
+                          dx={0}
+                          style={
+                            Object {
+                              "fill": "#cccccc",
+                              "fontFamily": "sans-serif",
+                              "fontSize": NaN,
+                              "letterSpacing": "normal",
+                              "padding": 10,
+                              "stroke": "transparent",
+                            }
+                          }
+                          textAnchor="middle"
+                          x={NaN}
+                        >
+                          $24k
+                        </tspan>
+                      </text>
+                    </g>
+                  </svg>
+                  <div
+                    style={
+                      Object {
+                        "height": "100%",
+                        "left": 0,
+                        "position": "absolute",
+                        "top": 0,
+                        "width": "100%",
+                        "zIndex": 99,
+                      }
+                    }
+                  >
+                    <svg
+                      height={300}
+                      style={
+                        Object {
+                          "height": "100%",
+                          "overflow": "visible",
+                          "width": "100%",
+                        }
+                      }
+                      viewBox="0 0 450 300"
+                      width={450}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="child-wrapper"
+          style={
+            Object {
+              "width": "50.00000%",
+            }
+          }
+        >
+          <div
+            className="box-column__child-wrapper"
+          >
+            <div
+              className="report-section"
+            >
+              <div
+                className="section-header"
+              >
+                <p
+                  className="section-header__title"
+                >
+                  Retention
+                </p>
+              </div>
+              <div
+                className="panel panel--default small-box"
+              >
+                <div
+                  className="small-box__labels"
+                >
+                  <span
+                    className="small-box__labels__name"
+                  >
+                    Lease Renewals
+                  </span>
+                  
+                </div>
+                <div
+                  className="small-box__outer-content"
+                >
+                  <div
+                    className="small-box__inner-content"
+                  >
+                    <span
+                      className="delta-layout"
+                    >
+                      <span
+                        className="formatted-value-with-symbol"
+                      >
+                        64
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="panel panel--default small-box"
+              >
+                <div
+                  className="small-box__labels"
+                >
+                  <span
+                    className="small-box__labels__name"
+                  >
+                    Retention Investment
+                  </span>
+                  
+                </div>
+                <div
+                  className="small-box__outer-content"
+                >
+                  <div
+                    className="small-box__inner-content"
+                  >
+                    <span
+                      className="delta-layout"
+                    >
+                      <span
+                        className="formatted-value-with-symbol"
+                      >
+                        $10k
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="panel panel--default small-box"
+              >
+                <div
+                  className="small-box__labels"
+                >
+                  <span
+                    className="small-box__labels__name"
+                  >
+                    Est. Retained Leasing Revenue
+                  </span>
+                  
+                </div>
+                <div
+                  className="small-box__outer-content"
+                >
+                  <div
+                    className="small-box__inner-content"
+                  >
+                    <span
+                      className="delta-layout"
+                    >
+                      <span
+                        className="formatted-value-with-symbol"
+                      >
+                        <span
+                          className="formatted-value-with-symbol__plus"
+                        >
+                          +
+                        </span>
+                        $1.4m
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="panel panel--default small-box"
+              >
+                <div
+                  className="small-box__labels"
+                >
+                  <span
+                    className="small-box__labels__name"
+                  >
+                    Retention ROMI
+                  </span>
+                  
+                </div>
+                <div
+                  className="small-box__outer-content"
+                >
+                  <div
+                    className="small-box__inner-content"
+                  >
+                    <span
+                      className="delta-layout"
+                    >
+                      <span
+                        className="formatted-value-with-symbol"
+                      >
+                        142
+                        <span
+                          className="formatted-value-with-symbol__times"
+                        >
+                          x
+                        </span>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="box-column__child-wrapper"
+          >
+            <div
+              className="report-section"
+            >
+              <div
+                className="section-header"
+              >
+                <p
+                  className="section-header__title"
+                >
+                  Retention Investment Allocations
+                </p>
+              </div>
+              <div
+                className="panel panel--default bar-chart panel-rounded-rect"
+              >
+                <div
+                  className="VictoryContainer"
+                  style={
+                    Object {
+                      "height": "100%",
+                      "pointerEvents": "none",
+                      "position": "relative",
+                      "touchAction": "none",
+                      "userSelect": "none",
+                      "width": "100%",
+                    }
+                  }
+                >
+                  <svg
+                    aria-labelledby="victory-container-2-title victory-container-2-desc"
+                    height={300}
+                    role="img"
+                    style={
+                      Object {
+                        "height": "100%",
+                        "pointerEvents": "all",
+                        "width": "100%",
+                      }
+                    }
+                    viewBox="0 0 450 300"
+                    width={450}
+                  >
+                    <g
+                      role="presentation"
+                    >
+                      <line
+                        role="presentation"
+                        shapeRendering="auto"
+                        style={
+                          Object {
+                            "fill": "transparent",
+                            "stroke": "#3d4852",
+                            "strokeLinecap": "round",
+                            "strokeLinejoin": "round",
+                            "strokeWidth": 1,
+                          }
+                        }
+                        vectorEffect="non-scaling-stroke"
+                        x1={NaN}
+                        x2={NaN}
+                        y1={0}
+                        y2={300}
+                      />
+                      <g
+                        role="presentation"
+                      >
+                        <line
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": "none",
+                              "pointerEvents": "painted",
+                              "stroke": "none",
+                            }
+                          }
+                          vectorEffect="non-scaling-stroke"
+                          x1={NaN}
+                          x2={NaN}
+                          y1={225}
+                          y2={225}
+                        />
+                        <line
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": "transparent",
+                              "size": 1,
+                              "stroke": "transparent",
+                            }
+                          }
+                          vectorEffect="non-scaling-stroke"
+                          x1={NaN}
+                          x2={NaN}
+                          y1={225}
+                          y2={225}
+                        />
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={NaN}
+                          x={NaN}
+                          y={225}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#cccccc",
+                                "fontFamily": "sans-serif",
+                                "fontSize": NaN,
+                                "letterSpacing": "normal",
+                                "padding": 10,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="end"
+                            x={NaN}
+                          >
+                            $20k
+                          </tspan>
+                        </text>
+                      </g>
+                      <g
+                        role="presentation"
+                      >
+                        <line
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": "none",
+                              "pointerEvents": "painted",
+                              "stroke": "none",
+                            }
+                          }
+                          vectorEffect="non-scaling-stroke"
+                          x1={NaN}
+                          x2={NaN}
+                          y1={150}
+                          y2={150}
+                        />
+                        <line
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": "transparent",
+                              "size": 1,
+                              "stroke": "transparent",
+                            }
+                          }
+                          vectorEffect="non-scaling-stroke"
+                          x1={NaN}
+                          x2={NaN}
+                          y1={150}
+                          y2={150}
+                        />
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={NaN}
+                          x={NaN}
+                          y={150}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#cccccc",
+                                "fontFamily": "sans-serif",
+                                "fontSize": NaN,
+                                "letterSpacing": "normal",
+                                "padding": 10,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="end"
+                            x={NaN}
+                          >
+                            $40k
+                          </tspan>
+                        </text>
+                      </g>
+                      <g
+                        role="presentation"
+                      >
+                        <line
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": "none",
+                              "pointerEvents": "painted",
+                              "stroke": "none",
+                            }
+                          }
+                          vectorEffect="non-scaling-stroke"
+                          x1={NaN}
+                          x2={NaN}
+                          y1={75}
+                          y2={75}
+                        />
+                        <line
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": "transparent",
+                              "size": 1,
+                              "stroke": "transparent",
+                            }
+                          }
+                          vectorEffect="non-scaling-stroke"
+                          x1={NaN}
+                          x2={NaN}
+                          y1={75}
+                          y2={75}
+                        />
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={NaN}
+                          x={NaN}
+                          y={75}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#cccccc",
+                                "fontFamily": "sans-serif",
+                                "fontSize": NaN,
+                                "letterSpacing": "normal",
+                                "padding": 10,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="end"
+                            x={NaN}
+                          >
+                            $60k
+                          </tspan>
+                        </text>
+                      </g>
+                      <g
+                        role="presentation"
+                      >
+                        <line
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": "none",
+                              "pointerEvents": "painted",
+                              "stroke": "none",
+                            }
+                          }
+                          vectorEffect="non-scaling-stroke"
+                          x1={NaN}
+                          x2={NaN}
+                          y1={0}
+                          y2={0}
+                        />
+                        <line
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": "transparent",
+                              "size": 1,
+                              "stroke": "transparent",
+                            }
+                          }
+                          vectorEffect="non-scaling-stroke"
+                          x1={NaN}
+                          x2={NaN}
+                          y1={0}
+                          y2={0}
+                        />
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={NaN}
+                          x={NaN}
+                          y={0}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#cccccc",
+                                "fontFamily": "sans-serif",
+                                "fontSize": NaN,
+                                "letterSpacing": "normal",
+                                "padding": 10,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="end"
+                            x={NaN}
+                          >
+                            $80k
+                          </tspan>
+                        </text>
+                      </g>
+                    </g>
+                    <g
+                      role="presentation"
+                    >
+                      <line
+                        role="presentation"
+                        shapeRendering="auto"
+                        style={
+                          Object {
+                            "stroke": "black",
+                          }
+                        }
+                        vectorEffect="non-scaling-stroke"
+                      />
+                    </g>
+                    <g
+                      role="presentation"
+                    >
+                      <path
+                        d="M NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+ z"
+                        role="presentation"
+                        shapeRendering="auto"
+                        style={
+                          Object {
+                            "fill": "#338100",
+                            "padding": 8,
+                            "stroke": "#338100",
+                            "strokeWidth": 0,
+                          }
+                        }
+                      />
+                      <path
+                        d="M NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+ z"
+                        role="presentation"
+                        shapeRendering="auto"
+                        style={
+                          Object {
+                            "fill": "#41C100",
+                            "padding": 8,
+                            "stroke": "#41C100",
+                            "strokeWidth": 0,
+                          }
+                        }
+                      />
+                      <path
+                        d="M NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+ z"
+                        role="presentation"
+                        shapeRendering="auto"
+                        style={
+                          Object {
+                            "fill": "#BCFBF1",
+                            "padding": 8,
+                            "stroke": "#BCFBF1",
+                            "strokeWidth": 0,
+                          }
+                        }
+                      />
+                      <path
+                        d="M NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+L NaN, NaN 
+A 0 0 0 0 0, NaN, NaN 
+ z"
+                        role="presentation"
+                        shapeRendering="auto"
+                        style={
+                          Object {
+                            "fill": "#53F7DD",
+                            "padding": 8,
+                            "stroke": "#53F7DD",
+                            "strokeWidth": 0,
+                          }
+                        }
+                      />
+                      <text
+                        direction="inherit"
+                        dx={0}
+                        dy={NaN}
+                        x={NaN}
+                        y={NaN}
+                      >
+                        <tspan
+                          dx={0}
+                          style={
+                            Object {
+                              "fill": "#cccccc",
+                              "fontFamily": "sans-serif",
+                              "fontSize": NaN,
+                              "letterSpacing": "normal",
+                              "padding": 10,
+                              "stroke": "transparent",
+                            }
+                          }
+                          textAnchor="middle"
+                          x={NaN}
+                        >
+                          $0
+                        </tspan>
+                      </text>
+                      <text
+                        direction="inherit"
+                        dx={0}
+                        dy={NaN}
+                        x={NaN}
+                        y={NaN}
+                      >
+                        <tspan
+                          dx={0}
+                          style={
+                            Object {
+                              "fill": "#cccccc",
+                              "fontFamily": "sans-serif",
+                              "fontSize": NaN,
+                              "letterSpacing": "normal",
+                              "padding": 10,
+                              "stroke": "transparent",
+                            }
+                          }
+                          textAnchor="middle"
+                          x={NaN}
+                        >
+                          $0
+                        </tspan>
+                      </text>
+                      <text
+                        direction="inherit"
+                        dx={0}
+                        dy={NaN}
+                        x={NaN}
+                        y={NaN}
+                      >
+                        <tspan
+                          dx={0}
+                          style={
+                            Object {
+                              "fill": "#cccccc",
+                              "fontFamily": "sans-serif",
+                              "fontSize": NaN,
+                              "letterSpacing": "normal",
+                              "padding": 10,
+                              "stroke": "transparent",
+                            }
+                          }
+                          textAnchor="middle"
+                          x={NaN}
+                        >
+                          $10k
+                        </tspan>
+                      </text>
+                      <text
+                        direction="inherit"
+                        dx={0}
+                        dy={NaN}
+                        x={NaN}
+                        y={NaN}
+                      >
+                        <tspan
+                          dx={0}
+                          style={
+                            Object {
+                              "fill": "#cccccc",
+                              "fontFamily": "sans-serif",
+                              "fontSize": NaN,
+                              "letterSpacing": "normal",
+                              "padding": 10,
+                              "stroke": "transparent",
+                            }
+                          }
+                          textAnchor="middle"
+                          x={NaN}
+                        >
+                          $0
+                        </tspan>
+                      </text>
+                    </g>
+                  </svg>
+                  <div
+                    style={
+                      Object {
+                        "height": "100%",
+                        "left": 0,
+                        "position": "absolute",
+                        "top": 0,
+                        "width": "100%",
+                        "zIndex": 99,
+                      }
+                    }
+                  >
+                    <svg
+                      height={300}
+                      style={
+                        Object {
+                          "height": "100%",
+                          "overflow": "visible",
+                          "width": "100%",
+                        }
+                      }
+                      viewBox="0 0 450 300"
+                      width={450}
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="report-section"
+    >
+      <div
+        className="section-header"
+      >
+        <p
+          className="section-header__title"
+        >
+          Acquisition Funnel
+        </p>
+      </div>
+      <div
+        className="box-row box-row--normal"
+      >
+        <div
+          className="child-wrapper"
+          style={
+            Object {
+              "width": "33.33333%",
+            }
+          }
+        >
+          <div
+            className="panel panel--default large-box"
+          >
+            <span
+              className="large-box__top-line"
+            >
+              USV &gt; EXE
+            </span>
+            <div
+              className="large-box__content"
+            >
+              <span
+                className="large-box__content-value"
+              >
+                0.7%
+              </span>
+              <div
+                className="large-box__content-extra"
+              />
+            </div>
+            <span
+              className="large-box__bottom-line"
+            />
+            <span
+              className="large-box__bottom-line"
+            >
+              
+            </span>
+          </div>
+        </div>
+        <div
+          className="child-wrapper"
+          style={
+            Object {
+              "width": "33.33333%",
+            }
+          }
+        >
+          <div
+            className="panel panel--default large-box"
+          >
+            <span
+              className="large-box__top-line"
+            >
+              Cancellation & Denial Rate
+            </span>
+            <div
+              className="large-box__content"
+            >
+              <span
+                className="large-box__content-value"
+              >
+                20%
+              </span>
+              <div
+                className="large-box__content-extra"
+              />
+            </div>
+            <span
+              className="large-box__bottom-line"
+            />
+            <span
+              className="large-box__bottom-line"
+            >
+              
+            </span>
+          </div>
+        </div>
+        <div
+          className="child-wrapper"
+          style={
+            Object {
+              "width": "33.33333%",
+            }
+          }
+        >
+          <div
+            className="panel panel--default large-box"
+          >
+            <span
+              className="large-box__top-line"
+            >
+              Cost per Exe / Lowest Monthly Rent
+            </span>
+            <div
+              className="large-box__content"
+            >
+              <span
+                className="large-box__content-value"
+              >
+                103%
+              </span>
+              <div
+                className="large-box__content-extra"
+              />
+            </div>
+            <span
+              className="large-box__bottom-line"
+            />
+            <span
+              className="large-box__bottom-line"
+            >
+              
+            </span>
+          </div>
+        </div>
+      </div>
+      <div
+        className="acquisition-funnel__table"
+      >
+        <div
+          className="acquisition-funnel__row"
+        >
+          <div
+            className="acquisition-funnel__column"
+          >
+            <div
+              className="panel panel--default acquisition-funnel__column-inner"
+            >
+              <div
+                className="acquisition-funnel__column-header"
+              >
+                Volume of Activity
+              </div>
+              <div
+                className="acquisition-funnel__column-content"
+              >
+                <div
+                  className="funnel-box-layout"
+                >
+                  <div
+                    className="funnel-box-layout__left"
+                  >
+                    <div
+                      className="funnel-box-layout__name"
+                    >
+                      Volume of USV
+                    </div>
+                    <div
+                      className="funnel-box-layout__target"
+                    >
+                      4-Week Average: 2,136
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout__right"
+                  >
+                    <div
+                      className="funnel-box-layout__value"
+                    >
+                      11,209
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="funnel-box-layout"
+                >
+                  <div
+                    className="funnel-box-layout__left"
+                  >
+                    <div
+                      className="funnel-box-layout__name"
+                    >
+                      Volume of INQ
+                    </div>
+                    <div
+                      className="funnel-box-layout__target"
+                    >
+                      4-Week Average: 128
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout__right"
+                  >
+                    <div
+                      className="funnel-box-layout__value"
+                    >
+                      673
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="funnel-box-layout"
+                >
+                  <div
+                    className="funnel-box-layout__left"
+                  >
+                    <div
+                      className="funnel-box-layout__name"
+                    >
+                      Volume of TOU
+                    </div>
+                    <div
+                      className="funnel-box-layout__target"
+                    >
+                      4-Week Average: 52
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout__right"
+                  >
+                    <div
+                      className="funnel-box-layout__value"
+                    >
+                      269
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="funnel-box-layout"
+                >
+                  <div
+                    className="funnel-box-layout__left"
+                  >
+                    <div
+                      className="funnel-box-layout__name"
+                    >
+                      Volume of APP
+                    </div>
+                    <div
+                      className="funnel-box-layout__target"
+                    >
+                      4-Week Average: 19
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout__right"
+                  >
+                    <div
+                      className="funnel-box-layout__value"
+                    >
+                      97
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="funnel-box-layout"
+                >
+                  <div
+                    className="funnel-box-layout__left"
+                  >
+                    <div
+                      className="funnel-box-layout__name"
+                    >
+                      Volume of EXE
+                    </div>
+                    <div
+                      className="funnel-box-layout__target"
+                    >
+                      4-Week Average: 16
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout__right"
+                  >
+                    <div
+                      className="funnel-box-layout__value"
+                    >
+                      77
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="acquisition-funnel__column"
+          >
+            <div
+              className="panel panel--default acquisition-funnel__column-inner"
+            >
+              <div
+                className="acquisition-funnel__column-header"
+              >
+                Conversion Rate
+              </div>
+              <div
+                className="acquisition-funnel__column-content"
+              >
+                <div
+                  className="funnel-box-layout"
+                >
+                  <div
+                    className="funnel-box-layout__left"
+                  >
+                    <div
+                      className="funnel-box-layout__name"
+                    >
+                      USV → INQ
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout__right"
+                  >
+                    <div
+                      className="funnel-box-layout__value"
+                    >
+                      6%
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="funnel-box-layout"
+                >
+                  <div
+                    className="funnel-box-layout__left"
+                  >
+                    <div
+                      className="funnel-box-layout__name"
+                    >
+                      INQ → TOU
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout__right"
+                  >
+                    <div
+                      className="funnel-box-layout__value"
+                    >
+                      40%
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="funnel-box-layout"
+                >
+                  <div
+                    className="funnel-box-layout__left"
+                  >
+                    <div
+                      className="funnel-box-layout__name"
+                    >
+                      TOU → APP
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout__right"
+                  >
+                    <div
+                      className="funnel-box-layout__value"
+                    >
+                      36%
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="funnel-box-layout"
+                >
+                  <div
+                    className="funnel-box-layout__left"
+                  >
+                    <div
+                      className="funnel-box-layout__name"
+                    >
+                      APP → EXE
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout__right"
+                  >
+                    <div
+                      className="funnel-box-layout__value"
+                    >
+                      80%
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="acquisition-funnel__column"
+          >
+            <div
+              className="panel panel--default acquisition-funnel__column-inner"
+            >
+              <div
+                className="acquisition-funnel__column-header"
+              >
+                Cost per Activity
+              </div>
+              <div
+                className="acquisition-funnel__column-content"
+              >
+                <div
+                  className="funnel-box-layout"
+                >
+                  <div
+                    className="funnel-box-layout__left"
+                  >
+                    <div
+                      className="funnel-box-layout__name"
+                    >
+                      Cost per USV
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout__right"
+                  >
+                    <div
+                      className="funnel-box-layout__value"
+                    >
+                      $10
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="funnel-box-layout"
+                >
+                  <div
+                    className="funnel-box-layout__left"
+                  >
+                    <div
+                      className="funnel-box-layout__name"
+                    >
+                      Cost per INQ
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout__right"
+                  >
+                    <div
+                      className="funnel-box-layout__value"
+                    >
+                      $165
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="funnel-box-layout"
+                >
+                  <div
+                    className="funnel-box-layout__left"
+                  >
+                    <div
+                      className="funnel-box-layout__name"
+                    >
+                      Cost per TOU
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout__right"
+                  >
+                    <div
+                      className="funnel-box-layout__value"
+                    >
+                      $413
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="funnel-box-layout"
+                >
+                  <div
+                    className="funnel-box-layout__left"
+                  >
+                    <div
+                      className="funnel-box-layout__name"
+                    >
+                      Cost per APP
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout__right"
+                  >
+                    <div
+                      className="funnel-box-layout__value"
+                    >
+                      $1,515
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="funnel-box-layout"
+                >
+                  <div
+                    className="funnel-box-layout__left"
+                  >
+                    <div
+                      className="funnel-box-layout__name"
+                    >
+                      Cost per EXE
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout__right"
+                  >
+                    <div
+                      className="funnel-box-layout__value"
+                    >
+                      $1,909
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div />
+  </div>
+</div>
+`;

@@ -402,6 +402,10 @@
         "Property": {
             "description": "Property-wide behavior",
             "properties": {
+                "average_monthly_rent": {
+                    "description": "The average rent, across all units, during this period",
+                    "type": "string"
+                },
                 "cost_per_exe_vs_rent": {
                     "description": "The cost per exe vs the monthly average rent during this period",
                     "type": "number"
@@ -414,21 +418,25 @@
                     "description": "The lowest rent, across all units, during this period",
                     "type": "string"
                 },
-                "monthly_average_rent": {
-                    "description": "The average rent, across all units, during this period",
-                    "type": "string"
-                },
                 "occupancy": {
                     "$ref": "#/definitions/Occupancy",
                     "description": "Basic occupancy information for the period"
+                },
+                "total_units": {
+                    "description": "The total number of units in this property during this period (older buildings may not specify)",
+                    "type": [
+                        "null",
+                        "number"
+                    ]
                 }
             },
             "required": [
+                "average_monthly_rent",
                 "cost_per_exe_vs_rent",
                 "leasing",
                 "lowest_monthly_rent",
-                "monthly_average_rent",
-                "occupancy"
+                "occupancy",
+                "total_units"
             ],
             "type": "object"
         },
@@ -671,6 +679,10 @@
         "RecursivePartial<Property>": {
             "description": "Target values are optional; if not present, they are not set.",
             "properties": {
+                "average_monthly_rent": {
+                    "description": "The average rent, across all units, during this period",
+                    "type": "string"
+                },
                 "cost_per_exe_vs_rent": {
                     "description": "The cost per exe vs the monthly average rent during this period",
                     "type": "number"
@@ -683,13 +695,16 @@
                     "description": "The lowest rent, across all units, during this period",
                     "type": "string"
                 },
-                "monthly_average_rent": {
-                    "description": "The average rent, across all units, during this period",
-                    "type": "string"
-                },
                 "occupancy": {
                     "$ref": "#/definitions/RecursivePartial<Occupancy>",
                     "description": "Basic occupancy information for the period"
+                },
+                "total_units": {
+                    "description": "The total number of units in this property during this period (older buildings may not specify)",
+                    "type": [
+                        "null",
+                        "number"
+                    ]
                 }
             },
             "type": "object"

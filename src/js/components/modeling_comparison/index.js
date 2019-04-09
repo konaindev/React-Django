@@ -21,8 +21,6 @@ const CellRenderer = props => <div>{props.value}</div>;
 export function ModelingComparison({ property_name, options }) {
   const tableRows = convertToTableRows(options);
 
-  console.log(tableRows);
-
   let reactTableColumns = [
     {
       Header: "",
@@ -101,7 +99,7 @@ ModelingComparison.propTypes = {
         cost_per_exe_vs_rent: number,
         leasing: object.isRequired,
         lowest_monthly_rent: string,
-        monthly_average_rent: string,
+        average_monthly_rent: string,
         occupancy: object.isRequired
       }).isRequired
     })

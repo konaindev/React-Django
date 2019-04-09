@@ -1,5 +1,6 @@
 import React from "react";
 import dateFnformat from "date-fns/format";
+import dfParse from "date-fns/parse";
 
 import { getDateDiff } from "./misc";
 
@@ -71,9 +72,14 @@ export const formatCurrency = (value, cents = false, currency = "USD") => {
  * @note This is always formatted in the en-US locale, because otherwise my hacknology could break.
  *
  * @param {number|string} value A numerical value to format
+ * @param {decimal|boolean} whether to include decimal point even if its greater than a unit value
  * @param {string} currency The ISO 4217 currency code
  */
-export const formatCurrencyShorthand = (value, currency = "USD") => {
+export const formatCurrencyShorthand = (
+  value,
+  decimal = false,
+  currency = "USD"
+) => {
   const levels = ["", "k", "m", "b"];
 
   // reduce value down to dollars, thousands, or millions of dollars
@@ -91,7 +97,7 @@ export const formatCurrencyShorthand = (value, currency = "USD") => {
   const formatter = Intl.NumberFormat("en-US", {
     style: "currency",
     minimumFractionDigits: 0,
-    maximumFractionDigits: maximumDigits,
+    maximumFractionDigits: decimal ? 1 : maximumDigits,
     useGrouping: false,
     currency
   });
@@ -99,6 +105,17 @@ export const formatCurrencyShorthand = (value, currency = "USD") => {
   // return the result with appropriate dollar value
   return `${formatter.format(number)}${level}`;
 };
+
+/**
+ * @description Convert a value (like 4500) to a shorthand USD display string with 1 digit ($4.5k)
+ *
+ * @note This is always formatted in the en-US locale, because otherwise my hacknology could break.
+ *
+ * @param {number|string} value A numerical value to format
+ * @param {string} currency The ISO 4217 currency code
+ */
+export const formatCurrencyShorthandWithDigit = (value, currency = "USD") =>
+  formatCurrencyShorthand(value, true, currency);
 
 /**
  * @description Format a date like it's the USA!
@@ -125,7 +142,7 @@ export const formatDate = (value, year = true) => {
  * formatDateWithTokens("2018-12-17", "MMM D, YYYY"); // Dec 17, 2018
  */
 export const formatDateWithTokens = (v, tokens) => {
-  return dateFnformat(new Date(v), tokens);
+  return dateFnformat(v, tokens);
 };
 
 /**
@@ -175,7 +192,7 @@ export const formatDateDiff = (startDateStr, endDateStr, unit = "month") => {
     minute: "min",
     hour: "hrs",
     day: "days",
-    week: "weeks",
+    week: "wks",
     month: "mo",
     year: "yr"
   };

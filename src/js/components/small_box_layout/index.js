@@ -10,7 +10,7 @@ import {
   formatDeltaPercent,
   formatNumber,
   formatCurrency,
-  formatCurrencyShorthand,
+  formatCurrencyShorthandWithDigit,
   formatDate
 } from "../../utils/formatters";
 import { getDefaultDirection, getPercentageDirection } from "../../utils/misc";
@@ -84,8 +84,8 @@ const SmallCurrencyBox = withFormatters(
 );
 const SmallCurrencyShorthandBox = withFormatters(
   SmallBoxLayout,
-  formatCurrencyShorthand,
-  formatCurrencyShorthand,
+  formatCurrencyShorthandWithDigit,
+  formatCurrencyShorthandWithDigit,
   getDefaultDirection
 );
 const SmallDateBox = withFormatters(SmallBoxLayout, formatDate);

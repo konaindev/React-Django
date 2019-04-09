@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PerformanceReportSpanDropdown renders correctly 1`] = `
+<span
+  className="report-span-dropdown"
+>
+  <select
+    onChange={[Function]}
+  >
+    <option
+      value="/projects/pro_eekgau8mfkbc34iq/report/baseline/"
+    >
+      Baseline Period (Jan 01 2017 - May 07 2018)
+    </option>
+    <option
+      value="/projects/pro_eekgau8mfkbc34iq/report/last-week/"
+    >
+      Last Week (Dec 24 2018 - Dec 31 2018)
+    </option>
+    <option
+      value="/projects/pro_eekgau8mfkbc34iq/report/last-two-weeks/"
+    >
+      Last Two Weeks (Dec 17 2018 - Dec 31 2018)
+    </option>
+    <option
+      value="/projects/pro_eekgau8mfkbc34iq/report/last-four-weeks/"
+    >
+      Last Four Weeks (Dec 03 2018 - Dec 31 2018)
+    </option>
+    <option
+      value="/projects/pro_eekgau8mfkbc34iq/report/campaign/"
+    >
+      Campaign To Date (May 07 2018 - Dec 31 2018)
+    </option>
+  </select>
+</span>
+`;

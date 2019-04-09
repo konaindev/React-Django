@@ -6,7 +6,7 @@ import { linkTo } from "@storybook/addon-links";
 
 import PerformanceReportSpanDropdown from "./index";
 
-const props = {
+export const props = {
   current_report_link: { name: "Some Report", link: "/some/url" },
   report_links: [
     {

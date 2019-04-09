@@ -5,8 +5,9 @@
   },
   "property_name": "Portland Multi Family",
   "property": {
-    "monthly_average_rent": "1842.59",
+    "average_monthly_rent": "1842.59",
     "lowest_monthly_rent": "1842.59",
+    "total_units": 265,
     "cost_per_exe_vs_rent": 0.58,
     "leasing": {
       "change": 9,
@@ -82,7 +83,7 @@
   },
   "targets": {
     "property": {
-      "monthly_average_rent": "7278.00",
+      "average_monthly_rent": "7278.00",
       "cost_per_exe_vs_rent": 1.03,
       "leasing": {
         "change": 11,

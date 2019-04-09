@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageChrome renders correctly 1`] = `
+<div
+  className="chrome"
+>
+  <div
+    className="page-chrome__top-chrome"
+  >
+    <div
+      className="page-chrome__top-chrome__content"
+    >
+      <div
+        className="page-header"
+      >
+        <div
+          className="container page-header__inner"
+        >
+          <div
+            className="remarkably-logo"
+          >
+             
+          </div>
+          <nav
+            className="page-header__items-outer"
+          >
+            <ul
+              className="page-header__items-inner"
+              style={
+                Object {
+                  "columns": 1,
+                }
+              }
+            >
+              <li
+                className="page-header__item"
+              >
+                <div>
+                  headerItems
+                </div>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <div>
+        topItems
+      </div>
+    </div>
+    <div
+      className="page-chrome__top-chrome__spacing-fix"
+      style={
+        Object {
+          "height": 76,
+        }
+      }
+    >
+       
+    </div>
+  </div>
+  <div>
+    children
+  </div>
+</div>
+`;

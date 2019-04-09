@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DashboardPage renders correctly 1`] = `
+<div
+  className="chrome"
+>
+  <div
+    className="page-chrome__top-chrome"
+  >
+    <div
+      className="page-chrome__top-chrome__content"
+    >
+      <div
+        className="page-header"
+      >
+        <div
+          className="container page-header__inner"
+        >
+          <div
+            className="remarkably-logo"
+          >
+             
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="page-chrome__top-chrome__spacing-fix"
+      style={
+        Object {
+          "height": 76,
+        }
+      }
+    >
+       
+    </div>
+  </div>
+  <div
+    className="dashboard-content"
+  >
+    <p>
+      (User dashboard coming soon!)
+    </p>
+  </div>
+</div>
+`;

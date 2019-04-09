@@ -5,10 +5,11 @@ import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 import SegmentOverviewByAge from "./index";
 
-const props = {
+export const props = {
   age_group: "18-24",
   segment_population: 10368,
   total_population: 120448,
+  segment_number: 1,
   income_groups: [
     {
       income: "50000.00",
@@ -62,5 +63,5 @@ const props = {
 };
 
 storiesOf("SegmentOverviewByAge", module).add("default", () => (
-  <SegmentOverviewByAge {...props} segment_number={1} />
+  <SegmentOverviewByAge {...props} />
 ));

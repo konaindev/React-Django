@@ -9,7 +9,13 @@ from jsonfield import JSONField
 from stdimage.models import StdImageField
 
 from remark.lib.tokens import public_id
-from remark.lib.metrics import PointMetric, SumIntervalMetric, ModelPeriod
+from remark.lib.metrics import (
+    PointMetric,
+    EndPointMetric,
+    SumIntervalMetric,
+    ModelPeriod,
+)
+from .spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
 
 
 def pro_public_id():
@@ -74,10 +80,7 @@ class Project(models.Model):
         default="",
         upload_to=building_image_media_path,
         help_text="""A full-resolution user-supplied image of the building.<br/>Resized variants (180x180, 76x76) will also be created on Amazon S3.""",
-        variations={
-            "regular": (180, 180, True),
-            "thumbnail": (76, 76, True),
-        }
+        variations={"regular": (180, 180, True), "thumbnail": (76, 76, True)},
     )
 
     baseline_start = models.DateField(
@@ -119,6 +122,47 @@ class Project(models.Model):
         # Ensure loaded data retains JSON object key ordering
         load_kwargs={"object_pairs_hook": collections.OrderedDict},
         help_text="Campaign Plan JSON data. Must conform to the schema defined in CampaignPlan.ts",
+    )
+
+    total_units = models.IntegerField(
+        null=True,
+        blank=True,
+        default=None,
+        help_text="The total number of units in this project/property.",
+    )
+
+    average_tenant_age = models.FloatField(
+        null=True,
+        blank=True,
+        default=None,
+        help_text="The average tenant age for this project/property.",
+    )
+
+    highest_monthly_rent = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=None,
+        null=True,
+        blank=True,
+        help_text="Highest rent tenants pay monthly. Applies for the duration of the project.",
+    )
+
+    average_monthly_rent = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=None,
+        null=True,
+        blank=True,
+        help_text="Average rent tenants pay monthly. Applies for the duration of the project.",
+    )
+
+    lowest_monthly_rent = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=None,
+        null=True,
+        blank=True,
+        help_text="Lowest rent tenants pay monthly. Applies for the duration of the project.",
     )
 
     def get_periods(self):
@@ -167,11 +211,11 @@ class Project(models.Model):
         """
         Return building image's S3 resource urls for all variants
         """
-        if (self.building_image):
+        if self.building_image:
             return dict(
                 original=self.building_image.url,
                 regular=self.building_image.regular.url,
-                thumbnail=self.building_image.thumbnail.url
+                thumbnail=self.building_image.thumbnail.url,
             )
         else:
             return None
@@ -189,8 +233,10 @@ class Project(models.Model):
 
 
 class SpreadsheetManager(models.Manager):
-    def latest_for_kind(self, kind):
-        return self.filter(kind=kind).order_by("-created").first()
+    def latest_for_kind(self, kind, subkind=None):
+        return (
+            self.filter(kind=kind, subkind=subkind or "").order_by("-created").first()
+        )
 
 
 class Spreadsheet(models.Model):
@@ -198,19 +244,7 @@ class Spreadsheet(models.Model):
     Represents a single uploaded spreadsheet for a project.
     """
 
-    KIND_PERIODS = "periods"  # Baseline and perf periods spreadsheet
-    KIND_MODELING_RUN_RATE = "modeling-run-rate"  # Modeling report (run rate)
-    KIND_MODELING_SCHEDULE = "modeling-schedule"  # Modeling report (schedule driven)
-    KIND_MODELING_INVESTMENT = "modeling-investment"  # Modeling report (investment)
-    KIND_MARKET = "market"  # TAM
-
-    SPREADSHEET_KINDS = [
-        (KIND_PERIODS, "periods"),
-        (KIND_MODELING_RUN_RATE, "modeling (run rate)"),
-        (KIND_MODELING_SCHEDULE, "modeling (schedule driven)"),
-        (KIND_MODELING_INVESTMENT, "modeling (investment driven)"),
-        (KIND_MARKET, "market"),
-    ]
+    objects = SpreadsheetManager()
 
     project = models.ForeignKey(
         Project, on_delete=models.CASCADE, related_name="spreadsheets"
@@ -219,16 +253,33 @@ class Spreadsheet(models.Model):
     created = models.DateTimeField(
         auto_now_add=True,
         db_index=True,
+        editable=False,
         help_text="The creation date for this spreadsheet record.",
     )
 
-    user = models.ForeignKey(
+    uploaded_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         null=True,
         blank=True,
         default=None,
         on_delete=models.SET_NULL,  # We allow NULL so that even if an admin is deleted, we preserve history regardless.
-        help_text="The user that uploaded this version of the spreadsheet.",
+        help_text="The user that uploaded this spreadsheet.",
+    )
+
+    kind = models.CharField(
+        blank=False,
+        choices=SpreadsheetKind.CHOICES,
+        db_index=True,
+        max_length=128,
+        help_text="The kind of data this spreadsheet contains.",
+    )
+
+    subkind = models.CharField(
+        blank=True,
+        default="",
+        db_index=True,
+        max_length=128,
+        help_text="The kind of Modeling spreadsheet (if applicable). Run Rate, Schedule Driven, etc",
     )
 
     file = models.FileField(
@@ -237,18 +288,44 @@ class Spreadsheet(models.Model):
         help_text="The underlying spreadsheet (probably .xlsx) file.",
     )
 
-    kind = models.CharField(
-        blank=False,
-        choices=SPREADSHEET_KINDS,
-        db_index=True,
-        max_length=128,
-        help_text="The kind of data this spreadsheet contains.",
+    imported_data = JSONField(
+        default=None,
+        null=True,
+        blank=True,
+        editable=False,
+        help_text="Raw imported JSON data. Schema depends on spreadsheet kind.",
     )
+
+    def has_imported_data(self):
+        """Return True if we have non-empty imported content."""
+        return bool(self.imported_data)
+
+    def is_latest_for_kind(self):
+        """Return True if this spreadsheet is the latest for its kind and subkind."""
+        return (
+            Spreadsheet.objects.latest_for_kind(self.kind, self.subkind).id == self.id
+        )
+
+    def get_activator(self):
+        return get_activator_for_spreadsheet(self)
+
+    def activate(self):
+        """
+        Activate the imported data *if* it's safe to do so; currently,
+        we consider it safe if this is the most recent spreadsheet of its kind
+        and we've successfully imported data.
+        """
+        if self.is_latest_for_kind() and self.has_imported_data():
+            activator = self.get_activator()
+            activator.activate()
 
     class Meta:
         # Always sort spreadsheets with the most recent created first.
         ordering = ["-created"]
-        indexes = [models.Index(fields=["created", "kind"])]
+        indexes = [
+            models.Index(fields=["created", "kind"]),
+            models.Index(fields=["created", "kind", "subkind"]),
+        ]
 
 
 class PeriodManager(models.Manager):
@@ -303,11 +380,6 @@ class Period(ModelPeriod, models.Model):
     )
     lease_cds.metric = SumIntervalMetric()
 
-    leases_due_to_expire = models.IntegerField(
-        default=0, help_text="Number of leases due to expire in period"
-    )
-    leases_due_to_expire.metric = SumIntervalMetric()
-
     lease_renewal_notices = models.IntegerField(
         default=0, help_text="Number of lease renewals signed"
     )
@@ -335,7 +407,7 @@ class Period(ModelPeriod, models.Model):
         decimal_places=3,
         help_text="Target: lease percentage (like 0.9)",
     )
-    target_lease_percent.metric = PointMetric()
+    target_lease_percent.metric = EndPointMetric()
 
     target_lease_applications = models.IntegerField(
         null=True, blank=True, default=None, help_text="Target: lease applications"
@@ -351,11 +423,6 @@ class Period(ModelPeriod, models.Model):
         null=True, blank=True, default=None, help_text="Target: lease renewal notices"
     )
     target_lease_renewal_notices.metric = SumIntervalMetric()
-
-    target_leases_due_to_expire = models.IntegerField(
-        null=True, blank=True, default=None, help_text="Target: leases due to expire"
-    )
-    target_leases_due_to_expire.metric = SumIntervalMetric()
 
     target_lease_renewals = models.IntegerField(
         null=True, blank=True, default=None, help_text="Target: lease renewals"
@@ -452,28 +519,6 @@ class Period(ModelPeriod, models.Model):
         help_text="Amount invested in acquisition market intelligence",
     )
     acq_market_intelligence.metric = SumIntervalMetric()
-
-    # XXX This number is a mess. It requires clarification about timeframes. -Dave
-    monthly_average_rent = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
-        default=None,
-        null=True,
-        blank=True,
-        help_text="Average rent tenants pay in the month including this period. If not specified, it will be pulled from an earlier period.",
-    )
-    monthly_average_rent.metric = PointMetric()
-
-    # XXX It's not clear to me this number is better. -Dave
-    lowest_monthly_rent = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
-        default=None,
-        null=True,
-        blank=True,
-        help_text="Lowest rent tenants pay in the month including this period. If not specified, it will be pulled from an earlier period.",
-    )
-    lowest_monthly_rent.metric = PointMetric()
 
     # ------------------------------------------------------
     # TARGETS: Acquisition Investment
@@ -580,6 +625,26 @@ class Period(ModelPeriod, models.Model):
     # ------------------------------------------------------
     # Meta, etc.
     # ------------------------------------------------------
+
+    @property
+    def average_monthly_rent(self):
+        return self.project.average_monthly_rent
+
+    @property
+    def lowest_monthly_rent(self):
+        return self.project.lowest_monthly_rent
+
+    @property
+    def total_units(self):
+        return self.project.total_units
+
+    def _build_metrics(self):
+        # Manually insert average_monthly_rent and lowest_monthly_rent
+        # TODO consider better ways to do this... -Dave
+        super()._build_metrics()
+        self._metrics["total_units"] = PointMetric()
+        self._metrics["average_monthly_rent"] = PointMetric()
+        self._metrics["lowest_monthly_rent"] = PointMetric()
 
     class Meta:
         # Always sort Periods with the earliest period first.

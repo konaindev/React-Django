@@ -10,7 +10,7 @@ import ReportLinks from "./index";
 
 const current_report_name = "baseline";
 
-const props = { current_report_name, report_links };
+export const props = { current_report_name, report_links };
 
 storiesOf("ReportLinks", module).add("default", () => (
   <ReportLinks {...props} />

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SectionHeader renders correctly 1`] = `
+<div
+  className="section-header"
+>
+  <p
+    className="section-header__title"
+  >
+    Test Section
+  </p>
+</div>
+`;

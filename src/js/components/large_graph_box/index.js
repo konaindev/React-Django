@@ -7,7 +7,7 @@ import WhiskerPlot from "../whisker_plot";
 import { getDefaultDirection, getPercentageDirection } from "../../utils/misc";
 import { LargeBoxLayout } from "../large_box_layout";
 import {
-  formatCurrencyShorthand,
+  formatCurrencyShorthandWithDigit,
   formatDeltaPercent,
   targetFormatter,
   formatPercent
@@ -15,14 +15,14 @@ import {
 
 export class LargeGraphBox extends Component {
   static propTypes = {
-    delta: PropTypes.number,
+    delta: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     extraContent: PropTypes.node,
     name: PropTypes.string.isRequired,
     series: PropTypes.arrayOf(
       PropTypes.oneOfType([PropTypes.number, PropTypes.string])
     ),
-    target: PropTypes.number,
-    value: PropTypes.number.isRequired,
+    target: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+    value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     digits: PropTypes.number,
     formatValue: PropTypes.func.isRequired,
     formatDelta: PropTypes.func.isRequired,
@@ -87,10 +87,10 @@ export const PercentageGraphBox = props => (
 
 export const CurrencyShorthandGraphBox = props => (
   <LargeGraphBox
-    formatDelta={formatCurrencyShorthand}
+    formatDelta={formatCurrencyShorthandWithDigit}
     getDeltaDirection={getDefaultDirection}
-    formatTarget={formatCurrencyShorthand}
-    formatValue={formatCurrencyShorthand}
+    formatTarget={formatCurrencyShorthandWithDigit}
+    formatValue={formatCurrencyShorthandWithDigit}
     {...props}
   />
 );

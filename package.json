@@ -10,7 +10,13 @@
     "storybook": "start-storybook -p 6006 --ci",
     "build-storybook": "build-storybook -o .out",
     "deploy-storybook": "rm -rf .out && build-storybook -o .out && echo 'storybook.remarkably.io' > '.out/CNAME' && storybook-to-ghpages --existing-output-dir=.out",
-    "test-ui": "jest"
+    "test-ui": "jest",
+    "test-ui-update-snapshots": "jest --updateSnapshot"
+  },
+  "storybook-deployer": {
+    "gitUsername": "Storybook Deployer",
+    "gitEmail": "storybook.deployer@remarkably.io",
+    "commitMessage": "Deploy Storybook to GitHub Pages [skip ci]"
   },
   "devDependencies": {
     "@babel/core": "^7",
@@ -48,6 +54,7 @@
     "optimize-css-assets-webpack-plugin": "^5.0.1",
     "prettier": "^1",
     "prettier-eslint": "^8",
+    "react-test-render": "^1.1.1",
     "resolve-url-loader": "^3.0.1",
     "sass": "^1.15.2",
     "sass-loader": "^7.1.0",

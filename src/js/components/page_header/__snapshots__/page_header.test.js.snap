@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageHeader renders correctly 1`] = `
+<div
+  className="page-header"
+>
+  <div
+    className="container page-header__inner"
+  >
+    <div
+      className="remarkably-logo"
+    >
+       
+    </div>
+    <nav
+      className="page-header__items-outer"
+    >
+      <ul
+        className="page-header__items-inner"
+        style={
+          Object {
+            "columns": 1,
+          }
+        }
+      >
+        <li
+          className="page-header__item"
+        >
+          header content
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
+`;
