@@ -1,14 +1,13 @@
-export const GENERIC_TABS = {
-  demand_creation: "Demand Creation",
-  market_intelligence: "Marketing Intelligence",
-  reputation_building: "Reputation Building",
-  leasing_enablement: "Leasing Enablement"
-};
+export const genericTabsInOrder = [
+  ["reputation_building", "Reputation Building"],
+  ["demand_creation", "Demand Creation"],
+  ["leasing_enablement", "Leasing Enablement"],
+  ["market_intelligence", "Marketing Intelligence"]
+];
+export const allTabsInOrder = [["overview", "Overview"], ...genericTabsInOrder];
 
-export const ALL_TABS = {
-  ...GENERIC_TABS,
-  overview: "Overview"
-};
+export const GENERIC_TABS = Object.fromEntries(genericTabsInOrder);
+export const ALL_TABS = Object.fromEntries(allTabsInOrder);
 
 export const TACTIC_STATUSES = {
   not_started: "Not Started",
