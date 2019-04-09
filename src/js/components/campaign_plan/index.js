@@ -36,6 +36,7 @@ export default class CampaignPlan extends Component {
     const { activeTab } = this.state;
     const isOverviewTab = activeTab === "overview";
     const isGenericTab = Object.keys(GENERIC_TABS).includes(activeTab);
+    const tabData = this.props[activeTab];
 
     return (
       <div className="page campaign_plan-view">
@@ -48,13 +49,13 @@ export default class CampaignPlan extends Component {
             />
           </div>
 
-          {activeTab === "overview" && (
-            <CampaignPlanOverviewTab {...this.props.overview} />
+          {activeTab == "overview" && tabData != null && (
+            <CampaignPlanOverviewTab {...tabData} />
           )}
 
-          {isGenericTab && (
+          {isGenericTab && tabData != null && (
             <CampaignPlanGenericTab
-              {...this.props[activeTab]}
+              {...tabData}
               tabKey={activeTab}
               key={activeTab}
             />
