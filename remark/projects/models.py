@@ -15,7 +15,7 @@ from remark.lib.metrics import (
     SumIntervalMetric,
     ModelPeriod,
 )
-from .spreadsheets.importers import get_importer_for_kind, SpreadsheetKind
+from .spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
 
 
 def pro_public_id():
@@ -296,15 +296,28 @@ class Spreadsheet(models.Model):
         help_text="Raw imported JSON data. Schema depends on spreadsheet kind.",
     )
 
+    def has_imported_data(self):
+        """Return True if we have non-empty imported content."""
+        return bool(self.imported_data)
+
     def is_latest_for_kind(self):
         """Return True if this spreadsheet is the latest for its kind and subkind."""
         return (
             Spreadsheet.objects.latest_for_kind(self.kind, self.subkind).id == self.id
         )
 
-    def get_importer(self, f):
-        """Given a fileobj or the name of a file, return an importer (if any exists)."""
-        return get_importer_for_kind(self.kind, f)
+    def get_activator(self):
+        return get_activator_for_spreadsheet(self)
+
+    def activate(self):
+        """
+        Activate the imported data *if* it's safe to do so; currently,
+        we consider it safe if this is the most recent spreadsheet of its kind
+        and we've successfully imported data.
+        """
+        if self.is_latest_for_kind() and self.has_imported_data():
+            activator = self.get_activator()
+            activator.activate()
 
     class Meta:
         # Always sort spreadsheets with the most recent created first.

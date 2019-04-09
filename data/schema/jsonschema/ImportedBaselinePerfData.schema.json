@@ -5,10 +5,10 @@
         "ImportedBaselinePerfData": {
             "description": "The intermediate import structure used by the BaselinePerf excel spreadsheet importer",
             "properties": {
-                "baseline_end_date": {
+                "baseline_end": {
                     "type": "string"
                 },
-                "baseline_start_date": {
+                "baseline_start": {
                     "type": "string"
                 },
                 "periods": {
@@ -19,8 +19,8 @@
                 }
             },
             "required": [
-                "baseline_end_date",
-                "baseline_start_date",
+                "baseline_end",
+                "baseline_start",
                 "periods"
             ],
             "type": "object"

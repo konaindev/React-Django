@@ -20,8 +20,8 @@ class BaselinePerfImporter(ProjectExcelImporter):
     BASELINE_PERIODS = SchemaCell(loc("META!B5"), DataType.NUMERIC, int)
     START_ROW = SchemaCell(loc("META!B1"), DataType.NUMERIC, int)
     END_ROW = SchemaCell(loc("META!B4"), DataType.NUMERIC, int)
-    BASELINE_START_DATE = SchemaCell(loc("META!B7"), DataType.DATETIME, date_converter)
-    BASELINE_END_DATE = SchemaCell(loc("META!B8"), DataType.DATETIME, date_converter)
+    BASELINE_START = SchemaCell(loc("META!B7"), DataType.DATETIME, date_converter)
+    BASELINE_END = SchemaCell(loc("META!B8"), DataType.DATETIME, date_converter)
 
     HEADER_ROW = 2
 
@@ -124,12 +124,8 @@ class BaselinePerfImporter(ProjectExcelImporter):
         self.check_meta()
         start_row = self.schema_value(self.START_ROW)
         end_row = self.schema_value(self.END_ROW)
-        self.cleaned_data["baseline_start_date"] = self.schema_value(
-            self.BASELINE_START_DATE
-        )
-        self.cleaned_data["baseline_end_date"] = self.schema_value(
-            self.BASELINE_END_DATE
-        )
+        self.cleaned_data["baseline_start"] = self.schema_value(self.BASELINE_START)
+        self.cleaned_data["baseline_end"] = self.schema_value(self.BASELINE_END)
         self.cleaned_data["periods"] = self.row_table(
             schema=self.PERIOD_ROW_SCHEMA,
             start_row=start_row,

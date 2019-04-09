@@ -31,7 +31,7 @@ interface ImportedPeriod {
 
 /** The intermediate import structure used by the BaselinePerf excel spreadsheet importer */
 export interface ImportedBaselinePerfData {
-  baseline_start_date: t.date;
-  baseline_end_date: t.date;
+  baseline_start: t.date;
+  baseline_end: t.date;
   periods: ImportedPeriod[];
 }
