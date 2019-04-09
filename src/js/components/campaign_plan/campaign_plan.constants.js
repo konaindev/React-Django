@@ -1,13 +1,18 @@
-export const genericTabsInOrder = [
+import { objectFromEntries } from "../../utils/misc";
+
+export const GENERIC_TABS_ORDERED = [
   ["reputation_building", "Reputation Building"],
   ["demand_creation", "Demand Creation"],
   ["leasing_enablement", "Leasing Enablement"],
   ["market_intelligence", "Marketing Intelligence"]
 ];
-export const allTabsInOrder = [["overview", "Overview"], ...genericTabsInOrder];
+export const ALL_TABS_ORDERED = [
+  ["overview", "Overview"],
+  ...GENERIC_TABS_ORDERED
+];
 
-export const GENERIC_TABS = Object.fromEntries(genericTabsInOrder);
-export const ALL_TABS = Object.fromEntries(allTabsInOrder);
+export const GENERIC_TABS = objectFromEntries(GENERIC_TABS_ORDERED);
+export const ALL_TABS = objectFromEntries(ALL_TABS_ORDERED);
 
 export const TACTIC_STATUSES = {
   not_started: "Not Started",

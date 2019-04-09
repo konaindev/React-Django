@@ -4,12 +4,12 @@ import PropTypes from "prop-types";
 import Container from "../container";
 import ButtonGroup from "../button_group";
 
-import { GENERIC_TABS, ALL_TABS } from "./campaign_plan.constants";
+import { GENERIC_TABS, ALL_TABS_ORDERED } from "./campaign_plan.constants";
 import CampaignPlanOverviewTab from "../campaign_plan_overview_tab";
 import CampaignPlanGenericTab from "../campaign_plan_generic_tab";
 import "./campaign_plan.scss";
 
-const buttonOptions = Object.entries(ALL_TABS).map(([key, label]) => ({
+const buttonOptions = ALL_TABS_ORDERED.map(([key, label]) => ({
   value: key,
   label: label
 }));
