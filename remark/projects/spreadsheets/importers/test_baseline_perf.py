@@ -52,11 +52,11 @@ class BaselinePerfTestCase(TestCase):
             raise importer.errors[0]
 
         self.assertEqual(
-            importer.cleaned_data["baseline_start_date"],
+            importer.cleaned_data["baseline_start"],
             datetime.date(year=2018, month=8, day=1),
         )
         self.assertEqual(
-            importer.cleaned_data["baseline_end_date"],
+            importer.cleaned_data["baseline_end"],
             datetime.date(year=2019, month=3, day=1),
         )
         self.assertEqual(len(importer.cleaned_data["periods"]), 9)
