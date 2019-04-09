@@ -2,35 +2,183 @@
 
 exports[`CampaignPlanOverviewTab renders correctly 1`] = `
 <div
-  className="container"
+  className="panel panel--default campaign-plan-generic-tab"
 >
   <div
-    className="panel panel--default campaign-plan-generic-tab"
+    className="ReactTable campaign-plan-generic-table demand_creation"
+    style={Object {}}
   >
     <div
-      className="ReactTable campaign-plan-generic-table demand_creation"
-      style={Object {}}
+      className="rt-table"
+      role="grid"
     >
       <div
-        className="rt-table"
-        role="grid"
+        className="rt-thead -header"
+        style={
+          Object {
+            "minWidth": "1318px",
+          }
+        }
       >
         <div
-          className="rt-thead -header"
-          style={
-            Object {
-              "minWidth": "1318px",
-            }
-          }
+          className="rt-tr"
+          role="row"
         >
           <div
-            className="rt-tr"
+            className="rt-th text-left"
+            onClick={[Function]}
+            role="columnheader"
+            style={
+              Object {
+                "flex": "300 0 auto",
+                "maxWidth": "300px",
+                "width": "300px",
+              }
+            }
+            tabIndex="-1"
+          >
+            <div
+              className=""
+            >
+              Tactic
+            </div>
+          </div>
+          <div
+            className="rt-th text-left"
+            onClick={[Function]}
+            role="columnheader"
+            style={
+              Object {
+                "flex": "160 0 auto",
+                "maxWidth": "160px",
+                "width": "160px",
+              }
+            }
+            tabIndex="-1"
+          >
+            <div
+              className=""
+            >
+              Schedule
+            </div>
+          </div>
+          <div
+            className="rt-th text-left"
+            onClick={[Function]}
+            role="columnheader"
+            style={
+              Object {
+                "flex": "120 0 auto",
+                "maxWidth": "120px",
+                "width": "120px",
+              }
+            }
+            tabIndex="-1"
+          >
+            <div
+              className=""
+            >
+              Status
+            </div>
+          </div>
+          <div
+            className="rt-th text-left"
+            onClick={[Function]}
+            role="columnheader"
+            style={
+              Object {
+                "flex": "248 0 auto",
+                "maxWidth": "248px",
+                "width": "248px",
+              }
+            }
+            tabIndex="-1"
+          >
+            <div
+              className=""
+            >
+              Notes/Assumptions
+            </div>
+          </div>
+          <div
+            className="rt-th text-right"
+            onClick={[Function]}
+            role="columnheader"
+            style={
+              Object {
+                "flex": "110 0 auto",
+                "maxWidth": "110px",
+                "width": "110px",
+              }
+            }
+            tabIndex="-1"
+          >
+            <div
+              className=""
+            >
+              # Of USV
+            </div>
+          </div>
+          <div
+            className="rt-th text-right"
+            onClick={[Function]}
+            role="columnheader"
+            style={
+              Object {
+                "flex": "120 0 auto",
+                "maxWidth": "120px",
+                "width": "120px",
+              }
+            }
+            tabIndex="-1"
+          >
+            <div
+              className=""
+            >
+              # of INQ
+            </div>
+          </div>
+          <div
+            className="rt-th text-right"
+            onClick={[Function]}
+            role="columnheader"
+            style={
+              Object {
+                "flex": "260 0 auto",
+                "maxWidth": "260px",
+                "width": "260px",
+              }
+            }
+            tabIndex="-1"
+          >
+            <div
+              className=""
+            >
+              Cost
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="rt-tbody"
+        style={
+          Object {
+            "minWidth": "1318px",
+          }
+        }
+      >
+        <div
+          className="rt-tr-group"
+          role="rowgroup"
+        >
+          <div
+            className="rt-tr -odd"
             role="row"
           >
             <div
-              className="rt-th text-left"
+              className="rt-td"
               onClick={[Function]}
-              role="columnheader"
+              role="gridcell"
               style={
                 Object {
                   "flex": "300 0 auto",
@@ -38,18 +186,22 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
                   "width": "300px",
                 }
               }
-              tabIndex="-1"
             >
               <div
-                className=""
+                className="cell-tactic"
               >
-                Tactic
+                <span
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                >
+                  Paid Search Advertising
+                </span>
               </div>
             </div>
             <div
-              className="rt-th text-left"
+              className="rt-td"
               onClick={[Function]}
-              role="columnheader"
+              role="gridcell"
               style={
                 Object {
                   "flex": "160 0 auto",
@@ -57,18 +209,15 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
                   "width": "160px",
                 }
               }
-              tabIndex="-1"
             >
-              <div
-                className=""
-              >
-                Schedule
+              <div>
+                Jul 2, 2019
               </div>
             </div>
             <div
-              className="rt-th text-left"
+              className="rt-td"
               onClick={[Function]}
-              role="columnheader"
+              role="gridcell"
               style={
                 Object {
                   "flex": "120 0 auto",
@@ -76,18 +225,17 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
                   "width": "120px",
                 }
               }
-              tabIndex="-1"
             >
               <div
-                className=""
+                className="cell-status in_progress"
               >
-                Status
+                In Progress
               </div>
             </div>
             <div
-              className="rt-th text-left"
+              className="rt-td"
               onClick={[Function]}
-              role="columnheader"
+              role="gridcell"
               style={
                 Object {
                   "flex": "248 0 auto",
@@ -95,18 +243,13 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
                   "width": "248px",
                 }
               }
-              tabIndex="-1"
             >
-              <div
-                className=""
-              >
-                Notes/Assumptions
-              </div>
+              <div />
             </div>
             <div
-              className="rt-th text-right"
+              className="rt-td"
               onClick={[Function]}
-              role="columnheader"
+              role="gridcell"
               style={
                 Object {
                   "flex": "110 0 auto",
@@ -114,18 +257,23 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
                   "width": "110px",
                 }
               }
-              tabIndex="-1"
             >
               <div
-                className=""
+                className="cell-metrics"
               >
-                # Of USV
+                <span>
+                  1,000
+                </span>
+                <span>
+                  $5
+                  /USV
+                </span>
               </div>
             </div>
             <div
-              className="rt-th text-right"
+              className="rt-td"
               onClick={[Function]}
-              role="columnheader"
+              role="gridcell"
               style={
                 Object {
                   "flex": "120 0 auto",
@@ -133,18 +281,19 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
                   "width": "120px",
                 }
               }
-              tabIndex="-1"
             >
               <div
-                className=""
+                className="cell-metrics"
               >
-                # of INQ
+                <span>
+                  0
+                </span>
               </div>
             </div>
             <div
-              className="rt-th text-right"
+              className="rt-td"
               onClick={[Function]}
-              role="columnheader"
+              role="gridcell"
               style={
                 Object {
                   "flex": "260 0 auto",
@@ -152,1369 +301,1216 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
                   "width": "260px",
                 }
               }
-              tabIndex="-1"
             >
               <div
-                className=""
+                className="cell-metrics"
               >
-                Cost
+                <span>
+                  $5,000
+                </span>
+                <span>
+                  $1,000
+                  /
+                  mo
+                </span>
               </div>
             </div>
           </div>
         </div>
         <div
-          className="rt-tbody"
-          style={
-            Object {
-              "minWidth": "1318px",
-            }
-          }
+          className="rt-tr-group"
+          role="rowgroup"
         >
           <div
-            className="rt-tr-group"
-            role="rowgroup"
+            className="rt-tr -even"
+            role="row"
           >
             <div
-              className="rt-tr -odd"
-              role="row"
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "300 0 auto",
+                  "maxWidth": "300px",
+                  "width": "300px",
+                }
+              }
             >
               <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "300 0 auto",
-                    "maxWidth": "300px",
-                    "width": "300px",
-                  }
-                }
+                className="cell-tactic"
               >
-                <div
-                  className="cell-tactic"
-                >
-                  <span
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
-                  >
-                    Paid Search Advertising
-                  </span>
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "160 0 auto",
-                    "maxWidth": "160px",
-                    "width": "160px",
-                  }
-                }
-              >
-                <div>
-                  Jul 2, 2019
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "120 0 auto",
-                    "maxWidth": "120px",
-                    "width": "120px",
-                  }
-                }
-              >
-                <div
-                  className="cell-status in_progress"
-                >
-                  In Progress
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "248 0 auto",
-                    "maxWidth": "248px",
-                    "width": "248px",
-                  }
-                }
-              >
-                <div />
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "110 0 auto",
-                    "maxWidth": "110px",
-                    "width": "110px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    1,000
-                  </span>
-                  <span>
-                    $5
-                    /USV
-                  </span>
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "120 0 auto",
-                    "maxWidth": "120px",
-                    "width": "120px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    0
-                  </span>
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "260 0 auto",
-                    "maxWidth": "260px",
-                    "width": "260px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    $5,000
-                  </span>
-                  <span>
-                    $1,000
-                    /
-                    mo
-                  </span>
-                </div>
+                Paid Social Advertising
               </div>
             </div>
-          </div>
-          <div
-            className="rt-tr-group"
-            role="rowgroup"
-          >
             <div
-              className="rt-tr -even"
-              role="row"
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "160 0 auto",
+                  "maxWidth": "160px",
+                  "width": "160px",
+                }
+              }
             >
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "300 0 auto",
-                    "maxWidth": "300px",
-                    "width": "300px",
-                  }
-                }
-              >
-                <div
-                  className="cell-tactic"
-                >
-                  Paid Social Advertising
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "160 0 auto",
-                    "maxWidth": "160px",
-                    "width": "160px",
-                  }
-                }
-              >
-                <div>
-                  Jul 3, 2019
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "120 0 auto",
-                    "maxWidth": "120px",
-                    "width": "120px",
-                  }
-                }
-              >
-                <div
-                  className="cell-status in_progress"
-                >
-                  In Progress
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "248 0 auto",
-                    "maxWidth": "248px",
-                    "width": "248px",
-                  }
-                }
-              >
-                <div />
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "110 0 auto",
-                    "maxWidth": "110px",
-                    "width": "110px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    1,000
-                  </span>
-                  <span>
-                    $5
-                    /USV
-                  </span>
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "120 0 auto",
-                    "maxWidth": "120px",
-                    "width": "120px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    0
-                  </span>
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "260 0 auto",
-                    "maxWidth": "260px",
-                    "width": "260px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    $5,000
-                  </span>
-                  <span>
-                    $1,000
-                    /
-                    mo
-                  </span>
-                </div>
+              <div>
+                Jul 3, 2019
               </div>
             </div>
-          </div>
-          <div
-            className="rt-tr-group"
-            role="rowgroup"
-          >
             <div
-              className="rt-tr -odd"
-              role="row"
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "120 0 auto",
+                  "maxWidth": "120px",
+                  "width": "120px",
+                }
+              }
             >
               <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "300 0 auto",
-                    "maxWidth": "300px",
-                    "width": "300px",
-                  }
-                }
+                className="cell-status in_progress"
               >
-                <div
-                  className="cell-tactic"
-                >
-                  Retargeted Display Advertising
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "160 0 auto",
-                    "maxWidth": "160px",
-                    "width": "160px",
-                  }
-                }
-              >
-                <div>
-                  Jul 4, 2019
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "120 0 auto",
-                    "maxWidth": "120px",
-                    "width": "120px",
-                  }
-                }
-              >
-                <div
-                  className="cell-status in_progress"
-                >
-                  In Progress
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "248 0 auto",
-                    "maxWidth": "248px",
-                    "width": "248px",
-                  }
-                }
-              >
-                <div />
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "110 0 auto",
-                    "maxWidth": "110px",
-                    "width": "110px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    1,000
-                  </span>
-                  <span>
-                    $5
-                    /USV
-                  </span>
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "120 0 auto",
-                    "maxWidth": "120px",
-                    "width": "120px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    0
-                  </span>
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "260 0 auto",
-                    "maxWidth": "260px",
-                    "width": "260px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    $5,000
-                  </span>
-                  <span>
-                    $1,000
-                    /
-                    mo
-                  </span>
-                </div>
+                In Progress
               </div>
             </div>
-          </div>
-          <div
-            className="rt-tr-group"
-            role="rowgroup"
-          >
             <div
-              className="rt-tr -even"
-              role="row"
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "248 0 auto",
+                  "maxWidth": "248px",
+                  "width": "248px",
+                }
+              }
+            >
+              <div />
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "110 0 auto",
+                  "maxWidth": "110px",
+                  "width": "110px",
+                }
+              }
             >
               <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "300 0 auto",
-                    "maxWidth": "300px",
-                    "width": "300px",
-                  }
-                }
+                className="cell-metrics"
               >
-                <div
-                  className="cell-tactic"
-                >
-                  Display Advertising
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "160 0 auto",
-                    "maxWidth": "160px",
-                    "width": "160px",
-                  }
-                }
-              >
-                <div>
-                  Jul 5, 2019
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "120 0 auto",
-                    "maxWidth": "120px",
-                    "width": "120px",
-                  }
-                }
-              >
-                <div
-                  className="cell-status in_progress"
-                >
-                  In Progress
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "248 0 auto",
-                    "maxWidth": "248px",
-                    "width": "248px",
-                  }
-                }
-              >
-                <div />
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "110 0 auto",
-                    "maxWidth": "110px",
-                    "width": "110px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    1,000
-                  </span>
-                  <span>
-                    $5
-                    /USV
-                  </span>
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "120 0 auto",
-                    "maxWidth": "120px",
-                    "width": "120px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    0
-                  </span>
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "260 0 auto",
-                    "maxWidth": "260px",
-                    "width": "260px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    $5,000
-                  </span>
-                  <span>
-                    $1,000
-                    /
-                    mo
-                  </span>
-                </div>
+                <span>
+                  1,000
+                </span>
+                <span>
+                  $5
+                  /USV
+                </span>
               </div>
             </div>
-          </div>
-          <div
-            className="rt-tr-group"
-            role="rowgroup"
-          >
             <div
-              className="rt-tr -odd"
-              role="row"
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "120 0 auto",
+                  "maxWidth": "120px",
+                  "width": "120px",
+                }
+              }
             >
               <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "300 0 auto",
-                    "maxWidth": "300px",
-                    "width": "300px",
-                  }
-                }
+                className="cell-metrics"
               >
-                <div
-                  className="cell-tactic"
-                >
-                  Apartments.com Advertising
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "160 0 auto",
-                    "maxWidth": "160px",
-                    "width": "160px",
-                  }
-                }
-              >
-                <div>
-                  Jul 6, 2019
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "120 0 auto",
-                    "maxWidth": "120px",
-                    "width": "120px",
-                  }
-                }
-              >
-                <div
-                  className="cell-status in_progress"
-                >
-                  In Progress
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "248 0 auto",
-                    "maxWidth": "248px",
-                    "width": "248px",
-                  }
-                }
-              >
-                <div />
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "110 0 auto",
-                    "maxWidth": "110px",
-                    "width": "110px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    1,000
-                  </span>
-                  <span>
-                    $5
-                    /USV
-                  </span>
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "120 0 auto",
-                    "maxWidth": "120px",
-                    "width": "120px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    0
-                  </span>
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "260 0 auto",
-                    "maxWidth": "260px",
-                    "width": "260px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    $5,000
-                  </span>
-                  <span>
-                    $1,000
-                    /
-                    mo
-                  </span>
-                </div>
+                <span>
+                  0
+                </span>
               </div>
             </div>
-          </div>
-          <div
-            className="rt-tr-group"
-            role="rowgroup"
-          >
             <div
-              className="rt-tr -even"
-              role="row"
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "260 0 auto",
+                  "maxWidth": "260px",
+                  "width": "260px",
+                }
+              }
             >
               <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "300 0 auto",
-                    "maxWidth": "300px",
-                    "width": "300px",
-                  }
-                }
+                className="cell-metrics"
               >
-                <div
-                  className="cell-tactic"
-                >
-                  Zillow.com Advertising
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "160 0 auto",
-                    "maxWidth": "160px",
-                    "width": "160px",
-                  }
-                }
-              >
-                <div>
-                  Jul 7, 2019
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "120 0 auto",
-                    "maxWidth": "120px",
-                    "width": "120px",
-                  }
-                }
-              >
-                <div
-                  className="cell-status in_progress"
-                >
-                  In Progress
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "248 0 auto",
-                    "maxWidth": "248px",
-                    "width": "248px",
-                  }
-                }
-              >
-                <div />
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "110 0 auto",
-                    "maxWidth": "110px",
-                    "width": "110px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    500
-                  </span>
-                  <span>
-                    $10
-                    /USV
-                  </span>
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "120 0 auto",
-                    "maxWidth": "120px",
-                    "width": "120px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    100
-                  </span>
-                  <span>
-                    $50
-                    /USV
-                  </span>
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "260 0 auto",
-                    "maxWidth": "260px",
-                    "width": "260px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    $5,000
-                  </span>
-                  <span>
-                    $1,000
-                    /
-                    mo
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            className="rt-tr-group"
-            role="rowgroup"
-          >
-            <div
-              className="rt-tr -odd"
-              role="row"
-            >
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "300 0 auto",
-                    "maxWidth": "300px",
-                    "width": "300px",
-                  }
-                }
-              >
-                <div
-                  className="cell-tactic"
-                >
-                  ApartmentList.com Advertising
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "160 0 auto",
-                    "maxWidth": "160px",
-                    "width": "160px",
-                  }
-                }
-              >
-                <div>
-                  Jul 8, 2019
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "120 0 auto",
-                    "maxWidth": "120px",
-                    "width": "120px",
-                  }
-                }
-              >
-                <div
-                  className="cell-status in_progress"
-                >
-                  In Progress
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "248 0 auto",
-                    "maxWidth": "248px",
-                    "width": "248px",
-                  }
-                }
-              >
-                <div />
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "110 0 auto",
-                    "maxWidth": "110px",
-                    "width": "110px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    500
-                  </span>
-                  <span>
-                    $10
-                    /USV
-                  </span>
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "120 0 auto",
-                    "maxWidth": "120px",
-                    "width": "120px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    100
-                  </span>
-                  <span>
-                    $50
-                    /USV
-                  </span>
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "260 0 auto",
-                    "maxWidth": "260px",
-                    "width": "260px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    $5,000
-                  </span>
-                  <span>
-                    $1,000
-                    /
-                    mo
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            className="rt-tr-group"
-            role="rowgroup"
-          >
-            <div
-              className="rt-tr -even"
-              role="row"
-            >
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "300 0 auto",
-                    "maxWidth": "300px",
-                    "width": "300px",
-                  }
-                }
-              >
-                <div
-                  className="cell-tactic"
-                >
-                  Website Live Chat Implementation
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "160 0 auto",
-                    "maxWidth": "160px",
-                    "width": "160px",
-                  }
-                }
-              >
-                <div>
-                  Feb 22, 2019
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "120 0 auto",
-                    "maxWidth": "120px",
-                    "width": "120px",
-                  }
-                }
-              >
-                <div
-                  className="cell-status complete"
-                >
-                  Complete
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "248 0 auto",
-                    "maxWidth": "248px",
-                    "width": "248px",
-                  }
-                }
-              >
-                <div />
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "110 0 auto",
-                    "maxWidth": "110px",
-                    "width": "110px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    0
-                  </span>
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "120 0 auto",
-                    "maxWidth": "120px",
-                    "width": "120px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    0
-                  </span>
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "260 0 auto",
-                    "maxWidth": "260px",
-                    "width": "260px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    $2,000
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            className="rt-tr-group"
-            role="rowgroup"
-          >
-            <div
-              className="rt-tr -odd"
-              role="row"
-            >
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "300 0 auto",
-                    "maxWidth": "300px",
-                    "width": "300px",
-                  }
-                }
-              >
-                <div
-                  className="cell-tactic"
-                >
-                  <span
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
-                  >
-                    Website Live Chat Service
-                  </span>
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "160 0 auto",
-                    "maxWidth": "160px",
-                    "width": "160px",
-                  }
-                }
-              >
-                <div>
-                  Jul 8, 2019
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "120 0 auto",
-                    "maxWidth": "120px",
-                    "width": "120px",
-                  }
-                }
-              >
-                <div
-                  className="cell-status in_progress"
-                >
-                  In Progress
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "248 0 auto",
-                    "maxWidth": "248px",
-                    "width": "248px",
-                  }
-                }
-              >
-                <div />
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "110 0 auto",
-                    "maxWidth": "110px",
-                    "width": "110px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    0
-                  </span>
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "120 0 auto",
-                    "maxWidth": "120px",
-                    "width": "120px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    0
-                  </span>
-                </div>
-              </div>
-              <div
-                className="rt-td"
-                onClick={[Function]}
-                role="gridcell"
-                style={
-                  Object {
-                    "flex": "260 0 auto",
-                    "maxWidth": "260px",
-                    "width": "260px",
-                  }
-                }
-              >
-                <div
-                  className="cell-metrics"
-                >
-                  <span>
-                    $1,000
-                  </span>
-                  <span>
-                    $200
-                    /
-                    mo
-                  </span>
-                </div>
+                <span>
+                  $5,000
+                </span>
+                <span>
+                  $1,000
+                  /
+                  mo
+                </span>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div
-        className="-loading"
-      >
         <div
-          className="-loading-inner"
+          className="rt-tr-group"
+          role="rowgroup"
         >
-          Loading...
+          <div
+            className="rt-tr -odd"
+            role="row"
+          >
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "300 0 auto",
+                  "maxWidth": "300px",
+                  "width": "300px",
+                }
+              }
+            >
+              <div
+                className="cell-tactic"
+              >
+                Retargeted Display Advertising
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "160 0 auto",
+                  "maxWidth": "160px",
+                  "width": "160px",
+                }
+              }
+            >
+              <div>
+                Jul 4, 2019
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "120 0 auto",
+                  "maxWidth": "120px",
+                  "width": "120px",
+                }
+              }
+            >
+              <div
+                className="cell-status in_progress"
+              >
+                In Progress
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "248 0 auto",
+                  "maxWidth": "248px",
+                  "width": "248px",
+                }
+              }
+            >
+              <div />
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "110 0 auto",
+                  "maxWidth": "110px",
+                  "width": "110px",
+                }
+              }
+            >
+              <div
+                className="cell-metrics"
+              >
+                <span>
+                  1,000
+                </span>
+                <span>
+                  $5
+                  /USV
+                </span>
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "120 0 auto",
+                  "maxWidth": "120px",
+                  "width": "120px",
+                }
+              }
+            >
+              <div
+                className="cell-metrics"
+              >
+                <span>
+                  0
+                </span>
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "260 0 auto",
+                  "maxWidth": "260px",
+                  "width": "260px",
+                }
+              }
+            >
+              <div
+                className="cell-metrics"
+              >
+                <span>
+                  $5,000
+                </span>
+                <span>
+                  $1,000
+                  /
+                  mo
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="rt-tr-group"
+          role="rowgroup"
+        >
+          <div
+            className="rt-tr -even"
+            role="row"
+          >
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "300 0 auto",
+                  "maxWidth": "300px",
+                  "width": "300px",
+                }
+              }
+            >
+              <div
+                className="cell-tactic"
+              >
+                Display Advertising
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "160 0 auto",
+                  "maxWidth": "160px",
+                  "width": "160px",
+                }
+              }
+            >
+              <div>
+                Jul 5, 2019
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "120 0 auto",
+                  "maxWidth": "120px",
+                  "width": "120px",
+                }
+              }
+            >
+              <div
+                className="cell-status in_progress"
+              >
+                In Progress
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "248 0 auto",
+                  "maxWidth": "248px",
+                  "width": "248px",
+                }
+              }
+            >
+              <div />
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "110 0 auto",
+                  "maxWidth": "110px",
+                  "width": "110px",
+                }
+              }
+            >
+              <div
+                className="cell-metrics"
+              >
+                <span>
+                  1,000
+                </span>
+                <span>
+                  $5
+                  /USV
+                </span>
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "120 0 auto",
+                  "maxWidth": "120px",
+                  "width": "120px",
+                }
+              }
+            >
+              <div
+                className="cell-metrics"
+              >
+                <span>
+                  0
+                </span>
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "260 0 auto",
+                  "maxWidth": "260px",
+                  "width": "260px",
+                }
+              }
+            >
+              <div
+                className="cell-metrics"
+              >
+                <span>
+                  $5,000
+                </span>
+                <span>
+                  $1,000
+                  /
+                  mo
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="rt-tr-group"
+          role="rowgroup"
+        >
+          <div
+            className="rt-tr -odd"
+            role="row"
+          >
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "300 0 auto",
+                  "maxWidth": "300px",
+                  "width": "300px",
+                }
+              }
+            >
+              <div
+                className="cell-tactic"
+              >
+                Apartments.com Advertising
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "160 0 auto",
+                  "maxWidth": "160px",
+                  "width": "160px",
+                }
+              }
+            >
+              <div>
+                Jul 6, 2019
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "120 0 auto",
+                  "maxWidth": "120px",
+                  "width": "120px",
+                }
+              }
+            >
+              <div
+                className="cell-status in_progress"
+              >
+                In Progress
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "248 0 auto",
+                  "maxWidth": "248px",
+                  "width": "248px",
+                }
+              }
+            >
+              <div />
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "110 0 auto",
+                  "maxWidth": "110px",
+                  "width": "110px",
+                }
+              }
+            >
+              <div
+                className="cell-metrics"
+              >
+                <span>
+                  1,000
+                </span>
+                <span>
+                  $5
+                  /USV
+                </span>
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "120 0 auto",
+                  "maxWidth": "120px",
+                  "width": "120px",
+                }
+              }
+            >
+              <div
+                className="cell-metrics"
+              >
+                <span>
+                  0
+                </span>
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "260 0 auto",
+                  "maxWidth": "260px",
+                  "width": "260px",
+                }
+              }
+            >
+              <div
+                className="cell-metrics"
+              >
+                <span>
+                  $5,000
+                </span>
+                <span>
+                  $1,000
+                  /
+                  mo
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="rt-tr-group"
+          role="rowgroup"
+        >
+          <div
+            className="rt-tr -even"
+            role="row"
+          >
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "300 0 auto",
+                  "maxWidth": "300px",
+                  "width": "300px",
+                }
+              }
+            >
+              <div
+                className="cell-tactic"
+              >
+                Zillow.com Advertising
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "160 0 auto",
+                  "maxWidth": "160px",
+                  "width": "160px",
+                }
+              }
+            >
+              <div>
+                Jul 7, 2019
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "120 0 auto",
+                  "maxWidth": "120px",
+                  "width": "120px",
+                }
+              }
+            >
+              <div
+                className="cell-status in_progress"
+              >
+                In Progress
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "248 0 auto",
+                  "maxWidth": "248px",
+                  "width": "248px",
+                }
+              }
+            >
+              <div />
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "110 0 auto",
+                  "maxWidth": "110px",
+                  "width": "110px",
+                }
+              }
+            >
+              <div
+                className="cell-metrics"
+              >
+                <span>
+                  500
+                </span>
+                <span>
+                  $10
+                  /USV
+                </span>
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "120 0 auto",
+                  "maxWidth": "120px",
+                  "width": "120px",
+                }
+              }
+            >
+              <div
+                className="cell-metrics"
+              >
+                <span>
+                  100
+                </span>
+                <span>
+                  $50
+                  /USV
+                </span>
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "260 0 auto",
+                  "maxWidth": "260px",
+                  "width": "260px",
+                }
+              }
+            >
+              <div
+                className="cell-metrics"
+              >
+                <span>
+                  $5,000
+                </span>
+                <span>
+                  $1,000
+                  /
+                  mo
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="rt-tr-group"
+          role="rowgroup"
+        >
+          <div
+            className="rt-tr -odd"
+            role="row"
+          >
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "300 0 auto",
+                  "maxWidth": "300px",
+                  "width": "300px",
+                }
+              }
+            >
+              <div
+                className="cell-tactic"
+              >
+                ApartmentList.com Advertising
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "160 0 auto",
+                  "maxWidth": "160px",
+                  "width": "160px",
+                }
+              }
+            >
+              <div>
+                Jul 8, 2019
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "120 0 auto",
+                  "maxWidth": "120px",
+                  "width": "120px",
+                }
+              }
+            >
+              <div
+                className="cell-status in_progress"
+              >
+                In Progress
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "248 0 auto",
+                  "maxWidth": "248px",
+                  "width": "248px",
+                }
+              }
+            >
+              <div />
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "110 0 auto",
+                  "maxWidth": "110px",
+                  "width": "110px",
+                }
+              }
+            >
+              <div
+                className="cell-metrics"
+              >
+                <span>
+                  500
+                </span>
+                <span>
+                  $10
+                  /USV
+                </span>
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "120 0 auto",
+                  "maxWidth": "120px",
+                  "width": "120px",
+                }
+              }
+            >
+              <div
+                className="cell-metrics"
+              >
+                <span>
+                  100
+                </span>
+                <span>
+                  $50
+                  /USV
+                </span>
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "260 0 auto",
+                  "maxWidth": "260px",
+                  "width": "260px",
+                }
+              }
+            >
+              <div
+                className="cell-metrics"
+              >
+                <span>
+                  $5,000
+                </span>
+                <span>
+                  $1,000
+                  /
+                  mo
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="rt-tr-group"
+          role="rowgroup"
+        >
+          <div
+            className="rt-tr -even"
+            role="row"
+          >
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "300 0 auto",
+                  "maxWidth": "300px",
+                  "width": "300px",
+                }
+              }
+            >
+              <div
+                className="cell-tactic"
+              >
+                Website Live Chat Implementation
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "160 0 auto",
+                  "maxWidth": "160px",
+                  "width": "160px",
+                }
+              }
+            >
+              <div>
+                Feb 22, 2019
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "120 0 auto",
+                  "maxWidth": "120px",
+                  "width": "120px",
+                }
+              }
+            >
+              <div
+                className="cell-status complete"
+              >
+                Complete
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "248 0 auto",
+                  "maxWidth": "248px",
+                  "width": "248px",
+                }
+              }
+            >
+              <div />
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "110 0 auto",
+                  "maxWidth": "110px",
+                  "width": "110px",
+                }
+              }
+            >
+              <div
+                className="cell-metrics"
+              >
+                <span>
+                  0
+                </span>
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "120 0 auto",
+                  "maxWidth": "120px",
+                  "width": "120px",
+                }
+              }
+            >
+              <div
+                className="cell-metrics"
+              >
+                <span>
+                  0
+                </span>
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "260 0 auto",
+                  "maxWidth": "260px",
+                  "width": "260px",
+                }
+              }
+            >
+              <div
+                className="cell-metrics"
+              >
+                <span>
+                  $2,000
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="rt-tr-group"
+          role="rowgroup"
+        >
+          <div
+            className="rt-tr -odd"
+            role="row"
+          >
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "300 0 auto",
+                  "maxWidth": "300px",
+                  "width": "300px",
+                }
+              }
+            >
+              <div
+                className="cell-tactic"
+              >
+                <span
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                >
+                  Website Live Chat Service
+                </span>
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "160 0 auto",
+                  "maxWidth": "160px",
+                  "width": "160px",
+                }
+              }
+            >
+              <div>
+                Jul 8, 2019
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "120 0 auto",
+                  "maxWidth": "120px",
+                  "width": "120px",
+                }
+              }
+            >
+              <div
+                className="cell-status in_progress"
+              >
+                In Progress
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "248 0 auto",
+                  "maxWidth": "248px",
+                  "width": "248px",
+                }
+              }
+            >
+              <div />
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "110 0 auto",
+                  "maxWidth": "110px",
+                  "width": "110px",
+                }
+              }
+            >
+              <div
+                className="cell-metrics"
+              >
+                <span>
+                  0
+                </span>
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "120 0 auto",
+                  "maxWidth": "120px",
+                  "width": "120px",
+                }
+              }
+            >
+              <div
+                className="cell-metrics"
+              >
+                <span>
+                  0
+                </span>
+              </div>
+            </div>
+            <div
+              className="rt-td"
+              onClick={[Function]}
+              role="gridcell"
+              style={
+                Object {
+                  "flex": "260 0 auto",
+                  "maxWidth": "260px",
+                  "width": "260px",
+                }
+              }
+            >
+              <div
+                className="cell-metrics"
+              >
+                <span>
+                  $1,000
+                </span>
+                <span>
+                  $200
+                  /
+                  mo
+                </span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <div
-      className="campaign-plan-generic-footer"
+      className="-loading"
     >
-      <p
-        className="footer__total"
+      <div
+        className="-loading-inner"
       >
-        Demand Creation
-         Total: 
-        $38,000
-      </p>
-      <p
-        className="footer__subtotal"
-      >
-        Total Number of USV: 
-        6,000
-      </p>
-      <p
-        className="footer__subtotal"
-      >
-        Total Number of INQ: 
-        200
-      </p>
+        Loading...
+      </div>
     </div>
+  </div>
+  <div
+    className="campaign-plan-generic-footer"
+  >
+    <p
+      className="footer__total"
+    >
+      Demand Creation
+       Total: 
+      $38,000
+    </p>
+    <p
+      className="footer__subtotal"
+    >
+      Total Number of USV: 
+      6,000
+    </p>
+    <p
+      className="footer__subtotal"
+    >
+      Total Number of INQ: 
+      200
+    </p>
   </div>
 </div>
 `;
