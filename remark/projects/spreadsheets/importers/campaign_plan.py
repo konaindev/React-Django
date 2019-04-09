@@ -15,8 +15,8 @@ from .base import ProjectExcelImporter
 
 
 def find_meta(predicate):
-    """Return a locator that scans the META!A column for header values."""
-    return find_row("META!A", predicate)
+    """Return a locator that scans the META!A column for header values and returns contents of column B."""
+    return find_row("META!A", predicate, target="B")
 
 
 def find_cat(predicate):
@@ -50,8 +50,20 @@ class CampaignPlanImporter(ProjectExcelImporter):
         "total_cost": CurrencyCell(find_cat("total cost")),
     }
 
+    def build_category(self, category, sheet):
+        self.cleaned_data[category] = self.row_table(
+            schema=self.CATEGORY_ROW_SCHEMA, start_row=2, end_row=3, sheet=sheet  # XXX
+        )
+
     def clean(self):
         super().clean()
+
+        # Build the meta table
         self.cleaned_data["meta"] = self.col(schema=self.META_COL_SCHEMA, col="B")
-        print(self.cleaned_data["meta"])
+
+        # Build for each category
+        self.build_category("reputation_building", "Reputation Building")
+        self.build_category("demand_creation", "Demand Creation")
+        self.build_category("leasing_enablement", "Leasing Enablement")
+        self.build_category("market_intelligence", "Market Intelligence")
 

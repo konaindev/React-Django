@@ -23,7 +23,9 @@ class ExcelImporter:
     def check_data_type(self, cell, data_type):
         """Raise an exception if cell's data type doesn't match provided data_type."""
         # If we have no expectations, we're always happy
-        if data_type == DataType.DATETIME:
+        if callable(data_type):
+            valid = data_type(cell)
+        elif data_type == DataType.DATETIME:
             valid = cell.is_date
         else:
             valid = data_type == cell.data_type

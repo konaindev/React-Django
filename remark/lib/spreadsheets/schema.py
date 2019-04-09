@@ -27,7 +27,8 @@ The cell's coordinates are obtained by calling the locator(...) method.
 See locators.py.
 
 The cell's expected excel data type is defined by data_type and must be
-one of the DataType.* values.
+one of the DataType.* values, or a callable that takes an openpyxl cell
+and determines whether it's valid.
 
 The cell's python type converter is an arbitrary callable (including arbitrary
 python types, like int/Decimal/etc) that indicates how the value should be
@@ -49,38 +50,44 @@ def StrCell(locator):
 def NullStrCell(locator):
     """Return a cell that converts to an optional python string."""
 
-    def str_or_null(value):
-        return str(value) if str(value) else None
+    def str_or_null_data_type(cell):
+        return cell.data_type in [DataType.STRING, DataType.NULL]
 
-    return SchemaCell(locator, DataType.String, str_or_null)
+    def str_or_null_converter(value):
+        return str(value) if value else None
+
+    return SchemaCell(locator, str_or_null_data_type, str_or_null_converter)
 
 
 def ChoiceCell(locator, choices):
     """Return a cell that converts to a predefined string, or raises."""
 
-    def choice_or_fail(value):
-        value = str(value) if str(value) else None
+    def choice_or_fail_converter(value):
+        value = str(value) if value else None
         if value not in choices:
             raise ExcelValidationError(
                 message=f"Unexpected value '{value}' found; expected one of '{choices}'"
             )
         return value
 
-    return SchemaCell(locator, DataType.STRING, choice_or_fail)
+    return SchemaCell(locator, DataType.STRING, choice_or_fail_converter)
 
 
 def NullChoiceCell(locator, choices):
     """Return a cell that converts to an optional predefined string, or raises."""
 
-    def choice_or_null_or_fail(value):
-        value = str(value) if str(value) else None
+    def str_or_null_data_type(cell):
+        return cell.data_type in [DataType.STRING, DataType.NULL]
+
+    def choice_or_null_or_fail_converter(value):
+        value = str(value) if value else None
         if (value is not None) and (value not in choices):
             raise ExcelValidationError(
                 message=f"Unexpected value '{value}' found; expected one of '{choices}'"
             )
         return value
 
-    return SchemaCell(locator, DataType.String, choice_or_null_or_fail)
+    return SchemaCell(locator, str_or_null_data_type, choice_or_null_or_fail_converter)
 
 
 def IntCell(locator):

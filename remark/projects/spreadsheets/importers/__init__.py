@@ -4,9 +4,13 @@ instances. Builds on top of our generic remark.lib.spreadsheets library.
 """
 from ..kinds import SpreadsheetKind
 from .baseline_perf import BaselinePerfImporter
+from .campaign_plan import CampaignPlanImporter
 
 
-IMPORTERS = {SpreadsheetKind.PERIODS: BaselinePerfImporter}
+IMPORTERS = {
+    SpreadsheetKind.PERIODS: BaselinePerfImporter,
+    SpreadsheetKind.CAMPAIGN: CampaignPlanImporter,
+}
 
 
 def get_importer_for_kind(kind, f):
