@@ -80,8 +80,8 @@ def get_report_usv_age_from_response(response):
         try:
             idx = dimensions.index(age_range)
             usv.append(int(metrics[idx]['values'][0]))
-        except ValueError:
-            usv.append(0)
+        except:
+            usv.append(0) 
     return usv
 
 
