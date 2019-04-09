@@ -5,6 +5,11 @@ export const GENERIC_TABS = {
   leasing_enablement: "Leasing Enablement"
 };
 
+export const ALL_TABS = {
+  ...GENERIC_TABS,
+  overview: "Overview"
+};
+
 export const TACTIC_STATUSES = {
   not_started: "Not Started",
   in_progress: "In Progress",

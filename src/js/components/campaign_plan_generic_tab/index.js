@@ -9,17 +9,14 @@ import {
   GENERIC_TABS,
   TACTIC_STATUSES
 } from "../campaign_plan/campaign_plan.constants";
-import Container from "../container";
 import Panel from "../panel";
 
 export function CampaignPlanGenericTab(props) {
   return (
-    <Container>
-      <Panel className="campaign-plan-generic-tab">
-        <CampaignPlanGenericTable {...props} />
-        <CampaignPlanGenericFooter {...props} />
-      </Panel>
-    </Container>
+    <Panel className="campaign-plan-generic-tab">
+      <CampaignPlanGenericTable {...props} />
+      <CampaignPlanGenericFooter {...props} />
+    </Panel>
   );
 }
 

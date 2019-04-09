@@ -4,7 +4,6 @@ import ReactMarkdown from "react-markdown";
 import cx from "classnames";
 
 import "./campaign_plan_overview_tab.scss";
-import Container from "../container";
 import Panel from "../panel";
 import { formatCurrency } from "../../utils/formatters.js";
 
@@ -18,8 +17,8 @@ export function CampaignPlanOverviewTab({
   target_investment
 }) {
   return (
-    <Container className="campaign-plan-overview-tab">
-      <Panel className="campaign-plan-overview-table">
+    <Panel className="campaign-plan-overview-tab">
+      <div className="campaign-plan-overview-table">
         <div className="table__row">
           <div className="row__label">Target Segments</div>
           <CampaignOverviewSegments
@@ -62,8 +61,8 @@ export function CampaignPlanOverviewTab({
             {...target_investment}
           />
         </div>
-      </Panel>
-    </Container>
+      </div>
+    </Panel>
   );
 }
 
