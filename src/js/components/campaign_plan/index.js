@@ -4,7 +4,15 @@ import PropTypes from "prop-types";
 import Container from "../container";
 import ButtonGroup from "../button_group";
 
+import { GENERIC_TABS, ALL_TABS_ORDERED } from "./campaign_plan.constants";
+import CampaignPlanOverviewTab from "../campaign_plan_overview_tab";
+import CampaignPlanGenericTab from "../campaign_plan_generic_tab";
 import "./campaign_plan.scss";
+
+const buttonOptions = ALL_TABS_ORDERED.map(([key, label]) => ({
+  value: key,
+  label: label
+}));
 
 /**
  * @class CampaignInvestmentReport
@@ -16,47 +24,52 @@ export default class CampaignPlan extends Component {
     super(props);
 
     this.state = {
-      buttonIndex: 0
+      activeTab: "overview"
     };
   }
 
-  onClickButton = index => {
-    this.setState({ buttonIndex: index });
+  onClickTab = tabKey => {
+    this.setState({ activeTab: tabKey });
   };
 
-  renderOption() {
-    const options = [
-      "https://imgur.com/6pa134E.png",
-      "https://imgur.com/OlTT4NS.png",
-      "https://imgur.com/xMhif74.png",
-      "https://imgur.com/mglPaZN.png",
-      "https://imgur.com/2eKTmPn.png"
-    ];
-    return <img src={options[this.state.buttonIndex]} />;
-  }
-
   render() {
-    const options = [
-      { label: "Overview", value: 0 },
-      { label: "Reputation Building", value: 1 },
-      { label: "Demand Creation", value: 2 },
-      { label: "Leasing Enablement", value: 3 },
-      { label: "Market Intelligence", value: 4 }
-    ];
+    const { activeTab } = this.state;
+    const isOverviewTab = activeTab === "overview";
+    const isGenericTab = Object.keys(GENERIC_TABS).includes(activeTab);
+    const tabData = this.props[activeTab];
 
     return (
       <div className="page campaign_plan-view">
         <Container>
           <div className="campaign_plan-view__subnav">
             <ButtonGroup
-              onChange={this.onClickButton}
-              value={this.state.buttonIndex}
-              options={options}
+              onChange={this.onClickTab}
+              value={activeTab}
+              options={buttonOptions}
             />
           </div>
+
+          {activeTab == "overview" && tabData != null && (
+            <CampaignPlanOverviewTab {...tabData} />
+          )}
+
+          {isGenericTab && tabData != null && (
+            <CampaignPlanGenericTab
+              {...tabData}
+              tabKey={activeTab}
+              key={activeTab}
+            />
+          )}
         </Container>
-        {this.renderOption()}
       </div>
     );
   }
 }
+
+CampaignPlan.propTypes = {
+  overview: PropTypes.object.isRequired,
+  reputation_building: PropTypes.object.isRequired,
+  demand_creation: PropTypes.object.isRequired,
+  leasing_enablement: PropTypes.object.isRequired,
+  market_intelligence: PropTypes.object.isRequired
+};

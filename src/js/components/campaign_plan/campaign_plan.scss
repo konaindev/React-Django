@@ -1,19 +1,9 @@
 @import "css/base.scss";
-@import "css/variables.scss";
 
 .campaign_plan-view {
     &__subnav {
-        margin-top: $s10;
+        margin-top: 2.75rem;
+        margin-bottom: 2.75rem;
         max-width: 80%;
-        font-weight: 800;
-        font-family: Formular, Arial, sans-serif;
-        font-size: 14px;
-        color: #798796;
-    }
-    img {
-        margin-top: 44px;
-        margin-left: 60px;
-        margin-bottom: 44px;
-        width: 80%;
     }
 }
