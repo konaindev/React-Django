@@ -51,11 +51,25 @@ class ReportSelectorBase:
         yield
 
     @classmethod
+    def public_selectors_for_project(cls, project):
+        base_selector = cls(project)
+        if base_selector.has_report_data() and base_selector.is_public():
+            yield base_selector
+
+    @classmethod
     def links_for_project(cls, project):
         """
         Yield all links available for this selector type for the given project.
         """
         for report_selector in cls.selectors_for_project(project):
+            yield report_selector.get_link()
+
+    @classmethod
+    def public_links_for_project(cls, project):
+        """
+        Yield all links available for this selector type for the given project.
+        """
+        for report_selector in cls.public_selectors_for_project(project):
             yield report_selector.get_link()
 
     def __init__(self, project):
@@ -81,8 +95,8 @@ class ReportSelectorBase:
         # Derived classes must implement
         raise NotImplementedError()
 
-    def is_enabled(self):
-        """Return True if underlying report is enabled by *_enabled fields in project model."""
+    def is_public(self):
+        """Return True if underlying report is enabled by *_public fields in project model."""
         # Derived classes must implement
         raise NotImplementedError()
 
@@ -105,7 +119,7 @@ class BaselineReportSelector(ReportSelectorBase):
     @classmethod
     def selectors_for_project(cls, project):
         baseline_selector = cls(project)
-        if baseline_selector.has_report_data() and baseline_selector.is_enabled():
+        if baseline_selector.has_report_data():
             yield baseline_selector
 
     @classmethod
@@ -126,8 +140,8 @@ class BaselineReportSelector(ReportSelectorBase):
     def has_report_data(self):
         return BaselineReport.has_baseline(self.project)
 
-    def is_enabled(self):
-        return self.project.baseline_report_enabled
+    def is_public(self):
+        return self.project.is_baseline_report_public
 
     def get_report(self):
         return BaselineReport.for_baseline(self.project)
@@ -156,6 +170,11 @@ class PerformanceReportSelector(ReportSelectorBase):
     def selectors_for_project(cls, project):
         yield from cls.named_selectors_for_project(project)
         yield from cls.campaign_period_selectors_for_project(project)
+
+    @classmethod
+    def public_selectors_for_project(cls, project):
+        if project.is_performance_report_public:
+            yield from cls.selectors_for_project(project)
 
     # Custom 'named' spans
     LAST_WEEK = "last-week"
@@ -290,8 +309,8 @@ class PerformanceReportSelector(ReportSelectorBase):
 
         return exists
 
-    def is_enabled(self):
-        return True
+    def is_public(self):
+        return self.project.is_performance_report_public
 
     def get_report(self):
         """
@@ -314,7 +333,7 @@ class MarketReportSelector(ReportSelectorBase):
     @classmethod
     def selectors_for_project(cls, project):
         tam_selector = cls(project)
-        if tam_selector.has_report_data() and tam_selector.is_enabled():
+        if tam_selector.has_report_data() and tam_selector.is_public():
             yield tam_selector
 
     def __init__(self, project):
@@ -334,8 +353,8 @@ class MarketReportSelector(ReportSelectorBase):
         """Return True if data exists for this type of report."""
         return MarketReport.exists(self.project)
 
-    def is_enabled(self):
-        return self.project.tam_enabled
+    def is_public(self):
+        return self.project.is_tam_public
 
     def get_report(self):
         """Return the underlying report."""
@@ -350,7 +369,7 @@ class ModelingReportSelector(ReportSelectorBase):
     @classmethod
     def selectors_for_project(cls, project):
         modeling_selector = cls(project)
-        if modeling_selector.has_report_data() and modeling_selector.is_enabled():
+        if modeling_selector.has_report_data() and modeling_selector.is_public():
             yield modeling_selector
 
     def __init__(self, project):
@@ -370,8 +389,8 @@ class ModelingReportSelector(ReportSelectorBase):
         """Return True if data exists for this type of report."""
         return ModelingReport.exists(self.project)
 
-    def is_enabled(self):
-        return self.project.modeling_enabled
+    def is_public(self):
+        return self.project.is_modeling_public
 
     def get_report(self):
         """Return the underlying report."""
@@ -386,7 +405,7 @@ class CampaignPlanSelector(ReportSelectorBase):
     @classmethod
     def selectors_for_project(cls, project):
         campaign_plan_selector = cls(project)
-        if campaign_plan_selector.has_report_data() and campaign_plan_selector.is_enabled():
+        if campaign_plan_selector.has_report_data() and campaign_plan_selector.is_public():
             yield campaign_plan_selector
 
     @classmethod
@@ -407,8 +426,8 @@ class CampaignPlanSelector(ReportSelectorBase):
         """Return True if data exists for this type of report."""
         return CampaignPlan.exists(self.project)
 
-    def is_enabled(self):
-        return self.project.campaign_plan_enabled
+    def is_public(self):
+        return self.project.is_campaign_plan_public
 
     def get_report(self):
         """Return the underlying report."""
@@ -419,6 +438,22 @@ class ReportLinks:
     """
     Provides ability to enumerate all report selectors defined here.
     """
+    @classmethod
+    def _1(cls, link_generator):
+        """Return None or a single item from the list."""
+        links = list(link_generator)
+        if not links:
+            return None
+        assert len(links) == 1
+        return links[0]
+
+    @classmethod
+    def _many(cls, link_generator):
+        """Return None or a list with items."""
+        links = list(link_generator)
+        if not links:
+            return None
+        return links
 
     @classmethod
     def for_project(cls, project):
@@ -446,27 +481,24 @@ class ReportLinks:
         }
         """
 
-        def _1(link_generator):
-            """Return None or a single item from the list."""
-            links = list(link_generator)
-            if not links:
-                return None
-            assert len(links) == 1
-            return links[0]
-
-        def _many(link_generator):
-            """Return None or a list with items."""
-            links = list(link_generator)
-            if not links:
-                return None
-            return links
-
         links = {
-            "baseline": _1(BaselineReportSelector.links_for_project(project)),
-            "performance": _many(PerformanceReportSelector.links_for_project(project)),
-            "market": _1(MarketReportSelector.links_for_project(project)),
-            "modeling": _1(ModelingReportSelector.links_for_project(project)),
-            "campaign_plan": _1(CampaignPlanSelector.links_for_project(project)),
+            "baseline": ReportLinks._1(BaselineReportSelector.links_for_project(project)),
+            "performance": ReportLinks._many(PerformanceReportSelector.links_for_project(project)),
+            "market": ReportLinks._1(MarketReportSelector.links_for_project(project)),
+            "modeling": ReportLinks._1(ModelingReportSelector.links_for_project(project)),
+            "campaign_plan": ReportLinks._1(CampaignPlanSelector.links_for_project(project)),
+        }
+
+        return links
+
+    @classmethod
+    def public_for_project(cls, project):
+        links = {
+            "baseline": ReportLinks._1(BaselineReportSelector.public_links_for_project(project)),
+            "performance": ReportLinks._many(PerformanceReportSelector.public_links_for_project(project)),
+            "market": ReportLinks._1(MarketReportSelector.public_links_for_project(project)),
+            "modeling": ReportLinks._1(ModelingReportSelector.public_links_for_project(project)),
+            "campaign_plan": ReportLinks._1(CampaignPlanSelector.public_links_for_project(project)),
         }
 
         return links
