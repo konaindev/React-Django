@@ -32,6 +32,9 @@ export default class LeasingPerformanceReport extends Component {
    * @description Component that renders the most important leasing performance numbers.
    */
   static HeadlineNumbers = ({ report: r }) => {
+    const totalUnits = r.property.total_units ? (
+      <div>{r.property.total_units} Total Units</div>
+    ) : null;
     return (
       <BoxRow>
         <PercentageGraphBox
@@ -40,11 +43,15 @@ export default class LeasingPerformanceReport extends Component {
           delta={r.deltas?.property?.leasing?.rate}
           series={r.whiskers?.leased_rate}
           target={r.targets?.property?.leasing?.rate}
-          extraContent={`${formatNumber(
-            r.property.leasing.units
-          )} Executed Leases (Out of ${formatNumber(
-            r.property.occupancy.occupiable
-          )})`}
+          extraContent={
+            <>
+              <div>
+                {formatNumber(r.property.leasing.units)} Executed Leases (Out of{" "}
+                {formatNumber(r.property.occupancy.occupiable)})
+              </div>
+              {totalUnits}
+            </>
+          }
         />
         <PercentageGraphBox
           name="Retention"
@@ -64,11 +71,15 @@ export default class LeasingPerformanceReport extends Component {
           delta={r.deltas?.property?.occupancy?.rate}
           series={r.whiskers?.occupancy_rate}
           target={r.targets?.property?.occupancy?.rate}
-          extraContent={`${formatNumber(
-            r.property.occupancy.units
-          )} Occupied Units (Out of ${formatNumber(
-            r.property.occupancy.occupiable
-          )})`}
+          extraContent={
+            <>
+              <div>
+                {formatNumber(r.property.occupancy.units)} Occupied Units (Out
+                of ${formatNumber(r.property.occupancy.occupiable)})
+              </div>
+              {totalUnits}
+            </>
+          }
         />
       </BoxRow>
     );

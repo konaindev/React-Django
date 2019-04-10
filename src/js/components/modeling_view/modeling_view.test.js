@@ -1,6 +1,6 @@
 import renderer from "react-test-renderer";
 import ModelingView from "./index";
-import { props } from "./modeling_view.stories";
+import { props } from "./props";
 
 describe("ModelingView", () => {
   it("renders correctly", () => {
