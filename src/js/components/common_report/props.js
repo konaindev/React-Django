@@ -1,3 +1,4 @@
+import React from "react";
 import { funnel_history } from "../funnel_performance_analysis/FunnelProps";
 
 // dummy data

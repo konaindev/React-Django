@@ -1,3 +1,5 @@
+import React from "react";
+
 // dummy data
 const WHISKERS = {
   leased_rate: [
