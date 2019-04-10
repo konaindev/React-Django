@@ -26,7 +26,7 @@ class ProjectPageView(ReactView):
         self.project = get_object_or_404(Project, public_id=project_id)
         return self.render(
             project=self.project.to_jsonable(),
-            report_links=ReportLinks.for_project(self.project),
+            report_links=ReportLinks.public_for_project(self.project),
         )
 
 
@@ -53,7 +53,7 @@ class ReportPageViewBase(ReactView):
             raise Http404
 
         return self.render(
-            report_links=ReportLinks.for_project(self.project),
+            report_links=ReportLinks.public_for_project(self.project),
             project=self.project.to_jsonable(),
             report=self.selector.get_report_data(),
             current_report_link=self.selector.get_link(),
