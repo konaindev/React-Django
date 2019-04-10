@@ -52,9 +52,9 @@ class ReportSelectorBase:
 
     @classmethod
     def public_selectors_for_project(cls, project):
-        base_selector = cls(project)
-        if base_selector.has_report_data() and base_selector.is_public():
-            yield base_selector
+        for selector in cls.selectors_for_project(project):
+            if selector.is_public():
+                yield selector
 
     @classmethod
     def links_for_project(cls, project):
@@ -170,11 +170,6 @@ class PerformanceReportSelector(ReportSelectorBase):
     def selectors_for_project(cls, project):
         yield from cls.named_selectors_for_project(project)
         yield from cls.campaign_period_selectors_for_project(project)
-
-    @classmethod
-    def public_selectors_for_project(cls, project):
-        if project.is_performance_report_public:
-            yield from cls.selectors_for_project(project)
 
     # Custom 'named' spans
     LAST_WEEK = "last-week"
@@ -405,7 +400,10 @@ class CampaignPlanSelector(ReportSelectorBase):
     @classmethod
     def selectors_for_project(cls, project):
         campaign_plan_selector = cls(project)
-        if campaign_plan_selector.has_report_data() and campaign_plan_selector.is_public():
+        if (
+            campaign_plan_selector.has_report_data()
+            and campaign_plan_selector.is_public()
+        ):
             yield campaign_plan_selector
 
     @classmethod
@@ -438,6 +436,7 @@ class ReportLinks:
     """
     Provides ability to enumerate all report selectors defined here.
     """
+
     @classmethod
     def _1(cls, link_generator):
         """Return None or a single item from the list."""
@@ -456,9 +455,9 @@ class ReportLinks:
         return links
 
     @classmethod
-    def for_project(cls, project):
+    def _project_links(cls, project, public):
         """
-        Get a nested structure of report links.
+        Get a nested structure of public (or private) report links.
 
         It conforms to the schema defined in ReportLinks.ts, like so:
 
@@ -480,25 +479,24 @@ class ReportLinks:
             "modeling": {...},
         }
         """
-
+        attr = "public_links_for_project" if public else "links_for_project"
         links = {
-            "baseline": ReportLinks._1(BaselineReportSelector.links_for_project(project)),
-            "performance": ReportLinks._many(PerformanceReportSelector.links_for_project(project)),
-            "market": ReportLinks._1(MarketReportSelector.links_for_project(project)),
-            "modeling": ReportLinks._1(ModelingReportSelector.links_for_project(project)),
-            "campaign_plan": ReportLinks._1(CampaignPlanSelector.links_for_project(project)),
+            "baseline": ReportLinks._1(getattr(BaselineReportSelector, attr)(project)),
+            "performance": ReportLinks._many(
+                getattr(PerformanceReportSelector, attr)(project)
+            ),
+            "market": ReportLinks._1(getattr(MarketReportSelector, attr)(project)),
+            "modeling": ReportLinks._1(getattr(ModelingReportSelector, attr)(project)),
+            "campaign_plan": ReportLinks._1(
+                getattr(CampaignPlanSelector, attr)(project)
+            ),
         }
-
         return links
 
     @classmethod
-    def public_for_project(cls, project):
-        links = {
-            "baseline": ReportLinks._1(BaselineReportSelector.public_links_for_project(project)),
-            "performance": ReportLinks._many(PerformanceReportSelector.public_links_for_project(project)),
-            "market": ReportLinks._1(MarketReportSelector.public_links_for_project(project)),
-            "modeling": ReportLinks._1(ModelingReportSelector.public_links_for_project(project)),
-            "campaign_plan": ReportLinks._1(CampaignPlanSelector.public_links_for_project(project)),
-        }
+    def for_project(cls, project):
+        return cls._project_links(project, public=False)
 
-        return links
+    @classmethod
+    def public_for_project(cls, project):
+        return cls._project_links(project, public=True)
