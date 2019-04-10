@@ -1,0 +1,137 @@
+@import "css/base.scss";
+
+@mixin table_header_text() {
+    color: $content-text-primary-color;
+    font-size: $text-xs;
+    line-height: $text-xl;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+@mixin table_content_text() {
+    color: $content-text-secondary-color;
+    font-size: $text-sm;
+    line-height: $text-2xl;
+}
+
+@mixin table_content_text_small() {
+    color: $content-text-secondary-color;
+    font-size: $text-xs;
+    line-height: $text-2xl;
+}
+
+$status-color-complete: $green-3;
+$status-color-in-progress: $blue-4;
+$status-color-not-started: $content-text-secondary-color;
+
+.campaign-plan-generic-tab {
+    margin-bottom: 2.75rem;
+}
+
+.campaign-plan-generic-table {
+    height: 100%;
+    background-color: $panel-background-color;
+
+    .rt-thead {
+        color: $content-text-primary-color;
+        border-color: $table-border-color;
+        border-bottom-width: 1px;
+        box-shadow: none !important;
+
+        @include table_header_text();
+
+        .rt-th {
+            border: none;
+
+            &>div {
+                padding: 44px 20px 36px 20px;
+            }
+
+            &:first-child {
+                &>div {
+                    padding-left: 60px;
+                }
+            }
+
+            &:last-child {
+                &>div {
+                    padding-right: 60px;
+                }
+            }
+        }
+    }
+
+    .rt-tbody {
+        .rt-tr-group {
+            border-bottom: 1px solid $table-border-color;
+
+            &:last-child {
+                border-bottom: 1px solid $table-border-color;
+            }
+        }
+
+        .rt-td {
+            padding: 0;
+            border-color: $table-border-color;
+            @include table_content_text();
+
+            &>div {
+                padding: 16px 20px;
+                white-space: normal;
+            }
+
+            &:first-child {
+                &>div {
+                    padding-left: 60px;
+                }
+            }
+
+            &:last-child {
+                &>div {
+                    padding-right: 60px;
+                }
+            }
+        }
+    }
+
+    .cell-status {
+        &.not_started {
+            color: $status-color-not-started;
+        }
+        &.in_progress {
+            color: $status-color-in-progress;
+        }
+        &.complete {
+            color: $status-color-complete;
+        }
+    }
+
+    .cell-metrics {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+
+        span:first-child {
+            color: $content-text-primary-color;
+        }
+        span + span {
+            @include table_content_text_small();
+        }
+    }
+}
+
+.campaign-plan-generic-footer {
+    padding: 40px 60px 50px 60px;
+    text-align: right;
+
+    .footer__total {
+        color: $content-text-primary-color;
+        font-size: $text-xxs * 2.8;
+        line-height: $text-xxs * 3.6;
+        margin-bottom: 0.5rem;
+    }
+
+    .footer__subtotal {
+        @include table_content_text();
+    }
+}
