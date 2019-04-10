@@ -185,3 +185,13 @@ export const PERFORMANCE_REPORT = {
   },
   whiskers: WHISKERS
 };
+
+export const props_baseline = {
+  type: "baseline",
+  report: BASELINE_REPORT
+};
+
+export const props_performance = {
+  type: "performance",
+  report: PERFORMANCE_REPORT
+};

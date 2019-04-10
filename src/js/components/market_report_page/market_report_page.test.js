@@ -1,7 +1,7 @@
 import MarketReportPage from "./index";
 import renderer from "react-test-renderer";
 import report from "../total_addressable_market/MarketAnalysis.js";
-import { project, report_links } from "../project_page/project_page.stories";
+import { project, report_links } from "../project_page/props";
 
 describe("MarketReportPage", () => {
   it("renders correctly", () => {

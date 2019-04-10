@@ -2,9 +2,9 @@ import AcquisitionFunnelReport from "./index";
 import renderer from "react-test-renderer";
 
 import {
-  BASELINE_REPORT,
-  PERFORMANCE_REPORT
-} from "./acquisition_funnel_report.stories";
+  props_baseline,
+  props_performance
+} from "./props";
 
 describe("AcquisitionFunnelReport", () => {
   beforeEach(() => {
@@ -12,23 +12,15 @@ describe("AcquisitionFunnelReport", () => {
   });
 
   it("renders baseline report correctly", () => {
-    const props = {
-      type: "baseline",
-      report: BASELINE_REPORT
-    };
     const tree = renderer
-      .create(<AcquisitionFunnelReport {...props} />)
+      .create(<AcquisitionFunnelReport {...props_baseline} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it("renders performance report correctly", () => {
-    const props = {
-      type: "performance",
-      report: PERFORMANCE_REPORT
-    };
     const tree = renderer
-      .create(<AcquisitionFunnelReport {...props} />)
+      .create(<AcquisitionFunnelReport {...props_performance} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });

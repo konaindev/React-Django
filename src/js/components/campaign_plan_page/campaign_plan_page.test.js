@@ -1,6 +1,6 @@
 import CampaignPlanPage from "./index";
 import renderer from "react-test-renderer";
-import { project, report_links } from "../project_page/project_page.stories.js";
+import { project, report_links } from "../project_page/props";
 
 describe("CampaignPlanPage", () => {
   it("renders correctly", () => {

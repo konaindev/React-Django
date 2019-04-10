@@ -2,7 +2,7 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 
-import { project, report_links } from "../project_page/project_page.stories.js";
+import { project, report_links } from "../project_page/props";
 
 import CampaignPlanPage from "./index";
 
