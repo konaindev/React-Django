@@ -56,3 +56,10 @@ export const getDefaultDirection = value => Math.sign(Math.round(value));
 
 export const getPercentageDirection = value =>
   Math.sign(Math.round(value * 1000));
+
+export const objectFromEntries = iterable => {
+  return [...iterable].reduce(
+    (obj, { 0: key, 1: val }) => Object.assign(obj, { [key]: val }),
+    {}
+  );
+};

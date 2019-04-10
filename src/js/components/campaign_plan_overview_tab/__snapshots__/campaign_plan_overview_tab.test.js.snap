@@ -2,10 +2,10 @@
 
 exports[`CampaignPlanOverviewTab renders correctly 1`] = `
 <div
-  className="container campaign-plan-overview-tab"
+  className="panel panel--default campaign-plan-overview-tab"
 >
   <div
-    className="panel panel--default campaign-plan-overview-table"
+    className="campaign-plan-overview-table"
   >
     <div
       className="table__row"

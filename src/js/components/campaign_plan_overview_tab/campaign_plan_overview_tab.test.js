@@ -1,11 +1,12 @@
 import renderer from "react-test-renderer";
+
 import CampaignPlanOverviewTab from "./index";
-import props from "./campaign_plan_overview_tab.props";
+import CampaignPlanProps from "../campaign_plan/campaign_plan.props";
 
 describe("CampaignPlanOverviewTab", () => {
   it("renders correctly", () => {
     const tree = renderer
-      .create(<CampaignPlanOverviewTab {...props} />)
+      .create(<CampaignPlanOverviewTab {...CampaignPlanProps.overview} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });

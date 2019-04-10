@@ -1,9 +1,10 @@
 import React from "react";
 
 import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
 
 import CampaignPlan from "./index";
+import CampaignPlanProps from "./campaign_plan.props";
 
-storiesOf("CampaignPlan", module).add("base", () => <CampaignPlan />);
+storiesOf("CampaignPlan", module).add("base", () => (
+  <CampaignPlan {...CampaignPlanProps} />
+));
