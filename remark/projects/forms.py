@@ -78,3 +78,36 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         exclude = []
+
+
+class TAMExportForm(forms.Form):
+    radius = forms.FloatField(
+        label="Radius",
+        help_text="Radius (in miles)",
+    )
+    zip_codes = forms.CharField(
+        widget=forms.Textarea,
+        label="Zip codes",
+        help_text="List of Zip Codes",
+    )
+    rti_target = forms.FloatField(
+        label="RTI Target",
+        help_text="Rent-To-Income Target, allowed values are 0% to 100%",
+        min_value=0,
+        max_value=1,
+    )
+    rti_income_groups = forms.CharField(
+        widget=forms.Textarea,
+        label="RTI Income Groups",
+        help_text="A list of integers representing annual salaries (e.g. $30000, $40000, $50000, $60000)",
+    )
+    rti_rental_rates = forms.CharField(
+        widget=forms.Textarea,
+        label="RTI Rent Groups",
+        help_text="A list of integers representing monthly rents (e.g. $500, $800, $1000, $1200)",
+    )
+    income_groups = forms.CharField(
+        widget=forms.Textarea,
+        label="Income Segments",
+        help_text="A list of integers representing annual salaries that is used differently than above (e.g. $30000, $40000, $50000)",
+    )

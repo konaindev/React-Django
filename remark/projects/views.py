@@ -1,7 +1,13 @@
-from django.http import Http404
+from django.contrib import messages
+from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
+from django.views.generic.edit import FormView
+from django.views.generic.detail import SingleObjectMixin
+from tempfile import NamedTemporaryFile
 
 from remark.lib.views import ReactView
+from remark.admin import admin_site
+from xls.exporters.tam_data import build_tam_data, DEFAULT_TEMPLATE_PATH
 
 from .reports.selectors import (
     BaselineReportSelector,
@@ -12,6 +18,8 @@ from .reports.selectors import (
     ReportLinks,
 )
 from .models import Project
+from .forms import TAMExportForm
+
 
 
 class ProjectPageView(ReactView):
@@ -91,9 +99,63 @@ class ModelingReportPageView(ReportPageViewBase):
     page_class = "ModelingReportPage"
     page_title = "Modeling Report"
 
+
 class CampaignPlanPageView(ReportPageViewBase):
     """Return a campaign plan page"""
 
     selector_class = CampaignPlanSelector
     page_class = "CampaignPlanPage"
     page_title = "Campaign Plan"
+
+
+class TAMExportView(FormView, SingleObjectMixin):
+    template_name = "projects/tam-export.html"
+    form_class = TAMExportForm
+    model = Project
+
+    def get_context_data(self, **kwargs):
+        self.object = self.get_object()
+        context = {
+            **admin_site.each_context(self.request),
+            **super().get_context_data(**kwargs),
+            "opts": Project._meta,
+        }
+        return context
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+        if form.is_valid():
+            project = self.object # TODO: use this project for feeding hardcoded args
+            tmp = NamedTemporaryFile()
+            try:
+                build_tam_data(
+                    zip_codes=form.cleaned_data["zip_codes"].split("\n"),
+                    lat=None,
+                    lon=None,
+                    loc=None,
+                    radius=form.cleaned_data["radius"],
+                    income_groups=None,
+                    rti_income_groups=form.cleaned_data["rti_income_groups"].split("\n"),
+                    rti_rental_rates=form.cleaned_data["rti_rental_rates"].split("\n"),
+                    rti_target=form.cleaned_data["rti_target"],
+                    age=None,
+                    max_rent=None,
+                    avg_rent=None,
+                    min_rent=None,
+                    usvs=None,
+                    templatefile=DEFAULT_TEMPLATE_PATH,
+                    outfile=tmp.name
+                )
+                tmp.seek(0)
+                stream = tmp.read()
+                response = HttpResponse(
+                    stream,
+                    content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                )
+                return response
+            except Exception as e:
+                messages.error(request, str(e))
+                return self.form_invalid(form)
+        else:
+            return self.form_invalid(form)

@@ -34,6 +34,7 @@ django-stdimage = "*"
 google-api-python-client = "*"
 beautifulsoup4 = "*"
 googlemaps = "*"
+bs4 = "*"
 
 [requires]
 python_version = "3.7"
