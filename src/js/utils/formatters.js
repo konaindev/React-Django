@@ -1,4 +1,5 @@
 import React from "react";
+import { isValid } from "date-fns";
 import dateFnformat from "date-fns/format";
 import dfParse from "date-fns/parse";
 
@@ -142,7 +143,11 @@ export const formatDate = (value, year = true) => {
  * formatDateWithTokens("2018-12-17", "MMM D, YYYY"); // Dec 17, 2018
  */
 export const formatDateWithTokens = (v, tokens) => {
-  return dateFnformat(v, tokens);
+  if (isValid(new Date(v))) {
+    return dateFnformat(v, tokens);
+  } else {
+    return v;
+  }
 };
 
 /**

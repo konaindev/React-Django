@@ -1,0 +1,325 @@
+export default {
+  overview: {
+    theme: "Variable by audience, market, and asset",
+    target_segments: [
+      {
+        ordinal: "Primary",
+        description: "Young Professionals (25-34)"
+      },
+      {
+        ordinal: "Secondary",
+        description: "Young Entrepreneurs (25-34)"
+      },
+      {
+        ordinal: "Tertiary",
+        description: "Young Couples (35-40)"
+      },
+      {
+        ordinal: "Quarternary",
+        description: "Established Singles (35-44)"
+      }
+    ],
+    goal: "Achieve 95% lease-up by 6/30/2019",
+    objectives: [
+      {
+        title: "Reputation Building",
+        description:
+          "Grow reach and shape perceptions\n* Attract 11,979 USV\n* Attract 1,000 social followers\n* Add 1,100 contacts to property database (email list)"
+      },
+      {
+        title: "Demand Creation",
+        description:
+          "Generate INQs and USVs:\n* Convert 6% of USVs to INQs\n* Attract 696 Inquires (calls, emails, walk-ins, chats, texts)\n* Conduct 270 tours (at 40% INQ>Tour conversion rate)"
+      },
+      {
+        title: "Leasing Enablement",
+        description:
+          "Equip leasing team with effective processes and tools that delight\n* Provide highly responsive process for handling INQ and Tours\n* Capture 97 signed leases"
+      },
+      {
+        title: "Marketing Intelligence",
+        description:
+          "Capture resident and prospect data:\n* Capture prospect data on website\n* Capture resident data about satisfaction and retention"
+      }
+    ],
+    assumptions:
+      "* Asset contains 260 units\n* 20% C&D rate\n* Model based on predictions generated in Sept. 2018",
+    schedule: "Campaign begins in Feb. 2019 and finishes in July 2019",
+    target: "180000.00",
+    target_investment: {
+      reputation_building: "35000.00",
+      demand_creation: "86000.00",
+      leasing_enablement: "35000.00",
+      market_intelligence: "24000.00"
+    }
+  },
+  reputation_building: {
+    tactics: [
+      {
+        name: "Brand Strategy",
+        tooltip: null,
+        schedule: "2019-01-20",
+        status: "complete",
+        notes: null,
+        base_cost: "15000.00",
+        cost_category: "one_time",
+        total_cost: "15000.00"
+      },
+      {
+        name: "Messaging Matrix",
+        tooltip: null,
+        schedule: "2019-02-01",
+        status: "complete",
+        notes: null,
+        base_cost: "5000.00",
+        cost_category: "one_time",
+        total_cost: "5000.00"
+      },
+      {
+        name: "Website Enhancements",
+        tooltip: null,
+        schedule: "2019-02-01",
+        status: "in_progress",
+        notes: null,
+        base_cost: "5000.00",
+        cost_category: "one_time",
+        total_cost: "5000.00"
+      },
+      {
+        name: "Beach Lifestyle Photoshoot",
+        tooltip: null,
+        schedule: "2019-02-15",
+        status: "not_started",
+        notes: null,
+        base_cost: "10000.00",
+        cost_category: "one_time",
+        total_cost: "10000.00"
+      }
+    ]
+  },
+  demand_creation: {
+    tactics: [
+      {
+        name: "Paid Search Advertising",
+        tooltip: "Google Search Ads",
+        schedule: "2019-07-02",
+        status: "in_progress",
+        notes: null,
+        base_cost: "1000.00",
+        cost_category: "monthly",
+        total_cost: "5000.00",
+        volumes: {
+          usv: 1000,
+          inq: 0
+        },
+        costs: {
+          usv: "5.00",
+          inq: null
+        }
+      },
+      {
+        name: "Paid Social Advertising",
+        tooltip: null,
+        schedule: "2019-07-03",
+        status: "in_progress",
+        notes: null,
+        base_cost: "1000.00",
+        cost_category: "monthly",
+        total_cost: "5000.00",
+        volumes: {
+          usv: 1000,
+          inq: 0
+        },
+        costs: {
+          usv: "5.00",
+          inq: null
+        }
+      },
+      {
+        name: "Retargeted Display Advertising",
+        tooltip: null,
+        schedule: "2019-07-04",
+        status: "in_progress",
+        notes: null,
+        base_cost: "1000.00",
+        cost_category: "monthly",
+        total_cost: "5000.00",
+        volumes: {
+          usv: 1000,
+          inq: 0
+        },
+        costs: {
+          usv: "5.00",
+          inq: null
+        }
+      },
+      {
+        name: "Display Advertising",
+        tooltip: null,
+        schedule: "2019-07-05",
+        status: "in_progress",
+        notes: null,
+        base_cost: "1000.00",
+        cost_category: "monthly",
+        total_cost: "5000.00",
+        volumes: {
+          usv: 1000,
+          inq: 0
+        },
+        costs: {
+          usv: "5.00",
+          inq: null
+        }
+      },
+      {
+        name: "Apartments.com Advertising",
+        tooltip: null,
+        schedule: "2019-07-06",
+        status: "in_progress",
+        notes: null,
+        base_cost: "1000.00",
+        cost_category: "monthly",
+        total_cost: "5000.00",
+        volumes: {
+          usv: 1000,
+          inq: 0
+        },
+        costs: {
+          usv: "5.00",
+          inq: null
+        }
+      },
+      {
+        name: "Zillow.com Advertising",
+        tooltip: null,
+        schedule: "2019-07-07",
+        status: "in_progress",
+        notes: null,
+        base_cost: "1000.00",
+        cost_category: "monthly",
+        total_cost: "5000.00",
+        volumes: {
+          usv: 500,
+          inq: 100
+        },
+        costs: {
+          usv: "10.00",
+          inq: "50.00"
+        }
+      },
+      {
+        name: "ApartmentList.com Advertising",
+        tooltip: null,
+        schedule: "2019-07-08",
+        status: "in_progress",
+        notes: null,
+        base_cost: "1000.00",
+        cost_category: "monthly",
+        total_cost: "5000.00",
+        volumes: {
+          usv: 500,
+          inq: 100
+        },
+        costs: {
+          usv: "10.00",
+          inq: "50.00"
+        }
+      },
+      {
+        name: "Website Live Chat Implementation",
+        tooltip: null,
+        schedule: "2019-02-22",
+        status: "complete",
+        notes: null,
+        base_cost: "2000.00",
+        cost_category: "one_time",
+        total_cost: "2000.00",
+        volumes: {
+          usv: 0,
+          inq: 0
+        },
+        costs: {
+          usv: null,
+          inq: null
+        }
+      },
+      {
+        name: "Website Live Chat Service",
+        tooltip: "Sustain or improve USV>INQ rate",
+        schedule: "2019-07-08",
+        status: "in_progress",
+        notes: null,
+        base_cost: "200.00",
+        cost_category: "monthly",
+        total_cost: "1000.00",
+        volumes: {
+          usv: 0,
+          inq: 0
+        },
+        costs: {
+          usv: null,
+          inq: null
+        }
+      }
+    ]
+  },
+  leasing_enablement: {
+    tactics: [
+      {
+        name: "Brochure Redesign & Print",
+        tooltip: null,
+        schedule: "2019-02-01",
+        status: "complete",
+        notes: null,
+        base_cost: "10000.00",
+        cost_category: "one_time",
+        total_cost: "10000.00"
+      },
+      {
+        name: "Tour Souvenirs",
+        tooltip: null,
+        schedule: "2019-02-15",
+        status: "complete",
+        notes: null,
+        base_cost: "10000.00",
+        cost_category: "one_time",
+        total_cost: "10000.00"
+      },
+      {
+        name: "Wayfinding Signage",
+        tooltip: null,
+        schedule: "2019-05-01",
+        status: "in_progress",
+        notes: null,
+        base_cost: "15000.00",
+        cost_category: "one_time",
+        total_cost: "15000.00"
+      }
+    ]
+  },
+  market_intelligence: {
+    tactics: [
+      {
+        name: "Remarkably",
+        tooltip: "Baseline, Modeling, and Campaign Plan",
+        schedule: "2019-01-01",
+        status: "complete",
+        notes: "Outsourced/Hard costs only",
+        base_cost: "4000.00",
+        cost_category: "monthly",
+        total_cost: "20000.00"
+      },
+      {
+        name: "Google and Social Analytics",
+        tooltip:
+          "Tactical, deep-dive website traffic and social follower engagement data and insights",
+        schedule: "2019-06-30",
+        status: "in_progress",
+        notes: "Implementing monitoring, tracking, and reporting",
+        base_cost: "500.00",
+        cost_category: "monthly",
+        total_cost: "2500.00"
+      }
+    ]
+  }
+};
