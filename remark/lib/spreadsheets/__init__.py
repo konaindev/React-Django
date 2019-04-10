@@ -35,9 +35,9 @@ from .schema import (
     IntCell,
     NullChoiceCell,
     NullStrCell,
-    Schema,
     SchemaCell,
     StrCell,
+    unflatten_dict,
 )
 
 __all__ = (
@@ -77,9 +77,9 @@ __all__ = (
     rows_until,
     rows_while_empty,
     rows_while,
-    Schema,
     SchemaCell,
     set_cell,
     StrCell,
+    unflatten_dict,
     unparse_location,
 )

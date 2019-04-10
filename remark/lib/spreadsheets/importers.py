@@ -4,7 +4,7 @@ from .errors import ExcelProgrammingError, ExcelValidationError
 from .getset import get_cell
 from .rowcol import col_range, row_range
 from .parse import parse_location_or_default
-from .schema import DataType
+from .schema import DataType, unflatten_dict
 
 
 class ExcelImporter:
@@ -106,10 +106,12 @@ class ExcelImporter:
             raise ExcelProgrammingError(
                 message="Location provided to row() must contain a row!"
             )
-        return {
-            key: self.schema_value(schema_item, sheet=sheet, row=row)
-            for key, schema_item in schema.items()
-        }
+        return unflatten_dict(
+            {
+                key: self.schema_value(schema_item, sheet=sheet, row=row)
+                for key, schema_item in schema.items()
+            }
+        )
 
     def col(self, schema, location=None, sheet=None, col=None):
         """
@@ -125,10 +127,12 @@ class ExcelImporter:
             raise ExcelProgrammingError(
                 message="Location provided to col() must contain a column!"
             )
-        return {
-            key: self.schema_value(schema_item, sheet=sheet, col=col)
-            for key, schema_item in schema.items()
-        }
+        return unflatten_dict(
+            {
+                key: self.schema_value(schema_item, sheet=sheet, col=col)
+                for key, schema_item in schema.items()
+            }
+        )
 
     def row_table(
         self, schema, rows=None, start_row=None, end_row=None, location=None, sheet=None

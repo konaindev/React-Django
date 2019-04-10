@@ -1,72 +1,8 @@
 {
-  "overview": {
-    "theme": "Variable by audience, market, and asset",
-    "target_segments": [
-      {
-        "ordinal": "Primary",
-        "description": "Young Professionals (25-34)"
-      },
-      {
-        "ordinal": "Secondary",
-        "description": "Young Entrepreneurs (25-34)"
-      },
-      {
-        "ordinal": "Tertiary",
-        "description": "Young Couples (35-40)"
-      },
-      {
-        "ordinal": "Quarternary",
-        "description": "Established Singles (35-44)"
-      }
-    ],
-    "goal": "Achieve 95% lease-up by 6/30/2019",
-    "objectives": [
-      {
-        "title": "Reputation Building",
-        "description": "Grow reach and shape perceptions\n* Attract 11,979 USV\n* Attract 1,000 social followers\n* Add 1,100 contacts to property database (email list)"
-      },
-      {
-        "title": "Demand Creation",
-        "description": "Generate INQs and USVs:\n* Convert 6% of USVs to INQs\n* Attract 696 Inquires (calls, emails, walk-ins, chats, texts)\n* Conduct 270 tours (at 40% INQ>Tour conversion rate)"
-      },
-      {
-        "title": "Leasing Enablement",
-        "description": "Equip leasing team with effective processes and tools that delight\n* Provide highly responsive process for handling INQ and Tours\n* Capture 97 signed leases"
-      },
-      {
-        "title": "Marketing Intelligence",
-        "description": "Capture resident and prospect data:\n* Capture prospect data on website\n* Capture resident data about satisfaction and retention"
-      }
-    ],
-    "assumptions": "* Asset contains 260 units\n* 20% C&D rate\n* Model based on predictions generated in Sept. 2018",
-    "schedule": "Campaign begins in Feb. 2019 and finishes in July 2019",
-    "target_investments": {
-      "reputation_building": {
-        "total": "20000.00",
-        "acquisition": "15000.00",
-        "retention": "5000.00"
-      },
-      "demand_creation": {
-        "total": "15000.00",
-        "acquisition": "5000.00",
-        "retention": "10000.00"
-      },
-      "leasing_enablement": {
-        "total": "20000.00",
-        "acquisition": "10000.00",
-        "retention": "10000.00"
-      },
-      "market_intelligence": {
-        "total": "20500.00",
-        "acquisition": "20000.00",
-        "retention": "500.00"
-      },
-      "total": {
-        "total": "75500.00",
-        "acquisition": "50000.00",
-        "retention": "25500.00"
-      }
-    }
+  "meta": {
+    "campaign_months": 5,
+    "campaign_weeks": 20,
+    "campaign_days": 140
   },
   "reputation_building": {
     "tactics": [
@@ -97,7 +33,7 @@
         "audience": null,
         "tooltip": null,
         "schedule": "2019-02-01",
-        "status": "In Progress",
+        "status": "Complete",
         "notes": null,
         "base_cost": "5000.00",
         "cost_type": "One-Time",
@@ -108,7 +44,7 @@
         "audience": null,
         "tooltip": null,
         "schedule": "2019-02-15",
-        "status": "Not Started",
+        "status": "Complete",
         "notes": null,
         "base_cost": "10000.00",
         "cost_type": "One-Time",
@@ -134,7 +70,7 @@
         },
         "costs": {
           "usv": "5.00",
-          "inq": null
+          "inq": "0.00"
         }
       },
       {
@@ -144,16 +80,16 @@
         "schedule": "2019-07-03",
         "status": "In Progress",
         "notes": null,
-        "base_cost": "1000.00",
+        "base_cost": "2000.00",
         "cost_type": "Monthly",
-        "total_cost": "5000.00",
+        "total_cost": "10000.00",
         "volumes": {
           "usv": 1000,
           "inq": 0
         },
         "costs": {
-          "usv": "5.00",
-          "inq": null
+          "usv": "10.00",
+          "inq": "0.00"
         }
       },
       {
@@ -172,7 +108,7 @@
         },
         "costs": {
           "usv": "5.00",
-          "inq": null
+          "inq": "0.00"
         }
       },
       {
@@ -191,7 +127,7 @@
         },
         "costs": {
           "usv": "5.00",
-          "inq": null
+          "inq": "0.00"
         }
       },
       {
@@ -210,7 +146,7 @@
         },
         "costs": {
           "usv": "5.00",
-          "inq": null
+          "inq": "0.00"
         }
       },
       {
@@ -266,8 +202,8 @@
           "inq": 0
         },
         "costs": {
-          "usv": null,
-          "inq": null
+          "usv": "0.00",
+          "inq": "0.00"
         }
       },
       {
@@ -285,8 +221,8 @@
           "inq": 0
         },
         "costs": {
-          "usv": null,
-          "inq": null
+          "usv": "0.00",
+          "inq": "0.00"
         }
       }
     ]
@@ -349,14 +285,74 @@
         "status": "In Progress",
         "notes": "Implementing monitoring, tracking, and reporting",
         "base_cost": "500.00",
-        "cost_type": "Monthly",
-        "total_cost": "2500.00"
+        "cost_type": "One-Time",
+        "total_cost": "500.00"
       }
     ]
   },
-  "meta": {
-    "campaign_months": 5,
-    "campaign_weeks": 20,
-    "campaign_days": 140
+  "overview": {
+    "theme": "Variable by audience and segment",
+    "target_segments": [
+      {
+        "ordinal": "Primary",
+        "description": "Young Professionals (25-34)"
+      },
+      {
+        "ordinal": "Secondary",
+        "description": "Young Entreprenuers (25-34)"
+      },
+      {
+        "ordinal": "Tertiary",
+        "description": "Young Couples (35-44)"
+      }
+    ],
+    "goal": "Achieve 95% lease-up by 6/30/2019",
+    "objectives": [
+      {
+        "title": "Reputation Building",
+        "description": "Grow reach and shape perceptions\n* Attract 11,979 USV\n* Attract 1,000 social followers\n* Add 1,100 contacts to property database (email list)\n"
+      },
+      {
+        "title": "Demand Creation",
+        "description": "Generate INQs and USVs:\n* Convert 6% of USVs to INQs\n* Attract 696 Inquires\n* Conduct 270 tours\n"
+      },
+      {
+        "title": "Leasing Enablement",
+        "description": "Equip leasing team with effective processes and tools that delight\n* Provide highly responsive process for handling INQ and Tours\n* Capture 97 signed leases\n"
+      },
+      {
+        "title": "Marketing Intelligence",
+        "description": "Capture resident and prospect data:\n* Capture prospect data on webstie\n* Capture resident data about satisfaction and retention\n"
+      }
+    ],
+    "assumptions": "* Asset contains 260 units\n* 20% C&D rate\n* Model based on predictions generated in Sept. 2018\n",
+    "schedule": "Campaign begins in Feb. 2019 and finishes in July 2019",
+    "target_investments": {
+      "total": {
+        "total": "75500.00",
+        "acquisition": "50000.00",
+        "retention": "25500.00"
+      },
+      "market_intelligence": {
+        "total": "20500.00",
+        "acquisition": "20000.00",
+        "retention": "500.00"
+      },
+      "leasing_enablement": {
+        "total": "20000.00",
+        "acquisition": "10000.00",
+        "retention": "10000.00"
+      },
+      "demand_creation": {
+        "total": "15000.00",
+        "acquisition": "5000.00",
+        "retention": "10000.00"
+      },
+      "reputation_building": {
+        "total": "20000.00",
+        "acquisition": "15000.00",
+        "retention": "5000.00"
+      }
+    }
   }
 }

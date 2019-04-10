@@ -58,6 +58,17 @@ class CampaignPlanImporter(ProjectExcelImporter):
         "total_cost": CurrencyCell(find_cat("total cost")),
     }
 
+    FUNNEL_CATEGORY_ROW_SCHEMA = dict(
+        CATEGORY_ROW_SCHEMA,
+        **{
+            # These are unflattened by our base ExcelImporter
+            "volumes.usv": IntCell(find_cat("# of usv")),
+            "volumes.inq": IntCell(find_cat("# of inq")),
+            "costs.usv": CurrencyCell(find_cat("usv cost")),
+            "costs.inq": CurrencyCell(find_cat("inq cost")),
+        },
+    )
+
     OVERVIEW_TARGET_SEGMENT_SCHEMA = {
         "ordinal": StrCell(loc("Overview!A")),
         "description": StrCell(loc("Overview!B")),
@@ -80,9 +91,17 @@ class CampaignPlanImporter(ProjectExcelImporter):
 
     def build_category(self, category):
         rows = rows_until_empty(self.workbook, start_row=2, sheet=category, col="A")
-        self.cleaned_data[self.CATEGORY_TO_KEY[category]] = self.row_table(
+        row_table = self.row_table(
             schema=self.CATEGORY_ROW_SCHEMA, rows=rows, sheet=category
         )
+        return {"tactics": row_table}
+
+    def build_funnel_category(self, category):
+        rows = rows_until_empty(self.workbook, start_row=2, sheet=category, col="A")
+        row_table = self.row_table(
+            schema=self.FUNNEL_CATEGORY_ROW_SCHEMA, rows=rows, sheet=category
+        )
+        return {"tactics": row_table}
 
     def locate_overview_header_cell(self, predicate):
         predicate = predicate if callable(predicate) else matchp(iexact=predicate)
@@ -142,30 +161,42 @@ class CampaignPlanImporter(ProjectExcelImporter):
         )
 
     def build_overview(self):
-        overview = {}
+        def overview_str(predicate):
+            return self.schema_value(StrCell(find_overview(predicate)))
 
-        overview["theme"] = self.schema_value(StrCell(find_overview("theme")))
-        overview["target_segments"] = self.build_overview_target_segments()
-        overview["goal"] = self.schema_value(StrCell(find_overview("goal")))
-        overview["objectives"] = self.build_overview_objectives()
-        overview["assumptions"] = self.build_overview_assumptions()
-        overview["schedule"] = self.schema_value(StrCell(find_overview("schedule")))
-        overview["target_investments"] = self.build_overview_target_investments()
+        return {
+            "theme": overview_str("theme"),
+            "target_segments": self.build_overview_target_segments(),
+            "goal": overview_str("goal"),
+            "objectives": self.build_overview_objectives(),
+            "assumptions": self.build_overview_assumptions(),
+            "schedule": overview_str("schedule"),
+            "target_investments": self.build_overview_target_investments(),
+        }
 
-        self.cleaned_data["overview"] = overview
+    def build_meta(self):
+        return self.col(schema=self.META_COL_SCHEMA, col="B")
 
     def clean(self):
         super().clean()
 
         # Build the meta table
-        self.cleaned_data["meta"] = self.col(schema=self.META_COL_SCHEMA, col="B")
+        self.cleaned_data["meta"] = self.build_meta()
 
         # Build for each category
-        self.build_category("Reputation Building")
-        self.build_category("Demand Creation")
-        self.build_category("Leasing Enablement")
-        self.build_category("Market Intelligence")
+        self.cleaned_data["reputation_building"] = self.build_category(
+            "Reputation Building"
+        )
+        self.cleaned_data["demand_creation"] = self.build_funnel_category(
+            "Demand Creation"
+        )
+        self.cleaned_data["leasing_enablement"] = self.build_category(
+            "Leasing Enablement"
+        )
+        self.cleaned_data["market_intelligence"] = self.build_category(
+            "Market Intelligence"
+        )
 
         # Build the overview
-        self.build_overview()
+        self.cleaned_data["overview"] = self.build_overview()
 

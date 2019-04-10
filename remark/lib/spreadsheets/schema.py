@@ -123,7 +123,22 @@ def CurrencyCell(locator):
     return SchemaCell(locator, DataType.NUMERIC, lambda v: d_quant_currency(v))
 
 
-# At some point I might expand this; for now, schemas are simply
-# dictionaries with arbitrary keys associated with SchemaCell instances.
-Schema = dict
+def unflatten_dict(flat):
+    """
+    Convert a flat dictionary into a nested dictionary by treating any key that
+    contains a '.' as a nested path name.
 
+    For instance {"a": 1, "b.c": 2, "b.d": 3} --> {"a": 1, "b": {"c": 2, "d": 3}}
+
+    This is useful when building complex nested schemas.
+    """
+    unflat = {}
+
+    for k, v in flat.items():
+        path = unflat
+        keys = k.split(".")
+        for part in keys[:-1]:
+            path = path.setdefault(part, {})
+        path[keys[-1]] = v
+
+    return unflat
