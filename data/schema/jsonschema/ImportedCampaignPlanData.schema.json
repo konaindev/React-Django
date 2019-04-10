@@ -1,34 +1,7 @@
 {
-    "$ref": "#/definitions/CampaignPlan",
+    "$ref": "#/definitions/ImportedCampaignPlanData",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
-        "CampaignPlan": {
-            "properties": {
-                "demand_creation": {
-                    "$ref": "#/definitions/DemandCreation"
-                },
-                "leasing_enablement": {
-                    "$ref": "#/definitions/LeasingEnablement"
-                },
-                "market_intelligence": {
-                    "$ref": "#/definitions/MarketIntelligence"
-                },
-                "overview": {
-                    "$ref": "#/definitions/Overview"
-                },
-                "reputation_building": {
-                    "$ref": "#/definitions/ReputationBuilding"
-                }
-            },
-            "required": [
-                "demand_creation",
-                "leasing_enablement",
-                "market_intelligence",
-                "overview",
-                "reputation_building"
-            ],
-            "type": "object"
-        },
         "CampaignPlanTargetInvestmentCategory": {
             "description": "Breakdown of targets across funnels for a single investment category",
             "properties": {
@@ -217,6 +190,61 @@
             "required": [
                 "inq",
                 "usv"
+            ],
+            "type": "object"
+        },
+        "ImportedCampaignPlanData": {
+            "description": "For now, imported campaign plan data is equivalent to live campaign plan data.",
+            "properties": {
+                "demand_creation": {
+                    "$ref": "#/definitions/DemandCreation"
+                },
+                "leasing_enablement": {
+                    "$ref": "#/definitions/LeasingEnablement"
+                },
+                "market_intelligence": {
+                    "$ref": "#/definitions/MarketIntelligence"
+                },
+                "meta": {
+                    "$ref": "#/definitions/ImportedCampaignPlanMeta"
+                },
+                "overview": {
+                    "$ref": "#/definitions/Overview"
+                },
+                "reputation_building": {
+                    "$ref": "#/definitions/ReputationBuilding"
+                }
+            },
+            "required": [
+                "demand_creation",
+                "leasing_enablement",
+                "market_intelligence",
+                "meta",
+                "overview",
+                "reputation_building"
+            ],
+            "type": "object"
+        },
+        "ImportedCampaignPlanMeta": {
+            "description": "Metadata specific to the import, used in computations.",
+            "properties": {
+                "campaign_days": {
+                    "description": "The number of days in campaign",
+                    "type": "integer"
+                },
+                "campaign_months": {
+                    "description": "The number of campaign months",
+                    "type": "integer"
+                },
+                "campaign_weeks": {
+                    "description": "The number of weeks in campaign",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "campaign_days",
+                "campaign_months",
+                "campaign_weeks"
             ],
             "type": "object"
         },
