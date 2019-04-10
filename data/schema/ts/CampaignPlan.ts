@@ -1,5 +1,4 @@
 import * as t from "./types";
-import { InvestmentExpenses } from "./BaselineReport";
 
 interface TargetSegment {
   /** A description of ordered importance ('primary', 'tertiary') */
@@ -15,6 +14,22 @@ interface Objective {
 
   /** A detailed description, in markdown */
   description: t.markdown;
+}
+
+/** Breakdown of targets across funnels for a single investment category */
+interface CampaignPlanTargetInvestmentCategory {
+  acquisition: t.currency;
+  retention: t.currency;
+  total: t.currency;
+}
+
+/** Breakdown of targets across funnels for all investment categories */
+interface CampaignPlanTargetInvestments {
+  reputation_building: CampaignPlanTargetInvestmentCategory;
+  demand_creation: CampaignPlanTargetInvestmentCategory;
+  leasing_enablement: CampaignPlanTargetInvestmentCategory;
+  market_intelligence: CampaignPlanTargetInvestmentCategory;
+  total: CampaignPlanTargetInvestmentCategory;
 }
 
 interface Overview {
@@ -36,11 +51,8 @@ interface Overview {
   /** Description of the schedule ('Begins in late may 2019') */
   schedule: string;
 
-  /** Target investment, total */
-  target: t.currency;
-
-  /** Target investment, per-tactic */
-  target_investment: InvestmentExpenses;
+  /** Target investments */
+  target_investments: CampaignPlanTargetInvestments;
 }
 
 /** Allowable schedule statuses */

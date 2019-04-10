@@ -2,6 +2,54 @@
     "$ref": "#/definitions/ImportedCampaignPlanData",
     "$schema": "http://json-schema.org/draft-07/schema#",
     "definitions": {
+        "CampaignPlanTargetInvestmentCategory": {
+            "description": "Breakdown of targets across funnels for a single investment category",
+            "properties": {
+                "acquisition": {
+                    "type": "string"
+                },
+                "retention": {
+                    "type": "string"
+                },
+                "total": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "acquisition",
+                "retention",
+                "total"
+            ],
+            "type": "object"
+        },
+        "CampaignPlanTargetInvestments": {
+            "description": "Breakdown of targets across funnels for all investment categories",
+            "properties": {
+                "demand_creation": {
+                    "$ref": "#/definitions/CampaignPlanTargetInvestmentCategory"
+                },
+                "leasing_enablement": {
+                    "$ref": "#/definitions/CampaignPlanTargetInvestmentCategory"
+                },
+                "market_intelligence": {
+                    "$ref": "#/definitions/CampaignPlanTargetInvestmentCategory"
+                },
+                "reputation_building": {
+                    "$ref": "#/definitions/CampaignPlanTargetInvestmentCategory"
+                },
+                "total": {
+                    "$ref": "#/definitions/CampaignPlanTargetInvestmentCategory"
+                }
+            },
+            "required": [
+                "demand_creation",
+                "leasing_enablement",
+                "market_intelligence",
+                "reputation_building",
+                "total"
+            ],
+            "type": "object"
+        },
         "CostType": {
             "description": "Known cost types",
             "enum": [
@@ -200,30 +248,6 @@
             ],
             "type": "object"
         },
-        "InvestmentExpenses": {
-            "description": "Marketing investment expense buckets",
-            "properties": {
-                "demand_creation": {
-                    "type": "string"
-                },
-                "leasing_enablement": {
-                    "type": "string"
-                },
-                "market_intelligence": {
-                    "type": "string"
-                },
-                "reputation_building": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "demand_creation",
-                "leasing_enablement",
-                "market_intelligence",
-                "reputation_building"
-            ],
-            "type": "object"
-        },
         "LeasingEnablement": {
             "properties": {
                 "tactics": {
@@ -292,13 +316,9 @@
                     "description": "Description of the schedule ('Begins in late may 2019')",
                     "type": "string"
                 },
-                "target": {
-                    "description": "Target investment, total",
-                    "type": "string"
-                },
-                "target_investment": {
-                    "$ref": "#/definitions/InvestmentExpenses",
-                    "description": "Target investment, per-tactic"
+                "target_investments": {
+                    "$ref": "#/definitions/CampaignPlanTargetInvestments",
+                    "description": "Target investments"
                 },
                 "target_segments": {
                     "description": "The target segments, in order from most important to least",
@@ -317,8 +337,7 @@
                 "goal",
                 "objectives",
                 "schedule",
-                "target",
-                "target_investment",
+                "target_investments",
                 "target_segments",
                 "theme"
             ],

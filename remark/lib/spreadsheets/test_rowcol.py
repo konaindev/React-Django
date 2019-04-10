@@ -1,6 +1,7 @@
 from django.test import TestCase
 
 
+from .errors import ExcelError
 from .rowcol import (
     col_for_index,
     col_range,
@@ -10,6 +11,9 @@ from .rowcol import (
     cols_while,
     index_for_col,
     next_col,
+    next_row,
+    prev_col,
+    prev_row,
     row_range,
     rows_until_empty,
     rows_until,
@@ -40,11 +44,45 @@ class ColForIndexTestCase(TestCase):
 
 
 class NextColTestCase(TestCase):
-    def tets_next_col(self):
+    def test_next_col(self):
         self.assertEqual(next_col("A"), "B")
         self.assertEqual(next_col("Z"), "AA")
         self.assertEqual(next_col("AA"), "AB")
         self.assertEqual(next_col("AZ"), "BA")
+
+
+class PrevColTestCase(TestCase):
+    def test_prev_col(self):
+        self.assertEqual(prev_col("B"), "A")
+        self.assertEqual(prev_col("AA"), "Z")
+        self.assertEqual(prev_col("AB"), "AA")
+        self.assertEqual(prev_col("BA"), "AZ")
+
+    def test_prev_col_boundary(self):
+        with self.assertRaises(ExcelError):
+            prev_col("A")
+
+
+class NextRowTestCase(TestCase):
+    def test_next_row(self):
+        # This is all very silly
+        self.assertEqual(next_row(1), 2)
+        self.assertEqual(next_row(26), 27)
+        self.assertEqual(next_row(27), 28)
+        self.assertEqual(next_row(52), 53)
+
+
+class PrevRowTestCase(TestCase):
+    def test_prev_row(self):
+        # This is all very silly, too
+        self.assertEqual(prev_row(2), 1)
+        self.assertEqual(prev_row(27), 26)
+        self.assertEqual(prev_row(28), 27)
+        self.assertEqual(prev_row(53), 52)
+
+    def test_prev_row_boundary(self):
+        with self.assertRaises(ExcelError):
+            prev_row(1)
 
 
 class RangesTestCase(TestCase):
@@ -80,6 +118,12 @@ class TestRowsUntilAndWhile(TestCase):
     def test_rows_until(self):
         rows = rows_until(self.workbook, lambda v: v == "remarkably", 1, "sheet!A")
         self.assertEqual(list(rows), [1, 2, 3])
+
+    def test_rows_until_reverse(self):
+        rows = rows_until(
+            self.workbook, lambda v: v == "hello", 4, "sheet!A", next_fn=prev_row
+        )
+        self.assertEqual(list(rows), [4, 3, 2])
 
     def test_rows_until_nothing(self):
         rows = rows_until(self.workbook, lambda v: v == "hello", 1, "sheet!A")

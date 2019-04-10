@@ -18,6 +18,13 @@ def next_row(row):
     return row + 1
 
 
+def prev_row(row):
+    """Given a row index, return the previous row index."""
+    if row > 1:
+        return row - 1
+    raise ExcelProgrammingError(message=f"Row `{row}` does not have a predecessor.")
+
+
 def index_for_col(col):
     """Given a column name, return an index for it; A = 1"""
     # This is simple base-26 arithmetic, only there's no 0 in the alphabet
@@ -41,6 +48,14 @@ def next_col(col):
     return col_for_index(index_for_col(col) + 1)
 
 
+def prev_col(col):
+    """Given a column name, return the previous column name."""
+    index = index_for_col(col)
+    if index > 1:
+        return col_for_index(index - 1)
+    raise ExcelProgrammingError(message=f"Column `{col}` does not have a predecessor.")
+
+
 def col_range(start_col, end_col):
     """Return an iterable of cols; both start and end are inclusive."""
     return (
@@ -54,7 +69,15 @@ def _is_empty(value):
     return (value is None) or (isinstance(value, str) and not bool(value))
 
 
-def rows_until(workbook, predicate, start_row, location=None, sheet=None, col=None):
+def rows_until(
+    workbook,
+    predicate,
+    start_row,
+    location=None,
+    sheet=None,
+    col=None,
+    next_fn=next_row,
+):
     """
     Return an iterable of row numbers, starting with start_row, and ending
     as soon as a `predicate` about some column in the current row is True.
@@ -75,11 +98,19 @@ def rows_until(workbook, predicate, start_row, location=None, sheet=None, col=No
     done = p(row)
     while not done:
         yield row
-        row = next_row(row)
+        row = next_fn(row)
         done = p(row)
 
 
-def rows_while(workbook, predicate, start_row, location=None, sheet=None, col=None):
+def rows_while(
+    workbook,
+    predicate,
+    start_row,
+    location=None,
+    sheet=None,
+    col=None,
+    next_fn=next_row,
+):
     """
     Return an iterable of row numbers, starting with start_row, and ending
     as soon as a `predicate` about some column in the current row is False.
@@ -87,23 +118,35 @@ def rows_while(workbook, predicate, start_row, location=None, sheet=None, col=No
     This is the inverse of rows_until. We simply invert the `predicate`.
     """
     return rows_until(
-        workbook, lambda v: not predicate(v), start_row, location, sheet, col
+        workbook, lambda v: not predicate(v), start_row, location, sheet, col, next_fn
     )
 
 
-def rows_until_empty(workbook, start_row, location=None, sheet=None, col=None):
+def rows_until_empty(
+    workbook, start_row, location=None, sheet=None, col=None, next_fn=next_row
+):
     """
     Return an iterable of row numbers, starting with start_row, and ending
     as soon as the provided column is empty on the current row.
     """
-    return rows_until(workbook, _is_empty, start_row, location, sheet, col)
+    return rows_until(workbook, _is_empty, start_row, location, sheet, col, next_fn)
 
 
-def rows_while_empty(workbook, start_row, location=None, sheet=None, col=None):
-    return rows_while(workbook, _is_empty, start_row, location, sheet, col)
+def rows_while_empty(
+    workbook, start_row, location=None, sheet=None, col=None, next_fn=next_row
+):
+    return rows_while(workbook, _is_empty, start_row, location, sheet, col, next_fn)
 
 
-def cols_until(workbook, predicate, start_col, location=None, sheet=None, row=None):
+def cols_until(
+    workbook,
+    predicate,
+    start_col,
+    location=None,
+    sheet=None,
+    row=None,
+    next_fn=next_col,
+):
     """
     Return an iterable of column names, starting with start_col, and ending
     as soon as a `predicate` about some row in the current column is True.
@@ -124,11 +167,19 @@ def cols_until(workbook, predicate, start_col, location=None, sheet=None, row=No
     done = p(col)
     while not done:
         yield col
-        col = next_col(col)
+        col = next_fn(col)
         done = p(col)
 
 
-def cols_while(workbook, predicate, start_col, location=None, sheet=None, row=None):
+def cols_while(
+    workbook,
+    predicate,
+    start_col,
+    location=None,
+    sheet=None,
+    row=None,
+    next_fn=next_col,
+):
     """
     Return an iterable of column names, starting with start_col, and ending
     as soon as a `predicate` about some row in the current column is False.
@@ -136,18 +187,22 @@ def cols_while(workbook, predicate, start_col, location=None, sheet=None, row=No
     This is the inverse of cols_until. We simply invert the `predicate`.
     """
     return cols_until(
-        workbook, lambda v: not predicate(v), start_col, location, sheet, row
+        workbook, lambda v: not predicate(v), start_col, location, sheet, row, next_col
     )
 
 
-def cols_until_empty(workbook, start_col, location=None, sheet=None, row=None):
+def cols_until_empty(
+    workbook, start_col, location=None, sheet=None, row=None, next_fn=next_col
+):
     """
     Return an iterable of row numbers, starting with start_row, and ending
     as soon as the provided column is empty on the current row.
     """
-    return cols_until(workbook, _is_empty, start_col, location, sheet, row)
+    return cols_until(workbook, _is_empty, start_col, location, sheet, row, next_fn)
 
 
-def cols_while_empty(workbook, start_col, location=None, sheet=None, row=None):
-    return cols_while(workbook, _is_empty, start_col, location, sheet, row)
+def cols_while_empty(
+    workbook, start_col, location=None, sheet=None, row=None, next_fn=next_col
+):
+    return cols_while(workbook, _is_empty, start_col, location, sheet, row, next_fn)
 

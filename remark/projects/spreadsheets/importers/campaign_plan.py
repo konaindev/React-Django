@@ -6,8 +6,10 @@ from remark.lib.spreadsheets import (
     find_col,
     find_row,
     IntCell,
+    loc,
     NullChoiceCell,
     NullStrCell,
+    prev_row,
     rows_until_empty,
     StrCell,
 )
@@ -23,6 +25,11 @@ def find_meta(predicate):
 def find_cat(predicate):
     """Return a locator that scans the 1st row of any sheet for header values."""
     return find_col(1, predicate)
+
+
+def find_overview(predicate):
+    """Return a locator that scans column A of the overview sheet for header values."""
+    return find_row("Overview!A", predicate, target="B")
 
 
 class CampaignPlanImporter(ProjectExcelImporter):
@@ -51,11 +58,101 @@ class CampaignPlanImporter(ProjectExcelImporter):
         "total_cost": CurrencyCell(find_cat("total cost")),
     }
 
-    def build_category(self, category, sheet):
-        rows = rows_until_empty(self.workbook, start_row=2, sheet=sheet, col="A")
-        self.cleaned_data[category] = self.row_table(
-            schema=self.CATEGORY_ROW_SCHEMA, rows=rows, sheet=sheet
+    OVERVIEW_TARGET_SEGMENT_SCHEMA = {
+        "ordinal": StrCell(loc("Overview!A")),
+        "description": StrCell(loc("Overview!B")),
+    }
+
+    OVERVIEW_TARGET_INVESMENT_SCHEMA = {
+        "category": StrCell(loc("Overview!A")),
+        "total": CurrencyCell(loc("Overview!B")),
+        "acquisition": CurrencyCell(loc("Overview!C")),
+        "retention": CurrencyCell(loc("Overview!D")),
+    }
+
+    CATEGORY_TO_KEY = {
+        "Reputation Building": "reputation_building",
+        "Demand Creation": "demand_creation",
+        "Leasing Enablement": "leasing_enablement",
+        "Market Intelligence": "market_intelligence",
+        "Total": "total",
+    }
+
+    def build_category(self, category):
+        rows = rows_until_empty(self.workbook, start_row=2, sheet=category, col="A")
+        self.cleaned_data[self.CATEGORY_TO_KEY[category]] = self.row_table(
+            schema=self.CATEGORY_ROW_SCHEMA, rows=rows, sheet=category
         )
+
+    def locate_overview_header_cell(self, predicate):
+        predicate = predicate if callable(predicate) else matchp(iexact=predicate)
+        return find_row("Overview!A", predicate)(self.workbook)
+
+    def build_markdown(self, start_row):
+        rows = rows_until_empty(
+            self.workbook, start_row=start_row, location="Overview!B"
+        )
+        # CONSIDER it would be nice to have an analogue of Django ORM's values(flat=True)
+        text_dicts = self.row_table({"text": StrCell(loc("Overview!B"))}, rows=rows)
+        texts = [text_dict["text"] for text_dict in text_dicts]
+        return "\n".join(texts) + "\n"  # Reasonable people demand trailing newlines.
+
+    def build_markdown_for_header(self, predicate):
+        _, _, row = self.locate_overview_header_cell(predicate)
+        return self.build_markdown(start_row=row)
+
+    def build_overview_target_segments(self):
+        _, _, row = self.locate_overview_header_cell("target segments")
+        rows = rows_until_empty(self.workbook, start_row=row + 1, location="Overview!A")
+        return self.row_table(self.OVERVIEW_TARGET_SEGMENT_SCHEMA, rows=rows)
+
+    def build_overview_objective(self, category):
+        # This will find the first occurence of the header, which given
+        # our current schema (with target investment headers at the very bottom
+        # of column A) should work fine.
+        return {
+            "title": category,
+            "description": self.build_markdown_for_header(category),
+        }
+
+    def build_overview_objectives(self):
+        return [
+            self.build_overview_objective("Reputation Building"),
+            self.build_overview_objective("Demand Creation"),
+            self.build_overview_objective("Leasing Enablement"),
+            self.build_overview_objective("Marketing Intelligence"),
+        ]
+
+    def build_overview_assumptions(self):
+        return self.build_markdown_for_header("assumptions")
+
+    def build_overview_target_investments(self):
+        # Find "Total" row and work backwards
+        _, _, row = self.locate_overview_header_cell("total")
+        rows = rows_until_empty(
+            self.workbook, start_row=row, location="Overview!A", next_fn=prev_row
+        )
+        items = self.row_table(self.OVERVIEW_TARGET_INVESMENT_SCHEMA, rows=rows)
+        # Convert dictionaries with the category key *inside* them
+        # into nested dictionaries where the category key is *outside*.
+        # aka {"category": "Reputation Building", "total": "100"} -->
+        # {"reputation_building": {"total": "100"}}
+        return dict(
+            (self.CATEGORY_TO_KEY[item.pop("category")], item) for item in items
+        )
+
+    def build_overview(self):
+        overview = {}
+
+        overview["theme"] = self.schema_value(StrCell(find_overview("theme")))
+        overview["target_segments"] = self.build_overview_target_segments()
+        overview["goal"] = self.schema_value(StrCell(find_overview("goal")))
+        overview["objectives"] = self.build_overview_objectives()
+        overview["assumptions"] = self.build_overview_assumptions()
+        overview["schedule"] = self.schema_value(StrCell(find_overview("schedule")))
+        overview["target_investments"] = self.build_overview_target_investments()
+
+        self.cleaned_data["overview"] = overview
 
     def clean(self):
         super().clean()
@@ -64,8 +161,11 @@ class CampaignPlanImporter(ProjectExcelImporter):
         self.cleaned_data["meta"] = self.col(schema=self.META_COL_SCHEMA, col="B")
 
         # Build for each category
-        self.build_category("reputation_building", "Reputation Building")
-        self.build_category("demand_creation", "Demand Creation")
-        self.build_category("leasing_enablement", "Leasing Enablement")
-        self.build_category("market_intelligence", "Market Intelligence")
+        self.build_category("Reputation Building")
+        self.build_category("Demand Creation")
+        self.build_category("Leasing Enablement")
+        self.build_category("Market Intelligence")
+
+        # Build the overview
+        self.build_overview()
 
