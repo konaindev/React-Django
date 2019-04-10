@@ -1,6 +1,10 @@
 import LeasingPerformanceReport from "./index";
 import renderer from "react-test-renderer";
-import { BASELINE_REPORT, PERFORMANCE_REPORT } from "./leasing_performance_report.stories";
+import {
+  props_baseline,
+  props_performance,
+  props_section_items
+} from "./props";
 
 describe("LeasingPerformanceReport", () => {
   beforeEach(() => {
@@ -8,27 +12,23 @@ describe("LeasingPerformanceReport", () => {
   });
 
   it("renders baseline report correctly", () => {
-    const props = {
-      report: BASELINE_REPORT
-    };
-    const tree = renderer.create(<LeasingPerformanceReport {...props} />).toJSON();
+    const tree = renderer
+      .create(<LeasingPerformanceReport {...props_baseline} />)
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it("renders performance report correctly", () => {
-    const props = {
-      report: PERFORMANCE_REPORT
-    };
-    const tree = renderer.create(<LeasingPerformanceReport {...props} />).toJSON();
+    const tree = renderer
+      .create(<LeasingPerformanceReport {...props_performance} />)
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it("renders with section items correctly", () => {
-    const props = {
-      report: PERFORMANCE_REPORT,
-      sectionItems: <div>"I AM SECTION ITEMS"</div>
-    };
-    const tree = renderer.create(<LeasingPerformanceReport {...props} />).toJSON();
+    const tree = renderer
+      .create(<LeasingPerformanceReport {...props_section_items} />)
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

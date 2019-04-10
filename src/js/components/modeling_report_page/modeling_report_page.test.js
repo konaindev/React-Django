@@ -1,7 +1,7 @@
 import renderer from "react-test-renderer";
 import ModelingReportPage from "./index";
-import { props as report } from "../modeling_view/modeling_view.stories.js";
-import { project, report_links } from "../project_page/project_page.stories.js";
+import { props as report } from "../modeling_view/props.js";
+import { project, report_links } from "../project_page/props";
 
 describe("ModelingReportPage", () => {
   it("renders correctly", () => {
