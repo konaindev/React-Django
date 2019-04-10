@@ -7,6 +7,7 @@ from ..kinds import SpreadsheetKind  # noqa
 from .baseline_perf import BaselinePerfActivator
 from .json_activators import CampaignPlanActivator
 
+
 ACTIVATORS = {
     SpreadsheetKind.PERIODS: BaselinePerfActivator,
     SpreadsheetKind.CAMPAIGN: CampaignPlanActivator,
