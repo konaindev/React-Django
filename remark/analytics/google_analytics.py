@@ -7,12 +7,12 @@ import os
 SCOPES = ["https://www.googleapis.com/auth/analytics.readonly"]
 
 AGE_BRACKETS = [
-    '18-24',
-    '25-34',
-    '35-44',
-    '45-54',
-    '55-64',
-    '65+',
+    "18-24",
+    "25-34",
+    "35-44",
+    "45-54",
+    "55-64",
+    "65+",
 ]
 
 def initialize_analytics_reporting():
@@ -68,20 +68,24 @@ def get_report_usv_age_from_response(response):
     ]
     """
 
-    report_rows = response.get('reports', [None])[0].get('data', {}).get('rows', [])
+    report_rows = response.get("reports", [None])[0].get("data", {}).get("rows", [])
     if len(report_rows) <= 0:
         return [0] * len(AGE_BRACKETS)
 
     row = report_rows[0]
     usv = []
-    dimensions = row.get('dimensions', [])
-    metrics = row.get('metrics', [])
+    dimensions = row.get("dimensions", [])
+    metrics = row.get("metrics", [])
     for age_range in AGE_BRACKETS:
         try:
             idx = dimensions.index(age_range)
-            usv.append(int(metrics[idx]['values'][0]))
-        except:
-            usv.append(0) 
+        except ValueError:
+            usv.append(0)
+            continue
+        try:
+            usv.append(int(metrics[idx]["values"][0]))
+        except IndexError:
+            raise ValueError("Value doesn't exist for age range {}".format(age_range))
     return usv
 
 

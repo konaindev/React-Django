@@ -44,5 +44,8 @@ class GoogleAnlayticsTest(TestCase):
         self.assertEqual(result, [0, 18, 0, 0, 0, 0])
 
     def test_get_report_usv_age_from_mal_response(self):
-        result = get_report_usv_age_from_response(self.mal_response_mock)
-        self.assertEqual(result, [0, 0, 0, 0, 0, 0])
+        self.assertRaises(
+            ValueError,
+            get_report_usv_age_from_response,
+            self.mal_response_mock
+        )
