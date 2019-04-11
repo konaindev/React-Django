@@ -32,6 +32,7 @@ django-storages = "*"
 pillow = "*"
 boto3 = "*"
 django-stdimage = "*"
+google-api-python-client = "*"
 
 [requires]
 python_version = "3.7"
