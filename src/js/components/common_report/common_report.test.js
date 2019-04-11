@@ -1,6 +1,6 @@
 import CommonReport from "./index";
 import renderer from "react-test-renderer";
-import { BASELINE_REPORT, PERFORMANCE_REPORT } from "./common_report.stories";
+import { props_baseline, props_performance, props_date_span } from "./props";
 
 describe("CommonReport", () => {
   beforeEach(() => {
@@ -8,30 +8,21 @@ describe("CommonReport", () => {
   });
 
   it("renders baseline report correctly", () => {
-    const props = {
-      report: BASELINE_REPORT,
-      type: "baseline"
-    };
-    const tree = renderer.create(<CommonReport {...props} />).toJSON();
+    const tree = renderer.create(<CommonReport {...props_baseline} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it("renders performance report correctly", () => {
-    const props = {
-      report: PERFORMANCE_REPORT,
-      type: "performance"
-    };
-    const tree = renderer.create(<CommonReport {...props} />).toJSON();
+    const tree = renderer
+      .create(<CommonReport {...props_performance} />)
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
   it("renders with date span correctly", () => {
-    const props = {
-      report: PERFORMANCE_REPORT,
-      type: "performance",
-      dateSpan: <div>"MY DATE SPAN GOES HERE"</div>
-    };
-    const tree = renderer.create(<CommonReport {...props} />).toJSON();
+    const tree = renderer
+      .create(<CommonReport {...props_date_span} />)
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

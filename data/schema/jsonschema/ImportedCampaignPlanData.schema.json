@@ -1,0 +1,458 @@
+{
+    "$ref": "#/definitions/ImportedCampaignPlanData",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "CampaignPlanTargetInvestmentCategory": {
+            "description": "Breakdown of targets across funnels for a single investment category",
+            "properties": {
+                "acquisition": {
+                    "type": "string"
+                },
+                "retention": {
+                    "type": "string"
+                },
+                "total": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "acquisition",
+                "retention",
+                "total"
+            ],
+            "type": "object"
+        },
+        "CampaignPlanTargetInvestments": {
+            "description": "Breakdown of targets across funnels for all investment categories",
+            "properties": {
+                "demand_creation": {
+                    "$ref": "#/definitions/CampaignPlanTargetInvestmentCategory"
+                },
+                "leasing_enablement": {
+                    "$ref": "#/definitions/CampaignPlanTargetInvestmentCategory"
+                },
+                "market_intelligence": {
+                    "$ref": "#/definitions/CampaignPlanTargetInvestmentCategory"
+                },
+                "reputation_building": {
+                    "$ref": "#/definitions/CampaignPlanTargetInvestmentCategory"
+                },
+                "total": {
+                    "$ref": "#/definitions/CampaignPlanTargetInvestmentCategory"
+                }
+            },
+            "required": [
+                "demand_creation",
+                "leasing_enablement",
+                "market_intelligence",
+                "reputation_building",
+                "total"
+            ],
+            "type": "object"
+        },
+        "CostType": {
+            "description": "Known cost types",
+            "enum": [
+                "Monthly",
+                "One-Time",
+                "Weekly"
+            ],
+            "type": "string"
+        },
+        "DemandCreation": {
+            "properties": {
+                "tactics": {
+                    "description": "List of tactics for this category",
+                    "items": {
+                        "$ref": "#/definitions/DemandCreationTactic"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "tactics"
+            ],
+            "type": "object"
+        },
+        "DemandCreationTactic": {
+            "properties": {
+                "audience": {
+                    "anyOf": [
+                        {
+                            "enum": [
+                                "Acquisition",
+                                "Retention"
+                            ],
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "The target audience (if applicable)"
+                },
+                "base_cost": {
+                    "description": "The base cost for the tactic",
+                    "type": "string"
+                },
+                "cost_type": {
+                    "$ref": "#/definitions/CostType",
+                    "description": "The cost type"
+                },
+                "costs": {
+                    "$ref": "#/definitions/DemandCreationTargets<string|null>",
+                    "description": "Campaign plan target costs for demand creation"
+                },
+                "name": {
+                    "description": "The name of the tactic, ('Brand Strategy')",
+                    "type": "string"
+                },
+                "notes": {
+                    "description": "Notes about the tactic (arbitrary markdown)",
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "schedule": {
+                    "description": "The scheduled date",
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/definitions/Status",
+                    "description": "The current schedule status"
+                },
+                "tooltip": {
+                    "description": "Details about the tactic (shown in tooltip, typically)",
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "total_cost": {
+                    "description": "Total cost @computed",
+                    "type": "string"
+                },
+                "volumes": {
+                    "$ref": "#/definitions/DemandCreationTargets<number>",
+                    "description": "Campaign plan target volumes for demand creation"
+                }
+            },
+            "required": [
+                "audience",
+                "base_cost",
+                "cost_type",
+                "costs",
+                "name",
+                "notes",
+                "schedule",
+                "status",
+                "tooltip",
+                "total_cost",
+                "volumes"
+            ],
+            "type": "object"
+        },
+        "DemandCreationTargets<number>": {
+            "properties": {
+                "inq": {
+                    "description": "Inquiries",
+                    "type": "number"
+                },
+                "usv": {
+                    "description": "Unique site visitors",
+                    "type": "number"
+                }
+            },
+            "required": [
+                "inq",
+                "usv"
+            ],
+            "type": "object"
+        },
+        "DemandCreationTargets<string|null>": {
+            "properties": {
+                "inq": {
+                    "description": "Inquiries",
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "usv": {
+                    "description": "Unique site visitors",
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                }
+            },
+            "required": [
+                "inq",
+                "usv"
+            ],
+            "type": "object"
+        },
+        "ImportedCampaignPlanData": {
+            "description": "For now, imported campaign plan data is equivalent to live campaign plan data.",
+            "properties": {
+                "demand_creation": {
+                    "$ref": "#/definitions/DemandCreation"
+                },
+                "leasing_enablement": {
+                    "$ref": "#/definitions/LeasingEnablement"
+                },
+                "market_intelligence": {
+                    "$ref": "#/definitions/MarketIntelligence"
+                },
+                "meta": {
+                    "$ref": "#/definitions/ImportedCampaignPlanMeta"
+                },
+                "overview": {
+                    "$ref": "#/definitions/Overview"
+                },
+                "reputation_building": {
+                    "$ref": "#/definitions/ReputationBuilding"
+                }
+            },
+            "required": [
+                "demand_creation",
+                "leasing_enablement",
+                "market_intelligence",
+                "meta",
+                "overview",
+                "reputation_building"
+            ],
+            "type": "object"
+        },
+        "ImportedCampaignPlanMeta": {
+            "description": "Metadata specific to the import, used in computations.",
+            "properties": {
+                "campaign_days": {
+                    "description": "The number of days in campaign",
+                    "type": "integer"
+                },
+                "campaign_months": {
+                    "description": "The number of campaign months",
+                    "type": "integer"
+                },
+                "campaign_weeks": {
+                    "description": "The number of weeks in campaign",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "campaign_days",
+                "campaign_months",
+                "campaign_weeks"
+            ],
+            "type": "object"
+        },
+        "LeasingEnablement": {
+            "properties": {
+                "tactics": {
+                    "description": "List of tactics for this category",
+                    "items": {
+                        "$ref": "#/definitions/Tactic"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "tactics"
+            ],
+            "type": "object"
+        },
+        "MarketIntelligence": {
+            "properties": {
+                "tactics": {
+                    "description": "List of tactics for this category",
+                    "items": {
+                        "$ref": "#/definitions/Tactic"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "tactics"
+            ],
+            "type": "object"
+        },
+        "Objective": {
+            "properties": {
+                "description": {
+                    "description": "A detailed description, in markdown",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "The primary title for the objective ('Reputation Building')",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "description",
+                "title"
+            ],
+            "type": "object"
+        },
+        "Overview": {
+            "properties": {
+                "assumptions": {
+                    "description": "Campaign assumptions",
+                    "type": "string"
+                },
+                "goal": {
+                    "description": "The overall campaign goal ('achieve lease-up')",
+                    "type": "string"
+                },
+                "objectives": {
+                    "description": "Campaign objectives",
+                    "items": {
+                        "$ref": "#/definitions/Objective"
+                    },
+                    "type": "array"
+                },
+                "schedule": {
+                    "description": "Description of the schedule ('Begins in late may 2019')",
+                    "type": "string"
+                },
+                "target_investments": {
+                    "$ref": "#/definitions/CampaignPlanTargetInvestments",
+                    "description": "Target investments"
+                },
+                "target_segments": {
+                    "description": "The target segments, in order from most important to least",
+                    "items": {
+                        "$ref": "#/definitions/TargetSegment"
+                    },
+                    "type": "array"
+                },
+                "theme": {
+                    "description": "The overall campaign theme ('Variable by audience and segment')",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "assumptions",
+                "goal",
+                "objectives",
+                "schedule",
+                "target_investments",
+                "target_segments",
+                "theme"
+            ],
+            "type": "object"
+        },
+        "ReputationBuilding": {
+            "properties": {
+                "tactics": {
+                    "description": "List of tactics for this category",
+                    "items": {
+                        "$ref": "#/definitions/Tactic"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "tactics"
+            ],
+            "type": "object"
+        },
+        "Status": {
+            "description": "Allowable schedule statuses",
+            "enum": [
+                "Complete",
+                "In Progress",
+                "Not Started"
+            ],
+            "type": "string"
+        },
+        "Tactic": {
+            "properties": {
+                "audience": {
+                    "anyOf": [
+                        {
+                            "enum": [
+                                "Acquisition",
+                                "Retention"
+                            ],
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "The target audience (if applicable)"
+                },
+                "base_cost": {
+                    "description": "The base cost for the tactic",
+                    "type": "string"
+                },
+                "cost_type": {
+                    "$ref": "#/definitions/CostType",
+                    "description": "The cost type"
+                },
+                "name": {
+                    "description": "The name of the tactic, ('Brand Strategy')",
+                    "type": "string"
+                },
+                "notes": {
+                    "description": "Notes about the tactic (arbitrary markdown)",
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "schedule": {
+                    "description": "The scheduled date",
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/definitions/Status",
+                    "description": "The current schedule status"
+                },
+                "tooltip": {
+                    "description": "Details about the tactic (shown in tooltip, typically)",
+                    "type": [
+                        "null",
+                        "string"
+                    ]
+                },
+                "total_cost": {
+                    "description": "Total cost @computed",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "audience",
+                "base_cost",
+                "cost_type",
+                "name",
+                "notes",
+                "schedule",
+                "status",
+                "tooltip",
+                "total_cost"
+            ],
+            "type": "object"
+        },
+        "TargetSegment": {
+            "properties": {
+                "description": {
+                    "description": "A description of the segment ('Young Professionals')",
+                    "type": "string"
+                },
+                "ordinal": {
+                    "description": "A description of ordered importance ('primary', 'tertiary')",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "description",
+                "ordinal"
+            ],
+            "type": "object"
+        }
+    }
+}
+

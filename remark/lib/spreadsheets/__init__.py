@@ -1,35 +1,85 @@
 """
 A library for reading data from, and writing data to, excel spreadsheets.
 """
-from .converters import date_converter, currency_converter
 from .errors import ExcelError, ExcelValidationError, ExcelProgrammingError
-from .locators import BaseLocator, loc, find_col, find_row
+from .getset import get_cell, set_cell
 from .importers import ExcelImporter
+from .locators import BaseLocator, loc, find_col, find_row
 from .parse import parse_location, unparse_location
-from .rowcol import row_range, index_for_col, col_for_index, next_col, col_range
-from .schema import DataType, SchemaCell, SchemaCol, SchemaRow, Schema
+from .rowcol import (
+    col_for_index,
+    col_range,
+    cols_until_empty,
+    cols_until,
+    cols_while_empty,
+    cols_while,
+    index_for_col,
+    next_col,
+    next_row,
+    prev_col,
+    prev_row,
+    row_range,
+    rows_until_empty,
+    rows_until,
+    rows_while_empty,
+    rows_while,
+)
+from .schema import (
+    ChoiceCell,
+    CurrencyCell,
+    DataType,
+    DateCell,
+    DateTimeCell,
+    DecimalCell,
+    FloatCell,
+    IntCell,
+    NullChoiceCell,
+    NullStrCell,
+    SchemaCell,
+    StrCell,
+    unflatten_dict,
+)
 
 __all__ = (
     BaseLocator,
+    ChoiceCell,
     col_for_index,
     col_range,
-    currency_converter,
+    cols_until_empty,
+    cols_until,
+    cols_while_empty,
+    cols_while,
+    CurrencyCell,
     DataType,
-    date_converter,
+    DateCell,
+    DateTimeCell,
+    DecimalCell,
     ExcelError,
     ExcelImporter,
     ExcelProgrammingError,
     ExcelValidationError,
     find_col,
     find_row,
+    FloatCell,
+    get_cell,
     index_for_col,
+    IntCell,
     loc,
     next_col,
+    next_row,
+    NullChoiceCell,
+    NullStrCell,
     parse_location,
+    prev_col,
+    prev_row,
     row_range,
-    Schema,
+    rows_until_empty,
+    rows_until,
+    rows_while_empty,
+    rows_while,
     SchemaCell,
-    SchemaCol,
-    SchemaRow,
+    set_cell,
+    StrCell,
+    unflatten_dict,
     unparse_location,
 )

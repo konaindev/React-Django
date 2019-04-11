@@ -1,5 +1,4 @@
 import * as t from "./types";
-import { InvestmentExpenses } from "./BaselineReport";
 
 interface TargetSegment {
   /** A description of ordered importance ('primary', 'tertiary') */
@@ -15,6 +14,22 @@ interface Objective {
 
   /** A detailed description, in markdown */
   description: t.markdown;
+}
+
+/** Breakdown of targets across funnels for a single investment category */
+interface CampaignPlanTargetInvestmentCategory {
+  acquisition: t.currency;
+  retention: t.currency;
+  total: t.currency;
+}
+
+/** Breakdown of targets across funnels for all investment categories */
+interface CampaignPlanTargetInvestments {
+  reputation_building: CampaignPlanTargetInvestmentCategory;
+  demand_creation: CampaignPlanTargetInvestmentCategory;
+  leasing_enablement: CampaignPlanTargetInvestmentCategory;
+  market_intelligence: CampaignPlanTargetInvestmentCategory;
+  total: CampaignPlanTargetInvestmentCategory;
 }
 
 interface Overview {
@@ -36,29 +51,36 @@ interface Overview {
   /** Description of the schedule ('Begins in late may 2019') */
   schedule: string;
 
-  /** Target investment, total */
-  target: t.currency;
-
-  /** Target investment, per-tactic */
-  target_investment: InvestmentExpenses;
+  /** Target investments */
+  target_investments: CampaignPlanTargetInvestments;
 }
 
 /** Allowable schedule statuses */
-enum ScheduleStatus {
-  not_started = "not_started",
-  in_progress = "in_progress",
-  complete = "complete"
+enum Status {
+  not_started = "Not Started",
+  in_progress = "In Progress",
+  complete = "Complete"
 }
 
-/** Known cost categories */
-enum CostCategory {
-  one_time = "one_time",
-  monthly = "monthly"
+/** Known cost types */
+enum CostType {
+  one_time = "One-Time",
+  monthly = "Monthly",
+  weekly = "Weekly"
+}
+
+/** Audience types */
+enum Audience {
+  acquisition = "Acquisition",
+  retention = "Retention"
 }
 
 interface Tactic {
   /** The name of the tactic, ('Brand Strategy') */
   name: string;
+
+  /** The target audience (if applicable) */
+  audience: Audience | null;
 
   /** Details about the tactic (shown in tooltip, typically) */
   tooltip: string | null;
@@ -67,7 +89,7 @@ interface Tactic {
   schedule: t.date;
 
   /** The current schedule status */
-  status: ScheduleStatus;
+  status: Status;
 
   /** Notes about the tactic (arbitrary markdown) */
   notes: t.markdown | null;
@@ -75,8 +97,8 @@ interface Tactic {
   /** The base cost for the tactic */
   base_cost: t.currency;
 
-  /** The cost category */
-  cost_category: CostCategory;
+  /** The cost type */
+  cost_type: CostType;
 
   /** Total cost @computed */
   total_cost: t.currency;

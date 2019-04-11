@@ -2,8 +2,8 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 
-import { props as report } from "../modeling_view/modeling_view.stories.js";
-import { project, report_links } from "../project_page/project_page.stories.js";
+import { props as report } from "../modeling_view/props.js";
+import { project, report_links } from "../project_page/props";
 
 import ModelingReportPage from "./index";
 

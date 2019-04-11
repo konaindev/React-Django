@@ -29,11 +29,60 @@
             ],
             "type": "object"
         },
-        "CostCategory": {
-            "description": "Known cost categories",
+        "CampaignPlanTargetInvestmentCategory": {
+            "description": "Breakdown of targets across funnels for a single investment category",
+            "properties": {
+                "acquisition": {
+                    "type": "string"
+                },
+                "retention": {
+                    "type": "string"
+                },
+                "total": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "acquisition",
+                "retention",
+                "total"
+            ],
+            "type": "object"
+        },
+        "CampaignPlanTargetInvestments": {
+            "description": "Breakdown of targets across funnels for all investment categories",
+            "properties": {
+                "demand_creation": {
+                    "$ref": "#/definitions/CampaignPlanTargetInvestmentCategory"
+                },
+                "leasing_enablement": {
+                    "$ref": "#/definitions/CampaignPlanTargetInvestmentCategory"
+                },
+                "market_intelligence": {
+                    "$ref": "#/definitions/CampaignPlanTargetInvestmentCategory"
+                },
+                "reputation_building": {
+                    "$ref": "#/definitions/CampaignPlanTargetInvestmentCategory"
+                },
+                "total": {
+                    "$ref": "#/definitions/CampaignPlanTargetInvestmentCategory"
+                }
+            },
+            "required": [
+                "demand_creation",
+                "leasing_enablement",
+                "market_intelligence",
+                "reputation_building",
+                "total"
+            ],
+            "type": "object"
+        },
+        "CostType": {
+            "description": "Known cost types",
             "enum": [
-                "monthly",
-                "one_time"
+                "Monthly",
+                "One-Time",
+                "Weekly"
             ],
             "type": "string"
         },
@@ -54,13 +103,28 @@
         },
         "DemandCreationTactic": {
             "properties": {
+                "audience": {
+                    "anyOf": [
+                        {
+                            "enum": [
+                                "Acquisition",
+                                "Retention"
+                            ],
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "The target audience (if applicable)"
+                },
                 "base_cost": {
                     "description": "The base cost for the tactic",
                     "type": "string"
                 },
-                "cost_category": {
-                    "$ref": "#/definitions/CostCategory",
-                    "description": "The cost category"
+                "cost_type": {
+                    "$ref": "#/definitions/CostType",
+                    "description": "The cost type"
                 },
                 "costs": {
                     "$ref": "#/definitions/DemandCreationTargets<string|null>",
@@ -82,7 +146,7 @@
                     "type": "string"
                 },
                 "status": {
-                    "$ref": "#/definitions/ScheduleStatus",
+                    "$ref": "#/definitions/Status",
                     "description": "The current schedule status"
                 },
                 "tooltip": {
@@ -102,8 +166,9 @@
                 }
             },
             "required": [
+                "audience",
                 "base_cost",
-                "cost_category",
+                "cost_type",
                 "costs",
                 "name",
                 "notes",
@@ -152,30 +217,6 @@
             "required": [
                 "inq",
                 "usv"
-            ],
-            "type": "object"
-        },
-        "InvestmentExpenses": {
-            "description": "Marketing investment expense buckets",
-            "properties": {
-                "demand_creation": {
-                    "type": "string"
-                },
-                "leasing_enablement": {
-                    "type": "string"
-                },
-                "market_intelligence": {
-                    "type": "string"
-                },
-                "reputation_building": {
-                    "type": "string"
-                }
-            },
-            "required": [
-                "demand_creation",
-                "leasing_enablement",
-                "market_intelligence",
-                "reputation_building"
             ],
             "type": "object"
         },
@@ -247,13 +288,9 @@
                     "description": "Description of the schedule ('Begins in late may 2019')",
                     "type": "string"
                 },
-                "target": {
-                    "description": "Target investment, total",
-                    "type": "string"
-                },
-                "target_investment": {
-                    "$ref": "#/definitions/InvestmentExpenses",
-                    "description": "Target investment, per-tactic"
+                "target_investments": {
+                    "$ref": "#/definitions/CampaignPlanTargetInvestments",
+                    "description": "Target investments"
                 },
                 "target_segments": {
                     "description": "The target segments, in order from most important to least",
@@ -272,8 +309,7 @@
                 "goal",
                 "objectives",
                 "schedule",
-                "target",
-                "target_investment",
+                "target_investments",
                 "target_segments",
                 "theme"
             ],
@@ -294,24 +330,39 @@
             ],
             "type": "object"
         },
-        "ScheduleStatus": {
+        "Status": {
             "description": "Allowable schedule statuses",
             "enum": [
-                "complete",
-                "in_progress",
-                "not_started"
+                "Complete",
+                "In Progress",
+                "Not Started"
             ],
             "type": "string"
         },
         "Tactic": {
             "properties": {
+                "audience": {
+                    "anyOf": [
+                        {
+                            "enum": [
+                                "Acquisition",
+                                "Retention"
+                            ],
+                            "type": "string"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "The target audience (if applicable)"
+                },
                 "base_cost": {
                     "description": "The base cost for the tactic",
                     "type": "string"
                 },
-                "cost_category": {
-                    "$ref": "#/definitions/CostCategory",
-                    "description": "The cost category"
+                "cost_type": {
+                    "$ref": "#/definitions/CostType",
+                    "description": "The cost type"
                 },
                 "name": {
                     "description": "The name of the tactic, ('Brand Strategy')",
@@ -329,7 +380,7 @@
                     "type": "string"
                 },
                 "status": {
-                    "$ref": "#/definitions/ScheduleStatus",
+                    "$ref": "#/definitions/Status",
                     "description": "The current schedule status"
                 },
                 "tooltip": {
@@ -345,8 +396,9 @@
                 }
             },
             "required": [
+                "audience",
                 "base_cost",
-                "cost_category",
+                "cost_type",
                 "name",
                 "notes",
                 "schedule",

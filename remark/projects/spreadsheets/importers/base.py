@@ -1,4 +1,9 @@
-from remark.lib.spreadsheets import ExcelImporter, SchemaCell, DataType, loc
+from remark.lib.spreadsheets import ExcelImporter, find_row, StrCell, IntCell
+
+
+def find_version(predicate):
+    """Return a locator that scans the VERSION!A column for header values and returns values in VERSION!B"""
+    return find_row("VERSION!A", predicate, target="B")
 
 
 class ProjectExcelImporter(ExcelImporter):
@@ -10,8 +15,8 @@ class ProjectExcelImporter(ExcelImporter):
     expected_type = None
     expected_version = None
 
-    SPREADSHEET_TYPE_SCELL = SchemaCell(loc("VERSION!B1"), DataType.STRING, str)
-    SPREADSHEET_VERSION_SCELL = SchemaCell(loc("VERSION!B2"), DataType.NUMERIC, int)
+    SPREADSHEET_KIND = StrCell(find_version("spreadsheet_kind"))
+    SPREADSHEET_VERSION = IntCell(find_version("spreadsheet_version"))
 
     def clean(self):
         """
@@ -23,9 +28,7 @@ class ProjectExcelImporter(ExcelImporter):
         """
         Validate the VERSION tab of the spreadsheet.
         """
+        self.check_schema_value(self.SPREADSHEET_KIND, expected=self.expected_type)
         self.check_schema_value(
-            self.SPREADSHEET_TYPE_SCELL, expected=self.expected_type
-        )
-        self.check_schema_value(
-            self.SPREADSHEET_VERSION_SCELL, expected=self.expected_version
+            self.SPREADSHEET_VERSION, expected=self.expected_version
         )

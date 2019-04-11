@@ -82,6 +82,7 @@ export const BASELINE_REPORT = {
   property: {
     lowest_monthly_rent: "1847.00",
     cost_per_exe_vs_rent: 0.54,
+    total_units: 201,
     leasing: {
       cd_rate: 0.29
     }
@@ -115,6 +116,7 @@ export const PERFORMANCE_REPORT = {
   property: {
     lowest_monthly_rent: "1856.90",
     cost_per_exe_vs_rent: 0.58,
+    total_units: 201,
     leasing: {
       cd_rate: 0.2
     }
@@ -182,4 +184,14 @@ export const PERFORMANCE_REPORT = {
     }
   },
   whiskers: WHISKERS
+};
+
+export const props_baseline = {
+  type: "baseline",
+  report: BASELINE_REPORT
+};
+
+export const props_performance = {
+  type: "performance",
+  report: PERFORMANCE_REPORT
 };

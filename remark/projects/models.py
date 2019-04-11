@@ -165,6 +165,31 @@ class Project(models.Model):
         help_text="Lowest rent tenants pay monthly. Applies for the duration of the project.",
     )
 
+    is_baseline_report_public = models.BooleanField(
+        verbose_name="Show Baseline Report?",
+        default=False,
+    )
+
+    is_tam_public = models.BooleanField(
+        verbose_name="Show TAM?",
+        default=False,
+    )
+
+    is_performance_report_public = models.BooleanField(
+        verbose_name="Show Performance Report?",
+        default=False,
+    )
+
+    is_modeling_public = models.BooleanField(
+        verbose_name="Show Modeling?",
+        default=False,
+    )
+
+    is_campaign_plan_public = models.BooleanField(
+        verbose_name="Show Campaign Plan?",
+        default=False,
+    )
+
     def get_periods(self):
         """
         Return a queryset of all periods, including the baseline.

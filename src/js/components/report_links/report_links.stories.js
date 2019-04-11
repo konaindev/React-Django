@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 
-import { report_links } from "../project_page/project_page.stories.js";
+import { report_links } from "../project_page/props";
 
 import ReportLinks from "./index";
 

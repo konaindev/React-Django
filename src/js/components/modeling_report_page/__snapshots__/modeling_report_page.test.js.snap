@@ -212,7 +212,17 @@ exports[`ModelingReportPage renders correctly 1`] = `
               <span
                 className="large-box__bottom-line"
               >
-                247 Executed Leases (Out of 260)
+                <div>
+                  247
+                   Executed Leases (Out of
+                   
+                  260
+                  )
+                </div>
+                <div>
+                  201
+                   Total Units
+                </div>
               </span>
               <span
                 className="large-box__bottom-line"
@@ -292,7 +302,16 @@ exports[`ModelingReportPage renders correctly 1`] = `
               <span
                 className="large-box__bottom-line"
               >
-                242 Occupied Units (Out of 260)
+                <div>
+                  242
+                   Occupied Units (Out of $
+                  260
+                  )
+                </div>
+                <div>
+                  201
+                   Total Units
+                </div>
               </span>
               <span
                 className="large-box__bottom-line"

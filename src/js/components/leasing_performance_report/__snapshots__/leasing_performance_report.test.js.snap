@@ -47,7 +47,17 @@ exports[`LeasingPerformanceReport renders baseline report correctly 1`] = `
         <span
           className="large-box__bottom-line"
         >
-          192 Executed Leases (Out of 260)
+          <div>
+            192
+             Executed Leases (Out of
+             
+            260
+            )
+          </div>
+          <div>
+            201
+             Total Units
+          </div>
         </span>
         <span
           className="large-box__bottom-line"
@@ -127,7 +137,16 @@ exports[`LeasingPerformanceReport renders baseline report correctly 1`] = `
         <span
           className="large-box__bottom-line"
         >
-          185 Occupied Units (Out of 260)
+          <div>
+            185
+             Occupied Units (Out of $
+            260
+            )
+          </div>
+          <div>
+            201
+             Total Units
+          </div>
         </span>
         <span
           className="large-box__bottom-line"
@@ -651,7 +670,17 @@ exports[`LeasingPerformanceReport renders performance report correctly 1`] = `
         <span
           className="large-box__bottom-line"
         >
-          227 Executed Leases (Out of 260)
+          <div>
+            227
+             Executed Leases (Out of
+             
+            260
+            )
+          </div>
+          <div>
+            201
+             Total Units
+          </div>
         </span>
         <span
           className="large-box__bottom-line"
@@ -1136,7 +1165,16 @@ exports[`LeasingPerformanceReport renders performance report correctly 1`] = `
         <span
           className="large-box__bottom-line"
         >
-          220 Occupied Units (Out of 260)
+          <div>
+            220
+             Occupied Units (Out of $
+            260
+            )
+          </div>
+          <div>
+            201
+             Total Units
+          </div>
         </span>
         <span
           className="large-box__bottom-line"
@@ -1889,7 +1927,17 @@ exports[`LeasingPerformanceReport renders with section items correctly 1`] = `
         <span
           className="large-box__bottom-line"
         >
-          227 Executed Leases (Out of 260)
+          <div>
+            227
+             Executed Leases (Out of
+             
+            260
+            )
+          </div>
+          <div>
+            201
+             Total Units
+          </div>
         </span>
         <span
           className="large-box__bottom-line"
@@ -2374,7 +2422,16 @@ exports[`LeasingPerformanceReport renders with section items correctly 1`] = `
         <span
           className="large-box__bottom-line"
         >
-          220 Occupied Units (Out of 260)
+          <div>
+            220
+             Occupied Units (Out of $
+            260
+            )
+          </div>
+          <div>
+            201
+             Total Units
+          </div>
         </span>
         <span
           className="large-box__bottom-line"

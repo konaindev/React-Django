@@ -5,9 +5,13 @@ into our datastore.
 
 from ..kinds import SpreadsheetKind  # noqa
 from .baseline_perf import BaselinePerfActivator
+from .json_activators import CampaignPlanActivator
 
 
-ACTIVATORS = {SpreadsheetKind.PERIODS: BaselinePerfActivator}
+ACTIVATORS = {
+    SpreadsheetKind.PERIODS: BaselinePerfActivator,
+    SpreadsheetKind.CAMPAIGN: CampaignPlanActivator,
+}
 
 
 def get_activator_for_spreadsheet(spreadsheet):
