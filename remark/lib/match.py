@@ -34,7 +34,7 @@ def match(v, **query):
 
     These are similar to value filters in Django querysets.
     """
-    return all((_MATCHERS[k](v or "", t) for k, t in query.items()))
+    return all((_MATCHERS[k](str(v or ""), t) for k, t in query.items()))
 
 
 def matchp(**query):

@@ -13,16 +13,22 @@ def row_range(start_row, end_row):
     return range(start_row, end_row + 1)
 
 
-def next_row(row):
-    """Given a row index, return the next row index."""
-    return row + 1
+def advance_row(increment):
+    """Given a row index, return a partial that advances it by `increment` places."""
+
+    def advance(row):
+        result = row + increment
+        if result <= 0:
+            raise ExcelProgrammingError(
+                message=f"Row `{row}` cannot be advanced by `{increment}`: out of bounds."
+            )
+        return result
+
+    return advance
 
 
-def prev_row(row):
-    """Given a row index, return the previous row index."""
-    if row > 1:
-        return row - 1
-    raise ExcelProgrammingError(message=f"Row `{row}` does not have a predecessor.")
+next_row = advance_row(1)
+prev_row = advance_row(-1)
 
 
 def index_for_col(col):
@@ -43,17 +49,22 @@ def col_for_index(index):
     return col
 
 
-def next_col(col):
-    """Given a column name, determine the next column name."""
-    return col_for_index(index_for_col(col) + 1)
+def advance_col(increment):
+    """Given a column name, return a function that advances it by `increment` places."""
+
+    def advance(col):
+        index = index_for_col(col) + increment
+        if index <= 0:
+            raise ExcelProgrammingError(
+                message=f"Column `{col}` cannot be advanced by `{increment}`: out of bounds."
+            )
+        return col_for_index(index)
+
+    return advance
 
 
-def prev_col(col):
-    """Given a column name, return the previous column name."""
-    index = index_for_col(col)
-    if index > 1:
-        return col_for_index(index - 1)
-    raise ExcelProgrammingError(message=f"Column `{col}` does not have a predecessor.")
+next_col = advance_col(1)
+prev_col = advance_col(-1)
 
 
 def col_range(start_col, end_col):
