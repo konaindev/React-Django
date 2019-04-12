@@ -4,7 +4,7 @@ from .errors import ExcelProgrammingError, ExcelValidationError
 from .getset import get_cell
 from .rowcol import col_range, row_range
 from .parse import parse_location_or_default
-from .schema import DataType, unflatten_dict
+from .schema import DataType, unflatten_dict, is_schema_cell
 
 
 class ExcelImporter:
@@ -16,7 +16,18 @@ class ExcelImporter:
         """
         Create an importer with a fileobj or with the path to an extant file.
         """
-        self.workbook = openpyxl.load_workbook(f, data_only=True, read_only=True)
+        # Do *not* use read_only=True because this forces openpyxl into a mode
+        # where *every* sheet/cell access results in re-parsing the XML. That's...
+        # insane, and a sign that openpyxl is problematic. -Dave
+        #
+        # Example timing for one of our spreadsheets with read_only=True:
+        #     imported full spreadsheet in 6.220s
+        #
+        # Example timing for that same spreadsheet without:
+        #     imported full spreadsheet in 0.410s
+        #
+        # Insane!
+        self.workbook = openpyxl.load_workbook(f, data_only=True)
         self.cleaned_data = {}
         self.errors = []
 
@@ -108,8 +119,10 @@ class ExcelImporter:
             )
         return unflatten_dict(
             {
-                key: self.schema_value(schema_item, sheet=sheet, row=row)
-                for key, schema_item in schema.items()
+                key: self.schema_value(schema_item_or_value, sheet=sheet, row=row)
+                if is_schema_cell(schema_item_or_value)
+                else schema_item_or_value
+                for key, schema_item_or_value in schema.items()
             }
         )
 
@@ -129,8 +142,10 @@ class ExcelImporter:
             )
         return unflatten_dict(
             {
-                key: self.schema_value(schema_item, sheet=sheet, col=col)
-                for key, schema_item in schema.items()
+                key: self.schema_value(schema_item_or_value, sheet=sheet, col=col)
+                if is_schema_cell(schema_item_or_value)
+                else schema_item_or_value
+                for key, schema_item_or_value in schema.items()
             }
         )
 
@@ -159,6 +174,85 @@ class ExcelImporter:
         sheet, _, _ = parse_location_or_default(location, sheet, None, None)
         cols = cols or col_range(start_col, end_col)
         return [self.col(schema, sheet=sheet, col=col) for col in cols]
+
+    def row_array(
+        self,
+        schema_item,
+        rows=None,
+        start_row=None,
+        end_row=None,
+        location=None,
+        sheet=None,
+    ):
+        """
+        Return an array of row values based on the schema_item.
+
+        Rows can either be provided as an iterable (via `rows`) or with
+        explicit values, via `start_row` and `end_row`.
+        """
+        sheet, _, _ = parse_location_or_default(location, sheet, None, None)
+        rows = rows or row_range(start_row, end_row)
+        return [self.schema_value(schema_item, sheet=sheet, row=row) for row in rows]
+
+    def col_array(
+        self,
+        schema_item,
+        cols=None,
+        start_col=None,
+        end_col=None,
+        location=None,
+        sheet=None,
+    ):
+        """
+        Return an array of column values based on the schema item.
+
+        Columns can either be provided as an iterable (via `cols`) or with
+        explicit values, via `start_col` and `end_col`.
+        """
+        sheet, _, _ = parse_location_or_default(location, sheet, None, None)
+        cols = cols or col_range(start_col, end_col)
+        return [self.schema_value(schema_item, sheet=sheet, col=col) for col in cols]
+
+    def table_array(
+        self,
+        schema_item,
+        cols=None,
+        start_col=None,
+        end_col=None,
+        rows=None,
+        start_row=None,
+        end_row=None,
+        location=None,
+        sheet=None,
+        row_major=True,
+    ):
+        """
+        Return a 2D array of values based on the schema item.
+
+        Rows and columns can either be provided as an iterable 
+        (via `rows` and `cols`) or with explicit values: `start_*` and `end_*`.
+
+        By default, we return a row-major array; this can be flipped.
+        """
+        sheet, _, _ = parse_location_or_default(location, sheet, None, None)
+        rows = list(rows or row_range(start_row, end_row))
+        cols = list(cols or col_range(start_col, end_col))
+        outer = rows if row_major else cols
+        inner = cols if row_major else rows
+        table = []
+        for outer_index in outer:
+            table.append(
+                [
+                    self.schema_value(
+                        schema_item,
+                        sheet=sheet,
+                        col=inner_index if row_major else outer_index,
+                        row=outer_index if row_major else inner_index,
+                    )
+                    for inner_index in inner
+                ]
+            )
+        return table
 
     def is_valid(self):
         """Validate the spreadsheet; return False if not possible."""

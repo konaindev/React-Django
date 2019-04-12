@@ -7,6 +7,8 @@ from .importers import ExcelImporter
 from .locators import BaseLocator, loc, find_col, find_row
 from .parse import parse_location, unparse_location
 from .rowcol import (
+    advance_col,
+    advance_row,
     col_for_index,
     col_range,
     cols_until_empty,
@@ -41,6 +43,8 @@ from .schema import (
 )
 
 __all__ = (
+    advance_col,
+    advance_row,
     BaseLocator,
     ChoiceCell,
     col_for_index,

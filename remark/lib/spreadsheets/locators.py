@@ -61,8 +61,10 @@ class loc(BaseLocator):
     the calling party.
     """
 
-    def __init__(self, location):
-        self.sheet, self.col, self.row = parse_location(location)
+    def __init__(self, location=None, sheet=None, col=None, row=None):
+        self.sheet, self.col, self.row = parse_location_or_default(
+            location, sheet, col, row
+        )
 
     def locate(self, workbook, sheet, col, row):
         return (sheet or self.sheet, col or self.col, row or self.row)

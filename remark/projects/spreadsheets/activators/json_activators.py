@@ -21,7 +21,3 @@ class JSONFieldActivator(ActivatorBase):
         setattr(self.project, self.project_field, self.data)
         self.project.save()
 
-
-class CampaignPlanActivator(JSONFieldActivator):
-    spreadsheet_kind = "campaign"
-    project_field = "tmp_campaign_plan_json"
