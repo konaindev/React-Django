@@ -15,7 +15,7 @@ class ExcelError(Exception):
         3. An openpyxl Cell
         """
         if isinstance(where, openpyxl.cell.cell.Cell):
-            where = unparse_location(where.parent.title, where.column_name, where.row)
+            where = unparse_location(where.parent.title, where.column_letter, where.row)
         elif isinstance(where, tuple):
             where = unparse_location(*where)
 

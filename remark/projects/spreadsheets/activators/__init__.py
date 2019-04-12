@@ -5,11 +5,13 @@ into our datastore.
 
 from ..kinds import SpreadsheetKind  # noqa
 from .baseline_perf import BaselinePerfActivator
-from .json_activators import CampaignPlanActivator
+from .campaign_plan import CampaignPlanActivator
+from .market import MarketActivator
 
 
 ACTIVATORS = {
     SpreadsheetKind.PERIODS: BaselinePerfActivator,
+    SpreadsheetKind.MARKET: MarketActivator,
     SpreadsheetKind.CAMPAIGN: CampaignPlanActivator,
 }
 
