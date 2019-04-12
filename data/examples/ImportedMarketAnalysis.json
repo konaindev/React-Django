@@ -1,0 +1,548 @@
+{
+  "location": "Rancho Cordova,CA",
+  "estimated_population": {
+    "zip_codes": [
+      {
+        "zip": "95670",
+        "outline": null
+      },
+      {
+        "zip": "95655",
+        "outline": null
+      },
+      {
+        "zip": "95827",
+        "outline": null
+      }
+    ],
+    "population": 78864
+  },
+  "rent_to_income": {
+    "categories": [
+      {
+        "name": "Low",
+        "low": 0.0,
+        "high": 0.12
+      },
+      {
+        "name": "Moderately Low",
+        "low": 0.13,
+        "high": 0.25
+      },
+      {
+        "name": "Target",
+        "low": 0.26,
+        "high": 0.34
+      },
+      {
+        "name": "Moderately High",
+        "low": 0.35000000000000003,
+        "high": 0.39
+      },
+      {
+        "name": "High",
+        "low": 0.4,
+        "high": 0.44
+      }
+    ],
+    "incomes": [
+      "50000.00",
+      "60000.00",
+      "70000.00",
+      "80000.00",
+      "90000.00",
+      "100000.00",
+      "110000.00",
+      "120000.00"
+    ],
+    "rental_rates": [
+      "1400.00",
+      "1600.00",
+      "1800.00",
+      "2000.00",
+      "2200.00",
+      "2400.00"
+    ],
+    "data": [
+      [
+        0.33599999999999997,
+        0.38399999999999995,
+        0.432,
+        0.48,
+        0.5279999999999999,
+        0.576
+      ],
+      [
+        0.28,
+        0.32,
+        0.36,
+        0.4,
+        0.44,
+        0.48
+      ],
+      [
+        0.24000000000000002,
+        0.2742857142857143,
+        0.3085714285714286,
+        0.34285714285714286,
+        0.37714285714285717,
+        0.4114285714285715
+      ],
+      [
+        0.21,
+        0.24,
+        0.26999999999999996,
+        0.3,
+        0.32999999999999996,
+        0.36
+      ],
+      [
+        0.18666666666666668,
+        0.21333333333333335,
+        0.24,
+        0.26666666666666666,
+        0.29333333333333333,
+        0.32
+      ],
+      [
+        0.16799999999999998,
+        0.19199999999999998,
+        0.216,
+        0.24,
+        0.26399999999999996,
+        0.288
+      ],
+      [
+        0.15272727272727274,
+        0.17454545454545456,
+        0.19636363636363638,
+        0.2181818181818182,
+        0.24000000000000002,
+        0.26181818181818184
+      ],
+      [
+        0.14,
+        0.16,
+        0.18,
+        0.2,
+        0.22,
+        0.24
+      ]
+    ]
+  },
+  "segments": [
+    {
+      "age_group": "18-24",
+      "market_size": 2574,
+      "usv": 0,
+      "growth": 0.0005819028222286878,
+      "future_size": 2575,
+      "income_groups": [
+        {
+          "income": "45000.00",
+          "group_population": 4085,
+          "home_owners": {
+            "total": 1511,
+            "family": 1018,
+            "nonfamily": 493
+          },
+          "renters": {
+            "total": 2574,
+            "family": 1734,
+            "nonfamily": 840
+          },
+          "market_size": 2574,
+          "active_populations": [
+            "renters.nonfamily",
+            "renters.family"
+          ]
+        },
+        {
+          "income": "65000.00",
+          "group_population": 2436,
+          "home_owners": {
+            "total": 901,
+            "family": 607,
+            "nonfamily": 294
+          },
+          "renters": {
+            "total": 1535,
+            "family": 1034,
+            "nonfamily": 501
+          },
+          "market_size": 1535,
+          "active_populations": [
+            "renters.nonfamily",
+            "renters.family"
+          ]
+        },
+        {
+          "income": "85000.00",
+          "group_population": 1557,
+          "home_owners": {
+            "total": 576,
+            "family": 388,
+            "nonfamily": 188
+          },
+          "renters": {
+            "total": 981,
+            "family": 661,
+            "nonfamily": 320
+          },
+          "market_size": 981,
+          "active_populations": [
+            "renters.nonfamily",
+            "renters.family"
+          ]
+        }
+      ],
+      "segment_population": 6870
+    },
+    {
+      "age_group": "25-34",
+      "market_size": 4755,
+      "usv": 0,
+      "growth": 0.037747290229667246,
+      "future_size": 4934,
+      "income_groups": [
+        {
+          "income": "45000.00",
+          "group_population": 7548,
+          "home_owners": {
+            "total": 2793,
+            "family": 1881,
+            "nonfamily": 912
+          },
+          "renters": {
+            "total": 4755,
+            "family": 3203,
+            "nonfamily": 1552
+          },
+          "market_size": 4755,
+          "active_populations": [
+            "renters.nonfamily",
+            "renters.family"
+          ]
+        },
+        {
+          "income": "65000.00",
+          "group_population": 4501,
+          "home_owners": {
+            "total": 1665,
+            "family": 1121,
+            "nonfamily": 544
+          },
+          "renters": {
+            "total": 2836,
+            "family": 1910,
+            "nonfamily": 926
+          },
+          "market_size": 2836,
+          "active_populations": [
+            "renters.nonfamily",
+            "renters.family"
+          ]
+        },
+        {
+          "income": "85000.00",
+          "group_population": 2877,
+          "home_owners": {
+            "total": 1064,
+            "family": 717,
+            "nonfamily": 347
+          },
+          "renters": {
+            "total": 1813,
+            "family": 1221,
+            "nonfamily": 592
+          },
+          "market_size": 1813,
+          "active_populations": [
+            "renters.nonfamily",
+            "renters.family"
+          ]
+        }
+      ],
+      "segment_population": 12695
+    },
+    {
+      "age_group": "35-44",
+      "market_size": 2396,
+      "usv": 0,
+      "growth": 0.03771300866002421,
+      "future_size": 2486,
+      "income_groups": [
+        {
+          "income": "45000.00",
+          "group_population": 6144,
+          "home_owners": {
+            "total": 3748,
+            "family": 2524,
+            "nonfamily": 1224
+          },
+          "renters": {
+            "total": 2396,
+            "family": 1614,
+            "nonfamily": 782
+          },
+          "market_size": 2396,
+          "active_populations": [
+            "renters.nonfamily",
+            "renters.family"
+          ]
+        },
+        {
+          "income": "65000.00",
+          "group_population": 3664,
+          "home_owners": {
+            "total": 2235,
+            "family": 1505,
+            "nonfamily": 730
+          },
+          "renters": {
+            "total": 1429,
+            "family": 962,
+            "nonfamily": 467
+          },
+          "market_size": 1429,
+          "active_populations": [
+            "renters.nonfamily",
+            "renters.family"
+          ]
+        },
+        {
+          "income": "85000.00",
+          "group_population": 2342,
+          "home_owners": {
+            "total": 1429,
+            "family": 962,
+            "nonfamily": 467
+          },
+          "renters": {
+            "total": 913,
+            "family": 615,
+            "nonfamily": 298
+          },
+          "market_size": 913,
+          "active_populations": [
+            "renters.nonfamily",
+            "renters.family"
+          ]
+        }
+      ],
+      "segment_population": 10334
+    },
+    {
+      "age_group": "45-54",
+      "market_size": 1896,
+      "usv": 0,
+      "growth": -0.020547287566010562,
+      "future_size": 1857,
+      "income_groups": [
+        {
+          "income": "45000.00",
+          "group_population": 6319,
+          "home_owners": {
+            "total": 4423,
+            "family": 2979,
+            "nonfamily": 1444
+          },
+          "renters": {
+            "total": 1896,
+            "family": 1277,
+            "nonfamily": 619
+          },
+          "market_size": 1896,
+          "active_populations": [
+            "renters.nonfamily",
+            "renters.family"
+          ]
+        },
+        {
+          "income": "65000.00",
+          "group_population": 3768,
+          "home_owners": {
+            "total": 2638,
+            "family": 1777,
+            "nonfamily": 861
+          },
+          "renters": {
+            "total": 1130,
+            "family": 761,
+            "nonfamily": 369
+          },
+          "market_size": 1130,
+          "active_populations": [
+            "renters.nonfamily",
+            "renters.family"
+          ]
+        },
+        {
+          "income": "85000.00",
+          "group_population": 2409,
+          "home_owners": {
+            "total": 1686,
+            "family": 1136,
+            "nonfamily": 550
+          },
+          "renters": {
+            "total": 723,
+            "family": 487,
+            "nonfamily": 236
+          },
+          "market_size": 723,
+          "active_populations": [
+            "renters.nonfamily",
+            "renters.family"
+          ]
+        }
+      ],
+      "segment_population": 10629
+    },
+    {
+      "age_group": "55-64",
+      "market_size": 1374,
+      "usv": 0,
+      "growth": -0.020557380523471443,
+      "future_size": 1346,
+      "income_groups": [
+        {
+          "income": "45000.00",
+          "group_population": 5726,
+          "home_owners": {
+            "total": 4352,
+            "family": 2931,
+            "nonfamily": 1421
+          },
+          "renters": {
+            "total": 1374,
+            "family": 925,
+            "nonfamily": 449
+          },
+          "market_size": 1374,
+          "active_populations": [
+            "renters.nonfamily",
+            "renters.family"
+          ]
+        },
+        {
+          "income": "65000.00",
+          "group_population": 3415,
+          "home_owners": {
+            "total": 2595,
+            "family": 1748,
+            "nonfamily": 847
+          },
+          "renters": {
+            "total": 820,
+            "family": 552,
+            "nonfamily": 268
+          },
+          "market_size": 820,
+          "active_populations": [
+            "renters.nonfamily",
+            "renters.family"
+          ]
+        },
+        {
+          "income": "85000.00",
+          "group_population": 2183,
+          "home_owners": {
+            "total": 1659,
+            "family": 1117,
+            "nonfamily": 542
+          },
+          "renters": {
+            "total": 524,
+            "family": 353,
+            "nonfamily": 171
+          },
+          "market_size": 524,
+          "active_populations": [
+            "renters.nonfamily",
+            "renters.family"
+          ]
+        }
+      ],
+      "segment_population": 9631
+    },
+    {
+      "age_group": "65+",
+      "market_size": 1484,
+      "usv": 0,
+      "growth": 0.12508282411838328,
+      "future_size": 1670,
+      "income_groups": [
+        {
+          "income": "45000.00",
+          "group_population": 7065,
+          "home_owners": {
+            "total": 5581,
+            "family": 3759,
+            "nonfamily": 1822
+          },
+          "renters": {
+            "total": 1484,
+            "family": 1000,
+            "nonfamily": 484
+          },
+          "market_size": 1484,
+          "active_populations": [
+            "renters.nonfamily",
+            "renters.family"
+          ]
+        },
+        {
+          "income": "65000.00",
+          "group_population": 4213,
+          "home_owners": {
+            "total": 3328,
+            "family": 2242,
+            "nonfamily": 1086
+          },
+          "renters": {
+            "total": 885,
+            "family": 596,
+            "nonfamily": 289
+          },
+          "market_size": 885,
+          "active_populations": [
+            "renters.nonfamily",
+            "renters.family"
+          ]
+        },
+        {
+          "income": "85000.00",
+          "group_population": 2693,
+          "home_owners": {
+            "total": 2127,
+            "family": 1433,
+            "nonfamily": 694
+          },
+          "renters": {
+            "total": 566,
+            "family": 381,
+            "nonfamily": 185
+          },
+          "market_size": 566,
+          "active_populations": [
+            "renters.nonfamily",
+            "renters.family"
+          ]
+        }
+      ],
+      "segment_population": 11884
+    }
+  ],
+  "future_year": 2024,
+  "total": {
+    "segment_population": 78864,
+    "market_size": 14479,
+    "usv": 0,
+    "future_size": 14868
+  },
+  "average": {
+    "age": 0,
+    "growth": 0.026670059623470233
+  }
+}

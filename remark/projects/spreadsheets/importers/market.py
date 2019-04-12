@@ -3,18 +3,26 @@ from remark.lib.spreadsheets import (
     advance_col,
     advance_row,
     ChoiceCell,
+    cols_until,
     cols_until_empty,
     CurrencyCell,
     find_row,
     FloatCell,
     IntCell,
     loc,
+    next_col,
     next_row,
     rows_until_empty,
     StrCell,
 )
 
 from .base import ProjectExcelImporter
+
+
+# TODO in this importer, I explored a few different ways to use the APIs.
+# They all work; I like some better than others, and learned a few things
+# about how to simplify the APIs. But I haven't *done* that yet, so please
+# forgive the inconsistencies for the time being. -Dave
 
 
 def find_output(predicate, target="B"):
@@ -33,6 +41,14 @@ class MarketImporter(ProjectExcelImporter):
         "Moderately High",
         "High",
     ]
+
+    SEGMENT_OVERVIEW_SCHEMA = {
+        "age_group": StrCell(loc("A")),
+        "market_size": IntCell(loc("B")),
+        "usv": IntCell(loc("C")),
+        "growth": FloatCell(loc("D")),
+        "future_size": IntCell(loc("E")),
+    }
 
     # Who loves functional programming? I do I do!
     # TODO CONSIDER these could probably live on the base importer but take a locator...
@@ -129,7 +145,7 @@ class MarketImporter(ProjectExcelImporter):
             FloatCell(loc()),
             start_col="B",
             end_col=advance_col(income_count - 1)("B"),
-            start_row=row + 1,
+            start_row=next_row(row),
             end_row=advance_row(rental_rate_count)(row),  # +1-1=0
             sheet="Output",
             row_major=False,
@@ -149,17 +165,60 @@ class MarketImporter(ProjectExcelImporter):
             "data": data,
         }
 
+    def update_segment_details(self, segment):
+        _, _, row = find_output(f"age segment: {segment['age_group']}")(self.workbook)
+        cols = list(
+            cols_until(self.workbook, matchp(exact="All"), "B", sheet="Output", row=row)
+        )
+
+        def _find(predicate):
+            return find_row("Output!A", predicate, start_row=row)
+
+        schema = {
+            "income": CurrencyCell(_find("age segment")),
+            "group_population": IntCell(_find("population")),
+            "home_owners.total": IntCell(_find("home owners")),
+            "home_owners.family": IntCell(_find("family ho")),
+            "home_owners.nonfamily": IntCell(_find("non-family ho")),
+            "renters.total": IntCell(_find("renters")),
+            "renters.family": IntCell(_find("family r")),
+            "renters.nonfamily": IntCell(_find("non-family r")),
+            "market_size": IntCell(_find("est. market")),
+            "active_populations": ["renters.nonfamily", "renters.family"],
+        }
+
+        segment["income_groups"] = self.col_table(schema, cols=cols, sheet="Output")
+        segment["segment_population"] = self.schema_value(
+            IntCell(loc(sheet="Output", row=next_row(row), col=next_col(cols[-1])))
+        )
+
     def get_segments(self):
-        pass
+        _, _, row = find_output("target segment")(self.workbook)
+        rows = rows_until_empty(self.workbook, next_row(row), location="Output!A")
+        # Grab the overviews for each segment
+        segments = self.row_table(
+            self.SEGMENT_OVERVIEW_SCHEMA, rows=rows, sheet="Output"
+        )
+        for segment in segments:
+            self.update_segment_details(segment)
+        return segments
 
     def get_future_year(self):
         return self.get_int("future year")
 
     def get_total(self):
-        pass
+        return {
+            "segment_population": self.get_int("est. population"),
+            "market_size": self.get_int("total market size"),
+            "usv": self.get_int("total usv"),
+            "future_size": self.get_int("future population size"),
+        }
 
     def get_average(self):
-        pass
+        return {
+            "age": self.get_int("total average age"),
+            "growth": self.get_float("total average growth"),
+        }
 
     def clean(self):
         super().clean()
@@ -171,4 +230,3 @@ class MarketImporter(ProjectExcelImporter):
         self.cleaned_data["future_year"] = self.get_future_year()
         self.cleaned_data["total"] = self.get_total()
         self.cleaned_data["average"] = self.get_average()
-

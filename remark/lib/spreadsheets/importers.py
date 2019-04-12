@@ -16,7 +16,18 @@ class ExcelImporter:
         """
         Create an importer with a fileobj or with the path to an extant file.
         """
-        self.workbook = openpyxl.load_workbook(f, data_only=True, read_only=True)
+        # Do *not* use read_only=True because this forces openpyxl into a mode
+        # where *every* sheet/cell access results in re-parsing the XML. That's...
+        # insane, and a sign that openpyxl is problematic. -Dave
+        #
+        # Example timing for one of our spreadsheets with read_only=True:
+        #     imported full spreadsheet in 6.220s
+        #
+        # Example timing for that same spreadsheet without:
+        #     imported full spreadsheet in 0.410s
+        #
+        # Insane!
+        self.workbook = openpyxl.load_workbook(f, data_only=True)
         self.cleaned_data = {}
         self.errors = []
 
