@@ -1,11 +1,11 @@
 import React from "react";
 import _get from "lodash/get";
 
-import { GENERIC_TABS } from "../campaign_plan/campaign_plan.constants";
+import { genericTabsMap } from "../campaign_plan/campaign_plan.constants";
 import { formatCurrency, formatNumber } from "../../utils/formatters.js";
 
 export function CampaignPlanGenericFooter({ tabKey, tactics }) {
-  const totalLabel = GENERIC_TABS[tabKey];
+  const totalLabel = genericTabsMap[tabKey];
 
   return (
     <div className="campaign-plan-generic-footer">

@@ -4,12 +4,12 @@ import PropTypes from "prop-types";
 import Container from "../container";
 import ButtonGroup from "../button_group";
 
-import { GENERIC_TABS, ALL_TABS_ORDERED } from "./campaign_plan.constants";
+import { genericTabsMap, allTabsSortedList } from "./campaign_plan.constants";
 import CampaignPlanOverviewTab from "../campaign_plan_overview_tab";
 import CampaignPlanGenericTab from "../campaign_plan_generic_tab";
 import "./campaign_plan.scss";
 
-const buttonOptions = ALL_TABS_ORDERED.map(([key, label]) => ({
+const buttonOptions = allTabsSortedList.map(([key, label]) => ({
   value: key,
   label: label
 }));
@@ -35,7 +35,7 @@ export default class CampaignPlan extends Component {
   render() {
     const { activeTab } = this.state;
     const isOverviewTab = activeTab === "overview";
-    const isGenericTab = Object.keys(GENERIC_TABS).includes(activeTab);
+    const isGenericTab = Object.keys(genericTabsMap).includes(activeTab);
     const tabData = this.props[activeTab];
 
     return (

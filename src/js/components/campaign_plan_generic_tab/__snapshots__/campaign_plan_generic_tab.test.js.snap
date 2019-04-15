@@ -227,7 +227,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               }
             >
               <div
-                className="cell-status in_progress"
+                className="cell-status in-progress"
               >
                 In Progress
               </div>
@@ -372,7 +372,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               }
             >
               <div
-                className="cell-status in_progress"
+                className="cell-status in-progress"
               >
                 In Progress
               </div>
@@ -517,7 +517,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               }
             >
               <div
-                className="cell-status in_progress"
+                className="cell-status in-progress"
               >
                 In Progress
               </div>
@@ -662,7 +662,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               }
             >
               <div
-                className="cell-status in_progress"
+                className="cell-status in-progress"
               >
                 In Progress
               </div>
@@ -807,7 +807,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               }
             >
               <div
-                className="cell-status in_progress"
+                className="cell-status in-progress"
               >
                 In Progress
               </div>
@@ -952,7 +952,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               }
             >
               <div
-                className="cell-status in_progress"
+                className="cell-status in-progress"
               >
                 In Progress
               </div>
@@ -1101,7 +1101,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               }
             >
               <div
-                className="cell-status in_progress"
+                className="cell-status in-progress"
               >
                 In Progress
               </div>
@@ -1391,7 +1391,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               }
             >
               <div
-                className="cell-status in_progress"
+                className="cell-status in-progress"
               >
                 In Progress
               </div>

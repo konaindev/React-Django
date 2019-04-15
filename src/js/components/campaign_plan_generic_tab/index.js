@@ -6,8 +6,9 @@ import "./campaign_plan_generic_tab.scss";
 import CampaignPlanGenericTable from "./campaign_plan_generic_table";
 import CampaignPlanGenericFooter from "./campaign_plan_generic_footer";
 import {
-  GENERIC_TABS,
-  TACTIC_STATUSES
+  genericTabsMap,
+  tacticStatusList,
+  costTypeList
 } from "../campaign_plan/campaign_plan.constants";
 import Panel from "../panel";
 
@@ -21,16 +22,16 @@ export function CampaignPlanGenericTab(props) {
 }
 
 CampaignPlanGenericTab.propTypes = {
-  tabKey: oneOf(Object.keys(GENERIC_TABS)),
+  tabKey: oneOf(Object.keys(genericTabsMap)),
   tactics: arrayOf(
     shape({
       name: string,
       tooltip: string,
       schedule: string,
-      status: oneOf(Object.keys(TACTIC_STATUSES)),
+      status: oneOf(tacticStatusList),
       notes: string,
       base_cost: string,
-      cost_category: string,
+      cost_type: oneOf(costTypeList),
       total_cost: string,
       volumes: shape({
         usv: number,

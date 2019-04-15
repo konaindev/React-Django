@@ -1,26 +1,35 @@
 import { objectFromEntries } from "../../utils/misc";
 
-export const GENERIC_TABS_ORDERED = [
+export const genericTabsSortedList = [
   ["reputation_building", "Reputation Building"],
   ["demand_creation", "Demand Creation"],
   ["leasing_enablement", "Leasing Enablement"],
   ["market_intelligence", "Marketing Intelligence"]
 ];
-export const ALL_TABS_ORDERED = [
+export const allTabsSortedList = [ // eslint-disable-line
   ["overview", "Overview"],
-  ...GENERIC_TABS_ORDERED
+  ...genericTabsSortedList
 ];
 
-export const GENERIC_TABS = objectFromEntries(GENERIC_TABS_ORDERED);
-export const ALL_TABS = objectFromEntries(ALL_TABS_ORDERED);
+export const genericTabsMap = objectFromEntries(genericTabsSortedList);
 
-export const TACTIC_STATUSES = {
-  not_started: "Not Started",
-  in_progress: "In Progress",
-  complete: "Complete"
+// tactic => status
+export const tacticStatusList = ["Not Started", "In Progress", "Complete"];
+export const getTacticStatusClass = status => {
+  let classes = {};
+  classes["Not Started"] = "not-started";
+  classes["In Progress"] = "in-progress";
+  classes["Complete"] = "complete";
+
+  return classes[status] || "";
 };
 
-export const AVG_COST_SUFFIX = {
-  monthly: "mo",
-  weekly: "week"
+// tactic => cost_type
+export const costTypeList = ["Monthly", "Weekly", "One-Time"];
+export const getCostTypeLabel = type => {
+  let labels = {};
+  labels["Monthly"] = "mo";
+  labels["Weekly"] = "week";
+
+  return labels[type] || "";
 };

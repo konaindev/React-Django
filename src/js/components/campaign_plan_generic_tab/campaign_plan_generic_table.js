@@ -1,16 +1,19 @@
 import React from "react";
 import ReactTable from "react-table";
+import cx from "classnames";
 
 import RMBTooltip from "../rmb_tooltip";
 import {
-  AVG_COST_SUFFIX,
-  TACTIC_STATUSES
+  tacticStatusClassNames,
+  getTacticStatusClass,
+  getCostTypeLabel
 } from "../campaign_plan/campaign_plan.constants";
 import {
   formatCurrency,
   formatDateWithTokens,
   formatNumber
 } from "../../utils/formatters.js";
+import { convertToKebabCase } from "../../utils/misc.js";
 
 export function CampaignPlanGenericTable({ tabKey, tactics }) {
   return (
@@ -158,9 +161,9 @@ function renderCost({ value }) {
 }
 
 function renderCostWithAvg({ original }) {
-  const { cost_category, total_cost, base_cost } = original;
+  const { cost_type, total_cost, base_cost } = original;
 
-  if (cost_category === "one_time") {
+  if (cost_type === "One-Time") {
     return (
       <div className="cell-metrics">
         <span>{formatCurrency(total_cost)}</span>
@@ -174,7 +177,7 @@ function renderCostWithAvg({ original }) {
       <span>
         {formatCurrency(base_cost)}
         {"/"}
-        {AVG_COST_SUFFIX[cost_category]}
+        {getCostTypeLabel(cost_type)}
       </span>
     </div>
   );
@@ -213,6 +216,10 @@ function renderNoINQ({ original }) {
 }
 
 function renderStatus({ value }) {
-  return <div className={`cell-status ${value}`}>{TACTIC_STATUSES[value]}</div>;
+  return (
+    <div className={cx("cell-status", getTacticStatusClass(value))}>
+      {value}
+    </div>
+  );
 }
 // End of Cell Renderers
