@@ -62,7 +62,7 @@ def command(project, kind, subkind, user, file):
         raise click.BadParameter(f"User with email={email} not found")
 
     if not ((kind == SpreadsheetKind.MODELING) ^ (not subkind)):
-        raise click.BadParemeter(
+        raise click.BadParameter(
             "For Modeling spreadsheets, you must also specify a value for subkind (like 'Run Rate'); for non-modeling spreadsheets, 'subkind' must be blank."
         )
 
