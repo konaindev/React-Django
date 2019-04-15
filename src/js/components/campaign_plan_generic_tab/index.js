@@ -27,7 +27,7 @@ CampaignPlanGenericTab.propTypes = {
       name: string,
       tooltip: string,
       schedule: string,
-      status: oneOf(Object.keys(TACTIC_STATUSES)),
+      status: oneOf(TACTIC_STATUSES),
       notes: string,
       base_cost: string,
       cost_category: string,

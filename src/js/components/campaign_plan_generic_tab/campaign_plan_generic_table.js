@@ -2,15 +2,13 @@ import React from "react";
 import ReactTable from "react-table";
 
 import RMBTooltip from "../rmb_tooltip";
-import {
-  AVG_COST_SUFFIX,
-  TACTIC_STATUSES
-} from "../campaign_plan/campaign_plan.constants";
+import { AVG_COST_SUFFIX } from "../campaign_plan/campaign_plan.constants";
 import {
   formatCurrency,
   formatDateWithTokens,
   formatNumber
 } from "../../utils/formatters.js";
+import { convertToKebabCase } from "../../utils/misc.js";
 
 export function CampaignPlanGenericTable({ tabKey, tactics }) {
   return (
@@ -213,6 +211,8 @@ function renderNoINQ({ original }) {
 }
 
 function renderStatus({ value }) {
-  return <div className={`cell-status ${value}`}>{TACTIC_STATUSES[value]}</div>;
+  return (
+    <div className={`cell-status ${convertToKebabCase(value)}`}>{value}</div>
+  );
 }
 // End of Cell Renderers

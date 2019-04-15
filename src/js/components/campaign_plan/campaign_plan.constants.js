@@ -14,11 +14,7 @@ export const ALL_TABS_ORDERED = [
 export const GENERIC_TABS = objectFromEntries(GENERIC_TABS_ORDERED);
 export const ALL_TABS = objectFromEntries(ALL_TABS_ORDERED);
 
-export const TACTIC_STATUSES = {
-  not_started: "Not Started",
-  in_progress: "In Progress",
-  complete: "Complete"
-};
+export const TACTIC_STATUSES = ["Not Started", "In Progress", "Complete"];
 
 export const AVG_COST_SUFFIX = {
   monthly: "mo",
