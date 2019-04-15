@@ -4,11 +4,8 @@ from .json_activators import JSONFieldActivator
 
 def _option_sort_order(option):
     """Sort option names alphabetically... except for Run Rate, which always comes first."""
-    return (
-        "___run_rate"
-        if option["name"].casefold().startswith("run rate")
-        else option["name"]
-    )
+    case_name = option["name"].casefold()
+    return "___run_rate" if "run rate" in case_name else case_name
 
 
 class ModelingActivator(JSONFieldActivator):

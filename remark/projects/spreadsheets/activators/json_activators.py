@@ -18,7 +18,7 @@ class JSONFieldActivator(ActivatorBase):
             )
 
     def get_field(self):
-        return getattr(self.project, self.project_field, {})
+        return getattr(self.project, self.project_field, None) or {}
 
     def set_field(self, jsonable):
         return setattr(self.project, self.project_field, jsonable)

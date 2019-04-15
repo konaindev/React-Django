@@ -68,7 +68,7 @@ class NewSpreadsheetInline(admin.StackedInline):
     model = Spreadsheet
     form = SpreadsheetForm
     extra = 0
-    list_display = ["created", "kind", "subkind", "file"]
+    list_display = ["created", "kind", "file"]
     readonly_fields = ["save_button"]
 
     def get_queryset(self, request):

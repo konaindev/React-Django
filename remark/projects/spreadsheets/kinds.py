@@ -6,7 +6,7 @@ class SpreadsheetKind:
 
     CHOICES = [
         (PERIODS, "Periods"),
-        (MODELING, "Modeling (must provide a subkind, too)"),
+        (MODELING, "Modeling"),
         (MARKET, "Market Report"),
         (CAMPAIGN, "Campaign Plan"),
     ]
