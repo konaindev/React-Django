@@ -95,7 +95,7 @@ class ComputedPeriod(ComputedValueMixin):
     def target_leased_units(self):
         """The target number of leased units we'd like to achieve."""
         return d_quant(
-            mult_or_none(self.target_lease_percent, self.occupiable_units),
+            mult_or_none(self.target_leased_rate, self.occupiable_units),
             decimal.Decimal(1),
             decimal.ROUND_HALF_UP,
         )

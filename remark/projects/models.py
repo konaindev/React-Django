@@ -166,28 +166,21 @@ class Project(models.Model):
     )
 
     is_baseline_report_public = models.BooleanField(
-        verbose_name="Show Baseline Report?",
-        default=False,
+        verbose_name="Show Baseline Report?", default=False
     )
 
-    is_tam_public = models.BooleanField(
-        verbose_name="Show TAM?",
-        default=False,
-    )
+    is_tam_public = models.BooleanField(verbose_name="Show TAM?", default=False)
 
     is_performance_report_public = models.BooleanField(
-        verbose_name="Show Performance Report?",
-        default=False,
+        verbose_name="Show Performance Report?", default=False
     )
 
     is_modeling_public = models.BooleanField(
-        verbose_name="Show Modeling?",
-        default=False,
+        verbose_name="Show Modeling?", default=False
     )
 
     is_campaign_plan_public = models.BooleanField(
-        verbose_name="Show Campaign Plan?",
-        default=False,
+        verbose_name="Show Campaign Plan?", default=False
     )
 
     def get_periods(self):
@@ -424,7 +417,7 @@ class Period(ModelPeriod, models.Model):
     # TARGETS: logical activity (lease)
     # ------------------------------------------------------
 
-    target_lease_percent = models.DecimalField(
+    target_leased_rate = models.DecimalField(
         null=True,
         blank=True,
         default=None,
@@ -432,7 +425,7 @@ class Period(ModelPeriod, models.Model):
         decimal_places=3,
         help_text="Target: lease percentage (like 0.9)",
     )
-    target_lease_percent.metric = EndPointMetric()
+    target_leased_rate.metric = EndPointMetric()
 
     target_lease_applications = models.IntegerField(
         null=True, blank=True, default=None, help_text="Target: lease applications"

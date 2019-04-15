@@ -228,7 +228,7 @@ class LincolnTowerPeriodTestCase(TestCase):
             leases_executed=6,
             occupiable_units_start=218,
             occupied_units_start=218,
-            target_lease_percent=decimal.Decimal("0.9"),
+            target_leased_rate=decimal.Decimal("0.9"),
             leases_ended=3,
             lease_renewal_notices=0,
             acq_reputation_building=decimal.Decimal("28000"),
