@@ -1,9 +1,10 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.utils.safestring import mark_safe
 
-from .models import Spreadsheet
+from .models import Project, Spreadsheet
+from .reports.selectors import ReportLinks
 from .spreadsheets import get_importer_for_kind, SpreadsheetKind
-
 
 class SpreadsheetForm(forms.ModelForm):
     """
@@ -44,3 +45,32 @@ class SpreadsheetForm(forms.ModelForm):
     class Meta:
         model = Spreadsheet
         fields = ["project", "kind", "subkind", "file"]
+
+
+class ProjectForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super(ProjectForm, self).__init__(*args, **kwargs)
+        field_maps = {
+            "is_baseline_report_public": "baseline",
+            "is_tam_public": "market",
+            "is_performance_report_public": "performance",
+            "is_modeling_public": "modeling",
+            "is_campaign_plan_public": "campaign_plan",
+        }
+
+        report_links = ReportLinks.for_project(self.instance)
+        for k, v in field_maps.items():
+            if isinstance(report_links[v], dict):
+                link = report_links[v]['url']
+            elif isinstance(report_links[v], list):
+                link = report_links[v][0]['url']
+            else:
+                continue
+            self.fields[k].label = mark_safe(
+                self.fields[k].label +
+                '&nbsp; (URL: <a target="_blank" href="{}">{}</a>)'.format(link, link)
+            )
+
+    class Meta:
+        model = Project
+        exclude = []

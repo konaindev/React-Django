@@ -328,7 +328,7 @@ class MarketReportSelector(ReportSelectorBase):
     @classmethod
     def selectors_for_project(cls, project):
         tam_selector = cls(project)
-        if tam_selector.has_report_data() and tam_selector.is_public():
+        if tam_selector.has_report_data():
             yield tam_selector
 
     def __init__(self, project):
@@ -364,7 +364,7 @@ class ModelingReportSelector(ReportSelectorBase):
     @classmethod
     def selectors_for_project(cls, project):
         modeling_selector = cls(project)
-        if modeling_selector.has_report_data() and modeling_selector.is_public():
+        if modeling_selector.has_report_data():
             yield modeling_selector
 
     def __init__(self, project):
@@ -400,10 +400,7 @@ class CampaignPlanSelector(ReportSelectorBase):
     @classmethod
     def selectors_for_project(cls, project):
         campaign_plan_selector = cls(project)
-        if (
-            campaign_plan_selector.has_report_data()
-            and campaign_plan_selector.is_public()
-        ):
+        if campaign_plan_selector.has_report_data():
             yield campaign_plan_selector
 
     @classmethod
