@@ -2,6 +2,7 @@ import React from "react";
 import { string, number, object, arrayOf, shape } from "prop-types";
 import ReactMarkdown from "react-markdown";
 import cx from "classnames";
+import _get from "lodash/get";
 
 import "./campaign_plan_overview_tab.scss";
 import Panel from "../panel";
@@ -14,7 +15,7 @@ export function CampaignPlanOverviewTab({
   assumptions,
   schedule,
   target,
-  target_investment
+  target_investments
 }) {
   return (
     <Panel className="campaign-plan-overview-tab">
@@ -57,8 +58,7 @@ export function CampaignPlanOverviewTab({
           <div className="row__label">Est. Campaign Target</div>
           <CampaignOverviewEstTarget
             className="row__content"
-            target={target}
-            {...target_investment}
+            {...target_investments}
           />
         </div>
       </div>
@@ -73,23 +73,23 @@ CampaignPlanOverviewTab.propTypes = {
       ordinal: string,
       description: string
     })
-  ),
+  ).isRequired,
   goal: string,
   objectives: arrayOf(
     shape({
       title: string,
       description: string
     })
-  ),
+  ).isRequired,
   assumptions: string,
   schedule: string,
-  target: string,
-  target_investment: shape({
-    reputation_building: string,
-    demand_creation: string,
-    leasing_enablement: string,
-    market_intelligence: string
-  })
+  target_investments: shape({
+    reputation_building: object,
+    demand_creation: object,
+    leasing_enablement: object,
+    market_intelligence: object,
+    total: object
+  }).isRequired
 };
 
 export default CampaignPlanOverviewTab;
@@ -124,9 +124,15 @@ export function CampaignOverviewObjectives({ objectives, className }) {
 }
 
 export function CampaignOverviewEstTarget(props) {
+  const TT = formatCurrency(_get(props, "total.total"));
+  const RB = formatCurrency(_get(props, "reputation_building.total"));
+  const DC = formatCurrency(_get(props, "demand_creation.total"));
+  const LE = formatCurrency(_get(props, "leasing_enablement.total"));
+  const MI = formatCurrency(_get(props, "market_intelligence.total"));
+
   return (
     <div className={cx("est-campaign-target", props.className)}>
-      <h1>{formatCurrency(props.target)}</h1>
+      <h1>{TT}</h1>
       <p>Based on Current Model</p>
       <br />
 
@@ -134,22 +140,22 @@ export function CampaignOverviewEstTarget(props) {
         <p>
           <span>Reputation Building</span>
           <span />
-          <span>{formatCurrency(props.reputation_building)}</span>
+          <span>{RB}</span>
         </p>
         <p>
           <span>Demand Creation</span>
           <span />
-          <span>{formatCurrency(props.demand_creation)}</span>
+          <span>{DC}</span>
         </p>
         <p>
           <span>Leasing Enablement</span>
           <span />
-          <span>{formatCurrency(props.leasing_enablement)}</span>
+          <span>{LE}</span>
         </p>
         <p>
           <span>Marketing Intelligence</span>
           <span />
-          <span>{formatCurrency(props.market_intelligence)}</span>
+          <span>{MI}</span>
         </p>
       </div>
     </div>
