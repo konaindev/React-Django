@@ -1,10 +1,12 @@
 import React from "react";
 import ReactTable from "react-table";
+import cx from "classnames";
 
 import RMBTooltip from "../rmb_tooltip";
 import {
-  COST_TYPES_PREFIX,
-  TACTIC_STATUSES
+  tacticStatusClassNames,
+  getTacticStatusClass,
+  getCostTypeLabel
 } from "../campaign_plan/campaign_plan.constants";
 import {
   formatCurrency,
@@ -161,7 +163,7 @@ function renderCost({ value }) {
 function renderCostWithAvg({ original }) {
   const { cost_type, total_cost, base_cost } = original;
 
-  if (cost_type === "One Time") {
+  if (cost_type === "One-Time") {
     return (
       <div className="cell-metrics">
         <span>{formatCurrency(total_cost)}</span>
@@ -175,7 +177,7 @@ function renderCostWithAvg({ original }) {
       <span>
         {formatCurrency(base_cost)}
         {"/"}
-        {COST_TYPES_PREFIX[cost_type]}
+        {getCostTypeLabel(cost_type)}
       </span>
     </div>
   );
@@ -214,6 +216,10 @@ function renderNoINQ({ original }) {
 }
 
 function renderStatus({ value }) {
-  return <div className={`cell-status ${TACTIC_STATUSES[value]}`}>{value}</div>;
+  return (
+    <div className={cx("cell-status", getTacticStatusClass(value))}>
+      {value}
+    </div>
+  );
 }
 // End of Cell Renderers
