@@ -28,7 +28,7 @@ $status-color-not-started: $content-text-secondary-color;
     margin-bottom: 2.75rem;
 }
 
-.campaign-plan-generic-table {
+.campaign-plan-generic-table.ReactTable {
     height: 100%;
     background-color: $panel-background-color;
 
@@ -95,10 +95,10 @@ $status-color-not-started: $content-text-secondary-color;
     }
 
     .cell-status {
-        &.not_started {
+        &.not-started {
             color: $status-color-not-started;
         }
-        &.in_progress {
+        &.in-progress {
             color: $status-color-in-progress;
         }
         &.complete {
