@@ -2,7 +2,10 @@ import React from "react";
 import ReactTable from "react-table";
 
 import RMBTooltip from "../rmb_tooltip";
-import { AVG_COST_SUFFIX } from "../campaign_plan/campaign_plan.constants";
+import {
+  COST_TYPES_PREFIX,
+  TACTIC_STATUSES
+} from "../campaign_plan/campaign_plan.constants";
 import {
   formatCurrency,
   formatDateWithTokens,
@@ -156,9 +159,9 @@ function renderCost({ value }) {
 }
 
 function renderCostWithAvg({ original }) {
-  const { cost_category, total_cost, base_cost } = original;
+  const { cost_type, total_cost, base_cost } = original;
 
-  if (cost_category === "one_time") {
+  if (cost_type === "One Time") {
     return (
       <div className="cell-metrics">
         <span>{formatCurrency(total_cost)}</span>
@@ -172,7 +175,7 @@ function renderCostWithAvg({ original }) {
       <span>
         {formatCurrency(base_cost)}
         {"/"}
-        {AVG_COST_SUFFIX[cost_category]}
+        {COST_TYPES_PREFIX[cost_type]}
       </span>
     </div>
   );
@@ -211,8 +214,6 @@ function renderNoINQ({ original }) {
 }
 
 function renderStatus({ value }) {
-  return (
-    <div className={`cell-status ${convertToKebabCase(value)}`}>{value}</div>
-  );
+  return <div className={`cell-status ${TACTIC_STATUSES[value]}`}>{value}</div>;
 }
 // End of Cell Renderers

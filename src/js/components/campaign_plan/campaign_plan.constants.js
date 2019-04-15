@@ -14,9 +14,14 @@ export const ALL_TABS_ORDERED = [
 export const GENERIC_TABS = objectFromEntries(GENERIC_TABS_ORDERED);
 export const ALL_TABS = objectFromEntries(ALL_TABS_ORDERED);
 
-export const TACTIC_STATUSES = ["Not Started", "In Progress", "Complete"];
+export const TACTIC_STATUSES = {
+  "Not Started": "not-started",
+  "In Progress": "in-progress",
+  "Complete": "complete" // eslint-disable-line
+};
 
-export const AVG_COST_SUFFIX = {
-  monthly: "mo",
-  weekly: "week"
+export const COST_TYPES_PREFIX = {
+  "Monthly": "mo",  // eslint-disable-line
+  "Weekly": "week",  // eslint-disable-line
+  "One-Time": ""
 };

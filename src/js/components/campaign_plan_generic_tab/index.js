@@ -7,7 +7,8 @@ import CampaignPlanGenericTable from "./campaign_plan_generic_table";
 import CampaignPlanGenericFooter from "./campaign_plan_generic_footer";
 import {
   GENERIC_TABS,
-  TACTIC_STATUSES
+  TACTIC_STATUSES,
+  COST_TYPES_PREFIX
 } from "../campaign_plan/campaign_plan.constants";
 import Panel from "../panel";
 
@@ -27,10 +28,10 @@ CampaignPlanGenericTab.propTypes = {
       name: string,
       tooltip: string,
       schedule: string,
-      status: oneOf(TACTIC_STATUSES),
+      status: oneOf(Object.keys(TACTIC_STATUSES)),
       notes: string,
       base_cost: string,
-      cost_category: string,
+      cost_type: oneOf(Object.keys(COST_TYPES_PREFIX)),
       total_cost: string,
       volumes: shape({
         usv: number,
