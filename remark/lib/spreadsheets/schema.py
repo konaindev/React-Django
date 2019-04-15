@@ -44,19 +44,33 @@ excel data types and python data types.
 
 def StrCell(locator):
     """Return a cell that converts to a python string."""
-    return SchemaCell(locator, DataType.STRING, str)
+
+    def str_or_convertible_data_type(cell):
+        return cell.data_type in frozenset([DataType.STRING, DataType.NUMERIC])
+
+    return SchemaCell(locator, str_or_convertible_data_type, str)
 
 
 def NullStrCell(locator):
     """Return a cell that converts to an optional python string."""
 
-    def str_or_null_data_type(cell):
-        return cell.data_type in [DataType.STRING, DataType.NULL]
+    def str_or_convertible_or_null_data_type(cell):
+        return cell.data_type in frozenset(
+            [DataType.STRING, DataType.NUMERIC, DataType.NULL]
+        )
 
     def str_or_null_converter(value):
-        return str(value) if value else None
+        if isinstance(value, str):
+            # Convert empty strings to None
+            result = str(value) if value else None
+        else:
+            # Convert non-None values to strings.
+            result = str(value) if value is not None else None
+        return result
 
-    return SchemaCell(locator, str_or_null_data_type, str_or_null_converter)
+    return SchemaCell(
+        locator, str_or_convertible_or_null_data_type, str_or_null_converter
+    )
 
 
 def ChoiceCell(locator, choices):
@@ -77,7 +91,7 @@ def NullChoiceCell(locator, choices):
     """Return a cell that converts to an optional predefined string, or raises."""
 
     def str_or_null_data_type(cell):
-        return cell.data_type in [DataType.STRING, DataType.NULL]
+        return cell.data_type in frozenset([DataType.STRING, DataType.NULL])
 
     def choice_or_null_or_fail_converter(value):
         value = str(value) if value else None
@@ -142,3 +156,8 @@ def unflatten_dict(flat):
         path[keys[-1]] = v
 
     return unflat
+
+
+def is_schema_cell(obj):
+    """Return True if this is a schema cell."""
+    return isinstance(obj, SchemaCell)
