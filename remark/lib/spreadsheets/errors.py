@@ -19,7 +19,7 @@ class ExcelError(Exception):
         elif isinstance(where, tuple):
             where = unparse_location(*where)
 
-        super().__init__(f"{where}:: {message}")
+        super().__init__(f"{where} :: {message}")
 
 
 class ExcelValidationError(ExcelError):

@@ -4,7 +4,7 @@ A library for reading data from, and writing data to, excel spreadsheets.
 from .errors import ExcelError, ExcelValidationError, ExcelProgrammingError
 from .getset import get_cell, set_cell
 from .importers import ExcelImporter
-from .locators import BaseLocator, loc, find_col, find_row
+from .locators import BaseLocator, loc, find_col, find_row, require_complete
 from .parse import parse_location, unparse_location
 from .rowcol import (
     advance_col,
@@ -76,6 +76,7 @@ __all__ = (
     parse_location,
     prev_col,
     prev_row,
+    require_complete,
     row_range,
     rows_until_empty,
     rows_until,

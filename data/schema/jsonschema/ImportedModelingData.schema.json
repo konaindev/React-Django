@@ -1,0 +1,411 @@
+{
+    "$ref": "#/definitions/ImportedModelingData",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "AcquisitionCategories<number>": {
+            "description": "Acquisition funnel categories",
+            "properties": {
+                "app": {
+                    "description": "Lease applications",
+                    "type": "number"
+                },
+                "exe": {
+                    "description": "Lease executions",
+                    "type": "number"
+                },
+                "inq": {
+                    "description": "Inquiries",
+                    "type": "number"
+                },
+                "tou": {
+                    "description": "Tours",
+                    "type": "number"
+                },
+                "usv": {
+                    "description": "Unique site visitors",
+                    "type": "number"
+                }
+            },
+            "required": [
+                "app",
+                "exe",
+                "inq",
+                "tou",
+                "usv"
+            ],
+            "type": "object"
+        },
+        "AcquisitionCategories<string>": {
+            "description": "Acquisition funnel categories",
+            "properties": {
+                "app": {
+                    "description": "Lease applications",
+                    "type": "string"
+                },
+                "exe": {
+                    "description": "Lease executions",
+                    "type": "string"
+                },
+                "inq": {
+                    "description": "Inquiries",
+                    "type": "string"
+                },
+                "tou": {
+                    "description": "Tours",
+                    "type": "string"
+                },
+                "usv": {
+                    "description": "Unique site visitors",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "app",
+                "exe",
+                "inq",
+                "tou",
+                "usv"
+            ],
+            "type": "object"
+        },
+        "AcquisitionConversions<number>": {
+            "description": "Acquisition conversions",
+            "properties": {
+                "app_exe": {
+                    "description": "APP > EXE conversion rate @computed",
+                    "type": "number"
+                },
+                "inq_tou": {
+                    "description": "INQ > TOU conversion rate @computed",
+                    "type": "number"
+                },
+                "tou_app": {
+                    "description": "TOU > APP conversion rate @computed",
+                    "type": "number"
+                },
+                "usv_exe": {
+                    "description": "USV > EXE conversion rate @computed",
+                    "type": "number"
+                },
+                "usv_inq": {
+                    "description": "USV > INQ conversion rate @computed",
+                    "type": "number"
+                }
+            },
+            "required": [
+                "app_exe",
+                "inq_tou",
+                "tou_app",
+                "usv_exe",
+                "usv_inq"
+            ],
+            "type": "object"
+        },
+        "AcquisitionFunnel": {
+            "description": "Acquisition funnel",
+            "properties": {
+                "conversions": {
+                    "$ref": "#/definitions/AcquisitionConversions<number>",
+                    "description": "Conversion rates in the acquisition funnel @computed"
+                },
+                "costs": {
+                    "$ref": "#/definitions/AcquisitionCategories<string>",
+                    "description": "Cost-pers in the acquisition funnel @computed"
+                },
+                "volumes": {
+                    "$ref": "#/definitions/AcquisitionCategories<number>",
+                    "description": "Absolute volumes in the acquisition funnel"
+                }
+            },
+            "required": [
+                "conversions",
+                "costs",
+                "volumes"
+            ],
+            "type": "object"
+        },
+        "ImportedModelingData": {
+            "properties": {
+                "dates": {
+                    "$ref": "#/definitions/TimeSpan",
+                    "description": "Dates for the report"
+                },
+                "four_week_funnel_averages": {
+                    "$ref": "#/definitions/AcquisitionCategories<number>",
+                    "description": "Four-week details for the acquisition funnel"
+                },
+                "funnel": {
+                    "$ref": "#/definitions/AcquisitionFunnel",
+                    "description": "The acqusition funnel"
+                },
+                "investment": {
+                    "$ref": "#/definitions/Investment",
+                    "description": "Investment expenses and outcomes, all categories"
+                },
+                "name": {
+                    "description": "A description of this option, like \"Schedule Driven\"",
+                    "type": "string"
+                },
+                "property": {
+                    "$ref": "#/definitions/Property",
+                    "description": "Property details for the report"
+                }
+            },
+            "required": [
+                "dates",
+                "four_week_funnel_averages",
+                "funnel",
+                "investment",
+                "name",
+                "property"
+            ],
+            "type": "object"
+        },
+        "Investment": {
+            "description": "All marketing investment categories",
+            "properties": {
+                "acquisition": {
+                    "$ref": "#/definitions/InvestmentCategoryWithExpenses",
+                    "description": "Investment and returns for the acquisition funnel"
+                },
+                "retention": {
+                    "$ref": "#/definitions/InvestmentCategoryWithExpenses",
+                    "description": "Investment and returns for the retention funnel"
+                },
+                "total": {
+                    "$ref": "#/definitions/InvestmentCategory",
+                    "description": "Total investment and returns across all funnels @computed"
+                }
+            },
+            "required": [
+                "acquisition",
+                "retention",
+                "total"
+            ],
+            "type": "object"
+        },
+        "InvestmentCategory": {
+            "description": "Per-category investment breakdown",
+            "properties": {
+                "estimated_revenue_gain": {
+                    "description": "The estimated revenue gain as a function of monthly rent @computed",
+                    "type": "string"
+                },
+                "romi": {
+                    "description": "The return on investment @computed",
+                    "type": "integer"
+                },
+                "total": {
+                    "description": "The total spent across all buckets @computed",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "estimated_revenue_gain",
+                "romi",
+                "total"
+            ],
+            "type": "object"
+        },
+        "InvestmentCategoryWithExpenses": {
+            "properties": {
+                "estimated_revenue_gain": {
+                    "description": "The estimated revenue gain as a function of monthly rent @computed",
+                    "type": "string"
+                },
+                "expenses": {
+                    "$ref": "#/definitions/InvestmentExpenses",
+                    "description": "Breakdown of marketing expenses into sub-buckets"
+                },
+                "romi": {
+                    "description": "The return on investment @computed",
+                    "type": "integer"
+                },
+                "total": {
+                    "description": "The total spent across all buckets @computed",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "estimated_revenue_gain",
+                "expenses",
+                "romi",
+                "total"
+            ],
+            "type": "object"
+        },
+        "InvestmentExpenses": {
+            "description": "Marketing investment expense buckets",
+            "properties": {
+                "demand_creation": {
+                    "type": "string"
+                },
+                "leasing_enablement": {
+                    "type": "string"
+                },
+                "market_intelligence": {
+                    "type": "string"
+                },
+                "reputation_building": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "demand_creation",
+                "leasing_enablement",
+                "market_intelligence",
+                "reputation_building"
+            ],
+            "type": "object"
+        },
+        "Leasing": {
+            "description": "Leasing -- the \"logical\" side of renting",
+            "properties": {
+                "cd_rate": {
+                    "description": "Cancellations/denials as percentage of lease application @computed",
+                    "type": "number"
+                },
+                "cds": {
+                    "description": "Number of cancellations AND denials",
+                    "type": "integer"
+                },
+                "change": {
+                    "description": "Net change in number of leases during this period @computed",
+                    "type": "integer"
+                },
+                "rate": {
+                    "description": "Lease rate as a function of occupiable units @computed",
+                    "type": "number"
+                },
+                "renewal_notices": {
+                    "description": "Number of new notices to renew",
+                    "type": "integer"
+                },
+                "renewal_rate": {
+                    "description": "Renewal rate @computed",
+                    "type": "number"
+                },
+                "renewals": {
+                    "description": "Number of renewals actually effected in timeframe",
+                    "type": "integer"
+                },
+                "resident_decisions": {
+                    "description": "Number of resident decisions (typically, due to expire leases)",
+                    "type": "integer"
+                },
+                "units": {
+                    "description": "Number of leased units at end of report period @computed",
+                    "type": "integer"
+                },
+                "vacation_notices": {
+                    "description": "Number of notices to vacate",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "cd_rate",
+                "cds",
+                "change",
+                "rate",
+                "renewal_notices",
+                "renewal_rate",
+                "renewals",
+                "resident_decisions",
+                "units",
+                "vacation_notices"
+            ],
+            "type": "object"
+        },
+        "Occupancy": {
+            "description": "Occupancy -- the \"physical\" side of renting",
+            "properties": {
+                "move_ins": {
+                    "description": "Number of units moved into during period",
+                    "type": "integer"
+                },
+                "move_outs": {
+                    "description": "Number of units moved out of during period",
+                    "type": "integer"
+                },
+                "occupiable": {
+                    "description": "Number of occupiable units at the end of report period",
+                    "type": "integer"
+                },
+                "rate": {
+                    "description": "Ratio of occupied to occupiable units @computed",
+                    "type": "number"
+                },
+                "units": {
+                    "description": "Number of occupied units at end of report period @computed",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "move_ins",
+                "move_outs",
+                "occupiable",
+                "rate",
+                "units"
+            ],
+            "type": "object"
+        },
+        "Property": {
+            "description": "Property-wide behavior",
+            "properties": {
+                "average_monthly_rent": {
+                    "description": "The average rent, across all units, during this period",
+                    "type": "string"
+                },
+                "cost_per_exe_vs_rent": {
+                    "description": "The cost per exe vs the monthly average rent during this period",
+                    "type": "number"
+                },
+                "leasing": {
+                    "$ref": "#/definitions/Leasing",
+                    "description": "Basic leasing information for the period"
+                },
+                "lowest_monthly_rent": {
+                    "description": "The lowest rent, across all units, during this period",
+                    "type": "string"
+                },
+                "occupancy": {
+                    "$ref": "#/definitions/Occupancy",
+                    "description": "Basic occupancy information for the period"
+                },
+                "total_units": {
+                    "description": "The total number of units in this property during this period (older buildings may not specify)",
+                    "type": [
+                        "null",
+                        "number"
+                    ]
+                }
+            },
+            "required": [
+                "average_monthly_rent",
+                "cost_per_exe_vs_rent",
+                "leasing",
+                "lowest_monthly_rent",
+                "occupancy",
+                "total_units"
+            ],
+            "type": "object"
+        },
+        "TimeSpan": {
+            "description": "A date range. Start dates are inclusive; end dates are exclusive.",
+            "properties": {
+                "end": {
+                    "type": "string"
+                },
+                "start": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "end",
+                "start"
+            ],
+            "type": "object"
+        }
+    }
+}
+

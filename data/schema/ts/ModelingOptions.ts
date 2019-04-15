@@ -2,7 +2,7 @@ import * as t from "./types";
 import { PropertyReportWithFunnelAverages } from "./BaselineReport";
 
 /** Defines a single potential modeling option under consideration. */
-interface ModelingOption extends PropertyReportWithFunnelAverages {
+export interface ModelingOption extends PropertyReportWithFunnelAverages {
   /** A description of this option, like "Schedule Driven" */
   name: string;
 }

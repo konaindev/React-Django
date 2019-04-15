@@ -17,7 +17,13 @@ class JSONFieldActivator(ActivatorBase):
                 f"Attempted to activate a {self.spreadsheet_kind} to non-existent field {self.project_field}."
             )
 
+    def get_field(self):
+        return getattr(self.project, self.project_field, None) or {}
+
+    def set_field(self, jsonable):
+        return setattr(self.project, self.project_field, jsonable)
+
     def activate(self):
-        setattr(self.project, self.project_field, self.data)
+        self.set_field(self.data)
         self.project.save()
 
