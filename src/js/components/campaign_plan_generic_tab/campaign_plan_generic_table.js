@@ -36,35 +36,35 @@ function getColumns(tabKey) {
     {
       Header: "Tactic",
       accessor: "name",
-      width: 300,
+      minWidth: 300,
       Cell: renderTactic,
       headerClassName: "text-left"
     },
     {
       Header: "Schedule",
       accessor: "schedule",
-      width: 160,
+      width: 176,
       Cell: renderSchedule,
       headerClassName: "text-left"
     },
     {
       Header: "Status",
       accessor: "status",
-      width: 120,
+      width: 136,
       Cell: renderStatus,
       headerClassName: "text-left"
     },
     {
       Header: "Notes/Assumptions",
       accessor: "notes",
-      width: 248,
+      minWidth: 248,
       Cell: renderNotes,
       headerClassName: "text-left"
     },
     {
       Header: "# Of USV",
       accessor: "volumes",
-      width: 110,
+      width: 112,
       Cell: renderNoUSV,
       headerClassName: "text-right"
     },
@@ -78,7 +78,8 @@ function getColumns(tabKey) {
     {
       Header: "Cost",
       accessor: "costs",
-      width: 260,
+      minWidth: 160,
+      maxWidth: 260,
       Cell: renderCostWithAvg,
       headerClassName: "text-right"
     }
@@ -88,35 +89,36 @@ function getColumns(tabKey) {
     {
       Header: "Tactic",
       accessor: "name",
-      width: 470,
+      minWidth: 280,
       Cell: renderTactic,
       headerClassName: "text-left"
     },
     {
       Header: "Schedule",
       accessor: "schedule",
-      width: 254,
+      width: 176,
       Cell: renderSchedule,
       headerClassName: "text-left"
     },
     {
       Header: "Status",
       accessor: "status",
-      width: 134,
+      width: 136,
       Cell: renderStatus,
       headerClassName: "text-left"
     },
     {
       Header: "Notes/Assumptions",
       accessor: "notes",
-      width: 304,
+      minWidth: 292,
       Cell: renderNotes,
       headerClassName: "text-left"
     },
     {
       Header: "Cost",
       accessor: "total_cost",
-      width: 156,
+      minWidth: 160,
+      width: 200,
       Cell: renderCost,
       headerClassName: "text-right"
     }

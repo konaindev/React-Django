@@ -26,6 +26,14 @@ $status-color-not-started: $content-text-secondary-color;
 
 .campaign-plan-generic-tab {
     margin-bottom: 2.75rem;
+
+    &.demand_creation {
+        min-width: 82rem;
+    }
+
+    &:not(.demand_creation) {
+        min-width: 68rem;
+    }
 }
 
 .campaign-plan-generic-table.ReactTable {
