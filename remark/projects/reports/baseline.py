@@ -7,15 +7,6 @@ from .periods import ComputedPeriod
 from remark.lib.math import avg_or_0, sum_or_0
 from remark.lib.metrics import BareMultiPeriod, Weekday
 
-HACK_BASELINE_OVERRIDES = {
-    # Meridian SLC -- override computed props
-    "pro_nqcu73oiinomuvn7": {"leased_units": 162},
-    # El Cortez
-    "pro_xujf7pnznggt5dny": {"leased_units": 113, "occupiable_units": 158},
-    # Lincoln Example
-    # "pro_eekgau8mfkbc34iq": {"leased_units": 456},
-}
-
 
 class BaselineReport(CommonReport):
     """
@@ -66,13 +57,11 @@ class BaselineReport(CommonReport):
         four_week_funnel_values = [fwp.get_values() for fwp in four_week_periods]
 
         return cls(
-            project, baseline_period, four_week_funnel_values=four_week_funnel_values,
-            multiperiod=multiperiod
+            project,
+            baseline_period,
+            four_week_funnel_values=four_week_funnel_values,
+            multiperiod=multiperiod,
         )
-
-    def build_computed_period(self, period):
-        overrides = HACK_BASELINE_OVERRIDES.get(self.project.public_id)
-        return ComputedPeriod(period, overrides=overrides)
 
     def build_four_week_averages(self):
         def _avg(name):
@@ -104,20 +93,17 @@ class BaselineReport(CommonReport):
             "inq_tou": "inq_tou_perc",
             "tou_app": "tou_app_perc",
             "app_exe": "app_exe_perc",
-            "usv_exe": "usv_exe_perc"
+            "usv_exe": "usv_exe_perc",
         }
 
         funnel_history = []
 
         week_periods = self.multiperiod.get_week_periods(
-            weekday=Weekday.MONDAY,
-            precise_start=True,
-            precise_end=True
+            weekday=Weekday.MONDAY, precise_start=True, precise_end=True
         )
 
         week_periods_by_month = itertools.groupby(
-            week_periods,
-            lambda period: period.get_start().__format__("%Y-%m")
+            week_periods, lambda period: period.get_start().__format__("%Y-%m")
         )
 
         for month, week_periods_grouper in week_periods_by_month:
@@ -144,17 +130,13 @@ class BaselineReport(CommonReport):
                     for new_key, old_key in key_map_for_conversions.items()
                 },
                 weekly_volumes={
-                    new_key: [
-                        week_values[old_key] for week_values in week_values_list
-                    ]
+                    new_key: [week_values[old_key] for week_values in week_values_list]
                     for new_key, old_key in key_map_for_volumes.items()
                 },
                 weekly_conversions={
-                    new_key: [
-                        week_values[old_key] for week_values in week_values_list
-                    ]
+                    new_key: [week_values[old_key] for week_values in week_values_list]
                     for new_key, old_key in key_map_for_conversions.items()
-                }
+                },
             )
 
             funnel_history.append(month_funnel)
