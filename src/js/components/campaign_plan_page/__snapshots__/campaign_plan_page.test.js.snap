@@ -390,7 +390,7 @@ exports[`CampaignPlanPage renders correctly 1`] = `
               className="est-campaign-target row__content"
             >
               <h1>
-                $180,000
+                $75,500
               </h1>
               <p>
                 Based on Current Model
@@ -405,7 +405,7 @@ exports[`CampaignPlanPage renders correctly 1`] = `
                   </span>
                   <span />
                   <span>
-                    $35,000
+                    $20,000
                   </span>
                 </p>
                 <p>
@@ -414,7 +414,7 @@ exports[`CampaignPlanPage renders correctly 1`] = `
                   </span>
                   <span />
                   <span>
-                    $86,000
+                    $15,000
                   </span>
                 </p>
                 <p>
@@ -423,7 +423,7 @@ exports[`CampaignPlanPage renders correctly 1`] = `
                   </span>
                   <span />
                   <span>
-                    $35,000
+                    $20,000
                   </span>
                 </p>
                 <p>
@@ -432,7 +432,7 @@ exports[`CampaignPlanPage renders correctly 1`] = `
                   </span>
                   <span />
                   <span>
-                    $24,000
+                    $20,500
                   </span>
                 </p>
               </div>
