@@ -1,20 +1,10 @@
-from remark.lib.match import matchp
 from remark.lib.spreadsheets import (
-    advance_col,
-    advance_row,
-    ChoiceCell,
-    cols_until,
-    cols_until_empty,
     CurrencyCell,
     DateCell,
     require_complete,
     find_row,
     FloatCell,
     IntCell,
-    loc,
-    next_col,
-    next_row,
-    rows_until_empty,
     StrCell,
 )
 
