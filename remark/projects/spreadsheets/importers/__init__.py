@@ -5,13 +5,15 @@ instances. Builds on top of our generic remark.lib.spreadsheets library.
 from ..kinds import SpreadsheetKind
 from .baseline_perf import BaselinePerfImporter
 from .campaign_plan import CampaignPlanImporter
+from .modeling import ModelingImporter
 from .market import MarketImporter
 
 
 IMPORTERS = {
-    SpreadsheetKind.PERIODS: BaselinePerfImporter,
     SpreadsheetKind.CAMPAIGN: CampaignPlanImporter,
     SpreadsheetKind.MARKET: MarketImporter,
+    SpreadsheetKind.MODELING: ModelingImporter,
+    SpreadsheetKind.PERIODS: BaselinePerfImporter,
 }
 
 

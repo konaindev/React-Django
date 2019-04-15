@@ -61,11 +61,6 @@ def command(project, kind, subkind, user, file):
     if user is None:
         raise click.BadParameter(f"User with email={email} not found")
 
-    if not ((kind == SpreadsheetKind.MODELING) ^ (not subkind)):
-        raise click.BadParemeter(
-            "For Modeling spreadsheets, you must also specify a value for subkind (like 'Run Rate'); for non-modeling spreadsheets, 'subkind' must be blank."
-        )
-
     importer = get_importer_for_kind(kind, file)
     if importer is None:
         raise click.BadParameter(
@@ -75,6 +70,10 @@ def command(project, kind, subkind, user, file):
     if not importer.is_valid():
         click.echo(f"Unable to import spreadsheet: {importer.errors}", err=True)
         return
+
+    subkind = None
+    if kind == SpreadsheetKind.MODELING:
+        subkind = importer.cleaned_data["name"]
 
     spreadsheet = Spreadsheet.objects.create(
         project=project,

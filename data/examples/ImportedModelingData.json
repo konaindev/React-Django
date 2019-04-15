@@ -1,0 +1,91 @@
+{
+  "name": "May Deadline - Conversion Focus",
+  "dates": {
+    "start": "2019-04-17",
+    "end": "2019-05-28"
+  },
+  "property": {
+    "average_monthly_rent": "1948.00",
+    "lowest_monthly_rent": "1948.00",
+    "cost_per_exe_vs_rent": 0.24373909137577002,
+    "total_units": 199,
+    "leasing": {
+      "change": 46,
+      "cds": 18,
+      "cd_rate": 0.2727272727272727,
+      "renewal_notices": 2,
+      "renewals": 2,
+      "renewal_rate": 0.5,
+      "resident_decisions": 4,
+      "vacation_notices": 2,
+      "rate": 0.9698492462311558,
+      "units": 193
+    },
+    "occupancy": {
+      "move_ins": 24,
+      "move_outs": 2,
+      "rate": 0.964824120603015,
+      "units": 192,
+      "occupiable": 199
+    }
+  },
+  "funnel": {
+    "volumes": {
+      "usv": 3180,
+      "inq": 294,
+      "tou": 108,
+      "app": 66,
+      "exe": 48
+    },
+    "costs": {
+      "usv": "7.17",
+      "inq": "77.52",
+      "tou": "211.02",
+      "app": "345.31",
+      "exe": "474.80"
+    },
+    "conversions": {
+      "usv_inq": 0.09245283018867924,
+      "inq_tou": 0.3673469387755102,
+      "tou_app": 0.6111111111111112,
+      "app_exe": 0.7272727272727273,
+      "usv_exe": 0.015094339622641511
+    }
+  },
+  "four_week_funnel_averages": {
+    "usv": 2120,
+    "inq": 196,
+    "tou": 72,
+    "app": 44,
+    "exe": 32
+  },
+  "investment": {
+    "acquisition": {
+      "expenses": {
+        "demand_creation": "14300.56",
+        "leasing_enablement": "6500.00",
+        "market_intelligence": "1990.02",
+        "reputation_building": "0.00"
+      },
+      "total": "22790.58",
+      "romi": 25,
+      "estimated_revenue_gain": "561024.00"
+    },
+    "retention": {
+      "expenses": {
+        "demand_creation": "0.00",
+        "leasing_enablement": "4249.98",
+        "market_intelligence": "1989.99",
+        "reputation_building": "0.00"
+      },
+      "total": "6239.97",
+      "romi": 7,
+      "estimated_revenue_gain": "46752.00"
+    },
+    "total": {
+      "total": "29030.55",
+      "romi": 21,
+      "estimated_revenue_gain": "607776.00"
+    }
+  }
+}
