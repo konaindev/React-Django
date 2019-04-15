@@ -1,6 +1,6 @@
 class SpreadsheetKind:
     PERIODS = "periods"  # Baseline and perf periods spreadsheet
-    MODELING = "modeling"  # Modeling report (any kind)
+    MODELING = "model"  # Modeling report (any kind)
     MARKET = "market"  # TAM
     CAMPAIGN = "campaign"  # Campaign Plan
 

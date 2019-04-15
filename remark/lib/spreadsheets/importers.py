@@ -113,10 +113,6 @@ class ExcelImporter:
         a python type converter.
         """
         sheet, _, row = parse_location_or_default(location, sheet, None, row)
-        if row is None:
-            raise ExcelProgrammingError(
-                message="Location provided to row() must contain a row!"
-            )
         return unflatten_dict(
             {
                 key: self.schema_value(schema_item_or_value, sheet=sheet, row=row)
@@ -136,10 +132,6 @@ class ExcelImporter:
         a python type converter.
         """
         sheet, col, _ = parse_location_or_default(location, sheet, col, None)
-        if col is None:
-            raise ExcelProgrammingError(
-                message="Location provided to col() must contain a column!"
-            )
         return unflatten_dict(
             {
                 key: self.schema_value(schema_item_or_value, sheet=sheet, col=col)

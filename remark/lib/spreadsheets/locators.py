@@ -16,6 +16,7 @@ lets you parameterize the behavior of the locator, in arbitrarily complex ways.
 See the simple factory example, `loc`, and the more complex examples
 `find_col` and `find_row`.
 """
+import inspect
 
 from remark.lib.match import matchp
 
@@ -241,3 +242,28 @@ class find_row(BaseLocator):
         # Return a matching location in the target location
         return (sheet or self.target_sheet, col or self.target_col, row or found_row)
 
+
+def require_complete(locator):
+    """
+    Given a locator, return a locator that *demands* a complete location on every
+    call to locator.
+    """
+
+    def inner(workbook, sheet, col, row):
+        def vars_and_args(obj):
+            return {
+                k: inspect.getclosurevars(v).nonlocals
+                if hasattr(v, "__closure__")
+                else v
+                for k, v in vars(obj).items()
+            }
+
+        osheet, ocol, orow = locator(workbook, sheet, col, row)
+        if (osheet is None) or (ocol is None) or (orow is None):
+            raise ExcelProgrammingError(
+                (osheet, ocol, orow),
+                f"require_complete: got incomplete value from '{sheet}'!{col}{row} and vars: {vars_and_args(locator)}",
+            )
+        return (osheet, ocol, orow)
+
+    return inner
