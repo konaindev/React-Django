@@ -11,4 +11,4 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         state = kwargs['state']
 
-        print(state)
+        import_geo_json()
