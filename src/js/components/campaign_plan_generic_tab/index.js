@@ -14,7 +14,7 @@ import Panel from "../panel";
 
 export function CampaignPlanGenericTab(props) {
   return (
-    <Panel className="campaign-plan-generic-tab">
+    <Panel className={cx("campaign-plan-generic-tab", props.tabKey)}>
       <CampaignPlanGenericTable {...props} />
       <CampaignPlanGenericFooter {...props} />
     </Panel>

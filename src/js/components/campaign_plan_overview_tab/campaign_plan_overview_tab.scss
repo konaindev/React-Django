@@ -9,6 +9,7 @@
 
 .campaign-plan-overview-tab {
     margin-bottom: 2.75rem;
+    min-width: 612px;
 }
 
 /* stylelint-disable at-rule-no-unknown */
@@ -38,16 +39,18 @@
         flex: 1 1 auto;
         color: $content-text-secondary-color;
         padding: 24px 40px;
+        min-width: 360px;
     }
 
     .target-segments {
         display: flex;
-        padding: 25px 0 24px 40px;
+        flex-wrap: wrap;
+        padding: 13px 30px 12px 10px;
     }
 
     .target-segment-item {
         flex: 1;
-        margin-right: 60px;
+        padding: 12px 30px;
 
         & > p:first-child {
             @include subheading();

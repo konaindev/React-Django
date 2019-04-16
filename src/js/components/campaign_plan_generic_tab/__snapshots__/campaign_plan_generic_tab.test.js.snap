@@ -2,7 +2,7 @@
 
 exports[`CampaignPlanOverviewTab renders correctly 1`] = `
 <div
-  className="panel panel--default campaign-plan-generic-tab"
+  className="panel panel--default campaign-plan-generic-tab demand_creation"
 >
   <div
     className="ReactTable campaign-plan-generic-table demand_creation"
@@ -16,7 +16,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
         className="rt-thead -header"
         style={
           Object {
-            "minWidth": "1318px",
+            "minWidth": "1252px",
           }
         }
       >
@@ -31,7 +31,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
             style={
               Object {
                 "flex": "300 0 auto",
-                "maxWidth": "300px",
+                "maxWidth": null,
                 "width": "300px",
               }
             }
@@ -49,9 +49,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
             role="columnheader"
             style={
               Object {
-                "flex": "160 0 auto",
-                "maxWidth": "160px",
-                "width": "160px",
+                "flex": "176 0 auto",
+                "maxWidth": "176px",
+                "width": "176px",
               }
             }
             tabIndex="-1"
@@ -68,9 +68,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
             role="columnheader"
             style={
               Object {
-                "flex": "120 0 auto",
-                "maxWidth": "120px",
-                "width": "120px",
+                "flex": "136 0 auto",
+                "maxWidth": "136px",
+                "width": "136px",
               }
             }
             tabIndex="-1"
@@ -88,7 +88,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
             style={
               Object {
                 "flex": "248 0 auto",
-                "maxWidth": "248px",
+                "maxWidth": null,
                 "width": "248px",
               }
             }
@@ -106,9 +106,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
             role="columnheader"
             style={
               Object {
-                "flex": "110 0 auto",
-                "maxWidth": "110px",
-                "width": "110px",
+                "flex": "112 0 auto",
+                "maxWidth": "112px",
+                "width": "112px",
               }
             }
             tabIndex="-1"
@@ -144,9 +144,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
             role="columnheader"
             style={
               Object {
-                "flex": "260 0 auto",
+                "flex": "160 0 auto",
                 "maxWidth": "260px",
-                "width": "260px",
+                "width": "160px",
               }
             }
             tabIndex="-1"
@@ -163,7 +163,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
         className="rt-tbody"
         style={
           Object {
-            "minWidth": "1318px",
+            "minWidth": "1252px",
           }
         }
       >
@@ -182,7 +182,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               style={
                 Object {
                   "flex": "300 0 auto",
-                  "maxWidth": "300px",
+                  "maxWidth": null,
                   "width": "300px",
                 }
               }
@@ -204,9 +204,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "160 0 auto",
-                  "maxWidth": "160px",
-                  "width": "160px",
+                  "flex": "176 0 auto",
+                  "maxWidth": "176px",
+                  "width": "176px",
                 }
               }
             >
@@ -220,9 +220,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "120 0 auto",
-                  "maxWidth": "120px",
-                  "width": "120px",
+                  "flex": "136 0 auto",
+                  "maxWidth": "136px",
+                  "width": "136px",
                 }
               }
             >
@@ -239,7 +239,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               style={
                 Object {
                   "flex": "248 0 auto",
-                  "maxWidth": "248px",
+                  "maxWidth": null,
                   "width": "248px",
                 }
               }
@@ -252,9 +252,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "110 0 auto",
-                  "maxWidth": "110px",
-                  "width": "110px",
+                  "flex": "112 0 auto",
+                  "maxWidth": "112px",
+                  "width": "112px",
                 }
               }
             >
@@ -296,9 +296,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "260 0 auto",
+                  "flex": "160 0 auto",
                   "maxWidth": "260px",
-                  "width": "260px",
+                  "width": "160px",
                 }
               }
             >
@@ -332,7 +332,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               style={
                 Object {
                   "flex": "300 0 auto",
-                  "maxWidth": "300px",
+                  "maxWidth": null,
                   "width": "300px",
                 }
               }
@@ -349,9 +349,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "160 0 auto",
-                  "maxWidth": "160px",
-                  "width": "160px",
+                  "flex": "176 0 auto",
+                  "maxWidth": "176px",
+                  "width": "176px",
                 }
               }
             >
@@ -365,9 +365,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "120 0 auto",
-                  "maxWidth": "120px",
-                  "width": "120px",
+                  "flex": "136 0 auto",
+                  "maxWidth": "136px",
+                  "width": "136px",
                 }
               }
             >
@@ -384,7 +384,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               style={
                 Object {
                   "flex": "248 0 auto",
-                  "maxWidth": "248px",
+                  "maxWidth": null,
                   "width": "248px",
                 }
               }
@@ -397,9 +397,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "110 0 auto",
-                  "maxWidth": "110px",
-                  "width": "110px",
+                  "flex": "112 0 auto",
+                  "maxWidth": "112px",
+                  "width": "112px",
                 }
               }
             >
@@ -441,9 +441,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "260 0 auto",
+                  "flex": "160 0 auto",
                   "maxWidth": "260px",
-                  "width": "260px",
+                  "width": "160px",
                 }
               }
             >
@@ -477,7 +477,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               style={
                 Object {
                   "flex": "300 0 auto",
-                  "maxWidth": "300px",
+                  "maxWidth": null,
                   "width": "300px",
                 }
               }
@@ -494,9 +494,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "160 0 auto",
-                  "maxWidth": "160px",
-                  "width": "160px",
+                  "flex": "176 0 auto",
+                  "maxWidth": "176px",
+                  "width": "176px",
                 }
               }
             >
@@ -510,9 +510,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "120 0 auto",
-                  "maxWidth": "120px",
-                  "width": "120px",
+                  "flex": "136 0 auto",
+                  "maxWidth": "136px",
+                  "width": "136px",
                 }
               }
             >
@@ -529,7 +529,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               style={
                 Object {
                   "flex": "248 0 auto",
-                  "maxWidth": "248px",
+                  "maxWidth": null,
                   "width": "248px",
                 }
               }
@@ -542,9 +542,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "110 0 auto",
-                  "maxWidth": "110px",
-                  "width": "110px",
+                  "flex": "112 0 auto",
+                  "maxWidth": "112px",
+                  "width": "112px",
                 }
               }
             >
@@ -586,9 +586,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "260 0 auto",
+                  "flex": "160 0 auto",
                   "maxWidth": "260px",
-                  "width": "260px",
+                  "width": "160px",
                 }
               }
             >
@@ -622,7 +622,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               style={
                 Object {
                   "flex": "300 0 auto",
-                  "maxWidth": "300px",
+                  "maxWidth": null,
                   "width": "300px",
                 }
               }
@@ -639,9 +639,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "160 0 auto",
-                  "maxWidth": "160px",
-                  "width": "160px",
+                  "flex": "176 0 auto",
+                  "maxWidth": "176px",
+                  "width": "176px",
                 }
               }
             >
@@ -655,9 +655,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "120 0 auto",
-                  "maxWidth": "120px",
-                  "width": "120px",
+                  "flex": "136 0 auto",
+                  "maxWidth": "136px",
+                  "width": "136px",
                 }
               }
             >
@@ -674,7 +674,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               style={
                 Object {
                   "flex": "248 0 auto",
-                  "maxWidth": "248px",
+                  "maxWidth": null,
                   "width": "248px",
                 }
               }
@@ -687,9 +687,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "110 0 auto",
-                  "maxWidth": "110px",
-                  "width": "110px",
+                  "flex": "112 0 auto",
+                  "maxWidth": "112px",
+                  "width": "112px",
                 }
               }
             >
@@ -731,9 +731,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "260 0 auto",
+                  "flex": "160 0 auto",
                   "maxWidth": "260px",
-                  "width": "260px",
+                  "width": "160px",
                 }
               }
             >
@@ -767,7 +767,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               style={
                 Object {
                   "flex": "300 0 auto",
-                  "maxWidth": "300px",
+                  "maxWidth": null,
                   "width": "300px",
                 }
               }
@@ -784,9 +784,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "160 0 auto",
-                  "maxWidth": "160px",
-                  "width": "160px",
+                  "flex": "176 0 auto",
+                  "maxWidth": "176px",
+                  "width": "176px",
                 }
               }
             >
@@ -800,9 +800,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "120 0 auto",
-                  "maxWidth": "120px",
-                  "width": "120px",
+                  "flex": "136 0 auto",
+                  "maxWidth": "136px",
+                  "width": "136px",
                 }
               }
             >
@@ -819,7 +819,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               style={
                 Object {
                   "flex": "248 0 auto",
-                  "maxWidth": "248px",
+                  "maxWidth": null,
                   "width": "248px",
                 }
               }
@@ -832,9 +832,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "110 0 auto",
-                  "maxWidth": "110px",
-                  "width": "110px",
+                  "flex": "112 0 auto",
+                  "maxWidth": "112px",
+                  "width": "112px",
                 }
               }
             >
@@ -876,9 +876,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "260 0 auto",
+                  "flex": "160 0 auto",
                   "maxWidth": "260px",
-                  "width": "260px",
+                  "width": "160px",
                 }
               }
             >
@@ -912,7 +912,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               style={
                 Object {
                   "flex": "300 0 auto",
-                  "maxWidth": "300px",
+                  "maxWidth": null,
                   "width": "300px",
                 }
               }
@@ -929,9 +929,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "160 0 auto",
-                  "maxWidth": "160px",
-                  "width": "160px",
+                  "flex": "176 0 auto",
+                  "maxWidth": "176px",
+                  "width": "176px",
                 }
               }
             >
@@ -945,9 +945,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "120 0 auto",
-                  "maxWidth": "120px",
-                  "width": "120px",
+                  "flex": "136 0 auto",
+                  "maxWidth": "136px",
+                  "width": "136px",
                 }
               }
             >
@@ -964,7 +964,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               style={
                 Object {
                   "flex": "248 0 auto",
-                  "maxWidth": "248px",
+                  "maxWidth": null,
                   "width": "248px",
                 }
               }
@@ -977,9 +977,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "110 0 auto",
-                  "maxWidth": "110px",
-                  "width": "110px",
+                  "flex": "112 0 auto",
+                  "maxWidth": "112px",
+                  "width": "112px",
                 }
               }
             >
@@ -1025,9 +1025,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "260 0 auto",
+                  "flex": "160 0 auto",
                   "maxWidth": "260px",
-                  "width": "260px",
+                  "width": "160px",
                 }
               }
             >
@@ -1061,7 +1061,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               style={
                 Object {
                   "flex": "300 0 auto",
-                  "maxWidth": "300px",
+                  "maxWidth": null,
                   "width": "300px",
                 }
               }
@@ -1078,9 +1078,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "160 0 auto",
-                  "maxWidth": "160px",
-                  "width": "160px",
+                  "flex": "176 0 auto",
+                  "maxWidth": "176px",
+                  "width": "176px",
                 }
               }
             >
@@ -1094,9 +1094,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "120 0 auto",
-                  "maxWidth": "120px",
-                  "width": "120px",
+                  "flex": "136 0 auto",
+                  "maxWidth": "136px",
+                  "width": "136px",
                 }
               }
             >
@@ -1113,7 +1113,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               style={
                 Object {
                   "flex": "248 0 auto",
-                  "maxWidth": "248px",
+                  "maxWidth": null,
                   "width": "248px",
                 }
               }
@@ -1126,9 +1126,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "110 0 auto",
-                  "maxWidth": "110px",
-                  "width": "110px",
+                  "flex": "112 0 auto",
+                  "maxWidth": "112px",
+                  "width": "112px",
                 }
               }
             >
@@ -1174,9 +1174,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "260 0 auto",
+                  "flex": "160 0 auto",
                   "maxWidth": "260px",
-                  "width": "260px",
+                  "width": "160px",
                 }
               }
             >
@@ -1210,7 +1210,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               style={
                 Object {
                   "flex": "300 0 auto",
-                  "maxWidth": "300px",
+                  "maxWidth": null,
                   "width": "300px",
                 }
               }
@@ -1227,9 +1227,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "160 0 auto",
-                  "maxWidth": "160px",
-                  "width": "160px",
+                  "flex": "176 0 auto",
+                  "maxWidth": "176px",
+                  "width": "176px",
                 }
               }
             >
@@ -1243,9 +1243,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "120 0 auto",
-                  "maxWidth": "120px",
-                  "width": "120px",
+                  "flex": "136 0 auto",
+                  "maxWidth": "136px",
+                  "width": "136px",
                 }
               }
             >
@@ -1262,7 +1262,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               style={
                 Object {
                   "flex": "248 0 auto",
-                  "maxWidth": "248px",
+                  "maxWidth": null,
                   "width": "248px",
                 }
               }
@@ -1275,9 +1275,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "110 0 auto",
-                  "maxWidth": "110px",
-                  "width": "110px",
+                  "flex": "112 0 auto",
+                  "maxWidth": "112px",
+                  "width": "112px",
                 }
               }
             >
@@ -1315,9 +1315,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "260 0 auto",
+                  "flex": "160 0 auto",
                   "maxWidth": "260px",
-                  "width": "260px",
+                  "width": "160px",
                 }
               }
             >
@@ -1346,7 +1346,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               style={
                 Object {
                   "flex": "300 0 auto",
-                  "maxWidth": "300px",
+                  "maxWidth": null,
                   "width": "300px",
                 }
               }
@@ -1368,9 +1368,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "160 0 auto",
-                  "maxWidth": "160px",
-                  "width": "160px",
+                  "flex": "176 0 auto",
+                  "maxWidth": "176px",
+                  "width": "176px",
                 }
               }
             >
@@ -1384,9 +1384,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "120 0 auto",
-                  "maxWidth": "120px",
-                  "width": "120px",
+                  "flex": "136 0 auto",
+                  "maxWidth": "136px",
+                  "width": "136px",
                 }
               }
             >
@@ -1403,7 +1403,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               style={
                 Object {
                   "flex": "248 0 auto",
-                  "maxWidth": "248px",
+                  "maxWidth": null,
                   "width": "248px",
                 }
               }
@@ -1416,9 +1416,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "110 0 auto",
-                  "maxWidth": "110px",
-                  "width": "110px",
+                  "flex": "112 0 auto",
+                  "maxWidth": "112px",
+                  "width": "112px",
                 }
               }
             >
@@ -1456,9 +1456,9 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
               role="gridcell"
               style={
                 Object {
-                  "flex": "260 0 auto",
+                  "flex": "160 0 auto",
                   "maxWidth": "260px",
-                  "width": "260px",
+                  "width": "160px",
                 }
               }
             >
