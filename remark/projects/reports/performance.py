@@ -6,15 +6,6 @@ from .common import CommonReport
 from .whiskers import WhiskerSeries
 
 
-HACK_PERFORMANCE_FINAL_REPORT_OVERRIDES = {
-    # El Cortez, perf report starting 2019-03-01
-    ("pro_xujf7pnznggt5dny", "2019-03-01"): {
-        "deltas.property.leasing.rate": 0.0,
-        "deltas.property.occupancy.rate": 0.0,
-    }
-}
-
-
 class PerformanceReport(CommonReport):
     """
     Provides Performance Report data for both named and arbitrary timespans.
@@ -128,16 +119,3 @@ class PerformanceReport(CommonReport):
         )
         return cls(project, period, previous_period=None, whiskers=whiskers)
 
-    def to_jsonable(self):
-        report = super().to_jsonable()
-
-        override_key = (self.project.public_id, report["dates"]["start"].isoformat())
-        overrides = HACK_PERFORMANCE_FINAL_REPORT_OVERRIDES.get(override_key, {})
-        for o_path, o_value in overrides.items():
-            o_path_parts = o_path.split(".")
-            o_current = report
-            for o_path_part in o_path_parts[:-1]:
-                o_current = o_current.get(o_path_part, {})
-            o_current[o_path_parts[-1]] = o_value
-
-        return report
