@@ -1,6 +1,8 @@
 import itertools
 from datetime import timedelta
 
+
+from ..models import TargetPeriod
 from .common import CommonReport
 from .periods import ComputedPeriod
 
@@ -46,7 +48,14 @@ class BaselineReport(CommonReport):
         if not cls.has_baseline(project):
             return None
         baseline_periods = project.get_baseline_periods()
-        multiperiod = BareMultiPeriod.from_periods(baseline_periods)
+        # TODO XXX remove this empty_target_period hack. This will go away as soon
+        # as I have target import and selection finished. -Dave
+        empty_target_period = TargetPeriod(
+            project=project, start=project.baseline_start, end=project.baseline_end
+        )
+        multiperiod = BareMultiPeriod.from_periods(
+            list(baseline_periods) + [empty_target_period]
+        )
         baseline_period = multiperiod.get_cumulative_period()
         only_funnel_multiperiod = multiperiod.only(
             "usvs", "inquiries", "tours", "lease_applications", "leases_executed"

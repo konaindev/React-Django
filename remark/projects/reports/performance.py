@@ -39,7 +39,10 @@ class PerformanceReport(CommonReport):
             return None
 
         all_periods = project.get_periods()
-        multiperiod = BareMultiPeriod.from_periods(all_periods)
+        all_target_periods = project.get_target_periods()
+        multiperiod = BareMultiPeriod.from_periods(
+            list(all_periods) + list(all_target_periods)
+        )
         end = end or multiperiod.get_end()
 
         # Get the period under question (this will always be constructed)
@@ -111,7 +114,10 @@ class PerformanceReport(CommonReport):
         if not cls.has_campaign_to_date(project):
             return None
         all_periods = project.get_periods()
-        multiperiod = BareMultiPeriod.from_periods(all_periods)
+        all_target_periods = project.get_target_periods()
+        multiperiod = BareMultiPeriod.from_periods(
+            list(all_periods) + list(all_target_periods)
+        )
         break_times = [project.get_campaign_start(), project.get_campaign_end()]
         period = multiperiod.get_periods(*break_times)[0]
         whiskers = WhiskerSeries.build_weekly_series(

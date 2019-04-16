@@ -185,13 +185,8 @@ class BareMultiPeriod(MultiPeriodBase):
         The 'extent' of the multiperiod will be the discovered extent of the 
         underlying periods.
         """
-
-        # All periods are presumed parallel; grab their metrics
-        metric_names = periods[0].get_metric_names()
-        metrics = {
-            metric_name: periods[0].get_metric(metric_name)
-            for metric_name in metric_names
-        }
+        # Build a mapping from metric name to metric
+        metrics = {}
 
         # Build a mapping from metric name to a list of time values
         values = {}
@@ -202,6 +197,10 @@ class BareMultiPeriod(MultiPeriodBase):
         for period in periods:
             start = period.get_start()
             end = period.get_end()
+
+            # TODO CONSIDER: what if metric names collide across periods?
+            # We should probably detect this and raise an exception. -Dave
+            metrics.update(period.get_metrics())
             period_values = period.get_values()
             period_time_values = {
                 metric_name: TimeValue(start, end, value)
