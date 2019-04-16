@@ -3,7 +3,7 @@ from django.utils.safestring import mark_safe
 
 from remark.admin import admin_site
 
-from .forms import SpreadsheetForm
+from .forms import ProjectForm, SpreadsheetForm
 from .models import Project, Period, Spreadsheet
 
 
@@ -181,6 +181,8 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, admin.ModelAdmin):
         "average_monthly_rent",
         "lowest_monthly_rent",
     ]
+
+    form = ProjectForm
 
     def number_of_periods(self, obj):
         return obj.periods.all().count()
