@@ -75,7 +75,7 @@ export default class LeasingPerformanceReport extends Component {
             <>
               <div>
                 {formatNumber(r.property.occupancy.units)} Occupied Units (Out
-                of ${formatNumber(r.property.occupancy.occupiable)})
+                of {formatNumber(r.property.occupancy.occupiable)})
               </div>
               {totalUnits}
             </>
