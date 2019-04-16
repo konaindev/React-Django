@@ -414,6 +414,170 @@ class Period(ModelPeriod, models.Model):
     lease_vacation_notices.metric = SumIntervalMetric()
 
     # ------------------------------------------------------
+    # Physical activity (occupancy)
+    # ------------------------------------------------------
+
+    occupiable_units_start = models.IntegerField(
+        default=None,
+        null=True,
+        blank=True,
+        help_text="Number of units that can possibly be at period start. If not specified, will be pulled from a previous period.",
+    )
+    occupiable_units_start.metric = PointMetric()
+
+    occupied_units_start = models.IntegerField(
+        help_text="Number of units occupied at period start."
+    )
+    occupied_units_start.metric = PointMetric()
+
+    move_ins = models.IntegerField(default=0, help_text="Number of units moved into")
+    move_ins.metric = SumIntervalMetric()
+
+    move_outs = models.IntegerField(default=0, help_text="Number of units moved out of")
+    move_outs.metric = SumIntervalMetric()
+
+    # ------------------------------------------------------
+    # Acquisition Investment
+    # ------------------------------------------------------
+
+    acq_reputation_building = models.DecimalField(
+        default=decimal.Decimal(0),
+        max_digits=10,
+        decimal_places=2,
+        help_text="Amount invested in acquisition reputation building",
+    )
+    acq_reputation_building.metric = SumIntervalMetric()
+
+    acq_demand_creation = models.DecimalField(
+        default=decimal.Decimal(0),
+        max_digits=10,
+        decimal_places=2,
+        help_text="Amount invested in acquisition demand creation",
+    )
+    acq_demand_creation.metric = SumIntervalMetric()
+
+    acq_leasing_enablement = models.DecimalField(
+        default=decimal.Decimal(0),
+        max_digits=10,
+        decimal_places=2,
+        help_text="Amount invested in acquisition leasing enablement",
+    )
+    acq_leasing_enablement.metric = SumIntervalMetric()
+
+    acq_market_intelligence = models.DecimalField(
+        default=decimal.Decimal(0),
+        max_digits=10,
+        decimal_places=2,
+        help_text="Amount invested in acquisition market intelligence",
+    )
+    acq_market_intelligence.metric = SumIntervalMetric()
+
+    # ------------------------------------------------------
+    # Retention Investment
+    # ------------------------------------------------------
+
+    ret_reputation_building = models.DecimalField(
+        default=decimal.Decimal(0),
+        max_digits=10,
+        decimal_places=2,
+        help_text="Amount invested in retention reputation building",
+    )
+    ret_reputation_building.metric = SumIntervalMetric()
+
+    ret_demand_creation = models.DecimalField(
+        default=decimal.Decimal(0),
+        max_digits=10,
+        decimal_places=2,
+        help_text="Amount invested in retention demand creation",
+    )
+    ret_demand_creation.metric = SumIntervalMetric()
+
+    ret_leasing_enablement = models.DecimalField(
+        default=decimal.Decimal(0),
+        max_digits=10,
+        decimal_places=2,
+        help_text="Amount invested in retention leasing enablement",
+    )
+    ret_leasing_enablement.metric = SumIntervalMetric()
+
+    ret_market_intelligence = models.DecimalField(
+        default=decimal.Decimal(0),
+        max_digits=10,
+        decimal_places=2,
+        help_text="Amount invested in retention market intelligence",
+    )
+    ret_market_intelligence.metric = SumIntervalMetric()
+
+    # ------------------------------------------------------
+    # Acquisition Funnel
+    # ------------------------------------------------------
+
+    usvs = models.IntegerField(
+        default=0, help_text="The number of unique site visitors during this period."
+    )
+    usvs.metric = SumIntervalMetric()
+
+    inquiries = models.IntegerField(
+        default=0, help_text="The number of site inquiries during this period."
+    )
+    inquiries.metric = SumIntervalMetric()
+
+    tours = models.IntegerField(
+        default=0, help_text="The number of tours during this period."
+    )
+    tours.metric = SumIntervalMetric()
+
+    # ------------------------------------------------------
+    # Meta, etc.
+    # ------------------------------------------------------
+
+    @property
+    def average_monthly_rent(self):
+        return self.project.average_monthly_rent
+
+    @property
+    def lowest_monthly_rent(self):
+        return self.project.lowest_monthly_rent
+
+    @property
+    def total_units(self):
+        return self.project.total_units
+
+    def _build_metrics(self):
+        # Manually insert average_monthly_rent and lowest_monthly_rent
+        # TODO consider better ways to do this... -Dave
+        super()._build_metrics()
+        self._metrics["total_units"] = PointMetric()
+        self._metrics["average_monthly_rent"] = PointMetric()
+        self._metrics["lowest_monthly_rent"] = PointMetric()
+
+    class Meta:
+        # Always sort Periods with the earliest period first.
+        ordering = ["start"]
+
+
+class TargetPeriodManager(models.Manager):
+    pass
+
+
+class TargetPeriod(ModelPeriod, models.Model):
+    objects = TargetPeriodManager()
+
+    project = models.ForeignKey(
+        Project, on_delete=models.CASCADE, related_name="target_periods"
+    )
+
+    start = models.DateField(
+        db_index=True,
+        help_text="The first date, inclusive, that this target period tracks.",
+    )
+
+    end = models.DateField(
+        db_index=True,
+        help_text="The final date, exclusive, that this target period tracks.",
+    )
+
+    # ------------------------------------------------------
     # TARGETS: logical activity (lease)
     # ------------------------------------------------------
 
@@ -466,29 +630,6 @@ class Period(ModelPeriod, models.Model):
     target_delta_leases.metric = SumIntervalMetric()
 
     # ------------------------------------------------------
-    # Physical activity (occupancy)
-    # ------------------------------------------------------
-
-    occupiable_units_start = models.IntegerField(
-        default=None,
-        null=True,
-        blank=True,
-        help_text="Number of units that can possibly be at period start. If not specified, will be pulled from a previous period.",
-    )
-    occupiable_units_start.metric = PointMetric()
-
-    occupied_units_start = models.IntegerField(
-        help_text="Number of units occupied at period start."
-    )
-    occupied_units_start.metric = PointMetric()
-
-    move_ins = models.IntegerField(default=0, help_text="Number of units moved into")
-    move_ins.metric = SumIntervalMetric()
-
-    move_outs = models.IntegerField(default=0, help_text="Number of units moved out of")
-    move_outs.metric = SumIntervalMetric()
-
-    # ------------------------------------------------------
     # TARGETS: Physical activity (occupancy)
     # ------------------------------------------------------
 
@@ -508,42 +649,6 @@ class Period(ModelPeriod, models.Model):
     target_occupied_units.metric = EndPointMetric()
 
     # ------------------------------------------------------
-    # Acquisition Investment
-    # ------------------------------------------------------
-
-    acq_reputation_building = models.DecimalField(
-        default=decimal.Decimal(0),
-        max_digits=10,
-        decimal_places=2,
-        help_text="Amount invested in acquisition reputation building",
-    )
-    acq_reputation_building.metric = SumIntervalMetric()
-
-    acq_demand_creation = models.DecimalField(
-        default=decimal.Decimal(0),
-        max_digits=10,
-        decimal_places=2,
-        help_text="Amount invested in acquisition demand creation",
-    )
-    acq_demand_creation.metric = SumIntervalMetric()
-
-    acq_leasing_enablement = models.DecimalField(
-        default=decimal.Decimal(0),
-        max_digits=10,
-        decimal_places=2,
-        help_text="Amount invested in acquisition leasing enablement",
-    )
-    acq_leasing_enablement.metric = SumIntervalMetric()
-
-    acq_market_intelligence = models.DecimalField(
-        default=decimal.Decimal(0),
-        max_digits=10,
-        decimal_places=2,
-        help_text="Amount invested in acquisition market intelligence",
-    )
-    acq_market_intelligence.metric = SumIntervalMetric()
-
-    # ------------------------------------------------------
     # TARGETS: Acquisition Investment
     # ------------------------------------------------------
 
@@ -558,42 +663,6 @@ class Period(ModelPeriod, models.Model):
     target_acq_investment.metric = SumIntervalMetric()
 
     # ------------------------------------------------------
-    # Retention Investment
-    # ------------------------------------------------------
-
-    ret_reputation_building = models.DecimalField(
-        default=decimal.Decimal(0),
-        max_digits=10,
-        decimal_places=2,
-        help_text="Amount invested in retention reputation building",
-    )
-    ret_reputation_building.metric = SumIntervalMetric()
-
-    ret_demand_creation = models.DecimalField(
-        default=decimal.Decimal(0),
-        max_digits=10,
-        decimal_places=2,
-        help_text="Amount invested in retention demand creation",
-    )
-    ret_demand_creation.metric = SumIntervalMetric()
-
-    ret_leasing_enablement = models.DecimalField(
-        default=decimal.Decimal(0),
-        max_digits=10,
-        decimal_places=2,
-        help_text="Amount invested in retention leasing enablement",
-    )
-    ret_leasing_enablement.metric = SumIntervalMetric()
-
-    ret_market_intelligence = models.DecimalField(
-        default=decimal.Decimal(0),
-        max_digits=10,
-        decimal_places=2,
-        help_text="Amount invested in retention market intelligence",
-    )
-    ret_market_intelligence.metric = SumIntervalMetric()
-
-    # ------------------------------------------------------
     # TARGETS: Retention Investment
     # ------------------------------------------------------
 
@@ -606,25 +675,6 @@ class Period(ModelPeriod, models.Model):
         help_text="Target: total retention investment",
     )
     target_ret_investment.metric = SumIntervalMetric()
-
-    # ------------------------------------------------------
-    # Acquisition Funnel
-    # ------------------------------------------------------
-
-    usvs = models.IntegerField(
-        default=0, help_text="The number of unique site visitors during this period."
-    )
-    usvs.metric = SumIntervalMetric()
-
-    inquiries = models.IntegerField(
-        default=0, help_text="The number of site inquiries during this period."
-    )
-    inquiries.metric = SumIntervalMetric()
-
-    tours = models.IntegerField(
-        default=0, help_text="The number of tours during this period."
-    )
-    tours.metric = SumIntervalMetric()
 
     # ------------------------------------------------------
     # TARGETS: Acquisition Funnel
@@ -645,31 +695,6 @@ class Period(ModelPeriod, models.Model):
     )
     target_tours.metric = SumIntervalMetric()
 
-    # ------------------------------------------------------
-    # Meta, etc.
-    # ------------------------------------------------------
-
-    @property
-    def average_monthly_rent(self):
-        return self.project.average_monthly_rent
-
-    @property
-    def lowest_monthly_rent(self):
-        return self.project.lowest_monthly_rent
-
-    @property
-    def total_units(self):
-        return self.project.total_units
-
-    def _build_metrics(self):
-        # Manually insert average_monthly_rent and lowest_monthly_rent
-        # TODO consider better ways to do this... -Dave
-        super()._build_metrics()
-        self._metrics["total_units"] = PointMetric()
-        self._metrics["average_monthly_rent"] = PointMetric()
-        self._metrics["lowest_monthly_rent"] = PointMetric()
-
     class Meta:
-        # Always sort Periods with the earliest period first.
+        # Always sort TargetPeriods with the earliest period first.
         ordering = ["start"]
-
