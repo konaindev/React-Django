@@ -71,4 +71,4 @@ class EndPointMetric(GravityPointMetricBase):
     """
 
     def get_unify_query_dict(self, start, end, time_values):
-        return dict(end__lt=end)
+        return dict(start__lt=end)

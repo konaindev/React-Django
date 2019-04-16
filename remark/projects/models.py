@@ -189,6 +189,12 @@ class Project(models.Model):
         """
         return self.periods.all()
 
+    def get_target_periods(self):
+        """
+        Return a queryset of all target periods.
+        """
+        return self.target_periods.all()
+
     def get_baseline_periods(self):
         """
         Return the baseline periods for this project.
@@ -201,6 +207,12 @@ class Project(models.Model):
         the baseline.
         """
         return self.periods.filter(start__gte=self.baseline_end)
+
+    def get_campaign_target_periods(self):
+        """
+        Return the campaign target periods for this project.
+        """
+        return self.target_periods.filter(start__gte=self.baseline_end)
 
     def get_campaign_period_dates(self):
         """
