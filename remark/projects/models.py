@@ -502,6 +502,11 @@ class Period(ModelPeriod, models.Model):
     )
     target_move_outs.metric = SumIntervalMetric()
 
+    target_occupied_units = models.IntegerField(
+        null=True, blank=True, default=None, help_text="Target: occupied units"
+    )
+    target_occupied_units.metric = EndPointMetric()
+
     # ------------------------------------------------------
     # Acquisition Investment
     # ------------------------------------------------------

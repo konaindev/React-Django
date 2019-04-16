@@ -125,15 +125,14 @@ class ComputedPeriod(ComputedValueMixin):
     # ------------------------------------------------------
 
     @computed_value
-    def target_occupied_units(self):
-        """Return the target number of occupiable units."""
-        # NOTE for now, we simply assume this is the same as the target leased units.
-        return self.target_leased_units
+    def target_occupiable_units(self):
+        """For now, we always hit our target."""
+        return self.occupiable_units
 
     @computed_value
     def target_occupancy_rate(self):
         """The target percentage of occupiable units that are actually occupied at end of period."""
-        return div_or_none(self.target_occupied_units, self.occupiable_units)
+        return div_or_none(self.target_occupied_units, self.target_occupiable_units)
 
     # ------------------------------------------------------
     # Investment
