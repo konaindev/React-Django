@@ -304,7 +304,7 @@ exports[`ModelingReportPage renders correctly 1`] = `
               >
                 <div>
                   242
-                   Occupied Units (Out of $
+                   Occupied Units (Out of 
                   260
                   )
                 </div>

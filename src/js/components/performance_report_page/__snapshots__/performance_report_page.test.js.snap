@@ -972,7 +972,7 @@ exports[`PerformanceReportPage renders correctly 1`] = `
             >
               <div>
                 220
-                 Occupied Units (Out of $
+                 Occupied Units (Out of 
                 260
                 )
               </div>

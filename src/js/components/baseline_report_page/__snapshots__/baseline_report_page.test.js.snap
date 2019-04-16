@@ -271,7 +271,7 @@ exports[`BaselineReportPage renders correctly 1`] = `
             >
               <div>
                 185
-                 Occupied Units (Out of $
+                 Occupied Units (Out of 
                 260
                 )
               </div>
