@@ -26,4 +26,3 @@ class AddressManagerTestCase(TestCase):
         result = None
         address = Address.objects.create_with_geocode_result(result)
         self.assertTrue(address is None)
-

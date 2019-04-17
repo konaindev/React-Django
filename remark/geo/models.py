@@ -148,3 +148,26 @@ class Address(models.Model):
 
     def __str__(self):
         return self.formatted_address or str(self.id)
+
+
+class ZipcodePolygon(models.Model):
+    """
+    Polygon data per zip code
+    """
+    zip_code = models.CharField(
+        primary_key=True,
+        help_text="5-digit ZIP code",
+        max_length=5,
+    )
+
+    state = models.CharField(
+        help_text="State Abbreviation",
+        max_length=2
+    )
+
+    geometry = JSONField(
+        help_text="Geometry JSON data"
+    )
+
+    class Meta:
+        db_table = "geo_zipcode_polygons"
