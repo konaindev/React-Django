@@ -1,5 +1,3 @@
-import json
-import os
 from urllib.request import urlopen
 import ijson
 
@@ -57,12 +55,10 @@ US_STATES = {
     "wy": "wy_wyoming_zip_codes_geo.min.json"
 }
 
-US_STATE_TEST = {
-    "dc": "dc_district_of_columbia_zip_codes_geo.min.json"
-}
+ZIP_CODE_ACCESSOR = "ZCTA5CE10"
 
 
-def import_zip_polygons_for_one_state(state_abbr):
+def import_one_state(state_abbr):
     file_name = US_STATES.get(state_abbr, None)
 
     if (file_name is None):
@@ -79,34 +75,31 @@ def import_zip_polygons_for_one_state(state_abbr):
         for feature in features:
             zip_code_count = zip_code_count + 1
             properties = feature["properties"]
-            zip_code = properties["ZCTA5CE10"]
-            geometry = feature["geometry"]
+            zip_code = properties[ZIP_CODE_ACCESSOR]
+            geojson = feature["geometry"]
 
-            geojson = {
-                "type": geometry["type"]
-            }
+            # ignore holes for optimization in case of "MultiPolygon"
+            geojson["coordinates"] = [geojson["coordinates"][0]] 
 
-            if geojson["type"] == "Polygon":
-                geojson["coordinates"] = geometry["coordinates"]
-            elif geojson["type"] == "MultiPolygon":
-                # ignore holes for optimization
-                geojson["coordinates"] = [geometry["coordinates"][0]]
-
-            # print(zip_code, geojson["type"])
+            print(zip_code)
 
     return zip_code_count
 
 
-def import_zip_polygons():
-    print("============================================================")
-    print("Started importing geojson data for all states\n")
+def import_zipcode_polygons(states_args = None):
+    states_to_import = states_args or list(US_STATES.keys())
 
-    for state in US_STATES:
-        print("------------------------------------------------------------")
-        print(f"state: [{state}] started...")
+    print("============================================================")
+    print("Started importing geojson data for the following states:")
+    print(", ".join([state.upper() for state in states_to_import]))
+
+    for state in states_to_import:
+        state_upper = state.upper()
+        print(f"========== {state_upper} ==========")
         try:
-            zip_code_count = import_zip_polygons_for_one_state(state)
-            print(f"state: [{state}] total: {zip_code_count} zip codes\n")
+            zip_code_count = import_one_state(state)
+            print(f"{zip_code_count} zip codes imported")
         except Exception as e:
-            print(f"state: [{state}] error!!!")
             print(e, "\n")
+
+    print("============================================================")
