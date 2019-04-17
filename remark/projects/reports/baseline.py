@@ -6,7 +6,7 @@ from ..models import TargetPeriod
 from .common import CommonReport
 from .periods import ComputedPeriod
 
-from remark.lib.math import avg_or_0, sum_or_0
+from remark.lib.math import avg_or_0
 from remark.lib.metrics import BareMultiPeriod, Weekday
 
 
@@ -48,13 +48,9 @@ class BaselineReport(CommonReport):
         if not cls.has_baseline(project):
             return None
         baseline_periods = project.get_baseline_periods()
-        # TODO XXX remove this empty_target_period hack. This will go away as soon
-        # as I have target import and selection finished. -Dave
-        empty_target_period = TargetPeriod(
-            project=project, start=project.baseline_start, end=project.baseline_end
-        )
+        baseline_target_periods = project.get_baseline_target_periods()
         multiperiod = BareMultiPeriod.from_periods(
-            list(baseline_periods) + [empty_target_period]
+            list(baseline_periods) + list(baseline_target_periods)
         )
         baseline_period = multiperiod.get_cumulative_period()
         only_funnel_multiperiod = multiperiod.only(

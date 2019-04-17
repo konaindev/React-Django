@@ -183,6 +183,17 @@ class Project(models.Model):
         verbose_name="Show Campaign Plan?", default=False
     )
 
+    def _target_periods(self, qs):
+        # TODO XXX temporary hack until we fully populate from model spreadsheets. -Dave
+        target_periods = list(qs)
+        if not target_periods:
+            end = self.get_campaign_end() or self.baseline_end
+            empty_target_period = TargetPeriod(
+                project=self, start=self.baseline_start, end=end
+            )
+            target_periods = [empty_target_period]
+        return target_periods
+
     def get_periods(self):
         """
         Return a queryset of all periods, including the baseline.
@@ -191,15 +202,23 @@ class Project(models.Model):
 
     def get_target_periods(self):
         """
-        Return a queryset of all target periods.
+        Return a list of all target periods.
         """
-        return self.target_periods.all()
+        return self._target_periods(self.target_periods.all())
 
     def get_baseline_periods(self):
         """
         Return the baseline periods for this project.
         """
         return self.periods.filter(end__lte=self.baseline_end)
+
+    def get_baseline_target_periods(self):
+        """
+        Return target periods within the baseline.
+        """
+        return self._target_periods(
+            self.target_periods.filter(end__lte=self.baseline_end)
+        )
 
     def get_campaign_periods(self):
         """
@@ -212,7 +231,9 @@ class Project(models.Model):
         """
         Return the campaign target periods for this project.
         """
-        return self.target_periods.filter(start__gte=self.baseline_end)
+        return self._target_periods(
+            self.target_periods.filter(start__gte=self.baseline_end)
+        )
 
     def get_campaign_period_dates(self):
         """
