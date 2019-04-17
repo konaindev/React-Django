@@ -10,7 +10,6 @@ rope = "*"
 python-language-server = {extras = ["all"],version = "*"}
 pyls-black = "*"
 pyls-mypy = "*"
-beautifulsoup4 = "*"
 click = "*"
 
 [packages]
@@ -33,6 +32,7 @@ pillow = "*"
 boto3 = "*"
 django-stdimage = "*"
 google-api-python-client = "*"
+beautifulsoup4 = "*"
 
 [requires]
 python_version = "3.7"
