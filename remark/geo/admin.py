@@ -53,5 +53,7 @@ class CityAdmin(admin.ModelAdmin):
     search_fields = ("name",)
 
 @admin.register(ZipcodePolygon, site=admin_site)
-class ZipcodePolygonsAdmin(admin.ModelAdmin):
-    model = ZipcodePolygon
+class ZipcodePolygonAdmin(admin.ModelAdmin):
+
+    list_display = ("zip_code", "state")
+    search_fields = ("zip_code", "state")
