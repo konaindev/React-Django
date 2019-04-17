@@ -6,6 +6,7 @@ from .models import Project, Spreadsheet
 from .reports.selectors import ReportLinks
 from .spreadsheets import get_importer_for_kind, SpreadsheetKind
 
+
 class SpreadsheetForm(forms.ModelForm):
     """
     Hooks into validation of spreadsheet content to ensure that only
@@ -47,8 +48,16 @@ class SpreadsheetForm(forms.ModelForm):
 
 
 class ProjectForm(forms.ModelForm):
+    NO_CHOICES = [("", "--(no active model)--")]
+
+    active_model_name = forms.ChoiceField(choices=NO_CHOICES, required=False)
+
     def __init__(self, *args, **kwargs):
         super(ProjectForm, self).__init__(*args, **kwargs)
+        self._map_public_fields()
+        self._update_active_model_choices()
+
+    def _map_public_fields(self):
         field_maps = {
             "is_baseline_report_public": "baseline",
             "is_tam_public": "market",
@@ -60,15 +69,27 @@ class ProjectForm(forms.ModelForm):
         report_links = ReportLinks.for_project(self.instance)
         for k, v in field_maps.items():
             if isinstance(report_links[v], dict):
-                link = report_links[v]['url']
+                link = report_links[v]["url"]
             elif isinstance(report_links[v], list):
-                link = report_links[v][0]['url']
+                link = report_links[v][0]["url"]
             else:
                 continue
             self.fields[k].label = mark_safe(
-                self.fields[k].label +
-                '&nbsp; (URL: <a target="_blank" href="{}">{}</a>)'.format(link, link)
+                self.fields[k].label
+                + f'&nbsp; (URL: <a target="_blank" href="{link}">{link}</a>)'
             )
+
+    def _update_active_model_choices(self):
+        modeling_report = self.instance.tmp_modeling_report_json or {}
+        modeling_options = modeling_report.get("options", [])
+        model_names = [
+            (modeling_option["name"], modeling_option["name"])
+            for modeling_option in modeling_options
+        ]
+        if not model_names:
+            self.fields["active_model_name"].disabled = True
+        model_names = self.NO_CHOICES + model_names
+        self.fields["active_model_name"].choices = model_names
 
     class Meta:
         model = Project

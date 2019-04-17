@@ -97,6 +97,7 @@ class Project(models.Model):
         default=None,
         null=True,
         blank=True,
+        verbose_name="TAM Data",
         # Ensure loaded data retains JSON object key ordering
         load_kwargs={"object_pairs_hook": collections.OrderedDict},
         help_text="Total Addressable Market (TAM) report JSON data. Must conform to the schema defined in MarketAnalysis.ts",
@@ -108,9 +109,17 @@ class Project(models.Model):
         default=None,
         null=True,
         blank=True,
+        verbose_name="Modeling Data",
         # Ensure loaded data retains JSON object key ordering
         load_kwargs={"object_pairs_hook": collections.OrderedDict},
         help_text="Modeling JSON data. Must conform to the schema defined in ModelingOptions.ts",
+    )
+
+    active_model_name = models.CharField(
+        blank=True,
+        default="",
+        max_length=255,
+        help_text="The name of the currently selected model, if any.",
     )
 
     # A temporary field, for the current sprint, that holds our campaign plan
@@ -119,6 +128,7 @@ class Project(models.Model):
         default=None,
         null=True,
         blank=True,
+        verbose_name="Campaign Data",
         # Ensure loaded data retains JSON object key ordering
         load_kwargs={"object_pairs_hook": collections.OrderedDict},
         help_text="Campaign Plan JSON data. Must conform to the schema defined in CampaignPlan.ts",

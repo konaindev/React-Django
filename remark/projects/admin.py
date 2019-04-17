@@ -184,6 +184,7 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, admin.ModelAdmin):
         "number_of_periods",
         "baseline_start",
         "baseline_end",
+        "active_model_name",
         "average_tenant_age",
         "highest_monthly_rent",
         "average_monthly_rent",
