@@ -139,7 +139,7 @@ exports[`LeasingPerformanceReport renders baseline report correctly 1`] = `
         >
           <div>
             185
-             Occupied Units (Out of $
+             Occupied Units (Out of 
             260
             )
           </div>
@@ -1167,7 +1167,7 @@ exports[`LeasingPerformanceReport renders performance report correctly 1`] = `
         >
           <div>
             220
-             Occupied Units (Out of $
+             Occupied Units (Out of 
             260
             )
           </div>
@@ -2424,7 +2424,7 @@ exports[`LeasingPerformanceReport renders with section items correctly 1`] = `
         >
           <div>
             220
-             Occupied Units (Out of $
+             Occupied Units (Out of 
             260
             )
           </div>

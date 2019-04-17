@@ -4,7 +4,8 @@ import os.path
 
 from django.test import TestCase
 
-from .models import Period, Project
+from remark.lib.metrics import BareMultiPeriod
+from .models import Period, Project, TargetPeriod
 from .reports.periods import ComputedPeriod
 from .reports.performance import PerformanceReport
 
@@ -19,11 +20,11 @@ class DefaultComputedPeriodTestCase(TestCase):
         project = Project.objects.create(
             name="test",
             baseline_start=datetime.date(year=2018, month=11, day=19),
-            baseline_end=datetime.date(year=2018, month=12, day=19),
+            baseline_end=datetime.date(year=2018, month=12, day=26),
             average_monthly_rent=decimal.Decimal("0"),
             lowest_monthly_rent=decimal.Decimal("0"),
         )
-        period = Period.objects.create(
+        raw_period = Period.objects.create(
             project=project,
             start=datetime.date(year=2018, month=12, day=19),
             end=datetime.date(year=2018, month=12, day=26),
@@ -31,6 +32,13 @@ class DefaultComputedPeriodTestCase(TestCase):
             occupiable_units_start=0,
             occupied_units_start=0,
         )
+        raw_target_period = TargetPeriod.objects.create(
+            project=project,
+            start=datetime.date(year=2018, month=12, day=19),
+            end=datetime.date(year=2018, month=12, day=26),
+        )
+        multiperiod = BareMultiPeriod.from_periods([raw_period, raw_target_period])
+        period = multiperiod.get_cumulative_period()
         self.period = ComputedPeriod(period)
 
     def test_delta_leases(self):
@@ -165,11 +173,11 @@ class DefaultReportTestCase(TestCase):
         project = Project.objects.create(
             name="test",
             baseline_start=datetime.date(year=2018, month=11, day=19),
-            baseline_end=datetime.date(year=2018, month=12, day=19),
+            baseline_end=datetime.date(year=2018, month=12, day=26),
             average_monthly_rent=decimal.Decimal("0"),
             lowest_monthly_rent=decimal.Decimal("0"),
         )
-        period = Period.objects.create(
+        raw_period = Period.objects.create(
             project=project,
             start=datetime.date(year=2018, month=12, day=19),
             end=datetime.date(year=2018, month=12, day=26),
@@ -177,6 +185,13 @@ class DefaultReportTestCase(TestCase):
             occupiable_units_start=0,
             occupied_units_start=0,
         )
+        raw_target_period = TargetPeriod.objects.create(
+            project=project,
+            start=datetime.date(year=2018, month=12, day=19),
+            end=datetime.date(year=2018, month=12, day=26),
+        )
+        multiperiod = BareMultiPeriod.from_periods([raw_period, raw_target_period])
+        period = multiperiod.get_cumulative_period()
         self.report = PerformanceReport(project, period)
 
     def test_report_jsonable(self):
@@ -212,14 +227,14 @@ class LincolnTowerPeriodTestCase(TestCase):
         self.project = Project.objects.create(
             name="test",
             baseline_start=datetime.date(year=2018, month=11, day=19),
-            baseline_end=datetime.date(year=2018, month=12, day=19),
+            baseline_end=datetime.date(year=2018, month=12, day=26),
             average_monthly_rent=decimal.Decimal("7278"),
             lowest_monthly_rent=decimal.Decimal("7278"),
         )
         self.raw_period = Period.objects.create(
             project=self.project,
             start=datetime.date(year=2018, month=12, day=19),
-            end=datetime.date(year=2018, month=12, day=19),
+            end=datetime.date(year=2018, month=12, day=26),
             leased_units_start=104,
             usvs=4086,
             inquiries=51,
@@ -228,7 +243,6 @@ class LincolnTowerPeriodTestCase(TestCase):
             leases_executed=6,
             occupiable_units_start=218,
             occupied_units_start=218,
-            target_lease_percent=decimal.Decimal("0.9"),
             leases_ended=3,
             lease_renewal_notices=0,
             acq_reputation_building=decimal.Decimal("28000"),
@@ -236,7 +250,19 @@ class LincolnTowerPeriodTestCase(TestCase):
             acq_leasing_enablement=decimal.Decimal("11000"),
             acq_market_intelligence=decimal.Decimal("7000"),
         )
-        self.period = ComputedPeriod(self.raw_period)
+
+        self.raw_target_period = TargetPeriod.objects.create(
+            project=self.project,
+            start=datetime.date(year=2018, month=12, day=19),
+            end=datetime.date(year=2018, month=12, day=26),
+            target_leased_rate=decimal.Decimal("0.9"),
+        )
+
+        self.raw_multiperiod = BareMultiPeriod.from_periods(
+            [self.raw_period, self.raw_target_period]
+        )
+        self.raw_cumulative = self.raw_multiperiod.get_cumulative_period()
+        self.period = ComputedPeriod(self.raw_cumulative)
 
     def test_delta_leases(self):
         self.assertEqual(self.period.delta_leases, 3)
@@ -288,6 +314,6 @@ class LincolnTowerPeriodTestCase(TestCase):
 
     def test_report_jsonable(self):
         # CONSIDER moving this to a separate location
-        report = PerformanceReport(self.project, self.raw_period)
+        report = PerformanceReport(self.project, self.raw_cumulative)
         self.assertTrue(report.to_jsonable())
 

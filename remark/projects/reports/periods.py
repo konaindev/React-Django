@@ -32,17 +32,8 @@ class ComputedPeriod(ComputedValueMixin):
     # NOTE this exists mostly to reduce the amount of noise in the Period
     # model class itself. This might be unnatural; it might just be better
     # to move all computations into the model directly. -Dave
-    def __init__(self, period, overrides=None):
+    def __init__(self, period):
         self.period = period
-        self.overrides = overrides or {}
-
-        # Manually override any computed values.
-        # Underlying "input" property values are overriden in __getattr__, below.
-        #
-        # HACK a better implementation makes the attribute a computed_property...
-        for override_name, override_value in self.overrides.items():
-            if self.is_computed_value(override_name):
-                setattr(self, override_name, override_value)
 
     # ------------------------------------------------------
     # Logical activity (lease)
@@ -95,7 +86,7 @@ class ComputedPeriod(ComputedValueMixin):
     def target_leased_units(self):
         """The target number of leased units we'd like to achieve."""
         return d_quant(
-            mult_or_none(self.target_lease_percent, self.occupiable_units),
+            mult_or_none(self.target_leased_rate, self.occupiable_units),
             decimal.Decimal(1),
             decimal.ROUND_HALF_UP,
         )
@@ -134,15 +125,14 @@ class ComputedPeriod(ComputedValueMixin):
     # ------------------------------------------------------
 
     @computed_value
-    def target_occupied_units(self):
-        """Return the target number of occupiable units."""
-        # NOTE for now, we simply assume this is the same as the target leased units.
-        return self.target_leased_units
+    def target_occupiable_units(self):
+        """For now, we always hit our target."""
+        return self.occupiable_units
 
     @computed_value
     def target_occupancy_rate(self):
         """The target percentage of occupiable units that are actually occupied at end of period."""
-        return div_or_none(self.target_occupied_units, self.occupiable_units)
+        return div_or_none(self.target_occupied_units, self.target_occupiable_units)
 
     # ------------------------------------------------------
     # Investment
@@ -431,9 +421,6 @@ class ComputedPeriod(ComputedValueMixin):
 
         Raise an exception if *that* isn't found.
         """
-        # Allow for overrides on underlying properties
-        if name in self.overrides:
-            return self.overrides[name]
         return self.period.get_value(name)
 
     # TODO these methods demonstrate that ComputedPeriod is kinda-sorta a PeriodBase.
@@ -454,15 +441,7 @@ class ComputedPeriod(ComputedValueMixin):
         """
         underlying_values = self.period.get_values()
         computed_values = self.get_computed_values()
-
-        # Hard-wire our final overrides; this is because our
-        # HACK in __init__(...) kills the ability for ComputedPropertyMixin
-        # to determine whether an overriden value is a computed property.
-        result = dict(**underlying_values, **computed_values)
-        result.update(self.overrides)
-
-        # Done!
-        return result
+        return dict(**underlying_values, **computed_values)
 
 
 class DeltaPeriod:

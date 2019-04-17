@@ -142,7 +142,7 @@ exports[`CommonReport renders baseline report correctly 1`] = `
           >
             <div>
               185
-               Occupied Units (Out of $
+               Occupied Units (Out of 
               260
               )
             </div>
@@ -8672,7 +8672,7 @@ exports[`CommonReport renders performance report correctly 1`] = `
           >
             <div>
               220
-               Occupied Units (Out of $
+               Occupied Units (Out of 
               260
               )
             </div>
@@ -13562,7 +13562,7 @@ exports[`CommonReport renders with date span correctly 1`] = `
           >
             <div>
               220
-               Occupied Units (Out of $
+               Occupied Units (Out of 
               260
               )
             </div>
