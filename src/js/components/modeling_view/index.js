@@ -4,10 +4,16 @@ import PropTypes from "prop-types";
 import ButtonGroup from "../button_group";
 import Container from "../container";
 import CommonReport from "../common_report";
+import ModelingComparison from "../modeling_comparison";
 import ReportDateSpan from "../report_date_span";
 import "./modeling_view.scss";
 
 export class ModelingView extends Component {
+  static propTypes = {
+    property_name: PropTypes.string,
+    options: PropTypes.array
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -31,10 +37,18 @@ export class ModelingView extends Component {
   }
 
   render() {
-    const subnavOptions = this.props.options.map((report, index) => ({
-      label: report.name,
-      value: index
-    }));
+    const { options } = this.props;
+    const { activeReportIndex } = this.state;
+    const subnavOptions = [
+      ...options.map((report, index) => ({
+        label: report.name,
+        value: index
+      })),
+      {
+        label: "Compare Models",
+        value: "compare"
+      }
+    ];
 
     return (
       <div className="page modeling-view">
@@ -42,16 +56,20 @@ export class ModelingView extends Component {
           <div className="modeling-view__subnav">
             <ButtonGroup
               onChange={this.handleSetActiveReportIndex}
-              value={this.state.activeReportIndex}
+              value={activeReportIndex}
               options={subnavOptions}
             />
           </div>
         </Container>
-        <CommonReport
-          report={this.getActiveReport()}
-          dateSpan={this.renderActiveDateSpan()}
-          type="baseline"
-        />
+        {activeReportIndex === "compare" ? (
+          <ModelingComparison {...this.props} />
+        ) : (
+          <CommonReport
+            report={this.getActiveReport()}
+            dateSpan={this.renderActiveDateSpan()}
+            type="baseline"
+          />
+        )}
       </div>
     );
   }
