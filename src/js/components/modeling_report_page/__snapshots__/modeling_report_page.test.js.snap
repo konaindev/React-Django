@@ -136,6 +136,12 @@ exports[`ModelingReportPage renders correctly 1`] = `
           >
             Run Rate
           </button>
+          <button
+            className="button button-undefined button-group__item"
+            onClick={[Function]}
+          >
+            Compare Models
+          </button>
         </div>
       </div>
     </div>
