@@ -40,6 +40,7 @@ from .schema import (
     SchemaCell,
     StrCell,
     unflatten_dict,
+    NullStrDateCell
 )
 
 __all__ = (
