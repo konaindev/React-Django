@@ -1,6 +1,8 @@
 from urllib.request import urlopen
 import ijson
 
+from remark.geo.models import ZipcodePolygon
+
 US_STATES = {
     "ak": "ak_alaska_zip_codes_geo.min.json",
     "al": "al_alabama_zip_codes_geo.min.json",
@@ -73,15 +75,22 @@ def import_one_state(state_abbr):
         features = ijson.items(input_file, 'features.item')
 
         for feature in features:
-            zip_code_count = zip_code_count + 1
+            # "properties" contains zip code and lat/lon, might need later
             properties = feature["properties"]
             zip_code = properties[ZIP_CODE_ACCESSOR]
-            geojson = feature["geometry"]
 
             # ignore holes for optimization in case of "MultiPolygon"
-            geojson["coordinates"] = [geojson["coordinates"][0]] 
+            geometry = feature["geometry"]
+            geometry["coordinates"] = [geometry["coordinates"][0]] 
+
+            ZipcodePolygon.objects.update_or_create(
+                zip_code=zip_code,
+                state=state_abbr.upper(),
+                geometry=geometry
+            )
 
             print(zip_code)
+            zip_code_count = zip_code_count + 1
 
     return zip_code_count
 
