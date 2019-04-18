@@ -1,4 +1,5 @@
 from django.core.management.base import BaseCommand
+
 from remark.geo.zipcodes.polygons_importer import import_zipcode_polygons
 
 class Command(BaseCommand):
