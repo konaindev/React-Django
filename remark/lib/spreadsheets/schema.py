@@ -23,7 +23,7 @@ class DataType:
 """
 A SchemaCell represents the expected schema for a given cell.
 
-The cell's coordinates are obtained by calling the locator(...) method. 
+The cell's coordinates are obtained by calling the locator(...) method.
 See locators.py.
 
 The cell's expected excel data type is defined by data_type and must be
@@ -37,7 +37,7 @@ converted into a python-native type.
 SchemaCell = namedtuple("SchemaCell", ["locator", "data_type", "converter"])
 
 """
-Convenience wrappers around SchemaCell for common pairings of 
+Convenience wrappers around SchemaCell for common pairings of
 excel data types and python data types.
 """
 
@@ -50,6 +50,27 @@ def StrCell(locator):
 
     return SchemaCell(locator, str_or_convertible_data_type, str)
 
+
+def NullStrDateCell(locator):
+    """Return a cell that converts to an optional python string from a string or date."""
+
+    def str_or_convertible_or_null_data_type(cell):
+        return cell.data_type in frozenset(
+            [DataType.STRING, DataType.NUMERIC, DataType.NULL, DataType.DATETIME]
+        )
+
+    def str_or_null_converter(value):
+        if isinstance(value, str):
+            # Convert empty strings to None
+            result = str(value) if value else None
+        else:
+            # Convert non-None values to strings.
+            result = str(value) if value is not None else None
+        return result
+
+    return SchemaCell(
+        locator, str_or_convertible_or_null_data_type, str_or_null_converter
+    )
 
 def NullStrCell(locator):
     """Return a cell that converts to an optional python string."""

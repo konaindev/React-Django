@@ -12,6 +12,7 @@ from remark.lib.spreadsheets import (
     prev_row,
     rows_until_empty,
     StrCell,
+    NullStrDateCell
 )
 
 from .base import ProjectExcelImporter
@@ -50,7 +51,7 @@ class CampaignPlanImporter(ProjectExcelImporter):
         "name": StrCell(find_cat("tactic")),
         "audience": NullChoiceCell(find_cat("audience"), choices=AUDIENCE_CHOICES),
         "tooltip": NullStrCell(find_cat("tooltip")),
-        "schedule": NullStrCell(find_cat("schedule")),
+        "schedule": NullStrDateCell(find_cat("schedule")),
         "status": ChoiceCell(find_cat("status"), choices=STATUS_CHOICES),
         "notes": NullStrCell(find_cat("notes")),
         "base_cost": CurrencyCell(find_cat(matchp(iexact="cost"))),
