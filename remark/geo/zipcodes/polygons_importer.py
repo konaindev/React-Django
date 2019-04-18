@@ -103,8 +103,7 @@ def import_zipcode_polygons(states_args = None):
     print(", ".join([state.upper() for state in states_to_import]))
 
     for state in states_to_import:
-        state_upper = state.upper()
-        print(f"========== {state_upper} ==========")
+        print(f"========== {state.upper()} ==========")
         try:
             zip_code_count = import_one_state(state)
             print(f"{zip_code_count} zip codes imported")
