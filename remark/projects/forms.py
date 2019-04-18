@@ -57,18 +57,25 @@ class ProjectForm(forms.ModelForm):
             "is_campaign_plan_public": "campaign_plan",
         }
 
-        report_links = ReportLinks.for_project(self.instance)
-        for k, v in field_maps.items():
-            if isinstance(report_links[v], dict):
-                link = report_links[v]['url']
-            elif isinstance(report_links[v], list):
-                link = report_links[v][0]['url']
-            else:
-                continue
-            self.fields[k].label = mark_safe(
-                self.fields[k].label +
-                '&nbsp; (URL: <a target="_blank" href="{}">{}</a>)'.format(link, link)
-            )
+        try:
+            report_links = ReportLinks.for_project(self.instance)
+            for k, v in field_maps.items():
+                if isinstance(report_links[v], dict):
+                    link = report_links[v]['url']
+                elif isinstance(report_links[v], list):
+                    link = report_links[v][0]['url']
+                else:
+                    continue
+                self.fields[k].label = mark_safe(
+                    self.fields[k].label +
+                    '&nbsp; (URL: <a target="_blank" href="{}">{}</a>)'.format(link, link)
+                )
+        except:
+            # This happens when creating a new Project
+            # Quick hack to get around that issue
+            pass
+
+
 
     class Meta:
         model = Project

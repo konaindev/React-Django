@@ -86,7 +86,7 @@ interface Tactic {
   tooltip: string | null;
 
   /** The scheduled date */
-  schedule: t.date;
+  schedule: string | null;
 
   /** The current schedule status */
   status: Status;
