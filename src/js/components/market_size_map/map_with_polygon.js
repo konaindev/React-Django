@@ -10,6 +10,10 @@ import {
   stylesForRegionFill
 } from "./map_settings";
 
+/**
+ * Markers to render as children <GoogleMap /> component
+ * should be a React component
+ */
 const ZipcodeText = ({ zipcode }) => (
   <div className="zip-code-text">{zipcode}</div>
 );
@@ -19,6 +23,10 @@ export class MapWithPolygon extends Component {
     zipcodeTextMarkers: null
   };
 
+  /**
+   * You can access to Google Maps "map" and "maps" objects here,
+   * "yesIWantToUseGoogleMapApiInternals" = true
+   */
   onGoogleApiLoaded = google => {
     this.google = google;
     this.zipcodeMarkers = [];
@@ -35,13 +43,22 @@ export class MapWithPolygon extends Component {
       }
     });
 
+    // Resize the viewport to contain all zipcode areas.
     google.map.fitBounds(this.mapBounds, 0);
-
+    // trigger render to display custom markers
     this.setState({
       zipcodeTextMarkers: this.zipcodeMarkers
     });
   };
 
+  /**
+   * Polygon geometry object
+   * https://tools.ietf.org/html/rfc7946#section-3.1.6
+   *
+   * Extends global map bounds with exterior ring points
+   * Interior rings represent holes within the exterior ring
+   * Put zipcode label in the center of exterior ring bounds
+   */
   processPolygon = (zip, [outerRing, ...innerRings]) => {
     let { google, zipcodeMarkers, mapBounds } = this;
     const polygonBounds = new google.maps.LatLngBounds();
