@@ -48,6 +48,7 @@ class SpreadsheetForm(forms.ModelForm):
 
 class ProjectForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
+        is_existing_instance = kwargs.get('instance') is not None
         super(ProjectForm, self).__init__(*args, **kwargs)
         field_maps = {
             "is_baseline_report_public": "baseline",
@@ -57,7 +58,7 @@ class ProjectForm(forms.ModelForm):
             "is_campaign_plan_public": "campaign_plan",
         }
 
-        try:
+        if is_existing_instance:
             report_links = ReportLinks.for_project(self.instance)
             for k, v in field_maps.items():
                 if isinstance(report_links[v], dict):
@@ -70,11 +71,6 @@ class ProjectForm(forms.ModelForm):
                     self.fields[k].label +
                     '&nbsp; (URL: <a target="_blank" href="{}">{}</a>)'.format(link, link)
                 )
-        except:
-            # This happens when creating a new Project
-            # Quick hack to get around that issue
-            pass
-
 
 
     class Meta:
