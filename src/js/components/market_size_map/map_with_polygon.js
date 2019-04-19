@@ -10,104 +10,75 @@ import {
   stylesForRegionFill
 } from "./map_settings";
 
-const ZipCodeText = ({ zipCode }) => (
-  <div className="zip-code-text">{zipCode}</div>
+const ZipcodeText = ({ zipcode }) => (
+  <div className="zip-code-text">{zipcode}</div>
 );
 
 export class MapWithPolygon extends Component {
-  constructor(props) {
-    super(props);
-
-    this.google = null;
-
-    this.state = {
-      isGoogleMapLoaded: false
-    };
-  }
-
-  // google: Object { map, maps }
-  onGoogleApiLoaded = google => {
-    this.google = google;
-
-    this.setState({
-      isGoogleMapLoaded: true
-    });
-
-    this.drawZipCodeAreas();
+  state = {
+    zipcodeTextMarkers: null
   };
 
-  drawZipCodeAreas() {
-    if (false === this.state.isGoogleMapLoaded) {
-      return;
-    }
+  onGoogleApiLoaded = google => {
+    this.google = google;
+    this.zipcodeMarkers = [];
+    this.mapBounds = new google.maps.LatLngBounds();
 
-    const { google } = this;
-    const bounds = new google.maps.LatLngBounds();
-
-    // draw each zip code area as polygon
-    this.props.zip_codes.forEach(zipCode => {
+    this.props.zip_codes.forEach(zipcodeData => {
       const {
         zip,
         outline: { type, coordinates }
-      } = zipCode;
+      } = zipcodeData;
 
-      if (type !== "Polygon") {
-        return;
+      if (type === "Polygon") {
+        this.processPolygon(zip, coordinates);
       }
-
-      const paths = coordinates.map(
-        ([lat, lng]) => new google.maps.LatLng(lat, lng)
-      );
-      paths.forEach(point => {
-        bounds.extend(point);
-      });
-
-      let polygon = new google.maps.Polygon({
-        map: google.map,
-        paths: paths,
-        ...stylesForRegionFill
-      });
     });
 
-    // resize map
-    google.map.fitBounds(bounds, 0);
-  }
+    google.map.fitBounds(this.mapBounds, 0);
 
-  getZipCodeTexts() {
-    if (false === this.state.isGoogleMapLoaded) {
-      return [];
-    }
-
-    const { google } = this;
-
-    return this.props.zip_codes.map(zipCode => {
-      const {
-        zip,
-        outline: { type, coordinates }
-      } = zipCode;
-      const bounds = new google.maps.LatLngBounds();
-
-      const paths = coordinates.map(
-        ([lat, lng]) => new google.maps.LatLng(lat, lng)
-      );
-      paths.forEach(point => {
-        bounds.extend(point);
-      });
-      const zipAreaCenter = bounds.getCenter();
-
-      return (
-        <ZipCodeText
-          key={zip}
-          lat={zipAreaCenter.lat()}
-          lng={zipAreaCenter.lng()}
-          zipCode={zip}
-        />
-      );
+    this.setState({
+      zipcodeTextMarkers: this.zipcodeMarkers
     });
-  }
+  };
+
+  processPolygon = (zip, [outerRing, ...innerRings]) => {
+    let { google, zipcodeMarkers, mapBounds } = this;
+    const polygonBounds = new google.maps.LatLngBounds();
+
+    const outerCoords = outerRing.map(
+      ([lat, lng]) => new google.maps.LatLng(lat, lng)
+    );
+
+    const innerCoords = innerRings.map(innerRing =>
+      innerRing.map(([lat, lng]) => new google.maps.LatLng(lat, lng))
+    );
+
+    outerCoords.forEach(point => {
+      mapBounds.extend(point);
+      polygonBounds.extend(point);
+    });
+
+    let polygon = new google.maps.Polygon({
+      map: google.map,
+      paths: [outerCoords, ...innerCoords],
+      ...stylesForRegionFill
+    });
+
+    const polygonCenter = polygonBounds.getCenter();
+    const centerCoords = [polygonCenter.lat(), polygonCenter.lng()];
+    zipcodeMarkers.push(
+      <ZipcodeText
+        key={`${zip}-${centerCoords[0]}-${centerCoords[1]}`}
+        lat={centerCoords[0]}
+        lng={centerCoords[1]}
+        zipcode={zip}
+      />
+    );
+  };
 
   render() {
-    const customMarkers = this.getZipCodeTexts();
+    const { zipcodeTextMarkers } = this.state;
 
     return (
       <div className="market-size-map">
@@ -119,7 +90,7 @@ export class MapWithPolygon extends Component {
           yesIWantToUseGoogleMapApiInternals={true}
           onGoogleApiLoaded={this.onGoogleApiLoaded}
         >
-          {customMarkers}
+          {zipcodeTextMarkers}
         </GoogleMap>
       </div>
     );
