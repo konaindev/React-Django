@@ -5,6 +5,7 @@ from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
 from tempfile import NamedTemporaryFile
 
+from remark.analytics.google_analytics import fetch_usv_age
 from remark.lib.views import ReactView
 from remark.admin import admin_site
 from xls.exporters.tam_data import build_tam_data, DEFAULT_TEMPLATE_PATH
@@ -108,6 +109,10 @@ class CampaignPlanPageView(ReportPageViewBase):
     page_title = "Campaign Plan"
 
 
+def multiline_text_to_array(text):
+    return [int(item) for item in text.replace("\r", "").split("\n")]
+
+
 class TAMExportView(FormView, SingleObjectMixin):
     template_name = "projects/tam-export.html"
     form_class = TAMExportForm
@@ -125,34 +130,45 @@ class TAMExportView(FormView, SingleObjectMixin):
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         form = self.get_form()
+
         if form.is_valid():
-            project = self.object # TODO: use this project for feeding hardcoded args
-            tmp = NamedTemporaryFile()
+            project = self.object
+            if project.address is None:
+                messages.error(request, "This project doesn't have an address yet.")
+                return self.form_invalid(form)
+            if project.analytics_provider is None:
+                messages.error(request, "This project doesn't have an analytics provider yet.")
+                return self.form_invalid(form)
+
             try:
-                build_tam_data(
-                    zip_codes=form.cleaned_data["zip_codes"].split("\n"),
-                    lat=None,
-                    lon=None,
-                    loc=None,
+                usvs = fetch_usv_age(project.analytics_provider.identifier)
+                workbook = build_tam_data(
+                    zip_codes=multiline_text_to_array(form.cleaned_data["zip_codes"]),
+                    lat=project.address.latitude,
+                    lon=project.address.longitude,
+                    loc=",".join([project.address.city, project.address.state]),
                     radius=form.cleaned_data["radius"],
-                    income_groups=None,
-                    rti_income_groups=form.cleaned_data["rti_income_groups"].split("\n"),
-                    rti_rental_rates=form.cleaned_data["rti_rental_rates"].split("\n"),
+                    income_groups=multiline_text_to_array(form.cleaned_data["income_groups"]),
+                    rti_income_groups=multiline_text_to_array(form.cleaned_data["rti_income_groups"]),
+                    rti_rental_rates=multiline_text_to_array(form.cleaned_data["rti_rental_rates"]),
                     rti_target=form.cleaned_data["rti_target"],
-                    age=None,
-                    max_rent=None,
-                    avg_rent=None,
-                    min_rent=None,
-                    usvs=None,
-                    templatefile=DEFAULT_TEMPLATE_PATH,
-                    outfile=tmp.name
+                    age=project.average_tenant_age,
+                    max_rent=project.highest_monthly_rent,
+                    avg_rent=project.average_monthly_rent,
+                    min_rent=project.lowest_monthly_rent,
+                    usvs=usvs,
+                    templatefile=DEFAULT_TEMPLATE_PATH
                 )
+
+                tmp = NamedTemporaryFile()
+                workbook.save(filename=tmp)
                 tmp.seek(0)
                 stream = tmp.read()
                 response = HttpResponse(
                     stream,
-                    content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                    content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 )
+                response['Content-Disposition'] = 'attachment; filename="remarkably-tam-{}.xlsx"'.format(project.name)
                 return response
             except Exception as e:
                 messages.error(request, str(e))

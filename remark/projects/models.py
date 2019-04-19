@@ -192,6 +192,13 @@ class Project(models.Model):
         verbose_name="Show Campaign Plan?", default=False
     )
 
+    address = models.ForeignKey(
+        'geo.Address',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
+
     def _target_periods(self, qs):
         # TODO XXX temporary hack until we fully populate from model spreadsheets. -Dave
         target_periods = list(qs)
@@ -760,3 +767,24 @@ class TargetPeriod(ModelPeriod, models.Model):
     class Meta:
         # Always sort TargetPeriods with the earliest period first.
         ordering = ["start"]
+
+
+class AnalyticsProvider(models.Model):
+    ANALYTICS_PROVIDER_CHOICES = [
+        ('google', 'Google Analytics'),
+    ]
+
+    project = models.OneToOneField(
+        Project,
+        related_name="analytics_provider",
+        on_delete=models.CASCADE,
+    )
+
+    provider = models.CharField(
+        max_length=255,
+        choices=ANALYTICS_PROVIDER_CHOICES,
+    )
+
+    identifier = models.CharField(
+        max_length=255,
+    )
