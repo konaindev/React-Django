@@ -321,7 +321,7 @@ exports[`BaselineReportPage renders correctly 1`] = `
                 <div
                   className="small-box__outer-content"
                 >
-                  <div
+                  <span
                     className="small-box__inner-content"
                   >
                     <span
@@ -333,7 +333,7 @@ exports[`BaselineReportPage renders correctly 1`] = `
                         96
                       </span>
                     </span>
-                  </div>
+                  </span>
                 </div>
               </div>
             </div>
@@ -356,7 +356,7 @@ exports[`BaselineReportPage renders correctly 1`] = `
                 <div
                   className="small-box__outer-content"
                 >
-                  <div
+                  <span
                     className="small-box__inner-content"
                   >
                     <span
@@ -368,7 +368,7 @@ exports[`BaselineReportPage renders correctly 1`] = `
                         28
                       </span>
                     </span>
-                  </div>
+                  </span>
                 </div>
               </div>
             </div>
@@ -400,7 +400,7 @@ exports[`BaselineReportPage renders correctly 1`] = `
                 <div
                   className="small-box__outer-content"
                 >
-                  <div
+                  <span
                     className="small-box__inner-content"
                   >
                     <span
@@ -412,7 +412,7 @@ exports[`BaselineReportPage renders correctly 1`] = `
                         94
                       </span>
                     </span>
-                  </div>
+                  </span>
                 </div>
               </div>
             </div>
@@ -435,7 +435,7 @@ exports[`BaselineReportPage renders correctly 1`] = `
                 <div
                   className="small-box__outer-content"
                 >
-                  <div
+                  <span
                     className="small-box__inner-content"
                   >
                     <span
@@ -447,7 +447,7 @@ exports[`BaselineReportPage renders correctly 1`] = `
                         38
                       </span>
                     </span>
-                  </div>
+                  </span>
                 </div>
               </div>
             </div>
@@ -479,7 +479,7 @@ exports[`BaselineReportPage renders correctly 1`] = `
                 <div
                   className="small-box__outer-content"
                 >
-                  <div
+                  <span
                     className="small-box__inner-content"
                   >
                     <span
@@ -491,7 +491,7 @@ exports[`BaselineReportPage renders correctly 1`] = `
                         72
                       </span>
                     </span>
-                  </div>
+                  </span>
                 </div>
               </div>
             </div>
@@ -514,7 +514,7 @@ exports[`BaselineReportPage renders correctly 1`] = `
                 <div
                   className="small-box__outer-content"
                 >
-                  <div
+                  <span
                     className="small-box__inner-content"
                   >
                     <span
@@ -526,7 +526,7 @@ exports[`BaselineReportPage renders correctly 1`] = `
                         36
                       </span>
                     </span>
-                  </div>
+                  </span>
                 </div>
               </div>
             </div>
@@ -658,6 +658,8 @@ exports[`BaselineReportPage renders correctly 1`] = `
             >
               <span
                 className="large-box__content-value"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
               >
                 <span
                   className="delta-layout"
@@ -728,7 +730,7 @@ exports[`BaselineReportPage renders correctly 1`] = `
                 <div
                   className="small-box__outer-content"
                 >
-                  <div
+                  <span
                     className="small-box__inner-content"
                   >
                     <span
@@ -745,7 +747,7 @@ exports[`BaselineReportPage renders correctly 1`] = `
                         36
                       </span>
                     </span>
-                  </div>
+                  </span>
                 </div>
               </div>
               <div
@@ -764,7 +766,7 @@ exports[`BaselineReportPage renders correctly 1`] = `
                 <div
                   className="small-box__outer-content"
                 >
-                  <div
+                  <span
                     className="small-box__inner-content"
                   >
                     <span
@@ -776,7 +778,7 @@ exports[`BaselineReportPage renders correctly 1`] = `
                         $68k
                       </span>
                     </span>
-                  </div>
+                  </span>
                 </div>
               </div>
               <div
@@ -795,7 +797,7 @@ exports[`BaselineReportPage renders correctly 1`] = `
                 <div
                   className="small-box__outer-content"
                 >
-                  <div
+                  <span
                     className="small-box__inner-content"
                   >
                     <span
@@ -812,7 +814,7 @@ exports[`BaselineReportPage renders correctly 1`] = `
                         $709.2k
                       </span>
                     </span>
-                  </div>
+                  </span>
                 </div>
               </div>
               <div
@@ -831,8 +833,10 @@ exports[`BaselineReportPage renders correctly 1`] = `
                 <div
                   className="small-box__outer-content"
                 >
-                  <div
+                  <span
                     className="small-box__inner-content"
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
                   >
                     <span
                       className="delta-layout"
@@ -848,7 +852,7 @@ exports[`BaselineReportPage renders correctly 1`] = `
                         </span>
                       </span>
                     </span>
-                  </div>
+                  </span>
                 </div>
               </div>
             </div>
@@ -1497,7 +1501,7 @@ A 0 0 0 0 0, NaN, NaN
                 <div
                   className="small-box__outer-content"
                 >
-                  <div
+                  <span
                     className="small-box__inner-content"
                   >
                     <span
@@ -1509,7 +1513,7 @@ A 0 0 0 0 0, NaN, NaN
                         94
                       </span>
                     </span>
-                  </div>
+                  </span>
                 </div>
               </div>
               <div
@@ -1528,7 +1532,7 @@ A 0 0 0 0 0, NaN, NaN
                 <div
                   className="small-box__outer-content"
                 >
-                  <div
+                  <span
                     className="small-box__inner-content"
                   >
                     <span
@@ -1540,7 +1544,7 @@ A 0 0 0 0 0, NaN, NaN
                         $6k
                       </span>
                     </span>
-                  </div>
+                  </span>
                 </div>
               </div>
               <div
@@ -1559,7 +1563,7 @@ A 0 0 0 0 0, NaN, NaN
                 <div
                   className="small-box__outer-content"
                 >
-                  <div
+                  <span
                     className="small-box__inner-content"
                   >
                     <span
@@ -1576,7 +1580,7 @@ A 0 0 0 0 0, NaN, NaN
                         $2.1m
                       </span>
                     </span>
-                  </div>
+                  </span>
                 </div>
               </div>
               <div
@@ -1595,8 +1599,10 @@ A 0 0 0 0 0, NaN, NaN
                 <div
                   className="small-box__outer-content"
                 >
-                  <div
+                  <span
                     className="small-box__inner-content"
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
                   >
                     <span
                       className="delta-layout"
@@ -1612,7 +1618,7 @@ A 0 0 0 0 0, NaN, NaN
                         </span>
                       </span>
                     </span>
-                  </div>
+                  </span>
                 </div>
               </div>
             </div>
