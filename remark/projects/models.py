@@ -1,9 +1,11 @@
 import collections
 import decimal
 import os.path
+import string
 
 from django.db import models
 from django.conf import settings
+from django.utils.crypto import get_random_string
 
 from jsonfield import JSONField
 from stdimage.models import StdImageField
@@ -29,10 +31,18 @@ def building_image_media_path(project, filename):
     determine where the uploaded building image should actually be placed.
 
     See https://docs.djangoproject.com/en/2.1/ref/models/fields/#filefield
+
+    Note: Thumbnail generation works fine on FileSystemStorage, but not on S3.
+    To overcome this known issue, we append a random hash to end of file name.
+    Though, old files will not be deleted from S3 on image replacement.
+
+    project/<public_id>/building_image_v<hash><.ext>
+    project/<public_id>/building_image_v<hash>.regular<.ext>
+    project/<public_id>/building_image_v<hash>.thumbnail<.ext>
     """
-    # We always target project/<public_id>/building_image<.ext>
     _, extension = os.path.splitext(filename)
-    return f"project/{project.public_id}/building_image{extension}"
+    hash = get_random_string(length=4, allowed_chars=string.digits)
+    return f"project/{project.public_id}/building_image_v{hash}{extension}"
 
 
 def spreadsheet_media_path(spreadsheet, filename):
