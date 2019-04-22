@@ -61,9 +61,10 @@ ZIP_CODE_ACCESSOR = "ZCTA5CE10"
 
 
 def import_one_state(state_abbr):
+
     file_name = US_STATES.get(state_abbr, None)
 
-    if (file_name is None):
+    if file_name is None:
         return
 
     remote_source = f"https://raw.githubusercontent.com/OpenDataDE/State-zip-code-GeoJSON/master/{file_name}"
@@ -78,19 +79,22 @@ def import_one_state(state_abbr):
             # "properties" contains zip code and lat/lon, might need later
             properties = feature["properties"]
             zip_code = properties[ZIP_CODE_ACCESSOR]
+            zip_code_count = zip_code_count + 1
 
-            # ignore holes for optimization in case of "MultiPolygon"
+            # ignore inner rings which represent holes in a polygon
             geometry = feature["geometry"]
-            geometry["coordinates"] = [geometry["coordinates"][0]] 
+            if geometry["type"] == "Polygon":
+                geometry["coordinates"] = [geometry["coordinates"][0]]
+
+            if geometry["type"] == "MultiPolygon":
+                for (index, polygon) in enumerate(geometry["coordinates"]):
+                    geometry["coordinates"][index] = [polygon[0]]
 
             ZipcodePolygon.objects.update_or_create(
                 zip_code=zip_code,
                 state=state_abbr.upper(),
                 geometry=geometry
             )
-
-            print(zip_code)
-            zip_code_count = zip_code_count + 1
 
     return zip_code_count
 
