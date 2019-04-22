@@ -32,20 +32,34 @@ export class MapWithPolygon extends Component {
     this.zipcodeMarkers = [];
     this.mapBounds = new google.maps.LatLngBounds();
 
-    this.props.zip_codes.forEach(zipcodeData => {
-      const {
-        zip,
-        outline: { type, coordinates }
-      } = zipcodeData;
+    try {
+      this.props.zip_codes.forEach(zipcodeData => {
+        const {
+          zip,
+          properties,
+          outline: { type, coordinates }
+        } = zipcodeData;
 
-      if (type === "Polygon") {
-        this.processPolygon(zip, coordinates);
-      }
-    });
+        if (type === "Polygon") {
+          this.renderPolygonOutline(zip, coordinates);
+        }
+        if (type == "MultiPolygon") {
+          // "coordinates" is an array of Polygon coordinate arrays.
+          coordinates.forEach(polygonCoords => {
+            this.renderPolygonOutline(zip, polygonCoords);
+          });
+        }
+
+        this.renderZipCodeLabel(zip, properties);
+      });
+    } catch (e) {
+      console.log("Failed to render zip codes");
+    }
 
     // Resize the viewport to contain all zipcode areas.
     google.map.fitBounds(this.mapBounds, 0);
-    // trigger render to display custom markers
+
+    // trigger render to display zipcode text in each boundary
     this.setState({
       zipcodeTextMarkers: this.zipcodeMarkers
     });
@@ -57,23 +71,18 @@ export class MapWithPolygon extends Component {
    *
    * Extends global map bounds with exterior ring points
    * Interior rings represent holes within the exterior ring
-   * Put zipcode label in the center of exterior ring bounds
    */
-  processPolygon = (zip, [outerRing, ...innerRings]) => {
-    let { google, zipcodeMarkers, mapBounds } = this;
-    const polygonBounds = new google.maps.LatLngBounds();
+  renderPolygonOutline = (zip, [outerRing, ...innerRings]) => {
+    let { google, mapBounds } = this;
 
-    const outerCoords = outerRing.map(
-      ([lat, lng]) => new google.maps.LatLng(lat, lng)
-    );
+    const outerCoords = outerRing.map(([x, y]) => new google.maps.LatLng(y, x));
 
     const innerCoords = innerRings.map(innerRing =>
-      innerRing.map(([lat, lng]) => new google.maps.LatLng(lat, lng))
+      innerRing.map(([x, y]) => new google.maps.LatLng(y, x))
     );
 
     outerCoords.forEach(point => {
       mapBounds.extend(point);
-      polygonBounds.extend(point);
     });
 
     let polygon = new google.maps.Polygon({
@@ -81,17 +90,21 @@ export class MapWithPolygon extends Component {
       paths: [outerCoords, ...innerCoords],
       ...stylesForRegionFill
     });
+  };
 
-    const polygonCenter = polygonBounds.getCenter();
-    const centerCoords = [polygonCenter.lat(), polygonCenter.lng()];
-    zipcodeMarkers.push(
-      <ZipcodeText
-        key={`${zip}-${centerCoords[0]}-${centerCoords[1]}`}
-        lat={centerCoords[0]}
-        lng={centerCoords[1]}
-        zipcode={zip}
-      />
-    );
+  renderZipCodeLabel = (zip, properties) => {
+    if (properties && properties.center) {
+      const { center } = properties;
+
+      this.zipcodeMarkers.push(
+        <ZipcodeText
+          key={`${zip}-${center[1]}-${center[0]}`}
+          lat={center[1]}
+          lng={center[0]}
+          zipcode={zip}
+        />
+      );
+    }
   };
 
   render() {
@@ -118,6 +131,7 @@ MapWithPolygon.propTypes = {
   zip_codes: PropTypes.arrayOf(
     PropTypes.shape({
       zip: PropTypes.string.isRequired,
+      properties: PropTypes.object,
       outline: PropTypes.shape({
         type: PropTypes.string,
         coordinates: PropTypes.array
