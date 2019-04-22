@@ -122,6 +122,10 @@ export default class CampaignInvestmentReport extends Component {
           value={r.investment.total.romi}
           target={r.targets?.investment?.total?.romi}
           symbolType="multiple"
+          tooltip={`${formatCurrencyShorthand(
+            r.investment.total.estimated_revenue_gain,
+            true
+          )}/${formatCurrencyShorthand(r.investment.total.total, true)}`}
         />
       </BoxRow>
     );
@@ -237,6 +241,10 @@ export default class CampaignInvestmentReport extends Component {
           value={r.investment.acquisition.romi}
           target={r.targets?.investment?.acquisition?.romi}
           symbolType="multiple"
+          tooltip={`${formatCurrencyShorthand(
+            r.investment.acquisition.estimated_revenue_gain,
+            true
+          )}/${formatCurrencyShorthand(r.investment.acquisition.total, true)}`}
         />
       </ReportSection>
     );
@@ -290,6 +298,10 @@ export default class CampaignInvestmentReport extends Component {
           value={r.investment.retention.romi}
           target={r.targets?.investment?.retention?.romi}
           symbolType="multiple"
+          tooltip={`${formatCurrencyShorthand(
+            r.investment.retention.estimated_revenue_gain,
+            true
+          )}/${formatCurrencyShorthand(r.investment.retention.total, true)}`}
         />
       </ReportSection>
     );
