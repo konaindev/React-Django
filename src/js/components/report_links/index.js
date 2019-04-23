@@ -59,14 +59,14 @@ export default class ReportLinks extends Component {
             this.props.report_links.modeling
           )}
           {this.renderLink(
-            "Performance",
-            "performance",
-            this.props.report_links.performance?.[0]
-          )}
-          {this.renderLink(
             "Campaign Plan",
             "campaign_plan",
             this.props.report_links.campaign_plan
+          )}
+          {this.renderLink(
+            "Performance",
+            "performance",
+            this.props.report_links.performance?.[0]
           )}
         </ul>
       </div>
