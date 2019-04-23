@@ -1,0 +1,57 @@
+@import "./base.scss";
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: $default-background-color;
+    color: $default-text-color;
+    font-family: $font-sans;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $font-headline;
+    font-weight: $weight-normal;
+}
+
+ul,
+li {
+    list-style-type: none;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    padding: $s1 $s2;
+    line-height: $line-height-loose;
+    color: $default-text-color;
+    background: transparent;
+    border: $input-border;
+    border-radius: $border-radius-default;
+
+    &:focus {
+        outline: none;
+        border-color: $input-focus-border-color;
+    }
+}
+
+input[type="submit"] {
+    background: $button-primary-bg-color;
+    border-radius: $border-radius-full;
+    border: solid 1px $button-primary-bg-color;
+    color: $button-primary-text-color;
+    padding: $s3 $s8;
+
+    &:hover {
+        background: $button-primary-active-bg-color;
+        color: $button-primary-active-text-color;
+    }
+}
+
+.force-scrollbar {
+    @include force-scrollbar();
+}
