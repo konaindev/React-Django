@@ -17,6 +17,7 @@ class BaselinePerfTestCase(TestCase):
         "start": datetime.date(year=2018, month=8, day=1),
         "end": datetime.date(year=2018, month=9, day=1),
         "leased_units_start": 153,
+        "leased_units_end": 136,
         "leases_ended": 17,
         "lease_applications": 1,
         "leases_executed": 0,

@@ -411,6 +411,14 @@ class Period(ModelPeriod, models.Model):
     )
     leased_units_start.metric = PointMetric()
 
+    leased_units_end = models.IntegerField(
+        null=True,
+        default=None,
+        editable=False,
+        help_text="Number of leased units at period end. (Cannot be edited.)",
+    )
+    leased_units_end.metric = EndPointMetric()
+
     leases_ended = models.IntegerField(
         default=0, help_text="Number of leases ended (roughly: move outs)"
     )
