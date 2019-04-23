@@ -8,9 +8,7 @@ export function FunnelAnalysisTable({ data, columns, viewMode }) {
     getProps: getColumnProps,
     width: getColumnWidth(column),
     minWidth: getColumnMinWidth(column, viewMode),
-    Cell: CellRenderer,
-    className: getColumnClass(column),
-    headerClassName: getColumnClass(column)
+    Cell: CellRenderer
   }));
 
   return (
@@ -25,15 +23,6 @@ export function FunnelAnalysisTable({ data, columns, viewMode }) {
       viewMode={viewMode}
     />
   );
-}
-
-function getColumnClass({ accessor }) {
-  switch (accessor) {
-    case "label":
-      return "sticky-column";
-    default:
-      return "";
-  }
 }
 
 function getColumnWidth({ accessor }) {
