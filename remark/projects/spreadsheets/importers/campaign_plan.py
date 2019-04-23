@@ -2,7 +2,6 @@ from remark.lib.match import matchp
 from remark.lib.spreadsheets import (
     ChoiceCell,
     CurrencyCell,
-    DateCell,
     find_col,
     find_row,
     IntCell,
@@ -12,7 +11,7 @@ from remark.lib.spreadsheets import (
     prev_row,
     rows_until_empty,
     StrCell,
-    NullStrDateCell
+    NullStrDateCell,
 )
 
 from .base import ProjectExcelImporter

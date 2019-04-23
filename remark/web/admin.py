@@ -1,6 +1,6 @@
-from django.contrib import admin
+from django.contrib import admin  # noqa
 
-from remark.admin import admin_site
+from remark.admin import admin_site  # noqa
 
 
 # @admin.register(Something, site=admin_site)

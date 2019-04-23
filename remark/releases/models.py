@@ -1,8 +1,8 @@
-from django.core import serializers
 from django.db import models
 from django.forms.models import model_to_dict
 
 # Create your models here.
+
 
 class ReleaseNoteQuerySet(models.QuerySet):
     def to_jsonable(self):
@@ -13,6 +13,7 @@ class ReleaseNote(models.Model):
     """
     Represents release note
     """
+
     title = models.CharField(max_length=255)
     version = models.CharField(max_length=20)
     content = models.TextField()

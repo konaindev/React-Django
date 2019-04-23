@@ -2,7 +2,6 @@ import itertools
 from datetime import timedelta
 
 
-from ..models import TargetPeriod
 from .common import CommonReport
 from .periods import ComputedPeriod
 

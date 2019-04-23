@@ -10,33 +10,20 @@ class GoogleAnlayticsTest(TestCase):
     """
 
     def setUp(self):
-        self.response_mock = {  
-            "reports":[{
-                "data":{  
-                    "rows":[{  
-                        "dimensions":[  
-                            "25-34"
-                        ],
-                        "metrics":[{  
-                            "values":[  
-                                "18"
-                            ]
-                        }]
-                    }]
+        self.response_mock = {
+            "reports": [
+                {
+                    "data": {
+                        "rows": [
+                            {"dimensions": ["25-34"], "metrics": [{"values": ["18"]}]}
+                        ]
+                    }
                 }
-            }]
+            ]
         }
 
-        self.mal_response_mock = {  
-            "reports":[{
-                "data":{  
-                    "rows":[{  
-                        "dimensions":[  
-                            "25-34"
-                        ]
-                    }]
-                }
-            }]
+        self.mal_response_mock = {
+            "reports": [{"data": {"rows": [{"dimensions": ["25-34"]}]}}]
         }
 
     def test_get_report_usv_age_from_response(self):
@@ -45,7 +32,5 @@ class GoogleAnlayticsTest(TestCase):
 
     def test_get_report_usv_age_from_mal_response(self):
         self.assertRaises(
-            ValueError,
-            get_report_usv_age_from_response,
-            self.mal_response_mock
+            ValueError, get_report_usv_age_from_response, self.mal_response_mock
         )
