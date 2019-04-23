@@ -24,6 +24,10 @@ $table-border-color: $gray-4;
         border: 0;
         background-color: $table-background-color;
 
+        .rt-table {
+            @include force-scrollbar();
+        }
+
         .rt-thead {
             border-color: $table-border-color;
             border-bottom-width: 1px;

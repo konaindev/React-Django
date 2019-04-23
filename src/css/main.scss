@@ -5,7 +5,6 @@
 @import "./fonts.scss";
 @import "~react-table/react-table.css"; // node_modules
 
-
 body {
     margin: 0;
     padding: 0;
@@ -58,6 +57,9 @@ input[type="submit"] {
     }
 }
 
+.force-scrollbar {
+    @include force-scrollbar();
+}
 
 //-----------------------------------------------------------------------------
 // Content Page Classes (for non-react-rooted pages)
