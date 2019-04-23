@@ -32,6 +32,14 @@ DEFAULT_OUTFILE_PATH = os.path.join(
 )
 
 
+VERBOSE = False
+
+
+def print_verbose(*args, **kwargs):
+    if VERBOSE:
+        print(*args, **kwargs)
+
+
 class Memoizer:
     """An abstract base decorator that implements generic memoization."""
 
@@ -61,7 +69,7 @@ class Memoizer:
         if self.contains(key):
             data = self.read(key)
         else:
-            print("Invoking ", func.__name__, args, kwargs)
+            print_verbose("Invoking ", func.__name__, args, kwargs)
             data = func(*args, **kwargs)
             self.write(key, data)
         return data
@@ -156,12 +164,12 @@ def fetch_population(zipcode):
     pop_th = soup.find_all(find_population)[0]
     td_value = str(pop_th.td.text)
     population = int(td_value.replace(",", ""))
-    print(f"Population: {population}")
+    print_verbose(f"Population: {population}")
 
     house_th = soup.find_all(find_households)[0]
     td_value = str(house_th.td.text)
     households = int(td_value.replace(",", ""))
-    print(f"households: {population}")
+    print_verbose(f"households: {population}")
 
     return (population, households)
 
@@ -180,16 +188,16 @@ def fetch_svg(base_url, zipcode, figure_id):
     figures = soup.find_all(find_figure)
     if len(figures) == 0:
         ref = f'id="{figure_id}"'
-        print(f"Searching for {ref}...")
-        print(f"Results: {response.text.find(ref)}")
+        print_verbose(f"Searching for {ref}...")
+        print_verbose(f"Results: {response.text.find(ref)}")
         raise Exception(f"Could not find the following figure: {figure_id}")
 
     try:
         svg = figures[0].find_all("svg")[0]
     except Exception as e:
-        print(f"Exception: {e}")
-        print(f"Length: {len(response.text)}")
-        print(figures[0].find("svg"))
+        print_verbose(f"Exception: {e}")
+        print_verbose(f"Length: {len(response.text)}")
+        print_verbose(figures[0].find("svg"))
         raise e
     return svg
 
@@ -204,7 +212,7 @@ def fetch_age_segments_by_zip(zipcode):
             txt = gs[x].title.text
             value = float(txt.replace("%", ""))
             result.append(value / 100.0)
-    # print(result)
+    # print_verbose(result)
     return result
 
 
@@ -247,14 +255,14 @@ def fetch_household_income_distribution(zipcode):
             txt = gs[x].title.text
             value = float(txt.replace("%", ""))
             result.append(value / 100.0)
-    print(result)
+    print_verbose(result)
     return result
 
 
 def write_labeled_data(ws, title, labels, data, start_row):
     if len(data) != len(labels):
-        print(labels)
-        print(data)
+        print_verbose(labels)
+        print_verbose(data)
         raise Exception(f"Data length and label length is not equal.")
 
     ws.cell(column=1, row=start_row, value=title)
@@ -322,14 +330,7 @@ INCOME_DIST_LABELS = [
     "$10-15k",
     "< $10k",
 ]
-AGE_SEGMENTS = [
-    "18-24",
-    "25-34",
-    "35-44",
-    "45-54",
-    "55-64",
-    "65+"
-]
+AGE_SEGMENTS = ["18-24", "25-34", "35-44", "45-54", "55-64", "65+"]
 
 ZIP_DATA_SHEET_NAME = "Zip Data {}"
 
@@ -342,8 +343,8 @@ def fill_zip_worksheet(workbook, zipcode):
     # household_income = fetch_household_income(zipcode)
     income_dist = fetch_household_income_distribution(zipcode)
 
-    print("POP")
-    print(population)
+    print_verbose("POP")
+    print_verbose(population)
 
     # Create speadsheet
     worksheet = workbook.create_sheet(title=ZIP_DATA_SHEET_NAME.format(zipcode))
@@ -400,6 +401,7 @@ INCOME_DIST_LEVELS = (
     (200000, 37),
 )
 
+
 def fill_computation_tab(worksheet, zip_codes, income_groups):
     # Add ACS Population Reference Sumed across all zip_codes
     age_group_pop_schema = (
@@ -420,12 +422,17 @@ def fill_computation_tab(worksheet, zip_codes, income_groups):
         if len(income_groups) - 1 == y:
             next_income_group = None
         else:
-            next_income_group = income_groups[y+1]
+            next_income_group = income_groups[y + 1]
         numerator = []
         denominator = []
         for x in range(start_x, len(INCOME_DIST_LEVELS)):
-            if next_income_group is not None and next_income_group <= INCOME_DIST_LEVELS[x][0]:
-                print(f"Income Break: {income_group} <= {INCOME_DIST_LEVELS[x][0]}")
+            if (
+                next_income_group is not None
+                and next_income_group <= INCOME_DIST_LEVELS[x][0]
+            ):
+                print_verbose(
+                    f"Income Break: {income_group} <= {INCOME_DIST_LEVELS[x][0]}"
+                )
                 break
             if income_group <= INCOME_DIST_LEVELS[x][0]:
                 for zip_code in zip_codes:
@@ -441,12 +448,11 @@ def fill_computation_tab(worksheet, zip_codes, income_groups):
 
         numerator_str = f"=({'+'.join(numerator)})"
         denominator_str = f"=({'+'.join(denominator)})"
-        #final_formula = f"=({'+'.join(numerator)})/({'+'.join(denominator)})"
+        # final_formula = f"=({'+'.join(numerator)})/({'+'.join(denominator)})"
         worksheet.cell(column=1, row=20 + y, value=income_groups[y])
         # worksheet.cell(column=2, row=20 + y, value=final_formula)
         worksheet.cell(column=3, row=20 + y, value=numerator_str)
         worksheet.cell(column=4, row=20 + y, value=denominator_str)
-
 
     # Total population
     formula = []
@@ -466,7 +472,9 @@ def fill_computation_tab(worksheet, zip_codes, income_groups):
     worksheet.cell(column=2, row=25, value=final_formula)
 
 
-def write_labeled_property(worksheet, search_value, write_value, search_column=1, write_column=2):
+def write_labeled_property(
+    worksheet, search_value, write_value, search_column=1, write_column=2
+):
     for x in range(1, 500):
         cell = worksheet.cell(column=search_column, row=x)
         if cell.value == search_value:
@@ -476,10 +484,11 @@ def write_labeled_property(worksheet, search_value, write_value, search_column=1
 
 def write_rti_info(worksheet, rti_income_groups, rti_rental_rates, rti_target):
     for x in range(len(rti_income_groups)):
-        worksheet.cell(column=2+x, row=26, value=rti_income_groups[x])
+        worksheet.cell(column=2 + x, row=26, value=rti_income_groups[x])
     for y in range(len(rti_rental_rates)):
-        worksheet.cell(column=1, row=27+y, value=rti_rental_rates[y])
+        worksheet.cell(column=1, row=27 + y, value=rti_rental_rates[y])
     write_labeled_property(worksheet, "Target RTI", rti_target)
+
 
 def write_tam_type(worksheet, lat, lon, tam_type, tam_data):
     if tam_type not in ["zipcodes", "radius"]:
@@ -487,7 +496,7 @@ def write_tam_type(worksheet, lat, lon, tam_type, tam_data):
     worksheet.cell(column=2, row=4, value=tam_type)
     if tam_type == "zipcodes":
         for x in range(len(tam_data)):
-            worksheet.cell(column=3+x, row=4, value=tam_data[x])
+            worksheet.cell(column=3 + x, row=4, value=tam_data[x])
     elif tam_type == "radius":
         worksheet.cell(column=3, row=4, value=tam_data)
         worksheet.cell(column=4, row=4, value="mi")
@@ -520,13 +529,13 @@ def build_tam_data_for_zip_codes(workbook, zip_codes, income_groups):
     live_zipcodes = []
     for zip_code in zip_codes:
         try:
-            print(f"Starting zip: {zip_code}")
+            print_verbose(f"Starting zip: {zip_code}")
             fill_zip_worksheet(workbook, zip_code)
             live_zipcodes.append(zip_code)
-            print(f"Completed zip: {zip_code}")
-        except Exception as e:
-            print(f"FAILED zip: {zip_code}")
-            #raise e
+            print_verbose(f"Completed zip: {zip_code}")
+        except Exception:
+            print_verbose(f"FAILED zip: {zip_code}")
+            # raise e
 
     fill_computation_tab(workbook["Computation"], live_zipcodes, income_groups)
 
@@ -541,10 +550,27 @@ def build_tam_data_for_location(workbook, location, radius, income_groups):
     zip_codes = fetch_zip_codes(
         location[0], location[1], radius * MILES_KILOMETERS_RATIO
     )
-    print(f"zipcodes: {zip_codes}")
+    print_verbose(f"zipcodes: {zip_codes}")
     return build_tam_data_for_zip_codes(workbook, zip_codes, income_groups)
 
-def build_tam_data(zip_codes, lat, lon, loc, radius, income_groups, rti_income_groups, rti_rental_rates, rti_target, age, max_rent, avg_rent, min_rent, usvs, templatefile=DEFAULT_TEMPLATE_PATH):
+
+def build_tam_data(
+    zip_codes,
+    lat,
+    lon,
+    loc,
+    radius,
+    income_groups,
+    rti_income_groups,
+    rti_rental_rates,
+    rti_target,
+    age,
+    max_rent,
+    avg_rent,
+    min_rent,
+    usvs,
+    templatefile=DEFAULT_TEMPLATE_PATH,
+):
 
     # Must have 4+ rental rates
     if len(rti_rental_rates) < 4:
@@ -587,7 +613,12 @@ def build_tam_data(zip_codes, lat, lon, loc, radius, income_groups, rti_income_g
 @click.command()
 @click.option("--lat", type=float, required=True, help="The latitude.")
 @click.option("--lon", type=float, required=True, help="The longitude.")
-@click.option("--loc", type=str, required=True, help="The City and State of the location in {city},{state} format")
+@click.option(
+    "--loc",
+    type=str,
+    required=True,
+    help="The City and State of the location in {city},{state} format",
+)
 @click.option("-r", "--radius", type=float, help="A radius in miles.")
 @click.option(
     "-z", "--zip", "zip_codes", type=int, multiple=True, help="A list of ZIP codes."
@@ -608,7 +639,7 @@ def build_tam_data(zip_codes, lat, lon, loc, radius, income_groups, rti_income_g
     type=int,
     multiple=True,
     required=True,
-    help="A list of RTI income limits"
+    help="A list of RTI income limits",
 )
 @click.option(
     "-m",
@@ -617,45 +648,20 @@ def build_tam_data(zip_codes, lat, lon, loc, radius, income_groups, rti_income_g
     type=int,
     multiple=True,
     required=True,
-    help="A list of RTI rental rates"
+    help="A list of RTI rental rates",
 )
 @click.option(
-    "-e",
-    "--rti-target",
-    "rti_target",
-    type=float,
-    help="RTI target percent."
+    "-e", "--rti-target", "rti_target", type=float, help="RTI target percent."
+)
+@click.option("-a", "--age", type=int, required=True, help="Average Tenant Age")
+@click.option(
+    "-b", "--max-rent", "max_rent", type=int, required=True, help="Maximum Rent"
 )
 @click.option(
-    "-a",
-    "--age",
-    type=int,
-    required=True,
-    help="Average Tenant Age"
+    "-c", "--avg-rent", "avg_rent", type=int, required=True, help="Average Rent"
 )
 @click.option(
-    "-b",
-    "--max-rent",
-    "max_rent",
-    type=int,
-    required=True,
-    help="Maximum Rent"
-)
-@click.option(
-    "-c",
-    "--avg-rent",
-    "avg_rent",
-    type=int,
-    required=True,
-    help="Average Rent"
-)
-@click.option(
-    "-d",
-    "--min-rent",
-    "min_rent",
-    type=int,
-    required=True,
-    help="Minimum Rent"
+    "-d", "--min-rent", "min_rent", type=int, required=True, help="Minimum Rent"
 )
 @click.option(
     "-u",
@@ -663,7 +669,7 @@ def build_tam_data(zip_codes, lat, lon, loc, radius, income_groups, rti_income_g
     type=int,
     multiple=True,
     required=True,
-    help="Unique Site Visitors. There must be 6 entries."
+    help="Unique Site Visitors. There must be 6 entries.",
 )
 @click.option(
     "-t",
@@ -679,10 +685,45 @@ def build_tam_data(zip_codes, lat, lon, loc, radius, income_groups, rti_income_g
     type=click.Path(),
     help="The output XLS filename",
 )
-def main(zip_codes, lat, lon, loc, radius, income_groups, rti_income_groups, rti_rental_rates, rti_target, age, max_rent, avg_rent, min_rent, usvs, templatefile, outfile):
-    workbook = build_tam_data(zip_codes, lat, lon, loc, radius, income_groups, rti_income_groups, rti_rental_rates, rti_target, age, max_rent, avg_rent, min_rent, usvs, templatefile)
+def main(
+    zip_codes,
+    lat,
+    lon,
+    loc,
+    radius,
+    income_groups,
+    rti_income_groups,
+    rti_rental_rates,
+    rti_target,
+    age,
+    max_rent,
+    avg_rent,
+    min_rent,
+    usvs,
+    templatefile,
+    outfile,
+):
+    workbook = build_tam_data(
+        zip_codes,
+        lat,
+        lon,
+        loc,
+        radius,
+        income_groups,
+        rti_income_groups,
+        rti_rental_rates,
+        rti_target,
+        age,
+        max_rent,
+        avg_rent,
+        min_rent,
+        usvs,
+        templatefile,
+    )
     # Save the resulting workbook
     workbook.save(filename=outfile)
 
+
 if __name__ == "__main__":
+    VERBOSE = True
     build_tam_data()

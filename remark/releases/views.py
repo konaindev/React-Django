@@ -1,4 +1,3 @@
-from django.http import Http404
 from django.shortcuts import get_object_or_404
 
 from remark.lib.views import ReactView
@@ -14,10 +13,8 @@ class ReleaseNotesPageView(ReactView):
         return f"Release Notes"
 
     def get(self, request):
-        self.release_notes = ReleaseNote.objects.all().order_by('-version')
-        return self.render(
-            release_notes=self.release_notes.to_jsonable(),
-        )
+        self.release_notes = ReleaseNote.objects.all().order_by("-version")
+        return self.render(release_notes=self.release_notes.to_jsonable())
 
 
 class ReleaseNoteDetailsPageView(ReactView):
@@ -30,6 +27,4 @@ class ReleaseNoteDetailsPageView(ReactView):
 
     def get(self, request, release_id):
         self.release_note = get_object_or_404(ReleaseNote, id=release_id)
-        return self.render(
-            release_note=self.release_note.to_jsonable(),
-        )
+        return self.render(release_note=self.release_note.to_jsonable())

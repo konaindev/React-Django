@@ -6,6 +6,7 @@ from .models import Project, Spreadsheet
 from .reports.selectors import ReportLinks
 from .spreadsheets import get_importer_for_kind, SpreadsheetKind
 
+
 class SpreadsheetForm(forms.ModelForm):
     """
     Hooks into validation of spreadsheet content to ensure that only
@@ -48,7 +49,7 @@ class SpreadsheetForm(forms.ModelForm):
 
 class ProjectForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        is_existing_instance = kwargs.get('instance') is not None
+        is_existing_instance = kwargs.get("instance") is not None
         super(ProjectForm, self).__init__(*args, **kwargs)
         field_maps = {
             "is_baseline_report_public": "baseline",
@@ -62,16 +63,17 @@ class ProjectForm(forms.ModelForm):
             report_links = ReportLinks.for_project(self.instance)
             for k, v in field_maps.items():
                 if isinstance(report_links[v], dict):
-                    link = report_links[v]['url']
+                    link = report_links[v]["url"]
                 elif isinstance(report_links[v], list):
-                    link = report_links[v][0]['url']
+                    link = report_links[v][0]["url"]
                 else:
                     continue
                 self.fields[k].label = mark_safe(
-                    self.fields[k].label +
-                    '&nbsp; (URL: <a target="_blank" href="{}">{}</a>)'.format(link, link)
+                    self.fields[k].label
+                    + '&nbsp; (URL: <a target="_blank" href="{}">{}</a>)'.format(
+                        link, link
+                    )
                 )
-
 
     class Meta:
         model = Project
