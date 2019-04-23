@@ -1,6 +1,7 @@
 from django.test import TestCase
 from xls.exporters.tam_data import build_tam_data
 
+
 class TAMExcelIntegrationTestCase(TestCase):
     """
     """
@@ -20,9 +21,8 @@ class TAMExcelIntegrationTestCase(TestCase):
             3000,
             2000,
             1500,
-            [0,0,0,0,0,0]
+            [0, 0, 0, 0, 0, 0],
         ]
 
     def test_tam_generation(self):
         build_tam_data(*self.args)
-    
