@@ -82,7 +82,6 @@
     "react-dom": "^16",
     "react-markdown": "^4.0.6",
     "react-table": "^6.9.2",
-    "react-table-hoc-fixed-columns": "^2.1.0",
     "sass-mq": "^5.0.0",
     "victory": "^31.1.0"
   }

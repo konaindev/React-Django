@@ -1,11 +1,6 @@
 import React from "react";
 import cx from "classnames";
 import ReactTable from "react-table";
-import withFixedColumns from "react-table-hoc-fixed-columns";
-
-// import "react-table-hoc-fixed-columns/lib/styles.css";
-
-const ReactTableFixedColumns = withFixedColumns(ReactTable);
 
 export function FunnelAnalysisTable({ data, columns, viewMode }) {
   let tableColumns = columns.map(column => ({
@@ -17,7 +12,7 @@ export function FunnelAnalysisTable({ data, columns, viewMode }) {
   }));
 
   return (
-    <ReactTableFixedColumns
+    <ReactTable
       data={data}
       columns={tableColumns}
       className={`analysis__table analysis__table--${viewMode}`}
