@@ -68,6 +68,14 @@ $cell-fill-color-highlight: $blue-3;
             }
         }
 
+        .sticky-column {
+            position: sticky !important;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            background-color: $gray-3;
+        }
+
         .cell-month {
             height: 100%;
             color: $gray-6;
