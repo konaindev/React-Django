@@ -411,6 +411,8 @@ class Period(ModelPeriod, models.Model):
     )
     leased_units_start.metric = PointMetric()
 
+    # This ultimately surfaces as `leased_units` on `ComputedPeriod` if
+    # it's provided here; otherwise, ComputedPeriod actually computes a value.
     leased_units_end = models.IntegerField(
         null=True,
         default=None,
@@ -470,6 +472,16 @@ class Period(ModelPeriod, models.Model):
         help_text="Number of units occupied at period start."
     )
     occupied_units_start.metric = PointMetric()
+
+    # This ultimately surfaces as `leased_units` on `ComputedPeriod` if
+    # it's provided here; otherwise, ComputedPeriod actually computes a value.
+    occupied_units_end = models.IntegerField(
+        null=True,
+        default=None,
+        editable=False,
+        help_text="Number of units occupied at period end. (Cannot be edited.)",
+    )
+    occupied_units_end.metric = EndPointMetric()
 
     move_ins = models.IntegerField(default=0, help_text="Number of units moved into")
     move_ins.metric = SumIntervalMetric()

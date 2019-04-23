@@ -27,6 +27,7 @@ class BaselinePerfTestCase(TestCase):
         "lease_vacation_notices": 19,
         "occupiable_units_start": 156,
         "occupied_units_start": 153,
+        "occupied_units_end": 148,
         "move_ins": 12,
         "move_outs": 17,
         "acq_reputation_building": Decimal(0),
