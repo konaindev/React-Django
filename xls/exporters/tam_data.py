@@ -490,6 +490,8 @@ def write_tam_type(worksheet, lat, lon, tam_type, tam_data):
             worksheet.cell(column=3+x, row=4, value=tam_data[x])
     elif tam_type == "radius":
         worksheet.cell(column=3, row=4, value=tam_data)
+        worksheet.cell(column=4, row=4, value="mi")
+
     write_labeled_property(worksheet, "Coordinates", lat)
     write_labeled_property(worksheet, "Coordinates", lon, write_column=3)
 
@@ -515,16 +517,18 @@ def write_output_properties(worksheet, loc, max_rent, avg_rent, min_rent, usvs):
 
 def build_tam_data_for_zip_codes(workbook, zip_codes, income_groups):
     # generate Zip Code Worksheet
+    live_zipcodes = []
     for zip_code in zip_codes:
         try:
             print(f"Starting zip: {zip_code}")
             fill_zip_worksheet(workbook, zip_code)
+            live_zipcodes.append(zip_code)
             print(f"Completed zip: {zip_code}")
         except Exception as e:
             print(f"FAILED zip: {zip_code}")
-            raise e
+            #raise e
 
-    fill_computation_tab(workbook["Computation"], zip_codes, income_groups)
+    fill_computation_tab(workbook["Computation"], live_zipcodes, income_groups)
 
     # TODO what's all this, then?
     # fetch_zip_codes(latitude, longitude, radius * MILES_KILOMETERS_RATIO)
@@ -533,11 +537,51 @@ def build_tam_data_for_zip_codes(workbook, zip_codes, income_groups):
     # fetch_household_income_distribution('85013')
 
 
-def build_tam_data_for_location(workbook, location, radius, income_groups, rti_income_groups, rti_rental_rates):
+def build_tam_data_for_location(workbook, location, radius, income_groups):
     zip_codes = fetch_zip_codes(
         location[0], location[1], radius * MILES_KILOMETERS_RATIO
     )
+    print(f"zipcodes: {zip_codes}")
     return build_tam_data_for_zip_codes(workbook, zip_codes, income_groups)
+
+def build_tam_data(zip_codes, lat, lon, loc, radius, income_groups, rti_income_groups, rti_rental_rates, rti_target, age, max_rent, avg_rent, min_rent, usvs, templatefile=DEFAULT_TEMPLATE_PATH):
+
+    # Must have 4+ rental rates
+    if len(rti_rental_rates) < 4:
+        raise Exception("Must have 4 or more RTI rental rates")
+
+    if len(rti_income_groups) < 4:
+        raise Exception("Must have 4 or more RTI income groups")
+
+    if len(usvs) != 6:
+        raise Exception("There must be six USV entries")
+
+    if rti_target is None:
+        rti_target = 0.3333
+
+    # Load workbook
+    workbook = load_workbook(templatefile)
+
+    # Delete Sample Data tab
+    workbook.remove(workbook["Sample Zip Data"])
+
+    # Build the data into the workbook
+    if zip_codes:
+        build_tam_data_for_zip_codes(workbook, zip_codes, income_groups)
+        write_tam_type(workbook["Output"], lat, lon, "zipcodes", zip_codes)
+    elif lat and lon and radius:
+        build_tam_data_for_location(workbook, (lat, lon), radius, income_groups)
+        write_tam_type(workbook["Output"], lat, lon, "radius", radius)
+    else:
+        raise click.UsageError(
+            "You must specify either zip_codes *or* a location and radius."
+        )
+
+    # Write Output tab Data
+    write_rti_info(workbook["Output"], rti_income_groups, rti_rental_rates, rti_target)
+    write_output_properties(workbook["Output"], loc, max_rent, avg_rent, min_rent, usvs)
+
+    return workbook
 
 
 @click.command()
@@ -635,46 +679,10 @@ def build_tam_data_for_location(workbook, location, radius, income_groups, rti_i
     type=click.Path(),
     help="The output XLS filename",
 )
-def build_tam_data(zip_codes, lat, lon, loc, radius, income_groups, rti_income_groups, rti_rental_rates, rti_target, age, max_rent, avg_rent, min_rent, usvs, templatefile, outfile):
-
-    # Must have 4+ rental rates
-    if len(rti_rental_rates) < 4:
-        raise Exception("Must have 4 or more RTI rental rates")
-
-    if len(rti_income_groups) < 4:
-        raise Exception("Must have 4 or more RTI income groups")
-
-    if len(usvs) != 6:
-        raise Exception("There must be six USV entries")
-
-    if rti_target is None:
-        rti_target = 0.3333
-
-    # Load workbook
-    workbook = load_workbook(templatefile)
-
-    # Delete Sample Data tab
-    workbook.remove(workbook["Sample Zip Data"])
-
-    # Build the data into the workbook
-    if zip_codes:
-        build_tam_data_for_zip_codes(workbook, zip_codes, income_groups)
-        write_tam_type(workbook["Output"], lat, lon, "zipcodes", zip_codes)
-    elif lat and lon and radius:
-        build_tam_data_for_location(workbook, (lat, lon), radius, income_groups)
-        write_tam_type(workbook["Output"], lat, lon, "radius", radius)
-    else:
-        raise click.UsageError(
-            "You must specify either zip_codes *or* a location and radius."
-        )
-
-    # Write Output tab Data
-    write_rti_info(workbook["Output"], rti_income_groups, rti_rental_rates, rti_target)
-    write_output_properties(workbook["Output"], loc, max_rent, avg_rent, min_rent, usvs)
-
+def main(zip_codes, lat, lon, loc, radius, income_groups, rti_income_groups, rti_rental_rates, rti_target, age, max_rent, avg_rent, min_rent, usvs, templatefile, outfile):
+    workbook = build_tam_data(zip_codes, lat, lon, loc, radius, income_groups, rti_income_groups, rti_rental_rates, rti_target, age, max_rent, avg_rent, min_rent, usvs, templatefile)
     # Save the resulting workbook
     workbook.save(filename=outfile)
-
 
 if __name__ == "__main__":
     build_tam_data()

@@ -3,6 +3,9 @@
 $table-bg-accent: rgba($gray-4, 0.5);
 
 .modeling-comparison {
+    padding-top: $s10;
+    padding-bottom: $s10;
+
     .ReactTable {
         height: 100%;
         background-color: $panel-background-color;

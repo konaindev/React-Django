@@ -116,7 +116,10 @@
                 },
                 "schedule": {
                     "description": "The scheduled date",
-                    "type": "string"
+                    "type": [
+                        "null",
+                        "string"
+                    ]
                 },
                 "status": {
                     "$ref": "#/definitions/Status",
@@ -405,7 +408,10 @@
                 },
                 "schedule": {
                     "description": "The scheduled date",
-                    "type": "string"
+                    "type": [
+                        "null",
+                        "string"
+                    ]
                 },
                 "status": {
                     "$ref": "#/definitions/Status",
