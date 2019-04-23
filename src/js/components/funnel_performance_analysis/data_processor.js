@@ -195,7 +195,8 @@ export default function(funnelHistory = []) {
 
   columns.unshift({
     accessor: "label",
-    Header: ""
+    Header: "",
+    fixed: "left" // sticky column using react-table-hoc-fixed-columns
   });
 
   return {

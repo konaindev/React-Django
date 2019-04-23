@@ -4,7 +4,8 @@
 @import "./normalize.scss";
 @import "./fonts.scss";
 @import "~react-table/react-table.css"; // node_modules
-
+// should come after "~react-table/react-table.css"
+@import "./react-table-hoc-fixed-columns.css";
 
 body {
     margin: 0;
