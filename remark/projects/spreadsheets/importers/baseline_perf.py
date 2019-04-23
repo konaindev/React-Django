@@ -36,6 +36,7 @@ class BaselinePerfImporter(ProjectExcelImporter):
         "start": DateCell(find_period("start date")),
         "end": DateCell(find_period("end date")),
         "leased_units_start": IntCell(find_period("leased units @ start")),
+        "leased_units_end": IntCell(find_period("leased units @ end")),
         "leases_ended": IntCell(find_period("ended")),
         "lease_applications": IntCell(find_period("APPs")),
         "leases_executed": IntCell(find_period("EXEs")),
