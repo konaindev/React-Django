@@ -79,6 +79,7 @@
     "prop-types": "^15",
     "rc-tooltip": "^3.7.3",
     "react": "^16",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16",
     "react-markdown": "^4.0.6",
     "react-table": "^6.9.2",
