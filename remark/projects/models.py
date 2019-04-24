@@ -1,7 +1,6 @@
 import collections
 import decimal
 import os.path
-import string
 
 from django.db import models
 from django.conf import settings
@@ -33,16 +32,16 @@ def building_image_media_path(project, filename):
     See https://docs.djangoproject.com/en/2.1/ref/models/fields/#filefield
 
     Note: Thumbnail generation works fine on FileSystemStorage, but not on S3.
-    To overcome this known issue, we append a random hash to end of file name.
+    To overcome this known issue, append random 7-char string to end of file name.
     Though, old files will not be deleted from S3 on image replacement.
 
-    project/<public_id>/building_image_v<hash><.ext>
-    project/<public_id>/building_image_v<hash>.regular<.ext>
-    project/<public_id>/building_image_v<hash>.thumbnail<.ext>
+    project/<public_id>/building_image_<random_str><.ext>
+    project/<public_id>/building_image_<random_str>.regular<.ext>
+    project/<public_id>/building_image_<random_str>.thumbnail<.ext>
     """
     _, extension = os.path.splitext(filename)
-    hash = get_random_string(length=4, allowed_chars=string.digits)
-    return f"project/{project.public_id}/building_image_v{hash}{extension}"
+    random_str = get_random_string(length=7)
+    return f"project/{project.public_id}/building_image_{random_str}{extension}"
 
 
 def spreadsheet_media_path(spreadsheet, filename):
