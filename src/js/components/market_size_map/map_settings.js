@@ -2,7 +2,7 @@ import scssVars from "../../../css/variables.scss";
 
 export const GOOGLE_MAP_API_KEY = "AIzaSyBu4HU8t3rRXnfdkNjSV1_PIhzzrFFlVTs";
 
-export const DEFAULT_ZOOM = 1;
+export const DEFAULT_ZOOM = 9;
 
 export const mapCirclePointColor = scssVars.mapCirclePointColor;
 
