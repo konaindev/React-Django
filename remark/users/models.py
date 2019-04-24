@@ -84,6 +84,12 @@ class User(PermissionsMixin, AbstractBaseUser):
         help_text="A unique identifier for this user that is safe to share publicly (via API, URL, etc).",
         max_length=24,
     )
+    account = models.ForeignKey(
+        'users.Account',
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+    )
 
     USERNAME_FIELD = "email"
     EMAIL_FIELD = "email"
