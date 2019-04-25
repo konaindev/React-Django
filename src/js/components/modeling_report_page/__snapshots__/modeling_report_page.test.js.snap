@@ -360,7 +360,7 @@ exports[`ModelingReportPage renders correctly 1`] = `
                   <div
                     className="small-box__outer-content"
                   >
-                    <div
+                    <span
                       className="small-box__inner-content"
                     >
                       <span
@@ -372,7 +372,7 @@ exports[`ModelingReportPage renders correctly 1`] = `
                           97
                         </span>
                       </span>
-                    </div>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -395,7 +395,7 @@ exports[`ModelingReportPage renders correctly 1`] = `
                   <div
                     className="small-box__outer-content"
                   >
-                    <div
+                    <span
                       className="small-box__inner-content"
                     >
                       <span
@@ -407,7 +407,7 @@ exports[`ModelingReportPage renders correctly 1`] = `
                           19
                         </span>
                       </span>
-                    </div>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -439,7 +439,7 @@ exports[`ModelingReportPage renders correctly 1`] = `
                   <div
                     className="small-box__outer-content"
                   >
-                    <div
+                    <span
                       className="small-box__inner-content"
                     >
                       <span
@@ -451,7 +451,7 @@ exports[`ModelingReportPage renders correctly 1`] = `
                           30
                         </span>
                       </span>
-                    </div>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -474,7 +474,7 @@ exports[`ModelingReportPage renders correctly 1`] = `
                   <div
                     className="small-box__outer-content"
                   >
-                    <div
+                    <span
                       className="small-box__inner-content"
                     >
                       <span
@@ -486,7 +486,7 @@ exports[`ModelingReportPage renders correctly 1`] = `
                           18
                         </span>
                       </span>
-                    </div>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -518,7 +518,7 @@ exports[`ModelingReportPage renders correctly 1`] = `
                   <div
                     className="small-box__outer-content"
                   >
-                    <div
+                    <span
                       className="small-box__inner-content"
                     >
                       <span
@@ -530,7 +530,7 @@ exports[`ModelingReportPage renders correctly 1`] = `
                           80
                         </span>
                       </span>
-                    </div>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -553,7 +553,7 @@ exports[`ModelingReportPage renders correctly 1`] = `
                   <div
                     className="small-box__outer-content"
                   >
-                    <div
+                    <span
                       className="small-box__inner-content"
                     >
                       <span
@@ -565,7 +565,7 @@ exports[`ModelingReportPage renders correctly 1`] = `
                           20
                         </span>
                       </span>
-                    </div>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -697,6 +697,8 @@ exports[`ModelingReportPage renders correctly 1`] = `
               >
                 <span
                   className="large-box__content-value"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
                 >
                   <span
                     className="delta-layout"
@@ -767,7 +769,7 @@ exports[`ModelingReportPage renders correctly 1`] = `
                   <div
                     className="small-box__outer-content"
                   >
-                    <div
+                    <span
                       className="small-box__inner-content"
                     >
                       <span
@@ -784,7 +786,7 @@ exports[`ModelingReportPage renders correctly 1`] = `
                           55
                         </span>
                       </span>
-                    </div>
+                    </span>
                   </div>
                 </div>
                 <div
@@ -803,7 +805,7 @@ exports[`ModelingReportPage renders correctly 1`] = `
                   <div
                     className="small-box__outer-content"
                   >
-                    <div
+                    <span
                       className="small-box__inner-content"
                     >
                       <span
@@ -815,7 +817,7 @@ exports[`ModelingReportPage renders correctly 1`] = `
                           $171k
                         </span>
                       </span>
-                    </div>
+                    </span>
                   </div>
                 </div>
                 <div
@@ -834,7 +836,7 @@ exports[`ModelingReportPage renders correctly 1`] = `
                   <div
                     className="small-box__outer-content"
                   >
-                    <div
+                    <span
                       className="small-box__inner-content"
                     >
                       <span
@@ -851,7 +853,7 @@ exports[`ModelingReportPage renders correctly 1`] = `
                           $1.2m
                         </span>
                       </span>
-                    </div>
+                    </span>
                   </div>
                 </div>
                 <div
@@ -870,8 +872,10 @@ exports[`ModelingReportPage renders correctly 1`] = `
                   <div
                     className="small-box__outer-content"
                   >
-                    <div
+                    <span
                       className="small-box__inner-content"
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
                     >
                       <span
                         className="delta-layout"
@@ -887,7 +891,7 @@ exports[`ModelingReportPage renders correctly 1`] = `
                           </span>
                         </span>
                       </span>
-                    </div>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -1475,7 +1479,7 @@ A 0 0 0 0 0, NaN, NaN
                   <div
                     className="small-box__outer-content"
                   >
-                    <div
+                    <span
                       className="small-box__inner-content"
                     >
                       <span
@@ -1487,7 +1491,7 @@ A 0 0 0 0 0, NaN, NaN
                           64
                         </span>
                       </span>
-                    </div>
+                    </span>
                   </div>
                 </div>
                 <div
@@ -1506,7 +1510,7 @@ A 0 0 0 0 0, NaN, NaN
                   <div
                     className="small-box__outer-content"
                   >
-                    <div
+                    <span
                       className="small-box__inner-content"
                     >
                       <span
@@ -1518,7 +1522,7 @@ A 0 0 0 0 0, NaN, NaN
                           $10k
                         </span>
                       </span>
-                    </div>
+                    </span>
                   </div>
                 </div>
                 <div
@@ -1537,7 +1541,7 @@ A 0 0 0 0 0, NaN, NaN
                   <div
                     className="small-box__outer-content"
                   >
-                    <div
+                    <span
                       className="small-box__inner-content"
                     >
                       <span
@@ -1554,7 +1558,7 @@ A 0 0 0 0 0, NaN, NaN
                           $1.4m
                         </span>
                       </span>
-                    </div>
+                    </span>
                   </div>
                 </div>
                 <div
@@ -1573,8 +1577,10 @@ A 0 0 0 0 0, NaN, NaN
                   <div
                     className="small-box__outer-content"
                   >
-                    <div
+                    <span
                       className="small-box__inner-content"
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
                     >
                       <span
                         className="delta-layout"
@@ -1590,7 +1596,7 @@ A 0 0 0 0 0, NaN, NaN
                           </span>
                         </span>
                       </span>
-                    </div>
+                    </span>
                   </div>
                 </div>
               </div>

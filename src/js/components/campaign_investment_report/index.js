@@ -84,6 +84,12 @@ const getRetentionChartData = r => {
   };
 };
 
+const romi_tooltip = obj => {
+  const numerator = formatCurrencyShorthand(obj.estimated_revenue_gain, true);
+  const denominator = formatCurrencyShorthand(obj.total, true);
+  return `${numerator} / ${denominator}`;
+};
+
 /**
  * @class CampaignInvestmentReport
  *
@@ -122,6 +128,7 @@ export default class CampaignInvestmentReport extends Component {
           value={r.investment.total.romi}
           target={r.targets?.investment?.total?.romi}
           symbolType="multiple"
+          tooltip={romi_tooltip(r.investment.total)}
         />
       </BoxRow>
     );
@@ -237,6 +244,7 @@ export default class CampaignInvestmentReport extends Component {
           value={r.investment.acquisition.romi}
           target={r.targets?.investment?.acquisition?.romi}
           symbolType="multiple"
+          tooltip={romi_tooltip(r.investment.acquisition)}
         />
       </ReportSection>
     );
@@ -290,6 +298,7 @@ export default class CampaignInvestmentReport extends Component {
           value={r.investment.retention.romi}
           target={r.targets?.investment?.retention?.romi}
           symbolType="multiple"
+          tooltip={romi_tooltip(r.investment.retention)}
         />
       </ReportSection>
     );

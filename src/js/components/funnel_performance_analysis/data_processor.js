@@ -195,7 +195,9 @@ export default function(funnelHistory = []) {
 
   columns.unshift({
     accessor: "label",
-    Header: ""
+    Header: "",
+    className: "sticky-column",
+    headerClassName: "sticky-column"
   });
 
   return {
