@@ -1,8 +1,8 @@
-from django.core.exceptions import ValidationError
-from django.conf import settings
 from django.db import models
+
 from jsonfield import JSONField
-import googlemaps
+
+from .geocode import geocode, GeocodeResult
 
 
 class Country(models.Model):
@@ -60,135 +60,83 @@ class City(models.Model):
         verbose_name_plural = "Cities"
 
 
+class AddressManager(models.Manager):
+    def create_with_location(self, location):
+        """
+        Given an arbitrary location string, attempt to *synchronously*
+        perform a geocode and create an Address from the result.
+
+        If the result is invalid, or geocoding fails, this will return None.
+        Otherwise, it will return the newly created Address instance.
+
+        If you want asynchronous behavior, you'll have to create it elsewhere.
+        """
+        result = geocode(location)
+        return self.create_with_geocode_result(result)
+
+    def create_with_geocode_result(self, result):
+        """
+        Given a GeocodeResult, validate it and return an Address.
+
+        If the result is invalid, this will return None.
+        """
+        address = None
+        if result and result.is_complete:
+            address = self.create(
+                street_address_1=result.street_address_1,
+                street_address_2=result.street_address_2 or "",
+                city=result.city,
+                state=result.state,
+                zip_code=result.zip5,
+                country=result.country,
+                geocode_json=result.geocode_json,
+            )
+        return address
+
+
 class Address(models.Model):
     """
     Represents an address with Google geocoding
     """
 
-    street_address_1 = models.CharField(help_text="Street address 1", max_length=255)
+    objects = AddressManager()
 
-    street_address_2 = models.CharField(
-        help_text="Street address 2", max_length=255, blank=True, null=True
+    street_address_1 = models.CharField(
+        blank=False, max_length=255, help_text="Street address 1"
     )
 
-    city = models.CharField(max_length=128)
+    street_address_2 = models.CharField(
+        max_length=255, blank=True, default="", help_text="Street address 2"
+    )
 
-    state = models.CharField(help_text="State / Province", max_length=128)
+    city = models.CharField(blank=False, max_length=128)
 
-    zip_code = models.CharField(help_text="Zipcode", blank=True, max_length=32)
+    state = models.CharField(blank=False, help_text="State / Province", max_length=128)
 
-    country = models.CharField(max_length=128)
+    zip_code = models.CharField(blank=False, max_length=32, help_text="ZIP5")
 
-    geo_code_json = JSONField(help_text="Google Geo Code JSON")
+    country = models.CharField(blank=False, max_length=128)
+
+    geocode_json = JSONField(
+        blank=True,
+        null=True,
+        default=None,
+        help_text="Raw JSON response from google geocode",
+    )
+
+    @property
+    def geocode_result(self):
+        try:
+            return GeocodeResult(self.geocode_json)
+        except Exception:
+            return None
 
     @property
     def latitude(self):
-        try:
-            return self.geo_code_json["geometry"]["location"]["lat"]
-        except Exception:
-            return None
+        result = self.geocode_result
+        return result.latitude if result else None
 
     @property
     def longitude(self):
-        try:
-            return self.geo_code_json["geometry"]["location"]["lng"]
-        except Exception:
-            return None
-
-    def save(self, *args, **kwargs):
-        full_address = ", ".join(
-            [
-                item
-                for item in [
-                    self.street_address_1,
-                    self.street_address_2,
-                    self.city,
-                    self.state,
-                    self.zip_code,
-                    self.country,
-                ]
-                if item is not None and item != ""
-            ]
-        )
-
-        gmaps = googlemaps.Client(key=settings.GOOGLE_GEOCODE_API_KEY)
-        geocode_result = gmaps.geocode(full_address)
-        self.process_geocode_response(geocode_result)
-        return super().save(*args, **kwargs)
-
-    def process_geocode_response(self, geocode_result):
-        try:
-            address_components = geocode_result[0]["address_components"]
-        except Exception:
-            raise ValidationError("Address components not found")
-
-        street_number_matches = [
-            item["short_name"]
-            for item in address_components
-            if "street_number" in item["types"]
-        ]
-        route_matches = [
-            item["short_name"]
-            for item in address_components
-            if "route" in item["types"]
-        ]
-
-        street_address_1_lines = street_number_matches + route_matches
-        if len(street_address_1_lines) > 0:
-            self.street_address_1 = " ".join(street_address_1_lines)
-        else:
-            raise ValidationError("Street address 1 not found")
-
-        self.street_address_2 = None
-
-        city_matches = [
-            item["short_name"]
-            for item in address_components
-            if "administrative_area_level_2" in item["types"]
-        ]
-        if len(city_matches) > 0:
-            self.city = city_matches[0]
-        else:
-            raise ValidationError("City not found")
-
-        state_matches = [
-            item["short_name"]
-            for item in address_components
-            if "administrative_area_level_1" in item["types"]
-        ]
-        if len(state_matches) > 0:
-            self.state = state_matches[0]
-        else:
-            raise ValidationError("State not found")
-
-        country_matches = [
-            item["short_name"]
-            for item in address_components
-            if "country" in item["types"]
-        ]
-        if len(country_matches) > 0:
-            self.country = country_matches[0]
-        else:
-            raise ValidationError("Country not found")
-
-        zip_code_matches = [
-            item["short_name"]
-            for item in address_components
-            if "postal_code" in item["types"]
-        ]
-        if len(zip_code_matches) > 0:
-            self.zip_code = zip_code_matches[0]
-        else:
-            raise ValidationError("Zipcode not found")
-
-        try:
-            _ = geocode_result[0]["geometry"]["location"]["lat"]
-        except Exception:
-            raise ValidationError("Latitude not found")
-
-        try:
-            _ = geocode_result[0]["geometry"]["location"]["lng"]
-        except Exception:
-            raise ValidationError("Longitude not found")
-
-        self.geo_code_json = geocode_result
+        result = self.geocode_result
+        return result.longitude if result else None
