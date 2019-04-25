@@ -2,7 +2,7 @@ export default {
   property_name: "Portland Multi Family",
   options: [
     {
-      name: "Schedule Driven",
+      name: "Schedule Driven - Early May",
       dates: {
         start: "2018-07-23",
         end: "2018-12-17"
@@ -93,7 +93,7 @@ export default {
     },
 
     {
-      name: "Investment Driven",
+      name: "Scedule Driven - Early June",
       dates: {
         start: "2018-07-23",
         end: "2019-05-27"
@@ -185,7 +185,7 @@ export default {
     },
 
     {
-      name: "Run Rate",
+      name: "Basic Run Rate",
       dates: {
         start: "2018-07-13",
         end: "2020-11-16"
