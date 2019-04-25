@@ -33,6 +33,7 @@ boto3 = "*"
 django-stdimage = "*"
 google-api-python-client = "*"
 beautifulsoup4 = "*"
+googlemaps = "*"
 
 [requires]
 python_version = "3.7"
