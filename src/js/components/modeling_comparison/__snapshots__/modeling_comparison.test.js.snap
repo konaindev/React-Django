@@ -64,7 +64,7 @@ exports[`ModelingComparison renders correctly 1`] = `
             <div
               className=""
             >
-              Run Rate
+              Basic Run Rate
             </div>
           </div>
           <div
@@ -83,7 +83,7 @@ exports[`ModelingComparison renders correctly 1`] = `
             <div
               className=""
             >
-              Schedule Driven
+              Schedule Driven - Early May
             </div>
           </div>
           <div
@@ -102,7 +102,7 @@ exports[`ModelingComparison renders correctly 1`] = `
             <div
               className=""
             >
-              Investment Driven
+              Scedule Driven - Early June
             </div>
           </div>
         </div>
