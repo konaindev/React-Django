@@ -1,6 +1,6 @@
 import openpyxl
 
-from .errors import ExcelError
+from .errors import ExcelError, ExcelValidationError
 from .getset import get_cell
 from .rowcol import col_range, row_range
 from .parse import parse_location_or_default
