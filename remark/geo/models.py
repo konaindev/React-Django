@@ -5,6 +5,86 @@ import googlemaps
 import os
 
 
+class Country(models.Model):
+    """
+    holds all of the countries in the world.
+    """
+    name = models.CharField(
+        help_text="Country Name",
+        max_length=250,
+    )
+
+    code = models.CharField(
+        help_text="Country Code",
+        max_length=4,
+        unique=True,
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Countries"
+
+
+class State(models.Model):
+    """
+    holds all of the states/provinces in the world
+    """
+    name = models.CharField(
+        help_text="State Name",
+        max_length=250,
+    )
+
+    code = models.CharField(
+        help_text="State Code",
+        max_length=4,
+        null=True,
+        blank=True,
+    )
+
+    country = models.ForeignKey(
+        Country,
+        on_delete=models.CASCADE,
+        related_name="states",
+    )
+
+    def __str__(self):
+        return self.name
+
+
+class City(models.Model):
+    """
+    holds all of the cities in the world linked to their state/province and country.
+    """
+    name = models.CharField(
+        help_text="City Name",
+        max_length=250,
+    )
+
+    state = models.ForeignKey(
+        State,
+        on_delete=models.CASCADE,
+        related_name="cities",
+        null=True,
+        blank=True,
+    )
+
+    country = models.ForeignKey(
+        Country,
+        on_delete=models.CASCADE,
+        related_name="cities",
+        null=True,
+        blank=True,
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Cities"
+
+
 class Address(models.Model):
     """
     Represents an address with Google geocoding
