@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('geo', '0002_address'),
+        ('geo', '0001_initial'),
     ]
 
     operations = [
