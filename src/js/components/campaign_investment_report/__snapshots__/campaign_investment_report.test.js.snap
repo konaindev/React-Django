@@ -125,6 +125,8 @@ exports[`CampaignInvestmentReport renders baseline report correctly 1`] = `
         >
           <span
             className="large-box__content-value"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
           >
             <span
               className="delta-layout"
@@ -195,7 +197,7 @@ exports[`CampaignInvestmentReport renders baseline report correctly 1`] = `
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
               >
                 <span
@@ -212,7 +214,7 @@ exports[`CampaignInvestmentReport renders baseline report correctly 1`] = `
                     36
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
           <div
@@ -231,7 +233,7 @@ exports[`CampaignInvestmentReport renders baseline report correctly 1`] = `
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
               >
                 <span
@@ -243,7 +245,7 @@ exports[`CampaignInvestmentReport renders baseline report correctly 1`] = `
                     $68k
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
           <div
@@ -262,7 +264,7 @@ exports[`CampaignInvestmentReport renders baseline report correctly 1`] = `
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
               >
                 <span
@@ -279,7 +281,7 @@ exports[`CampaignInvestmentReport renders baseline report correctly 1`] = `
                     $709.2k
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
           <div
@@ -298,8 +300,10 @@ exports[`CampaignInvestmentReport renders baseline report correctly 1`] = `
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
               >
                 <span
                   className="delta-layout"
@@ -315,7 +319,7 @@ exports[`CampaignInvestmentReport renders baseline report correctly 1`] = `
                     </span>
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
         </div>
@@ -964,7 +968,7 @@ A 0 0 0 0 0, NaN, NaN
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
               >
                 <span
@@ -976,7 +980,7 @@ A 0 0 0 0 0, NaN, NaN
                     94
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
           <div
@@ -995,7 +999,7 @@ A 0 0 0 0 0, NaN, NaN
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
               >
                 <span
@@ -1007,7 +1011,7 @@ A 0 0 0 0 0, NaN, NaN
                     $6k
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
           <div
@@ -1026,7 +1030,7 @@ A 0 0 0 0 0, NaN, NaN
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
               >
                 <span
@@ -1043,7 +1047,7 @@ A 0 0 0 0 0, NaN, NaN
                     $2.1m
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
           <div
@@ -1062,8 +1066,10 @@ A 0 0 0 0 0, NaN, NaN
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
               >
                 <span
                   className="delta-layout"
@@ -1079,7 +1085,7 @@ A 0 0 0 0 0, NaN, NaN
                     </span>
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
         </div>
@@ -2004,6 +2010,8 @@ exports[`CampaignInvestmentReport renders negative performance report correctly 
         >
           <span
             className="large-box__content-value"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
           >
             <span
               className="delta-layout"
@@ -2083,7 +2091,7 @@ exports[`CampaignInvestmentReport renders negative performance report correctly 
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
               >
                 <span
@@ -2100,7 +2108,7 @@ exports[`CampaignInvestmentReport renders negative performance report correctly 
                     9
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
           <div
@@ -2123,7 +2131,7 @@ exports[`CampaignInvestmentReport renders negative performance report correctly 
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
               >
                 <span
@@ -2135,7 +2143,7 @@ exports[`CampaignInvestmentReport renders negative performance report correctly 
                     $14k
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
           <div
@@ -2158,7 +2166,7 @@ exports[`CampaignInvestmentReport renders negative performance report correctly 
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
               >
                 <span
@@ -2175,7 +2183,7 @@ exports[`CampaignInvestmentReport renders negative performance report correctly 
                     $199k
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
           <div
@@ -2198,8 +2206,10 @@ exports[`CampaignInvestmentReport renders negative performance report correctly 
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
               >
                 <span
                   className="delta-layout"
@@ -2220,7 +2230,7 @@ exports[`CampaignInvestmentReport renders negative performance report correctly 
                     </span>
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
         </div>
@@ -2873,7 +2883,7 @@ A 0 0 0 0 0, NaN, NaN
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
               >
                 <span
@@ -2918,7 +2928,7 @@ A 0 0 0 0 0, NaN, NaN
                     </div>
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
           <div
@@ -2941,7 +2951,7 @@ A 0 0 0 0 0, NaN, NaN
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
               >
                 <span
@@ -2953,7 +2963,7 @@ A 0 0 0 0 0, NaN, NaN
                     $2k
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
           <div
@@ -2976,7 +2986,7 @@ A 0 0 0 0 0, NaN, NaN
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
               >
                 <span
@@ -2993,7 +3003,7 @@ A 0 0 0 0 0, NaN, NaN
                     $155.1k
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
           <div
@@ -3016,8 +3026,10 @@ A 0 0 0 0 0, NaN, NaN
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
               >
                 <span
                   className="delta-layout"
@@ -3033,7 +3045,7 @@ A 0 0 0 0 0, NaN, NaN
                     </span>
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
         </div>
@@ -3958,6 +3970,8 @@ exports[`CampaignInvestmentReport renders performance report correctly 1`] = `
         >
           <span
             className="large-box__content-value"
+            onMouseEnter={[Function]}
+            onMouseLeave={[Function]}
           >
             <span
               className="delta-layout"
@@ -4032,7 +4046,7 @@ exports[`CampaignInvestmentReport renders performance report correctly 1`] = `
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
               >
                 <span
@@ -4049,7 +4063,7 @@ exports[`CampaignInvestmentReport renders performance report correctly 1`] = `
                     9
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
           <div
@@ -4072,7 +4086,7 @@ exports[`CampaignInvestmentReport renders performance report correctly 1`] = `
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
               >
                 <span
@@ -4084,7 +4098,7 @@ exports[`CampaignInvestmentReport renders performance report correctly 1`] = `
                     $14k
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
           <div
@@ -4107,7 +4121,7 @@ exports[`CampaignInvestmentReport renders performance report correctly 1`] = `
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
               >
                 <span
@@ -4124,7 +4138,7 @@ exports[`CampaignInvestmentReport renders performance report correctly 1`] = `
                     $199k
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
           <div
@@ -4147,8 +4161,10 @@ exports[`CampaignInvestmentReport renders performance report correctly 1`] = `
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
               >
                 <span
                   className="delta-layout"
@@ -4164,7 +4180,7 @@ exports[`CampaignInvestmentReport renders performance report correctly 1`] = `
                     </span>
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
         </div>
@@ -4817,7 +4833,7 @@ A 0 0 0 0 0, NaN, NaN
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
               >
                 <span
@@ -4862,7 +4878,7 @@ A 0 0 0 0 0, NaN, NaN
                     </div>
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
           <div
@@ -4885,7 +4901,7 @@ A 0 0 0 0 0, NaN, NaN
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
               >
                 <span
@@ -4897,7 +4913,7 @@ A 0 0 0 0 0, NaN, NaN
                     $2k
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
           <div
@@ -4920,7 +4936,7 @@ A 0 0 0 0 0, NaN, NaN
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
               >
                 <span
@@ -4937,7 +4953,7 @@ A 0 0 0 0 0, NaN, NaN
                     $155.1k
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
           <div
@@ -4960,8 +4976,10 @@ A 0 0 0 0 0, NaN, NaN
             <div
               className="small-box__outer-content"
             >
-              <div
+              <span
                 className="small-box__inner-content"
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
               >
                 <span
                   className="delta-layout"
@@ -4977,7 +4995,7 @@ A 0 0 0 0 0, NaN, NaN
                     </span>
                   </span>
                 </span>
-              </div>
+              </span>
             </div>
           </div>
         </div>
