@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     "remark.projects",
     "remark.releases",
     "remark.web",
+    "remark.geo",
 ]
 
 MIDDLEWARE = [
