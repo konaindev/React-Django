@@ -11,8 +11,19 @@
         'value': '{{ page_props.project.public_id }}'
       });
       {% endif %}
-    </script>    
+    </script>
 {% endif %}
+
+<!-- Lucky Orange Heatmap Analytics -->
+<script type='text/javascript'>
+window.__lo_site_id = 152380;
+
+	(function() {
+		var wa = document.createElement('script'); wa.type = 'text/javascript'; wa.async = true;
+		wa.src = 'https://d10lpsik1i8c69.cloudfront.net/w.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(wa, s);
+	  })();
+</script>
 
 {% if FB_PIXEL_ID %}
     <script>
@@ -25,7 +36,7 @@
       s.parentNode.insertBefore(t,s)}(window,document,'script',
       'https://connect.facebook.net/en_US/fbevents.js');
       window.remarkably_fbq = fbq;
-      fbq('init', '{{ FB_PIXEL_ID }}'); 
+      fbq('init', '{{ FB_PIXEL_ID }}');
       fbq('track', 'PageView');
     </script>
     <noscript>
