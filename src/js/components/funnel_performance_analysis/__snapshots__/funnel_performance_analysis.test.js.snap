@@ -87,7 +87,7 @@ exports[`FunnelPerformanceAnalysis renders default correctly 1`] = `
             role="row"
           >
             <div
-              className="rt-th"
+              className="rt-th sticky-column"
               onClick={[Function]}
               role="columnheader"
               style={
@@ -352,7 +352,7 @@ exports[`FunnelPerformanceAnalysis renders default correctly 1`] = `
               role="row"
             >
               <div
-                className="rt-td"
+                className="rt-td sticky-column"
                 extra={
                   Object {
                     "viewMode": "monthly",
@@ -867,7 +867,7 @@ exports[`FunnelPerformanceAnalysis renders default correctly 1`] = `
               role="row"
             >
               <div
-                className="rt-td"
+                className="rt-td sticky-column"
                 extra={
                   Object {
                     "viewMode": "monthly",
@@ -1382,7 +1382,7 @@ exports[`FunnelPerformanceAnalysis renders default correctly 1`] = `
               role="row"
             >
               <div
-                className="rt-td"
+                className="rt-td sticky-column"
                 extra={
                   Object {
                     "viewMode": "monthly",
@@ -1897,7 +1897,7 @@ exports[`FunnelPerformanceAnalysis renders default correctly 1`] = `
               role="row"
             >
               <div
-                className="rt-td"
+                className="rt-td sticky-column"
                 extra={
                   Object {
                     "viewMode": "monthly",
@@ -2412,7 +2412,7 @@ exports[`FunnelPerformanceAnalysis renders default correctly 1`] = `
               role="row"
             >
               <div
-                className="rt-td"
+                className="rt-td sticky-column"
                 extra={
                   Object {
                     "viewMode": "monthly",
@@ -2956,7 +2956,7 @@ exports[`FunnelPerformanceAnalysis renders default correctly 1`] = `
             role="row"
           >
             <div
-              className="rt-th"
+              className="rt-th sticky-column"
               onClick={[Function]}
               role="columnheader"
               style={
@@ -3221,7 +3221,7 @@ exports[`FunnelPerformanceAnalysis renders default correctly 1`] = `
               role="row"
             >
               <div
-                className="rt-td"
+                className="rt-td sticky-column"
                 extra={
                   Object {
                     "viewMode": "monthly",
@@ -3736,7 +3736,7 @@ exports[`FunnelPerformanceAnalysis renders default correctly 1`] = `
               role="row"
             >
               <div
-                className="rt-td"
+                className="rt-td sticky-column"
                 extra={
                   Object {
                     "viewMode": "monthly",
@@ -4251,7 +4251,7 @@ exports[`FunnelPerformanceAnalysis renders default correctly 1`] = `
               role="row"
             >
               <div
-                className="rt-td"
+                className="rt-td sticky-column"
                 extra={
                   Object {
                     "viewMode": "monthly",
@@ -4766,7 +4766,7 @@ exports[`FunnelPerformanceAnalysis renders default correctly 1`] = `
               role="row"
             >
               <div
-                className="rt-td"
+                className="rt-td sticky-column"
                 extra={
                   Object {
                     "viewMode": "monthly",
@@ -5375,7 +5375,7 @@ exports[`FunnelPerformanceAnalysis renders with [] correctly 1`] = `
             role="row"
           >
             <div
-              className="rt-th"
+              className="rt-th sticky-column"
               onClick={[Function]}
               role="columnheader"
               style={
@@ -5412,7 +5412,7 @@ exports[`FunnelPerformanceAnalysis renders with [] correctly 1`] = `
               role="row"
             >
               <div
-                className="rt-td"
+                className="rt-td sticky-column"
                 extra={
                   Object {
                     "viewMode": "monthly",
@@ -5447,7 +5447,7 @@ exports[`FunnelPerformanceAnalysis renders with [] correctly 1`] = `
               role="row"
             >
               <div
-                className="rt-td"
+                className="rt-td sticky-column"
                 extra={
                   Object {
                     "viewMode": "monthly",
@@ -5482,7 +5482,7 @@ exports[`FunnelPerformanceAnalysis renders with [] correctly 1`] = `
               role="row"
             >
               <div
-                className="rt-td"
+                className="rt-td sticky-column"
                 extra={
                   Object {
                     "viewMode": "monthly",
@@ -5517,7 +5517,7 @@ exports[`FunnelPerformanceAnalysis renders with [] correctly 1`] = `
               role="row"
             >
               <div
-                className="rt-td"
+                className="rt-td sticky-column"
                 extra={
                   Object {
                     "viewMode": "monthly",
@@ -5552,7 +5552,7 @@ exports[`FunnelPerformanceAnalysis renders with [] correctly 1`] = `
               role="row"
             >
               <div
-                className="rt-td"
+                className="rt-td sticky-column"
                 extra={
                   Object {
                     "viewMode": "monthly",
@@ -5616,7 +5616,7 @@ exports[`FunnelPerformanceAnalysis renders with [] correctly 1`] = `
             role="row"
           >
             <div
-              className="rt-th"
+              className="rt-th sticky-column"
               onClick={[Function]}
               role="columnheader"
               style={
@@ -5653,7 +5653,7 @@ exports[`FunnelPerformanceAnalysis renders with [] correctly 1`] = `
               role="row"
             >
               <div
-                className="rt-td"
+                className="rt-td sticky-column"
                 extra={
                   Object {
                     "viewMode": "monthly",
@@ -5688,7 +5688,7 @@ exports[`FunnelPerformanceAnalysis renders with [] correctly 1`] = `
               role="row"
             >
               <div
-                className="rt-td"
+                className="rt-td sticky-column"
                 extra={
                   Object {
                     "viewMode": "monthly",
@@ -5723,7 +5723,7 @@ exports[`FunnelPerformanceAnalysis renders with [] correctly 1`] = `
               role="row"
             >
               <div
-                className="rt-td"
+                className="rt-td sticky-column"
                 extra={
                   Object {
                     "viewMode": "monthly",
@@ -5758,7 +5758,7 @@ exports[`FunnelPerformanceAnalysis renders with [] correctly 1`] = `
               role="row"
             >
               <div
-                className="rt-td"
+                className="rt-td sticky-column"
                 extra={
                   Object {
                     "viewMode": "monthly",

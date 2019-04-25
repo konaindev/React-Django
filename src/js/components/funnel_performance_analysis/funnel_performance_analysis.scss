@@ -5,6 +5,8 @@ $weekly-bar-height: 40px;
 $weekly-bar-width: 8px;
 $cell-fill-color: $gray-5;
 $cell-fill-color-highlight: $blue-3;
+$table-background-color: $gray-3;
+$table-border-color: $gray-4;
 
 .funnel-performance-analysis {
     .panel {
@@ -20,15 +22,20 @@ $cell-fill-color-highlight: $blue-3;
 
     .analysis__table.ReactTable {
         border: 0;
-        background-color: $gray-3;
+        background-color: $table-background-color;
+
+        .rt-table {
+            @include force-scrollbar();
+        }
 
         .rt-thead {
-            border-color: $gray-4;
+            border-color: $table-border-color;
             border-bottom-width: 1px;
             box-shadow: none;
 
             .rt-th {
                 padding: 0;
+                border-right-width: 0;
                 color: $highlight-gray-3;
                 font-size: $text-xs;
                 line-height: $text-xl;
@@ -42,15 +49,18 @@ $cell-fill-color-highlight: $blue-3;
         }
 
         .rt-tbody {
+            overflow: visible;
+
             .rt-tr-group {
-                border-bottom: 1px solid $gray-4;
+                border-bottom: 1px solid $table-border-color;
                 &:last-child {
-                    border-bottom: 1px solid $gray-4;
+                    border-bottom: 1px solid $table-border-color;
                 }
             }
 
             .rt-td {
                 padding: 0;
+                border-right-width: 0;
 
                 &:first-child {
                     color: $highlight-gray-3;
@@ -66,6 +76,16 @@ $cell-fill-color-highlight: $blue-3;
                     }
                 }
             }
+        }
+
+        .rt-thead .rt-th.sticky-column,
+        .rt-tbody .rt-td.sticky-column {
+            position: sticky !important;
+            left: 0;
+            top: 0;
+            z-index: 1;
+            background-color: $table-background-color;
+            // border-right: 1px solid $table-border-color;
         }
 
         .cell-month {
@@ -163,10 +183,10 @@ $cell-fill-color-highlight: $blue-3;
     }
 
     // weekly table has borders around each cell
-    .analysis__table--weekly {
+    .analysis__table--weekly.ReactTable {
         .rt-tbody {
             .rt-td {
-                border-color: $gray-4;
+                border-color: $table-border-color;
                 border-right-width: 1px;
 
                 &:first-child, &:last-child {

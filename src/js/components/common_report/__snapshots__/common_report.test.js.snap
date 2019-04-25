@@ -2704,7 +2704,7 @@ A 0 0 0 0 0, NaN, NaN
               role="row"
             >
               <div
-                className="rt-th"
+                className="rt-th sticky-column"
                 onClick={[Function]}
                 role="columnheader"
                 style={
@@ -2969,7 +2969,7 @@ A 0 0 0 0 0, NaN, NaN
                 role="row"
               >
                 <div
-                  className="rt-td"
+                  className="rt-td sticky-column"
                   extra={
                     Object {
                       "viewMode": "monthly",
@@ -3484,7 +3484,7 @@ A 0 0 0 0 0, NaN, NaN
                 role="row"
               >
                 <div
-                  className="rt-td"
+                  className="rt-td sticky-column"
                   extra={
                     Object {
                       "viewMode": "monthly",
@@ -3999,7 +3999,7 @@ A 0 0 0 0 0, NaN, NaN
                 role="row"
               >
                 <div
-                  className="rt-td"
+                  className="rt-td sticky-column"
                   extra={
                     Object {
                       "viewMode": "monthly",
@@ -4514,7 +4514,7 @@ A 0 0 0 0 0, NaN, NaN
                 role="row"
               >
                 <div
-                  className="rt-td"
+                  className="rt-td sticky-column"
                   extra={
                     Object {
                       "viewMode": "monthly",
@@ -5029,7 +5029,7 @@ A 0 0 0 0 0, NaN, NaN
                 role="row"
               >
                 <div
-                  className="rt-td"
+                  className="rt-td sticky-column"
                   extra={
                     Object {
                       "viewMode": "monthly",
@@ -5573,7 +5573,7 @@ A 0 0 0 0 0, NaN, NaN
               role="row"
             >
               <div
-                className="rt-th"
+                className="rt-th sticky-column"
                 onClick={[Function]}
                 role="columnheader"
                 style={
@@ -5838,7 +5838,7 @@ A 0 0 0 0 0, NaN, NaN
                 role="row"
               >
                 <div
-                  className="rt-td"
+                  className="rt-td sticky-column"
                   extra={
                     Object {
                       "viewMode": "monthly",
@@ -6353,7 +6353,7 @@ A 0 0 0 0 0, NaN, NaN
                 role="row"
               >
                 <div
-                  className="rt-td"
+                  className="rt-td sticky-column"
                   extra={
                     Object {
                       "viewMode": "monthly",
@@ -6868,7 +6868,7 @@ A 0 0 0 0 0, NaN, NaN
                 role="row"
               >
                 <div
-                  className="rt-td"
+                  className="rt-td sticky-column"
                   extra={
                     Object {
                       "viewMode": "monthly",
@@ -7383,7 +7383,7 @@ A 0 0 0 0 0, NaN, NaN
                 role="row"
               >
                 <div
-                  className="rt-td"
+                  className="rt-td sticky-column"
                   extra={
                     Object {
                       "viewMode": "monthly",
