@@ -1,8 +1,8 @@
 from django.core.exceptions import ValidationError
+from django.conf import settings
 from django.db import models
 from jsonfield import JSONField
 import googlemaps
-import os
 
 
 class Country(models.Model):
@@ -111,7 +111,7 @@ class Address(models.Model):
             ]
         )
 
-        gmaps = googlemaps.Client(key=os.environ.get("GOOGLE_GEOCODE_API_KEY"))
+        gmaps = googlemaps.Client(key=settings.GOOGLE_GEOCODE_API_KEY)
         geocode_result = gmaps.geocode(full_address)
         self.process_geocode_response(geocode_result)
         return super().save(*args, **kwargs)
