@@ -1,6 +1,6 @@
 import openpyxl
 
-from .errors import ExcelValidationError
+from .errors import ExcelError
 from .getset import get_cell
 from .rowcol import col_range, row_range
 from .parse import parse_location_or_default
@@ -250,7 +250,7 @@ class ExcelImporter:
         """Validate the spreadsheet; return False if not possible."""
         try:
             self.clean()
-        except ExcelValidationError as e:
+        except ExcelError as e:
             self.errors.append(e)
         return len(self.errors) == 0
 
