@@ -69,16 +69,11 @@ class GeocodeResult:
         return self.first_result.get("formatted_address")
 
     @property
-    def street_address_1(self):
+    def street_address(self):
         """Return the street, if known. (ex: 2901 NE Blakeley Street)"""
         number = self.get_short_component("street_number") or ""
         route = self.get_short_component("route") or ""
         return f"{number} {route}".strip() or None
-
-    @property
-    def street_address_2(self):
-        """This appears to have no analogue in google geocoding. Return None."""
-        return None
 
     @property
     def city(self):
@@ -117,7 +112,7 @@ class GeocodeResult:
         components = [
             self.latitude,
             self.longitude,
-            self.street_address_1,
+            self.street_address,
             self.city,
             self.state,
             self.country,

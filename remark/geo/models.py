@@ -83,8 +83,8 @@ class AddressManager(models.Manager):
         address = None
         if result and result.is_complete:
             address = self.create(
-                street_address_1=result.street_address_1,
-                street_address_2=result.street_address_2 or "",
+                street_address_1=result.street_address,
+                street_address_2="",
                 city=result.city,
                 state=result.state,
                 zip_code=result.zip5,

@@ -116,11 +116,8 @@ class TestCompleteGeocodeResult(TestCase):
             self.result.formatted_address, "2901 NE Blakeley St, Seattle, WA 98105, USA"
         )
 
-    def test_street_address_1(self):
-        self.assertEqual(self.result.street_address_1, "2901 NE Blakeley St")
-
-    def test_street_address_2(self):
-        self.assertEqual(self.result.street_address_2, None)
+    def test_street_address(self):
+        self.assertEqual(self.result.street_address, "2901 NE Blakeley St")
 
     def test_city(self):
         self.assertEqual(self.result.city, "Seattle")
@@ -199,11 +196,8 @@ class TestIncompleteGeocodeResult(TestCase):
     def test_formatted_address(self):
         self.assertEqual(self.result.formatted_address, "Seattle, WA 98195, USA")
 
-    def test_street_address_1(self):
-        self.assertEqual(self.result.street_address_1, None)
-
-    def test_street_address_2(self):
-        self.assertEqual(self.result.street_address_2, None)
+    def test_street_address(self):
+        self.assertEqual(self.result.street_address, None)
 
     def test_city(self):
         self.assertEqual(self.result.city, "Seattle")
