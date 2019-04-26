@@ -1,24 +1,18 @@
-from django.core.exceptions import ValidationError
 from django.db import models
+
 from jsonfield import JSONField
-import googlemaps
-import os
+
+from .geocode import geocode, GeocodeResult
 
 
 class Country(models.Model):
     """
     holds all of the countries in the world.
     """
-    name = models.CharField(
-        help_text="Country Name",
-        max_length=250,
-    )
 
-    code = models.CharField(
-        help_text="Country Code",
-        max_length=4,
-        unique=True,
-    )
+    name = models.CharField(help_text="Country Name", max_length=250)
+
+    code = models.CharField(help_text="Country Code", max_length=4, unique=True)
 
     def __str__(self):
         return self.name
@@ -31,22 +25,13 @@ class State(models.Model):
     """
     holds all of the states/provinces in the world
     """
-    name = models.CharField(
-        help_text="State Name",
-        max_length=250,
-    )
 
-    code = models.CharField(
-        help_text="State Code",
-        max_length=4,
-        null=True,
-        blank=True,
-    )
+    name = models.CharField(help_text="State Name", max_length=250)
+
+    code = models.CharField(help_text="State Code", max_length=4, null=True, blank=True)
 
     country = models.ForeignKey(
-        Country,
-        on_delete=models.CASCADE,
-        related_name="states",
+        Country, on_delete=models.CASCADE, related_name="states"
     )
 
     def __str__(self):
@@ -57,25 +42,15 @@ class City(models.Model):
     """
     holds all of the cities in the world linked to their state/province and country.
     """
-    name = models.CharField(
-        help_text="City Name",
-        max_length=250,
-    )
+
+    name = models.CharField(help_text="City Name", max_length=250)
 
     state = models.ForeignKey(
-        State,
-        on_delete=models.CASCADE,
-        related_name="cities",
-        null=True,
-        blank=True,
+        State, on_delete=models.CASCADE, related_name="cities", null=True, blank=True
     )
 
     country = models.ForeignKey(
-        Country,
-        on_delete=models.CASCADE,
-        related_name="cities",
-        null=True,
-        blank=True,
+        Country, on_delete=models.CASCADE, related_name="cities", null=True, blank=True
     )
 
     def __str__(self):
@@ -85,37 +60,83 @@ class City(models.Model):
         verbose_name_plural = "Cities"
 
 
+class AddressManager(models.Manager):
+    def create_with_location(self, location):
+        """
+        Given an arbitrary location string, attempt to *synchronously*
+        perform a geocode and create an Address from the result.
+
+        If the result is invalid, or geocoding fails, this will return None.
+        Otherwise, it will return the newly created Address instance.
+
+        If you want asynchronous behavior, you'll have to create it elsewhere.
+        """
+        result = geocode(location)
+        return self.create_with_geocode_result(result)
+
+    def create_with_geocode_result(self, result):
+        """
+        Given a GeocodeResult, validate it and return an Address.
+
+        If the result is invalid, this will return None.
+        """
+        address = None
+        if result and result.is_complete:
+            address = self.create(
+                street_address_1=result.street_address,
+                street_address_2="",
+                city=result.city,
+                state=result.state,
+                zip_code=result.zip5,
+                country=result.country,
+                geocode_json=result.geocode_json,
+            )
+        return address
+
+
 class Address(models.Model):
     """
     Represents an address with Google geocoding
     """
+
+    objects = AddressManager()
+
     street_address_1 = models.CharField(
-        help_text="Street address 1",
-        max_length=255,
+        blank=False, max_length=255, help_text="Street address 1"
     )
 
     street_address_2 = models.CharField(
-        help_text="Street address 2",
-        max_length=255,
+        max_length=255, blank=True, default="", help_text="Street address 2"
+    )
+
+    city = models.CharField(blank=False, max_length=128)
+
+    state = models.CharField(blank=False, help_text="State / Province", max_length=128)
+
+    zip_code = models.CharField(blank=False, max_length=32, help_text="ZIP5")
+
+    country = models.CharField(blank=False, max_length=128)
+
+    geocode_json = JSONField(
         blank=True,
-        null=True
+        null=True,
+        default=None,
+        help_text="Raw JSON response from google geocode",
     )
 
-    city = models.CharField(max_length=128)
+    @property
+    def geocode_result(self):
+        try:
+            return GeocodeResult(self.geocode_json)
+        except Exception:
+            return None
 
-    state = models.CharField(
-        help_text="State / Province",
-        max_length=128
-    )
+    @property
+    def latitude(self):
+        result = self.geocode_result
+        return result.latitude if result else None
 
-    zip_code = models.CharField(
-        help_text="Zipcode",
-        blank=True,
-        max_length=32
-    )
-
-    country = models.CharField(max_length=128)
-
-    geo_code_json = JSONField(
-        help_text="Google Geo Code JSON"
-    )
+    @property
+    def longitude(self):
+        result = self.geocode_result
+        return result.longitude if result else None

@@ -220,6 +220,12 @@ CACHES = {
 
 
 #
+# API Keys
+#
+
+GOOGLE_GEOCODE_API_KEY = os.getenv("GOOGLE_GEOCODE_API_KEY", None)
+
+#
 # Analytics (hey, we might want these down the road).
 #
 
