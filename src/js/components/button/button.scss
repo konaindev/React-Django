@@ -67,4 +67,8 @@
             background-color: darken($button-default-active-bg-color, 2%);
         }
     }
+
+    &--disabled {
+        cursor: not-allowed;
+    }
 }
