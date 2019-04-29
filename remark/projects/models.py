@@ -193,7 +193,10 @@ class Project(models.Model):
     )
 
     address = models.ForeignKey(
-        "geo.Address", on_delete=models.CASCADE, null=True, blank=True
+        "geo.Address",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
     )
 
     def _target_periods(self, qs):
