@@ -69,7 +69,7 @@ def import_one_state(state_abbr):
 
     remote_source = f"https://raw.githubusercontent.com/OpenDataDE/State-zip-code-GeoJSON/master/{file_name}"
     file_handle = urlopen(remote_source)
-    zip_code_count = 0
+    counter = 0
 
     with file_handle as input_file:
         # load json iteratively
@@ -79,16 +79,7 @@ def import_one_state(state_abbr):
             # "properties" contains zip code and lat/lon, might need later
             properties = feature["properties"]
             zip_code = properties[ZIP_CODE_ACCESSOR]
-            zip_code_count = zip_code_count + 1
-
-            # ignore inner rings which represent holes in a polygon
-            geometry = feature["geometry"]
-            if geometry["type"] == "Polygon":
-                geometry["coordinates"] = [geometry["coordinates"][0]]
-
-            if geometry["type"] == "MultiPolygon":
-                for (index, polygon) in enumerate(geometry["coordinates"]):
-                    geometry["coordinates"][index] = [polygon[0]]
+            counter = counter + 1
 
             ZipcodePolygon.objects.update_or_create(
                 zip_code=zip_code,
@@ -96,7 +87,7 @@ def import_one_state(state_abbr):
                 geometry=geometry
             )
 
-    return zip_code_count
+    return counter
 
 
 def import_zipcode_polygons(states_args = None):
