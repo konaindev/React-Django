@@ -7,46 +7,49 @@ import ButtonToggle from "../button_toggle";
 import CopyToClipboard from "../copy_to_clipboard";
 import "./share_toggle.scss";
 
-const ENDPOINT = "/endpoint-to-update-flag";
+const ENDPOINT = "/endpoint-to-update-shared-flag";
 
-function updateSharedEffect(flagInState) {
-  const [flag, setFlag] = useState(null);
+function useApi() {
+  const [shared, setShared] = useState(null);
 
-  const sendPostRequest = async () => {
-    if (flag === null) {
-      return setFlag(flagInState);
+  const updateServer = async () => {
+    if (shared === null) {
+      return;
     }
 
     try {
-      const resp = await axios.post(ENDPOINT, { shared: flagInState });
-      setFlag(resp.flag);
+      const resp = await axios.post(ENDPOINT, { shared });
     } catch (err) {
-      setFlag(flagInState);
+      console.log("Failed to update shared", err);
     }
   };
 
   useEffect(() => {
-    sendPostRequest();
-  }, [flagInState]);
+    updateServer();
+  }, [shared]);
 
-  return flag;
+  return [setShared];
 }
 
 export function ShareToggle(props) {
-  const { shared: flagInProps, share_url } = props;
+  const { shared, share_url } = props;
 
-  const [flagInState, setFlagInState] = useState(flagInProps);
-  const flagFromApi = updateSharedEffect(flagInState);
-  const flagToPass = flagFromApi === null ? flagInState : flagFromApi;
+  const [flag, setFlag] = useState(shared);
+  const [makeApiCall] = useApi();
+
+  const handleToggleChange = newValue => {
+    setFlag(newValue);
+    makeApiCall(newValue);
+  };
 
   return (
     <div className="share-toggle">
-      <ButtonToggle checked={flagToPass} onChange={setFlagInState} />
+      <ButtonToggle checked={flag} onChange={handleToggleChange} />
 
       <CopyToClipboard
         textToCopy={share_url}
         buttonLabel="Copy Link"
-        disabled={!flagToPass}
+        disabled={!flag}
       />
     </div>
   );
