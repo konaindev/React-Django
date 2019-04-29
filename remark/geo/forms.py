@@ -27,6 +27,7 @@ class LocationForm(forms.ModelForm):
 
     def save(self, commit=True, *args, **kwargs):
         obj = super().save(commit=False, *args, **kwargs)
+        obj.formatted_address = self.result.formatted_address
         obj.street_address_1 = self.result.street_address
         obj.street_address_2 = ""
         obj.city = self.result.city
@@ -41,6 +42,7 @@ class LocationForm(forms.ModelForm):
     class Meta:
         model = Address
         exclude = [
+            "formatted_address",
             "street_address_1",
             "street_address_2",
             "city",
