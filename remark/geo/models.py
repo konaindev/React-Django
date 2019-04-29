@@ -168,6 +168,3 @@ class ZipcodePolygon(models.Model):
     geometry = JSONField(
         help_text="Geometry JSON data"
     )
-
-    class Meta:
-        db_table = "geo_zipcode_polygons"
