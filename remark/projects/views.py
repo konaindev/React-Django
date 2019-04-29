@@ -135,7 +135,6 @@ class TAMExportView(FormView, SingleObjectMixin):
             if project.analytics_provider is None:
                 messages.error(request, "This project doesn't have an analytics provider yet.")
                 return self.form_invalid(form)
-            print(form.cleaned_data)
             try:
                 usvs = fetch_usv_age(project.analytics_provider.identifier)
                 workbook = build_tam_data(

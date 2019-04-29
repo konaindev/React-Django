@@ -92,11 +92,13 @@ class TAMExportForm(forms.Form):
     radius = forms.FloatField(
         label="Radius",
         help_text="Radius (in miles)",
+        required=False,
     )
     zip_codes = forms.CharField(
         widget=forms.Textarea,
         label="Zip codes",
         help_text="List of Zip Codes",
+        required=False,
     )
     rti_target = forms.FloatField(
         label="RTI Target",
@@ -120,7 +122,13 @@ class TAMExportForm(forms.Form):
         help_text="A list of integers representing annual salaries that is used differently than above (e.g. $30000, $40000, $50000)",
     )
 
+    def clean_radius(self):
+        if not self.data["radius"] and not self.data["zip_codes"]:
+            raise forms.ValidationError("You should enter either one of Radius or Zip Codes")
+
     def clean_zip_codes(self):
+        if self.data["radius"] and self.data["zip_codes"]:
+            raise forms.ValidationError("You should enter either one of Radius or Zip Codes")
         return multiline_text_to_str_array(self.cleaned_data["zip_codes"])
 
     def clean_income_groups(self):
