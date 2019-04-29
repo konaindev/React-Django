@@ -83,20 +83,19 @@ class ProjectForm(forms.ModelForm):
                     )
                 )
 
+    def _update_active_model_choices(self):
+        modeling_report = self.instance.tmp_modeling_report_json or {}
+        modeling_options = modeling_report.get("options", [])
+        model_names = [
+            (modeling_option["name"], modeling_option["name"])
+            for modeling_option in modeling_options
+        ]
+        if not model_names:
+            self.fields["active_model_name"].disabled = True
+        model_names = self.NO_CHOICES + model_names
+        self.fields["active_model_name"].choices = model_names
+
     class Meta:
         model = Project
         exclude = []
 
-
-# TODO FIXME -dave bad merge.
-# def _update_active_model_choices(self):
-#     modeling_report = self.instance.tmp_modeling_report_json or {}
-#     modeling_options = modeling_report.get("options", [])
-#     model_names = [
-#         (modeling_option["name"], modeling_option["name"])
-#         for modeling_option in modeling_options
-#     ]
-#     if not model_names:
-#         self.fields["active_model_name"].disabled = True
-#     model_names = self.NO_CHOICES + model_names
-#     self.fields["active_model_name"].choices = model_names
