@@ -2,8 +2,9 @@
 {% load i18n admin_urls %}
 
 {% block submit-row %}
+{% if opts.model_name == 'project' %}
 <a href="{% url 'admin:tam_export' original.pk %}">{% trans "Export Total Market Analysis" %}</a>
-
+{% endif %}
 {# below are from default django implementation. #}
 
 {% if show_save %}<input type="submit" value="{% trans 'Save' %}" class="default" name="_save">{% endif %}
