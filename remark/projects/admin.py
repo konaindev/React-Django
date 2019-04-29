@@ -203,3 +203,7 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, admin.ModelAdmin):
                 obj = formset_form.instance
                 self.update_spreadsheet(request, obj, formset_form)
         super().save_formset(request, form, formset, change=change)
+
+    class Media:
+        js = ("js/project_admin.js",)
+

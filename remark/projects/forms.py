@@ -50,7 +50,15 @@ class SpreadsheetForm(forms.ModelForm):
 class ProjectForm(forms.ModelForm):
     NO_CHOICES = [("", "--(no active model)--")]
 
-    active_model_name = forms.ChoiceField(choices=NO_CHOICES, required=False)
+    active_model_name = forms.ChoiceField(
+        choices=NO_CHOICES,
+        required=False,
+        widget=forms.Select(
+            attrs={
+                "onChange": "window.enable_submit_warning('Are you sure you want to save? All target values will be replaced by those in the newly chosen model.');"
+            }
+        ),
+    )
 
     def __init__(self, *args, **kwargs):
         self.is_existing_instance = kwargs.get("instance") is not None
