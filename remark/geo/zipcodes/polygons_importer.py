@@ -78,17 +78,16 @@ def import_one_state(state_abbr):
             if all_props is None:
                 continue
 
-            zip_code = all_props["ZCTA5CE10"]
-            properties = dict(
-                lat=float(all_props["INTPTLAT10"]),
-                lon=float(all_props["INTPTLON10"])
-            )
             counter = counter + 1
+            zip_code = all_props["ZCTA5CE10"]
+            lat = float(all_props["INTPTLAT10"])
+            lon = float(all_props["INTPTLON10"])
+            properties = dict(center=[lon, lat])
 
             ZipcodePolygon.objects.update_or_create(
                 zip_code=zip_code,
                 state=state_abbr.upper(),
-                geometry=geometry,
+                geometry=feature["geometry"],
                 properties=properties
             )
 
