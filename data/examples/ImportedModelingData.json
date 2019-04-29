@@ -87,5 +87,199 @@
       "romi": 21,
       "estimated_revenue_gain": "607776.00"
     }
-  }
+  },
+  "targets": [
+    {
+      "start": "2019-04-17",
+      "target_leased_rate": 0.7788944723618091,
+      "target_lease_applications": 11,
+      "target_leases_executed": 8,
+      "target_lease_renewal_notices": 1,
+      "target_lease_renewals": 0,
+      "target_lease_vacation_notices": 1,
+      "target_lease_cds": 3,
+      "target_delta_leases": 8,
+      "target_move_ins": 0,
+      "target_move_outs": 0,
+      "target_occupied_units": 154,
+      "target_acq_expenses": {
+        "demand_creation": "1666.76",
+        "leasing_enablement": "0.00",
+        "market_intelligence": "331.67",
+        "reputation_building": "0.00"
+      },
+      "target_ret_expenses": {
+        "demand_creation": "0.00",
+        "leasing_enablement": "458.33",
+        "market_intelligence": "331.67",
+        "reputation_building": "0.00"
+      },
+      "target_usvs": 530,
+      "target_inquiries": 49,
+      "target_tours": 18,
+      "end": "2019-04-24",
+      "target_acq_investment": "1998.43",
+      "target_ret_investment": "790.00"
+    },
+    {
+      "start": "2019-04-24",
+      "target_leased_rate": 0.8190954773869347,
+      "target_lease_applications": 11,
+      "target_leases_executed": 8,
+      "target_lease_renewal_notices": 0,
+      "target_lease_renewals": 1,
+      "target_lease_vacation_notices": 1,
+      "target_lease_cds": 3,
+      "target_delta_leases": 8,
+      "target_move_ins": 0,
+      "target_move_outs": 0,
+      "target_occupied_units": 162,
+      "target_acq_expenses": {
+        "demand_creation": "1666.76",
+        "leasing_enablement": "0.00",
+        "market_intelligence": "331.67",
+        "reputation_building": "0.00"
+      },
+      "target_ret_expenses": {
+        "demand_creation": "0.00",
+        "leasing_enablement": "458.33",
+        "market_intelligence": "331.67",
+        "reputation_building": "0.00"
+      },
+      "target_usvs": 530,
+      "target_inquiries": 49,
+      "target_tours": 18,
+      "end": "2019-05-01",
+      "target_acq_investment": "1998.43",
+      "target_ret_investment": "790.00"
+    },
+    {
+      "start": "2019-05-01",
+      "target_leased_rate": 0.8592964824120602,
+      "target_lease_applications": 11,
+      "target_leases_executed": 8,
+      "target_lease_renewal_notices": 0,
+      "target_lease_renewals": 0,
+      "target_lease_vacation_notices": 0,
+      "target_lease_cds": 3,
+      "target_delta_leases": 8,
+      "target_move_ins": 0,
+      "target_move_outs": 0,
+      "target_occupied_units": 170,
+      "target_acq_expenses": {
+        "demand_creation": "1666.76",
+        "leasing_enablement": "0.00",
+        "market_intelligence": "331.67",
+        "reputation_building": "0.00"
+      },
+      "target_ret_expenses": {
+        "demand_creation": "0.00",
+        "leasing_enablement": "458.33",
+        "market_intelligence": "331.67",
+        "reputation_building": "0.00"
+      },
+      "target_usvs": 530,
+      "target_inquiries": 49,
+      "target_tours": 18,
+      "end": "2019-05-08",
+      "target_acq_investment": "1998.43",
+      "target_ret_investment": "790.00"
+    },
+    {
+      "start": "2019-05-08",
+      "target_leased_rate": 0.8944723618090452,
+      "target_lease_applications": 11,
+      "target_leases_executed": 8,
+      "target_lease_renewal_notices": 1,
+      "target_lease_renewals": 1,
+      "target_lease_vacation_notices": 0,
+      "target_lease_cds": 3,
+      "target_delta_leases": 7,
+      "target_move_ins": 8,
+      "target_move_outs": 1,
+      "target_occupied_units": 177,
+      "target_acq_expenses": {
+        "demand_creation": "1666.76",
+        "leasing_enablement": "0.00",
+        "market_intelligence": "331.67",
+        "reputation_building": "0.00"
+      },
+      "target_ret_expenses": {
+        "demand_creation": "0.00",
+        "leasing_enablement": "458.33",
+        "market_intelligence": "331.67",
+        "reputation_building": "0.00"
+      },
+      "target_usvs": 530,
+      "target_inquiries": 49,
+      "target_tours": 18,
+      "end": "2019-05-15",
+      "target_acq_investment": "1998.43",
+      "target_ret_investment": "790.00"
+    },
+    {
+      "start": "2019-05-15",
+      "target_leased_rate": 0.9296482412060302,
+      "target_lease_applications": 11,
+      "target_leases_executed": 8,
+      "target_lease_renewal_notices": 0,
+      "target_lease_renewals": 0,
+      "target_lease_vacation_notices": 0,
+      "target_lease_cds": 3,
+      "target_delta_leases": 7,
+      "target_move_ins": 8,
+      "target_move_outs": 1,
+      "target_occupied_units": 184,
+      "target_acq_expenses": {
+        "demand_creation": "1666.76",
+        "leasing_enablement": "0.00",
+        "market_intelligence": "331.67",
+        "reputation_building": "0.00"
+      },
+      "target_ret_expenses": {
+        "demand_creation": "0.00",
+        "leasing_enablement": "458.33",
+        "market_intelligence": "331.67",
+        "reputation_building": "0.00"
+      },
+      "target_usvs": 530,
+      "target_inquiries": 49,
+      "target_tours": 18,
+      "end": "2019-05-22",
+      "target_acq_investment": "1998.43",
+      "target_ret_investment": "790.00"
+    },
+    {
+      "start": "2019-05-22",
+      "target_leased_rate": 0.9698492462311558,
+      "target_lease_applications": 11,
+      "target_leases_executed": 8,
+      "target_lease_renewal_notices": 0,
+      "target_lease_renewals": 0,
+      "target_lease_vacation_notices": 0,
+      "target_lease_cds": 3,
+      "target_delta_leases": 8,
+      "target_move_ins": 8,
+      "target_move_outs": 0,
+      "target_occupied_units": 192,
+      "target_acq_expenses": {
+        "demand_creation": "1666.76",
+        "leasing_enablement": "0.00",
+        "market_intelligence": "331.67",
+        "reputation_building": "0.00"
+      },
+      "target_ret_expenses": {
+        "demand_creation": "0.00",
+        "leasing_enablement": "458.33",
+        "market_intelligence": "331.67",
+        "reputation_building": "0.00"
+      },
+      "target_usvs": 530,
+      "target_inquiries": 49,
+      "target_tours": 18,
+      "end": "2019-05-29",
+      "target_acq_investment": "1998.43",
+      "target_ret_investment": "790.00"
+    }
+  ]
 }

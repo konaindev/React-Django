@@ -149,6 +149,12 @@
                 "property": {
                     "$ref": "#/definitions/Property",
                     "description": "Property details for the report"
+                },
+                "targets": {
+                    "items": {
+                        "$ref": "#/definitions/ImportedModelingTargets"
+                    },
+                    "type": "array"
                 }
             },
             "required": [
@@ -157,7 +163,113 @@
                 "funnel",
                 "investment",
                 "name",
-                "property"
+                "property",
+                "targets"
+            ],
+            "type": "object"
+        },
+        "ImportedModelingTargets": {
+            "properties": {
+                "end": {
+                    "type": "string"
+                },
+                "start": {
+                    "type": "string"
+                },
+                "target_acq_expenses": {
+                    "$ref": "#/definitions/InvestmentExpenses",
+                    "description": "from individual AQC [sic] columns"
+                },
+                "target_acq_investment": {
+                    "description": "summed from \"AQC [sic] Reputation Building, AQC Demand Creation, AQC Leasing Enablemenet, AQC Market Intelligence\" columns",
+                    "type": "string"
+                },
+                "target_delta_leases": {
+                    "description": "from \"Weekly Delta Leased Units\" column",
+                    "type": "integer"
+                },
+                "target_inquiries": {
+                    "description": "from \"INQs\" column",
+                    "type": "integer"
+                },
+                "target_lease_applications": {
+                    "description": "from \"Apps\" column",
+                    "type": "integer"
+                },
+                "target_lease_cds": {
+                    "description": "from \"C/D\" column",
+                    "type": "integer"
+                },
+                "target_lease_renewal_notices": {
+                    "description": "from \"Notice to Renew\" column",
+                    "type": "integer"
+                },
+                "target_lease_renewals": {
+                    "description": "from \"Renewals\" column",
+                    "type": "integer"
+                },
+                "target_lease_vacation_notices": {
+                    "description": "from \"Notice to Vacate\" column",
+                    "type": "integer"
+                },
+                "target_leased_rate": {
+                    "description": "from \"Lease Up %\" column",
+                    "type": "number"
+                },
+                "target_leases_executed": {
+                    "description": "from \"EXE\" column",
+                    "type": "integer"
+                },
+                "target_move_ins": {
+                    "description": "from \"Move Ins\" column",
+                    "type": "integer"
+                },
+                "target_move_outs": {
+                    "description": "from \"Move Outs\" column",
+                    "type": "integer"
+                },
+                "target_occupied_units": {
+                    "description": "from \"Occupied Units\" column",
+                    "type": "integer"
+                },
+                "target_ret_expenses": {
+                    "$ref": "#/definitions/InvestmentExpenses",
+                    "description": "from individual Ret columns"
+                },
+                "target_ret_investment": {
+                    "description": "summed from \"Ret Reputation Building, Ret Demand Creation, Ret Leasing Enablemenet, Ret Market Intelligence\" columns",
+                    "type": "string"
+                },
+                "target_tours": {
+                    "description": "from \"TOU\" column",
+                    "type": "integer"
+                },
+                "target_usvs": {
+                    "description": "from \"USVs\" column",
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "end",
+                "start",
+                "target_acq_expenses",
+                "target_acq_investment",
+                "target_delta_leases",
+                "target_inquiries",
+                "target_lease_applications",
+                "target_lease_cds",
+                "target_lease_renewal_notices",
+                "target_lease_renewals",
+                "target_lease_vacation_notices",
+                "target_leased_rate",
+                "target_leases_executed",
+                "target_move_ins",
+                "target_move_outs",
+                "target_occupied_units",
+                "target_ret_expenses",
+                "target_ret_investment",
+                "target_tours",
+                "target_usvs"
             ],
             "type": "object"
         },
