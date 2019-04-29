@@ -350,9 +350,6 @@ class Project(models.Model):
             target_period.save()
             return target_period
 
-        # It doesn't belong in remark/projects/spreadsheets/... since
-        # by the time we get here, there's no spreadsheet. It's kinda odd-duck.
-
         # Remove all extant target periods
         self.target_periods.all().delete()
 
