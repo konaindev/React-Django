@@ -25,4 +25,24 @@ class ModelingReport(ReportBase):
         self.project = project
 
     def to_jsonable(self):
-        return self.project.tmp_modeling_report_json
+        # If a specific model is selected on the project, re-order the JSON
+        # so that the selected model is first, and give it a slightly altered name.
+        jsonable = self.project.tmp_modeling_report_json
+
+        # Reorder options if there's a selected model.
+        if self.project.selected_model_name:
+            options = jsonable.get("options", [])
+            names = [option.get("name") for option in options]
+            try:
+                index = names.index(self.project.selected_model_name)
+            except Exception:
+                index = None
+
+            if index is not None:
+                selected_option = options.pop(index)
+                selected_option["name"] = f"{selected_option['name']} (Selected)"
+                options = [selected_option] + options
+
+            jsonable["options"] = options
+
+        return jsonable
