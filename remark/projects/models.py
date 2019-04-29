@@ -769,9 +769,16 @@ class TargetPeriod(ModelPeriod, models.Model):
         ordering = ["start"]
 
 
+class AnalyticsProviderManager(models.Manager):
+    def google(self):
+        return self.filter(provider='google').first()
+
+
 class AnalyticsProvider(models.Model):
     ANALYTICS_PROVIDER_CHOICES = [("google", "Google Analytics")]
     ANALYTICS_PROVIDER_DICT = dict(ANALYTICS_PROVIDER_CHOICES)
+
+    manager = AnalyticsProviderManager()
 
     project = models.ForeignKey(
         Project,

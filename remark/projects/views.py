@@ -132,12 +132,13 @@ class TAMExportView(FormView, SingleObjectMixin):
             if project.address is None:
                 messages.error(request, "This project doesn't have an address yet.")
                 return self.form_invalid(form)
-            if project.analytics_providers.first() is None:
+            google_provider = project.analytics_providers.google()
+            if google_provider is None:
                 messages.error(request, "This project doesn't have an analytics provider yet.")
                 return self.form_invalid(form)
 
             try:
-                usvs = fetch_usv_age(project.analytics_providers.first().identifier)
+                usvs = fetch_usv_age(google_provider.identifier)
                 workbook = build_tam_data(
                     zip_codes=form.cleaned_data["zip_codes"],
                     lat=project.address.latitude,
