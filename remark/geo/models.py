@@ -161,10 +161,14 @@ class ZipcodePolygon(models.Model):
     )
 
     state = models.CharField(
-        help_text="State Abbreviation",
+        help_text="State abbreviation",
         max_length=2
     )
 
     geometry = JSONField(
-        help_text="Geometry JSON data"
+        help_text="Geometry JSON data which includes 'type' and 'coordinates'"
+    )
+
+    properties = JSONField(
+        help_text="Additional properties in JSON format"
     )

@@ -57,8 +57,6 @@ US_STATES = {
     "wy": "wy_wyoming_zip_codes_geo.min.json"
 }
 
-ZIP_CODE_ACCESSOR = "ZCTA5CE10"
-
 
 def import_one_state(state_abbr):
 
@@ -76,15 +74,22 @@ def import_one_state(state_abbr):
         features = ijson.items(input_file, 'features.item')
 
         for feature in features:
-            # "properties" contains zip code and lat/lon, might need later
-            properties = feature["properties"]
-            zip_code = properties[ZIP_CODE_ACCESSOR]
+            all_props = feature["properties"]
+            if all_props is None:
+                continue
+
+            zip_code = all_props["ZCTA5CE10"]
+            properties = dict(
+                lat=float(all_props["INTPTLAT10"]),
+                lon=float(all_props["INTPTLON10"])
+            )
             counter = counter + 1
 
             ZipcodePolygon.objects.update_or_create(
                 zip_code=zip_code,
                 state=state_abbr.upper(),
-                geometry=geometry
+                geometry=geometry,
+                properties=properties
             )
 
     return counter
