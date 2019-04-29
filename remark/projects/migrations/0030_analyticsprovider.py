@@ -17,7 +17,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('provider', models.CharField(choices=[('google', 'Google Analytics')], max_length=255)),
                 ('identifier', models.CharField(max_length=255)),
-                ('project', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='projects.Project', related_name="analytics_provider")),
+                ('project', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='projects.Project', related_name="analytics_providers")),
             ],
         ),
     ]
