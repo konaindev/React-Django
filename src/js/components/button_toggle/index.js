@@ -1,9 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
 
-import Button from "../button";
-import ButtonGroup from "../button_group";
 import "./button_toggle.scss";
 
 export function ButtonToggle(props) {
@@ -41,7 +39,7 @@ export function ButtonToggle(props) {
         </div>
       </span>
 
-      <span className="toggle-outer-label">{label}</span>
+      {label && <span className="toggle-outer-label">{label}</span>}
     </label>
   );
 }

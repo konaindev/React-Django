@@ -11,7 +11,7 @@ import ButtonToggle from "./index";
 storiesOf("ButtonToggle", module)
   .add(
     "default",
-    withState({ checked: false })(({ store }) => (
+    withState({ checked: true })(({ store }) => (
       <StorybookContainer>
         <ButtonToggle
           checked={store.state.checked}

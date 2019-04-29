@@ -14,14 +14,14 @@ export function CopyToClipboardButton({ disabled, textToCopy, buttonLabel }) {
 
     setTimeout(() => {
       setCopied(false);
-    }, 3000);
+    }, 1500);
   };
 
   const [copied, setCopied] = useState(false);
 
   if (disabled) {
     return (
-      <Button className="copy-to-clipboard copy-to-clipboard--disabled">
+      <Button className="copy-to-clipboard" disabled>
         {buttonLabel}
       </Button>
     );
@@ -29,10 +29,7 @@ export function CopyToClipboardButton({ disabled, textToCopy, buttonLabel }) {
 
   return (
     <CopyToClipboard text={textToCopy} onCopy={copyCallback}>
-      <Button
-        color="primary"
-        className="copy-to-clipboard copy-to-clipboard--enabled"
-      >
+      <Button color="primary" className="copy-to-clipboard">
         {copied ? copiedText : buttonLabel}
       </Button>
     </CopyToClipboard>

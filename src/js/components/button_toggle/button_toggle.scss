@@ -21,9 +21,7 @@ $thumb-size: 2.5rem;
         vertical-align: middle;
         height: $thumb-size;
         user-select: none;
-        background-color: $button-default-bg-color;
         border-radius: $border-radius-default;
-        color: $button-default-text-color;
 
         &--checked {
             background-color: $button-primary-bg-color;
@@ -45,6 +43,9 @@ $thumb-size: 2.5rem;
         }
 
         &--unchecked {
+            background-color: $button-default-bg-color;
+            color: $button-default-text-color;
+
             .toggle-thumb {
                 left: 0;
             }
@@ -55,11 +56,10 @@ $thumb-size: 2.5rem;
         position: absolute;
         margin: 2px;
         border-radius: $border-radius-default;
-        box-shadow: 0 2px 4px 0 rgba($gray-4, 0.15);
-        background: #fff;
+        background-color: $white;
         width: calc(#{$thumb-size} - 4px);
         height: calc(#{$thumb-size} - 4px);
-        transition: left .1s cubic-bezier(.4,1,.75,.9);
+        transition: left 0.1s cubic-bezier(0.4, 1, 0.75, 0.9);
     }
 
     .toggle-button-checked {
@@ -83,5 +83,35 @@ $thumb-size: 2.5rem;
 
     .toggle-outer-label {
         margin-left: $s4;
+        user-select: none;
+    }
+
+    &:hover,
+    &:focus {
+        .toggle-tracks {
+            &--checked {
+                background-color: lighten($button-primary-bg-color, 3%);
+            }
+
+            &--unchecked {
+                background-color: lighten($button-default-bg-color, 3%);
+            }
+        }
+
+        .toggle-thumb {
+            box-shadow: 0 0 6px 0 $gray-8;
+        }
+    }
+
+    &:active {
+        .toggle-tracks {
+            &--checked {
+                background-color: darken($button-primary-bg-color, 2%);
+            }
+
+            &--unchecked {
+                background-color: darken($button-default-bg-color, 2%);
+            }
+        }
     }
 }
