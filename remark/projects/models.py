@@ -330,15 +330,37 @@ class Project(models.Model):
         the currently selected model.
 
         """
-        # TODO CONSIDER where does this code actually belong? -Dave
+        # TODO CONSIDER where does this code actually belong?
+        #
+        # This doesn't feel like the right place but I don't have a better
+        # answer. I originally assumed it belonged in remark/projects/spreadsheets/
+        # but that feels wrong, too: yes, this data was *imported* from a spreadsheet,
+        # and yes, this looks like activation, but in this case, there is data
+        # from multiple spreadsheets in play. Perhaps a different approach
+        # to managing tmp_modeling_report_json would allow for clarity here?
+        #
+        # -Dave
+        def _create_target_period(data):
+            target_period = TargetPeriod(project=self)
+            for k, v in data.items():
+                # Yes, this will set values for keys that aren't fields;
+                # that's fine; we don't overwrite anything we shouldn't,
+                # and extraneous stuff is ignored for save.
+                setattr(target_period, k, v)
+            target_period.save()
+            return target_period
+
+        # It doesn't belong in remark/projects/spreadsheets/... since
+        # by the time we get here, there's no spreadsheet. It's kinda odd-duck.
 
         # Remove all extant target periods
-        self.target_periods.delete()
+        self.target_periods.all().delete()
 
+        # If there are any, create new target periods!
         option = self.get_selected_model_option()
         if option is not None:
-            # TODO FINISH ME
-            pass
+            for data in option.get("targets", []):
+                _create_target_period(data)
 
     def save(self, *args, **kwargs):
         model_selection_changed = (

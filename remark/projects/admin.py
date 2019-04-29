@@ -12,7 +12,10 @@ class UpdateSpreadsheetAdminMixin:
         """Add current user and imported data, if available and not yet present."""
         if not obj.id:
             obj.uploaded_by = obj.uploaded_by or request.user
-            obj.imported_data = obj.imported_data or form.cleaned_data["imported_data"]
+            obj.imported_data = (
+                getattr(obj, "imported_data", None)
+                or form.cleaned_data["imported_data"]
+            )
 
 
 @admin.register(Spreadsheet, site=admin_site)
