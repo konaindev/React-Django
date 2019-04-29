@@ -1,6 +1,7 @@
 @import "css/base.scss";
 
-$thumb-size: 2.5rem;
+$toggle-thumb-size: 2.5rem;
+$toggle-box-shadow: 0 0 6px 0 $gray-8;
 
 .button-toggle {
     display: inline-block;
@@ -19,7 +20,7 @@ $thumb-size: 2.5rem;
         position: relative;
         display: inline-block;
         vertical-align: middle;
-        height: $thumb-size;
+        height: $toggle-thumb-size;
         user-select: none;
         border-radius: $border-radius-default;
 
@@ -28,12 +29,12 @@ $thumb-size: 2.5rem;
             color: $button-primary-text-color;
 
             .toggle-thumb {
-                left: calc(100% - #{$thumb-size});
+                left: calc(100% - #{$toggle-thumb-size});
             }
 
             .toggle-button-checked {
                 visibility: visible;
-                line-height: $thumb-size;
+                line-height: $toggle-thumb-size;
             }
 
             .toggle-button-unchecked {
@@ -57,23 +58,23 @@ $thumb-size: 2.5rem;
         margin: 2px;
         border-radius: $border-radius-default;
         background-color: $white;
-        width: calc(#{$thumb-size} - 4px);
-        height: calc(#{$thumb-size} - 4px);
+        width: calc(#{$toggle-thumb-size} - 4px);
+        height: calc(#{$toggle-thumb-size} - 4px);
         transition: left 0.1s cubic-bezier(0.4, 1, 0.75, 0.9);
     }
 
     .toggle-button-checked {
         visibility: hidden;
         margin-left: $s4;
-        margin-right: $thumb-size + $s4;
+        margin-right: $toggle-thumb-size + $s4;
         line-height: 0;
     }
 
     .toggle-button-unchecked {
         visibility: visible;
-        margin-left: $thumb-size + $s4;
+        margin-left: $toggle-thumb-size + $s4;
         margin-right: $s4;
-        line-height: $thumb-size;
+        line-height: $toggle-thumb-size;
     }
 
     .toggle-inner-label {
@@ -99,7 +100,7 @@ $thumb-size: 2.5rem;
         }
 
         .toggle-thumb {
-            box-shadow: 0 0 6px 0 $gray-8;
+            box-shadow: $toggle-box-shadow;
         }
     }
 
