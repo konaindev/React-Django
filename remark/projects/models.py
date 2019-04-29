@@ -124,7 +124,7 @@ class Project(models.Model):
         help_text="Modeling JSON data. Must conform to the schema defined in ModelingOptions.ts",
     )
 
-    active_model_name = models.CharField(
+    selected_model_name = models.CharField(
         blank=True,
         default="",
         max_length=255,
@@ -201,6 +201,15 @@ class Project(models.Model):
     is_campaign_plan_public = models.BooleanField(
         verbose_name="Show Campaign Plan?", default=False
     )
+
+    # This value is set when the instance is created; if we later
+    # call save, and it changes, then we update targets for the model.
+    __selected_model_name = None
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Save this for comparison purposes on save(...)
+        self.__selected_model_name = self.selected_model_name
 
     def _target_periods(self, qs):
         # TODO XXX temporary hack until we fully populate from model spreadsheets. -Dave
@@ -297,6 +306,47 @@ class Project(models.Model):
             "name": self.name,
             "building_image": self.get_building_image(),
         }
+
+    def get_named_model_option(self, name):
+        """Given a named model, return the option."""
+        data = self.tmp_modeling_report_json
+        options = data.get("options", [])
+        for option in options:
+            if option.get("name") == name:
+                return option
+        return None
+
+    def get_selected_model_option(self):
+        """Return the currently selected model option."""
+        return (
+            self.get_named_model_option(self.selected_model_name)
+            if self.selected_model_name
+            else None
+        )
+
+    def update_for_selected_model(self):
+        """
+        Update all associated data (like target periods) based on 
+        the currently selected model.
+
+        """
+        # TODO CONSIDER where does this code actually belong? -Dave
+
+        # Remove all extant target periods
+        self.target_periods.delete()
+
+        option = self.get_selected_model_option()
+        if option is not None:
+            # TODO FINISH ME
+            pass
+
+    def save(self, *args, **kwargs):
+        model_selection_changed = (
+            self.__selected_model_name is not self.selected_model_name
+        )
+        super().save(*args, **kwargs)
+        if model_selection_changed:
+            self.update_for_selected_model()
 
     def __str__(self):
         return "{} ({})".format(self.name, self.public_id)

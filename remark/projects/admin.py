@@ -184,7 +184,7 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, admin.ModelAdmin):
         "number_of_periods",
         "baseline_start",
         "baseline_end",
-        "active_model_name",
+        "selected_model_name",
         "average_tenant_age",
         "highest_monthly_rent",
         "average_monthly_rent",
@@ -197,7 +197,7 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, admin.ModelAdmin):
         return obj.periods.all().count()
 
     def save_formset(self, request, form, formset, change):
-        # Force
+        # Force spreadsheet updating
         if formset.model == Spreadsheet:
             for formset_form in formset:
                 obj = formset_form.instance

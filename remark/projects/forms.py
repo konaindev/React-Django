@@ -48,14 +48,14 @@ class SpreadsheetForm(forms.ModelForm):
 
 
 class ProjectForm(forms.ModelForm):
-    NO_CHOICES = [("", "--(no active model)--")]
+    NO_CHOICES = [("", "--(no selected model)--")]
 
-    active_model_name = forms.ChoiceField(
+    selected_model_name = forms.ChoiceField(
         choices=NO_CHOICES,
         required=False,
         widget=forms.Select(
             attrs={
-                "onChange": "window.enable_submit_warning('Are you sure you want to save? All target values will be replaced by those in the newly chosen model.');"
+                "onChange": "window.enable_submit_warning('Are you sure you want to save? All target values will be replaced by those in the newly selected model.');"
             }
         ),
     )
@@ -64,7 +64,7 @@ class ProjectForm(forms.ModelForm):
         self.is_existing_instance = kwargs.get("instance") is not None
         super(ProjectForm, self).__init__(*args, **kwargs)
         self._map_public_fields()
-        self._update_active_model_choices()
+        self._update_selected_model_choices()
 
     def _map_public_fields(self):
         field_maps = {
@@ -91,7 +91,7 @@ class ProjectForm(forms.ModelForm):
                     )
                 )
 
-    def _update_active_model_choices(self):
+    def _update_selected_model_choices(self):
         modeling_report = self.instance.tmp_modeling_report_json or {}
         modeling_options = modeling_report.get("options", [])
         model_names = [
@@ -99,9 +99,9 @@ class ProjectForm(forms.ModelForm):
             for modeling_option in modeling_options
         ]
         if not model_names:
-            self.fields["active_model_name"].disabled = True
+            self.fields["selected_model_name"].disabled = True
         model_names = self.NO_CHOICES + model_names
-        self.fields["active_model_name"].choices = model_names
+        self.fields["selected_model_name"].choices = model_names
 
     class Meta:
         model = Project
