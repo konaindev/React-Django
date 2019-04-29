@@ -5,6 +5,7 @@ from django.contrib.auth.models import PermissionsMixin
 
 from remark.lib.tokens import public_id
 from remark.lib.fields import NormalizedEmailField
+from .constants import ACCOUNT_TYPE
 
 
 def usr_public_id():
@@ -83,9 +84,37 @@ class User(PermissionsMixin, AbstractBaseUser):
         help_text="A unique identifier for this user that is safe to share publicly (via API, URL, etc).",
         max_length=24,
     )
+    account = models.ForeignKey(
+        'users.Account',
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+    )
 
     USERNAME_FIELD = "email"
     EMAIL_FIELD = "email"
     REQUIRED_FIELDS = []
 
     objects = UserManager()
+
+
+class Account(models.Model):
+    company_name = models.CharField(
+        max_length=250,
+        help_text="Company Name"
+    )
+
+    address = models.ForeignKey(
+        'geo.Address',
+        on_delete=models.CASCADE,
+        related_name="accounts",
+        help_text="Address"
+    )
+
+    account_type = models.IntegerField(
+        choices=ACCOUNT_TYPE,
+        help_text="Account Type",
+    )
+
+    def __str__(self):
+        return self.company_name

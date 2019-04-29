@@ -53,6 +53,7 @@ class ProjectForm(forms.ModelForm):
     active_model_name = forms.ChoiceField(choices=NO_CHOICES, required=False)
 
     def __init__(self, *args, **kwargs):
+        self.is_existing_instance = kwargs.get("instance") is not None
         super(ProjectForm, self).__init__(*args, **kwargs)
         self._map_public_fields()
         self._update_active_model_choices()
@@ -66,7 +67,7 @@ class ProjectForm(forms.ModelForm):
             "is_campaign_plan_public": "campaign_plan",
         }
 
-        try:
+        if self.is_existing_instance:
             report_links = ReportLinks.for_project(self.instance)
             for k, v in field_maps.items():
                 if isinstance(report_links[v], dict):
@@ -81,24 +82,21 @@ class ProjectForm(forms.ModelForm):
                         link, link
                     )
                 )
-        except Exception:
-            # This happens when creating a new Project
-            # Quick hack to get around that issue
-            # XXX TODO HACK FIXME I dunno who wrote this hack, but this ain't the way. :-) -Dave
-            pass
-
-    def _update_active_model_choices(self):
-        modeling_report = self.instance.tmp_modeling_report_json or {}
-        modeling_options = modeling_report.get("options", [])
-        model_names = [
-            (modeling_option["name"], modeling_option["name"])
-            for modeling_option in modeling_options
-        ]
-        if not model_names:
-            self.fields["active_model_name"].disabled = True
-        model_names = self.NO_CHOICES + model_names
-        self.fields["active_model_name"].choices = model_names
 
     class Meta:
         model = Project
         exclude = []
+
+
+# TODO FIXME -dave bad merge.
+# def _update_active_model_choices(self):
+#     modeling_report = self.instance.tmp_modeling_report_json or {}
+#     modeling_options = modeling_report.get("options", [])
+#     model_names = [
+#         (modeling_option["name"], modeling_option["name"])
+#         for modeling_option in modeling_options
+#     ]
+#     if not model_names:
+#         self.fields["active_model_name"].disabled = True
+#     model_names = self.NO_CHOICES + model_names
+#     self.fields["active_model_name"].choices = model_names

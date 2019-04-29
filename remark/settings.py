@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     "remark.projects",
     "remark.releases",
     "remark.web",
+    "remark.geo",
 ]
 
 MIDDLEWARE = [
@@ -217,6 +218,12 @@ CACHES = {
     }
 }
 
+
+#
+# API Keys
+#
+
+GOOGLE_GEOCODE_API_KEY = os.getenv("GOOGLE_GEOCODE_API_KEY", None)
 
 #
 # Analytics (hey, we might want these down the road).

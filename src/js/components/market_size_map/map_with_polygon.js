@@ -10,104 +10,105 @@ import {
   stylesForRegionFill
 } from "./map_settings";
 
-const ZipCodeText = ({ zipCode }) => (
-  <div className="zip-code-text">{zipCode}</div>
+/**
+ * Markers to render as children <GoogleMap /> component
+ * should be a React component
+ */
+const ZipcodeText = ({ zipcode }) => (
+  <div className="zip-code-text">{zipcode}</div>
 );
 
 export class MapWithPolygon extends Component {
-  constructor(props) {
-    super(props);
-
-    this.google = null;
-
-    this.state = {
-      isGoogleMapLoaded: false
-    };
-  }
-
-  // google: Object { map, maps }
-  onGoogleApiLoaded = google => {
-    this.google = google;
-
-    this.setState({
-      isGoogleMapLoaded: true
-    });
-
-    this.drawZipCodeAreas();
+  state = {
+    zipcodeTextMarkers: null
   };
 
-  drawZipCodeAreas() {
-    if (false === this.state.isGoogleMapLoaded) {
-      return;
+  /**
+   * You can access to Google Maps "map" and "maps" objects here,
+   * "yesIWantToUseGoogleMapApiInternals" = true
+   */
+  onGoogleApiLoaded = google => {
+    this.google = google;
+    this.zipcodeMarkers = [];
+    this.mapBounds = new google.maps.LatLngBounds();
+
+    try {
+      this.props.zip_codes.forEach(zipcodeData => {
+        const {
+          zip,
+          properties,
+          outline: { type, coordinates }
+        } = zipcodeData;
+
+        if (type === "Polygon") {
+          this.renderPolygonOutline(zip, coordinates);
+        }
+        if (type == "MultiPolygon") {
+          // "coordinates" is an array of Polygon coordinate arrays.
+          coordinates.forEach(polygonCoords => {
+            this.renderPolygonOutline(zip, polygonCoords);
+          });
+        }
+
+        this.renderZipCodeLabel(zip, properties);
+      });
+    } catch (e) {
+      console.log("Failed to render zip codes");
     }
 
-    const { google } = this;
-    const bounds = new google.maps.LatLngBounds();
+    // Resize the viewport to contain all zipcode areas.
+    google.map.fitBounds(this.mapBounds, 0);
 
-    // draw each zip code area as polygon
-    this.props.zip_codes.forEach(zipCode => {
-      const {
-        zip,
-        outline: { type, coordinates }
-      } = zipCode;
+    // trigger render to display zipcode text in each boundary
+    this.setState({
+      zipcodeTextMarkers: this.zipcodeMarkers
+    });
+  };
 
-      if (type !== "Polygon") {
-        return;
-      }
+  /**
+   * Polygon geometry object
+   * https://tools.ietf.org/html/rfc7946#section-3.1.6
+   *
+   * Extends global map bounds with exterior ring points
+   * Interior rings represent holes within the exterior ring
+   */
+  renderPolygonOutline = (zip, [outerRing, ...innerRings]) => {
+    let { google, mapBounds } = this;
 
-      const paths = coordinates.map(
-        ([lat, lng]) => new google.maps.LatLng(lat, lng)
-      );
-      paths.forEach(point => {
-        bounds.extend(point);
-      });
+    const outerCoords = outerRing.map(([x, y]) => new google.maps.LatLng(y, x));
 
-      let polygon = new google.maps.Polygon({
-        map: google.map,
-        paths: paths,
-        ...stylesForRegionFill
-      });
+    const innerCoords = innerRings.map(innerRing =>
+      innerRing.map(([x, y]) => new google.maps.LatLng(y, x))
+    );
+
+    outerCoords.forEach(point => {
+      mapBounds.extend(point);
     });
 
-    // resize map
-    google.map.fitBounds(bounds, 0);
-  }
+    let polygon = new google.maps.Polygon({
+      map: google.map,
+      paths: [outerCoords, ...innerCoords],
+      ...stylesForRegionFill
+    });
+  };
 
-  getZipCodeTexts() {
-    if (false === this.state.isGoogleMapLoaded) {
-      return [];
-    }
+  renderZipCodeLabel = (zip, properties) => {
+    if (properties && properties.center) {
+      const { center } = properties;
 
-    const { google } = this;
-
-    return this.props.zip_codes.map(zipCode => {
-      const {
-        zip,
-        outline: { type, coordinates }
-      } = zipCode;
-      const bounds = new google.maps.LatLngBounds();
-
-      const paths = coordinates.map(
-        ([lat, lng]) => new google.maps.LatLng(lat, lng)
-      );
-      paths.forEach(point => {
-        bounds.extend(point);
-      });
-      const zipAreaCenter = bounds.getCenter();
-
-      return (
-        <ZipCodeText
-          key={zip}
-          lat={zipAreaCenter.lat()}
-          lng={zipAreaCenter.lng()}
-          zipCode={zip}
+      this.zipcodeMarkers.push(
+        <ZipcodeText
+          key={`${zip}-${center[1]}-${center[0]}`}
+          lat={center[1]}
+          lng={center[0]}
+          zipcode={zip}
         />
       );
-    });
-  }
+    }
+  };
 
   render() {
-    const customMarkers = this.getZipCodeTexts();
+    const { zipcodeTextMarkers } = this.state;
 
     return (
       <div className="market-size-map">
@@ -119,7 +120,7 @@ export class MapWithPolygon extends Component {
           yesIWantToUseGoogleMapApiInternals={true}
           onGoogleApiLoaded={this.onGoogleApiLoaded}
         >
-          {customMarkers}
+          {zipcodeTextMarkers}
         </GoogleMap>
       </div>
     );
@@ -130,6 +131,7 @@ MapWithPolygon.propTypes = {
   zip_codes: PropTypes.arrayOf(
     PropTypes.shape({
       zip: PropTypes.string.isRequired,
+      properties: PropTypes.object,
       outline: PropTypes.shape({
         type: PropTypes.string,
         coordinates: PropTypes.array

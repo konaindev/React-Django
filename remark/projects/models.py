@@ -4,6 +4,7 @@ import os.path
 
 from django.db import models
 from django.conf import settings
+from django.utils.crypto import get_random_string
 
 from jsonfield import JSONField
 from stdimage.models import StdImageField
@@ -29,10 +30,18 @@ def building_image_media_path(project, filename):
     determine where the uploaded building image should actually be placed.
 
     See https://docs.djangoproject.com/en/2.1/ref/models/fields/#filefield
+
+    Note: Thumbnail generation works fine on FileSystemStorage, but not on S3.
+    To overcome this known issue, append random 7-char string to end of file name.
+    Though, old files will not be deleted from S3 on image replacement.
+
+    project/<public_id>/building_image_<random_str><.ext>
+    project/<public_id>/building_image_<random_str>.regular<.ext>
+    project/<public_id>/building_image_<random_str>.thumbnail<.ext>
     """
-    # We always target project/<public_id>/building_image<.ext>
     _, extension = os.path.splitext(filename)
-    return f"project/{project.public_id}/building_image{extension}"
+    random_str = get_random_string(length=7)
+    return f"project/{project.public_id}/building_image_{random_str}{extension}"
 
 
 def spreadsheet_media_path(spreadsheet, filename):
@@ -421,6 +430,16 @@ class Period(ModelPeriod, models.Model):
     )
     leased_units_start.metric = PointMetric()
 
+    # This ultimately surfaces as `leased_units` on `ComputedPeriod` if
+    # it's provided here; otherwise, ComputedPeriod actually computes a value.
+    leased_units_end = models.IntegerField(
+        null=True,
+        default=None,
+        editable=False,
+        help_text="Number of leased units at period end. (Cannot be edited.)",
+    )
+    leased_units_end.metric = EndPointMetric()
+
     leases_ended = models.IntegerField(
         default=0, help_text="Number of leases ended (roughly: move outs)"
     )
@@ -472,6 +491,16 @@ class Period(ModelPeriod, models.Model):
         help_text="Number of units occupied at period start."
     )
     occupied_units_start.metric = PointMetric()
+
+    # This ultimately surfaces as `leased_units` on `ComputedPeriod` if
+    # it's provided here; otherwise, ComputedPeriod actually computes a value.
+    occupied_units_end = models.IntegerField(
+        null=True,
+        default=None,
+        editable=False,
+        help_text="Number of units occupied at period end. (Cannot be edited.)",
+    )
+    occupied_units_end.metric = EndPointMetric()
 
     move_ins = models.IntegerField(default=0, help_text="Number of units moved into")
     move_ins.metric = SumIntervalMetric()

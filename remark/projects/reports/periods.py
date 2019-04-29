@@ -53,7 +53,20 @@ class ComputedPeriod(ComputedValueMixin):
     @computed_value
     def leased_units(self):
         """The total number of leases in effect at the end of the period."""
-        return sum_or_0(self.leased_units_start, self.delta_leases)
+        # HACK To fix https://www.pivotaltracker.com/n/projects/2240283 in a day,
+        # we use the number explicitly imported from our spreadsheets
+        # *if it's available*. Otherwise, we compute it just like we used to.
+        # Eventually, I think we need to consider simply importing *all*
+        # of our per-period computations from the spreadsheet, and *completely*
+        # deleting our ComputedPeriod code. But we're not there yet, and I'd
+        # be nervous to make the change without a lot more available time. (This
+        # needs to get done *today*!) -Dave
+        underlying_value = self.period.get_value("leased_units_end")
+        if underlying_value is not None:
+            result = underlying_value
+        else:
+            result = sum_or_0(self.leased_units_start, self.delta_leases)
+        return result
 
     @computed_value
     def leased_rate(self):
@@ -112,8 +125,21 @@ class ComputedPeriod(ComputedValueMixin):
     @computed_value
     def occupied_units(self):
         """The total occupancy in effect at the end of the period."""
-        moved_in = sum_or_0(self.occupied_units_start, self.move_ins)
-        return sub_or_0(moved_in, self.move_outs)
+        # HACK To fix https://www.pivotaltracker.com/n/projects/2240283 in a day,
+        # we use the number explicitly imported from our spreadsheets
+        # *if it's available*. Otherwise, we compute it just like we used to.
+        # Eventually, I think we need to consider simply importing *all*
+        # of our per-period computations from the spreadsheet, and *completely*
+        # deleting our ComputedPeriod code. But we're not there yet, and I'd
+        # be nervous to make the change without a lot more available time. (This
+        # needs to get done *today*!) -Dave
+        underlying_value = self.period.get_value("occupied_units_end")
+        if underlying_value is not None:
+            result = underlying_value
+        else:
+            moved_in = sum_or_0(self.occupied_units_start, self.move_ins)
+            result = sub_or_0(moved_in, self.move_outs)
+        return result
 
     @computed_value
     def occupancy_rate(self):

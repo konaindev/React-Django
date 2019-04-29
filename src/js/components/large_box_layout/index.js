@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 
 import FormattedMultiple from "../formatted_multiple";
 import Panel from "../panel";
+import Tooltip from "../rmb_tooltip";
 import withFormatters from "../with_formatters";
 import {
   formatMultiple,
@@ -32,12 +33,15 @@ export class LargeBoxLayout extends Component {
       .isRequired,
     detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
     detail2: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-    innerBox: PropTypes.element
+    innerBox: PropTypes.element,
+    tooltip: PropTypes.node
   };
 
   render() {
-    const { name, content, innerBox, detail, detail2 } = this.props;
-
+    const { name, content, innerBox, detail, detail2, tooltip } = this.props;
+    const contentValue = (
+      <span className="large-box__content-value">{content}</span>
+    );
     return (
       <Panel className="large-box">
         {/* Container for the content itself.
@@ -45,7 +49,13 @@ export class LargeBoxLayout extends Component {
             while justif- centers the rows vertically within the box. */}
         <span className="large-box__top-line">{name}</span>
         <div className="large-box__content">
-          <span className="large-box__content-value">{content}</span>
+          {tooltip ? (
+            <Tooltip placement="top" overlay={tooltip}>
+              {contentValue}
+            </Tooltip>
+          ) : (
+            contentValue
+          )}
           {innerBox && (
             <div className="large-box__content-extra">{innerBox}</div>
           )}

@@ -79,18 +79,18 @@ exports[`ReportPageChrome renders correctly 1`] = `
             Modeling
           </li>
           <li
-            className="enabled"
-            data-url="/projects/pro_example/performance/last-week/"
-            onClick={[Function]}
-          >
-            Performance
-          </li>
-          <li
             className="disabled"
             data-url="#"
             onClick={[Function]}
           >
             Campaign Plan
+          </li>
+          <li
+            className="enabled"
+            data-url="/projects/pro_example/performance/last-week/"
+            onClick={[Function]}
+          >
+            Performance
           </li>
         </ul>
       </div>

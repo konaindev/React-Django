@@ -1685,7 +1685,7 @@ exports[`AcquisitionFunnelReport renders performance report correctly 1`] = `
                     <span
                       className="delta-indicator__delta"
                     >
-                      -1pts
+                      -1pt
                     </span>
                      
                     <span
@@ -1745,7 +1745,7 @@ exports[`AcquisitionFunnelReport renders performance report correctly 1`] = `
                     <span
                       className="delta-indicator__delta"
                     >
-                      1pts
+                      1pt
                     </span>
                      
                     <span

@@ -1,5 +1,6 @@
 import React from "react";
 import { string, number, object, arrayOf, shape } from "prop-types";
+import { convertToKebabCase } from "../../utils/misc";
 import cn from "classnames";
 import ReactTable from "react-table";
 
@@ -32,23 +33,26 @@ export function ModelingComparison({ property_name, options }) {
           <span className="row-label-text">{row.value}</span>
         </div>
       )
-    },
-    {
-      Header: "Run Rate",
-      accessor: "run-rate",
-      Cell: CellRenderer
-    },
-    {
-      Header: "Schedule Driven",
-      accessor: "schedule-driven",
-      Cell: CellRenderer
-    },
-    {
-      Header: "Investment Driven",
-      accessor: "investment-driven",
-      Cell: CellRenderer
     }
   ];
+
+  // dynamically create columns based on available reports
+  for (let report of options) {
+    const accessor = convertToKebabCase(report.name);
+    const column = {
+      Header: report.name,
+      accessor: accessor,
+      Cell: CellRenderer
+    };
+
+    // Make sure that run rate model is always shown first
+    if (accessor.indexOf("run-rate") > -1 && reactTableColumns.length > 1) {
+      const rest = reactTableColumns.slice(1);
+      reactTableColumns = [reactTableColumns[0], column, ...rest];
+    } else {
+      reactTableColumns.push(column);
+    }
+  }
 
   return (
     <Container className="modeling-comparison" style={{ height: "100%" }}>

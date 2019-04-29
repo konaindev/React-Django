@@ -37,10 +37,10 @@ from .schema import (
     IntCell,
     NullChoiceCell,
     NullStrCell,
+    NullStrDateCell,
     SchemaCell,
     StrCell,
     unflatten_dict,
-    NullStrDateCell
 )
 
 __all__ = (
@@ -74,6 +74,7 @@ __all__ = (
     next_row,
     NullChoiceCell,
     NullStrCell,
+    NullStrDateCell,
     parse_location,
     prev_col,
     prev_row,

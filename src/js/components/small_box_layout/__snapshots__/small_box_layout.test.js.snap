@@ -21,11 +21,11 @@ exports[`SmallBoxLayout renders correctly 1`] = `
   <div
     className="small-box__outer-content"
   >
-    <div
+    <span
       className="small-box__inner-content"
     >
       Test content
-    </div>
+    </span>
   </div>
 </div>
 `;

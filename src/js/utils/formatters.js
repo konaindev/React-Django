@@ -171,7 +171,8 @@ export const formatMultiple = value => {
 export const formatDeltaPercent = value => {
   const number = Number(value) * 100;
   const digits = Math.abs(number) < 1 ? 1 : 0;
-  return `${formatNumber(number, digits)}pts`;
+  const formattedNumber = formatNumber(number, digits);
+  return `${formattedNumber}${Math.abs(formattedNumber) === 1 ? "pt" : "pts"}`;
 };
 
 // XXX move this somewhere else @FIXME since it implicitly depends on React

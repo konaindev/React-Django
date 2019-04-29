@@ -24,13 +24,9 @@ class ModelingImporter(ProjectExcelImporter):
         "dates.start": DateCell(find("start date")),
         "dates.end": DateCell(find("end date")),
         "property.average_monthly_rent": CurrencyCell(find("average rent")),
-        "property.lowest_monthly_rent": CurrencyCell(
-            find("average rent")
-        ),  # TODO @shakakai "lowest rent"
+        "property.lowest_monthly_rent": CurrencyCell(find("lowest rent")),
         "property.cost_per_exe_vs_rent": FloatCell(find("cost per exe vs rent")),
-        "property.total_units": IntCell(
-            find("occupiable units")
-        ),  # TODO @shakakai "total units"
+        "property.total_units": IntCell(find("total units")),
         "property.leasing.change": IntCell(find("leasing change")),
         "property.leasing.cds": IntCell(find("cancels & denials")),
         "property.leasing.cd_rate": FloatCell(find("cd rate")),
