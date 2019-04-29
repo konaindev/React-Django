@@ -4,9 +4,9 @@ from django.urls import path
 from django.utils.safestring import mark_safe
 
 from remark.admin import admin_site
-
+from remark.analytics.admin import InlineAnalyticsProviderAdmin
 from .forms import ProjectForm, SpreadsheetForm
-from .models import AnalyticsProvider, Project, Period, Spreadsheet, TargetPeriod
+from .models import Project, Period, Spreadsheet, TargetPeriod
 from .views import TAMExportView
 
 
@@ -183,21 +183,6 @@ class TAMExportMixin:
             )
         ]
         return my_urls + urls
-
-
-@admin.register(AnalyticsProvider, site=admin_site)
-class AnalyticsProviderAdmin(admin.ModelAdmin):
-    pass
-
-
-class InlineAnalyticsProviderAdmin(admin.TabularInline):
-    """
-    Inline Admin for displaying read-only *existing* analytics provider records.
-
-    This works around a particularly gnarly design/arch issue in the Django
-    admin, as documented here: https://code.djangoproject.com/ticket/15602
-    """
-    model = AnalyticsProvider
 
 
 @admin.register(Project, site=admin_site)
