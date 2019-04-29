@@ -1,31 +1,23 @@
-import ButtonToggle from "./index";
 import renderer from "react-test-renderer";
 
-// describe("ButtonGroup", () => {
-//   const props = {
-//     value: "investment-driven",
-//     options: [
-//       {
-//         value: "schedule-driven",
-//         label: "Schedule Driven"
-//       },
-//       {
-//         value: "investment-driven",
-//         label: "Investment Driven"
-//       },
-//       {
-//         value: "run-rate",
-//         label: "Run Rate"
-//       },
-//       {
-//         value: "compare-models",
-//         label: "Compare Models"
-//       }
-//     ]
-//   };
+import ButtonToggle from "./index";
 
-//   it("renders correctly", () => {
-//     const tree = renderer.create(<ButtonGroup {...props} />).toJSON();
-//     expect(tree).toMatchSnapshot();
-//   });
-// });
+describe("ButtonToggle", () => {
+  it("renders toggle with on/off correctly", () => {
+    const tree = renderer.create(<ButtonToggle />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it("renders toggle with custom labels correctly", () => {
+    const tree = renderer
+      .create(
+        <ButtonToggle
+          innerLabelChecked="Checked"
+          innerLabelUnchecked="Unchecked"
+          label="Containing Label"
+        />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+});

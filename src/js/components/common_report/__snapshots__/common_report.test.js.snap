@@ -2646,13 +2646,13 @@ A 0 0 0 0 0, NaN, NaN
           className="button-group"
         >
           <button
-            className="button button--selected button--undefined button-group__item"
+            className="button button--selected button--default button-group__item"
             onClick={[Function]}
           >
             Monthly
           </button>
           <button
-            className="button button--undefined button-group__item"
+            className="button button--default button-group__item"
             onClick={[Function]}
           >
             Weekly
