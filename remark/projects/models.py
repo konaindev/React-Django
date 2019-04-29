@@ -193,10 +193,7 @@ class Project(models.Model):
     )
 
     address = models.ForeignKey(
-        'geo.Address',
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
+        "geo.Address", on_delete=models.CASCADE, null=True, blank=True
     )
 
     def _target_periods(self, qs):
@@ -770,21 +767,16 @@ class TargetPeriod(ModelPeriod, models.Model):
 
 
 class AnalyticsProvider(models.Model):
-    ANALYTICS_PROVIDER_CHOICES = [
-        ('google', 'Google Analytics'),
-    ]
+    ANALYTICS_PROVIDER_CHOICES = [("google", "Google Analytics")]
+    ANALYTICS_PROVIDER_DICT = dict(ANALYTICS_PROVIDER_CHOICES)
 
     project = models.OneToOneField(
-        Project,
-        related_name="analytics_provider",
-        on_delete=models.CASCADE,
+        Project, related_name="analytics_provider", on_delete=models.CASCADE
     )
 
-    provider = models.CharField(
-        max_length=255,
-        choices=ANALYTICS_PROVIDER_CHOICES,
-    )
+    provider = models.CharField(max_length=255, choices=ANALYTICS_PROVIDER_CHOICES)
 
-    identifier = models.CharField(
-        max_length=255,
-    )
+    identifier = models.CharField(max_length=255)
+
+    def __str__(self):
+        return f"{self.ANALYTICS_PROVIDER_DICT[self.provider]} ({self.identifier})"
