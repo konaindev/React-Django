@@ -80,6 +80,14 @@ class ProjectForm(forms.ModelForm):
         exclude = []
 
 
+def multiline_text_to_str_array(text):
+    return [str(item) for item in text.replace("\r", "").split("\n")]
+
+
+def multiline_text_to_int_array(text):
+    return [int(item) for item in text.replace("\r", "").split("\n")]
+
+
 class TAMExportForm(forms.Form):
     radius = forms.FloatField(
         label="Radius",
@@ -111,3 +119,15 @@ class TAMExportForm(forms.Form):
         label="Income Segments",
         help_text="A list of integers representing annual salaries that is used differently than above (e.g. $30000, $40000, $50000)",
     )
+
+    def clean_zip_codes(self):
+        return multiline_text_to_str_array(self.cleaned_data["zip_codes"])
+
+    def clean_income_groups(self):
+        return multiline_text_to_int_array(self.cleaned_data["income_groups"])
+
+    def clean_rti_income_groups(self):
+        return multiline_text_to_int_array(self.cleaned_data["rti_income_groups"])
+
+    def clean_rti_rental_rates(self):
+        return multiline_text_to_int_array(self.cleaned_data["rti_rental_rates"])

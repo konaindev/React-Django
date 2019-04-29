@@ -109,10 +109,6 @@ class CampaignPlanPageView(ReportPageViewBase):
     page_title = "Campaign Plan"
 
 
-def multiline_text_to_array(text):
-    return [int(item) for item in text.replace("\r", "").split("\n")]
-
-
 class TAMExportView(FormView, SingleObjectMixin):
     template_name = "projects/tam-export.html"
     form_class = TAMExportForm
@@ -139,18 +135,18 @@ class TAMExportView(FormView, SingleObjectMixin):
             if project.analytics_provider is None:
                 messages.error(request, "This project doesn't have an analytics provider yet.")
                 return self.form_invalid(form)
-
+            print(form.cleaned_data)
             try:
                 usvs = fetch_usv_age(project.analytics_provider.identifier)
                 workbook = build_tam_data(
-                    zip_codes=multiline_text_to_array(form.cleaned_data["zip_codes"]),
+                    zip_codes=form.cleaned_data["zip_codes"],
                     lat=project.address.latitude,
                     lon=project.address.longitude,
                     loc=",".join([project.address.city, project.address.state]),
                     radius=form.cleaned_data["radius"],
-                    income_groups=multiline_text_to_array(form.cleaned_data["income_groups"]),
-                    rti_income_groups=multiline_text_to_array(form.cleaned_data["rti_income_groups"]),
-                    rti_rental_rates=multiline_text_to_array(form.cleaned_data["rti_rental_rates"]),
+                    income_groups=form.cleaned_data["income_groups"],
+                    rti_income_groups=form.cleaned_data["rti_income_groups"],
+                    rti_rental_rates=form.cleaned_data["rti_rental_rates"],
                     rti_target=form.cleaned_data["rti_target"],
                     age=project.average_tenant_age,
                     max_rent=project.highest_monthly_rent,
