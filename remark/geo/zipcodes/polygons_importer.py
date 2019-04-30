@@ -84,9 +84,11 @@ def import_one_state(state_abbr):
 
         ZipcodePolygon.objects.update_or_create(
             zip_code=zip_code,
-            state=state_abbr.upper(),
-            geometry=feature["geometry"],
-            properties=properties
+            defaults={
+                "state": state_abbr.upper(),
+                "geometry": feature["geometry"],
+                "properties": properties
+            }
         )
 
     return counter
