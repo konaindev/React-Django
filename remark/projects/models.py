@@ -106,6 +106,7 @@ class Project(models.Model):
         default=None,
         null=True,
         blank=True,
+        verbose_name="TAM Data",
         # Ensure loaded data retains JSON object key ordering
         load_kwargs={"object_pairs_hook": collections.OrderedDict},
         help_text="Total Addressable Market (TAM) report JSON data. Must conform to the schema defined in MarketAnalysis.ts",
@@ -117,9 +118,17 @@ class Project(models.Model):
         default=None,
         null=True,
         blank=True,
+        verbose_name="Modeling Data",
         # Ensure loaded data retains JSON object key ordering
         load_kwargs={"object_pairs_hook": collections.OrderedDict},
         help_text="Modeling JSON data. Must conform to the schema defined in ModelingOptions.ts",
+    )
+
+    selected_model_name = models.CharField(
+        blank=True,
+        default="",
+        max_length=255,
+        help_text="The name of the currently selected model, if any.",
     )
 
     # A temporary field, for the current sprint, that holds our campaign plan
@@ -128,6 +137,7 @@ class Project(models.Model):
         default=None,
         null=True,
         blank=True,
+        verbose_name="Campaign Data",
         # Ensure loaded data retains JSON object key ordering
         load_kwargs={"object_pairs_hook": collections.OrderedDict},
         help_text="Campaign Plan JSON data. Must conform to the schema defined in CampaignPlan.ts",
@@ -193,11 +203,17 @@ class Project(models.Model):
     )
 
     address = models.ForeignKey(
-        "geo.Address",
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
+        "geo.Address", on_delete=models.SET_NULL, null=True, blank=True
     )
+
+    # This value is set when the instance is created; if we later
+    # call save, and it changes, then we update targets for the model.
+    __selected_model_name = None
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Save this for comparison purposes on save(...)
+        self.__selected_model_name = self.selected_model_name
 
     def _target_periods(self, qs):
         # TODO XXX temporary hack until we fully populate from model spreadsheets. -Dave
@@ -294,6 +310,66 @@ class Project(models.Model):
             "name": self.name,
             "building_image": self.get_building_image(),
         }
+
+    def get_named_model_option(self, name):
+        """Given a named model, return the option."""
+        data = self.tmp_modeling_report_json
+        options = data.get("options", [])
+        for option in options:
+            if option.get("name") == name:
+                return option
+        return None
+
+    def get_selected_model_option(self):
+        """Return the currently selected model option."""
+        return (
+            self.get_named_model_option(self.selected_model_name)
+            if self.selected_model_name
+            else None
+        )
+
+    def update_for_selected_model(self):
+        """
+        Update all associated data (like target periods) based on 
+        the currently selected model.
+
+        """
+        # TODO CONSIDER where does this code actually belong?
+        #
+        # This doesn't feel like the right place but I don't have a better
+        # answer. I originally assumed it belonged in remark/projects/spreadsheets/
+        # but that feels wrong, too: yes, this data was *imported* from a spreadsheet,
+        # and yes, this looks like activation, but in this case, there is data
+        # from multiple spreadsheets in play. Perhaps a different approach
+        # to managing tmp_modeling_report_json would allow for clarity here?
+        #
+        # -Dave
+        def _create_target_period(data):
+            target_period = TargetPeriod(project=self)
+            for k, v in data.items():
+                # Yes, this will set values for keys that aren't fields;
+                # that's fine; we don't overwrite anything we shouldn't,
+                # and extraneous stuff is ignored for save.
+                setattr(target_period, k, v)
+            target_period.save()
+            return target_period
+
+        # Remove all extant target periods
+        self.target_periods.all().delete()
+
+        # If there are any, create new target periods!
+        option = self.get_selected_model_option()
+        if option is not None:
+            for data in option.get("targets", []):
+                _create_target_period(data)
+
+    def save(self, *args, **kwargs):
+        model_selection_changed = (
+            self.__selected_model_name is not self.selected_model_name
+        )
+        super().save(*args, **kwargs)
+        if model_selection_changed:
+            self.update_for_selected_model()
 
     def __str__(self):
         return "{} ({})".format(self.name, self.public_id)
