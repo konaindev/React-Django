@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.http import Http404, HttpResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404
 from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
@@ -23,7 +24,7 @@ from .forms import TAMExportForm
 
 
 
-class ProjectPageView(ReactView):
+class ProjectPageView(LoginRequiredMixin, ReactView):
     """Render a page that shows information about the overall project."""
 
     page_class = "ProjectPage"
@@ -39,7 +40,7 @@ class ProjectPageView(ReactView):
         )
 
 
-class ReportPageViewBase(ReactView):
+class ReportPageViewBase(LoginRequiredMixin, ReactView):
     """
     Generic base class for all report views that use ReportSelectors.
     """
