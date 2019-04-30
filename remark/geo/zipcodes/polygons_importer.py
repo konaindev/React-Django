@@ -1,5 +1,5 @@
-from urllib.request import urlopen
-import ijson
+import json
+import requests
 
 from remark.geo.models import ZipcodePolygon
 
@@ -66,30 +66,28 @@ def import_one_state(state_abbr):
         return
 
     remote_source = f"https://raw.githubusercontent.com/OpenDataDE/State-zip-code-GeoJSON/master/{file_name}"
-    file_handle = urlopen(remote_source)
+    response = requests.get(remote_source)
+    data = json.loads(response.text)
+
     counter = 0
 
-    with file_handle as input_file:
-        # load json iteratively
-        features = ijson.items(input_file, 'features.item')
+    for feature in data["features"]:
+        all_props = feature["properties"]
+        if all_props is None:
+            continue
 
-        for feature in features:
-            all_props = feature["properties"]
-            if all_props is None:
-                continue
+        counter = counter + 1
+        zip_code = all_props["ZCTA5CE10"]
+        lat = float(all_props["INTPTLAT10"])
+        lon = float(all_props["INTPTLON10"])
+        properties = dict(center=[lon, lat])
 
-            counter = counter + 1
-            zip_code = all_props["ZCTA5CE10"]
-            lat = float(all_props["INTPTLAT10"])
-            lon = float(all_props["INTPTLON10"])
-            properties = dict(center=[lon, lat])
-
-            ZipcodePolygon.objects.update_or_create(
-                zip_code=zip_code,
-                state=state_abbr.upper(),
-                geometry=feature["geometry"],
-                properties=properties
-            )
+        ZipcodePolygon.objects.update_or_create(
+            zip_code=zip_code,
+            state=state_abbr.upper(),
+            geometry=feature["geometry"],
+            properties=properties
+        )
 
     return counter
 
