@@ -202,6 +202,10 @@ class Project(models.Model):
         verbose_name="Show Campaign Plan?", default=False
     )
 
+    address = models.ForeignKey(
+        "geo.Address", on_delete=models.SET_NULL, null=True, blank=True
+    )
+
     # This value is set when the instance is created; if we later
     # call save, and it changes, then we update targets for the model.
     __selected_model_name = None

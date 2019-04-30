@@ -83,6 +83,7 @@ class AddressManager(models.Manager):
         address = None
         if result and result.is_complete:
             address = self.create(
+                formatted_address=result.formatted_address,
                 street_address_1=result.street_address,
                 street_address_2="",
                 city=result.city,
@@ -100,6 +101,10 @@ class Address(models.Model):
     """
 
     objects = AddressManager()
+
+    formatted_address = models.CharField(
+        blank=False, max_length=255, help_text="The address in canonical formatted form"
+    )
 
     street_address_1 = models.CharField(
         blank=False, max_length=255, help_text="Street address 1"
@@ -140,3 +145,6 @@ class Address(models.Model):
     def longitude(self):
         result = self.geocode_result
         return result.longitude if result else None
+
+    def __str__(self):
+        return self.formatted_address or str(self.id)

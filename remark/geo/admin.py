@@ -9,6 +9,7 @@ from .models import Address, Country, State, City
 @admin.register(Address, site=admin_site)
 class AddressAdmin(admin.ModelAdmin):
     ADDRESS_FIELDS = [
+        "formatted_address",
         "street_address_1",
         "street_address_2",
         "city",
