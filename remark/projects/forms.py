@@ -130,13 +130,12 @@ class TAMExportForm(forms.Form):
         validators=[validate_linebreak_separated_numbers_list,],
     )
 
-    def clean_radius(self):
-        if not self.data["radius"] and not self.data["zip_codes"]:
-            raise forms.ValidationError("You should enter either one of Radius or Zip Codes")
+    def clean(self):
+        if not self.data["radius"] and not self.data["zip_codes"] or \
+            self.data["radius"] and self.data["zip_codes"]:
+            raise forms.ValidationError("You should enter either one of Radius or Zip Codes", code='invalid')
 
     def clean_zip_codes(self):
-        if self.data["radius"] and self.data["zip_codes"]:
-            raise forms.ValidationError("You should enter either one of Radius or Zip Codes")
         return multiline_text_to_str_array(self.cleaned_data["zip_codes"])
 
     def clean_income_groups(self):
