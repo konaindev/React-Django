@@ -2,6 +2,10 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
 
+from remark.lib.validators import (
+    validate_linebreak_separated_numbers_list,
+    validate_linebreak_separated_strings_list
+)
 from .models import Project, Spreadsheet
 from .reports.selectors import ReportLinks
 from .spreadsheets import get_importer_for_kind, SpreadsheetKind
@@ -78,3 +82,67 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         exclude = []
+
+
+def multiline_text_to_str_array(text):
+    return [str(item) for item in text.replace("\r", "").split("\n")]
+
+
+def multiline_text_to_int_array(text):
+    return [int(item) for item in text.replace("\r", "").split("\n")]
+
+
+class TAMExportForm(forms.Form):
+    radius = forms.FloatField(
+        label="Radius",
+        help_text="Radius (in miles)",
+        required=False,
+    )
+    zip_codes = forms.CharField(
+        widget=forms.Textarea,
+        label="Zip codes",
+        help_text="List of Zip Codes",
+        required=False,
+        validators=[validate_linebreak_separated_strings_list,],
+    )
+    rti_target = forms.FloatField(
+        label="RTI Target",
+        help_text="Rent-To-Income Target, allowed values are 0% to 100%",
+        min_value=0,
+        max_value=1,
+    )
+    rti_income_groups = forms.CharField(
+        widget=forms.Textarea,
+        label="RTI Income Groups",
+        help_text="A list of integers representing annual salaries (e.g. $30000, $40000, $50000, $60000)",
+        validators=[validate_linebreak_separated_numbers_list,],
+    )
+    rti_rental_rates = forms.CharField(
+        widget=forms.Textarea,
+        label="RTI Rent Groups",
+        help_text="A list of integers representing monthly rents (e.g. $500, $800, $1000, $1200)",
+        validators=[validate_linebreak_separated_numbers_list,],
+    )
+    income_groups = forms.CharField(
+        widget=forms.Textarea,
+        label="Income Segments",
+        help_text="A list of integers representing annual salaries that is used differently than above (e.g. $30000, $40000, $50000)",
+        validators=[validate_linebreak_separated_numbers_list,],
+    )
+
+    def clean(self):
+        if not self.data["radius"] and not self.data["zip_codes"] or \
+            self.data["radius"] and self.data["zip_codes"]:
+            raise forms.ValidationError("You should enter either one of Radius or Zip Codes", code='invalid')
+
+    def clean_zip_codes(self):
+        return multiline_text_to_str_array(self.cleaned_data["zip_codes"])
+
+    def clean_income_groups(self):
+        return multiline_text_to_int_array(self.cleaned_data["income_groups"])
+
+    def clean_rti_income_groups(self):
+        return multiline_text_to_int_array(self.cleaned_data["rti_income_groups"])
+
+    def clean_rti_rental_rates(self):
+        return multiline_text_to_int_array(self.cleaned_data["rti_rental_rates"])

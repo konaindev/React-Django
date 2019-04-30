@@ -192,6 +192,13 @@ class Project(models.Model):
         verbose_name="Show Campaign Plan?", default=False
     )
 
+    address = models.ForeignKey(
+        "geo.Address",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+    )
+
     def _target_periods(self, qs):
         # TODO XXX temporary hack until we fully populate from model spreadsheets. -Dave
         target_periods = list(qs)

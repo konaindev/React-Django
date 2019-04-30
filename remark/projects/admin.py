@@ -1,10 +1,13 @@
 from django.contrib import admin
+from django.template.response import TemplateResponse
+from django.urls import path
 from django.utils.safestring import mark_safe
 
 from remark.admin import admin_site
-
+from remark.analytics.admin import InlineAnalyticsProviderAdmin
 from .forms import ProjectForm, SpreadsheetForm
 from .models import Project, Period, Spreadsheet, TargetPeriod
+from .views import TAMExportView
 
 
 class UpdateSpreadsheetAdminMixin:
@@ -169,10 +172,24 @@ class TargetPeriodInline(admin.TabularInline):
         return False
 
 
+class TAMExportMixin:
+    def get_urls(self):
+        urls = super().get_urls()
+        my_urls = [
+            path(
+                '<pk>/tam-export/',
+                self.admin_site.admin_view(TAMExportView.as_view()),
+                name="tam_export",
+            )
+        ]
+        return my_urls + urls
+
+
 @admin.register(Project, site=admin_site)
-class ProjectAdmin(UpdateSpreadsheetAdminMixin, admin.ModelAdmin):
+class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin):
     save_on_top = True
     inlines = (
+        InlineAnalyticsProviderAdmin,
         NewSpreadsheetInline,
         ExistingSpreadsheetInline,
         PeriodInline,
