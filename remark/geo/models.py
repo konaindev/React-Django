@@ -150,10 +150,25 @@ class Address(models.Model):
         return self.formatted_address or str(self.id)
 
 
+class ZipcodePolygonManager(models.Manager):
+    def fetch_zip_polygons(self, zip_code):
+        try:
+            row = self.get(zip_code=zip_code)
+            return dict(
+                properties=row.properties,
+                geometry=row.geometry
+            )
+        except self.model.DoesNotExist:
+            return None
+
+
 class ZipcodePolygon(models.Model):
     """
     Polygon data per zip code
     """
+
+    objects = ZipcodePolygonManager()
+
     zip_code = models.CharField(
         primary_key=True,
         help_text="5-digit ZIP code",
