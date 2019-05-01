@@ -27,7 +27,7 @@ export default function(modelingOptions = []) {
       }
     },
     {
-      label: "95% Leased Date",
+      label: "Target Leased Date",
       highlight: true,
       formatter: formatLeasedDate,
       path: "dates.end"
