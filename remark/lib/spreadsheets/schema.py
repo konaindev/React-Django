@@ -72,6 +72,7 @@ def NullStrDateCell(locator):
         locator, str_or_convertible_or_null_data_type, str_or_null_converter
     )
 
+
 def NullStrCell(locator):
     """Return a cell that converts to an optional python string."""
 
@@ -101,7 +102,7 @@ def ChoiceCell(locator, choices):
         value = str(value) if value else None
         if value not in choices:
             raise ExcelValidationError(
-                message=f"Unexpected value '{value}' found; expected one of '{choices}'"
+                f"Unexpected value '{value}' found; expected one of '{choices}'"
             )
         return value
 
@@ -118,7 +119,7 @@ def NullChoiceCell(locator, choices):
         value = str(value) if value else None
         if (value is not None) and (value not in choices):
             raise ExcelValidationError(
-                message=f"Unexpected value '{value}' found; expected one of '{choices}'"
+                f"Unexpected value '{value}' found; expected one of '{choices}'"
             )
         return value
 

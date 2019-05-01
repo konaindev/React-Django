@@ -15,15 +15,15 @@ def get_cell(workbook, sheet, col, row):
     """
     # Workbook must be supplied
     if workbook is None:
-        raise ExcelProgrammingError(message="No workbook found")
+        raise ExcelProgrammingError("No workbook found")
 
     # Make sure a complete location is provided
     if (not sheet) or (not col) or (not row):
-        raise ExcelProgrammingError((sheet, col, row), "incomplete location")
+        raise ExcelProgrammingError("incomplete location", where=(sheet, col, row))
 
     # Make sure sheet exists
     if sheet not in workbook:
-        raise ExcelProgrammingError((sheet, col, row), "invalid sheet")
+        raise ExcelProgrammingError("invalid sheet", where=(sheet, col, row))
 
     return workbook[sheet][f"{col}{row}"]
 

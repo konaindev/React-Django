@@ -1,7 +1,12 @@
 """
 A library for reading data from, and writing data to, excel spreadsheets.
 """
-from .errors import ExcelError, ExcelValidationError, ExcelProgrammingError
+from .errors import (
+    ExcelError,
+    ExcelLocationError,
+    ExcelProgrammingError,
+    ExcelValidationError,
+)
 from .getset import get_cell, set_cell
 from .importers import ExcelImporter
 from .locators import BaseLocator, loc, find_col, find_row
@@ -61,6 +66,7 @@ __all__ = (
     DecimalCell,
     ExcelError,
     ExcelImporter,
+    ExcelLocationError,
     ExcelProgrammingError,
     ExcelValidationError,
     find_col,

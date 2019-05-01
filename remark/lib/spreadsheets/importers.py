@@ -42,7 +42,8 @@ class ExcelImporter:
             valid = data_type == cell.data_type
         if not valid:
             raise ExcelValidationError(
-                cell, f"found data type '{cell.data_type}' but expected '{data_type}'"
+                f"found data type '{cell.data_type}' but expected '{data_type}'",
+                where=cell,
             )
 
     def check_convert(self, cell, converter=None):
@@ -59,7 +60,7 @@ class ExcelImporter:
                 value = converter(value)
             except Exception as e:
                 raise ExcelValidationError(
-                    cell, f"Could not apply value converter '{converter}': '{e}'"
+                    f"Could not apply value converter '{converter}': '{e}'", where=cell
                 )
         return value
 
@@ -100,7 +101,7 @@ class ExcelImporter:
         value_matches = expected(value) if callable(expected) else expected == value
         if not value_matches:
             raise ExcelValidationError(
-                cell, f"expected value '{expected}', found '{value}'"
+                f"expected value '{expected}', found '{value}'", where=cell
             )
 
     def row(self, schema, location=None, sheet=None, row=None):

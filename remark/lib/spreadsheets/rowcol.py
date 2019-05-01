@@ -20,7 +20,7 @@ def advance_row(increment):
         result = row + increment
         if result <= 0:
             raise ExcelProgrammingError(
-                message=f"Row `{row}` cannot be advanced by `{increment}`: out of bounds."
+                f"Row `{row}` cannot be advanced by `{increment}`: out of bounds."
             )
         return result
 
@@ -56,7 +56,7 @@ def advance_col(increment):
         index = index_for_col(col) + increment
         if index <= 0:
             raise ExcelProgrammingError(
-                message=f"Column `{col}` cannot be advanced by `{increment}`: out of bounds."
+                f"Column `{col}` cannot be advanced by `{increment}`: out of bounds."
             )
         return col_for_index(index)
 
@@ -99,7 +99,7 @@ def rows_until(
     sheet, col, _ = parse_location_or_default(location, sheet, col, None)
     if col is None:
         raise ExcelProgrammingError(
-            message="Location provided to rows_until() must contain a column!"
+            "Location provided to rows_until() must contain a column!"
         )
 
     def p(row):
@@ -168,7 +168,7 @@ def cols_until(
     sheet, _, row = parse_location_or_default(location, sheet, None, row)
     if row is None:
         raise ExcelProgrammingError(
-            message="Location provided to cols_until() must contain a row!"
+            "Location provided to cols_until() must contain a row!"
         )
 
     def p(col):

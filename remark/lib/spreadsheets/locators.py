@@ -16,11 +16,9 @@ lets you parameterize the behavior of the locator, in arbitrarily complex ways.
 See the simple factory example, `loc`, and the more complex examples
 `find_col` and `find_row`.
 """
-import inspect
-
 from remark.lib.match import matchp
 
-from .errors import ExcelProgrammingError
+from .errors import ExcelLocationError, ExcelProgrammingError
 from .getset import get_cell
 from .parse import parse_location, parse_location_or_default, unparse_location
 from .rowcol import col_range, row_range
@@ -43,8 +41,8 @@ class BaseLocator:
         """
         sheet_, col_, row_ = self.locate(workbook, sheet=sheet, col=col, row=row)
         if any(component is None for component in [sheet_, col_, row_]):
-            message = self.get_error_message(workbook, sheet_, col_, row_)
-            raise ExcelProgrammingError(message=message)
+            message = self.get_error_message(workbook, sheet, col, row)
+            raise ExcelLocationError(message)
         return (sheet_, col_, row_)
 
     def locate(self, workbook, sheet, col, row):
@@ -66,7 +64,7 @@ class BaseLocator:
 
         Derived classes can override this to provide an easier to read message.
         """
-        return f"locate({unparse_location(sheet_, col_, row_)}) did not return a complete location"
+        return f"locate({unparse_location(sheet, col, row)}) did not return a complete location"
 
 
 class loc(BaseLocator):
@@ -83,6 +81,9 @@ class loc(BaseLocator):
 
     def locate(self, workbook, sheet, col, row):
         return (sheet or self.sheet, col or self.col, row or self.row)
+
+    def get_error_message(self, workbook, sheet, col, row):
+        return f"loc({unparse_location(self.sheet, self.col, self.row)})({unparse_location(sheet, col, row)}) is incomplete"
 
 
 # CONSIDER: is there a clean way to unify find_col and find_row? They're so
@@ -114,7 +115,7 @@ class find_col(BaseLocator):
         # (Otherwise, how do we know where to look for stuff that matches?!)
         if not self.header_row:
             raise ExcelProgrammingError(
-                message=f"Invalid header location '{header}' provided to find_col; at a minimum, it must contain a row."
+                f"Invalid header location '{header}' provided to find_col; at a minimum, it must contain a row."
             )
 
         # Parse the optional target location.
@@ -177,7 +178,7 @@ class find_col(BaseLocator):
         predicate_ = getattr(self.predicate, "description", str(self.predicate))
         header_ = unparse_location(self.header_sheet, None, self.header_row)
         target_ = unparse_location(self.target_sheet, None, self.target_row)
-        return f'find_col: unable to find cell matching "{predicate_}" with header="{header_}", target="{target_}", from "{self.start_col}" to "{self.end_col}"'
+        return f'find_col: unable to find cell matching `{predicate_}` with header="{header_}", target="{target_}", from "{self.start_col}" to "{self.end_col}", and locate({unparse_location(sheet, col, row)})'
 
 
 class find_row(BaseLocator):
@@ -203,7 +204,7 @@ class find_row(BaseLocator):
         # (Otherwise, how do we know where to look for stuff that matches?!)
         if not self.header_col:
             raise ExcelProgrammingError(
-                message=f"Invalid header location '{header}' provided to find_row; at a minimum, it must contain a col."
+                f"Invalid header location '{header}' provided to find_row; at a minimum, it must contain a col."
             )
 
         # Parse the optional target location.
@@ -266,5 +267,5 @@ class find_row(BaseLocator):
         predicate_ = getattr(self.predicate, "description", str(self.predicate))
         header_ = unparse_location(self.header_sheet, self.header_col, None)
         target_ = unparse_location(self.target_sheet, self.target_col, None)
-        return f'find_row: unable to find cell matching "{predicate_}" with header="{header_}", target="{target_}", from "{self.start_row}" to "{self.end_row}"'
+        return f'find_row: unable to find cell matching `{predicate_}` with header="{header_}", target="{target_}", from "{self.start_row}" to "{self.end_row}", and locate({unparse_location(sheet, col, row)})'
 
