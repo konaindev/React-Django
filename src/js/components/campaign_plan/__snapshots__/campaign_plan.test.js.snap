@@ -279,7 +279,7 @@ exports[`CampaignPlan renders correctly 1`] = `
           <div
             className="row__label"
           >
-            Est. Campaign Target
+            Est. Campaign Investment
           </div>
           <div
             className="est-campaign-target row__content"
