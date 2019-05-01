@@ -160,27 +160,15 @@ class ExcelImporter:
             result = schema
         return result
 
-    def row(self, schema, location=None, sheet=None, row=None):
+    def schema(self, schema, location=None, sheet=None, col=None, row=None):
         """
-        Return the structured contents of a single row, based on the provided
-        schema definition.
+        Return values in a structured form, replacing all SchemaCells found
+        in a schema with actual data from the spreadsheet.
         """
-        sheet, _, row = parse_location_or_default(location, sheet, None, row)
+        sheet, col, row = parse_location_or_default(location, sheet, col, row)
 
         def _visitor(schema_cell):
-            return self.value(schema_cell, sheet=sheet, row=row)
-
-        return self.walk_schema(schema, _visitor)
-
-    def col(self, schema, location=None, sheet=None, col=None):
-        """
-        Return the structured contents of a single column, based on the
-        provided schema definition.
-        """
-        sheet, col, _ = parse_location_or_default(location, sheet, col, None)
-
-        def _visitor(schema_cell):
-            return self.value(schema_cell, sheet=sheet, col=col)
+            return self.value(schema_cell, sheet=sheet, col=col, row=row)
 
         return self.walk_schema(schema, _visitor)
 
@@ -195,7 +183,7 @@ class ExcelImporter:
         """
         sheet, _, _ = parse_location_or_default(location, sheet, None, None)
         rows = rows or row_range(start_row, end_row)
-        return [self.row(schema, sheet=sheet, row=row) for row in rows]
+        return [self.schema(schema, sheet=sheet, row=row) for row in rows]
 
     def col_table(
         self, schema, cols=None, start_col=None, end_col=None, location=None, sheet=None
@@ -208,7 +196,7 @@ class ExcelImporter:
         """
         sheet, _, _ = parse_location_or_default(location, sheet, None, None)
         cols = cols or col_range(start_col, end_col)
-        return [self.col(schema, sheet=sheet, col=col) for col in cols]
+        return [self.schema(schema, sheet=sheet, col=col) for col in cols]
 
     def row_array(
         self,

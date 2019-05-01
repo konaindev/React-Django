@@ -113,7 +113,7 @@ class MarketImporter(ProjectExcelImporter):
 
     def get_rent_to_income_category(self, category):
         _, _, row = find_output(matchp(exact=category))(self.workbook)
-        return self.row(
+        return self.schema(
             schema={
                 "name": category,
                 "low": FloatCell(loc("B")),

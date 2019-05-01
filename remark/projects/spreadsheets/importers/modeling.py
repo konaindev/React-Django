@@ -163,7 +163,7 @@ class ModelingImporter(ProjectExcelImporter):
     }
 
     def clean_output_data(self):
-        return self.col(self.OUTPUT_SCHEMA)
+        return self.schema(self.OUTPUT_SCHEMA)
 
     def clean_model_targets(self):
         baseline_weeks = self.value(
