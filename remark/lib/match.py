@@ -5,6 +5,10 @@ The test_match.py implementation should give a good flavor of the utility here.
 """
 
 
+def _str(v):
+    return str(v) if v is not None else ""
+
+
 _MATCHERS = {
     "eq": lambda v, t: v == t,
     "gt": lambda v, t: v > t,
@@ -12,11 +16,11 @@ _MATCHERS = {
     "lt": lambda v, t: v < t,
     "lte": lambda v, t: v <= t,
     "exact": lambda v, t: v == t,  # synonym for eq
-    "iexact": lambda v, t: v.casefold() == t.casefold(),
-    "startswith": lambda v, t: v.startswith(t),
-    "istartswith": lambda v, t: v.casefold().startswith(t.casefold()),
-    "contains": lambda v, t: t in v,
-    "icontains": lambda v, t: t.casefold() in v.casefold(),
+    "iexact": lambda v, t: _str(v).casefold() == t.casefold(),
+    "startswith": lambda v, t: _str(v).startswith(t),
+    "istartswith": lambda v, t: _str(v).casefold().startswith(t.casefold()),
+    "contains": lambda v, t: t in _str(v),
+    "icontains": lambda v, t: t.casefold() in _str(v).casefold(),
     "endswith": lambda v, t: v.endswith(t),
     "iendswith": lambda v, t: v.casefold().endswith(t.casefold()),
 }
