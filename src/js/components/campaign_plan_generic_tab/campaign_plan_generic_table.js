@@ -210,7 +210,7 @@ function renderNoINQ({ original }) {
       {costs.inq != null && (
         <span>
           {formatCurrency(costs.inq)}
-          {"/USV"}
+          {"/INQ"}
         </span>
       )}
     </div>
