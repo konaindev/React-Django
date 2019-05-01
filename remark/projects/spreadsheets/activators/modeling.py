@@ -33,3 +33,8 @@ class ModelingActivator(JSONFieldActivator):
         self.set_field({"property_name": property_name, "options": options})
         self.project.save()
 
+        # Special case: *if* we just activated a *selected* model type, then we'd
+        # better update targets.
+        if self.project.selected_model_name == self.data["name"]:
+            self.project.update_for_selected_model()
+
