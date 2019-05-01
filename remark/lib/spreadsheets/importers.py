@@ -113,7 +113,9 @@ class ExcelImporter:
         simply an arbitrary Python data structure -- either a dict, or a
         list, or an arbitrary nesting of these -- where some of the values in
         a dictionary, or some of the items in a list, are derived from
-        SchemaCell.
+        SchemaCell. In the cases where we find a SchemaCell, we invoke the
+        visitor to produce a value based on it; in all other cases, we simply
+        maintain the structure as-is.
 
         For instance:
 
