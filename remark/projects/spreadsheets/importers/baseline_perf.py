@@ -67,16 +67,16 @@ class BaselinePerfImporter(ProjectExcelImporter):
         """
         Validate that the basic contents of our META tab are valid.
         """
-        self.check_schema_value(self.DATES_VALID, expected="valid")
-        self.check_schema_value(self.BASELINE_PERIODS, expected=lambda value: value > 0)
+        self.check_value(self.DATES_VALID, expected="valid")
+        self.check_value(self.BASELINE_PERIODS, expected=lambda value: value > 0)
 
     def clean(self):
         super().clean()
         self.check_meta()
-        start_row = self.schema_value(self.START_ROW)
-        end_row = self.schema_value(self.END_ROW)
-        self.cleaned_data["baseline_start"] = self.schema_value(self.BASELINE_START)
-        self.cleaned_data["baseline_end"] = self.schema_value(self.BASELINE_END)
+        start_row = self.value(self.START_ROW)
+        end_row = self.value(self.END_ROW)
+        self.cleaned_data["baseline_start"] = self.value(self.BASELINE_START)
+        self.cleaned_data["baseline_end"] = self.value(self.BASELINE_END)
         self.cleaned_data["periods"] = self.row_table(
             schema=self.PERIOD_ROW_SCHEMA, start_row=start_row, end_row=end_row
         )

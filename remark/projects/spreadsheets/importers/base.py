@@ -28,7 +28,5 @@ class ProjectExcelImporter(ExcelImporter):
         """
         Validate the VERSION tab of the spreadsheet.
         """
-        self.check_schema_value(self.SPREADSHEET_KIND, expected=self.expected_type)
-        self.check_schema_value(
-            self.SPREADSHEET_VERSION, expected=self.expected_version
-        )
+        self.check_value(self.SPREADSHEET_KIND, expected=self.expected_type)
+        self.check_value(self.SPREADSHEET_VERSION, expected=self.expected_version)

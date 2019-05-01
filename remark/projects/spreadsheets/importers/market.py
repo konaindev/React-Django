@@ -55,7 +55,7 @@ class MarketImporter(ProjectExcelImporter):
     # and simplify things? -Dave
     def _get(self, predicate, target, schema_cell, **kwargs):
         """Return an arbitrary cell based on search in the output header column"""
-        return self.schema_value(schema_cell(find_output(predicate, target), **kwargs))
+        return self.value(schema_cell(find_output(predicate, target), **kwargs))
 
     def get_int(self, predicate, target="B"):
         """Return an int based on search in the output header column"""
@@ -192,7 +192,7 @@ class MarketImporter(ProjectExcelImporter):
         }
 
         segment["income_groups"] = self.col_table(schema, cols=cols, sheet="Output")
-        segment["segment_population"] = self.schema_value(
+        segment["segment_population"] = self.value(
             IntCell(loc(sheet="Output", row=next_row(row), col=next_col(cols[-1])))
         )
 

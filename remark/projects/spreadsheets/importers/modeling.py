@@ -166,7 +166,7 @@ class ModelingImporter(ProjectExcelImporter):
         return self.col(self.OUTPUT_SCHEMA)
 
     def clean_model_targets(self):
-        baseline_weeks = self.schema_value(
+        baseline_weeks = self.value(
             IntCell(find_row("META!A", "baseline weeks", target="B"))
         )
         start_row = 4

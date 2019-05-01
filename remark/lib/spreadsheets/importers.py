@@ -64,29 +64,55 @@ class ExcelImporter:
                 )
         return value
 
-    def schema_cell(self, schema_item, location=None, sheet=None, col=None, row=None):
+    def cell(self, schema_cell=None, location=None, sheet=None, col=None, row=None):
         """
-        Given a SchemaCell, return the openpyxl Cell at the underlying location.
+        Return an openpyxl Cell instance from the spreadsheet.
 
-        The location is determined first and foremost by the `location` provided
-        here, and secondarily by the schema_item's `locator`.
+        The location of the cell is determined first and foremost by the `location` 
+        provided here, and secondarily by the schema_cell's `locator` (if any).
+
+        Typically, you'll *declare* how to find a cell by setting the schema_cell
+        to a SchemaCell tuple.
+
+        That said, if you just want to get a Cell from the spreadsheet directly
+        and without any fussy schema mechanisms you can always call with 
+        (for example): self.cell(location="output!A3")
         """
         sheet, col, row = parse_location_or_default(location, sheet, col, row)
-        sheet, col, row = schema_item.locator(self.workbook, sheet, col, row)
+        if schema_cell is not None:
+            sheet, col, row = schema_cell.locator(self.workbook, sheet, col, row)
         return get_cell(self.workbook, sheet, col, row)
 
-    def schema_value(self, schema_item, location=None, sheet=None, col=None, row=None):
+    def value(self, schema_cell=None, location=None, sheet=None, col=None, row=None):
         """
-        Given a SchemaCell, return the python-converted Cell value at the
-        underlying location, validating it as necessary.
+        Return the value of a cell in the spreadsheet.
+
+        The location of the cell is determined first and foremost by the `location` 
+        provided here, and secondarily by the schema_cell's `locator` (if any).
+
+        Typically, you'll *declare* how to find a cell, and validate its value,
+        by setting the schema_cell to a SchemaCell tuple.
+
+        That said, if you just want to get a value from the spreadsheet directly
+        and without any fussy schema mechanisms you can always call with 
+        (for example): self.value(location="output!A3")
         """
-        cell = self.schema_cell(schema_item, location, sheet, col, row)
-        self.check_data_type(cell, schema_item.data_type)
-        value = self.check_convert(cell, schema_item.converter)
+        cell = self.cell(schema_cell, location, sheet, col, row)
+        if schema_cell is not None:
+            self.check_data_type(cell, schema_cell.data_type)
+            value = self.check_convert(cell, schema_cell.converter)
+        else:
+            value = cell.value
         return value
 
-    def check_schema_value(
-        self, schema_item, location=None, sheet=None, col=None, row=None, expected=None
+    def check_value(
+        self,
+        schema_cell=None,
+        location=None,
+        sheet=None,
+        col=None,
+        row=None,
+        expected=None,
     ):
         """
         Raise an exception if the wrong value is found.
@@ -95,9 +121,9 @@ class ExcelImporter:
         is provided, it is called with the converted value and must return
         True if the expectation is met.
         """
-        cell = self.schema_cell(schema_item, location, sheet, col, row)
-        self.check_data_type(cell, schema_item.data_type)
-        value = self.check_convert(cell, schema_item.converter)
+        cell = self.cell(schema_cell, location, sheet, col, row)
+        self.check_data_type(cell, schema_cell.data_type)
+        value = self.check_convert(cell, schema_cell.converter)
         value_matches = expected(value) if callable(expected) else expected == value
         if not value_matches:
             raise ExcelValidationError(
@@ -136,37 +162,25 @@ class ExcelImporter:
 
     def row(self, schema, location=None, sheet=None, row=None):
         """
-        Return the structured contents of a given row, based on the provided
+        Return the structured contents of a single row, based on the provided
         schema definition.
-
-        A schema definition is simply a dictionary mapping a key name to
-        a SchemaCell, which provides a locator, an expcted data type, and
-        a python type converter.
         """
         sheet, _, row = parse_location_or_default(location, sheet, None, row)
 
-        def _visitor(schema):
-            return self.schema_value(schema, sheet=sheet, row=row)
+        def _visitor(schema_cell):
+            return self.value(schema_cell, sheet=sheet, row=row)
 
         return self.walk_schema(schema, _visitor)
 
     def col(self, schema, location=None, sheet=None, col=None):
         """
-        Return the structured contents of a given column, based on the
+        Return the structured contents of a single column, based on the
         provided schema definition.
-
-        A schema definition is an arbitrary python structure,
-        either a dict or a list or a nesting of the two,
-        that provides SchemaCells in 
-
-        A schema definition is simply a dictionary mapping a key name to
-        a SchemaCell, which provides a locator, an expcted data type, and
-        a python type converter.
         """
         sheet, col, _ = parse_location_or_default(location, sheet, col, None)
 
-        def _visitor(schema):
-            return self.schema_value(schema, sheet=sheet, col=col)
+        def _visitor(schema_cell):
+            return self.value(schema_cell, sheet=sheet, col=col)
 
         return self.walk_schema(schema, _visitor)
 
@@ -198,7 +212,7 @@ class ExcelImporter:
 
     def row_array(
         self,
-        schema_item,
+        schema_cell,
         rows=None,
         start_row=None,
         end_row=None,
@@ -206,18 +220,18 @@ class ExcelImporter:
         sheet=None,
     ):
         """
-        Return an array of row values based on the schema_item.
+        Return an array of row values based on the schema_cell.
 
         Rows can either be provided as an iterable (via `rows`) or with
         explicit values, via `start_row` and `end_row`.
         """
         sheet, _, _ = parse_location_or_default(location, sheet, None, None)
         rows = rows or row_range(start_row, end_row)
-        return [self.schema_value(schema_item, sheet=sheet, row=row) for row in rows]
+        return [self.value(schema_cell, sheet=sheet, row=row) for row in rows]
 
     def col_array(
         self,
-        schema_item,
+        schema_cell,
         cols=None,
         start_col=None,
         end_col=None,
@@ -232,11 +246,11 @@ class ExcelImporter:
         """
         sheet, _, _ = parse_location_or_default(location, sheet, None, None)
         cols = cols or col_range(start_col, end_col)
-        return [self.schema_value(schema_item, sheet=sheet, col=col) for col in cols]
+        return [self.value(schema_cell, sheet=sheet, col=col) for col in cols]
 
     def table_array(
         self,
-        schema_item,
+        schema_cell,
         cols=None,
         start_col=None,
         end_col=None,
@@ -264,8 +278,8 @@ class ExcelImporter:
         for outer_index in outer:
             table.append(
                 [
-                    self.schema_value(
-                        schema_item,
+                    self.value(
+                        schema_cell,
                         sheet=sheet,
                         col=inner_index if row_major else outer_index,
                         row=outer_index if row_major else inner_index,
