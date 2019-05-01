@@ -55,7 +55,7 @@ export function CampaignPlanOverviewTab({
           />
         </div>
         <div className="table__row table__row--last">
-          <div className="row__label">Est. Campaign Target</div>
+          <div className="row__label">Est. Campaign Investment</div>
           <CampaignOverviewEstTarget
             className="row__content"
             {...target_investments}
