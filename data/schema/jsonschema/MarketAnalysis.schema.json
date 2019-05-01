@@ -708,6 +708,10 @@
                 "zip": {
                     "description": "The zip code",
                     "type": "string"
+                },
+                "properties": {
+                    "description": "Associated properties of the zip code; can be any JSON object",
+                    "type": "object"
                 }
             },
             "required": [
