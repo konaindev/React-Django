@@ -21,6 +21,34 @@ _MATCHERS = {
     "iendswith": lambda v, t: v.casefold().endswith(t.casefold()),
 }
 
+_DESCRIPTIONS = {
+    "eq": lambda l, r: f"{l} == {r}",
+    "gt": lambda l, r: f"{l} > {r}",
+    "gte": lambda l, r: f"{l} >= {r}",
+    "lt": lambda l, r: f"{l} < {r}",
+    "lte": lambda l, r: f"{l} <= {r}",
+    "exact": lambda l, r: f"{l} == {r}",
+    "iexact": lambda l, r: f"{l} == {r} (case insensitive)",
+    "startswith": lambda l, r: f"{l}.starts_with({r})",
+    "istartswith": lambda l, r: f"{l}.starts_with({r}) (case insensitive)",
+    "contains": lambda l, r: f"{l}.contains({r})",
+    "icontains": lambda l, r: f"{l}.contains({r}) (case insensitive)",
+    "endswith": lambda l, r: f"{l}.ends_with({r})",
+    "iendswith": lambda l, r: f"{l}.ends_with({r}) (case insensitive)",
+}
+
+
+def query_description(**query):
+    """Given a query dictionary, provide a human-readable description."""
+
+    def _description(k, v):
+        if isinstance(v, str):
+            v = f'"{v}"'
+        return _DESCRIPTIONS[k]("cell", v)
+
+    components = [_description(k, v) for k, v in query.items()]
+    return " and ".join(components)
+
 
 def match(v, **query):
     """
@@ -34,11 +62,13 @@ def match(v, **query):
 
     These are similar to value filters in Django querysets.
     """
-    return all((_MATCHERS[k](str(v or ""), t) for k, t in query.items()))
+    return all((_MATCHERS[k](v, t) for k, t in query.items()))
 
 
 def matchp(**query):
     """
     Returns a predicate that invokes match(...) on the supplied value
     """
-    return lambda v: match(v, **query)
+    predicate = lambda v: match(v, **query)  # noqa
+    predicate.description = query_description(**query)
+    return predicate

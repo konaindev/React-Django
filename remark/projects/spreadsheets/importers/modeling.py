@@ -1,7 +1,6 @@
 from remark.lib.spreadsheets import (
     CurrencyCell,
     DateCell,
-    require_complete,
     find_col,
     find_row,
     FloatCell,
@@ -14,11 +13,11 @@ from .base import ProjectExcelImporter
 
 
 def find(predicate):
-    return require_complete(find_row("OUTPUT!A", predicate, target="B"))
+    return find_row("OUTPUT!A", predicate, target="B")
 
 
 def model(predicate):
-    return require_complete(find_col("MODEL!2", predicate))
+    return find_col("MODEL!2", predicate)
 
 
 class ModelingImporter(ProjectExcelImporter):

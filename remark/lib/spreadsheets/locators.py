@@ -22,7 +22,7 @@ from remark.lib.match import matchp
 
 from .errors import ExcelProgrammingError
 from .getset import get_cell
-from .parse import parse_location, parse_location_or_default
+from .parse import parse_location, parse_location_or_default, unparse_location
 from .rowcol import col_range, row_range
 
 
@@ -41,8 +41,11 @@ class BaseLocator:
         Constructing a BaseLocator is like calling a locator factory, 
         which means __call__ is equivalent to a locator. (See comments above).
         """
-        sheet, col, row = self.locate(workbook, sheet=sheet, col=col, row=row)
-        return (sheet, col, row)
+        sheet_, col_, row_ = self.locate(workbook, sheet=sheet, col=col, row=row)
+        if any(component is None for component in [sheet_, col_, row_]):
+            message = self.get_error_message(workbook, sheet_, col_, row_)
+            raise ExcelProgrammingError(message=message)
+        return (sheet_, col_, row_)
 
     def locate(self, workbook, sheet, col, row):
         """
@@ -53,6 +56,17 @@ class BaseLocator:
         derive from BaseLocator and implement this method.
         """
         raise NotImplementedError("Derived classes must implement locate()")
+
+    def get_error_message(self, workbook, sheet, col, row):
+        """
+        Called when an incomplete location is returned by locate(...).
+        By default, provides a simple error message indicating what failed.
+
+        The (sheet, col, row) provided are those originally sent to locate(...).
+
+        Derived classes can override this to provide an easier to read message.
+        """
+        return f"locate({unparse_location(sheet_, col_, row_)}) did not return a complete location"
 
 
 class loc(BaseLocator):
@@ -159,6 +173,12 @@ class find_col(BaseLocator):
         # Return a matching location in the target location
         return (sheet or self.target_sheet, col or found_col, row or self.target_row)
 
+    def get_error_message(self, workbook, sheet, col, row):
+        predicate_ = getattr(self.predicate, "description", str(self.predicate))
+        header_ = unparse_location(self.header_sheet, None, self.header_row)
+        target_ = unparse_location(self.target_sheet, None, self.target_row)
+        return f'find_col: unable to find cell matching "{predicate_}" with header="{header_}", target="{target_}", from "{self.start_col}" to "{self.end_col}"'
+
 
 class find_row(BaseLocator):
     """
@@ -242,28 +262,9 @@ class find_row(BaseLocator):
         # Return a matching location in the target location
         return (sheet or self.target_sheet, col or self.target_col, row or found_row)
 
+    def get_error_message(self, workbook, sheet, col, row):
+        predicate_ = getattr(self.predicate, "description", str(self.predicate))
+        header_ = unparse_location(self.header_sheet, self.header_col, None)
+        target_ = unparse_location(self.target_sheet, self.target_col, None)
+        return f'find_row: unable to find cell matching "{predicate_}" with header="{header_}", target="{target_}", from "{self.start_row}" to "{self.end_row}"'
 
-def require_complete(locator):
-    """
-    Given a locator, return a locator that *demands* a complete location on every
-    call to locator.
-    """
-
-    def inner(workbook, sheet, col, row):
-        def vars_and_args(obj):
-            return {
-                k: inspect.getclosurevars(v).nonlocals
-                if hasattr(v, "__closure__")
-                else v
-                for k, v in vars(obj).items()
-            }
-
-        osheet, ocol, orow = locator(workbook, sheet, col, row)
-        if (osheet is None) or (ocol is None) or (orow is None):
-            raise ExcelProgrammingError(
-                (osheet, ocol, orow),
-                f"require_complete: got incomplete value from '{sheet}'!{col}{row} and vars: {vars_and_args(locator)}",
-            )
-        return (osheet, ocol, orow)
-
-    return inner

@@ -30,10 +30,31 @@ class ParseLocationTestCase(TestCase):
 
 
 class UnparseLocationTestCase(TestCase):
-    def test_1(self):
+    def test_simple(self):
+        unparsed = unparse_location("sheet", "A", 7)
+        self.assertEqual(unparsed, "'sheet'!A7")
+
+    def test_no_sheet(self):
+        unparsed = unparse_location(None, "A", 7)
+        self.assertEqual(unparsed, "A7")
+
+    def test_no_col(self):
+        unparsed = unparse_location("sheet", None, 7)
+        self.assertEqual(unparsed, "'sheet'!7")
+
+    def test_no_row(self):
+        unparsed = unparse_location("sheet", "C", None)
+        self.assertEqual(unparsed, "'sheet'!C")
+
+    def test_nothing(self):
+        unparsed = unparse_location(None, None, None)
+        self.assertEqual(unparsed, "")
+
+    def test_round_trip_1(self):
         original = "'sheet name'!A1"
         self.assertEqual(original, unparse_location(*parse_location(original)))
 
-    def test_2(self):
+    def test_round_trip_2(self):
         original = "'fun in the sun name'!AZQ17"
         self.assertEqual(original, unparse_location(*parse_location(original)))
+

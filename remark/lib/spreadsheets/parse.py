@@ -38,4 +38,11 @@ def parse_location_or_default(location=None, sheet=None, col=None, row=None):
 
 
 def unparse_location(sheet=None, col=None, row=None):
-    return f"'{sheet}'!{col}{row}"
+    # I'd like to return strings without quoted sheet names in cases where
+    # they aren't necessary. I can't find any compelling and complete description
+    # of when this is actually the case, though! This is as close as I got:
+    # http://www.excelcodex.com/2012/06/worksheets-naming-conventions/
+    sheet_ = f"'{sheet}'!" if sheet else ""
+    col_ = col if col else ""
+    row_ = str(row) if row is not None else ""
+    return f"{sheet_}{col_}{row_}"
