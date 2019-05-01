@@ -1015,7 +1015,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
                 </span>
                 <span>
                   $50
-                  /USV
+                  /INQ
                 </span>
               </div>
             </div>
@@ -1164,7 +1164,7 @@ exports[`CampaignPlanOverviewTab renders correctly 1`] = `
                 </span>
                 <span>
                   $50
-                  /USV
+                  /INQ
                 </span>
               </div>
             </div>
