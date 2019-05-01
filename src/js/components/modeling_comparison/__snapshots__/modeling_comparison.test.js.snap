@@ -217,7 +217,7 @@ exports[`ModelingComparison renders correctly 1`] = `
                 <span
                   className="row-label-text"
                 >
-                  95% Leased Date
+                  Target Leased Date
                 </span>
               </div>
             </div>
