@@ -33,6 +33,19 @@ and determines whether it's valid.
 The cell's python type converter is an arbitrary callable (including arbitrary
 python types, like int/Decimal/etc) that indicates how the value should be
 converted into a python-native type.
+
+CONSIDER: I originally broke this idea into two pieces:
+
+(1) the locator
+(2) type information: a combination of the data_type [which is about Excel's type] 
+    and the converter [which is about Python's]
+
+And, y'know, these two things really *are* unrelated ideas. It just turns out it 
+seems pretty natural to tie the two together in a tuple; it makes schema 
+declarations in importers more compact and, I think, more readable.
+
+Then again, maybe it's silly, and confusing to other devs, and we should separate
+these two things back out -- you decide. :-) -Dave
 """
 SchemaCell = namedtuple("SchemaCell", ["locator", "data_type", "converter"])
 

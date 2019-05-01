@@ -4,7 +4,7 @@ from .errors import ExcelError, ExcelValidationError
 from .getset import get_cell
 from .rowcol import col_range, row_range
 from .parse import parse_location_or_default
-from .schema import DataType, unflatten_dict, is_schema_cell
+from .schema import DataType, is_schema_cell
 
 
 class ExcelImporter:
@@ -66,7 +66,7 @@ class ExcelImporter:
 
     def schema_cell(self, schema_item, location=None, sheet=None, col=None, row=None):
         """
-        Given a schema item, return the cell at the underlying location.
+        Given a SchemaCell, return the openpyxl Cell at the underlying location.
 
         The location is determined first and foremost by the `location` provided
         here, and secondarily by the schema_item's `locator`.
@@ -77,7 +77,7 @@ class ExcelImporter:
 
     def schema_value(self, schema_item, location=None, sheet=None, col=None, row=None):
         """
-        Given a SchemaCell, return the python-converted value at the
+        Given a SchemaCell, return the python-converted Cell value at the
         underlying location, validating it as necessary.
         """
         cell = self.schema_cell(schema_item, location, sheet, col, row)
@@ -104,6 +104,34 @@ class ExcelImporter:
                 f"expected value '{expected}', found '{value}'", where=cell
             )
 
+    def walk_schema(self, schema, visitor):
+        """
+        Walk an arbitrary schema definition, calling a visitor method for
+        each SchemaCell we find in the structure.
+
+        In the context of our spreadsheet library, a schema definition is
+        simply an arbitrary Python data structure -- either a dict, or a
+        list, or an arbitrary nesting of these -- where some of the values in
+        a dictionary, or some of the items in a list, are derived from
+        SchemaCell.
+
+        For instance:
+
+            walk({"hello": "world", "goodbye": SchemaCell(...)}, get_value) 
+                -->
+            {"hello": "world", "goodbye": 42}
+        """
+        if isinstance(schema, dict):
+            result = {k: self.walk_schema(v, visitor) for k, v in schema.items()}
+        elif isinstance(schema, list):
+            result = [self.walk_schema(item, visitor) for item in schema]
+        elif is_schema_cell(schema):
+            result = visitor(schema)
+        else:
+            # Schema is a raw value; pass it through.
+            result = schema
+        return result
+
     def row(self, schema, location=None, sheet=None, row=None):
         """
         Return the structured contents of a given row, based on the provided
@@ -114,33 +142,31 @@ class ExcelImporter:
         a python type converter.
         """
         sheet, _, row = parse_location_or_default(location, sheet, None, row)
-        return unflatten_dict(
-            {
-                key: self.schema_value(schema_item_or_value, sheet=sheet, row=row)
-                if is_schema_cell(schema_item_or_value)
-                else schema_item_or_value
-                for key, schema_item_or_value in schema.items()
-            }
-        )
+
+        def _visitor(schema):
+            return self.schema_value(schema, sheet=sheet, row=row)
+
+        return self.walk_schema(schema, _visitor)
 
     def col(self, schema, location=None, sheet=None, col=None):
         """
         Return the structured contents of a given column, based on the
         provided schema definition.
 
+        A schema definition is an arbitrary python structure,
+        either a dict or a list or a nesting of the two,
+        that provides SchemaCells in 
+
         A schema definition is simply a dictionary mapping a key name to
         a SchemaCell, which provides a locator, an expcted data type, and
         a python type converter.
         """
         sheet, col, _ = parse_location_or_default(location, sheet, col, None)
-        return unflatten_dict(
-            {
-                key: self.schema_value(schema_item_or_value, sheet=sheet, col=col)
-                if is_schema_cell(schema_item_or_value)
-                else schema_item_or_value
-                for key, schema_item_or_value in schema.items()
-            }
-        )
+
+        def _visitor(schema):
+            return self.schema_value(schema, sheet=sheet, col=col)
+
+        return self.walk_schema(schema, _visitor)
 
     def row_table(
         self, schema, rows=None, start_row=None, end_row=None, location=None, sheet=None

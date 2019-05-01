@@ -61,11 +61,14 @@ class CampaignPlanImporter(ProjectExcelImporter):
     FUNNEL_CATEGORY_ROW_SCHEMA = dict(
         CATEGORY_ROW_SCHEMA,
         **{
-            # These are unflattened by our base ExcelImporter
-            "volumes.usv": IntCell(find_cat("# of usv")),
-            "volumes.inq": IntCell(find_cat("# of inq")),
-            "costs.usv": CurrencyCell(find_cat("usv cost")),
-            "costs.inq": CurrencyCell(find_cat("inq cost")),
+            "volumes": {
+                "usv": IntCell(find_cat("# of usv")),
+                "inq": IntCell(find_cat("# of inq")),
+            },
+            "costs": {
+                "usv": CurrencyCell(find_cat("usv cost")),
+                "inq": CurrencyCell(find_cat("inq cost")),
+            },
         },
     )
 

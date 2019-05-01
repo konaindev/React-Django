@@ -177,12 +177,16 @@ class MarketImporter(ProjectExcelImporter):
         schema = {
             "income": CurrencyCell(_find("age segment")),
             "group_population": IntCell(_find("population")),
-            "home_owners.total": IntCell(_find("home owners")),
-            "home_owners.family": IntCell(_find("family ho")),
-            "home_owners.nonfamily": IntCell(_find("non-family ho")),
-            "renters.total": IntCell(_find("renters")),
-            "renters.family": IntCell(_find("family r")),
-            "renters.nonfamily": IntCell(_find("non-family r")),
+            "home_owners": {
+                "total": IntCell(_find("home owners")),
+                "family": IntCell(_find("family ho")),
+                "nonfamily": IntCell(_find("non-family ho")),
+            },
+            "renters": {
+                "total": IntCell(_find("renters")),
+                "family": IntCell(_find("family r")),
+                "nonfamily": IntCell(_find("non-family r")),
+            },
             "market_size": IntCell(_find("est. market")),
             "active_populations": ["renters.nonfamily", "renters.family"],
         }
