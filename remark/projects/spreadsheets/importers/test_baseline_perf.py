@@ -1,7 +1,10 @@
-import os
 import datetime
+import json
+import jsonschema
+import os
 from decimal import Decimal
 
+from django.core.serializers.json import DjangoJSONEncoder
 from django.test import TestCase
 
 from .baseline_perf import BaselinePerfImporter
@@ -9,8 +12,11 @@ from .baseline_perf import BaselinePerfImporter
 
 class BaselinePerfTestCase(TestCase):
     TEST_FILE_NAME = os.path.join(
-        os.path.abspath(os.path.dirname(__file__)),
-        "../../../../xls/examples/elcortez-baseline-perf.xlsx",
+        os.path.abspath(os.path.dirname(__file__)), "./test/baseline-perf.xlsx"
+    )
+
+    SCHEMA_FILE_NAME = os.path.join(
+        os.path.abspath(os.path.dirname(__file__)), "./test/baseline-perf.schema.json"
     )
 
     EXPECTED_FIRST_PERIOD = {
@@ -65,3 +71,15 @@ class BaselinePerfTestCase(TestCase):
 
         first_period = importer.cleaned_data["periods"][0]
         self.assertEqual(first_period, self.EXPECTED_FIRST_PERIOD)
+
+    def test_schema_valid(self):
+        with open(self.SCHEMA_FILE_NAME, "rt") as schema_file:
+            schema = json.load(schema_file)
+
+        importer = BaselinePerfImporter(self.TEST_FILE_NAME)
+        if not importer.is_valid():
+            raise importer.errors[0]
+
+        json_string = DjangoJSONEncoder().encode(importer.cleaned_data)
+        decoded_jsonable = json.loads(json_string)
+        jsonschema.validate(instance=decoded_jsonable, schema=schema)
