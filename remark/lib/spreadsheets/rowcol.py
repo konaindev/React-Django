@@ -83,13 +83,12 @@ def location_range(
     start_row=None,
     end_col=None,
     end_row=None,
-    row_major=True,
 ):
     """
     Return an iterable of (sheet, col, row) locations.
 
-    The sequence can be along a single axis (a row or a column) or it
-    can be through a rectangular range; in that case, it is row-major by default.
+    The sequence must be along a single axis (a row or a column); for
+    recangular ranges, see location_range_rect(...).
     """
     start_sheet, start_col, start_row = parse_location_or_default(
         start, sheet, start_col, start_row
@@ -100,12 +99,19 @@ def location_range(
 
     # Sanity check: you've got to stay in a single sheet
     if start_sheet != end_sheet:
-        raise ExcelProgrammingError("Location ranges must reside on a single sheet!")
+        raise ExcelProgrammingError("location_range must reside on a single sheet!")
 
     # Sanity check: you've got to start somewhere.
     if start_col is None and start_row is None:
-        raise ExcelProgrammingError("Location ranges must start and end somewhere!")
+        raise ExcelProgrammingError("location_range must start and end somewhere!")
 
+    # Sanity check: this has to be a non-rectangular range.
+    if start_col != end_col and start_row != end_row:
+        raise ExcelProgrammingError(
+            "location_range must not be rectangular; use location_range_rect instead."
+        )
+
+    result = None
     sheet = start_sheet
 
     # Row-only iteration
@@ -119,20 +125,60 @@ def location_range(
         row = start_row
         result = ((sheet, col, row) for col in col_range(start_col, end_col))
 
-    # Rectangular, row-major
-    elif row_major:
-        result = (
-            (sheet, col, row)
-            for row in row_range(start_row, end_row)
-            for col in col_range(start_col, end_col)
+    assert result is not None, "one of the two cases must always be possible"
+
+    return result
+
+
+def location_range_rect(
+    start=None,
+    end=None,
+    sheet=None,
+    start_col=None,
+    start_row=None,
+    end_col=None,
+    end_row=None,
+    row_major=True,
+):
+    """
+    Return an iterable that contains iterables of (sheet, col, row) locations.
+
+    The sequence must be rectangular.
+    """
+    start_sheet, start_col, start_row = parse_location_or_default(
+        start, sheet, start_col, start_row
+    )
+    end_sheet, end_col, end_row = parse_location_or_default(
+        end, sheet, end_col, end_row
+    )
+
+    # Sanity check: you've got to stay in a single sheet
+    if start_sheet != end_sheet:
+        raise ExcelProgrammingError(
+            "location_range_rect must reside on a single sheet!"
         )
 
-    # Rectangular, column-major
+    # Sanity check: you've got to start somewhere.
+    if start_col is None and start_row is None:
+        raise ExcelProgrammingError("location_range_rect must start and end somewhere!")
+
+    # Sanity check: this has to be a rectangular range.
+    if start_col == end_col or start_row == end_row:
+        raise ExcelProgrammingError(
+            "location_range_rect must be rectangular; use location_range instead."
+        )
+
+    sheet = start_sheet
+
+    if row_major:
+        result = (
+            ((sheet, col, row) for col in col_range(start_col, end_col))
+            for row in row_range(start_row, end_row)
+        )
     else:
         result = (
-            (sheet, col, row)
+            ((sheet, col, row) for row in row_range(start_row, end_row))
             for col in col_range(start_col, end_col)
-            for row in row_range(start_row, end_row)
         )
 
     return result

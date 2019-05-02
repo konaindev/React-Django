@@ -10,6 +10,7 @@ from .rowcol import (
     cols_while_empty,
     cols_while,
     index_for_col,
+    location_range_rect,
     location_range,
     next_col,
     next_row,
@@ -119,31 +120,34 @@ class RangesTestCase(TestCase):
             list(locations), [(None, None, 1), (None, None, 2), (None, None, 3)]
         )
 
-    def test_location_range_rectangular_row_major(self):
-        locations = location_range("foo!A1", "foo!C2", row_major=True)
+    def test_location_range_invalid_rect(self):
+        with self.assertRaises(ExcelProgrammingError):
+            locations = location_range("foo!A1", "foo!C2")
+            _ = list(locations)
+
+    def test_location_range_rect_invalid_not_rectangular(self):
+        with self.assertRaises(ExcelProgrammingError):
+            locations = location_range_rect("foo!A1", "foo!Z1")
+            _ = [[location for location in inner] for inner in locations]
+
+    def test_location_range_rect_row_major(self):
+        locations = location_range_rect("foo!A1", "foo!C2", row_major=True)
         self.assertEqual(
-            list(locations),
+            [[location for location in inner] for inner in locations],
             [
-                ("foo", "A", 1),
-                ("foo", "B", 1),
-                ("foo", "C", 1),
-                ("foo", "A", 2),
-                ("foo", "B", 2),
-                ("foo", "C", 2),
+                [("foo", "A", 1), ("foo", "B", 1), ("foo", "C", 1)],
+                [("foo", "A", 2), ("foo", "B", 2), ("foo", "C", 2)],
             ],
         )
 
-    def test_location_range_rectangular_col_major(self):
-        locations = location_range("foo!A1", "foo!C2", row_major=False)
+    def test_location_range_rect_col_major(self):
+        locations = location_range_rect("foo!A1", "foo!C2", row_major=False)
         self.assertEqual(
-            list(locations),
+            [[location for location in inner] for inner in locations],
             [
-                ("foo", "A", 1),
-                ("foo", "A", 2),
-                ("foo", "B", 1),
-                ("foo", "B", 2),
-                ("foo", "C", 1),
-                ("foo", "C", 2),
+                [("foo", "A", 1), ("foo", "A", 2)],
+                [("foo", "B", 1), ("foo", "B", 2)],
+                [("foo", "C", 1), ("foo", "C", 2)],
             ],
         )
 
