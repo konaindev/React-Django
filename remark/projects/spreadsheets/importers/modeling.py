@@ -174,8 +174,8 @@ class ModelingImporter(ProjectExcelImporter):
         # row_range(...) is inclusive, and we want to get one extra row
         # so we can determine the correct end date for each intermediate row.
         end_row = start_row + baseline_weeks
-        raw_targets = self.row_table(
-            schema=self.MODEL_SCHEMA, rows=row_range(start_row, end_row)
+        raw_targets = self.schema_list(
+            schema=self.MODEL_SCHEMA, locations=row_range(start_row, end_row)
         )
 
         # Fix up the end dates for each of the targets

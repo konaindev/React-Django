@@ -75,6 +75,42 @@ def col_range(start_col, end_col):
     )
 
 
+def location_range(
+    start=None,
+    end=None,
+    sheet=None,
+    start_col=None,
+    start_row=None,
+    end_col=None,
+    end_row=None,
+):
+    """Return an iterable of rows *or* columns *or both*. Who cares; we can do it all!"""
+    start_sheet, start_col, start_row = parse_location_or_default(
+        start, sheet, start_col, start_row
+    )
+    end_sheet, end_col, end_row = parse_location_or_default(
+        end, sheet, end_col, end_row
+    )
+    if start_sheet != end_sheet:
+        raise ExcelProgrammingError("Location ranges must reside on a single sheet!")
+    sheet = start_sheet
+    if start_col == end_col:
+        # This is row-only.
+        col = start_col
+        for row in row_range(start_row, end_row):
+            yield (sheet, col, row)
+    elif start_row == end_row:
+        # This is col-only
+        row = start_row
+        for col in col_range(start_col, end_col):
+            yield (sheet, col, row)
+    else:
+        # two dimensional!
+        for row in row_range(start_row, end_row):
+            for col in col_range(start_col, end_col):
+                yield (sheet, col, row)
+
+
 def _is_empty(value):
     """Return True if a cell's value is 'empty'; intentionally *loose* definition."""
     return (value is None) or (isinstance(value, str) and not bool(value))

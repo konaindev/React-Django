@@ -96,9 +96,9 @@ class MarketImporter(ProjectExcelImporter):
     def get_estimated_population_zip(self):
         _, _, row = find_output("tam type")(self.workbook)
         cols = cols_until_empty(self.workbook, "C", sheet="Output", row=row)
-        zip_codes = self.col_table(
+        zip_codes = self.schema_list(
             schema={"zip": StrCell(loc(sheet="Output", row=row)), "outline": None},
-            cols=cols,
+            locations=cols,
         )
         return {"zip_codes": zip_codes}
 
@@ -191,7 +191,9 @@ class MarketImporter(ProjectExcelImporter):
             "active_populations": ["renters.nonfamily", "renters.family"],
         }
 
-        segment["income_groups"] = self.col_table(schema, cols=cols, sheet="Output")
+        segment["income_groups"] = self.schema_list(
+            schema, locations=cols, sheet="Output"
+        )
         segment["segment_population"] = self.value(
             IntCell(loc(sheet="Output", row=next_row(row), col=next_col(cols[-1])))
         )
@@ -200,8 +202,8 @@ class MarketImporter(ProjectExcelImporter):
         _, _, row = find_output("target segment")(self.workbook)
         rows = rows_until_empty(self.workbook, next_row(row), location="Output!A")
         # Grab the overviews for each segment
-        segments = self.row_table(
-            self.SEGMENT_OVERVIEW_SCHEMA, rows=rows, sheet="Output"
+        segments = self.schema_list(
+            self.SEGMENT_OVERVIEW_SCHEMA, locations=rows, sheet="Output"
         )
         for segment in segments:
             self.update_segment_details(segment)

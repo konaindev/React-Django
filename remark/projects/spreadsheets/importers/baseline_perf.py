@@ -32,7 +32,7 @@ class BaselinePerfImporter(ProjectExcelImporter):
     BASELINE_START = DateCell(find_meta("baseline_start_date"))
     BASELINE_END = DateCell(find_meta("baseline_end_date"))
 
-    PERIOD_ROW_SCHEMA = {
+    PERIOD_SCHEMA = {
         "start": DateCell(find_period("start date")),
         "end": DateCell(find_period("end date")),
         "leased_units_start": IntCell(find_period("leased units @ start")),
@@ -77,6 +77,6 @@ class BaselinePerfImporter(ProjectExcelImporter):
         end_row = self.value(self.END_ROW)
         self.cleaned_data["baseline_start"] = self.value(self.BASELINE_START)
         self.cleaned_data["baseline_end"] = self.value(self.BASELINE_END)
-        self.cleaned_data["periods"] = self.row_table(
-            schema=self.PERIOD_ROW_SCHEMA, start_row=start_row, end_row=end_row
+        self.cleaned_data["periods"] = self.schema_list(
+            schema=self.PERIOD_SCHEMA, start=start_row, end=end_row
         )

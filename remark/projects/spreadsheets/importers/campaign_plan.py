@@ -46,7 +46,7 @@ class CampaignPlanImporter(ProjectExcelImporter):
         "campaign_days": IntCell(find_meta("days")),
     }
 
-    CATEGORY_ROW_SCHEMA = {
+    CATEGORY_SCHEMA = {
         "name": StrCell(find_cat("tactic")),
         "audience": NullChoiceCell(find_cat("audience"), choices=AUDIENCE_CHOICES),
         "tooltip": NullStrCell(find_cat("tooltip")),
@@ -58,8 +58,8 @@ class CampaignPlanImporter(ProjectExcelImporter):
         "total_cost": DefaultCurrencyCell(find_cat("total cost")),
     }
 
-    FUNNEL_CATEGORY_ROW_SCHEMA = dict(
-        CATEGORY_ROW_SCHEMA,
+    FUNNEL_CATEGORY_SCHEMA = dict(
+        CATEGORY_SCHEMA,
         **{
             "volumes": {
                 "usv": IntCell(find_cat("# of usv")),
@@ -94,17 +94,17 @@ class CampaignPlanImporter(ProjectExcelImporter):
 
     def build_category(self, category):
         rows = rows_until_empty(self.workbook, start_row=2, sheet=category, col="A")
-        row_table = self.row_table(
-            schema=self.CATEGORY_ROW_SCHEMA, rows=rows, sheet=category
+        tactics = self.schema_list(
+            schema=self.CATEGORY_SCHEMA, locations=rows, sheet=category
         )
-        return {"tactics": row_table}
+        return {"tactics": tactics}
 
     def build_funnel_category(self, category):
         rows = rows_until_empty(self.workbook, start_row=2, sheet=category, col="A")
-        row_table = self.row_table(
-            schema=self.FUNNEL_CATEGORY_ROW_SCHEMA, rows=rows, sheet=category
+        tactics = self.schema_list(
+            schema=self.FUNNEL_CATEGORY_SCHEMA, locations=rows, sheet=category
         )
-        return {"tactics": row_table}
+        return {"tactics": tactics}
 
     def locate_overview_header_cell(self, predicate):
         predicate = predicate if callable(predicate) else matchp(iexact=predicate)
@@ -115,7 +115,9 @@ class CampaignPlanImporter(ProjectExcelImporter):
             self.workbook, start_row=start_row, location="Overview!B"
         )
         # CONSIDER it would be nice to have an analogue of Django ORM's values(flat=True)
-        text_dicts = self.row_table({"text": StrCell(loc("Overview!B"))}, rows=rows)
+        text_dicts = self.schema_list(
+            {"text": StrCell(loc("Overview!B"))}, locations=rows
+        )
         texts = [text_dict["text"] for text_dict in text_dicts]
         return "\n".join(texts) + "\n"  # Reasonable people demand trailing newlines.
 
@@ -126,7 +128,7 @@ class CampaignPlanImporter(ProjectExcelImporter):
     def build_overview_target_segments(self):
         _, _, row = self.locate_overview_header_cell("target segments")
         rows = rows_until_empty(self.workbook, start_row=row + 1, location="Overview!A")
-        return self.row_table(self.OVERVIEW_TARGET_SEGMENT_SCHEMA, rows=rows)
+        return self.schema_list(self.OVERVIEW_TARGET_SEGMENT_SCHEMA, locations=rows)
 
     def build_overview_objective(self, category):
         # This will find the first occurence of the header, which given
@@ -154,7 +156,7 @@ class CampaignPlanImporter(ProjectExcelImporter):
         rows = rows_until_empty(
             self.workbook, start_row=row, location="Overview!A", next_fn=prev_row
         )
-        items = self.row_table(self.OVERVIEW_TARGET_INVESMENT_SCHEMA, rows=rows)
+        items = self.schema_list(self.OVERVIEW_TARGET_INVESMENT_SCHEMA, locations=rows)
         # Convert dictionaries with the category key *inside* them
         # into nested dictionaries where the category key is *outside*.
         # aka {"category": "Reputation Building", "total": "100"} -->

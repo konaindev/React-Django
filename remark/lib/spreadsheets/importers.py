@@ -2,8 +2,8 @@ import openpyxl
 
 from .errors import ExcelError, ExcelValidationError
 from .getset import get_cell
-from .rowcol import col_range, row_range
-from .parse import parse_location_or_default
+from .rowcol import col_range, row_range, location_range
+from .parse import parse_location, parse_location_or_default
 from .schema import DataType, is_schema_cell
 
 
@@ -172,31 +172,49 @@ class ExcelImporter:
 
         return self.walk_schema(schema, _visitor)
 
-    def row_table(
-        self, schema, rows=None, start_row=None, end_row=None, location=None, sheet=None
+    def schema_list(
+        self,
+        schema,
+        locations=None,
+        start=None,
+        end=None,
+        location=None,
+        sheet=None,
+        col=None,
+        row=None,
     ):
         """
-        Return an array of row dictionaries based on the schema.
+        Repeatedly call schema() with a varying location value each time.
+        Return a list of the results.
 
-        Rows can either be provided as an iterable (via `rows`) or with
-        explicit values, via `start_row` and `end_row`.
-        """
-        sheet, _, _ = parse_location_or_default(location, sheet, None, None)
-        rows = rows or row_range(start_row, end_row)
-        return [self.schema(schema, sheet=sheet, row=row) for row in rows]
+        There are *lots* of ways to specify the varying locations; this
+        makes it easy to use this API, at the cost of making the actual
+        calling structure look pretty wacky:
 
-    def col_table(
-        self, schema, cols=None, start_col=None, end_col=None, location=None, sheet=None
-    ):
-        """
-        Return an array of column dictionaries based on the schema.
+        If `start` and `end` are provided, they are used to form a location
+        range; this is a very flexible concept, allowing for row ranges,
+        column ranges, *or* rectangular ranges.
 
-        Columns can either be provided as an iterable (via `cols`) or with
-        explicit values, via `start_col` and `end_col`.
+        If `locations` is provided, it should generate a set of rows, columns,
+        or both. It can yield full tuples of the form (sheet, col, row) or
+        it can return row numbers or column names, or some portion thereof;
+        we handle all cases, to allow for maximum flexibility.
         """
-        sheet, _, _ = parse_location_or_default(location, sheet, None, None)
-        cols = cols or col_range(start_col, end_col)
-        return [self.schema(schema, sheet=sheet, col=col) for col in cols]
+        sheet, col, row = parse_location_or_default(location, sheet, None, None)
+        locations = locations or location_range(start, end)
+
+        def _schema(location):
+            # We're being *super* flexible in what we accept for the
+            # locations, start, and end parameters; here's the cost:
+            if isinstance(location, tuple):
+                sheet_, col_, row_ = location
+            else:
+                sheet_, col_, row_ = parse_location(location)
+            return self.schema(
+                schema, sheet=sheet_ or sheet, col=col_ or col, row=row_ or row
+            )
+
+        return [_schema(location) for location in locations]
 
     def row_array(
         self,
