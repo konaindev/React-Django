@@ -85,8 +85,8 @@ class MarketImporter(ProjectExcelImporter):
             "center": {
                 "type": "Point",
                 "coordinates": [
-                    self.get_float("coordinates", "B"),
                     self.get_float("coordinates", "C"),
+                    self.get_float("coordinates", "B"),
                 ],
             },
             "radius": self.get_float("tam type", "C"),
