@@ -151,7 +151,7 @@ class Address(models.Model):
 
 
 class ZipcodePolygonManager(models.Manager):
-    def fetch_zip_polygons(self, zip_code):
+    def look_up_polygon(self, zip_code):
         try:
             row = self.get(zip_code=zip_code)
             return dict(

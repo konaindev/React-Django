@@ -17,14 +17,11 @@ class MarketActivator(JSONFieldActivator):
         population_zip_codes = self.data["estimated_population"].get("zip_codes", [])
         for population_zip_code in population_zip_codes:
             zip = population_zip_code["zip"]
-            zipcode_data = ZipcodePolygon.objects.fetch_zip_polygons(zip)
+            polygon_data = ZipcodePolygon.objects.look_up_polygon(zip)
 
-            if zipcode_data is None:
-                population_zip_code["properties"] = None
-                population_zip_code["outline"] = None
-            else:
-                population_zip_code["properties"] = zipcode_data["properties"]
-                population_zip_code["outline"] = zipcode_data["geometry"]
+            if polygon_data is not None:
+                population_zip_code["properties"] = polygon_data["properties"]
+                population_zip_code["outline"] = polygon_data["geometry"]
 
     def activate(self):
         self.activate_outlines()
