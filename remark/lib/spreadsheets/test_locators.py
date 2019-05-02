@@ -1,5 +1,8 @@
 from django.test import TestCase
 
+from remark.lib.match import matchp
+
+from .errors import ExcelLocationError
 from .locators import loc, find_col, find_row
 
 
@@ -34,6 +37,11 @@ class LocTestCase(TestCase):
         location = locator({}, "test", "A", 42)
         self.assertEqual(location, ("test", "A", 42))
 
+    def test_incomplete(self):
+        locator = loc(42)
+        with self.assertRaises(ExcelLocationError):
+            _ = locator({}, "test", None, None)
+
 
 class FindColTestCase(TestCase):
     def test_correct_col(self):
@@ -52,6 +60,21 @@ class FindColTestCase(TestCase):
         location = locator(workbook, "test", None, 42)
         self.assertEqual(location, ("test", "C", 42))
 
+    def test_cant_find_col(self):
+        locator = find_col(
+            1, predicate=matchp(exact="GOOD"), start_col="A", end_col="D"
+        )
+        workbook = {
+            "test": {
+                "A1": TestCell("bad"),
+                "B1": TestCell("wild"),
+                "C1": TestCell("funky"),
+                "D1": TestCell("cool"),
+            }
+        }
+        with self.assertRaises(ExcelLocationError):
+            _ = locator(workbook, "test", None, 42)
+
 
 class FindRowTestCase(TestCase):
     def test_correct_row(self):
@@ -68,3 +91,16 @@ class FindRowTestCase(TestCase):
         location = locator(workbook, "test", "ZZTOP", None)
         self.assertEqual(location, ("test", "ZZTOP", 3))
 
+    def test_cant_find_row(self):
+        # Find the row in the header column whose cell contains the value "GOOD"
+        locator = find_row("A", predicate=matchp(exact="GOOD"), start_row=1, end_row=4)
+        workbook = {
+            "test": {
+                "A1": TestCell("bad"),
+                "A2": TestCell("wild"),
+                "A3": TestCell("funky"),
+                "A4": TestCell("cool"),
+            }
+        }
+        with self.assertRaises(ExcelLocationError):
+            _ = locator(workbook, "test", "ZZTOP", None)

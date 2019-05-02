@@ -1,11 +1,16 @@
 """
 A library for reading data from, and writing data to, excel spreadsheets.
 """
-from .errors import ExcelError, ExcelValidationError, ExcelProgrammingError
+from .errors import (
+    ExcelError,
+    ExcelLocationError,
+    ExcelProgrammingError,
+    ExcelValidationError,
+)
 from .getset import get_cell, set_cell
 from .importers import ExcelImporter
-from .locators import BaseLocator, loc, find_col, find_row, require_complete
-from .parse import parse_location, unparse_location
+from .locators import BaseLocator, loc, find_col, find_row
+from .parse import parse_location_or_default, parse_location, unparse_location
 from .rowcol import (
     advance_col,
     advance_row,
@@ -16,6 +21,8 @@ from .rowcol import (
     cols_while_empty,
     cols_while,
     index_for_col,
+    location_range_rect,
+    location_range,
     next_col,
     next_row,
     prev_col,
@@ -33,6 +40,10 @@ from .schema import (
     DateCell,
     DateTimeCell,
     DecimalCell,
+    DefaultCurrencyCell,
+    DefaultDecimalCell,
+    DefaultFloatCell,
+    DefaultIntCell,
     FloatCell,
     IntCell,
     NullChoiceCell,
@@ -59,8 +70,13 @@ __all__ = (
     DateCell,
     DateTimeCell,
     DecimalCell,
+    DefaultCurrencyCell,
+    DefaultDecimalCell,
+    DefaultFloatCell,
+    DefaultIntCell,
     ExcelError,
     ExcelImporter,
+    ExcelLocationError,
     ExcelProgrammingError,
     ExcelValidationError,
     find_col,
@@ -68,6 +84,8 @@ __all__ = (
     FloatCell,
     get_cell,
     index_for_col,
+    location_range_rect,
+    location_range,
     IntCell,
     loc,
     next_col,
@@ -75,10 +93,10 @@ __all__ = (
     NullChoiceCell,
     NullStrCell,
     NullStrDateCell,
+    parse_location_or_default,
     parse_location,
     prev_col,
     prev_row,
-    require_complete,
     row_range,
     rows_until_empty,
     rows_until,
