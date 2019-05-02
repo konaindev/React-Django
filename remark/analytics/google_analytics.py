@@ -2,6 +2,7 @@ from googleapiclient.discovery import build
 from google.oauth2 import service_account
 import json
 import os
+from remark.settings import GOOGLE_APPLICATION_CREDENTIALS
 
 
 SCOPES = ["https://www.googleapis.com/auth/analytics.readonly"]
@@ -21,7 +22,7 @@ def initialize_analytics_reporting():
     Returns:
     An authorized Analytics Reporting API V4 service object.
     """
-    service_account_info = json.loads(os.environ.get("GOOGLE_APPLICATION_CREDENTIALS"))
+    service_account_info = json.loads(GOOGLE_APPLICATION_CREDENTIALS)
     credentials = service_account.Credentials.from_service_account_info(service_account_info)
 
     # Build the service object.

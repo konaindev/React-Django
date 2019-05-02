@@ -4,7 +4,7 @@ from django.utils.safestring import mark_safe
 
 from remark.lib.validators import (
     validate_linebreak_separated_numbers_list,
-    validate_linebreak_separated_strings_list
+    validate_linebreak_separated_strings_list,
 )
 from .models import Project, Spreadsheet
 from .reports.selectors import ReportLinks
@@ -52,9 +52,25 @@ class SpreadsheetForm(forms.ModelForm):
 
 
 class ProjectForm(forms.ModelForm):
+    NO_CHOICES = [("", "--(no selected model)--")]
+
+    selected_model_name = forms.ChoiceField(
+        choices=NO_CHOICES,
+        required=False,
+        widget=forms.Select(
+            attrs={
+                "onChange": "window.enable_submit_warning('Are you sure you want to save? All target values will be replaced by those in the newly selected model.');"
+            }
+        ),
+    )
+
     def __init__(self, *args, **kwargs):
-        is_existing_instance = kwargs.get("instance") is not None
+        self.is_existing_instance = kwargs.get("instance") is not None
         super(ProjectForm, self).__init__(*args, **kwargs)
+        self._map_public_fields()
+        self._update_selected_model_choices()
+
+    def _map_public_fields(self):
         field_maps = {
             "is_baseline_report_public": "baseline",
             "is_tam_public": "market",
@@ -63,7 +79,7 @@ class ProjectForm(forms.ModelForm):
             "is_campaign_plan_public": "campaign_plan",
         }
 
-        if is_existing_instance:
+        if self.is_existing_instance:
             report_links = ReportLinks.for_project(self.instance)
             for k, v in field_maps.items():
                 if isinstance(report_links[v], dict):
@@ -78,6 +94,18 @@ class ProjectForm(forms.ModelForm):
                         link, link
                     )
                 )
+
+    def _update_selected_model_choices(self):
+        modeling_report = self.instance.tmp_modeling_report_json or {}
+        modeling_options = modeling_report.get("options", [])
+        model_names = [
+            (modeling_option["name"], modeling_option["name"])
+            for modeling_option in modeling_options
+        ]
+        if not model_names:
+            self.fields["selected_model_name"].disabled = True
+        model_names = self.NO_CHOICES + model_names
+        self.fields["selected_model_name"].choices = model_names
 
     class Meta:
         model = Project
@@ -94,16 +122,14 @@ def multiline_text_to_int_array(text):
 
 class TAMExportForm(forms.Form):
     radius = forms.FloatField(
-        label="Radius",
-        help_text="Radius (in miles)",
-        required=False,
+        label="Radius", help_text="Radius (in miles)", required=False
     )
     zip_codes = forms.CharField(
         widget=forms.Textarea,
         label="Zip codes",
         help_text="List of Zip Codes",
         required=False,
-        validators=[validate_linebreak_separated_strings_list,],
+        validators=[validate_linebreak_separated_strings_list],
     )
     rti_target = forms.FloatField(
         label="RTI Target",
@@ -115,25 +141,31 @@ class TAMExportForm(forms.Form):
         widget=forms.Textarea,
         label="RTI Income Groups",
         help_text="A list of integers representing annual salaries (e.g. $30000, $40000, $50000, $60000)",
-        validators=[validate_linebreak_separated_numbers_list,],
+        validators=[validate_linebreak_separated_numbers_list],
     )
     rti_rental_rates = forms.CharField(
         widget=forms.Textarea,
         label="RTI Rent Groups",
         help_text="A list of integers representing monthly rents (e.g. $500, $800, $1000, $1200)",
-        validators=[validate_linebreak_separated_numbers_list,],
+        validators=[validate_linebreak_separated_numbers_list],
     )
     income_groups = forms.CharField(
         widget=forms.Textarea,
         label="Income Segments",
         help_text="A list of integers representing annual salaries that is used differently than above (e.g. $30000, $40000, $50000)",
-        validators=[validate_linebreak_separated_numbers_list,],
+        validators=[validate_linebreak_separated_numbers_list],
     )
 
     def clean(self):
-        if not self.data["radius"] and not self.data["zip_codes"] or \
-            self.data["radius"] and self.data["zip_codes"]:
-            raise forms.ValidationError("You should enter either one of Radius or Zip Codes", code='invalid')
+        if (
+            not self.data["radius"]
+            and not self.data["zip_codes"]
+            or self.data["radius"]
+            and self.data["zip_codes"]
+        ):
+            raise forms.ValidationError(
+                "You should enter either one of Radius or Zip Codes", code="invalid"
+            )
 
     def clean_zip_codes(self):
         return multiline_text_to_str_array(self.cleaned_data["zip_codes"])

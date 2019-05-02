@@ -2,9 +2,11 @@ from remark.lib.spreadsheets import (
     CurrencyCell,
     DateCell,
     require_complete,
+    find_col,
     find_row,
     FloatCell,
     IntCell,
+    row_range,
     StrCell,
 )
 
@@ -15,11 +17,15 @@ def find(predicate):
     return require_complete(find_row("OUTPUT!A", predicate, target="B"))
 
 
+def model(predicate):
+    return require_complete(find_col("MODEL!2", predicate))
+
+
 class ModelingImporter(ProjectExcelImporter):
     expected_type = "model"
     expected_version = 1
 
-    SCHEMA = {
+    OUTPUT_SCHEMA = {
         "name": StrCell(find("model name")),
         "dates.start": DateCell(find("start date")),
         "dates.end": DateCell(find("end date")),
@@ -103,7 +109,71 @@ class ModelingImporter(ProjectExcelImporter):
         ),
     }
 
+    MODEL_SCHEMA = {
+        "start": DateCell(model("week start")),
+        "target_leased_rate": FloatCell(model("lease up %")),
+        "target_lease_applications": IntCell(model("apps")),
+        "target_leases_executed": IntCell(model("exe")),
+        "target_lease_renewal_notices": IntCell(model("notice to renew")),
+        "target_lease_renewals": IntCell(model("renewals")),
+        "target_lease_vacation_notices": IntCell(model("notice to vacate")),
+        "target_lease_cds": IntCell(model("c/d")),
+        "target_delta_leases": IntCell(model("weekly delta leased units")),
+        "target_move_ins": IntCell(model("move ins")),
+        "target_move_outs": IntCell(model("move outs")),
+        "target_occupied_units": IntCell(model("occupied units")),
+        "target_acq_expenses.demand_creation": CurrencyCell(model("aqc demand")),
+        "target_acq_expenses.leasing_enablement": CurrencyCell(model("aqc leasing")),
+        "target_acq_expenses.market_intelligence": CurrencyCell(model("aqc market")),
+        "target_acq_expenses.reputation_building": CurrencyCell(
+            model("aqc reputation")
+        ),
+        "target_ret_expenses.demand_creation": CurrencyCell(model("ret demand")),
+        "target_ret_expenses.leasing_enablement": CurrencyCell(model("ret leasing")),
+        "target_ret_expenses.market_intelligence": CurrencyCell(model("ret market")),
+        "target_ret_expenses.reputation_building": CurrencyCell(
+            model("ret reputation")
+        ),
+        "target_usvs": IntCell(model("usvs")),
+        "target_inquiries": IntCell(model("inqs")),
+        "target_tours": IntCell(model("tou")),
+    }
+
+    def clean_output_data(self):
+        return self.col(self.OUTPUT_SCHEMA)
+
+    def clean_model_targets(self):
+        baseline_weeks = self.schema_value(
+            IntCell(find_row("META!A", "baseline weeks", target="B"))
+        )
+        start_row = 4
+
+        # row_range(...) is inclusive, and we want to get one extra row
+        # so we can determine the correct end date for each intermediate row.
+        end_row = start_row + baseline_weeks
+        raw_targets = self.row_table(
+            schema=self.MODEL_SCHEMA, rows=row_range(start_row, end_row)
+        )
+
+        # Fix up the end dates for each of the targets
+        for raw_target, next_raw_target in zip(raw_targets[:-1], raw_targets[1:]):
+            raw_target["end"] = next_raw_target["start"]
+
+        # Fix up the total investment targets
+        for raw_target in raw_targets:
+            for category in ["acq", "ret"]:
+                raw_target[f"target_{category}_investment"] = (
+                    raw_target[f"target_{category}_expenses"]["demand_creation"]
+                    + raw_target[f"target_{category}_expenses"]["leasing_enablement"]
+                    + raw_target[f"target_{category}_expenses"]["market_intelligence"]
+                    + raw_target[f"target_{category}_expenses"]["reputation_building"]
+                )
+
+        # Drop the extraneous period.
+        return raw_targets[:-1]
+
     def clean(self):
         super().clean()
 
-        self.cleaned_data = self.col(self.SCHEMA)
+        self.cleaned_data = self.clean_output_data()
+        self.cleaned_data["targets"] = self.clean_model_targets()

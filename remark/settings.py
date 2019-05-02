@@ -24,6 +24,12 @@ def _safe_int(x):
         i = None
     return i
 
+def required_env(name):
+    result = os.getenv(name)
+    if result is None:
+        raise Exception(f"Required Environmental Variable is missing: {name}")
+    return result
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -223,7 +229,8 @@ CACHES = {
 # API Keys
 #
 
-GOOGLE_GEOCODE_API_KEY = os.getenv("GOOGLE_GEOCODE_API_KEY", None)
+GOOGLE_GEOCODE_API_KEY = required_env("GOOGLE_GEOCODE_API_KEY")
+GOOGLE_APPLICATION_CREDENTIALS = required_env("GOOGLE_APPLICATION_CREDENTIALS")
 
 #
 # Analytics (hey, we might want these down the road).

@@ -15,7 +15,10 @@ class UpdateSpreadsheetAdminMixin:
         """Add current user and imported data, if available and not yet present."""
         if not obj.id:
             obj.uploaded_by = obj.uploaded_by or request.user
-            obj.imported_data = obj.imported_data or form.cleaned_data["imported_data"]
+            obj.imported_data = (
+                getattr(obj, "imported_data", None)
+                or form.cleaned_data["imported_data"]
+            )
 
 
 @admin.register(Spreadsheet, site=admin_site)
@@ -177,7 +180,7 @@ class TAMExportMixin:
         urls = super().get_urls()
         my_urls = [
             path(
-                '<pk>/tam-export/',
+                "<pk>/tam-export/",
                 self.admin_site.admin_view(TAMExportView.as_view()),
                 name="tam_export",
             )
@@ -201,6 +204,7 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
         "number_of_periods",
         "baseline_start",
         "baseline_end",
+        "selected_model_name",
         "average_tenant_age",
         "highest_monthly_rent",
         "average_monthly_rent",
@@ -213,9 +217,13 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
         return obj.periods.all().count()
 
     def save_formset(self, request, form, formset, change):
-        # Force
+        # Force spreadsheet updating
         if formset.model == Spreadsheet:
             for formset_form in formset:
                 obj = formset_form.instance
                 self.update_spreadsheet(request, obj, formset_form)
         super().save_formset(request, form, formset, change=change)
+
+    class Media:
+        js = ("js/project_admin.js",)
+

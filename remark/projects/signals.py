@@ -8,3 +8,4 @@ from .models import Spreadsheet
 def activate_spreadsheets_if_safe(sender, instance, created, raw, **kwargs):
     if not raw:
         instance.activate()
+
