@@ -177,7 +177,7 @@ class CampaignPlanImporter(ProjectExcelImporter):
 
     def build_overview(self):
         def overview_str(predicate):
-            return self.value(StrCell(find_overview(predicate)))
+            return self.schema(StrCell(find_overview(predicate)))
 
         return {
             "theme": overview_str("theme"),

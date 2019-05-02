@@ -73,10 +73,10 @@ class BaselinePerfImporter(ProjectExcelImporter):
     def clean(self):
         super().clean()
         self.check_meta()
-        start_row = self.value(self.START_ROW)
-        end_row = self.value(self.END_ROW)
-        self.cleaned_data["baseline_start"] = self.value(self.BASELINE_START)
-        self.cleaned_data["baseline_end"] = self.value(self.BASELINE_END)
+        start_row = self.schema(self.START_ROW)
+        end_row = self.schema(self.END_ROW)
+        self.cleaned_data["baseline_start"] = self.schema(self.BASELINE_START)
+        self.cleaned_data["baseline_end"] = self.schema(self.BASELINE_END)
         self.cleaned_data["periods"] = self.schema_list(
             schema=self.PERIOD_SCHEMA, start=start_row, end=end_row
         )

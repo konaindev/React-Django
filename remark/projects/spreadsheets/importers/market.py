@@ -87,7 +87,7 @@ class MarketImporter(ProjectExcelImporter):
     }
 
     def get_location(self):
-        return self.value(StrCell(find("city, state")))
+        return self.schema(StrCell(find("city, state")))
 
     def get_estimated_population_radius(self):
         return self.schema(self.POPULATION_RADIUS_SCHEMA)
@@ -101,14 +101,14 @@ class MarketImporter(ProjectExcelImporter):
         return {"zip_codes": zip_codes}
 
     def get_estimated_population(self):
-        tam_type = self.value(
+        tam_type = self.schema(
             ChoiceCell(find("tam type"), choices=["radius", "zipcodes"])
         )
         if tam_type == "radius":
             result = self.get_estimated_population_radius()
         else:
             result = self.get_estimated_population_zip()
-        result["population"] = self.value(IntCell(find("est. population")))
+        result["population"] = self.schema(IntCell(find("est. population")))
         return result
 
     def get_rent_to_income_category(self, category):
@@ -124,14 +124,14 @@ class MarketImporter(ProjectExcelImporter):
     def get_rent_to_income_incomes(self):
         _, _, row = find("rent | incomes")(self.workbook)
         cols = cols_until_empty(self.workbook, "B", test_sheet="Output", test_row=row)
-        return self.value_list(
+        return self.schema_list(
             CurrencyCell(loc(sheet="Output", row=row)), locations=cols
         )
 
     def get_rent_to_income_rental_rates(self):
         _, _, row = find("rent | incomes")(self.workbook)
         rows = rows_until_empty(self.workbook, next_row(row), test_location="Output!A")
-        return self.value_list(CurrencyCell(loc("Output!A")), locations=rows)
+        return self.schema_list(CurrencyCell(loc("Output!A")), locations=rows)
 
     def get_rent_to_income_data(self, income_count, rental_rate_count):
         _, _, row = find("rent | incomes")(self.workbook)
@@ -194,7 +194,7 @@ class MarketImporter(ProjectExcelImporter):
         segment["income_groups"] = self.schema_list(
             schema, locations=cols, sheet="Output"
         )
-        segment["segment_population"] = self.value(
+        segment["segment_population"] = self.schema(
             IntCell(loc(sheet="Output", row=next_row(row), col=next_col(cols[-1])))
         )
 
@@ -208,7 +208,7 @@ class MarketImporter(ProjectExcelImporter):
         return segments
 
     def get_future_year(self):
-        return self.value(IntCell(find("future year")))
+        return self.schema(IntCell(find("future year")))
 
     def get_total(self):
         return self.schema(self.TOTAL_SCHEMA)

@@ -208,33 +208,6 @@ class ExcelImporter:
 
         return [_schema(location) for location in locations]
 
-    def value_list(
-        self,
-        schema_cell,
-        locations=None,
-        start=None,
-        end=None,
-        location=None,
-        sheet=None,
-        col=None,
-        row=None,
-    ):
-        """
-        Return a one-dimensional list of values based on a single schema_cell,
-        across an arbitrary set of locations.
-        """
-        # Determine the default values, if any
-        sheet, col, row = parse_location_or_default(location, sheet, col, row)
-
-        # Construct the varying locations
-        locations = locations or location_range(start, end)
-
-        def _value(location):
-            sheet_, col_, row_ = parse_location_or_default(location)
-            return self.value(schema_cell, sheet=sheet_, col=col_, row=row_)
-
-        return [_value(location) for location in locations]
-
     def table_array(
         self,
         schema_cell,
