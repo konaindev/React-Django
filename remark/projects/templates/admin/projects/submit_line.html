@@ -2,7 +2,7 @@
 {% load i18n admin_urls %}
 
 {% block submit-row %}
-{% if opts.model_name == 'project' %}
+{% if opts.model_name == 'project' and original.pk %}
 <a href="{% url 'admin:tam_export' original.pk %}">{% trans "Export Total Market Analysis" %}</a>
 {% endif %}
 {# below are from default django implementation. #}
