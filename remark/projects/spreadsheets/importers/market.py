@@ -43,11 +43,11 @@ class MarketImporter(ProjectExcelImporter):
     ]
 
     SEGMENT_OVERVIEW_SCHEMA = {
-        "age_group": StrCell(loc("A")),
-        "market_size": IntCell(loc("B")),
-        "usv": IntCell(loc("C")),
-        "growth": FloatCell(loc("D")),
-        "future_size": IntCell(loc("E")),
+        "age_group": StrCell(loc("Output!A")),
+        "market_size": IntCell(loc("Output!B")),
+        "usv": IntCell(loc("Output!C")),
+        "growth": FloatCell(loc("Output!D")),
+        "future_size": IntCell(loc("Output!E")),
     }
 
     # Who loves functional programming? I do I do!
@@ -95,7 +95,7 @@ class MarketImporter(ProjectExcelImporter):
 
     def get_estimated_population_zip(self):
         _, _, row = find_output("tam type")(self.workbook)
-        cols = cols_until_empty(self.workbook, "C", sheet="Output", row=row)
+        cols = cols_until_empty(self.workbook, "C", test_sheet="Output", test_row=row)
         zip_codes = self.schema_list(
             schema={"zip": StrCell(loc(sheet="Output", row=row)), "outline": None},
             locations=cols,
@@ -131,13 +131,15 @@ class MarketImporter(ProjectExcelImporter):
 
     def get_rent_to_income_incomes(self):
         _, _, row = find_output("rent | incomes")(self.workbook)
-        cols = cols_until_empty(self.workbook, "B", sheet="Output", row=row)
-        return self.col_array(CurrencyCell(loc(sheet="Output", row=row)), cols=cols)
+        cols = cols_until_empty(self.workbook, "B", test_sheet="Output", test_row=row)
+        return self.value_list(
+            CurrencyCell(loc(sheet="Output", row=row)), locations=cols
+        )
 
     def get_rent_to_income_rental_rates(self):
         _, _, row = find_output("rent | incomes")(self.workbook)
-        rows = rows_until_empty(self.workbook, next_row(row), location="Output!A")
-        return self.row_array(CurrencyCell(loc("Output!A")), rows=rows)
+        rows = rows_until_empty(self.workbook, next_row(row), test_location="Output!A")
+        return self.value_list(CurrencyCell(loc("Output!A")), locations=rows)
 
     def get_rent_to_income_data(self, income_count, rental_rate_count):
         _, _, row = find_output("rent | incomes")(self.workbook)
@@ -168,7 +170,13 @@ class MarketImporter(ProjectExcelImporter):
     def update_segment_details(self, segment):
         _, _, row = find_output(f"age segment: {segment['age_group']}")(self.workbook)
         cols = list(
-            cols_until(self.workbook, matchp(exact="All"), "B", sheet="Output", row=row)
+            cols_until(
+                self.workbook,
+                matchp(exact="All"),
+                "B",
+                test_sheet="Output",
+                test_row=row,
+            )
         )
 
         def _find(predicate):
@@ -200,11 +208,9 @@ class MarketImporter(ProjectExcelImporter):
 
     def get_segments(self):
         _, _, row = find_output("target segment")(self.workbook)
-        rows = rows_until_empty(self.workbook, next_row(row), location="Output!A")
+        rows = rows_until_empty(self.workbook, next_row(row), test_location="Output!A")
         # Grab the overviews for each segment
-        segments = self.schema_list(
-            self.SEGMENT_OVERVIEW_SCHEMA, locations=rows, sheet="Output"
-        )
+        segments = self.schema_list(self.SEGMENT_OVERVIEW_SCHEMA, locations=rows)
         for segment in segments:
             self.update_segment_details(segment)
         return segments
@@ -236,3 +242,4 @@ class MarketImporter(ProjectExcelImporter):
         self.cleaned_data["future_year"] = self.get_future_year()
         self.cleaned_data["total"] = self.get_total()
         self.cleaned_data["average"] = self.get_average()
+

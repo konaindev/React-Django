@@ -83,32 +83,59 @@ def location_range(
     start_row=None,
     end_col=None,
     end_row=None,
+    row_major=True,
 ):
-    """Return an iterable of rows *or* columns *or both*. Who cares; we can do it all!"""
+    """
+    Return an iterable of (sheet, col, row) locations.
+
+    The sequence can be along a single axis (a row or a column) or it
+    can be through a rectangular range; in that case, it is row-major by default.
+    """
     start_sheet, start_col, start_row = parse_location_or_default(
         start, sheet, start_col, start_row
     )
     end_sheet, end_col, end_row = parse_location_or_default(
         end, sheet, end_col, end_row
     )
+
+    # Sanity check: you've got to stay in a single sheet
     if start_sheet != end_sheet:
         raise ExcelProgrammingError("Location ranges must reside on a single sheet!")
+
+    # Sanity check: you've got to start somewhere.
+    if start_col is None and start_row is None:
+        raise ExcelProgrammingError("Location ranges must start and end somewhere!")
+
     sheet = start_sheet
+
+    # Row-only iteration
     if start_col == end_col:
-        # This is row-only.
         col = start_col
-        for row in row_range(start_row, end_row):
-            yield (sheet, col, row)
+        result = ((sheet, col, row) for row in row_range(start_row, end_row))
+
+    # Column-only iteration
     elif start_row == end_row:
         # This is col-only
         row = start_row
-        for col in col_range(start_col, end_col):
-            yield (sheet, col, row)
+        result = ((sheet, col, row) for col in col_range(start_col, end_col))
+
+    # Rectangular, row-major
+    elif row_major:
+        result = (
+            (sheet, col, row)
+            for row in row_range(start_row, end_row)
+            for col in col_range(start_col, end_col)
+        )
+
+    # Rectangular, column-major
     else:
-        # two dimensional!
-        for row in row_range(start_row, end_row):
-            for col in col_range(start_col, end_col):
-                yield (sheet, col, row)
+        result = (
+            (sheet, col, row)
+            for col in col_range(start_col, end_col)
+            for row in row_range(start_row, end_row)
+        )
+
+    return result
 
 
 def _is_empty(value):
@@ -120,26 +147,32 @@ def rows_until(
     workbook,
     predicate,
     start_row,
-    location=None,
-    sheet=None,
-    col=None,
+    test_location=None,
+    test_sheet=None,
+    test_col=None,
     next_fn=next_row,
 ):
     """
-    Return an iterable of row numbers, starting with start_row, and ending
-    as soon as a `predicate` about some column in the current row is True.
+    Return an iterable of row numbers, starting with start_row, and ending as 
+    soon as a `predicate` about some column in the current row is True.
 
     This is particularly useful both when calling the various Importer.*_table(...)
     methods and when parameterizing the more complex locators.
     """
-    sheet, col, _ = parse_location_or_default(location, sheet, col, None)
-    if col is None:
+    test_sheet, test_col, _ = parse_location_or_default(
+        test_location, test_sheet, test_col, None
+    )
+    if test_sheet is None:
         raise ExcelProgrammingError(
-            "Location provided to rows_until() must contain a column!"
+            "test location provided to rows_until() must contain a sheet!"
+        )
+    if test_col is None:
+        raise ExcelProgrammingError(
+            "test location provided to rows_until() must contain a column!"
         )
 
     def p(row):
-        return predicate(get_cell(workbook, sheet, col, row).value)
+        return predicate(get_cell(workbook, test_sheet, test_col, row).value)
 
     row = start_row
     done = p(row)
@@ -153,45 +186,65 @@ def rows_while(
     workbook,
     predicate,
     start_row,
-    location=None,
-    sheet=None,
-    col=None,
+    test_location=None,
+    test_sheet=None,
+    test_col=None,
     next_fn=next_row,
 ):
     """
-    Return an iterable of row numbers, starting with start_row, and ending
+    Return an iterable row numbers, starting with start_row, and ending
     as soon as a `predicate` about some column in the current row is False.
 
     This is the inverse of rows_until. We simply invert the `predicate`.
     """
     return rows_until(
-        workbook, lambda v: not predicate(v), start_row, location, sheet, col, next_fn
+        workbook,
+        lambda v: not predicate(v),
+        start_row,
+        test_location,
+        test_sheet,
+        test_col,
+        next_fn,
     )
 
 
 def rows_until_empty(
-    workbook, start_row, location=None, sheet=None, col=None, next_fn=next_row
+    workbook,
+    start_row,
+    test_location=None,
+    test_sheet=None,
+    test_col=None,
+    next_fn=next_row,
 ):
     """
     Return an iterable of row numbers, starting with start_row, and ending
     as soon as the provided column is empty on the current row.
     """
-    return rows_until(workbook, _is_empty, start_row, location, sheet, col, next_fn)
+    return rows_until(
+        workbook, _is_empty, start_row, test_location, test_sheet, test_col, next_fn
+    )
 
 
 def rows_while_empty(
-    workbook, start_row, location=None, sheet=None, col=None, next_fn=next_row
+    workbook,
+    start_row,
+    test_location=None,
+    test_sheet=None,
+    test_col=None,
+    next_fn=next_row,
 ):
-    return rows_while(workbook, _is_empty, start_row, location, sheet, col, next_fn)
+    return rows_while(
+        workbook, _is_empty, start_row, test_location, test_sheet, test_col, next_fn
+    )
 
 
 def cols_until(
     workbook,
     predicate,
     start_col,
-    location=None,
-    sheet=None,
-    row=None,
+    test_location=None,
+    test_sheet=None,
+    test_row=None,
     next_fn=next_col,
 ):
     """
@@ -201,14 +254,20 @@ def cols_until(
     This is particularly useful both when calling the various Importer.*_table(...)
     methods and when parameterizing the more complex locators.
     """
-    sheet, _, row = parse_location_or_default(location, sheet, None, row)
-    if row is None:
+    test_sheet, _, test_row = parse_location_or_default(
+        test_location, test_sheet, None, test_row
+    )
+    if test_sheet is None:
         raise ExcelProgrammingError(
-            "Location provided to cols_until() must contain a row!"
+            "test location provided to cols_until() must contain a sheet!"
+        )
+    if test_row is None:
+        raise ExcelProgrammingError(
+            "test location provided to cols_until() must contain a row!"
         )
 
     def p(col):
-        return predicate(get_cell(workbook, sheet, col, row).value)
+        return predicate(get_cell(workbook, test_sheet, col, test_row).value)
 
     col = start_col
     done = p(col)
@@ -222,34 +281,54 @@ def cols_while(
     workbook,
     predicate,
     start_col,
-    location=None,
-    sheet=None,
-    row=None,
+    test_location=None,
+    test_sheet=None,
+    test_row=None,
     next_fn=next_col,
 ):
     """
-    Return an iterable of column names, starting with start_col, and ending
+    Return an iterable column names, starting with start_col, and ending
     as soon as a `predicate` about some row in the current column is False.
 
     This is the inverse of cols_until. We simply invert the `predicate`.
     """
     return cols_until(
-        workbook, lambda v: not predicate(v), start_col, location, sheet, row, next_col
+        workbook,
+        lambda v: not predicate(v),
+        start_col,
+        test_location,
+        test_sheet,
+        test_row,
+        next_col,
     )
 
 
 def cols_until_empty(
-    workbook, start_col, location=None, sheet=None, row=None, next_fn=next_col
+    workbook,
+    start_col,
+    test_location=None,
+    test_sheet=None,
+    test_row=None,
+    next_fn=next_col,
 ):
     """
-    Return an iterable of row numbers, starting with start_row, and ending
+    Return an iterable of (sheet, col, row) locations, starting with start_col, and ending
     as soon as the provided column is empty on the current row.
     """
-    return cols_until(workbook, _is_empty, start_col, location, sheet, row, next_fn)
+    return cols_until(
+        workbook, _is_empty, start_col, test_location, test_sheet, test_row, next_fn
+    )
 
 
 def cols_while_empty(
-    workbook, start_col, location=None, sheet=None, row=None, next_fn=next_col
+    workbook,
+    start_col,
+    test_location=None,
+    test_sheet=None,
+    test_row=None,
+    next_fn=next_col,
 ):
-    return cols_while(workbook, _is_empty, start_col, location, sheet, row, next_fn)
+    return cols_while(
+        workbook, _is_empty, start_col, test_location, test_sheet, test_row, next_fn
+    )
 

@@ -119,8 +119,8 @@ class RangesTestCase(TestCase):
             list(locations), [(None, None, 1), (None, None, 2), (None, None, 3)]
         )
 
-    def test_location_range_rectangular(self):
-        locations = location_range("foo!A1", "foo!C2")
+    def test_location_range_rectangular_row_major(self):
+        locations = location_range("foo!A1", "foo!C2", row_major=True)
         self.assertEqual(
             list(locations),
             [
@@ -129,6 +129,20 @@ class RangesTestCase(TestCase):
                 ("foo", "C", 1),
                 ("foo", "A", 2),
                 ("foo", "B", 2),
+                ("foo", "C", 2),
+            ],
+        )
+
+    def test_location_range_rectangular_col_major(self):
+        locations = location_range("foo!A1", "foo!C2", row_major=False)
+        self.assertEqual(
+            list(locations),
+            [
+                ("foo", "A", 1),
+                ("foo", "A", 2),
+                ("foo", "B", 1),
+                ("foo", "B", 2),
+                ("foo", "C", 1),
                 ("foo", "C", 2),
             ],
         )
@@ -249,4 +263,3 @@ class TestColsUntilAndWhile(TestCase):
     def test_cols_while_empty_2(self):
         cols = cols_while_empty(self.workbook, "B", "sheet!3")
         self.assertEqual(list(cols), ["B", "C"])
-

@@ -3,7 +3,7 @@ import openpyxl
 from .errors import ExcelError, ExcelValidationError
 from .getset import get_cell
 from .rowcol import col_range, row_range, location_range
-from .parse import parse_location, parse_location_or_default
+from .parse import parse_location_or_default
 from .schema import DataType, is_schema_cell
 
 
@@ -79,7 +79,7 @@ class ExcelImporter:
         (for example): self.cell(location="output!A3")
         """
         sheet, col, row = parse_location_or_default(location, sheet, col, row)
-        if schema_cell is not None:
+        if (schema_cell is not None) and callable(schema_cell.locator):
             sheet, col, row = schema_cell.locator(self.workbook, sheet, col, row)
         return get_cell(self.workbook, sheet, col, row)
 
@@ -187,72 +187,53 @@ class ExcelImporter:
         Repeatedly call schema() with a varying location value each time.
         Return a list of the results.
 
-        There are *lots* of ways to specify the varying locations; this
-        makes it easy to use this API, at the cost of making the actual
-        calling structure look pretty wacky:
+        There are two ways to specify the varying locations. Either pass
+        in a iterable for `locations` -- this can either be (sheet, col, row) tuples
+        *or* naked row/column numbers, or provide a `start` or `end` which will 
+        be tossed to `location_range(...)` (see rowcol.py for details).
 
-        If `start` and `end` are provided, they are used to form a location
-        range; this is a very flexible concept, allowing for row ranges,
-        column ranges, *or* rectangular ranges.
-
-        If `locations` is provided, it should generate a set of rows, columns,
-        or both. It can yield full tuples of the form (sheet, col, row) or
-        it can return row numbers or column names, or some portion thereof;
-        we handle all cases, to allow for maximum flexibility.
+        In addition, default values for `location` --> (`sheet`, `col`, `row`)
+        can be provided if the locations themselves are not complete.
         """
-        sheet, col, row = parse_location_or_default(location, sheet, None, None)
+        # Determine the default values, if any
+        sheet, col, row = parse_location_or_default(location, sheet, col, row)
+
+        # Construct the varying locations
         locations = locations or location_range(start, end)
 
         def _schema(location):
-            # We're being *super* flexible in what we accept for the
-            # locations, start, and end parameters; here's the cost:
-            if isinstance(location, tuple):
-                sheet_, col_, row_ = location
-            else:
-                sheet_, col_, row_ = parse_location(location)
-            return self.schema(
-                schema, sheet=sheet_ or sheet, col=col_ or col, row=row_ or row
-            )
+            """Call schema on a location, defaulting to default values if needed."""
+            sheet_, col_, row_ = parse_location_or_default(location, sheet, col, row)
+            return self.schema(schema, sheet=sheet_, col=col_, row=row_)
 
         return [_schema(location) for location in locations]
 
-    def row_array(
+    def value_list(
         self,
         schema_cell,
-        rows=None,
-        start_row=None,
-        end_row=None,
+        locations=None,
+        start=None,
+        end=None,
         location=None,
         sheet=None,
+        col=None,
+        row=None,
     ):
         """
-        Return an array of row values based on the schema_cell.
-
-        Rows can either be provided as an iterable (via `rows`) or with
-        explicit values, via `start_row` and `end_row`.
+        Return a one-dimensional list of values based on a single schema_cell,
+        across an arbitrary set of locations.
         """
-        sheet, _, _ = parse_location_or_default(location, sheet, None, None)
-        rows = rows or row_range(start_row, end_row)
-        return [self.value(schema_cell, sheet=sheet, row=row) for row in rows]
+        # Determine the default values, if any
+        sheet, col, row = parse_location_or_default(location, sheet, col, row)
 
-    def col_array(
-        self,
-        schema_cell,
-        cols=None,
-        start_col=None,
-        end_col=None,
-        location=None,
-        sheet=None,
-    ):
-        """
-        Return an array of column values based on the schema item.
+        # Construct the varying locations
+        locations = locations or location_range(start, end)
 
-        Columns can either be provided as an iterable (via `cols`) or with
-        explicit values, via `start_col` and `end_col`.
-        """
-        sheet, _, _ = parse_location_or_default(location, sheet, None, None)
-        cols = cols or col_range(start_col, end_col)
-        return [self.value(schema_cell, sheet=sheet, col=col) for col in cols]
+        def _value(location):
+            sheet_, col_, row_ = parse_location_or_default(location)
+            return self.value(schema_cell, sheet=sheet_, col=col_, row=row_)
+
+        return [_value(location) for location in locations]
 
     def table_array(
         self,

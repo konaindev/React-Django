@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from .parse import parse_location, unparse_location
+from .parse import parse_location, unparse_location, parse_location_or_default
 
 
 class ParseLocationTestCase(TestCase):
@@ -27,6 +27,42 @@ class ParseLocationTestCase(TestCase):
     def test_quoted_sheet(self):
         parsed = parse_location("'output sheet'!BB7")
         self.assertEqual(parsed, ("output sheet", "BB", 7))
+
+    def test_tuple(self):
+        parsed = parse_location(("already_parsed", "A", 99))
+        self.assertEqual(parsed, ("already_parsed", "A", 99))
+
+
+class ParseLocationOrDefaultTestCase(TestCase):
+    def test_empty_string(self):
+        parsed = parse_location_or_default("", "default", "ZZ", 333)
+        self.assertEqual(parsed, ("default", "ZZ", 333))
+
+    def test_sheet_only(self):
+        parsed = parse_location_or_default("sheet!", "default", "ZZ", 333)
+        self.assertEqual(parsed, ("sheet", "ZZ", 333))
+
+    def test_col_only(self):
+        parsed = parse_location_or_default("c", "default", "ZZ", 333)
+        self.assertEqual(parsed, ("default", "C", 333))
+
+    def test_row_only(self):
+        parsed = parse_location_or_default("22", "default", "ZZ", 333)
+        self.assertEqual(parsed, ("default", "ZZ", 22))
+
+    def test_all(self):
+        parsed = parse_location_or_default("sheet!AZ42", "default", "ZZ", 333)
+        self.assertEqual(parsed, ("sheet", "AZ", 42))
+
+    def test_quoted_sheet(self):
+        parsed = parse_location_or_default("'output sheet'!BB7", "default", "ZZ", 333)
+        self.assertEqual(parsed, ("output sheet", "BB", 7))
+
+    def test_tuple(self):
+        parsed = parse_location_or_default(
+            ("already_parsed", None, 99), "default", "ZZ", 333
+        )
+        self.assertEqual(parsed, ("already_parsed", "ZZ", 99))
 
 
 class UnparseLocationTestCase(TestCase):
@@ -57,4 +93,3 @@ class UnparseLocationTestCase(TestCase):
     def test_round_trip_2(self):
         original = "'fun in the sun name'!AZQ17"
         self.assertEqual(original, unparse_location(*parse_location(original)))
-

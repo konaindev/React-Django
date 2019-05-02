@@ -73,15 +73,15 @@ class CampaignPlanImporter(ProjectExcelImporter):
     )
 
     OVERVIEW_TARGET_SEGMENT_SCHEMA = {
-        "ordinal": StrCell(loc("Overview!A")),
-        "description": StrCell(loc("Overview!B")),
+        "ordinal": StrCell(loc("A")),
+        "description": StrCell(loc("B")),
     }
 
     OVERVIEW_TARGET_INVESMENT_SCHEMA = {
-        "category": StrCell(loc("Overview!A")),
-        "total": DefaultCurrencyCell(loc("Overview!B")),
-        "acquisition": DefaultCurrencyCell(loc("Overview!C")),
-        "retention": DefaultCurrencyCell(loc("Overview!D")),
+        "category": StrCell(loc("A")),
+        "total": DefaultCurrencyCell(loc("B")),
+        "acquisition": DefaultCurrencyCell(loc("C")),
+        "retention": DefaultCurrencyCell(loc("D")),
     }
 
     CATEGORY_TO_KEY = {
@@ -93,14 +93,18 @@ class CampaignPlanImporter(ProjectExcelImporter):
     }
 
     def build_category(self, category):
-        rows = rows_until_empty(self.workbook, start_row=2, sheet=category, col="A")
+        rows = rows_until_empty(
+            self.workbook, start_row=2, test_sheet=category, test_col="A"
+        )
         tactics = self.schema_list(
             schema=self.CATEGORY_SCHEMA, locations=rows, sheet=category
         )
         return {"tactics": tactics}
 
     def build_funnel_category(self, category):
-        rows = rows_until_empty(self.workbook, start_row=2, sheet=category, col="A")
+        rows = rows_until_empty(
+            self.workbook, start_row=2, test_sheet=category, test_col="A"
+        )
         tactics = self.schema_list(
             schema=self.FUNNEL_CATEGORY_SCHEMA, locations=rows, sheet=category
         )
@@ -112,7 +116,7 @@ class CampaignPlanImporter(ProjectExcelImporter):
 
     def build_markdown(self, start_row):
         rows = rows_until_empty(
-            self.workbook, start_row=start_row, location="Overview!B"
+            self.workbook, start_row=start_row, test_location="Overview!B"
         )
         # CONSIDER it would be nice to have an analogue of Django ORM's values(flat=True)
         text_dicts = self.schema_list(
@@ -127,8 +131,12 @@ class CampaignPlanImporter(ProjectExcelImporter):
 
     def build_overview_target_segments(self):
         _, _, row = self.locate_overview_header_cell("target segments")
-        rows = rows_until_empty(self.workbook, start_row=row + 1, location="Overview!A")
-        return self.schema_list(self.OVERVIEW_TARGET_SEGMENT_SCHEMA, locations=rows)
+        rows = rows_until_empty(
+            self.workbook, start_row=row + 1, test_location="Overview!A"
+        )
+        return self.schema_list(
+            self.OVERVIEW_TARGET_SEGMENT_SCHEMA, locations=rows, sheet="Overview"
+        )
 
     def build_overview_objective(self, category):
         # This will find the first occurence of the header, which given
@@ -154,9 +162,11 @@ class CampaignPlanImporter(ProjectExcelImporter):
         # Find "Total" row and work backwards
         _, _, row = self.locate_overview_header_cell("total")
         rows = rows_until_empty(
-            self.workbook, start_row=row, location="Overview!A", next_fn=prev_row
+            self.workbook, start_row=row, test_location="Overview!A", next_fn=prev_row
         )
-        items = self.schema_list(self.OVERVIEW_TARGET_INVESMENT_SCHEMA, locations=rows)
+        items = self.schema_list(
+            self.OVERVIEW_TARGET_INVESMENT_SCHEMA, locations=rows, sheet="Overview"
+        )
         # Convert dictionaries with the category key *inside* them
         # into nested dictionaries where the category key is *outside*.
         # aka {"category": "Reputation Building", "total": "100"} -->

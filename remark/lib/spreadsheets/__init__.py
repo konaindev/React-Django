@@ -10,7 +10,7 @@ from .errors import (
 from .getset import get_cell, set_cell
 from .importers import ExcelImporter
 from .locators import BaseLocator, loc, find_col, find_row
-from .parse import parse_location, unparse_location
+from .parse import parse_location_or_default, parse_location, unparse_location
 from .rowcol import (
     advance_col,
     advance_row,
@@ -89,6 +89,7 @@ __all__ = (
     NullChoiceCell,
     NullStrCell,
     NullStrDateCell,
+    parse_location_or_default,
     parse_location,
     prev_col,
     prev_row,

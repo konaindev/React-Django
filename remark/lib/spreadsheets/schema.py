@@ -55,7 +55,7 @@ excel data types and python data types.
 """
 
 
-def StrCell(locator):
+def StrCell(locator=None):
     """Return a cell that converts to a python string."""
 
     def str_or_convertible_data_type(cell):
@@ -64,7 +64,7 @@ def StrCell(locator):
     return SchemaCell(locator, str_or_convertible_data_type, str)
 
 
-def NullStrDateCell(locator):
+def NullStrDateCell(locator=None):
     """Return a cell that converts to an optional python string from a string or date."""
 
     def str_or_convertible_or_null_data_type(cell):
@@ -86,7 +86,7 @@ def NullStrDateCell(locator):
     )
 
 
-def NullStrCell(locator):
+def NullStrCell(locator=None):
     """Return a cell that converts to an optional python string."""
 
     def str_or_convertible_or_null_data_type(cell):
@@ -108,8 +108,9 @@ def NullStrCell(locator):
     )
 
 
-def ChoiceCell(locator, choices):
+def ChoiceCell(locator=None, choices=None):
     """Return a cell that converts to a predefined string, or raises."""
+    choices = choices or []
 
     def choice_or_fail_converter(value):
         value = str(value) if value else None
@@ -122,8 +123,9 @@ def ChoiceCell(locator, choices):
     return SchemaCell(locator, DataType.STRING, choice_or_fail_converter)
 
 
-def NullChoiceCell(locator, choices):
+def NullChoiceCell(locator=None, choices=None):
     """Return a cell that converts to an optional predefined string, or raises."""
+    choices = choices or []
 
     def str_or_null_data_type(cell):
         return cell.data_type in frozenset([DataType.STRING, DataType.NULL])
@@ -139,12 +141,12 @@ def NullChoiceCell(locator, choices):
     return SchemaCell(locator, str_or_null_data_type, choice_or_null_or_fail_converter)
 
 
-def IntCell(locator):
+def IntCell(locator=None):
     """Return a cell that converts to a python int, or raises."""
     return SchemaCell(locator, DataType.NUMERIC, int)
 
 
-def DefaultIntCell(locator, default=0):
+def DefaultIntCell(locator=None, default=0):
     """Return a cell that converts to a python int; if the cell is empty, return default."""
 
     def int_or_null_data_type(cell):
@@ -156,12 +158,12 @@ def DefaultIntCell(locator, default=0):
     return SchemaCell(locator, int_or_null_data_type, int_or_default_or_fail_converter)
 
 
-def FloatCell(locator):
+def FloatCell(locator=None):
     """Return a cell that converts to a python float."""
     return SchemaCell(locator, DataType.NUMERIC, float)
 
 
-def DefaultFloatCell(locator, default=0.0):
+def DefaultFloatCell(locator=None, default=0.0):
     """Return a cell that converts to a python float; if the cell is empty, return default."""
 
     def float_or_null_data_type(cell):
@@ -175,12 +177,12 @@ def DefaultFloatCell(locator, default=0.0):
     )
 
 
-def DecimalCell(locator):
+def DecimalCell(locator=None):
     """Return a cell that converts to a python decimal."""
     return SchemaCell(locator, DataType.NUMERIC, Decimal)
 
 
-def DefaultDecimalCell(locator, default=Decimal(0)):
+def DefaultDecimalCell(locator=None, default=Decimal(0)):
     """Return a cell that converts to a python Decimal; if the cell is empty, return default."""
 
     def decimal_or_null_data_type(cell):
@@ -194,7 +196,7 @@ def DefaultDecimalCell(locator, default=Decimal(0)):
     )
 
 
-def DateTimeCell(locator):
+def DateTimeCell(locator=None):
     """Return a cell that converts to a datetime.datetime instance."""
 
     # converter is no-op because openpyxl already provides a datetime.
@@ -202,17 +204,17 @@ def DateTimeCell(locator):
     return SchemaCell(locator, DataType.DATETIME, lambda dt: dt)
 
 
-def DateCell(locator):
+def DateCell(locator=None):
     """Return a cell that converts to a datetime.date instance."""
     return SchemaCell(locator, DataType.DATETIME, lambda dt: dt.date())
 
 
-def CurrencyCell(locator):
+def CurrencyCell(locator=None):
     """Return a cell that converts to a Decimal, quantized for currency."""
     return SchemaCell(locator, DataType.NUMERIC, lambda v: d_quant_currency(v))
 
 
-def DefaultCurrencyCell(locator, default=Decimal("0")):
+def DefaultCurrencyCell(locator=None, default=Decimal("0")):
     """Return a cell that converts to a Decimal, quantized for currency, or default."""
 
     def currency_or_null_data_type(cell):

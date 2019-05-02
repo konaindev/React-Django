@@ -175,7 +175,7 @@ class ModelingImporter(ProjectExcelImporter):
         # so we can determine the correct end date for each intermediate row.
         end_row = start_row + baseline_weeks
         raw_targets = self.schema_list(
-            schema=self.MODEL_SCHEMA, locations=row_range(start_row, end_row)
+            schema=self.MODEL_SCHEMA, start=start_row, end=end_row
         )
 
         # Fix up the end dates for each of the targets
