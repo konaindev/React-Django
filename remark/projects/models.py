@@ -4,6 +4,7 @@ import os.path
 
 from django.db import models
 from django.conf import settings
+from django.contrib.auth.models import Group
 from django.utils.crypto import get_random_string
 
 from jsonfield import JSONField
@@ -206,6 +207,10 @@ class Project(models.Model):
         "geo.Address", on_delete=models.SET_NULL, null=True, blank=True
     )
 
+    view_group = models.OneToOneField(
+        Group, on_delete=models.SET_NULL, null=True, blank=True
+    )
+
     # This value is set when the instance is created; if we later
     # call save, and it changes, then we update targets for the model.
     __selected_model_name = None
@@ -363,7 +368,17 @@ class Project(models.Model):
             for data in option.get("targets", []):
                 _create_target_period(data)
 
+    def __assign_blank_view_group(self):
+        """
+        Creates a new Group and assign it to view_gruop field
+        """
+        view_group = Group(name=f"{project.name} view group")
+        view_group.save()
+        project.view_group = view_group
+
     def save(self, *args, **kwargs):
+        if not self.pk:
+            self.__assign_blank_view_group()
         model_selection_changed = (
             self.__selected_model_name is not self.selected_model_name
         )
