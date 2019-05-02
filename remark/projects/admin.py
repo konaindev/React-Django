@@ -192,11 +192,11 @@ class TAMExportMixin:
 class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin):
     save_on_top = True
     inlines = (
-        InlineAnalyticsProviderAdmin,
         NewSpreadsheetInline,
         ExistingSpreadsheetInline,
         PeriodInline,
         TargetPeriodInline,
+        InlineAnalyticsProviderAdmin,
     )
     list_display = [
         "name",
