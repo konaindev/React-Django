@@ -2,7 +2,7 @@ import openpyxl
 
 from .errors import ExcelError, ExcelValidationError
 from .getset import get_cell
-from .rowcol import col_range, row_range, location_range
+from .rowcol import col_range, row_range, location_range, location_range_rect
 from .parse import parse_location_or_default
 from .schema import DataType, is_schema_cell
 
@@ -208,46 +208,30 @@ class ExcelImporter:
 
         return [_schema(location) for location in locations]
 
-    def table_array(
-        self,
-        schema_cell,
-        cols=None,
-        start_col=None,
-        end_col=None,
-        rows=None,
-        start_row=None,
-        end_row=None,
-        location=None,
-        sheet=None,
-        row_major=True,
+    def schema_rect(
+        self, schema, locations=None, location=None, sheet=None, col=None, row=None
     ):
         """
-        Return a 2D array of values based on the schema item.
+        Repeatedly call schema() with a varying location value each time.
+        Return a two-dimensional list of the results.
 
-        Rows and columns can either be provided as an iterable 
-        (via `rows` and `cols`) or with explicit values: `start_*` and `end_*`.
+        To specify location, pass in an iterable of iterables for `locations`;
+        each should be in the form (sheet, col, row).
+
+        In addition, default values for `location` --> (`sheet`, `col`, `row`)
+        can be provided if the locations themselves are not complete.
 
         By default, we return a row-major array; this can be flipped.
         """
-        sheet, _, _ = parse_location_or_default(location, sheet, None, None)
-        rows = list(rows or row_range(start_row, end_row))
-        cols = list(cols or col_range(start_col, end_col))
-        outer = rows if row_major else cols
-        inner = cols if row_major else rows
-        table = []
-        for outer_index in outer:
-            table.append(
-                [
-                    self.value(
-                        schema_cell,
-                        sheet=sheet,
-                        col=inner_index if row_major else outer_index,
-                        row=outer_index if row_major else inner_index,
-                    )
-                    for inner_index in inner
-                ]
-            )
-        return table
+        # Determine the default values, if any
+        sheet, col, row = parse_location_or_default(location, sheet, col, row)
+
+        def _schema(location):
+            """Call schema on a location, defaulting to default values if needed."""
+            sheet_, col_, row_ = parse_location_or_default(location, sheet, col, row)
+            return self.schema(schema, sheet=sheet_, col=col_, row=row_)
+
+        return [[_schema(location) for location in inner] for inner in locations]
 
     def is_valid(self):
         """Validate the spreadsheet; return False if not possible."""

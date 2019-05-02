@@ -3,13 +3,14 @@ from remark.lib.spreadsheets import (
     advance_col,
     advance_row,
     ChoiceCell,
-    cols_until,
     cols_until_empty,
+    cols_until,
     CurrencyCell,
     find_row,
     FloatCell,
     IntCell,
     loc,
+    location_range_rect,
     next_col,
     next_row,
     rows_until_empty,
@@ -135,8 +136,7 @@ class MarketImporter(ProjectExcelImporter):
 
     def get_rent_to_income_data(self, income_count, rental_rate_count):
         _, _, row = find("rent | incomes")(self.workbook)
-        return self.table_array(
-            FloatCell(loc()),
+        locations = location_range_rect(
             start_col="B",
             end_col=advance_col(income_count - 1)("B"),
             start_row=next_row(row),
@@ -144,6 +144,7 @@ class MarketImporter(ProjectExcelImporter):
             sheet="Output",
             row_major=False,
         )
+        return self.schema_rect(FloatCell(), locations=locations)
 
     def get_rent_to_income(self):
         categories = self.get_rent_to_income_categories()
