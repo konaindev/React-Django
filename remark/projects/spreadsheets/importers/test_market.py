@@ -10,6 +10,7 @@ class MarketTestCase(SpreadsheetFileTestCaseMixin, TestCase):
     schema_file_name = "market.schema.json"
 
     def test_example_data(self):
+        """Sanity check a small amount of data from the imported sheet."""
         super().test_example_data()
         self.assertEqual(self.importer.cleaned_data["location"], "Seattle,WA")
         self.assertEqual(
