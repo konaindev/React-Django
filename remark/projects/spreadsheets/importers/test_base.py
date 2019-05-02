@@ -1,5 +1,6 @@
 import json
 import os
+import warnings
 
 import jsonschema
 
@@ -62,9 +63,16 @@ class SpreadsheetFileTestCaseMixin:
         return self.get_absolute_test_file_name(self.schema_file_name)
 
     def setUpImporter(self):
-        self.importer = self.importer_class(self.get_absolute_spreadsheet_file_name())
-        if not self.importer.is_valid():
-            raise self.importer.errors[0]
+        # openpyxl emits a bunch of warnings we don't care about in our tests.
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+
+            # import and perform first pass at validation.
+            self.importer = self.importer_class(
+                self.get_absolute_spreadsheet_file_name()
+            )
+            if not self.importer.is_valid():
+                raise self.importer.errors[0]
 
     def setUpSchema(self):
         with open(self.get_absolute_schema_file_name(), "rt") as schema_file:

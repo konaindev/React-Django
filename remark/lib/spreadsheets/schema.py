@@ -140,8 +140,20 @@ def NullChoiceCell(locator, choices):
 
 
 def IntCell(locator):
-    """Return a cell that converts to a predefined string, or raises."""
+    """Return a cell that converts to a python int, or raises."""
     return SchemaCell(locator, DataType.NUMERIC, int)
+
+
+def DefaultIntCell(locator, default=0):
+    """Return a cell that converts to a python int; if the cell is empty, return default."""
+
+    def int_or_null_data_type(cell):
+        return cell.data_type in frozenset([DataType.NUMERIC, DataType.NULL])
+
+    def int_or_default_or_fail_converter(value):
+        return int(value) if value is not None else default
+
+    return SchemaCell(locator, int_or_null_data_type, int_or_default_or_fail_converter)
 
 
 def FloatCell(locator):
@@ -149,9 +161,37 @@ def FloatCell(locator):
     return SchemaCell(locator, DataType.NUMERIC, float)
 
 
+def DefaultFloatCell(locator, default=0.0):
+    """Return a cell that converts to a python float; if the cell is empty, return default."""
+
+    def float_or_null_data_type(cell):
+        return cell.data_type in frozenset([DataType.NUMERIC, DataType.NULL])
+
+    def float_or_default_or_fail_converter(value):
+        return float(value) if value is not None else default
+
+    return SchemaCell(
+        locator, float_or_null_data_type, float_or_default_or_fail_converter
+    )
+
+
 def DecimalCell(locator):
     """Return a cell that converts to a python decimal."""
     return SchemaCell(locator, DataType.NUMERIC, Decimal)
+
+
+def DefaultDecimalCell(locator, default=Decimal(0)):
+    """Return a cell that converts to a python Decimal; if the cell is empty, return default."""
+
+    def decimal_or_null_data_type(cell):
+        return cell.data_type in frozenset([DataType.NUMERIC, DataType.NULL])
+
+    def decimal_or_default_or_fail_converter(value):
+        return Decimal(value) if value is not None else default
+
+    return SchemaCell(
+        locator, decimal_or_null_data_type, decimal_or_default_or_fail_converter
+    )
 
 
 def DateTimeCell(locator):
@@ -169,6 +209,24 @@ def DateCell(locator):
 
 def CurrencyCell(locator):
     """Return a cell that converts to a Decimal, quantized for currency."""
+    return SchemaCell(locator, DataType.NUMERIC, lambda v: d_quant_currency(v))
+
+
+def DefaultCurrencyCell(locator, default=Decimal("0")):
+    """Return a cell that converts to a Decimal, quantized for currency, or default."""
+
+    def currency_or_null_data_type(cell):
+        return cell.data_type in frozenset([DataType.NUMERIC, DataType.NULL])
+
+    def currency_or_default_or_fail_converter(value):
+        return (
+            d_quant_currency(value) if value is not None else d_quant_currency(default)
+        )
+
+    return SchemaCell(
+        locator, currency_or_null_data_type, currency_or_default_or_fail_converter
+    )
+
     return SchemaCell(locator, DataType.NUMERIC, lambda v: d_quant_currency(v))
 
 

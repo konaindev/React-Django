@@ -1,17 +1,17 @@
 from remark.lib.match import matchp
 from remark.lib.spreadsheets import (
     ChoiceCell,
-    CurrencyCell,
+    DefaultCurrencyCell,
     find_col,
     find_row,
     IntCell,
     loc,
     NullChoiceCell,
     NullStrCell,
+    NullStrDateCell,
     prev_row,
     rows_until_empty,
     StrCell,
-    NullStrDateCell,
 )
 
 from .base import ProjectExcelImporter
@@ -53,9 +53,9 @@ class CampaignPlanImporter(ProjectExcelImporter):
         "schedule": NullStrDateCell(find_cat("schedule")),
         "status": ChoiceCell(find_cat("status"), choices=STATUS_CHOICES),
         "notes": NullStrCell(find_cat("notes")),
-        "base_cost": CurrencyCell(find_cat(matchp(iexact="cost"))),
+        "base_cost": DefaultCurrencyCell(find_cat(matchp(iexact="cost"))),
         "cost_type": ChoiceCell(find_cat("cost type"), choices=COST_TYPE_CHOICES),
-        "total_cost": CurrencyCell(find_cat("total cost")),
+        "total_cost": DefaultCurrencyCell(find_cat("total cost")),
     }
 
     FUNNEL_CATEGORY_ROW_SCHEMA = dict(
@@ -66,8 +66,8 @@ class CampaignPlanImporter(ProjectExcelImporter):
                 "inq": IntCell(find_cat("# of inq")),
             },
             "costs": {
-                "usv": CurrencyCell(find_cat("usv cost")),
-                "inq": CurrencyCell(find_cat("inq cost")),
+                "usv": DefaultCurrencyCell(find_cat("usv cost")),
+                "inq": DefaultCurrencyCell(find_cat("inq cost")),
             },
         },
     )
@@ -79,9 +79,9 @@ class CampaignPlanImporter(ProjectExcelImporter):
 
     OVERVIEW_TARGET_INVESMENT_SCHEMA = {
         "category": StrCell(loc("Overview!A")),
-        "total": CurrencyCell(loc("Overview!B")),
-        "acquisition": CurrencyCell(loc("Overview!C")),
-        "retention": CurrencyCell(loc("Overview!D")),
+        "total": DefaultCurrencyCell(loc("Overview!B")),
+        "acquisition": DefaultCurrencyCell(loc("Overview!C")),
+        "retention": DefaultCurrencyCell(loc("Overview!D")),
     }
 
     CATEGORY_TO_KEY = {
