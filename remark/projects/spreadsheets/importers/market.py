@@ -25,8 +25,8 @@ from .base import ProjectExcelImporter
 # forgive the inconsistencies for the time being. -Dave
 
 
-def find_output(predicate, target="B"):
-    """Return a locator that scans the META!A column for header values and returns target column."""
+def find(predicate, target="B"):
+    """Return a locator that scans the Output!A column for header values and returns target column."""
     return find_row("Output!A", predicate, target=target)
 
 
@@ -50,78 +50,70 @@ class MarketImporter(ProjectExcelImporter):
         "future_size": IntCell(loc("Output!E")),
     }
 
-    # Who loves functional programming? I do I do!
-    # TODO CONSIDER these could probably live on the base importer but take a locator...
-    # and simplify things? -Dave
-    def _get(self, predicate, target, schema_cell, **kwargs):
-        """Return an arbitrary cell based on search in the output header column"""
-        return self.value(schema_cell(find_output(predicate, target), **kwargs))
+    POPULATION_RADIUS_SCHEMA = {
+        "center": {
+            "type": "Point",
+            "coordinates": [
+                FloatCell(find("coordinates", "B")),
+                FloatCell(find("coordinates", "C")),
+            ],
+        },
+        "radius": FloatCell(find("tam type", "C")),
+        "units": ChoiceCell(find("tam type", "D"), choices=["mi", "km"]),
+    }
 
-    def get_int(self, predicate, target="B"):
-        """Return an int based on search in the output header column"""
-        return self._get(predicate, target, IntCell)
+    @staticmethod
+    def POPULATION_ZIP_SCHEMA(row):
+        return {"zip": StrCell(loc(sheet="Output", row=row)), "outline": None}
 
-    def get_str(self, predicate, target="B"):
-        """Return a str based on search in the output header column"""
-        return self._get(predicate, target, StrCell)
-
-    def get_choice(self, predicate, target="B", choices=[]):
-        """Return a choice str based on search in the output header column"""
-        return self._get(predicate, target, ChoiceCell, choices=choices)
-
-    def get_float(self, predicate, target="B"):
-        """Return a float based on search in the output header column"""
-        return self._get(predicate, target, FloatCell)
-
-    def get_currency(self, predicate, target="B"):
-        """Return a currency based on search in the output header column"""
-        return self._get(predicate, target, CurrencyCell)
-
-    def get_location(self):
-        return self.get_str("city, state")
-
-    def get_estimated_population_radius(self):
+    @staticmethod
+    def RTI_SCHEMA(category):
         return {
-            "center": {
-                "type": "Point",
-                "coordinates": [
-                    self.get_float("coordinates", "B"),
-                    self.get_float("coordinates", "C"),
-                ],
-            },
-            "radius": self.get_float("tam type", "C"),
-            "units": self.get_choice("tam type", "D", choices=["mi", "km"]),
+            "name": category,
+            "low": FloatCell(loc("B")),
+            "high": FloatCell(loc("C")),
         }
 
+    TOTAL_SCHEMA = {
+        "segment_population": IntCell(find("est. population")),
+        "market_size": IntCell(find("total market size")),
+        "usv": IntCell(find("total usv")),
+        "future_size": IntCell(find("future population size")),
+    }
+
+    AVERAGE_SCHEMA = {
+        "age": IntCell(find("total average age")),
+        "growth": FloatCell(find("total average growth")),
+    }
+
+    def get_location(self):
+        return self.value(StrCell(find("city, state")))
+
+    def get_estimated_population_radius(self):
+        return self.schema(self.POPULATION_RADIUS_SCHEMA)
+
     def get_estimated_population_zip(self):
-        _, _, row = find_output("tam type")(self.workbook)
+        _, _, row = find("tam type")(self.workbook)
         cols = cols_until_empty(self.workbook, "C", test_sheet="Output", test_row=row)
         zip_codes = self.schema_list(
-            schema={"zip": StrCell(loc(sheet="Output", row=row)), "outline": None},
-            locations=cols,
+            schema=self.POPULATION_ZIP_SCHEMA(row), locations=cols
         )
         return {"zip_codes": zip_codes}
 
     def get_estimated_population(self):
-        tam_type = self.get_choice("tam type", choices=["radius", "zipcodes"])
+        tam_type = self.value(
+            ChoiceCell(find("tam type"), choices=["radius", "zipcodes"])
+        )
         if tam_type == "radius":
             result = self.get_estimated_population_radius()
         else:
             result = self.get_estimated_population_zip()
-        result["population"] = self.get_int("est. population")
+        result["population"] = self.value(IntCell(find("est. population")))
         return result
 
     def get_rent_to_income_category(self, category):
-        _, _, row = find_output(matchp(exact=category))(self.workbook)
-        return self.schema(
-            schema={
-                "name": category,
-                "low": FloatCell(loc("B")),
-                "high": FloatCell(loc("C")),
-            },
-            sheet="Output",
-            row=row,
-        )
+        _, _, row = find(matchp(exact=category))(self.workbook)
+        return self.schema(schema=self.RTI_SCHEMA(category), sheet="Output", row=row)
 
     def get_rent_to_income_categories(self):
         return [
@@ -130,19 +122,19 @@ class MarketImporter(ProjectExcelImporter):
         ]
 
     def get_rent_to_income_incomes(self):
-        _, _, row = find_output("rent | incomes")(self.workbook)
+        _, _, row = find("rent | incomes")(self.workbook)
         cols = cols_until_empty(self.workbook, "B", test_sheet="Output", test_row=row)
         return self.value_list(
             CurrencyCell(loc(sheet="Output", row=row)), locations=cols
         )
 
     def get_rent_to_income_rental_rates(self):
-        _, _, row = find_output("rent | incomes")(self.workbook)
+        _, _, row = find("rent | incomes")(self.workbook)
         rows = rows_until_empty(self.workbook, next_row(row), test_location="Output!A")
         return self.value_list(CurrencyCell(loc("Output!A")), locations=rows)
 
     def get_rent_to_income_data(self, income_count, rental_rate_count):
-        _, _, row = find_output("rent | incomes")(self.workbook)
+        _, _, row = find("rent | incomes")(self.workbook)
         return self.table_array(
             FloatCell(loc()),
             start_col="B",
@@ -168,7 +160,7 @@ class MarketImporter(ProjectExcelImporter):
         }
 
     def update_segment_details(self, segment):
-        _, _, row = find_output(f"age segment: {segment['age_group']}")(self.workbook)
+        _, _, row = find(f"age segment: {segment['age_group']}")(self.workbook)
         cols = list(
             cols_until(
                 self.workbook,
@@ -207,7 +199,7 @@ class MarketImporter(ProjectExcelImporter):
         )
 
     def get_segments(self):
-        _, _, row = find_output("target segment")(self.workbook)
+        _, _, row = find("target segment")(self.workbook)
         rows = rows_until_empty(self.workbook, next_row(row), test_location="Output!A")
         # Grab the overviews for each segment
         segments = self.schema_list(self.SEGMENT_OVERVIEW_SCHEMA, locations=rows)
@@ -216,21 +208,13 @@ class MarketImporter(ProjectExcelImporter):
         return segments
 
     def get_future_year(self):
-        return self.get_int("future year")
+        return self.value(IntCell(find("future year")))
 
     def get_total(self):
-        return {
-            "segment_population": self.get_int("est. population"),
-            "market_size": self.get_int("total market size"),
-            "usv": self.get_int("total usv"),
-            "future_size": self.get_int("future population size"),
-        }
+        return self.schema(self.TOTAL_SCHEMA)
 
     def get_average(self):
-        return {
-            "age": self.get_int("total average age"),
-            "growth": self.get_float("total average growth"),
-        }
+        return self.schema(self.AVERAGE_SCHEMA)
 
     def clean(self):
         super().clean()
