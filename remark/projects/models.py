@@ -368,6 +368,12 @@ class Project(models.Model):
             for data in option.get("targets", []):
                 _create_target_period(data)
 
+    def belongs_to_user(self, user):
+        if self.view_group is not None:
+            return user.groups.filter(pk=self.view_group.pk).count() > 0
+        else:
+            return False
+
     def __assign_blank_view_group(self):
         """
         Creates a new Group and assign it to view_gruop field

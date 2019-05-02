@@ -28,7 +28,7 @@ class ProjectSingleMixin:
     def get_project(self, request, project_id):
         self.project = get_object_or_404(Project, public_id=project_id)
         user = request.user
-        if not user.is_superuser and not user.has_perm('projects.view_project'):
+        if not user.is_superuser and not self.project.belongs_to_user(user):
             raise PermissionDenied
 
 
