@@ -146,3 +146,13 @@ class BaselineReport(CommonReport):
             funnel_history.append(month_funnel)
 
         return funnel_history
+
+    def to_jsonable(self):
+        data = super().to_jsonable()
+        competitors = []
+        for project in self.project.competitors.all():
+            report = BaselineReport.for_baseline(project)
+            competitors.append(report.build_json_data())
+
+        data["competitors"] = competitors
+        return data

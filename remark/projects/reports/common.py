@@ -180,7 +180,7 @@ class CommonReport(ReportBase):
     def build_funnel_history(self):
         return None
 
-    def to_jsonable(self):
+    def build_json_data(self):
         """
         Return a structure that can be converted to a JSON string.
 
@@ -213,3 +213,5 @@ class CommonReport(ReportBase):
             deltas=deltas,
         )
 
+    def to_jsonable(self):
+        return self.build_json_data()

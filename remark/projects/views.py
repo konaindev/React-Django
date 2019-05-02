@@ -88,6 +88,20 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
     def get_page_title(self):
         return f"{self.project.name} {self.page_title}"
 
+    def get_competitors(self, *args, **kwargs):
+        competitors = []
+        for project in self.project.competitors:
+            if project is not None:
+                try:
+                    selector = self.selector_class(project, *args, **kwargs)
+                    competitors.append({
+                        "report": selector.get_report_data(),
+                        "project": self.project.to_jsonable(),
+                    })
+                except:
+                    pass
+        return competitors
+
     def get(self, request, project_id, *args, **kwargs):
         self.get_project(request, project_id)
 
