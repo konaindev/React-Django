@@ -205,6 +205,7 @@ class CommonReport(ReportBase):
         return dict(
             dates=dates,
             property_name=self.project.name,
+            address=self.project.address.to_jsonable() if self.project.address is not None else None,
             **property_report,
             targets=targets,
             four_week_funnel_averages=four_week_funnel_averages,
