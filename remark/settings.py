@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import sys
 
 import dj_database_url
 import django_heroku
@@ -143,6 +144,30 @@ DATABASES = {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": os.path.join("/tmp/remark.sqlite3"),
     }
+}
+
+# Logging
+
+LOGGING = {
+    'handlers': {
+        'console':{
+            'level':'INFO',
+            'class':'logging.StreamHandler',
+            'strm': sys.stdout,
+            'formatter': 'remarkably'
+        }
+    },
+    'formatters': {
+        'remarkably' : {
+            'format': '{levelname}::{asctime}::{module}::{filename}::{funcName}::{message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname}::{message}',
+            'style': '{',
+        }
+    }
+
 }
 
 # Change 'default' database configuration with $DATABASE_URL.
