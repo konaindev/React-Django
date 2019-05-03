@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 import sys
 
+import logging.config
+
 import dj_database_url
 import django_heroku
 
@@ -147,19 +149,21 @@ DATABASES = {
 }
 
 # Logging
-
-LOGGING = {
+LOGGING_CONFIG = None
+logging.config.dictConfig({
+    'version': 1,
+    'disable_existing_loggers': False,
     'handlers': {
-        'console':{
+        'remarkably':{
             'level':'INFO',
             'class':'logging.StreamHandler',
-            'strm': sys.stdout,
+            'stream': sys.stdout,
             'formatter': 'remarkably'
         }
     },
     'formatters': {
         'remarkably' : {
-            'format': '{levelname}::{asctime}::{module}::{filename}::{funcName}::{message}',
+            'format': '{levelname} {asctime} {module} {filename} {funcName} {message}',
             'style': '{',
         },
         'simple': {
@@ -169,13 +173,13 @@ LOGGING = {
     },
     "loggers": {
         "django": {
-            "handlers": ["console"],
+            "handlers": ['remarkably'],
         },
         "remark": {
-            "handlers": ["console"],
+            "handlers": ['remarkably'],
         }
     }
-}
+})
 
 # Change 'default' database configuration with $DATABASE_URL.
 DATABASES["default"].update(dj_database_url.config(conn_max_age=500, ssl_require=True))
