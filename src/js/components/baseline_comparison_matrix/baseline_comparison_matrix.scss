@@ -1,0 +1,83 @@
+@import "css/base.scss";
+
+@mixin table_header_text() {
+    color: $content-text-secondary-color;
+    font-size: $text-xs;
+    line-height: $text-xl;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.baseline-comparison-panel {
+    overflow: hidden;
+}
+
+.baseline-comparison-table {
+    &.ReactTable {
+        height: 100%;
+        background-color: $panel-background-color;
+        color: $content-text-secondary-color;
+
+        .rt-thead {
+            border-color: $table-border-color;
+            border-bottom-width: 1px;
+            box-shadow: none !important;
+
+            @include table_header_text();
+
+            .rt-th {
+                border: none;
+
+                & > div {
+                    padding: 44px 20px 36px 20px;
+                }
+
+                &:first-child {
+                    & > div {
+                        padding-left: 60px;
+                    }
+                }
+
+                &:last-child {
+                    & > div {
+                        padding-right: 60px;
+                    }
+                }
+            }
+        }
+
+        .rt-tbody {
+            .rt-tr-group {
+                border-bottom: 1px solid $table-border-color;
+
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
+
+            .rt-td {
+                padding: $s4 $s5;
+                border-color: $table-border-color;
+                font-size: $text-base;
+                line-height: $text-2xl;
+
+                &:first-child {
+                    & > div {
+                        padding-left: 60px;
+                    }
+                }
+
+                &:last-child {
+                    & > div {
+                        padding-right: 60px;
+                    }
+                }
+            }
+        }
+    }
+
+    &__value-cell {
+        text-align: right;
+        color: $content-text-primary-color;
+    }
+}
