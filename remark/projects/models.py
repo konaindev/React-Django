@@ -215,14 +215,17 @@ class Project(models.Model):
         # Save this for comparison purposes on save(...)
         self.__selected_model_name = self.selected_model_name
 
-    def _target_periods(self, qs):
-        # TODO XXX temporary hack until we fully populate from model spreadsheets. -Dave
+    def _target_periods(self, qs, start, end):
+        """
+        Return target periods, if they exist; if they don't, cons up a single
+        empty/fake target period to satisfy our downstream computations.
+        """
+        # XXX this is basically a hack; remove it once our downstream
+        # code (ComputedPeriod, etc) is not dependent on the existence of
+        # target values. -Dave
         target_periods = list(qs)
         if not target_periods:
-            end = self.get_campaign_end() or self.baseline_end
-            empty_target_period = TargetPeriod(
-                project=self, start=self.baseline_start, end=end
-            )
+            empty_target_period = TargetPeriod(project=self, start=start, end=end)
             target_periods = [empty_target_period]
         return target_periods
 
@@ -236,7 +239,11 @@ class Project(models.Model):
         """
         Return a list of all target periods.
         """
-        return self._target_periods(self.target_periods.all())
+        return self._target_periods(
+            self.target_periods.all(),
+            start=self.baseline_start,
+            end=self.get_campaign_end() or self.baseline_end,
+        )
 
     def get_baseline_periods(self):
         """
@@ -249,7 +256,9 @@ class Project(models.Model):
         Return target periods within the baseline.
         """
         return self._target_periods(
-            self.target_periods.filter(end__lte=self.baseline_end)
+            self.target_periods.filter(end__lte=self.baseline_end),
+            start=self.baseline_start,
+            end=self.baseline_end,
         )
 
     def get_campaign_periods(self):
@@ -264,7 +273,9 @@ class Project(models.Model):
         Return the campaign target periods for this project.
         """
         return self._target_periods(
-            self.target_periods.filter(start__gte=self.baseline_end)
+            self.target_periods.filter(start__gte=self.baseline_end),
+            start=self.baseline_end,
+            end=self.get_campaign_end() or self.baseline_end,
         )
 
     def get_campaign_period_dates(self):
