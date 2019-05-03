@@ -5,7 +5,7 @@ import django.db.models.deletion
 
 
 def add_groups_for_existing_projects(apps, schema_editor):
-    Group = apps.get_model('auth', 'group')
+    Group = apps.get_model('auth', 'Group')
     Project = apps.get_model('projects', 'Project')
     for project in Project.objects.all():
         view_group = Group(name=f"{project.name} view group")
