@@ -166,8 +166,15 @@ LOGGING = {
             'format': '{levelname}::{message}',
             'style': '{',
         }
+    },
+    "loggers": {
+        "django": {
+            "handlers": ["console"],
+        },
+        "remark": {
+            "handlers": ["console"],
+        }
     }
-
 }
 
 # Change 'default' database configuration with $DATABASE_URL.
