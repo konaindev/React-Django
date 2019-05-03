@@ -227,6 +227,24 @@ class Project(models.Model):
         verbose_name="Show Campaign Plan?", default=False
     )
 
+    is_baseline_report_shared = models.BooleanField(
+        verbose_name="Share Baseline Report?", default=False
+    )
+
+    is_tam_shared = models.BooleanField(verbose_name="Share TAM?", default=False)
+
+    is_performance_report_shared = models.BooleanField(
+        verbose_name="Share Performance Report?", default=False
+    )
+
+    is_modeling_shared = models.BooleanField(
+        verbose_name="Share Modeling?", default=False
+    )
+
+    is_campaign_plan_shared = models.BooleanField(
+        verbose_name="Share Campaign Plan?", default=False
+    )
+
     address = models.ForeignKey(
         "geo.Address", on_delete=models.SET_NULL, null=True, blank=True
     )
