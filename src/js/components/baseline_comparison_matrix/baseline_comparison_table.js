@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import ReactTable from "react-table";
 import cx from "classnames";
 import get from "lodash/get";
+import isNil from "lodash/isNil";
 
 import Panel from "../panel";
 import { getDateDiff } from "../../utils/misc";
@@ -190,8 +191,11 @@ const getData = reports =>
     );
     return values.reduce(
       (acc, value, index) => {
-        acc[`value_${index}`] = row.formatter ? row.formatter(value) : value;
-        acc.sum += Number(value);
+        acc[`value_${index}`] =
+          row.formatter && !isNil(value) ? row.formatter(value) : value;
+        if (value) {
+          acc.sum += Number(value);
+        }
         return acc;
       },
       { label: row.label, sum: 0, index: rowIndex }

@@ -2965,9 +2965,7 @@ A 0 0 0 0 0, NaN, NaN
                         "width": "100px",
                       }
                     }
-                  >
-                    NaN
-                  </div>
+                  />
                   <div
                     className="rt-td baseline-comparison-table__value-cell"
                     onClick={[Function]}
@@ -2980,7 +2978,7 @@ A 0 0 0 0 0, NaN, NaN
                       }
                     }
                   >
-                    NaN
+                    $0
                   </div>
                 </div>
               </div>

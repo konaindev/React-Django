@@ -4,7 +4,7 @@ import { funnel_history } from "../funnel_performance_analysis/FunnelProps";
 export const competitors = [
   {
     dates: {
-      start: "2017-01-01",
+      start: "2017-01-03",
       end: "2018-05-07"
     },
     address: {

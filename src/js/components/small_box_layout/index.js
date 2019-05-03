@@ -36,7 +36,6 @@ class SmallBoxLayout extends Component {
 
   render() {
     const { content, detail, name, tooltip } = this.props;
-
     const contentValue = (
       <span className="small-box__inner-content">{content}</span>
     );

@@ -8447,7 +8447,7 @@ A 0 0 0 0 0, NaN, NaN
                       }
                     }
                   >
-                    17 Months
+                    16 Months
                   </div>
                   <div
                     className="rt-td baseline-comparison-table__value-cell"
@@ -8475,7 +8475,7 @@ A 0 0 0 0 0, NaN, NaN
                       }
                     }
                   >
-                    10 Months
+                    9.666666666666666 Months
                   </div>
                 </div>
               </div>
@@ -8540,9 +8540,7 @@ A 0 0 0 0 0, NaN, NaN
                         "width": "100px",
                       }
                     }
-                  >
-                    0
-                  </div>
+                  />
                   <div
                     className="rt-td baseline-comparison-table__value-cell"
                     onClick={[Function]}
@@ -8672,9 +8670,31 @@ A 0 0 0 0 0, NaN, NaN
                         "width": "100px",
                       }
                     }
-                  >
-                    NaN
-                  </div>
+                  />
+                  <div
+                    className="rt-td baseline-comparison-table__value-cell"
+                    onClick={[Function]}
+                    role="gridcell"
+                    style={
+                      Object {
+                        "flex": "100 0 auto",
+                        "maxWidth": null,
+                        "width": "100px",
+                      }
+                    }
+                  />
+                  <div
+                    className="rt-td baseline-comparison-table__value-cell"
+                    onClick={[Function]}
+                    role="gridcell"
+                    style={
+                      Object {
+                        "flex": "100 0 auto",
+                        "maxWidth": null,
+                        "width": "100px",
+                      }
+                    }
+                  />
                   <div
                     className="rt-td baseline-comparison-table__value-cell"
                     onClick={[Function]}
@@ -8687,35 +8707,7 @@ A 0 0 0 0 0, NaN, NaN
                       }
                     }
                   >
-                    NaN
-                  </div>
-                  <div
-                    className="rt-td baseline-comparison-table__value-cell"
-                    onClick={[Function]}
-                    role="gridcell"
-                    style={
-                      Object {
-                        "flex": "100 0 auto",
-                        "maxWidth": null,
-                        "width": "100px",
-                      }
-                    }
-                  >
-                    NaN
-                  </div>
-                  <div
-                    className="rt-td baseline-comparison-table__value-cell"
-                    onClick={[Function]}
-                    role="gridcell"
-                    style={
-                      Object {
-                        "flex": "100 0 auto",
-                        "maxWidth": null,
-                        "width": "100px",
-                      }
-                    }
-                  >
-                    NaN
+                    $0
                   </div>
                 </div>
               </div>
