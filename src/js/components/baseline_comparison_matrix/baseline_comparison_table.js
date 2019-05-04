@@ -33,7 +33,7 @@ const tableMap = [
     label: "Baseline Duration (Months)",
     getValue: report =>
       getDateDiff(report.dates.start, report.dates.end, "month"),
-    formatter: value => `${value} Months`
+    formatter: value => `${formatNumber(value)} Months`
   },
   {
     label: "Number of Units",
