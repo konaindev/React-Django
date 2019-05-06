@@ -11,7 +11,7 @@ export default class Button extends Component {
     selected: PropTypes.bool,
     fullWidth: PropTypes.bool,
     uppercase: PropTypes.bool,
-    color: PropTypes.oneOf(["default", "primary"]),
+    color: PropTypes.oneOf(["default", "primary", "outline"]),
     onClick: PropTypes.func
   };
 
@@ -35,7 +35,7 @@ export default class Button extends Component {
             "button--block": fullWidth,
             "button--uppercase": uppercase
           },
-          `button-${color}`,
+          `button--${color}`,
           className
         )}
         onClick={onClick}
