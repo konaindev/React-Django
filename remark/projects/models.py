@@ -369,10 +369,9 @@ class Project(models.Model):
                 _create_target_period(data)
 
     def user_can_view(self, user):
-        if self.view_group is not None:
-            return user.groups.filter(pk=self.view_group.pk).exists()
-        else:
-            return False
+        if user.is_superuser:
+            return True
+        return (self.view_group is not None) and user.groups.filter(pk=self.view_group.pk).exists()
 
     def __assign_blank_view_group(self):
         """
