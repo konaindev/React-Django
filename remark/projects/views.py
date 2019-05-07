@@ -1,4 +1,6 @@
 from django.contrib import messages
+from django.core.exceptions import PermissionDenied
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic.edit import FormView
@@ -22,8 +24,15 @@ from .models import Project
 from .forms import TAMExportForm
 
 
+class ProjectSingleMixin:
+    def get_project(self, request, project_id):
+        self.project = get_object_or_404(Project, public_id=project_id)
+        user = request.user
+        if not self.project.user_can_view(user):
+            raise PermissionDenied
 
-class ProjectPageView(ReactView):
+
+class ProjectPageView(LoginRequiredMixin, ProjectSingleMixin, ReactView):
     """Render a page that shows information about the overall project."""
 
     page_class = "ProjectPage"
@@ -32,14 +41,14 @@ class ProjectPageView(ReactView):
         return f"{self.project.name} Reports"
 
     def get(self, request, project_id):
-        self.project = get_object_or_404(Project, public_id=project_id)
+        self.get_project(request, project_id)
         return self.render(
             project=self.project.to_jsonable(),
             report_links=ReportLinks.public_for_project(self.project),
         )
 
 
-class ReportPageViewBase(ReactView):
+class ReportPageViewBase(LoginRequiredMixin, ProjectSingleMixin, ReactView):
     """
     Generic base class for all report views that use ReportSelectors.
     """
@@ -50,7 +59,7 @@ class ReportPageViewBase(ReactView):
         return f"{self.project.name} {self.page_title}"
 
     def get(self, request, project_id, *args, **kwargs):
-        self.project = get_object_or_404(Project, public_id=project_id)
+        self.get_project(request, project_id)
 
         try:
             self.selector = self.selector_class(self.project, *args, **kwargs)
