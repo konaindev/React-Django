@@ -19,7 +19,7 @@ from .reports.selectors import (
     CampaignPlanSelector,
     ReportLinks,
 )
-from .models import Project
+from .models import Project, TAMExportLog
 from .forms import TAMExportForm
 
 
@@ -156,15 +156,17 @@ class TAMExportView(FormView, SingleObjectMixin):
                 }
                 workbook = build_tam_data(**args)
 
-                tmp = NamedTemporaryFile()
+                tmp = NamedTemporaryFile(delete=True)
                 workbook.save(filename=tmp)
-                tmp.seek(0)
-                TAMExportLog.objects.create(
+                tmp.flush()
+
+                tam_export_log = TAMExportLog.objects.create(
                     project=project,
-                    file=File,
                     user=request.user,
-                    args_json=args
+                    args_json=args,
+                    file=File(tmp, name="tam_export_log.xlsx")
                 )
+                tmp.seek(0)
                 stream = tmp.read()
                 response = HttpResponse(
                     stream,

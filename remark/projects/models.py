@@ -2,6 +2,7 @@ import collections
 import decimal
 import os.path
 
+from datetime import datetime
 from django.db import models
 from django.conf import settings
 from django.utils.crypto import get_random_string
@@ -856,6 +857,19 @@ class TargetPeriod(ModelPeriod, models.Model):
         ordering = ["start"]
 
 
+def tam_export_media_path(instance, filename):
+    """
+    Given a TAM export log instance, and the filename as supplied during upload,
+    determine where the uploaded spreadsheet file should actually be placed.
+    """
+    # We always target project/<public_id>/tam_export_<upload_time><.ext>
+    _, extension = os.path.splitext(filename)
+    sheetname = "_".join(
+        ["tam_export", datetime.now().strftime("%Y-%m-%d_%H-%M-%S")]
+    )
+    return f"project/{instance.project.public_id}/{sheetname}{extension}"
+
+
 class TAMExportLog(models.Model):
     project = models.ForeignKey(
         Project, on_delete=models.CASCADE, related_name="tam_export_logs"
@@ -867,7 +881,7 @@ class TAMExportLog(models.Model):
 
     file = models.FileField(
         blank=False,
-        upload_to=spreadsheet_media_path,
+        upload_to=tam_export_media_path,
         help_text="The underlying spreadsheet (probably .xlsx) file.",
     )
 
@@ -887,3 +901,6 @@ class TAMExportLog(models.Model):
         load_kwargs={"object_pairs_hook": collections.OrderedDict},
         help_text="The arguments used to build TAM export file.",
     )
+
+    def __str__(self):
+        return f"{self.project} Export For {self.user} at {self.exported_at.strftime('%Y-%m-%d_%H-%M-%S')}"

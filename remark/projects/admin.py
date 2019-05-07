@@ -6,7 +6,7 @@ from django.utils.safestring import mark_safe
 from remark.admin import admin_site
 from remark.analytics.admin import InlineAnalyticsProviderAdmin
 from .forms import ProjectForm, SpreadsheetForm
-from .models import Project, Period, Spreadsheet, TargetPeriod
+from .models import Project, Period, Spreadsheet, TargetPeriod, TAMExportLog
 from .views import TAMExportView
 
 
@@ -227,3 +227,7 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
     class Media:
         js = ("js/project_admin.js",)
 
+
+@admin.register(TAMExportLog, site=admin_site)
+class TAMExportLogAdmin(admin.ModelAdmin):
+    pass
