@@ -854,3 +854,36 @@ class TargetPeriod(ModelPeriod, models.Model):
     class Meta:
         # Always sort TargetPeriods with the earliest period first.
         ordering = ["start"]
+
+
+class TAMExportLog(models.Model):
+    project = models.ForeignKey(
+        Project, on_delete=models.CASCADE, related_name="tam_export_logs"
+    )
+
+    user = models.ForeignKey(
+        'users.User', on_delete=models.CASCADE, related_name="tam_export_logs"
+    )
+
+    file = models.FileField(
+        blank=False,
+        upload_to=spreadsheet_media_path,
+        help_text="The underlying spreadsheet (probably .xlsx) file.",
+    )
+
+    exported_at = models.DateTimeField(
+        auto_now_add=True,
+        db_index=True,
+        editable=False,
+        help_text="The date exported.",
+    )
+
+    args_json = JSONField(
+        default=None,
+        null=True,
+        blank=True,
+        verbose_name="TAM Export Arguments",
+        # Ensure loaded data retains JSON object key ordering
+        load_kwargs={"object_pairs_hook": collections.OrderedDict},
+        help_text="The arguments used to build TAM export file.",
+    )

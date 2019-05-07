@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.core.files import File
 from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic.edit import FormView
@@ -135,27 +136,35 @@ class TAMExportView(FormView, SingleObjectMixin):
             usvs = get_project_usvs(project)
 
             try:
-                workbook = build_tam_data(
-                    zip_codes=form.cleaned_data["zip_codes"],
-                    lat=project.address.latitude,
-                    lon=project.address.longitude,
-                    loc=",".join([project.address.city, project.address.state]),
-                    radius=form.cleaned_data["radius"],
-                    income_groups=form.cleaned_data["income_groups"],
-                    rti_income_groups=form.cleaned_data["rti_income_groups"],
-                    rti_rental_rates=form.cleaned_data["rti_rental_rates"],
-                    rti_target=form.cleaned_data["rti_target"],
-                    age=project.average_tenant_age,
-                    max_rent=project.highest_monthly_rent,
-                    avg_rent=project.average_monthly_rent,
-                    min_rent=project.lowest_monthly_rent,
-                    usvs=usvs,
-                    templatefile=DEFAULT_TEMPLATE_PATH
-                )
+                usvs = fetch_usv_age(google_provider.identifier)
+                args = {
+                    "zip_codes": form.cleaned_data["zip_codes"],
+                    "lat": project.address.latitude,
+                    "lon": project.address.longitude,
+                    "loc": ",".join([project.address.city, project.address.state]),
+                    "radius": form.cleaned_data["radius"],
+                    "income_groups": form.cleaned_data["income_groups"],
+                    "rti_income_groups": form.cleaned_data["rti_income_groups"],
+                    "rti_rental_rates": form.cleaned_data["rti_rental_rates"],
+                    "rti_target": form.cleaned_data["rti_target"],
+                    "age": project.average_tenant_age,
+                    "max_rent": project.highest_monthly_rent,
+                    "avg_rent": project.average_monthly_rent,
+                    "min_rent": project.lowest_monthly_rent,
+                    "usvs": usvs,
+                    "templatefile": DEFAULT_TEMPLATE_PATH,
+                }
+                workbook = build_tam_data(**args)
 
                 tmp = NamedTemporaryFile()
                 workbook.save(filename=tmp)
                 tmp.seek(0)
+                TAMExportLog.objects.create(
+                    project=project,
+                    file=File,
+                    user=request.user,
+                    args_json=args
+                )
                 stream = tmp.read()
                 response = HttpResponse(
                     stream,
