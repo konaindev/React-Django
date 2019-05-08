@@ -35,6 +35,9 @@ google-api-python-client = "*"
 beautifulsoup4 = "*"
 googlemaps = "*"
 bs4 = "*"
+celery = "*"
+django-celery-results = "*"
+redis = "*"
 
 [requires]
 python_version = "3.7"

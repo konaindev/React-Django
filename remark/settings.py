@@ -85,6 +85,7 @@ INSTALLED_APPS = [
     "remark.releases",
     "remark.web",
     "remark.geo",
+    "django_celery_results",
 ]
 
 MIDDLEWARE = [
@@ -275,6 +276,16 @@ GOOGLE_APPLICATION_CREDENTIALS = required_env("GOOGLE_APPLICATION_CREDENTIALS")
 GOOGLE_ANALYTICS_KEY = os.getenv("GOOGLE_ANALYTICS_KEY", None)
 FB_PIXEL_ID = os.getenv("FB_PIXEL_ID", None)
 
+
+#
+# django-celery-results
+#
+CELERY_RESULT_BACKEND = 'django-db'
+
+#
+# REDIS
+#
+REDIS_URI = os.getenv("REDIS_URI", "redis://localhost:6379/0")
 
 # Activate Django-Heroku.
 django_heroku.settings(locals(), staticfiles=True)
