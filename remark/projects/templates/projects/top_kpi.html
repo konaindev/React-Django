@@ -1,0 +1,90 @@
+<!-- ////////// START Detailed KPI \\\\\\\\\\ -->
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
+
+   <tr>
+       <td align="center" valign="middle" style="padding-top: 50px; font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;">
+           <p style="color: #F5FAF7; text-transform: uppercase; font-weight: 500; font-sie: 14px; line-height: 20px; letter-spacing: 1.5px">{{kpi.name}}</p>
+       </td>
+   </tr>
+
+   <tr>
+       <td align="center" valign="middle" style="font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; padding: 10px 0 50px;">
+         {% if kpi.health == 2 %}
+          <span style="padding: 6px; border: 1px solid #89FF45; color: #89FF45; font-size: 16px; line-height: 22px; margin: 0; letter-spacing: .5px; text-transform: uppercase; font-weight: 400;">
+                                           On track
+                                    </span>
+          {% elif kpi.health == 1 %}
+            <span style="padding: 6px; border: 1px solid #F3F65C; color: #F3F65C; font-size: 16px; line-height: 22px; margin: 0; letter-spacing: .5px; text-transform: uppercase; font-weight: 400;">
+                                           At risk
+                                   </span>
+          {% else %}
+           <span
+                 style="padding: 6px; border: 1px solid #FF5300; color: #FF5300; font-size: 16px; line-height: 22px; margin: 0; letter-spacing: .5px; text-transform: uppercase; font-weight: 400;">
+                                           Requires review
+                                   </span>
+          {% endif %}
+       </td>
+
+   </tr>
+
+   <!-- START CTD Block -->
+
+   <tr>
+       <td align="center" valign="middle" style="font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; padding-bottom: 30px;">
+           <p style="font-size: 12px; font-weight: 400; line-height: 20px; letter-spacing: 1px; color: #798796; text-transform: uppercase; margin: 0;">Campaign to date</p>
+           <p style="font-size: 36px; font-weight: 300; color: #F5FAF7; margin: 0;">{{kpi.campaign_value}}</p>
+           <p style="font-size: 14px; font-weight: 400; line-height: 20px; color: #798796; letter-spacing: .5px; margin-top: 10px;">Target: {{kpi.campaign_target}}</p>
+       </td>
+
+
+   </tr>
+
+   <!-- END CTD Block -->
+
+
+   </table>
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:400px;">
+   <tr>
+
+       <td align="left" valign="middle" style="font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; text-align: left; width: 180px;">
+           <p style="font-size: 12px; font-weight: 400; line-height: 20px; letter-spacing: 1px; color: #798796; text-transform: uppercase; margin: 0;">Last Week</p>
+           <p style="font-size: 36px; font-weight: 300; color: #F5FAF7; margin: 0;">{{kpi.prev_value}}</p>
+           <p style="font-size: 14px; font-weight: 400; line-height: 20px; color: #798796; letter-spacing: .5px; margin: 10px 0 0;">Target: {{kpi.prev_target}}</p>
+       </td>
+
+
+       <td align="center" valign="middle" style="padding: 0 10px;">
+          <img src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/KPI-arrow.png" height="28" width="28" alt="&rarr;" style="font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; color: #F5FAF7; font-size: 36px; font-weight: 200;"/>
+       </td>
+
+       <td align="right" valign="middle" style="font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; width: 180px;">
+           <p style="font-size: 12px; font-weight: 400; line-height: 20px; letter-spacing: 1px; color: #798796; text-transform: uppercase; margin: 0;">This Week</p>
+           <p style="font-size: 36px; font-weight: 300; color: #F5FAF7; margin: 0;">{{kpi.week_value}}</p>
+           <p style="font-size: 14px; font-weight: 400; line-height: 20px; color: #798796; letter-spacing: .5px; margin: 10px 0 0;">Target: {{kpi.week_target}}</p>
+       </td>
+
+   </tr>
+</table>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:400px;">
+  <tr>
+       <td align="center" valign="middle" class="content-block" style="font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; background-color: #20272E; padding-top: 50px;">
+           <p style="margin: 0; font-weight: 300; color: #F5FAF7; line-height: 28px; font-size: 16px; letter-spacing: .25px">{{kpi.insight}}</p>
+       </td>
+   </tr>
+</table>
+
+<!-- START Button -->
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
+  <tr>
+       <td align="center" valign="middle" class="content-block" style="font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; background-color: #20272E; padding-top: 50px; padding-bottom: 100px;">
+        <a href="{{report_url}}" class="btn-primary">View Report</a>
+       </td>
+   </tr>
+</table>
+<!-- END Button -->
+
+<!-- ////////// END Detailed KPI \\\\\\\\\\ -->

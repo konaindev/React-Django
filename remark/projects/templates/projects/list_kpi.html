@@ -1,0 +1,47 @@
+<!-- START KPI -->
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
+    <tr>
+
+        <td align="left" valign="middle" width='60%' style="height: 130px; font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;">
+            <p style="color: #F5FAF7; text-transform: uppercase; font-weight: 600; font-sie: 14px; line-height: 20px; letter-spacing: 1.5px">{{kpi.name}}</p>
+            <p style="color: #798796; font-weight: 300; font-sie: 14px; line-height: 20px;">{{kpi.model_percent}} of Model Target</p>
+        </td>
+
+
+        <td align="right" valign="middle" width="40%" style="font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;">
+            {% if kpi.health == 2 %}
+            <span style="padding: 6px; border: 1px solid #89FF45; color: #89FF45; font-size: 11px; line-height: 20px; margin: 0; letter-spacing: .5px; text-transform: uppercase; font-weight: 400;">
+                On track
+            </span>
+            {% elif kpi.health == 1 %}
+            <span style="padding: 6px; border: 1px solid #F3F65C; color: #F3F65C; font-size: 11px; line-height: 20px; margin: 0; letter-spacing: .5px; text-transform: uppercase; font-weight: 400;">
+            At risk
+            </span>
+            {% else %}
+            <span style="padding: 6px; border: 1px solid #FF5300; color: #FF5300; font-size: 11px; line-height: 20px; margin: 0; letter-spacing: .5px; text-transform: uppercase; font-weight: 400;">
+            Requires review
+            </span>
+            {% endif %}
+
+        </td>
+
+    </tr>
+</table>
+
+
+
+
+    <!-- START Line -->
+
+    <table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100% !important; max-width: 640px;">
+        <tr>
+            <td align="left" valign="top" width="600px"  height="1" style="background-color: #2B343D; border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 1px;"><!--[if gte mso 15]>&nbsp;<![endif]--></td>
+        </tr>
+    </table>
+    <!-- END Line -->
+
+
+
+
+<!-- END KPI -->
