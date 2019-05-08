@@ -56,6 +56,7 @@ SELECTORS = {
     "cost_per_app" : lambda x : x["funnel"]["costs"]["app"],
     "cost_per_exe" : lambda x : x["funnel"]["costs"]["exe"]
 }
+
 FORMATTERS = {
     "lease_rate" : percent_formatter,
     "retention_rate" : percent_formatter,
@@ -108,6 +109,32 @@ TITLES = {
     "cost_per_exe" : "Cost per EXE"
 }
 
+IS_CUMULATIVE = {
+    "lease_rate" : True,
+    "retention_rate" : False,
+    "occupied_rate" : True,
+    "cds" : False,
+    "renew" : False,
+    "vacate" : False,
+    "move_ins" : False,
+    "move_outs" : False,
+    "usv" : False,
+    "inq" : False,
+    "tou" : False,
+    "app" : False,
+    "exe" : False,
+    "usv_inq" : False,
+    "inq_tou" : False,
+    "tou_app" : False,
+    "app_exe" : False,
+    "usv_exe" : False,
+    "cost_per_usv" : False,
+    "cost_per_inq" : False,
+    "cost_per_tou" : False,
+    "cost_per_app" : False,
+    "cost_per_exe" : False
+}
+
 '''
 Need to convert this to a system that relies on dynamically calculated
 Standard Deviation at some point. There are definitely KPIs that have
@@ -127,6 +154,7 @@ def top_kpi(kpi_key, campaign, this_week, prev_week, text):
     selector = SELECTORS[kpi_key]
     title = TITLES[kpi_key]
     formatter = FORMATTERS[kpi_key]
+    is_cumulative = IS_CUMULATIVE[kpi_key]
     campaign_value = selector(campaign)
     campaign_target = selector(campaign["targets"])
     return {
@@ -138,7 +166,8 @@ def top_kpi(kpi_key, campaign, this_week, prev_week, text):
         "week_target" : formatter(selector(this_week["targets"])),
         "prev_value" : formatter(selector(prev_week)),
         "prev_target" : formatter(selector(prev_week["targets"])),
-        "insight" : text
+        "insight" : text,
+        "is_cumulative" : is_cumulative
     }
 
 def list_kpi(kpi_key, campaign, health):
