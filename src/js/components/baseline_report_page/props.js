@@ -96,4 +96,15 @@ export const report = {
 
 const current_report_link = report_links.baseline;
 
-export const props = { project, report, report_links, current_report_link };
+const share_info = {
+  shared: true,
+  share_url: `/projects/${project.public_id}/share/baseline/`
+};
+
+export default {
+  project,
+  report,
+  report_links,
+  current_report_link,
+  share_info
+};

@@ -1,8 +1,9 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 
 import ReportLinks from "../report_links";
 import ProjectPageChrome from "../project_page_chrome";
+import ShareToggle from "../share_toggle";
 
 import "./report_page_chrome.scss";
 
@@ -17,19 +18,31 @@ export default class ReportPageChrome extends Component {
     project: PropTypes.object.isRequired,
     current_report_name: PropTypes.string.isRequired,
     report_links: PropTypes.object.isRequired,
+    share_info: PropTypes.object.isRequired,
     topItems: PropTypes.node,
     children: PropTypes.node.isRequired
   };
 
+  static defaultProps = {
+    share_info: {
+      shared: false,
+      share_url: ""
+    }
+  };
+
   render() {
     const topItems = (
-      <>
-        <ReportLinks
-          current_report_name={this.props.current_report_name}
-          report_links={this.props.report_links}
-        />
-        {this.props.topItems}
-      </>
+      <section className="report-page-subheader">
+        <div className="container">
+          <div className="subheader__inner">
+            <ReportLinks
+              current_report_name={this.props.current_report_name}
+              report_links={this.props.report_links}
+            />
+            <ShareToggle {...this.props.share_info} />
+          </div>
+        </div>
+      </section>
     );
 
     return (
