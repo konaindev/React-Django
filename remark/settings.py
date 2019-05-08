@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_js_reverse",
     "stdimage",
+    "django_celery_results",
     "remark.analytics",
     "remark.users",
     "remark.projects",
@@ -86,7 +87,6 @@ INSTALLED_APPS = [
     "remark.web",
     "remark.geo",
     "remark",
-    "django_celery_results",
 ]
 
 MIDDLEWARE = [

@@ -5,6 +5,7 @@ from tempfile import NamedTemporaryFile
 
 from remark.analytics.google_analytics import get_project_usvs
 from remark.projects.models import Project, TAMExportLog
+from remark.lib.email import send_email_to_user
 from remark.lib.logging import getLogger
 from remark.users.models import User
 from xls.exporters.tam_data import build_tam_data, DEFAULT_TEMPLATE_PATH
@@ -46,7 +47,19 @@ def export_tam_task(project_pk, user_pk, form_data):
             project=project,
             user=user,
             args_json=args,
-            file=File(tmp, name="tam_export_log.xlsx")
+            file=File(tmp, name="tam_export.xlsx")
         )
+        tmp.seek(0)
+
+        send_email_to_user(
+            user,
+            "email/tam_export",
+            attachments=[{
+                "name": "tam_export.xlsx",
+                "content": tmp.read(),
+                "type": None
+            }]
+        )
+
     except Exception as e:
         logger.error(str(e))
