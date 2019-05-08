@@ -215,11 +215,11 @@ div[style*="margin: 16px 0;"] { margin: 0 !important; }
                     </table>
 
 <!-- Top KPI 1 -->
-{% include "projects/top_kpi.html" with kpi=lease_rate reporting_url=reporting_url only %}
+{% include "projects/top_kpi.html" with kpi=lease_rate report_url=report_url only %}
 <!-- Top KPI 2 -->
-{% include "projects/top_kpi.html" with kpi=best_kpi reporting_url=reporting_url only %}
+{% include "projects/top_kpi.html" with kpi=best_kpi report_url=report_url only %}
 <!-- Top KPI 3 -->
-{% include "projects/top_kpi.html" with kpi=worst_kpi reporting_url=reporting_url only %}
+{% include "projects/top_kpi.html" with kpi=worst_kpi report_url=report_url only %}
 
                 </tr>
 
@@ -301,16 +301,12 @@ div[style*="margin: 16px 0;"] { margin: 0 !important; }
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
                    <tr>
                         <td align="center" valign="middle" class="content-block" style="font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; background-color: #20272E; padding-top: 50px;">
-                         <a href="{{report_url}}" class="btn-primary">View Report</a>
+                         {% include "projects/view_report_button.html" %}
                         </td>
                     </tr>
                 </table>
 
                     <!-- END Button -->
-
-
-
-
                 </tr>
             </table>
             <!--[if (gte mso 9)|(IE)]>
@@ -390,7 +386,7 @@ div[style*="margin: 16px 0;"] { margin: 0 !important; }
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
                    <tr>
                         <td align="center" valign="middle" class="content-block" style="font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; background-color: #20272E; padding-top: 50px;">
-                         <a href="{{report_url}}" class="btn-primary">View Report</a>
+                         {% include "projects/view_report_button.html" %}
                         </td>
                     </tr>
                 </table>
@@ -481,7 +477,7 @@ div[style*="margin: 16px 0;"] { margin: 0 !important; }
                 <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
                    <tr>
                         <td align="center" valign="middle" class="content-block" style="font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; background-color: #20272E; padding-top: 50px;">
-                         <a href="{{report_url}}" class="btn-primary">View Report</a>
+                         {% include "projects/view_report_button.html" %}
                         </td>
                     </tr>
                 </table>
