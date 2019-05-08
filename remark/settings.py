@@ -85,6 +85,7 @@ INSTALLED_APPS = [
     "remark.releases",
     "remark.web",
     "remark.geo",
+    "remark",
     "django_celery_results",
 ]
 
