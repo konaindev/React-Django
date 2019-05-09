@@ -73,6 +73,7 @@ class ReportPageViewBase(LoginRequiredMixin, ProjectSingleMixin, ReactView):
             project=self.project.to_jsonable(),
             report=self.selector.get_report_data(),
             current_report_link=self.selector.get_link(),
+            share_info=self.selector.get_share_info()
         )
 
 

@@ -80,6 +80,11 @@ class ReportSelectorBase:
         # Derived classes must implement
         raise NotImplementedError()
 
+    def get_share_url(self):
+        """Return share URL linking to this report."""
+        # Derived classes must implement
+        raise NotImplementedError()
+
     def get_description(self):
         """Return a human-readable description of a custom span."""
         # Derived classes must implement
@@ -90,6 +95,9 @@ class ReportSelectorBase:
         # Derived classes may override
         return {"url": self.get_url(), "description": self.get_description()}
 
+    def get_share_info(self):
+        return {"shared": self.is_shared(), "share_url": self.get_share_url()}
+
     def has_report_data(self):
         """Return True if data exists for this type of report."""
         # Derived classes must implement
@@ -97,6 +105,11 @@ class ReportSelectorBase:
 
     def is_public(self):
         """Return True if underlying report is enabled by *_public fields in project model."""
+        # Derived classes must implement
+        raise NotImplementedError()
+
+    def is_shared(self):
+        """Return True if underlying report is enabled by *_shared fields in project model."""
         # Derived classes must implement
         raise NotImplementedError()
 
@@ -132,6 +145,11 @@ class BaselineReportSelector(ReportSelectorBase):
         url = reverse("baseline_report", kwargs=kwargs)
         return url
 
+    def get_share_url(self):
+        kwargs = {"project_id": self.project.public_id}
+        url = reverse("baseline_report_shared", kwargs=kwargs)
+        return url
+
     def get_description(self):
         """Return a human-readable description of a custom span."""
         dates = DateRange(self.project.baseline_start, self.project.baseline_end)
@@ -142,6 +160,9 @@ class BaselineReportSelector(ReportSelectorBase):
 
     def is_public(self):
         return self.project.is_baseline_report_public
+
+    def is_shared(self):
+        return self.project.is_baseline_report_shared
 
     def get_report(self):
         return BaselineReport.for_baseline(self.project)
@@ -252,6 +273,11 @@ class PerformanceReportSelector(ReportSelectorBase):
         url = reverse("performance_report", kwargs=kwargs)
         return url
 
+    def get_share_url(self):
+        kwargs = {"project_id": self.project.public_id, "report_span": self.report_span}
+        url = reverse("performance_report_shared", kwargs=kwargs)
+        return url
+
     def get_weeks(self):
         """If we're a LAST_*_WEEKS custom span, return a number of weeks."""
         weeks = None
@@ -307,6 +333,9 @@ class PerformanceReportSelector(ReportSelectorBase):
     def is_public(self):
         return self.project.is_performance_report_public
 
+    def is_shared(self):
+        return self.project.is_performance_report_shared
+
     def get_report(self):
         """
         Return a Report covering the requested timespan.
@@ -340,6 +369,11 @@ class MarketReportSelector(ReportSelectorBase):
         url = reverse("market_report", kwargs=kwargs)
         return url
 
+    def get_share_url(self):
+        kwargs = {"project_id": self.project.public_id}
+        url = reverse("market_report_shared", kwargs=kwargs)
+        return url
+
     def get_description(self):
         """Return a human-readable description of a custom span."""
         return "Total Addressable Market"
@@ -350,6 +384,9 @@ class MarketReportSelector(ReportSelectorBase):
 
     def is_public(self):
         return self.project.is_tam_public
+
+    def is_shared(self):
+        return self.project.is_tam_shared
 
     def get_report(self):
         """Return the underlying report."""
@@ -376,6 +413,11 @@ class ModelingReportSelector(ReportSelectorBase):
         url = reverse("modeling_report", kwargs=kwargs)
         return url
 
+    def get_share_url(self):
+        kwargs = {"project_id": self.project.public_id}
+        url = reverse("modeling_report_shared", kwargs=kwargs)
+        return url
+
     def get_description(self):
         """Return a human-readable description of a custom span."""
         return "Modeling"
@@ -386,6 +428,9 @@ class ModelingReportSelector(ReportSelectorBase):
 
     def is_public(self):
         return self.project.is_modeling_public
+
+    def is_shared(self):
+        return self.project.is_modeling_shared
 
     def get_report(self):
         """Return the underlying report."""
@@ -413,6 +458,11 @@ class CampaignPlanSelector(ReportSelectorBase):
         url = reverse("campaign_plan", kwargs=kwargs)
         return url
 
+    def get_share_url(self):
+        kwargs = {"project_id": self.project.public_id}
+        url = reverse("campaign_plan_shared", kwargs=kwargs)
+        return url
+
     def get_description(self):
         """Return a human-readable description of a custom span."""
         return "Campaign Plan"
@@ -423,6 +473,9 @@ class CampaignPlanSelector(ReportSelectorBase):
 
     def is_public(self):
         return self.project.is_campaign_plan_public
+
+    def is_shared(self):
+        return self.project.is_campaign_plan_shared
 
     def get_report(self):
         """Return the underlying report."""
