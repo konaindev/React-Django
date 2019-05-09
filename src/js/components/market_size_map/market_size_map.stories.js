@@ -7,7 +7,7 @@ import MarketSizeMap from "./index";
 export const props_radius = {
   center: {
     type: "Point",
-    coordinates: [45.52, -122.68194444]
+    coordinates: [-122.68194444, 45.52]
   },
   radius: 3.1,
   units: "mi" // both miles and kilometers should be supported
@@ -62,18 +62,6 @@ export const props_portland = {
       outline: {
         type: "MultiPolygon",
         coordinates: [
-          // original Polygon(big) positions
-          // [
-          //   [
-          //     [-122.57889, 45.522781],
-          //     [-122.57889, 45.504635],
-          //     [-122.617931, 45.505185],
-          //     [-122.619031, 45.505185],
-          //     [-122.617381, 45.523331],
-          //     [-122.57889, 45.522781]
-          //   ]
-          // ],
-          // modified Polygon(big) positions to demonstrate MultiPolygon
           [
             [
               [-122.57889, 45.522781],

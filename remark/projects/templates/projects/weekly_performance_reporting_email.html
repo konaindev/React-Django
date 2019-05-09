@@ -1,0 +1,592 @@
+
+<!doctype html>
+<html>
+<head>
+<title></title>
+<style type="text/css">
+/* CLIENT-SPECIFIC STYLES */
+body, table, td, a { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+img { -ms-interpolation-mode: bicubic; }
+
+/* RESET STYLES */
+img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; }
+table { border-collapse: collapse !important; }
+body { height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important; }
+
+/* iOS BLUE LINKS */
+a[x-apple-data-detectors] {
+    color: inherit !important;
+    text-decoration: none !important;
+    font-size: inherit !important;
+    font-family: inherit !important;
+    font-weight: inherit !important;
+    line-height: inherit !important;
+}
+
+/* MOBILE STYLES */
+@media screen and (max-width: 600px) {
+  .img-max {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+  }
+
+  .max-width {
+    max-width: 100% !important;
+  }
+
+  .mobile-wrapper {
+    width: 85% !important;
+    max-width: 85% !important;
+  }
+
+  .mobile-padding {
+    padding-left: 5% !important;
+    padding-right: 5% !important;
+  }
+}
+
+.btn-primary {
+  text-decoration: none;
+  color: #FFF;
+  background-color: #006EFF;
+  border: solid #006EFF;
+  border-width: 10px 30px;
+  line-height: 2;
+  letter-spacing: 1.5px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  display: inline-block;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+@font-face {
+    font-family: 'Formular';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Formular-Regular'), url(https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/formular-regular.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Formular';
+    font-style: normal;
+    font-weight: 600;
+    src: local('Formular-Medium'), url(https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/formular-medium.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Formular';
+    font-style: normal;
+    font-weight: 800;
+    src: local('Formular-Bold'), url(https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/formular-bold.woff) format('woff');
+}
+
+/* ANDROID CENTER FIX */
+div[style*="margin: 16px 0;"] { margin: 0 !important; }
+</style>
+</head>
+<body style="margin: 0 !important; padding: 0; !important background-color: #F5FAF7;" bgcolor="#F5FAF7">
+
+<!-- HIDDEN PREHEADER TEXT -->
+<div style="display: none; font-size: 1px; color: #fefefe; line-height: 1px; font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden;">
+
+</div>
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+        <td align="center" valign="top" width="100%" bgcolor="#101417" style="padding: 50px 20px;" class="mobile-padding">
+            <!--[if (gte mso 9)|(IE)]>
+            <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
+            <tr>
+            <td align="center" valign="top" width="600">
+            <![endif]-->
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px; ">
+                <tr>
+                    <td align="center" valign="middle" style="padding: 50px 0;">
+                        <img src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/logo.png" width="50%" border="0" style="display: block; font-size: 36px; color: #F5FAF7; font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;" alt="Remarkably">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" valign="top" style="padding: 0 0 50px 0; font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;">
+                        <h1 style="font-size: 28px; color: #F5FAF7; font-weight: 300; line-height: 46px; margin-bottom: 50px; max-width: 400px;">Your weekly performance report is ready for review. </h1>
+                        <span style="color: #b7bdc9; font-size: 12px; font-weight: 400; line-height: 24px; margin: 0; letter-spacing: 1px; text-transform: uppercase">
+                          For the week of
+                        </span>
+                        <p style="color: #F5FAF7; font-size: 16px; font-weight: 200; line-height: 28px; margin: 0; letter-spacing: .5px">
+                         {{start_date}} - {{end_date}}
+                        </p>
+                        <p style="color: #b7bdc9; font-size: 12px; font-weight: 400; line-height: 24px; margin: 30px 0 0 0; letter-spacing: 1px; text-transform: uppercase">
+                          Prepared for
+                        </p>
+                        <p style="color: #F5FAF7; font-size: 16px; font-weight: 200; line-height: 28px;  margin: 0; letter-spacing: .5px">
+                         {{client}}
+                        </p>
+                        <p style="color: #b7bdc9; font-size: 12px; font-weight: 400; line-height: 24px;  margin: 30px 0 0 0; letter-spacing: 1px; text-transform: uppercase">
+                          Property
+                        </p>
+                        <p style="color: #F5FAF7; font-size: 16px; font-weight: 200; line-height: 28px; margin: 0; letter-spacing: .5px">
+                         {{name}} - {{city}}, {{state}}
+                        </p>
+                    </td>
+                </tr>
+            </table>
+            <!--[if (gte mso 9)|(IE)]>
+            </td>
+            </tr>
+            </table>
+            <![endif]-->
+        </td>
+
+    </tr>
+    <tr>
+        <td align="center" valign="top" width="100%" bgcolor="#181D23" style="padding: 100px 20px;" class="mobile-padding">
+            <!--[if (gte mso 9)|(IE)]>
+            <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
+            <tr>
+            <td align="center" valign="top" width="600">
+            <![endif]-->
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px; ">
+                <tr>
+                    <td align="center" valign="top" style="padding: 0 0 20px 0;">
+                        <img src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/health.png" width="40" height="36" border="0" style="display: block;">
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center" valign="top" style="padding: 0 0 50px 0; font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;">
+                        <h1 style="font-size: 28px; color: #F5FAF7; font-weight: 300; line-height: 46px; margin-bottom: 50px;">Campaign Health</h1>
+                        {% if health == "2" %}
+                        <span style="padding: 14px; border: 1px solid #89FF45; color: #89FF45; font-size: 22px; font-weight: 300; line-height: 24px; margin: 0; letter-spacing: .5px; text-transform: uppercase">
+                          On track
+                        </span>
+                        {% elif health == "1" %}
+                        <span style="padding: 14px; border: 1px solid #F3F65C; color: #F3F65C; font-size: 22px; font-weight: 300; line-height: 24px; margin: 0; letter-spacing: .5px; text-transform: uppercase">
+                          At risk
+                        </span>
+                        {% else %}
+                        <span style="padding: 14px; border: 1px solid #FF5300; color: #FF5300; font-size: 22px; font-weight: 300; line-height: 24px; margin: 0; letter-spacing: .5px; text-transform: uppercase">
+                          Requires review
+                        </span>
+                        {% endif %}
+
+                    </td>
+                </tr>
+            </table>
+            <!--[if (gte mso 9)|(IE)]>
+            </td>
+            </tr>
+            </table>
+            <![endif]-->
+        </td>
+
+    </tr>
+     <tr>
+        <td align="center" height="100%" valign="top" width="100%" bgcolor="#20272E" style="padding: 100px 20px 0;" class="mobile-padding">
+
+            <!--[if (gte mso 9)|(IE)]>
+            <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
+            <tr>
+            <td align="center" valign="top" width="600">
+            <![endif]-->
+
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
+
+
+                  <tr>
+                    <td align="center" valign="top" style="padding: 0 0 20px 0;">
+                        <img src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/top.png" width="42" height="40" border="0" style="display: block; color: #006EFF; font-size: 46px" alt="&star;">
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td align="center" valign="top" style="font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;">
+                        <h1 style="font-size: 28px; color: #F5FAF7; font-weight: 300; line-height: 46px; margin-bottom: 30px;">KPI Highlights This Week</h1>
+                    </td>
+                </tr>
+              </table>
+
+                    <table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100% !important; max-width: 640px;">
+                        <tr>
+                            <td align="left" valign="top" width="600px" height="1" style="background-color: #2B343D; border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 1px;"><!--[if gte mso 15]>&nbsp;<![endif]--></td>
+                        </tr>
+                    </table>
+
+<!-- Top KPI 1 -->
+{% include "projects/top_kpi.html" with kpi=lease_rate report_url=report_url only %}
+<!-- Top KPI 2 -->
+{% include "projects/top_kpi.html" with kpi=best_kpi report_url=report_url only %}
+<!-- Top KPI 3 -->
+{% include "projects/top_kpi.html" with kpi=worst_kpi report_url=report_url only %}
+
+                </tr>
+
+
+
+
+            </table>
+
+            <!--[if (gte mso 9)|(IE)]>
+            </td>
+            </tr>
+            </table>
+            <![endif]-->
+
+        <!--</td>
+
+    </tr>-->
+
+
+
+    <!-- START KPI Group -->
+     <table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+       <tr>
+
+            <td align="center" height="100%" valign="top" width="100%" bgcolor="#20272E" style="padding: 100px 20px 0;" class="mobile-padding">
+
+            <!--[if (gte mso 9)|(IE)]>
+            <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
+            <tr>
+            <td align="center" valign="top" width="600">
+            <![endif]-->
+
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
+
+                <tr>
+
+                <!-- START Icon/Title -->
+
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
+                        <tr>
+                            <td align="left" valign="top">
+                                <img src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/up.png" width="42" height="40" border="0" style="display: block; font-size: 36px; color: #89FF45; font-weight: 600;" alt="&nearr;">
+                            </td>
+                        </tr>
+
+                    <td align="left" valign="top" style="padding: 0; font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;">
+                        <h1 style="font-size: 28px; color: #F5FAF7; font-weight: 300; line-height: 46px; margin: 10px 0;">Top performing KPIs</h1>
+                        <p style="font-size: 12px; font-weight: 400; line-height: 20px; letter-spacing: 1px; color: #798796; text-transform: uppercase; margin: 0 0 30px 0;">Campaign to date</p>
+
+                    </td>
+
+                <!-- END Icon/Title -->
+
+
+                    </table>
+
+
+
+
+
+                    <!-- START Line -->
+
+                    <table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100% !important; max-width: 640px;">
+                        <tr>
+                            <td align="left" valign="top" width="600px"  height="1" style="background-color: #2B343D; border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 1px;"><!--[if gte mso 15]>&nbsp;<![endif]--></td>
+                        </tr>
+                    </table>
+                    <!-- END Line -->
+
+
+{% include "projects/list_kpi.html" with kpi=top_1 only %}
+
+{% include "projects/list_kpi.html" with kpi=top_2 only %}
+
+{% include "projects/list_kpi.html" with kpi=top_3 only %}
+
+                     {% include "projects/view_report_button.html" %}
+                </tr>
+            </table>
+            <!--[if (gte mso 9)|(IE)]>
+            </td>
+            </tr>
+            </table>
+            <![endif]-->
+        </td>
+    </tr>
+    </table>
+
+
+    <!-- END KPI Group -->
+
+
+
+
+
+    <!-- START KPI Group -->
+     <table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+       <tr>
+
+            <td align="center" height="100%" valign="top" width="100%" bgcolor="#20272E" style="padding: 100px 20px 0;" class="mobile-padding">
+
+            <!--[if (gte mso 9)|(IE)]>
+            <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
+            <tr>
+            <td align="center" valign="top" width="600">
+            <![endif]-->
+
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
+
+                <tr>
+
+                <!-- START Icon/Title -->
+
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
+                        <tr>
+                            <td align="left" valign="top">
+                                <img src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/down.png" width="42" height="40" border="0" style="display: block; font-size: 36px; color: #F3F65C; font-weight: 600;" alt="&searr;">
+                            </td>
+                        </tr>
+
+                    <td align="left" valign="top" style="padding: 0; font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;">
+                         <h1 style="font-size: 28px; color: #F5FAF7; font-weight: 300; line-height: 46px; margin: 10px 0;">At risk KPIs</h1>
+                        <p style="font-size: 12px; font-weight: 400; line-height: 20px; letter-spacing: 1px; color: #798796; text-transform: uppercase; margin: 0 0 30px 0;">Campaign to date</p>
+                    </td>
+
+                <!-- END Icon/Title -->
+
+
+                    </table>
+
+
+
+
+
+                    <!-- START Line -->
+
+                    <table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100% !important; max-width: 640px;">
+                        <tr>
+                            <td align="left" valign="top" width="600px"  height="1" style="background-color: #2B343D; border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 1px;"><!--[if gte mso 15]>&nbsp;<![endif]--></td>
+                        </tr>
+                    </table>
+                    <!-- END Line -->
+
+
+{% include "projects/list_kpi.html" with kpi=risk_1 only %}
+
+{% include "projects/list_kpi.html" with kpi=risk_2 only %}
+
+{% include "projects/list_kpi.html" with kpi=risk_3 only %}
+
+                     {% include "projects/view_report_button.html" %}
+
+
+
+
+                </tr>
+            </table>
+            <!--[if (gte mso 9)|(IE)]>
+            </td>
+            </tr>
+            </table>
+            <![endif]-->
+        </td>
+    </tr>
+    </table>
+
+
+    <!-- END KPI Group -->
+
+
+
+
+
+
+    <!-- START KPI Group -->
+     <table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+       <tr>
+
+            <td align="center" height="100%" valign="top" width="100%" bgcolor="#20272E" style="padding: 100px 20px;" class="mobile-padding">
+
+            <!--[if (gte mso 9)|(IE)]>
+            <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
+            <tr>
+            <td align="center" valign="top" width="600">
+            <![endif]-->
+
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
+
+                <tr>
+
+                <!-- START Icon/Title -->
+
+                    <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
+                        <tr>
+                            <td align="left" valign="top">
+                                <img src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/low.png" width="42" height="40" border="0" style="display: block; font-size: 46px; color: #FF5300; font-weight: 600;" alt="&excl;">
+                            </td>
+                        </tr>
+
+                    <td align="left" valign="top" style="padding: 0; font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;">
+                         <h1 style="font-size: 28px; color: #F5FAF7; font-weight: 300; line-height: 46px; margin: 10px 0;">Low performing KPIs</h1>
+                        <p style="font-size: 12px; font-weight: 400; line-height: 20px; letter-spacing: 1px; color: #798796; text-transform: uppercase; margin: 0 0 30px 0;">Campaign to date</p>
+                    </td>
+
+                <!-- END Icon/Title -->
+
+
+                    </table>
+
+
+
+
+
+                    <!-- START Line -->
+
+                    <table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100% !important; max-width: 640px;">
+                        <tr>
+                            <td align="left" valign="top" width="600px"  height="1" style="background-color: #2B343D; border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 1px;"><!--[if gte mso 15]>&nbsp;<![endif]--></td>
+                        </tr>
+                    </table>
+                    <!-- END Line -->
+
+
+
+{% include "projects/list_kpi.html" with kpi=low_1 only %}
+
+{% include "projects/list_kpi.html" with kpi=low_2 only %}
+
+{% include "projects/list_kpi.html" with kpi=low_3 only %}
+
+                     {% include "projects/view_report_button.html" %}
+
+
+
+
+                </tr>
+            </table>
+            <!--[if (gte mso 9)|(IE)]>
+            </td>
+            </tr>
+            </table>
+            <![endif]-->
+        </td>
+    </tr>
+    </table>
+
+
+    <!-- END KPI Group -->
+
+
+
+
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+       <tr>
+        <td align="center" height="100%" valign="top" width="100%" bgcolor="#181D23" style="padding: 100px 20px;" class="mobile-padding">
+
+            <!--[if (gte mso 9)|(IE)]>
+            <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
+            <tr>
+            <td align="center" valign="top" width="600">
+            <![endif]-->
+
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
+
+                <tr>
+                    <td align="center" valign="top" style="padding: 0; font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;">
+                        <h1 style="font-size: 28px; color: #F5FAF7; font-weight: 300; line-height: 46px; margin-bottom: 50px;">Questions or feedback?</h1>
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td align="center" valign="middle" class="content-block" style="font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;">
+                        <a href="mailto:{{email}}" class="btn-primary">Contact Us</a>
+                         <a href="http://www.remarkably.io" style="text-decoration: none; display: block; color: #338BFF; font-size: 16px; line-height: 28px; margin-top: 30px; letter-spacing: .5px">
+                         +1 800 266 9255
+                        </a>
+                    </td>
+
+                </tr>
+
+
+            </table>
+            <!--[if (gte mso 9)|(IE)]>
+            </td>
+            </tr>
+            </table>
+            <![endif]-->
+        </td>
+    </tr>
+    </table>
+
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+
+    <tr>
+        <td align="center" height="100%" valign="top" width="100%" bgcolor="#101417" style="padding: 100px 20px 30px;">
+           <!-- [if (gte mso 9)|(IE)]>
+            <table align="center" border="0" cellspacing="0" cellpadding="0" width="600">
+            <tr>
+            <td align="center" valign="top" width="600">
+            <![endif] -->
+            <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
+
+                <tr>
+                    <td align="center" valign="top" style="padding: 0 0 50px 0;">
+                        <img src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/logo.png" width="177" height="30" border="0" alt="Remarkably" style="display: block; font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; color: #F5FAF7; font-size: 36px; font-weight: 400;">
+                    </td>
+                </tr>
+
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
+                    <tr>
+                        <td align="right" valign="middle" style="padding-left: 30px;">
+                            <a href="http://www.twitter.com/Remarkably" >
+                                <img src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/twitter.png" width="40" height="40" border="0" alt="Twitter" style="font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; color: #F5FAF7; font-size: 16px; font-weight: 200;">
+                            </a>
+                        </td>
+                        <td align="center" valign="middle">
+                            <a href="http://www.linkedin.com/Remarkably" >
+                                <img src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/linkedin.png" width="40" height="40" border="0" alt="LinkedIn" style="font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; color: #F5FAF7; font-size: 16px; font-weight: 200;">
+                            </a>
+                        </td>
+                        <td align="left" valign="middle" style="padding-right: 30px;">
+                            <a href="http://www.instagram.com/Remarkably" >
+                                <img src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/instagram.png" width="40" height="40" border="0" alt="Instagram" style="font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; color: #F5FAF7; font-size: 16px; font-weight: 200;">
+                            </a>
+                        </td>
+                    </tr>
+
+
+                </table>
+
+                 <tr>
+
+                    <td align="center" bgcolor="#101417" valign="top" style="padding-bottom: 100px; font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; color: #798796;">
+                        <p style="font-size: 14px; line-height: 20px;">
+                          Remarkably, Inc<br>
+	    	              2284 W. Commodore Way, Ste. 200<br>
+                          Seattle, WA 98199<br>
+                        </p>
+
+                        <p style="padding: 30px 0; font-size: 14px; line-height: 20px;">© 2019 Remarkably.io. All rights reserved.</p>
+
+                        <p>
+                          <a href="[unsubscribe]" style="font-size: 12px; color: #404E5C; text-decoration: underline;" target="_blank">Unsubscribe</a>
+                        </p>
+                        <!--
+                        <p>
+                          <a href="" style="font-size: 12px; color: #404E5C; text-decoration: underline;" target="_blank">Unsubscribe Preferences</a>
+                        </p>
+                        -->
+                    </td>
+                </tr>
+
+
+            </table>
+            <!-- [if (gte mso 9)|(IE)]>
+            </td>
+            </tr>
+            </table>
+            <![endif] -->
+        </td>
+    </tr>
+    </table>
+</table>
+</body>
+</html>

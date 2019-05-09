@@ -148,3 +148,42 @@ class Address(models.Model):
 
     def __str__(self):
         return self.formatted_address or str(self.id)
+
+
+class ZipcodePolygonManager(models.Manager):
+    def look_up_polygon(self, zip_code):
+        try:
+            row = self.get(zip_code=zip_code)
+            return dict(
+                properties=row.properties,
+                geometry=row.geometry
+            )
+        except self.model.DoesNotExist:
+            return None
+
+
+class ZipcodePolygon(models.Model):
+    """
+    Polygon data per zip code
+    """
+
+    objects = ZipcodePolygonManager()
+
+    zip_code = models.CharField(
+        primary_key=True,
+        help_text="5-digit ZIP code",
+        max_length=5,
+    )
+
+    state = models.CharField(
+        help_text="State abbreviation",
+        max_length=2
+    )
+
+    geometry = JSONField(
+        help_text="Geometry JSON data which includes 'type' and 'coordinates'"
+    )
+
+    properties = JSONField(
+        help_text="Additional properties in JSON format"
+    )

@@ -7,7 +7,7 @@ from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
 from tempfile import NamedTemporaryFile
 
-from remark.analytics.google_analytics import fetch_usv_age
+from remark.analytics.google_analytics import get_project_usvs
 from remark.lib.views import ReactView
 from remark.admin import admin_site
 from xls.exporters.tam_data import build_tam_data, DEFAULT_TEMPLATE_PATH
@@ -141,13 +141,9 @@ class TAMExportView(FormView, SingleObjectMixin):
             if project.address is None:
                 messages.error(request, "This project doesn't have an address yet.")
                 return self.form_invalid(form)
-            google_provider = project.analytics_providers.google()
-            if google_provider is None:
-                messages.error(request, "This project doesn't have an analytics provider yet.")
-                return self.form_invalid(form)
+            usvs = get_project_usvs(project)
 
             try:
-                usvs = fetch_usv_age(google_provider.identifier)
                 workbook = build_tam_data(
                     zip_codes=form.cleaned_data["zip_codes"],
                     lat=project.address.latitude,
