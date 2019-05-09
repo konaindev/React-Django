@@ -43,7 +43,10 @@ class PerformanceReport(CommonReport):
         multiperiod = BareMultiPeriod.from_periods(
             list(all_periods) + list(all_target_periods)
         )
-        end = end or multiperiod.get_end()
+        # project.get_campaign_end() may not be the same as multiperiod.get_end(),
+        # since targets can extend into the future; our interest here is
+        # to cut future targets, and only think about data we have *now*.
+        end = end or project.get_campaign_end()
 
         # Get the period under question (this will always be constructed)
         break_times = [end - time_delta, end]

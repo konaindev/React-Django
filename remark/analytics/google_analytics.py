@@ -94,3 +94,17 @@ def fetch_usv_age(SITE_ID):
     analytics = initialize_analytics_reporting()
     response = get_report(analytics, SITE_ID)
     return get_report_usv_age_from_response(response)
+
+
+def get_blank_usvs():
+    return [0, 0, 0, 0, 0, 0]
+
+
+def get_project_usvs(project):
+    google_provider = project.analytics_providers.google()
+    if google_provider is not None:
+        try:
+            return fetch_usv_age(google_provider.identifier)
+        except:
+            pass
+    return get_blank_usvs()

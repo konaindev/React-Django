@@ -22,6 +22,7 @@ share a common timespan -- zero or more values per name. It is possible to
 build MultiPeriods from individual TimeValues or overlapping Periods, and then
 re-slice into coherent single Periods.
 """
+# flake8: noqa
 
 from .datesequence import DateSequence, Weekday
 from .errors import InvalidMetricOperation
@@ -31,21 +32,4 @@ from .multiperiod import BareMultiPeriod, MultiPeriodBase
 from .period import BarePeriod, ModelPeriod, PeriodBase
 from .point import PointMetric, EndPointMetric
 from .timevalue import TimeValue, TimeValueCollection
-
-__all__ = (
-    BareMultiPeriod,
-    BarePeriod,
-    DateSequence,
-    EndPointMetric,
-    InvalidMetricOperation,
-    MetricBase,
-    ModelPeriod,
-    MultiPeriodBase,
-    PeriodBase,
-    PointMetric,
-    SumIntervalMetric,
-    TimeValue,
-    TimeValueCollection,
-    Weekday,
-)
 

@@ -21,6 +21,3 @@ def get_importer_for_kind(kind, f):
     importer_class = IMPORTERS.get(kind)
     return importer_class(f) if importer_class is not None else None
 
-
-__all__ = (get_importer_for_kind,)
-

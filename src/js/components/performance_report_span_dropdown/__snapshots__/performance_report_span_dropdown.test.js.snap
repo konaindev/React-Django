@@ -5,6 +5,7 @@ exports[`PerformanceReportSpanDropdown renders correctly 1`] = `
   className="report-span-dropdown"
 >
   <select
+    defaultValue="/some/url"
     onChange={[Function]}
   >
     <option

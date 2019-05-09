@@ -2,9 +2,9 @@ import openpyxl
 
 from .errors import ExcelError, ExcelValidationError
 from .getset import get_cell
-from .rowcol import col_range, row_range
+from .rowcol import col_range, row_range, location_range, location_range_rect
 from .parse import parse_location_or_default
-from .schema import DataType, unflatten_dict, is_schema_cell
+from .schema import DataType, is_schema_cell
 
 
 class ExcelImporter:
@@ -42,7 +42,8 @@ class ExcelImporter:
             valid = data_type == cell.data_type
         if not valid:
             raise ExcelValidationError(
-                cell, f"found data type '{cell.data_type}' but expected '{data_type}'"
+                f"found data type '{cell.data_type}' but expected '{data_type}'",
+                where=cell,
             )
 
     def check_convert(self, cell, converter=None):
@@ -59,33 +60,59 @@ class ExcelImporter:
                 value = converter(value)
             except Exception as e:
                 raise ExcelValidationError(
-                    cell, f"Could not apply value converter '{converter}': '{e}'"
+                    f"Could not apply value converter '{converter}': '{e}'", where=cell
                 )
         return value
 
-    def schema_cell(self, schema_item, location=None, sheet=None, col=None, row=None):
+    def cell(self, schema_cell=None, location=None, sheet=None, col=None, row=None):
         """
-        Given a schema item, return the cell at the underlying location.
+        Return an openpyxl Cell instance from the spreadsheet.
 
-        The location is determined first and foremost by the `location` provided
-        here, and secondarily by the schema_item's `locator`.
+        The location of the cell is determined first and foremost by the `location` 
+        provided here, and secondarily by the schema_cell's `locator` (if any).
+
+        Typically, you'll *declare* how to find a cell by setting the schema_cell
+        to a SchemaCell tuple.
+
+        That said, if you just want to get a Cell from the spreadsheet directly
+        and without any fussy schema mechanisms you can always call with 
+        (for example): self.cell(location="output!A3")
         """
         sheet, col, row = parse_location_or_default(location, sheet, col, row)
-        sheet, col, row = schema_item.locator(self.workbook, sheet, col, row)
+        if (schema_cell is not None) and callable(schema_cell.locator):
+            sheet, col, row = schema_cell.locator(self.workbook, sheet, col, row)
         return get_cell(self.workbook, sheet, col, row)
 
-    def schema_value(self, schema_item, location=None, sheet=None, col=None, row=None):
+    def value(self, schema_cell=None, location=None, sheet=None, col=None, row=None):
         """
-        Given a SchemaCell, return the python-converted value at the
-        underlying location, validating it as necessary.
+        Return the value of a cell in the spreadsheet.
+
+        The location of the cell is determined first and foremost by the `location` 
+        provided here, and secondarily by the schema_cell's `locator` (if any).
+
+        Typically, you'll *declare* how to find a cell, and validate its value,
+        by setting the schema_cell to a SchemaCell tuple.
+
+        That said, if you just want to get a value from the spreadsheet directly
+        and without any fussy schema mechanisms you can always call with 
+        (for example): self.value(location="output!A3")
         """
-        cell = self.schema_cell(schema_item, location, sheet, col, row)
-        self.check_data_type(cell, schema_item.data_type)
-        value = self.check_convert(cell, schema_item.converter)
+        cell = self.cell(schema_cell, location, sheet, col, row)
+        if schema_cell is not None:
+            self.check_data_type(cell, schema_cell.data_type)
+            value = self.check_convert(cell, schema_cell.converter)
+        else:
+            value = cell.value
         return value
 
-    def check_schema_value(
-        self, schema_item, location=None, sheet=None, col=None, row=None, expected=None
+    def check_value(
+        self,
+        schema_cell=None,
+        location=None,
+        sheet=None,
+        col=None,
+        row=None,
+        expected=None,
     ):
         """
         Raise an exception if the wrong value is found.
@@ -94,157 +121,117 @@ class ExcelImporter:
         is provided, it is called with the converted value and must return
         True if the expectation is met.
         """
-        cell = self.schema_cell(schema_item, location, sheet, col, row)
-        self.check_data_type(cell, schema_item.data_type)
-        value = self.check_convert(cell, schema_item.converter)
+        cell = self.cell(schema_cell, location, sheet, col, row)
+        self.check_data_type(cell, schema_cell.data_type)
+        value = self.check_convert(cell, schema_cell.converter)
         value_matches = expected(value) if callable(expected) else expected == value
         if not value_matches:
             raise ExcelValidationError(
-                cell, f"expected value '{expected}', found '{value}'"
+                f"expected value '{expected}', found '{value}'", where=cell
             )
 
-    def row(self, schema, location=None, sheet=None, row=None):
+    def walk_schema(self, schema, visitor):
         """
-        Return the structured contents of a given row, based on the provided
-        schema definition.
+        Walk an arbitrary schema definition, calling a visitor method for
+        each SchemaCell we find in the structure.
 
-        A schema definition is simply a dictionary mapping a key name to
-        a SchemaCell, which provides a locator, an expcted data type, and
-        a python type converter.
+        In the context of our spreadsheet library, a schema definition is
+        simply an arbitrary Python data structure -- either a dict, or a
+        list, or an arbitrary nesting of these -- where some of the values in
+        a dictionary, or some of the items in a list, are derived from
+        SchemaCell. In the cases where we find a SchemaCell, we invoke the
+        visitor to produce a value based on it; in all other cases, we simply
+        maintain the structure as-is.
+
+        For instance:
+
+            walk({"hello": "world", "goodbye": SchemaCell(...)}, get_value) 
+                -->
+            {"hello": "world", "goodbye": 42}
         """
-        sheet, _, row = parse_location_or_default(location, sheet, None, row)
-        return unflatten_dict(
-            {
-                key: self.schema_value(schema_item_or_value, sheet=sheet, row=row)
-                if is_schema_cell(schema_item_or_value)
-                else schema_item_or_value
-                for key, schema_item_or_value in schema.items()
-            }
-        )
+        if isinstance(schema, dict):
+            result = {k: self.walk_schema(v, visitor) for k, v in schema.items()}
+        elif isinstance(schema, list):
+            result = [self.walk_schema(item, visitor) for item in schema]
+        elif is_schema_cell(schema):
+            result = visitor(schema)
+        else:
+            # Schema is a raw value; pass it through.
+            result = schema
+        return result
 
-    def col(self, schema, location=None, sheet=None, col=None):
+    def schema(self, schema, location=None, sheet=None, col=None, row=None):
         """
-        Return the structured contents of a given column, based on the
-        provided schema definition.
-
-        A schema definition is simply a dictionary mapping a key name to
-        a SchemaCell, which provides a locator, an expcted data type, and
-        a python type converter.
+        Return values in a structured form, replacing all SchemaCells found
+        in a schema with actual data from the spreadsheet.
         """
-        sheet, col, _ = parse_location_or_default(location, sheet, col, None)
-        return unflatten_dict(
-            {
-                key: self.schema_value(schema_item_or_value, sheet=sheet, col=col)
-                if is_schema_cell(schema_item_or_value)
-                else schema_item_or_value
-                for key, schema_item_or_value in schema.items()
-            }
-        )
+        sheet, col, row = parse_location_or_default(location, sheet, col, row)
 
-    def row_table(
-        self, schema, rows=None, start_row=None, end_row=None, location=None, sheet=None
-    ):
-        """
-        Return an array of row dictionaries based on the schema.
+        def _visitor(schema_cell):
+            return self.value(schema_cell, sheet=sheet, col=col, row=row)
 
-        Rows can either be provided as an iterable (via `rows`) or with
-        explicit values, via `start_row` and `end_row`.
-        """
-        sheet, _, _ = parse_location_or_default(location, sheet, None, None)
-        rows = rows or row_range(start_row, end_row)
-        return [self.row(schema, sheet=sheet, row=row) for row in rows]
+        return self.walk_schema(schema, _visitor)
 
-    def col_table(
-        self, schema, cols=None, start_col=None, end_col=None, location=None, sheet=None
-    ):
-        """
-        Return an array of column dictionaries based on the schema.
-
-        Columns can either be provided as an iterable (via `cols`) or with
-        explicit values, via `start_col` and `end_col`.
-        """
-        sheet, _, _ = parse_location_or_default(location, sheet, None, None)
-        cols = cols or col_range(start_col, end_col)
-        return [self.col(schema, sheet=sheet, col=col) for col in cols]
-
-    def row_array(
+    def schema_list(
         self,
-        schema_item,
-        rows=None,
-        start_row=None,
-        end_row=None,
+        schema,
+        locations=None,
+        start=None,
+        end=None,
         location=None,
         sheet=None,
+        col=None,
+        row=None,
     ):
         """
-        Return an array of row values based on the schema_item.
+        Repeatedly call schema() with a varying location value each time.
+        Return a list of the results.
 
-        Rows can either be provided as an iterable (via `rows`) or with
-        explicit values, via `start_row` and `end_row`.
+        There are two ways to specify the varying locations. Either pass
+        in a iterable for `locations` -- this can either be (sheet, col, row) tuples
+        *or* naked row/column numbers, or provide a `start` or `end` which will 
+        be tossed to `location_range(...)` (see rowcol.py for details).
+
+        In addition, default values for `location` --> (`sheet`, `col`, `row`)
+        can be provided if the locations themselves are not complete.
         """
-        sheet, _, _ = parse_location_or_default(location, sheet, None, None)
-        rows = rows or row_range(start_row, end_row)
-        return [self.schema_value(schema_item, sheet=sheet, row=row) for row in rows]
+        # Determine the default values, if any
+        sheet, col, row = parse_location_or_default(location, sheet, col, row)
 
-    def col_array(
-        self,
-        schema_item,
-        cols=None,
-        start_col=None,
-        end_col=None,
-        location=None,
-        sheet=None,
+        # Construct the varying locations
+        locations = locations or location_range(start, end)
+
+        def _schema(location):
+            """Call schema on a location, defaulting to default values if needed."""
+            sheet_, col_, row_ = parse_location_or_default(location, sheet, col, row)
+            return self.schema(schema, sheet=sheet_, col=col_, row=row_)
+
+        return [_schema(location) for location in locations]
+
+    def schema_rect(
+        self, schema, locations=None, location=None, sheet=None, col=None, row=None
     ):
         """
-        Return an array of column values based on the schema item.
+        Repeatedly call schema() with a varying location value each time.
+        Return a two-dimensional list of the results.
 
-        Columns can either be provided as an iterable (via `cols`) or with
-        explicit values, via `start_col` and `end_col`.
-        """
-        sheet, _, _ = parse_location_or_default(location, sheet, None, None)
-        cols = cols or col_range(start_col, end_col)
-        return [self.schema_value(schema_item, sheet=sheet, col=col) for col in cols]
+        To specify location, pass in an iterable of iterables for `locations`;
+        each should be in the form (sheet, col, row).
 
-    def table_array(
-        self,
-        schema_item,
-        cols=None,
-        start_col=None,
-        end_col=None,
-        rows=None,
-        start_row=None,
-        end_row=None,
-        location=None,
-        sheet=None,
-        row_major=True,
-    ):
-        """
-        Return a 2D array of values based on the schema item.
-
-        Rows and columns can either be provided as an iterable 
-        (via `rows` and `cols`) or with explicit values: `start_*` and `end_*`.
+        In addition, default values for `location` --> (`sheet`, `col`, `row`)
+        can be provided if the locations themselves are not complete.
 
         By default, we return a row-major array; this can be flipped.
         """
-        sheet, _, _ = parse_location_or_default(location, sheet, None, None)
-        rows = list(rows or row_range(start_row, end_row))
-        cols = list(cols or col_range(start_col, end_col))
-        outer = rows if row_major else cols
-        inner = cols if row_major else rows
-        table = []
-        for outer_index in outer:
-            table.append(
-                [
-                    self.schema_value(
-                        schema_item,
-                        sheet=sheet,
-                        col=inner_index if row_major else outer_index,
-                        row=outer_index if row_major else inner_index,
-                    )
-                    for inner_index in inner
-                ]
-            )
-        return table
+        # Determine the default values, if any
+        sheet, col, row = parse_location_or_default(location, sheet, col, row)
+
+        def _schema(location):
+            """Call schema on a location, defaulting to default values if needed."""
+            sheet_, col_, row_ = parse_location_or_default(location, sheet, col, row)
+            return self.schema(schema, sheet=sheet_, col=col_, row=row_)
+
+        return [[_schema(location) for location in inner] for inner in locations]
 
     def is_valid(self):
         """Validate the spreadsheet; return False if not possible."""
