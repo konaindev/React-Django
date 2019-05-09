@@ -7,7 +7,7 @@ from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
 from django.urls import reverse
 
-from remark.lib.views import ReactView
+from remark.lib.views import ReactView, APIView
 from remark.admin import admin_site
 from .reports.selectors import (
     BaselineReportSelector,
@@ -149,3 +149,32 @@ class TAMExportView(FormView, SingleObjectMixin):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
+
+
+class ReportShareUpdateAPIView(APIView):
+    # APIView to update shared status of a given project and report type
+
+    # Doesn't need CSRF protection for REST API endpoint
+    csrf_exempt = True
+
+    def post(self, request, project_id):
+
+        shared_field_names = dict(
+            baseline="is_baseline_report_shared",
+            market="is_tam_shared",
+            performance="is_performance_report_shared",
+            modeling="is_modeling_shared",
+            campaign_plan="is_campaign_plan_shared"
+        )
+
+        try:
+            shared, report_name = self.get_data().values() # parse payload
+            field_name = shared_field_names[report_name]
+
+            project = Project.objects.get(public_id=project_id)
+            setattr(project, field_name, shared)
+            project.save()
+
+            return self.render_success()
+        except Exception:
+            return self.render_failure()

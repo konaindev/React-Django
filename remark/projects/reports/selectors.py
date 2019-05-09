@@ -96,9 +96,13 @@ class ReportSelectorBase:
         return {"url": self.get_url(), "description": self.get_description()}
 
     def get_share_info(self, base_url):
+        kwargs = {"project_id": self.project.public_id}
+        change_url = reverse("api_update_shared", kwargs=kwargs)
+
         return dict(
             shared=self.is_shared(),
-            share_url=f"{base_url}{self.get_share_url()}"
+            share_url=f"${base_url}{self.get_share_url()}",
+            change_url=change_url
         )
 
     def has_report_data(self):

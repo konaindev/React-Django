@@ -6,7 +6,8 @@ from .views import (
     PerformanceReportPageView,
     MarketReportPageView,
     ModelingReportPageView,
-    CampaignPlanPageView
+    CampaignPlanPageView,
+    ReportShareUpdateAPIView
 )
 
 
@@ -58,5 +59,11 @@ urlpatterns = [
         "<project_id>/share/campaign_plan/",
         CampaignPlanPageView.as_view(),
         name="campaign_plan_shared",
-    )
+    ),
+    # REST API to update reports shared status
+    path(
+        "<project_id>/api/update_shared/",
+        ReportShareUpdateAPIView.as_view(),
+        name="api_update_shared",
+    ),
 ]
