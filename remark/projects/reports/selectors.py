@@ -95,8 +95,11 @@ class ReportSelectorBase:
         # Derived classes may override
         return {"url": self.get_url(), "description": self.get_description()}
 
-    def get_share_info(self):
-        return {"shared": self.is_shared(), "share_url": self.get_share_url()}
+    def get_share_info(self, base_url):
+        return dict(
+            shared=self.is_shared(),
+            share_url=f"{base_url}{self.get_share_url()}"
+        )
 
     def has_report_data(self):
         """Return True if data exists for this type of report."""
