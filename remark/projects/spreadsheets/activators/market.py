@@ -2,6 +2,7 @@ from ..kinds import SpreadsheetKind
 from .json_activators import JSONFieldActivator
 from remark.geo.models import ZipcodePolygon
 
+
 class MarketActivator(JSONFieldActivator):
     spreadsheet_kind = SpreadsheetKind.MARKET
     project_field = "tmp_market_report_json"
@@ -16,8 +17,8 @@ class MarketActivator(JSONFieldActivator):
         #
         population_zip_codes = self.data["estimated_population"].get("zip_codes", [])
         for population_zip_code in population_zip_codes:
-            zip = population_zip_code["zip"]
-            polygon_data = ZipcodePolygon.objects.look_up_polygon(zip)
+            zip_code = population_zip_code["zip"]
+            polygon_data = ZipcodePolygon.objects.look_up_polygon(zip_code)
 
             if polygon_data is not None:
                 population_zip_code["properties"] = polygon_data["properties"]
