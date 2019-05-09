@@ -8,13 +8,7 @@ import click
 from bs4 import BeautifulSoup
 from openpyxl import load_workbook
 from remark.lib.memoizer import file_memoize, delay_file_memoize
-from remark.geo.usa_census import (
-    fetch_population,
-    fetch_age_segments_by_zip,
-    fetch_household_type,
-    fetch_household_income,
-    fetch_household_income_distribution,
-)
+from remark.geo.usa_census import get_usa_census_data
 
 FREE_MAP_TOOLS_URL = "https://www.freemaptools.com/ajax/us/get-all-zip-codes-inside.php"
 FREE_MAP_REFERER = "https://www.freemaptools.com/find-zip-codes-inside-radius.htm"
@@ -61,7 +55,7 @@ def write_labeled_data(ws, title, labels, data, start_row):
     if len(data) != len(labels):
         print_verbose(labels)
         print_verbose(data)
-        raise Exception(f"Data length and label length is not equal.")
+        raise Exception(f"{title} Data length and label length is not equal.")
 
     ws.cell(column=1, row=start_row, value=title)
     for x in range(len(data)):
@@ -135,11 +129,7 @@ ZIP_DATA_SHEET_NAME = "Zip Data {}"
 
 def fill_zip_worksheet(workbook, zipcode):
     # Fetch all data first - if a Zip Code doesn't work. Ignore it.
-    population = fetch_population(zipcode)
-    age_segments = fetch_age_segments_by_zip(zipcode)
-    household_type = fetch_household_type(zipcode)
-    # household_income = fetch_household_income(zipcode)
-    income_dist = fetch_household_income_distribution(zipcode)
+    population, age_segments, household_type, income_dist = get_usa_census_data(zipcode)
 
     print_verbose("POP")
     print_verbose(population)
@@ -331,9 +321,9 @@ def build_tam_data_for_zip_codes(workbook, zip_codes, income_groups):
             fill_zip_worksheet(workbook, zip_code)
             live_zipcodes.append(zip_code)
             print_verbose(f"Completed zip: {zip_code}")
-        except Exception:
+        except Exception as e:
             print_verbose(f"FAILED zip: {zip_code}")
-            # raise e
+            raise e
 
     fill_computation_tab(workbook["Computation"], live_zipcodes, income_groups)
 

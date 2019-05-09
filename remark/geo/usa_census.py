@@ -6,6 +6,13 @@ import click
 from bs4 import BeautifulSoup
 from remark.lib.memoizer import file_memoize, delay_file_memoize
 from remark.lib.logging import getLogger
+from .models import (
+    USACensusZip,
+    USACensusPopulationByAge,
+    USACensusHouseholdByType,
+    USACensusIncomeDistribution,
+)
+
 
 STAT_ATLAS_AGE_URL = "https://statisticalatlas.com/zip/{}/Age-and-Sex"
 STAT_ATLAS_HOUSEHOLD_URL = "https://statisticalatlas.com/zip/{}/Household-Types"
@@ -20,6 +27,50 @@ CACHE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../data
 
 logger = getLogger(__name__)
 
+AGE_SEGMENT_RANGES = [
+    (85, -1),
+    (80, 84),
+    (75, 79),
+    (70, 74),
+    (67, 69),
+    (65, 66),
+    (62, 64),
+    (60, 61),
+    (55, 59),
+    (50, 54),
+    (45, 49),
+    (40, 44),
+    (35, 39),
+    (30, 34),
+    (25, 29),
+    (22, 24),
+    (21, 21),
+    (20, 20),
+    (18, 19),
+    (15, 17),
+    (10, 14),
+    (5, 9),
+    (0, 4),
+]
+
+INCOME_DIST_RANGES = [
+    (200000, -1),
+    (150000, 200000),
+    (125000, 150000),
+    (100000, 125000),
+    (75000, 100000),
+    (60000, 75000),
+    (50000, 60000),
+    (45000, 50000),
+    (40000, 45000),
+    (35000, 40000),
+    (30000, 35000),
+    (25000, 30000),
+    (20000, 25000),
+    (15000, 20000),
+    (10000, 15000),
+    (0, 10000),
+]
 
 def find_population(el):
     return el.has_attr("title") and el["title"] == "Population"
@@ -131,3 +182,72 @@ def fetch_household_income_distribution(zipcode):
             result.append(value / 100.0)
     logger.info(result)
     return result
+
+
+def get_usa_census_population(zipcode):
+    usa_census_zip = USACensusZip.objects.filter(zipcode=zipcode).first()
+    if usa_census_zip is None:
+        population = fetch_population(zipcode)
+        usa_census_zip = USACensusZip.objects.create(
+            total_population=population[0],
+            number_of_households=population[1],
+            zipcode=zipcode
+        )
+    return usa_census_zip
+
+
+def get_usa_census_age_segments(usa_census_zip):
+    age_segments = usa_census_zip.age_segments.order_by('-start_age').all()
+    if age_segments.count() == 0:
+        age_segments_data = fetch_age_segments_by_zip(usa_census_zip.zipcode)
+        age_segments = [
+            USACensusPopulationByAge(
+                usa_census_zip=usa_census_zip,
+                population_percentage=percentage,
+                start_age=AGE_SEGMENT_RANGES[idx][0],
+                end_age=AGE_SEGMENT_RANGES[idx][1],
+            ) for idx, percentage in enumerate(age_segments_data)
+        ]
+        USACensusPopulationByAge.objects.bulk_create(age_segments)
+    return [item.population_percentage for item in age_segments]
+
+
+def get_usa_census_households(usa_census_zip):
+    households = usa_census_zip.households.all()
+    if households.count() == 0:
+        households_data = fetch_household_type(usa_census_zip.zipcode)
+        households = [
+            USACensusHouseholdByType(
+                usa_census_zip=usa_census_zip,
+                household_type=household_type[0],
+                household_percentage=households_data[idx]
+            ) for idx, household_type in enumerate(USACensusHouseholdByType.HouseholdType.CHOICES)
+        ]
+        USACensusHouseholdByType.objects.bulk_create(households)
+    return [item.household_percentage for item in households]
+
+
+def get_usa_census_income_distributions(usa_census_zip):
+    income_distributions = usa_census_zip.income_distributions.order_by('-income_start').all()
+    if income_distributions.count() == 0:
+        income_dist_data = fetch_household_income_distribution(usa_census_zip.zipcode)
+        income_distributions = [
+            USACensusIncomeDistribution(
+                usa_census_zip=usa_census_zip,
+                income_start=INCOME_DIST_RANGES[idx][0],
+                income_end=INCOME_DIST_RANGES[idx][1],
+                income_distribution_percentage=percentage,
+            ) for idx, percentage in enumerate(income_dist_data)
+        ]
+        USACensusIncomeDistribution.objects.bulk_create(income_distributions)
+    return [item.income_distribution_percentage for item in income_distributions]
+
+
+def get_usa_census_data(zipcode):
+    usa_census_zip = get_usa_census_population(zipcode)
+    age_segments = get_usa_census_age_segments(usa_census_zip)
+    households = get_usa_census_households(usa_census_zip)
+    income_distributions = get_usa_census_income_distributions(usa_census_zip)
+
+    population = [usa_census_zip.total_population, usa_census_zip.number_of_households]
+    return population, age_segments, households, income_distributions
