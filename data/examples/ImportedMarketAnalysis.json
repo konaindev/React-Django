@@ -4,15 +4,18 @@
     "zip_codes": [
       {
         "zip": "95670",
-        "outline": null
+        "outline": null,
+        "properties": null
       },
       {
         "zip": "95655",
-        "outline": null
+        "outline": null,
+        "properties": null
       },
       {
         "zip": "95827",
-        "outline": null
+        "outline": null,
+        "properties": null
       }
     ],
     "population": 78864
@@ -72,14 +75,7 @@
         0.5279999999999999,
         0.576
       ],
-      [
-        0.28,
-        0.32,
-        0.36,
-        0.4,
-        0.44,
-        0.48
-      ],
+      [0.28, 0.32, 0.36, 0.4, 0.44, 0.48],
       [
         0.24000000000000002,
         0.2742857142857143,
@@ -88,14 +84,7 @@
         0.37714285714285717,
         0.4114285714285715
       ],
-      [
-        0.21,
-        0.24,
-        0.26999999999999996,
-        0.3,
-        0.32999999999999996,
-        0.36
-      ],
+      [0.21, 0.24, 0.26999999999999996, 0.3, 0.32999999999999996, 0.36],
       [
         0.18666666666666668,
         0.21333333333333335,
@@ -120,14 +109,7 @@
         0.24000000000000002,
         0.26181818181818184
       ],
-      [
-        0.14,
-        0.16,
-        0.18,
-        0.2,
-        0.22,
-        0.24
-      ]
+      [0.14, 0.16, 0.18, 0.2, 0.22, 0.24]
     ]
   },
   "segments": [
@@ -152,10 +134,7 @@
             "nonfamily": 840
           },
           "market_size": 2574,
-          "active_populations": [
-            "renters.nonfamily",
-            "renters.family"
-          ]
+          "active_populations": ["renters.nonfamily", "renters.family"]
         },
         {
           "income": "65000.00",
@@ -171,10 +150,7 @@
             "nonfamily": 501
           },
           "market_size": 1535,
-          "active_populations": [
-            "renters.nonfamily",
-            "renters.family"
-          ]
+          "active_populations": ["renters.nonfamily", "renters.family"]
         },
         {
           "income": "85000.00",
@@ -190,10 +166,7 @@
             "nonfamily": 320
           },
           "market_size": 981,
-          "active_populations": [
-            "renters.nonfamily",
-            "renters.family"
-          ]
+          "active_populations": ["renters.nonfamily", "renters.family"]
         }
       ],
       "segment_population": 6870
@@ -219,10 +192,7 @@
             "nonfamily": 1552
           },
           "market_size": 4755,
-          "active_populations": [
-            "renters.nonfamily",
-            "renters.family"
-          ]
+          "active_populations": ["renters.nonfamily", "renters.family"]
         },
         {
           "income": "65000.00",
@@ -238,10 +208,7 @@
             "nonfamily": 926
           },
           "market_size": 2836,
-          "active_populations": [
-            "renters.nonfamily",
-            "renters.family"
-          ]
+          "active_populations": ["renters.nonfamily", "renters.family"]
         },
         {
           "income": "85000.00",
@@ -257,10 +224,7 @@
             "nonfamily": 592
           },
           "market_size": 1813,
-          "active_populations": [
-            "renters.nonfamily",
-            "renters.family"
-          ]
+          "active_populations": ["renters.nonfamily", "renters.family"]
         }
       ],
       "segment_population": 12695
@@ -286,10 +250,7 @@
             "nonfamily": 782
           },
           "market_size": 2396,
-          "active_populations": [
-            "renters.nonfamily",
-            "renters.family"
-          ]
+          "active_populations": ["renters.nonfamily", "renters.family"]
         },
         {
           "income": "65000.00",
@@ -305,10 +266,7 @@
             "nonfamily": 467
           },
           "market_size": 1429,
-          "active_populations": [
-            "renters.nonfamily",
-            "renters.family"
-          ]
+          "active_populations": ["renters.nonfamily", "renters.family"]
         },
         {
           "income": "85000.00",
@@ -324,10 +282,7 @@
             "nonfamily": 298
           },
           "market_size": 913,
-          "active_populations": [
-            "renters.nonfamily",
-            "renters.family"
-          ]
+          "active_populations": ["renters.nonfamily", "renters.family"]
         }
       ],
       "segment_population": 10334
@@ -353,10 +308,7 @@
             "nonfamily": 619
           },
           "market_size": 1896,
-          "active_populations": [
-            "renters.nonfamily",
-            "renters.family"
-          ]
+          "active_populations": ["renters.nonfamily", "renters.family"]
         },
         {
           "income": "65000.00",
@@ -372,10 +324,7 @@
             "nonfamily": 369
           },
           "market_size": 1130,
-          "active_populations": [
-            "renters.nonfamily",
-            "renters.family"
-          ]
+          "active_populations": ["renters.nonfamily", "renters.family"]
         },
         {
           "income": "85000.00",
@@ -391,10 +340,7 @@
             "nonfamily": 236
           },
           "market_size": 723,
-          "active_populations": [
-            "renters.nonfamily",
-            "renters.family"
-          ]
+          "active_populations": ["renters.nonfamily", "renters.family"]
         }
       ],
       "segment_population": 10629
@@ -420,10 +366,7 @@
             "nonfamily": 449
           },
           "market_size": 1374,
-          "active_populations": [
-            "renters.nonfamily",
-            "renters.family"
-          ]
+          "active_populations": ["renters.nonfamily", "renters.family"]
         },
         {
           "income": "65000.00",
@@ -439,10 +382,7 @@
             "nonfamily": 268
           },
           "market_size": 820,
-          "active_populations": [
-            "renters.nonfamily",
-            "renters.family"
-          ]
+          "active_populations": ["renters.nonfamily", "renters.family"]
         },
         {
           "income": "85000.00",
@@ -458,10 +398,7 @@
             "nonfamily": 171
           },
           "market_size": 524,
-          "active_populations": [
-            "renters.nonfamily",
-            "renters.family"
-          ]
+          "active_populations": ["renters.nonfamily", "renters.family"]
         }
       ],
       "segment_population": 9631
@@ -487,10 +424,7 @@
             "nonfamily": 484
           },
           "market_size": 1484,
-          "active_populations": [
-            "renters.nonfamily",
-            "renters.family"
-          ]
+          "active_populations": ["renters.nonfamily", "renters.family"]
         },
         {
           "income": "65000.00",
@@ -506,10 +440,7 @@
             "nonfamily": 289
           },
           "market_size": 885,
-          "active_populations": [
-            "renters.nonfamily",
-            "renters.family"
-          ]
+          "active_populations": ["renters.nonfamily", "renters.family"]
         },
         {
           "income": "85000.00",
@@ -525,10 +456,7 @@
             "nonfamily": 185
           },
           "market_size": 566,
-          "active_populations": [
-            "renters.nonfamily",
-            "renters.family"
-          ]
+          "active_populations": ["renters.nonfamily", "renters.family"]
         }
       ],
       "segment_population": 11884

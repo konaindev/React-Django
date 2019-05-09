@@ -708,7 +708,7 @@
                 "properties": {
                     "anyOf": [
                         {
-                            "properties": {
+                            "additionalProperties": {
                             },
                             "type": "object"
                         },
@@ -716,7 +716,7 @@
                             "type": "null"
                         }
                     ],
-                    "description": "An arbitrary hash of geographic properties; may not be present."
+                    "description": "Associated properties of the zip code; can be any JSON object"
                 },
                 "zip": {
                     "description": "The zip code",
@@ -725,6 +725,7 @@
             },
             "required": [
                 "outline",
+                "properties",
                 "zip"
             ],
             "type": "object"

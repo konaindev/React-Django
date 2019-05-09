@@ -97,7 +97,11 @@ class MarketImporter(ProjectExcelImporter):
         _, _, row = find_output("tam type")(self.workbook)
         cols = cols_until_empty(self.workbook, "C", sheet="Output", row=row)
         zip_codes = self.col_table(
-            schema={"zip": StrCell(loc(sheet="Output", row=row)), "outline": None},
+            schema={
+                "zip": StrCell(loc(sheet="Output", row=row)),
+                "outline": None,
+                "properties": None,
+            },
             cols=cols,
         )
         return {"zip_codes": zip_codes}
