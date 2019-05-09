@@ -7,7 +7,7 @@ import { linkTo } from "@storybook/addon-links";
 import PerformanceReportSpanDropdown from "./index";
 
 export const props = {
-  current_report_link: { name: "Some Report", link: "/some/url" },
+  current_report_link: { description: "Some Report", url: "/some/url" },
   report_links: [
     {
       url: "/projects/pro_eekgau8mfkbc34iq/report/baseline/",
@@ -32,6 +32,15 @@ export const props = {
   ]
 };
 
+export const nolinks_props = {
+  current_report_link: { description: "Some Report", url: "/some/url" },
+  report_links: null
+};
+
 storiesOf("PerformanceReportSpanDropdown", module).add("default", () => (
   <PerformanceReportSpanDropdown {...props} />
+));
+
+storiesOf("PerformanceReportSpanDropdown", module).add("nolinks", () => (
+  <PerformanceReportSpanDropdown {...nolinks_props} />
 ));

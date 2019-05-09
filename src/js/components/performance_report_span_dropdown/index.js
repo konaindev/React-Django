@@ -11,7 +11,7 @@ import "./performance_report_span_dropdown.scss";
 export default class PerformanceReportSpanDropdown extends Component {
   static propTypes = {
     current_report_link: PropTypes.object.isRequired,
-    report_links: PropTypes.arrayOf(PropTypes.object).isRequired
+    report_links: PropTypes.arrayOf(PropTypes.object)
   };
 
   onChange = event => {
@@ -20,8 +20,11 @@ export default class PerformanceReportSpanDropdown extends Component {
   };
 
   renderOptions() {
+    // handle the case where there are no public report links
+    const links = this.props.report_links || [this.props.current_report_link];
+
     let options = [];
-    for (let link of this.props.report_links) {
+    for (let link of links) {
       options.push(
         <option key={link.url} value={link.url}>
           {link.description}

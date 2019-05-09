@@ -6,7 +6,7 @@ import openpyxl
 class ExcelError(Exception):
     """Generic error for all code in this library."""
 
-    def __init__(self, where=None, message=None):
+    def __init__(self, message, where=None):
         """
         Construct an ExcelError. For convenience, `where` may be one of:
 
@@ -19,16 +19,24 @@ class ExcelError(Exception):
         elif isinstance(where, tuple):
             where = unparse_location(*where)
 
-        super().__init__(f"{where} :: {message}")
+        message = f"{where} :: {message}" if where else message
+        super().__init__(message)
 
 
-class ExcelValidationError(ExcelError):
-    """An exception for when there's an error in the excel spreadsheet itself."""
+class ExcelLocationError(ExcelError):
+    """An exception for when we failed to locate a cell successfully."""
 
     pass
 
 
 class ExcelProgrammingError(ExcelError):
-    """An exception for when we messed something up here in this code..."""
+    """An exception for when we made a mistake in our code, which mistake is caught at runtime."""
 
     pass
+
+
+class ExcelValidationError(ExcelError):
+    """An exception for when there's a data validation issue in an excel spreadsheet."""
+
+    pass
+
