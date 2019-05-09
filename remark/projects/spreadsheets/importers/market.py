@@ -55,8 +55,8 @@ class MarketImporter(ProjectExcelImporter):
         "center": {
             "type": "Point",
             "coordinates": [
-                FloatCell(find("coordinates", "B")),
                 FloatCell(find("coordinates", "C")),
+                FloatCell(find("coordinates", "B")),
             ],
         },
         "radius": FloatCell(find("tam type", "C")),
