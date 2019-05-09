@@ -182,6 +182,14 @@ def list_kpi(kpi_key, campaign, health):
         "health" : health
     }
 
+def create_list_kpi(result, campaign, prefix, kpis, health):
+    result[f"{prefix}_1"] = list_kpi(kpis[0], campaign, health)
+    if len(kpis) > 1:
+        result[f"{prefix}_2"] = list_kpi(kpis[1], campaign, health)
+    if len(kpis) > 2:
+        result[f"{prefix}_3"] = list_kpi(kpis[2], campaign, health)
+
+
 @click.command()
 @click.option(
     "-p",
@@ -300,17 +308,12 @@ def command(project_id, start, client, health, leaseratetext, bestkpi, bestkpite
         "lease_rate" : top_kpi("lease_rate", campaign_to_date, this_week, prev_week, leaseratetext),
         "best_kpi" : top_kpi(bestkpi, campaign_to_date, this_week, prev_week, bestkpitext),
         "worst_kpi" : top_kpi(worstkpi, campaign_to_date, this_week, prev_week, worstkpitext),
-        "top_1" : list_kpi(topkpis[0], campaign_to_date, 2),
-        "top_2" : list_kpi(topkpis[1], campaign_to_date, 2),
-        "top_3" : list_kpi(topkpis[2], campaign_to_date, 2),
-        "risk_1" : list_kpi(riskkpis[0], campaign_to_date, 1),
-        "risk_2" : list_kpi(riskkpis[1], campaign_to_date, 1),
-        "risk_3" : list_kpi(riskkpis[2], campaign_to_date, 1),
-        "low_1" : list_kpi(lowkpis[0], campaign_to_date, 0),
-        "low_2" : list_kpi(lowkpis[1], campaign_to_date, 0),
-        "low_3" : list_kpi(lowkpis[2], campaign_to_date, 0),
         "email" : email
     }
+
+    create_list_kpi(template_vars, campaign_to_date, "top", topkpis, 2)
+    create_list_kpi(template_vars, campaign_to_date, "risk", riskkpis, 1)
+    create_list_kpi(template_vars, campaign_to_date, "low", lowkpis, 0)
 
     template = get_template("projects/weekly_performance_reporting_email.html")
     result = template.render(template_vars)
