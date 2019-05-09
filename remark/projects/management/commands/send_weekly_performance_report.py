@@ -109,7 +109,7 @@ TITLES = {
     "cost_per_exe" : "Cost per EXE"
 }
 
-IS_CUMULATIVE = {
+SHOW_CAMPAIGN = {
     "lease_rate" : True,
     "retention_rate" : False,
     "occupied_rate" : True,
@@ -154,7 +154,7 @@ def top_kpi(kpi_key, campaign, this_week, prev_week, text):
     selector = SELECTORS[kpi_key]
     title = TITLES[kpi_key]
     formatter = FORMATTERS[kpi_key]
-    is_cumulative = IS_CUMULATIVE[kpi_key]
+    show_campaign = SHOW_CAMPAIGN[kpi_key]
     campaign_value = selector(campaign)
     campaign_target = selector(campaign["targets"])
     return {
@@ -167,7 +167,7 @@ def top_kpi(kpi_key, campaign, this_week, prev_week, text):
         "prev_value" : formatter(selector(prev_week)),
         "prev_target" : formatter(selector(prev_week["targets"])),
         "insight" : text,
-        "is_cumulative" : is_cumulative
+        "show_campaign" : show_campaign
     }
 
 def list_kpi(kpi_key, campaign, health):
