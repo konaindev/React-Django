@@ -3,7 +3,7 @@ from django.contrib import admin
 from remark.admin import admin_site
 
 from .forms import LocationForm, AddressForm
-from .models import Address, Country, State, City
+from .models import Address, Country, State, City, ZipcodePolygon
 
 
 @admin.register(Address, site=admin_site)
@@ -51,3 +51,9 @@ class CityAdmin(admin.ModelAdmin):
     list_display = ("name", "state", "country")
     ordering = ("pk",)
     search_fields = ("name",)
+
+
+@admin.register(ZipcodePolygon, site=admin_site)
+class ZipcodePolygonAdmin(admin.ModelAdmin):
+    list_display = ("zip_code", "state")
+    search_fields = ("zip_code", "state")
