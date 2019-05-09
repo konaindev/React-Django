@@ -705,6 +705,19 @@
                     ],
                     "description": "A polygon outlining the zipcode as a GeoJSON Polygon; may be null if unknown"
                 },
+                "properties": {
+                    "anyOf": [
+                        {
+                            "properties": {
+                            },
+                            "type": "object"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "An arbitrary hash of geographic properties; may not be present."
+                },
                 "zip": {
                     "description": "The zip code",
                     "type": "string"

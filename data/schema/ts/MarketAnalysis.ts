@@ -142,6 +142,9 @@ interface PopulationZipCode {
 
   /** A polygon outlining the zipcode as a GeoJSON Polygon; may be null if unknown */
   outline: geo.Polygon | geo.MultiPolygon | null;
+
+  /** An arbitrary hash of geographic properties; may not be present. */
+  properties?: {} | null;
 }
 
 /** Estimated population with a set of zip codes */
