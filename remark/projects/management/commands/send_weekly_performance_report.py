@@ -30,6 +30,12 @@ def currency_formatter(value):
     final = "{:.2f}".format(initial)
     return "$" + final
 
+def none_wrapper(formatter, selector, obj):
+    try:
+        result = selector(obj)
+        return formatter(result)
+    except:
+        return None
 
 SELECTORS = {
     "lease_rate" : lambda x : x["property"]["leasing"]["rate"],
@@ -165,7 +171,7 @@ def top_kpi(kpi_key, campaign, this_week, prev_week, text):
         "week_value" : formatter(selector(this_week)),
         "week_target" : formatter(selector(this_week["targets"])),
         "prev_value" : formatter(selector(prev_week)),
-        "prev_target" : formatter(selector(prev_week["targets"])),
+        "prev_target" : none_wrapper(formatter, selector, prev_week["targets"]),
         "insight" : text,
         "show_campaign" : show_campaign
     }

@@ -53,7 +53,9 @@
        <td align="left" valign="middle" style="font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif; text-align: left; width: 180px;">
            <p style="font-size: 12px; font-weight: 400; line-height: 20px; letter-spacing: 1px; color: #798796; text-transform: uppercase; margin: 0;">Last Week</p>
            <p style="font-size: 36px; font-weight: 300; color: #F5FAF7; margin: 0;">{{kpi.prev_value}}</p>
+           {% if kpi.prev_target %}
            <p style="font-size: 14px; font-weight: 400; line-height: 20px; color: #798796; letter-spacing: .5px; margin: 10px 0 0;">Target: {{kpi.prev_target}}</p>
+           {% endif %}
        </td>
 
 
