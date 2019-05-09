@@ -24,6 +24,8 @@ killchildren() {
 # Build our frontend assets
 yarn webpack --progress --color --hide-modules --config=webpack.dev.js --watch &
 
+redis-server > /dev/null &
+
 ./manage.py celery &
 
 # Run the django dev server (on 8000)

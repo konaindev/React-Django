@@ -37,7 +37,6 @@ beautifulsoup4 = "*"
 googlemaps = "*"
 bs4 = "*"
 celery = "*"
-django-celery-results = "*"
 redis = "*"
 
 [requires]

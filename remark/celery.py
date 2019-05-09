@@ -8,8 +8,8 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'remark.settings')
 
 app = Celery(
     'remark',
-    broker=settings.REDIS_URI,
-    backend=settings.REDIS_URI
+    broker=settings.REDIS_URL,
+    backend=settings.REDIS_URL
 )
 
 # Using a string here means the worker doesn't have to serialize

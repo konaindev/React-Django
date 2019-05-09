@@ -50,7 +50,7 @@ def send_email(emails_to, template_dir, context=None, attachments=None):
     Render the email and send it to the list specified in emails_to.
     """
     message = build_message(emails_to, template_dir, context=context)
-    if attachments is not None and len(attachments) > 0:
+    if attachments:
         for attachment in attachments:
             message.attach(attachment['name'], attachment['content'], attachment['type'])
     message.send()
