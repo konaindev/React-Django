@@ -247,7 +247,10 @@ const current_report_link = {
 };
 const share_info = {
   shared: false,
-  share_url: `/projects/${project.public_id}/share/performance/last-four-weeks/`
+  share_url: `/projects/${
+    project.public_id
+  }/share/performance/last-four-weeks/`,
+  change_url: `/projects/${project.public_id}/change/`
 };
 
 export default {

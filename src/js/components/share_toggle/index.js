@@ -7,9 +7,7 @@ import ButtonToggle from "../button_toggle";
 import CopyToClipboard from "../copy_to_clipboard";
 import "./share_toggle.scss";
 
-const ENDPOINT = "/endpoint-to-update-shared-flag";
-
-function useApi() {
+function useApi(endpoint, report_name) {
   const [shared, setShared] = useState(null);
 
   const updateServer = async () => {
@@ -18,7 +16,7 @@ function useApi() {
     }
 
     try {
-      const resp = await axios.post(ENDPOINT, { shared });
+      const resp = await axios.post(endpoint, { shared, report_name });
     } catch (err) {
       console.log("Failed to update shared", err);
     }
@@ -32,10 +30,10 @@ function useApi() {
 }
 
 export function ShareToggle(props) {
-  const { shared, share_url } = props;
+  const { shared, share_url, change_url, current_report_name } = props;
 
   const [flag, setFlag] = useState(shared);
-  const [makeApiCall] = useApi();
+  const [makeApiCall] = useApi(change_url, current_report_name);
 
   const handleToggleChange = newValue => {
     setFlag(newValue);

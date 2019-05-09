@@ -98,7 +98,8 @@ const current_report_link = report_links.baseline;
 
 const share_info = {
   shared: true,
-  share_url: `/projects/${project.public_id}/share/baseline/`
+  share_url: `/projects/${project.public_id}/share/baseline/`,
+  change_url: `/projects/${project.public_id}/change/`
 };
 
 export default {

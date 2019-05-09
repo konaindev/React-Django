@@ -4,7 +4,8 @@ import report from "../total_addressable_market/MarketAnalysis.js";
 const current_report_link = report_links.market;
 const share_info = {
   shared: false,
-  share_url: `/projects/${project.public_id}/share/market/`
+  share_url: `/projects/${project.public_id}/share/market/`,
+  change_url: `/projects/${project.public_id}/change/`
 };
 
 export default {
