@@ -11,15 +11,19 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         # Optional argument
-        parser.add_argument("-s", "--states", type=str, help="Comma separated list of states" )
+        parser.add_argument(
+            "-s", "--states", type=str, help="Comma separated list of states"
+        )
 
     def handle(self, *args, **kwargs):
-        states_args = kwargs['states']
+        states_args = kwargs["states"]
 
         if states_args is None:
             states_to_import = list(filenames_by_state.keys())
         else:
-            states_to_import = [state.lower().strip() for state in states_args.split(",")]
+            states_to_import = [
+                state.lower().strip() for state in states_args.split(",")
+            ]
 
         print("========================================================")
         print("Started importing geojson data for the following states:")
@@ -37,7 +41,9 @@ class Command(BaseCommand):
         print("========================================================")
 
 
-remote_folder = "https://raw.githubusercontent.com/OpenDataDE/State-zip-code-GeoJSON/master/"
+remote_folder = (
+    "https://raw.githubusercontent.com/OpenDataDE/State-zip-code-GeoJSON/master/"
+)
 
 filenames_by_state = {
     "ak": "ak_alaska_zip_codes_geo.min.json",
@@ -90,7 +96,7 @@ filenames_by_state = {
     "wa": "wa_washington_zip_codes_geo.min.json",
     "wi": "wi_wisconsin_zip_codes_geo.min.json",
     "wv": "wv_west_virginia_zip_codes_geo.min.json",
-    "wy": "wy_wyoming_zip_codes_geo.min.json"
+    "wy": "wy_wyoming_zip_codes_geo.min.json",
 }
 
 
@@ -123,8 +129,8 @@ def import_data_for_a_state(state):
             defaults={
                 "state": state.upper(),
                 "geometry": feature["geometry"],
-                "properties": properties
-            }
+                "properties": properties,
+            },
         )
 
     return counter
