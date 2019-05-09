@@ -341,7 +341,7 @@ class Project(models.Model):
 
     def update_for_selected_model(self):
         """
-        Update all associated data (like target periods) based on 
+        Update all associated data (like target periods) based on
         the currently selected model.
 
         """
@@ -854,3 +854,24 @@ class TargetPeriod(ModelPeriod, models.Model):
     class Meta:
         # Always sort TargetPeriods with the earliest period first.
         ordering = ["start"]
+
+class PerformanceEmailManager(models.Manager):
+    pass
+
+
+class PerformanceEmail(ModelPeriod, models.Model):
+    objects = PerformanceEmailManager()
+
+    project = models.ForeignKey(
+        Project, on_delete=models.CASCADE, related_name="performance_emails"
+    )
+
+    start = models.DateField(
+        db_index=True,
+        help_text="The first date, inclusive, that this target period tracks.",
+    )
+
+    end = models.DateField(
+        db_index=True,
+        help_text="The final date, exclusive, that this target period tracks.",
+    )
