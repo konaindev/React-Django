@@ -65,7 +65,11 @@ class MarketImporter(ProjectExcelImporter):
 
     @staticmethod
     def POPULATION_ZIP_SCHEMA(row):
-        return {"zip": StrCell(loc(sheet="Output", row=row)), "outline": None}
+        return {
+            "zip": StrCell(loc(sheet="Output", row=row)),
+            "outline": None,
+            "properties": None,
+        }
 
     @staticmethod
     def RTI_SCHEMA(category):
