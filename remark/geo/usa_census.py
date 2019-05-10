@@ -77,7 +77,8 @@ def find_households(el):
 def get(url):
     headers = {"user-agent": USER_AGENT, "referer": STAT_ATLAS_REFER}
     response = requests.get(url, headers=headers)
-    if 200 > response.status_code > 299:
+    if not response.ok:
+        logging.error("usa_census::get::error", response.reason, response.text)
         raise Exception("usa_census::get::error response", url)
     return response
 
