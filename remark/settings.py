@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 import sys
 
-import logging.config
-
 import dj_database_url
 import django_heroku
 
@@ -26,6 +24,7 @@ def _safe_int(x):
     except Exception:
         i = None
     return i
+
 
 def required_env(name):
     result = os.getenv(name)
@@ -150,37 +149,29 @@ DATABASES = {
 }
 
 # Logging
-LOGGING_CONFIG = None
-logging.config.dictConfig({
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'remarkably':{
-            'level':'INFO',
-            'class':'logging.StreamHandler',
-            'stream': sys.stdout,
-            'formatter': 'remarkably'
+LOGGING_CONFIG = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "remarkably": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+            "stream": sys.stdout,
+            "formatter": "remarkably",
         }
     },
-    'formatters': {
-        'remarkably' : {
-            'format': '{levelname} {asctime} {module} {filename} {funcName} {message}',
-            'style': '{',
+    "formatters": {
+        "remarkably": {
+            "format": "{levelname} {asctime} {module} {filename} {funcName} {message}",
+            "style": "{",
         },
-        'simple': {
-            'format': '{levelname}::{message}',
-            'style': '{',
-        }
+        "simple": {"format": "{levelname}::{message}", "style": "{"},
     },
     "loggers": {
-        "django": {
-            "handlers": ['remarkably'],
-        },
-        "remark": {
-            "handlers": ['remarkably'],
-        }
-    }
-})
+        "django": {"handlers": ["remarkably"]},
+        "remark": {"handlers": ["remarkably"]},
+    },
+}
 
 # Change 'default' database configuration with $DATABASE_URL.
 DATABASES["default"].update(dj_database_url.config(conn_max_age=500, ssl_require=True))
