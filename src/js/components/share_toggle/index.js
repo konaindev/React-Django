@@ -7,7 +7,7 @@ import ButtonToggle from "../button_toggle";
 import CopyToClipboard from "../copy_to_clipboard";
 import "./share_toggle.scss";
 
-function useApi(endpoint, report_name) {
+function useApi(update_endpoint, update_action, report_name) {
   const [shared, setShared] = useState(null);
 
   const updateServer = async () => {
@@ -16,7 +16,12 @@ function useApi(endpoint, report_name) {
     }
 
     try {
-      const resp = await axios.post(endpoint, { shared, report_name });
+      const payload = {
+        update_action,
+        shared,
+        report_name
+      };
+      const resp = await axios.put(update_endpoint, payload);
     } catch (err) {
       console.log("Failed to update shared", err);
     }
@@ -30,10 +35,20 @@ function useApi(endpoint, report_name) {
 }
 
 export function ShareToggle(props) {
-  const { shared, share_url, change_url, current_report_name } = props;
+  const {
+    shared,
+    share_url,
+    update_endpoint,
+    current_report_name,
+    update_action
+  } = props;
 
   const [flag, setFlag] = useState(shared);
-  const [makeApiCall] = useApi(change_url, current_report_name);
+  const [makeApiCall] = useApi(
+    update_endpoint,
+    update_action,
+    current_report_name
+  );
 
   const handleToggleChange = newValue => {
     setFlag(newValue);
@@ -55,11 +70,16 @@ export function ShareToggle(props) {
 
 ShareToggle.propTypes = {
   shared: PropTypes.bool,
-  share_url: PropTypes.string.isRequired
+  share_url: PropTypes.string.isRequired,
+  update_endpoint: PropTypes.string,
+  update_action: PropTypes.string,
+  current_report_name: PropTypes.string.isRequired
 };
 
 ShareToggle.defaultProps = {
-  shared: false
+  shared: false,
+  update_action: "shared_reports",
+  update_endpoint: "/"
 };
 
 export default ShareToggle;

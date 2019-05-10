@@ -151,14 +151,22 @@ class TAMExportView(FormView, SingleObjectMixin):
             return self.form_invalid(form)
 
 
-class ReportShareUpdateAPIView(APIView):
-    # APIView to update shared status of a given project and report type
+class ProjectUpdateAPIView(APIView):
+    # APIView to update project details
 
-    # Doesn't need CSRF protection for REST API endpoint
+    # Doesn't need CSRF protection for this REST API endpoint
     csrf_exempt = True
 
-    def post(self, request, project_id):
+    def put(self, request, project_id):
+        payload = self.get_data()
+        update_action = payload.get("update_action")
 
+        if update_action == "shared_reports":
+            return self.update_shared_reports(project_id, payload)
+        else:
+            return self.render_failure_message("Not supported")
+
+    def update_shared_reports(self, project_id, payload):
         shared_field_names = dict(
             baseline="is_baseline_report_shared",
             market="is_tam_shared",
@@ -168,13 +176,14 @@ class ReportShareUpdateAPIView(APIView):
         )
 
         try:
-            shared, report_name = self.get_data().values() # parse payload
-            field_name = shared_field_names[report_name]
-
+            shared = payload.get("shared")
+            report_name = payload.get("report_name")
+            field_name = shared_field_names.get(report_name)
+            
             project = Project.objects.get(public_id=project_id)
             setattr(project, field_name, shared)
             project.save()
 
             return self.render_success()
         except Exception:
-            return self.render_failure()
+            return self.render_failure_message("Failed to update")

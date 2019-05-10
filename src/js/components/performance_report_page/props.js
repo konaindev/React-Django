@@ -250,7 +250,7 @@ const share_info = {
   share_url: `/projects/${
     project.public_id
   }/share/performance/last-four-weeks/`,
-  change_url: `/projects/${project.public_id}/change/`
+  update_action: "shared_reports"
 };
 
 export default {

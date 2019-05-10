@@ -5,7 +5,7 @@ const current_report_link = report_links.market;
 const share_info = {
   shared: false,
   share_url: `/projects/${project.public_id}/share/campaign_plan/`,
-  change_url: `/projects/${project.public_id}/change/`
+  update_action: "shared_reports"
 };
 
 export default {

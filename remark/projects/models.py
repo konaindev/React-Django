@@ -6,6 +6,7 @@ from datetime import datetime
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import Group
+from django.urls import reverse
 from django.utils.crypto import get_random_string
 
 from jsonfield import JSONField
@@ -363,11 +364,16 @@ class Project(models.Model):
 
     def to_jsonable(self):
         """Return a representation that can be converted to a JSON string."""
-        return {
-            "public_id": self.public_id,
-            "name": self.name,
-            "building_image": self.get_building_image(),
-        }
+
+        kwargs = {"project_id": self.public_id}
+        update_endpoint = reverse("update_endpoint", kwargs=kwargs)
+
+        return dict(
+            public_id=self.public_id,
+            name=self.name,
+            building_image=self.get_building_image(),
+            update_endpoint=update_endpoint
+        )
 
     def get_named_model_option(self, name):
         """Given a named model, return the option."""

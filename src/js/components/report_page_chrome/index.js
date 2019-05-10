@@ -31,7 +31,12 @@ export default class ReportPageChrome extends Component {
   };
 
   render() {
-    const { current_report_name, report_links, share_info } = this.props;
+    const {
+      project,
+      current_report_name,
+      report_links,
+      share_info
+    } = this.props;
 
     const topItems = (
       <section className="report-page-subheader">
@@ -44,6 +49,7 @@ export default class ReportPageChrome extends Component {
             <ShareToggle
               {...share_info}
               current_report_name={current_report_name}
+              update_endpoint={project.update_endpoint}
             />
           </div>
         </div>
