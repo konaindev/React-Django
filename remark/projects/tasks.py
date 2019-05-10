@@ -9,6 +9,8 @@ from remark.lib.logging import getLogger
 from remark.users.models import User
 from xls.exporters.tam_data import build_tam_data, DEFAULT_TEMPLATE_PATH
 
+from traceback import print_exception
+
 
 logger = getLogger(__name__)
 
@@ -65,4 +67,4 @@ def export_tam_task(project_pk, user_pk, form_data):
             )
 
     except Exception as e:
-        logger.error(str(e))
+        logger.error(print_exception(e))
