@@ -76,6 +76,8 @@ def find_households(el):
 
 
 def fetch_population(zipcode):
+    logger.info(f"usa_census::fetch_population::start", zipcode)
+
     url = STAT_ATLAS_AGE_URL.format(zipcode)
     headers = {"user-agent": USER_AGENT, "referer": STAT_ATLAS_REFER}
     response = requests.get(url, headers=headers)
@@ -83,14 +85,13 @@ def fetch_population(zipcode):
     pop_th = soup.find_all(find_population)[0]
     td_value = str(pop_th.td.text)
     population = int(td_value.replace(",", ""))
-    logger.info(f"Population: {population}")
-
     house_th = soup.find_all(find_households)[0]
     td_value = str(house_th.td.text)
     households = int(td_value.replace(",", ""))
-    logger.info(f"households: {population}")
+    result = (population, households)
 
-    return (population, households)
+    logger.info(f"usa_census::fetch_population::end", result)
+    return result
 
 
 def fetch_svg(base_url, zipcode, figure_id):
@@ -118,10 +119,12 @@ def fetch_svg(base_url, zipcode, figure_id):
         logger.error(f"Length: {len(response.text)}")
         logger.error(figures[0].find("svg"))
         raise e
+
     return svg
 
 
 def fetch_age_segments_by_zip(zipcode):
+    logger.info(f"usa_census::fetch_age_segments_by_zip::{zipcode}")
     svg = fetch_svg(STAT_ATLAS_AGE_URL, zipcode, "figure/age-structure")
     gs = svg.g.find_all("g")
     result = []
@@ -130,11 +133,12 @@ def fetch_age_segments_by_zip(zipcode):
             txt = gs[x].title.text
             value = float(txt.replace("%", ""))
             result.append(value / 100.0)
-    # logger.info(result)
+    logger.info(f"usa_census::fetch_age_segments_by_zip::end", result)
     return result
 
 
 def fetch_household_type(zipcode):
+    logger.info(f"usa_census::fetch_household_type::{zipcode}")
     svg = fetch_svg(STAT_ATLAS_HOUSEHOLD_URL, zipcode, "figure/household-types")
     gs = svg.g.find_all("g")
     result = []
@@ -144,10 +148,12 @@ def fetch_household_type(zipcode):
             if txt.find("%") > -1:
                 value = float(txt.replace("%", "").replace(",", ""))
                 result.append(value / 100.0)
+    logger.info(f"usa_census::fetch_household_type::end", result)
     return result
 
 
 def fetch_household_income(zipcode):
+    logger.info(f"usa_census::fetch_household_income::{zipcode}")
     svg = fetch_svg(
         STAT_ATLAS_HOUSEHOLD_INCOME_URL, zipcode, "figure/household-income-percentiles"
     )
@@ -156,10 +162,12 @@ def fetch_household_income(zipcode):
     for x in range(len(result)):
         txt = result[x].title.text
         result[x] = float(txt.replace("$", "").replace(",", ""))
+    logger.info(f"usa_census::fetch_household_income::end", result)
     return result
 
 
 def fetch_household_income_distribution(zipcode):
+    logger.info(f"usa_census::fetch_household_income_distribution::{zipcode}")
     svg = fetch_svg(
         STAT_ATLAS_HOUSEHOLD_INCOME_URL, zipcode, "figure/household-income-distribution"
     )
