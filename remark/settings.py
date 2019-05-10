@@ -149,7 +149,7 @@ DATABASES = {
 }
 
 # Logging
-LOGGING_CONFIG = {
+LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
     "handlers": {
