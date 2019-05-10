@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.core.validators import MaxValueValidator, MinValueValidator
 from jsonfield import JSONField
 
 from .geocode import geocode, GeocodeResult
@@ -186,4 +186,73 @@ class ZipcodePolygon(models.Model):
 
     properties = JSONField(
         help_text="Additional properties in JSON format"
+    )
+
+
+class USACensusZip(models.Model):
+    total_population = models.PositiveIntegerField()
+
+    number_of_households = models.PositiveIntegerField()
+
+    zipcode = models.CharField(max_length=20, unique=True)
+
+    def __str__(self):
+        return zipcode
+
+
+class USACensusPopulationByAge(models.Model):
+    usa_census_zip = models.ForeignKey(
+        USACensusZip, on_delete=models.CASCADE, related_name="age_segments"
+    )
+
+    start_age = models.IntegerField()
+
+    end_age = models.IntegerField()
+
+    population_percentage = models.FloatField(
+        validators=[MinValueValidator(0.0), MaxValueValidator(1.0)]
+    )
+
+
+class USACensusHouseholdByType(models.Model):
+
+    class HouseholdType:
+        MARRIED = "Married"
+        SINGLE_FEMALE = "Single Female"
+        SINGLE_MALE = "Single Male"
+        ONE_PERSON = "One Person"
+        NON_FAMILY = "Non-Family"
+
+        CHOICES = [
+            (MARRIED, MARRIED),
+            (SINGLE_FEMALE, SINGLE_FEMALE),
+            (SINGLE_MALE, SINGLE_MALE),
+            (ONE_PERSON, ONE_PERSON),
+            (NON_FAMILY, NON_FAMILY),
+        ]
+
+    usa_census_zip = models.ForeignKey(
+        USACensusZip, on_delete=models.CASCADE, related_name="households"
+    )
+
+    household_type = models.CharField(
+        max_length=20, choices=HouseholdType.CHOICES
+    )
+
+    household_percentage = models.FloatField(
+        validators=[MinValueValidator(0.0), MaxValueValidator(1.0)]
+    )
+
+
+class USACensusIncomeDistribution(models.Model):
+    usa_census_zip = models.ForeignKey(
+        USACensusZip, on_delete=models.CASCADE, related_name="income_distributions"
+    )
+
+    income_start = models.IntegerField()
+
+    income_end = models.IntegerField()
+
+    income_distribution_percentage = models.FloatField(
+        validators=[MinValueValidator(0.0), MaxValueValidator(1.0)]
     )

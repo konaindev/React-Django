@@ -5,13 +5,10 @@ from django.http import Http404, HttpResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
-from tempfile import NamedTemporaryFile
+from django.urls import reverse
 
-from remark.analytics.google_analytics import get_project_usvs
 from remark.lib.views import ReactView
 from remark.admin import admin_site
-from xls.exporters.tam_data import build_tam_data, DEFAULT_TEMPLATE_PATH
-
 from .reports.selectors import (
     BaselineReportSelector,
     PerformanceReportSelector,
@@ -22,6 +19,7 @@ from .reports.selectors import (
 )
 from .models import Project
 from .forms import TAMExportForm
+from .tasks import export_tam_task
 
 
 class ProjectSingleMixin:
@@ -123,6 +121,9 @@ class TAMExportView(FormView, SingleObjectMixin):
     form_class = TAMExportForm
     model = Project
 
+    def get_success_url(self):
+        return reverse("admin:tam_export", kwargs={ "pk": self.object.pk })
+
     def get_context_data(self, **kwargs):
         self.object = self.get_object()
         context = {
@@ -141,39 +142,9 @@ class TAMExportView(FormView, SingleObjectMixin):
             if project.address is None:
                 messages.error(request, "This project doesn't have an address yet.")
                 return self.form_invalid(form)
-            usvs = get_project_usvs(project)
 
-            try:
-                workbook = build_tam_data(
-                    zip_codes=form.cleaned_data["zip_codes"],
-                    lat=project.address.latitude,
-                    lon=project.address.longitude,
-                    loc=",".join([project.address.city, project.address.state]),
-                    radius=form.cleaned_data["radius"],
-                    income_groups=form.cleaned_data["income_groups"],
-                    rti_income_groups=form.cleaned_data["rti_income_groups"],
-                    rti_rental_rates=form.cleaned_data["rti_rental_rates"],
-                    rti_target=form.cleaned_data["rti_target"],
-                    age=project.average_tenant_age,
-                    max_rent=project.highest_monthly_rent,
-                    avg_rent=project.average_monthly_rent,
-                    min_rent=project.lowest_monthly_rent,
-                    usvs=usvs,
-                    templatefile=DEFAULT_TEMPLATE_PATH
-                )
-
-                tmp = NamedTemporaryFile()
-                workbook.save(filename=tmp)
-                tmp.seek(0)
-                stream = tmp.read()
-                response = HttpResponse(
-                    stream,
-                    content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                )
-                response['Content-Disposition'] = 'attachment; filename="remarkably-tam-{}.xlsx"'.format(project.name)
-                return response
-            except Exception as e:
-                messages.error(request, str(e))
-                return self.form_invalid(form)
+            export_tam_task.delay(project.pk, request.user.pk, form.cleaned_data)
+            messages.success(request, "TAM Export started. You will be emailed with the result shortly.")
+            return self.form_valid(form)
         else:
             return self.form_invalid(form)

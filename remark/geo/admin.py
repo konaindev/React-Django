@@ -3,7 +3,14 @@ from django.contrib import admin
 from remark.admin import admin_site
 
 from .forms import LocationForm, AddressForm
-from .models import Address, Country, State, City, ZipcodePolygon
+from .models import (
+    Address, Country, State, City,
+    ZipcodePolygon,
+    USACensusZip,
+    USACensusPopulationByAge,
+    USACensusHouseholdByType,
+    USACensusIncomeDistribution,
+)
 
 
 @admin.register(Address, site=admin_site)
@@ -57,3 +64,23 @@ class CityAdmin(admin.ModelAdmin):
 class ZipcodePolygonAdmin(admin.ModelAdmin):
     list_display = ("zip_code", "state")
     search_fields = ("zip_code", "state")
+
+
+@admin.register(USACensusZip, site=admin_site)
+class USACensusZipAdmin(admin.ModelAdmin):
+    list_display = ("zipcode", "total_population", "number_of_households")
+
+
+@admin.register(USACensusPopulationByAge, site=admin_site)
+class USACensusPopulationByAgeAdmin(admin.ModelAdmin):
+    list_display = ("usa_census_zip", "start_age", "end_age", "population_percentage")
+
+
+@admin.register(USACensusHouseholdByType, site=admin_site)
+class USACensusHouseholdByTypeAdmin(admin.ModelAdmin):
+    list_display = ("usa_census_zip", "household_type", "household_percentage")
+
+
+@admin.register(USACensusIncomeDistribution, site=admin_site)
+class USACensusIncomeDistributionAdmin(admin.ModelAdmin):
+    list_display = ("usa_census_zip", "income_start", "income_end", "income_distribution_percentage")
