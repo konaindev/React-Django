@@ -11,6 +11,7 @@ python-language-server = {extras = ["all"],version = "*"}
 pyls-black = "*"
 pyls-mypy = "*"
 click = "*"
+watchdog = "*"
 
 [packages]
 django-heroku = "*"
@@ -35,6 +36,8 @@ google-api-python-client = "*"
 beautifulsoup4 = "*"
 googlemaps = "*"
 bs4 = "*"
+celery = "*"
+redis = "*"
 
 [requires]
 python_version = "3.7"
