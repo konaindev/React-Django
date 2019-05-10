@@ -1,27 +1,20 @@
 import functools
 import os
-import pickle
 import requests
-import tempfile
-import time
 import xml.etree.ElementTree as ET
 
 import click
 
 from bs4 import BeautifulSoup
 from openpyxl import load_workbook
+from remark.lib.memoizer import file_memoize, delay_file_memoize
+from remark.geo.usa_census import get_usa_census_data
 
 FREE_MAP_TOOLS_URL = "https://www.freemaptools.com/ajax/us/get-all-zip-codes-inside.php"
 FREE_MAP_REFERER = "https://www.freemaptools.com/find-zip-codes-inside-radius.htm"
 
-STAT_ATLAS_AGE_URL = "https://statisticalatlas.com/zip/{}/Age-and-Sex"
-STAT_ATLAS_HOUSEHOLD_URL = "https://statisticalatlas.com/zip/{}/Household-Types"
-STAT_ATLAS_HOUSEHOLD_INCOME_URL = "https://statisticalatlas.com/zip/{}/Household-Income"
-STAT_ATLAS_REFER = "https://statisticalatlas.com/United-States/Overview"
-
 USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36"
 MILES_KILOMETERS_RATIO = 1.60934
-
 
 CACHE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../data/cache")
 DEFAULT_TEMPLATE_PATH = os.path.join(
@@ -38,95 +31,6 @@ VERBOSE = False
 def print_verbose(*args, **kwargs):
     if VERBOSE:
         print(*args, **kwargs)
-
-
-class Memoizer:
-    """An abstract base decorator that implements generic memoization."""
-
-    def __init__(self):
-        """Initialize a memoizer, possibly with arguments in derived classes."""
-        pass
-
-    def get_key(self, args, kwargs):
-        """Get the cache key for a given func invocation."""
-        raise NotImplementedError()
-
-    def contains(self, key):
-        """Return True if key is in memoized cache."""
-        raise NotImplementedError()
-
-    def read(self, key):
-        """Return data for key if in cache, otherwise raise an exception."""
-        raise NotImplementedError()
-
-    def write(self, key, data):
-        """Write data for key to cache, overwriting extant data."""
-        raise NotImplementedError()
-
-    def memoize(self, func, args, kwargs):
-        """Return cached data, or invoke the underlying func if not."""
-        key = self.get_key(args, kwargs)
-        if self.contains(key):
-            data = self.read(key)
-        else:
-            print_verbose("Invoking ", func.__name__, args, kwargs)
-            data = func(*args, **kwargs)
-            self.write(key, data)
-        return data
-
-    def __call__(self, func):
-        # Since this class takes __init__ parameters, __call__ must wrap.
-        self.func = func
-
-        @functools.wraps(func)
-        def wrapper(*args, **kwargs):
-            return self.memoize(func, args, kwargs)
-
-        return wrapper
-
-
-class file_memoize(Memoizer):
-    """Memoizer that writes to a cache files directory."""
-
-    def __init__(self, cache_dir=None):
-        """
-        Initialize a memoizer with a given cache directory.
-        """
-        super().__init__()
-        self.cache_dir = cache_dir or tempfile.mkdtemp()
-
-    def get_key(self, args, kwargs):
-        # The key is the file path
-        args_key = "_".join([f"{arg}" for arg in args])
-        kwargs_key = "_".join([f"{k}-{v}" for k, v in kwargs.items()])
-        file_name = f"{self.func.__name__}{'_' if args_key else ''}{args_key}{'_' if kwargs_key else ''}{kwargs_key}.pkl"
-        path = os.path.join(self.cache_dir, file_name)
-        return path
-
-    def contains(self, key):
-        return os.path.exists(key)
-
-    def read(self, key):
-        with open(key, "rb") as f:
-            data = pickle.load(f)
-        return data
-
-    def write(self, key, data):
-        with open(key, "wb") as f:
-            pickle.dump(data, f)
-
-
-class delay_file_memoize(file_memoize):
-    """Memoizer that writes to a cache files directory and also delays after each memoization."""
-
-    def __init__(self, cache_dir=None, delay=2):
-        super().__init__(cache_dir=cache_dir)
-        self.delay = delay
-
-    def memoize(self, func, args, kwargs):
-        result = super().memoize(func, args, kwargs)
-        time.sleep(self.delay)
-        return result
 
 
 @delay_file_memoize(cache_dir=CACHE_DIR)
@@ -147,123 +51,11 @@ def fetch_zip_codes(latitude, longitude, radius):
     return result
 
 
-def find_population(el):
-    return el.has_attr("title") and el["title"] == "Population"
-
-
-def find_households(el):
-    return el.has_attr("title") and el["title"] == "Households"
-
-
-@delay_file_memoize(cache_dir=CACHE_DIR)
-def fetch_population(zipcode):
-    url = STAT_ATLAS_AGE_URL.format(zipcode)
-    headers = {"user-agent": USER_AGENT, "referer": STAT_ATLAS_REFER}
-    response = requests.get(url, headers=headers)
-    soup = BeautifulSoup(response.text, features="html.parser")
-    pop_th = soup.find_all(find_population)[0]
-    td_value = str(pop_th.td.text)
-    population = int(td_value.replace(",", ""))
-    print_verbose(f"Population: {population}")
-
-    house_th = soup.find_all(find_households)[0]
-    td_value = str(house_th.td.text)
-    households = int(td_value.replace(",", ""))
-    print_verbose(f"households: {population}")
-
-    return (population, households)
-
-
-def fetch_svg(base_url, zipcode, figure_id):
-    def find_figure(el):
-        if el.has_attr("id") and el["id"] == figure_id:
-            return True
-        return False
-
-    url = base_url.format(zipcode)
-    headers = {"user-agent": USER_AGENT, "referer": STAT_ATLAS_REFER}
-    response = requests.get(url, headers=headers)
-
-    soup = BeautifulSoup(response.text, features="html.parser")
-    figures = soup.find_all(find_figure)
-    if len(figures) == 0:
-        ref = f'id="{figure_id}"'
-        print_verbose(f"Searching for {ref}...")
-        print_verbose(f"Results: {response.text.find(ref)}")
-        raise Exception(f"Could not find the following figure: {figure_id}")
-
-    try:
-        svg = figures[0].find_all("svg")[0]
-    except Exception as e:
-        print_verbose(f"Exception: {e}")
-        print_verbose(f"Length: {len(response.text)}")
-        print_verbose(figures[0].find("svg"))
-        raise e
-    return svg
-
-
-@delay_file_memoize(cache_dir=CACHE_DIR)
-def fetch_age_segments_by_zip(zipcode):
-    svg = fetch_svg(STAT_ATLAS_AGE_URL, zipcode, "figure/age-structure")
-    gs = svg.g.find_all("g")
-    result = []
-    for x in range(len(gs)):
-        if x >= 26 and x < 49:
-            txt = gs[x].title.text
-            value = float(txt.replace("%", ""))
-            result.append(value / 100.0)
-    # print_verbose(result)
-    return result
-
-
-@delay_file_memoize(cache_dir=CACHE_DIR)
-def fetch_household_type(zipcode):
-    svg = fetch_svg(STAT_ATLAS_HOUSEHOLD_URL, zipcode, "figure/household-types")
-    gs = svg.g.find_all("g")
-    result = []
-    for x in range(len(gs)):
-        if x >= 7:
-            txt = gs[x].title.text
-            if txt.find("%") > -1:
-                value = float(txt.replace("%", "").replace(",", ""))
-                result.append(value / 100.0)
-    return result
-
-
-@delay_file_memoize(cache_dir=CACHE_DIR)
-def fetch_household_income(zipcode):
-    svg = fetch_svg(
-        STAT_ATLAS_HOUSEHOLD_INCOME_URL, zipcode, "figure/household-income-percentiles"
-    )
-    gs = svg.g.find_all("g")
-    result = [gs[8], gs[10], gs[12], gs[14], gs[16], gs[18]]
-    for x in range(len(result)):
-        txt = result[x].title.text
-        result[x] = float(txt.replace("$", "").replace(",", ""))
-    return result
-
-
-@delay_file_memoize(cache_dir=CACHE_DIR)
-def fetch_household_income_distribution(zipcode):
-    svg = fetch_svg(
-        STAT_ATLAS_HOUSEHOLD_INCOME_URL, zipcode, "figure/household-income-distribution"
-    )
-    gs = svg.g.find_all("g")
-    result = []
-    for x in range(len(gs)):
-        if x >= 19 and x < 35:
-            txt = gs[x].title.text
-            value = float(txt.replace("%", ""))
-            result.append(value / 100.0)
-    print_verbose(result)
-    return result
-
-
 def write_labeled_data(ws, title, labels, data, start_row):
     if len(data) != len(labels):
         print_verbose(labels)
         print_verbose(data)
-        raise Exception(f"Data length and label length is not equal.")
+        raise Exception(f"{title} Data length and label length is not equal.")
 
     ws.cell(column=1, row=start_row, value=title)
     for x in range(len(data)):
@@ -337,11 +129,7 @@ ZIP_DATA_SHEET_NAME = "Zip Data {}"
 
 def fill_zip_worksheet(workbook, zipcode):
     # Fetch all data first - if a Zip Code doesn't work. Ignore it.
-    population = fetch_population(zipcode)
-    age_segments = fetch_age_segments_by_zip(zipcode)
-    household_type = fetch_household_type(zipcode)
-    # household_income = fetch_household_income(zipcode)
-    income_dist = fetch_household_income_distribution(zipcode)
+    population, age_segments, household_type, income_dist = get_usa_census_data(zipcode)
 
     print_verbose("POP")
     print_verbose(population)
@@ -533,9 +321,9 @@ def build_tam_data_for_zip_codes(workbook, zip_codes, income_groups):
             fill_zip_worksheet(workbook, zip_code)
             live_zipcodes.append(zip_code)
             print_verbose(f"Completed zip: {zip_code}")
-        except Exception:
+        except Exception as e:
             print_verbose(f"FAILED zip: {zip_code}")
-            # raise e
+            raise e
 
     fill_computation_tab(workbook["Computation"], live_zipcodes, income_groups)
 
