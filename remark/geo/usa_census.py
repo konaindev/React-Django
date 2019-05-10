@@ -4,7 +4,6 @@ import requests
 import click
 
 from bs4 import BeautifulSoup
-from remark.lib.memoizer import file_memoize, delay_file_memoize
 from remark.lib.logging import getLogger
 from .models import (
     USACensusZip,
@@ -20,9 +19,6 @@ STAT_ATLAS_HOUSEHOLD_INCOME_URL = "https://statisticalatlas.com/zip/{}/Household
 STAT_ATLAS_REFER = "https://statisticalatlas.com/United-States/Overview"
 
 USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36"
-
-
-CACHE_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../data/cache")
 
 
 logger = getLogger(__name__)
@@ -80,7 +76,6 @@ def find_households(el):
     return el.has_attr("title") and el["title"] == "Households"
 
 
-@delay_file_memoize(cache_dir=CACHE_DIR)
 def fetch_population(zipcode):
     url = STAT_ATLAS_AGE_URL.format(zipcode)
     headers = {"user-agent": USER_AGENT, "referer": STAT_ATLAS_REFER}
@@ -127,7 +122,6 @@ def fetch_svg(base_url, zipcode, figure_id):
     return svg
 
 
-@delay_file_memoize(cache_dir=CACHE_DIR)
 def fetch_age_segments_by_zip(zipcode):
     svg = fetch_svg(STAT_ATLAS_AGE_URL, zipcode, "figure/age-structure")
     gs = svg.g.find_all("g")
@@ -141,7 +135,6 @@ def fetch_age_segments_by_zip(zipcode):
     return result
 
 
-@delay_file_memoize(cache_dir=CACHE_DIR)
 def fetch_household_type(zipcode):
     svg = fetch_svg(STAT_ATLAS_HOUSEHOLD_URL, zipcode, "figure/household-types")
     gs = svg.g.find_all("g")
@@ -155,7 +148,6 @@ def fetch_household_type(zipcode):
     return result
 
 
-@delay_file_memoize(cache_dir=CACHE_DIR)
 def fetch_household_income(zipcode):
     svg = fetch_svg(
         STAT_ATLAS_HOUSEHOLD_INCOME_URL, zipcode, "figure/household-income-percentiles"
@@ -168,7 +160,6 @@ def fetch_household_income(zipcode):
     return result
 
 
-@delay_file_memoize(cache_dir=CACHE_DIR)
 def fetch_household_income_distribution(zipcode):
     svg = fetch_svg(
         STAT_ATLAS_HOUSEHOLD_INCOME_URL, zipcode, "figure/household-income-distribution"
