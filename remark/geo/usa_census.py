@@ -78,7 +78,7 @@ def get(url):
     headers = {"user-agent": USER_AGENT, "referer": STAT_ATLAS_REFER}
     response = requests.get(url, headers=headers)
     if not response.ok:
-        logging.error("usa_census::get::error", response.reason, response.text)
+        logger.error("usa_census::get::error", response.reason, response.text)
         raise Exception("usa_census::get::error response", url)
     return response
 
