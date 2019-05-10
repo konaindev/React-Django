@@ -1,3 +1,5 @@
+import logging
+
 from django.test import TestCase
 from xls.exporters.tam_data import build_tam_data
 
@@ -7,6 +9,7 @@ class TAMExcelIntegrationTestCase(TestCase):
     """
 
     def setUp(self):
+        super().setUp()
         self.args = [
             ["98103"],
             47.6931622,

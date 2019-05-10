@@ -1,13 +1,11 @@
-import functools
 import os
 import requests
 import xml.etree.ElementTree as ET
 
 import click
 
-from bs4 import BeautifulSoup
 from openpyxl import load_workbook
-from remark.lib.memoizer import file_memoize, delay_file_memoize
+from remark.lib.memoizer import delay_file_memoize
 from remark.geo.usa_census import get_usa_census_data
 
 FREE_MAP_TOOLS_URL = "https://www.freemaptools.com/ajax/us/get-all-zip-codes-inside.php"

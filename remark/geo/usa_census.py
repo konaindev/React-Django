@@ -1,7 +1,5 @@
-import os
 import requests
 
-import click
 
 from bs4 import BeautifulSoup
 from remark.lib.logging import getLogger
@@ -67,6 +65,7 @@ INCOME_DIST_RANGES = [
     (10000, 15000),
     (0, 10000),
 ]
+
 
 def find_population(el):
     return el.has_attr("title") and el["title"] == "Population"
@@ -182,13 +181,13 @@ def get_usa_census_population(zipcode):
         usa_census_zip = USACensusZip.objects.create(
             total_population=population[0],
             number_of_households=population[1],
-            zipcode=zipcode
+            zipcode=zipcode,
         )
     return usa_census_zip
 
 
 def get_usa_census_age_segments(usa_census_zip):
-    age_segments = usa_census_zip.age_segments.order_by('-start_age').all()
+    age_segments = usa_census_zip.age_segments.order_by("-start_age").all()
     if age_segments.count() == 0:
         age_segments_data = fetch_age_segments_by_zip(usa_census_zip.zipcode)
         age_segments = [
@@ -197,7 +196,8 @@ def get_usa_census_age_segments(usa_census_zip):
                 population_percentage=percentage,
                 start_age=AGE_SEGMENT_RANGES[idx][0],
                 end_age=AGE_SEGMENT_RANGES[idx][1],
-            ) for idx, percentage in enumerate(age_segments_data)
+            )
+            for idx, percentage in enumerate(age_segments_data)
         ]
         USACensusPopulationByAge.objects.bulk_create(age_segments)
     return [item.population_percentage for item in age_segments]
@@ -211,15 +211,20 @@ def get_usa_census_households(usa_census_zip):
             USACensusHouseholdByType(
                 usa_census_zip=usa_census_zip,
                 household_type=household_type[0],
-                household_percentage=households_data[idx]
-            ) for idx, household_type in enumerate(USACensusHouseholdByType.HouseholdType.CHOICES)
+                household_percentage=households_data[idx],
+            )
+            for idx, household_type in enumerate(
+                USACensusHouseholdByType.HouseholdType.CHOICES
+            )
         ]
         USACensusHouseholdByType.objects.bulk_create(households)
     return [item.household_percentage for item in households]
 
 
 def get_usa_census_income_distributions(usa_census_zip):
-    income_distributions = usa_census_zip.income_distributions.order_by('-income_start').all()
+    income_distributions = usa_census_zip.income_distributions.order_by(
+        "-income_start"
+    ).all()
     if income_distributions.count() == 0:
         income_dist_data = fetch_household_income_distribution(usa_census_zip.zipcode)
         income_distributions = [
@@ -228,7 +233,8 @@ def get_usa_census_income_distributions(usa_census_zip):
                 income_start=INCOME_DIST_RANGES[idx][0],
                 income_end=INCOME_DIST_RANGES[idx][1],
                 income_distribution_percentage=percentage,
-            ) for idx, percentage in enumerate(income_dist_data)
+            )
+            for idx, percentage in enumerate(income_dist_data)
         ]
         USACensusIncomeDistribution.objects.bulk_create(income_distributions)
     return [item.income_distribution_percentage for item in income_distributions]
