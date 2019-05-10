@@ -4,8 +4,7 @@ import report from "../campaign_plan/campaign_plan.props";
 const current_report_link = report_links.market;
 const share_info = {
   shared: false,
-  share_url: `/projects/${project.public_id}/share/campaign_plan/`,
-  update_action: "shared_reports"
+  share_url: `/projects/${project.public_id}/share/campaign_plan/`
 };
 
 export default {

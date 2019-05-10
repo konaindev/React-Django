@@ -60,7 +60,7 @@ urlpatterns = [
         CampaignPlanPageView.as_view(),
         name="campaign_plan_shared",
     ),
-    # REST API to update reports shared status
+    # REST API to update project details
     path(
         "<project_id>/update/",
         ProjectUpdateAPIView.as_view(),

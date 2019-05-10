@@ -98,8 +98,7 @@ class ReportSelectorBase:
     def get_share_info(self, base_url):
         return dict(
             shared=self.is_shared(),
-            share_url=f"${base_url}{self.get_share_url()}",
-            update_action="shared_reports"
+            share_url=f"{base_url}{self.get_share_url()}"
         )
 
     def has_report_data(self):

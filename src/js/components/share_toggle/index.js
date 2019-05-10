@@ -7,7 +7,9 @@ import ButtonToggle from "../button_toggle";
 import CopyToClipboard from "../copy_to_clipboard";
 import "./share_toggle.scss";
 
-function useApi(update_endpoint, update_action, report_name) {
+const api_update_action = "shared_reports";
+
+function useApi(update_endpoint, report_name) {
   const [shared, setShared] = useState(null);
 
   const updateServer = async () => {
@@ -17,7 +19,7 @@ function useApi(update_endpoint, update_action, report_name) {
 
     try {
       const payload = {
-        update_action,
+        update_action: api_update_action,
         shared,
         report_name
       };
@@ -35,20 +37,10 @@ function useApi(update_endpoint, update_action, report_name) {
 }
 
 export function ShareToggle(props) {
-  const {
-    shared,
-    share_url,
-    update_endpoint,
-    current_report_name,
-    update_action
-  } = props;
+  const { shared, share_url, update_endpoint, current_report_name } = props;
 
   const [flag, setFlag] = useState(shared);
-  const [makeApiCall] = useApi(
-    update_endpoint,
-    update_action,
-    current_report_name
-  );
+  const [makeApiCall] = useApi(update_endpoint, current_report_name);
 
   const handleToggleChange = newValue => {
     setFlag(newValue);
@@ -72,14 +64,11 @@ ShareToggle.propTypes = {
   shared: PropTypes.bool,
   share_url: PropTypes.string.isRequired,
   update_endpoint: PropTypes.string,
-  update_action: PropTypes.string,
   current_report_name: PropTypes.string.isRequired
 };
 
 ShareToggle.defaultProps = {
-  shared: false,
-  update_action: "shared_reports",
-  update_endpoint: "/"
+  shared: false
 };
 
 export default ShareToggle;

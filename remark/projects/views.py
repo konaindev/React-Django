@@ -157,14 +157,17 @@ class ProjectUpdateAPIView(APIView):
     # Doesn't need CSRF protection for this REST API endpoint
     csrf_exempt = True
 
+    actions_supported = ["shared_reports"]
+
     def put(self, request, project_id):
         payload = self.get_data()
         update_action = payload.get("update_action")
 
+        if not update_action in self.actions_supported:
+            return self.render_failure_message("Not supported")
+
         if update_action == "shared_reports":
             return self.update_shared_reports(project_id, payload)
-        else:
-            return self.render_failure_message("Not supported")
 
     def update_shared_reports(self, project_id, payload):
         shared_field_names = dict(
