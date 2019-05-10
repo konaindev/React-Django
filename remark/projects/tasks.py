@@ -38,23 +38,29 @@ def export_tam_task(project_pk, user_pk, form_data):
         }
         workbook = build_tam_data(**args)
 
+        tam_export_log = None
+
         with NamedTemporaryFile() as tmp:
             workbook.save(filename=tmp)
             tmp.flush()
 
-            _ = TAMExportLog.objects.create(
+            tam_export_log = TAMExportLog.objects.create(
                 project=project,
                 user=user,
                 args_json=args,
                 file=File(tmp, name="tam_export.xlsx"),
             )
-            tmp.seek(0)
 
+        if tam_export_log is not None:
             send_email_to_user(
                 user,
                 "email/tam_export",
                 attachments=[
-                    {"name": "tam_export.xlsx", "content": tmp.read(), "type": None}
+                    {
+                        "name": "tam_export.xlsx",
+                        "content": tam_export_log.file.open().read(),
+                        "type": None,
+                    }
                 ],
             )
 
