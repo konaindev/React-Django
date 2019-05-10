@@ -74,13 +74,18 @@ def find_population(el):
 def find_households(el):
     return el.has_attr("title") and el["title"] == "Households"
 
+def get(url):
+    headers = {"user-agent": USER_AGENT, "referer": STAT_ATLAS_REFER}
+    response = requests.get(url, headers=headers)
+    if 200 > response.status_code > 299:
+        raise Exception("usa_census::get::error response", url)
+    return response
 
 def fetch_population(zipcode):
     logger.info(f"usa_census::fetch_population::start", zipcode)
 
     url = STAT_ATLAS_AGE_URL.format(zipcode)
-    headers = {"user-agent": USER_AGENT, "referer": STAT_ATLAS_REFER}
-    response = requests.get(url, headers=headers)
+    response = get(url)
     soup = BeautifulSoup(response.text, features="html.parser")
     pop_th = soup.find_all(find_population)[0]
     td_value = str(pop_th.td.text)
@@ -101,8 +106,7 @@ def fetch_svg(base_url, zipcode, figure_id):
         return False
 
     url = base_url.format(zipcode)
-    headers = {"user-agent": USER_AGENT, "referer": STAT_ATLAS_REFER}
-    response = requests.get(url, headers=headers)
+    response = get(url)
 
     soup = BeautifulSoup(response.text, features="html.parser")
     figures = soup.find_all(find_figure)
