@@ -1,4 +1,3 @@
-from __future__ import absolute_import, unicode_literals
 from celery import shared_task
 from django.core.files import File
 from tempfile import NamedTemporaryFile
@@ -47,18 +46,16 @@ def export_tam_task(project_pk, user_pk, form_data):
                 project=project,
                 user=user,
                 args_json=args,
-                file=File(tmp, name="tam_export.xlsx")
+                file=File(tmp, name="tam_export.xlsx"),
             )
             tmp.seek(0)
 
             send_email_to_user(
                 user,
                 "email/tam_export",
-                attachments=[{
-                    "name": "tam_export.xlsx",
-                    "content": tmp.read(),
-                    "type": None
-                }]
+                attachments=[
+                    {"name": "tam_export.xlsx", "content": tmp.read(), "type": None}
+                ],
             )
 
     except Exception as e:
