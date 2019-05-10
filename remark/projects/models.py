@@ -17,7 +17,7 @@ from remark.lib.metrics import (
     ModelPeriod,
 )
 from .spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
-
+from .email.constants import KPI_NAMES, KPI_CATEGORIES
 
 def pro_public_id():
     """Public identifier for a project."""
@@ -80,6 +80,30 @@ class Project(models.Model):
 
     name = models.CharField(
         max_length=255, help_text="The user-facing name of the project."
+    )
+
+    # This is temporary until we have accounts setup for all our clients
+    # Remove me and link via a ForeignKey when that happens. -TPC
+    customer_name = models.CharField(
+        max_length=255,
+        help_text="The company that hired Remarkaby.",
+        default=""
+    )
+
+    # This is a temporary field until we have user accounts setup.
+    # When that happens there should be a many to one relationship with
+    # those users. We should pull email addresses from the user accounts. -TPC
+    email_distribution_list = models.TextField(
+        max_length=2000,
+        default="",
+        help_text="Comma separated list of people to receive email updates about this Project."
+    )
+
+    # This is for the SendGrid recipients list.
+    email_list_id = models.CharField(
+        max_length=256,
+        null=True,
+        default=None
     )
 
     # StdImageField works just like Django's own ImageField
@@ -859,7 +883,7 @@ class PerformanceEmailManager(models.Manager):
     pass
 
 
-class PerformanceEmail(ModelPeriod, models.Model):
+class PerformanceEmail(models.Model):
     objects = PerformanceEmailManager()
 
     project = models.ForeignKey(
@@ -875,3 +899,64 @@ class PerformanceEmail(ModelPeriod, models.Model):
         db_index=True,
         help_text="The final date, exclusive, that this target period tracks.",
     )
+
+    send_datetime = models.DateField(
+        null=True,
+        blank=False,
+        default=None,
+    )
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        null=True,
+        blank=True,
+        default=None,
+        on_delete=models.SET_NULL,  # We allow NULL so that even if an admin is deleted, we preserve history regardless.
+        help_text="The user that created this report.",
+    )
+
+    campaign_health = models.TextField(
+        choices = (("0", "Requires Review"), ("1", "At Risk"), ("2", "On Track")),
+        null=False,
+        default="2"
+    )
+    lease_rate_text = models.TextField()
+    top_performing_kpi = models.TextField(choices=KPI_NAMES.items())
+    top_performing_insight = models.TextField()
+    low_performing_kpi = models.TextField(choices=KPI_NAMES.items())
+    low_performing_insight = models.TextField()
+
+    # SendGrid email campaign ID
+    email_campaign_id = models.CharField(
+        null=True,
+        default=None,
+        max_length=255
+    )
+
+    def filter_performance_kpis(self, category):
+        result = []
+        for kpi in self.performance_kpis.all():
+            if kpi.category == category:
+                result.append(kpi.name)
+        return result
+
+    @property
+    def top_kpis(self):
+        return self.filter_performance_kpis('top')
+
+    @property
+    def low_kpis(self):
+        return self.filter_performance_kpis('low')
+
+    @property
+    def risk_kpis(self):
+        return self.filter_performance_kpis('risk')
+
+
+
+class PerformanceEmailKPI(models.Model):
+    performance_email = models.ForeignKey(
+        PerformanceEmail, on_delete=models.CASCADE, related_name="performance_kpis"
+    )
+
+    name = models.TextField(choices=KPI_NAMES.items())
+    category = models.TextField(choices=KPI_CATEGORIES.items())

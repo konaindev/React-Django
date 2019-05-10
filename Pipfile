@@ -36,6 +36,7 @@ google-api-python-client = "*"
 beautifulsoup4 = "*"
 googlemaps = "*"
 bs4 = "*"
+sendgrid = "*"
 
 [requires]
 python_version = "3.7"

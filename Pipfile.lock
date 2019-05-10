@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "f08089d5391ac1cdf9173c1b2f5ee3099c67bf987918ca899e91a9939252f0ce"
+            "sha256": "1d49ec04234e23e017ab13b8c999ac25cb1d4c707c28861bb7635fa6a2524ddf"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -115,11 +115,11 @@
         },
         "django-js-reverse": {
             "hashes": [
-                "sha256:22d755f3c1fdccd9e62fa9d8b3d273a019194c6fd394d31d5acfbc30efbc9574",
-                "sha256:abfab18a631fbf5de8d5e313ff003e842ec04d124cbc7a56c79b1b45eb882ed5"
+                "sha256:2a392d169f44e30b883c30dfcfd917a14167ce8fe196c99d2385b31c90d77aa0",
+                "sha256:8134c2ab6307c945edfa90671ca65e85d6c1754d48566bdd6464be259cc80c30"
             ],
             "index": "pypi",
-            "version": "==0.9.0"
+            "version": "==0.9.1"
         },
         "django-stdimage": {
             "hashes": [
@@ -366,6 +366,12 @@
             "index": "pypi",
             "version": "==0.10.1"
         },
+        "python-http-client": {
+            "hashes": [
+                "sha256:7e430f4b9dd2b621b0051f6a362f103447ea8e267594c602a5c502a0c694ee38"
+            ],
+            "version": "==3.1.0"
+        },
         "python-utils": {
             "hashes": [
                 "sha256:34aaf26b39b0b86628008f2ae0ac001b30e7986a8d303b61e1357dfcdad4f6d3",
@@ -401,6 +407,14 @@
                 "sha256:f23d5cb7d862b104401d9021fc82e5fa0e0cf57b7660a1331425aab0c691d021"
             ],
             "version": "==0.2.0"
+        },
+        "sendgrid": {
+            "hashes": [
+                "sha256:297d33363a70df9b39419210e1273b165d487730e85c495695e0015bc626db71",
+                "sha256:8b82c8c801dde8180a567913a9f80d8a63f38e39f209edde302b6df899b4bca1"
+            ],
+            "index": "pypi",
+            "version": "==6.0.5"
         },
         "six": {
             "hashes": [

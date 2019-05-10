@@ -6,8 +6,11 @@ from django.utils.safestring import mark_safe
 from remark.admin import admin_site
 from remark.analytics.admin import InlineAnalyticsProviderAdmin
 from .forms import ProjectForm, SpreadsheetForm
-from .models import Project, Period, Spreadsheet, TargetPeriod
+from .models import Project, Period, Spreadsheet, TargetPeriod, PerformanceEmail, PerformanceEmailKPI
 from .views import TAMExportView
+
+import datetime
+from remark.projects.email.performance_report import send_performance_email
 
 
 class UpdateSpreadsheetAdminMixin:
@@ -227,3 +230,34 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
     class Media:
         js = ("js/project_admin.js",)
 
+
+class PerformanceEmailKPIInline(admin.TabularInline):
+    model = PerformanceEmailKPI
+
+@admin.register(PerformanceEmail, site=admin_site)
+class PerformanceEmailAdmin(admin.ModelAdmin):
+    inlines = [
+        PerformanceEmailKPIInline
+    ]
+    fields = [
+        "project",
+        "start",
+        "send_datetime",
+        "lease_rate_text",
+        "top_performing_kpi",
+        "top_performing_insight",
+        "low_performing_kpi",
+        "low_performing_insight"
+    ]
+
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.created_by = request.user
+        obj.end = obj.start + datetime.timedelta(days=7)
+        obj.save()
+        success, campaign_id = send_performance_email(obj)
+        if success:
+            obj.campaign_id = campaign_id
+            obj.save()
+        else:
+            raise Exception("Email could not be sent!")
