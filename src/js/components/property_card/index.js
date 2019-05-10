@@ -4,6 +4,12 @@ import Button from "../button";
 import Panel from "../panel";
 import "./property_card.scss";
 
+const STATUS_LABEL = [
+  "NEEDS REVIEW",
+  "AT RISK",
+  "ON TRACK",
+];
+
 export const PropertyCard = ({
   property_name,
   address,
@@ -31,12 +37,12 @@ export const PropertyCard = ({
         <div className="property-card__address">{address}</div>
         <div
           className={cn("property-card__status", {
-            "property-card__status--on-track": true,
-            "property-card__status--at-risk": false,
-            "property-card__status--requires-review": false
+            "property-card__status--on-track": performance_rating === 2,
+            "property-card__status--at-risk": performance_rating === 1,
+            "property-card__status--requires-review": performance_rating === 0
           })}
         >
-          {"ON TRACK"}
+          {STATUS_LABEL[performance_rating]}
         </div>
       </div>
     </Panel>
