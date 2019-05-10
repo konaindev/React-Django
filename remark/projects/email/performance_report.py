@@ -6,7 +6,7 @@ from remark.users.models import User
 from remark.projects.models import Project, Spreadsheet
 from remark.projects.reports.performance import PerformanceReport
 
-from remark.projects.email.constants import SELECTORS, FORMATTERS, SHOW_CAMPAIGN, KPIS
+from remark.projects.email.constants import SELECTORS, FORMATTERS, SHOW_CAMPAIGN, KPIS, KPI_NAMES
 from remark.lib.sendgrid_email import create_contact_if_not_exists, create_contact_list_if_not_exists, create_campaign_if_not_exists
 
 def none_wrapper(formatter, selector, obj):
@@ -33,7 +33,7 @@ def health_check(stat, stat_target):
 
 def top_kpi(kpi_key, campaign, this_week, prev_week, text):
     selector = SELECTORS[kpi_key]
-    title = TITLES[kpi_key]
+    title = KPI_NAMES[kpi_key]
     formatter = FORMATTERS[kpi_key]
     show_campaign = SHOW_CAMPAIGN[kpi_key]
     campaign_value = selector(campaign)
@@ -53,7 +53,7 @@ def top_kpi(kpi_key, campaign, this_week, prev_week, text):
 
 def list_kpi(kpi_key, campaign, health):
     selector = SELECTORS[kpi_key]
-    title = TITLES[kpi_key]
+    title = KPI_NAMES[kpi_key]
     campaign_value = selector(campaign)
     campaign_target = selector(campaign["targets"])
     model_percent = float(campaign_value) / float(campaign_target)
@@ -70,103 +70,7 @@ def create_list_kpi(result, campaign, prefix, kpis, health):
     if len(kpis) > 2:
         result[f"{prefix}_3"] = list_kpi(kpis[2], campaign, health)
 
-'''
-@click.command()
-@click.option(
-    "-p",
-    "--project_id",
-    required=True,
-    type=click.Choice(list(Project.objects.all().values_list("public_id", flat=True))),
-    help="The project id.",
-)
-@click.option(
-    "-s",
-    "--start",
-    required=True,
-    type=click.DateTime(formats=("%m/%d/%Y",)),
-    help="Start of reporting period",
-)
-@click.option(
-    "-c",
-    "--client",
-    required=True,
-    type=str,
-    help="Name of client"
-)
-@click.option(
-    "-h",
-    "--health",
-    required=True,
-    type=click.Choice(("0","1","2")),
-    help="Health of campaign. Must be 0,1,2"
-)
-@click.option(
-    "-l",
-    "--leaseratetext",
-    required=True,
-    type=str,
-    help="Insight for lease rate"
-)
-@click.option(
-    "-b",
-    "--bestkpi",
-    required=True,
-    type=str,
-    help="Best Kpi"
-)
-@click.option(
-    "-bkt",
-    "--bestkpitext",
-    required=True,
-    type=str,
-    help="Insight for best kpi"
-)
-@click.option(
-    "-w",
-    "--worstkpi",
-    required=True,
-    type=str,
-    help="Worst KPI"
-)
-@click.option(
-    "-wkt",
-    "--worstkpitext",
-    required=True,
-    type=str,
-    help="Worst KPI Insight"
-)
-@click.option(
-    "-t",
-    "--topkpis",
-    required=True,
-    type=str,
-    multiple=True,
-    help="Top Performing KPIs"
-)
-@click.option(
-    "-r",
-    "--riskkpis",
-    required=True,
-    type=str,
-    multiple=True,
-    help="At Risk KPIs"
-)
-@click.option(
-    "-lo",
-    "--lowkpis",
-    required=True,
-    type=str,
-    multiple=True,
-    help="Low Performing KPIs"
-)
-@click.option(
-    "-e",
-    "--email",
-    required=True,
-    type=str,
-    help="Email they should respond to"
-)
-'''
+
 def create_html(project, start, client, health, leaseratetext, bestkpi, bestkpitext, worstkpi, worstkpitext, topkpis, riskkpis, lowkpis, email):
     project_id = project.public_id
     end = start + datetime.timedelta(days=7)
@@ -174,7 +78,7 @@ def create_html(project, start, client, health, leaseratetext, bestkpi, bestkpit
     prevstart = start - datetime.timedelta(days=7)
     campaign_to_date = PerformanceReport.for_campaign_to_date(project).to_jsonable()
     this_week = PerformanceReport.for_dates(project, start, end).to_jsonable()
-    prev_week = PerformanceReport.for_dates(project, prevstart.date(), start.date()).to_jsonable()
+    prev_week = PerformanceReport.for_dates(project, prevstart, start).to_jsonable()
 
     template_vars = {
         "report_url" : f"https://app.remarkably.io/projects/{project_id}/performance/last-week/",

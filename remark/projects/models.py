@@ -933,9 +933,12 @@ class PerformanceEmail(models.Model):
     )
 
     def filter_performance_kpis(self, category):
+        print("FILTERING KPIS")
         result = []
         for kpi in self.performance_kpis.all():
+            print(kpi)
             if kpi.category == category:
+                print("added")
                 result.append(kpi.name)
         return result
 
