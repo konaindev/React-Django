@@ -5,6 +5,11 @@ Baseline-like, Performance-like, and Modeling-section-like reports.
 from . import ReportBase
 from .periods import ComputedPeriod, DeltaPeriod
 
+
+class InvalidReportRequest(Exception):
+    pass
+
+
 # Map from our internal flat values structure to the outward
 # schema defined in BaslineReport.ts, etc, and expected props.
 #

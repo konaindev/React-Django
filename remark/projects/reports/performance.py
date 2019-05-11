@@ -2,7 +2,7 @@ import datetime
 
 from remark.lib.metrics import BareMultiPeriod
 
-from .common import CommonReport
+from .common import CommonReport, InvalidReportRequest
 from .whiskers import WhiskerSeries
 
 
@@ -24,7 +24,7 @@ class PerformanceReport(CommonReport):
 
         # Make sure the project perf range starts *at or after* extant data.
         delta_start = end - time_delta
-        return project.get_campaign_periods().filter(start__lte=delta_start).exists()
+        return project.get_campaign_periods().filter(start__gte=delta_start).exists()
 
     @classmethod
     def for_time_delta_from_end(cls, project, time_delta, end=None):
@@ -33,10 +33,13 @@ class PerformanceReport(CommonReport):
         at the provided end date. If no end date is provided, the natural
         end date for the project is used.
 
-        Return None if no such data exists.
+        Raise an exception if no such data exists.
         """
         if not cls.has_time_delta_from_end(project, time_delta, end=end):
-            return None
+            end = end or project.get_campaign_end()
+            raise InvalidReportRequest(
+                f"Invalid report end={end} and delta before end={time_delta}"
+            )
 
         all_periods = project.get_periods()
         all_target_periods = project.get_target_periods()
@@ -80,6 +83,9 @@ class PerformanceReport(CommonReport):
 
         Return None if no such data exists.
         """
+        if not cls.has_last_weeks(project, weeks):
+            raise InvalidReportRequest(f"Invalid report last weeks: {weeks}")
+
         return cls.for_time_delta_from_end(
             project, time_delta=datetime.timedelta(weeks=weeks)
         )
@@ -98,6 +104,8 @@ class PerformanceReport(CommonReport):
 
         Return None if no such perf data exists in this span.
         """
+        if not cls.has_dates(project, start, end):
+            raise InvalidReportRequest(f"Invalid report dates: {start} to {end}")
         return cls.for_time_delta_from_end(project, time_delta=end - start, end=end)
 
     @classmethod
