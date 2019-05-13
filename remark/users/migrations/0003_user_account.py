@@ -38,7 +38,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='user',
             name='account',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.PROTECT, to='users.Account'),
+            field=models.ForeignKey(blank=True, null=True, related_name='users', on_delete=django.db.models.deletion.PROTECT, to='users.Account'),
         ),
         migrations.RunPython(set_account_for_existing_users, do_nothing),
     ]

@@ -85,7 +85,8 @@ class User(PermissionsMixin, AbstractBaseUser):
         max_length=24,
     )
     account = models.ForeignKey(
-        'users.Account',
+        "users.Account",
+        related_name="users",
         on_delete=models.PROTECT,
         null=True,
         blank=True,
