@@ -116,8 +116,8 @@ def create_html(
         # You might also consider calling
         #
         #    PerformanceReport.has_campaign_to_date(project)
-        #    PerformanceReport.for_dates(project, start, end)
-        #    PerformanceReport.for_dates(project, prevstart, start)
+        #    PerformanceReport.has_dates(project, start, end)
+        #    PerformanceReport.has_dates(project, prevstart, start)
         #
         # and making sure all of these return True, *before* you ever call
         # create_html. would be good to check in a django Form, for instance.
