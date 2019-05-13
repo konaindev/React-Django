@@ -53,47 +53,104 @@ exports[`BaselineReportPage renders correctly 1`] = `
           </nav>
         </div>
       </div>
-      <div
-        className="project-report-links"
+      <section
+        className="report-page-subheader"
       >
-        <ul>
-          <li
-            className="selected enabled"
-            data-url="/projects/pro_example/baseline/"
-            onClick={[Function]}
+        <div
+          className="container"
+        >
+          <div
+            className="subheader__inner"
           >
-            Baseline
-          </li>
-          <li
-            className="enabled"
-            data-url="/projects/pro_example/market/"
-            onClick={[Function]}
-          >
-            Market Analysis
-          </li>
-          <li
-            className="disabled"
-            data-url="#"
-            onClick={[Function]}
-          >
-            Modeling
-          </li>
-          <li
-            className="disabled"
-            data-url="#"
-            onClick={[Function]}
-          >
-            Campaign Plan
-          </li>
-          <li
-            className="enabled"
-            data-url="/projects/pro_example/performance/last-week/"
-            onClick={[Function]}
-          >
-            Performance
-          </li>
-        </ul>
-      </div>
+            <div
+              className="project-report-links"
+            >
+              <ul>
+                <li
+                  className="selected enabled"
+                  data-url="/projects/pro_example/baseline/"
+                  onClick={[Function]}
+                >
+                  Baseline
+                </li>
+                <li
+                  className="enabled"
+                  data-url="/projects/pro_example/market/"
+                  onClick={[Function]}
+                >
+                  Market Analysis
+                </li>
+                <li
+                  className="disabled"
+                  data-url="#"
+                  onClick={[Function]}
+                >
+                  Modeling
+                </li>
+                <li
+                  className="disabled"
+                  data-url="#"
+                  onClick={[Function]}
+                >
+                  Campaign Plan
+                </li>
+                <li
+                  className="enabled"
+                  data-url="/projects/pro_example/performance/last-week/"
+                  onClick={[Function]}
+                >
+                  Performance
+                </li>
+              </ul>
+            </div>
+            <div
+              className="share-toggle"
+            >
+              <label
+                className="button-toggle"
+              >
+                <input
+                  checked={true}
+                  onChange={[Function]}
+                  type="checkbox"
+                />
+                <span
+                  className="toggle-tracks toggle-tracks--checked"
+                >
+                  <span
+                    className="toggle-thumb"
+                  />
+                  <div
+                    className="toggle-button-checked"
+                  >
+                    <div
+                      className="toggle-inner-label"
+                    >
+                      On
+                    </div>
+                  </div>
+                  <div
+                    className="toggle-button-unchecked"
+                  >
+                    <div
+                      className="toggle-inner-label"
+                    >
+                      Off
+                    </div>
+                  </div>
+                </span>
+                
+              </label>
+              <button
+                className="button button--primary copy-to-clipboard"
+                onClick={[Function]}
+              >
+                Copy Link
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
     <div
       className="page-chrome__top-chrome__spacing-fix"
