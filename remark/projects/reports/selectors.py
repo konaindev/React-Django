@@ -57,6 +57,12 @@ class ReportSelectorBase:
                 yield selector
 
     @classmethod
+    def share_selectors_for_project(cls, project):
+        for selector in cls.selectors_for_project(project):
+            if selector.is_shared():
+                yield selector
+
+    @classmethod
     def links_for_project(cls, project):
         """
         Yield all links available for this selector type for the given project.
@@ -71,6 +77,14 @@ class ReportSelectorBase:
         """
         for report_selector in cls.public_selectors_for_project(project):
             yield report_selector.get_link()
+
+    @classmethod
+    def share_links_for_project(cls, project):
+        """
+        Yield all links available for this selector type for the given project.
+        """
+        for report_selector in cls.share_selectors_for_project(project):
+            yield report_selector.get_share_link()
 
     def __init__(self, project):
         self.project = project
@@ -94,6 +108,11 @@ class ReportSelectorBase:
         """Return a link dictionary suitable for use in the frontend."""
         # Derived classes may override
         return {"url": self.get_url(), "description": self.get_description()}
+    
+    def get_share_link(self):
+        """Return a link dictionary suitable for use in the frontend."""
+        # Derived classes may override
+        return {"url": self.get_share_url(), "description": self.get_description()}
 
     def get_share_info(self, base_url):
         return dict(
@@ -508,7 +527,7 @@ class ReportLinks:
         return links
 
     @classmethod
-    def _project_links(cls, project, public):
+    def _project_links(cls, project, public=False, shared=False):
         """
         Get a nested structure of public (or private) report links.
 
@@ -532,7 +551,13 @@ class ReportLinks:
             "modeling": {...},
         }
         """
-        attr = "public_links_for_project" if public else "links_for_project"
+        if shared:
+            attr = "share_links_for_project"
+        elif public:
+            attr = "public_links_for_project"
+        else:
+            attr = "links_for_project"
+
         links = {
             "baseline": ReportLinks._1(getattr(BaselineReportSelector, attr)(project)),
             "performance": ReportLinks._many(
@@ -553,3 +578,7 @@ class ReportLinks:
     @classmethod
     def public_for_project(cls, project):
         return cls._project_links(project, public=True)
+
+    @classmethod
+    def share_for_project(cls, project):
+        return cls._project_links(project, shared=True)

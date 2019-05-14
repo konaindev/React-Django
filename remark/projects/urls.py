@@ -37,27 +37,27 @@ urlpatterns = [
     # Add Support for Share URLs to Reports
     path(
         "<project_id>/share/baseline/",
-        BaselineReportPageView.as_view(),
+        BaselineReportPageView.as_view(is_anonymous_view=True),
         name="baseline_report_shared",
     ),
     path(
         "<project_id>/share/performance/<report_span>/",
-        PerformanceReportPageView.as_view(),
+        PerformanceReportPageView.as_view(is_anonymous_view=True),
         name="performance_report_shared",
     ),
     path(
         "<project_id>/share/market/",
-        MarketReportPageView.as_view(),
+        MarketReportPageView.as_view(is_anonymous_view=True),
         name="market_report_shared"
     ),
     path(
         "<project_id>/share/modeling/",
-        ModelingReportPageView.as_view(),
+        ModelingReportPageView.as_view(is_anonymous_view=True),
         name="modeling_report_shared",
     ),
     path(
         "<project_id>/share/campaign_plan/",
-        CampaignPlanPageView.as_view(),
+        CampaignPlanPageView.as_view(is_anonymous_view=True),
         name="campaign_plan_shared",
     ),
     # REST API to update project details
