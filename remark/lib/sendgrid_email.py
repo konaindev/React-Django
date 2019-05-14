@@ -17,10 +17,15 @@ def process_response(response, msg, ignore_response=False):
         print(response.status_code)
         print(response.headers)
         raise Exception(f"SendGrid Exception: {msg}")
-    # print(response.body)
+
+    print(f"SendGrid Response: {response.body}")
+
     if ignore_response:
         return None
-    result = json.loads(response.body)
+    try:
+        result = json.loads(response.body)
+    except:
+        raise Exception(f"Invalid JSON Response: `{response.body}`")
     return result
 
 def create_recipient(email):
