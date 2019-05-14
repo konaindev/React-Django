@@ -13,6 +13,7 @@ from .constants import (
     SHOW_CAMPAIGN,
     KPIS,
     KPI_NAMES,
+    percent_formatter
 )
 from remark.lib.sendgrid_email import (
     create_contact_if_not_exists,
@@ -71,13 +72,12 @@ def top_kpi(kpi_key, campaign, this_week, prev_week, text):
 def list_kpi(kpi_key, campaign, health):
     selector = SELECTORS[kpi_key]
     title = KPI_NAMES[kpi_key]
-    formatter = FORMATTERS[kpi_key]
     campaign_value = selector(campaign)
     campaign_target = selector(campaign["targets"])
     model_percent = float(campaign_value) / float(campaign_target)
     return {
         "name": title,
-        "model_percent": formatter(model_percent),
+        "model_percent": percent_formatter(model_percent),
         "health": health,
     }
 
