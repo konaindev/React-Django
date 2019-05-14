@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 
 from remark.admin import admin_site
 from .models import Account, User
+from .forms import AccountForm
 
 
 @admin.register(User, site=admin_site)
@@ -34,37 +35,6 @@ class UserAdmin(AuthUserAdmin):
     search_fields = ("email", "public_id")
     ordering = ("email",)
     filter_horizontal = ("groups", "user_permissions")
-
-
-class AccountForm(forms.ModelForm):
-    class Meta:
-        model = Account
-        fields = "__all__"
-
-    users = forms.ModelMultipleChoiceField(
-        queryset=User.objects.all(),
-        required=False,
-        widget=admin.widgets.FilteredSelectMultiple(
-            verbose_name='Users',
-            is_stacked=False
-        )
-    )
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        if self.instance.pk:
-            self.fields['users'].initial = self.instance.users.all()
-
-    def save(self, commit=True):
-        account = super().save(commit=False)  
-        if commit:
-            account.save()
-
-        if account.pk:
-            account.users.update(account=None)
-            self.cleaned_data['users'].update(account=account)
-
-        return account
 
 
 @admin.register(Account, site=admin_site)
