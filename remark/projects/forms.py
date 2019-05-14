@@ -68,6 +68,7 @@ class ProjectForm(forms.ModelForm):
         self.is_existing_instance = kwargs.get("instance") is not None
         super(ProjectForm, self).__init__(*args, **kwargs)
         self._map_public_fields()
+        self._map_shared_fields()
         self._update_selected_model_choices()
 
     def _map_public_fields(self):
@@ -81,6 +82,31 @@ class ProjectForm(forms.ModelForm):
 
         if self.is_existing_instance:
             report_links = ReportLinks.for_project(self.instance)
+            for k, v in field_maps.items():
+                if isinstance(report_links[v], dict):
+                    link = report_links[v]["url"]
+                elif isinstance(report_links[v], list):
+                    link = report_links[v][0]["url"]
+                else:
+                    continue
+                self.fields[k].label = mark_safe(
+                    self.fields[k].label
+                    + '&nbsp; (URL: <a target="_blank" href="{}">{}</a>)'.format(
+                        link, link
+                    )
+                )
+
+    def _map_shared_fields(self):
+        field_maps = {
+            "is_baseline_report_shared": "baseline",
+            "is_tam_shared": "market",
+            "is_performance_report_shared": "performance",
+            "is_modeling_shared": "modeling",
+            "is_campaign_plan_shared": "campaign_plan",
+        }
+
+        if self.is_existing_instance:
+            report_links = ReportLinks.share_for_project(self.instance)
             for k, v in field_maps.items():
                 if isinstance(report_links[v], dict):
                     link = report_links[v]["url"]

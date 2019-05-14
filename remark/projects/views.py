@@ -23,7 +23,7 @@ from .tasks import export_tam_task
 
 
 # project model field names used to control anonymous access, by report_name
-shared_field_names = dict(
+shared_fields_by_report = dict(
     baseline="is_baseline_report_shared",
     market="is_tam_shared",
     performance="is_performance_report_shared",
@@ -38,19 +38,22 @@ class ProjectSingleMixin:
 
         user = request.user
 
+        # protected views
         if not self.is_anonymous_view:
             if not user.is_authenticated:
                 raise Http404
             elif not self.project.user_can_view(user):
                 raise PermissionDenied
+            else:
+                return
 
-        is_report_shared = False
-        shared_field_name = shared_field_names.get(self.report_name)
-        if shared_field_name is not None:
-            is_report_shared = getattr(self.project, shared_field_name, False)
-
-        # prevent anonymous users from accessing reports which are NOT shared
-        if not is_report_shared and (not user.is_authenticated):
+        # public shared report views
+        try:
+            shared_field = shared_fields_by_report.get(self.report_name)
+            is_report_shared = getattr(self.project, shared_field, False)
+            if not is_report_shared and (not user.is_authenticated):
+                raise Http404
+        except Exception:
             raise Http404
 
 
@@ -79,8 +82,8 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
     """
 
     selector_class = None
-    report_name = None
     is_anonymous_view = False
+    report_name = None
 
     def get_page_title(self):
         return f"{self.project.name} {self.page_title}"
@@ -216,10 +219,10 @@ class ProjectUpdateAPIView(LoginRequiredMixin, APIView):
         try:
             shared = payload.get("shared")
             report_name = payload.get("report_name")
-            field_name = shared_field_names.get(report_name)
-            
+            shared_field = shared_fields_by_report.get(report_name)
+
             project = Project.objects.get(public_id=project_id)
-            setattr(project, field_name, shared)
+            setattr(project, shared_field, shared)
             project.save()
 
             return self.render_success()
