@@ -39,6 +39,22 @@
         }
     }
 
+    &--outline {
+        background-color: transparent;
+        border: 1px solid $button-outline-border-color;
+        color: $button-outline-text-color;
+
+        &:hover, &:focus {
+            background-color: transparent;
+            border-color: lighten($button-outline-border-color, 3%);
+        }
+
+        &:active {
+            background-color: transparent;
+            border-color: darken($button-outline-border-color, 2%);
+        }
+    }
+
     &--selected {
         background-color: $button-default-active-bg-color;
         color: $button-default-active-text-color;

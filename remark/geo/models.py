@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.core.validators import MaxValueValidator, MinValueValidator
 from jsonfield import JSONField
 
 from .geocode import geocode, GeocodeResult
@@ -148,3 +148,111 @@ class Address(models.Model):
 
     def __str__(self):
         return self.formatted_address or str(self.id)
+
+
+class ZipcodePolygonManager(models.Manager):
+    def look_up_polygon(self, zip_code):
+        try:
+            row = self.get(zip_code=zip_code)
+            return dict(
+                properties=row.properties,
+                geometry=row.geometry
+            )
+        except self.model.DoesNotExist:
+            return None
+
+
+class ZipcodePolygon(models.Model):
+    """
+    Polygon data per zip code
+    """
+
+    objects = ZipcodePolygonManager()
+
+    zip_code = models.CharField(
+        primary_key=True,
+        help_text="5-digit ZIP code",
+        max_length=5,
+    )
+
+    state = models.CharField(
+        help_text="State abbreviation",
+        max_length=2
+    )
+
+    geometry = JSONField(
+        help_text="Geometry JSON data which includes 'type' and 'coordinates'"
+    )
+
+    properties = JSONField(
+        help_text="Additional properties in JSON format"
+    )
+
+
+class USACensusZip(models.Model):
+    total_population = models.PositiveIntegerField()
+
+    number_of_households = models.PositiveIntegerField()
+
+    zipcode = models.CharField(max_length=20, unique=True)
+
+    def __str__(self):
+        return zipcode
+
+
+class USACensusPopulationByAge(models.Model):
+    usa_census_zip = models.ForeignKey(
+        USACensusZip, on_delete=models.CASCADE, related_name="age_segments"
+    )
+
+    start_age = models.IntegerField()
+
+    end_age = models.IntegerField()
+
+    population_percentage = models.FloatField(
+        validators=[MinValueValidator(0.0), MaxValueValidator(1.0)]
+    )
+
+
+class USACensusHouseholdByType(models.Model):
+
+    class HouseholdType:
+        MARRIED = "Married"
+        SINGLE_FEMALE = "Single Female"
+        SINGLE_MALE = "Single Male"
+        ONE_PERSON = "One Person"
+        NON_FAMILY = "Non-Family"
+
+        CHOICES = [
+            (MARRIED, MARRIED),
+            (SINGLE_FEMALE, SINGLE_FEMALE),
+            (SINGLE_MALE, SINGLE_MALE),
+            (ONE_PERSON, ONE_PERSON),
+            (NON_FAMILY, NON_FAMILY),
+        ]
+
+    usa_census_zip = models.ForeignKey(
+        USACensusZip, on_delete=models.CASCADE, related_name="households"
+    )
+
+    household_type = models.CharField(
+        max_length=20, choices=HouseholdType.CHOICES
+    )
+
+    household_percentage = models.FloatField(
+        validators=[MinValueValidator(0.0), MaxValueValidator(1.0)]
+    )
+
+
+class USACensusIncomeDistribution(models.Model):
+    usa_census_zip = models.ForeignKey(
+        USACensusZip, on_delete=models.CASCADE, related_name="income_distributions"
+    )
+
+    income_start = models.IntegerField()
+
+    income_end = models.IntegerField()
+
+    income_distribution_percentage = models.FloatField(
+        validators=[MinValueValidator(0.0), MaxValueValidator(1.0)]
+    )

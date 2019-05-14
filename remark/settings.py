@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 import sys
 
-import logging.config
-
 import dj_database_url
 import django_heroku
 
@@ -26,6 +24,7 @@ def _safe_int(x):
     except Exception:
         i = None
     return i
+
 
 def required_env(name):
     result = os.getenv(name)
@@ -85,6 +84,7 @@ INSTALLED_APPS = [
     "remark.releases",
     "remark.web",
     "remark.geo",
+    "remark",
 ]
 
 MIDDLEWARE = [
@@ -149,37 +149,29 @@ DATABASES = {
 }
 
 # Logging
-LOGGING_CONFIG = None
-logging.config.dictConfig({
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'remarkably':{
-            'level':'INFO',
-            'class':'logging.StreamHandler',
-            'stream': sys.stdout,
-            'formatter': 'remarkably'
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "handlers": {
+        "remarkably": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+            "stream": sys.stdout,
+            "formatter": "remarkably",
         }
     },
-    'formatters': {
-        'remarkably' : {
-            'format': '{levelname} {asctime} {module} {filename} {funcName} {message}',
-            'style': '{',
+    "formatters": {
+        "remarkably": {
+            "format": "{levelname} {asctime} {module} {filename} {funcName} {message}",
+            "style": "{",
         },
-        'simple': {
-            'format': '{levelname}::{message}',
-            'style': '{',
-        }
+        "simple": {"format": "{levelname}::{message}", "style": "{"},
     },
     "loggers": {
-        "django": {
-            "handlers": ['remarkably'],
-        },
-        "remark": {
-            "handlers": ['remarkably'],
-        }
-    }
-})
+        "django": {"handlers": ["remarkably"]},
+        "remark": {"handlers": ["remarkably"]},
+    },
+}
 
 # Change 'default' database configuration with $DATABASE_URL.
 DATABASES["default"].update(dj_database_url.config(conn_max_age=500, ssl_require=True))
@@ -275,6 +267,11 @@ GOOGLE_APPLICATION_CREDENTIALS = required_env("GOOGLE_APPLICATION_CREDENTIALS")
 GOOGLE_ANALYTICS_KEY = os.getenv("GOOGLE_ANALYTICS_KEY", None)
 FB_PIXEL_ID = os.getenv("FB_PIXEL_ID", None)
 
+#
+# REDIS
+#
+REDIS_URL = os.getenv("REDIS_URL", "redis://")
+CELERY_BROKER_URL = REDIS_URL
 
 # Activate Django-Heroku.
 django_heroku.settings(locals(), staticfiles=True)

@@ -6,7 +6,7 @@ from django.utils.safestring import mark_safe
 from remark.admin import admin_site
 from remark.analytics.admin import InlineAnalyticsProviderAdmin
 from .forms import ProjectForm, SpreadsheetForm
-from .models import Project, Period, Spreadsheet, TargetPeriod, PerformanceEmail, PerformanceEmailKPI
+from .models import Project, Period, Spreadsheet, TargetPeriod, PerformanceEmail, PerformanceEmailKPI, TAMExportLog
 from .views import TAMExportView
 
 import datetime
@@ -268,3 +268,7 @@ class PerformanceEmailAdmin(admin.ModelAdmin):
         #    obj.save()
         #else:
         #    raise Exception("Email could not be sent!")
+
+@admin.register(TAMExportLog, site=admin_site)
+class TAMExportLogAdmin(admin.ModelAdmin):
+    pass

@@ -45,7 +45,7 @@ export class MapWithCircle extends Component {
 
     const {
       center: {
-        coordinates: [lat, lng]
+        coordinates: [lng, lat]
       }
     } = this.props;
     return new this.google.maps.LatLng(lat, lng);

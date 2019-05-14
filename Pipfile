@@ -12,6 +12,7 @@ pyls-black = "*"
 pyls-mypy = "*"
 click = "*"
 pip-licenses = "*"
+watchdog = "*"
 
 [packages]
 django-heroku = "*"
@@ -37,6 +38,8 @@ beautifulsoup4 = "*"
 googlemaps = "*"
 bs4 = "*"
 sendgrid = "*"
+celery = "*"
+redis = "*"
 
 [requires]
 python_version = "3.7"

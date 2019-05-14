@@ -23,13 +23,13 @@ exports[`FunnelPerformanceAnalysis renders default correctly 1`] = `
         className="button-group"
       >
         <button
-          className="button button--selected button-undefined button-group__item"
+          className="button button--selected button--undefined button-group__item"
           onClick={[Function]}
         >
           Monthly
         </button>
         <button
-          className="button button-undefined button-group__item"
+          className="button button--undefined button-group__item"
           onClick={[Function]}
         >
           Weekly
@@ -5311,13 +5311,13 @@ exports[`FunnelPerformanceAnalysis renders with [] correctly 1`] = `
         className="button-group"
       >
         <button
-          className="button button--selected button-undefined button-group__item"
+          className="button button--selected button--undefined button-group__item"
           onClick={[Function]}
         >
           Monthly
         </button>
         <button
-          className="button button-undefined button-group__item"
+          className="button button--undefined button-group__item"
           onClick={[Function]}
         >
           Weekly

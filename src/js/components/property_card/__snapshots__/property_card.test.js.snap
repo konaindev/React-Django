@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PropertyCard renders correctly 1`] = `
+<div
+  className="property-card"
+>
+  <div
+    className="panel panel--default property-card__panel"
+  >
+    <div
+      className="property-card__image"
+      style={
+        Object {
+          "backgroundImage": "url(https://i.imgur.com/UEH4gfU.jpg)",
+        }
+      }
+    >
+      <div
+        className="property-card__overlay"
+      >
+        <a
+          className="property-card__overlay-link"
+          href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+        >
+          <button
+            className="button button--outline"
+          >
+            View Report
+          </button>
+        </a>
+        <div
+          className="property-card__actions"
+        />
+      </div>
+    </div>
+    <div
+      className="property-card__body"
+    >
+      <div
+        className="property-card__name"
+      >
+        Meridian SLC
+      </div>
+      <div
+        className="property-card__address"
+      >
+        123 4th Avenue, Seattle WA 98106
+      </div>
+      <div
+        className="property-card__status"
+      />
+    </div>
+  </div>
+</div>
+`;

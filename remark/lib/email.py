@@ -7,7 +7,7 @@ from remark.lib.logging import getLogger
 logger = getLogger(__name__)
 
 
-def send_email_to_user(user, template_dir, context=None):
+def send_email_to_user(user, template_dir, context=None, attachments=None):
     """
     Given a template directory containing the following files:
 
@@ -15,12 +15,13 @@ def send_email_to_user(user, template_dir, context=None):
     2. body.txt <-- the plain text body copy
     3. body.html <-- spiffy HTML body copy
 
+    attachments: array of { "name", "content", "type" } dict
     Render the email and send it to the user.
     """
-    send_email([user.email], template_dir, context=context)
+    send_email([user.email], template_dir, context=context, attachments=attachments)
 
 
-def send_email_to_admins(template_dir, context=None):
+def send_email_to_admins(template_dir, context=None, attachments=None):
     """
     Given a template directory containing the following files:
 
@@ -30,10 +31,15 @@ def send_email_to_admins(template_dir, context=None):
 
     Render the email and send it to the admins.
     """
-    send_email([admin[1] for admin in settings.ADMINS], template_dir, context=context)
+    send_email(
+        [admin[1] for admin in settings.ADMINS],
+        template_dir,
+        context=context,
+        attachments=attachments
+    )
 
 
-def send_email(emails_to, template_dir, context=None):
+def send_email(emails_to, template_dir, context=None, attachments=None):
     """
     Given a template directory containing the following files:
 
@@ -44,6 +50,9 @@ def send_email(emails_to, template_dir, context=None):
     Render the email and send it to the list specified in emails_to.
     """
     message = build_message(emails_to, template_dir, context=context)
+    if attachments:
+        for attachment in attachments:
+            message.attach(attachment['name'], attachment['content'], attachment['type'])
     message.send()
 
 

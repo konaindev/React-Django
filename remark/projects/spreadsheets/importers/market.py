@@ -55,8 +55,8 @@ class MarketImporter(ProjectExcelImporter):
         "center": {
             "type": "Point",
             "coordinates": [
-                FloatCell(find("coordinates", "B")),
                 FloatCell(find("coordinates", "C")),
+                FloatCell(find("coordinates", "B")),
             ],
         },
         "radius": FloatCell(find("tam type", "C")),
@@ -65,7 +65,11 @@ class MarketImporter(ProjectExcelImporter):
 
     @staticmethod
     def POPULATION_ZIP_SCHEMA(row):
-        return {"zip": StrCell(loc(sheet="Output", row=row)), "outline": None}
+        return {
+            "zip": StrCell(loc(sheet="Output", row=row)),
+            "outline": None,
+            "properties": None,
+        }
 
     @staticmethod
     def RTI_SCHEMA(category):
