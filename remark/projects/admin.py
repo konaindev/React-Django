@@ -234,6 +234,8 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
 class PerformanceEmailKPIInline(admin.TabularInline):
     model = PerformanceEmailKPI
 
+from django.db import transaction
+
 @admin.register(PerformanceEmail, site=admin_site)
 class PerformanceEmailAdmin(admin.ModelAdmin):
     inlines = [
@@ -250,14 +252,19 @@ class PerformanceEmailAdmin(admin.ModelAdmin):
         "low_performing_insight"
     ]
 
+    #@transaction.atomic
     def save_model(self, request, obj, form, change):
         if not change:
             obj.created_by = request.user
         obj.end = obj.start + datetime.timedelta(days=7)
-        obj.save()
-        success, campaign_id = send_performance_email(obj)
-        if success:
-            obj.campaign_id = campaign_id
-            obj.save()
-        else:
-            raise Exception("Email could not be sent!")
+        #for kpi in obj.performance_kpis.all():
+        #    kpi.save()
+        #obj.save()
+        super().save_model(request, obj, form, change)
+
+        # success, campaign_id = send_performance_email(obj)
+        #if success:
+        #    obj.campaign_id = campaign_id
+        #    obj.save()
+        #else:
+        #    raise Exception("Email could not be sent!")

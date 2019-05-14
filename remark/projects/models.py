@@ -935,7 +935,9 @@ class PerformanceEmail(models.Model):
     def filter_performance_kpis(self, category):
         print("FILTERING KPIS")
         result = []
-        for kpi in self.performance_kpis.all():
+        all_kpis = PerformanceEmailKPI.objects.filter(performance_email = self)
+        print(all_kpis)
+        for kpi in all_kpis:
             print(kpi)
             if kpi.category == category:
                 print("added")

@@ -27,7 +27,14 @@ def create_recipient(email):
     data = [{ "email": email }]
     response = sg.client.contactdb.recipients.post(request_body=data)
     result = process_response(response, "Could not create recipient")
-    return result["recipients"][0]["id"]
+
+    if result["error_count"] > 0:
+        raise Exception(f"Creating recipient caused error: {result['errors'][0]}")
+
+    if result["new_count"] != 1:
+        raise Exception("Recipient was not created but SendGrid did not throw an error. This is a weird place.")
+
+    return result["persisted_recipients"][0]
 
 def create_contact_if_not_exists(email):
     params = {'email': email}
