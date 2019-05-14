@@ -273,7 +273,7 @@ FB_PIXEL_ID = os.getenv("FB_PIXEL_ID", None)
 #
 REDIS_URL = os.getenv("REDIS_URL", "redis://")
 CELERY_BROKER_URL = REDIS_URL
-CELERY_RESULT_BACKEND = "redis"
+CELERY_IGNORE_RESULT = True
 
 # Activate Django-Heroku.
 django_heroku.settings(locals(), staticfiles=True)
