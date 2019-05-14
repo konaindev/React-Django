@@ -109,7 +109,9 @@ class ProjectForm(forms.ModelForm):
 
     class Meta:
         model = Project
-        exclude = []
+        exclude = [
+            "email_list_id"
+        ]
 
 
 def multiline_text_to_str_array(text):
