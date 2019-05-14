@@ -176,12 +176,14 @@ def send_performance_email(performance_email_id):
     for contact in contacts:
         contact_id = create_contact_if_not_exists(contact)
         contact_ids.append(contact_id)
+        time.sleep(5)
 
     # Sync Contact List
     list_id = project.email_list_id
     new_list_id = create_contact_list_if_not_exists(
         project.public_id, list_id, contact_ids
     )
+    time.sleep(10)
     if list_id != new_list_id:
         project.email_list_id = new_list_id
         project.save()
