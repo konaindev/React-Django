@@ -25,8 +25,12 @@ class PerformanceEmailAdmin(admin.ModelAdmin):
     ]
 
     def save_model(self, request, obj, form, change):
+        print("email_app::admin::PerformanceEmailAdmin::save_model::top")
         if not change:
             obj.created_by = request.user
         obj.end = obj.start + datetime.timedelta(days=7)
+        print("email_app::admin::PerformanceEmailAdmin::save_model::before save")
         super().save_model(request, obj, form, change)
+        print("email_app::admin::PerformanceEmailAdmin::save_model::after save")
         send_performance_email.apply_async(args=(obj.id,), countdown=2)
+        print("email_app::admin::PerformanceEmailAdmin::save_model::after async task")
