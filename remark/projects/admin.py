@@ -227,6 +227,7 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
     class Media:
         js = ("js/project_admin.js",)
 
+
 @admin.register(TAMExportLog, site=admin_site)
 class TAMExportLogAdmin(admin.ModelAdmin):
     pass
