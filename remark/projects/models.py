@@ -18,7 +18,6 @@ from remark.lib.metrics import (
     ModelPeriod,
 )
 from .spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
-from .email.constants import KPI_NAMES, KPI_CATEGORIES
 
 def pro_public_id():
     """Public identifier for a project."""

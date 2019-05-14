@@ -10,8 +10,6 @@ from .models import Project, Period, Spreadsheet, TargetPeriod, TAMExportLog
 from .views import TAMExportView
 
 import datetime
-from remark.projects.email.performance_report import send_performance_email
-
 
 class UpdateSpreadsheetAdminMixin:
     def update_spreadsheet(self, request, obj, form):
@@ -22,7 +20,6 @@ class UpdateSpreadsheetAdminMixin:
                 getattr(obj, "imported_data", None)
                 or form.cleaned_data["imported_data"]
             )
-
 
 @admin.register(Spreadsheet, site=admin_site)
 class SpreadsheetAdmin(UpdateSpreadsheetAdminMixin, admin.ModelAdmin):
