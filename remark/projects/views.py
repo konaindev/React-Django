@@ -192,7 +192,7 @@ class TAMExportView(FormView, SingleObjectMixin):
             return self.form_invalid(form)
 
 
-class ProjectUpdateAPIView(APIView):
+class ProjectUpdateAPIView(LoginRequiredMixin, APIView):
     # APIView to update project details
 
     # Doesn't need CSRF protection for this REST API endpoint
