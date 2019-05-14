@@ -192,7 +192,7 @@ class ComputedPeriod(ComputedValueMixin):
     @computed_value
     def estimated_acq_revenue_gain(self):
         """
-        Return an estimate of how much new annualk revenue will be obtained on the
+        Return an estimate of how much new annualk revenue will be obtained on the 
         basis of this period's acquisition funnel outcomes.
         """
         return mult_or_0(self.delta_leases, self.average_monthly_rent, 12)
@@ -200,7 +200,7 @@ class ComputedPeriod(ComputedValueMixin):
     @computed_value
     def estimated_ret_revenue_gain(self):
         """
-        Return an estimate of how much new annual revenue will be obtained on the
+        Return an estimate of how much new annual revenue will be obtained on the 
         basis of this period's acquisition funnel outcomes.
         """
         return mult_or_0(self.lease_renewals, self.average_monthly_rent, 12)

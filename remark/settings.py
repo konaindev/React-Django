@@ -78,7 +78,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_js_reverse",
     "stdimage",
-    "remark.email_app",
     "remark.analytics",
     "remark.users",
     "remark.projects",
@@ -273,7 +272,6 @@ FB_PIXEL_ID = os.getenv("FB_PIXEL_ID", None)
 #
 REDIS_URL = os.getenv("REDIS_URL", "redis://")
 CELERY_BROKER_URL = REDIS_URL
-CELERY_RESULT_BACKEND = "redis"
 
 # Activate Django-Heroku.
 django_heroku.settings(locals(), staticfiles=True)

@@ -9,7 +9,6 @@ from .forms import ProjectForm, SpreadsheetForm
 from .models import Project, Period, Spreadsheet, TargetPeriod, TAMExportLog
 from .views import TAMExportView
 
-import datetime
 
 class UpdateSpreadsheetAdminMixin:
     def update_spreadsheet(self, request, obj, form):
@@ -20,6 +19,7 @@ class UpdateSpreadsheetAdminMixin:
                 getattr(obj, "imported_data", None)
                 or form.cleaned_data["imported_data"]
             )
+
 
 @admin.register(Spreadsheet, site=admin_site)
 class SpreadsheetAdmin(UpdateSpreadsheetAdminMixin, admin.ModelAdmin):
@@ -226,6 +226,7 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
 
     class Media:
         js = ("js/project_admin.js",)
+
 
 @admin.register(TAMExportLog, site=admin_site)
 class TAMExportLogAdmin(admin.ModelAdmin):
