@@ -24,6 +24,7 @@ class PerformanceEmailAdmin(admin.ModelAdmin):
         "low_performing_kpi",
         "low_performing_insight"
     ]
+    list_display = ["project", "start", "created_by"]
 
     def save_model(self, request, obj, form, change):
         print("email_app::admin::PerformanceEmailAdmin::save_model::top")
