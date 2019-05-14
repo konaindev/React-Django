@@ -70,12 +70,13 @@ def top_kpi(kpi_key, campaign, this_week, prev_week, text):
 def list_kpi(kpi_key, campaign, health):
     selector = SELECTORS[kpi_key]
     title = KPI_NAMES[kpi_key]
+    formatter = FORMATTERS[kpi_key]
     campaign_value = selector(campaign)
     campaign_target = selector(campaign["targets"])
     model_percent = float(campaign_value) / float(campaign_target)
     return {
         "name": title,
-        "model_percent": percent_formatter(model_percent, digits=0),
+        "model_percent": formatter(model_percent),
         "health": health,
     }
 
@@ -200,10 +201,10 @@ def send_performance_email(perf_email):
         CONTACT_EMAIL,
     )
 
-    title = f"{property.name} :: Performance Report :: {perf_email.start.strftime('%m/%d/%Y')}"
-    subject = f"{property.name} :: Performance Report :: {perf_email.start.strftime('%m/%d/%Y')}"
+    title = f"{project.name} :: Performance Report :: {perf_email.start.strftime('%m/%d/%Y')}"
+    subject = f"{project.name} :: Performance Report :: {perf_email.start.strftime('%m/%d/%Y')}"
 
-    create_campaign_if_not_exists(
+    perf_email.email_campaign_id = create_campaign_if_not_exists(
         email_campaign_id,
         title,
         subject,
@@ -212,3 +213,4 @@ def send_performance_email(perf_email):
         categories,
         html_content,
     )
+    return True

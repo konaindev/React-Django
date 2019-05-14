@@ -6,7 +6,7 @@ from django.utils.safestring import mark_safe
 from remark.admin import admin_site
 from remark.analytics.admin import InlineAnalyticsProviderAdmin
 from .forms import ProjectForm, SpreadsheetForm
-from .models import Project, Period, Spreadsheet, TargetPeriod, PerformanceEmail, PerformanceEmailKPI, TAMExportLog
+from .models import Project, Period, Spreadsheet, TargetPeriod, TAMExportLog
 from .views import TAMExportView
 
 import datetime
@@ -229,45 +229,6 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
 
     class Media:
         js = ("js/project_admin.js",)
-
-
-class PerformanceEmailKPIInline(admin.TabularInline):
-    model = PerformanceEmailKPI
-
-from django.db import transaction
-
-@admin.register(PerformanceEmail, site=admin_site)
-class PerformanceEmailAdmin(admin.ModelAdmin):
-    inlines = [
-        PerformanceEmailKPIInline
-    ]
-    fields = [
-        "project",
-        "start",
-        "send_datetime",
-        "lease_rate_text",
-        "top_performing_kpi",
-        "top_performing_insight",
-        "low_performing_kpi",
-        "low_performing_insight"
-    ]
-
-    #@transaction.atomic
-    def save_model(self, request, obj, form, change):
-        if not change:
-            obj.created_by = request.user
-        obj.end = obj.start + datetime.timedelta(days=7)
-        #for kpi in obj.performance_kpis.all():
-        #    kpi.save()
-        #obj.save()
-        super().save_model(request, obj, form, change)
-
-        # success, campaign_id = send_performance_email(obj)
-        #if success:
-        #    obj.campaign_id = campaign_id
-        #    obj.save()
-        #else:
-        #    raise Exception("Email could not be sent!")
 
 @admin.register(TAMExportLog, site=admin_site)
 class TAMExportLogAdmin(admin.ModelAdmin):
