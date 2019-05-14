@@ -90,8 +90,8 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
 
         try:
             self.selector = self.selector_class(self.project, *args, **kwargs)
-        except Exception as ex:
-            print(type(ex).__name__, ex.args)
+        except Exception:
+            self.selector = None
             raise Http404
 
         if (self.selector is None) or (not self.selector.has_report_data()):
@@ -100,16 +100,18 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
         if self.is_anonymous_view:
             report_links = ReportLinks.share_for_project(self.project)
             current_report_link = self.selector.get_share_link()
+            share_info = None
         else:
             report_links = ReportLinks.public_for_project(self.project)
             current_report_link = self.selector.get_link()
+            share_info = self.selector.get_share_info(self.base_url())
 
         return self.render(
             report_links=report_links,
             current_report_link=current_report_link,
             project=self.project.to_jsonable(),
             report=self.selector.get_report_data(),
-            share_info=self.selector.get_share_info(self.base_url())
+            share_info=share_info
         )
 
 

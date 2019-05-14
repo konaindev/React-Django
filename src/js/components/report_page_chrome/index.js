@@ -18,16 +18,9 @@ export default class ReportPageChrome extends Component {
     project: PropTypes.object.isRequired,
     current_report_name: PropTypes.string.isRequired,
     report_links: PropTypes.object.isRequired,
-    share_info: PropTypes.object.isRequired,
+    share_info: PropTypes.object,
     topItems: PropTypes.node,
     children: PropTypes.node.isRequired
-  };
-
-  static defaultProps = {
-    share_info: {
-      shared: false,
-      share_url: ""
-    }
   };
 
   render() {
@@ -46,11 +39,13 @@ export default class ReportPageChrome extends Component {
               current_report_name={current_report_name}
               report_links={report_links}
             />
-            <ShareToggle
-              {...share_info}
-              current_report_name={current_report_name}
-              update_endpoint={project.update_endpoint}
-            />
+            {share_info != null && (
+              <ShareToggle
+                {...share_info}
+                current_report_name={current_report_name}
+                update_endpoint={project.update_endpoint}
+              />
+            )}
           </div>
         </div>
       </section>

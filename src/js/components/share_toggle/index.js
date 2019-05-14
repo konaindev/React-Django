@@ -68,7 +68,8 @@ ShareToggle.propTypes = {
 };
 
 ShareToggle.defaultProps = {
-  shared: false
+  shared: false,
+  share_url: ""
 };
 
 export default ShareToggle;
