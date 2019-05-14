@@ -103,51 +103,6 @@ exports[`ReportPageChrome renders correctly 1`] = `
                 </li>
               </ul>
             </div>
-            <div
-              className="share-toggle"
-            >
-              <label
-                className="button-toggle"
-              >
-                <input
-                  checked={false}
-                  onChange={[Function]}
-                  type="checkbox"
-                />
-                <span
-                  className="toggle-tracks toggle-tracks--unchecked"
-                >
-                  <span
-                    className="toggle-thumb"
-                  />
-                  <div
-                    className="toggle-button-checked"
-                  >
-                    <div
-                      className="toggle-inner-label"
-                    >
-                      On
-                    </div>
-                  </div>
-                  <div
-                    className="toggle-button-unchecked"
-                  >
-                    <div
-                      className="toggle-inner-label"
-                    >
-                      Off
-                    </div>
-                  </div>
-                </span>
-                
-              </label>
-              <button
-                className="button button--disabled button--default copy-to-clipboard"
-                onClick={[Function]}
-              >
-                Copy Link
-              </button>
-            </div>
           </div>
         </div>
       </section>
