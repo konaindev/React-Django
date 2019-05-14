@@ -238,7 +238,7 @@ div[style*="margin: 16px 0;"] { margin: 0 !important; }
 
     </tr>-->
 
-{% if top_1 %}
+{# if top_1 #}
 
     <!-- START KPI Group -->
      <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -312,9 +312,9 @@ div[style*="margin: 16px 0;"] { margin: 0 !important; }
 
     <!-- END KPI Group -->
 
-{% endif %}
+{# endif #}
 
-{% if risk_1 %}
+{# if risk_1 #}
 
     <!-- START KPI Group -->
      <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -372,7 +372,7 @@ div[style*="margin: 16px 0;"] { margin: 0 !important; }
 
 {% include "projects/list_kpi.html" with kpi=risk_3 only %}
 
-                     {% include "projects/view_report_button.html" %}
+{% include "projects/view_report_button.html" %}
 
 
 
@@ -391,9 +391,9 @@ div[style*="margin: 16px 0;"] { margin: 0 !important; }
 
     <!-- END KPI Group -->
 
-{% endif %}
+{# endif #}
 
-{% if low_1 %}
+{# if low_1 #}
 
 
     <!-- START KPI Group -->
@@ -453,7 +453,7 @@ div[style*="margin: 16px 0;"] { margin: 0 !important; }
 
 {% include "projects/list_kpi.html" with kpi=low_3 only %}
 
-                     {% include "projects/view_report_button.html" %}
+{% include "projects/view_report_button.html" %}
 
 
 
@@ -472,7 +472,7 @@ div[style*="margin: 16px 0;"] { margin: 0 !important; }
 
     <!-- END KPI Group -->
 
-{% endif %}
+{# endif #}
 
 
     <table border="0" cellpadding="0" cellspacing="0" width="100%">
