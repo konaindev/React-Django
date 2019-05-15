@@ -1,19 +1,9 @@
 @import "css/base.scss";
 
-$property-card-width: 25%;
-$property-card-image-height: 220px;
-$property-card-status-color-on-track: $green-2;
-$property-card-status-color-at-risk: $orange-4;
-$property-card-status-color-requires-review: $orange-2;
-$property-card-status-text-size: 11px;
-$property-card-panel-hover-color: $gray-4;
-$property-card-panel-hover-box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.7);
-$property-card-panel-overlay-color: $gray-5;
-
 .property-card {
     $this: &;
     width: $property-card-width;
-    padding: $s4;
+    padding: $property-card-spacing / 2;
 
     &__panel {
         overflow: hidden;
