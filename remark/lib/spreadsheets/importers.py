@@ -31,7 +31,7 @@ class ExcelImporter:
         self.cleaned_data = {}
         self.errors = []
 
-    def check_data_type(self, cell, data_type):
+    def check_data_type(self, cell, data_type, label):
         """Raise an exception if cell's data type doesn't match provided data_type."""
         # If we have no expectations, we're always happy
         if callable(data_type):
@@ -42,11 +42,11 @@ class ExcelImporter:
             valid = data_type == cell.data_type
         if not valid:
             raise ExcelValidationError(
-                f"found data type '{cell.data_type}' but expected '{data_type}'",
+                f"For {label}: found data type '{cell.data_type}' but expected '{data_type}'",
                 where=cell,
             )
 
-    def check_convert(self, cell, converter=None):
+    def check_convert(self, cell, converter=None, label=None):
         """
         Attempt to convert a cell's raw value to a python value.
 
@@ -60,7 +60,7 @@ class ExcelImporter:
                 value = converter(value)
             except Exception as e:
                 raise ExcelValidationError(
-                    f"Could not apply value converter '{converter}': '{e}'", where=cell
+                    f"For {label}: Could not apply value converter '{converter}': '{e}'", where=cell
                 )
         return value
 
@@ -68,14 +68,14 @@ class ExcelImporter:
         """
         Return an openpyxl Cell instance from the spreadsheet.
 
-        The location of the cell is determined first and foremost by the `location` 
+        The location of the cell is determined first and foremost by the `location`
         provided here, and secondarily by the schema_cell's `locator` (if any).
 
         Typically, you'll *declare* how to find a cell by setting the schema_cell
         to a SchemaCell tuple.
 
         That said, if you just want to get a Cell from the spreadsheet directly
-        and without any fussy schema mechanisms you can always call with 
+        and without any fussy schema mechanisms you can always call with
         (for example): self.cell(location="output!A3")
         """
         sheet, col, row = parse_location_or_default(location, sheet, col, row)
@@ -87,20 +87,20 @@ class ExcelImporter:
         """
         Return the value of a cell in the spreadsheet.
 
-        The location of the cell is determined first and foremost by the `location` 
+        The location of the cell is determined first and foremost by the `location`
         provided here, and secondarily by the schema_cell's `locator` (if any).
 
         Typically, you'll *declare* how to find a cell, and validate its value,
         by setting the schema_cell to a SchemaCell tuple.
 
         That said, if you just want to get a value from the spreadsheet directly
-        and without any fussy schema mechanisms you can always call with 
+        and without any fussy schema mechanisms you can always call with
         (for example): self.value(location="output!A3")
         """
         cell = self.cell(schema_cell, location, sheet, col, row)
         if schema_cell is not None:
-            self.check_data_type(cell, schema_cell.data_type)
-            value = self.check_convert(cell, schema_cell.converter)
+            self.check_data_type(cell, schema_cell.data_type, schema_cell.label)
+            value = self.check_convert(cell, schema_cell.converter, schema_cell.label)
         else:
             value = cell.value
         return value
@@ -122,8 +122,8 @@ class ExcelImporter:
         True if the expectation is met.
         """
         cell = self.cell(schema_cell, location, sheet, col, row)
-        self.check_data_type(cell, schema_cell.data_type)
-        value = self.check_convert(cell, schema_cell.converter)
+        self.check_data_type(cell, schema_cell.data_type, schema_cell.label)
+        value = self.check_convert(cell, schema_cell.converter, schema_cell.label)
         value_matches = expected(value) if callable(expected) else expected == value
         if not value_matches:
             raise ExcelValidationError(
@@ -145,7 +145,7 @@ class ExcelImporter:
 
         For instance:
 
-            walk({"hello": "world", "goodbye": SchemaCell(...)}, get_value) 
+            walk({"hello": "world", "goodbye": SchemaCell(...)}, get_value)
                 -->
             {"hello": "world", "goodbye": 42}
         """
@@ -189,7 +189,7 @@ class ExcelImporter:
 
         There are two ways to specify the varying locations. Either pass
         in a iterable for `locations` -- this can either be (sheet, col, row) tuples
-        *or* naked row/column numbers, or provide a `start` or `end` which will 
+        *or* naked row/column numbers, or provide a `start` or `end` which will
         be tossed to `location_range(...)` (see rowcol.py for details).
 
         In addition, default values for `location` --> (`sheet`, `col`, `row`)

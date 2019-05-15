@@ -192,15 +192,11 @@ div[style*="margin: 16px 0;"] { margin: 0 !important; }
             <![endif]-->
 
             <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width:600px;">
-
-
                   <tr>
                     <td align="center" valign="top" style="padding: 0 0 20px 0;">
                         <img src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/top.png" width="42" height="40" border="0" style="display: block; color: #006EFF; font-size: 46px" alt="&star;">
                     </td>
                 </tr>
-
-
                 <tr>
                     <td align="center" valign="top" style="font-family: Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;">
                         <h1 style="font-size: 28px; color: #F5FAF7; font-weight: 300; line-height: 46px; margin-bottom: 30px;">KPI Highlights This Week</h1>
@@ -208,11 +204,11 @@ div[style*="margin: 16px 0;"] { margin: 0 !important; }
                 </tr>
               </table>
 
-                    <table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100% !important; max-width: 640px;">
-                        <tr>
-                            <td align="left" valign="top" width="600px" height="1" style="background-color: #2B343D; border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 1px;"><!--[if gte mso 15]>&nbsp;<![endif]--></td>
-                        </tr>
-                    </table>
+              <table cellspacing="0" cellpadding="0" border="0" width="100%" style="width: 100% !important; max-width: 640px;">
+                  <tr>
+                      <td align="left" valign="top" width="600px" height="1" style="background-color: #2B343D; border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; mso-line-height-rule: exactly; line-height: 1px;"><!--[if gte mso 15]>&nbsp;<![endif]--></td>
+                  </tr>
+              </table>
 
 <!-- Top KPI 1 -->
 {% include "projects/top_kpi.html" with kpi=lease_rate report_url=report_url only %}
@@ -220,13 +216,9 @@ div[style*="margin: 16px 0;"] { margin: 0 !important; }
 {% include "projects/top_kpi.html" with kpi=best_kpi report_url=report_url only %}
 <!-- Top KPI 3 -->
 {% include "projects/top_kpi.html" with kpi=worst_kpi report_url=report_url only %}
-
-                </tr>
-
-
-
-
-            </table>
+      
+    </tr>
+</table>
 
             <!--[if (gte mso 9)|(IE)]>
             </td>
