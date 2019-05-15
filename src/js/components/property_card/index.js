@@ -4,11 +4,7 @@ import Button from "../button";
 import Panel from "../panel";
 import "./property_card.scss";
 
-const STATUS_LABEL = [
-  "NEEDS REVIEW",
-  "AT RISK",
-  "ON TRACK",
-];
+const STATUS_LABEL = ["NEEDS REVIEW", "AT RISK", "ON TRACK"];
 
 export const PropertyCard = ({
   property_name,
