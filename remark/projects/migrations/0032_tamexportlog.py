@@ -19,7 +19,7 @@ class Migration(migrations.Migration):
             name='TAMExportLog',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('file', models.FileField(help_text='The underlying spreadsheet (probably .xlsx) file.', upload_to=remark.projects.models.spreadsheet_media_path)),
+                ('file', models.FileField(help_text='The underlying spreadsheet (probably .xlsx) file.', upload_to=remark.projects.models.tam_export_media_path)),
                 ('exported_at', models.DateTimeField(auto_now_add=True, db_index=True, help_text='The date exported.')),
                 ('args_json', jsonfield.fields.JSONField(blank=True, default=None, help_text='The arguments used to build TAM export file.', null=True, verbose_name='TAM Export Arguments')),
                 ('project', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='tam_export_logs', to='projects.Project')),

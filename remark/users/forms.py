@@ -23,10 +23,9 @@ class AccountForm(forms.ModelForm):
         if self.instance.pk:
             self.fields['users'].initial = self.instance.users.all()
 
-    def save(self, commit=True):
-        account = super().save(commit=False)  
-        if commit:
-            account.save()
+    def save(self, *args, **kwrags):
+        account = super().save(commit=False)
+        account.save()
 
         if account.pk:
             account.users.update(account=None)
