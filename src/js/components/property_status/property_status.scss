@@ -1,0 +1,27 @@
+@import "css/base.scss";
+
+$property-status-color-on-track: $green-2;
+$property-status-color-at-risk: $orange-4;
+$property-status-color-requires-review: $orange-2;
+
+.property-status {
+    border: 1px solid transparent;
+    display: inline-block;
+    padding: $s1;
+    font-size: 11px;
+
+    &--on-track {
+        border-color: $property-status-color-on-track;
+        color: $property-status-color-on-track;
+    }
+
+    &--at-risk {
+        border-color: $property-status-color-at-risk;
+        color: $property-status-color-at-risk;
+    }
+
+    &--requires-review {
+        border-color: $property-status-color-requires-review;
+        color: $property-status-color-requires-review;
+    }
+}

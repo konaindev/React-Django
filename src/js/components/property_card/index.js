@@ -1,7 +1,7 @@
 import React from "react";
-import cn from "classnames";
 import Button from "../button";
 import Panel from "../panel";
+import PropertyStatus from "../property_status";
 import "./property_card.scss";
 
 const STATUS_LABEL = ["NEEDS REVIEW", "AT RISK", "ON TRACK"];
@@ -31,15 +31,7 @@ export const PropertyCard = ({
       <div className="property-card__body">
         <div className="property-card__name">{property_name}</div>
         <div className="property-card__address">{address}</div>
-        <div
-          className={cn("property-card__status", {
-            "property-card__status--on-track": performance_rating === 2,
-            "property-card__status--at-risk": performance_rating === 1,
-            "property-card__status--requires-review": performance_rating === 0
-          })}
-        >
-          {STATUS_LABEL[performance_rating]}
-        </div>
+        <PropertyStatus performance_rating={performance_rating} />
       </div>
     </Panel>
   </div>

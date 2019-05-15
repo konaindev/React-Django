@@ -85,26 +85,4 @@
         font-size: $text-xs;
         margin: $s3 0;
     }
-
-    &__status {
-        border: 1px solid transparent;
-        display: inline-block;
-        padding: $s1;
-        font-size: $property-card-status-text-size;
-
-        &--on-track {
-            border-color: $property-card-status-color-on-track;
-            color: $property-card-status-color-on-track;
-        }
-
-        &--at-risk {
-            border-color: $property-card-status-color-at-risk;
-            color: $property-card-status-color-at-risk;
-        }
-
-        &--requires-review {
-            border-color: $property-card-status-color-requires-review;
-            color: $property-card-status-color-requires-review;
-        }
-    }
 }
