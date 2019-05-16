@@ -1,7 +1,9 @@
 import PropTypes from "prop-types";
 import React from "react";
+
 import Panel from "../panel";
 import PropertyStatus from "../property_status";
+
 import "./property_row.scss";
 
 export class PropertyRow extends React.PureComponent {

@@ -1,5 +1,6 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
+
 import PropertyStatus from "./index";
 
 storiesOf("PropertyStatus", module)

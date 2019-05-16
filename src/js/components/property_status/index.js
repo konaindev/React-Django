@@ -1,6 +1,7 @@
 import cn from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
+
 import "./property_status.scss";
 
 export class PropertyStatus extends React.PureComponent {

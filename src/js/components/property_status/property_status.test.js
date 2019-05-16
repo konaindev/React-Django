@@ -1,4 +1,5 @@
 import renderer from "react-test-renderer";
+
 import PropertyStatus from "./index";
 
 describe("PropertyStatus", () => {
