@@ -7,6 +7,8 @@
     padding: 0 20px;
     font-family: $font-sans;
     font-size: $text-base;
+    min-width: 700px;
+    box-sizing: content-box;
 }
 
 .property-row__image {

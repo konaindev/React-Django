@@ -13,13 +13,11 @@ const PropertyRow = ({
   performance_rating
 }) => {
   return (
-    <Panel>
-      <div className="property-row">
-        <img className="property-row__image" src={image_url} />
-        <div className="property-row__name">{property_name}</div>
-        <div className="property-row__address">{address}</div>
-        <PropertyStatus performance_rating={performance_rating} />
-      </div>
+    <Panel className="property-row">
+      <img className="property-row__image" src={image_url} />
+      <div className="property-row__name">{property_name}</div>
+      <div className="property-row__address">{address}</div>
+      <PropertyStatus performance_rating={performance_rating} />
     </Panel>
   );
 };

@@ -2,30 +2,26 @@
 
 exports[`PropertyRow renders correctly 1`] = `
 <div
-  className="panel panel--default"
+  className="panel panel--default property-row"
 >
+  <img
+    className="property-row__image"
+    src="https://i.imgur.com/UEH4gfU.jpg"
+  />
   <div
-    className="property-row"
+    className="property-row__name"
   >
-    <img
-      className="property-row__image"
-      src="https://i.imgur.com/UEH4gfU.jpg"
-    />
-    <div
-      className="property-row__name"
-    >
-      Meridian SLC
-    </div>
-    <div
-      className="property-row__address"
-    >
-      123 4th Avenue, Seattle WA 98106
-    </div>
-    <div
-      className="property-status property-status--on-track"
-    >
-      ON TRACK
-    </div>
+    Meridian SLC
+  </div>
+  <div
+    className="property-row__address"
+  >
+    123 4th Avenue, Seattle WA 98106
+  </div>
+  <div
+    className="property-status property-status--on-track"
+  >
+    ON TRACK
   </div>
 </div>
 `;
