@@ -4,29 +4,20 @@ import React from "react";
 
 import "./property_status.scss";
 
-export class PropertyStatus extends React.PureComponent {
-  static propTypes = {
-    className: PropTypes.string,
-    performance_rating: PropTypes.number.isRequired
-  };
+const STATUS_LABEL = ["NEEDS REVIEW", "AT RISK", "ON TRACK"];
 
-  static STATUS_LABEL = ["NEEDS REVIEW", "AT RISK", "ON TRACK"];
+const PropertyStatus = ({ className, performance_rating }) => {
+  const classNames = cn("property-status", className, {
+    "property-status--requires-review": performance_rating === 0,
+    "property-status--at-risk": performance_rating === 1,
+    "property-status--on-track": performance_rating === 2
+  });
+  return <div className={classNames}>{STATUS_LABEL[performance_rating]}</div>;
+};
 
-  get className() {
-    return cn("property-status", this.props.className, {
-      "property-status--requires-review": this.props.performance_rating === 0,
-      "property-status--at-risk": this.props.performance_rating === 1,
-      "property-status--on-track": this.props.performance_rating === 2
-    });
-  }
+PropertyStatus.propTypes = {
+  className: PropTypes.string,
+  performance_rating: PropTypes.number.isRequired
+};
 
-  render() {
-    return (
-      <div className={this.className}>
-        {PropertyStatus.STATUS_LABEL[this.props.performance_rating]}
-      </div>
-    );
-  }
-}
-
-export default PropertyStatus;
+export default React.memo(PropertyStatus);
