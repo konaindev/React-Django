@@ -17,6 +17,7 @@ from remark.lib.metrics import (
     SumIntervalMetric,
     ModelPeriod,
 )
+from remark.users.constants import ACCOUNT_TYPE
 from .spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
 
 def pro_public_id():
