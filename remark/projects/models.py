@@ -25,6 +25,11 @@ def pro_public_id():
     return public_id("pro")
 
 
+def fund_public_id():
+    """Public identifier for a fund."""
+    return public_id("fund")
+
+
 def building_image_media_path(project, filename):
     """
     Given a Project instance, and the filename as supplied during upload,
@@ -931,3 +936,28 @@ class TAMExportLog(models.Model):
 
     def __str__(self):
         return f"{self.project} Export For {self.user} at {self.exported_at.strftime('%Y-%m-%d_%H-%M-%S')}"
+
+
+class Fund(models.Model):
+    public_id = models.CharField(
+        primary_key=True,
+        default=fund_public_id,
+        help_text="A unique identifier for this fund that is safe to share publicly.",
+        max_length=24,
+        editable=False,
+    )
+
+    account = models.ForeignKey(
+        "users.Account",
+        on_delete=models.CASCADE,
+        blank=False,
+    )
+
+    name = models.CharField(
+        max_length=255,
+        blank=False,
+        help_text="Fund Name"
+    )
+
+    def __str__(self):
+        return self.name
