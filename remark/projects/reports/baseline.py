@@ -21,13 +21,13 @@ class BaselineReport(CommonReport):
         period,
         previous_period=None,
         whiskers=None,
-        four_week_funnel_values=None,
+        four_week_computed_periods=None,
         multiperiod=None,
     ):
         super().__init__(
             project, period, previous_period=previous_period, whiskers=whiskers
         )
-        self.four_week_funnel_values = four_week_funnel_values
+        self.four_week_computed_periods = four_week_computed_periods
         self.multiperiod = multiperiod
 
     @classmethod
@@ -53,24 +53,37 @@ class BaselineReport(CommonReport):
         )
         baseline_period = multiperiod.get_cumulative_period()
         only_funnel_multiperiod = multiperiod.only(
-            "usvs", "inquiries", "tours", "lease_applications", "leases_executed"
+            "usvs",
+            "inquiries",
+            "tours",
+            "lease_applications",
+            "leases_executed",
+            "acq_reputation_building",
+            "acq_demand_creation",
+            "acq_leasing_enablement",
+            "acq_market_intelligence",
+            "ret_reputation_building",
+            "ret_demand_creation",
+            "ret_leasing_enablement",
+            "ret_market_intelligence",
         )
         four_week_periods = only_funnel_multiperiod.get_delta_periods(
             time_delta=timedelta(weeks=4), after_end=False
         )
-        four_week_funnel_values = [fwp.get_values() for fwp in four_week_periods]
+        four_week_computed_periods = \
+            [ComputedPeriod(p) for p in four_week_periods]
 
         return cls(
             project,
             baseline_period,
-            four_week_funnel_values=four_week_funnel_values,
+            four_week_computed_periods=four_week_computed_periods,
             multiperiod=multiperiod,
         )
 
     def build_four_week_averages(self):
         def _avg(name):
             return round(
-                avg_or_0([fwfv[name] for fwfv in self.four_week_funnel_values])
+                avg_or_0([getattr(p, name) for p in self.four_week_computed_periods])
             )
 
         return {
@@ -79,6 +92,9 @@ class BaselineReport(CommonReport):
             "tou": _avg("tours"),
             "app": _avg("lease_applications"),
             "exe": _avg("leases_executed"),
+            "investment": _avg("investment"),
+            "acq_investment": _avg("acq_investment"),
+            "ret_investment": _avg("ret_investment"),
         }
 
     def build_funnel_history(self):

@@ -281,4 +281,3 @@ class BareMultiPeriod(MultiPeriodBase):
             metrics=filtered_metrics,
             time_values=filtered_time_value_collections,
         )
-
