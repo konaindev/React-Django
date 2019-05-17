@@ -1,33 +1,59 @@
 @import "css/base.scss";
 
+$property-row-height: 64px;
+$property-row-min-width: 770px;
+$property-row-hover-color: $gray-4;
+$property-row-image-size: 40px;
+$property-row-field-width: 25%;
+$property-row-field-padding: 20px;
+$property-row-name-min-width: 250px;
+$property-row-name-width: 25%;
+$property-row-name-min-width: 250px;
+$property-row-address-min-width: 370px;
+
+
 .property-row {
     display: flex;
-    height: 64px;
+    height: $property-row-height;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 $property-row-field-padding;
     font-family: $font-sans;
     font-size: $text-base;
-    min-width: 700px;
+    min-width: $property-row-min-width;
     box-sizing: content-box;
+    &:hover {
+        background-color: $property-row-hover-color;
+        .property-row__name:after {
+            content: '';
+            height: 11px;
+            width: 6px;
+            margin-left: $property-row-field-padding / 2;
+            display: inline-block;
+            background-image: url(img/arrow-right.svg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
+    }
 }
 
 .property-row__image {
-    width: 40px;
-    height: 40px;
-    border-radius: 4px;
+    width: $property-row-image-size;
+    height: $property-row-image-size;
+    border-radius: $border-radius-default;
 }
 
 .property-row__name {
-    padding-left: 20px;
-    width: 25%;
-    min-width: 250px;
+    padding-left: $property-row-field-padding;
+    width: $property-row-field-width;
+    min-width: $property-row-name-min-width;
     color: $content-text-primary-color;
 }
 
 .property-row__address {
-    width: 25%;
-    min-width: 300px;
-    padding-left: 10px;
+    width: $property-row-field-width;
+    min-width: $property-row-address-min-width;
+    padding-left: $property-row-field-padding;
     color: $content-text-secondary-color;
     font-weight: $weight-light;
 }
