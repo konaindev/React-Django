@@ -116,7 +116,7 @@ export default class CampaignInvestmentReport extends Component {
           name="Campaign Investment"
           value={r.investment.total.total}
           extraContent={formatFourWeekAverages(
-            r.four_week_funnel_averages.investment
+            r.four_week_funnel_averages?.investment
           )}
           target={r.targets?.investment?.total?.total}
           delta={r.deltas?.investment?.total?.total}
@@ -241,7 +241,7 @@ export default class CampaignInvestmentReport extends Component {
           name="Acquisition Investment"
           value={r.investment.acquisition.total}
           detail={formatFourWeekAverages(
-            r.four_week_funnel_averages.acq_investment
+            r.four_week_funnel_averages?.acq_investment
           )}
           target={r.targets?.investment?.acquisition?.total}
           delta={r.deltas?.investment?.acquisition?.total}
@@ -298,7 +298,7 @@ export default class CampaignInvestmentReport extends Component {
           name="Retention Investment"
           value={r.investment.retention.total}
           detail={formatFourWeekAverages(
-            r.four_week_funnel_averages.ret_investment
+            r.four_week_funnel_averages?.ret_investment
           )}
           target={r.targets?.investment?.retention?.total}
           delta={r.deltas?.investment?.retention?.total}
