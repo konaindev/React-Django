@@ -1,15 +1,24 @@
 @import "css/base.scss";
 
-.project-page__report-section {
-    padding: $s8;
-    padding-left: 39px;
+.project-page__container {
+    margin-top: $s8;
+    margin-bottom: $s8;
 }
 
-.project-page__report-section__links {
-    line-height: $line-height-normal;
-    padding: $s4 0 $s4 $s10;
+.project-page__report-group {
+    padding: $s6 0;
+
+    ul {
+        line-height: $line-height-normal;
+        margin: $s4 $s10;
+        padding: 0;
+
+        li {
+            margin-bottom: $s2;
+        }
+    }
 }
 
-.project-page__report-section__link {
+.project-page__report-link {
     color: $content-text-secondary-color;
 }
