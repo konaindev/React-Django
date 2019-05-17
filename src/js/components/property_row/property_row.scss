@@ -1,33 +1,35 @@
 @import "css/base.scss";
 
-$property-row-height: 64px;
-$property-row-min-width: 770px;
-$property-row-hover-color: $gray-4;
-$property-row-image-size: 40px;
-$property-row-field-width: 25%;
-$property-row-field-padding: 20px;
-$property-row-name-min-width: 250px;
-$property-row-name-width: 25%;
-$property-row-name-min-width: 250px;
-$property-row-address-min-width: 370px;
+$height: 64px;
+$min-width: 770px;
+$hover-color: $gray-4;
+$image-size: 40px;
+$field-width: 25%;
+$field-padding: 20px;
+$name-min-width: 250px;
+$name-width: 25%;
+$name-min-width: 250px;
+$address-min-width: 370px;
+$arrow-size: 12px;
 
 
 .property-row {
     display: flex;
-    height: $property-row-height;
+    cursor: pointer;
+    height: $height;
     align-items: center;
-    padding: 0 $property-row-field-padding;
+    padding: 0 $field-padding;
     font-family: $font-sans;
     font-size: $text-base;
-    min-width: $property-row-min-width;
+    min-width: $min-width;
     box-sizing: content-box;
     &:hover {
-        background-color: $property-row-hover-color;
+        background-color: $hover-color;
         .property-row__name:after {
             content: '';
-            height: 11px;
-            width: 6px;
-            margin-left: $property-row-field-padding / 2;
+            height: $arrow-size;
+            width: $arrow-size / 2;
+            margin-left: $field-padding / 2;
             display: inline-block;
             background-image: url(img/arrow-right.svg);
             background-repeat: no-repeat;
@@ -38,22 +40,22 @@ $property-row-address-min-width: 370px;
 }
 
 .property-row__image {
-    width: $property-row-image-size;
-    height: $property-row-image-size;
+    width: $image-size;
+    height: $image-size;
     border-radius: $border-radius-default;
 }
 
 .property-row__name {
-    padding-left: $property-row-field-padding;
-    width: $property-row-field-width;
-    min-width: $property-row-name-min-width;
+    padding-left: $field-padding;
+    width: $field-width;
+    min-width: $name-min-width;
     color: $content-text-primary-color;
 }
 
 .property-row__address {
-    width: $property-row-field-width;
-    min-width: $property-row-address-min-width;
-    padding-left: $property-row-field-padding;
+    width: $field-width;
+    min-width: $address-min-width;
+    padding-left: $field-padding;
     color: $content-text-secondary-color;
     font-weight: $weight-light;
 }
