@@ -11,6 +11,7 @@ python-language-server = {extras = ["all"],version = "*"}
 pyls-black = "*"
 pyls-mypy = "*"
 click = "*"
+pip-licenses = "*"
 watchdog = "*"
 
 [packages]
@@ -36,6 +37,7 @@ google-api-python-client = "*"
 beautifulsoup4 = "*"
 googlemaps = "*"
 bs4 = "*"
+sendgrid = "*"
 celery = "*"
 redis = "*"
 

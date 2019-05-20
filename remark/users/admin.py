@@ -1,11 +1,14 @@
+from django.contrib import admin
+from django import forms
 from django.contrib.auth.admin import UserAdmin as AuthUserAdmin
 from django.utils.translation import gettext_lazy as _
 
 from remark.admin import admin_site
+from .models import Account, User
+from .forms import AccountForm
 
-from .models import User
 
-
+@admin.register(User, site=admin_site)
 class UserAdmin(AuthUserAdmin):
     fieldsets = (
         (None, {"fields": ("email", "password", "account")}),
@@ -34,4 +37,6 @@ class UserAdmin(AuthUserAdmin):
     filter_horizontal = ("groups", "user_permissions")
 
 
-admin_site.register(User, UserAdmin)
+@admin.register(Account, site=admin_site)
+class AccountAdmin(admin.ModelAdmin):
+    form = AccountForm

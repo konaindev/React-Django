@@ -1,0 +1,110 @@
+@import "css/base.scss";
+
+.property-card {
+    $this: &;
+    width: $property-card-width;
+    padding: $property-card-spacing / 2;
+
+    &__panel {
+        overflow: hidden;
+
+        &:hover {
+            background-color: $property-card-panel-hover-color;
+            box-shadow: $property-card-panel-hover-box-shadow;
+
+            #{$this}__overlay {
+                opacity: 1;
+            }
+
+            #{$this}__actions {
+                height: $s16;
+            }
+        }
+    }
+
+    &__image {
+        height: $property-card-image-height;
+        background-size: cover;
+        background-position: center;
+    }
+
+    &__overlay {
+        position: relative;
+        padding-bottom: $s16;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        transition: all 0.2s ease;
+
+        > * {
+            position: relative;
+        }
+
+        &:before {
+            opacity: 0.9;
+            content: '';
+            background-color: $property-card-panel-overlay-color;
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            bottom: 0;
+        }
+    }
+
+    &__overlay-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        flex: 1;
+    }
+
+    &__actions {
+        transition: all 0.2s ease;
+        position: absolute;
+        left: 0;
+        height: 0;
+        right: 0;
+        bottom: 0;
+        background-color: $property-card-panel-hover-color;
+    }
+
+    &__body {
+        padding: $s5 $s4;
+    }
+
+    &__name {
+        color: $content-text-primary-color;
+        margin: $s2 0;
+    }
+
+    &__address {
+        color: $content-text-secondary-color;
+        font-size: $text-xs;
+        margin: $s3 0;
+    }
+
+    &__status {
+        border: 1px solid transparent;
+        display: inline-block;
+        padding: $s1;
+        font-size: $property-card-status-text-size;
+
+        &--on-track {
+            border-color: $property-card-status-color-on-track;
+            color: $property-card-status-color-on-track;
+        }
+
+        &--at-risk {
+            border-color: $property-card-status-color-at-risk;
+            color: $property-card-status-color-at-risk;
+        }
+
+        &--requires-review {
+            border-color: $property-card-status-color-requires-review;
+            color: $property-card-status-color-requires-review;
+        }
+    }
+}

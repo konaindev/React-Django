@@ -1,0 +1,20 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$150000$11ZuGZ7tegb4$Deh0AQIl6LuzIyiRugOkIQJJdQJHgoaTiUSpaHWdgT8=",
+      "last_login": "2019-05-07T21:31:06.428Z",
+      "is_superuser": true,
+      "date_joined": "2019-01-15T23:37:07.817Z",
+      "updated": "2019-01-15T23:37:07.817Z",
+      "is_active": true,
+      "is_staff": true,
+      "email": "test@psl.com",
+      "public_id": "usr_jjzpeyfeshzpaha5",
+      "account": 1,
+      "groups": [],
+      "user_permissions": []
+    }
+  }
+]

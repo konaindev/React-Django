@@ -20,7 +20,6 @@ from remark.lib.metrics import (
 )
 from .spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
 
-
 def pro_public_id():
     """Public identifier for a project."""
     return public_id("pro")
@@ -82,6 +81,30 @@ class Project(models.Model):
 
     name = models.CharField(
         max_length=255, help_text="The user-facing name of the project."
+    )
+
+    # This is temporary until we have accounts setup for all our clients
+    # Remove me and link via a ForeignKey when that happens. -TPC
+    customer_name = models.CharField(
+        max_length=255,
+        help_text="The company that hired Remarkaby.",
+        default=""
+    )
+
+    # This is a temporary field until we have user accounts setup.
+    # When that happens there should be a many to one relationship with
+    # those users. We should pull email addresses from the user accounts. -TPC
+    email_distribution_list = models.TextField(
+        max_length=2000,
+        default="",
+        help_text="Comma separated list of people to receive email updates about this Project."
+    )
+
+    # This is for the SendGrid recipients list.
+    email_list_id = models.CharField(
+        max_length=256,
+        null=True,
+        default=None
     )
 
     # StdImageField works just like Django's own ImageField
@@ -347,7 +370,7 @@ class Project(models.Model):
 
     def update_for_selected_model(self):
         """
-        Update all associated data (like target periods) based on 
+        Update all associated data (like target periods) based on
         the currently selected model.
 
         """
@@ -875,7 +898,6 @@ class TargetPeriod(ModelPeriod, models.Model):
     class Meta:
         # Always sort TargetPeriods with the earliest period first.
         ordering = ["start"]
-
 
 def tam_export_media_path(instance, filename):
     """
