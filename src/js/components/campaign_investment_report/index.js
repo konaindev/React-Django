@@ -8,11 +8,7 @@ import BoxRow from "../box_row";
 import BoxColumn from "../box_column";
 import Panel from "../panel";
 import ReportSection from "../report_section";
-import {
-  SmallNumberBox,
-  SmallCurrencyShorthandBox,
-  SmallMultipleBox
-} from "../small_box_layout";
+import { SmallNumberBox, SmallCurrencyShorthandBox } from "../small_box_layout";
 import {
   formatCurrencyShorthand,
   formatCurrencyShorthandWithDigit
@@ -240,7 +236,7 @@ export default class CampaignInvestmentReport extends Component {
         <SmallCurrencyShorthandBox
           name="Acquisition Investment"
           value={r.investment.acquisition.total}
-          detail={formatFourWeekAverages(
+          detail2={formatFourWeekAverages(
             r.four_week_funnel_averages?.acq_investment
           )}
           target={r.targets?.investment?.acquisition?.total}
@@ -297,7 +293,7 @@ export default class CampaignInvestmentReport extends Component {
         <SmallCurrencyShorthandBox
           name="Retention Investment"
           value={r.investment.retention.total}
-          detail={formatFourWeekAverages(
+          detail2={formatFourWeekAverages(
             r.four_week_funnel_averages?.ret_investment
           )}
           target={r.targets?.investment?.retention?.total}
