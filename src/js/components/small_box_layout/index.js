@@ -46,11 +46,11 @@ class SmallBoxLayout extends Component {
         {/* Container for the label and detail text */}
         <div className="small-box__labels">
           <span className="small-box__labels__name">{name}</span>
-          {detail && (
-            <span className="small-box__labels__detail">{detail}</span>
-          )}
           {detail2 && (
             <span className="small-box__labels__detail">{detail2}</span>
+          )}
+          {detail && (
+            <span className="small-box__labels__detail">{detail}</span>
           )}
         </div>
         {/* Container for the content itself */}

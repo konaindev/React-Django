@@ -230,12 +230,12 @@ exports[`CampaignInvestmentReport renders baseline report correctly 1`] = `
               >
                 Acquisition Investment
               </span>
-              
               <span
                 className="small-box__labels__detail"
               >
                 4-Week Average: $5.3k
               </span>
+              
             </div>
             <div
               className="small-box__outer-content"
@@ -1001,12 +1001,12 @@ A 0 0 0 0 0, NaN, NaN
               >
                 Retention Investment
               </span>
-              
               <span
                 className="small-box__labels__detail"
               >
                 4-Week Average: $45
               </span>
+              
             </div>
             <div
               className="small-box__outer-content"
@@ -4094,12 +4094,12 @@ exports[`CampaignInvestmentReport renders performance report correctly 1`] = `
               <span
                 className="small-box__labels__detail"
               >
-                Target: $15k
+                4-Week Average: $5.3k
               </span>
               <span
                 className="small-box__labels__detail"
               >
-                4-Week Average: $5.3k
+                Target: $15k
               </span>
             </div>
             <div
@@ -4914,12 +4914,12 @@ A 0 0 0 0 0, NaN, NaN
               <span
                 className="small-box__labels__detail"
               >
-                Target: $2k
+                4-Week Average: $45
               </span>
               <span
                 className="small-box__labels__detail"
               >
-                4-Week Average: $45
+                Target: $2k
               </span>
             </div>
             <div
