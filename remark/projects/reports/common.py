@@ -97,6 +97,18 @@ SCHEMA_MAP = {
 }
 
 
+AVERAGE_METRICS_MAP = {
+    "usvs": "usv",
+    "inquiries": "inq",
+    "tours": "tou",
+    "lease_applications": "app",
+    "leases_executed": "exe",
+    "investment": "investment",
+    "acq_investment": "acq_investment",
+    "ret_investment": "ret_investment",
+}
+
+
 def recursive_map(d, fn):
     """
     Walk down a dictionary hierarchy recursively, calling the mapping function 
@@ -175,7 +187,16 @@ class CommonReport(ReportBase):
         return ComputedPeriod(period)
 
     def build_four_week_averages(self):
-        return {"usv": 0, "inq": 0, "tou": 0, "app": 0, "exe": 0}
+        period = self.period
+
+        def _avg(name):
+            value = getattr(period, name)
+            if not value:
+                return 0
+            four_weeks = 4 * 7  # 28 days
+            days = (period.get_end() - period.get_start()).days
+            return round(four_weeks * value / days)
+        return {AVERAGE_METRICS_MAP[k]: _avg(k) for k in AVERAGE_METRICS_MAP}
 
     def build_funnel_history(self):
         return None
