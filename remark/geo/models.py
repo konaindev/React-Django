@@ -153,11 +153,13 @@ class Address(models.Model):
 class ZipcodePolygonManager(models.Manager):
     def look_up_polygon(self, zip_code):
         try:
-            row = self.get(zip_code=zip_code)
+            polygon = self.get(zip_code=zip_code)
 
             return dict(
-                properties=row.properties,
-                geometry=row.geometry
+                geometry=polygon.geometry,
+                properties=dict(
+                    center={"lat": polygon.lat, "lon": polygon.lon}
+                )
             )
         except self.model.DoesNotExist:
             return None
