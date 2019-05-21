@@ -5,8 +5,10 @@ import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 
 import BaselineComparisonMatrix from "./index";
-import { props } from "./props";
+import { props, one_competitor_props } from "./props";
 
-storiesOf("BaselineComparisonMatrix", module).add("default", () => (
-  <BaselineComparisonMatrix {...props} />
-));
+storiesOf("BaselineComparisonMatrix", module)
+  .add("default", () => <BaselineComparisonMatrix {...props} />)
+  .add("One Competitor", () => (
+    <BaselineComparisonMatrix {...one_competitor_props} />
+  ));
