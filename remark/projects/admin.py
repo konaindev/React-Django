@@ -11,6 +11,7 @@ from .views import TAMExportView
 
 import datetime
 
+
 class UpdateSpreadsheetAdminMixin:
     def update_spreadsheet(self, request, obj, form):
         """Add current user and imported data, if available and not yet present."""
@@ -20,6 +21,7 @@ class UpdateSpreadsheetAdminMixin:
                 getattr(obj, "imported_data", None)
                 or form.cleaned_data["imported_data"]
             )
+
 
 @admin.register(Spreadsheet, site=admin_site)
 class SpreadsheetAdmin(UpdateSpreadsheetAdminMixin, admin.ModelAdmin):

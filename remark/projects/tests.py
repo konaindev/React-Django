@@ -4,8 +4,11 @@ import os.path
 
 from django.test import TestCase
 
+from remark.crm.models import Business
+from remark.geo.models import Address
+from remark.users.models import Account
 from remark.lib.metrics import BareMultiPeriod
-from .models import Period, Project, TargetPeriod
+from .models import Fund, Period, Project, TargetPeriod
 from .reports.periods import ComputedPeriod
 from .reports.performance import PerformanceReport
 
@@ -17,12 +20,37 @@ class DefaultComputedPeriodTestCase(TestCase):
     """
 
     def setUp(self):
+        address = Address.objects.create(
+            street_address_1="2284 W. Commodore Way, Suite 200",
+            city="Seattle",
+            state="WA",
+            zip_code=98199,
+            country="US",
+        )
+        account = Account.objects.create(
+            company_name="test", address=address, account_type=4
+        )
+        asset_manager = Business.objects.create(
+            name="Test Asset Manager", business_type=2, address=address
+        )
+        property_manager = Business.objects.create(
+            name="Test Property Manager", business_type=3, address=address
+        )
+        property_owner = Business.objects.create(
+            name="Test Property Owner", business_type=1, address=address
+        )
+        fund = Fund.objects.create(account=account, name="Test Fund")
         project = Project.objects.create(
             name="test",
             baseline_start=datetime.date(year=2018, month=11, day=19),
             baseline_end=datetime.date(year=2018, month=12, day=26),
             average_monthly_rent=decimal.Decimal("0"),
             lowest_monthly_rent=decimal.Decimal("0"),
+            account=account,
+            asset_manager=asset_manager,
+            property_manager=property_manager,
+            property_owner=property_owner,
+            fund=fund,
         )
         raw_period = Period.objects.create(
             project=project,
@@ -170,12 +198,37 @@ class DefaultComputedPeriodTestCase(TestCase):
 
 class DefaultReportTestCase(TestCase):
     def setUp(self):
+        address = Address.objects.create(
+            street_address_1="2284 W. Commodore Way, Suite 200",
+            city="Seattle",
+            state="WA",
+            zip_code=98199,
+            country="US",
+        )
+        account = Account.objects.create(
+            company_name="test", address=address, account_type=4
+        )
+        asset_manager = Business.objects.create(
+            name="Test Asset Manager", business_type=2, address=address
+        )
+        property_manager = Business.objects.create(
+            name="Test Property Manager", business_type=3, address=address
+        )
+        property_owner = Business.objects.create(
+            name="Test Property Owner", business_type=1, address=address
+        )
+        fund = Fund.objects.create(account=account, name="Test Fund")
         project = Project.objects.create(
             name="test",
             baseline_start=datetime.date(year=2018, month=11, day=19),
             baseline_end=datetime.date(year=2018, month=12, day=26),
             average_monthly_rent=decimal.Decimal("0"),
             lowest_monthly_rent=decimal.Decimal("0"),
+            account=account,
+            asset_manager=asset_manager,
+            property_manager=property_manager,
+            property_owner=property_owner,
+            fund=fund,
         )
         raw_period = Period.objects.create(
             project=project,
@@ -224,12 +277,37 @@ class LincolnTowerPeriodTestCase(TestCase):
     """Test an example Lincoln Tower period model with computed properties."""
 
     def setUp(self):
+        address = Address.objects.create(
+            street_address_1="2284 W. Commodore Way, Suite 200",
+            city="Seattle",
+            state="WA",
+            zip_code=98199,
+            country="US",
+        )
+        account = Account.objects.create(
+            company_name="test", address=address, account_type=4
+        )
+        asset_manager = Business.objects.create(
+            name="Test Asset Manager", business_type=2, address=address
+        )
+        property_manager = Business.objects.create(
+            name="Test Property Manager", business_type=3, address=address
+        )
+        property_owner = Business.objects.create(
+            name="Test Property Owner", business_type=1, address=address
+        )
+        fund = Fund.objects.create(account=account, name="Test Fund")
         self.project = Project.objects.create(
             name="test",
             baseline_start=datetime.date(year=2018, month=11, day=19),
             baseline_end=datetime.date(year=2018, month=12, day=26),
             average_monthly_rent=decimal.Decimal("7278"),
             lowest_monthly_rent=decimal.Decimal("7278"),
+            account=account,
+            asset_manager=asset_manager,
+            property_manager=property_manager,
+            property_owner=property_owner,
+            fund=fund,
         )
         self.raw_period = Period.objects.create(
             project=self.project,
@@ -316,4 +394,3 @@ class LincolnTowerPeriodTestCase(TestCase):
         # CONSIDER moving this to a separate location
         report = PerformanceReport(self.project, self.raw_cumulative)
         self.assertTrue(report.to_jsonable())
-

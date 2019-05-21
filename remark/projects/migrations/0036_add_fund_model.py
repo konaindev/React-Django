@@ -7,18 +7,30 @@ import remark.projects.models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('users', '0003_user_account'),
-        ('projects', '0035_project_users'),
-    ]
+    dependencies = [("users", "0003_user_account"), ("projects", "0035_project_users")]
 
     operations = [
         migrations.CreateModel(
-            name='Fund',
+            name="Fund",
             fields=[
-                ('public_id', models.CharField(default=remark.projects.models.fund_public_id, editable=False, help_text='A unique identifier for this fund that is safe to share publicly.', max_length=24, primary_key=True, serialize=False)),
-                ('name', models.CharField(help_text='Fund Name', max_length=255)),
-                ('account', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='users.Account')),
+                (
+                    "public_id",
+                    models.CharField(
+                        default=remark.projects.models.fund_public_id,
+                        editable=False,
+                        help_text="A unique identifier for this fund that is safe to share publicly.",
+                        max_length=24,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("name", models.CharField(help_text="Fund Name", max_length=255)),
+                (
+                    "account",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="users.Account"
+                    ),
+                ),
             ],
-        ),
+        )
     ]
