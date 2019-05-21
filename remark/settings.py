@@ -277,3 +277,8 @@ CELERY_IGNORE_RESULT = True
 
 # Activate Django-Heroku.
 django_heroku.settings(locals(), staticfiles=True)
+
+# disable SSL db connection on local
+if DEBUG:
+    if "OPTIONS" in DATABASES["default"]:
+        DATABASES["default"]["OPTIONS"]["sslmode"] = "disable"
