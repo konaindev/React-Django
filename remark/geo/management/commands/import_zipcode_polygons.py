@@ -1,6 +1,7 @@
 import json
 import requests
 
+from django.contrib.gis.measure import Area
 from django.core.management.base import BaseCommand
 
 from remark.geo.models import ZipcodePolygon
@@ -110,7 +111,6 @@ def import_data_for_a_state(state):
     remote_file = f"{remote_folder}{file_name}"
     response = requests.get(remote_file)
     data = json.loads(response.text)
-
     counter = 0
 
     for feature in data["features"]:
@@ -119,6 +119,8 @@ def import_data_for_a_state(state):
             continue
 
         counter = counter + 1
+        land_area = Area(sq_m=properties["ALAND10"])
+        water_area = Area(sq_m=properties["AWATER10"])
 
         ZipcodePolygon.objects.update_or_create(
             zip_code=properties["ZCTA5CE10"],
@@ -127,8 +129,8 @@ def import_data_for_a_state(state):
                 geometry=feature["geometry"],
                 lat=properties["INTPTLAT10"],
                 lon=properties["INTPTLON10"],
-                land_area=properties["ALAND10"],
-                water_area=properties["AWATER10"]
+                land_area=land_area.sq_mi,
+                water_area=water_area.sq_mi
             ),
         )
 

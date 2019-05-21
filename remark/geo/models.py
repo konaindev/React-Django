@@ -196,9 +196,9 @@ class ZipcodePolygon(models.Model):
         help_text="Longitude of zipcode center",
     )
 
-    land_area = models.FloatField(default=0, help_text="Land area in square meters")
+    land_area = models.FloatField(default=0, help_text="Land area in square miles")
 
-    water_area = models.FloatField(default=0, help_text="Water area in square meters")
+    water_area = models.FloatField(default=0, help_text="Water area in square miles")
 
     class Meta:
         indexes = [models.Index(fields=["zip_code", "lat", "lon"])]

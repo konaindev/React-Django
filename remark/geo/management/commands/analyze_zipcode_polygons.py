@@ -20,9 +20,6 @@ class Command(BaseCommand):
             std_dev=StdDev(agg_field),
         )
 
-        for k in result:
-            result[k] = Area(sq_m=result[k]).sq_mi
-
         print("========================================================")
         print("Statistics for the land area value (mi^2):")
         print("Mean: ", result["mean"])
