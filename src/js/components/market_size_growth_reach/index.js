@@ -12,54 +12,60 @@ export function MarketSizeGrowthReach({
   total: { market_size, usv, future_size }
 }) {
   return (
-    <Panel className="market-size-growth-reach">
-      <div className="market-size-growth-reach__table">
-        <div className="table__row table__row--head">
-          <span>Target Segment</span>
-          <span>Est. Market Size</span>
-          <span>Unique Site Visitors</span>
-          <span>Est. Market Growth</span>
-          <span>Est. {future_year} Market Size</span>
-        </div>
-        {market_sizes.map((size, index) => (
-          <div key={index} className="table__row table__row--body">
-            <span>Ages {size.age_group.split("-").join(" - ")}</span>
-            <span>{formatNumber(size.market_size)}</span>
-            <span>{formatNumber(size.usv)}</span>
-            <span>{formatPercent(size.growth, 2, 0)}</span>
-            <span>{formatNumber(size.future_size)}</span>
+    <div className="market-size-growth-reach">
+      <Panel>
+        <div className="market-size-growth-reach__table">
+          <div className="table__row table__row--head">
+            <span>Target Segment</span>
+            <span>Est. Market Size</span>
+            <span>Unique Site Visitors</span>
+            <span>Est. Market Growth</span>
+            <span>Est. {future_year} Market Size</span>
           </div>
-        ))}
-      </div>
+          {market_sizes.map((size, index) => (
+            <div key={index} className="table__row table__row--body">
+              <span>Ages {size.age_group.split("-").join(" - ")}</span>
+              <span>{formatNumber(size.market_size)}</span>
+              <span>{formatNumber(size.usv)}</span>
+              <span>{formatPercent(size.growth, 2, 0)}</span>
+              <span>{formatNumber(size.future_size)}</span>
+            </div>
+          ))}
+        </div>
 
-      <div className="market-size-growth-reach__summary">
-        <div className="summary__box">
-          <span>Average</span>
-          <span>Tenant Age</span>
-          <span>{age}</span>
+        <div className="market-size-growth-reach__summary">
+          <div className="summary__box">
+            <span>Average</span>
+            <span>Tenant Age</span>
+            <span>{age}</span>
+          </div>
+          <div className="summary__box">
+            <span>Est. Total</span>
+            <span>Market Size</span>
+            <span>{formatNumber(market_size)}</span>
+          </div>
+          <div className="summary__box">
+            <span>Total Unique</span>
+            <span>Site Visitors</span>
+            <span>{formatNumber(usv)}</span>
+          </div>
+          <div className="summary__box">
+            <span>Average</span>
+            <span>Market Growth</span>
+            <span>{formatPercent(growth, 2, 0)}</span>
+          </div>
+          <div className="summary__box">
+            <span>Est. Total {future_year}</span>
+            <span>Market Size</span>
+            <span>{formatNumber(future_size)}</span>
+          </div>
         </div>
-        <div className="summary__box">
-          <span>Est. Total</span>
-          <span>Market Size</span>
-          <span>{formatNumber(market_size)}</span>
-        </div>
-        <div className="summary__box">
-          <span>Total Unique</span>
-          <span>Site Visitors</span>
-          <span>{formatNumber(usv)}</span>
-        </div>
-        <div className="summary__box">
-          <span>Average</span>
-          <span>Market Growth</span>
-          <span>{formatPercent(growth, 2, 0)}</span>
-        </div>
-        <div className="summary__box">
-          <span>Est. Total {future_year}</span>
-          <span>Market Size</span>
-          <span>{formatNumber(future_size)}</span>
-        </div>
-      </div>
-    </Panel>
+      </Panel>
+      <span className="market-size-growth-reach__text">
+        * Population estimated based on data available through the US Census
+        Bureau (2017)
+      </span>
+    </div>
   );
 }
 
