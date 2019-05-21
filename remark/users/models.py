@@ -1,7 +1,10 @@
-from django.db import models
+import os.path
 
+from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
+from django.utils.crypto import get_random_string
+from stdimage.models import StdImageField
 
 from remark.lib.tokens import public_id
 from remark.lib.fields import NormalizedEmailField
@@ -10,6 +13,26 @@ from .constants import ACCOUNT_TYPE
 
 def usr_public_id():
     return public_id("usr")
+
+
+def avatar_media_path(user, filename):
+    """
+    Given a User instance, and the filename as supplied during upload,
+    determine where the uploaded avatar image should actually be placed.
+
+    See https://docs.djangoproject.com/en/2.1/ref/models/fields/#filefield
+
+    Note: Thumbnail generation works fine on FileSystemStorage, but not on S3.
+    To overcome this known issue, append random 7-char string to end of file name.
+    Though, old files will not be deleted from S3 on image replacement.
+
+    user/<public_id>/avatar_<random_str><.ext>
+    user/<public_id>/avatar_<random_str>.regular<.ext>
+    user/<public_id>/avatar_<random_str>.thumbnail<.ext>
+    """
+    _, extension = os.path.splitext(filename)
+    random_str = get_random_string(length=7)
+    return f"user/{user.public_id}/avatar_{random_str}{extension}"
 
 
 class UserManager(BaseUserManager):
@@ -77,7 +100,17 @@ class User(PermissionsMixin, AbstractBaseUser):
     updated = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
+    first_name = models.CharField(max_length=250, null=True)
+    last_name = models.CharField(max_length=250, null=True)
     email = NormalizedEmailField(unique=True)
+    avatar = StdImageField(
+        null=True,
+        blank=True,
+        default="",
+        upload_to=avatar_media_path,
+        help_text="""A full-resolution user avatar.<br/>Resized variants (100x100, 36x36) will also be created on Amazon S3.""",
+        variations={"regular": (100, 100, True), "thumbnail": (36, 36, True)},
+    )
     public_id = models.CharField(
         unique=True,
         default=usr_public_id,

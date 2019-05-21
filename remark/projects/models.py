@@ -230,6 +230,10 @@ class Project(models.Model):
         "geo.Address", on_delete=models.SET_NULL, null=True, blank=True
     )
 
+    users = models.ManyToManyField(
+        "users.User", related_name="projects"
+    )
+
     # This value is set when the instance is created; if we later
     # call save, and it changes, then we update targets for the model.
     __selected_model_name = None
