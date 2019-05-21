@@ -275,5 +275,6 @@ REDIS_URL = os.getenv("REDIS_URL", "redis://")
 CELERY_BROKER_URL = REDIS_URL
 CELERY_IGNORE_RESULT = True
 
-# Activate Django-Heroku.
-django_heroku.settings(locals(), staticfiles=True)
+# Activate Django-Heroku. Don't modify the DATABASES variable if we're in debug;
+# otherwise, modify it to match Heroku's needs (including forcing it to be SSL.)
+django_heroku.settings(locals(), staticfiles=True, databases=not DEBUG)
