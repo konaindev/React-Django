@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='project',
             name='competitors',
-            field=models.ManyToManyField(related_name='_project_competitors_+', to='projects.Project'),
+            field=models.ManyToManyField(blank=True, related_name='_project_competitors_+', to='projects.Project'),
         ),
     ]
