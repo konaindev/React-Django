@@ -152,7 +152,8 @@ class BaselineReport(CommonReport):
         competitors = []
         for project in self.project.competitors.all():
             report = BaselineReport.for_baseline(project)
-            competitors.append(report.build_json_data())
+            if report:
+                competitors.append(report.build_json_data())
 
         data["competitors"] = competitors
         return data
