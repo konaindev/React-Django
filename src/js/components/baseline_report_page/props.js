@@ -1114,22 +1114,22 @@ export default {
   share_info
 };
 
-const no_competitors_report = { ...report };
+export const no_competitors_report = { ...report };
 no_competitors_report.competitors = [];
 
 export const no_competitors_props = {
   project,
-  no_competitors_report,
+  report: no_competitors_report,
   report_links,
   current_report_link
 };
 
-const one_competitor_report = { ...report };
+export const one_competitor_report = { ...report };
 one_competitor_report.competitors = [competitors[0]];
 
 export const one_competitor_props = {
   project,
-  one_competitor_report,
+  report: one_competitor_report,
   report_links,
   current_report_link
 };
