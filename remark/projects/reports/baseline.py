@@ -1,5 +1,4 @@
 import itertools
-from datetime import timedelta
 
 
 from .common import CommonReport
@@ -15,12 +14,7 @@ class BaselineReport(CommonReport):
     """
 
     def __init__(
-        self,
-        project,
-        period,
-        previous_period=None,
-        whiskers=None,
-        multiperiod=None,
+        self, project, period, previous_period=None, whiskers=None, multiperiod=None
     ):
         super().__init__(
             project, period, previous_period=previous_period, whiskers=whiskers
@@ -49,11 +43,7 @@ class BaselineReport(CommonReport):
             list(baseline_periods) + list(baseline_target_periods)
         )
         baseline_period = multiperiod.get_cumulative_period()
-        return cls(
-            project,
-            baseline_period,
-            multiperiod=multiperiod,
-        )
+        return cls(project, baseline_period, multiperiod=multiperiod)
 
     def build_funnel_history(self):
         if self.multiperiod is None:

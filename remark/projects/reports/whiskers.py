@@ -48,4 +48,3 @@ class WhiskerSeries:
             for attr_target_metric, public_target in cls.WHISKER_METRICS
         }
         return weekly_series
-

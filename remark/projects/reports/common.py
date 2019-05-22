@@ -196,6 +196,7 @@ class CommonReport(ReportBase):
             four_weeks = 4 * 7  # 28 days
             days = (period.get_end() - period.get_start()).days
             return round(four_weeks * value / days)
+
         return {AVERAGE_METRICS_MAP[k]: _avg(k) for k in AVERAGE_METRICS_MAP}
 
     def build_funnel_history(self):
@@ -233,4 +234,3 @@ class CommonReport(ReportBase):
             whiskers=self.whiskers,
             deltas=deltas,
         )
-
