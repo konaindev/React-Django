@@ -24,6 +24,7 @@ $arrow-size: 12px;
     min-width: $min-width;
     box-sizing: border-box;
     border: 1px solid transparent;
+    transition: border 0.1s linear;
 
     &:hover {
         background-color: $hover-color;
@@ -91,7 +92,8 @@ $arrow-size: 12px;
     background-color: $blue-3; // in case of image missing
     background-size: 13px 10px;
     background-position: center;
-    display: none;
+    opacity: 0;
+    transition: opacity 0.1s linear;
 }
 
 .property-row--selection-mode {
@@ -104,6 +106,6 @@ $arrow-size: 12px;
     border: 1px solid $blue-3;
 
     .property-row__tick {
-        display: inline-flex;
+        opacity: 1;
     }
 }
