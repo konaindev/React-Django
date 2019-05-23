@@ -3,17 +3,17 @@
 $color-on-track: $green-3;
 $color-at-risk: $orange-4;
 $color-requires-review: $orange-2;
-$height: 18px;
-$font-size: 11px;
+$inner-text-line-height: 18px;
+$inner-text-font-size: 11px;
 
 .property-status {
     border: 1px solid transparent;
     display: inline-block;
     padding: 0 6px;
     font-family: $font-sans;
-    font-size: $font-size;
-    letter-spacing: $letter-spacing-wide;
-    line-height: $height;
+    font-size: $inner-text-font-size;
+    letter-spacing: 0.5px;
+    line-height: $inner-text-line-height;
     text-align: center;
     white-space: nowrap;
 

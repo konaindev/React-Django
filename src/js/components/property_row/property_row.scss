@@ -23,8 +23,10 @@ $arrow-size: 12px;
     font-size: $text-base;
     min-width: $min-width;
     box-sizing: content-box;
+
     &:hover {
         background-color: $hover-color;
+
         .property-row__name:after {
             content: '';
             height: $arrow-size;
@@ -35,6 +37,10 @@ $arrow-size: 12px;
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;
+        }
+
+        .property-row__address {
+            color: $content-text-primary-color;
         }
     }
 }
