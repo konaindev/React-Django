@@ -37,7 +37,7 @@ const PropertyRow = ({
 
   return (
     <Panel className={rowClass} style={style}>
-      <div className="property-row__lead" onClick={handleToggle}>
+      <div className="property-row__selector" onClick={handleToggle}>
         <div style={imageStyle} className="property-row__image" />
         <div className="property-row__tick" />
       </div>

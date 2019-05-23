@@ -5,7 +5,7 @@ exports[`PropertyRow renders correctly 1`] = `
   className="panel panel--default property-row"
 >
   <div
-    className="property-row__lead"
+    className="property-row__selector"
     onClick={[Function]}
   >
     <div

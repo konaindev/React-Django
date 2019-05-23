@@ -61,20 +61,25 @@ $arrow-size: 12px;
     font-weight: $weight-light;
 }
 
-.property-row__lead {
+.property-row__selector {
     width: $image-size;
     height: $image-size;
-    box-sizing: border-box;
     border-radius: $border-radius-default;
     position: relative;
     overflow: hidden;
     transition: all 0.2s ease-in-out;
+
+    & > div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+    }
 }
 
 .property-row__image {
-    position: absolute;
-    width: 100%;
-    height: 100%;
     background-color: $gray-3; // in case of image missing
     background-size: cover;
     background-repeat: no-repeat;
@@ -82,19 +87,15 @@ $arrow-size: 12px;
 }
 
 .property-row__tick {
-    position: absolute;
-    width: 100%;
-    height: 100%;
     background-image: url(../../../images/icon-tick.svg);
     background-color: $blue-3; // in case of image missing
-    background-size: 16px 16px;
-    background-repeat: no-repeat;
+    background-size: 13px 10px;
     background-position: center;
     display: none;
 }
 
 .property-row--selection-mode {
-    .property-row__lead {
+    .property-row__selector {
         border: 1px solid $blue-3;
     }
 }
@@ -103,6 +104,6 @@ $arrow-size: 12px;
     border: 1px solid $blue-3;
 
     .property-row__tick {
-        display: flex;
+        display: inline-flex;
     }
 }
