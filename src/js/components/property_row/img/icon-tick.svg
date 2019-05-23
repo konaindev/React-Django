@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24">
+    <defs>
+        <path id="icon-tick__a" d="M9.157 15.692L19.41 5.44a1.5 1.5 0 1 1 2.121 2.122L10.218 18.874a1.5 1.5 0 0 1-2.122 0L2.44 13.218a1.5 1.5 0 1 1 2.122-2.122l4.596 4.596z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <mask id="icon-tick__b" fill="#fff"><use xlink:href="#icon-tick__a"/></mask>
+        <use fill="#FFF" xlink:href="#icon-tick__a"/>
+        <g fill="#FFF" mask="url(#icon-tick__b)">
+            <path d="M0 0h24v24H0z"/>
+        </g>
+    </g>
+</svg>
