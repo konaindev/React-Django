@@ -47,8 +47,10 @@ exports[`PropertyCard renders correctly 1`] = `
         123 4th Avenue, Seattle WA 98106
       </div>
       <div
-        className="property-status"
-      />
+        className="property-status property-card__status property-status--on-track"
+      >
+        ON TRACK
+      </div>
     </div>
   </div>
 </div>
