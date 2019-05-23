@@ -31,7 +31,10 @@ export const PropertyCard = ({
       <div className="property-card__body">
         <div className="property-card__name">{property_name}</div>
         <div className="property-card__address">{address}</div>
-        <PropertyStatus performance_rating={performance_rating} />
+        <PropertyStatus
+          performance_rating={performance_rating}
+          className="property-card__status"
+        />
       </div>
     </Panel>
   </div>

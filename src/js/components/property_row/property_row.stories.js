@@ -3,7 +3,10 @@ import { storiesOf } from "@storybook/react";
 
 import PropertyRow from "./index";
 import { props } from "./props";
+import Container from "../container";
 
 storiesOf("PropertyRow", module).add("default", () => (
-  <PropertyRow {...props} />
+  <Container style={{ margin: "1rem auto" }}>
+    <PropertyRow {...props} />
+  </Container>
 ));

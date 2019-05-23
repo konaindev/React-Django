@@ -2,8 +2,10 @@
 
 .property-card {
     $this: &;
+
+    display: inline-block;
     width: $property-card-width;
-    padding: $property-card-spacing / 2;
+    margin: $property-card-spacing;
 
     &__panel {
         overflow: hidden;
@@ -17,7 +19,7 @@
             }
 
             #{$this}__actions {
-                height: $s16;
+                height: $property-card-actions-height;
             }
         }
     }
@@ -30,7 +32,7 @@
 
     &__overlay {
         position: relative;
-        padding-bottom: $s16;
+        padding-bottom: $property-card-actions-height;
         height: 100%;
         display: flex;
         flex-direction: column;
@@ -59,6 +61,15 @@
         justify-content: center;
         text-decoration: none;
         flex: 1;
+
+        button {
+            text-transform: uppercase;
+            font-size: $text-xs;
+            font-weight: $weight-bold;
+            letter-spacing: $letter-spacing-wider;
+            line-height: $line-height-normal;
+            padding: $s3 $s6;
+        }
     }
 
     &__actions {
@@ -72,17 +83,23 @@
     }
 
     &__body {
-        padding: $s5 $s4;
+        padding: $s6 $s5;
+        font-size: 0;
     }
 
     &__name {
         color: $content-text-primary-color;
-        margin: $s2 0;
+        font-size: $text-base;
+        line-height: $line-height-relaxed;
     }
 
     &__address {
         color: $content-text-secondary-color;
         font-size: $text-xs;
-        margin: $s3 0;
+        line-height: $line-height-loose;
+    }
+
+    &__status {
+        margin-top: $s2;
     }
 }

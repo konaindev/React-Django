@@ -3,5 +3,5 @@
 .property-card-list {
     display: flex;
     flex-wrap: wrap;
-    margin: -$property-card-spacing / 2;
+    margin: $property-card-spacing * (-1);
 }
