@@ -1,0 +1,56 @@
+@import "css/base.scss";
+@import "css/variables.scss";
+
+.modal-window {
+    min-width: 320px;
+    min-height: 220px;
+    padding: 44px 60px 48px 60px;
+    background-color: #20272e;
+    border-radius: 6px;
+    box-shadow: none;
+}
+
+.modal-overlay {
+    background-color: rgba(16,20,23,0.85);
+}
+
+.modal-window__close {
+    position: absolute;
+    top: 54px;
+    right: 60px;
+    &:focus {
+        outline: none;
+    }
+    &::before {
+        content: 'x';
+        color: #53f7dd;
+        font-size: 20px;
+        letter-spacing: 1.43px;
+        line-height: 16px;
+        text-align: center;
+    }
+}
+
+.modal-window__head {
+    height: 35px;
+    line-height: 35px;
+    color: #f5faf7;
+    font-size: 28px;
+}
+
+.modal-window__body {
+    padding: 40px 0 28px 0;
+}
+
+.modal-window__buttons-group {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.modal-window__button {
+    height: 44px;
+    width: 144px;
+    line-height: 20px;
+    font-weight: 500;
+    letter-spacing: 1px;
+}

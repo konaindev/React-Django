@@ -9,6 +9,14 @@ exports[`Button renders default button correctly 1`] = `
 </button>
 `;
 
+exports[`Button renders disabled button correctly 1`] = `
+<button
+  className="button button--disabled"
+>
+  Disabled Button
+</button>
+`;
+
 exports[`Button renders selected button correctly 1`] = `
 <button
   className="button button--selected button--default"

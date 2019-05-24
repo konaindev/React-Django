@@ -12,7 +12,7 @@ export default class Button extends Component {
     selected: PropTypes.bool,
     fullWidth: PropTypes.bool,
     uppercase: PropTypes.bool,
-    color: PropTypes.oneOf(["default", "primary", "outline"]),
+    color: PropTypes.oneOf(["default", "primary", "outline", "disabled"]),
     onClick: PropTypes.func
   };
 
