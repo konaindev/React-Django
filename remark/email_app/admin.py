@@ -18,6 +18,7 @@ class PerformanceEmailAdmin(admin.ModelAdmin):
     fields = [
         "project",
         "start",
+        "campaign_health",
         "lease_rate_text",
         "top_performing_kpi",
         "top_performing_insight",
