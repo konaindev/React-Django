@@ -9,6 +9,14 @@ def bus_public_id():
     return public_id("bus")
 
 
+class BusinessesQuerySet(models.QuerySet):
+    def property_managers(self, **kwargs):
+        return self.filter(business_type=3, **kwargs)
+
+    def asset_managers(self, **kwargs):
+        return self.filter(business_type=2, **kwargs)
+
+
 class Business(models.Model):
     public_id = models.CharField(
         primary_key=True,
@@ -27,6 +35,8 @@ class Business(models.Model):
     address = models.ForeignKey(
         "geo.Address", on_delete=models.CASCADE, blank=False, help_text="Address"
     )
+
+    objects = BusinessesQuerySet.as_manager()
 
     def __str__(self):
         return self.name

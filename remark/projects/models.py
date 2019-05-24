@@ -5,6 +5,7 @@ import os.path
 from datetime import datetime
 from django.db import models
 from django.conf import settings
+from django.urls import reverse
 from django.utils.crypto import get_random_string
 
 from jsonfield import JSONField
@@ -402,6 +403,15 @@ class Project(models.Model):
             ]
         else:
             return None
+
+    def get_regular_url(self):
+        if self.building_image:
+            return self.building_image.regular.url
+        else:
+            return None
+
+    def get_baseline_url(self):
+        return reverse("baseline_report", kwargs={"project_id": self.public_id})
 
     def to_jsonable(self):
         """Return a representation that can be converted to a JSON string."""
