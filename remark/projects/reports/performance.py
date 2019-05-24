@@ -135,4 +135,3 @@ class PerformanceReport(CommonReport):
             project, multiperiod, break_times[-1]
         )
         return cls(project, period, previous_period=None, whiskers=whiskers)
-

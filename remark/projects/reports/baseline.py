@@ -1,11 +1,9 @@
 import itertools
-from datetime import timedelta
 
 
 from .common import CommonReport
 from .periods import ComputedPeriod
 
-from remark.lib.math import avg_or_0
 from remark.lib.metrics import BareMultiPeriod, Weekday
 
 
@@ -16,18 +14,11 @@ class BaselineReport(CommonReport):
     """
 
     def __init__(
-        self,
-        project,
-        period,
-        previous_period=None,
-        whiskers=None,
-        four_week_funnel_values=None,
-        multiperiod=None,
+        self, project, period, previous_period=None, whiskers=None, multiperiod=None
     ):
         super().__init__(
             project, period, previous_period=previous_period, whiskers=whiskers
         )
-        self.four_week_funnel_values = four_week_funnel_values
         self.multiperiod = multiperiod
 
     @classmethod
@@ -52,34 +43,7 @@ class BaselineReport(CommonReport):
             list(baseline_periods) + list(baseline_target_periods)
         )
         baseline_period = multiperiod.get_cumulative_period()
-        only_funnel_multiperiod = multiperiod.only(
-            "usvs", "inquiries", "tours", "lease_applications", "leases_executed"
-        )
-        four_week_periods = only_funnel_multiperiod.get_delta_periods(
-            time_delta=timedelta(weeks=4), after_end=False
-        )
-        four_week_funnel_values = [fwp.get_values() for fwp in four_week_periods]
-
-        return cls(
-            project,
-            baseline_period,
-            four_week_funnel_values=four_week_funnel_values,
-            multiperiod=multiperiod,
-        )
-
-    def build_four_week_averages(self):
-        def _avg(name):
-            return round(
-                avg_or_0([fwfv[name] for fwfv in self.four_week_funnel_values])
-            )
-
-        return {
-            "usv": _avg("usvs"),
-            "inq": _avg("inquiries"),
-            "tou": _avg("tours"),
-            "app": _avg("lease_applications"),
-            "exe": _avg("leases_executed"),
-        }
+        return cls(project, baseline_period, multiperiod=multiperiod)
 
     def build_funnel_history(self):
         if self.multiperiod is None:

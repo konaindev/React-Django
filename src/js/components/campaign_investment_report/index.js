@@ -8,15 +8,10 @@ import BoxRow from "../box_row";
 import BoxColumn from "../box_column";
 import Panel from "../panel";
 import ReportSection from "../report_section";
-import {
-  SmallNumberBox,
-  SmallCurrencyShorthandBox,
-  SmallMultipleBox
-} from "../small_box_layout";
-import WhiskerPlot from "../whisker_plot";
+import { SmallNumberBox, SmallCurrencyShorthandBox } from "../small_box_layout";
 import {
   formatCurrencyShorthand,
-  formatPercent
+  formatCurrencyShorthandWithDigit
 } from "../../utils/formatters.js";
 import { remarkablyChartTheme } from "../../utils/victoryTheme.js";
 import { CurrencyShorthandGraphBox } from "../large_graph_box";
@@ -90,6 +85,14 @@ const romi_tooltip = obj => {
   return `${numerator} / ${denominator}`;
 };
 
+const formatFourWeekAverages = value => {
+  if (!value) {
+    return;
+  }
+  const curValue = formatCurrencyShorthandWithDigit(value);
+  return `4-Week Average: ${curValue}`;
+};
+
 /**
  * @class CampaignInvestmentReport
  *
@@ -108,6 +111,9 @@ export default class CampaignInvestmentReport extends Component {
         <CurrencyShorthandGraphBox
           name="Campaign Investment"
           value={r.investment.total.total}
+          extraContent={formatFourWeekAverages(
+            r.four_week_funnel_averages?.investment
+          )}
           target={r.targets?.investment?.total?.total}
           delta={r.deltas?.investment?.total?.total}
           series={r.whiskers?.investment}
@@ -230,6 +236,9 @@ export default class CampaignInvestmentReport extends Component {
         <SmallCurrencyShorthandBox
           name="Acquisition Investment"
           value={r.investment.acquisition.total}
+          detail2={formatFourWeekAverages(
+            r.four_week_funnel_averages?.acq_investment
+          )}
           target={r.targets?.investment?.acquisition?.total}
           delta={r.deltas?.investment?.acquisition?.total}
         />
@@ -284,6 +293,9 @@ export default class CampaignInvestmentReport extends Component {
         <SmallCurrencyShorthandBox
           name="Retention Investment"
           value={r.investment.retention.total}
+          detail2={formatFourWeekAverages(
+            r.four_week_funnel_averages?.ret_investment
+          )}
           target={r.targets?.investment?.retention?.total}
           delta={r.deltas?.investment?.retention?.total}
         />
