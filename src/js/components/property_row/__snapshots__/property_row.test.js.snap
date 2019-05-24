@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PropertyRow renders correctly 1`] = `
+<div
+  className="panel panel--default property-row"
+>
+  <div
+    className="property-row__selector"
+    onClick={[Function]}
+  >
+    <div
+      className="property-row__image"
+      style={
+        Object {
+          "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
+        }
+      }
+    />
+    <div
+      className="property-row__tick"
+    />
+  </div>
+  <div
+    className="property-row__name"
+  >
+    Meridian SLC
+  </div>
+  <div
+    className="property-row__address"
+  >
+    123 4th Avenue, Seattle WA 98106
+  </div>
+  <div
+    className="property-status property-status--on-track"
+  >
+    ON TRACK
+  </div>
+</div>
+`;

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PropertyStatus renders correctly 1`] = `
+<div
+  className="property-status property-status--requires-review"
+>
+  NEEDS REVIEW
+</div>
+`;
+
+exports[`PropertyStatus renders correctly 2`] = `
+<div
+  className="property-status property-status--at-risk"
+>
+  AT RISK
+</div>
+`;
+
+exports[`PropertyStatus renders correctly 3`] = `
+<div
+  className="property-status property-status--on-track"
+>
+  ON TRACK
+</div>
+`;

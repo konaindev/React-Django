@@ -6,7 +6,7 @@ import PropertyCardList from "./index";
 import { props } from "./props";
 
 storiesOf("PropertyCardList", module).add("default", () => (
-  <Container>
+  <Container style={{ margin: "1rem auto" }}>
     <PropertyCardList {...props} />
   </Container>
 ));
