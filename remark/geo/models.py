@@ -150,27 +150,27 @@ class Address(models.Model):
         return self.formatted_address or str(self.id)
 
 
-class ZipcodePolygonManager(models.Manager):
+class ZipcodeManager(models.Manager):
     def look_up_polygon(self, zip_code):
         try:
-            polygon = self.get(zip_code=zip_code)
+            zipcode = self.get(zip_code=zip_code)
 
             return dict(
-                geometry=polygon.geometry,
+                geometry=zipcode.geometry,
                 properties=dict(
-                    center={"lat": polygon.lat, "lon": polygon.lon}
+                    center={"lat": zipcode.lat, "lon": zipcode.lon}
                 )
             )
         except self.model.DoesNotExist:
             return None
 
 
-class ZipcodePolygon(models.Model):
+class Zipcode(models.Model):
     """
     Polygon data per zip code
     """
 
-    objects = ZipcodePolygonManager()
+    objects = ZipcodeManager()
 
     zip_code = models.CharField(
         primary_key=True, help_text="5-digit ZIP code", max_length=5
@@ -186,6 +186,7 @@ class ZipcodePolygon(models.Model):
         max_digits=9,
         decimal_places=6,
         default=None,
+        null=True,
         help_text="Latitude of zipcode center",
     )
 
@@ -193,15 +194,13 @@ class ZipcodePolygon(models.Model):
         max_digits=9,
         decimal_places=6,
         default=None,
+        null=True,
         help_text="Longitude of zipcode center",
     )
 
     land_area = models.FloatField(default=0, help_text="Land area in square miles")
 
     water_area = models.FloatField(default=0, help_text="Water area in square miles")
-
-    class Meta:
-        indexes = [models.Index(fields=["zip_code", "lat", "lon"])]
 
 
 class USACensusZip(models.Model):

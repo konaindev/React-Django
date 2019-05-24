@@ -4,7 +4,7 @@ import requests
 from django.contrib.gis.measure import Area
 from django.core.management.base import BaseCommand
 
-from remark.geo.models import ZipcodePolygon
+from remark.geo.models import Zipcode
 
 
 class Command(BaseCommand):
@@ -122,7 +122,7 @@ def import_data_for_a_state(state):
         land_area = Area(sq_m=properties["ALAND10"])
         water_area = Area(sq_m=properties["AWATER10"])
 
-        ZipcodePolygon.objects.update_or_create(
+        Zipcode.objects.update_or_create(
             zip_code=properties["ZCTA5CE10"],
             defaults=dict(
                 state=state.upper(),
