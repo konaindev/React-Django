@@ -1,0 +1,111 @@
+@import "css/base.scss";
+
+$height: 64px;
+$min-width: 770px;
+$hover-color: $gray-4;
+$image-size: 40px;
+$field-width: 25%;
+$field-padding: 20px;
+$name-min-width: 250px;
+$name-width: 25%;
+$name-min-width: 250px;
+$address-min-width: 370px;
+$arrow-size: 12px;
+
+
+.property-row {
+    display: flex;
+    cursor: pointer;
+    height: $height;
+    align-items: center;
+    padding: 0 $field-padding;
+    font-size: $text-base;
+    line-height: $line-height-relaxed;
+    min-width: $min-width;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    transition: border 0.1s linear;
+
+    &:hover {
+        background-color: $hover-color;
+
+        .property-row__name:after {
+            content: '';
+            height: $arrow-size;
+            width: $arrow-size / 2;
+            margin-left: $field-padding / 2;
+            display: inline-block;
+            background-image: url(../../../images/icon-arrow-right.svg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
+
+        .property-row__address {
+            color: $content-text-primary-color;
+        }
+    }
+}
+
+.property-row__name {
+    padding-left: $field-padding;
+    width: $field-width;
+    min-width: $name-min-width;
+    color: $content-text-primary-color;
+}
+
+.property-row__address {
+    width: $field-width;
+    min-width: $address-min-width;
+    padding-left: $field-padding;
+    color: $content-text-secondary-color;
+    font-weight: $weight-light;
+}
+
+.property-row__selector {
+    width: $image-size;
+    height: $image-size;
+    border-radius: $border-radius-default;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+
+    & > div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-repeat: no-repeat;
+    }
+}
+
+.property-row__image {
+    background-color: $gray-3; // in case of image missing
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.property-row__tick {
+    background-image: url(../../../images/icon-tick.svg);
+    background-color: $blue-3; // in case of image missing
+    background-size: 13px 10px;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 0.1s linear;
+}
+
+.property-row--selection-mode {
+    .property-row__selector {
+        border: 1px solid $blue-3;
+    }
+}
+
+.property-row--selected {
+    border: 1px solid $blue-3;
+
+    .property-row__tick {
+        opacity: 1;
+    }
+}
