@@ -11,6 +11,7 @@ from .models import (
 )
 
 
+STAT_ATLAS_OVERVIEW_URL = "https://statisticalatlas.com/zip/{}/Overview"
 STAT_ATLAS_AGE_URL = "https://statisticalatlas.com/zip/{}/Age-and-Sex"
 STAT_ATLAS_HOUSEHOLD_URL = "https://statisticalatlas.com/zip/{}/Household-Types"
 STAT_ATLAS_HOUSEHOLD_INCOME_URL = "https://statisticalatlas.com/zip/{}/Household-Income"
@@ -81,6 +82,24 @@ def get(url):
         logger.error("usa_census::get::error", response.reason, response.text)
         raise Exception("usa_census::get::error response", url)
     return response
+
+
+def check_overview_status(zipcode):
+    logger.info(f"usa_census::check_overview_status::start {zipcode}")
+
+    headers = {"user-agent": USER_AGENT, "referer": STAT_ATLAS_REFER}
+    url = STAT_ATLAS_OVERVIEW_URL.format(zipcode)
+    response = requests.get(url, headers=headers)
+    if response.ok:
+        result = '200'
+    elif response.status_code == 404:
+        result = '404'
+    else:
+        result = 'OTHER'
+
+    logger.info(f"usa_census::check_overview_status::end {result}")
+    return result
+
 
 def fetch_population(zipcode):
     logger.info(f"usa_census::fetch_population::start", zipcode)

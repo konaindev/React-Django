@@ -8,7 +8,7 @@ from remark.geo.models import Zipcode
 
 
 class Command(BaseCommand):
-    help = "Import zipcode polygons data into database"
+    help = "Import zipcode data from github source into database"
 
     def add_arguments(self, parser):
         # Optional argument

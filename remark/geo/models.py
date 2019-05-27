@@ -157,9 +157,7 @@ class ZipcodeManager(models.Manager):
 
             return dict(
                 geometry=zipcode.geometry,
-                properties=dict(
-                    center={"lat": zipcode.lat, "lon": zipcode.lon}
-                )
+                properties=dict(center={"lat": zipcode.lat, "lon": zipcode.lon}),
             )
         except self.model.DoesNotExist:
             return None
@@ -201,6 +199,11 @@ class Zipcode(models.Model):
     land_area = models.FloatField(default=0, help_text="Land area in square miles")
 
     water_area = models.FloatField(default=0, help_text="Water area in square miles")
+
+    has_population = models.BooleanField(
+        null=True,
+        help_text="Flag to identify dead zipcodes, based on Atlas service",
+    )
 
 
 class USACensusZip(models.Model):
