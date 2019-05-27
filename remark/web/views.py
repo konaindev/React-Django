@@ -1,6 +1,7 @@
 from django.urls import reverse
 
 from remark.crm.models import Business
+from remark.geo.models import State
 from remark.projects.models import Fund, Project
 from remark.lib.views import ReactView
 
@@ -39,16 +40,36 @@ class DashboardView(ReactView):
             "logout_url": reverse("logout"),
             # TODO: Add account_url
         }
-        projects = [
-            {
-                "property_name": project.name,
-                "address": str(project.address) if project.address else "",
-                "image_url": project.get_regular_url(),
-                "performance_rating": project.get_performance_rating(),
-                "url": project.get_baseline_url(),
-            }
-            for project in Project.objects.filter(**project_params)
-        ]
+
+        projects = []
+        states = []
+        cities = []
+        for project in Project.objects.filter(**project_params):
+            projects.append(
+                {
+                    "property_name": project.name,
+                    "address": str(project.address) if project.address else "",
+                    "image_url": project.get_regular_url(),
+                    "performance_rating": project.get_performance_rating(),
+                    "url": project.get_baseline_url(),
+                }
+            )
+            if project.address:
+                state = project.address.state
+                city = project.address.city
+                try:
+                    state_name = State.objects.get(code=state).name
+                except State.DoesNotExist:
+                    state_name = ""
+                states.append({"label": state_name, "value": state})
+                cities.append(
+                    {
+                        "label": city,
+                        "value": "{}, {}".format(city, state).lower(),
+                        "state": state,
+                    }
+                )
+
         asset_managers = [
             {"id": business.public_id, "label": business.name}
             for business in Business.objects.asset_managers(user.id, **am_params)
@@ -61,10 +82,6 @@ class DashboardView(ReactView):
             {"id": fund.public_id, "label": fund.name}
             for fund in Fund.objects.filter(**fd_params)
         ]
-        # TODO: Add states
-        states = []
-        # TODO: Add cities
-        cities = []
         return self.render(
             properties=projects,
             user=user_dict,
