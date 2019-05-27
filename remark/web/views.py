@@ -44,7 +44,7 @@ class DashboardView(ReactView):
                 "property_name": project.name,
                 "address": str(project.address) if project.address else "",
                 "image_url": project.get_regular_url(),
-                # TODO: Add performance_rating
+                "performance_rating": project.get_performance_rating(),
                 "url": project.get_baseline_url(),
             }
             for project in Project.objects.filter(**project_params)

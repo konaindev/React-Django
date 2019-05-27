@@ -11,6 +11,7 @@ from django.utils.crypto import get_random_string
 from jsonfield import JSONField
 from stdimage.models import StdImageField
 
+from remark.lib.stats import health_check
 from remark.lib.tokens import public_id
 from remark.lib.metrics import (
     PointMetric,
@@ -19,6 +20,7 @@ from remark.lib.metrics import (
     ModelPeriod,
 )
 from .spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
+from .reports.performance import PerformanceReport
 
 
 def pro_public_id():
@@ -438,6 +440,24 @@ class Project(models.Model):
             if self.selected_model_name
             else None
         )
+
+    def get_performance_rating(self):
+        performance_report = PerformanceReport.for_campaign_to_date(self)
+        if not performance_report:
+            return 0
+        campaign_to_date = performance_report.to_jsonable()
+        lease_rate = (
+            campaign_to_date.get("property", {}).get("leasing", {}).get("rate", 0)
+        )
+        target_lease_rate = (
+            campaign_to_date.get("targets", {})
+            .get("property", {})
+            .get("leasing", {})
+            .get("rate", 0)
+        )
+        if not target_lease_rate:
+            return 0
+        return health_check(lease_rate, target_lease_rate)
 
     def update_for_selected_model(self):
         """
