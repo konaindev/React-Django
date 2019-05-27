@@ -19,18 +19,16 @@ class DashboardView(ReactView):
         project_params = {"account_id": user.account_id}
         if request.GET.get("q"):
             project_params["name__icontains"] = request.GET.get("q")
-
-        pm_params = {}
-        if request.GET.getlist("pm"):
-            pm_params["public_id__in"] = request.GET.getlist("pm")
-
-        am_params = {}
+        if request.GET.get("st"):
+            project_params["address__state__in"] = request.GET.getlist("st")
+        if request.GET.get("ct"):
+            project_params["address__city__in"] = request.GET.getlist("ct")
+        if request.GET.get("pm"):
+            project_params["property_manager_id__in"] = request.GET.getlist("pm")
         if request.GET.getlist("am"):
-            am_params["public_id__in"] = request.GET.getlist("am")
-
-        fd_params = {"account_id": user.account_id}
-        if request.GET.getlist("fd"):
-            am_params["public_id__in"] = request.GET.getlist("fd")
+            project_params["asset_manager_id__in"] = request.GET.getlist("am")
+        if request.GET.get("fd"):
+            project_params["fund_id__in"] = request.GET.getlist("fd")
 
         user_dict = {
             "email": user.email,
@@ -72,15 +70,15 @@ class DashboardView(ReactView):
 
         asset_managers = [
             {"id": business.public_id, "label": business.name}
-            for business in Business.objects.asset_managers(user.id, **am_params)
+            for business in Business.objects.asset_managers(user.id)
         ]
         property_managers = [
             {"id": business.public_id, "label": business.name}
-            for business in Business.objects.property_managers(user.id, **pm_params)
+            for business in Business.objects.property_managers(user.id)
         ]
         funds = [
             {"id": fund.public_id, "label": fund.name}
-            for fund in Fund.objects.filter(**fd_params)
+            for fund in Fund.objects.filter(account_id=user.account_id)
         ]
         return self.render(
             properties=projects,
