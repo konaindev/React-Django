@@ -41,9 +41,9 @@ class PropertyListTestCase(TestCase):
         property_owner = Business.objects.create(
             name="Test Property Owner", business_type=1, address=address
         )
-        self.fund1 = Fund.objects.create(account=account, name="Test Fund")
-        self.fund2 = Fund.objects.create(account=account, name="Test Fund")
-        Project.objects.create(
+        self.fund = Fund.objects.create(account=account, name="Test Fund")
+        Fund.objects.create(account=account, name="Test Fund")
+        self.project1 = Project.objects.create(
             name="test",
             baseline_start=datetime.date(year=2018, month=11, day=19),
             baseline_end=datetime.date(year=2018, month=12, day=26),
@@ -53,33 +53,49 @@ class PropertyListTestCase(TestCase):
             asset_manager=self.asset_manager1,
             property_manager=self.property_manager1,
             property_owner=property_owner,
-            fund=self.fund1,
+            fund=self.fund,
         )
-        Project.objects.create(
+        self.project2 = Project.objects.create(
             name="project",
             baseline_start=datetime.date(year=2018, month=11, day=19),
             baseline_end=datetime.date(year=2018, month=12, day=26),
             average_monthly_rent=decimal.Decimal("0"),
             lowest_monthly_rent=decimal.Decimal("0"),
             account=account,
-            asset_manager=self.asset_manager1,
+            asset_manager=self.asset_manager2,
             property_manager=self.property_manager2,
             property_owner=property_owner,
-            fund=self.fund2,
+            fund=self.fund,
         )
         self.client.login(email="test@test.com", password="testpassword")
 
     def test_without_query(self):
         response = self.client.get(reverse("dashboard"))
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(
+            response.context["page_props"]["properties"][0]["property_name"],
+            self.project1.name,
+        )
+        self.assertEqual(
+            response.context["page_props"]["properties"][1]["property_name"],
+            self.project2.name,
+        )
+        self.assertEqual(len(response.context["page_props"]["property_managers"]), 2)
+        self.assertEqual(len(response.context["page_props"]["asset_managers"]), 2)
+        self.assertEqual(len(response.context["page_props"]["funds"]), 2)
 
     def test_query(self):
         query = "q=tes&pm={}&pm={}&am={}&fb={}".format(
             self.property_manager1.public_id,
             self.property_manager2.public_id,
-            self.asset_manager2.public_id,
-            self.fund1.public_id,
+            self.asset_manager1.public_id,
+            self.fund.public_id,
         )
         url = "{}?{}".format(reverse("dashboard"), query)
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(len(response.context["page_props"]["properties"]), 1)
+        self.assertEqual(
+            response.context["page_props"]["properties"][0]["property_name"],
+            self.project1.name,
+        )

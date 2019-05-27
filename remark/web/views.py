@@ -70,11 +70,11 @@ class DashboardView(ReactView):
 
         asset_managers = [
             {"id": business.public_id, "label": business.name}
-            for business in Business.objects.asset_managers(user.id)
+            for business in Business.objects.asset_managers(user.account_id)
         ]
         property_managers = [
             {"id": business.public_id, "label": business.name}
-            for business in Business.objects.property_managers(user.id)
+            for business in Business.objects.property_managers(user.account_id)
         ]
         funds = [
             {"id": fund.public_id, "label": fund.name}

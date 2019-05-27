@@ -1,8 +1,8 @@
 from django.db import models
 
 from remark.lib.tokens import public_id
+from remark.projects.models import Project
 from remark.users.constants import ACCOUNT_TYPE
-from remark.users.models import User
 
 
 def bus_public_id():
@@ -11,13 +11,17 @@ def bus_public_id():
 
 
 class BusinessesQuerySet(models.QuerySet):
-    def property_managers(self, user_id, **kwargs):
-        user_subquery = models.Subquery(User.objects.filter(id=user_id).values('account_id'))
-        return self.annotate(property_manager__account_id=user_subquery).filter(business_type=3, **kwargs)
+    def property_managers(self, account_id, **kwargs):
+        project_subquery = models.Subquery(
+            Project.objects.filter(account_id=account_id).values("property_manager_id")
+        )
+        return self.filter(public_id__in=project_subquery, business_type=3, **kwargs)
 
-    def asset_managers(self, user_id, **kwargs):
-        user_subquery = models.Subquery(User.objects.filter(id=user_id).values('account_id'))
-        return self.annotate(asset_manager__account_id=user_subquery).filter(business_type=2, **kwargs)
+    def asset_managers(self, account_id, **kwargs):
+        project_subquery = models.Subquery(
+            Project.objects.filter(account_id=account_id).values("asset_manager_id")
+        )
+        return self.filter(public_id__in=project_subquery, business_type=2, **kwargs)
 
 
 class Business(models.Model):
