@@ -1,5 +1,5 @@
-$row-indent: 8px;
+$row-space: 8px 0 0;
 
 .property-list__row {
-    margin-top: $row-indent;
+    margin: $row-space;
 }
