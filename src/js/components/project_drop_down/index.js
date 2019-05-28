@@ -14,21 +14,24 @@ export default class ProjectDropDown extends Component {
   // `project_links`; that's a nice parallel to `current_report_link` and
   // `report_links`.
   static propTypes = {
-    project: PropTypes.object.isRequired
+    project: PropTypes.shape({
+      name: PropTypes.string,
+      building_logo: PropTypes.array
+    }).isRequired
   };
 
   render() {
-    const { name, building_image: buildingImage } = this.props.project;
+    const { name, building_logo } = this.props.project;
 
-    let buildingImageStyle = {};
-    if (buildingImage) {
-      buildingImageStyle["backgroundImage"] = `url(${buildingImage.thumbnail})`;
+    let buildingLogoStyle = {};
+    if (building_logo != null) {
+      buildingLogoStyle["backgroundImage"] = `url(${building_logo[2]})`;
     }
 
     // For now, just render the name and a blank image.
     return (
       <div className="project-drop-down">
-        <span className="project-drop-down__image" style={buildingImageStyle} />
+        <span className="project-drop-down__image" style={buildingLogoStyle} />
         <span className="project-drop-down__text">{name}</span>
       </div>
     );

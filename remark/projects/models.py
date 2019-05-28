@@ -30,24 +30,24 @@ def fund_public_id():
     return public_id("fund")
 
 
-def building_image_media_path(project, filename):
+def building_logo_media_path(project, filename):
     """
     Given a Project instance, and the filename as supplied during upload,
-    determine where the uploaded building image should actually be placed.
+    determine where the uploaded building logo should actually be placed.
 
     See https://docs.djangoproject.com/en/2.1/ref/models/fields/#filefield
 
-    Note: Thumbnail generation works fine on FileSystemStorage, but not on S3.
+    Note: Thumbnail regeneration works fine on FileSystemStorage, but not on S3.
     To overcome this known issue, append random 7-char string to end of file name.
     Though, old files will not be deleted from S3 on image replacement.
 
-    project/<public_id>/building_image_<random_str><.ext>
-    project/<public_id>/building_image_<random_str>.regular<.ext>
-    project/<public_id>/building_image_<random_str>.thumbnail<.ext>
+    project/<public_id>/building_logo_<random_str><.ext>
+    project/<public_id>/building_logo_<random_str>.180x180<.ext>
+    project/<public_id>/building_logo_<random_str>.76x76<.ext>
     """
     _, extension = os.path.splitext(filename)
     random_str = get_random_string(length=7)
-    return f"project/{project.public_id}/building_image_{random_str}{extension}"
+    return f"project/{project.public_id}/building_logo_{random_str}{extension}"
 
 
 def spreadsheet_media_path(spreadsheet, filename):
@@ -143,12 +143,12 @@ class Project(models.Model):
 
     # StdImageField works just like Django's own ImageField
     # except that you can specify different sized variations.
-    building_image = StdImageField(
+    building_logo = StdImageField(
         blank=True,
         default="",
-        upload_to=building_image_media_path,
-        help_text="""A full-resolution user-supplied image of the building.<br/>Resized variants (180x180, 76x76) will also be created on Amazon S3.""",
-        variations={"regular": (180, 180, True), "thumbnail": (76, 76, True)},
+        upload_to=building_logo_media_path,
+        help_text="""A full-resolution user-supplied image of the building logo.<br/>Resized variants (180x180, 76x76) will also be created on Amazon S3.""",
+        variations={"regular": (180, 180), "thumbnail": (76, 76)},
     )
 
     baseline_start = models.DateField(
@@ -362,16 +362,16 @@ class Project(models.Model):
             .first()
         )
 
-    def get_building_image(self):
+    def get_building_logo(self):
         """
-        Return building image's S3 resource urls for all variants
+        Return building logo's S3 resource urls for all variants
         """
-        if self.building_image:
-            return dict(
-                original=self.building_image.url,
-                regular=self.building_image.regular.url,
-                thumbnail=self.building_image.thumbnail.url,
-            )
+        if self.building_logo:
+            return [
+                self.building_logo.url,
+                self.building_logo.regular.url,
+                self.building_logo.thumbnail.url
+            ]
         else:
             return None
 
@@ -380,7 +380,7 @@ class Project(models.Model):
         return {
             "public_id": self.public_id,
             "name": self.name,
-            "building_image": self.get_building_image(),
+            "building_logo": self.get_building_logo(),
         }
 
     def get_named_model_option(self, name):

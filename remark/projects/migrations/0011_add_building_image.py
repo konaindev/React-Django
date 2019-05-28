@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='project',
             name='building_image',
-            field=models.ImageField(blank=True, default='', help_text='A full-resolution user-supplied image of the building.', upload_to=remark.projects.models.building_image_media_path),
+            field=models.ImageField(blank=True, default='', help_text='A full-resolution user-supplied image of the building.', upload_to=remark.projects.models.building_logo_media_path),
         ),
     ]
