@@ -42,8 +42,8 @@ def building_logo_media_path(project, filename):
     Though, old files will not be deleted from S3 on image replacement.
 
     project/<public_id>/building_logo_<random_str><.ext>
-    project/<public_id>/building_logo_<random_str>.180x180<.ext>
-    project/<public_id>/building_logo_<random_str>.76x76<.ext>
+    project/<public_id>/building_logo_<random_str>.regular<.ext>
+    project/<public_id>/building_logo_<random_str>.thumbnail<.ext>
     """
     _, extension = os.path.splitext(filename)
     random_str = get_random_string(length=7)
