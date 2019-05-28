@@ -8,6 +8,7 @@ import PropertyStatus from "../property_status";
 import "./property_row.scss";
 
 const PropertyRow = ({
+  property_id,
   image_url,
   property_name,
   address,
@@ -31,7 +32,7 @@ const PropertyRow = ({
 
   const handleToggle = () => {
     if (selection_mode === true) {
-      onSelect(!selected);
+      onSelect(property_id, !selected);
     }
   };
 
@@ -49,6 +50,7 @@ const PropertyRow = ({
 };
 
 PropertyRow.propTypes = {
+  property_id: PropTypes.string.isRequired,
   image_url: PropTypes.string.isRequired,
   property_name: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,

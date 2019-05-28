@@ -11,6 +11,7 @@ class PropertyList extends React.PureComponent {
   static propTypes = {
     properties: PropTypes.arrayOf(
       PropTypes.shape({
+        property_id: PropTypes.string.isRequired,
         image_url: PropTypes.string.isRequired,
         property_name: PropTypes.string.isRequired,
         address: PropTypes.string.isRequired,
@@ -18,47 +19,45 @@ class PropertyList extends React.PureComponent {
       })
     ).isRequired,
     selectionMode: PropTypes.bool,
-    onSelect: PropTypes.func
+    onSelect: PropTypes.func,
+    selected: PropTypes.arrayOf(PropTypes.string)
   };
 
   static defaultProps = {
     selectionMode: false,
-    onSelect: () => {}
+    onSelect: () => {},
+    selected: []
   };
 
-  state = {
-    selected: {}
+  onSelect = (propertyId, value) => {
+    const selected = this.selectedProperties;
+    if (value) {
+      selected[propertyId] = value;
+    } else {
+      delete selected[propertyId];
+    }
+    this.props.onSelect(Object.keys(selected));
   };
-
-  onSelect = (i, value) => {
-    const selected = { ...this.state.selected };
-    selected[i] = value;
-    this.setState({ selected });
-    const selectedProperties = [];
-    const properties = this.sortedProperties;
-    Object.keys(selected).forEach(i => {
-      if (selected[i]) {
-        selectedProperties.push(properties[i]);
-      }
-    });
-    this.props.onSelect(selectedProperties);
-  };
-
-  get sortedProperties() {
-    return _sortBy(this.props.properties, property => property.property_name);
-  }
 
   get propertiesRows() {
-    return this.sortedProperties.map((property, i) => (
-      <div key={i} className="property-list__row">
+    const selected = this.selectedProperties;
+    return this.props.properties.map(property => (
+      <div key={property.property_id} className="property-list__row">
         <PropertyRow
           {...property}
           selection_mode={this.props.selectionMode}
-          selected={_get(this.state.selected, i, false)}
-          onSelect={value => this.onSelect(i, value)}
+          selected={_get(selected, property.property_id, false)}
+          onSelect={this.onSelect}
         />
       </div>
     ));
+  }
+
+  get selectedProperties() {
+    return this.props.selected.reduce((selected, id) => {
+      selected[id] = true;
+      return selected;
+    }, {});
   }
 
   render() {
