@@ -50,6 +50,12 @@ def building_logo_media_path(project, filename):
     return f"project/{project.public_id}/building_logo_{random_str}{extension}"
 
 
+def building_image_media_path(project, filename):
+    _, extension = os.path.splitext(filename)
+    random_str = get_random_string(length=7)
+    return f"project/{project.public_id}/building_image_{random_str}{extension}"
+
+
 def spreadsheet_media_path(spreadsheet, filename):
     """
     Given a Spreadsheet instance, and the filename as supplied during upload,
@@ -147,8 +153,16 @@ class Project(models.Model):
         blank=True,
         default="",
         upload_to=building_logo_media_path,
-        help_text="""A full-resolution user-supplied image of the building logo.<br/>Resized variants (180x180, 76x76) will also be created on Amazon S3.""",
+        help_text="""Property logo.<br/>Resized variants (180x180, 76x76) will also be created on Amazon S3.""",
         variations={"regular": (180, 180), "thumbnail": (76, 76)},
+    )
+
+    building_image = StdImageField(
+        blank=True,
+        default="",
+        upload_to=building_image_media_path,
+        help_text="""Front photo shot of the property.<br/>Resized variants (309x220, 180x180, 76x76) will also be created on Amazon S3.""",
+        variations={"landscape": (309, 220, True), "regular": (180, 180, True), "thumbnail": (76, 76, True)},
     )
 
     baseline_start = models.DateField(
@@ -375,12 +389,27 @@ class Project(models.Model):
         else:
             return None
 
+    def get_building_image(self):
+        """
+        Return building image's S3 resource urls for all variants
+        """
+        if self.building_image:
+            return [
+                self.building_image.url,
+                self.building_image.landscape.url,
+                self.building_image.regular.url,
+                self.building_image.thumbnail.url
+            ]
+        else:
+            return None
+
     def to_jsonable(self):
         """Return a representation that can be converted to a JSON string."""
         return {
             "public_id": self.public_id,
             "name": self.name,
             "building_logo": self.get_building_logo(),
+            "building_image": self.get_building_image()
         }
 
     def get_named_model_option(self, name):
