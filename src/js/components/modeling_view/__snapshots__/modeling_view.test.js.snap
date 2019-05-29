@@ -14,25 +14,25 @@ exports[`ModelingView renders correctly 1`] = `
         className="button-group"
       >
         <button
-          className="button button--selected button--undefined button-group__item"
+          className="button button--selected button--default button-group__item"
           onClick={[Function]}
         >
           Schedule Driven
         </button>
         <button
-          className="button button--undefined button-group__item"
+          className="button button--default button-group__item"
           onClick={[Function]}
         >
           Investment Driven
         </button>
         <button
-          className="button button--undefined button-group__item"
+          className="button button--default button-group__item"
           onClick={[Function]}
         >
           Run Rate
         </button>
         <button
-          className="button button--undefined button-group__item"
+          className="button button--default button-group__item"
           onClick={[Function]}
         >
           Compare Models

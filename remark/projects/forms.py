@@ -67,33 +67,39 @@ class ProjectForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.is_existing_instance = kwargs.get("instance") is not None
         super(ProjectForm, self).__init__(*args, **kwargs)
-        self._map_public_fields()
+        self._map_public_and_shared_fields()
         self._update_selected_model_choices()
 
-    def _map_public_fields(self):
-        field_maps = {
-            "is_baseline_report_public": "baseline",
-            "is_tam_public": "market",
-            "is_performance_report_public": "performance",
-            "is_modeling_public": "modeling",
-            "is_campaign_plan_public": "campaign_plan",
-        }
-
-        if self.is_existing_instance:
-            report_links = ReportLinks.for_project(self.instance)
-            for k, v in field_maps.items():
-                if isinstance(report_links[v], dict):
-                    link = report_links[v]["url"]
-                elif isinstance(report_links[v], list):
-                    link = report_links[v][0]["url"]
+    def _map_public_and_shared_fields(self):
+        def append_links_to_field_label(link_type, report_links, field_maps):
+            for prefix, report_name in field_maps.items():
+                field_name = prefix + link_type
+                if isinstance(report_links[report_name], dict):
+                    link = report_links[report_name]["url"]
+                elif isinstance(report_links[report_name], list):
+                    link = report_links[report_name][0]["url"]
                 else:
                     continue
-                self.fields[k].label = mark_safe(
-                    self.fields[k].label
+                self.fields[field_name].label = mark_safe(
+                    self.fields[field_name].label
                     + '&nbsp; (URL: <a target="_blank" href="{}">{}</a>)'.format(
                         link, link
                     )
                 )
+
+        field_maps = {
+            "is_baseline_report_": "baseline",
+            "is_tam_": "market",
+            "is_performance_report_": "performance",
+            "is_modeling_": "modeling",
+            "is_campaign_plan_": "campaign_plan",
+        }
+
+        if self.is_existing_instance:
+            report_links = ReportLinks.for_project(self.instance)
+            append_links_to_field_label("public", report_links, field_maps)
+            report_links = ReportLinks.share_for_project(self.instance)
+            append_links_to_field_label("shared", report_links, field_maps)
 
     def _update_selected_model_choices(self):
         modeling_report = self.instance.tmp_modeling_report_json or {}

@@ -1,6 +1,7 @@
-import BaselineReportPage from "./index";
 import renderer from "react-test-renderer";
-import { props } from "./props";
+
+import BaselineReportPage from "./index";
+import props from "./props";
 
 describe("BaselineReportPage", () => {
   it("renders correctly", () => {

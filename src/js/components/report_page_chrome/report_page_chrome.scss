@@ -1,1 +1,21 @@
 @import "css/base.scss";
+
+.report-page-subheader {
+    background-color: $default-background-color;
+    border-bottom: solid 1px $nav-link-border-color;
+
+    .subheader__inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .project-report-links {
+        padding-top: 1.75rem;
+    }
+
+    .share-toggle {
+        margin: 1.375rem 0 0.875rem auto;
+    }
+}

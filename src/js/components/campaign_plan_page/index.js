@@ -11,13 +11,16 @@ export default class CampaignPlanPage extends Component {
   };
 
   render() {
+    const { project, report, report_links, share_info } = this.props;
+
     return (
       <ReportPageChrome
-        project={this.props.project}
+        project={project}
         current_report_name="campaign_plan"
-        report_links={this.props.report_links}
+        report_links={report_links}
+        share_info={share_info}
       >
-        <CampaignPlan {...this.props.report} />
+        <CampaignPlan {...report} />
       </ReportPageChrome>
     );
   }
