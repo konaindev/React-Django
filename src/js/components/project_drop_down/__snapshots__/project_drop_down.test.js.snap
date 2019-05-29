@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ProjectDropDown renders with building image correctly 1`] = `
+exports[`ProjectDropDown renders with building logo correctly 1`] = `
 <div
   className="project-drop-down"
 >
@@ -16,7 +16,7 @@ exports[`ProjectDropDown renders with building image correctly 1`] = `
 </div>
 `;
 
-exports[`ProjectDropDown renders without building image correctly 1`] = `
+exports[`ProjectDropDown renders without building logo correctly 1`] = `
 <div
   className="project-drop-down"
 >

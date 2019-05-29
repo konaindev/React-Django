@@ -15,6 +15,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='project',
             name='building_image',
-            field=stdimage.models.StdImageField(blank=True, default='', help_text='A full-resolution user-supplied image of the building.<br/>Resized variants (180x180, 76x76) will also be created on Amazon S3.', upload_to=remark.projects.models.building_image_media_path),
+            field=stdimage.models.StdImageField(blank=True, default='', help_text='A full-resolution user-supplied image of the building.<br/>Resized variants (180x180, 76x76) will also be created on Amazon S3.', upload_to=remark.projects.models.building_logo_media_path),
         ),
     ]

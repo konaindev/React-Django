@@ -11,23 +11,25 @@ const project = { name: "Portland Multi Family", public_id: "pro_example" };
 const propsWithoutImage = {
   project: {
     ...project,
-    building_image: null
+    building_logo: null
   }
 };
 
 const propsWithImage = {
   project: {
     ...project,
-    building_image: {
-      thumbnail: "assets/remarkably-logo-green.svg"
-    }
+    building_logo: [
+      "assets/remarkably-logo-green.svg",
+      "assets/remarkably-logo-green.svg",
+      "assets/remarkably-logo-green.svg"
+    ]
   }
 };
 
-storiesOf("ProjectDropDown", module).add("without building image", () => (
+storiesOf("ProjectDropDown", module).add("without building logo", () => (
   <ProjectDropDown {...propsWithoutImage} />
 ));
 
-storiesOf("ProjectDropDown", module).add("with building image", () => (
+storiesOf("ProjectDropDown", module).add("with building logo", () => (
   <ProjectDropDown {...propsWithImage} />
 ));
