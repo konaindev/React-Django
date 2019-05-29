@@ -1,0 +1,31 @@
+.add-property-form__input {
+    width: 340px;
+
+    &--city {
+        width: 150px;
+        margin-right: 8px;
+    }
+    &--state {
+        width: 82px;
+        margin-right: 8px;
+    }
+    &--zipcode {
+        width: 92px;
+    }
+}
+
+.add-property-form__field {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    margin-bottom: 12px;
+}
+
+.add-property-form__label {
+    width: 160px;
+    color: #f5faf7;
+    font-size: 12px;
+    letter-spacing: 1px;
+    line-height: 20px;
+    text-transform: uppercase;
+}

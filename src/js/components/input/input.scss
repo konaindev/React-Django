@@ -1,0 +1,22 @@
+@import "css/base.scss";
+@import "css/variables.scss";
+
+.input[type="text"] {
+    padding: 10px 16px;
+    border: 1px solid #404e5d;
+    border-radius: 4px;
+    color: #f5faf7;
+    font-size: 14px;
+    line-height: 20px;
+    background: transparent;
+
+    &:focus {
+        border: 1px solid #0069ff;
+        color: #53f7dd;
+        outline: none;
+    }
+
+    &::placeholder {
+        color: #798796;
+    }
+}
