@@ -5,7 +5,7 @@ from remark.admin import admin_site
 from .forms import LocationForm, AddressForm
 from .models import (
     Address, Country, State, City,
-    ZipcodePolygon,
+    Zipcode,
     USACensusZip,
     USACensusPopulationByAge,
     USACensusHouseholdByType,
@@ -60,8 +60,8 @@ class CityAdmin(admin.ModelAdmin):
     search_fields = ("name",)
 
 
-@admin.register(ZipcodePolygon, site=admin_site)
-class ZipcodePolygonAdmin(admin.ModelAdmin):
+@admin.register(Zipcode, site=admin_site)
+class ZipcodeAdmin(admin.ModelAdmin):
     list_display = ("zip_code", "state")
     search_fields = ("zip_code", "state")
 
