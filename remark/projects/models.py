@@ -19,9 +19,15 @@ from remark.lib.metrics import (
 )
 from .spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
 
+
 def pro_public_id():
     """Public identifier for a project."""
     return public_id("pro")
+
+
+def fund_public_id():
+    """Public identifier for a fund."""
+    return public_id("fund")
 
 
 def building_image_media_path(project, filename):
@@ -82,12 +88,45 @@ class Project(models.Model):
         max_length=255, help_text="The user-facing name of the project."
     )
 
+    account = models.ForeignKey(
+        "users.Account", on_delete=models.CASCADE, related_name="account", blank=True
+    )
+
+    asset_manager = models.ForeignKey(
+        "crm.Business",
+        on_delete=models.CASCADE,
+        related_name="asset_manager",
+        blank=False,
+        limit_choices_to={"business_type": 2},
+    )
+
+    property_manager = models.ForeignKey(
+        "crm.Business",
+        on_delete=models.CASCADE,
+        related_name="property_manager",
+        blank=False,
+        limit_choices_to={"business_type": 3},
+    )
+
+    property_owner = models.ForeignKey(
+        "crm.Business",
+        on_delete=models.CASCADE,
+        related_name="property_owner",
+        blank=False,
+        limit_choices_to={"business_type": 1},
+    )
+
+    fund = models.ForeignKey(
+        "projects.Fund",
+        on_delete=models.CASCADE,
+        blank=False,
+        # limit_choices_to={'account': self.account},
+    )
+
     # This is temporary until we have accounts setup for all our clients
     # Remove me and link via a ForeignKey when that happens. -TPC
     customer_name = models.CharField(
-        max_length=255,
-        help_text="The company that hired Remarkaby.",
-        default=""
+        max_length=255, help_text="The company that hired Remarkaby.", default=""
     )
 
     # This is a temporary field until we have user accounts setup.
@@ -96,15 +135,11 @@ class Project(models.Model):
     email_distribution_list = models.TextField(
         max_length=2000,
         default="",
-        help_text="Comma separated list of people to receive email updates about this Project."
+        help_text="Comma separated list of people to receive email updates about this Project.",
     )
 
     # This is for the SendGrid recipients list.
-    email_list_id = models.CharField(
-        max_length=256,
-        null=True,
-        default=None
-    )
+    email_list_id = models.CharField(max_length=256, null=True, default=None)
 
     # StdImageField works just like Django's own ImageField
     # except that you can specify different sized variations.
@@ -230,9 +265,7 @@ class Project(models.Model):
         "geo.Address", on_delete=models.SET_NULL, null=True, blank=True
     )
 
-    users = models.ManyToManyField(
-        "users.User", related_name="projects"
-    )
+    users = models.ManyToManyField("users.User", related_name="projects")
 
     # This value is set when the instance is created; if we later
     # call save, and it changes, then we update targets for the model.
@@ -883,6 +916,7 @@ class TargetPeriod(ModelPeriod, models.Model):
         # Always sort TargetPeriods with the earliest period first.
         ordering = ["start"]
 
+
 def tam_export_media_path(instance, filename):
     """
     Given a TAM export log instance, and the filename as supplied during upload,
@@ -890,9 +924,7 @@ def tam_export_media_path(instance, filename):
     """
     # We always target project/<public_id>/tam_export_<upload_time><.ext>
     _, extension = os.path.splitext(filename)
-    sheetname = "_".join(
-        ["tam_export", datetime.now().strftime("%Y-%m-%d_%H-%M-%S")]
-    )
+    sheetname = "_".join(["tam_export", datetime.now().strftime("%Y-%m-%d_%H-%M-%S")])
     return f"project/{instance.project.public_id}/{sheetname}{extension}"
 
 
@@ -902,7 +934,7 @@ class TAMExportLog(models.Model):
     )
 
     user = models.ForeignKey(
-        'users.User', on_delete=models.CASCADE, related_name="tam_export_logs"
+        "users.User", on_delete=models.CASCADE, related_name="tam_export_logs"
     )
 
     file = models.FileField(
@@ -912,10 +944,7 @@ class TAMExportLog(models.Model):
     )
 
     exported_at = models.DateTimeField(
-        auto_now_add=True,
-        db_index=True,
-        editable=False,
-        help_text="The date exported.",
+        auto_now_add=True, db_index=True, editable=False, help_text="The date exported."
     )
 
     args_json = JSONField(
@@ -930,3 +959,20 @@ class TAMExportLog(models.Model):
 
     def __str__(self):
         return f"{self.project} Export For {self.user} at {self.exported_at.strftime('%Y-%m-%d_%H-%M-%S')}"
+
+
+class Fund(models.Model):
+    public_id = models.CharField(
+        primary_key=True,
+        default=fund_public_id,
+        help_text="A unique identifier for this fund that is safe to share publicly.",
+        max_length=24,
+        editable=False,
+    )
+
+    account = models.ForeignKey("users.Account", on_delete=models.CASCADE, blank=False)
+
+    name = models.CharField(max_length=255, blank=False, help_text="Fund Name")
+
+    def __str__(self):
+        return self.name

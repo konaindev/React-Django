@@ -81,6 +81,7 @@ INSTALLED_APPS = [
     "remark.email_app",
     "remark.analytics",
     "remark.users",
+    "remark.crm",
     "remark.projects",
     "remark.releases",
     "remark.web",

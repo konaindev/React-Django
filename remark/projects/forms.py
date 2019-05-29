@@ -107,11 +107,16 @@ class ProjectForm(forms.ModelForm):
         model_names = self.NO_CHOICES + model_names
         self.fields["selected_model_name"].choices = model_names
 
+    def clean_fund(self):
+        if self.cleaned_data["account"].id != self.cleaned_data["fund"].account_id:
+            raise forms.ValidationError(
+                "Fund do not match the Account attached to the Project"
+            )
+        return self.cleaned_data["fund"]
+
     class Meta:
         model = Project
-        exclude = [
-            "email_list_id"
-        ]
+        exclude = ["email_list_id"]
 
 
 def multiline_text_to_str_array(text):
