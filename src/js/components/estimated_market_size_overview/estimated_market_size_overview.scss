@@ -38,10 +38,6 @@
             padding: 0 $s6;
             align-items: center;
             flex: 1;
-
-            &:last-child {
-                flex-direction: column-reverse;
-            }
         }
     }
 }
