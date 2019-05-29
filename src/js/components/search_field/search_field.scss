@@ -1,0 +1,67 @@
+@import 'css/base.scss';
+
+$input-height: 100%;
+$input-offset: 16px;
+$search-icon-size: 16px;
+$close-icon-size: 10px;
+
+
+.search-field {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    .search-field__input {
+        width: 100%;
+        height: $input-height;
+        padding: 0;
+        font-family: $font-sans;
+        font-size: $text-base;
+        line-height: $input-height;
+        color: $input-text-color;
+        border: none;
+        caret-color: $input-caret-color;
+        &::placeholder {
+            color: $default-text-color;
+        }
+    }
+}
+
+.search-field__input-wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: $input-offset + $search-icon-size;
+    max-width: 0;
+    overflow: hidden;
+    background-color: $default-background-color;
+    transition: all .1s linear;
+}
+
+.search-field__icon {
+    display: inline-block;
+    width: $search-icon-size;
+    height: $search-icon-size;
+    cursor: pointer;
+    background-image: url('../../../images/icon-search.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.search-field__children {
+    margin-left: $input-offset;
+}
+
+.search-field--active {
+    .search-field__input-wrapper {
+        right: 0;
+        max-width: 100%;
+        transition: all .5s linear;
+    }
+
+    .search-field__icon {
+        background-image: url('../../../images/icon-close.svg');
+        background-size: $close-icon-size;
+    }
+}

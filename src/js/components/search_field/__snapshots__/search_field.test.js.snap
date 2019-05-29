@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchField active 1`] = `
+<div
+  className="search-field search-field--active"
+>
+  <div
+    className="search-field__icon"
+    onClick={[Function]}
+  >
+    q
+  </div>
+  <div
+    className="search-field__input-wrapper"
+  >
+    <input
+      className="search-field__input"
+      defaultValue="search"
+      onKeyPress={[Function]}
+      placeholder="Search Properties…"
+      type="text"
+    />
+  </div>
+  <div
+    className="search-field__children"
+  />
+</div>
+`;
+
+exports[`SearchField custom placeholder 1`] = `
+<div
+  className="search-field"
+>
+  <div
+    className="search-field__icon"
+    onClick={[Function]}
+  >
+    q
+  </div>
+  <div
+    className="search-field__input-wrapper"
+  >
+    <input
+      className="search-field__input"
+      defaultValue=""
+      onKeyPress={[Function]}
+      placeholder="placeholder"
+      type="text"
+    />
+  </div>
+  <div
+    className="search-field__children"
+  />
+</div>
+`;
+
+exports[`SearchField renders correctly 1`] = `
+<div
+  className="search-field"
+>
+  <div
+    className="search-field__icon"
+    onClick={[Function]}
+  >
+    q
+  </div>
+  <div
+    className="search-field__input-wrapper"
+  >
+    <input
+      className="search-field__input"
+      defaultValue=""
+      onKeyPress={[Function]}
+      placeholder="Search Properties…"
+      type="text"
+    />
+  </div>
+  <div
+    className="search-field__children"
+  />
+</div>
+`;
+
+exports[`SearchField renders with children 1`] = `
+<div
+  className="search-field"
+>
+  <div
+    className="search-field__icon"
+    onClick={[Function]}
+  >
+    q
+  </div>
+  <div
+    className="search-field__input-wrapper"
+  >
+    <input
+      className="search-field__input"
+      defaultValue=""
+      onKeyPress={[Function]}
+      placeholder="Search Properties…"
+      type="text"
+    />
+  </div>
+  <div
+    className="search-field__children"
+  >
+    <div>
+      field 1
+    </div>
+    <div>
+      field 2
+    </div>
+    <div>
+      field 3
+    </div>
+  </div>
+</div>
+`;
