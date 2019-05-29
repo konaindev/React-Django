@@ -153,7 +153,7 @@ class Project(models.Model):
         blank=True,
         default="",
         upload_to=building_logo_media_path,
-        help_text="""Property logo.<br/>Resized variants (180x180, 76x76) will also be created on Amazon S3.""",
+        help_text="""Image of property logo<br/>Resized variants (180x180, 76x76) will also be created on Amazon S3.""",
         variations={"regular": (180, 180), "thumbnail": (76, 76)},
     )
 
@@ -161,7 +161,7 @@ class Project(models.Model):
         blank=True,
         default="",
         upload_to=building_image_media_path,
-        help_text="""Front photo shot of the property.<br/>Resized variants (309x220, 180x180, 76x76) will also be created on Amazon S3.""",
+        help_text="""Image of property building<br/>Resized variants (309x220, 180x180, 76x76) will also be created on Amazon S3.""",
         variations={"landscape": (309, 220, True), "regular": (180, 180, True), "thumbnail": (76, 76, True)},
     )
 
