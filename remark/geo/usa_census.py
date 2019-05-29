@@ -75,6 +75,7 @@ def find_population(el):
 def find_households(el):
     return el.has_attr("title") and el["title"] == "Households"
 
+
 def get(url):
     headers = {"user-agent": USER_AGENT, "referer": STAT_ATLAS_REFER}
     response = requests.get(url, headers=headers)
@@ -84,21 +85,15 @@ def get(url):
     return response
 
 
-def check_overview_status(zipcode):
-    logger.info(f"usa_census::check_overview_status::start {zipcode}")
-
+"""
+Check HTTP status code of Atlas Overview page for a given zipcode
+- 404 status code implies that zipcode is invalid or dead(no population)
+"""
+def check_overview_page_status_code(zipcode):
     headers = {"user-agent": USER_AGENT, "referer": STAT_ATLAS_REFER}
     url = STAT_ATLAS_OVERVIEW_URL.format(zipcode)
     response = requests.get(url, headers=headers)
-    if response.ok:
-        result = '200'
-    elif response.status_code == 404:
-        result = '404'
-    else:
-        result = 'OTHER'
-
-    logger.info(f"usa_census::check_overview_status::end {result}")
-    return result
+    return response.status_code
 
 
 def fetch_population(zipcode):
