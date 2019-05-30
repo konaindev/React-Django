@@ -246,7 +246,7 @@ class Project(models.Model):
         verbose_name="Share Campaign Plan?", default=False
     )
 
-    competitors = models.ManyToManyField("self", blank=True)
+    competitors = models.ManyToManyField("self", blank=True, symmetrical=False)
 
     address = models.ForeignKey(
         "geo.Address", on_delete=models.SET_NULL, null=True, blank=True
