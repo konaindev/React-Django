@@ -118,6 +118,12 @@ class ComputedPeriod(ComputedValueMixin):
             self.target_lease_renewal_notices, self.target_lease_vacation_notices
         )
 
+    @computed_value
+    def target_lease_cd_rate(self):
+        """The target number of lease cancellations units we'd like to achieve."""
+        # XXX copied from lease_cd_rate
+        return div_or_0(self.target_lease_cds, self.target_lease_applications)
+
     # ------------------------------------------------------
     # Physical activity (occupancy)
     # ------------------------------------------------------
