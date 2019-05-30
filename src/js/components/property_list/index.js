@@ -1,7 +1,5 @@
 import PropTypes from "prop-types";
 import React from "react";
-import _sortBy from "lodash/sortBy";
-import _get from "lodash/get";
 
 import PropertyRow from "../property_row";
 
