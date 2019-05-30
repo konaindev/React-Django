@@ -18,8 +18,10 @@ export default function Select(props) {
     className,
     onChange,
     options,
+    defaultValue,
     value,
     placeholder,
+    name,
     ...otherProps
   } = props;
   const classes = cn("select", className);
@@ -27,7 +29,9 @@ export default function Select(props) {
     <ReactSelect
       className={classes}
       classNamePrefix="select"
+      name={name}
       options={options}
+      defaultValue={defaultValue}
       value={value}
       placeholder={placeholder}
       onChange={onChange}
@@ -42,6 +46,8 @@ Select.propTypes = {
     PropTypes.shape({ label: PropTypes.string, value: PropTypes.string })
   ),
   className: PropTypes.string,
+  name: PropTypes.string,
+  defaultValue: PropTypes.string,
   value: PropTypes.string,
   placeholder: PropTypes.string,
   onChange: PropTypes.func

@@ -2,13 +2,14 @@
 @import "css/variables.scss";
 
 .input[type="text"] {
-    padding: 10px 16px;
+    padding: 9px 16px;
     border: 1px solid #404e5d;
     border-radius: 4px;
+    box-sizing: border-box;
     color: #f5faf7;
     font-size: 14px;
     line-height: 20px;
-    background: transparent;
+    background-color: #20272e;
 
     &:focus {
         border: 1px solid #0069ff;
@@ -18,5 +19,6 @@
 
     &::placeholder {
         color: #798796;
+        opacity: 1;
     }
 }
