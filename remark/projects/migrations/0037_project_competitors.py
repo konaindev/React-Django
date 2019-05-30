@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('projects', '0032_project_view_group'),
+        ('projects', '0036_add_shared_flags_to_project'),
     ]
 
     operations = [
