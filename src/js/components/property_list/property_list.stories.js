@@ -13,7 +13,7 @@ storiesOf("PropertyList", module)
       <PropertyList
         {...props}
         selectionMode={true}
-        selected={store.state.selected}
+        selectedProperties={store.state.selected}
         onSelect={selected => {
           store.set({ selected });
         }}

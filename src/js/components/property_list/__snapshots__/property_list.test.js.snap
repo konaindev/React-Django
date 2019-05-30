@@ -87,7 +87,7 @@ exports[`PropertyList renders correctly 1`] = `
       },
     ]
   }
-  selected={Array []}
+  selectedProperties={Array []}
   selectionMode={true}
 >
   <div
@@ -804,7 +804,7 @@ exports[`PropertyList renders correctly 2`] = `
       },
     ]
   }
-  selected={Array []}
+  selectedProperties={Array []}
   selectionMode={true}
 >
   <div
@@ -1521,7 +1521,7 @@ exports[`PropertyList renders correctly 3`] = `
       },
     ]
   }
-  selected={Array []}
+  selectedProperties={Array []}
   selectionMode={true}
 >
   <div

@@ -20,44 +20,38 @@ class PropertyList extends React.PureComponent {
     ).isRequired,
     selectionMode: PropTypes.bool,
     onSelect: PropTypes.func,
-    selected: PropTypes.arrayOf(PropTypes.string)
+    selectedProperties: PropTypes.arrayOf(PropTypes.string)
   };
 
   static defaultProps = {
     selectionMode: false,
     onSelect: () => {},
-    selected: []
+    selectedProperties: []
   };
 
   onSelect = (propertyId, value) => {
-    const selected = this.selectedProperties;
+    let selected;
     if (value) {
-      selected[propertyId] = value;
+      selected = [...this.props.selectedProperties, propertyId];
     } else {
-      delete selected[propertyId];
+      selected = this.props.selectedProperties.filter(id => id !== propertyId);
     }
-    this.props.onSelect(Object.keys(selected));
+    this.props.onSelect(selected);
   };
 
   get propertiesRows() {
-    const selected = this.selectedProperties;
     return this.props.properties.map(property => (
       <div key={property.property_id} className="property-list__row">
         <PropertyRow
           {...property}
           selection_mode={this.props.selectionMode}
-          selected={_get(selected, property.property_id, false)}
+          selected={this.props.selectedProperties.includes(
+            property.property_id
+          )}
           onSelect={this.onSelect}
         />
       </div>
     ));
-  }
-
-  get selectedProperties() {
-    return this.props.selected.reduce((selected, id) => {
-      selected[id] = true;
-      return selected;
-    }, {});
   }
 
   render() {
