@@ -32,7 +32,7 @@ class DashboardView(ReactView):
 
         user_dict = {
             "email": user.email,
-            "user_id": user.id,
+            "user_id": user.public_id,
             "account_id": user.account_id,
             "account_name": user.account.company_name,
             "logout_url": reverse("logout"),
