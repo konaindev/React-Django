@@ -46,6 +46,7 @@ class DashboardView(ReactView):
             projects.append(
                 {
                     "property_name": project.name,
+                    "property_id": project.public_id,
                     "address": str(project.address) if project.address else "",
                     "image_url": project.get_regular_url(),
                     "performance_rating": project.get_performance_rating(),
