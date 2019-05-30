@@ -1,7 +1,7 @@
 import renderer from "react-test-renderer";
 
 import BaselineReportPage from "./index";
-import { props, one_competitor_props, no_competitors_props } from "./props";
+import props, { one_competitor_props, no_competitors_props } from "./props";
 
 describe("BaselineReportPage", () => {
   it("renders correctly", () => {

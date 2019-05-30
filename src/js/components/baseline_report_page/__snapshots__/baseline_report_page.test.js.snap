@@ -53,47 +53,59 @@ exports[`BaselineReportPage No Competitors 1`] = `
           </nav>
         </div>
       </div>
-      <div
-        className="project-report-links"
+      <section
+        className="report-page-subheader"
       >
-        <ul>
-          <li
-            className="selected enabled"
-            data-url="/projects/pro_example/baseline/"
-            onClick={[Function]}
+        <div
+          className="container"
+        >
+          <div
+            className="subheader__inner"
           >
-            Baseline
-          </li>
-          <li
-            className="enabled"
-            data-url="/projects/pro_example/market/"
-            onClick={[Function]}
-          >
-            Market Analysis
-          </li>
-          <li
-            className="disabled"
-            data-url="#"
-            onClick={[Function]}
-          >
-            Modeling
-          </li>
-          <li
-            className="disabled"
-            data-url="#"
-            onClick={[Function]}
-          >
-            Campaign Plan
-          </li>
-          <li
-            className="enabled"
-            data-url="/projects/pro_example/performance/last-week/"
-            onClick={[Function]}
-          >
-            Performance
-          </li>
-        </ul>
-      </div>
+            <div
+              className="project-report-links"
+            >
+              <ul>
+                <li
+                  className="selected enabled"
+                  data-url="/projects/pro_example/baseline/"
+                  onClick={[Function]}
+                >
+                  Baseline
+                </li>
+                <li
+                  className="enabled"
+                  data-url="/projects/pro_example/market/"
+                  onClick={[Function]}
+                >
+                  Market Analysis
+                </li>
+                <li
+                  className="disabled"
+                  data-url="#"
+                  onClick={[Function]}
+                >
+                  Modeling
+                </li>
+                <li
+                  className="disabled"
+                  data-url="#"
+                  onClick={[Function]}
+                >
+                  Campaign Plan
+                </li>
+                <li
+                  className="enabled"
+                  data-url="/projects/pro_example/performance/last-week/"
+                  onClick={[Function]}
+                >
+                  Performance
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
     <div
       className="page-chrome__top-chrome__spacing-fix"
@@ -2775,13 +2787,13 @@ A 0 0 0 0 0, NaN, NaN
             className="button-group"
           >
             <button
-              className="button button--selected button-undefined button-group__item"
+              className="button button--selected button--default button-group__item"
               onClick={[Function]}
             >
               Monthly
             </button>
             <button
-              className="button button-undefined button-group__item"
+              className="button button--default button-group__item"
               onClick={[Function]}
             >
               Weekly
@@ -9877,47 +9889,59 @@ exports[`BaselineReportPage One Competitor 1`] = `
           </nav>
         </div>
       </div>
-      <div
-        className="project-report-links"
+      <section
+        className="report-page-subheader"
       >
-        <ul>
-          <li
-            className="selected enabled"
-            data-url="/projects/pro_example/baseline/"
-            onClick={[Function]}
+        <div
+          className="container"
+        >
+          <div
+            className="subheader__inner"
           >
-            Baseline
-          </li>
-          <li
-            className="enabled"
-            data-url="/projects/pro_example/market/"
-            onClick={[Function]}
-          >
-            Market Analysis
-          </li>
-          <li
-            className="disabled"
-            data-url="#"
-            onClick={[Function]}
-          >
-            Modeling
-          </li>
-          <li
-            className="disabled"
-            data-url="#"
-            onClick={[Function]}
-          >
-            Campaign Plan
-          </li>
-          <li
-            className="enabled"
-            data-url="/projects/pro_example/performance/last-week/"
-            onClick={[Function]}
-          >
-            Performance
-          </li>
-        </ul>
-      </div>
+            <div
+              className="project-report-links"
+            >
+              <ul>
+                <li
+                  className="selected enabled"
+                  data-url="/projects/pro_example/baseline/"
+                  onClick={[Function]}
+                >
+                  Baseline
+                </li>
+                <li
+                  className="enabled"
+                  data-url="/projects/pro_example/market/"
+                  onClick={[Function]}
+                >
+                  Market Analysis
+                </li>
+                <li
+                  className="disabled"
+                  data-url="#"
+                  onClick={[Function]}
+                >
+                  Modeling
+                </li>
+                <li
+                  className="disabled"
+                  data-url="#"
+                  onClick={[Function]}
+                >
+                  Campaign Plan
+                </li>
+                <li
+                  className="enabled"
+                  data-url="/projects/pro_example/performance/last-week/"
+                  onClick={[Function]}
+                >
+                  Performance
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
     <div
       className="page-chrome__top-chrome__spacing-fix"
@@ -12599,13 +12623,13 @@ A 0 0 0 0 0, NaN, NaN
             className="button-group"
           >
             <button
-              className="button button--selected button-undefined button-group__item"
+              className="button button--selected button--default button-group__item"
               onClick={[Function]}
             >
               Monthly
             </button>
             <button
-              className="button button-undefined button-group__item"
+              className="button button--default button-group__item"
               onClick={[Function]}
             >
               Weekly
