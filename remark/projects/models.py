@@ -98,7 +98,7 @@ class Project(models.Model):
     )
 
     account = models.ForeignKey(
-        "users.Account", on_delete=models.CASCADE, related_name="account", blank=True
+        "users.Account", on_delete=models.CASCADE, related_name="account", blank=False
     )
 
     asset_manager = models.ForeignKey(
@@ -129,7 +129,6 @@ class Project(models.Model):
         "projects.Fund",
         on_delete=models.CASCADE,
         blank=False,
-        # limit_choices_to={'account': self.account},
     )
 
     # This is temporary until we have accounts setup for all our clients
