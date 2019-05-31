@@ -67,7 +67,8 @@ $input-width: 340px;
     margin-right: 60px;
 }
 
-.add-property-form__photo {
+.add-property-form__image {
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -97,4 +98,22 @@ $input-width: 340px;
     &:active {
         background-color: darken(#20272e, 2%);
     }
+}
+
+.add-property-form__photo-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.add-property-form__close-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 13px;
+    height: 14px;
+    background-image: url('./../../../images/close-icon.svg');
+    cursor: pointer;
 }

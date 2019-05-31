@@ -32,38 +32,68 @@ export default class AddPropertyForm extends Component {
     return this.props.states.map(s => ({ label: s.name, value: s.id }));
   }
 
-  get preview() {
-    if (!this.state.photo) {
-      return;
+  get previewStyles() {
+    let image = this.state.image;
+    if (!image) {
+      return {};
     }
-    return <img src={this.state.photo} width="100%" height="100%" alt="" />;
+    return {
+      backgroundImage: `url(${image})`,
+      backgroundPosition: "center center",
+      backgroundSize: "contain"
+    };
   }
 
-  state = { photo: null };
+  get imageInput() {
+    if (this.state.image) {
+      return;
+    }
+    return (
+      <label className="add-property-form__file">
+        ADD PHOTO
+        <input
+          type="file"
+          style={{ display: "none" }}
+          onChange={this.getPhoto}
+        />
+      </label>
+    );
+  }
+
+  get closeImage() {
+    if (!this.state.image) {
+      return;
+    }
+    return (
+      <div
+        className="add-property-form__close-image"
+        onClick={this.onCloseImage}
+      />
+    );
+  }
+
+  state = { image: null };
 
   getPhoto = e => {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.onload = e => {
-      this.setState({ photo: e.target.result });
+      this.setState({ image: e.target.result });
     };
     reader.readAsDataURL(file);
+  };
+
+  onCloseImage = () => {
+    this.setState({ image: null });
   };
 
   render() {
     return (
       <form className="add-property-form">
         <div className="add-property-form__column">
-          <div className="add-property-form__photo">
-            <label className="add-property-form__file">
-              ADD PHOTO
-              <input
-                type="file"
-                style={{ display: "none" }}
-                onChange={this.getPhoto}
-              />
-              {this.preview}
-            </label>
+          <div className="add-property-form__image" style={this.previewStyles}>
+            {this.imageInput}
+            {this.closeImage}
           </div>
         </div>
         <div className="add-property-form__column">
