@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import Button from "../button";
+import CloseIcon from "../close-icon";
 import Input from "../input";
 import Select from "../select";
 
@@ -65,7 +66,7 @@ export default class AddPropertyForm extends Component {
       return;
     }
     return (
-      <div
+      <CloseIcon
         className="add-property-form__close-image"
         onClick={this.onCloseImage}
       />
@@ -89,7 +90,11 @@ export default class AddPropertyForm extends Component {
 
   render() {
     return (
-      <form className="add-property-form">
+      <form
+        className="add-property-form"
+        action={this.props.post_url}
+        method="post"
+      >
         <div className="add-property-form__column">
           <div className="add-property-form__image" style={this.previewStyles}>
             {this.imageInput}

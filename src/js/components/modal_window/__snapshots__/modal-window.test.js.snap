@@ -32,13 +32,6 @@ exports[`ModalWindow render modal window with Head, Body and Buttons correctly 1
   >
     Test Text
   </div>
-  <div
-    className="modal-window__buttons-group"
-  >
-    <button>
-      Button
-    </button>
-  </div>
 </Modal>
 `;
 

@@ -65,6 +65,10 @@ $input-width: 340px;
 
 .add-property-form__column {
     margin-right: 60px;
+
+    &:last-child {
+        margin-right: 0;
+    }
 }
 
 .add-property-form__image {
@@ -112,8 +116,4 @@ $input-width: 340px;
     position: absolute;
     top: 0;
     right: 0;
-    width: 13px;
-    height: 14px;
-    background-image: url('./../../../images/close-icon.svg');
-    cursor: pointer;
 }

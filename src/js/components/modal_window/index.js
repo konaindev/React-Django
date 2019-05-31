@@ -68,18 +68,5 @@ ModalWindowBody.defaultProps = {
   className: ""
 };
 
-function ModalWindowButtonsGroup(props) {
-  const className = cn("modal-window__buttons-group", props.className);
-  return <div className={className}>{props.children}</div>;
-}
-ModalWindowButtonsGroup.propTypes = {
-  children: PropTypes.node.isRequired,
-  className: PropTypes.string
-};
-ModalWindowButtonsGroup.defaultProps = {
-  className: ""
-};
-
 ModalWindow.Head = ModalWindowHead;
 ModalWindow.Body = ModalWindowBody;
-ModalWindow.BGroup = ModalWindowButtonsGroup;

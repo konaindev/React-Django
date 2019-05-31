@@ -18,9 +18,6 @@ describe("ModalWindow", () => {
         <ModalWindow open={true}>
           <ModalWindow.Head>Head</ModalWindow.Head>
           <ModalWindow.Body>Test Text</ModalWindow.Body>
-          <ModalWindow.BGroup>
-            <button>Button</button>
-          </ModalWindow.BGroup>
         </ModalWindow>
       )
       .toJSON();

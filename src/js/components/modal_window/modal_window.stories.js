@@ -33,11 +33,6 @@ class ModalWithOpen extends Component {
             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
             culpa qui officia deserunt mollit anim id est laborum.
           </ModalWindow.Body>
-          <ModalWindow.BGroup>
-            <Button color="primary" onClick={this.onClose}>
-              Close
-            </Button>
-          </ModalWindow.BGroup>
         </ModalWindow>
       </div>
     );
