@@ -177,7 +177,7 @@ export default class AddPropertyForm extends Component {
           </Field>
           <Field className="add-property-form__field--button">
             <div className="add-property-form__submit-wrap">
-              <Button className="add-property-form__submit" color="primary">
+              <Button className="add-property-form__submit" color="disabled">
                 SUBMIT
               </Button>
             </div>
