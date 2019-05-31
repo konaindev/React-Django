@@ -5,7 +5,7 @@ import { props } from "./props";
 
 describe("PropertyList", () => {
   it("renders correctly", () => {
-    const wrapper = mount(<PropertyList {...props} selectionMode={true} />);
+    const wrapper = mount(<PropertyList {...props} />);
     expect(wrapper).toMatchSnapshot();
 
     wrapper

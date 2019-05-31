@@ -16,15 +16,17 @@ class PropertyList extends React.PureComponent {
         performance_rating: PropTypes.number.isRequired
       })
     ).isRequired,
-    selectionMode: PropTypes.bool,
     onSelect: PropTypes.func,
     selectedProperties: PropTypes.arrayOf(PropTypes.string)
   };
 
   static defaultProps = {
-    selectionMode: false,
     onSelect: () => {},
     selectedProperties: []
+  };
+
+  state = {
+    selectionMode: false
   };
 
   onSelect = (propertyId, value) => {
@@ -35,18 +37,25 @@ class PropertyList extends React.PureComponent {
       selected = this.props.selectedProperties.filter(id => id !== propertyId);
     }
     this.props.onSelect(selected);
+    this.setState({
+      selectionMode: !!this.props.selectedProperties.length
+    });
   };
 
   get propertiesRows() {
+    const selectionMode =
+      this.state.selectionMode || !!this.props.selectedProperties.length;
     return this.props.properties.map(property => (
       <div key={property.property_id} className="property-list__row">
         <PropertyRow
           {...property}
-          selection_mode={this.props.selectionMode}
+          selection_mode={selectionMode}
           selected={this.props.selectedProperties.includes(
             property.property_id
           )}
           onSelect={this.onSelect}
+          onMouseImgEnter={() => this.setState({ selectionMode: true })}
+          onMouseImgLeave={() => this.setState({ selectionMode: false })}
         />
       </div>
     ));

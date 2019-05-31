@@ -88,7 +88,6 @@ exports[`PropertyList renders correctly 1`] = `
     ]
   }
   selectedProperties={Array []}
-  selectionMode={true}
 >
   <div
     className="property-list"
@@ -100,25 +99,29 @@ exports[`PropertyList renders correctly 1`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={2}
         property_id="pro_1prk0l2sdc0jv8dr"
         property_name="Meridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -127,6 +130,9 @@ exports[`PropertyList renders correctly 1`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -141,6 +147,16 @@ exports[`PropertyList renders correctly 1`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={2}
@@ -162,25 +178,29 @@ exports[`PropertyList renders correctly 1`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={1}
         property_id="pro_ojso5xourpuai2vs"
         property_name="Beridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -189,6 +209,9 @@ exports[`PropertyList renders correctly 1`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -203,6 +226,16 @@ exports[`PropertyList renders correctly 1`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={1}
@@ -224,25 +257,29 @@ exports[`PropertyList renders correctly 1`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={2}
         property_id="pro_fy9oyksyn2cbvop2"
         property_name="Teridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -251,6 +288,9 @@ exports[`PropertyList renders correctly 1`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -265,6 +305,16 @@ exports[`PropertyList renders correctly 1`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={2}
@@ -286,25 +336,29 @@ exports[`PropertyList renders correctly 1`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={0}
         property_id="pro_5p1zpema2mezfyu0"
         property_name="Deridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -313,6 +367,9 @@ exports[`PropertyList renders correctly 1`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -327,6 +384,16 @@ exports[`PropertyList renders correctly 1`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={0}
@@ -348,25 +415,29 @@ exports[`PropertyList renders correctly 1`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={2}
         property_id="pro_1aww0vi1utykrzt3"
         property_name="Peridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -375,6 +446,9 @@ exports[`PropertyList renders correctly 1`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -389,6 +463,16 @@ exports[`PropertyList renders correctly 1`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={2}
@@ -410,25 +494,29 @@ exports[`PropertyList renders correctly 1`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={2}
         property_id="pro_gmcmkdnapem2pwvc"
         property_name="Leridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -437,6 +525,9 @@ exports[`PropertyList renders correctly 1`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -451,6 +542,16 @@ exports[`PropertyList renders correctly 1`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={2}
@@ -472,25 +573,29 @@ exports[`PropertyList renders correctly 1`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={1}
         property_id="pro_r3izthx0760jgqh0"
         property_name="Qeridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -499,6 +604,9 @@ exports[`PropertyList renders correctly 1`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -513,6 +621,16 @@ exports[`PropertyList renders correctly 1`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={1}
@@ -534,25 +652,29 @@ exports[`PropertyList renders correctly 1`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={1}
         property_id="pro_i6uvh7d5lk0ux3sf"
         property_name="Keridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -561,6 +683,9 @@ exports[`PropertyList renders correctly 1`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -575,6 +700,16 @@ exports[`PropertyList renders correctly 1`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={1}
@@ -596,25 +731,29 @@ exports[`PropertyList renders correctly 1`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={2}
         property_id="pro_xr068tps5ero17ur"
         property_name="Yeridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -623,6 +762,9 @@ exports[`PropertyList renders correctly 1`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -637,6 +779,16 @@ exports[`PropertyList renders correctly 1`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={2}
@@ -658,25 +810,29 @@ exports[`PropertyList renders correctly 1`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={2}
         property_id="pro_uif27s7rpx8ewwx5"
         property_name="Weridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -685,6 +841,9 @@ exports[`PropertyList renders correctly 1`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -699,6 +858,16 @@ exports[`PropertyList renders correctly 1`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={2}
@@ -805,7 +974,6 @@ exports[`PropertyList renders correctly 2`] = `
     ]
   }
   selectedProperties={Array []}
-  selectionMode={true}
 >
   <div
     className="property-list"
@@ -817,25 +985,29 @@ exports[`PropertyList renders correctly 2`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={2}
         property_id="pro_1prk0l2sdc0jv8dr"
         property_name="Meridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -844,6 +1016,9 @@ exports[`PropertyList renders correctly 2`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -858,6 +1033,16 @@ exports[`PropertyList renders correctly 2`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={2}
@@ -879,25 +1064,29 @@ exports[`PropertyList renders correctly 2`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={1}
         property_id="pro_ojso5xourpuai2vs"
         property_name="Beridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -906,6 +1095,9 @@ exports[`PropertyList renders correctly 2`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -920,6 +1112,16 @@ exports[`PropertyList renders correctly 2`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={1}
@@ -941,25 +1143,29 @@ exports[`PropertyList renders correctly 2`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={2}
         property_id="pro_fy9oyksyn2cbvop2"
         property_name="Teridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -968,6 +1174,9 @@ exports[`PropertyList renders correctly 2`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -982,6 +1191,16 @@ exports[`PropertyList renders correctly 2`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={2}
@@ -1003,25 +1222,29 @@ exports[`PropertyList renders correctly 2`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={0}
         property_id="pro_5p1zpema2mezfyu0"
         property_name="Deridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -1030,6 +1253,9 @@ exports[`PropertyList renders correctly 2`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -1044,6 +1270,16 @@ exports[`PropertyList renders correctly 2`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={0}
@@ -1065,25 +1301,29 @@ exports[`PropertyList renders correctly 2`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={2}
         property_id="pro_1aww0vi1utykrzt3"
         property_name="Peridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -1092,6 +1332,9 @@ exports[`PropertyList renders correctly 2`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -1106,6 +1349,16 @@ exports[`PropertyList renders correctly 2`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={2}
@@ -1127,25 +1380,29 @@ exports[`PropertyList renders correctly 2`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={2}
         property_id="pro_gmcmkdnapem2pwvc"
         property_name="Leridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -1154,6 +1411,9 @@ exports[`PropertyList renders correctly 2`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -1168,6 +1428,16 @@ exports[`PropertyList renders correctly 2`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={2}
@@ -1189,25 +1459,29 @@ exports[`PropertyList renders correctly 2`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={1}
         property_id="pro_r3izthx0760jgqh0"
         property_name="Qeridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -1216,6 +1490,9 @@ exports[`PropertyList renders correctly 2`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -1230,6 +1507,16 @@ exports[`PropertyList renders correctly 2`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={1}
@@ -1251,25 +1538,29 @@ exports[`PropertyList renders correctly 2`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={1}
         property_id="pro_i6uvh7d5lk0ux3sf"
         property_name="Keridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -1278,6 +1569,9 @@ exports[`PropertyList renders correctly 2`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -1292,6 +1586,16 @@ exports[`PropertyList renders correctly 2`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={1}
@@ -1313,25 +1617,29 @@ exports[`PropertyList renders correctly 2`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={2}
         property_id="pro_xr068tps5ero17ur"
         property_name="Yeridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -1340,6 +1648,9 @@ exports[`PropertyList renders correctly 2`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -1354,6 +1665,16 @@ exports[`PropertyList renders correctly 2`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={2}
@@ -1375,25 +1696,29 @@ exports[`PropertyList renders correctly 2`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={2}
         property_id="pro_uif27s7rpx8ewwx5"
         property_name="Weridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -1402,6 +1727,9 @@ exports[`PropertyList renders correctly 2`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -1416,6 +1744,16 @@ exports[`PropertyList renders correctly 2`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={2}
@@ -1522,7 +1860,6 @@ exports[`PropertyList renders correctly 3`] = `
     ]
   }
   selectedProperties={Array []}
-  selectionMode={true}
 >
   <div
     className="property-list"
@@ -1534,25 +1871,29 @@ exports[`PropertyList renders correctly 3`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={2}
         property_id="pro_1prk0l2sdc0jv8dr"
         property_name="Meridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -1561,6 +1902,9 @@ exports[`PropertyList renders correctly 3`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -1575,6 +1919,16 @@ exports[`PropertyList renders correctly 3`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={2}
@@ -1596,25 +1950,29 @@ exports[`PropertyList renders correctly 3`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={1}
         property_id="pro_ojso5xourpuai2vs"
         property_name="Beridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -1623,6 +1981,9 @@ exports[`PropertyList renders correctly 3`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -1637,6 +1998,16 @@ exports[`PropertyList renders correctly 3`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={1}
@@ -1658,25 +2029,29 @@ exports[`PropertyList renders correctly 3`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={2}
         property_id="pro_fy9oyksyn2cbvop2"
         property_name="Teridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -1685,6 +2060,9 @@ exports[`PropertyList renders correctly 3`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -1699,6 +2077,16 @@ exports[`PropertyList renders correctly 3`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={2}
@@ -1720,25 +2108,29 @@ exports[`PropertyList renders correctly 3`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={0}
         property_id="pro_5p1zpema2mezfyu0"
         property_name="Deridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -1747,6 +2139,9 @@ exports[`PropertyList renders correctly 3`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -1761,6 +2156,16 @@ exports[`PropertyList renders correctly 3`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={0}
@@ -1782,25 +2187,29 @@ exports[`PropertyList renders correctly 3`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={2}
         property_id="pro_1aww0vi1utykrzt3"
         property_name="Peridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -1809,6 +2218,9 @@ exports[`PropertyList renders correctly 3`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -1823,6 +2235,16 @@ exports[`PropertyList renders correctly 3`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={2}
@@ -1844,25 +2266,29 @@ exports[`PropertyList renders correctly 3`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={2}
         property_id="pro_gmcmkdnapem2pwvc"
         property_name="Leridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -1871,6 +2297,9 @@ exports[`PropertyList renders correctly 3`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -1885,6 +2314,16 @@ exports[`PropertyList renders correctly 3`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={2}
@@ -1906,25 +2345,29 @@ exports[`PropertyList renders correctly 3`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={1}
         property_id="pro_r3izthx0760jgqh0"
         property_name="Qeridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -1933,6 +2376,9 @@ exports[`PropertyList renders correctly 3`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -1947,6 +2393,16 @@ exports[`PropertyList renders correctly 3`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={1}
@@ -1968,25 +2424,29 @@ exports[`PropertyList renders correctly 3`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={1}
         property_id="pro_i6uvh7d5lk0ux3sf"
         property_name="Keridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -1995,6 +2455,9 @@ exports[`PropertyList renders correctly 3`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -2009,6 +2472,16 @@ exports[`PropertyList renders correctly 3`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={1}
@@ -2030,25 +2503,29 @@ exports[`PropertyList renders correctly 3`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={2}
         property_id="pro_xr068tps5ero17ur"
         property_name="Yeridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -2057,6 +2534,9 @@ exports[`PropertyList renders correctly 3`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -2071,6 +2551,16 @@ exports[`PropertyList renders correctly 3`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={2}
@@ -2092,25 +2582,29 @@ exports[`PropertyList renders correctly 3`] = `
       <PropertyRow
         address="123 4th Avenue, Seattle WA 98106"
         image_url="https://i.imgur.com/UEH4gfU.jpg"
+        onMouseImgEnter={[Function]}
+        onMouseImgLeave={[Function]}
         onSelect={[Function]}
         performance_rating={2}
         property_id="pro_uif27s7rpx8ewwx5"
         property_name="Weridian SLC"
         selected={false}
-        selection_mode={true}
+        selection_mode={false}
         url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
       >
         <Panel
-          className="property-row property-row--selection-mode"
+          className="property-row"
           component="div"
           size="default"
         >
           <div
-            className="panel panel--default property-row property-row--selection-mode"
+            className="panel panel--default property-row"
           >
             <div
               className="property-row__selector"
               onClick={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
             >
               <div
                 className="property-row__image"
@@ -2119,6 +2613,9 @@ exports[`PropertyList renders correctly 3`] = `
                     "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
                   }
                 }
+              />
+              <div
+                className="property-row__selector-hover"
               />
               <div
                 className="property-row__tick"
@@ -2133,6 +2630,16 @@ exports[`PropertyList renders correctly 3`] = `
               className="property-row__address"
             >
               123 4th Avenue, Seattle WA 98106
+            </div>
+            <div
+              className="property-row__link-container"
+            >
+              <a
+                className="property-row__link"
+                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              >
+                View Property
+              </a>
             </div>
             <PropertyStatus
               performance_rating={2}

@@ -7,6 +7,8 @@ exports[`PropertyRow renders correctly 1`] = `
   <div
     className="property-row__selector"
     onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="property-row__image"
@@ -15,6 +17,9 @@ exports[`PropertyRow renders correctly 1`] = `
           "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
         }
       }
+    />
+    <div
+      className="property-row__selector-hover"
     />
     <div
       className="property-row__tick"
@@ -29,6 +34,16 @@ exports[`PropertyRow renders correctly 1`] = `
     className="property-row__address"
   >
     123 4th Avenue, Seattle WA 98106
+  </div>
+  <div
+    className="property-row__link-container"
+  >
+    <a
+      className="property-row__link"
+      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+    >
+      View Property
+    </a>
   </div>
   <div
     className="property-status property-status--on-track"
@@ -45,6 +60,8 @@ exports[`PropertyRow renders selected 1`] = `
   <div
     className="property-row__selector"
     onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="property-row__image"
@@ -53,6 +70,9 @@ exports[`PropertyRow renders selected 1`] = `
           "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
         }
       }
+    />
+    <div
+      className="property-row__selector-hover"
     />
     <div
       className="property-row__tick"
@@ -67,6 +87,16 @@ exports[`PropertyRow renders selected 1`] = `
     className="property-row__address"
   >
     123 4th Avenue, Seattle WA 98106
+  </div>
+  <div
+    className="property-row__link-container"
+  >
+    <a
+      className="property-row__link"
+      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+    >
+      View Property
+    </a>
   </div>
   <div
     className="property-status property-status--on-track"
@@ -83,6 +113,8 @@ exports[`PropertyRow renders selection mode 1`] = `
   <div
     className="property-row__selector"
     onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
   >
     <div
       className="property-row__image"
@@ -91,6 +123,9 @@ exports[`PropertyRow renders selection mode 1`] = `
           "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
         }
       }
+    />
+    <div
+      className="property-row__selector-hover"
     />
     <div
       className="property-row__tick"
@@ -105,6 +140,16 @@ exports[`PropertyRow renders selection mode 1`] = `
     className="property-row__address"
   >
     123 4th Avenue, Seattle WA 98106
+  </div>
+  <div
+    className="property-row__link-container"
+  >
+    <a
+      className="property-row__link"
+      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+    >
+      View Property
+    </a>
   </div>
   <div
     className="property-status property-status--on-track"

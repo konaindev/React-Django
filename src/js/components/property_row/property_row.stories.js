@@ -20,7 +20,7 @@ storiesOf("PropertyRow", module)
           {...props}
           selection_mode={true}
           selected={store.state.selected[0]}
-          onSelect={value => {
+          onSelect={(propertyId, value) => {
             store.set({ selected: [value, store.state.selected[1]] });
           }}
         />
@@ -29,7 +29,7 @@ storiesOf("PropertyRow", module)
           selection_mode={true}
           selected={store.state.selected[1]}
           style={{ marginTop: "0.5rem" }}
-          onSelect={value => {
+          onSelect={(propertyId, value) => {
             store.set({ selected: [store.state.selected[0], value] });
           }}
         />
