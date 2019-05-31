@@ -1,12 +1,27 @@
 from django.db import models
 
 from remark.lib.tokens import public_id
+from remark.projects.models import Project
 from remark.users.constants import ACCOUNT_TYPE
 
 
 def bus_public_id():
     """Public identifier for a business."""
     return public_id("bus")
+
+
+class BusinessesQuerySet(models.QuerySet):
+    def property_managers(self, account_id, **kwargs):
+        project_subquery = models.Subquery(
+            Project.objects.filter(account_id=account_id).values("property_manager_id")
+        )
+        return self.filter(public_id__in=project_subquery, business_type=3, **kwargs)
+
+    def asset_managers(self, account_id, **kwargs):
+        project_subquery = models.Subquery(
+            Project.objects.filter(account_id=account_id).values("asset_manager_id")
+        )
+        return self.filter(public_id__in=project_subquery, business_type=2, **kwargs)
 
 
 class Business(models.Model):
@@ -27,6 +42,8 @@ class Business(models.Model):
     address = models.ForeignKey(
         "geo.Address", on_delete=models.CASCADE, blank=False, help_text="Address"
     )
+
+    objects = BusinessesQuerySet.as_manager()
 
     def __str__(self):
         return self.name

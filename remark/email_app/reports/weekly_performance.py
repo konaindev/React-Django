@@ -3,8 +3,7 @@ import time
 
 from django.template.loader import get_template
 
-from remark.users.models import User
-from remark.projects.models import Project, Spreadsheet
+from remark.lib.stats import health_check
 from remark.projects.reports.performance import PerformanceReport, InvalidReportRequest
 from remark.email_app.models import PerformanceEmail
 
@@ -12,9 +11,8 @@ from .constants import (
     SELECTORS,
     FORMATTERS,
     SHOW_CAMPAIGN,
-    KPIS,
     KPI_NAMES,
-    percent_formatter
+    percent_formatter,
 )
 from remark.lib.sendgrid_email import (
     create_contact_if_not_exists,
@@ -36,17 +34,6 @@ Need to convert this to a system that relies on dynamically calculated
 Standard Deviation at some point. There are definitely KPIs that have
 more spread than others.
 """
-
-
-def health_check(stat, stat_target):
-    # 0.50 = 750 / 1500
-    percent = float(stat) / float(stat_target)
-    if percent > 0.95:
-        return 2
-    elif percent > 0.75:
-        return 1
-    else:
-        return 0
 
 
 def top_kpi(kpi_key, campaign, this_week, prev_week, text):
@@ -160,6 +147,7 @@ CONTACT_EMAIL = "info@remarkably.io"
 SENDER_ID = 482157
 
 from celery import shared_task
+
 
 @shared_task
 def send_performance_email(performance_email_id):

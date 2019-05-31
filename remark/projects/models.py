@@ -5,11 +5,13 @@ import os.path
 from datetime import datetime
 from django.db import models
 from django.conf import settings
+from django.urls import reverse
 from django.utils.crypto import get_random_string
 
 from jsonfield import JSONField
 from stdimage.models import StdImageField
 
+from remark.lib.stats import health_check
 from remark.lib.tokens import public_id
 from remark.lib.metrics import (
     PointMetric,
@@ -18,6 +20,7 @@ from remark.lib.metrics import (
     ModelPeriod,
 )
 from .spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
+from .reports.performance import PerformanceReport
 
 
 def pro_public_id():
@@ -95,7 +98,7 @@ class Project(models.Model):
     )
 
     account = models.ForeignKey(
-        "users.Account", on_delete=models.CASCADE, related_name="account", blank=True
+        "users.Account", on_delete=models.CASCADE, related_name="account", blank=False
     )
 
     asset_manager = models.ForeignKey(
@@ -126,7 +129,6 @@ class Project(models.Model):
         "projects.Fund",
         on_delete=models.CASCADE,
         blank=False,
-        # limit_choices_to={'account': self.account},
     )
 
     # This is temporary until we have accounts setup for all our clients
@@ -403,6 +405,15 @@ class Project(models.Model):
         else:
             return None
 
+    def get_regular_url(self):
+        if self.building_image:
+            return self.building_image.regular.url
+        else:
+            return None
+
+    def get_baseline_url(self):
+        return reverse("baseline_report", kwargs={"project_id": self.public_id})
+
     def to_jsonable(self):
         """Return a representation that can be converted to a JSON string."""
         return {
@@ -428,6 +439,24 @@ class Project(models.Model):
             if self.selected_model_name
             else None
         )
+
+    def get_performance_rating(self):
+        performance_report = PerformanceReport.for_campaign_to_date(self)
+        if not performance_report:
+            return 0
+        campaign_to_date = performance_report.to_jsonable()
+        lease_rate = (
+            campaign_to_date.get("property", {}).get("leasing", {}).get("rate", 0)
+        )
+        target_lease_rate = (
+            campaign_to_date.get("targets", {})
+            .get("property", {})
+            .get("leasing", {})
+            .get("rate", 0)
+        )
+        if not target_lease_rate:
+            return 0
+        return health_check(lease_rate, target_lease_rate)
 
     def update_for_selected_model(self):
         """
