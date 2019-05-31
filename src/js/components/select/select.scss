@@ -2,21 +2,21 @@
 @import "css/variables.scss";
 
 .select {
-    border: 1px solid #404e5d;
-    border-radius: 4px;
+    border: 1px solid $input-border-color;
+    border-radius: $select-border-radius;
     outline: none;
 
     &:focus {
-        border: 1px solid #0069FF;
+        border: 1px solid $input-focus-border-color;
     }
 
     .select__control {
-        background-color: #20272e;
+        background-color: $select-background-color;
         border: none;
 
         &--is-focused {
             .select__single-value {
-                color: #53f7dd;
+                color: $input-text-active-color;
             }
         }
         &--menu-is-open {
@@ -32,10 +32,10 @@
     }
 
     .select__placeholder {
-        color: #798796;
+        color: $input-placeholder-color;
         font-family: $font-sans;
-        font-size: 14px;
-        line-height: 20px;
+        font-size: $text-sm;
+        line-height: $text-xl;
     }
 
     .select__indicator-separator {
@@ -55,35 +55,33 @@
 
     .select__single-value {
         margin: 0;
-        color: #f5faf7;
+        color: $input-text-color;
         font-family: $font-sans;
-        font-size: 14px;
-        line-height: 20px;
+        font-size: $text-sm;
+        line-height: $text-xl;
     }
 
     .select__menu {
         padding: 4px 0;
         margin-top: 8px;
-        border-radius: 4px;
-        background-color: #20272e;
+        border-radius: $select-border-radius;
+        background-color: $select-background-color;
         box-shadow: 0 2px 20px 0 rgba(0,0,0,0.35), 0 2px 6px 0 rgba(0,0,0,0.1);
     }
 
     .select__option {
         padding: 14px 20px;
-        color: #798796;
+        color: $select-option-background-color2;
         font-family: $font-sans;
-        font-size: 14px;
-        line-height: 20px;
+        font-size: $text-sm;
+        line-height: $text-xl;
 
-        &--is-focused {
-            background-color: #2b343d;
-        }
+        &--is-focused,
         &--is-selected {
-            background-color: #2b343d;
+            background-color: $select-option-focused-color;
         }
         &:active {
-            background-color: $gray-5;
+            background-color: $select-option-active-color;
         }
     }
 }

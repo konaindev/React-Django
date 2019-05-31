@@ -25,8 +25,8 @@ $input-width: 340px;
 }
 
 .add-property-form__submit {
-    padding: $s3 42px !important;
-    line-height: 20px;
+    padding: 12px 42px !important;
+    line-height: $text-xl;
     letter-spacing: 1px;
     font-weight: 500;
     text-transform: uppercase;
@@ -47,9 +47,9 @@ $input-width: 340px;
 .add-property-form__label {
     width: 160px;
     color: #f5faf7;
-    font-size: 12px;
+    font-size: $text-xs;
     letter-spacing: 1px;
-    line-height: 20px;
+    line-height: $text-xl;
     text-transform: uppercase;
 }
 
@@ -87,20 +87,20 @@ $input-width: 340px;
 .add-property-form__file {
     padding: 6px 14px;
     color: #f5faf7;
-    font-size: 12px;
+    font-size: $text-xs;
     letter-spacing: 1px;
-    line-height: 20px;
+    line-height: $text-xl;
     border: 1px solid #f5faf7;
     border-radius: 2px;
-    background-color: #20272e;
+    background-color: $button-default-bg-color;
     cursor: pointer;
 
     &:hover, &:focus {
-        background-color: lighten(#20272e, 3%);
+        background-color: lighten($button-default-bg-color, 3%);
     }
 
     &:active {
-        background-color: darken(#20272e, 2%);
+        background-color: darken($button-default-bg-color, 2%);
     }
 }
 

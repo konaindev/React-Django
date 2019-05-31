@@ -3,22 +3,22 @@
 
 .input[type="text"] {
     padding: 9px 16px;
-    border: 1px solid #404e5d;
+    border: $input-border;
     border-radius: 4px;
     box-sizing: border-box;
-    color: #f5faf7;
-    font-size: 14px;
-    line-height: 20px;
-    background-color: #20272e;
+    color: $input-text-color;
+    font-size: $text-sm;
+    line-height: $text-xl;
+    background-color: $input-background-color;
 
     &:focus {
-        border: 1px solid #0069ff;
-        color: #53f7dd;
+        border: 1px solid $input-focus-border-color;
+        color: $input-text-active-color;
         outline: none;
     }
 
     &::placeholder {
-        color: #798796;
+        color: $input-placeholder-color;
         opacity: 1;
     }
 }

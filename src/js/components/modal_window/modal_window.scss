@@ -6,13 +6,13 @@
     min-width: 320px;
     min-height: 220px;
     padding: 44px 60px 48px 60px;
-    background-color: #20272e;
-    border-radius: 6px;
+    background-color: $modal-window-background-color;
+    border-radius: $modal-window-border-radius;
     box-shadow: none;
 }
 
 .modal-overlay {
-    background-color: rgba(16,20,23,0.85);
+    background-color: $modal-window-overlay-color;
 }
 
 .modal-window__close {
@@ -31,7 +31,7 @@
     height: 35px;
     margin-bottom: 41px;
     line-height: 35px;
-    color: #f5faf7;
+    color: $title-large-color;
     font-size: 28px;
 }
 
