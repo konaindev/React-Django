@@ -97,7 +97,7 @@ def check_overview_page_status_code(zipcode):
 
 
 def fetch_population(zipcode):
-    logger.info(f"usa_census::fetch_population::start", zipcode)
+    logger.info(f"usa_census::fetch_population::start {zipcode}")
 
     url = STAT_ATLAS_AGE_URL.format(zipcode)
     response = get(url)
@@ -110,7 +110,7 @@ def fetch_population(zipcode):
     households = int(td_value.replace(",", ""))
     result = (population, households)
 
-    logger.info(f"usa_census::fetch_population::end", result)
+    logger.info(f"usa_census::fetch_population::end {result}")
     return result
 
 
@@ -152,7 +152,7 @@ def fetch_age_segments_by_zip(zipcode):
             txt = gs[x].title.text
             value = float(txt.replace("%", ""))
             result.append(value / 100.0)
-    logger.info(f"usa_census::fetch_age_segments_by_zip::end", result)
+    logger.info(f"usa_census::fetch_age_segments_by_zip::end {result}")
     return result
 
 
@@ -167,7 +167,7 @@ def fetch_household_type(zipcode):
             if txt.find("%") > -1:
                 value = float(txt.replace("%", "").replace(",", ""))
                 result.append(value / 100.0)
-    logger.info(f"usa_census::fetch_household_type::end", result)
+    logger.info(f"usa_census::fetch_household_type::end {result}")
     return result
 
 
