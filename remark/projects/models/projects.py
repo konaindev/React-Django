@@ -21,8 +21,8 @@ from remark.lib.metrics import (
     SumIntervalMetric,
     ModelPeriod,
 )
-from .spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
-from .reports.performance import PerformanceReport
+from remark.projects.spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
+from remark.projects.reports.performance import PerformanceReport
 
 
 def pro_public_id():
