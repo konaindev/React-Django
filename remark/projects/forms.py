@@ -113,6 +113,13 @@ class ProjectForm(forms.ModelForm):
         model_names = self.NO_CHOICES + model_names
         self.fields["selected_model_name"].choices = model_names
 
+    def clean_competitors(self):
+        max_competitors = 2
+        competitors = self.cleaned_data.get('competitors')
+        if competitors and competitors.count() > max_competitors:
+            raise forms.ValidationError('Maximum %s competitors.' % max_competitors)
+        return competitors
+
     class Meta:
         model = Project
         exclude = [

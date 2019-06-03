@@ -246,6 +246,8 @@ class Project(models.Model):
         verbose_name="Share Campaign Plan?", default=False
     )
 
+    competitors = models.ManyToManyField("self", blank=True, symmetrical=False)
+
     address = models.ForeignKey(
         "geo.Address", on_delete=models.SET_NULL, null=True, blank=True
     )
@@ -764,6 +766,10 @@ class Period(ModelPeriod, models.Model):
         return self.project.lowest_monthly_rent
 
     @property
+    def highest_monthly_rent(self):
+        return self.project.highest_monthly_rent
+
+    @property
     def total_units(self):
         return self.project.total_units
 
@@ -774,6 +780,7 @@ class Period(ModelPeriod, models.Model):
         self._metrics["total_units"] = PointMetric()
         self._metrics["average_monthly_rent"] = PointMetric()
         self._metrics["lowest_monthly_rent"] = PointMetric()
+        self._metrics["highest_monthly_rent"] = PointMetric()
 
     class Meta:
         # Always sort Periods with the earliest period first.

@@ -1,24 +1,23 @@
+import BaselineComparisonMatrix from "./index";
 import renderer from "react-test-renderer";
+import { props, one_competitor_props, no_competitor_props } from "./props";
 
-import BaselineReportPage from "./index";
-import props, { one_competitor_props, no_competitors_props } from "./props";
-
-describe("BaselineReportPage", () => {
+describe("BaselineComparisonMatrix", () => {
   it("renders correctly", () => {
     const tree = renderer
-      .create(<BaselineReportPage {...props} />)
+      .create(<BaselineComparisonMatrix {...props} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
   it("One Competitor", () => {
     const tree = renderer
-      .create(<BaselineReportPage {...one_competitor_props} />)
+      .create(<BaselineComparisonMatrix {...one_competitor_props} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
   it("No Competitors", () => {
     const tree = renderer
-      .create(<BaselineReportPage {...no_competitors_props} />)
+      .create(<BaselineComparisonMatrix {...no_competitor_props} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
