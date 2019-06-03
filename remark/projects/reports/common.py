@@ -20,6 +20,7 @@ SCHEMA_MAP = {
     "property": {
         "average_monthly_rent": "average_monthly_rent",
         "lowest_monthly_rent": "lowest_monthly_rent",
+        "highest_monthly_rent": "highest_monthly_rent",
         "total_units": "total_units",
         "cost_per_exe_vs_rent": "cost_per_exe_vs_lowest_monthly_rent",
         "leasing": {
