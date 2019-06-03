@@ -102,30 +102,6 @@ export default class AddPropertyForm extends Component {
           </div>
         </div>
         <div className="add-property-form__column">
-          <Field label="Your Name:">
-            <Input
-              className="add-property-form__input"
-              name="name"
-              placeholder="Jon Smith"
-              type="text"
-            />
-          </Field>
-          <Field label="Your Email:">
-            <Input
-              className="add-property-form__input"
-              name="email"
-              placeholder="jon.doe@gmail.com"
-              type="text"
-            />
-          </Field>
-          <Field label="Phone Number:">
-            <Input
-              className="add-property-form__input"
-              name="phone"
-              placeholder="xxx-xxx-xxxx"
-              type="text"
-            />
-          </Field>
           <Field label="Property Name:">
             <Input
               className="add-property-form__input"

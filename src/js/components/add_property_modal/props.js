@@ -11,8 +11,8 @@ export const props = {
     packages: [
       { id: "accelerate", name: "Accelerate" },
       { id: "optimize", name: "Optimize" },
-      { id: "other", name: "Not Sure" },
-      { id: "ground", name: "Ground Up" }
+      { id: "ground", name: "Ground Up" },
+      { id: "other", name: "Not Sure" }
     ]
   }
 };
