@@ -38,51 +38,6 @@ exports[`AddPropertyForm add property form 1`] = `
       <div
         className="add-property-form__label"
       >
-        Your Name:
-      </div>
-      <input
-        className="input add-property-form__input"
-        name="name"
-        placeholder="Jon Smith"
-        type="text"
-      />
-    </div>
-    <div
-      className="add-property-form__field"
-    >
-      <div
-        className="add-property-form__label"
-      >
-        Your Email:
-      </div>
-      <input
-        className="input add-property-form__input"
-        name="email"
-        placeholder="jon.doe@gmail.com"
-        type="text"
-      />
-    </div>
-    <div
-      className="add-property-form__field"
-    >
-      <div
-        className="add-property-form__label"
-      >
-        Phone Number:
-      </div>
-      <input
-        className="input add-property-form__input"
-        name="phone"
-        placeholder="xxx-xxx-xxxx"
-        type="text"
-      />
-    </div>
-    <div
-      className="add-property-form__field"
-    >
-      <div
-        className="add-property-form__label"
-      >
         Property Name:
       </div>
       <input
