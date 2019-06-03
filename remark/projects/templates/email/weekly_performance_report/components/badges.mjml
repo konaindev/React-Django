@@ -1,0 +1,10 @@
+<mj-class name="badge" background-color="transparent" border-radius="0" letter-spacing=".5px" padding="0 0 0 0" text-transform="uppercase"/>
+<mj-class name="badge-column" padding="10px 5px 10px 0" />
+
+<mj-class name="badge-small" font-size="11px" line-height="22px" />
+<mj-class name="badge-medium" font-size="16px" line-height="22px"/>
+<mj-class name="badge-large" font-size="20px" line-height="22px" />
+
+<mj-class name="badge-green" border="1px solid #89FF45" color="#89FF45"/>
+<mj-class name="badge-red" border="1px solid #FF5300" color="#FF5300"/>
+<mj-class name="badge-yellow" border="1px solid #F3F65C" color="#F3F65C"/>

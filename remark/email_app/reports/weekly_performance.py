@@ -20,6 +20,8 @@ from remark.lib.sendgrid_email import (
     create_campaign_if_not_exists,
 )
 
+from celery import shared_task
+
 
 def none_wrapper(formatter, selector, obj):
     try:
@@ -145,9 +147,6 @@ def create_html(
 
 CONTACT_EMAIL = "info@remarkably.io"
 SENDER_ID = 482157
-
-from celery import shared_task
-
 
 @shared_task
 def send_performance_email(performance_email_id):

@@ -1,0 +1,24 @@
+
+<mj-font name="Formular" href="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/formular-regular.woff" />
+<mj-all font-family="Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;"/>
+
+<mj-class name="divider" border-width="1px" border-color="#2B343D" padding="0"/>
+
+<mj-class name="section" padding="100px 0"/>
+<mj-class name="container" padding="0 20px" />
+
+<mj-class name="pt-15" padding-top="15px" />
+<mj-class name="pt-30" padding-top="30px" />
+<mj-class name="pt-50" padding-top="50px" />
+<mj-class name="pt-100" padding-top="100px" />
+<mj-class name="pt-150" padding-top="150px" />
+
+<mj-class name="p-0" padding="0" />
+
+<mj-class name="pb-0" padding-bottom="0" />
+<mj-class name="pb-15" padding-bottom="15px" />
+<mj-class name="pb-30" padding-bottom="30px" />
+<mj-class name="pb-50" padding-bottom="50px" />
+<mj-class name="pb-100" padding-bottom="100px" />
+
+<mj-class name="ptb-30" padding-bottom="30px" />

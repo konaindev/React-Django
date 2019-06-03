@@ -1,0 +1,21 @@
+
+  <mj-wrapper full-width="full-width" mj-class="bg-gray" padding="0">
+    <mj-section mj-class="pb-30">
+      <mj-column width="100%">
+        <mj-image src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/health.png" width="40px" height="36px" />
+        <mj-text mj-class="text-white h1 pb-30" align="center">Campaign Health</mj-text>
+        <mj-button align="center" css-class="large" mj-class="badge badge-medium badge-green">
+            <span>On track</span>
+          </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <!-- START Insight -->
+      <mj-section vertical-align="middle" mj-class="pb-100">
+        <mj-column width="400px" mj-class="pt-15" mj-class="container">
+          <mj-text mj-class="text text-white" align="center">You’re a behind on hitting your model. Try targeting higher quality applicants with social ads.</mj-text>
+        </mj-column>
+      </mj-section>
+      <!-- END Insight -->
+
+    </mj-wrapper>

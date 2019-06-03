@@ -1,0 +1,623 @@
+{% load mjml %}
+
+{% mjml %}
+<mjml>
+  <mj-head>
+    <mj-title>Remarkably :: Weekly Performance Email</mj-title>
+
+    <mj-attributes>
+      <!-- Styles / Utilities -->
+      <mj-include path='./styles/utilities.mjml' />
+      <mj-include path='./styles/color.mjml' />
+      <mj-include path='./styles/text.mjml' />
+
+      <!-- Components -->
+      <mj-include path='./components/buttons.mjml' />
+      <mj-include path='./components/badges.mjml' />
+    </mj-attributes>
+
+    <!-- Fonts -->
+    <mj-include path="./styles/fonts.mjml" />
+
+    <!-- Embeded CSS -->
+    <mj-include path='./styles/css.mjml' />
+
+  </mj-head>
+
+  <mj-body background-color="#ffffff" padding="0">
+
+
+<!-- HEADING START -->
+
+<mj-wrapper full-width="full-width" mj-class="bg-black" padding="0">
+    <mj-section mj-class="section">
+        <mj-column width="100%" mj-class="container">
+              <mj-image css-class="heading-image" mj-class="pb-50" src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/logo.png" border="0" alt="Remarkably"/>
+              <mj-text mj-class="text-white h1" align="center">
+                Your weekly performance report is ready for review.
+            </mj-text>
+            <mj-text mj-class="text-gray h3 pt-50" align="center">
+                For the week of
+            </mj-text>
+            <mj-text mj-class="text-white text p-0" align="center">
+                November 6th - 13th, 2019
+            </mj-text>
+            <mj-text mj-class="text-gray h3 pt-50" align="center">
+                Prepared for
+            </mj-text>
+            <mj-text mj-class="text-white text p-0" align="center">
+                Pennybacker Capital
+            </mj-text>
+            <mj-text mj-class="text-gray h3 pt-50" align="center">
+                Property
+            </mj-text>
+            <mj-text mj-class="text-white text p-0" align="center">
+                El Cortez - Phoenix, Arizona
+            </mj-text>
+        </mj-column>
+      </mj-section>
+</mj-wrapper>
+
+<!-- HEADING END -->
+
+<!-- GOAL START -->
+    <!-- Ignoring for now.
+      <mj-include path="./components/goal.mjml" />
+    -->
+<!-- GOAL END -->
+
+<!-- HEALTH START -->
+
+  <mj-wrapper full-width="full-width" mj-class="bg-gray" padding="0">
+
+    <mj-section mj-class="pb-30">
+      <mj-column width="100%">
+        <mj-image src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/health.png" width="40px" height="36px" />
+        <mj-text mj-class="text-white h1 pb-30" align="center">Campaign Health</mj-text>
+        <mj-button align="center" css-class="large" mj-class="badge badge-medium badge-green">
+            <span>On track</span>
+          </mj-button>
+      </mj-column>
+    </mj-section>
+
+    <!-- START Insight -->
+    <mj-section vertical-align="middle" mj-class="pb-100">
+      <mj-column width="400px" mj-class="pt-15" mj-class="container">
+        <mj-text mj-class="text text-white" align="center">You’re a behind on hitting your model. Try targeting higher quality applicants with social ads.</mj-text>
+      </mj-column>
+    </mj-section>
+    <!-- END Insight -->
+
+  </mj-wrapper>
+
+<!-- HEALTH END -->
+
+<!-- KPI HIGHLIGHTS HEADING START -->
+
+  <mj-wrapper full-width="full-width" mj-class="bg-smoke">
+      <mj-section mj-class="pt-100">
+        <mj-column width="100%">
+          <mj-image css-class="highlight-image" src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/top.png" width="42px" height="40px" alt="&star;"/>
+          <mj-text mj-class="h1 text-white pb-30" align="center">KPI Highlights This Week</mj-text>
+          <mj-divider mj-class="divider"></mj-divider>
+        </mj-column>
+      </mj-section>
+  </mj-wrapper>
+
+<!-- KPI HIGHLIGHTS HEADING END -->
+
+<!-- TOP PERFORMER START -->
+
+  <mj-wrapper full-width="full-width" mj-class="bg-smoke" padding="0">
+      <!-- START Badge -->
+      <mj-section mj-class="pt-100 pb-50">
+        <mj-column mj-class="container" width="100%">
+          <mj-text mj-class="h3 text-white pb-15" align="center">Tours to Lease Applications</mj-text>
+          <mj-button align="center" css-class="medium" mj-class="badge badge-medium badge-green">
+              <mj-raw>
+                <span>Highest Performer</span>
+              </mj-raw>
+            </mj-button>
+        </mj-column>
+      </mj-section>
+      <!-- END Badge -->
+
+        <mj-section mj-class="pb-15 pt-15 container" text-align="center" vertical-align="middle">
+          <mj-group width="400px" vertical-align="middle">
+            <mj-column>
+              <mj-text mj-class="caption text-gray p-0" align="left">Last Week</mj-text>
+              <mj-text mj-class="h1-jumbo text-white p-0" align="left">36</mj-text>
+              <mj-text mj-class="text-gray" padding-left="0" align="left" font-size="14px">Target: 80</mj-text>
+            </mj-column>
+
+            <mj-column padding="20px 0">
+              <mj-image css-class="arrow-image" src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/KPI-arrow.png" height="28px" width="28px" alt="&rarr;" />
+            </mj-column>
+
+            <mj-column>
+              <mj-text mj-class="caption text-gray p-0" align="right">This Week</mj-text>
+              <mj-text mj-class="h1-jumbo text-white p-0" align="right">36</mj-text>
+              <mj-text mj-class="text-gray" padding-right="0" align="right" font-size="14px">Target: 80</mj-text>
+            </mj-column>
+          </mj-group>
+        </mj-section>
+
+        <!-- START Insight -->
+        <mj-section vertical-align="middle">
+          <mj-column width="400px" mj-class="pt-15" mj-class="container">
+            <mj-text mj-class="text text-white" align="center">You’re a behind on hitting your model. Try targeting higher quality applicants with social ads.</mj-text>
+            <!-- <mj-button href="https://google.com" mj-class="button bg-blue">View Report</mj-button> -->
+          </mj-column>
+        </mj-section>
+        <!-- END Insight -->
+    </mj-wrapper>
+
+<!-- TOP PERFORMER END -->
+
+<!-- WORST PERFORMER START -->
+
+<mj-wrapper full-width="full-width" mj-class="bg-smoke" padding="0">
+    <!-- START Badge -->
+    <mj-section mj-class="pt-100 pb-50">
+      <mj-column mj-class="container" width="100%">
+        <mj-text mj-class="h3 text-white pb-15" align="center">Tours to Lease Applications</mj-text>
+        <mj-button align="center" css-class="medium" mj-class="badge badge-medium badge-green">
+            <mj-raw>
+              <span>Highest Performer</span>
+            </mj-raw>
+          </mj-button>
+      </mj-column>
+    </mj-section>
+    <!-- END Badge -->
+
+      <mj-section mj-class="pb-15 pt-15 container" text-align="center" vertical-align="middle">
+        <mj-group width="400px" vertical-align="middle">
+          <mj-column>
+            <mj-text mj-class="caption text-gray p-0" align="left">Last Week</mj-text>
+            <mj-text mj-class="h1-jumbo text-white p-0" align="left">36</mj-text>
+            <mj-text mj-class="text-gray" padding-left="0" align="left" font-size="14px">Target: 80</mj-text>
+          </mj-column>
+
+          <mj-column padding="20px 0">
+            <mj-image css-class="arrow-image" src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/KPI-arrow.png" height="28px" width="28px" alt="&rarr;" />
+          </mj-column>
+
+          <mj-column>
+            <mj-text mj-class="caption text-gray p-0" align="right">This Week</mj-text>
+            <mj-text mj-class="h1-jumbo text-white p-0" align="right">36</mj-text>
+            <mj-text mj-class="text-gray" padding-right="0" align="right" font-size="14px">Target: 80</mj-text>
+          </mj-column>
+        </mj-group>
+      </mj-section>
+
+      <!-- START Insight -->
+      <mj-section vertical-align="middle">
+        <mj-column width="400px" mj-class="pt-15" mj-class="container">
+          <mj-text mj-class="text text-white" align="center">You’re a behind on hitting your model. Try targeting higher quality applicants with social ads.</mj-text>
+          <!-- <mj-button href="https://google.com" mj-class="button bg-blue">View Report</mj-button> -->
+        </mj-column>
+      </mj-section>
+      <!-- END Insight -->
+  </mj-wrapper>
+
+<!-- WORST PERFORMER END -->
+
+<!-- CALL TO ACTION START -->
+
+    <mj-wrapper full-width="full-width" mj-class="bg-smoke" padding="0">
+      <mj-section mj-class="pt-50 pb-50">
+          <mj-column width="100%">
+            <mj-button href="https://google.com" mj-class="button bg-blue">View Report</mj-button>
+          </mj-column>
+      </mj-section>
+    </mj-wrapper>
+
+<!-- CALL TO ACTION END -->
+
+<!-- CAMPAIGN TO DATE HEADING START -->
+
+  <mj-wrapper full-width="full-width" mj-class="bg-smoke">
+      <mj-section mj-class="pt-150">
+        <mj-column width="100%">
+          <mj-image css-class="highlight-image" src="images/ctd.png" width="42px" height="40px" alt="&star;"/>
+          <mj-text mj-class="h1 text-white pb-30" align="center">Highlights Campaign To Date</mj-text>
+          <mj-divider mj-class="divider"></mj-divider>
+        </mj-column>
+      </mj-section>
+  </mj-wrapper>
+
+<!-- CAMPAIGN TO DATE HEADING END -->
+
+<!-- CTD TOP KPIS START -->
+
+
+  <mj-wrapper full-width="full-width" mj-class="bg-smoke" padding="0">
+    <mj-section mj-class="pt-100">
+      <mj-column width="100%" mj-class="p-0">
+        <mj-image align="left" css-class="top-image" src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/up.png" width="40px" height="26px" alt="&nearr;" />
+        <mj-text mj-class="h1 text-white pb-0" align="left">On Track Performance Areas</mj-text>
+        <mj-text mj-class="caption text-gray pb-30" align="left">Campaign to Date</mj-text>
+        <mj-divider mj-class="divider"></mj-divider>
+      </mj-column>
+      </mj-section>
+
+
+    <!-- START 1 KPI -->
+
+
+      <!-- Start Badge Table -->
+     <mj-section mj-class="p-0" >
+        <mj-column width="100%" mj-class="container" vertical-align="middle">
+          <mj-table padding="0 5px">
+
+             <tr>
+                <td align="left" valign="middle" width="50%">
+                    <p class="kpi">Unique Site Visitors to Inquiries</p>
+                    <p class="kpi-model">56% of Model Target</p>
+                </td>
+
+                <td align="right" valign="middle" style="padding-left:20px;">
+                  <span class="small-badge small-badge-green">On Track</span>
+                </td>
+              </tr>
+
+          </mj-table>
+        </mj-column>
+    </mj-section>
+
+    <!-- End Badge Table -->
+
+
+    <mj-section>
+     <mj-column width="100%">
+        <mj-divider mj-class="divider"></mj-divider>
+      </mj-column>
+    </mj-section>
+
+    <mj-section mj-class="p-0" >
+        <mj-column width="100%" mj-class="container" vertical-align="middle">
+          <mj-table padding="0 5px">
+
+             <tr>
+              <td align="left" valign="middle" width="50%">
+                  <p class="kpi">Notices to Vacate</p>
+                  <p class="kpi-model">56% of Model Target</p>
+              </td>
+
+
+              <td align="right" valign="middle" style="padding-left:20px;">
+                  <span class="small-badge small-badge-yellow">At Risk</span>
+              </td>
+          </tr>
+
+          </mj-table>
+        </mj-column>
+    </mj-section>
+
+    <!-- End Badge Table -->
+
+
+    <mj-section>
+     <mj-column width="100%">
+        <mj-divider mj-class="divider"></mj-divider>
+      </mj-column>
+    </mj-section>
+
+
+    <mj-section mj-class="p-0" >
+        <mj-column width="100%" mj-class="container" vertical-align="middle">
+          <mj-table padding="0 5px">
+
+             <tr>
+              <td align="left" valign="middle" width="50%">
+                  <p class="kpi">Lease Applications to Lease Executions</p>
+                  <p class="kpi-model">56% of Model Target</p>
+              </td>
+
+              <td align="right" valign="middle" style="padding-left:20px;">
+                  <span class="small-badge small-badge-red">Off Track</span>
+              </td>
+
+          </tr>
+
+          </mj-table>
+        </mj-column>
+    </mj-section>
+
+    <mj-section>
+     <mj-column width="100%">
+        <mj-divider mj-class="divider"></mj-divider>
+      </mj-column>
+    </mj-section>
+
+
+</mj-wrapper>
+
+<!-- CTD TOP KPIS END -->
+
+<!-- CTD AT RISK KPIS START -->
+
+
+  <mj-wrapper full-width="full-width" mj-class="bg-smoke" padding="0">
+    <mj-section mj-class="pt-100">
+      <mj-column width="100%" mj-class="p-0">
+        <mj-image align="left" css-class="top-image" src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/up.png" width="40px" height="26px" alt="&nearr;" />
+        <mj-text mj-class="h1 text-white pb-0" align="left">On Track Performance Areas</mj-text>
+        <mj-text mj-class="caption text-gray pb-30" align="left">Campaign to Date</mj-text>
+        <mj-divider mj-class="divider"></mj-divider>
+      </mj-column>
+      </mj-section>
+
+
+    <!-- START 1 KPI -->
+
+
+      <!-- Start Badge Table -->
+     <mj-section mj-class="p-0" >
+        <mj-column width="100%" mj-class="container" vertical-align="middle">
+          <mj-table padding="0 5px">
+
+             <tr>
+                <td align="left" valign="middle" width="50%">
+                    <p class="kpi">Unique Site Visitors to Inquiries</p>
+                    <p class="kpi-model">56% of Model Target</p>
+                </td>
+
+                <td align="right" valign="middle" style="padding-left:20px;">
+                  <span class="small-badge small-badge-green">On Track</span>
+                </td>
+              </tr>
+
+          </mj-table>
+        </mj-column>
+    </mj-section>
+
+    <!-- End Badge Table -->
+
+
+    <mj-section>
+     <mj-column width="100%">
+        <mj-divider mj-class="divider"></mj-divider>
+      </mj-column>
+    </mj-section>
+
+    <mj-section mj-class="p-0" >
+        <mj-column width="100%" mj-class="container" vertical-align="middle">
+          <mj-table padding="0 5px">
+
+             <tr>
+              <td align="left" valign="middle" width="50%">
+                  <p class="kpi">Notices to Vacate</p>
+                  <p class="kpi-model">56% of Model Target</p>
+              </td>
+
+
+              <td align="right" valign="middle" style="padding-left:20px;">
+                  <span class="small-badge small-badge-yellow">At Risk</span>
+              </td>
+          </tr>
+
+          </mj-table>
+        </mj-column>
+    </mj-section>
+
+    <!-- End Badge Table -->
+
+
+    <mj-section>
+     <mj-column width="100%">
+        <mj-divider mj-class="divider"></mj-divider>
+      </mj-column>
+    </mj-section>
+
+
+    <mj-section mj-class="p-0" >
+        <mj-column width="100%" mj-class="container" vertical-align="middle">
+          <mj-table padding="0 5px">
+
+             <tr>
+              <td align="left" valign="middle" width="50%">
+                  <p class="kpi">Lease Applications to Lease Executions</p>
+                  <p class="kpi-model">56% of Model Target</p>
+              </td>
+
+              <td align="right" valign="middle" style="padding-left:20px;">
+                  <span class="small-badge small-badge-red">Off Track</span>
+              </td>
+
+          </tr>
+
+          </mj-table>
+        </mj-column>
+    </mj-section>
+
+    <mj-section>
+     <mj-column width="100%">
+        <mj-divider mj-class="divider"></mj-divider>
+      </mj-column>
+    </mj-section>
+
+
+</mj-wrapper>
+
+<!-- CTD AT RISK KPIS END -->
+
+<!-- CTD AT WORST KPIS START -->
+
+  <mj-wrapper full-width="full-width" mj-class="bg-smoke" padding="0">
+    <mj-section mj-class="pt-100">
+      <mj-column width="100%" mj-class="p-0">
+        <mj-image align="left" css-class="top-image" src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/up.png" width="40px" height="26px" alt="&nearr;" />
+        <mj-text mj-class="h1 text-white pb-0" align="left">On Track Performance Areas</mj-text>
+        <mj-text mj-class="caption text-gray pb-30" align="left">Campaign to Date</mj-text>
+        <mj-divider mj-class="divider"></mj-divider>
+      </mj-column>
+      </mj-section>
+
+     <mj-section mj-class="p-0" >
+        <mj-column width="100%" mj-class="container" vertical-align="middle">
+          <mj-table padding="0 5px">
+
+             <tr>
+                <td align="left" valign="middle" width="50%">
+                    <p class="kpi">Unique Site Visitors to Inquiries</p>
+                    <p class="kpi-model">56% of Model Target</p>
+                </td>
+
+                <td align="right" valign="middle" style="padding-left:20px;">
+                  <span class="small-badge small-badge-green">On Track</span>
+                </td>
+              </tr>
+
+          </mj-table>
+        </mj-column>
+    </mj-section>
+
+    <mj-section>
+     <mj-column width="100%">
+        <mj-divider mj-class="divider"></mj-divider>
+      </mj-column>
+    </mj-section>
+
+    <mj-section mj-class="p-0" >
+        <mj-column width="100%" mj-class="container" vertical-align="middle">
+          <mj-table padding="0 5px">
+             <tr>
+                <td align="left" valign="middle" width="50%">
+                    <p class="kpi">Notices to Vacate</p>
+                    <p class="kpi-model">56% of Model Target</p>
+                </td>
+                <td align="right" valign="middle" style="padding-left:20px;">
+                    <span class="small-badge small-badge-yellow">At Risk</span>
+                </td>
+              </tr>
+          </mj-table>
+        </mj-column>
+    </mj-section>
+
+    <!-- End Badge Table -->
+
+    <mj-section>
+     <mj-column width="100%">
+        <mj-divider mj-class="divider"></mj-divider>
+      </mj-column>
+    </mj-section>
+
+    <mj-section mj-class="p-0" >
+        <mj-column width="100%" mj-class="container" vertical-align="middle">
+          <mj-table padding="0 5px">
+             <tr>
+                <td align="left" valign="middle" width="50%">
+                    <p class="kpi">Lease Applications to Lease Executions</p>
+                    <p class="kpi-model">56% of Model Target</p>
+                </td>
+
+                <td align="right" valign="middle" style="padding-left:20px;">
+                    <span class="small-badge small-badge-red">Off Track</span>
+                </td>
+              </tr>
+          </mj-table>
+        </mj-column>
+    </mj-section>
+
+    <mj-section>
+     <mj-column width="100%">
+        <mj-divider mj-class="divider"></mj-divider>
+      </mj-column>
+    </mj-section>
+
+</mj-wrapper>
+
+
+<!-- CTD AT WORST KPIS START -->
+
+<!-- START Suggested Insight -->
+
+    <mj-wrapper full-width="full-width" mj-class="bg-smoke" padding="0">
+      <mj-section mj-class="pb-100">
+          <mj-column width="440px" mj-class="pt-15" padding-left="20px" padding-right="20px" mj-class="container">
+            <mj-text mj-class="text text-white" align="center">
+              Excellent leasing team follow-up which results in surge of leasing applications
+            </mj-text>
+            <!--
+              Bullet Point here when needed
+
+              <mj-include path="./components/bullet-point.mjml" />
+
+              -->
+          </mj-column>
+      </mj-section>
+    </mj-wrapper>
+
+    <mj-wrapper full-width="full-width" mj-class="bg-smoke" padding="0">
+      <mj-section mj-class="pb-100">
+          <mj-column width="100%">
+          <mj-button href="https://google.com" mj-class="button bg-blue">View Report</mj-button>
+          </mj-column>
+      </mj-section>
+    </mj-wrapper>
+
+<!-- END Suggested Insight -->
+
+<!-- QUESTION FEEDBACK START -->
+
+<mj-wrapper full-width="full-width" mj-class="bg-gray" padding="0">
+  <mj-section mj-class="section">
+    <mj-column width="100%">
+      <mj-text mj-class="text-white h1 pb-15" align="center">Questions or feedback?</mj-text>
+      <mj-button href="https://google.com" mj-class="button bg-blue">Contact Us</mj-button>
+      <mj-button href="https://google.com" mj-class="link text-blue">+1 800 266 9255</mj-button>
+    </mj-column>
+  </mj-section>
+</mj-wrapper>
+
+<!-- QUESTION FEEDBACK END -->
+
+<!-- FOOTER START -->
+
+  <mj-wrapper full-width="full-width" mj-class="bg-black" padding="0">
+    <mj-section mj-class="pt-100" >
+      <mj-column>
+        <mj-image css-class="footer-image" src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/logo.png" width="177px" height="30px" alt="Remarkably"/>
+      </mj-column>
+    </mj-section>
+
+    <mj-section>
+      <mj-column>
+        <mj-social icon-size="40px" mode="horizontal">
+          <mj-social-element css-class="social-image" src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/twitter.png" alt="Twitter" href="https://mjml.io/" />
+          <mj-social-element css-class="social-image" src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/linkedin.png" alt="Linkedin" href="https://mjml.io/" padding="0 30px"/>
+          <mj-social-element css-class="social-image" src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/instagram.png" alt="Instagram" href="https://mjml.io/" />
+        </mj-social>
+      </mj-column>
+    </mj-section>
+
+    <mj-section>
+      <mj-column>
+        <mj-text align="center" mj-class="footer-text text-gray">Remarkably, Inc</mj-text>
+        <mj-text align="center" mj-class="footer-text text-gray">2284 W. Commodore Way, Ste. 200</mj-text>
+        <mj-text align="center" mj-class="footer-text text-gray">Seattle, WA 98199</mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section>
+      <mj-column>
+        <mj-text align="center" mj-class="footer-text text-gray">&copy; 2019 Remarkably.io. All rights reserved.</mj-text>
+      </mj-column>
+    </mj-section>
+
+    <mj-section mj-class="pb-100" >
+      <mj-column>
+        <mj-button align="center" mj-class="footer-link" href="[unscubscribe]">Unsubscribe</mj-button>
+        <!--
+        <mj-button align="center" mj-class="footer-link">Unsubscribe Preferences</mj-button>
+        -->
+      </mj-column>
+    </mj-section>
+    </mj-wrapper>
+
+<!-- FOOTER END -->
+
+  </mj-body>
+</mjml>
+{% endmjml %}

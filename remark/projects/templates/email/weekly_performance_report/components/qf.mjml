@@ -1,0 +1,10 @@
+  <mj-wrapper full-width="full-width" mj-class="bg-gray" padding="0">
+    <mj-section mj-class="section">
+      <mj-column width="100%">
+        <mj-text mj-class="text-white h1 pb-15" align="center">Questions or feedback?</mj-text>
+        <mj-button href="https://google.com" mj-class="button bg-blue">Contact Us</mj-button>
+        <mj-button href="https://google.com" mj-class="link text-blue">+1 800 266 9255</mj-button>
+      </mj-column>
+    </mj-section>
+    </mj-wrapper>
+    

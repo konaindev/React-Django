@@ -1,0 +1,20 @@
+<mj-style>
+      @font-face {
+        font-family: 'Formular';
+        font-style: normal;
+        font-weight: 400;
+        src: local('Formular-Regular'), url(https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/formular-regular.woff) format('woff');
+    }
+    @font-face {
+        font-family: 'Formular';
+        font-style: normal;
+        font-weight: 600;
+        src: local('Formular-Medium'), url(https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/formular-medium.woff) format('woff');
+    }
+    @font-face {
+        font-family: 'Formular';
+        font-style: normal;
+        font-weight: 800;
+        src: local('Formular-Bold'), url(https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/formular-bold.woff) format('woff');
+    }
+</mj-style>

@@ -41,6 +41,7 @@ bs4 = "*"
 sendgrid = "*"
 celery = "*"
 redis = "*"
+django-mjml = "*"
 
 [requires]
 python_version = "3.7"

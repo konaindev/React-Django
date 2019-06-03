@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_js_reverse",
     "stdimage",
+    "mjml",
     "remark.email_app",
     "remark.analytics",
     "remark.users",
@@ -254,6 +255,12 @@ CACHES = {
     }
 }
 
+#
+# MJML Setup
+#
+
+MJML_BACKEND_MODE = 'cmd'
+MJML_EXEC_CMD = ['node_modules/.bin/mjml', '--config.minify', 'true', '--config.validationLevel', 'strict']
 
 #
 # API Keys

@@ -1,0 +1,14 @@
+
+<mj-class name="h1-jumbo" font-size="36px" line-height="44px" /> <!-- Your weekly performance... -->
+<mj-class name="h1" font-size="28px" line-height="46px" /> <!-- Your weekly performance... -->
+<mj-class name="h2" font-size="18px" line-height="28px"/> <!-- El Cortez -->
+<mj-class name="h3" font-size="16px" letter-spacing="1px" line-height="30px" font-weight="500" text-transform="uppercase"/> <!-- APP VOLUME -->
+<mj-class name="h4" font-size="14px" font-weight="500" letter-spacing="1px" line-height="24px" text-transform="uppercase"/> <!-- PROPERTY -->
+
+<mj-class name="text" font-size="16px" line-height="28px" font-weight="400" /> <!-- insight white text -->
+<mj-class name="caption" font-size="14px" line-height="20px" font-weight="400" letter-spacing="1px" text-transform="uppercase"/> <!-- CAMPAIGN TO DATE -->
+<mj-class name="model-caption" font-size="16px" line-height="20px" font-weight="400" letter-spacing=".5px"/>
+
+<mj-class name="footer-text" font-size="14px" line-height="20px" font-weight="400" padding="0"/>
+
+<mj-class name="text-align-center" text-align="center"/>

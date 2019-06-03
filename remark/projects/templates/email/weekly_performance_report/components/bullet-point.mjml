@@ -1,0 +1,12 @@
+<mj-table padding="10px 0">
+    <tr>
+        <td align="right" valign="top" width="5%">
+            <span style="font-size: 24px; padding-right: 10px; color: #798796; font-weight: 200;">&rarr;</span>
+        </td>
+    
+    
+        <td align="left" valign="top" style="padding-left:10px; padding-top: 0px;">
+            <span style="letter-spacing: normal; color: #F5FAF7; font-size: 16px; font-weight: 300; line-height: 28px;">Excellent leasing team follow-up which results in surge of leasing applications</span>
+        </td>
+    </tr>
+</mj-table>

@@ -1,0 +1,29 @@
+
+<mj-wrapper full-width="full-width" mj-class="bg-black" padding="0">
+    <mj-section mj-class="section">
+        <mj-column width="100%" mj-class="container">
+              <mj-image css-class="heading-image" mj-class="pb-50" src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/logo.png" border="0" alt="Remarkably"/>
+              <mj-text mj-class="text-white h1" align="center">
+                Your weekly performance report is ready for review. 
+            </mj-text>
+            <mj-text mj-class="text-gray h3 pt-50" align="center">
+                For the week of
+            </mj-text>
+            <mj-text mj-class="text-white text p-0" align="center">
+                November 6th - 13th, 2019
+            </mj-text>
+            <mj-text mj-class="text-gray h3 pt-50" align="center">
+                Prepared for
+            </mj-text>
+            <mj-text mj-class="text-white text p-0" align="center">
+                Pennybacker Capital
+            </mj-text>
+            <mj-text mj-class="text-gray h3 pt-50" align="center">
+                Property
+            </mj-text>
+            <mj-text mj-class="text-white text p-0" align="center">
+                El Cortez - Phoenix, Arizona
+            </mj-text>
+        </mj-column>
+      </mj-section>
+</mj-wrapper>

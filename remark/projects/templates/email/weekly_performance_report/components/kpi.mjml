@@ -1,0 +1,43 @@
+<mj-wrapper full-width="full-width" mj-class="bg-smoke" padding="0">
+      <!-- START Badge -->
+      <mj-section mj-class="pt-100 pb-50">
+        <mj-column mj-class="container" width="100%">
+          <mj-text mj-class="h3 text-white pb-15" align="center">Tours to Lease Applications</mj-text>
+          <mj-button align="center" css-class="medium" mj-class="badge badge-medium badge-green">
+              <mj-raw>
+                <span>Highest Performer</span>
+              </mj-raw>
+            </mj-button>
+        </mj-column>
+      </mj-section>
+      <!-- END Badge -->
+
+        <mj-section mj-class="pb-15 pt-15 container" text-align="center" vertical-align="middle">
+          <mj-group width="400px" vertical-align="middle">
+            <mj-column>
+              <mj-text mj-class="caption text-gray p-0" align="left">Last Week</mj-text>
+              <mj-text mj-class="h1-jumbo text-white p-0" align="left">36</mj-text>
+              <mj-text mj-class="text-gray" padding-left="0" align="left" font-size="14px">Target: 80</mj-text>
+            </mj-column>
+
+            <mj-column padding="20px 0">
+              <mj-image css-class="arrow-image" src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/KPI-arrow.png" height="28px" width="28px" alt="&rarr;" />
+            </mj-column>
+
+            <mj-column>
+              <mj-text mj-class="caption text-gray p-0" align="right">This Week</mj-text>
+              <mj-text mj-class="h1-jumbo text-white p-0" align="right">36</mj-text>
+              <mj-text mj-class="text-gray" padding-right="0" align="right" font-size="14px">Target: 80</mj-text>
+            </mj-column>
+          </mj-group>
+        </mj-section>
+
+        <!-- START Insight -->
+        <mj-section vertical-align="middle">
+          <mj-column width="400px" mj-class="pt-15" mj-class="container">
+            <mj-text mj-class="text text-white" align="center">You’re a behind on hitting your model. Try targeting higher quality applicants with social ads.</mj-text>
+            <!-- <mj-button href="https://google.com" mj-class="button bg-blue">View Report</mj-button> -->
+          </mj-column>
+        </mj-section>
+        <!-- END Insight -->
+    </mj-wrapper>
