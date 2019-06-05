@@ -57,7 +57,7 @@ def top_kpi(kpi_key, this_week, prev_week=None, text=None):
     return result
 
 
-def list_kpi(kpi_key, campaign, health):
+def list_kpi(kpi_key, campaign):
     selector = SELECTORS[kpi_key]
     title = KPI_NAMES[kpi_key]
     campaign_value = selector(campaign)
@@ -70,7 +70,7 @@ def list_kpi(kpi_key, campaign, health):
     }
 
 
-def create_list_kpi(result, campaign, prefix, kpis, health):
+def create_list_kpi(result, campaign, prefix, kpis):
     result[f"{prefix}_1"] = list_kpi(kpis[0], campaign)
     if len(kpis) > 1:
         result[f"{prefix}_2"] = list_kpi(kpis[1], campaign)
@@ -133,9 +133,9 @@ def create_html(
         "email": email,
     }
 
-    create_list_kpi(template_vars, campaign_to_date, "top", topkpis, 2)
-    create_list_kpi(template_vars, campaign_to_date, "risk", riskkpis, 1)
-    create_list_kpi(template_vars, campaign_to_date, "low", lowkpis, 0)
+    create_list_kpi(template_vars, campaign_to_date, "top", topkpis)
+    create_list_kpi(template_vars, campaign_to_date, "risk", riskkpis)
+    create_list_kpi(template_vars, campaign_to_date, "low", lowkpis)
 
     template = get_template("email/weekly_performance_report/index.html")
     result = template.render(template_vars)
