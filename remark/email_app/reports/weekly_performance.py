@@ -48,7 +48,7 @@ def top_kpi(kpi_key, this_week, prev_week=None, text=None):
         "target": formatter(selector(this_week["targets"])),
     }
     if prev_week is not None:
-        result["prev_value"] = formatter(selector(prev_week)),
+        result["prev_value"] = formatter(selector(prev_week))
         result["prev_target"] = none_wrapper(formatter, selector, prev_week["targets"])
 
     if text is not None:
