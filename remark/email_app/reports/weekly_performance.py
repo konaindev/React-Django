@@ -65,8 +65,7 @@ def list_kpi(kpi_key, campaign):
     model_percent = float(campaign_value) / float(campaign_target)
     return {
         "name": title,
-        "model_percent": percent_formatter(model_percent),
-        "health": health,
+        "model_percent": percent_formatter(model_percent)
     }
 
 
