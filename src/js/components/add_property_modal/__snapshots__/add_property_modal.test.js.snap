@@ -34,6 +34,8 @@ exports[`AddPropertyModal renders AddPropertyModal correctly 1`] = `
       action="/projects/new"
       className="add-property-form"
       method="post"
+      onReset={[Function]}
+      onSubmit={[Function]}
     >
       <div
         className="add-property-form__column"
@@ -72,6 +74,8 @@ exports[`AddPropertyModal renders AddPropertyModal correctly 1`] = `
           <input
             className="input add-property-form__input"
             name="property_name"
+            onBlur={[Function]}
+            onChange={[Function]}
             placeholder="Property Name"
             type="text"
           />
@@ -87,6 +91,8 @@ exports[`AddPropertyModal renders AddPropertyModal correctly 1`] = `
           <input
             className="input add-property-form__input"
             name="address"
+            onBlur={[Function]}
+            onChange={[Function]}
             placeholder="Street Address 1"
             type="text"
           />
@@ -100,6 +106,8 @@ exports[`AddPropertyModal renders AddPropertyModal correctly 1`] = `
           <input
             className="input add-property-form__input"
             name="address2"
+            onBlur={[Function]}
+            onChange={[Function]}
             placeholder="Street Address 2"
             type="text"
           />
@@ -116,6 +124,8 @@ exports[`AddPropertyModal renders AddPropertyModal correctly 1`] = `
             <input
               className="input add-property-form__input add-property-form__input--city"
               name="city"
+              onBlur={[Function]}
+              onChange={[Function]}
               placeholder="City"
               type="text"
             />
@@ -175,6 +185,8 @@ exports[`AddPropertyModal renders AddPropertyModal correctly 1`] = `
             <input
               className="input add-property-form__input add-property-form__input--zipcode"
               name="zipcode"
+              onBlur={[Function]}
+              onChange={[Function]}
               placeholder="Zipcode"
               type="text"
             />
