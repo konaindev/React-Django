@@ -132,16 +132,17 @@
                   <!-- Start Badge Table -->
 
 {% include "./campaign_to_date_list_item.html" with kpi=kpi_1 health=health only %}
-
 {% include "./campaign_to_date_list_break.html" %}
 
-{% include "./campaign_to_date_list_item.html" with kpi=kpi_2 health=health only %}
+{% if kpi_2 %}
+  {% include "./campaign_to_date_list_item.html" with kpi=kpi_2 health=health only %}
+  {% include "./campaign_to_date_list_break.html" %}
+{% endif %}
 
-{% include "./campaign_to_date_list_break.html" %}
-
-{% include "./campaign_to_date_list_item.html" with kpi=kpi_3 health=health only %}
-
-{% include "./campaign_to_date_list_break.html" %}
+{% if kpi_3 %}
+  {% include "./campaign_to_date_list_item.html" with kpi=kpi_3 health=health only %}
+  {% include "./campaign_to_date_list_break.html" %}
+{% endif %}
                   <!-- End Badge Table -->
 
                 </td>
