@@ -20,6 +20,8 @@ from remark.lib.sendgrid_email import (
     create_campaign_if_not_exists,
 )
 
+from celery import shared_task
+
 
 def none_wrapper(formatter, selector, obj):
     try:
@@ -36,25 +38,23 @@ more spread than others.
 """
 
 
-def top_kpi(kpi_key, campaign, this_week, prev_week, text):
+def top_kpi(kpi_key, this_week, prev_week=None, text=None):
     selector = SELECTORS[kpi_key]
     title = KPI_NAMES[kpi_key]
     formatter = FORMATTERS[kpi_key]
-    show_campaign = SHOW_CAMPAIGN[kpi_key]
-    campaign_value = selector(campaign)
-    campaign_target = selector(campaign["targets"])
-    return {
+    result = {
         "name": title,
-        "health": health_check(campaign_value, campaign_target),
-        "campaign_value": formatter(campaign_value),
-        "campaign_target": formatter(campaign_target),
-        "week_value": formatter(selector(this_week)),
-        "week_target": formatter(selector(this_week["targets"])),
-        "prev_value": formatter(selector(prev_week)),
-        "prev_target": none_wrapper(formatter, selector, prev_week["targets"]),
-        "insight": text,
-        "show_campaign": show_campaign,
+        "value": formatter(selector(this_week)),
+        "target": formatter(selector(this_week["targets"])),
     }
+    if prev_week is not None:
+        result["prev_value"] = formatter(selector(prev_week)),
+        result["prev_target"] = none_wrapper(formatter, selector, prev_week["targets"])
+
+    if text is not None:
+        result["insight"] = text
+
+    return result
 
 
 def list_kpi(kpi_key, campaign, health):
@@ -71,11 +71,11 @@ def list_kpi(kpi_key, campaign, health):
 
 
 def create_list_kpi(result, campaign, prefix, kpis, health):
-    result[f"{prefix}_1"] = list_kpi(kpis[0], campaign, health)
+    result[f"{prefix}_1"] = list_kpi(kpis[0], campaign)
     if len(kpis) > 1:
-        result[f"{prefix}_2"] = list_kpi(kpis[1], campaign, health)
+        result[f"{prefix}_2"] = list_kpi(kpis[1], campaign)
     if len(kpis) > 2:
-        result[f"{prefix}_3"] = list_kpi(kpis[2], campaign, health)
+        result[f"{prefix}_3"] = list_kpi(kpis[2], campaign)
 
 
 def create_html(
@@ -121,15 +121,14 @@ def create_html(
         "name": project.name,
         "city": project.address.city,
         "state": project.address.state,
-        "health": health,
-        "lease_rate": top_kpi(
-            "lease_rate", campaign_to_date, this_week, prev_week, leaseratetext
-        ),
+        "campaign_health": health,
+        "campaign_insight": leaseratetext,
+        "lease_rate": top_kpi("lease_rate", this_week),
         "best_kpi": top_kpi(
-            bestkpi, campaign_to_date, this_week, prev_week, bestkpitext
+            bestkpi, this_week, prev_week, bestkpitext
         ),
         "worst_kpi": top_kpi(
-            worstkpi, campaign_to_date, this_week, prev_week, worstkpitext
+            worstkpi, this_week, prev_week, worstkpitext
         ),
         "email": email,
     }
@@ -138,16 +137,13 @@ def create_html(
     create_list_kpi(template_vars, campaign_to_date, "risk", riskkpis, 1)
     create_list_kpi(template_vars, campaign_to_date, "low", lowkpis, 0)
 
-    template = get_template("projects/weekly_performance_reporting_email.html")
+    template = get_template("email/weekly_performance_report/index.html")
     result = template.render(template_vars)
     return result
 
 
 CONTACT_EMAIL = "info@remarkably.io"
 SENDER_ID = 482157
-
-from celery import shared_task
-
 
 @shared_task
 def send_performance_email(performance_email_id):
