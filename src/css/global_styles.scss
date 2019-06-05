@@ -55,3 +55,9 @@ input[type="submit"] {
 .force-scrollbar {
     @include force-scrollbar();
 }
+
+.error {
+    padding-top: 3px;
+    font-size: 14px;
+    color: $orange-2;
+}

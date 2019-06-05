@@ -13,10 +13,10 @@ import { propertySchema } from "./validators";
 
 function FieldInput(props) {
   return (
-    <>
+    <div>
       <FormikField {...props} />
-      <ErrorMessage className="error" name={props.name} />
-    </>
+      <ErrorMessage className="error" name={props.name} component="div" />
+    </div>
   );
 }
 FieldInput.propTypes = {
@@ -106,7 +106,7 @@ export default class AddPropertyForm extends Component {
   render() {
     return (
       <Formik validationSchema={propertySchema}>
-        {({ isSubmitting }) => (
+        {({ errors, isSubmitting }) => (
           <Form
             className="add-property-form"
             action={this.props.post_url}
