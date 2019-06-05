@@ -1,9 +1,0 @@
-<mj-wrapper full-width="full-width" mj-class="bg-smoke">
-    <mj-section mj-class="pt-150">
-      <mj-column width="100%">
-        <mj-image css-class="highlight-image" src="images/ctd.png" width="42px" height="40px" alt="&star;"/>
-        <mj-text mj-class="h1 text-white pb-30" align="center">Highlights Campaign To Date</mj-text>
-        <mj-divider mj-class="divider"></mj-divider>
-      </mj-column>
-    </mj-section>
-</mj-wrapper>
