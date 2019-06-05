@@ -60,6 +60,7 @@ def pull_modeling_data_from_project(project, apps):
         campaign_model = CampaignModel(
             campaign=campaign,
             spreadsheet=spreadsheet,
+            name=model_name,
             model_start=model_start,
             model_end=model_end,
             model_index=model_index
@@ -91,5 +92,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(move_modeling_references),
+        migrations.RunPython(move_modeling_references, reverse_code=migrations.RunPython.noop),
     ]

@@ -38,6 +38,7 @@ class Migration(migrations.Migration):
             name='CampaignModel',
             fields=[
                 ('campaign_model_id', models.CharField(default=remark.projects.models.modeling.campaign_model_public_id, editable=False, max_length=50, primary_key=True, serialize=False)),
+                ('name', models.CharField(max_length=100)),
                 ('model_start', models.DateField()),
                 ('model_end', models.DateField()),
                 ('active', models.BooleanField(default=True)),

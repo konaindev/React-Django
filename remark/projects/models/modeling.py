@@ -44,6 +44,7 @@ class CampaignModel(models.Model):
     spreadsheet = models.ForeignKey(
         'Spreadsheet2', on_delete=models.CASCADE, related_name="campaign_models"
     )
+    name=models.CharField(max_length=100)
     model_start = models.DateField()
     model_end = models.DateField()
     active = models.BooleanField(default=True)
