@@ -24,16 +24,20 @@ def model_percent(name, report):
     selector = SELECTORS[name]
     dir = KPI_POSITIVE_DIRECTION[name]
     try:
-        num = float( selector(report) )
-        den = float( selector(report["targets"]) )
+        value = float( selector(report) )
+        target = float( selector(report["targets"]) )
+
+        if target == 0.0:
+            return None
+
         if dir:
-            return num / den
+            return value / target
         else:
-            return den / num
+            return target / value
     except:
         pass
 
-    return 0
+    return None
 
 def campaign_insight(campaign_health):
     if campaign_health == 2:
@@ -91,8 +95,15 @@ def update_performance_report(sender, instance, created, raw, **kwargs):
     wk_model_percent = {}
     for k in SHOW_CAMPAIGN.keys():
         if SHOW_CAMPAIGN[k]:
-            ctd_model_percent[k] = model_percent(k, campaign_to_date)
-            wk_model_percent[k] = model_percent(k, this_week)
+            ctd = model_percent(k, campaign_to_date)
+            # We ignore percent of model values that don't make sense
+            # like Infinity, Zero, or Div by Zero Error
+            if ctd is not None:
+                ctd_model_percent[k] = ctd
+
+            wk = model_percent(k, this_week)
+            if wk is not None:
+                wk_model_percent[k] = wk
 
     ctd_sorted = sorted(ctd_model_percent, key=ctd_model_percent.get, reverse=True)
     wk_sorted = sorted(wk_model_percent, key=wk_model_percent.get, reverse=True)
