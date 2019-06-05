@@ -52,13 +52,15 @@ def low_kpi_insight(name):
 
 @receiver(post_save, sender=Period)
 def update_performance_report(sender, instance, created, raw, **kwargs):
-    if not created and PerformanceEmail.objects.filter(start__exact=instance.start).count() > 0:
+
+    project = instance.project
+    start = instance.start
+
+    if not created and PerformanceEmail.objects.filter(start__exact=start, project__exact=project).count() > 0:
         print("Already created performance email. Skipping.")
         return
 
-    project = instance.project
     campaign_start = project.get_campaign_start()
-    start = instance.start
     end = instance.end
     prevstart = start - datetime.timedelta(days=7)
 
