@@ -117,7 +117,7 @@ def create_html(
         "start_date": start.strftime("%m/%d/%Y"),
         "end_date": human_end.strftime("%m/%d/%Y"),
         "client": client,
-        "name": project.name,
+        "property_name": project.name,
         "city": project.address.city,
         "state": project.address.state,
         "campaign_health": int(health),
