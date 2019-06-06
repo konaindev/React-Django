@@ -1,0 +1,94 @@
+@import 'css/base.scss';
+
+$west-color: $green-1;
+$south-color: $cyan-3;
+$midwest-color: $green-2;
+$northeast-color: $turquoise-3;
+$dark-label-color: $gray-2;
+
+.regional-map--hover {
+    .regional-map__region {
+        opacity: .6;
+        fill: $map-disable-color;
+    }
+
+    .regional-map__label {
+        fill: $map-label-hover-color;
+    }
+}
+
+.regional-map--west {
+    .regional-map__region--west {
+        opacity: 1;
+        fill: $map-hover-color;
+    }
+
+    .regional-map__label--west {
+        fill: $map-label-color;
+    }
+}
+
+.regional-map--south {
+    .regional-map__region--south {
+        opacity: 1;
+        fill: $map-hover-color;
+    }
+
+    .regional-map__label--south {
+        fill: $map-label-color;
+    }
+}
+
+.regional-map--midwest {
+    .regional-map__region--midwest {
+        opacity: 1;
+        fill: $map-hover-color;
+    }
+
+    .regional-map__label--midwest {
+        fill: $map-label-color;
+    }
+}
+
+.regional-map--northeast {
+    .regional-map__region--northeast {
+        opacity: 1;
+        fill: $map-hover-color;
+    }
+
+    .regional-map__label--northeast {
+        fill: $map-label-color;
+    }
+}
+
+.regional-map__region {
+    &--west {
+        fill: $west-color;
+    }
+
+    &--south {
+        fill: $south-color;
+    }
+
+    &--midwest {
+        fill: $midwest-color;
+    }
+
+    &--northeast {
+        fill: $northeast-color;
+    }
+}
+
+.regional-map__label {
+    font-family: $font-sans;
+    font-size: $text-xs;
+    font-weight: bold;
+    letter-spacing: $letter-spacing-wider;
+    text-transform: uppercase;
+    pointer-events: none;
+    fill: $map-label-color;
+
+    &--south {
+        fill: $dark-label-color;
+    }
+}
