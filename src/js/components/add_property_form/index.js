@@ -2,8 +2,8 @@ import cn from "classnames";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
+import CloseIcon from "../../icons/close";
 import Button from "../button";
-import CloseIcon from "../close-icon";
 import Input from "../input";
 import Select from "../select";
 

@@ -3,6 +3,7 @@ import Modal from "react-responsive-modal";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
+import { CloseSvgPath } from "../../icons/close";
 import "./modal_window.scss";
 
 export default class ModalWindow extends Component {
