@@ -45,6 +45,7 @@ $input-width: 340px;
 }
 
 .add-property-form__label {
+    flex-shrink: 0;
     width: 160px;
     color: #f5faf7;
     font-size: $text-xs;
@@ -55,6 +56,7 @@ $input-width: 340px;
 
 .add-property-form__fields-wrap {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .add-property-form__submit-wrap {

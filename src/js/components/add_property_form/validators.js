@@ -30,7 +30,7 @@ export const propertySchema = Yup.object().shape({
       value ? value.toString().length === 5 : false
     )
     .label('"Zipcode"'),
-  package: Yup.string()
+  package: Yup.mixed()
     .required()
     .label('"Package"')
 });
