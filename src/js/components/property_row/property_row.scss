@@ -1,4 +1,4 @@
-@import "css/base.scss";
+@import 'css/base.scss';
 
 $height: 64px;
 $min-width: 770px;
@@ -11,64 +11,87 @@ $name-width: 25%;
 $name-min-width: 250px;
 $address-min-width: 370px;
 $arrow-size: 12px;
+$link-padding: 8px 10px;
 
 
 .property-row {
     display: flex;
-    cursor: pointer;
     height: $height;
-    align-items: center;
+    min-width: $min-width;
     padding: 0 $field-padding;
     font-size: $text-base;
     line-height: $line-height-relaxed;
-    min-width: $min-width;
-    box-sizing: border-box;
     border: 1px solid transparent;
-    transition: border 0.1s linear;
+    box-sizing: border-box;
+    transition: border .1s linear;
+    align-items: center;
 
     &:hover {
         background-color: $hover-color;
 
         .property-row__name:after {
-            content: '';
-            height: $arrow-size;
-            width: $arrow-size / 2;
-            margin-left: $field-padding / 2;
             display: inline-block;
+            width: $arrow-size / 2;
+            height: $arrow-size;
+            margin-left: $field-padding / 2;
             background-image: url(../../../images/icon-arrow-right.svg);
-            background-repeat: no-repeat;
             background-position: center;
+            background-repeat: no-repeat;
             background-size: contain;
+            content: '';
         }
 
         .property-row__address {
-            color: $content-text-primary-color;
+            display: none;
+        }
+
+        .property-row__link-container {
+            display: block;
         }
     }
 }
 
 .property-row__name {
-    padding-left: $field-padding;
     width: $field-width;
     min-width: $name-min-width;
+    padding-left: $field-padding;
     color: $content-text-primary-color;
 }
 
+.property-row__link-container,
 .property-row__address {
     width: $field-width;
     min-width: $address-min-width;
     padding-left: $field-padding;
-    color: $content-text-secondary-color;
     font-weight: $weight-light;
+    color: $content-text-secondary-color;
+}
+
+.property-row__link-container {
+    display: none;
+}
+
+.property-row__link {
+    display: inline-block;
+    padding: $link-padding;
+    font-family: $font-sans;
+    font-size: $text-xs;
+    color: $nav-link-color;
+    text-decoration: none;
+    cursor: pointer;
+    background: $default-background-color;
+    border-radius: $border-radius-default;
 }
 
 .property-row__selector {
+    position: relative;
     width: $image-size;
     height: $image-size;
-    border-radius: $border-radius-default;
-    position: relative;
     overflow: hidden;
-    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: $border-radius-default;
+    transition: all .2s ease-in-out;
 
     & > div {
         position: absolute;
@@ -78,22 +101,28 @@ $arrow-size: 12px;
         height: 100%;
         background-repeat: no-repeat;
     }
+
+    &:hover {
+        .property-row__selector-hover {
+            background: linear-gradient(0deg, rgba(0, 105, 255, .5), rgba(0, 105, 255, .5));
+        }
+    }
 }
 
 .property-row__image {
     background-color: $gray-3; // in case of image missing
-    background-size: cover;
-    background-repeat: no-repeat;
     background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .property-row__tick {
-    background-image: url(../../../images/icon-tick.svg);
     background-color: $blue-3; // in case of image missing
-    background-size: 13px 10px;
+    background-image: url(../../../images/icon-tick.svg);
     background-position: center;
+    background-size: 13px 10px;
     opacity: 0;
-    transition: opacity 0.1s linear;
+    transition: opacity .1s linear;
 }
 
 .property-row--selection-mode {
@@ -107,5 +136,9 @@ $arrow-size: 12px;
 
     .property-row__tick {
         opacity: 1;
+    }
+
+    .property-row__address {
+        color: $content-text-primary-color;
     }
 }
