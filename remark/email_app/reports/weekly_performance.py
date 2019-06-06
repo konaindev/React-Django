@@ -120,7 +120,7 @@ def create_html(
         "name": project.name,
         "city": project.address.city,
         "state": project.address.state,
-        "campaign_health": health,
+        "campaign_health": int(health),
         "campaign_insight": leaseratetext,
         "lease_rate": top_kpi("lease_rate", this_week),
         "best_kpi": top_kpi(
