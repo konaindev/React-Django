@@ -3,15 +3,15 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 import { withState } from "@dump247/storybook-state";
 
-import RegionalMap from "./index";
+import USRegionalMap from "./index";
 import { props } from "./props";
 
-storiesOf("RegionalMap", module)
+storiesOf("USRegionalMap", module)
   .add(
     "default",
     withState({ excludedRegions: [] })(({ store }) => (
       <div style={{ margin: "80px auto" }}>
-        <RegionalMap
+        <USRegionalMap
           {...props}
           excludedRegions={store.state.excludedRegions}
           onExcludeRegion={region => {
@@ -30,4 +30,6 @@ storiesOf("RegionalMap", module)
       </div>
     ))
   )
-  .add("max size", () => <RegionalMap {...props} width="100%" height="100%" />);
+  .add("max size", () => (
+    <USRegionalMap {...props} width="100%" height="100%" />
+  ));

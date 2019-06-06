@@ -10,57 +10,57 @@ $button-hover: rgba($gray-5, .5);
 $button-spacing: 10px 16px;
 $tooltip-margin: -8px -10px;
 
-.regional-map--hover {
-    .regional-map__region {
+.us-regional-map--hover {
+    .us-regional-map__region {
         fill: rgba($map-disable-color, .6);
     }
 
-    .regional-map__label {
+    .us-regional-map__label {
         fill: $map-label-hover-color;
     }
 }
 
-.regional-map--w {
-    .regional-map__region--w {
+.us-regional-map--w {
+    .us-regional-map__region--w {
         fill: $map-hover-color;
     }
 
-    .regional-map__label--w {
+    .us-regional-map__label--w {
         fill: $map-label-color;
     }
 }
 
-.regional-map--s {
-    .regional-map__region--s {
+.us-regional-map--s {
+    .us-regional-map__region--s {
         fill: $map-hover-color;
     }
 
-    .regional-map__label--s {
+    .us-regional-map__label--s {
         fill: $map-label-color;
     }
 }
 
-.regional-map--mw {
-    .regional-map__region--mw {
+.us-regional-map--mw {
+    .us-regional-map__region--mw {
         fill: $map-hover-color;
     }
 
-    .regional-map__label--mw {
+    .us-regional-map__label--mw {
         fill: $map-label-color;
     }
 }
 
-.regional-map--ne {
-    .regional-map__region--ne {
+.us-regional-map--ne {
+    .us-regional-map__region--ne {
         fill: $map-hover-color;
     }
 
-    .regional-map__label--ne {
+    .us-regional-map__label--ne {
         fill: $map-label-color;
     }
 }
 
-.regional-map__region {
+.us-regional-map__region {
     &--w {
         fill: $west-color;
     }
@@ -78,7 +78,7 @@ $tooltip-margin: -8px -10px;
     }
 }
 
-.regional-map__label {
+.us-regional-map__label {
     font-family: $font-sans;
     font-size: $text-xs;
     font-weight: bold;
@@ -91,14 +91,14 @@ $tooltip-margin: -8px -10px;
     }
 }
 
-.regional-map__button-container {
+.us-regional-map__tooltip {
     width: $button-width;
     margin: $tooltip-margin;
     overflow: hidden;
     border-radius: $border-radius-default;
 }
 
-.regional-map__button {
+.us-regional-map__button {
     display: block;
     padding: $button-spacing;
     font-size: $text-xs;

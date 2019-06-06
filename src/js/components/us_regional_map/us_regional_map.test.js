@@ -1,16 +1,16 @@
 import renderer from "react-test-renderer";
 
-import RegionalMap from "./index";
+import USRegionalMap from "./index";
 import { props } from "./props";
 
-describe("RegionalMap", () => {
+describe("USRegionalMap", () => {
   it("renders correctly", () => {
-    const tree = renderer.create(<RegionalMap {...props} />).toJSON();
+    const tree = renderer.create(<USRegionalMap {...props} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
   it("max size", () => {
     const tree = renderer
-      .create(<RegionalMap width="100%" height="100%" {...props} />)
+      .create(<USRegionalMap width="100%" height="100%" {...props} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
