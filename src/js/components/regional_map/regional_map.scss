@@ -5,11 +5,14 @@ $south-color: $cyan-3;
 $midwest-color: $green-2;
 $northeast-color: $turquoise-3;
 $dark-label-color: $gray-2;
+$button-width: 140px;
+$button-hover: rgba($gray-5, .5);
+$button-spacing: 10px 16px;
+$tooltip-margin: -8px -10px;
 
 .regional-map--hover {
     .regional-map__region {
-        opacity: .6;
-        fill: $map-disable-color;
+        fill: rgba($map-disable-color, .6);
     }
 
     .regional-map__label {
@@ -17,64 +20,60 @@ $dark-label-color: $gray-2;
     }
 }
 
-.regional-map--west {
-    .regional-map__region--west {
-        opacity: 1;
+.regional-map--w {
+    .regional-map__region--w {
         fill: $map-hover-color;
     }
 
-    .regional-map__label--west {
+    .regional-map__label--w {
         fill: $map-label-color;
     }
 }
 
-.regional-map--south {
-    .regional-map__region--south {
-        opacity: 1;
+.regional-map--s {
+    .regional-map__region--s {
         fill: $map-hover-color;
     }
 
-    .regional-map__label--south {
+    .regional-map__label--s {
         fill: $map-label-color;
     }
 }
 
-.regional-map--midwest {
-    .regional-map__region--midwest {
-        opacity: 1;
+.regional-map--mw {
+    .regional-map__region--mw {
         fill: $map-hover-color;
     }
 
-    .regional-map__label--midwest {
+    .regional-map__label--mw {
         fill: $map-label-color;
     }
 }
 
-.regional-map--northeast {
-    .regional-map__region--northeast {
-        opacity: 1;
+.regional-map--ne {
+    .regional-map__region--ne {
         fill: $map-hover-color;
     }
 
-    .regional-map__label--northeast {
+    .regional-map__label--ne {
         fill: $map-label-color;
     }
 }
 
 .regional-map__region {
-    &--west {
+    &--w {
         fill: $west-color;
     }
 
-    &--south {
+    &--s {
         fill: $south-color;
     }
 
-    &--midwest {
+    &--mw {
         fill: $midwest-color;
     }
 
-    &--northeast {
+    &--ne {
         fill: $northeast-color;
     }
 }
@@ -85,10 +84,29 @@ $dark-label-color: $gray-2;
     font-weight: bold;
     letter-spacing: $letter-spacing-wider;
     text-transform: uppercase;
-    pointer-events: none;
     fill: $map-label-color;
 
-    &--south {
+    &--s {
         fill: $dark-label-color;
+    }
+}
+
+.regional-map__button-container {
+    width: $button-width;
+    margin: $tooltip-margin;
+    overflow: hidden;
+    border-radius: $border-radius-default;
+}
+
+.regional-map__button {
+    display: block;
+    padding: $button-spacing;
+    font-size: $text-xs;
+    letter-spacing: $letter-spacing-wide;
+    color: $button-default-active-text-color;
+    text-decoration: none;
+    cursor: pointer;
+    &:hover {
+        background: $button-hover;
     }
 }
