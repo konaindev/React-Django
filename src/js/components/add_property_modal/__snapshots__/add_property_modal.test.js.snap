@@ -79,6 +79,7 @@ exports[`AddPropertyModal renders AddPropertyModal correctly 1`] = `
               onChange={[Function]}
               placeholder="Property Name"
               type="text"
+              value=""
             />
           </div>
         </div>
@@ -98,6 +99,7 @@ exports[`AddPropertyModal renders AddPropertyModal correctly 1`] = `
               onChange={[Function]}
               placeholder="Street Address 1"
               type="text"
+              value=""
             />
           </div>
         </div>
@@ -115,6 +117,7 @@ exports[`AddPropertyModal renders AddPropertyModal correctly 1`] = `
               onChange={[Function]}
               placeholder="Street Address 2"
               type="text"
+              value=""
             />
           </div>
         </div>
@@ -124,20 +127,20 @@ exports[`AddPropertyModal renders AddPropertyModal correctly 1`] = `
           <div
             className="add-property-form__label"
           />
-          <div
-            className="add-property-form__fields-wrap"
-          >
-            <div>
+          <div>
+            <div
+              className="add-property-form__fields-wrap"
+            >
               <input
                 className="input add-property-form__input add-property-form__input--city"
                 name="city"
                 onBlur={[Function]}
                 onChange={[Function]}
+                onFocus={[Function]}
                 placeholder="City"
                 type="text"
+                value=""
               />
-            </div>
-            <div>
               <div
                 className="select add-property-form__input add-property-form__input--state css-2b097c-container"
                 onKeyDown={[Function]}
@@ -191,15 +194,15 @@ exports[`AddPropertyModal renders AddPropertyModal correctly 1`] = `
                   value=""
                 />
               </div>
-            </div>
-            <div>
               <input
                 className="input add-property-form__input add-property-form__input--zipcode"
                 name="zipcode"
                 onBlur={[Function]}
                 onChange={[Function]}
+                onFocus={[Function]}
                 placeholder="Zipcode"
                 type="text"
+                value=""
               />
             </div>
           </div>

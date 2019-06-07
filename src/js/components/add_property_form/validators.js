@@ -19,9 +19,6 @@ export const propertySchema = Yup.object().shape({
     .required()
     .max(128)
     .label('"City"'),
-  state: Yup.string()
-    .required()
-    .label('"State"'),
   zipcode: Yup.number()
     .required()
     .positive()
@@ -30,6 +27,9 @@ export const propertySchema = Yup.object().shape({
       value ? value.toString().length === 5 : false
     )
     .label('"Zipcode"'),
+  state: Yup.mixed()
+    .required()
+    .label('"State"'),
   package: Yup.mixed()
     .required()
     .label('"Package"')
