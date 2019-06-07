@@ -56,7 +56,6 @@ Select.propTypes = {
   onChange: PropTypes.func,
   components: PropTypes.object
 };
-
 Select.defaultProps = {
   components: {}
 };
