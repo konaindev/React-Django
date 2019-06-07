@@ -19,7 +19,7 @@ from .models import Project
 from .forms import TAMExportForm
 from .tasks import export_tam_task
 
-from remark.lib.logging import getLogger
+from remark.lib.logging import getLogger, error_text
 
 
 logger = getLogger(__name__)
@@ -67,14 +67,19 @@ class ReportPageViewBase(ReactView):
         if (self.selector is None) or (not self.selector.has_report_data()):
             raise Http404
 
-        logger.info("ReportPageViewBase::get::report_links")
-        report_links = ReportLinks.public_for_project(self.project)
-        logger.info("ReportPageViewBase::get::project.to_jsonable")
-        project_json = self.project.to_jsonable()
-        logger.info("ReportPageViewBase::get::get_report_data")
-        report=self.selector.get_report_data()
-        logger.info("ReportPageViewBase::get::get_link")
-        current_report_link=self.selector.get_link()
+        try:
+            logger.info("ReportPageViewBase::get::report_links")
+            report_links = ReportLinks.public_for_project(self.project)
+            logger.info("ReportPageViewBase::get::project.to_jsonable")
+            project_json = self.project.to_jsonable()
+            logger.info("ReportPageViewBase::get::get_report_data")
+            report=self.selector.get_report_data()
+            logger.info("ReportPageViewBase::get::get_link")
+            current_report_link=self.selector.get_link()
+        except Exception as e:
+            logger.error(error_text(e))
+            raise Http404
+
         logger.info("ReportPageViewBase::get::bottom")
         return self.render(
             report_links=report_links,
