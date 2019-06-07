@@ -67,14 +67,15 @@ class ReportPageViewBase(ReactView):
         if (self.selector is None) or (not self.selector.has_report_data()):
             raise Http404
 
+        project_json = None
+        report_links = None
+        report = None
+        current_report_link = None
+
         try:
-            logger.info("ReportPageViewBase::get::report_links")
             report_links = ReportLinks.public_for_project(self.project)
-            logger.info("ReportPageViewBase::get::project.to_jsonable")
             project_json = self.project.to_jsonable()
-            logger.info("ReportPageViewBase::get::get_report_data")
             report=self.selector.get_report_data()
-            logger.info("ReportPageViewBase::get::get_link")
             current_report_link=self.selector.get_link()
         except Exception as e:
             logger.error(error_text(e))
@@ -83,7 +84,7 @@ class ReportPageViewBase(ReactView):
         logger.info("ReportPageViewBase::get::bottom")
         return self.render(
             report_links=report_links,
-            project=project,
+            project=project_json,
             report=report,
             current_report_link=current_report_link,
         )
