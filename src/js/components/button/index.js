@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import cn from "classnames";
+import cx from "classnames";
 
 import "./button.scss";
 
@@ -8,11 +8,25 @@ export default class Button extends Component {
   static propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
+    disabled: PropTypes.bool,
     selected: PropTypes.bool,
     fullWidth: PropTypes.bool,
     uppercase: PropTypes.bool,
     color: PropTypes.oneOf(["default", "primary", "outline"]),
     onClick: PropTypes.func
+  };
+
+  static defaultProps = {
+    color: "default",
+    disabled: false,
+    onClick: () => {}
+  };
+
+  handleClick = () => {
+    const { disabled, onClick } = this.props;
+    if (!disabled) {
+      onClick();
+    }
   };
 
   render() {
@@ -21,16 +35,19 @@ export default class Button extends Component {
       className,
       color,
       onClick,
+      disabled,
       selected,
       fullWidth,
       uppercase,
       ...buttonProps
     } = this.props;
+
     return (
       <button
-        className={cn(
+        className={cx(
           "button",
           {
+            "button--disabled": disabled,
             "button--selected": selected,
             "button--block": fullWidth,
             "button--uppercase": uppercase
@@ -38,7 +55,7 @@ export default class Button extends Component {
           `button--${color}`,
           className
         )}
-        onClick={onClick}
+        onClick={this.handleClick}
         {...buttonProps}
       >
         {children}

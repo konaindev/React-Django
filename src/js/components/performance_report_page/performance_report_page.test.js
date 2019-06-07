@@ -1,6 +1,6 @@
 import renderer from "react-test-renderer";
 import PerformanceReportPage from "./index";
-import { props } from "./props";
+import props from "./props";
 
 describe("PerformanceReportPage", () => {
   beforeEach(() => {

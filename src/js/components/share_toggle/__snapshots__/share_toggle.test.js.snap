@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ShareToggle renders share toggle correctly 1`] = `
+<div
+  className="share-toggle"
+>
+  <label
+    className="button-toggle"
+  >
+    <input
+      checked={true}
+      onChange={[Function]}
+      type="checkbox"
+    />
+    <span
+      className="toggle-tracks toggle-tracks--checked"
+    >
+      <span
+        className="toggle-thumb"
+      />
+      <div
+        className="toggle-button-checked"
+      >
+        <div
+          className="toggle-inner-label"
+        >
+          On
+        </div>
+      </div>
+      <div
+        className="toggle-button-unchecked"
+      >
+        <div
+          className="toggle-inner-label"
+        >
+          Off
+        </div>
+      </div>
+    </span>
+    
+  </label>
+  <button
+    className="button button--primary copy-to-clipboard"
+    onClick={[Function]}
+  >
+    Copy Link
+  </button>
+</div>
+`;

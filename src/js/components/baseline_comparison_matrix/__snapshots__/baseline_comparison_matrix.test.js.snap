@@ -1,0 +1,6749 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BaselineComparisonMatrix No Competitors 1`] = `
+<div
+  className="baseline-comparison-matrix"
+>
+  <div
+    className="section-header"
+  >
+    <p
+      className="section-header__title"
+    >
+      Baseline Comparison Matrix
+    </p>
+  </div>
+  <div
+    className="panel panel--default baseline-comparison-panel"
+  >
+    <div
+      className="ReactTable baseline-comparison-table"
+      style={Object {}}
+    >
+      <div
+        className="rt-table"
+        role="grid"
+      >
+        <div
+          className="rt-thead -header"
+          style={
+            Object {
+              "minWidth": "300px",
+            }
+          }
+        >
+          <div
+            className="rt-tr"
+            role="row"
+          >
+            <div
+              className="rt-th"
+              onClick={[Function]}
+              role="columnheader"
+              style={
+                Object {
+                  "flex": "100 0 auto",
+                  "maxWidth": null,
+                  "width": "100px",
+                }
+              }
+              tabIndex="-1"
+            >
+              <div
+                className=""
+              >
+                
+              </div>
+            </div>
+            <div
+              className="rt-th text-right"
+              onClick={[Function]}
+              role="columnheader"
+              style={
+                Object {
+                  "flex": "100 0 auto",
+                  "maxWidth": null,
+                  "width": "100px",
+                }
+              }
+              tabIndex="-1"
+            >
+              <div
+                className=""
+              >
+                Portland Multi-Family
+                <br />
+                Campaign
+              </div>
+            </div>
+            <div
+              className="rt-th text-right"
+              onClick={[Function]}
+              role="columnheader"
+              style={
+                Object {
+                  "flex": "100 0 auto",
+                  "maxWidth": null,
+                  "width": "100px",
+                }
+              }
+              tabIndex="-1"
+            >
+              <div
+                className=""
+              >
+                Cross-Sample
+                <br />
+                Average
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="rt-tbody"
+          style={
+            Object {
+              "minWidth": "300px",
+            }
+          }
+        >
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Location
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Seattle, WA
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Date
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Jul '17 - Jul '18
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Baseline Duration (Months)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                12 Months
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                12 Months
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Number of Units
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                201
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                201
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Min. Monthly Rental ($)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $1,847
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $1,847
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Max. Monthly Rental ($)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              />
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $0
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Avg. Cost per Sqft ($)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $1,847
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $1,847
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Campaign Investment
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $74k
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $74k
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Estimated Revenue Change
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $3m
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $3m
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                ROMI
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                38x
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                38x
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Leased Rate
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                74%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                74%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Retention Rate
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                71%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                71%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Occupancy Rate
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                71%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                71%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Cancellation & Denial Rate
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                29%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                29%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Notices to Renew
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                94
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                94
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Notices to Vacate
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                38
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                38
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Move Ins
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                72
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                72
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Move Outs
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                36
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                36
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Unique Site Visitors (USV)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                19,621
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                19,621
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Inquiries (INQ)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                785
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                785
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Tours (TOU)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                259
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                259
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Lease Applications (APP)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                96
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                96
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Lease Executions (EXE)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                68
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                68
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                USV &gt; EXE
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                INQ &gt; TOU
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                33%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                33%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                TOU &gt; APP
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                37%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                37%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                APP &gt; EXE
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                71%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                71%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Cost Per USV
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $3.47
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $3.47
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Cost Per INQ
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $86.62
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $86.62
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Cost Per TOU
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $262.00
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $262.00
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Cost Per APP
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $708.00
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $708.00
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Cost Per EXE
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $1,000
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $1,000
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="-loading"
+      >
+        <div
+          className="-loading-inner"
+        >
+          Loading...
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`BaselineComparisonMatrix One Competitor 1`] = `
+<div
+  className="baseline-comparison-matrix"
+>
+  <div
+    className="section-header"
+  >
+    <p
+      className="section-header__title"
+    >
+      Baseline Comparison Matrix
+    </p>
+  </div>
+  <div
+    className="panel panel--default baseline-comparison-panel"
+  >
+    <div
+      className="ReactTable baseline-comparison-table"
+      style={Object {}}
+    >
+      <div
+        className="rt-table"
+        role="grid"
+      >
+        <div
+          className="rt-thead -header"
+          style={
+            Object {
+              "minWidth": "400px",
+            }
+          }
+        >
+          <div
+            className="rt-tr"
+            role="row"
+          >
+            <div
+              className="rt-th"
+              onClick={[Function]}
+              role="columnheader"
+              style={
+                Object {
+                  "flex": "100 0 auto",
+                  "maxWidth": null,
+                  "width": "100px",
+                }
+              }
+              tabIndex="-1"
+            >
+              <div
+                className=""
+              >
+                
+              </div>
+            </div>
+            <div
+              className="rt-th text-right"
+              onClick={[Function]}
+              role="columnheader"
+              style={
+                Object {
+                  "flex": "100 0 auto",
+                  "maxWidth": null,
+                  "width": "100px",
+                }
+              }
+              tabIndex="-1"
+            >
+              <div
+                className=""
+              >
+                Portland Multi-Family
+                <br />
+                Campaign
+              </div>
+            </div>
+            <div
+              className="rt-th text-right"
+              onClick={[Function]}
+              role="columnheader"
+              style={
+                Object {
+                  "flex": "100 0 auto",
+                  "maxWidth": null,
+                  "width": "100px",
+                }
+              }
+              tabIndex="-1"
+            >
+              <div
+                className=""
+              >
+                Anonymous 1
+              </div>
+            </div>
+            <div
+              className="rt-th text-right"
+              onClick={[Function]}
+              role="columnheader"
+              style={
+                Object {
+                  "flex": "100 0 auto",
+                  "maxWidth": null,
+                  "width": "100px",
+                }
+              }
+              tabIndex="-1"
+            >
+              <div
+                className=""
+              >
+                Cross-Sample
+                <br />
+                Average
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="rt-tbody"
+          style={
+            Object {
+              "minWidth": "400px",
+            }
+          }
+        >
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Location
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Seattle, WA
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Seattle, WA
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Date
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Jul '17 - Jul '18
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Jan '17 - May '18
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Baseline Duration (Months)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                12 Months
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                16 Months
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                14 Months
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Number of Units
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                201
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                200
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                201
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Min. Monthly Rental ($)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $1,847
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $7,278
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $4,563
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Max. Monthly Rental ($)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              />
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              />
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $0
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Avg. Cost per Sqft ($)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $1,847
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $7,278
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $4,563
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Campaign Investment
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $74k
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $66k
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $70k
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Estimated Revenue Change
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $3m
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $2m
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $2m
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                ROMI
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                38x
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                26x
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                32x
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Leased Rate
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                74%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                42%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                58%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Retention Rate
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                71%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                36%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Occupancy Rate
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                71%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                36%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Cancellation & Denial Rate
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                29%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                15%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Notices to Renew
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                94
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                47
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Notices to Vacate
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                38
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                19
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Move Ins
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                72
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                36
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Move Outs
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                36
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                18
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Unique Site Visitors (USV)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                19,621
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                10,786
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                15,204
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Inquiries (INQ)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                785
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                487
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                636
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Tours (TOU)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                259
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                269
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                264
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Lease Applications (APP)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                96
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                30
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                63
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Lease Executions (EXE)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                68
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                27
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                48
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                USV &gt; EXE
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                INQ &gt; TOU
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                33%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                55%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                44%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                TOU &gt; APP
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                37%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                11%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                24%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                APP &gt; EXE
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                71%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                90%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                80%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Cost Per USV
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $3.47
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $6.12
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $4.80
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Cost Per INQ
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $86.62
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $135.52
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $111.07
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Cost Per TOU
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $262.00
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $245.35
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $253.68
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Cost Per APP
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $708.00
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $2,200.00
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $1,454.00
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Cost Per EXE
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $1,000
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $2,444
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $1,722
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="-loading"
+      >
+        <div
+          className="-loading-inner"
+        >
+          Loading...
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`BaselineComparisonMatrix renders correctly 1`] = `
+<div
+  className="baseline-comparison-matrix"
+>
+  <div
+    className="section-header"
+  >
+    <p
+      className="section-header__title"
+    >
+      Baseline Comparison Matrix
+    </p>
+  </div>
+  <div
+    className="panel panel--default baseline-comparison-panel"
+  >
+    <div
+      className="ReactTable baseline-comparison-table"
+      style={Object {}}
+    >
+      <div
+        className="rt-table"
+        role="grid"
+      >
+        <div
+          className="rt-thead -header"
+          style={
+            Object {
+              "minWidth": "500px",
+            }
+          }
+        >
+          <div
+            className="rt-tr"
+            role="row"
+          >
+            <div
+              className="rt-th"
+              onClick={[Function]}
+              role="columnheader"
+              style={
+                Object {
+                  "flex": "100 0 auto",
+                  "maxWidth": null,
+                  "width": "100px",
+                }
+              }
+              tabIndex="-1"
+            >
+              <div
+                className=""
+              >
+                
+              </div>
+            </div>
+            <div
+              className="rt-th text-right"
+              onClick={[Function]}
+              role="columnheader"
+              style={
+                Object {
+                  "flex": "100 0 auto",
+                  "maxWidth": null,
+                  "width": "100px",
+                }
+              }
+              tabIndex="-1"
+            >
+              <div
+                className=""
+              >
+                Portland Multi-Family
+                <br />
+                Campaign
+              </div>
+            </div>
+            <div
+              className="rt-th text-right"
+              onClick={[Function]}
+              role="columnheader"
+              style={
+                Object {
+                  "flex": "100 0 auto",
+                  "maxWidth": null,
+                  "width": "100px",
+                }
+              }
+              tabIndex="-1"
+            >
+              <div
+                className=""
+              >
+                Anonymous 1
+              </div>
+            </div>
+            <div
+              className="rt-th text-right"
+              onClick={[Function]}
+              role="columnheader"
+              style={
+                Object {
+                  "flex": "100 0 auto",
+                  "maxWidth": null,
+                  "width": "100px",
+                }
+              }
+              tabIndex="-1"
+            >
+              <div
+                className=""
+              >
+                Anonymous 2
+              </div>
+            </div>
+            <div
+              className="rt-th text-right"
+              onClick={[Function]}
+              role="columnheader"
+              style={
+                Object {
+                  "flex": "100 0 auto",
+                  "maxWidth": null,
+                  "width": "100px",
+                }
+              }
+              tabIndex="-1"
+            >
+              <div
+                className=""
+              >
+                Cross-Sample
+                <br />
+                Average
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="rt-tbody"
+          style={
+            Object {
+              "minWidth": "500px",
+            }
+          }
+        >
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Location
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Seattle, WA
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Seattle, WA
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Seattle, WA
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Date
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Jul '17 - Jul '18
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Jan '17 - May '18
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Feb '19 - Mar '19
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Baseline Duration (Months)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                12 Months
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                16 Months
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                1 Months
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                10 Months
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Number of Units
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                201
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                200
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              />
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                134
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Min. Monthly Rental ($)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $1,847
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $7,278
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $1,400
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $3,508
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Max. Monthly Rental ($)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              />
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              />
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              />
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $0
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Avg. Cost per Sqft ($)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $1,847
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $7,278
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $1,948
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $3,691
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Campaign Investment
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $74k
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $66k
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $5k
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $48k
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Estimated Revenue Change
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $3m
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $2m
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $655k
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $2m
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                ROMI
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                38x
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                26x
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                120x
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                61x
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Leased Rate
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                74%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                42%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                74%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                63%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Retention Rate
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                71%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                24%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Occupancy Rate
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                71%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                73%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                48%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Cancellation & Denial Rate
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                29%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                16%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                15%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Notices to Renew
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                94
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                31
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Notices to Vacate
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                38
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                2
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                13
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Move Ins
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                72
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                31
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                34
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Move Outs
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                36
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                2
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                13
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Unique Site Visitors (USV)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                19,621
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                10,786
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                10,136
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Inquiries (INQ)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                785
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                487
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                137
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                470
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Tours (TOU)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                259
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                269
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                35
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                188
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Lease Applications (APP)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                96
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                30
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                37
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                54
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Lease Executions (EXE)
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                68
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                27
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                31
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                42
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                USV &gt; EXE
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                0%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                INQ &gt; TOU
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                33%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                55%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                26%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                38%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                TOU &gt; APP
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                37%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                11%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                106%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                51%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                APP &gt; EXE
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                71%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                90%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                84%
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                82%
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Cost Per USV
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $3.47
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $6.12
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $0.00
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $3.20
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Cost Per INQ
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $86.62
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $135.52
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $33.94
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $85.36
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Cost Per TOU
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $262.00
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $245.35
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $132.87
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $213.41
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -odd"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Cost Per APP
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $708.00
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $2,200.00
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $125.68
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $1,011.23
+              </div>
+            </div>
+          </div>
+          <div
+            className="rt-tr-group"
+            role="rowgroup"
+          >
+            <div
+              className="rt-tr -even"
+              role="row"
+            >
+              <div
+                className="rt-td"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                Cost Per EXE
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $1,000
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $2,444
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $150
+              </div>
+              <div
+                className="rt-td baseline-comparison-table__value-cell"
+                onClick={[Function]}
+                role="gridcell"
+                style={
+                  Object {
+                    "flex": "100 0 auto",
+                    "maxWidth": null,
+                    "width": "100px",
+                  }
+                }
+              >
+                $1,198
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="-loading"
+      >
+        <div
+          className="-loading-inner"
+        >
+          Loading...
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

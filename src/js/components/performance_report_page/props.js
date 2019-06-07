@@ -245,5 +245,15 @@ const current_report_link = {
   url: "/projects/pro_example/performance/last-four-weeks/",
   description: "Last Four Weeks (Dec 03 2018 - Dec 31 2018)"
 };
+const share_info = {
+  shared: false,
+  share_url: `/projects/${project.public_id}/share/performance/last-four-weeks/`
+};
 
-export const props = { project, report, report_links, current_report_link };
+export default {
+  project,
+  report,
+  report_links,
+  current_report_link,
+  share_info
+};

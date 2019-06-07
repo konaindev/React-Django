@@ -85,6 +85,11 @@ class UserManager(BaseUserManager):
         if extra_fields.get("is_superuser") is not True:
             raise ValueError("Superuser must have is_superuser=True.")
 
+        try:
+            account = Account.objects.get(company_name="Remarkably", account_type=4)
+            extra_fields.setdefault("account_id", account.id)
+        except Account.DoesNotExist:
+            pass
         return self._create_user(email, raw_password=password, **extra_fields)
 
 
