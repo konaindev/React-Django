@@ -106,7 +106,7 @@ export default class AddPropertyForm extends Component {
             <Input
               className="add-property-form__input"
               name="property_name"
-              placeholder="abc apartments"
+              placeholder="Property Name"
               type="text"
             />
           </Field>
