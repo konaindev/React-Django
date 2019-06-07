@@ -174,6 +174,7 @@ LOGGING = {
         "remark": {"handlers": ["remarkably"]},
     },
 }
+DEBUG_PRINT_LOGGER = True
 
 # Change 'default' database configuration with $DATABASE_URL.
 DATABASES["default"].update(dj_database_url.config(conn_max_age=500))
