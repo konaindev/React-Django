@@ -20,6 +20,8 @@ exports[`AddPropertyForm add property form 1`] = `
       >
         ADD PHOTO
         <input
+          accept="image/*"
+          name="photo"
           onChange={[Function]}
           style={
             Object {

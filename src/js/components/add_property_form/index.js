@@ -168,7 +168,9 @@ export default class AddPropertyForm extends Component {
       <label className="add-property-form__file">
         ADD PHOTO
         <input
+          accept="image/*"
           type="file"
+          name="photo"
           style={{ display: "none" }}
           onChange={this.getPhoto}
         />

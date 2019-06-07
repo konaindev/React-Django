@@ -49,6 +49,8 @@ exports[`AddPropertyModal renders AddPropertyModal correctly 1`] = `
           >
             ADD PHOTO
             <input
+              accept="image/*"
+              name="photo"
               onChange={[Function]}
               style={
                 Object {

@@ -235,6 +235,7 @@ AWS_QUERYSTRING_AUTH = False
 
 MEDIA_ROOT = os.getenv("MEDIA_ROOT", "")  # Must correspond with storage instance.
 MEDIA_URL = os.getenv("MEDIA_URL", "")  # See the top-level README for details.
+FILE_UPLOAD_MAX_MEMORY_SIZE = 1024 ** 2 * 5  # 5MB
 
 #
 # Javascript reversing.
