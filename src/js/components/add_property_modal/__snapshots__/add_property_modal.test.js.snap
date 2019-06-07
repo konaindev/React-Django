@@ -72,7 +72,7 @@ exports[`AddPropertyModal renders AddPropertyModal correctly 1`] = `
           <input
             className="input add-property-form__input"
             name="property_name"
-            placeholder="abc apartments"
+            placeholder="Property Name"
             type="text"
           />
         </div>
