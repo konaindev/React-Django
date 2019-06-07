@@ -1,6 +1,8 @@
 import cn from "classnames";
+import { Field } from "formik";
+import _clone from "lodash/clone";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { Component } from "react";
 import ReactSelect, { components } from "react-select";
 
 import "./select.scss";
@@ -49,7 +51,7 @@ Select.propTypes = {
   className: PropTypes.string,
   name: PropTypes.string,
   defaultValue: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.object,
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   components: PropTypes.object
@@ -58,3 +60,43 @@ Select.propTypes = {
 Select.defaultProps = {
   components: {}
 };
+
+export function FormSelect(props) {
+  return <Field component={FormSelectComponent} {...props} />;
+}
+FormSelect.propTypes = {
+  name: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  defaultValue: PropTypes.string,
+  value: PropTypes.object,
+  placeholder: PropTypes.string
+};
+
+class FormSelectComponent extends Component {
+  onChange = obj => {
+    const { field, form } = this.props;
+    const values = _clone(form.values);
+    values[field.name] = obj;
+    form.setValues(values);
+  };
+
+  onBlur = () => {
+    const { field, form } = this.props;
+    const touched = _clone(form.touched);
+    touched[field.name] = true;
+    form.setTouched(touched);
+  };
+
+  render() {
+    const { form, field, ...otherProps } = this.props;
+    return (
+      <Select
+        name={field.name}
+        value={field.value}
+        onChange={this.onChange}
+        onBlur={this.onBlur}
+        {...otherProps}
+      />
+    );
+  }
+}

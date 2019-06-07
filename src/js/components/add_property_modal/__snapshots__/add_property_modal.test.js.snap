@@ -285,6 +285,7 @@ exports[`AddPropertyModal renders AddPropertyModal correctly 1`] = `
             <button
               className="button button--disabled add-property-form__submit"
               onClick={[Function]}
+              type="submit"
             >
               SUBMIT
             </button>

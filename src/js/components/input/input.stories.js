@@ -3,6 +3,12 @@ import React, { Component } from "react";
 
 import { storiesOf } from "@storybook/react";
 
-import Input from "./index";
+import { default as Input, FormInput } from "./index";
 
-storiesOf("Input", module).add("text", () => <Input type="text" />);
+storiesOf("Input", module)
+  .add("text", () => <Input placeholder="text" type="text" />)
+  .add("form input", () => (
+    <Formik>
+      <FormInput placeholder="text" type="text" />
+    </Formik>
+  ));

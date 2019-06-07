@@ -1,133 +1,14 @@
-import cn from "classnames";
-import { Formik, Form, Field as FormikField, ErrorMessage } from "formik";
-import _clone from "lodash/clone";
+import { Formik, Form } from "formik";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import CloseIcon from "../../icons/close";
 import Button from "../button";
-import Input from "../input";
-import Select from "../select";
+import { FormSelect } from "../select";
 
 import "./add_property_form.scss";
+import { default as Field, FieldInput, WrappedFields } from "./fields";
 import { propertySchema } from "./validators";
-
-function FieldInput(props) {
-  return (
-    <div>
-      <FormikField {...props} />
-      <ErrorMessage className="error" name={props.name} component="div" />
-    </div>
-  );
-}
-FieldInput.propTypes = {
-  name: PropTypes.string.isRequired
-};
-
-function Field(props) {
-  const className = cn("add-property-form__field", props.className);
-  return (
-    <div className={className}>
-      <div className="add-property-form__label">{props.label}</div>
-      {props.children}
-    </div>
-  );
-}
-Field.propTypes = {
-  children: PropTypes.node.isRequired,
-  label: PropTypes.string,
-  className: PropTypes.string,
-  name: PropTypes.string
-};
-
-class WrappedFields extends Component {
-  static fields = ["city", "state", "zipcode"];
-
-  onWrappedFocus = e => {
-    const fields = _clone(this.props.touched);
-    for (const f of WrappedFields.fields) {
-      fields[f] = false;
-    }
-    fields[e.target.name] = true;
-    this.props.setTouched(fields);
-  };
-
-  get errorMessage() {
-    const { errors, touched } = this.props;
-    let msg;
-    for (const f of WrappedFields.fields) {
-      if (errors[f] && touched[f]) {
-        msg = errors[f];
-        break;
-      }
-    }
-    if (!msg) {
-      return;
-    }
-    return <div className="error">{msg}</div>;
-  }
-
-  render() {
-    return (
-      <div>
-        <div className="add-property-form__fields-wrap">
-          <FormikField name="city">
-            {({ field }) => (
-              <Input
-                {...field}
-                className="add-property-form__input add-property-form__input--city"
-                placeholder="City"
-                type="text"
-                onFocus={this.onWrappedFocus}
-              />
-            )}
-          </FormikField>
-          <FormikField name="state">
-            {({ field }) => (
-              <Select
-                {...field}
-                onChange={obj => {
-                  const values = _clone(this.props.values);
-                  values["state"] = obj;
-                  this.props.setValues(values);
-                }}
-                onBlur={() => {
-                  const t = _clone(this.props.touched);
-                  t.state = true;
-                  this.props.setTouched(t);
-                }}
-                className="add-property-form__input add-property-form__input--state"
-                options={this.props.states}
-                placeholder="State"
-                onFocus={this.onWrappedFocus}
-              />
-            )}
-          </FormikField>
-          <FormikField name="zipcode">
-            {({ field }) => (
-              <Input
-                {...field}
-                className="add-property-form__input add-property-form__input--zipcode"
-                placeholder="Zipcode"
-                type="text"
-                onFocus={this.onWrappedFocus}
-              />
-            )}
-          </FormikField>
-        </div>
-        {this.errorMessage}
-      </div>
-    );
-  }
-}
-WrappedFields.propTypes = {
-  errors: PropTypes.object.isRequired,
-  values: PropTypes.object.isRequired,
-  touched: PropTypes.object.isRequired,
-  states: PropTypes.array.isRequired,
-  setTouched: PropTypes.func.isRequired,
-  setValues: PropTypes.func.isRequired
-};
 
 const initialValues = {
   property_name: "",
@@ -205,14 +86,17 @@ export default class AddPropertyForm extends Component {
     this.setState({ image: null });
   };
 
+  onSubmit = () => {};
+
   render() {
     return (
       <Formik
         validationSchema={propertySchema}
         initialValues={initialValues}
         validateOnBlur={true}
+        onSubmit={this.onSubmit}
       >
-        {({ errors, touched, values, setTouched, setValues }) => (
+        {({ errors, touched, values, isValid, setTouched, setValues }) => (
           <Form
             className="add-property-form"
             action={this.props.post_url}
@@ -229,40 +113,28 @@ export default class AddPropertyForm extends Component {
             </div>
             <div className="add-property-form__column">
               <Field label="Property Name:">
-                <FieldInput name="property_name">
-                  {({ field }) => (
-                    <Input
-                      {...field}
-                      className="add-property-form__input"
-                      placeholder="Property Name"
-                      type="text"
-                    />
-                  )}
-                </FieldInput>
+                <FieldInput
+                  className="add-property-form__input"
+                  name="property_name"
+                  placeholder="Property Name"
+                  type="text"
+                />
               </Field>
               <Field label="Address:">
-                <FieldInput name="address">
-                  {({ field }) => (
-                    <Input
-                      {...field}
-                      className="add-property-form__input"
-                      placeholder="Street Address 1"
-                      type="text"
-                    />
-                  )}
-                </FieldInput>
+                <FieldInput
+                  className="add-property-form__input"
+                  name="address"
+                  placeholder="Street Address 1"
+                  type="text"
+                />
               </Field>
               <Field>
-                <FieldInput name="address2">
-                  {({ field }) => (
-                    <Input
-                      {...field}
-                      className="add-property-form__input"
-                      placeholder="Street Address 2"
-                      type="text"
-                    />
-                  )}
-                </FieldInput>
+                <FieldInput
+                  className="add-property-form__input"
+                  name="address2"
+                  placeholder="Street Address 2"
+                  type="text"
+                />
               </Field>
               <Field>
                 <WrappedFields
@@ -275,32 +147,20 @@ export default class AddPropertyForm extends Component {
                 />
               </Field>
               <Field label="Package Option:">
-                <FieldInput name="package">
-                  {({ field }) => (
-                    <Select
-                      {...field}
-                      className="add-property-form__input"
-                      options={this.packages}
-                      placeholder="Select a Package..."
-                      onBlur={() => {
-                        const t = _clone(touched);
-                        t.package = true;
-                        setTouched(t);
-                      }}
-                      onChange={obj => {
-                        const vals = _clone(values);
-                        vals["package"] = obj;
-                        setValues(vals);
-                      }}
-                    />
-                  )}
-                </FieldInput>
+                <FieldInput
+                  className="add-property-form__input"
+                  name="package"
+                  options={this.packages}
+                  placeholder="Select a Package..."
+                  component={FormSelect}
+                />
               </Field>
               <Field className="add-property-form__field--button">
                 <div className="add-property-form__submit-wrap">
                   <Button
                     className="add-property-form__submit"
-                    color="disabled"
+                    type="submit"
+                    color={isValid ? "primary" : "disabled"}
                   >
                     SUBMIT
                   </Button>
