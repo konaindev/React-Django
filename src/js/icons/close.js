@@ -1,4 +1,5 @@
 import React from "react";
+
 import IconBase from "./icon_base";
 
 const Close = props => (
