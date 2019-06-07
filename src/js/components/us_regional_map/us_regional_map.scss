@@ -81,7 +81,7 @@ $tooltip-margin: -8px -10px;
 .us-regional-map__label {
     font-family: $font-sans;
     font-size: $text-xs;
-    font-weight: bold;
+    font-weight: $weight-normal;
     letter-spacing: $letter-spacing-wider;
     text-transform: uppercase;
     fill: $map-label-color;
