@@ -19,6 +19,10 @@ from .models import Project
 from .forms import TAMExportForm
 from .tasks import export_tam_task
 
+from remark.lib.logging import getLogger
+
+
+logger = getLogger(__name__)
 
 
 class ProjectPageView(ReactView):
@@ -48,10 +52,14 @@ class ReportPageViewBase(ReactView):
         return f"{self.project.name} {self.page_title}"
 
     def get(self, request, project_id, *args, **kwargs):
+        logger.info("ReportPageViewBase::get::top")
         self.project = get_object_or_404(Project, public_id=project_id)
+        logger.info("ReportPageViewBase::get::after get_object_or_404")
 
         try:
+            logger.info("ReportPageViewBase::get::before selector_class")
             self.selector = self.selector_class(self.project, *args, **kwargs)
+            logger.info("ReportPageViewBase::get::after selector_class")
         except Exception:
             self.selector = None
             raise Http404
@@ -59,6 +67,7 @@ class ReportPageViewBase(ReactView):
         if (self.selector is None) or (not self.selector.has_report_data()):
             raise Http404
 
+        logger.info("ReportPageViewBase::get::bottom")
         return self.render(
             report_links=ReportLinks.public_for_project(self.project),
             project=self.project.to_jsonable(),
