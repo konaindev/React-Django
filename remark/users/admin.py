@@ -5,13 +5,26 @@ from django.utils.translation import gettext_lazy as _
 
 from remark.admin import admin_site
 from .models import Account, User
-from .forms import AccountForm
+from .forms import AccountForm, UserForm
 
 
 @admin.register(User, site=admin_site)
 class UserAdmin(AuthUserAdmin):
     fieldsets = (
-        (None, {"fields": ("email", "password", "account")}),
+        (
+            None,
+            {
+                "fields": (
+                    "email",
+                    "first_name",
+                    "last_name",
+                    "password",
+                    "avatar",
+                    "account",
+                    "projects",
+                )
+            }
+        ),
         (
             _("Permissions"),
             {
@@ -34,6 +47,7 @@ class UserAdmin(AuthUserAdmin):
     list_filter = ("is_staff", "is_superuser", "is_active", "groups")
     search_fields = ("email", "public_id")
     ordering = ("email",)
+    form = UserForm
     filter_horizontal = ("groups", "user_permissions")
 
 
