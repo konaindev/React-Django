@@ -7,7 +7,6 @@ export const states = [
   { id: "CO", name: "CO" },
   { id: "CT", name: "CT" },
   { id: "DE", name: "DE" },
-  { id: "DC", name: "DC" },
   { id: "FL", name: "FL" },
   { id: "GA", name: "GA" },
   { id: "HI", name: "HI" },
@@ -49,14 +48,5 @@ export const states = [
   { id: "WA", name: "WA" },
   { id: "WV", name: "WV" },
   { id: "WI", name: "WI" },
-  { id: "WY", name: "WY" },
-  { id: "AS", name: "AS" },
-  { id: "GU", name: "GU" },
-  { id: "MP", name: "MP" },
-  { id: "PR", name: "PR" },
-  { id: "VI", name: "VI" },
-  { id: "UM", name: "UM" },
-  { id: "FM", name: "FM" },
-  { id: "MH", name: "MH" },
-  { id: "PW", name: "PW" }
+  { id: "WY", name: "WY" }
 ];
