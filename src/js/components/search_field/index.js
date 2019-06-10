@@ -1,7 +1,8 @@
 import cn from "classnames";
 import PropTypes from "prop-types";
-
 import React from "react";
+
+import { Close, Search } from "../../icons";
 
 import "./search_field.scss";
 
@@ -38,7 +39,16 @@ class SearchField extends React.PureComponent {
     });
     return (
       <div className={className}>
-        <div className="search-field__icon" onClick={this.toggleActive} />
+        <div className="search-field__icon">
+          <Close
+            className="search-field__icon-close"
+            onClick={this.toggleActive}
+          />
+          <Search
+            className="search-field__icon-search"
+            onClick={this.toggleActive}
+          />
+        </div>
         <div className="search-field__input-wrapper">
           <input
             className="search-field__input"

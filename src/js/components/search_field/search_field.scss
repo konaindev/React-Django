@@ -1,14 +1,18 @@
 @import 'css/base.scss';
 
+$field-min-height: 20px;
 $input-height: 100%;
 $input-offset: 16px;
 $search-icon-size: 16px;
 $close-icon-size: 10px;
+$icon-color: $highlight-gray-3;
 
 
 .search-field {
     position: relative;
     display: flex;
+    width: 100%;
+    min-height: $field-min-height;
     align-items: center;
 
     .search-field__input {
@@ -21,6 +25,7 @@ $close-icon-size: 10px;
         color: $input-text-color;
         border: none;
         caret-color: $input-caret-color;
+
         &::placeholder {
             color: $default-text-color;
         }
@@ -35,21 +40,32 @@ $close-icon-size: 10px;
     max-width: 0;
     overflow: hidden;
     background-color: $default-background-color;
-    transition: all .1s linear;
+    transition: all .1s ease;
 }
 
 .search-field__icon {
     display: inline-block;
     width: $search-icon-size;
     height: $search-icon-size;
+    color: $icon-color;
+}
+
+.search-field__icon-close {
+    display: none;
+    width: $close-icon-size;
+    height: $close-icon-size;
     cursor: pointer;
-    background-image: url('../../../images/icon-search.svg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
+}
+
+.search-field__icon-search {
+    display: inline-block;
+    width: $search-icon-size;
+    height: $search-icon-size;
+    cursor: pointer;
 }
 
 .search-field__children {
+    width: 100%;
     margin-left: $input-offset;
 }
 
@@ -57,11 +73,14 @@ $close-icon-size: 10px;
     .search-field__input-wrapper {
         right: 0;
         max-width: 100%;
-        transition: all .5s linear;
+        transition: all .5s ease;
     }
 
-    .search-field__icon {
-        background-image: url('../../../images/icon-close.svg');
-        background-size: $close-icon-size;
+    .search-field__icon-close {
+        display: inline-block;
+    }
+
+    .search-field__icon-search {
+        display: none;
     }
 }
