@@ -7,6 +7,22 @@ import { Close, Search } from "../../icons";
 import "./search_field.scss";
 
 class SearchField extends React.PureComponent {
+  static propTypes = {
+    value: PropTypes.string,
+    placeholder: PropTypes.string,
+    children: PropTypes.node,
+    name: PropTypes.string,
+    onSubmit: PropTypes.func
+  };
+
+  static defaultProps = {
+    value: "",
+    placeholder: "Search Properties…",
+    children: null,
+    name: "q",
+    onSubmit: () => {}
+  };
+
   constructor(props) {
     super(props);
     let isActive = false;
@@ -56,6 +72,7 @@ class SearchField extends React.PureComponent {
               this.searchInput = input;
             }}
             type="text"
+            name={this.props.name}
             defaultValue={this.props.value}
             placeholder={this.props.placeholder}
             onKeyPress={this.onSubmit}
@@ -66,18 +83,5 @@ class SearchField extends React.PureComponent {
     );
   }
 }
-
-SearchField.propTypes = {
-  value: PropTypes.string,
-  placeholder: PropTypes.string,
-  children: PropTypes.node,
-  onSubmit: PropTypes.func
-};
-SearchField.defaultProps = {
-  value: "",
-  placeholder: "Search Properties…",
-  children: null,
-  onSubmit: () => {}
-};
 
 export default SearchField;

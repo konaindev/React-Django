@@ -21,14 +21,14 @@ exports[`SearchField active 1`] = `
       <path
         d="M1.43532 1.92201L11.3649 12.0613"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeWidth="2"
       />
       <path
         d="M11.4774 1.90854L1.83659 12.0504"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeWidth="2"
       />
     </svg>
     <svg
@@ -54,6 +54,7 @@ exports[`SearchField active 1`] = `
     <input
       className="search-field__input"
       defaultValue="search"
+      name="q"
       onKeyPress={[Function]}
       placeholder="Search Properties…"
       type="text"
@@ -86,14 +87,14 @@ exports[`SearchField custom placeholder 1`] = `
       <path
         d="M1.43532 1.92201L11.3649 12.0613"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeWidth="2"
       />
       <path
         d="M11.4774 1.90854L1.83659 12.0504"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeWidth="2"
       />
     </svg>
     <svg
@@ -119,6 +120,7 @@ exports[`SearchField custom placeholder 1`] = `
     <input
       className="search-field__input"
       defaultValue=""
+      name="q"
       onKeyPress={[Function]}
       placeholder="placeholder"
       type="text"
@@ -151,14 +153,14 @@ exports[`SearchField renders correctly 1`] = `
       <path
         d="M1.43532 1.92201L11.3649 12.0613"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeWidth="2"
       />
       <path
         d="M11.4774 1.90854L1.83659 12.0504"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeWidth="2"
       />
     </svg>
     <svg
@@ -184,6 +186,7 @@ exports[`SearchField renders correctly 1`] = `
     <input
       className="search-field__input"
       defaultValue=""
+      name="q"
       onKeyPress={[Function]}
       placeholder="Search Properties…"
       type="text"
@@ -216,14 +219,14 @@ exports[`SearchField renders with children 1`] = `
       <path
         d="M1.43532 1.92201L11.3649 12.0613"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeWidth="2"
       />
       <path
         d="M11.4774 1.90854L1.83659 12.0504"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-width="2"
+        strokeLinecap="round"
+        strokeWidth="2"
       />
     </svg>
     <svg
@@ -249,6 +252,7 @@ exports[`SearchField renders with children 1`] = `
     <input
       className="search-field__input"
       defaultValue=""
+      name="q"
       onKeyPress={[Function]}
       placeholder="Search Properties…"
       type="text"

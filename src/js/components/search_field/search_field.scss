@@ -48,6 +48,7 @@ $icon-color: $highlight-gray-3;
     width: $search-icon-size;
     height: $search-icon-size;
     color: $icon-color;
+    cursor: pointer;
 }
 
 .search-field__icon-close {
