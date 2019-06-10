@@ -1,0 +1,105 @@
+@import 'css/base.scss';
+
+.us-sub-region-map {
+    display: inline-block;
+
+    &--w {
+        padding-top: 55px;
+    }
+
+    &--mw {
+        padding-top: 45px;
+    }
+
+    &--s {
+        padding-top: 80px;
+    }
+
+    &--ne {
+        padding-top: 25px;
+    }
+}
+
+.us-sub-region-map__label {
+    font-family: $font-sans;
+    font-size: $text-xs;
+    font-weight: $weight-normal;
+    letter-spacing: $letter-spacing-wider;
+    text-transform: uppercase;
+    fill: #f5faf7;
+
+    &--id,
+    &--co {
+        fill: #181d23;
+    }
+}
+
+.us-sub-region-map--hover {
+    .us-sub-region-map__state {
+        fill: rgba(#2b343d, .6);
+    }
+
+    .us-sub-region-map__label {
+        fill: #404e5d;
+    }
+
+    .us-sub-region-map__state--hover {
+        fill: #006eff;
+    }
+
+    .us-sub-region-map__state--hover + .us-sub-region-map__label {
+        fill: #f5faf7;
+    }
+}
+
+.us-sub-region-map__state {
+    fill: rgba(#2b343d, .6);
+
+    &--ca {
+        fill: #41c100;
+    }
+
+    &--or {
+        fill: #338100;
+    }
+
+    &--wa {
+        fill: #1f4647;
+    }
+
+    &--id {
+        fill: #53f7dd;
+    }
+
+    &--co {
+        fill: #bcfbf1;
+    }
+
+    &--excluded {
+        fill: rgba(#2b343d, .6);
+    }
+}
+
+.us-sub-region-map__state--excluded + .us-sub-region-map__label {
+    fill: #404e5d;
+}
+
+.us-sub-region-map__tooltip {
+    width: 140px;
+    margin: -8px -10px;
+    overflow: hidden;
+    border-radius: $border-radius-default;
+}
+
+.us-sub-region-map__button {
+    display: block;
+    padding: 10px 16px;
+    font-size: $text-xs;
+    letter-spacing: $letter-spacing-wide;
+    color: $button-default-active-text-color;
+    text-decoration: none;
+    cursor: pointer;
+    &:hover {
+        background: rgba($gray-5, .5);
+    }
+}
