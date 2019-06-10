@@ -30,6 +30,7 @@ export default class DashboardPage extends React.PureComponent {
       viewType: props.viewType,
       selectedProperties: props.selectedProperties
     };
+    this.urlParams = new URLSearchParams(window.location.search);
   }
 
   selectAll = () => {
@@ -57,6 +58,18 @@ export default class DashboardPage extends React.PureComponent {
     }
   }
 
+  onSearchHandler = searchText => {
+    const oldSearchText = this.urlParams.get("q") || "";
+    if (searchText) {
+      this.urlParams.set("q", searchText);
+    } else {
+      this.urlParams.delete("q");
+    }
+    if (oldSearchText !== searchText) {
+      window.location.search = this.urlParams.toString();
+    }
+  };
+
   render() {
     const className = cn("dashboard-content", {
       "dashboard-content--selection-mode": this.state.selectedProperties.length
@@ -76,9 +89,13 @@ export default class DashboardPage extends React.PureComponent {
               </div>
             </div>
             <div className="dashboard-content__controls">
-              <div className="dashboard-content__filters">
-                <DashboardControls properties={this.props.properties} />
-              </div>
+              <form className="dashboard-content__filters">
+                <DashboardControls
+                  properties={this.props.properties}
+                  searchText={this.urlParams.get("q")}
+                  onSubmit={this.onSearchHandler}
+                />
+              </form>
               <div className="dashboard-content__selection">
                 <DashboardSelection
                   selectedProperties={this.state.selectedProperties}
@@ -139,9 +156,9 @@ DashboardSelection.propTypes = {
   selectedProperties: PropTypes.array.isRequired
 };
 
-const DashboardControls = ({ properties }) => {
+const DashboardControls = ({ properties, searchText, onSubmit }) => {
   return (
-    <SearchField>
+    <SearchField onSubmit={onSubmit} value={searchText}>
       <div className="dashboard-controls">
         <span className="dashboard-controls__title">
           {properties.length} Properties
