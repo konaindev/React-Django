@@ -30,6 +30,29 @@ storiesOf("USRegionalMap", module)
       </div>
     ))
   )
+  .add(
+    "Excluded West",
+    withState({ excludedRegions: ["w"] })(({ store }) => (
+      <div style={{ margin: "80px auto" }}>
+        <USRegionalMap
+          {...props}
+          excludedRegions={store.state.excludedRegions}
+          onExcludeRegion={region => {
+            const excludedRegions = [...store.state.excludedRegions, region];
+            store.set({ excludedRegions });
+            action("onExcludeRegion")(region);
+          }}
+          onIncludeRegion={region => {
+            const excludedRegions = store.state.excludedRegions.filter(
+              r => r !== region
+            );
+            store.set({ excludedRegions });
+            action("onIncludeRegion")(region);
+          }}
+        />
+      </div>
+    ))
+  )
   .add("max size", () => (
     <USRegionalMap {...props} width="100%" height="100%" />
   ));

@@ -18,44 +18,12 @@ $tooltip-margin: -8px -10px;
     .us-regional-map__label {
         fill: $map-label-hover-color;
     }
-}
 
-.us-regional-map--w {
-    .us-regional-map__region--w {
+    .us-regional-map__region--hover {
         fill: $map-hover-color;
     }
 
-    .us-regional-map__label--w {
-        fill: $map-label-color;
-    }
-}
-
-.us-regional-map--s {
-    .us-regional-map__region--s {
-        fill: $map-hover-color;
-    }
-
-    .us-regional-map__label--s {
-        fill: $map-label-color;
-    }
-}
-
-.us-regional-map--mw {
-    .us-regional-map__region--mw {
-        fill: $map-hover-color;
-    }
-
-    .us-regional-map__label--mw {
-        fill: $map-label-color;
-    }
-}
-
-.us-regional-map--ne {
-    .us-regional-map__region--ne {
-        fill: $map-hover-color;
-    }
-
-    .us-regional-map__label--ne {
+    .us-regional-map__region--hover + .us-regional-map__label {
         fill: $map-label-color;
     }
 }
@@ -76,6 +44,14 @@ $tooltip-margin: -8px -10px;
     &--ne {
         fill: $northeast-color;
     }
+
+    &--excluded {
+        fill: rgba($map-disable-color, .6);
+    }
+}
+
+.us-regional-map__region--excluded + .us-regional-map__label {
+    fill: $map-label-hover-color;
 }
 
 .us-regional-map__label {

@@ -8,6 +8,20 @@ describe("USRegionalMap", () => {
     const tree = renderer.create(<USRegionalMap {...props} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
+  it("Excluded West", () => {
+    const tree = renderer
+      .create(<USRegionalMap {...props} excludedRegions={["w"]} />)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+  it("Excluded all", () => {
+    const tree = renderer
+      .create(
+        <USRegionalMap {...props} excludedRegions={["w", "mw", "s", "ne"]} />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
   it("max size", () => {
     const tree = renderer
       .create(<USRegionalMap width="100%" height="100%" {...props} />)
