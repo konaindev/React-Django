@@ -7,13 +7,16 @@ from remark.lib.stats import health_check
 from remark.email_app.models import PerformanceEmail, PerformanceEmailKPI
 from remark.email_app.reports.constants import (
     SELECTORS,
-    SHOW_CAMPAIGN,
     KPI_NAMES,
-    KPI_POSITIVE_DIRECTION
+    KPI_POSITIVE_DIRECTION,
+    KPIS_INCLUDE_IN_EMAIL
 )
 
 import datetime
 
+from remark.lib.logging import getLogger
+
+logger = getLogger(__name__)
 
 @receiver(post_save, sender=Spreadsheet)
 def activate_spreadsheets_if_safe(sender, instance, created, raw, **kwargs):
@@ -54,61 +57,21 @@ def low_kpi_insight(name):
     human_name = KPI_NAMES[name]
     return f"Disappointing {human_name} last week. Let's make this old news quickly."
 
-@receiver(post_save, sender=Period)
-def update_performance_report(sender, instance, created, raw, **kwargs):
-
-    project = instance.project
-    start = instance.start
-
-    if not created and PerformanceEmail.objects.filter(start__exact=start, project__exact=project).count() > 0:
-        print("Already created performance email. Skipping.")
-        return
-
-    campaign_start = project.get_campaign_start()
-    end = instance.end
-    prevstart = start - datetime.timedelta(days=7)
-
-    if start < campaign_start:
-        print("Start date is before campaign start. Skipping.")
-        print(f"start: {start} || campaign start: {campaign_start}")
-        return
-
-    if not PerformanceReport.has_dates(project, campaign_start, end) or not PerformanceReport.has_dates(project, start, end):
-        print("Does not have required reports available. Skipping.")
-        return
-
-    campaign_to_date = PerformanceReport.for_dates(project, campaign_start, end).to_jsonable()
-    this_week = PerformanceReport.for_dates(project, start, end).to_jsonable()
-
-    print("campaign_to_date::", campaign_to_date)
-    print("this_week::", this_week)
-
-    # Props
-    lease_rate = SELECTORS["lease_rate"](campaign_to_date)
-    target_lease_rate = SELECTORS["lease_rate"](campaign_to_date["targets"])
-
-    # Campaign Health
-    campaign_health = health_check(lease_rate, target_lease_rate)
-
+def rank_kpis(report):
     # Find Top Weekly KPIs
-    ctd_model_percent = {}
-    wk_model_percent = {}
-    for k in SHOW_CAMPAIGN.keys():
-        if SHOW_CAMPAIGN[k]:
-            ctd = model_percent(k, campaign_to_date)
-            # We ignore percent of model values that don't make sense
-            # like Infinity, Zero, or Div by Zero Error
-            if ctd is not None:
-                ctd_model_percent[k] = ctd
+    result = {}
+    for k in KPIS_INCLUDE_IN_EMAIL:
+        mp = model_percent(k, report)
+        # We ignore percent of model values that don't make sense
+        # like Infinity, Zero, or Div by Zero Error
+        if mp is not None:
+            result[k] = mp
+    return result
 
-            wk = model_percent(k, this_week)
-            if wk is not None:
-                wk_model_percent[k] = wk
+def sort_kpis(kpis):
+    return sorted(kpis, key=kpis.get, reverse=True)
 
-    ctd_sorted = sorted(ctd_model_percent, key=ctd_model_percent.get, reverse=True)
-    wk_sorted = sorted(wk_model_percent, key=wk_model_percent.get, reverse=True)
-
-    # Find the Top KPIs
+def get_ctd_top_kpis(ctd_model_percent, ctd_sorted):
     top_kpis = []
     if ctd_model_percent[ctd_sorted[0]] > 0.95:
         top_kpis.append(ctd_sorted[0])
@@ -116,13 +79,14 @@ def update_performance_report(sender, instance, created, raw, **kwargs):
             top_kpis.append(ctd_sorted[1])
             if ctd_model_percent[ctd_sorted[2]] > 0.95:
                 top_kpis.append(ctd_sorted[2])
+    return top_kpis
 
+def get_ctd_rest(ctd_model_percent, ctd_sorted):
     risk_kpis = []
     low_kpis = []
     for x in range(-1, -7, -1):
         name = ctd_sorted[x]
         value = ctd_model_percent[name]
-        print(f"name::{name} - value::{value}")
         # Are we adding to at risk or off track
         if value < 0.95:
             if value < 0.75 and len(low_kpis) < 3:
@@ -133,6 +97,61 @@ def update_performance_report(sender, instance, created, raw, **kwargs):
                 break
         else:
             break
+    return (risk_kpis, low_kpis)
+
+def get_ctd_kpi_lists(ctd_model_percent):
+    ctd_sorted = sort_kpis(ctd_model_percent)
+    top_kpis = get_ctd_top_kpis(ctd_model_percent, ctd_sorted)
+    risk_kpis, low_kpis = get_ctd_rest(ctd_model_percent, ctd_sorted)
+    return (top_kpis, risk_kpis, low_kpis)
+
+@receiver(post_save, sender=Period)
+def update_performance_report(sender, instance, created, raw, **kwargs):
+
+    project = instance.project
+    start = instance.start
+
+    if not created and PerformanceEmail.objects.filter(start__exact=start, project__exact=project).count() > 0:
+        logger.info("Already created performance email. Skipping.")
+        return
+
+    campaign_start = project.get_campaign_start()
+    end = instance.end
+    prevstart = start - datetime.timedelta(days=7)
+
+    if start < campaign_start:
+        logger.info("Start date is before campaign start. Skipping.")
+        logger.info(f"start: {start} || campaign start: {campaign_start}")
+        return
+
+    if not PerformanceReport.has_dates(project, campaign_start, end) or not PerformanceReport.has_dates(project, start, end):
+        logger.info("Does not have required reports available. Skipping.")
+        return
+
+    campaign_to_date = PerformanceReport.for_dates(project, campaign_start, end).to_jsonable()
+    this_week = PerformanceReport.for_dates(project, start, end).to_jsonable()
+
+    logger.info("campaign_to_date::", campaign_to_date)
+    logger.info("this_week::", this_week)
+
+    # Props
+    lease_rate = SELECTORS["lease_rate"](campaign_to_date)
+    target_lease_rate = SELECTORS["lease_rate"](campaign_to_date["targets"])
+
+    # Campaign Health
+    campaign_health = health_check(lease_rate, target_lease_rate)
+
+    # Find Top Weekly KPIs
+    ctd_model_percent = rank_kpis(campaign_to_date)
+    wk_model_percent = rank_kpis(this_week)
+
+    # Find Top and Bottom KPI
+    wk_sorted = sort_kpis(wk_model_percent)
+
+    # Create KPI Lists for CTD
+    ctd_sorted = sort_kpis(ctd_model_percent)
+    top_kpis = get_ctd_top_kpis(ctd_model_percent, ctd_sorted)
+    risk_kpis, low_kpis = get_ctd_rest(ctd_model_percent, ctd_sorted)
 
     # https://app.remarkably.io/admin/email_app/performanceemail/26/change/
     pe = PerformanceEmail()
@@ -147,9 +166,9 @@ def update_performance_report(sender, instance, created, raw, **kwargs):
     pe.low_performing_insight = low_kpi_insight(wk_sorted[-1])
     pe.save()
 
-    print("TOP_KPIS::", top_kpis)
-    print("risk_kpis::", risk_kpis)
-    print("low_kpis::", low_kpis)
+    logger.info("TOP_KPIS::", top_kpis)
+    logger.info("risk_kpis::", risk_kpis)
+    logger.info("low_kpis::", low_kpis)
 
     for kpi in top_kpis:
         pek = PerformanceEmailKPI()

@@ -394,3 +394,118 @@ class LincolnTowerPeriodTestCase(TestCase):
         # CONSIDER moving this to a separate location
         report = PerformanceReport(self.project, self.raw_cumulative)
         self.assertTrue(report.to_jsonable())
+
+from .signals import model_percent, get_ctd_top_kpis, sort_kpis, get_ctd_rest
+
+class PerformanceEmailSignalTestCase(TestCase):
+    """Test an example performace creation."""
+
+    def setUp(self):
+        pass
+
+    def generate_mp_json(self, selectors, value, target):
+        tl_values = {}
+        values = tl_values
+        tl_targets = {}
+        targets = tl_targets
+        for x in range(len(selectors)):
+            if x >= len(selectors)-1:
+                values[selectors[x]] = value
+                targets[selectors[x]] = target
+            else:
+                values[selectors[x]] = {}
+                values = values[selectors[x]]
+                targets[selectors[x]] = {}
+                targets = targets[selectors[x]]
+        tl_values["targets"] = tl_targets
+        return tl_values
+
+    def test_model_percent_equal(self):
+        selectors = ["property", "leasing", "rate"]
+        target = 0.80
+        value = 0.80
+        json_report = self.generate_mp_json(selectors, value, target)
+        result = model_percent("lease_rate", json_report)
+        self.assertEqual(result, 1.0)
+
+    def test_model_percent_less(self):
+        selectors = ["property", "leasing", "rate"]
+        target = 0.80
+        value = 0.40
+        json_report = self.generate_mp_json(selectors, value, target)
+        result = model_percent("lease_rate", json_report)
+        self.assertEqual(result, 0.5)
+
+    def test_model_percent_greater(self):
+        selectors = ["property", "leasing", "rate"]
+        target = 0.80
+        value = 0.90
+        json_report = self.generate_mp_json(selectors, value, target)
+        result = model_percent("lease_rate", json_report)
+        self.assertEqual(result, 1.125)
+
+    def test_model_percent_move_outs_less(self):
+        selectors = ["property", "occupancy", "move_outs"]
+        target = 10
+        value = 12
+        json_report = self.generate_mp_json(selectors, value, target)
+        result = model_percent("move_outs", json_report)
+        self.assertEqual(result, 10/12)
+
+    def test_model_percent_move_outs_greater(self):
+        selectors = ["property", "occupancy", "move_outs"]
+        target = 10
+        value = 8
+        json_report = self.generate_mp_json(selectors, value, target)
+        result = model_percent("move_outs", json_report)
+        self.assertEqual(result, 1.25)
+
+    def test_get_ctd_top_kpis(self):
+        ctd_model_percent = {
+            'move_ins' : 1.0,
+            'move_outs' : 0.6
+        }
+        ctd_sorted = sort_kpis(ctd_model_percent)
+        result = get_ctd_top_kpis(ctd_model_percent, ctd_sorted)
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0], 'move_ins')
+
+    def test_get_ctd_top_kpis_full_set(self):
+        ctd_model_percent = {
+            'move_ins' : 1.0,
+            'usv' : 1.20,
+            'inq' : 1.40,
+            'move_outs' : 0.6
+        }
+        ctd_sorted = sort_kpis(ctd_model_percent)
+        result = get_ctd_top_kpis(ctd_model_percent, ctd_sorted)
+        self.assertEqual(len(result), 3)
+        self.assertEqual(result[0], 'inq')
+        self.assertEqual(result[1], 'usv')
+        self.assertEqual(result[2], 'move_ins')
+
+    def test_get_ctd_top_kpis_empty_set(self):
+        ctd_model_percent = {
+            'move_ins' : 0.85,
+            'usv' : 0.20,
+            'inq' : 0.40,
+            'move_outs' : 0.6
+        }
+        ctd_sorted = sort_kpis(ctd_model_percent)
+        result = get_ctd_top_kpis(ctd_model_percent, ctd_sorted)
+        self.assertEqual(len(result), 0)
+
+    def test_get_ctd_rest(self):
+        ctd_model_percent = {
+            'move_ins' : 0.95,
+            'usv' : 0.20,
+            'inq' : 0.40,
+            'move_outs' : 0.8,
+        }
+        ctd_sorted = sort_kpis(ctd_model_percent)
+        risk, low = get_ctd_rest(ctd_model_percent, ctd_sorted)
+        self.assertEqual(len(risk), 1)
+        self.assertEqual(risk[0], 'move_outs')
+        self.assertEqual(len(low), 2)
+        self.assertEqual(low[0], 'usv')
+        self.assertEqual(low[1], 'inq')

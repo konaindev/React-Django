@@ -123,6 +123,25 @@ SHOW_CAMPAIGN = {
     "cost_per_exe" : True
 }
 
+# KPIs that should be included in Email Reports
+# These came from Sergey - TPC
+KPIS_INCLUDE_IN_EMAIL = [
+    "retention_rate",
+    "occupied_rate",
+    # "cds", We should add this back in when we have a better modeling system - TPC
+    "renew",
+    "vacate",
+    "usv",
+    "inq",
+    "tou",
+    "app",
+    "exe",
+    "usv_inq",
+    "inq_tou",
+    "tou_app",
+    "app_exe"
+]
+
 KPI_POSITIVE_DIRECTION = {
     "lease_rate" : True,
     "retention_rate" : True,
