@@ -12,6 +12,7 @@ exports[`Button renders default button correctly 1`] = `
 exports[`Button renders disabled button correctly 1`] = `
 <button
   className="button button--disabled"
+  onClick={[Function]}
 >
   Disabled Button
 </button>

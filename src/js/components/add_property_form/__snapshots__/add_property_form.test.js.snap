@@ -224,6 +224,7 @@ exports[`AddPropertyForm add property form 1`] = `
       >
         <button
           className="button button--disabled add-property-form__submit"
+          onClick={[Function]}
         >
           SUBMIT
         </button>
