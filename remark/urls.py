@@ -44,6 +44,5 @@ urlpatterns = [
     path("releases/", include("remark.releases.urls")),
     # Misc. site-wide pages (about/company/privacy policy/refund policy/etc)
     path("", include("remark.web.urls")),
-    path("email_app/", include("remark.email_app.urls")),
     path("sales/", include("remark.sales.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
