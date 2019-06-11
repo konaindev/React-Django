@@ -6,11 +6,11 @@ import { props } from "./props";
 
 storiesOf("DashboardPage", module)
   .add("default", () => <DashboardPage {...props} />)
-  .add("Row view", () => <DashboardPage {...props} viewType="row" />)
+  .add("List view", () => <DashboardPage {...props} viewType="list" />)
   .add("Row select", () => (
     <DashboardPage
       {...props}
-      viewType="row"
+      viewType="list"
       selectedProperties={[props.properties[0].property_id]}
     />
   ));

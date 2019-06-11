@@ -22,6 +22,10 @@ $filter-field-spacing: 8px;
     justify-content: flex-end;
 }
 
+.dashboard-content__title-right {
+    display: flex;
+}
+
 .dashboard-content--selection-mode {
     .dashboard-content__filters {
         height: 0;
@@ -48,7 +52,7 @@ $filter-field-spacing: 8px;
 
 .dashboard-content__select-view {
     display: inline-block;
-    margin-right: 34px;
+    margin-right: 22px;
 }
 
 

@@ -3,12 +3,13 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Button from "../button";
+import ToggleButton from "../toggle_button";
 import Container from "../container";
 import PageChrome from "../page_chrome";
 import PropertyCardList from "../property_card_list";
 import PropertyList from "../property_list";
 import SearchField from "../search_field";
-import { Close } from "../../icons";
+import { Close, ListView, TileView } from "../../icons";
 
 import "./dashboard_page.scss";
 
@@ -21,8 +22,19 @@ export default class DashboardPage extends React.PureComponent {
 
   static defaultProps = {
     selectedProperties: [],
-    viewType: "card"
+    viewType: "tile"
   };
+
+  static buttonOptions = [
+    {
+      id: "list",
+      icon: ListView
+    },
+    {
+      id: "tile",
+      icon: TileView
+    }
+  ];
 
   constructor(props) {
     super(props);
@@ -42,16 +54,8 @@ export default class DashboardPage extends React.PureComponent {
     this.setState({ selectedProperties: [] });
   };
 
-  rowView = () => {
-    this.setState({ viewType: "row" });
-  };
-
-  cardView = () => {
-    this.setState({ viewType: "card" });
-  };
-
   get propertiesListComponent() {
-    if (this.state.viewType === "card") {
+    if (this.state.viewType === "tile") {
       return PropertyCardList;
     } else {
       return PropertyList;
@@ -80,10 +84,13 @@ export default class DashboardPage extends React.PureComponent {
         <div className={className}>
           <Container>
             <div className="dashboard-content__title">
-              <div>
+              <div className="dashboard-content__title-right">
                 <div className="dashboard-content__select-view">
-                  <Button onClick={this.rowView}>row</Button>
-                  <Button onClick={this.cardView}>card</Button>
+                  <ToggleButton
+                    options={DashboardPage.buttonOptions}
+                    value={this.state.viewType}
+                    onChange={viewType => this.setState({ viewType })}
+                  />
                 </div>
                 <Button color="primary">Add Property</Button>
               </div>
