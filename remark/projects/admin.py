@@ -1,12 +1,12 @@
 from django.contrib import admin
 from django.template.response import TemplateResponse
-from django.urls import path
+from django.urls import path, reverse
 from django.utils.safestring import mark_safe
 
 from remark.admin import admin_site
 from remark.analytics.admin import InlineAnalyticsProviderAdmin
 from .forms import ProjectForm, SpreadsheetForm
-from .models import Fund, Project, Period, Spreadsheet, TargetPeriod, TAMExportLog, Tag
+from .models import Fund, Project, Period, Spreadsheet, TargetPeriod, TAMExportLog, Tag, CampaignModel
 from .views import TAMExportView
 
 import datetime
@@ -49,6 +49,33 @@ class SpreadsheetAdmin(UpdateSpreadsheetAdminMixin, admin.ModelAdmin):
             if obj is not None
             else self.pre_creation_readonly_fields
         )
+
+
+@admin.register(CampaignModel, site=admin_site)
+class CampaignModelAdmin(admin.ModelAdmin):
+    list_display = ["name", "project", "is_selected", "active", "model_index", "model_start", "model_end"]
+    readonly_fields = ["project", "is_selected", "file_url", "json_data" ]
+
+    def project(self, obj):
+        return mark_safe('<a href="{}">{}</a>'.format(
+            reverse("admin:projects_project_change", args=(obj.project().pk,)),
+            obj.project().name
+        ))
+
+    def is_selected(self, obj):
+        return "Yes" if obj.is_selected() else ""
+
+    fieldsets = (
+        ("Model Details", {
+            "fields": ("project", "name", "model_start", "model_end", "active", "model_index"),
+        }),
+        ("Spreadsheet", {
+            "fields": ("file_url", "json_data")
+        })
+    )
+
+    def has_add_permission(self, request):
+        return False
 
 
 class NewSpreadsheetInline(admin.StackedInline):

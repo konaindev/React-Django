@@ -50,6 +50,21 @@ class CampaignModel(models.Model):
     active = models.BooleanField(default=True)
     model_index = models.IntegerField(default=0)
 
+    def project(self):
+        return self.campaign.project
+
+    def is_selected(self):
+        return self.campaign.selected_campaign_model == self
+
+    def file_url(self):
+        return self.spreadsheet.file_url
+
+    def json_data(self):
+        return self.spreadsheet.json_data
+
+    def __str__(self):
+        return f"{self.name} | {self.project().name}"
+
 
 class Spreadsheet2(models.Model):
     spreadsheet_id = models.CharField(
