@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Select render select 1`] = `
+<div
+  className="select multi-select css-1ym6uuo-container"
+  onKeyDown={[Function]}
+>
+  <div
+    className="select__control css-yk16xz-control"
+    onMouseDown={[Function]}
+    onTouchEnd={[Function]}
+  >
+    <div
+      className="select__value-container select__value-container--is-multi css-1hwfws3"
+    >
+      <div
+        className="select__placeholder css-1wa3eu0-placeholder"
+      >
+        Select an option...
+      </div>
+      <input
+        className="css-62g3xt-dummyInput"
+        disabled={false}
+        id="react-select-2-input"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        readOnly={true}
+        tabIndex="0"
+        value=""
+      />
+    </div>
+    <div
+      className="select__indicators css-1wy0on6"
+    >
+      <span
+        className="select__indicator-separator css-1okebmr-indicatorSeparator"
+      />
+      <div
+        aria-hidden="true"
+        className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+        onMouseDown={[Function]}
+        onTouchEnd={[Function]}
+      >
+        <div
+          className="select__dropdown-arrow"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
