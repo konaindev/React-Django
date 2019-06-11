@@ -206,7 +206,7 @@ class CommonReport(ReportBase):
         """
         Return a structure that can be converted to a JSON string.
 
-        This must match the schemee in our typescript.
+        This must match the scheme in our typescript.
         """
         dates = {"start": self.period.get_start(), "end": self.period.get_end()}
 

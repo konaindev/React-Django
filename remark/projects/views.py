@@ -64,8 +64,10 @@ class ReportPageViewBase(ReactView):
             self.selector = None
             raise Http404
 
+        logger.info("ReportPageViewBase::get::checking has_report_data")
         if (self.selector is None) or (not self.selector.has_report_data()):
             raise Http404
+        logger.info("ReportPageViewBase::get::after checking has_report_data")
 
         project_json = None
         report_links = None

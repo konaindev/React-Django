@@ -95,13 +95,13 @@ class PerformanceReport(CommonReport):
         """
         Return True if it's possible to build a perf report for these dates.
         """
-        # return cls.has_time_delta_from_end(project, time_delta=end - start, end=end)
+        return cls.has_time_delta_from_end(project, time_delta=end - start, end=end)
         # Should be using the above but does not always work - TPC
-        try:
+        '''try:
             cls.for_dates(project, start, end).to_jsonable()
             return True
         except:
-            return False
+            return False'''
 
 
     @classmethod
