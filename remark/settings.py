@@ -90,6 +90,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "remark.lib.middleware.exception.log_500",
     "django.middleware.security.SecurityMiddleware",
     # Handled by django_heroku.settings(...)
     # "whitenoise.middleware.WhiteNoiseMiddleware",
