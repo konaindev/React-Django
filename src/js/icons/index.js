@@ -6,3 +6,4 @@ export { default as ListView } from "./list_view";
 export { default as TileView } from "./tile_view";
 export { default as Close } from "./close";
 export { default as Search } from "./search";
+export { default as Sort } from "./sort";
