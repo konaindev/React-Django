@@ -6,6 +6,7 @@ $filter-field-spacing: 8px;
 .dashboard-content {
     padding: $s12;
     text-align: center;
+    min-width: 1450px;
 }
 
 .dashboard-content__controls {
@@ -71,17 +72,20 @@ $filter-field-spacing: 8px;
     font-family: $font-sans;
     font-size: $text-sm;
     font-weight: $weight-medium;
-    letter-spacing: $letter-spacing-wider;
+    letter-spacing: $letter-spacing-wide;
     color: $title-section-color;
     text-align: left;
     text-transform: uppercase;
 }
 
 .dashboard-controls__field {
+    width: 180px;
+    text-align: left;
     margin-left: $filter-field-spacing;
 }
 
 .dashboard-controls__sort {
+    width: 293px;
     margin-left: auto;
 }
 
@@ -91,7 +95,7 @@ $filter-field-spacing: 8px;
     font-family: $font-sans;
     font-size: $text-xs;
     font-weight: $weight-normal;
-    letter-spacing: $letter-spacing-wider;
+    letter-spacing: $letter-spacing-wide;
     color: $title-small-color;
     text-transform: uppercase;
 }
@@ -120,7 +124,7 @@ $filter-field-spacing: 8px;
     font-family: $font-sans;
     font-size: $text-xs;
     font-weight: $weight-normal;
-    letter-spacing: $letter-spacing-wider;
+    letter-spacing: $letter-spacing-wide;
     color: $button-default-active-text-color;
     align-items: center;
 }

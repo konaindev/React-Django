@@ -3,12 +3,14 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import Button from "../button";
+import SortSelect from "../sort_select";
 import ToggleButton from "../toggle_button";
 import Container from "../container";
 import PageChrome from "../page_chrome";
 import PropertyCardList from "../property_card_list";
-import PropertyList from "../property_list";
+// import PropertyList from "../property_list";
 import SearchField from "../search_field";
+import MultiSelect from "../multi_select";
 import { Close, ListView, TileView } from "../../icons";
 
 import "./dashboard_page.scss";
@@ -16,6 +18,9 @@ import "./dashboard_page.scss";
 export default class DashboardPage extends React.PureComponent {
   static propTypes = {
     properties: PropTypes.array.isRequired,
+    funds: PropTypes.array.isRequired,
+    asset_managers: PropTypes.array.isRequired,
+    property_managers: PropTypes.array.isRequired,
     selectedProperties: PropTypes.arrayOf(PropTypes.string),
     viewType: PropTypes.string
   };
@@ -34,6 +39,16 @@ export default class DashboardPage extends React.PureComponent {
       id: "tile",
       icon: TileView
     }
+  ];
+
+  static sortOptions = [
+    { label: "Recently Viewed", value: "recently" },
+    { label: "By Property Mgr.", value: "propertyMgr" },
+    { label: "By Asset Owner", value: "assetOwner" },
+    { label: "By Region", value: "region" },
+    { label: "By City", value: "city" },
+    { label: "By Fund", value: "fund" },
+    { label: "By performance", value: "performance" }
   ];
 
   constructor(props) {
@@ -58,8 +73,36 @@ export default class DashboardPage extends React.PureComponent {
     if (this.state.viewType === "tile") {
       return PropertyCardList;
     } else {
-      return PropertyList;
+      // return PropertyList;
+      return "PropertyList";
     }
+  }
+
+  get fundsOptions() {
+    return this.props.funds.map(fund => ({
+      label: fund.label,
+      value: fund.id
+    }));
+  }
+
+  get assetOwnersOptions() {
+    return this.props.asset_managers.map(am => ({
+      label: am.label,
+      value: am.id
+    }));
+  }
+  get propertyManagersOptions() {
+    return this.props.property_managers.map(am => ({
+      label: am.label,
+      value: am.id
+    }));
+  }
+
+  get locationsOptions() {
+    return this.props.states.map(am => ({
+      label: am.label,
+      value: am.value
+    }));
   }
 
   onSearchHandler = searchText => {
@@ -96,13 +139,17 @@ export default class DashboardPage extends React.PureComponent {
               </div>
             </div>
             <div className="dashboard-content__controls">
-              <form className="dashboard-content__filters">
+              <div className="dashboard-content__filters">
                 <DashboardControls
                   properties={this.props.properties}
                   searchText={this.urlParams.get("q")}
+                  fundsOptions={this.fundsOptions}
+                  assetOwnersOptions={this.assetOwnersOptions}
+                  propertyManagersOptions={this.propertyManagersOptions}
+                  locationsOptions={this.locationsOptions}
                   onSubmit={this.onSearchHandler}
                 />
-              </form>
+              </div>
               <div className="dashboard-content__selection">
                 <DashboardSelection
                   selectedProperties={this.state.selectedProperties}
@@ -163,41 +210,60 @@ DashboardSelection.propTypes = {
   selectedProperties: PropTypes.array.isRequired
 };
 
-const DashboardControls = ({ properties, searchText, onSubmit }) => {
+const DashboardControls = ({
+  properties,
+  searchText,
+  onSubmit,
+  fundsOptions,
+  assetOwnersOptions,
+  propertyManagersOptions,
+  locationsOptions
+}) => {
   return (
     <SearchField onSubmit={onSubmit} value={searchText}>
       <div className="dashboard-controls">
         <span className="dashboard-controls__title">
           {properties.length} Properties
         </span>
-        <select className="dashboard-controls__field">
-          <option />
-          <option>1</option>
-        </select>
-        <select className="dashboard-controls__field">
-          <option />
-          <option>1</option>
-        </select>
-        <select className="dashboard-controls__field">
-          <option />
-          <option>1</option>
-        </select>
-        <select className="dashboard-controls__field">
-          <option />
-          <option>1</option>
-        </select>
-        <div className="dashboard-controls__sort">
-          <div className="dashboard-controls__sort-title">SORT:</div>
-          <select>
-            <option>Recently Viewed</option>
-            <option>By Property Mgr.</option>
-            <option>By Asset Owner</option>
-            <option>By region</option>
-            <option>By City</option>
-            <option>By Fund</option>
-            <option>By performance</option>
-          </select>
-        </div>
+        <MultiSelect
+          className="dashboard-controls__field"
+          options={locationsOptions}
+          styles={{
+            menu: provided => ({ ...provided, width: 320 })
+          }}
+          placeholder="Locations…"
+        />
+        <MultiSelect
+          className="dashboard-controls__field"
+          options={fundsOptions}
+          styles={{
+            menu: provided => ({ ...provided, width: 320 })
+          }}
+          placeholder="Funds…"
+        />
+        <MultiSelect
+          className="dashboard-controls__field"
+          options={assetOwnersOptions}
+          styles={{
+            menu: provided => ({ ...provided, width: 320 })
+          }}
+          placeholder="Asset Owners…"
+        />
+        <MultiSelect
+          className="dashboard-controls__field"
+          options={propertyManagersOptions}
+          styles={{
+            menu: provided => ({ ...provided, width: 320 })
+          }}
+          placeholder="Property Mgr…"
+        />
+        <SortSelect
+          className="dashboard-controls__sort"
+          options={DashboardPage.sortOptions}
+          defaultValue={DashboardPage.sortOptions[0]}
+          onChange={() => {}}
+          onReverse={() => {}}
+        />
       </div>
     </SearchField>
   );

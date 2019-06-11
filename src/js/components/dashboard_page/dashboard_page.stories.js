@@ -7,7 +7,7 @@ import { props } from "./props";
 storiesOf("DashboardPage", module)
   .add("default", () => <DashboardPage {...props} />)
   .add("List view", () => <DashboardPage {...props} viewType="list" />)
-  .add("Row select", () => (
+  .add("List select", () => (
     <DashboardPage
       {...props}
       viewType="list"
