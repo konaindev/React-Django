@@ -232,6 +232,7 @@ const DashboardControls = ({
             menu: provided => ({ ...provided, width: 320 })
           }}
           placeholder="Locations…"
+          label="Locations…"
         />
         <MultiSelect
           className="dashboard-controls__field"
@@ -240,6 +241,7 @@ const DashboardControls = ({
             menu: provided => ({ ...provided, width: 320 })
           }}
           placeholder="Funds…"
+          label="Funds…"
         />
         <MultiSelect
           className="dashboard-controls__field"
@@ -248,6 +250,7 @@ const DashboardControls = ({
             menu: provided => ({ ...provided, width: 320 })
           }}
           placeholder="Asset Owners…"
+          label="Asset Owners…"
         />
         <MultiSelect
           className="dashboard-controls__field"
@@ -256,6 +259,7 @@ const DashboardControls = ({
             menu: provided => ({ ...provided, width: 320 })
           }}
           placeholder="Property Mgr…"
+          label="Property Mgr…"
         />
         <SortSelect
           className="dashboard-controls__sort"
