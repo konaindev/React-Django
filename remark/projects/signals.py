@@ -131,22 +131,33 @@ def update_performance_report(sender, instance, created, raw, **kwargs):
     campaign_to_date = PerformanceReport.for_dates(project, campaign_start, end).to_jsonable()
     this_week = PerformanceReport.for_dates(project, start, end).to_jsonable()
 
-    logger.info("campaign_to_date::", campaign_to_date)
-    logger.info("this_week::", this_week)
-
     # Props
     lease_rate = SELECTORS["lease_rate"](campaign_to_date)
-    target_lease_rate = SELECTORS["lease_rate"](campaign_to_date["targets"])
+    target_lease_rate = 0.90
+    try:
+        target_lease_rate = SELECTORS["lease_rate"](campaign_to_date["targets"])
+    except:
+        logger.info("No targets set. Skipping performance email creation")
+        return
 
     # Campaign Health
     campaign_health = health_check(lease_rate, target_lease_rate)
 
     # Find Top Weekly KPIs
     ctd_model_percent = rank_kpis(campaign_to_date)
+    if len(ctd_model_percent.keys()) == 0:
+        logger.info("No ranked campaign kpis available. Skipping performance email creation")
+        return
+
     wk_model_percent = rank_kpis(this_week)
+    if len(wk_model_percent.keys()) == 0:
+        logger.info("No ranked weekly kpis available. Skipping performance email creation")
+        return
 
     # Find Top and Bottom KPI
     wk_sorted = sort_kpis(wk_model_percent)
+    top_kpi = wk_sorted[0]
+    low_kpi = wk_sorted[-1]
 
     # Create KPI Lists for CTD
     ctd_sorted = sort_kpis(ctd_model_percent)
@@ -160,15 +171,15 @@ def update_performance_report(sender, instance, created, raw, **kwargs):
     pe.end = end
     pe.campaign_health = str(campaign_health)
     pe.lease_rate_text = campaign_insight(campaign_health)
-    pe.top_performing_kpi = wk_sorted[0]
-    pe.top_performing_insight = top_kpi_insight(wk_sorted[0])
-    pe.low_performing_kpi = wk_sorted[-1]
-    pe.low_performing_insight = low_kpi_insight(wk_sorted[-1])
+    pe.top_performing_kpi = top_kpi
+    pe.top_performing_insight = top_kpi_insight(top_kpi)
+    pe.low_performing_kpi = low_kpi
+    pe.low_performing_insight = low_kpi_insight(low_kpi)
     pe.save()
 
-    logger.info("TOP_KPIS::", top_kpis)
-    logger.info("risk_kpis::", risk_kpis)
-    logger.info("low_kpis::", low_kpis)
+    logger.info(f"TOP_KPIS::{top_kpis}")
+    logger.info(f"risk_kpis::{risk_kpis}")
+    logger.info(f"low_kpis::{low_kpis}")
 
     for kpi in top_kpis:
         pek = PerformanceEmailKPI()

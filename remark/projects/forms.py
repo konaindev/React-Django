@@ -49,8 +49,9 @@ class SpreadsheetForm(forms.ModelForm):
 
             return cleaned_data
         except Exception as e:
-            logger.error(error_as_text(e))
-            raise Exception("Invalid spreadsheet")
+            etxt = error_text(e)
+            logger.error(etxt)
+            raise Exception(f"Invalid spreadsheet: {etxt}")
 
     class Meta:
         model = Spreadsheet
