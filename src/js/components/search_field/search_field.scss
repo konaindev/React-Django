@@ -37,6 +37,7 @@ $icon-color: $highlight-gray-3;
     top: 0;
     bottom: 0;
     left: $input-offset + $search-icon-size;
+    z-index: 1;
     max-width: 0;
     overflow: hidden;
     background-color: $default-background-color;
