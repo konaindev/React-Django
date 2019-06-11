@@ -42,7 +42,7 @@ class CampaignModel(models.Model):
         editable=False,
     )
     campaign = models.ForeignKey(
-        'Campaign', on_delete=models.CASCADE, related_name="campaign_models"
+        'Campaign', on_delete=models.CASCADE, related_name="campaign_models", verbose_name="Project"
     )
     spreadsheet = models.ForeignKey(
         'Spreadsheet2', on_delete=models.CASCADE, related_name="campaign_models"
@@ -53,17 +53,21 @@ class CampaignModel(models.Model):
     active = models.BooleanField(default=True)
     model_index = models.IntegerField(default=0)
 
-    def project(self):
+    def campaign_project(self):
         return self.campaign.project
+    project = property(campaign_project)
 
     def is_selected(self):
         return self.campaign.selected_campaign_model == self
+    selected = property(is_selected)
 
-    def file_url(self):
+    def spreadsheet_file_url(self):
         return self.spreadsheet.file_url
+    file_url = property(spreadsheet_file_url)
 
-    def json_data(self):
+    def spreadsheet_json_data(self):
         return self.spreadsheet.json_data
+    json_data = property(spreadsheet_json_data)
 
     def __str__(self):
         return "{} ({})".format(self.name, self.campaign_model_id)
