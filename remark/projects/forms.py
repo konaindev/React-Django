@@ -26,7 +26,10 @@ class SpreadsheetForm(forms.ModelForm):
         cleaned_data = super().clean()
 
         try:
-            if cleaned_data["kind"] != SpreadsheetKind.MODELING and cleaned_data["subkind"]:
+            if (
+                cleaned_data["kind"] != SpreadsheetKind.MODELING
+                and cleaned_data["subkind"]
+            ):
                 raise ValidationError(
                     "For non-modeling spreadsheets, 'subkind' must be blank."
                 )
@@ -38,7 +41,9 @@ class SpreadsheetForm(forms.ModelForm):
                     f"No spreadsheet importer available for {cleaned_data['kind']}"
                 )
             if not importer.is_valid():
-                raise ValidationError(f"Could not validate spreadsheet: {importer.errors}")
+                raise ValidationError(
+                    f"Could not validate spreadsheet: {importer.errors}"
+                )
 
             # If this is a modeling spreadsheet, set the subkind based on the model name.
             if cleaned_data["kind"] == SpreadsheetKind.MODELING:
@@ -48,10 +53,18 @@ class SpreadsheetForm(forms.ModelForm):
             cleaned_data["imported_data"] = importer.cleaned_data
 
             return cleaned_data
+        except ValidationError as e:
+            # It is important to raise ValidationError outward from a Django Form instance's
+            # clean() method if the only problem is with validation. If you do this, the
+            # form will simply return False for is_valid() and you can do normal form error
+            # handling. If you *don't* do this -- for instance, if you catch the ValidationError
+            # and re-raise a different exception of type Exception, then Django will assume
+            # that something unexpected happened. This will result in a 500 error. -Dave
+            raise e
         except Exception as e:
             etxt = error_text(e)
             logger.error(etxt)
-            raise Exception(f"Invalid spreadsheet: {etxt}")
+            raise Exception(f"Unexpected error when cleaning spreadsheet: {etxt}")
 
     class Meta:
         model = Spreadsheet
