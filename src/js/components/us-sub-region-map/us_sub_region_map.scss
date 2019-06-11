@@ -1,6 +1,9 @@
 @import 'css/base.scss';
 
-
+$button-width: 140px;
+$button-hover: rgba($gray-5, .5);
+$button-spacing: 10px 16px;
+$tooltip-margin: -8px -10px;
 
 .us-sub-region-map {
     display: inline-block;
@@ -28,7 +31,7 @@
     font-weight: $weight-normal;
     letter-spacing: $letter-spacing-wider;
     text-transform: uppercase;
-    fill: #f5faf7;
+    fill: $map-label-color;
 
     &--id,
     &--nm,
@@ -49,187 +52,187 @@
     &--ri,
     &--nj,
     &--vt {
-        fill: #181d23;
+        fill: $map-dark-label-color;
     }
 }
 
 .us-sub-region-map--hover {
     .us-sub-region-map__state {
-        fill: rgba(#2b343d, .6);
+        fill: $map-disable-color;
     }
 
     .us-sub-region-map__label {
-        fill: #404e5d;
+        fill: $map-label-hover-color;
     }
 
     .us-sub-region-map__state--hover {
-        fill: #006eff;
+        fill: $map-hover-color;
     }
 
     .us-sub-region-map__state--hover + .us-sub-region-map__label {
-        fill: #f5faf7;
+        fill: $map-label-color;
     }
 }
 
 .us-sub-region-map__state {
-    fill: rgba(#2b343d, .6);
+    fill: $map-disable-color;
 
     //WEST
     &--wa {
-        fill: #1D3D3E
+        fill: #1d3d3e;
     }
     &--or {
-        fill: #2C6038
+        fill: #2c6038;
     }
     &--ca {
-        fill: #325145
+        fill: #325145;
     }
     &--nv {
-        fill: #379D22
+        fill: #379d22;
     }
     &--az {
-        fill: #4ED26A
+        fill: #4ed26a;
     }
     &--nm {
-        fill: #49F6D8
+        fill: #49f6d8;
     }
     &--co {
-        fill: #51DC88
+        fill: #51dc88;
     }
     &--ut {
-        fill: #317333
+        fill: #317333;
     }
     &--wy {
-        fill: #49C94C
+        fill: #49c94c;
     }
     &--id {
-        fill: #84E5B4
+        fill: #84e5b4;
     }
     &--mt {
-        fill: #78CE60
+        fill: #78ce60;
     }
     &--ak {
-        fill: #84F4DD
+        fill: #84f4dd;
     }
     &--hi {
-        fill: #68BD39
+        fill: #68bd39;
     }
 
     //MIDWEST
     &--nd {
-        fill: #84F4DD
+        fill: #84f4dd;
     }
     &--sd {
-        fill: #325145
+        fill: #325145;
     }
     &--ne {
-        fill: #379D22
+        fill: #379d22;
     }
     &--ks {
-        fill: #84E5B4
+        fill: #84e5b4;
     }
     &--mn {
-        fill: #2C6038
+        fill: #2c6038;
     }
     &--ia {
-        fill: #51DC88
+        fill: #51dc88;
     }
     &--mo {
-        fill: #78CE6E
+        fill: #78ce6e;
     }
     &--wi {
-        fill: #49F6D8
+        fill: #49f6d8;
     }
     &--il {
-        fill: #68BD39
+        fill: #68bd39;
     }
     &--in {
-        fill: #317333
+        fill: #317333;
     }
     &--mi {
-        fill: #51DC88
+        fill: #51dc88;
     }
     &--oh {
-        fill: #1D3D3E
+        fill: #1d3d3e;
     }
 
     //SOUTH
     &--tx {
-        fill: #1D3D3E
+        fill: #1d3d3e;
     }
     &--ok {
-        fill: #84F4D0
+        fill: #84f4d0;
     }
     &--ar {
-        fill: #51DC
+        fill: #51dc;
     }
     &--la {
-        fill: #317330
+        fill: #317330;
     }
     &--ms {
-        fill: #84E5B4
+        fill: #84e5b4;
     }
     &--al {
-        fill: #379D
+        fill: #379d;
     }
     &--ga {
-        fill: #78CE6E
+        fill: #78ce6e;
     }
     &--fl {
-        fill: #325145
+        fill: #325145;
     }
     &--tn {
-        fill: #84F4DD
+        fill: #84f4dd;
     }
     &--sc {
-        fill: #2C6038
+        fill: #2c6038;
     }
     &--nc {
-        fill: #379D
+        fill: #379d;
     }
     &--ky {
-        fill: #51DC88
+        fill: #51dc88;
     }
     &--wv {
-        fill: #379D22
+        fill: #379d22;
     }
     &--va {
-        fill: #1D3D3E
+        fill: #1d3d3e;
     }
     &--md {
-        fill: #51DC88
+        fill: #51dc88;
     }
     &--de {
-        fill: #379D22
+        fill: #379d22;
     }
 
     //NORTH EAST
     &--pa {
-        fill: #1D3D3E
+        fill: #1d3d3e;
     }
     &--nj {
-        fill: #51DC88
+        fill: #51dc88;
     }
     &--ny {
-        fill: #68BD39
+        fill: #68bd39;
     }
     &--ct {
-        fill: #84E5B4
+        fill: #84e5b4;
     }
     &--ma {
-        fill: #317333
+        fill: #317333;
     }
     &--ri {
-        fill: #51DC88
+        fill: #51dc88;
     }
     &--nh {
-        fill: #325145
+        fill: #325145;
     }
     &--vt {
-        fill: #78CE60
+        fill: #78ce60;
     }
     &--me {
-        fill: #49F6D8
+        fill: #49f6d8;
     }
 
     &--excluded {
@@ -238,25 +241,25 @@
 }
 
 .us-sub-region-map__state--excluded + .us-sub-region-map__label {
-    fill: #404e5d;
+    fill: $map-label-hover-color;
 }
 
 .us-sub-region-map__tooltip {
-    width: 140px;
-    margin: -8px -10px;
+    width: $button-width;
+    margin: $tooltip-margin;
     overflow: hidden;
     border-radius: $border-radius-default;
 }
 
 .us-sub-region-map__button {
     display: block;
-    padding: 10px 16px;
+    padding: $button-spacing;
     font-size: $text-xs;
     letter-spacing: $letter-spacing-wide;
     color: $button-default-active-text-color;
     text-decoration: none;
     cursor: pointer;
     &:hover {
-        background: rgba($gray-5, .5);
+        background: $button-hover;
     }
 }
