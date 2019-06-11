@@ -127,7 +127,7 @@ def update_performance_report(sender, instance, created, raw, **kwargs):
     if not PerformanceReport.has_dates(project, campaign_start, end) or not PerformanceReport.has_dates(project, start, end):
         logger.info("Does not have required reports available. Skipping.")
         return
-
+    
     campaign_to_date = PerformanceReport.for_dates(project, campaign_start, end).to_jsonable()
     this_week = PerformanceReport.for_dates(project, start, end).to_jsonable()
 
