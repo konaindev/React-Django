@@ -22,7 +22,7 @@ exports[`USSubRegionMap renders Midwest 1`] = `
       />
     </g>
     <text
-      className="us-sub-region-map__label"
+      className="us-sub-region-map__label us-sub-region-map__label--mi"
       x="532"
       y="229"
     >
@@ -34,7 +34,7 @@ exports[`USSubRegionMap renders Midwest 1`] = `
       onMouseEnter={[Function]}
     />
     <text
-      className="us-sub-region-map__label"
+      className="us-sub-region-map__label us-sub-region-map__label--nd"
       x="107"
       y="76"
     >
@@ -58,7 +58,7 @@ exports[`USSubRegionMap renders Midwest 1`] = `
       onMouseEnter={[Function]}
     />
     <text
-      className="us-sub-region-map__label"
+      className="us-sub-region-map__label us-sub-region-map__label--ia"
       x="289"
       y="284"
     >
@@ -82,7 +82,7 @@ exports[`USSubRegionMap renders Midwest 1`] = `
       onMouseEnter={[Function]}
     />
     <text
-      className="us-sub-region-map__label"
+      className="us-sub-region-map__label us-sub-region-map__label--wi"
       x="385"
       y="185"
     >
@@ -130,7 +130,7 @@ exports[`USSubRegionMap renders Midwest 1`] = `
       onMouseEnter={[Function]}
     />
     <text
-      className="us-sub-region-map__label"
+      className="us-sub-region-map__label us-sub-region-map__label--ks"
       x="149"
       y="411"
     >
@@ -216,7 +216,7 @@ exports[`USSubRegionMap renders North East 1`] = `
       onMouseEnter={[Function]}
     />
     <text
-      className="us-sub-region-map__label"
+      className="us-sub-region-map__label us-sub-region-map__label--nj"
       x="251"
       y="486"
     >
@@ -240,7 +240,7 @@ exports[`USSubRegionMap renders North East 1`] = `
       onMouseEnter={[Function]}
     />
     <text
-      className="us-sub-region-map__label"
+      className="us-sub-region-map__label us-sub-region-map__label--ri"
       x="361"
       y="347"
     >
@@ -252,7 +252,7 @@ exports[`USSubRegionMap renders North East 1`] = `
       onMouseEnter={[Function]}
     />
     <text
-      className="us-sub-region-map__label"
+      className="us-sub-region-map__label us-sub-region-map__label--ct"
       x="311"
       y="355"
     >
@@ -264,7 +264,7 @@ exports[`USSubRegionMap renders North East 1`] = `
       onMouseEnter={[Function]}
     />
     <text
-      className="us-sub-region-map__label"
+      className="us-sub-region-map__label us-sub-region-map__label--vt"
       x="275"
       y="202"
     >
@@ -276,7 +276,7 @@ exports[`USSubRegionMap renders North East 1`] = `
       onMouseEnter={[Function]}
     />
     <text
-      className="us-sub-region-map__label"
+      className="us-sub-region-map__label us-sub-region-map__label--me"
       x="394"
       y="106"
     >
@@ -302,7 +302,7 @@ exports[`USSubRegionMap renders South 1`] = `
       onMouseEnter={[Function]}
     />
     <text
-      className="us-sub-region-map__label"
+      className="us-sub-region-map__label us-sub-region-map__label--md"
       x="617"
       y="26"
     >
@@ -362,7 +362,7 @@ exports[`USSubRegionMap renders South 1`] = `
       onMouseEnter={[Function]}
     />
     <text
-      className="us-sub-region-map__label"
+      className="us-sub-region-map__label us-sub-region-map__label--ky"
       x="458"
       y="99"
     >
@@ -446,7 +446,7 @@ exports[`USSubRegionMap renders South 1`] = `
       onMouseEnter={[Function]}
     />
     <text
-      className="us-sub-region-map__label"
+      className="us-sub-region-map__label us-sub-region-map__label--tn"
       x="440"
       y="145"
     >
@@ -458,7 +458,7 @@ exports[`USSubRegionMap renders South 1`] = `
       onMouseEnter={[Function]}
     />
     <text
-      className="us-sub-region-map__label"
+      className="us-sub-region-map__label us-sub-region-map__label--ok"
       x="200"
       y="160"
     >
@@ -470,7 +470,7 @@ exports[`USSubRegionMap renders South 1`] = `
       onMouseEnter={[Function]}
     />
     <text
-      className="us-sub-region-map__label"
+      className="us-sub-region-map__label us-sub-region-map__label--ms"
       x="370"
       y="231"
     >
@@ -580,7 +580,7 @@ exports[`USSubRegionMap renders West 1`] = `
       onMouseEnter={[Function]}
     />
     <text
-      className="us-sub-region-map__label"
+      className="us-sub-region-map__label us-sub-region-map__label--nm"
       x="570"
       y="413"
     >
@@ -652,7 +652,7 @@ exports[`USSubRegionMap renders West 1`] = `
       onMouseEnter={[Function]}
     />
     <text
-      className="us-sub-region-map__label"
+      className="us-sub-region-map__label us-sub-region-map__label--ak"
       x="93"
       y="245"
     >
