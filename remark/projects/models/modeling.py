@@ -30,6 +30,9 @@ class Campaign(models.Model):
         'CampaignModel', on_delete=models.CASCADE, related_name="+", null=True
     )
 
+    def __str__(self):
+        return self.project.name if self.project else self.campaign_id
+
 
 class CampaignModel(models.Model):
     campaign_model_id = models.CharField(
@@ -63,7 +66,7 @@ class CampaignModel(models.Model):
         return self.spreadsheet.json_data
 
     def __str__(self):
-        return f"{self.name} | {self.project().name}"
+        return "{} ({})".format(self.name, self.campaign_model_id)
 
 
 class Spreadsheet2(models.Model):

@@ -54,10 +54,11 @@ class SpreadsheetAdmin(UpdateSpreadsheetAdminMixin, admin.ModelAdmin):
 @admin.register(CampaignModel, site=admin_site)
 class CampaignModelAdmin(admin.ModelAdmin):
     list_display = ["name", "project", "is_selected", "active", "model_index", "model_start", "model_end"]
+    list_filter = ("campaign__project",)
     readonly_fields = ["project", "is_selected", "file_url", "json_data" ]
 
     def project(self, obj):
-        return mark_safe('<a href="{}">{}</a>'.format(
+        return mark_safe('<a href="{}" target="_blank">{}</a>'.format(
             reverse("admin:projects_project_change", args=(obj.project().pk,)),
             obj.project().name
         ))
