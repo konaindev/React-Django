@@ -1,6 +1,6 @@
-from remark.lib.views import APIView, LoginRequiredAPIView
+from remark.lib.views import LoginRequiredAPIView
 
 
 class NewPropertyView(LoginRequiredAPIView):
-    def post(self, request):
+    def get(self, request):
         return self.render_success({}, status=self.HTTP_200_OK)

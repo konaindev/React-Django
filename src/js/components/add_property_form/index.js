@@ -1,4 +1,5 @@
 import { Formik, Form } from "formik";
+import _clone from "lodash/clone";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
@@ -11,6 +12,7 @@ import { default as Field, FieldInput, WrappedFields } from "./fields";
 import { propertySchema } from "./validators";
 
 const initialValues = {
+  photo: null,
   property_name: "",
   address: "",
   address2: "",
@@ -21,6 +23,11 @@ const initialValues = {
 };
 
 export default class AddPropertyForm extends Component {
+  constructor(props) {
+    super(props);
+    this.formik = React.createRef();
+  }
+
   get packages() {
     return this.props.packages.map(p => ({ label: p.name, value: p.id }));
   }
@@ -80,13 +87,26 @@ export default class AddPropertyForm extends Component {
       this.setState({ image: e.target.result });
     };
     reader.readAsDataURL(file);
+    this.formik.current.setFieldValue("photo", file);
   };
 
   onCloseImage = () => {
     this.setState({ image: null });
   };
 
-  onSubmit = () => {};
+  onSubmit = (values, actions) => {
+    const data = _clone(values);
+    data.package = values.package.value;
+    data.state = values.state.value;
+    const formData = new FormData();
+    for (const k of Object.keys(data)) {
+      formData.append(k, data[k]);
+    }
+    fetch(this.props.post_url, {
+      method: "POST",
+      body: formData
+    }).then(() => actions.setSubmitting(false));
+  };
 
   render() {
     return (
@@ -95,12 +115,22 @@ export default class AddPropertyForm extends Component {
         initialValues={initialValues}
         validateOnBlur={true}
         onSubmit={this.onSubmit}
+        ref={this.formik}
       >
-        {({ errors, touched, values, isValid, setTouched, setValues }) => (
+        {({
+          errors,
+          touched,
+          values,
+          isValid,
+          setTouched,
+          setValues,
+          setFieldValue
+        }) => (
           <Form
             className="add-property-form"
             action={this.props.post_url}
             method="post"
+            autocomplete="off"
           >
             <div className="add-property-form__column">
               <div
