@@ -72,7 +72,9 @@
     }
 
     &--disabled {
+        background-color: $gray-4;
         cursor: not-allowed;
+        color: #404e5d;
 
         &:hover, &:focus, &:active {
             background-color: $button-default-bg-color;
