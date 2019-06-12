@@ -1,0 +1,88 @@
+@import 'css/base.scss';
+
+$west-color: $green-1;
+$south-color: $cyan-3;
+$midwest-color: $green-2;
+$northeast-color: $turquoise-3;
+$dark-label-color: $gray-2;
+$button-width: 140px;
+$button-hover: rgba($gray-5, .5);
+$button-spacing: 10px 16px;
+$tooltip-margin: -8px -10px;
+
+.us-regional-map--hover {
+    .us-regional-map__region {
+        fill: rgba($map-disable-color, .6);
+    }
+
+    .us-regional-map__label {
+        fill: $map-label-hover-color;
+    }
+
+    .us-regional-map__region--hover {
+        fill: $map-hover-color;
+    }
+
+    .us-regional-map__region--hover + .us-regional-map__label {
+        fill: $map-label-color;
+    }
+}
+
+.us-regional-map__region {
+    &--w {
+        fill: $west-color;
+    }
+
+    &--s {
+        fill: $south-color;
+    }
+
+    &--mw {
+        fill: $midwest-color;
+    }
+
+    &--ne {
+        fill: $northeast-color;
+    }
+
+    &--excluded {
+        fill: rgba($map-disable-color, .6);
+    }
+}
+
+.us-regional-map__region--excluded + .us-regional-map__label {
+    fill: $map-label-hover-color;
+}
+
+.us-regional-map__label {
+    font-family: $font-sans;
+    font-size: $text-xs;
+    font-weight: $weight-normal;
+    letter-spacing: $letter-spacing-wider;
+    text-transform: uppercase;
+    fill: $map-label-color;
+
+    &--s {
+        fill: $dark-label-color;
+    }
+}
+
+.us-regional-map__tooltip {
+    width: $button-width;
+    margin: $tooltip-margin;
+    overflow: hidden;
+    border-radius: $border-radius-default;
+}
+
+.us-regional-map__button {
+    display: block;
+    padding: $button-spacing;
+    font-size: $text-xs;
+    letter-spacing: $letter-spacing-wide;
+    color: $button-default-active-text-color;
+    text-decoration: none;
+    cursor: pointer;
+    &:hover {
+        background: $button-hover;
+    }
+}
