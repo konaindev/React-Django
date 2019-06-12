@@ -197,3 +197,6 @@ dump.rdb
 
 # Pycharm
 .idea/
+
+# IDE files
+.idea/
