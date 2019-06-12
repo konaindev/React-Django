@@ -162,42 +162,59 @@ class Address(models.Model):
         return self.formatted_address or str(self.id)
 
 
-class ZipcodePolygonManager(models.Manager):
+class ZipcodeManager(models.Manager):
     def look_up_polygon(self, zip_code):
         try:
-            row = self.get(zip_code=zip_code)
+            zipcode = self.get(zip_code=zip_code)
+
             return dict(
-                properties=row.properties,
-                geometry=row.geometry
+                geometry=zipcode.geometry,
+                properties=dict(center={"lat": zipcode.lat, "lon": zipcode.lon}),
             )
         except self.model.DoesNotExist:
             return None
 
 
-class ZipcodePolygon(models.Model):
+class Zipcode(models.Model):
     """
     Polygon data per zip code
     """
 
-    objects = ZipcodePolygonManager()
+    objects = ZipcodeManager()
 
     zip_code = models.CharField(
-        primary_key=True,
-        help_text="5-digit ZIP code",
-        max_length=5,
+        primary_key=True, help_text="5-digit ZIP code", max_length=5
     )
 
-    state = models.CharField(
-        help_text="State abbreviation",
-        max_length=2
-    )
+    state = models.CharField(help_text="State abbreviation", max_length=2)
 
     geometry = JSONField(
         help_text="Geometry JSON data which includes 'type' and 'coordinates'"
     )
 
-    properties = JSONField(
-        help_text="Additional properties in JSON format"
+    lat = models.DecimalField(
+        max_digits=9,
+        decimal_places=6,
+        default=None,
+        null=True,
+        help_text="Latitude of zipcode center",
+    )
+
+    lon = models.DecimalField(
+        max_digits=9,
+        decimal_places=6,
+        default=None,
+        null=True,
+        help_text="Longitude of zipcode center",
+    )
+
+    land_area = models.FloatField(default=0, help_text="Land area in square miles")
+
+    water_area = models.FloatField(default=0, help_text="Water area in square miles")
+
+    has_population = models.BooleanField(
+        null=True,
+        help_text="Flag to identify dead zipcodes, based on Atlas service",
     )
 
 
@@ -227,7 +244,6 @@ class USACensusPopulationByAge(models.Model):
 
 
 class USACensusHouseholdByType(models.Model):
-
     class HouseholdType:
         MARRIED = "Married"
         SINGLE_FEMALE = "Single Female"
@@ -247,9 +263,7 @@ class USACensusHouseholdByType(models.Model):
         USACensusZip, on_delete=models.CASCADE, related_name="households"
     )
 
-    household_type = models.CharField(
-        max_length=20, choices=HouseholdType.CHOICES
-    )
+    household_type = models.CharField(max_length=20, choices=HouseholdType.CHOICES)
 
     household_percentage = models.FloatField(
         validators=[MinValueValidator(0.0), MaxValueValidator(1.0)]

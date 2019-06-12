@@ -75,6 +75,11 @@ export const BASELINE_REPORT = {
       estimated_revenue_gain: "2800000.00"
     }
   },
+  four_week_funnel_averages: {
+    acq_investment: 5314,
+    investment: 5359,
+    ret_investment: 45
+  },
 
   // XXX extra stuff displayed directly in this section but is really
   // a different part of the report structure. feels like a mismatch?
@@ -116,6 +121,11 @@ export const PERFORMANCE_REPORT = {
       romi: 22,
       estimated_revenue_gain: "354000.00"
     }
+  },
+  four_week_funnel_averages: {
+    acq_investment: 5314,
+    investment: 5359,
+    ret_investment: 45
   },
   property: {
     total_units: 201,

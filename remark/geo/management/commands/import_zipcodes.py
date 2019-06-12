@@ -1,13 +1,14 @@
 import json
 import requests
 
+from django.contrib.gis.measure import Area
 from django.core.management.base import BaseCommand
 
-from remark.geo.models import ZipcodePolygon
+from remark.geo.models import Zipcode
 
 
 class Command(BaseCommand):
-    help = "Import zipcode polygons data into database"
+    help = "Import zipcode data from github source into database"
 
     def add_arguments(self, parser):
         # Optional argument
@@ -110,27 +111,27 @@ def import_data_for_a_state(state):
     remote_file = f"{remote_folder}{file_name}"
     response = requests.get(remote_file)
     data = json.loads(response.text)
-
     counter = 0
 
     for feature in data["features"]:
-        all_props = feature["properties"]
-        if all_props is None:
+        properties = feature["properties"]
+        if properties is None:
             continue
 
         counter = counter + 1
-        zip_code = all_props["ZCTA5CE10"]
-        lat = float(all_props["INTPTLAT10"])
-        lon = float(all_props["INTPTLON10"])
-        properties = dict(center=[lon, lat])
+        land_area = Area(sq_m=properties["ALAND10"])
+        water_area = Area(sq_m=properties["AWATER10"])
 
-        ZipcodePolygon.objects.update_or_create(
-            zip_code=zip_code,
-            defaults={
-                "state": state.upper(),
-                "geometry": feature["geometry"],
-                "properties": properties,
-            },
+        Zipcode.objects.update_or_create(
+            zip_code=properties["ZCTA5CE10"],
+            defaults=dict(
+                state=state.upper(),
+                geometry=feature["geometry"],
+                lat=properties["INTPTLAT10"],
+                lon=properties["INTPTLON10"],
+                land_area=land_area.sq_mi,
+                water_area=water_area.sq_mi
+            ),
         )
 
     return counter

@@ -81,6 +81,7 @@ INSTALLED_APPS = [
     "remark.email_app",
     "remark.analytics",
     "remark.users",
+    "remark.crm",
     "remark.projects",
     "remark.releases",
     "remark.web",
@@ -89,6 +90,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "remark.lib.middleware.exception.log_500",
     "django.middleware.security.SecurityMiddleware",
     # Handled by django_heroku.settings(...)
     # "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -173,9 +175,10 @@ LOGGING = {
         "remark": {"handlers": ["remarkably"]},
     },
 }
+DEBUG_PRINT_LOGGER = True
 
 # Change 'default' database configuration with $DATABASE_URL.
-DATABASES["default"].update(dj_database_url.config(conn_max_age=500, ssl_require=True))
+DATABASES["default"].update(dj_database_url.config(conn_max_age=500))
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
@@ -252,7 +255,6 @@ CACHES = {
         "LOCATION": "default",
     }
 }
-
 
 #
 # API Keys

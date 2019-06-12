@@ -200,11 +200,13 @@ $line-height-compressed: 0.75;
 $line-height-none: 1;
 $line-height-tight: 1.25;
 $line-height-normal: 1.5;
+$line-height-relaxed: 1.75;
 $line-height-loose: 2;
 
-$letter-spacing-tight: -0.05em;
+$letter-spacing-tight: -0.5px;
 $letter-spacing-normal: 0;
-$letter-spacing-wide: 0.05em;
+$letter-spacing-wide: 0.5px;
+$letter-spacing-wider: 1px;
 
 $weight-hairline: 100;
 $weight-thin: 200;
@@ -274,16 +276,13 @@ $small-box-vertical-spacing: 10px;
 $anchor-color: $blue-3;
 $footer-text-color: $turquoise-5;
 
-$property-card-width: 25%;
+$property-card-width: 309px;
 $property-card-image-height: 220px;
-$property-card-status-color-on-track: $green-3;
-$property-card-status-color-at-risk: $orange-4;
-$property-card-status-color-requires-review: $orange-2;
-$property-card-status-text-size: 11px;
+$property-card-actions-height: 68px;
 $property-card-panel-hover-color: $gray-4;
 $property-card-panel-hover-box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.7);
 $property-card-panel-overlay-color: $gray-5;
-$property-card-spacing: 28px;
+$property-card-spacing: 14px;
 
 $auth-form-logo-width: 160px;
 $auth-form-logo-height: 27px;

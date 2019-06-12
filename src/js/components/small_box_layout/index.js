@@ -31,11 +31,12 @@ class SmallBoxLayout extends Component {
     name: PropTypes.string.isRequired,
     content: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
       .isRequired,
-    detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+    detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+    detail2: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
   };
 
   render() {
-    const { content, detail, name, tooltip } = this.props;
+    const { content, detail, detail2, name, tooltip } = this.props;
     const contentValue = (
       <span className="small-box__inner-content">{content}</span>
     );
@@ -45,6 +46,9 @@ class SmallBoxLayout extends Component {
         {/* Container for the label and detail text */}
         <div className="small-box__labels">
           <span className="small-box__labels__name">{name}</span>
+          {detail2 && (
+            <span className="small-box__labels__detail">{detail2}</span>
+          )}
           {detail && (
             <span className="small-box__labels__detail">{detail}</span>
           )}

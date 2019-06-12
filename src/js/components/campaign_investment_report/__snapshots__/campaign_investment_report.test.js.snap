@@ -46,7 +46,9 @@ exports[`CampaignInvestmentReport renders baseline report correctly 1`] = `
         </div>
         <span
           className="large-box__bottom-line"
-        />
+        >
+          4-Week Average: $5.4k
+        </span>
         <span
           className="large-box__bottom-line"
         >
@@ -227,6 +229,11 @@ exports[`CampaignInvestmentReport renders baseline report correctly 1`] = `
                 className="small-box__labels__name"
               >
                 Acquisition Investment
+              </span>
+              <span
+                className="small-box__labels__detail"
+              >
+                4-Week Average: $5.3k
               </span>
               
             </div>
@@ -993,6 +1000,11 @@ A 0 0 0 0 0, NaN, NaN
                 className="small-box__labels__name"
               >
                 Retention Investment
+              </span>
+              <span
+                className="small-box__labels__detail"
+              >
+                4-Week Average: $45
               </span>
               
             </div>
@@ -3891,7 +3903,9 @@ exports[`CampaignInvestmentReport renders performance report correctly 1`] = `
         </div>
         <span
           className="large-box__bottom-line"
-        />
+        >
+          4-Week Average: $5.4k
+        </span>
         <span
           className="large-box__bottom-line"
         >
@@ -4076,6 +4090,11 @@ exports[`CampaignInvestmentReport renders performance report correctly 1`] = `
                 className="small-box__labels__name"
               >
                 Acquisition Investment
+              </span>
+              <span
+                className="small-box__labels__detail"
+              >
+                4-Week Average: $5.3k
               </span>
               <span
                 className="small-box__labels__detail"
@@ -4891,6 +4910,11 @@ A 0 0 0 0 0, NaN, NaN
                 className="small-box__labels__name"
               >
                 Retention Investment
+              </span>
+              <span
+                className="small-box__labels__detail"
+              >
+                4-Week Average: $45
               </span>
               <span
                 className="small-box__labels__detail"

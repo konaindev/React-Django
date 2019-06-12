@@ -123,6 +123,51 @@ SHOW_CAMPAIGN = {
     "cost_per_exe" : True
 }
 
+# KPIs that should be included in Email Reports
+# These came from Sergey - TPC
+KPIS_INCLUDE_IN_EMAIL = [
+    "retention_rate",
+    "occupied_rate",
+    # "cds", We should add this back in when we have a better modeling system - TPC
+    "renew",
+    "vacate",
+    "usv",
+    "inq",
+    "tou",
+    "app",
+    "exe",
+    "usv_inq",
+    "inq_tou",
+    "tou_app",
+    "app_exe"
+]
+
+KPI_POSITIVE_DIRECTION = {
+    "lease_rate" : True,
+    "retention_rate" : True,
+    "occupied_rate" : True,
+    "cds" : False,
+    "renew" : True,
+    "vacate" : False,
+    "move_ins" : True,
+    "move_outs" : False,
+    "usv" : True,
+    "inq" : True,
+    "tou" : True,
+    "app" : True,
+    "exe" : True,
+    "usv_inq" : True,
+    "inq_tou" : True,
+    "tou_app" : True,
+    "app_exe" : True,
+    "usv_exe" : True,
+    "cost_per_usv" : False,
+    "cost_per_inq" : False,
+    "cost_per_tou" : False,
+    "cost_per_app" : False,
+    "cost_per_exe" : False
+}
+
 KPIS = SHOW_CAMPAIGN.keys()
 KPI_CATEGORIES = {
     "top": "Top",

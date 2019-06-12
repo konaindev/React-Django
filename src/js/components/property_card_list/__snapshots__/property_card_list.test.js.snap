@@ -51,7 +51,7 @@ exports[`PropertyCardList renders correctly 1`] = `
           123 4th Avenue, Seattle WA 98106
         </div>
         <div
-          className="property-card__status property-card__status--on-track"
+          className="property-status property-card__status property-status--on-track"
         >
           ON TRACK
         </div>
@@ -105,7 +105,7 @@ exports[`PropertyCardList renders correctly 1`] = `
           123 4th Avenue, Seattle WA 98106
         </div>
         <div
-          className="property-card__status property-card__status--on-track"
+          className="property-status property-card__status property-status--on-track"
         >
           ON TRACK
         </div>
@@ -159,7 +159,7 @@ exports[`PropertyCardList renders correctly 1`] = `
           123 4th Avenue, Seattle WA 98106
         </div>
         <div
-          className="property-card__status property-card__status--on-track"
+          className="property-status property-card__status property-status--on-track"
         >
           ON TRACK
         </div>
@@ -213,7 +213,7 @@ exports[`PropertyCardList renders correctly 1`] = `
           123 4th Avenue, Seattle WA 98106
         </div>
         <div
-          className="property-card__status property-card__status--at-risk"
+          className="property-status property-card__status property-status--at-risk"
         >
           AT RISK
         </div>
@@ -267,7 +267,7 @@ exports[`PropertyCardList renders correctly 1`] = `
           123 4th Avenue, Seattle WA 98106
         </div>
         <div
-          className="property-card__status property-card__status--at-risk"
+          className="property-status property-card__status property-status--at-risk"
         >
           AT RISK
         </div>
@@ -321,7 +321,7 @@ exports[`PropertyCardList renders correctly 1`] = `
           123 4th Avenue, Seattle WA 98106
         </div>
         <div
-          className="property-card__status property-card__status--at-risk"
+          className="property-status property-card__status property-status--at-risk"
         >
           AT RISK
         </div>
@@ -375,7 +375,7 @@ exports[`PropertyCardList renders correctly 1`] = `
           123 4th Avenue, Seattle WA 98106
         </div>
         <div
-          className="property-card__status property-card__status--requires-review"
+          className="property-status property-card__status property-status--requires-review"
         >
           NEEDS REVIEW
         </div>
@@ -429,7 +429,7 @@ exports[`PropertyCardList renders correctly 1`] = `
           123 4th Avenue, Seattle WA 98106
         </div>
         <div
-          className="property-card__status property-card__status--requires-review"
+          className="property-status property-card__status property-status--requires-review"
         >
           NEEDS REVIEW
         </div>
@@ -483,7 +483,7 @@ exports[`PropertyCardList renders correctly 1`] = `
           123 4th Avenue, Seattle WA 98106
         </div>
         <div
-          className="property-card__status property-card__status--requires-review"
+          className="property-status property-card__status property-status--requires-review"
         >
           NEEDS REVIEW
         </div>
@@ -537,7 +537,7 @@ exports[`PropertyCardList renders correctly 1`] = `
           123 4th Avenue, Seattle WA 98106
         </div>
         <div
-          className="property-card__status property-card__status--on-track"
+          className="property-status property-card__status property-status--on-track"
         >
           ON TRACK
         </div>

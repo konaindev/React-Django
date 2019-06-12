@@ -11,6 +11,7 @@ from .models import (
 )
 
 
+STAT_ATLAS_OVERVIEW_URL = "https://statisticalatlas.com/zip/{}/Overview"
 STAT_ATLAS_AGE_URL = "https://statisticalatlas.com/zip/{}/Age-and-Sex"
 STAT_ATLAS_HOUSEHOLD_URL = "https://statisticalatlas.com/zip/{}/Household-Types"
 STAT_ATLAS_HOUSEHOLD_INCOME_URL = "https://statisticalatlas.com/zip/{}/Household-Income"
@@ -74,6 +75,7 @@ def find_population(el):
 def find_households(el):
     return el.has_attr("title") and el["title"] == "Households"
 
+
 def get(url):
     headers = {"user-agent": USER_AGENT, "referer": STAT_ATLAS_REFER}
     response = requests.get(url, headers=headers)
@@ -82,8 +84,20 @@ def get(url):
         raise Exception("usa_census::get::error response", url)
     return response
 
+
+"""
+Check HTTP status code of Atlas Overview page for a given zipcode
+- 404 status code implies that zipcode is invalid or dead(no population)
+"""
+def check_overview_page_status_code(zipcode):
+    headers = {"user-agent": USER_AGENT, "referer": STAT_ATLAS_REFER}
+    url = STAT_ATLAS_OVERVIEW_URL.format(zipcode)
+    response = requests.get(url, headers=headers)
+    return response.status_code
+
+
 def fetch_population(zipcode):
-    logger.info(f"usa_census::fetch_population::start", zipcode)
+    logger.info(f"usa_census::fetch_population::start {zipcode}")
 
     url = STAT_ATLAS_AGE_URL.format(zipcode)
     response = get(url)
@@ -96,7 +110,7 @@ def fetch_population(zipcode):
     households = int(td_value.replace(",", ""))
     result = (population, households)
 
-    logger.info(f"usa_census::fetch_population::end", result)
+    logger.info(f"usa_census::fetch_population::end {result}")
     return result
 
 
@@ -138,7 +152,7 @@ def fetch_age_segments_by_zip(zipcode):
             txt = gs[x].title.text
             value = float(txt.replace("%", ""))
             result.append(value / 100.0)
-    logger.info(f"usa_census::fetch_age_segments_by_zip::end", result)
+    logger.info(f"usa_census::fetch_age_segments_by_zip::end {result}")
     return result
 
 
@@ -153,7 +167,7 @@ def fetch_household_type(zipcode):
             if txt.find("%") > -1:
                 value = float(txt.replace("%", "").replace(",", ""))
                 result.append(value / 100.0)
-    logger.info(f"usa_census::fetch_household_type::end", result)
+    logger.info(f"usa_census::fetch_household_type::end {result}")
     return result
 
 

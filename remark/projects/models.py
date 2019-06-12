@@ -5,6 +5,7 @@ import os.path
 from datetime import datetime
 from django.db import models
 from django.conf import settings
+
 from django.contrib.auth.models import Group
 from django.urls import reverse
 from django.utils.crypto import get_random_string
@@ -12,6 +13,7 @@ from django.utils.crypto import get_random_string
 from jsonfield import JSONField
 from stdimage.models import StdImageField
 
+from remark.lib.stats import health_check
 from remark.lib.tokens import public_id
 from remark.lib.metrics import (
     PointMetric,
@@ -20,27 +22,40 @@ from remark.lib.metrics import (
     ModelPeriod,
 )
 from .spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
+from .reports.performance import PerformanceReport
+
 
 def pro_public_id():
     """Public identifier for a project."""
     return public_id("pro")
 
 
-def building_image_media_path(project, filename):
+def fund_public_id():
+    """Public identifier for a fund."""
+    return public_id("fund")
+
+
+def building_logo_media_path(project, filename):
     """
     Given a Project instance, and the filename as supplied during upload,
-    determine where the uploaded building image should actually be placed.
+    determine where the uploaded building logo should actually be placed.
 
     See https://docs.djangoproject.com/en/2.1/ref/models/fields/#filefield
 
-    Note: Thumbnail generation works fine on FileSystemStorage, but not on S3.
+    Note: Thumbnail regeneration works fine on FileSystemStorage, but not on S3.
     To overcome this known issue, append random 7-char string to end of file name.
     Though, old files will not be deleted from S3 on image replacement.
 
-    project/<public_id>/building_image_<random_str><.ext>
-    project/<public_id>/building_image_<random_str>.regular<.ext>
-    project/<public_id>/building_image_<random_str>.thumbnail<.ext>
+    project/<public_id>/building_logo_<random_str><.ext>
+    project/<public_id>/building_logo_<random_str>.regular<.ext>
+    project/<public_id>/building_logo_<random_str>.thumbnail<.ext>
     """
+    _, extension = os.path.splitext(filename)
+    random_str = get_random_string(length=7)
+    return f"project/{project.public_id}/building_logo_{random_str}{extension}"
+
+
+def building_image_media_path(project, filename):
     _, extension = os.path.splitext(filename)
     random_str = get_random_string(length=7)
     return f"project/{project.public_id}/building_image_{random_str}{extension}"
@@ -84,12 +99,44 @@ class Project(models.Model):
         max_length=255, help_text="The user-facing name of the project."
     )
 
+    account = models.ForeignKey(
+        "users.Account", on_delete=models.CASCADE, related_name="account", blank=False
+    )
+
+    asset_manager = models.ForeignKey(
+        "crm.Business",
+        on_delete=models.CASCADE,
+        related_name="asset_manager",
+        blank=False,
+        limit_choices_to={"business_type": 2},
+    )
+
+    property_manager = models.ForeignKey(
+        "crm.Business",
+        on_delete=models.CASCADE,
+        related_name="property_manager",
+        blank=False,
+        limit_choices_to={"business_type": 3},
+    )
+
+    property_owner = models.ForeignKey(
+        "crm.Business",
+        on_delete=models.CASCADE,
+        related_name="property_owner",
+        blank=False,
+        limit_choices_to={"business_type": 1},
+    )
+
+    fund = models.ForeignKey(
+        "projects.Fund",
+        on_delete=models.CASCADE,
+        blank=False,
+    )
+
     # This is temporary until we have accounts setup for all our clients
     # Remove me and link via a ForeignKey when that happens. -TPC
     customer_name = models.CharField(
-        max_length=255,
-        help_text="The company that hired Remarkaby.",
-        default=""
+        max_length=255, help_text="The company that hired Remarkaby.", default=""
     )
 
     # This is a temporary field until we have user accounts setup.
@@ -98,24 +145,28 @@ class Project(models.Model):
     email_distribution_list = models.TextField(
         max_length=2000,
         default="",
-        help_text="Comma separated list of people to receive email updates about this Project."
+        help_text="Comma separated list of people to receive email updates about this Project.",
     )
 
     # This is for the SendGrid recipients list.
-    email_list_id = models.CharField(
-        max_length=256,
-        null=True,
-        default=None
-    )
+    email_list_id = models.CharField(max_length=256, null=True, default=None)
 
     # StdImageField works just like Django's own ImageField
     # except that you can specify different sized variations.
+    building_logo = StdImageField(
+        blank=True,
+        default="",
+        upload_to=building_logo_media_path,
+        help_text="""Image of property logo<br/>Resized variants (180x180, 76x76) will also be created on Amazon S3.""",
+        variations={"regular": (180, 180), "thumbnail": (76, 76)},
+    )
+
     building_image = StdImageField(
         blank=True,
         default="",
         upload_to=building_image_media_path,
-        help_text="""A full-resolution user-supplied image of the building.<br/>Resized variants (180x180, 76x76) will also be created on Amazon S3.""",
-        variations={"regular": (180, 180, True), "thumbnail": (76, 76, True)},
+        help_text="""Image of property building<br/>Resized variants (309x220, 180x180, 76x76) will also be created on Amazon S3.""",
+        variations={"landscape": (309, 220, True), "regular": (180, 180, True), "thumbnail": (76, 76, True)},
     )
 
     baseline_start = models.DateField(
@@ -355,18 +406,41 @@ class Project(models.Model):
             .first()
         )
 
+    def get_building_logo(self):
+        """
+        Return building logo's S3 resource urls for all variants
+        """
+        if self.building_logo:
+            return [
+                self.building_logo.url,
+                self.building_logo.regular.url,
+                self.building_logo.thumbnail.url
+            ]
+        else:
+            return None
+
     def get_building_image(self):
         """
         Return building image's S3 resource urls for all variants
         """
         if self.building_image:
-            return dict(
-                original=self.building_image.url,
-                regular=self.building_image.regular.url,
-                thumbnail=self.building_image.thumbnail.url,
-            )
+            return [
+                self.building_image.url,
+                self.building_image.landscape.url,
+                self.building_image.regular.url,
+                self.building_image.thumbnail.url
+            ]
         else:
             return None
+
+    def get_regular_url(self):
+        if self.building_image:
+            return self.building_image.regular.url
+        else:
+            return None
+
+    def get_baseline_url(self):
+        return reverse("baseline_report", kwargs={"project_id": self.public_id})
 
     def to_jsonable(self):
         """Return a representation that can be converted to a JSON string."""
@@ -377,6 +451,7 @@ class Project(models.Model):
         return dict(
             public_id=self.public_id,
             name=self.name,
+            building_logo=self.get_building_logo(),
             building_image=self.get_building_image(),
             update_endpoint=update_endpoint
         )
@@ -397,6 +472,24 @@ class Project(models.Model):
             if self.selected_model_name
             else None
         )
+
+    def get_performance_rating(self):
+        performance_report = PerformanceReport.for_campaign_to_date(self)
+        if not performance_report:
+            return 0
+        campaign_to_date = performance_report.to_jsonable()
+        lease_rate = (
+            campaign_to_date.get("property", {}).get("leasing", {}).get("rate", 0)
+        )
+        target_lease_rate = (
+            campaign_to_date.get("targets", {})
+            .get("property", {})
+            .get("leasing", {})
+            .get("rate", 0)
+        )
+        if not target_lease_rate:
+            return 0
+        return health_check(lease_rate, target_lease_rate)
 
     def update_for_selected_model(self):
         """
@@ -934,6 +1027,7 @@ class TargetPeriod(ModelPeriod, models.Model):
         # Always sort TargetPeriods with the earliest period first.
         ordering = ["start"]
 
+
 def tam_export_media_path(instance, filename):
     """
     Given a TAM export log instance, and the filename as supplied during upload,
@@ -941,9 +1035,7 @@ def tam_export_media_path(instance, filename):
     """
     # We always target project/<public_id>/tam_export_<upload_time><.ext>
     _, extension = os.path.splitext(filename)
-    sheetname = "_".join(
-        ["tam_export", datetime.now().strftime("%Y-%m-%d_%H-%M-%S")]
-    )
+    sheetname = "_".join(["tam_export", datetime.now().strftime("%Y-%m-%d_%H-%M-%S")])
     return f"project/{instance.project.public_id}/{sheetname}{extension}"
 
 
@@ -953,7 +1045,7 @@ class TAMExportLog(models.Model):
     )
 
     user = models.ForeignKey(
-        'users.User', on_delete=models.CASCADE, related_name="tam_export_logs"
+        "users.User", on_delete=models.CASCADE, related_name="tam_export_logs"
     )
 
     file = models.FileField(
@@ -963,10 +1055,7 @@ class TAMExportLog(models.Model):
     )
 
     exported_at = models.DateTimeField(
-        auto_now_add=True,
-        db_index=True,
-        editable=False,
-        help_text="The date exported.",
+        auto_now_add=True, db_index=True, editable=False, help_text="The date exported."
     )
 
     args_json = JSONField(
@@ -981,3 +1070,20 @@ class TAMExportLog(models.Model):
 
     def __str__(self):
         return f"{self.project} Export For {self.user} at {self.exported_at.strftime('%Y-%m-%d_%H-%M-%S')}"
+
+
+class Fund(models.Model):
+    public_id = models.CharField(
+        primary_key=True,
+        default=fund_public_id,
+        help_text="A unique identifier for this fund that is safe to share publicly.",
+        max_length=24,
+        editable=False,
+    )
+
+    account = models.ForeignKey("users.Account", on_delete=models.CASCADE, blank=False)
+
+    name = models.CharField(max_length=255, blank=False, help_text="Fund Name")
+
+    def __str__(self):
+        return self.name

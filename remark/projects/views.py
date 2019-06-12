@@ -21,6 +21,10 @@ from .models import Project
 from .forms import TAMExportForm
 from .tasks import export_tam_task
 
+from remark.lib.logging import getLogger, error_text
+
+
+logger = getLogger(__name__)
 
 # project model field names used to control anonymous access, by report_name
 shared_fields_by_report = dict(
@@ -103,16 +107,22 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
         return competitors
 
     def get(self, request, project_id, *args, **kwargs):
+        logger.info("ReportPageViewBase::get::top")
         self.get_project(request, project_id)
+        logger.info("ReportPageViewBase::get::after get_object_or_404")
 
         try:
+            logger.info("ReportPageViewBase::get::before selector_class")
             self.selector = self.selector_class(self.project, *args, **kwargs)
+            logger.info("ReportPageViewBase::get::after selector_class")
         except Exception:
             self.selector = None
             raise Http404
 
+        logger.info("ReportPageViewBase::get::checking has_report_data")
         if (self.selector is None) or (not self.selector.has_report_data()):
             raise Http404
+        logger.info("ReportPageViewBase::get::after checking has_report_data")
 
         if self.is_anonymous_view:
             report_links = ReportLinks.share_for_project(self.project)
@@ -122,6 +132,8 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
             report_links = ReportLinks.public_for_project(self.project)
             current_report_link = self.selector.get_link()
             share_info = self.selector.get_share_info(self.base_url())
+
+        logger.info("ReportPageViewBase::get::bottom")
 
         return self.render(
             report_links=report_links,

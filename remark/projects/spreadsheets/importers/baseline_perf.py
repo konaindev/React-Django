@@ -6,6 +6,7 @@ from remark.lib.spreadsheets import (
     IntCell,
     DateCell,
     CurrencyCell,
+    ExcelValidationError,
 )
 
 from .base import ProjectExcelImporter
@@ -80,3 +81,25 @@ class BaselinePerfImporter(ProjectExcelImporter):
         self.cleaned_data["periods"] = self.schema_list(
             schema=self.PERIOD_SCHEMA, start=start_row, end=end_row
         )
+
+        # Sanity check that there is at least one period
+        if not self.cleaned_data["periods"]:
+            raise ExcelValidationError(
+                "BaselinePerfImporter.clean: Unable to load any periods from the spreadsheet."
+            )
+
+        # Sanity check that our first period has the same start date as the
+        # baseline start we pulled from the spreadsheet meta tab; if not, blow up.
+        baseline_start = self.cleaned_data["baseline_start"]
+        period_start = self.cleaned_data["periods"][0]["start"]
+        if baseline_start != period_start:
+            raise ExcelValidationError(
+                f"BaselinePerfImporter.clean: The spreadsheet looks broken. The first baseline period starts on {baseline_start} but the first period starts on {period_start}."
+            )
+
+        # Sanity check that period end dates are always lexically after the start dates
+        for period in self.cleaned_data["periods"]:
+            if period["start"] >= period["end"]:
+                raise ExcelValidationError(
+                    f"BaselinePerfImporter.clean: The spreadsheet looks broken. There is a period that begins on {period['start']} but ends *at or before* that, on {period['end']}."
+                )

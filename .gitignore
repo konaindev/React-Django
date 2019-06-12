@@ -194,3 +194,9 @@ dump.rdb
 
 # vi swp
 *.swp
+
+# Pycharm
+.idea/
+
+# IDE files
+.idea/

@@ -4,8 +4,11 @@ import os.path
 
 from django.test import TestCase
 
+from remark.crm.models import Business
+from remark.geo.models import Address
+from remark.users.models import Account
 from remark.lib.metrics import BareMultiPeriod
-from .models import Period, Project, TargetPeriod
+from .models import Fund, Period, Project, TargetPeriod
 from .reports.periods import ComputedPeriod
 from .reports.performance import PerformanceReport
 
@@ -17,12 +20,37 @@ class DefaultComputedPeriodTestCase(TestCase):
     """
 
     def setUp(self):
+        address = Address.objects.create(
+            street_address_1="2284 W. Commodore Way, Suite 200",
+            city="Seattle",
+            state="WA",
+            zip_code=98199,
+            country="US",
+        )
+        account = Account.objects.create(
+            company_name="test", address=address, account_type=4
+        )
+        asset_manager = Business.objects.create(
+            name="Test Asset Manager", business_type=2, address=address
+        )
+        property_manager = Business.objects.create(
+            name="Test Property Manager", business_type=3, address=address
+        )
+        property_owner = Business.objects.create(
+            name="Test Property Owner", business_type=1, address=address
+        )
+        fund = Fund.objects.create(account=account, name="Test Fund")
         project = Project.objects.create(
             name="test",
             baseline_start=datetime.date(year=2018, month=11, day=19),
             baseline_end=datetime.date(year=2018, month=12, day=26),
             average_monthly_rent=decimal.Decimal("0"),
             lowest_monthly_rent=decimal.Decimal("0"),
+            account=account,
+            asset_manager=asset_manager,
+            property_manager=property_manager,
+            property_owner=property_owner,
+            fund=fund,
         )
         raw_period = Period.objects.create(
             project=project,
@@ -170,12 +198,37 @@ class DefaultComputedPeriodTestCase(TestCase):
 
 class DefaultReportTestCase(TestCase):
     def setUp(self):
+        address = Address.objects.create(
+            street_address_1="2284 W. Commodore Way, Suite 200",
+            city="Seattle",
+            state="WA",
+            zip_code=98199,
+            country="US",
+        )
+        account = Account.objects.create(
+            company_name="test", address=address, account_type=4
+        )
+        asset_manager = Business.objects.create(
+            name="Test Asset Manager", business_type=2, address=address
+        )
+        property_manager = Business.objects.create(
+            name="Test Property Manager", business_type=3, address=address
+        )
+        property_owner = Business.objects.create(
+            name="Test Property Owner", business_type=1, address=address
+        )
+        fund = Fund.objects.create(account=account, name="Test Fund")
         project = Project.objects.create(
             name="test",
             baseline_start=datetime.date(year=2018, month=11, day=19),
             baseline_end=datetime.date(year=2018, month=12, day=26),
             average_monthly_rent=decimal.Decimal("0"),
             lowest_monthly_rent=decimal.Decimal("0"),
+            account=account,
+            asset_manager=asset_manager,
+            property_manager=property_manager,
+            property_owner=property_owner,
+            fund=fund,
         )
         raw_period = Period.objects.create(
             project=project,
@@ -224,12 +277,37 @@ class LincolnTowerPeriodTestCase(TestCase):
     """Test an example Lincoln Tower period model with computed properties."""
 
     def setUp(self):
+        address = Address.objects.create(
+            street_address_1="2284 W. Commodore Way, Suite 200",
+            city="Seattle",
+            state="WA",
+            zip_code=98199,
+            country="US",
+        )
+        account = Account.objects.create(
+            company_name="test", address=address, account_type=4
+        )
+        asset_manager = Business.objects.create(
+            name="Test Asset Manager", business_type=2, address=address
+        )
+        property_manager = Business.objects.create(
+            name="Test Property Manager", business_type=3, address=address
+        )
+        property_owner = Business.objects.create(
+            name="Test Property Owner", business_type=1, address=address
+        )
+        fund = Fund.objects.create(account=account, name="Test Fund")
         self.project = Project.objects.create(
             name="test",
             baseline_start=datetime.date(year=2018, month=11, day=19),
             baseline_end=datetime.date(year=2018, month=12, day=26),
             average_monthly_rent=decimal.Decimal("7278"),
             lowest_monthly_rent=decimal.Decimal("7278"),
+            account=account,
+            asset_manager=asset_manager,
+            property_manager=property_manager,
+            property_owner=property_owner,
+            fund=fund,
         )
         self.raw_period = Period.objects.create(
             project=self.project,
@@ -317,3 +395,117 @@ class LincolnTowerPeriodTestCase(TestCase):
         report = PerformanceReport(self.project, self.raw_cumulative)
         self.assertTrue(report.to_jsonable())
 
+from .signals import model_percent, get_ctd_top_kpis, sort_kpis, get_ctd_rest
+
+class PerformanceEmailSignalTestCase(TestCase):
+    """Test an example performace creation."""
+
+    def setUp(self):
+        pass
+
+    def generate_mp_json(self, selectors, value, target):
+        tl_values = {}
+        values = tl_values
+        tl_targets = {}
+        targets = tl_targets
+        for x in range(len(selectors)):
+            if x >= len(selectors)-1:
+                values[selectors[x]] = value
+                targets[selectors[x]] = target
+            else:
+                values[selectors[x]] = {}
+                values = values[selectors[x]]
+                targets[selectors[x]] = {}
+                targets = targets[selectors[x]]
+        tl_values["targets"] = tl_targets
+        return tl_values
+
+    def test_model_percent_equal(self):
+        selectors = ["property", "leasing", "rate"]
+        target = 0.80
+        value = 0.80
+        json_report = self.generate_mp_json(selectors, value, target)
+        result = model_percent("lease_rate", json_report)
+        self.assertEqual(result, 1.0)
+
+    def test_model_percent_less(self):
+        selectors = ["property", "leasing", "rate"]
+        target = 0.80
+        value = 0.40
+        json_report = self.generate_mp_json(selectors, value, target)
+        result = model_percent("lease_rate", json_report)
+        self.assertEqual(result, 0.5)
+
+    def test_model_percent_greater(self):
+        selectors = ["property", "leasing", "rate"]
+        target = 0.80
+        value = 0.90
+        json_report = self.generate_mp_json(selectors, value, target)
+        result = model_percent("lease_rate", json_report)
+        self.assertEqual(result, 1.125)
+
+    def test_model_percent_move_outs_less(self):
+        selectors = ["property", "occupancy", "move_outs"]
+        target = 10
+        value = 12
+        json_report = self.generate_mp_json(selectors, value, target)
+        result = model_percent("move_outs", json_report)
+        self.assertEqual(result, 10/12)
+
+    def test_model_percent_move_outs_greater(self):
+        selectors = ["property", "occupancy", "move_outs"]
+        target = 10
+        value = 8
+        json_report = self.generate_mp_json(selectors, value, target)
+        result = model_percent("move_outs", json_report)
+        self.assertEqual(result, 1.25)
+
+    def test_get_ctd_top_kpis(self):
+        ctd_model_percent = {
+            'move_ins' : 1.0,
+            'move_outs' : 0.6
+        }
+        ctd_sorted = sort_kpis(ctd_model_percent)
+        result = get_ctd_top_kpis(ctd_model_percent, ctd_sorted)
+        self.assertEqual(len(result), 1)
+        self.assertEqual(result[0], 'move_ins')
+
+    def test_get_ctd_top_kpis_full_set(self):
+        ctd_model_percent = {
+            'move_ins' : 1.0,
+            'usv' : 1.20,
+            'inq' : 1.40,
+            'move_outs' : 0.6
+        }
+        ctd_sorted = sort_kpis(ctd_model_percent)
+        result = get_ctd_top_kpis(ctd_model_percent, ctd_sorted)
+        self.assertEqual(len(result), 3)
+        self.assertEqual(result[0], 'inq')
+        self.assertEqual(result[1], 'usv')
+        self.assertEqual(result[2], 'move_ins')
+
+    def test_get_ctd_top_kpis_empty_set(self):
+        ctd_model_percent = {
+            'move_ins' : 0.85,
+            'usv' : 0.20,
+            'inq' : 0.40,
+            'move_outs' : 0.6
+        }
+        ctd_sorted = sort_kpis(ctd_model_percent)
+        result = get_ctd_top_kpis(ctd_model_percent, ctd_sorted)
+        self.assertEqual(len(result), 0)
+
+    def test_get_ctd_rest(self):
+        ctd_model_percent = {
+            'move_ins' : 0.95,
+            'usv' : 0.20,
+            'inq' : 0.40,
+            'move_outs' : 0.8,
+        }
+        ctd_sorted = sort_kpis(ctd_model_percent)
+        risk, low = get_ctd_rest(ctd_model_percent, ctd_sorted)
+        self.assertEqual(len(risk), 1)
+        self.assertEqual(risk[0], 'move_outs')
+        self.assertEqual(len(low), 2)
+        self.assertEqual(low[0], 'usv')
+        self.assertEqual(low[1], 'inq')

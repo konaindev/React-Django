@@ -4,11 +4,11 @@ import ProjectDropDown from "./index";
 describe("ProjectDropDown", () => {
   const project = { name: "Portland Multi Family", public_id: "pro_example" };
 
-  it("renders without building image correctly", () => {
+  it("renders without building logo correctly", () => {
     const props = {
       project: {
         ...project,
-        building_image: null
+        building_logo: null
       }
     };
 
@@ -16,11 +16,11 @@ describe("ProjectDropDown", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it("renders with building image correctly", () => {
+  it("renders with building logo correctly", () => {
     const props = {
       project: {
         ...project,
-        building_image: null
+        building_logo: null
       }
     };
 

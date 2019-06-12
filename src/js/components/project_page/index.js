@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import ProjectPageChrome from "../project_page_chrome";
+import Container from "../container";
 
 import "./project_page.scss";
 
@@ -10,10 +11,18 @@ export default class ProjectPage extends Component {
     project: PropTypes.object.isRequired
   };
 
+  static groupTitlesByReport = {
+    baseline: "Baseline Report",
+    market: "Market Report",
+    modeling: "Modeling Report",
+    campaign_plan: "Campaign Plan",
+    performance: "Performance Reports"
+  };
+
   renderLink(link) {
     return (
       <li key={link.url}>
-        <a href={link.url} className="project-page__report-section__link">
+        <a href={link.url} className="project-page__report-link">
           {link.description}
         </a>
       </li>
@@ -30,41 +39,27 @@ export default class ProjectPage extends Component {
     );
   }
 
-  renderSection(links, name) {
+  renderGroups(reportLinks) {
+    const titles = ProjectPage.groupTitlesByReport;
+
     return (
-      <div className="project-page__report-section">
-        <h2>{name}</h2>
-        <ul className="project-page__report-section__links">
-          {this.renderLinks(links)}
-        </ul>
-      </div>
+      <React.Fragment>
+        {Object.keys(titles).map(report_name => (
+          <div key={report_name} className="project-page__report-group">
+            <h2>{titles[report_name]}</h2>
+            <ul>{this.renderLinks(reportLinks[report_name])}</ul>
+          </div>
+        ))}
+      </React.Fragment>
     );
   }
 
   render() {
     return (
       <ProjectPageChrome project={this.props.project}>
-        <div>
-          {this.renderSection(
-            this.props.report_links.baseline,
-            "Baseline Report"
-          )}
-        </div>
-        <div>
-          {this.renderSection(
-            this.props.report_links.performance,
-            "Performance Reports"
-          )}
-        </div>
-        <div>
-          {this.renderSection(
-            this.props.report_links.modeling,
-            "Modeling Report"
-          )}
-        </div>
-        <div>
-          {this.renderSection(this.props.report_links.market, "Market Report")}
-        </div>
+        <Container className="project-page__container">
+          {this.renderGroups(this.props.report_links)}
+        </Container>
       </ProjectPageChrome>
     );
   }

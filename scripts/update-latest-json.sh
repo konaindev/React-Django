@@ -12,5 +12,6 @@ fi
 #   url = https://git.heroku.com/remarkably.git
 #   fetch = +refs/heads/*:refs/remotes/heroku/*
 echo 'Downloading all project data from the production heroku instance...'
-heroku run --remote prod python manage.py dumpdata projects.project projects.period projects.targetperiod geo.address > data/dumped/latest.json
+# heroku run --remote prod python manage.py dumpdata projects.project projects.period projects.targetperiod geo.address > data/dumped/latest.json
+heroku run python manage.py dumpdata projects email_app users geo.address > data/dumped/latest.json
 echo 'The data/dumped/latest.json file is updated. You can commit this, if you like!'
