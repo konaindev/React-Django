@@ -1,0 +1,416 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DashboardControls renders correctly 1`] = `
+<div
+  className="search-field"
+>
+  <div
+    className="search-field__icon"
+  >
+    <svg
+      aria-hidden="true"
+      className="search-field__icon-close"
+      color="inherit"
+      focusable="false"
+      height="1em"
+      onClick={[Function]}
+      role="presentation"
+      viewBox="0 0 13 14"
+      width="1em"
+    >
+      <path
+        d="M1.43532 1.92201L11.3649 12.0613"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="2"
+      />
+      <path
+        d="M11.4774 1.90854L1.83659 12.0504"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeWidth="2"
+      />
+    </svg>
+    <svg
+      aria-hidden="true"
+      className="search-field__icon-search"
+      color="inherit"
+      focusable="false"
+      height="1em"
+      onClick={[Function]}
+      role="presentation"
+      viewBox="0 0 24 24"
+      width="1em"
+    >
+      <path
+        d="M9.99396 0C4.48629 0 0 4.48629 0 9.99396C0 15.5016 4.48629 19.9879 9.99396 19.9879C12.389 19.9879 14.5886 19.1374 16.3124 17.7256L22.2795 23.6927C22.3716 23.7886 22.4819 23.8652 22.604 23.918C22.726 23.9707 22.8574 23.9986 22.9903 23.9999C23.1233 24.0013 23.2552 23.9761 23.3783 23.9259C23.5014 23.8756 23.6132 23.8013 23.7073 23.7073C23.8013 23.6132 23.8756 23.5014 23.9259 23.3783C23.9761 23.2552 24.0013 23.1233 23.9999 22.9903C23.9986 22.8574 23.9707 22.726 23.918 22.604C23.8652 22.4819 23.7886 22.3716 23.6927 22.2795L17.7256 16.3124C19.1374 14.5886 19.9879 12.389 19.9879 9.99396C19.9879 4.48629 15.5016 0 9.99396 0ZM9.99396 1.99879C14.4214 1.99879 17.9891 5.56652 17.9891 9.99396C17.9891 14.4214 14.4214 17.9891 9.99396 17.9891C5.56652 17.9891 1.99879 14.4214 1.99879 9.99396C1.99879 5.56652 5.56652 1.99879 9.99396 1.99879Z"
+        fill="currentColor"
+      />
+    </svg>
+  </div>
+  <div
+    className="search-field__input-wrapper"
+  >
+    <input
+      className="search-field__input"
+      defaultValue=""
+      name="q"
+      onKeyPress={[Function]}
+      placeholder="Search Properties…"
+      type="text"
+    />
+  </div>
+  <div
+    className="search-field__children"
+  >
+    <div
+      className="dashboard-controls"
+    >
+      <span
+        className="dashboard-controls__title"
+      >
+        10
+         Properties
+      </span>
+      <div
+        className="select multi-select dashboard-controls__field css-2b097c-container"
+        onKeyDown={[Function]}
+      >
+        <div
+          className="select__control css-yk16xz-control"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="select__value-container select__value-container--is-multi css-1hwfws3"
+          >
+            <div
+              className="select__placeholder css-1wa3eu0-placeholder"
+            >
+              Locations…
+            </div>
+            <input
+              className="css-62g3xt-dummyInput"
+              disabled={false}
+              id="react-select-2-input"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              readOnly={true}
+              tabIndex="0"
+              value=""
+            />
+          </div>
+          <div
+            className="select__indicators css-1wy0on6"
+          >
+            <span
+              className="select__indicator-separator css-1okebmr-indicatorSeparator"
+            />
+            <div
+              aria-hidden="true"
+              className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <div
+                className="select__dropdown-arrow"
+              />
+            </div>
+          </div>
+        </div>
+        <div>
+          <input
+            name="ct"
+            type="hidden"
+          />
+        </div>
+      </div>
+      <div
+        className="select multi-select dashboard-controls__field css-2b097c-container"
+        onKeyDown={[Function]}
+      >
+        <div
+          className="select__control css-yk16xz-control"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="select__value-container select__value-container--is-multi css-1hwfws3"
+          >
+            <div
+              className="select__placeholder css-1wa3eu0-placeholder"
+            >
+              Funds…
+            </div>
+            <input
+              className="css-62g3xt-dummyInput"
+              disabled={false}
+              id="react-select-3-input"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              readOnly={true}
+              tabIndex="0"
+              value=""
+            />
+          </div>
+          <div
+            className="select__indicators css-1wy0on6"
+          >
+            <span
+              className="select__indicator-separator css-1okebmr-indicatorSeparator"
+            />
+            <div
+              aria-hidden="true"
+              className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <div
+                className="select__dropdown-arrow"
+              />
+            </div>
+          </div>
+        </div>
+        <div>
+          <input
+            name="fd"
+            type="hidden"
+          />
+        </div>
+      </div>
+      <div
+        className="select multi-select dashboard-controls__field css-2b097c-container"
+        onKeyDown={[Function]}
+      >
+        <div
+          className="select__control css-yk16xz-control"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="select__value-container select__value-container--is-multi css-1hwfws3"
+          >
+            <div
+              className="select__placeholder css-1wa3eu0-placeholder"
+            >
+              Asset Owners…
+            </div>
+            <input
+              className="css-62g3xt-dummyInput"
+              disabled={false}
+              id="react-select-4-input"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              readOnly={true}
+              tabIndex="0"
+              value=""
+            />
+          </div>
+          <div
+            className="select__indicators css-1wy0on6"
+          >
+            <span
+              className="select__indicator-separator css-1okebmr-indicatorSeparator"
+            />
+            <div
+              aria-hidden="true"
+              className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <div
+                className="select__dropdown-arrow"
+              />
+            </div>
+          </div>
+        </div>
+        <div>
+          <input
+            name="am"
+            type="hidden"
+          />
+        </div>
+      </div>
+      <div
+        className="select multi-select dashboard-controls__field css-2b097c-container"
+        onKeyDown={[Function]}
+      >
+        <div
+          className="select__control css-yk16xz-control"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="select__value-container select__value-container--is-multi css-1hwfws3"
+          >
+            <div
+              className="select__placeholder css-1wa3eu0-placeholder"
+            >
+              Property Mgr…
+            </div>
+            <input
+              className="css-62g3xt-dummyInput"
+              disabled={false}
+              id="react-select-5-input"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              readOnly={true}
+              tabIndex="0"
+              value=""
+            />
+          </div>
+          <div
+            className="select__indicators css-1wy0on6"
+          >
+            <span
+              className="select__indicator-separator css-1okebmr-indicatorSeparator"
+            />
+            <div
+              aria-hidden="true"
+              className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <div
+                className="select__dropdown-arrow"
+              />
+            </div>
+          </div>
+        </div>
+        <div>
+          <input
+            name="pm"
+            type="hidden"
+          />
+        </div>
+      </div>
+      <div
+        className="sort-select dashboard-controls__sort"
+      >
+        <div
+          className="sort-select__title"
+        >
+          SORT:
+        </div>
+        <div
+          className="sort-select__field-wrapper"
+        >
+          <div
+            className="select sort-select__field css-2b097c-container"
+            onKeyDown={[Function]}
+          >
+            <div
+              className="select__control css-yk16xz-control"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <div
+                className="select__value-container select__value-container--has-value css-1hwfws3"
+              >
+                <div
+                  className="select__single-value css-1uccc91-singleValue"
+                >
+                  Recently Viewed
+                </div>
+                <input
+                  className="css-62g3xt-dummyInput"
+                  disabled={false}
+                  id="react-select-6-input"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  readOnly={true}
+                  tabIndex="0"
+                  value=""
+                />
+              </div>
+              <div
+                className="select__indicators css-1wy0on6"
+              >
+                <span
+                  className="select__indicator-separator css-1okebmr-indicatorSeparator"
+                />
+                <div
+                  aria-hidden="true"
+                  className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                  onMouseDown={[Function]}
+                  onTouchEnd={[Function]}
+                >
+                  <div
+                    className="select__dropdown-arrow"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+          <svg
+            aria-hidden="true"
+            className="sort-select__icon"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            onClick={[Function]}
+            role="presentation"
+            viewBox="0 0 16 14"
+            width="1em"
+          >
+            <g
+              fill="currentColor"
+              stroke="none"
+              strokeWidth="1"
+            >
+              <g
+                transform="translate(-1383.000000, -185.000000)"
+              >
+                <g
+                  transform="translate(1087.000000, 169.000000)"
+                >
+                  <g
+                    transform="translate(296.000000, 16.000000)"
+                  >
+                    <rect
+                      height="1"
+                      rx="0.4895163"
+                      width="7.78365217"
+                      x="8.01085217"
+                      y="2.353442"
+                    />
+                    <rect
+                      height="1"
+                      rx="0.4895163"
+                      width="5.8377113"
+                      x="8.01085217"
+                      y="5.290502"
+                    />
+                    <rect
+                      height="1"
+                      rx="0.4895163"
+                      width="3.89181217"
+                      x="8.01085217"
+                      y="8.22766"
+                    />
+                    <rect
+                      height="1"
+                      rx="0.4895163"
+                      width="1.94590609"
+                      x="8.01085217"
+                      y="11.16472"
+                    />
+                    <path
+                      d="M2.85056,13.92804 C2.94554435,14.02394 3.09984696,14.02401 3.1949287,13.92818 L5.98018783,11.12216 C6.07507478,11.02654 6.07503304,10.87163 5.98008348,10.77608 L5.68895304,10.48313 C5.59389913,10.38751 5.43977043,10.38758 5.34480696,10.48334 L3.47919304,12.3641 L3.47919304,0.2447585 C3.47919304,0.1095822 3.37029565,-1.139453e-08 3.23595826,0 L2.80937043,3.618335e-08 C2.67503304,4.757781e-08 2.56613565,0.1095822 2.56613565,0.2447585 L2.5661287,12.3641 L0.706685218,10.48383 C0.611766261,10.38786 0.457431652,10.38765 0.36227687,10.48341 L0.0712431306,10.77629 C-0.0236404172,10.87177 -0.0237631303,11.02654 0.070968348,11.12216 L2.85056,13.92804 Z"
+                    />
+                  </g>
+                </g>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
