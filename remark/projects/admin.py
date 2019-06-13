@@ -150,65 +150,20 @@ class ExistingSpreadsheetInline(admin.TabularInline):
     is_active.boolean = True
 
 
-@admin.register(Campaign, site=admin_site)
-class CampaignAdmin(admin.ModelAdmin):
-    list_display = ["name", "project__link", "selected_campaign_model"]
-    list_filter = ("project__name",)
-    fields = ["name", "project", "selected_campaign_model"]
-    readonly_fields_on_create = ("selected_campaign_model",)
-    readonly_fields_on_update = ("project",)
-    ordering = ['name']
-
-    def project__link(self, obj):
-        return mark_safe(
-            '<a href="{}" target="_blank">{}</a>'.format(
-                reverse("admin:projects_project_change", args=(obj.project.pk,)),
-                obj.project.name,
-            )
-        )
-    project__link.short_description = "Project"
-
-    def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        if db_field.name == "selected_campaign_model":
-            try:
-                object_id = unquote(request.resolver_match.kwargs['object_id'])
-                kwargs["queryset"] = CampaignModel.objects.filter(campaign__pk=object_id)
-            except:
-                kwargs["queryset"] = CampaignModel.objects.all()
-        return super().formfield_for_foreignkey(db_field, request, **kwargs)
-
-    def get_readonly_fields(self, request, obj=None):
-        return (
-            self.readonly_fields_on_update
-            if obj is not None
-            else self.readonly_fields_on_create
-        )
-
-
 @admin.register(CampaignModel, site=admin_site)
 class CampaignModelAdmin(admin.ModelAdmin):
     list_display = [
         "name",
         "project",
-        "selected",
+        "is_selected",
         "active",
         "model_index",
         "model_start",
         "model_end",
     ]
-    list_filter = ("campaign",)
+    list_filter = ("campaign__project__name",)
     readonly_fields = ["project", "selected", "file_url", "json_data"]
-
-    def project(self, obj):
-        return mark_safe(
-            '<a href="{}" target="_blank">{}</a>'.format(
-                reverse("admin:projects_project_change", args=(obj.project.pk,)),
-                obj.project.name,
-            )
-        )
-
-    def selected(self, obj):
-        return "Yes" if obj.selected else ""
+    ordering = ['model_index']
 
     fieldsets = (
         (
@@ -230,6 +185,81 @@ class CampaignModelAdmin(admin.ModelAdmin):
 
     def has_add_permission(self, request):
         return False
+
+    def project(self, obj):
+        return mark_safe(
+            '<a href="{}" target="_blank">{}</a>'.format(
+                reverse("admin:projects_project_change", args=(obj.project.pk,)),
+                obj.project.name,
+            )
+        )
+
+    def is_selected(self, obj):
+        return bool(obj.selected)
+    is_selected.boolean = True
+
+
+class CampaignModelInline(admin.TabularInline):
+    verbose_name = "Campaign Model"
+    verbose_name_plural = "Campaign Models"
+
+    model = CampaignModel
+    fields = [
+        "name",
+        "is_selected",
+        "active",
+        "model_index",
+        "model_start",
+        "model_end",
+    ]
+    readonly_fields = ["is_selected"]
+    show_change_link = True
+    extra = 0
+    max_num = 0
+    ordering = ['model_index']
+
+    def has_add_permission(self, request, obj):
+        return False
+
+    def is_selected(self, obj):
+        return bool(obj.selected)
+    is_selected.boolean = True
+
+
+@admin.register(Campaign, site=admin_site)
+class CampaignAdmin(admin.ModelAdmin):
+    list_display = ["name", "project__link", "selected_campaign_model"]
+    list_filter = ("project__name",)
+    fields = ["name", "project", "selected_campaign_model"]
+    readonly_fields_on_create = ("selected_campaign_model",)
+    readonly_fields_on_update = ("project",)
+    inlines = (CampaignModelInline,)
+    ordering = ['name']
+
+    def project__link(self, obj):
+        return mark_safe(
+            '<a href="{}" target="_blank">{}</a>'.format(
+                reverse("admin:projects_project_change", args=(obj.project.pk,)),
+                obj.project.name,
+            )
+        )
+    project__link.short_description = "Project"
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        if db_field.name == "selected_campaign_model":
+            try:
+                object_id = unquote(request.resolver_match.kwargs['object_id'])
+                kwargs["queryset"] = CampaignModel.objects.filter(campaign__pk=object_id).order_by('model_index')
+            except:
+                kwargs["queryset"] = CampaignModel.objects.all()
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+    def get_readonly_fields(self, request, obj=None):
+        return (
+            self.readonly_fields_on_update
+            if obj is not None
+            else self.readonly_fields_on_create
+        )
 
 
 class CampaignInline(admin.TabularInline):
