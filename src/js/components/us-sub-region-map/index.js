@@ -39,10 +39,7 @@ class USSubRegionMap extends React.Component {
     const link = this.props.states[usState];
     return (
       <div className="us-sub-region-map__tooltip">
-        <div
-          className="us-sub-region-map__button"
-          onClick={() => this.toggleState(usState)}
-        >
+        <div className="us-sub-region-map__button" onClick={this.toggleState}>
           {this.props.excludedStates.includes(usState)
             ? "Include State"
             : "Exclude State"}
@@ -61,13 +58,18 @@ class USSubRegionMap extends React.Component {
     };
   }
 
-  toggleState = usState => {
+  toggleState = () => {
+    const usState = this.state.usState;
     if (this.props.excludedStates.includes(usState)) {
       this.props.onIncludeState(usState);
     } else {
       this.props.onExcludeState(usState);
     }
   };
+
+  onMouseEnterHandler = usState => this.setState({ usState });
+
+  onMouseLeaveHandler = () => this.setState({ usState: "" });
 
   render() {
     const Region = USSubRegionMap.regions[this.props.region];
@@ -79,10 +81,7 @@ class USSubRegionMap extends React.Component {
       }
     );
     return (
-      <div
-        className={className}
-        onMouseLeave={() => this.setState({ usState: "" })}
-      >
+      <div className={className} onMouseLeave={this.onMouseLeaveHandler}>
         <RMBTooltip
           placement="top"
           overlayStyle={{ opacity: 1 }}
@@ -92,7 +91,7 @@ class USSubRegionMap extends React.Component {
         >
           <Region
             {...this.props}
-            onMouseEnter={usState => this.setState({ usState })}
+            onMouseEnter={this.onMouseEnterHandler}
             usState={this.state.usState}
           />
         </RMBTooltip>
