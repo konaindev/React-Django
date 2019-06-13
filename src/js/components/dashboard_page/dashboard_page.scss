@@ -1,12 +1,9 @@
 @import 'css/base.scss';
 
-$filter-title-width: 200px;
-$filter-field-spacing: 8px;
-
 .dashboard-content {
+    min-width: 1500px;
     padding: $s12;
     text-align: center;
-    min-width: 1450px;
 }
 
 .dashboard-content__controls {
@@ -54,81 +51,4 @@ $filter-field-spacing: 8px;
 .dashboard-content__select-view {
     display: inline-block;
     margin-right: 22px;
-}
-
-
-
-.dashboard-controls {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    flex-wrap: wrap;
-    align-items: center;
-}
-
-.dashboard-controls__title {
-    display: inline-block;
-    width: $filter-title-width;
-    font-family: $font-sans;
-    font-size: $text-sm;
-    font-weight: $weight-medium;
-    letter-spacing: $letter-spacing-wide;
-    color: $title-section-color;
-    text-align: left;
-    text-transform: uppercase;
-}
-
-.dashboard-controls__field {
-    width: 180px;
-    text-align: left;
-    margin-left: $filter-field-spacing;
-}
-
-.dashboard-controls__sort {
-    width: 293px;
-    margin-left: auto;
-}
-
-.dashboard-controls__sort-title {
-    display: inline-block;
-    margin-right: 12px;
-    font-family: $font-sans;
-    font-size: $text-xs;
-    font-weight: $weight-normal;
-    letter-spacing: $letter-spacing-wide;
-    color: $title-small-color;
-    text-transform: uppercase;
-}
-
-
-.dashboard-selection {
-    display: flex;
-    height: 100%;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.dashboard-selection__title {
-    font-family: $font-sans;
-    font-size: $text-base;
-    font-weight: $weight-normal;
-    letter-spacing: $letter-spacing-wide;
-    color: $title-large-color;
-}
-
-.dashboard-selection__button {
-    display: inline-flex;
-    padding-right: 0;
-    padding-left: 0;
-    margin-left: 42px;
-    font-family: $font-sans;
-    font-size: $text-xs;
-    font-weight: $weight-normal;
-    letter-spacing: $letter-spacing-wide;
-    color: $button-default-active-text-color;
-    align-items: center;
-}
-
-.dashboard-selection__button-icon {
-    margin-left: 8px;
 }

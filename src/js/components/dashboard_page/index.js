@@ -1,21 +1,20 @@
+import _isEmpty from "lodash/isEmpty";
 import cn from "classnames";
 import React from "react";
 import PropTypes from "prop-types";
 
 import Button from "../button";
-import SortSelect from "../sort_select";
+import DashboardControls from "../dashboard_controls";
 import ToggleButton from "../toggle_button";
 import Container from "../container";
 import PageChrome from "../page_chrome";
 import PropertyCardList from "../property_card_list";
 import PropertyList from "../property_list";
-import SearchField from "../search_field";
-import MultiSelect from "../multi_select";
 import { Close, ListView, TileView } from "../../icons";
 
 import "./dashboard_page.scss";
 
-export default class DashboardPage extends React.PureComponent {
+export class DashboardPage extends React.PureComponent {
   static propTypes = {
     properties: PropTypes.array.isRequired,
     funds: PropTypes.array.isRequired,
@@ -41,23 +40,12 @@ export default class DashboardPage extends React.PureComponent {
     }
   ];
 
-  static sortOptions = [
-    { label: "Recently Viewed", value: "recently" },
-    { label: "By Property Mgr.", value: "propertyMgr" },
-    { label: "By Asset Owner", value: "assetOwner" },
-    { label: "By Region", value: "region" },
-    { label: "By City", value: "city" },
-    { label: "By Fund", value: "fund" },
-    { label: "By performance", value: "performance" }
-  ];
-
   constructor(props) {
     super(props);
     this.state = {
       viewType: props.viewType,
       selectedProperties: props.selectedProperties
     };
-    this.urlParams = new URLSearchParams(window.location.search);
   }
 
   selectAll = () => {
@@ -77,43 +65,14 @@ export default class DashboardPage extends React.PureComponent {
     }
   }
 
-  get fundsOptions() {
-    return this.props.funds.map(fund => ({
-      label: fund.label,
-      value: fund.id
-    }));
-  }
+  onChangeFilter = filters => {
+    this.props.onChangeFilter(filters);
+  };
 
-  get assetOwnersOptions() {
-    return this.props.asset_managers.map(am => ({
-      label: am.label,
-      value: am.id
-    }));
-  }
-  get propertyManagersOptions() {
-    return this.props.property_managers.map(am => ({
-      label: am.label,
-      value: am.id
-    }));
-  }
+  toggleView = viewType => this.setState({ viewType });
 
-  get locationsOptions() {
-    return this.props.states.map(am => ({
-      label: am.label,
-      value: am.value
-    }));
-  }
-
-  onSearchHandler = searchText => {
-    const oldSearchText = this.urlParams.get("q") || "";
-    if (searchText) {
-      this.urlParams.set("q", searchText);
-    } else {
-      this.urlParams.delete("q");
-    }
-    if (oldSearchText !== searchText) {
-      window.location.search = this.urlParams.toString();
-    }
+  onSelectHandler = selectedProperties => {
+    this.setState({ selectedProperties });
   };
 
   render() {
@@ -131,7 +90,7 @@ export default class DashboardPage extends React.PureComponent {
                   <ToggleButton
                     options={DashboardPage.buttonOptions}
                     value={this.state.viewType}
-                    onChange={viewType => this.setState({ viewType })}
+                    onChange={this.toggleView}
                   />
                 </div>
                 <Button color="primary">Add Property</Button>
@@ -140,13 +99,13 @@ export default class DashboardPage extends React.PureComponent {
             <div className="dashboard-content__controls">
               <div className="dashboard-content__filters">
                 <DashboardControls
-                  properties={this.props.properties}
-                  searchText={this.urlParams.get("q")}
-                  fundsOptions={this.fundsOptions}
-                  assetOwnersOptions={this.assetOwnersOptions}
-                  propertyManagersOptions={this.propertyManagersOptions}
-                  locationsOptions={this.locationsOptions}
-                  onSubmit={this.onSearchHandler}
+                  propertiesCount={this.props.properties.length}
+                  funds={this.props.funds}
+                  assetManagers={this.props.asset_managers}
+                  propertyManagers={this.props.property_managers}
+                  locations={this.props.states}
+                  filters={this.props.filters}
+                  onChange={this.onChangeFilter}
                 />
               </div>
               <div className="dashboard-content__selection">
@@ -160,9 +119,7 @@ export default class DashboardPage extends React.PureComponent {
             <PropertiesListComponent
               properties={this.props.properties}
               selectedProperties={this.state.selectedProperties}
-              onSelect={selectedProperties => {
-                this.setState({ selectedProperties });
-              }}
+              onSelect={this.onSelectHandler}
             />
           </Container>
         </div>
@@ -209,69 +166,39 @@ DashboardSelection.propTypes = {
   selectedProperties: PropTypes.array.isRequired
 };
 
-const DashboardControls = ({
-  properties,
-  searchText,
-  onSubmit,
-  fundsOptions,
-  assetOwnersOptions,
-  propertyManagersOptions,
-  locationsOptions
-}) => {
-  return (
-    <SearchField onSubmit={onSubmit} value={searchText}>
-      <div className="dashboard-controls">
-        <span className="dashboard-controls__title">
-          {properties.length} Properties
-        </span>
-        <MultiSelect
-          className="dashboard-controls__field"
-          options={locationsOptions}
-          styles={{
-            menu: provided => ({ ...provided, width: 320 })
-          }}
-          placeholder="Locations…"
-          label="Locations…"
-        />
-        <MultiSelect
-          className="dashboard-controls__field"
-          options={fundsOptions}
-          styles={{
-            menu: provided => ({ ...provided, width: 320 })
-          }}
-          placeholder="Funds…"
-          label="Funds…"
-        />
-        <MultiSelect
-          className="dashboard-controls__field"
-          options={assetOwnersOptions}
-          styles={{
-            menu: provided => ({ ...provided, width: 320 })
-          }}
-          placeholder="Asset Owners…"
-          label="Asset Owners…"
-        />
-        <MultiSelect
-          className="dashboard-controls__field"
-          options={propertyManagersOptions}
-          styles={{
-            menu: provided => ({ ...provided, width: 320 })
-          }}
-          placeholder="Property Mgr…"
-          label="Property Mgr…"
-        />
-        <SortSelect
-          className="dashboard-controls__sort"
-          options={DashboardPage.sortOptions}
-          defaultValue={DashboardPage.sortOptions[0]}
-          onChange={() => {}}
-          onReverse={() => {}}
-        />
-      </div>
-    </SearchField>
-  );
-};
+export default class UrlQueryLayer extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.filters = {};
+    this.urlParams = new URLSearchParams(window.location.search);
+    this.urlParams.forEach((value, name) => {
+      this.filters[name] = value;
+    });
+  }
 
-DashboardControls.propTypes = {
-  properties: PropTypes.array.isRequired
-};
+  onChangeFilter = filters => {
+    console.log("onChangeFilter");
+    Object.keys(filters).forEach(filterName => {
+      const value = filters[filterName];
+      if (_isEmpty(value)) {
+        this.urlParams.delete(filterName);
+      } else {
+        this.urlParams.set(filterName, value);
+      }
+    });
+    const searchStr = this.urlParams.toString();
+    if (searchStr !== window.location.search) {
+      window.location.search = searchStr;
+    }
+  };
+
+  render() {
+    return (
+      <DashboardPage
+        {...this.props}
+        filters={this.filters}
+        onChangeFilter={this.onChangeFilter}
+      />
+    );
+  }
+}
