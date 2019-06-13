@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.admin.utils import unquote
 from django.template.response import TemplateResponse
 from django.urls import path, reverse
 from django.utils.safestring import mark_safe
@@ -6,7 +7,17 @@ from django.utils.safestring import mark_safe
 from remark.admin import admin_site
 from remark.analytics.admin import InlineAnalyticsProviderAdmin
 from .forms import ProjectForm, SpreadsheetForm
-from .models import Fund, Project, Period, Spreadsheet, TargetPeriod, TAMExportLog, Tag, CampaignModel
+from .models import (
+    Fund,
+    Project,
+    Campaign,
+    CampaignModel,
+    Period,
+    Spreadsheet,
+    TargetPeriod,
+    TAMExportLog,
+    Tag,
+)
 from .views import TAMExportView
 
 import datetime
@@ -49,34 +60,6 @@ class SpreadsheetAdmin(UpdateSpreadsheetAdminMixin, admin.ModelAdmin):
             if obj is not None
             else self.pre_creation_readonly_fields
         )
-
-
-@admin.register(CampaignModel, site=admin_site)
-class CampaignModelAdmin(admin.ModelAdmin):
-    list_display = ["name", "project", "selected", "active", "model_index", "model_start", "model_end"]
-    list_filter = ("campaign",)
-    readonly_fields = ["project", "selected", "file_url", "json_data" ]
-
-    def project(self, obj):
-        return mark_safe('<a href="{}" target="_blank">{}</a>'.format(
-            reverse("admin:projects_project_change", args=(obj.project.pk,)),
-            obj.project.name
-        ))
-
-    def selected(self, obj):
-        return "Yes" if obj.selected else ""
-
-    fieldsets = (
-        ("Model Details", {
-            "fields": ("project", "name", "model_start", "model_end", "model_index", "active", "selected"),
-        }),
-        ("Spreadsheet", {
-            "fields": ("file_url", "json_data")
-        })
-    )
-
-    def has_add_permission(self, request):
-        return False
 
 
 class NewSpreadsheetInline(admin.StackedInline):
@@ -167,6 +150,93 @@ class ExistingSpreadsheetInline(admin.TabularInline):
     is_active.boolean = True
 
 
+@admin.register(Campaign, site=admin_site)
+class CampaignAdmin(admin.ModelAdmin):
+    list_display = ["campaign_id", "project__link", "selected_campaign_model"]
+    list_filter = ("project__name",)
+    readonly_fields = ["project"]
+    fields = ["project", "selected_campaign_model"]
+
+    def project__link(self, obj):
+        return mark_safe(
+            '<a href="{}" target="_blank">{}</a>'.format(
+                reverse("admin:projects_project_change", args=(obj.project.pk,)),
+                obj.project.name,
+            )
+        )
+    project__link.short_description = "Project"
+
+    def formfield_for_foreignkey(self, db_field, request, **kwargs):
+        object_id = unquote(request.resolver_match.kwargs['object_id'])
+        if db_field.name == "selected_campaign_model":
+            kwargs["queryset"] = CampaignModel.objects.filter(campaign__pk=object_id)
+        return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+
+@admin.register(CampaignModel, site=admin_site)
+class CampaignModelAdmin(admin.ModelAdmin):
+    list_display = [
+        "name",
+        "project",
+        "selected",
+        "active",
+        "model_index",
+        "model_start",
+        "model_end",
+    ]
+    list_filter = ("campaign",)
+    readonly_fields = ["project", "selected", "file_url", "json_data"]
+
+    def project(self, obj):
+        return mark_safe(
+            '<a href="{}" target="_blank">{}</a>'.format(
+                reverse("admin:projects_project_change", args=(obj.project.pk,)),
+                obj.project.name,
+            )
+        )
+
+    def selected(self, obj):
+        return "Yes" if obj.selected else ""
+
+    fieldsets = (
+        (
+            "Model Details",
+            {
+                "fields": (
+                    "project",
+                    "name",
+                    "model_start",
+                    "model_end",
+                    "model_index",
+                    "active",
+                    "selected",
+                )
+            },
+        ),
+        ("Spreadsheet", {"fields": ("file_url", "json_data")}),
+    )
+
+    def has_add_permission(self, request):
+        return False
+
+
+class CampaignInline(admin.TabularInline):
+    # verbose_name = "Existing Spreadsheet"
+    # verbose_name_plural = "Existing Spreadsheets"
+    model = Campaign
+    list_display = ["campaign_id", "selected_campaign_model"]
+    show_change_link = True
+
+    # def has_add_permission(self, request, obj):
+    #     return False
+
+    # def has_change_permission(self, request, obj):
+    #     return False
+
+    # def has_delete_permission(self, request, obj):
+    #     return False
+
+
 @admin.register(Period, site=admin_site)
 class PeriodAdmin(admin.ModelAdmin):
     list_display = ["project", "start", "end"]
@@ -222,6 +292,7 @@ class TAMExportMixin:
 class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin):
     save_on_top = True
     inlines = (
+        CampaignInline,
         NewSpreadsheetInline,
         ExistingSpreadsheetInline,
         PeriodInline,
