@@ -13,7 +13,6 @@ $address-min-width: 370px;
 $arrow-size: 12px;
 $link-padding: 8px 10px;
 
-
 .property-row {
     display: flex;
     height: $height;
@@ -21,6 +20,7 @@ $link-padding: 8px 10px;
     padding: 0 $field-padding;
     font-size: $text-base;
     line-height: $line-height-relaxed;
+    text-align: left;
     border: 1px solid transparent;
     box-sizing: border-box;
     transition: border .1s linear;

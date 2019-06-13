@@ -8,7 +8,7 @@ import ToggleButton from "../toggle_button";
 import Container from "../container";
 import PageChrome from "../page_chrome";
 import PropertyCardList from "../property_card_list";
-// import PropertyList from "../property_list";
+import PropertyList from "../property_list";
 import SearchField from "../search_field";
 import MultiSelect from "../multi_select";
 import { Close, ListView, TileView } from "../../icons";
@@ -73,8 +73,7 @@ export default class DashboardPage extends React.PureComponent {
     if (this.state.viewType === "tile") {
       return PropertyCardList;
     } else {
-      // return PropertyList;
-      return "PropertyList";
+      return PropertyList;
     }
   }
 
