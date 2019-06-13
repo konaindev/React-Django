@@ -3,6 +3,8 @@ import cn from "classnames";
 import React from "react";
 import PropTypes from "prop-types";
 
+import AddPropertyModal from "../add_property_modal";
+import { states } from "../add_property_form/states";
 import Button from "../button";
 import DashboardControls from "../dashboard_controls";
 import ToggleButton from "../toggle_button";
@@ -40,11 +42,23 @@ export class DashboardPage extends React.PureComponent {
     }
   ];
 
+  static addPropertyFormProps = {
+    packages: [
+      { id: "accelerate", name: "Accelerate" },
+      { id: "optimize", name: "Optimize" },
+      { id: "ground", name: "Ground Up" },
+      { id: "other", name: "Not Sure" }
+    ],
+    post_url: "/projects/new",
+    states
+  };
+
   constructor(props) {
     super(props);
     this.state = {
       viewType: props.viewType,
-      selectedProperties: props.selectedProperties
+      selectedProperties: props.selectedProperties,
+      isShowAddPropertyForm: false
     };
   }
 
@@ -75,6 +89,14 @@ export class DashboardPage extends React.PureComponent {
     this.setState({ selectedProperties });
   };
 
+  onShowAddPropertyForm = () => {
+    this.setState({ isShowAddPropertyForm: true });
+  };
+
+  onHideAddPropertyForm = () => {
+    this.setState({ isShowAddPropertyForm: false });
+  };
+
   render() {
     const className = cn("dashboard-content", {
       "dashboard-content--selection-mode": this.state.selectedProperties.length
@@ -93,7 +115,9 @@ export class DashboardPage extends React.PureComponent {
                     onChange={this.toggleView}
                   />
                 </div>
-                <Button color="primary">Add Property</Button>
+                <Button color="primary" onClick={this.onShowAddPropertyForm}>
+                  Add Property
+                </Button>
               </div>
             </div>
             <div className="dashboard-content__controls">
@@ -122,6 +146,11 @@ export class DashboardPage extends React.PureComponent {
               onSelect={this.onSelectHandler}
             />
           </Container>
+          <AddPropertyModal
+            open={this.state.isShowAddPropertyForm}
+            formProps={DashboardPage.addPropertyFormProps}
+            onClose={this.onHideAddPropertyForm}
+          />
         </div>
       </PageChrome>
     );
