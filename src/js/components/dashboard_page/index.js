@@ -206,7 +206,6 @@ export default class UrlQueryLayer extends React.PureComponent {
   }
 
   onChangeFilter = filters => {
-    console.log("onChangeFilter");
     Object.keys(filters).forEach(filterName => {
       const value = filters[filterName];
       if (_isEmpty(value)) {

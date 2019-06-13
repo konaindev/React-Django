@@ -60,23 +60,23 @@ export default class DashboardControls extends React.PureComponent {
   }
 
   get assetOwnersOptions() {
-    return this.props.assetManagers.map(am => ({
-      label: am.label,
-      value: am.id
+    return this.props.assetManagers.map(assetManager => ({
+      label: assetManager.label,
+      value: assetManager.id
     }));
   }
 
   get propertyManagersOptions() {
-    return this.props.propertyManagers.map(am => ({
-      label: am.label,
-      value: am.id
+    return this.props.propertyManagers.map(propertyManager => ({
+      label: propertyManager.label,
+      value: propertyManager.id
     }));
   }
 
   get locationsOptions() {
-    return this.props.locations.map(am => ({
-      label: am.label,
-      value: am.value
+    return this.props.locations.map(location => ({
+      label: location.label,
+      value: location.value
     }));
   }
 
