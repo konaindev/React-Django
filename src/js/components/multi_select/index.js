@@ -48,7 +48,7 @@ export default function MultiSelect(props) {
       isMulti={true}
       hideSelectedOptions={false}
       label={label}
-      loadOptions={() => props.options}
+      options={props.options}
       closeMenuOnSelect={false}
       {...otherProps}
     />
@@ -60,8 +60,8 @@ MultiSelect.propTypes = {
     PropTypes.shape({ label: PropTypes.string, value: PropTypes.string })
   ),
   className: PropTypes.string,
-  defaultValue: PropTypes.string,
-  value: PropTypes.string,
+  defaultValue: PropTypes.array,
+  value: PropTypes.array,
   placeholder: PropTypes.string,
   label: PropTypes.string,
   onChange: PropTypes.func

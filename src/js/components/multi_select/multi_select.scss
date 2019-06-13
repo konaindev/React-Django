@@ -12,6 +12,12 @@ $checkbox-tick-size: 10px;
     &.select .select__option--is-selected {
         background-color: $select-option-background-color;
     }
+
+    .multi-select__option {
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+    }
 }
 
 .multi-select--has-value {
@@ -19,12 +25,6 @@ $checkbox-tick-size: 10px;
         color: $input-text-color;
         background: $selected-color;
     }
-}
-
-.multi-select__option {
-    display: flex;
-    cursor: pointer;
-    align-items: center;
 }
 
 .multi-select__option-checkbox {
