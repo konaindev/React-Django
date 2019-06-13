@@ -422,7 +422,7 @@ exports[`USSubRegionMap renders South 1`] = `
       onMouseEnter={[Function]}
     />
     <text
-      className="us-sub-region-map__label"
+      className="us-sub-region-map__label us-sub-region-map__label--ar"
       x="305"
       y="180"
     >
