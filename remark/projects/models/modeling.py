@@ -31,7 +31,7 @@ class Campaign(models.Model):
         Project, on_delete=models.CASCADE, related_name="campaigns", null=True
     )
     selected_campaign_model = models.ForeignKey(
-        "CampaignModel", on_delete=models.CASCADE, related_name="+", null=True
+        "CampaignModel", on_delete=models.CASCADE, related_name="+", null=True, blank=True
     )
 
     def __str__(self):

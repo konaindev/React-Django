@@ -152,10 +152,12 @@ class ExistingSpreadsheetInline(admin.TabularInline):
 
 @admin.register(Campaign, site=admin_site)
 class CampaignAdmin(admin.ModelAdmin):
-    list_display = ["campaign_id", "project__link", "selected_campaign_model"]
+    list_display = ["name", "project__link", "selected_campaign_model"]
     list_filter = ("project__name",)
-    readonly_fields = ["project"]
-    fields = ["project", "selected_campaign_model"]
+    fields = ["name", "project", "selected_campaign_model"]
+    readonly_fields_on_create = ("selected_campaign_model",)
+    readonly_fields_on_update = ("project",)
+    ordering = ['name']
 
     def project__link(self, obj):
         return mark_safe(
@@ -167,10 +169,20 @@ class CampaignAdmin(admin.ModelAdmin):
     project__link.short_description = "Project"
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        object_id = unquote(request.resolver_match.kwargs['object_id'])
         if db_field.name == "selected_campaign_model":
-            kwargs["queryset"] = CampaignModel.objects.filter(campaign__pk=object_id)
+            try:
+                object_id = unquote(request.resolver_match.kwargs['object_id'])
+                kwargs["queryset"] = CampaignModel.objects.filter(campaign__pk=object_id)
+            except:
+                kwargs["queryset"] = CampaignModel.objects.all()
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
+
+    def get_readonly_fields(self, request, obj=None):
+        return (
+            self.readonly_fields_on_update
+            if obj is not None
+            else self.readonly_fields_on_create
+        )
 
 
 @admin.register(CampaignModel, site=admin_site)
@@ -221,20 +233,15 @@ class CampaignModelAdmin(admin.ModelAdmin):
 
 
 class CampaignInline(admin.TabularInline):
-    # verbose_name = "Existing Spreadsheet"
-    # verbose_name_plural = "Existing Spreadsheets"
     model = Campaign
-    list_display = ["campaign_id", "selected_campaign_model"]
+    list_display = ["name", "selected_campaign_model"]
+    readonly_fields = ["selected_campaign_model"]
     show_change_link = True
+    extra = 0
+    ordering = ['name']
 
-    # def has_add_permission(self, request, obj):
-    #     return False
-
-    # def has_change_permission(self, request, obj):
-    #     return False
-
-    # def has_delete_permission(self, request, obj):
-    #     return False
+    def has_change_permission(self, request, obj):
+        return False
 
 
 @admin.register(Period, site=admin_site)
