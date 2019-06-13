@@ -72,6 +72,7 @@
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.9",
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
     "date-fns": "^1.30.1",
