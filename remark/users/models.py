@@ -48,13 +48,20 @@ class UserManager(BaseUserManager):
         """
         Creates and saves a User with the given email and password.
         """
+
         if not email:
             raise ValueError("email must be set")
+
+        # Create the crm.Person with email provided above
+        person = Person(first_name="", last_name="", email=email)
+        person.save()
+
         user = self.model(email=email, **extra_fields)
         if raw_password:
             user.set_password(raw_password)
         if password:
             user.password = password
+        user.person = person
         user.save(using=self._db)
         return user
 
@@ -122,10 +129,6 @@ class User(PermissionsMixin, AbstractBaseUser):
     def last_name(self):
         return self.person.last_name
 
-    @property
-    def email(self):
-        return self.person.email
-
     avatar = StdImageField(
         null=True,
         blank=True,
@@ -147,6 +150,7 @@ class User(PermissionsMixin, AbstractBaseUser):
         null=True,
         blank=True,
     )
+    email = NormalizedEmailField(unique=True)
 
     USERNAME_FIELD = "email"
     EMAIL_FIELD = "email"
