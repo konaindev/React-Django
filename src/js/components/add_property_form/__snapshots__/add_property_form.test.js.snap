@@ -3,7 +3,7 @@
 exports[`AddPropertyForm add property form 1`] = `
 <form
   action="sales/new-project/"
-  autocomplete="off"
+  autoComplete="off"
   className="add-property-form"
   method="post"
   onReset={[Function]}
@@ -22,7 +22,7 @@ exports[`AddPropertyForm add property form 1`] = `
         ADD PHOTO
         <input
           accept="image/*"
-          name="photo"
+          name="building_photo"
           onChange={[Function]}
           style={
             Object {
@@ -68,7 +68,7 @@ exports[`AddPropertyForm add property form 1`] = `
       <div>
         <input
           className="input add-property-form__input"
-          name="address"
+          name="street_address_1"
           onBlur={[Function]}
           onChange={[Function]}
           placeholder="Street Address 1"
@@ -86,7 +86,7 @@ exports[`AddPropertyForm add property form 1`] = `
       <div>
         <input
           className="input add-property-form__input"
-          name="address2"
+          name="street_address_2"
           onBlur={[Function]}
           onChange={[Function]}
           placeholder="Street Address 2"
@@ -170,7 +170,7 @@ exports[`AddPropertyForm add property form 1`] = `
           </div>
           <input
             className="input add-property-form__input add-property-form__input--zipcode"
-            name="zipcode"
+            name="zip_code"
             onBlur={[Function]}
             onChange={[Function]}
             onFocus={[Function]}
@@ -238,7 +238,7 @@ exports[`AddPropertyForm add property form 1`] = `
             </div>
           </div>
           <input
-            name="package"
+            name="product_type"
             type="hidden"
             value=""
           />
