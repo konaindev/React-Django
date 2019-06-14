@@ -32,6 +32,7 @@ exports[`AddPropertyModal renders AddPropertyModal correctly 1`] = `
   >
     <form
       action="/projects/new"
+      autocomplete="off"
       className="add-property-form"
       method="post"
       onReset={[Function]}

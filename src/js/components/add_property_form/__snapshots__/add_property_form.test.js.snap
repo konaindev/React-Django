@@ -2,7 +2,8 @@
 
 exports[`AddPropertyForm add property form 1`] = `
 <form
-  action="/projects/new"
+  action="sales/new-project/"
+  autocomplete="off"
   className="add-property-form"
   method="post"
   onReset={[Function]}
