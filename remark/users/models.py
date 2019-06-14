@@ -105,9 +105,27 @@ class User(PermissionsMixin, AbstractBaseUser):
     updated = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-    first_name = models.CharField(max_length=250, null=True)
-    last_name = models.CharField(max_length=250, null=True)
-    email = NormalizedEmailField(unique=True)
+
+    person = models.ForeignKey(
+        "crm.Person",
+        related_name="users",
+        on_delete=models.PROTECT,
+        null=True,
+        blank=True,
+    )
+
+    @property
+    def first_name(self):
+        return self.person.first_name
+
+    @property
+    def last_name(self):
+        return self.person.last_name
+
+    @property
+    def email(self):
+        return self.person.email
+
     avatar = StdImageField(
         null=True,
         blank=True,
