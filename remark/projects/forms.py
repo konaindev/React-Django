@@ -6,13 +6,21 @@ from remark.lib.validators import (
     validate_linebreak_separated_numbers_list,
     validate_linebreak_separated_strings_list,
 )
-from .models import Project, Spreadsheet
+from .models import Project, Spreadsheet, CampaignModel
 from .reports.selectors import ReportLinks
 from .spreadsheets import get_importer_for_kind, SpreadsheetKind
 
 from remark.lib.logging import error_text, getLogger
 
 logger = getLogger(__name__)
+
+
+class CampaignModelUploadForm(forms.ModelForm):
+    spreadsheet_file = forms.FileField()
+
+    class Meta:
+        model = CampaignModel
+        fields = ["spreadsheet_file"]
 
 
 class SpreadsheetForm(forms.ModelForm):

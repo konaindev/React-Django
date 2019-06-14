@@ -1,5 +1,4 @@
 from django.db import models
-from remark.projects.models import Project
 from django.conf import settings
 from .reports.constants import KPI_NAMES, KPI_CATEGORIES
 
@@ -11,7 +10,7 @@ class PerformanceEmail(models.Model):
     objects = PerformanceEmailManager()
 
     project = models.ForeignKey(
-        Project, on_delete=models.CASCADE, related_name="performance_emails"
+        "projects.Project", on_delete=models.CASCADE, related_name="performance_emails"
     )
 
     start = models.DateField(

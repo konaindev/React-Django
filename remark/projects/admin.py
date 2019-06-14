@@ -6,7 +6,7 @@ from django.utils.safestring import mark_safe
 
 from remark.admin import admin_site
 from remark.analytics.admin import InlineAnalyticsProviderAdmin
-from .forms import ProjectForm, SpreadsheetForm
+from .forms import ProjectForm, SpreadsheetForm, CampaignModelUploadForm
 from .models import (
     Fund,
     Project,
@@ -200,7 +200,30 @@ class CampaignModelAdmin(admin.ModelAdmin):
     is_selected.boolean = True
 
 
-class CampaignModelInline(admin.TabularInline):
+class CampaignModelUploadInline(admin.StackedInline):
+    """
+    Inline Admin for adding *new* campaign model to a campaign.
+    """
+    verbose_name = "campaign model"
+    verbose_name_plural = "New Campaign Model"
+    model = CampaignModel
+    form = CampaignModelUploadForm
+    extra = 0
+    max_num = 1
+    readonly_fields = ["upload_button"]
+
+    def get_queryset(self, request):
+        queryset = super().get_queryset(request)
+        return queryset.none()
+
+    @mark_safe
+    def upload_button(self, obj):
+        return '<input type="submit" value="Upload" name="_continue">'
+
+    upload_button.short_description = ""
+
+
+class CampaignModelTableInline(admin.TabularInline):
     verbose_name = "Campaign Model"
     verbose_name_plural = "Campaign Models"
 
@@ -235,7 +258,7 @@ class CampaignAdmin(admin.ModelAdmin):
     fields = ["name", "project", "selected_campaign_model"]
     readonly_fields_on_create = ("selected_campaign_model",)
     readonly_fields_on_update = ("project",)
-    inlines = (CampaignModelInline,)
+    inlines = (CampaignModelUploadInline, CampaignModelTableInline,)
     ordering = ["project__name"]
 
     def project_link(self, obj):
@@ -250,15 +273,10 @@ class CampaignAdmin(admin.ModelAdmin):
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
         if db_field.name == "selected_campaign_model":
-            try:
-                # update view
-                object_id = unquote(request.resolver_match.kwargs["object_id"])
-                kwargs["queryset"] = CampaignModel.objects.filter(
-                    campaign__pk=object_id
-                ).order_by("model_index")
-            except:
-                # create view
-                kwargs["queryset"] = CampaignModel.objects.all()
+            object_id = unquote(request.resolver_match.kwargs["object_id"])
+            kwargs["queryset"] = CampaignModel.objects.filter(
+                campaign__pk=object_id
+            ).order_by("model_index")
         return super().formfield_for_foreignkey(db_field, request, **kwargs)
 
     def get_readonly_fields(self, request, obj=None):
@@ -267,6 +285,13 @@ class CampaignAdmin(admin.ModelAdmin):
             if obj is not None
             else self.readonly_fields_on_create
         )
+
+    # hide new campaign form on create view
+    def get_inline_instances(self, request, obj=None):
+        if obj is None:
+            return ()
+        else:
+            return [inline(self.model, self.admin_site) for inline in self.inlines]
 
 
 class CampaignInline(admin.TabularInline):
