@@ -399,9 +399,9 @@ exports[`PropertyList renders correctly 1`] = `
               performance_rating={0}
             >
               <div
-                className="property-status property-status--requires-review"
+                className="property-status property-status--off-track"
               >
-                NEEDS REVIEW
+                OFF TRACK
               </div>
             </PropertyStatus>
           </div>
@@ -1285,9 +1285,9 @@ exports[`PropertyList renders correctly 2`] = `
               performance_rating={0}
             >
               <div
-                className="property-status property-status--requires-review"
+                className="property-status property-status--off-track"
               >
-                NEEDS REVIEW
+                OFF TRACK
               </div>
             </PropertyStatus>
           </div>
@@ -2171,9 +2171,9 @@ exports[`PropertyList renders correctly 3`] = `
               performance_rating={0}
             >
               <div
-                className="property-status property-status--requires-review"
+                className="property-status property-status--off-track"
               >
-                NEEDS REVIEW
+                OFF TRACK
               </div>
             </PropertyStatus>
           </div>

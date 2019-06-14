@@ -1,7 +1,7 @@
 @import "css/base.scss";
 
 $status-color-on-track: $green-3;
-$status-color-at-risk: $orange-4;
+$status-color-at-risk: $yellow-1;
 $status-color-requires-review: $orange-2;
 $status-text-height: 18px;
 $status-text-size: 11px;
@@ -27,7 +27,7 @@ $status-text-size: 11px;
         color: $status-color-at-risk;
     }
 
-    &--requires-review {
+    &--off-track {
         border-color: $status-color-requires-review;
         color: $status-color-requires-review;
     }

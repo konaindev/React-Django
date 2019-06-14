@@ -4,11 +4,11 @@ import React from "react";
 
 import "./property_status.scss";
 
-const STATUS_LABEL = ["NEEDS REVIEW", "AT RISK", "ON TRACK"];
+const STATUS_LABEL = ["OFF TRACK", "AT RISK", "ON TRACK"];
 
 const PropertyStatus = ({ className, performance_rating }) => {
   const classNames = cn("property-status", className, {
-    "property-status--requires-review": performance_rating === 0,
+    "property-status--off-track": performance_rating === 0,
     "property-status--at-risk": performance_rating === 1,
     "property-status--on-track": performance_rating === 2
   });
