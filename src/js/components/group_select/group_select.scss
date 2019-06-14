@@ -1,0 +1,94 @@
+@import 'css/base.scss';
+
+$selected-color: $blue-3;
+$checkbox-spacing: 13.5px;
+$checkbox-size: 16px;
+$checkbox-background: $blue-3;
+$checkbox-border-color: $blue-4;
+$checkbox-tick-size: 10px;
+$group-width: 180px;
+$menu-spacing: 0 20px 20px;
+$option-spacing: 0 15px;
+$group-border-color: $gray-4;
+
+.group-select {
+    &.select .select__option--is-focused,
+    &.select .select__option--is-selected {
+        background-color: $select-option-background-color;
+    }
+
+    &.select .select__option:active {
+        background: transparent;
+    }
+
+    .select__group-heading {
+        padding: 0;
+    }
+
+    .select__menu {
+        padding: $menu-spacing;
+        box-sizing: content-box;
+    }
+
+    .group-select__option {
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.group-select--has-value {
+    &.select__control {
+        color: $input-text-color;
+        background: $selected-color;
+    }
+}
+
+.group-select__option-checkbox {
+    width: $checkbox-size;
+    height: $checkbox-size;
+    border: 1px solid $button-outline-border-color;
+    border-radius: $select-border-radius;
+}
+
+.group-select__option-label {
+    margin-left: $checkbox-spacing;
+}
+
+.group-select__option--selected {
+    .group-select__option-checkbox {
+        background: $checkbox-background url(../../../images/icon-tick.svg) no-repeat center;
+        background-size: $checkbox-tick-size;
+        border-color: $checkbox-border-color;
+    }
+}
+
+.group-select__label {
+    line-height: $text-xl;
+}
+
+.group-select__group-header.group-select__option {
+    margin: auto 20px;
+    padding-left: 0;
+    padding-right: 0;
+    border-bottom: 1px solid #2B343D;
+}
+
+.group-select__groups {
+    display: flex;
+ 
+    .select__group {
+        width: $group-width;
+        margin: $option-spacing;
+    }
+}
+
+.group-select__group {
+    border-bottom: 1px solid $group-border-color;
+}
+
+.group-select__all {
+    margin: $option-spacing;
+}
