@@ -7,7 +7,8 @@ $checkbox-background: $blue-3;
 $checkbox-border-color: $blue-4;
 $checkbox-tick-size: 10px;
 $group-width: 180px;
-$menu-spacing: 0 20px 20px;
+$menu-spacing: 0 0 20px 20px;
+$menu-max-height: 500px;
 $option-spacing: 0 15px;
 $group-border-color: $gray-4;
 
@@ -28,6 +29,10 @@ $group-border-color: $gray-4;
     .select__menu {
         padding: $menu-spacing;
         box-sizing: content-box;
+    }
+
+    .select__menu-list {
+        max-height: $menu-max-height;
     }
 
     .group-select__option {

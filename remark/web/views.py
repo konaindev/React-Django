@@ -21,7 +21,8 @@ class DashboardView(LoginRequiredMixin, ReactView):
         if request.GET.get("q"):
             project_params["name__icontains"] = request.GET.get("q")
         if request.GET.get("st"):
-            project_params["address__state__in"] = request.GET.getlist("st")
+            st = request.GET.getlist("st")
+            project_params["address__state__iregex"] = r"(" + "|".join(st) + ")"
         if request.GET.get("ct"):
             project_params["address__city__in"] = request.GET.getlist("ct")
         if request.GET.get("pm"):
@@ -62,7 +63,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
                     {
                         "city": city,
                         "label": "{}, {}".format(city, state.upper()),
-                        "state": state,
+                        "state": state.lower(),
                     }
                 )
 

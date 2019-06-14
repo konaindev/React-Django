@@ -4,6 +4,7 @@ export const props = {
   locations: [
     { city: "Seattle", label: "Seattle, WA", state: "wa" },
     { city: "New Haven", label: "New Haven, CT", state: "ct" },
+    { city: "San Antonio", label: "San Antonio, TX", state: "tx" },
     { city: "Dallas", label: "Dallas, TX", state: "tx" }
   ],
   propertyManagers: [

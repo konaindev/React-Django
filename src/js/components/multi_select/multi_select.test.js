@@ -1,17 +1,19 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import Select from "./index";
+import MultiSelect from "./index";
 import { props } from "./props";
 
-describe("Select", () => {
+describe("MultiSelect", () => {
   it("render select", () => {
-    const tree = renderer.create(<Select {...props} />).toJSON();
+    const tree = renderer.create(<MultiSelect {...props} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
   it("all selected", () => {
     const tree = renderer
-      .create(<Select {...props} selectAllLabel="ALL" value={props.options} />)
+      .create(
+        <MultiSelect {...props} selectAllLabel="ALL" value={props.options} />
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });

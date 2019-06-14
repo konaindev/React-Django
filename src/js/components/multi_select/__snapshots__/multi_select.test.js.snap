@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Select all selected 1`] = `
+exports[`MultiSelect all selected 1`] = `
 <div
   className="select multi-select css-1ym6uuo-container"
   onKeyDown={[Function]}
@@ -51,7 +51,7 @@ exports[`Select all selected 1`] = `
 </div>
 `;
 
-exports[`Select render select 1`] = `
+exports[`MultiSelect render select 1`] = `
 <div
   className="select multi-select css-1ym6uuo-container"
   onKeyDown={[Function]}
