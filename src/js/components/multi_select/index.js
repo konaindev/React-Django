@@ -43,23 +43,69 @@ function Control(props) {
   return <components.Control {...props} className={classes} />;
 }
 
-export default function MultiSelect(props) {
-  const { className, label, ...otherProps } = props;
-  const classes = cn("multi-select", className);
-  return (
-    <Select
-      className={classes}
-      classNamePrefix="select"
-      isClearable={false}
-      components={{ Option, ValueContainer, Control }}
-      isMulti={true}
-      hideSelectedOptions={false}
-      label={label}
-      options={props.options}
-      closeMenuOnSelect={false}
-      {...otherProps}
-    />
-  );
+export default class MultiSelect extends React.PureComponent {
+  get options() {
+    if (this.props.selectAllLabel) {
+      return [
+        { label: this.props.selectAllLabel, value: "all" },
+        ...this.props.options
+      ];
+    } else {
+      return this.props.options;
+    }
+  }
+
+  get value() {
+    if (this.props.value.length === this.props.options.length) {
+      return [
+        { label: this.props.selectAllLabel, value: "all" },
+        ...this.props.value
+      ];
+    }
+    return this.props.value;
+  }
+
+  onChange = (options, field) => {
+    if (field.action === "select-option" && field.option.value === "all") {
+      this.props.onChange(this.props.options, field);
+    } else if (
+      field.action === "deselect-option" &&
+      field.option.value === "all"
+    ) {
+      this.props.onChange([], field);
+    } else {
+      const newOptions = options.filter(o => o.value !== "all");
+      return this.props.onChange(newOptions, field);
+    }
+  };
+
+  render() {
+    const {
+      className,
+      label,
+      value,
+      options,
+      onChange,
+      ...otherProps
+    } = this.props;
+    const classes = cn("multi-select", className);
+    return (
+      <Select
+        className={classes}
+        classNamePrefix="select"
+        isClearable={false}
+        components={{ Option, ValueContainer, Control }}
+        isMulti={true}
+        hideSelectedOptions={false}
+        label={label}
+        options={this.options}
+        closeMenuOnSelect={false}
+        value={this.value}
+        onChange={this.onChange}
+        {...otherProps}
+      />
+    );
+  }
 }
 
 MultiSelect.propTypes = {
@@ -71,9 +117,12 @@ MultiSelect.propTypes = {
   value: PropTypes.array,
   placeholder: PropTypes.string,
   label: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  selectAllLabel: PropTypes.string
 };
 
 MultiSelect.defaultProps = {
+  value: [],
+  selectAllLabel: "",
   label: "Select..."
 };

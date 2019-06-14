@@ -147,6 +147,7 @@ export default class DashboardControls extends React.PureComponent {
             styles={DashboardControls.multiSelectStyle}
             placeholder="Funds…"
             label="Funds…"
+            selectAllLabel="ALL FUNDS"
             onChange={this.onChangeHandler}
             onMenuClose={this.onChangeFilter}
           />
@@ -158,6 +159,7 @@ export default class DashboardControls extends React.PureComponent {
             styles={DashboardControls.multiSelectStyle}
             placeholder="Asset Owners…"
             label="Asset Owners…"
+            selectAllLabel="ALL OWNERS"
             onChange={this.onChangeHandler}
             onMenuClose={this.onChangeFilter}
           />
@@ -169,6 +171,7 @@ export default class DashboardControls extends React.PureComponent {
             styles={DashboardControls.multiSelectStyle}
             placeholder="Property Mgr…"
             label="Property Mgr…"
+            selectAllLabel="ALL MANAGERS"
             onChange={this.onChangeHandler}
             onMenuClose={this.onChangeFilter}
           />

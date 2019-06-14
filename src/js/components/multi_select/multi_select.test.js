@@ -9,4 +9,10 @@ describe("Select", () => {
     const tree = renderer.create(<Select {...props} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
+  it("all selected", () => {
+    const tree = renderer
+      .create(<Select {...props} selectAllLabel="ALL" value={props.options} />)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });
