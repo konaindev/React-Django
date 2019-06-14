@@ -109,11 +109,11 @@ export class DashboardPage extends React.PureComponent {
             <div className="dashboard-content__title">
               <div className="dashboard-content__title-right">
                 <div className="dashboard-content__select-view">
-                  <ToggleButton
+                  {/* <ToggleButton
                     options={DashboardPage.buttonOptions}
                     value={this.state.viewType}
                     onChange={this.toggleView}
-                  />
+                  /> */}
                 </div>
                 <Button color="primary" onClick={this.onShowAddPropertyForm}>
                   Add Property
