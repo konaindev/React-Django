@@ -45,3 +45,7 @@ $checkbox-tick-size: 10px;
         border-color: $checkbox-border-color;
     }
 }
+
+.multi-select__label {
+    line-height: $text-xl;
+}

@@ -85,7 +85,7 @@ exports[`DashboardControls renders correctly 1`] = `
             className="select__value-container select__value-container--is-multi css-1hwfws3"
           >
             <div
-              className="select__placeholder css-1wa3eu0-placeholder"
+              className="select__placeholder"
             >
               Locations…
             </div>
@@ -139,7 +139,7 @@ exports[`DashboardControls renders correctly 1`] = `
             className="select__value-container select__value-container--is-multi css-1hwfws3"
           >
             <div
-              className="select__placeholder css-1wa3eu0-placeholder"
+              className="select__placeholder"
             >
               Funds…
             </div>
@@ -193,7 +193,7 @@ exports[`DashboardControls renders correctly 1`] = `
             className="select__value-container select__value-container--is-multi css-1hwfws3"
           >
             <div
-              className="select__placeholder css-1wa3eu0-placeholder"
+              className="select__placeholder"
             >
               Asset Owners…
             </div>
@@ -247,7 +247,7 @@ exports[`DashboardControls renders correctly 1`] = `
             className="select__value-container select__value-container--is-multi css-1hwfws3"
           >
             <div
-              className="select__placeholder css-1wa3eu0-placeholder"
+              className="select__placeholder"
             >
               Property Mgr…
             </div>

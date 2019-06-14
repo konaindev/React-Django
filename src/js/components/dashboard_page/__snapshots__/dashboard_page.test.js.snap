@@ -148,7 +148,7 @@ exports[`DashboardPage Row select 1`] = `
                       className="select__value-container select__value-container--is-multi css-1hwfws3"
                     >
                       <div
-                        className="select__placeholder css-1wa3eu0-placeholder"
+                        className="select__placeholder"
                       >
                         Locations…
                       </div>
@@ -202,7 +202,7 @@ exports[`DashboardPage Row select 1`] = `
                       className="select__value-container select__value-container--is-multi css-1hwfws3"
                     >
                       <div
-                        className="select__placeholder css-1wa3eu0-placeholder"
+                        className="select__placeholder"
                       >
                         Funds…
                       </div>
@@ -256,7 +256,7 @@ exports[`DashboardPage Row select 1`] = `
                       className="select__value-container select__value-container--is-multi css-1hwfws3"
                     >
                       <div
-                        className="select__placeholder css-1wa3eu0-placeholder"
+                        className="select__placeholder"
                       >
                         Asset Owners…
                       </div>
@@ -310,7 +310,7 @@ exports[`DashboardPage Row select 1`] = `
                       className="select__value-container select__value-container--is-multi css-1hwfws3"
                     >
                       <div
-                        className="select__placeholder css-1wa3eu0-placeholder"
+                        className="select__placeholder"
                       >
                         Property Mgr…
                       </div>
@@ -1234,7 +1234,7 @@ exports[`DashboardPage Row view 1`] = `
                       className="select__value-container select__value-container--is-multi css-1hwfws3"
                     >
                       <div
-                        className="select__placeholder css-1wa3eu0-placeholder"
+                        className="select__placeholder"
                       >
                         Locations…
                       </div>
@@ -1288,7 +1288,7 @@ exports[`DashboardPage Row view 1`] = `
                       className="select__value-container select__value-container--is-multi css-1hwfws3"
                     >
                       <div
-                        className="select__placeholder css-1wa3eu0-placeholder"
+                        className="select__placeholder"
                       >
                         Funds…
                       </div>
@@ -1342,7 +1342,7 @@ exports[`DashboardPage Row view 1`] = `
                       className="select__value-container select__value-container--is-multi css-1hwfws3"
                     >
                       <div
-                        className="select__placeholder css-1wa3eu0-placeholder"
+                        className="select__placeholder"
                       >
                         Asset Owners…
                       </div>
@@ -1396,7 +1396,7 @@ exports[`DashboardPage Row view 1`] = `
                       className="select__value-container select__value-container--is-multi css-1hwfws3"
                     >
                       <div
-                        className="select__placeholder css-1wa3eu0-placeholder"
+                        className="select__placeholder"
                       >
                         Property Mgr…
                       </div>
@@ -2320,7 +2320,7 @@ exports[`DashboardPage renders correctly 1`] = `
                       className="select__value-container select__value-container--is-multi css-1hwfws3"
                     >
                       <div
-                        className="select__placeholder css-1wa3eu0-placeholder"
+                        className="select__placeholder"
                       >
                         Locations…
                       </div>
@@ -2374,7 +2374,7 @@ exports[`DashboardPage renders correctly 1`] = `
                       className="select__value-container select__value-container--is-multi css-1hwfws3"
                     >
                       <div
-                        className="select__placeholder css-1wa3eu0-placeholder"
+                        className="select__placeholder"
                       >
                         Funds…
                       </div>
@@ -2428,7 +2428,7 @@ exports[`DashboardPage renders correctly 1`] = `
                       className="select__value-container select__value-container--is-multi css-1hwfws3"
                     >
                       <div
-                        className="select__placeholder css-1wa3eu0-placeholder"
+                        className="select__placeholder"
                       >
                         Asset Owners…
                       </div>
@@ -2482,7 +2482,7 @@ exports[`DashboardPage renders correctly 1`] = `
                       className="select__value-container select__value-container--is-multi css-1hwfws3"
                     >
                       <div
-                        className="select__placeholder css-1wa3eu0-placeholder"
+                        className="select__placeholder"
                       >
                         Property Mgr…
                       </div>

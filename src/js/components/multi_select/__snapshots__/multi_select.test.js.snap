@@ -14,7 +14,7 @@ exports[`Select render select 1`] = `
       className="select__value-container select__value-container--is-multi css-1hwfws3"
     >
       <div
-        className="select__placeholder css-1wa3eu0-placeholder"
+        className="select__placeholder"
       >
         Select an option...
       </div>

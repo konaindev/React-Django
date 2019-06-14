@@ -20,15 +20,22 @@ function Option(props) {
 }
 
 function ValueContainer({ children, ...props }) {
+  let label;
   if (props.hasValue) {
-    return props.selectProps.label;
+    label = (
+      <div className="multi-select__label">{props.selectProps.label}</div>
+    );
   } else {
-    return (
-      <components.ValueContainer {...props}>
-        {children}
-      </components.ValueContainer>
+    label = (
+      <div className="select__placeholder">{props.selectProps.placeholder}</div>
     );
   }
+  return (
+    <components.ValueContainer {...props}>
+      {label}
+      {children[1]}
+    </components.ValueContainer>
+  );
 }
 
 function Control(props) {
