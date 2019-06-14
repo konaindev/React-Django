@@ -29,6 +29,7 @@ export default class DashboardControls extends React.PureComponent {
     filters: PropTypes.shape({
       q: PropTypes.string,
       ct: PropTypes.array,
+      st: PropTypes.array,
       fd: PropTypes.array,
       am: PropTypes.array,
       pm: PropTypes.array
@@ -76,13 +77,30 @@ export default class DashboardControls extends React.PureComponent {
   get locationsOptions() {
     return this.props.locations.map(location => ({
       label: location.label,
-      value: location.value
+      city: location.city,
+      state: location.state,
+      value: location.label
     }));
   }
 
   getSelectedOptions = (options, name) => {
     const values = _get(this.state.filters, name, []);
     return options.filter(o => values.includes(o.value));
+  };
+
+  getLocationsOptions = options => {
+    const cities = _get(this.state.filters, "ct", []);
+    const states = _get(this.state.filters, "st", []);
+    return options.filter(
+      o => cities.includes(o.city) && states.includes(o.state)
+    );
+  };
+
+  onChangeLocation = (options, field) => {
+    const filters = { ...this.state.filters };
+    filters.ct = [...new Set(options.map(o => o.city))];
+    filters.st = [...new Set(options.map(o => o.state))];
+    this.setState({ filters });
   };
 
   onChangeHandler = (options, field) => {
@@ -106,10 +124,7 @@ export default class DashboardControls extends React.PureComponent {
   render() {
     const searchText = this.state.filters?.q;
     const locationsOptions = this.locationsOptions;
-    const selectedLocations = this.getSelectedOptions(
-      this.locationsOptions,
-      "ct"
-    );
+    const selectedLocations = this.getLocationsOptions(this.locationsOptions);
     const fundsOptions = this.fundsOptions;
     const selectedFunds = this.getSelectedOptions(fundsOptions, "fd");
     const assetOwnersOptions = this.assetOwnersOptions;
@@ -132,11 +147,11 @@ export default class DashboardControls extends React.PureComponent {
             className="dashboard-controls__field"
             options={locationsOptions}
             value={selectedLocations}
-            name="ct"
             styles={DashboardControls.multiSelectStyle}
             placeholder="Locations…"
             label="Locations…"
-            onChange={this.onChangeHandler}
+            selectAllLabel="ALL LOCATIONS"
+            onChange={this.onChangeLocation}
             onMenuClose={this.onChangeFilter}
           />
           <MultiSelect

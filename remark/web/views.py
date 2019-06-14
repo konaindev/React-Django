@@ -41,8 +41,6 @@ class DashboardView(LoginRequiredMixin, ReactView):
         }
 
         projects = []
-        states = []
-        cities = []
         for project in Project.objects.filter(**project_params):
             projects.append(
                 {
@@ -54,18 +52,16 @@ class DashboardView(LoginRequiredMixin, ReactView):
                     "url": project.get_baseline_url(),
                 }
             )
+
+        locations = []
+        for project in Project.objects.filter(account_id=user.account_id).distinct("address__state", "address__city"):
             if project.address:
                 state = project.address.state
                 city = project.address.city
-                try:
-                    state_name = State.objects.get(code=state).name
-                except State.DoesNotExist:
-                    state_name = ""
-                states.append({"label": state_name, "value": state})
-                cities.append(
+                locations.append(
                     {
-                        "label": city,
-                        "value": "{}, {}".format(city, state).lower(),
+                        "city": city,
+                        "label": "{}, {}".format(city, state.upper()),
                         "state": state,
                     }
                 )
@@ -86,8 +82,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
             properties=projects,
             user=user_dict,
             search_url=request.get_full_path(),
-            states=states,
-            cities=cities,
+            locations=locations,
             property_managers=property_managers,
             asset_managers=asset_managers,
             funds=funds,
