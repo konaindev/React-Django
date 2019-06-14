@@ -2,9 +2,9 @@
 
 exports[`PropertyStatus renders correctly 1`] = `
 <div
-  className="property-status property-status--requires-review"
+  className="property-status property-status--off-track"
 >
-  NEEDS REVIEW
+  OFF TRACK
 </div>
 `;
 

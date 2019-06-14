@@ -6,7 +6,7 @@ import ModalWindow from "../modal_window";
 
 export default function AddPropertyModal(props) {
   return (
-    <ModalWindow open={props.open}>
+    <ModalWindow open={props.open} onClose={props.onClose}>
       <ModalWindow.Head>Add Property</ModalWindow.Head>
       <ModalWindow.Body>
         <AddPropertyForm {...props.formProps} />
@@ -24,5 +24,9 @@ AddPropertyModal.propTypes = {
       PropTypes.shape({ id: PropTypes.string, name: PropTypes.string })
     ).isRequired,
     post_url: PropTypes.string
-  }).isRequired
+  }).isRequired,
+  onClose: PropTypes.func
+};
+AddPropertyModal.defaultProps = {
+  onClose: () => {}
 };

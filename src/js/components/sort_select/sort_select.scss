@@ -1,0 +1,56 @@
+@import 'css/base.scss';
+
+$sort-field-spacing: 12px;
+$sort-icon-spacing: 15px;
+$border-color: $gray-4;
+
+.sort-select {
+    display: flex;
+    text-align: left;
+    align-items: center;
+}
+
+.sort-select__title {
+    display: inline-block;
+    margin-right: $sort-field-spacing;
+    font-family: $font-sans;
+    font-size: $text-xs;
+    font-weight: $weight-normal;
+    letter-spacing: $letter-spacing-wide;
+    color: $title-small-color;
+    text-transform: uppercase;
+}
+
+.sort-select__field-wrapper {
+    display: flex;
+    border: 1px solid $border-color;
+    border-radius: $select-border-radius;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.sort-select__field {
+    min-width: auto;
+    border-right: 1px solid $border-color;
+    flex-grow: 1;
+
+    &.select {
+        .select__control {
+            border: none;
+            border-radius: 0;
+        }
+        .select__menu-list {
+            max-height: none;
+        }
+    }
+}
+
+.sort-select__icon {
+    margin: auto $sort-icon-spacing;
+    color: $title-small-color;
+    cursor: pointer;
+
+    &--reverse {
+        transform: scale(1, -1);
+    }
+}

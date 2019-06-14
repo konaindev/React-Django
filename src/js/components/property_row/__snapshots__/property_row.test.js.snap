@@ -1,6 +1,112 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PropertyRow renders correctly 1`] = `
+exports[`PropertyRow renders at-risk 1`] = `
+<div
+  className="panel panel--default property-row"
+>
+  <div
+    className="property-row__selector"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <div
+      className="property-row__image"
+      style={
+        Object {
+          "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
+        }
+      }
+    />
+    <div
+      className="property-row__selector-hover"
+    />
+    <div
+      className="property-row__tick"
+    />
+  </div>
+  <div
+    className="property-row__name"
+  >
+    Meridian SLC
+  </div>
+  <div
+    className="property-row__address"
+  >
+    123 4th Avenue, Seattle WA 98106
+  </div>
+  <div
+    className="property-row__link-container"
+  >
+    <a
+      className="property-row__link"
+      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+    >
+      View Property
+    </a>
+  </div>
+  <div
+    className="property-status property-status--at-risk"
+  >
+    AT RISK
+  </div>
+</div>
+`;
+
+exports[`PropertyRow renders off-track 1`] = `
+<div
+  className="panel panel--default property-row"
+>
+  <div
+    className="property-row__selector"
+    onClick={[Function]}
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <div
+      className="property-row__image"
+      style={
+        Object {
+          "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
+        }
+      }
+    />
+    <div
+      className="property-row__selector-hover"
+    />
+    <div
+      className="property-row__tick"
+    />
+  </div>
+  <div
+    className="property-row__name"
+  >
+    Meridian SLC
+  </div>
+  <div
+    className="property-row__address"
+  >
+    123 4th Avenue, Seattle WA 98106
+  </div>
+  <div
+    className="property-row__link-container"
+  >
+    <a
+      className="property-row__link"
+      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+    >
+      View Property
+    </a>
+  </div>
+  <div
+    className="property-status property-status--off-track"
+  >
+    OFF TRACK
+  </div>
+</div>
+`;
+
+exports[`PropertyRow renders on-track 1`] = `
 <div
   className="panel panel--default property-row"
 >

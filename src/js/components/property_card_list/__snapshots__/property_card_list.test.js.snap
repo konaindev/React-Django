@@ -375,9 +375,9 @@ exports[`PropertyCardList renders correctly 1`] = `
           123 4th Avenue, Seattle WA 98106
         </div>
         <div
-          className="property-status property-card__status property-status--requires-review"
+          className="property-status property-card__status property-status--off-track"
         >
-          NEEDS REVIEW
+          OFF TRACK
         </div>
       </div>
     </div>
@@ -429,9 +429,9 @@ exports[`PropertyCardList renders correctly 1`] = `
           123 4th Avenue, Seattle WA 98106
         </div>
         <div
-          className="property-status property-card__status property-status--requires-review"
+          className="property-status property-card__status property-status--off-track"
         >
-          NEEDS REVIEW
+          OFF TRACK
         </div>
       </div>
     </div>
@@ -483,9 +483,9 @@ exports[`PropertyCardList renders correctly 1`] = `
           123 4th Avenue, Seattle WA 98106
         </div>
         <div
-          className="property-status property-card__status property-status--requires-review"
+          className="property-status property-card__status property-status--off-track"
         >
-          NEEDS REVIEW
+          OFF TRACK
         </div>
       </div>
     </div>

@@ -58,6 +58,18 @@
         }
     }
 
+    &--transparent {
+        background-color: transparent;
+
+        &:hover, &:focus {
+            background-color: transparent;
+        }
+
+        &:active {
+            background-color: transparent;
+        }
+    }
+
     &--selected {
         background-color: $button-default-active-bg-color;
         color: $button-default-active-text-color;

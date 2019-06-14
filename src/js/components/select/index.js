@@ -22,6 +22,7 @@ export default function Select(props) {
     value,
     placeholder,
     name,
+    components,
     ...otherProps
   } = props;
   const classes = cn("select", className);
@@ -36,7 +37,7 @@ export default function Select(props) {
       placeholder={placeholder}
       onChange={onChange}
       isSearchable={false}
-      components={{ DropdownIndicator }}
+      components={{ DropdownIndicator, ...components }}
       {...otherProps}
     />
   );
@@ -50,5 +51,10 @@ Select.propTypes = {
   defaultValue: PropTypes.string,
   value: PropTypes.string,
   placeholder: PropTypes.string,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  components: PropTypes.object
+};
+
+Select.defaultProps = {
+  components: {}
 };

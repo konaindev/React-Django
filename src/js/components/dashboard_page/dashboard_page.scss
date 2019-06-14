@@ -1,6 +1,54 @@
 @import "css/base.scss";
 
 .dashboard-content {
+    min-width: 1500px;
     padding: $s12;
     text-align: center;
+}
+
+.dashboard-content__controls {
+    height: 44px;
+    padding-bottom: 19px;
+    margin-bottom: 36px;
+    border-bottom: $heading-border;
+    box-sizing: content-box;
+}
+
+.dashboard-content__title {
+    display: flex;
+    margin-bottom: 28px;
+    justify-content: flex-end;
+}
+
+.dashboard-content__title-right {
+    display: flex;
+}
+
+.dashboard-content--selection-mode {
+    .dashboard-content__filters {
+        height: 0;
+        overflow: hidden;
+    }
+
+    .dashboard-content__selection {
+        height: 100%;
+    }
+}
+
+.dashboard-content__filters {
+    display: flex;
+    height: 100%;
+    transition: all .1s ease;
+    align-items: center;
+}
+
+.dashboard-content__selection {
+    height: 0;
+    overflow: hidden;
+    transition: all .1s ease;
+}
+
+.dashboard-content__select-view {
+    display: inline-block;
+    margin-right: 22px;
 }
