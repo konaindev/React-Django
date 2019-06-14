@@ -12,13 +12,13 @@ import { default as Field, FieldInput, WrappedFields } from "./fields";
 import { propertySchema } from "./validators";
 
 const initialValues = {
-  photo: null,
+  building_photo: null,
   property_name: "",
-  address: "",
-  address2: "",
+  street_address_1: "",
+  street_address_2: "",
   city: "",
   state: null,
-  zipcode: "",
+  zip_code: "",
   package: null
 };
 
@@ -58,7 +58,7 @@ export default class AddPropertyForm extends Component {
         <input
           accept="image/*"
           type="file"
-          name="photo"
+          name="building_photo"
           style={{ display: "none" }}
           onChange={this.getPhoto}
         />
@@ -96,7 +96,7 @@ export default class AddPropertyForm extends Component {
 
   onSubmit = (values, actions) => {
     const data = _clone(values);
-    data.package = values.package.value;
+    data.product_type = values.product_type.value;
     data.state = values.state.value;
     const formData = new FormData();
     for (const k of Object.keys(data)) {
@@ -130,7 +130,7 @@ export default class AddPropertyForm extends Component {
             className="add-property-form"
             action={this.props.post_url}
             method="post"
-            autocomplete="off"
+            autoComplete="off"
           >
             <div className="add-property-form__column">
               <div
@@ -153,7 +153,7 @@ export default class AddPropertyForm extends Component {
               <Field label="Address:">
                 <FieldInput
                   className="add-property-form__input"
-                  name="address"
+                  name="street_address_1"
                   placeholder="Street Address 1"
                   type="text"
                 />
@@ -161,7 +161,7 @@ export default class AddPropertyForm extends Component {
               <Field>
                 <FieldInput
                   className="add-property-form__input"
-                  name="address2"
+                  name="street_address_2"
                   placeholder="Street Address 2"
                   type="text"
                 />
@@ -179,7 +179,7 @@ export default class AddPropertyForm extends Component {
               <Field label="Package Option:">
                 <FieldInput
                   className="add-property-form__input"
-                  name="package"
+                  name="product_type"
                   options={this.packages}
                   placeholder="Select a Package..."
                   component={FormSelect}

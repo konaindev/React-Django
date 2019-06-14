@@ -57,6 +57,7 @@ BASE_URL = os.getenv("BASE_URL", None)
 # Email setup
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "Remarkably <hello@remarkably.io>")
 ADMINS = [("Remarkably Ops", "ops@remarkably.io")]
+SALES_EMAIL = "sales@remarkably.io"
 EMAIL_BACKEND = os.getenv(
     "EMAIL_BACKEND", "django.core.mail.backends.smtp.EmailBackend"
 )

@@ -7,11 +7,11 @@ export const propertySchema = Yup.object().shape({
     .required()
     .max(255)
     .label('"Name"'),
-  address: Yup.string()
+  street_address_1: Yup.string()
     .required()
     .max(255)
     .label('"Address 1"'),
-  address2: Yup.string()
+  street_address_2: Yup.string()
     .required()
     .max(255)
     .label('"Address 2"'),
@@ -19,7 +19,7 @@ export const propertySchema = Yup.object().shape({
     .required()
     .max(128)
     .label('"City"'),
-  zipcode: Yup.number()
+  zip_code: Yup.number()
     .required()
     .positive()
     .integer()
@@ -30,7 +30,7 @@ export const propertySchema = Yup.object().shape({
   state: Yup.mixed()
     .required()
     .label('"State"'),
-  package: Yup.mixed()
+  product_type: Yup.mixed()
     .required()
     .label('"Package"')
 });
