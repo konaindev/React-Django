@@ -49,7 +49,7 @@ def copy_modeling_data_of_a_project(project, apps):
             campaign = Campaign(
                 project=project,
                 selected_campaign_model=None,
-                name="Campaign"
+                name="Unnamed Campaign"
             )
             campaign.save()
 
