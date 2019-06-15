@@ -251,8 +251,19 @@ class CampaignModelTableInline(admin.TabularInline):
     is_selected.boolean = True
 
 
+class UploadCampaignModelAdminMixin:
+    def update_campaign_model(self, request, obj, form):
+        # check if it's new campaign model formset
+        # i.e. from CampaignModelUploadInline, not CampaignModelTableInline
+        if not form.cleaned_data["campaign_model_id"]:
+            obj.name = form.cleaned_data["name"]
+            obj.spreadsheet = form.cleaned_data["spreadsheet"]
+            obj.model_start = form.cleaned_data["model_start"]
+            obj.model_end = form.cleaned_data["model_end"]
+
+
 @admin.register(Campaign, site=admin_site)
-class CampaignAdmin(admin.ModelAdmin):
+class CampaignAdmin(UploadCampaignModelAdminMixin, admin.ModelAdmin):
     list_display = ["name", "project_link", "selected_campaign_model"]
     list_filter = ("project__name",)
     fields = ["name", "project", "selected_campaign_model"]
@@ -292,6 +303,13 @@ class CampaignAdmin(admin.ModelAdmin):
             return ()
         else:
             return [inline(self.model, self.admin_site) for inline in self.inlines]
+
+    def save_formset(self, request, form, formset, change):
+        if formset.model == CampaignModel:
+            for formset_form in formset:
+                obj = formset_form.instance
+                self.update_campaign_model(request, obj, formset_form)
+        super().save_formset(request, form, formset, change=change)
 
 
 class CampaignInline(admin.TabularInline):

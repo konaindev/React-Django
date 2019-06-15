@@ -6,7 +6,7 @@ from remark.lib.validators import (
     validate_linebreak_separated_numbers_list,
     validate_linebreak_separated_strings_list,
 )
-from .models import Project, Spreadsheet, CampaignModel
+from .models import Project, CampaignModel, Spreadsheet, Spreadsheet2
 from .reports.selectors import ReportLinks
 from .spreadsheets import get_importer_for_kind, SpreadsheetKind
 
@@ -16,7 +16,41 @@ logger = getLogger(__name__)
 
 
 class CampaignModelUploadForm(forms.ModelForm):
+    # Custom field to allow spreadsheet file upload
     spreadsheet_file = forms.FileField()
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        try:
+            importer = get_importer_for_kind(SpreadsheetKind.MODELING, cleaned_data["spreadsheet_file"])
+            if importer is None:
+                raise ValidationError(
+                    f"No spreadsheet importer available for model"
+                )
+            if not importer.is_valid():
+                raise ValidationError(
+                    f"Could not validate spreadsheet: {importer.errors}"
+                )
+
+            spreadsheet = Spreadsheet2(
+                file_url=cleaned_data["spreadsheet_file"],
+                json_data=importer.cleaned_data,
+                kind=SpreadsheetKind.MODELING
+            )
+            spreadsheet.save()
+
+            cleaned_data["spreadsheet"] = spreadsheet
+            cleaned_data["name"] = importer.cleaned_data["name"]
+            cleaned_data["model_start"] = importer.cleaned_data["dates"]["start"]
+            cleaned_data["model_end"] = importer.cleaned_data["dates"]["end"]
+            return cleaned_data
+        except ValidationError as e:
+            raise e
+        except Exception as e:
+            etxt = error_text(e)
+            logger.error(etxt)
+            raise Exception(f"Unexpected error when cleaning spreadsheet: {etxt}")
 
     class Meta:
         model = CampaignModel
