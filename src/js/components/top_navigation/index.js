@@ -16,7 +16,7 @@ export default class TopNavigation extends React.PureComponent {
     selected_link: PropTypes.string.isRequired
   };
 
-  getLink = () => {
+  renderLinks = () => {
     return this.props.links.map(link => {
       const className = cn("top-navigation__link", {
         "top-navigation__link--active": link.id === this.props.selected_link
@@ -30,6 +30,6 @@ export default class TopNavigation extends React.PureComponent {
   };
 
   render() {
-    return <div className="top-navigation">{this.getLink()}</div>;
+    return <div className="top-navigation">{this.renderLinks()}</div>;
   }
 }
