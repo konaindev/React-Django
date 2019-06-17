@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import CloseIcon from "../../icons/close";
+import { post } from "../../utils/fetch";
 import Button from "../button";
 import { FormSelect } from "../select";
 
@@ -87,7 +88,7 @@ export default class AddPropertyForm extends Component {
       this.setState({ image: e.target.result });
     };
     reader.readAsDataURL(file);
-    this.formik.current.setFieldValue("photo", file);
+    this.formik.current.setFieldValue("building_photo", file);
   };
 
   onCloseImage = () => {
@@ -102,10 +103,9 @@ export default class AddPropertyForm extends Component {
     for (const k of Object.keys(data)) {
       formData.append(k, data[k]);
     }
-    fetch(this.props.post_url, {
-      method: "POST",
-      body: formData
-    }).then(() => actions.setSubmitting(false));
+    post(this.props.post_url, formData).then(() =>
+      actions.setSubmitting(false)
+    );
   };
 
   render() {
@@ -117,15 +117,7 @@ export default class AddPropertyForm extends Component {
         onSubmit={this.onSubmit}
         ref={this.formik}
       >
-        {({
-          errors,
-          touched,
-          values,
-          isValid,
-          setTouched,
-          setValues,
-          setFieldValue
-        }) => (
+        {({ errors, touched, values, isValid, setTouched, setValues }) => (
           <Form
             className="add-property-form"
             action={this.props.post_url}
@@ -210,5 +202,6 @@ AddPropertyForm.propTypes = {
   states: PropTypes.arrayOf(
     PropTypes.shape({ id: PropTypes.string, name: PropTypes.string })
   ).isRequired,
-  post_url: PropTypes.string
+  post_url: PropTypes.string,
+  csrfToken: PropTypes.string
 };

@@ -49,7 +49,7 @@ export class DashboardPage extends React.PureComponent {
       { id: "ground", name: "Ground Up" },
       { id: "other", name: "Not Sure" }
     ],
-    post_url: "/projects/new",
+    post_url: "/sales/new-project",
     states
   };
 

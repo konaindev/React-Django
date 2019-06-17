@@ -2,7 +2,7 @@ import { states } from "../add_property_form/states";
 
 export const props = {
   formProps: {
-    post_url: "/projects/new",
+    post_url: "/sales/new-project",
     packages: [
       { id: "accelerate", name: "Accelerate" },
       { id: "optimize", name: "Optimize" },

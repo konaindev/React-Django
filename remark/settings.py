@@ -79,6 +79,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_js_reverse",
     "stdimage",
+    "remark.sales",
     "remark.email_app",
     "remark.analytics",
     "remark.users",
