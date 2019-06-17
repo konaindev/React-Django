@@ -6,7 +6,7 @@ from django.db import models
 from jsonfield import JSONField
 
 from remark.lib.tokens import public_id
-from remark.projects.models import Project, spreadsheet_media_path
+from remark.projects.models import Project
 from remark.projects.spreadsheets import SpreadsheetKind
 
 
@@ -17,9 +17,17 @@ def campaign_public_id():
 def campaign_model_public_id():
     return public_id("campaign_model")
 
-
 def spreadsheet_public_id():
     return public_id("spreadsheet2")
+
+def spreadsheet_media_path(spreadsheet, filename):
+    # Spreadsheet2 model doesn't have `project`, `created` fields
+    # These fields are temporarily set from forms
+    _, extension = os.path.splitext(filename)
+    sheetname = "_".join(
+        [spreadsheet.kind, spreadsheet.created.strftime("%Y-%m-%d_%H-%M-%S")]
+    )
+    return f"project/{spreadsheet.project.public_id}/{sheetname}{extension}"
 
 
 class Campaign(models.Model):

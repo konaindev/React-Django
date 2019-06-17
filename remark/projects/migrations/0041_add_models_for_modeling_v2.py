@@ -25,7 +25,7 @@ class Migration(migrations.Migration):
             name='Spreadsheet2',
             fields=[
                 ('spreadsheet_id', models.CharField(default=remark.projects.models.modeling.spreadsheet_public_id, editable=False, max_length=50, primary_key=True, serialize=False)),
-                ('file_url', models.FileField(help_text='The underlying spreadsheet (probably .xlsx) file.', upload_to=remark.projects.models.projects.spreadsheet_media_path)),
+                ('file_url', models.FileField(help_text='The underlying spreadsheet (probably .xlsx) file.', upload_to=remark.projects.models.modeling.spreadsheet_media_path)),
                 ('json_data', jsonfield.fields.JSONField(default=None, editable=False, help_text='Raw imported JSON data. Schema depends on spreadsheet kind.')),
                 ('kind', models.CharField(choices=[('periods', 'Periods'), ('model', 'Modeling'), ('market', 'Market Report'), ('campaign', 'Campaign Plan')], db_index=True, help_text='The kind of data this spreadsheet contains. Enum: Market, Period, Modeling, Campaign Plan', max_length=128)),
             ],

@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
@@ -38,6 +40,9 @@ class CampaignModelUploadForm(forms.ModelForm):
                 json_data=importer.cleaned_data,
                 kind=SpreadsheetKind.MODELING
             )
+            # creates temporary fields for upload_to path generation
+            spreadsheet.project = cleaned_data["campaign"].project
+            spreadsheet.created = datetime.now()
             spreadsheet.save()
 
             cleaned_data["spreadsheet"] = spreadsheet
