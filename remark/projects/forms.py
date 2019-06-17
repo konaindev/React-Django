@@ -25,11 +25,11 @@ class CampaignModelUploadForm(forms.ModelForm):
         cleaned_data = super().clean()
 
         try:
-            importer = get_importer_for_kind(SpreadsheetKind.MODELING, cleaned_data["spreadsheet_file"])
+            importer = get_importer_for_kind(
+                SpreadsheetKind.MODELING, cleaned_data["spreadsheet_file"]
+            )
             if importer is None:
-                raise ValidationError(
-                    f"No spreadsheet importer available for model"
-                )
+                raise ValidationError(f"No spreadsheet importer available for model")
             if not importer.is_valid():
                 raise ValidationError(
                     f"Could not validate spreadsheet: {importer.errors}"
@@ -38,9 +38,9 @@ class CampaignModelUploadForm(forms.ModelForm):
             spreadsheet = Spreadsheet2(
                 file_url=cleaned_data["spreadsheet_file"],
                 json_data=importer.cleaned_data,
-                kind=SpreadsheetKind.MODELING
+                kind=SpreadsheetKind.MODELING,
             )
-            # creates temporary fields for upload_to path generation
+            # creates temporary fields required to generate "upload_to" path
             spreadsheet.project = cleaned_data["campaign"].project
             spreadsheet.created = datetime.now()
             spreadsheet.save()
@@ -49,6 +49,7 @@ class CampaignModelUploadForm(forms.ModelForm):
             cleaned_data["name"] = importer.cleaned_data["name"]
             cleaned_data["model_start"] = importer.cleaned_data["dates"]["start"]
             cleaned_data["model_end"] = importer.cleaned_data["dates"]["end"]
+
             return cleaned_data
         except ValidationError as e:
             raise e
@@ -184,9 +185,9 @@ class ProjectForm(forms.ModelForm):
 
     def clean_competitors(self):
         max_competitors = 2
-        competitors = self.cleaned_data.get('competitors')
+        competitors = self.cleaned_data.get("competitors")
         if competitors and competitors.count() > max_competitors:
-            raise forms.ValidationError('Maximum %s competitors.' % max_competitors)
+            raise forms.ValidationError("Maximum %s competitors." % max_competitors)
         return competitors
 
     def clean_fund(self):

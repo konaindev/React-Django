@@ -4,7 +4,7 @@ from django.template.response import TemplateResponse
 from django.urls import path, reverse
 from django.utils.safestring import mark_safe
 
-from remark.admin import admin_site
+from remark.admin import admin_site, custom_titled_filter
 from remark.analytics.admin import InlineAnalyticsProviderAdmin
 from .forms import ProjectForm, SpreadsheetForm, CampaignModelUploadForm
 from .models import (
@@ -159,7 +159,7 @@ class CampaignModelAdmin(admin.ModelAdmin):
         "model_start",
         "model_end",
     ]
-    list_filter = ("campaign__project__name",)
+    list_filter = (("campaign__project__name", custom_titled_filter("Project")),)
     readonly_fields = ["project_link", "selected", "file_url", "json_data"]
     ordering = ["campaign__project__name"]
 
@@ -192,6 +192,8 @@ class CampaignModelAdmin(admin.ModelAdmin):
             )
         )
 
+    project_link.short_description = "Project"
+
     def is_selected(self, obj):
         return bool(obj.selected)
 
@@ -202,6 +204,7 @@ class CampaignModelUploadInline(admin.StackedInline):
     """
     Inline Admin for adding *new* campaign model to a campaign.
     """
+
     verbose_name = "campaign model"
     verbose_name_plural = "New Campaign Model"
     model = CampaignModel
@@ -250,7 +253,7 @@ class CampaignModelTableInline(admin.TabularInline):
 
 
 class UploadCampaignModelAdminMixin:
-    def update_campaign_model(self, request, obj, form):
+    def fill_spreadsheet_data(self, request, obj, form):
         # check if it's new campaign model formset
         # i.e. from CampaignModelUploadInline, not CampaignModelTableInline
         if not form.cleaned_data["campaign_model_id"]:
@@ -263,11 +266,11 @@ class UploadCampaignModelAdminMixin:
 @admin.register(Campaign, site=admin_site)
 class CampaignAdmin(UploadCampaignModelAdminMixin, admin.ModelAdmin):
     list_display = ["name", "project_link", "selected_campaign_model"]
-    list_filter = ("project__name",)
+    list_filter = (("project__name", custom_titled_filter("Project")),)
     fields = ["name", "project", "selected_campaign_model"]
     readonly_fields_on_create = ("selected_campaign_model",)
     readonly_fields_on_update = ("project",)
-    inlines = (CampaignModelUploadInline, CampaignModelTableInline,)
+    inlines = (CampaignModelUploadInline, CampaignModelTableInline)
     ordering = ["project__name"]
 
     def project_link(self, obj):
@@ -306,7 +309,7 @@ class CampaignAdmin(UploadCampaignModelAdminMixin, admin.ModelAdmin):
         if formset.model == CampaignModel:
             for formset_form in formset:
                 obj = formset_form.instance
-                self.update_campaign_model(request, obj, formset_form)
+                self.fill_spreadsheet_data(request, obj, formset_form)
         super().save_formset(request, form, formset, change=change)
 
 

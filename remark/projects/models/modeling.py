@@ -17,12 +17,14 @@ def campaign_public_id():
 def campaign_model_public_id():
     return public_id("campaign_model")
 
+
 def spreadsheet_public_id():
     return public_id("spreadsheet2")
 
+
 def spreadsheet_media_path(spreadsheet, filename):
-    # Spreadsheet2 model doesn't have `project`, `created` fields
-    # These fields are temporarily set from forms
+    # Spreadsheet2 model doesn't have "project", "created" fields
+    # These fields are set from forms temporarily
     _, extension = os.path.splitext(filename)
     sheetname = "_".join(
         [spreadsheet.kind, spreadsheet.created.strftime("%Y-%m-%d_%H-%M-%S")]
@@ -39,7 +41,11 @@ class Campaign(models.Model):
         Project, on_delete=models.CASCADE, related_name="campaigns", null=True
     )
     selected_campaign_model = models.ForeignKey(
-        "CampaignModel", on_delete=models.CASCADE, related_name="+", null=True, blank=True
+        "CampaignModel",
+        on_delete=models.CASCADE,
+        related_name="+",
+        null=True,
+        blank=True,
     )
 
     def __str__(self):
