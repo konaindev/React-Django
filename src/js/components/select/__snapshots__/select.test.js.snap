@@ -48,5 +48,10 @@ exports[`Select render select 1`] = `
       </div>
     </div>
   </div>
+  <input
+    name="select"
+    type="hidden"
+    value=""
+  />
 </div>
 `;

@@ -1,8 +1,15 @@
+import { Formik } from "formik";
 import React, { Component } from "react";
 
 import { storiesOf } from "@storybook/react";
 
-import Select from "./index";
+import { default as Select, FormSelect } from "./index";
 import { props } from "./props";
 
-storiesOf("Select", module).add("default", () => <Select {...props} />);
+storiesOf("Select", module)
+  .add("default", () => <Select {...props} />)
+  .add("form select", () => (
+    <Formik>
+      <FormSelect {...props} />
+    </Formik>
+  ));

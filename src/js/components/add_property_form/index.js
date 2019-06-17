@@ -1,27 +1,23 @@
-import cn from "classnames";
+import { Formik, Form } from "formik";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import CloseIcon from "../../icons/close";
 import Button from "../button";
-import Input from "../input";
-import Select from "../select";
+import { FormSelect } from "../select";
 
 import "./add_property_form.scss";
+import { default as Field, FieldInput, WrappedFields } from "./fields";
+import { propertySchema } from "./validators";
 
-function Field(props) {
-  const className = cn("add-property-form__field", props.className);
-  return (
-    <div className={className}>
-      <div className="add-property-form__label">{props.label}</div>
-      {props.children}
-    </div>
-  );
-}
-Field.propTypes = {
-  children: PropTypes.node.isRequired,
-  label: PropTypes.string,
-  className: PropTypes.string
+const initialValues = {
+  property_name: "",
+  address: "",
+  address2: "",
+  city: "",
+  state: null,
+  zipcode: "",
+  package: null
 };
 
 export default class AddPropertyForm extends Component {
@@ -53,7 +49,9 @@ export default class AddPropertyForm extends Component {
       <label className="add-property-form__file">
         ADD PHOTO
         <input
+          accept="image/*"
           type="file"
+          name="photo"
           style={{ display: "none" }}
           onChange={this.getPhoto}
         />
@@ -88,83 +86,90 @@ export default class AddPropertyForm extends Component {
     this.setState({ image: null });
   };
 
+  onSubmit = () => {};
+
   render() {
     return (
-      <form
-        className="add-property-form"
-        action={this.props.post_url}
-        method="post"
+      <Formik
+        validationSchema={propertySchema}
+        initialValues={initialValues}
+        validateOnBlur={true}
+        onSubmit={this.onSubmit}
       >
-        <div className="add-property-form__column">
-          <div className="add-property-form__image" style={this.previewStyles}>
-            {this.imageInput}
-            {this.closeImage}
-          </div>
-        </div>
-        <div className="add-property-form__column">
-          <Field label="Property Name:">
-            <Input
-              className="add-property-form__input"
-              name="property_name"
-              placeholder="Property Name"
-              type="text"
-            />
-          </Field>
-          <Field label="Address:">
-            <Input
-              className="add-property-form__input"
-              name="address"
-              placeholder="Street Address 1"
-              type="text"
-            />
-          </Field>
-          <Field>
-            <Input
-              className="add-property-form__input"
-              name="address2"
-              placeholder="Street Address 2"
-              type="text"
-            />
-          </Field>
-          <Field>
-            <div className="add-property-form__fields-wrap">
-              <Input
-                className="add-property-form__input add-property-form__input--city"
-                name="city"
-                placeholder="City"
-                type="text"
-              />
-              <Select
-                className="add-property-form__input add-property-form__input--state"
-                options={this.states}
-                name="state"
-                placeholder="State"
-              />
-              <Input
-                className="add-property-form__input add-property-form__input--zipcode"
-                name="zipcode"
-                placeholder="Zipcode"
-                type="text"
-              />
+        {({ errors, touched, values, isValid, setTouched, setValues }) => (
+          <Form
+            className="add-property-form"
+            action={this.props.post_url}
+            method="post"
+          >
+            <div className="add-property-form__column">
+              <div
+                className="add-property-form__image"
+                style={this.previewStyles}
+              >
+                {this.imageInput}
+                {this.closeImage}
+              </div>
             </div>
-          </Field>
-          <Field label="Package Option:">
-            <Select
-              className="add-property-form__input"
-              options={this.packages}
-              name="package"
-              placeholder="Select a Package..."
-            />
-          </Field>
-          <Field className="add-property-form__field--button">
-            <div className="add-property-form__submit-wrap">
-              <Button className="add-property-form__submit" color="disabled">
-                SUBMIT
-              </Button>
+            <div className="add-property-form__column">
+              <Field label="Property Name:">
+                <FieldInput
+                  className="add-property-form__input"
+                  name="property_name"
+                  placeholder="Property Name"
+                  type="text"
+                />
+              </Field>
+              <Field label="Address:">
+                <FieldInput
+                  className="add-property-form__input"
+                  name="address"
+                  placeholder="Street Address 1"
+                  type="text"
+                />
+              </Field>
+              <Field>
+                <FieldInput
+                  className="add-property-form__input"
+                  name="address2"
+                  placeholder="Street Address 2"
+                  type="text"
+                />
+              </Field>
+              <Field>
+                <WrappedFields
+                  errors={errors}
+                  values={values}
+                  touched={touched}
+                  states={this.states}
+                  setTouched={setTouched}
+                  setValues={setValues}
+                />
+              </Field>
+              <Field label="Package Option:">
+                <FieldInput
+                  className="add-property-form__input"
+                  name="package"
+                  options={this.packages}
+                  placeholder="Select a Package..."
+                  component={FormSelect}
+                />
+              </Field>
+              <Field className="add-property-form__field--button">
+                <div className="add-property-form__submit-wrap">
+                  <Button
+                    className="add-property-form__submit"
+                    type="submit"
+                    color={isValid ? "primary" : "disabled"}
+                  >
+                    SUBMIT
+                  </Button>
+                </div>
+              </Field>
             </div>
-          </Field>
-        </div>
-      </form>
+          </Form>
+        )}
+      </Formik>
     );
   }
 }

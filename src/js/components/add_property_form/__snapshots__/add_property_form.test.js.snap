@@ -5,6 +5,8 @@ exports[`AddPropertyForm add property form 1`] = `
   action="/projects/new"
   className="add-property-form"
   method="post"
+  onReset={[Function]}
+  onSubmit={[Function]}
 >
   <div
     className="add-property-form__column"
@@ -18,6 +20,8 @@ exports[`AddPropertyForm add property form 1`] = `
       >
         ADD PHOTO
         <input
+          accept="image/*"
+          name="photo"
           onChange={[Function]}
           style={
             Object {
@@ -40,12 +44,17 @@ exports[`AddPropertyForm add property form 1`] = `
       >
         Property Name:
       </div>
-      <input
-        className="input add-property-form__input"
-        name="property_name"
-        placeholder="Property Name"
-        type="text"
-      />
+      <div>
+        <input
+          className="input add-property-form__input"
+          name="property_name"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder="Property Name"
+          type="text"
+          value=""
+        />
+      </div>
     </div>
     <div
       className="add-property-form__field"
@@ -55,43 +64,133 @@ exports[`AddPropertyForm add property form 1`] = `
       >
         Address:
       </div>
-      <input
-        className="input add-property-form__input"
-        name="address"
-        placeholder="Street Address 1"
-        type="text"
-      />
-    </div>
-    <div
-      className="add-property-form__field"
-    >
-      <div
-        className="add-property-form__label"
-      />
-      <input
-        className="input add-property-form__input"
-        name="address2"
-        placeholder="Street Address 2"
-        type="text"
-      />
-    </div>
-    <div
-      className="add-property-form__field"
-    >
-      <div
-        className="add-property-form__label"
-      />
-      <div
-        className="add-property-form__fields-wrap"
-      >
+      <div>
         <input
-          className="input add-property-form__input add-property-form__input--city"
-          name="city"
-          placeholder="City"
+          className="input add-property-form__input"
+          name="address"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder="Street Address 1"
           type="text"
+          value=""
         />
+      </div>
+    </div>
+    <div
+      className="add-property-form__field"
+    >
+      <div
+        className="add-property-form__label"
+      />
+      <div>
+        <input
+          className="input add-property-form__input"
+          name="address2"
+          onBlur={[Function]}
+          onChange={[Function]}
+          placeholder="Street Address 2"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <div
+      className="add-property-form__field"
+    >
+      <div
+        className="add-property-form__label"
+      />
+      <div>
         <div
-          className="select add-property-form__input add-property-form__input--state css-2b097c-container"
+          className="add-property-form__fields-wrap"
+        >
+          <input
+            className="input add-property-form__input add-property-form__input--city"
+            name="city"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            placeholder="City"
+            type="text"
+            value=""
+          />
+          <div
+            className="select add-property-form__input add-property-form__input--state css-2b097c-container"
+            onKeyDown={[Function]}
+          >
+            <div
+              className="select__control css-yk16xz-control"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <div
+                className="select__value-container css-1hwfws3"
+              >
+                <div
+                  className="select__placeholder css-1wa3eu0-placeholder"
+                >
+                  State
+                </div>
+                <input
+                  className="css-62g3xt-dummyInput"
+                  disabled={false}
+                  id="react-select-2-input"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  readOnly={true}
+                  tabIndex="0"
+                  value=""
+                />
+              </div>
+              <div
+                className="select__indicators css-1wy0on6"
+              >
+                <span
+                  className="select__indicator-separator css-1okebmr-indicatorSeparator"
+                />
+                <div
+                  aria-hidden="true"
+                  className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                  onMouseDown={[Function]}
+                  onTouchEnd={[Function]}
+                >
+                  <div
+                    className="select__dropdown-arrow"
+                  />
+                </div>
+              </div>
+            </div>
+            <input
+              name="state"
+              type="hidden"
+              value=""
+            />
+          </div>
+          <input
+            className="input add-property-form__input add-property-form__input--zipcode"
+            name="zipcode"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            placeholder="Zipcode"
+            type="text"
+            value=""
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="add-property-form__field"
+    >
+      <div
+        className="add-property-form__label"
+      >
+        Package Option:
+      </div>
+      <div>
+        <div
+          className="select add-property-form__input css-2b097c-container"
           onKeyDown={[Function]}
         >
           <div
@@ -105,12 +204,12 @@ exports[`AddPropertyForm add property form 1`] = `
               <div
                 className="select__placeholder css-1wa3eu0-placeholder"
               >
-                State
+                Select a Package...
               </div>
               <input
                 className="css-62g3xt-dummyInput"
                 disabled={false}
-                id="react-select-2-input"
+                id="react-select-3-input"
                 onBlur={[Function]}
                 onChange={[Function]}
                 onFocus={[Function]}
@@ -138,79 +237,11 @@ exports[`AddPropertyForm add property form 1`] = `
             </div>
           </div>
           <input
-            name="state"
+            name="package"
             type="hidden"
             value=""
           />
         </div>
-        <input
-          className="input add-property-form__input add-property-form__input--zipcode"
-          name="zipcode"
-          placeholder="Zipcode"
-          type="text"
-        />
-      </div>
-    </div>
-    <div
-      className="add-property-form__field"
-    >
-      <div
-        className="add-property-form__label"
-      >
-        Package Option:
-      </div>
-      <div
-        className="select add-property-form__input css-2b097c-container"
-        onKeyDown={[Function]}
-      >
-        <div
-          className="select__control css-yk16xz-control"
-          onMouseDown={[Function]}
-          onTouchEnd={[Function]}
-        >
-          <div
-            className="select__value-container css-1hwfws3"
-          >
-            <div
-              className="select__placeholder css-1wa3eu0-placeholder"
-            >
-              Select a Package...
-            </div>
-            <input
-              className="css-62g3xt-dummyInput"
-              disabled={false}
-              id="react-select-3-input"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
-              readOnly={true}
-              tabIndex="0"
-              value=""
-            />
-          </div>
-          <div
-            className="select__indicators css-1wy0on6"
-          >
-            <span
-              className="select__indicator-separator css-1okebmr-indicatorSeparator"
-            />
-            <div
-              aria-hidden="true"
-              className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
-              onMouseDown={[Function]}
-              onTouchEnd={[Function]}
-            >
-              <div
-                className="select__dropdown-arrow"
-              />
-            </div>
-          </div>
-        </div>
-        <input
-          name="package"
-          type="hidden"
-          value=""
-        />
       </div>
     </div>
     <div
@@ -225,6 +256,7 @@ exports[`AddPropertyForm add property form 1`] = `
         <button
           className="button button--disabled add-property-form__submit"
           onClick={[Function]}
+          type="submit"
         >
           SUBMIT
         </button>

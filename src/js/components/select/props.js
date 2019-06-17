@@ -9,4 +9,9 @@ const styles = {
   container: provided => ({ ...provided, width: 400 })
 };
 
-export const props = { options, styles, placeholder: "Select an option..." };
+export const props = {
+  options,
+  styles,
+  placeholder: "Select an option...",
+  name: "select"
+};
