@@ -1,20 +1,20 @@
 from . import ReportBase
-
+from remark.projects.models import Project
 
 class ModelingReport(ReportBase):
     """Tools for generating modeling report data."""
 
-    # TODO for this sprint, we simply check whether the whole
-    # pre-computed report is in the database or not.
-    #
-    # For a future sprint... do something better; presumably
+    # TODO Is it possible to do something better; presumably
     # this will derive from CommonReport, or at least contain
     # a set of CommonReport derivates?
 
     @classmethod
     def exists(cls, project):
-        """Return True if a modeling report exists for this project."""
-        return bool(project.tmp_modeling_report_json)
+        """Return True if campaign and models exist for this project."""
+        models_count = 0
+        for campaign in project.campaigns.all():
+            models_count = models_count + campaign.campaign_models.count()
+        return models_count > 0
 
     @classmethod
     def for_project(cls, project):
@@ -25,24 +25,20 @@ class ModelingReport(ReportBase):
         self.project = project
 
     def to_jsonable(self):
-        # If a specific model is selected on the project, re-order the JSON
-        # so that the selected model is first, and give it a slightly altered name.
-        jsonable = self.project.tmp_modeling_report_json
+        # Exposes "model_index" and "selected" model status
+        # so that model options can be re-ordered in UI
+        model_options = []
+        for campaign in self.project.campaigns.all():
+            for campaign_model in campaign.campaign_models.all():
+                model_options.append(dict(
+                    selected=campaign.selected_campaign_model == campaign_model,
+                    model_index=campaign_model.model_index,
+                    **campaign_model.json_data
+                ))
 
-        # Reorder options if there's a selected model.
-        if self.project.selected_model_name:
-            options = jsonable.get("options", [])
-            names = [option.get("name") for option in options]
-            try:
-                index = names.index(self.project.selected_model_name)
-            except Exception:
-                index = None
-
-            if index is not None:
-                selected_option = options.pop(index)
-                selected_option["name"] = f"{selected_option['name']} (Selected)"
-                options = [selected_option] + options
-
-            jsonable["options"] = options
+        jsonable = dict(
+            property_name=self.project.name,
+            options=model_options
+        )
 
         return jsonable

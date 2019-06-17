@@ -6,7 +6,6 @@ from django.db import models
 from jsonfield import JSONField
 
 from remark.lib.tokens import public_id
-from remark.projects.models import Project
 from remark.projects.spreadsheets import SpreadsheetKind
 
 
@@ -38,7 +37,7 @@ class Campaign(models.Model):
     )
     name = models.CharField(max_length=255)
     project = models.ForeignKey(
-        Project, on_delete=models.CASCADE, related_name="campaigns", null=True
+        "projects.Project", on_delete=models.CASCADE, related_name="campaigns", null=True
     )
     selected_campaign_model = models.ForeignKey(
         "CampaignModel",
