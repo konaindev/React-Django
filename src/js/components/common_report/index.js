@@ -33,7 +33,9 @@ export default class CommonReport extends Component {
         <CampaignInvestmentReport report={report} />
         <AcquisitionFunnelReport report={report} type={type} />
         <FunnelPerformanceAnalysis {...report} />
-        {type === "baseline" && <BaselineComparisonMatrix report={report} />}
+        {type === "baseline" && !!report?.competitors?.length && (
+          <BaselineComparisonMatrix report={report} />
+        )}
       </Container>
     );
   }
