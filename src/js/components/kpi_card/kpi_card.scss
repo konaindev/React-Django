@@ -1,0 +1,68 @@
+@import 'css/base.scss';
+
+$card-height: 236px;
+$card-max-width: 300px;
+$card-min-width: 240px;
+$card-header-height: 6px;
+
+.kpi-card {
+    height: $card-height;
+    max-width: $card-max-width;
+    min-width: $card-min-width;
+    overflow: hidden;
+    font-family: $font-sans;
+    background: $panel-background-color;
+    border-radius: $panel-border-radius;
+
+    &--off-track {
+        .kpi-card__bar {
+            background: $property-status-color-requires-review;
+        }
+    }
+
+    &--at-risk {
+        .kpi-card__bar {
+            background: $property-status-color-at-risk;
+        }
+    }
+
+    &--on-track {
+        .kpi-card__bar {
+            background: $property-status-color-on-track;
+        }
+    }
+}
+
+.kpi-card__bar {
+    height: $card-header-height;
+}
+
+.kpi-card__health {
+    margin-top: 34px;
+    text-align: center;
+}
+
+.kpi-card__value {
+    margin-top: 39px;
+    font-size: $text-3xl;
+    line-height: $line-height-tight;
+    color: $content-text-primary-color;
+    text-align: center;
+}
+
+.kpi-card__name {
+    margin-top: 3px;
+    font-size: $text-sm;
+    line-height: $line-height-relaxed;
+    color: $content-text-secondary-color;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.kpi-card__target {
+    margin-top: 20px;
+    font-size: $text-xs;
+    line-height: $line-height-normal;
+    color: $content-text-secondary-color;
+    text-align: center;
+}
