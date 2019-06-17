@@ -1,0 +1,266 @@
+@import 'css/base.scss';
+
+$button-width: 140px;
+$button-hover: rgba($gray-5, .5);
+$button-spacing: 10px 16px;
+$tooltip-margin: -8px -10px;
+
+.us-sub-region-map {
+    display: inline-block;
+
+    &--w {
+        padding-top: 55px;
+    }
+
+    &--mw {
+        padding-top: 45px;
+    }
+
+    &--s {
+        padding-top: 80px;
+    }
+
+    &--ne {
+        padding-top: 25px;
+    }
+}
+
+.us-sub-region-map__label {
+    font-family: $font-sans;
+    font-size: $text-xs;
+    font-weight: $weight-normal;
+    letter-spacing: $letter-spacing-wider;
+    text-transform: uppercase;
+    fill: $map-label-color;
+
+    &--id,
+    &--nm,
+    &--ak,
+    &--co,
+    &--mi,
+    &--nd,
+    &--wi,
+    &--ks,
+    &--ia,
+    &--ar,
+    &--ok,
+    &--ms,
+    &--tn,
+    &--ky,
+    &--md,
+    &--ct,
+    &--me,
+    &--ri,
+    &--nj,
+    &--vt {
+        fill: $map-dark-label-color;
+    }
+}
+
+.us-sub-region-map--hover {
+    .us-sub-region-map__state {
+        fill: $map-disable-color;
+    }
+
+    .us-sub-region-map__label {
+        fill: $map-label-hover-color;
+    }
+
+    .us-sub-region-map__state--hover {
+        fill: $map-hover-color;
+    }
+
+    .us-sub-region-map__state--hover + .us-sub-region-map__label {
+        fill: $map-label-color;
+    }
+}
+
+.us-sub-region-map__state {
+    fill: $map-disable-color;
+
+    //WEST
+    &--wa {
+        fill: #1d3d3e;
+    }
+    &--or {
+        fill: #2c6038;
+    }
+    &--ca {
+        fill: #325145;
+    }
+    &--nv {
+        fill: #379d22;
+    }
+    &--az {
+        fill: #4ed26a;
+    }
+    &--nm {
+        fill: #49f6d8;
+    }
+    &--co {
+        fill: #51dc88;
+    }
+    &--ut {
+        fill: #317333;
+    }
+    &--wy {
+        fill: #49c94c;
+    }
+    &--id {
+        fill: #84e5b4;
+    }
+    &--mt {
+        fill: #78ce60;
+    }
+    &--ak {
+        fill: #84f4dd;
+    }
+    &--hi {
+        fill: #68bd39;
+    }
+
+    //MIDWEST
+    &--nd {
+        fill: #84f4dd;
+    }
+    &--sd {
+        fill: #325145;
+    }
+    &--ne {
+        fill: #379d22;
+    }
+    &--ks {
+        fill: #84e5b4;
+    }
+    &--mn {
+        fill: #2c6038;
+    }
+    &--ia {
+        fill: #51dc88;
+    }
+    &--mo {
+        fill: #78ce6e;
+    }
+    &--wi {
+        fill: #49f6d8;
+    }
+    &--il {
+        fill: #68bd39;
+    }
+    &--in {
+        fill: #317333;
+    }
+    &--mi {
+        fill: #51dc88;
+    }
+    &--oh {
+        fill: #1d3d3e;
+    }
+
+    //SOUTH
+    &--tx {
+        fill: #1d3d3e;
+    }
+    &--ok {
+        fill: #84f4d0;
+    }
+    &--ar {
+        fill: #51dc88;
+    }
+    &--la {
+        fill: #317333;
+    }
+    &--ms {
+        fill: #84e5b4;
+    }
+    &--al {
+        fill: #379d22;
+    }
+    &--ga {
+        fill: #78ce6e;
+    }
+    &--fl {
+        fill: #325145;
+    }
+    &--tn {
+        fill: #84f4dd;
+    }
+    &--sc {
+        fill: #2c6038;
+    }
+    &--nc {
+        fill: #379d22;
+    }
+    &--ky {
+        fill: #51dc88;
+    }
+    &--wv {
+        fill: #379d22;
+    }
+    &--va {
+        fill: #1d3d3e;
+    }
+    &--md {
+        fill: #51dc88;
+    }
+    &--de {
+        fill: #379d22;
+    }
+
+    //NORTH EAST
+    &--pa {
+        fill: #1d3d3e;
+    }
+    &--nj {
+        fill: #51dc88;
+    }
+    &--ny {
+        fill: #68bd39;
+    }
+    &--ct {
+        fill: #84e5b4;
+    }
+    &--ma {
+        fill: #317333;
+    }
+    &--ri {
+        fill: #51dc88;
+    }
+    &--nh {
+        fill: #325145;
+    }
+    &--vt {
+        fill: #78ce60;
+    }
+    &--me {
+        fill: #49f6d8;
+    }
+
+    &--excluded {
+        fill: rgba(#2b343d, .6);
+    }
+}
+
+.us-sub-region-map__state--excluded + .us-sub-region-map__label {
+    fill: $map-label-hover-color;
+}
+
+.us-sub-region-map__tooltip {
+    width: $button-width;
+    margin: $tooltip-margin;
+    overflow: hidden;
+    border-radius: $border-radius-default;
+}
+
+.us-sub-region-map__button {
+    display: block;
+    padding: $button-spacing;
+    font-size: $text-xs;
+    letter-spacing: $letter-spacing-wide;
+    color: $button-default-active-text-color;
+    text-decoration: none;
+    cursor: pointer;
+    &:hover {
+        background: $button-hover;
+    }
+}
