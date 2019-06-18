@@ -103,9 +103,25 @@ export default class AddPropertyForm extends Component {
     for (const k of Object.keys(data)) {
       formData.append(k, data[k]);
     }
-    post(this.props.post_url, formData).then(() =>
-      actions.setSubmitting(false)
-    );
+    post(this.props.post_url, formData)
+      .then(response => {
+        if (!response.ok) {
+          if (response.status === 400) {
+            return response.json();
+          }
+        }
+        this.props.onSuccess();
+        actions.setSubmitting(false);
+      })
+      .then(errors => {
+        if (errors) {
+          const data = {};
+          for (const k of Object.keys(errors)) {
+            data[k] = errors[k][0].message;
+          }
+          actions.setErrors(data);
+        }
+      });
   };
 
   render() {
@@ -203,5 +219,9 @@ AddPropertyForm.propTypes = {
     PropTypes.shape({ id: PropTypes.string, name: PropTypes.string })
   ).isRequired,
   post_url: PropTypes.string,
-  csrfToken: PropTypes.string
+  csrfToken: PropTypes.string,
+  onSuccess: PropTypes.func
+};
+AddPropertyForm.defaultProps = {
+  onSuccess() {}
 };
