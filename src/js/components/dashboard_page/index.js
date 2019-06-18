@@ -24,12 +24,16 @@ export class DashboardPage extends React.PureComponent {
     asset_managers: PropTypes.array.isRequired,
     property_managers: PropTypes.array.isRequired,
     selectedProperties: PropTypes.arrayOf(PropTypes.string),
-    viewType: PropTypes.string
+    viewType: PropTypes.string,
+    filters: PropTypes.object,
+    onChangeFilter: PropTypes.func
   };
 
   static defaultProps = {
     selectedProperties: [],
-    viewType: "tile"
+    viewType: "tile",
+    filters: {},
+    onChangeFilter: () => {}
   };
 
   static buttonOptions = [
