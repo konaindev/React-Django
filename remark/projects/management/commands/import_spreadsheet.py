@@ -1,20 +1,15 @@
+from datetime import datetime
 import djclick as click
 
 from django.core.files import File
 
 from remark.users.models import User
-from remark.projects.models import Project, Spreadsheet
+from remark.projects.models import Project, Spreadsheet, Spreadsheet2, Campaign, CampaignModel
+from remark.projects.spreadsheets.activators import ModelingActivator
 from remark.projects.spreadsheets import get_importer_for_kind, SpreadsheetKind
 
 
 @click.command()
-@click.option(
-    "-p",
-    "--project",
-    required=True,
-    type=click.Choice(list(Project.objects.all().values_list("public_id", flat=True))),
-    help="The kind of spreadsheet file to import.",
-)
 @click.option(
     "-k",
     "--kind",
@@ -23,22 +18,30 @@ from remark.projects.spreadsheets import get_importer_for_kind, SpreadsheetKind
     help="The kind of spreadsheet file to import.",
 )
 @click.option(
+    "-p",
+    "--project",
+    required=True,
+    type=click.Choice(list(Project.objects.all().values_list("public_id", flat=True))),
+    help="public_id of the project",
+)
+@click.option(
+    "-c",
+    "--campaign",
+    required=False,
+    type=click.Choice(
+        list(Campaign.objects.all().values_list("campaign_id", flat=True))
+    ),
+    help="For Modeling spreadsheets, you must specify a campaign to which the new model belongs.",
+)
+@click.option(
     "-u",
     "--user",
-    required=True,
+    required=False,
     type=str,
     help="The email of the user that is uploading the file.",
 )
-@click.option(
-    "-s",
-    "--subkind",
-    required=False,
-    default="",
-    type=str,
-    help="For Modeling spreadsheets, you must also specify a value for subkind (like 'Run Rate')",
-)
 @click.argument("file", required=True, type=click.File("rb"))
-def command(project, kind, subkind, user, file):
+def command(project, kind, campaign, user, file):
     """
     Import a spreadsheet file into the database for a given project.
 
@@ -55,12 +58,6 @@ def command(project, kind, subkind, user, file):
     except Exception:
         raise click.BadParameter(f"Project with public_id={public_id} not found")
 
-    # Try to find the user in question
-    email = user
-    user = User.objects.for_email(email=email)
-    if user is None:
-        raise click.BadParameter(f"User with email={email} not found")
-
     importer = get_importer_for_kind(kind, file)
     if importer is None:
         raise click.BadParameter(
@@ -71,20 +68,62 @@ def command(project, kind, subkind, user, file):
         click.echo(f"Unable to import spreadsheet: {importer.errors}", err=True)
         return
 
-    subkind = None
+    # MODELING
     if kind == SpreadsheetKind.MODELING:
-        subkind = importer.cleaned_data["name"]
+        campaign_id = campaign
+        try:
+            campaign = Campaign.objects.get(campaign_id=campaign_id)
+        except Exception:
+            raise click.BadParameter(
+                f"Campaign with campaign_id={campaign_id} not found"
+            )
 
-    spreadsheet = Spreadsheet.objects.create(
-        project=project,
-        uploaded_by=user,
-        kind=kind,
-        subkind=subkind,
-        file=File(file),
-        imported_data=importer.cleaned_data,
+        handle_modeling_kind(project, campaign, file, importer.cleaned_data)
+        return
+    # PERIODS | MARKET | CAMPAIGN
+    else:
+        # Try to find the user in question
+        email = user
+        user = User.objects.for_email(email=email)
+        if user is None:
+            raise click.BadParameter(f"User with email={email} not found")
+
+        spreadsheet = Spreadsheet.objects.create(
+            project=project,
+            uploaded_by=user,
+            kind=kind,
+            file=File(file),
+            imported_data=importer.cleaned_data,
+        )
+
+        click.echo(
+            f"SUCCESS. Spreadsheet id={spreadsheet.id} imported to project {public_id} and activated."
+        )
+
+
+def handle_modeling_kind(project, campaign, file, imported_data):
+    """
+    - We cannot use ModelingActivator which saves spreadsheet data into Project model
+    """
+    spreadsheet = Spreadsheet2(
+        file_url=File(file),
+        json_data=imported_data,
+        kind=SpreadsheetKind.MODELING,
     )
+    # creates temporary fields required to generate "upload_to" path
+    spreadsheet.project = project
+    spreadsheet.created = datetime.now()
+    spreadsheet.save()
+
+    campaign_model = CampaignModel(
+        campaign=campaign,
+        spreadsheet=spreadsheet,
+        name=imported_data["name"],
+        model_start=imported_data["dates"]["start"],
+        model_end=imported_data["dates"]["end"],
+    )
+    campaign_model.save()
 
     click.echo(
-        f"SUCCESS. Spreadsheet id={spreadsheet.id} imported to project {public_id} and activated."
+        f"SUCCESS. Campaign Model {campaign_model.campaign_model_id} has been created."
     )
-
