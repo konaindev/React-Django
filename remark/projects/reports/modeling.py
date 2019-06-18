@@ -25,8 +25,11 @@ class ModelingReport(ReportBase):
         self.project = project
 
     def to_jsonable(self):
-        # Exposes "model_index" and "selected" model status
-        # so that model options can be re-ordered in UI
+        # TODO: Future plan is to show Modeling page underneath Campaign Tab.
+        # Generation of modeling options should be modified accordingly.
+        #
+        # Expose "model_id", "model_index" and "selected" model status
+        # so that model options can be re-ordered in UI as needed.
         model_options = []
         for campaign in self.project.campaigns.all():
             for campaign_model in campaign.campaign_models.all():

@@ -96,6 +96,9 @@ class CampaignModel(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ["model_index"]
+
 
 class Spreadsheet2(models.Model):
     spreadsheet_id = models.CharField(

@@ -4,6 +4,8 @@ from django.template.response import TemplateResponse
 from django.urls import path, reverse
 from django.utils.safestring import mark_safe
 
+from adminsortable2.admin import SortableInlineAdminMixin
+
 from remark.admin import admin_site, custom_titled_filter
 from remark.analytics.admin import InlineAnalyticsProviderAdmin
 from .forms import ProjectForm, SpreadsheetForm, CampaignModelUploadForm
@@ -224,7 +226,7 @@ class CampaignModelUploadInline(admin.StackedInline):
     upload_button.short_description = ""
 
 
-class CampaignModelTableInline(admin.TabularInline):
+class CampaignModelTableInline(SortableInlineAdminMixin, admin.TabularInline):
     verbose_name = "Campaign Model"
     verbose_name_plural = "Campaign Models"
 
