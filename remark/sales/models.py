@@ -1,5 +1,6 @@
 import os
 
+from datetime import datetime
 from django.db import models
 from django.utils.crypto import get_random_string
 
@@ -36,3 +37,6 @@ class ProductInquiry(models.Model):
 
     building_photo = models.ImageField(
         upload_to=building_photo_path, null=True, blank=True)
+
+    created = models.DateTimeField(
+        default=datetime.utcnow, null=False, blank=True)
