@@ -7,7 +7,7 @@ from .states import STATES
 
 
 class PropertyForm(forms.ModelForm):
-    building_photo = forms.ImageField(required=False)
+    building_photo = forms.ImageField(required=False, label="Building photo")
 
     class Meta:
         model = ProductInquiry
@@ -15,9 +15,11 @@ class PropertyForm(forms.ModelForm):
 
 
 class AddressForm(forms.ModelForm):
-    state = forms.ChoiceField(required=True, choices=STATES)
-    zip_code = forms.RegexField(required=True, regex=r"^\d{5}$")
-    country = forms.CharField(required=False, max_length=128, initial="US")
+    state = forms.ChoiceField(required=True, choices=STATES, label="State")
+    zip_code = forms.RegexField(
+        required=True, regex=r"^\d{5}$", label="Zipcode")
+    country = forms.CharField(
+        required=False, max_length=128, initial="US", label="Country")
 
     class Meta:
         model = Address

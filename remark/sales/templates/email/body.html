@@ -6,8 +6,8 @@
 </head>
 <body>
 <ul>
-{% for k, v in data.items %}
-<li>{{ k }}: {{ v }}</li>
+{% for f in fields %}
+<li>{{ f.label }}: {% if f.value %}{{ f.value }}{% else %}{{ f.initial }}{% endif %}</li>
 {% endfor %}
 </ul>
 </body>

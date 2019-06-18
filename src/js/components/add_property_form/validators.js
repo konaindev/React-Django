@@ -12,7 +12,6 @@ export const propertySchema = Yup.object().shape({
     .max(255)
     .label('"Address 1"'),
   street_address_2: Yup.string()
-    .required()
     .max(255)
     .label('"Address 2"'),
   city: Yup.string()

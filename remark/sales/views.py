@@ -18,16 +18,17 @@ class NewPropertyView(LoginRequiredMixin, RemarkView):
             errors = property_form.errors.get_json_data()
             errors.update(address_form.errors.get_json_data())
             return JsonResponse(errors, status=400)
+
         product = property_form.instance
         product.user = request.user
         address = address_form.instance
         address.save()
         product.address = address
         product.save()
+
         attachments = None
-        data = property_form.cleaned_data
-        if data["building_photo"]:
-            photo = data["building_photo"]
+        photo = property_form.cleaned_data["building_photo"]
+        if photo:
             attachments = [
                 {
                     'name': photo.name,
@@ -37,6 +38,7 @@ class NewPropertyView(LoginRequiredMixin, RemarkView):
             ]
             product.building_photo = photo
             product.save()
-        data.update(address_form.cleaned_data)
-        send_email([SALES_EMAIL], 'email', {'data': data}, attachments)
+        fields = property_form.visible_fields()
+        fields.extend(address_form.visible_fields())
+        send_email([SALES_EMAIL], 'email', {'fields': fields}, attachments)
         return JsonResponse({}, status=200)
