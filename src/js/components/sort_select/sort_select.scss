@@ -17,7 +17,7 @@ $border-color: $gray-4;
     font-size: $text-xs;
     font-weight: $weight-normal;
     letter-spacing: $letter-spacing-wide;
-    color: $title-small-color;
+    color: $input-label-color;
     text-transform: uppercase;
 }
 
@@ -39,15 +39,24 @@ $border-color: $gray-4;
             border: none;
             border-radius: 0;
         }
+
         .select__menu-list {
             max-height: none;
+        }
+
+        .select__control--menu-is-open {
+            background: $select-active-background;
+        }
+
+        .select__single-value {
+            color: $input-text-color;
         }
     }
 }
 
 .sort-select__icon {
     padding: $sort-icon-spacing;
-    color: $title-small-color;
+    color: $input-label-color;
     cursor: pointer;
 
     &--reverse {
