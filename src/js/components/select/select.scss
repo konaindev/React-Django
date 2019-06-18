@@ -5,6 +5,7 @@
     outline: none;
 
     .select__control {
+        cursor: pointer;
         padding: 10px 16px;
         border-radius: $select-border-radius;
         background-color: transparent;
