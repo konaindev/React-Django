@@ -6,6 +6,7 @@
     display: inline-block;
     width: $property-card-width;
     margin: $property-card-spacing;
+    text-align: left;
 
     &__panel {
         overflow: hidden;
