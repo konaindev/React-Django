@@ -1,0 +1,120 @@
+@import "css/base.scss";
+
+$row-height: 110px;
+$row-indent: 50px;
+$row-background: #222b33;
+$row-background-hover: $gray-3;
+$border-color: $gray-4;
+$image-size: 36px;
+$image-spacing: 30px;
+$image-border-radius: 6px;
+$title-width: 200px;
+$title-spacing: 20px;
+$title-height: 20px;
+$health-width: 184px;
+$kpi-width: 160px;
+$value-height: 20px;
+$target-height: 16px;
+$target-spacing: 6px;
+$link-padding: 8px 10px;
+$link-height: 20px;
+
+.portfolio-property-row {
+    display: flex;
+    height: $row-height;
+    font-family: $font-sans;
+    background: $row-background;
+    border-bottom: 1px solid $border-color;
+    align-items: center;
+
+    &:hover {
+        background: $row-background-hover;
+
+        .portfolio-property-row__link {
+            display: inline-block;
+        }
+
+        .portfolio-property-row__health {
+            display: none;
+        }
+    }
+
+    &--subproperty {
+        padding-left: $row-indent;
+    }
+}
+
+
+.portfolio-property-row__image {
+    width: $image-size;
+    height: $image-size;
+    margin-left: $image-spacing;
+    background-color: $gray-2; // in case of image missing
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: $image-border-radius;
+    flex-shrink: 0;
+}
+
+.portfolio-property-row__title {
+    width: $title-width;
+    margin-left: $title-spacing;
+    white-space: nowrap;
+}
+
+.portfolio-property-row__name {
+    height: $title-height;
+    font-size: $text-sm;
+    line-height: $title-height;
+    color: $column-header-regular-color;
+}
+
+.portfolio-property-row__address {
+    height: $title-height;
+    font-size: $text-xs;
+    line-height: $title-height;
+    color: $column-header-medium-color;
+}
+
+.portfolio-property-row__x {
+    width: $health-width;
+}
+
+.portfolio-property-row__link {
+    display: none;
+    padding: $link-padding;
+    font-size: $text-xs;
+    color: $nav-link-color;
+    text-decoration: none;
+    cursor: pointer;
+    background: $default-background-color;
+    border-radius: $border-radius-default;
+    line-height: $link-height;
+}
+
+.portfolio-property-row__kpis {
+    display: flex;
+    margin-left: auto;
+}
+
+.portfolio-property-row__kpi {
+    width: $kpi-width;
+    text-align: center;
+}
+
+.portfolio-property-row__value {
+    height: $value-height;
+    font-size: $text-xl;
+    color: $column-header-regular-color;
+}
+
+.portfolio-property-row__target {
+    height: $target-height;
+    margin-top: $target-spacing;
+    font-size: $text-xs;
+    line-height: $target-height;
+    color: $column-header-medium-color;
+    white-space: nowrap;
+}
+
