@@ -45,6 +45,7 @@ class Campaign(models.Model):
         related_name="+",
         null=True,
         blank=True,
+        help_text="All target values will be replaced by those in the newly selected model."
     )
 
     def __str__(self):
