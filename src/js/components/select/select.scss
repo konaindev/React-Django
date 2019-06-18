@@ -75,6 +75,10 @@
         box-shadow: 0 2px 20px 0 rgba(0,0,0,0.35), 0 2px 6px 0 rgba(0,0,0,0.1);
     }
 
+    .select__menu-list {
+        @include force-scrollbar();
+    }
+
     .select__option {
         padding: 14px 20px;
         color: $select-option-background-color2;
