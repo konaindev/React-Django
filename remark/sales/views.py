@@ -5,12 +5,12 @@ from remark.lib.email import send_email
 from remark.lib.views import RemarkView
 from remark.settings import SALES_EMAIL
 
-from .forms import AddressForm, PropertyForm
+from .forms import AddressForm, ProductInquiryForm
 
 
-class NewPropertyView(LoginRequiredMixin, RemarkView):
+class ProductInquiryView(LoginRequiredMixin, RemarkView):
     def post(self, request):
-        property_form = PropertyForm(request.POST, request.FILES)
+        property_form = ProductInquiryForm(request.POST, request.FILES)
         address_form = AddressForm(request.POST)
         property_valid = property_form.is_valid()
         address_valid = address_form.is_valid()

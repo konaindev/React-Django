@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import NewPropertyView
+from .views import ProductInquiryView
 
 
-urlpatterns = [path("new-project", NewPropertyView.as_view(), name="new_property")]
+urlpatterns = [path("new-project", ProductInquiryView.as_view(), name="new_property")]

@@ -6,7 +6,7 @@ from .models import ProductInquiry
 from .states import STATES
 
 
-class PropertyForm(forms.ModelForm):
+class ProductInquiryForm(forms.ModelForm):
     building_photo = forms.ImageField(required=False, label="Building photo")
 
     class Meta:
