@@ -10,7 +10,7 @@ from remark.projects.spreadsheets import SpreadsheetKind
 
 
 def campaign_public_id():
-    return public_id("campagin")
+    return public_id("campaign")
 
 
 def campaign_model_public_id():
