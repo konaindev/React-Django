@@ -52,14 +52,8 @@ $group-border-color: $gray-4;
 }
 
 .group-select__label {
+    font-size: $text-sm;
     line-height: $text-xl;
-}
-
-.group-select__group-header.group-select__option {
-    margin: auto 20px;
-    padding-left: 0;
-    padding-right: 0;
-    border-bottom: 1px solid #2B343D;
 }
 
 .group-select__groups {
@@ -72,6 +66,8 @@ $group-border-color: $gray-4;
 }
 
 .group-select__group {
+    font-weight: $weight-normal;
+    text-transform: uppercase;
     border-bottom: 1px solid $group-border-color;
 }
 
