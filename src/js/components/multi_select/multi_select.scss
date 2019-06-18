@@ -2,10 +2,6 @@
 
 $selected-color: $blue-3;
 $checkbox-spacing: 13.5px;
-$checkbox-size: 16px;
-$checkbox-background: $blue-3;
-$checkbox-border-color: $blue-4;
-$checkbox-tick-size: 10px;
 
 .multi-select {
     &.select .select__option--is-focused,
@@ -27,23 +23,8 @@ $checkbox-tick-size: 10px;
     }
 }
 
-.multi-select__option-checkbox {
-    width: $checkbox-size;
-    height: $checkbox-size;
-    border: 1px solid $button-outline-border-color;
-    border-radius: $select-border-radius;
-}
-
 .multi-select__option-label {
     margin-left: $checkbox-spacing;
-}
-
-.multi-select__option--selected {
-    .multi-select__option-checkbox {
-        background: $checkbox-background url(../../../images/icon-tick.svg) no-repeat center;
-        background-size: $checkbox-tick-size;
-        border-color: $checkbox-border-color;
-    }
 }
 
 .multi-select__label {

@@ -5,17 +5,15 @@ import PropTypes from "prop-types";
 import React from "react";
 import { components } from "react-select";
 
+import Checkbox from "../checkbox";
 import Select from "../select";
 
 import "./group_select.scss";
 
 function Option(props) {
-  const classes = cn("group-select__option", {
-    "group-select__option--selected": props.isSelected
-  });
   return (
-    <components.Option className={classes} {...props}>
-      <div className="group-select__option-checkbox" />
+    <components.Option className="group-select__option" {...props}>
+      <Checkbox isSelected={props.isSelected} />
       <div className="group-select__option-label">{props.label}</div>
     </components.Option>
   );
@@ -47,18 +45,13 @@ function Control(props) {
 
 export default class GroupSelect extends React.PureComponent {
   menuList = props => {
-    const classes = cn(
-      "select__option",
-      "group-select__all",
-      "group-select__option",
-      {
-        "group-select__option--selected": this.isAllSelected
-      }
-    );
     return (
       <components.MenuList {...props}>
-        <div className={classes} onClick={this.onSelectAll}>
-          <div className="group-select__option-checkbox" />
+        <div
+          className="group-select__all group-select__option select__option"
+          onClick={this.onSelectAll}
+        >
+          <Checkbox isSelected={this.isAllSelected} />
           <div className="group-select__option-label">
             {this.props.selectAllLabel}
           </div>
@@ -69,21 +62,13 @@ export default class GroupSelect extends React.PureComponent {
   };
 
   groupHeading = props => {
-    const classes = cn(
-      "select__option",
-      "group-select__group",
-      "group-select__option",
-      {
-        "group-select__option--selected": this.isGroupSelect(props.children)
-      }
-    );
     return (
       <components.GroupHeading {...props}>
         <div
-          className={classes}
+          className="group-select__group group-select__option select__option"
           onClick={() => this.onSelectGroup(props.children)}
         >
-          <div className="group-select__option-checkbox" />
+          <Checkbox isSelected={this.isGroupSelect(props.children)} />
           <div className="group-select__option-label">{props.children}</div>
         </div>
       </components.GroupHeading>

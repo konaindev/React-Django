@@ -2,10 +2,6 @@
 
 $selected-color: $blue-3;
 $checkbox-spacing: 13.5px;
-$checkbox-size: 16px;
-$checkbox-background: $blue-3;
-$checkbox-border-color: $blue-4;
-$checkbox-tick-size: 10px;
 $group-width: 180px;
 $menu-spacing: 0 0 20px 20px;
 $menu-max-height: 500px;
@@ -51,23 +47,8 @@ $group-border-color: $gray-4;
     }
 }
 
-.group-select__option-checkbox {
-    width: $checkbox-size;
-    height: $checkbox-size;
-    border: 1px solid $button-outline-border-color;
-    border-radius: $select-border-radius;
-}
-
 .group-select__option-label {
     margin-left: $checkbox-spacing;
-}
-
-.group-select__option--selected {
-    .group-select__option-checkbox {
-        background: $checkbox-background url(../../../images/icon-tick.svg) no-repeat center;
-        background-size: $checkbox-tick-size;
-        border-color: $checkbox-border-color;
-    }
 }
 
 .group-select__label {

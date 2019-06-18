@@ -3,17 +3,15 @@ import PropTypes from "prop-types";
 import React from "react";
 import { components } from "react-select";
 
+import Checkbox from "../checkbox";
 import Select from "../select";
 
 import "./multi_select.scss";
 
 function Option(props) {
-  const classes = cn("multi-select__option", {
-    "multi-select__option--selected": props.isSelected
-  });
   return (
-    <components.Option className={classes} {...props}>
-      <div className="multi-select__option-checkbox" />
+    <components.Option className="multi-select__option" {...props}>
+      <Checkbox isSelected={props.isSelected} />
       <div className="multi-select__option-label">{props.label}</div>
     </components.Option>
   );
