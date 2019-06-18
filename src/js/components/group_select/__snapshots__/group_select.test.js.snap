@@ -57,11 +57,11 @@ exports[`GroupSelect all selected 1`] = `
       className="select__menu-list select__menu-list--is-multi css-11unzgr"
     >
       <div
-        className="select__option group-select__all group-select__option"
+        className="group-select__all group-select__option select__option"
         onClick={[Function]}
       >
         <div
-          className="group-select__option-checkbox"
+          className="checkbox"
         />
         <div
           className="group-select__option-label"
@@ -80,11 +80,11 @@ exports[`GroupSelect all selected 1`] = `
             id="react-select-3-group-0-heading"
           >
             <div
-              className="select__option group-select__group group-select__option"
+              className="group-select__group group-select__option select__option"
               onClick={[Function]}
             >
               <div
-                className="group-select__option-checkbox"
+                className="checkbox"
               />
               <div
                 className="group-select__option-label"
@@ -103,7 +103,7 @@ exports[`GroupSelect all selected 1`] = `
               tabIndex={-1}
             >
               <div
-                className="group-select__option-checkbox"
+                className="checkbox"
               />
               <div
                 className="group-select__option-label"
@@ -120,7 +120,7 @@ exports[`GroupSelect all selected 1`] = `
               tabIndex={-1}
             >
               <div
-                className="group-select__option-checkbox"
+                className="checkbox"
               />
               <div
                 className="group-select__option-label"
@@ -137,7 +137,7 @@ exports[`GroupSelect all selected 1`] = `
               tabIndex={-1}
             >
               <div
-                className="group-select__option-checkbox"
+                className="checkbox"
               />
               <div
                 className="group-select__option-label"
@@ -154,7 +154,7 @@ exports[`GroupSelect all selected 1`] = `
               tabIndex={-1}
             >
               <div
-                className="group-select__option-checkbox"
+                className="checkbox"
               />
               <div
                 className="group-select__option-label"
@@ -172,11 +172,11 @@ exports[`GroupSelect all selected 1`] = `
             id="react-select-3-group-1-heading"
           >
             <div
-              className="select__option group-select__group group-select__option"
+              className="group-select__group group-select__option select__option"
               onClick={[Function]}
             >
               <div
-                className="group-select__option-checkbox"
+                className="checkbox"
               />
               <div
                 className="group-select__option-label"
@@ -195,7 +195,7 @@ exports[`GroupSelect all selected 1`] = `
               tabIndex={-1}
             >
               <div
-                className="group-select__option-checkbox"
+                className="checkbox"
               />
               <div
                 className="group-select__option-label"
@@ -212,7 +212,7 @@ exports[`GroupSelect all selected 1`] = `
               tabIndex={-1}
             >
               <div
-                className="group-select__option-checkbox"
+                className="checkbox"
               />
               <div
                 className="group-select__option-label"
@@ -229,7 +229,7 @@ exports[`GroupSelect all selected 1`] = `
               tabIndex={-1}
             >
               <div
-                className="group-select__option-checkbox"
+                className="checkbox"
               />
               <div
                 className="group-select__option-label"
@@ -246,7 +246,7 @@ exports[`GroupSelect all selected 1`] = `
               tabIndex={-1}
             >
               <div
-                className="group-select__option-checkbox"
+                className="checkbox"
               />
               <div
                 className="group-select__option-label"
@@ -264,11 +264,11 @@ exports[`GroupSelect all selected 1`] = `
             id="react-select-3-group-2-heading"
           >
             <div
-              className="select__option group-select__group group-select__option"
+              className="group-select__group group-select__option select__option"
               onClick={[Function]}
             >
               <div
-                className="group-select__option-checkbox"
+                className="checkbox"
               />
               <div
                 className="group-select__option-label"
@@ -287,7 +287,7 @@ exports[`GroupSelect all selected 1`] = `
               tabIndex={-1}
             >
               <div
-                className="group-select__option-checkbox"
+                className="checkbox"
               />
               <div
                 className="group-select__option-label"
@@ -304,7 +304,7 @@ exports[`GroupSelect all selected 1`] = `
               tabIndex={-1}
             >
               <div
-                className="group-select__option-checkbox"
+                className="checkbox"
               />
               <div
                 className="group-select__option-label"
@@ -321,7 +321,7 @@ exports[`GroupSelect all selected 1`] = `
               tabIndex={-1}
             >
               <div
-                className="group-select__option-checkbox"
+                className="checkbox"
               />
               <div
                 className="group-select__option-label"
@@ -338,7 +338,7 @@ exports[`GroupSelect all selected 1`] = `
               tabIndex={-1}
             >
               <div
-                className="group-select__option-checkbox"
+                className="checkbox"
               />
               <div
                 className="group-select__option-label"

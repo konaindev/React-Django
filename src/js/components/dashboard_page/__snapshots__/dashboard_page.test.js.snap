@@ -51,10 +51,10 @@ exports[`DashboardPage Row select 1`] = `
             className="dashboard-content__select-view"
           />
           <button
-            className="button button--primary"
+            className="button button--uppercase button--primary dashboard-content__add-property"
             onClick={[Function]}
           >
-            Add Property
+            ADD PROPERTY
           </button>
         </div>
       </div>
@@ -1131,10 +1131,10 @@ exports[`DashboardPage Row view 1`] = `
             className="dashboard-content__select-view"
           />
           <button
-            className="button button--primary"
+            className="button button--uppercase button--primary dashboard-content__add-property"
             onClick={[Function]}
           >
-            Add Property
+            ADD PROPERTY
           </button>
         </div>
       </div>
@@ -2211,10 +2211,10 @@ exports[`DashboardPage renders correctly 1`] = `
             className="dashboard-content__select-view"
           />
           <button
-            className="button button--primary"
+            className="button button--uppercase button--primary dashboard-content__add-property"
             onClick={[Function]}
           >
-            Add Property
+            ADD PROPERTY
           </button>
         </div>
       </div>
