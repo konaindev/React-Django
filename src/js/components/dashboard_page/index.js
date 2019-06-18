@@ -116,8 +116,13 @@ export class DashboardPage extends React.PureComponent {
                     onChange={this.toggleView}
                   /> */}
                 </div>
-                <Button color="primary" onClick={this.onShowAddPropertyForm}>
-                  Add Property
+                <Button
+                  className="dashboard-content__add-property"
+                  color="primary"
+                  uppercase={true}
+                  onClick={this.onShowAddPropertyForm}
+                >
+                  ADD PROPERTY
                 </Button>
               </div>
             </div>
