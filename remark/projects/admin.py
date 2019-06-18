@@ -37,7 +37,7 @@ class UpdateSpreadsheetAdminMixin:
 @admin.register(Spreadsheet, site=admin_site)
 class SpreadsheetAdmin(UpdateSpreadsheetAdminMixin, admin.ModelAdmin):
     form = SpreadsheetForm
-    list_display = ["project", "created", "uploaded_by", "kind", "subkind"]
+    list_display = ["project", "created", "uploaded_by", "kind"]
     pre_creation_readonly_fields = []
     post_creation_readonly_fields = [
         "project",
@@ -45,7 +45,6 @@ class SpreadsheetAdmin(UpdateSpreadsheetAdminMixin, admin.ModelAdmin):
         "uploaded_by",
         "file",
         "kind",
-        "subkind",
         "imported_data",
     ]
 
@@ -113,7 +112,6 @@ class ExistingSpreadsheetInline(admin.TabularInline):
         "created",
         "uploaded_by",
         "kind",
-        "subkind",
         "file",
         "has_imported_data",
     ]
@@ -122,7 +120,6 @@ class ExistingSpreadsheetInline(admin.TabularInline):
         "created",
         "uploaded_by",
         "kind",
-        "subkind",
         "file",
         "has_imported_data",
     ]
@@ -392,7 +389,6 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
         "number_of_periods",
         "baseline_start",
         "baseline_end",
-        "selected_model_name",
         "average_tenant_age",
         "highest_monthly_rent",
         "average_monthly_rent",

@@ -74,14 +74,6 @@ class SpreadsheetForm(forms.ModelForm):
         cleaned_data = super().clean()
 
         try:
-            if (
-                cleaned_data["kind"] != SpreadsheetKind.MODELING
-                and cleaned_data["subkind"]
-            ):
-                raise ValidationError(
-                    "For non-modeling spreadsheets, 'subkind' must be blank."
-                )
-
             # Attempt to import and validate the spreadsheet contents
             importer = get_importer_for_kind(cleaned_data["kind"], cleaned_data["file"])
             if importer is None:
@@ -92,10 +84,6 @@ class SpreadsheetForm(forms.ModelForm):
                 raise ValidationError(
                     f"Could not validate spreadsheet: {importer.errors}"
                 )
-
-            # If this is a modeling spreadsheet, set the subkind based on the model name.
-            if cleaned_data["kind"] == SpreadsheetKind.MODELING:
-                cleaned_data["subkind"] = importer.cleaned_data["name"]
 
             # Success! We read the spreadsheet just fine.
             cleaned_data["imported_data"] = importer.cleaned_data
@@ -116,29 +104,15 @@ class SpreadsheetForm(forms.ModelForm):
 
     class Meta:
         model = Spreadsheet
-        fields = ["project", "kind", "subkind", "file"]
-        # You're not allowed to set the subkind directly.
-        widgets = {"subkind": forms.HiddenInput()}
+        fields = ["project", "kind", "file"]
 
 
 class ProjectForm(forms.ModelForm):
-    NO_CHOICES = [("", "--(no selected model)--")]
-
-    selected_model_name = forms.ChoiceField(
-        choices=NO_CHOICES,
-        required=False,
-        widget=forms.Select(
-            attrs={
-                "onChange": "window.enable_submit_warning('Are you sure you want to save? All target values will be replaced by those in the newly selected model.');"
-            }
-        ),
-    )
 
     def __init__(self, *args, **kwargs):
         self.is_existing_instance = kwargs.get("instance") is not None
         super(ProjectForm, self).__init__(*args, **kwargs)
         self._map_public_and_shared_fields()
-        self._update_selected_model_choices()
 
     def _map_public_and_shared_fields(self):
         def append_links_to_field_label(link_type, report_links, field_maps):
@@ -170,18 +144,6 @@ class ProjectForm(forms.ModelForm):
             append_links_to_field_label("public", report_links, field_maps)
             report_links = ReportLinks.share_for_project(self.instance)
             append_links_to_field_label("shared", report_links, field_maps)
-
-    def _update_selected_model_choices(self):
-        modeling_report = self.instance.tmp_modeling_report_json or {}
-        modeling_options = modeling_report.get("options", [])
-        model_names = [
-            (modeling_option["name"], modeling_option["name"])
-            for modeling_option in modeling_options
-        ]
-        if not model_names:
-            self.fields["selected_model_name"].disabled = True
-        model_names = self.NO_CHOICES + model_names
-        self.fields["selected_model_name"].choices = model_names
 
     def clean_competitors(self):
         max_competitors = 2

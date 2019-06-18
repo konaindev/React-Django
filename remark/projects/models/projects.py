@@ -200,25 +200,6 @@ class Project(models.Model):
         help_text="Total Addressable Market (TAM) report JSON data. Must conform to the schema defined in MarketAnalysis.ts",
     )
 
-    # A temporary field, for the current sprint, that holds our computed
-    # model options data
-    tmp_modeling_report_json = JSONField(
-        default=None,
-        null=True,
-        blank=True,
-        verbose_name="Modeling Data",
-        # Ensure loaded data retains JSON object key ordering
-        load_kwargs={"object_pairs_hook": collections.OrderedDict},
-        help_text="Modeling JSON data. Must conform to the schema defined in ModelingOptions.ts",
-    )
-
-    selected_model_name = models.CharField(
-        blank=True,
-        default="",
-        max_length=255,
-        help_text="The name of the currently selected model, if any.",
-    )
-
     # A temporary field, for the current sprint, that holds our campaign plan
     # report data
     tmp_campaign_plan_json = JSONField(
@@ -322,14 +303,8 @@ class Project(models.Model):
         Group, on_delete=models.SET_NULL, null=True, blank=True
     )
 
-    # This value is set when the instance is created; if we later
-    # call save, and it changes, then we update targets for the model.
-    __selected_model_name = None
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Save this for comparison purposes on save(...)
-        self.__selected_model_name = self.selected_model_name
 
     def _target_periods(self, qs, start, end):
         """
@@ -472,23 +447,6 @@ class Project(models.Model):
             update_endpoint=update_endpoint
         )
 
-    def get_named_model_option(self, name):
-        """Given a named model, return the option."""
-        data = self.tmp_modeling_report_json
-        options = data.get("options", [])
-        for option in options:
-            if option.get("name") == name:
-                return option
-        return None
-
-    def get_selected_model_option(self):
-        """Return the currently selected model option."""
-        return (
-            self.get_named_model_option(self.selected_model_name)
-            if self.selected_model_name
-            else None
-        )
-
     def get_performance_rating(self):
         performance_report = PerformanceReport.for_campaign_to_date(self)
         if not performance_report:
@@ -507,41 +465,6 @@ class Project(models.Model):
             return -1
         return health_check(lease_rate, target_lease_rate)
 
-    def update_for_selected_model(self):
-        """
-        Update all associated data (like target periods) based on
-        the currently selected model.
-
-        """
-        # TODO CONSIDER where does this code actually belong?
-        #
-        # This doesn't feel like the right place but I don't have a better
-        # answer. I originally assumed it belonged in remark/projects/spreadsheets/
-        # but that feels wrong, too: yes, this data was *imported* from a spreadsheet,
-        # and yes, this looks like activation, but in this case, there is data
-        # from multiple spreadsheets in play. Perhaps a different approach
-        # to managing tmp_modeling_report_json would allow for clarity here?
-        #
-        # -Dave
-        def _create_target_period(data):
-            target_period = TargetPeriod(project=self)
-            for k, v in data.items():
-                # Yes, this will set values for keys that aren't fields;
-                # that's fine; we don't overwrite anything we shouldn't,
-                # and extraneous stuff is ignored for save.
-                setattr(target_period, k, v)
-            target_period.save()
-            return target_period
-
-        # Remove all extant target periods
-        self.target_periods.all().delete()
-
-        # If there are any, create new target periods!
-        option = self.get_selected_model_option()
-        if option is not None:
-            for data in option.get("targets", []):
-                _create_target_period(data)
-
     def user_can_view(self, user):
         if user.is_superuser:
             return True
@@ -558,21 +481,16 @@ class Project(models.Model):
     def save(self, *args, **kwargs):
         if not self.pk:
             self.__assign_blank_view_group()
-        model_selection_changed = (
-            self.__selected_model_name is not self.selected_model_name
-        )
         super().save(*args, **kwargs)
-        if model_selection_changed:
-            self.update_for_selected_model()
 
     def __str__(self):
         return "{} ({})".format(self.name, self.public_id)
 
 
 class SpreadsheetManager(models.Manager):
-    def latest_for_kind(self, kind, subkind=None):
+    def latest_for_kind(self, kind):
         return (
-            self.filter(kind=kind, subkind=subkind or "").order_by("-created").first()
+            self.filter(kind=kind).order_by("-created").first()
         )
 
 
@@ -611,14 +529,6 @@ class Spreadsheet(models.Model):
         help_text="The kind of data this spreadsheet contains.",
     )
 
-    subkind = models.CharField(
-        blank=True,
-        default="",
-        db_index=True,
-        max_length=128,
-        help_text="The kind of Modeling spreadsheet (if applicable). Run Rate, Schedule Driven, etc",
-    )
-
     file = models.FileField(
         blank=False,
         upload_to=spreadsheet_media_path,
@@ -638,9 +548,9 @@ class Spreadsheet(models.Model):
         return bool(self.imported_data)
 
     def is_latest_for_kind(self):
-        """Return True if this spreadsheet is the latest for its kind and subkind."""
+        """Return True if this spreadsheet is the latest for its kind."""
         return (
-            Spreadsheet.objects.latest_for_kind(self.kind, self.subkind).id == self.id
+            Spreadsheet.objects.latest_for_kind(self.kind).id == self.id
         )
 
     def get_activator(self):
@@ -660,8 +570,7 @@ class Spreadsheet(models.Model):
         # Always sort spreadsheets with the most recent created first.
         ordering = ["-created"]
         indexes = [
-            models.Index(fields=["created", "kind"]),
-            models.Index(fields=["created", "kind", "subkind"]),
+            models.Index(fields=["created", "kind"])
         ]
 
 
