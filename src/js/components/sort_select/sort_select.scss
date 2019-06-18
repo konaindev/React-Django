@@ -1,7 +1,7 @@
 @import 'css/base.scss';
 
 $sort-field-spacing: 12px;
-$sort-icon-spacing: 15px;
+$sort-icon-spacing: 11px 15px;
 $border-color: $gray-4;
 
 .sort-select {
@@ -46,7 +46,7 @@ $border-color: $gray-4;
 }
 
 .sort-select__icon {
-    margin: auto $sort-icon-spacing;
+    padding: $sort-icon-spacing;
     color: $title-small-color;
     cursor: pointer;
 
