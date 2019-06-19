@@ -98,7 +98,7 @@ export default class AddPropertyForm extends Component {
   };
 
   onSubmit = (values, actions) => {
-    if (this.isSubmitting) {
+    if (this.isSubmitting || !this.props.post_url) {
       return;
     }
     this.isSubmitting = true;

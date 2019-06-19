@@ -2,7 +2,7 @@
 
 exports[`AddPropertyForm add property form 1`] = `
 <form
-  action="/sales/new-project"
+  action={null}
   autoComplete="off"
   className="add-property-form"
   method="post"

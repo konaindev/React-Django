@@ -31,7 +31,7 @@ exports[`AddPropertyModal renders AddPropertyModal correctly 1`] = `
     className="modal-window__body"
   >
     <form
-      action="/sales/new-project"
+      action={null}
       autoComplete="off"
       className="add-property-form"
       method="post"
