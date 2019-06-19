@@ -16,6 +16,7 @@ from .models import (
     CampaignModel,
     Period,
     Spreadsheet,
+    Spreadsheet2,
     TargetPeriod,
     TAMExportLog,
     Tag,
@@ -147,6 +148,12 @@ class ExistingSpreadsheetInline(admin.TabularInline):
     is_active.boolean = True
 
 
+@admin.register(Spreadsheet2, site=admin_site)
+class Spreadsheet2Admin(admin.ModelAdmin):
+    list_display = ["file_url"]
+    readonly_fields = ["kind", "file_url"]
+
+
 @admin.register(CampaignModel, site=admin_site)
 class CampaignModelAdmin(admin.ModelAdmin):
     list_display = [
@@ -159,26 +166,26 @@ class CampaignModelAdmin(admin.ModelAdmin):
         "model_end",
     ]
     list_filter = (("campaign__project__name", custom_titled_filter("Project")),)
-    readonly_fields = ["project_link", "selected", "file_url", "json_data"]
     ordering = ["campaign__project__name"]
-
-    fieldsets = (
-        (
-            "Model Details",
-            {
-                "fields": (
-                    "project_link",
-                    "name",
-                    "model_start",
-                    "model_end",
-                    "model_index",
-                    "active",
-                    "selected",
-                )
-            },
-        ),
-        ("Spreadsheet", {"fields": ("file_url", "json_data")}),
-    )
+    fields = [
+        "project_link",
+        "campaign",
+        "name",
+        "model_start",
+        "model_end",
+        "model_index",
+        "active",
+        "selected",
+        "spreadsheet_link",
+        "json_data",
+    ]
+    readonly_fields = [
+        "project_link",
+        "campaign",
+        "selected",
+        "spreadsheet_link",
+        "json_data",
+    ]
 
     def has_add_permission(self, request):
         return False
@@ -190,12 +197,21 @@ class CampaignModelAdmin(admin.ModelAdmin):
                 obj.project.name,
             )
         )
-
     project_link.short_description = "Project"
+
+    def spreadsheet_link(self, obj):
+        return mark_safe(
+            '<a href="{}" target="_blank">{}</a>'.format(
+                reverse(
+                    "admin:projects_spreadsheet2_change", args=(obj.spreadsheet.pk,)
+                ),
+                obj.spreadsheet.pk,
+            )
+        )
+    spreadsheet_link.short_description = "Spreadsheet"
 
     def is_selected(self, obj):
         return bool(obj.selected)
-
     is_selected.boolean = True
 
 

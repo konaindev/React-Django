@@ -63,7 +63,6 @@ class CampaignModel(models.Model):
         "Campaign",
         on_delete=models.CASCADE,
         related_name="campaign_models",
-        verbose_name="Project",
     )
     spreadsheet = models.ForeignKey(
         "Spreadsheet2", on_delete=models.CASCADE, related_name="campaign_models"
@@ -112,7 +111,6 @@ class Spreadsheet2(models.Model):
     )
     json_data = JSONField(
         default=None,
-        editable=False,
         help_text="Raw imported JSON data. Schema depends on spreadsheet kind.",
     )
     kind = models.CharField(
