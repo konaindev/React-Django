@@ -51,7 +51,7 @@ export default class PortfolioPropertyRow extends React.PureComponent {
           <div className="portfolio-property-row__name">{name}</div>
           <div className="portfolio-property-row__address">{address}</div>
         </div>
-        <div className="portfolio-property-row__x">
+        <div className="portfolio-property-row__info">
           <PropertyStatus
             className="portfolio-property-row__health"
             performance_rating={health}
