@@ -81,6 +81,7 @@ export default class AddPropertyForm extends Component {
   }
 
   state = { image: null };
+  isSubmitting = false;
 
   getPhoto = e => {
     const file = e.target.files[0];
@@ -97,6 +98,10 @@ export default class AddPropertyForm extends Component {
   };
 
   onSubmit = (values, actions) => {
+    if (this.isSubmitting) {
+      return;
+    }
+    this.isSubmitting = true;
     const data = _clone(values);
     data.product_type = values.product_type.value;
     data.state = values.state.value;
@@ -107,10 +112,12 @@ export default class AddPropertyForm extends Component {
     post(this.props.post_url, formData)
       .then(() => {
         actions.setSubmitting(false);
+        this.isSubmitting = false;
         this.props.onSuccess();
       })
       .catch(error => {
         actions.setSubmitting(false);
+        this.isSubmitting = false;
         const r = error.response;
         if (r && r.status === 400) {
           actions.setErrors(convertBackendErrors(r.data));
