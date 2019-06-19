@@ -1,0 +1,497 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PortfolioPropertyGroupRow renders correctly 1`] = `
+<div
+  className="portfolio-property-group-row"
+  style={Object {}}
+>
+  <div
+    className="portfolio-property-group-row__group"
+    onClick={[Function]}
+  >
+    <div
+      className="portfolio-property-group-row__image"
+      style={
+        Object {
+          "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
+        }
+      }
+    />
+    <div
+      className="portfolio-property-group-row__title"
+    >
+      <div
+        className="portfolio-property-group-row__name"
+      >
+        West
+      </div>
+      <div
+        className="portfolio-property-group-row__property-count"
+      >
+        3
+         Properties
+      </div>
+    </div>
+    <div
+      className="portfolio-property-group-row__kpis"
+    >
+      <div
+        className="portfolio-property-group-row__kpi"
+      >
+        <div
+          className="portfolio-property-group-row__value"
+        >
+          0.9
+        </div>
+        <div
+          className="portfolio-property-group-row__target"
+        >
+          Target: 0.9
+        </div>
+      </div>
+      <div
+        className="portfolio-property-group-row__kpi"
+      >
+        <div
+          className="portfolio-property-group-row__value"
+        >
+          0.8
+        </div>
+        <div
+          className="portfolio-property-group-row__target"
+        >
+          Target: 0.8
+        </div>
+      </div>
+      <div
+        className="portfolio-property-group-row__kpi"
+      >
+        <div
+          className="portfolio-property-group-row__value"
+        >
+          0.1
+        </div>
+        <div
+          className="portfolio-property-group-row__target"
+        >
+          Target: 0.1
+        </div>
+      </div>
+      <div
+        className="portfolio-property-group-row__kpi"
+      >
+        <div
+          className="portfolio-property-group-row__value"
+        >
+          0.5
+        </div>
+        <div
+          className="portfolio-property-group-row__target"
+        >
+          Target: 0.5
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`PortfolioPropertyGroupRow renders opened 1`] = `
+<div
+  className="portfolio-property-group-row"
+  style={
+    Object {
+      "height": NaN,
+    }
+  }
+>
+  <div
+    className="portfolio-property-group-row__group portfolio-property-group-row__group--open"
+    onClick={[Function]}
+  >
+    <div
+      className="portfolio-property-group-row__image"
+      style={
+        Object {
+          "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
+        }
+      }
+    />
+    <div
+      className="portfolio-property-group-row__title"
+    >
+      <div
+        className="portfolio-property-group-row__name"
+      >
+        West
+      </div>
+      <div
+        className="portfolio-property-group-row__property-count"
+      >
+        3
+         Properties
+      </div>
+    </div>
+    <div
+      className="portfolio-property-group-row__kpis"
+    >
+      <div
+        className="portfolio-property-group-row__kpi"
+      >
+        <div
+          className="portfolio-property-group-row__value"
+        >
+          0.9
+        </div>
+        <div
+          className="portfolio-property-group-row__target"
+        >
+          Target: 0.9
+        </div>
+      </div>
+      <div
+        className="portfolio-property-group-row__kpi"
+      >
+        <div
+          className="portfolio-property-group-row__value"
+        >
+          0.8
+        </div>
+        <div
+          className="portfolio-property-group-row__target"
+        >
+          Target: 0.8
+        </div>
+      </div>
+      <div
+        className="portfolio-property-group-row__kpi"
+      >
+        <div
+          className="portfolio-property-group-row__value"
+        >
+          0.1
+        </div>
+        <div
+          className="portfolio-property-group-row__target"
+        >
+          Target: 0.1
+        </div>
+      </div>
+      <div
+        className="portfolio-property-group-row__kpi"
+      >
+        <div
+          className="portfolio-property-group-row__value"
+        >
+          0.5
+        </div>
+        <div
+          className="portfolio-property-group-row__target"
+        >
+          Target: 0.5
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="portfolio-property-row portfolio-property-row--subproperty"
+  >
+    <div
+      className="portfolio-property-row__image"
+      style={
+        Object {
+          "backgroundImage": "url(\\"https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg\\")",
+        }
+      }
+    />
+    <div
+      className="portfolio-property-row__title"
+    >
+      <div
+        className="portfolio-property-row__name"
+      >
+        Building A
+      </div>
+      <div
+        className="portfolio-property-row__address"
+      >
+        San Antonio, TX 1
+      </div>
+    </div>
+    <div
+      className="portfolio-property-row__info"
+    >
+      <div
+        className="property-status portfolio-property-row__health property-status--off-track"
+      >
+        OFF TRACK
+      </div>
+      <a
+        className="portfolio-property-row__link"
+      >
+        View Property
+      </a>
+    </div>
+    <div
+      className="portfolio-property-row__kpis"
+    >
+      <div
+        className="portfolio-property-row__kpi"
+      >
+        <div
+          className="portfolio-property-row__value"
+        >
+          0.9
+        </div>
+        <div
+          className="portfolio-property-row__target"
+        >
+          Target: 0.9
+        </div>
+      </div>
+      <div
+        className="portfolio-property-row__kpi"
+      >
+        <div
+          className="portfolio-property-row__value"
+        >
+          0.8
+        </div>
+        <div
+          className="portfolio-property-row__target"
+        >
+          Target: 0.8
+        </div>
+      </div>
+      <div
+        className="portfolio-property-row__kpi"
+      >
+        <div
+          className="portfolio-property-row__value"
+        >
+          0.1
+        </div>
+        <div
+          className="portfolio-property-row__target"
+        >
+          Target: 0.1
+        </div>
+      </div>
+      <div
+        className="portfolio-property-row__kpi"
+      >
+        <div
+          className="portfolio-property-row__value"
+        >
+          0.5
+        </div>
+        <div
+          className="portfolio-property-row__target"
+        >
+          Target: 0.5
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="portfolio-property-row portfolio-property-row--subproperty"
+  >
+    <div
+      className="portfolio-property-row__image"
+      style={
+        Object {
+          "backgroundImage": "url(\\"https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg\\")",
+        }
+      }
+    />
+    <div
+      className="portfolio-property-row__title"
+    >
+      <div
+        className="portfolio-property-row__name"
+      >
+        Building B
+      </div>
+      <div
+        className="portfolio-property-row__address"
+      >
+        San Antonio, TX 2
+      </div>
+    </div>
+    <div
+      className="portfolio-property-row__info"
+    >
+      <div
+        className="property-status portfolio-property-row__health property-status--at-risk"
+      >
+        AT RISK
+      </div>
+      <a
+        className="portfolio-property-row__link"
+      >
+        View Property
+      </a>
+    </div>
+    <div
+      className="portfolio-property-row__kpis"
+    >
+      <div
+        className="portfolio-property-row__kpi"
+      >
+        <div
+          className="portfolio-property-row__value"
+        >
+          0.9
+        </div>
+        <div
+          className="portfolio-property-row__target"
+        >
+          Target: 0.9
+        </div>
+      </div>
+      <div
+        className="portfolio-property-row__kpi"
+      >
+        <div
+          className="portfolio-property-row__value"
+        >
+          0.8
+        </div>
+        <div
+          className="portfolio-property-row__target"
+        >
+          Target: 0.8
+        </div>
+      </div>
+      <div
+        className="portfolio-property-row__kpi"
+      >
+        <div
+          className="portfolio-property-row__value"
+        >
+          0.1
+        </div>
+        <div
+          className="portfolio-property-row__target"
+        >
+          Target: 0.1
+        </div>
+      </div>
+      <div
+        className="portfolio-property-row__kpi"
+      >
+        <div
+          className="portfolio-property-row__value"
+        >
+          0.5
+        </div>
+        <div
+          className="portfolio-property-row__target"
+        >
+          Target: 0.5
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="portfolio-property-row portfolio-property-row--subproperty"
+  >
+    <div
+      className="portfolio-property-row__image"
+      style={
+        Object {
+          "backgroundImage": "url(\\"https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg\\")",
+        }
+      }
+    />
+    <div
+      className="portfolio-property-row__title"
+    >
+      <div
+        className="portfolio-property-row__name"
+      >
+        Building C
+      </div>
+      <div
+        className="portfolio-property-row__address"
+      >
+        San Antonio, TX 3
+      </div>
+    </div>
+    <div
+      className="portfolio-property-row__info"
+    >
+      <div
+        className="property-status portfolio-property-row__health property-status--on-track"
+      >
+        ON TRACK
+      </div>
+      <a
+        className="portfolio-property-row__link"
+      >
+        View Property
+      </a>
+    </div>
+    <div
+      className="portfolio-property-row__kpis"
+    >
+      <div
+        className="portfolio-property-row__kpi"
+      >
+        <div
+          className="portfolio-property-row__value"
+        >
+          0.9
+        </div>
+        <div
+          className="portfolio-property-row__target"
+        >
+          Target: 0.9
+        </div>
+      </div>
+      <div
+        className="portfolio-property-row__kpi"
+      >
+        <div
+          className="portfolio-property-row__value"
+        >
+          0.8
+        </div>
+        <div
+          className="portfolio-property-row__target"
+        >
+          Target: 0.8
+        </div>
+      </div>
+      <div
+        className="portfolio-property-row__kpi"
+      >
+        <div
+          className="portfolio-property-row__value"
+        >
+          0.1
+        </div>
+        <div
+          className="portfolio-property-row__target"
+        >
+          Target: 0.1
+        </div>
+      </div>
+      <div
+        className="portfolio-property-row__kpi"
+      >
+        <div
+          className="portfolio-property-row__value"
+        >
+          0.5
+        </div>
+        <div
+          className="portfolio-property-row__target"
+        >
+          Target: 0.5
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
