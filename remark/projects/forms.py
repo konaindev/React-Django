@@ -70,6 +70,16 @@ class SpreadsheetForm(forms.ModelForm):
     APIs.
     """
 
+    # exclude MODELING spreadsheet since it's managed by CampaignModel
+    kind = forms.ChoiceField(
+        choices=[
+            choice
+            for choice in SpreadsheetKind.CHOICES
+            if choice[0] is not SpreadsheetKind.MODELING
+        ],
+        required=True,
+    )
+
     def clean(self):
         cleaned_data = super().clean()
 
@@ -108,7 +118,6 @@ class SpreadsheetForm(forms.ModelForm):
 
 
 class ProjectForm(forms.ModelForm):
-
     def __init__(self, *args, **kwargs):
         self.is_existing_instance = kwargs.get("instance") is not None
         super(ProjectForm, self).__init__(*args, **kwargs)
