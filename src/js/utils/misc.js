@@ -8,6 +8,7 @@ import {
   differenceInCalendarMonths,
   differenceInCalendarYears
 } from "date-fns";
+import _mapValues from "lodash/mapValues";
 
 export const convertToKebabCase = (string = "") => {
   return string.replace(/\s+/g, "-").toLowerCase();
@@ -63,3 +64,10 @@ export const objectFromEntries = iterable => {
     {}
   );
 };
+
+/*
+ * Converts backend errors to show them on UI
+ */
+export function convertBackendErrors(errors) {
+  return _mapValues(errors, item => item[0].message);
+}

@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import CloseIcon from "../../icons/close";
-import { post } from "../../utils/fetch";
+import { post } from "../../utils/api";
+import { convertBackendErrors } from "../../utils/misc";
 import Button from "../button";
 import { FormSelect } from "../select";
 
@@ -104,22 +105,15 @@ export default class AddPropertyForm extends Component {
       formData.append(k, data[k]);
     }
     post(this.props.post_url, formData)
-      .then(response => {
-        if (!response.ok) {
-          if (response.status === 400) {
-            return response.json();
-          }
-        }
-        this.props.onSuccess();
+      .then(() => {
         actions.setSubmitting(false);
+        this.props.onSuccess();
       })
-      .then(errors => {
-        if (errors) {
-          const data = {};
-          for (const k of Object.keys(errors)) {
-            data[k] = errors[k][0].message;
-          }
-          actions.setErrors(data);
+      .catch(error => {
+        actions.setSubmitting(false);
+        const r = error.response;
+        if (r && r.status === 400) {
+          actions.setErrors(convertBackendErrors(r.data));
         }
       });
   };
