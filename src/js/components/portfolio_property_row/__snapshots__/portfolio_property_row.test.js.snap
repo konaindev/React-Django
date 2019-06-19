@@ -27,7 +27,7 @@ exports[`PortfolioPropertyRow renders at-risk 1`] = `
     </div>
   </div>
   <div
-    className="portfolio-property-row__x"
+    className="portfolio-property-row__info"
   >
     <div
       className="property-status portfolio-property-row__health property-status--at-risk"
@@ -130,7 +130,7 @@ exports[`PortfolioPropertyRow renders off-track 1`] = `
     </div>
   </div>
   <div
-    className="portfolio-property-row__x"
+    className="portfolio-property-row__info"
   >
     <div
       className="property-status portfolio-property-row__health property-status--off-track"
@@ -233,7 +233,7 @@ exports[`PortfolioPropertyRow renders on-track 1`] = `
     </div>
   </div>
   <div
-    className="portfolio-property-row__x"
+    className="portfolio-property-row__info"
   >
     <div
       className="property-status portfolio-property-row__health property-status--on-track"
