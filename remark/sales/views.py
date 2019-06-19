@@ -22,6 +22,9 @@ class ProductInquiryView(LoginRequiredMixin, RemarkView):
         product = property_form.instance
         product.user = request.user
         address = address_form.instance
+        # Set default country to "US"
+        if not address.country:
+            address.country = address_form["country"].initial
         address.save()
         product.address = address
         product.save()
@@ -40,5 +43,7 @@ class ProductInquiryView(LoginRequiredMixin, RemarkView):
             product.save()
         fields = property_form.visible_fields()
         fields.extend(address_form.visible_fields())
+
         send_email([SALES_EMAIL], 'email', {'fields': fields}, attachments)
+
         return JsonResponse({}, status=200)
