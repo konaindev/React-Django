@@ -1,0 +1,33 @@
+@import "css/base.scss";
+
+$header-background: $gray-1;
+$header-height: 52px;
+$title-spacing: 50px;
+
+.portfolio-table__header {
+    display: flex;
+    height: $header-height;
+    font-family: $font-sans;
+    font-size: $text-xs;
+    letter-spacing: $letter-spacing-wider;
+    color: $column-header-regular-color;
+    text-transform: uppercase;
+    background: $header-background;
+    border-top-right-radius: $border-radius-lg;
+    border-top-left-radius: $border-radius-lg;
+    align-items: center;
+}
+
+.portfolio-table__title {
+    margin-left: $title-spacing;
+}
+
+.portfolio-table__kpis {
+    display: flex;
+    margin-left: auto;
+}
+
+.portfolio-table__kpi {
+    width: $portfolio-property-kpi-width;
+    text-align: center;
+}
