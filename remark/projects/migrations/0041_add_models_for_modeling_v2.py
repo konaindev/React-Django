@@ -3,8 +3,7 @@
 from django.db import migrations, models
 import django.db.models.deletion
 import jsonfield.fields
-import remark.projects.models.modeling
-import remark.projects.models.projects
+import remark.projects.models
 
 
 class Migration(migrations.Migration):
@@ -17,15 +16,15 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='Campaign',
             fields=[
-                ('campaign_id', models.CharField(default=remark.projects.models.modeling.campaign_public_id, editable=False, max_length=50, primary_key=True, serialize=False)),
+                ('campaign_id', models.CharField(default=remark.projects.models.campaign_public_id, editable=False, max_length=50, primary_key=True, serialize=False)),
                 ('name', models.CharField(max_length=255)),
             ],
         ),
         migrations.CreateModel(
             name='Spreadsheet2',
             fields=[
-                ('spreadsheet_id', models.CharField(default=remark.projects.models.modeling.spreadsheet_public_id, editable=False, max_length=50, primary_key=True, serialize=False)),
-                ('file_url', models.FileField(help_text='The underlying spreadsheet (probably .xlsx) file.', upload_to=remark.projects.models.modeling.spreadsheet_media_path)),
+                ('spreadsheet_id', models.CharField(default=remark.projects.models.spreadsheet_public_id, editable=False, max_length=50, primary_key=True, serialize=False)),
+                ('file_url', models.FileField(help_text='The underlying spreadsheet (probably .xlsx) file.', upload_to=remark.projects.models.spreadsheet_media_path)),
                 ('json_data', jsonfield.fields.JSONField(default=None, editable=False, help_text='Raw imported JSON data. Schema depends on spreadsheet kind.')),
                 ('kind', models.CharField(choices=[('periods', 'Periods'), ('model', 'Modeling'), ('market', 'Market Report'), ('campaign', 'Campaign Plan')], db_index=True, help_text='The kind of data this spreadsheet contains. Enum: Market, Period, Modeling, Campaign Plan', max_length=128)),
             ],
@@ -38,12 +37,12 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='spreadsheet',
             name='file',
-            field=models.FileField(help_text='The underlying spreadsheet (probably .xlsx) file.', upload_to=remark.projects.models.projects.spreadsheet_media_path),
+            field=models.FileField(help_text='The underlying spreadsheet (probably .xlsx) file.', upload_to=remark.projects.models.spreadsheet_media_path),
         ),
         migrations.CreateModel(
             name='CampaignModel',
             fields=[
-                ('campaign_model_id', models.CharField(default=remark.projects.models.modeling.campaign_model_public_id, editable=False, max_length=50, primary_key=True, serialize=False)),
+                ('campaign_model_id', models.CharField(default=remark.projects.models.campaign_model_public_id, editable=False, max_length=50, primary_key=True, serialize=False)),
                 ('name', models.CharField(max_length=255)),
                 ('model_start', models.DateField()),
                 ('model_end', models.DateField()),
