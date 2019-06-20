@@ -53,6 +53,9 @@ def update_existing_project(apps, schema_editor):
         fund=fund,
     )
 
+def noop(apps, schema_editor):
+    pass
+
 
 class Migration(migrations.Migration):
 
@@ -120,7 +123,7 @@ class Migration(migrations.Migration):
                 to="crm.Business",
             ),
         ),
-        migrations.RunPython(update_existing_project),
+        migrations.RunPython(update_existing_project, noop),
         migrations.AlterField(
             model_name="project",
             name="account",
