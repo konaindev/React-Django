@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 
 import PageHeader from "../page_header";
@@ -72,7 +72,7 @@ class BottomChrome extends Component {
   };
 
   render() {
-    return <>{this.props.children}</>;
+    return <Fragment>{this.props.children}</Fragment>;
   }
 }
 

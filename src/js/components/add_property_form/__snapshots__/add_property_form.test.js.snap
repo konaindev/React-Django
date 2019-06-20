@@ -1,0 +1,235 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddPropertyForm add property form 1`] = `
+<form
+  action="/projects/new"
+  className="add-property-form"
+  method="post"
+>
+  <div
+    className="add-property-form__column"
+  >
+    <div
+      className="add-property-form__image"
+      style={Object {}}
+    >
+      <label
+        className="add-property-form__file"
+      >
+        ADD PHOTO
+        <input
+          onChange={[Function]}
+          style={
+            Object {
+              "display": "none",
+            }
+          }
+          type="file"
+        />
+      </label>
+    </div>
+  </div>
+  <div
+    className="add-property-form__column"
+  >
+    <div
+      className="add-property-form__field"
+    >
+      <div
+        className="add-property-form__label"
+      >
+        Property Name:
+      </div>
+      <input
+        className="input add-property-form__input"
+        name="property_name"
+        placeholder="Property Name"
+        type="text"
+      />
+    </div>
+    <div
+      className="add-property-form__field"
+    >
+      <div
+        className="add-property-form__label"
+      >
+        Address:
+      </div>
+      <input
+        className="input add-property-form__input"
+        name="address"
+        placeholder="Street Address 1"
+        type="text"
+      />
+    </div>
+    <div
+      className="add-property-form__field"
+    >
+      <div
+        className="add-property-form__label"
+      />
+      <input
+        className="input add-property-form__input"
+        name="address2"
+        placeholder="Street Address 2"
+        type="text"
+      />
+    </div>
+    <div
+      className="add-property-form__field"
+    >
+      <div
+        className="add-property-form__label"
+      />
+      <div
+        className="add-property-form__fields-wrap"
+      >
+        <input
+          className="input add-property-form__input add-property-form__input--city"
+          name="city"
+          placeholder="City"
+          type="text"
+        />
+        <div
+          className="select add-property-form__input add-property-form__input--state css-2b097c-container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="select__control css-yk16xz-control"
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+          >
+            <div
+              className="select__value-container css-1hwfws3"
+            >
+              <div
+                className="select__placeholder css-1wa3eu0-placeholder"
+              >
+                State
+              </div>
+              <input
+                className="css-62g3xt-dummyInput"
+                disabled={false}
+                id="react-select-2-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+            <div
+              className="select__indicators css-1wy0on6"
+            >
+              <span
+                className="select__indicator-separator css-1okebmr-indicatorSeparator"
+              />
+              <div
+                aria-hidden="true"
+                className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+              >
+                <div
+                  className="select__dropdown-arrow"
+                />
+              </div>
+            </div>
+          </div>
+          <input
+            name="state"
+            type="hidden"
+            value=""
+          />
+        </div>
+        <input
+          className="input add-property-form__input add-property-form__input--zipcode"
+          name="zipcode"
+          placeholder="Zipcode"
+          type="text"
+        />
+      </div>
+    </div>
+    <div
+      className="add-property-form__field"
+    >
+      <div
+        className="add-property-form__label"
+      >
+        Package Option:
+      </div>
+      <div
+        className="select add-property-form__input css-2b097c-container"
+        onKeyDown={[Function]}
+      >
+        <div
+          className="select__control css-yk16xz-control"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="select__value-container css-1hwfws3"
+          >
+            <div
+              className="select__placeholder css-1wa3eu0-placeholder"
+            >
+              Select a Package...
+            </div>
+            <input
+              className="css-62g3xt-dummyInput"
+              disabled={false}
+              id="react-select-3-input"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              readOnly={true}
+              tabIndex="0"
+              value=""
+            />
+          </div>
+          <div
+            className="select__indicators css-1wy0on6"
+          >
+            <span
+              className="select__indicator-separator css-1okebmr-indicatorSeparator"
+            />
+            <div
+              aria-hidden="true"
+              className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <div
+                className="select__dropdown-arrow"
+              />
+            </div>
+          </div>
+        </div>
+        <input
+          name="package"
+          type="hidden"
+          value=""
+        />
+      </div>
+    </div>
+    <div
+      className="add-property-form__field add-property-form__field--button"
+    >
+      <div
+        className="add-property-form__label"
+      />
+      <div
+        className="add-property-form__submit-wrap"
+      >
+        <button
+          className="button button--disabled add-property-form__submit"
+          onClick={[Function]}
+        >
+          SUBMIT
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+`;

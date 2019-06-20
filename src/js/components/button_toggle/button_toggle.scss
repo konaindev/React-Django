@@ -1,0 +1,118 @@
+@import "css/base.scss";
+
+$toggle-thumb-size: 2.5rem;
+$toggle-box-shadow: 0 0 6px 0 $gray-8;
+
+.button-toggle {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+
+    input {
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        z-index: -1;
+    }
+
+    .toggle-tracks {
+        position: relative;
+        display: inline-block;
+        vertical-align: middle;
+        height: $toggle-thumb-size;
+        user-select: none;
+        border-radius: $border-radius-default;
+
+        &--checked {
+            background-color: $button-primary-bg-color;
+            color: $button-primary-text-color;
+
+            .toggle-thumb {
+                left: calc(100% - #{$toggle-thumb-size});
+            }
+
+            .toggle-button-checked {
+                visibility: visible;
+                line-height: $toggle-thumb-size;
+            }
+
+            .toggle-button-unchecked {
+                visibility: hidden;
+                line-height: 0;
+            }
+        }
+
+        &--unchecked {
+            background-color: $button-default-bg-color;
+            color: $button-default-text-color;
+
+            .toggle-thumb {
+                left: 0;
+            }
+        }
+    }
+
+    .toggle-thumb {
+        position: absolute;
+        margin: 2px;
+        border-radius: $border-radius-default;
+        background-color: $white;
+        width: calc(#{$toggle-thumb-size} - 4px);
+        height: calc(#{$toggle-thumb-size} - 4px);
+        transition: left 0.1s cubic-bezier(0.4, 1, 0.75, 0.9);
+    }
+
+    .toggle-button-checked {
+        visibility: hidden;
+        margin-left: $s4;
+        margin-right: $toggle-thumb-size + $s4;
+        line-height: 0;
+    }
+
+    .toggle-button-unchecked {
+        visibility: visible;
+        margin-left: $toggle-thumb-size + $s4;
+        margin-right: $s4;
+        line-height: $toggle-thumb-size;
+    }
+
+    .toggle-inner-label {
+        text-align: center;
+        font-size: $text-sm;
+    }
+
+    .toggle-outer-label {
+        margin-left: $s4;
+        user-select: none;
+    }
+
+    &:hover,
+    &:focus {
+        .toggle-tracks {
+            &--checked {
+                background-color: lighten($button-primary-bg-color, 3%);
+            }
+
+            &--unchecked {
+                background-color: lighten($button-default-bg-color, 3%);
+            }
+        }
+
+        .toggle-thumb {
+            box-shadow: $toggle-box-shadow;
+        }
+    }
+
+    &:active {
+        .toggle-tracks {
+            &--checked {
+                background-color: darken($button-primary-bg-color, 2%);
+            }
+
+            &--unchecked {
+                background-color: darken($button-default-bg-color, 2%);
+            }
+        }
+    }
+}

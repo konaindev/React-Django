@@ -8,7 +8,16 @@ describe("Button", () => {
   });
 
   it("renders selected button correctly", () => {
-    const tree = renderer.create(<Button selected>Selected Button</Button>).toJSON();
+    const tree = renderer
+      .create(<Button selected>Selected Button</Button>)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it("renders disabled button correctly", () => {
+    const tree = renderer
+      .create(<Button color="disabled">Disabled Button</Button>)
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

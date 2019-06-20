@@ -24,6 +24,7 @@ exports[`PropertyCard renders correctly 1`] = `
         >
           <button
             className="button button--outline"
+            onClick={[Function]}
           >
             View Report
           </button>

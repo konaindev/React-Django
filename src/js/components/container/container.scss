@@ -1,7 +1,8 @@
 @import "css/base.scss";
 
 .container {
-    max-width: 1350px;
+    width: 100%;
+    max-width: $container-width + 2 * $container-padding;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 $container-padding;
 }

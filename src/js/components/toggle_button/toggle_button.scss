@@ -1,0 +1,25 @@
+@import "css/base.scss";
+
+.toggle-button {
+    display: inline-flex;
+
+    &__item {
+        flex: 1;
+        background: none;
+        padding: $s3;
+        color: $default-text-color;
+        display: inline-flex;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, .05);
+        }
+
+        &:focus {
+            outline: none;
+        }
+
+        &--selected {
+            color: $button-primary-bg-color;
+        }
+    }
+}

@@ -5,6 +5,8 @@ import os.path
 from datetime import datetime
 from django.db import models
 from django.conf import settings
+
+from django.contrib.auth.models import Group
 from django.urls import reverse
 from django.utils.crypto import get_random_string
 
@@ -277,11 +279,37 @@ class Project(models.Model):
         verbose_name="Show Campaign Plan?", default=False
     )
 
+    is_baseline_report_shared = models.BooleanField(
+        verbose_name="Share Baseline Report?", default=False
+    )
+
+    is_tam_shared = models.BooleanField(verbose_name="Share TAM?", default=False)
+
+    is_performance_report_shared = models.BooleanField(
+        verbose_name="Share Performance Report?", default=False
+    )
+
+    is_modeling_shared = models.BooleanField(
+        verbose_name="Share Modeling?", default=False
+    )
+
+    is_campaign_plan_shared = models.BooleanField(
+        verbose_name="Share Campaign Plan?", default=False
+    )
+
+    competitors = models.ManyToManyField("self", blank=True, symmetrical=False)
+
     address = models.ForeignKey(
         "geo.Address", on_delete=models.SET_NULL, null=True, blank=True
     )
 
-    users = models.ManyToManyField("users.User", related_name="projects")
+    users = models.ManyToManyField(
+        "users.User", related_name="projects"
+    )
+  
+    view_group = models.OneToOneField(
+        Group, on_delete=models.SET_NULL, null=True, blank=True
+    )
 
     # This value is set when the instance is created; if we later
     # call save, and it changes, then we update targets for the model.
@@ -416,12 +444,17 @@ class Project(models.Model):
 
     def to_jsonable(self):
         """Return a representation that can be converted to a JSON string."""
-        return {
-            "public_id": self.public_id,
-            "name": self.name,
-            "building_logo": self.get_building_logo(),
-            "building_image": self.get_building_image()
-        }
+
+        kwargs = {"project_id": self.public_id}
+        update_endpoint = reverse("update_endpoint", kwargs=kwargs)
+
+        return dict(
+            public_id=self.public_id,
+            name=self.name,
+            building_logo=self.get_building_logo(),
+            building_image=self.get_building_image(),
+            update_endpoint=update_endpoint
+        )
 
     def get_named_model_option(self, name):
         """Given a named model, return the option."""
@@ -493,7 +526,22 @@ class Project(models.Model):
             for data in option.get("targets", []):
                 _create_target_period(data)
 
+    def user_can_view(self, user):
+        if user.is_superuser:
+            return True
+        return (self.view_group is not None) and user.groups.filter(pk=self.view_group.pk).exists()
+
+    def __assign_blank_view_group(self):
+        """
+        Creates a new Group and assign it to view_gruop field
+        """
+        view_group = Group(name=f"{project.name} view group")
+        view_group.save()
+        project.view_group = view_group
+
     def save(self, *args, **kwargs):
+        if not self.pk:
+            self.__assign_blank_view_group()
         model_selection_changed = (
             self.__selected_model_name is not self.selected_model_name
         )
@@ -815,6 +863,10 @@ class Period(ModelPeriod, models.Model):
         return self.project.lowest_monthly_rent
 
     @property
+    def highest_monthly_rent(self):
+        return self.project.highest_monthly_rent
+
+    @property
     def total_units(self):
         return self.project.total_units
 
@@ -825,6 +877,7 @@ class Period(ModelPeriod, models.Model):
         self._metrics["total_units"] = PointMetric()
         self._metrics["average_monthly_rent"] = PointMetric()
         self._metrics["lowest_monthly_rent"] = PointMetric()
+        self._metrics["highest_monthly_rent"] = PointMetric()
 
     class Meta:
         # Always sort Periods with the earliest period first.
