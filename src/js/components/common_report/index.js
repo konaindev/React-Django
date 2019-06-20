@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import AcquisitionFunnelReport from "../acquisition_funnel_report";
-import BaselineComparisonMatrix from "../baseline_comparison_matrix";
 import CampaignInvestmentReport from "../campaign_investment_report";
 import Container from "../container";
 import LeasingPerformanceReport from "../leasing_performance_report";
@@ -33,7 +32,6 @@ export default class CommonReport extends Component {
         <CampaignInvestmentReport report={report} />
         <AcquisitionFunnelReport report={report} type={type} />
         <FunnelPerformanceAnalysis {...report} />
-        {type === "baseline" && <BaselineComparisonMatrix report={report} />}
       </Container>
     );
   }

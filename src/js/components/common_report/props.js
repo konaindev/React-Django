@@ -1,5 +1,4 @@
 import React from "react";
-import { competitors } from "../baseline_report_page/props";
 import { funnel_history } from "../funnel_performance_analysis/FunnelProps";
 
 // dummy data
@@ -139,7 +138,6 @@ export const BASELINE_REPORT = {
     app: 7,
     exe: 5
   },
-  competitors,
   funnel_history
 };
 

@@ -14,31 +14,31 @@ exports[`CampaignPlan renders correctly 1`] = `
         className="button-group"
       >
         <button
-          className="button button--selected button--default button-group__item"
+          className="button button--selected button--undefined button-group__item"
           onClick={[Function]}
         >
           Overview
         </button>
         <button
-          className="button button--default button-group__item"
+          className="button button--undefined button-group__item"
           onClick={[Function]}
         >
           Reputation Building
         </button>
         <button
-          className="button button--default button-group__item"
+          className="button button--undefined button-group__item"
           onClick={[Function]}
         >
           Demand Creation
         </button>
         <button
-          className="button button--default button-group__item"
+          className="button button--undefined button-group__item"
           onClick={[Function]}
         >
           Leasing Enablement
         </button>
         <button
-          className="button button--default button-group__item"
+          className="button button--undefined button-group__item"
           onClick={[Function]}
         >
           Marketing Intelligence

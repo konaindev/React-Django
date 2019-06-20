@@ -27,7 +27,6 @@ exports[`PropertyCardList renders correctly 1`] = `
           >
             <button
               className="button button--outline"
-              onClick={[Function]}
             >
               View Report
             </button>
@@ -81,7 +80,6 @@ exports[`PropertyCardList renders correctly 1`] = `
           >
             <button
               className="button button--outline"
-              onClick={[Function]}
             >
               View Report
             </button>
@@ -135,7 +133,6 @@ exports[`PropertyCardList renders correctly 1`] = `
           >
             <button
               className="button button--outline"
-              onClick={[Function]}
             >
               View Report
             </button>
@@ -189,7 +186,6 @@ exports[`PropertyCardList renders correctly 1`] = `
           >
             <button
               className="button button--outline"
-              onClick={[Function]}
             >
               View Report
             </button>
@@ -243,7 +239,6 @@ exports[`PropertyCardList renders correctly 1`] = `
           >
             <button
               className="button button--outline"
-              onClick={[Function]}
             >
               View Report
             </button>
@@ -297,7 +292,6 @@ exports[`PropertyCardList renders correctly 1`] = `
           >
             <button
               className="button button--outline"
-              onClick={[Function]}
             >
               View Report
             </button>
@@ -351,7 +345,6 @@ exports[`PropertyCardList renders correctly 1`] = `
           >
             <button
               className="button button--outline"
-              onClick={[Function]}
             >
               View Report
             </button>
@@ -405,7 +398,6 @@ exports[`PropertyCardList renders correctly 1`] = `
           >
             <button
               className="button button--outline"
-              onClick={[Function]}
             >
               View Report
             </button>
@@ -459,7 +451,6 @@ exports[`PropertyCardList renders correctly 1`] = `
           >
             <button
               className="button button--outline"
-              onClick={[Function]}
             >
               View Report
             </button>
@@ -513,7 +504,6 @@ exports[`PropertyCardList renders correctly 1`] = `
           >
             <button
               className="button button--outline"
-              onClick={[Function]}
             >
               View Report
             </button>

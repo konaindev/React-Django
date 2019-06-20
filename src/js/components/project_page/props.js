@@ -1,7 +1,6 @@
 export const project = {
   public_id: "pro_example",
-  name: "Portland Multi Family",
-  update_endpoint: "/projects/pro_example/update/"
+  name: "Portland Multi Family"
 };
 
 // see data/schemas/ts/ReportLinks.ts and data/examples/ReportLinks.json

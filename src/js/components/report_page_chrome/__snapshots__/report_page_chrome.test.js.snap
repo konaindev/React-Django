@@ -53,59 +53,50 @@ exports[`ReportPageChrome renders correctly 1`] = `
           </nav>
         </div>
       </div>
-      <section
-        className="report-page-subheader"
+      <div
+        className="project-report-links"
       >
-        <div
-          className="container"
-        >
-          <div
-            className="subheader__inner"
+        <ul>
+          <li
+            className="selected enabled"
+            data-url="/projects/pro_example/baseline/"
+            onClick={[Function]}
           >
-            <div
-              className="project-report-links"
-            >
-              <ul>
-                <li
-                  className="selected enabled"
-                  data-url="/projects/pro_example/baseline/"
-                  onClick={[Function]}
-                >
-                  Baseline
-                </li>
-                <li
-                  className="enabled"
-                  data-url="/projects/pro_example/market/"
-                  onClick={[Function]}
-                >
-                  Market Analysis
-                </li>
-                <li
-                  className="disabled"
-                  data-url="#"
-                  onClick={[Function]}
-                >
-                  Modeling
-                </li>
-                <li
-                  className="disabled"
-                  data-url="#"
-                  onClick={[Function]}
-                >
-                  Campaign Plan
-                </li>
-                <li
-                  className="enabled"
-                  data-url="/projects/pro_example/performance/last-week/"
-                  onClick={[Function]}
-                >
-                  Performance
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
+            Baseline
+          </li>
+          <li
+            className="enabled"
+            data-url="/projects/pro_example/market/"
+            onClick={[Function]}
+          >
+            Market Analysis
+          </li>
+          <li
+            className="disabled"
+            data-url="#"
+            onClick={[Function]}
+          >
+            Modeling
+          </li>
+          <li
+            className="disabled"
+            data-url="#"
+            onClick={[Function]}
+          >
+            Campaign Plan
+          </li>
+          <li
+            className="enabled"
+            data-url="/projects/pro_example/performance/last-week/"
+            onClick={[Function]}
+          >
+            Performance
+          </li>
+        </ul>
+      </div>
+      <div>
+        topItems
+      </div>
     </div>
     <div
       className="page-chrome__top-chrome__spacing-fix"

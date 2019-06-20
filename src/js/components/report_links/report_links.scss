@@ -1,29 +1,32 @@
 @import "css/base.scss";
 
-$link-h-spacing: 1.625rem; // 26px
-$link-v-spacing: 0.875rem; // 14px
-
 .project-report-links {
-    display: inline-block;
+    position: relative;
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    height: 76px;
+    background-color: $default-background-color;
+    border-bottom: solid 1px $nav-link-border-color;
 }
 
 .project-report-links ul {
+    position: absolute;
+    bottom: -1px;
     display: inline-block;
-    list-style: none;
-    padding: 0;
-    margin-bottom: -1px;
-    margin-left: -1 * $link-h-spacing;
+    text-align: center;
+    list-style-position: inside;
+    margin-left: -$s4;
 }
 
 .project-report-links li {
     cursor: pointer;
     display: inline-block;
-    margin: 0 $link-h-spacing;
-    padding: $link-v-spacing 0;
+    margin: 0 $s4;
+    padding-bottom: $s4;
     color: $nav-link-color;
-    font-size: $text-base;
     letter-spacing: 0.5px;
-    line-height: $text-xl;
 }
 
 .project-report-links li.disabled {
