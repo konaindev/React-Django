@@ -55,7 +55,9 @@ class DashboardView(LoginRequiredMixin, ReactView):
             )
 
         locations = []
-        for project in Project.objects.filter(account_id=user.account_id).distinct("address__state", "address__city"):
+        for project in Project.objects.filter(account_id=user.account_id).distinct(
+            "address__state", "address__city"
+        ):
             if project.address:
                 state = project.address.state
                 city = project.address.city
