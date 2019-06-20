@@ -37,7 +37,8 @@ $border-color: $gray-4;
     &.select {
         .select__control {
             border: none;
-            border-radius: 0;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
         }
 
         .select__menu-list {
