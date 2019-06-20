@@ -10,12 +10,11 @@ $header-half-inset: 36px;
 
     &__inner {
         height: $header-height;
+        padding: $s5 0;
         line-height: $line-height-tight;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding-top: $s5;
-        padding-bottom: $s5;
     }
 
     &__items-inner {

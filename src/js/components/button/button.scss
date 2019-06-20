@@ -1,11 +1,21 @@
 @import "css/base.scss";
 
 .button {
+    background-color: $button-default-bg-color;
     padding: $s3 $s4;
     border-radius: $border-radius-default;
+    color: $button-default-text-color;
     outline: none !important;
     font-size: $text-sm;
     text-decoration: none;
+
+    &:hover, &:focus {
+        background-color: lighten($button-default-bg-color, 3%);
+    }
+
+    &:active {
+        background-color: darken($button-default-bg-color, 2%);
+    }
 
     &--block {
         width: 100%;
@@ -14,19 +24,6 @@
 
     &--uppercase {
         text-transform: uppercase;
-    }
-
-    &--default {
-        background-color: $button-default-bg-color;
-        color: $button-default-text-color;
-
-        &:hover, &:focus {
-            background-color: lighten($button-default-bg-color, 3%);
-        }
-
-        &:active {
-            background-color: darken($button-default-bg-color, 2%);
-        }
     }
 
     &--primary {
@@ -68,16 +65,6 @@
 
         &:active {
             background-color: darken($button-default-active-bg-color, 2%);
-        }
-    }
-
-    &--disabled {
-        background-color: $gray-4;
-        cursor: not-allowed;
-        color: #404e5d;
-
-        &:hover, &:focus, &:active {
-            background-color: $button-default-bg-color;
         }
     }
 }

@@ -7,7 +7,6 @@ export const props = {
         start: "2018-07-23",
         end: "2018-12-17"
       },
-      property_name: "Portland Multi Family",
       property: {
         average_monthly_rent: "1847.00",
         lowest_monthly_rent: "1847.00",

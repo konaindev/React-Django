@@ -2,26 +2,15 @@
 
 exports[`Button renders default button correctly 1`] = `
 <button
-  className="button button--default"
-  onClick={[Function]}
+  className="button button--undefined"
 >
   Default Button
 </button>
 `;
 
-exports[`Button renders disabled button correctly 1`] = `
-<button
-  className="button button--disabled"
-  onClick={[Function]}
->
-  Disabled Button
-</button>
-`;
-
 exports[`Button renders selected button correctly 1`] = `
 <button
-  className="button button--selected button--default"
-  onClick={[Function]}
+  className="button button--selected button--undefined"
 >
   Selected Button
 </button>

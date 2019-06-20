@@ -11,16 +11,13 @@ export default class ModelingReportPage extends Component {
   };
 
   render() {
-    const { project, report, report_links, share_info } = this.props;
-
     return (
       <ReportPageChrome
-        project={project}
+        project={this.props.project}
         current_report_name="modeling"
-        report_links={report_links}
-        share_info={share_info}
+        report_links={this.props.report_links}
       >
-        <ModelingView {...report} />{" "}
+        <ModelingView {...this.props.report} />{" "}
       </ReportPageChrome>
     );
   }
