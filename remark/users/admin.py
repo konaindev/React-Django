@@ -17,7 +17,6 @@ class UserAdmin(AuthUserAdmin):
                 "fields": (
                     "email",
                     "password",
-                    "avatar",
                     "account",
                     "projects",
                     "person"

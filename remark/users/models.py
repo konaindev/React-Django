@@ -4,17 +4,18 @@ from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.utils.crypto import get_random_string
-from stdimage.models import StdImageField
 
 from remark.lib.tokens import public_id
 from remark.lib.fields import NormalizedEmailField
 from .constants import ACCOUNT_TYPE
 
+from remark.crm.models import Person
+
 
 def usr_public_id():
     return public_id("usr")
 
-
+# This is still here due to a migration referencing it
 def avatar_media_path(user, filename):
     """
     Given a User instance, and the filename as supplied during upload,
@@ -52,17 +53,13 @@ class UserManager(BaseUserManager):
         if not email:
             raise ValueError("email must be set")
 
-        # Create the crm.Person with email provided above
-        person = Person(first_name="", last_name="", email=email)
-        person.save()
-
         user = self.model(email=email, **extra_fields)
         if raw_password:
             user.set_password(raw_password)
         if password:
             user.password = password
-        user.person = person
         user.save(using=self._db)
+
         return user
 
     def create_user_hashed_password(self, email, password=None, **extra_fields):
@@ -113,30 +110,6 @@ class User(PermissionsMixin, AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
 
-    person = models.ForeignKey(
-        "crm.Person",
-        related_name="users",
-        on_delete=models.PROTECT,
-        null=True,
-        blank=True,
-    )
-
-    @property
-    def first_name(self):
-        return self.person.first_name
-
-    @property
-    def last_name(self):
-        return self.person.last_name
-
-    avatar = StdImageField(
-        null=True,
-        blank=True,
-        default="",
-        upload_to=avatar_media_path,
-        help_text="""A full-resolution user avatar.<br/>Resized variants (100x100, 36x36) will also be created on Amazon S3.""",
-        variations={"regular": (100, 100, True), "thumbnail": (36, 36, True)},
-    )
     public_id = models.CharField(
         unique=True,
         default=usr_public_id,
