@@ -85,6 +85,7 @@
         font-family: $font-sans;
         font-size: $text-sm;
         line-height: $text-xl;
+        cursor: pointer;
 
         &--is-focused,
         &--is-selected {
