@@ -11,6 +11,8 @@ from remark.lib.spreadsheets import (
 
 from .base import ProjectExcelImporter
 
+from datetime import timedelta
+
 
 def find(predicate):
     return find_row("OUTPUT!A", predicate, target="B")
@@ -166,21 +168,18 @@ class ModelingImporter(ProjectExcelImporter):
         return self.schema(self.OUTPUT_SCHEMA)
 
     def clean_model_targets(self):
-        baseline_weeks = self.schema(
-            IntCell(find_row("META!A", "baseline weeks", target="B"))
-        )
         start_row = 4
-
-        # row_range(...) is inclusive, and we want to get one extra row
-        # so we can determine the correct end date for each intermediate row.
-        end_row = start_row + baseline_weeks
+        end_row = self.schema(
+            IntCell(find_row("INPUTS!A", "Model End Row", target="B"))
+        )
         raw_targets = self.schema_list(
             schema=self.MODEL_SCHEMA, start=start_row, end=end_row
         )
 
-        # Fix up the end dates for each of the targets
-        for raw_target, next_raw_target in zip(raw_targets[:-1], raw_targets[1:]):
-            raw_target["end"] = next_raw_target["start"]
+        # Add the end dates for each of the targets
+        for target in raw_targets:
+            start = target["start"]
+            target["end"] = start + timedelta(days=7)
 
         # Fix up the total investment targets
         for raw_target in raw_targets:
@@ -193,7 +192,7 @@ class ModelingImporter(ProjectExcelImporter):
                 )
 
         # Drop the extraneous period.
-        return raw_targets[:-1]
+        return raw_targets
 
     def clean(self):
         super().clean()

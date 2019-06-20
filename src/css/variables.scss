@@ -156,6 +156,11 @@ $map-road-color: $gray-2;
 $map-water-color: $gray-2;
 $map-location-text-color: $gray-6;
 $map-land-color: $gray-3;
+$map-hover-color: $blue-3;
+$map-disable-color: $gray-4;
+$map-label-color: $highlight-gray-3;
+$map-label-hover-color: $gray-5;
+
 
 $rtir-category-bg-color-0: $blue-1;
 $rtir-category-bg-color-1: $blue-2;
@@ -273,6 +278,7 @@ $small-box-vertical-spacing: 10px;
     mapWaterColor: $map-water-color;
     mapRegionBgColor: $map-region-bg-color;
     mapRegionBgOpacity: $map-region-bg-opacity;
+    mapLineHeight: $text-base;
 
     pieColorUnallocated: $gray-4;
     pieColor1: $green-1;
