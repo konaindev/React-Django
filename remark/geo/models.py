@@ -129,6 +129,18 @@ class Address(models.Model):
         help_text="Raw JSON response from google geocode",
     )
 
+    def to_jsonable(self):
+        """Return a representation that can be converted to a JSON string."""
+        return {
+            "street_address_1": self.street_address_1,
+            "street_address_2": self.street_address_2,
+            "city": self.city,
+            "state": self.state,
+            "zip_code": self.zip_code,
+            "country": self.country,
+            "formatted_address": self.formatted_address,
+        }
+
     @property
     def geocode_result(self):
         try:

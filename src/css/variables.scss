@@ -94,6 +94,10 @@ $accent-times-color: $blue-3;
 
 $table-border-color: $gray-4;
 
+$modal-window-background-color: $gray-3;
+$modal-window-overlay-color: rgba(16,20,23,0.85);
+$modal-window-border-radius: 6px;
+
 // Various other colors
 $default-background-color: $gray-2;
 $alt-default-background-color: $gray-3;
@@ -103,8 +107,17 @@ $input-border-color: $gray-5;
 $input-border: 1px solid $input-border-color;
 $input-focus-border-color: $blue-3;
 $input-text-color: $highlight-gray-3;
-$select-option-background-color: $gray-3;
 $input-label-color: $highlight-gray-3;
+$input-background-color: $gray-3;
+$input-text-active-color: $cyan-3;
+$input-placeholder-color: $gray-6;
+
+$select-option-background-color: $gray-3;
+$select-option-background-color2: $gray-6;
+$select-option-focused-color: $gray-4;
+$select-option-active-color: $gray-5;
+$select-background-color: $gray-3;
+$select-border-radius: 4px;
 
 $release-note-link-color: $cyan-3;
 
@@ -250,6 +263,8 @@ $border-radius-default: 0.25rem;
 $border-radius-lg: 0.5rem;
 $border-radius-full: 9999px;
 
+$container-width: 82.5rem; // 1320px
+$container-padding: 2rem;
 $box-space: 30px;
 $small-box-vertical-spacing: 10px;
 

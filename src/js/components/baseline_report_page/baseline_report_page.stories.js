@@ -5,8 +5,11 @@ import { action } from "@storybook/addon-actions";
 import { linkTo } from "@storybook/addon-links";
 
 import BaselineReportPage from "./index";
-import { props } from "./props";
+import props, { no_competitors_props, one_competitor_props } from "./props";
 
-storiesOf("BaselineReportPage", module).add("default", () => (
-  <BaselineReportPage {...props} />
-));
+storiesOf("BaselineReportPage", module)
+  .add("default", () => <BaselineReportPage {...props} />)
+  .add("No Competitors", () => <BaselineReportPage {...no_competitors_props} />)
+  .add("One Competitor", () => (
+    <BaselineReportPage {...one_competitor_props} />
+  ));

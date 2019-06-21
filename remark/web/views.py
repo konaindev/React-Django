@@ -4,9 +4,10 @@ from remark.crm.models import Business
 from remark.geo.models import State
 from remark.projects.models import Fund, Project
 from remark.lib.views import ReactView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class DashboardView(ReactView):
+class DashboardView(LoginRequiredMixin, ReactView):
     """Render dashboard page."""
 
     page_class = "DashboardPage"

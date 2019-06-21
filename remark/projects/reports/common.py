@@ -20,6 +20,7 @@ SCHEMA_MAP = {
     "property": {
         "average_monthly_rent": "average_monthly_rent",
         "lowest_monthly_rent": "lowest_monthly_rent",
+        "highest_monthly_rent": "highest_monthly_rent",
         "total_units": "total_units",
         "cost_per_exe_vs_rent": "cost_per_exe_vs_lowest_monthly_rent",
         "leasing": {
@@ -202,7 +203,7 @@ class CommonReport(ReportBase):
     def build_funnel_history(self):
         return None
 
-    def to_jsonable(self):
+    def build_json_data(self):
         """
         Return a structure that can be converted to a JSON string.
 
@@ -227,6 +228,7 @@ class CommonReport(ReportBase):
         return dict(
             dates=dates,
             property_name=self.project.name,
+            address=self.project.address.to_jsonable() if self.project.address is not None else None,
             **property_report,
             targets=targets,
             four_week_funnel_averages=four_week_funnel_averages,
@@ -234,3 +236,7 @@ class CommonReport(ReportBase):
             whiskers=self.whiskers,
             deltas=deltas,
         )
+
+    def to_jsonable(self):
+        return self.build_json_data()
+

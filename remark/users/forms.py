@@ -3,6 +3,7 @@ from django import forms
 
 from .models import Account, User
 from remark.projects.models import Project
+from remark.crm.models import Person
 
 
 class AccountForm(forms.ModelForm):
@@ -49,13 +50,19 @@ class UserForm(forms.ModelForm):
         )
     )
 
+    person = forms.ModelChoiceField(
+        queryset=Person.objects.all(),
+        required=False,
+        empty_label="None"
+    )
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         if self.instance.pk:
             self.fields['projects'].initial = self.instance.projects.all()
 
     def save(self, commit=True):
-        user = super().save(commit=False)  
+        user = super().save(commit=False)
         if commit:
             user.save()
 
