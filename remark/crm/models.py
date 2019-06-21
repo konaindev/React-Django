@@ -135,7 +135,7 @@ class Person(models.Model):
     )
 
     user = models.ForeignKey(
-        "users.User", on_delete=models.CASCADE, blank=True, help_text="User associated with this person"
+        "users.User", on_delete=models.CASCADE, null=True, blank=True, help_text="User associated with this person"
     )
 
     avatar = StdImageField(
