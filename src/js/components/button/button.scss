@@ -85,8 +85,9 @@
 
     &--disabled {
         background-color: $gray-4;
+        color: $button-disabled-text-color;
         cursor: not-allowed;
-        color: #404e5d;
+        pointer-events: none;
 
         &:hover, &:focus, &:active {
             background-color: $button-default-bg-color;

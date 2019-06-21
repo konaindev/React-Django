@@ -23,7 +23,8 @@ AddPropertyModal.propTypes = {
     states: PropTypes.arrayOf(
       PropTypes.shape({ id: PropTypes.string, name: PropTypes.string })
     ).isRequired,
-    post_url: PropTypes.string
+    post_url: PropTypes.string,
+    onSuccess: PropTypes.func
   }).isRequired,
   onClose: PropTypes.func
 };

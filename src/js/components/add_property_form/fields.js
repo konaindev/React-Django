@@ -41,7 +41,7 @@ FieldInput.defaultProps = {
 };
 
 export class WrappedFields extends Component {
-  static fields = ["city", "state", "zipcode"];
+  static fields = ["city", "state", "zip_code"];
 
   onWrappedFocus = e => {
     const fields = _clone(this.props.touched);
@@ -87,7 +87,7 @@ export class WrappedFields extends Component {
           />
           <FormInput
             className="add-property-form__input add-property-form__input--zipcode"
-            name="zipcode"
+            name="zip_code"
             placeholder="Zipcode"
             type="text"
             onFocus={this.onWrappedFocus}

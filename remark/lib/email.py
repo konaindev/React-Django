@@ -87,4 +87,3 @@ def build_message(emails_to, template_dir, context=None):
         "build_message: build message with subject: {}".format(rendered_subject)
     )
     return message
-

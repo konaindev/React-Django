@@ -1,8 +1,11 @@
 import { Formik, Form } from "formik";
+import _clone from "lodash/clone";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import CloseIcon from "../../icons/close";
+import { post } from "../../utils/api";
+import { convertBackendErrors } from "../../utils/misc";
 import Button from "../button";
 import { FormSelect } from "../select";
 
@@ -11,16 +14,22 @@ import { default as Field, FieldInput, WrappedFields } from "./fields";
 import { propertySchema } from "./validators";
 
 const initialValues = {
+  building_photo: null,
   property_name: "",
-  address: "",
-  address2: "",
+  street_address_1: "",
+  street_address_2: "",
   city: "",
   state: null,
-  zipcode: "",
+  zip_code: "",
   package: null
 };
 
 export default class AddPropertyForm extends Component {
+  constructor(props) {
+    super(props);
+    this.formik = React.createRef();
+  }
+
   get packages() {
     return this.props.packages.map(p => ({ label: p.name, value: p.id }));
   }
@@ -51,7 +60,7 @@ export default class AddPropertyForm extends Component {
         <input
           accept="image/*"
           type="file"
-          name="photo"
+          name="building_photo"
           style={{ display: "none" }}
           onChange={this.getPhoto}
         />
@@ -72,6 +81,7 @@ export default class AddPropertyForm extends Component {
   }
 
   state = { image: null };
+  isSubmitting = false;
 
   getPhoto = e => {
     const file = e.target.files[0];
@@ -80,13 +90,40 @@ export default class AddPropertyForm extends Component {
       this.setState({ image: e.target.result });
     };
     reader.readAsDataURL(file);
+    this.formik.current.setFieldValue("building_photo", file);
   };
 
   onCloseImage = () => {
     this.setState({ image: null });
   };
 
-  onSubmit = () => {};
+  onSubmit = (values, actions) => {
+    if (this.isSubmitting || !this.props.post_url) {
+      return;
+    }
+    this.isSubmitting = true;
+    const data = _clone(values);
+    data.product_type = values.product_type.value;
+    data.state = values.state.value;
+    const formData = new FormData();
+    for (const k of Object.keys(data)) {
+      formData.append(k, data[k]);
+    }
+    post(this.props.post_url, formData)
+      .then(() => {
+        actions.setSubmitting(false);
+        this.isSubmitting = false;
+        this.props.onSuccess();
+      })
+      .catch(error => {
+        actions.setSubmitting(false);
+        this.isSubmitting = false;
+        const r = error.response;
+        if (r && r.status === 400) {
+          actions.setErrors(convertBackendErrors(r.data));
+        }
+      });
+  };
 
   render() {
     return (
@@ -95,12 +132,14 @@ export default class AddPropertyForm extends Component {
         initialValues={initialValues}
         validateOnBlur={true}
         onSubmit={this.onSubmit}
+        ref={this.formik}
       >
         {({ errors, touched, values, isValid, setTouched, setValues }) => (
           <Form
             className="add-property-form"
             action={this.props.post_url}
             method="post"
+            autoComplete="off"
           >
             <div className="add-property-form__column">
               <div
@@ -123,7 +162,7 @@ export default class AddPropertyForm extends Component {
               <Field label="Address:">
                 <FieldInput
                   className="add-property-form__input"
-                  name="address"
+                  name="street_address_1"
                   placeholder="Street Address 1"
                   type="text"
                 />
@@ -131,7 +170,7 @@ export default class AddPropertyForm extends Component {
               <Field>
                 <FieldInput
                   className="add-property-form__input"
-                  name="address2"
+                  name="street_address_2"
                   placeholder="Street Address 2"
                   type="text"
                 />
@@ -149,7 +188,7 @@ export default class AddPropertyForm extends Component {
               <Field label="Package Option:">
                 <FieldInput
                   className="add-property-form__input"
-                  name="package"
+                  name="product_type"
                   options={this.packages}
                   placeholder="Select a Package..."
                   component={FormSelect}
@@ -180,5 +219,10 @@ AddPropertyForm.propTypes = {
   states: PropTypes.arrayOf(
     PropTypes.shape({ id: PropTypes.string, name: PropTypes.string })
   ).isRequired,
-  post_url: PropTypes.string
+  post_url: PropTypes.string,
+  csrfToken: PropTypes.string,
+  onSuccess: PropTypes.func
+};
+AddPropertyForm.defaultProps = {
+  onSuccess() {}
 };

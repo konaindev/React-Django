@@ -148,6 +148,8 @@ $button-primary-active-bg-color: $blue-2;
 $button-primary-text-color: $highlight-gray-3;
 $button-primary-active-text-color: $highlight-gray-3;
 
+$button-disabled-text-color: $gray-5;
+
 $button-group-line-color: $gray-4;
 
 $map-circle-point-color: $green-3;
@@ -282,6 +284,7 @@ $small-box-vertical-spacing: 10px;
     mapWaterColor: $map-water-color;
     mapRegionBgColor: $map-region-bg-color;
     mapRegionBgOpacity: $map-region-bg-opacity;
+    mapLineHeight: $text-base;
 
     pieColorUnallocated: $gray-4;
     pieColor1: $green-1;

@@ -2755,7 +2755,7 @@ A 0 0 0 0 0, NaN, NaN
                 className="rt-thead -header"
                 style={
                   Object {
-                    "minWidth": "300px",
+                    "minWidth": "500px",
                   }
                 }
               >
@@ -2819,6 +2819,44 @@ A 0 0 0 0 0, NaN, NaN
                     <div
                       className=""
                     >
+                      Anonymous 1
+                    </div>
+                  </div>
+                  <div
+                    className="rt-th text-right"
+                    onClick={[Function]}
+                    role="columnheader"
+                    style={
+                      Object {
+                        "flex": "100 0 auto",
+                        "maxWidth": null,
+                        "width": "100px",
+                      }
+                    }
+                    tabIndex="-1"
+                  >
+                    <div
+                      className=""
+                    >
+                      Anonymous 2
+                    </div>
+                  </div>
+                  <div
+                    className="rt-th text-right"
+                    onClick={[Function]}
+                    role="columnheader"
+                    style={
+                      Object {
+                        "flex": "100 0 auto",
+                        "maxWidth": null,
+                        "width": "100px",
+                      }
+                    }
+                    tabIndex="-1"
+                  >
+                    <div
+                      className=""
+                    >
                       Cross-Sample
                       <br />
                       Average
@@ -2830,7 +2868,7 @@ A 0 0 0 0 0, NaN, NaN
                 className="rt-tbody"
                 style={
                   Object {
-                    "minWidth": "300px",
+                    "minWidth": "500px",
                   }
                 }
               >
@@ -2869,6 +2907,34 @@ A 0 0 0 0 0, NaN, NaN
                       }
                     >
                       
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Seattle, WA
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Seattle, WA
                     </div>
                     <div
                       className="rt-td baseline-comparison-table__value-cell"
@@ -2934,6 +3000,34 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
+                      Jan '17 - May '18
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Feb '19 - Mar '19
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
                       
                     </div>
                   </div>
@@ -2986,7 +3080,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      5 Months
+                      16 Months
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      1 Months
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      7 Months
                     </div>
                   </div>
                 </div>
@@ -3038,7 +3160,33 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      201
+                      200
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    />
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      134
                     </div>
                   </div>
                 </div>
@@ -3090,7 +3238,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      $1,847
+                      $7,278
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $1,400
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $3,508
                     </div>
                   </div>
                 </div>
@@ -3116,6 +3292,30 @@ A 0 0 0 0 0, NaN, NaN
                     >
                       Max. Monthly Rental ($)
                     </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    />
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    />
                     <div
                       className="rt-td baseline-comparison-table__value-cell"
                       onClick={[Function]}
@@ -3192,7 +3392,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      $1,847
+                      $7,278
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $1,948
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $3,691
                     </div>
                   </div>
                 </div>
@@ -3244,7 +3472,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      $181k
+                      $66k
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $5k
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $84k
                     </div>
                   </div>
                 </div>
@@ -3296,7 +3552,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      $3m
+                      $2m
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $655k
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $2m
                     </div>
                   </div>
                 </div>
@@ -3348,7 +3632,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      14x
+                      26x
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      120x
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      53x
                     </div>
                   </div>
                 </div>
@@ -3400,7 +3712,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      95%
+                      42%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      74%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      70%
                     </div>
                   </div>
                 </div>
@@ -3452,7 +3792,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      63%
+                      0%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      0%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      21%
                     </div>
                   </div>
                 </div>
@@ -3504,7 +3872,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      93%
+                      0%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      73%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      55%
                     </div>
                   </div>
                 </div>
@@ -3556,7 +3952,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      20%
+                      0%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      16%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      12%
                     </div>
                   </div>
                 </div>
@@ -3608,7 +4032,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      30
+                      0
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      0
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      10
                     </div>
                   </div>
                 </div>
@@ -3660,7 +4112,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      18
+                      0
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      2
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      7
                     </div>
                   </div>
                 </div>
@@ -3712,7 +4192,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      80
+                      0
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      31
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      37
                     </div>
                   </div>
                 </div>
@@ -3764,7 +4272,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      20
+                      0
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      2
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      7
                     </div>
                   </div>
                 </div>
@@ -3816,7 +4352,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      11,209
+                      10,786
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      0
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      7,332
                     </div>
                   </div>
                 </div>
@@ -3868,7 +4432,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      673
+                      487
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      137
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      432
                     </div>
                   </div>
                 </div>
@@ -3922,6 +4514,34 @@ A 0 0 0 0 0, NaN, NaN
                     >
                       269
                     </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      35
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      191
+                    </div>
                   </div>
                 </div>
                 <div
@@ -3972,7 +4592,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      97
+                      30
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      37
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      55
                     </div>
                   </div>
                 </div>
@@ -4024,7 +4672,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      77
+                      27
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      31
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      45
                     </div>
                   </div>
                 </div>
@@ -4076,7 +4752,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      1%
+                      0%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      0%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      0%
                     </div>
                   </div>
                 </div>
@@ -4115,6 +4819,34 @@ A 0 0 0 0 0, NaN, NaN
                       }
                     >
                       40%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      55%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      26%
                     </div>
                     <div
                       className="rt-td baseline-comparison-table__value-cell"
@@ -4180,7 +4912,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      36%
+                      11%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      106%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      51%
                     </div>
                   </div>
                 </div>
@@ -4232,7 +4992,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      80%
+                      90%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      84%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      85%
                     </div>
                   </div>
                 </div>
@@ -4284,7 +5072,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      $9.90
+                      $6.12
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $0.00
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $5.34
                     </div>
                   </div>
                 </div>
@@ -4336,7 +5152,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      $165.00
+                      $135.52
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $33.94
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $111.49
                     </div>
                   </div>
                 </div>
@@ -4388,7 +5232,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      $413.00
+                      $245.35
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $132.87
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $263.74
                     </div>
                   </div>
                 </div>
@@ -4440,7 +5312,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      $1,515.00
+                      $2,200.00
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $125.68
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $1,280.23
                     </div>
                   </div>
                 </div>
@@ -4492,7 +5392,35 @@ A 0 0 0 0 0, NaN, NaN
                         }
                       }
                     >
-                      $1,909
+                      $2,444
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $150
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $1,501
                     </div>
                   </div>
                 </div>
