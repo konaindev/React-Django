@@ -95,9 +95,13 @@
     }
 
     &__address {
-        color: $content-text-secondary-color;
+        height: $property-card-address-height;
+        overflow: hidden;
         font-size: $text-xs;
         line-height: $line-height-loose;
+        color: $content-text-secondary-color;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     &__status {
