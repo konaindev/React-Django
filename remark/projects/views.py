@@ -186,7 +186,7 @@ class CampaignPlanPageView(ReportPageViewBase):
     selector_class = CampaignPlanSelector
     page_class = "CampaignPlanPage"
     page_title = "Campaign Plan"
-    report_name = "campain_plan"
+    report_name = "campaign_plan"
 
 
 class TAMExportView(FormView, SingleObjectMixin):
