@@ -27,8 +27,10 @@
 
     &__image {
         height: $property-card-image-height;
-        background-size: cover;
+        background-image: url("../../../images/apartment.svg");
         background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
     }
 
     &__overlay {

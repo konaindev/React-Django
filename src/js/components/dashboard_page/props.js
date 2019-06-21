@@ -4,7 +4,7 @@ export const props = {
       property_name: "Meridian SLC",
       property_id: "pro_1prk0l2sdc0jv8dr",
       address: "123 4th Avenue, Seattle WA 98106",
-      image_url: "https://i.imgur.com/UEH4gfU.jpg",
+      image_url: "",
       performance_rating: 2,
       url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
     },
