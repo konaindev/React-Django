@@ -11,4 +11,9 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.AddField(
+            model_name='project',
+            name='competitors',
+            field=models.ManyToManyField(blank=True, related_name='_project_competitors_+', to='projects.Project'),
+        ),
     ]
