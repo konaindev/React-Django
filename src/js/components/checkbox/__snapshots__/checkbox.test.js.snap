@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Checkbox render default 1`] = `
+<div
+  className="checkbox"
+/>
+`;
+
+exports[`Checkbox selected 1`] = `
+<div
+  className="checkbox checkbox--selected"
+/>
+`;

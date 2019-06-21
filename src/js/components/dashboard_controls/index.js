@@ -4,8 +4,10 @@ import React from "react";
 
 import MultiSelect from "../multi_select";
 import SearchField from "../search_field";
+import GroupSelect from "../group_select";
 import SortSelect from "../sort_select";
 
+import { regions } from "./regions";
 import "./dashboard_controls.scss";
 
 export default class DashboardControls extends React.PureComponent {
@@ -29,6 +31,7 @@ export default class DashboardControls extends React.PureComponent {
     filters: PropTypes.shape({
       q: PropTypes.string,
       ct: PropTypes.array,
+      st: PropTypes.array,
       fd: PropTypes.array,
       am: PropTypes.array,
       pm: PropTypes.array
@@ -44,6 +47,10 @@ export default class DashboardControls extends React.PureComponent {
   static multiSelectStyle = {
     menu: provided => ({ ...provided, width: 320 })
   };
+
+  static locationsStyle = columns => ({
+    menu: provided => ({ ...provided, width: 210 * columns })
+  });
 
   constructor(props) {
     super(props);
@@ -74,15 +81,39 @@ export default class DashboardControls extends React.PureComponent {
   }
 
   get locationsOptions() {
-    return this.props.locations.map(location => ({
-      label: location.label,
-      value: location.value
-    }));
+    return regions
+      .map(r => ({
+        label: r.name,
+        options: this.props.locations
+          .filter(location => r.states.includes(location.state))
+          .map(location => ({
+            label: location.label,
+            city: location.city,
+            state: location.state,
+            value: location.label
+          }))
+      }))
+      .filter(region => region.options.length);
   }
 
   getSelectedOptions = (options, name) => {
     const values = _get(this.state.filters, name, []);
     return options.filter(o => values.includes(o.value));
+  };
+
+  getSelectedLocationsOptions = options => {
+    const cities = _get(this.state.filters, "ct", []);
+    const states = _get(this.state.filters, "st", []);
+    return options
+      .reduce((acc, o) => [...acc, ...o.options], [])
+      .filter(o => cities.includes(o.city) && states.includes(o.state));
+  };
+
+  onChangeLocation = options => {
+    const filters = { ...this.state.filters };
+    filters.ct = [...new Set(options.map(o => o.city))];
+    filters.st = [...new Set(options.map(o => o.state))];
+    this.setState({ filters });
   };
 
   onChangeHandler = (options, field) => {
@@ -106,9 +137,8 @@ export default class DashboardControls extends React.PureComponent {
   render() {
     const searchText = this.state.filters?.q;
     const locationsOptions = this.locationsOptions;
-    const selectedLocations = this.getSelectedOptions(
-      this.locationsOptions,
-      "ct"
+    const selectedLocations = this.getSelectedLocationsOptions(
+      this.locationsOptions
     );
     const fundsOptions = this.fundsOptions;
     const selectedFunds = this.getSelectedOptions(fundsOptions, "fd");
@@ -128,15 +158,15 @@ export default class DashboardControls extends React.PureComponent {
           <span className="dashboard-controls__title">
             {this.props.propertiesCount} Properties
           </span>
-          <MultiSelect
+          <GroupSelect
             className="dashboard-controls__field"
             options={locationsOptions}
             value={selectedLocations}
-            name="ct"
-            styles={DashboardControls.multiSelectStyle}
+            styles={DashboardControls.locationsStyle(locationsOptions.length)}
             placeholder="Locations…"
             label="Locations…"
-            onChange={this.onChangeHandler}
+            selectAllLabel="ALL LOCATIONS"
+            onChange={this.onChangeLocation}
             onMenuClose={this.onChangeFilter}
           />
           <MultiSelect

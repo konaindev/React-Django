@@ -50,8 +50,8 @@ Select.propTypes = {
   ),
   className: PropTypes.string,
   name: PropTypes.string,
-  defaultValue: PropTypes.string,
-  value: PropTypes.object,
+  defaultValue: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
+  value: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   components: PropTypes.object

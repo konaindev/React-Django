@@ -1,0 +1,76 @@
+@import 'css/base.scss';
+
+$selected-color: $blue-3;
+$checkbox-spacing: 13.5px;
+$group-width: 180px;
+$menu-spacing: 0 0 20px 20px;
+$menu-max-height: 500px;
+$option-spacing: 0 15px;
+$group-border-color: $gray-4;
+
+.group-select {
+    &.select .select__option--is-focused,
+    &.select .select__option--is-selected {
+        background-color: $select-option-background-color;
+    }
+
+    &.select .select__option:active {
+        background: transparent;
+    }
+
+    .select__group-heading {
+        padding: 0;
+    }
+
+    .select__menu {
+        padding: $menu-spacing;
+        box-sizing: content-box;
+    }
+
+    .select__menu-list {
+        max-height: $menu-max-height;
+    }
+
+    .group-select__option {
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.group-select--has-value {
+    &.select__control {
+        color: $input-text-color;
+        background: $selected-color;
+    }
+}
+
+.group-select__option-label {
+    margin-left: $checkbox-spacing;
+}
+
+.group-select__label {
+    font-size: $text-sm;
+    line-height: $text-xl;
+}
+
+.group-select__groups {
+    display: flex;
+ 
+    .select__group {
+        width: $group-width;
+        margin: $option-spacing;
+    }
+}
+
+.group-select__group {
+    font-weight: $weight-normal;
+    text-transform: uppercase;
+    border-bottom: 1px solid $group-border-color;
+}
+
+.group-select__all {
+    margin: $option-spacing;
+}

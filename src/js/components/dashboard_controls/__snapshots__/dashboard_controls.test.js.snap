@@ -73,7 +73,7 @@ exports[`DashboardControls renders correctly 1`] = `
          Properties
       </span>
       <div
-        className="select multi-select dashboard-controls__field css-2b097c-container"
+        className="select group-select dashboard-controls__field css-2b097c-container"
         onKeyDown={[Function]}
       >
         <div
@@ -118,12 +118,6 @@ exports[`DashboardControls renders correctly 1`] = `
               />
             </div>
           </div>
-        </div>
-        <div>
-          <input
-            name="ct"
-            type="hidden"
-          />
         </div>
       </div>
       <div

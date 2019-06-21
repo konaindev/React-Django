@@ -1,7 +1,7 @@
 @import 'css/base.scss';
 
 $sort-field-spacing: 12px;
-$sort-icon-spacing: 15px;
+$sort-icon-spacing: 11px 15px;
 $border-color: $gray-4;
 
 .sort-select {
@@ -17,7 +17,7 @@ $border-color: $gray-4;
     font-size: $text-xs;
     font-weight: $weight-normal;
     letter-spacing: $letter-spacing-wide;
-    color: $title-small-color;
+    color: $input-label-color;
     text-transform: uppercase;
 }
 
@@ -37,17 +37,27 @@ $border-color: $gray-4;
     &.select {
         .select__control {
             border: none;
-            border-radius: 0;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
         }
+
         .select__menu-list {
             max-height: none;
+        }
+
+        .select__control--menu-is-open {
+            background: $select-active-background;
+        }
+
+        .select__single-value {
+            color: $input-text-color;
         }
     }
 }
 
 .sort-select__icon {
-    margin: auto $sort-icon-spacing;
-    color: $title-small-color;
+    padding: $sort-icon-spacing;
+    color: $input-label-color;
     cursor: pointer;
 
     &--reverse {

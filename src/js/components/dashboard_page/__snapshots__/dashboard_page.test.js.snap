@@ -51,10 +51,10 @@ exports[`DashboardPage Row select 1`] = `
             className="dashboard-content__select-view"
           />
           <button
-            className="button button--primary"
+            className="button button--uppercase button--primary dashboard-content__add-property"
             onClick={[Function]}
           >
-            Add Property
+            ADD PROPERTY
           </button>
         </div>
       </div>
@@ -116,7 +116,7 @@ exports[`DashboardPage Row select 1`] = `
             >
               <input
                 className="search-field__input"
-                defaultValue=""
+                defaultValue={null}
                 name="q"
                 onKeyPress={[Function]}
                 placeholder="Search Properties…"
@@ -136,7 +136,7 @@ exports[`DashboardPage Row select 1`] = `
                    Properties
                 </span>
                 <div
-                  className="select multi-select dashboard-controls__field css-2b097c-container"
+                  className="select group-select dashboard-controls__field css-2b097c-container"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -181,12 +181,6 @@ exports[`DashboardPage Row select 1`] = `
                         />
                       </div>
                     </div>
-                  </div>
-                  <div>
-                    <input
-                      name="ct"
-                      type="hidden"
-                    />
                   </div>
                 </div>
                 <div
@@ -1137,10 +1131,10 @@ exports[`DashboardPage Row view 1`] = `
             className="dashboard-content__select-view"
           />
           <button
-            className="button button--primary"
+            className="button button--uppercase button--primary dashboard-content__add-property"
             onClick={[Function]}
           >
-            Add Property
+            ADD PROPERTY
           </button>
         </div>
       </div>
@@ -1202,7 +1196,7 @@ exports[`DashboardPage Row view 1`] = `
             >
               <input
                 className="search-field__input"
-                defaultValue=""
+                defaultValue={null}
                 name="q"
                 onKeyPress={[Function]}
                 placeholder="Search Properties…"
@@ -1222,7 +1216,7 @@ exports[`DashboardPage Row view 1`] = `
                    Properties
                 </span>
                 <div
-                  className="select multi-select dashboard-controls__field css-2b097c-container"
+                  className="select group-select dashboard-controls__field css-2b097c-container"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -1267,12 +1261,6 @@ exports[`DashboardPage Row view 1`] = `
                         />
                       </div>
                     </div>
-                  </div>
-                  <div>
-                    <input
-                      name="ct"
-                      type="hidden"
-                    />
                   </div>
                 </div>
                 <div
@@ -2223,10 +2211,10 @@ exports[`DashboardPage renders correctly 1`] = `
             className="dashboard-content__select-view"
           />
           <button
-            className="button button--primary"
+            className="button button--uppercase button--primary dashboard-content__add-property"
             onClick={[Function]}
           >
-            Add Property
+            ADD PROPERTY
           </button>
         </div>
       </div>
@@ -2288,7 +2276,7 @@ exports[`DashboardPage renders correctly 1`] = `
             >
               <input
                 className="search-field__input"
-                defaultValue=""
+                defaultValue={null}
                 name="q"
                 onKeyPress={[Function]}
                 placeholder="Search Properties…"
@@ -2308,7 +2296,7 @@ exports[`DashboardPage renders correctly 1`] = `
                    Properties
                 </span>
                 <div
-                  className="select multi-select dashboard-controls__field css-2b097c-container"
+                  className="select group-select dashboard-controls__field css-2b097c-container"
                   onKeyDown={[Function]}
                 >
                   <div
@@ -2353,12 +2341,6 @@ exports[`DashboardPage renders correctly 1`] = `
                         />
                       </div>
                     </div>
-                  </div>
-                  <div>
-                    <input
-                      name="ct"
-                      type="hidden"
-                    />
                   </div>
                 </div>
                 <div

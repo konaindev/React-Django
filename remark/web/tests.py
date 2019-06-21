@@ -81,7 +81,6 @@ class PropertyListTestCase(TestCase):
                     "label": self.asset_manager2.name,
                 },
             ],
-            "cities": [],
             "funds": [
                 {"id": self.fund1.public_id, "label": self.fund1.name},
                 {"id": self.fund2.public_id, "label": self.fund2.name},
@@ -114,7 +113,7 @@ class PropertyListTestCase(TestCase):
                     "label": self.property_manager2.name,
                 },
             ],
-            "states": [],
+            "locations": [],
             "user": {
                 "account_id": self.account.id,
                 "account_name": self.account.company_name,
@@ -129,7 +128,6 @@ class PropertyListTestCase(TestCase):
         self.assertCountEqual(
             response.context["page_props"]["asset_managers"], data["asset_managers"]
         )
-        self.assertCountEqual(response.context["page_props"]["cities"], data["cities"])
         self.assertCountEqual(response.context["page_props"]["funds"], data["funds"])
         self.assertCountEqual(
             response.context["page_props"]["properties"], data["properties"]
@@ -138,7 +136,7 @@ class PropertyListTestCase(TestCase):
             response.context["page_props"]["property_managers"],
             data["property_managers"],
         )
-        self.assertCountEqual(response.context["page_props"]["states"], data["states"])
+        self.assertCountEqual(response.context["page_props"]["locations"], data["locations"])
         self.assertCountEqual(response.context["page_props"]["user"], data["user"])
 
     def test_query(self):
@@ -153,7 +151,6 @@ class PropertyListTestCase(TestCase):
                     "label": self.asset_manager2.name,
                 },
             ],
-            "cities": [],
             "funds": [
                 {"id": self.fund1.public_id, "label": self.fund1.name},
                 {"id": self.fund2.public_id, "label": self.fund2.name},
@@ -178,7 +175,7 @@ class PropertyListTestCase(TestCase):
                     "label": self.property_manager2.name,
                 },
             ],
-            "states": [],
+            "locations": [],
             "user": {
                 "account_id": self.account.id,
                 "account_name": self.account.company_name,
@@ -200,7 +197,6 @@ class PropertyListTestCase(TestCase):
         self.assertCountEqual(
             response.context["page_props"]["asset_managers"], data["asset_managers"]
         )
-        self.assertCountEqual(response.context["page_props"]["cities"], data["cities"])
         self.assertCountEqual(response.context["page_props"]["funds"], data["funds"])
         self.assertCountEqual(
             response.context["page_props"]["properties"], data["properties"]
@@ -209,5 +205,5 @@ class PropertyListTestCase(TestCase):
             response.context["page_props"]["property_managers"],
             data["property_managers"],
         )
-        self.assertCountEqual(response.context["page_props"]["states"], data["states"])
+        self.assertCountEqual(response.context["page_props"]["locations"], data["locations"])
         self.assertCountEqual(response.context["page_props"]["user"], data["user"])

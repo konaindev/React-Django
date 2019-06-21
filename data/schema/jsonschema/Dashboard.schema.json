@@ -1,0 +1,217 @@
+{
+    "$ref": "#/definitions/Dashboard",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "AssetManager": {
+            "description": "Business with type = 2",
+            "properties": {
+                "id": {
+                    "description": "The Asset manager public id",
+                    "type": "string"
+                },
+                "label": {
+                    "description": "The Asset manager name",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "label"
+            ],
+            "type": "object"
+        },
+        "Dashboard": {
+            "description": "Dashboard is a page with a list of properties and filter by them",
+            "properties": {
+                "asset_managers": {
+                    "description": "The List of asset managers",
+                    "items": {
+                        "$ref": "#/definitions/AssetManager"
+                    },
+                    "type": "array"
+                },
+                "funds": {
+                    "description": "The List of funds",
+                    "items": {
+                        "$ref": "#/definitions/Fund"
+                    },
+                    "type": "array"
+                },
+                "locations": {
+                    "description": "The List of locations of properties",
+                    "items": {
+                        "$ref": "#/definitions/Location"
+                    },
+                    "type": "array"
+                },
+                "properties": {
+                    "description": "The List of user properties",
+                    "items": {
+                        "$ref": "#/definitions/Property"
+                    },
+                    "type": "array"
+                },
+                "property_managers": {
+                    "description": "The List of property managers",
+                    "items": {
+                        "$ref": "#/definitions/PropertyManager"
+                    },
+                    "type": "array"
+                },
+                "search_url": {
+                    "description": "The request URL",
+                    "type": "string"
+                },
+                "user": {
+                    "$ref": "#/definitions/User",
+                    "description": "Current user"
+                }
+            },
+            "required": [
+                "asset_managers",
+                "funds",
+                "locations",
+                "properties",
+                "property_managers",
+                "search_url",
+                "user"
+            ],
+            "type": "object"
+        },
+        "Fund": {
+            "description": "Fund structure",
+            "properties": {
+                "id": {
+                    "description": "The Fund public id",
+                    "type": "string"
+                },
+                "label": {
+                    "description": "The Fund name",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "label"
+            ],
+            "type": "object"
+        },
+        "Location": {
+            "properties": {
+                "city": {
+                    "description": "The city name",
+                    "type": "string"
+                },
+                "label": {
+                    "description": "The human readable location (like 'Portland, OR')",
+                    "type": "string"
+                },
+                "state": {
+                    "description": "The state code",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "city",
+                "label",
+                "state"
+            ],
+            "type": "object"
+        },
+        "Property": {
+            "description": "Property structure",
+            "properties": {
+                "address": {
+                    "description": "The property address",
+                    "type": "string"
+                },
+                "image_url": {
+                    "description": "The relative link to the property image",
+                    "type": "string"
+                },
+                "performance_rating": {
+                    "description": "Health of property\n2 - on track\n1 - at risk\n0 - off track",
+                    "enum": [
+                        0,
+                        1,
+                        2
+                    ],
+                    "type": "number"
+                },
+                "property_id": {
+                    "description": "The property public id",
+                    "type": "string"
+                },
+                "property_name": {
+                    "description": "The property name",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "The relative link to the property page",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "address",
+                "image_url",
+                "performance_rating",
+                "property_id",
+                "property_name",
+                "url"
+            ],
+            "type": "object"
+        },
+        "PropertyManager": {
+            "description": "Business with type = 3",
+            "properties": {
+                "id": {
+                    "description": "The Property manager public id",
+                    "type": "string"
+                },
+                "label": {
+                    "description": "The Property manager name",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "id",
+                "label"
+            ],
+            "type": "object"
+        },
+        "User": {
+            "description": "User structure",
+            "properties": {
+                "account_id": {
+                    "description": "The account id",
+                    "type": "string"
+                },
+                "account_name": {
+                    "description": "The account name",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "The user email",
+                    "type": "string"
+                },
+                "logout_url": {
+                    "description": "The user email",
+                    "type": "string"
+                },
+                "user_id": {
+                    "description": "The user public id",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "account_id",
+                "account_name",
+                "email",
+                "logout_url",
+                "user_id"
+            ],
+            "type": "object"
+        }
+    }
+}
+

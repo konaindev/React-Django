@@ -92,15 +92,10 @@ export const props = {
     account_url: "/user/1234556960"
   },
   search_url: "/dashboard",
-  states: [
-    { label: "Washington", value: "wa" },
-    { label: "Connecticut", value: "ct" },
-    { label: "Texas", value: "tx" }
-  ],
-  cities: [
-    { label: "Seattle", value: "seattle, wa", state: "wa" },
-    { label: "New Haven", value: "new haven, ct", state: "ct" },
-    { label: "Dallas", value: "dallas, tx", state: "tx" }
+  locations: [
+    { city: "Seattle", label: "Seattle, WA", state: "wa" },
+    { city: "New Haven", label: "New Haven, CT", state: "ct" },
+    { city: "Dallas", label: "Dallas, TX", state: "tx" }
   ],
   property_managers: [
     { id: "12345", label: "Alliance Property Management" },

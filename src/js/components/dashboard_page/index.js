@@ -1,4 +1,5 @@
 import _isEmpty from "lodash/isEmpty";
+import _isArray from "lodash/isArray";
 import cn from "classnames";
 import React from "react";
 import PropTypes from "prop-types";
@@ -23,12 +24,16 @@ export class DashboardPage extends React.PureComponent {
     asset_managers: PropTypes.array.isRequired,
     property_managers: PropTypes.array.isRequired,
     selectedProperties: PropTypes.arrayOf(PropTypes.string),
-    viewType: PropTypes.string
+    viewType: PropTypes.string,
+    filters: PropTypes.object,
+    onChangeFilter: PropTypes.func
   };
 
   static defaultProps = {
     selectedProperties: [],
-    viewType: "tile"
+    viewType: "tile",
+    filters: {},
+    onChangeFilter: () => {}
   };
 
   static buttonOptions = [
@@ -116,8 +121,13 @@ export class DashboardPage extends React.PureComponent {
                     onChange={this.toggleView}
                   /> */}
                 </div>
-                <Button color="primary" onClick={this.onShowAddPropertyForm}>
-                  Add Property
+                <Button
+                  className="dashboard-content__add-property"
+                  color="primary"
+                  uppercase={true}
+                  onClick={this.onShowAddPropertyForm}
+                >
+                  ADD PROPERTY
                 </Button>
               </div>
             </div>
@@ -128,7 +138,7 @@ export class DashboardPage extends React.PureComponent {
                   funds={this.props.funds}
                   assetManagers={this.props.asset_managers}
                   propertyManagers={this.props.property_managers}
-                  locations={this.props.states}
+                  locations={this.props.locations}
                   filters={this.props.filters}
                   onChange={this.onChangeFilter}
                 />
@@ -200,22 +210,30 @@ export default class UrlQueryLayer extends React.PureComponent {
   constructor(props) {
     super(props);
     this.filters = {};
-    this.urlParams = new URLSearchParams(window.location.search);
-    this.urlParams.forEach((value, name) => {
-      this.filters[name] = value;
-    });
+    const urlParams = new URLSearchParams(window.location.search);
+    this.filters = {
+      q: urlParams.get("q"),
+      ct: urlParams.getAll("ct"),
+      st: urlParams.getAll("st"),
+      fd: urlParams.getAll("fd"),
+      am: urlParams.getAll("am"),
+      pm: urlParams.getAll("pm")
+    };
   }
 
   onChangeFilter = filters => {
+    const urlParams = new URLSearchParams();
     Object.keys(filters).forEach(filterName => {
       const value = filters[filterName];
-      if (_isEmpty(value)) {
-        this.urlParams.delete(filterName);
-      } else {
-        this.urlParams.set(filterName, value);
+      if (!_isEmpty(value)) {
+        if (_isArray(value)) {
+          value.forEach(v => urlParams.append(filterName, v));
+        } else {
+          urlParams.set(filterName, value);
+        }
       }
     });
-    const searchStr = this.urlParams.toString();
+    const searchStr = urlParams.toString();
     if (searchStr !== window.location.search) {
       window.location.search = searchStr;
     }

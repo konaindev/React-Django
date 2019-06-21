@@ -2,9 +2,10 @@ export const props = {
   propertiesCount: 10,
   filters: {},
   locations: [
-    { label: "Seattle", value: "seattle, wa", state: "wa" },
-    { label: "New Haven", value: "new haven, ct", state: "ct" },
-    { label: "Dallas", value: "dallas, tx", state: "tx" }
+    { city: "Seattle", label: "Seattle, WA", state: "wa" },
+    { city: "New Haven", label: "New Haven, CT", state: "ct" },
+    { city: "San Antonio", label: "San Antonio, TX", state: "tx" },
+    { city: "Dallas", label: "Dallas, TX", state: "tx" }
   ],
   propertyManagers: [
     { id: "12345", label: "Alliance Property Management" },
