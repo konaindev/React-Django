@@ -27,8 +27,10 @@
 
     &__image {
         height: $property-card-image-height;
-        background-size: cover;
+        background-image: url("../../../images/apartment.svg");
         background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
     }
 
     &__overlay {
@@ -95,9 +97,13 @@
     }
 
     &__address {
-        color: $content-text-secondary-color;
+        height: $property-card-address-height;
+        overflow: hidden;
         font-size: $text-xs;
         line-height: $line-height-loose;
+        color: $content-text-secondary-color;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 
     &__status {

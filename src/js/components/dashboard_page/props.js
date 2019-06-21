@@ -4,14 +4,14 @@ export const props = {
       property_name: "Meridian SLC",
       property_id: "pro_1prk0l2sdc0jv8dr",
       address: "123 4th Avenue, Seattle WA 98106",
-      image_url: "https://i.imgur.com/UEH4gfU.jpg",
+      image_url: "",
       performance_rating: 2,
       url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
     },
     {
       property_name: "Beridian SLC",
       property_id: "pro_ojso5xourpuai2vs",
-      address: "123 4th Avenue, Seattle WA 98106",
+      address: "",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 1,
       url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
@@ -19,7 +19,7 @@ export const props = {
     {
       property_name: "Teridian SLC",
       property_id: "pro_fy9oyksyn2cbvop2",
-      address: "123 4th Avenue, Seattle WA 98106",
+      address: "1779 Nacogdoches Rd, San Antonio, TX 78209, USA",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 2,
       url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"

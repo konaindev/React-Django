@@ -550,7 +550,7 @@ exports[`DashboardPage Row select 1`] = `
                 className="property-row__image"
                 style={
                   Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
+                    "backgroundImage": "url(\\"\\")",
                   }
                 }
               />
@@ -623,7 +623,7 @@ exports[`DashboardPage Row select 1`] = `
             <div
               className="property-row__address"
             >
-              123 4th Avenue, Seattle WA 98106
+              
             </div>
             <div
               className="property-row__link-container"
@@ -677,7 +677,7 @@ exports[`DashboardPage Row select 1`] = `
             <div
               className="property-row__address"
             >
-              123 4th Avenue, Seattle WA 98106
+              1779 Nacogdoches Rd, San Antonio, TX 78209, USA
             </div>
             <div
               className="property-row__link-container"
@@ -1630,7 +1630,7 @@ exports[`DashboardPage Row view 1`] = `
                 className="property-row__image"
                 style={
                   Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
+                    "backgroundImage": "url(\\"\\")",
                   }
                 }
               />
@@ -1703,7 +1703,7 @@ exports[`DashboardPage Row view 1`] = `
             <div
               className="property-row__address"
             >
-              123 4th Avenue, Seattle WA 98106
+              
             </div>
             <div
               className="property-row__link-container"
@@ -1757,7 +1757,7 @@ exports[`DashboardPage Row view 1`] = `
             <div
               className="property-row__address"
             >
-              123 4th Avenue, Seattle WA 98106
+              1779 Nacogdoches Rd, San Antonio, TX 78209, USA
             </div>
             <div
               className="property-row__link-container"
@@ -2702,11 +2702,7 @@ exports[`DashboardPage renders correctly 1`] = `
           >
             <div
               className="property-card__image"
-              style={
-                Object {
-                  "backgroundImage": "url(https://i.imgur.com/UEH4gfU.jpg)",
-                }
-              }
+              style={Object {}}
             >
               <div
                 className="property-card__overlay"
@@ -2759,6 +2755,7 @@ exports[`DashboardPage renders correctly 1`] = `
               style={
                 Object {
                   "backgroundImage": "url(https://i.imgur.com/UEH4gfU.jpg)",
+                  "backgroundSize": "cover",
                 }
               }
             >
@@ -2792,7 +2789,7 @@ exports[`DashboardPage renders correctly 1`] = `
               <div
                 className="property-card__address"
               >
-                123 4th Avenue, Seattle WA 98106
+                
               </div>
               <div
                 className="property-status property-card__status property-status--at-risk"
@@ -2813,6 +2810,7 @@ exports[`DashboardPage renders correctly 1`] = `
               style={
                 Object {
                   "backgroundImage": "url(https://i.imgur.com/UEH4gfU.jpg)",
+                  "backgroundSize": "cover",
                 }
               }
             >
@@ -2846,7 +2844,7 @@ exports[`DashboardPage renders correctly 1`] = `
               <div
                 className="property-card__address"
               >
-                123 4th Avenue, Seattle WA 98106
+                1779 Nacogdoches Rd, San Antonio, TX 78209, USA
               </div>
               <div
                 className="property-status property-card__status property-status--on-track"
@@ -2867,6 +2865,7 @@ exports[`DashboardPage renders correctly 1`] = `
               style={
                 Object {
                   "backgroundImage": "url(https://i.imgur.com/UEH4gfU.jpg)",
+                  "backgroundSize": "cover",
                 }
               }
             >
@@ -2921,6 +2920,7 @@ exports[`DashboardPage renders correctly 1`] = `
               style={
                 Object {
                   "backgroundImage": "url(https://i.imgur.com/UEH4gfU.jpg)",
+                  "backgroundSize": "cover",
                 }
               }
             >
@@ -2975,6 +2975,7 @@ exports[`DashboardPage renders correctly 1`] = `
               style={
                 Object {
                   "backgroundImage": "url(https://i.imgur.com/UEH4gfU.jpg)",
+                  "backgroundSize": "cover",
                 }
               }
             >
@@ -3029,6 +3030,7 @@ exports[`DashboardPage renders correctly 1`] = `
               style={
                 Object {
                   "backgroundImage": "url(https://i.imgur.com/UEH4gfU.jpg)",
+                  "backgroundSize": "cover",
                 }
               }
             >
@@ -3083,6 +3085,7 @@ exports[`DashboardPage renders correctly 1`] = `
               style={
                 Object {
                   "backgroundImage": "url(https://i.imgur.com/UEH4gfU.jpg)",
+                  "backgroundSize": "cover",
                 }
               }
             >
@@ -3137,6 +3140,7 @@ exports[`DashboardPage renders correctly 1`] = `
               style={
                 Object {
                   "backgroundImage": "url(https://i.imgur.com/UEH4gfU.jpg)",
+                  "backgroundSize": "cover",
                 }
               }
             >
@@ -3191,6 +3195,7 @@ exports[`DashboardPage renders correctly 1`] = `
               style={
                 Object {
                   "backgroundImage": "url(https://i.imgur.com/UEH4gfU.jpg)",
+                  "backgroundSize": "cover",
                 }
               }
             >

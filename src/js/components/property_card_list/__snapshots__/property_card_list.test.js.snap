@@ -15,6 +15,7 @@ exports[`PropertyCardList renders correctly 1`] = `
         style={
           Object {
             "backgroundImage": "url(https://i.imgur.com/UEH4gfU.jpg)",
+            "backgroundSize": "cover",
           }
         }
       >
@@ -69,6 +70,7 @@ exports[`PropertyCardList renders correctly 1`] = `
         style={
           Object {
             "backgroundImage": "url(https://i.imgur.com/UEH4gfU.jpg)",
+            "backgroundSize": "cover",
           }
         }
       >
@@ -123,6 +125,7 @@ exports[`PropertyCardList renders correctly 1`] = `
         style={
           Object {
             "backgroundImage": "url(https://i.imgur.com/UEH4gfU.jpg)",
+            "backgroundSize": "cover",
           }
         }
       >
@@ -177,6 +180,7 @@ exports[`PropertyCardList renders correctly 1`] = `
         style={
           Object {
             "backgroundImage": "url(https://i.imgur.com/UEH4gfU.jpg)",
+            "backgroundSize": "cover",
           }
         }
       >
@@ -231,6 +235,7 @@ exports[`PropertyCardList renders correctly 1`] = `
         style={
           Object {
             "backgroundImage": "url(https://i.imgur.com/UEH4gfU.jpg)",
+            "backgroundSize": "cover",
           }
         }
       >
@@ -285,6 +290,7 @@ exports[`PropertyCardList renders correctly 1`] = `
         style={
           Object {
             "backgroundImage": "url(https://i.imgur.com/UEH4gfU.jpg)",
+            "backgroundSize": "cover",
           }
         }
       >
@@ -339,6 +345,7 @@ exports[`PropertyCardList renders correctly 1`] = `
         style={
           Object {
             "backgroundImage": "url(https://i.imgur.com/UEH4gfU.jpg)",
+            "backgroundSize": "cover",
           }
         }
       >
@@ -393,6 +400,7 @@ exports[`PropertyCardList renders correctly 1`] = `
         style={
           Object {
             "backgroundImage": "url(https://i.imgur.com/UEH4gfU.jpg)",
+            "backgroundSize": "cover",
           }
         }
       >
@@ -447,6 +455,7 @@ exports[`PropertyCardList renders correctly 1`] = `
         style={
           Object {
             "backgroundImage": "url(https://i.imgur.com/UEH4gfU.jpg)",
+            "backgroundSize": "cover",
           }
         }
       >
@@ -501,6 +510,7 @@ exports[`PropertyCardList renders correctly 1`] = `
         style={
           Object {
             "backgroundImage": "url(https://i.imgur.com/UEH4gfU.jpg)",
+            "backgroundSize": "cover",
           }
         }
       >
