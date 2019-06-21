@@ -57,6 +57,7 @@ BASE_URL = os.getenv("BASE_URL", None)
 # Email setup
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "Remarkably <hello@remarkably.io>")
 ADMINS = [("Remarkably Ops", "ops@remarkably.io")]
+SALES_EMAIL = "sales@remarkably.io"
 EMAIL_BACKEND = os.getenv(
     "EMAIL_BACKEND", "django.core.mail.backends.smtp.EmailBackend"
 )
@@ -78,6 +79,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django_js_reverse",
     "stdimage",
+    "remark.sales",
     "remark.email_app",
     "remark.analytics",
     "remark.users",
@@ -235,7 +237,6 @@ AWS_QUERYSTRING_AUTH = False
 
 MEDIA_ROOT = os.getenv("MEDIA_ROOT", "")  # Must correspond with storage instance.
 MEDIA_URL = os.getenv("MEDIA_URL", "")  # See the top-level README for details.
-FILE_UPLOAD_MAX_MEMORY_SIZE = 1024 ** 2 * 5  # 5MB
 
 #
 # Javascript reversing.

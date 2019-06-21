@@ -1,7 +1,7 @@
 import { states } from "./states";
 
 export const props = {
-  post_url: "/projects/new",
+  post_url: null,
   packages: [
     { id: "accelerate", name: "Accelerate" },
     { id: "optimize", name: "Optimize" },

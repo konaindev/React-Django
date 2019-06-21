@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<ul>
+{% for f in fields %}
+<li>{{ f.label }}: {% if f.value %}{{ f.value }}{% else %}{{ f.initial }}{% endif %}</li>
+{% endfor %}
+</ul>
+</body>
+</html>

@@ -1,0 +1,3 @@
+{% for f in fields %}
+* {{ f.label }}: {% if f.value %}{{ f.value }}{% else %}{{ f.initial }}{% endif %}
+{% endfor %}

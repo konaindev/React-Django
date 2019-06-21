@@ -42,17 +42,6 @@ export class DashboardPage extends React.PureComponent {
     }
   ];
 
-  static addPropertyFormProps = {
-    packages: [
-      { id: "accelerate", name: "Accelerate" },
-      { id: "optimize", name: "Optimize" },
-      { id: "ground", name: "Ground Up" },
-      { id: "other", name: "Not Sure" }
-    ],
-    post_url: "/projects/new",
-    states
-  };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -95,6 +84,18 @@ export class DashboardPage extends React.PureComponent {
 
   onHideAddPropertyForm = () => {
     this.setState({ isShowAddPropertyForm: false });
+  };
+
+  addPropertyFormProps = {
+    packages: [
+      { id: "accelerate", name: "Accelerate" },
+      { id: "optimize", name: "Optimize" },
+      { id: "ground", name: "Ground Up" },
+      { id: "other", name: "Not Sure" }
+    ],
+    post_url: "/sales/new-project",
+    onSuccess: this.onHideAddPropertyForm,
+    states
   };
 
   render() {
@@ -148,7 +149,7 @@ export class DashboardPage extends React.PureComponent {
           </Container>
           <AddPropertyModal
             open={this.state.isShowAddPropertyForm}
-            formProps={DashboardPage.addPropertyFormProps}
+            formProps={this.addPropertyFormProps}
             onClose={this.onHideAddPropertyForm}
           />
         </div>
