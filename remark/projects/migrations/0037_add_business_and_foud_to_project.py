@@ -5,6 +5,26 @@ import django.db.models.deletion
 import remark.projects.models
 
 
+def get_business(Business, pk, name, business_type, address):
+    try:
+        return Business.objects.get(pk=pk)
+    except:
+        return Business.objects.create(
+            public_id=pk,
+            name=name,
+            business_type=business_type,
+            address=address,
+        )
+
+def get_fund(Fund, pk, account, name):
+    try:
+        return Fund.object.get(pk=pk)
+    except:
+        return Fund.objects.create(
+            public_id=pk, account=account, name=name
+        )
+
+
 def update_existing_project(apps, schema_editor):
     Account = apps.get_model("users", "Account")
     Project = apps.get_model("projects", "Project")
@@ -22,28 +42,10 @@ def update_existing_project(apps, schema_editor):
         country="US",
     )
 
-    asset_manager = Business.objects.create(
-        public_id="bus_6zkhlxb7fyra0is4",
-        name="Remarkably Asset Manager",
-        business_type=2,
-        address=address,
-    )
-    property_manager = Business.objects.create(
-        public_id="bus_cdxci5ki438rwvcc",
-        name="Remarkably Property Manager",
-        business_type=3,
-        address=address,
-    )
-    property_owner = Business.objects.create(
-        public_id="bus_9js5f2zqmirgmmnj",
-        name="Remarkably Property Owner",
-        business_type=1,
-        address=address,
-    )
-
-    fund = Fund.objects.create(
-        public_id="fund_ojo50w9sugy5omed", account=account, name="Remarkably Fund"
-    )
+    asset_manager = get_business(Business, "bus_6zkhlxb7fyra0is4", "Remarkably Asset Manager", 2, address)
+    property_manager = get_business(Business, "bus_cdxci5ki438rwvcc", "Remarkably Property Manager", 3, address)
+    property_owner = get_business(Business, "bus_9js5f2zqmirgmmnj", "Remarkably Property Owner", 1, address)
+    fund = get_fund(Fund, "fund_ojo50w9sugy5omed", account, "Remarkably Fund")
 
     Project.objects.all().update(
         account=account,
@@ -52,6 +54,9 @@ def update_existing_project(apps, schema_editor):
         property_owner=property_owner,
         fund=fund,
     )
+
+def noop(apps, schema_editor):
+    pass
 
 
 class Migration(migrations.Migration):
@@ -120,7 +125,7 @@ class Migration(migrations.Migration):
                 to="crm.Business",
             ),
         ),
-        migrations.RunPython(update_existing_project),
+        migrations.RunPython(update_existing_project, noop),
         migrations.AlterField(
             model_name="project",
             name="account",
