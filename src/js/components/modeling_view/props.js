@@ -1,3 +1,5 @@
+import { competitors } from "../baseline_report_page/props";
+
 export const props = {
   property_name: "Portland Multi Family",
   options: [
@@ -91,7 +93,8 @@ export const props = {
           romi: 14,
           estimated_revenue_gain: "2600000.00"
         }
-      }
+      },
+      competitors
     },
 
     {
