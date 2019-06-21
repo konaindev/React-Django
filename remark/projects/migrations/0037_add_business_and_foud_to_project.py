@@ -22,28 +22,38 @@ def update_existing_project(apps, schema_editor):
         country="US",
     )
 
-    asset_manager = Business.objects.create(
-        public_id="bus_6zkhlxb7fyra0is4",
-        name="Remarkably Asset Manager",
-        business_type=2,
-        address=address,
-    )
-    property_manager = Business.objects.create(
-        public_id="bus_cdxci5ki438rwvcc",
-        name="Remarkably Property Manager",
-        business_type=3,
-        address=address,
-    )
-    property_owner = Business.objects.create(
-        public_id="bus_9js5f2zqmirgmmnj",
-        name="Remarkably Property Owner",
-        business_type=1,
-        address=address,
-    )
+    pk = "bus_6zkhlxb7fyra0is4"
+    if Business.objects.filter(pk=pk).count() == 0:
+        asset_manager = Business.objects.create(
+            public_id=pk,
+            name="Remarkably Asset Manager",
+            business_type=2,
+            address=address,
+        )
 
-    fund = Fund.objects.create(
-        public_id="fund_ojo50w9sugy5omed", account=account, name="Remarkably Fund"
-    )
+    pk = "bus_cdxci5ki438rwvcc"
+    if Business.objects.filter(pk=pk).count() == 0:
+        property_manager = Business.objects.create(
+            public_id="bus_cdxci5ki438rwvcc",
+            name="Remarkably Property Manager",
+            business_type=3,
+            address=address,
+        )
+
+    pk = "bus_9js5f2zqmirgmmnj"
+    if Business.objects.filter(pk=pk).count() == 0:
+        property_owner = Business.objects.create(
+            public_id="bus_9js5f2zqmirgmmnj",
+            name="Remarkably Property Owner",
+            business_type=1,
+            address=address,
+        )
+
+    pk = "fund_ojo50w9sugy5omed"
+    if Fund.objects.filter(pk=pk).count() == 0:
+        fund = Fund.objects.create(
+            public_id="fund_ojo50w9sugy5omed", account=account, name="Remarkably Fund"
+        )
 
     Project.objects.all().update(
         account=account,
