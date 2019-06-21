@@ -1,0 +1,39 @@
+@import "css/base.scss";
+@import "css/variables.scss";
+
+.modal-window {
+    max-width: unset;
+    min-height: 220px;
+    padding: 44px 60px 48px 60px;
+    background-color: $modal-window-background-color;
+    border-radius: $modal-window-border-radius;
+    box-shadow: none;
+}
+
+.modal-overlay {
+    background-color: $modal-window-overlay-color;
+}
+
+.modal-window__close {
+    position: absolute;
+    top: 55px;
+    right: 60px;
+    width: 13px;
+    height: 14px;
+    background-image: url('./../../../images/close-icon.svg');
+    &:focus {
+        outline: none;
+    }
+}
+
+.modal-window__head {
+    height: 35px;
+    margin-bottom: 41px;
+    line-height: 35px;
+    color: $title-large-color;
+    font-size: 28px;
+}
+
+.modal-window__body {
+    padding: 0;
+}

@@ -26,14 +26,17 @@ export default class PerformanceReportPage extends Component {
   }
 
   render() {
+    const { project, report, report_links, share_info } = this.props;
+
     return (
       <ReportPageChrome
-        project={this.props.project}
+        project={project}
         current_report_name="performance"
-        report_links={this.props.report_links}
+        report_links={report_links}
+        share_info={share_info}
       >
         <CommonReport
-          report={this.props.report}
+          report={report}
           dateSpan={this.renderDateSpan()}
           type="performance"
         />
