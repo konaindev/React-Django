@@ -17,7 +17,12 @@ class DashboardView(LoginRequiredMixin, ReactView):
 
     def get(self, request):
         user = request.user
-        project_params = {"account_id": user.account_id}
+
+        if user.is_superuser:
+            project_params = {}
+        else:
+            project_params = {"account_id": user.account_id}
+
         if request.GET.get("q"):
             project_params["name__icontains"] = request.GET.get("q")
         if request.GET.get("st"):
