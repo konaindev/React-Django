@@ -535,9 +535,9 @@ class Project(models.Model):
         """
         Creates a new Group and assign it to view_gruop field
         """
-        view_group = Group(name=f"{project.name} view group")
+        view_group = Group(name=f"project | {self.name} | view")
         view_group.save()
-        project.view_group = view_group
+        self.view_group = view_group
 
     def save(self, *args, **kwargs):
         if not self.pk:
