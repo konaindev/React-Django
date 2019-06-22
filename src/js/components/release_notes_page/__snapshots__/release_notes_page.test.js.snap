@@ -16,11 +16,15 @@ exports[`ReleaseNotesPage renders correctly 1`] = `
         <div
           className="container page-header__inner"
         >
-          <div
-            className="remarkably-logo"
+          <a
+            href="/dashboard"
           >
-             
-          </div>
+            <div
+              className="remarkably-logo"
+            >
+               
+            </div>
+          </a>
         </div>
       </div>
     </div>

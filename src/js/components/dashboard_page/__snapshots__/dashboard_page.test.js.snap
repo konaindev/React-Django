@@ -16,11 +16,15 @@ exports[`DashboardPage Row select 1`] = `
         <div
           className="container page-header__inner"
         >
-          <div
-            className="remarkably-logo"
+          <a
+            href="/dashboard"
           >
-             
-          </div>
+            <div
+              className="remarkably-logo"
+            >
+               
+            </div>
+          </a>
         </div>
       </div>
     </div>
@@ -1096,11 +1100,15 @@ exports[`DashboardPage Row view 1`] = `
         <div
           className="container page-header__inner"
         >
-          <div
-            className="remarkably-logo"
+          <a
+            href="/dashboard"
           >
-             
-          </div>
+            <div
+              className="remarkably-logo"
+            >
+               
+            </div>
+          </a>
         </div>
       </div>
     </div>
@@ -2176,11 +2184,15 @@ exports[`DashboardPage renders correctly 1`] = `
         <div
           className="container page-header__inner"
         >
-          <div
-            className="remarkably-logo"
+          <a
+            href="/dashboard"
           >
-             
-          </div>
+            <div
+              className="remarkably-logo"
+            >
+               
+            </div>
+          </a>
         </div>
       </div>
     </div>

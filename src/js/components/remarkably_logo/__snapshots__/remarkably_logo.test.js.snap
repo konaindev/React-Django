@@ -1,9 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`RemarkablyLogo renders correctly 1`] = `
-<div
-  className="remarkably-logo"
+<a
+  href="/dashboard"
 >
-   
-</div>
+  <div
+    className="remarkably-logo"
+  >
+     
+  </div>
+</a>
 `;
