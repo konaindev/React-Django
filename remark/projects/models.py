@@ -74,6 +74,14 @@ def spreadsheet_media_path(spreadsheet, filename):
     return f"project/{spreadsheet.project.public_id}/{sheetname}{extension}"
 
 
+class Tag(models.Model):
+    word = models.CharField(max_length=250)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.word
+
+
 class ProjectManager(models.Manager):
     pass
 
@@ -130,8 +138,11 @@ class Project(models.Model):
     fund = models.ForeignKey(
         "projects.Fund",
         on_delete=models.CASCADE,
-        blank=False,
+        blank=True,
+        null=True
     )
+
+    custom_tags = models.ManyToManyField(Tag, blank=True)
 
     # This is temporary until we have accounts setup for all our clients
     # Remove me and link via a ForeignKey when that happens. -TPC
@@ -439,6 +450,11 @@ class Project(models.Model):
         else:
             return None
 
+    def get_building_image_url(self):
+        if self.building_image:
+            return self.building_image.url
+        return None
+
     def get_baseline_url(self):
         return reverse("baseline_report", kwargs={"project_id": self.public_id})
 
@@ -476,7 +492,7 @@ class Project(models.Model):
     def get_performance_rating(self):
         performance_report = PerformanceReport.for_campaign_to_date(self)
         if not performance_report:
-            return 0
+            return -1
         campaign_to_date = performance_report.to_jsonable()
         lease_rate = (
             campaign_to_date.get("property", {}).get("leasing", {}).get("rate", 0)
@@ -488,7 +504,7 @@ class Project(models.Model):
             .get("rate", 0)
         )
         if not target_lease_rate:
-            return 0
+            return -1
         return health_check(lease_rate, target_lease_rate)
 
     def update_for_selected_model(self):
