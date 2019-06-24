@@ -3,7 +3,6 @@
 $status-color-on-track: $green-3;
 $status-color-at-risk: $yellow-1;
 $status-color-requires-review: $orange-2;
-$status-color-not-available: $gray-6;
 $status-text-height: 18px;
 $status-text-size: 11px;
 
@@ -31,10 +30,5 @@ $status-text-size: 11px;
     &--off-track {
         border-color: $status-color-requires-review;
         color: $status-color-requires-review;
-    }
-
-    &--not-available {
-        border-color: $status-color-not-available;
-        color: $status-color-not-available;
     }
 }
