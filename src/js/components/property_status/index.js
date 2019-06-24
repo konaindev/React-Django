@@ -13,10 +13,11 @@ const PropertyStatus = ({ className, performance_rating }) => {
     "property-status--at-risk": performance_rating === 1,
     "property-status--on-track": performance_rating === 2
   });
-  if (performance_rating === -1) {
-    return <div> </div>;
-  }
-  return <div className={classNames}>{STATUS_LABEL[performance_rating]}</div>;
+  return (
+    <div className={classNames}>
+      {performance_rating == -1 ? "" : STATUS_LABEL[performance_rating]}
+    </div>
+  );
 };
 
 PropertyStatus.propTypes = {

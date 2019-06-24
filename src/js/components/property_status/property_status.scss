@@ -31,4 +31,8 @@ $status-text-size: 11px;
         border-color: $status-color-requires-review;
         color: $status-color-requires-review;
     }
+
+    &--not-available {
+        height: 28px;
+    }
 }
