@@ -110,7 +110,7 @@ def fetch_population(zipcode):
     households = int(td_value.replace(",", ""))
     result = (population, households)
 
-    logger.info(f"usa_census::fetch_population::end {result}")
+    logger.info(f"usa_census::fetch_population::end")
     return result
 
 
@@ -152,7 +152,7 @@ def fetch_age_segments_by_zip(zipcode):
             txt = gs[x].title.text
             value = float(txt.replace("%", ""))
             result.append(value / 100.0)
-    logger.info(f"usa_census::fetch_age_segments_by_zip::end {result}")
+    logger.info(f"usa_census::fetch_age_segments_by_zip::end")
     return result
 
 
@@ -167,7 +167,7 @@ def fetch_household_type(zipcode):
             if txt.find("%") > -1:
                 value = float(txt.replace("%", "").replace(",", ""))
                 result.append(value / 100.0)
-    logger.info(f"usa_census::fetch_household_type::end {result}")
+    logger.info(f"usa_census::fetch_household_type::end")
     return result
 
 
@@ -181,7 +181,7 @@ def fetch_household_income(zipcode):
     for x in range(len(result)):
         txt = result[x].title.text
         result[x] = float(txt.replace("$", "").replace(",", ""))
-    logger.info(f"usa_census::fetch_household_income::end", result)
+    logger.info(f"usa_census::fetch_household_income::end")
     return result
 
 
@@ -197,7 +197,7 @@ def fetch_household_income_distribution(zipcode):
             txt = gs[x].title.text
             value = float(txt.replace("%", ""))
             result.append(value / 100.0)
-    logger.info(result)
+    logger.info(f"usa_census::fetch_household_income_distribution::end")
     return result
 
 
