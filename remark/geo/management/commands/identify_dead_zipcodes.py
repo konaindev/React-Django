@@ -11,7 +11,7 @@ logger = getLogger(__name__)
 
 
 class Command(BaseCommand):
-    help = "Identify dead zipcodes checking Atals service"
+    help = "Identify dead zipcodes checking Atlas service"
 
     def add_arguments(self, parser):
         # Optional argument
