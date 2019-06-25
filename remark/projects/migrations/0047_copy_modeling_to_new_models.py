@@ -92,7 +92,7 @@ def copy_modeling_data(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('projects', '0041_add_models_for_modeling_v2'),
+        ('projects', '0046_add_models_for_modeling_v2'),
     ]
 
     operations = [

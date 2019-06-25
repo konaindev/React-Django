@@ -9,7 +9,7 @@ import remark.projects.models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('projects', '0040_merge_20190612_1859'),
+        ('projects', '0045_auto_20190624_1713'),
     ]
 
     operations = [

@@ -6,7 +6,7 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('projects', '0042_copy_modeling_to_new_models'),
+        ('projects', '0047_copy_modeling_to_new_models'),
     ]
 
     operations = [
