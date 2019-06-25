@@ -56,12 +56,14 @@ export default class MultiSelect extends React.PureComponent {
     placeholder: PropTypes.string,
     label: PropTypes.string,
     onChange: PropTypes.func,
+    onApply: PropTypes.func,
     selectAllLabel: PropTypes.string
   };
 
   static defaultProps = {
     value: [],
     selectAllLabel: "All",
+    onApply: () => {},
     label: "Select..."
   };
 
@@ -89,6 +91,14 @@ export default class MultiSelect extends React.PureComponent {
             onClick={this.onReset}
           >
             reset
+          </Button>
+          <Button
+            className="multi-select__button"
+            uppercase={true}
+            color="primary"
+            onClick={this.props.onApply}
+          >
+            apply
           </Button>
         </div>
       </components.MenuList>

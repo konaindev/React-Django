@@ -57,6 +57,8 @@ $controls-spacing: 50px 30px 22px;
 }
 
 .multi-select__controls {
+    display: flex;
+    justify-content: space-between;
     margin: $controls-spacing;
 }
 

@@ -72,6 +72,14 @@ export default class GroupSelect extends React.PureComponent {
           >
             reset
           </Button>
+          <Button
+            className="multi-select__button"
+            uppercase={true}
+            color="primary"
+            onClick={this.props.onApply}
+          >
+            apply
+          </Button>
         </div>
       </components.MenuList>
     );
@@ -179,11 +187,13 @@ GroupSelect.propTypes = {
   placeholder: PropTypes.string,
   label: PropTypes.string,
   onChange: PropTypes.func,
+  onApply: PropTypes.func,
   selectAllLabel: PropTypes.string
 };
 
 GroupSelect.defaultProps = {
   value: [],
   selectAllLabel: "Select All",
-  label: "Select..."
+  label: "Select...",
+  onApply: () => {}
 };

@@ -3,9 +3,9 @@
 $selected-color: $blue-3;
 $checkbox-spacing: 13.5px;
 $group-width: 180px;
-$menu-spacing: 0 0 20px 20px;
+$menu-spacing: 0 30px 30px 30px;
 $menu-max-height: 400px;
-$option-spacing: 0 15px;
+$option-spacing: 37px;
 $group-border-color: $gray-4;
 $controls-spacing: 50px;
 
@@ -25,6 +25,7 @@ $controls-spacing: 50px;
     }
 
     .select__menu {
+        width: auto;
         padding: $menu-spacing;
         box-sizing: content-box;
     }
@@ -66,7 +67,11 @@ $controls-spacing: 50px;
 
     .select__group {
         width: $group-width;
-        margin: $option-spacing;
+        margin-left: $option-spacing;
+
+        &:first-child {
+            margin-left: 0;
+        }
     }
 }
 
@@ -76,11 +81,9 @@ $controls-spacing: 50px;
     border-bottom: 1px solid $group-border-color;
 }
 
-.group-select__all {
-    margin: $option-spacing;
-}
-
 .group-select__controls {
+    display: flex;
+    justify-content: space-between;
     margin-top: $controls-spacing;
 }
 

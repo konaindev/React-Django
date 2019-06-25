@@ -358,6 +358,12 @@ exports[`GroupSelect all selected 1`] = `
         >
           reset
         </button>
+        <button
+          className="button button--uppercase button--primary multi-select__button"
+          onClick={[Function]}
+        >
+          apply
+        </button>
       </div>
     </div>
   </div>
