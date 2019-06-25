@@ -28,4 +28,8 @@ $header-half-inset: 36px;
         display: block;
         padding: 0 0 0 $header-half-inset;
     }
+
+    &__nav {
+        margin: 0 auto;
+    }
 }

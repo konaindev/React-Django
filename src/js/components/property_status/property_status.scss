@@ -1,8 +1,5 @@
 @import "css/base.scss";
 
-$status-color-on-track: $green-3;
-$status-color-at-risk: $yellow-1;
-$status-color-requires-review: $orange-2;
 $status-text-height: 18px;
 $status-text-size: 11px;
 
@@ -18,18 +15,18 @@ $status-text-size: 11px;
     white-space: nowrap;
 
     &--on-track {
-        border-color: $status-color-on-track;
-        color: $status-color-on-track;
+        border-color: $property-status-color-on-track;
+        color: $property-status-color-on-track;
     }
 
     &--at-risk {
-        border-color: $status-color-at-risk;
-        color: $status-color-at-risk;
+        border-color: $property-status-color-at-risk;
+        color: $property-status-color-at-risk;
     }
 
     &--off-track {
-        border-color: $status-color-requires-review;
-        color: $status-color-requires-review;
+        border-color: $property-status-color-requires-review;
+        color: $property-status-color-requires-review;
     }
 
     &--not-available {

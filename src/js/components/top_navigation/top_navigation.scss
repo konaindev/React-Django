@@ -1,0 +1,33 @@
+@import 'css/base.scss';
+
+$link-spacing: 50px;
+$link-padding: 28px 0 25px;
+$active-border-color: #006EFF;
+
+.top-navigation {
+    display: flex;
+    justify-content: center;
+}
+
+.top-navigation__link {
+    padding: $link-padding;
+    margin-left: $link-spacing;
+    font-family: $font-sans;
+    font-size: $text-base;
+    line-height: $line-height-tight;
+    letter-spacing: $letter-spacing-wide;
+    color: $nav-link-disabled-color;
+    text-align: center;
+    text-decoration: none;
+
+    &:first-child {
+        margin-left: 0;
+    }
+
+    &--active {
+        color: $nav-link-color;
+        border-right: 3px solid transparent;
+        border-bottom: 3px solid $active-border-color;
+        border-left: 3px solid transparent;
+    }
+}
