@@ -7,11 +7,14 @@ import { props } from "./props";
 
 storiesOf("SortSelect", module).add(
   "default",
-  withState({ isReverse: false })(({ store }) => (
-    <SortSelect
-      {...props}
-      isReverse={store.state.isReverse}
-      onReverse={isReverse => store.set({ isReverse })}
-    />
+  withState({ direction: "asc" })(({ store }) => (
+    <div style={{ width: 300 }}>
+      <SortSelect
+        {...props}
+        direction={store.state.direction}
+        value={store.state.value}
+        onChange={(value, direction) => store.set({ value, direction })}
+      />
+    </div>
   ))
 );

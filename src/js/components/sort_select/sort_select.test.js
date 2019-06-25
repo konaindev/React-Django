@@ -11,7 +11,7 @@ describe("SortSelect", () => {
   });
   it("render reverse sort select", () => {
     const tree = renderer
-      .create(<SortSelect {...props} isReverse={true} />)
+      .create(<SortSelect {...props} direction="desc" />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
