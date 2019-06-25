@@ -4,18 +4,21 @@ $selected-color: $blue-3;
 $checkbox-spacing: 13.5px;
 $group-width: 180px;
 $menu-spacing: 0 0 20px 20px;
-$menu-max-height: 500px;
+$menu-max-height: 400px;
 $option-spacing: 0 15px;
 $group-border-color: $gray-4;
+$controls-spacing: 50px;
+$reset-button-background: $gray-4;
 
 .group-select {
+    &.select .select__option:active,
     &.select .select__option--is-focused,
     &.select .select__option--is-selected {
         background-color: $select-option-background-color;
     }
 
-    &.select .select__option:active {
-        background: transparent;
+    &.select .select__option--is-selected {
+        color: $select-option-color;
     }
 
     .select__group-heading {
@@ -28,7 +31,7 @@ $group-border-color: $gray-4;
     }
 
     .select__menu-list {
-        max-height: $menu-max-height;
+        max-height: none;
     }
 
     .group-select__option {
@@ -57,8 +60,11 @@ $group-border-color: $gray-4;
 }
 
 .group-select__groups {
+    @include force-scrollbar();
     display: flex;
- 
+    overflow: auto;
+    max-height: $menu-max-height;
+
     .select__group {
         width: $group-width;
         margin: $option-spacing;
@@ -73,4 +79,17 @@ $group-border-color: $gray-4;
 
 .group-select__all {
     margin: $option-spacing;
+}
+
+.group-select__controls {
+    margin-top: $controls-spacing;
+}
+
+.group-select__reset {
+    padding: $s3 $s6;
+    font-size: $text-xs;
+    letter-spacing: $letter-spacing-wider;
+    background: $reset-button-background;
+    color: $button-default-active-text-color;
+    font-weight: $weight-bold;
 }
