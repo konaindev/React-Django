@@ -18,7 +18,7 @@ export default class DashboardControls extends React.PureComponent {
     { label: "By State", value: "state" },
     { label: "By City", value: "city" },
     { label: "By Fund", value: "fund" },
-    { label: "By performance", value: "performance" }
+    { label: "By Performance", value: "performance" }
   ];
 
   static propTypes = {
