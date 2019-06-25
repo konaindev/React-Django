@@ -32,28 +32,34 @@ export class MapWithPolygon extends Component {
     this.zipcodeMarkers = [];
     this.mapBounds = new google.maps.LatLngBounds();
 
-    try {
-      this.props.zip_codes.forEach(zipcodeData => {
-        const {
-          zip,
-          properties,
-          outline: { type, coordinates }
-        } = zipcodeData;
+    const uniqZipCodes = this.props.zip_codes.reduce((acc, cur) => {
+      const x = acc.find(item => item.zip === cur.zip);
+      if (!x) {
+        return acc.concat([cur]);
+      } else {
+        return acc;
+      }
+    }, []);
 
-        if (type === "Polygon") {
-          this.renderPolygonOutline(zip, coordinates);
+    try {
+      uniqZipCodes.forEach(({ zip, properties, outline }) => {
+        outline = outline || { coordinates: [] };
+
+        if (outline.type === "Polygon") {
+          this.renderPolygonOutline(zip, outline.coordinates);
         }
-        if (type == "MultiPolygon") {
+        if (outline.type == "MultiPolygon") {
           // "coordinates" is an array of Polygon coordinate arrays.
-          coordinates.forEach(polygonCoords => {
+          outline.coordinates.forEach(polygonCoords => {
             this.renderPolygonOutline(zip, polygonCoords);
           });
         }
-
-        this.renderZipCodeLabel(zip, properties);
+        if (outline.type) {
+          this.renderZipCodeLabel(zip, properties);
+        }
       });
     } catch (e) {
-      console.log("Failed to render zip codes");
+      console.log("Failed to render zip codes", e);
     }
 
     // Resize the viewport to contain all zipcode areas.
