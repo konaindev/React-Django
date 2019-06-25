@@ -15,6 +15,7 @@ export default class Button extends Component {
     color: PropTypes.oneOf([
       "default",
       "primary",
+      "secondary",
       "outline",
       "disabled",
       "transparent"

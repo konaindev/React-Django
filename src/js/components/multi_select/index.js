@@ -83,7 +83,8 @@ export default class MultiSelect extends React.PureComponent {
         <div className="multi-select__options">{props.children}</div>
         <div className="multi-select__controls">
           <Button
-            className="multi-select__reset"
+            className="multi-select__button"
+            color="secondary"
             uppercase={true}
             onClick={this.onReset}
           >

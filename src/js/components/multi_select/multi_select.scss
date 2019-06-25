@@ -4,7 +4,6 @@ $selected-color: $blue-3;
 $checkbox-spacing: 13.5px;
 $option-spacing: 14px 30px;
 $menu-max-height: 400px;
-$reset-button-background: $gray-4;
 $controls-spacing: 50px 30px 22px;
 
 .multi-select {
@@ -61,11 +60,9 @@ $controls-spacing: 50px 30px 22px;
     margin: $controls-spacing;
 }
 
-.multi-select__reset {
-    padding: $s3 $s6;
+.multi-select__button {
+    width: 100px;
     font-size: $text-xs;
     font-weight: $weight-bold;
     letter-spacing: $letter-spacing-wider;
-    color: $button-default-active-text-color;
-    background: $reset-button-background;
 }

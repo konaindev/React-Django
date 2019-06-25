@@ -65,7 +65,8 @@ export default class GroupSelect extends React.PureComponent {
         <div className="group-select__groups">{props.children}</div>
         <div className="group-select__controls">
           <Button
-            className="group-select__reset"
+            className="group-select__button"
+            color="secondary"
             uppercase={true}
             onClick={this.onReset}
           >

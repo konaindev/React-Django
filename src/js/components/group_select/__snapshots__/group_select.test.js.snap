@@ -353,7 +353,7 @@ exports[`GroupSelect all selected 1`] = `
         className="group-select__controls"
       >
         <button
-          className="button button--uppercase button--default group-select__reset"
+          className="button button--uppercase button--secondary group-select__button"
           onClick={[Function]}
         >
           reset

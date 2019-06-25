@@ -8,7 +8,6 @@ $menu-max-height: 400px;
 $option-spacing: 0 15px;
 $group-border-color: $gray-4;
 $controls-spacing: 50px;
-$reset-button-background: $gray-4;
 
 .group-select {
     &.select .select__option:active,
@@ -85,11 +84,9 @@ $reset-button-background: $gray-4;
     margin-top: $controls-spacing;
 }
 
-.group-select__reset {
-    padding: $s3 $s6;
+.group-select__button {
+    width: 100px;
     font-size: $text-xs;
-    letter-spacing: $letter-spacing-wider;
-    background: $reset-button-background;
-    color: $button-default-active-text-color;
     font-weight: $weight-bold;
+    letter-spacing: $letter-spacing-wider;
 }

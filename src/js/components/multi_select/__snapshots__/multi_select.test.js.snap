@@ -145,7 +145,7 @@ exports[`MultiSelect all selected 1`] = `
         className="multi-select__controls"
       >
         <button
-          className="button button--uppercase button--default multi-select__reset"
+          className="button button--uppercase button--secondary multi-select__button"
           onClick={[Function]}
         >
           reset

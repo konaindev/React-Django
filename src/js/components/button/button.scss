@@ -42,6 +42,19 @@
         }
     }
 
+    &--secondary {
+        background-color: $button-secondary-bg-color;
+        color: $button-secondary-text-color;
+
+        &:hover, &:focus {
+            background-color: lighten($button-secondary-bg-color, 3%);
+        }
+
+        &:active {
+            background-color: darken($button-secondary-bg-color, 2%);
+        }
+    }
+
     &--outline {
         background-color: transparent;
         border: 1px solid $button-outline-border-color;
