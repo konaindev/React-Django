@@ -12,13 +12,12 @@ import "./dashboard_controls.scss";
 
 export default class DashboardControls extends React.PureComponent {
   static sortOptions = [
-    { label: "Recently Viewed", value: "recently" },
+    { label: "By Name", value: "name" },
     { label: "By Property Mgr.", value: "propertyMgr" },
     { label: "By Asset Owner", value: "assetOwner" },
-    { label: "By Region", value: "region" },
+    { label: "By State", value: "state" },
     { label: "By City", value: "city" },
-    { label: "By Fund", value: "fund" },
-    { label: "By performance", value: "performance" }
+    { label: "By Fund", value: "fund" }
   ];
 
   static propTypes = {
@@ -34,7 +33,9 @@ export default class DashboardControls extends React.PureComponent {
       st: PropTypes.array,
       fd: PropTypes.array,
       am: PropTypes.array,
-      pm: PropTypes.array
+      pm: PropTypes.array,
+      s: PropTypes.string,
+      d: PropTypes.oneOf(["asc", "desc"])
     }),
     onChange: PropTypes.func.isRequired
   };
@@ -134,6 +135,17 @@ export default class DashboardControls extends React.PureComponent {
     this.props.onChange(this.state.filters);
   };
 
+  onChangeSort = (value, direction) => {
+    const filters = {
+      ...this.state.filters,
+      s: value,
+      d: direction
+    };
+    this.setState({ filters }, () => {
+      this.props.onChange(filters);
+    });
+  };
+
   render() {
     const searchText = this.state.filters?.q;
     const locationsOptions = this.locationsOptions;
@@ -152,6 +164,7 @@ export default class DashboardControls extends React.PureComponent {
       propertyManagersOptions,
       "pm"
     );
+    const sort = this.props.filters.s || this.props.sortOptions[0].value;
     return (
       <SearchField value={searchText} onSubmit={this.onSearchHandler}>
         <div className="dashboard-controls">
@@ -208,7 +221,9 @@ export default class DashboardControls extends React.PureComponent {
           <SortSelect
             className="dashboard-controls__sort"
             options={this.props.sortOptions}
-            defaultValue={this.props.sortOptions[0]}
+            value={sort}
+            direction={this.props.filters.d}
+            onChange={this.onChangeSort}
           />
         </div>
       </SearchField>
