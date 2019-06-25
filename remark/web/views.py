@@ -52,7 +52,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
                 {
                     "property_name": project.name,
                     "property_id": project.public_id,
-                    "address": str(project.address) if project.address else "",
+                    "address": f"{project.address.city}, {project.address.state}" if project.address else "",
                     "image_url": project.get_building_image_url(),
                     "performance_rating": project.get_performance_rating(),
                     "url": project.get_baseline_url(),
