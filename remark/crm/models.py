@@ -38,6 +38,7 @@ def avatar_media_path(person, filename):
     random_str = get_random_string(length=7)
     return f"person/{person.public_id}/avatar_{random_str}{extension}"
 
+
 class BusinessesQuerySet(models.QuerySet):
     def property_managers(self, account_id, **kwargs):
         project_subquery = models.Subquery(
