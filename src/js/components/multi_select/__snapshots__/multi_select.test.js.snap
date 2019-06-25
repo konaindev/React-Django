@@ -6,7 +6,7 @@ exports[`MultiSelect all selected 1`] = `
   onKeyDown={[Function]}
 >
   <div
-    className="multi-select--has-value select__control css-yk16xz-control"
+    className="multi-select--has-value select__control select__control--menu-is-open css-yk16xz-control"
     onMouseDown={[Function]}
     onTouchEnd={[Function]}
   >
@@ -45,6 +45,117 @@ exports[`MultiSelect all selected 1`] = `
         <div
           className="select__dropdown-arrow"
         />
+      </div>
+    </div>
+  </div>
+  <div
+    className="select__menu css-26l3qy-menu"
+    onMouseDown={[Function]}
+    onMouseMove={[Function]}
+  >
+    <div
+      className="select__menu-list select__menu-list--is-multi css-11unzgr"
+    >
+      <div
+        className="multi-select__option select__option select__option--is-selected"
+        onClick={[Function]}
+      >
+        <div
+          className="checkbox multi-select__checkbox checkbox--selected"
+        />
+        <div
+          className="multi-select__option-label"
+        >
+          ALL
+        </div>
+      </div>
+      <div
+        className="multi-select__options"
+      >
+        <div
+          className="multi-select__option select__option select__option--is-selected css-9gakcf-option"
+          id="react-select-3-option-0"
+          onClick={[Function]}
+          onMouseMove={[Function]}
+          onMouseOver={[Function]}
+          tabIndex={-1}
+        >
+          <div
+            className="checkbox multi-select__checkbox checkbox--selected"
+          />
+          <div
+            className="multi-select__option-label"
+          >
+            Option 1
+          </div>
+        </div>
+        <div
+          className="multi-select__option select__option select__option--is-selected css-9gakcf-option"
+          id="react-select-3-option-1"
+          onClick={[Function]}
+          onMouseMove={[Function]}
+          onMouseOver={[Function]}
+          tabIndex={-1}
+        >
+          <div
+            className="checkbox multi-select__checkbox checkbox--selected"
+          />
+          <div
+            className="multi-select__option-label"
+          >
+            Option 2
+          </div>
+        </div>
+        <div
+          className="multi-select__option select__option select__option--is-selected css-9gakcf-option"
+          id="react-select-3-option-2"
+          onClick={[Function]}
+          onMouseMove={[Function]}
+          onMouseOver={[Function]}
+          tabIndex={-1}
+        >
+          <div
+            className="checkbox multi-select__checkbox checkbox--selected"
+          />
+          <div
+            className="multi-select__option-label"
+          >
+            Option 3
+          </div>
+        </div>
+        <div
+          className="multi-select__option select__option select__option--is-selected css-9gakcf-option"
+          id="react-select-3-option-3"
+          onClick={[Function]}
+          onMouseMove={[Function]}
+          onMouseOver={[Function]}
+          tabIndex={-1}
+        >
+          <div
+            className="checkbox multi-select__checkbox checkbox--selected"
+          />
+          <div
+            className="multi-select__option-label"
+          >
+            Option 4
+          </div>
+        </div>
+      </div>
+      <div
+        className="multi-select__controls"
+      >
+        <button
+          className="button button--uppercase button--secondary multi-select__button"
+          onClick={[Function]}
+        >
+          reset
+        </button>
+        <button
+          className="button button--uppercase button--primary multi-select__button"
+          onClick={[Function]}
+        >
+          apply
+        </button>
       </div>
     </div>
   </div>

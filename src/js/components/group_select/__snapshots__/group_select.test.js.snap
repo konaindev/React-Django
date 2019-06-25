@@ -349,6 +349,22 @@ exports[`GroupSelect all selected 1`] = `
           </div>
         </div>
       </div>
+      <div
+        className="group-select__controls"
+      >
+        <button
+          className="button button--uppercase button--secondary group-select__button"
+          onClick={[Function]}
+        >
+          reset
+        </button>
+        <button
+          className="button button--uppercase button--primary multi-select__button"
+          onClick={[Function]}
+        >
+          apply
+        </button>
+      </div>
     </div>
   </div>
 </div>

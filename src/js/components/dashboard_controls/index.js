@@ -167,7 +167,7 @@ export default class DashboardControls extends React.PureComponent {
             label="Locations…"
             selectAllLabel="ALL LOCATIONS"
             onChange={this.onChangeLocation}
-            onMenuClose={this.onChangeFilter}
+            onApply={this.onChangeFilter}
           />
           <MultiSelect
             className="dashboard-controls__field"
@@ -179,7 +179,7 @@ export default class DashboardControls extends React.PureComponent {
             label="Funds…"
             selectAllLabel="ALL FUNDS"
             onChange={this.onChangeHandler}
-            onMenuClose={this.onChangeFilter}
+            onApply={this.onChangeFilter}
           />
           <MultiSelect
             className="dashboard-controls__field"
@@ -191,7 +191,7 @@ export default class DashboardControls extends React.PureComponent {
             label="Asset Owners…"
             selectAllLabel="ALL OWNERS"
             onChange={this.onChangeHandler}
-            onMenuClose={this.onChangeFilter}
+            onApply={this.onChangeFilter}
           />
           <MultiSelect
             className="dashboard-controls__field"
@@ -203,7 +203,7 @@ export default class DashboardControls extends React.PureComponent {
             label="Property Mgr…"
             selectAllLabel="ALL MANAGERS"
             onChange={this.onChangeHandler}
-            onMenuClose={this.onChangeFilter}
+            onApply={this.onChangeFilter}
           />
           <SortSelect
             className="dashboard-controls__sort"
