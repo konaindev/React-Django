@@ -12,7 +12,12 @@ describe("MultiSelect", () => {
   it("all selected", () => {
     const tree = renderer
       .create(
-        <MultiSelect {...props} selectAllLabel="ALL" value={props.options} />
+        <MultiSelect
+          {...props}
+          menuIsOpen
+          selectAllLabel="ALL"
+          value={props.options}
+        />
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

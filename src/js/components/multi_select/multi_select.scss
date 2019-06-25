@@ -1,18 +1,32 @@
-@import 'css/base.scss';
+@import "css/base.scss";
 
 $selected-color: $blue-3;
 $checkbox-spacing: 13.5px;
+$option-spacing: 14px 30px;
+$menu-max-height: 400px;
+$reset-button-background: $gray-4;
+$controls-spacing: 50px 30px 22px;
 
 .multi-select {
+    &.select .select__option:active,
     &.select .select__option--is-focused,
     &.select .select__option--is-selected {
         background-color: $select-option-background-color;
     }
 
+    &.select .select__option--is-selected {
+        color: $select-option-color;
+    }
+
+    .select__menu-list {
+        max-height: none;
+    }
+
     .multi-select__option {
         display: flex;
+        padding: $option-spacing;
         cursor: pointer;
-        align-items: center;
+        align-items: flex-start;
     }
 }
 
@@ -30,4 +44,28 @@ $checkbox-spacing: 13.5px;
 .multi-select__label {
     font-size: $text-sm;
     line-height: $text-xl;
+}
+
+.multi-select__options {
+    @include force-scrollbar();
+    overflow: auto;
+    max-height: $menu-max-height;
+}
+
+.multi-select__checkbox {
+    flex-shrink: 0;
+    margin: 1.5px 0;
+}
+
+.multi-select__controls {
+    margin: $controls-spacing;
+}
+
+.multi-select__reset {
+    padding: $s3 $s6;
+    font-size: $text-xs;
+    font-weight: $weight-bold;
+    letter-spacing: $letter-spacing-wider;
+    color: $button-default-active-text-color;
+    background: $reset-button-background;
 }
