@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import Container from "../container";
+import TopNavigation from "../top_navigation";
 import RemarkablyLogo from "../remarkably_logo";
 
 import "./page_header.scss";
@@ -38,11 +39,23 @@ export default class PageHeader extends Component {
     );
   }
 
+  renderNavLink() {
+    if (!this.props.navLinks) {
+      return null;
+    }
+    return (
+      <div className="page-header__nav">
+        <TopNavigation {...this.props.navLinks} />
+      </div>
+    );
+  }
+
   render() {
     return (
       <div className="page-header">
         <Container className="page-header__inner">
           <RemarkablyLogo />
+          {this.renderNavLink()}
           {this.renderChildren()}
         </Container>
       </div>
