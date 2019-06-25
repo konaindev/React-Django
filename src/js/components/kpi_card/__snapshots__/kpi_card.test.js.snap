@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SectionHeader renders At Risk 1`] = `
+<div
+  className="kpi-card kpi-card--at-risk"
+>
+  <div
+    className="kpi-card__bar"
+  />
+  <div
+    className="kpi-card__health"
+  >
+    <div
+      className="property-status property-status--at-risk"
+    >
+      AT RISK
+    </div>
+  </div>
+  <div
+    className="kpi-card__value"
+  >
+    23%
+  </div>
+  <div
+    className="kpi-card__name"
+  >
+    INQ → TOU
+  </div>
+  <div
+    className="kpi-card__target"
+  >
+    Target: 
+    40%
+  </div>
+</div>
+`;
+
+exports[`SectionHeader renders Off Track 1`] = `
+<div
+  className="kpi-card kpi-card--off-track"
+>
+  <div
+    className="kpi-card__bar"
+  />
+  <div
+    className="kpi-card__health"
+  >
+    <div
+      className="property-status property-status--off-track"
+    >
+      OFF TRACK
+    </div>
+  </div>
+  <div
+    className="kpi-card__value"
+  >
+    33%
+  </div>
+  <div
+    className="kpi-card__name"
+  >
+    TOU → APP
+  </div>
+  <div
+    className="kpi-card__target"
+  >
+    Target: 
+    66%
+  </div>
+</div>
+`;
+
+exports[`SectionHeader renders On Track 1`] = `
+<div
+  className="kpi-card kpi-card--on-track"
+>
+  <div
+    className="kpi-card__bar"
+  />
+  <div
+    className="kpi-card__health"
+  >
+    <div
+      className="property-status property-status--on-track"
+    >
+      ON TRACK
+    </div>
+  </div>
+  <div
+    className="kpi-card__value"
+  >
+    5%
+  </div>
+  <div
+    className="kpi-card__name"
+  >
+    USV → INQ
+  </div>
+  <div
+    className="kpi-card__target"
+  >
+    Target: 
+    6%
+  </div>
+</div>
+`;
