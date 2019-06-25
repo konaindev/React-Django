@@ -12,7 +12,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
 
     page_class = "DashboardPage"
 
-    sort = {
+    sql_sort = {
         "name": "name",
         "propertyMgr": "property_manager__name",
         "assetOwner": "asset_manager__name",
@@ -41,7 +41,8 @@ class DashboardView(LoginRequiredMixin, ReactView):
         if request.GET.get("fd"):
             project_params["fund_id__in"] = request.GET.getlist("fd")
 
-        order = self.sort.get(request.GET.get("s")) or "name"
+        sort = request.GET.get("s")
+        order = self.sql_sort.get(sort) or "name"
         direction = request.GET.get("d") or "asc"
         if direction == "desc":
             order = f"-{order}"
@@ -67,6 +68,9 @@ class DashboardView(LoginRequiredMixin, ReactView):
                     "url": project.get_baseline_url(),
                 }
             )
+        if sort == "performance":
+            is_reverse = direction == "asc"
+            projects = sorted(projects, key=lambda p: p["performance_rating"], reverse=is_reverse)
 
         locations = []
         for project in Project.objects.filter(account_id=user.account_id).distinct(
