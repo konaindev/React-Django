@@ -49,7 +49,7 @@ export default class DashboardControls extends React.PureComponent {
   };
 
   static locationsStyle = columns => ({
-    menu: provided => ({ ...provided, width: 210 * columns })
+    menu: provided => ({ ...provided, width: 210 * columns, minWidth: 320 })
   });
 
   constructor(props) {
