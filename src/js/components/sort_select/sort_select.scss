@@ -59,6 +59,7 @@ $border-color: $gray-4;
     padding: $sort-icon-spacing;
     color: $input-label-color;
     cursor: pointer;
+    box-sizing: content-box;
 
     &--reverse {
         transform: scale(1, -1);

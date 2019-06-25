@@ -12,6 +12,15 @@ class DashboardView(LoginRequiredMixin, ReactView):
 
     page_class = "DashboardPage"
 
+    sql_sort = {
+        "name": "name",
+        "propertyMgr": "property_manager__name",
+        "assetOwner": "asset_manager__name",
+        "state": "address__state",
+        "city": "address__city",
+        "fund": "fund__name",
+    }
+
     def get_page_title(self):
         return "Dashboard"
 
@@ -37,6 +46,12 @@ class DashboardView(LoginRequiredMixin, ReactView):
         if request.GET.get("fd"):
             project_params["fund_id__in"] = request.GET.getlist("fd")
 
+        sort = request.GET.get("s")
+        order = self.sql_sort.get(sort) or "name"
+        direction = request.GET.get("d") or "asc"
+        if direction == "desc":
+            order = f"-{order}"
+
         user_dict = {
             "email": user.email,
             "user_id": user.public_id,
@@ -47,7 +62,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
         }
 
         projects = []
-        for project in Project.objects.filter(**project_params):
+        for project in Project.objects.filter(**project_params).order_by(order):
             projects.append(
                 {
                     "property_name": project.name,
@@ -58,6 +73,9 @@ class DashboardView(LoginRequiredMixin, ReactView):
                     "url": project.get_baseline_url(),
                 }
             )
+        if sort == "performance":
+            is_reverse = direction == "asc"
+            projects = sorted(projects, key=lambda p: p["performance_rating"], reverse=is_reverse)
 
         locations = []
         for project in Project.objects.filter(account_id=user.account_id).distinct(
@@ -89,7 +107,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
         return self.render(
             properties=projects,
             user=user_dict,
-            search_url=request.get_full_path(),
+            search_url=request.GET.urlencode(),
             locations=locations,
             property_managers=property_managers,
             asset_managers=asset_managers,

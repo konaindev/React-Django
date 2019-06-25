@@ -1,5 +1,6 @@
 import _isEmpty from "lodash/isEmpty";
 import _isArray from "lodash/isArray";
+import _isEqual from "lodash/isEqual";
 import cn from "classnames";
 import React from "react";
 import PropTypes from "prop-types";
@@ -210,18 +211,23 @@ export default class UrlQueryLayer extends React.PureComponent {
   constructor(props) {
     super(props);
     this.filters = {};
-    const urlParams = new URLSearchParams(window.location.search);
+    const urlParams = new URLSearchParams(props.search_url);
     this.filters = {
       q: urlParams.get("q"),
       ct: urlParams.getAll("ct"),
       st: urlParams.getAll("st"),
       fd: urlParams.getAll("fd"),
       am: urlParams.getAll("am"),
-      pm: urlParams.getAll("pm")
+      pm: urlParams.getAll("pm"),
+      s: urlParams.get("s"),
+      d: urlParams.get("d")
     };
   }
 
   onChangeFilter = filters => {
+    if (_isEqual(filters, this.filters)) {
+      return;
+    }
     const urlParams = new URLSearchParams();
     Object.keys(filters).forEach(filterName => {
       const value = filters[filterName];
@@ -233,10 +239,7 @@ export default class UrlQueryLayer extends React.PureComponent {
         }
       }
     });
-    const searchStr = urlParams.toString();
-    if (searchStr !== window.location.search) {
-      window.location.search = searchStr;
-    }
+    window.location.search = urlParams.toString();
   };
 
   render() {

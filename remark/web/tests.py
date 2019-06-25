@@ -27,19 +27,19 @@ class PropertyListTestCase(TestCase):
             account=self.account, email="test@test.com", password="testpassword"
         )
         self.asset_manager1 = Business.objects.create(
-            name="Test Asset Manager", business_type=2, address=address
+            name="Test Asset Manager", business_type=2
         )
         self.asset_manager2 = Business.objects.create(
-            name="Test Asset Manager 2", business_type=2, address=address
+            name="Test Asset Manager 2", business_type=2
         )
         self.property_manager1 = Business.objects.create(
-            name="Test Property Manager", business_type=3, address=address
+            name="Test Property Manager", business_type=3
         )
         self.property_manager2 = Business.objects.create(
-            name="Test Property Manager 2", business_type=3, address=address
+            name="Test Property Manager 2", business_type=3
         )
         property_owner = Business.objects.create(
-            name="Test Property Owner", business_type=1, address=address
+            name="Test Property Owner", business_type=1
         )
         self.fund1 = Fund.objects.create(account=self.account, name="Test Fund 1")
         self.fund2 = Fund.objects.create(account=self.account, name="Test Fund 2")
@@ -136,7 +136,9 @@ class PropertyListTestCase(TestCase):
             response.context["page_props"]["property_managers"],
             data["property_managers"],
         )
-        self.assertCountEqual(response.context["page_props"]["locations"], data["locations"])
+        self.assertCountEqual(
+            response.context["page_props"]["locations"], data["locations"]
+        )
         self.assertCountEqual(response.context["page_props"]["user"], data["user"])
 
     def test_query(self):
@@ -205,5 +207,7 @@ class PropertyListTestCase(TestCase):
             response.context["page_props"]["property_managers"],
             data["property_managers"],
         )
-        self.assertCountEqual(response.context["page_props"]["locations"], data["locations"])
+        self.assertCountEqual(
+            response.context["page_props"]["locations"], data["locations"]
+        )
         self.assertCountEqual(response.context["page_props"]["user"], data["user"])

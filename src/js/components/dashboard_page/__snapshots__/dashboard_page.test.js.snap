@@ -375,7 +375,7 @@ exports[`DashboardPage Row select 1`] = `
                           <div
                             className="select__single-value css-1uccc91-singleValue"
                           >
-                            Recently Viewed
+                            By Name
                           </div>
                           <input
                             className="css-62g3xt-dummyInput"
@@ -1459,7 +1459,7 @@ exports[`DashboardPage Row view 1`] = `
                           <div
                             className="select__single-value css-1uccc91-singleValue"
                           >
-                            Recently Viewed
+                            By Name
                           </div>
                           <input
                             className="css-62g3xt-dummyInput"
@@ -2543,7 +2543,7 @@ exports[`DashboardPage renders correctly 1`] = `
                           <div
                             className="select__single-value css-1uccc91-singleValue"
                           >
-                            Recently Viewed
+                            By Name
                           </div>
                           <input
                             className="css-62g3xt-dummyInput"

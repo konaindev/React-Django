@@ -31,13 +31,13 @@ class DefaultComputedPeriodTestCase(TestCase):
             company_name="test", address=address, account_type=4
         )
         asset_manager = Business.objects.create(
-            name="Test Asset Manager", business_type=2, address=address
+            name="Test Asset Manager", business_type=2
         )
         property_manager = Business.objects.create(
-            name="Test Property Manager", business_type=3, address=address
+            name="Test Property Manager", business_type=3
         )
         property_owner = Business.objects.create(
-            name="Test Property Owner", business_type=1, address=address
+            name="Test Property Owner", business_type=1
         )
         fund = Fund.objects.create(account=account, name="Test Fund")
         project = Project.objects.create(
@@ -209,13 +209,13 @@ class DefaultReportTestCase(TestCase):
             company_name="test", address=address, account_type=4
         )
         asset_manager = Business.objects.create(
-            name="Test Asset Manager", business_type=2, address=address
+            name="Test Asset Manager", business_type=2
         )
         property_manager = Business.objects.create(
-            name="Test Property Manager", business_type=3, address=address
+            name="Test Property Manager", business_type=3
         )
         property_owner = Business.objects.create(
-            name="Test Property Owner", business_type=1, address=address
+            name="Test Property Owner", business_type=1
         )
         fund = Fund.objects.create(account=account, name="Test Fund")
         project = Project.objects.create(
@@ -288,13 +288,13 @@ class LincolnTowerPeriodTestCase(TestCase):
             company_name="test", address=address, account_type=4
         )
         asset_manager = Business.objects.create(
-            name="Test Asset Manager", business_type=2, address=address
+            name="Test Asset Manager", business_type=2
         )
         property_manager = Business.objects.create(
-            name="Test Property Manager", business_type=3, address=address
+            name="Test Property Manager", business_type=3
         )
         property_owner = Business.objects.create(
-            name="Test Property Owner", business_type=1, address=address
+            name="Test Property Owner", business_type=1
         )
         fund = Fund.objects.create(account=account, name="Test Fund")
         self.project = Project.objects.create(
