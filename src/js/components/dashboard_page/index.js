@@ -243,7 +243,7 @@ export default class UrlQueryLayer extends React.PureComponent {
   };
 
   render() {
-    if (_isEmpty(this.props.filters) && !this.props.properties.length) {
+    if (this.props.no_projects) {
       return (
         <PageChrome>
           <div className="dashboard-content">
