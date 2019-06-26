@@ -57,21 +57,21 @@ exports[`MultiSelect all selected 1`] = `
       className="select__menu-list select__menu-list--is-multi css-11unzgr"
     >
       <div
-        className="multi-select__option select__option select__option--is-selected"
-        onClick={[Function]}
-      >
-        <div
-          className="checkbox multi-select__checkbox checkbox--selected"
-        />
-        <div
-          className="multi-select__option-label"
-        >
-          ALL
-        </div>
-      </div>
-      <div
         className="multi-select__options"
       >
+        <div
+          className="multi-select__option select__option select__option--is-selected"
+          onClick={[Function]}
+        >
+          <div
+            className="checkbox multi-select__checkbox checkbox--selected"
+          />
+          <div
+            className="multi-select__option-label"
+          >
+            ALL
+          </div>
+        </div>
         <div
           className="multi-select__option select__option select__option--is-selected css-9gakcf-option"
           id="react-select-3-option-0"

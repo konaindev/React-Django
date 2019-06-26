@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loader hidden 1`] = `null`;
+
+exports[`Loader renders correctly 1`] = `
+<div
+  className="loader"
+>
+  <div
+    className="loader__image"
+  />
+</div>
+`;

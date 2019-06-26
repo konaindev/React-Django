@@ -15,6 +15,7 @@ import PageChrome from "../page_chrome";
 import PropertyCardList from "../property_card_list";
 import PropertyList from "../property_list";
 import { Close, ListView, TileView } from "../../icons";
+import Loader from "../loader";
 
 import "./dashboard_page.scss";
 
@@ -53,7 +54,8 @@ export class DashboardPage extends React.PureComponent {
     this.state = {
       viewType: props.viewType,
       selectedProperties: props.selectedProperties,
-      isShowAddPropertyForm: false
+      isShowAddPropertyForm: false,
+      isShowLoader: false
     };
   }
 
@@ -75,7 +77,10 @@ export class DashboardPage extends React.PureComponent {
   }
 
   onChangeFilter = filters => {
-    this.props.onChangeFilter(filters);
+    this.setState({ isShowLoader: true });
+    setTimeout(() => {
+      this.props.onChangeFilter(filters);
+    }, 150);
   };
 
   toggleView = viewType => this.setState({ viewType });
@@ -127,6 +132,7 @@ export class DashboardPage extends React.PureComponent {
                   color="primary"
                   uppercase={true}
                   onClick={this.onShowAddPropertyForm}
+                  disabled={this.state.isShowLoader}
                 >
                   ADD PROPERTY
                 </Button>
@@ -142,6 +148,7 @@ export class DashboardPage extends React.PureComponent {
                   locations={this.props.locations}
                   filters={this.props.filters}
                   onChange={this.onChangeFilter}
+                  isDisabled={this.state.isShowLoader}
                 />
               </div>
               <div className="dashboard-content__selection">
@@ -152,11 +159,14 @@ export class DashboardPage extends React.PureComponent {
                 />
               </div>
             </div>
-            <PropertiesListComponent
-              properties={this.props.properties}
-              selectedProperties={this.state.selectedProperties}
-              onSelect={this.onSelectHandler}
-            />
+            <div className="dashboard-content__properties">
+              <Loader isShow={this.state.isShowLoader} />
+              <PropertiesListComponent
+                properties={this.props.properties}
+                selectedProperties={this.state.selectedProperties}
+                onSelect={this.onSelectHandler}
+              />
+            </div>
           </Container>
           <AddPropertyModal
             open={this.state.isShowAddPropertyForm}

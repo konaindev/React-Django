@@ -67,22 +67,28 @@ export default class MultiSelect extends React.PureComponent {
     label: "Select..."
   };
 
+  state = {
+    menuIsOpen: false
+  };
+
   menuList = props => {
     const classes = cn("multi-select__option", "select__option", {
       "select__option--is-selected": this.isAllSelected
     });
     return (
       <components.MenuList {...props}>
-        <div className={classes} onClick={this.onSelectAll}>
-          <Checkbox
-            className="multi-select__checkbox"
-            isSelected={this.isAllSelected}
-          />
-          <div className="multi-select__option-label">
-            {this.props.selectAllLabel}
+        <div className="multi-select__options">
+          <div className={classes} onClick={this.onSelectAll}>
+            <Checkbox
+              className="multi-select__checkbox"
+              isSelected={this.isAllSelected}
+            />
+            <div className="multi-select__option-label">
+              {this.props.selectAllLabel}
+            </div>
           </div>
+          {props.children}
         </div>
-        <div className="multi-select__options">{props.children}</div>
         <div className="multi-select__controls">
           <Button
             className="multi-select__button"
@@ -96,7 +102,7 @@ export default class MultiSelect extends React.PureComponent {
             className="multi-select__button"
             uppercase={true}
             color="primary"
-            onClick={this.props.onApply}
+            onClick={this.onApply}
           >
             apply
           </Button>
@@ -134,6 +140,19 @@ export default class MultiSelect extends React.PureComponent {
     this.props.onChange([], field);
   };
 
+  onApply = () => {
+    this.setState({ menuIsOpen: false });
+    this.props.onApply();
+  };
+
+  onMenuOpen = () => {
+    this.setState({ menuIsOpen: true });
+  };
+
+  onMenuClose = () => {
+    this.setState({ menuIsOpen: false });
+  };
+
   render() {
     const { className, label, onChange, ...otherProps } = this.props;
     const classes = cn("multi-select", className);
@@ -152,7 +171,10 @@ export default class MultiSelect extends React.PureComponent {
         hideSelectedOptions={false}
         label={label}
         closeMenuOnSelect={false}
+        menuIsOpen={this.state.menuIsOpen}
         onChange={this.onChange}
+        onMenuOpen={this.onMenuOpen}
+        onMenuClose={this.onMenuClose}
         {...otherProps}
       />
     );

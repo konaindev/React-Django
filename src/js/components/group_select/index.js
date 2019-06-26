@@ -45,6 +45,10 @@ function Control(props) {
 }
 
 export default class GroupSelect extends React.PureComponent {
+  state = {
+    menuIsOpen: false
+  };
+
   menuList = props => {
     const classes = cn(
       "group-select__all",
@@ -56,13 +60,15 @@ export default class GroupSelect extends React.PureComponent {
     );
     return (
       <components.MenuList {...props}>
-        <div className={classes} onClick={this.onSelectAll}>
-          <Checkbox isSelected={this.isAllSelected} />
-          <div className="group-select__option-label">
-            {this.props.selectAllLabel}
+        <div className="group-select__options">
+          <div className={classes} onClick={this.onSelectAll}>
+            <Checkbox isSelected={this.isAllSelected} />
+            <div className="group-select__option-label">
+              {this.props.selectAllLabel}
+            </div>
           </div>
+          <div className="group-select__groups">{props.children}</div>
         </div>
-        <div className="group-select__groups">{props.children}</div>
         <div className="group-select__controls">
           <Button
             className="group-select__button"
@@ -76,7 +82,7 @@ export default class GroupSelect extends React.PureComponent {
             className="multi-select__button"
             uppercase={true}
             color="primary"
-            onClick={this.props.onApply}
+            onClick={this.onApply}
           >
             apply
           </Button>
@@ -152,6 +158,19 @@ export default class GroupSelect extends React.PureComponent {
     return this.props.onChange(options);
   };
 
+  onApply = () => {
+    this.setState({ menuIsOpen: false });
+    this.props.onApply();
+  };
+
+  onMenuOpen = () => {
+    this.setState({ menuIsOpen: true });
+  };
+
+  onMenuClose = () => {
+    this.setState({ menuIsOpen: false });
+  };
+
   render() {
     const { className, label, onChange, ...otherProps } = this.props;
     const classes = cn("group-select", className);
@@ -170,7 +189,10 @@ export default class GroupSelect extends React.PureComponent {
         hideSelectedOptions={false}
         label={label}
         closeMenuOnSelect={false}
+        menuIsOpen={this.state.menuIsOpen}
         onChange={this.onChange}
+        onMenuOpen={this.onMenuOpen}
+        onMenuClose={this.onMenuClose}
         {...otherProps}
       />
     );
