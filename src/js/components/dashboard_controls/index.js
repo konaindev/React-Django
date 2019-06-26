@@ -1,3 +1,4 @@
+import cn from "classnames";
 import _get from "lodash/get";
 import PropTypes from "prop-types";
 import React from "react";
@@ -38,12 +39,14 @@ export default class DashboardControls extends React.PureComponent {
       s: PropTypes.string,
       d: PropTypes.oneOf(["asc", "desc"])
     }),
-    onChange: PropTypes.func.isRequired
+    onChange: PropTypes.func.isRequired,
+    isDisabled: PropTypes.bool
   };
 
   static defaultProps = {
     filters: { ct: [], fd: [], am: [], pm: [] },
-    sortOptions: DashboardControls.sortOptions
+    sortOptions: DashboardControls.sortOptions,
+    isDisabled: false
   };
 
   static multiSelectStyle = {
@@ -162,9 +165,16 @@ export default class DashboardControls extends React.PureComponent {
       "pm"
     );
     const sort = this.props.filters.s || this.props.sortOptions[0].value;
+    const classes = cn("dashboard-controls", {
+      "dashboard-controls--disable": this.props.isDisabled
+    });
     return (
-      <SearchField value={searchText} onSubmit={this.onSearchHandler}>
-        <div className="dashboard-controls">
+      <SearchField
+        className={classes}
+        value={searchText}
+        onSubmit={this.onSearchHandler}
+      >
+        <div className="dashboard-controls__filters">
           <span className="dashboard-controls__title">
             {this.props.propertiesCount} Properties
           </span>
@@ -177,6 +187,7 @@ export default class DashboardControls extends React.PureComponent {
             selectAllLabel="ALL LOCATIONS"
             onChange={this.onChangeLocation}
             onApply={this.onChangeFilter}
+            isDisabled={this.props.isDisabled}
           />
           <MultiSelect
             className="dashboard-controls__field"
@@ -189,6 +200,7 @@ export default class DashboardControls extends React.PureComponent {
             selectAllLabel="ALL FUNDS"
             onChange={this.onChangeHandler}
             onApply={this.onChangeFilter}
+            isDisabled={this.props.isDisabled}
           />
           <MultiSelect
             className="dashboard-controls__field"
@@ -201,6 +213,7 @@ export default class DashboardControls extends React.PureComponent {
             selectAllLabel="ALL OWNERS"
             onChange={this.onChangeHandler}
             onApply={this.onChangeFilter}
+            isDisabled={this.props.isDisabled}
           />
           <MultiSelect
             className="dashboard-controls__field"
@@ -213,6 +226,7 @@ export default class DashboardControls extends React.PureComponent {
             selectAllLabel="ALL MANAGERS"
             onChange={this.onChangeHandler}
             onApply={this.onChangeFilter}
+            isDisabled={this.props.isDisabled}
           />
           <SortSelect
             className="dashboard-controls__sort"
@@ -220,6 +234,7 @@ export default class DashboardControls extends React.PureComponent {
             value={sort}
             direction={this.props.filters.d}
             onChange={this.onChangeSort}
+            isDisabled={this.props.isDisabled}
           />
         </div>
       </SearchField>

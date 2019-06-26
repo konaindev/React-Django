@@ -48,6 +48,10 @@
     transition: all .1s ease;
 }
 
+.dashboard-content__properties {
+    position: relative;
+}
+
 .dashboard-content__select-view {
     display: inline-block;
     margin-right: 22px;

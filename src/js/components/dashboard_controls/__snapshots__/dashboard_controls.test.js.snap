@@ -2,7 +2,7 @@
 
 exports[`DashboardControls renders correctly 1`] = `
 <div
-  className="search-field"
+  className="search-field dashboard-controls"
 >
   <div
     className="search-field__icon"
@@ -64,7 +64,7 @@ exports[`DashboardControls renders correctly 1`] = `
     className="search-field__children"
   >
     <div
-      className="dashboard-controls"
+      className="dashboard-controls__filters"
     >
       <span
         className="dashboard-controls__title"

@@ -8,6 +8,7 @@ import "./search_field.scss";
 
 class SearchField extends React.PureComponent {
   static propTypes = {
+    className: PropTypes.string,
     value: PropTypes.string,
     placeholder: PropTypes.string,
     children: PropTypes.node,
@@ -50,7 +51,7 @@ class SearchField extends React.PureComponent {
   };
 
   render() {
-    const className = cn("search-field", {
+    const className = cn("search-field", this.props.className, {
       "search-field--active": this.state.isActive
     });
     return (

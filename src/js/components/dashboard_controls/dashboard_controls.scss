@@ -3,7 +3,12 @@
 $filter-title-width: 200px;
 $filter-field-spacing: 8px;
 
-.dashboard-controls {
+.dashboard-controls--disable {
+    pointer-events: none;
+    cursor: default;
+}
+
+.dashboard-controls__filters {
     display: flex;
     width: 100%;
     height: 100%;
