@@ -47,6 +47,10 @@ $border-color: $gray-4;
 
         .select__control--menu-is-open {
             background: $select-active-background;
+
+            .select__placeholder {
+                color: $input-text-color;
+            }
         }
 
         .select__single-value {
@@ -60,6 +64,10 @@ $border-color: $gray-4;
     color: $input-label-color;
     cursor: pointer;
     box-sizing: content-box;
+
+    &:hover {
+        background: $border-color;
+    }
 
     &--reverse {
         transform: scale(1, -1);
