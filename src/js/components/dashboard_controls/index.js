@@ -50,10 +50,6 @@ export default class DashboardControls extends React.PureComponent {
     menu: provided => ({ ...provided, width: 320 })
   };
 
-  static locationsStyle = columns => ({
-    menu: provided => ({ ...provided, width: 210 * columns, minWidth: 320 })
-  });
-
   constructor(props) {
     super(props);
     this.state = {
@@ -176,7 +172,6 @@ export default class DashboardControls extends React.PureComponent {
             className="dashboard-controls__field"
             options={locationsOptions}
             value={selectedLocations}
-            styles={DashboardControls.locationsStyle(locationsOptions.length)}
             placeholder="Locations…"
             label="Locations…"
             selectAllLabel="ALL LOCATIONS"

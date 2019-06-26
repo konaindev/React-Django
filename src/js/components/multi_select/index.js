@@ -73,16 +73,18 @@ export default class MultiSelect extends React.PureComponent {
     });
     return (
       <components.MenuList {...props}>
-        <div className={classes} onClick={this.onSelectAll}>
-          <Checkbox
-            className="multi-select__checkbox"
-            isSelected={this.isAllSelected}
-          />
-          <div className="multi-select__option-label">
-            {this.props.selectAllLabel}
+        <div className="multi-select__options">
+          <div className={classes} onClick={this.onSelectAll}>
+            <Checkbox
+              className="multi-select__checkbox"
+              isSelected={this.isAllSelected}
+            />
+            <div className="multi-select__option-label">
+              {this.props.selectAllLabel}
+            </div>
           </div>
+          {props.children}
         </div>
-        <div className="multi-select__options">{props.children}</div>
         <div className="multi-select__controls">
           <Button
             className="multi-select__button"

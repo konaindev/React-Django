@@ -30,3 +30,31 @@
         border-radius: 8px;
     }
 }
+
+@mixin dark-scrollbar() {
+    &::-webkit-scrollbar {
+        -webkit-appearance: none;
+    }
+
+    &::-webkit-scrollbar:vertical {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar:horizontal {
+        height: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        border-radius: 8px;
+        background-color: #404E5C;
+
+        &:hover {
+            background-color: rgba(#404E5C, 0.6);
+        }
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: rgba(#404E5C, 0.25);
+        border-radius: 8px;
+    }
+}

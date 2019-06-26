@@ -56,13 +56,15 @@ export default class GroupSelect extends React.PureComponent {
     );
     return (
       <components.MenuList {...props}>
-        <div className={classes} onClick={this.onSelectAll}>
-          <Checkbox isSelected={this.isAllSelected} />
-          <div className="group-select__option-label">
-            {this.props.selectAllLabel}
+        <div className="group-select__options">
+          <div className={classes} onClick={this.onSelectAll}>
+            <Checkbox isSelected={this.isAllSelected} />
+            <div className="group-select__option-label">
+              {this.props.selectAllLabel}
+            </div>
           </div>
+          <div className="group-select__groups">{props.children}</div>
         </div>
-        <div className="group-select__groups">{props.children}</div>
         <div className="group-select__controls">
           <Button
             className="group-select__button"

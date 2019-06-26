@@ -13,7 +13,13 @@ export const props = {
   ],
   assetManagers: [
     { id: "12345", label: "Brickhouse Asset Management" },
-    { id: "54321", label: "Brick and Mortar Capital" }
+    { id: "54321", label: "Brick and Mortar Capital" },
+    { id: "23456", label: "Edward Rose Building Enterprise" },
+    { id: "34567", label: "Hunt Companies, Inc." },
+    { id: "45678", label: "Camden Property Trust" },
+    { id: "56789", label: "JPMorgan Asset Management" },
+    { id: "67891", label: "Apartment Investment and Management Company" },
+    { id: "78910", label: "Cortland Partners" }
   ],
   funds: [
     { id: "12345", label: "Ground Up Development Fund 1" },
