@@ -137,7 +137,7 @@ class Project(models.Model):
 
     fund = models.ForeignKey(
         "projects.Fund",
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         blank=True,
         null=True
     )
