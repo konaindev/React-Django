@@ -1,24 +1,24 @@
 {% load static %}
-<?xml-stylesheet type="text/css" href="{% static "index.css" %}" ?>
-<svg width="499" height="499" viewBox="0 0 499 499" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="{{ width }}" height="{{ height }}" viewBox="0 0 {{ width }} {{ height }}" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <link href="{% static "index.css" %}" rel="stylesheet" type="text/css" xmlns="http://www.w3.org/1999/xhtml" />
   <style>
     <![CDATA[
     text,
     tspan {
-      font-family: "Formular";
-      font-size: 15px;
-      fill: {{ text_color }};
+      font-family: "{{ font.font_family }}";
+      font-size: {{ font.font_size }};
+      fill: {{ font.color }};
       text-anchor: middle;
     }
     ]]>
   </style>
   <defs>
-    <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="499" height="499">
-      <circle cx="249.5" cy="249.5" r="140.511" stroke="black" stroke-width="74.9393"/>
+    <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="{{ width }}" height="{{ height }}">
+      <circle cx="{{ x0 }}" cy="{{ y0 }}" r="{{ r0 }}" stroke="black" stroke-width="{{ donut_width }}" />
     </mask>
   </defs>
   <g mask="url(#mask0)">
-    <circle cx="249.5" cy="249.5" r="215.4503" fill="{{ bg }}" />
+    <circle cx="{{ x0 }}" cy="{{ y0 }}" r="{{ r }}" fill="{{ bg }}" />
     {% for path in svg_paths %}
     {{ path|safe }}
     {% endfor %}
