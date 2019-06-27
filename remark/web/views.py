@@ -7,6 +7,12 @@ from remark.lib.views import ReactView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
+def has_property_in_list_of_dict(ary, prop, value):
+    for item in ary:
+        if item[prop] == value:
+            return True
+    return False
+
 class DashboardView(LoginRequiredMixin, ReactView):
     """Render dashboard page."""
 
@@ -31,6 +37,46 @@ class DashboardView(LoginRequiredMixin, ReactView):
             project_params = {}
         else:
             project_params = {"account_id": user.account_id}
+
+        locations = []
+        asset_managers = []
+        property_managers = []
+        funds = []
+        no_projects = True
+        for project in Project.objects.filter(**project_params):
+            no_projects = False
+            if project.address is not None:
+                state = project.address.state
+                city = project.address.city
+                label = f"{city}, {state.upper()}",
+                if not has_property_in_list_of_dict(locations, "label", label):
+                    locations.append(
+                        {
+                            "city": city,
+                            "label": label,
+                            "state": state.lower(),
+                        }
+                    )
+            if project.asset_manager is not None and \
+                not has_property_in_list_of_dict(asset_managers, "id", project.asset_manager.public_id):
+                asset_managers.append({
+                    "id": project.asset_manager.public_id,
+                    "label": project.asset_manager.name
+                })
+
+            if project.property_manager is not None and \
+                not has_property_in_list_of_dict(property_managers, "id", project.property_manager.public_id):
+                property_managers.append({
+                    "id": project.property_manager.public_id,
+                    "label": project.property_manager.name
+                })
+
+            if project.fund is not None and \
+                not has_property_in_list_of_dict(funds, "id", project.fund.public_id):
+                funds.append({
+                    "id": project.fund.public_id,
+                    "label": project.fund.name
+                })
 
         if request.GET.get("q"):
             project_params["name__icontains"] = request.GET.get("q")
@@ -73,38 +119,13 @@ class DashboardView(LoginRequiredMixin, ReactView):
                     "url": project.get_baseline_url(),
                 }
             )
+
         if sort == "performance":
             is_reverse = direction == "asc"
             projects = sorted(projects, key=lambda p: p["performance_rating"], reverse=is_reverse)
 
-        locations = []
-        for project in Project.objects.filter(account_id=user.account_id).distinct(
-            "address__state", "address__city"
-        ):
-            if project.address:
-                state = project.address.state
-                city = project.address.city
-                locations.append(
-                    {
-                        "city": city,
-                        "label": "{}, {}".format(city, state.upper()),
-                        "state": state.lower(),
-                    }
-                )
-
-        asset_managers = [
-            {"id": business.public_id, "label": business.name}
-            for business in Business.objects.asset_managers(user.account_id)
-        ]
-        property_managers = [
-            {"id": business.public_id, "label": business.name}
-            for business in Business.objects.property_managers(user.account_id)
-        ]
-        funds = [
-            {"id": fund.public_id, "label": fund.name}
-            for fund in Fund.objects.filter(account_id=user.account_id)
-        ]
         return self.render(
+            no_projects=no_projects,
             properties=projects,
             user=user_dict,
             search_url=request.GET.urlencode(),

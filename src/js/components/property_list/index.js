@@ -62,6 +62,16 @@ class PropertyList extends React.PureComponent {
   }
 
   render() {
+    console.log("here are the properties");
+    console.log(this.props.properties);
+    if (this.props.properties.length === 0) {
+      return (
+        <div className="property-list">
+          All your properties have been filtered out. Remove some of the filters
+          above.
+        </div>
+      );
+    }
     return <div className="property-list">{this.propertiesRows}</div>;
   }
 }

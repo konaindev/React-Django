@@ -143,6 +143,9 @@ class ProjectForm(forms.ModelForm):
         return competitors
 
     def clean_fund(self):
+        if self.cleaned_data["fund"] is None:
+            return None
+
         if self.cleaned_data["account"].id != self.cleaned_data["fund"].account_id:
             raise forms.ValidationError(
                 "Fund do not match the Account attached to the Project"
