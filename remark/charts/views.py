@@ -19,7 +19,7 @@ class DonutPieChartView(RemarkView):
         "height": chart_height,
         "x0": chart_width / 2,
         "y0": chart_height / 2,
-        "r0": 140.511,
+        "r0": r0,
         "r": r0 + donut_width,
         "donut_width": donut_width,
         "max_value": max_value,
