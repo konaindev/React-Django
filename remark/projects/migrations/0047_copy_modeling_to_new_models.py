@@ -49,7 +49,7 @@ def copy_modeling_data_of_a_project(project, apps):
             campaign = Campaign(
                 project=project,
                 selected_campaign_model=None,
-                name="Unnamed Campaign"
+                name="First Campaign"
             )
             campaign.save()
 
@@ -71,8 +71,7 @@ def copy_modeling_data_of_a_project(project, apps):
         campaign_model.save()
 
         # save selected model to Campaign if model is set as selected in Project
-        is_model_selected = project.selected_model_name == model_name
-        if is_model_selected:
+        if project.selected_model_name == model_name:
             campaign.selected_campaign_model = campaign_model
             campaign.save()
 
