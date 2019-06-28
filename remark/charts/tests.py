@@ -20,19 +20,38 @@ class DonutChartTestCase(SimpleTestCase):
         self.current_dir = os.path.dirname(os.path.abspath(__file__))
 
     def test_png_image(self):
-        r = self.client.get(self.url, self.test_data)
-        result = r.content
+        resp = self.client.get(self.url, self.test_data)
         path = os.path.join(self.current_dir, "test_files/donut.png")
         with open(path, "rb") as f:
             expect = f.read()
+        self.assertEqual(200, resp.status_code)
+        self.assertEqual("image/png", resp["Content-Type"])
+        result = resp.content
         self.assertEqual(expect, result)
 
     def test_svg_image(self):
         data = copy(self.test_data)
         data["type"] = "svg"
-        r = self.client.get(self.url, data)
-        result = r.content
+        with self.settings(DEBUG=True):
+            resp = self.client.get(self.url, data)
         path = os.path.join(self.current_dir, "test_files/donut.svg")
-        with open(path, "r") as f:
-            expect = f.read().encode("utf-8")
+        with open(path, "rb") as f:
+            expect = f.read()
+        self.assertEqual(200, resp.status_code)
+        self.assertEqual("image/svg+xml", resp["Content-Type"])
+        result = resp.content
         self.assertEqual(expect, result)
+
+    def test_required_params(self):
+        resp = self.client.get(self.url, {})
+        self.assertEqual(400, resp.status_code)
+        errors = resp.json()
+        error_keys = {
+            "goal",
+            "goal_date",
+            "current",
+            "bg",
+            "bg_target",
+            "bg_current",
+        }
+        self.assertSetEqual(error_keys, set(errors))
