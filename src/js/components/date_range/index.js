@@ -27,7 +27,8 @@ export default class DateRange extends React.PureComponent {
     this.dayPicker = React.createRef();
     this.node = React.createRef();
     this.state = {
-      select: "from"
+      select: "from",
+      isOpen: false
     };
   }
 
@@ -38,16 +39,19 @@ export default class DateRange extends React.PureComponent {
   };
 
   onDayClick = date => {
+    let startDate = this.props.startDate;
+    let endDate = this.props.endDate;
     if (this.state.select === "from") {
-      let endDate = this.props.endDate;
-      if (date > this.props.endDate) {
-        endDate = null;
+      startDate = date;
+      console.log("> ", date > this.props.endDate);
+      if (date > this.props.endDate && this.props.endDate) {
+        startDate = this.props.endDate;
+        endDate = date;
       }
-      this.props.onChange(date, endDate);
+      this.props.onChange(startDate, endDate);
       this.setState({ select: "to" });
     }
     if (this.state.select === "to") {
-      let startDate = this.props.startDate;
       let endDate = date;
       if (date < this.props.startDate) {
         startDate = date;
@@ -63,12 +67,14 @@ export default class DateRange extends React.PureComponent {
     if (!this.props.isDisabled) {
       document.addEventListener("mousedown", this.handleClick, false);
       this.dayPicker.current.showDayPicker();
+      this.setState({ isOpen: true });
     }
   };
 
   hideDayPicker = () => {
     document.removeEventListener("mousedown", this.handleClick, false);
     this.dayPicker.current.hideDayPicker();
+    this.setState({ isOpen: false });
   };
 
   renderInput = () => {
@@ -84,9 +90,13 @@ export default class DateRange extends React.PureComponent {
       endDate = formatDateWithTokens(this.props.endDate, this.props.dateFormat);
     }
     const classNameFrom = cn("date-range__value", {
+      "date-range__value--selecting":
+        this.state.select === "from" && this.state.isOpen,
       "date-range__value--placeholder": !this.props.startDate
     });
     const classNameTo = cn("date-range__value", {
+      "date-range__value--selecting":
+        this.state.select === "to" && this.state.isOpen,
       "date-range__value--placeholder": !this.props.endDate
     });
     return (
@@ -150,7 +160,7 @@ export default class DateRange extends React.PureComponent {
           dayPickerProps={{
             selectedDays: [startDate, { from: startDate, to: endDate }],
             disabledDays: { after: today },
-            toMonth: endDate,
+            toMonth: today,
             modifiers,
             numberOfMonths: 1,
             onDayClick: this.onDayClick,

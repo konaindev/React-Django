@@ -14,9 +14,10 @@ $week-height: 22px;
 $day-wrapper-height: 24px;
 $day-width: 30px;
 $day-height: 30px;
-$day-selected-background: #2b343d;
-$day-active-color: #006eff;
+$day-selected-background: $gray-4;
+$day-active-color: $blue-7;
 $day-today-background: $gray-4;
+$day-selecting-background: $gray-4;
 
 .date-range {
     display: inline-block;
@@ -30,6 +31,7 @@ $day-today-background: $gray-4;
     padding: $input-spacing;
     font-family: $font-sans;
     font-size: $text-sm;
+    cursor: pointer;
     border: 1px solid $input-border-color;
     border-radius: $input-border-radius;
     align-items: center;
@@ -39,10 +41,18 @@ $day-today-background: $gray-4;
 
 .date-range__value {
     width: $value-width;
+    padding: 3px 4px;
     font-size: $text-sm;
+    line-height: 20px;
     letter-spacing: $letter-spacing-wider;
     color: $input-text-color;
     text-align: center;
+    border-radius: 2px;
+    box-sizing: content-box;
+
+    &--selecting {
+        background-color: $day-selecting-background;
+    }
 
     &--placeholder {
         color: $input-placeholder-color;
@@ -154,12 +164,13 @@ $day-today-background: $gray-4;
 }
 
 .date-range__day-wrapper {
+    display: flex;
     width: 100%;
     height: $day-wrapper-height;
-    display: flex;
+    outline: none;
+
     align-items: center;
     justify-content: center;
-    outline: none;
 
     &:first-child {
         padding-left: 0;
@@ -188,8 +199,6 @@ $day-today-background: $gray-4;
 
 .date-range__day {
     display: flex;
-    align-items: center;
-    justify-content: center;
     width: $day-width;
     height: $day-height;
     font-size: $text-xs;
@@ -199,6 +208,9 @@ $day-today-background: $gray-4;
     border: 1px solid transparent;
     border-radius: 50%;
     box-sizing: border-box;
+
+    align-items: center;
+    justify-content: center;
 
     &:hover {
         border-color: $day-active-color;
@@ -216,10 +228,10 @@ $day-today-background: $gray-4;
 
     &--end,
     &--start {
-        border: 3px solid $day-picker-background;
-        border-top-color: transparent;
         color: $content-text-primary-color;
         background: $day-active-color;
+        border: 3px solid $day-picker-background;
+        border-top-color: transparent;
         box-sizing: content-box;
         background-clip: content-box;
 
