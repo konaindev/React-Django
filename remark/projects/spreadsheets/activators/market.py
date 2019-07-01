@@ -16,8 +16,16 @@ class MarketActivator(JSONFieldActivator):
         # of each one:
         #
         population_zip_codes = self.data["estimated_population"].get("zip_codes", [])
+        processed = []
         for population_zip_code in population_zip_codes:
             zip_code = population_zip_code["zip"]
+            # some spreadsheets have duplicated zipcodes
+            if zip_code in processed:
+                population_zip_codes.remove(population_zip_code)
+                continue
+            else:
+                processed.append(zip_code)
+
             polygon_data = Zipcode.objects.look_up_polygon(zip_code)
 
             if polygon_data is not None:
