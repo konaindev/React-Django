@@ -1,0 +1,78 @@
+@import "css/base.scss";
+
+$page-spacing: 100px auto 113px;
+$title-height: 44px;
+$controls-spacing: 50px;
+$select-width: 310px;
+$title-bar-height: 20px;
+$title-bar-spacing: 100px;
+$title-bar-border-spacing: 20px;
+$kpi-card-spacing: 30px;
+$kpi-cards-spacing: 50px;
+$table-spacing: 100px;
+
+.portfolio-analysis {
+    margin: $page-spacing;
+    font-family: $font-sans;
+}
+
+.portfolio-analysis__header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.portfolio-analysis__title {
+    height: $title-height;
+    font-size: $text-4xl;
+    color: $title-large-color;
+}
+
+.portfolio-analysis__controls {
+    display: flex;
+    margin-top: $controls-spacing;
+    justify-content: space-between;
+}
+
+.portfolio-analysis__select-kpi {
+    width: $select-width;
+}
+
+.portfolio-analysis__title-bar {
+    display: flex;
+    height: $title-bar-height;
+    padding-bottom: $title-bar-border-spacing;
+    margin-top: $title-bar-spacing;
+    font-size: $text-xl;
+    color: $title-small-color;
+    border-bottom: $heading-border;
+    box-sizing: content-box;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.portfolio-analysis__property-count {
+    font-size: $text-sm;
+    letter-spacing: $letter-spacing-wider;
+    color: $default-text-color;
+    text-transform: uppercase;
+}
+
+.portfolio-analysis__kpi-card {
+    max-width: none;
+    margin-left: $kpi-card-spacing;
+    flex-grow: 1;
+
+    &:first-child {
+        margin-left: 0;
+    }
+}
+
+.portfolio-analysis__kpi-cards {
+    display: flex;
+    margin-top: $kpi-cards-spacing;
+    justify-content: space-between;
+}
+
+.portfolio-analysis__table {
+    margin-top: $table-spacing;
+}
