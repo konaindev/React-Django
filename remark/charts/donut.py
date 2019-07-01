@@ -9,9 +9,9 @@ class DonutChart:
         self.goal = data["goal"]
         self.current = data["current"]
         self.goal_date = data["goal_date"]
-        self.bg = data["bg"]
-        self.bg_target = data["bg_target"]
-        self.bg_current = data["bg_current"]
+        self.bg = f"#{data['bg']}"
+        self.bg_target = f"#{data['bg_target']}"
+        self.bg_current = f"#{data['bg_current']}"
         self.font = font_options
         self.width = options["width"]
         self.height = options["height"]

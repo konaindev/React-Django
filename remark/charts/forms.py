@@ -3,7 +3,7 @@ import re
 from django import forms
 
 
-HEX_RE = re.compile(r"^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$")
+HEX_RE = re.compile(r"^([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$")
 CHARTS_TYPES = [
     ("png", "png"),
     ("svg", "svg"),

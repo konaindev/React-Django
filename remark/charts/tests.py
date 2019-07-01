@@ -10,9 +10,9 @@ class DonutChartTestCase(SimpleTestCase):
         "goal": 95,
         "goal_date": "2015-11-17",
         "current": 80,
-        "bg": "#20272E",
-        "bg_target": "#404E5C",
-        "bg_current": "#006EFF",
+        "bg": "20272E",
+        "bg_target": "404E5C",
+        "bg_current": "006EFF",
     }
 
     def setUp(self):
