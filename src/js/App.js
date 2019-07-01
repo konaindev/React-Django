@@ -1,7 +1,14 @@
 import React, { Component } from "react";
+import { Provider } from "react-redux";
+import store from "./store";
 
 export default class App extends Component {
+
   render() {
-    return <div className="app">{this.props.children}</div>;
+    return (
+      <Provider store={store}>
+        <div className="app">{this.props.children}</div>
+      </Provider>
+    );
   }
 }

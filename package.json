@@ -86,9 +86,11 @@
     "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^16",
     "react-markdown": "^4.0.6",
+    "react-redux": "^7.1.0",
     "react-responsive-modal": "^4.0.1",
     "react-select": "^3.0.3",
     "react-table": "^6.9.2",
+    "redux": "^4.0.1",
     "sass-mq": "^5.0.0",
     "victory": "^31.1.0",
     "yup": "^0.27.0"
