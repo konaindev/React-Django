@@ -85,6 +85,7 @@ export default class PageChrome extends Component {
   static propTypes = {
     headerItems: PropTypes.node,
     topItems: PropTypes.node,
+    navLinks: PropTypes.node,
     children: PropTypes.node.isRequired
   };
 
@@ -92,7 +93,9 @@ export default class PageChrome extends Component {
     return (
       <div className="chrome">
         <TopChrome>
-          <PageHeader>{this.props.headerItems}</PageHeader>
+          <PageHeader navLinks={this.props.navLinks}>
+            {this.props.headerItems}
+          </PageHeader>
           {this.props.topItems}
         </TopChrome>
         {this.props.children}
