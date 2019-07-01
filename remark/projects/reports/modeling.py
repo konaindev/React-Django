@@ -36,7 +36,7 @@ class ModelingReport(ReportBase):
                 if not campaign_model.active:
                     continue
                 model_options.append(dict(
-                    model_id=campaign_model.campaign_model_id,
+                    model_id=campaign_model.public_id,
                     model_index=campaign_model.model_index,
                     is_selected=campaign.selected_campaign_model == campaign_model,
                     **campaign_model.json_data

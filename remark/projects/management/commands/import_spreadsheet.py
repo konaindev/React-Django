@@ -29,7 +29,7 @@ from remark.projects.spreadsheets import get_importer_for_kind, SpreadsheetKind
     "--campaign",
     required=False,
     type=click.Choice(
-        list(Campaign.objects.all().values_list("campaign_id", flat=True))
+        list(Campaign.objects.all().values_list("public_id", flat=True))
     ),
     help="For Modeling spreadsheets, you must specify a campaign to which the new model belongs.",
 )
@@ -70,12 +70,12 @@ def command(project, kind, campaign, user, file):
 
     # MODELING
     if kind == SpreadsheetKind.MODELING:
-        campaign_id = campaign
+        campaign_public_id = campaign
         try:
-            campaign = Campaign.objects.get(campaign_id=campaign_id)
+            campaign = Campaign.objects.get(public_id=campaign_public_id)
         except Exception:
             raise click.BadParameter(
-                f"Campaign with campaign_id={campaign_id} not found"
+                f"Campaign with public_id={campaign_public_id} not found"
             )
 
         handle_modeling_kind(project, campaign, file, importer.cleaned_data)
@@ -125,5 +125,5 @@ def handle_modeling_kind(project, campaign, file, imported_data):
     campaign_model.save()
 
     click.echo(
-        f"SUCCESS. Campaign Model {campaign_model.campaign_model_id} has been created."
+        f"SUCCESS. Campaign Model {campaign_model.public_id} has been created."
     )

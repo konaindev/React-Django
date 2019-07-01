@@ -590,7 +590,7 @@ class Spreadsheet(models.Model):
 
 
 class Spreadsheet2(models.Model):
-    spreadsheet_id = models.CharField(
+    public_id = models.CharField(
         primary_key=True, default=spreadsheet_public_id, max_length=50, editable=False
     )
     file_url = models.FileField(
@@ -1052,7 +1052,7 @@ class Fund(models.Model):
 
 
 class Campaign(models.Model):
-    campaign_id = models.CharField(
+    public_id = models.CharField(
         primary_key=True, default=campaign_public_id, max_length=50, editable=False
     )
     name = models.CharField(max_length=255)
@@ -1124,11 +1124,11 @@ class Campaign(models.Model):
                 _create_target_period(data)
 
     def __str__(self):
-        return "{} ({})".format(self.name, self.campaign_id)
+        return "{} ({})".format(self.name, self.public_id)
 
 
 class CampaignModel(models.Model):
-    campaign_model_id = models.CharField(
+    public_id = models.CharField(
         primary_key=True,
         default=campaign_model_public_id,
         max_length=50,
