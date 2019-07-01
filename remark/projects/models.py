@@ -1064,7 +1064,7 @@ class Campaign(models.Model):
     )
     selected_campaign_model = models.ForeignKey(
         "CampaignModel",
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name="+",
         null=True,
         blank=True,
