@@ -19,15 +19,43 @@ class DonutChartTestCase(SimpleTestCase):
         self.url = reverse("donut")
         self.current_dir = os.path.dirname(os.path.abspath(__file__))
 
-    def test_png_image(self):
-        resp = self.client.get(self.url, self.test_data)
-        path = os.path.join(self.current_dir, "test_files/donut.png")
+    def _check_correct_png(self, data, file_path):
+        resp = self.client.get(self.url, data)
+        path = os.path.join(self.current_dir, file_path)
         with open(path, "rb") as f:
             expect = f.read()
         self.assertEqual(200, resp.status_code)
         self.assertEqual("image/png", resp["Content-Type"])
         result = resp.content
         self.assertEqual(expect, result)
+
+    def test_overlapped_labels_on_right(self):
+        data = copy(self.test_data)
+        data["goal"] = 47
+        data["current"] = 60
+        self._check_correct_png(data, "test_files/right_overlap.png")
+
+    def test_overlapped_labels_on_left(self):
+        data = copy(self.test_data)
+        data["goal"] = 53
+        data["current"] = 60
+        self._check_correct_png(data, "test_files/left_overlap.png")
+
+    def test_current_greater_goal(self):
+        data = copy(self.test_data)
+        data["goal"] = 20
+        data["current"] = 40
+        self._check_correct_png(data, "test_files/current_greater_goal.png")
+
+    def test_goal_greater_current(self):
+        self._check_correct_png(
+            self.test_data, "test_files/goal_greater_current.png")
+
+    def test_current_equal_goal(self):
+        data = copy(self.test_data)
+        data["goal"] = 60
+        data["current"] = 60
+        self._check_correct_png(data, "test_files/current_equal_goal.png")
 
     def test_svg_image(self):
         data = copy(self.test_data)
