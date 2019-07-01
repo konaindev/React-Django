@@ -1050,8 +1050,13 @@ class Fund(models.Model):
     def __str__(self):
         return self.name
 
+class CampaignManager(models.Manager):
+    pass
+
 
 class Campaign(models.Model):
+    objects = CampaignManager()
+
     public_id = models.CharField(
         primary_key=True, default=campaign_public_id, max_length=50, editable=False
     )
@@ -1127,7 +1132,23 @@ class Campaign(models.Model):
         return "{} ({})".format(self.name, self.public_id)
 
 
+class CampaignModelManager(models.Manager):
+    def get_model_for_date(self, project_id, query_date):
+        # TODO with the given date, there might be multiple models matching
+        # should improve logic to pick the most relevant one
+        try:
+            return self.filter(
+                campaign__project=project_id,
+                model_start__lte=query_date,
+                model_end__gte=query_date,
+            ).first()
+        except self.model.DoesNotExist:
+            return None
+
+
 class CampaignModel(models.Model):
+    objects = CampaignModelManager()
+
     public_id = models.CharField(
         primary_key=True,
         default=campaign_model_public_id,
