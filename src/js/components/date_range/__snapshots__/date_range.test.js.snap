@@ -37,7 +37,7 @@ exports[`DateRange renders opened 1`] = `
       onClick={[Function]}
     >
       <span
-        className="date-range__value date-range__value--placeholder"
+        className="date-range__value date-range__value--selecting date-range__value--placeholder"
       >
         MM/DD/YY
       </span>
@@ -753,7 +753,7 @@ exports[`DateRange renders with dates 1`] = `
       onClick={[Function]}
     >
       <span
-        className="date-range__value"
+        className="date-range__value date-range__value--selecting"
       >
         06/12/19
       </span>
