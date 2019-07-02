@@ -20,6 +20,15 @@ Frontend code lives in the `src/` directory.
 
 For back-end code, we use `flake8` to validate code, and `python black` to enforce code style. For front-end code, we use various of `prettierjs` and `stylelint`.
 
+### Core Dependencies
+
+- node
+- yarn
+- python3
+- pipenv
+- postgres (including cli tools, such as `pg_config`)
+- openssl-dev (make sure the libs are in `$PATH`)
+
 ## Running the project locally
 
 - Run `pipenv install` and `pipenv shell` to get the back-end requirements installed.
