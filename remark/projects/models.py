@@ -192,7 +192,11 @@ class Project(models.Model):
         default="",
         upload_to=building_image_media_path,
         help_text="""Image of property building<br/>Resized variants (309x220, 180x180, 76x76) will also be created on Amazon S3.""",
-        variations={"landscape": (309, 220, True), "regular": (180, 180, True), "thumbnail": (76, 76, True)},
+        variations={
+            "landscape": (309, 220, True),
+            "regular": (180, 180, True),
+            "thumbnail": (76, 76, True),
+        },
     )
 
     baseline_start = models.DateField(
@@ -310,10 +314,8 @@ class Project(models.Model):
         "geo.Address", on_delete=models.SET_NULL, null=True, blank=True
     )
 
-    users = models.ManyToManyField(
-        "users.User", related_name="projects"
-    )
-  
+    users = models.ManyToManyField("users.User", related_name="projects")
+
     view_group = models.OneToOneField(
         Group, on_delete=models.SET_NULL, null=True, blank=True
     )
@@ -415,7 +417,7 @@ class Project(models.Model):
             return [
                 self.building_logo.url,
                 self.building_logo.regular.url,
-                self.building_logo.thumbnail.url
+                self.building_logo.thumbnail.url,
             ]
         else:
             return None
@@ -429,7 +431,7 @@ class Project(models.Model):
                 self.building_image.url,
                 self.building_image.landscape.url,
                 self.building_image.regular.url,
-                self.building_image.thumbnail.url
+                self.building_image.thumbnail.url,
             ]
         else:
             return None
@@ -459,7 +461,7 @@ class Project(models.Model):
             name=self.name,
             building_logo=self.get_building_logo(),
             building_image=self.get_building_image(),
-            update_endpoint=update_endpoint
+            update_endpoint=update_endpoint,
         )
 
     def get_performance_rating(self):
@@ -483,7 +485,9 @@ class Project(models.Model):
     def user_can_view(self, user):
         if user.is_superuser:
             return True
-        return (self.view_group is not None) and user.groups.filter(pk=self.view_group.pk).exists()
+        return (self.view_group is not None) and user.groups.filter(
+            pk=self.view_group.pk
+        ).exists()
 
     def __assign_blank_view_group(self):
         """
@@ -504,9 +508,7 @@ class Project(models.Model):
 
 class SpreadsheetManager(models.Manager):
     def latest_for_kind(self, kind):
-        return (
-            self.filter(kind=kind).order_by("-created").first()
-        )
+        return self.filter(kind=kind).order_by("-created").first()
 
 
 class Spreadsheet(models.Model):
@@ -564,9 +566,7 @@ class Spreadsheet(models.Model):
 
     def is_latest_for_kind(self):
         """Return True if this spreadsheet is the latest for its kind."""
-        return (
-            Spreadsheet.objects.latest_for_kind(self.kind).id == self.id
-        )
+        return Spreadsheet.objects.latest_for_kind(self.kind).id == self.id
 
     def get_activator(self):
         return get_activator_for_spreadsheet(self)
@@ -584,9 +584,7 @@ class Spreadsheet(models.Model):
     class Meta:
         # Always sort spreadsheets with the most recent created first.
         ordering = ["-created"]
-        indexes = [
-            models.Index(fields=["created", "kind"])
-        ]
+        indexes = [models.Index(fields=["created", "kind"])]
 
 
 class Spreadsheet2(models.Model):
@@ -862,7 +860,7 @@ class TargetPeriod(ModelPeriod, models.Model):
         on_delete=models.CASCADE,
         related_name="+",
         null=True,
-        blank=True
+        blank=True,
     )
 
     start = models.DateField(
