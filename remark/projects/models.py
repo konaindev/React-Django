@@ -857,6 +857,14 @@ class TargetPeriod(ModelPeriod, models.Model):
         Project, on_delete=models.CASCADE, related_name="target_periods"
     )
 
+    campaign_model = models.ForeignKey(
+        "CampaignModel",
+        on_delete=models.CASCADE,
+        related_name="+",
+        null=True,
+        blank=True
+    )
+
     start = models.DateField(
         db_index=True,
         help_text="The first date, inclusive, that this target period tracks.",
@@ -1050,6 +1058,7 @@ class Fund(models.Model):
     def __str__(self):
         return self.name
 
+
 class CampaignManager(models.Manager):
     pass
 
@@ -1107,7 +1116,7 @@ class Campaign(models.Model):
         """
 
         def _create_target_period(data):
-            target_period = TargetPeriod(project=self.project)
+            target_period = TargetPeriod(project=self.project, campaign_model=self)
             for k, v in data.items():
                 # Yes, this will set values for keys that aren't fields;
                 # that's fine; we don't overwrite anything we shouldn't,
@@ -1120,7 +1129,7 @@ class Campaign(models.Model):
             return
 
         # Remove all extant target periods
-        self.project.target_periods.all().delete()
+        self.project.target_periods.filter("campaign_model", self).delete()
 
         # If there are any, create new target periods!
         option = self.get_selected_model_option()
