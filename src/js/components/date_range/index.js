@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import DayPickerInput from "react-day-picker/DayPickerInput";
 
+import Button from "../button";
 import { formatDateWithTokens } from "../../utils/formatters";
 
 import "./date_range.scss";
@@ -28,76 +29,45 @@ export default class DateRange extends React.PureComponent {
     this.node = React.createRef();
     this.state = {
       select: "from",
-      isOpen: false
+      isOpen: false,
+      startDate: props.startDate,
+      endDate: props.endDate
     };
   }
 
-  handleClick = e => {
-    if (!this.node.current.contains(e.target)) {
-      this.hideDayPicker();
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.endDate !== this.props.endDate ||
+      prevProps.startDate !== this.props.startDate
+    ) {
+      this.setState({
+        startDate: this.props.startDate,
+        endDate: this.props.endDate
+      });
     }
-  };
-
-  onDayClick = date => {
-    let startDate = this.props.startDate;
-    let endDate = this.props.endDate;
-    if (this.state.select === "from") {
-      startDate = date;
-      console.log("> ", date > this.props.endDate);
-      if (date > this.props.endDate && this.props.endDate) {
-        startDate = this.props.endDate;
-        endDate = date;
-      }
-      this.props.onChange(startDate, endDate);
-      this.setState({ select: "to" });
-    }
-    if (this.state.select === "to") {
-      let endDate = date;
-      if (date < this.props.startDate) {
-        startDate = date;
-        endDate = this.props.startDate;
-      }
-      this.props.onChange(startDate, endDate);
-      this.setState({ select: "from" });
-      this.hideDayPicker();
-    }
-  };
-
-  showDayPicker = () => {
-    if (!this.props.isDisabled) {
-      document.addEventListener("mousedown", this.handleClick, false);
-      this.dayPicker.current.showDayPicker();
-      this.setState({ isOpen: true });
-    }
-  };
-
-  hideDayPicker = () => {
-    document.removeEventListener("mousedown", this.handleClick, false);
-    this.dayPicker.current.hideDayPicker();
-    this.setState({ isOpen: false });
-  };
+  }
 
   renderInput = () => {
     let startDate = this.props.dateFormat;
-    if (this.props.startDate) {
+    if (this.state.startDate) {
       startDate = formatDateWithTokens(
-        this.props.startDate,
+        this.state.startDate,
         this.props.dateFormat
       );
     }
     let endDate = this.props.dateFormat;
-    if (this.props.endDate) {
-      endDate = formatDateWithTokens(this.props.endDate, this.props.dateFormat);
+    if (this.state.endDate) {
+      endDate = formatDateWithTokens(this.state.endDate, this.props.dateFormat);
     }
     const classNameFrom = cn("date-range__value", {
       "date-range__value--selecting":
         this.state.select === "from" && this.state.isOpen,
-      "date-range__value--placeholder": !this.props.startDate
+      "date-range__value--placeholder": !this.state.startDate
     });
     const classNameTo = cn("date-range__value", {
       "date-range__value--selecting":
         this.state.select === "to" && this.state.isOpen,
-      "date-range__value--placeholder": !this.props.endDate
+      "date-range__value--placeholder": !this.state.endDate
     });
     return (
       <div className="date-range__input" onClick={this.showDayPicker}>
@@ -125,7 +95,22 @@ export default class DateRange extends React.PureComponent {
     );
   };
 
-  renderEmpty = () => null;
+  renderFooter = () => {
+    return (
+      <div className="date-range__footer">
+        <Button className="date-range__button" onClick={this.onCancel}>
+          Cancel
+        </Button>
+        <Button
+          className="date-range__button"
+          color="primary"
+          onClick={this.onApply}
+        >
+          Apply
+        </Button>
+      </div>
+    );
+  };
 
   renderDay = (day, modifiers) => {
     const classes = cn("date-range__day", {
@@ -137,15 +122,63 @@ export default class DateRange extends React.PureComponent {
     return <div className={classes}>{day.getDate()}</div>;
   };
 
+  handleClick = e => {
+    if (!this.node.current.contains(e.target)) {
+      this.hideDayPicker();
+    }
+  };
+
+  showDayPicker = () => {
+    if (!this.props.isDisabled) {
+      document.addEventListener("mousedown", this.handleClick, false);
+      this.dayPicker.current.showDayPicker();
+      this.setState({ isOpen: true });
+    }
+  };
+
+  hideDayPicker = () => {
+    document.removeEventListener("mousedown", this.handleClick, false);
+    this.dayPicker.current.hideDayPicker();
+    this.setState({ isOpen: false, select: "from" });
+  };
+
+  onCancel = () => {
+    this.setState({
+      startDate: this.props.startDate,
+      endDate: this.props.endDate
+    });
+    this.hideDayPicker();
+  };
+
+  onApply = () => {
+    this.props.onChange(this.state.startDate, this.state.endDate);
+    this.hideDayPicker();
+  };
+
+  onDayClick = date => {
+    let startDate = this.state.startDate;
+    let endDate = this.state.endDate;
+    if (this.state.select === "from") {
+      startDate = date;
+      if (date > this.state.endDate && this.state.endDate) {
+        startDate = this.state.endDate;
+        endDate = date;
+      }
+      this.setState({ startDate, endDate, select: "to" });
+    }
+    if (this.state.select === "to") {
+      let endDate = date;
+      if (date < this.state.startDate) {
+        startDate = date;
+        endDate = this.state.startDate;
+      }
+      this.setState({ startDate, endDate, select: "from" });
+    }
+  };
+
   render() {
-    const {
-      startDate,
-      endDate,
-      onChange,
-      dateFormat,
-      className,
-      ...otherProps
-    } = this.props;
+    const { className } = this.props;
+    const { startDate, endDate } = this.state;
     const modifiers = { start: startDate, end: endDate };
     const today = new Date();
     const classes = cn("date-range", className);
@@ -166,7 +199,7 @@ export default class DateRange extends React.PureComponent {
             onDayClick: this.onDayClick,
             navbarElement: this.renderNavBar,
             renderDay: this.renderDay,
-            captionElement: this.renderEmpty,
+            captionElement: this.renderFooter,
             classNames: {
               container: "date-range__day-picker",
               wrapper: "date-range__month-wrapper",
@@ -186,7 +219,6 @@ export default class DateRange extends React.PureComponent {
           }}
           hideOnDayClick={false}
           component={this.renderInput}
-          {...otherProps}
         />
       </div>
     );

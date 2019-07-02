@@ -91,6 +91,22 @@ exports[`DateRange renders opened 1`] = `
                 role="grid"
               >
                 <div
+                  className="date-range__footer"
+                >
+                  <button
+                    className="button button--default date-range__button"
+                    onClick={[Function]}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="button button--primary date-range__button"
+                    onClick={[Function]}
+                  >
+                    Apply
+                  </button>
+                </div>
+                <div
                   className=""
                   role="rowgroup"
                 >
@@ -806,6 +822,22 @@ exports[`DateRange renders with dates 1`] = `
                 className="date-range__month"
                 role="grid"
               >
+                <div
+                  className="date-range__footer"
+                >
+                  <button
+                    className="button button--default date-range__button"
+                    onClick={[Function]}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="button button--primary date-range__button"
+                    onClick={[Function]}
+                  >
+                    Apply
+                  </button>
+                </div>
                 <div
                   className=""
                   role="rowgroup"
