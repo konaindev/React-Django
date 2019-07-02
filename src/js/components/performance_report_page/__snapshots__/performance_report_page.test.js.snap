@@ -160,33 +160,34 @@ exports[`PerformanceReportPage renders correctly 1`] = `
               className="share-toggle"
             >
               <label
-                className="button-toggle"
+                className="button-toggle button-toggle--unchecked"
               >
                 <input
                   checked={false}
+                  className="button-toggle__input"
                   onChange={[Function]}
                   type="checkbox"
                 />
                 <span
-                  className="toggle-tracks toggle-tracks--unchecked"
+                  className="button-toggle__track"
                 >
                   <span
-                    className="toggle-thumb"
+                    className="button-toggle__thumb"
                   />
                   <div
-                    className="toggle-button-checked"
+                    className="button-toggle__checked"
                   >
                     <div
-                      className="toggle-inner-label"
+                      className="button-toggle__inner-label"
                     >
                       On
                     </div>
                   </div>
                   <div
-                    className="toggle-button-unchecked"
+                    className="button-toggle__unchecked"
                   >
                     <div
-                      className="toggle-inner-label"
+                      className="button-toggle__inner-label"
                     >
                       Off
                     </div>

@@ -17,29 +17,36 @@ export function ButtonToggle(props) {
     onChange(e.target.checked);
   };
 
-  const tracksClass = cx(
-    "toggle-tracks",
-    checked ? "toggle-tracks--checked" : "toggle-tracks--unchecked"
+  const classes = cx(
+    "button-toggle",
+    checked ? "button-toggle--checked" : "button-toggle--unchecked"
   );
 
   const buttonClass = cx("button", { "button--primary": checked });
 
   return (
-    <label className="button-toggle">
-      <input type="checkbox" checked={checked} onChange={handleChange} />
+    <label className={classes}>
+      <input
+        className="button-toggle__input"
+        type="checkbox"
+        checked={checked}
+        onChange={handleChange}
+      />
 
-      <span className={tracksClass}>
-        <span className="toggle-thumb" />
+      <span className="button-toggle__track">
+        <span className="button-toggle__thumb" />
 
-        <div className="toggle-button-checked">
-          <div className="toggle-inner-label">{innerLabelChecked}</div>
+        <div className="button-toggle__checked">
+          <div className="button-toggle__inner-label">{innerLabelChecked}</div>
         </div>
-        <div className="toggle-button-unchecked">
-          <div className="toggle-inner-label">{innerLabelUnchecked}</div>
+        <div className="button-toggle__unchecked">
+          <div className="button-toggle__inner-label">
+            {innerLabelUnchecked}
+          </div>
         </div>
       </span>
 
-      {label && <span className="toggle-outer-label">{label}</span>}
+      {label && <span className="button-toggle__outer-label">{label}</span>}
     </label>
   );
 }
