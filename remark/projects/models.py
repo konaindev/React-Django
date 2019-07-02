@@ -1140,17 +1140,7 @@ class Campaign(models.Model):
 
 
 class CampaignModelManager(models.Manager):
-    def get_model_for_date(self, project_id, query_date):
-        # TODO with the given date, there might be multiple models matching
-        # should improve logic to pick the most relevant one
-        try:
-            return self.filter(
-                campaign__project=project_id,
-                model_start__lte=query_date,
-                model_end__gte=query_date,
-            ).first()
-        except self.model.DoesNotExist:
-            return None
+    pass
 
 
 class CampaignModel(models.Model):
