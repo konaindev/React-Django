@@ -1,0 +1,29 @@
+{% load static %}
+<svg width="{{ width }}" height="{{ height }}" viewBox="0 0 {{ width }} {{ height }}" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <link href="{% static "index.css" %}" rel="stylesheet" type="text/css" xmlns="http://www.w3.org/1999/xhtml" />
+  <style>
+    <![CDATA[
+    text,
+    tspan {
+      font-family: "{{ font.font_family }}";
+      font-size: {{ font.font_size }};
+      fill: {{ font.color }};
+      text-anchor: middle;
+    }
+    ]]>
+  </style>
+  <defs>
+    <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="{{ width }}" height="{{ height }}">
+      <circle cx="{{ x0 }}" cy="{{ y0 }}" r="{{ r0 }}" stroke="black" stroke-width="{{ donut_width }}" />
+    </mask>
+  </defs>
+  <g mask="url(#mask0)">
+    <circle cx="{{ x0 }}" cy="{{ y0 }}" r="{{ r }}" fill="{{ bg }}" />
+    {% for path in svg_paths %}
+    {{ path|safe }}
+    {% endfor %}
+  </g>
+  {% for text in texts %}
+  {{ text|safe }}
+  {% endfor %}
+</svg>

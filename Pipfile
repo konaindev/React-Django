@@ -7,7 +7,7 @@ verify_ssl = true
 flake8 = "*"
 black = "*"
 rope = "*"
-python-language-server = {version = "*",extras = ["all"]}
+python-language-server = {extras = ["all"],version = "*"}
 pyls-black = "*"
 pyls-mypy = "*"
 click = "*"
@@ -41,6 +41,8 @@ bs4 = "*"
 sendgrid = "*"
 celery = "*"
 redis = "*"
+cairosvg = "*"
+svgwrite = "*"
 
 [requires]
 python_version = "3.7"
