@@ -1,0 +1,441 @@
+{
+    "$ref": "#/definitions/PortfolioAnalysisListView",
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "DateRange": {
+            "properties": {
+                "end_date": {
+                    "type": "string"
+                },
+                "preset": {
+                    "enum": [
+                        "custom",
+                        "last_four_weeks",
+                        "last_two_weeks",
+                        "last_week",
+                        "year_to_date"
+                    ],
+                    "type": "string"
+                },
+                "start_date": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "end_date",
+                "preset",
+                "start_date"
+            ],
+            "type": "object"
+        },
+        "GroupProperty": {
+            "properties": {
+                "image_url": {
+                    "description": "The relative link to the property image",
+                    "type": "string"
+                },
+                "kpis": {
+                    "properties": {
+                        "cd_rate": {
+                            "type": "number"
+                        },
+                        "lease_rate": {
+                            "type": "number"
+                        },
+                        "occupancy_rate": {
+                            "type": "number"
+                        },
+                        "renewal_rate": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "cd_rate",
+                        "lease_rate",
+                        "occupancy_rate",
+                        "renewal_rate"
+                    ],
+                    "type": "object"
+                },
+                "name": {
+                    "description": "Property Group name",
+                    "type": "string"
+                },
+                "properties": {
+                    "description": "List of properties",
+                    "items": {
+                        "$ref": "#/definitions/SingleProperty"
+                    },
+                    "type": "array"
+                },
+                "targets": {
+                    "properties": {
+                        "cd_rate": {
+                            "type": "number"
+                        },
+                        "lease_rate": {
+                            "type": "number"
+                        },
+                        "occupancy_rate": {
+                            "type": "number"
+                        },
+                        "renewal_rate": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "cd_rate",
+                        "lease_rate",
+                        "occupancy_rate",
+                        "renewal_rate"
+                    ],
+                    "type": "object"
+                },
+                "type": {
+                    "description": "Property type",
+                    "enum": [
+                        "group"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "image_url",
+                "kpis",
+                "name",
+                "properties",
+                "targets",
+                "type"
+            ],
+            "type": "object"
+        },
+        "IndividualProperty": {
+            "properties": {
+                "address": {
+                    "description": "Property adderss",
+                    "type": "string"
+                },
+                "health": {
+                    "description": "Health of property\n2 - on track\n1 - at risk\n0 - off track",
+                    "enum": [
+                        0,
+                        1,
+                        2
+                    ],
+                    "type": "number"
+                },
+                "image_url": {
+                    "description": "The relative link to the property image",
+                    "type": "string"
+                },
+                "kpis": {
+                    "properties": {
+                        "cd_rate": {
+                            "type": "number"
+                        },
+                        "lease_rate": {
+                            "type": "number"
+                        },
+                        "occupancy_rate": {
+                            "type": "number"
+                        },
+                        "renewal_rate": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "cd_rate",
+                        "lease_rate",
+                        "occupancy_rate",
+                        "renewal_rate"
+                    ],
+                    "type": "object"
+                },
+                "name": {
+                    "description": "Property Group name",
+                    "type": "string"
+                },
+                "targets": {
+                    "properties": {
+                        "cd_rate": {
+                            "type": "number"
+                        },
+                        "lease_rate": {
+                            "type": "number"
+                        },
+                        "occupancy_rate": {
+                            "type": "number"
+                        },
+                        "renewal_rate": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "cd_rate",
+                        "lease_rate",
+                        "occupancy_rate",
+                        "renewal_rate"
+                    ],
+                    "type": "object"
+                },
+                "type": {
+                    "description": "Property type",
+                    "enum": [
+                        "individual"
+                    ],
+                    "type": "string"
+                }
+            },
+            "required": [
+                "address",
+                "health",
+                "image_url",
+                "kpis",
+                "name",
+                "targets",
+                "type"
+            ],
+            "type": "object"
+        },
+        "KpiBundle": {
+            "properties": {
+                "name": {
+                    "description": "Kpi name",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Kpi key",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "name",
+                "value"
+            ],
+            "type": "object"
+        },
+        "KpiHighlight": {
+            "properties": {
+                "health": {
+                    "description": "Health of property\n2 - on track\n1 - at risk\n0 - off track",
+                    "enum": [
+                        0,
+                        1,
+                        2
+                    ],
+                    "type": "number"
+                },
+                "label": {
+                    "description": "KPI label",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "KPI name",
+                    "type": "string"
+                },
+                "target": {
+                    "description": "KPI target value",
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                },
+                "value": {
+                    "description": "KPI value",
+                    "type": [
+                        "string",
+                        "number"
+                    ]
+                }
+            },
+            "required": [
+                "health",
+                "label",
+                "name",
+                "target",
+                "value"
+            ],
+            "type": "object"
+        },
+        "KpiOrder": {
+            "properties": {
+                "label": {
+                    "description": "Kpi label",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Kpi key",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "label",
+                "value"
+            ],
+            "type": "object"
+        },
+        "PortfolioAnalysisListView": {
+            "properties": {
+                "date_selection": {
+                    "$ref": "#/definitions/DateRange",
+                    "description": "A date range."
+                },
+                "highlight_kpis": {
+                    "description": "List of list of highlight KPIs.",
+                    "items": {
+                        "$ref": "#/definitions/KpiHighlight"
+                    },
+                    "type": "array"
+                },
+                "kpi_bundles": {
+                    "description": "Kpi list for portfolio analysis",
+                    "items": {
+                        "$ref": "#/definitions/KpiBundle"
+                    },
+                    "type": "array"
+                },
+                "kpi_order": {
+                    "description": "List of KPIs in the proper order.",
+                    "items": {
+                        "$ref": "#/definitions/KpiOrder"
+                    },
+                    "type": "array"
+                },
+                "selected_kpi_bundle": {
+                    "description": "Selected kpi, value from kpi_bundles",
+                    "type": "string"
+                },
+                "share_info": {
+                    "$ref": "#/definitions/ShareInfo"
+                },
+                "table_data": {
+                    "description": "List of Properties.",
+                    "items": {
+                        "anyOf": [
+                            {
+                                "$ref": "#/definitions/GroupProperty"
+                            },
+                            {
+                                "$ref": "#/definitions/IndividualProperty"
+                            }
+                        ]
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "date_selection",
+                "highlight_kpis",
+                "kpi_bundles",
+                "kpi_order",
+                "selected_kpi_bundle",
+                "share_info",
+                "table_data"
+            ],
+            "type": "object"
+        },
+        "ShareInfo": {
+            "properties": {
+                "share_url": {
+                    "description": "Public url to portfolio analysis",
+                    "type": "string"
+                },
+                "shared": {
+                    "description": "Is Portfolio analysis shared",
+                    "type": "boolean"
+                },
+                "update_endpoint": {
+                    "description": "URL for updating share state",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "share_url",
+                "shared",
+                "update_endpoint"
+            ],
+            "type": "object"
+        },
+        "SingleProperty": {
+            "properties": {
+                "address": {
+                    "description": "Property adderss",
+                    "type": "string"
+                },
+                "health": {
+                    "description": "Health of property\n2 - on track\n1 - at risk\n0 - off track",
+                    "enum": [
+                        0,
+                        1,
+                        2
+                    ],
+                    "type": "number"
+                },
+                "image_url": {
+                    "description": "The relative link to the property image",
+                    "type": "string"
+                },
+                "kpis": {
+                    "properties": {
+                        "cd_rate": {
+                            "type": "number"
+                        },
+                        "lease_rate": {
+                            "type": "number"
+                        },
+                        "occupancy_rate": {
+                            "type": "number"
+                        },
+                        "renewal_rate": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "cd_rate",
+                        "lease_rate",
+                        "occupancy_rate",
+                        "renewal_rate"
+                    ],
+                    "type": "object"
+                },
+                "name": {
+                    "description": "Property Group name",
+                    "type": "string"
+                },
+                "targets": {
+                    "properties": {
+                        "cd_rate": {
+                            "type": "number"
+                        },
+                        "lease_rate": {
+                            "type": "number"
+                        },
+                        "occupancy_rate": {
+                            "type": "number"
+                        },
+                        "renewal_rate": {
+                            "type": "number"
+                        }
+                    },
+                    "required": [
+                        "cd_rate",
+                        "lease_rate",
+                        "occupancy_rate",
+                        "renewal_rate"
+                    ],
+                    "type": "object"
+                }
+            },
+            "required": [
+                "address",
+                "health",
+                "image_url",
+                "kpis",
+                "name",
+                "targets"
+            ],
+            "type": "object"
+        }
+    }
+}
+
