@@ -1,5 +1,43 @@
 @import "css/base.scss";
 
+$button-width: 6.375rem;
+$button-height: 2.25rem;
+$button-spacing: 0.5rem 0.625rem;
+$button-coor: $gray-4;
+$icon-width: 1.25rem;
+$icon-height: 0.625rem;
+$label-width: 3.75rem;
+$label-height: 1.25rem;
+$label-color: $highlight-gray-3;
+$disable-color: $highlight-gray-3;
+
 .copy-to-clipboard {
-    min-width: 6.5rem;
+    display: inline-flex;
+    width: $button-width;
+    height: $button-height;
+    padding: $button-spacing;
+    color: $label-color;
+    background: $button-coor;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.copy-to-clipboard--disbale {
+    color: $gray-9;
+
+    .copy-to-clipboard__icon {
+        fill: $gray-9;
+    }
+}
+
+.copy-to-clipboard__icon {
+    width: $icon-width;
+    height: $icon-height;
+    fill: $label-color;
+}
+
+.copy-to-clipboard__label {
+    width: $label-width;
+    font-size: $text-xs;
+    line-height: $label-height;
 }

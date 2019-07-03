@@ -110,10 +110,28 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
           
         </label>
         <button
-          className="button button--primary copy-to-clipboard"
+          className="button button--default copy-to-clipboard share-toggle__copy"
           onClick={[Function]}
         >
-          Copy Link
+          <svg
+            aria-hidden="true"
+            className="copy-to-clipboard__icon"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 18 8"
+            width="1em"
+          >
+            <path
+              d="M4.5 0.25C2.42925 0.25 0.75 1.92925 0.75 4C0.75 6.07075 2.42925 7.75 4.5 7.75H6.75C7.16421 7.75 7.5 7.41421 7.5 7C7.5 6.58579 7.16421 6.25 6.75 6.25H4.5C3.25725 6.25 2.25 5.24275 2.25 4C2.25 2.75725 3.25725 1.75 4.5 1.75H6.75C7.16421 1.75 7.5 1.41421 7.5 1C7.5 0.585786 7.16421 0.25 6.75 0.25H4.5ZM11.25 0.25C10.8358 0.25 10.5 0.585786 10.5 1C10.5 1.41421 10.8358 1.75 11.25 1.75H13.5C14.7428 1.75 15.75 2.75725 15.75 4C15.75 5.24275 14.7428 6.25 13.5 6.25H11.25C10.8358 6.25 10.5 6.58579 10.5 7C10.5 7.41421 10.8358 7.75 11.25 7.75H13.5C15.5708 7.75 17.25 6.07075 17.25 4C17.25 1.92925 15.5708 0.25 13.5 0.25H11.25ZM6 3.25C5.58579 3.25 5.25 3.58579 5.25 4C5.25 4.41421 5.58579 4.75 6 4.75H12C12.4142 4.75 12.75 4.41421 12.75 4C12.75 3.58579 12.4142 3.25 12 3.25H6Z"
+            />
+          </svg>
+          <span
+            className="copy-to-clipboard__label"
+          >
+            Copy Link
+          </span>
         </button>
       </div>
     </div>
