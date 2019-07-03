@@ -3,8 +3,6 @@ import { general } from "../actions";
 
 export default (state = {}, action) => {
   let newState = {};
-  console.log("0000000000", action);
-
   switch (action.type) {
     case "GENERAL_SET_STATE": {
       newState = { ...action.newState };
@@ -13,7 +11,6 @@ export default (state = {}, action) => {
     default:
       newState = { ...state };
   }
-  console.log(" the new state should be ", newState);
   return newState;
 };
 
