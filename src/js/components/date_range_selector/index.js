@@ -71,7 +71,7 @@ export default class DateRangeSelector extends React.PureComponent {
 
   onChangeDate = (startDate, endDate) => {
     this.props.onChange(
-      this.props.preset,
+      "custom",
       formatDateWithTokens(startDate, this.props.dateFormat),
       formatDateWithTokens(endDate, this.props.dateFormat)
     );
@@ -91,7 +91,6 @@ export default class DateRangeSelector extends React.PureComponent {
           startDate={new Date(this.props.start_date)}
           endDate={new Date(this.props.end_date)}
           onChange={this.onChangeDate}
-          isDisabled={this.props.preset !== "custom"}
         />
       </div>
     );
