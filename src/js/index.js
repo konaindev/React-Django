@@ -20,7 +20,8 @@ import ProjectPage from "./components/project_page";
 import ReleaseNotesPage from "./components/release_notes_page";
 import ReleaseNoteDetailsPage from "./components/release_note_details_page";
 import CampaignPlanPage from "./components/campaign_plan_page";
-
+import store from "./state/store";
+import { general } from "./state/actions";
 const pages = {
   BaselineReportPage,
   DashboardPage,
@@ -92,14 +93,16 @@ const ready = cb => {
   document.addEventListener("DOMContentLoaded", handleContentLoaded);
 };
 
-/*
-
 /* Run our page. */
 ready(() => {
   const pageClass = getPageClass();
   /* If this is a react rooted page, spin up the app. */
   if (pageClass) {
     const pageProps = getPageProps();
-    renderApp(pageClass, pageProps);
+    // TODO: as an interim step, let's prime redux from the
+    //       injected props so we can prove this out before
+    //       porting -jc
+    store.dispatch(general.set(pageProps));
+    renderApp(pageClass, {});
   }
 });

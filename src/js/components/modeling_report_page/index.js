@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 
 import ReportPageChrome from "../report_page_chrome";
 import ModelingView from "../modeling_view";
-
-export default class ModelingReportPage extends Component {
+import { connect } from "react-redux";
+export class ModelingReportPage extends Component {
   static propTypes = {
     report: PropTypes.object.isRequired,
     project: PropTypes.object.isRequired
@@ -25,3 +25,5 @@ export default class ModelingReportPage extends Component {
     );
   }
 }
+
+export default connect(x => x)(ModelingReportPage);

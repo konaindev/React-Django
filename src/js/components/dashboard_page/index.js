@@ -18,6 +18,7 @@ import { Close, ListView, TileView } from "../../icons";
 import Loader from "../loader";
 
 import "./dashboard_page.scss";
+import { connect } from "react-redux";
 
 export class DashboardPage extends React.PureComponent {
   static propTypes = {
@@ -217,7 +218,7 @@ DashboardSelection.propTypes = {
   selectedProperties: PropTypes.array.isRequired
 };
 
-export default class UrlQueryLayer extends React.PureComponent {
+export class UrlQueryLayer extends React.PureComponent {
   constructor(props) {
     super(props);
     this.filters = {};
@@ -274,3 +275,5 @@ export default class UrlQueryLayer extends React.PureComponent {
     );
   }
 }
+
+export default connect(x => x)(UrlQueryLayer);

@@ -4,13 +4,14 @@ import PropTypes from "prop-types";
 import ReportPageChrome from "../report_page_chrome";
 import PerformanceReportSpanDropdown from "../performance_report_span_dropdown";
 import CommonReport from "../common_report";
+import { connect } from "react-redux";
 
 /**
  * @class PerformanceReportPage
  *
  * @classdesc Renders page chrome and contents for a single performance report
  */
-export default class PerformanceReportPage extends Component {
+export class PerformanceReportPage extends Component {
   static propTypes = {
     report: PropTypes.object.isRequired,
     project: PropTypes.object.isRequired
@@ -44,3 +45,5 @@ export default class PerformanceReportPage extends Component {
     );
   }
 }
+
+export default connect(x => x)(PerformanceReportPage);
