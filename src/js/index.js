@@ -22,6 +22,8 @@ import ReleaseNoteDetailsPage from "./components/release_note_details_page";
 import CampaignPlanPage from "./components/campaign_plan_page";
 import store from "./state/store";
 import { general } from "./state/actions";
+import axios from "axios";
+
 const pages = {
   BaselineReportPage,
   DashboardPage,
@@ -34,6 +36,32 @@ const pages = {
   CampaignPlanPage
 };
 
+const tmpFetchDashboardData = pageClass => {
+  const rawCookies = document.cookie.split("; ");
+  let cookie = undefined;
+  for (let i = 0; i < rawCookies.length; i++) {
+    const cookies = rawCookies[i].split("=");
+    if (cookies[0] === "csrftoken") {
+      cookie = cookies[1];
+    }
+  }
+  window
+    .fetch("http://localhost:8000/dashboard", {
+      responseType: "json",
+      credentials: "include",
+      mode: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": cookie
+      }
+    })
+    .then(x => x.json())
+    .then(newState => store.dispatch(general.set(newState)))
+    .catch(e => console.log(e))
+    .finally(() => {
+      renderApp(pageClass, {});
+    });
+};
 /*
  * Import the root application here.
  */
@@ -96,13 +124,15 @@ const ready = cb => {
 /* Run our page. */
 ready(() => {
   const pageClass = getPageClass();
+
   /* If this is a react rooted page, spin up the app. */
   if (pageClass) {
-    const pageProps = getPageProps();
-    // TODO: as an interim step, let's prime redux from the
-    //       injected props so we can prove this out before
-    //       porting -jc
-    store.dispatch(general.set(pageProps));
-    renderApp(pageClass, {});
+    if (root && root.dataset.page === "DashboardPage") {
+      tmpFetchDashboardData(pageClass);
+    } else {
+      store.dispatch(general.set(getPageProps()));
+
+      renderApp(pageClass, {});
+    }
   }
 });
