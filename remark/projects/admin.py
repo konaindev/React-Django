@@ -268,9 +268,6 @@ class CampaignModelTableInline(SortableInlineAdminMixin, admin.TabularInline):
     max_num = 0
     ordering = ["model_index"]
 
-    def has_add_permission(self, request, obj):
-        return False
-
     def is_selected(self, obj):
         return bool(obj.selected)
 
