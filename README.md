@@ -28,6 +28,7 @@ For back-end code, we use `flake8` to validate code, and `python black` to enfor
 - pipenv
 - postgres (including cli tools, such as `pg_config`)
 - openssl-dev (make sure the libs are in `$PATH`)
+- cairo
 
 ## Running the project locally
 
