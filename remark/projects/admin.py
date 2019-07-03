@@ -159,6 +159,7 @@ class CampaignModelAdmin(admin.ModelAdmin):
     list_display = [
         "name",
         "project_link",
+        "campaign_link",
         "is_selected",
         "active",
         "model_index",
@@ -169,7 +170,7 @@ class CampaignModelAdmin(admin.ModelAdmin):
     ordering = ["campaign__project__name"]
     fields = [
         "project_link",
-        "campaign",
+        "campaign_link",
         "name",
         "model_start",
         "model_end",
@@ -181,7 +182,7 @@ class CampaignModelAdmin(admin.ModelAdmin):
     ]
     readonly_fields = [
         "project_link",
-        "campaign",
+        "campaign_link",
         "selected",
         "spreadsheet_link",
         "json_data",
@@ -198,6 +199,15 @@ class CampaignModelAdmin(admin.ModelAdmin):
             )
         )
     project_link.short_description = "Project"
+
+    def campaign_link(self, obj):
+        return mark_safe(
+            '<a href="{}" target="_blank">{}</a>'.format(
+                reverse("admin:projects_campaign_change", args=(obj.campaign.pk,)),
+                obj.campaign.name,
+            )
+        )
+    campaign_link.short_description = "Campaign"
 
     def spreadsheet_link(self, obj):
         return mark_safe(
