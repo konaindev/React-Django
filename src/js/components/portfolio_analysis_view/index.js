@@ -133,8 +133,7 @@ export default class PortfolioAnalysisView extends React.PureComponent {
             <div className="portfolio-analysis__title">Portfolio Analysis</div>
             <ShareToggle
               {...share_info}
-              current_report_name={"current_report_name"}
-              update_endpoint={"project.update_endpoint"}
+              current_report_name="portfolio_analysis"
             />
           </div>
           <div className="portfolio-analysis__controls">
