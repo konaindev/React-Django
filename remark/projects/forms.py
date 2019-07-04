@@ -22,13 +22,14 @@ class CampaignModelUploadForm(forms.ModelForm):
     spreadsheet_file = forms.FileField()
 
     """
-    When the form is submitted with file input left blank, clean() method is not called at all.
+    When the form is submitted with "spreadsheet_file" (custom field) left blank, clean() method is not called at all.
     "helper_field" (which is hidden) helps triggering validation.
-    Commenting for now, since there is an ongoing work on django side.
+
+    IMPORTANT: if you are not going to upload, you should close the inline form and save page.
     @ref: https://code.djangoproject.com/ticket/29087
     @ref: https://github.com/django/django/pull/11504/files
     """
-    # helper_field = forms.CharField(widget=forms.widgets.HiddenInput({ "value": "any" }))
+    helper_field = forms.CharField(widget=forms.widgets.HiddenInput({"value": "any"}))
 
     def clean(self):
         cleaned_data = super().clean()
@@ -37,7 +38,7 @@ class CampaignModelUploadForm(forms.ModelForm):
             # if spreadsheet file is empty, show error on UI
             spreadsheet_file = cleaned_data.get("spreadsheet_file", None)
             if spreadsheet_file is None:
-                raise ValidationError("")
+                raise ValidationError("No spreadsheet file chosen.")
 
             importer = get_importer_for_kind(
                 SpreadsheetKind.MODELING, cleaned_data["spreadsheet_file"]
@@ -98,6 +99,10 @@ class SpreadsheetForm(forms.ModelForm):
         cleaned_data = super().clean()
 
         try:
+            # validate file input
+            if cleaned_data.get("file", None) is None:
+                raise ValidationError("No spreadsheet file chosen.")
+
             # Attempt to import and validate the spreadsheet contents
             importer = get_importer_for_kind(cleaned_data["kind"], cleaned_data["file"])
             if importer is None:
