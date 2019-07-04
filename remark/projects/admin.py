@@ -278,8 +278,8 @@ class UploadCampaignModelAdminMixin:
     def fill_spreadsheet_data(self, request, obj, form):
         # check if it's new campaign model formset
         # i.e. from CampaignModelUploadInline, not CampaignModelTableInline
-        is_new = form.cleaned_data.get("is_new", False)
-        if is_new:
+        spreadsheet = form.cleaned_data.get("spreadsheet", None)
+        if spreadsheet is not None:
             obj.name = form.cleaned_data["name"]
             obj.spreadsheet = form.cleaned_data["spreadsheet"]
             obj.model_start = form.cleaned_data["model_start"]

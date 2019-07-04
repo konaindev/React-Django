@@ -49,7 +49,6 @@ class CampaignModelUploadForm(forms.ModelForm):
             cleaned_data["name"] = importer.cleaned_data["name"]
             cleaned_data["model_start"] = importer.cleaned_data["dates"]["start"]
             cleaned_data["model_end"] = importer.cleaned_data["dates"]["end"]
-            cleaned_data["is_new"] = True
 
             return cleaned_data
         except ValidationError as e:
