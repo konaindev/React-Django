@@ -21,7 +21,7 @@ interface KpiBundle {
 
 interface DateRange {
   // Preset time period
-  preset: "custom" | "custom" | "last_week" | "last_two_weeks" | "last_four_weeks" | "year_to_date"
+  preset: "custom" | "last_week" | "last_two_weeks" | "last_four_weeks" | "year_to_date"
 
   // provides the start date of the time period
   start_date: t.date;
@@ -54,10 +54,10 @@ interface KpiHighlight {
     label: string;
     
     /** KPI target value */
-    target: t.percent | t.decimal;
+    target: t.currency;
 
     /** KPI value */
-    value: t.percent | t.decimal;
+    value: t.currency;
 }
 
 interface Property {
@@ -67,20 +67,13 @@ interface Property {
   /** The relative link to the property image */
   image_url: string;
 
-  kpis: {
-    lease_rate: t.float;
-    occupancy_rate: t.float;
-    cd_rate: t.float;
-    renewal_rate: t.float;
-  };
+  /** KPIs value */
+  kpis: object;
 
-  targets: {
-    lease_rate: t.float;
-    occupancy_rate: t.float;
-    cd_rate: t.float;
-    renewal_rate: t.float;
-  };
+  /** KPIs targets value */
+  targets: object;
 }
+
 interface SingleProperty extends Property {
   /** Property adderss */
   address: string;
@@ -90,8 +83,9 @@ interface SingleProperty extends Property {
    2 - on track
    1 - at risk
    0 - off track
+   -1 - not currently in a campaign
    */
-  health: 0 | 1 | 2;
+  health: -1 | 0 | 1 | 2;
 }
 
 interface GroupProperty extends Property {

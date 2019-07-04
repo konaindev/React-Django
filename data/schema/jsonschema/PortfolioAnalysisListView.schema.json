@@ -35,26 +35,10 @@
                     "type": "string"
                 },
                 "kpis": {
+                    "additionalProperties": true,
+                    "description": "KPIs value",
                     "properties": {
-                        "cd_rate": {
-                            "type": "number"
-                        },
-                        "lease_rate": {
-                            "type": "number"
-                        },
-                        "occupancy_rate": {
-                            "type": "number"
-                        },
-                        "renewal_rate": {
-                            "type": "number"
-                        }
                     },
-                    "required": [
-                        "cd_rate",
-                        "lease_rate",
-                        "occupancy_rate",
-                        "renewal_rate"
-                    ],
                     "type": "object"
                 },
                 "name": {
@@ -69,26 +53,10 @@
                     "type": "array"
                 },
                 "targets": {
+                    "additionalProperties": true,
+                    "description": "KPIs targets value",
                     "properties": {
-                        "cd_rate": {
-                            "type": "number"
-                        },
-                        "lease_rate": {
-                            "type": "number"
-                        },
-                        "occupancy_rate": {
-                            "type": "number"
-                        },
-                        "renewal_rate": {
-                            "type": "number"
-                        }
                     },
-                    "required": [
-                        "cd_rate",
-                        "lease_rate",
-                        "occupancy_rate",
-                        "renewal_rate"
-                    ],
                     "type": "object"
                 },
                 "type": {
@@ -116,8 +84,9 @@
                     "type": "string"
                 },
                 "health": {
-                    "description": "Health of property\n2 - on track\n1 - at risk\n0 - off track",
+                    "description": "Health of property\n2 - on track\n1 - at risk\n0 - off track\n-1 - not currently in a campaign",
                     "enum": [
+                        -1,
                         0,
                         1,
                         2
@@ -129,26 +98,10 @@
                     "type": "string"
                 },
                 "kpis": {
+                    "additionalProperties": true,
+                    "description": "KPIs value",
                     "properties": {
-                        "cd_rate": {
-                            "type": "number"
-                        },
-                        "lease_rate": {
-                            "type": "number"
-                        },
-                        "occupancy_rate": {
-                            "type": "number"
-                        },
-                        "renewal_rate": {
-                            "type": "number"
-                        }
                     },
-                    "required": [
-                        "cd_rate",
-                        "lease_rate",
-                        "occupancy_rate",
-                        "renewal_rate"
-                    ],
                     "type": "object"
                 },
                 "name": {
@@ -156,26 +109,10 @@
                     "type": "string"
                 },
                 "targets": {
+                    "additionalProperties": true,
+                    "description": "KPIs targets value",
                     "properties": {
-                        "cd_rate": {
-                            "type": "number"
-                        },
-                        "lease_rate": {
-                            "type": "number"
-                        },
-                        "occupancy_rate": {
-                            "type": "number"
-                        },
-                        "renewal_rate": {
-                            "type": "number"
-                        }
                     },
-                    "required": [
-                        "cd_rate",
-                        "lease_rate",
-                        "occupancy_rate",
-                        "renewal_rate"
-                    ],
                     "type": "object"
                 },
                 "type": {
@@ -235,17 +172,11 @@
                 },
                 "target": {
                     "description": "KPI target value",
-                    "type": [
-                        "string",
-                        "number"
-                    ]
+                    "type": "string"
                 },
                 "value": {
                     "description": "KPI value",
-                    "type": [
-                        "string",
-                        "number"
-                    ]
+                    "type": "string"
                 }
             },
             "required": [
@@ -363,8 +294,9 @@
                     "type": "string"
                 },
                 "health": {
-                    "description": "Health of property\n2 - on track\n1 - at risk\n0 - off track",
+                    "description": "Health of property\n2 - on track\n1 - at risk\n0 - off track\n-1 - not currently in a campaign",
                     "enum": [
+                        -1,
                         0,
                         1,
                         2
@@ -376,26 +308,10 @@
                     "type": "string"
                 },
                 "kpis": {
+                    "additionalProperties": true,
+                    "description": "KPIs value",
                     "properties": {
-                        "cd_rate": {
-                            "type": "number"
-                        },
-                        "lease_rate": {
-                            "type": "number"
-                        },
-                        "occupancy_rate": {
-                            "type": "number"
-                        },
-                        "renewal_rate": {
-                            "type": "number"
-                        }
                     },
-                    "required": [
-                        "cd_rate",
-                        "lease_rate",
-                        "occupancy_rate",
-                        "renewal_rate"
-                    ],
                     "type": "object"
                 },
                 "name": {
@@ -403,26 +319,10 @@
                     "type": "string"
                 },
                 "targets": {
+                    "additionalProperties": true,
+                    "description": "KPIs targets value",
                     "properties": {
-                        "cd_rate": {
-                            "type": "number"
-                        },
-                        "lease_rate": {
-                            "type": "number"
-                        },
-                        "occupancy_rate": {
-                            "type": "number"
-                        },
-                        "renewal_rate": {
-                            "type": "number"
-                        }
                     },
-                    "required": [
-                        "cd_rate",
-                        "lease_rate",
-                        "occupancy_rate",
-                        "renewal_rate"
-                    ],
                     "type": "object"
                 }
             },
