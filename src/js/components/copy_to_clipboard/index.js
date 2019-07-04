@@ -65,8 +65,8 @@ export function CopyToClipboardButton({
 CopyToClipboardButton.propTypes = {
   textToCopy: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
-  CopyNode: PropTypes.node,
-  CopiedNode: PropTypes.node,
+  CopyNode: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  CopiedNode: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   onClick: PropTypes.func
 };
 

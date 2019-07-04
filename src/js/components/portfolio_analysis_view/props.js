@@ -50,22 +50,22 @@ export const props = {
       health: 0,
       name: "usv_inq",
       label: "USV → INQ",
-      target: 0.07,
-      value: 0.05
+      target: "0.07",
+      value: "0.05"
     },
     {
       health: 1,
       name: "inq_tou",
       label: "INQ → TOU",
-      target: 0.25,
-      value: 0.2
+      target: "0.25",
+      value: "0.2"
     },
     {
       health: 2,
       name: "tou_app",
       label: "TOU → APP",
-      target: 0.5,
-      value: 0.6
+      target: "0.5",
+      value: "0.6"
     }
   ],
 

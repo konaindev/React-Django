@@ -85,7 +85,7 @@ export default class PageChrome extends Component {
   static propTypes = {
     headerItems: PropTypes.node,
     topItems: PropTypes.node,
-    navLinks: PropTypes.node,
+    navLinks: PropTypes.object,
     children: PropTypes.node.isRequired
   };
 
