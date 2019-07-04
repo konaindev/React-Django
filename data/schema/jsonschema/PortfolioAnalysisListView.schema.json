@@ -121,6 +121,10 @@
                         "individual"
                     ],
                     "type": "string"
+                },
+                "url": {
+                    "description": "ULR to property",
+                    "type": "string"
                 }
             },
             "required": [
@@ -130,7 +134,8 @@
                 "kpis",
                 "name",
                 "targets",
-                "type"
+                "type",
+                "url"
             ],
             "type": "object"
         },
@@ -324,6 +329,10 @@
                     "properties": {
                     },
                     "type": "object"
+                },
+                "url": {
+                    "description": "ULR to property",
+                    "type": "string"
                 }
             },
             "required": [
@@ -332,7 +341,8 @@
                 "image_url",
                 "kpis",
                 "name",
-                "targets"
+                "targets",
+                "url"
             ],
             "type": "object"
         }

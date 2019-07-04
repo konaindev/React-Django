@@ -86,6 +86,9 @@ interface SingleProperty extends Property {
    -1 - not currently in a campaign
    */
   health: -1 | 0 | 1 | 2;
+
+  /** ULR to property */
+  url: string;
 }
 
 interface GroupProperty extends Property {
