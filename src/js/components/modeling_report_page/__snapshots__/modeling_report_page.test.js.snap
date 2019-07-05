@@ -40,17 +40,66 @@ exports[`ModelingReportPage renders correctly 1`] = `
                 className="page-header__item"
               >
                 <div
-                  className="project-drop-down"
+                  className="user-menu"
                 >
-                  <span
-                    className="project-drop-down__image"
-                    style={Object {}}
-                  />
-                  <span
-                    className="project-drop-down__text"
+                  <div
+                    className="select user-menu__select css-2b097c-container"
+                    onKeyDown={[Function]}
                   >
-                    Portland Multi Family
-                  </span>
+                    <div
+                      className="select__control css-yk16xz-control"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <div
+                        className="select__value-container css-1hwfws3"
+                      >
+                        <div
+                          className="user-menu__image-container"
+                        >
+                          <div
+                            className="user-menu__image user-menu__image--default"
+                          />
+                          <div
+                            className="user-menu__image"
+                            style={
+                              Object {
+                                "backgroundImage": "url(https://storage.googleapis.com/tracker-avatar-production/a11569ffecab2b5564c0cbfa5e5f283a_3140620_96.png)",
+                              }
+                            }
+                          />
+                        </div>
+                        <input
+                          className="css-62g3xt-dummyInput"
+                          disabled={false}
+                          id="react-select-2-input"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          readOnly={true}
+                          tabIndex="0"
+                          value=""
+                        />
+                      </div>
+                      <div
+                        className="select__indicators css-1wy0on6"
+                      >
+                        <span
+                          className="select__indicator-separator css-1okebmr-indicatorSeparator"
+                        />
+                        <div
+                          aria-hidden="true"
+                          className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <div
+                            className="select__dropdown-arrow"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </li>
             </ul>

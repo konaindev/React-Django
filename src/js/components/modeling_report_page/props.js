@@ -1,5 +1,5 @@
 import { props as report } from "../modeling_view/props.js";
-import { project, report_links } from "../project_page/props";
+import { project, report_links, user } from "../project_page/props";
 
 const current_report_link = report_links.modeling;
 const share_info = {
@@ -8,6 +8,7 @@ const share_info = {
 };
 
 export default {
+  user,
   project,
   report,
   report_links,

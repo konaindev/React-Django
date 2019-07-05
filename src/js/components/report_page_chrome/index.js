@@ -16,6 +16,7 @@ import "./report_page_chrome.scss";
 export default class ReportPageChrome extends Component {
   static propTypes = {
     project: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
     current_report_name: PropTypes.string.isRequired,
     report_links: PropTypes.object.isRequired,
     share_info: PropTypes.object,
@@ -26,6 +27,7 @@ export default class ReportPageChrome extends Component {
   render() {
     const {
       project,
+      user,
       current_report_name,
       report_links,
       share_info
@@ -52,7 +54,7 @@ export default class ReportPageChrome extends Component {
     );
 
     return (
-      <ProjectPageChrome project={this.props.project} topItems={topItems}>
+      <ProjectPageChrome user={user} topItems={topItems}>
         {this.props.children}
       </ProjectPageChrome>
     );
