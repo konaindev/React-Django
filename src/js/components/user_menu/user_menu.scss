@@ -9,7 +9,6 @@ $menu-item-height: 20px;
 $icon-size: 1.25rem;
 $icon-spacing: 1rem;
 
-
 .user-menu {
     width: $menu-width;
 }
@@ -26,30 +25,33 @@ $icon-spacing: 1rem;
 }
 .user-menu__image-container {
     position: relative;
-}
-
-.user-menu__image-default,
-.user-menu__image {
     width: $image-size;
     height: $image-size;
+}
+
+.user-menu__image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 50%;
+
+    &--default {
+        background-image: url(../../../images/default-user.svg);
+    }
 }
 
-.user-menu__image-default {
-    position: absolute;
-    top: 0;
-    z-index: -1;
-    background-image: url(../../../images/default-user.svg);
-}
-
-.user-menu__dropdown {
+.user-menu__dropdown.select__menu {
     position: absolute;
     top: $dropdown-top-spacing;
     right: 0;
     width: $dropdown-width;
+    padding: 0;
+    margin: 0;
     overflow: hidden;
     background: $select-option-background-color;
     border-radius: 0 0 $select-border-radius $select-border-radius;
@@ -59,10 +61,11 @@ $icon-spacing: 1rem;
 .user-menu__dropdown-item {
     display: flex;
     padding: $menu-item-spacing;
-    cursor: pointer;
-    color: $default-text-color;
     font-size: $text-sm;
     line-height: $menu-item-height;
+    color: $default-text-color;
+    text-decoration: none;
+    cursor: pointer;
     align-items: center;
 
     &:hover {
@@ -74,6 +77,5 @@ $icon-spacing: 1rem;
     width: $icon-size;
     height: $icon-size;
     margin-right: $icon-spacing;
-
     stroke: $default-text-color;
 }

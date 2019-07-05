@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
+import { components } from "react-select";
 
 import Select from "../select";
 import { LogOut } from "../../icons";
@@ -23,30 +24,25 @@ export default class UserMenu extends React.PureComponent {
     };
     return (
       <div className="user-menu__image-container">
-        <div className="user-menu__image-default" />
+        <div className="user-menu__image user-menu__image--default" />
         <div className="user-menu__image" style={style} />
       </div>
     );
   };
 
-  logOut = () => {
+  dropdownMenu = props => {
     return (
-      <div className="user-menu__dropdown">
-        <div className="user-menu__dropdown-item" onClick={this.onLogOut}>
+      <components.Menu {...props} className="user-menu__dropdown">
+        <a className="user-menu__dropdown-item" href={this.props.logout_url}>
           <LogOut className="user-menu__icon" />
           <div>Log Out</div>
-        </div>
-      </div>
+        </a>
+      </components.Menu>
     );
   };
 
-  onLogOut = () => {
-    const { logout_url } = this.props;
-    window.location.href = logout_url;
-  };
-
   render() {
-    const { profile_image_url } = this.props;
+    const { profile_image_url, ...otherProps } = this.props;
     const style = {
       backgroundImage: `url(${profile_image_url})`
     };
@@ -55,10 +51,11 @@ export default class UserMenu extends React.PureComponent {
         <Select
           className="user-menu__select"
           components={{
-            Menu: this.logOut,
+            Menu: this.dropdownMenu,
             Placeholder: this.userImage
           }}
           profile_image_url={profile_image_url}
+          {...otherProps}
         />
       </div>
     );
