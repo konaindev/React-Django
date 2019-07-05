@@ -136,6 +136,7 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
         logger.info("ReportPageViewBase::get::bottom")
 
         return self.render(
+            user=request.user.get_menu_dict(),
             report_links=report_links,
             current_report_link=current_report_link,
             project=self.project.to_jsonable(),

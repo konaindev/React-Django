@@ -83,24 +83,23 @@ class PropertyListTestCase(TestCase):
             ],
             "funds": [
                 {"id": self.fund1.public_id, "label": self.fund1.name},
-                {"id": self.fund2.public_id, "label": self.fund2.name},
             ],
             "properties": [
                 {
                     "address": "",
                     "image_url": None,
-                    "performance_rating": 0,
-                    "property_id": self.project1.public_id,
-                    "property_name": self.project1.name,
-                    "url": "/projects/{}/baseline/".format(self.project1.public_id),
+                    "performance_rating": -1,
+                    "property_id": self.project2.public_id,
+                    "property_name": self.project2.name,
+                    "url": "/projects/{}/baseline/".format(self.project2.public_id),
                 },
                 {
                     "address": "",
                     "image_url": None,
-                    "performance_rating": 0,
-                    "property_id": self.project2.public_id,
-                    "property_name": self.project2.name,
-                    "url": "/projects/{}/baseline/".format(self.project2.public_id),
+                    "performance_rating": -1,
+                    "property_id": self.project1.public_id,
+                    "property_name": self.project1.name,
+                    "url": "/projects/{}/baseline/".format(self.project1.public_id),
                 },
             ],
             "property_managers": [
@@ -155,13 +154,12 @@ class PropertyListTestCase(TestCase):
             ],
             "funds": [
                 {"id": self.fund1.public_id, "label": self.fund1.name},
-                {"id": self.fund2.public_id, "label": self.fund2.name},
             ],
             "properties": [
                 {
                     "address": "",
                     "image_url": None,
-                    "performance_rating": 0,
+                    "performance_rating": -1,
                     "property_id": self.project1.public_id,
                     "property_name": self.project1.name,
                     "url": "/projects/{}/baseline/".format(self.project1.public_id),
