@@ -64,7 +64,7 @@ exports[`ProjectPage renders correctly 1`] = `
                             className="user-menu__image"
                             style={
                               Object {
-                                "backgroundImage": "url()",
+                                "backgroundImage": "url(https://storage.googleapis.com/tracker-avatar-production/a11569ffecab2b5564c0cbfa5e5f283a_3140620_96.png)",
                               }
                             }
                           />
