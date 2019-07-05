@@ -4,6 +4,17 @@ export const project = {
   update_endpoint: "/projects/pro_example/update/"
 };
 
+export const user = {
+  email: "test@remarkably.io",
+  user_id: "1234556960",
+  account_id: "5678899",
+  account_name: "Remarkably Client",
+  profile_image_url:
+    "https://storage.googleapis.com/tracker-avatar-production/a11569ffecab2b5564c0cbfa5e5f283a_3140620_96.png",
+  logout_url: "/user/logout",
+  account_url: "/user/1234556960"
+};
+
 // see data/schemas/ts/ReportLinks.ts and data/examples/ReportLinks.json
 export const report_links = {
   baseline: {
@@ -63,4 +74,4 @@ export const report_links = {
   }
 };
 
-export const props = { project, report_links };
+export const props = { project, report_links, user };

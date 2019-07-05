@@ -75,6 +75,7 @@ class ProjectPageView(ProjectSingleMixin, ReactView):
         self.get_project(request, project_id)
 
         return self.render(
+            user=request.user.get_menu_dict(),
             project=self.project.to_jsonable(),
             report_links=ReportLinks.public_for_project(self.project),
         )
