@@ -32,7 +32,7 @@ exports[`PerformanceReportPage renders correctly 1`] = `
               className="page-header__items-inner"
               style={
                 Object {
-                  "columns": 1,
+                  "gridTemplateColumns": "repeat(1, 1fr)",
                 }
               }
             >
