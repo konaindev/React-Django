@@ -43,6 +43,7 @@ celery = "*"
 redis = "*"
 cairosvg = "*"
 svgwrite = "*"
+django-redis = "*"
 
 [requires]
 python_version = "3.7"
