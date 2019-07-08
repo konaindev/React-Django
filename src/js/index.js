@@ -57,7 +57,7 @@ const tmpFetchDashboardData = pageClass => {
     .then(newState => store.dispatch(general.set(newState)))
     .catch(e => console.log(e))
     .finally(() => {
-      renderApp(pageClass, {});
+      renderApp(pageClass, { search_url: queryString });
     });
 };
 /*
