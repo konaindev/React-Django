@@ -6,15 +6,17 @@ import TotalAddressableMarket from "../total_addressable_market";
 
 export default class MarketReportPage extends Component {
   static propTypes = {
+    user: PropTypes.object.isRequired,
     report: PropTypes.object.isRequired,
     project: PropTypes.object.isRequired
   };
 
   render() {
-    const { project, report, report_links, share_info } = this.props;
+    const { user, project, report, report_links, share_info } = this.props;
 
     return (
       <ReportPageChrome
+        user={user}
         project={project}
         current_report_name="market"
         report_links={report_links}

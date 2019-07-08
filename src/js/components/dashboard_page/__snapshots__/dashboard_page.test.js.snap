@@ -25,6 +25,85 @@ exports[`DashboardPage Row select 1`] = `
                
             </div>
           </a>
+          <nav
+            className="page-header__items-outer"
+          >
+            <ul
+              className="page-header__items-inner"
+              style={
+                Object {
+                  "gridTemplateColumns": "repeat(1, 1fr)",
+                }
+              }
+            >
+              <li
+                className="page-header__item"
+              >
+                <div
+                  className="user-menu"
+                >
+                  <div
+                    className="select user-menu__select css-2b097c-container"
+                    onKeyDown={[Function]}
+                  >
+                    <div
+                      className="select__control css-yk16xz-control"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <div
+                        className="select__value-container css-1hwfws3"
+                      >
+                        <div
+                          className="user-menu__image-container"
+                        >
+                          <div
+                            className="user-menu__image user-menu__image--default"
+                          />
+                          <div
+                            className="user-menu__image"
+                            style={
+                              Object {
+                                "backgroundImage": "url(https://storage.googleapis.com/tracker-avatar-production/a11569ffecab2b5564c0cbfa5e5f283a_3140620_96.png)",
+                              }
+                            }
+                          />
+                        </div>
+                        <input
+                          className="css-62g3xt-dummyInput"
+                          disabled={false}
+                          id="react-select-14-input"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          readOnly={true}
+                          tabIndex="0"
+                          value=""
+                        />
+                      </div>
+                      <div
+                        className="select__indicators css-1wy0on6"
+                      >
+                        <span
+                          className="select__indicator-separator css-1okebmr-indicatorSeparator"
+                        />
+                        <div
+                          aria-hidden="true"
+                          className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <div
+                            className="select__dropdown-arrow"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </div>
@@ -159,7 +238,7 @@ exports[`DashboardPage Row select 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-12-input"
+                        id="react-select-15-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -207,7 +286,7 @@ exports[`DashboardPage Row select 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-13-input"
+                        id="react-select-16-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -261,7 +340,7 @@ exports[`DashboardPage Row select 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-14-input"
+                        id="react-select-17-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -315,7 +394,7 @@ exports[`DashboardPage Row select 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-15-input"
+                        id="react-select-18-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -380,7 +459,7 @@ exports[`DashboardPage Row select 1`] = `
                           <input
                             className="css-62g3xt-dummyInput"
                             disabled={false}
-                            id="react-select-16-input"
+                            id="react-select-19-input"
                             onBlur={[Function]}
                             onChange={[Function]}
                             onFocus={[Function]}
@@ -1113,6 +1192,85 @@ exports[`DashboardPage Row view 1`] = `
                
             </div>
           </a>
+          <nav
+            className="page-header__items-outer"
+          >
+            <ul
+              className="page-header__items-inner"
+              style={
+                Object {
+                  "gridTemplateColumns": "repeat(1, 1fr)",
+                }
+              }
+            >
+              <li
+                className="page-header__item"
+              >
+                <div
+                  className="user-menu"
+                >
+                  <div
+                    className="select user-menu__select css-2b097c-container"
+                    onKeyDown={[Function]}
+                  >
+                    <div
+                      className="select__control css-yk16xz-control"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <div
+                        className="select__value-container css-1hwfws3"
+                      >
+                        <div
+                          className="user-menu__image-container"
+                        >
+                          <div
+                            className="user-menu__image user-menu__image--default"
+                          />
+                          <div
+                            className="user-menu__image"
+                            style={
+                              Object {
+                                "backgroundImage": "url(https://storage.googleapis.com/tracker-avatar-production/a11569ffecab2b5564c0cbfa5e5f283a_3140620_96.png)",
+                              }
+                            }
+                          />
+                        </div>
+                        <input
+                          className="css-62g3xt-dummyInput"
+                          disabled={false}
+                          id="react-select-8-input"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          readOnly={true}
+                          tabIndex="0"
+                          value=""
+                        />
+                      </div>
+                      <div
+                        className="select__indicators css-1wy0on6"
+                      >
+                        <span
+                          className="select__indicator-separator css-1okebmr-indicatorSeparator"
+                        />
+                        <div
+                          aria-hidden="true"
+                          className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <div
+                            className="select__dropdown-arrow"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </div>
@@ -1247,7 +1405,7 @@ exports[`DashboardPage Row view 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-7-input"
+                        id="react-select-9-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -1295,7 +1453,7 @@ exports[`DashboardPage Row view 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-8-input"
+                        id="react-select-10-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -1349,7 +1507,7 @@ exports[`DashboardPage Row view 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-9-input"
+                        id="react-select-11-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -1403,7 +1561,7 @@ exports[`DashboardPage Row view 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-10-input"
+                        id="react-select-12-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -1468,7 +1626,7 @@ exports[`DashboardPage Row view 1`] = `
                           <input
                             className="css-62g3xt-dummyInput"
                             disabled={false}
-                            id="react-select-11-input"
+                            id="react-select-13-input"
                             onBlur={[Function]}
                             onChange={[Function]}
                             onFocus={[Function]}
@@ -2201,6 +2359,85 @@ exports[`DashboardPage renders correctly 1`] = `
                
             </div>
           </a>
+          <nav
+            className="page-header__items-outer"
+          >
+            <ul
+              className="page-header__items-inner"
+              style={
+                Object {
+                  "gridTemplateColumns": "repeat(1, 1fr)",
+                }
+              }
+            >
+              <li
+                className="page-header__item"
+              >
+                <div
+                  className="user-menu"
+                >
+                  <div
+                    className="select user-menu__select css-2b097c-container"
+                    onKeyDown={[Function]}
+                  >
+                    <div
+                      className="select__control css-yk16xz-control"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <div
+                        className="select__value-container css-1hwfws3"
+                      >
+                        <div
+                          className="user-menu__image-container"
+                        >
+                          <div
+                            className="user-menu__image user-menu__image--default"
+                          />
+                          <div
+                            className="user-menu__image"
+                            style={
+                              Object {
+                                "backgroundImage": "url(https://storage.googleapis.com/tracker-avatar-production/a11569ffecab2b5564c0cbfa5e5f283a_3140620_96.png)",
+                              }
+                            }
+                          />
+                        </div>
+                        <input
+                          className="css-62g3xt-dummyInput"
+                          disabled={false}
+                          id="react-select-2-input"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          readOnly={true}
+                          tabIndex="0"
+                          value=""
+                        />
+                      </div>
+                      <div
+                        className="select__indicators css-1wy0on6"
+                      >
+                        <span
+                          className="select__indicator-separator css-1okebmr-indicatorSeparator"
+                        />
+                        <div
+                          aria-hidden="true"
+                          className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <div
+                            className="select__dropdown-arrow"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </div>
@@ -2335,7 +2572,7 @@ exports[`DashboardPage renders correctly 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-2-input"
+                        id="react-select-3-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -2383,7 +2620,7 @@ exports[`DashboardPage renders correctly 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-3-input"
+                        id="react-select-4-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -2437,7 +2674,7 @@ exports[`DashboardPage renders correctly 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-4-input"
+                        id="react-select-5-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -2491,7 +2728,7 @@ exports[`DashboardPage renders correctly 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-5-input"
+                        id="react-select-6-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -2556,7 +2793,7 @@ exports[`DashboardPage renders correctly 1`] = `
                           <input
                             className="css-62g3xt-dummyInput"
                             disabled={false}
-                            id="react-select-6-input"
+                            id="react-select-7-input"
                             onBlur={[Function]}
                             onChange={[Function]}
                             onFocus={[Function]}

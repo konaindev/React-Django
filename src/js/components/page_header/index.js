@@ -31,7 +31,7 @@ export default class PageHeader extends Component {
       <nav className="page-header__items-outer">
         <ul
           className="page-header__items-inner"
-          style={{ columns: childCount }}
+          style={{ gridTemplateColumns: `repeat(${childCount}, 1fr)` }}
         >
           {wrappedChildren}
         </ul>

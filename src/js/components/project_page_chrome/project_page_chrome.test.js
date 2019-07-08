@@ -1,12 +1,12 @@
 import renderer from "react-test-renderer";
+
+import { props as user } from "../user_menu/props";
 import ProjectPageChrome from "./index";
 
 describe("ProjectPageChrome", () => {
   it("renders correctly", () => {
-    const project = { name: "Portland Multi Family", public_id: "pro_example" };
-
     const props = {
-      project: project,
+      user: user,
       topItems: <div>topItems</div>,
       children: <div>children</div>
     };

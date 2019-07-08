@@ -16,6 +16,7 @@ import PropertyCardList from "../property_card_list";
 import PropertyList from "../property_list";
 import { Close, ListView, TileView } from "../../icons";
 import Loader from "../loader";
+import UserMenu from "../user_menu";
 
 import "./dashboard_page.scss";
 
@@ -113,9 +114,10 @@ export class DashboardPage extends React.PureComponent {
     const className = cn("dashboard-content", {
       "dashboard-content--selection-mode": this.state.selectedProperties.length
     });
+    const { user } = this.props;
     const PropertiesListComponent = this.propertiesListComponent;
     return (
-      <PageChrome>
+      <PageChrome headerItems={<UserMenu {...user} />}>
         <div className={className}>
           <Container>
             <div className="dashboard-content__title">
