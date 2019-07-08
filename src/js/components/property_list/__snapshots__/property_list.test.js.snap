@@ -158,7 +158,7 @@ exports[`PropertyList renders correctly 1`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={2}
             >
               <div
@@ -166,7 +166,7 @@ exports[`PropertyList renders correctly 1`] = `
               >
                 ON TRACK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -237,7 +237,7 @@ exports[`PropertyList renders correctly 1`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={1}
             >
               <div
@@ -245,7 +245,7 @@ exports[`PropertyList renders correctly 1`] = `
               >
                 AT RISK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -316,7 +316,7 @@ exports[`PropertyList renders correctly 1`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={2}
             >
               <div
@@ -324,7 +324,7 @@ exports[`PropertyList renders correctly 1`] = `
               >
                 ON TRACK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -395,7 +395,7 @@ exports[`PropertyList renders correctly 1`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={0}
             >
               <div
@@ -403,7 +403,7 @@ exports[`PropertyList renders correctly 1`] = `
               >
                 OFF TRACK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -474,7 +474,7 @@ exports[`PropertyList renders correctly 1`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={2}
             >
               <div
@@ -482,7 +482,7 @@ exports[`PropertyList renders correctly 1`] = `
               >
                 ON TRACK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -553,7 +553,7 @@ exports[`PropertyList renders correctly 1`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={2}
             >
               <div
@@ -561,7 +561,7 @@ exports[`PropertyList renders correctly 1`] = `
               >
                 ON TRACK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -632,7 +632,7 @@ exports[`PropertyList renders correctly 1`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={1}
             >
               <div
@@ -640,7 +640,7 @@ exports[`PropertyList renders correctly 1`] = `
               >
                 AT RISK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -711,7 +711,7 @@ exports[`PropertyList renders correctly 1`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={1}
             >
               <div
@@ -719,7 +719,7 @@ exports[`PropertyList renders correctly 1`] = `
               >
                 AT RISK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -790,7 +790,7 @@ exports[`PropertyList renders correctly 1`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={2}
             >
               <div
@@ -798,7 +798,7 @@ exports[`PropertyList renders correctly 1`] = `
               >
                 ON TRACK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -869,7 +869,7 @@ exports[`PropertyList renders correctly 1`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={2}
             >
               <div
@@ -877,7 +877,7 @@ exports[`PropertyList renders correctly 1`] = `
               >
                 ON TRACK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -1044,7 +1044,7 @@ exports[`PropertyList renders correctly 2`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={2}
             >
               <div
@@ -1052,7 +1052,7 @@ exports[`PropertyList renders correctly 2`] = `
               >
                 ON TRACK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -1123,7 +1123,7 @@ exports[`PropertyList renders correctly 2`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={1}
             >
               <div
@@ -1131,7 +1131,7 @@ exports[`PropertyList renders correctly 2`] = `
               >
                 AT RISK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -1202,7 +1202,7 @@ exports[`PropertyList renders correctly 2`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={2}
             >
               <div
@@ -1210,7 +1210,7 @@ exports[`PropertyList renders correctly 2`] = `
               >
                 ON TRACK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -1281,7 +1281,7 @@ exports[`PropertyList renders correctly 2`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={0}
             >
               <div
@@ -1289,7 +1289,7 @@ exports[`PropertyList renders correctly 2`] = `
               >
                 OFF TRACK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -1360,7 +1360,7 @@ exports[`PropertyList renders correctly 2`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={2}
             >
               <div
@@ -1368,7 +1368,7 @@ exports[`PropertyList renders correctly 2`] = `
               >
                 ON TRACK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -1439,7 +1439,7 @@ exports[`PropertyList renders correctly 2`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={2}
             >
               <div
@@ -1447,7 +1447,7 @@ exports[`PropertyList renders correctly 2`] = `
               >
                 ON TRACK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -1518,7 +1518,7 @@ exports[`PropertyList renders correctly 2`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={1}
             >
               <div
@@ -1526,7 +1526,7 @@ exports[`PropertyList renders correctly 2`] = `
               >
                 AT RISK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -1597,7 +1597,7 @@ exports[`PropertyList renders correctly 2`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={1}
             >
               <div
@@ -1605,7 +1605,7 @@ exports[`PropertyList renders correctly 2`] = `
               >
                 AT RISK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -1676,7 +1676,7 @@ exports[`PropertyList renders correctly 2`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={2}
             >
               <div
@@ -1684,7 +1684,7 @@ exports[`PropertyList renders correctly 2`] = `
               >
                 ON TRACK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -1755,7 +1755,7 @@ exports[`PropertyList renders correctly 2`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={2}
             >
               <div
@@ -1763,7 +1763,7 @@ exports[`PropertyList renders correctly 2`] = `
               >
                 ON TRACK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -1930,7 +1930,7 @@ exports[`PropertyList renders correctly 3`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={2}
             >
               <div
@@ -1938,7 +1938,7 @@ exports[`PropertyList renders correctly 3`] = `
               >
                 ON TRACK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -2009,7 +2009,7 @@ exports[`PropertyList renders correctly 3`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={1}
             >
               <div
@@ -2017,7 +2017,7 @@ exports[`PropertyList renders correctly 3`] = `
               >
                 AT RISK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -2088,7 +2088,7 @@ exports[`PropertyList renders correctly 3`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={2}
             >
               <div
@@ -2096,7 +2096,7 @@ exports[`PropertyList renders correctly 3`] = `
               >
                 ON TRACK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -2167,7 +2167,7 @@ exports[`PropertyList renders correctly 3`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={0}
             >
               <div
@@ -2175,7 +2175,7 @@ exports[`PropertyList renders correctly 3`] = `
               >
                 OFF TRACK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -2246,7 +2246,7 @@ exports[`PropertyList renders correctly 3`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={2}
             >
               <div
@@ -2254,7 +2254,7 @@ exports[`PropertyList renders correctly 3`] = `
               >
                 ON TRACK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -2325,7 +2325,7 @@ exports[`PropertyList renders correctly 3`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={2}
             >
               <div
@@ -2333,7 +2333,7 @@ exports[`PropertyList renders correctly 3`] = `
               >
                 ON TRACK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -2404,7 +2404,7 @@ exports[`PropertyList renders correctly 3`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={1}
             >
               <div
@@ -2412,7 +2412,7 @@ exports[`PropertyList renders correctly 3`] = `
               >
                 AT RISK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -2483,7 +2483,7 @@ exports[`PropertyList renders correctly 3`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={1}
             >
               <div
@@ -2491,7 +2491,7 @@ exports[`PropertyList renders correctly 3`] = `
               >
                 AT RISK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -2562,7 +2562,7 @@ exports[`PropertyList renders correctly 3`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={2}
             >
               <div
@@ -2570,7 +2570,7 @@ exports[`PropertyList renders correctly 3`] = `
               >
                 ON TRACK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
@@ -2641,7 +2641,7 @@ exports[`PropertyList renders correctly 3`] = `
                 View Property
               </a>
             </div>
-            <PropertyStatus
+            <Memo(PropertyStatus)
               performance_rating={2}
             >
               <div
@@ -2649,7 +2649,7 @@ exports[`PropertyList renders correctly 3`] = `
               >
                 ON TRACK
               </div>
-            </PropertyStatus>
+            </Memo(PropertyStatus)>
           </div>
         </Panel>
       </PropertyRow>
