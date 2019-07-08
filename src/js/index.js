@@ -36,15 +36,23 @@ const pages = {
 };
 
 const tmpFetchDashboardData = pageClass => {
+  const location = window.location;
+  const queryString = location.search;
+
   window
-    .fetch(`${process.env.BASE_URL}/dashboard`, {
-      responseType: "json",
-      credentials: "include",
-      mode: "same-origin",
-      headers: {
-        "Content-Type": "application/json"
+    .fetch(
+      `${process.env.BASE_URL}/dashboard${
+        queryString ? `?${queryString}` : ""
+      }`,
+      {
+        responseType: "json",
+        credentials: "include",
+        mode: "same-origin",
+        headers: {
+          "Content-Type": "application/json"
+        }
       }
-    })
+    )
     .then(x => x.json())
     .then(newState => store.dispatch(general.set(newState)))
     .catch(e => console.log(e))
