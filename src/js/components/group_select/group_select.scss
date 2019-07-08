@@ -4,7 +4,6 @@ $selected-color: $blue-3;
 $checkbox-spacing: 13.5px;
 $group-width: 180px;
 $menu-spacing: 10px 20px 0 30px;
-$menu-spacing2: 10px 10px 0 0;
 $menu-max-height: 472px;
 $option-spacing: 37px;
 $group-border-color: $gray-4;
@@ -57,7 +56,6 @@ $controls-spacing: 50px 30px 30px;
     @include dark-scrollbar();
     max-height: $menu-max-height;
     padding: $menu-spacing;
-    margin: $menu-spacing2;
     overflow: auto;
 }
 
