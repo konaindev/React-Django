@@ -126,7 +126,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
                 {
                     "no_projects": no_projects,
                     "properties": projects,
-                    "user": user_dict,
+                    "user": user.get_menu_dict(),
                     "locations": locations,
                     "property_managers": property_managers,
                     "asset_managers": asset_managers,
@@ -137,7 +137,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
             return self.render(
                 no_projects=no_projects,
                 properties=projects,
-                user=user_dict,
+                user=user.get_menu_dict(),
                 search_url=request.GET.urlencode(),
                 locations=locations,
                 property_managers=property_managers,
