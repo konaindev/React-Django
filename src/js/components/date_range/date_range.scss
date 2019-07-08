@@ -4,6 +4,7 @@ $input-width: 240px;
 $input-height: 44px;
 $input-spacing: 0 20px;
 $input-border-color: $gray-4;
+$input-hover-border-color: $gray-5;
 $value-width: 74px;
 $day-picker-width: 280px;
 $day-picker-spacing: 19px 0 0;
@@ -43,6 +44,10 @@ $button-height: 30px;
     border-radius: $input-border-radius;
     align-items: center;
     justify-content: space-between;
+
+    &:hover {
+        border-color: $input-hover-border-color;
+    }
 }
 
 
