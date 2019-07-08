@@ -1,0 +1,1492 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DateRange renders correctly 1`] = `
+<div
+  className="date-range"
+>
+  <div>
+    <div
+      className="date-range__input"
+      onClick={[Function]}
+    >
+      <span
+        className="date-range__value date-range__value--placeholder"
+      >
+        MM/DD/YY
+      </span>
+      <span>
+        to
+      </span>
+      <span
+        className="date-range__value date-range__value--placeholder"
+      >
+        MM/DD/YY
+      </span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DateRange renders opened 1`] = `
+<div
+  className="date-range"
+>
+  <div>
+    <div
+      className="date-range__input"
+      onClick={[Function]}
+    >
+      <span
+        className="date-range__value date-range__value--selecting date-range__value--placeholder"
+      >
+        MM/DD/YY
+      </span>
+      <span>
+        to
+      </span>
+      <span
+        className="date-range__value date-range__value--placeholder"
+      >
+        MM/DD/YY
+      </span>
+    </div>
+    <div
+      className="date-range__overlay-wrapper"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      tabIndex={0}
+    >
+      <div
+        className=""
+      >
+        <div
+          className="date-range__day-picker"
+          lang="en"
+        >
+          <div
+            className="date-range__month-wrapper"
+            onKeyDown={[Function]}
+            tabIndex={0}
+          >
+            <div
+              className="date-range__nav-bar"
+            >
+              <div
+                className="date-range__nav-button date-range__nav-button--prev"
+                onClick={[Function]}
+              />
+              <div
+                className="date-range__current-month"
+              >
+                June 2019
+              </div>
+              <div
+                className="date-range__nav-button date-range__nav-button--next"
+                onClick={[Function]}
+              />
+            </div>
+            <div>
+              <div
+                className="date-range__month"
+                role="grid"
+              >
+                <div
+                  className="date-range__footer"
+                >
+                  <button
+                    className="button button--default date-range__button"
+                    onClick={[Function]}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="button button--primary date-range__button"
+                    onClick={[Function]}
+                  >
+                    Apply
+                  </button>
+                </div>
+                <div
+                  className=""
+                  role="rowgroup"
+                >
+                  <div
+                    className="date-range__weekdays"
+                    role="row"
+                  >
+                    <div
+                      className="date-range__weekday"
+                      role="columnheader"
+                    >
+                      <abbr
+                        title="Sunday"
+                      >
+                        Su
+                      </abbr>
+                    </div>
+                    <div
+                      className="date-range__weekday"
+                      role="columnheader"
+                    >
+                      <abbr
+                        title="Monday"
+                      >
+                        Mo
+                      </abbr>
+                    </div>
+                    <div
+                      className="date-range__weekday"
+                      role="columnheader"
+                    >
+                      <abbr
+                        title="Tuesday"
+                      >
+                        Tu
+                      </abbr>
+                    </div>
+                    <div
+                      className="date-range__weekday"
+                      role="columnheader"
+                    >
+                      <abbr
+                        title="Wednesday"
+                      >
+                        We
+                      </abbr>
+                    </div>
+                    <div
+                      className="date-range__weekday"
+                      role="columnheader"
+                    >
+                      <abbr
+                        title="Thursday"
+                      >
+                        Th
+                      </abbr>
+                    </div>
+                    <div
+                      className="date-range__weekday"
+                      role="columnheader"
+                    >
+                      <abbr
+                        title="Friday"
+                      >
+                        Fr
+                      </abbr>
+                    </div>
+                    <div
+                      className="date-range__weekday"
+                      role="columnheader"
+                    >
+                      <abbr
+                        title="Saturday"
+                      >
+                        Sa
+                      </abbr>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="date-range__days"
+                  role="rowgroup"
+                >
+                  <div
+                    className="date-range__week"
+                    role="row"
+                  >
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper date-range__day-wrapper--outside"
+                    />
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper date-range__day-wrapper--outside"
+                    />
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper date-range__day-wrapper--outside"
+                    />
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper date-range__day-wrapper--outside"
+                    />
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper date-range__day-wrapper--outside"
+                    />
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper date-range__day-wrapper--outside"
+                    />
+                    <div
+                      aria-disabled={false}
+                      aria-label="Sat Jun 01 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={0}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        1
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="date-range__week"
+                    role="row"
+                  >
+                    <div
+                      aria-disabled={false}
+                      aria-label="Sun Jun 02 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        2
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Mon Jun 03 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        3
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Tue Jun 04 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        4
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Wed Jun 05 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        5
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Thu Jun 06 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        6
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Fri Jun 07 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        7
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Sat Jun 08 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        8
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="date-range__week"
+                    role="row"
+                  >
+                    <div
+                      aria-disabled={false}
+                      aria-label="Sun Jun 09 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        9
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Mon Jun 10 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        10
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Tue Jun 11 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        11
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Wed Jun 12 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        12
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Thu Jun 13 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        13
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Fri Jun 14 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        14
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Sat Jun 15 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        15
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="date-range__week"
+                    role="row"
+                  >
+                    <div
+                      aria-disabled={false}
+                      aria-label="Sun Jun 16 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        16
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Mon Jun 17 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        17
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Tue Jun 18 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        18
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Wed Jun 19 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        19
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Thu Jun 20 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        20
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Fri Jun 21 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        21
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Sat Jun 22 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        22
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="date-range__week"
+                    role="row"
+                  >
+                    <div
+                      aria-disabled={false}
+                      aria-label="Sun Jun 23 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        23
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Mon Jun 24 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper today"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day date-range__day--today"
+                      >
+                        24
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={true}
+                      aria-label="Tue Jun 25 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper disabled"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day date-range__day--disabled"
+                      >
+                        25
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={true}
+                      aria-label="Wed Jun 26 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper disabled"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day date-range__day--disabled"
+                      >
+                        26
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={true}
+                      aria-label="Thu Jun 27 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper disabled"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day date-range__day--disabled"
+                      >
+                        27
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={true}
+                      aria-label="Fri Jun 28 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper disabled"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day date-range__day--disabled"
+                      >
+                        28
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={true}
+                      aria-label="Sat Jun 29 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper disabled"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day date-range__day--disabled"
+                      >
+                        29
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="date-range__week"
+                    role="row"
+                  >
+                    <div
+                      aria-disabled={true}
+                      aria-label="Sun Jun 30 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper disabled"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day date-range__day--disabled"
+                      >
+                        30
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper disabled date-range__day-wrapper--outside"
+                    />
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper disabled date-range__day-wrapper--outside"
+                    />
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper disabled date-range__day-wrapper--outside"
+                    />
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper disabled date-range__day-wrapper--outside"
+                    />
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper disabled date-range__day-wrapper--outside"
+                    />
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper disabled date-range__day-wrapper--outside"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DateRange renders with dates 1`] = `
+<div
+  className="date-range"
+>
+  <div>
+    <div
+      className="date-range__input"
+      onClick={[Function]}
+    >
+      <span
+        className="date-range__value date-range__value--selecting"
+      >
+        06/12/19
+      </span>
+      <span>
+        to
+      </span>
+      <span
+        className="date-range__value"
+      >
+        06/20/19
+      </span>
+    </div>
+    <div
+      className="date-range__overlay-wrapper"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      tabIndex={0}
+    >
+      <div
+        className=""
+      >
+        <div
+          className="date-range__day-picker"
+          lang="en"
+        >
+          <div
+            className="date-range__month-wrapper"
+            onKeyDown={[Function]}
+            tabIndex={0}
+          >
+            <div
+              className="date-range__nav-bar"
+            >
+              <div
+                className="date-range__nav-button date-range__nav-button--prev"
+                onClick={[Function]}
+              />
+              <div
+                className="date-range__current-month"
+              >
+                June 2019
+              </div>
+              <div
+                className="date-range__nav-button date-range__nav-button--next"
+                onClick={[Function]}
+              />
+            </div>
+            <div>
+              <div
+                className="date-range__month"
+                role="grid"
+              >
+                <div
+                  className="date-range__footer"
+                >
+                  <button
+                    className="button button--default date-range__button"
+                    onClick={[Function]}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="button button--primary date-range__button"
+                    onClick={[Function]}
+                  >
+                    Apply
+                  </button>
+                </div>
+                <div
+                  className=""
+                  role="rowgroup"
+                >
+                  <div
+                    className="date-range__weekdays"
+                    role="row"
+                  >
+                    <div
+                      className="date-range__weekday"
+                      role="columnheader"
+                    >
+                      <abbr
+                        title="Sunday"
+                      >
+                        Su
+                      </abbr>
+                    </div>
+                    <div
+                      className="date-range__weekday"
+                      role="columnheader"
+                    >
+                      <abbr
+                        title="Monday"
+                      >
+                        Mo
+                      </abbr>
+                    </div>
+                    <div
+                      className="date-range__weekday"
+                      role="columnheader"
+                    >
+                      <abbr
+                        title="Tuesday"
+                      >
+                        Tu
+                      </abbr>
+                    </div>
+                    <div
+                      className="date-range__weekday"
+                      role="columnheader"
+                    >
+                      <abbr
+                        title="Wednesday"
+                      >
+                        We
+                      </abbr>
+                    </div>
+                    <div
+                      className="date-range__weekday"
+                      role="columnheader"
+                    >
+                      <abbr
+                        title="Thursday"
+                      >
+                        Th
+                      </abbr>
+                    </div>
+                    <div
+                      className="date-range__weekday"
+                      role="columnheader"
+                    >
+                      <abbr
+                        title="Friday"
+                      >
+                        Fr
+                      </abbr>
+                    </div>
+                    <div
+                      className="date-range__weekday"
+                      role="columnheader"
+                    >
+                      <abbr
+                        title="Saturday"
+                      >
+                        Sa
+                      </abbr>
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="date-range__days"
+                  role="rowgroup"
+                >
+                  <div
+                    className="date-range__week"
+                    role="row"
+                  >
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper date-range__day-wrapper--outside"
+                    />
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper date-range__day-wrapper--outside"
+                    />
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper date-range__day-wrapper--outside"
+                    />
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper date-range__day-wrapper--outside"
+                    />
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper date-range__day-wrapper--outside"
+                    />
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper date-range__day-wrapper--outside"
+                    />
+                    <div
+                      aria-disabled={false}
+                      aria-label="Sat Jun 01 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={0}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        1
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="date-range__week"
+                    role="row"
+                  >
+                    <div
+                      aria-disabled={false}
+                      aria-label="Sun Jun 02 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        2
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Mon Jun 03 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        3
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Tue Jun 04 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        4
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Wed Jun 05 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        5
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Thu Jun 06 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        6
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Fri Jun 07 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        7
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Sat Jun 08 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        8
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="date-range__week"
+                    role="row"
+                  >
+                    <div
+                      aria-disabled={false}
+                      aria-label="Sun Jun 09 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        9
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Mon Jun 10 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        10
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Tue Jun 11 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        11
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Wed Jun 12 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper start date-range__day-wrapper--selected"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day date-range__day--start"
+                      >
+                        12
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Thu Jun 13 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper date-range__day-wrapper--selected"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        13
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Fri Jun 14 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper date-range__day-wrapper--selected"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        14
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Sat Jun 15 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper date-range__day-wrapper--selected"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        15
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="date-range__week"
+                    role="row"
+                  >
+                    <div
+                      aria-disabled={false}
+                      aria-label="Sun Jun 16 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper date-range__day-wrapper--selected"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        16
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Mon Jun 17 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper date-range__day-wrapper--selected"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        17
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Tue Jun 18 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper date-range__day-wrapper--selected"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        18
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Wed Jun 19 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper date-range__day-wrapper--selected"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        19
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Thu Jun 20 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper end date-range__day-wrapper--selected"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day date-range__day--end"
+                      >
+                        20
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Fri Jun 21 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        21
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Sat Jun 22 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        22
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="date-range__week"
+                    role="row"
+                  >
+                    <div
+                      aria-disabled={false}
+                      aria-label="Sun Jun 23 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        23
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Mon Jun 24 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper today"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day date-range__day--today"
+                      >
+                        24
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={true}
+                      aria-label="Tue Jun 25 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper disabled"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day date-range__day--disabled"
+                      >
+                        25
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={true}
+                      aria-label="Wed Jun 26 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper disabled"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day date-range__day--disabled"
+                      >
+                        26
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={true}
+                      aria-label="Thu Jun 27 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper disabled"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day date-range__day--disabled"
+                      >
+                        27
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={true}
+                      aria-label="Fri Jun 28 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper disabled"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day date-range__day--disabled"
+                      >
+                        28
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={true}
+                      aria-label="Sat Jun 29 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper disabled"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day date-range__day--disabled"
+                      >
+                        29
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="date-range__week"
+                    role="row"
+                  >
+                    <div
+                      aria-disabled={true}
+                      aria-label="Sun Jun 30 2019"
+                      aria-selected={false}
+                      className="date-range__day-wrapper disabled"
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day date-range__day--disabled"
+                      >
+                        30
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper disabled date-range__day-wrapper--outside"
+                    />
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper disabled date-range__day-wrapper--outside"
+                    />
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper disabled date-range__day-wrapper--outside"
+                    />
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper disabled date-range__day-wrapper--outside"
+                    />
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper disabled date-range__day-wrapper--outside"
+                    />
+                    <div
+                      aria-disabled={true}
+                      className="date-range__day-wrapper disabled date-range__day-wrapper--outside"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

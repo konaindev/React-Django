@@ -1,0 +1,272 @@
+@import "css/base.scss";
+
+$input-width: 240px;
+$input-height: 44px;
+$input-spacing: 0 20px;
+$input-border-color: $gray-4;
+$value-width: 74px;
+$day-picker-width: 280px;
+$day-picker-spacing: 19px 0 0;
+$day-picker-shadow: 0 2px 20px rgba(0, 0, 0, .35);
+$day-picker-background: $gray-3;
+$nav-bar-height: 20px;
+$nav-bar-spacing: 0 22px;
+$weekdays-spacing: 0 14px;
+$week-height: 22px;
+$days-spacing: 6px 14px 0;
+$day-wrapper-height: 24px;
+$day-width: 30px;
+$day-height: 30px;
+$day-selected-background: $gray-4;
+$day-active-color: $blue-7;
+$day-today-background: $gray-4;
+$day-selecting-background: $gray-4;
+$footer-spacing: 13px 0 0;
+$footer-spacing2: 14px;
+$button-width: 58px;
+$button-height: 30px;
+
+.date-range {
+    display: inline-block;
+    font-family: $font-sans;
+}
+
+.date-range__input {
+    display: flex;
+    width: $input-width;
+    height: $input-height;
+    padding: $input-spacing;
+    font-family: $font-sans;
+    font-size: $text-sm;
+    cursor: pointer;
+    border: 1px solid $input-border-color;
+    border-radius: $input-border-radius;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.date-range__value {
+    width: $value-width;
+    padding: 3px 4px;
+    font-size: $text-sm;
+    line-height: 20px;
+    letter-spacing: $letter-spacing-wider;
+    color: $input-text-color;
+    text-align: center;
+    border-radius: 2px;
+    box-sizing: content-box;
+
+    &--selecting {
+        background-color: $day-selecting-background;
+    }
+
+    &--placeholder {
+        color: $input-placeholder-color;
+        text-transform: lowercase;
+    }
+}
+
+
+.date-range__day-picker {
+    position: absolute;
+    top: 18px;
+    right: 50%;
+    z-index: 1;
+    width: $day-picker-width;
+    padding: $day-picker-spacing;
+    background: $day-picker-background;
+    border-radius: $input-border-radius;
+    box-shadow: $day-picker-shadow;
+    transform: translateX(50%);
+
+    &:before {
+        position: absolute;
+        top: -10px;
+        right: 50%;
+        width: 0;
+        height: 0;
+        border-color: transparent transparent $day-picker-background transparent;
+        border-style: solid;
+        border-width: 0 10px 10px 10px;
+        content: "";
+        transform: translateX(50%);
+    }
+}
+
+.date-range__overlay-wrapper {
+    position: relative;
+}
+
+.date-range__nav-bar {
+    display: flex;
+    padding: $nav-bar-spacing;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.date-range__current-month {
+    font-size: $text-xs;
+    font-weight: $weight-bold;
+    line-height: $nav-bar-height;
+    letter-spacing: $letter-spacing-wider;
+    color: $title-small-color;
+    text-transform: uppercase;
+}
+
+.date-range__nav-button {
+    display: inline-block;
+    width: 7px;
+    height: 12px;
+    cursor: pointer;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    &--prev {
+        background-image: url(../../../images/icon-arrow-left.svg);
+    }
+
+    &--next {
+        background-image: url(../../../images/icon-arrow-right.svg);
+    }
+}
+
+.date-range__month-wrapper {
+    outline: none;
+}
+
+.date-range__month {
+    display: flex;
+    margin-top: 12px;
+    flex-direction: column;
+}
+
+.date-range__weekdays {
+    display: grid;
+    height: $week-height;
+    margin: $weekdays-spacing;
+    grid-template-columns: repeat(7, 1fr);
+    align-items: center;
+}
+
+.date-range__weekday {
+    font-size: $text-xs;
+    letter-spacing: $letter-spacing-wider;
+    color: $column-header-regular-color;
+    text-align: center;
+    text-transform: uppercase;
+
+    abbr {
+        text-decoration: none;
+    }
+}
+
+.date-range__days {
+    margin: $days-spacing;
+}
+
+.date-range__week {
+    display: grid;
+    height: 32px;
+    grid-template-columns: repeat(7, 1fr);
+    align-items: center;
+}
+
+.date-range__day-wrapper {
+    display: flex;
+    width: 100%;
+    height: $day-wrapper-height;
+    outline: none;
+
+    align-items: center;
+    justify-content: center;
+
+    &:first-child {
+        padding-left: 0;
+    }
+
+    &--outside {
+        visibility: hidden;
+    }
+
+    &--selected {
+        background: $day-selected-background;
+    }
+
+    &.end {
+        background: linear-gradient(to left, transparent 85%, $day-selected-background 15%);
+    }
+
+    &.start {
+        background: linear-gradient(to right, transparent 85%, $day-selected-background 15%);
+    }
+
+    &.disabled {
+        pointer-events: none;
+    }
+}
+
+.date-range__day {
+    display: flex;
+    width: $day-width;
+    height: $day-height;
+    font-size: $text-xs;
+    letter-spacing: $letter-spacing-wide;
+    color: $content-text-primary-color;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 50%;
+    box-sizing: border-box;
+
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        border-color: $day-active-color;
+    }
+
+    &--today {
+        background: $day-today-background;
+        border-color: $day-today-background;
+    }
+
+    &--disabled {
+        color: $content-text-secondary-color;
+        cursor: default;
+    }
+
+    &--end,
+    &--start {
+        color: $content-text-primary-color;
+        background: $day-active-color;
+        border: 3px solid $day-picker-background;
+        border-top-color: transparent;
+        box-sizing: content-box;
+        background-clip: content-box;
+
+        &:hover {
+            border-color: $day-picker-background;
+            border-top-color: transparent;
+        }
+    }
+}
+
+.date-range__footer {
+    display: flex;
+    padding: $footer-spacing2;
+    margin: $footer-spacing;
+    border-top: $heading-border;
+    justify-content: space-between;
+    order: 1;
+}
+
+.date-range__button {
+    display: flex;
+    width: $button-width;
+    height: $button-height;
+    padding: initial;
+    font-size: $text-xs;
+    align-items: center;
+    justify-content: center;
+}
