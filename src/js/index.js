@@ -36,22 +36,13 @@ const pages = {
 };
 
 const tmpFetchDashboardData = pageClass => {
-  const rawCookies = document.cookie.split("; ");
-  let cookie = undefined;
-  for (let i = 0; i < rawCookies.length; i++) {
-    const cookies = rawCookies[i].split("=");
-    if (cookies[0] === "csrftoken") {
-      cookie = cookies[1];
-    }
-  }
   window
-    .fetch("http://localhost:8000/dashboard", {
+    .fetch(`${process.env.BASE_URL}/dashboard`, {
       responseType: "json",
       credentials: "include",
       mode: "same-origin",
       headers: {
-        "Content-Type": "application/json",
-        "X-CSRF-Token": cookie
+        "Content-Type": "application/json"
       }
     })
     .then(x => x.json())
