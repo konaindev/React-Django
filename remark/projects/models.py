@@ -5,7 +5,6 @@ import os.path
 from datetime import datetime
 from django.db import models
 from django.conf import settings
-
 from django.contrib.auth.models import Group
 from django.urls import reverse
 from django.utils.crypto import get_random_string
@@ -21,8 +20,8 @@ from remark.lib.metrics import (
     SumIntervalMetric,
     ModelPeriod,
 )
-from .spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
-from .reports.performance import PerformanceReport
+from remark.projects.spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
+from remark.projects.reports.performance import PerformanceReport
 
 
 def pro_public_id():
@@ -33,6 +32,18 @@ def pro_public_id():
 def fund_public_id():
     """Public identifier for a fund."""
     return public_id("fund")
+
+
+def campaign_public_id():
+    return public_id("campaign")
+
+
+def campaign_model_public_id():
+    return public_id("campaign_model")
+
+
+def spreadsheet_public_id():
+    return public_id("spreadsheet2")
 
 
 def building_logo_media_path(project, filename):
@@ -65,6 +76,10 @@ def spreadsheet_media_path(spreadsheet, filename):
     """
     Given a Spreadsheet instance, and the filename as supplied during upload,
     determine where the uploaded spreadsheet file should actually be placed.
+
+    Note:
+    Spreadsheet2 model doesn't have "project", "created" fields,
+    which are currently set from forms temporarily.
     """
     # We always target project/<public_id>/<sheet_kind>_<upload_time><.ext>
     _, extension = os.path.splitext(filename)
@@ -177,7 +192,11 @@ class Project(models.Model):
         default="",
         upload_to=building_image_media_path,
         help_text="""Image of property building<br/>Resized variants (309x220, 180x180, 76x76) will also be created on Amazon S3.""",
-        variations={"landscape": (309, 220, True), "regular": (180, 180, True), "thumbnail": (76, 76, True)},
+        variations={
+            "landscape": (309, 220, True),
+            "regular": (180, 180, True),
+            "thumbnail": (76, 76, True),
+        },
     )
 
     baseline_start = models.DateField(
@@ -198,25 +217,6 @@ class Project(models.Model):
         # Ensure loaded data retains JSON object key ordering
         load_kwargs={"object_pairs_hook": collections.OrderedDict},
         help_text="Total Addressable Market (TAM) report JSON data. Must conform to the schema defined in MarketAnalysis.ts",
-    )
-
-    # A temporary field, for the current sprint, that holds our computed
-    # model options data
-    tmp_modeling_report_json = JSONField(
-        default=None,
-        null=True,
-        blank=True,
-        verbose_name="Modeling Data",
-        # Ensure loaded data retains JSON object key ordering
-        load_kwargs={"object_pairs_hook": collections.OrderedDict},
-        help_text="Modeling JSON data. Must conform to the schema defined in ModelingOptions.ts",
-    )
-
-    selected_model_name = models.CharField(
-        blank=True,
-        default="",
-        max_length=255,
-        help_text="The name of the currently selected model, if any.",
     )
 
     # A temporary field, for the current sprint, that holds our campaign plan
@@ -314,22 +314,14 @@ class Project(models.Model):
         "geo.Address", on_delete=models.SET_NULL, null=True, blank=True
     )
 
-    users = models.ManyToManyField(
-        "users.User", related_name="projects"
-    )
-  
+    users = models.ManyToManyField("users.User", related_name="projects")
+
     view_group = models.OneToOneField(
         Group, on_delete=models.SET_NULL, null=True, blank=True
     )
 
-    # This value is set when the instance is created; if we later
-    # call save, and it changes, then we update targets for the model.
-    __selected_model_name = None
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Save this for comparison purposes on save(...)
-        self.__selected_model_name = self.selected_model_name
 
     def _target_periods(self, qs, start, end):
         """
@@ -425,7 +417,7 @@ class Project(models.Model):
             return [
                 self.building_logo.url,
                 self.building_logo.regular.url,
-                self.building_logo.thumbnail.url
+                self.building_logo.thumbnail.url,
             ]
         else:
             return None
@@ -439,7 +431,7 @@ class Project(models.Model):
                 self.building_image.url,
                 self.building_image.landscape.url,
                 self.building_image.regular.url,
-                self.building_image.thumbnail.url
+                self.building_image.thumbnail.url,
             ]
         else:
             return None
@@ -469,24 +461,7 @@ class Project(models.Model):
             name=self.name,
             building_logo=self.get_building_logo(),
             building_image=self.get_building_image(),
-            update_endpoint=update_endpoint
-        )
-
-    def get_named_model_option(self, name):
-        """Given a named model, return the option."""
-        data = self.tmp_modeling_report_json
-        options = data.get("options", [])
-        for option in options:
-            if option.get("name") == name:
-                return option
-        return None
-
-    def get_selected_model_option(self):
-        """Return the currently selected model option."""
-        return (
-            self.get_named_model_option(self.selected_model_name)
-            if self.selected_model_name
-            else None
+            update_endpoint=update_endpoint,
         )
 
     def get_performance_rating(self):
@@ -507,45 +482,12 @@ class Project(models.Model):
             return -1
         return health_check(lease_rate, target_lease_rate)
 
-    def update_for_selected_model(self):
-        """
-        Update all associated data (like target periods) based on
-        the currently selected model.
-
-        """
-        # TODO CONSIDER where does this code actually belong?
-        #
-        # This doesn't feel like the right place but I don't have a better
-        # answer. I originally assumed it belonged in remark/projects/spreadsheets/
-        # but that feels wrong, too: yes, this data was *imported* from a spreadsheet,
-        # and yes, this looks like activation, but in this case, there is data
-        # from multiple spreadsheets in play. Perhaps a different approach
-        # to managing tmp_modeling_report_json would allow for clarity here?
-        #
-        # -Dave
-        def _create_target_period(data):
-            target_period = TargetPeriod(project=self)
-            for k, v in data.items():
-                # Yes, this will set values for keys that aren't fields;
-                # that's fine; we don't overwrite anything we shouldn't,
-                # and extraneous stuff is ignored for save.
-                setattr(target_period, k, v)
-            target_period.save()
-            return target_period
-
-        # Remove all extant target periods
-        self.target_periods.all().delete()
-
-        # If there are any, create new target periods!
-        option = self.get_selected_model_option()
-        if option is not None:
-            for data in option.get("targets", []):
-                _create_target_period(data)
-
     def user_can_view(self, user):
         if user.is_superuser:
             return True
-        return (self.view_group is not None) and user.groups.filter(pk=self.view_group.pk).exists()
+        return (self.view_group is not None) and user.groups.filter(
+            pk=self.view_group.pk
+        ).exists()
 
     def __assign_blank_view_group(self):
         """
@@ -558,22 +500,15 @@ class Project(models.Model):
     def save(self, *args, **kwargs):
         if not self.pk:
             self.__assign_blank_view_group()
-        model_selection_changed = (
-            self.__selected_model_name is not self.selected_model_name
-        )
         super().save(*args, **kwargs)
-        if model_selection_changed:
-            self.update_for_selected_model()
 
     def __str__(self):
         return "{} ({})".format(self.name, self.public_id)
 
 
 class SpreadsheetManager(models.Manager):
-    def latest_for_kind(self, kind, subkind=None):
-        return (
-            self.filter(kind=kind, subkind=subkind or "").order_by("-created").first()
-        )
+    def latest_for_kind(self, kind):
+        return self.filter(kind=kind).order_by("-created").first()
 
 
 class Spreadsheet(models.Model):
@@ -611,14 +546,6 @@ class Spreadsheet(models.Model):
         help_text="The kind of data this spreadsheet contains.",
     )
 
-    subkind = models.CharField(
-        blank=True,
-        default="",
-        db_index=True,
-        max_length=128,
-        help_text="The kind of Modeling spreadsheet (if applicable). Run Rate, Schedule Driven, etc",
-    )
-
     file = models.FileField(
         blank=False,
         upload_to=spreadsheet_media_path,
@@ -638,10 +565,8 @@ class Spreadsheet(models.Model):
         return bool(self.imported_data)
 
     def is_latest_for_kind(self):
-        """Return True if this spreadsheet is the latest for its kind and subkind."""
-        return (
-            Spreadsheet.objects.latest_for_kind(self.kind, self.subkind).id == self.id
-        )
+        """Return True if this spreadsheet is the latest for its kind."""
+        return Spreadsheet.objects.latest_for_kind(self.kind).id == self.id
 
     def get_activator(self):
         return get_activator_for_spreadsheet(self)
@@ -659,10 +584,29 @@ class Spreadsheet(models.Model):
     class Meta:
         # Always sort spreadsheets with the most recent created first.
         ordering = ["-created"]
-        indexes = [
-            models.Index(fields=["created", "kind"]),
-            models.Index(fields=["created", "kind", "subkind"]),
-        ]
+        indexes = [models.Index(fields=["created", "kind"])]
+
+
+class Spreadsheet2(models.Model):
+    public_id = models.CharField(
+        primary_key=True, default=spreadsheet_public_id, max_length=50, editable=False
+    )
+    file_url = models.FileField(
+        blank=False,
+        upload_to=spreadsheet_media_path,
+        help_text="The underlying spreadsheet (probably .xlsx) file.",
+    )
+    json_data = JSONField(
+        default=None,
+        help_text="Raw imported JSON data. Schema depends on spreadsheet kind.",
+    )
+    kind = models.CharField(
+        blank=False,
+        choices=SpreadsheetKind.CHOICES,
+        db_index=True,
+        max_length=128,
+        help_text="The kind of data this spreadsheet contains. Enum: Market, Period, Modeling, Campaign Plan",
+    )
 
 
 class PeriodManager(models.Manager):
@@ -911,6 +855,14 @@ class TargetPeriod(ModelPeriod, models.Model):
         Project, on_delete=models.CASCADE, related_name="target_periods"
     )
 
+    campaign_model = models.ForeignKey(
+        "CampaignModel",
+        on_delete=models.CASCADE,
+        related_name="+",
+        null=True,
+        blank=True,
+    )
+
     start = models.DateField(
         db_index=True,
         help_text="The first date, inclusive, that this target period tracks.",
@@ -1103,3 +1055,137 @@ class Fund(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class CampaignManager(models.Manager):
+    pass
+
+
+class Campaign(models.Model):
+    objects = CampaignManager()
+
+    public_id = models.CharField(
+        primary_key=True, default=campaign_public_id, max_length=50, editable=False
+    )
+    name = models.CharField(max_length=255)
+    project = models.ForeignKey(
+        "projects.Project",
+        on_delete=models.CASCADE,
+        related_name="campaigns",
+        null=True,
+    )
+    selected_campaign_model = models.ForeignKey(
+        "CampaignModel",
+        on_delete=models.SET_NULL,
+        related_name="+",
+        null=True,
+        blank=True,
+        help_text="All target values will be replaced by those in the newly selected model.",
+    )
+
+    # This value is set when the instance is created; if we later
+    # call save, and it changes, then we update targets for the model.
+    __selected_campaign_model = None
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Save this for comparison purposes on save(...)
+        self.__selected_campaign_model = self.selected_campaign_model
+
+    def save(self, *args, **kwargs):
+        model_selection_changed = (
+            self.__selected_campaign_model != self.selected_campaign_model
+        )
+        super().save(*args, **kwargs)
+        if model_selection_changed:
+            self.update_for_selected_model()
+
+    def get_selected_model_option(self):
+        """Return the currently selected model option."""
+        if self.selected_campaign_model is None:
+            return
+
+        return self.selected_campaign_model.spreadsheet.json_data
+
+    def update_for_selected_model(self):
+        """
+        Update all associated data (like target periods) based on
+        the currently selected model.
+        """
+
+        def _create_target_period(data):
+            target_period = TargetPeriod(project=self.project, campaign_model=self)
+            for k, v in data.items():
+                # Yes, this will set values for keys that aren't fields;
+                # that's fine; we don't overwrite anything we shouldn't,
+                # and extraneous stuff is ignored for save.
+                setattr(target_period, k, v)
+            target_period.save()
+            return target_period
+
+        if self.project is None:
+            return
+
+        # Remove all extant target periods
+        self.project.target_periods.filter("campaign_model", self).delete()
+
+        # If there are any, create new target periods!
+        option = self.get_selected_model_option()
+        if option is not None:
+            for data in option.get("targets", []):
+                _create_target_period(data)
+
+    def __str__(self):
+        return "{} ({})".format(self.name, self.public_id)
+
+
+class CampaignModelManager(models.Manager):
+    pass
+
+
+class CampaignModel(models.Model):
+    objects = CampaignModelManager()
+
+    public_id = models.CharField(
+        primary_key=True,
+        default=campaign_model_public_id,
+        max_length=50,
+        editable=False,
+    )
+    campaign = models.ForeignKey(
+        "Campaign", on_delete=models.CASCADE, related_name="campaign_models"
+    )
+    spreadsheet = models.ForeignKey(
+        "Spreadsheet2", on_delete=models.CASCADE, related_name="campaign_models"
+    )
+    name = models.CharField(max_length=255)
+    model_start = models.DateField()
+    model_end = models.DateField()
+    active = models.BooleanField(default=True)
+    model_index = models.IntegerField(default=0)
+
+    def campaign_project(self):
+        return self.campaign.project
+
+    project = property(campaign_project)
+
+    def is_selected(self):
+        return self.campaign.selected_campaign_model == self
+
+    selected = property(is_selected)
+
+    def spreadsheet_file_url(self):
+        return self.spreadsheet.file_url
+
+    file_url = property(spreadsheet_file_url)
+
+    def spreadsheet_json_data(self):
+        return self.spreadsheet.json_data
+
+    json_data = property(spreadsheet_json_data)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ["model_index"]

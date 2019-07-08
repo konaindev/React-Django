@@ -9,6 +9,9 @@ def _option_sort_order(option):
 
 
 class ModelingActivator(JSONFieldActivator):
+    # TODO This class is obsolete now, since MODELING spreadsheet data is 
+    # no longer saved into Project model, need action.
+
     spreadsheet_kind = SpreadsheetKind.MODELING
     project_field = "tmp_modeling_report_json"
 
@@ -37,4 +40,3 @@ class ModelingActivator(JSONFieldActivator):
         # better update targets.
         if self.project.selected_model_name == self.data["name"]:
             self.project.update_for_selected_model()
-
