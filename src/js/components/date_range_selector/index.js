@@ -34,6 +34,11 @@ export default class DateRangeSelector extends React.PureComponent {
     { label: "Custom", value: "custom" }
   ];
 
+  constructor(props) {
+    super(props);
+    this.dayPicker = React.createRef();
+  }
+
   get startDateByPreset() {
     return {
       custom: this.props.start_date,
@@ -62,6 +67,9 @@ export default class DateRangeSelector extends React.PureComponent {
     const preset = option.value;
     const startDate = this.startDateByPreset[preset];
     const endDate = this.endDateByPreset[preset];
+    if (preset === "custom") {
+      this.dayPicker.current.showDayPicker();
+    }
     this.props.onChange(
       preset,
       formatDateWithTokens(startDate, this.props.dateFormat),
@@ -93,6 +101,7 @@ export default class DateRangeSelector extends React.PureComponent {
           startDate={startDate}
           endDate={endDate}
           onChange={this.onChangeDate}
+          ref={this.dayPicker}
         />
       </div>
     );
