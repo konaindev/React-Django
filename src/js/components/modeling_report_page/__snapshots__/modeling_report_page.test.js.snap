@@ -2329,7 +2329,9 @@ A 0 0 0 0 0, NaN, NaN
               </div>
               <span
                 className="large-box__bottom-line"
-              />
+              >
+                $1,909 / $1,847
+              </span>
               <span
                 className="large-box__bottom-line"
               >
