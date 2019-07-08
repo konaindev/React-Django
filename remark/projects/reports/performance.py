@@ -142,3 +142,7 @@ class PerformanceReport(CommonReport):
             project, multiperiod, break_times[-1]
         )
         return cls(project, period, previous_period=None, whiskers=whiskers)
+
+    def omit_four_week_averages(self, built_averages):
+        built_averages["acq_investment"] = None
+        # built_averages["ret_investment"] = None
