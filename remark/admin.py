@@ -18,3 +18,13 @@ class RemarkablyAdminSite(admin.AdminSite):
 admin_site = RemarkablyAdminSite()
 
 admin_site.register(Group, GroupAdmin)
+
+# modify filter title on list pages
+def custom_titled_filter(title):
+    class Wrapper(admin.FieldListFilter):
+        def __new__(cls, *args, **kwargs):
+            instance = admin.FieldListFilter.create(*args, **kwargs)
+            instance.title = title
+            return instance
+
+    return Wrapper

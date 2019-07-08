@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     "django_js_reverse",
+    "adminsortable2",
     "stdimage",
     "remark.charts",
     "remark.sales",
