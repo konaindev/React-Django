@@ -71,7 +71,7 @@ class ComputedPeriod(ComputedValueMixin):
     @computed_value
     def leased_rate(self):
         """The percentage of leasable units that are actually leased at end of period."""
-        return div_or_0(self.leased_units, self.occupiable_units)
+        return div_or_0(self.leased_units, self.total_units)
 
     @computed_value
     def renewal_rate(self):
@@ -150,7 +150,7 @@ class ComputedPeriod(ComputedValueMixin):
     @computed_value
     def occupancy_rate(self):
         """The percentage of occupiable units that are actually occupied at end of period."""
-        return div_or_0(self.occupied_units, self.occupiable_units)
+        return div_or_0(self.occupied_units, self.total_units)
 
     # ------------------------------------------------------
     # TARGETS: Physical activity (occupancy)
