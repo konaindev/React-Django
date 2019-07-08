@@ -2,18 +2,21 @@
 
 import datetime
 from django.db import migrations, models
+from django.utils import timezone
+
+
+def utcnow():
+    return datetime.datetime.now(timezone.utc)
 
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('sales', '0001_add_product_inquiry'),
-    ]
+    dependencies = [("sales", "0001_add_product_inquiry")]
 
     operations = [
         migrations.AddField(
-            model_name='productinquiry',
-            name='created',
-            field=models.DateTimeField(blank=True, default=datetime.datetime.utcnow),
-        ),
+            model_name="productinquiry",
+            name="created",
+            field=models.DateTimeField(blank=True, default=utcnow),
+        )
     ]

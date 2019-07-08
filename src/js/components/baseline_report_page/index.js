@@ -15,6 +15,7 @@ import "./baseline_report_page.scss";
 export class BaselineReportPage extends Component {
   static propTypes = {
     report: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
     project: PropTypes.object.isRequired
   };
 
@@ -23,10 +24,11 @@ export class BaselineReportPage extends Component {
   }
 
   render() {
-    const { project, report, report_links, share_info } = this.props;
+    const { user, project, report, report_links, share_info } = this.props;
 
     return (
       <ReportPageChrome
+        user={user}
         project={project}
         current_report_name="baseline"
         report_links={report_links}

@@ -13,6 +13,7 @@ import { connect } from "react-redux";
  */
 export class PerformanceReportPage extends Component {
   static propTypes = {
+    user: PropTypes.object.isRequired,
     report: PropTypes.object.isRequired,
     project: PropTypes.object.isRequired
   };
@@ -27,10 +28,11 @@ export class PerformanceReportPage extends Component {
   }
 
   render() {
-    const { project, report, report_links, share_info } = this.props;
+    const { user, project, report, report_links, share_info } = this.props;
 
     return (
       <ReportPageChrome
+        user={user}
         project={project}
         current_report_name="performance"
         report_links={report_links}

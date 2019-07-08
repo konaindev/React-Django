@@ -1,4 +1,4 @@
-import { project, report_links } from "../project_page/props";
+import { project, report_links, user } from "../project_page/props";
 import { funnel_history } from "../funnel_performance_analysis/FunnelProps";
 
 export const competitors = [
@@ -1107,6 +1107,7 @@ const share_info = {
 };
 
 export default {
+  user,
   project,
   report,
   report_links,
@@ -1118,6 +1119,7 @@ export const no_competitors_report = { ...report };
 no_competitors_report.competitors = [];
 
 export const no_competitors_props = {
+  user,
   project,
   report: no_competitors_report,
   report_links,
@@ -1128,6 +1130,7 @@ export const one_competitor_report = { ...report };
 one_competitor_report.competitors = [competitors[0]];
 
 export const one_competitor_props = {
+  user,
   project,
   report: one_competitor_report,
   report_links,

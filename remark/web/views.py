@@ -1,5 +1,3 @@
-from django.urls import reverse
-
 from remark.crm.models import Business
 from remark.geo.models import State
 from remark.projects.models import Fund, Project
@@ -102,15 +100,6 @@ class DashboardView(LoginRequiredMixin, ReactView):
         direction = request.GET.get("d") or "asc"
         if direction == "desc":
             order = f"-{order}"
-
-        user_dict = {
-            "email": user.email,
-            "user_id": user.public_id,
-            "account_id": user.account_id,
-            "account_name": user.account.company_name,
-            "logout_url": reverse("logout"),
-            # TODO: Add account_url
-        }
 
         projects = []
         for project in Project.objects.filter(**project_params).order_by(order):

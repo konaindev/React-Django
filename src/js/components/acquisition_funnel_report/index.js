@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import BoxRow from "../box_row";
-import BoxColumn from "../box_column";
 import ReportSection from "../report_section";
 import Panel from "../panel";
-import WhiskerPlot from "../whisker_plot";
 import {
   FunnelNumberBox,
   FunnelPercentBox,
@@ -14,8 +12,6 @@ import {
 import {
   formatCurrency,
   formatNumber,
-  formatPercent,
-  formatDeltaPercent,
   targetFormatter
 } from "../../utils/formatters.js";
 import { PercentageGraphBox } from "../large_graph_box";
@@ -46,6 +42,13 @@ export default class AcquisitionFunnelReport extends Component {
    * @description Component that renders headline acquisition funnel numbers
    */
   static HeadlineNumbers = ({ report: r }) => {
+    const costPerExe =
+      r.funnel?.costs?.exe && formatCurrency(r.funnel.costs.exe);
+    const lowestMonthlyRent =
+      r.property?.lowest_monthly_rent &&
+      formatCurrency(r.property.lowest_monthly_rent);
+    const description =
+      costPerExe && lowestMonthlyRent && `${costPerExe} / ${lowestMonthlyRent}`;
     return (
       <BoxRow>
         <PercentageGraphBox
@@ -70,6 +73,7 @@ export default class AcquisitionFunnelReport extends Component {
           target={r.targets?.property?.cost_per_exe_vs_rent}
           delta={r.deltas?.property?.cost_per_exe_vs_rent}
           series={r.whiskers?.cost_per_exe_vs_rent}
+          extraContent={description}
         />
       </BoxRow>
     );

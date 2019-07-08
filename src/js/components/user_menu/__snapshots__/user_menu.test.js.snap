@@ -1,0 +1,175 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserMenu render default 1`] = `
+<div
+  className="user-menu"
+>
+  <div
+    className="select user-menu__select css-2b097c-container"
+    onKeyDown={[Function]}
+  >
+    <div
+      className="select__control css-yk16xz-control"
+      onMouseDown={[Function]}
+      onTouchEnd={[Function]}
+    >
+      <div
+        className="select__value-container css-1hwfws3"
+      >
+        <div
+          className="user-menu__image-container"
+        >
+          <div
+            className="user-menu__image user-menu__image--default"
+          />
+          <div
+            className="user-menu__image"
+            style={
+              Object {
+                "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+              }
+            }
+          />
+        </div>
+        <input
+          className="css-62g3xt-dummyInput"
+          disabled={false}
+          id="react-select-2-input"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          readOnly={true}
+          tabIndex="0"
+          value=""
+        />
+      </div>
+      <div
+        className="select__indicators css-1wy0on6"
+      >
+        <span
+          className="select__indicator-separator css-1okebmr-indicatorSeparator"
+        />
+        <div
+          aria-hidden="true"
+          className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="select__dropdown-arrow"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`UserMenu render opened 1`] = `
+<div
+  className="user-menu"
+>
+  <div
+    className="select user-menu__select css-2b097c-container"
+    onKeyDown={[Function]}
+  >
+    <div
+      className="select__control select__control--menu-is-open css-yk16xz-control"
+      onMouseDown={[Function]}
+      onTouchEnd={[Function]}
+    >
+      <div
+        className="select__value-container css-1hwfws3"
+      >
+        <div
+          className="user-menu__image-container"
+        >
+          <div
+            className="user-menu__image user-menu__image--default"
+          />
+          <div
+            className="user-menu__image"
+            style={
+              Object {
+                "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+              }
+            }
+          />
+        </div>
+        <input
+          className="css-62g3xt-dummyInput"
+          disabled={false}
+          id="react-select-3-input"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          readOnly={true}
+          tabIndex="0"
+          value=""
+        />
+      </div>
+      <div
+        className="select__indicators css-1wy0on6"
+      >
+        <span
+          className="select__indicator-separator css-1okebmr-indicatorSeparator"
+        />
+        <div
+          aria-hidden="true"
+          className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="select__dropdown-arrow"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      className="user-menu__dropdown select__menu css-26l3qy-menu"
+      onMouseDown={[Function]}
+      onMouseMove={[Function]}
+    >
+      <a
+        className="user-menu__dropdown-item"
+        href="https://app.remarkably.io/user/logout"
+      >
+        <svg
+          aria-hidden="true"
+          className="user-menu__icon"
+          color="inherit"
+          fill="none"
+          focusable="false"
+          height="1em"
+          role="presentation"
+          viewBox="0 0 20 20"
+          width="1em"
+        >
+          <path
+            d="M7.5 17.5H4.16667C3.72464 17.5 3.30072 17.3244 2.98816 17.0118C2.67559 16.6993 2.5 16.2754 2.5 15.8333V4.16667C2.5 3.72464 2.67559 3.30072 2.98816 2.98816C3.30072 2.67559 3.72464 2.5 4.16667 2.5H7.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.5"
+          />
+          <path
+            d="M13.3333 14.1667L17.5 10L13.3333 5.83337"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.5"
+          />
+          <path
+            d="M17.5 10H7.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="1.5"
+          />
+        </svg>
+        <div>
+          Log Out
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+`;

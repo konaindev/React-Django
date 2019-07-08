@@ -1,4 +1,4 @@
-import { project, report_links } from "../project_page/props";
+import { project, report_links, user } from "../project_page/props";
 
 // dummy data
 const WHISKERS = {
@@ -251,6 +251,7 @@ const share_info = {
 };
 
 export default {
+  user,
   project,
   report,
   report_links,

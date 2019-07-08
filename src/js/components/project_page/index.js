@@ -9,6 +9,7 @@ import "./project_page.scss";
 
 export class ProjectPage extends Component {
   static propTypes = {
+    user: PropTypes.object.isRequired,
     project: PropTypes.object.isRequired
   };
 
@@ -57,7 +58,7 @@ export class ProjectPage extends Component {
 
   render() {
     return (
-      <ProjectPageChrome project={this.props.project}>
+      <ProjectPageChrome project={this.props.project} user={this.props.user}>
         <Container className="project-page__container">
           {this.renderGroups(this.props.report_links)}
         </Container>
