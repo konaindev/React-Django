@@ -317,7 +317,11 @@ class Project(models.Model):
     users = models.ManyToManyField("users.User", related_name="projects")
 
     view_group = models.OneToOneField(
-        Group, on_delete=models.SET_NULL, null=True, blank=True
+        Group, on_delete=models.SET_NULL, null=True, blank=True, related_name="view_of"
+    )
+
+    admin_group = models.OneToOneField(
+        Group, on_delete=models.SET_NULL, null=True, blank=True, related_name="admin_of",
     )
 
     def __init__(self, *args, **kwargs):
