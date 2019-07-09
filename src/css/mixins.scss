@@ -1,5 +1,7 @@
 @import "./variables.scss";
 
+$dark-scroll-color: $gray-9;
+
 // Mac OS hides scrollbars by default
 // System settings => General => Show scroll bars: "When scrolling"
 @mixin force-scrollbar() {
@@ -45,26 +47,26 @@
     }
 
     &::-webkit-scrollbar-thumb {
-        background-color: #404e5c;
+        background-color: $dark-scroll-color;
         border: 10px solid transparent;
         border-radius: 18px;
         box-sizing: content-box;
         background-clip: content-box;
 
         &:hover {
-            background-color: rgba(#404e5c, 0.6);
+            background-color: rgba($dark-scroll-color, 0.6);
         }
     }
 
     &::-webkit-scrollbar-corner {
-        background-color: rgba(#404e5c, 0.25);
+        background-color: rgba($dark-scroll-color, 0.25);
         border: 10px solid transparent;
         border-radius: 18px;
         background-clip: content-box;
     }
 
     &::-webkit-scrollbar-track {
-        background-color: rgba(#404e5c, 0.25);
+        background-color: rgba($dark-scroll-color, 0.25);
         border: 10px solid transparent;
         border-radius: 18px;
         background-clip: content-box;
