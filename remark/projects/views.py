@@ -109,7 +109,13 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
 
     def get(self, request, project_id, *args, **kwargs):
         logger.info("ReportPageViewBase::get::top")
-        self.get_project(request, project_id)
+        
+        try:
+            self.get_project(request, project_id)
+        except Exception as e:
+            logger.error(error_text(e))
+            raise Http404
+
         logger.info("ReportPageViewBase::get::after get_object_or_404")
 
         try:
