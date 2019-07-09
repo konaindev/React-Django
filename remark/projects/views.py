@@ -56,6 +56,7 @@ class ProjectSingleMixin:
             shared_field = shared_fields_by_report.get(self.report_name)
             is_report_shared = getattr(self.project, shared_field, False)
             if not is_report_shared and (not user.is_authenticated):
+                logger.error(f"Project ID: {project_id} || is_report_shared: {is_report_shared} || user.is_authenticated: {user.is_authenticated}")
                 raise Http404
         except Exception:
             raise Http404
@@ -109,7 +110,7 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
 
     def get(self, request, project_id, *args, **kwargs):
         logger.info("ReportPageViewBase::get::top")
-        
+
         try:
             self.get_project(request, project_id)
         except Exception as e:
