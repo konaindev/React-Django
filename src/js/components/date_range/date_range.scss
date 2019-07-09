@@ -187,7 +187,7 @@ $button-height: 30px;
     align-items: center;
     justify-content: center;
 
-    &:first-child {
+    &:first-of-type {
         padding-left: 0;
     }
 

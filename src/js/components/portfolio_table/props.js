@@ -97,11 +97,11 @@ export const props = {
     },
     {
       type: "individual",
-      name: "Remarkably National",
-      address: "San Antonio, TX 34524",
+      name: "Building D",
+      address: "San Antonio, TX 78207",
       image_url:
-        "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
-      health: 1,
+        "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+      health: 2,
       kpis: {
         lease_rate: 0.9,
         occupancy_rate: 0.8,
@@ -116,12 +116,29 @@ export const props = {
       }
     },
     {
-      type: "individual",
-      name: "Portfolio Average",
-      address: "San Antonio, TX 242",
+      type: "group",
+      name: "Remarkably National",
       image_url:
         "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
-      health: 2,
+      kpis: {
+        lease_rate: 0.9,
+        occupancy_rate: 0.8,
+        cd_rate: 0.1,
+        renewal_rate: 0.5
+      },
+      targets: {
+        lease_rate: 0.9,
+        occupancy_rate: 0.8,
+        cd_rate: 0.1,
+        renewal_rate: 0.5
+      }
+    },
+    {
+      type: "group",
+      name: "Portfolio Average",
+      image_url:
+        "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
+      properties: 11,
       kpis: {
         lease_rate: 0.9,
         occupancy_rate: 0.8,

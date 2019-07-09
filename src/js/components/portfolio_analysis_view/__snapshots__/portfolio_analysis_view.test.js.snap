@@ -272,7 +272,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
       <div
         className="portfolio-analysis__property-count"
       >
-        3
+        4
          properties
       </div>
     </div>
@@ -423,7 +423,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
             style={Object {}}
           >
             <div
-              className="portfolio-property-group-row__group"
+              className="portfolio-property-group-row__group portfolio-property-group-row__group--opening"
               onClick={[Function]}
             >
               <div
@@ -518,7 +518,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
               className="portfolio-property-row__image"
               style={
                 Object {
-                  "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
+                  "backgroundImage": "url(\\"https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg\\")",
                 }
               }
             />
@@ -528,12 +528,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
               <div
                 className="portfolio-property-row__name"
               >
-                Remarkably National
+                Building D
               </div>
               <div
                 className="portfolio-property-row__address"
               >
-                San Antonio, TX 34524
+                San Antonio, TX 78207
               </div>
             </div>
             <div
@@ -612,101 +612,181 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
             </div>
           </div>
           <div
-            className="portfolio-property-row"
+            className="portfolio-property-group-row"
+            style={Object {}}
           >
             <div
-              className="portfolio-property-row__image"
-              style={
-                Object {
-                  "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
+              className="portfolio-property-group-row__group"
+              onClick={[Function]}
+            >
+              <div
+                className="portfolio-property-group-row__image"
+                style={
+                  Object {
+                    "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
+                  }
                 }
-              }
-            />
-            <div
-              className="portfolio-property-row__title"
-            >
+              />
               <div
-                className="portfolio-property-row__name"
+                className="portfolio-property-group-row__title"
               >
-                Portfolio Average
+                <div
+                  className="portfolio-property-group-row__name"
+                >
+                  Remarkably National
+                </div>
               </div>
               <div
-                className="portfolio-property-row__address"
+                className="portfolio-property-group-row__kpis"
               >
-                San Antonio, TX 242
+                <div
+                  className="portfolio-property-group-row__kpi"
+                >
+                  <div
+                    className="portfolio-property-group-row__value"
+                  >
+                    0.9
+                  </div>
+                  <div
+                    className="portfolio-property-group-row__target"
+                  >
+                    Target: 0.9
+                  </div>
+                </div>
+                <div
+                  className="portfolio-property-group-row__kpi"
+                >
+                  <div
+                    className="portfolio-property-group-row__value"
+                  >
+                    0.8
+                  </div>
+                  <div
+                    className="portfolio-property-group-row__target"
+                  >
+                    Target: 0.8
+                  </div>
+                </div>
+                <div
+                  className="portfolio-property-group-row__kpi"
+                >
+                  <div
+                    className="portfolio-property-group-row__value"
+                  >
+                    0.1
+                  </div>
+                  <div
+                    className="portfolio-property-group-row__target"
+                  >
+                    Target: 0.1
+                  </div>
+                </div>
+                <div
+                  className="portfolio-property-group-row__kpi"
+                >
+                  <div
+                    className="portfolio-property-group-row__value"
+                  >
+                    0.5
+                  </div>
+                  <div
+                    className="portfolio-property-group-row__target"
+                  >
+                    Target: 0.5
+                  </div>
+                </div>
               </div>
             </div>
+          </div>
+          <div
+            className="portfolio-property-group-row"
+            style={Object {}}
+          >
             <div
-              className="portfolio-property-row__info"
+              className="portfolio-property-group-row__group"
+              onClick={[Function]}
             >
               <div
-                className="property-status portfolio-property-row__health property-status--at-risk"
-              >
-                AT RISK
-              </div>
-              <a
-                className="portfolio-property-row__link"
-              >
-                View Property
-              </a>
-            </div>
-            <div
-              className="portfolio-property-row__kpis"
-            >
+                className="portfolio-property-group-row__image"
+                style={
+                  Object {
+                    "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
+                  }
+                }
+              />
               <div
-                className="portfolio-property-row__kpi"
+                className="portfolio-property-group-row__title"
               >
                 <div
-                  className="portfolio-property-row__value"
+                  className="portfolio-property-group-row__name"
                 >
-                  0.9
+                  Portfolio Average
                 </div>
                 <div
-                  className="portfolio-property-row__target"
+                  className="portfolio-property-group-row__property-count"
                 >
-                  Target: 0.9
+                  11
+                   Properties
                 </div>
               </div>
               <div
-                className="portfolio-property-row__kpi"
+                className="portfolio-property-group-row__kpis"
               >
                 <div
-                  className="portfolio-property-row__value"
+                  className="portfolio-property-group-row__kpi"
                 >
-                  0.8
+                  <div
+                    className="portfolio-property-group-row__value"
+                  >
+                    0.9
+                  </div>
+                  <div
+                    className="portfolio-property-group-row__target"
+                  >
+                    Target: 0.9
+                  </div>
                 </div>
                 <div
-                  className="portfolio-property-row__target"
+                  className="portfolio-property-group-row__kpi"
                 >
-                  Target: 0.8
-                </div>
-              </div>
-              <div
-                className="portfolio-property-row__kpi"
-              >
-                <div
-                  className="portfolio-property-row__value"
-                >
-                  0.1
-                </div>
-                <div
-                  className="portfolio-property-row__target"
-                >
-                  Target: 0.1
-                </div>
-              </div>
-              <div
-                className="portfolio-property-row__kpi"
-              >
-                <div
-                  className="portfolio-property-row__value"
-                >
-                  0.5
+                  <div
+                    className="portfolio-property-group-row__value"
+                  >
+                    0.8
+                  </div>
+                  <div
+                    className="portfolio-property-group-row__target"
+                  >
+                    Target: 0.8
+                  </div>
                 </div>
                 <div
-                  className="portfolio-property-row__target"
+                  className="portfolio-property-group-row__kpi"
                 >
-                  Target: 0.5
+                  <div
+                    className="portfolio-property-group-row__value"
+                  >
+                    0.1
+                  </div>
+                  <div
+                    className="portfolio-property-group-row__target"
+                  >
+                    Target: 0.1
+                  </div>
+                </div>
+                <div
+                  className="portfolio-property-group-row__kpi"
+                >
+                  <div
+                    className="portfolio-property-group-row__value"
+                  >
+                    0.5
+                  </div>
+                  <div
+                    className="portfolio-property-group-row__target"
+                  >
+                    Target: 0.5
+                  </div>
                 </div>
               </div>
             </div>

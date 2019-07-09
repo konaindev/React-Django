@@ -27,10 +27,9 @@ $target-spacing: 6px;
     background: $row-background;
     border-bottom: 1px solid $border-color;
     align-items: center;
-    cursor: pointer;
 
     &:before {
-        display: inline-block;
+        display: none;
         width: 8px;
         height: 16px;
         margin-left: 30px;
@@ -45,6 +44,14 @@ $target-spacing: 6px;
     &--open {
         &:before {
             transform: rotate(90deg);
+        }
+    }
+
+    &--opening {
+        cursor: pointer;
+
+        &:before {
+            display: inline-block;
         }
     }
 }

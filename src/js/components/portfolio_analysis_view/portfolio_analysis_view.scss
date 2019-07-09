@@ -71,7 +71,7 @@ $table-spacing: 100px;
     margin-left: $kpi-card-spacing;
     flex-grow: 1;
 
-    &:first-child {
+    &:first-of-type {
         margin-left: 0;
     }
 }
