@@ -6,14 +6,14 @@ import PropertyStatus from "../property_status";
 
 import "./kpi_card.scss";
 
-const KPICard = ({ health, value, name, target }) => {
-  const className = cn("kpi-card", {
+const KPICard = ({ health, value, name, target, className }) => {
+  const classes = cn("kpi-card", className, {
     "kpi-card--off-track": health === 0,
     "kpi-card--at-risk": health === 1,
     "kpi-card--on-track": health === 2
   });
   return (
-    <div className={className}>
+    <div className={classes}>
       <div className="kpi-card__bar" />
       <div className="kpi-card__health">
         <PropertyStatus performance_rating={health} />

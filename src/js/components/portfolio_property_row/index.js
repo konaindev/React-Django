@@ -9,7 +9,7 @@ import "./portfolio_property_row.scss";
 export default class PortfolioPropertyRow extends React.PureComponent {
   static propTypes = {
     type: PropTypes.oneOf(["individual", "subproperty"]).isRequired,
-    url: PropTypes.string.isRequired,
+    url: PropTypes.string,
     image_url: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     address: PropTypes.string.isRequired,

@@ -15,25 +15,6 @@ $border-color: $gray-4;
     width: $select-width;
     height: $field-height;
     vertical-align: top;
-
-    .select__control {
-        background-color: transparent;
-        border-color: $border-color;
-
-        &--is-focused {
-            .select__single-value {
-                color: $input-text-color;
-            }
-        }
-    }
-
-    .select__option {
-        &:active,
-        &--is-focused,
-        &--is-selected {
-            color: $input-text-color;
-        }
-    }
 }
 
 .date-range-selector__data-picker {

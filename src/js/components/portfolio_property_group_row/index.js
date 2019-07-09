@@ -11,7 +11,10 @@ export default class PortfolioPropertyGroupRow extends React.PureComponent {
   static propTypes = {
     image_url: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    properties: PropTypes.array.isRequired,
+    properties: PropTypes.oneOfType([
+      PropTypes.array.isRequired,
+      PropTypes.number
+    ]),
     kpi_order: PropTypes.array.isRequired,
     kpis: PropTypes.object.isRequired,
     targets: PropTypes.object.isRequired
@@ -30,6 +33,23 @@ export default class PortfolioPropertyGroupRow extends React.PureComponent {
         parseInt(groupScss.portfolioPropertyGroupRowHeight);
     }
     return containerStyle;
+  }
+
+  get propertiesCount() {
+    if (!this.props.properties) {
+      return null;
+    }
+    const propertiesCount =
+      this.props.properties.length || this.props.properties;
+    return (
+      <div className="portfolio-property-group-row__property-count">
+        {propertiesCount} Properties
+      </div>
+    );
+  }
+
+  get isOpening() {
+    return this.props.properties && this.props.properties.length;
   }
 
   renderKPIs() {
@@ -64,7 +84,9 @@ export default class PortfolioPropertyGroupRow extends React.PureComponent {
   }
 
   toggleHandler = () => {
-    this.setState({ isOpen: !this.state.isOpen });
+    if (this.isOpening) {
+      this.setState({ isOpen: !this.state.isOpen });
+    }
   };
 
   render() {
@@ -73,7 +95,8 @@ export default class PortfolioPropertyGroupRow extends React.PureComponent {
       backgroundImage: `url("${image_url}")`
     };
     const classes = cn("portfolio-property-group-row__group", {
-      "portfolio-property-group-row__group--open": this.state.isOpen
+      "portfolio-property-group-row__group--open": this.state.isOpen,
+      "portfolio-property-group-row__group--opening": this.isOpening
     });
     return (
       <div className="portfolio-property-group-row" style={this.containerStyle}>
@@ -84,9 +107,7 @@ export default class PortfolioPropertyGroupRow extends React.PureComponent {
           />
           <div className="portfolio-property-group-row__title">
             <div className="portfolio-property-group-row__name">{name}</div>
-            <div className="portfolio-property-group-row__property-count">
-              {properties.length} Properties
-            </div>
+            {this.propertiesCount}
           </div>
           <div className="portfolio-property-group-row__kpis">
             {this.renderKPIs()}

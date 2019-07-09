@@ -6,7 +6,7 @@ exports[`PortfolioPropertyGroupRow renders correctly 1`] = `
   style={Object {}}
 >
   <div
-    className="portfolio-property-group-row__group"
+    className="portfolio-property-group-row__group portfolio-property-group-row__group--opening"
     onClick={[Function]}
   >
     <div
@@ -106,7 +106,7 @@ exports[`PortfolioPropertyGroupRow renders opened 1`] = `
   }
 >
   <div
-    className="portfolio-property-group-row__group portfolio-property-group-row__group--open"
+    className="portfolio-property-group-row__group portfolio-property-group-row__group--open portfolio-property-group-row__group--opening"
     onClick={[Function]}
   >
     <div
