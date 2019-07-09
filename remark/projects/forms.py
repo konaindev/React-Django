@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
@@ -6,13 +8,74 @@ from remark.lib.validators import (
     validate_linebreak_separated_numbers_list,
     validate_linebreak_separated_strings_list,
 )
-from .models import Project, Spreadsheet
+from .models import Project, CampaignModel, Spreadsheet, Spreadsheet2
 from .reports.selectors import ReportLinks
 from .spreadsheets import get_importer_for_kind, SpreadsheetKind
 
 from remark.lib.logging import error_text, getLogger
 
 logger = getLogger(__name__)
+
+
+class CampaignModelUploadForm(forms.ModelForm):
+    # Custom field to allow spreadsheet file upload
+    spreadsheet_file = forms.FileField()
+
+    """
+    When the form is submitted with "spreadsheet_file" (custom field) left blank, clean() method is not called at all.
+    "helper_field" (which is hidden) helps triggering validation.
+
+    IMPORTANT: if you are not going to upload, you should close the inline form and save page.
+    @ref: https://code.djangoproject.com/ticket/29087
+    @ref: https://github.com/django/django/pull/11504/files
+    """
+    helper_field = forms.CharField(widget=forms.widgets.HiddenInput({"value": "any"}))
+
+    def clean(self):
+        cleaned_data = super().clean()
+
+        try:
+            # if spreadsheet file is empty, show error on UI
+            spreadsheet_file = cleaned_data.get("spreadsheet_file", None)
+            if spreadsheet_file is None:
+                raise ValidationError("No spreadsheet file chosen.")
+
+            importer = get_importer_for_kind(
+                SpreadsheetKind.MODELING, cleaned_data["spreadsheet_file"]
+            )
+            if importer is None:
+                raise ValidationError(f"No spreadsheet importer available for model")
+            if not importer.is_valid():
+                raise ValidationError(
+                    f"Could not validate spreadsheet: {importer.errors}"
+                )
+
+            spreadsheet = Spreadsheet2(
+                file_url=cleaned_data["spreadsheet_file"],
+                json_data=importer.cleaned_data,
+                kind=SpreadsheetKind.MODELING,
+            )
+            # creates temporary fields required to generate "upload_to" path
+            spreadsheet.project = cleaned_data["campaign"].project
+            spreadsheet.created = datetime.now()
+            spreadsheet.save()
+
+            cleaned_data["spreadsheet"] = spreadsheet
+            cleaned_data["name"] = importer.cleaned_data["name"]
+            cleaned_data["model_start"] = importer.cleaned_data["dates"]["start"]
+            cleaned_data["model_end"] = importer.cleaned_data["dates"]["end"]
+
+            return cleaned_data
+        except ValidationError as e:
+            raise e
+        except Exception as e:
+            etxt = error_text(e)
+            logger.error(etxt)
+            raise Exception(f"Unexpected error when cleaning spreadsheet: {etxt}")
+
+    class Meta:
+        model = CampaignModel
+        fields = ["spreadsheet_file"]
 
 
 class SpreadsheetForm(forms.ModelForm):
@@ -22,17 +85,23 @@ class SpreadsheetForm(forms.ModelForm):
     APIs.
     """
 
+    # exclude MODELING spreadsheet since it's managed by CampaignModel
+    kind = forms.ChoiceField(
+        choices=[
+            choice
+            for choice in SpreadsheetKind.CHOICES
+            if choice[0] is not SpreadsheetKind.MODELING
+        ],
+        required=True,
+    )
+
     def clean(self):
         cleaned_data = super().clean()
 
         try:
-            if (
-                cleaned_data["kind"] != SpreadsheetKind.MODELING
-                and cleaned_data["subkind"]
-            ):
-                raise ValidationError(
-                    "For non-modeling spreadsheets, 'subkind' must be blank."
-                )
+            # validate file input
+            if cleaned_data.get("file", None) is None:
+                raise ValidationError("No spreadsheet file chosen.")
 
             # Attempt to import and validate the spreadsheet contents
             importer = get_importer_for_kind(cleaned_data["kind"], cleaned_data["file"])
@@ -44,10 +113,6 @@ class SpreadsheetForm(forms.ModelForm):
                 raise ValidationError(
                     f"Could not validate spreadsheet: {importer.errors}"
                 )
-
-            # If this is a modeling spreadsheet, set the subkind based on the model name.
-            if cleaned_data["kind"] == SpreadsheetKind.MODELING:
-                cleaned_data["subkind"] = importer.cleaned_data["name"]
 
             # Success! We read the spreadsheet just fine.
             cleaned_data["imported_data"] = importer.cleaned_data
@@ -68,29 +133,14 @@ class SpreadsheetForm(forms.ModelForm):
 
     class Meta:
         model = Spreadsheet
-        fields = ["project", "kind", "subkind", "file"]
-        # You're not allowed to set the subkind directly.
-        widgets = {"subkind": forms.HiddenInput()}
+        fields = ["project", "kind", "file"]
 
 
 class ProjectForm(forms.ModelForm):
-    NO_CHOICES = [("", "--(no selected model)--")]
-
-    selected_model_name = forms.ChoiceField(
-        choices=NO_CHOICES,
-        required=False,
-        widget=forms.Select(
-            attrs={
-                "onChange": "window.enable_submit_warning('Are you sure you want to save? All target values will be replaced by those in the newly selected model.');"
-            }
-        ),
-    )
-
     def __init__(self, *args, **kwargs):
         self.is_existing_instance = kwargs.get("instance") is not None
         super(ProjectForm, self).__init__(*args, **kwargs)
         self._map_public_and_shared_fields()
-        self._update_selected_model_choices()
 
     def _map_public_and_shared_fields(self):
         def append_links_to_field_label(link_type, report_links, field_maps):
@@ -123,23 +173,11 @@ class ProjectForm(forms.ModelForm):
             report_links = ReportLinks.share_for_project(self.instance)
             append_links_to_field_label("shared", report_links, field_maps)
 
-    def _update_selected_model_choices(self):
-        modeling_report = self.instance.tmp_modeling_report_json or {}
-        modeling_options = modeling_report.get("options", [])
-        model_names = [
-            (modeling_option["name"], modeling_option["name"])
-            for modeling_option in modeling_options
-        ]
-        if not model_names:
-            self.fields["selected_model_name"].disabled = True
-        model_names = self.NO_CHOICES + model_names
-        self.fields["selected_model_name"].choices = model_names
-
     def clean_competitors(self):
         max_competitors = 2
-        competitors = self.cleaned_data.get('competitors')
+        competitors = self.cleaned_data.get("competitors")
         if competitors and competitors.count() > max_competitors:
-            raise forms.ValidationError('Maximum %s competitors.' % max_competitors)
+            raise forms.ValidationError("Maximum %s competitors." % max_competitors)
         return competitors
 
     def clean_fund(self):

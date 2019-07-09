@@ -1,4 +1,4 @@
-import { project, report_links } from "../project_page/props";
+import { project, report_links, user } from "../project_page/props";
 import report from "../campaign_plan/campaign_plan.props";
 
 const current_report_link = report_links.market;
@@ -8,6 +8,7 @@ const share_info = {
 };
 
 export default {
+  user,
   project,
   report,
   report_links,

@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import ProjectDropDown from "../project_drop_down";
 import PageChrome from "../page_chrome";
+import UserMenu from "../user_menu";
 
 import "./project_page_chrome.scss";
 
@@ -14,13 +14,13 @@ import "./project_page_chrome.scss";
  */
 export default class ProjectPageChrome extends Component {
   static propTypes = {
-    project: PropTypes.object.isRequired,
+    user: PropTypes.object.isRequired,
     topItems: PropTypes.node,
     children: PropTypes.node.isRequired
   };
 
   render() {
-    const headerItems = <ProjectDropDown project={this.props.project} />;
+    const headerItems = <UserMenu {...this.props.user} />;
 
     return (
       <PageChrome headerItems={headerItems} topItems={this.props.topItems}>

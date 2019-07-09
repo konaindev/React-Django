@@ -203,6 +203,11 @@ class CommonReport(ReportBase):
     def build_funnel_history(self):
         return None
 
+    # from some type of reports, we might need to drop some metrics
+    # ex: "Performance Report" => Remove 4-week target for Acquisition Investment
+    def omit_four_week_averages(self, built_averages):
+        pass
+
     def build_json_data(self):
         """
         Return a structure that can be converted to a JSON string.
@@ -215,6 +220,8 @@ class CommonReport(ReportBase):
         property_report = unflatten(SCHEMA_MAP, flat_period_values)
 
         four_week_funnel_averages = self.build_four_week_averages()
+        self.omit_four_week_averages(four_week_funnel_averages)
+
         funnel_history = self.build_funnel_history()
 
         targets = unflatten_optional(TARGET_SCHEMA_MAP, flat_period_values)
@@ -239,4 +246,3 @@ class CommonReport(ReportBase):
 
     def to_jsonable(self):
         return self.build_json_data()
-

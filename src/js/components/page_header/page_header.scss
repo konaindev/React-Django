@@ -19,7 +19,8 @@ $header-half-inset: 36px;
     }
 
     &__items-inner {
-        display: block;
+        display: grid;
+        grid-template-columns: 1fr;
         font-family: $font-sans;
         padding: 0;
     }

@@ -308,6 +308,7 @@ class LincolnTowerPeriodTestCase(TestCase):
             property_manager=property_manager,
             property_owner=property_owner,
             fund=fund,
+            total_units=220,
         )
         self.raw_period = Period.objects.create(
             project=self.project,
@@ -351,8 +352,15 @@ class LincolnTowerPeriodTestCase(TestCase):
     def test_target_leased_units(self):
         self.assertEqual(self.period.target_leased_units, 196)
 
+    def test_total_units(self):
+        # total_units should be pulled from ref property
+        self.assertEqual(self.period.total_units, 220)
+
     def test_leased_rate(self):
-        self.assertEqual(self.period.leased_rate, 0.4908256880733945)
+        self.assertEqual(round(self.period.leased_rate, 4), 0.4864)
+
+    def test_occupancy_rate(self):
+        self.assertEqual(round(self.period.occupancy_rate, 4), 0.9909)
 
     def test_usv_inq_perc(self):
         self.assertEqual(self.period.usv_inq_perc, 0.012481644640234948)

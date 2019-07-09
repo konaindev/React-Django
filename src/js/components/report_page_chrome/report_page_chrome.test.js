@@ -1,14 +1,15 @@
 import renderer from "react-test-renderer";
-import ReportPageChrome from "./index";
+
 import { props as reportLinkProps } from "../report_links/report_links.stories";
+import { props as user } from "../user_menu/props";
+
+import ReportPageChrome from "./index";
 
 describe("ReportPageChrome", () => {
   it("renders correctly", () => {
-    const project = { name: "Portland Multi Family", public_id: "pro_example" };
-
     const props = {
       ...reportLinkProps,
-      project: project,
+      user: user,
       topItems: <div>topItems</div>,
       children: <div>children</div>
     };
