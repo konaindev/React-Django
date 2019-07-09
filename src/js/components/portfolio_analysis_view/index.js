@@ -139,6 +139,7 @@ export default class PortfolioAnalysisView extends React.PureComponent {
           <div className="portfolio-analysis__controls">
             <Select
               className="portfolio-analysis__select-kpi"
+              theme="default"
               options={this.kpiOptions}
               value={this.kpiValue}
               onChange={this.onChangeKpi}

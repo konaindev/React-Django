@@ -95,3 +95,22 @@
         }
     }
 }
+
+
+.select--default {
+    .select__control {
+        border-color: $select-border-color;
+
+        .select__single-value {
+            color: $input-text-color;
+        }
+    }
+
+    .select__option {
+        &:active,
+        &--is-focused,
+        &--is-selected {
+            color: $input-text-color;
+        }
+    }
+}

@@ -4,7 +4,6 @@ $page-spacing: 100px auto 113px;
 $title-height: 44px;
 $controls-spacing: 50px;
 $select-width: 310px;
-$select-border-color: $gray-4;
 $title-bar-height: 20px;
 $title-bar-spacing: 100px;
 $title-bar-border-spacing: 20px;
@@ -36,14 +35,6 @@ $table-spacing: 100px;
 
 .portfolio-analysis__select-kpi {
     width: $select-width;
-
-    .select__control {
-        border-color: $select-border-color;
-
-        .select__single-value {
-            color: $input-text-color;
-        }
-    }
 }
 
 .portfolio-analysis__title-bar {

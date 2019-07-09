@@ -92,6 +92,7 @@ export default class DateRangeSelector extends React.PureComponent {
       <div className="date-range-selector">
         <Select
           className="date-range-selector__select"
+          theme="default"
           options={DateRangeSelector.options}
           value={this.presetValue}
           onChange={this.onChangePreset}

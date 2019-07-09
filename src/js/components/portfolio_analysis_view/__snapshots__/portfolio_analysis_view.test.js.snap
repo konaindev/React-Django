@@ -139,7 +139,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
       className="portfolio-analysis__controls"
     >
       <div
-        className="select portfolio-analysis__select-kpi css-2b097c-container"
+        className="select portfolio-analysis__select-kpi select--default css-2b097c-container"
         onKeyDown={[Function]}
       >
         <div
@@ -190,7 +190,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
         className="date-range-selector"
       >
         <div
-          className="select date-range-selector__select css-2b097c-container"
+          className="select date-range-selector__select select--default css-2b097c-container"
           onKeyDown={[Function]}
         >
           <div
