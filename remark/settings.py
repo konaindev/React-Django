@@ -255,8 +255,10 @@ CACHE_JS_REVERSE = not DEBUG
 
 CACHES = {
     "default": {
-        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
-        "LOCATION": "default",
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": required_env("REDIS_URL"),
+        "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
+        "TIMEOUT": 10,
     }
 }
 

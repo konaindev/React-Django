@@ -4,11 +4,34 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import cn from "classnames";
 
 import Button from "../button";
+import { Link, Tick } from "../../icons";
 import "./copy_to_clipboard.scss";
 
-export function CopyToClipboardButton({ disabled, textToCopy, buttonLabel }) {
-  const copiedText = "Copied!";
+function CopyIcon() {
+  return (
+    <React.Fragment>
+      <Link className="copy-to-clipboard__icon" />
+      <span className="copy-to-clipboard__label">Copy Link</span>
+    </React.Fragment>
+  );
+}
 
+function CopiedIcon() {
+  return (
+    <React.Fragment>
+      <Tick className="copy-to-clipboard__icon" />
+      <span className="copy-to-clipboard__label">Copied!</span>
+    </React.Fragment>
+  );
+}
+
+export function CopyToClipboardButton({
+  className,
+  textToCopy,
+  disabled,
+  CopyNode,
+  CopiedNode
+}) {
   const copyCallback = () => {
     setCopied(true);
 
@@ -18,34 +41,39 @@ export function CopyToClipboardButton({ disabled, textToCopy, buttonLabel }) {
   };
 
   const [copied, setCopied] = useState(false);
+  const classes = cn("copy-to-clipboard", className, {
+    "copy-to-clipboard--disbale": disabled
+  });
 
   if (disabled) {
     return (
-      <Button className="copy-to-clipboard" disabled>
-        {buttonLabel}
+      <Button className={classes} disabled>
+        <CopyNode />
       </Button>
     );
   }
 
   return (
     <CopyToClipboard text={textToCopy} onCopy={copyCallback}>
-      <Button color="primary" className="copy-to-clipboard">
-        {copied ? copiedText : buttonLabel}
+      <Button className={classes}>
+        {copied ? <CopiedNode /> : <CopyNode />}
       </Button>
     </CopyToClipboard>
   );
 }
 
 CopyToClipboardButton.propTypes = {
+  textToCopy: PropTypes.string.isRequired,
   disabled: PropTypes.bool,
-  textToCopy: PropTypes.string,
-  buttonLabel: PropTypes.string,
+  CopyNode: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+  CopiedNode: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
   onClick: PropTypes.func
 };
 
 CopyToClipboardButton.defaultProps = {
   disabled: false,
-  buttonLabel: "Copy Text",
+  CopyNode: CopyIcon,
+  CopiedNode: CopiedIcon,
   onClick: () => {}
 };
 

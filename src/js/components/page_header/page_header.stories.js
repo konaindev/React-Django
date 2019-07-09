@@ -13,7 +13,8 @@ storiesOf("PageHeader", module)
       <div>ososo</div>header content
     </PageHeader>
   ))
-  .add("Nav link", () => (
+  .add("Nav link", () => <PageHeader navLinks={props} />)
+  .add("User Menu", () => (
     <PageHeader navLinks={props}>
       <UserMenu {...userProps} />
     </PageHeader>

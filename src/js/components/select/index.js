@@ -25,9 +25,12 @@ export default function Select(props) {
     placeholder,
     name,
     components,
+    theme,
     ...otherProps
   } = props;
-  const classes = cn("select", className);
+  const classes = cn("select", className, {
+    [`select--${theme}`]: theme
+  });
   return (
     <ReactSelect
       className={classes}
@@ -45,6 +48,7 @@ export default function Select(props) {
   );
 }
 Select.propTypes = {
+  theme: PropTypes.string,
   options: PropTypes.arrayOf(
     PropTypes.shape({ label: PropTypes.string, value: PropTypes.string })
   ),
@@ -57,6 +61,7 @@ Select.propTypes = {
   components: PropTypes.object
 };
 Select.defaultProps = {
+  theme: "",
   components: {}
 };
 

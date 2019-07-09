@@ -4,6 +4,8 @@ from remark.projects.models import Fund, Project
 from remark.lib.views import ReactView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
+from django.core.cache import cache
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
 
 def has_property_in_list_of_dict(ary, prop, value):
@@ -32,6 +34,17 @@ class DashboardView(LoginRequiredMixin, ReactView):
 
     def get(self, request):
         user = request.user
+
+        cache_key = "{}^{}^{}^{}".format(
+            user.public_id,
+            request.path,
+            request.content_type,
+            request.META["QUERY_STRING"],
+        )
+
+        if cache_key in cache:
+            cached_reponse = cache.get(cache_key)
+            return cached_reponse
 
         if user.is_superuser:
             project_params = {}
@@ -121,20 +134,21 @@ class DashboardView(LoginRequiredMixin, ReactView):
             projects = sorted(
                 projects, key=lambda p: p["performance_rating"], reverse=is_reverse
             )
-        if request.content_type == "application/json":
-            return JsonResponse(
-                {
-                    "no_projects": no_projects,
-                    "properties": projects,
-                    "user": user.get_menu_dict(),
-                    "locations": locations,
-                    "property_managers": property_managers,
-                    "asset_managers": asset_managers,
-                    "funds": funds,
-                }
-            )
-        else:
-            return self.render(
+
+        response = JsonResponse(
+            {
+                "no_projects": no_projects,
+                "properties": projects,
+                "user": user.get_menu_dict(),
+                "locations": locations,
+                "property_managers": property_managers,
+                "asset_managers": asset_managers,
+                "funds": funds,
+            }
+        )
+
+        if request.content_type != "application/json":
+            response = self.render(
                 no_projects=no_projects,
                 properties=projects,
                 user=user.get_menu_dict(),
@@ -144,3 +158,6 @@ class DashboardView(LoginRequiredMixin, ReactView):
                 asset_managers=asset_managers,
                 funds=funds,
             )
+
+        cache.set(cache_key, response, timeout=DEFAULT_TIMEOUT)
+        return response

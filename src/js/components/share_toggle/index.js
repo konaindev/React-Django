@@ -52,6 +52,7 @@ export function ShareToggle(props) {
       <ButtonToggle checked={flag} onChange={handleToggleChange} />
 
       <CopyToClipboard
+        className="share-toggle__copy"
         textToCopy={share_url}
         buttonLabel="Copy Link"
         disabled={!flag}

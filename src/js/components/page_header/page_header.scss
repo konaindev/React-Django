@@ -11,11 +11,10 @@ $header-half-inset: 36px;
     &__inner {
         height: $header-height;
         line-height: $line-height-tight;
-        display: flex;
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
         align-items: center;
         justify-content: space-between;
-        padding-top: $s5;
-        padding-bottom: $s5;
     }
 
     &__items-inner {
@@ -23,6 +22,11 @@ $header-half-inset: 36px;
         grid-template-columns: 1fr;
         font-family: $font-sans;
         padding: 0;
+    }
+
+    &__items-outer {
+        grid-column-start: 3;
+        justify-self: end;
     }
 
     &__item {

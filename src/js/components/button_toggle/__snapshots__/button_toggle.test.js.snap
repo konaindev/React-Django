@@ -2,40 +2,41 @@
 
 exports[`ButtonToggle renders toggle with custom labels correctly 1`] = `
 <label
-  className="button-toggle"
+  className="button-toggle button-toggle--unchecked"
 >
   <input
     checked={false}
+    className="button-toggle__input"
     onChange={[Function]}
     type="checkbox"
   />
   <span
-    className="toggle-tracks toggle-tracks--unchecked"
+    className="button-toggle__track"
   >
     <span
-      className="toggle-thumb"
+      className="button-toggle__thumb"
     />
     <div
-      className="toggle-button-checked"
+      className="button-toggle__checked"
     >
       <div
-        className="toggle-inner-label"
+        className="button-toggle__inner-label"
       >
         Checked
       </div>
     </div>
     <div
-      className="toggle-button-unchecked"
+      className="button-toggle__unchecked"
     >
       <div
-        className="toggle-inner-label"
+        className="button-toggle__inner-label"
       >
         Unchecked
       </div>
     </div>
   </span>
   <span
-    className="toggle-outer-label"
+    className="button-toggle__outer-label"
   >
     Containing Label
   </span>
@@ -44,33 +45,34 @@ exports[`ButtonToggle renders toggle with custom labels correctly 1`] = `
 
 exports[`ButtonToggle renders toggle with on/off correctly 1`] = `
 <label
-  className="button-toggle"
+  className="button-toggle button-toggle--unchecked"
 >
   <input
     checked={false}
+    className="button-toggle__input"
     onChange={[Function]}
     type="checkbox"
   />
   <span
-    className="toggle-tracks toggle-tracks--unchecked"
+    className="button-toggle__track"
   >
     <span
-      className="toggle-thumb"
+      className="button-toggle__thumb"
     />
     <div
-      className="toggle-button-checked"
+      className="button-toggle__checked"
     >
       <div
-        className="toggle-inner-label"
+        className="button-toggle__inner-label"
       >
         On
       </div>
     </div>
     <div
-      className="toggle-button-unchecked"
+      className="button-toggle__unchecked"
     >
       <div
-        className="toggle-inner-label"
+        className="button-toggle__inner-label"
       >
         Off
       </div>

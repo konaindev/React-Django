@@ -4,6 +4,8 @@ export { default as ArrowUp } from "./arrow_up";
 export { default as Close } from "./close";
 export { default as ListView } from "./list_view";
 export { default as LogOut } from "./log_out";
+export { default as Link } from "./link";
+export { default as Tick } from "./tick";
 export { default as TileView } from "./tile_view";
 export { default as Search } from "./search";
 export { default as Sort } from "./sort";

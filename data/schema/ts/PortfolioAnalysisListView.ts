@@ -95,8 +95,8 @@ interface GroupProperty extends Property {
     /** Property type */
     type: "group";
 
-    /** List of properties */
-    properties: Array<SingleProperty>;
+    /** List of properties or properties count */
+    properties?: Array<SingleProperty> | number;
 }
 
 interface IndividualProperty extends SingleProperty {

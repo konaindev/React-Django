@@ -1,0 +1,799 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PortfolioAnalysisView renders correctly 1`] = `
+<div
+  className="chrome"
+>
+  <div
+    className="page-chrome__top-chrome"
+  >
+    <div
+      className="page-chrome__top-chrome__content"
+    >
+      <div
+        className="page-header"
+      >
+        <div
+          className="container page-header__inner"
+        >
+          <a
+            href="/dashboard"
+          >
+            <div
+              className="remarkably-logo"
+            >
+               
+            </div>
+          </a>
+          <div
+            className="page-header__nav"
+          >
+            <div
+              className="top-navigation"
+            >
+              <a
+                className="top-navigation__link"
+                href="http://app.remarkably.io/dashboard"
+              >
+                Portfolio
+              </a>
+              <a
+                className="top-navigation__link top-navigation__link--active"
+                href="http://app.remarkably.io/portfolio-analysis"
+              >
+                Portfolio Analysis
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="page-chrome__top-chrome__spacing-fix"
+      style={
+        Object {
+          "height": 76,
+        }
+      }
+    >
+       
+    </div>
+  </div>
+  <div
+    className="container portfolio-analysis"
+  >
+    <div
+      className="portfolio-analysis__header"
+    >
+      <div
+        className="portfolio-analysis__title"
+      >
+        Portfolio Analysis
+      </div>
+      <div
+        className="share-toggle"
+      >
+        <label
+          className="button-toggle button-toggle--checked"
+        >
+          <input
+            checked={true}
+            className="button-toggle__input"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="button-toggle__track"
+          >
+            <span
+              className="button-toggle__thumb"
+            />
+            <div
+              className="button-toggle__checked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                On
+              </div>
+            </div>
+            <div
+              className="button-toggle__unchecked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                Off
+              </div>
+            </div>
+          </span>
+          
+        </label>
+        <button
+          className="button button--default copy-to-clipboard share-toggle__copy"
+          onClick={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            className="copy-to-clipboard__icon"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 18 8"
+            width="1em"
+          >
+            <path
+              d="M4.5 0.25C2.42925 0.25 0.75 1.92925 0.75 4C0.75 6.07075 2.42925 7.75 4.5 7.75H6.75C7.16421 7.75 7.5 7.41421 7.5 7C7.5 6.58579 7.16421 6.25 6.75 6.25H4.5C3.25725 6.25 2.25 5.24275 2.25 4C2.25 2.75725 3.25725 1.75 4.5 1.75H6.75C7.16421 1.75 7.5 1.41421 7.5 1C7.5 0.585786 7.16421 0.25 6.75 0.25H4.5ZM11.25 0.25C10.8358 0.25 10.5 0.585786 10.5 1C10.5 1.41421 10.8358 1.75 11.25 1.75H13.5C14.7428 1.75 15.75 2.75725 15.75 4C15.75 5.24275 14.7428 6.25 13.5 6.25H11.25C10.8358 6.25 10.5 6.58579 10.5 7C10.5 7.41421 10.8358 7.75 11.25 7.75H13.5C15.5708 7.75 17.25 6.07075 17.25 4C17.25 1.92925 15.5708 0.25 13.5 0.25H11.25ZM6 3.25C5.58579 3.25 5.25 3.58579 5.25 4C5.25 4.41421 5.58579 4.75 6 4.75H12C12.4142 4.75 12.75 4.41421 12.75 4C12.75 3.58579 12.4142 3.25 12 3.25H6Z"
+            />
+          </svg>
+          <span
+            className="copy-to-clipboard__label"
+          >
+            Copy Link
+          </span>
+        </button>
+      </div>
+    </div>
+    <div
+      className="portfolio-analysis__controls"
+    >
+      <div
+        className="select portfolio-analysis__select-kpi select--default css-2b097c-container"
+        onKeyDown={[Function]}
+      >
+        <div
+          className="select__control css-yk16xz-control"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="select__value-container select__value-container--has-value css-1hwfws3"
+          >
+            <div
+              className="select__single-value css-1uccc91-singleValue"
+            >
+              Leasing Performance
+            </div>
+            <input
+              className="css-62g3xt-dummyInput"
+              disabled={false}
+              id="react-select-2-input"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              readOnly={true}
+              tabIndex="0"
+              value=""
+            />
+          </div>
+          <div
+            className="select__indicators css-1wy0on6"
+          >
+            <span
+              className="select__indicator-separator css-1okebmr-indicatorSeparator"
+            />
+            <div
+              aria-hidden="true"
+              className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <div
+                className="select__dropdown-arrow"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="date-range-selector"
+      >
+        <div
+          className="select date-range-selector__select select--default css-2b097c-container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="select__control css-yk16xz-control"
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+          >
+            <div
+              className="select__value-container select__value-container--has-value css-1hwfws3"
+            >
+              <div
+                className="select__single-value css-1uccc91-singleValue"
+              >
+                Custom
+              </div>
+              <input
+                className="css-62g3xt-dummyInput"
+                disabled={false}
+                id="react-select-3-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+            <div
+              className="select__indicators css-1wy0on6"
+            >
+              <span
+                className="select__indicator-separator css-1okebmr-indicatorSeparator"
+              />
+              <div
+                aria-hidden="true"
+                className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+              >
+                <div
+                  className="select__dropdown-arrow"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="date-range date-range-selector__data-picker"
+        >
+          <div>
+            <div
+              className="date-range__input"
+              onClick={[Function]}
+            >
+              <span
+                className="date-range__value"
+              >
+                04/15/19
+              </span>
+              <span>
+                to
+              </span>
+              <span
+                className="date-range__value"
+              >
+                04/22/19
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="portfolio-analysis__title-bar"
+    >
+      <div>
+        All Property Averages
+      </div>
+      <div
+        className="portfolio-analysis__property-count"
+      >
+        4
+         properties
+      </div>
+    </div>
+    <div
+      className="portfolio-analysis__kpi-cards"
+    >
+      <div
+        className="kpi-card portfolio-analysis__kpi-card kpi-card--off-track"
+      >
+        <div
+          className="kpi-card__bar"
+        />
+        <div
+          className="kpi-card__health"
+        >
+          <div
+            className="property-status property-status--off-track"
+          >
+            OFF TRACK
+          </div>
+        </div>
+        <div
+          className="kpi-card__value"
+        >
+          5%
+        </div>
+        <div
+          className="kpi-card__name"
+        >
+          USV → INQ
+        </div>
+        <div
+          className="kpi-card__target"
+        >
+          Target: 
+          7%
+        </div>
+      </div>
+      <div
+        className="kpi-card portfolio-analysis__kpi-card kpi-card--at-risk"
+      >
+        <div
+          className="kpi-card__bar"
+        />
+        <div
+          className="kpi-card__health"
+        >
+          <div
+            className="property-status property-status--at-risk"
+          >
+            AT RISK
+          </div>
+        </div>
+        <div
+          className="kpi-card__value"
+        >
+          20%
+        </div>
+        <div
+          className="kpi-card__name"
+        >
+          INQ → TOU
+        </div>
+        <div
+          className="kpi-card__target"
+        >
+          Target: 
+          25%
+        </div>
+      </div>
+      <div
+        className="kpi-card portfolio-analysis__kpi-card kpi-card--on-track"
+      >
+        <div
+          className="kpi-card__bar"
+        />
+        <div
+          className="kpi-card__health"
+        >
+          <div
+            className="property-status property-status--on-track"
+          >
+            ON TRACK
+          </div>
+        </div>
+        <div
+          className="kpi-card__value"
+        >
+          60%
+        </div>
+        <div
+          className="kpi-card__name"
+        >
+          TOU → APP
+        </div>
+        <div
+          className="kpi-card__target"
+        >
+          Target: 
+          50%
+        </div>
+      </div>
+    </div>
+    <div
+      className="portfolio-analysis__table"
+    >
+      <div
+        className="portfolio-table"
+      >
+        <div
+          className="portfolio-table__header"
+        >
+          <div
+            className="portfolio-table__title"
+          >
+            Group
+          </div>
+          <div
+            className="portfolio-table__kpis"
+          >
+            <div
+              className="portfolio-table__kpi"
+            >
+              Lease Rate
+            </div>
+            <div
+              className="portfolio-table__kpi"
+            >
+              Occupancy Rate
+            </div>
+            <div
+              className="portfolio-table__kpi"
+            >
+              CD Rate
+            </div>
+            <div
+              className="portfolio-table__kpi"
+            >
+              Renewal Rate
+            </div>
+          </div>
+        </div>
+        <div
+          className="portfolio-table__body"
+        >
+          <div
+            className="portfolio-property-group-row"
+            style={Object {}}
+          >
+            <div
+              className="portfolio-property-group-row__group portfolio-property-group-row__group--opening"
+              onClick={[Function]}
+            >
+              <div
+                className="portfolio-property-group-row__image"
+                style={
+                  Object {
+                    "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
+                  }
+                }
+              />
+              <div
+                className="portfolio-property-group-row__title"
+              >
+                <div
+                  className="portfolio-property-group-row__name"
+                >
+                  West
+                </div>
+                <div
+                  className="portfolio-property-group-row__property-count"
+                >
+                  3
+                   Properties
+                </div>
+              </div>
+              <div
+                className="portfolio-property-group-row__kpis"
+              >
+                <div
+                  className="portfolio-property-group-row__kpi"
+                >
+                  <div
+                    className="portfolio-property-group-row__value"
+                  >
+                    0.9
+                  </div>
+                  <div
+                    className="portfolio-property-group-row__target"
+                  >
+                    Target: 0.9
+                  </div>
+                </div>
+                <div
+                  className="portfolio-property-group-row__kpi"
+                >
+                  <div
+                    className="portfolio-property-group-row__value"
+                  >
+                    0.8
+                  </div>
+                  <div
+                    className="portfolio-property-group-row__target"
+                  >
+                    Target: 0.8
+                  </div>
+                </div>
+                <div
+                  className="portfolio-property-group-row__kpi"
+                >
+                  <div
+                    className="portfolio-property-group-row__value"
+                  >
+                    0.1
+                  </div>
+                  <div
+                    className="portfolio-property-group-row__target"
+                  >
+                    Target: 0.1
+                  </div>
+                </div>
+                <div
+                  className="portfolio-property-group-row__kpi"
+                >
+                  <div
+                    className="portfolio-property-group-row__value"
+                  >
+                    0.5
+                  </div>
+                  <div
+                    className="portfolio-property-group-row__target"
+                  >
+                    Target: 0.5
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="portfolio-property-row"
+          >
+            <div
+              className="portfolio-property-row__image"
+              style={
+                Object {
+                  "backgroundImage": "url(\\"https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg\\")",
+                }
+              }
+            />
+            <div
+              className="portfolio-property-row__title"
+            >
+              <div
+                className="portfolio-property-row__name"
+              >
+                Building D
+              </div>
+              <div
+                className="portfolio-property-row__address"
+              >
+                San Antonio, TX 78207
+              </div>
+            </div>
+            <div
+              className="portfolio-property-row__info"
+            >
+              <div
+                className="property-status portfolio-property-row__health property-status--on-track"
+              >
+                ON TRACK
+              </div>
+              <a
+                className="portfolio-property-row__link"
+              >
+                View Property
+              </a>
+            </div>
+            <div
+              className="portfolio-property-row__kpis"
+            >
+              <div
+                className="portfolio-property-row__kpi"
+              >
+                <div
+                  className="portfolio-property-row__value"
+                >
+                  0.9
+                </div>
+                <div
+                  className="portfolio-property-row__target"
+                >
+                  Target: 0.9
+                </div>
+              </div>
+              <div
+                className="portfolio-property-row__kpi"
+              >
+                <div
+                  className="portfolio-property-row__value"
+                >
+                  0.8
+                </div>
+                <div
+                  className="portfolio-property-row__target"
+                >
+                  Target: 0.8
+                </div>
+              </div>
+              <div
+                className="portfolio-property-row__kpi"
+              >
+                <div
+                  className="portfolio-property-row__value"
+                >
+                  0.1
+                </div>
+                <div
+                  className="portfolio-property-row__target"
+                >
+                  Target: 0.1
+                </div>
+              </div>
+              <div
+                className="portfolio-property-row__kpi"
+              >
+                <div
+                  className="portfolio-property-row__value"
+                >
+                  0.5
+                </div>
+                <div
+                  className="portfolio-property-row__target"
+                >
+                  Target: 0.5
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="portfolio-property-group-row"
+            style={Object {}}
+          >
+            <div
+              className="portfolio-property-group-row__group"
+              onClick={[Function]}
+            >
+              <div
+                className="portfolio-property-group-row__image"
+                style={
+                  Object {
+                    "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
+                  }
+                }
+              />
+              <div
+                className="portfolio-property-group-row__title"
+              >
+                <div
+                  className="portfolio-property-group-row__name"
+                >
+                  Remarkably National
+                </div>
+              </div>
+              <div
+                className="portfolio-property-group-row__kpis"
+              >
+                <div
+                  className="portfolio-property-group-row__kpi"
+                >
+                  <div
+                    className="portfolio-property-group-row__value"
+                  >
+                    0.9
+                  </div>
+                  <div
+                    className="portfolio-property-group-row__target"
+                  >
+                    Target: 0.9
+                  </div>
+                </div>
+                <div
+                  className="portfolio-property-group-row__kpi"
+                >
+                  <div
+                    className="portfolio-property-group-row__value"
+                  >
+                    0.8
+                  </div>
+                  <div
+                    className="portfolio-property-group-row__target"
+                  >
+                    Target: 0.8
+                  </div>
+                </div>
+                <div
+                  className="portfolio-property-group-row__kpi"
+                >
+                  <div
+                    className="portfolio-property-group-row__value"
+                  >
+                    0.1
+                  </div>
+                  <div
+                    className="portfolio-property-group-row__target"
+                  >
+                    Target: 0.1
+                  </div>
+                </div>
+                <div
+                  className="portfolio-property-group-row__kpi"
+                >
+                  <div
+                    className="portfolio-property-group-row__value"
+                  >
+                    0.5
+                  </div>
+                  <div
+                    className="portfolio-property-group-row__target"
+                  >
+                    Target: 0.5
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="portfolio-property-group-row"
+            style={Object {}}
+          >
+            <div
+              className="portfolio-property-group-row__group"
+              onClick={[Function]}
+            >
+              <div
+                className="portfolio-property-group-row__image"
+                style={
+                  Object {
+                    "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
+                  }
+                }
+              />
+              <div
+                className="portfolio-property-group-row__title"
+              >
+                <div
+                  className="portfolio-property-group-row__name"
+                >
+                  Portfolio Average
+                </div>
+                <div
+                  className="portfolio-property-group-row__property-count"
+                >
+                  11
+                   Properties
+                </div>
+              </div>
+              <div
+                className="portfolio-property-group-row__kpis"
+              >
+                <div
+                  className="portfolio-property-group-row__kpi"
+                >
+                  <div
+                    className="portfolio-property-group-row__value"
+                  >
+                    0.9
+                  </div>
+                  <div
+                    className="portfolio-property-group-row__target"
+                  >
+                    Target: 0.9
+                  </div>
+                </div>
+                <div
+                  className="portfolio-property-group-row__kpi"
+                >
+                  <div
+                    className="portfolio-property-group-row__value"
+                  >
+                    0.8
+                  </div>
+                  <div
+                    className="portfolio-property-group-row__target"
+                  >
+                    Target: 0.8
+                  </div>
+                </div>
+                <div
+                  className="portfolio-property-group-row__kpi"
+                >
+                  <div
+                    className="portfolio-property-group-row__value"
+                  >
+                    0.1
+                  </div>
+                  <div
+                    className="portfolio-property-group-row__target"
+                  >
+                    Target: 0.1
+                  </div>
+                </div>
+                <div
+                  className="portfolio-property-group-row__kpi"
+                >
+                  <div
+                    className="portfolio-property-group-row__value"
+                  >
+                    0.5
+                  </div>
+                  <div
+                    className="portfolio-property-group-row__target"
+                  >
+                    Target: 0.5
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

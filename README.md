@@ -29,9 +29,12 @@ For back-end code, we use `flake8` to validate code, and `python black` to enfor
 - postgres (including cli tools, such as `pg_config`)
 - openssl-dev (make sure the libs are in `$PATH`)
 - cairo
+- redis
+- postgres
 
 ## Running the project locally
 
+- Ensure you have all system deps running (postgres, redis, etc)
 - Run `pipenv install` and `pipenv shell` to get the back-end requirements installed.
 - Run `yarn install` to get the front-end requirements inst alled.
 - Then run `./manage.py test` to make sure there is sanity.
@@ -45,6 +48,7 @@ DEBUG_PRINT_LOGGER=YES
 EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
 EMAIL_USE_TLS=NO
 GOOGLE_APPLICATION_CREDENTIALS=content_of_google_service_account_key_file
+REDIS_URL=redis://127.0.0.1:6379/
 ```
 
 - Run a build of the front-end assets: `yarn build`.
@@ -63,6 +67,31 @@ Want some fancy magic to reload your web page any time any front or backend asse
 Warning: this is fancy magic. I imagine it is fragile. -Dave
 
 ## Sharp edges
+
+### Caching
+
+#### Cache Key & Behavior
+
+Currently caching is implemented on a per-route-per-method-handler basis. As such, `/dashboard` caches
+based on what is assumed to be it's core usecase. With that thinking, the cache key is composed from:
+
+- the user object `public_id`
+- the request object `path`
+- the request object `query_string`
+
+Going forward it will be highly worthwhile to consolidate all caching in a
+middleware, and apply a consistent strategy across handlers/routes.
+
+#### TTL
+
+TTL is defaulted in the django cache configuration with an arbitrary value. Since each handler sets the
+key and TTL during the `cache.set()` call it is completely possible to set wildly different expirations.
+This could, on occasion, result in some wacky troubleshooting.
+
+#### Invalidation
+
+Currently there is not a centeralized mechanism to bust a redis cache. This should be implemented via a header
+(`X-Remark-Cache: bust`) or similar, and applied in a middleware.
 
 ### Known technical debt
 

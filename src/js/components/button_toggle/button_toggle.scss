@@ -1,118 +1,131 @@
 @import "css/base.scss";
 
-$toggle-thumb-size: 2.5rem;
+$toggle-thumb-size: 1.625rem;
 $toggle-box-shadow: 0 0 6px 0 $gray-8;
+$toggle-border-radius: 100px;
+$toggle-checked-background: $blue-7;
+$toggle-unchecked-background: $gray-3;
+$toggle-checked-color: $highlight-gray-3;
+$toggle-unchecked-color: $gray-6;
 
 .button-toggle {
-    display: inline-block;
     position: relative;
+    display: inline-block;
     cursor: pointer;
 
-    input {
-        position: absolute;
-        top: 0;
-        left: 0;
-        opacity: 0;
-        z-index: -1;
-    }
-
-    .toggle-tracks {
-        position: relative;
-        display: inline-block;
-        vertical-align: middle;
-        height: $toggle-thumb-size;
-        user-select: none;
-        border-radius: $border-radius-default;
-
-        &--checked {
-            background-color: $button-primary-bg-color;
-            color: $button-primary-text-color;
-
-            .toggle-thumb {
-                left: calc(100% - #{$toggle-thumb-size});
-            }
-
-            .toggle-button-checked {
-                visibility: visible;
-                line-height: $toggle-thumb-size;
-            }
-
-            .toggle-button-unchecked {
-                visibility: hidden;
-                line-height: 0;
-            }
-        }
-
-        &--unchecked {
-            background-color: $button-default-bg-color;
-            color: $button-default-text-color;
-
-            .toggle-thumb {
-                left: 0;
-            }
+    &:hover,
+    &:focus {
+        .button-toggle__thumb {
+            box-shadow: $toggle-box-shadow;
         }
     }
+}
 
-    .toggle-thumb {
-        position: absolute;
-        margin: 2px;
-        border-radius: $border-radius-default;
-        background-color: $white;
-        width: calc(#{$toggle-thumb-size} - 4px);
-        height: calc(#{$toggle-thumb-size} - 4px);
-        transition: left 0.1s cubic-bezier(0.4, 1, 0.75, 0.9);
+.button-toggle--checked {
+    .button-toggle__track {
+        color: $toggle-checked-color;
+        background-color: $toggle-checked-background;
     }
 
-    .toggle-button-checked {
-        visibility: hidden;
-        margin-left: $s4;
-        margin-right: $toggle-thumb-size + $s4;
-        line-height: 0;
+    .button-toggle__thumb {
+        left: calc(100% - #{$toggle-thumb-size});
     }
 
-    .toggle-button-unchecked {
-        visibility: visible;
-        margin-left: $toggle-thumb-size + $s4;
-        margin-right: $s4;
+    .button-toggle__checked {
         line-height: $toggle-thumb-size;
+        visibility: visible;
     }
 
-    .toggle-inner-label {
-        text-align: center;
-        font-size: $text-sm;
-    }
-
-    .toggle-outer-label {
-        margin-left: $s4;
-        user-select: none;
+    .button-toggle__unchecked {
+        line-height: 0;
+        visibility: hidden;
     }
 
     &:hover,
     &:focus {
-        .toggle-tracks {
-            &--checked {
-                background-color: lighten($button-primary-bg-color, 3%);
-            }
-
-            &--unchecked {
-                background-color: lighten($button-default-bg-color, 3%);
-            }
-        }
-
-        .toggle-thumb {
-            box-shadow: $toggle-box-shadow;
+        .button-toggle__track {
+            background-color: lighten($toggle-checked-background, 3%);
         }
     }
 
     &:active {
-        .toggle-tracks {
-            &--checked {
-                background-color: darken($button-primary-bg-color, 2%);
-            }
-
-            &--unchecked {
-                background-color: darken($button-default-bg-color, 2%);
-            }
+        .button-toggle__track {
+            background-color: darken($toggle-checked-background, 2%);
         }
     }
+}
+
+.button-toggle--unchecked {
+    .button-toggle__track {
+        color: $toggle-unchecked-color;
+        background-color: $toggle-unchecked-background;
+    }
+
+    .button-toggle__thumb {
+        left: 0;
+    }
+
+    &:hover,
+    &:focus {
+        .button-toggle__track {
+            background-color: lighten($toggle-unchecked-background, 3%);
+        }
+    }
+    &:active {
+        .button-toggle__track {
+            background-color: darken($toggle-unchecked-background, 2%);
+        }
+    }
+}
+
+.button-toggle__input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0;
+}
+
+.button-toggle__track {
+    position: relative;
+    display: inline-block;
+    height: $toggle-thumb-size;
+    vertical-align: middle;
+    border-radius: $toggle-border-radius;
+    user-select: none;
+}
+
+.button-toggle__thumb {
+    position: absolute;
+    width: calc(#{$toggle-thumb-size} - 8px);
+    height: calc(#{$toggle-thumb-size} - 8px);
+    margin: 4px;
+    background-color: $toggle-checked-color;
+    border-radius: 50%;
+    transition: left .1s cubic-bezier(.4, 1, .75, .9);
+}
+
+.button-toggle__checked {
+    margin-right: $toggle-thumb-size;
+    margin-left: $s2;
+    line-height: 0;
+    visibility: hidden;
+}
+
+.button-toggle__unchecked {
+    margin-right: $s2;
+    margin-left: $toggle-thumb-size;
+    line-height: $toggle-thumb-size;
+    visibility: visible;
+}
+
+.button-toggle__inner-label {
+    font-size: $text-xxs;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.button-toggle__outer-label {
+    margin-left: $s4;
+    user-select: none;
 }
