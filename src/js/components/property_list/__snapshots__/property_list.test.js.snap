@@ -1,2659 +1,548 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PropertyList renders correctly 1`] = `
-<PropertyList
-  onSelect={[Function]}
-  properties={
-    Array [
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 2,
-        "property_id": "pro_1prk0l2sdc0jv8dr",
-        "property_name": "Meridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 1,
-        "property_id": "pro_ojso5xourpuai2vs",
-        "property_name": "Beridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 2,
-        "property_id": "pro_fy9oyksyn2cbvop2",
-        "property_name": "Teridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 0,
-        "property_id": "pro_5p1zpema2mezfyu0",
-        "property_name": "Deridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 2,
-        "property_id": "pro_1aww0vi1utykrzt3",
-        "property_name": "Peridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 2,
-        "property_id": "pro_gmcmkdnapem2pwvc",
-        "property_name": "Leridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 1,
-        "property_id": "pro_r3izthx0760jgqh0",
-        "property_name": "Qeridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 1,
-        "property_id": "pro_i6uvh7d5lk0ux3sf",
-        "property_name": "Keridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 2,
-        "property_id": "pro_xr068tps5ero17ur",
-        "property_name": "Yeridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 2,
-        "property_id": "pro_uif27s7rpx8ewwx5",
-        "property_name": "Weridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-    ]
-  }
-  selectedProperties={Array []}
+<div
+  className="property-list"
 >
   <div
-    className="property-list"
+    className="property-list__row"
   >
     <div
-      className="property-list__row"
-      key="pro_1prk0l2sdc0jv8dr"
+      className="panel panel--default property-row"
     >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={2}
-        property_id="pro_1prk0l2sdc0jv8dr"
-        property_name="Meridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      <div
+        className="property-row__selector"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
       >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Meridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={2}
-            >
-              <div
-                className="property-status property-status--on-track"
-              >
-                ON TRACK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_ojso5xourpuai2vs"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={1}
-        property_id="pro_ojso5xourpuai2vs"
-        property_name="Beridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+        <div
+          className="property-row__image"
+          style={
+            Object {
+              "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
+            }
+          }
+        />
+        <div
+          className="property-row__selector-hover"
+        />
+        <div
+          className="property-row__tick"
+        />
+      </div>
+      <div
+        className="property-row__name"
       >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Beridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={1}
-            >
-              <div
-                className="property-status property-status--at-risk"
-              >
-                AT RISK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_fy9oyksyn2cbvop2"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={2}
-        property_id="pro_fy9oyksyn2cbvop2"
-        property_name="Teridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+        Meridian SLC
+      </div>
+      <div
+        className="property-row__address"
       >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Teridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={2}
-            >
-              <div
-                className="property-status property-status--on-track"
-              >
-                ON TRACK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_5p1zpema2mezfyu0"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={0}
-        property_id="pro_5p1zpema2mezfyu0"
-        property_name="Deridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+        123 4th Avenue, Seattle WA 98106
+      </div>
+      <div
+        className="property-row__link-container"
       >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
+        <a
+          className="property-row__link"
+          href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
         >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Deridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={0}
-            >
-              <div
-                className="property-status property-status--off-track"
-              >
-                OFF TRACK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_1aww0vi1utykrzt3"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={2}
-        property_id="pro_1aww0vi1utykrzt3"
-        property_name="Peridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+          View Property
+        </a>
+      </div>
+      <div
+        className="property-status property-status--on-track"
       >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Peridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={2}
-            >
-              <div
-                className="property-status property-status--on-track"
-              >
-                ON TRACK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_gmcmkdnapem2pwvc"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={2}
-        property_id="pro_gmcmkdnapem2pwvc"
-        property_name="Leridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-      >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Leridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={2}
-            >
-              <div
-                className="property-status property-status--on-track"
-              >
-                ON TRACK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_r3izthx0760jgqh0"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={1}
-        property_id="pro_r3izthx0760jgqh0"
-        property_name="Qeridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-      >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Qeridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={1}
-            >
-              <div
-                className="property-status property-status--at-risk"
-              >
-                AT RISK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_i6uvh7d5lk0ux3sf"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={1}
-        property_id="pro_i6uvh7d5lk0ux3sf"
-        property_name="Keridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-      >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Keridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={1}
-            >
-              <div
-                className="property-status property-status--at-risk"
-              >
-                AT RISK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_xr068tps5ero17ur"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={2}
-        property_id="pro_xr068tps5ero17ur"
-        property_name="Yeridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-      >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Yeridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={2}
-            >
-              <div
-                className="property-status property-status--on-track"
-              >
-                ON TRACK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_uif27s7rpx8ewwx5"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={2}
-        property_id="pro_uif27s7rpx8ewwx5"
-        property_name="Weridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-      >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Weridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={2}
-            >
-              <div
-                className="property-status property-status--on-track"
-              >
-                ON TRACK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
+        ON TRACK
+      </div>
     </div>
   </div>
-</PropertyList>
-`;
-
-exports[`PropertyList renders correctly 2`] = `
-<PropertyList
-  onSelect={[Function]}
-  properties={
-    Array [
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 2,
-        "property_id": "pro_1prk0l2sdc0jv8dr",
-        "property_name": "Meridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 1,
-        "property_id": "pro_ojso5xourpuai2vs",
-        "property_name": "Beridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 2,
-        "property_id": "pro_fy9oyksyn2cbvop2",
-        "property_name": "Teridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 0,
-        "property_id": "pro_5p1zpema2mezfyu0",
-        "property_name": "Deridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 2,
-        "property_id": "pro_1aww0vi1utykrzt3",
-        "property_name": "Peridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 2,
-        "property_id": "pro_gmcmkdnapem2pwvc",
-        "property_name": "Leridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 1,
-        "property_id": "pro_r3izthx0760jgqh0",
-        "property_name": "Qeridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 1,
-        "property_id": "pro_i6uvh7d5lk0ux3sf",
-        "property_name": "Keridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 2,
-        "property_id": "pro_xr068tps5ero17ur",
-        "property_name": "Yeridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 2,
-        "property_id": "pro_uif27s7rpx8ewwx5",
-        "property_name": "Weridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-    ]
-  }
-  selectedProperties={Array []}
->
   <div
-    className="property-list"
+    className="property-list__row"
   >
     <div
-      className="property-list__row"
-      key="pro_1prk0l2sdc0jv8dr"
+      className="panel panel--default property-row"
     >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={2}
-        property_id="pro_1prk0l2sdc0jv8dr"
-        property_name="Meridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      <div
+        className="property-row__selector"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
       >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Meridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={2}
-            >
-              <div
-                className="property-status property-status--on-track"
-              >
-                ON TRACK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_ojso5xourpuai2vs"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={1}
-        property_id="pro_ojso5xourpuai2vs"
-        property_name="Beridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+        <div
+          className="property-row__image"
+          style={
+            Object {
+              "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
+            }
+          }
+        />
+        <div
+          className="property-row__selector-hover"
+        />
+        <div
+          className="property-row__tick"
+        />
+      </div>
+      <div
+        className="property-row__name"
       >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Beridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={1}
-            >
-              <div
-                className="property-status property-status--at-risk"
-              >
-                AT RISK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_fy9oyksyn2cbvop2"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={2}
-        property_id="pro_fy9oyksyn2cbvop2"
-        property_name="Teridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+        Beridian SLC
+      </div>
+      <div
+        className="property-row__address"
       >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Teridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={2}
-            >
-              <div
-                className="property-status property-status--on-track"
-              >
-                ON TRACK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_5p1zpema2mezfyu0"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={0}
-        property_id="pro_5p1zpema2mezfyu0"
-        property_name="Deridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+        123 4th Avenue, Seattle WA 98106
+      </div>
+      <div
+        className="property-row__link-container"
       >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
+        <a
+          className="property-row__link"
+          href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
         >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Deridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={0}
-            >
-              <div
-                className="property-status property-status--off-track"
-              >
-                OFF TRACK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_1aww0vi1utykrzt3"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={2}
-        property_id="pro_1aww0vi1utykrzt3"
-        property_name="Peridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+          View Property
+        </a>
+      </div>
+      <div
+        className="property-status property-status--at-risk"
       >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Peridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={2}
-            >
-              <div
-                className="property-status property-status--on-track"
-              >
-                ON TRACK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_gmcmkdnapem2pwvc"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={2}
-        property_id="pro_gmcmkdnapem2pwvc"
-        property_name="Leridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-      >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Leridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={2}
-            >
-              <div
-                className="property-status property-status--on-track"
-              >
-                ON TRACK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_r3izthx0760jgqh0"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={1}
-        property_id="pro_r3izthx0760jgqh0"
-        property_name="Qeridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-      >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Qeridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={1}
-            >
-              <div
-                className="property-status property-status--at-risk"
-              >
-                AT RISK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_i6uvh7d5lk0ux3sf"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={1}
-        property_id="pro_i6uvh7d5lk0ux3sf"
-        property_name="Keridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-      >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Keridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={1}
-            >
-              <div
-                className="property-status property-status--at-risk"
-              >
-                AT RISK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_xr068tps5ero17ur"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={2}
-        property_id="pro_xr068tps5ero17ur"
-        property_name="Yeridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-      >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Yeridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={2}
-            >
-              <div
-                className="property-status property-status--on-track"
-              >
-                ON TRACK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_uif27s7rpx8ewwx5"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={2}
-        property_id="pro_uif27s7rpx8ewwx5"
-        property_name="Weridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-      >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Weridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={2}
-            >
-              <div
-                className="property-status property-status--on-track"
-              >
-                ON TRACK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
+        AT RISK
+      </div>
     </div>
   </div>
-</PropertyList>
-`;
-
-exports[`PropertyList renders correctly 3`] = `
-<PropertyList
-  onSelect={[Function]}
-  properties={
-    Array [
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 2,
-        "property_id": "pro_1prk0l2sdc0jv8dr",
-        "property_name": "Meridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 1,
-        "property_id": "pro_ojso5xourpuai2vs",
-        "property_name": "Beridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 2,
-        "property_id": "pro_fy9oyksyn2cbvop2",
-        "property_name": "Teridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 0,
-        "property_id": "pro_5p1zpema2mezfyu0",
-        "property_name": "Deridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 2,
-        "property_id": "pro_1aww0vi1utykrzt3",
-        "property_name": "Peridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 2,
-        "property_id": "pro_gmcmkdnapem2pwvc",
-        "property_name": "Leridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 1,
-        "property_id": "pro_r3izthx0760jgqh0",
-        "property_name": "Qeridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 1,
-        "property_id": "pro_i6uvh7d5lk0ux3sf",
-        "property_name": "Keridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 2,
-        "property_id": "pro_xr068tps5ero17ur",
-        "property_name": "Yeridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-      Object {
-        "address": "123 4th Avenue, Seattle WA 98106",
-        "image_url": "https://i.imgur.com/UEH4gfU.jpg",
-        "performance_rating": 2,
-        "property_id": "pro_uif27s7rpx8ewwx5",
-        "property_name": "Weridian SLC",
-        "url": "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
-      },
-    ]
-  }
-  selectedProperties={Array []}
->
   <div
-    className="property-list"
+    className="property-list__row"
   >
     <div
-      className="property-list__row"
-      key="pro_1prk0l2sdc0jv8dr"
+      className="panel panel--default property-row"
     >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={2}
-        property_id="pro_1prk0l2sdc0jv8dr"
-        property_name="Meridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      <div
+        className="property-row__selector"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
       >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Meridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={2}
-            >
-              <div
-                className="property-status property-status--on-track"
-              >
-                ON TRACK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_ojso5xourpuai2vs"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={1}
-        property_id="pro_ojso5xourpuai2vs"
-        property_name="Beridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+        <div
+          className="property-row__image"
+          style={
+            Object {
+              "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
+            }
+          }
+        />
+        <div
+          className="property-row__selector-hover"
+        />
+        <div
+          className="property-row__tick"
+        />
+      </div>
+      <div
+        className="property-row__name"
       >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Beridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={1}
-            >
-              <div
-                className="property-status property-status--at-risk"
-              >
-                AT RISK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_fy9oyksyn2cbvop2"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={2}
-        property_id="pro_fy9oyksyn2cbvop2"
-        property_name="Teridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+        Teridian SLC
+      </div>
+      <div
+        className="property-row__address"
       >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Teridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={2}
-            >
-              <div
-                className="property-status property-status--on-track"
-              >
-                ON TRACK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_5p1zpema2mezfyu0"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={0}
-        property_id="pro_5p1zpema2mezfyu0"
-        property_name="Deridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+        123 4th Avenue, Seattle WA 98106
+      </div>
+      <div
+        className="property-row__link-container"
       >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
+        <a
+          className="property-row__link"
+          href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
         >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Deridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={0}
-            >
-              <div
-                className="property-status property-status--off-track"
-              >
-                OFF TRACK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_1aww0vi1utykrzt3"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={2}
-        property_id="pro_1aww0vi1utykrzt3"
-        property_name="Peridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+          View Property
+        </a>
+      </div>
+      <div
+        className="property-status property-status--on-track"
       >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Peridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={2}
-            >
-              <div
-                className="property-status property-status--on-track"
-              >
-                ON TRACK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_gmcmkdnapem2pwvc"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={2}
-        property_id="pro_gmcmkdnapem2pwvc"
-        property_name="Leridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-      >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Leridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={2}
-            >
-              <div
-                className="property-status property-status--on-track"
-              >
-                ON TRACK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_r3izthx0760jgqh0"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={1}
-        property_id="pro_r3izthx0760jgqh0"
-        property_name="Qeridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-      >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Qeridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={1}
-            >
-              <div
-                className="property-status property-status--at-risk"
-              >
-                AT RISK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_i6uvh7d5lk0ux3sf"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={1}
-        property_id="pro_i6uvh7d5lk0ux3sf"
-        property_name="Keridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-      >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Keridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={1}
-            >
-              <div
-                className="property-status property-status--at-risk"
-              >
-                AT RISK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_xr068tps5ero17ur"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={2}
-        property_id="pro_xr068tps5ero17ur"
-        property_name="Yeridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-      >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Yeridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={2}
-            >
-              <div
-                className="property-status property-status--on-track"
-              >
-                ON TRACK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
-    </div>
-    <div
-      className="property-list__row"
-      key="pro_uif27s7rpx8ewwx5"
-    >
-      <PropertyRow
-        address="123 4th Avenue, Seattle WA 98106"
-        image_url="https://i.imgur.com/UEH4gfU.jpg"
-        onMouseImgEnter={[Function]}
-        onMouseImgLeave={[Function]}
-        onSelect={[Function]}
-        performance_rating={2}
-        property_id="pro_uif27s7rpx8ewwx5"
-        property_name="Weridian SLC"
-        selected={false}
-        selection_mode={false}
-        url="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-      >
-        <Panel
-          className="property-row"
-          component="div"
-          size="default"
-        >
-          <div
-            className="panel panel--default property-row"
-          >
-            <div
-              className="property-row__selector"
-              onClick={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <div
-                className="property-row__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
-                  }
-                }
-              />
-              <div
-                className="property-row__selector-hover"
-              />
-              <div
-                className="property-row__tick"
-              />
-            </div>
-            <div
-              className="property-row__name"
-            >
-              Weridian SLC
-            </div>
-            <div
-              className="property-row__address"
-            >
-              123 4th Avenue, Seattle WA 98106
-            </div>
-            <div
-              className="property-row__link-container"
-            >
-              <a
-                className="property-row__link"
-                href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
-              >
-                View Property
-              </a>
-            </div>
-            <PropertyStatus
-              performance_rating={2}
-            >
-              <div
-                className="property-status property-status--on-track"
-              >
-                ON TRACK
-              </div>
-            </PropertyStatus>
-          </div>
-        </Panel>
-      </PropertyRow>
+        ON TRACK
+      </div>
     </div>
   </div>
-</PropertyList>
+  <div
+    className="property-list__row"
+  >
+    <div
+      className="panel panel--default property-row"
+    >
+      <div
+        className="property-row__selector"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <div
+          className="property-row__image"
+          style={
+            Object {
+              "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
+            }
+          }
+        />
+        <div
+          className="property-row__selector-hover"
+        />
+        <div
+          className="property-row__tick"
+        />
+      </div>
+      <div
+        className="property-row__name"
+      >
+        Deridian SLC
+      </div>
+      <div
+        className="property-row__address"
+      >
+        123 4th Avenue, Seattle WA 98106
+      </div>
+      <div
+        className="property-row__link-container"
+      >
+        <a
+          className="property-row__link"
+          href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+        >
+          View Property
+        </a>
+      </div>
+      <div
+        className="property-status property-status--off-track"
+      >
+        OFF TRACK
+      </div>
+    </div>
+  </div>
+  <div
+    className="property-list__row"
+  >
+    <div
+      className="panel panel--default property-row"
+    >
+      <div
+        className="property-row__selector"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <div
+          className="property-row__image"
+          style={
+            Object {
+              "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
+            }
+          }
+        />
+        <div
+          className="property-row__selector-hover"
+        />
+        <div
+          className="property-row__tick"
+        />
+      </div>
+      <div
+        className="property-row__name"
+      >
+        Peridian SLC
+      </div>
+      <div
+        className="property-row__address"
+      >
+        123 4th Avenue, Seattle WA 98106
+      </div>
+      <div
+        className="property-row__link-container"
+      >
+        <a
+          className="property-row__link"
+          href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+        >
+          View Property
+        </a>
+      </div>
+      <div
+        className="property-status property-status--on-track"
+      >
+        ON TRACK
+      </div>
+    </div>
+  </div>
+  <div
+    className="property-list__row"
+  >
+    <div
+      className="panel panel--default property-row"
+    >
+      <div
+        className="property-row__selector"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <div
+          className="property-row__image"
+          style={
+            Object {
+              "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
+            }
+          }
+        />
+        <div
+          className="property-row__selector-hover"
+        />
+        <div
+          className="property-row__tick"
+        />
+      </div>
+      <div
+        className="property-row__name"
+      >
+        Leridian SLC
+      </div>
+      <div
+        className="property-row__address"
+      >
+        123 4th Avenue, Seattle WA 98106
+      </div>
+      <div
+        className="property-row__link-container"
+      >
+        <a
+          className="property-row__link"
+          href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+        >
+          View Property
+        </a>
+      </div>
+      <div
+        className="property-status property-status--on-track"
+      >
+        ON TRACK
+      </div>
+    </div>
+  </div>
+  <div
+    className="property-list__row"
+  >
+    <div
+      className="panel panel--default property-row"
+    >
+      <div
+        className="property-row__selector"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <div
+          className="property-row__image"
+          style={
+            Object {
+              "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
+            }
+          }
+        />
+        <div
+          className="property-row__selector-hover"
+        />
+        <div
+          className="property-row__tick"
+        />
+      </div>
+      <div
+        className="property-row__name"
+      >
+        Qeridian SLC
+      </div>
+      <div
+        className="property-row__address"
+      >
+        123 4th Avenue, Seattle WA 98106
+      </div>
+      <div
+        className="property-row__link-container"
+      >
+        <a
+          className="property-row__link"
+          href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+        >
+          View Property
+        </a>
+      </div>
+      <div
+        className="property-status property-status--at-risk"
+      >
+        AT RISK
+      </div>
+    </div>
+  </div>
+  <div
+    className="property-list__row"
+  >
+    <div
+      className="panel panel--default property-row"
+    >
+      <div
+        className="property-row__selector"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <div
+          className="property-row__image"
+          style={
+            Object {
+              "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
+            }
+          }
+        />
+        <div
+          className="property-row__selector-hover"
+        />
+        <div
+          className="property-row__tick"
+        />
+      </div>
+      <div
+        className="property-row__name"
+      >
+        Keridian SLC
+      </div>
+      <div
+        className="property-row__address"
+      >
+        123 4th Avenue, Seattle WA 98106
+      </div>
+      <div
+        className="property-row__link-container"
+      >
+        <a
+          className="property-row__link"
+          href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+        >
+          View Property
+        </a>
+      </div>
+      <div
+        className="property-status property-status--at-risk"
+      >
+        AT RISK
+      </div>
+    </div>
+  </div>
+  <div
+    className="property-list__row"
+  >
+    <div
+      className="panel panel--default property-row"
+    >
+      <div
+        className="property-row__selector"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <div
+          className="property-row__image"
+          style={
+            Object {
+              "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
+            }
+          }
+        />
+        <div
+          className="property-row__selector-hover"
+        />
+        <div
+          className="property-row__tick"
+        />
+      </div>
+      <div
+        className="property-row__name"
+      >
+        Yeridian SLC
+      </div>
+      <div
+        className="property-row__address"
+      >
+        123 4th Avenue, Seattle WA 98106
+      </div>
+      <div
+        className="property-row__link-container"
+      >
+        <a
+          className="property-row__link"
+          href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+        >
+          View Property
+        </a>
+      </div>
+      <div
+        className="property-status property-status--on-track"
+      >
+        ON TRACK
+      </div>
+    </div>
+  </div>
+  <div
+    className="property-list__row"
+  >
+    <div
+      className="panel panel--default property-row"
+    >
+      <div
+        className="property-row__selector"
+        onClick={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <div
+          className="property-row__image"
+          style={
+            Object {
+              "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
+            }
+          }
+        />
+        <div
+          className="property-row__selector-hover"
+        />
+        <div
+          className="property-row__tick"
+        />
+      </div>
+      <div
+        className="property-row__name"
+      >
+        Weridian SLC
+      </div>
+      <div
+        className="property-row__address"
+      >
+        123 4th Avenue, Seattle WA 98106
+      </div>
+      <div
+        className="property-row__link-container"
+      >
+        <a
+          className="property-row__link"
+          href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+        >
+          View Property
+        </a>
+      </div>
+      <div
+        className="property-status property-status--on-track"
+      >
+        ON TRACK
+      </div>
+    </div>
+  </div>
+</div>
 `;
