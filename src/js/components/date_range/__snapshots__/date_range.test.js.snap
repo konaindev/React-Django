@@ -594,6 +594,22 @@ exports[`DateRange renders opened 1`] = `
                       aria-disabled={false}
                       aria-label="Sun Jun 23 2019"
                       aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        23
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Mon Jun 24 2019"
+                      aria-selected={false}
                       className="date-range__day-wrapper today"
                       onClick={[Function]}
                       onKeyDown={[Function]}
@@ -602,22 +618,6 @@ exports[`DateRange renders opened 1`] = `
                     >
                       <div
                         className="date-range__day date-range__day--today"
-                      >
-                        23
-                      </div>
-                    </div>
-                    <div
-                      aria-disabled={true}
-                      aria-label="Mon Jun 24 2019"
-                      aria-selected={false}
-                      className="date-range__day-wrapper disabled"
-                      onClick={[Function]}
-                      onKeyDown={[Function]}
-                      role="gridcell"
-                      tabIndex={-1}
-                    >
-                      <div
-                        className="date-range__day date-range__day--disabled"
                       >
                         24
                       </div>
@@ -771,7 +771,7 @@ exports[`DateRange renders with dates 1`] = `
       <span
         className="date-range__value date-range__value--selecting"
       >
-        06/11/19
+        06/12/19
       </span>
       <span>
         to
@@ -779,7 +779,7 @@ exports[`DateRange renders with dates 1`] = `
       <span
         className="date-range__value"
       >
-        06/19/19
+        06/20/19
       </span>
     </div>
     <div
@@ -1124,14 +1124,14 @@ exports[`DateRange renders with dates 1`] = `
                       aria-disabled={false}
                       aria-label="Tue Jun 11 2019"
                       aria-selected={false}
-                      className="date-range__day-wrapper start date-range__day-wrapper--selected"
+                      className="date-range__day-wrapper "
                       onClick={[Function]}
                       onKeyDown={[Function]}
                       role="gridcell"
                       tabIndex={-1}
                     >
                       <div
-                        className="date-range__day date-range__day--start"
+                        className="date-range__day"
                       >
                         11
                       </div>
@@ -1140,14 +1140,14 @@ exports[`DateRange renders with dates 1`] = `
                       aria-disabled={false}
                       aria-label="Wed Jun 12 2019"
                       aria-selected={false}
-                      className="date-range__day-wrapper date-range__day-wrapper--selected"
+                      className="date-range__day-wrapper start date-range__day-wrapper--selected"
                       onClick={[Function]}
                       onKeyDown={[Function]}
                       role="gridcell"
                       tabIndex={-1}
                     >
                       <div
-                        className="date-range__day"
+                        className="date-range__day date-range__day--start"
                       >
                         12
                       </div>
@@ -1257,14 +1257,14 @@ exports[`DateRange renders with dates 1`] = `
                       aria-disabled={false}
                       aria-label="Wed Jun 19 2019"
                       aria-selected={false}
-                      className="date-range__day-wrapper end date-range__day-wrapper--selected"
+                      className="date-range__day-wrapper date-range__day-wrapper--selected"
                       onClick={[Function]}
                       onKeyDown={[Function]}
                       role="gridcell"
                       tabIndex={-1}
                     >
                       <div
-                        className="date-range__day date-range__day--end"
+                        className="date-range__day"
                       >
                         19
                       </div>
@@ -1273,14 +1273,14 @@ exports[`DateRange renders with dates 1`] = `
                       aria-disabled={false}
                       aria-label="Thu Jun 20 2019"
                       aria-selected={false}
-                      className="date-range__day-wrapper "
+                      className="date-range__day-wrapper end date-range__day-wrapper--selected"
                       onClick={[Function]}
                       onKeyDown={[Function]}
                       role="gridcell"
                       tabIndex={-1}
                     >
                       <div
-                        className="date-range__day"
+                        className="date-range__day date-range__day--end"
                       >
                         20
                       </div>
@@ -1326,6 +1326,22 @@ exports[`DateRange renders with dates 1`] = `
                       aria-disabled={false}
                       aria-label="Sun Jun 23 2019"
                       aria-selected={false}
+                      className="date-range__day-wrapper "
+                      onClick={[Function]}
+                      onKeyDown={[Function]}
+                      role="gridcell"
+                      tabIndex={-1}
+                    >
+                      <div
+                        className="date-range__day"
+                      >
+                        23
+                      </div>
+                    </div>
+                    <div
+                      aria-disabled={false}
+                      aria-label="Mon Jun 24 2019"
+                      aria-selected={false}
                       className="date-range__day-wrapper today"
                       onClick={[Function]}
                       onKeyDown={[Function]}
@@ -1334,22 +1350,6 @@ exports[`DateRange renders with dates 1`] = `
                     >
                       <div
                         className="date-range__day date-range__day--today"
-                      >
-                        23
-                      </div>
-                    </div>
-                    <div
-                      aria-disabled={true}
-                      aria-label="Mon Jun 24 2019"
-                      aria-selected={false}
-                      className="date-range__day-wrapper disabled"
-                      onClick={[Function]}
-                      onKeyDown={[Function]}
-                      role="gridcell"
-                      tabIndex={-1}
-                    >
-                      <div
-                        className="date-range__day date-range__day--disabled"
                       >
                         24
                       </div>

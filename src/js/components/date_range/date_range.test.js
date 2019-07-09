@@ -1,4 +1,5 @@
 import renderer from "react-test-renderer";
+import { parse } from "date-fns";
 
 import DateRange from "./index";
 
@@ -10,7 +11,7 @@ describe("DateRange", () => {
       constructor(...props) {
         super(...props);
         if (!props.length) {
-          return new Date(date);
+          return parse(date);
         }
       }
     };
@@ -33,8 +34,8 @@ describe("DateRange", () => {
   });
   it("renders with dates", () => {
     const props = {
-      startDate: new Date("2019-06-12"),
-      endDate: new Date("2019-06-20"),
+      startDate: parse("2019-06-12"),
+      endDate: parse("2019-06-20"),
       onChange: () => {}
     };
     mockDate("2019-06-24");

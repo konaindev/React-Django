@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { endOfWeek, startOfYear, startOfWeek, subWeeks } from "date-fns";
+import { endOfWeek, startOfYear, startOfWeek, subWeeks, parse } from "date-fns";
 
 import DateRange from "../date_range";
 import Select from "../select";
@@ -78,6 +78,8 @@ export default class DateRangeSelector extends React.PureComponent {
   };
 
   render() {
+    const startDate = parse(this.props.start_date);
+    const endDate = parse(this.props.end_date);
     return (
       <div className="date-range-selector">
         <Select
@@ -88,8 +90,8 @@ export default class DateRangeSelector extends React.PureComponent {
         />
         <DateRange
           className="date-range-selector__data-picker"
-          startDate={new Date(this.props.start_date)}
-          endDate={new Date(this.props.end_date)}
+          startDate={startDate}
+          endDate={endDate}
           onChange={this.onChangeDate}
         />
       </div>
