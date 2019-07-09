@@ -15,7 +15,7 @@ import "./baseline_report_page.scss";
 export default class BaselineReportPage extends Component {
   static propTypes = {
     report: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired,
+    user: PropTypes.object,
     project: PropTypes.object.isRequired
   };
 

@@ -110,6 +110,13 @@ export class DashboardPage extends React.PureComponent {
     states
   };
 
+  getHeaderItems() {
+    if (this.props.user) {
+      return <UserMenu {...this.props.user} />;
+    }
+    return null;
+  }
+
   render() {
     const className = cn("dashboard-content", {
       "dashboard-content--selection-mode": this.state.selectedProperties.length
@@ -117,7 +124,7 @@ export class DashboardPage extends React.PureComponent {
     const { user } = this.props;
     const PropertiesListComponent = this.propertiesListComponent;
     return (
-      <PageChrome headerItems={<UserMenu {...user} />}>
+      <PageChrome headerItems={this.getHeaderItems()}>
         <div className={className}>
           <Container>
             <div className="dashboard-content__title">

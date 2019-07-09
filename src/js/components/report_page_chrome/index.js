@@ -16,7 +16,7 @@ import "./report_page_chrome.scss";
 export default class ReportPageChrome extends Component {
   static propTypes = {
     project: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired,
+    user: PropTypes.object,
     current_report_name: PropTypes.string.isRequired,
     report_links: PropTypes.object.isRequired,
     share_info: PropTypes.object,

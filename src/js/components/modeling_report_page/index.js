@@ -6,7 +6,7 @@ import ModelingView from "../modeling_view";
 
 export default class ModelingReportPage extends Component {
   static propTypes = {
-    user: PropTypes.object.isRequired,
+    user: PropTypes.object,
     report: PropTypes.object.isRequired,
     project: PropTypes.object.isRequired
   };
