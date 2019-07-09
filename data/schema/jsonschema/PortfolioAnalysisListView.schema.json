@@ -46,11 +46,18 @@
                     "type": "string"
                 },
                 "properties": {
-                    "description": "List of properties",
-                    "items": {
-                        "$ref": "#/definitions/SingleProperty"
-                    },
-                    "type": "array"
+                    "anyOf": [
+                        {
+                            "items": {
+                                "$ref": "#/definitions/SingleProperty"
+                            },
+                            "type": "array"
+                        },
+                        {
+                            "type": "number"
+                        }
+                    ],
+                    "description": "List of properties or properties count"
                 },
                 "targets": {
                     "additionalProperties": true,
@@ -71,7 +78,6 @@
                 "image_url",
                 "kpis",
                 "name",
-                "properties",
                 "targets",
                 "type"
             ],
