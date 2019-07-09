@@ -43,6 +43,7 @@ celery = "*"
 redis = "*"
 cairosvg = "*"
 svgwrite = "*"
+django-redis = "*"
 django-admin-sortable2 = "*"
 
 [requires]
