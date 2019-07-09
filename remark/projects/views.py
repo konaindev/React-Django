@@ -125,11 +125,14 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
             raise Http404
         logger.info("ReportPageViewBase::get::after checking has_report_data")
 
+        user_menu = None
+        share_info = None
+
         if self.is_anonymous_view:
             report_links = ReportLinks.share_for_project(self.project)
             current_report_link = self.selector.get_share_link()
-            share_info = None
         else:
+            user_menu = request.user.get_menu_dict()
             report_links = ReportLinks.public_for_project(self.project)
             current_report_link = self.selector.get_link()
             share_info = self.selector.get_share_info(self.base_url())
@@ -137,7 +140,7 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
         logger.info("ReportPageViewBase::get::bottom")
 
         return self.render(
-            user=request.user.get_menu_dict(),
+            user=user_menu,
             report_links=report_links,
             current_report_link=current_report_link,
             project=self.project.to_jsonable(),
