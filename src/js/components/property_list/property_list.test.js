@@ -1,23 +1,11 @@
-import { mount } from "enzyme";
+import renderer from "react-test-renderer";
 
 import PropertyList from "./index";
 import { props } from "./props";
 
 describe("PropertyList", () => {
   it("renders correctly", () => {
-    const wrapper = mount(<PropertyList {...props} />);
-    expect(wrapper).toMatchSnapshot();
-
-    wrapper
-      .find(".property-row__selector")
-      .first()
-      .simulate("click");
-    expect(wrapper).toMatchSnapshot();
-
-    wrapper
-      .find(".property-row__selector")
-      .first()
-      .simulate("click");
-    expect(wrapper).toMatchSnapshot();
+    const tree = renderer.create(<PropertyList {...props} />);
+    expect(tree).toMatchSnapshot();
   });
 });
