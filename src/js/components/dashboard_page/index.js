@@ -20,7 +20,7 @@ import UserMenu from "../user_menu";
 
 import "./dashboard_page.scss";
 import { connect } from "react-redux";
-
+import router from "../../router";
 export class DashboardPage extends React.PureComponent {
   static propTypes = {
     properties: PropTypes.array.isRequired,
@@ -32,7 +32,6 @@ export class DashboardPage extends React.PureComponent {
     filters: PropTypes.object,
     onChangeFilter: PropTypes.func
   };
-
   static defaultProps = {
     selectedProperties: [],
     viewType: "tile",
@@ -59,6 +58,12 @@ export class DashboardPage extends React.PureComponent {
       isShowAddPropertyForm: false,
       isShowLoader: false
     };
+    this._router = router("/dashboard")(x =>
+      props.dispatch({
+        type: "API_DASHBOARD",
+        searchString: x
+      })
+    );
   }
 
   selectAll = () => {
@@ -68,6 +73,10 @@ export class DashboardPage extends React.PureComponent {
 
   cancelSelect = () => {
     this.setState({ selectedProperties: [] });
+  };
+
+  changeLoader = () => {
+    this.setState({ isShowLoader: false });
   };
 
   get propertiesListComponent() {
@@ -82,6 +91,8 @@ export class DashboardPage extends React.PureComponent {
     this.setState({ isShowLoader: true });
     setTimeout(() => {
       this.props.onChangeFilter(filters);
+      // the current method of managing loader state needs to change -jc 10-jul-19
+      this.changeLoader();
     }, 150);
   };
 
@@ -252,11 +263,16 @@ export class UrlQueryLayer extends React.PureComponent {
         }
       }
     });
-    window.location.search = urlParams.toString();
+
+    window.history.replaceState({}, "", `/dashboard?${urlParams.toString()}`);
+    this.props.dispatch({
+      type: "API_DASHBOARD",
+      searchString: `${urlParams.toString()}`
+    });
   };
 
   render() {
-    if (this.props.no_projects) {
+    if (this.props.no_projects || !this.props.properties) {
       return (
         <PageChrome>
           <div className="dashboard-content">

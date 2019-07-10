@@ -38,7 +38,8 @@ const pages = {
 const tmpFetchDashboardData = pageClass => {
   const location = window.location;
   const queryString = location.search;
-
+  console.log("fetching the data...i think");
+  let _newState = {};
   window
     .fetch(
       `${process.env.BASE_URL}/dashboard${
@@ -54,10 +55,13 @@ const tmpFetchDashboardData = pageClass => {
       }
     )
     .then(x => x.json())
-    .then(newState => store.dispatch(general.set(newState)))
+    .then(newState => {
+      store.dispatch(general.set(newState));
+      _newState = newState;
+    })
     .catch(e => console.log(e))
     .finally(() => {
-      renderApp(pageClass, { search_url: queryString });
+      renderApp(pageClass, _newState);
     });
 };
 /*
@@ -78,6 +82,7 @@ const renderApp = (pageClass, pageProps) => {
   const root = document.querySelector("#root");
   const page = React.createElement(pageClass, pageProps);
   const app = React.createElement(App, {}, page);
+
   ReactDOM.render(app, root);
 };
 
@@ -129,8 +134,7 @@ ready(() => {
       tmpFetchDashboardData(pageClass);
     } else {
       store.dispatch(general.set(getPageProps()));
-
-      renderApp(pageClass, {});
+      renderApp(pageClass, getPageProps());
     }
   }
 });
