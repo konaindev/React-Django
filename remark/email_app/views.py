@@ -15,6 +15,7 @@ class EmailTestPage(ContentView):
             "property_name": "El Cortez",
             "city": "Phoenix",
             "state": "AZ",
+            "campaign_goal_chart_url": "https://app.remarkably.io/charts/donut?goal=95&goal_date=2019-05-31&current=80&bg=20272e&bg_target=404e5c&bg_current=006eff",
             "campaign_health": 2,
             "campaign_insight": "You are doing great! Keep it up!",
             "lease_rate": {
@@ -30,7 +31,7 @@ class EmailTestPage(ContentView):
                 "insight": "Looking great!",
             },
             "worst_kpi": {
-                "name": "APPLICATIONS TO LEASE EXECUTIONS",
+                "name": "LEASE APPLICATIONS TO LEASE EXECUTIONS",
                 "value": "50%",
                 "target": "70%",
                 "prev_value": "40%",
@@ -62,6 +63,7 @@ class EmailTestPage(ContentView):
                 "name" : "Unique Site Visitors",
                 "model_percent" : "120%"
             },
+            "risk_insight": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque congue risus libero, vel cursus nibh porttitor nec.  Site Visitors",
             "low_1": {
                 "name" : "Applications",
                 "model_percent" : "150%"
@@ -73,6 +75,7 @@ class EmailTestPage(ContentView):
             "low_3": {
                 "name" : "Unique Site Visitors",
                 "model_percent" : "120%"
-            }
+            },
+            "low_insight": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque congue risus libero, vel cursus nibh porttitor nec.  Site Visitors",
         }
         return self.render("email/weekly_performance_report/index.html", **data)
