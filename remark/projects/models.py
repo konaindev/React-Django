@@ -130,7 +130,8 @@ class Project(models.Model):
         "crm.Business",
         on_delete=models.CASCADE,
         related_name="asset_manager",
-        blank=False,
+        blank=True,
+        null=True,
         limit_choices_to={"business_type": 2},
     )
 
@@ -138,7 +139,8 @@ class Project(models.Model):
         "crm.Business",
         on_delete=models.CASCADE,
         related_name="property_manager",
-        blank=False,
+        blank=True,
+        null=True,
         limit_choices_to={"business_type": 3},
     )
 
@@ -146,7 +148,8 @@ class Project(models.Model):
         "crm.Business",
         on_delete=models.CASCADE,
         related_name="property_owner",
-        blank=False,
+        blank=True,
+        null=True,
         limit_choices_to={"business_type": 1},
     )
 
