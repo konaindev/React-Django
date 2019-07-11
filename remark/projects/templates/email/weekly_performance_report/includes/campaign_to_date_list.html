@@ -130,7 +130,7 @@
       <![endif]-->
                   <!-- START 1 KPI -->
                   <!-- Start Badge Table -->
-{% if kpi_1 is None and kpi_2 is None and kpi_3 is None %}
+{% if not kpi_1 and not kpi_2 and not kpi_3 %}
   {% include "./campaign_to_date_no_kpis.html" with health=health only %}
   {% include "./campaign_to_date_list_break.html" %}
 {% endif %}
