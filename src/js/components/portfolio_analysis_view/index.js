@@ -10,6 +10,7 @@ import KPICard from "../kpi_card";
 import Select from "../select";
 import ShareToggle from "../share_toggle";
 import { formatPercent } from "../../utils/formatters";
+import UserMenu from "../user_menu";
 
 import "./portfolio_analysis_view.scss";
 
@@ -62,7 +63,8 @@ export class PortfolioAnalysisView extends React.PureComponent {
         value: PropTypes.string.isRequired
       })
     ).isRequired,
-    table_data: PropTypes.arrayOf(PropTypes.object).isRequired
+    table_data: PropTypes.arrayOf(PropTypes.object).isRequired,
+    user: PropTypes.object
   };
 
   static defaultProps = {
@@ -101,6 +103,13 @@ export class PortfolioAnalysisView extends React.PureComponent {
     );
   };
 
+  renderHeaderItems() {
+    if (this.props.user) {
+      return <UserMenu {...this.props.user} />;
+    }
+    return null;
+  }
+
   onChangeKpi = option => {
     this.props.onChange({
       selected_kpi_bundle: option.value,
@@ -128,7 +137,7 @@ export class PortfolioAnalysisView extends React.PureComponent {
       kpi_order
     } = this.props;
     return (
-      <PageChrome navLinks={navLinks}>
+      <PageChrome navLinks={navLinks} headerItems={this.renderHeaderItems()}>
         <Container className="portfolio-analysis">
           <div className="portfolio-analysis__header">
             <div className="portfolio-analysis__title">Portfolio Analysis</div>

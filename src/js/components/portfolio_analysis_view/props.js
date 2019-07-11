@@ -1,4 +1,5 @@
 import { props as tableProps } from "../portfolio_table/props";
+import { props as userProps } from "../user_menu/props";
 
 export const props = {
   share_info: {
@@ -6,7 +7,9 @@ export const props = {
     share_url: "http://app.remarkably.com/",
     update_endpoint: "/projects/pro_example/update/"
   },
+
   selected_kpi_bundle: "leasing_performance",
+
   kpi_bundles: [
     {
       name: "Leasing Performance",
@@ -54,5 +57,7 @@ export const props = {
     }
   ],
 
-  table_data: tableProps.properties
+  table_data: tableProps.properties,
+
+  user: userProps
 };
