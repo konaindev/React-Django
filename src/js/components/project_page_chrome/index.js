@@ -14,13 +14,20 @@ import "./project_page_chrome.scss";
  */
 export default class ProjectPageChrome extends Component {
   static propTypes = {
-    user: PropTypes.object.isRequired,
+    user: PropTypes.object,
     topItems: PropTypes.node,
     children: PropTypes.node.isRequired
   };
 
+  getHeaderItems() {
+    if (this.props.user) {
+      return <UserMenu {...this.props.user} />;
+    }
+    return null;
+  }
+
   render() {
-    const headerItems = <UserMenu {...this.props.user} />;
+    const headerItems = this.getHeaderItems();
 
     return (
       <PageChrome headerItems={headerItems} topItems={this.props.topItems}>

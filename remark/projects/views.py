@@ -56,6 +56,7 @@ class ProjectSingleMixin:
             shared_field = shared_fields_by_report.get(self.report_name)
             is_report_shared = getattr(self.project, shared_field, False)
             if not is_report_shared and (not user.is_authenticated):
+                logger.error(f"Project ID: {project_id} || is_report_shared: {is_report_shared} || user.is_authenticated: {user.is_authenticated}")
                 raise Http404
         except Exception:
             raise Http404
@@ -109,7 +110,13 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
 
     def get(self, request, project_id, *args, **kwargs):
         logger.info("ReportPageViewBase::get::top")
-        self.get_project(request, project_id)
+
+        try:
+            self.get_project(request, project_id)
+        except Exception as e:
+            logger.error(error_text(e))
+            raise Http404
+
         logger.info("ReportPageViewBase::get::after get_object_or_404")
 
         try:
@@ -125,11 +132,14 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
             raise Http404
         logger.info("ReportPageViewBase::get::after checking has_report_data")
 
+        user_menu = None
+        share_info = None
+
         if self.is_anonymous_view:
             report_links = ReportLinks.share_for_project(self.project)
             current_report_link = self.selector.get_share_link()
-            share_info = None
         else:
+            user_menu = request.user.get_menu_dict()
             report_links = ReportLinks.public_for_project(self.project)
             current_report_link = self.selector.get_link()
             share_info = self.selector.get_share_info(self.base_url())
@@ -137,7 +147,7 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
         logger.info("ReportPageViewBase::get::bottom")
 
         return self.render(
-            user=request.user.get_menu_dict(),
+            user=user_menu,
             report_links=report_links,
             current_report_link=current_report_link,
             project=self.project.to_jsonable(),

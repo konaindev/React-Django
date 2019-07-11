@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 
 export class CampaignPlanPage extends Component {
   static propTypes = {
-    user: PropTypes.object.isRequired,
+    user: PropTypes.object,
     report: PropTypes.object.isRequired,
     project: PropTypes.object.isRequired
   };
