@@ -17,7 +17,7 @@ class EmailTestPage(ContentView):
             "state": "AZ",
             "campaign_goal_chart_url": "https://app.remarkably.io/charts/donut?goal=95&goal_date=2019-05-31&current=80&bg=20272e&bg_target=404e5c&bg_current=006eff",
             "campaign_health": 2,
-            "campaign_insight": "You are doing great! Keep it up!",
+            "campaign_insight": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque congue risus libero, vel cursus nibh porttitor nec.",
             "lease_rate": {
                 "value" : "80%",
                 "target" : "79%",
@@ -28,7 +28,7 @@ class EmailTestPage(ContentView):
                 "target": "30%",
                 "prev_value": "30%",
                 "prev_target": "30%",
-                "insight": "Looking great!",
+                "insight": "Still well below campaign to-date target but excellent leasing team follow-up and on-property experience resulting in a surge of lease applications!",
             },
             "worst_kpi": {
                 "name": "LEASE APPLICATIONS TO LEASE EXECUTIONS",
@@ -36,7 +36,7 @@ class EmailTestPage(ContentView):
                 "target": "70%",
                 "prev_value": "40%",
                 "prev_target": "70%",
-                "insight": "Improving but still far below needed conversion rate",
+                "insight": "Lease Execution processing delays and/or unit ‘holds’ not being executed causing large swings in weekly performance. Currently calculating 6 APPs pending.",
             },
             "email": "info@remarkably.io",
             "top_1": {
@@ -63,7 +63,7 @@ class EmailTestPage(ContentView):
                 "name" : "Unique Site Visitors",
                 "model_percent" : "120%"
             },
-            "risk_insight": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque congue risus libero, vel cursus nibh porttitor nec.  Site Visitors",
+            "risk_insight": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque congue risus libero, vel cursus nibh porttitor nec.",
             "low_1": {
                 "name" : "Applications",
                 "model_percent" : "150%"
@@ -76,6 +76,6 @@ class EmailTestPage(ContentView):
                 "name" : "Unique Site Visitors",
                 "model_percent" : "120%"
             },
-            "low_insight": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque congue risus libero, vel cursus nibh porttitor nec.  Site Visitors",
+            "low_insight": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque congue risus libero, vel cursus nibh porttitor nec.",
         }
         return self.render("email/weekly_performance_report/index.html", **data)
