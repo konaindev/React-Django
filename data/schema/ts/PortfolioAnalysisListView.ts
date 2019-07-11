@@ -1,3 +1,4 @@
+import UserMenu from "./userMenu"
 import * as t from "./types";
 
 interface ShareInfo {
@@ -125,4 +126,7 @@ export interface PortfolioAnalysisListView {
 
   /** List of Properties. */
   table_data: Array<GroupProperty | IndividualProperty>;
+
+  /** Data of current user for user menu */
+  user: UserMenu;
 }
