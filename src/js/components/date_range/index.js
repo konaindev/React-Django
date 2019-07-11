@@ -47,37 +47,6 @@ export default class DateRange extends React.PureComponent {
     }
   }
 
-  renderInput = () => {
-    let startDate = this.props.dateFormat;
-    if (this.state.startDate) {
-      startDate = formatDateWithTokens(
-        this.state.startDate,
-        this.props.dateFormat
-      );
-    }
-    let endDate = this.props.dateFormat;
-    if (this.state.endDate) {
-      endDate = formatDateWithTokens(this.state.endDate, this.props.dateFormat);
-    }
-    const classNameFrom = cn("date-range__value", {
-      "date-range__value--selecting":
-        this.state.select === "from" && this.state.isOpen,
-      "date-range__value--placeholder": !this.state.startDate
-    });
-    const classNameTo = cn("date-range__value", {
-      "date-range__value--selecting":
-        this.state.select === "to" && this.state.isOpen,
-      "date-range__value--placeholder": !this.state.endDate
-    });
-    return (
-      <div className="date-range__input" onClick={this.showDayPicker}>
-        <span className={classNameFrom}>{startDate}</span>
-        <span>to</span>
-        <span className={classNameTo}>{endDate}</span>
-      </div>
-    );
-  };
-
   renderNavBar = ({ month, onPreviousClick, onNextClick }) => {
     const monthStr = formatDateWithTokens(month, "MMMM YYYY");
     return (
@@ -218,8 +187,52 @@ export default class DateRange extends React.PureComponent {
             }
           }}
           hideOnDayClick={false}
-          component={this.renderInput}
+          component={DateRangeInput}
+          inputProps={{
+            dateFormat: this.props.dateFormat,
+            startDate: this.state.startDate,
+            endDate: this.state.endDate,
+            select: this.state.select,
+            isOpen: this.state.isOpen,
+            showDayPicker: this.showDayPicker
+          }}
         />
+      </div>
+    );
+  }
+}
+
+class DateRangeInput extends React.PureComponent {
+  render() {
+    const {
+      dateFormat,
+      startDate,
+      endDate,
+      isOpen,
+      select,
+      showDayPicker
+    } = this.props;
+    let startDateStr = dateFormat;
+    if (startDate) {
+      startDateStr = formatDateWithTokens(startDate, dateFormat);
+    }
+    let endDateStr = dateFormat;
+    if (endDate) {
+      endDateStr = formatDateWithTokens(endDate, dateFormat);
+    }
+    const classNameFrom = cn("date-range__value", {
+      "date-range__value--selecting": select === "from" && isOpen,
+      "date-range__value--placeholder": !startDate
+    });
+    const classNameTo = cn("date-range__value", {
+      "date-range__value--selecting": select === "to" && isOpen,
+      "date-range__value--placeholder": !endDate
+    });
+    return (
+      <div className="date-range__input" onClick={showDayPicker}>
+        <span className={classNameFrom}>{startDateStr}</span>
+        <span>to</span>
+        <span className={classNameTo}>{endDateStr}</span>
       </div>
     );
   }
