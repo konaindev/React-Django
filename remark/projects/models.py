@@ -122,6 +122,8 @@ class Project(models.Model):
         max_length=255, help_text="The user-facing name of the project."
     )
 
+    property = models.OneToOneField("projects.Property", on_delete=models.CASCADE, blank=False)
+
     account = models.ForeignKey(
         "users.Account", on_delete=models.CASCADE, related_name="account", blank=False
     )
@@ -175,29 +177,6 @@ class Project(models.Model):
     # This is for the SendGrid recipients list.
     email_list_id = models.CharField(max_length=256, null=True, default=None)
 
-    # StdImageField works just like Django's own ImageField
-    # except that you can specify different sized variations.
-    building_logo = StdImageField(
-        blank=True,
-        default="",
-        upload_to=building_logo_media_path,
-        help_text="""Image of property logo<br/>Resized variants (180x180, 76x76) will also be created on Amazon S3.""",
-        variations={"regular": (180, 180), "thumbnail": (76, 76)},
-    )
-
-    building_image = StdImageField(
-        blank=True,
-        default="",
-        upload_to=building_image_media_path,
-        help_text="""Image of property building<br/>Resized variants (309x220, 180x180, 76x76) will also be created on Amazon S3.""",
-        variations={
-            "dashboard": (400, 400, True),
-            "landscape": (309, 220, True),
-            "regular": (180, 180, True),
-            "thumbnail": (76, 76, True),
-        },
-    )
-
     baseline_start = models.DateField(
         help_text="The first date, inclusive, for the baseline period."
     )
@@ -228,47 +207,6 @@ class Project(models.Model):
         # Ensure loaded data retains JSON object key ordering
         load_kwargs={"object_pairs_hook": collections.OrderedDict},
         help_text="Campaign Plan JSON data. Must conform to the schema defined in CampaignPlan.ts",
-    )
-
-    total_units = models.IntegerField(
-        null=True,
-        blank=True,
-        default=None,
-        help_text="The total number of units in this project/property.",
-    )
-
-    average_tenant_age = models.FloatField(
-        null=True,
-        blank=True,
-        default=None,
-        help_text="The average tenant age for this project/property.",
-    )
-
-    highest_monthly_rent = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
-        default=None,
-        null=True,
-        blank=True,
-        help_text="Highest rent tenants pay monthly. Applies for the duration of the project.",
-    )
-
-    average_monthly_rent = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
-        default=None,
-        null=True,
-        blank=True,
-        help_text="Average rent tenants pay monthly. Applies for the duration of the project.",
-    )
-
-    lowest_monthly_rent = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
-        default=None,
-        null=True,
-        blank=True,
-        help_text="Lowest rent tenants pay monthly. Applies for the duration of the project.",
     )
 
     is_baseline_report_public = models.BooleanField(
@@ -500,6 +438,85 @@ class Project(models.Model):
 
     def __str__(self):
         return "{} ({})".format(self.name, self.public_id)
+
+
+class Property(models.Model):
+    """
+    Property for project
+    """
+
+    property_id = models.AutoField(primary_key=True)
+
+    name = models.CharField(
+        max_length=255, help_text="The user-facing name of the project.", blank=False
+    )
+
+    average_tenant_age = models.IntegerField(
+        null=True,
+        blank=True,
+        default=0,
+        help_text="The average tenant age for this property.",
+    )
+
+    total_units = models.IntegerField(
+        blank=False,
+        default=0,
+        help_text="The total number of units in this property.",
+    )
+
+    highest_monthly_rent = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+        blank=False,
+        help_text="Highest rent tenants pay monthly. Applies for the duration of the project.",
+    )
+
+    average_monthly_rent = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+        blank=False,
+        help_text="Average rent tenants pay monthly. Applies for the duration of the project.",
+    )
+
+    lowest_monthly_rent = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+        blank=False,
+        help_text="Lowest rent tenants pay monthly. Applies for the duration of the project.",
+    )
+
+    geo_address = models.ForeignKey(
+        "geo.Address", on_delete=models.CASCADE, null=True, blank=False
+    )
+
+    # StdImageField works just like Django's own ImageField
+    # except that you can specify different sized variations.
+    building_logo = StdImageField(
+        blank=True,
+        default="",
+        upload_to=building_logo_media_path,
+        help_text="""Image of property logo<br/>Resized variants (180x180, 76x76) will also be created on Amazon S3.""",
+        variations={"regular": (180, 180), "thumbnail": (76, 76)},
+    )
+
+    building_image = StdImageField(
+        blank=True,
+        default="",
+        upload_to=building_image_media_path,
+        help_text="""Image of property building<br/>Resized variants (309x220, 180x180, 76x76) will also be created on Amazon S3.""",
+        variations={
+            "dashboard": (400, 400, True),
+            "landscape": (309, 220, True),
+            "regular": (180, 180, True),
+            "thumbnail": (76, 76, True),
+        },
+    )
+
+    def __str__(self):
+        return f"{self.name} | property"
 
 
 class SpreadsheetManager(models.Manager):
@@ -1095,7 +1112,7 @@ class Campaign(models.Model):
         except:
             pass
 
-    
+
     def save(self, *args, **kwargs):
         try:
             old = type(self).objects.get(pk=self.pk) if self.pk else None
