@@ -32,6 +32,14 @@ For back-end code, we use `flake8` to validate code, and `python black` to enfor
 - redis
 - postgres
 
+### Exceptions
+
+Remarkably uses a hosted exception tracking platform, currently Sentry.io,
+which you can run [locally](https://hub.docker.com/r/amd64/sentry) via docker.
+
+Sentry provides the ability to [add contextual data](https://docs.sentry.io/enriching-error-data/context/?platform=javascript#tagging-events) via tagging. This
+will enchance the debugging experience.
+
 ## Running the project locally
 
 - Ensure you have all system deps running (postgres, redis, etc)
@@ -49,6 +57,7 @@ EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
 EMAIL_USE_TLS=NO
 GOOGLE_APPLICATION_CREDENTIALS=content_of_google_service_account_key_file
 REDIS_URL=redis://127.0.0.1:6379/
+SENTRY_URL=https://<hash>@sentry.io/<path>
 ```
 
 - Run a build of the front-end assets: `yarn build`.
