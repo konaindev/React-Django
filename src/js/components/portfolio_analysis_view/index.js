@@ -122,7 +122,7 @@ export class PortfolioAnalysisView extends React.PureComponent {
   render() {
     const {
       navLinks,
-      share_info,
+      // share_info,
       date_selection,
       table_data,
       kpi_order
@@ -132,10 +132,10 @@ export class PortfolioAnalysisView extends React.PureComponent {
         <Container className="portfolio-analysis">
           <div className="portfolio-analysis__header">
             <div className="portfolio-analysis__title">Portfolio Analysis</div>
-            <ShareToggle
+            {/* <ShareToggle
               {...share_info}
               current_report_name="portfolio_analysis"
-            />
+            /> */}
           </div>
           <div className="portfolio-analysis__controls">
             <Select
