@@ -90,6 +90,8 @@ def create_html(
     topkpis,
     riskkpis,
     lowkpis,
+    riskkpitext,
+    lowkpitext,
     email,
 ):
     project_id = project.public_id
@@ -129,6 +131,8 @@ def create_html(
         "worst_kpi": top_kpi(
             worstkpi, this_week, prev_week, worstkpitext
         ),
+        "risk_kpi_text": riskkpitext,
+        "low_kpi_text": lowkpitext,
         "email": email,
     }
 
@@ -189,6 +193,8 @@ def send_performance_email(performance_email_id):
         perf_email.top_kpis,
         perf_email.risk_kpis,
         perf_email.low_kpis,
+        perf_email.risk_kpi_text,
+        perf_email.low_kpi_text,
         CONTACT_EMAIL,
     )
 

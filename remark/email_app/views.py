@@ -63,7 +63,7 @@ class EmailTestPage(ContentView):
                 "name" : "Unique Site Visitors",
                 "model_percent" : "120%"
             },
-            "risk_insight": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque congue risus libero, vel cursus nibh porttitor nec.",
+            "risk_kpi_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque congue risus libero, vel cursus nibh porttitor nec.",
             "low_1": {
                 "name" : "Applications",
                 "model_percent" : "150%"
@@ -76,6 +76,5 @@ class EmailTestPage(ContentView):
                 "name" : "Unique Site Visitors",
                 "model_percent" : "120%"
             },
-            "low_insight": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque congue risus libero, vel cursus nibh porttitor nec.",
         }
         return self.render("email/weekly_performance_report/index.html", **data)
