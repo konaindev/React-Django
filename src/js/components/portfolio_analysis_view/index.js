@@ -1,3 +1,4 @@
+import _isEqual from "lodash/isEqual";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -28,7 +29,7 @@ const navLinks = {
   selected_link: "portfolio-analysis"
 };
 
-export default class PortfolioAnalysisView extends React.PureComponent {
+export class PortfolioAnalysisView extends React.PureComponent {
   static propTypes = {
     navLinks: PropTypes.shape({
       links: PropTypes.arrayOf(
@@ -165,6 +166,23 @@ export default class PortfolioAnalysisView extends React.PureComponent {
           </div>
         </Container>
       </PageChrome>
+    );
+  }
+}
+
+export default class UrlQueryLayer extends React.PureComponent {
+  onChangeHandler = params => {
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set("b", params.selected_kpi_bundle);
+    urlParams.set("p", params.date_selection.preset);
+    urlParams.set("s", params.date_selection.start_date);
+    urlParams.set("e", params.date_selection.end_date);
+    window.location.search = urlParams.toString();
+  };
+
+  render() {
+    return (
+      <PortfolioAnalysisView {...this.props} onChange={this.onChangeHandler} />
     );
   }
 }
