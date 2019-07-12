@@ -14,13 +14,17 @@ class PortfolioTableView(PortfolioMixin, ReactView):
 
     def get(self, request):
 
-        bundle = request.get("b")
+        if "b" in request.GET:
+            bundle = request.GET["b"]
+        else:
+            bundle = "leasing_performance"
+
         bundle_data = LEASING_PERFORMANCE
         if bundle == "leasing_performance":
             bundle_data = LEASING_PERFORMANCE
-        elif bundle == "conversion_rates":
-            bundle_data = CONVERSION_RATES
-        elif bundle == "rentention_performance":
+        elif bundle == "campaign_investment":
+            bundle_data = CAMPAIGN_INVESTMENT
+        elif bundle == "retention_performance":
             bundle_data = RETENTION_PERFORMANCE
 
         standard_data = {
@@ -35,8 +39,8 @@ class PortfolioTableView(PortfolioMixin, ReactView):
                     "value": "leasing_performance"
                 },
                 {
-                    "name": "Conversion Rates",
-                    "value": "conversion_rates"
+                    "name": "Campaign Investment",
+                    "value": "campaign_investment"
                 },
                 {
                     "name": "Retention Performance",
@@ -45,650 +49,632 @@ class PortfolioTableView(PortfolioMixin, ReactView):
             ],
             "date_selection": {
                 "preset": "custom",
-                "start_date": "2019-05-01",
-                "end_date": "2019-06-01"
+                "start_date": "2019-06-01",
+                "end_date": "2019-06-07"
+            },
+            "user": {
+                "email": "test@remarkably.io",
+                "user_id": "peep_12345",
+                "account_id": "acc_12345",
+                "account_name": "Remarkably",
+                "logout_url": "/users/logout",
+                "profile_image_url": None
+                  #  "https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg"
             }
         }
         result = dict(**bundle_data, **standard_data)
 
-        return self.render(result)
+        return self.render(**result)
 
 
 
 LEASING_PERFORMANCE = {
-    "share_info": {
-        "shared": False,
-        "share_url": "http://app.remarkably.com/",
-        "update_endpoint": "/projects/pro_example/update/"
-    },
     "selected_kpi_bundle": "leasing_performance",
-    "kpi_bundles": [
-        {
-            "name": "Leasing Performance",
-            "value": "leasing_performance"
-        },
-        {
-            "name": "Conversion Rates",
-            "value": "conversion_rates"
-        },
-        {
-            "name": "Retention Performance",
-            "value": "retention_performance"
-        }
-    ],
-
-    "date_selection": {
-        "preset": "custom",
-        "start_date": "2019-04-15",
-        "end_date": "2019-04-22"
-    },
-
     "kpi_order": [
         {
             "label": "Lease Rate",
             "value": "lease_rate"
         },
         {
-            "label": "Occupancy Rate",
-            "value": "occupancy_rate"
-        },
-        {
-            "label": "CD Rate",
-            "value": "cd_rate"
-        },
-        {
-            "label": "Renewal Rate",
+            "label": "Retained Rate",
             "value": "renewal_rate"
+        },
+        {
+            "label": "Occupied Rate",
+            "value": "occupancy_rate"
         }
     ],
 
     "highlight_kpis": [
         {
-            "health": 0,
-            "name": "usv_inq",
-            "label": "USV → INQ",
-            "target": "0.07",
-            "value": "0.05"
+            "health": 2,
+            "name": "lease_rate",
+            "label": "Lease Rate",
+            "target": "75%",
+            "value": "79%"
         },
         {
             "health": 1,
-            "name": "inq_tou",
-            "label": "INQ → TOU",
-            "target": "0.25",
-            "value": "0.2"
+            "name": "renewal_rate",
+            "label": "Retained Rate",
+            "target": "21%",
+            "value": "17%"
         },
         {
             "health": 2,
-            "name": "tou_app",
-            "label": "TOU → APP",
-            "target": "0.5",
-            "value": "0.6"
+            "name": "occupancy_rate",
+            "label": "Occupied Rate",
+            "target": "69%",
+            "value": "75%"
         }
     ],
 
     "table_data": [
         {
             "type": "group",
-            "name": "West",
+            "name": "PNW Group",
             "image_url":
-                "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
+                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png",
             "kpis": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
+                "lease_rate": "70%",
+                "renewal_rate": "17%",
+                "occupancy_rate": "64%",
             },
             "targets": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
+                "lease_rate": "60%",
+                "renewal_rate": "13%",
+                "occupancy_rate": "46%",
             },
             "properties": [
                 {
-                    "name": "Building A",
-                    "address": "San Antonio, TX 78207",
+                    "name": "C Aire",
+                    "address": "Seattle, WA",
                     "image_url":
-                        "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+                        "https://g5-assets-cld-res.cloudinary.com/image/upload/q_auto,f_auto,fl_lossy/g5/g5-c-ibsddh6p-pillar-properties-client/g5-cl-55us94ubz-the-lyric-capitol-hill/uploads/apartments-for-rent-seattle-hero.jpg",
                     "health": 2,
                     "url": "/projects/pro_p5ekr6sr760axrnm/",
                     "kpis": {
-                        "lease_rate": 0.9,
-                        "occupancy_rate": 0.8,
-                        "cd_rate": 0.1,
-                        "renewal_rate": 0.5
+                        "lease_rate": "57%",
+                        "renewal_rate": "0%",
+                        "occupancy_rate": "52%",
                     },
                     "targets": {
-                        "lease_rate": 0.9,
-                        "occupancy_rate": 0.8,
-                        "cd_rate": 0.1,
-                        "renewal_rate": 0.5
+                        "lease_rate": "35%",
+                        "renewal_rate": "0%",
+                        "occupancy_rate": "23%",
                     }
                 },
                 {
-                    "name": "Building B",
-                    "address": "San Antonio, TX 78208",
+                    "name": "The Spoke",
+                    "address": "Portland, OR",
                     "image_url":
-                        "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+                        "https://res.cloudinary.com/sagacity/image/upload/c_crop,h_4557,w_4165,x_0,y_257/c_limit,dpr_auto,f_auto,fl_lossy,q_80,w_1080/1017-habitat-collective-on-4th_commzl.jpg",
+                    "health": 2,
+                    "url": "/projects/pro_p5ekr6sr760axrnm/",
+                    "kpis": {
+                        "lease_rate": "84%",
+                        "renewal_rate": "33%",
+                        "occupancy_rate": "76%",
+                    },
+                    "targets": {
+                        "lease_rate": "85%",
+                        "renewal_rate": "25%",
+                        "occupancy_rate": "69%",
+                    }
+                }
+            ]
+        },
+{
+            "type": "group",
+            "name": "PHX Group",
+            "image_url":
+                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png",
+            "kpis": {
+                "lease_rate": "87%",
+                "renewal_rate": "17%",
+                "occupancy_rate": "86%",
+            },
+            "targets": {
+                "lease_rate": "91%",
+                "renewal_rate": "29%",
+                "occupancy_rate": "91%",
+            },
+            "properties": [
+                {
+                    "name": "Phoenix Flats",
+                    "address": "Phoenix, AZ",
+                    "image_url":
+                        "https://1-aegir0-camdenliving-com45.s3.amazonaws.com/styles/_min-width___480px_/s3/community/camden-north-end/headers/camdennorthend201857copy.jpg?itok=MMgp28cs&timestamp=1549062957",
                     "health": 1,
                     "url": "/projects/pro_p5ekr6sr760axrnm/",
                     "kpis": {
-                        "lease_rate": 0.9,
-                        "occupancy_rate": 0.8,
-                        "cd_rate": 0.1,
-                        "renewal_rate": 0.5
+                        "lease_rate": "87%",
+                        "renewal_rate": "0%",
+                        "occupancy_rate": "86%",
                     },
                     "targets": {
-                        "lease_rate": 0.9,
-                        "occupancy_rate": 0.8,
-                        "cd_rate": 0.1,
-                        "renewal_rate": 0.5
+                        "lease_rate": "91%",
+                        "renewal_rate": "25%",
+                        "occupancy_rate": "92%",
                     }
                 },
                 {
-                    "name": "Building C",
-                    "address": "San Antonio, TX 78209",
+                    "name": "Henry Apartments",
+                    "address": "Phoenix, AZ",
                     "image_url":
-                        "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
-                    "health": 0,
+                        "https://g5-assets-cld-res.cloudinary.com/image/upload/q_auto,f_auto,fl_lossy/g5/g5-c-1t2d31r8-berkshire-communities/g5-cl-i2qo6kgi-roosevelt-square/uploads/berk-rooseveltsq-41-gallery.jpg",
+                    "health": 2,
                     "url": "/projects/pro_p5ekr6sr760axrnm/",
                     "kpis": {
-                        "lease_rate": 0.9,
-                        "occupancy_rate": 0.8,
-                        "cd_rate": 0.1,
-                        "renewal_rate": 0.5
+                        "lease_rate": "88%",
+                        "renewal_rate": "33%",
+                        "occupancy_rate": "87%",
                     },
                     "targets": {
-                        "lease_rate": 0.9,
-                        "occupancy_rate": 0.8,
-                        "cd_rate": 0.1,
-                        "renewal_rate": 0.5
+                        "lease_rate": "90%",
+                        "renewal_rate": "33%",
+                        "occupancy_rate": "90%",
                     }
                 }
             ]
         },
         {
-            "type": "individual",
-            "name": "Building A",
-            "address": "San Antonio, TX 78207",
-            "image_url":
-                "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
-            "health": 2,
-            "url": "/projects/pro_p5ekr6sr760axrnm/",
-            "kpis": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
-            },
-            "targets": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
-            }
-        },
-        {
             "type": "group",
             "name": "Remarkably National",
             "image_url":
-                "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
+                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/remarkably_national.png",
             "kpis": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
+                "lease_rate": "79%",
+                "renewal_rate": "26%",
+                "occupancy_rate": "81%",
             },
             "targets": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
+                "lease_rate": "",
+                "renewal_rate": "",
+                "occupancy_rate": "",
             }
         },
         {
             "type": "group",
             "name": "Portfolio Average",
             "image_url":
-                "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
+                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png",
             "properties": 11,
             "kpis": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
+                "lease_rate": "79%",
+                "renewal_rate": "17%",
+                "occupancy_rate": "75%",
             },
             "targets": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
+                "lease_rate": "75%",
+                "renewal_rate": "21%",
+                "occupancy_rate": "69%",
             }
         }
     ]
 }
 
-CONVERSION_RATES = {
-    "share_info": {
-        "shared": False,
-        "share_url": "http://app.remarkably.com/",
-        "update_endpoint": "/projects/pro_example/update/"
-    },
-    "selected_kpi_bundle": "leasing_performance",
-    "kpi_bundles": [
-        {
-            "name": "Leasing Performance",
-            "value": "leasing_performance"
-        },
-        {
-            "name": "Conversion Rates",
-            "value": "conversion_rates"
-        },
-        {
-            "name": "Retention Performance",
-            "value": "retention_performance"
-        }
-    ],
-
-    "date_selection": {
-        "preset": "custom",
-        "start_date": "2019-04-15",
-        "end_date": "2019-04-22"
-    },
-
+CAMPAIGN_INVESTMENT = {
+    "selected_kpi_bundle": "campaign_investment",
     "kpi_order": [
         {
-            "label": "Lease Rate",
-            "value": "lease_rate"
+            "label": "Campaign Investment",
+            "value": "investment"
         },
         {
-            "label": "Occupancy Rate",
-            "value": "occupancy_rate"
+            "label": "Est. Revenue Change",
+            "value": "est_revenue_change"
         },
         {
-            "label": "CD Rate",
-            "value": "cd_rate"
+            "label": "ROMI",
+            "value": "romi"
         },
         {
-            "label": "Renewal Rate",
-            "value": "renewal_rate"
+            "label": "Cost per EXE / Lowest Monthly Rent",
+            "value": "exe_rent_ratio"
         }
     ],
 
     "highlight_kpis": [
         {
-            "health": 0,
-            "name": "usv_inq",
-            "label": "USV → INQ",
-            "target": "0.07",
-            "value": "0.05"
+            "health": 2,
+            "name": "investment",
+            "label": "Campaign Investment",
+            "target": "$7,250.00",
+            "value": "$7,404.06"
         },
         {
             "health": 1,
-            "name": "inq_tou",
-            "label": "INQ → TOU",
-            "target": "0.25",
-            "value": "0.2"
+            "name": "est_revenue_change",
+            "label": "Est. Revenue Change",
+            "target": "$62,275.00",
+            "value": "$36,900.00"
         },
         {
-            "health": 2,
-            "name": "tou_app",
-            "label": "TOU → APP",
-            "target": "0.5",
-            "value": "0.6"
+            "health": 0,
+            "name": "romi",
+            "label": "ROMI",
+            "target": "11",
+            "value": "3"
+        },
+        {
+            "health": 1,
+            "name": "exe_rent_ratio",
+            "label": "Cost per EXE / Lowest Monthly Rent",
+            "target": "111%",
+            "value": "133%"
         }
     ],
 
     "table_data": [
         {
             "type": "group",
-            "name": "West",
+            "name": "PNW Group",
             "image_url":
-                "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
+                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png",
             "kpis": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
+                "investment": "$11,748.13",
+                "est_revenue_change": "$73,200.00",
+                "romi": "7",
+                "exe_rent_ratio": "197%"
             },
             "targets": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
+                "investment": "$11,300.00",
+                "est_revenue_change": "$93,050.00",
+                "romi": "10",
+                "exe_rent_ratio": "142%"
             },
             "properties": [
                 {
-                    "name": "Building A",
-                    "address": "San Antonio, TX 78207",
+                    "name": "C Aire",
+                    "address": "Seattle, WA",
                     "image_url":
-                        "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+                        "https://g5-assets-cld-res.cloudinary.com/image/upload/q_auto,f_auto,fl_lossy/g5/g5-c-ibsddh6p-pillar-properties-client/g5-cl-55us94ubz-the-lyric-capitol-hill/uploads/apartments-for-rent-seattle-hero.jpg",
                     "health": 2,
                     "url": "/projects/pro_p5ekr6sr760axrnm/",
                     "kpis": {
-                        "lease_rate": 0.9,
-                        "occupancy_rate": 0.8,
-                        "cd_rate": 0.1,
-                        "renewal_rate": 0.5
+                        "investment": "$8,063.75",
+                        "est_revenue_change": "$86,400.00",
+                        "romi": "11",
+                        "exe_rent_ratio": "156%"
                     },
                     "targets": {
-                        "lease_rate": 0.9,
-                        "occupancy_rate": 0.8,
-                        "cd_rate": 0.1,
-                        "renewal_rate": 0.5
+                        "investment": "$7,600.00",
+                        "est_revenue_change": "$117,700.00",
+                         "romi": "15",
+                         "exe_rent_ratio": "108%"
                     }
                 },
                 {
-                    "name": "Building B",
-                    "address": "San Antonio, TX 78208",
+                    "name": "The Spoke",
+                    "address": "Portland, OR",
                     "image_url":
-                        "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+                        "https://res.cloudinary.com/sagacity/image/upload/c_crop,h_4557,w_4165,x_0,y_257/c_limit,dpr_auto,f_auto,fl_lossy,q_80,w_1080/1017-habitat-collective-on-4th_commzl.jpg",
+                    "health": 2,
+                    "url": "/projects/pro_p5ekr6sr760axrnm/",
+                    "kpis": {
+                        "investment": "$15,432.50",
+                        "est_revenue_change": "$60,000.00",
+                        "romi": "4",
+                        "exe_rent_ratio": "239%"
+                    },
+                    "targets": {
+                        "investment": "$15,000.00",
+                        "est_revenue_change": "$68,400.00",
+                        "romi": "5",
+                        "exe_rent_ratio": "175%"
+                    }
+                }
+            ]
+        },
+{
+            "type": "group",
+            "name": "PHX Group",
+            "image_url":
+                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png",
+            "kpis": {
+                        "investment": " $3,060.00 ",
+                        "est_revenue_change": " $600.00 ",
+                        "romi": "-1",
+                        "exe_rent_ratio": "69%"
+                    },
+                    "targets": {
+                        "investment": " $3,200.00 ",
+                        "est_revenue_change": " $31,500.00 ",
+                        "romi": "11",
+                        "exe_rent_ratio": "80%"
+                    },
+            "properties": [
+                {
+                    "name": "Phoenix Flats",
+                    "address": "Phoenix, AZ",
+                    "image_url":
+                        "https://1-aegir0-camdenliving-com45.s3.amazonaws.com/styles/_min-width___480px_/s3/community/camden-north-end/headers/camdennorthend201857copy.jpg?itok=MMgp28cs&timestamp=1549062957",
                     "health": 1,
                     "url": "/projects/pro_p5ekr6sr760axrnm/",
                     "kpis": {
-                        "lease_rate": 0.9,
-                        "occupancy_rate": 0.8,
-                        "cd_rate": 0.1,
-                        "renewal_rate": 0.5
+                        "investment": " $2,140.00 ",
+                        "est_revenue_change": "- $10,200.00",
+                        "romi": "-5",
+                        "exe_rent_ratio": "60%"
                     },
                     "targets": {
-                        "lease_rate": 0.9,
-                        "occupancy_rate": 0.8,
-                        "cd_rate": 0.1,
-                        "renewal_rate": 0.5
+                        "investment": " $2,600.00 ",
+                        "est_revenue_change": " $44,300.00 ",
+                        "romi": "17",
+                        "exe_rent_ratio": "67%"
                     }
                 },
                 {
-                    "name": "Building C",
-                    "address": "San Antonio, TX 78209",
+                    "name": "Henry Apartments",
+                    "address": "Phoenix, AZ",
                     "image_url":
-                        "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
-                    "health": 0,
+                        "https://g5-assets-cld-res.cloudinary.com/image/upload/q_auto,f_auto,fl_lossy/g5/g5-c-1t2d31r8-berkshire-communities/g5-cl-i2qo6kgi-roosevelt-square/uploads/berk-rooseveltsq-41-gallery.jpg",
+                    "health": 2,
                     "url": "/projects/pro_p5ekr6sr760axrnm/",
                     "kpis": {
-                        "lease_rate": 0.9,
-                        "occupancy_rate": 0.8,
-                        "cd_rate": 0.1,
-                        "renewal_rate": 0.5
+                        "investment": " $3,980.00 ",
+                        "est_revenue_change": " $11,400.00 ",
+                        "romi": "3",
+                        "exe_rent_ratio": "78%"
                     },
                     "targets": {
-                        "lease_rate": 0.9,
-                        "occupancy_rate": 0.8,
-                        "cd_rate": 0.1,
-                        "renewal_rate": 0.5
+                        "investment": " $3,800.00 ",
+                        "est_revenue_change": " $18,700.00 ",
+                        "romi": "5",
+                        "exe_rent_ratio": "94%"
                     }
                 }
             ]
         },
         {
-            "type": "individual",
-            "name": "Building A",
-            "address": "San Antonio, TX 78207",
-            "image_url":
-                "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
-            "health": 2,
-            "url": "/projects/pro_p5ekr6sr760axrnm/",
-            "kpis": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
-            },
-            "targets": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
-            }
-        },
-        {
             "type": "group",
             "name": "Remarkably National",
             "image_url":
-                "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
+                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/remarkably_national.png",
             "kpis": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
-            },
-            "targets": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
-            }
+                        "investment": " $4,509.37 ",
+                        "est_revenue_change": " $44,900.00 ",
+                        "romi": "19",
+                        "exe_rent_ratio": "86%"
+                    },
+                    "targets": {
+                        "investment": "",
+                        "est_revenue_change": "",
+                        "romi": "5",
+                        "exe_rent_ratio": ""
+                    }
         },
         {
             "type": "group",
             "name": "Portfolio Average",
             "image_url":
-                "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
+                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png",
             "properties": 11,
             "kpis": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
-            },
-            "targets": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
-            }
+                        "investment": " $7,404.06 ",
+                        "est_revenue_change": " $36,900.00 ",
+                        "romi": "3",
+                        "exe_rent_ratio": "133%"
+                    },
+                    "targets": {
+                        "investment": " $7,250.00 ",
+                        "est_revenue_change": " $62,275.00 ",
+                        "romi": "11",
+                        "exe_rent_ratio": "111%"
+                    }
         }
     ]
 }
 
 RETENTION_PERFORMANCE = {
-    "share_info": {
-        "shared": False,
-        "share_url": "http://app.remarkably.com/",
-        "update_endpoint": "/projects/pro_example/update/"
-    },
-    "selected_kpi_bundle": "leasing_performance",
-    "kpi_bundles": [
-        {
-            "name": "Leasing Performance",
-            "value": "leasing_performance"
-        },
-        {
-            "name": "Conversion Rates",
-            "value": "conversion_rates"
-        },
-        {
-            "name": "Retention Performance",
-            "value": "retention_performance"
-        }
-    ],
-
-    "date_selection": {
-        "preset": "custom",
-        "start_date": "2019-04-15",
-        "end_date": "2019-04-22"
-    },
-
+    "selected_kpi_bundle": "retention_performance",
     "kpi_order": [
         {
-            "label": "Lease Rate",
-            "value": "lease_rate"
+            "label": "Move Ins",
+            "value": "move_ins"
         },
         {
-            "label": "Occupancy Rate",
-            "value": "occupancy_rate"
+            "label": "Move Outs",
+            "value": "move_outs"
         },
         {
-            "label": "CD Rate",
-            "value": "cd_rate"
+            "label": "Renewals",
+            "value": "renewals"
         },
         {
-            "label": "Renewal Rate",
-            "value": "renewal_rate"
+            "label": "Notices to Vacate",
+            "value": "vacation_notices"
         }
     ],
 
     "highlight_kpis": [
         {
-            "health": 0,
-            "name": "usv_inq",
-            "label": "USV → INQ",
-            "target": "0.07",
-            "value": "0.05"
+            "health": 1,
+            "name": "move_ins",
+            "label": "Move Ins",
+            "target": "5",
+            "value": "4"
         },
         {
             "health": 1,
-            "name": "inq_tou",
-            "label": "INQ → TOU",
-            "target": "0.25",
-            "value": "0.2"
+            "name": "move_outs",
+            "label": "Move Outs",
+            "target": "2",
+            "value": "3"
         },
         {
             "health": 2,
-            "name": "tou_app",
-            "label": "TOU → APP",
-            "target": "0.5",
-            "value": "0.6"
+            "name": "renewals",
+            "label": "Renewals",
+            "target": "0",
+            "value": "1"
+        },
+        {
+            "health": 2,
+            "name": "vacation_notices",
+            "label": "Notices to Vacate",
+            "target": "2",
+            "value": "2"
         }
     ],
 
     "table_data": [
         {
             "type": "group",
-            "name": "West",
+            "name": "PNW Group",
             "image_url":
-                "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
+                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png",
             "kpis": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
+                "move_ins": "2",
+                "move_outs": "1",
+                "renewals": "1",
+                "vacation_notices": "1"
             },
             "targets": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
+                "move_ins": "5",
+                "move_outs": "2",
+                "renewals": "1",
+                "vacation_notices": "2"
             },
             "properties": [
                 {
-                    "name": "Building A",
-                    "address": "San Antonio, TX 78207",
+                    "name": "C Aire",
+                    "address": "Seattle, WA",
                     "image_url":
-                        "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+                        "https://g5-assets-cld-res.cloudinary.com/image/upload/q_auto,f_auto,fl_lossy/g5/g5-c-ibsddh6p-pillar-properties-client/g5-cl-55us94ubz-the-lyric-capitol-hill/uploads/apartments-for-rent-seattle-hero.jpg",
                     "health": 2,
                     "url": "/projects/pro_p5ekr6sr760axrnm/",
                     "kpis": {
-                        "lease_rate": 0.9,
-                        "occupancy_rate": 0.8,
-                        "cd_rate": 0.1,
-                        "renewal_rate": 0.5
+                        "move_ins": "4",
+                        "move_outs": "0",
+                        "renewals": "0",
+                        "vacation_notices": "0"
                     },
                     "targets": {
-                        "lease_rate": 0.9,
-                        "occupancy_rate": 0.8,
-                        "cd_rate": 0.1,
-                        "renewal_rate": 0.5
+                        "move_ins": "5",
+                        "move_outs": "0",
+                        "renewals": "0",
+                        "vacation_notices": "0"
                     }
                 },
                 {
-                    "name": "Building B",
-                    "address": "San Antonio, TX 78208",
+                    "name": "The Spoke",
+                    "address": "Portland, OR",
                     "image_url":
-                        "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+                        "https://res.cloudinary.com/sagacity/image/upload/c_crop,h_4557,w_4165,x_0,y_257/c_limit,dpr_auto,f_auto,fl_lossy,q_80,w_1080/1017-habitat-collective-on-4th_commzl.jpg",
+                    "health": 2,
+                    "url": "/projects/pro_p5ekr6sr760axrnm/",
+                    "kpis": {
+                        "move_ins": 0,
+                        "move_outs": 1,
+                        "renewals": 1,
+                         "vacation_notices": 2
+                    },
+                    "targets": {
+                        "move_ins": 4,
+                        "move_outs": 3,
+                        "renewals": 1,
+                        "vacation_notices": 3
+                    }
+                }
+            ]
+        },
+{
+            "type": "group",
+            "name": "PHX Group",
+            "image_url":
+                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png",
+            "kpis": {
+                "move_ins": 7,
+                "move_outs": 5,
+                "renewals": 1,
+                "vacation_notices": 3
+            },
+            "targets": {
+                "move_ins": 5,
+                "move_outs": 2,
+                "renewals": "0",
+                "vacation_notices": 2
+            },
+            "properties": [
+                {
+                    "name": "Phoenix Flats",
+                    "address": "Phoenix, AZ",
+                    "image_url":
+                        "https://1-aegir0-camdenliving-com45.s3.amazonaws.com/styles/_min-width___480px_/s3/community/camden-north-end/headers/camdennorthend201857copy.jpg?itok=MMgp28cs&timestamp=1549062957",
                     "health": 1,
                     "url": "/projects/pro_p5ekr6sr760axrnm/",
                     "kpis": {
-                        "lease_rate": 0.9,
-                        "occupancy_rate": 0.8,
-                        "cd_rate": 0.1,
-                        "renewal_rate": 0.5
+                        "move_ins": 3,
+                        "move_outs": 5,
+                        "renewals": 0,
+                        "vacation_notices": 2
                     },
                     "targets": {
-                        "lease_rate": 0.9,
-                        "occupancy_rate": 0.8,
-                        "cd_rate": 0.1,
-                        "renewal_rate": 0.5
+                        "move_ins": 4,
+                        "move_outs": 2,
+                        "renewals": 2,
+                        "vacation_notices": 2
                     }
                 },
                 {
-                    "name": "Building C",
-                    "address": "San Antonio, TX 78209",
+                    "name": "Henry Apartments",
+                    "address": "Phoenix, AZ",
                     "image_url":
-                        "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
-                    "health": 0,
+                        "https://g5-assets-cld-res.cloudinary.com/image/upload/q_auto,f_auto,fl_lossy/g5/g5-c-1t2d31r8-berkshire-communities/g5-cl-i2qo6kgi-roosevelt-square/uploads/berk-rooseveltsq-41-gallery.jpg",
+                    "health": 2,
                     "url": "/projects/pro_p5ekr6sr760axrnm/",
                     "kpis": {
-                        "lease_rate": 0.9,
-                        "occupancy_rate": 0.8,
-                        "cd_rate": 0.1,
-                        "renewal_rate": 0.5
+                        "move_ins": 10,
+                        "move_outs": 4,
+                        "renewals": 2,
+                         "vacation_notices": 4
                     },
                     "targets": {
-                        "lease_rate": 0.9,
-                        "occupancy_rate": 0.8,
-                        "cd_rate": 0.1,
-                        "renewal_rate": 0.5
+                        "move_ins": 4,
+                        "move_outs": 2,
+                        "renewals": 1,
+                        "vacation_notices": 2
                     }
                 }
             ]
         },
         {
-            "type": "individual",
-            "name": "Building A",
-            "address": "San Antonio, TX 78207",
-            "image_url":
-                "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
-            "health": 2,
-            "url": "/projects/pro_p5ekr6sr760axrnm/",
-            "kpis": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
-            },
-            "targets": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
-            }
-        },
-        {
             "type": "group",
             "name": "Remarkably National",
             "image_url":
-                "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
+                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/remarkably_national.png",
             "kpis": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
+                "move_ins": 4,
+                "move_outs": 3,
+                "renewals": 3,
+                "vacation_notices": 3
             },
             "targets": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
+                "move_ins": "",
+                "move_outs": "",
+                "renewals": "",
+                "vacation_notices": ""
             }
         },
         {
             "type": "group",
             "name": "Portfolio Average",
             "image_url":
-                "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
-            "properties": 11,
+                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png",
+            "properties": 4,
             "kpis": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
+                "move_ins": 4,
+                "move_outs": 3,
+                "renewals": 1,
+                "vacation_notices": 2
             },
             "targets": {
-                "lease_rate": 0.9,
-                "occupancy_rate": 0.8,
-                "cd_rate": 0.1,
-                "renewal_rate": 0.5
+                "move_ins": 5,
+                "move_outs": 2,
+                "renewals": "0",
+                "vacation_notices": 2
             }
         }
     ]

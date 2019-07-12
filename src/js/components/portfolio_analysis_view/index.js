@@ -19,12 +19,12 @@ const navLinks = {
     {
       id: "portfolio",
       name: "Portfolio",
-      url: "http://app.remarkably.io/dashboard"
+      url: "/dashboard"
     },
     {
       id: "portfolio-analysis",
       name: "Portfolio Analysis",
-      url: "http://app.remarkably.io/portfolio-analysis"
+      url: "/portfolio/table"
     }
   ],
   selected_link: "portfolio-analysis"
@@ -94,9 +94,9 @@ export class PortfolioAnalysisView extends React.PureComponent {
         <KPICard
           className="portfolio-analysis__kpi-card"
           health={health}
-          value={formatPercent(value)}
+          value={value}
           name={label}
-          target={formatPercent(target)}
+          target={target}
           key={name}
         />
       )
