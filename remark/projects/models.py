@@ -128,7 +128,7 @@ class Project(models.Model):
 
     asset_manager = models.ForeignKey(
         "crm.Business",
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name="asset_manager",
         blank=True,
         null=True,
@@ -137,7 +137,7 @@ class Project(models.Model):
 
     property_manager = models.ForeignKey(
         "crm.Business",
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name="property_manager",
         blank=True,
         null=True,
@@ -146,7 +146,7 @@ class Project(models.Model):
 
     property_owner = models.ForeignKey(
         "crm.Business",
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name="property_owner",
         blank=True,
         null=True,
