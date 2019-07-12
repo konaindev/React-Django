@@ -22,6 +22,7 @@ import ReleaseNoteDetailsPage from "./components/release_note_details_page";
 import CampaignPlanPage from "./components/campaign_plan_page";
 import store from "./state/store";
 import { general } from "./state/actions";
+import PortfolioAnalysisView from "./components/portfolio_analysis_view";
 
 const pages = {
   BaselineReportPage,
@@ -32,7 +33,8 @@ const pages = {
   ProjectPage,
   ReleaseNotesPage,
   ReleaseNoteDetailsPage,
-  CampaignPlanPage
+  CampaignPlanPage,
+  PortfolioAnalysisView
 };
 
 const tmpFetchDashboardData = pageClass => {

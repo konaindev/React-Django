@@ -63,7 +63,7 @@
                     "type": "string"
                 },
                 "user": {
-                    "$ref": "#/definitions/User",
+                    "$ref": "#/definitions/default",
                     "description": "Current user"
                 }
             },
@@ -179,8 +179,8 @@
             ],
             "type": "object"
         },
-        "User": {
-            "description": "User structure",
+        "default": {
+            "description": "User structure for user menu",
             "properties": {
                 "account_id": {
                     "description": "The account id",

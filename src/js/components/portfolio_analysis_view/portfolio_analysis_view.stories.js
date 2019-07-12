@@ -3,7 +3,7 @@ import { withState } from "@dump247/storybook-state";
 import { action } from "@storybook/addon-actions";
 import { storiesOf } from "@storybook/react";
 
-import PortfolioAnalysisView from "./index";
+import { PortfolioAnalysisView } from "./index";
 import { props } from "./props";
 
 const initState = {
