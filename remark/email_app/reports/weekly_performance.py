@@ -6,6 +6,7 @@ from django.template.loader import get_template
 from remark.lib.stats import health_check
 from remark.projects.reports.performance import PerformanceReport, InvalidReportRequest
 from remark.email_app.models import PerformanceEmail
+from remark.projects.models import TargetPeriod
 
 from .constants import (
     SELECTORS,
@@ -13,6 +14,7 @@ from .constants import (
     SHOW_CAMPAIGN,
     KPI_NAMES,
     percent_formatter,
+    percent_formatter_no_suffix,
 )
 from remark.lib.sendgrid_email import (
     create_contact_if_not_exists,
@@ -63,10 +65,7 @@ def list_kpi(kpi_key, campaign):
     campaign_value = selector(campaign)
     campaign_target = selector(campaign["targets"])
     model_percent = float(campaign_value) / float(campaign_target)
-    return {
-        "name": title,
-        "model_percent": percent_formatter(model_percent)
-    }
+    return {"name": title, "model_percent": percent_formatter(model_percent)}
 
 
 def create_list_kpi(result, campaign, prefix, kpis):
@@ -75,6 +74,28 @@ def create_list_kpi(result, campaign, prefix, kpis):
         result[f"{prefix}_2"] = list_kpi(kpis[1], campaign)
     if len(kpis) > 2:
         result[f"{prefix}_3"] = list_kpi(kpis[2], campaign)
+
+
+def campaign_goal_chart_url(project, this_week):
+    selector = SELECTORS["lease_rate"]
+    formatter = percent_formatter_no_suffix
+
+    target_period = (
+        TargetPeriod.objects.filter(project=project).order_by("start").first()
+    )
+    goal_date = target_period.end
+    goal = formatter(target_period.target_leased_rate)
+    current = formatter(selector(this_week))
+
+    return (
+        "https://app.remarkably.io/charts/donut"
+        + f"?goal={goal}"
+        + f"&goal_date={goal_date}"
+        + f"&current={current}"
+        + "&bg=20272e"
+        + "&bg_target=404e5c"
+        + "&bg_current=006eff"
+    )
 
 
 def create_html(
@@ -125,15 +146,12 @@ def create_html(
         "campaign_health": int(health),
         "campaign_insight": leaseratetext,
         "lease_rate": top_kpi("lease_rate", this_week),
-        "best_kpi": top_kpi(
-            bestkpi, this_week, prev_week, bestkpitext
-        ),
-        "worst_kpi": top_kpi(
-            worstkpi, this_week, prev_week, worstkpitext
-        ),
+        "best_kpi": top_kpi(bestkpi, this_week, prev_week, bestkpitext),
+        "worst_kpi": top_kpi(worstkpi, this_week, prev_week, worstkpitext),
         "risk_kpi_text": riskkpitext,
         "low_kpi_text": lowkpitext,
         "email": email,
+        "campaign_goal_chart_url": campaign_goal_chart_url(project, this_week),
     }
 
     create_list_kpi(template_vars, campaign_to_date, "top", topkpis)
@@ -147,6 +165,7 @@ def create_html(
 
 CONTACT_EMAIL = "info@remarkably.io"
 SENDER_ID = 482157
+
 
 @shared_task
 def send_performance_email(performance_email_id):

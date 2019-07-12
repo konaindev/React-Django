@@ -4,7 +4,10 @@ def int_formatter(value):
 def percent_formatter_2(value):
     return percent_formatter(value, digits=2)
 
-def percent_formatter(value, digits=0):
+def percent_formatter_no_suffix(value):
+    return percent_formatter(value, digits=0, suffix=False)
+
+def percent_formatter(value, digits=0, suffix=True):
     initial = float(value) * 100.0
     if digits == 1:
         final = "{:.1f}".format(initial)
@@ -12,7 +15,7 @@ def percent_formatter(value, digits=0):
         final = "{:.0f}".format(initial)
     else:
         final = "{:.2f}".format(initial)
-    return final + "%"
+    return final + ("%" if suffix else "")
 
 def currency_formatter(value):
     initial = float(value)
