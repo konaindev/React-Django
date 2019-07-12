@@ -46,6 +46,8 @@ svgwrite = "*"
 django-redis = "*"
 django-admin-sortable2 = "*"
 sentry-sdk = "*"
+graphkit = "*"
+
 [requires]
 python_version = "3.7"
 

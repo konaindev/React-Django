@@ -1,6 +1,6 @@
 import renderer from "react-test-renderer";
 
-import PortfolioAnalysisView from "./index";
+import { PortfolioAnalysisView } from "./index";
 import { props } from "./props";
 
 describe("PortfolioAnalysisView", () => {
