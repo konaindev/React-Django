@@ -20,6 +20,22 @@ import UserMenu from "../user_menu";
 
 import "./dashboard_page.scss";
 
+const navLinks = {
+  links: [
+    {
+      id: "portfolio",
+      name: "Portfolio",
+      url: "/dashboard"
+    },
+    {
+      id: "portfolio-analysis",
+      name: "Portfolio Analysis",
+      url: "/portfolio/table"
+    }
+  ],
+  selected_link: "portfolio"
+};
+
 export class DashboardPage extends React.PureComponent {
   static propTypes = {
     properties: PropTypes.array.isRequired,
@@ -36,7 +52,8 @@ export class DashboardPage extends React.PureComponent {
     selectedProperties: [],
     viewType: "tile",
     filters: {},
-    onChangeFilter: () => {}
+    onChangeFilter: () => {},
+    navLinks: navLinks
   };
 
   static buttonOptions = [
@@ -123,8 +140,10 @@ export class DashboardPage extends React.PureComponent {
     });
     const { user } = this.props;
     const PropertiesListComponent = this.propertiesListComponent;
+    const navLinks =
+      user.email.indexOf("remarkably.io") > -1 ? this.props.navLinks : null;
     return (
-      <PageChrome headerItems={this.getHeaderItems()}>
+      <PageChrome navLinks={navLinks} headerItems={this.getHeaderItems()}>
         <div className={className}>
           <Container>
             <div className="dashboard-content__title">
