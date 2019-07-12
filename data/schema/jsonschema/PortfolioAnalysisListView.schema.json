@@ -263,6 +263,10 @@
                         ]
                     },
                     "type": "array"
+                },
+                "user": {
+                    "$ref": "#/definitions/default",
+                    "description": "Data of current user for user menu"
                 }
             },
             "required": [
@@ -272,7 +276,8 @@
                 "kpi_order",
                 "selected_kpi_bundle",
                 "share_info",
-                "table_data"
+                "table_data",
+                "user"
             ],
             "type": "object"
         },
@@ -349,6 +354,39 @@
                 "name",
                 "targets",
                 "url"
+            ],
+            "type": "object"
+        },
+        "default": {
+            "description": "User structure for user menu",
+            "properties": {
+                "account_id": {
+                    "description": "The account id",
+                    "type": "string"
+                },
+                "account_name": {
+                    "description": "The account name",
+                    "type": "string"
+                },
+                "email": {
+                    "description": "The user email",
+                    "type": "string"
+                },
+                "logout_url": {
+                    "description": "The user email",
+                    "type": "string"
+                },
+                "user_id": {
+                    "description": "The user public id",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "account_id",
+                "account_name",
+                "email",
+                "logout_url",
+                "user_id"
             ],
             "type": "object"
         }

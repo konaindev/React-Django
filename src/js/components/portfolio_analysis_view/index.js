@@ -1,3 +1,4 @@
+import _isEqual from "lodash/isEqual";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -9,6 +10,7 @@ import KPICard from "../kpi_card";
 import Select from "../select";
 import ShareToggle from "../share_toggle";
 import { formatPercent } from "../../utils/formatters";
+import UserMenu from "../user_menu";
 
 import "./portfolio_analysis_view.scss";
 
@@ -28,7 +30,7 @@ const navLinks = {
   selected_link: "portfolio-analysis"
 };
 
-export default class PortfolioAnalysisView extends React.PureComponent {
+export class PortfolioAnalysisView extends React.PureComponent {
   static propTypes = {
     navLinks: PropTypes.shape({
       links: PropTypes.arrayOf(
@@ -61,7 +63,8 @@ export default class PortfolioAnalysisView extends React.PureComponent {
         value: PropTypes.string.isRequired
       })
     ).isRequired,
-    table_data: PropTypes.arrayOf(PropTypes.object).isRequired
+    table_data: PropTypes.arrayOf(PropTypes.object).isRequired,
+    user: PropTypes.object
   };
 
   static defaultProps = {
@@ -100,6 +103,13 @@ export default class PortfolioAnalysisView extends React.PureComponent {
     );
   };
 
+  renderHeaderItems() {
+    if (this.props.user) {
+      return <UserMenu {...this.props.user} />;
+    }
+    return null;
+  }
+
   onChangeKpi = option => {
     this.props.onChange({
       selected_kpi_bundle: option.value,
@@ -121,20 +131,20 @@ export default class PortfolioAnalysisView extends React.PureComponent {
   render() {
     const {
       navLinks,
-      share_info,
+      // share_info,
       date_selection,
       table_data,
       kpi_order
     } = this.props;
     return (
-      <PageChrome navLinks={navLinks}>
+      <PageChrome navLinks={navLinks} headerItems={this.renderHeaderItems()}>
         <Container className="portfolio-analysis">
           <div className="portfolio-analysis__header">
             <div className="portfolio-analysis__title">Portfolio Analysis</div>
-            <ShareToggle
+            {/* <ShareToggle
               {...share_info}
               current_report_name="portfolio_analysis"
-            />
+            /> */}
           </div>
           <div className="portfolio-analysis__controls">
             <Select
@@ -165,6 +175,23 @@ export default class PortfolioAnalysisView extends React.PureComponent {
           </div>
         </Container>
       </PageChrome>
+    );
+  }
+}
+
+export default class UrlQueryLayer extends React.PureComponent {
+  onChangeHandler = params => {
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set("b", params.selected_kpi_bundle);
+    urlParams.set("p", params.date_selection.preset);
+    urlParams.set("s", params.date_selection.start_date);
+    urlParams.set("e", params.date_selection.end_date);
+    window.location.search = urlParams.toString();
+  };
+
+  render() {
+    return (
+      <PortfolioAnalysisView {...this.props} onChange={this.onChangeHandler} />
     );
   }
 }

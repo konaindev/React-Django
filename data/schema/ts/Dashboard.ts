@@ -1,3 +1,5 @@
+import UserMenu from "./userMenu"
+
 /** Dashboard is a page with a list of properties and filter by them */
 export interface Dashboard {
   /** The List of user properties */
@@ -16,7 +18,7 @@ export interface Dashboard {
   funds: Array<Fund>;
 
   /** Current user */
-  user: User;
+  user: UserMenu;
 
   /** The request URL */
   search_url: string;
@@ -84,22 +86,4 @@ interface Fund {
 
   /** The Fund name */
   label: string;
-}
-
-/** User structure */
-interface User {
-  /** The user email */
-  email: string;
-
-  /** The user public id */
-  user_id: string;
-
-  /** The account id */
-  account_id: string;
-
-  /** The account name */
-  account_name: string;
-
-  /** The user email */
-  logout_url: string;
 }
