@@ -112,14 +112,15 @@ def create_html(
         # create_html. would be good to check in a django Form, for instance.
         raise e
 
+    address = project.property.geo_address
     template_vars = {
         "report_url": f"https://app.remarkably.io/projects/{project_id}/performance/last-week/",
         "start_date": start.strftime("%m/%d/%Y"),
         "end_date": human_end.strftime("%m/%d/%Y"),
         "client": client,
         "property_name": project.name,
-        "city": project.address.city,
-        "state": project.address.state,
+        "city": address.city,
+        "state": address.state,
         "campaign_health": int(health),
         "campaign_insight": leaseratetext,
         "lease_rate": top_kpi("lease_rate", this_week),

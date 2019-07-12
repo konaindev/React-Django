@@ -235,10 +235,11 @@ class CommonReport(ReportBase):
             flat_delta_values = self.delta.get_values()
             deltas = unflatten_optional(SCHEMA_MAP, flat_delta_values)
 
+        address = self.project.property.geo_address
         return dict(
             dates=dates,
             property_name=self.project.name,
-            address=self.project.address.to_jsonable() if self.project.address is not None else None,
+            address=address.to_jsonable(),
             **property_report,
             targets=targets,
             four_week_funnel_averages=four_week_funnel_averages,

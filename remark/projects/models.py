@@ -46,7 +46,7 @@ def spreadsheet_public_id():
     return public_id("spreadsheet2")
 
 
-def building_logo_media_path(project, filename):
+def building_logo_media_path(property, filename):
     """
     Given a Project instance, and the filename as supplied during upload,
     determine where the uploaded building logo should actually be placed.
@@ -63,13 +63,13 @@ def building_logo_media_path(project, filename):
     """
     _, extension = os.path.splitext(filename)
     random_str = get_random_string(length=7)
-    return f"project/{project.public_id}/building_logo_{random_str}{extension}"
+    return f"property/{property.id}/building_logo_{random_str}{extension}"
 
 
-def building_image_media_path(project, filename):
+def building_image_media_path(property, filename):
     _, extension = os.path.splitext(filename)
     random_str = get_random_string(length=7)
-    return f"project/{project.public_id}/building_image_{random_str}{extension}"
+    return f"property/{property.id}/building_image_{random_str}{extension}"
 
 
 def spreadsheet_media_path(spreadsheet, filename):
@@ -350,11 +350,12 @@ class Project(models.Model):
         """
         Return building logo's S3 resource urls for all variants
         """
-        if self.building_logo:
+        property = self.property
+        if property.building_logo:
             return [
-                self.building_logo.url,
-                self.building_logo.regular.url,
-                self.building_logo.thumbnail.url,
+                property.building_logo.url,
+                property.building_logo.regular.url,
+                property.building_logo.thumbnail.url,
             ]
         else:
             return None
@@ -363,19 +364,21 @@ class Project(models.Model):
         """
         Return building image's S3 resource urls for all variants
         """
-        if self.building_image:
+        property = self.property
+        if property.building_image:
             return [
-                self.building_image.url,
-                self.building_image.landscape.url,
-                self.building_image.regular.url,
-                self.building_image.thumbnail.url,
+                property.building_image.url,
+                property.building_image.landscape.url,
+                property.building_image.regular.url,
+                property.building_image.thumbnail.url,
             ]
         else:
             return None
 
     def get_building_image_url(self):
-        if self.building_image:
-            return self.building_image.dashboard.url
+        property = self.property
+        if property.building_image:
+            return property.building_image.dashboard.url
         return None
 
     def get_baseline_url(self):
@@ -829,19 +832,19 @@ class Period(ModelPeriod, models.Model):
 
     @property
     def average_monthly_rent(self):
-        return self.project.average_monthly_rent
+        return self.project.property.average_monthly_rent
 
     @property
     def lowest_monthly_rent(self):
-        return self.project.lowest_monthly_rent
+        return self.project.property.lowest_monthly_rent
 
     @property
     def highest_monthly_rent(self):
-        return self.project.highest_monthly_rent
+        return self.project.property.highest_monthly_rent
 
     @property
     def total_units(self):
-        return self.project.total_units
+        return self.project.property.total_units
 
     def _build_metrics(self):
         # Manually insert average_monthly_rent and lowest_monthly_rent

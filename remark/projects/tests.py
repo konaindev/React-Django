@@ -8,7 +8,7 @@ from remark.crm.models import Business
 from remark.geo.models import Address
 from remark.users.models import Account
 from remark.lib.metrics import BareMultiPeriod
-from .models import Fund, Period, Project, TargetPeriod
+from .models import Fund, Period, Project, Property, TargetPeriod
 from .reports.periods import ComputedPeriod
 from .reports.performance import PerformanceReport
 
@@ -40,17 +40,22 @@ class DefaultComputedPeriodTestCase(TestCase):
             name="Test Property Owner", business_type=1
         )
         fund = Fund.objects.create(account=account, name="Test Fund")
+        property = Property.objects.create(
+            name="test",
+            average_monthly_rent=decimal.Decimal("0"),
+            lowest_monthly_rent=decimal.Decimal("0"),
+            geo_address=address,
+        )
         project = Project.objects.create(
             name="test",
             baseline_start=datetime.date(year=2018, month=11, day=19),
             baseline_end=datetime.date(year=2018, month=12, day=26),
-            average_monthly_rent=decimal.Decimal("0"),
-            lowest_monthly_rent=decimal.Decimal("0"),
             account=account,
             asset_manager=asset_manager,
             property_manager=property_manager,
             property_owner=property_owner,
             fund=fund,
+            property=property,
         )
         raw_period = Period.objects.create(
             project=project,
@@ -218,17 +223,22 @@ class DefaultReportTestCase(TestCase):
             name="Test Property Owner", business_type=1
         )
         fund = Fund.objects.create(account=account, name="Test Fund")
+        property = Property.objects.create(
+            name="test",
+            average_monthly_rent=decimal.Decimal("0"),
+            lowest_monthly_rent=decimal.Decimal("0"),
+            geo_address=address,
+        )
         project = Project.objects.create(
             name="test",
             baseline_start=datetime.date(year=2018, month=11, day=19),
             baseline_end=datetime.date(year=2018, month=12, day=26),
-            average_monthly_rent=decimal.Decimal("0"),
-            lowest_monthly_rent=decimal.Decimal("0"),
             account=account,
             asset_manager=asset_manager,
             property_manager=property_manager,
             property_owner=property_owner,
             fund=fund,
+            property=property,
         )
         raw_period = Period.objects.create(
             project=project,
@@ -297,18 +307,23 @@ class LincolnTowerPeriodTestCase(TestCase):
             name="Test Property Owner", business_type=1
         )
         fund = Fund.objects.create(account=account, name="Test Fund")
+        property = Property.objects.create(
+            name=self.project.name,
+            total_units=220,
+            average_monthly_rent=decimal.Decimal("7278"),
+            lowest_monthly_rent=decimal.Decimal("7278"),
+            geo_address=address,
+        )
         self.project = Project.objects.create(
             name="test",
             baseline_start=datetime.date(year=2018, month=11, day=19),
             baseline_end=datetime.date(year=2018, month=12, day=26),
-            average_monthly_rent=decimal.Decimal("7278"),
-            lowest_monthly_rent=decimal.Decimal("7278"),
             account=account,
             asset_manager=asset_manager,
             property_manager=property_manager,
             property_owner=property_owner,
             fund=fund,
-            total_units=220,
+            property=property,
         )
         self.raw_period = Period.objects.create(
             project=self.project,

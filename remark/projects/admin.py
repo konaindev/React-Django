@@ -414,10 +414,6 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
         "number_of_periods",
         "baseline_start",
         "baseline_end",
-        "average_tenant_age",
-        "highest_monthly_rent",
-        "average_monthly_rent",
-        "lowest_monthly_rent",
     ]
 
     fields = [

@@ -43,29 +43,37 @@ class PropertyListTestCase(TestCase):
         )
         self.fund1 = Fund.objects.create(account=self.account, name="Test Fund 1")
         self.fund2 = Fund.objects.create(account=self.account, name="Test Fund 2")
+        property1 = Project.objects.create(
+            name="test",
+            average_monthly_rent=decimal.Decimal("0"),
+            lowest_monthly_rent=decimal.Decimal("0"),
+        )
         self.project1 = Project.objects.create(
             name="test",
             baseline_start=datetime.date(year=2018, month=11, day=19),
             baseline_end=datetime.date(year=2018, month=12, day=26),
-            average_monthly_rent=decimal.Decimal("0"),
-            lowest_monthly_rent=decimal.Decimal("0"),
             account=self.account,
             asset_manager=self.asset_manager1,
             property_manager=self.property_manager1,
             property_owner=property_owner,
             fund=self.fund1,
+            property=property1,
+        )
+        property2 = Project.objects.create(
+            name="project",
+            average_monthly_rent=decimal.Decimal("0"),
+            lowest_monthly_rent=decimal.Decimal("0"),
         )
         self.project2 = Project.objects.create(
             name="project",
             baseline_start=datetime.date(year=2018, month=11, day=19),
             baseline_end=datetime.date(year=2018, month=12, day=26),
-            average_monthly_rent=decimal.Decimal("0"),
-            lowest_monthly_rent=decimal.Decimal("0"),
             account=self.account,
             asset_manager=self.asset_manager2,
             property_manager=self.property_manager2,
             property_owner=property_owner,
             fund=self.fund1,
+            property=property2,
         )
         self.client.login(email="test@test.com", password="testpassword")
 
