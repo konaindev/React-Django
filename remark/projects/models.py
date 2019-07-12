@@ -48,6 +48,10 @@ def spreadsheet_public_id():
     return public_id("spreadsheet2")
 
 
+def building_public_id():
+    return public_id("building")
+
+
 def public_property_id():
     return public_id("property")
 
@@ -1268,3 +1272,37 @@ class CampaignModel(models.Model):
 
     class Meta:
         ordering = ["model_index"]
+
+
+class BuildingManager(models.Manager):
+    pass
+
+
+class Building(models.Model):
+    public_id = models.CharField(
+        primary_key=True,
+        default=building_public_id,
+        help_text="",
+        max_length=24,
+        editable=False,
+    )
+
+    property = models.ForeignKey(
+        "projects.Project", on_delete=models.CASCADE, blank=False, help_text="Project"
+    )
+
+    building_identifier = models.CharField(
+        max_length=255, blank=False, help_text="Building identifier"
+    )
+
+    number_of_floors = models.IntegerField(
+        default=1, blank=False, help_text="Number of Floors"
+    )
+
+    has_elevator = models.BooleanField(default=False, verbose_name="Has Elevator?")
+
+    number_of_units = models.IntegerField(
+        default=1, blank=False, help_text="Number of Units"
+    )
+
+    objects = BuildingManager()
