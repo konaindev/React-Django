@@ -260,7 +260,7 @@ CACHES = {
         "BACKEND": "django_redis.cache.RedisCache",
         "LOCATION": required_env("REDIS_URL"),
         "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
-        "TIMEOUT": 10,
+        "TIMEOUT": os.getenv("REDIS_TTL", 10),
     }
 }
 

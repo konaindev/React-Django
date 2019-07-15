@@ -97,6 +97,8 @@ TTL is defaulted in the django cache configuration with an arbitrary value. Sinc
 key and TTL during the `cache.set()` call it is completely possible to set wildly different expirations.
 This could, on occasion, result in some wacky troubleshooting.
 
+You can now set the default TTL by specifying `REDIS_TTL` in your `.env` file.
+
 #### Invalidation
 
 Currently there is not a centeralized mechanism to bust a redis cache. This should be implemented via a header
