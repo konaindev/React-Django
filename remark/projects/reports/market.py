@@ -1,4 +1,5 @@
 from . import ReportBase
+from remark.geo.models import Zipcode
 
 
 class MarketReport(ReportBase):
@@ -23,4 +24,17 @@ class MarketReport(ReportBase):
         self.project = project
 
     def to_jsonable(self):
+        report = dict(self.project.tmp_market_report_json)
+        estimated_population = report.get("estimated_population", {})
+        center = estimated_population.get("center", {})
+        coordinates = center.get("coordinates")
+        if coordinates is not None:
+            polygons = Zipcode.objects.look_up_polygons_in_circle(
+                coordinates,
+                estimated_population["radius"],
+            )
+
+        report["estimated_population"]["zip_codes"] = polygons
+        self.project.tmp_market_report_json = report
+
         return self.project.tmp_market_report_json
