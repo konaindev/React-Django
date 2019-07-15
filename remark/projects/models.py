@@ -317,7 +317,11 @@ class Project(models.Model):
     users = models.ManyToManyField("users.User", related_name="projects")
 
     view_group = models.OneToOneField(
-        Group, on_delete=models.SET_NULL, null=True, blank=True
+        Group, on_delete=models.SET_NULL, null=True, blank=True, related_name="view_of"
+    )
+
+    admin_group = models.OneToOneField(
+        Group, on_delete=models.SET_NULL, null=True, blank=True, related_name="admin_of",
     )
 
     def __init__(self, *args, **kwargs):
@@ -489,17 +493,20 @@ class Project(models.Model):
             pk=self.view_group.pk
         ).exists()
 
-    def __assign_blank_view_group(self):
+    def __assign_blank_groups(self):
         """
         Creates a new Group and assign it to view_gruop field
         """
         view_group = Group(name=f"project | {self.name} | view")
+        admin_group = Group(name=f"project | {self.name} | admin")
         view_group.save()
+        admin_group.save()
         self.view_group = view_group
+        self.admin_group = admin_group
 
     def save(self, *args, **kwargs):
         if not self.pk:
-            self.__assign_blank_view_group()
+            self.__assign_blank_groups()
         super().save(*args, **kwargs)
 
     def __str__(self):
