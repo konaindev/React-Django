@@ -18,6 +18,7 @@ class Migration(migrations.Migration):
             name='Property',
             fields=[
                 ('property_id', models.AutoField(primary_key=True, serialize=False)),
+                ('public_id', models.CharField(default=remark.projects.models.public_property_id, editable=False, max_length=50, unique=True)),
                 ('name', models.CharField(help_text='The user-facing name of the project.', max_length=255)),
                 ('average_tenant_age', models.IntegerField(blank=True, default=0, help_text='The average tenant age for this property.', null=True)),
                 ('total_units', models.IntegerField(default=0, help_text='The total number of units in this property.')),
@@ -26,7 +27,7 @@ class Migration(migrations.Migration):
                 ('lowest_monthly_rent', models.DecimalField(decimal_places=2, default=0, help_text='Lowest rent tenants pay monthly. Applies for the duration of the project.', max_digits=10)),
                 ('building_logo', stdimage.models.StdImageField(blank=True, default='', help_text='Image of property logo<br/>Resized variants (180x180, 76x76) will also be created on Amazon S3.', upload_to=remark.projects.models.building_logo_media_path)),
                 ('building_image', stdimage.models.StdImageField(blank=True, default='', help_text='Image of property building<br/>Resized variants (309x220, 180x180, 76x76) will also be created on Amazon S3.', upload_to=remark.projects.models.building_image_media_path)),
-                ('geo_address', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='geo.Address')),
+                ('geo_address', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='geo.Address')),
             ],
         ),
         migrations.AddField(

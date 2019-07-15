@@ -112,7 +112,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
 
         projects = []
         for project in Project.objects.filter(**project_params).order_by(order):
-            address = project.geo_address
+            address = project.property.geo_address
             projects.append(
                 {
                     "property_name": project.name,

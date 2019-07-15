@@ -9,6 +9,8 @@ def create_properties(apps, schema_editor):
     for p in Project.objects.all():
         if p.property is not None:
             continue
+        if not p.address:
+            raise ValueError(f'Project "{p.name}" does not have address object')
         property = Property(
             name=f'{p.name}',
             average_tenant_age=p.average_tenant_age or 0,

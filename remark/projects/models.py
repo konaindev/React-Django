@@ -46,6 +46,10 @@ def spreadsheet_public_id():
     return public_id("spreadsheet2")
 
 
+def public_property_id():
+    return public_id("property")
+
+
 def building_logo_media_path(property, filename):
     """
     Given a Project instance, and the filename as supplied during upload,
@@ -63,13 +67,13 @@ def building_logo_media_path(property, filename):
     """
     _, extension = os.path.splitext(filename)
     random_str = get_random_string(length=7)
-    return f"property/{property.id}/building_logo_{random_str}{extension}"
+    return f"property/{property.public_id}/building_logo_{random_str}{extension}"
 
 
 def building_image_media_path(property, filename):
     _, extension = os.path.splitext(filename)
     random_str = get_random_string(length=7)
-    return f"property/{property.id}/building_image_{random_str}{extension}"
+    return f"property/{property.public_id}/building_image_{random_str}{extension}"
 
 
 def spreadsheet_media_path(spreadsheet, filename):
@@ -450,6 +454,14 @@ class Property(models.Model):
 
     property_id = models.AutoField(primary_key=True)
 
+    public_id = models.CharField(
+        default=public_property_id,
+        max_length=50,
+        editable=False,
+        null=False,
+        unique=True,
+    )
+
     name = models.CharField(
         max_length=255, help_text="The user-facing name of the project.", blank=False
     )
@@ -491,9 +503,7 @@ class Property(models.Model):
         help_text="Lowest rent tenants pay monthly. Applies for the duration of the project.",
     )
 
-    geo_address = models.ForeignKey(
-        "geo.Address", on_delete=models.CASCADE, null=True, blank=False
-    )
+    geo_address = models.ForeignKey("geo.Address", on_delete=models.CASCADE, blank=False)
 
     # StdImageField works just like Django's own ImageField
     # except that you can specify different sized variations.
