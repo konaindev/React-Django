@@ -5,6 +5,6 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [("projects", "0052_merge_20190702_1843")]
+    dependencies = [("projects", "0054_create_admin_groups")]
 
     operations = [migrations.RemoveField(model_name="project", name="customer_name")]
