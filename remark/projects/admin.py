@@ -420,7 +420,6 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
     ]
 
     form = ProjectForm
-    filter_horizontal = ("users",)
 
     def number_of_periods(self, obj):
         return obj.periods.all().count()

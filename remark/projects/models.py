@@ -314,8 +314,6 @@ class Project(models.Model):
         "geo.Address", on_delete=models.SET_NULL, null=True, blank=True
     )
 
-    users = models.ManyToManyField("users.User", related_name="projects")
-
     view_group = models.OneToOneField(
         Group, on_delete=models.SET_NULL, null=True, blank=True, related_name="view_of"
     )
