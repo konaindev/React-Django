@@ -1,6 +1,5 @@
 from django.contrib import admin
 from django.contrib.admin.utils import unquote
-from django.template.response import TemplateResponse
 from django.urls import path, reverse
 from django.utils.safestring import mark_safe
 
@@ -12,6 +11,7 @@ from .forms import ProjectForm, SpreadsheetForm, CampaignModelUploadForm
 from .models import (
     Fund,
     Project,
+    Property,
     Campaign,
     CampaignModel,
     Period,
@@ -482,4 +482,9 @@ class TAMExportLogAdmin(admin.ModelAdmin):
 
 @admin.register(Fund, site=admin_site)
 class FundAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(Property, site=admin_site)
+class PropertyAdmin(admin.ModelAdmin):
     pass
