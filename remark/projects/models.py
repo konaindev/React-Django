@@ -159,11 +159,9 @@ class Project(models.Model):
 
     custom_tags = models.ManyToManyField(Tag, blank=True)
 
-    # This is temporary until we have accounts setup for all our clients
-    # Remove me and link via a ForeignKey when that happens. -TPC
-    customer_name = models.CharField(
-        max_length=255, help_text="The company that hired Remarkaby.", default=""
-    )
+    @property
+    def customer_name(self):
+        return self.account.company_name
 
     # This is a temporary field until we have user accounts setup.
     # When that happens there should be a many to one relationship with
