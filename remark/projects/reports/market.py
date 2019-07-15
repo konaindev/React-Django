@@ -32,6 +32,7 @@ class MarketReport(ReportBase):
             polygons = Zipcode.objects.look_up_polygons_in_circle(
                 coordinates,
                 estimated_population["radius"],
+                self.project.address.state
             )
 
         report["estimated_population"]["zip_codes"] = polygons
