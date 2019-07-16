@@ -45,7 +45,6 @@ cairosvg = "*"
 svgwrite = "*"
 django-redis = "*"
 django-admin-sortable2 = "*"
-sentry-sdk = "*"
 graphkit = "*"
 
 [requires]

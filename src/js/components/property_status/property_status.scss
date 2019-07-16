@@ -25,12 +25,11 @@ $status-text-size: 11px;
     }
 
     &--off-track {
-        border-color: $property-status-color-off-track;
-        color: $property-status-color-off-track;
+        border-color: $property-status-color-requires-review;
+        color: $property-status-color-requires-review;
     }
 
     &--not-available {
-        border-color: $property-status-color-not-available;
-        color: $property-status-color-not-available;
+        height: 20px;
     }
 }
