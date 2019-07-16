@@ -11,11 +11,10 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import sys
+
 import dj_database_url
 import django_heroku
-import sentry_sdk
-from sentry_sdk import configure_scope
-from sentry_sdk.integrations.django import DjangoIntegration
+
 from dotenv import load_dotenv
 
 
@@ -260,7 +259,7 @@ CACHES = {
         "BACKEND": "django_redis.cache.RedisCache",
         "LOCATION": required_env("REDIS_URL"),
         "OPTIONS": {"CLIENT_CLASS": "django_redis.client.DefaultClient"},
-        "TIMEOUT": os.getenv("REDIS_TTL", 10),
+        "TIMEOUT": 10,
     }
 }
 
@@ -288,10 +287,3 @@ CELERY_IGNORE_RESULT = True
 # Activate Django-Heroku. Don't modify the DATABASES variable if we're in debug;
 # otherwise, modify it to match Heroku's needs (including forcing it to be SSL.)
 django_heroku.settings(locals(), staticfiles=True, databases=not DEBUG)
-
-# Configure Sentry -jc 11-jul-19
-
-sentry_sdk.init(dsn=os.getenv("SENTRY_URL", ""), integrations=[DjangoIntegration()])
-
-with configure_scope() as scope:
-    scope.set_tag("env", os.getenv("ENV", "local"))

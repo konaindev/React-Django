@@ -25,26 +25,6 @@ exports[`DashboardPage Row select 1`] = `
                
             </div>
           </a>
-          <div
-            className="page-header__nav"
-          >
-            <div
-              className="top-navigation"
-            >
-              <a
-                className="top-navigation__link top-navigation__link--active"
-                href="/dashboard"
-              >
-                Portfolio
-              </a>
-              <a
-                className="top-navigation__link"
-                href="/portfolio/table"
-              >
-                Portfolio Analysis
-              </a>
-            </div>
-          </div>
           <nav
             className="page-header__items-outer"
           >
@@ -1212,26 +1192,6 @@ exports[`DashboardPage Row view 1`] = `
                
             </div>
           </a>
-          <div
-            className="page-header__nav"
-          >
-            <div
-              className="top-navigation"
-            >
-              <a
-                className="top-navigation__link top-navigation__link--active"
-                href="/dashboard"
-              >
-                Portfolio
-              </a>
-              <a
-                className="top-navigation__link"
-                href="/portfolio/table"
-              >
-                Portfolio Analysis
-              </a>
-            </div>
-          </div>
           <nav
             className="page-header__items-outer"
           >
@@ -2399,26 +2359,6 @@ exports[`DashboardPage renders correctly 1`] = `
                
             </div>
           </a>
-          <div
-            className="page-header__nav"
-          >
-            <div
-              className="top-navigation"
-            >
-              <a
-                className="top-navigation__link top-navigation__link--active"
-                href="/dashboard"
-              >
-                Portfolio
-              </a>
-              <a
-                className="top-navigation__link"
-                href="/portfolio/table"
-              >
-                Portfolio Analysis
-              </a>
-            </div>
-          </div>
           <nav
             className="page-header__items-outer"
           >
