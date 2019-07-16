@@ -169,7 +169,8 @@ class ZipcodeManager(models.Manager):
             zipcode = self.get(zip_code=zip_code)
 
             return dict(
-                geometry=zipcode.geometry,
+                zip=zip_code,
+                outline=zipcode.geometry,
                 properties=dict(center=[zipcode.lon, zipcode.lat]),
             )
         except self.model.DoesNotExist:
