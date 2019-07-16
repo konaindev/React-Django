@@ -60,9 +60,9 @@ workflows:
   tests-only:
     jobs:
       - build:
-          filters:
-            branches:
-              ignore: staging
+          branches:
+            ignore:
+              - staging
 
   build-deploy:
     jobs:
@@ -70,6 +70,5 @@ workflows:
       - deploy-staging:
           requires:
             - build
-          filters:
-            branches:
-              only: staging_
+          branches:
+            only: staging_
