@@ -35,18 +35,18 @@ def populate_zipcode_outlines(project):
     estimated_population = report.get("estimated_population", {})
     population_zipcodes = estimated_population.get("zip_codes", [])
     circle_center = estimated_population.get("center", {})
-    circle_radius = estimated_population.get("radius")
-    circle_radius_units = estimated_population.get("units")
-    radius_in_miles = convert_to_miles(circle_radius, circle_radius_units)
     center_coords = circle_center.get("coordinates")
+    circle_radius = estimated_population.get("radius")
+    radius_units = estimated_population.get("units")
+    radius_in_miles = convert_to_miles(circle_radius, radius_units)
 
     # zipcode areas only
     if len(population_zipcodes) > 0:
-        for population_zipcode in population_zipcodes:
-            polygon_data = Zipcode.objects.look_up_polygon(population_zipcode["zip"])
-            if polygon_data is not None:
-                population_zipcode["outline"] = polygon_data["outline"]
-                population_zipcode["properties"] = polygon_data["properties"]
+        for zipcode in population_zipcodes:
+            polygon = Zipcode.objects.look_up_polygon(zipcode["zip"])
+            if polygon is not None:
+                zipcode["outline"] = polygon["outline"]
+                zipcode["properties"] = polygon["properties"]
 
     # if circle mode, populate zipcodes in the circle area
     elif center_coords is not None:
