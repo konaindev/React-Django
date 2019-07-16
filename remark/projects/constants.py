@@ -1,11 +1,8 @@
 PROPERTY_TYPE = (
     (1, "Multifamily - Standard"),
     (2, "Multifamily - Micro"),
-    (3, "Student"),
-    (4, "Housing"),
-    (5, "Senior"),
-    (6, "Housing"),
-    (7, "Planned"),
-    (8, "Communities"),
-    (9, "Condominiums"),
+    (3, "Student Housing"),
+    (4, "Senior Housing"),
+    (5, "Planned Communities"),
+    (6, "Condominiums"),
 )
