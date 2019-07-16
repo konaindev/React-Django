@@ -419,6 +419,7 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
     fields = [
         "name",
         "account",
+        "property",
         "asset_manager",
         "property_manager",
         "property_owner",
@@ -426,17 +427,10 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
         "customer_name",
         "custom_tags",
         "email_distribution_list",
-        "building_logo",
-        "building_image",
         "baseline_start",
         "baseline_end",
         "tmp_market_report_json",
         "tmp_campaign_plan_json",
-        "total_units",
-        "average_tenant_age",
-        "highest_monthly_rent",
-        "average_monthly_rent",
-        "lowest_monthly_rent",
         "is_baseline_report_public",
         "is_tam_public",
         "is_performance_report_public",
@@ -448,8 +442,8 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
         "is_modeling_shared",
         "is_campaign_plan_shared",
         "competitors",
-        "address",
         "view_group",
+        "admin_group",
     ]
 
     readonly_fields = ["customer_name"]
