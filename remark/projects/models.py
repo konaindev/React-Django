@@ -251,10 +251,6 @@ class Project(models.Model):
 
     competitors = models.ManyToManyField("self", blank=True, symmetrical=False)
 
-    address = models.ForeignKey(
-        "geo.Address", on_delete=models.SET_NULL, null=True, blank=True
-    )
-
     view_group = models.OneToOneField(
         Group, on_delete=models.SET_NULL, null=True, blank=True, related_name="view_of"
     )

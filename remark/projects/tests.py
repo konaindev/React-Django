@@ -308,7 +308,7 @@ class LincolnTowerPeriodTestCase(TestCase):
         )
         fund = Fund.objects.create(account=account, name="Test Fund")
         property = Property.objects.create(
-            name=self.project.name,
+            name="test",
             total_units=220,
             average_monthly_rent=decimal.Decimal("7278"),
             lowest_monthly_rent=decimal.Decimal("7278"),
