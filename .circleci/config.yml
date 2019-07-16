@@ -61,8 +61,7 @@ workflows:
     jobs:
       - build:
           branches:
-            ignore:
-              - staging
+            ignore: staging
 
   build-deploy:
     jobs:
@@ -71,4 +70,4 @@ workflows:
           requires:
             - build
           branches:
-            only: staging_
+            only: staging
