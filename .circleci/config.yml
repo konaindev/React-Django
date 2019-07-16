@@ -36,24 +36,24 @@ jobs:
       # run tests!
       - run: yarn test-ui
 
-deploy-staging:
-  docker:
-    # specify the version you desire here
-    - image: circleci/node:11.7.0
+  deploy-staging:
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:11.7.0
 
-    # Specify service dependencies here if necessary
-    # CircleCI maintains a library of pre-built images
-    # documented at https://circleci.com/docs/2.0/circleci-images/
-    # - image: circleci/mongo:3.4.4
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mongo:3.4.4
 
-  working_directory: ~/repo
+    working_directory: ~/repo
 
-  steps:
-    - checkout
-    - run:
-        name: Deploy Staging to Heroku
-        command: |
-          git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
+    steps:
+      - checkout
+      - run:
+          name: Deploy Staging to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP_NAME.git master
 
 workflows:
   version: 2
