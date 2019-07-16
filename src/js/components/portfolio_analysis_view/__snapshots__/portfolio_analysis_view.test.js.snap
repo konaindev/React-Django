@@ -33,13 +33,13 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
             >
               <a
                 className="top-navigation__link"
-                href="/dashboard"
+                href="http://app.remarkably.io/dashboard"
               >
                 Portfolio
               </a>
               <a
                 className="top-navigation__link top-navigation__link--active"
-                href="/portfolio/table"
+                href="http://app.remarkably.io/portfolio-analysis"
               >
                 Portfolio Analysis
               </a>
@@ -312,7 +312,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
         <div
           className="kpi-card__value"
         >
-          0.05
+          5%
         </div>
         <div
           className="kpi-card__name"
@@ -323,7 +323,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
           className="kpi-card__target"
         >
           Target: 
-          0.07
+          7%
         </div>
       </div>
       <div
@@ -344,7 +344,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
         <div
           className="kpi-card__value"
         >
-          0.2
+          20%
         </div>
         <div
           className="kpi-card__name"
@@ -355,7 +355,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
           className="kpi-card__target"
         >
           Target: 
-          0.25
+          25%
         </div>
       </div>
       <div
@@ -376,7 +376,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
         <div
           className="kpi-card__value"
         >
-          0.6
+          60%
         </div>
         <div
           className="kpi-card__name"
@@ -387,7 +387,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
           className="kpi-card__target"
         >
           Target: 
-          0.5
+          50%
         </div>
       </div>
     </div>

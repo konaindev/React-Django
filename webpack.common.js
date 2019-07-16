@@ -2,7 +2,6 @@ const path = require("path");
 const miniCSS = require("mini-css-extract-plugin");
 const StyleLintPlugin = require("stylelint-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
-const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   entry: {
@@ -62,8 +61,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new miniCSS({ filename: "index.css", chunkFilename: "[id].css" }),
-    new StyleLintPlugin(),
-    new Dotenv()
+    new StyleLintPlugin()
   ],
   profile: true,
   resolve: {

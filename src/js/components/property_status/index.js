@@ -15,9 +15,7 @@ const PropertyStatus = ({ className, performance_rating }) => {
   });
   return (
     <div className={classNames}>
-      {performance_rating == -1
-        ? "CAMPAIGN PENDING"
-        : STATUS_LABEL[performance_rating]}
+      {performance_rating == -1 ? "" : STATUS_LABEL[performance_rating]}
     </div>
   );
 };

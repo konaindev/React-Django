@@ -32,14 +32,6 @@ For back-end code, we use `flake8` to validate code, and `python black` to enfor
 - redis
 - postgres
 
-### Exceptions
-
-Remarkably uses a hosted exception tracking platform, currently Sentry.io,
-which you can run [locally](https://hub.docker.com/r/amd64/sentry) via docker.
-
-Sentry provides the ability to [add contextual data](https://docs.sentry.io/enriching-error-data/context/?platform=javascript#tagging-events) via tagging. This
-will enchance the debugging experience.
-
 ## Running the project locally
 
 - Ensure you have all system deps running (postgres, redis, etc)
@@ -57,7 +49,6 @@ EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
 EMAIL_USE_TLS=NO
 GOOGLE_APPLICATION_CREDENTIALS=content_of_google_service_account_key_file
 REDIS_URL=redis://127.0.0.1:6379/
-SENTRY_URL=https://<hash>@sentry.io/<path>
 ```
 
 - Run a build of the front-end assets: `yarn build`.
@@ -96,8 +87,6 @@ middleware, and apply a consistent strategy across handlers/routes.
 TTL is defaulted in the django cache configuration with an arbitrary value. Since each handler sets the
 key and TTL during the `cache.set()` call it is completely possible to set wildly different expirations.
 This could, on occasion, result in some wacky troubleshooting.
-
-You can now set the default TTL by specifying `REDIS_TTL` in your `.env` file.
 
 #### Invalidation
 
