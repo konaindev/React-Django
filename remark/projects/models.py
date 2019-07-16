@@ -126,6 +126,10 @@ class Project(models.Model):
         max_length=255, help_text="The user-facing name of the project."
     )
 
+    @property
+    def customer_name(self):
+        return self.account.company_name
+
     property = models.OneToOneField("projects.Property", on_delete=models.CASCADE, blank=False)
 
     account = models.ForeignKey(
@@ -164,10 +168,6 @@ class Project(models.Model):
     )
 
     custom_tags = models.ManyToManyField(Tag, blank=True)
-
-    @property
-    def customer_name(self):
-        return self.account.company_name
 
     # This is a temporary field until we have user accounts setup.
     # When that happens there should be a many to one relationship with
