@@ -275,6 +275,7 @@ $s64: 16rem;
 $border-radius-none: 0;
 $border-radius-sm: 0.125rem;
 $border-radius-default: 0.25rem;
+$border-radius-base: 0.375rem; // 6px
 $border-radius-lg: 0.5rem;
 $border-radius-full: 9999px;
 
@@ -284,6 +285,8 @@ $box-space: 30px;
 $small-box-vertical-spacing: 10px;
 
 :export {
+    fontSans: $font-sans;
+
     mapCirclePointColor: $map-circle-point-color;
     mapZipTextColor: $map-zip-text-color;
     mapRadiusTextColor: $map-radius-text-color;

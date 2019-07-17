@@ -1,0 +1,115 @@
+@import "css/base.scss";
+
+$pie-size: 200;
+$pie-color1: $green-1;
+$pie-color2: $green-2;
+$pie-color3: $cyan-6;
+$pie-color4: $cyan-3;
+$pie-label-color1: $gray-3;
+$pie-label-color2: $highlight-gray-3;
+$pie-border-color: $gray-9;
+$label-size: 14px;
+$section-background: $gray-3;
+$section-height: 360px;
+$section-width: 645px;
+$section-spacing: 60px;
+$section-border-color: $gray-9;
+$row-height: 60px;
+$mark-size: 1.5rem;
+$mark-spacing: 16px;
+
+.investment-allocation {
+    max-width: $section-width;
+
+    .section-header {
+        border-color: $section-border-color;
+    }
+}
+
+.investment-allocation__body {
+    display: flex;
+    height: $section-height;
+    padding: $section-spacing;
+    background: $section-background;
+    border-radius: $border-radius-base;
+
+    align-items: center;
+}
+
+.investment-allocation__chart {
+    width: $pie-size+px;
+    height: $pie-size+px;
+    flex-shrink: 0;
+}
+
+.investment-allocation__expenses {
+    display: flex;
+    margin-left: $section-spacing;
+    flex-direction: column;
+
+    flex-grow: 1;
+    justify-content: center;
+}
+
+.investment-allocation__row {
+    display: flex;
+    height: $row-height;
+    font-family: $font-sans;
+    color: $content-text-primary-color;
+
+    justify-content: space-between;
+    align-items: center;
+
+    &--empty {
+        color: $content-text-secondary-color;
+    }
+}
+
+.investment-allocation__title {
+    display: flex;
+    font-size: $text-sm;
+
+    align-items: center;
+
+    &:before {
+        display: inline-block;
+        width: $mark-size;
+        height: $mark-size;
+        margin-right: $mark-spacing;
+        border-radius: 50%;
+        content: "";
+        flex-shrink: 0;
+    }
+
+    &--reputation-building:before {
+        background-color: $pie-color1;
+    }
+    &--demand-creation:before {
+        background-color: $pie-color2;
+    }
+    &--leasing-enablement:before {
+        background-color: $pie-color3;
+    }
+    &--market-intelligence:before {
+        background-color: $pie-color4;
+    }
+}
+
+.investment-allocation__value {
+    display: flex;
+    font-size: $text-xl;
+
+    align-items: center;
+}
+
+:export {
+    investmentAllocationPieSize: $pie-size;
+    investmentAllocationPieColor1: $pie-color1;
+    investmentAllocationPieColor2: $pie-color2;
+    investmentAllocationPieColor3: $pie-color3;
+    investmentAllocationPieColor4: $pie-color4;
+    investmentAllocationLableColor1: $pie-label-color1;
+    investmentAllocationLableColor2: $pie-label-color2;
+    investmentAllocationLableSize: $label-size;
+    investmentAllocationBorderColor: $pie-border-color;
+}
