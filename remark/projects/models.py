@@ -1121,9 +1121,15 @@ class Campaign(models.Model):
         Update all associated data (like target periods) based on
         the currently selected model.
         """
-        def _create_target_period(data):
-            target_period = TargetPeriod(project=self.project, campaign_model=self.selected_campaign_model)
-            for k, v in data.items():
+        def _get_model_targets(campaign_model):
+            if campaign_model is None:
+                return []
+            json_data = campaign_model.spreadsheet.json_data
+            return json_data.get("targets", [])
+
+        def _create_target_period(campaign_model, target_data):
+            target_period = TargetPeriod(project=self.project, campaign_model=campaign_model)
+            for k, v in target_data.items():
                 # Yes, this will set values for keys that aren't fields;
                 # that's fine; we don't overwrite anything we shouldn't,
                 # and extraneous stuff is ignored for save.
@@ -1137,11 +1143,13 @@ class Campaign(models.Model):
         # Remove all extant target periods
         self.project.target_periods.all().delete()
 
-        # If there are any, create new target periods!
-        option = self.get_selected_model_option()
-        if option is not None:
-            for data in option.get("targets", []):
-                _create_target_period(data)
+        campaigns_with_active_models = self.project.campaigns.exclude(selected_campaign_model=None)
+        active_models = []
+        for campaign in campaigns_with_active_models:
+            active_model = campaign.selected_campaign_model
+            active_models.append(active_model)
+            for target_data in _get_model_targets(active_model):
+                _create_target_period(active_model, target_data)
 
     def __str__(self):
         return "{} ({})".format(self.name, self.public_id)
