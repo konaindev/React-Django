@@ -73,10 +73,6 @@ jobs:
 
 workflows:
   version: 2
-  aws-cli:
-    jobs:
-      - aws-cli:
-          context: aws-staging
 
   tests-only:
     jobs:
@@ -89,7 +85,7 @@ workflows:
     jobs:
       - build
       - deploy-staging:
-          context: aws-staging
+          context: stage-aws
           requires:
             - build
           filters:
