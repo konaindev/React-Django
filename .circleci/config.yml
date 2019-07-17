@@ -70,9 +70,9 @@ jobs:
 workflows:
   version: 2
   aws-cli:
-  jobs:
-    - aws-cli:
-        context: aws
+    jobs:
+      - aws-cli:
+          context: aws
 
   tests-only:
     jobs:
