@@ -6,7 +6,6 @@ version: 2.1
 
 orbs:
   aws-cli: circleci/aws-cli@0.1.1
-  python: medasync/python@0.0.6
   node: circleci/node@1.1.3
 
 jobs:
