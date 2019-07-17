@@ -14,8 +14,6 @@ jobs:
     steps:
       - checkout
       - aws-cli/install
-      - aws-cli/configure:
-          profile-name: circle-stage
 
   build:
     docker:
