@@ -65,7 +65,7 @@ jobs:
       - run:
           name: Fetch .env from s3
           command: |
-            aws s3 cp s3://remarkably-staging-58d2d32d-caeb-4629-a941-3b16bb028421/env ./.env
+            aws s3 cp s3://remarkably-staging-58d2d32d-caeb-4629-a941-3b16bb028421/env ~/repo/.env
       - run:
           name: Deploy Staging to Heroku
           command: |
