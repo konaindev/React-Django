@@ -92,7 +92,7 @@ workflows:
           requires:
             - build
             - aws-cli:
-              context: aws-staging
+                context: aws-staging
           filters:
             branches:
               only: cicd-staging
