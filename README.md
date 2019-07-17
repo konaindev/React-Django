@@ -4,6 +4,8 @@ The Remarkably web application.
 
 A Django 2.x website, with a React front-end, running on Python 3.7+ and Heroku.
 
+CircleCI --> Heroku (Staging) [![CircleCI](https://circleci.com/gh/remarkably-io/remarkably/tree/staging.svg?style=svg&circle-token=21d63293e5d7a26405fb5ba0be14443fe616aae0)](https://circleci.com/gh/remarkably-io/remarkably/tree/staging)
+
 ## What's here?
 
 The Django project (and all the django apps) live in the `remark/` subdirectory.
