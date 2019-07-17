@@ -62,6 +62,9 @@ jobs:
 
     steps:
       - checkout
+      - aws-cli/install
+      - aws-cli/configure:
+          profile-name: circle
       - run:
           name: Fetch .env from s3
           command: |
