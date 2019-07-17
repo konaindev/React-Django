@@ -89,10 +89,10 @@ workflows:
     jobs:
       - build
       - deploy-staging:
+          context: aws-staging
           requires:
             - build
-            - aws-cli:
-                context: aws-staging
+            - aws-cli
           filters:
             branches:
               only: cicd-staging
