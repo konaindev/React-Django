@@ -42,7 +42,7 @@ class ComputedPeriod(ComputedValueMixin):
     @computed_value
     def delta_leases(self):
         """The net number of new leases obtained during the period."""
-        return sub_or_0(self.leases_executed, self.leases_ended)
+        return self.leases_executed - self.leases_ended
 
     @computed_value
     def occupiable_units(self):
@@ -173,20 +173,21 @@ class ComputedPeriod(ComputedValueMixin):
     @computed_value
     def acq_investment(self):
         """The total acqusition investment (in dollars)."""
-        return sum_or_0(
-            self.acq_reputation_building,
-            self.acq_demand_creation,
-            self.acq_leasing_enablement,
+        return (
+            self.acq_reputation_building +
+            self.acq_demand_creation +
+            self.acq_leasing_enablement +
             self.acq_market_intelligence
         )
+
 
     @computed_value
     def ret_investment(self):
         """The total retention investment (in dollars)."""
-        return sum_or_0(
-            self.ret_reputation_building,
-            self.ret_demand_creation,
-            self.ret_leasing_enablement,
+        return (
+            self.ret_reputation_building +
+            self.ret_demand_creation +
+            self.ret_leasing_enablement +
             self.ret_market_intelligence
         )
 
