@@ -1099,21 +1099,14 @@ class Campaign(models.Model):
         help_text="All target values will be replaced by those in the newly selected model.",
     )
 
-    # This value is set when the instance is created; if we later
-    # call save, and it changes, then we update targets for the model.
-    __selected_campaign_model = None
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # Save this for comparison purposes on save(...)
-        self.__selected_campaign_model = self.selected_campaign_model
-
     def save(self, *args, **kwargs):
-        model_selection_changed = (
-            self.__selected_campaign_model != self.selected_campaign_model
-        )
+        try:
+            old = type(self).objects.get(pk=self.pk) if self.pk else None
+        except:
+            old = None
         super().save(*args, **kwargs)
-        if model_selection_changed:
+        # detect change on selected_campaign_model
+        if old and old.selected_campaign_model != self.selected_campaign_model:
             self.update_for_selected_model()
 
     def get_selected_model_option(self):
@@ -1128,7 +1121,6 @@ class Campaign(models.Model):
         Update all associated data (like target periods) based on
         the currently selected model.
         """
-
         def _create_target_period(data):
             target_period = TargetPeriod(project=self.project, campaign_model=self.selected_campaign_model)
             for k, v in data.items():
@@ -1143,7 +1135,7 @@ class Campaign(models.Model):
             return
 
         # Remove all extant target periods
-        tps = self.project.target_periods.filter(campaign_model=self.selected_campaign_model).delete()
+        self.project.target_periods.all().delete()
 
         # If there are any, create new target periods!
         option = self.get_selected_model_option()
