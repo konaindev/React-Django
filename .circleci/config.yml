@@ -90,4 +90,4 @@ workflows:
             - build
           filters:
             branches:
-              only: cicd-staging
+              only: staging
