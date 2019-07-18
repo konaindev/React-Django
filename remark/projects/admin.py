@@ -453,7 +453,6 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
         "is_campaign_plan_shared",
         "competitors",
         "address",
-        "users",
         "view_group",
     ]
 
