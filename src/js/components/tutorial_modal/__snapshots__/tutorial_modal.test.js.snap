@@ -1,0 +1,223 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TutorialModal render default 1`] = `
+<Modal
+  center={true}
+  classNames={
+    Object {
+      "closeButton": "modal-window__close",
+      "modal": "modal-window tutorial-modal",
+      "overlay": "modal-overlay",
+    }
+  }
+  closeOnOverlayClick={true}
+  focusTrapped={false}
+  onClose={[Function]}
+  open={true}
+  styles={
+    Object {
+      "closeIcon": Object {
+        "display": "none",
+      },
+    }
+  }
+>
+  <div
+    className="modal-window__head tutorial-modal__header"
+  >
+    Quickstart
+  </div>
+  <div
+    className="modal-window__body"
+  >
+    <div
+      className="tutorial-modal__image"
+      style={
+        Object {
+          "backgroundImage": "url(https://imgur.com/vW7xfzx.png)",
+        }
+      }
+    />
+    <div
+      className="tutorial-modal__caption"
+    >
+      Keep tabs on all your properties and how they are performing towards their goal.
+    </div>
+    <div
+      className="tutorial-modal__nav"
+    >
+      <div>
+        <div
+          className="tutorial-modal__nav-indicator tutorial-modal__nav-indicator--active"
+          data-index={0}
+          onClick={[Function]}
+        />
+        <div
+          className="tutorial-modal__nav-indicator"
+          data-index={1}
+          onClick={[Function]}
+        />
+        <div
+          className="tutorial-modal__nav-indicator"
+          data-index={2}
+          onClick={[Function]}
+        />
+      </div>
+      <button
+        className="button button--highlight tutorial-modal__nav-button"
+        onClick={[Function]}
+      >
+        Next
+      </button>
+    </div>
+  </div>
+</Modal>
+`;
+
+exports[`TutorialModal render default 2`] = `
+<Modal
+  center={true}
+  classNames={
+    Object {
+      "closeButton": "modal-window__close",
+      "modal": "modal-window tutorial-modal",
+      "overlay": "modal-overlay",
+    }
+  }
+  closeOnOverlayClick={true}
+  focusTrapped={false}
+  onClose={[Function]}
+  open={true}
+  styles={
+    Object {
+      "closeIcon": Object {
+        "display": "none",
+      },
+    }
+  }
+>
+  <div
+    className="modal-window__head tutorial-modal__header"
+  >
+    Quickstart
+  </div>
+  <div
+    className="modal-window__body"
+  >
+    <div
+      className="tutorial-modal__image"
+      style={
+        Object {
+          "backgroundImage": "url(https://imgur.com/MLfs4eQ.png)",
+        }
+      }
+    />
+    <div
+      className="tutorial-modal__caption"
+    >
+      Have a bird's eye view of across your entire portfolio.
+    </div>
+    <div
+      className="tutorial-modal__nav"
+    >
+      <div>
+        <div
+          className="tutorial-modal__nav-indicator"
+          data-index={0}
+          onClick={[Function]}
+        />
+        <div
+          className="tutorial-modal__nav-indicator tutorial-modal__nav-indicator--active"
+          data-index={1}
+          onClick={[Function]}
+        />
+        <div
+          className="tutorial-modal__nav-indicator"
+          data-index={2}
+          onClick={[Function]}
+        />
+      </div>
+      <button
+        className="button button--highlight tutorial-modal__nav-button"
+        onClick={[Function]}
+      >
+        Next
+      </button>
+    </div>
+  </div>
+</Modal>
+`;
+
+exports[`TutorialModal render default 3`] = `
+<Modal
+  center={true}
+  classNames={
+    Object {
+      "closeButton": "modal-window__close",
+      "modal": "modal-window tutorial-modal",
+      "overlay": "modal-overlay",
+    }
+  }
+  closeOnOverlayClick={true}
+  focusTrapped={false}
+  onClose={[Function]}
+  open={true}
+  styles={
+    Object {
+      "closeIcon": Object {
+        "display": "none",
+      },
+    }
+  }
+>
+  <div
+    className="modal-window__head tutorial-modal__header"
+  >
+    Quickstart
+  </div>
+  <div
+    className="modal-window__body"
+  >
+    <div
+      className="tutorial-modal__image"
+      style={
+        Object {
+          "backgroundImage": "url(https://imgur.com/eQtUTc0.png)",
+        }
+      }
+    />
+    <div
+      className="tutorial-modal__caption"
+    >
+      Invite members of your organization to stay up to date and colloborate across projects.
+    </div>
+    <div
+      className="tutorial-modal__nav"
+    >
+      <div>
+        <div
+          className="tutorial-modal__nav-indicator"
+          data-index={0}
+          onClick={[Function]}
+        />
+        <div
+          className="tutorial-modal__nav-indicator"
+          data-index={1}
+          onClick={[Function]}
+        />
+        <div
+          className="tutorial-modal__nav-indicator tutorial-modal__nav-indicator--active"
+          data-index={2}
+          onClick={[Function]}
+        />
+      </div>
+      <button
+        className="button button--primary tutorial-modal__nav-button"
+        onClick={[Function]}
+      >
+        GOT IT
+      </button>
+    </div>
+  </div>
+</Modal>
+`;
