@@ -2,13 +2,21 @@
 
 exports[`PropertyStatus renders correctly 1`] = `
 <div
+  className="property-status property-status--not-available"
+>
+  CAMPAIGN PENDING
+</div>
+`;
+
+exports[`PropertyStatus renders correctly 2`] = `
+<div
   className="property-status property-status--off-track"
 >
   OFF TRACK
 </div>
 `;
 
-exports[`PropertyStatus renders correctly 2`] = `
+exports[`PropertyStatus renders correctly 3`] = `
 <div
   className="property-status property-status--at-risk"
 >
@@ -16,7 +24,7 @@ exports[`PropertyStatus renders correctly 2`] = `
 </div>
 `;
 
-exports[`PropertyStatus renders correctly 3`] = `
+exports[`PropertyStatus renders correctly 4`] = `
 <div
   className="property-status property-status--on-track"
 >

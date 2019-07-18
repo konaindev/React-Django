@@ -159,11 +159,9 @@ class Project(models.Model):
 
     custom_tags = models.ManyToManyField(Tag, blank=True)
 
-    # This is temporary until we have accounts setup for all our clients
-    # Remove me and link via a ForeignKey when that happens. -TPC
-    customer_name = models.CharField(
-        max_length=255, help_text="The company that hired Remarkaby.", default=""
-    )
+    @property
+    def customer_name(self):
+        return self.account.company_name
 
     # This is a temporary field until we have user accounts setup.
     # When that happens there should be a many to one relationship with
@@ -314,10 +312,12 @@ class Project(models.Model):
         "geo.Address", on_delete=models.SET_NULL, null=True, blank=True
     )
 
-    users = models.ManyToManyField("users.User", related_name="projects")
-
     view_group = models.OneToOneField(
-        Group, on_delete=models.SET_NULL, null=True, blank=True
+        Group, on_delete=models.SET_NULL, null=True, blank=True, related_name="view_of"
+    )
+
+    admin_group = models.OneToOneField(
+        Group, on_delete=models.SET_NULL, null=True, blank=True, related_name="admin_of",
     )
 
     def __init__(self, *args, **kwargs):
@@ -505,17 +505,20 @@ class Project(models.Model):
             pk=self.view_group.pk
         ).exists()
 
-    def __assign_blank_view_group(self):
+    def __assign_blank_groups(self):
         """
         Creates a new Group and assign it to view_gruop field
         """
         view_group = Group(name=f"project | {self.name} | view")
+        admin_group = Group(name=f"project | {self.name} | admin")
         view_group.save()
+        admin_group.save()
         self.view_group = view_group
+        self.admin_group = admin_group
 
     def save(self, *args, **kwargs):
         if not self.pk:
-            self.__assign_blank_view_group()
+            self.__assign_blank_groups()
         super().save(*args, **kwargs)
 
     def __str__(self):
