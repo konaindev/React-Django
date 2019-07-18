@@ -151,10 +151,7 @@ class Project(models.Model):
     )
 
     fund = models.ForeignKey(
-        "projects.Fund",
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True
+        "projects.Fund", on_delete=models.SET_NULL, blank=True, null=True
     )
 
     custom_tags = models.ManyToManyField(Tag, blank=True)
@@ -1121,6 +1118,7 @@ class Campaign(models.Model):
         Update all associated data (like target periods) based on
         the currently selected model.
         """
+
         def _get_model_targets(campaign_model):
             if campaign_model is None:
                 return []
@@ -1128,11 +1126,13 @@ class Campaign(models.Model):
             return json_data.get("targets", [])
 
         def _create_target_period(campaign_model, target_data):
-            target_period = TargetPeriod(project=self.project, campaign_model=campaign_model)
+            # override if there is overlapping period
+            self.project.target_periods.filter(end=target_data["end"]).delete()
+            # create TargetPeriod and set fields with json values
+            target_period = TargetPeriod(
+                project=self.project, campaign_model=campaign_model
+            )
             for k, v in target_data.items():
-                # Yes, this will set values for keys that aren't fields;
-                # that's fine; we don't overwrite anything we shouldn't,
-                # and extraneous stuff is ignored for save.
                 setattr(target_period, k, v)
             target_period.save()
             return target_period
@@ -1143,11 +1143,18 @@ class Campaign(models.Model):
         # Remove all extant target periods
         self.project.target_periods.all().delete()
 
-        campaigns_with_active_models = self.project.campaigns.exclude(selected_campaign_model=None)
-        active_models = []
-        for campaign in campaigns_with_active_models:
-            active_model = campaign.selected_campaign_model
-            active_models.append(active_model)
+        campaigns_with_active_models = self.project.campaigns.exclude(
+            selected_campaign_model=None
+        )
+        active_models = [
+            campaign.selected_campaign_model
+            for campaign in campaigns_with_active_models
+        ]
+        # Campaigns typically don't over lap BUT if they do,
+        # you should use the Target Periods from the __latter__ Campaign
+        active_models.sort(key=lambda m: m.model_end)
+
+        for active_model in active_models:
             for target_data in _get_model_targets(active_model):
                 _create_target_period(active_model, target_data)
 
