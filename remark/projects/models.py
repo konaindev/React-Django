@@ -1108,8 +1108,15 @@ class Campaign(models.Model):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        # TODO: remove this swap variable in PR#198
         # Save this for comparison purposes on save(...)
-        self.__selected_campaign_model = self.selected_campaign_model
+        # while loading dump data, "selected_campaign_model" results in KeyError
+        # "selected_campaign_model_id" works though
+        # bare for now, to make dumpdata working properly
+        try:
+            self.__selected_campaign_model = self.selected_campaign_model
+        except:
+            pass
 
     def save(self, *args, **kwargs):
         model_selection_changed = (
