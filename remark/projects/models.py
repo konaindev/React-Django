@@ -1101,7 +1101,9 @@ class Campaign(models.Model):
             old = type(self).objects.get(pk=self.pk) if self.pk else None
         except:
             old = None
+
         super().save(*args, **kwargs)
+
         # detect change on selected_campaign_model
         if old and old.selected_campaign_model != self.selected_campaign_model:
             self.update_for_selected_model()
