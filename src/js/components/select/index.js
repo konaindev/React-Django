@@ -5,12 +5,15 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 import ReactSelect, { components } from "react-select";
 
+import { IconUp, IconDown } from "../../icons";
+
 import "./select.scss";
 
 function DropdownIndicator(props) {
   return (
     <components.DropdownIndicator {...props}>
-      <div className="select__dropdown-arrow" />
+      <IconDown className="select__dropdown-arrow select__dropdown-arrow--down" />
+      <IconUp className="select__dropdown-arrow select__dropdown-arrow--up" />
     </components.DropdownIndicator>
   );
 }

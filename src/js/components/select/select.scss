@@ -25,9 +25,14 @@
             }
         }
         &--menu-is-open {
-            .select__dropdown-arrow {
-                background-image: url("../../../images/icon-up.svg");
-                background-position: -1px 0;
+            .select__dropdown-arrow{
+                &--up {
+                    display: block;
+                }
+
+                &--down {
+                    display: none;
+                }
             }
         }
     }
@@ -53,10 +58,14 @@
     }
 
     .select__dropdown-arrow {
-        width: 8px;
-        height: 4px;
-        background-position: -1px -1px;
-        background-image: url("../../../images/icon-down.svg");
+        width: 10px;
+        height: 5px;
+        color: #F5FAF7;
+        transform: translate(1px, -1px);
+
+        &--up {
+            display: none;
+        }
     }
 
     .select__single-value {
