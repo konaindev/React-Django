@@ -12,11 +12,13 @@ $label-size: 14px;
 $section-background: $gray-3;
 $section-height: 360px;
 $section-width: 645px;
-$section-spacing: 60px;
+$section-spacing: 50px 40px;
 $section-border-color: $gray-9;
+$expenses-spacing: 5%;
 $row-height: 60px;
 $mark-size: 1.5rem;
-$mark-spacing: 16px;
+$mark-spacing: 10px;
+$value-spacing: 10px;
 
 .investment-allocation {
     max-width: $section-width;
@@ -32,7 +34,6 @@ $mark-spacing: 16px;
     padding: $section-spacing;
     background: $section-background;
     border-radius: $border-radius-base;
-
     align-items: center;
 }
 
@@ -44,9 +45,8 @@ $mark-spacing: 16px;
 
 .investment-allocation__expenses {
     display: flex;
-    margin-left: $section-spacing;
+    margin-left: $expenses-spacing;
     flex-direction: column;
-
     flex-grow: 1;
     justify-content: center;
 }
@@ -56,7 +56,6 @@ $mark-spacing: 16px;
     height: $row-height;
     font-family: $font-sans;
     color: $content-text-primary-color;
-
     justify-content: space-between;
     align-items: center;
 
@@ -97,8 +96,8 @@ $mark-spacing: 16px;
 
 .investment-allocation__value {
     display: flex;
+    padding-left: $value-spacing;
     font-size: $text-xl;
-
     align-items: center;
 }
 
