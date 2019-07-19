@@ -191,6 +191,7 @@ class Project(models.Model):
         upload_to=building_image_media_path,
         help_text="""Image of property building<br/>Resized variants (309x220, 180x180, 76x76) will also be created on Amazon S3.""",
         variations={
+            "dashboard": (400, 400, True),
             "landscape": (309, 220, True),
             "regular": (180, 180, True),
             "thumbnail": (76, 76, True),
@@ -452,15 +453,9 @@ class Project(models.Model):
         else:
             return None
 
-    def get_regular_url(self):
-        if self.building_image:
-            return self.building_image.regular.url
-        else:
-            return None
-
     def get_building_image_url(self):
         if self.building_image:
-            return self.building_image.url
+            return self.building_image.dashboard.url
         return None
 
     def get_baseline_url(self):
