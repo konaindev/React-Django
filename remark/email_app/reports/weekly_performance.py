@@ -111,8 +111,8 @@ def create_html(
     topkpis,
     riskkpis,
     lowkpis,
-    riskkpitext,
-    lowkpitext,
+    risk_kpi_insight_text,
+    low_kpi_insight_text,
     email,
 ):
     project_id = project.public_id
@@ -148,8 +148,8 @@ def create_html(
         "lease_rate": top_kpi("lease_rate", this_week),
         "best_kpi": top_kpi(bestkpi, this_week, prev_week, bestkpitext),
         "worst_kpi": top_kpi(worstkpi, this_week, prev_week, worstkpitext),
-        "risk_kpi_text": riskkpitext,
-        "low_kpi_text": lowkpitext,
+        "risk_kpi_insight_text": risk_kpi_insight_text,
+        "low_kpi_insight_text": low_kpi_insight_text,
         "email": email,
         "campaign_goal_chart_url": campaign_goal_chart_url(project, this_week),
     }
@@ -212,8 +212,8 @@ def send_performance_email(performance_email_id):
         perf_email.top_kpis,
         perf_email.risk_kpis,
         perf_email.low_kpis,
-        perf_email.risk_kpi_text,
-        perf_email.low_kpi_text,
+        perf_email.risk_kpi_insight_text,
+        perf_email.low_kpi_insight_text,
         CONTACT_EMAIL,
     )
 

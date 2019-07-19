@@ -63,7 +63,7 @@ class EmailTestPage(ContentView):
                 "name" : "Unique Site Visitors",
                 "model_percent" : "120%"
             },
-            "risk_kpi_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque congue risus libero, vel cursus nibh porttitor nec.",
+            "risk_kpi_insight_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque congue risus libero, vel cursus nibh porttitor nec.",
             "low_1": {
                 "name" : "Applications",
                 "model_percent" : "150%"
@@ -76,5 +76,16 @@ class EmailTestPage(ContentView):
                 "name" : "Unique Site Visitors",
                 "model_percent" : "120%"
             },
+            "low_kpi_insight_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque congue risus libero, vel cursus nibh porttitor nec.",
         }
+
+        # need some variants for testing this email template
+        # currently supports "no_kpis"
+        variant = request.GET.get("variant")
+        if variant == "no_kpi":
+            fields_to_remove = ["risk_1", "risk_2", "risk_3", "low_1", "low_2", "low_3"]
+            for field in fields_to_remove:
+                if field in data:
+                    data.pop(field)
+
         return self.render("email/weekly_performance_report/index.html", **data)

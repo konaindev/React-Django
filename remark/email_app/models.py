@@ -42,8 +42,8 @@ class PerformanceEmail(models.Model):
     top_performing_insight = models.TextField()
     low_performing_kpi = models.TextField(choices=KPI_NAMES.items())
     low_performing_insight = models.TextField()
-    risk_kpi_text = models.TextField(null=True, help_text="Optional text for At Risk section")
-    low_kpi_text = models.TextField(null=True, help_text="Optional text for Off Track section")
+    risk_kpi_insight_text = models.TextField(null=True, help_text="Optional text below At Risk KPI's")
+    low_kpi_insight_text = models.TextField(null=True, help_text="Optional text below Off Track KPI's")
 
     # SendGrid email campaign ID
     email_campaign_id = models.CharField(

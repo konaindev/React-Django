@@ -133,25 +133,28 @@
 {% if not kpi_1 and not kpi_2 and not kpi_3 %}
   {% include "./campaign_to_date_no_kpis.html" with health=health only %}
   {% include "./campaign_to_date_list_break.html" %}
-{% endif %}
 
-{% if kpi_1 %}
-  {% include "./campaign_to_date_list_item.html" with kpi=kpi_1 health=health only %}
-  {% include "./campaign_to_date_list_break.html" %}
-{% endif %}
+{% else %}
 
-{% if kpi_2 %}
-  {% include "./campaign_to_date_list_item.html" with kpi=kpi_2 health=health only %}
-  {% include "./campaign_to_date_list_break.html" %}
-{% endif %}
+  {% if kpi_1 %}
+    {% include "./campaign_to_date_list_item.html" with kpi=kpi_1 health=health only %}
+    {% include "./campaign_to_date_list_break.html" %}
+  {% endif %}
 
-{% if kpi_3 %}
-  {% include "./campaign_to_date_list_item.html" with kpi=kpi_3 health=health only %}
-  {% include "./campaign_to_date_list_break.html" %}
-{% endif %}
-                  <!-- End Badge Table -->
-{% if kpi_text %}
-  {% include "./campaign_to_date_list_kpitext.html" with kpi_text=kpi_text only %}
+  {% if kpi_2 %}
+    {% include "./campaign_to_date_list_item.html" with kpi=kpi_2 health=health only %}
+    {% include "./campaign_to_date_list_break.html" %}
+  {% endif %}
+
+  {% if kpi_3 %}
+    {% include "./campaign_to_date_list_item.html" with kpi=kpi_3 health=health only %}
+    {% include "./campaign_to_date_list_break.html" %}
+  {% endif %}
+                    <!-- End Badge Table -->
+  {% if kpi_insight_text %}
+    {% include "./campaign_to_date_list_kpi_insight.html" with kpi_text=kpi_insight_text only %}
+  {% endif %}
+
 {% endif %}
 
                 </td>

@@ -24,8 +24,8 @@ class PerformanceEmailAdmin(admin.ModelAdmin):
         "top_performing_insight",
         "low_performing_kpi",
         "low_performing_insight",
-        "risk_kpi_text",
-        "low_kpi_text",
+        "risk_kpi_insight_text",
+        "low_kpi_insight_text",
     ]
     list_display = ["project", "start", "created_by"]
 
