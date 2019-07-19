@@ -80,8 +80,9 @@ def campaign_goal_chart_url(project, this_week):
     selector = SELECTORS["lease_rate"]
     formatter = percent_formatter_no_suffix
 
+    this_week_end = this_week["dates"]["end"]
     target_period = (
-        TargetPeriod.objects.filter(project=project).order_by("start").first()
+        TargetPeriod.objects.filter(project=project, end__lte=this_week_end).order_by("-end").first()
     )
     goal_date = target_period.end
     goal = formatter(target_period.target_leased_rate)

@@ -13,12 +13,12 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='performanceemail',
             name='low_kpi_insight_text',
-            field=models.TextField(help_text="Optional text below Off Track KPI's", null=True),
+            field=models.TextField(help_text="Optional text below Off Track KPI's", null=True, blank=True),
         ),
         migrations.AddField(
             model_name='performanceemail',
             name='risk_kpi_insight_text',
-            field=models.TextField(help_text="Optional text below At Risk KPI's", null=True),
+            field=models.TextField(help_text="Optional text below At Risk KPI's", null=True, blank=True),
         ),
         migrations.AlterField(
             model_name='performanceemail',
