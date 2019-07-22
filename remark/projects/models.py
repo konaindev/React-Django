@@ -9,6 +9,7 @@ from django.contrib.auth.models import Group
 from django.urls import reverse
 from django.utils.crypto import get_random_string
 
+from image_cropping import ImageRatioField
 from jsonfield import JSONField
 from stdimage.models import StdImageField
 
@@ -23,7 +24,6 @@ from remark.lib.metrics import (
 from remark.projects.spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
 from remark.projects.reports.performance import PerformanceReport
 from remark.projects.constants import PROPERTY_TYPE, BUILDING_CLASS
-
 
 
 def pro_public_id():
@@ -555,6 +555,7 @@ class Property(models.Model):
         help_text="""Image of property logo<br/>Resized variants (180x180, 76x76) will also be created on Amazon S3.""",
         variations={"regular": (180, 180), "thumbnail": (76, 76)},
     )
+    building_logo_cropping = ImageRatioField("building_logo", "180x180")
 
     building_image = StdImageField(
         blank=True,
@@ -568,6 +569,8 @@ class Property(models.Model):
             "thumbnail": (76, 76, True),
         },
     )
+    building_image_cropping = ImageRatioField("building_image", "400x400")
+    building_image_landscape_cropping = ImageRatioField("building_image", "309x220")
 
     property_type = models.IntegerField(choices=PROPERTY_TYPE, null=True, blank=False)
 
