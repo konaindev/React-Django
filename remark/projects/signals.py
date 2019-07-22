@@ -204,11 +204,3 @@ def update_performance_report(sender, instance, created, raw, **kwargs):
         pek.category = "low"
         pek.performance_email = pe
         pek.save()
-
-
-@receiver(post_save, sender=Campaign)
-def delete_related_targets(sender, instance, created, raw, **kwargs):
-    # when selected_campaign_model is set to null
-    # remove all extant target periods
-    if instance.project is not None and instance.selected_campaign_model is None:
-        instance.project.target_periods.all().delete()
