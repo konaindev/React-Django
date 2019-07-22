@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from remark.email_app.models import PerformanceEmail
+from remark.email_app.reports.weekly_performance import generate_template_vars
 from remark.lib.views import ContentView
 
 class EmailTestPage(ContentView):
@@ -7,7 +9,7 @@ class EmailTestPage(ContentView):
     template_name = "email/weekly_performance_report/index.html"
 
     def get(self, request):
-        data = {
+        template_vars = {
             "report_url": f"https://app.remarkably.io/projects/abc/performance/last-week/",
             "start_date": "05/24/2019",
             "end_date": "05/30/2019",
@@ -85,7 +87,17 @@ class EmailTestPage(ContentView):
         if variant == "no_kpi":
             fields_to_remove = ["risk_1", "risk_2", "risk_3", "low_1", "low_2", "low_3"]
             for field in fields_to_remove:
-                if field in data:
-                    data.pop(field)
+                if field in template_vars:
+                    template_vars.pop(field)
 
-        return self.render("email/weekly_performance_report/index.html", **data)
+        # Allow preview of a specific PerformanceEmail instance
+        perf_email_id = request.GET.get("performance_email")
+        try:
+            perf_email = PerformanceEmail.objects.get(pk=perf_email_id)
+        except:
+            perf_email = None
+
+        if perf_email is not None:
+            template_vars = generate_template_vars(perf_email)
+
+        return self.render("email/weekly_performance_report/index.html", **template_vars)
