@@ -3,6 +3,7 @@ from datetime import datetime
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
+from image_cropping import ImageCropWidget
 
 from remark.lib.validators import (
     validate_linebreak_separated_numbers_list,
@@ -197,6 +198,10 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         exclude = ["email_list_id"]
+        widgets = {
+            "building_logo": ImageCropWidget,
+            "building_image": ImageCropWidget,
+        }
 
 
 def multiline_text_to_str_array(text):
