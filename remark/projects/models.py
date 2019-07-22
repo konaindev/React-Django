@@ -1154,7 +1154,7 @@ class Campaign(models.Model):
         ]
         # Campaigns typically don't over lap BUT if they do,
         # you should use the Target Periods from the __latter__ Campaign
-        active_models.sort(key=lambda m: m.model_end)
+        active_models.sort(key=lambda m: m.model_start)
 
         for active_model in active_models:
             for target_data in _get_model_targets(active_model):
