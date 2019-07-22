@@ -437,7 +437,7 @@ class Project(models.Model):
 
     def get_building_image_url(self):
         if self.building_image:
-            return self.building_image.dashboard.url
+            return self.building_image.url
         return None
 
     def get_baseline_url(self):
