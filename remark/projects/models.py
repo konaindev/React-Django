@@ -381,24 +381,6 @@ class Project(models.Model):
         """
         return self.periods.filter(start__gte=self.baseline_end)
 
-    def get_campaign_target_periods(self):
-        """
-        Return the campaign target periods for this project.
-        """
-
-        # Hack to support CampaignModel's without a campaign attached.
-        # This needs to be removed
-        if self.target_periods.all().exclude(campaign_model=None).count() > 0:
-            qs = self.target_periods.all().exclude(campaign_model=None)
-        else:
-            qs = self.target_periods.all()
-
-        return self._target_periods(
-            qs.filter(start__gte=self.baseline_end),
-            start=self.baseline_end,
-            end=self.get_campaign_end() or self.baseline_end,
-        )
-
     def get_campaign_period_dates(self):
         """
         Return tuples containing start and end dates for all campaign periods.
