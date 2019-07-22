@@ -2,17 +2,20 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2
+version: 2.1
+
+orbs:
+  aws-cli: circleci/aws-cli@0.1.1
+  node: circleci/node@1.1.3
+  heroku: circleci/heroku@0.0.8
+
 jobs:
   build:
     docker:
-      # specify the version you desire here
-      - image: circleci/node:11.7.0
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
+      - image: circleci/python:3.7.2-node
+      - image: circleci/postgres:latest
+      - image: circleci/redis:latest
+      # pre-built images https://circleci.com/docs/2.0/circleci-images/
 
     working_directory: ~/repo
 
@@ -27,11 +30,67 @@ jobs:
             - v1-dependencies-
 
       - run: yarn install
-
+      - run: pipenv install
+      - run: yarn build
+      - run: pipenv run python manage.py collectstatic
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
+      - run: mv .env-example .env
+
       # run tests!
       - run: yarn test-ui
+      - run: pipenv run python manage.py test
+      - run: pipenv run python manage.py migrate
+      - run: pipenv run python manage.py loaddata data/dumped/latest.json
+
+  deploy-staging:
+    docker:
+      # specify the version you desire here
+      - image: circleci/python:3.6.4
+
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mongo:3.4.4
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - aws-cli/install
+      - run:
+          name: Fetch .env from s3
+          command: |
+            aws s3 cp s3://remarkably-staging-58d2d32d-caeb-4629-a941-3b16bb028421/env ~/repo/.env
+      - run:
+          name: Deploy Staging to Heroku
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/remarkably-staging.git master --force
+      - run: curl https://cli-assets.heroku.com/install.sh | sh
+      - run: heroku pg:reset --app remarkably-staging DATABASE_URL --confirm remarkably-staging
+      - run: heroku run -x -a remarkably-staging python manage.py migrate
+      - run: heroku run -x -a remarkably-staging python manage.py loaddata data/dumped/latest.json
+
+workflows:
+  version: 2.1
+
+  tests-only:
+    jobs:
+      - build:
+          filters:
+            branches:
+              ignore: staging
+
+  build-deploy:
+    jobs:
+      - build
+      - deploy-staging:
+          context: stage-aws
+          requires:
+            - build
+          filters:
+            branches:
+              only: staging

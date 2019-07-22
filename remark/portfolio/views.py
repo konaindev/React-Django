@@ -132,7 +132,7 @@ LEASING_PERFORMANCE = {
                     "image_url":
                         "https://g5-assets-cld-res.cloudinary.com/image/upload/q_auto,f_auto,fl_lossy/g5/g5-c-ibsddh6p-pillar-properties-client/g5-cl-55us94ubz-the-lyric-capitol-hill/uploads/apartments-for-rent-seattle-hero.jpg",
                     "health": 2,
-                    "url": "/projects/pro_p5ekr6sr760axrnm/",
+                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
                     "kpis": {
                         "lease_rate": "57%",
                         "renewal_rate": "0%",
@@ -150,7 +150,7 @@ LEASING_PERFORMANCE = {
                     "image_url":
                         "https://res.cloudinary.com/sagacity/image/upload/c_crop,h_4557,w_4165,x_0,y_257/c_limit,dpr_auto,f_auto,fl_lossy,q_80,w_1080/1017-habitat-collective-on-4th_commzl.jpg",
                     "health": 2,
-                    "url": "/projects/pro_p5ekr6sr760axrnm/",
+                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
                     "kpis": {
                         "lease_rate": "84%",
                         "renewal_rate": "33%",
@@ -186,7 +186,7 @@ LEASING_PERFORMANCE = {
                     "image_url":
                         "https://1-aegir0-camdenliving-com45.s3.amazonaws.com/styles/_min-width___480px_/s3/community/camden-north-end/headers/camdennorthend201857copy.jpg?itok=MMgp28cs&timestamp=1549062957",
                     "health": 1,
-                    "url": "/projects/pro_p5ekr6sr760axrnm/",
+                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
                     "kpis": {
                         "lease_rate": "87%",
                         "renewal_rate": "0%",
@@ -204,7 +204,7 @@ LEASING_PERFORMANCE = {
                     "image_url":
                         "https://g5-assets-cld-res.cloudinary.com/image/upload/q_auto,f_auto,fl_lossy/g5/g5-c-1t2d31r8-berkshire-communities/g5-cl-i2qo6kgi-roosevelt-square/uploads/berk-rooseveltsq-41-gallery.jpg",
                     "health": 2,
-                    "url": "/projects/pro_p5ekr6sr760axrnm/",
+                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
                     "kpis": {
                         "lease_rate": "88%",
                         "renewal_rate": "33%",
@@ -280,15 +280,15 @@ CAMPAIGN_INVESTMENT = {
             "health": 2,
             "name": "investment",
             "label": "Campaign Investment",
-            "target": "$7,250.00",
-            "value": "$7,404.06"
+            "target": "$7,250",
+            "value": "$7,404"
         },
         {
             "health": 1,
             "name": "est_revenue_change",
             "label": "Est. Revenue Change",
-            "target": "$62,275.00",
-            "value": "$36,900.00"
+            "target": "$62,275",
+            "value": "$36,900"
         },
         {
             "health": 0,
@@ -314,13 +314,13 @@ CAMPAIGN_INVESTMENT = {
                 "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png",
             "kpis": {
                 "investment": "$11,748.13",
-                "est_revenue_change": "$73,200.00",
+                "est_revenue_change": "$73,200",
                 "romi": "7",
                 "exe_rent_ratio": "197%"
             },
             "targets": {
                 "investment": "$11,300.00",
-                "est_revenue_change": "$93,050.00",
+                "est_revenue_change": "$93,050",
                 "romi": "10",
                 "exe_rent_ratio": "142%"
             },
@@ -331,16 +331,16 @@ CAMPAIGN_INVESTMENT = {
                     "image_url":
                         "https://g5-assets-cld-res.cloudinary.com/image/upload/q_auto,f_auto,fl_lossy/g5/g5-c-ibsddh6p-pillar-properties-client/g5-cl-55us94ubz-the-lyric-capitol-hill/uploads/apartments-for-rent-seattle-hero.jpg",
                     "health": 2,
-                    "url": "/projects/pro_p5ekr6sr760axrnm/",
+                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
                     "kpis": {
                         "investment": "$8,063.75",
-                        "est_revenue_change": "$86,400.00",
+                        "est_revenue_change": "$86,400",
                         "romi": "11",
                         "exe_rent_ratio": "156%"
                     },
                     "targets": {
                         "investment": "$7,600.00",
-                        "est_revenue_change": "$117,700.00",
+                        "est_revenue_change": "$117,700",
                          "romi": "15",
                          "exe_rent_ratio": "108%"
                     }
@@ -351,16 +351,16 @@ CAMPAIGN_INVESTMENT = {
                     "image_url":
                         "https://res.cloudinary.com/sagacity/image/upload/c_crop,h_4557,w_4165,x_0,y_257/c_limit,dpr_auto,f_auto,fl_lossy,q_80,w_1080/1017-habitat-collective-on-4th_commzl.jpg",
                     "health": 2,
-                    "url": "/projects/pro_p5ekr6sr760axrnm/",
+                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
                     "kpis": {
                         "investment": "$15,432.50",
-                        "est_revenue_change": "$60,000.00",
+                        "est_revenue_change": "$60,000",
                         "romi": "4",
                         "exe_rent_ratio": "239%"
                     },
                     "targets": {
                         "investment": "$15,000.00",
-                        "est_revenue_change": "$68,400.00",
+                        "est_revenue_change": "$68,400",
                         "romi": "5",
                         "exe_rent_ratio": "175%"
                     }
@@ -374,13 +374,13 @@ CAMPAIGN_INVESTMENT = {
                 "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png",
             "kpis": {
                         "investment": " $3,060.00 ",
-                        "est_revenue_change": " $600.00 ",
+                        "est_revenue_change": " $600",
                         "romi": "-1",
                         "exe_rent_ratio": "69%"
                     },
                     "targets": {
                         "investment": " $3,200.00 ",
-                        "est_revenue_change": " $31,500.00 ",
+                        "est_revenue_change": " $31,500",
                         "romi": "11",
                         "exe_rent_ratio": "80%"
                     },
@@ -391,16 +391,16 @@ CAMPAIGN_INVESTMENT = {
                     "image_url":
                         "https://1-aegir0-camdenliving-com45.s3.amazonaws.com/styles/_min-width___480px_/s3/community/camden-north-end/headers/camdennorthend201857copy.jpg?itok=MMgp28cs&timestamp=1549062957",
                     "health": 1,
-                    "url": "/projects/pro_p5ekr6sr760axrnm/",
+                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
                     "kpis": {
                         "investment": " $2,140.00 ",
-                        "est_revenue_change": "- $10,200.00",
+                        "est_revenue_change": "- $10,200",
                         "romi": "-5",
                         "exe_rent_ratio": "60%"
                     },
                     "targets": {
                         "investment": " $2,600.00 ",
-                        "est_revenue_change": " $44,300.00 ",
+                        "est_revenue_change": " $44,300",
                         "romi": "17",
                         "exe_rent_ratio": "67%"
                     }
@@ -411,16 +411,16 @@ CAMPAIGN_INVESTMENT = {
                     "image_url":
                         "https://g5-assets-cld-res.cloudinary.com/image/upload/q_auto,f_auto,fl_lossy/g5/g5-c-1t2d31r8-berkshire-communities/g5-cl-i2qo6kgi-roosevelt-square/uploads/berk-rooseveltsq-41-gallery.jpg",
                     "health": 2,
-                    "url": "/projects/pro_p5ekr6sr760axrnm/",
+                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
                     "kpis": {
                         "investment": " $3,980.00 ",
-                        "est_revenue_change": " $11,400.00 ",
+                        "est_revenue_change": " $11,400",
                         "romi": "3",
                         "exe_rent_ratio": "78%"
                     },
                     "targets": {
                         "investment": " $3,800.00 ",
-                        "est_revenue_change": " $18,700.00 ",
+                        "est_revenue_change": " $18,700",
                         "romi": "5",
                         "exe_rent_ratio": "94%"
                     }
@@ -433,8 +433,8 @@ CAMPAIGN_INVESTMENT = {
             "image_url":
                 "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/remarkably_national.png",
             "kpis": {
-                        "investment": " $4,509.37 ",
-                        "est_revenue_change": " $44,900.00 ",
+                        "investment": " $4,509",
+                        "est_revenue_change": "$44,900",
                         "romi": "19",
                         "exe_rent_ratio": "86%"
                     },
@@ -453,13 +453,13 @@ CAMPAIGN_INVESTMENT = {
             "properties": 11,
             "kpis": {
                         "investment": " $7,404.06 ",
-                        "est_revenue_change": " $36,900.00 ",
+                        "est_revenue_change": " $36,900",
                         "romi": "3",
                         "exe_rent_ratio": "133%"
                     },
                     "targets": {
                         "investment": " $7,250.00 ",
-                        "est_revenue_change": " $62,275.00 ",
+                        "est_revenue_change": " $62,275",
                         "romi": "11",
                         "exe_rent_ratio": "111%"
                     }
@@ -544,7 +544,7 @@ RETENTION_PERFORMANCE = {
                     "image_url":
                         "https://g5-assets-cld-res.cloudinary.com/image/upload/q_auto,f_auto,fl_lossy/g5/g5-c-ibsddh6p-pillar-properties-client/g5-cl-55us94ubz-the-lyric-capitol-hill/uploads/apartments-for-rent-seattle-hero.jpg",
                     "health": 2,
-                    "url": "/projects/pro_p5ekr6sr760axrnm/",
+                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
                     "kpis": {
                         "move_ins": "4",
                         "move_outs": "0",
@@ -564,7 +564,7 @@ RETENTION_PERFORMANCE = {
                     "image_url":
                         "https://res.cloudinary.com/sagacity/image/upload/c_crop,h_4557,w_4165,x_0,y_257/c_limit,dpr_auto,f_auto,fl_lossy,q_80,w_1080/1017-habitat-collective-on-4th_commzl.jpg",
                     "health": 2,
-                    "url": "/projects/pro_p5ekr6sr760axrnm/",
+                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
                     "kpis": {
                         "move_ins": 0,
                         "move_outs": 1,
@@ -604,7 +604,7 @@ RETENTION_PERFORMANCE = {
                     "image_url":
                         "https://1-aegir0-camdenliving-com45.s3.amazonaws.com/styles/_min-width___480px_/s3/community/camden-north-end/headers/camdennorthend201857copy.jpg?itok=MMgp28cs&timestamp=1549062957",
                     "health": 1,
-                    "url": "/projects/pro_p5ekr6sr760axrnm/",
+                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
                     "kpis": {
                         "move_ins": 3,
                         "move_outs": 5,
@@ -624,7 +624,7 @@ RETENTION_PERFORMANCE = {
                     "image_url":
                         "https://g5-assets-cld-res.cloudinary.com/image/upload/q_auto,f_auto,fl_lossy/g5/g5-c-1t2d31r8-berkshire-communities/g5-cl-i2qo6kgi-roosevelt-square/uploads/berk-rooseveltsq-41-gallery.jpg",
                     "health": 2,
-                    "url": "/projects/pro_p5ekr6sr760axrnm/",
+                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
                     "kpis": {
                         "move_ins": 10,
                         "move_outs": 4,

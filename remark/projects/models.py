@@ -128,25 +128,28 @@ class Project(models.Model):
 
     asset_manager = models.ForeignKey(
         "crm.Business",
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name="asset_manager",
-        blank=False,
+        blank=True,
+        null=True,
         limit_choices_to={"business_type": 2},
     )
 
     property_manager = models.ForeignKey(
         "crm.Business",
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name="property_manager",
-        blank=False,
+        blank=True,
+        null=True,
         limit_choices_to={"business_type": 3},
     )
 
     property_owner = models.ForeignKey(
         "crm.Business",
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         related_name="property_owner",
-        blank=False,
+        blank=True,
+        null=True,
         limit_choices_to={"business_type": 1},
     )
 
@@ -159,11 +162,9 @@ class Project(models.Model):
 
     custom_tags = models.ManyToManyField(Tag, blank=True)
 
-    # This is temporary until we have accounts setup for all our clients
-    # Remove me and link via a ForeignKey when that happens. -TPC
-    customer_name = models.CharField(
-        max_length=255, help_text="The company that hired Remarkaby.", default=""
-    )
+    @property
+    def customer_name(self):
+        return self.account.company_name
 
     # This is a temporary field until we have user accounts setup.
     # When that happens there should be a many to one relationship with
@@ -193,6 +194,7 @@ class Project(models.Model):
         upload_to=building_image_media_path,
         help_text="""Image of property building<br/>Resized variants (309x220, 180x180, 76x76) will also be created on Amazon S3.""",
         variations={
+            "dashboard": (400, 400, True),
             "landscape": (309, 220, True),
             "regular": (180, 180, True),
             "thumbnail": (76, 76, True),
@@ -314,8 +316,6 @@ class Project(models.Model):
         "geo.Address", on_delete=models.SET_NULL, null=True, blank=True
     )
 
-    users = models.ManyToManyField("users.User", related_name="projects")
-
     view_group = models.OneToOneField(
         Group, on_delete=models.SET_NULL, null=True, blank=True, related_name="view_of"
     )
@@ -351,8 +351,16 @@ class Project(models.Model):
         """
         Return a list of all target periods.
         """
+
+        # Hack to support CampaignModel's without a campaign attached.
+        # This needs to be removed
+        if self.target_periods.all().exclude(campaign_model=None).count() > 0:
+            qs = self.target_periods.all().exclude(campaign_model=None)
+        else:
+            qs = self.target_periods.all()
+
         return self._target_periods(
-            self.target_periods.all(),
+            qs,
             start=self.baseline_start,
             end=self.get_campaign_end() or self.baseline_end,
         )
@@ -384,8 +392,16 @@ class Project(models.Model):
         """
         Return the campaign target periods for this project.
         """
+
+        # Hack to support CampaignModel's without a campaign attached.
+        # This needs to be removed
+        if self.target_periods.all().exclude(campaign_model=None).count() > 0:
+            qs = self.target_periods.all().exclude(campaign_model=None)
+        else:
+            qs = self.target_periods.all()
+
         return self._target_periods(
-            self.target_periods.filter(start__gte=self.baseline_end),
+            qs.filter(start__gte=self.baseline_end),
             start=self.baseline_end,
             end=self.get_campaign_end() or self.baseline_end,
         )
@@ -440,15 +456,9 @@ class Project(models.Model):
         else:
             return None
 
-    def get_regular_url(self):
-        if self.building_image:
-            return self.building_image.regular.url
-        else:
-            return None
-
     def get_building_image_url(self):
         if self.building_image:
-            return self.building_image.url
+            return self.building_image.dashboard.url
         return None
 
     def get_baseline_url(self):
@@ -1096,8 +1106,15 @@ class Campaign(models.Model):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        # TODO: remove this swap variable in PR#198
         # Save this for comparison purposes on save(...)
-        self.__selected_campaign_model = self.selected_campaign_model
+        # while loading dump data, "selected_campaign_model" results in KeyError
+        # "selected_campaign_model_id" works though
+        # bare for now, to make dumpdata working properly
+        try:
+            self.__selected_campaign_model = self.selected_campaign_model
+        except:
+            pass
 
     def save(self, *args, **kwargs):
         model_selection_changed = (
@@ -1121,7 +1138,7 @@ class Campaign(models.Model):
         """
 
         def _create_target_period(data):
-            target_period = TargetPeriod(project=self.project, campaign_model=self)
+            target_period = TargetPeriod(project=self.project, campaign_model=self.selected_campaign_model)
             for k, v in data.items():
                 # Yes, this will set values for keys that aren't fields;
                 # that's fine; we don't overwrite anything we shouldn't,
@@ -1134,7 +1151,7 @@ class Campaign(models.Model):
             return
 
         # Remove all extant target periods
-        self.project.target_periods.filter("campaign_model", self).delete()
+        tps = self.project.target_periods.filter(campaign_model=self.selected_campaign_model).delete()
 
         # If there are any, create new target periods!
         option = self.get_selected_model_option()

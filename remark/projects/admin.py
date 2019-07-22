@@ -410,6 +410,7 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
     list_display = [
         "name",
         "public_id",
+        "customer_name",
         "number_of_periods",
         "baseline_start",
         "baseline_end",
@@ -419,8 +420,45 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
         "lowest_monthly_rent",
     ]
 
+    fields = [
+        "name",
+        "account",
+        "asset_manager",
+        "property_manager",
+        "property_owner",
+        "fund",
+        "customer_name",
+        "custom_tags",
+        "email_distribution_list",
+        "building_logo",
+        "building_image",
+        "baseline_start",
+        "baseline_end",
+        "tmp_market_report_json",
+        "tmp_campaign_plan_json",
+        "total_units",
+        "average_tenant_age",
+        "highest_monthly_rent",
+        "average_monthly_rent",
+        "lowest_monthly_rent",
+        "is_baseline_report_public",
+        "is_tam_public",
+        "is_performance_report_public",
+        "is_modeling_public",
+        "is_campaign_plan_public",
+        "is_baseline_report_shared",
+        "is_tam_shared",
+        "is_performance_report_shared",
+        "is_modeling_shared",
+        "is_campaign_plan_shared",
+        "competitors",
+        "address",
+        "view_group",
+    ]
+
+    readonly_fields = ["customer_name"]
+
     form = ProjectForm
-    filter_horizontal = ("users",)
 
     def number_of_periods(self, obj):
         return obj.periods.all().count()
