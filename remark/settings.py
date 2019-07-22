@@ -93,6 +93,7 @@ INSTALLED_APPS = [
     "remark.web",
     "remark.geo",
     "remark",
+    "django_extensions",
 ]
 
 MIDDLEWARE = [
