@@ -40,7 +40,6 @@ const pages = {
 const tmpFetchDashboardData = pageClass => {
   const location = window.location;
   const queryString = location.search;
-  console.log("fetching the data...i think");
   let _newState = {};
   window
     .fetch(

@@ -190,6 +190,7 @@ export class DashboardPage extends React.PureComponent {
                   filters={this.props.filters}
                   onChange={this.onChangeFilter}
                   isDisabled={this.state.isShowLoader}
+                  dispatch={this.props.dispatch}
                 />
               </div>
               <div className="dashboard-content__selection">
