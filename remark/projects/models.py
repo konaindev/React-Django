@@ -154,10 +154,7 @@ class Project(models.Model):
     )
 
     fund = models.ForeignKey(
-        "projects.Fund",
-        on_delete=models.SET_NULL,
-        blank=True,
-        null=True
+        "projects.Fund", on_delete=models.SET_NULL, blank=True, null=True
     )
 
     custom_tags = models.ManyToManyField(Tag, blank=True)
@@ -387,24 +384,6 @@ class Project(models.Model):
         the baseline.
         """
         return self.periods.filter(start__gte=self.baseline_end)
-
-    def get_campaign_target_periods(self):
-        """
-        Return the campaign target periods for this project.
-        """
-
-        # Hack to support CampaignModel's without a campaign attached.
-        # This needs to be removed
-        if self.target_periods.all().exclude(campaign_model=None).count() > 0:
-            qs = self.target_periods.all().exclude(campaign_model=None)
-        else:
-            qs = self.target_periods.all()
-
-        return self._target_periods(
-            qs.filter(start__gte=self.baseline_end),
-            start=self.baseline_end,
-            end=self.get_campaign_end() or self.baseline_end,
-        )
 
     def get_campaign_period_dates(self):
         """
@@ -1116,12 +1095,17 @@ class Campaign(models.Model):
         except:
             pass
 
+    
     def save(self, *args, **kwargs):
-        model_selection_changed = (
-            self.__selected_campaign_model != self.selected_campaign_model
-        )
+        try:
+            old = type(self).objects.get(pk=self.pk) if self.pk else None
+        except:
+            old = None
+
         super().save(*args, **kwargs)
-        if model_selection_changed:
+
+        # detect change on selected_campaign_model
+        if old and old.selected_campaign_model != self.selected_campaign_model:
             self.update_for_selected_model()
 
     def get_selected_model_option(self):
@@ -1137,12 +1121,20 @@ class Campaign(models.Model):
         the currently selected model.
         """
 
-        def _create_target_period(data):
-            target_period = TargetPeriod(project=self.project, campaign_model=self.selected_campaign_model)
-            for k, v in data.items():
-                # Yes, this will set values for keys that aren't fields;
-                # that's fine; we don't overwrite anything we shouldn't,
-                # and extraneous stuff is ignored for save.
+        def _get_model_targets(campaign_model):
+            if campaign_model is None:
+                return []
+            json_data = campaign_model.spreadsheet.json_data
+            return json_data.get("targets", [])
+
+        def _create_target_period(campaign_model, target_data):
+            # override if there is overlapping period
+            self.project.target_periods.filter(end=target_data["end"]).delete()
+            # create TargetPeriod and set fields with json values
+            target_period = TargetPeriod(
+                project=self.project, campaign_model=campaign_model
+            )
+            for k, v in target_data.items():
                 setattr(target_period, k, v)
             target_period.save()
             return target_period
@@ -1151,13 +1143,22 @@ class Campaign(models.Model):
             return
 
         # Remove all extant target periods
-        tps = self.project.target_periods.filter(campaign_model=self.selected_campaign_model).delete()
+        self.project.target_periods.all().delete()
 
-        # If there are any, create new target periods!
-        option = self.get_selected_model_option()
-        if option is not None:
-            for data in option.get("targets", []):
-                _create_target_period(data)
+        campaigns_with_active_models = self.project.campaigns.exclude(
+            selected_campaign_model=None
+        )
+        active_models = [
+            campaign.selected_campaign_model
+            for campaign in campaigns_with_active_models
+        ]
+        # Campaigns typically don't over lap BUT if they do,
+        # you should use the Target Periods from the __latter__ Campaign
+        active_models.sort(key=lambda m: m.model_start)
+
+        for active_model in active_models:
+            for target_data in _get_model_targets(active_model):
+                _create_target_period(active_model, target_data)
 
     def __str__(self):
         return "{} ({})".format(self.name, self.public_id)

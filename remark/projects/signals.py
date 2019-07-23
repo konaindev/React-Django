@@ -216,3 +216,4 @@ def delete_related_targets(sender, instance, created, raw, **kwargs):
             instance.project.target_periods.all().delete()
     except:
         pass
+

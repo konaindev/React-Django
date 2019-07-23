@@ -42,7 +42,39 @@ which you can run [locally](https://hub.docker.com/r/amd64/sentry) via docker.
 Sentry provides the ability to [add contextual data](https://docs.sentry.io/enriching-error-data/context/?platform=javascript#tagging-events) via tagging. This
 will enchance the debugging experience.
 
-## Running the project locally
+## Fixtures
+
+Test fixtures for loading the database are stored in aws s3. The following yarn commands are provided to help update and manage the fixture file until which time a better solution can be implemented:
+
+Dump a copy of your local database into the fixture json
+
+```
+$ yarn dump-local-fixtures
+```
+
+Upload your local fixtures as `<short-hash>.latest.json`. NOTE: the current git commit will be used for the `short-hash`...so know where you are!
+
+```
+$ yarn upload-s3-fixtures
+```
+
+Overwrite the the main fixture file in s3 with the file you uploaded with `upload-s3-fixtures`. NOTE: the current git commit will be used for the `short-hash`...so know where you are!
+
+```
+$ yarn update-s3-fixtures
+```
+
+Attempt to fetch the fixtures for the current commit. NOTE: this will overwrite your local `data/dumped/latest.json`
+
+```
+$ yarn fetch-s3-fixtures
+```
+
+Attempt to fetch the `latest` fixtures from s3. NOTE: this will overwrite your local `data/dumped/latest.json`
+
+```
+$ yarn fetch-latest-fixtures
+```
 
 - Ensure you have all system deps running (postgres, redis, etc)
 - Run `pipenv install` and `pipenv shell` to get the back-end requirements installed.
