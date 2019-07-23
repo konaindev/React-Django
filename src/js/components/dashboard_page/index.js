@@ -263,7 +263,9 @@ export class UrlQueryLayer extends React.PureComponent {
   constructor(props) {
     super(props);
     this.filters = {};
-    const urlParams = new URLSearchParams(props.search_url);
+    const urlParams = new URLSearchParams(
+      props.search_url || window.location.search
+    );
     this.filters = {
       q: urlParams.get("q"),
       ct: urlParams.getAll("ct"),
