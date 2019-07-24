@@ -16,7 +16,7 @@ KPI_BUNDLES = {
     LEASING_PERFORMANCE: {
         "title": "Leasing Performance",
         "kpis": [
-            KPI.lease_rate,
+            KPI.leased_rate,
             KPI.renewal_rate,
             KPI.occupancy_rate
         ]
