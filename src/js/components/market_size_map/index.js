@@ -47,17 +47,17 @@ export class MarketSizeMap extends Component {
     return radius != null && units != null;
   }
 
-  get isZipcodeMode() {
+  get isPolygonMode() {
     const { zip_codes } = this.props;
     return zip_codes && zip_codes.length > 0;
   }
 
-  get isComplexMode() {
-    return this.isCircleMode && this.isZipcodeMode;
+  get isCirclePolygonMode() {
+    return this.isCircleMode && this.isPolygonMode;
   }
 
   get uniqueZipCodes() {
-    if (!this.isZipcodeMode) {
+    if (!this.isPolygonMode) {
       return [];
     }
 
@@ -211,7 +211,7 @@ export class MarketSizeMap extends Component {
   };
 
   renderZipcodePolygons = () => {
-    if (!this.isZipcodeMode) {
+    if (!this.isPolygonMode) {
       return;
     }
 
@@ -231,8 +231,11 @@ export class MarketSizeMap extends Component {
       }
     });
 
-    // Resize the viewport to contain all zipcode areas.
-    this.google.map.fitBounds(this.mapBounds, 0);
+    // fit all polygons, only if map doesn't display circle
+    // if circle is to be shown, circle has higher priority
+    if (false === this.isCirclePolygonMode) {
+      this.google.map.fitBounds(this.mapBounds, 0);
+    }
   };
 
   renderZipcodeMarkers = () => {
