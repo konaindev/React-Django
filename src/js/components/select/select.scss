@@ -138,7 +138,7 @@
 
     .select__control,
     .select__control:hover {
-        padding: 11px 20px 11px 11px;
+        padding: 12px 20px 12px 12px;
         background: inherit;
         border-color: $select-highlight-border-color;
     }
@@ -165,12 +165,12 @@
     }
 
     .select__placeholder {
-        font-weight: 300;
+        font-weight: $weight-light;
         color: $select-highlight-border-color;
     }
 
     .select__menu {
-        margin: -5px 0 0;
+        margin: -6px 0 0;
         background-color: inherit;
         border: 1px solid $select-highlight-border-color;
         border-top: none;
@@ -202,6 +202,20 @@
     .select__menu-list {
         padding-top: 0;
     }
+
+    .select__group {
+        padding: 0;
+    }
+
+    .select__group-heading {
+        color: #798796;
+        font-size: 12px;
+        line-height: 20px;
+        margin: 0;
+        padding: 6px 12px;
+        text-transform: capitalize;
+        font-weight: $weight-light;
+    }
 }
 
 .select-search {
@@ -211,7 +225,7 @@
 
     &.select--highlight {
         .select__control {
-            padding: 11px 20px 11px 11px;
+            padding: 12px 20px 12px 12px;
         }
     }
 }
@@ -220,7 +234,7 @@
     display: inline-block;
     width: auto;
     padding: 0;
-    margin: 6px 11px;
+    margin: 6px 12px;
     background: transparent;
 }
 

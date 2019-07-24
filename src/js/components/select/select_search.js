@@ -19,7 +19,7 @@ export class SelectSearch extends React.PureComponent {
     styles: PropTypes.object,
     cacheOptions: PropTypes.bool,
     placeholder: PropTypes.string,
-    defaultOptions: PropTypes.bool,
+    defaultOptions: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
     value: PropTypes.object,
     isCreatable: PropTypes.bool,
     onCreateOption: PropTypes.func,
