@@ -45,6 +45,15 @@ class BaselineReport(CommonReport):
         baseline_period = multiperiod.get_cumulative_period()
         return cls(project, baseline_period, multiperiod=multiperiod)
 
+    @staticmethod
+    def build_targets(period_values):
+        """
+        A baseline report is based on historical or past performance and
+        thus is not tied to any campaign or model.
+        As such, there should be no targets on the baseline report page.
+        """
+        return None
+
     def build_funnel_history(self):
         if self.multiperiod is None:
             return []
@@ -118,6 +127,5 @@ class BaselineReport(CommonReport):
             report = BaselineReport.for_baseline(project)
             if report:
                 competitors.append(report.build_json_data())
-
         data["competitors"] = competitors
         return data

@@ -203,6 +203,10 @@ class CommonReport(ReportBase):
     def build_funnel_history(self):
         return None
 
+    @staticmethod
+    def build_targets(period_values):
+        return unflatten_optional(TARGET_SCHEMA_MAP, period_values)
+
     # from some type of reports, we might need to drop some metrics
     # ex: "Performance Report" => Remove 4-week target for Acquisition Investment
     def omit_four_week_averages(self, built_averages):
@@ -223,8 +227,7 @@ class CommonReport(ReportBase):
         self.omit_four_week_averages(four_week_funnel_averages)
 
         funnel_history = self.build_funnel_history()
-
-        targets = unflatten_optional(TARGET_SCHEMA_MAP, flat_period_values)
+        targets = self.build_targets(flat_period_values)
 
         if self.delta is None:
             deltas = {}
