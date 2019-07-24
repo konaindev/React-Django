@@ -1,15 +1,14 @@
 @import "css/base.scss";
-@import "css/variables.scss";
 
 .select {
     outline: none;
 
     .select__control {
-        cursor: pointer;
-        padding: 10px 16px;
-        border-radius: $select-border-radius;
-        background-color: transparent;
         height: 100%;
+        padding: 10px 16px;
+        cursor: pointer;
+        background-color: transparent;
+        border-radius: $select-border-radius;
         box-shadow: none;
 
         &, &:hover {
@@ -25,7 +24,7 @@
             }
         }
         &--menu-is-open {
-            .select__dropdown-arrow{
+            .select__dropdown-arrow {
                 &--up {
                     display: block;
                 }
@@ -43,10 +42,10 @@
 
     .select__placeholder {
         margin: 0;
-        color: $input-placeholder-color;
         font-family: $font-sans;
         font-size: $text-sm;
         line-height: $text-xl;
+        color: $input-placeholder-color;
     }
 
     .select__indicator-separator {
@@ -60,7 +59,7 @@
     .select__dropdown-arrow {
         width: 10px;
         height: 5px;
-        color: #F5FAF7;
+        color: #f5faf7;
         transform: translate(1px, -1px);
 
         &--up {
@@ -70,17 +69,17 @@
 
     .select__single-value {
         margin: 0;
-        color: $input-text-color;
         font-family: $font-sans;
         font-size: $text-sm;
         line-height: $text-xl;
+        color: $input-text-color;
     }
 
     .select__menu {
         margin-top: 8px;
-        border-radius: $select-border-radius;
         background-color: $select-background-color;
-        box-shadow: 0 2px 20px 0 rgba(0,0,0,0.35), 0 2px 6px 0 rgba(0,0,0,0.1);
+        border-radius: $select-border-radius;
+        box-shadow: 0 2px 20px 0 rgba(0,0,0,.35), 0 2px 6px 0 rgba(0,0,0,.1);
     }
 
     .select__menu-list {
@@ -89,10 +88,10 @@
 
     .select__option {
         padding: 14px 20px;
-        color: $select-option-background-color2;
         font-family: $font-sans;
         font-size: $text-sm;
         line-height: $text-xl;
+        color: $select-option-background-color2;
         cursor: pointer;
 
         &--is-focused,
@@ -101,6 +100,14 @@
         }
         &:active {
             background-color: $select-option-active-color;
+        }
+    }
+
+    .select__input {
+        color: $input-text-color;
+
+        input {
+            height: 20px;
         }
     }
 }
@@ -122,4 +129,103 @@
             color: $input-text-color;
         }
     }
+}
+
+.select--highlight {
+    display: inline-block;
+    background-color: $select-highlight-bg-color;
+    border-radius: $select-border-radius;
+
+    .select__control,
+    .select__control:hover {
+        padding: 11px 20px 11px 11px;
+        background: inherit;
+        border-color: $select-highlight-border-color;
+    }
+
+    .select__control--is-focused {
+        .select__single-value {
+            color: $select-highlight-value-color;
+        }
+    }
+
+    .select__single-value {
+        color: $select-highlight-value-color;
+    }
+
+    .select__control--menu-is-open,
+    .select__control--menu-is-open:hover {
+        border-bottom: none;
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+    .select__dropdown-arrow {
+        color: $select-highlight-border-color;
+    }
+
+    .select__placeholder {
+        font-weight: 300;
+        color: $select-highlight-border-color;
+    }
+
+    .select__menu {
+        margin: -5px 0 0;
+        background-color: inherit;
+        border: 1px solid $select-highlight-border-color;
+        border-top: none;
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+        box-shadow: none;
+    }
+
+    .select__input {
+        color: $select-highlight-value-color;
+        caret-color: $select-highlight-caret-color;
+    }
+
+    .select__option {
+        padding: 6px 11px;
+        color: $select-highlight-option-color;
+
+        &--is-focused,
+        &--is-selected,
+        &:active {
+            background-color: $select-highlight-option-active-color;
+        }
+    }
+
+    .select__menu-notice--no-options {
+        padding-top: 0;
+    }
+
+    .select__menu-list {
+        padding-top: 0;
+    }
+}
+
+.select-search {
+    .select__control {
+        padding: 9px 16px;
+    }
+
+    &.select--highlight {
+        .select__control {
+            padding: 11px 20px 11px 11px;
+        }
+    }
+}
+
+.select-search__button-container.select__option {
+    display: inline-block;
+    width: auto;
+    padding: 0;
+    margin: 6px 11px;
+    background: transparent;
+}
+
+.select-search__add-button {
+    padding: 8px 12px;
+    font-size: $text-xs;
+    line-height: 10px;
 }

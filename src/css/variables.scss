@@ -22,6 +22,7 @@ $yellow-1: #F3F65C;
 $highlight-gray-1: #8f9993;
 $highlight-gray-2: #bfccc4;
 $highlight-gray-3: #f5faf7;
+$highlight-gray-4: #eff4fb;
 
 // Cyan palette (used in charts)
 $cyan-1: #2a7b6f;
@@ -128,6 +129,12 @@ $select-border-radius: 4px;
 $select-border-color: $gray-4;
 $select-active-background: $blue-3;
 $select-option-color: $highlight-gray-3;
+$select-highlight-bg-color: $white;
+$select-highlight-border-color: $gray-6;
+$select-highlight-value-color: $gray-3;
+$select-highlight-caret-color: $blue-3;
+$select-highlight-option-color: $gray-9;
+$select-highlight-option-active-color: $highlight-gray-4;
 
 $release-note-link-color: $cyan-3;
 
