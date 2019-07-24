@@ -1,10 +1,36 @@
 from remark.lib.views import ReactView
 from remark.lib.logging import getLogger, error_text
+from remark.lib.time_series.common import KPI, KPITitle
 
 logger = getLogger(__name__)
 
 class PortfolioMixin:
     pass
+
+
+LEASING_PERFORMANCE = "leasing_performance"
+CAMPAIGN_INVESTMENT = "campaign_investment"
+RETENTION_PERFORMANCE = "retention_performance"
+
+KPI_BUNDLES = {
+    LEASING_PERFORMANCE: {
+        "title": "Leasing Performance",
+        "kpis": [
+            KPI.lease_rate,
+            KPI.renewal_rate,
+            KPI.occupancy_rate
+        ]
+    },
+    CAMPAIGN_INVESTMENT: {
+        "title": "Campaign Investment",
+        "kpis": [
+            KPI.investment,
+            KPI.estimated_revenue_gain,
+            KPI.romi,
+            KPI.exe_to_lowest_rent
+        ]
+    },
+}
 
 
 class PortfolioTableView(PortfolioMixin, ReactView):
@@ -17,58 +43,81 @@ class PortfolioTableView(PortfolioMixin, ReactView):
         if "b" in request.GET:
             bundle = request.GET["b"]
         else:
-            bundle = "leasing_performance"
+            bundle = LEASING_PERFORMANCE
 
-        bundle_data = LEASING_PERFORMANCE
-        if bundle == "leasing_performance":
-            bundle_data = LEASING_PERFORMANCE
-        elif bundle == "campaign_investment":
-            bundle_data = CAMPAIGN_INVESTMENT
-        elif bundle == "retention_performance":
-            bundle_data = RETENTION_PERFORMANCE
+        if bundle not in KPI_BUNDLES:
+            raise Exception("Could not find KPI Bundle")
+
+        # Pull all property data
+
+        # Figure out what should be grouped
+
+        # Do aggregates for groups and ALL Property
+
+        # Include Remarkably National Average
+
 
         standard_data = {
-            "share_info": {
-                "shared": False,
-                "share_url": "http://app.remarkably.com/",
-                "update_endpoint": "/projects/pro_example/update/"
-            },
-            "kpi_bundles": [
-                {
-                    "name": "Leasing Performance",
-                    "value": "leasing_performance"
-                },
-                {
-                    "name": "Campaign Investment",
-                    "value": "campaign_investment"
-                },
-                {
-                    "name": "Retention Performance",
-                    "value": "retention_performance"
-                }
-            ],
-            "date_selection": {
-                "preset": "custom",
-                "start_date": "2019-06-01",
-                "end_date": "2019-06-07"
-            },
-            "user": {
-                "email": "test@remarkably.io",
-                "user_id": "peep_12345",
-                "account_id": "acc_12345",
-                "account_name": "Remarkably",
-                "logout_url": "/users/logout",
-                "profile_image_url": None
-                  #  "https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg"
-            }
+            "share_info": self.share_info(),
+            "kpi_bundles": self.kpi_bundle_list(),
+            "selected_kpi_bundle": bundle,
+            "kpi_order": self.kpi_ordering(bundle),
+            "date_selection": self.get_date_selection(),
+            "user": self.get_user_info()
         }
         result = dict(**bundle_data, **standard_data)
 
         return self.render(**result)
 
+    def kpi_bundle_list(self):
+        result = []
+        for item in KPI_BUNDLES:
+            result.append({
+                "name": KPI_BUNDLES[item]["title"],
+                "value": item
+            })
+        return result
+
+    def share_info(self):
+        # TODO: Fix ME
+        return {
+            "shared": False,
+            "share_url": "http://app.remarkably.com/",
+            "update_endpoint": "/projects/pro_example/update/"
+        }
+
+    def kpi_ordering(self, bundle):
+        bundle_data = KPI_BUNDLES[bundle]
+        result = []
+        for kpi in bundle_data["kpis"]:
+            result.append({
+                "label": KPITitle.for_kpi(kpi),
+                "value": kpi
+            })
+        return result
+
+    def get_user_info(self):
+        # TODO: Fix me
+        return {
+            "email": "test@remarkably.io",
+            "user_id": "peep_12345",
+            "account_id": "acc_12345",
+            "account_name": "Remarkably",
+            "logout_url": "/users/logout",
+            "profile_image_url": None
+        }
+
+    def get_date_selection(self):
+        # TODO: Fix me
+        return {
+            "preset": "custom",
+            "start_date": "2019-06-01",
+            "end_date": "2019-06-07"
+        }
 
 
-LEASING_PERFORMANCE = {
+
+leasing_perf = {
     "selected_kpi_bundle": "leasing_performance",
     "kpi_order": [
         {
@@ -254,7 +303,7 @@ LEASING_PERFORMANCE = {
     ]
 }
 
-CAMPAIGN_INVESTMENT = {
+campaign_invest = {
     "selected_kpi_bundle": "campaign_investment",
     "kpi_order": [
         {

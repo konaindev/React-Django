@@ -17,12 +17,13 @@ def select(base_query, start, end, hydrater=None):
 
     query = base_query.filter(Q(before | middle | after)).order_by("end")
     ts = list(query)
-    if hydrater is not None:
-        result = []
-        for item in ts:
-            result.append(hydrater(item))
-    else:
+
+    if hydrater is None:
         return ts
+
+    result = []
+    for item in ts:
+        result.append(hydrater(item))
     return result
 
 
