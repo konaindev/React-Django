@@ -8,14 +8,17 @@ import {
   GOOGLE_MAP_API_KEY,
   DEFAULT_ZOOM,
   createDefaultMapOptions,
-  stylesForRegionFill,
-  mapCirclePointColor
+  greenAreaTheme,
+  grayAreaTheme,
+  blueAreaTheme
 } from "./map_settings";
 import "./market_size_map.scss";
 
 // markers rendered as children of <GoogleMap /> SHOULD be a React component
-const ZipcodeText = ({ zipcode }) => (
-  <div className="zip-code-text">{zipcode}</div>
+const ZipcodeText = ({ zipcode, labelColor }) => (
+  <div className="zip-code-text" style={{ color: labelColor }}>
+    {zipcode}
+  </div>
 );
 const RadiusTextRotated = ({ radius, units }) => (
   <div className="radius-text-rotated">{`${radius} ${units}`}</div>
@@ -54,6 +57,14 @@ export class MarketSizeMap extends Component {
 
   get isCirclePolygonMode() {
     return this.isCircleMode && this.isPolygonMode;
+  }
+
+  get circleTheme() {
+    return greenAreaTheme;
+  }
+
+  get polygonTheme() {
+    return this.isCirclePolygonMode ? grayAreaTheme : blueAreaTheme;
   }
 
   get uniqueZipCodes() {
@@ -101,40 +112,40 @@ export class MarketSizeMap extends Component {
       130
     );
 
-    // circle with blue border and opacity filled
     let circle = new google.maps.Circle({
       map: google.map,
       center: centerLatLng,
       radius: radiusInMeter,
-      ...stylesForRegionFill
+      ...this.circleTheme
     });
 
     // resize map so that circle is drawn in proper size
     google.map.fitBounds(circle.getBounds(), 0);
 
+    // base circle point for center/border markers
     const pointSymbol = {
       path: google.maps.SymbolPath.CIRCLE,
       scale: 8,
-      fillColor: mapCirclePointColor,
+      fillColor: this.circleTheme.strokeColor,
       fillOpacity: 1,
       strokeOpacity: 0
     };
 
-    // white point in the center of the circle
+    // green point in the center of the circle
     let centerMarker = new google.maps.Marker({
       position: centerLatLng,
       map: google.map,
       icon: pointSymbol
     });
 
-    // white point on the border of the circle
+    // green point on the border of the circle
     let borderMarker = new google.maps.Marker({
       position: borderLatLng,
       map: google.map,
       icon: pointSymbol
     });
 
-    // white dashed line connecting these two markers above
+    // green dashed line connecting these two markers above
     const dashSymbol = {
       path: "M 0,-1 0,1",
       strokeOpacity: 1,
@@ -145,7 +156,7 @@ export class MarketSizeMap extends Component {
     let radiusLine = new google.maps.Polyline({
       path: [centerLatLng, borderLatLng],
       map: google.map,
-      strokeColor: mapCirclePointColor,
+      strokeColor: this.circleTheme.strokeColor,
       strokeOpacity: 0,
       icons: [
         {
@@ -206,7 +217,7 @@ export class MarketSizeMap extends Component {
     let polygon = new google.maps.Polygon({
       map: google.map,
       paths: [outerCoords, ...innerCoords],
-      ...stylesForRegionFill
+      ...this.polygonTheme
     });
   };
 
@@ -253,6 +264,7 @@ export class MarketSizeMap extends Component {
           lat={center[1]}
           lng={center[0]}
           zipcode={zip}
+          labelColor={this.polygonTheme.labelColor}
         />
       );
     });
