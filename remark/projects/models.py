@@ -1268,3 +1268,20 @@ class CampaignModel(models.Model):
 
     class Meta:
         ordering = ["model_index"]
+
+
+class LeaseStage(models.Model):
+    full_name = models.CharField(max_length=30, blank=False, null=False)
+    short_name = models.CharField(max_length=30, blank=False, null=False)
+
+
+class PropertyLeaseStage(models.Model):
+    project = models.ForeignKey(
+        Project, on_delete=models.CASCADE, related_name="lease_stage"
+    )
+    lease_stage = models.ForeignKey(LeaseStage, on_delete=models.CASCADE)
+
+    start = models.DateField(db_index=True, null=False, blank=False)
+    end = models.DateField(db_index=True, null=True, blank=True)
+
+    includes_remarkably_effect = models.BooleanField(default=True, blank=True)
