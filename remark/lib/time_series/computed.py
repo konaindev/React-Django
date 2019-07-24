@@ -76,7 +76,6 @@ def op(name, needs, fun):
     return operation(name=f"{name}_op", needs=needs, provides=[name])(fun)
 
 
-# FIX ME: Change the rest of the string to KPI field references
 kpi_graph = compose(name="kpi_graph")(
 
     # Leasing
