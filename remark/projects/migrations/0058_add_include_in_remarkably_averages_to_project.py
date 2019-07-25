@@ -5,7 +5,7 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [("projects", "0056_remove_users_from_project")]
+    dependencies = [("projects", "0057_merge_20190719_0759")]
 
     operations = [
         migrations.AddField(
