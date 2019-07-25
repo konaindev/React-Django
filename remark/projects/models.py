@@ -22,6 +22,8 @@ from remark.lib.metrics import (
 )
 from remark.projects.spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
 from remark.projects.reports.performance import PerformanceReport
+from remark.projects.constants import PROPERTY_TYPE, BUILDING_CLASS
+
 
 
 def pro_public_id():
@@ -142,7 +144,7 @@ class Project(models.Model):
         related_name="asset_manager",
         blank=True,
         null=True,
-        limit_choices_to={"business_type": 2},
+        limit_choices_to={"is_asset_manager": True},
     )
 
     property_manager = models.ForeignKey(
@@ -151,7 +153,7 @@ class Project(models.Model):
         related_name="property_manager",
         blank=True,
         null=True,
-        limit_choices_to={"business_type": 3},
+        limit_choices_to={"is_property_manager": True},
     )
 
     property_owner = models.ForeignKey(
@@ -160,7 +162,16 @@ class Project(models.Model):
         related_name="property_owner",
         blank=True,
         null=True,
-        limit_choices_to={"business_type": 1},
+        limit_choices_to={"is_property_owner": True},
+    )
+
+    developer = models.ForeignKey(
+        "crm.Business",
+        on_delete=models.SET_NULL,
+        related_name="developer",
+        blank=True,
+        null=True,
+        limit_choices_to={"is_developer": True},
     )
 
     fund = models.ForeignKey(
@@ -378,7 +389,8 @@ class Project(models.Model):
     def get_building_image_url(self):
         property = self.property
         if property.building_image:
-            return property.building_image.dashboard.url
+            return property.building_image.url
+
         return None
 
     def get_baseline_url(self):
@@ -522,6 +534,12 @@ class Property(models.Model):
             "regular": (180, 180, True),
             "thumbnail": (76, 76, True),
         },
+    )
+
+    property_type = models.IntegerField(choices=PROPERTY_TYPE, null=True, blank=False)
+
+    building_class = models.IntegerField(
+        choices=BUILDING_CLASS, null=False, blank=False, default=1
     )
 
     def __str__(self):

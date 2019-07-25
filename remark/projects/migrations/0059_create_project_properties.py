@@ -3,14 +3,31 @@
 from django.db import migrations
 
 
+def create_temporary_address(apps):
+    Address = apps.get_model('geo', 'Address')
+    temp_address = Address(
+        formatted_address="Columbia Tower",
+        street_address_1="111 Columbia Street",
+        street_address_2="",
+        city="Seattle",
+        state="WA",
+        zip_code="98111",
+        country="USA",
+        geocode_json=None,
+    )
+    temp_address.save()
+    return temp_address
+
+
 def create_properties(apps, schema_editor):
     Project = apps.get_model('projects', 'Project')
     Property = apps.get_model('projects', 'Property')
     for p in Project.objects.all():
         if p.property is not None:
             continue
-        if not p.address:
-            raise ValueError(f'Project "{p.name}" does not have address object')
+        address = p.address
+        if not address:
+            address = create_temporary_address(apps)
         property = Property(
             name=f'{p.name}',
             average_tenant_age=p.average_tenant_age or 0,
@@ -18,7 +35,7 @@ def create_properties(apps, schema_editor):
             highest_monthly_rent=p.highest_monthly_rent or 0,
             average_monthly_rent=p.average_monthly_rent or 0,
             lowest_monthly_rent=p.lowest_monthly_rent or 0,
-            geo_address=p.address,
+            geo_address=address,
             building_logo=p.building_logo,
             building_image=p.building_image,
         )

@@ -27,19 +27,19 @@ class PropertyListTestCase(TestCase):
             account=self.account, email="test@test.com", password="testpassword"
         )
         self.asset_manager1 = Business.objects.create(
-            name="Test Asset Manager", business_type=2
+            name="Test Asset Manager", is_asset_manager=True
         )
         self.asset_manager2 = Business.objects.create(
-            name="Test Asset Manager 2", business_type=2
+            name="Test Asset Manager 2", is_asset_manager=True
         )
         self.property_manager1 = Business.objects.create(
-            name="Test Property Manager", business_type=3
+            name="Test Property Manager", is_property_manager=True
         )
         self.property_manager2 = Business.objects.create(
-            name="Test Property Manager 2", business_type=3
+            name="Test Property Manager 2", is_property_manager=True
         )
         property_owner = Business.objects.create(
-            name="Test Property Owner", business_type=1
+            name="Test Property Owner", is_property_owner=True
         )
         self.fund1 = Fund.objects.create(account=self.account, name="Test Fund 1")
         self.fund2 = Fund.objects.create(account=self.account, name="Test Fund 2")
@@ -91,9 +91,7 @@ class PropertyListTestCase(TestCase):
                     "label": self.asset_manager2.name,
                 },
             ],
-            "funds": [
-                {"id": self.fund1.public_id, "label": self.fund1.name},
-            ],
+            "funds": [{"id": self.fund1.public_id, "label": self.fund1.name}],
             "properties": [
                 {
                     "address": "Seattle, WA",
@@ -162,9 +160,7 @@ class PropertyListTestCase(TestCase):
                     "label": self.asset_manager2.name,
                 },
             ],
-            "funds": [
-                {"id": self.fund1.public_id, "label": self.fund1.name},
-            ],
+            "funds": [{"id": self.fund1.public_id, "label": self.fund1.name}],
             "properties": [
                 {
                     "address": "Seattle, WA",
