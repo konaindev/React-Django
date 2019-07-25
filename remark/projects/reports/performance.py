@@ -143,6 +143,6 @@ class PerformanceReport(CommonReport):
         )
         return cls(project, period, previous_period=None, whiskers=whiskers)
 
-    def omit_four_week_averages(self, built_averages):
-        built_averages["acq_investment"] = None
-        # built_averages["ret_investment"] = None
+    @staticmethod
+    def get_four_week_average_fields():
+        return []
