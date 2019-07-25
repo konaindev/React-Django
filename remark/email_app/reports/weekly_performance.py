@@ -126,6 +126,7 @@ def generate_template_vars(perf_email):
         # create_html. would be good to check in a django Form, for instance.
         raise e
 
+    address = project.property.geo_address
     health = perf_email.campaign_health
     lease_rate_text = perf_email.lease_rate_text
     best_kpi = perf_email.top_performing_kpi
@@ -145,8 +146,8 @@ def generate_template_vars(perf_email):
         "end_date": human_end.strftime("%m/%d/%Y"),
         "client": project.customer_name,
         "property_name": project.name,
-        "city": project.address.city,
-        "state": project.address.state,
+        "city": address.city,
+        "state": address.state,
         "campaign_health": int(health),
         "campaign_insight": lease_rate_text,
         "lease_rate": top_kpi("lease_rate", this_week),

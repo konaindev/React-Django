@@ -21,20 +21,22 @@ def export_tam_task(project_pk, user_pk, form_data):
         project = Project.objects.get(pk=project_pk)
         user = User.objects.get(pk=user_pk)
         usvs = get_project_usvs(project)
+        property = project.property
+        address = property.geo_address
         args = {
             "zip_codes": form_data["zip_codes"],
-            "lat": project.address.latitude,
-            "lon": project.address.longitude,
-            "loc": ",".join([project.address.city, project.address.state]),
+            "lat": address.latitude,
+            "lon": address.longitude,
+            "loc": ",".join([address.city, address.state]),
             "radius": form_data["radius"],
             "income_groups": form_data["income_groups"],
             "rti_income_groups": form_data["rti_income_groups"],
             "rti_rental_rates": form_data["rti_rental_rates"],
             "rti_target": form_data["rti_target"],
-            "age": project.average_tenant_age,
-            "max_rent": project.highest_monthly_rent,
-            "avg_rent": project.average_monthly_rent,
-            "min_rent": project.lowest_monthly_rent,
+            "age": property.average_tenant_age,
+            "max_rent": property.highest_monthly_rent,
+            "avg_rent": property.average_monthly_rent,
+            "min_rent": property.lowest_monthly_rent,
             "usvs": usvs,
             "templatefile": DEFAULT_TEMPLATE_PATH,
         }
