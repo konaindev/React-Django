@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from remark.email_app.models import PerformanceEmail
+from remark.email_app.reports.weekly_performance import generate_template_vars
 from remark.lib.views import ContentView
 
 class EmailTestPage(ContentView):
@@ -7,7 +9,7 @@ class EmailTestPage(ContentView):
     template_name = "email/weekly_performance_report/index.html"
 
     def get(self, request):
-        data = {
+        template_vars = {
             "report_url": f"https://app.remarkably.io/projects/abc/performance/last-week/",
             "start_date": "05/24/2019",
             "end_date": "05/30/2019",
@@ -15,8 +17,9 @@ class EmailTestPage(ContentView):
             "property_name": "El Cortez",
             "city": "Phoenix",
             "state": "AZ",
+            "campaign_goal_chart_url": "https://app.remarkably.io/charts/donut?goal=95&goal_date=2019-05-31&current=80&bg=20272e&bg_target=404e5c&bg_current=006eff",
             "campaign_health": 2,
-            "campaign_insight": "You are doing great! Keep it up!",
+            "campaign_insight": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque congue risus libero, vel cursus nibh porttitor nec.",
             "lease_rate": {
                 "value" : "80%",
                 "target" : "79%",
@@ -27,15 +30,15 @@ class EmailTestPage(ContentView):
                 "target": "30%",
                 "prev_value": "30%",
                 "prev_target": "30%",
-                "insight": "Looking great!",
+                "insight": "Still well below campaign to-date target but excellent leasing team follow-up and on-property experience resulting in a surge of lease applications!",
             },
             "worst_kpi": {
-                "name": "APPLICATIONS TO LEASE EXECUTIONS",
+                "name": "LEASE APPLICATIONS TO LEASE EXECUTIONS",
                 "value": "50%",
                 "target": "70%",
                 "prev_value": "40%",
                 "prev_target": "70%",
-                "insight": "Improving but still far below needed conversion rate",
+                "insight": "Lease Execution processing delays and/or unit ‘holds’ not being executed causing large swings in weekly performance. Currently calculating 6 APPs pending.",
             },
             "email": "info@remarkably.io",
             "top_1": {
@@ -62,6 +65,7 @@ class EmailTestPage(ContentView):
                 "name" : "Unique Site Visitors",
                 "model_percent" : "120%"
             },
+            "risk_kpi_insight_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque congue risus libero, vel cursus nibh porttitor nec.",
             "low_1": {
                 "name" : "Applications",
                 "model_percent" : "150%"
@@ -73,6 +77,27 @@ class EmailTestPage(ContentView):
             "low_3": {
                 "name" : "Unique Site Visitors",
                 "model_percent" : "120%"
-            }
+            },
+            "low_kpi_insight_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque congue risus libero, vel cursus nibh porttitor nec.",
         }
-        return self.render("email/weekly_performance_report/index.html", **data)
+
+        # need some variants for testing this email template
+        # currently supports "no_kpis"
+        variant = request.GET.get("variant")
+        if variant == "no_kpi":
+            fields_to_remove = ["risk_1", "risk_2", "risk_3", "low_1", "low_2", "low_3"]
+            for field in fields_to_remove:
+                if field in template_vars:
+                    template_vars.pop(field)
+
+        # Allow preview of a specific PerformanceEmail instance
+        perf_email_id = request.GET.get("performance_email")
+        try:
+            perf_email = PerformanceEmail.objects.get(pk=perf_email_id)
+        except:
+            perf_email = None
+
+        if perf_email is not None:
+            template_vars = generate_template_vars(perf_email)
+
+        return self.render("email/weekly_performance_report/index.html", **template_vars)

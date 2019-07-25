@@ -6,6 +6,7 @@ from django.template.loader import get_template
 from remark.lib.stats import health_check
 from remark.projects.reports.performance import PerformanceReport, InvalidReportRequest
 from remark.email_app.models import PerformanceEmail
+from remark.projects.models import TargetPeriod
 
 from .constants import (
     SELECTORS,
@@ -13,6 +14,7 @@ from .constants import (
     SHOW_CAMPAIGN,
     KPI_NAMES,
     percent_formatter,
+    percent_formatter_no_suffix,
 )
 from remark.lib.sendgrid_email import (
     create_contact_if_not_exists,
@@ -21,6 +23,10 @@ from remark.lib.sendgrid_email import (
 )
 
 from celery import shared_task
+
+
+CONTACT_EMAIL = "info@remarkably.io"
+SENDER_ID = 482157
 
 
 def none_wrapper(formatter, selector, obj):
@@ -63,10 +69,7 @@ def list_kpi(kpi_key, campaign):
     campaign_value = selector(campaign)
     campaign_target = selector(campaign["targets"])
     model_percent = float(campaign_value) / float(campaign_target)
-    return {
-        "name": title,
-        "model_percent": percent_formatter(model_percent)
-    }
+    return {"name": title, "model_percent": percent_formatter(model_percent)}
 
 
 def create_list_kpi(result, campaign, prefix, kpis):
@@ -77,22 +80,33 @@ def create_list_kpi(result, campaign, prefix, kpis):
         result[f"{prefix}_3"] = list_kpi(kpis[2], campaign)
 
 
-def create_html(
-    project,
-    start,
-    client,
-    health,
-    leaseratetext,
-    bestkpi,
-    bestkpitext,
-    worstkpi,
-    worstkpitext,
-    topkpis,
-    riskkpis,
-    lowkpis,
-    email,
-):
+def campaign_goal_chart_url(project, this_week):
+    selector = SELECTORS["lease_rate"]
+    formatter = percent_formatter_no_suffix
+
+    this_week_end = this_week["dates"]["end"]
+    target_period = (
+        TargetPeriod.objects.filter(project=project, end__lte=this_week_end).order_by("-end").first()
+    )
+    goal_date = target_period.end
+    goal = formatter(target_period.target_leased_rate)
+    current = formatter(selector(this_week))
+
+    return (
+        "https://app.remarkably.io/charts/donut"
+        + f"?goal={goal}"
+        + f"&goal_date={goal_date}"
+        + f"&current={current}"
+        + "&bg=20272e"
+        + "&bg_target=404e5c"
+        + "&bg_current=006eff"
+    )
+
+
+def generate_template_vars(perf_email):
+    project = perf_email.project
     project_id = project.public_id
+    start = perf_email.start
     end = start + datetime.timedelta(days=7)
     human_end = start + datetime.timedelta(days=6)
     prevstart = start - datetime.timedelta(days=7)
@@ -112,37 +126,50 @@ def create_html(
         # create_html. would be good to check in a django Form, for instance.
         raise e
 
+    health = perf_email.campaign_health
+    lease_rate_text = perf_email.lease_rate_text
+    best_kpi = perf_email.top_performing_kpi
+    best_kpi_text = perf_email.top_performing_insight
+    worst_kpi = perf_email.low_performing_kpi
+    worst_kpi_text = perf_email.low_performing_insight
+    top_kpis = perf_email.top_kpis
+    risk_kpis = perf_email.risk_kpis
+    low_kpis = perf_email.low_kpis
+    risk_kpi_insight_text = perf_email.risk_kpi_insight_text
+    low_kpi_insight_text = perf_email.low_kpi_insight_text
+    email = CONTACT_EMAIL
+
     template_vars = {
         "report_url": f"https://app.remarkably.io/projects/{project_id}/performance/last-week/",
         "start_date": start.strftime("%m/%d/%Y"),
         "end_date": human_end.strftime("%m/%d/%Y"),
-        "client": client,
+        "client": project.customer_name,
         "property_name": project.name,
         "city": project.address.city,
         "state": project.address.state,
         "campaign_health": int(health),
-        "campaign_insight": leaseratetext,
+        "campaign_insight": lease_rate_text,
         "lease_rate": top_kpi("lease_rate", this_week),
-        "best_kpi": top_kpi(
-            bestkpi, this_week, prev_week, bestkpitext
-        ),
-        "worst_kpi": top_kpi(
-            worstkpi, this_week, prev_week, worstkpitext
-        ),
+        "best_kpi": top_kpi(best_kpi, this_week, prev_week, best_kpi_text),
+        "worst_kpi": top_kpi(worst_kpi, this_week, prev_week, worst_kpi_text),
+        "risk_kpi_insight_text": risk_kpi_insight_text,
+        "low_kpi_insight_text": low_kpi_insight_text,
         "email": email,
+        "campaign_goal_chart_url": campaign_goal_chart_url(project, this_week),
     }
 
-    create_list_kpi(template_vars, campaign_to_date, "top", topkpis)
-    create_list_kpi(template_vars, campaign_to_date, "risk", riskkpis)
-    create_list_kpi(template_vars, campaign_to_date, "low", lowkpis)
+    create_list_kpi(template_vars, campaign_to_date, "top", top_kpis)
+    create_list_kpi(template_vars, campaign_to_date, "risk", risk_kpis)
+    create_list_kpi(template_vars, campaign_to_date, "low", low_kpis)
 
+    return template_vars
+
+
+def create_html(template_vars):
     template = get_template("email/weekly_performance_report/index.html")
     result = template.render(template_vars)
     return result
 
-
-CONTACT_EMAIL = "info@remarkably.io"
-SENDER_ID = 482157
 
 @shared_task
 def send_performance_email(performance_email_id):
@@ -176,21 +203,8 @@ def send_performance_email(performance_email_id):
     email_campaign_id = perf_email.email_campaign_id
     categories = [project.public_id]
 
-    html_content = create_html(
-        project,
-        perf_email.start,
-        project.customer_name,
-        perf_email.campaign_health,
-        perf_email.lease_rate_text,
-        perf_email.top_performing_kpi,
-        perf_email.top_performing_insight,
-        perf_email.low_performing_kpi,
-        perf_email.low_performing_insight,
-        perf_email.top_kpis,
-        perf_email.risk_kpis,
-        perf_email.low_kpis,
-        CONTACT_EMAIL,
-    )
+    template_vars = generate_template_vars(perf_email)
+    html_content = create_html(template_vars)
 
     title = f"{project.name} :: Performance Report :: {perf_email.start.strftime('%m/%d/%Y')}"
     subject = f"{project.name} :: Performance Report :: {perf_email.start.strftime('%m/%d/%Y')}"
