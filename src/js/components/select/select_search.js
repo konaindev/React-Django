@@ -40,7 +40,9 @@ export class SelectSearch extends React.PureComponent {
   };
 
   isValidNewOption = (inputValue, selectValue, selectOptions) => {
-    return !selectOptions.length && this.props.isCreatable;
+    const groupOptions =
+      selectOptions?.[0]?.options && selectOptions[0].options.length;
+    return (!selectOptions.length || !groupOptions) && this.props.isCreatable;
   };
 
   components = {

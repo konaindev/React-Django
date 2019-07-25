@@ -1,3 +1,18 @@
+@import "css/base.scss";
+
 .google-address {
     width: 100%;
+}
+
+.google-address__street {
+    display: inline-block;
+    &::after {
+        white-space: pre;
+        content: " ";
+    }
+}
+
+.google-address__city {
+    display: inline-block;
+    color: $default-text-color;
 }

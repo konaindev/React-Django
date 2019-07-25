@@ -8,7 +8,7 @@ import { googleAddresses, companyAddresses } from "./props";
 const loadOptions = (inputValue, callback) => {
   setTimeout(() => {
     const options = googleAddresses.filter(i =>
-      i.label.toLowerCase().includes(inputValue.toLowerCase())
+      i.value.toLowerCase().includes(inputValue.toLowerCase())
     );
     callback(options);
   }, 500);

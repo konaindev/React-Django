@@ -9,18 +9,25 @@ import "./google_address.scss";
 export default class GoogleAddress extends React.PureComponent {
   static propTypes = {
     companyAddresses: PropTypes.arrayOf(
-      PropTypes.shape({ label: PropTypes.string, value: PropTypes.string })
+      PropTypes.shape({
+        value: PropTypes.string,
+        street: PropTypes.string,
+        city: PropTypes.string,
+        state: PropTypes.string
+      })
     ),
     className: PropTypes.string,
     theme: PropTypes.oneOf(["", "highlight"]),
     loadOptions: PropTypes.func.isRequired,
-    placeholder: PropTypes.string
+    placeholder: PropTypes.string,
+    onChange: PropTypes.func
   };
 
   static defaultProps = {
     className: "",
     theme: "highlight",
-    placeholder: "Select office..."
+    placeholder: "Select office...",
+    onChange: () => {}
   };
 
   loadOptions = (inputValue, callback) => {
@@ -34,6 +41,20 @@ export default class GoogleAddress extends React.PureComponent {
     });
   };
 
+  formatOptionLabel = data => {
+    if (data.__isNew__) {
+      return data.label;
+    }
+    return (
+      <div>
+        <div className="google-address__street">{data.street},</div>
+        <div className="google-address__city">
+          {data.city}, {data.state}
+        </div>
+      </div>
+    );
+  };
+
   render() {
     const {
       className,
@@ -41,6 +62,7 @@ export default class GoogleAddress extends React.PureComponent {
       placeholder,
       companyAddresses,
       loadOptions,
+      onChange,
       ...otherProps
     } = this.props;
     const classes = cn("google-address", className);
@@ -56,7 +78,10 @@ export default class GoogleAddress extends React.PureComponent {
         theme={theme}
         placeholder={placeholder}
         defaultOptions={options}
+        isCreatable={true}
         loadOptions={this.loadOptions}
+        formatOptionLabel={this.formatOptionLabel}
+        onChange={onChange}
         {...otherProps}
       />
     );
