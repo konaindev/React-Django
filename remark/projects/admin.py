@@ -413,6 +413,7 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
         "property_type",
         "customer_name",
         "number_of_periods",
+        "building_class",
         "baseline_start",
         "baseline_end",
         "average_tenant_age",

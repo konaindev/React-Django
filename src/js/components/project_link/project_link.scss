@@ -1,0 +1,40 @@
+@import "css/base.scss";
+
+$project-link-spacing: 16px;
+$project-link-image-size: 36px;
+$project-link-arrow-size: 14px;
+
+.project_link {
+    display: flex;
+    align-items: center;
+    font-family: $font-sans;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.project_link__arrow {
+    width: $project-link-arrow-size / 2;
+    height: $project-link-arrow-size;
+    margin-right: $project-link-spacing;
+    background-image: url(../../../images/icon-arrow-left.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.project_link__image {
+    width: $project-link-image-size;
+    height: $project-link-image-size;
+    border-radius: $border-radius-default;
+    background-image: url(../../../images/blank_property.svg);
+    //background-color: $gray-3; // in case of image missing
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.project_link__name {
+    margin: 0 $project-link-spacing;
+    font-size: $text-xl;
+    color: $nav-link-color;
+}

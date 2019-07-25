@@ -22,9 +22,11 @@ const PropertyStatus = ({ className, performance_rating }) => {
   );
 };
 
+PropertyStatus.healthType = PropTypes.oneOf([-1, 0, 1, 2]);
+
 PropertyStatus.propTypes = {
   className: PropTypes.string,
-  performance_rating: PropTypes.number.isRequired
+  performance_rating: PropertyStatus.healthType.isRequired
 };
 
 export default React.memo(PropertyStatus);

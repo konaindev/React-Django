@@ -187,6 +187,15 @@ class CommonReport(ReportBase):
     def build_computed_period(self, period):
         return ComputedPeriod(period)
 
+    @staticmethod
+    def get_four_week_average_fields():
+        """
+        Returns list of fields for which needed to do calculation
+
+        Override this of need customize that list (or [] if need to exclude all averages)
+        """
+        return AVERAGE_METRICS_MAP.keys()
+
     def build_four_week_averages(self):
         period = self.period
 
@@ -198,15 +207,14 @@ class CommonReport(ReportBase):
             days = (period.get_end() - period.get_start()).days
             return round(four_weeks * value / days)
 
-        return {AVERAGE_METRICS_MAP[k]: _avg(k) for k in AVERAGE_METRICS_MAP}
+        return {AVERAGE_METRICS_MAP[f]: _avg(f) for f in self.get_four_week_average_fields()}
 
     def build_funnel_history(self):
         return None
 
-    # from some type of reports, we might need to drop some metrics
-    # ex: "Performance Report" => Remove 4-week target for Acquisition Investment
-    def omit_four_week_averages(self, built_averages):
-        pass
+    @staticmethod
+    def build_targets(period_values):
+        return unflatten_optional(TARGET_SCHEMA_MAP, period_values)
 
     def build_json_data(self):
         """
@@ -220,11 +228,9 @@ class CommonReport(ReportBase):
         property_report = unflatten(SCHEMA_MAP, flat_period_values)
 
         four_week_funnel_averages = self.build_four_week_averages()
-        self.omit_four_week_averages(four_week_funnel_averages)
 
         funnel_history = self.build_funnel_history()
-
-        targets = unflatten_optional(TARGET_SCHEMA_MAP, flat_period_values)
+        targets = self.build_targets(flat_period_values)
 
         if self.delta is None:
             deltas = {}
