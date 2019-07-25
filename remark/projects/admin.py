@@ -410,6 +410,7 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
     list_display = [
         "name",
         "public_id",
+        "property_type",
         "customer_name",
         "number_of_periods",
         "building_class",

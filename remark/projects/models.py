@@ -22,7 +22,8 @@ from remark.lib.metrics import (
 )
 from remark.projects.spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
 from remark.projects.reports.performance import PerformanceReport
-from remark.projects.constants import BUILDING_CLASS
+from remark.projects.constants import PROPERTY_TYPE, BUILDING_CLASS
+
 
 
 def pro_public_id():
@@ -319,6 +320,8 @@ class Project(models.Model):
 
     competitors = models.ManyToManyField("self", blank=True, symmetrical=False)
 
+    property_type = models.IntegerField(choices=PROPERTY_TYPE, null=True, blank=False)
+
     building_class = models.IntegerField(
         choices=BUILDING_CLASS, null=False, blank=False, default=1
     )
@@ -451,7 +454,7 @@ class Project(models.Model):
 
     def get_building_image_url(self):
         if self.building_image:
-            return self.building_image.dashboard.url
+            return self.building_image.url
         return None
 
     def get_baseline_url(self):
