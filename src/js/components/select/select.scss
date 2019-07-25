@@ -133,7 +133,7 @@
 
 .select--highlight {
     display: inline-block;
-    background-color: $select-highlight-bg-color;
+    background-color: $select-highlight-bg;
     border-radius: $select-border-radius;
 
     .select__control,
@@ -156,6 +156,7 @@
     .select__control--menu-is-open,
     .select__control--menu-is-open:hover {
         border-bottom: none;
+        border-color: $select-highlight-active-border-color;
         border-bottom-right-radius: 0;
         border-bottom-left-radius: 0;
     }
@@ -172,7 +173,7 @@
     .select__menu {
         margin: -6px 0 0;
         background-color: inherit;
-        border: 1px solid $select-highlight-border-color;
+        border: 1px solid $select-highlight-active-border-color;
         border-top: none;
         border-top-right-radius: 0;
         border-top-left-radius: 0;
@@ -189,14 +190,20 @@
         color: $select-highlight-option-color;
 
         &--is-focused,
-        &--is-selected,
         &:active {
-            background-color: $select-highlight-option-active-color;
+            background-color: $select-highlight-option-active-bg;
+        }
+
+        &--is-selected {
+            color: $select-highlight-selected-color;
+            background-color: $select-highlight-selected-bg;
         }
     }
 
+    .select__menu-notice--loading,
     .select__menu-notice--no-options {
         padding-top: 0;
+        font-size: $text-xs;
     }
 
     .select__menu-list {
@@ -208,13 +215,13 @@
     }
 
     .select__group-heading {
-        color: #798796;
-        font-size: 12px;
-        line-height: 20px;
-        margin: 0;
         padding: 6px 12px;
-        text-transform: capitalize;
+        margin: 0;
+        font-size: $text-xs;
         font-weight: $weight-light;
+        line-height: 20px;
+        color: $select-highlight-group-color;
+        text-transform: capitalize;
     }
 }
 

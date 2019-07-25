@@ -5,7 +5,7 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
 import { default as Select, FormSelect, SelectSearch } from "./index";
-import { geoOptions, props, propsScroll } from "./props";
+import { geoOptions, props, propsScroll, propsGroup } from "./props";
 
 const style = {
   background: "#FFFFFF",
@@ -23,7 +23,9 @@ const loadOptions = (inputValue, callback) => {
 
 storiesOf("Select", module)
   .add("default", () => <Select {...props} />)
+  .add("group", () => <Select {...propsGroup} />)
   .add("highlight", () => <Select theme="highlight" {...props} />)
+  .add("highlight group", () => <Select theme="highlight" {...propsGroup} />)
   .add("form select", () => (
     <Formik>
       <FormSelect {...props} />

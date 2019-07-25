@@ -129,12 +129,17 @@ $select-border-radius: 4px;
 $select-border-color: $gray-4;
 $select-active-background: $blue-3;
 $select-option-color: $highlight-gray-3;
-$select-highlight-bg-color: $white;
+
+$select-highlight-bg: $white;
 $select-highlight-border-color: $gray-6;
+$select-highlight-active-border-color: $blue-7;
+$select-highlight-selected-bg: $blue-7;
+$select-highlight-selected-color: $highlight-gray-3;
 $select-highlight-value-color: $gray-3;
 $select-highlight-caret-color: $blue-3;
 $select-highlight-option-color: $gray-9;
-$select-highlight-option-active-color: $highlight-gray-4;
+$select-highlight-option-active-bg: $highlight-gray-4;
+$select-highlight-group-color: $gray-6;
 
 $release-note-link-color: $cyan-3;
 
