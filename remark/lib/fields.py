@@ -41,6 +41,7 @@ class ImageRatioFieldExt(ImageRatioField):
                 width, height = (image.width, image.height)
             except AttributeError:
                 width, height = get_backend().get_size(image)
+            # Catch non existing images
             except FileNotFoundError:
                 width, height = (0, 0)
 
