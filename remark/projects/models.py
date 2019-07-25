@@ -178,6 +178,10 @@ class Project(models.Model):
         "projects.Fund", on_delete=models.SET_NULL, blank=True, null=True
     )
 
+    include_in_remarkably_averages = models.BooleanField(
+        verbose_name="Include in aggregate averages?", default=True
+    )
+
     custom_tags = models.ManyToManyField(Tag, blank=True)
 
     # This is a temporary field until we have user accounts setup.
