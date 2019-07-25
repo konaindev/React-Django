@@ -50,7 +50,7 @@ def remove_properties(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('projects', '0057_add_property_model'),
+        ('projects', '0058_add_property_model'),
     ]
 
     operations = [

@@ -10,7 +10,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('geo', '0012_add_has_population_to_zipcode'),
-        ('projects', '0056_remove_users_from_project'),
+        ('projects', '0057_merge_20190719_0759'),
     ]
 
     operations = [
