@@ -13,7 +13,7 @@ const ProjectLink = ({ imageUrl, name, health, url }) => {
   return (
     <a className="project_link" href={url}>
       <div className="project_link__arrow" />
-      <div style={imageStyle} className="project_link__image" />
+      <div style={imageUrl ? imageStyle : {}} className="project_link__image" />
       <div className="project_link__name">{name}</div>
       <PropertyStatus performance_rating={health} />
     </a>

@@ -26,7 +26,8 @@ $project-link-arrow-size: 14px;
     width: $project-link-image-size;
     height: $project-link-image-size;
     border-radius: $border-radius-default;
-    background-color: $gray-3; // in case of image missing
+    background-image: url(../../../images/blank_property.svg);
+    //background-color: $gray-3; // in case of image missing
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
