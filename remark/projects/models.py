@@ -52,7 +52,7 @@ def public_property_id():
 
 def building_logo_media_path(property, filename):
     """
-    Given a Project instance, and the filename as supplied during upload,
+    Given a Property instance, and the filename as supplied during upload,
     determine where the uploaded building logo should actually be placed.
 
     See https://docs.djangoproject.com/en/2.1/ref/models/fields/#filefield
@@ -61,9 +61,9 @@ def building_logo_media_path(property, filename):
     To overcome this known issue, append random 7-char string to end of file name.
     Though, old files will not be deleted from S3 on image replacement.
 
-    project/<public_id>/building_logo_<random_str><.ext>
-    project/<public_id>/building_logo_<random_str>.regular<.ext>
-    project/<public_id>/building_logo_<random_str>.thumbnail<.ext>
+    property/<public_id>/building_logo_<random_str><.ext>
+    property/<public_id>/building_logo_<random_str>.regular<.ext>
+    property/<public_id>/building_logo_<random_str>.thumbnail<.ext>
     """
     _, extension = os.path.splitext(filename)
     random_str = get_random_string(length=7)
