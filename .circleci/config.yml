@@ -29,9 +29,9 @@ jobs:
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
 
-      - run: yarn install
-      - run: pipenv install
-      - run: yarn build
+      - run: yarn install --silent
+      - run: pipenv --bare install
+      - run: yarn build --silent
       - run: pipenv run python manage.py collectstatic
       - save_cache:
           paths:
@@ -86,7 +86,10 @@ workflows:
 
   build-deploy:
     jobs:
-      - build
+      - build:
+          filters:
+            branches:
+              only: staging
       - deploy-staging:
           context: stage-aws
           requires:
