@@ -18,7 +18,6 @@ class UserAdmin(AuthUserAdmin):
                     "email",
                     "password",
                     "account",
-                    "projects",
                     "person"
                 )
             }
