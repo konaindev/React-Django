@@ -3,6 +3,20 @@
 from django.db import migrations
 
 
+def add_lease_stage_to_project(apps, schema_editor):
+    LeaseStage = apps.get_model('projects', 'LeaseStage')
+    PropertyLeaseStage = apps.get_model('projects', 'PropertyLeaseStage')
+    Project = apps.get_model('projects', 'Project')
+    stage = LeaseStage.objects.get(short_name="stabilization")
+
+    for p in Project.objects.all():
+        pass
+
+
+def remove_lease_stage_from_project(apps, schema_editor):
+    pass
+
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -10,4 +24,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.RunPython(add_lease_stage_to_project, remove_lease_stage_from_project)
     ]

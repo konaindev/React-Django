@@ -3,7 +3,44 @@
 from django.db import migrations
 
 
-data = []
+data = [
+    {
+        "full_name": "Pre-Lease",
+        "short_name": "pre-lease",
+    },
+    {
+        "full_name": "Lease-Up",
+        "short_name": "lease-up",
+    },
+    {
+        "full_name": "Phased Delivery / 2+ Buildings",
+        "short_name": "phased delivery",
+    },
+    {
+        "full_name": "Maintain Stabilization",
+        "short_name": "stabilization",
+    },
+    {
+        "full_name": "Improve Performance",
+        "short_name": "performance",
+    },
+    {
+        "full_name": "Manage Occupancy",
+        "short_name": "occupancy",
+    },
+    {
+        "full_name": "Reintroduce Asset",
+        "short_name": "asset",
+    },
+    {
+        "full_name": "Dual Strategy / 2+ Buildings",
+        "short_name": "dual strategy",
+    },
+    {
+        "full_name": "Other",
+        "short_name": "other",
+    },
+]
 
 
 def create_lease_stages(apps, schema_editor):
