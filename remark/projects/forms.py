@@ -144,6 +144,7 @@ class ProjectForm(forms.ModelForm):
         self.fields["asset_manager"].empty_label = "None Selected"
         self.fields["property_manager"].empty_label = "None Selected"
         self.fields["property_owner"].empty_label = "None Selected"
+        self.fields["developer"].empty_label = "None Selected"
 
     def _map_public_and_shared_fields(self):
         def append_links_to_field_label(link_type, report_links, field_maps):

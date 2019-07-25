@@ -302,14 +302,15 @@ def command(project_id, start, client, health, leaseratetext, bestkpi, bestkpite
     this_week = PerformanceReport.for_dates(project, start.date(), end.date()).to_jsonable()
     prev_week = PerformanceReport.for_dates(project, prevstart.date(), start.date()).to_jsonable()
 
+    address = project.property.geo_address
     template_vars = {
         "report_url" : f"https://app.remarkably.io/projects/{project_id}/performance/last-week/",
         "start_date" : start.strftime("%m/%d/%Y"),
         "end_date" : human_end.strftime("%m/%d/%Y"),
         "client" : client,
         "name" : project.name,
-        "city" : project.address.city,
-        "state" : project.address.state,
+        "city" : address.city,
+        "state" : address.state,
         "health" : health,
         "lease_rate" : top_kpi("lease_rate", campaign_to_date, this_week, prev_week, leaseratetext),
         "best_kpi" : top_kpi(bestkpi, campaign_to_date, this_week, prev_week, bestkpitext),

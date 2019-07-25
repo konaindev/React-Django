@@ -1,3 +1,7 @@
+import "core-js/shim"; // core-js@2
+import "regenerator-runtime/runtime";
+import "url-search-params-polyfill";
+
 import React from "react";
 import ReactDOM from "react-dom";
 import * as Sentry from "@sentry/browser";
