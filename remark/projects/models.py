@@ -22,6 +22,7 @@ from remark.lib.metrics import (
 )
 from remark.projects.spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
 from remark.projects.reports.performance import PerformanceReport
+from remark.projects.constants import BUILDING_CLASS
 
 
 def pro_public_id():
@@ -317,6 +318,10 @@ class Project(models.Model):
     )
 
     competitors = models.ManyToManyField("self", blank=True, symmetrical=False)
+
+    building_class = models.IntegerField(
+        choices=BUILDING_CLASS, null=False, blank=False, default=1
+    )
 
     address = models.ForeignKey(
         "geo.Address", on_delete=models.SET_NULL, null=True, blank=True
