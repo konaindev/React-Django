@@ -16,3 +16,9 @@
     display: inline-block;
     color: $default-text-color;
 }
+
+.select--highlight .select__option--is-selected {
+    .google-address__city {
+        color: #F5FAF7;
+    }
+}

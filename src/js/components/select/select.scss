@@ -202,8 +202,10 @@
 
     .select__menu-notice--loading,
     .select__menu-notice--no-options {
-        padding-top: 0;
+        padding-top: 4px;
+        padding-bottom: 14px;
         font-size: $text-xs;
+        line-height: 20px;
     }
 
     .select__menu-list {
