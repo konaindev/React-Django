@@ -113,6 +113,36 @@ exports[`BaselineReportPage No Competitors 1`] = `
           className="container"
         >
           <div
+            className="report-page__project-link"
+          >
+            <a
+              className="project_link"
+              href="/dashboard"
+            >
+              <div
+                className="project_link__arrow"
+              />
+              <div
+                className="project_link__image"
+                style={
+                  Object {
+                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
+                  }
+                }
+              />
+              <div
+                className="project_link__name"
+              >
+                Portland Multi Family
+              </div>
+              <div
+                className="property-status property-status--on-track"
+              >
+                ON TRACK
+              </div>
+            </a>
+          </div>
+          <div
             className="subheader__inner"
           >
             <div
@@ -8221,6 +8251,36 @@ exports[`BaselineReportPage One Competitor 1`] = `
         <div
           className="container"
         >
+          <div
+            className="report-page__project-link"
+          >
+            <a
+              className="project_link"
+              href="/dashboard"
+            >
+              <div
+                className="project_link__arrow"
+              />
+              <div
+                className="project_link__image"
+                style={
+                  Object {
+                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
+                  }
+                }
+              />
+              <div
+                className="project_link__name"
+              >
+                Portland Multi Family
+              </div>
+              <div
+                className="property-status property-status--on-track"
+              >
+                ON TRACK
+              </div>
+            </a>
+          </div>
           <div
             className="subheader__inner"
           >
@@ -18577,6 +18637,36 @@ exports[`BaselineReportPage renders correctly 1`] = `
         <div
           className="container"
         >
+          <div
+            className="report-page__project-link"
+          >
+            <a
+              className="project_link"
+              href="/dashboard"
+            >
+              <div
+                className="project_link__arrow"
+              />
+              <div
+                className="project_link__image"
+                style={
+                  Object {
+                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
+                  }
+                }
+              />
+              <div
+                className="project_link__name"
+              >
+                Portland Multi Family
+              </div>
+              <div
+                className="property-status property-status--on-track"
+              >
+                ON TRACK
+              </div>
+            </a>
+          </div>
           <div
             className="subheader__inner"
           >

@@ -34,7 +34,47 @@ For back-end code, we use `flake8` to validate code, and `python black` to enfor
 - redis
 - postgres
 
-## Running the project locally
+### Exceptions
+
+Remarkably uses a hosted exception tracking platform, currently Sentry.io,
+which you can run [locally](https://hub.docker.com/r/amd64/sentry) via docker.
+
+Sentry provides the ability to [add contextual data](https://docs.sentry.io/enriching-error-data/context/?platform=javascript#tagging-events) via tagging. This
+will enchance the debugging experience.
+
+## Fixtures
+
+Test fixtures for loading the database are stored in aws s3. The following yarn commands are provided to help update and manage the fixture file until which time a better solution can be implemented:
+
+Dump a copy of your local database into the fixture json
+
+```
+$ yarn dump-local-fixtures
+```
+
+Upload your local fixtures as `<short-hash>.latest.json`. NOTE: the current git commit will be used for the `short-hash`...so know where you are!
+
+```
+$ yarn upload-s3-fixtures
+```
+
+Overwrite the the main fixture file in s3 with the file you uploaded with `upload-s3-fixtures`. NOTE: the current git commit will be used for the `short-hash`...so know where you are!
+
+```
+$ yarn update-s3-fixtures
+```
+
+Attempt to fetch the fixtures for the current commit. NOTE: this will overwrite your local `data/dumped/latest.json`
+
+```
+$ yarn fetch-s3-fixtures
+```
+
+Attempt to fetch the `latest` fixtures from s3. NOTE: this will overwrite your local `data/dumped/latest.json`
+
+```
+$ yarn fetch-latest-fixtures
+```
 
 - Ensure you have all system deps running (postgres, redis, etc)
 - Run `pipenv install` and `pipenv shell` to get the back-end requirements installed.
@@ -51,6 +91,7 @@ EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
 EMAIL_USE_TLS=NO
 GOOGLE_APPLICATION_CREDENTIALS=content_of_google_service_account_key_file
 REDIS_URL=redis://127.0.0.1:6379/
+SENTRY_URL=https://<hash>@sentry.io/<path>
 ```
 
 - Run a build of the front-end assets: `yarn build`.
@@ -89,6 +130,8 @@ middleware, and apply a consistent strategy across handlers/routes.
 TTL is defaulted in the django cache configuration with an arbitrary value. Since each handler sets the
 key and TTL during the `cache.set()` call it is completely possible to set wildly different expirations.
 This could, on occasion, result in some wacky troubleshooting.
+
+You can now set the default TTL by specifying `REDIS_TTL` in your `.env` file.
 
 #### Invalidation
 

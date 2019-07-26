@@ -4,7 +4,10 @@ def int_formatter(value):
 def percent_formatter_2(value):
     return percent_formatter(value, digits=2)
 
-def percent_formatter(value, digits=0):
+def percent_formatter_no_suffix(value):
+    return percent_formatter(value, digits=0, suffix=False)
+
+def percent_formatter(value, digits=0, suffix=True):
     initial = float(value) * 100.0
     if digits == 1:
         final = "{:.1f}".format(initial)
@@ -12,7 +15,7 @@ def percent_formatter(value, digits=0):
         final = "{:.0f}".format(initial)
     else:
         final = "{:.2f}".format(initial)
-    return final + "%"
+    return final + ("%" if suffix else "")
 
 def currency_formatter(value):
     initial = float(value)
@@ -72,29 +75,29 @@ FORMATTERS = {
 }
 
 KPI_NAMES = {
-    "lease_rate" : "Lease Rate",
-    "retention_rate" : "Retention Rate",
-    "occupied_rate" : "Occupied",
+    "lease_rate" : "Leased Rate",
+    "retention_rate" : "Retained Rate",
+    "occupied_rate" : "Occupancy Rate",
     "cds" : "Cancellations and Denials",
-    "renew" : "Notices to Renew",
-    "vacate" : "Notice to Vacate",
+    "renew" : "Number of Notices to Renew",
+    "vacate" : "Number of Notices to Vacate",
     "move_ins" : "Move Ins",
     "move_outs" : "Move Outs",
-    "usv" : "Volume of USV",
-    "inq" : "Volume of INQ",
-    "tou" : "Volume of TOU",
-    "app" : "Volume of APP",
-    "exe" : "Volume of EXE",
-    "usv_inq" : "USV > INQ",
-    "inq_tou" : "INQ > TOU",
-    "tou_app" : "TOU > APP",
-    "app_exe" : "APP > EXE",
-    "usv_exe" : "USV > EXE",
-    "cost_per_usv" : "Cost per USV",
-    "cost_per_inq" : "Cost per INQ",
-    "cost_per_tou" : "Cost per TOU",
-    "cost_per_app" : "Cost per APP",
-    "cost_per_exe" : "Cost per EXE"
+    "usv" : "Number of Unique Site Visitors",
+    "inq" : "Number of Inquiries",
+    "tou" : "Number of Tours",
+    "app" : "Number of Lease Applications",
+    "exe" : "Number of Lease Executions",
+    "usv_inq" : "Unique Site Visitors > Inquiries",
+    "inq_tou" : "Inquiries > Tours",
+    "tou_app" : "Tours > Lease Applications",
+    "app_exe" : "Lease Applications > Lease Executions",
+    "usv_exe" : "Unique Site Visitors > Lease Executions",
+    "cost_per_usv" : "Cost per Unique Site Visitor",
+    "cost_per_inq" : "Cost per Inquiry",
+    "cost_per_tou" : "Cost per Tour",
+    "cost_per_app" : "Cost per Lease Application",
+    "cost_per_exe" : "Cost per Lease Execution"
 }
 
 SHOW_CAMPAIGN = {

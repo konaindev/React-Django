@@ -47,6 +47,7 @@ $blue-4: #2c88ff;
 $blue-5: #5da3ff;
 $blue-6: #97c4ff;
 $blue-7: #006eff;
+$blue-8: #338bff;
 
 // Turquoise palette
 $turquoise-1: #102324;
@@ -82,8 +83,8 @@ $column-header-regular-color: $highlight-gray-3;
 $content-text-primary-color: $highlight-gray-3;
 $content-text-secondary-color: $gray-6;
 
-$delta-indicator-up-color: $green-3;
-$delta-indicator-down-color: $orange-3;
+$delta-indicator-up-color: $blue-8;
+$delta-indicator-down-color: $blue-8;
 $delta-indicator-flat-color: $gray-6;
 
 $nav-link-color: $highlight-gray-3;
@@ -275,6 +276,7 @@ $s64: 16rem;
 $border-radius-none: 0;
 $border-radius-sm: 0.125rem;
 $border-radius-default: 0.25rem;
+$border-radius-base: 0.375rem; // 6px
 $border-radius-lg: 0.5rem;
 $border-radius-full: 9999px;
 
@@ -284,6 +286,8 @@ $box-space: 30px;
 $small-box-vertical-spacing: 10px;
 
 :export {
+    fontSans: $font-sans;
+
     mapCirclePointColor: $map-circle-point-color;
     mapZipTextColor: $map-zip-text-color;
     mapRadiusTextColor: $map-radius-text-color;
@@ -321,7 +325,8 @@ $property-card-address-height: 24px;
 
 $property-status-color-on-track: $green-3;
 $property-status-color-at-risk: $yellow-1;
-$property-status-color-requires-review: $orange-2;
+$property-status-color-off-track: $orange-2;
+$property-status-color-not-available: $gray-6;
 
 $portfolio-property-kpi-width: 160px;
 

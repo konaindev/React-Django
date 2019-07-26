@@ -1,6 +1,10 @@
+import "core-js/shim"; // core-js@2
+import "regenerator-runtime/runtime";
+import "url-search-params-polyfill";
+
 import React from "react";
 import ReactDOM from "react-dom";
-
+import * as Sentry from "@sentry/browser";
 /**
  * Import our master CSS to force our bundler to build it
  */
@@ -98,6 +102,13 @@ const ready = cb => {
 
 /* Run our page. */
 ready(() => {
+  Sentry.init({
+    dsn: process.env.SENTRY_URL
+  });
+  // detect what environment we are running in
+
+  Sentry.configureScope(x => x.setTag("env", process.env.ENV || "local"));
+
   const pageClass = getPageClass();
   /* If this is a react rooted page, spin up the app. */
   if (pageClass) {

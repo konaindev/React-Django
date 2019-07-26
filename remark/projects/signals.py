@@ -206,9 +206,14 @@ def update_performance_report(sender, instance, created, raw, **kwargs):
         pek.save()
 
 
+# TODO: remove this swap variable in PR#198
 @receiver(post_save, sender=Campaign)
 def delete_related_targets(sender, instance, created, raw, **kwargs):
     # when selected_campaign_model is set to null
     # remove all extant target periods
-    if instance.project is not None and instance.selected_campaign_model is None:
-        instance.project.target_periods.all().delete()
+    try:
+        if instance.project is not None and instance.selected_campaign_model is None:
+            instance.project.target_periods.all().delete()
+    except:
+        pass
+

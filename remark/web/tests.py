@@ -7,7 +7,7 @@ from django.urls import reverse
 from remark.crm.models import Business
 from remark.geo.models import Address
 from remark.users.models import Account, User
-from remark.projects.models import Fund, Project
+from remark.projects.models import Fund, Project, Property
 
 
 class PropertyListTestCase(TestCase):
@@ -27,45 +27,55 @@ class PropertyListTestCase(TestCase):
             account=self.account, email="test@test.com", password="testpassword"
         )
         self.asset_manager1 = Business.objects.create(
-            name="Test Asset Manager", business_type=2
+            name="Test Asset Manager", is_asset_manager=True
         )
         self.asset_manager2 = Business.objects.create(
-            name="Test Asset Manager 2", business_type=2
+            name="Test Asset Manager 2", is_asset_manager=True
         )
         self.property_manager1 = Business.objects.create(
-            name="Test Property Manager", business_type=3
+            name="Test Property Manager", is_property_manager=True
         )
         self.property_manager2 = Business.objects.create(
-            name="Test Property Manager 2", business_type=3
+            name="Test Property Manager 2", is_property_manager=True
         )
         property_owner = Business.objects.create(
-            name="Test Property Owner", business_type=1
+            name="Test Property Owner", is_property_owner=True
         )
         self.fund1 = Fund.objects.create(account=self.account, name="Test Fund 1")
         self.fund2 = Fund.objects.create(account=self.account, name="Test Fund 2")
+        property1 = Property.objects.create(
+            name="test",
+            average_monthly_rent=decimal.Decimal("0"),
+            lowest_monthly_rent=decimal.Decimal("0"),
+            geo_address=address,
+        )
         self.project1 = Project.objects.create(
             name="test",
             baseline_start=datetime.date(year=2018, month=11, day=19),
             baseline_end=datetime.date(year=2018, month=12, day=26),
-            average_monthly_rent=decimal.Decimal("0"),
-            lowest_monthly_rent=decimal.Decimal("0"),
             account=self.account,
             asset_manager=self.asset_manager1,
             property_manager=self.property_manager1,
             property_owner=property_owner,
             fund=self.fund1,
+            property=property1,
+        )
+        property2 = Property.objects.create(
+            name="project",
+            average_monthly_rent=decimal.Decimal("0"),
+            lowest_monthly_rent=decimal.Decimal("0"),
+            geo_address=address,
         )
         self.project2 = Project.objects.create(
             name="project",
             baseline_start=datetime.date(year=2018, month=11, day=19),
             baseline_end=datetime.date(year=2018, month=12, day=26),
-            average_monthly_rent=decimal.Decimal("0"),
-            lowest_monthly_rent=decimal.Decimal("0"),
             account=self.account,
             asset_manager=self.asset_manager2,
             property_manager=self.property_manager2,
             property_owner=property_owner,
             fund=self.fund1,
+            property=property2,
         )
         self.client.login(email="test@test.com", password="testpassword")
 
@@ -81,12 +91,10 @@ class PropertyListTestCase(TestCase):
                     "label": self.asset_manager2.name,
                 },
             ],
-            "funds": [
-                {"id": self.fund1.public_id, "label": self.fund1.name},
-            ],
+            "funds": [{"id": self.fund1.public_id, "label": self.fund1.name}],
             "properties": [
                 {
-                    "address": "",
+                    "address": "Seattle, WA",
                     "image_url": None,
                     "performance_rating": -1,
                     "property_id": self.project2.public_id,
@@ -94,7 +102,7 @@ class PropertyListTestCase(TestCase):
                     "url": "/projects/{}/baseline/".format(self.project2.public_id),
                 },
                 {
-                    "address": "",
+                    "address": "Seattle, WA",
                     "image_url": None,
                     "performance_rating": -1,
                     "property_id": self.project1.public_id,
@@ -112,7 +120,7 @@ class PropertyListTestCase(TestCase):
                     "label": self.property_manager2.name,
                 },
             ],
-            "locations": [],
+            "locations": [{"city": "Seattle", "label": ("Seattle, WA",), "state": "wa"}],
             "user": {
                 "account_id": self.account.id,
                 "account_name": self.account.company_name,
@@ -152,12 +160,10 @@ class PropertyListTestCase(TestCase):
                     "label": self.asset_manager2.name,
                 },
             ],
-            "funds": [
-                {"id": self.fund1.public_id, "label": self.fund1.name},
-            ],
+            "funds": [{"id": self.fund1.public_id, "label": self.fund1.name}],
             "properties": [
                 {
-                    "address": "",
+                    "address": "Seattle, WA",
                     "image_url": None,
                     "performance_rating": -1,
                     "property_id": self.project1.public_id,
@@ -175,7 +181,7 @@ class PropertyListTestCase(TestCase):
                     "label": self.property_manager2.name,
                 },
             ],
-            "locations": [],
+            "locations": [{"city": "Seattle", "label": ("Seattle, WA",), "state": "wa"}],
             "user": {
                 "account_id": self.account.id,
                 "account_name": self.account.company_name,

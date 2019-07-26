@@ -1,9 +1,5 @@
 from django.db import models
-
 from remark.lib.tokens import public_id
-from remark.projects.models import Project
-from remark.users.constants import ACCOUNT_TYPE
-
 from stdimage.models import StdImageField
 
 
@@ -11,13 +7,16 @@ def bus_public_id():
     """Public identifier for a business."""
     return public_id("bus")
 
+
 def peep_public_id():
     """Public identifier for a business."""
     return public_id("peep")
 
+
 def off_public_id():
     """Public identifier for a business."""
     return public_id("off")
+
 
 def avatar_media_path(person, filename):
     """
@@ -39,20 +38,6 @@ def avatar_media_path(person, filename):
     return f"person/{person.public_id}/avatar_{random_str}{extension}"
 
 
-class BusinessesQuerySet(models.QuerySet):
-    def property_managers(self, account_id, **kwargs):
-        project_subquery = models.Subquery(
-            Project.objects.filter(account_id=account_id).values("property_manager_id")
-        )
-        return self.filter(public_id__in=project_subquery, business_type=3, **kwargs)
-
-    def asset_managers(self, account_id, **kwargs):
-        project_subquery = models.Subquery(
-            Project.objects.filter(account_id=account_id).values("asset_manager_id")
-        )
-        return self.filter(public_id__in=project_subquery, business_type=2, **kwargs)
-
-
 class Business(models.Model):
     public_id = models.CharField(
         primary_key=True,
@@ -64,11 +49,25 @@ class Business(models.Model):
 
     name = models.CharField(max_length=255, blank=False, help_text="Business Name")
 
-    business_type = models.IntegerField(
-        choices=ACCOUNT_TYPE, null=False, help_text="Business Type"
+    is_property_owner = models.BooleanField(
+        default=False, help_text="Business Type is Property Owner"
     )
 
-    objects = BusinessesQuerySet.as_manager()
+    is_asset_manager = models.BooleanField(
+        default=False, help_text="Business Type is Asset Manager"
+    )
+
+    is_property_manager = models.BooleanField(
+        default=False, help_text="Business Type is Property Manager"
+    )
+
+    is_remarkably = models.BooleanField(
+        default=False, help_text="Business Type is Remarkably"
+    )
+
+    is_developer = models.BooleanField(
+        default=False, help_text="Business Type is Developer"
+    )
 
     def __str__(self):
         return self.name
@@ -76,8 +75,10 @@ class Business(models.Model):
     class Meta:
         verbose_name_plural = "Businesses"
 
+
 class OfficeManager(models.Manager):
     pass
+
 
 class Office(models.Model):
     public_id = models.CharField(
@@ -90,7 +91,9 @@ class Office(models.Model):
 
     is_home_office = models.BooleanField(default=False, help_text="Is the home office?")
 
-    name = models.CharField(default="", max_length=255, blank=False, help_text="Office Name")
+    name = models.CharField(
+        default="", max_length=255, blank=False, help_text="Office Name"
+    )
 
     address = models.ForeignKey(
         "geo.Address", on_delete=models.CASCADE, blank=False, help_text="Address"
@@ -108,6 +111,7 @@ class Office(models.Model):
 
 class PeopleManager(models.Manager):
     pass
+
 
 class Person(models.Model):
     public_id = models.CharField(
@@ -127,16 +131,25 @@ class Person(models.Model):
 
     email = models.CharField(max_length=255, blank=False, help_text="Email")
 
-    office_phone = models.CharField(max_length=255, blank=True, help_text="Office Phone")
+    office_phone = models.CharField(
+        max_length=255, blank=True, help_text="Office Phone"
+    )
 
     cell_phone = models.CharField(max_length=255, blank=True, help_text="Cell Phone")
 
     office = models.ForeignKey(
-        "crm.Office", on_delete=models.CASCADE, blank=False, help_text="Office the person works at"
+        "crm.Office",
+        on_delete=models.CASCADE,
+        blank=False,
+        help_text="Office the person works at",
     )
 
     user = models.ForeignKey(
-        "users.User", on_delete=models.CASCADE, null=True, blank=True, help_text="User associated with this person"
+        "users.User",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        help_text="User associated with this person",
     )
 
     avatar = StdImageField(
@@ -151,4 +164,6 @@ class Person(models.Model):
     objects = PeopleManager()
 
     def __str__(self):
-        return "{}: {} {} ({})".format(self.office.business.name, self.first_name, self.last_name, self.public_id)
+        return "{}: {} {} ({})".format(
+            self.office.business.name, self.first_name, self.last_name, self.public_id
+        )

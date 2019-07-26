@@ -141,6 +141,10 @@ class ProjectForm(forms.ModelForm):
         self.is_existing_instance = kwargs.get("instance") is not None
         super(ProjectForm, self).__init__(*args, **kwargs)
         self._map_public_and_shared_fields()
+        self.fields["asset_manager"].empty_label = "None Selected"
+        self.fields["property_manager"].empty_label = "None Selected"
+        self.fields["property_owner"].empty_label = "None Selected"
+        self.fields["developer"].empty_label = "None Selected"
 
     def _map_public_and_shared_fields(self):
         def append_links_to_field_label(link_type, report_links, field_maps):

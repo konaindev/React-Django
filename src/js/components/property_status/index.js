@@ -15,14 +15,18 @@ const PropertyStatus = ({ className, performance_rating }) => {
   });
   return (
     <div className={classNames}>
-      {performance_rating == -1 ? "" : STATUS_LABEL[performance_rating]}
+      {performance_rating == -1
+        ? "CAMPAIGN PENDING"
+        : STATUS_LABEL[performance_rating]}
     </div>
   );
 };
 
+PropertyStatus.healthType = PropTypes.oneOf([-1, 0, 1, 2]);
+
 PropertyStatus.propTypes = {
   className: PropTypes.string,
-  performance_rating: PropTypes.number.isRequired
+  performance_rating: PropertyStatus.healthType.isRequired
 };
 
 export default React.memo(PropertyStatus);
