@@ -114,6 +114,10 @@ class SpreadsheetForm(forms.ModelForm):
                 raise ValidationError(
                     f"Could not validate spreadsheet: {importer.errors}"
                 )
+            if importer.has_overlapping_periods(cleaned_data["project"]):
+                raise ValidationError(
+                    f"Has overlapping periods!!!"
+                )
 
             # Success! We read the spreadsheet just fine.
             cleaned_data["imported_data"] = importer.cleaned_data
