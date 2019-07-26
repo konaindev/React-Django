@@ -7,6 +7,7 @@ def get_project_start_end(project):
     periods = project.periods.all().order_by('start')
     start_period = periods.first()
     end_period = periods.last()
+    # If there are no periods then use `baseline` dates
     start = project.baseline_start
     end = project.baseline_end
     if start_period:
