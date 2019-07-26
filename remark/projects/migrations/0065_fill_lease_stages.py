@@ -58,7 +58,7 @@ def clear_lease_stages(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('projects', '0058_add_lease_stage_models'),
+        ('projects', '0064_add_lease_stage_models'),
     ]
 
     operations = [

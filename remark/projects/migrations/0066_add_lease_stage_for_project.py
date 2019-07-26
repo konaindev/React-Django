@@ -20,7 +20,7 @@ def remove_lease_stage_from_project(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('projects', '0059_fill_lease_stages'),
+        ('projects', '0065_fill_lease_stages'),
     ]
 
     operations = [
