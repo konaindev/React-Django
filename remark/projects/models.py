@@ -22,6 +22,8 @@ from remark.lib.metrics import (
 )
 from remark.projects.spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
 from remark.projects.reports.performance import PerformanceReport
+from remark.projects.constants import PROPERTY_TYPE, BUILDING_CLASS
+
 
 
 def pro_public_id():
@@ -46,9 +48,13 @@ def spreadsheet_public_id():
     return public_id("spreadsheet2")
 
 
-def building_logo_media_path(project, filename):
+def public_property_id():
+    return public_id("property")
+
+
+def building_logo_media_path(property, filename):
     """
-    Given a Project instance, and the filename as supplied during upload,
+    Given a Property instance, and the filename as supplied during upload,
     determine where the uploaded building logo should actually be placed.
 
     See https://docs.djangoproject.com/en/2.1/ref/models/fields/#filefield
@@ -57,19 +63,19 @@ def building_logo_media_path(project, filename):
     To overcome this known issue, append random 7-char string to end of file name.
     Though, old files will not be deleted from S3 on image replacement.
 
-    project/<public_id>/building_logo_<random_str><.ext>
-    project/<public_id>/building_logo_<random_str>.regular<.ext>
-    project/<public_id>/building_logo_<random_str>.thumbnail<.ext>
+    property/<public_id>/building_logo_<random_str><.ext>
+    property/<public_id>/building_logo_<random_str>.regular<.ext>
+    property/<public_id>/building_logo_<random_str>.thumbnail<.ext>
     """
     _, extension = os.path.splitext(filename)
     random_str = get_random_string(length=7)
-    return f"project/{project.public_id}/building_logo_{random_str}{extension}"
+    return f"property/{property.public_id}/building_logo_{random_str}{extension}"
 
 
-def building_image_media_path(project, filename):
+def building_image_media_path(property, filename):
     _, extension = os.path.splitext(filename)
     random_str = get_random_string(length=7)
-    return f"project/{project.public_id}/building_image_{random_str}{extension}"
+    return f"property/{property.public_id}/building_image_{random_str}{extension}"
 
 
 def spreadsheet_media_path(spreadsheet, filename):
@@ -122,6 +128,12 @@ class Project(models.Model):
         max_length=255, help_text="The user-facing name of the project."
     )
 
+    @property
+    def customer_name(self):
+        return self.account.company_name
+
+    property = models.OneToOneField("projects.Property", on_delete=models.CASCADE, blank=False)
+
     account = models.ForeignKey(
         "users.Account", on_delete=models.CASCADE, related_name="account", blank=False
     )
@@ -132,7 +144,7 @@ class Project(models.Model):
         related_name="asset_manager",
         blank=True,
         null=True,
-        limit_choices_to={"business_type": 2},
+        limit_choices_to={"is_asset_manager": True},
     )
 
     property_manager = models.ForeignKey(
@@ -141,7 +153,7 @@ class Project(models.Model):
         related_name="property_manager",
         blank=True,
         null=True,
-        limit_choices_to={"business_type": 3},
+        limit_choices_to={"is_property_manager": True},
     )
 
     property_owner = models.ForeignKey(
@@ -150,18 +162,27 @@ class Project(models.Model):
         related_name="property_owner",
         blank=True,
         null=True,
-        limit_choices_to={"business_type": 1},
+        limit_choices_to={"is_property_owner": True},
+    )
+
+    developer = models.ForeignKey(
+        "crm.Business",
+        on_delete=models.SET_NULL,
+        related_name="developer",
+        blank=True,
+        null=True,
+        limit_choices_to={"is_developer": True},
     )
 
     fund = models.ForeignKey(
         "projects.Fund", on_delete=models.SET_NULL, blank=True, null=True
     )
 
-    custom_tags = models.ManyToManyField(Tag, blank=True)
+    include_in_remarkably_averages = models.BooleanField(
+        verbose_name="Include in aggregate averages?", default=True
+    )
 
-    @property
-    def customer_name(self):
-        return self.account.company_name
+    custom_tags = models.ManyToManyField(Tag, blank=True)
 
     # This is a temporary field until we have user accounts setup.
     # When that happens there should be a many to one relationship with
@@ -174,29 +195,6 @@ class Project(models.Model):
 
     # This is for the SendGrid recipients list.
     email_list_id = models.CharField(max_length=256, null=True, default=None)
-
-    # StdImageField works just like Django's own ImageField
-    # except that you can specify different sized variations.
-    building_logo = StdImageField(
-        blank=True,
-        default="",
-        upload_to=building_logo_media_path,
-        help_text="""Image of property logo<br/>Resized variants (180x180, 76x76) will also be created on Amazon S3.""",
-        variations={"regular": (180, 180), "thumbnail": (76, 76)},
-    )
-
-    building_image = StdImageField(
-        blank=True,
-        default="",
-        upload_to=building_image_media_path,
-        help_text="""Image of property building<br/>Resized variants (309x220, 180x180, 76x76) will also be created on Amazon S3.""",
-        variations={
-            "dashboard": (400, 400, True),
-            "landscape": (309, 220, True),
-            "regular": (180, 180, True),
-            "thumbnail": (76, 76, True),
-        },
-    )
 
     baseline_start = models.DateField(
         help_text="The first date, inclusive, for the baseline period."
@@ -228,47 +226,6 @@ class Project(models.Model):
         # Ensure loaded data retains JSON object key ordering
         load_kwargs={"object_pairs_hook": collections.OrderedDict},
         help_text="Campaign Plan JSON data. Must conform to the schema defined in CampaignPlan.ts",
-    )
-
-    total_units = models.IntegerField(
-        null=True,
-        blank=True,
-        default=None,
-        help_text="The total number of units in this project/property.",
-    )
-
-    average_tenant_age = models.FloatField(
-        null=True,
-        blank=True,
-        default=None,
-        help_text="The average tenant age for this project/property.",
-    )
-
-    highest_monthly_rent = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
-        default=None,
-        null=True,
-        blank=True,
-        help_text="Highest rent tenants pay monthly. Applies for the duration of the project.",
-    )
-
-    average_monthly_rent = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
-        default=None,
-        null=True,
-        blank=True,
-        help_text="Average rent tenants pay monthly. Applies for the duration of the project.",
-    )
-
-    lowest_monthly_rent = models.DecimalField(
-        max_digits=10,
-        decimal_places=2,
-        default=None,
-        null=True,
-        blank=True,
-        help_text="Lowest rent tenants pay monthly. Applies for the duration of the project.",
     )
 
     is_baseline_report_public = models.BooleanField(
@@ -308,10 +265,6 @@ class Project(models.Model):
     )
 
     competitors = models.ManyToManyField("self", blank=True, symmetrical=False)
-
-    address = models.ForeignKey(
-        "geo.Address", on_delete=models.SET_NULL, null=True, blank=True
-    )
 
     view_group = models.OneToOneField(
         Group, on_delete=models.SET_NULL, null=True, blank=True, related_name="view_of"
@@ -412,11 +365,12 @@ class Project(models.Model):
         """
         Return building logo's S3 resource urls for all variants
         """
-        if self.building_logo:
+        property = self.property
+        if property.building_logo:
             return [
-                self.building_logo.url,
-                self.building_logo.regular.url,
-                self.building_logo.thumbnail.url,
+                property.building_logo.url,
+                property.building_logo.regular.url,
+                property.building_logo.thumbnail.url,
             ]
         else:
             return None
@@ -425,19 +379,22 @@ class Project(models.Model):
         """
         Return building image's S3 resource urls for all variants
         """
-        if self.building_image:
+        property = self.property
+        if property.building_image:
             return [
-                self.building_image.url,
-                self.building_image.landscape.url,
-                self.building_image.regular.url,
-                self.building_image.thumbnail.url,
+                property.building_image.url,
+                property.building_image.landscape.url,
+                property.building_image.regular.url,
+                property.building_image.thumbnail.url,
             ]
         else:
             return None
 
     def get_building_image_url(self):
-        if self.building_image:
-            return self.building_image.url
+        property = self.property
+        if property.building_image:
+            return property.building_image.url
+
         return None
 
     def get_baseline_url(self):
@@ -500,6 +457,97 @@ class Project(models.Model):
 
     def __str__(self):
         return "{} ({})".format(self.name, self.public_id)
+
+
+class Property(models.Model):
+    """
+    Property for project
+    """
+
+    property_id = models.AutoField(primary_key=True)
+
+    public_id = models.CharField(
+        default=public_property_id,
+        max_length=50,
+        editable=False,
+        null=False,
+        unique=True,
+    )
+
+    name = models.CharField(
+        max_length=255, help_text="The user-facing name of the project.", blank=False
+    )
+
+    average_tenant_age = models.IntegerField(
+        null=True,
+        blank=True,
+        default=0,
+        help_text="The average tenant age for this property.",
+    )
+
+    total_units = models.IntegerField(
+        blank=False,
+        default=0,
+        help_text="The total number of units in this property.",
+    )
+
+    highest_monthly_rent = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+        blank=False,
+        help_text="Highest rent tenants pay monthly. Applies for the duration of the project.",
+    )
+
+    average_monthly_rent = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+        blank=False,
+        help_text="Average rent tenants pay monthly. Applies for the duration of the project.",
+    )
+
+    lowest_monthly_rent = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+        blank=False,
+        help_text="Lowest rent tenants pay monthly. Applies for the duration of the project.",
+    )
+
+    geo_address = models.ForeignKey("geo.Address", on_delete=models.CASCADE, blank=False)
+
+    # StdImageField works just like Django's own ImageField
+    # except that you can specify different sized variations.
+    building_logo = StdImageField(
+        blank=True,
+        default="",
+        upload_to=building_logo_media_path,
+        help_text="""Image of property logo<br/>Resized variants (180x180, 76x76) will also be created on Amazon S3.""",
+        variations={"regular": (180, 180), "thumbnail": (76, 76)},
+    )
+
+    building_image = StdImageField(
+        blank=True,
+        default="",
+        upload_to=building_image_media_path,
+        help_text="""Image of property building<br/>Resized variants (309x220, 180x180, 76x76) will also be created on Amazon S3.""",
+        variations={
+            "dashboard": (400, 400, True),
+            "landscape": (309, 220, True),
+            "regular": (180, 180, True),
+            "thumbnail": (76, 76, True),
+        },
+    )
+
+    property_type = models.IntegerField(choices=PROPERTY_TYPE, null=True, blank=False)
+
+    building_class = models.IntegerField(
+        choices=BUILDING_CLASS, null=False, blank=False, default=1
+    )
+
+    def __str__(self):
+        return f"{self.name} | property"
 
 
 class SpreadsheetManager(models.Manager):
@@ -812,19 +860,19 @@ class Period(ModelPeriod, models.Model):
 
     @property
     def average_monthly_rent(self):
-        return self.project.average_monthly_rent
+        return self.project.property.average_monthly_rent
 
     @property
     def lowest_monthly_rent(self):
-        return self.project.lowest_monthly_rent
+        return self.project.property.lowest_monthly_rent
 
     @property
     def highest_monthly_rent(self):
-        return self.project.highest_monthly_rent
+        return self.project.property.highest_monthly_rent
 
     @property
     def total_units(self):
-        return self.project.total_units
+        return self.project.property.total_units
 
     def _build_metrics(self):
         # Manually insert average_monthly_rent and lowest_monthly_rent
@@ -1095,7 +1143,7 @@ class Campaign(models.Model):
         except:
             pass
 
-    
+
     def save(self, *args, **kwargs):
         try:
             old = type(self).objects.get(pk=self.pk) if self.pk else None

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import ReportLinks from "../report_links";
 import ProjectPageChrome from "../project_page_chrome";
 import ShareToggle from "../share_toggle";
+import ProjectLink from "../project_link";
 
 import "./report_page_chrome.scss";
 
@@ -21,7 +22,12 @@ export default class ReportPageChrome extends Component {
     report_links: PropTypes.object.isRequired,
     share_info: PropTypes.object,
     topItems: PropTypes.node,
-    children: PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
+    backUrl: PropTypes.string
+  };
+
+  static defaultProps = {
+    backUrl: "/dashboard"
   };
 
   render() {
@@ -30,12 +36,21 @@ export default class ReportPageChrome extends Component {
       user,
       current_report_name,
       report_links,
-      share_info
+      share_info,
+      backUrl
     } = this.props;
 
     const topItems = (
       <section className="report-page-subheader">
         <div className="container">
+          <div className="report-page__project-link">
+            <ProjectLink
+              name={project.name}
+              url={backUrl}
+              imageUrl={project.building_image}
+              health={project.health}
+            />
+          </div>
           <div className="subheader__inner">
             <ReportLinks
               current_report_name={current_report_name}

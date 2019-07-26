@@ -11,7 +11,12 @@
     "build-storybook": "build-storybook -o .out",
     "deploy-storybook": "rm -rf .out && build-storybook -o .out && echo 'storybook.remarkably.io' > '.out/CNAME' && storybook-to-ghpages --existing-output-dir=.out",
     "test-ui": "jest --runInBand --silent --ci",
-    "test-ui-update-snapshots": "jest --updateSnapshot"
+    "test-ui-update-snapshots": "jest --updateSnapshot",
+    "dump-local-fixtures": "python manage.py dumpdata --natural-foreign --natural-primary projects email_app crm analytics auth users contenttypes geo.address > data/dumped/latest.json",
+    "upload-s3-fixtures": "aws s3 cp data/dumped/latest.json s3://fa22980d-b1d2-453b-8133-307ad70ccc55/$(git log --pretty=format:'%h' -n 1).latest.json",
+    "update-s3-fixtures": "aws s3 cp s3://fa22980d-b1d2-453b-8133-307ad70ccc55/$(git log --pretty=format:'%h' -n 1).latest.json s3://fa22980d-b1d2-453b-8133-307ad70ccc55/latest.json",
+    "fetch-s3-fixtures": "aws s3 cp s3://fa22980d-b1d2-453b-8133-307ad70ccc55/$(git log --pretty=format:'%h' -n 1).latest.json data/dumped/latest.json",
+    "fetch-latest-fixtures": "aws s3 cp s3://fa22980d-b1d2-453b-8133-307ad70ccc55/latest.json data/dumped/latest.json"
   },
   "storybook-deployer": {
     "gitUsername": "Storybook Deployer",
@@ -20,7 +25,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7",
-    "@babel/plugin-proposal-optional-chaining": "^7.2.0",
+    "@babel/plugin-proposal-class-properties": "^7",
+    "@babel/plugin-proposal-optional-chaining": "^7",
     "@babel/plugin-transform-runtime": "^7",
     "@babel/preset-env": "^7",
     "@babel/preset-react": "^7",
@@ -34,7 +40,6 @@
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.5",
     "babel-plugin-lodash": "^3.3.4",
-    "babel-plugin-transform-class-properties": "^6",
     "browser-sync": "^2",
     "clean-webpack-plugin": "^2.0.1",
     "enzyme": "^3.9.0",
@@ -95,7 +100,9 @@
     "react-select": "^3.0.3",
     "react-table": "^6.9.2",
     "redux": "^4.0.1",
+    "regenerator-runtime": "^0.13.3",
     "sass-mq": "^5.0.0",
+    "url-search-params-polyfill": "^7.0.0",
     "victory": "^31.1.0",
     "yup": "^0.27.0"
   }

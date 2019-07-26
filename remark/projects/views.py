@@ -224,10 +224,6 @@ class TAMExportView(FormView, SingleObjectMixin):
 
         if form.is_valid():
             project = self.object
-            if project.address is None:
-                messages.error(request, "This project doesn't have an address yet.")
-                return self.form_invalid(form)
-
             export_tam_task.delay(project.pk, request.user.pk, form.cleaned_data)
             messages.success(request, "TAM Export started. You will be emailed with the result shortly.")
             return self.form_valid(form)

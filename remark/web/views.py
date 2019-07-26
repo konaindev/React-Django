@@ -54,14 +54,14 @@ class DashboardView(LoginRequiredMixin, ReactView):
         no_projects = True
         for project in Project.objects.filter(**project_params):
             no_projects = False
-            if project.address is not None:
-                state = project.address.state
-                city = project.address.city
-                label = (f"{city}, {state.upper()}",)
-                if not has_property_in_list_of_dict(locations, "label", label):
-                    locations.append(
-                        {"city": city, "label": label, "state": state.lower()}
-                    )
+            address = project.property.geo_address
+            state = address.state
+            city = address.city
+            label = (f"{city}, {state.upper()}",)
+            if not has_property_in_list_of_dict(locations, "label", label):
+                locations.append(
+                    {"city": city, "label": label, "state": state.lower()}
+                )
             if project.asset_manager is not None and not has_property_in_list_of_dict(
                 asset_managers, "id", project.asset_manager.public_id
             ):
@@ -94,9 +94,9 @@ class DashboardView(LoginRequiredMixin, ReactView):
             project_params["name__icontains"] = request.GET.get("q")
         if request.GET.get("st"):
             st = request.GET.getlist("st")
-            project_params["address__state__iregex"] = r"(" + "|".join(st) + ")"
+            project_params["property__geo_address__state__iregex"] = r"(" + "|".join(st) + ")"
         if request.GET.get("ct"):
-            project_params["address__city__in"] = request.GET.getlist("ct")
+            project_params["property__geo_address__city__in"] = request.GET.getlist("ct")
         if request.GET.get("pm"):
             project_params["property_manager_id__in"] = request.GET.getlist("pm")
         if request.GET.getlist("am"):
@@ -112,13 +112,12 @@ class DashboardView(LoginRequiredMixin, ReactView):
 
         projects = []
         for project in Project.objects.filter(**project_params).order_by(order):
+            address = project.property.geo_address
             projects.append(
                 {
                     "property_name": project.name,
                     "property_id": project.public_id,
-                    "address": f"{project.address.city}, {project.address.state}"
-                    if project.address
-                    else "",
+                    "address": f"{address.city}, {address.state}",
                     "image_url": project.get_building_image_url(),
                     "performance_rating": project.get_performance_rating(),
                     "url": project.get_baseline_url(),
