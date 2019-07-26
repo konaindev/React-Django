@@ -135,20 +135,20 @@ class BaselinePerfImporter(ProjectExcelImporter):
                     f"BaselinePerfImporter.clean: The spreadsheet looks broken. There is a period that begins on {period['start']} but ends *at or before* that, on {period['end']}."
                 )
 
-    def has_overlapping_periods(self, project):
+    def find_overlapping_period(self, project):
         def _is_overlapping(start_1, end_1, start_2, end_2):
             return (start_1 <= end_2 and end_1 >= start_2)
 
         # not likely happen, but just covering the edge case
         if project is None:
-            return False
+            return None
 
-        existing_period_dates = project.get_periods().order_by("-start").values_list("start", "end")
+        existing_period_dates = project.get_periods().order_by("-start")
         new_period_dates = self.cleaned_data["periods"]
 
         for p1 in new_period_dates:
             for p2 in existing_period_dates:
-                if _is_overlapping(p1["start"], p1["end"], p2[0], p2[1]):
-                    return True
+                if _is_overlapping(p1["start"], p1["end"], p2.start, p2.end):
+                    return p2
 
-        return False
+        return None
