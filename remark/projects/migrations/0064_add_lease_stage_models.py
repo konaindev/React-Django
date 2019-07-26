@@ -27,7 +27,7 @@ class Migration(migrations.Migration):
                 ('end', models.DateField(blank=True, db_index=True, null=True)),
                 ('includes_remarkably_effect', models.BooleanField(blank=True, default=True)),
                 ('lease_stage', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='projects.LeaseStage')),
-                ('project', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='lease_stage', to='projects.Project')),
+                ('project', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='projects.Project')),
             ],
         ),
     ]
