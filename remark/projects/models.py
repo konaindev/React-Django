@@ -1288,7 +1288,7 @@ class Building(models.Model):
     )
 
     property = models.ForeignKey(
-        "projects.Project", on_delete=models.CASCADE, blank=False, help_text="Project"
+        "projects.Property", on_delete=models.CASCADE, blank=False, help_text="Property"
     )
 
     building_identifier = models.CharField(
@@ -1296,10 +1296,10 @@ class Building(models.Model):
     )
 
     number_of_floors = models.IntegerField(
-        default=1, blank=False, help_text="Number of Floors"
+        default=1, blank=False, help_text="Number of floors in the building"
     )
 
-    has_elevator = models.BooleanField(default=False, verbose_name="Has Elevator?")
+    has_elevator = models.BooleanField(default=False, verbose_name="Does the building have a elevator?")
 
     number_of_units = models.IntegerField(
         default=1, blank=False, help_text="Number of Units"
