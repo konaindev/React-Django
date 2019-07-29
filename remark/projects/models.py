@@ -1127,23 +1127,6 @@ class Campaign(models.Model):
         help_text="All target values will be replaced by those in the newly selected model.",
     )
 
-    # This value is set when the instance is created; if we later
-    # call save, and it changes, then we update targets for the model.
-    __selected_campaign_model = None
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # TODO: remove this swap variable in PR#198
-        # Save this for comparison purposes on save(...)
-        # while loading dump data, "selected_campaign_model" results in KeyError
-        # "selected_campaign_model_id" works though
-        # bare for now, to make dumpdata working properly
-        try:
-            self.__selected_campaign_model = self.selected_campaign_model
-        except:
-            pass
-
-
     def save(self, *args, **kwargs):
         try:
             old = type(self).objects.get(pk=self.pk) if self.pk else None
