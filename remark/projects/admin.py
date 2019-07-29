@@ -21,7 +21,6 @@ from .models import (
     TAMExportLog,
     Tag,
     LeaseStage,
-    PropertyLeaseStage,
 )
 from .views import TAMExportView
 
@@ -459,9 +458,4 @@ class PropertyAdmin(admin.ModelAdmin):
 
 @admin.register(LeaseStage, site=admin_site)
 class LeaseStageAdmin(admin.ModelAdmin):
-    pass
-
-
-@admin.register(PropertyLeaseStage, site=admin_site)
-class PropertyLeaseStageAdmin(admin.ModelAdmin):
     pass

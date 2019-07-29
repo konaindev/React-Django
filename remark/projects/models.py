@@ -696,6 +696,7 @@ class Period(ModelPeriod, models.Model):
     project = models.ForeignKey(
         Project, on_delete=models.CASCADE, related_name="periods"
     )
+    lease_stage = models.ForeignKey("LeaseStage", on_delete=models.CASCADE)
 
     start = models.DateField(
         db_index=True, help_text="The first date, inclusive, that this period tracks."
@@ -704,6 +705,8 @@ class Period(ModelPeriod, models.Model):
     end = models.DateField(
         db_index=True, help_text="The final date, exclusive, that this period tracks."
     )
+
+    includes_remarkably_effect = models.BooleanField(default=True, blank=True)
 
     # ------------------------------------------------------
     # Logical activity (lease)
@@ -1276,16 +1279,3 @@ class LeaseStage(models.Model):
 
     def __str__(self):
         return self.full_name
-
-
-class PropertyLeaseStage(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
-    lease_stage = models.ForeignKey(LeaseStage, on_delete=models.CASCADE)
-
-    start = models.DateField(db_index=True, null=False, blank=False)
-    end = models.DateField(db_index=True, null=True, blank=True)
-
-    includes_remarkably_effect = models.BooleanField(default=True, blank=True)
-
-    def __str__(self):
-        return f"{self.project.name} | {self.lease_stage.full_name}"

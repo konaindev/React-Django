@@ -3,45 +3,24 @@
 from django.db import migrations, models
 
 
-def get_project_start_end(project):
-    periods = project.periods.all().order_by('start')
-    start_period = periods.first()
-    end_period = periods.last()
-    # If there are no periods then use `baseline` dates
-    start = project.baseline_start
-    end = project.baseline_end
-    if start_period:
-        start = start_period.start
-    if end_period:
-        end = end_period.end
-    return start, end
-
-
-def add_lease_stage_to_project(apps, schema_editor):
+def add_lease_stage_to_period(apps, schema_editor):
     LeaseStage = apps.get_model('projects', 'LeaseStage')
-    PropertyLeaseStage = apps.get_model('projects', 'PropertyLeaseStage')
-    Project = apps.get_model('projects', 'Project')
-    stage = LeaseStage.objects.get(short_name="stabilization")
+    Period = apps.get_model('projects', 'Period')
 
-    for p in Project.objects.all():
-        start, end = get_project_start_end(p)
-        pls = PropertyLeaseStage(lease_stage=stage, project=p, start=start, end=end)
-        pls.save()
+    stage = LeaseStage.objects.get(short_name="stabilization")
+    for p in Period.objects.all():
+        p.lease_stage = stage
+        p.save()
 
 
 def remove_lease_stage_from_project(apps, schema_editor):
     LeaseStage = apps.get_model('projects', 'LeaseStage')
-    PropertyLeaseStage = apps.get_model('projects', 'PropertyLeaseStage')
-    Project = apps.get_model('projects', 'Project')
-    stage = LeaseStage.objects.get(short_name="stabilization")
+    Period = apps.get_model('projects', 'Period')
 
-    for p in Project.objects.all():
-        start, end = get_project_start_end(p)
-        try:
-            pls = PropertyLeaseStage.objects.get(lease_stage=stage, project=p, start=start, end=end)
-        except models.Model.DoesNotExist:
-            continue
-        pls.delete()
+    stage = LeaseStage.objects.get(short_name="stabilization")
+    for p in Period.objects.filter(lease_stage=stage):
+        p.lease_stage = None
+        p.save()
 
 
 class Migration(migrations.Migration):
@@ -51,5 +30,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(add_lease_stage_to_project, remove_lease_stage_from_project)
+        migrations.RunPython(add_lease_stage_to_period, remove_lease_stage_from_project)
     ]
