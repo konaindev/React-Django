@@ -1,6 +1,8 @@
 from remark.lib.views import ReactView
 from remark.lib.logging import getLogger, error_text
 from remark.lib.time_series.common import KPI, KPITitle
+from .api import get_table_structure
+import datetime
 
 logger = getLogger(__name__)
 
@@ -32,6 +34,40 @@ KPI_BUNDLES = {
     },
 }
 
+'''
+b: KPI Bundle. Optional. Defaults to leasing_performance. Accepted values: leasing_performance, conversion_rates, retention_performance
+p: Period. Optional. Defaults to last_week. Accepted values: last_week, last_two_weeks, last_four_weeks, year_to_date
+s: Start Date. Optional. Defaults to 1 week ago.
+e: End Date. Optional. Defaults to yesterday.
+'''
+
+PERIOD_GROUP = (
+    "last_week",
+    "last_two_weeks",
+    "last_four_weeks",
+    "year_to_date",
+    "custom"
+)
+
+
+def x_mondays_ago(x):
+    '''
+
+    :param x: This is the number of Mondays ago you want. 0-means the last Monday.
+    :return: A datetime object.
+    '''
+    today = datetime.date.today()
+    if today.isoweekday() == 1:
+        last_monday = today - datetime.timedelta(days=7)
+    else:
+        last_monday = today - datetime.timedelta(days=today.weekday())
+
+    if x == 0:
+        return last_monday
+
+    days_before = 7 * x
+    return last_monday - datetime.timedelta(days=days_before)
+
 
 class PortfolioTableView(PortfolioMixin, ReactView):
 
@@ -48,26 +84,68 @@ class PortfolioTableView(PortfolioMixin, ReactView):
         if bundle not in KPI_BUNDLES:
             raise Exception("Could not find KPI Bundle")
 
-        # Pull all property data
+        if "p" in request.GET:
+            period_group = request.GET["p"]
+        else:
+            period_group = PERIOD_GROUP[0]
 
-        # Figure out what should be grouped
+        if period_group not in PERIOD_GROUP:
+            raise Exception("Period group is not a valid value")
 
-        # Do aggregates for groups and ALL Property
+        start, end = self.get_start_and_end(
+            period_group,
+            request.GET['s'] if 's' in request.GET else None,
+            request.GET['e'] if 'e' in request.GET else None,
+        )
 
-        # Include Remarkably National Average
-
-
-        standard_data = {
+        result = {
             "share_info": self.share_info(),
             "kpi_bundles": self.kpi_bundle_list(),
             "selected_kpi_bundle": bundle,
             "kpi_order": self.kpi_ordering(bundle),
-            "date_selection": self.get_date_selection(),
-            "user": self.get_user_info()
+            "date_selection": self.get_date_selection(period_group, start, end),
+            "user": self.get_user_info(),
+            "table_date": get_table_structure(
+                request.user,
+                start,
+                end,
+                kpis=KPI_BUNDLES[bundle]["kpis"]
+            )
         }
-        result = dict(**bundle_data, **standard_data)
 
         return self.render(**result)
+
+    def get_start_and_end(self, period_group, start, end):
+        '''
+        "last_week",
+        "last_two_weeks",
+        "last_four_weeks",
+        "year_to_date",
+        "custom"
+
+        :param period_group:
+        :param start:
+        :param end:
+        :return:
+        '''
+        if period_group == PERIOD_GROUP[4]:
+            s = datetime.datetime.fromisoformat(start)
+            e = datetime.datetime.fromisoformat(end)
+            return s, e
+
+        e = x_mondays_ago(0)+datetime.timedelta(days=1)
+        s = None
+
+        if period_group == PERIOD_GROUP[0]:
+            s = x_mondays_ago(1)
+        elif period_group == PERIOD_GROUP[1]:
+            s = x_mondays_ago(2)
+        elif period_group == PERIOD_GROUP[2]:
+            s = x_mondays_ago(4)
+        else:
+            s = datetime.date(year=e.year, month=0, day=1)
+
+        return s, e
 
     def kpi_bundle_list(self):
         result = []
@@ -107,12 +185,11 @@ class PortfolioTableView(PortfolioMixin, ReactView):
             "profile_image_url": None
         }
 
-    def get_date_selection(self):
-        # TODO: Fix me
+    def get_date_selection(self, period_group, start, end):
         return {
-            "preset": "custom",
-            "start_date": "2019-06-01",
-            "end_date": "2019-06-07"
+            "preset": period_group,
+            "start_date": start.strftime('%Y-%m-%d'),
+            "end_date": end.strftime('%Y-%m-%d')
         }
 
 

@@ -6,11 +6,11 @@ from django.db.models import Q
 # Also, to pull the model data out of the model class into a raw data structure
 
 
-'''
-This function produces a query that will select all periods
-of data that touch the time period specified by start and end.
-'''
 def select(base_query, start, end, hydrater=None):
+    '''
+    This function produces a query that will select all periods
+    of data that touch the time period specified by start and end.
+    '''
     before = (Q(start__gte=start) & Q(start__lt=end))
     middle = (Q(start__lte=start) & Q(end__gt=start))
     after = (Q(end__gt=start) & Q(end__lt=end))

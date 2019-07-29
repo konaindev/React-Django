@@ -104,7 +104,13 @@ class Tag(models.Model):
 
 
 class ProjectManager(models.Manager):
-    pass
+
+    def get_all_for_user(self, user):
+        groups = list(user.groups.all())
+        ids = []
+        for group in groups:
+            ids.append(group.id)
+        return self.filter(view_group_id__in=ids)
 
 
 class Project(models.Model):
@@ -937,7 +943,7 @@ class TargetPeriod(ModelPeriod, models.Model):
     target_lease_applications.metric = SumIntervalMetric()
 
     target_leases_executed = models.IntegerField(
-        null=True, blank=True, default=None, help_text="Target: leases execfuted"
+        null=True, blank=True, default=None, help_text="Target: leases executed"
     )
     target_leases_executed.metric = SumIntervalMetric()
 

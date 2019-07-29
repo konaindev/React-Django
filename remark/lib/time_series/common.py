@@ -102,7 +102,7 @@ class KPITitle:
 
     @staticmethod
     def for_kpi(kpi_name):
-        return getattr(KPITitles, kpi_name)
+        return getattr(KPITitle, kpi_name)
 
     # Lease
     leases_ended = "leases_ended"
@@ -153,7 +153,7 @@ class KPITitle:
     delta_leases = "delta_leases"
     occupiable_units = "occupiable_units"
     leased_units = "leased_units"
-    lease_rate = "lease_rate"
+    leased_rate = "leased_rate"
     renewal_rate = "renewal_rate"
     lease_cd_rate = "lease_cd_rate"
     resident_decisions = "resident_decisions"

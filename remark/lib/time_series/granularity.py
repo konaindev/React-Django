@@ -82,7 +82,7 @@ def _merge(merge_document, ts):
                 print(f"value: {value}")
                 result[prop] = value
             elif callable(merge_document[prop]):
-                value = merge_document[prop](result, ts[x], prop)
+                value = merge_document[prop](result, ts[x], prop, length)
                 result[prop] = value
             else:
                 raise Exception("Invalid merge strategy supplied")
@@ -119,6 +119,8 @@ def split(split_document, p, when):
         method = split_document[prop]
         if method == "linear":
             left, right = split_linear(p, prop, when)
+        elif method == "noop":
+            left, right = p[prop], p[prop]
         elif callable(method):
             left, right = method(p, prop, when)
         else:
@@ -132,6 +134,7 @@ def split_linear(p, prop, when):
     total_seconds = (p["end"] - p["start"]).total_seconds()
     left_seconds = (when - p["start"]).total_seconds()
 
+    print(p)
     value = p[prop]
     kind = time_value_type(value)
     if kind == int:
