@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PageAuth renders correctly 1`] = `
+<div
+  className="page-auth"
+>
+  <div
+    className="page-auth__header"
+  >
+    <a
+      className="page-auth__back-link"
+      href="/"
+    >
+      ← Back to Log In
+    </a>
+    <div
+      className="page-auth__logo"
+    >
+      <a
+        href="/dashboard"
+      >
+        <div
+          className="remarkably-logo"
+        >
+           
+        </div>
+      </a>
+    </div>
+  </div>
+  <div
+    className="page-auth__body"
+  >
+    <div>
+      children
+    </div>
+  </div>
+  <div
+    className="page-auth__footer"
+  >
+    © 2019 Remarkably. All Rights Reserved
+  </div>
+</div>
+`;
+
+exports[`PageAuth renders without back link 1`] = `
+<div
+  className="page-auth"
+>
+  <div
+    className="page-auth__header"
+  >
+    <div
+      className="page-auth__logo"
+    >
+      <a
+        href="/dashboard"
+      >
+        <div
+          className="remarkably-logo"
+        >
+           
+        </div>
+      </a>
+    </div>
+  </div>
+  <div
+    className="page-auth__body"
+  >
+    <div>
+      children
+    </div>
+  </div>
+  <div
+    className="page-auth__footer"
+  >
+    © 2019 Remarkably. All Rights Reserved
+  </div>
+</div>
+`;
