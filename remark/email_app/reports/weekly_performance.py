@@ -77,14 +77,17 @@ def create_list_kpi(result, campaign, prefix, kpis):
         result[f"{prefix}_{index}"] = list_kpi(kpi, campaign)
 
 
-def campaign_goal_chart_url(project, this_week):
+def generate_campaign_goal_chart_url(project, this_week):
     selector = SELECTORS["lease_rate"]
     formatter = percent_formatter_no_suffix
 
-    this_week_end = this_week["dates"]["end"]
-    goal_target_period = project.get_active_campaign_goal(this_week_end)
+    week_start = this_week["dates"]["start"]
+    week_end = this_week["dates"]["end"]
+    goal_target_period = project.get_active_campaign_goal(week_end)
     if goal_target_period is None:
-        return ""
+        raise InvalidReportRequest(
+            f"No target periods or selected model for week ({week_start}, {week_end})"
+        )
 
     goal_date = goal_target_period.end
     goal = formatter(goal_target_period.target_leased_rate)
@@ -112,6 +115,7 @@ def generate_template_vars(perf_email):
         campaign_to_date = PerformanceReport.for_campaign_to_date(project).to_jsonable()
         this_week = PerformanceReport.for_dates(project, start, end).to_jsonable()
         prev_week = PerformanceReport.for_dates(project, prevstart, start).to_jsonable()
+        campaign_goal_chart_url = generate_campaign_goal_chart_url(project, this_week)
     except InvalidReportRequest as e:
         # TODO todd: do something useful here.
         # You might also consider calling
@@ -154,7 +158,7 @@ def generate_template_vars(perf_email):
         "risk_kpi_insight_text": risk_kpi_insight_text,
         "low_kpi_insight_text": low_kpi_insight_text,
         "email": email,
-        "campaign_goal_chart_url": campaign_goal_chart_url(project, this_week),
+        "campaign_goal_chart_url": campaign_goal_chart_url,
     }
 
     create_list_kpi(template_vars, campaign_to_date, "top", top_kpis)
