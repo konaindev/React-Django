@@ -73,11 +73,8 @@ def list_kpi(kpi_key, campaign):
 
 
 def create_list_kpi(result, campaign, prefix, kpis):
-    result[f"{prefix}_1"] = list_kpi(kpis[0], campaign)
-    if len(kpis) > 1:
-        result[f"{prefix}_2"] = list_kpi(kpis[1], campaign)
-    if len(kpis) > 2:
-        result[f"{prefix}_3"] = list_kpi(kpis[2], campaign)
+    for index, kpi in enumerate(kpis, 1): # iterate index in [1, 2, 3]
+        result[f"{prefix}_{index}"] = list_kpi(kpi, campaign)
 
 
 def campaign_goal_chart_url(project, this_week):
