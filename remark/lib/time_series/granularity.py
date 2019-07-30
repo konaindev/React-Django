@@ -74,10 +74,16 @@ def _merge(merge_document, ts):
         return ts
 
     result = ts[0]
-    for x in range(1, length):
-        print(f"_merge: x:{x}")
-        for prop in merge_document:
-            if merge_document[prop] == "sum":
+    for prop in merge_document:
+        for x in range(1, length):
+            print(f"_merge | prop: {prop} | x:{x}")
+            if merge_document[prop] == "first":
+                # already set before the for loop
+                break
+            elif merge_document[prop] == "last":
+                result[prop] = ts[-1][prop]
+                break
+            elif merge_document[prop] == "sum":
                 value = _merge_sum(result, ts[x], prop)
                 print(f"value: {value}")
                 result[prop] = value

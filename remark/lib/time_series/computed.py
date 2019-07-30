@@ -116,8 +116,51 @@ kpi_graph = compose(name="kpi_graph")(
     op(KPI.investment, [KPI.acq_investment, KPI.ret_investment], add),
 
     # Revenue
-    op(KPI.estimated_acq_revenue_gain, [KPI.leases_executed, KPI.average_rent], twelve_mo_mult_or_0),
-    op(KPI.estimated_ret_revenue_gain, [KPI.lease_renewal_notices, KPI.average_rent], twelve_mo_mult_or_0),
+    op(KPI.estimated_acq_revenue_gain, [KPI.leases_executed, KPI.average_monthly_rent], twelve_mo_mult_or_0),
+    op(KPI.estimated_ret_revenue_gain, [KPI.lease_renewal_notices, KPI.average_monthly_rent], twelve_mo_mult_or_0),
+    op(KPI.estimated_revenue_gain, [KPI.estimated_acq_revenue_gain, KPI.estimated_ret_revenue_gain], sum_or_0),
+
+    # ROMI
+    op(KPI.acq_romi, [KPI.estimated_acq_revenue_gain, KPI.acq_investment], romi_calc),
+    op(KPI.ret_romi, [KPI.estimated_ret_revenue_gain, KPI.ret_investment], romi_calc),
+    op(KPI.romi, [KPI.estimated_revenue_gain, KPI.investment], romi_calc),
+
+    # Funnel Conversions
+    op(KPI.usv_exe, [KPI.leases_executed, KPI.usvs], div_or_0),
+    op(KPI.usv_inq, [KPI.inquiries, KPI.usvs], div_or_0),
+    op(KPI.inq_tou, [KPI.tours, KPI.inquiries], div_or_0),
+    op(KPI.tou_app, [KPI.lease_applications, KPI.tours], div_or_0),
+    op(KPI.app_exe, [KPI.leases_executed, KPI.lease_applications], div_or_0),
+
+    # Cost Pers
+    op(KPI.usv_cost, [KPI.acq_investment, KPI.usvs], cost_per_calc),
+    op(KPI.inq_cost, [KPI.acq_investment, KPI.inquiries], cost_per_calc),
+    op(KPI.tou_cost, [KPI.acq_investment, KPI.tours], cost_per_calc),
+    op(KPI.app_cost, [KPI.acq_investment, KPI.lease_applications], cost_per_calc),
+    op(KPI.exe_cost, [KPI.acq_investment, KPI.leases_executed], cost_per_calc),
+
+    op(KPI.exe_to_lowest_rent, [KPI.exe_cost, KPI.lowest_monthly_rent], chain(div_or_0, float)),
+)
+
+target_graph = compose(name="target_graph")(
+    op(KPI.investment, [KPI.acq_investment, KPI.ret_investment], add),
+
+    op(KPI.occupiable_units, [KPI.occupiable_units_start], identity),
+
+    op(KPI.resident_decisions, [KPI.lease_renewal_notices, KPI.lease_vacation_notices], sum_or_0),
+    op(KPI.renewal_rate, [KPI.lease_renewal_notices, KPI.resident_decisions], div_or_0),
+
+    op(KPI.leased_units, [
+        KPI.leased_units_end,
+        KPI.leased_units_start,
+        KPI.delta_leases
+    ], leased_units_calc),
+    op(KPI.leased_rate, [KPI.leased_units, KPI.occupiable_units], div_or_0),
+    op(KPI.occupancy_rate, [KPI.occupied_units, KPI.occupiable_units_start], div_or_0),
+
+    # Revenue
+    op(KPI.estimated_acq_revenue_gain, [KPI.leases_executed, KPI.average_monthly_rent], twelve_mo_mult_or_0),
+    op(KPI.estimated_ret_revenue_gain, [KPI.lease_renewal_notices, KPI.average_monthly_rent], twelve_mo_mult_or_0),
     op(KPI.estimated_revenue_gain, [KPI.estimated_acq_revenue_gain, KPI.estimated_ret_revenue_gain], sum_or_0),
 
     # ROMI
@@ -143,8 +186,29 @@ kpi_graph = compose(name="kpi_graph")(
 )
 
 
-def generated_computed_kpis(base_kpis, outputs=None):
+def generate_computed_kpis(base_kpis, outputs=None):
+    if base_kpis is None:
+        return None
+
     if outputs is None:
         return kpi_graph(base_kpis)
+
     return kpi_graph(base_kpis, outputs=outputs)
+
+
+def generate_computed_targets(base_targets, outputs=None):
+    if base_targets is None:
+        return None
+
+    if outputs is None:
+        return target_graph(base_targets)
+
+    if KPI.leased_rate in outputs and KPI.leased_rate in base_targets:
+        outputs = outputs.copy()
+        outputs.pop(outputs.index(KPI.leased_rate))
+        result = target_graph(base_targets, outputs=outputs)
+        result[KPI.leased_rate] = base_targets[KPI.leased_rate]
+        return result
+
+    return target_graph(base_targets, outputs=outputs)
 

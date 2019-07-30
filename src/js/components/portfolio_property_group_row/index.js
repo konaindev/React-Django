@@ -7,6 +7,8 @@ import PortfolioPropertyRow from "../portfolio_property_row";
 import groupScss from "./portfolio_property_group_row.scss";
 import rowScss from "../portfolio_property_row/portfolio_property_row.scss";
 
+import { formatKPI } from "../../utils/kpi_formatters";
+
 export default class PortfolioPropertyGroupRow extends React.PureComponent {
   static propTypes = {
     image_url: PropTypes.string.isRequired,
@@ -56,12 +58,12 @@ export default class PortfolioPropertyGroupRow extends React.PureComponent {
     return this.props.kpi_order.map((kpi, index) => {
       let target = "";
       if (this.props.targets[kpi]) {
-        target = `Target: ${this.props.targets[kpi]}`;
+        target = `Target: ${formatKPI(kpi, this.props.targets[kpi])}`;
       }
       return (
         <div className="portfolio-property-group-row__kpi" key={index}>
           <div className="portfolio-property-group-row__value">
-            {this.props.kpis[kpi]}
+            {formatKPI(kpi, this.props.kpis[kpi])}
           </div>
           <div className="portfolio-property-group-row__target">{target}</div>
         </div>

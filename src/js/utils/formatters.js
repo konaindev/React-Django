@@ -34,6 +34,15 @@ export const formatPercent = (
   return formatter.format(value);
 };
 
+export const configuredFormatPercent = (
+  maxFractionDigits = 0,
+  minFractionDigits
+) => {
+  return value => {
+    return formatPercent(value, maxFractionDigits, minFractionDigits);
+  };
+};
+
 /**
  * @description Convert a value (like 4500) to a display string (4,500)
  *
@@ -46,6 +55,12 @@ export const formatNumber = (value, decimals = 0) => {
     maximumFractionDigits: decimals
   });
   return formatter.format(value);
+};
+
+export const configuredFormatNumber = (decimals = 0) => {
+  return value => {
+    return formatNumber(value, decimals);
+  };
 };
 
 /**
@@ -63,6 +78,12 @@ export const formatCurrency = (value, cents = false, currency = "USD") => {
     currency
   });
   return formatter.format(value);
+};
+
+export const configuredFormatCurrency = (cents = false, currency = "USD") => {
+  return value => {
+    return formatCurrency(value, cents, currency);
+  };
 };
 
 /**

@@ -1,8 +1,10 @@
 from remark.lib.views import ReactView
 from remark.lib.logging import getLogger, error_text
-from remark.lib.time_series.common import KPI, KPITitle
+from remark.lib.time_series.common import KPI, KPITitle, KPIFormat
 from .api import get_table_structure
 import datetime
+
+from remark.lib.stats import health_check
 
 logger = getLogger(__name__)
 
@@ -98,6 +100,17 @@ class PortfolioTableView(PortfolioMixin, ReactView):
             request.GET['e'] if 'e' in request.GET else None,
         )
 
+        kpis_to_include = KPI_BUNDLES[bundle]["kpis"]
+        table_data, portfolio_average = get_table_structure(
+            request.user,
+            start,
+            end,
+            kpis_to_include
+        )
+
+        if table_data is None:
+            raise Exception("Table data cannot be None")
+
         result = {
             "share_info": self.share_info(),
             "kpi_bundles": self.kpi_bundle_list(),
@@ -105,12 +118,8 @@ class PortfolioTableView(PortfolioMixin, ReactView):
             "kpi_order": self.kpi_ordering(bundle),
             "date_selection": self.get_date_selection(period_group, start, end),
             "user": self.get_user_info(),
-            "table_date": get_table_structure(
-                request.user,
-                start,
-                end,
-                kpis=KPI_BUNDLES[bundle]["kpis"]
-            )
+            "table_data": table_data,
+            "highlight_kpis": self.get_highlight_kpis(portfolio_average)
         }
 
         return self.render(**result)
@@ -143,9 +152,27 @@ class PortfolioTableView(PortfolioMixin, ReactView):
         elif period_group == PERIOD_GROUP[2]:
             s = x_mondays_ago(4)
         else:
-            s = datetime.date(year=e.year, month=0, day=1)
+            s = datetime.date(year=e.year, month=1, day=1)
 
         return s, e
+
+    def get_highlight_kpis(self, group):
+        result = []
+        if group is None:
+            return []
+
+        for key in group["kpis"]:
+            target = group["targets"][key]
+            value = group["kpis"][key]
+            result.append({
+                "name": key,
+                "label": KPITitle.for_kpi(key),
+                "target": KPIFormat.apply(key, target),
+                "value": KPIFormat.apply(key, value),
+                "health": health_check(value, target)
+            })
+        return result
+
 
     def kpi_bundle_list(self):
         result = []
