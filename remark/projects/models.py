@@ -361,6 +361,29 @@ class Project(models.Model):
             .first()
         )
 
+    def get_active_campaign_goal(self, current_date):
+        """
+        Return last target period of a campaign
+        This campaign daterange should include "current_date"
+        """
+        active_target_period = (
+            self.target_periods.filter(end__gte=current_date)
+            .exclude(campaign_model=None)
+            .order_by("end")
+            .first()
+        )
+        if active_target_period is None:
+            return None
+
+        active_campaign_model = active_target_period.campaign_model
+        last_target_period = (
+            self.target_periods.filter(campaign_model=active_campaign_model)
+            .order_by("-end")
+            .first()
+        )
+
+        return last_target_period
+
     def get_building_logo(self):
         """
         Return building logo's S3 resource urls for all variants

@@ -82,11 +82,12 @@ def campaign_goal_chart_url(project, this_week):
     formatter = percent_formatter_no_suffix
 
     this_week_end = this_week["dates"]["end"]
-    target_period = (
-        TargetPeriod.objects.filter(project=project, end__lte=this_week_end).order_by("-end").first()
-    )
-    goal_date = target_period.end
-    goal = formatter(target_period.target_leased_rate)
+    goal_target_period = project.get_active_campaign_goal(this_week_end)
+    if goal_target_period is None:
+        return ""
+
+    goal_date = goal_target_period.end
+    goal = formatter(goal_target_period.target_leased_rate)
     current = formatter(selector(this_week))
 
     return (
