@@ -6,6 +6,7 @@ from remark.lib.spreadsheets import (
     IntCell,
     DateCell,
     CurrencyCell,
+    StrCell,
     ExcelValidationError,
 )
 
@@ -36,6 +37,7 @@ class BaselinePerfImporter(ProjectExcelImporter):
     PERIOD_SCHEMA = {
         "start": DateCell(find_period("start date")),
         "end": DateCell(find_period("end date")),
+        "lease_stage_str": StrCell(find_period("lease stage")),
         "leased_units_start": IntCell(find_period("leased units @ start")),
         "leased_units_end": IntCell(find_period("leased units @ end")),
         "leases_ended": IntCell(find_period("ended")),
@@ -103,3 +105,17 @@ class BaselinePerfImporter(ProjectExcelImporter):
                 raise ExcelValidationError(
                     f"BaselinePerfImporter.clean: The spreadsheet looks broken. There is a period that begins on {period['start']} but ends *at or before* that, on {period['end']}."
                 )
+
+        # Check that all lease stages are exist in DB
+        from remark.projects.models import LeaseStage
+        lease_stages_set = set([p["lease_stage_str"] for p in self.cleaned_data["periods"]])
+        if lease_stages_set:
+            lease_stages = LeaseStage.objects \
+                .filter(short_name__in=lease_stages_set) \
+                .values_list("short_name", flat=True)
+            wrong_stages = lease_stages_set - set(lease_stages)
+            if wrong_stages:
+                wrong_stages_str = ", ".join(wrong_stages)
+                raise ExcelValidationError(
+                    f"BaselinePerfActivator.activate_period: The spreadsheet looks broken. "
+                    f"Lease stages with names '{wrong_stages_str}' doesn't exist in database.")
