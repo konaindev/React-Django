@@ -1,0 +1,35 @@
+
+<svg width="499" height="499" viewBox="0 0 499 499" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <link href="/static/index.css" rel="stylesheet" type="text/css" xmlns="http://www.w3.org/1999/xhtml" />
+  <style>
+    <![CDATA[
+    text,
+    tspan {
+      font-family: "Formular";
+      font-size: 15px;
+      fill: #f5faf7;
+      text-anchor: middle;
+    }
+    ]]>
+  </style>
+  <defs>
+    <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="499" height="499">
+      <circle cx="249.5" cy="249.5" r="140.511" stroke="black" stroke-width="74.9393" />
+    </mask>
+  </defs>
+  <g mask="url(#mask0)">
+    <circle cx="249.5" cy="249.5" r="215.4503" fill="#20272E" />
+    
+    <path d="M 249.5 34.0497 A 215.4503 215.4503 0 0,1 249.5 464.9503 L 249.5 249.5" fill="#006EFF" />
+    
+    <path d="M 249.5 464.9503 A 215.4503 215.4503 0 0,1 182.9222 454.4054 L 249.5 249.5" fill="#404E5C" />
+    
+  </g>
+  
+  <text x="249.5" y="390.011"><tspan>Current:</tspan><tspan dy="17px" x="249.5">50%</tspan></text>
+  
+  <text x="197.7745" y="380.1438"><tspan>Goal:</tspan><tspan dy="17px" x="197.7745">55%</tspan></text>
+  
+  <text dy="-8px" x="249.5" y="249.5"><tspan>55% Leased Goal</tspan><tspan dy="24px" x="249.5">by 11/17/2015</tspan></text>
+  
+</svg>

@@ -59,6 +59,28 @@ class DonutChartTestCase(SimpleTestCase):
         self._check_correct_svg(
             self.test_data, "test_files/goal_greater_current.svg")
 
+    def test_goal_greater_current_and_smaller_50(self):
+        data = copy(self.test_data)
+        data["goal"] = 41
+        data["current"] = 16
+        data["goal_date"] = "2019-11-11"
+        self._check_correct_svg(
+            data, "test_files/goal_greater_current_and_smaller_50.svg")
+
+    def test_goal_label_moved_due_to_overlap(self):
+        data = copy(self.test_data)
+        data["goal"] = 55
+        data["current"] = 50
+        self._check_correct_svg(
+            data, "test_files/goal_label_moved_due_to_overlap.svg")
+
+    def test_goal_label_near_but_not_overlap(self):
+        data = copy(self.test_data)
+        data["goal"] = 61
+        data["current"] = 50
+        self._check_correct_svg(
+            data, "test_files/goal_label_near_but_not_overlap.svg")
+
     def test_required_params(self):
         resp = self.client.get(self.url, {})
         self.assertEqual(400, resp.status_code)
