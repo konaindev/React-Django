@@ -34,7 +34,7 @@ exports[`TutorialModal render default 1`] = `
       className="tutorial-modal__image"
       style={
         Object {
-          "backgroundImage": "url(https://imgur.com/vW7xfzx.png)",
+          "backgroundImage": "url(test-file-stub)",
         }
       }
     />
@@ -108,7 +108,7 @@ exports[`TutorialModal render default 2`] = `
       className="tutorial-modal__image"
       style={
         Object {
-          "backgroundImage": "url(https://imgur.com/MLfs4eQ.png)",
+          "backgroundImage": "url(test-file-stub)",
         }
       }
     />
@@ -182,14 +182,14 @@ exports[`TutorialModal render default 3`] = `
       className="tutorial-modal__image"
       style={
         Object {
-          "backgroundImage": "url(https://imgur.com/eQtUTc0.png)",
+          "backgroundImage": "url(test-file-stub)",
         }
       }
     />
     <div
       className="tutorial-modal__caption"
     >
-      Invite members of your organization to stay up to date and colloborate across projects.
+      Invite members of your organization to stay up to date and collaborate across projects.
     </div>
     <div
       className="tutorial-modal__nav"
