@@ -1,10 +1,110 @@
 from remark.lib.views import ReactView
 from remark.lib.logging import getLogger, error_text
+from remark.lib.time_series.common import KPI, KPITitle, KPIFormat
+from remark.portfolio.api.table_data import get_table_structure
+import datetime
+
+from remark.lib.stats import get_kpi_health
 
 logger = getLogger(__name__)
 
 class PortfolioMixin:
     pass
+
+
+LEASING_PERFORMANCE = "leasing_performance"
+CAMPAIGN_INVESTMENT = "campaign_investment"
+RETENTION_PERFORMANCE = "retention_performance"
+ACQUISITION_VOLUMES = "acquisition_volumes"
+ACQUISITION_CONVERSION = "acquisition_conversion"
+ACQUISITION_COST = "acquisition_cost"
+
+
+KPI_BUNDLES = {
+    LEASING_PERFORMANCE: {
+        "title": "Leasing Performance",
+        "kpis": [
+            KPI.leased_rate,
+            KPI.renewal_rate,
+            KPI.occupancy_rate
+        ]
+    },
+    CAMPAIGN_INVESTMENT: {
+        "title": "Campaign Investment",
+        "kpis": [
+            KPI.investment,
+            KPI.estimated_revenue_gain,
+            KPI.romi,
+            KPI.exe_to_lowest_rent
+        ]
+    },
+    RETENTION_PERFORMANCE: {
+        "title": "Retention Performance",
+        "kpis": [
+            KPI.move_ins,
+            KPI.move_outs,
+            KPI.lease_renewals,
+            KPI.lease_vacation_notices
+        ]
+    },
+    ACQUISITION_VOLUMES: {
+        "title": "Acquisition Funnel - Volumes",
+        "kpis": [
+            KPI.usvs,
+            KPI.inquiries,
+            KPI.tours,
+            KPI.lease_applications,
+            KPI.leases_executed
+        ]
+    },
+    ACQUISITION_CONVERSION: {
+        "title": "Acquisition Funnel - Conversion Rates",
+        "kpis": [
+            KPI.usv_inq,
+            KPI.inq_tou,
+            KPI.tou_app,
+            KPI.app_exe,
+            KPI.usv_exe
+        ]
+    },
+    ACQUISITION_COST: {
+        "title": "Acquisition Funnel - Cost Per Activity",
+        "kpis": [
+            KPI.usv_cost,
+            KPI.inq_cost,
+            KPI.tou_cost,
+            KPI.app_cost,
+            KPI.exe_cost
+        ]
+    }
+}
+
+PERIOD_GROUP = (
+    "last_week",
+    "last_two_weeks",
+    "last_four_weeks",
+    "year_to_date",
+    "custom"
+)
+
+
+def x_mondays_ago(x):
+    '''
+
+    :param x: This is the number of Mondays ago you want. 0-means the last Monday.
+    :return: A datetime object.
+    '''
+    today = datetime.date.today()
+    if today.isoweekday() == 1:
+        last_monday = today - datetime.timedelta(days=7)
+    else:
+        last_monday = today - datetime.timedelta(days=today.weekday())
+
+    if x == 0:
+        return last_monday
+
+    days_before = 7 * x
+    return last_monday - datetime.timedelta(days=days_before)
 
 
 class PortfolioTableView(PortfolioMixin, ReactView):
@@ -17,665 +117,151 @@ class PortfolioTableView(PortfolioMixin, ReactView):
         if "b" in request.GET:
             bundle = request.GET["b"]
         else:
-            bundle = "leasing_performance"
+            bundle = LEASING_PERFORMANCE
 
-        bundle_data = LEASING_PERFORMANCE
-        if bundle == "leasing_performance":
-            bundle_data = LEASING_PERFORMANCE
-        elif bundle == "campaign_investment":
-            bundle_data = CAMPAIGN_INVESTMENT
-        elif bundle == "retention_performance":
-            bundle_data = RETENTION_PERFORMANCE
+        if bundle not in KPI_BUNDLES:
+            raise Exception("Could not find KPI Bundle")
 
-        standard_data = {
-            "share_info": {
-                "shared": False,
-                "share_url": "http://app.remarkably.com/",
-                "update_endpoint": "/projects/pro_example/update/"
-            },
-            "kpi_bundles": [
-                {
-                    "name": "Leasing Performance",
-                    "value": "leasing_performance"
-                },
-                {
-                    "name": "Campaign Investment",
-                    "value": "campaign_investment"
-                },
-                {
-                    "name": "Retention Performance",
-                    "value": "retention_performance"
-                }
-            ],
-            "date_selection": {
-                "preset": "custom",
-                "start_date": "2019-06-01",
-                "end_date": "2019-06-07"
-            },
-            "user": {
-                "email": "test@remarkably.io",
-                "user_id": "peep_12345",
-                "account_id": "acc_12345",
-                "account_name": "Remarkably",
-                "logout_url": "/users/logout",
-                "profile_image_url": None
-                  #  "https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg"
-            }
+        if "p" in request.GET:
+            period_group = request.GET["p"]
+        else:
+            period_group = PERIOD_GROUP[0]
+
+        if period_group not in PERIOD_GROUP:
+            raise Exception("Period group is not a valid value")
+
+        start, end = self.get_start_and_end(
+            period_group,
+            request.GET['s'] if 's' in request.GET else None,
+            request.GET['e'] if 'e' in request.GET else None,
+        )
+
+        kpis_to_include = KPI_BUNDLES[bundle]["kpis"]
+        table_data, portfolio_average = get_table_structure(
+            request.user,
+            start,
+            end,
+            kpis_to_include
+        )
+
+        if table_data is None:
+            raise Exception("Table data cannot be None")
+
+        result = {
+            "share_info": self.share_info(),
+            "kpi_bundles": self.kpi_bundle_list(),
+            "selected_kpi_bundle": bundle,
+            "kpi_order": self.kpi_ordering(bundle),
+            "date_selection": self.get_date_selection(period_group, start, end),
+            "user": self.get_user_info(),
+            "table_data": table_data,
+            "highlight_kpis": self.get_highlight_kpis(portfolio_average, kpis_to_include)
         }
-        result = dict(**bundle_data, **standard_data)
 
         return self.render(**result)
 
+    def get_start_and_end(self, period_group, start, end):
+        '''
+        "last_week",
+        "last_two_weeks",
+        "last_four_weeks",
+        "year_to_date",
+        "custom"
+
+        :param period_group:
+        :param start:
+        :param end:
+        :return:
+        '''
+        if period_group == PERIOD_GROUP[4]:
+            s = datetime.date.fromisoformat(start)
+            e = datetime.date.fromisoformat(end)
+            return s, e
+
+        e = x_mondays_ago(0)+datetime.timedelta(days=1)
+        s = None
+
+        if period_group == PERIOD_GROUP[0]:
+            s = x_mondays_ago(1)
+        elif period_group == PERIOD_GROUP[1]:
+            s = x_mondays_ago(2)
+        elif period_group == PERIOD_GROUP[2]:
+            s = x_mondays_ago(4)
+        else:
+            s = datetime.date(year=e.year, month=1, day=1)
+
+        return s, e
+
+    def get_highlight_kpis(self, group, kpis_to_include):
+        result = []
+        if group is None:
+            return []
+
+        for key in kpis_to_include:
+            if key in group["targets"]:
+                target = KPIFormat.apply(key, group["targets"][key])
+            else:
+                target = None
+
+            value = KPIFormat.apply(key, group["kpis"][key])
+
+            if target is not None:
+                health = get_kpi_health(value, target, key)
+            else:
+                health = -1
+
+            result.append({
+                "name": key,
+                "label": KPITitle.for_kpi(key),
+                "target": target,
+                "value": value,
+                "health": health
+            })
+        return result
 
 
-LEASING_PERFORMANCE = {
-    "selected_kpi_bundle": "leasing_performance",
-    "kpi_order": [
-        {
-            "label": "Lease Rate",
-            "value": "lease_rate"
-        },
-        {
-            "label": "Retained Rate",
-            "value": "renewal_rate"
-        },
-        {
-            "label": "Occupied Rate",
-            "value": "occupancy_rate"
+    def kpi_bundle_list(self):
+        result = []
+        for item in KPI_BUNDLES:
+            result.append({
+                "name": KPI_BUNDLES[item]["title"],
+                "value": item
+            })
+        return result
+
+    def share_info(self):
+        # TODO: Fix ME
+        return {
+            "shared": False,
+            "share_url": "http://app.remarkably.com/",
+            "update_endpoint": "/projects/pro_example/update/"
         }
-    ],
 
-    "highlight_kpis": [
-        {
-            "health": 2,
-            "name": "lease_rate",
-            "label": "Lease Rate",
-            "target": "75%",
-            "value": "79%"
-        },
-        {
-            "health": 1,
-            "name": "renewal_rate",
-            "label": "Retained Rate",
-            "target": "21%",
-            "value": "17%"
-        },
-        {
-            "health": 2,
-            "name": "occupancy_rate",
-            "label": "Occupied Rate",
-            "target": "69%",
-            "value": "75%"
-        }
-    ],
+    def kpi_ordering(self, bundle):
+        bundle_data = KPI_BUNDLES[bundle]
+        result = []
+        for kpi in bundle_data["kpis"]:
+            result.append({
+                "label": KPITitle.for_kpi(kpi),
+                "value": kpi
+            })
+        return result
 
-    "table_data": [
-        {
-            "type": "group",
-            "name": "PNW Group",
-            "image_url":
-                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png",
-            "kpis": {
-                "lease_rate": "70%",
-                "renewal_rate": "17%",
-                "occupancy_rate": "64%",
-            },
-            "targets": {
-                "lease_rate": "60%",
-                "renewal_rate": "13%",
-                "occupancy_rate": "46%",
-            },
-            "properties": [
-                {
-                    "name": "C Aire",
-                    "address": "Seattle, WA",
-                    "image_url":
-                        "https://g5-assets-cld-res.cloudinary.com/image/upload/q_auto,f_auto,fl_lossy/g5/g5-c-ibsddh6p-pillar-properties-client/g5-cl-55us94ubz-the-lyric-capitol-hill/uploads/apartments-for-rent-seattle-hero.jpg",
-                    "health": 2,
-                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
-                    "kpis": {
-                        "lease_rate": "57%",
-                        "renewal_rate": "0%",
-                        "occupancy_rate": "52%",
-                    },
-                    "targets": {
-                        "lease_rate": "35%",
-                        "renewal_rate": "0%",
-                        "occupancy_rate": "23%",
-                    }
-                },
-                {
-                    "name": "The Spoke",
-                    "address": "Portland, OR",
-                    "image_url":
-                        "https://res.cloudinary.com/sagacity/image/upload/c_crop,h_4557,w_4165,x_0,y_257/c_limit,dpr_auto,f_auto,fl_lossy,q_80,w_1080/1017-habitat-collective-on-4th_commzl.jpg",
-                    "health": 2,
-                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
-                    "kpis": {
-                        "lease_rate": "84%",
-                        "renewal_rate": "33%",
-                        "occupancy_rate": "76%",
-                    },
-                    "targets": {
-                        "lease_rate": "85%",
-                        "renewal_rate": "25%",
-                        "occupancy_rate": "69%",
-                    }
-                }
-            ]
-        },
-{
-            "type": "group",
-            "name": "PHX Group",
-            "image_url":
-                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png",
-            "kpis": {
-                "lease_rate": "87%",
-                "renewal_rate": "17%",
-                "occupancy_rate": "86%",
-            },
-            "targets": {
-                "lease_rate": "91%",
-                "renewal_rate": "29%",
-                "occupancy_rate": "91%",
-            },
-            "properties": [
-                {
-                    "name": "Phoenix Flats",
-                    "address": "Phoenix, AZ",
-                    "image_url":
-                        "https://1-aegir0-camdenliving-com45.s3.amazonaws.com/styles/_min-width___480px_/s3/community/camden-north-end/headers/camdennorthend201857copy.jpg?itok=MMgp28cs&timestamp=1549062957",
-                    "health": 1,
-                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
-                    "kpis": {
-                        "lease_rate": "87%",
-                        "renewal_rate": "0%",
-                        "occupancy_rate": "86%",
-                    },
-                    "targets": {
-                        "lease_rate": "91%",
-                        "renewal_rate": "25%",
-                        "occupancy_rate": "92%",
-                    }
-                },
-                {
-                    "name": "Henry Apartments",
-                    "address": "Phoenix, AZ",
-                    "image_url":
-                        "https://g5-assets-cld-res.cloudinary.com/image/upload/q_auto,f_auto,fl_lossy/g5/g5-c-1t2d31r8-berkshire-communities/g5-cl-i2qo6kgi-roosevelt-square/uploads/berk-rooseveltsq-41-gallery.jpg",
-                    "health": 2,
-                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
-                    "kpis": {
-                        "lease_rate": "88%",
-                        "renewal_rate": "33%",
-                        "occupancy_rate": "87%",
-                    },
-                    "targets": {
-                        "lease_rate": "90%",
-                        "renewal_rate": "33%",
-                        "occupancy_rate": "90%",
-                    }
-                }
-            ]
-        },
-        {
-            "type": "group",
-            "name": "Remarkably National",
-            "image_url":
-                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/remarkably_national.png",
-            "kpis": {
-                "lease_rate": "79%",
-                "renewal_rate": "26%",
-                "occupancy_rate": "81%",
-            },
-            "targets": {
-                "lease_rate": "",
-                "renewal_rate": "",
-                "occupancy_rate": "",
-            }
-        },
-        {
-            "type": "group",
-            "name": "Portfolio Average",
-            "image_url":
-                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png",
-            "properties": 11,
-            "kpis": {
-                "lease_rate": "79%",
-                "renewal_rate": "17%",
-                "occupancy_rate": "75%",
-            },
-            "targets": {
-                "lease_rate": "75%",
-                "renewal_rate": "21%",
-                "occupancy_rate": "69%",
-            }
+    def get_user_info(self):
+        # TODO: Fix me
+        return {
+            "email": "test@remarkably.io",
+            "user_id": "peep_12345",
+            "account_id": "acc_12345",
+            "account_name": "Remarkably",
+            "logout_url": "/users/logout",
+            "profile_image_url": None
         }
-    ]
-}
 
-CAMPAIGN_INVESTMENT = {
-    "selected_kpi_bundle": "campaign_investment",
-    "kpi_order": [
-        {
-            "label": "Campaign Investment",
-            "value": "investment"
-        },
-        {
-            "label": "Est. Revenue Change",
-            "value": "est_revenue_change"
-        },
-        {
-            "label": "ROMI",
-            "value": "romi"
-        },
-        {
-            "label": "Cost per EXE / Lowest Monthly Rent",
-            "value": "exe_rent_ratio"
+    def get_date_selection(self, period_group, start, end):
+        return {
+            "preset": period_group,
+            "start_date": start.strftime('%Y-%m-%d'),
+            "end_date": end.strftime('%Y-%m-%d')
         }
-    ],
 
-    "highlight_kpis": [
-        {
-            "health": 2,
-            "name": "investment",
-            "label": "Campaign Investment",
-            "target": "$7,250",
-            "value": "$7,404"
-        },
-        {
-            "health": 1,
-            "name": "est_revenue_change",
-            "label": "Est. Revenue Change",
-            "target": "$62,275",
-            "value": "$36,900"
-        },
-        {
-            "health": 0,
-            "name": "romi",
-            "label": "ROMI",
-            "target": "11",
-            "value": "3"
-        },
-        {
-            "health": 1,
-            "name": "exe_rent_ratio",
-            "label": "Cost per EXE / Lowest Monthly Rent",
-            "target": "111%",
-            "value": "133%"
-        }
-    ],
-
-    "table_data": [
-        {
-            "type": "group",
-            "name": "PNW Group",
-            "image_url":
-                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png",
-            "kpis": {
-                "investment": "$11,748.13",
-                "est_revenue_change": "$73,200",
-                "romi": "7",
-                "exe_rent_ratio": "197%"
-            },
-            "targets": {
-                "investment": "$11,300.00",
-                "est_revenue_change": "$93,050",
-                "romi": "10",
-                "exe_rent_ratio": "142%"
-            },
-            "properties": [
-                {
-                    "name": "C Aire",
-                    "address": "Seattle, WA",
-                    "image_url":
-                        "https://g5-assets-cld-res.cloudinary.com/image/upload/q_auto,f_auto,fl_lossy/g5/g5-c-ibsddh6p-pillar-properties-client/g5-cl-55us94ubz-the-lyric-capitol-hill/uploads/apartments-for-rent-seattle-hero.jpg",
-                    "health": 2,
-                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
-                    "kpis": {
-                        "investment": "$8,063.75",
-                        "est_revenue_change": "$86,400",
-                        "romi": "11",
-                        "exe_rent_ratio": "156%"
-                    },
-                    "targets": {
-                        "investment": "$7,600.00",
-                        "est_revenue_change": "$117,700",
-                         "romi": "15",
-                         "exe_rent_ratio": "108%"
-                    }
-                },
-                {
-                    "name": "The Spoke",
-                    "address": "Portland, OR",
-                    "image_url":
-                        "https://res.cloudinary.com/sagacity/image/upload/c_crop,h_4557,w_4165,x_0,y_257/c_limit,dpr_auto,f_auto,fl_lossy,q_80,w_1080/1017-habitat-collective-on-4th_commzl.jpg",
-                    "health": 2,
-                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
-                    "kpis": {
-                        "investment": "$15,432.50",
-                        "est_revenue_change": "$60,000",
-                        "romi": "4",
-                        "exe_rent_ratio": "239%"
-                    },
-                    "targets": {
-                        "investment": "$15,000.00",
-                        "est_revenue_change": "$68,400",
-                        "romi": "5",
-                        "exe_rent_ratio": "175%"
-                    }
-                }
-            ]
-        },
-{
-            "type": "group",
-            "name": "PHX Group",
-            "image_url":
-                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png",
-            "kpis": {
-                        "investment": " $3,060.00 ",
-                        "est_revenue_change": " $600",
-                        "romi": "-1",
-                        "exe_rent_ratio": "69%"
-                    },
-                    "targets": {
-                        "investment": " $3,200.00 ",
-                        "est_revenue_change": " $31,500",
-                        "romi": "11",
-                        "exe_rent_ratio": "80%"
-                    },
-            "properties": [
-                {
-                    "name": "Phoenix Flats",
-                    "address": "Phoenix, AZ",
-                    "image_url":
-                        "https://1-aegir0-camdenliving-com45.s3.amazonaws.com/styles/_min-width___480px_/s3/community/camden-north-end/headers/camdennorthend201857copy.jpg?itok=MMgp28cs&timestamp=1549062957",
-                    "health": 1,
-                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
-                    "kpis": {
-                        "investment": " $2,140.00 ",
-                        "est_revenue_change": "- $10,200",
-                        "romi": "-5",
-                        "exe_rent_ratio": "60%"
-                    },
-                    "targets": {
-                        "investment": " $2,600.00 ",
-                        "est_revenue_change": " $44,300",
-                        "romi": "17",
-                        "exe_rent_ratio": "67%"
-                    }
-                },
-                {
-                    "name": "Henry Apartments",
-                    "address": "Phoenix, AZ",
-                    "image_url":
-                        "https://g5-assets-cld-res.cloudinary.com/image/upload/q_auto,f_auto,fl_lossy/g5/g5-c-1t2d31r8-berkshire-communities/g5-cl-i2qo6kgi-roosevelt-square/uploads/berk-rooseveltsq-41-gallery.jpg",
-                    "health": 2,
-                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
-                    "kpis": {
-                        "investment": " $3,980.00 ",
-                        "est_revenue_change": " $11,400",
-                        "romi": "3",
-                        "exe_rent_ratio": "78%"
-                    },
-                    "targets": {
-                        "investment": " $3,800.00 ",
-                        "est_revenue_change": " $18,700",
-                        "romi": "5",
-                        "exe_rent_ratio": "94%"
-                    }
-                }
-            ]
-        },
-        {
-            "type": "group",
-            "name": "Remarkably National",
-            "image_url":
-                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/remarkably_national.png",
-            "kpis": {
-                        "investment": " $4,509",
-                        "est_revenue_change": "$44,900",
-                        "romi": "19",
-                        "exe_rent_ratio": "86%"
-                    },
-                    "targets": {
-                        "investment": "",
-                        "est_revenue_change": "",
-                        "romi": "5",
-                        "exe_rent_ratio": ""
-                    }
-        },
-        {
-            "type": "group",
-            "name": "Portfolio Average",
-            "image_url":
-                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png",
-            "properties": 11,
-            "kpis": {
-                        "investment": " $7,404.06 ",
-                        "est_revenue_change": " $36,900",
-                        "romi": "3",
-                        "exe_rent_ratio": "133%"
-                    },
-                    "targets": {
-                        "investment": " $7,250.00 ",
-                        "est_revenue_change": " $62,275",
-                        "romi": "11",
-                        "exe_rent_ratio": "111%"
-                    }
-        }
-    ]
-}
-
-RETENTION_PERFORMANCE = {
-    "selected_kpi_bundle": "retention_performance",
-    "kpi_order": [
-        {
-            "label": "Move Ins",
-            "value": "move_ins"
-        },
-        {
-            "label": "Move Outs",
-            "value": "move_outs"
-        },
-        {
-            "label": "Renewals",
-            "value": "renewals"
-        },
-        {
-            "label": "Notices to Vacate",
-            "value": "vacation_notices"
-        }
-    ],
-
-    "highlight_kpis": [
-        {
-            "health": 1,
-            "name": "move_ins",
-            "label": "Move Ins",
-            "target": "5",
-            "value": "4"
-        },
-        {
-            "health": 1,
-            "name": "move_outs",
-            "label": "Move Outs",
-            "target": "2",
-            "value": "3"
-        },
-        {
-            "health": 2,
-            "name": "renewals",
-            "label": "Renewals",
-            "target": "0",
-            "value": "1"
-        },
-        {
-            "health": 2,
-            "name": "vacation_notices",
-            "label": "Notices to Vacate",
-            "target": "2",
-            "value": "2"
-        }
-    ],
-
-    "table_data": [
-        {
-            "type": "group",
-            "name": "PNW Group",
-            "image_url":
-                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png",
-            "kpis": {
-                "move_ins": "2",
-                "move_outs": "1",
-                "renewals": "1",
-                "vacation_notices": "1"
-            },
-            "targets": {
-                "move_ins": "5",
-                "move_outs": "2",
-                "renewals": "1",
-                "vacation_notices": "2"
-            },
-            "properties": [
-                {
-                    "name": "C Aire",
-                    "address": "Seattle, WA",
-                    "image_url":
-                        "https://g5-assets-cld-res.cloudinary.com/image/upload/q_auto,f_auto,fl_lossy/g5/g5-c-ibsddh6p-pillar-properties-client/g5-cl-55us94ubz-the-lyric-capitol-hill/uploads/apartments-for-rent-seattle-hero.jpg",
-                    "health": 2,
-                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
-                    "kpis": {
-                        "move_ins": "4",
-                        "move_outs": "0",
-                        "renewals": "0",
-                        "vacation_notices": "0"
-                    },
-                    "targets": {
-                        "move_ins": "5",
-                        "move_outs": "0",
-                        "renewals": "0",
-                        "vacation_notices": "0"
-                    }
-                },
-                {
-                    "name": "The Spoke",
-                    "address": "Portland, OR",
-                    "image_url":
-                        "https://res.cloudinary.com/sagacity/image/upload/c_crop,h_4557,w_4165,x_0,y_257/c_limit,dpr_auto,f_auto,fl_lossy,q_80,w_1080/1017-habitat-collective-on-4th_commzl.jpg",
-                    "health": 2,
-                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
-                    "kpis": {
-                        "move_ins": 0,
-                        "move_outs": 1,
-                        "renewals": 1,
-                         "vacation_notices": 2
-                    },
-                    "targets": {
-                        "move_ins": 4,
-                        "move_outs": 3,
-                        "renewals": 1,
-                        "vacation_notices": 3
-                    }
-                }
-            ]
-        },
-{
-            "type": "group",
-            "name": "PHX Group",
-            "image_url":
-                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png",
-            "kpis": {
-                "move_ins": 7,
-                "move_outs": 5,
-                "renewals": 1,
-                "vacation_notices": 3
-            },
-            "targets": {
-                "move_ins": 5,
-                "move_outs": 2,
-                "renewals": "0",
-                "vacation_notices": 2
-            },
-            "properties": [
-                {
-                    "name": "Phoenix Flats",
-                    "address": "Phoenix, AZ",
-                    "image_url":
-                        "https://1-aegir0-camdenliving-com45.s3.amazonaws.com/styles/_min-width___480px_/s3/community/camden-north-end/headers/camdennorthend201857copy.jpg?itok=MMgp28cs&timestamp=1549062957",
-                    "health": 1,
-                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
-                    "kpis": {
-                        "move_ins": 3,
-                        "move_outs": 5,
-                        "renewals": 0,
-                        "vacation_notices": 2
-                    },
-                    "targets": {
-                        "move_ins": 4,
-                        "move_outs": 2,
-                        "renewals": 2,
-                        "vacation_notices": 2
-                    }
-                },
-                {
-                    "name": "Henry Apartments",
-                    "address": "Phoenix, AZ",
-                    "image_url":
-                        "https://g5-assets-cld-res.cloudinary.com/image/upload/q_auto,f_auto,fl_lossy/g5/g5-c-1t2d31r8-berkshire-communities/g5-cl-i2qo6kgi-roosevelt-square/uploads/berk-rooseveltsq-41-gallery.jpg",
-                    "health": 2,
-                    "url": "/projects/pro_tdglra7vyt7wu311/performance/last-four-weeks/",
-                    "kpis": {
-                        "move_ins": 10,
-                        "move_outs": 4,
-                        "renewals": 2,
-                         "vacation_notices": 4
-                    },
-                    "targets": {
-                        "move_ins": 4,
-                        "move_outs": 2,
-                        "renewals": 1,
-                        "vacation_notices": 2
-                    }
-                }
-            ]
-        },
-        {
-            "type": "group",
-            "name": "Remarkably National",
-            "image_url":
-                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/remarkably_national.png",
-            "kpis": {
-                "move_ins": 4,
-                "move_outs": 3,
-                "renewals": 3,
-                "vacation_notices": 3
-            },
-            "targets": {
-                "move_ins": "",
-                "move_outs": "",
-                "renewals": "",
-                "vacation_notices": ""
-            }
-        },
-        {
-            "type": "group",
-            "name": "Portfolio Average",
-            "image_url":
-                "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png",
-            "properties": 4,
-            "kpis": {
-                "move_ins": 4,
-                "move_outs": 3,
-                "renewals": 1,
-                "vacation_notices": 2
-            },
-            "targets": {
-                "move_ins": 5,
-                "move_outs": 2,
-                "renewals": "0",
-                "vacation_notices": 2
-            }
-        }
-    ]
-}

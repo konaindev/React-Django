@@ -119,6 +119,9 @@ SHAPE = {
 @click.argument("start", required=True, type=click.DateTime(formats=("%d/%m/%Y",)))
 @click.argument("end", required=True, type=click.DateTime(formats=("%d/%m/%Y",)))
 def command(start, end):
+    _command(start, end)
+
+def _command(start, end):
     start = start.date()
     end = end.date()
 
@@ -137,7 +140,6 @@ def command(start, end):
             reports.append(raw_values)
 
     # Generate the aggregate total
-
     result = {
         "start": start,
         "end": end,
@@ -157,4 +159,4 @@ def command(start, end):
 
     average_period.save()
 
-    return None
+    return average_period

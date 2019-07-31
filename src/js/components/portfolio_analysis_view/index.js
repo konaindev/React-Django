@@ -12,6 +12,8 @@ import ShareToggle from "../share_toggle";
 import { formatPercent } from "../../utils/formatters";
 import UserMenu from "../user_menu";
 
+import { formatKPI } from "../../utils/kpi_formatters";
+
 import "./portfolio_analysis_view.scss";
 
 const navLinks = {
@@ -56,11 +58,11 @@ export class PortfolioAnalysisView extends React.PureComponent {
     }).isRequired,
     highlight_kpis: PropTypes.arrayOf(
       PropTypes.shape({
-        health: PropTypes.oneOf([0, 1, 2]).isRequired,
+        health: PropTypes.oneOf([-1, 0, 1, 2]).isRequired,
         name: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
-        target: PropTypes.string.isRequired,
-        value: PropTypes.string.isRequired
+        target: PropTypes.any.isRequired,
+        value: PropTypes.any.isRequired
       })
     ).isRequired,
     table_data: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -94,9 +96,9 @@ export class PortfolioAnalysisView extends React.PureComponent {
         <KPICard
           className="portfolio-analysis__kpi-card"
           health={health}
-          value={value}
+          value={formatKPI(name, value)}
           name={label}
-          target={target}
+          target={formatKPI(name, target)}
           key={name}
         />
       )
