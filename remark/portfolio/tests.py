@@ -2,16 +2,11 @@ from datetime import timedelta, datetime
 import decimal
 
 from django.test import TestCase
-from mock import patch, Mock
 
-from remark.portfolio.management.commands.generate_remarkably_average import _command
-
-from remark.portfolio.models import RemarkablyPortfolioAveragePeriod
 from remark.projects.models import Project, Period, Fund
 from remark.geo.models import Address
 from remark.crm.models import Business
 from remark.users.models import Account
-from remark.projects.reports.performance import PerformanceReport
 
 
 def query_for_periods(project, start, end):
