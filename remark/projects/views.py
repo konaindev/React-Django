@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404, HttpResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
 from django.urls import reverse
@@ -129,7 +129,9 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
 
         logger.info("ReportPageViewBase::get::checking has_report_data")
         if (self.selector is None) or (not self.selector.has_report_data()):
-            raise Http404
+            if self.report_name == "market":
+                raise Http404
+            return redirect("market_report", project_id=project_id)
         logger.info("ReportPageViewBase::get::after checking has_report_data")
 
         user_menu = None
