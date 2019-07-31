@@ -61,8 +61,8 @@ export class PortfolioAnalysisView extends React.PureComponent {
         health: PropTypes.oneOf([0, 1, 2]).isRequired,
         name: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
-        target: PropTypes.string.isRequired,
-        value: PropTypes.string.isRequired
+        target: PropTypes.any.isRequired,
+        value: PropTypes.any.isRequired
       })
     ).isRequired,
     table_data: PropTypes.arrayOf(PropTypes.object).isRequired,

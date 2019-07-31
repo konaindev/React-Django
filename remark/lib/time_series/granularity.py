@@ -73,39 +73,45 @@ def _merge(merge_document, ts):
     if ts == 1:
         return ts
 
-    result = ts[0]
+    result = {
+        "start": ts[0]['start'],
+        "end": ts[0]['end']
+    }
     for prop in merge_document:
-        for x in range(1, length):
-            print(f"_merge | prop: {prop} | x:{x}")
             if merge_document[prop] == "first":
-                # already set before the for loop
-                break
+                result[prop] = _merge_first(ts, prop)
             elif merge_document[prop] == "last":
-                result[prop] = ts[-1][prop]
-                break
+                result[prop] = _merge_last(ts, prop)
             elif merge_document[prop] == "sum":
-                value = _merge_sum(result, ts[x], prop)
-                print(f"value: {value}")
+                value = _merge_sum(ts, prop)
                 result[prop] = value
             elif callable(merge_document[prop]):
-                value = merge_document[prop](result, ts[x], prop, length)
+                value = merge_document[prop](ts, prop)
                 result[prop] = value
             else:
                 raise Exception("Invalid merge strategy supplied")
     return result
 
 
-def _merge_sum(p1, p2, prop):
-    a = p1[prop]
-    b = p2[prop]
+def cast_zero_of_type(example):
+    return type(example)(0)
 
-    if a is None:
-        a = 0
-    if b is None:
-        b = 0
 
-    return a + b
+def _merge_sum(items, prop):
+    result = cast_zero_of_type(items[0][prop])
+    for item in items:
+        value = item[prop]
+        if value is not None:
+            result += value
+    return result
 
+
+def _merge_last(items, prop):
+    return items[-1][prop]
+
+
+def _merge_first(items, prop):
+    return items[0][prop]
 
 # Split Strategies
 LINEAR = "linear"
