@@ -72,7 +72,7 @@ class DonutChart:
             "",
             insert=(x, y),
         )
-        t.add(text.TSpan(f"Current:"))
+        t.add(text.TSpan("Current:"))
         t.add(text.TSpan(f"{self.current}%", x=[x], dy=["17px"]))
         return t.tostring()
 
