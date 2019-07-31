@@ -89,7 +89,8 @@ def generate_campaign_goal_chart_url(project, this_week):
             f"No target periods or selected model for week ({week_start}, {week_end})"
         )
 
-    goal_date = goal_target_period.end
+    # target periods' end date is one day after the actual end date
+    goal_date = goal_target_period.end - datetime.timedelta(days=1)
     goal = formatter(goal_target_period.target_leased_rate)
     current = formatter(selector(this_week))
 
