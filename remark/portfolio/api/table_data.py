@@ -95,8 +95,8 @@ def get_table_structure(user, start, end, kpis):
             portfolio_average_targets.append(project["base_targets"])
 
     # Next we need to combine the Group properties
+    table_data = []
     if len(portfolio_average) == 0:
-        table_data = []
         portfolio_average_group = None
     else:
         portfolio_average_group = {
@@ -107,7 +107,8 @@ def get_table_structure(user, start, end, kpis):
             "base_kpis": get_base_kpis_for_group(portfolio_average, start, end),
             "base_targets": get_targets_for_group(portfolio_average_targets, start, end)
         }
-        table_data = [portfolio_average_group, ]
+        generate_computed_properties(portfolio_average_group, kpis)
+        format_kpis(portfolio_average_group, kpis)
 
     properties_in_groups = []
     for group in groupings:
@@ -146,6 +147,8 @@ def get_table_structure(user, start, end, kpis):
     for project in project_flat_list:
         if project["id"] not in properties_in_groups:
             table_data.append(project)
+
+    table_data.append(portfolio_average_group)
 
     return table_data, portfolio_average_group
 

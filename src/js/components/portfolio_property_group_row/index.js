@@ -19,7 +19,7 @@ export default class PortfolioPropertyGroupRow extends React.PureComponent {
     ]),
     kpi_order: PropTypes.array.isRequired,
     kpis: PropTypes.object.isRequired,
-    targets: PropTypes.object.isRequired
+    targets: PropTypes.object
   };
 
   state = {
@@ -57,7 +57,7 @@ export default class PortfolioPropertyGroupRow extends React.PureComponent {
   renderKPIs() {
     return this.props.kpi_order.map((kpi, index) => {
       let target = "";
-      if (this.props.targets[kpi]) {
+      if (this.props.targets && this.props.targets[kpi]) {
         target = `Target: ${formatKPI(kpi, this.props.targets[kpi])}`;
       }
       return (

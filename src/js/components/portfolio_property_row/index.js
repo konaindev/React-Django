@@ -15,16 +15,16 @@ export default class PortfolioPropertyRow extends React.PureComponent {
     image_url: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     address: PropTypes.string.isRequired,
-    health: PropTypes.oneOf([0, 1, 2]).isRequired,
+    health: PropTypes.oneOf([-1, 0, 1, 2]).isRequired,
     kpi_order: PropTypes.array.isRequired,
     kpis: PropTypes.object.isRequired,
-    targets: PropTypes.object.isRequired
+    targets: PropTypes.object
   };
 
   renderKPIs() {
     return this.props.kpi_order.map((kpi, index) => {
       let target = "";
-      if (this.props.targets[kpi]) {
+      if (this.props.targets && this.props.targets[kpi]) {
         target = `Target: ${formatKPI(kpi, this.props.targets[kpi])}`;
       }
       return (
