@@ -24,7 +24,7 @@ class DonutChart:
         self.max_value = options["max_value"]
         half_max = self.max_value / 2
         self.is_labels_overlap = self.current >= half_max and \
-            (half_max - 4 <= self.goal <= half_max + 4)
+            (half_max - 3 <= self.goal <= half_max + 3)
 
     def calc_slice_coord(self, value, r):
         angle = value * (2 * math.pi / self.max_value)
@@ -33,19 +33,21 @@ class DonutChart:
         return round(x, 4), round(y, 4)
 
     def get_goal_text(self):
-        half_value = self.max_value / 2
+        half_max = self.max_value / 2
+        # Don't show goal label if labels and slices overlap
+        if self.is_labels_overlap:
+            return ""
         if self.goal > self.current:
-            if self.goal <= half_value + 11:
-                if self.goal <= half_value + 3:
-                    return ""
-                text_value = self.goal + 3
-            else:
-                text_value = self.current + \
-                             (self.goal - self.current) / 2
+            # Show goal label in the middle of goal slice
+            text_value = self.current + \
+                         (self.goal - self.current) / 2
+            # If goal label overlaps current one at the bottom of donut then move goal one
+            # to not overlap current one
+            if self.current >= half_max and half_max <= text_value <= half_max + 5:
+                text_value = half_max + 6
             x, y = self.calc_slice_coord(text_value, self.r0)
         else:
-            if self.is_labels_overlap:
-                return ""
+            # If current > goal then show goal label near dashed line
             if self.goal > self.max_value / 2:
                 text_value = self.goal + 3
             else:
@@ -55,7 +57,7 @@ class DonutChart:
             "",
             insert=(x, y),
         )
-        t.add(text.TSpan(f"Goal:"))
+        t.add(text.TSpan("Goal:"))
         t.add(text.TSpan(f"{self.goal}%", x=[x], dy=["17px"]))
         return t.tostring()
 
