@@ -4,7 +4,7 @@ from remark.lib.time_series.common import KPI, KPITitle, KPIFormat
 from remark.portfolio.api.table_data import get_table_structure
 import datetime
 
-from remark.lib.stats import health_check
+from remark.lib.stats import get_kpi_health
 
 logger = getLogger(__name__)
 
@@ -155,7 +155,7 @@ class PortfolioTableView(PortfolioMixin, ReactView):
             "date_selection": self.get_date_selection(period_group, start, end),
             "user": self.get_user_info(),
             "table_data": table_data,
-            "highlight_kpis": self.get_highlight_kpis(portfolio_average)
+            "highlight_kpis": self.get_highlight_kpis(portfolio_average, kpis_to_include)
         }
 
         return self.render(**result)
@@ -174,8 +174,8 @@ class PortfolioTableView(PortfolioMixin, ReactView):
         :return:
         '''
         if period_group == PERIOD_GROUP[4]:
-            s = datetime.datetime.fromisoformat(start)
-            e = datetime.datetime.fromisoformat(end)
+            s = datetime.date.fromisoformat(start)
+            e = datetime.date.fromisoformat(end)
             return s, e
 
         e = x_mondays_ago(0)+datetime.timedelta(days=1)
@@ -192,20 +192,30 @@ class PortfolioTableView(PortfolioMixin, ReactView):
 
         return s, e
 
-    def get_highlight_kpis(self, group):
+    def get_highlight_kpis(self, group, kpis_to_include):
         result = []
         if group is None:
             return []
 
-        for key in group["kpis"]:
-            target = group["targets"][key]
-            value = group["kpis"][key]
+        for key in kpis_to_include:
+            if key in group["targets"]:
+                target = KPIFormat.apply(key, group["targets"][key])
+            else:
+                target = None
+
+            value = KPIFormat.apply(key, group["kpis"][key])
+
+            if target is not None:
+                health = get_kpi_health(value, target, key)
+            else:
+                health = -1
+
             result.append({
                 "name": key,
                 "label": KPITitle.for_kpi(key),
-                "target": KPIFormat.apply(key, target),
-                "value": KPIFormat.apply(key, value),
-                "health": health_check(value, target)
+                "target": target,
+                "value": value,
+                "health": health
             })
         return result
 

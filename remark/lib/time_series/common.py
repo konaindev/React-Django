@@ -110,7 +110,7 @@ class KPITitle:
     leased_units_start = "Leased Units Start"
     lease_renewal_notices = "Renewal Notices"
     lease_renewals = "Renewals"
-    lease_vacation_notices = "Vacation Notices"
+    lease_vacation_notices = "Notices to Vacate"
 
     # Activity
 
@@ -154,12 +154,12 @@ class KPITitle:
     occupiable_units = "Occupiable Units"
     leased_units = "Leased Units"
     leased_rate = "Leased Rate"
-    renewal_rate = "Renewal Rate"
+    renewal_rate = "Retention Rate"
     lease_cd_rate = "Cancellation & Denial Rate"
     resident_decisions = "Resident Decisions"
 
     # Activity
-    occupancy_rate = "Occupancy Rate"
+    occupancy_rate = "Occupied Rate"
     occupied_units = "Occupied Units"
 
     # Investment

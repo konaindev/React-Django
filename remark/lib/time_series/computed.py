@@ -185,6 +185,18 @@ target_graph = compose(name="target_graph")(
     op(KPI.exe_to_lowest_rent, [KPI.exe_cost, KPI.lowest_monthly_rent], chain(div_or_0, float)),
 )
 
+NON_COMPUTED_OUTPUTS = (
+    KPI.lease_renewals,
+    KPI.move_outs,
+    KPI.move_ins,
+    KPI.lease_vacation_notices,
+    KPI.usvs,
+    KPI.inquiries,
+    KPI.tours,
+    KPI.lease_applications,
+    KPI.leases_executed
+)
+
 
 def generate_computed_kpis(base_kpis, outputs=None):
     if base_kpis is None:
@@ -193,7 +205,22 @@ def generate_computed_kpis(base_kpis, outputs=None):
     if outputs is None:
         return kpi_graph(base_kpis)
 
-    return kpi_graph(base_kpis, outputs=outputs)
+    outputs = outputs.copy()
+    copy_fields = []
+    for kpi_name in NON_COMPUTED_OUTPUTS:
+        if kpi_name in outputs:
+            outputs.pop(outputs.index(kpi_name))
+            copy_fields.append(kpi_name)
+
+    result = kpi_graph(base_kpis, outputs=outputs)
+    for field in copy_fields:
+        result[field] = base_kpis[field]
+    return result
+
+
+NON_COMPUTED_TARGETS = NON_COMPUTED_OUTPUTS + (
+    KPI.leased_rate,
+)
 
 
 def generate_computed_targets(base_targets, outputs=None):
@@ -203,12 +230,15 @@ def generate_computed_targets(base_targets, outputs=None):
     if outputs is None:
         return target_graph(base_targets)
 
-    if KPI.leased_rate in outputs and KPI.leased_rate in base_targets:
-        outputs = outputs.copy()
-        outputs.pop(outputs.index(KPI.leased_rate))
-        result = target_graph(base_targets, outputs=outputs)
-        result[KPI.leased_rate] = base_targets[KPI.leased_rate]
-        return result
+    outputs = outputs.copy()
+    copy_fields = []
+    for kpi_name in NON_COMPUTED_TARGETS:
+        if kpi_name in outputs:
+            outputs.pop(outputs.index(kpi_name))
+            copy_fields.append(kpi_name)
 
-    return target_graph(base_targets, outputs=outputs)
+    result = target_graph(base_targets, outputs=outputs)
+    for field in copy_fields:
+        result[field] = base_targets[field]
+    return result
 

@@ -126,6 +126,15 @@ export const formatCurrencyShorthand = (
   return `${formatter.format(number)}${level}`;
 };
 
+export const configuredFormatCurrencyShorthand = (
+  decimal = false,
+  currency = "USD"
+) => {
+  return value => {
+    return formatCurrencyShorthand(value, decimal, currency);
+  };
+};
+
 /**
  * @description Convert a value (like 4500) to a shorthand USD display string with 1 digit ($4.5k)
  *

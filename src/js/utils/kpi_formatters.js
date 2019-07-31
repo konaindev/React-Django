@@ -1,7 +1,8 @@
 import {
   configuredFormatCurrency,
   configuredFormatNumber,
-  configuredFormatPercent
+  configuredFormatPercent,
+  configuredFormatCurrencyShorthand
 } from "./formatters";
 
 const KPI_FORMAT = {
@@ -31,6 +32,7 @@ const KPI_FORMAT = {
   lease_renewal_notices: configuredFormatNumber(),
   lease_renewals: configuredFormatNumber(),
   lease_vacation_notices: configuredFormatNumber(),
+  leases_ended: configuredFormatNumber(),
 
   // Activity
   move_outs: configuredFormatNumber(),
@@ -44,9 +46,9 @@ const KPI_FORMAT = {
   investment: configuredFormatCurrency(),
 
   // Revenue
-  estimated_acq_revenue_gain: configuredFormatCurrency(),
-  estimated_ret_revenue_gain: configuredFormatCurrency(),
-  estimated_revenue_gain: configuredFormatCurrency(),
+  estimated_acq_revenue_gain: configuredFormatCurrencyShorthand(true),
+  estimated_ret_revenue_gain: configuredFormatCurrencyShorthand(true),
+  estimated_revenue_gain: configuredFormatCurrencyShorthand(true),
 
   // ROMI
   romi: configuredFormatNumber(),
@@ -57,8 +59,8 @@ const KPI_FORMAT = {
   exe_to_lowest_rent: configuredFormatPercent(),
 
   // Funnel Conversions
-  usv_exe: configuredFormatPercent(),
-  usv_inq: configuredFormatPercent(),
+  usv_exe: configuredFormatPercent(2),
+  usv_inq: configuredFormatPercent(1),
   inq_tou: configuredFormatPercent(),
   tou_app: configuredFormatPercent(),
   app_exe: configuredFormatPercent(),

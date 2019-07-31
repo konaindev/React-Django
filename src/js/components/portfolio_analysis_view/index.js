@@ -58,7 +58,7 @@ export class PortfolioAnalysisView extends React.PureComponent {
     }).isRequired,
     highlight_kpis: PropTypes.arrayOf(
       PropTypes.shape({
-        health: PropTypes.oneOf([0, 1, 2]).isRequired,
+        health: PropTypes.oneOf([-1, 0, 1, 2]).isRequired,
         name: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
         target: PropTypes.any.isRequired,
