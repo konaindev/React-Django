@@ -312,7 +312,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
         <div
           className="kpi-card__value"
         >
-          0.05
+          5%
         </div>
         <div
           className="kpi-card__name"
@@ -323,7 +323,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
           className="kpi-card__target"
         >
           Target: 
-          0.07
+          7%
         </div>
       </div>
       <div
@@ -344,7 +344,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
         <div
           className="kpi-card__value"
         >
-          0.2
+          20%
         </div>
         <div
           className="kpi-card__name"
@@ -355,7 +355,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
           className="kpi-card__target"
         >
           Target: 
-          0.25
+          25%
         </div>
       </div>
       <div
@@ -376,7 +376,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
         <div
           className="kpi-card__value"
         >
-          0.6
+          60%
         </div>
         <div
           className="kpi-card__name"
@@ -387,7 +387,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
           className="kpi-card__target"
         >
           Target: 
-          0.5
+          50%
         </div>
       </div>
     </div>
@@ -473,12 +473,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.9
+                    90%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.9
+                    Target: 90%
                   </div>
                 </div>
                 <div
@@ -487,12 +487,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.8
+                    80%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.8
+                    Target: 80%
                   </div>
                 </div>
                 <div
@@ -501,12 +501,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.1
+                    10%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.1
+                    Target: 10%
                   </div>
                 </div>
                 <div
@@ -515,12 +515,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.5
+                    50%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.5
+                    Target: 50%
                   </div>
                 </div>
               </div>
@@ -574,12 +574,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                 <div
                   className="portfolio-property-row__value"
                 >
-                  0.9
+                  90%
                 </div>
                 <div
                   className="portfolio-property-row__target"
                 >
-                  Target: 0.9
+                  Target: 90%
                 </div>
               </div>
               <div
@@ -588,12 +588,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                 <div
                   className="portfolio-property-row__value"
                 >
-                  0.8
+                  80%
                 </div>
                 <div
                   className="portfolio-property-row__target"
                 >
-                  Target: 0.8
+                  Target: 80%
                 </div>
               </div>
               <div
@@ -602,12 +602,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                 <div
                   className="portfolio-property-row__value"
                 >
-                  0.1
+                  10%
                 </div>
                 <div
                   className="portfolio-property-row__target"
                 >
-                  Target: 0.1
+                  Target: 10%
                 </div>
               </div>
               <div
@@ -616,12 +616,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                 <div
                   className="portfolio-property-row__value"
                 >
-                  0.5
+                  50%
                 </div>
                 <div
                   className="portfolio-property-row__target"
                 >
-                  Target: 0.5
+                  Target: 50%
                 </div>
               </div>
             </div>
@@ -660,12 +660,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.9
+                    90%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.9
+                    Target: 90%
                   </div>
                 </div>
                 <div
@@ -674,12 +674,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.8
+                    80%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.8
+                    Target: 80%
                   </div>
                 </div>
                 <div
@@ -688,12 +688,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.1
+                    10%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.1
+                    Target: 10%
                   </div>
                 </div>
                 <div
@@ -702,12 +702,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.5
+                    50%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.5
+                    Target: 50%
                   </div>
                 </div>
               </div>
@@ -753,12 +753,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.9
+                    90%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.9
+                    Target: 90%
                   </div>
                 </div>
                 <div
@@ -767,12 +767,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.8
+                    80%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.8
+                    Target: 80%
                   </div>
                 </div>
                 <div
@@ -781,12 +781,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.1
+                    10%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.1
+                    Target: 10%
                   </div>
                 </div>
                 <div
@@ -795,12 +795,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.5
+                    50%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.5
+                    Target: 50%
                   </div>
                 </div>
               </div>
