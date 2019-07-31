@@ -66,6 +66,7 @@ TEST_SPLIT_DOC = {
     "apps": "linear"
 }
 
+
 class GranularityTestCase(TestCase):
 
     def setUp(self) -> None:
@@ -114,8 +115,16 @@ class GranularityTestCase(TestCase):
             "apps": "sum",
         }
         ts = [
-            { "apps": 5.0 },
-            { "apps": 2.0 }
+            {
+                "start": cd(4),
+                "end": cd(10),
+                "apps": 5.0
+            },
+            {
+                "start": cd(4),
+                "end": cd(10),
+                "apps": 2.0
+            }
         ]
         result = _merge(merge_doc, ts)
         self.assertEqual(type(result), dict)

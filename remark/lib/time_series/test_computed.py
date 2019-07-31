@@ -2,7 +2,7 @@ from django.test import TestCase
 from datetime import date
 from decimal import Decimal
 
-from .computed import generated_computed_kpis
+from .computed import generate_computed_kpis
 from .common import KPI
 
 KPI_DATA = {
@@ -36,7 +36,7 @@ KPI_DATA = {
     KPI.inquiries: 75,
     KPI.tours: 30,
 
-    KPI.average_rent: Decimal(1000.0),
+    KPI.average_monthly_rent: Decimal(1000.0),
     KPI.lowest_monthly_rent: Decimal(500.0),
     KPI.highest_monthly_rent: Decimal(1200.0)
 }
@@ -51,7 +51,7 @@ class ComputeTestCase(TestCase):
         pass
 
     def testBasic(self):
-        result = generated_computed_kpis(KPI_DATA)
+        result = generate_computed_kpis(KPI_DATA)
         print(result)
 
         def g(kpi_name):

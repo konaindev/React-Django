@@ -6,7 +6,7 @@ from django.db.models import signals
 
 from .query import select
 
-from remark.projects.models import Period, Project, Fund
+from remark.projects.models import Period, Project, Fund, Property
 from remark.users.models import Account
 from remark.crm.models import Business
 from remark.geo.models import Address
@@ -24,21 +24,25 @@ def create_project():
         company_name="test", address=address, account_type=4
     )
     asset_manager = Business.objects.create(
-        name="Test Asset Manager", business_type=2
+        name="Test Asset Manager", is_asset_manager=True
     )
     property_manager = Business.objects.create(
-        name="Test Property Manager", business_type=3
+        name="Test Property Manager", is_property_manager=True
     )
     property_owner = Business.objects.create(
-        name="Test Property Owner", business_type=1
+        name="Test Property Owner", is_property_manager=True
     )
     fund = Fund.objects.create(account=account, name="Test Fund")
+    property = Property.objects.create(
+        geo_address=address,
+        average_monthly_rent=decimal.Decimal("0"),
+        lowest_monthly_rent=decimal.Decimal("0"),
+    )
     project = Project.objects.create(
             name="test",
             baseline_start=date(year=2018, month=11, day=19),
             baseline_end=date(year=2018, month=12, day=26),
-            average_monthly_rent=decimal.Decimal("0"),
-            lowest_monthly_rent=decimal.Decimal("0"),
+            property=property,
             account=account,
             asset_manager=asset_manager,
             property_manager=property_manager,
@@ -83,26 +87,25 @@ class QueryDescriptionTestCase(TestCase):
     def testQueryOrder(self):
         start = create_date(1)
         end = create_date(29)
-        query = select(Period.objects.filter(project=self.project), start, end)
-        periods = list(query)
+        periods = select(Period.objects.filter(project=self.project), start, end)
         self.assertEqual(periods[0].start.day, 1)
         self.assertEqual(periods[-1].end.day, 29)
 
     def testSelect(self):
         start = create_date(1)
         end = create_date(22)
-        count = select(Period.objects.filter(project=self.project), start, end).count()
-        self.assertEqual(count, 3)
+        periods = select(Period.objects.filter(project=self.project), start, end)
+        self.assertEqual(len(periods), 3)
 
     def testSelect2(self):
         start = create_date(7)
         end = create_date(22)
-        count = select(Period.objects.filter(project=self.project), start, end).count()
-        self.assertEqual(count, 2)
+        periods = select(Period.objects.filter(project=self.project), start, end)
+        self.assertEqual(len(periods), 2)
 
     def testSelectMiddle2(self):
         start = create_date(5)
         end = create_date(8)
-        count = select(Period.objects.filter(project=self.project), start, end).count()
-        self.assertEqual(count, 2)
+        periods = select(Period.objects.filter(project=self.project), start, end)
+        self.assertEqual(len(periods), 2)
 
