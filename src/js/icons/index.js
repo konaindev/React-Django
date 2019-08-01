@@ -9,3 +9,5 @@ export { default as Tick } from "./tick";
 export { default as TileView } from "./tile_view";
 export { default as Search } from "./search";
 export { default as Sort } from "./sort";
+export { default as IconUp } from "./icon_up";
+export { default as IconDown } from "./icon_down";
