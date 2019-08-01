@@ -9,7 +9,7 @@ from remark.lib.validators import (
     validate_linebreak_separated_numbers_list,
     validate_linebreak_separated_strings_list,
 )
-from .models import Project, CampaignModel, Spreadsheet, Spreadsheet2
+from .models import Project, Property, CampaignModel, Spreadsheet, Spreadsheet2
 from .reports.selectors import ReportLinks
 from .spreadsheets import get_importer_for_kind, SpreadsheetKind
 
@@ -198,10 +198,6 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         exclude = ["email_list_id"]
-        widgets = {
-            "building_logo": ImageCropWidget,
-            "building_image": ImageCropWidget,
-        }
 
 
 def multiline_text_to_str_array(text):
@@ -270,3 +266,13 @@ class TAMExportForm(forms.Form):
 
     def clean_rti_rental_rates(self):
         return multiline_text_to_int_array(self.cleaned_data["rti_rental_rates"])
+
+
+class PropertyForm(forms.ModelForm):
+    class Meta:
+        model = Property
+        fields = "__all__"
+        widgets = {
+            "building_logo": ImageCropWidget,
+            "building_image": ImageCropWidget,
+        }
