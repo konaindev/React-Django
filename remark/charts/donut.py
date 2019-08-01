@@ -22,9 +22,7 @@ class DonutChart:
         self.r = options["r"]
         self.donut_width = options["donut_width"]
         self.max_value = options["max_value"]
-        half_max = self.max_value / 2
-        self.is_labels_overlap = self.current >= half_max and \
-            (half_max - 3 <= self.goal <= half_max + 3)
+        self.is_labels_overlap = (0 <= self.current - self.goal <= 6)
 
     def calc_slice_coord(self, value, r):
         angle = value * (2 * math.pi / self.max_value)
@@ -33,26 +31,12 @@ class DonutChart:
         return round(x, 4), round(y, 4)
 
     def get_goal_text(self):
-        half_max = self.max_value / 2
-        # Don't show goal label if labels and slices overlap
         if self.is_labels_overlap:
             return ""
-        if self.goal > self.current:
-            # Show goal label in the middle of goal slice
-            text_value = self.current + \
-                         (self.goal - self.current) / 2
-            # If goal label overlaps current one at the bottom of donut then move goal one
-            # to not overlap current one
-            if self.current >= half_max and half_max <= text_value <= half_max + 5:
-                text_value = half_max + 6
-            x, y = self.calc_slice_coord(text_value, self.r0)
+        if 0 <= self.goal - self.current <= 4:
+            x, y = self.calc_slice_coord(self.current + 3, self.r0)
         else:
-            # If current > goal then show goal label near dashed line
-            if self.goal > self.max_value / 2:
-                text_value = self.goal + 3
-            else:
-                text_value = self.goal - 3
-            x, y = self.calc_slice_coord(text_value, self.r0)
+            x, y = self.calc_slice_coord(self.goal - 3, self.r0)
         t = text.Text(
             "",
             insert=(x, y),
@@ -62,12 +46,12 @@ class DonutChart:
         return t.tostring()
 
     def get_current_text(self):
-        max_value = self.max_value
-        if self.current >= self.max_value / 2 or self.current > self.goal:
-            x, y = self.calc_slice_coord(max_value / 2, self.r0)
+        half_size = self.max_value / 2
+        if (half_size - 7 <= self.current <= half_size + 14) or \
+                (self.current >= self.max_value - 15) or (self.current <= self.max_value + 9):
+            x, y = self.calc_slice_coord(self.current - 4, self.r0)
         else:
-            text_value = self.current / 2
-            x, y = self.calc_slice_coord(text_value, self.r0)
+            x, y = self.calc_slice_coord(self.current - 3, self.r0)
         t = text.Text(
             "",
             insert=(x, y),
