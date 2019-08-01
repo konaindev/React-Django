@@ -28,7 +28,7 @@ const FormFiled = ({ theme, label, error, touched, Input, ...props }) => {
 FormFiled.propTypes = {
   theme: PropTypes.oneOf(["", "inline"]),
   label: PropTypes.string.isRequired,
-  Input: PropTypes.node.isRequired,
+  Input: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   error: PropTypes.string,
   touched: PropTypes.bool
 };
