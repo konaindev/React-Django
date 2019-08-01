@@ -165,7 +165,7 @@ class KPITitle:
     # Investment
     acq_investment = "Aquisition Investment"
     ret_investment = "Retention Investment"
-    investment = "Investment"
+    investment = "Campaign Investment"
 
     # Revenue
     estimated_acq_revenue_gain = "Est. Acquisition Revenue Gain"
