@@ -9,7 +9,6 @@ from django.contrib.auth.models import Group
 from django.urls import reverse
 from django.utils.crypto import get_random_string
 
-from image_cropping import ImageRatioField
 from jsonfield import JSONField
 from stdimage.models import StdImageField
 
