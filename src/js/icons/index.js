@@ -11,3 +11,5 @@ export { default as Search } from "./search";
 export { default as Sort } from "./sort";
 export { default as IconUp } from "./icon_up";
 export { default as IconDown } from "./icon_down";
+export { default as Error } from "./error";
+export { default as Ok } from "./ok";
