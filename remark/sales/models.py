@@ -5,6 +5,7 @@ from django.db import models
 from django.utils.crypto import get_random_string
 
 from remark.geo.models import Address
+from remark.lib.fields import ImageRatioFieldExt
 from remark.users.models import User
 
 
@@ -37,6 +38,10 @@ class ProductInquiry(models.Model):
 
     building_photo = models.ImageField(
         upload_to=building_photo_path, null=True, blank=True)
+    building_photo_cropping = ImageRatioFieldExt("building_photo", "400x400")
 
     created = models.DateTimeField(
         default=datetime.utcnow, null=False, blank=True)
+
+    def __str__(self):
+        return f"{self.property_name} | {self.get_product_type_display()} | {self.user}"
