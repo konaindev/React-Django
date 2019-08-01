@@ -13,7 +13,12 @@ import "./page_auth.scss";
 export default class PageAuth extends React.PureComponent {
   static propTypes = {
     backLink: PropTypes.string,
+    backLinkText: PropTypes.string,
     children: PropTypes.node.isRequired
+  };
+
+  static defaultProps = {
+    backLinkText: "← Go to Login"
   };
 
   get backLink() {
@@ -22,7 +27,7 @@ export default class PageAuth extends React.PureComponent {
     }
     return (
       <a className="page-auth__back-link" href={this.props.backLink}>
-        ← Back to Log In
+        {this.props.backLinkText}
       </a>
     );
   }
