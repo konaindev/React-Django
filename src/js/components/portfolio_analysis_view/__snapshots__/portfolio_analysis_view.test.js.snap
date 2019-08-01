@@ -312,7 +312,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
         <div
           className="kpi-card__value"
         >
-          5%
+          5.0%
         </div>
         <div
           className="kpi-card__name"
@@ -323,7 +323,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
           className="kpi-card__target"
         >
           Target: 
-          7%
+          7.0%
         </div>
       </div>
       <div
