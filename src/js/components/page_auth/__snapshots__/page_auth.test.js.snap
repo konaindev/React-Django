@@ -11,7 +11,7 @@ exports[`PageAuth renders correctly 1`] = `
       className="page-auth__back-link"
       href="/"
     >
-      ← Back to Log In
+      ← Go to Login
     </a>
     <div
       className="page-auth__logo"
