@@ -17,3 +17,7 @@ export const getCookie = name => {
   }
   return "";
 };
+
+export const setCookie = (name, value) => {
+  document.cookie = `${name}=${value}`;
+};

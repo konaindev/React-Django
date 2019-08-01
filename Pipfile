@@ -14,6 +14,8 @@ click = "*"
 pip-licenses = "*"
 watchdog = "*"
 ipdb = "*"
+mock = "*"
+factory_boy = "*"
 
 [packages]
 django-heroku = "*"
@@ -48,6 +50,7 @@ django-admin-sortable2 = "*"
 sentry-sdk = "*"
 graphkit = "*"
 django-extensions = "*"
+factory-boy = "*"
 
 [requires]
 python_version = "3.7"

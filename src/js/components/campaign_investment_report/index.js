@@ -1,3 +1,4 @@
+import _isNil from "lodash/isNil";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
@@ -86,7 +87,7 @@ const romi_tooltip = obj => {
 };
 
 const formatFourWeekAverages = value => {
-  if (!value) {
+  if (_isNil(value)) {
     return;
   }
   const curValue = formatCurrencyShorthandWithDigit(value);

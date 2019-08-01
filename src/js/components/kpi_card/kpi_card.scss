@@ -14,6 +14,12 @@ $card-header-height: 6px;
     background: $panel-background-color;
     border-radius: $panel-border-radius;
 
+    &--not-available {
+        .kpi-card__bar {
+            background: $property-status-color-not-available;
+        }
+    }
+
     &--off-track {
         .kpi-card__bar {
             background: $property-status-color-off-track;

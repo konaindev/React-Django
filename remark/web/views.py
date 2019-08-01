@@ -1,7 +1,6 @@
-from remark.crm.models import Business
-from remark.geo.models import State
 from remark.projects.models import Fund, Project
 from remark.lib.views import ReactView
+from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.core.cache import cache
@@ -43,8 +42,8 @@ class DashboardView(LoginRequiredMixin, ReactView):
         )
 
         if cache_key in cache:
-            cached_reponse = cache.get(cache_key)
-            return cached_reponse
+            cached_response = cache.get(cache_key)
+            return cached_response
 
         if user.is_superuser:
             project_params = {}
@@ -139,10 +138,12 @@ class DashboardView(LoginRequiredMixin, ReactView):
                 "no_projects": no_projects,
                 "properties": projects,
                 "user": user.get_menu_dict(),
+                "search_url": request.GET.urlencode(),
                 "locations": locations,
                 "property_managers": property_managers,
                 "asset_managers": asset_managers,
                 "funds": funds,
+                "static_url": settings.STATIC_URL
             }
         )
 
@@ -156,6 +157,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
                 property_managers=property_managers,
                 asset_managers=asset_managers,
                 funds=funds,
+                static_url=settings.STATIC_URL
             )
 
         cache.set(cache_key, response, timeout=DEFAULT_TIMEOUT)

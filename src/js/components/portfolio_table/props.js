@@ -2,7 +2,7 @@ export const props = {
   kpi_order: [
     {
       label: "Lease Rate",
-      value: "lease_rate"
+      value: "leased_rate"
     },
     {
       label: "Occupancy Rate",
@@ -10,7 +10,7 @@ export const props = {
     },
     {
       label: "CD Rate",
-      value: "cd_rate"
+      value: "lease_cd_rate"
     },
     {
       label: "Renewal Rate",
@@ -24,15 +24,15 @@ export const props = {
       image_url:
         "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
       kpis: {
-        lease_rate: 0.9,
+        leased_rate: 0.9,
         occupancy_rate: 0.8,
-        cd_rate: 0.1,
+        lease_cd_rate: 0.1,
         renewal_rate: 0.5
       },
       targets: {
-        lease_rate: 0.9,
+        leased_rate: 0.9,
         occupancy_rate: 0.8,
-        cd_rate: 0.1,
+        lease_cd_rate: 0.1,
         renewal_rate: 0.5
       },
       properties: [
@@ -43,15 +43,15 @@ export const props = {
             "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
           health: 0,
           kpis: {
-            lease_rate: 0.9,
+            leased_rate: 0.9,
             occupancy_rate: 0.8,
-            cd_rate: 0.1,
+            lease_cd_rate: 0.1,
             renewal_rate: 0.5
           },
           targets: {
-            lease_rate: 0.9,
+            leased_rate: 0.9,
             occupancy_rate: 0.8,
-            cd_rate: 0.1,
+            lease_cd_rate: 0.1,
             renewal_rate: 0.5
           }
         },
@@ -62,15 +62,15 @@ export const props = {
             "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
           health: 1,
           kpis: {
-            lease_rate: 0.9,
+            leased_rate: 0.9,
             occupancy_rate: 0.8,
-            cd_rate: 0.1,
+            lease_cd_rate: 0.1,
             renewal_rate: 0.5
           },
           targets: {
-            lease_rate: 0.9,
+            leased_rate: 0.9,
             occupancy_rate: 0.8,
-            cd_rate: 0.1,
+            lease_cd_rate: 0.1,
             renewal_rate: 0.5
           }
         },
@@ -81,15 +81,15 @@ export const props = {
             "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
           health: 2,
           kpis: {
-            lease_rate: 0.9,
+            leased_rate: 0.9,
             occupancy_rate: 0.8,
-            cd_rate: 0.1,
+            lease_cd_rate: 0.1,
             renewal_rate: 0.5
           },
           targets: {
-            lease_rate: 0.9,
+            leased_rate: 0.9,
             occupancy_rate: 0.8,
-            cd_rate: 0.1,
+            lease_cd_rate: 0.1,
             renewal_rate: 0.5
           }
         }
@@ -103,15 +103,15 @@ export const props = {
         "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
       health: 2,
       kpis: {
-        lease_rate: 0.9,
+        leased_rate: 0.9,
         occupancy_rate: 0.8,
-        cd_rate: 0.1,
+        lease_cd_rate: 0.1,
         renewal_rate: 0.5
       },
       targets: {
-        lease_rate: 0.9,
+        leased_rate: 0.9,
         occupancy_rate: 0.8,
-        cd_rate: 0.1,
+        lease_cd_rate: 0.1,
         renewal_rate: 0.5
       }
     },
@@ -121,15 +121,15 @@ export const props = {
       image_url:
         "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
       kpis: {
-        lease_rate: 0.9,
+        leased_rate: 0.9,
         occupancy_rate: 0.8,
-        cd_rate: 0.1,
+        lease_cd_rate: 0.1,
         renewal_rate: 0.5
       },
       targets: {
-        lease_rate: 0.9,
+        leased_rate: 0.9,
         occupancy_rate: 0.8,
-        cd_rate: 0.1,
+        lease_cd_rate: 0.1,
         renewal_rate: 0.5
       }
     },
@@ -140,15 +140,15 @@ export const props = {
         "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
       properties: 11,
       kpis: {
-        lease_rate: 0.9,
+        leased_rate: 0.9,
         occupancy_rate: 0.8,
-        cd_rate: 0.1,
+        lease_cd_rate: 0.1,
         renewal_rate: 0.5
       },
       targets: {
-        lease_rate: 0.9,
+        leased_rate: 0.9,
         occupancy_rate: 0.8,
-        cd_rate: 0.1,
+        lease_cd_rate: 0.1,
         renewal_rate: 0.5
       }
     }

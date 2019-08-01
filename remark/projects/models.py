@@ -104,7 +104,13 @@ class Tag(models.Model):
 
 
 class ProjectManager(models.Manager):
-    pass
+
+    def get_all_for_user(self, user):
+        groups = list(user.groups.all())
+        ids = []
+        for group in groups:
+            ids.append(group.id)
+        return self.filter(view_group_id__in=ids)
 
 
 class Project(models.Model):
@@ -360,6 +366,29 @@ class Project(models.Model):
             .values_list("end", flat=True)
             .first()
         )
+
+    def get_active_campaign_goal(self, current_date):
+        """
+        Return last target period of a campaign
+        This campaign daterange should include "current_date"
+        """
+        active_target_period = (
+            self.target_periods.filter(end__gte=current_date)
+            .exclude(campaign_model=None)
+            .order_by("end")
+            .first()
+        )
+        if active_target_period is None:
+            return None
+
+        active_campaign_model = active_target_period.campaign_model
+        last_target_period = (
+            self.target_periods.filter(campaign_model=active_campaign_model)
+            .order_by("-end")
+            .first()
+        )
+
+        return last_target_period
 
     def get_building_logo(self):
         """
@@ -937,7 +966,7 @@ class TargetPeriod(ModelPeriod, models.Model):
     target_lease_applications.metric = SumIntervalMetric()
 
     target_leases_executed = models.IntegerField(
-        null=True, blank=True, default=None, help_text="Target: leases execfuted"
+        null=True, blank=True, default=None, help_text="Target: leases executed"
     )
     target_leases_executed.metric = SumIntervalMetric()
 
@@ -1127,23 +1156,6 @@ class Campaign(models.Model):
         help_text="All target values will be replaced by those in the newly selected model.",
     )
 
-    # This value is set when the instance is created; if we later
-    # call save, and it changes, then we update targets for the model.
-    __selected_campaign_model = None
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        # TODO: remove this swap variable in PR#198
-        # Save this for comparison purposes on save(...)
-        # while loading dump data, "selected_campaign_model" results in KeyError
-        # "selected_campaign_model_id" works though
-        # bare for now, to make dumpdata working properly
-        try:
-            self.__selected_campaign_model = self.selected_campaign_model
-        except:
-            pass
-
-
     def save(self, *args, **kwargs):
         try:
             old = type(self).objects.get(pk=self.pk) if self.pk else None
@@ -1154,39 +1166,33 @@ class Campaign(models.Model):
 
         # detect change on selected_campaign_model
         if old and old.selected_campaign_model != self.selected_campaign_model:
-            self.update_for_selected_model()
+            self.handle_change_selected_model()
 
-    def get_selected_model_option(self):
-        """Return the currently selected model option."""
-        if self.selected_campaign_model is None:
-            return
+    @staticmethod
+    def _get_model_targets(campaign_model):
+        if campaign_model is None:
+            return []
+        json_data = campaign_model.spreadsheet.json_data
+        return json_data.get("targets", [])
 
-        return self.selected_campaign_model.spreadsheet.json_data
+    @staticmethod
+    def _create_target_period(project, campaign_model, target_data):
+        # override if there is overlapping period
+        project.target_periods.filter(end=target_data["end"]).delete()
+        # create TargetPeriod and set fields with json values
+        target_period = TargetPeriod(
+            project=project, campaign_model=campaign_model
+        )
+        for k, v in target_data.items():
+            setattr(target_period, k, v)
+        target_period.save()
+        return target_period
 
-    def update_for_selected_model(self):
+    def handle_change_selected_model(self):
         """
         Update all associated data (like target periods) based on
         the currently selected model.
         """
-
-        def _get_model_targets(campaign_model):
-            if campaign_model is None:
-                return []
-            json_data = campaign_model.spreadsheet.json_data
-            return json_data.get("targets", [])
-
-        def _create_target_period(campaign_model, target_data):
-            # override if there is overlapping period
-            self.project.target_periods.filter(end=target_data["end"]).delete()
-            # create TargetPeriod and set fields with json values
-            target_period = TargetPeriod(
-                project=self.project, campaign_model=campaign_model
-            )
-            for k, v in target_data.items():
-                setattr(target_period, k, v)
-            target_period.save()
-            return target_period
-
         if self.project is None:
             return
 
@@ -1200,13 +1206,13 @@ class Campaign(models.Model):
             campaign.selected_campaign_model
             for campaign in campaigns_with_active_models
         ]
-        # Campaigns typically don't over lap BUT if they do,
+        # Campaigns typically don't overlap BUT if they do,
         # you should use the Target Periods from the __latter__ Campaign
         active_models.sort(key=lambda m: m.model_start)
 
         for active_model in active_models:
-            for target_data in _get_model_targets(active_model):
-                _create_target_period(active_model, target_data)
+            for raw_target in self._get_model_targets(active_model):
+                self._create_target_period(self.project, active_model, raw_target)
 
     def __str__(self):
         return "{} ({})".format(self.name, self.public_id)

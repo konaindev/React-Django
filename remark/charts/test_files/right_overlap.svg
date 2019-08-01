@@ -20,16 +20,16 @@
   <g mask="url(#mask0)">
     <circle cx="249.5" cy="249.5" r="215.4503" fill="#20272E" />
     
-    <path d="M 249.5 34.0497 A 215.4503 215.4503 0 1,1 122.8615 423.803 L 249.5 249.5" fill="#006EFF" />
+    <path d="M 249.5 34.0497 A 215.4503 215.4503 0 0,1 249.5 464.9503 L 249.5 249.5" fill="#006EFF" />
     
-    <line stroke="white" stroke-dasharray="4 4" x1="249.5" x2="289.8714" y1="249.5" y2="461.1341" />
+    <line stroke="white" stroke-dasharray="4 4" x1="249.5" x2="328.8125" y1="249.5" y2="449.8206" />
     
   </g>
   
-  <text x="249.5" y="390.011"><tspan>Current:</tspan><tspan dy="17px" x="249.5">60%</tspan></text>
+  <text x="284.4437" y="385.5966"><tspan>Current:</tspan><tspan dy="17px" x="284.4437">50%</tspan></text>
   
   
   
-  <text dy="-8px" x="249.5" y="249.5"><tspan>47% Leased Goal</tspan><tspan dy="24px" x="249.5">by 11/17/2015</tspan></text>
+  <text dy="-8px" x="249.5" y="249.5"><tspan>44% Leased Goal</tspan><tspan dy="24px" x="249.5">by 11/17/2015</tspan></text>
   
 </svg>
