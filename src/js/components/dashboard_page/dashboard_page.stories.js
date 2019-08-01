@@ -6,6 +6,8 @@ import { action } from "@storybook/addon-actions";
 import { DashboardPage } from "./index";
 import { props } from "./props";
 
+document.cookie = "isLogin=true";
+
 storiesOf("DashboardPage", module)
   .add(
     "default",

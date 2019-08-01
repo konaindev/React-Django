@@ -19,6 +19,7 @@ import Loader from "../loader";
 import UserMenu from "../user_menu";
 
 import "./dashboard_page.scss";
+import TutorialView from "../tutorial_view";
 
 const navLinks = {
   links: [
@@ -138,12 +139,13 @@ export class DashboardPage extends React.PureComponent {
     const className = cn("dashboard-content", {
       "dashboard-content--selection-mode": this.state.selectedProperties.length
     });
-    const { user } = this.props;
+    const { user, static_url } = this.props;
     const PropertiesListComponent = this.propertiesListComponent;
     const navLinks =
       user.email.indexOf("remarkably.io") > -1 ? this.props.navLinks : null;
     return (
       <PageChrome navLinks={navLinks} headerItems={this.getHeaderItems()}>
+        <TutorialView staticUrl={static_url} />
         <div className={className}>
           <Container>
             <div className="dashboard-content__title">

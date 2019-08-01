@@ -1,0 +1,94 @@
+@import 'css/base.scss';
+
+$window-width: 700px;
+$window-spacing: 30px;
+$image-height: 300px;
+$caption-width: 400px;
+$caption-spacing: 50px auto 0;
+$navbar-height: 104px;
+$navbar-spacing1: 30px;
+$navbar-spacing2: 46px -30px -30px;
+$navbar-bg-color: $gray-4;
+$navbar-bg-radius: 0 0 6px 6px;
+$nav-indicator-size: 8px;
+$nav-indicator-spacing: 10px;
+$nav-indicator-color: $gray-3;
+$nav-indicator-active-color: $highlight-gray-3;
+$nav-btn-width: 104px;
+$nav-btn-height: 44px;
+
+.tutorial-modal {
+    width: $window-width;
+    padding: $window-spacing;
+    font-family: $font-sans;
+
+    .modal-window__close {
+        top: $window-spacing;
+        right: $window-spacing;
+        background-position: 50% -14px;
+    }
+}
+
+.tutorial-modal__header {
+    margin-bottom: 0;
+    font-size: $text-sm;
+    line-height: $line-height-normal;
+    letter-spacing: $letter-spacing-wider;
+    color: $title-large-color;
+    text-transform: uppercase;
+}
+
+.tutorial-modal__image {
+    height: $image-height;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.tutorial-modal__caption {
+    width: $caption-width;
+    margin: $caption-spacing;
+    font-size: $text-base;
+    line-height: $line-height-relaxed;
+    color: $content-text-primary-color;
+    text-align: center;
+}
+
+.tutorial-modal__nav {
+    display: flex;
+    height: $navbar-height;
+    padding: $navbar-spacing1;
+    margin: $navbar-spacing2;
+    background: $navbar-bg-color;
+    border-radius: $navbar-bg-radius;
+
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tutorial-modal__nav-indicator {
+    display: inline-block;
+    width: $nav-indicator-size;
+    height: $nav-indicator-size;
+    margin-left: $nav-indicator-spacing;
+    cursor: pointer;
+    background-color: $nav-indicator-color;
+    border-radius: 50%;
+
+    &:first-of-type {
+        margin-left: 0;
+    }
+
+    &--active {
+        background-color: $nav-indicator-active-color;
+    }
+}
+
+.tutorial-modal__nav-button {
+    width: $nav-btn-width;
+    height: $nav-btn-height;
+    font-size: $text-xs;
+    font-weight: $weight-bold;
+    letter-spacing: $letter-spacing-wider;
+    text-transform: uppercase;
+}
