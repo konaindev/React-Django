@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('projects', '0066_add_lease_stage_for_project'),
+        ('projects', '0067_add_lease_stage_for_project'),
     ]
 
     operations = [
