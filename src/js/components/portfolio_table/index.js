@@ -24,9 +24,11 @@ export default class PortfolioTable extends React.PureComponent {
 
   renderRow() {
     const kpiOrder = this.props.kpi_order.map(kpi => kpi.value);
-    return this.props.properties.map((property, index) => {
-      const Row = PortfolioTable.rowType[property.type];
-      return <Row {...property} kpi_order={kpiOrder} key={index} />;
+    this.props.properties.map((property, index) => {
+      if (property && property !== null) {
+        const Row = PortfolioTable.rowType[property.type];
+        return <Row {...property} kpi_order={kpiOrder} key={index} />;
+      }
     });
   }
 
