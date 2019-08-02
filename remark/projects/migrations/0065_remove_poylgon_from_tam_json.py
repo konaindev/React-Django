@@ -26,6 +26,6 @@ def remove_polygon_from_tam_json(apps, schema_editor):
 
 class Migration(migrations.Migration):
 
-    dependencies = [("projects", "0057_merge_20190719_0759")]
+    dependencies = [("projects", "0064_auto_20190731_2017")]
 
     operations = [migrations.RunPython(remove_polygon_from_tam_json)]
