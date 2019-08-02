@@ -11,9 +11,9 @@ CHARTS_TYPES = [
 
 
 class DonutForm(forms.Form):
-    goal = forms.IntegerField(required=True, min_value=0, max_value=100)
+    goal = forms.IntegerField(required=True, min_value=0)
     goal_date = forms.DateField(required=True)
-    current = forms.IntegerField(required=True, min_value=0, max_value=100)
+    current = forms.IntegerField(required=True, min_value=0)
     bg = forms.RegexField(required=True, regex=HEX_RE)
     bg_target = forms.RegexField(required=True, regex=HEX_RE)
     bg_current = forms.RegexField(required=True, regex=HEX_RE)
