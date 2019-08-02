@@ -5,6 +5,7 @@ export { default as Close } from "./close";
 export { default as ListView } from "./list_view";
 export { default as LogOut } from "./log_out";
 export { default as Link } from "./link";
+export { default as Link2 } from "./link2";
 export { default as Tick } from "./tick";
 export { default as TileView } from "./tile_view";
 export { default as Search } from "./search";

@@ -107,9 +107,8 @@ export default class CreatePasswordView extends React.PureComponent {
                   <div className="create-password__field">
                     <FormFiled label="Password">
                       <RMBTooltip
-                        theme="light"
+                        theme="highlight"
                         trigger={["focus"]}
-                        visible={true}
                         overlay={this.renderTooltip(
                           values.password,
                           errors.password
