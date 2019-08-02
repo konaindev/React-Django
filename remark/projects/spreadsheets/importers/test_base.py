@@ -101,4 +101,3 @@ class SpreadsheetFileTestCaseMixin:
         json_string = DjangoJSONEncoder().encode(self.importer.cleaned_data)
         decoded_jsonable = json.loads(json_string)
         jsonschema.validate(instance=decoded_jsonable, schema=self.schema)
-
