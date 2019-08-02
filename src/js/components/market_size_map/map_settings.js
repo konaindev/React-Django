@@ -64,15 +64,6 @@ export const grayAreaTheme = {
   labelColor: scssVars.mapGrayAreaLabelColor
 };
 
-export const blueAreaTheme = {
-  strokeColor: scssVars.mapBlueAreaStrokeColor,
-  strokeOpacity: 1,
-  strokeWeight: scssVars.mapBlueAreaStrokeWeight,
-  fillColor: scssVars.mapBlueAreaFillColor,
-  fillOpacity: scssVars.mapBlueAreaFillOpacity,
-  labelColor: scssVars.mapBlueAreaLabelColor
-};
-
 export const createDefaultMapOptions = maps => ({
   styles: mapNightTheme,
   draggable: false,

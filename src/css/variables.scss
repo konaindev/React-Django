@@ -189,17 +189,11 @@ $map-green-area-fill-color: $green-3;
 $map-green-area-fill-opacity: 0.05;
 $map-green-area-label-color: $gray-3;
 // gray area
-$map-gray-area-stroke-color: $gray-5;
+$map-gray-area-stroke-color: rgba($white, 0.25);
 $map-gray-area-stroke-weight: 1;
-$map-gray-area-fill-color: $gray-7;
+$map-gray-area-fill-color: $white;
 $map-gray-area-fill-opacity: 0.05;
-$map-gray-area-label-color: $gray-5;
-// blue area
-$map-blue-area-stroke-color: $blue-3;
-$map-blue-area-stroke-weight: 1.5;
-$map-blue-area-fill-color: $blue-7;
-$map-blue-area-fill-opacity: 0.1;
-$map-blue-area-label-color: $highlight-gray-3;
+$map-gray-area-label-color: rgba($white, 0.5);
 
 // USRegionMap
 $map-hover-color: $blue-3;
@@ -335,11 +329,6 @@ $small-box-vertical-spacing: 10px;
     mapGrayAreaFillColor: $map-gray-area-fill-color;
     mapGrayAreaFillOpacity: $map-gray-area-fill-opacity;
     mapGrayAreaLabelColor: $map-gray-area-label-color;
-    mapBlueAreaStrokeColor: $map-blue-area-stroke-color;
-    mapBlueAreaStrokeWeight: $map-blue-area-stroke-weight;
-    mapBlueAreaFillColor: $map-blue-area-fill-color;
-    mapBlueAreaFillOpacity: $map-blue-area-fill-opacity;
-    mapBlueAreaLabelColor: $map-blue-area-label-color;
 
     pieColorUnallocated: $gray-4;
     pieColor1: $green-1;

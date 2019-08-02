@@ -9,8 +9,7 @@ import {
   DEFAULT_ZOOM,
   createDefaultMapOptions,
   greenAreaTheme,
-  grayAreaTheme,
-  blueAreaTheme
+  grayAreaTheme
 } from "./map_settings";
 import "./market_size_map.scss";
 
@@ -64,7 +63,7 @@ export class MarketSizeMap extends Component {
   }
 
   get polygonTheme() {
-    return this.isCirclePolygonMode ? grayAreaTheme : blueAreaTheme;
+    return grayAreaTheme;
   }
 
   get uniqueZipCodes() {
