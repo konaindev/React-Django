@@ -41,7 +41,7 @@ export default class CreatePasswordView extends React.PureComponent {
       if (Object.keys(fieldError).length) {
         errors.password = fieldError;
       }
-      if (values.password2 !== values.password) {
+      if (!values.password2 || values.password2 !== values.password) {
         errors.password2 = "Passwords must match";
       }
       if (Object.keys(errors).length) {
@@ -116,9 +116,9 @@ export default class CreatePasswordView extends React.PureComponent {
                         )}
                       >
                         <Input
-                          className="create-password__input"
                           type="password"
                           name="password"
+                          theme="highlight"
                           onChange={handleChange}
                           onBlur={handleBlur}
                           value={values.password}
@@ -131,13 +131,16 @@ export default class CreatePasswordView extends React.PureComponent {
                       label="Confirm Password"
                       error={errors.password2}
                       touched={touched.password2}
-                      Input={Input}
-                      type="password"
-                      name="password2"
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      value={values.password2}
-                    />
+                    >
+                      <Input
+                        type="password"
+                        name="password2"
+                        theme="highlight"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        value={values.password2}
+                      />
+                    </FormFiled>
                   </div>
                   <Button
                     className="create-password__button"
