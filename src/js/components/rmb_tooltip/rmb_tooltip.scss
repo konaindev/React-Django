@@ -138,4 +138,8 @@ $tooltip-highlight-color: $content-text-secondary-color;
 .rmb-tooltip__button-icon {
     margin-left: auto;
     color: $tooltip-icon-color;
+
+    .rc-tooltip-arrow {
+        background-image: url(../../../images/tooltip-arrow-highlight.svg);
+    }
 }
