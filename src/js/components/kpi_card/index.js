@@ -8,6 +8,7 @@ import "./kpi_card.scss";
 
 const KPICard = ({ health, value, name, target, className }) => {
   const classes = cn("kpi-card", className, {
+    "kpi-card--not-available": health === -1,
     "kpi-card--off-track": health === 0,
     "kpi-card--at-risk": health === 1,
     "kpi-card--on-track": health === 2
@@ -25,7 +26,7 @@ const KPICard = ({ health, value, name, target, className }) => {
   );
 };
 KPICard.propTypes = {
-  health: PropTypes.oneOf([0, 1, 2]).isRequired,
+  health: PropTypes.oneOf([-1, 0, 1, 2]).isRequired,
   value: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   target: PropTypes.string.isRequired

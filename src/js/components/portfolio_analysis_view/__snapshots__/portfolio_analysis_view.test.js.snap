@@ -113,9 +113,48 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                           onMouseDown={[Function]}
                           onTouchEnd={[Function]}
                         >
-                          <div
-                            className="select__dropdown-arrow"
-                          />
+                          <svg
+                            aria-hidden="true"
+                            className="select__dropdown-arrow select__dropdown-arrow--down"
+                            color="inherit"
+                            focusable="false"
+                            height="1em"
+                            role="presentation"
+                            viewBox="0 0 10 5"
+                            width="1em"
+                          >
+                            <path
+                              d="M1 1.16134L4.92334 4.5"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                            />
+                            <path
+                              d="M8.82812 1.16134L5 4.5"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                          <svg
+                            aria-hidden="true"
+                            className="select__dropdown-arrow select__dropdown-arrow--up"
+                            color="inherit"
+                            focusable="false"
+                            height="1em"
+                            role="presentation"
+                            viewBox="0 0 10 5"
+                            width="1em"
+                          >
+                            <path
+                              d="M1 3.83866L4.92334 0.5"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                            />
+                            <path
+                              d="M8.82812 3.83866L5 0.5"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                            />
+                          </svg>
                         </div>
                       </div>
                     </div>
@@ -194,9 +233,48 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
               onMouseDown={[Function]}
               onTouchEnd={[Function]}
             >
-              <div
-                className="select__dropdown-arrow"
-              />
+              <svg
+                aria-hidden="true"
+                className="select__dropdown-arrow select__dropdown-arrow--down"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 10 5"
+                width="1em"
+              >
+                <path
+                  d="M1 1.16134L4.92334 4.5"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M8.82812 1.16134L5 4.5"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <svg
+                aria-hidden="true"
+                className="select__dropdown-arrow select__dropdown-arrow--up"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 10 5"
+                width="1em"
+              >
+                <path
+                  d="M1 3.83866L4.92334 0.5"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M8.82812 3.83866L5 0.5"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                />
+              </svg>
             </div>
           </div>
         </div>
@@ -245,9 +323,48 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                 onMouseDown={[Function]}
                 onTouchEnd={[Function]}
               >
-                <div
-                  className="select__dropdown-arrow"
-                />
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--down"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 1.16134L4.92334 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 1.16134L5 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--up"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 3.83866L4.92334 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 3.83866L5 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
               </div>
             </div>
           </div>
@@ -312,7 +429,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
         <div
           className="kpi-card__value"
         >
-          0.05
+          5.0%
         </div>
         <div
           className="kpi-card__name"
@@ -323,7 +440,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
           className="kpi-card__target"
         >
           Target: 
-          0.07
+          7.0%
         </div>
       </div>
       <div
@@ -344,7 +461,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
         <div
           className="kpi-card__value"
         >
-          0.2
+          20%
         </div>
         <div
           className="kpi-card__name"
@@ -355,7 +472,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
           className="kpi-card__target"
         >
           Target: 
-          0.25
+          25%
         </div>
       </div>
       <div
@@ -376,7 +493,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
         <div
           className="kpi-card__value"
         >
-          0.6
+          60%
         </div>
         <div
           className="kpi-card__name"
@@ -387,7 +504,7 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
           className="kpi-card__target"
         >
           Target: 
-          0.5
+          50%
         </div>
       </div>
     </div>
@@ -473,12 +590,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.9
+                    90%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.9
+                    Target: 90%
                   </div>
                 </div>
                 <div
@@ -487,12 +604,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.8
+                    80%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.8
+                    Target: 80%
                   </div>
                 </div>
                 <div
@@ -501,12 +618,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.1
+                    10%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.1
+                    Target: 10%
                   </div>
                 </div>
                 <div
@@ -515,12 +632,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.5
+                    50%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.5
+                    Target: 50%
                   </div>
                 </div>
               </div>
@@ -574,12 +691,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                 <div
                   className="portfolio-property-row__value"
                 >
-                  0.9
+                  90%
                 </div>
                 <div
                   className="portfolio-property-row__target"
                 >
-                  Target: 0.9
+                  Target: 90%
                 </div>
               </div>
               <div
@@ -588,12 +705,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                 <div
                   className="portfolio-property-row__value"
                 >
-                  0.8
+                  80%
                 </div>
                 <div
                   className="portfolio-property-row__target"
                 >
-                  Target: 0.8
+                  Target: 80%
                 </div>
               </div>
               <div
@@ -602,12 +719,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                 <div
                   className="portfolio-property-row__value"
                 >
-                  0.1
+                  10%
                 </div>
                 <div
                   className="portfolio-property-row__target"
                 >
-                  Target: 0.1
+                  Target: 10%
                 </div>
               </div>
               <div
@@ -616,12 +733,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                 <div
                   className="portfolio-property-row__value"
                 >
-                  0.5
+                  50%
                 </div>
                 <div
                   className="portfolio-property-row__target"
                 >
-                  Target: 0.5
+                  Target: 50%
                 </div>
               </div>
             </div>
@@ -660,12 +777,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.9
+                    90%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.9
+                    Target: 90%
                   </div>
                 </div>
                 <div
@@ -674,12 +791,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.8
+                    80%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.8
+                    Target: 80%
                   </div>
                 </div>
                 <div
@@ -688,12 +805,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.1
+                    10%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.1
+                    Target: 10%
                   </div>
                 </div>
                 <div
@@ -702,12 +819,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.5
+                    50%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.5
+                    Target: 50%
                   </div>
                 </div>
               </div>
@@ -753,12 +870,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.9
+                    90%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.9
+                    Target: 90%
                   </div>
                 </div>
                 <div
@@ -767,12 +884,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.8
+                    80%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.8
+                    Target: 80%
                   </div>
                 </div>
                 <div
@@ -781,12 +898,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.1
+                    10%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.1
+                    Target: 10%
                   </div>
                 </div>
                 <div
@@ -795,12 +912,12 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
                   <div
                     className="portfolio-property-group-row__value"
                   >
-                    0.5
+                    50%
                   </div>
                   <div
                     className="portfolio-property-group-row__target"
                   >
-                    Target: 0.5
+                    Target: 50%
                   </div>
                 </div>
               </div>

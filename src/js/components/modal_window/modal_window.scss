@@ -21,6 +21,8 @@
     width: 13px;
     height: 14px;
     background-image: url('../../../images/close-icon.svg');
+    background-repeat: no-repeat;
+    background-position: 50% 0;
     &:focus {
         outline: none;
     }

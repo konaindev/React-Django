@@ -3,17 +3,10 @@ import { Field } from "formik";
 import _clone from "lodash/clone";
 import PropTypes from "prop-types";
 import React, { Component } from "react";
-import ReactSelect, { components } from "react-select";
+import ReactSelect from "react-select";
 
+import { DropdownIndicator } from "./select_components";
 import "./select.scss";
-
-function DropdownIndicator(props) {
-  return (
-    <components.DropdownIndicator {...props}>
-      <div className="select__dropdown-arrow" />
-    </components.DropdownIndicator>
-  );
-}
 
 export default function Select(props) {
   const {
@@ -104,3 +97,5 @@ class FormSelectComponent extends Component {
     );
   }
 }
+
+export { SelectSearch } from "./select_search";
