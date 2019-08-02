@@ -8,4 +8,10 @@ describe("Input", () => {
     const tree = renderer.create(<Input type="text" />).toJSON();
     expect(tree).toMatchSnapshot();
   });
+  it("render text input highlight", () => {
+    const tree = renderer
+      .create(<Input type="text" theme="highlight" />)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

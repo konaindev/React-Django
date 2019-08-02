@@ -6,12 +6,15 @@ import React from "react";
 import "./input.scss";
 
 export default function Input(props) {
-  const { className, ...otherProps } = props;
-  const classes = cn("input", className);
+  const { className, theme, ...otherProps } = props;
+  const classes = cn("input", className, {
+    [`input--${theme}`]: theme
+  });
   return <input className={classes} type={props.type} {...otherProps} />;
 }
 Input.propTypes = {
   type: PropTypes.string.isRequired,
+  theme: PropTypes.oneOf(["", "highlight"]),
   className: PropTypes.string
 };
 
