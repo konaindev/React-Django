@@ -81,6 +81,7 @@ INSTALLED_APPS = [
     "django_js_reverse",
     "adminsortable2",
     "stdimage",
+    "mjml",
     "remark.charts",
     "remark.sales",
     "remark.email_app",
@@ -285,6 +286,12 @@ FB_PIXEL_ID = os.getenv("FB_PIXEL_ID", None)
 REDIS_URL = os.getenv("REDIS_URL", "redis://")
 CELERY_BROKER_URL = REDIS_URL
 CELERY_IGNORE_RESULT = True
+
+#
+# MJML
+#
+MJML_EXEC_CMD = "./node_modules/.bin/mjml"
+MJML_CHECK_CMD_ON_STARTUP = False
 
 # Activate Django-Heroku. Don't modify the DATABASES variable if we're in debug;
 # otherwise, modify it to match Heroku's needs (including forcing it to be SSL.)

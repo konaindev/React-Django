@@ -51,6 +51,7 @@ sentry-sdk = "*"
 graphkit = "*"
 django-extensions = "*"
 factory-boy = "*"
+django-mjml = "*"
 
 [requires]
 python_version = "3.7"
