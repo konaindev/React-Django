@@ -13,9 +13,9 @@ $tooltip-highlight-color: $content-text-secondary-color;
     opacity: 1;
 
     .rc-tooltip-inner {
-        color: $tooltip-text-color;
         max-width: 360px;
         padding: 10px;
+        color: $tooltip-text-color;
         white-space: normal;
         background-color: $tooltip-background-color;
     }
@@ -97,6 +97,7 @@ $tooltip-highlight-color: $content-text-secondary-color;
     .rc-tooltip-inner {
         color: $tooltip-highlight-color;
         background-color: $tooltip-highlight-bg;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, .1), 0 20px 30px rgba(0, 0, 0, .2);
     }
 
     .rc-tooltip-arrow {
