@@ -26,9 +26,9 @@
     
   </g>
   
-  <text x="357.7656" y="339.0651"><tspan>Current:</tspan><tspan dy="17px" x="357.7656">40%</tspan></text>
-  
   <text x="372.6307" y="181.8083"><tspan>Goal:</tspan><tspan dy="17px" x="372.6307">20%</tspan></text>
+  
+  <text x="249.5" y="390.011"><tspan>Current:</tspan><tspan dy="17px" x="249.5">40%</tspan></text>
   
   <text dy="-8px" x="249.5" y="249.5"><tspan>20% Leased Goal</tspan><tspan dy="24px" x="249.5">by 11/17/2015</tspan></text>
   
