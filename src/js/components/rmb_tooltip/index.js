@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import Tooltip from "rc-tooltip";
 
-import { Link2 } from "../../icons";
+import { NavLink } from "../../icons";
 import Button from "../button";
 
 import "rc-tooltip/assets/bootstrap.css";
@@ -21,7 +21,7 @@ export const RMBTooltip = props => {
         <a className="rmb-tooltip__link" href={props.link}>
           <Button className="rmb-tooltip__button" fullWidth={true}>
             <span className="rmb-tooltip__button-text">Learn More</span>
-            <Link2 className="rmb-tooltip__button-icon" />
+            <NavLink className="rmb-tooltip__button-icon" />
           </Button>
         </a>
       </React.Fragment>
