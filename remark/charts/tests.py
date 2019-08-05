@@ -58,6 +58,7 @@ class DonutChartTestCase(SimpleTestCase):
     #     self._check_correct_svg(
     #         self.test_data, "test_files/goal_greater_current.svg")
 
+    '''
     def test_over_100_goal_only(self):
         data = copy(self.test_data)
         data["goal"] = 120
@@ -92,6 +93,8 @@ class DonutChartTestCase(SimpleTestCase):
         data["current"] = 50
         self._check_correct_svg(
             data, "test_files/goal_label_moved_due_to_overlap.svg")
+    
+    '''
 
     def test_required_params(self):
         resp = self.client.get(self.url, {})
