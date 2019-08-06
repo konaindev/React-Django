@@ -129,7 +129,7 @@ export default class CreatePasswordView extends React.PureComponent {
                     <FormFiled
                       label="Confirm Password"
                       error={errors.password2}
-                      touched={touched.password2}
+                      showError={touched.password2 && values.password}
                     >
                       <Input
                         type="password"

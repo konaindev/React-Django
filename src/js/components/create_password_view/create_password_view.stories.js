@@ -7,7 +7,7 @@ import { rules } from "./props";
 const validate = values => {
   return new Promise(res => {
     let errors = {};
-    if (values.length <= 8) {
+    if (!values || values.length < 8) {
       errors.length = true;
     }
     setTimeout(() => res(errors));

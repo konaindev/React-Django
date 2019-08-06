@@ -6,11 +6,11 @@ import { Error, Ok } from "../../icons";
 
 import "./form_field.scss";
 
-const FormFiled = ({ theme, label, error, touched, Input, ...props }) => {
+const FormFiled = ({ theme, label, error, showError, Input, ...props }) => {
   const classes = cn("form-field", {
     [`form-field--${theme}`]: theme,
-    "form-field--ok": !error && touched,
-    "form-field--error": error && touched
+    "form-field--ok": !error && showError,
+    "form-field--error": error && showError
   });
   return (
     <div className={classes}>
@@ -30,13 +30,13 @@ FormFiled.propTypes = {
   label: PropTypes.string.isRequired,
   Input: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
   error: PropTypes.string,
-  touched: PropTypes.bool
+  showError: PropTypes.bool
 };
 
 FormFiled.defaultProps = {
   theme: "",
   Input: ({ children }) => children,
-  touched: false
+  showError: false
 };
 
 export default FormFiled;
