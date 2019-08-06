@@ -1,0 +1,8 @@
+<mj-class name="text-4xl" font-size="36px" line-height="44px" />
+<mj-class name="text-xl" font-size="20px" line-height="34px" />
+<mj-class name="text-lg" font-size="18px" line-height="30px" />
+<mj-class name="text-base" font-size="16px" line-height="28px" />
+<mj-class name="text-sm" font-size="14px" line-height="24px" />
+<mj-class name="text-xs" font-size="12px" line-height="20px" />
+
+<mj-class name="text-align-center" text-align="center"/>
