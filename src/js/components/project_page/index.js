@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 
 import ProjectPageChrome from "../project_page_chrome";
 import Container from "../container";
+import { connect } from "react-redux";
 
 import "./project_page.scss";
 
-export default class ProjectPage extends Component {
+export class ProjectPage extends Component {
   static propTypes = {
     user: PropTypes.object.isRequired,
     project: PropTypes.object.isRequired
@@ -65,3 +66,5 @@ export default class ProjectPage extends Component {
     );
   }
 }
+
+export default connect(x => x)(ProjectPage);

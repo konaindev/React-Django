@@ -2,6 +2,7 @@ from remark.projects.models import Fund, Project
 from remark.lib.views import ReactView
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import JsonResponse
 from django.core.cache import cache
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
@@ -33,13 +34,16 @@ class DashboardView(LoginRequiredMixin, ReactView):
     def get(self, request):
         user = request.user
 
-        cache_key = "{}^{}^{}".format(
-            user.public_id, request.path, request.META["QUERY_STRING"]
+        cache_key = "{}^{}^{}^{}".format(
+            user.public_id,
+            request.path,
+            request.content_type,
+            request.META["QUERY_STRING"],
         )
 
         if cache_key in cache:
-            cached_reponse = cache.get(cache_key)
-            return cached_reponse
+            cached_response = cache.get(cache_key)
+            return cached_response
 
         if user.is_superuser:
             project_params = {}
@@ -58,9 +62,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
             city = address.city
             label = (f"{city}, {state.upper()}",)
             if not has_property_in_list_of_dict(locations, "label", label):
-                locations.append(
-                    {"city": city, "label": label, "state": state.lower()}
-                )
+                locations.append({"city": city, "label": label, "state": state.lower()})
             if project.asset_manager is not None and not has_property_in_list_of_dict(
                 asset_managers, "id", project.asset_manager.public_id
             ):
@@ -93,9 +95,13 @@ class DashboardView(LoginRequiredMixin, ReactView):
             project_params["name__icontains"] = request.GET.get("q")
         if request.GET.get("st"):
             st = request.GET.getlist("st")
-            project_params["property__geo_address__state__iregex"] = r"(" + "|".join(st) + ")"
+            project_params["property__geo_address__state__iregex"] = (
+                r"(" + "|".join(st) + ")"
+            )
         if request.GET.get("ct"):
-            project_params["property__geo_address__city__in"] = request.GET.getlist("ct")
+            project_params["property__geo_address__city__in"] = request.GET.getlist(
+                "ct"
+            )
         if request.GET.get("pm"):
             project_params["property_manager_id__in"] = request.GET.getlist("pm")
         if request.GET.getlist("am"):
@@ -129,16 +135,32 @@ class DashboardView(LoginRequiredMixin, ReactView):
                 projects, key=lambda p: p["performance_rating"], reverse=is_reverse
             )
 
-        response = self.render(
-            no_projects=no_projects,
-            properties=projects,
-            user=user.get_menu_dict(),
-            search_url=request.GET.urlencode(),
-            locations=locations,
-            property_managers=property_managers,
-            asset_managers=asset_managers,
-            funds=funds,
-            static_url=settings.STATIC_URL,
+        response = JsonResponse(
+            {
+                "no_projects": no_projects,
+                "properties": projects,
+                "user": user.get_menu_dict(),
+                "search_url": request.GET.urlencode(),
+                "locations": locations,
+                "property_managers": property_managers,
+                "asset_managers": asset_managers,
+                "funds": funds,
+                "static_url": settings.STATIC_URL
+            }
         )
+
+        if request.content_type != "application/json":
+            response = self.render(
+                no_projects=no_projects,
+                properties=projects,
+                user=user.get_menu_dict(),
+                search_url=request.GET.urlencode(),
+                locations=locations,
+                property_managers=property_managers,
+                asset_managers=asset_managers,
+                funds=funds,
+                static_url=settings.STATIC_URL
+            )
+
         cache.set(cache_key, response, timeout=DEFAULT_TIMEOUT)
         return response
