@@ -23,7 +23,7 @@ storiesOf("FormFiled", module)
       <FormFiled
         label="Confirm Password"
         error="Passwords must match"
-        touched={true}
+        showError={true}
         Input={Input}
         type="password"
       />
@@ -33,7 +33,7 @@ storiesOf("FormFiled", module)
     <div style={style}>
       <FormFiled
         label="Confirm Password"
-        touched={true}
+        showError={true}
         Input={Input}
         type="password"
       />

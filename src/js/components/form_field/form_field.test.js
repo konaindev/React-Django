@@ -17,7 +17,7 @@ describe("FormFiled", () => {
         <FormFiled
           label="Confirm Password"
           error="Passwords must match"
-          touched={true}
+          showError={true}
           Input={Input}
           type="password"
         />
@@ -30,7 +30,7 @@ describe("FormFiled", () => {
       .create(
         <FormFiled
           label="Confirm Password"
-          touched={true}
+          showError={true}
           Input={Input}
           type="password"
         />
