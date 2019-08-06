@@ -141,8 +141,8 @@ export class DashboardPage extends React.PureComponent {
     });
     const { user, static_url } = this.props;
     const PropertiesListComponent = this.propertiesListComponent;
-    const navLinks =
-      user.email.indexOf("remarkably.io") > -1 ? this.props.navLinks : null;
+    const navLinks = this.props.navLinks;
+    // user.email.indexOf("remarkably.io") > -1 ? this.props.navLinks : null;
     return (
       <PageChrome navLinks={navLinks} headerItems={this.getHeaderItems()}>
         <TutorialView staticUrl={static_url} />
