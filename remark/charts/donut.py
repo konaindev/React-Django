@@ -22,7 +22,7 @@ class DonutChart:
         self.r = options["r"]
         self.donut_width = options["donut_width"]
         self.max_value = options["max_value"]
-        self.is_labels_overlap = (0 <= self.current - self.goal <= 6)
+        self.is_labels_overlap = (0 < self.current - self.goal <= 6)
 
     def calc_slice_coord(self, value, r):
         angle = value * (2 * math.pi / self.max_value)
@@ -32,8 +32,8 @@ class DonutChart:
 
     def get_goal_text(self):
         if self.is_labels_overlap:
-            return ""
-        if 0 <= self.goal - self.current <= 4:
+            x, y = self.calc_slice_coord(self.current - 10, self.r0)
+        elif 0 <= self.goal - self.current <= 4:
             x, y = self.calc_slice_coord(self.current + 3, self.r0)
         else:
             x, y = self.calc_slice_coord(self.goal - 3, self.r0)
