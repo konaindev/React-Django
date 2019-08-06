@@ -30,7 +30,7 @@ class DonutChartTestCase(SimpleTestCase):
         # output as svg files for easy reference
         goal = data["goal"]
         current = data["current"]
-        file_path = f"example_files/donut_{goal}_{current}.svg"
+        file_path = f"output_files/donut_{goal}_{current}.svg"
         path = os.path.join(self.current_dir, file_path)
         with open(path, "wb") as f:
             f.write(resp.content)
