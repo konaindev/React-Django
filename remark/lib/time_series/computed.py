@@ -1,5 +1,5 @@
 from operator import truediv, add, mul, sub
-from remark.lib.math import sum_or_0, div_or_0, mult_or_0, d_div_or_0, d_quant_currency, sub_or_0
+from remark.lib.math import sum_or_0, div_or_0, d_mult_or_0, d_div_or_0, d_quant_currency, sub_or_0
 from graphkit import compose, operation
 from .common import KPI
 
@@ -62,7 +62,7 @@ def chain(*fns):
 
 
 def twelve_mo_mult_or_0(*args):
-    return mult_or_0(*args, 12)
+    return d_mult_or_0(*args, 12)
 
 
 cost_per_calc = chain(d_div_or_0, d_quant_currency)
