@@ -1,10 +1,12 @@
+from copy import copy
+
 from django.shortcuts import render
 
 from remark.email_app.models import PerformanceEmail
 from remark.email_app.reports.weekly_performance import generate_template_vars
 from remark.lib.views import ContentView
 
-class EmailTestPage(ContentView):
+class WeeklyPerformanceTestPage(ContentView):
 
     template_name = "email/weekly_performance_report/index.html"
 
@@ -100,4 +102,42 @@ class EmailTestPage(ContentView):
         if perf_email is not None:
             template_vars = generate_template_vars(perf_email)
 
-        return self.render("email/weekly_performance_report/index.html", **template_vars)
+        return self.render(self.template_name, **template_vars)
+
+
+class AddedToPropertyTestPage(ContentView):
+
+    template_name = "email_added_to_property/index.mjml"
+
+    def get(self, request):
+        is_multiple = request.GET.get("portfolio") in (True, "true")
+
+        single_property = {
+            "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/weekly_performance_reports/ctd.png",
+            "title": "Rainier Lofts",
+            "address": "1234 1st Ave, Seattle, WA 98101",
+            "view_link": "https://app.remarkably.io"
+        }
+
+        template_vars = {
+            "email_title": "Added to New Property",
+            "email_preview": "Added to New Property",
+            "inviter_name": "William George",
+            "is_multiple": is_multiple,
+            "property_name": "Rainier Lofts",
+            "properties": [single_property],
+            "more_count": None,
+            "view_button_link": "https://app.remarkably.io",
+            "view_button_label": "View Property"
+        }
+
+        if is_multiple is True:
+            template_vars["more_count"] = 5
+            template_vars["view_button_label"] = "View All Properties"
+
+            for i in range(1, 5):
+                each = copy(single_property)
+                each["title"] += f" {i + 1}"
+                template_vars["properties"].append(each)
+
+        return self.render(self.template_name, **template_vars)

@@ -1,0 +1,16 @@
+<mj-wrapper full-width="full-width" mj-class="bg-black" padding="0">
+  <mj-section mj-class="py-50">
+    <mj-column mj-class="container">
+      <mj-image src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/logo.png" alt="Remarkably" width="174px" height="30px" mj-class="p-0" />
+    </mj-column>
+  </mj-section>
+
+  <mj-section mj-class="pt-50 pb-0">
+    <mj-column mj-class="container">
+      <mj-image src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/abstract_buildings.png" alt="Abstract Buildings" width="600px" mj-class="p-0" />
+    </mj-column>
+  </mj-section>
+</mj-wrapper>
+
+<mj-wrapper full-width="full-width" mj-class="divider-full">
+</mj-wrapper>

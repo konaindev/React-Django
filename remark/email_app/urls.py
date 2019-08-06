@@ -1,10 +1,12 @@
 from django.urls import path
 
 from .views import (
-    EmailTestPage,
+    WeeklyPerformanceTestPage,
+    AddedToPropertyTestPage,
 )
 
 
 urlpatterns = [
-    path("weekly_performance", EmailTestPage.as_view(), name="weekly_performance"),
+    path("weekly_performance", WeeklyPerformanceTestPage.as_view(), name="weekly_performance"),
+    path("added_to_property", AddedToPropertyTestPage.as_view(), name="added_to_property")
 ]
