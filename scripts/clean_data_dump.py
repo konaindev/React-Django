@@ -20,7 +20,9 @@ def command(input_file, output_file):
             # convert all user passwords to `test`
             model["fields"]['password'] = TEST_PASSWORD
         elif model["model"] == "projects.project":
-            model["fields"]["building_image"] = None
+            #if "building_image" in model["fields"]
+            #model["fields"]["building_image"] = None
+            pass
     json.dump(input_json, output_file)
     print("Done.")
 
