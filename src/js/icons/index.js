@@ -1,10 +1,15 @@
 export { default as ArrowDown } from "./arrow_down";
 export { default as ArrowSide } from "./arrow_side";
 export { default as ArrowUp } from "./arrow_up";
+export { default as Billing } from "./billing";
 export { default as Close } from "./close";
+export { default as Email } from "./email";
+export { default as Invite } from "./invite";
 export { default as ListView } from "./list_view";
+export { default as Lock } from "./lock";
 export { default as LogOut } from "./log_out";
 export { default as Link } from "./link";
+export { default as Profile } from "./profile";
 export { default as NavLink } from "./nav_link";
 export { default as Tick } from "./tick";
 export { default as TileView } from "./tile_view";
