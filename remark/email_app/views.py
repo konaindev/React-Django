@@ -105,6 +105,20 @@ class WeeklyPerformanceTestPage(ContentView):
         return self.render(self.template_name, **template_vars)
 
 
+class WelcomeTestPage(ContentView):
+
+    template_name = "email_welcome/index.mjml"
+
+    def get(self, request):
+        template_vars = {
+            "email_title": "Welcome",
+            "email_preview": "Welcome to Remarkably",
+            "create_account_link": "https://app.remarkably.io"
+        }
+
+        return self.render(self.template_name, **template_vars)
+
+
 class AddedToPropertyTestPage(ContentView):
 
     template_name = "email_added_to_property/index.mjml"
