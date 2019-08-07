@@ -15,6 +15,7 @@ import "css/main.scss";
  *
  * Be sure to add your Page to the pages object.
  */
+import AccountSettings from "./components/account_settings";
 import BaselineReportPage from "./components/baseline_report_page";
 import DashboardPage from "./components/dashboard_page";
 import MarketReportPage from "./components/market_report_page";
@@ -29,6 +30,7 @@ import { general } from "./state/actions";
 import PortfolioAnalysisView from "./components/portfolio_analysis_view";
 
 const pages = {
+  AccountSettings,
   BaselineReportPage,
   DashboardPage,
   MarketReportPage,
