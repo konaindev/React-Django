@@ -1,0 +1,69 @@
+@import "css/base.scss";
+
+$page-width: 1000px;
+$title-height: 44px;
+$subtitle-color: $gray-6;
+$subtitle-height: 28px;
+$account-menu-width: 280px;
+$menu-border: 1px solid $gray-4;
+$menu-item-background: $gray-2;
+$menu-item-width: 221px;
+$menu-item-color: $gray-6;
+
+.account-settings {
+    width: $page-width;
+    margin: 50px auto 53px;
+    font-family: $font-sans;
+}
+
+.account-settings__title {
+    height: $title-height;
+    font-size: $text-4xl;
+    color: $title-large-color;
+}
+
+.account-settings__subtitle {
+    margin-top: 10px;
+    font-size: $text-base;
+    color: $subtitle-color;
+    line-height: $subtitle-height;
+}
+
+.account-settings__panel {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 50px;
+    background: $panel-background-color;
+    border-radius: $panel-border-radius;
+}
+
+.account-settings__menu {
+    width: $account-menu-width;
+    border-right: $menu-border;
+    padding: 30px 30px 29px 30px;
+}
+
+.account-settings__page-content {
+    flex-grow: 1;
+}
+
+.account-settings__menu-item {
+    display: flex;
+    align-items: center;
+    width: $menu-item-width;
+    padding: 14px;
+    margin-bottom: 20px;
+    color: $menu-item-color;
+    font-size: $text-base;
+    border-radius: 4px;
+    background: transparent;
+    line-height: $line-height-relaxed;
+
+    &--active {
+        background: $menu-item-background;
+    }
+}
+
+.account-settings__menu-item-text {
+    margin-left: 15px;
+}
