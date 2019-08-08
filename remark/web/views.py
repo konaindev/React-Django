@@ -23,8 +23,8 @@ class DashboardView(LoginRequiredMixin, ReactView):
         "name": "name",
         "propertyMgr": "property_manager__name",
         "assetOwner": "asset_manager__name",
-        "state": "address__state",
-        "city": "address__city",
+        "state": "property__geo_address__state",
+        "city": "property__geo_address__city",
         "fund": "fund__name",
     }
 
@@ -145,7 +145,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
                 "property_managers": property_managers,
                 "asset_managers": asset_managers,
                 "funds": funds,
-                "static_url": settings.STATIC_URL
+                "static_url": settings.STATIC_URL,
             }
         )
 
@@ -159,7 +159,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
                 property_managers=property_managers,
                 asset_managers=asset_managers,
                 funds=funds,
-                static_url=settings.STATIC_URL
+                static_url=settings.STATIC_URL,
             )
 
         cache.set(cache_key, response, timeout=DEFAULT_TIMEOUT)
