@@ -68,6 +68,9 @@ def twelve_mo_mult_or_0(*args):
 cost_per_calc = chain(d_div_or_0, d_quant_currency)
 romi_calc = chain(d_div_or_0, round)
 
+def occupancy_rate_calc(occupied_units, occupiable_units):
+    print(occupied_units, occupiable_units)
+    return div_or_0(occupied_units, occupiable_units)
 
 def op(name, needs, fun):
     # Short cut for operation that only provides one return
@@ -92,7 +95,7 @@ kpi_graph = compose(name="kpi_graph")(
     op(KPI.lease_cd_rate, [KPI.lease_cds, KPI.lease_applications], div_or_0),
 
     # Activity
-    op(KPI.occupancy_rate, [KPI.occupied_units, KPI.occupiable_units], div_or_0),
+    op(KPI.occupancy_rate, [KPI.occupied_units, KPI.occupiable_units], occupancy_rate_calc),
     op(KPI.occupied_units, [
         KPI.occupied_units_end,
         KPI.occupied_units_start,
