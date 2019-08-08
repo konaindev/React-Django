@@ -5,7 +5,7 @@ import { general } from "../actions";
 export const fetchDashboard = store => next => action => {
   if (action.type === "API_DASHBOARD") {
     window
-      .fetch(`${process.env.BASE_URL}/dashboard?${action.searchString}`, {
+      .fetch(`${BASE_URL}/dashboard?${action.searchString}`, {
         responseType: "json",
         credentials: "include",
         mode: "same-origin",

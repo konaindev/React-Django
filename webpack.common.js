@@ -3,7 +3,7 @@ const miniCSS = require("mini-css-extract-plugin");
 const StyleLintPlugin = require("stylelint-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
-
+const webpack = require("webpack");
 module.exports = {
   entry: {
     app: ["./src/js/index.js"]
@@ -63,7 +63,10 @@ module.exports = {
     new CleanWebpackPlugin(),
     new miniCSS({ filename: "index.css", chunkFilename: "[id].css" }),
     new StyleLintPlugin(),
-    new Dotenv()
+    new Dotenv(),
+    new webpack.DefinePlugin({
+      BASE_URL: JSON.stringify(process.env.BASE_URL)
+    })
   ],
   profile: true,
   resolve: {
