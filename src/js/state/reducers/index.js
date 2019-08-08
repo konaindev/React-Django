@@ -1,11 +1,19 @@
 import { combineReducers } from "redux";
 import { general } from "../actions";
 
-export default (state = {}, action) => {
+const initState = {
+  tutorialView: {}
+};
+
+export default (state = initState, action) => {
   let newState = {};
   switch (action.type) {
     case "GENERAL_SET_STATE": {
       newState = { ...action.newState };
+      break;
+    }
+    case "TUTORIAL_SET_STATE": {
+      newState = { ...state, tutorialView: action.newState };
       break;
     }
     default:

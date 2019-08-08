@@ -1,6 +1,6 @@
 import { createStore, applyMiddleware } from "redux";
 import reducers from "../reducers";
-import { fetchDashboard } from "../middleware";
+import { fetchDashboard, fetchTutorial } from "../middleware";
 
 // TODO: contextually enable devtools based on prod or not
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -11,7 +11,8 @@ export default createStore(
     applyMiddleware(
       //window.__REDUX_DEVTOOLS_EXTENSION__ &&
       //  window.__REDUX_DEVTOOLS_EXTENSION__({ trace: true, traceLimit: 25 }),
-      fetchDashboard
+      fetchDashboard,
+      fetchTutorial
     )
   )
 );

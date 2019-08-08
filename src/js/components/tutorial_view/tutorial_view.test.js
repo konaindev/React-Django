@@ -1,24 +1,38 @@
 import renderer from "react-test-renderer";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 
 import TutorialView from "./index";
 
 jest.mock("react-responsive-modal", () => "Modal");
+const _ = x => createStore(() => ({ tutorialView: x }));
 
 describe("TutorialView", () => {
-  afterEach(() => {
-    document.cookie = "isLogin= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
-  });
-
   it("render default", () => {
+    const props = {
+      static_url: "static/",
+      is_show_tutorial: true
+    };
     const tree = renderer
-      .create(<TutorialView staticUrl={"static/"} />)
+      .create(
+        <Provider store={_(props)}>
+          <TutorialView />
+        </Provider>
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
   it("render hidden", () => {
-    document.cookie = "isLogin=true";
+    const props = {
+      static_url: "static/",
+      is_show_tutorial: false
+    };
     const tree = renderer
-      .create(<TutorialView staticUrl={"static/"} />)
+      .create(
+        <Provider store={_(props)}>
+          <TutorialView />
+        </Provider>
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });

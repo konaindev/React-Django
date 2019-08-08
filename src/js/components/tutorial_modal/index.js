@@ -83,7 +83,13 @@ export default class TutorialModal extends React.PureComponent {
       backgroundImage: `url(${imageUrl})`
     };
     return (
-      <ModalWindow className="tutorial-modal" open={open} onClose={onClose}>
+      <ModalWindow
+        className="tutorial-modal"
+        closeOnOverlayClick={false}
+        closeOnEsc={false}
+        open={open}
+        onClose={onClose}
+      >
         <ModalWindow.Head className="tutorial-modal__header">
           {title}
         </ModalWindow.Head>

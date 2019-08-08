@@ -7,3 +7,10 @@ export const general = {
     type: "GENERAL_UPDATE_STATE"
   }
 };
+
+export const tutorial = {
+  set: newState => ({
+    type: "TUTORIAL_SET_STATE",
+    newState
+  })
+};
