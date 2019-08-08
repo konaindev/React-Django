@@ -45,17 +45,18 @@ class DashboardView(LoginRequiredMixin, ReactView):
             cached_response = cache.get(cache_key)
             return cached_response
 
+        project_params = {}
         if user.is_superuser:
-            project_params = {}
+            project_query = Project.objects.all()
         else:
-            project_params = {"account_id": user.account_id}
+            project_query = Project.objects.get_all_for_user(user)
 
         locations = []
         asset_managers = []
         property_managers = []
         funds = []
         no_projects = True
-        for project in Project.objects.filter(**project_params):
+        for project in project_query:
             no_projects = False
             address = project.property.geo_address
             state = address.state
@@ -116,7 +117,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
             order = f"-{order}"
 
         projects = []
-        for project in Project.objects.filter(**project_params).order_by(order):
+        for project in project_query.filter(**project_params).order_by(order):
             address = project.property.geo_address
             projects.append(
                 {
