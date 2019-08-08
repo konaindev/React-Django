@@ -10,7 +10,8 @@ export default class ToggleButton extends Component {
     options: PropTypes.arrayOf(
       PropTypes.shape({
         value: PropTypes.any,
-        icon: PropTypes.func
+        icon: PropTypes.func,
+        text: PropTypes.string
       })
     )
   };
@@ -25,18 +26,36 @@ export default class ToggleButton extends Component {
     return (
       <div className="toggle-button">
         {options.map((option, index) => {
-          const Icon = option.icon;
-          return (
-            <button
-              key={index}
-              className={cn("toggle-button__item", {
-                "toggle-button__item--selected": option.id === value
-              })}
-              onClick={this.handleChange(option.id)}
-            >
-              <Icon width={20} height={20} />
-            </button>
-          );
+          if (option.icon) {
+            const Icon = option.icon;
+            return (
+              <button
+                key={index}
+                className={cn("toggle-button__item", {
+                  "toggle-button__item--selected": option.id === value
+                })}
+                onClick={this.handleChange(option.id)}
+              >
+                <Icon width={20} height={20} />
+              </button>
+            );
+          } else if (option.text) {
+            return (
+              <button
+                key={index}
+                className={cn("toggle-button__item", {
+                  "toggle-button__item--selected": option.id === value
+                })}
+                onClick={this.handleChange(option.id)}
+              >
+                {option.text}
+              </button>
+            );
+          } else {
+            throw new Error(
+              "Must provide either the icon or text for a button"
+            );
+          }
         })}
       </div>
     );

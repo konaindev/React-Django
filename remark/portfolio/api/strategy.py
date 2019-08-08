@@ -151,7 +151,7 @@ PROPERTY_SPLIT_DOCUMENT = {
     "highest_monthly_rent": "noop",
 }
 
-GROUP_MERGE_DOC = {
+GROUP_AGGREGATE_MERGE_DOC = {
     "leases_ended": "sum",
     "leased_units_end": "sum",
     "leased_units_start": "sum",
@@ -185,6 +185,47 @@ GROUP_MERGE_DOC = {
     "tours": "sum",
     "lease_applications": "sum",
     "leases_executed": "sum",
+
+    # Rent
+    "average_monthly_rent": weighted_average_by_unit_count,
+    "lowest_monthly_rent": weighted_average_by_unit_count,
+    "highest_monthly_rent": weighted_average_by_unit_count,
+}
+
+GROUP_AVERAGE_MERGE_DOC = {
+    "leases_ended": "average",
+    "leased_units_end": "average",
+    "leased_units_start": "average",
+    "lease_renewal_notices": "average",
+    "lease_renewals": "average",
+    "lease_vacation_notices": "average",
+
+    # Activity
+    "move_outs": "average",
+    "move_ins": "average",
+    "occupied_units_end": "average",
+    "occupied_units_start": "average",
+    "occupiable_units_start": "average",
+
+    # Cancellations & Denials
+    "lease_cds": "average",
+
+    # Investment
+    "acq_reputation_building": "average",
+    "acq_demand_creation": "average",
+    "acq_leasing_enablement": "average",
+    "acq_market_intelligence": "average",
+    "ret_reputation_building": "average",
+    "ret_demand_creation": "average",
+    "ret_leasing_enablement": "average",
+    "ret_market_intelligence": "average",
+
+    # Funnel Volumes
+    "usvs": "average",
+    "inquiries": "average",
+    "tours": "average",
+    "lease_applications": "average",
+    "leases_executed": "average",
 
     # Rent
     "average_monthly_rent": weighted_average_by_unit_count,
@@ -233,7 +274,7 @@ GROUP_SPLIT_DOC = {
     "highest_monthly_rent": "noop",
 }
 
-GROUP_TARGET_MERGE_DOC = {
+GROUP_AGGREGATE_TARGET_MERGE_DOC = {
     'leased_rate': weighted_average_by_unit_count,
     'lease_applications': "sum",
     'leases_executed': "sum",
@@ -250,6 +291,25 @@ GROUP_TARGET_MERGE_DOC = {
     'usvs': "sum",
     'inquiries': "sum",
     'tours': "sum",
+}
+
+GROUP_AVERAGE_TARGET_MERGE_DOC = {
+    'leased_rate': weighted_average_by_unit_count,
+    'lease_applications': "average",
+    'leases_executed': "average",
+    'lease_renewal_notices': "average",
+    'lease_renewals': "average",
+    'lease_vacation_notices': "average",
+    'lease_cds': "average",
+    'delta_leases': "average",
+    'move_ins': "average",
+    'move_outs': "average",
+    'occupied_units': "average",
+    'acq_investment': "average",
+    'ret_investment': "average",
+    'usvs': "average",
+    'inquiries': "average",
+    'tours': "average",
 }
 
 GROUP_TARGET_SPLIT_DOC = {
@@ -309,9 +369,15 @@ def get_targets_for_project(project, start, end, skip_select=False):
     return merge(PROPERTY_TARGET_MERGE_DOC, PROPERTY_TARGET_SPLIT_DOC, project, start, end)
 
 
-def get_base_kpis_for_group(group_kpis, start, end):
-    return merge(GROUP_MERGE_DOC, GROUP_SPLIT_DOC, group_kpis, start, end)
+def get_base_kpis_for_group(group_kpis, start, end, average=False):
+    if not average:
+        return merge(GROUP_AGGREGATE_MERGE_DOC, GROUP_SPLIT_DOC, group_kpis, start, end)
+
+    return merge(GROUP_AVERAGE_MERGE_DOC, GROUP_SPLIT_DOC, group_kpis, start, end)
 
 
-def get_targets_for_group(group_targets, start, end):
-    return merge(GROUP_TARGET_MERGE_DOC, GROUP_TARGET_SPLIT_DOC, group_targets, start, end)
+def get_targets_for_group(group_targets, start, end, average=False):
+    if not average:
+        return merge(GROUP_AGGREGATE_TARGET_MERGE_DOC, GROUP_TARGET_SPLIT_DOC, group_targets, start, end)
+
+    return merge(GROUP_AVERAGE_TARGET_MERGE_DOC, GROUP_TARGET_SPLIT_DOC, group_targets, start, end)

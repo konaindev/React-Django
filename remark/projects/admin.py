@@ -9,6 +9,7 @@ from remark.admin import admin_site, custom_titled_filter
 from remark.analytics.admin import InlineAnalyticsProviderAdmin
 from .forms import ProjectForm, SpreadsheetForm, CampaignModelUploadForm
 from .models import (
+    Building,
     Fund,
     Project,
     Property,
@@ -396,6 +397,14 @@ class TAMExportMixin:
         return my_urls + urls
 
 
+class BuildingInline(admin.TabularInline):
+    model = Building
+    fields = ["building_identifier", "number_of_floors", "number_of_units", "has_elevator"]
+    show_change_link = True
+    extra = 0
+    ordering = ["building_identifier"]
+
+
 @admin.register(Project, site=admin_site)
 class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin):
     save_on_top = True
@@ -452,4 +461,11 @@ class FundAdmin(admin.ModelAdmin):
 
 @admin.register(Property, site=admin_site)
 class PropertyAdmin(admin.ModelAdmin):
-    pass
+    inlines = (
+        BuildingInline,
+    )
+
+
+@admin.register(Building, site=admin_site)
+class BuildingAdmin(admin.ModelAdmin):
+    list_display = ["building_identifier", "property"]

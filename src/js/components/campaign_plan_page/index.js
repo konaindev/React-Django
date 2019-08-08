@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 
 import ReportPageChrome from "../report_page_chrome";
 import CampaignPlan from "../campaign_plan";
+import { connect } from "react-redux";
 
-export default class CampaignPlanPage extends Component {
+export class CampaignPlanPage extends Component {
   static propTypes = {
     user: PropTypes.object,
     report: PropTypes.object.isRequired,
@@ -27,3 +28,5 @@ export default class CampaignPlanPage extends Component {
     );
   }
 }
+
+export default connect(x => x)(CampaignPlanPage);

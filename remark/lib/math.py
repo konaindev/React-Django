@@ -74,6 +74,16 @@ def mult_or_0(*values):
     return reduce(swallow_none(op_mult, 0), values, 1)
 
 
+def d_mult_or_0(*values):
+    args = []
+    for value in values:
+        if type(value) is not Decimal:
+            args.append(Decimal(value))
+        else:
+            args.append(value)
+    return mult_or_0(*args)
+
+
 def mult_or_1(*values):
     """
     Multiply all values. If any of them is None, substitute 1 instead.
