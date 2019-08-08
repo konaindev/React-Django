@@ -28,7 +28,7 @@ def find_period(predicate):
 def get_lease_stages():
     """
     TODO: If it will do a lot of queries and will work too slow in future
-        we can use caching here (for example beaker https://github.com/bbangert/beaker)
+        we can use caching here (for example `beaker` https://github.com/bbangert/beaker)
     """
     from remark.projects.models import LeaseStage
     return list(LeaseStage.objects.values_list("full_name", flat=True))
