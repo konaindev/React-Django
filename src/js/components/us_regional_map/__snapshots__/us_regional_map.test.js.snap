@@ -69,6 +69,7 @@ exports[`USRegionalMap Excluded West 1`] = `
         NORTH
       </tspan>
       <tspan
+        dy="1rem"
         x="612"
       >
         EAST
@@ -147,6 +148,7 @@ exports[`USRegionalMap Excluded all 1`] = `
         NORTH
       </tspan>
       <tspan
+        dy="1rem"
         x="612"
       >
         EAST
@@ -225,6 +227,7 @@ exports[`USRegionalMap max size 1`] = `
         NORTH
       </tspan>
       <tspan
+        dy="1rem"
         x="612"
       >
         EAST
@@ -303,6 +306,7 @@ exports[`USRegionalMap renders correctly 1`] = `
         NORTH
       </tspan>
       <tspan
+        dy="1rem"
         x="612"
       >
         EAST
