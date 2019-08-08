@@ -1,6 +1,3 @@
-from django.db.models import Model
-
-from remark.lib.spreadsheets import ExcelValidationError
 from .base import ActivatorBase
 
 from ..importers import SpreadsheetKind
@@ -8,6 +5,12 @@ from ..importers import SpreadsheetKind
 
 class BaselinePerfActivator(ActivatorBase):
     spreadsheet_kind = SpreadsheetKind.PERIODS
+
+    def __init__(self, *args, **kwargs):
+        super(BaselinePerfActivator, self).__init__(*args, **kwargs)
+        # Cache lease stages for periods activating
+        from remark.projects.models import LeaseStage
+        self.lease_stages_map = {s.full_name: s for s in LeaseStage.objects.all()}
 
     def activate(self):
         self.activate_periods()
@@ -27,9 +30,7 @@ class BaselinePerfActivator(ActivatorBase):
         # Period object, so this is pretty trivial...
         defaults = {k: v for k, v in data_period.items() if k not in ["start", "end", "lease_stage_str"]}
         # Get lease stage
-        from remark.projects.models import LeaseStage
-        lease_stage_str = data_period["lease_stage_str"]
-        lease_stage = LeaseStage.objects.get(short_name=lease_stage_str)
+        lease_stage = self.lease_stages_map[data_period["lease_stage_str"]]
         # ignore returned (period, created) tuple
         self.project.periods.update_or_create(
             project=self.project,

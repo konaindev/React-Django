@@ -2,11 +2,13 @@ from remark.lib.match import matchp
 from remark.lib.spreadsheets import (
     find_row,
     find_col,
+    DataType,
     ChoiceCell,
     IntCell,
     DateCell,
     CurrencyCell,
     StrCell,
+    SchemaCell,
     ExcelValidationError,
 )
 
@@ -23,6 +25,33 @@ def find_period(predicate):
     return find_col("output_periods!2", predicate)
 
 
+def get_lease_stages():
+    """
+    TODO: If it will do a lot of queries and will work too slow in future
+        we can use caching here (for example beaker https://github.com/bbangert/beaker)
+    """
+    from remark.projects.models import LeaseStage
+    return list(LeaseStage.objects.values_list("full_name", flat=True))
+
+
+def LeaseStagesCell(locator=None, label=None):
+    def str_or_convertible_or_null_data_type(cell):
+        return cell.data_type in frozenset(
+            [DataType.STRING, DataType.NUMERIC, DataType.NULL]
+        )
+
+    def choice_or_fail_converter(value):
+        value = str(value) if value else None
+        choices = get_lease_stages()
+        if value not in get_lease_stages():
+            raise ExcelValidationError(
+                f"Unexpected value '{value}' found; expected one of '{choices}'"
+            )
+        return value
+
+    return SchemaCell(locator, str_or_convertible_or_null_data_type, choice_or_fail_converter, label=None)
+
+
 class BaselinePerfImporter(ProjectExcelImporter):
     expected_type = "baseline_perf"
     expected_version = 1
@@ -37,7 +66,7 @@ class BaselinePerfImporter(ProjectExcelImporter):
     PERIOD_SCHEMA = {
         "start": DateCell(find_period("start date")),
         "end": DateCell(find_period("end date")),
-        "lease_stage_str": StrCell(find_period("lease stage")),
+        "lease_stage_str": LeaseStagesCell(find_period("lease stage")),
         "leased_units_start": IntCell(find_period("leased units @ start")),
         "leased_units_end": IntCell(find_period("leased units @ end")),
         "leases_ended": IntCell(find_period("ended")),
@@ -105,17 +134,3 @@ class BaselinePerfImporter(ProjectExcelImporter):
                 raise ExcelValidationError(
                     f"BaselinePerfImporter.clean: The spreadsheet looks broken. There is a period that begins on {period['start']} but ends *at or before* that, on {period['end']}."
                 )
-
-        # Check that all lease stages are exist in DB
-        from remark.projects.models import LeaseStage
-        lease_stages_set = set([p["lease_stage_str"] for p in self.cleaned_data["periods"]])
-        if lease_stages_set:
-            lease_stages = LeaseStage.objects \
-                .filter(short_name__in=lease_stages_set) \
-                .values_list("short_name", flat=True)
-            wrong_stages = lease_stages_set - set(lease_stages)
-            if wrong_stages:
-                wrong_stages_str = ", ".join(wrong_stages)
-                raise ExcelValidationError(
-                    f"BaselinePerfActivator.activate_period: The spreadsheet looks broken. "
-                    f"Lease stages with names '{wrong_stages_str}' doesn't exist in database.")

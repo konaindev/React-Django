@@ -15,7 +15,7 @@ class BaselinePerfTestCase(SpreadsheetFileTestCaseMixin, TestCase):
     EXPECTED_FIRST_PERIOD = {
         "start": datetime.date(year=2018, month=8, day=1),
         "end": datetime.date(year=2018, month=9, day=1),
-        "lease_stage_str": "performance",
+        "lease_stage_str": "Improve Performance",
         "leased_units_start": 153,
         "leased_units_end": 136,
         "leases_ended": 17,
