@@ -18,7 +18,8 @@ class UserAdmin(AuthUserAdmin):
                     "email",
                     "password",
                     "account",
-                    "person"
+                    "person",
+                    "is_show_tutorial",
                 )
             }
         ),

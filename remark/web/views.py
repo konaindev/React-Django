@@ -1,10 +1,12 @@
-from remark.projects.models import Fund, Project
-from remark.lib.views import ReactView
+import json
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
 from django.core.cache import cache
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
+
+from remark.projects.models import Fund, Project
+from remark.lib.views import ReactView, RemarkView
 
 
 def has_property_in_list_of_dict(ary, prop, value):
@@ -145,7 +147,6 @@ class DashboardView(LoginRequiredMixin, ReactView):
                 "property_managers": property_managers,
                 "asset_managers": asset_managers,
                 "funds": funds,
-                "static_url": settings.STATIC_URL
             }
         )
 
@@ -159,8 +160,26 @@ class DashboardView(LoginRequiredMixin, ReactView):
                 property_managers=property_managers,
                 asset_managers=asset_managers,
                 funds=funds,
-                static_url=settings.STATIC_URL
             )
 
         cache.set(cache_key, response, timeout=DEFAULT_TIMEOUT)
         return response
+
+
+class TutorialView(LoginRequiredMixin, RemarkView):
+    def get(self, request):
+        user = request.user
+        return JsonResponse(
+            {
+                "static_url": settings.STATIC_URL,
+                "is_show_tutorial": user.is_show_tutorial,
+            },
+            status=200,
+        )
+
+    def post(self, request):
+        params = json.loads(request.body)
+        user = request.user
+        user.is_show_tutorial = params.get("is_show_tutorial", False)
+        user.save()
+        return JsonResponse({"is_show_tutorial": user.is_show_tutorial}, status=200)
