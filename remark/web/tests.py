@@ -1,6 +1,7 @@
 import datetime
 import decimal
 
+from django.contrib.auth.models import Group
 from django.test import TestCase
 from django.urls import reverse
 
@@ -20,23 +21,34 @@ class PropertyListTestCase(TestCase):
             country="US",
         )
 
+        group1 = Group.objects.create(name="project 1 view group")
+        group2 = Group.objects.create(name="project 2 view group")
+        group3 = Group.objects.create(name="project 3 view group")
         self.account = Account.objects.create(
             company_name="test", address=address, account_type=4
         )
         self.user = User.objects.create_user(
             account=self.account, email="test@test.com", password="testpassword"
         )
+        group1.user_set.add(self.user)
+        group2.user_set.add(self.user)
         self.asset_manager1 = Business.objects.create(
             name="Test Asset Manager", is_asset_manager=True
         )
         self.asset_manager2 = Business.objects.create(
             name="Test Asset Manager 2", is_asset_manager=True
         )
+        self.asset_manager3 = Business.objects.create(
+            name="Test Asset Manager 3", is_asset_manager=True
+        )
         self.property_manager1 = Business.objects.create(
             name="Test Property Manager", is_property_manager=True
         )
         self.property_manager2 = Business.objects.create(
             name="Test Property Manager 2", is_property_manager=True
+        )
+        self.property_manager3 = Business.objects.create(
+            name="Test Property Manager 3", is_property_manager=True
         )
         property_owner = Business.objects.create(
             name="Test Property Owner", is_property_owner=True
@@ -50,7 +62,7 @@ class PropertyListTestCase(TestCase):
             geo_address=address,
         )
         self.project1 = Project.objects.create(
-            name="test",
+            name="project 1",
             baseline_start=datetime.date(year=2018, month=11, day=19),
             baseline_end=datetime.date(year=2018, month=12, day=26),
             account=self.account,
@@ -59,6 +71,7 @@ class PropertyListTestCase(TestCase):
             property_owner=property_owner,
             fund=self.fund1,
             property=property1,
+            view_group=group1,
         )
         property2 = Property.objects.create(
             name="project",
@@ -67,7 +80,7 @@ class PropertyListTestCase(TestCase):
             geo_address=address,
         )
         self.project2 = Project.objects.create(
-            name="project",
+            name="project 2",
             baseline_start=datetime.date(year=2018, month=11, day=19),
             baseline_end=datetime.date(year=2018, month=12, day=26),
             account=self.account,
@@ -76,6 +89,25 @@ class PropertyListTestCase(TestCase):
             property_owner=property_owner,
             fund=self.fund1,
             property=property2,
+            view_group=group2,
+        )
+        property3 = Property.objects.create(
+            name="project",
+            average_monthly_rent=decimal.Decimal("0"),
+            lowest_monthly_rent=decimal.Decimal("0"),
+            geo_address=address,
+        )
+        self.project3 = Project.objects.create(
+            name="project 3",
+            baseline_start=datetime.date(year=2018, month=11, day=19),
+            baseline_end=datetime.date(year=2018, month=12, day=26),
+            account=self.account,
+            asset_manager=self.asset_manager3,
+            property_manager=self.property_manager3,
+            property_owner=property_owner,
+            fund=self.fund2,
+            property=property3,
+            view_group=group3,
         )
         self.client.login(email="test@test.com", password="testpassword")
 
@@ -120,7 +152,9 @@ class PropertyListTestCase(TestCase):
                     "label": self.property_manager2.name,
                 },
             ],
-            "locations": [{"city": "Seattle", "label": ("Seattle, WA",), "state": "wa"}],
+            "locations": [
+                {"city": "Seattle", "label": ("Seattle, WA",), "state": "wa"}
+            ],
             "user": {
                 "account_id": self.account.id,
                 "account_name": self.account.company_name,
@@ -181,7 +215,9 @@ class PropertyListTestCase(TestCase):
                     "label": self.property_manager2.name,
                 },
             ],
-            "locations": [{"city": "Seattle", "label": ("Seattle, WA",), "state": "wa"}],
+            "locations": [
+                {"city": "Seattle", "label": ("Seattle, WA",), "state": "wa"}
+            ],
             "user": {
                 "account_id": self.account.id,
                 "account_name": self.account.company_name,
@@ -191,13 +227,13 @@ class PropertyListTestCase(TestCase):
             },
         }
 
-        query = "q=tes&pm={}&pm={}&am={}&fb={}".format(
-            self.property_manager1.public_id,
-            self.property_manager2.public_id,
-            self.asset_manager1.public_id,
-            self.fund1.public_id,
+        query = (
+            f"q=project&pm={self.property_manager1.public_id}"
+            f"&pm={self.property_manager2.public_id}"
+            f"&am={self.asset_manager1.public_id}"
+            f"&fb={self.fund1.public_id}"
         )
-        url = "{}?{}".format(reverse("dashboard"), query)
+        url = f"{reverse('dashboard')}?{query}"
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertCountEqual(

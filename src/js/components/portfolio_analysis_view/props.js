@@ -59,5 +59,6 @@ export const props = {
 
   table_data: tableProps.properties,
 
-  user: userProps
+  user: userProps,
+  display_average: "1"
 };

@@ -3,6 +3,11 @@ const miniCSS = require("mini-css-extract-plugin");
 const StyleLintPlugin = require("stylelint-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
+const webpack = require("webpack");
+
+if (process.env.BASE_URL.length < 1) {
+  throw new Error("MISSING BASE_URL IN ENV VAR");
+}
 
 module.exports = {
   entry: {
@@ -63,7 +68,10 @@ module.exports = {
     new CleanWebpackPlugin(),
     new miniCSS({ filename: "index.css", chunkFilename: "[id].css" }),
     new StyleLintPlugin(),
-    new Dotenv()
+    new Dotenv(),
+    new webpack.DefinePlugin({
+      "process.env": { BASE_URL: JSON.stringify(process.env.BASE_URL) }
+    })
   ],
   profile: true,
   resolve: {

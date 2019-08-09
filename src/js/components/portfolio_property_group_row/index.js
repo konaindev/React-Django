@@ -57,7 +57,7 @@ export default class PortfolioPropertyGroupRow extends React.PureComponent {
   renderKPIs() {
     return this.props.kpi_order.map((kpi, index) => {
       let target = "";
-      if (this.props.targets && this.props.targets[kpi]) {
+      if ("targets" in this.props && kpi in this.props.targets) {
         target = `Target: ${formatKPI(kpi, this.props.targets[kpi])}`;
       }
       return (

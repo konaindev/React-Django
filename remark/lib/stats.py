@@ -22,11 +22,11 @@ def _health_standard(stat, stat_target):
 def _health_currency_range(stat, stat_target):
     stat_type = type(stat)
     ten_percent = stat_target * stat_type(0.10)
-    if stat >= stat_target - ten_percent and stat <= stat_target + ten_percent:
+    if stat_target - ten_percent <= stat <= stat_target + ten_percent:
         return 2
 
     thirty_percent = ten_percent * stat_type(3)
-    if stat >= stat_target - thirty_percent and stat <= stat_target + thirty_percent:
+    if stat_target - thirty_percent <= stat <= stat_target + thirty_percent:
         return 1
 
     return 0
@@ -62,7 +62,9 @@ HEALTH_EXCEPTIONS = {
     KPI.app_cost: _health_down_is_good,
     KPI.tou_cost: _health_down_is_good,
     KPI.inq_cost: _health_down_is_good,
-    KPI.usv_cost: _health_down_is_good
+    KPI.usv_cost: _health_down_is_good,
+
+    KPI.exe_to_lowest_rent: _health_down_is_good
 }
 
 

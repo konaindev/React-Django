@@ -1,12 +1,9 @@
 import scssVars from "../../../css/variables.scss";
 
 export const GOOGLE_MAP_API_KEY = "AIzaSyBu4HU8t3rRXnfdkNjSV1_PIhzzrFFlVTs";
-
 export const DEFAULT_ZOOM = 9;
 
-export const mapCirclePointColor = scssVars.mapCirclePointColor;
-
-export const stylesForNightMode = [
+export const mapNightTheme = [
   {
     featureType: "all",
     elementType: "geometry",
@@ -20,7 +17,7 @@ export const stylesForNightMode = [
   {
     featureType: "all",
     elementType: "labels.text.fill",
-    stylers: [{ color: scssVars.mapLocationTextColor }]
+    stylers: [{ color: scssVars.mapLabelTextColor }]
   },
   {
     featureType: "poi",
@@ -49,16 +46,26 @@ export const stylesForNightMode = [
   }
 ];
 
-export const stylesForRegionFill = {
-  strokeColor: scssVars.mapRegionBgColor,
+export const greenAreaTheme = {
+  strokeColor: scssVars.mapGreenAreaStrokeColor,
   strokeOpacity: 1,
-  strokeWeight: 1.54,
-  fillColor: scssVars.mapRegionBgColor,
-  fillOpacity: scssVars.mapRegionBgOpacity
+  strokeWeight: scssVars.mapGreenAreaStrokeWeight,
+  fillColor: scssVars.mapGreenAreaFillColor,
+  fillOpacity: scssVars.mapGreenAreaFillOpacity,
+  labelColor: scssVars.mapGreenAreaLabelColor
+};
+
+export const grayAreaTheme = {
+  strokeColor: scssVars.mapGrayAreaStrokeColor,
+  strokeOpacity: 1,
+  strokeWeight: scssVars.mapGrayAreaStrokeWeight,
+  fillColor: scssVars.mapGrayAreaFillColor,
+  fillOpacity: scssVars.mapGrayAreaFillOpacity,
+  labelColor: scssVars.mapGrayAreaLabelColor
 };
 
 export const createDefaultMapOptions = maps => ({
-  styles: stylesForNightMode,
+  styles: mapNightTheme,
   draggable: false,
   zoomControl: false,
   scrollwheel: false,

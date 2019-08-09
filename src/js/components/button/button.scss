@@ -106,4 +106,17 @@
             background-color: $button-default-bg-color;
         }
     }
+
+    &--highlight {
+        color: $button-highlight-text-color;
+        background-color: $button-highlight-bg-color;
+
+        &:hover, &:focus {
+            background-color: lighten($button-highlight-bg-color, 3%);
+        }
+
+        &:active {
+            background-color: darken($button-highlight-bg-color, 2%);
+        }
+    }
 }

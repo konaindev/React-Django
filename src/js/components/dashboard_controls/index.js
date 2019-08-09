@@ -1,6 +1,8 @@
 import cn from "classnames";
 import _get from "lodash/get";
 import PropTypes from "prop-types";
+import _isEmpty from "lodash/isEmpty";
+import _isArray from "lodash/isArray";
 import React from "react";
 
 import MultiSelect from "../multi_select";
@@ -132,6 +134,27 @@ export default class DashboardControls extends React.PureComponent {
   };
 
   onChangeFilter = () => {
+    const urlParams = new URLSearchParams();
+    Object.keys(this.state.filters).forEach(filterName => {
+      const value = this.state.filters[filterName];
+      if (!_isEmpty(value)) {
+        if (_isArray(value)) {
+          value.forEach(v => urlParams.append(filterName, v));
+        } else {
+          urlParams.set(filterName, value);
+        }
+      }
+    });
+
+    window.history.replaceState({}, "", `/dashboard?${urlParams.toString()}`);
+    if (urlParams.toString().length < 1) {
+      // all filters have been removed
+
+      this.props.dispatch({
+        type: "API_DASHBOARD",
+        searchString: `${urlParams.toString()}`
+      });
+    }
     this.props.onChange(this.state.filters);
   };
 

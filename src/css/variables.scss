@@ -22,6 +22,7 @@ $yellow-1: #F3F65C;
 $highlight-gray-1: #8f9993;
 $highlight-gray-2: #bfccc4;
 $highlight-gray-3: #f5faf7;
+$highlight-gray-4: #eff4fb;
 
 // Cyan palette (used in charts)
 $cyan-1: #2a7b6f;
@@ -129,6 +130,17 @@ $select-border-color: $gray-4;
 $select-active-background: $blue-3;
 $select-option-color: $highlight-gray-3;
 
+$select-highlight-bg: $white;
+$select-highlight-border-color: $gray-6;
+$select-highlight-active-border-color: $blue-7;
+$select-highlight-selected-bg: $blue-7;
+$select-highlight-selected-color: $highlight-gray-3;
+$select-highlight-value-color: $gray-3;
+$select-highlight-caret-color: $blue-3;
+$select-highlight-option-color: $gray-9;
+$select-highlight-option-active-bg: $highlight-gray-4;
+$select-highlight-group-color: $gray-6;
+
 $release-note-link-color: $cyan-3;
 
 // Variables common to all visualization panels
@@ -154,6 +166,9 @@ $button-primary-active-bg-color: $blue-2;
 $button-primary-text-color: $highlight-gray-3;
 $button-primary-active-text-color: $highlight-gray-3;
 
+$button-highlight-bg-color: $highlight-gray-3;
+$button-highlight-text-color: $gray-3;
+
 $button-secondary-bg-color: $gray-4;
 $button-secondary-text-color: $highlight-gray-3;
 
@@ -161,21 +176,32 @@ $button-disabled-text-color: $gray-5;
 
 $button-group-line-color: $gray-4;
 
-$map-circle-point-color: $green-3;
-$map-zip-text-color: $highlight-gray-3;
-$map-radius-text-color: $gray-3;
-$map-region-bg-color: $green-3;
-$map-region-bg-opacity: 0.05;
+// MarketSizeMap component
 $map-background-color: $gray-2;
 $map-road-color: $gray-2;
 $map-water-color: $gray-2;
-$map-location-text-color: $gray-6;
+$map-label-text-color: $gray-4;
 $map-land-color: $gray-3;
+// green area
+$map-green-area-stroke-color: $green-3;
+$map-green-area-stroke-weight: 1;
+$map-green-area-fill-color: $green-3;
+$map-green-area-fill-opacity: 0.05;
+$map-green-area-label-color: $gray-3;
+// gray area
+$map-gray-area-stroke-color: rgba($white, 0.25);
+$map-gray-area-stroke-weight: 1;
+$map-gray-area-fill-color: $white;
+$map-gray-area-fill-opacity: 0.05;
+$map-gray-area-label-color: rgba($white, 0.5);
+
+// USRegionMap
 $map-hover-color: $blue-3;
 $map-disable-color: rgba($gray-4, .6);
 $map-label-color: $highlight-gray-3;
 $map-label-hover-color: $gray-5;
 $map-dark-label-color: $gray-2;
+
 
 $rtir-category-bg-color-0: $blue-1;
 $rtir-category-bg-color-1: $blue-2;
@@ -288,16 +314,21 @@ $small-box-vertical-spacing: 10px;
 :export {
     fontSans: $font-sans;
 
-    mapCirclePointColor: $map-circle-point-color;
-    mapZipTextColor: $map-zip-text-color;
-    mapRadiusTextColor: $map-radius-text-color;
     mapLandColor: $map-land-color;
-    mapLocationTextColor: $map-location-text-color;
     mapRoadColor: $map-road-color;
     mapWaterColor: $map-water-color;
-    mapRegionBgColor: $map-region-bg-color;
-    mapRegionBgOpacity: $map-region-bg-opacity;
+    mapLabelTextColor: $map-label-text-color;
     mapLineHeight: $text-base;
+    mapGreenAreaStrokeColor: $map-green-area-stroke-color;
+    mapGreenAreaStrokeWeight: $map-green-area-stroke-weight;
+    mapGreenAreaFillColor: $map-green-area-fill-color;
+    mapGreenAreaFillOpacity: $map-green-area-fill-opacity;
+    mapGreenAreaLabelColor: $map-green-area-label-color;
+    mapGrayAreaStrokeColor: $map-gray-area-stroke-color;
+    mapGrayAreaStrokeWeight: $map-gray-area-stroke-weight;
+    mapGrayAreaFillColor: $map-gray-area-fill-color;
+    mapGrayAreaFillOpacity: $map-gray-area-fill-opacity;
+    mapGrayAreaLabelColor: $map-gray-area-label-color;
 
     pieColorUnallocated: $gray-4;
     pieColor1: $green-1;

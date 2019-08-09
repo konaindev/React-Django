@@ -48,6 +48,10 @@ def spreadsheet_public_id():
     return public_id("spreadsheet2")
 
 
+def building_public_id():
+    return public_id("building")
+
+
 def public_property_id():
     return public_id("property")
 
@@ -699,6 +703,7 @@ class Period(ModelPeriod, models.Model):
     project = models.ForeignKey(
         Project, on_delete=models.CASCADE, related_name="periods"
     )
+    lease_stage = models.ForeignKey("LeaseStage", on_delete=models.CASCADE)
 
     start = models.DateField(
         db_index=True, help_text="The first date, inclusive, that this period tracks."
@@ -707,6 +712,8 @@ class Period(ModelPeriod, models.Model):
     end = models.DateField(
         db_index=True, help_text="The final date, exclusive, that this period tracks."
     )
+
+    includes_remarkably_effect = models.BooleanField(default=True, blank=True)
 
     # ------------------------------------------------------
     # Logical activity (lease)
@@ -1271,3 +1278,44 @@ class CampaignModel(models.Model):
 
     class Meta:
         ordering = ["model_index"]
+
+
+class LeaseStage(models.Model):
+    full_name = models.CharField(max_length=30, blank=False, null=False)
+    short_name = models.CharField(max_length=30, blank=False, null=False)
+
+    def __str__(self):
+        return self.full_name
+
+class BuildingManager(models.Manager):
+    pass
+
+
+class Building(models.Model):
+    public_id = models.CharField(
+        primary_key=True,
+        default=building_public_id,
+        help_text="",
+        max_length=24,
+        editable=False,
+    )
+
+    property = models.ForeignKey(
+        "projects.Property", on_delete=models.CASCADE, blank=False, help_text="Property"
+    )
+
+    building_identifier = models.CharField(
+        max_length=255, blank=False, help_text="Building identifier"
+    )
+
+    number_of_floors = models.IntegerField(
+        default=1, blank=False, help_text="Number of floors in the building"
+    )
+
+    has_elevator = models.BooleanField(default=False, verbose_name="Does the building have a elevator?")
+
+    number_of_units = models.IntegerField(
+        default=1, blank=False, help_text="Number of Units"
+    )
+
+    objects = BuildingManager()

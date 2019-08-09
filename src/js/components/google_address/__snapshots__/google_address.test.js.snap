@@ -1,0 +1,135 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GoogleAddress render correctly 1`] = `
+<div
+  className="select-search select google-address select--highlight css-2b097c-container"
+  onKeyDown={[Function]}
+>
+  <div
+    className="select__control css-yk16xz-control"
+    onMouseDown={[Function]}
+    onTouchEnd={[Function]}
+  >
+    <div
+      className="select__value-container css-1hwfws3"
+    >
+      <div
+        className="select__placeholder css-1wa3eu0-placeholder"
+      >
+        Select office...
+      </div>
+      <div>
+        <div
+          className="select__input"
+          style={
+            Object {
+              "display": "inline-block",
+            }
+          }
+        >
+          <input
+            aria-autocomplete="list"
+            autoCapitalize="none"
+            autoComplete="off"
+            autoCorrect="off"
+            disabled={false}
+            id="react-select-2-input"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            spellCheck="false"
+            style={
+              Object {
+                "background": 0,
+                "border": 0,
+                "boxSizing": "content-box",
+                "color": "inherit",
+                "fontSize": "inherit",
+                "label": "input",
+                "opacity": 1,
+                "outline": 0,
+                "padding": 0,
+                "width": "1px",
+              }
+            }
+            tabIndex="0"
+            type="text"
+            value=""
+          />
+          <div
+            style={
+              Object {
+                "height": 0,
+                "left": 0,
+                "overflow": "scroll",
+                "position": "absolute",
+                "top": 0,
+                "visibility": "hidden",
+                "whiteSpace": "pre",
+              }
+            }
+          >
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="select__indicators css-1wy0on6"
+    >
+      <span
+        className="select__indicator-separator css-1okebmr-indicatorSeparator"
+      />
+      <div
+        aria-hidden="true"
+        className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+        onMouseDown={[Function]}
+        onTouchEnd={[Function]}
+      >
+        <svg
+          aria-hidden="true"
+          className="select__dropdown-arrow select__dropdown-arrow--down"
+          color="inherit"
+          focusable="false"
+          height="1em"
+          role="presentation"
+          viewBox="0 0 10 5"
+          width="1em"
+        >
+          <path
+            d="M1 1.16134L4.92334 4.5"
+            stroke="currentColor"
+            strokeLinecap="round"
+          />
+          <path
+            d="M8.82812 1.16134L5 4.5"
+            stroke="currentColor"
+            strokeLinecap="round"
+          />
+        </svg>
+        <svg
+          aria-hidden="true"
+          className="select__dropdown-arrow select__dropdown-arrow--up"
+          color="inherit"
+          focusable="false"
+          height="1em"
+          role="presentation"
+          viewBox="0 0 10 5"
+          width="1em"
+        >
+          <path
+            d="M1 3.83866L4.92334 0.5"
+            stroke="currentColor"
+            strokeLinecap="round"
+          />
+          <path
+            d="M8.82812 3.83866L5 0.5"
+            stroke="currentColor"
+            strokeLinecap="round"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+`;

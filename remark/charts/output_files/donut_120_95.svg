@@ -20,16 +20,18 @@
   <g mask="url(#mask0)">
     <circle cx="249.5" cy="249.5" r="215.4503" fill="#20272E" />
     
-    <path d="M 249.5 34.0497 A 215.4503 215.4503 0 1,1 44.5946 182.9222 L 249.5 249.5" fill="#006EFF" />
+    <path d="M 249.5 34.0497 A 215.4503 215.4503 0 1,1 182.9222 44.5946 L 249.5 249.5" fill="#006EFF" />
     
-    <path d="M 44.5946 182.9222 A 215.4503 215.4503 0 0,1 182.9222 44.5946 L 249.5 249.5" fill="#404E5C" />
+    <line stroke="white" stroke-dasharray="4 4" x1="249.5" x2="454.4054" y1="249.5" y2="182.9222" />
+    
+    <path d="M 182.9222 44.5946 A 215.4503 215.4503 0 0,1 249.5 34.0497 L 249.5 249.5" fill="#404E5C" />
     
   </g>
   
-  <text x="249.5" y="390.011"><tspan>Current:</tspan><tspan dy="17px" x="249.5">80%</tspan></text>
+  <text x="372.6307" y="181.8083"><tspan>Goal:</tspan><tspan dy="17px" x="372.6307">120%</tspan></text>
   
-  <text x="150.1437" y="150.1437"><tspan>Goal:</tspan><tspan dy="17px" x="150.1437">95%</tspan></text>
+  <text x="174.2104" y="130.8626"><tspan>Current:</tspan><tspan dy="17px" x="174.2104">95%</tspan></text>
   
-  <text dy="-8px" x="249.5" y="249.5"><tspan>95% Leased Goal</tspan><tspan dy="24px" x="249.5">by 11/17/2015</tspan></text>
+  <text dy="-8px" x="249.5" y="249.5"><tspan>120% Leased Goal</tspan><tspan dy="24px" x="249.5">by 11/17/2015</tspan></text>
   
 </svg>
