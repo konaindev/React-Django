@@ -266,7 +266,8 @@ export class UrlQueryLayer extends React.PureComponent {
     super(props);
     this.filters = {};
     const urlParams = new URLSearchParams(
-      props.search_url || window.location.search
+      // props.search_url || window.location.search
+      window.location.search
     );
     this.filters = {
       q: urlParams.get("q"),
@@ -278,6 +279,7 @@ export class UrlQueryLayer extends React.PureComponent {
       s: urlParams.get("s"),
       d: urlParams.get("d")
     };
+    this.state = { ...this.filters };
   }
 
   onChangeFilter = filters => {
@@ -295,7 +297,7 @@ export class UrlQueryLayer extends React.PureComponent {
         }
       }
     });
-
+    this.setState(filters);
     window.history.replaceState({}, "", `/dashboard?${urlParams.toString()}`);
     this.props.dispatch({
       type: "API_DASHBOARD",
@@ -319,7 +321,7 @@ export class UrlQueryLayer extends React.PureComponent {
     return (
       <DashboardPage
         {...this.props}
-        filters={this.filters}
+        filters={this.state}
         onChangeFilter={this.onChangeFilter}
       />
     );
