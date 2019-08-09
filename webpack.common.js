@@ -5,7 +5,8 @@ const CleanWebpackPlugin = require("clean-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const webpack = require("webpack");
 
-if (process.env.BASE_URL.length < 1) {
+const isProduction = process.env.NODE_ENV === "production";
+if (isProduction && !process.env.BASE_URL) {
   throw new Error("MISSING BASE_URL IN ENV VAR");
 }
 
