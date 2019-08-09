@@ -3,13 +3,19 @@
 $page-width: 1000px;
 $title-height: 44px;
 $subtitle-color: $gray-6;
-$subtitle-height: 28px;
+$subtitle-line-height: 28px;
 $account-menu-width: 280px;
 $menu-border: 1px solid $gray-4;
 $menu-item-background: $gray-2;
 $menu-item-width: 221px;
 $menu-item-color: $gray-6;
 $menu-active-item-color: $highlight-gray-3;
+$tab-title-color: $highlight-gray-3;
+$tab-title-line-height: 34px;
+$input-label-line-height: $line-height-tight;
+$input-border: 1px solid $gray-4;
+$input-line-height: 20px;
+$input-text-color: $highlight-gray-3;
 
 .account-settings {
     width: $page-width;
@@ -27,7 +33,7 @@ $menu-active-item-color: $highlight-gray-3;
     margin-top: 10px;
     font-size: $text-base;
     color: $subtitle-color;
-    line-height: $subtitle-height;
+    line-height: $subtitle-line-height;
 }
 
 .account-settings__panel {
@@ -42,10 +48,6 @@ $menu-active-item-color: $highlight-gray-3;
     width: $account-menu-width;
     border-right: $menu-border;
     padding: 30px 30px 29px 30px;
-}
-
-.account-settings__page-content {
-    flex-grow: 1;
 }
 
 .account-settings__menu-item {
@@ -69,4 +71,37 @@ $menu-active-item-color: $highlight-gray-3;
 
 .account-settings__menu-item-text {
     margin-left: 15px;
+}
+
+.account-settings__tab {
+    flex-grow: 1;
+    padding: 30px;
+}
+
+.account-settings__tab-title {
+    color: $tab-title-color;
+    font-size: $text-xl;
+    line-height: $tab-title-line-height;
+}
+
+.account-settings__label {
+    font-size: $text-xs;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: $input-label-line-height;
+}
+
+.account-settings__tab-content {
+    margin-top: 30px;
+}
+
+.account-settings__input {
+    padding: 12px;
+    margin-top: 8px;
+    color: $input-text-color;
+    font-size: $text-sm;
+    border: $input-border;
+    border-radius: 4px;
+    background: transparent;
+    line-height: $input-line-height;
 }
