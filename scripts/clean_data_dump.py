@@ -11,16 +11,12 @@ TEST_PASSWORD = "pbkdf2_sha256$150000$mB9xzUGC4xro$a4oeUKHtyc8TDMinSQ2kPkuZH/kU4
 def command(input_file, output_file):
     print("Start.")
     input_json = json.load(input_file)
-    # print("middle.")
     for model in input_json:
         if model["model"] == "users.user":
-            # print(f"model: {model['model']}")
-            # print(model["fields"])
-
-            # convert all user passwords to `test`
             model["fields"]['password'] = TEST_PASSWORD
         elif model["model"] == "projects.property":
             model["fields"]["building_image"] = None
+            model["fields"]["building_logo"] = None
     json.dump(input_json, output_file)
     print("Done.")
 
