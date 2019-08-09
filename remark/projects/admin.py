@@ -7,8 +7,9 @@ from adminsortable2.admin import SortableInlineAdminMixin
 
 from remark.admin import admin_site, custom_titled_filter
 from remark.analytics.admin import InlineAnalyticsProviderAdmin
-from .forms import ProjectForm, SpreadsheetForm, CampaignModelUploadForm
+from .forms import ProjectForm, PropertyForm, SpreadsheetForm, CampaignModelUploadForm
 from .models import (
+    Building,
     Fund,
     Project,
     Property,
@@ -20,6 +21,7 @@ from .models import (
     TargetPeriod,
     TAMExportLog,
     Tag,
+    LeaseStage,
 )
 from .views import TAMExportView
 
@@ -396,6 +398,14 @@ class TAMExportMixin:
         return my_urls + urls
 
 
+class BuildingInline(admin.TabularInline):
+    model = Building
+    fields = ["building_identifier", "number_of_floors", "number_of_units", "has_elevator"]
+    show_change_link = True
+    extra = 0
+    ordering = ["building_identifier"]
+
+
 @admin.register(Project, site=admin_site)
 class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin):
     save_on_top = True
@@ -452,4 +462,18 @@ class FundAdmin(admin.ModelAdmin):
 
 @admin.register(Property, site=admin_site)
 class PropertyAdmin(admin.ModelAdmin):
+    form = PropertyForm
+    inlines = (
+        BuildingInline,
+    )
+
+
+@admin.register(LeaseStage, site=admin_site)
+class LeaseStageAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(Building, site=admin_site)
+class BuildingAdmin(admin.ModelAdmin):
+    list_display = ["building_identifier", "property"]
+

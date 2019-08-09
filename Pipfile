@@ -51,6 +51,8 @@ sentry-sdk = "*"
 graphkit = "*"
 django-extensions = "*"
 factory-boy = "*"
+django-image-cropping = "*"
+easy-thumbnails = "*"
 
 [requires]
 python_version = "3.7"

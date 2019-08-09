@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import ReportPageChrome from "../report_page_chrome";
 import ReportDateSpan from "../report_date_span";
 import CommonReport from "../common_report";
-
+import { connect } from "react-redux";
 import "./baseline_report_page.scss";
 
 /**
@@ -12,7 +12,7 @@ import "./baseline_report_page.scss";
  *
  * @classdesc Renders page chrome and contents for a single baseline report
  */
-export default class BaselineReportPage extends Component {
+export class BaselineReportPage extends Component {
   static propTypes = {
     report: PropTypes.object.isRequired,
     user: PropTypes.object,
@@ -43,3 +43,5 @@ export default class BaselineReportPage extends Component {
     );
   }
 }
+
+export default connect(x => x)(BaselineReportPage);

@@ -1,6 +1,8 @@
 import renderer from "react-test-renderer";
 import PerformanceReportPage from "./index";
 import props from "./props";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 
 describe("PerformanceReportPage", () => {
   beforeEach(() => {
@@ -8,7 +10,13 @@ describe("PerformanceReportPage", () => {
   });
 
   it("renders correctly", () => {
-    const tree = renderer.create(<PerformanceReportPage {...props} />).toJSON();
+    const tree = renderer
+      .create(
+        <Provider store={createStore(() => props)}>
+          <PerformanceReportPage {...props} />
+        </Provider>
+      )
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

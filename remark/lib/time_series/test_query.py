@@ -6,7 +6,7 @@ from django.db.models import signals
 
 from .query import select
 
-from remark.projects.models import Period, Project, Fund, Property
+from remark.projects.models import Fund, LeaseStage, Period, Project, Property
 from remark.users.models import Account
 from remark.crm.models import Business
 from remark.geo.models import Address
@@ -53,10 +53,12 @@ def create_project():
 
 
 def create_period(project, start, end):
+    stage = LeaseStage.objects.get(short_name="performance")
     return Period.objects.create(
         start=start,
         end=end,
         project=project,
+        lease_stage=stage,
         leased_units_start=0,
         occupiable_units_start=0,
         occupied_units_start=0,
