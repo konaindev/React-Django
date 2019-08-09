@@ -47,9 +47,6 @@ def get_table_structure(user, start, end, kpis, show_averages):
         base_kpis = get_base_kpis_for_project(project, start, end)
         base_targets = get_targets_for_project(project, start, end)
 
-        if base_targets is None:
-            print(project)
-
         if base_kpis is not None:
             image_url = project.get_building_image_url()
             if image_url is None:
