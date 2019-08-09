@@ -9,6 +9,7 @@ $menu-border: 1px solid $gray-4;
 $menu-item-background: $gray-2;
 $menu-item-width: 221px;
 $menu-item-color: $gray-6;
+$menu-active-item-color: $highlight-gray-3;
 
 .account-settings {
     width: $page-width;
@@ -57,9 +58,11 @@ $menu-item-color: $gray-6;
     font-size: $text-base;
     border-radius: 4px;
     background: transparent;
+    cursor: pointer;
     line-height: $line-height-relaxed;
 
     &--active {
+        color: $menu-active-item-color;
         background: $menu-item-background;
     }
 }

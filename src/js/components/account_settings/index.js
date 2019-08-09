@@ -1,12 +1,54 @@
+import cn from "classnames";
 import React from "react";
-import PropTypes from "prop-types";
 
 import { Email, Lock, Profile } from "../../icons";
 import PageChrome from "../page_chrome";
 
 import "./account_settings.scss";
 
-export default class AccountSettings extends React.Component {
+export default class AccountSettings extends React.PureComponent {
+  state = { tab: "profile" };
+
+  menuItems = [
+    {
+      id: "profile",
+      name: "Profile",
+      component: Profile
+    },
+    {
+      id: "lock",
+      name: "Security",
+      component: Lock
+    },
+    {
+      id: "email",
+      name: "Email Reports",
+      component: Email
+    }
+  ];
+
+  selectTab = tab => this.setState({ tab });
+
+  getItems = () => {
+    const { tab } = this.state;
+    return this.menuItems.map(item => {
+      const Component = item.component;
+      const itemClass = cn("account-settings__menu-item", {
+        "account-settings__menu-item--active": item.id === tab
+      });
+      return (
+        <div
+          className={itemClass}
+          key={item.id}
+          onClick={() => this.selectTab(item.id)}
+        >
+          <Component />
+          <span className="account-settings__menu-item-text">{item.name}</span>
+        </div>
+      );
+    });
+  };
+
   render() {
     return (
       <PageChrome>
@@ -19,26 +61,7 @@ export default class AccountSettings extends React.Component {
             </div>
           </div>
           <div className="account-settings__panel">
-            <div className="account-settings__menu">
-              <div className="account-settings__menu-item">
-                <Profile />
-                <span className="account-settings__menu-item-text">
-                  Profile
-                </span>
-              </div>
-              <div className="account-settings__menu-item">
-                <Lock />
-                <span className="account-settings__menu-item-text">
-                  Security
-                </span>
-              </div>
-              <div className="account-settings__menu-item">
-                <Email />
-                <span className="account-settings__menu-item-text">
-                  Email Reports
-                </span>
-              </div>
-            </div>
+            <div className="account-settings__menu">{this.getItems()}</div>
             <div className="account-settings__page-content"></div>
           </div>
         </div>
