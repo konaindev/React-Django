@@ -4,6 +4,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Formik, Form } from "formik";
 
+import AccountForm from "../account_form";
 import Button from "../button";
 import Input from "../input";
 import FormFiled from "../form_field";
@@ -104,77 +105,71 @@ class CreatePasswordView extends React.PureComponent {
   render() {
     return (
       <PageAuth backLink="/">
-        <div className="create-password">
-          <WizardProgress
-            className="create-password__wizard"
-            steps={this.steps}
-          />
-          <div className="create-password__body">
-            <div className="create-password__title">Set your password</div>
-            <div className="create-password__subtitle">
-              Enter a password to gain access to your account.
-            </div>
-            <Formik validate={this.validate} onSubmit={this.onSubmit}>
-              {({
-                errors,
-                touched,
-                values,
-                isValid,
-                handleChange,
-                handleBlur
-              }) => (
-                <Form className="create-password__form">
-                  <div className="create-password__field">
-                    <FormFiled label="Password">
-                      <RMBTooltip
-                        theme="highlight"
-                        trigger={["focus"]}
-                        overlay={this.renderTooltip(
-                          values.password,
-                          errors.password
-                        )}
-                      >
-                        <Input
-                          type="password"
-                          name="password"
-                          theme="highlight"
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          value={values.password}
-                        />
-                      </RMBTooltip>
-                    </FormFiled>
-                  </div>
-                  <div className="create-password__field">
-                    <FormFiled
-                      label="Confirm Password"
-                      error={errors.password2}
-                      showError={touched.password2 && values.password}
+        <AccountForm
+          steps={this.steps}
+          title="Set your password"
+          subtitle="Enter a password to gain access to your account."
+        >
+          <Formik validate={this.validate} onSubmit={this.onSubmit}>
+            {({
+              errors,
+              touched,
+              values,
+              isValid,
+              handleChange,
+              handleBlur
+            }) => (
+              <Form>
+                <div className={AccountForm.fieldClass}>
+                  <FormFiled label="Password">
+                    <RMBTooltip
+                      theme="highlight"
+                      trigger={["focus"]}
+                      overlay={this.renderTooltip(
+                        values.password,
+                        errors.password
+                      )}
                     >
                       <Input
                         type="password"
-                        name="password2"
+                        name="password"
                         theme="highlight"
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values.password2}
+                        value={values.password}
                       />
-                    </FormFiled>
-                  </div>
-                  <Button
-                    className="create-password__button"
-                    color={this.getButtonColor(isValid)}
-                    fullWidth={true}
-                    uppercase={true}
-                    type="submit"
+                    </RMBTooltip>
+                  </FormFiled>
+                </div>
+                <div className={AccountForm.fieldClass}>
+                  <FormFiled
+                    label="Confirm Password"
+                    error={errors.password2}
+                    showError={touched.password2 && values.password}
                   >
-                    Set Password
-                  </Button>
-                </Form>
-              )}
-            </Formik>
-          </div>
-        </div>
+                    <Input
+                      type="password"
+                      name="password2"
+                      theme="highlight"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      value={values.password2}
+                    />
+                  </FormFiled>
+                </div>
+                <Button
+                  className="create-password__button"
+                  color={this.getButtonColor(isValid)}
+                  fullWidth={true}
+                  uppercase={true}
+                  type="submit"
+                >
+                  Set Password
+                </Button>
+              </Form>
+            )}
+          </Formik>
+        </AccountForm>
       </PageAuth>
     );
   }
