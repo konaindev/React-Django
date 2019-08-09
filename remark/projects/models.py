@@ -700,6 +700,7 @@ class Period(ModelPeriod, models.Model):
     project = models.ForeignKey(
         Project, on_delete=models.CASCADE, related_name="periods"
     )
+    lease_stage = models.ForeignKey("LeaseStage", on_delete=models.CASCADE)
 
     start = models.DateField(
         db_index=True, help_text="The first date, inclusive, that this period tracks."
@@ -708,6 +709,8 @@ class Period(ModelPeriod, models.Model):
     end = models.DateField(
         db_index=True, help_text="The final date, exclusive, that this period tracks."
     )
+
+    includes_remarkably_effect = models.BooleanField(default=True, blank=True)
 
     # ------------------------------------------------------
     # Logical activity (lease)
@@ -1273,6 +1276,13 @@ class CampaignModel(models.Model):
     class Meta:
         ordering = ["model_index"]
 
+
+class LeaseStage(models.Model):
+    full_name = models.CharField(max_length=30, blank=False, null=False)
+    short_name = models.CharField(max_length=30, blank=False, null=False)
+
+    def __str__(self):
+        return self.full_name
 
 class BuildingManager(models.Manager):
     pass

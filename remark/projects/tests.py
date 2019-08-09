@@ -8,7 +8,7 @@ from remark.crm.models import Business
 from remark.geo.models import Address
 from remark.users.models import Account
 from remark.lib.metrics import BareMultiPeriod
-from .models import Fund, Period, Project, Property, TargetPeriod
+from .models import Fund, LeaseStage, Period, Project, Property, TargetPeriod
 from .reports.periods import ComputedPeriod
 from .reports.performance import PerformanceReport
 
@@ -57,8 +57,10 @@ class DefaultComputedPeriodTestCase(TestCase):
             fund=fund,
             property=property,
         )
+        stage = LeaseStage.objects.get(short_name="performance")
         raw_period = Period.objects.create(
             project=project,
+            lease_stage=stage,
             start=datetime.date(year=2018, month=12, day=19),
             end=datetime.date(year=2018, month=12, day=26),
             leased_units_start=0,
@@ -240,8 +242,10 @@ class DefaultReportTestCase(TestCase):
             fund=fund,
             property=property,
         )
+        stage = LeaseStage.objects.get(short_name="performance")
         raw_period = Period.objects.create(
             project=project,
+            lease_stage=stage,
             start=datetime.date(year=2018, month=12, day=19),
             end=datetime.date(year=2018, month=12, day=26),
             leased_units_start=0,
@@ -325,8 +329,10 @@ class LincolnTowerPeriodTestCase(TestCase):
             fund=fund,
             property=property,
         )
+        stage = LeaseStage.objects.get(short_name="performance")
         self.raw_period = Period.objects.create(
             project=self.project,
+            lease_stage=stage,
             start=datetime.date(year=2018, month=12, day=19),
             end=datetime.date(year=2018, month=12, day=26),
             leased_units_start=104,

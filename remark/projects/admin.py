@@ -21,6 +21,7 @@ from .models import (
     TargetPeriod,
     TAMExportLog,
     Tag,
+    LeaseStage,
 )
 from .views import TAMExportView
 
@@ -464,6 +465,11 @@ class PropertyAdmin(admin.ModelAdmin):
     inlines = (
         BuildingInline,
     )
+
+
+@admin.register(LeaseStage, site=admin_site)
+class LeaseStageAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(Building, site=admin_site)
