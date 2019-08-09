@@ -1,18 +1,37 @@
-import MarketSizeGrowthReach from "./index";
+import MarketSizeMap from "./index";
 import renderer from "react-test-renderer";
-import { props_radius, props_zips } from "./market_size_map.stories";
+import{
+  circleOnly,
+  zipcodesOnly,
+  circleWithZipcodes,
+  polygonWithHole
+} from "./props";
 
-describe("MarketSizeGrowthReach", () => {
-  it("renders circle with radius correctly", () => {
+describe("MarketSizeMap", () => {
+  it("renders circle-only mode correctly", () => {
     const tree = renderer
-      .create(<MarketSizeGrowthReach {...props_radius} />)
+      .create(<MarketSizeMap {...circleOnly} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
 
-  it("renders zip code polygons correctly", () => {
+  it("renders zipcodes-only mode correctly", () => {
     const tree = renderer
-      .create(<MarketSizeGrowthReach {...props_zips} />)
+      .create(<MarketSizeMap {...zipcodesOnly} />)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it("renders circle-with-zipcodes mode correctly", () => {
+    const tree = renderer
+      .create(<MarketSizeMap {...circleWithZipcodes} />)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
+  it("renders polygon-with-hole map correctly", () => {
+    const tree = renderer
+      .create(<MarketSizeMap {...polygonWithHole} />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });

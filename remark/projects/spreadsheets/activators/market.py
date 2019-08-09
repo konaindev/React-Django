@@ -12,8 +12,7 @@ class MarketActivator(JSONFieldActivator):
         # from a TAM spreadsheet.
         #
         # *IF* "zip_codes" is in self.data["estimated_population"],
-        # *THEN* you will want to set a value for the "outline" key
-        # of each one:
+        # *THEN* geometry outlines will be populated in "MarketReport" class
         #
         population_zip_codes = self.data["estimated_population"].get("zip_codes", [])
         processed = []
@@ -25,12 +24,6 @@ class MarketActivator(JSONFieldActivator):
                 continue
             else:
                 processed.append(zip_code)
-
-            polygon_data = Zipcode.objects.look_up_polygon(zip_code)
-
-            if polygon_data is not None:
-                population_zip_code["properties"] = polygon_data["properties"]
-                population_zip_code["outline"] = polygon_data["geometry"]
 
     def activate(self):
         self.activate_outlines()
