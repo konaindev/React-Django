@@ -7,7 +7,7 @@ from adminsortable2.admin import SortableInlineAdminMixin
 
 from remark.admin import admin_site, custom_titled_filter
 from remark.analytics.admin import InlineAnalyticsProviderAdmin
-from .forms import ProjectForm, SpreadsheetForm, CampaignModelUploadForm
+from .forms import ProjectForm, PropertyForm, SpreadsheetForm, CampaignModelUploadForm
 from .models import (
     Building,
     Fund,
@@ -462,6 +462,7 @@ class FundAdmin(admin.ModelAdmin):
 
 @admin.register(Property, site=admin_site)
 class PropertyAdmin(admin.ModelAdmin):
+    form = PropertyForm
     inlines = (
         BuildingInline,
     )
@@ -475,3 +476,4 @@ class LeaseStageAdmin(admin.ModelAdmin):
 @admin.register(Building, site=admin_site)
 class BuildingAdmin(admin.ModelAdmin):
     list_display = ["building_identifier", "property"]
+

@@ -81,6 +81,8 @@ INSTALLED_APPS = [
     "django_js_reverse",
     "adminsortable2",
     "stdimage",
+    "easy_thumbnails",
+    "image_cropping",
     "remark.charts",
     "remark.sales",
     "remark.email_app",
@@ -95,6 +97,13 @@ INSTALLED_APPS = [
     "remark",
     "django_extensions",
 ]
+
+from easy_thumbnails.conf import Settings as thumbnail_settings
+THUMBNAIL_PROCESSORS = (
+    'image_cropping.thumbnail_processors.crop_corners',
+) + thumbnail_settings.THUMBNAIL_PROCESSORS
+
+IMAGE_CROPPING_SIZE_WARNING = True
 
 MIDDLEWARE = [
     "remark.lib.middleware.exception.log_500",

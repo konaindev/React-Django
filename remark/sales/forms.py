@@ -1,4 +1,5 @@
 from django import forms
+from image_cropping import ImageCropWidget
 
 from remark.geo.models import Address
 
@@ -31,3 +32,12 @@ class AddressForm(forms.ModelForm):
             "zip_code",
             "country",
         ]
+
+
+class ProductInquiryAdminForm(forms.ModelForm):
+    class Meta:
+        model = ProductInquiry
+        fields = "__all__"
+        widgets = {
+            "building_photo": ImageCropWidget,
+        }
