@@ -50,15 +50,10 @@ def populate_zipcode_outlines(project):
 
     # if circle mode, populate zipcodes in the circle area
     elif center_coords is not None:
-        try:
-            circle_state = project.property.get_geo_state()
-        except Exception:
-            circle_state = None
-
         polygons = Zipcode.objects.look_up_polygons_in_circle(
             center_coords,
             radius_in_miles,
-            circle_state
+            project.property.get_geo_state()
         )
         report["estimated_population"]["zip_codes"] = polygons
 
