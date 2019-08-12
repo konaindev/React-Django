@@ -47,7 +47,7 @@ export default class ReportPageChrome extends Component {
             <ProjectLink
               name={project.name}
               url={backUrl}
-              imageUrl={project.building_image}
+              imageUrl={project.building_image[3]}
               health={project.health}
             />
           </div>
