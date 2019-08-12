@@ -64,4 +64,7 @@ class TutorialView extends React.PureComponent {
   }
 }
 
-export default connect(x => x.tutorialView)(TutorialView);
+const mapState = state => {
+  return { ...state.tutorial.tutorialView };
+};
+export default connect(mapState)(TutorialView);
