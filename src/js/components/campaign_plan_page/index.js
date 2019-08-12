@@ -29,10 +29,4 @@ export class CampaignPlanPage extends Component {
   }
 }
 
-const mapState = state => {
-  return {
-    ...state.general,
-    ...state.network
-  };
-};
-export default connect(mapState)(CampaignPlanPage);
+export default connect(x => x)(CampaignPlanPage);
