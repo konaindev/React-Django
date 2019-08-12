@@ -305,3 +305,7 @@ sentry_sdk.init(dsn=os.getenv("SENTRY_URL", ""), integrations=[DjangoIntegration
 
 with configure_scope() as scope:
     scope.set_tag("env", os.getenv("ENV", "local"))
+
+# Use the same storage engine for thumbnails as for files
+THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
+THUMBNAIL_PRESERVE_EXTENSIONS = True
