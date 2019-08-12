@@ -1,7 +1,6 @@
 import { combineReducers } from "redux";
 import { general } from "../actions";
 
-
 const initState = {
   tutorialView: {}
 };
