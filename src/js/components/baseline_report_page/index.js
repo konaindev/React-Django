@@ -44,4 +44,10 @@ export class BaselineReportPage extends Component {
   }
 }
 
-export default connect(x => x)(BaselineReportPage);
+const mapState = state => {
+  return {
+    ...state.general,
+    ...state.network
+  };
+};
+export default connect(mapState)(BaselineReportPage);

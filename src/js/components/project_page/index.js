@@ -67,4 +67,10 @@ export class ProjectPage extends Component {
   }
 }
 
-export default connect(x => x)(ProjectPage);
+const mapState = state => {
+  return {
+    ...state.general,
+    ...state.network
+  };
+};
+export default connect(mapState)(ProjectPage);
