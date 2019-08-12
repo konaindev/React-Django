@@ -162,13 +162,17 @@ exports[`PerformanceReportPage renders correctly 1`] = `
                 className="project_link__arrow"
               />
               <div
-                className="project_link__image"
-                style={
-                  Object {
-                    "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
+                className="project_link__image-default"
+              >
+                <div
+                  className="project_link__image"
+                  style={
+                    Object {
+                      "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
+                    }
                   }
-                }
-              />
+                />
+              </div>
               <div
                 className="project_link__name"
               >

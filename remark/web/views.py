@@ -25,8 +25,8 @@ class DashboardView(LoginRequiredMixin, ReactView):
         "name": "name",
         "propertyMgr": "property_manager__name",
         "assetOwner": "asset_manager__name",
-        "state": "address__state",
-        "city": "address__city",
+        "state": "property__geo_address__state",
+        "city": "property__geo_address__city",
         "fund": "fund__name",
     }
 
@@ -47,17 +47,18 @@ class DashboardView(LoginRequiredMixin, ReactView):
             cached_response = cache.get(cache_key)
             return cached_response
 
+        project_params = {}
         if user.is_superuser:
-            project_params = {}
+            project_query = Project.objects.all()
         else:
-            project_params = {"account_id": user.account_id}
+            project_query = Project.objects.get_all_for_user(user)
 
         locations = []
         asset_managers = []
         property_managers = []
         funds = []
         no_projects = True
-        for project in Project.objects.filter(**project_params):
+        for project in project_query:
             no_projects = False
             address = project.property.geo_address
             state = address.state
@@ -118,7 +119,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
             order = f"-{order}"
 
         projects = []
-        for project in Project.objects.filter(**project_params).order_by(order):
+        for project in project_query.filter(**project_params).order_by(order):
             address = project.property.geo_address
             projects.append(
                 {
@@ -147,6 +148,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
                 "property_managers": property_managers,
                 "asset_managers": asset_managers,
                 "funds": funds,
+                "static_url": settings.STATIC_URL,
             }
         )
 
@@ -160,6 +162,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
                 property_managers=property_managers,
                 asset_managers=asset_managers,
                 funds=funds,
+                static_url=settings.STATIC_URL,
             )
 
         cache.set(cache_key, response, timeout=DEFAULT_TIMEOUT)

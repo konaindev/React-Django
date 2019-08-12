@@ -81,6 +81,8 @@ INSTALLED_APPS = [
     "django_js_reverse",
     "adminsortable2",
     "stdimage",
+    "easy_thumbnails",
+    "image_cropping",
     "remark.charts",
     "remark.sales",
     "remark.email_app",
@@ -95,6 +97,13 @@ INSTALLED_APPS = [
     "remark",
     "django_extensions",
 ]
+
+from easy_thumbnails.conf import Settings as thumbnail_settings
+THUMBNAIL_PROCESSORS = (
+    'image_cropping.thumbnail_processors.crop_corners',
+) + thumbnail_settings.THUMBNAIL_PROCESSORS
+
+IMAGE_CROPPING_SIZE_WARNING = True
 
 MIDDLEWARE = [
     "remark.lib.middleware.exception.log_500",
@@ -296,3 +305,7 @@ sentry_sdk.init(dsn=os.getenv("SENTRY_URL", ""), integrations=[DjangoIntegration
 
 with configure_scope() as scope:
     scope.set_tag("env", os.getenv("ENV", "local"))
+
+# Use the same storage engine for thumbnails as for files
+THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
+THUMBNAIL_PRESERVE_EXTENSIONS = True

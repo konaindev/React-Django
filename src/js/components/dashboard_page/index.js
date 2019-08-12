@@ -22,7 +22,7 @@ import "./dashboard_page.scss";
 import { connect } from "react-redux";
 import router from "../../router";
 import TutorialView from "../tutorial_view";
-
+import { networking } from "../../state/actions";
 const navLinks = {
   links: [
     {
@@ -74,8 +74,7 @@ export class DashboardPage extends React.PureComponent {
     this.state = {
       viewType: props.viewType,
       selectedProperties: props.selectedProperties,
-      isShowAddPropertyForm: false,
-      isShowLoader: false
+      isShowAddPropertyForm: false
     };
     this._router = router("/dashboard")(x =>
       props.dispatch({
@@ -95,7 +94,7 @@ export class DashboardPage extends React.PureComponent {
   };
 
   changeLoader = () => {
-    this.setState({ isShowLoader: false });
+    // this.setState({ isShowLoader: false });
   };
 
   get propertiesListComponent() {
@@ -106,14 +105,7 @@ export class DashboardPage extends React.PureComponent {
     }
   }
 
-  onChangeFilter = filters => {
-    this.setState({ isShowLoader: true });
-    setTimeout(() => {
-      this.props.onChangeFilter(filters);
-      // the current method of managing loader state needs to change -jc 10-jul-19
-      this.changeLoader();
-    }, 150);
-  };
+  onChangeFilter = filters => this.props.onChangeFilter(filters);
 
   toggleView = viewType => this.setState({ viewType });
 
@@ -155,6 +147,7 @@ export class DashboardPage extends React.PureComponent {
     const { user } = this.props;
     const PropertiesListComponent = this.propertiesListComponent;
     const navLinks = this.props.navLinks;
+    const { isFetching } = this.props;
     // user.email.indexOf("remarkably.io") > -1 ? this.props.navLinks : null;
     return (
       <PageChrome navLinks={navLinks} headerItems={this.getHeaderItems()}>
@@ -175,7 +168,7 @@ export class DashboardPage extends React.PureComponent {
                   color="primary"
                   uppercase={true}
                   onClick={this.onShowAddPropertyForm}
-                  disabled={this.state.isShowLoader}
+                  disabled={isFetching}
                 >
                   ADD PROPERTY
                 </Button>
@@ -191,7 +184,7 @@ export class DashboardPage extends React.PureComponent {
                   locations={this.props.locations}
                   filters={this.props.filters}
                   onChange={this.onChangeFilter}
-                  isDisabled={this.state.isShowLoader}
+                  isDisabled={isFetching}
                   dispatch={this.props.dispatch}
                 />
               </div>
@@ -204,7 +197,7 @@ export class DashboardPage extends React.PureComponent {
               </div>
             </div>
             <div className="dashboard-content__properties">
-              <Loader isShow={this.state.isShowLoader} />
+              <Loader isShow={isFetching} />
               <PropertiesListComponent
                 properties={this.props.properties}
                 selectedProperties={this.state.selectedProperties}
@@ -266,7 +259,8 @@ export class UrlQueryLayer extends React.PureComponent {
     super(props);
     this.filters = {};
     const urlParams = new URLSearchParams(
-      props.search_url || window.location.search
+      // props.search_url || window.location.search
+      window.location.search
     );
     this.filters = {
       q: urlParams.get("q"),
@@ -278,6 +272,7 @@ export class UrlQueryLayer extends React.PureComponent {
       s: urlParams.get("s"),
       d: urlParams.get("d")
     };
+    this.state = { ...this.filters };
   }
 
   onChangeFilter = filters => {
@@ -295,12 +290,9 @@ export class UrlQueryLayer extends React.PureComponent {
         }
       }
     });
-
+    this.setState(filters);
     window.history.replaceState({}, "", `/dashboard?${urlParams.toString()}`);
-    this.props.dispatch({
-      type: "API_DASHBOARD",
-      searchString: `${urlParams.toString()}`
-    });
+    this.props.dispatch(networking.fetchDashboard(`${urlParams.toString()}`));
   };
 
   render() {
@@ -319,11 +311,17 @@ export class UrlQueryLayer extends React.PureComponent {
     return (
       <DashboardPage
         {...this.props}
-        filters={this.filters}
+        filters={this.state}
         onChangeFilter={this.onChangeFilter}
       />
     );
   }
 }
 
-export default connect(x => x)(UrlQueryLayer);
+const mapState = state => {
+  return {
+    ...state.general,
+    ...state.network
+  };
+};
+export default connect(mapState)(UrlQueryLayer);

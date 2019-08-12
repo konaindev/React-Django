@@ -14,7 +14,7 @@ export const convertToKebabCase = (string = "") => {
   return string.replace(/\s+/g, "-").toLowerCase();
 };
 
-export const convertDistanceToMeter = (distance, unit) => {
+export const convertToMeter = (distance, unit) => {
   if (unit === "mi") {
     return distance * 1609.34;
   }

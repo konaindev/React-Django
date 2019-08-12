@@ -12,6 +12,7 @@ from django.utils.crypto import get_random_string
 from jsonfield import JSONField
 from stdimage.models import StdImageField
 
+from remark.lib.fields import ImageRatioFieldExt
 from remark.lib.stats import health_check
 from remark.lib.tokens import public_id
 from remark.lib.metrics import (
@@ -23,7 +24,6 @@ from remark.lib.metrics import (
 from remark.projects.spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
 from remark.projects.reports.performance import PerformanceReport
 from remark.projects.constants import PROPERTY_TYPE, BUILDING_CLASS
-
 
 
 def pro_public_id():
@@ -46,6 +46,10 @@ def campaign_model_public_id():
 
 def spreadsheet_public_id():
     return public_id("spreadsheet2")
+
+
+def building_public_id():
+    return public_id("building")
 
 
 def public_property_id():
@@ -555,6 +559,7 @@ class Property(models.Model):
         help_text="""Image of property logo<br/>Resized variants (180x180, 76x76) will also be created on Amazon S3.""",
         variations={"regular": (180, 180), "thumbnail": (76, 76)},
     )
+    building_logo_cropping = ImageRatioFieldExt("building_logo", "180x180")
 
     building_image = StdImageField(
         blank=True,
@@ -568,12 +573,17 @@ class Property(models.Model):
             "thumbnail": (76, 76, True),
         },
     )
+    building_image_cropping = ImageRatioFieldExt("building_image", "400x400")
+    building_image_landscape_cropping = ImageRatioFieldExt("building_image", "309x220")
 
     property_type = models.IntegerField(choices=PROPERTY_TYPE, null=True, blank=False)
 
     building_class = models.IntegerField(
         choices=BUILDING_CLASS, null=False, blank=False, default=1
     )
+
+    def get_geo_state(self):
+        return self.geo_address.state
 
     def __str__(self):
         return f"{self.name} | property"
@@ -696,6 +706,7 @@ class Period(ModelPeriod, models.Model):
     project = models.ForeignKey(
         Project, on_delete=models.CASCADE, related_name="periods"
     )
+    lease_stage = models.ForeignKey("LeaseStage", on_delete=models.CASCADE)
 
     start = models.DateField(
         db_index=True, help_text="The first date, inclusive, that this period tracks."
@@ -704,6 +715,8 @@ class Period(ModelPeriod, models.Model):
     end = models.DateField(
         db_index=True, help_text="The final date, exclusive, that this period tracks."
     )
+
+    includes_remarkably_effect = models.BooleanField(default=True, blank=True)
 
     # ------------------------------------------------------
     # Logical activity (lease)
@@ -1268,3 +1281,44 @@ class CampaignModel(models.Model):
 
     class Meta:
         ordering = ["model_index"]
+
+
+class LeaseStage(models.Model):
+    full_name = models.CharField(max_length=30, blank=False, null=False)
+    short_name = models.CharField(max_length=30, blank=False, null=False)
+
+    def __str__(self):
+        return self.full_name
+
+class BuildingManager(models.Manager):
+    pass
+
+
+class Building(models.Model):
+    public_id = models.CharField(
+        primary_key=True,
+        default=building_public_id,
+        help_text="",
+        max_length=50,
+        editable=False,
+    )
+
+    property = models.ForeignKey(
+        "projects.Property", on_delete=models.CASCADE, blank=False, help_text="Property"
+    )
+
+    building_identifier = models.CharField(
+        max_length=255, blank=False, help_text="Building identifier"
+    )
+
+    number_of_floors = models.IntegerField(
+        default=1, blank=False, help_text="Number of floors in the building"
+    )
+
+    has_elevator = models.BooleanField(default=False, verbose_name="Does the building have a elevator?")
+
+    number_of_units = models.IntegerField(
+        default=1, blank=False, help_text="Number of Units"
+    )
+
+    objects = BuildingManager()

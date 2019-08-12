@@ -65,7 +65,7 @@ class ZipcodeManagerTestCase(TestCase):
         jsonable = Zipcode.objects.look_up_polygon("97201")
         self.assertTrue(jsonable is not None)
         self.assertEqual(type(jsonable), dict)
-        self.assertEqual(type(jsonable["geometry"]), dict)
+        self.assertEqual(type(jsonable["outline"]), dict)
         self.assertEqual(type(jsonable["properties"]), dict)
 
         center = jsonable["properties"]["center"]

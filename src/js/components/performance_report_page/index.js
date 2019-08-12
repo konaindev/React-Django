@@ -48,4 +48,10 @@ export class PerformanceReportPage extends Component {
   }
 }
 
-export default connect(x => x)(PerformanceReportPage);
+const mapState = state => {
+  return {
+    ...state.general,
+    ...state.network
+  };
+};
+export default connect(mapState)(PerformanceReportPage);

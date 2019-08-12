@@ -1,11 +1,12 @@
 import { combineReducers } from "redux";
 import { general } from "../actions";
 
+
 const initState = {
   tutorialView: {}
 };
 
-export default (state = initState, action) => {
+const dashboard = (state = initState, action) => {
   let newState = {};
   switch (action.type) {
     case "GENERAL_SET_STATE": {
@@ -22,6 +23,21 @@ export default (state = initState, action) => {
   return newState;
 };
 
-// TODO: flatten the reducer for now, since it will take
-//       some time to untangle the FE arch -jc
-// export default combineReducers({ general });
+const network = (state = { isFetching: false }, action) => {
+  let newState = {};
+  switch (action.type) {
+    case "NETWORK_START_FETCH": {
+      newState = { ...state, isFetching: true };
+      break;
+    }
+    case "NETWORK_STOP_FETCH": {
+      newState = { ...state, isFetching: false };
+      break;
+    }
+    default:
+      newState = { ...state };
+  }
+  return newState;
+};
+
+export default combineReducers({ general: dashboard, network });
