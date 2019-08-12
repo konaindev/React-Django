@@ -582,6 +582,9 @@ class Property(models.Model):
         choices=BUILDING_CLASS, null=False, blank=False, default=1
     )
 
+    def get_geo_state(self):
+        return self.geo_address.state
+
     def __str__(self):
         return f"{self.name} | property"
 
