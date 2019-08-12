@@ -1,4 +1,6 @@
-import { general, networking } from "../actions";
+import { general, tutorial, networking } from "../actions";
+import { get, post } from "../../utils/api";
+
 // Here we create a middleware that intercepts
 // actions representing a request for data from
 // the api
@@ -26,6 +28,27 @@ export const fetchDashboard = store => next => action => {
         console.log("ERROR", e);
         next(networking.stopFetching());
       });
+  } else {
+    next(action);
+  }
+};
+
+export const fetchTutorial = store => next => action => {
+  if (action.type === "API_TUTORIAL") {
+    const url = `${process.env.BASE_URL}/tutorial`;
+    if (action.data) {
+      post(url, action.data)
+        .then(response => {
+          next(tutorial.set(response.data));
+        })
+        .catch(e => console.log("-----> ERROR", e));
+    } else {
+      get(url)
+        .then(response => {
+          next(tutorial.set(response.data));
+        })
+        .catch(e => console.log("-----> ERROR", e));
+    }
   } else {
     next(action);
   }

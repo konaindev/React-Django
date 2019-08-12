@@ -17,3 +17,11 @@ export function post(url, data, headers = {}, csrfProtect = true) {
   }
   return axios(config);
 }
+
+export function get(url) {
+  const config = {
+    method: "get",
+    url
+  };
+  return axios(config);
+}

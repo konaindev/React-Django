@@ -10,7 +10,8 @@ exports[`TutorialView render default 1`] = `
       "overlay": "modal-overlay",
     }
   }
-  closeOnOverlayClick={true}
+  closeOnEsc={false}
+  closeOnOverlayClick={false}
   focusTrapped={false}
   onClose={[Function]}
   open={true}
@@ -84,7 +85,8 @@ exports[`TutorialView render hidden 1`] = `
       "overlay": "modal-overlay",
     }
   }
-  closeOnOverlayClick={true}
+  closeOnEsc={false}
+  closeOnOverlayClick={false}
   focusTrapped={false}
   onClose={[Function]}
   open={false}
