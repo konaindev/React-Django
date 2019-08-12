@@ -3,8 +3,10 @@ from datetime import datetime
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
+from django.urls import reverse
 from image_cropping import ImageCropWidget
 
+from remark.settings import BASE_URL
 from remark.lib.validators import (
     validate_linebreak_separated_numbers_list,
     validate_linebreak_separated_strings_list,
@@ -113,6 +115,14 @@ class SpreadsheetForm(forms.ModelForm):
             if not importer.is_valid():
                 raise ValidationError(
                     f"Could not validate spreadsheet: {importer.errors}"
+                )
+
+            # check if spreadsheet contains overlapping Period
+            period = importer.find_overlapping_period(cleaned_data["project"])
+            if period is not None:
+                period_path = reverse("admin:projects_period_change", args=[period.pk])
+                raise ValidationError(
+                    f"Found overlapping period, please delete the existing one here. {BASE_URL}{period_path}"
                 )
 
             # Success! We read the spreadsheet just fine.
