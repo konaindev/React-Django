@@ -1299,7 +1299,7 @@ class Building(models.Model):
         primary_key=True,
         default=building_public_id,
         help_text="",
-        max_length=24,
+        max_length=50,
         editable=False,
     )
 
