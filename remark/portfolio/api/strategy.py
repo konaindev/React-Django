@@ -1,9 +1,11 @@
 from decimal import Decimal
+import datetime
 
 from remark.projects.models import Period, TargetPeriod
 from remark.lib.time_series.common import KPI
 from remark.lib.time_series.query import select
 from remark.lib.time_series.granularity import merge
+from remark.lib.cache import remark_cache, TIMEOUT_1_WEEK
 
 
 def weighted_average_by_unit_count(items, prop):
@@ -29,6 +31,25 @@ def weighted_average_by_unit_count(items, prop):
     for item in items:
         result += item[prop] * (item[unit_property] / total_units)
     return result
+
+
+def date_to_datetime(d):
+    return datetime.datetime.fromordinal(d.toordinal())
+
+
+def calc_occupied_units(item, prop, when):
+    moveins = item[KPI.move_ins]
+    moveouts = item[KPI.move_outs]
+    occupied_units = item[KPI.occupied_units]
+    when = date_to_datetime(when).timestamp()
+    start = date_to_datetime(item["start"]).timestamp()
+    end = date_to_datetime(item["end"]).timestamp()
+    total_time = end - start
+    left_ratio = (when - start) / total_time
+    delta_leases = moveins - moveouts
+    left = occupied_units - round(delta_leases * left_ratio)
+    right = occupied_units
+    return left, right
 
 
 PROPERTY_TARGET_MERGE_DOC = {
@@ -61,7 +82,7 @@ PROPERTY_TARGET_SPLIT_DOC = {
     'delta_leases': "linear",
     'move_ins': "linear",
     'move_outs': "linear",
-    'occupied_units': "linear",
+    'occupied_units': calc_occupied_units,
     'acq_investment': "linear",
     'ret_investment': "linear",
     'usvs': "linear",
@@ -82,7 +103,7 @@ PROPERTY_MERGE_DOCUMENT = {
     "move_ins": "sum",
     "occupied_units_end": "last",
     "occupied_units_start": "first",
-    "occupiable_units_start": "first",
+    "occupiable_units_start": "last", # This is non-intuitive but true
 
     # Cancellations & Denials
     "lease_cds": "sum",
@@ -353,9 +374,11 @@ def get_merged_timeseries(cls, merge_doc, split_doc, project, start, end):
 
     if len(stripped_periods) == 0:
         return None
-    return merge(merge_doc, split_doc, stripped_periods, start, end)
+    result = merge(merge_doc, split_doc, stripped_periods, start, end)
+    return result
 
 
+@remark_cache("remark.portfolio.api.strategy.get_base_kpis_for_project", TIMEOUT_1_WEEK)
 def get_base_kpis_for_project(project, start, end, skip_select=False):
     # Added for ease of testing
     if not skip_select:
@@ -363,6 +386,7 @@ def get_base_kpis_for_project(project, start, end, skip_select=False):
     return merge(PROPERTY_MERGE_DOCUMENT, PROPERTY_SPLIT_DOCUMENT, project, start, end)
 
 
+@remark_cache("remark.portfolio.api.strategy.get_targets_for_project", TIMEOUT_1_WEEK)
 def get_targets_for_project(project, start, end, skip_select=False):
     if not skip_select:
         return get_merged_timeseries(TargetPeriod, PROPERTY_TARGET_MERGE_DOC, PROPERTY_TARGET_SPLIT_DOC, project, start, end)
