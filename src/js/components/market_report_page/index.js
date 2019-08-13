@@ -29,4 +29,10 @@ export class MarketReportPage extends Component {
   }
 }
 
-export default connect(x => x)(MarketReportPage);
+const mapState = state => {
+  return {
+    ...state.general,
+    ...state.network
+  };
+};
+export default connect(mapState)(MarketReportPage);

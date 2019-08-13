@@ -53,7 +53,7 @@ def populate_zipcode_outlines(project):
         polygons = Zipcode.objects.look_up_polygons_in_circle(
             center_coords,
             radius_in_miles,
-            project.address.state
+            project.property.get_geo_state()
         )
         report["estimated_population"]["zip_codes"] = polygons
 

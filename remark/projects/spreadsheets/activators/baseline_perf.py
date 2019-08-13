@@ -31,10 +31,10 @@ class BaselinePerfActivator(ActivatorBase):
         defaults = {k: v for k, v in data_period.items() if k not in ["start", "end", "lease_stage_str"]}
         # Get lease stage
         lease_stage = self.lease_stages_map[data_period["lease_stage_str"]]
+        defaults["lease_stage"] = lease_stage
         # ignore returned (period, created) tuple
         self.project.periods.update_or_create(
             project=self.project,
-            lease_stage=lease_stage,
             start=data_period["start"],
             end=data_period["end"],
             defaults=defaults,
