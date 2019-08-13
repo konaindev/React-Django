@@ -5,6 +5,7 @@ from remark.projects.models import Period, TargetPeriod
 from remark.lib.time_series.common import KPI
 from remark.lib.time_series.query import select
 from remark.lib.time_series.granularity import merge
+from remark.lib.cache import remark_cache, TIMEOUT_1_WEEK
 
 
 def weighted_average_by_unit_count(items, prop):
@@ -377,6 +378,7 @@ def get_merged_timeseries(cls, merge_doc, split_doc, project, start, end):
     return result
 
 
+@remark_cache("remark.portfolio.api.strategy.get_base_kpis_for_project", TIMEOUT_1_WEEK)
 def get_base_kpis_for_project(project, start, end, skip_select=False):
     # Added for ease of testing
     if not skip_select:
@@ -384,6 +386,7 @@ def get_base_kpis_for_project(project, start, end, skip_select=False):
     return merge(PROPERTY_MERGE_DOCUMENT, PROPERTY_SPLIT_DOCUMENT, project, start, end)
 
 
+@remark_cache("remark.portfolio.api.strategy.get_targets_for_project", TIMEOUT_1_WEEK)
 def get_targets_for_project(project, start, end, skip_select=False):
     if not skip_select:
         return get_merged_timeseries(TargetPeriod, PROPERTY_TARGET_MERGE_DOC, PROPERTY_TARGET_SPLIT_DOC, project, start, end)
