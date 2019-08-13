@@ -17,7 +17,7 @@ def noop(apps, schema_editor):
 
 class Migration(migrations.Migration):
 
-    dependencies = [("users", "0006_auto_20190620_1904")]
+    dependencies = [("users", "0007_add_is_show_tutorial")]
 
     operations = [
         migrations.AddField(
