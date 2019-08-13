@@ -27,3 +27,10 @@ export const networking = {
     searchString
   })
 };
+
+export const createPassword = {
+  redirect: url => ({
+    type: "CREATE_PASSWORD_REDIRECT",
+    url
+  })
+};

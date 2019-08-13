@@ -1,19 +1,15 @@
 import React from "react";
+import { createStore } from "redux";
+import { Provider } from "react-redux";
 import { storiesOf } from "@storybook/react";
 
 import CreatePasswordView from "./index";
-import { rules } from "./props";
+import { props } from "./props";
 
-const validate = values => {
-  return new Promise(res => {
-    let errors = {};
-    if (!values || values.length < 8) {
-      errors.length = true;
-    }
-    setTimeout(() => res(errors));
-  });
-};
+const _ = x => createStore(() => ({ createPassword: x }));
 
 storiesOf("CreatePasswordView", module).add("default", () => (
-  <CreatePasswordView rules={rules} validate={validate} />
+  <Provider store={_(props)}>
+    <CreatePasswordView />
+  </Provider>
 ));

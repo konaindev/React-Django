@@ -1,6 +1,7 @@
 import cn from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
+import { connect } from "react-redux";
 import { Formik, Form } from "formik";
 
 import Button from "../button";
@@ -10,10 +11,11 @@ import PageAuth from "../page_auth";
 import RMBTooltip from "../rmb_tooltip";
 import WizardProgress from "../wizard_progress";
 import { Error, Ok } from "../../icons";
+import router from "../../router";
 
 import "./create_password_view.scss";
 
-export default class CreatePasswordView extends React.PureComponent {
+class CreatePasswordView extends React.PureComponent {
   static propTypes = {
     rules: PropTypes.arrayOf(
       PropTypes.shape({
@@ -21,14 +23,22 @@ export default class CreatePasswordView extends React.PureComponent {
         key: PropTypes.string.isRequired
       })
     ).isRequired,
-    validate: PropTypes.func,
-    onSubmit: PropTypes.func
+    validate: PropTypes.func
   };
 
   static defaultProps = {
-    validate: () => {},
-    onSubmit: () => {}
+    validate: () => {}
   };
+
+  constructor(props) {
+    super(props);
+    this._router = router("/create-password/*")(hash =>
+      props.dispatch({
+        type: "API_CREATE_PASSWORD",
+        hash
+      })
+    );
+  }
 
   steps = [
     { name: "Set Password", isActive: true },
@@ -81,6 +91,16 @@ export default class CreatePasswordView extends React.PureComponent {
     return "disabled-light";
   };
 
+  onSubmit = (values, actions) => {
+    this.props.dispatch({
+      type: "API_CREATE_PASSWORD",
+      hash: this.props.hash,
+      data: {
+        password: values.password
+      }
+    });
+  };
+
   render() {
     return (
       <PageAuth backLink="/">
@@ -94,7 +114,7 @@ export default class CreatePasswordView extends React.PureComponent {
             <div className="create-password__subtitle">
               Enter a password to gain access to your account.
             </div>
-            <Formik validate={this.validate} onSubmit={this.props.onSubmit}>
+            <Formik validate={this.validate} onSubmit={this.onSubmit}>
               {({
                 errors,
                 touched,
@@ -159,3 +179,9 @@ export default class CreatePasswordView extends React.PureComponent {
     );
   }
 }
+
+const mapState = state => ({
+  ...state.createPassword
+});
+
+export default connect(mapState)(CreatePasswordView);
