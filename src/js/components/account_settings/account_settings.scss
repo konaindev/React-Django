@@ -16,6 +16,8 @@ $input-label-line-height: $line-height-tight;
 $input-border: 1px solid $gray-4;
 $input-line-height: 20px;
 $input-text-color: $highlight-gray-3;
+$password-text-color: $gray-6;
+$buttons-border: 1px solid $gray-4;
 
 .account-settings {
     width: $page-width;
@@ -75,7 +77,6 @@ $input-text-color: $highlight-gray-3;
 
 .account-settings__tab {
     flex-grow: 1;
-    padding: 30px;
 }
 
 .account-settings__tab-title {
@@ -92,10 +93,27 @@ $input-text-color: $highlight-gray-3;
 }
 
 .account-settings__tab-content {
-    margin-top: 30px;
+    padding: 30px;
 }
 
-.account-settings__input {
+.account-settings__field-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+.account-settings__field {
+    margin-top: 30px;
+
+    &--short {
+        width: 200px;
+        margin-top: 0;
+    }
+}
+
+.account-settings__input,
+.account-settings__input[type=password] {
+    width: 100%;
     padding: 12px;
     margin-top: 8px;
     color: $input-text-color;
@@ -104,4 +122,25 @@ $input-text-color: $highlight-gray-3;
     border-radius: 4px;
     background: transparent;
     line-height: $input-line-height;
+
+    &:focus {
+        outline: none;
+        border-color: $input-focus-border-color;
+    }
+}
+
+.account-settings__input[type=password] {
+    color: $password-text-color;
+}
+
+.account-settings__buttons-field {
+    padding: 30px;
+    border-top: $buttons-border;
+}
+
+.account-settings__button {
+    padding: 12px 32px;
+    font-size: $text-xs;
+    letter-spacing: 1px;
+    text-transform: uppercase;
 }
