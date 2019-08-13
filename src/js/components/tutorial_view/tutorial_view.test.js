@@ -5,7 +5,7 @@ import { createStore } from "redux";
 import TutorialView from "./index";
 
 jest.mock("react-responsive-modal", () => "Modal");
-const _ = x => createStore(() => ({ tutorialView: x }));
+const _ = x => createStore(() => ({ tutorial: { tutorialView: x } }));
 
 describe("TutorialView", () => {
   it("render default", () => {
