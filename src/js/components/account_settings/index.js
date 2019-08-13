@@ -4,6 +4,7 @@ import React from "react";
 import { Email, Lock, Profile } from "../../icons";
 import PageChrome from "../page_chrome";
 
+import Button from "../button";
 import "./account_settings.scss";
 
 export default class AccountSettings extends React.PureComponent {
@@ -63,14 +64,46 @@ export default class AccountSettings extends React.PureComponent {
           <div className="account-settings__panel">
             <div className="account-settings__menu">{this.getItems()}</div>
             <div className="account-settings__tab">
-              <div className="account-settings__tab-title">
-                Account Security
-              </div>
               <div className="account-settings__tab-content">
+                <div className="account-settings__tab-title">
+                  Account Security
+                </div>
                 <div className="account-settings__field">
                   <div className="account-settings__label">Email Address</div>
                   <input className="account-settings__input" />
                 </div>
+                <div className="account-settings__field-group">
+                  <div className="account-settings__field account-settings__field--short">
+                    <div className="account-settings__label">
+                      Current Password
+                    </div>
+                    <input
+                      className="account-settings__input"
+                      type="password"
+                    />
+                  </div>
+                  <div className="account-settings__field account-settings__field--short">
+                    <div className="account-settings__label">New Password</div>
+                    <input
+                      className="account-settings__input"
+                      type="password"
+                    />
+                  </div>
+                  <div className="account-settings__field account-settings__field--short">
+                    <div className="account-settings__label">
+                      Confirm Password
+                    </div>
+                    <input
+                      className="account-settings__input"
+                      type="password"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="account-settings__buttons-field">
+                <Button className="account-settings__button" color="primary">
+                  Save
+                </Button>
               </div>
             </div>
           </div>
