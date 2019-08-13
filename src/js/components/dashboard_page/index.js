@@ -144,14 +144,14 @@ export class DashboardPage extends React.PureComponent {
     const className = cn("dashboard-content", {
       "dashboard-content--selection-mode": this.state.selectedProperties.length
     });
-    const { user, static_url } = this.props;
+    const { user } = this.props;
     const PropertiesListComponent = this.propertiesListComponent;
     const navLinks = this.props.navLinks;
     const { isFetching } = this.props;
     // user.email.indexOf("remarkably.io") > -1 ? this.props.navLinks : null;
     return (
       <PageChrome navLinks={navLinks} headerItems={this.getHeaderItems()}>
-        <TutorialView staticUrl={static_url} />
+        <TutorialView />
         <div className={className}>
           <Container>
             <div className="dashboard-content__title">

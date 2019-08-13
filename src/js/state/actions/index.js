@@ -8,6 +8,13 @@ export const general = {
   }
 };
 
+export const tutorial = {
+  set: newState => ({
+    type: "TUTORIAL_SET_STATE",
+    newState
+  })
+};
+
 export const networking = {
   startFetching: () => ({
     type: "NETWORK_START_FETCH"
