@@ -46,7 +46,6 @@ class CreatePasswordTestCase(TestCase):
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["page_props"]["hash"], hash)
-        self.assertEqual(response.context["page_props"]["post_url"], url)
         self.assertEqual(response.context["page_props"]["validate_url"], validate_url)
         self.assertEqual(response.context["page_props"]["rules"], v_rules)
 

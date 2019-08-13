@@ -34,13 +34,13 @@ class CreatePasswordView extends React.PureComponent {
 
   static defaultProps = {
     back_link: "/",
-    validate_url: "",
+    validate_url: "users/validate_password",
     validate: validatePassword
   };
 
   constructor(props) {
     super(props);
-    this._router = router("/create-password/*")(hash =>
+    this._router = router("/users")(hash =>
       props.dispatch({
         type: "API_CREATE_PASSWORD",
         hash

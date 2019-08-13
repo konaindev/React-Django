@@ -138,7 +138,6 @@ class CreatePasswordView(ReactView):
             hash=hash,
             rules=v_rules,
             validate_url=reverse("validate_password"),
-            post_url=reverse("create_password", kwargs={"hash": hash}),
         )
 
     def post(self, request, hash):
