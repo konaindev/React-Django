@@ -40,12 +40,13 @@ def calc_occupied_units(item, prop, when):
     moveins = item[KPI.move_ins]
     moveouts = item[KPI.move_outs]
     occupied_units = item[KPI.occupied_units]
-    when = date_to_datetime(when).total_seconds()
-    start = date_to_datetime(item["start"]).total_seconds()
-    end = date_to_datetime(item["end"]).total_seconds()
+    when = date_to_datetime(when).timestamp()
+    start = date_to_datetime(item["start"]).timestamp()
+    end = date_to_datetime(item["end"]).timestamp()
     total_time = end - start
-    left_ratio = when - start / total_time
-    left = occupied_units - round(moveins * left_ratio) + round(moveouts * left_ratio)
+    left_ratio = (when - start) / total_time
+    delta_leases = moveins - moveouts
+    left = occupied_units - round(delta_leases * left_ratio)
     right = occupied_units
     return left, right
 
