@@ -405,10 +405,10 @@ class LincolnTowerPeriodTestCase(TestCase):
         self.assertEqual(self.period.romi, 4)
 
     def test_cost_per_usv(self):
-        self.assertEqual(self.period.cost_per_usv, decimal.Decimal("16.40"))
+        self.assertEqual(self.period.cost_per_usv, decimal.Decimal("13.71"))
 
     def test_cost_per_inq(self):
-        self.assertEqual(self.period.cost_per_inq, decimal.Decimal("1313.73"))
+        self.assertEqual(self.period.cost_per_inq, decimal.Decimal("1098.04"))
 
     def test_cost_per_tou(self):
         self.assertEqual(self.period.cost_per_tou, decimal.Decimal("1810.81"))
