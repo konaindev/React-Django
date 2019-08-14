@@ -398,6 +398,12 @@ class LincolnTowerPeriodTestCase(TestCase):
     def test_investment(self):
         self.assertEqual(self.period.investment, decimal.Decimal("67000"))
 
+    def test_acq_investment(self):
+        self.assertEqual(self.period.acq_investment, decimal.Decimal("67000"))
+
+    def test_acq_investment_without_leasing(self):
+        self.assertEqual(self.period.acq_investment_without_leasing, decimal.Decimal("56000"))
+
     def test_estimated_revenue_gain(self):
         self.assertEqual(self.period.estimated_revenue_gain, decimal.Decimal("262008"))
 
