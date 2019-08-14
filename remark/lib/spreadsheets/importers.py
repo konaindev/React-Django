@@ -241,7 +241,7 @@ class ExcelImporter:
             self.errors.append(e)
         return len(self.errors) == 0
 
-    def clean(self):
+    def clean(self, ctx):
         """
         Validate the spreadsheet.
 

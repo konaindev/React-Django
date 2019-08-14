@@ -103,7 +103,7 @@ class BaselinePerfImporter(ProjectExcelImporter):
         self.check_value(self.BASELINE_PERIODS, expected=lambda value: value > 0)
 
     def clean(self, ctx):
-        super().clean()
+        super().clean(ctx)
         self.check_meta()
         start_row = self.schema(self.START_ROW)
         end_row = self.schema(self.END_ROW)

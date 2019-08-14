@@ -195,7 +195,7 @@ class ModelingImporter(ProjectExcelImporter):
         return raw_targets
 
     def clean(self, ctx):
-        super().clean()
+        super().clean(ctx)
 
         self.cleaned_data = self.clean_output_data()
         self.cleaned_data["targets"] = self.clean_model_targets()

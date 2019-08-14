@@ -222,7 +222,7 @@ class MarketImporter(ProjectExcelImporter):
         return self.schema(self.AVERAGE_SCHEMA)
 
     def clean(self, ctx):
-        super().clean()
+        super().clean(ctx)
 
         self.cleaned_data["location"] = self.get_location()
         self.cleaned_data["estimated_population"] = self.get_estimated_population()
