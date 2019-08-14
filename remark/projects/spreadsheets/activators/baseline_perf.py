@@ -13,6 +13,7 @@ class BaselinePerfActivator(ActivatorBase):
         self.lease_stages_map = {s.full_name: s for s in LeaseStage.objects.all()}
 
     def activate(self):
+        self.remove_existing_periods()
         self.activate_periods()
         self.activate_project()
 
@@ -39,3 +40,8 @@ class BaselinePerfActivator(ActivatorBase):
             end=data_period["end"],
             defaults=defaults,
         )
+
+    def remove_existing_periods(self):
+        self.project.get_periods().delete()
+
+

@@ -233,10 +233,10 @@ class ExcelImporter:
 
         return [[_schema(location) for location in inner] for inner in locations]
 
-    def is_valid(self):
+    def is_valid(self, ctx):
         """Validate the spreadsheet; return False if not possible."""
         try:
-            self.clean()
+            self.clean(ctx)
         except ExcelError as e:
             self.errors.append(e)
         return len(self.errors) == 0

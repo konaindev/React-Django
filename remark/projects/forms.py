@@ -112,18 +112,19 @@ class SpreadsheetForm(forms.ModelForm):
                 raise ValidationError(
                     f"No spreadsheet importer available for {cleaned_data['kind']}"
                 )
-            if not importer.is_valid():
+            if not importer.is_valid(cleaned_data):
                 raise ValidationError(
                     f"Could not validate spreadsheet: {importer.errors}"
                 )
 
             # check if spreadsheet contains overlapping Period
-            period = importer.find_overlapping_period(cleaned_data["project"])
-            if period is not None:
-                period_path = reverse("admin:projects_period_change", args=[period.pk])
-                raise ValidationError(
-                    f"Found overlapping period, please delete the existing one here. {BASE_URL}{period_path}"
-                )
+            if hasattr(importer, "find_overlapping_period"):
+                period = importer.find_overlapping_period(cleaned_data["project"])
+                if period is not None:
+                    period_path = reverse("admin:projects_period_change", args=[period.pk])
+                    raise ValidationError(
+                        f"Found overlapping period, please delete the existing one here. {BASE_URL}{period_path}"
+                    )
 
             # Success! We read the spreadsheet just fine.
             cleaned_data["imported_data"] = importer.cleaned_data
