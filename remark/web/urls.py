@@ -15,14 +15,15 @@ Including another URLconf
 """
 
 from django.urls import path
-from django.contrib.auth import views as auth_views
+
 from .views import DashboardView, TutorialView
+from remark.users.views import CustomLoginView
 
 
 urlpatterns = [
     path("dashboard", DashboardView.as_view(), name="dashboard"),
     path("tutorial", TutorialView.as_view(), name="tutorial"),
     path(
-        "", auth_views.LoginView.as_view(template_name="users/login.html"), name="login"
+        "", CustomLoginView.as_view(template_name="users/login.html"), name="login"
     ),
 ]

@@ -13,7 +13,12 @@
 {% endblock %}
 
 {% block form_extra %}
+{# This block should be wrapped inside <form> element because of "remember" field #}
+<p>
+  <label><input name="remember" type="checkbox" value="checked">Remember me?</label>
+</p>
 {# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Never set a password? Or forgot it?</a></p>
+<p>
+  <a href="{% url 'password_reset' %}">Never set a password? Or forgot it?</a>
+</p>
 {% endblock %}
-
