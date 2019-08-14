@@ -244,41 +244,11 @@
     }
 
     &__extras {
-        p {
-            margin-top: 1rem;
-        }
-    }
+        overflow: auto;
+        margin-top: $s6;
 
-    &__remember {
-        margin-top: 0.5rem;
-
-        label {
-            cursor: pointer;
-            font-size: $text-sm;
-            text-transform: unset;
-            padding-left: $s6;
-            position: relative;
-            margin-bottom: 0;
-
-            input {
-                visibility: hidden;
-                position: absolute;
-                width: auto;
-                top: 0;
-                left: 0;
-            }
-
-            input + span {
-                position: absolute;
-                top: 2px;
-                left: 0;
-            }
-
-            input:checked + span {
-                background: $blue-3 url(../images/icon-tick.svg) no-repeat center;
-                background-size: 10px;
-                border-color: $blue-4;
-            }
+        .rmb-checkbox {
+            margin-bottom: $s6;
         }
     }
 

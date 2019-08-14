@@ -3,6 +3,7 @@
 $checkbox-size: 17px;
 $checkbox-background: $blue-3;
 $checkbox-border-color: $gray-6;
+$checkbox-text-color: $highlight-gray-3;
 $checkbox-selected-border-color: $blue-4;
 $checkbox-tick-size: 10px;
 $checkbox-border-radius: 2px;
@@ -16,6 +17,40 @@ $checkbox-border-radius: 2px;
     border-radius: $checkbox-border-radius;
 
     &--selected {
+        background: $checkbox-background url(../../../images/icon-tick.svg) no-repeat center;
+        background-size: $checkbox-tick-size;
+        border-color: $checkbox-selected-border-color;
+    }
+}
+
+.rmb-checkbox {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    cursor: pointer;
+    color: $checkbox-text-color;
+    font-size: $text-sm;
+    text-transform: unset;
+    padding-left: $s6;
+    position: relative;
+    margin-bottom: $s2;
+
+    input {
+        visibility: hidden;
+        // display: none;
+    }
+
+    input + span {
+        position: absolute;
+        top: auto;
+        left: 0;
+        width: $checkbox-size;
+        height: $checkbox-size;
+        border: 1px solid $checkbox-border-color;
+        border-radius: $checkbox-border-radius;
+    }
+
+    input:checked + span {
         background: $checkbox-background url(../../../images/icon-tick.svg) no-repeat center;
         background-size: $checkbox-tick-size;
         border-color: $checkbox-selected-border-color;

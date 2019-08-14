@@ -14,11 +14,11 @@
 
 {% block form_extra %}
 {# This block should be wrapped inside <form> element because of "remember" field #}
-<p class="auth-form__field auth-form__remember">
-  <label>
-    Remember Me?
+<p>
+  <label class="rmb-checkbox">
+    <span>Remember Me?</span>
     <input name="remember" type="checkbox" value="checked">
-    <span class="checkbox"></span>
+    <span></span>
   </label>
 </p>
 {# Assumes you setup the password_reset view in your URLconf #}
