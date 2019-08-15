@@ -244,8 +244,12 @@
     }
 
     &__extras {
+        overflow: auto;
         margin-top: $s6;
-        text-align: center;
+
+        .rmb-checkbox {
+            margin-bottom: $s6;
+        }
     }
 
     a {
