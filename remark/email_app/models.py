@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from .reports.constants import KPI_NAMES, KPI_CATEGORIES
 
+
 class PerformanceEmailManager(models.Manager):
     pass
 
@@ -33,29 +34,35 @@ class PerformanceEmail(models.Model):
     )
 
     campaign_health = models.TextField(
-        choices = (("0", "Requires Review"), ("1", "At Risk"), ("2", "On Track")),
+        choices=(("0", "Requires Review"), ("1", "At Risk"), ("2", "On Track")),
         null=False,
-        default="2"
+        default="2",
     )
-    lease_rate_text = models.TextField()
+    lease_rate_text = models.TextField(
+        null=True, blank=True, help_text="Optional text for Lease Rate section"
+    )
     top_performing_kpi = models.TextField(choices=KPI_NAMES.items())
-    top_performing_insight = models.TextField()
+    top_performing_insight = models.TextField(
+        null=True, blank=True, help_text="Optional text for Highest Performer"
+    )
     low_performing_kpi = models.TextField(choices=KPI_NAMES.items())
-    low_performing_insight = models.TextField()
-    risk_kpi_insight_text = models.TextField(null=True, blank=True, help_text="Optional text below At Risk KPI's")
-    low_kpi_insight_text = models.TextField(null=True, blank=True, help_text="Optional text below Off Track KPI's")
+    low_performing_insight = models.TextField(
+        null=True, blank=True, help_text="Optional text for Lowest Performer"
+    )
+    risk_kpi_insight_text = models.TextField(
+        null=True, blank=True, help_text="Optional text for At Risk KPI's"
+    )
+    low_kpi_insight_text = models.TextField(
+        null=True, blank=True, help_text="Optional text for Off Track KPI's"
+    )
 
     # SendGrid email campaign ID
-    email_campaign_id = models.CharField(
-        null=True,
-        default=None,
-        max_length=255
-    )
+    email_campaign_id = models.CharField(null=True, default=None, max_length=255)
 
     def filter_performance_kpis(self, category):
         print("FILTERING KPIS")
         result = []
-        all_kpis = PerformanceEmailKPI.objects.filter(performance_email = self)
+        all_kpis = PerformanceEmailKPI.objects.filter(performance_email=self)
         print(all_kpis)
         for kpi in all_kpis:
             print(kpi)
@@ -66,16 +73,15 @@ class PerformanceEmail(models.Model):
 
     @property
     def top_kpis(self):
-        return self.filter_performance_kpis('top')
+        return self.filter_performance_kpis("top")
 
     @property
     def low_kpis(self):
-        return self.filter_performance_kpis('low')
+        return self.filter_performance_kpis("low")
 
     @property
     def risk_kpis(self):
-        return self.filter_performance_kpis('risk')
-
+        return self.filter_performance_kpis("risk")
 
 
 class PerformanceEmailKPI(models.Model):
