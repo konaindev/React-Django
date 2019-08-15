@@ -15,7 +15,11 @@ export default class AccountSecurity extends React.Component {
           <div className="account-settings__field-group">
             <div className="account-settings__field account-settings__field--short">
               <div className="account-settings__label">Current Password</div>
-              <input className="account-settings__input" type="password" />
+              <input
+                className="account-settings__input account-settings__input--current-password"
+                type="password"
+                value="*******************"
+              />
             </div>
             <div className="account-settings__field account-settings__field--short">
               <div className="account-settings__label">New Password</div>
