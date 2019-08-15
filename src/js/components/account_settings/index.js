@@ -1,4 +1,5 @@
 import cn from "classnames";
+import PropTypes from "prop-types";
 import React from "react";
 
 import { Email, Lock, Profile } from "../../icons";
@@ -26,7 +27,13 @@ const navLinks = {
 };
 
 export default class AccountSettings extends React.PureComponent {
-  state = { tab: "profile" };
+  static propTypes = {
+    initialTab: PropTypes.string
+  };
+
+  static defaultProps = {
+    initialTab: "profile"
+  };
 
   tabsData = {
     profile: {
@@ -47,6 +54,13 @@ export default class AccountSettings extends React.PureComponent {
   };
 
   tabs = ["profile", "lock", "email"];
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      tab: props.initialTab
+    };
+  }
 
   selectTab = tab => this.setState({ tab });
 
