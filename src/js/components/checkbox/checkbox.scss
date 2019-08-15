@@ -36,8 +36,9 @@ $checkbox-border-radius: 2px;
     margin-bottom: $s2;
 
     input {
-        visibility: hidden;
-        // display: none;
+        opacity: 0;
+        position: absolute;
+        left: 0;
     }
 
     input + span {
