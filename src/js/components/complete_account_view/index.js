@@ -2,6 +2,7 @@ import cn from "classnames";
 import { Formik, Form } from "formik";
 import PropTypes from "prop-types";
 import React from "react";
+import { connect } from "react-redux";
 
 import AccountForm from "../account_form";
 import FormFiled from "../form_field";
@@ -12,11 +13,12 @@ import Button from "../button";
 import Checkbox from "../checkbox";
 import MultiSelect from "../multi_select";
 import GoogleAddress from "../google_address";
+import router from "../../router";
 
 import { propertySchema } from "./validators";
 import "./complete_account_view.scss";
 
-export default class CompleteAccountView extends React.PureComponent {
+class CompleteAccountView extends React.PureComponent {
   static propTypes = {
     office_types: Select.optionsType.isRequired,
     company_roles: MultiSelect.optionsType.isRequired,
@@ -26,6 +28,15 @@ export default class CompleteAccountView extends React.PureComponent {
   static defaultProps = {
     officeAddress: []
   };
+
+  constructor(props) {
+    super(props);
+    this._router = router("/complete-account")(x =>
+      props.dispatch({
+        type: "API_COMPLETE_ACCOUNT"
+      })
+    );
+  }
 
   selectStyles = {
     container: provided => ({ ...provided, width: "100%" }),
@@ -240,3 +251,11 @@ export default class CompleteAccountView extends React.PureComponent {
     );
   }
 }
+
+const mapState = state => {
+  return {
+    ...state.completeAccount
+  };
+};
+
+export default connect(mapState)(CompleteAccountView);
