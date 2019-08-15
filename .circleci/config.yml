@@ -74,6 +74,32 @@ jobs:
       - run: heroku run -x -a remarkably-staging python manage.py migrate
       - run: heroku run -x -a remarkably-staging python manage.py loaddata data/dumped/latest.json
 
+  deploy-production:
+    docker:
+      - image: circleci/python:3.6.4
+
+    working_directory: ~/repo
+
+    steps:
+      - run: curl https://cli-assets.heroku.com/install.sh | sh
+      - checkout
+      - run:
+          name: Maintenance Mode On
+          command: heroku maintenance:on --app remarkably
+      - run:
+          name: Backup Production Postgres
+          command: heroku pg:backups:capture --app remarkably
+      - run:
+          name: Deploy Master to Heroku Production
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/remarkably.git master --force
+      - run:
+          name: Migrate Database Schema
+          command: heroku run -x -a remarkably python manage.py migrate
+      - run:
+          name: Maintenance Mode Off
+          command: heroku maintenance:off --app remarkably
+
 workflows:
   version: 2.1
 
@@ -97,3 +123,18 @@ workflows:
           filters:
             branches:
               only: staging
+
+  build-production:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
+      - hold:
+          type: approval
+          requires:
+            - build
+      - deploy-production:
+          context: deploy-production
+          requires:
+            - hold
