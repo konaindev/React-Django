@@ -7,6 +7,7 @@ $subtitle-line-height: 28px;
 $account-menu-width: 280px;
 $menu-border: 1px solid $gray-4;
 $menu-item-background: $gray-2;
+$menu-item-background-hover: rgba(16, 20, 23, .1);
 $menu-item-width: 221px;
 $menu-item-color: $gray-6;
 $menu-active-item-color: $highlight-gray-3;
@@ -17,6 +18,7 @@ $input-border: 1px solid $gray-4;
 $input-line-height: 20px;
 $input-text-color: $highlight-gray-3;
 $password-text-color: $gray-6;
+$current-password-text-color: $gray-4;
 $buttons-border: 1px solid $gray-4;
 $button-line-height: 20px;
 
@@ -65,6 +67,9 @@ $button-line-height: 20px;
     background: transparent;
     cursor: pointer;
     line-height: $line-height-relaxed;
+    &:hover:not(&--active) {
+        background: $menu-item-background-hover;
+    }
 
     &--active {
         color: $menu-active-item-color;
@@ -127,12 +132,12 @@ $button-line-height: 20px;
 
     &:focus {
         outline: none;
-        border-color: $input-focus-border-color;
+        border-color: $input-highlight-focus-border;
     }
-}
 
-.account-settings__input[type=password] {
-    color: $password-text-color;
+    &--current-password {
+        color: $current-password-text-color;
+    }
 }
 
 .account-settings__buttons-field {
