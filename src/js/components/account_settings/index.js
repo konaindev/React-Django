@@ -4,46 +4,63 @@ import React from "react";
 import { Email, Lock, Profile } from "../../icons";
 import PageChrome from "../page_chrome";
 
-import Button from "../button";
+import AccountSecurity from "./account_security";
+import EmailReports from "./email_reports";
+import ProfileTab from "./profile";
 import "./account_settings.scss";
+
+const navLinks = {
+  links: [
+    {
+      id: "portfolio",
+      name: "Portfolio",
+      url: "/dashboard"
+    },
+    {
+      id: "portfolio-analysis",
+      name: "Portfolio Analysis",
+      url: "/portfolio/table"
+    }
+  ],
+  selected_link: ""
+};
 
 export default class AccountSettings extends React.PureComponent {
   state = { tab: "profile" };
 
-  menuItems = [
-    {
-      id: "profile",
+  tabsData = {
+    profile: {
       name: "Profile",
-      component: Profile
+      iconComponent: Profile,
+      component: ProfileTab
     },
-    {
-      id: "lock",
+    lock: {
       name: "Security",
-      component: Lock
+      iconComponent: Lock,
+      component: AccountSecurity
     },
-    {
-      id: "email",
+    email: {
       name: "Email Reports",
-      component: Email
+      iconComponent: Email,
+      component: EmailReports
     }
-  ];
+  };
+
+  tabs = ["profile", "lock", "email"];
 
   selectTab = tab => this.setState({ tab });
 
   getItems = () => {
     const { tab } = this.state;
-    return this.menuItems.map(item => {
-      const Component = item.component;
+    return this.tabs.map(id => {
+      const item = this.tabsData[id];
+      const Icon = item.iconComponent;
       const itemClass = cn("account-settings__menu-item", {
-        "account-settings__menu-item--active": item.id === tab
+        "account-settings__menu-item--active": id === tab
       });
       return (
-        <div
-          className={itemClass}
-          key={item.id}
-          onClick={() => this.selectTab(item.id)}
-        >
-          <Component />
+        <div className={itemClass} key={id} onClick={() => this.selectTab(id)}>
+          <Icon />
           <span className="account-settings__menu-item-text">{item.name}</span>
         </div>
       );
@@ -51,8 +68,9 @@ export default class AccountSettings extends React.PureComponent {
   };
 
   render() {
+    const Component = this.tabsData[this.state.tab].component;
     return (
-      <PageChrome>
+      <PageChrome navLinks={navLinks}>
         <div className="account-settings">
           <div className="account-settings__header">
             <div className="account-settings__title">Account Settings</div>
@@ -63,49 +81,7 @@ export default class AccountSettings extends React.PureComponent {
           </div>
           <div className="account-settings__panel">
             <div className="account-settings__menu">{this.getItems()}</div>
-            <div className="account-settings__tab">
-              <div className="account-settings__tab-content">
-                <div className="account-settings__tab-title">
-                  Account Security
-                </div>
-                <div className="account-settings__field">
-                  <div className="account-settings__label">Email Address</div>
-                  <input className="account-settings__input" />
-                </div>
-                <div className="account-settings__field-group">
-                  <div className="account-settings__field account-settings__field--short">
-                    <div className="account-settings__label">
-                      Current Password
-                    </div>
-                    <input
-                      className="account-settings__input"
-                      type="password"
-                    />
-                  </div>
-                  <div className="account-settings__field account-settings__field--short">
-                    <div className="account-settings__label">New Password</div>
-                    <input
-                      className="account-settings__input"
-                      type="password"
-                    />
-                  </div>
-                  <div className="account-settings__field account-settings__field--short">
-                    <div className="account-settings__label">
-                      Confirm Password
-                    </div>
-                    <input
-                      className="account-settings__input"
-                      type="password"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="account-settings__buttons-field">
-                <Button className="account-settings__button" color="primary">
-                  Save
-                </Button>
-              </div>
-            </div>
+            <Component />
           </div>
         </div>
       </PageChrome>

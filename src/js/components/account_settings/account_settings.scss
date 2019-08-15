@@ -18,6 +18,7 @@ $input-line-height: 20px;
 $input-text-color: $highlight-gray-3;
 $password-text-color: $gray-6;
 $buttons-border: 1px solid $gray-4;
+$button-line-height: 20px;
 
 .account-settings {
     width: $page-width;
@@ -87,6 +88,7 @@ $buttons-border: 1px solid $gray-4;
 
 .account-settings__label {
     font-size: $text-xs;
+    font-weight: $weight-medium;
     letter-spacing: 1px;
     text-transform: uppercase;
     line-height: $input-label-line-height;
@@ -141,6 +143,8 @@ $buttons-border: 1px solid $gray-4;
 .account-settings__button {
     padding: 12px 32px;
     font-size: $text-xs;
+    font-weight: $weight-semibold;
     letter-spacing: 1px;
     text-transform: uppercase;
+    line-height: $button-line-height;
 }
