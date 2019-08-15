@@ -108,7 +108,9 @@ workflows:
       - build:
           filters:
             branches:
-              ignore: staging
+              ignore:
+                  - staging
+                  - master
 
   build-deploy:
     jobs:
