@@ -1,5 +1,5 @@
 import { general, tutorial, networking, createPassword } from "../actions";
-import { get, post } from "../../utils/api";
+import { get as apiGet, post as apiPost } from "../../utils/api";
 
 // Here we create a middleware that intercepts
 // actions representing a request for data from
@@ -12,17 +12,8 @@ export const fetchDashboard = store => next => action => {
     if (!isFetching || isFetching === false) {
       store.dispatch(networking.startFetching());
     }
-    window
-      .fetch(`${process.env.BASE_URL}/dashboard?${action.searchString}`, {
-        responseType: "json",
-        credentials: "include",
-        mode: "same-origin",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-      .then(x => x.json())
-      .then(newState => next(general.set(newState)))
+    apiGet(`${process.env.BASE_URL}/dashboard?${action.searchString}`)
+      .then(response => next(general.set(response.data)))
       .then(setTimeout(() => next(networking.stopFetching()), 120))
       .catch(e => {
         console.log("ERROR", e);
@@ -37,13 +28,13 @@ export const fetchTutorial = store => next => action => {
   if (action.type === "API_TUTORIAL") {
     const url = `${process.env.BASE_URL}/tutorial`;
     if (action.data) {
-      post(url, action.data)
+      apiPost(url, action.data)
         .then(response => {
           next(tutorial.set(response.data));
         })
         .catch(e => console.log("-----> ERROR", e));
     } else {
-      get(url)
+      apiGet(url)
         .then(response => {
           next(tutorial.set(response.data));
         })

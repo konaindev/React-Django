@@ -18,10 +18,13 @@ export function post(url, data, headers = {}, csrfProtect = true) {
   return axios(config);
 }
 
-export function get(url) {
-  const config = {
+export function get(url, config = {}) {
+  const params = {
     method: "get",
-    url
+    url,
+    responseType: "json",
+    withCredentials: true,
+    ...config
   };
-  return axios(config);
+  return axios(params);
 }

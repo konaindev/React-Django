@@ -24,6 +24,7 @@ import ProjectPage from "./components/project_page";
 import ReleaseNotesPage from "./components/release_notes_page";
 import ReleaseNoteDetailsPage from "./components/release_note_details_page";
 import CampaignPlanPage from "./components/campaign_plan_page";
+import { get as apiGet } from "./utils/api";
 import store from "./state/store";
 import { general } from "./state/actions";
 import PortfolioAnalysisView from "./components/portfolio_analysis_view";
@@ -45,22 +46,12 @@ const tmpFetchDashboardData = pageClass => {
   const location = window.location;
   const queryString = location.search;
   let _newState = {};
-  window
-    .fetch(
-      `${process.env.BASE_URL}/dashboard${
-        queryString ? `?${queryString}` : ""
-      }`,
-      {
-        responseType: "json",
-        credentials: "include",
-        mode: "same-origin",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }
-    )
-    .then(x => x.json())
-    .then(newState => {
+
+  apiGet(
+    `${process.env.BASE_URL}/dashboard${queryString ? `?${queryString}` : ""}`
+  )
+    .then(response => {
+      const newState = response.data;
       store.dispatch(general.set(newState));
       _newState = newState;
     })
