@@ -112,7 +112,7 @@ workflows:
           filters:
             branches:
               only: staging
-  
+
   build-production:
     jobs:
       - build:
@@ -120,9 +120,9 @@ workflows:
             branches:
               only: master
       - hold:
-        type: approval
-        requires:
-          - build
+          type: approval
+          requires:
+            - build
       - deploy-production:
           context: deploy-production
           requires:
