@@ -49,6 +49,9 @@ $controls-spacing: 50px 30px 22px;
 .multi-select__label {
     font-size: $text-sm;
     line-height: $text-xl;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .multi-select__options {
@@ -75,4 +78,36 @@ $controls-spacing: 50px 30px 22px;
     font-size: $text-xs;
     font-weight: $weight-bold;
     letter-spacing: $letter-spacing-wider;
+}
+
+.multi-select.select--highlight {
+    .select__option {
+        &--is-selected {
+            color: $select-highlight-option-color;
+            background-color: $select-highlight-bg;
+        }
+
+        &--is-focused,
+        &:active {
+            background-color: $select-highlight-option-active-bg;
+        }
+    }
+
+    .multi-select__options {
+        padding: 0;
+    }
+
+    .multi-select__option {
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+
+    .multi-select--has-value.select__control {
+        color: $select-highlight-option-color;
+        background: $select-highlight-bg;
+    }
+
+    .multi-select__option-label {
+        margin-left: $s3;
+    }
 }
