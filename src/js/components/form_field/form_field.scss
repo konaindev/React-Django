@@ -1,4 +1,5 @@
 @import "css/base.scss";
+
 $form-field-width: 360px;
 $form-field-error-color: $orange-6;
 $form-field-ok-color: #47bf00;
@@ -105,5 +106,11 @@ $form-field-icon-spacing: 14px;
 
     &--ok {
         color: $form-field-ok-color;
+    }
+}
+
+.form-field--without-icon {
+    .form-field__icon {
+        visibility: hidden;
     }
 }

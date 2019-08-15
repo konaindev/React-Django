@@ -39,6 +39,29 @@ storiesOf("FormFiled", module)
       />
     </div>
   ))
+  .add("error without icon", () => (
+    <div style={style}>
+      <FormFiled
+        label="Confirm Password"
+        error="Passwords must match"
+        showError={true}
+        Input={Input}
+        type="password"
+        showIcon={false}
+      />
+    </div>
+  ))
+  .add("ok without icon", () => (
+    <div style={style}>
+      <FormFiled
+        label="Confirm Password"
+        showError={true}
+        Input={Input}
+        type="password"
+        showIcon={false}
+      />
+    </div>
+  ))
   .add("inline", () => (
     <div style={style}>
       <FormFiled label="Confirm Password" theme="inline">
