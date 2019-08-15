@@ -1,0 +1,47 @@
+@import "css/base.scss";
+
+$complete-account-field-height: 44px;
+$complete-account-field-spacing: 20px;
+$complete-account-field-min-width: 130px;
+$complete-account-terms-spacing: 50px;
+$complete-account-button-spacing: 20px;
+$complete-account-checkbox-spacing: 10px;
+$complete-account-link-color: $gray-3;
+
+.complete-account {
+    .form-field__input-container {
+        height: $complete-account-field-height;
+    }
+
+    .complete-account__field-set {
+        display: flex;
+    }
+}
+
+.complete-account__field {
+    min-width: $complete-account-field-min-width;
+}
+
+.complete-account__field + .complete-account__field {
+    margin-left: $complete-account-field-spacing;
+}
+
+.complete-account__terms {
+    display: flex;
+    align-items: center;
+    margin-top: $complete-account-terms-spacing;
+    font-size: $text-xs;
+}
+
+.complete-account__checkbox {
+    margin-right: $complete-account-checkbox-spacing;
+}
+
+.complete-account__link {
+    color: $complete-account-link-color
+}
+
+.complete-account__button {
+    margin-top: $complete-account-button-spacing;
+    letter-spacing: $letter-spacing-wider;
+}
