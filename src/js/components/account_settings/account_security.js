@@ -1,6 +1,7 @@
 import React from "react";
 
 import Button from "../button";
+import Tooltip from "../rmb_tooltip";
 
 export default class AccountSecurity extends React.Component {
   render() {
@@ -22,7 +23,9 @@ export default class AccountSecurity extends React.Component {
             </div>
             <div className="account-settings__field account-settings__field--short">
               <div className="account-settings__label">New Password</div>
-              <input className="account-settings__input" type="password" />
+              <Tooltip placement="bottom" visible={true}>
+                <input className="account-settings__input" type="password" />
+              </Tooltip>
             </div>
             <div className="account-settings__field account-settings__field--short">
               <div className="account-settings__label">Confirm Password</div>
