@@ -134,8 +134,10 @@ $button-line-height: 20px;
         outline: none;
         border-color: $input-highlight-focus-border;
     }
+}
 
-    &--current-password {
+.account-settings__input {
+    &#{&}--current-password {
         color: $current-password-text-color;
     }
 }
