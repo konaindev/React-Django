@@ -18,7 +18,6 @@ export default class AccountSecurity extends React.Component {
               <input
                 className="account-settings__input account-settings__input--current-password"
                 type="password"
-                value="*******************"
               />
             </div>
             <div className="account-settings__field account-settings__field--short">
