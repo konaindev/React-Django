@@ -1,4 +1,4 @@
-import { general, tutorial, networking } from "../actions";
+import { general, tutorial, networking, createPassword } from "../actions";
 import { get, post } from "../../utils/api";
 
 // Here we create a middleware that intercepts
@@ -48,6 +48,31 @@ export const fetchTutorial = store => next => action => {
           next(tutorial.set(response.data));
         })
         .catch(e => console.log("-----> ERROR", e));
+    }
+  } else {
+    next(action);
+  }
+};
+
+export const fetchCreatePassword = store => next => action => {
+  if (action.type === "API_CREATE_PASSWORD") {
+    const hash = action.hash;
+    if (action.data) {
+      const url = `${process.env.BASE_URL}/create-password/${hash}"`;
+      const data = { password };
+      post(url, action.data)
+        .then(response => {
+          if (response.status === 200) {
+            const redirectUrl = "/";
+            next(createPassword.redirect(redirectUrl));
+          } else {
+            throw response;
+          }
+        })
+        .catch(e => console.log("-----> ERROR", e));
+    } else {
+      const url = `${process.env.BASE_URL}/create-password/${hash}"`;
+      get(url);
     }
   } else {
     next(action);

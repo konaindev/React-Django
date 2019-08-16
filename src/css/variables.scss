@@ -15,6 +15,7 @@ $orange-2: #ff5300;
 $orange-3: #ff7632;
 $orange-4: #ff9869;
 $orange-5: #ffbb9b;
+$orange-6: #ff540d;
 
 $yellow-1: #F3F65C;
 
@@ -39,6 +40,7 @@ $green-3: #65ff00;
 $green-4: #85ff30;
 $green-5: #a4ff6b;
 $green-6: #c2ff9e;
+$green-7: #47bf00;
 
 // Blue palette
 $blue-1: #003582;
@@ -68,6 +70,7 @@ $gray-6: #798796;
 $gray-7: #c2c6cb;
 $gray-8: #e1e3e5;
 $gray-9: #404E5C;
+$gray-10: #F4F3F3;
 
 $white: #ffffff;
 
@@ -120,6 +123,10 @@ $input-background-color: $gray-3;
 $input-text-active-color: $cyan-3;
 $input-placeholder-color: $gray-6;
 
+$input-highlight-color: $gray-3;
+$input-highlight-border: $gray-6;
+$input-highlight-focus-border: $blue-7;
+
 $select-option-background-color: $gray-3;
 $select-option-background-color2: $gray-6;
 $select-option-focused-color: $gray-4;
@@ -171,6 +178,9 @@ $button-highlight-text-color: $gray-3;
 
 $button-secondary-bg-color: $gray-4;
 $button-secondary-text-color: $highlight-gray-3;
+
+$button-disabled-light-bg: $gray-8;
+$button-disabled-light-text-color: $gray-6;
 
 $button-disabled-text-color: $gray-5;
 
@@ -288,6 +298,7 @@ $s3: 0.75rem;
 $s4: 1rem;
 $s5: 1.25rem;
 $s6: 1.5rem;
+$s7: 1.75rem;
 $s8: 2rem;
 $s10: 2.5rem;
 $s12: 3rem;

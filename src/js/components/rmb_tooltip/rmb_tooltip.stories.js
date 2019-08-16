@@ -23,7 +23,7 @@ const rowStyle = {
 const containerStyle = {
   display: "table",
   backgroundColor: "#FFF",
-  padding: "2rem"
+  padding: "6rem"
 };
 
 const rcTooltipExample = (
@@ -97,8 +97,57 @@ const rcTooltipExample = (
   </div>
 );
 
-storiesOf("RMBTooltip", module).add("base", () => (
-  <div style={{ margin: "1rem auto" }}>
-    <Container>{rcTooltipExample}</Container>
-  </div>
-));
+storiesOf("RMBTooltip", module)
+  .add("base", () => (
+    <div style={{ margin: "1rem auto" }}>
+      <Container>{rcTooltipExample}</Container>
+    </div>
+  ))
+  .add("text", () => (
+    <div
+      style={{
+        padding: "2rem",
+        width: "50vw",
+        height: "50vh",
+        background: "#f6f6f6",
+        textAlign: "center"
+      }}
+    >
+      <Tooltip placement="bottom" text="Tooltip Text">
+        <span>Tooltip</span>
+      </Tooltip>
+    </div>
+  ))
+  .add("highlight", () => (
+    <div
+      style={{
+        padding: "2rem",
+        width: "50vw",
+        height: "50vh",
+        textAlign: "center"
+      }}
+    >
+      <Tooltip placement="bottom" theme="highlight" text="Tooltip Text">
+        <span>Tooltip</span>
+      </Tooltip>
+    </div>
+  ))
+  .add("text with link", () => (
+    <div
+      style={{
+        padding: "2rem",
+        width: "75vw",
+        height: "50vh",
+        background: "#f6f6f6",
+        textAlign: "center"
+      }}
+    >
+      <Tooltip
+        placement="bottom"
+        text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur."
+        link="/"
+      >
+        <span>Tooltip</span>
+      </Tooltip>
+    </div>
+  ));

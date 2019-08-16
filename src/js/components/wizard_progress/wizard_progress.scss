@@ -1,0 +1,39 @@
+@import "css/base.scss";
+
+.wizard-progress {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.wizard-progress__step {
+    font-family: $font-sans;
+    font-size: 12px;
+    line-height: 20px;
+    color: #798796;
+    display: inline-block;
+
+    &--active {
+        color: #006EFF;
+
+        .wizard-progress__step-number {
+            background-color: #006EFF;
+        }
+    }
+
+    & + .wizard-progress__step {
+        margin-left: 50px;
+    }
+}
+
+.wizard-progress__step-number {
+    display: inline-block;
+    margin-right: 6px;
+    width: 20px;
+    height: 20px;
+    color: #F5FAF7;
+    background-color: #798796;
+    border-radius: 50%;
+    text-align: center;
+}

@@ -1,0 +1,109 @@
+@import "css/base.scss";
+$form-field-width: 360px;
+$form-field-error-color: $orange-6;
+$form-field-ok-color: #47bf00;
+$form-field-color: $gray-3;
+$form-field-input-height: 44px;
+$form-field-icon-size: 16px;
+$form-field-icon-spacing: 14px;
+
+.form-field {
+    min-width: $form-field-width;
+    font-family: $font-sans;
+
+    .form-field__error {
+        visibility: hidden;
+    }
+
+    .form-field__icon--error {
+        visibility: hidden;
+    }
+
+    &--inline {
+        display: inline-block;
+        min-width: auto;
+    }
+}
+
+.form-field--error {
+    .form-field__error {
+        visibility: visible;
+    }
+
+    .form-field__icon--error {
+        visibility: visible;
+    }
+
+    .form-field__icon--ok {
+        visibility: hidden;
+    }
+
+    .form-field__label {
+        color: $form-field-error-color;
+    }
+
+    .form-field__input {
+        padding-right: $form-field-icon-size + $form-field-icon-spacing * 2;
+        border-color: $form-field-error-color;
+    }
+}
+
+.form-field--ok {
+    .form-field__input {
+        padding-right: 44px;
+    }
+
+    .form-field__icon--error {
+        visibility: hidden;
+    }
+
+    .form-field__icon--ok {
+        visibility: visible;
+    }
+}
+
+.form-field__label {
+    font-size: $text-xs;
+    line-height: $text-xl;
+    letter-spacing: $letter-spacing-wider;
+    color: $form-field-color;
+    text-transform: uppercase;
+}
+
+.form-field__error {
+    float: right;
+    max-width: 50%;
+    font-size: $text-xs;
+    line-height: $text-xl;
+    color: $form-field-error-color;
+}
+
+.form-field__input-container {
+    position: relative;
+    margin-top: 8px;
+}
+
+.form-field__input {
+    width: 100%;
+    height: $form-field-input-height;
+    font-size: $text-sm;
+    line-height: $text-xl;
+    color: $form-field-color;
+}
+
+.form-field__icon {
+    position: absolute;
+    top: $form-field-icon-spacing;
+    right: $form-field-icon-spacing;
+    width: $form-field-icon-size;
+    height: $form-field-icon-size;
+    visibility: hidden;
+
+    &--error {
+        color: $form-field-error-color;
+    }
+
+    &--ok {
+        color: $form-field-ok-color;
+    }
+}

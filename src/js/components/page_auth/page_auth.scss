@@ -1,0 +1,43 @@
+@import "css/base.scss";
+
+$copyright-color: $blue-6;
+
+.page-auth {
+    display: flex;
+    min-height: 100vh;
+    font-family: $font-sans;
+    background-image: url(../../../images/remarkably-password-bg.svg);
+    background-position: center;
+    background-size: cover;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-auth__header {
+    display: flex;
+    width: 100%;
+    padding: $s10 $s12 0;
+    align-items: center;
+}
+
+.page-auth__back-link {
+    font-size: $text-sm;
+    color: $nav-link-color;
+    text-align: center;
+    text-decoration: none;
+}
+
+.page-auth__logo {
+    margin-left: auto;
+    pointer-events: none;
+    cursor: default;
+}
+
+.page-auth__footer {
+    margin: $s7 $s10;
+    font-size: $text-sm;
+    color: $copyright-color;
+    text-align: left;
+    align-self: flex-start;
+}

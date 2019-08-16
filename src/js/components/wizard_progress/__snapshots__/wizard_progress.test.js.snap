@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WizardProgress renders correctly 1`] = `
+<div
+  className="wizard-progress"
+>
+  <div
+    className="wizard-progress__step wizard-progress__step--active"
+  >
+    <div
+      className="wizard-progress__step-number"
+    >
+      1
+    </div>
+    Set Password
+  </div>
+  <div
+    className="wizard-progress__step"
+  >
+    <div
+      className="wizard-progress__step-number"
+    >
+      2
+    </div>
+    Complete Account
+  </div>
+</div>
+`;
