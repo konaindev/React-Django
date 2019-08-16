@@ -38,3 +38,8 @@ def anonymous_required(function=None, redirect_url=None):
     if function:
         return actual_decorator(function)
     return actual_decorator
+
+"""
+TODO: @decorated_includes might be convenient
+@ref: https://stackoverflow.com/questions/2307926/is-it-possible-to-decorate-include-in-django-urls-with-login-required
+"""
