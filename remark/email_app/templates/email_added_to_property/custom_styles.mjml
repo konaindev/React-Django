@@ -1,0 +1,12 @@
+<mj-style>
+  .property-row-image {
+    width: 76px !important;
+  }
+  .property-row-description {
+    width: calc(100% - 220px) !important;
+    max-width: calc(100% - 220px) !important;
+  }
+  .property-row-link {
+    width: 144px !important;
+  }
+</mj-style> 

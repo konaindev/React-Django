@@ -51,6 +51,7 @@ sentry-sdk = "*"
 graphkit = "*"
 django-extensions = "*"
 factory-boy = "*"
+django-mjml = "*"
 django-image-cropping = "*"
 easy-thumbnails = "*"
 

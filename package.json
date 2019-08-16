@@ -87,7 +87,7 @@
     "formik": "^1.5.7",
     "google-map-react": "^1.1.2",
     "lodash": "^4.17.11",
-    "mjml": "^4.4.0-beta.2",
+    "mjml": "^4.4.1",
     "prop-types": "^15",
     "rc-tooltip": "^3.7.3",
     "react": "^16",

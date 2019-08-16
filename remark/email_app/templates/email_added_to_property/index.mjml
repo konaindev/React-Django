@@ -1,0 +1,22 @@
+{% load mjml %}
+
+{% mjml %}
+<mjml>
+  <mj-head>
+    <mj-title>{{ email_title }}</mj-title>
+    <mj-preview>{{ email_preview }}</mj-preview>
+
+    {% include "../components/global_styles.mjml" %}
+
+    {% include "./custom_styles.mjml" %}
+  </mj-head>
+
+  <mj-body>
+    {% include "./header_section.mjml" %}
+
+    {% include "./main_section.mjml" %}
+
+    {% include "../components/footer.mjml" %}
+  </mj-body>
+</mjml>
+{% endmjml %}

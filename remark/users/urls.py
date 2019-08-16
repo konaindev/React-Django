@@ -3,6 +3,9 @@ from django.contrib.auth import views as auth_views
 from django.urls import path
 from django.views.generic.base import RedirectView
 
+from remark.decorators import anonymous_required
+
+
 urlpatterns = [
     # XXX SECURITY Django's logout view uses GET to perform the logout action,
     # which is pretty lame -- it's trivially cross-site scriptable. Not a huge
@@ -30,38 +33,44 @@ urlpatterns = [
     # The "not logged in, I forgot my password" case
     path(
         "password-reset/",
-        auth_views.PasswordResetView.as_view(
-            template_name="users/password_reset_form.html",
-            subject_template_name="users/emails/password_reset_subject.txt",
-            email_template_name="users/emails/password_reset_email.txt",
-            html_email_template_name="users/emails/password_reset_email.html",
-            extra_email_context={
-                "BASE_URL": settings.BASE_URL,
-                "subject": "Set your Remarkably password",
-            },
+        anonymous_required(
+            auth_views.PasswordResetView.as_view(
+                template_name="users/password_reset_form.html",
+                subject_template_name="users/emails/password_reset_subject.txt",
+                email_template_name="users/emails/password_reset_email.txt",
+                html_email_template_name="users/emails/password_reset_email.html",
+                extra_email_context={
+                    "BASE_URL": settings.BASE_URL,
+                    "subject": "Set your Remarkably password",
+                },
+            )
         ),
         name="password_reset",
     ),
     # We've *sent* the reset link
     path(
         "password-reset/done/",
-        auth_views.PasswordResetDoneView.as_view(
-            template_name="users/password_reset_done.html"
+        anonymous_required(
+            auth_views.PasswordResetDoneView.as_view(
+                template_name="users/password_reset_done.html"
+            )
         ),
         name="password_reset_done",
     ),
     # The reset link itself
     path(
         "reset/<uidb64>/<token>/",
-        auth_views.PasswordResetConfirmView.as_view(
-            template_name="users/password_reset_confirm.html", post_reset_login=True
+        anonymous_required(
+            auth_views.PasswordResetConfirmView.as_view(
+                template_name="users/password_reset_confirm.html", post_reset_login=True
+            )
         ),
         name="password_reset_confirm",
     ),
     # Done with reset link!
     path(
         "reset/done/",
-        RedirectView.as_view(pattern_name="home"),
+        anonymous_required(RedirectView.as_view(pattern_name="home")),
         name="password_reset_complete",
     ),
 ]

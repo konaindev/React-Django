@@ -59,20 +59,29 @@ jobs:
     working_directory: ~/repo
 
     steps:
-      - checkout
-      - aws-cli/install
       - run:
-          name: Fetch .env from s3
-          command: |
-            aws s3 cp s3://remarkably-staging-58d2d32d-caeb-4629-a941-3b16bb028421/env ~/repo/.env
+          name: Install Heroku Tools
+          command: curl https://cli-assets.heroku.com/install.sh | sh
+      - checkout
+      - run:
+          name: Maintenance Mode On
+          command: heroku maintenance:on --app remarkably-staging
       - run:
           name: Deploy Staging to Heroku
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/remarkably-staging.git master --force
-      - run: curl https://cli-assets.heroku.com/install.sh | sh
-      - run: heroku pg:reset --app remarkably-staging DATABASE_URL --confirm remarkably-staging
-      - run: heroku run -x -a remarkably-staging python manage.py migrate
-      - run: heroku run -x -a remarkably-staging python manage.py loaddata data/dumped/latest.json
+      - run:
+          name: Reset Database
+          command: heroku pg:reset --app remarkably-staging DATABASE_URL --confirm remarkably-staging
+      - run:
+          name: Migrate Database Schema
+          command: heroku run -x -a remarkably-staging python manage.py migrate
+      - run:
+          name: Load fixture data
+          command: heroku run -x -a remarkably-staging python manage.py loaddata data/dumped/latest.json
+      - run:
+          name: Maintenance Mode Off
+          command: heroku maintenance:off --app remarkably-staging
 
   deploy-production:
     docker:
@@ -81,7 +90,9 @@ jobs:
     working_directory: ~/repo
 
     steps:
-      - run: curl https://cli-assets.heroku.com/install.sh | sh
+      - run:
+          name: Install Heroku Tools
+          command: curl https://cli-assets.heroku.com/install.sh | sh
       - checkout
       - run:
           name: Maintenance Mode On
