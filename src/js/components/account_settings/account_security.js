@@ -1,6 +1,7 @@
 import React from "react";
 
 import Button from "../button";
+import { PasswordOverlay } from "../password_tooltip";
 import Tooltip from "../rmb_tooltip";
 
 export default class AccountSecurity extends React.Component {
@@ -23,7 +24,12 @@ export default class AccountSecurity extends React.Component {
             </div>
             <div className="account-settings__field account-settings__field--short">
               <div className="account-settings__label">New Password</div>
-              <Tooltip placement="bottom" visible={true}>
+              <Tooltip
+                placement="bottom"
+                theme="dark"
+                overlay={<PasswordOverlay />}
+                trigger={["focus"]}
+              >
                 <input className="account-settings__input" type="password" />
               </Tooltip>
             </div>

@@ -142,11 +142,7 @@ storiesOf("RMBTooltip", module)
         textAlign: "center"
       }}
     >
-      <Tooltip
-        placement="bottom"
-        theme="dark"
-        text="Tooltip Text"
-      >
+      <Tooltip placement="bottom" theme="dark" text="Tooltip Text">
         <span>Tooltip</span>
       </Tooltip>
     </div>
