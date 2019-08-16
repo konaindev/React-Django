@@ -5,6 +5,9 @@ $tooltip-text-color: $content-text-primary-color;
 $tooltip-icon-color: $content-text-secondary-color;
 $tooltip-highlight-bg: $white;
 $tooltip-highlight-color: $content-text-secondary-color;
+$tooltip-dark-bg: $gray-1;
+$tooltip-dark-color: $content-text-secondary-color;
+$tooltip-border-radius: 4px;
 
 .rmb-tooltip {
     font-family: $font-sans;
@@ -24,7 +27,7 @@ $tooltip-highlight-color: $content-text-secondary-color;
         width: 30px;
         height: 12px;
         margin: 0;
-        background-image: url(../../../images/tooltip-arrow.svg);
+        background-image: url(images/arrow.svg);
         background-position: center;
         background-repeat: no-repeat;
         border: none;
@@ -98,10 +101,24 @@ $tooltip-highlight-color: $content-text-secondary-color;
         color: $tooltip-highlight-color;
         background-color: $tooltip-highlight-bg;
         box-shadow: 0 2px 6px rgba(0, 0, 0, .1), 0 20px 30px rgba(0, 0, 0, .2);
+        border-radius: $tooltip-border-radius;
     }
 
     .rc-tooltip-arrow {
-        background-image: url(../../../images/tooltip-arrow-highlight.svg);
+        background-image: url(images/arrow-highlight.svg);
+    }
+}
+
+.rmb-tooltip--dark {
+    .rc-tooltip-inner {
+        color: $tooltip-dark-color;
+        background-color: $tooltip-dark-bg;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, .1), 0 20px 30px rgba(0, 0, 0, .2);
+        border-radius: $tooltip-border-radius;
+    }
+
+    .rc-tooltip-arrow {
+        background-image: url(images/arrow-dark.svg);
     }
 }
 
