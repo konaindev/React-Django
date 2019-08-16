@@ -179,9 +179,11 @@
         }
     }
 
-    &__message {
-        margin-bottom: $s6;
-        color: $auth-form-message-color;
+    &__messages {
+        p {
+            margin-bottom: $s6;
+            color: $auth-form-message-color;
+        }
     }
 
     &__logo-wrap {
@@ -314,9 +316,11 @@
         }
     }
 
-    &__message {
-        margin-bottom: $s6;
-        color: $password-form-message-color;
+    &__messages {
+        p {
+            margin-bottom: $s6;
+            color: $password-form-message-color;
+        }
     }
 
     &__nonfield-extras {
