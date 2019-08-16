@@ -1,0 +1,15 @@
+<mj-attributes>
+  <!-- Styles / Utilities -->
+  {% include "../styles/utilities.mjml" %}
+  {% include "../styles/color.mjml" %}
+  {% include "../styles/text.mjml" %}
+
+  <!-- Components -->
+  {% include "../components/buttons.mjml" %}
+</mj-attributes>
+
+<!-- Fonts -->
+{% include "../styles/fonts.mjml" %}
+
+<!-- Embeded CSS -->
+{% include "../styles/css.mjml" %}
