@@ -22,14 +22,14 @@
     
     <path d="M 249.5 34.0497 A 215.4503 215.4503 0 1,1 122.8615 423.803 L 249.5 249.5" fill="#006EFF" />
     
-    <line stroke="white" stroke-dasharray="4 4" x1="249.5" x2="122.8615" y1="249.5" y2="423.803" />
+    <line stroke="white" stroke-dasharray="4 4" x1="249.5" x2="289.8714" y1="249.5" y2="461.1341" />
     
   </g>
   
-  <text x="147.0719" y="345.6864"><tspan>Goal:</tspan><tspan dy="17px" x="147.0719">60%</tspan></text>
+  <text x="301.2255" y="380.1438"><tspan>Goal:</tspan><tspan dy="17px" x="301.2255">47%</tspan></text>
   
-  <text x="249.5" y="390.011"><tspan>Current:</tspan><tspan dy="17px" x="249.5">60%</tspan></text>
+  <text x="197.7745" y="380.1438"><tspan>Current:</tspan><tspan dy="17px" x="197.7745">60%</tspan></text>
   
-  <text dy="-8px" x="249.5" y="249.5"><tspan>60% Leased Goal</tspan><tspan dy="24px" x="249.5">by 11/17/2015</tspan></text>
+  <text dy="-8px" x="249.5" y="249.5"><tspan>47% Leased Goal</tspan><tspan dy="24px" x="249.5">by 11/17/2015</tspan></text>
   
 </svg>

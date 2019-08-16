@@ -11,10 +11,13 @@ import Select from "../select";
 import ShareToggle from "../share_toggle";
 import { formatPercent } from "../../utils/formatters";
 import UserMenu from "../user_menu";
+import Button from "../button";
 
 import { formatKPI } from "../../utils/kpi_formatters";
 
 import "./portfolio_analysis_view.scss";
+import ButtonGroup from "../button_group";
+import ToggleButton from "../toggle_button";
 
 const navLinks = {
   links: [
@@ -31,6 +34,17 @@ const navLinks = {
   ],
   selected_link: "portfolio-analysis"
 };
+
+const average_buttons_options = [
+  {
+    text: "Property Averages",
+    id: "1"
+  },
+  {
+    text: "Property Totals",
+    id: "0"
+  }
+];
 
 export class PortfolioAnalysisView extends React.PureComponent {
   static propTypes = {
@@ -66,7 +80,8 @@ export class PortfolioAnalysisView extends React.PureComponent {
       })
     ).isRequired,
     table_data: PropTypes.arrayOf(PropTypes.object).isRequired,
-    user: PropTypes.object
+    user: PropTypes.object,
+    display_average: PropTypes.oneOf(["1", "0"]).isRequired
   };
 
   static defaultProps = {
@@ -115,7 +130,8 @@ export class PortfolioAnalysisView extends React.PureComponent {
   onChangeKpi = option => {
     this.props.onChange({
       selected_kpi_bundle: option.value,
-      date_selection: this.props.date_selection
+      date_selection: this.props.date_selection,
+      display_average: this.props.display_average
     });
   };
 
@@ -126,7 +142,17 @@ export class PortfolioAnalysisView extends React.PureComponent {
         preset,
         end_date: endDate,
         start_date: startDate
-      }
+      },
+      display_average: this.props.display_average
+    });
+  };
+
+  onAverageClick = selection => {
+    console.log("average click");
+    this.props.onChange({
+      selected_kpi_bundle: this.props.selected_kpi_bundle,
+      date_selection: this.props.date_selection,
+      display_average: selection
     });
   };
 
@@ -136,7 +162,8 @@ export class PortfolioAnalysisView extends React.PureComponent {
       // share_info,
       date_selection,
       table_data,
-      kpi_order
+      kpi_order,
+      display_average
     } = this.props;
     return (
       <PageChrome navLinks={navLinks} headerItems={this.renderHeaderItems()}>
@@ -164,7 +191,11 @@ export class PortfolioAnalysisView extends React.PureComponent {
             />
           </div>
           <div className="portfolio-analysis__title-bar">
-            <div>All Property Averages</div>
+            <ToggleButton
+              options={average_buttons_options}
+              value={display_average}
+              onChange={this.onAverageClick}
+            />
             <div className="portfolio-analysis__property-count">
               {table_data.length} properties
             </div>
@@ -188,6 +219,7 @@ export default class UrlQueryLayer extends React.PureComponent {
     urlParams.set("p", params.date_selection.preset);
     urlParams.set("s", params.date_selection.start_date);
     urlParams.set("e", params.date_selection.end_date);
+    urlParams.set("a", params.display_average);
     window.location.search = urlParams.toString();
   };
 

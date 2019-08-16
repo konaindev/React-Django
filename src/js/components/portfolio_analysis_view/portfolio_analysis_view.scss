@@ -50,6 +50,15 @@ $table-spacing: 100px;
     align-items: center;
 }
 
+.portfolio-analysis__title-bar button.toggle-button__item {
+    font-size: $text-lg;
+    width: 200px;
+}
+
+.portfolio-analysis__title-bar button.toggle-button__item--selected {
+    bottom-border: solid 1px $blue-3;
+}
+
 .portfolio-analysis__property-count {
     font-size: $text-sm;
     letter-spacing: $letter-spacing-wider;

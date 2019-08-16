@@ -24,6 +24,8 @@ import ProjectPage from "./components/project_page";
 import ReleaseNotesPage from "./components/release_notes_page";
 import ReleaseNoteDetailsPage from "./components/release_note_details_page";
 import CampaignPlanPage from "./components/campaign_plan_page";
+import store from "./state/store";
+import { general } from "./state/actions";
 import PortfolioAnalysisView from "./components/portfolio_analysis_view";
 
 const pages = {
@@ -39,6 +41,34 @@ const pages = {
   PortfolioAnalysisView
 };
 
+const tmpFetchDashboardData = pageClass => {
+  const location = window.location;
+  const queryString = location.search;
+  let _newState = {};
+  window
+    .fetch(
+      `${process.env.BASE_URL}/dashboard${
+        queryString ? `?${queryString}` : ""
+      }`,
+      {
+        responseType: "json",
+        credentials: "include",
+        mode: "same-origin",
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
+    )
+    .then(x => x.json())
+    .then(newState => {
+      store.dispatch(general.set(newState));
+      _newState = newState;
+    })
+    .catch(e => console.log(e))
+    .finally(() => {
+      renderApp(pageClass, _newState);
+    });
+};
 /*
  * Import the root application here.
  */
@@ -57,6 +87,7 @@ const renderApp = (pageClass, pageProps) => {
   const root = document.querySelector("#root");
   const page = React.createElement(pageClass, pageProps);
   const app = React.createElement(App, {}, page);
+
   ReactDOM.render(app, root);
 };
 
@@ -98,8 +129,6 @@ const ready = cb => {
   document.addEventListener("DOMContentLoaded", handleContentLoaded);
 };
 
-/*
-
 /* Run our page. */
 ready(() => {
   Sentry.init({
@@ -110,9 +139,14 @@ ready(() => {
   Sentry.configureScope(x => x.setTag("env", process.env.ENV || "local"));
 
   const pageClass = getPageClass();
+
   /* If this is a react rooted page, spin up the app. */
   if (pageClass) {
-    const pageProps = getPageProps();
-    renderApp(pageClass, pageProps);
+    if (root && root.dataset.page === "DashboardPage") {
+      tmpFetchDashboardData(pageClass);
+    } else {
+      store.dispatch(general.set(getPageProps()));
+      renderApp(pageClass, getPageProps());
+    }
   }
 });

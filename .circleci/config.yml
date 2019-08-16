@@ -59,20 +59,57 @@ jobs:
     working_directory: ~/repo
 
     steps:
-      - checkout
-      - aws-cli/install
       - run:
-          name: Fetch .env from s3
-          command: |
-            aws s3 cp s3://remarkably-staging-58d2d32d-caeb-4629-a941-3b16bb028421/env ~/repo/.env
+          name: Install Heroku Tools
+          command: curl https://cli-assets.heroku.com/install.sh | sh
+      - checkout
+      - run:
+          name: Maintenance Mode On
+          command: heroku maintenance:on --app remarkably-staging
       - run:
           name: Deploy Staging to Heroku
           command: |
             git push https://heroku:$HEROKU_API_KEY@git.heroku.com/remarkably-staging.git master --force
-      - run: curl https://cli-assets.heroku.com/install.sh | sh
-      - run: heroku pg:reset --app remarkably-staging DATABASE_URL --confirm remarkably-staging
-      - run: heroku run -x -a remarkably-staging python manage.py migrate
-      - run: heroku run -x -a remarkably-staging python manage.py loaddata data/dumped/latest.json
+      - run:
+          name: Reset Database
+          command: heroku pg:reset --app remarkably-staging DATABASE_URL --confirm remarkably-staging
+      - run:
+          name: Migrate Database Schema
+          command: heroku run -x -a remarkably-staging python manage.py migrate
+      - run:
+          name: Load fixture data
+          command: heroku run -x -a remarkably-staging python manage.py loaddata data/dumped/latest.json
+      - run:
+          name: Maintenance Mode Off
+          command: heroku maintenance:off --app remarkably-staging
+
+  deploy-production:
+    docker:
+      - image: circleci/python:3.6.4
+
+    working_directory: ~/repo
+
+    steps:
+      - run:
+          name: Install Heroku Tools
+          command: curl https://cli-assets.heroku.com/install.sh | sh
+      - checkout
+      - run:
+          name: Maintenance Mode On
+          command: heroku maintenance:on --app remarkably
+      - run:
+          name: Backup Production Postgres
+          command: heroku pg:backups:capture --app remarkably
+      - run:
+          name: Deploy Master to Heroku Production
+          command: |
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/remarkably.git master --force
+      - run:
+          name: Migrate Database Schema
+          command: heroku run -x -a remarkably python manage.py migrate
+      - run:
+          name: Maintenance Mode Off
+          command: heroku maintenance:off --app remarkably
 
 workflows:
   version: 2.1
@@ -82,7 +119,9 @@ workflows:
       - build:
           filters:
             branches:
-              ignore: staging
+              ignore:
+                  - staging
+                  - master
 
   build-deploy:
     jobs:
@@ -97,3 +136,18 @@ workflows:
           filters:
             branches:
               only: staging
+
+  build-production:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only: master
+      - hold:
+          type: approval
+          requires:
+            - build
+      - deploy-production:
+          context: deploy-production
+          requires:
+            - hold

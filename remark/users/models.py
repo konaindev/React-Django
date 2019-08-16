@@ -126,6 +126,10 @@ class User(PermissionsMixin, AbstractBaseUser):
     )
     email = NormalizedEmailField(unique=True)
 
+    is_show_tutorial = models.BooleanField(
+        default=True, help_text="Should there be tutorial showing"
+    )
+
     USERNAME_FIELD = "email"
     EMAIL_FIELD = "email"
     REQUIRED_FIELDS = []

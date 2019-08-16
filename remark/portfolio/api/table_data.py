@@ -35,7 +35,18 @@ def format_kpis(item, kpis):
             item["targets"][kpi] = KPIFormat.apply(kpi, item["targets"][kpi])
 
 
-def get_table_structure(user, start, end, kpis):
+def strip_base_data(item):
+    if "base_targets" in item:
+        del item["base_targets"]
+    if "base_kpis" in item:
+        del item["base_kpis"]
+    if "properties" in item:
+        for subitem in item["properties"]:
+            strip_base_data(subitem)
+
+
+
+def get_table_structure(user, start, end, kpis, show_averages):
     projects = Project.objects.get_all_for_user(user)
     projects = list(projects)
 
@@ -46,9 +57,6 @@ def get_table_structure(user, start, end, kpis):
         # generate flat data for project
         base_kpis = get_base_kpis_for_project(project, start, end)
         base_targets = get_targets_for_project(project, start, end)
-
-        if base_targets is None:
-            print(project)
 
         if base_kpis is not None:
             image_url = project.get_building_image_url()
@@ -101,11 +109,11 @@ def get_table_structure(user, start, end, kpis):
     else:
         portfolio_average_group = {
             "type": "group",
-            "name": "Portfolio Average",
+            "name": "All My Properties",
             "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png",
             "property_count": len(project_flat_list),
-            "base_kpis": get_base_kpis_for_group(portfolio_average, start, end),
-            "base_targets": get_targets_for_group(portfolio_average_targets, start, end)
+            "base_kpis": get_base_kpis_for_group(portfolio_average, start, end, show_averages),
+            "base_targets": get_targets_for_group(portfolio_average_targets, start, end, show_averages)
         }
         generate_computed_properties(portfolio_average_group, kpis)
         format_kpis(portfolio_average_group, kpis)
@@ -132,8 +140,8 @@ def get_table_structure(user, start, end, kpis):
             "name": group,
             "image_url":
                 "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png",
-            "base_kpis": get_base_kpis_for_group(group_kpis, start, end),
-            "base_targets": get_targets_for_group(group_targets, start, end),
+            "base_kpis": get_base_kpis_for_group(group_kpis, start, end, show_averages),
+            "base_targets": get_targets_for_group(group_targets, start, end, show_averages),
             "properties": properties,
             "property_count": len(properties)
         })
@@ -149,6 +157,10 @@ def get_table_structure(user, start, end, kpis):
             table_data.append(project)
 
     table_data.append(portfolio_average_group)
+
+    # Remove all the base kpis & targets
+    for item in table_data:
+        strip_base_data(item)
 
     return table_data, portfolio_average_group
 

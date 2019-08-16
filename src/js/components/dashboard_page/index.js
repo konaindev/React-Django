@@ -19,8 +19,10 @@ import Loader from "../loader";
 import UserMenu from "../user_menu";
 
 import "./dashboard_page.scss";
+import { connect } from "react-redux";
+import router from "../../router";
 import TutorialView from "../tutorial_view";
-
+import { networking } from "../../state/actions";
 const navLinks = {
   links: [
     {
@@ -48,7 +50,6 @@ export class DashboardPage extends React.PureComponent {
     filters: PropTypes.object,
     onChangeFilter: PropTypes.func
   };
-
   static defaultProps = {
     selectedProperties: [],
     viewType: "tile",
@@ -73,9 +74,14 @@ export class DashboardPage extends React.PureComponent {
     this.state = {
       viewType: props.viewType,
       selectedProperties: props.selectedProperties,
-      isShowAddPropertyForm: false,
-      isShowLoader: false
+      isShowAddPropertyForm: false
     };
+    this._router = router("/dashboard")(x =>
+      props.dispatch({
+        type: "API_DASHBOARD",
+        searchString: x
+      })
+    );
   }
 
   selectAll = () => {
@@ -87,6 +93,10 @@ export class DashboardPage extends React.PureComponent {
     this.setState({ selectedProperties: [] });
   };
 
+  changeLoader = () => {
+    // this.setState({ isShowLoader: false });
+  };
+
   get propertiesListComponent() {
     if (this.state.viewType === "tile") {
       return PropertyCardList;
@@ -95,12 +105,7 @@ export class DashboardPage extends React.PureComponent {
     }
   }
 
-  onChangeFilter = filters => {
-    this.setState({ isShowLoader: true });
-    setTimeout(() => {
-      this.props.onChangeFilter(filters);
-    }, 150);
-  };
+  onChangeFilter = filters => this.props.onChangeFilter(filters);
 
   toggleView = viewType => this.setState({ viewType });
 
@@ -139,13 +144,14 @@ export class DashboardPage extends React.PureComponent {
     const className = cn("dashboard-content", {
       "dashboard-content--selection-mode": this.state.selectedProperties.length
     });
-    const { user, static_url } = this.props;
+    const { user } = this.props;
     const PropertiesListComponent = this.propertiesListComponent;
-    const navLinks =
-      user.email.indexOf("remarkably.io") > -1 ? this.props.navLinks : null;
+    const navLinks = this.props.navLinks;
+    const { isFetching } = this.props;
+    // user.email.indexOf("remarkably.io") > -1 ? this.props.navLinks : null;
     return (
       <PageChrome navLinks={navLinks} headerItems={this.getHeaderItems()}>
-        <TutorialView staticUrl={static_url} />
+        <TutorialView />
         <div className={className}>
           <Container>
             <div className="dashboard-content__title">
@@ -162,7 +168,7 @@ export class DashboardPage extends React.PureComponent {
                   color="primary"
                   uppercase={true}
                   onClick={this.onShowAddPropertyForm}
-                  disabled={this.state.isShowLoader}
+                  disabled={isFetching}
                 >
                   ADD PROPERTY
                 </Button>
@@ -178,7 +184,8 @@ export class DashboardPage extends React.PureComponent {
                   locations={this.props.locations}
                   filters={this.props.filters}
                   onChange={this.onChangeFilter}
-                  isDisabled={this.state.isShowLoader}
+                  isDisabled={isFetching}
+                  dispatch={this.props.dispatch}
                 />
               </div>
               <div className="dashboard-content__selection">
@@ -190,7 +197,7 @@ export class DashboardPage extends React.PureComponent {
               </div>
             </div>
             <div className="dashboard-content__properties">
-              <Loader isShow={this.state.isShowLoader} />
+              <Loader isShow={isFetching} />
               <PropertiesListComponent
                 properties={this.props.properties}
                 selectedProperties={this.state.selectedProperties}
@@ -247,11 +254,14 @@ DashboardSelection.propTypes = {
   selectedProperties: PropTypes.array.isRequired
 };
 
-export default class UrlQueryLayer extends React.PureComponent {
+export class UrlQueryLayer extends React.PureComponent {
   constructor(props) {
     super(props);
     this.filters = {};
-    const urlParams = new URLSearchParams(props.search_url);
+    const urlParams = new URLSearchParams(
+      // props.search_url || window.location.search
+      window.location.search
+    );
     this.filters = {
       q: urlParams.get("q"),
       ct: urlParams.getAll("ct"),
@@ -262,6 +272,7 @@ export default class UrlQueryLayer extends React.PureComponent {
       s: urlParams.get("s"),
       d: urlParams.get("d")
     };
+    this.state = { ...this.filters };
   }
 
   onChangeFilter = filters => {
@@ -279,11 +290,13 @@ export default class UrlQueryLayer extends React.PureComponent {
         }
       }
     });
-    window.location.search = urlParams.toString();
+    this.setState(filters);
+    window.history.replaceState({}, "", `/dashboard?${urlParams.toString()}`);
+    this.props.dispatch(networking.fetchDashboard(`${urlParams.toString()}`));
   };
 
   render() {
-    if (this.props.no_projects) {
+    if (this.props.no_projects || !this.props.properties) {
       return (
         <PageChrome>
           <div className="dashboard-content">
@@ -298,9 +311,17 @@ export default class UrlQueryLayer extends React.PureComponent {
     return (
       <DashboardPage
         {...this.props}
-        filters={this.filters}
+        filters={this.state}
         onChangeFilter={this.onChangeFilter}
       />
     );
   }
 }
+
+const mapState = state => {
+  return {
+    ...state.general,
+    ...state.network
+  };
+};
+export default connect(mapState)(UrlQueryLayer);

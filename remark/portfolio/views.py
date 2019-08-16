@@ -130,6 +130,11 @@ class PortfolioTableView(PortfolioMixin, ReactView):
         if period_group not in PERIOD_GROUP:
             raise Exception("Period group is not a valid value")
 
+        if "a" in request.GET:
+            show_averages = request.GET["a"] == "1"
+        else:
+            show_averages = True
+
         start, end = self.get_start_and_end(
             period_group,
             request.GET['s'] if 's' in request.GET else None,
@@ -141,7 +146,8 @@ class PortfolioTableView(PortfolioMixin, ReactView):
             request.user,
             start,
             end,
-            kpis_to_include
+            kpis_to_include,
+            show_averages
         )
 
         if table_data is None:
@@ -155,7 +161,8 @@ class PortfolioTableView(PortfolioMixin, ReactView):
             "date_selection": self.get_date_selection(period_group, start, end),
             "user": self.get_user_info(),
             "table_data": table_data,
-            "highlight_kpis": self.get_highlight_kpis(portfolio_average, kpis_to_include)
+            "highlight_kpis": self.get_highlight_kpis(portfolio_average, kpis_to_include),
+            "display_average": "1" if show_averages else "0"
         }
 
         return self.render(**result)
@@ -175,10 +182,11 @@ class PortfolioTableView(PortfolioMixin, ReactView):
         '''
         if period_group == PERIOD_GROUP[4]:
             s = datetime.date.fromisoformat(start)
-            e = datetime.date.fromisoformat(end)
+            # Adding 1 day to make exclusive end date
+            e = datetime.date.fromisoformat(end) + datetime.timedelta(days=1)
             return s, e
 
-        e = x_mondays_ago(0)+datetime.timedelta(days=1)
+        e = x_mondays_ago(0) + datetime.timedelta(days=1)
         s = None
 
         if period_group == PERIOD_GROUP[0]:
@@ -259,6 +267,8 @@ class PortfolioTableView(PortfolioMixin, ReactView):
         }
 
     def get_date_selection(self, period_group, start, end):
+        # Removing 1 day to make inclusive end date
+        end = end - datetime.timedelta(days=1)
         return {
             "preset": period_group,
             "start_date": start.strftime('%Y-%m-%d'),

@@ -192,8 +192,8 @@ class CampaignPlanImporter(ProjectExcelImporter):
     def build_meta(self):
         return self.schema(schema=self.META_COL_SCHEMA, col="B")
 
-    def clean(self):
-        super().clean()
+    def clean(self, ctx):
+        super().clean(ctx)
 
         # Build the meta table
         self.cleaned_data["meta"] = self.build_meta()

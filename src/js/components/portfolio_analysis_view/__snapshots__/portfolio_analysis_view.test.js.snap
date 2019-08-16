@@ -398,8 +398,21 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
     <div
       className="portfolio-analysis__title-bar"
     >
-      <div>
-        All Property Averages
+      <div
+        className="toggle-button"
+      >
+        <button
+          className="toggle-button__item toggle-button__item--selected"
+          onClick={[Function]}
+        >
+          Property Averages
+        </button>
+        <button
+          className="toggle-button__item"
+          onClick={[Function]}
+        >
+          Property Totals
+        </button>
       </div>
       <div
         className="portfolio-analysis__property-count"

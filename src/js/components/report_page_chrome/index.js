@@ -8,6 +8,9 @@ import ProjectLink from "../project_link";
 
 import "./report_page_chrome.scss";
 
+const DEFAULT_IMAGE_URL =
+  "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png";
+
 /**
  * @class ReportPageChrome
  *
@@ -39,6 +42,10 @@ export default class ReportPageChrome extends Component {
       share_info,
       backUrl
     } = this.props;
+    let image_url = DEFAULT_IMAGE_URL;
+    if (project && project.building_image && project.building_image[3]) {
+      image_url = project.building_image[3];
+    }
 
     const topItems = (
       <section className="report-page-subheader">
@@ -47,7 +54,7 @@ export default class ReportPageChrome extends Component {
             <ProjectLink
               name={project.name}
               url={backUrl}
-              imageUrl={project.building_image}
+              imageUrl={image_url}
               health={project.health}
             />
           </div>

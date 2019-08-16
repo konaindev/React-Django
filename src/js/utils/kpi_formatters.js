@@ -66,7 +66,7 @@ const KPI_FORMAT = {
   app_exe: configuredFormatPercent(),
 
   // Cost Pers
-  usv_cost: configuredFormatCurrency(),
+  usv_cost: configuredFormatCurrency(true),
   inq_cost: configuredFormatCurrency(),
   tou_cost: configuredFormatCurrency(),
   app_cost: configuredFormatCurrency(),

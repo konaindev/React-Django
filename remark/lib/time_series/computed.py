@@ -1,5 +1,5 @@
 from operator import truediv, add, mul, sub
-from remark.lib.math import sum_or_0, div_or_0, mult_or_0, d_div_or_0, d_quant_currency, sub_or_0
+from remark.lib.math import sum_or_0, div_or_0, d_mult_or_0, d_div_or_0, d_quant_currency, sub_or_0
 from graphkit import compose, operation
 from .common import KPI
 
@@ -62,11 +62,25 @@ def chain(*fns):
 
 
 def twelve_mo_mult_or_0(*args):
-    return mult_or_0(*args, 12)
+    return d_mult_or_0(*args, 12)
 
 
 cost_per_calc = chain(d_div_or_0, d_quant_currency)
 romi_calc = chain(d_div_or_0, round)
+
+
+def occupancy_rate_calc(occupied_units, occupiable_units):
+    print(occupied_units, occupiable_units)
+    return div_or_0(occupied_units, occupiable_units)
+
+
+def trace_calc(name, fun):
+    def inner(*args, **kwargs):
+        print(f"Calc: {name}")
+        print(f"Args: {args}")
+        print(f"Kwargs: {kwargs}")
+        return fun(*args, **kwargs)
+    return inner
 
 
 def op(name, needs, fun):
@@ -86,13 +100,13 @@ kpi_graph = compose(name="kpi_graph")(
         KPI.leased_units_start,
         KPI.delta_leases
     ], leased_units_calc),
-    op(KPI.leased_rate, [KPI.leased_units, KPI.occupiable_units], div_or_0),
+    op(KPI.leased_rate, [KPI.leased_units, KPI.occupiable_units], trace_calc(KPI.leased_rate, div_or_0)),
     op(KPI.resident_decisions, [KPI.lease_renewal_notices, KPI.lease_vacation_notices], sum_or_0),
     op(KPI.renewal_rate, [KPI.lease_renewal_notices, KPI.resident_decisions], div_or_0),
     op(KPI.lease_cd_rate, [KPI.lease_cds, KPI.lease_applications], div_or_0),
 
     # Activity
-    op(KPI.occupancy_rate, [KPI.occupied_units, KPI.occupiable_units], div_or_0),
+    op(KPI.occupancy_rate, [KPI.occupied_units, KPI.occupiable_units], occupancy_rate_calc),
     op(KPI.occupied_units, [
         KPI.occupied_units_end,
         KPI.occupied_units_start,
@@ -155,8 +169,8 @@ target_graph = compose(name="target_graph")(
         KPI.leased_units_start,
         KPI.delta_leases
     ], leased_units_calc),
-    op(KPI.leased_rate, [KPI.leased_units, KPI.occupiable_units], div_or_0),
-    op(KPI.occupancy_rate, [KPI.occupied_units, KPI.occupiable_units_start], div_or_0),
+    op(KPI.leased_rate, [KPI.leased_units, KPI.occupiable_units], trace_calc("leased rate targets", div_or_0)),
+    op(KPI.occupancy_rate, [KPI.occupied_units, KPI.occupiable_units_start], trace_calc("occupancy rate targets", div_or_0)),
 
     # Revenue
     op(KPI.estimated_acq_revenue_gain, [KPI.leases_executed, KPI.average_monthly_rent], twelve_mo_mult_or_0),

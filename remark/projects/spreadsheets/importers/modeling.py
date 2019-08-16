@@ -194,8 +194,8 @@ class ModelingImporter(ProjectExcelImporter):
         # Drop the extraneous period.
         return raw_targets
 
-    def clean(self):
-        super().clean()
+    def clean(self, ctx):
+        super().clean(ctx)
 
         self.cleaned_data = self.clean_output_data()
         self.cleaned_data["targets"] = self.clean_model_targets()

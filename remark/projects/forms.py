@@ -3,12 +3,15 @@ from datetime import datetime
 from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.safestring import mark_safe
+from django.urls import reverse
+from image_cropping import ImageCropWidget
 
+from remark.settings import BASE_URL
 from remark.lib.validators import (
     validate_linebreak_separated_numbers_list,
     validate_linebreak_separated_strings_list,
 )
-from .models import Project, CampaignModel, Spreadsheet, Spreadsheet2
+from .models import Project, Property, CampaignModel, Spreadsheet, Spreadsheet2
 from .reports.selectors import ReportLinks
 from .spreadsheets import get_importer_for_kind, SpreadsheetKind
 
@@ -109,10 +112,19 @@ class SpreadsheetForm(forms.ModelForm):
                 raise ValidationError(
                     f"No spreadsheet importer available for {cleaned_data['kind']}"
                 )
-            if not importer.is_valid():
+            if not importer.is_valid(cleaned_data):
                 raise ValidationError(
                     f"Could not validate spreadsheet: {importer.errors}"
                 )
+
+            # check if spreadsheet contains overlapping Period
+            if hasattr(importer, "find_overlapping_period"):
+                period = importer.find_overlapping_period(cleaned_data["project"])
+                if period is not None:
+                    period_path = reverse("admin:projects_period_change", args=[period.pk])
+                    raise ValidationError(
+                        f"Found overlapping period, please delete the existing one here. {BASE_URL}{period_path}"
+                    )
 
             # Success! We read the spreadsheet just fine.
             cleaned_data["imported_data"] = importer.cleaned_data
@@ -265,3 +277,13 @@ class TAMExportForm(forms.Form):
 
     def clean_rti_rental_rates(self):
         return multiline_text_to_int_array(self.cleaned_data["rti_rental_rates"])
+
+
+class PropertyForm(forms.ModelForm):
+    class Meta:
+        model = Property
+        fields = "__all__"
+        widgets = {
+            "building_logo": ImageCropWidget,
+            "building_image": ImageCropWidget,
+        }

@@ -85,6 +85,9 @@ def _merge(merge_document, ts):
             elif merge_document[prop] == "sum":
                 value = _merge_sum(ts, prop)
                 result[prop] = value
+            elif merge_document[prop] == "average":
+                value = _merge_average(ts, prop)
+                result[prop] = value
             elif callable(merge_document[prop]):
                 value = merge_document[prop](ts, prop)
                 result[prop] = value
@@ -93,8 +96,16 @@ def _merge(merge_document, ts):
     return result
 
 
-def cast_zero_of_type(example):
-    return type(example)(0)
+def cast_zero_of_type(example, value=0):
+    return type(example)(value)
+
+
+def _merge_average(items, prop):
+    if len(items) == 0:
+        return None
+
+    result = _merge_sum(items, prop)
+    return result / cast_zero_of_type(items[0][prop], len(items))
 
 
 def _merge_sum(items, prop):
@@ -112,6 +123,7 @@ def _merge_last(items, prop):
 
 def _merge_first(items, prop):
     return items[0][prop]
+
 
 # Split Strategies
 LINEAR = "linear"

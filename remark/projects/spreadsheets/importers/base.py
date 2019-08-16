@@ -18,7 +18,7 @@ class ProjectExcelImporter(ExcelImporter):
     SPREADSHEET_KIND = StrCell(find_version("spreadsheet_kind"))
     SPREADSHEET_VERSION = IntCell(find_version("spreadsheet_version"))
 
-    def clean(self):
+    def clean(self, ctx):
         """
         Clean a remarkably-style excel spreadsheet.
         """

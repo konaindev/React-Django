@@ -179,9 +179,11 @@
         }
     }
 
-    &__message {
-        margin-bottom: $s6;
-        color: $auth-form-message-color;
+    &__messages {
+        p {
+            margin-bottom: $s6;
+            color: $auth-form-message-color;
+        }
     }
 
     &__logo-wrap {
@@ -244,8 +246,12 @@
     }
 
     &__extras {
+        overflow: auto;
         margin-top: $s6;
-        text-align: center;
+
+        .rmb-checkbox {
+            margin-bottom: $s6;
+        }
     }
 
     a {
@@ -310,9 +316,11 @@
         }
     }
 
-    &__message {
-        margin-bottom: $s6;
-        color: $password-form-message-color;
+    &__messages {
+        p {
+            margin-bottom: $s6;
+            color: $password-form-message-color;
+        }
     }
 
     &__nonfield-extras {

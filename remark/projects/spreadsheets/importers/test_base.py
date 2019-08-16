@@ -25,13 +25,13 @@ class TestVersionCheck(TestCase):
         importer = TestImporter(self.TEST_FILE_NAME)
         importer.expected_type = "baseline_perf"
         importer.expected_version = 1
-        self.assertTrue(importer.is_valid())
+        self.assertTrue(importer.is_valid({}))
 
     def test_fail(self):
         importer = TestImporter(self.TEST_FILE_NAME)
         importer.expected_type = "nope"
         importer.expected_version = 0
-        self.assertFalse(importer.is_valid())
+        self.assertFalse(importer.is_valid({}))
         self.assertEqual(len(importer.errors), 1)
 
 
@@ -71,7 +71,7 @@ class SpreadsheetFileTestCaseMixin:
             self.importer = self.importer_class(
                 self.get_absolute_spreadsheet_file_name()
             )
-            if not self.importer.is_valid():
+            if not self.importer.is_valid({}):
                 raise self.importer.errors[0]
 
     def setUpSchema(self):
@@ -101,4 +101,3 @@ class SpreadsheetFileTestCaseMixin:
         json_string = DjangoJSONEncoder().encode(self.importer.cleaned_data)
         decoded_jsonable = json.loads(json_string)
         jsonschema.validate(instance=decoded_jsonable, schema=self.schema)
-
