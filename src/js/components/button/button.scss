@@ -96,6 +96,7 @@
         }
     }
 
+    &[disabled],
     &--disabled {
         background-color: $gray-4;
         color: $button-disabled-text-color;
