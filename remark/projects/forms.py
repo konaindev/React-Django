@@ -48,7 +48,7 @@ class CampaignModelUploadForm(forms.ModelForm):
             )
             if importer is None:
                 raise ValidationError(f"No spreadsheet importer available for model")
-            if not importer.is_valid():
+            if not importer.is_valid(cleaned_data):
                 raise ValidationError(
                     f"Could not validate spreadsheet: {importer.errors}"
                 )
