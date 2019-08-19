@@ -34,3 +34,10 @@ export const createPassword = {
     url
   })
 };
+
+export const completeAccount = {
+  redirect: url => ({
+    type: "COMPLETE_ACCOUNT_REDIRECT",
+    url
+  })
+};

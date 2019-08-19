@@ -48,4 +48,5 @@ urlpatterns = [
     path("email_app/", include("remark.email_app.urls")),
     path("charts/", include("remark.charts.urls")),
     path("portfolio/", include("remark.portfolio.urls")),
+    path("geo/", include("remark.geo.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

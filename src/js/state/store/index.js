@@ -3,7 +3,9 @@ import reducers from "../reducers";
 import {
   fetchDashboard,
   fetchTutorial,
-  fetchCreatePassword
+  fetchCreatePassword,
+  fetchCompanyAddress,
+  fetchCompleteAccount
 } from "../middleware";
 
 // TODO: contextually enable devtools based on prod or not
@@ -17,7 +19,9 @@ export default createStore(
       //  window.__REDUX_DEVTOOLS_EXTENSION__({ trace: true, traceLimit: 25 }),
       fetchDashboard,
       fetchTutorial,
-      fetchCreatePassword
+      fetchCreatePassword,
+      fetchCompanyAddress,
+      fetchCompleteAccount
     )
   )
 );

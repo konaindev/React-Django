@@ -17,17 +17,12 @@ import router from "../../router";
 
 import { propertySchema } from "./validators";
 import "./complete_account_view.scss";
-import { DropdownIndicator } from "../select/select_components";
 
 class CompleteAccountView extends React.PureComponent {
   static propTypes = {
     office_types: Select.optionsType.isRequired,
     company_roles: MultiSelect.optionsType.isRequired,
-    officeAddress: PropTypes.array
-  };
-
-  static defaultProps = {
-    officeAddress: []
+    office_address: PropTypes.array
   };
 
   constructor(props) {
@@ -62,11 +57,33 @@ class CompleteAccountView extends React.PureComponent {
 
   getSelectLabel = values => values?.map(v => v.label).join(", ");
 
-  loadAddress = (inputValue, callback) => {};
+  loadAddress = (inputValue, callback) => {
+    clearTimeout(this.loadAddressTimeOut);
+    this.loadAddressTimeOut = setTimeout(() => {
+      this.props.dispatch({
+        type: "API_COMPANY_ADDRESS",
+        data: { address: inputValue },
+        callback
+      });
+    }, 300);
+  };
+
+  onSubmit = (values, actions) => {
+    console.log("----------------------->");
+    console.log(values);
+    const data = { ...values };
+    data.company_role = values.company_role.map(type => type.value);
+    data.office_type = values.office_type.value;
+    data.office_address = values.office_address.value;
+    this.props.dispatch({
+      type: "API_COMPLETE_ACCOUNT",
+      data
+    });
+  };
   loadCompany = (inputValue, callback) => {};
 
   render() {
-    const { company_roles, office_types, officeAddress } = this.props;
+    const { company_roles, office_types, office_address } = this.props;
     const classes = cn("complete-account__field-set", AccountForm.fieldClass);
     return (
       <PageAuth backLink="/">
@@ -76,7 +93,7 @@ class CompleteAccountView extends React.PureComponent {
           title="Complete your account"
           subtitle="We need just a bit more information about you to complete your account."
         >
-          <Formik validationSchema={propertySchema}>
+          <Formik validationSchema={propertySchema} onSubmit={this.onSubmit}>
             {({
               errors,
               touched,
@@ -197,10 +214,14 @@ class CompleteAccountView extends React.PureComponent {
                   <GoogleAddress
                     name="office_address"
                     loadOptions={this.loadAddress}
-                    companyAddresses={officeAddress}
+                    companyAddresses={office_address}
                     value={values.office_address}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
+                    onChange={props => {
+                      setFieldValue("office_address", props);
+                    }}
+                    onBlur={() => {
+                      setFieldTouched("office_address");
+                    }}
                   />
                 </FormFiled>
                 <FormFiled
