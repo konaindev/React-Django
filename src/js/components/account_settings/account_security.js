@@ -1,10 +1,17 @@
 import React from "react";
 
 import Button from "../button";
-import { PasswordOverlay } from "../password_tooltip";
+import PasswordOverlay from "../password_tooltip";
 import Tooltip from "../rmb_tooltip";
+import { props } from "./props";
 
 export default class AccountSecurity extends React.Component {
+  state = { password: "" };
+
+  changePassword = e => {
+    this.setState({ password: e.target.value });
+  };
+
   render() {
     return (
       <div className="account-settings__tab">
@@ -27,10 +34,17 @@ export default class AccountSecurity extends React.Component {
               <Tooltip
                 placement="bottom"
                 theme="dark"
-                overlay={<PasswordOverlay />}
+                overlay={
+                  <PasswordOverlay password={this.state.password} {...props} />
+                }
                 trigger={["focus"]}
               >
-                <input className="account-settings__input" type="password" />
+                <input
+                  className="account-settings__input"
+                  value={this.state.password}
+                  type="password"
+                  onChange={this.changePassword}
+                />
               </Tooltip>
             </div>
             <div className="account-settings__field account-settings__field--short">
