@@ -14,13 +14,15 @@ export default class PasswordOverlay extends React.PureComponent {
       })
     ),
     password: PropTypes.string,
-    errors: PropTypes.object
+    errors: PropTypes.object,
+    theme: PropTypes.oneOf(["", "highlight", "dark"])
   };
 
   static defaultProps = {
     rules: [],
     password: "",
-    errors: {}
+    errors: {},
+    theme: ""
   };
 
   renderRules() {
@@ -43,8 +45,12 @@ export default class PasswordOverlay extends React.PureComponent {
   }
 
   render() {
+    const { theme } = this.props;
+    const class_ = cn("password-tooltip", {
+      [`password-tooltip--${theme}`]: theme
+    });
     return (
-      <div className="password-tooltip">
+      <div className={class_}>
         <div className="password-tooltip__title">Password must:</div>
         <div className="password-tooltip__rules">{this.renderRules()}</div>
       </div>
