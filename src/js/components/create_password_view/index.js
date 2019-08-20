@@ -7,7 +7,7 @@ import AccountForm from "../account_form";
 import router from "../../router";
 import Button from "../button";
 import Input from "../input";
-import FormFiled from "../form_field";
+import FormField from "../form_field";
 import PageAuth from "../page_auth";
 import PasswordOverlay from "../password_tooltip";
 import RMBTooltip from "../rmb_tooltip";
