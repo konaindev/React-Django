@@ -32,6 +32,7 @@ export default class AccountSecurity extends React.Component {
             <div className="account-settings__field account-settings__field--short">
               <div className="account-settings__label">New Password</div>
               <Tooltip
+                visible={true}
                 placement="bottom"
                 theme="dark"
                 overlay={
