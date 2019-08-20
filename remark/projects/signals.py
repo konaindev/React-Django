@@ -73,30 +73,36 @@ def sort_kpis(kpis):
 
 def get_ctd_top_kpis(ctd_model_percent, ctd_sorted):
     top_kpis = []
-    if ctd_model_percent[ctd_sorted[0]] > 0.95:
-        top_kpis.append(ctd_sorted[0])
-        if ctd_model_percent[ctd_sorted[1]] > 0.95:
-            top_kpis.append(ctd_sorted[1])
-            if ctd_model_percent[ctd_sorted[2]] > 0.95:
-                top_kpis.append(ctd_sorted[2])
+    try:
+        if ctd_model_percent[ctd_sorted[0]] > 0.95:
+            top_kpis.append(ctd_sorted[0])
+            if ctd_model_percent[ctd_sorted[1]] > 0.95:
+                top_kpis.append(ctd_sorted[1])
+                if ctd_model_percent[ctd_sorted[2]] > 0.95:
+                    top_kpis.append(ctd_sorted[2])
+    except IndexError:
+        pass
     return top_kpis
 
 def get_ctd_rest(ctd_model_percent, ctd_sorted):
     risk_kpis = []
     low_kpis = []
-    for x in range(-1, -7, -1):
-        name = ctd_sorted[x]
-        value = ctd_model_percent[name]
-        # Are we adding to at risk or off track
-        if value < 0.95:
-            if value < 0.75 and len(low_kpis) < 3:
-                low_kpis.append(name)
-            elif len(risk_kpis) < 3:
-                risk_kpis.append(name)
+    try:
+        for x in range(-1, -7, -1):
+            name = ctd_sorted[x]
+            value = ctd_model_percent[name]
+            # Are we adding to at risk or off track
+            if value < 0.95:
+                if value < 0.75 and len(low_kpis) < 3:
+                    low_kpis.append(name)
+                elif len(risk_kpis) < 3:
+                    risk_kpis.append(name)
+                else:
+                    break
             else:
                 break
-        else:
-            break
+    except IndexError:
+        pass
     return (risk_kpis, low_kpis)
 
 def get_ctd_kpi_lists(ctd_model_percent):
