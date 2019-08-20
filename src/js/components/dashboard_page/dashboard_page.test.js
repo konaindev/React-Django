@@ -1,11 +1,18 @@
 import renderer from "react-test-renderer";
-
-import DashboardPage from "./index";
-import { props } from "./props";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 
-const _ = x => createStore(() => x);
+import DashboardPage from "./index";
+import { props } from "./props";
+
+import { props as tutorialProps } from "../tutorial_modal/props";
+
+const _ = x =>
+  createStore(() => ({
+    general: x,
+    network: { isFetching: false },
+    tutorial: { tutorialView: tutorialProps }
+  }));
 
 describe("DashboardPage", () => {
   it("renders correctly", () => {
