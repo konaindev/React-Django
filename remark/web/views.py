@@ -138,32 +138,23 @@ class DashboardView(LoginRequiredMixin, ReactView):
                 projects, key=lambda p: p["performance_rating"], reverse=is_reverse
             )
 
-        response = JsonResponse(
-            {
-                "no_projects": no_projects,
-                "properties": projects,
-                "user": user.get_menu_dict(),
-                "search_url": request.GET.urlencode(),
-                "locations": locations,
-                "property_managers": property_managers,
-                "asset_managers": asset_managers,
-                "funds": funds,
-                "static_url": settings.STATIC_URL,
-            }
+        response_data = dict(
+            no_projects=no_projects,
+            properties=projects,
+            user=user.get_menu_dict(),
+            search_url=request.GET.urlencode(),
+            locations=locations,
+            property_managers=property_managers,
+            asset_managers=asset_managers,
+            funds=funds,
+            static_url=settings.STATIC_URL,
         )
 
-        if request.content_type != "application/json":
-            response = self.render(
-                no_projects=no_projects,
-                properties=projects,
-                user=user.get_menu_dict(),
-                search_url=request.GET.urlencode(),
-                locations=locations,
-                property_managers=property_managers,
-                asset_managers=asset_managers,
-                funds=funds,
-                static_url=settings.STATIC_URL,
-            )
+        response_type_requested = request.headers.get("Accept", "")
+        if "application/json" in response_type_requested:
+            response = JsonResponse(response_data)
+        else:
+            response = self.render(**response_data)
 
         cache.set(cache_key, response, timeout=DEFAULT_TIMEOUT)
         return response
