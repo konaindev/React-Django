@@ -358,6 +358,7 @@ $anchor-color: $blue-3;
 $footer-text-color: $turquoise-5;
 
 $property-card-width: 309px;
+$property-card-border: 2px;
 $property-card-image-height: 220px;
 $property-card-actions-height: 68px;
 $property-card-panel-hover-color: $gray-4;
@@ -365,6 +366,10 @@ $property-card-panel-hover-box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.7);
 $property-card-panel-overlay-color: $gray-5;
 $property-card-spacing: 14px;
 $property-card-address-height: 24px;
+$property-card-selector-size: 32px;
+$property-card-selector-bg: $blue-3;
+$property-card-selector-color: $highlight-gray-3;
+$property-card-selector-border: 1.2px;
 
 $property-status-color-on-track: $green-3;
 $property-status-color-at-risk: $yellow-1;
