@@ -15,7 +15,7 @@ export default class PasswordOverlay extends React.PureComponent {
     ),
     password: PropTypes.string,
     errors: PropTypes.object,
-    theme: PropTypes.oneOf(["", "highlight", "dark"])
+    theme: PropTypes.oneOf(["", "highlight"])
   };
 
   static defaultProps = {
