@@ -111,6 +111,7 @@ def get_ctd_kpi_lists(ctd_model_percent):
     risk_kpis, low_kpis = get_ctd_rest(ctd_model_percent, ctd_sorted)
     return (top_kpis, risk_kpis, low_kpis)
 
+
 @receiver(post_save, sender=Period)
 def update_performance_report(sender, instance, created, raw, **kwargs):
     # dont run this for fixtures
@@ -120,8 +121,8 @@ def update_performance_report(sender, instance, created, raw, **kwargs):
     project = instance.project
     start = instance.start
 
-    if not created and PerformanceEmail.objects.filter(start__exact=start, project__exact=project).count() > 0:
-        logger.info("Already created performance email. Skipping.")
+    if not created:
+        logger.info("No new record created for this period. Skipping.")
         return
 
     campaign_start = project.get_campaign_start()
@@ -173,7 +174,11 @@ def update_performance_report(sender, instance, created, raw, **kwargs):
     top_kpis = get_ctd_top_kpis(ctd_model_percent, ctd_sorted)
     risk_kpis, low_kpis = get_ctd_rest(ctd_model_percent, ctd_sorted)
 
-    # https://app.remarkably.io/admin/email_app/performanceemail/26/change/
+    existing_mails = PerformanceEmail.objects.filter(start__exact=start, project__exact=project)
+    if existing_mails.count() > 0:
+        logger.info("Deleted already created performance email. Creating new one.")
+        existing_mails.delete()
+
     pe = PerformanceEmail()
     pe.project = project
     pe.start = start
