@@ -5,10 +5,10 @@ import { action } from "@storybook/addon-actions";
 import { Provider } from "react-redux";
 import { DashboardPage } from "./index";
 import { props } from "./props";
-import { createStore } from "redux";
-document.cookie = "isLogin=true";
 import store from "../../state/store";
 const _store = store;
+
+document.cookie = "isLogin=true";
 
 storiesOf("DashboardPage", module)
   .add(
