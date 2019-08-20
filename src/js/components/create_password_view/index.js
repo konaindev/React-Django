@@ -5,14 +5,14 @@ import { connect } from "react-redux";
 import { Formik, Form } from "formik";
 
 import AccountForm from "../account_form";
+import { Error, Ok } from "../../icons";
+import router from "../../router";
 import Button from "../button";
 import Input from "../input";
 import FormFiled from "../form_field";
 import PageAuth from "../page_auth";
+import PasswordOverlay from "../password_tooltip";
 import RMBTooltip from "../rmb_tooltip";
-import WizardProgress from "../wizard_progress";
-import { Error, Ok } from "../../icons";
-import router from "../../router";
 
 import "./create_password_view.scss";
 
@@ -125,10 +125,14 @@ class CreatePasswordView extends React.PureComponent {
                     <RMBTooltip
                       theme="highlight"
                       trigger={["focus"]}
-                      overlay={this.renderTooltip(
-                        values.password,
-                        errors.password
-                      )}
+                      overlay={
+                        <PasswordOverlay
+                          rules={this.props.rules}
+                          password={values.password}
+                          errors={errors.password}
+                          theme="highlight"
+                        />
+                      }
                     >
                       <Input
                         type="password"
