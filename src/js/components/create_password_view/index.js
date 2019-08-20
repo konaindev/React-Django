@@ -1,11 +1,9 @@
-import cn from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
 import { Formik, Form } from "formik";
 
 import AccountForm from "../account_form";
-import { Error, Ok } from "../../icons";
 import router from "../../router";
 import Button from "../button";
 import Input from "../input";
@@ -59,30 +57,6 @@ class CreatePasswordView extends React.PureComponent {
         throw errors;
       }
     });
-  };
-
-  renderTooltip = (value, errors) => {
-    const rules = this.props.rules.map(rule => {
-      const error = errors?.[rule.key];
-      const classes = cn("create-password-tooltip__rule", {
-        "create-password-tooltip__rule--error": value && error,
-        "create-password-tooltip__rule--ok": value && !error
-      });
-      return (
-        <div className={classes} key={rule.key}>
-          <div className="create-password-tooltip__icon create-password-tooltip__icon--default" />
-          <Error className="create-password-tooltip__icon create-password-tooltip__icon--error" />
-          <Ok className="create-password-tooltip__icon create-password-tooltip__icon--ok" />
-          <div className="create-password-tooltip__text">{rule.label}</div>
-        </div>
-      );
-    });
-    return (
-      <div className="create-password-tooltip">
-        <div className="create-password-tooltip__title">Password must:</div>
-        <div className="create-password-tooltip__rules">{rules}</div>
-      </div>
-    );
   };
 
   getButtonColor = isValid => {
