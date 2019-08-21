@@ -1,3 +1,4 @@
+import qs from "qs";
 import {
   differenceInMilliseconds,
   differenceInSeconds,
@@ -71,3 +72,14 @@ export const objectFromEntries = iterable => {
 export function convertBackendErrors(errors) {
   return _mapValues(errors, item => item[0].message);
 }
+
+export const qsParse = (queryString, hasLeadingPrefix = true) => {
+  return qs.parse(queryString, { ignoreQueryPrefix: hasLeadingPrefix });
+};
+
+export const qsStringify = (queryParams, appendLeadingPrefix = true) => {
+  return qs.stringify(queryParams, {
+    addQueryPrefix: appendLeadingPrefix,
+    indices: false // array values, "a=1&a=2" instead of "a[0]=1&a[1]=2"
+  });
+};
