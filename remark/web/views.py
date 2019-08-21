@@ -6,6 +6,7 @@ from django.core.cache import cache
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
 from remark.projects.models import Fund, Project
+from remark.lib.cache import remark_cache, TIMEOUT_1_WEEK
 from remark.lib.views import ReactView, RemarkView
 
 
@@ -20,6 +21,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
     """Render dashboard page."""
 
     page_class = "DashboardPage"
+    cache_key_project = "remark.web.views.dashboard_view.get_project_details"
 
     sql_sort = {
         "name": "name",
@@ -33,19 +35,25 @@ class DashboardView(LoginRequiredMixin, ReactView):
     def get_page_title(self):
         return "Dashboard"
 
-    def get(self, request):
-        user = request.user
-
-        cache_key = "{}^{}^{}^{}".format(
-            user.public_id,
-            request.path,
-            request.content_type,
-            request.META["QUERY_STRING"],
+    @staticmethod
+    @remark_cache(cache_key_project, TIMEOUT_1_WEEK)
+    def get_project_details(project):
+        address = project.property.geo_address
+        return dict(
+            property_name=project.name,
+            property_id=project.public_id,
+            address=f"{address.city}, {address.state}",
+            image_url=project.get_building_image_url(),
+            performance_rating=project.get_performance_rating(),
+            url=project.get_baseline_url(),
         )
 
-        if cache_key in cache:
-            cached_response = cache.get(cache_key)
-            return cached_response
+    def get(self, request):
+        data_type_requested = request.headers.get("Accept", "")
+        if "application/json" not in data_type_requested:
+            return self.render(dict())
+
+        user = request.user
 
         project_params = {}
         if user.is_superuser:
@@ -118,19 +126,10 @@ class DashboardView(LoginRequiredMixin, ReactView):
         if direction == "desc":
             order = f"-{order}"
 
-        projects = []
-        for project in project_query.filter(**project_params).order_by(order):
-            address = project.property.geo_address
-            projects.append(
-                {
-                    "property_name": project.name,
-                    "property_id": project.public_id,
-                    "address": f"{address.city}, {address.state}",
-                    "image_url": project.get_building_image_url(),
-                    "performance_rating": project.get_performance_rating(),
-                    "url": project.get_baseline_url(),
-                }
-            )
+        projects = [
+            self.get_project_details(project)
+            for project in project_query.filter(**project_params).order_by(order)
+        ]
 
         if sort == "performance":
             is_reverse = direction == "asc"
@@ -150,14 +149,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
             static_url=settings.STATIC_URL,
         )
 
-        response_type_requested = request.headers.get("Accept", "")
-        if "application/json" in response_type_requested:
-            response = JsonResponse(response_data)
-        else:
-            response = self.render(**response_data)
-
-        cache.set(cache_key, response, timeout=DEFAULT_TIMEOUT)
-        return response
+        return JsonResponse(response_data)
 
 
 class TutorialView(LoginRequiredMixin, RemarkView):
