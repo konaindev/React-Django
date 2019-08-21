@@ -165,8 +165,9 @@ class PropertyListTestCase(TestCase):
         }
 
         response = self.client.get(reverse("dashboard"), HTTP_ACCEPT="application/json")
-        response_json = response.json()
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(type(response).__name__, "JsonResponse")
+        response_json = response.json()
         self.assertCountEqual(response_json["asset_managers"], data["asset_managers"])
         self.assertCountEqual(response_json["funds"], data["funds"])
         self.assertCountEqual(response_json["properties"], data["properties"])
@@ -229,8 +230,9 @@ class PropertyListTestCase(TestCase):
         )
         url = f"{reverse('dashboard')}?{query}"
         response = self.client.get(url, HTTP_ACCEPT="application/json")
-        response_json = response.json()
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(type(response).__name__, "JsonResponse")
+        response_json = response.json()
         self.assertCountEqual(response_json["asset_managers"], data["asset_managers"])
         self.assertCountEqual(response_json["funds"], data["funds"])
         self.assertCountEqual(response_json["properties"], data["properties"])
