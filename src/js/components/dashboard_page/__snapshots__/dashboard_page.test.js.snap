@@ -959,22 +959,22 @@ exports[`DashboardPage Row select 1`] = `
               className="dashboard-selection__controls"
             >
               <button
-                className="button button--transparent dashboard-selection__button"
+                className="button button--secondary dashboard-selection__button"
                 onClick={[Function]}
               >
-                INVITE
+                invite
               </button>
               <button
-                className="button button--transparent dashboard-selection__button"
+                className="button button--secondary dashboard-selection__button"
                 onClick={[Function]}
               >
-                SELECT ALL
+                select all
               </button>
               <button
-                className="button button--transparent dashboard-selection__button"
+                className="button button--secondary dashboard-selection__button"
                 onClick={[Function]}
               >
-                CANCEL
+                cancel
                 <svg
                   aria-hidden="true"
                   className="dashboard-selection__button-icon"
@@ -2515,22 +2515,22 @@ exports[`DashboardPage Row view 1`] = `
               className="dashboard-selection__controls"
             >
               <button
-                className="button button--transparent dashboard-selection__button"
+                className="button button--secondary dashboard-selection__button"
                 onClick={[Function]}
               >
-                INVITE
+                invite
               </button>
               <button
-                className="button button--transparent dashboard-selection__button"
+                className="button button--secondary dashboard-selection__button"
                 onClick={[Function]}
               >
-                SELECT ALL
+                select all
               </button>
               <button
-                className="button button--transparent dashboard-selection__button"
+                className="button button--secondary dashboard-selection__button"
                 onClick={[Function]}
               >
-                CANCEL
+                cancel
                 <svg
                   aria-hidden="true"
                   className="dashboard-selection__button-icon"
@@ -4071,22 +4071,22 @@ exports[`DashboardPage renders correctly 1`] = `
               className="dashboard-selection__controls"
             >
               <button
-                className="button button--transparent dashboard-selection__button"
+                className="button button--secondary dashboard-selection__button"
                 onClick={[Function]}
               >
-                INVITE
+                invite
               </button>
               <button
-                className="button button--transparent dashboard-selection__button"
+                className="button button--secondary dashboard-selection__button"
                 onClick={[Function]}
               >
-                SELECT ALL
+                select all
               </button>
               <button
-                className="button button--transparent dashboard-selection__button"
+                className="button button--secondary dashboard-selection__button"
                 onClick={[Function]}
               >
-                CANCEL
+                cancel
                 <svg
                   aria-hidden="true"
                   className="dashboard-selection__button-icon"

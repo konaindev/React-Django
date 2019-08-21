@@ -99,10 +99,6 @@ export class DashboardPage extends React.PureComponent {
     this.setState({ selectedProperties: [] });
   };
 
-  changeLoader = () => {
-    // this.setState({ isShowLoader: false });
-  };
-
   get propertiesListComponent() {
     if (this.state.viewType === "tile") {
       return PropertyCardList;
@@ -233,22 +229,22 @@ const DashboardSelection = ({
         {selectedProperties.length} Properties Selected
       </div>
       <div className="dashboard-selection__controls">
-        <Button className="dashboard-selection__button" color="transparent">
-          INVITE
+        <Button className="dashboard-selection__button" color="secondary">
+          invite
         </Button>
         <Button
           className="dashboard-selection__button"
-          color="transparent"
+          color="secondary"
           onClick={selectAll}
         >
-          SELECT ALL
+          select all
         </Button>
         <Button
           className="dashboard-selection__button"
-          color="transparent"
+          color="secondary"
           onClick={cancelSelect}
         >
-          CANCEL
+          cancel
           <Close className="dashboard-selection__button-icon" width={9} />
         </Button>
       </div>

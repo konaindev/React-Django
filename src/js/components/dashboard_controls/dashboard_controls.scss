@@ -55,7 +55,6 @@ $filter-field-spacing: 8px;
 .dashboard-selection {
     display: flex;
     height: 100%;
-
     justify-content: space-between;
     align-items: center;
 }
@@ -70,15 +69,20 @@ $filter-field-spacing: 8px;
 
 .dashboard-selection__button {
     display: inline-flex;
-    padding-right: 0;
-    padding-left: 0;
-    margin-left: 42px;
+    width: 100px;
+    height: 36px;
     font-family: $font-sans;
     font-size: $text-xs;
     font-weight: $weight-normal;
     letter-spacing: $letter-spacing-wide;
     color: $button-default-active-text-color;
-    align-items: center;
+    text-transform: capitalize;
+    box-sizing: border-box;
+    justify-content: center;
+}
+
+.dashboard-selection__button + .dashboard-selection__button {
+    margin-left: 30px;
 }
 
 .dashboard-selection__button-icon {
