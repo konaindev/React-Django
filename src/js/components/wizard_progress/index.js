@@ -2,16 +2,20 @@ import cn from "classnames";
 import React from "react";
 import PropTypes from "prop-types";
 
+import { Ok } from "../../icons";
+
 import "./wizard_progress.scss";
 
 const renderSteps = steps =>
-  steps.map(({ name, isActive }, i) => {
+  steps.map(({ name, isActive, isComplete }, i) => {
     const classes = cn("wizard-progress__step", {
-      "wizard-progress__step--active": isActive
+      "wizard-progress__step--active": isActive,
+      "wizard-progress__step--complete": isComplete
     });
     return (
       <div className={classes} key={i}>
         <div className="wizard-progress__step-number">{i + 1}</div>
+        {isComplete && <Ok className="wizard-progress__icon" />}
         {name}
       </div>
     );

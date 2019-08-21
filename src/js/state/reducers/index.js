@@ -61,9 +61,23 @@ const createPassword = (state = {}, action) => {
   return newState;
 };
 
+const completeAccount = (state = {}, action) => {
+  let newState = {};
+  switch (action.type) {
+    case "COMPLETE_ACCOUNT_SET_STATE": {
+      newState = { ...state, ...action.newState };
+      break;
+    }
+    default:
+      newState = { ...state };
+  }
+  return newState;
+};
+
 export default combineReducers({
   general: dashboard,
   network,
   tutorial,
-  createPassword
+  createPassword,
+  completeAccount
 });

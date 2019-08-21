@@ -40,11 +40,15 @@ export default function Select(props) {
     />
   );
 }
+Select.optionsType = PropTypes.arrayOf(
+  PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    value: PropTypes.string.isRequired
+  })
+);
 Select.propTypes = {
   theme: PropTypes.string,
-  options: PropTypes.arrayOf(
-    PropTypes.shape({ label: PropTypes.string, value: PropTypes.string })
-  ),
+  options: Select.optionsType,
   className: PropTypes.string,
   name: PropTypes.string,
   defaultValue: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),

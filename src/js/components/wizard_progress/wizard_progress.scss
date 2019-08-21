@@ -1,5 +1,8 @@
 @import "css/base.scss";
 
+$wizard-progress-step-size: 20px;
+$wizard-progress-step-spacing: 6px;
+
 .wizard-progress {
     display: flex;
     justify-content: center;
@@ -9,16 +12,28 @@
 
 .wizard-progress__step {
     font-family: $font-sans;
-    font-size: 12px;
+    font-size: $text-xs;
     line-height: 20px;
-    color: #798796;
-    display: inline-block;
+    color: $gray-6;
+    display: inline-flex;
 
     &--active {
-        color: #006EFF;
+        color: $blue-7;
 
         .wizard-progress__step-number {
-            background-color: #006EFF;
+            background-color: $blue-7;
+        }
+    }
+
+    &--complete {
+        color: $gray-3;
+
+        .wizard-progress__step-number {
+            display: none;
+        }
+
+        .wizard-progress__icon {
+            display: inline-block;
         }
     }
 
@@ -29,11 +44,20 @@
 
 .wizard-progress__step-number {
     display: inline-block;
-    margin-right: 6px;
-    width: 20px;
-    height: 20px;
-    color: #F5FAF7;
-    background-color: #798796;
+    margin-right: $wizard-progress-step-spacing;
+    width: $wizard-progress-step-size;
+    height: $wizard-progress-step-size;
+    color: $highlight-gray-3;
+    background-color: $gray-6;
     border-radius: 50%;
     text-align: center;
 }
+
+.wizard-progress__icon {
+    display: none;
+    color: $green-7;
+    margin-right: $wizard-progress-step-spacing;
+    width: $wizard-progress-step-size;
+    height: $wizard-progress-step-size;
+}
+

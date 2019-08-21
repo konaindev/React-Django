@@ -1,0 +1,42 @@
+@import "css/base.scss";
+
+$account-form-width: 520px;
+$account-form-bg: $white;
+$account-form-spacing: 34px 80px 50px;
+$account-form-title-spacing: 50px 60px 0;
+$account-form-subtitle-spacing: 16px 80px 0;
+
+.account-form {
+    width: $account-form-width;
+    font-family: $font-sans;
+    background: $account-form-bg;
+    border-radius: $border-radius-default;
+}
+
+.account-form__wizard {
+    border-bottom: 1px solid $gray-10;
+}
+
+.account-form__title {
+    margin: $account-form-title-spacing;
+    font-size: $text-4xl;
+    line-height: 44px;
+    color: $blue-7;
+    text-align: center;
+}
+
+.account-form__subtitle {
+    margin: $account-form-subtitle-spacing;
+    font-size: $text-sm;
+    line-height: 20px;
+    color: $gray-3;
+    text-align: center;
+}
+
+.account-form__body {
+    padding: $account-form-spacing;
+}
+
+.account-form__field + .account-form__field {
+    margin-top: 20px;
+}
