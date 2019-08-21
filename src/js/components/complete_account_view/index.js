@@ -68,9 +68,22 @@ class CompleteAccountView extends React.PureComponent {
     }, 300);
   };
 
+  loadCompany = (inputValue, callback) => {
+    if (!inputValue) {
+      callback([]);
+      return;
+    }
+    clearTimeout(this.loadCompanyTimeOut);
+    this.loadCompanyTimeOut = setTimeout(() => {
+      this.props.dispatch({
+        type: "API_COMPANY",
+        data: { company: inputValue },
+        callback
+      });
+    }, 300);
+  };
+
   onSubmit = (values, actions) => {
-    console.log("----------------------->");
-    console.log(values);
     const data = { ...values };
     data.company_role = values.company_role.map(type => type.value);
     data.office_type = values.office_type.value;
@@ -80,7 +93,6 @@ class CompleteAccountView extends React.PureComponent {
       data
     });
   };
-  loadCompany = (inputValue, callback) => {};
 
   render() {
     const { company_roles, office_types, office_address } = this.props;

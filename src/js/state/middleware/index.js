@@ -76,32 +76,48 @@ export const fetchCreatePassword = store => next => action => {
   }
 };
 
-export const fetchCompanyAddress = store => next => action => {
-  if (action.type === "API_COMPANY_ADDRESS") {
-    const url = `${process.env.BASE_URL}/geo/office-address/`;
-    axiosPost(url, action.data)
-      .then(response => {
-        action.callback(response.data?.offices_addresses || []);
-      })
-      .catch(e => console.log("-----> ERROR", e));
-  } else {
-    next(action);
+export const fetchCompany = store => next => action => {
+  switch (action.type) {
+    case "API_COMPANY_ADDRESS": {
+      const url = `${process.env.BASE_URL}/geo/office-address/`;
+      axiosPost(url, action.data)
+        .then(response => {
+          action.callback(response.data?.offices_addresses || []);
+        })
+        .catch(e => console.log("-----> ERROR", e));
+      break;
+    }
+    case "API_COMPANY": {
+      const url = `${process.env.BASE_URL}/crm/company-search/`;
+      axiosPost(url, action.data)
+        .then(response => {
+          action.callback(response.data?.company || []);
+        })
+        .catch(e => console.log("-----> ERROR", e));
+      break;
+    }
+    default:
+      next(action);
   }
 };
 
 export const fetchCompleteAccount = store => next => action => {
   if (action.type === "API_COMPLETE_ACCOUNT") {
     const url = `${process.env.BASE_URL}/users/complete-account/`;
-    axiosPost(url, action.data)
-      .then(response => {
-        if (response.status === 200) {
-          const redirectUrl = "/";
-          next(completeAccount.redirect(redirectUrl));
-        } else {
-          throw response;
-        }
-      })
-      .catch(e => console.log("-----> ERROR", e));
+    if (action.data) {
+      axiosPost(url, action.data)
+        .then(response => {
+          if (response.status === 200) {
+            const redirectUrl = "/";
+            next(completeAccount.redirect(redirectUrl));
+          } else {
+            throw response;
+          }
+        })
+        .catch(e => console.log("-----> ERROR", e));
+    } else {
+      //  TODO: Add get request for form data
+    }
   } else {
     next(action);
   }

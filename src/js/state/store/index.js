@@ -4,7 +4,7 @@ import {
   fetchDashboard,
   fetchTutorial,
   fetchCreatePassword,
-  fetchCompanyAddress,
+  fetchCompany,
   fetchCompleteAccount
 } from "../middleware";
 
@@ -20,7 +20,7 @@ export default createStore(
       fetchDashboard,
       fetchTutorial,
       fetchCreatePassword,
-      fetchCompanyAddress,
+      fetchCompany,
       fetchCompleteAccount
     )
   )
