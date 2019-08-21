@@ -49,10 +49,6 @@ class DashboardView(LoginRequiredMixin, ReactView):
         )
 
     def get(self, request):
-        data_type_requested = request.headers.get("Accept", "")
-        if "application/json" not in data_type_requested:
-            return self.render(dict())
-
         user = request.user
 
         project_params = {}
@@ -149,7 +145,11 @@ class DashboardView(LoginRequiredMixin, ReactView):
             static_url=settings.STATIC_URL,
         )
 
-        return JsonResponse(response_data)
+        data_type_requested = request.headers.get("Accept", "")
+        if "application/json" in data_type_requested:
+            return JsonResponse(response_data)
+        else:
+            return self.render(**response_data)
 
 
 class TutorialView(LoginRequiredMixin, RemarkView):
