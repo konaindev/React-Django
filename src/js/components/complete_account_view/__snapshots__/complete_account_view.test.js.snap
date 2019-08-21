@@ -267,6 +267,141 @@ exports[`CompleteAccountView renders correctly 1`] = `
             <div
               className="form-field__label"
             >
+              company
+            </div>
+            <div
+              className="form-field__input-container"
+            >
+              <div
+                className="select-search select select--highlight css-dyr6gj-container"
+                onKeyDown={[Function]}
+              >
+                <div
+                  className="select__control css-yk16xz-control"
+                  onMouseDown={[Function]}
+                  onTouchEnd={[Function]}
+                >
+                  <div
+                    className="select__value-container css-1jn1ih4"
+                  >
+                    <div
+                      className="select__placeholder css-1wa3eu0-placeholder"
+                    >
+                      
+                    </div>
+                    <div>
+                      <div
+                        className="select__input"
+                        style={
+                          Object {
+                            "display": "inline-block",
+                          }
+                        }
+                      >
+                        <input
+                          aria-autocomplete="list"
+                          autoCapitalize="none"
+                          autoComplete="off"
+                          autoCorrect="off"
+                          disabled={false}
+                          id="react-select-2-input"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          spellCheck="false"
+                          style={
+                            Object {
+                              "background": 0,
+                              "border": 0,
+                              "boxSizing": "content-box",
+                              "color": "inherit",
+                              "fontSize": "inherit",
+                              "label": "input",
+                              "opacity": 1,
+                              "outline": 0,
+                              "padding": 0,
+                              "width": "1px",
+                            }
+                          }
+                          tabIndex="0"
+                          type="text"
+                          value=""
+                        />
+                        <div
+                          style={
+                            Object {
+                              "height": 0,
+                              "left": 0,
+                              "overflow": "scroll",
+                              "position": "absolute",
+                              "top": 0,
+                              "visibility": "hidden",
+                              "whiteSpace": "pre",
+                            }
+                          }
+                        >
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="select__indicators css-1wy0on6"
+                  >
+                    <span
+                      className="select__indicator-separator css-1okebmr-indicatorSeparator"
+                    />
+                  </div>
+                </div>
+                <input
+                  name="company"
+                  type="hidden"
+                  value=""
+                />
+              </div>
+              <svg
+                aria-hidden="true"
+                className="form-field__icon form-field__icon--error"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 16 16"
+                width="1em"
+              >
+                <path
+                  clipRule="evenodd"
+                  d="M0 8C0 3.58293 3.58293 0 8 0C12.4171 0 16 3.58293 16 8C16 12.4171 12.4171 16 8 16C3.58293 16 0 12.4171 0 8ZM11.8724 10.9435L10.9407 11.8724C10.7706 12.0425 10.4932 12.0425 10.3231 11.8724L7.99902 9.54878L5.67498 11.8724C5.50487 12.0425 5.22745 12.0425 5.05733 11.8698L4.12562 10.9435C3.95813 10.7708 3.95813 10.496 4.12562 10.3233L6.44966 7.99967L4.12824 5.67863C3.95812 5.50593 3.95812 5.22856 4.12824 5.05847L5.05733 4.12953C5.22745 3.95682 5.50748 3.95682 5.6776 4.12953L7.99902 6.45057L10.3231 4.12953C10.4932 3.95682 10.7732 3.95682 10.9407 4.12953L11.8724 5.05585C12.0425 5.22856 12.0425 5.50593 11.8724 5.67863L9.54838 7.99967L11.8724 10.3233C12.0399 10.496 12.0399 10.7708 11.8724 10.9435Z"
+                  fill="currentColor"
+                  fillRule="evenodd"
+                />
+              </svg>
+              <svg
+                aria-hidden="true"
+                className="form-field__icon form-field__icon--ok"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 16 16"
+                width="1em"
+              >
+                <path
+                  d="M8 0C3.58293 0 0 3.58293 0 8C0 12.4171 3.58293 16 8 16C12.4171 16 16 12.4171 16 8C16 3.58293 12.4171 0 8 0ZM12.2049 5.52439L7.91463 11.8512C7.78781 12.039 7.58537 12.1659 7.38537 12.1659C7.18537 12.1659 6.96585 12.0561 6.82439 11.9171L4.30732 9.39756C4.13659 9.22683 4.13659 8.94634 4.30732 8.77561L4.92927 8.15366C5.1 7.98293 5.38049 7.98293 5.54878 8.15366L7.1878 9.79024L10.7488 4.53659C10.8854 4.33659 11.161 4.28537 11.361 4.41951L12.0902 4.91463C12.2878 5.04878 12.3415 5.32439 12.2049 5.52439Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            className="form-field account-form__field form-field--without-icon"
+          >
+            <div
+              className="form-field__error"
+            />
+            <div
+              className="form-field__label"
+            >
               company role
             </div>
             <div
@@ -292,7 +427,7 @@ exports[`CompleteAccountView renders correctly 1`] = `
                     <input
                       className="css-62g3xt-dummyInput"
                       disabled={false}
-                      id="react-select-2-input"
+                      id="react-select-3-input"
                       onBlur={[Function]}
                       onChange={[Function]}
                       onFocus={[Function]}
@@ -445,7 +580,7 @@ exports[`CompleteAccountView renders correctly 1`] = `
                           autoComplete="off"
                           autoCorrect="off"
                           disabled={false}
-                          id="react-select-3-input"
+                          id="react-select-4-input"
                           onBlur={[Function]}
                           onChange={[Function]}
                           onFocus={[Function]}
@@ -672,7 +807,7 @@ exports[`CompleteAccountView renders correctly 1`] = `
                     <input
                       className="css-62g3xt-dummyInput"
                       disabled={false}
-                      id="react-select-4-input"
+                      id="react-select-5-input"
                       onBlur={[Function]}
                       onChange={[Function]}
                       onFocus={[Function]}

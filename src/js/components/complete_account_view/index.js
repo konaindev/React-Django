@@ -8,7 +8,7 @@ import AccountForm from "../account_form";
 import FormFiled from "../form_field";
 import PageAuth from "../page_auth";
 import Input from "../input";
-import Select from "../select";
+import Select, { SelectSearch } from "../select";
 import Button from "../button";
 import Checkbox from "../checkbox";
 import MultiSelect from "../multi_select";
@@ -17,6 +17,7 @@ import router from "../../router";
 
 import { propertySchema } from "./validators";
 import "./complete_account_view.scss";
+import { DropdownIndicator } from "../select/select_components";
 
 class CompleteAccountView extends React.PureComponent {
   static propTypes = {
@@ -38,6 +39,10 @@ class CompleteAccountView extends React.PureComponent {
     );
   }
 
+  selectSearchComponents = {
+    DropdownIndicator: () => null
+  };
+
   selectStyles = {
     container: provided => ({ ...provided, width: "100%" }),
     valueContainer: provided => ({ ...provided, height: "18px" })
@@ -58,6 +63,7 @@ class CompleteAccountView extends React.PureComponent {
   getSelectLabel = values => values?.map(v => v.label).join(", ");
 
   loadAddress = (inputValue, callback) => {};
+  loadCompany = (inputValue, callback) => {};
 
   render() {
     const { company_roles, office_types, officeAddress } = this.props;
@@ -130,6 +136,30 @@ class CompleteAccountView extends React.PureComponent {
                     value={values.title}
                     onChange={handleChange}
                     onBlur={handleBlur}
+                  />
+                </FormFiled>
+                <FormFiled
+                  className={AccountForm.fieldClass}
+                  label="company"
+                  showError={touched.company}
+                  showIcon={false}
+                  error={errors.company}
+                >
+                  <SelectSearch
+                    name="company"
+                    theme="highlight"
+                    placeholder=""
+                    components={this.selectSearchComponents}
+                    styles={this.selectStyles}
+                    loadOptions={this.loadCompany}
+                    isCreatable={true}
+                    value={values.company}
+                    onChange={props => {
+                      setFieldValue("company", props);
+                    }}
+                    onBlur={() => {
+                      setFieldTouched("company");
+                    }}
                   />
                 </FormFiled>
                 <FormFiled

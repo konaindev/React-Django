@@ -12,12 +12,19 @@ export const propertySchema = Yup.object().shape({
   title: Yup.string()
     .max(255, "is too much length")
     .label(" "),
+  company: Yup.object()
+    .required()
+    .shape({
+      label: Yup.string().max(255, "is too much length"),
+      value: Yup.string().max(255, "is too much length")
+    })
+    .label(" "),
   company_role: Yup.array()
     .required()
     .of(
       Yup.object({
-        label: Yup.string(),
-        value: Yup.string()
+        label: Yup.string().max(255, "is too much length"),
+        value: Yup.string().max(255, "is too much length")
       })
     )
     .label(" "),
@@ -32,8 +39,8 @@ export const propertySchema = Yup.object().shape({
   office_type: Yup.object()
     .required()
     .shape({
-      label: Yup.string(),
-      value: Yup.string()
+      label: Yup.string().max(255, "is too much length"),
+      value: Yup.string().max(255, "is too much length")
     })
     .label(" "),
   terms: Yup.boolean()
