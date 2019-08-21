@@ -45,6 +45,52 @@ function Control(props) {
   return <components.Control {...props} className={classes} />;
 }
 
+function AllOption({
+  selectAllLabel,
+  isShowAllOption,
+  isAllSelected,
+  onSelectAll
+}) {
+  if (!isShowAllOption) {
+    return null;
+  }
+  const classes = cn("multi-select__option", "select__option", {
+    "select__option--is-selected": isAllSelected
+  });
+  return (
+    <div className={classes} onClick={onSelectAll}>
+      <Checkbox className="multi-select__checkbox" isSelected={isAllSelected} />
+      <div className="multi-select__option-label">{selectAllLabel}</div>
+    </div>
+  );
+}
+
+function Controls({ isShowControls, onReset, onApply }) {
+  if (!isShowControls) {
+    return null;
+  }
+  return (
+    <div className="multi-select__controls">
+      <Button
+        className="multi-select__button"
+        color="secondary"
+        uppercase={true}
+        onClick={onReset}
+      >
+        reset
+      </Button>
+      <Button
+        className="multi-select__button"
+        uppercase={true}
+        color="primary"
+        onClick={onApply}
+      >
+        apply
+      </Button>
+    </div>
+  );
+}
+
 export default class MultiSelect extends React.PureComponent {
   static optionsType = PropTypes.arrayOf(
     PropTypes.shape({
@@ -80,60 +126,23 @@ export default class MultiSelect extends React.PureComponent {
     menuIsOpen: false
   };
 
-  renderControls = () => {
-    if (!this.props.isShowControls) {
-      return null;
-    }
-    return (
-      <div className="multi-select__controls">
-        <Button
-          className="multi-select__button"
-          color="secondary"
-          uppercase={true}
-          onClick={this.onReset}
-        >
-          reset
-        </Button>
-        <Button
-          className="multi-select__button"
-          uppercase={true}
-          color="primary"
-          onClick={this.onApply}
-        >
-          apply
-        </Button>
-      </div>
-    );
-  };
-
-  renderAllOption = () => {
-    if (!this.props.isShowAllOption) {
-      return null;
-    }
-    const classes = cn("multi-select__option", "select__option", {
-      "select__option--is-selected": this.isAllSelected
-    });
-    return (
-      <div className={classes} onClick={this.onSelectAll}>
-        <Checkbox
-          className="multi-select__checkbox"
-          isSelected={this.isAllSelected}
-        />
-        <div className="multi-select__option-label">
-          {this.props.selectAllLabel}
-        </div>
-      </div>
-    );
-  };
-
   menuList = props => {
     return (
       <components.MenuList {...props}>
         <div className="multi-select__options">
-          {this.renderAllOption()}
+          <AllOption
+            selectAllLabel={this.props.selectAllLabel}
+            isAllSelected={this.isAllSelected}
+            isShowAllOption={this.props.isShowAllOption}
+            onSelectAll={this.onSelectAll}
+          />
           {props.children}
         </div>
-        {this.renderControls()}
+        <Controls
+          isShowControls={this.props.isShowControls}
+          onApply={this.onApply}
+          onReset={this.onReset}
+        />
       </components.MenuList>
     );
   };
