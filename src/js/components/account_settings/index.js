@@ -95,7 +95,7 @@ export default class AccountSettings extends React.PureComponent {
           </div>
           <div className="account-settings__panel">
             <div className="account-settings__menu">{this.getItems()}</div>
-            <Component />
+            <Component {...this.props} />
           </div>
         </div>
       </PageChrome>

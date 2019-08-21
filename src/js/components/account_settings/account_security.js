@@ -1,4 +1,6 @@
+import cn from "classnames";
 import { Formik, Form } from "formik";
+import PropTypes from "prop-types";
 import React from "react";
 
 import Yup from "../../yup";
@@ -12,34 +14,92 @@ const schema = Yup.object().shape({
     .required()
     .max(255)
     .email(),
-  password: Yup.string()
-    .required()
-    .min(8)
+  password: Yup.string(),
+  confirm_password: Yup.string().when("password", (password, schema) => {
+    if (password) {
+      return Yup.string()
+        .required()
+        .oneOf([Yup.ref("password"), null]);
+    }
+    return schema;
+  })
 });
 
-export default class AccountSecurity extends React.Component {
-  state = { password: "" };
+const initialValues = {
+  email: "",
+  old_password: "*******************",
+  password: "",
+  confirm_password: ""
+};
 
-  changePassword = e => {
-    this.setState({ password: e.target.value });
+export default class AccountSecurity extends React.PureComponent {
+  static propTypes = {
+    validate: PropTypes.func
+  };
+
+  static defaultProps = {
+    validate: () => {}
+  };
+
+  getErrorMessage = (errors, touched) => {
+    let message;
+    if (errors.confirm_password && touched.confirm_password) {
+      message = "New passwords don’t match.";
+    } else {
+      for (let k of Object.keys(errors)) {
+        if (touched[k]) {
+          message = "Please review highlighted fields above.";
+          break;
+        }
+      }
+    }
+    return <div className="account-settings__general-error">{message}</div>;
+  };
+
+  getFieldClasses = (name, errors, touched, extraModifiers = []) => {
+    const extra = extraModifiers
+      .map(mod => `account-settings__field--${mod}`)
+      .join(" ");
+    return cn("account-settings__field", extra, {
+      "account-settings__field--error": errors[name] && touched[name]
+    });
   };
 
   render() {
     return (
       <div className="account-settings__tab">
-        <Formik validationSchema={schema} validateOnBlur={true}>
-          {({ errors, touched, values, isValid, setTouched, setValues }) => (
+        <Formik
+          validate={this.props.validate}
+          validationSchema={schema}
+          validateOnBlur={true}
+          validateOnChange={true}
+          initialValues={initialValues}
+        >
+          {({ errors, touched, values, handleChange, handleBlur }) => (
             <Form method="post" autoComplete="off">
               <div className="account-settings__tab-content">
                 <div className="account-settings__tab-title">
                   Account Security
                 </div>
-                <div className="account-settings__field">
+                <div className={this.getFieldClasses("email", errors, touched)}>
                   <div className="account-settings__label">Email Address</div>
-                  <input className="account-settings__input" name="email" />
+                  <input
+                    className="account-settings__input"
+                    name="email"
+                    value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
                 </div>
                 <div className="account-settings__field-group">
-                  <div className="account-settings__field account-settings__field--short">
+                  <div
+                    className={this.getFieldClasses(
+                      "old_password",
+                      errors,
+                      touched,
+                      ["short"]
+                    )}
+                  >
                     <div className="account-settings__label">
                       Current Password
                     </div>
@@ -47,16 +107,25 @@ export default class AccountSecurity extends React.Component {
                       className="account-settings__input account-settings__input--current-password"
                       name="old_password"
                       type="password"
+                      value={values.old_password}
                     />
                   </div>
-                  <div className="account-settings__field account-settings__field--short">
+                  <div
+                    className={this.getFieldClasses(
+                      "password",
+                      errors,
+                      touched,
+                      ["short"]
+                    )}
+                  >
                     <div className="account-settings__label">New Password</div>
                     <Tooltip
                       placement="bottom"
                       theme="dark"
                       overlay={
                         <PasswordOverlay
-                          password={this.state.password}
+                          password={values.password}
+                          errors={errors.password}
                           {...props}
                         />
                       }
@@ -65,13 +134,21 @@ export default class AccountSecurity extends React.Component {
                       <input
                         className="account-settings__input"
                         name="password"
-                        value={this.state.password}
                         type="password"
-                        onChange={this.changePassword}
+                        value={values.password}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
                       />
                     </Tooltip>
                   </div>
-                  <div className="account-settings__field account-settings__field--short">
+                  <div
+                    className={this.getFieldClasses(
+                      "confirm_password",
+                      errors,
+                      touched,
+                      ["short"]
+                    )}
+                  >
                     <div className="account-settings__label">
                       Confirm Password
                     </div>
@@ -79,14 +156,22 @@ export default class AccountSecurity extends React.Component {
                       className="account-settings__input"
                       name="confirm_password"
                       type="password"
+                      value={values.confirm_password}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
                     />
                   </div>
                 </div>
               </div>
               <div className="account-settings__buttons-field">
-                <Button className="account-settings__button" color="primary">
+                <Button
+                  className="account-settings__button"
+                  color="primary"
+                  type="submit"
+                >
                   Save
                 </Button>
+                {this.getErrorMessage(errors, touched)}
               </div>
             </Form>
           )}

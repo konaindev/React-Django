@@ -21,6 +21,8 @@ $password-text-color: $gray-6;
 $current-password-text-color: $gray-4;
 $buttons-border: 1px solid $gray-4;
 $button-line-height: 20px;
+$error-line-height: 1.625rem;
+$error-color: $orange-6;
 
 .account-settings {
     width: $page-width;
@@ -143,6 +145,8 @@ $button-line-height: 20px;
 }
 
 .account-settings__buttons-field {
+    display: flex;
+    align-items: center;
     padding: 30px;
     border-top: $buttons-border;
 }
@@ -154,4 +158,22 @@ $button-line-height: 20px;
     letter-spacing: 1px;
     text-transform: uppercase;
     line-height: $button-line-height;
+}
+
+.account-settings__general-error {
+    margin-left: 30px;
+    font-size: $text-sm;
+    color: $error-color;
+    line-height: $error-line-height;
+}
+
+.account-settings__field--error {
+    .account-settings__label {
+        color: $error-color;
+    }
+
+    .account-settings__input,
+    .account-settings__input:focus {
+        border: 1px solid $error-color;
+    }
 }
