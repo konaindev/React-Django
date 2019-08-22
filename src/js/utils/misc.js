@@ -73,6 +73,9 @@ export function convertBackendErrors(errors) {
   return _mapValues(errors, item => item[0].message);
 }
 
+/*
+ * Shallow wrapper of "qs" plugin's parse() / stringify() methods
+ */
 export const qsParse = (queryString, hasLeadingPrefix = true) => {
   return qs.parse(queryString, { ignoreQueryPrefix: hasLeadingPrefix });
 };
@@ -80,6 +83,6 @@ export const qsParse = (queryString, hasLeadingPrefix = true) => {
 export const qsStringify = (queryParams, appendLeadingPrefix = true) => {
   return qs.stringify(queryParams, {
     addQueryPrefix: appendLeadingPrefix,
-    indices: false // array values, "a=1&a=2" instead of "a[0]=1&a[1]=2"
+    arrayFormat: "repeat" // "a=1&a=2" instead of "a[0]=1&a[1]=2"
   });
 };

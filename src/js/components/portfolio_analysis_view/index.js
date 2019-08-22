@@ -8,16 +8,12 @@ import PageChrome from "../page_chrome";
 import PortfolioTable from "../portfolio_table";
 import KPICard from "../kpi_card";
 import Select from "../select";
-import ShareToggle from "../share_toggle";
-import { formatPercent } from "../../utils/formatters";
 import UserMenu from "../user_menu";
-import Button from "../button";
-
+import ToggleButton from "../toggle_button";
 import { formatKPI } from "../../utils/kpi_formatters";
+import { qsParse, qsStringify } from "../../utils/misc";
 
 import "./portfolio_analysis_view.scss";
-import ButtonGroup from "../button_group";
-import ToggleButton from "../toggle_button";
 
 const navLinks = {
   links: [
@@ -214,13 +210,13 @@ export class PortfolioAnalysisView extends React.PureComponent {
 
 export default class UrlQueryLayer extends React.PureComponent {
   onChangeHandler = params => {
-    const urlParams = new URLSearchParams(window.location.search);
-    urlParams.set("b", params.selected_kpi_bundle);
-    urlParams.set("p", params.date_selection.preset);
-    urlParams.set("s", params.date_selection.start_date);
-    urlParams.set("e", params.date_selection.end_date);
-    urlParams.set("a", params.display_average);
-    window.location.search = urlParams.toString();
+    const urlParams = qsParse(window.location.search);
+    urlParams["b"] = params.selected_kpi_bundle;
+    urlParams["p"] = params.date_selection.preset;
+    urlParams["s"] = params.date_selection.start_date;
+    urlParams["e"] = params.date_selection.end_date;
+    urlParams["a"] = params.display_average;
+    window.location.search = qsStringify(urlParams);
   };
 
   render() {

@@ -1,6 +1,6 @@
 import { qsParse, qsStringify } from "./misc";
 
-describe.only("utils > query strings", () => {
+describe("utils > query strings", () => {
   it("qsParse()", () => {
     expect(qsParse("a=1&b=2", false)).toEqual({ a: "1", b: "2" });
     expect(qsParse("?a=1&b=2")).toEqual({ a: "1", b: "2" });
