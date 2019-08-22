@@ -12,15 +12,15 @@ $menu-item-width: 221px;
 $menu-item-color: $gray-6;
 $menu-active-item-color: $highlight-gray-3;
 $tab-title-color: $highlight-gray-3;
-$tab-title-line-height: 34px;
+$tab-title-line-height: 2.125rem;
 $input-label-line-height: $line-height-tight;
 $input-border: 1px solid $gray-4;
-$input-line-height: 20px;
+$input-line-height: 1.25rem;
 $input-text-color: $highlight-gray-3;
 $password-text-color: $gray-6;
 $current-password-text-color: $gray-4;
 $buttons-border: 1px solid $gray-4;
-$button-line-height: 20px;
+$button-line-height: 1.25rem;
 $error-line-height: 1.625rem;
 $error-color: $orange-6;
 
@@ -122,25 +122,15 @@ $error-color: $orange-6;
 
 .account-settings__input,
 .account-settings__input[type=password] {
-    width: 100%;
-    padding: 12px;
     margin-top: 8px;
-    color: $input-text-color;
-    font-size: $text-sm;
-    border: $input-border;
-    border-radius: 4px;
-    background: transparent;
-    line-height: $input-line-height;
-
-    &:focus {
-        outline: none;
-        border-color: $input-highlight-focus-border;
-    }
 }
 
 .account-settings__input {
     &#{&}--current-password {
         color: $current-password-text-color;
+        &:focus {
+            color: $current-password-text-color;
+        }
     }
 }
 

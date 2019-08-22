@@ -95,7 +95,7 @@ class CreatePasswordView extends React.PureComponent {
             }) => (
               <Form>
                 <div className={AccountForm.fieldClass}>
-                  <FormFiled label="Password">
+                  <FormField label="Password">
                     <RMBTooltip
                       theme="highlight"
                       trigger={["focus"]}
@@ -117,10 +117,10 @@ class CreatePasswordView extends React.PureComponent {
                         value={values.password}
                       />
                     </RMBTooltip>
-                  </FormFiled>
+                  </FormField>
                 </div>
                 <div className={AccountForm.fieldClass}>
-                  <FormFiled
+                  <FormField
                     label="Confirm Password"
                     error={errors.password2}
                     showError={touched.password2 && values.password}
@@ -133,7 +133,7 @@ class CreatePasswordView extends React.PureComponent {
                       onBlur={handleBlur}
                       value={values.password2}
                     />
-                  </FormFiled>
+                  </FormField>
                 </div>
                 <Button
                   className="create-password__button"

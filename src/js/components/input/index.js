@@ -13,9 +13,12 @@ export default function Input(props) {
   return <input className={classes} type={props.type} {...otherProps} />;
 }
 Input.propTypes = {
-  type: PropTypes.string.isRequired,
-  theme: PropTypes.oneOf(["", "highlight"]),
+  type: PropTypes.string,
+  theme: PropTypes.oneOf(["", "highlight", "gray"]),
   className: PropTypes.string
+};
+Input.defaultProps = {
+  type: "text"
 };
 
 export function FormInput(props) {

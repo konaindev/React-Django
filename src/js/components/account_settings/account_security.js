@@ -5,6 +5,7 @@ import React from "react";
 
 import Yup from "../../yup";
 import Button from "../button";
+import Input from "../input";
 import PasswordOverlay from "../password_tooltip";
 import Tooltip from "../rmb_tooltip";
 import { props } from "./props";
@@ -83,9 +84,10 @@ export default class AccountSecurity extends React.PureComponent {
                 </div>
                 <div className={this.getFieldClasses("email", errors, touched)}>
                   <div className="account-settings__label">Email Address</div>
-                  <input
+                  <Input
                     className="account-settings__input"
                     name="email"
+                    theme="gray"
                     value={values.email}
                     onChange={handleChange}
                     onBlur={handleBlur}
@@ -103,10 +105,11 @@ export default class AccountSecurity extends React.PureComponent {
                     <div className="account-settings__label">
                       Current Password
                     </div>
-                    <input
+                    <Input
                       className="account-settings__input account-settings__input--current-password"
                       name="old_password"
                       type="password"
+                      theme="gray"
                       value={values.old_password}
                     />
                   </div>
@@ -131,10 +134,11 @@ export default class AccountSecurity extends React.PureComponent {
                       }
                       trigger={["focus"]}
                     >
-                      <input
+                      <Input
                         className="account-settings__input"
                         name="password"
                         type="password"
+                        theme="gray"
                         value={values.password}
                         onChange={handleChange}
                         onBlur={handleBlur}
@@ -152,10 +156,11 @@ export default class AccountSecurity extends React.PureComponent {
                     <div className="account-settings__label">
                       Confirm Password
                     </div>
-                    <input
+                    <Input
                       className="account-settings__input"
                       name="confirm_password"
                       type="password"
+                      theme="gray"
                       value={values.confirm_password}
                       onChange={handleChange}
                       onBlur={handleBlur}
