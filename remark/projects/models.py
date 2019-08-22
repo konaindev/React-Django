@@ -110,11 +110,8 @@ class Tag(models.Model):
 class ProjectManager(models.Manager):
 
     def get_all_for_user(self, user):
-        groups = list(user.groups.all())
-        ids = []
-        for group in groups:
-            ids.append(group.id)
-        return self.filter(view_group_id__in=ids)
+        group_ids = [group.id for group in user.groups.all()]
+        return self.filter(view_group_id__in=group_ids)
 
 
 class Project(models.Model):
