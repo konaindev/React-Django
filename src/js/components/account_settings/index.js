@@ -26,6 +26,47 @@ const navLinks = {
   selected_link: ""
 };
 
+const tabsData = {
+  profile: {
+    name: "Profile",
+    iconComponent: Profile,
+    component: ProfileTab
+  },
+  lock: {
+    name: "Security",
+    iconComponent: Lock,
+    component: AccountSecurity
+  },
+  email: {
+    name: "Email Reports",
+    iconComponent: Email,
+    component: EmailReports
+  }
+};
+
+function MenuItems(props) {
+  const { tab, selectTab, tabs } = props;
+  const tabsUI = tabs.map(id => {
+    const item = tabsData[id];
+    const Icon = item.iconComponent;
+    const itemClass = cn("account-settings__menu-item", {
+      "account-settings__menu-item--active": id === tab
+    });
+    return (
+      <div className={itemClass} key={id} onClick={() => selectTab(id)}>
+        <Icon />
+        <span className="account-settings__menu-item-text">{item.name}</span>
+      </div>
+    );
+  });
+  return <>{tabsUI}</>;
+}
+MenuItems.propTypes = {
+  tab: PropTypes.string.isRequired,
+  tabs: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selectTab: PropTypes.func.isRequired
+};
+
 export default class AccountSettings extends React.PureComponent {
   static propTypes = {
     initialTab: PropTypes.string
@@ -33,24 +74,6 @@ export default class AccountSettings extends React.PureComponent {
 
   static defaultProps = {
     initialTab: "profile"
-  };
-
-  tabsData = {
-    profile: {
-      name: "Profile",
-      iconComponent: Profile,
-      component: ProfileTab
-    },
-    lock: {
-      name: "Security",
-      iconComponent: Lock,
-      component: AccountSecurity
-    },
-    email: {
-      name: "Email Reports",
-      iconComponent: Email,
-      component: EmailReports
-    }
   };
 
   tabs = ["profile", "lock", "email"];
@@ -64,25 +87,8 @@ export default class AccountSettings extends React.PureComponent {
 
   selectTab = tab => this.setState({ tab });
 
-  getItems = () => {
-    const { tab } = this.state;
-    return this.tabs.map(id => {
-      const item = this.tabsData[id];
-      const Icon = item.iconComponent;
-      const itemClass = cn("account-settings__menu-item", {
-        "account-settings__menu-item--active": id === tab
-      });
-      return (
-        <div className={itemClass} key={id} onClick={() => this.selectTab(id)}>
-          <Icon />
-          <span className="account-settings__menu-item-text">{item.name}</span>
-        </div>
-      );
-    });
-  };
-
   render() {
-    const Component = this.tabsData[this.state.tab].component;
+    const Component = tabsData[this.state.tab].component;
     return (
       <PageChrome navLinks={navLinks}>
         <div className="account-settings">
@@ -94,7 +100,13 @@ export default class AccountSettings extends React.PureComponent {
             </div>
           </div>
           <div className="account-settings__panel">
-            <div className="account-settings__menu">{this.getItems()}</div>
+            <div className="account-settings__menu">
+              <MenuItems
+                tab={this.state.tab}
+                tabs={this.tabs}
+                selectTab={this.selectTab}
+              />
+            </div>
             <Component {...this.props} />
           </div>
         </div>
