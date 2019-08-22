@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import React, { Component } from "react";
 
 import CloseIcon from "../../icons/close";
-import { post } from "../../utils/api";
+import { axiosPost } from "../../utils/api";
 import { convertBackendErrors } from "../../utils/misc";
 import Button from "../button";
 import { FormSelect } from "../select";
@@ -109,7 +109,7 @@ export default class AddPropertyForm extends Component {
     for (const k of Object.keys(data)) {
       formData.append(k, data[k]);
     }
-    post(this.props.post_url, formData)
+    axiosPost(this.props.post_url, formData)
       .then(() => {
         actions.setSubmitting(false);
         this.isSubmitting = false;
