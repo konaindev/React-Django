@@ -3,6 +3,7 @@ import { Formik, Form } from "formik";
 import PropTypes from "prop-types";
 import React from "react";
 
+import { Checked } from "../../icons";
 import Yup from "../../yup";
 import Button from "../button";
 import Input from "../input";
@@ -42,6 +43,8 @@ export default class AccountSecurity extends React.PureComponent {
     validate: () => {}
   };
 
+  state = { success: false };
+
   getErrorMessage = (errors, touched) => {
     let message;
     if (errors.confirm_password && touched.confirm_password) {
@@ -54,7 +57,22 @@ export default class AccountSecurity extends React.PureComponent {
         }
       }
     }
+    if (!message) {
+      return;
+    }
     return <div className="account-settings__general-error">{message}</div>;
+  };
+
+  getSuccessMessage = () => {
+    if (!this.state.success) {
+      return;
+    }
+    return (
+      <div className="account-settings__success">
+        <Checked className="account-settings__checked" />
+        Password has successfuly been reset.
+      </div>
+    );
   };
 
   getFieldClasses = (name, errors, touched, extraModifiers = []) => {
@@ -66,6 +84,14 @@ export default class AccountSecurity extends React.PureComponent {
     });
   };
 
+  onSubmit = (values, actions) => {
+    actions.setSubmitting(false);
+    this.setState({ success: true });
+    setTimeout(() => {
+      this.setState({ success: false });
+    }, 5000);
+  };
+
   render() {
     return (
       <div className="account-settings__tab">
@@ -75,6 +101,7 @@ export default class AccountSecurity extends React.PureComponent {
           validateOnBlur={true}
           validateOnChange={true}
           initialValues={initialValues}
+          onSubmit={this.onSubmit}
         >
           {({ errors, touched, values, handleChange, handleBlur }) => (
             <Form method="post" autoComplete="off">
@@ -177,6 +204,7 @@ export default class AccountSecurity extends React.PureComponent {
                   Save
                 </Button>
                 {this.getErrorMessage(errors, touched)}
+                {this.getSuccessMessage()}
               </div>
             </Form>
           )}
