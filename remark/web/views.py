@@ -51,6 +51,23 @@ class DashboardView(LoginRequiredMixin, ReactView):
     def get(self, request):
         user = request.user
 
+        
+        # @TOOD: we might need to render empty props initially
+        #
+        # data_type_requested = request.headers.get("Accept", "")
+        # if "application/json" not in data_type_requested:
+        #     return self.render(
+        #         no_projects=False,
+        #         properties=[],
+        #         user=user.get_menu_dict(),
+        #         search_url=request.GET.urlencode(),
+        #         locations=[],
+        #         property_managers=[],
+        #         asset_managers=[],
+        #         funds=[],
+        #         static_url=settings.STATIC_URL,
+        #     )
+
         project_params = {}
         if user.is_superuser:
             project_query = Project.objects.all()
@@ -144,6 +161,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
             funds=funds,
             static_url=settings.STATIC_URL,
         )
+        # return JsonResponse(response_data)
 
         data_type_requested = request.headers.get("Accept", "")
         if "application/json" in data_type_requested:
