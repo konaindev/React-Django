@@ -22,9 +22,9 @@ export const networking = {
   stopFetching: () => ({
     type: "NETWORK_STOP_FETCH"
   }),
-  fetchDashboard: searchString => ({
+  fetchDashboard: (queryString = "") => ({
     type: "API_DASHBOARD",
-    searchString
+    queryString
   })
 };
 

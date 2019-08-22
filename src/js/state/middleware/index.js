@@ -12,7 +12,7 @@ export const fetchDashboard = store => next => action => {
     if (!isFetching || isFetching === false) {
       store.dispatch(networking.startFetching());
     }
-    apiGet(`${process.env.BASE_URL}/dashboard?${action.searchString}`)
+    apiGet(`${process.env.BASE_URL}/dashboard${action.queryString}`)
       .then(response => next(general.set(response.data)))
       .then(setTimeout(() => next(networking.stopFetching()), 120))
       .catch(e => {

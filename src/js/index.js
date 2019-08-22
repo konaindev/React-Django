@@ -24,7 +24,6 @@ import ProjectPage from "./components/project_page";
 import ReleaseNotesPage from "./components/release_notes_page";
 import ReleaseNoteDetailsPage from "./components/release_note_details_page";
 import CampaignPlanPage from "./components/campaign_plan_page";
-import { get as apiGet } from "./utils/api";
 import store from "./state/store";
 import { general } from "./state/actions";
 import PortfolioAnalysisView from "./components/portfolio_analysis_view";
@@ -42,28 +41,9 @@ const pages = {
   PortfolioAnalysisView
 };
 
-const tmpFetchDashboardData = pageClass => {
-  const location = window.location;
-  const queryString = location.search;
-  let _newState = {};
-
-  apiGet(
-    `${process.env.BASE_URL}/dashboard${queryString ? `?${queryString}` : ""}`
-  )
-    .then(response => {
-      const newState = response.data;
-      store.dispatch(general.set(newState));
-      _newState = newState;
-    })
-    .catch(e => console.log(e))
-    .finally(() => {
-      renderApp(pageClass, _newState);
-    });
-};
 /*
  * Import the root application here.
  */
-
 import App from "./App.js";
 
 /*
@@ -133,11 +113,7 @@ ready(() => {
 
   /* If this is a react rooted page, spin up the app. */
   if (pageClass) {
-    if (root && root.dataset.page === "DashboardPage") {
-      tmpFetchDashboardData(pageClass);
-    } else {
-      store.dispatch(general.set(getPageProps()));
-      renderApp(pageClass, getPageProps());
-    }
+    store.dispatch(general.set(getPageProps()));
+    renderApp(pageClass, getPageProps());
   }
 });

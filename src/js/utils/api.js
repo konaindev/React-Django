@@ -22,7 +22,6 @@ export function get(url, config = {}) {
   const params = {
     method: "get",
     url,
-    responseType: "json",
     withCredentials: true,
     ...config
   };
