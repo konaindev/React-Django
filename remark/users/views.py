@@ -3,6 +3,7 @@ from django.contrib.auth import views as auth_views, login as auth_login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect, JsonResponse
 
+from remark.crm.models import Business, Office, Person
 from remark.lib.views import ReactView
 from remark.geo.models import Address
 
@@ -45,33 +46,17 @@ class CompleteAccountView(LoginRequiredMixin, ReactView):
     page_class = "CompleteAccountView"
 
     def get(self, request):
-        user = request.user
-        addresses = Address.objects.filter(
-            property__project__account_id=user.account_id
-        )
-        office_address = [
-            {
-                "value": address.formatted_address,
-                "street": address.street_address_1 or address.street_address_2,
-                "city": address.city,
-                "state": address.state,
-            }
-            for address in addresses
-        ]
-        if request.content_type != "application/json":
-            response = self.render(
-                office_types=OFFICE_TYPES,
-                company_roles=COMPANY_ROLES,
-                office_address=office_address,
-            )
-        else:
+        if request.headers.get("Response-Type") == "application/json":
             response = JsonResponse(
                 {
                     "office_types": OFFICE_TYPES,
                     "company_roles": COMPANY_ROLES,
-                    "office_address": office_address,
-                },
-                status=200,
+                }
+            )
+        else:
+            response = self.render(
+                office_types=OFFICE_TYPES,
+                company_roles=COMPANY_ROLES,
             )
         return response
 
