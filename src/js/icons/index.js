@@ -3,6 +3,7 @@ export { default as ArrowSide } from "./arrow_side";
 export { default as ArrowUp } from "./arrow_up";
 export { default as Billing } from "./billing";
 export { default as Close } from "./close";
+export { default as Checked } from "./checked";
 export { default as Email } from "./email";
 export { default as Invite } from "./invite";
 export { default as ListView } from "./list_view";
