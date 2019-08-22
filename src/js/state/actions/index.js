@@ -39,5 +39,9 @@ export const completeAccount = {
   redirect: url => ({
     type: "COMPLETE_ACCOUNT_REDIRECT",
     url
+  }),
+  set: newState => ({
+    type: "COMPLETE_ACCOUNT_SET_STATE",
+    newState
   })
 };

@@ -28,9 +28,11 @@ export const propertySchema = Yup.object().shape({
       })
     )
     .label(" "),
-  office_address: Yup.string()
+  office_address: Yup.object()
+    .shape({
+      value: Yup.string().max(255, "is too much length")
+    })
     .required()
-    .max(255, "is too much length")
     .label(" "),
   office_name: Yup.string()
     .required()

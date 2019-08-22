@@ -79,10 +79,15 @@ export const fetchCreatePassword = store => next => action => {
 export const fetchCompany = store => next => action => {
   switch (action.type) {
     case "API_COMPANY_ADDRESS": {
-      const url = `${process.env.BASE_URL}/geo/office-address/`;
+      const url = `${process.env.BASE_URL}/crm/office-address/`;
       axiosPost(url, action.data)
         .then(response => {
-          action.callback(response.data?.offices_addresses || []);
+          const companyAddresses = response.data?.addresses || [];
+          if (action.callback) {
+            action.callback(companyAddresses);
+          } else {
+            next(completeAccount.set({ companyAddresses }));
+          }
         })
         .catch(e => console.log("-----> ERROR", e));
       break;
@@ -116,7 +121,11 @@ export const fetchCompleteAccount = store => next => action => {
         })
         .catch(e => console.log("-----> ERROR", e));
     } else {
-      //  TODO: Add get request for form data
+      axiosGet(url)
+        .then(response => {
+          next(completeAccount.set(response.data));
+        })
+        .catch(e => console.log("-----> ERROR", e));
     }
   } else {
     next(action);

@@ -27,12 +27,25 @@ class CompleteAccountView extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    this._router = router("/complete-account")(x =>
+    this.formik = React.createRef();
+    this._router = router("/complete-account")(() => {
       props.dispatch({
         type: "API_COMPLETE_ACCOUNT"
-      })
-    );
+      });
+    });
   }
+
+  initialValues = {
+    first_name: "",
+    last_name: "",
+    title: "",
+    company: null,
+    company_role: [],
+    office_address: null,
+    office_name: "",
+    office_type: null,
+    terms: false
+  };
 
   selectSearchComponents = {
     DropdownIndicator: () => null
@@ -58,21 +71,24 @@ class CompleteAccountView extends React.PureComponent {
   getSelectLabel = values => values?.map(v => v.label).join(", ");
 
   loadAddress = (inputValue, callback) => {
+    const data = { address: inputValue };
+    const context = this.formik?.current?.getFormikContext();
+    const businessId = context?.values?.company?.value;
+    const businessName = context?.values?.company?.label;
+    if (businessId !== businessName) {
+      data["business_id"] = businessId;
+    }
     clearTimeout(this.loadAddressTimeOut);
     this.loadAddressTimeOut = setTimeout(() => {
       this.props.dispatch({
         type: "API_COMPANY_ADDRESS",
-        data: { address: inputValue },
+        data,
         callback
       });
     }, 300);
   };
 
   loadCompany = (inputValue, callback) => {
-    if (!inputValue) {
-      callback([]);
-      return;
-    }
     clearTimeout(this.loadCompanyTimeOut);
     this.loadCompanyTimeOut = setTimeout(() => {
       this.props.dispatch({
@@ -85,6 +101,7 @@ class CompleteAccountView extends React.PureComponent {
 
   onSubmit = (values, actions) => {
     const data = { ...values };
+    data.company = values.company.value;
     data.company_role = values.company_role.map(type => type.value);
     data.office_type = values.office_type.value;
     data.office_address = values.office_address.value;
@@ -94,8 +111,55 @@ class CompleteAccountView extends React.PureComponent {
     });
   };
 
+  onCreateCompany = value => {
+    const option = { label: value, value };
+    this.formik.current.setFieldValue("company", option);
+  };
+
+  onChangeCompany = company => {
+    this.formik.current.setFieldValue("company", company);
+    this.props.dispatch({
+      type: "API_COMPANY_ADDRESS",
+      data: { address: "", business_id: company.value }
+    });
+  };
+
+  onBlurCompany = () => {
+    this.formik.current.setFieldTouched("company");
+  };
+
+  onChangeCompanyRole = value => {
+    this.formik.current.setFieldValue("company_role", value);
+  };
+
+  onBlurCompanyRole = () => {
+    this.formik.current.setFieldTouched("company_role");
+  };
+
+  onChangeOfficeAddress = value => {
+    this.formik.current.setFieldValue("office_address", value);
+  };
+
+  onBlurOfficeAddress = () => {
+    this.formik.current.setFieldTouched("office_address");
+  };
+
+  onChangeOfficeType = value => {
+    this.formik.current.setFieldValue("office_type", value);
+  };
+
+  onBlurOfficeType = () => {
+    this.formik.current.setFieldTouched("office_type");
+  };
+
+  onChangeTerms = () => {
+    const context = this.formik.current.getFormikContext();
+    const value = context?.values?.terms;
+    this.formik.current.setFieldValue("terms", !value);
+  };
+
   render() {
-    const { company_roles, office_types, office_address } = this.props;
+    const { company_roles, office_types, companyAddresses } = this.props;
     const classes = cn("complete-account__field-set", AccountForm.fieldClass);
     return (
       <PageAuth backLink="/">
@@ -105,14 +169,17 @@ class CompleteAccountView extends React.PureComponent {
           title="Complete your account"
           subtitle="We need just a bit more information about you to complete your account."
         >
-          <Formik validationSchema={propertySchema} onSubmit={this.onSubmit}>
+          <Formik
+            validationSchema={propertySchema}
+            onSubmit={this.onSubmit}
+            initialValues={this.initialValues}
+            ref={this.formik}
+          >
             {({
               errors,
               touched,
               values,
               isValid,
-              setFieldValue,
-              setFieldTouched,
               handleChange,
               handleBlur
             }) => (
@@ -181,14 +248,12 @@ class CompleteAccountView extends React.PureComponent {
                     components={this.selectSearchComponents}
                     styles={this.selectStyles}
                     loadOptions={this.loadCompany}
+                    defaultOptions={[]}
                     isCreatable={true}
                     value={values.company}
-                    onChange={props => {
-                      setFieldValue("company", props);
-                    }}
-                    onBlur={() => {
-                      setFieldTouched("company");
-                    }}
+                    onCreateOption={this.onCreateCompany}
+                    onChange={this.onChangeCompany}
+                    onBlur={this.onBlurCompany}
                   />
                 </FormFiled>
                 <FormFiled
@@ -208,12 +273,8 @@ class CompleteAccountView extends React.PureComponent {
                     label={this.getSelectLabel(values.company_role)}
                     placeholder="Select role..."
                     value={values.company_role}
-                    onChange={props => {
-                      setFieldValue("company_role", props);
-                    }}
-                    onBlur={() => {
-                      setFieldTouched("company_role");
-                    }}
+                    onChange={this.onChangeCompanyRole}
+                    onBlur={this.onBlurCompanyRole}
                   />
                 </FormFiled>
                 <FormFiled
@@ -226,14 +287,13 @@ class CompleteAccountView extends React.PureComponent {
                   <GoogleAddress
                     name="office_address"
                     loadOptions={this.loadAddress}
-                    companyAddresses={office_address}
+                    cacheOptions={false}
+                    companyAddresses={companyAddresses}
+                    labelCompany=""
+                    labelGoogle=""
                     value={values.office_address}
-                    onChange={props => {
-                      setFieldValue("office_address", props);
-                    }}
-                    onBlur={() => {
-                      setFieldTouched("office_address");
-                    }}
+                    onChange={this.onChangeOfficeAddress}
+                    onBlur={this.onBlurOfficeAddress}
                   />
                 </FormFiled>
                 <FormFiled
@@ -265,29 +325,22 @@ class CompleteAccountView extends React.PureComponent {
                     styles={this.selectStyles}
                     options={office_types}
                     value={values.office_type}
-                    onChange={props => {
-                      setFieldValue("office_type", props);
-                    }}
-                    onBlur={() => {
-                      setFieldTouched("office_type");
-                    }}
+                    onChange={this.onChangeOfficeType}
+                    onBlur={this.onBlurOfficeType}
                   />
                 </FormFiled>
                 <div className="complete-account__terms">
                   <Checkbox
                     className="complete-account__checkbox"
                     isSelected={values.terms}
-                    onClick={props => {
-                      setFieldValue("terms", !values.terms);
-                    }}
-                    onBlur={() => console.log("onBlur")}
+                    onClick={this.onChangeTerms}
                   />
                   <input
                     type="checkbox"
                     name="terms"
                     hidden={true}
                     checked={values.terms}
-                    onBlur={handleBlur}
+                    readOnly={true}
                   />
                   Accept&nbsp;
                   <a

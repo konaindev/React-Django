@@ -61,7 +61,14 @@ const createPassword = (state = {}, action) => {
   return newState;
 };
 
-const completeAccount = (state = {}, action) => {
+const completeAccount = (
+  state = {
+    companyAddresses: [],
+    company_roles: [],
+    office_types: []
+  },
+  action
+) => {
   let newState = {};
   switch (action.type) {
     case "COMPLETE_ACCOUNT_SET_STATE": {
