@@ -150,7 +150,6 @@ export default class AccountSecurity extends React.PureComponent {
                   >
                     <div className="account-settings__label">New Password</div>
                     <Tooltip
-                      visible={true}
                       placement="bottom"
                       theme="dark"
                       overlay={
