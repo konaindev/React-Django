@@ -5,18 +5,18 @@ ACCOUNT_TYPE = (
     (4, "Remarkably"),
 )
 
-OFFICE_TYPES = [
-    {"label": "Global", "value": "global"},
-    {"label": "National", "value": "national"},
-    {"label": "Regional", "value": "regional"},
-    {"label": "Other", "value": "other"},
-]
-
 COMPANY_ROLES = [
     {"label": "Owner", "value": "owner"},
     {"label": "Developer", "value": "developer"},
     {"label": "Asset Manager", "value": "asset_manager"},
     {"label": "Property Manager", "value": "property_manager"},
-    {"label": "JV / Investor", "value": "investor"},
-    {"label": "Vendor / Consultant", "value": "vendor"},
+    # {"label": "JV / Investor", "value": "investor"},
+    # {"label": "Vendor / Consultant", "value": "vendor"},
 ]
+
+BUSINESS_TYPE = {
+    "owner": "is_property_owner",
+    "developer": "is_developer",
+    "asset_manager": "is_asset_manager",
+    "property_manager": "is_property_manager",
+}

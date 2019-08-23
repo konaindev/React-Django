@@ -2,8 +2,10 @@ from django.contrib import admin
 from django import forms
 
 from remark.crm.models import Person
+from remark.crm.constants import OFFICE_TYPES
+
 from .models import Account, User
-from .constants import COMPANY_ROLES, OFFICE_TYPES
+from .constants import COMPANY_ROLES
 
 
 class AccountForm(forms.ModelForm):
@@ -55,7 +57,6 @@ class UserForm(forms.ModelForm):
 
 
 company_roles_values = [(role["value"], role["label"]) for role in COMPANY_ROLES]
-office_types_values = [(type["value"], type["label"]) for type in OFFICE_TYPES]
 
 
 class AccountCompleteForm(forms.Form):
@@ -66,7 +67,7 @@ class AccountCompleteForm(forms.Form):
     company_role = forms.MultipleChoiceField(
         choices=company_roles_values, required=True
     )
-    office_address=forms.CharField(max_length=255, required=True)
+    office_address = forms.CharField(max_length=255, required=True)
     office_name = forms.CharField(max_length=255, required=True)
-    office_type = forms.ChoiceField(choices=office_types_values, required=True)
+    office_type = forms.ChoiceField(choices=OFFICE_TYPES, required=True)
     terms = forms.BooleanField(required=True)

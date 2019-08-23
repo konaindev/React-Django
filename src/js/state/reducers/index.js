@@ -1,5 +1,4 @@
 import { combineReducers } from "redux";
-import { general } from "../actions";
 
 const initState = {
   tutorialView: {}
@@ -51,8 +50,12 @@ const network = (state = { isFetching: false }, action) => {
 const createPassword = (state = {}, action) => {
   let newState = {};
   switch (action.type) {
-    case "CREATE_PASSWORD_": {
+    case "CREATE_PASSWORD_SET_STATE": {
       newState = { ...state, tutorialView: action.newState };
+      break;
+    }
+    case "CREATE_PASSWORD_REDIRECT": {
+      window.location.replace(action.url);
       break;
     }
     default:
@@ -73,6 +76,10 @@ const completeAccount = (
   switch (action.type) {
     case "COMPLETE_ACCOUNT_SET_STATE": {
       newState = { ...state, ...action.newState };
+      break;
+    }
+    case "COMPLETE_ACCOUNT_REDIRECT": {
+      window.location.replace(action.url);
       break;
     }
     default:

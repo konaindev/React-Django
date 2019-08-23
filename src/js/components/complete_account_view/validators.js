@@ -41,7 +41,7 @@ export const propertySchema = Yup.object().shape({
   office_type: Yup.object()
     .shape({
       label: Yup.string().max(255, "is too much length"),
-      value: Yup.string().max(255, "is too much length")
+      value: Yup.number()
     })
     .required()
     .label(" "),
