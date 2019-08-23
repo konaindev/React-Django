@@ -28,7 +28,7 @@ describe("FormFiled", () => {
   it("renders with error without icon", () => {
     const tree = renderer
       .create(
-        <FormFiled
+        <FormField
           label="Confirm Password"
           error="Passwords must match"
           showError={true}
@@ -56,7 +56,7 @@ describe("FormFiled", () => {
   it("renders ok without icon", () => {
     const tree = renderer
       .create(
-        <FormFiled
+        <FormField
           label="Confirm Password"
           showError={true}
           Input={Input}
