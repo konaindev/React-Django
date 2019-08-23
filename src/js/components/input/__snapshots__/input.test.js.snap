@@ -13,3 +13,10 @@ exports[`Input render text input highlight 1`] = `
   type="text"
 />
 `;
+
+exports[`Input render text with gray theme 1`] = `
+<input
+  className="input input--gray"
+  type="text"
+/>
+`;
