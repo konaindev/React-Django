@@ -19,9 +19,8 @@ const router = base => callback => {
     route.base(base || "/dashboard");
 
     route("/..", async function() {
-      const { search } = window.location;
       // fire the callback
-      await callback(search);
+      await callback(window.location.search);
     });
     // start the router and autoprocess the current url
     route.start(true);

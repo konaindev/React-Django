@@ -41,38 +41,9 @@ const pages = {
   PortfolioAnalysisView
 };
 
-const tmpFetchDashboardData = pageClass => {
-  const location = window.location;
-  const queryString = location.search;
-  let _newState = {};
-  window
-    .fetch(
-      `${process.env.BASE_URL}/dashboard${
-        queryString ? `?${queryString}` : ""
-      }`,
-      {
-        responseType: "json",
-        credentials: "include",
-        mode: "same-origin",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }
-    )
-    .then(x => x.json())
-    .then(newState => {
-      store.dispatch(general.set(newState));
-      _newState = newState;
-    })
-    .catch(e => console.log(e))
-    .finally(() => {
-      renderApp(pageClass, _newState);
-    });
-};
 /*
  * Import the root application here.
  */
-
 import App from "./App.js";
 
 /*
@@ -142,11 +113,7 @@ ready(() => {
 
   /* If this is a react rooted page, spin up the app. */
   if (pageClass) {
-    if (root && root.dataset.page === "DashboardPage") {
-      tmpFetchDashboardData(pageClass);
-    } else {
-      store.dispatch(general.set(getPageProps()));
-      renderApp(pageClass, getPageProps());
-    }
+    store.dispatch(general.set(getPageProps()));
+    renderApp(pageClass, getPageProps());
   }
 });

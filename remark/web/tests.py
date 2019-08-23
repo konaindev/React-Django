@@ -153,7 +153,7 @@ class PropertyListTestCase(TestCase):
                 },
             ],
             "locations": [
-                {"city": "Seattle", "label": ("Seattle, WA",), "state": "wa"}
+                {"city": "Seattle", "label": ["Seattle, WA"], "state": "wa"}
             ],
             "user": {
                 "account_id": self.account.id,
@@ -164,23 +164,18 @@ class PropertyListTestCase(TestCase):
             },
         }
 
-        response = self.client.get(reverse("dashboard"))
+        response = self.client.get(reverse("dashboard"), HTTP_ACCEPT="application/json")
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(type(response).__name__, "JsonResponse")
+        response_json = response.json()
+        self.assertCountEqual(response_json["asset_managers"], data["asset_managers"])
+        self.assertCountEqual(response_json["funds"], data["funds"])
+        self.assertCountEqual(response_json["properties"], data["properties"])
         self.assertCountEqual(
-            response.context["page_props"]["asset_managers"], data["asset_managers"]
+            response_json["property_managers"], data["property_managers"]
         )
-        self.assertCountEqual(response.context["page_props"]["funds"], data["funds"])
-        self.assertCountEqual(
-            response.context["page_props"]["properties"], data["properties"]
-        )
-        self.assertCountEqual(
-            response.context["page_props"]["property_managers"],
-            data["property_managers"],
-        )
-        self.assertCountEqual(
-            response.context["page_props"]["locations"], data["locations"]
-        )
-        self.assertCountEqual(response.context["page_props"]["user"], data["user"])
+        self.assertCountEqual(response_json["locations"], data["locations"])
+        self.assertCountEqual(response_json["user"], data["user"])
 
     def test_query(self):
         data = {
@@ -216,7 +211,7 @@ class PropertyListTestCase(TestCase):
                 },
             ],
             "locations": [
-                {"city": "Seattle", "label": ("Seattle, WA",), "state": "wa"}
+                {"city": "Seattle", "label": ["Seattle, WA"], "state": "wa"}
             ],
             "user": {
                 "account_id": self.account.id,
@@ -234,20 +229,15 @@ class PropertyListTestCase(TestCase):
             f"&fb={self.fund1.public_id}"
         )
         url = f"{reverse('dashboard')}?{query}"
-        response = self.client.get(url)
+        response = self.client.get(url, HTTP_ACCEPT="application/json")
         self.assertEqual(response.status_code, 200)
+        self.assertEqual(type(response).__name__, "JsonResponse")
+        response_json = response.json()
+        self.assertCountEqual(response_json["asset_managers"], data["asset_managers"])
+        self.assertCountEqual(response_json["funds"], data["funds"])
+        self.assertCountEqual(response_json["properties"], data["properties"])
         self.assertCountEqual(
-            response.context["page_props"]["asset_managers"], data["asset_managers"]
+            response_json["property_managers"], data["property_managers"]
         )
-        self.assertCountEqual(response.context["page_props"]["funds"], data["funds"])
-        self.assertCountEqual(
-            response.context["page_props"]["properties"], data["properties"]
-        )
-        self.assertCountEqual(
-            response.context["page_props"]["property_managers"],
-            data["property_managers"],
-        )
-        self.assertCountEqual(
-            response.context["page_props"]["locations"], data["locations"]
-        )
-        self.assertCountEqual(response.context["page_props"]["user"], data["user"])
+        self.assertCountEqual(response_json["locations"], data["locations"])
+        self.assertCountEqual(response_json["user"], data["user"])
