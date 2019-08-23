@@ -1,0 +1,290 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccountSettings account security tab 1`] = `
+<div
+  className="chrome"
+>
+  <div
+    className="page-chrome__top-chrome"
+  >
+    <div
+      className="page-chrome__top-chrome__content"
+    >
+      <div
+        className="page-header"
+      >
+        <div
+          className="container page-header__inner"
+        >
+          <a
+            href="/dashboard"
+          >
+            <div
+              className="remarkably-logo"
+            >
+               
+            </div>
+          </a>
+          <div
+            className="page-header__nav"
+          >
+            <div
+              className="top-navigation"
+            >
+              <a
+                className="top-navigation__link"
+                href="/dashboard"
+              >
+                Portfolio
+              </a>
+              <a
+                className="top-navigation__link"
+                href="/portfolio/table"
+              >
+                Portfolio Analysis
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="page-chrome__top-chrome__spacing-fix"
+      style={
+        Object {
+          "height": 76,
+        }
+      }
+    >
+       
+    </div>
+  </div>
+  <div
+    className="account-settings"
+  >
+    <div
+      className="account-settings__header"
+    >
+      <div
+        className="account-settings__title"
+      >
+        Account Settings
+      </div>
+      <div
+        className="account-settings__subtitle"
+      >
+        Manage and edit your profile, security, notifications, and billing settings.
+      </div>
+    </div>
+    <div
+      className="account-settings__panel"
+    >
+      <div
+        className="account-settings__menu"
+      >
+        <div
+          className="account-settings__menu-item"
+          onClick={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 20 20"
+            width="1em"
+          >
+            <path
+              d="M16.6668 17.5V15.8333C16.6668 14.9493 16.3156 14.1014 15.6905 13.4763C15.0654 12.8512 14.2176 12.5 13.3335 12.5H6.66683C5.78277 12.5 4.93493 12.8512 4.30981 13.4763C3.68469 14.1014 3.3335 14.9493 3.3335 15.8333V17.5"
+              fill="transparent"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M9.99984 9.16667C11.8408 9.16667 13.3332 7.67428 13.3332 5.83333C13.3332 3.99238 11.8408 2.5 9.99984 2.5C8.15889 2.5 6.6665 3.99238 6.6665 5.83333C6.6665 7.67428 8.15889 9.16667 9.99984 9.16667Z"
+              fill="transparent"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+            />
+          </svg>
+          <span
+            className="account-settings__menu-item-text"
+          >
+            Profile
+          </span>
+        </div>
+        <div
+          className="account-settings__menu-item account-settings__menu-item--active"
+          onClick={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 20 20"
+            width="1em"
+          >
+            <path
+              d="M15.8333 9.16669H4.16667C3.24619 9.16669 2.5 9.91288 2.5 10.8334V16.6667C2.5 17.5872 3.24619 18.3334 4.16667 18.3334H15.8333C16.7538 18.3334 17.5 17.5872 17.5 16.6667V10.8334C17.5 9.91288 16.7538 9.16669 15.8333 9.16669Z"
+              fill="transparent"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M5.83301 9.16669V5.83335C5.83301 4.72828 6.27199 3.66848 7.0534 2.88708C7.8348 2.10567 8.89461 1.66669 9.99967 1.66669C11.1047 1.66669 12.1646 2.10567 12.946 2.88708C13.7274 3.66848 14.1663 4.72828 14.1663 5.83335V9.16669"
+              fill="transparent"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+            />
+          </svg>
+          <span
+            className="account-settings__menu-item-text"
+          >
+            Security
+          </span>
+        </div>
+        <div
+          className="account-settings__menu-item"
+          onClick={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 20 20"
+            width="1em"
+          >
+            <path
+              d="M3.33366 3.33331H16.667C17.5837 3.33331 18.3337 4.08331 18.3337 4.99998V15C18.3337 15.9166 17.5837 16.6666 16.667 16.6666H3.33366C2.41699 16.6666 1.66699 15.9166 1.66699 15V4.99998C1.66699 4.08331 2.41699 3.33331 3.33366 3.33331Z"
+              fill="transparent"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+            />
+            <path
+              d="M18.3337 5L10.0003 10.8333L1.66699 5"
+              fill="transparent"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1.5"
+            />
+          </svg>
+          <span
+            className="account-settings__menu-item-text"
+          >
+            Email Reports
+          </span>
+        </div>
+      </div>
+      <div
+        className="account-settings__tab"
+      >
+        <form
+          autoComplete="off"
+          method="post"
+          onReset={[Function]}
+          onSubmit={[Function]}
+        >
+          <div
+            className="account-settings__tab-content"
+          >
+            <div
+              className="account-settings__tab-title"
+            >
+              Account Security
+            </div>
+            <div
+              className="account-settings__field"
+            >
+              <div
+                className="account-settings__label"
+              >
+                Email Address
+              </div>
+              <input
+                className="input account-settings__input input--gray"
+                name="email"
+                onBlur={[Function]}
+                onChange={[Function]}
+                type="text"
+                value=""
+              />
+            </div>
+            <div
+              className="account-settings__field-group"
+            >
+              <div
+                className="account-settings__field account-settings__field--short"
+              >
+                <div
+                  className="account-settings__label"
+                >
+                  Current Password
+                </div>
+                <input
+                  className="input account-settings__input account-settings__input--current-password input--gray"
+                  name="old_password"
+                  type="password"
+                  value="*******************"
+                />
+              </div>
+              <div
+                className="account-settings__field account-settings__field--short"
+              >
+                <div
+                  className="account-settings__label"
+                >
+                  New Password
+                </div>
+              </div>
+              <div
+                className="account-settings__field account-settings__field--short"
+              >
+                <div
+                  className="account-settings__label"
+                >
+                  Confirm Password
+                </div>
+                <input
+                  className="input account-settings__input input--gray"
+                  name="confirm_password"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  type="password"
+                  value=""
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="account-settings__buttons-field"
+          >
+            <button
+              className="button button--primary account-settings__button"
+              onClick={[Function]}
+              type="submit"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+`;

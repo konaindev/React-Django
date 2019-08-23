@@ -69,7 +69,7 @@ MenuItems.propTypes = {
 
 export default class AccountSettings extends React.PureComponent {
   static propTypes = {
-    initialTab: PropTypes.string
+    initialTab: PropTypes.oneOf(["profile", "lock", "email"])
   };
 
   static defaultProps = {
