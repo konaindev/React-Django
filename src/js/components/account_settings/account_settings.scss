@@ -12,7 +12,7 @@ $menu-item-background-hover: rgba(16, 20, 23, .1);
 $menu-item-width: 221px;
 $menu-item-color: $gray-6;
 $tab-title-line-height: 2.125rem;
-$input-label-line-height: $line-height-tight;
+$input-label-line-height: 1.25rem;
 $input-border: 1px solid $gray-4;
 $input-line-height: 1.25rem;
 $password-text-color: $gray-6;
@@ -98,6 +98,7 @@ $error-color: $orange-6;
 }
 
 .account-settings__label {
+    margin-bottom: 8px;
     font-size: $text-xs;
     font-weight: $weight-medium;
     letter-spacing: 1px;
@@ -113,10 +114,11 @@ $error-color: $orange-6;
     margin-top: 50px;
 }
 
-.account-settings__field-group {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 50px;
+.account-settings__field {
+    &--full-grid {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
 }
 
 .account-settings__field-grid {
