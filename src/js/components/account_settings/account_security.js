@@ -43,7 +43,7 @@ export default class AccountSecurity extends React.PureComponent {
     validate: () => {}
   };
 
-  state = { success: false };
+  state = { submitted: false };
 
   getErrorMessage = (errors, touched) => {
     let message;
@@ -64,7 +64,7 @@ export default class AccountSecurity extends React.PureComponent {
   };
 
   getSuccessMessage = () => {
-    if (!this.state.success) {
+    if (!this.state.submitted) {
       return;
     }
     return (
@@ -86,9 +86,9 @@ export default class AccountSecurity extends React.PureComponent {
 
   onSubmit = (values, actions) => {
     actions.setSubmitting(false);
-    this.setState({ success: true });
+    this.setState({ submitted: true });
     setTimeout(() => {
-      this.setState({ success: false });
+      this.setState({ submitted: false });
     }, 5000);
   };
 
