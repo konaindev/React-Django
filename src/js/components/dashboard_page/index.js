@@ -14,6 +14,7 @@ import Container from "../container";
 import PageChrome from "../page_chrome";
 import PropertyCardList from "../property_card_list";
 import PropertyList from "../property_list";
+import ToggleButton from "../toggle_button";
 import { Close, ListView, TileView } from "../../icons";
 import Loader from "../loader";
 import UserMenu from "../user_menu";

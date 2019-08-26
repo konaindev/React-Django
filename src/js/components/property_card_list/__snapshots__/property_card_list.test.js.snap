@@ -57,7 +57,11 @@ exports[`PropertyCardList renders correctly 1`] = `
           </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="users-icon"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -134,7 +138,11 @@ exports[`PropertyCardList renders correctly 1`] = `
           </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="users-icon"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -211,7 +219,11 @@ exports[`PropertyCardList renders correctly 1`] = `
           </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="users-icon"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -288,7 +300,11 @@ exports[`PropertyCardList renders correctly 1`] = `
           </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="users-icon"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -365,7 +381,11 @@ exports[`PropertyCardList renders correctly 1`] = `
           </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="users-icon"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -442,7 +462,11 @@ exports[`PropertyCardList renders correctly 1`] = `
           </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="users-icon"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -519,7 +543,11 @@ exports[`PropertyCardList renders correctly 1`] = `
           </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="users-icon"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -596,7 +624,11 @@ exports[`PropertyCardList renders correctly 1`] = `
           </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="users-icon"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -673,7 +705,11 @@ exports[`PropertyCardList renders correctly 1`] = `
           </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="users-icon"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -750,7 +786,11 @@ exports[`PropertyCardList renders correctly 1`] = `
           </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="users-icon"
+            />
+          </div>
         </div>
       </div>
       <div

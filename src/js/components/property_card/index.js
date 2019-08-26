@@ -5,6 +5,7 @@ import React from "react";
 import Button from "../button";
 import Panel from "../panel";
 import PropertyStatus from "../property_status";
+import UsersIcon from "../users_icon";
 import Tick from "../../icons/tick";
 
 import "./property_card.scss";
@@ -16,6 +17,7 @@ export const PropertyCard = ({
   image_url,
   performance_rating,
   url,
+  users,
   selected,
   onSelect
 }) => {
@@ -43,7 +45,9 @@ export const PropertyCard = ({
                 <Button color="outline">View Report</Button>
               </a>
             </div>
-            <div className="property-card__actions" />
+            <div className="property-card__actions">
+              <UsersIcon users={users} />
+            </div>
           </div>
         </div>
         <div className="property-card__body">
@@ -65,6 +69,7 @@ PropertyCard.requiredPropTypes = {
   address: PropTypes.string.isRequired,
   image_url: PropTypes.string.isRequired,
   performance_rating: PropTypes.number.isRequired,
+  users: PropTypes.array,
   url: PropTypes.string.isRequired
 };
 
@@ -75,7 +80,9 @@ PropertyCard.propTypes = {
 };
 
 PropertyCard.defaultProps = {
+  users: [],
   selected: false,
   onSelect: () => {}
 };
+
 export default PropertyCard;
