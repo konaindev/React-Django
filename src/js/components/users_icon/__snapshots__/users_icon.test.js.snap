@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UsersIcon render default 1`] = `
+<div
+  className="users-icon"
+>
+  <div
+    className="users-icon__count"
+  >
+    <span>
+      +
+      8
+    </span>
+  </div>
+  <div
+    className="users-icon__icon"
+    style={
+      Object {
+        "backgroundColor": "#006EFF",
+      }
+    }
+  >
+    RC
+    <div
+      className="users-icon__img"
+      style={
+        Object {
+          "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+        }
+      }
+    />
+  </div>
+  <div
+    className="users-icon__icon"
+    style={
+      Object {
+        "backgroundColor": "#6B29BE",
+      }
+    }
+  >
+    RC
+    <div
+      className="users-icon__img"
+      style={
+        Object {
+          "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+        }
+      }
+    />
+  </div>
+  <div
+    className="users-icon__icon"
+    style={
+      Object {
+        "backgroundColor": "#006EFF",
+      }
+    }
+  >
+    RC
+    <div
+      className="users-icon__img"
+      style={
+        Object {
+          "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+        }
+      }
+    />
+  </div>
+  <div
+    className="users-icon__icon"
+    style={
+      Object {
+        "backgroundColor": "#6B29BE",
+      }
+    }
+  >
+    RC
+    <div
+      className="users-icon__img"
+      style={
+        Object {
+          "backgroundImage": "url(undefined)",
+        }
+      }
+    />
+  </div>
+  <div
+    className="users-icon__icon"
+    style={
+      Object {
+        "backgroundColor": "#006EFF",
+      }
+    }
+  >
+    RC
+    <div
+      className="users-icon__img"
+      style={
+        Object {
+          "backgroundImage": "url(/photo.jpg)",
+        }
+      }
+    />
+  </div>
+</div>
+`;
