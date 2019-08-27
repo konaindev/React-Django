@@ -55,6 +55,11 @@ $error-color: $orange-6;
     padding: 30px 30px 29px 30px;
 }
 
+.account-settings__menu-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
 .account-settings__menu-item {
     display: flex;
     align-items: center;
@@ -86,6 +91,7 @@ $error-color: $orange-6;
 }
 
 .account-settings__tab-title {
+    margin-bottom: 30px;
     color: $text-color;
     font-size: $text-xl;
     line-height: $tab-title-line-height;
@@ -103,19 +109,20 @@ $error-color: $orange-6;
     padding: 30px;
 }
 
+.account-settings__tab-section + .account-settings__tab-section {
+    margin-top: 50px;
+}
+
 .account-settings__field-group {
     display: flex;
     justify-content: space-between;
     margin-top: 50px;
 }
 
-.account-settings__field {
-    margin-top: 30px;
-
-    &--short {
-        width: 200px;
-        margin-top: 0;
-    }
+.account-settings__field-grid {
+    display: grid;
+    grid-gap: 30px;
+    grid-template-columns: 1fr 1fr;
 }
 
 .account-settings__input,
