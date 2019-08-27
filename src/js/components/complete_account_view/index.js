@@ -39,11 +39,11 @@ class CompleteAccountView extends React.PureComponent {
     first_name: "",
     last_name: "",
     title: "",
-    company: null,
+    company: undefined,
     company_role: [],
-    office_address: null,
+    office_address: undefined,
     office_name: "",
-    office_type: null,
+    office_type: undefined,
     terms: false
   };
 
@@ -239,7 +239,7 @@ class CompleteAccountView extends React.PureComponent {
                   label="company"
                   showError={touched.company}
                   showIcon={false}
-                  error={errors.company}
+                  error={errors?.company?.value}
                 >
                   <SelectSearch
                     name="company"
@@ -282,7 +282,7 @@ class CompleteAccountView extends React.PureComponent {
                   label="office address"
                   showError={touched.office_address}
                   showIcon={false}
-                  error={errors.office_address}
+                  error={errors?.office_address?.value}
                 >
                   <GoogleAddress
                     name="office_address"
@@ -317,7 +317,7 @@ class CompleteAccountView extends React.PureComponent {
                   label="office type"
                   showError={touched.office_type}
                   showIcon={false}
-                  error={errors.office_type}
+                  error={errors?.office_type?.value}
                 >
                   <Select
                     name="office_type"

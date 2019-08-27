@@ -12,13 +12,12 @@ export const propertySchema = Yup.object().shape({
   title: Yup.string()
     .max(255, "is too much length")
     .label(" "),
-  company: Yup.object()
-    .required()
-    .shape({
-      label: Yup.string().max(255, "is too much length"),
-      value: Yup.string().max(255, "is too much length")
-    })
-    .label(" "),
+  company: Yup.object({
+    value: Yup.string()
+      .max(255, "is too much length")
+      .required()
+      .label(" ")
+  }).label(" "),
   company_role: Yup.array()
     .required()
     .of(
@@ -28,23 +27,21 @@ export const propertySchema = Yup.object().shape({
       })
     )
     .label(" "),
-  office_address: Yup.object()
-    .shape({
-      value: Yup.string().max(255, "is too much length")
-    })
-    .required()
-    .label(" "),
+  office_address: Yup.object({
+    value: Yup.string()
+      .max(255, "is too much length")
+      .required()
+      .label(" ")
+  }).label(" "),
   office_name: Yup.string()
     .required()
     .max(255, "is too much length")
     .label(" "),
-  office_type: Yup.object()
-    .shape({
-      label: Yup.string().max(255, "is too much length"),
-      value: Yup.number()
-    })
-    .required()
-    .label(" "),
+  office_type: Yup.object({
+    value: Yup.number()
+      .required()
+      .label(" ")
+  }).label(" "),
   terms: Yup.boolean()
     .oneOf([true])
     .required()
