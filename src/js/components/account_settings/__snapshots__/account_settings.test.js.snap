@@ -88,6 +88,7 @@ exports[`AccountSettings account security tab 1`] = `
         >
           <svg
             aria-hidden="true"
+            className="account-settings__menu-icon"
             color="inherit"
             focusable="false"
             height="1em"
@@ -124,6 +125,7 @@ exports[`AccountSettings account security tab 1`] = `
         >
           <svg
             aria-hidden="true"
+            className="account-settings__menu-icon"
             color="inherit"
             focusable="false"
             height="1em"
@@ -160,6 +162,7 @@ exports[`AccountSettings account security tab 1`] = `
         >
           <svg
             aria-hidden="true"
+            className="account-settings__menu-icon"
             color="inherit"
             focusable="false"
             height="1em"
@@ -204,70 +207,63 @@ exports[`AccountSettings account security tab 1`] = `
             className="account-settings__tab-content"
           >
             <div
-              className="account-settings__tab-title"
-            >
-              Account Security
-            </div>
-            <div
-              className="account-settings__field"
+              className="account-settings__tab-section"
             >
               <div
-                className="account-settings__label"
+                className="account-settings__tab-title"
               >
-                Email Address
+                Account Security
               </div>
-              <input
-                className="input account-settings__input input--gray"
-                name="email"
-                onBlur={[Function]}
-                onChange={[Function]}
-                type="text"
-                value=""
-              />
-            </div>
-            <div
-              className="account-settings__field-group"
-            >
               <div
-                className="account-settings__field account-settings__field--short"
+                className="account-settings__field"
               >
                 <div
                   className="account-settings__label"
                 >
-                  Current Password
-                </div>
-                <input
-                  className="input account-settings__input account-settings__input--current-password input--gray"
-                  name="old_password"
-                  type="password"
-                  value="*******************"
-                />
-              </div>
-              <div
-                className="account-settings__field account-settings__field--short"
-              >
-                <div
-                  className="account-settings__label"
-                >
-                  New Password
-                </div>
-              </div>
-              <div
-                className="account-settings__field account-settings__field--short"
-              >
-                <div
-                  className="account-settings__label"
-                >
-                  Confirm Password
+                  Email Address
                 </div>
                 <input
                   className="input account-settings__input input--gray"
-                  name="confirm_password"
+                  name="email"
                   onBlur={[Function]}
                   onChange={[Function]}
-                  type="password"
+                  type="text"
                   value=""
                 />
+              </div>
+            </div>
+            <div
+              className="account-settings__tab-section"
+            >
+              <div
+                className="account-settings__field-grid"
+              >
+                <div
+                  className="account-settings__field"
+                >
+                  <div
+                    className="account-settings__label"
+                  >
+                    New Password
+                  </div>
+                </div>
+                <div
+                  className="account-settings__field"
+                >
+                  <div
+                    className="account-settings__label"
+                  >
+                    Confirm Password
+                  </div>
+                  <input
+                    className="input account-settings__input input--gray"
+                    name="confirm_password"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    type="password"
+                    value=""
+                  />
+                </div>
               </div>
             </div>
           </div>
