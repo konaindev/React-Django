@@ -29,7 +29,6 @@ const schema = Yup.object().shape({
 
 const initialValues = {
   email: "",
-  old_password: "*******************",
   password: "",
   confirm_password: ""
 };
@@ -75,11 +74,8 @@ export default class AccountSecurity extends React.PureComponent {
     );
   };
 
-  getFieldClasses = (name, errors, touched, extraModifiers = []) => {
-    const extra = extraModifiers
-      .map(mod => `account-settings__field--${mod}`)
-      .join(" ");
-    return cn("account-settings__field", extra, {
+  getFieldClasses = (name, errors, touched) => {
+    return cn("account-settings__field", {
       "account-settings__field--error": errors[name] && touched[name]
     });
   };
@@ -106,92 +102,79 @@ export default class AccountSecurity extends React.PureComponent {
           {({ errors, touched, values, handleChange, handleBlur }) => (
             <Form method="post" autoComplete="off">
               <div className="account-settings__tab-content">
-                <div className="account-settings__tab-title">
-                  Account Security
-                </div>
-                <div className={this.getFieldClasses("email", errors, touched)}>
-                  <div className="account-settings__label">Email Address</div>
-                  <Input
-                    className="account-settings__input"
-                    name="email"
-                    theme="gray"
-                    value={values.email}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                  />
-                </div>
-                <div className="account-settings__field-group">
-                  <div
-                    className={this.getFieldClasses(
-                      "old_password",
-                      errors,
-                      touched,
-                      ["short"]
-                    )}
-                  >
-                    <div className="account-settings__label">
-                      Current Password
-                    </div>
-                    <Input
-                      className="account-settings__input account-settings__input--current-password"
-                      name="old_password"
-                      type="password"
-                      theme="gray"
-                      value={values.old_password}
-                    />
+                <div className="account-settings__tab-section">
+                  <div className="account-settings__tab-title">
+                    Account Security
                   </div>
                   <div
-                    className={this.getFieldClasses(
-                      "password",
-                      errors,
-                      touched,
-                      ["short"]
-                    )}
+                    className={this.getFieldClasses("email", errors, touched)}
                   >
-                    <div className="account-settings__label">New Password</div>
-                    <Tooltip
-                      placement="bottom"
-                      theme="dark"
-                      overlay={
-                        <PasswordOverlay
-                          password={values.password}
-                          errors={errors.password}
-                          {...props}
-                        />
-                      }
-                      trigger={["focus"]}
-                    >
-                      <Input
-                        className="account-settings__input"
-                        name="password"
-                        type="password"
-                        theme="gray"
-                        value={values.password}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                      />
-                    </Tooltip>
-                  </div>
-                  <div
-                    className={this.getFieldClasses(
-                      "confirm_password",
-                      errors,
-                      touched,
-                      ["short"]
-                    )}
-                  >
-                    <div className="account-settings__label">
-                      Confirm Password
-                    </div>
+                    <div className="account-settings__label">Email Address</div>
                     <Input
                       className="account-settings__input"
-                      name="confirm_password"
-                      type="password"
+                      name="email"
                       theme="gray"
-                      value={values.confirm_password}
+                      value={values.email}
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
+                  </div>
+                </div>
+                <div className="account-settings__tab-section">
+                  <div className="account-settings__field-grid">
+                    <div
+                      className={this.getFieldClasses(
+                        "password",
+                        errors,
+                        touched
+                      )}
+                    >
+                      <div className="account-settings__label">
+                        New Password
+                      </div>
+                      <Tooltip
+                        placement="bottom"
+                        theme="dark"
+                        overlay={
+                          <PasswordOverlay
+                            password={values.password}
+                            errors={errors.password}
+                            {...props}
+                          />
+                        }
+                        trigger={["focus"]}
+                      >
+                        <Input
+                          className="account-settings__input"
+                          name="password"
+                          type="password"
+                          theme="gray"
+                          value={values.password}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                        />
+                      </Tooltip>
+                    </div>
+                    <div
+                      className={this.getFieldClasses(
+                        "confirm_password",
+                        errors,
+                        touched
+                      )}
+                    >
+                      <div className="account-settings__label">
+                        Confirm Password
+                      </div>
+                      <Input
+                        className="account-settings__input"
+                        name="confirm_password"
+                        type="password"
+                        theme="gray"
+                        value={values.confirm_password}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>

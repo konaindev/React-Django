@@ -54,7 +54,7 @@ function MenuItems(props) {
     });
     return (
       <div className={itemClass} key={id} onClick={() => selectTab(id)}>
-        <Icon />
+        <Icon className="account-settings__menu-icon" />
         <span className="account-settings__menu-item-text">{item.name}</span>
       </div>
     );
