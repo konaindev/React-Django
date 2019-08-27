@@ -19,9 +19,11 @@ export default function Select(props) {
     name,
     components,
     theme,
+    size,
     ...otherProps
   } = props;
   const classes = cn("select", className, {
+    [`select--${size}`]: size,
     [`select--${theme}`]: theme
   });
   return (
@@ -47,6 +49,7 @@ Select.optionsType = PropTypes.arrayOf(
   })
 );
 Select.propTypes = {
+  size: PropTypes.oneOf(["", "small"]),
   theme: PropTypes.string,
   options: Select.optionsType,
   className: PropTypes.string,
@@ -58,6 +61,7 @@ Select.propTypes = {
   components: PropTypes.object
 };
 Select.defaultProps = {
+  size: "",
   theme: "",
   components: {}
 };

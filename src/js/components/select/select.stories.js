@@ -5,7 +5,17 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
 import { default as Select, FormSelect, SelectSearch } from "./index";
-import { geoOptions, props, propsScroll, propsGroup } from "./props";
+import {
+  MenuWithDescription,
+  OptionWithDescription
+} from "./select_components";
+import {
+  geoOptions,
+  props,
+  propsScroll,
+  propsGroup,
+  descriptionOption
+} from "./props";
 
 const style = {
   background: "#FFFFFF",
@@ -50,6 +60,21 @@ storiesOf("Select", module)
         onChange={(option, actionName) => {
           action("onChange")(option, actionName);
         }}
+      />
+    </div>
+  ))
+  .add("With description", () => (
+    <div style={{ textAlign: "right", padding: "20px" }}>
+      <Select
+        {...props}
+        styles={{}}
+        size="small"
+        options={descriptionOption}
+        components={{
+          Menu: MenuWithDescription,
+          Option: OptionWithDescription
+        }}
+        menuIsOpen
       />
     </div>
   ));

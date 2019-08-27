@@ -1,7 +1,7 @@
 import React from "react";
 import { components } from "react-select";
 
-import { IconDown, IconUp } from "../../icons";
+import { IconDown, IconUp, TickSmall } from "../../icons";
 import Button from "../button";
 
 export function DropdownIndicator(props) {
@@ -31,4 +31,24 @@ export const OptionWithAdd = props => {
     );
   }
   return <components.Option {...props} />;
+};
+
+export const MenuWithDescription = props => {
+  console.log(props);
+  return <components.Menu className="select__menu--description" {...props} />;
+};
+
+export const OptionWithDescription = props => {
+  console.log(props);
+  return (
+    <components.Option {...props}>
+      <TickSmall className="select__tick" />
+      <div>
+        <div className="select__option-title">{props.data.label}</div>
+        <div className="select__option-description">
+          {props.data.description}
+        </div>
+      </div>
+    </components.Option>
+  );
 };

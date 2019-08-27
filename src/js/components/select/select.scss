@@ -54,6 +54,7 @@ $focused-color: $blue-3;
         font-size: $text-sm;
         line-height: $text-xl;
         color: $input-placeholder-color;
+        white-space: nowrap;
     }
 
     .select__indicator-separator {
@@ -119,6 +120,70 @@ $focused-color: $blue-3;
             height: 20px;
         }
     }
+}
+
+.select .select__menu--description {
+    right: 0;
+    display: flex;
+    width: 284px;
+    text-align: left;
+    border: 1px solid $select-border-color;
+
+    .select__menu-list {
+        padding: 0;
+    }
+
+    .select__option {
+        display: flex;
+        padding: 15px 12px;
+        align-items: flex-start;
+
+        &:first-child {
+            padding-top: 20px;
+        }
+
+        &:last-child {
+            padding-bottom: 20px;
+        }
+    }
+
+    .select__option--is-selected {
+        background-color: inherit;
+
+        .select__option-title {
+            color: $select-option-selected-color;
+        }
+
+        .select__tick {
+            visibility: visible;
+        }
+    }
+}
+
+.select__option-title {
+    font-size: $text-base;
+    color: $select-option-color;
+}
+
+.select__option-description {
+    margin-top: 5px;
+    font-size: $text-xs;
+    line-height: 20px;
+    color: $select-description-color;
+}
+
+.select__tick {
+    width: 6px;
+    height: 6px;
+    padding: 4px;
+    margin-top: 3px;
+    margin-right: 12px;
+    color: $select-tick-color;
+    background: $select-tick-bg;
+    border-radius: 50%;
+    visibility: hidden;
+    box-sizing: content-box;
+    flex-shrink: 0;
 }
 
 .select--default {
@@ -234,6 +299,31 @@ $focused-color: $blue-3;
         text-transform: capitalize;
     }
 }
+
+.select--small {
+    display: inline-block;
+    width: 81px;
+
+    .select__control {
+        height: 14px;
+        min-height: 30px;
+        padding: 7px;
+    }
+
+    .select__value-container {
+        height: 14px;
+    }
+
+    .select__single-value {
+        font-size: $text-xs;
+    }
+
+    .select__option {
+        padding: 8px;
+        font-size: $text-xs;
+    }
+}
+
 
 .select-search {
     .select__control {
