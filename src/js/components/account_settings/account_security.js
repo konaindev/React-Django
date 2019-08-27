@@ -3,7 +3,7 @@ import { Formik, Form } from "formik";
 import PropTypes from "prop-types";
 import React from "react";
 
-import { Checked } from "../../icons";
+import { Tick } from "../../icons";
 import Yup from "../../yup";
 import Button from "../button";
 import Input from "../input";
@@ -68,7 +68,7 @@ export default class AccountSecurity extends React.PureComponent {
     }
     return (
       <div className="account-settings__success">
-        <Checked className="account-settings__checked" />
+        <Tick className="account-settings__checked" />
         Password has successfuly been reset.
       </div>
     );
