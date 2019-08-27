@@ -92,7 +92,7 @@ class CompleteAccountView extends React.PureComponent {
     clearTimeout(this.loadCompanyTimeOut);
     this.loadCompanyTimeOut = setTimeout(() => {
       this.props.dispatch({
-        type: "API_COMPANY",
+        type: "API_COMPANY_SEARCH",
         data: { company: inputValue },
         callback
       });

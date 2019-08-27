@@ -95,7 +95,7 @@ export const fetchCompany = store => next => action => {
         .catch(e => console.log("-----> ERROR", e));
       break;
     }
-    case "API_COMPANY": {
+    case "API_COMPANY_SEARCH": {
       const url = `${process.env.BASE_URL}/crm/company-search/`;
       axiosPost(url, action.data)
         .then(response => {
