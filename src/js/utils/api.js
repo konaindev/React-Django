@@ -21,7 +21,7 @@ export function axiosPost(url, data, headers = {}, csrfProtect = true) {
 export function axiosGet(url, config = {}) {
   const params = {
     method: "get",
-    headers: { "Response-Type": "application/json" },
+    headers: { Accept: "application/json" },
     url,
     withCredentials: true,
     ...config

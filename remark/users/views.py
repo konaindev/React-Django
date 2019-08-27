@@ -49,7 +49,8 @@ class CompleteAccountView(LoginRequiredMixin, ReactView):
     office_options = [{"label": type[1], "value": type[0]} for type in OFFICE_TYPES]
 
     def get(self, request):
-        if request.headers.get("Response-Type") == "application/json":
+        accept = request.META.get('HTTP_ACCEPT')
+        if accept == "application/json":
             response = JsonResponse(
                 {"office_types": self.office_options, "company_roles": COMPANY_ROLES}
             )
