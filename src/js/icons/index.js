@@ -12,6 +12,7 @@ export { default as Link } from "./link";
 export { default as Profile } from "./profile";
 export { default as NavLink } from "./nav_link";
 export { default as Tick } from "./tick";
+export { default as TickSmall } from "./tick_small";
 export { default as TileView } from "./tile_view";
 export { default as Search } from "./search";
 export { default as Sort } from "./sort";
