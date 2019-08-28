@@ -1,5 +1,6 @@
 import cn from "classnames";
 import { Formik, Form } from "formik";
+import _pickBy from "lodash/pickBy";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -13,9 +14,13 @@ import { props } from "./props";
 
 const schema = Yup.object().shape({
   email: Yup.string()
-    .required()
     .max(255)
     .email(),
+  old_password: Yup.string().when("password", {
+    is: password => !!password,
+    then: Yup.string().required(),
+    otherwise: Yup.string()
+  }),
   password: Yup.string(),
   confirm_password: Yup.string().when("password", (password, schema) => {
     if (password) {
@@ -29,6 +34,7 @@ const schema = Yup.object().shape({
 
 const initialValues = {
   email: "",
+  old_password: "",
   password: "",
   confirm_password: ""
 };
@@ -42,7 +48,7 @@ export default class AccountSecurity extends React.PureComponent {
     validate: () => {}
   };
 
-  state = { submitted: false };
+  state = { fieldsSubmitted: [] };
 
   getErrorMessage = (errors, touched) => {
     let message;
@@ -63,13 +69,20 @@ export default class AccountSecurity extends React.PureComponent {
   };
 
   getSuccessMessage = () => {
-    if (!this.state.submitted) {
+    const fields = this.state.fieldsSubmitted;
+    if (!fields.length) {
       return;
+    }
+    let message;
+    if (fields.includes("password")) {
+      message = "Password has successfuly been reset.";
+    } else if (fields.includes("email")) {
+      message = "Email change successful.";
     }
     return (
       <div className="account-settings__success">
         <Tick className="account-settings__checked" />
-        Password has successfuly been reset.
+        {message}
       </div>
     );
   };
@@ -82,9 +95,12 @@ export default class AccountSecurity extends React.PureComponent {
 
   onSubmit = (values, actions) => {
     actions.setSubmitting(false);
-    this.setState({ submitted: true });
+    if (!values.email && !values.password) {
+      return;
+    }
+    this.setState({ fieldsSubmitted: Object.keys(_pickBy(values)) });
     setTimeout(() => {
-      this.setState({ submitted: false });
+      this.setState({ fieldsSubmitted: [] });
     }, 5000);
   };
 
@@ -121,7 +137,27 @@ export default class AccountSecurity extends React.PureComponent {
                   </div>
                 </div>
                 <div className="account-settings__tab-section">
-                  <div className="account-settings__field-grid">
+                  <div className="account-settings__field-grid account-settings__field-grid--col-3">
+                    <div
+                      className={this.getFieldClasses(
+                        "old_password",
+                        errors,
+                        touched
+                      )}
+                    >
+                      <div className="account-settings__label">
+                        Current Password
+                      </div>
+                      <Input
+                        className="account-settings__input"
+                        name="old_password"
+                        type="password"
+                        theme="gray"
+                        value={values.old_password}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                      />
+                    </div>
                     <div
                       className={this.getFieldClasses(
                         "password",

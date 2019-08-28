@@ -123,20 +123,14 @@ $error-color: $orange-6;
     display: grid;
     grid-gap: 30px;
     grid-template-columns: 1fr 1fr;
+    &--col-3 {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 }
 
 .account-settings__input,
 .account-settings__input[type=password] {
     margin-top: 8px;
-}
-
-.account-settings__input {
-    &#{&}--current-password {
-        color: $current-password-text-color;
-        &:focus {
-            color: $current-password-text-color;
-        }
-    }
 }
 
 .account-settings__buttons-field {
