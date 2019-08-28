@@ -1,6 +1,7 @@
 import React from "react";
 
 import Button from "../button";
+import { Upload } from "../../icons";
 import Input from "../input";
 
 export default class Profile extends React.Component {
@@ -10,6 +11,15 @@ export default class Profile extends React.Component {
         <div className="account-settings__tab-content">
           <div className="account-settings__tab-section">
             <div className="account-settings__tab-title">General Info</div>
+            <div className="account-settings__logo-field">
+              <div className="account-settings__logo">
+                <label className="account-settings__logo-input">
+                  <Upload />
+                  <input name="logo" type="file" />
+                </label>
+              </div>
+              <div className="account-settings__info" />
+            </div>
             <div className="account-settings__field-grid">
               <div className="account-settings__field">
                 <div className="account-settings__label">First Name</div>

@@ -4,7 +4,7 @@ import IconBase from "./icon_base";
 const Upload = props => {
   return (
     <IconBase viewBox="0 0 14 14" {...props}>
-      <g clipPath="url(#clip0)">
+      <g clipPath="url(#clip0)" fill="transparent">
         <path
           d="M9.33366 9.33333L7.00033 7L4.66699 9.33333"
           stroke="#F5FAF7"

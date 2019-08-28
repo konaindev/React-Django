@@ -184,3 +184,33 @@ $error-color: $orange-6;
     margin-right: 10px;
     fill: $green-7;
 }
+
+.account-settings__logo-field {
+    margin-bottom: 30px;
+}
+
+.account-settings__logo {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background: url("./img/image.png");
+}
+
+.account-settings__logo-input {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    background-color: $gray-9;
+    border: 3px solid $gray-3;
+    border-radius: 50%;
+    cursor: pointer;
+
+    input {
+        display: none;
+    }
+}
