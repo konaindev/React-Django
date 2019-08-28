@@ -236,8 +236,25 @@ exports[`AccountSettings account security tab 1`] = `
               className="account-settings__tab-section"
             >
               <div
-                className="account-settings__field-grid"
+                className="account-settings__field-grid account-settings__field-grid--col-3"
               >
+                <div
+                  className="account-settings__field"
+                >
+                  <div
+                    className="account-settings__label"
+                  >
+                    Current Password
+                  </div>
+                  <input
+                    className="input account-settings__input input--gray"
+                    name="old_password"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    type="password"
+                    value=""
+                  />
+                </div>
                 <div
                   className="account-settings__field"
                 >

@@ -5,7 +5,7 @@ import AccountSettings from "./index";
 
 function validateSecurity(values) {
   const errors = {};
-  if (!values.password || values.password.length < 8) {
+  if (values.password && values.password.length < 8) {
     errors.password = { length: "Must be at least 8 characters" };
   }
   return errors;
