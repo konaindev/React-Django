@@ -1,0 +1,24 @@
+@import "css/base.scss";
+
+.user-row {
+    display: flex;
+    align-items: center;
+    font-family: $font-sans;
+}
+
+.user-row__avatar {
+    margin-right: $s4;
+}
+
+.user-row__name {
+    font-size: $text-xs;
+    height: $s3;
+    color: $title-small-color;
+}
+
+.user-row__email {
+    margin-top: $s1;
+    font-size: $text-xs;
+    height: $s3;
+    color: $title-section-color;
+}
