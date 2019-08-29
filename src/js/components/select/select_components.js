@@ -1,7 +1,7 @@
 import React from "react";
 import { components } from "react-select";
 
-import { IconDown, IconUp, TickSmall } from "../../icons";
+import { IconDown, IconUp, TickSmall, Close } from "../../icons";
 import Button from "../button";
 
 export function DropdownIndicator(props) {
@@ -33,22 +33,50 @@ export const OptionWithAdd = props => {
   return <components.Option {...props} />;
 };
 
-export const MenuWithDescription = props => {
-  console.log(props);
-  return <components.Menu className="select__menu--description" {...props} />;
+export const MenuWithDescription = props => (
+  <components.Menu className="select__menu--description" {...props} />
+);
+
+export const OptionWithDescription = props => (
+  <components.Option {...props}>
+    <TickSmall className="select__tick" />
+    <div>
+      <div className="select__option-title">{props.data.label}</div>
+      <div className="select__option-description">{props.data.description}</div>
+    </div>
+  </components.Option>
+);
+
+const MultiValueContainer = props => {
+  const innerProps = {
+    ...props.innerProps,
+    className: "select-multi-value"
+  };
+  return <components.MultiValueContainer {...props} innerProps={innerProps} />;
 };
 
-export const OptionWithDescription = props => {
-  console.log(props);
+const MultiValueLabel = props => {
+  const innerProps = {
+    ...props.innerProps,
+    className: "select-multi-value__label"
+  };
+  return <components.MultiValueLabel {...props} innerProps={innerProps} />;
+};
+
+const MultiValueRemove = props => {
+  const innerProps = {
+    ...props.innerProps,
+    className: "select-multi-value__close"
+  };
   return (
-    <components.Option {...props}>
-      <TickSmall className="select__tick" />
-      <div>
-        <div className="select__option-title">{props.data.label}</div>
-        <div className="select__option-description">
-          {props.data.description}
-        </div>
-      </div>
-    </components.Option>
+    <components.MultiValueRemove {...props} innerProps={innerProps}>
+      <Close />
+    </components.MultiValueRemove>
   );
+};
+
+export const MultiValueComponents = {
+  MultiValueContainer,
+  MultiValueLabel,
+  MultiValueRemove
 };

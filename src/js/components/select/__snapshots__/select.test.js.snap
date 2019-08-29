@@ -11,7 +11,7 @@ exports[`Select render gray select 1`] = `
     onTouchEnd={[Function]}
   >
     <div
-      className="select__value-container css-1hwfws3"
+      className="select__value-container css-1jn1ih4"
     >
       <div
         className="select__placeholder css-1wa3eu0-placeholder"
@@ -106,7 +106,7 @@ exports[`Select render highlight select 1`] = `
     onTouchEnd={[Function]}
   >
     <div
-      className="select__value-container css-1hwfws3"
+      className="select__value-container css-1jn1ih4"
     >
       <div
         className="select__placeholder css-1wa3eu0-placeholder"
@@ -201,7 +201,7 @@ exports[`Select render highlight select search 1`] = `
     onTouchEnd={[Function]}
   >
     <div
-      className="select__value-container css-1hwfws3"
+      className="select__value-container css-1jn1ih4"
     >
       <div
         className="select__placeholder css-1wa3eu0-placeholder"
@@ -223,7 +223,7 @@ exports[`Select render highlight select search 1`] = `
             autoComplete="off"
             autoCorrect="off"
             disabled={false}
-            id="react-select-6-input"
+            id="react-select-8-input"
             onBlur={[Function]}
             onChange={[Function]}
             onFocus={[Function]}
@@ -329,6 +329,490 @@ exports[`Select render highlight select search 1`] = `
 </div>
 `;
 
+exports[`Select render multi value select 1`] = `
+<div
+  className="select select--is-multi select--transparent css-2b097c-container"
+  onKeyDown={[Function]}
+>
+  <div
+    className="select__control css-yk16xz-control"
+    onMouseDown={[Function]}
+    onTouchEnd={[Function]}
+  >
+    <div
+      className="select__value-container select__value-container--is-multi select__value-container--has-value css-1ux8av0"
+    >
+      <div
+        className="select-multi-value"
+      >
+        <div
+          className="select-multi-value__label"
+        >
+          Option 1
+        </div>
+        <div
+          className="select-multi-value__close"
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 13 14"
+            width="1em"
+          >
+            <path
+              d="M1.43532 1.92201L11.3649 12.0613"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M11.4774 1.90854L1.83659 12.0504"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="select-multi-value"
+      >
+        <div
+          className="select-multi-value__label"
+        >
+          Option 2
+        </div>
+        <div
+          className="select-multi-value__close"
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 13 14"
+            width="1em"
+          >
+            <path
+              d="M1.43532 1.92201L11.3649 12.0613"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M11.4774 1.90854L1.83659 12.0504"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="select-multi-value"
+      >
+        <div
+          className="select-multi-value__label"
+        >
+          Option 3
+        </div>
+        <div
+          className="select-multi-value__close"
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 13 14"
+            width="1em"
+          >
+            <path
+              d="M1.43532 1.92201L11.3649 12.0613"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M11.4774 1.90854L1.83659 12.0504"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="select-multi-value"
+      >
+        <div
+          className="select-multi-value__label"
+        >
+          Option 4
+        </div>
+        <div
+          className="select-multi-value__close"
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 13 14"
+            width="1em"
+          >
+            <path
+              d="M1.43532 1.92201L11.3649 12.0613"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M11.4774 1.90854L1.83659 12.0504"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="select-multi-value"
+      >
+        <div
+          className="select-multi-value__label"
+        >
+          Option 5
+        </div>
+        <div
+          className="select-multi-value__close"
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 13 14"
+            width="1em"
+          >
+            <path
+              d="M1.43532 1.92201L11.3649 12.0613"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M11.4774 1.90854L1.83659 12.0504"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="select-multi-value"
+      >
+        <div
+          className="select-multi-value__label"
+        >
+          Option 6
+        </div>
+        <div
+          className="select-multi-value__close"
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 13 14"
+            width="1em"
+          >
+            <path
+              d="M1.43532 1.92201L11.3649 12.0613"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M11.4774 1.90854L1.83659 12.0504"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="select-multi-value"
+      >
+        <div
+          className="select-multi-value__label"
+        >
+          Option 7
+        </div>
+        <div
+          className="select-multi-value__close"
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 13 14"
+            width="1em"
+          >
+            <path
+              d="M1.43532 1.92201L11.3649 12.0613"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M11.4774 1.90854L1.83659 12.0504"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="select-multi-value"
+      >
+        <div
+          className="select-multi-value__label"
+        >
+          Option 8
+        </div>
+        <div
+          className="select-multi-value__close"
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 13 14"
+            width="1em"
+          >
+            <path
+              d="M1.43532 1.92201L11.3649 12.0613"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M11.4774 1.90854L1.83659 12.0504"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="select-multi-value"
+      >
+        <div
+          className="select-multi-value__label"
+        >
+          Option 9
+        </div>
+        <div
+          className="select-multi-value__close"
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 13 14"
+            width="1em"
+          >
+            <path
+              d="M1.43532 1.92201L11.3649 12.0613"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M11.4774 1.90854L1.83659 12.0504"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        className="select-multi-value"
+      >
+        <div
+          className="select-multi-value__label"
+        >
+          Option 10
+        </div>
+        <div
+          className="select-multi-value__close"
+          onClick={[Function]}
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <svg
+            aria-hidden="true"
+            color="inherit"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 13 14"
+            width="1em"
+          >
+            <path
+              d="M1.43532 1.92201L11.3649 12.0613"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+            <path
+              d="M11.4774 1.90854L1.83659 12.0504"
+              stroke="currentColor"
+              strokeLinecap="round"
+              strokeWidth="2"
+            />
+          </svg>
+        </div>
+      </div>
+      <input
+        className="css-62g3xt-dummyInput"
+        disabled={false}
+        id="react-select-6-input"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        readOnly={true}
+        tabIndex="0"
+        value=""
+      />
+    </div>
+    <div
+      className="select__indicators css-1wy0on6"
+    >
+      <div
+        aria-hidden="true"
+        className="select__indicator select__clear-indicator css-tlfecz-indicatorContainer"
+        onMouseDown={[Function]}
+        onTouchEnd={[Function]}
+      >
+        <svg
+          aria-hidden="true"
+          className="css-19bqh2r"
+          focusable="false"
+          height={20}
+          viewBox="0 0 20 20"
+          width={20}
+        >
+          <path
+            d="M14.348 14.849c-0.469 0.469-1.229 0.469-1.697 0l-2.651-3.030-2.651 3.029c-0.469 0.469-1.229 0.469-1.697 0-0.469-0.469-0.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-0.469-0.469-0.469-1.228 0-1.697s1.228-0.469 1.697 0l2.652 3.031 2.651-3.031c0.469-0.469 1.228-0.469 1.697 0s0.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c0.469 0.469 0.469 1.229 0 1.698z"
+          />
+        </svg>
+      </div>
+      <span
+        className="select__indicator-separator css-1okebmr-indicatorSeparator"
+      />
+      <div
+        aria-hidden="true"
+        className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+        onMouseDown={[Function]}
+        onTouchEnd={[Function]}
+      >
+        <svg
+          aria-hidden="true"
+          className="select__dropdown-arrow select__dropdown-arrow--down"
+          color="inherit"
+          focusable="false"
+          height="1em"
+          role="presentation"
+          viewBox="0 0 10 5"
+          width="1em"
+        >
+          <path
+            d="M1 1.16134L4.92334 4.5"
+            stroke="currentColor"
+            strokeLinecap="round"
+          />
+          <path
+            d="M8.82812 1.16134L5 4.5"
+            stroke="currentColor"
+            strokeLinecap="round"
+          />
+        </svg>
+        <svg
+          aria-hidden="true"
+          className="select__dropdown-arrow select__dropdown-arrow--up"
+          color="inherit"
+          focusable="false"
+          height="1em"
+          role="presentation"
+          viewBox="0 0 10 5"
+          width="1em"
+        >
+          <path
+            d="M1 3.83866L4.92334 0.5"
+            stroke="currentColor"
+            strokeLinecap="round"
+          />
+          <path
+            d="M8.82812 3.83866L5 0.5"
+            stroke="currentColor"
+            strokeLinecap="round"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Select render select 1`] = `
 <div
   className="select css-1ym6uuo-container"
@@ -340,7 +824,7 @@ exports[`Select render select 1`] = `
     onTouchEnd={[Function]}
   >
     <div
-      className="select__value-container css-1hwfws3"
+      className="select__value-container css-1jn1ih4"
     >
       <div
         className="select__placeholder css-1wa3eu0-placeholder"
@@ -435,7 +919,7 @@ exports[`Select render select search 1`] = `
     onTouchEnd={[Function]}
   >
     <div
-      className="select__value-container css-1hwfws3"
+      className="select__value-container css-1jn1ih4"
     >
       <div
         className="select__placeholder css-1wa3eu0-placeholder"
@@ -457,7 +941,241 @@ exports[`Select render select search 1`] = `
             autoComplete="off"
             autoCorrect="off"
             disabled={false}
-            id="react-select-5-input"
+            id="react-select-7-input"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            spellCheck="false"
+            style={
+              Object {
+                "background": 0,
+                "border": 0,
+                "boxSizing": "content-box",
+                "color": "inherit",
+                "fontSize": "inherit",
+                "label": "input",
+                "opacity": 1,
+                "outline": 0,
+                "padding": 0,
+                "width": "1px",
+              }
+            }
+            tabIndex="0"
+            type="text"
+            value=""
+          />
+          <div
+            style={
+              Object {
+                "height": 0,
+                "left": 0,
+                "overflow": "scroll",
+                "position": "absolute",
+                "top": 0,
+                "visibility": "hidden",
+                "whiteSpace": "pre",
+              }
+            }
+          >
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="select__indicators css-1wy0on6"
+    >
+      <span
+        className="select__indicator-separator css-1okebmr-indicatorSeparator"
+      />
+      <div
+        aria-hidden="true"
+        className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+        onMouseDown={[Function]}
+        onTouchEnd={[Function]}
+      >
+        <svg
+          aria-hidden="true"
+          className="select__dropdown-arrow select__dropdown-arrow--down"
+          color="inherit"
+          focusable="false"
+          height="1em"
+          role="presentation"
+          viewBox="0 0 10 5"
+          width="1em"
+        >
+          <path
+            d="M1 1.16134L4.92334 4.5"
+            stroke="currentColor"
+            strokeLinecap="round"
+          />
+          <path
+            d="M8.82812 1.16134L5 4.5"
+            stroke="currentColor"
+            strokeLinecap="round"
+          />
+        </svg>
+        <svg
+          aria-hidden="true"
+          className="select__dropdown-arrow select__dropdown-arrow--up"
+          color="inherit"
+          focusable="false"
+          height="1em"
+          role="presentation"
+          viewBox="0 0 10 5"
+          width="1em"
+        >
+          <path
+            d="M1 3.83866L4.92334 0.5"
+            stroke="currentColor"
+            strokeLinecap="round"
+          />
+          <path
+            d="M8.82812 3.83866L5 0.5"
+            stroke="currentColor"
+            strokeLinecap="round"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+  <input
+    name="select"
+    type="hidden"
+    value=""
+  />
+</div>
+`;
+
+exports[`Select render transparent select 1`] = `
+<div
+  className="select select--transparent css-1ym6uuo-container"
+  onKeyDown={[Function]}
+>
+  <div
+    className="select__control css-yk16xz-control"
+    onMouseDown={[Function]}
+    onTouchEnd={[Function]}
+  >
+    <div
+      className="select__value-container css-1jn1ih4"
+    >
+      <div
+        className="select__placeholder css-1wa3eu0-placeholder"
+      >
+        Select an option...
+      </div>
+      <input
+        className="css-62g3xt-dummyInput"
+        disabled={false}
+        id="react-select-5-input"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        readOnly={true}
+        tabIndex="0"
+        value=""
+      />
+    </div>
+    <div
+      className="select__indicators css-1wy0on6"
+    >
+      <span
+        className="select__indicator-separator css-1okebmr-indicatorSeparator"
+      />
+      <div
+        aria-hidden="true"
+        className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+        onMouseDown={[Function]}
+        onTouchEnd={[Function]}
+      >
+        <svg
+          aria-hidden="true"
+          className="select__dropdown-arrow select__dropdown-arrow--down"
+          color="inherit"
+          focusable="false"
+          height="1em"
+          role="presentation"
+          viewBox="0 0 10 5"
+          width="1em"
+        >
+          <path
+            d="M1 1.16134L4.92334 4.5"
+            stroke="currentColor"
+            strokeLinecap="round"
+          />
+          <path
+            d="M8.82812 1.16134L5 4.5"
+            stroke="currentColor"
+            strokeLinecap="round"
+          />
+        </svg>
+        <svg
+          aria-hidden="true"
+          className="select__dropdown-arrow select__dropdown-arrow--up"
+          color="inherit"
+          focusable="false"
+          height="1em"
+          role="presentation"
+          viewBox="0 0 10 5"
+          width="1em"
+        >
+          <path
+            d="M1 3.83866L4.92334 0.5"
+            stroke="currentColor"
+            strokeLinecap="round"
+          />
+          <path
+            d="M8.82812 3.83866L5 0.5"
+            stroke="currentColor"
+            strokeLinecap="round"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+  <input
+    name="select"
+    type="hidden"
+    value=""
+  />
+</div>
+`;
+
+exports[`Select render transparent select search 1`] = `
+<div
+  className="select-search select select--transparent css-1ym6uuo-container"
+  onKeyDown={[Function]}
+>
+  <div
+    className="select__control css-yk16xz-control"
+    onMouseDown={[Function]}
+    onTouchEnd={[Function]}
+  >
+    <div
+      className="select__value-container css-1jn1ih4"
+    >
+      <div
+        className="select__placeholder css-1wa3eu0-placeholder"
+      >
+        Select an option...
+      </div>
+      <div>
+        <div
+          className="select__input"
+          style={
+            Object {
+              "display": "inline-block",
+            }
+          }
+        >
+          <input
+            aria-autocomplete="list"
+            autoCapitalize="none"
+            autoComplete="off"
+            autoCorrect="off"
+            disabled={false}
+            id="react-select-9-input"
             onBlur={[Function]}
             onChange={[Function]}
             onFocus={[Function]}

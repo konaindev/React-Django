@@ -15,6 +15,7 @@ const options2 = [
 ];
 
 const styles = {
+  valueContainer: provided => ({ ...provided, height: "18px" }),
   container: provided => ({ ...provided, width: 400 })
 };
 

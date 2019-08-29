@@ -20,9 +20,11 @@ export default function Select(props) {
     components,
     theme,
     size,
+    isMulti,
     ...otherProps
   } = props;
   const classes = cn("select", className, {
+    "select--is-multi": isMulti,
     [`select--${size}`]: size,
     [`select--${theme}`]: theme
   });
@@ -37,6 +39,7 @@ export default function Select(props) {
       placeholder={placeholder}
       onChange={onChange}
       isSearchable={false}
+      isMulti={isMulti}
       components={{ DropdownIndicator, ...components }}
       {...otherProps}
     />
@@ -50,7 +53,7 @@ Select.optionsType = PropTypes.arrayOf(
 );
 Select.propTypes = {
   size: PropTypes.oneOf(["", "small"]),
-  theme: PropTypes.string,
+  theme: PropTypes.oneOf(["", "default", "highlight", "transparent"]),
   options: Select.optionsType,
   className: PropTypes.string,
   name: PropTypes.string,
@@ -58,11 +61,13 @@ Select.propTypes = {
   value: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
+  isMulti: PropTypes.bool,
   components: PropTypes.object
 };
 Select.defaultProps = {
   size: "",
   theme: "",
+  isMulti: false,
   components: {}
 };
 

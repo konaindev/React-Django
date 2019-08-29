@@ -7,7 +7,8 @@ import { action } from "@storybook/addon-actions";
 import { default as Select, FormSelect, SelectSearch } from "./index";
 import {
   MenuWithDescription,
-  OptionWithDescription
+  OptionWithDescription,
+  MultiValueComponents
 } from "./select_components";
 import {
   geoOptions,
@@ -37,6 +38,21 @@ storiesOf("Select", module)
   .add("highlight", () => <Select theme="highlight" {...props} />)
   .add("highlight group", () => <Select theme="highlight" {...propsGroup} />)
   .add("gray", () => <Select theme="gray" {...props} />)
+  .add("transparent", () => <Select theme="transparent" {...props} />)
+  .add("multi value", () => (
+    <div style={{ height: "86px", width: "400px" }}>
+      <Select
+        theme="transparent"
+        options={propsScroll.options}
+        defaultValue={propsScroll.options}
+        styles={{
+          valueContainer: provided => ({ ...provided, height: "42px" })
+        }}
+        isMulti={true}
+        components={{ ...MultiValueComponents }}
+      />
+    </div>
+  ))
   .add("form select", () => (
     <Formik>
       <FormSelect {...props} />

@@ -2,7 +2,7 @@
 
 exports[`MultiSelect all selected 1`] = `
 <div
-  className="select multi-select css-1ym6uuo-container"
+  className="select multi-select select--is-multi css-1ym6uuo-container"
   onKeyDown={[Function]}
 >
   <div
@@ -203,7 +203,7 @@ exports[`MultiSelect all selected 1`] = `
 
 exports[`MultiSelect gray 1`] = `
 <div
-  className="select multi-select select--gray css-1ym6uuo-container"
+  className="select multi-select select--is-multi select--gray css-1ym6uuo-container"
   onKeyDown={[Function]}
 >
   <div
@@ -375,7 +375,7 @@ exports[`MultiSelect gray 1`] = `
 
 exports[`MultiSelect highlight 1`] = `
 <div
-  className="select multi-select select--highlight css-1ym6uuo-container"
+  className="select multi-select select--is-multi select--highlight css-1ym6uuo-container"
   onKeyDown={[Function]}
 >
   <div
@@ -547,7 +547,7 @@ exports[`MultiSelect highlight 1`] = `
 
 exports[`MultiSelect render select 1`] = `
 <div
-  className="select multi-select css-1ym6uuo-container"
+  className="select multi-select select--is-multi css-1ym6uuo-container"
   onKeyDown={[Function]}
 >
   <div

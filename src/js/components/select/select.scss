@@ -1,6 +1,14 @@
 @import "css/base.scss";
 
 $focused-color: $blue-3;
+$multi-value-bg: $gray-4;
+$multi-value-color: $highlight-gray-3;
+$multi-value-border-radius: $border-radius-sm;
+$multi-value-size: $s3;
+$multi-value-close-size: 14px;
+$multi-value-close-color: $gray-6;
+$multi-value-close-hover-bg: $gray-6;
+$multi-value-close-hover-color: $gray-4;
 
 .select {
     outline: none;
@@ -119,6 +127,12 @@ $focused-color: $blue-3;
         input {
             height: 20px;
         }
+    }
+
+    .select__value-container--is-multi {
+        @include dark-scrollbar();
+        height: 100%;
+        overflow: auto;
     }
 }
 
@@ -300,6 +314,18 @@ $focused-color: $blue-3;
     }
 }
 
+.select.select--transparent {
+    .select__control,
+    .select__control:hover {
+        padding: 0;
+        border: none;
+    }
+
+    .select__indicators {
+        display: none;
+    }
+}
+
 .select--small {
     display: inline-block;
     width: 81px;
@@ -321,6 +347,20 @@ $focused-color: $blue-3;
     .select__option {
         padding: 8px;
         font-size: $text-xs;
+    }
+}
+
+.select--is-multi {
+    height: 100%;
+
+    .select__control {
+        min-height: inherit;
+        max-height: inherit;
+    }
+
+    .select__value-container {
+        min-height: inherit;
+        max-height: inherit;
     }
 }
 
@@ -393,5 +433,40 @@ $focused-color: $blue-3;
         &:active {
             background-color: $select-option-focused-color;
         }
+    }
+}
+
+
+.select-multi-value {
+    display: flex;
+    height: $multi-value-size;
+    padding: 9px 6px;
+    margin: 5px;
+    font-size: $text-xs;
+    color: $multi-value-color;
+    background: $multi-value-bg;
+    border-radius: $multi-value-border-radius;
+    box-sizing: content-box;
+    align-items: center;
+}
+
+.select-multi-value__label {
+    height: $multi-value-size;
+}
+
+.select-multi-value__close {
+    display: flex;
+    width: $multi-value-close-size;
+    height: $multi-value-close-size;
+    padding: 3px;
+    margin-left: 6px;
+    color: $multi-value-close-color;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        color: $multi-value-close-hover-color;
+        background: $multi-value-close-hover-bg;
+        border-radius: $multi-value-border-radius;
     }
 }
