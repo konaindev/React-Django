@@ -5,7 +5,7 @@ import React from "react";
 import Button from "../button";
 import Panel from "../panel";
 import PropertyStatus from "../property_status";
-import UsersIcon from "../users_icon";
+import UserIconList from "../user_icon_list";
 import Tick from "../../icons/tick";
 
 import "./property_card.scss";
@@ -46,7 +46,7 @@ export const PropertyCard = ({
               </a>
             </div>
             <div className="property-card__actions">
-              <UsersIcon users={users} />
+              <UserIconList users={users} />
             </div>
           </div>
         </div>

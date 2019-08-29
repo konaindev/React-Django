@@ -4171,7 +4171,7 @@ exports[`DashboardPage renders correctly 1`] = `
                     className="property-card__actions"
                   >
                     <div
-                      className="users-icon"
+                      className="user-icon-list"
                     />
                   </div>
                 </div>
@@ -4252,7 +4252,7 @@ exports[`DashboardPage renders correctly 1`] = `
                     className="property-card__actions"
                   >
                     <div
-                      className="users-icon"
+                      className="user-icon-list"
                     />
                   </div>
                 </div>
@@ -4333,7 +4333,7 @@ exports[`DashboardPage renders correctly 1`] = `
                     className="property-card__actions"
                   >
                     <div
-                      className="users-icon"
+                      className="user-icon-list"
                     />
                   </div>
                 </div>
@@ -4414,7 +4414,7 @@ exports[`DashboardPage renders correctly 1`] = `
                     className="property-card__actions"
                   >
                     <div
-                      className="users-icon"
+                      className="user-icon-list"
                     />
                   </div>
                 </div>
@@ -4495,7 +4495,7 @@ exports[`DashboardPage renders correctly 1`] = `
                     className="property-card__actions"
                   >
                     <div
-                      className="users-icon"
+                      className="user-icon-list"
                     />
                   </div>
                 </div>
@@ -4576,7 +4576,7 @@ exports[`DashboardPage renders correctly 1`] = `
                     className="property-card__actions"
                   >
                     <div
-                      className="users-icon"
+                      className="user-icon-list"
                     />
                   </div>
                 </div>
@@ -4657,7 +4657,7 @@ exports[`DashboardPage renders correctly 1`] = `
                     className="property-card__actions"
                   >
                     <div
-                      className="users-icon"
+                      className="user-icon-list"
                     />
                   </div>
                 </div>
@@ -4738,7 +4738,7 @@ exports[`DashboardPage renders correctly 1`] = `
                     className="property-card__actions"
                   >
                     <div
-                      className="users-icon"
+                      className="user-icon-list"
                     />
                   </div>
                 </div>
@@ -4819,7 +4819,7 @@ exports[`DashboardPage renders correctly 1`] = `
                     className="property-card__actions"
                   >
                     <div
-                      className="users-icon"
+                      className="user-icon-list"
                     />
                   </div>
                 </div>
@@ -4900,7 +4900,7 @@ exports[`DashboardPage renders correctly 1`] = `
                     className="property-card__actions"
                   >
                     <div
-                      className="users-icon"
+                      className="user-icon-list"
                     />
                   </div>
                 </div>

@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UsersIcon render default 1`] = `
+exports[`UserIconList render default 1`] = `
 <div
-  className="users-icon"
+  className="user-icon-list"
 >
   <div
-    className="users-icon__count"
+    className="user-icon-list__count"
   >
     <span>
       +
@@ -13,7 +13,7 @@ exports[`UsersIcon render default 1`] = `
     </span>
   </div>
   <div
-    className="users-icon__icon"
+    className="user-icon user-icon-list__icon"
     style={
       Object {
         "backgroundColor": "#006EFF",
@@ -22,7 +22,7 @@ exports[`UsersIcon render default 1`] = `
   >
     RC
     <div
-      className="users-icon__img"
+      className="user-icon__avatar"
       style={
         Object {
           "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
@@ -31,7 +31,7 @@ exports[`UsersIcon render default 1`] = `
     />
   </div>
   <div
-    className="users-icon__icon"
+    className="user-icon user-icon-list__icon"
     style={
       Object {
         "backgroundColor": "#6B29BE",
@@ -40,7 +40,7 @@ exports[`UsersIcon render default 1`] = `
   >
     RC
     <div
-      className="users-icon__img"
+      className="user-icon__avatar"
       style={
         Object {
           "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
@@ -49,7 +49,7 @@ exports[`UsersIcon render default 1`] = `
     />
   </div>
   <div
-    className="users-icon__icon"
+    className="user-icon user-icon-list__icon"
     style={
       Object {
         "backgroundColor": "#006EFF",
@@ -58,7 +58,7 @@ exports[`UsersIcon render default 1`] = `
   >
     RC
     <div
-      className="users-icon__img"
+      className="user-icon__avatar"
       style={
         Object {
           "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
@@ -67,7 +67,7 @@ exports[`UsersIcon render default 1`] = `
     />
   </div>
   <div
-    className="users-icon__icon"
+    className="user-icon user-icon-list__icon"
     style={
       Object {
         "backgroundColor": "#6B29BE",
@@ -76,16 +76,16 @@ exports[`UsersIcon render default 1`] = `
   >
     RC
     <div
-      className="users-icon__img"
+      className="user-icon__avatar"
       style={
         Object {
-          "backgroundImage": "url(undefined)",
+          "backgroundImage": "url()",
         }
       }
     />
   </div>
   <div
-    className="users-icon__icon"
+    className="user-icon user-icon-list__icon"
     style={
       Object {
         "backgroundColor": "#006EFF",
@@ -94,7 +94,7 @@ exports[`UsersIcon render default 1`] = `
   >
     RC
     <div
-      className="users-icon__img"
+      className="user-icon__avatar"
       style={
         Object {
           "backgroundImage": "url(/photo.jpg)",

@@ -1,4 +1,4 @@
-import { props as usersProps } from "../users_icon/props";
+import { props as usersProps } from "../user_icon_list/props";
 
 export const props = {
   property_name: "Meridian SLC",

@@ -1,12 +1,12 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
-import UsersIcon from "./index";
+import UserIconList from "./index";
 import { props } from "./props";
 
-describe("UsersIcon", () => {
+describe("UserIconList", () => {
   it("render default", () => {
-    const tree = renderer.create(<UsersIcon {...props} />).toJSON();
+    const tree = renderer.create(<UserIconList {...props} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });
