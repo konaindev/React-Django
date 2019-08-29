@@ -11,14 +11,24 @@ export default class Profile extends React.Component {
         <div className="account-settings__tab-content">
           <div className="account-settings__tab-section">
             <div className="account-settings__tab-title">General Info</div>
-            <div className="account-settings__logo-field">
-              <div className="account-settings__logo">
-                <label className="account-settings__logo-input">
-                  <Upload />
-                  <input name="logo" type="file" />
-                </label>
+            <div className="account-settings__photo-field">
+              <div className="account-settings__photo-info">
+                <div className="account-settings__photo">
+                  <label className="account-settings__upload">
+                    <Upload className="account-settings__upload-icon" />
+                    <input name="logo" type="file" />
+                  </label>
+                </div>
+                <div className="account-settings__photo-data">
+                  <div className="account-settings__photo-text account-settings__photo-text--name">
+                    Phillip McPhillipson
+                  </div>
+                  <div className="account-settings__photo-text">Admin</div>
+                </div>
               </div>
-              <div className="account-settings__info" />
+              <div className="account-settings__help-text">
+                3MB Size Limit. PNG or JPG only.
+              </div>
             </div>
             <div className="account-settings__field-grid">
               <div className="account-settings__field">
