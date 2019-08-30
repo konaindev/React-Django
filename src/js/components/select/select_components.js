@@ -87,3 +87,12 @@ export const OptionUsers = props => (
     <UserRow {...props.data} />
   </components.Option>
 );
+
+export const menuListConstructor = component => props => (
+  <components.MenuList {...props}>
+    {props.children}
+    <components.Option cx={() => {}} getStyles={() => {}}>
+      {component}
+    </components.Option>
+  </components.MenuList>
+);
