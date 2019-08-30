@@ -96,6 +96,7 @@
         }
     }
 
+    &[disabled],
     &--disabled {
         background-color: $gray-4;
         color: $button-disabled-text-color;
@@ -118,5 +119,12 @@
         &:active {
             background-color: darken($button-highlight-bg-color, 2%);
         }
+    }
+
+    &--disabled-light {
+        background-color: $button-disabled-light-bg;
+        color: $button-disabled-light-text-color;
+        cursor: not-allowed;
+        pointer-events: none;
     }
 }

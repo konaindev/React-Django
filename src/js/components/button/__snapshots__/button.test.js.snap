@@ -18,11 +18,56 @@ exports[`Button renders disabled button correctly 1`] = `
 </button>
 `;
 
+exports[`Button renders disabled-light button correctly 1`] = `
+<button
+  className="button button--disabled-light"
+  onClick={[Function]}
+>
+  Disabled light Button
+</button>
+`;
+
+exports[`Button renders primary button correctly 1`] = `
+<button
+  className="button button--primary"
+  onClick={[Function]}
+>
+  Primary Button
+</button>
+`;
+
+exports[`Button renders primary outline correctly 1`] = `
+<button
+  className="button button--outline"
+  onClick={[Function]}
+>
+  Outline Button
+</button>
+`;
+
+exports[`Button renders secondary button correctly 1`] = `
+<button
+  className="button button--secondary"
+  onClick={[Function]}
+>
+  Secondary Button
+</button>
+`;
+
 exports[`Button renders selected button correctly 1`] = `
 <button
   className="button button--selected button--default"
   onClick={[Function]}
 >
   Selected Button
+</button>
+`;
+
+exports[`Button renders transparent button correctly 1`] = `
+<button
+  className="button button--transparent"
+  onClick={[Function]}
+>
+  Transparent Button
 </button>
 `;

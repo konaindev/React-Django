@@ -1,4 +1,5 @@
 import json
+
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
@@ -6,6 +7,7 @@ from django.core.cache import cache
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
 from remark.projects.models import Fund, Project
+from remark.lib.cache import remark_cache, TIMEOUT_1_WEEK
 from remark.lib.views import ReactView, RemarkView
 
 
@@ -33,32 +35,53 @@ class DashboardView(LoginRequiredMixin, ReactView):
     def get_page_title(self):
         return "Dashboard"
 
-    def get(self, request):
-        user = request.user
-
-        cache_key = "{}^{}^{}^{}".format(
-            user.public_id,
-            request.path,
-            request.content_type,
-            request.META["QUERY_STRING"],
-        )
-
+    @staticmethod
+    def get_project_details(project):
+        """ cached by "project.public_id", details for project card on UI """
+        cache_key = f"remark.web.views.dashboard_view.project.{project.public_id}"
         if cache_key in cache:
-            cached_response = cache.get(cache_key)
-            return cached_response
+            return cache.get(cache_key)
 
-        project_params = {}
+        address = project.property.geo_address
+        project_details = dict(
+            property_name=project.name,
+            property_id=project.public_id,
+            address=f"{address.city}, {address.state}",
+            image_url=project.get_building_image_url(),
+            performance_rating=project.get_performance_rating(),
+            url=project.get_baseline_url(),
+        )
+        cache.set(cache_key, project_details, TIMEOUT_1_WEEK)
+        return project_details
+
+    @staticmethod
+    def get_owned_projects(user):
+        """ return QuerySet<Project> accessible by the specified user """
         if user.is_superuser:
             project_query = Project.objects.all()
         else:
             project_query = Project.objects.get_all_for_user(user)
+        return project_query
+
+    @classmethod
+    def get_user_filter_options(cls, user):
+        """
+        cached by "user.public_id", iterates all projects accessible by the user
+        dropdown options for locations | funds | asset owners | project managers
+        flag reflecting user has accessible projects or not
+        """
+        cache_key = f"remark.web.views.dashboard_view.user_filters.{user.public_id}"
+        if cache_key in cache:
+            return cache.get(cache_key)
+
+        owned_projects = cls.get_owned_projects(user)
 
         locations = []
         asset_managers = []
         property_managers = []
         funds = []
         no_projects = True
-        for project in project_query:
+        for project in owned_projects:
             no_projects = False
             address = project.property.geo_address
             state = address.state
@@ -75,7 +98,6 @@ class DashboardView(LoginRequiredMixin, ReactView):
                         "label": project.asset_manager.name,
                     }
                 )
-
             if (
                 project.property_manager is not None
                 and not has_property_in_list_of_dict(
@@ -88,85 +110,83 @@ class DashboardView(LoginRequiredMixin, ReactView):
                         "label": project.property_manager.name,
                     }
                 )
-
             if project.fund is not None and not has_property_in_list_of_dict(
                 funds, "id", project.fund.public_id
             ):
                 funds.append({"id": project.fund.public_id, "label": project.fund.name})
 
+        user_filters = dict(
+            locations=locations,
+            asset_managers=asset_managers,
+            property_managers=property_managers,
+            funds=funds,
+            no_projects=no_projects,
+        )
+        cache.set(cache_key, user_filters, TIMEOUT_1_WEEK)
+        return user_filters
+
+    @classmethod
+    def prepare_filters_from_request(cls, request):
+        """ calc queryset filter params based on HTTP request query strings """
+        lookup_params = {}
         if request.GET.get("q"):
-            project_params["name__icontains"] = request.GET.get("q")
+            lookup_params["name__icontains"] = request.GET.get("q")
         if request.GET.get("st"):
             st = request.GET.getlist("st")
-            project_params["property__geo_address__state__iregex"] = (
+            lookup_params["property__geo_address__state__iregex"] = (
                 r"(" + "|".join(st) + ")"
             )
         if request.GET.get("ct"):
-            project_params["property__geo_address__city__in"] = request.GET.getlist(
-                "ct"
-            )
+            lookup_params["property__geo_address__city__in"] = request.GET.getlist("ct")
         if request.GET.get("pm"):
-            project_params["property_manager_id__in"] = request.GET.getlist("pm")
+            lookup_params["property_manager_id__in"] = request.GET.getlist("pm")
         if request.GET.getlist("am"):
-            project_params["asset_manager_id__in"] = request.GET.getlist("am")
+            lookup_params["asset_manager_id__in"] = request.GET.getlist("am")
         if request.GET.get("fd"):
-            project_params["fund_id__in"] = request.GET.getlist("fd")
+            lookup_params["fund_id__in"] = request.GET.getlist("fd")
 
-        sort = request.GET.get("s")
-        order = self.sql_sort.get(sort) or "name"
+        sort_by = request.GET.get("s")
+        ordering = cls.sql_sort.get(sort_by) or "name"
         direction = request.GET.get("d") or "asc"
         if direction == "desc":
-            order = f"-{order}"
+            ordering = f"-{ordering}"
 
-        projects = []
-        for project in project_query.filter(**project_params).order_by(order):
-            address = project.property.geo_address
-            projects.append(
-                {
-                    "property_name": project.name,
-                    "property_id": project.public_id,
-                    "address": f"{address.city}, {address.state}",
-                    "image_url": project.get_building_image_url(),
-                    "performance_rating": project.get_performance_rating(),
-                    "url": project.get_baseline_url(),
-                }
-            )
+        return (lookup_params, ordering)
 
-        if sort == "performance":
+    def get(self, request):
+        """
+        GET "/dashboard" handler
+        Accept: text/html, application/json
+        """
+        owned_projects = self.get_owned_projects(request.user)
+        filter_options = self.get_user_filter_options(request.user)
+        (lookup_params, ordering) = self.prepare_filters_from_request(request)
+        projects = [
+            self.get_project_details(project)
+            for project in owned_projects.filter(**lookup_params).order_by(ordering)
+        ]
+
+        sort_by = request.GET.get("s")
+        direction = request.GET.get("d") or "asc"
+        if sort_by == "performance":
             is_reverse = direction == "asc"
             projects = sorted(
                 projects, key=lambda p: p["performance_rating"], reverse=is_reverse
             )
 
-        response = JsonResponse(
-            {
-                "no_projects": no_projects,
-                "properties": projects,
-                "user": user.get_menu_dict(),
-                "search_url": request.GET.urlencode(),
-                "locations": locations,
-                "property_managers": property_managers,
-                "asset_managers": asset_managers,
-                "funds": funds,
-                "static_url": settings.STATIC_URL,
-            }
+        response_data = dict(
+            properties=projects,
+            user=request.user.get_menu_dict(),
+            search_url=request.GET.urlencode(),
+            static_url=settings.STATIC_URL,
+            **filter_options,
         )
 
-        if request.content_type != "application/json":
-            response = self.render(
-                no_projects=no_projects,
-                properties=projects,
-                user=user.get_menu_dict(),
-                search_url=request.GET.urlencode(),
-                locations=locations,
-                property_managers=property_managers,
-                asset_managers=asset_managers,
-                funds=funds,
-                static_url=settings.STATIC_URL,
-            )
-
-        cache.set(cache_key, response, timeout=DEFAULT_TIMEOUT)
-        return response
+        data_type_requested = request.headers.get("Accept", "")
+        if "application/json" in data_type_requested:
+            return JsonResponse(response_data)
+        else:
+            return self.render(**response_data)
 
 
 class TutorialView(LoginRequiredMixin, RemarkView):

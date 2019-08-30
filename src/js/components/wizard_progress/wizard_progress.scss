@@ -1,0 +1,63 @@
+@import "css/base.scss";
+
+$wizard-progress-step-size: 20px;
+$wizard-progress-step-spacing: 6px;
+
+.wizard-progress {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.wizard-progress__step {
+    font-family: $font-sans;
+    font-size: $text-xs;
+    line-height: 20px;
+    color: $gray-6;
+    display: inline-flex;
+
+    &--active {
+        color: $blue-7;
+
+        .wizard-progress__step-number {
+            background-color: $blue-7;
+        }
+    }
+
+    &--complete {
+        color: $gray-3;
+
+        .wizard-progress__step-number {
+            display: none;
+        }
+
+        .wizard-progress__icon {
+            display: inline-block;
+        }
+    }
+
+    & + .wizard-progress__step {
+        margin-left: 50px;
+    }
+}
+
+.wizard-progress__step-number {
+    display: inline-block;
+    margin-right: $wizard-progress-step-spacing;
+    width: $wizard-progress-step-size;
+    height: $wizard-progress-step-size;
+    color: $highlight-gray-3;
+    background-color: $gray-6;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.wizard-progress__icon {
+    display: none;
+    color: $green-7;
+    margin-right: $wizard-progress-step-spacing;
+    width: $wizard-progress-step-size;
+    height: $wizard-progress-step-size;
+}
+

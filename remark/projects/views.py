@@ -1,3 +1,4 @@
+from django.contrib.auth.views import redirect_to_login
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -26,6 +27,9 @@ from remark.lib.logging import getLogger, error_text
 
 logger = getLogger(__name__)
 
+class Redirect(Exception):
+    pass
+
 # project model field names used to control anonymous access, by report_name
 shared_fields_by_report = dict(
     baseline="is_baseline_report_shared",
@@ -45,7 +49,7 @@ class ProjectSingleMixin:
         # protected views
         if not self.is_anonymous_view:
             if not user.is_authenticated:
-                raise Http404
+                raise Redirect
             elif not self.project.user_can_view(user):
                 raise PermissionDenied
             else:
@@ -62,7 +66,7 @@ class ProjectSingleMixin:
             raise Http404
 
 
-class ProjectPageView(ProjectSingleMixin, ReactView):
+class ProjectPageView(LoginRequiredMixin, ProjectSingleMixin, ReactView):
     """Render a page that shows information about the overall project."""
 
     page_class = "ProjectPage"
@@ -73,7 +77,15 @@ class ProjectPageView(ProjectSingleMixin, ReactView):
         return f"{self.project.name} Reports"
 
     def get(self, request, project_id):
-        self.get_project(request, project_id)
+        try:
+            self.get_project(request, project_id)
+        except PermissionDenied:
+            return redirect("dashboard")
+        except Redirect:
+            return redirect_to_login(self.request.get_full_path())
+        except Exception as e:
+            logger.error(error_text(e))
+            raise Http404
 
         return self.render(
             user=request.user.get_menu_dict(),
@@ -113,6 +125,10 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
 
         try:
             self.get_project(request, project_id)
+        except PermissionDenied:
+            return redirect("dashboard")
+        except Redirect:
+            return redirect_to_login(self.request.get_full_path())
         except Exception as e:
             logger.error(error_text(e))
             raise Http404

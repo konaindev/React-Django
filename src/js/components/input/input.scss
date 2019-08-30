@@ -22,3 +22,21 @@
         opacity: 1;
     }
 }
+
+.input.input--highlight {
+    width: 100%;
+    padding: 11px;
+    font-size: $text-sm;
+    line-height: 20px;
+    color: $input-highlight-color;
+    background: transparent;
+    border: 1px solid $input-highlight-border;
+    border-radius: $input-border-radius;
+    box-sizing: border-box;
+
+    &:focus {
+        color: $input-highlight-color;
+        border: 1px solid $input-highlight-focus-border;
+        outline: none;
+    }
+}

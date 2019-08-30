@@ -6,3 +6,10 @@ exports[`Input render text input 1`] = `
   type="text"
 />
 `;
+
+exports[`Input render text input highlight 1`] = `
+<input
+  className="input input--highlight"
+  type="text"
+/>
+`;

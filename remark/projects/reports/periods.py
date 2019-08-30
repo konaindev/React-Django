@@ -174,21 +174,29 @@ class ComputedPeriod(ComputedValueMixin):
     def acq_investment(self):
         """The total acqusition investment (in dollars)."""
         return (
-            self.acq_reputation_building +
-            self.acq_demand_creation +
-            self.acq_leasing_enablement +
-            self.acq_market_intelligence
+            self.acq_reputation_building
+            + self.acq_demand_creation
+            + self.acq_leasing_enablement
+            + self.acq_market_intelligence
         )
 
+    @computed_value
+    def acq_investment_without_leasing(self):
+        """The total acqusition investment except leasing enablement (in dollars)."""
+        return (
+            self.acq_reputation_building
+            + self.acq_demand_creation
+            + self.acq_market_intelligence
+        )
 
     @computed_value
     def ret_investment(self):
         """The total retention investment (in dollars)."""
         return (
-            self.ret_reputation_building +
-            self.ret_demand_creation +
-            self.ret_leasing_enablement +
-            self.ret_market_intelligence
+            self.ret_reputation_building
+            + self.ret_demand_creation
+            + self.ret_leasing_enablement
+            + self.ret_market_intelligence
         )
 
     @computed_value
@@ -371,12 +379,16 @@ class ComputedPeriod(ComputedValueMixin):
     @computed_value
     def cost_per_usv(self):
         """Return the estimated cost to obtain a unique site visitor in this period."""
-        return d_quant_currency(d_div_or_0(self.acq_investment, self.usvs))
+        return d_quant_currency(
+            d_div_or_0(self.acq_investment_without_leasing, self.usvs)
+        )
 
     @computed_value
     def cost_per_inq(self):
         """Return the estimated cost to obtain an inbound inquiry in this period."""
-        return d_quant_currency(d_div_or_0(self.acq_investment, self.inquiries))
+        return d_quant_currency(
+            d_div_or_0(self.acq_investment_without_leasing, self.inquiries)
+        )
 
     @computed_value
     def cost_per_tou(self):

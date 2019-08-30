@@ -1,15 +1,15 @@
-import _isEmpty from "lodash/isEmpty";
-import _isArray from "lodash/isArray";
-import _isEqual from "lodash/isEqual";
-import cn from "classnames";
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import cn from "classnames";
+import _isArray from "lodash/isArray";
+import _isEmpty from "lodash/isEmpty";
+import _isEqual from "lodash/isEqual";
 
 import AddPropertyModal from "../add_property_modal";
 import { states } from "../add_property_form/states";
 import Button from "../button";
 import DashboardControls from "../dashboard_controls";
-import ToggleButton from "../toggle_button";
 import Container from "../container";
 import PageChrome from "../page_chrome";
 import PropertyCardList from "../property_card_list";
@@ -18,11 +18,13 @@ import { Close, ListView, TileView } from "../../icons";
 import Loader from "../loader";
 import UserMenu from "../user_menu";
 
-import "./dashboard_page.scss";
-import { connect } from "react-redux";
 import router from "../../router";
+import { qsParse, qsStringify } from "../../utils/misc";
 import TutorialView from "../tutorial_view";
 import { networking } from "../../state/actions";
+
+import "./dashboard_page.scss";
+
 const navLinks = {
   links: [
     {
@@ -76,12 +78,16 @@ export class DashboardPage extends React.PureComponent {
       selectedProperties: props.selectedProperties,
       isShowAddPropertyForm: false
     };
-    this._router = router("/dashboard")(x =>
-      props.dispatch({
-        type: "API_DASHBOARD",
-        searchString: x
-      })
-    );
+
+    this._router = router("/dashboard")(queryString => {
+      // @TODO:
+      // uncomment in case of Django -> DashboardView renders empty props initially
+      //
+      // props.dispatch({
+      //   type: "API_DASHBOARD",
+      //   queryString
+      // });
+    });
   }
 
   selectAll = () => {
@@ -257,42 +263,51 @@ DashboardSelection.propTypes = {
 export class UrlQueryLayer extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.filters = {};
-    const urlParams = new URLSearchParams(
-      // props.search_url || window.location.search
-      window.location.search
-    );
-    this.filters = {
-      q: urlParams.get("q"),
-      ct: urlParams.getAll("ct"),
-      st: urlParams.getAll("st"),
-      fd: urlParams.getAll("fd"),
-      am: urlParams.getAll("am"),
-      pm: urlParams.getAll("pm"),
-      s: urlParams.get("s"),
-      d: urlParams.get("d")
-    };
-    this.state = { ...this.filters };
+
+    this.loadQueryString();
   }
+
+  loadQueryString = () => {
+    const filterNames = ["q", "ct", "st", "fd", "am", "pm", "s", "d"];
+    const stringFilters = ["q", "s", "d"];
+    const urlParams = qsParse(window.location.search);
+
+    this.filters = {};
+    Object.keys(urlParams).forEach(k => {
+      const value = urlParams[k];
+
+      if (!filterNames.includes(k) || _isEmpty(value)) {
+        return;
+      }
+
+      if (!stringFilters.includes(k) && !_isArray(value)) {
+        this.filters[k] = [value];
+      } else {
+        this.filters[k] = value;
+      }
+    });
+
+    this.state = { ...this.filters };
+  };
 
   onChangeFilter = filters => {
     if (_isEqual(filters, this.filters)) {
       return;
     }
-    const urlParams = new URLSearchParams();
-    Object.keys(filters).forEach(filterName => {
-      const value = filters[filterName];
+
+    this.setState(filters);
+
+    let urlParams = {};
+    Object.keys(filters).forEach(k => {
+      const value = filters[k];
       if (!_isEmpty(value)) {
-        if (_isArray(value)) {
-          value.forEach(v => urlParams.append(filterName, v));
-        } else {
-          urlParams.set(filterName, value);
-        }
+        urlParams[k] = value;
       }
     });
-    this.setState(filters);
-    window.history.replaceState({}, "", `/dashboard?${urlParams.toString()}`);
-    this.props.dispatch(networking.fetchDashboard(`${urlParams.toString()}`));
+
+    const queryString = qsStringify(urlParams);
+    window.history.replaceState({}, "", `/dashboard${queryString}`);
+    this.props.dispatch(networking.fetchDashboard(queryString));
   };
 
   render() {

@@ -9,7 +9,7 @@ def user_passes_test(test_func, redirect_url=None):
     Decorator for views that checks that the user passes the given test,
     redirecting to the redirect_url if necessary.
 
-    @ref django.contrib.auth.decorators
+    @ref https://github.com/django/django/blob/master/django/contrib/auth/decorators.py#L10
     """
 
     def decorator(view_func):

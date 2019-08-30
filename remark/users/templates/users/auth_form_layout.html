@@ -16,7 +16,7 @@
                     {% block nonfield_extras %}{% endblock %}
                 </div>
 
-                <form method="post" action="{% block action %}#{% endblock %}">
+                <form method="post" action="{% block action %}#{% endblock %}" id="auth-form">
                     {% csrf_token %}
 
                     {% for hidden_field in form.hidden_fields %}
@@ -49,5 +49,22 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+      if (document.readyState !== "loading") {
+        setup();
+      } else {
+        document.addEventListener("DOMContentLoaded", setup);
+      }
+
+      function setup() {
+        var authForm = document.getElementById("auth-form");
+        var submitButton = document.querySelector("#auth-form button[type=\"submit\"]");
+        submitButton.addEventListener("click", function() {
+          this.setAttribute("disabled", "");
+          authForm.submit();
+        });
+      }
+    </script>
 
 {% endblock %}

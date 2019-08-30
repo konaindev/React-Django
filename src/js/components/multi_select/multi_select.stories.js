@@ -47,4 +47,18 @@ storiesOf("MultiSelect", module)
         onChange={options => store.set({ values: options })}
       />
     ))
+  )
+  .add(
+    "highlight",
+    withState({ values: [] })(({ store }) => (
+      <MultiSelect
+        {...props}
+        theme="highlight"
+        isShowControls={false}
+        isShowAllOption={false}
+        value={store.state.values}
+        label={store.state.values?.map(v => v.label).join(", ")}
+        onChange={options => store.set({ values: options })}
+      />
+    ))
   );

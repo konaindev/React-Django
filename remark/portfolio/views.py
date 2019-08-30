@@ -1,10 +1,12 @@
+import datetime
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from remark.lib.views import ReactView
 from remark.lib.logging import getLogger, error_text
 from remark.lib.time_series.common import KPI, KPITitle, KPIFormat
 from remark.portfolio.api.table_data import get_table_structure
-import datetime
-
 from remark.lib.stats import get_kpi_health
+
 
 logger = getLogger(__name__)
 
@@ -107,7 +109,7 @@ def x_mondays_ago(x):
     return last_monday - datetime.timedelta(days=days_before)
 
 
-class PortfolioTableView(PortfolioMixin, ReactView):
+class PortfolioTableView(LoginRequiredMixin, PortfolioMixin, ReactView):
 
     page_class = "PortfolioAnalysisView"
     page_title = "Portfolio Analysis"

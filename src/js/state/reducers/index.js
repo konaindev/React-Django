@@ -48,4 +48,36 @@ const network = (state = { isFetching: false }, action) => {
   return newState;
 };
 
-export default combineReducers({ general: dashboard, network, tutorial });
+const createPassword = (state = {}, action) => {
+  let newState = {};
+  switch (action.type) {
+    case "CREATE_PASSWORD_": {
+      newState = { ...state, tutorialView: action.newState };
+      break;
+    }
+    default:
+      newState = { ...state };
+  }
+  return newState;
+};
+
+const completeAccount = (state = {}, action) => {
+  let newState = {};
+  switch (action.type) {
+    case "COMPLETE_ACCOUNT_SET_STATE": {
+      newState = { ...state, ...action.newState };
+      break;
+    }
+    default:
+      newState = { ...state };
+  }
+  return newState;
+};
+
+export default combineReducers({
+  general: dashboard,
+  network,
+  tutorial,
+  createPassword,
+  completeAccount
+});

@@ -1,14 +1,16 @@
-from django.contrib import admin
-from .models import PerformanceEmail, PerformanceEmailKPI
-from remark.admin import admin_site
-from .reports.weekly_performance import send_performance_email
 import datetime
+
+from django.contrib import admin
+
+from remark.admin import admin_site, custom_titled_filter
 from remark.lib.logging import error_text
+from .models import PerformanceEmail, PerformanceEmailKPI
+from .reports.weekly_performance import send_performance_email
+
 
 class PerformanceEmailKPIInline(admin.TabularInline):
     model = PerformanceEmailKPI
 
-from django.db import transaction
 
 @admin.register(PerformanceEmail, site=admin_site)
 class PerformanceEmailAdmin(admin.ModelAdmin):
@@ -27,7 +29,9 @@ class PerformanceEmailAdmin(admin.ModelAdmin):
         "risk_kpi_insight_text",
         "low_kpi_insight_text",
     ]
-    list_display = ["project", "start", "created_by"]
+    list_display = ("project", "start", "created_by")
+    list_filter = (("project__name", custom_titled_filter("Project")),)
+    ordering = ("-start",)
 
     def save_model(self, request, obj, form, change):
         print("email_app::admin::PerformanceEmailAdmin::save_model::top")

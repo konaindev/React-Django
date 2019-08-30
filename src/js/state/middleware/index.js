@@ -1,5 +1,5 @@
-import { general, tutorial, networking } from "../actions";
-import { get, post } from "../../utils/api";
+import { general, tutorial, networking, createPassword } from "../actions";
+import { axiosGet, axiosPost } from "../../utils/api";
 
 // Here we create a middleware that intercepts
 // actions representing a request for data from
@@ -12,17 +12,8 @@ export const fetchDashboard = store => next => action => {
     if (!isFetching || isFetching === false) {
       store.dispatch(networking.startFetching());
     }
-    window
-      .fetch(`${process.env.BASE_URL}/dashboard?${action.searchString}`, {
-        responseType: "json",
-        credentials: "include",
-        mode: "same-origin",
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-      .then(x => x.json())
-      .then(newState => next(general.set(newState)))
+    axiosGet(`${process.env.BASE_URL}/dashboard${action.queryString}`)
+      .then(response => next(general.set(response.data)))
       .then(setTimeout(() => next(networking.stopFetching()), 120))
       .catch(e => {
         console.log("ERROR", e);
@@ -37,17 +28,42 @@ export const fetchTutorial = store => next => action => {
   if (action.type === "API_TUTORIAL") {
     const url = `${process.env.BASE_URL}/tutorial`;
     if (action.data) {
-      post(url, action.data)
+      axiosPost(url, action.data)
         .then(response => {
           next(tutorial.set(response.data));
         })
         .catch(e => console.log("-----> ERROR", e));
     } else {
-      get(url)
+      axiosGet(url)
         .then(response => {
           next(tutorial.set(response.data));
         })
         .catch(e => console.log("-----> ERROR", e));
+    }
+  } else {
+    next(action);
+  }
+};
+
+export const fetchCreatePassword = store => next => action => {
+  if (action.type === "API_CREATE_PASSWORD") {
+    const hash = action.hash;
+    if (action.data) {
+      const url = `${process.env.BASE_URL}/create-password/${hash}"`;
+      const data = { password };
+      axiosPost(url, action.data)
+        .then(response => {
+          if (response.status === 200) {
+            const redirectUrl = "/";
+            next(createPassword.redirect(redirectUrl));
+          } else {
+            throw response;
+          }
+        })
+        .catch(e => console.log("-----> ERROR", e));
+    } else {
+      const url = `${process.env.BASE_URL}/create-password/${hash}"`;
+      axiosGet(url);
     }
   } else {
     next(action);

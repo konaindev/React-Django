@@ -22,8 +22,15 @@ export const networking = {
   stopFetching: () => ({
     type: "NETWORK_STOP_FETCH"
   }),
-  fetchDashboard: searchString => ({
+  fetchDashboard: (queryString = "") => ({
     type: "API_DASHBOARD",
-    searchString
+    queryString
+  })
+};
+
+export const createPassword = {
+  redirect: url => ({
+    type: "CREATE_PASSWORD_REDIRECT",
+    url
   })
 };

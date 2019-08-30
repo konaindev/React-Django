@@ -22,4 +22,19 @@ describe("MultiSelect", () => {
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
+  it("highlight", () => {
+    const tree = renderer
+      .create(
+        <MultiSelect
+          {...props}
+          menuIsOpen
+          isShowControls={false}
+          isShowAllOption={false}
+          theme="highlight"
+          value={props.options}
+        />
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  })
 });

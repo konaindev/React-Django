@@ -38,6 +38,10 @@
 
     .select__value-container {
         padding: 0;
+
+        input {
+            height: 0;
+        }
     }
 
     .select__placeholder {

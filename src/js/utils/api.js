@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { getCSRFToken } from "./csrf";
 
-export function post(url, data, headers = {}, csrfProtect = true) {
+export function axiosPost(url, data, headers = {}, csrfProtect = true) {
   const config = {
     method: "post",
     headers: { ...headers },
@@ -18,10 +18,12 @@ export function post(url, data, headers = {}, csrfProtect = true) {
   return axios(config);
 }
 
-export function get(url) {
-  const config = {
+export function axiosGet(url, config = {}) {
+  const params = {
     method: "get",
-    url
+    url,
+    withCredentials: true,
+    ...config
   };
-  return axios(config);
+  return axios(params);
 }
