@@ -200,3 +200,6 @@ dump.rdb
 
 # IDE files
 .idea/
+
+*-storybook/
+*_storybook/
