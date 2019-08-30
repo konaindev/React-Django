@@ -1,0 +1,2099 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InviteModal renders with multiple properties 1`] = `
+<Modal
+  center={true}
+  classNames={
+    Object {
+      "closeButton": "modal-window__close",
+      "modal": "modal-window invite-modal",
+      "overlay": "modal-overlay",
+    }
+  }
+  closeOnOverlayClick={true}
+  focusTrapped={false}
+  onClose={[Function]}
+  open={true}
+  styles={
+    Object {
+      "closeIcon": Object {
+        "display": "none",
+      },
+    }
+  }
+>
+  <div
+    className="modal-window__head invite-modal__header"
+  >
+    <div
+      className="invite-modal__title"
+    >
+      Invite to
+    </div>
+    <div
+      className="invite-modal__title invite-modal__title--name"
+    >
+       
+      2 properties
+    </div>
+  </div>
+  <div
+    className="modal-window__body"
+  >
+    <div
+      className="invite-modal__container invite-modal__container--select"
+    >
+      <div
+        className="select-search select invite-modal__select-users select--is-multi select--transparent css-2b097c-container"
+        onKeyDown={[Function]}
+      >
+        <div
+          className="select__control css-yk16xz-control"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="select__value-container select__value-container--is-multi css-1hwfws3"
+          >
+            <div
+              className="select__placeholder css-1wa3eu0-placeholder"
+            >
+              Type a name or an email address
+            </div>
+            <div>
+              <div
+                className="select__input"
+                style={
+                  Object {
+                    "display": "inline-block",
+                  }
+                }
+              >
+                <input
+                  aria-autocomplete="list"
+                  autoCapitalize="none"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  disabled={false}
+                  id="react-select-17-input"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  spellCheck="false"
+                  style={
+                    Object {
+                      "background": 0,
+                      "border": 0,
+                      "boxSizing": "content-box",
+                      "color": "inherit",
+                      "fontSize": "inherit",
+                      "label": "input",
+                      "opacity": 1,
+                      "outline": 0,
+                      "padding": 0,
+                      "width": "1px",
+                    }
+                  }
+                  tabIndex="0"
+                  type="text"
+                  value=""
+                />
+                <div
+                  style={
+                    Object {
+                      "height": 0,
+                      "left": 0,
+                      "overflow": "scroll",
+                      "position": "absolute",
+                      "top": 0,
+                      "visibility": "hidden",
+                      "whiteSpace": "pre",
+                    }
+                  }
+                >
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="select invite-modal__select-role select--small select--default css-2b097c-container"
+        onKeyDown={[Function]}
+      >
+        <div
+          className="select__control css-yk16xz-control"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="select__value-container select__value-container--has-value css-1hwfws3"
+          >
+            <div
+              className="select__single-value css-1uccc91-singleValue"
+            >
+              Member
+            </div>
+            <input
+              className="css-62g3xt-dummyInput"
+              disabled={false}
+              id="react-select-18-input"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              readOnly={true}
+              tabIndex="0"
+              value=""
+            />
+          </div>
+          <div
+            className="select__indicators css-1wy0on6"
+          >
+            <span
+              className="select__indicator-separator css-1okebmr-indicatorSeparator"
+            />
+            <div
+              aria-hidden="true"
+              className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <svg
+                aria-hidden="true"
+                className="select__dropdown-arrow select__dropdown-arrow--down"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 10 5"
+                width="1em"
+              >
+                <path
+                  d="M1 1.16134L4.92334 4.5"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M8.82812 1.16134L5 4.5"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <svg
+                aria-hidden="true"
+                className="select__dropdown-arrow select__dropdown-arrow--up"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 10 5"
+                width="1em"
+              >
+                <path
+                  d="M1 3.83866L4.92334 0.5"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M8.82812 3.83866L5 0.5"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="invite-modal__container invite-modal__container--users"
+    />
+    <div
+      className="invite-modal__container invite-modal__container--button"
+    >
+      <button
+        className="button button--disabled button--uppercase button--primary invite-modal__button"
+        onClick={[Function]}
+      >
+        invite
+      </button>
+    </div>
+  </div>
+</Modal>
+`;
+
+exports[`InviteModal renders with single properties 1`] = `
+<Modal
+  center={true}
+  classNames={
+    Object {
+      "closeButton": "modal-window__close",
+      "modal": "modal-window invite-modal",
+      "overlay": "modal-overlay",
+    }
+  }
+  closeOnOverlayClick={true}
+  focusTrapped={false}
+  onClose={[Function]}
+  open={true}
+  styles={
+    Object {
+      "closeIcon": Object {
+        "display": "none",
+      },
+    }
+  }
+>
+  <div
+    className="modal-window__head invite-modal__header"
+  >
+    <div
+      className="invite-modal__title"
+    >
+      Invite to
+    </div>
+    <div
+      className="invite-modal__title invite-modal__title--name"
+    >
+       
+      The Chalet
+    </div>
+  </div>
+  <div
+    className="modal-window__body"
+  >
+    <div
+      className="invite-modal__container invite-modal__container--select"
+    >
+      <div
+        className="select-search select invite-modal__select-users select--is-multi select--transparent css-2b097c-container"
+        onKeyDown={[Function]}
+      >
+        <div
+          className="select__control css-yk16xz-control"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="select__value-container select__value-container--is-multi css-1hwfws3"
+          >
+            <div
+              className="select__placeholder css-1wa3eu0-placeholder"
+            >
+              Type a name or an email address
+            </div>
+            <div>
+              <div
+                className="select__input"
+                style={
+                  Object {
+                    "display": "inline-block",
+                  }
+                }
+              >
+                <input
+                  aria-autocomplete="list"
+                  autoCapitalize="none"
+                  autoComplete="off"
+                  autoCorrect="off"
+                  disabled={false}
+                  id="react-select-2-input"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  spellCheck="false"
+                  style={
+                    Object {
+                      "background": 0,
+                      "border": 0,
+                      "boxSizing": "content-box",
+                      "color": "inherit",
+                      "fontSize": "inherit",
+                      "label": "input",
+                      "opacity": 1,
+                      "outline": 0,
+                      "padding": 0,
+                      "width": "1px",
+                    }
+                  }
+                  tabIndex="0"
+                  type="text"
+                  value=""
+                />
+                <div
+                  style={
+                    Object {
+                      "height": 0,
+                      "left": 0,
+                      "overflow": "scroll",
+                      "position": "absolute",
+                      "top": 0,
+                      "visibility": "hidden",
+                      "whiteSpace": "pre",
+                    }
+                  }
+                >
+                  
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="select invite-modal__select-role select--small select--default css-2b097c-container"
+        onKeyDown={[Function]}
+      >
+        <div
+          className="select__control css-yk16xz-control"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="select__value-container select__value-container--has-value css-1hwfws3"
+          >
+            <div
+              className="select__single-value css-1uccc91-singleValue"
+            >
+              Member
+            </div>
+            <input
+              className="css-62g3xt-dummyInput"
+              disabled={false}
+              id="react-select-3-input"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              readOnly={true}
+              tabIndex="0"
+              value=""
+            />
+          </div>
+          <div
+            className="select__indicators css-1wy0on6"
+          >
+            <span
+              className="select__indicator-separator css-1okebmr-indicatorSeparator"
+            />
+            <div
+              aria-hidden="true"
+              className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <svg
+                aria-hidden="true"
+                className="select__dropdown-arrow select__dropdown-arrow--down"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 10 5"
+                width="1em"
+              >
+                <path
+                  d="M1 1.16134L4.92334 4.5"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M8.82812 1.16134L5 4.5"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                />
+              </svg>
+              <svg
+                aria-hidden="true"
+                className="select__dropdown-arrow select__dropdown-arrow--up"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 10 5"
+                width="1em"
+              >
+                <path
+                  d="M1 3.83866L4.92334 0.5"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                />
+                <path
+                  d="M8.82812 3.83866L5 0.5"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="invite-modal__container invite-modal__container--users"
+    >
+      <div
+        className="invite-modal__member"
+      >
+        <div
+          className="user-row"
+          role="member"
+          user_id="peep_00001"
+        >
+          <div
+            className="user-icon user-row__avatar"
+            style={
+              Object {
+                "backgroundColor": undefined,
+              }
+            }
+          >
+            RC
+            <div
+              className="user-icon__avatar"
+              style={
+                Object {
+                  "backgroundImage": "url(/photo.jpg)",
+                }
+              }
+            />
+          </div>
+          <div>
+            <div
+              className="user-row__name"
+            >
+              Remarkably Client
+            </div>
+            <div
+              className="user-row__email"
+            >
+              client@remarkably.com
+            </div>
+          </div>
+        </div>
+        <div
+          className="select invite-modal__select-role select--small select--transparent css-2b097c-container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="select__control css-yk16xz-control"
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+          >
+            <div
+              className="select__value-container select__value-container--has-value css-1hwfws3"
+            >
+              <div
+                className="select__single-value css-1q05wlw-singleValue"
+              >
+                Member
+              </div>
+              <input
+                className="css-62g3xt-dummyInput"
+                disabled={false}
+                id="react-select-4-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+            <div
+              className="select__indicators css-1wy0on6"
+            >
+              <span
+                className="select__indicator-separator css-1okebmr-indicatorSeparator"
+              />
+              <div
+                aria-hidden="true"
+                className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--down"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 1.16134L4.92334 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 1.16134L5 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--up"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 3.83866L4.92334 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 3.83866L5 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="invite-modal__member"
+      >
+        <div
+          className="user-row"
+          role="member"
+          user_id="peep_00002"
+        >
+          <div
+            className="user-icon user-row__avatar"
+            style={
+              Object {
+                "backgroundColor": undefined,
+              }
+            }
+          >
+            RC
+            <div
+              className="user-icon__avatar"
+              style={
+                Object {
+                  "backgroundImage": "url()",
+                }
+              }
+            />
+          </div>
+          <div>
+            <div
+              className="user-row__name"
+            >
+              Remarkably Client
+            </div>
+            <div
+              className="user-row__email"
+            >
+              client@remarkably.com
+            </div>
+          </div>
+        </div>
+        <div
+          className="select invite-modal__select-role select--small select--transparent css-2b097c-container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="select__control css-yk16xz-control"
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+          >
+            <div
+              className="select__value-container select__value-container--has-value css-1hwfws3"
+            >
+              <div
+                className="select__single-value css-1q05wlw-singleValue"
+              >
+                Member
+              </div>
+              <input
+                className="css-62g3xt-dummyInput"
+                disabled={false}
+                id="react-select-5-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+            <div
+              className="select__indicators css-1wy0on6"
+            >
+              <span
+                className="select__indicator-separator css-1okebmr-indicatorSeparator"
+              />
+              <div
+                aria-hidden="true"
+                className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--down"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 1.16134L4.92334 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 1.16134L5 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--up"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 3.83866L4.92334 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 3.83866L5 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="invite-modal__member"
+      >
+        <div
+          className="user-row"
+          role="admin"
+          user_id="peep_00003"
+        >
+          <div
+            className="user-icon user-row__avatar"
+            style={
+              Object {
+                "backgroundColor": undefined,
+              }
+            }
+          >
+            RC
+            <div
+              className="user-icon__avatar"
+              style={
+                Object {
+                  "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                }
+              }
+            />
+          </div>
+          <div>
+            <div
+              className="user-row__name"
+            >
+              Remarkably Client
+            </div>
+            <div
+              className="user-row__email"
+            >
+              client@remarkably.com
+            </div>
+          </div>
+        </div>
+        <div
+          className="select invite-modal__select-role select--small select--transparent css-2b097c-container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="select__control css-yk16xz-control"
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+          >
+            <div
+              className="select__value-container select__value-container--has-value css-1hwfws3"
+            >
+              <div
+                className="select__single-value css-1q05wlw-singleValue"
+              >
+                Admin
+              </div>
+              <input
+                className="css-62g3xt-dummyInput"
+                disabled={false}
+                id="react-select-6-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+            <div
+              className="select__indicators css-1wy0on6"
+            >
+              <span
+                className="select__indicator-separator css-1okebmr-indicatorSeparator"
+              />
+              <div
+                aria-hidden="true"
+                className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--down"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 1.16134L4.92334 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 1.16134L5 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--up"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 3.83866L4.92334 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 3.83866L5 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="invite-modal__member"
+      >
+        <div
+          className="user-row"
+          role="member"
+          user_id="peep_00004"
+        >
+          <div
+            className="user-icon user-row__avatar"
+            style={
+              Object {
+                "backgroundColor": undefined,
+              }
+            }
+          >
+            RC
+            <div
+              className="user-icon__avatar"
+              style={
+                Object {
+                  "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                }
+              }
+            />
+          </div>
+          <div>
+            <div
+              className="user-row__name"
+            >
+              Remarkably Client
+            </div>
+            <div
+              className="user-row__email"
+            >
+              client@remarkably.com
+            </div>
+          </div>
+        </div>
+        <div
+          className="select invite-modal__select-role select--small select--transparent css-2b097c-container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="select__control css-yk16xz-control"
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+          >
+            <div
+              className="select__value-container select__value-container--has-value css-1hwfws3"
+            >
+              <div
+                className="select__single-value css-1q05wlw-singleValue"
+              >
+                Member
+              </div>
+              <input
+                className="css-62g3xt-dummyInput"
+                disabled={false}
+                id="react-select-7-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+            <div
+              className="select__indicators css-1wy0on6"
+            >
+              <span
+                className="select__indicator-separator css-1okebmr-indicatorSeparator"
+              />
+              <div
+                aria-hidden="true"
+                className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--down"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 1.16134L4.92334 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 1.16134L5 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--up"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 3.83866L4.92334 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 3.83866L5 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="invite-modal__member"
+      >
+        <div
+          className="user-row"
+          role="member"
+          user_id="peep_00005"
+        >
+          <div
+            className="user-icon user-row__avatar"
+            style={
+              Object {
+                "backgroundColor": undefined,
+              }
+            }
+          >
+            RC
+            <div
+              className="user-icon__avatar"
+              style={
+                Object {
+                  "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                }
+              }
+            />
+          </div>
+          <div>
+            <div
+              className="user-row__name"
+            >
+              Remarkably Client
+            </div>
+            <div
+              className="user-row__email"
+            >
+              client@remarkably.com
+            </div>
+          </div>
+        </div>
+        <div
+          className="select invite-modal__select-role select--small select--transparent css-2b097c-container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="select__control css-yk16xz-control"
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+          >
+            <div
+              className="select__value-container select__value-container--has-value css-1hwfws3"
+            >
+              <div
+                className="select__single-value css-1q05wlw-singleValue"
+              >
+                Member
+              </div>
+              <input
+                className="css-62g3xt-dummyInput"
+                disabled={false}
+                id="react-select-8-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+            <div
+              className="select__indicators css-1wy0on6"
+            >
+              <span
+                className="select__indicator-separator css-1okebmr-indicatorSeparator"
+              />
+              <div
+                aria-hidden="true"
+                className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--down"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 1.16134L4.92334 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 1.16134L5 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--up"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 3.83866L4.92334 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 3.83866L5 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="invite-modal__member"
+      >
+        <div
+          className="user-row"
+          role="member"
+          user_id="peep_00006"
+        >
+          <div
+            className="user-icon user-row__avatar"
+            style={
+              Object {
+                "backgroundColor": undefined,
+              }
+            }
+          >
+            RC
+            <div
+              className="user-icon__avatar"
+              style={
+                Object {
+                  "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                }
+              }
+            />
+          </div>
+          <div>
+            <div
+              className="user-row__name"
+            >
+              Remarkably Client
+            </div>
+            <div
+              className="user-row__email"
+            >
+              client@remarkably.com
+            </div>
+          </div>
+        </div>
+        <div
+          className="select invite-modal__select-role select--small select--transparent css-2b097c-container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="select__control css-yk16xz-control"
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+          >
+            <div
+              className="select__value-container select__value-container--has-value css-1hwfws3"
+            >
+              <div
+                className="select__single-value css-1q05wlw-singleValue"
+              >
+                Member
+              </div>
+              <input
+                className="css-62g3xt-dummyInput"
+                disabled={false}
+                id="react-select-9-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+            <div
+              className="select__indicators css-1wy0on6"
+            >
+              <span
+                className="select__indicator-separator css-1okebmr-indicatorSeparator"
+              />
+              <div
+                aria-hidden="true"
+                className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--down"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 1.16134L4.92334 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 1.16134L5 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--up"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 3.83866L4.92334 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 3.83866L5 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="invite-modal__member"
+      >
+        <div
+          className="user-row"
+          role="member"
+          user_id="peep_00007"
+        >
+          <div
+            className="user-icon user-row__avatar"
+            style={
+              Object {
+                "backgroundColor": undefined,
+              }
+            }
+          >
+            RC
+            <div
+              className="user-icon__avatar"
+              style={
+                Object {
+                  "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                }
+              }
+            />
+          </div>
+          <div>
+            <div
+              className="user-row__name"
+            >
+              Remarkably Client
+            </div>
+            <div
+              className="user-row__email"
+            >
+              client@remarkably.com
+            </div>
+          </div>
+        </div>
+        <div
+          className="select invite-modal__select-role select--small select--transparent css-2b097c-container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="select__control css-yk16xz-control"
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+          >
+            <div
+              className="select__value-container select__value-container--has-value css-1hwfws3"
+            >
+              <div
+                className="select__single-value css-1q05wlw-singleValue"
+              >
+                Member
+              </div>
+              <input
+                className="css-62g3xt-dummyInput"
+                disabled={false}
+                id="react-select-10-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+            <div
+              className="select__indicators css-1wy0on6"
+            >
+              <span
+                className="select__indicator-separator css-1okebmr-indicatorSeparator"
+              />
+              <div
+                aria-hidden="true"
+                className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--down"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 1.16134L4.92334 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 1.16134L5 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--up"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 3.83866L4.92334 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 3.83866L5 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="invite-modal__member"
+      >
+        <div
+          className="user-row"
+          role="member"
+          user_id="peep_00008"
+        >
+          <div
+            className="user-icon user-row__avatar"
+            style={
+              Object {
+                "backgroundColor": undefined,
+              }
+            }
+          >
+            RC
+            <div
+              className="user-icon__avatar"
+              style={
+                Object {
+                  "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                }
+              }
+            />
+          </div>
+          <div>
+            <div
+              className="user-row__name"
+            >
+              Remarkably Client
+            </div>
+            <div
+              className="user-row__email"
+            >
+              client@remarkably.com
+            </div>
+          </div>
+        </div>
+        <div
+          className="select invite-modal__select-role select--small select--transparent css-2b097c-container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="select__control css-yk16xz-control"
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+          >
+            <div
+              className="select__value-container select__value-container--has-value css-1hwfws3"
+            >
+              <div
+                className="select__single-value css-1q05wlw-singleValue"
+              >
+                Member
+              </div>
+              <input
+                className="css-62g3xt-dummyInput"
+                disabled={false}
+                id="react-select-11-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+            <div
+              className="select__indicators css-1wy0on6"
+            >
+              <span
+                className="select__indicator-separator css-1okebmr-indicatorSeparator"
+              />
+              <div
+                aria-hidden="true"
+                className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--down"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 1.16134L4.92334 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 1.16134L5 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--up"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 3.83866L4.92334 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 3.83866L5 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="invite-modal__member"
+      >
+        <div
+          className="user-row"
+          role="member"
+          user_id="peep_00009"
+        >
+          <div
+            className="user-icon user-row__avatar"
+            style={
+              Object {
+                "backgroundColor": undefined,
+              }
+            }
+          >
+            RC
+            <div
+              className="user-icon__avatar"
+              style={
+                Object {
+                  "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                }
+              }
+            />
+          </div>
+          <div>
+            <div
+              className="user-row__name"
+            >
+              Remarkably Client
+            </div>
+            <div
+              className="user-row__email"
+            >
+              client@remarkably.com
+            </div>
+          </div>
+        </div>
+        <div
+          className="select invite-modal__select-role select--small select--transparent css-2b097c-container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="select__control css-yk16xz-control"
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+          >
+            <div
+              className="select__value-container select__value-container--has-value css-1hwfws3"
+            >
+              <div
+                className="select__single-value css-1q05wlw-singleValue"
+              >
+                Member
+              </div>
+              <input
+                className="css-62g3xt-dummyInput"
+                disabled={false}
+                id="react-select-12-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+            <div
+              className="select__indicators css-1wy0on6"
+            >
+              <span
+                className="select__indicator-separator css-1okebmr-indicatorSeparator"
+              />
+              <div
+                aria-hidden="true"
+                className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--down"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 1.16134L4.92334 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 1.16134L5 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--up"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 3.83866L4.92334 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 3.83866L5 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="invite-modal__member"
+      >
+        <div
+          className="user-row"
+          role="member"
+          user_id="peep_00010"
+        >
+          <div
+            className="user-icon user-row__avatar"
+            style={
+              Object {
+                "backgroundColor": undefined,
+              }
+            }
+          >
+            RC
+            <div
+              className="user-icon__avatar"
+              style={
+                Object {
+                  "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                }
+              }
+            />
+          </div>
+          <div>
+            <div
+              className="user-row__name"
+            >
+              Remarkably Client
+            </div>
+            <div
+              className="user-row__email"
+            >
+              client@remarkably.com
+            </div>
+          </div>
+        </div>
+        <div
+          className="select invite-modal__select-role select--small select--transparent css-2b097c-container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="select__control css-yk16xz-control"
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+          >
+            <div
+              className="select__value-container select__value-container--has-value css-1hwfws3"
+            >
+              <div
+                className="select__single-value css-1q05wlw-singleValue"
+              >
+                Member
+              </div>
+              <input
+                className="css-62g3xt-dummyInput"
+                disabled={false}
+                id="react-select-13-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+            <div
+              className="select__indicators css-1wy0on6"
+            >
+              <span
+                className="select__indicator-separator css-1okebmr-indicatorSeparator"
+              />
+              <div
+                aria-hidden="true"
+                className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--down"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 1.16134L4.92334 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 1.16134L5 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--up"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 3.83866L4.92334 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 3.83866L5 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="invite-modal__member"
+      >
+        <div
+          className="user-row"
+          role="member"
+          user_id="peep_00011"
+        >
+          <div
+            className="user-icon user-row__avatar"
+            style={
+              Object {
+                "backgroundColor": undefined,
+              }
+            }
+          >
+            RC
+            <div
+              className="user-icon__avatar"
+              style={
+                Object {
+                  "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                }
+              }
+            />
+          </div>
+          <div>
+            <div
+              className="user-row__name"
+            >
+              Remarkably Client
+            </div>
+            <div
+              className="user-row__email"
+            >
+              client@remarkably.com
+            </div>
+          </div>
+        </div>
+        <div
+          className="select invite-modal__select-role select--small select--transparent css-2b097c-container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="select__control css-yk16xz-control"
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+          >
+            <div
+              className="select__value-container select__value-container--has-value css-1hwfws3"
+            >
+              <div
+                className="select__single-value css-1q05wlw-singleValue"
+              >
+                Member
+              </div>
+              <input
+                className="css-62g3xt-dummyInput"
+                disabled={false}
+                id="react-select-14-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+            <div
+              className="select__indicators css-1wy0on6"
+            >
+              <span
+                className="select__indicator-separator css-1okebmr-indicatorSeparator"
+              />
+              <div
+                aria-hidden="true"
+                className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--down"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 1.16134L4.92334 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 1.16134L5 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--up"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 3.83866L4.92334 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 3.83866L5 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="invite-modal__member"
+      >
+        <div
+          className="user-row"
+          role="member"
+          user_id="peep_00012"
+        >
+          <div
+            className="user-icon user-row__avatar"
+            style={
+              Object {
+                "backgroundColor": undefined,
+              }
+            }
+          >
+            RC
+            <div
+              className="user-icon__avatar"
+              style={
+                Object {
+                  "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                }
+              }
+            />
+          </div>
+          <div>
+            <div
+              className="user-row__name"
+            >
+              Remarkably Client
+            </div>
+            <div
+              className="user-row__email"
+            >
+              client@remarkably.com
+            </div>
+          </div>
+        </div>
+        <div
+          className="select invite-modal__select-role select--small select--transparent css-2b097c-container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="select__control css-yk16xz-control"
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+          >
+            <div
+              className="select__value-container select__value-container--has-value css-1hwfws3"
+            >
+              <div
+                className="select__single-value css-1q05wlw-singleValue"
+              >
+                Member
+              </div>
+              <input
+                className="css-62g3xt-dummyInput"
+                disabled={false}
+                id="react-select-15-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+            <div
+              className="select__indicators css-1wy0on6"
+            >
+              <span
+                className="select__indicator-separator css-1okebmr-indicatorSeparator"
+              />
+              <div
+                aria-hidden="true"
+                className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--down"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 1.16134L4.92334 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 1.16134L5 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--up"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 3.83866L4.92334 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 3.83866L5 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="invite-modal__member"
+      >
+        <div
+          className="user-row"
+          role="member"
+          user_id="peep_00013"
+        >
+          <div
+            className="user-icon user-row__avatar"
+            style={
+              Object {
+                "backgroundColor": undefined,
+              }
+            }
+          >
+            RC
+            <div
+              className="user-icon__avatar"
+              style={
+                Object {
+                  "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                }
+              }
+            />
+          </div>
+          <div>
+            <div
+              className="user-row__name"
+            >
+              Remarkably Client
+            </div>
+            <div
+              className="user-row__email"
+            >
+              client@remarkably.com
+            </div>
+          </div>
+        </div>
+        <div
+          className="select invite-modal__select-role select--small select--transparent css-2b097c-container"
+          onKeyDown={[Function]}
+        >
+          <div
+            className="select__control css-yk16xz-control"
+            onMouseDown={[Function]}
+            onTouchEnd={[Function]}
+          >
+            <div
+              className="select__value-container select__value-container--has-value css-1hwfws3"
+            >
+              <div
+                className="select__single-value css-1q05wlw-singleValue"
+              >
+                Member
+              </div>
+              <input
+                className="css-62g3xt-dummyInput"
+                disabled={false}
+                id="react-select-16-input"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                readOnly={true}
+                tabIndex="0"
+                value=""
+              />
+            </div>
+            <div
+              className="select__indicators css-1wy0on6"
+            >
+              <span
+                className="select__indicator-separator css-1okebmr-indicatorSeparator"
+              />
+              <div
+                aria-hidden="true"
+                className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--down"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 1.16134L4.92334 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 1.16134L5 4.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                <svg
+                  aria-hidden="true"
+                  className="select__dropdown-arrow select__dropdown-arrow--up"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 10 5"
+                  width="1em"
+                >
+                  <path
+                    d="M1 3.83866L4.92334 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                  <path
+                    d="M8.82812 3.83866L5 0.5"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="invite-modal__container invite-modal__container--button"
+    >
+      <button
+        className="button button--disabled button--uppercase button--primary invite-modal__button"
+        onClick={[Function]}
+      >
+        invite
+      </button>
+    </div>
+  </div>
+</Modal>
+`;
