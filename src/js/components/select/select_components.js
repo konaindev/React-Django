@@ -1,8 +1,9 @@
 import React from "react";
 import { components } from "react-select";
 
-import { IconDown, IconUp, TickSmall, Close } from "../../icons";
 import Button from "../button";
+import UserRow from "../user_row";
+import { IconDown, IconUp, TickSmall, Close } from "../../icons";
 
 export function DropdownIndicator(props) {
   return (
@@ -80,3 +81,9 @@ export const MultiValueComponents = {
   MultiValueLabel,
   MultiValueRemove
 };
+
+export const OptionUsers = props => (
+  <components.Option {...props}>
+    <UserRow {...props.data} />
+  </components.Option>
+);

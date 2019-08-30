@@ -321,8 +321,10 @@ $multi-value-close-hover-color: $gray-4;
         border: none;
     }
 
-    .select__indicators {
-        display: none;
+    .select__control--is-focused {
+        .select__single-value {
+            color: $input-text-color;
+        }
     }
 }
 
