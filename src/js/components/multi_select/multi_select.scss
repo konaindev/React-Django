@@ -7,6 +7,7 @@ $options-spacing: 10px 20px 0 30px;
 $menu-max-height: 400px;
 $controls-spacing: 50px 30px 22px;
 $focused-color: $blue-8;
+$arrow-width: 10px;
 
 .multi-select {
     &.select .select__option:active,
@@ -113,6 +114,9 @@ $focused-color: $blue-8;
 }
 
 .multi-select.select--gray {
+    .multi-select__label {
+        max-width: calc(100% - #{$arrow-width});
+    }
     .select__control {
         padding: 11px 20px 11px 12px;
         color: $input-text-color;

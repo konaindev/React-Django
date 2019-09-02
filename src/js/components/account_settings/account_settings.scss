@@ -6,6 +6,7 @@ $text-color: $highlight-gray-3;
 $label-color: $gray-6;
 $subtitle-line-height: 28px;
 $account-menu-width: 280px;
+$items-gap: 1.875rem;
 $menu-border: 1px solid $gray-4;
 $menu-item-background: $gray-2;
 $menu-item-background-hover: rgba(16, 20, 23, .1);
@@ -123,8 +124,8 @@ $info-line-height: 1.75rem;
 
 .account-settings__field-grid {
     display: grid;
-    grid-gap: 30px;
-    grid-template-columns: 1fr 1fr;
+    grid-gap: $items-gap;
+    grid-template-columns: 1fr calc(50% - #{$items-gap / 2});
     &--col-3 {
         grid-template-columns: 1fr 1fr 1fr;
     }
