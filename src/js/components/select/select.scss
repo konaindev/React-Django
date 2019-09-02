@@ -1,5 +1,7 @@
 @import "css/base.scss";
 
+$focused-color: $blue-8;
+
 .select {
     outline: none;
 
@@ -257,4 +259,49 @@
     padding: 8px 12px;
     font-size: $text-xs;
     line-height: 10px;
+}
+
+.select--gray {
+    .select__control {
+        padding: $s3 $s5 $s3 $s3;
+        background-color: $select-background-color;
+        border: 1px solid $select-border-color;
+
+        &:hover {
+            border-color: $select-border-color;
+        }
+        &--is-focused {
+            .select__single-value {
+                color: $input-text-color;
+            }
+        }
+        &--menu-is-open {
+            &,
+            &:hover {
+                border-color: $focused-color;
+                border-bottom-color: $select-border-color;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+        }
+    }
+    .select__menu {
+        margin: -5px 0 0;
+        background-color: $select-background-color;
+        box-shadow: none;
+        border: 1px solid $focused-color;
+        border-top: none;
+        border-top-right-radius: 0;
+        border-top-left-radius: 0;
+    }
+    .select__menu-list {
+        padding: 0.375rem 0;
+    }
+    .select__option {
+        padding: 0.375rem 0 0.375rem $s3;
+        &--is-focused,
+        &:active {
+            background-color: $select-option-focused-color;
+        }
+    }
 }

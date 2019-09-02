@@ -5,6 +5,7 @@ import Button from "../button";
 import { Upload } from "../../icons";
 import Input from "../input";
 import MultiSelect from "../multi_select";
+import Select from "../select";
 
 const initialValues = { company_role: [] };
 
@@ -16,6 +17,12 @@ export default class Profile extends React.PureComponent {
     { label: "Property Manager", value: "property" },
     { label: "JV / Investor", value: "jv" },
     { label: "Vendor / Consultant", value: "vendor" }
+  ];
+  static officeTypes = [
+    { label: "Global", value: "global" },
+    { label: "National", value: "national" },
+    { label: "Regional", value: "regional" },
+    { label: "Other", value: "other" }
   ];
 
   render() {
@@ -121,6 +128,7 @@ export default class Profile extends React.PureComponent {
                         Company Role
                       </div>
                       <MultiSelect
+                        className="account-settings__input"
                         name="company_role"
                         theme="gray"
                         isShowControls={false}
@@ -157,11 +165,11 @@ export default class Profile extends React.PureComponent {
                     </div>
                     <div className="account-settings__field">
                       <div className="account-settings__label">Office Type</div>
-                      <Input
+                      <Select
                         className="account-settings__input"
                         name="office_type"
                         theme="gray"
-                        value="Regional"
+                        options={Profile.officeTypes}
                       />
                     </div>
                   </div>
