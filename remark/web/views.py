@@ -182,8 +182,8 @@ class DashboardView(LoginRequiredMixin, ReactView):
             **filter_options,
         )
 
-        data_type_requested = request.headers.get("Accept", "")
-        if "application/json" in data_type_requested:
+        accept = request.META.get('HTTP_ACCEPT')
+        if accept == "application/json":
             return JsonResponse(response_data)
         else:
             return self.render(**response_data)
