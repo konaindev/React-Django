@@ -405,7 +405,7 @@ class Project(models.Model):
         else:
             return None
 
-    def get_building_image(self):
+    def get_building_image_variants(self):
         """
         Return building image's S3 resource urls for all variants
         """
@@ -420,12 +420,21 @@ class Project(models.Model):
         else:
             return None
 
-    def get_building_image_url(self):
+    def get_building_image_variant(self, variant):
+        """
+        Return building image's S3 resource url for a specific variants
+        """
         property = self.property
         if property.building_image:
+            if variant is "landscape":
+                return property.building_image.landscape.url
+            if variant is "regular":
+                return property.building_image.regular.url
+            if variant == "thumbnail":
+                return property.building_image.thumbnail.url
             return property.building_image.url
-
-        return None
+        else:
+            return None
 
     def get_baseline_url(self):
         return reverse("baseline_report", kwargs={"project_id": self.public_id})
@@ -440,7 +449,7 @@ class Project(models.Model):
             public_id=self.public_id,
             name=self.name,
             building_logo=self.get_building_logo(),
-            building_image=self.get_building_image(),
+            building_image=self.get_building_image_variants(),
             update_endpoint=update_endpoint,
         )
 
