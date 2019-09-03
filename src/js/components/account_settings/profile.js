@@ -1,4 +1,5 @@
 import { Formik, Form } from "formik";
+import PropTypes from "prop-types";
 import React from "react";
 
 import Button from "../button";
@@ -7,9 +8,22 @@ import Input from "../input";
 import MultiSelect from "../multi_select";
 import Select from "../select";
 
-const initialValues = { company_role: [] };
-
 export default class Profile extends React.PureComponent {
+  static propTypes = {
+    person: PropTypes.shape({
+      avatar_url: PropTypes.string,
+      first_name: PropTypes.string,
+      last_name: PropTypes.string,
+      title: PropTypes.string,
+      phone: PropTypes.string,
+      phone_ext: PropTypes.string,
+      company_name: PropTypes.string,
+      company_role: PropTypes.arrayOf(PropTypes.string),
+      office_address: PropTypes.string,
+      office_name: PropTypes.string,
+      office_type: PropTypes.string
+    })
+  };
   static roleOptions = [
     { label: "Owner", value: "owner" },
     { label: "Developer", value: "developer" },
@@ -28,7 +42,7 @@ export default class Profile extends React.PureComponent {
   render() {
     return (
       <div className="account-settings__tab">
-        <Formik initialValues={initialValues}>
+        <Formik initialValues={this.props.person}>
           {({ values, handleChange, handleBlur, setFieldValue }) => (
             <Form method="post" autoComplete="off">
               <div className="account-settings__tab-content">
@@ -46,7 +60,7 @@ export default class Profile extends React.PureComponent {
                       </div>
                       <div className="account-settings__photo-data">
                         <div className="account-settings__photo-text account-settings__photo-text--name">
-                          Phillip McPhillipson
+                          {values.first_name} {values.last_name}
                         </div>
                         <div className="account-settings__photo-text">
                           Admin
@@ -64,7 +78,9 @@ export default class Profile extends React.PureComponent {
                         className="account-settings__input"
                         name="first_name"
                         theme="gray"
-                        value="Phillip"
+                        value={values.first_name}
+                        onBlur={handleBlur}
+                        onChange={handleChange}
                       />
                     </div>
                     <div className="account-settings__field">
@@ -73,7 +89,9 @@ export default class Profile extends React.PureComponent {
                         className="account-settings__input"
                         name="last_name"
                         theme="gray"
-                        value="McPhillipson"
+                        value={values.last_name}
+                        onBlur={handleBlur}
+                        onChange={handleChange}
                       />
                     </div>
                     <div className="account-settings__field">
@@ -84,7 +102,9 @@ export default class Profile extends React.PureComponent {
                         className="account-settings__input"
                         name="title"
                         theme="gray"
-                        value="Founder"
+                        value={values.title}
+                        onBlur={handleBlur}
+                        onChange={handleChange}
                       />
                     </div>
                     <div className="account-settings__field">
@@ -95,6 +115,9 @@ export default class Profile extends React.PureComponent {
                         className="account-settings__input"
                         name="phone"
                         theme="gray"
+                        value={values.phone}
+                        onBlur={handleBlur}
+                        onChange={handleChange}
                       />
                     </div>
                     <div className="account-settings__field">
@@ -105,6 +128,9 @@ export default class Profile extends React.PureComponent {
                         className="account-settings__input"
                         name="phone_ext"
                         theme="gray"
+                        value={values.phone_ext}
+                        onBlur={handleBlur}
+                        onChange={handleChange}
                       />
                     </div>
                   </div>
@@ -120,7 +146,9 @@ export default class Profile extends React.PureComponent {
                         className="account-settings__input"
                         name="company"
                         theme="gray"
-                        value="Glacier Associates"
+                        value={values.company}
+                        onBlur={handleBlur}
+                        onChange={handleChange}
                       />
                     </div>
                     <div className="account-settings__field">
@@ -151,7 +179,9 @@ export default class Profile extends React.PureComponent {
                         className="account-settings__input"
                         name="office_address"
                         theme="gray"
-                        value="1730 Minor Avenue, Lansing, MI"
+                        value={values.office_address}
+                        onBlur={handleBlur}
+                        onChange={handleChange}
                       />
                     </div>
                     <div className="account-settings__field">
@@ -160,7 +190,9 @@ export default class Profile extends React.PureComponent {
                         className="account-settings__input"
                         name="office_name"
                         theme="gray"
-                        value="Michigan"
+                        value={values.office_name}
+                        onBlur={handleBlur}
+                        onChange={handleChange}
                       />
                     </div>
                     <div className="account-settings__field">
@@ -170,6 +202,9 @@ export default class Profile extends React.PureComponent {
                         name="office_type"
                         theme="gray"
                         options={Profile.officeTypes}
+                        value={values.office_type}
+                        onBlur={handleBlur}
+                        onChange={value => setFieldValue("office_type", value)}
                       />
                     </div>
                   </div>
