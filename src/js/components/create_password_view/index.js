@@ -1,18 +1,16 @@
-import cn from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
 import { Formik, Form } from "formik";
 
 import AccountForm from "../account_form";
+import router from "../../router";
 import Button from "../button";
 import Input from "../input";
-import FormFiled from "../form_field";
+import FormField from "../form_field";
 import PageAuth from "../page_auth";
+import PasswordOverlay from "../password_tooltip";
 import RMBTooltip from "../rmb_tooltip";
-import WizardProgress from "../wizard_progress";
-import { Error, Ok } from "../../icons";
-import router from "../../router";
 
 import "./create_password_view.scss";
 
@@ -61,30 +59,6 @@ class CreatePasswordView extends React.PureComponent {
     });
   };
 
-  renderTooltip = (value, errors) => {
-    const rules = this.props.rules.map(rule => {
-      const error = errors?.[rule.key];
-      const classes = cn("create-password-tooltip__rule", {
-        "create-password-tooltip__rule--error": value && error,
-        "create-password-tooltip__rule--ok": value && !error
-      });
-      return (
-        <div className={classes} key={rule.key}>
-          <div className="create-password-tooltip__icon create-password-tooltip__icon--default" />
-          <Error className="create-password-tooltip__icon create-password-tooltip__icon--error" />
-          <Ok className="create-password-tooltip__icon create-password-tooltip__icon--ok" />
-          <div className="create-password-tooltip__text">{rule.label}</div>
-        </div>
-      );
-    });
-    return (
-      <div className="create-password-tooltip">
-        <div className="create-password-tooltip__title">Password must:</div>
-        <div className="create-password-tooltip__rules">{rules}</div>
-      </div>
-    );
-  };
-
   getButtonColor = isValid => {
     if (isValid) {
       return "primary";
@@ -121,14 +95,18 @@ class CreatePasswordView extends React.PureComponent {
             }) => (
               <Form>
                 <div className={AccountForm.fieldClass}>
-                  <FormFiled label="Password">
+                  <FormField label="Password">
                     <RMBTooltip
                       theme="highlight"
                       trigger={["focus"]}
-                      overlay={this.renderTooltip(
-                        values.password,
-                        errors.password
-                      )}
+                      overlay={
+                        <PasswordOverlay
+                          rules={this.props.rules}
+                          password={values.password}
+                          errors={errors.password}
+                          theme="highlight"
+                        />
+                      }
                     >
                       <Input
                         type="password"
@@ -139,10 +117,10 @@ class CreatePasswordView extends React.PureComponent {
                         value={values.password}
                       />
                     </RMBTooltip>
-                  </FormFiled>
+                  </FormField>
                 </div>
                 <div className={AccountForm.fieldClass}>
-                  <FormFiled
+                  <FormField
                     label="Confirm Password"
                     error={errors.password2}
                     showError={touched.password2 && values.password}
@@ -155,7 +133,7 @@ class CreatePasswordView extends React.PureComponent {
                       onBlur={handleBlur}
                       value={values.password2}
                     />
-                  </FormFiled>
+                  </FormField>
                 </div>
                 <Button
                   className="create-password__button"

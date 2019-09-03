@@ -1,0 +1,184 @@
+@import "css/base.scss";
+
+$page-width: 1000px;
+$title-height: 44px;
+$text-color: $highlight-gray-3;
+$subtitle-color: $gray-6;
+$subtitle-line-height: 28px;
+$account-menu-width: 280px;
+$menu-border: 1px solid $gray-4;
+$menu-item-background: $gray-2;
+$menu-item-background-hover: rgba(16, 20, 23, .1);
+$menu-item-width: 221px;
+$menu-item-color: $gray-6;
+$tab-title-line-height: 2.125rem;
+$input-label-line-height: $line-height-tight;
+$input-border: 1px solid $gray-4;
+$input-line-height: 1.25rem;
+$password-text-color: $gray-6;
+$current-password-text-color: $gray-4;
+$buttons-border: 1px solid $gray-4;
+$button-line-height: 1.25rem;
+$message-line-height: 1.625rem;
+$error-color: $orange-6;
+
+.account-settings {
+    width: $page-width;
+    margin: 50px auto 53px;
+    font-family: $font-sans;
+}
+
+.account-settings__title {
+    height: $title-height;
+    font-size: $text-4xl;
+    color: $title-large-color;
+}
+
+.account-settings__subtitle {
+    margin-top: 10px;
+    font-size: $text-base;
+    color: $subtitle-color;
+    line-height: $subtitle-line-height;
+}
+
+.account-settings__panel {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 50px;
+    background: $panel-background-color;
+    border-radius: $panel-border-radius;
+}
+
+.account-settings__menu {
+    width: $account-menu-width;
+    border-right: $menu-border;
+    padding: 30px 30px 29px 30px;
+}
+
+.account-settings__menu-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.account-settings__menu-item {
+    display: flex;
+    align-items: center;
+    width: $menu-item-width;
+    padding: 10px 14px;
+    margin-bottom: 20px;
+    color: $menu-item-color;
+    font-size: $text-base;
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    line-height: $line-height-relaxed;
+    &:hover:not(&--active) {
+        background: $menu-item-background-hover;
+    }
+
+    &--active {
+        color: $text-color;
+        background: $menu-item-background;
+    }
+}
+
+.account-settings__menu-item-text {
+    margin-left: 15px;
+}
+
+.account-settings__tab {
+    flex-grow: 1;
+}
+
+.account-settings__tab-title {
+    margin-bottom: 30px;
+    color: $text-color;
+    font-size: $text-xl;
+    line-height: $tab-title-line-height;
+}
+
+.account-settings__label {
+    font-size: $text-xs;
+    font-weight: $weight-medium;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: $input-label-line-height;
+}
+
+.account-settings__tab-content {
+    padding: 30px;
+}
+
+.account-settings__tab-section + .account-settings__tab-section {
+    margin-top: 50px;
+}
+
+.account-settings__field-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px;
+}
+
+.account-settings__field-grid {
+    display: grid;
+    grid-gap: 30px;
+    grid-template-columns: 1fr 1fr;
+    &--col-3 {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+
+.account-settings__input,
+.account-settings__input[type=password] {
+    margin-top: 8px;
+}
+
+.account-settings__buttons-field {
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    border-top: $buttons-border;
+}
+
+.account-settings__button {
+    padding: 12px 32px;
+    font-size: $text-xs;
+    font-weight: $weight-semibold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    line-height: $button-line-height;
+}
+
+.account-settings__general-error {
+    margin-left: 30px;
+    font-size: $text-sm;
+    color: $error-color;
+    line-height: $message-line-height;
+}
+
+.account-settings__field--error {
+    .account-settings__label {
+        color: $error-color;
+    }
+
+    .account-settings__input,
+    .account-settings__input:focus {
+        border: 1px solid $error-color;
+    }
+}
+
+.account-settings__success {
+    display: flex;
+    align-items: center;
+    margin-left: 30px;
+    color: $text-color;
+    font-size: $text-sm;
+    line-height: $message-line-height;
+}
+
+.account-settings__checked {
+    width: 18px;
+    height: 14px;
+    margin-right: 10px;
+    fill: $green-7;
+}

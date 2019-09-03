@@ -6,7 +6,7 @@ import { Error, Ok } from "../../icons";
 
 import "./form_field.scss";
 
-const FormFiled = ({
+const FormField = ({
   className,
   theme,
   label,
@@ -35,7 +35,7 @@ const FormFiled = ({
   );
 };
 
-FormFiled.propTypes = {
+FormField.propTypes = {
   theme: PropTypes.oneOf(["", "inline"]),
   label: PropTypes.string.isRequired,
   Input: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
@@ -44,11 +44,11 @@ FormFiled.propTypes = {
   showError: PropTypes.bool
 };
 
-FormFiled.defaultProps = {
+FormField.defaultProps = {
   theme: "",
   Input: ({ children }) => children,
   showError: false,
   showIcon: true
 };
 
-export default FormFiled;
+export default FormField;

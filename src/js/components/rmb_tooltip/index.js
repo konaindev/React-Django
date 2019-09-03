@@ -36,7 +36,7 @@ export const RMBTooltip = props => {
 RMBTooltip.propTypes = {
   text: PropTypes.string,
   link: PropTypes.string,
-  theme: PropTypes.oneOf(["", "highlight"])
+  theme: PropTypes.oneOf(["", "highlight", "dark"])
 };
 
 export default RMBTooltip;

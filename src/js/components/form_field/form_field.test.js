@@ -2,19 +2,19 @@ import renderer from "react-test-renderer";
 
 import Input from "../input";
 
-import FormFiled from "./index";
+import FormField from "./index";
 
 describe("FormFiled", () => {
   it("renders correctly", () => {
     const tree = renderer
-      .create(<FormFiled label="Confirm" Input={Input} type="password" />)
+      .create(<FormField label="Confirm" Input={Input} type="password" />)
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
   it("renders with error", () => {
     const tree = renderer
       .create(
-        <FormFiled
+        <FormField
           label="Confirm Password"
           error="Passwords must match"
           showError={true}
@@ -28,7 +28,7 @@ describe("FormFiled", () => {
   it("renders with error without icon", () => {
     const tree = renderer
       .create(
-        <FormFiled
+        <FormField
           label="Confirm Password"
           error="Passwords must match"
           showError={true}
@@ -43,7 +43,7 @@ describe("FormFiled", () => {
   it("renders ok", () => {
     const tree = renderer
       .create(
-        <FormFiled
+        <FormField
           label="Confirm Password"
           showError={true}
           Input={Input}
@@ -56,7 +56,7 @@ describe("FormFiled", () => {
   it("renders ok without icon", () => {
     const tree = renderer
       .create(
-        <FormFiled
+        <FormField
           label="Confirm Password"
           showError={true}
           Input={Input}
@@ -70,9 +70,9 @@ describe("FormFiled", () => {
   it("renders inline", () => {
     const tree = renderer
       .create(
-        <FormFiled label="Confirm Password" theme="inline">
+        <FormField label="Confirm Password" theme="inline">
           <Input type="password" />
-        </FormFiled>
+        </FormField>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

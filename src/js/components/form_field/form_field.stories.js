@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 
 import Input from "../input";
 
-import FormFiled from "./index";
+import FormField from "./index";
 
 const style = {
   background: "#fff",
@@ -15,12 +15,12 @@ const style = {
 storiesOf("FormFiled", module)
   .add("default", () => (
     <div style={style}>
-      <FormFiled label="Confirm Password" Input={Input} type="password" />
+      <FormField label="Confirm Password" Input={Input} type="password" />
     </div>
   ))
   .add("error", () => (
     <div style={style}>
-      <FormFiled
+      <FormField
         label="Confirm Password"
         error="Passwords must match"
         showError={true}
@@ -31,7 +31,7 @@ storiesOf("FormFiled", module)
   ))
   .add("ok", () => (
     <div style={style}>
-      <FormFiled
+      <FormField
         label="Confirm Password"
         showError={true}
         Input={Input}
@@ -64,8 +64,8 @@ storiesOf("FormFiled", module)
   ))
   .add("inline", () => (
     <div style={style}>
-      <FormFiled label="Confirm Password" theme="inline">
+      <FormField label="Confirm Password" theme="inline">
         <Input type="password" />
-      </FormFiled>
+      </FormField>
     </div>
   ));

@@ -1,6 +1,8 @@
 @import "css/base.scss";
 @import "css/variables.scss";
 
+$input-line-height: 1.25rem;
+
 .input[type="text"] {
     padding: 9px 16px;
     border: $input-border;
@@ -37,6 +39,23 @@
     &:focus {
         color: $input-highlight-color;
         border: 1px solid $input-highlight-focus-border;
+        outline: none;
+    }
+}
+
+.input.input--gray {
+    width: 100%;
+    padding: 11px 12px;
+    color: $input-text-color;
+    font-size: $text-sm;
+    border: 1px solid $gray-4;
+    border-radius: 4px;
+    background: transparent;
+    line-height: $input-line-height;
+
+    &:focus {
+        color: $input-text-color;
+        border-color: $input-highlight-focus-border;
         outline: none;
     }
 }
