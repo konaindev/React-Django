@@ -1,0 +1,220 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Collapsible render default 1`] = `
+<div
+  className="collapsible"
+>
+  <div
+    className="collapsible__trigger"
+    onClick={[Function]}
+  >
+    <div
+      className="collapsible__trigger-content"
+    >
+      Collapsible row
+    </div>
+  </div>
+  <div
+    className="collapsible__content"
+    style={
+      Object {
+        "height": 0,
+      }
+    }
+  >
+    <div>
+      <div>
+        Content
+      </div>
+      <div>
+        Row 1
+      </div>
+      <div>
+        Row 2
+      </div>
+      <div>
+        Row 3
+      </div>
+      <div>
+        Row 4
+      </div>
+      <div>
+        Row 5
+      </div>
+      <div>
+        Row 6
+      </div>
+      <div>
+        Row 7
+      </div>
+      <div>
+        Row 8
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Collapsible render open 1`] = `
+<div
+  className="collapsible collapsible--open"
+>
+  <div
+    className="collapsible__trigger"
+    onClick={[Function]}
+  >
+    <div
+      className="collapsible__trigger-content"
+    >
+      Collapsible row
+    </div>
+  </div>
+  <div
+    className="collapsible__content"
+    style={
+      Object {
+        "height": 150,
+      }
+    }
+  >
+    <div>
+      <div>
+        Content
+      </div>
+      <div>
+        Row 1
+      </div>
+      <div>
+        Row 2
+      </div>
+      <div>
+        Row 3
+      </div>
+      <div>
+        Row 4
+      </div>
+      <div>
+        Row 5
+      </div>
+      <div>
+        Row 6
+      </div>
+      <div>
+        Row 7
+      </div>
+      <div>
+        Row 8
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Collapsible render with icon 1`] = `
+<div
+  className="collapsible"
+>
+  <div
+    className="collapsible__trigger"
+    onClick={[Function]}
+  >
+    <div
+      className="collapsible__trigger-content"
+    >
+      <div
+        className="collapsible"
+      >
+        <div
+          className="collapsible__trigger"
+          onClick={[Function]}
+        >
+          <div
+            className="collapsible__trigger-content"
+          >
+            <div>
+              <div
+                className="collapsible__icon"
+              />
+              Collapsible row
+            </div>
+          </div>
+        </div>
+        <div
+          className="collapsible__content"
+          style={
+            Object {
+              "height": 0,
+            }
+          }
+        >
+          <div>
+            Content
+          </div>
+          <div>
+            Row 1
+          </div>
+          <div>
+            Row 2
+          </div>
+          <div>
+            Row 3
+          </div>
+          <div>
+            Row 4
+          </div>
+          <div>
+            Row 5
+          </div>
+          <div>
+            Row 6
+          </div>
+          <div>
+            Row 7
+          </div>
+          <div>
+            Row 8
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="collapsible__content"
+    style={
+      Object {
+        "height": 0,
+      }
+    }
+  >
+    <div>
+      <div>
+        Content
+      </div>
+      <div>
+        Row 1
+      </div>
+      <div>
+        Row 2
+      </div>
+      <div>
+        Row 3
+      </div>
+      <div>
+        Row 4
+      </div>
+      <div>
+        Row 5
+      </div>
+      <div>
+        Row 6
+      </div>
+      <div>
+        Row 7
+      </div>
+      <div>
+        Row 8
+      </div>
+    </div>
+  </div>
+</div>
+`;
