@@ -7,6 +7,7 @@ import { Upload } from "../../icons";
 import Input from "../input";
 import MultiSelect from "../multi_select";
 import Select from "../select";
+import { profileSchema } from "./validators";
 
 export default class Profile extends React.PureComponent {
   static propTypes = {
