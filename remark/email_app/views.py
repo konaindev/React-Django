@@ -130,7 +130,6 @@ class AddedToPropertyTestPage(ContentView):
             "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/weekly_performance_reports/ctd.png",
             "title": "Rainier Lofts",
             "address": "1234 1st Ave, Seattle, WA 98101",
-            "view_link": "https://app.remarkably.io"
         }
 
         template_vars = {
@@ -141,13 +140,13 @@ class AddedToPropertyTestPage(ContentView):
             "property_name": "Rainier Lofts",
             "properties": [single_property],
             "more_count": None,
-            "view_button_link": "https://app.remarkably.io",
-            "view_button_label": "View Property"
+            "main_button_link": "https://app.remarkably.io",
+            "main_button_label": "View Property",
         }
 
         if is_multiple is True:
             template_vars["more_count"] = 5
-            template_vars["view_button_label"] = "View All Properties"
+            template_vars["main_button_label"] = "View All Properties"
 
             for i in range(1, 5):
                 each = copy(single_property)
