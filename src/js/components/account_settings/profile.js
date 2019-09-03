@@ -18,10 +18,15 @@ export default class Profile extends React.PureComponent {
       phone: PropTypes.string,
       phone_ext: PropTypes.string,
       company_name: PropTypes.string,
-      company_role: PropTypes.arrayOf(PropTypes.string),
+      company_role: PropTypes.arrayOf(
+        PropTypes.shape({
+          label: PropTypes.string,
+          value: PropTypes.string
+        })
+      ),
       office_address: PropTypes.string,
       office_name: PropTypes.string,
-      office_type: PropTypes.string
+      office_type: PropTypes.object
     })
   };
   static roleOptions = [
@@ -39,10 +44,24 @@ export default class Profile extends React.PureComponent {
     { label: "Other", value: "other" }
   ];
 
+  constructor(props) {
+    super(props);
+    this.formik = React.createRef();
+  }
+
+  onFileUpload = e => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onload = e => {
+      this.formik.current.setFieldValue("avatar_url", e.target.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
   render() {
     return (
       <div className="account-settings__tab">
-        <Formik initialValues={this.props.person}>
+        <Formik initialValues={this.props.person} ref={this.formik}>
           {({ values, handleChange, handleBlur, setFieldValue }) => (
             <Form method="post" autoComplete="off">
               <div className="account-settings__tab-content">
@@ -53,9 +72,19 @@ export default class Profile extends React.PureComponent {
                   <div className="account-settings__photo-field">
                     <div className="account-settings__photo-info">
                       <div className="account-settings__photo">
+                        <img
+                          className="account-settings__photo-img"
+                          src={values.avatar_url}
+                          alt="LOGO"
+                        />
                         <label className="account-settings__upload">
                           <Upload className="account-settings__upload-icon" />
-                          <input name="logo" type="file" />
+                          <input
+                            name="logo"
+                            type="file"
+                            accept="image/*"
+                            onChange={this.onFileUpload}
+                          />
                         </label>
                       </div>
                       <div className="account-settings__photo-data">

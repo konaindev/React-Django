@@ -20,7 +20,8 @@ const rules = [
 ];
 
 const person = {
-  avatar_url: "",
+  avatar_url:
+    "https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg",
   first_name: "Phillip",
   last_name: "McPhillipson",
   title: "Founder",

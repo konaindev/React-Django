@@ -181,6 +181,18 @@ $info-line-height: 1.75rem;
     fill: $green-7;
 }
 
+.account-settings__photo {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.account-settings__photo-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
 .account-settings__photo-field {
     margin-bottom: 30px;
 }
@@ -194,13 +206,6 @@ $info-line-height: 1.75rem;
 
 .account-settings__photo-data {
     margin-left: 30px;
-}
-
-.account-settings__photo {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    background: url("./img/image.png");
 }
 
 .account-settings__upload {
