@@ -117,11 +117,11 @@ export const multiProps = {
   properties: [
     {
       property_name: "Del Mar",
-      members: members.slice(0, 3)
+      members: members.slice(0, 1)
     },
     {
       property_name: "The Chalet",
-      members: members.slice(3)
+      members: members.slice(1)
     }
   ]
 };

@@ -36,16 +36,18 @@
 
     &--select {
         display: flex;
+        max-height: 126px;
+        min-height: 70px;
+
         justify-content: space-between;
         align-items: center;
-        min-height: 70px;
-        max-height: 126px;
     }
 
     &--users {
         height: 286px;
-        padding: 30px 20px;
+        padding: 20px;
         overflow: auto;
+
         @include dark-scrollbar();
     }
 
@@ -55,44 +57,98 @@
 }
 
 .invite-modal__select-users {
-    min-height: 40px;
     max-height: 126px;
+    min-height: 40px;
+
     flex-grow: 1;
 }
 
 .invite-modal__select-role {
     display: inline-block;
     margin-left: 5px;
+
     flex-shrink: 0;
 }
 
 .invite-modal__button {
+    width: 86px;
     font-size: 12px;
     line-height: 20px;
     letter-spacing: 1px;
-    width: 86px;
 }
 
 .invite-modal__member {
     display: flex;
+
     justify-content: space-between;
     align-items: center;
 
-    &+ .invite-modal__member {
+    & + .invite-modal__member {
         margin-top: 24px;
     }
 }
 
 .invite-modal__remove-btn {
+    height: 20px;
     padding: 20px 38px;
     font-size: 16px;
-    height: 20px;
-    color: #FF540D;
-    box-sizing: content-box;
+    color: #ff540d;
     cursor: pointer;
-    border-top: 1px solid #2B343D;
+    border-top: 1px solid #2b343d;
+    box-sizing: content-box;
 
     &:hover {
         background-color: #2b343d;
     }
+}
+
+.invite-modal__collapsible {
+    background: #29343f;
+    border-radius: 4px;
+
+    + .invite-modal__collapsible {
+        margin-top: 20px;
+    }
+}
+
+.invite-modal__trigger {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.invite-modal__collapsible-icon {
+    width: 6px;
+    height: 10px;
+    margin-top: 5px;
+    margin-right: 10px;
+    align-self: flex-start;
+}
+
+.invite-modal__property-name {
+    font-size: 14px;
+    line-height: 20px;
+    color: #f5faf7;
+}
+
+.invite-modal__users-count {
+    font-size: 12px;
+    line-height: 20px;
+    color: #798796;
+}
+
+.invite-modal__collapsible-container {
+    display: flex;
+    align-items: center;
+}
+
+.invite-modal__close {
+    width: 8px;
+    height: 8px;
+    margin-left: 20px;
+}
+
+.invite-modal__collapsible-members {
+    padding: 30px 34px;
+    background: #262F38;
 }

@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import Button from "../button";
+import Collapsible from "../collapsible";
 import ModalWindow from "../modal_window";
 import Select, { SelectSearch } from "../select";
 import {
@@ -11,9 +12,11 @@ import {
   OptionUsers,
   menuListConstructor
 } from "../select/select_components";
+import UserRow from "../user_row";
+import UserIconList from "../user_icon_list";
+import { Close } from "../../icons";
 
 import "./invite_modal.scss";
-import UserRow from "../user_row";
 
 export default class InviteModal extends React.PureComponent {
   static propTypes = {
@@ -67,6 +70,10 @@ export default class InviteModal extends React.PureComponent {
 
   removeUser = () => {};
 
+  removeProperty = e => {
+    e.stopPropagation();
+  };
+
   renderTitle = () => {
     let propertyName;
     if (this.props.properties.length === 1) {
@@ -116,11 +123,46 @@ export default class InviteModal extends React.PureComponent {
   };
 
   renderProperty = () => {
+    return this.props.properties.map(property => (
+      <Collapsible
+        className="invite-modal__collapsible"
+        isOpen={false}
+        renderChild={true}
+        trigger={this.renderPropertyRow(property)}
+      >
+        <div className="invite-modal__collapsible-members">
+          {this.renderMembers(property.members)}
+        </div>
+      </Collapsible>
+    ));
+  };
+
+  renderPropertyRow = property => (
+    <div className="invite-modal__trigger">
+      <div className="invite-modal__collapsible-container">
+        <Collapsible.Icon className="invite-modal__collapsible-icon" />
+        <div>
+          <div className="invite-modal__property-name">
+            {property.property_name}
+          </div>
+          <div className="invite-modal__users-count">
+            {property.members.length} Users
+          </div>
+        </div>
+      </div>
+      <div className="invite-modal__collapsible-container">
+        <UserIconList users={property.members} />
+        <Close className="invite-modal__close" onClick={this.removeProperty} />
+      </div>
+    </div>
+  );
+
+  renderPropertyOrMembers = () => {
     if (this.props.properties.length === 1) {
       const members = this.props.properties[0].members;
       return this.renderMembers(members);
     } else {
-      return null;
+      return this.renderProperty();
     }
   };
 
@@ -152,7 +194,7 @@ export default class InviteModal extends React.PureComponent {
             />
           </div>
           <div className="invite-modal__container invite-modal__container--users">
-            {this.renderProperty()}
+            {this.renderPropertyOrMembers()}
           </div>
           <div className="invite-modal__container invite-modal__container--button">
             <Button
