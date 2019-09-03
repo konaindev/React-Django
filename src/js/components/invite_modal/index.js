@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import React from "react";
+import { connect } from "react-redux";
 
 import Button from "../button";
 import Collapsible from "../collapsible";
@@ -18,7 +19,7 @@ import { Close } from "../../icons";
 
 import "./invite_modal.scss";
 
-export default class InviteModal extends React.PureComponent {
+class InviteModal extends React.PureComponent {
   static propTypes = {
     open: PropTypes.bool,
     properties: PropTypes.arrayOf(
@@ -66,12 +67,17 @@ export default class InviteModal extends React.PureComponent {
     menuList: provided => ({ ...provided, overflow: "initial" })
   };
 
-  loadUsers = (inputValue, callback) => {};
+  loadUsers = (inputValue, callback) => {
+    // TODO: Implement loadUsers
+  };
 
-  removeUser = () => {};
+  removeUser = () => {
+    // TODO: Implement removeUser
+  };
 
   removeProperty = e => {
     e.stopPropagation();
+    // TODO: Implement removeProperty
   };
 
   renderTitle = () => {
@@ -211,3 +217,9 @@ export default class InviteModal extends React.PureComponent {
     );
   }
 }
+
+const mapState = state => {
+  return state;
+};
+
+export default connect(mapState)(InviteModal);
