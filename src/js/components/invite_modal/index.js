@@ -11,7 +11,8 @@ import {
   OptionWithDescription,
   MultiValueComponents,
   OptionUsers,
-  menuListConstructor
+  menuListConstructor,
+  MenuPortal
 } from "../select/select_components";
 import UserRow from "../user_row";
 import UserIconList from "../user_icon_list";
@@ -64,7 +65,8 @@ class InviteModal extends React.PureComponent {
 
   static selectStyle = {
     singleValue: provided => ({ ...provided, right: 10 }),
-    menuList: provided => ({ ...provided, overflow: "initial" })
+    menuList: provided => ({ ...provided, overflow: "initial" }),
+    menuPortal: provided => ({ ...provided, zIndex: 1000, height: 0 })
   };
 
   loadUsers = (inputValue, callback) => {
@@ -79,6 +81,8 @@ class InviteModal extends React.PureComponent {
     e.stopPropagation();
     // TODO: Implement removeProperty
   };
+
+  closeMenuOnScroll = () => true;
 
   renderTitle = () => {
     let propertyName;
@@ -118,10 +122,13 @@ class InviteModal extends React.PureComponent {
               ...InviteModal.selectRoleComponents,
               MenuList: menuListConstructor(
                 this.renderRemoveButton(member.user_id)
-              )
+              ),
+              MenuPortal
             }}
             options={InviteModal.roleOptions}
             defaultValue={role}
+            menuPortalTarget={document.body}
+            closeMenuOnScroll={this.closeMenuOnScroll}
           />
         </div>
       );

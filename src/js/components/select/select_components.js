@@ -96,3 +96,9 @@ export const menuListConstructor = component => props => (
     </components.Option>
   </components.MenuList>
 );
+
+export const MenuPortal = props => (
+  <components.MenuPortal {...props}>
+    <div className={props.selectProps.className}>{props.children}</div>
+  </components.MenuPortal>
+);
