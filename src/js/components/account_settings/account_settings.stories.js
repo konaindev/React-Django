@@ -2,6 +2,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 
 import AccountSettings from "./index";
+import { props } from "./props";
 
 function validateSecurity(values) {
   const errors = {};
@@ -12,8 +13,8 @@ function validateSecurity(values) {
 }
 
 storiesOf("AccountSettings", module)
-  .add("Profile", () => <AccountSettings initialTab="profile" />)
+  .add("Profile", () => <AccountSettings initialTab="profile" {...props} />)
   .add("Account Security", () => (
-    <AccountSettings initialTab="lock" validate={validateSecurity} />
+    <AccountSettings initialTab="lock" validate={validateSecurity} {...props} />
   ))
   .add("Email Reports", () => <AccountSettings initialTab="email" />);

@@ -3,24 +3,24 @@
 $page-width: 1000px;
 $title-height: 44px;
 $text-color: $highlight-gray-3;
-$subtitle-color: $gray-6;
+$label-color: $gray-6;
 $subtitle-line-height: 28px;
 $account-menu-width: 280px;
+$items-gap: 1.875rem;
 $menu-border: 1px solid $gray-4;
 $menu-item-background: $gray-2;
 $menu-item-background-hover: rgba(16, 20, 23, .1);
 $menu-item-width: 221px;
-$menu-item-color: $gray-6;
 $tab-title-line-height: 2.125rem;
-$input-label-line-height: $line-height-tight;
+$input-label-line-height: 1.25rem;
 $input-border: 1px solid $gray-4;
 $input-line-height: 1.25rem;
-$password-text-color: $gray-6;
 $current-password-text-color: $gray-4;
 $buttons-border: 1px solid $gray-4;
 $button-line-height: 1.25rem;
 $message-line-height: 1.625rem;
 $error-color: $orange-6;
+$info-line-height: 1.75rem;
 
 .account-settings {
     width: $page-width;
@@ -37,7 +37,7 @@ $error-color: $orange-6;
 .account-settings__subtitle {
     margin-top: 10px;
     font-size: $text-base;
-    color: $subtitle-color;
+    color: $label-color;
     line-height: $subtitle-line-height;
 }
 
@@ -66,7 +66,7 @@ $error-color: $orange-6;
     width: $menu-item-width;
     padding: 10px 14px;
     margin-bottom: 20px;
-    color: $menu-item-color;
+    color: $label-color;
     font-size: $text-base;
     border-radius: 4px;
     background: transparent;
@@ -98,6 +98,8 @@ $error-color: $orange-6;
 }
 
 .account-settings__label {
+    margin-bottom: 8px;
+    color: $label-color;
     font-size: $text-xs;
     font-weight: $weight-medium;
     letter-spacing: 1px;
@@ -113,24 +115,20 @@ $error-color: $orange-6;
     margin-top: 50px;
 }
 
-.account-settings__field-group {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 50px;
+.account-settings__field {
+    &--full-grid {
+        grid-column-start: 1;
+        grid-column-end: 3;
+    }
 }
 
 .account-settings__field-grid {
     display: grid;
-    grid-gap: 30px;
-    grid-template-columns: 1fr 1fr;
+    grid-gap: $items-gap;
+    grid-template-columns: 1fr calc(50% - #{$items-gap / 2});
     &--col-3 {
         grid-template-columns: 1fr 1fr 1fr;
     }
-}
-
-.account-settings__input,
-.account-settings__input[type=password] {
-    margin-top: 8px;
 }
 
 .account-settings__buttons-field {
@@ -181,4 +179,70 @@ $error-color: $orange-6;
     height: 14px;
     margin-right: 10px;
     fill: $green-7;
+}
+
+.account-settings__photo {
+    position: relative;
+    width: 100px;
+    height: 100px;
+}
+
+.account-settings__photo-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.account-settings__photo-field {
+    margin-bottom: 30px;
+}
+
+.account-settings__photo-info {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.account-settings__photo-data {
+    margin-left: 30px;
+}
+
+.account-settings__upload {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 33px;
+    height: 33px;
+    background-color: $gray-9;
+    border: 3px solid $gray-3;
+    border-radius: 50%;
+    color: $highlight-gray-3;
+    cursor: pointer;
+
+    input {
+        display: none;
+    }
+}
+
+.account-settings__upload-icon {
+    width: 0.875rem;
+    height: 0.875rem;
+}
+
+.account-settings__help-text {
+    color: $label-color;
+    font-size: $text-3xs;
+    line-height: $text-sm;
+}
+
+.account-settings__photo-text {
+    font-size: $text-base;
+    line-height: $info-line-height;
+    &--name {
+        color: $text-color;
+    }
 }

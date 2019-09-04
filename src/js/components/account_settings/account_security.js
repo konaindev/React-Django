@@ -10,7 +10,6 @@ import Button from "../button";
 import Input from "../input";
 import PasswordOverlay from "../password_tooltip";
 import Tooltip from "../rmb_tooltip";
-import { props } from "./props";
 
 const schema = Yup.object().shape({
   email: Yup.string()
@@ -41,6 +40,12 @@ const initialValues = {
 
 export default class AccountSecurity extends React.PureComponent {
   static propTypes = {
+    rules: PropTypes.arrayOf(
+      PropTypes.shape({
+        key: PropTypes.string,
+        label: PropTypes.string
+      })
+    ).isRequired,
     validate: PropTypes.func
   };
 
@@ -175,7 +180,7 @@ export default class AccountSecurity extends React.PureComponent {
                           <PasswordOverlay
                             password={values.password}
                             errors={errors.password}
-                            {...props}
+                            rules={this.props.rules}
                           />
                         }
                         trigger={["focus"]}
