@@ -4,6 +4,7 @@ import React from "react";
 import PropertyRow from "../property_row";
 
 import "./property_list.scss";
+import PropertyCard from "../property_card";
 
 class PropertyList extends React.PureComponent {
   static propTypes = {
@@ -17,7 +18,9 @@ class PropertyList extends React.PureComponent {
       })
     ).isRequired,
     onSelect: PropTypes.func,
-    selectedProperties: PropTypes.arrayOf(PropTypes.string)
+    selectedProperties: PropTypes.arrayOf(
+      PropTypes.shape(PropertyCard.requiredPropTypes)
+    )
   };
 
   static defaultProps = {
@@ -32,9 +35,14 @@ class PropertyList extends React.PureComponent {
   onSelect = (propertyId, value) => {
     let selected;
     if (value) {
-      selected = [...this.props.selectedProperties, propertyId];
+      const property = this.props.properties.find(
+        p => p.property_id === propertyId
+      );
+      selected = [...this.props.selectedProperties, property];
     } else {
-      selected = this.props.selectedProperties.filter(id => id !== propertyId);
+      selected = this.props.selectedProperties.filter(
+        p => p.property_id !== propertyId
+      );
     }
     this.props.onSelect(selected);
     this.setState({
@@ -50,8 +58,8 @@ class PropertyList extends React.PureComponent {
         <PropertyRow
           {...property}
           selection_mode={selectionMode}
-          selected={this.props.selectedProperties.includes(
-            property.property_id
+          selected={this.props.selectedProperties.some(
+            p => p.property_id === property.property_id
           )}
           onSelect={this.onSelect}
           onMouseImgEnter={() => this.setState({ selectionMode: true })}
@@ -62,8 +70,6 @@ class PropertyList extends React.PureComponent {
   }
 
   render() {
-    console.log("here are the properties");
-    console.log(this.props.properties);
     if (this.props.properties.length === 0) {
       return (
         <div className="property-list">

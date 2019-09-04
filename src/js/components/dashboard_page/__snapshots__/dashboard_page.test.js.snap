@@ -4172,7 +4172,26 @@ exports[`DashboardPage renders correctly 1`] = `
                   >
                     <div
                       className="user-icon-list"
-                    />
+                    >
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://storage.googleapis.com/tracker-avatar-production/a11569ffecab2b5564c0cbfa5e5f283a_3140620_96.png)",
+                            }
+                          }
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -4253,7 +4272,62 @@ exports[`DashboardPage renders correctly 1`] = `
                   >
                     <div
                       className="user-icon-list"
-                    />
+                    >
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#6B29BE",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url()",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -4334,7 +4408,106 @@ exports[`DashboardPage renders correctly 1`] = `
                   >
                     <div
                       className="user-icon-list"
-                    />
+                    >
+                      <div
+                        className="user-icon-list__count"
+                      >
+                        <span>
+                          +
+                          7
+                        </span>
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#6B29BE",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#6B29BE",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url()",
+                            }
+                          }
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -4415,7 +4588,106 @@ exports[`DashboardPage renders correctly 1`] = `
                   >
                     <div
                       className="user-icon-list"
-                    />
+                    >
+                      <div
+                        className="user-icon-list__count"
+                      >
+                        <span>
+                          +
+                          7
+                        </span>
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#6B29BE",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#6B29BE",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url()",
+                            }
+                          }
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -4496,7 +4768,106 @@ exports[`DashboardPage renders correctly 1`] = `
                   >
                     <div
                       className="user-icon-list"
-                    />
+                    >
+                      <div
+                        className="user-icon-list__count"
+                      >
+                        <span>
+                          +
+                          7
+                        </span>
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#6B29BE",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#6B29BE",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url()",
+                            }
+                          }
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -4577,7 +4948,106 @@ exports[`DashboardPage renders correctly 1`] = `
                   >
                     <div
                       className="user-icon-list"
-                    />
+                    >
+                      <div
+                        className="user-icon-list__count"
+                      >
+                        <span>
+                          +
+                          7
+                        </span>
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#6B29BE",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#6B29BE",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url()",
+                            }
+                          }
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -4658,7 +5128,106 @@ exports[`DashboardPage renders correctly 1`] = `
                   >
                     <div
                       className="user-icon-list"
-                    />
+                    >
+                      <div
+                        className="user-icon-list__count"
+                      >
+                        <span>
+                          +
+                          7
+                        </span>
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#6B29BE",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#6B29BE",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url()",
+                            }
+                          }
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -4739,7 +5308,106 @@ exports[`DashboardPage renders correctly 1`] = `
                   >
                     <div
                       className="user-icon-list"
-                    />
+                    >
+                      <div
+                        className="user-icon-list__count"
+                      >
+                        <span>
+                          +
+                          7
+                        </span>
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#6B29BE",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#6B29BE",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url()",
+                            }
+                          }
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -4820,7 +5488,106 @@ exports[`DashboardPage renders correctly 1`] = `
                   >
                     <div
                       className="user-icon-list"
-                    />
+                    >
+                      <div
+                        className="user-icon-list__count"
+                      >
+                        <span>
+                          +
+                          7
+                        </span>
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#6B29BE",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#6B29BE",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url()",
+                            }
+                          }
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -4901,7 +5668,106 @@ exports[`DashboardPage renders correctly 1`] = `
                   >
                     <div
                       className="user-icon-list"
-                    />
+                    >
+                      <div
+                        className="user-icon-list__count"
+                      >
+                        <span>
+                          +
+                          7
+                        </span>
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#6B29BE",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#6B29BE",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        style={
+                          Object {
+                            "backgroundColor": "#006EFF",
+                          }
+                        }
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url()",
+                            }
+                          }
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

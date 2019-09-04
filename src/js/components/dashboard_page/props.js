@@ -1,3 +1,107 @@
+const members = [
+  {
+    user_id: "peep_00001",
+    profile_image_url: "/photo.jpg",
+    account_name: "Remarkably Client",
+    email: "client@remarkably.com",
+    role: "member"
+  },
+  {
+    user_id: "peep_00002",
+    account_name: "Remarkably Client",
+    email: "client@remarkably.com",
+    role: "member"
+  },
+  {
+    user_id: "peep_00003",
+    profile_image_url:
+      "https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg",
+    account_name: "Remarkably Client",
+    email: "client@remarkably.com",
+    role: "admin"
+  },
+  {
+    user_id: "peep_00004",
+    profile_image_url:
+      "https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg",
+    account_name: "Remarkably Client",
+    email: "client@remarkably.com",
+    role: "member"
+  },
+  {
+    user_id: "peep_00005",
+    profile_image_url:
+      "https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg",
+    account_name: "Remarkably Client",
+    email: "client@remarkably.com",
+    role: "member"
+  },
+  {
+    user_id: "peep_00006",
+    profile_image_url:
+      "https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg",
+    account_name: "Remarkably Client",
+    email: "client@remarkably.com",
+    role: "member"
+  },
+  {
+    user_id: "peep_00007",
+    profile_image_url:
+      "https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg",
+    account_name: "Remarkably Client",
+    email: "client@remarkably.com",
+    role: "member"
+  },
+  {
+    user_id: "peep_00008",
+    profile_image_url:
+      "https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg",
+    account_name: "Remarkably Client",
+    email: "client@remarkably.com",
+    role: "member"
+  },
+  {
+    user_id: "peep_00009",
+    profile_image_url:
+      "https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg",
+    account_name: "Remarkably Client",
+    email: "client@remarkably.com",
+    role: "member"
+  },
+  {
+    user_id: "peep_00010",
+    profile_image_url:
+      "https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg",
+    account_name: "Remarkably Client",
+    email: "client@remarkably.com",
+    role: "member"
+  },
+  {
+    user_id: "peep_00011",
+    profile_image_url:
+      "https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg",
+    account_name: "Remarkably Client",
+    email: "client@remarkably.com",
+    role: "member"
+  },
+  {
+    user_id: "peep_00012",
+    profile_image_url:
+      "https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg",
+    account_name: "Remarkably Client",
+    email: "client@remarkably.com",
+    role: "member"
+  },
+  {
+    user_id: "peep_00013",
+    profile_image_url:
+      "https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg",
+    account_name: "Remarkably Client",
+    email: "client@remarkably.com",
+    role: "member"
+  }
+];
+
 export const props = {
   properties: [
     {
@@ -6,7 +110,17 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "",
       performance_rating: 2,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: [
+        {
+          user_id: "1234556960",
+          profile_image_url:
+            "https://storage.googleapis.com/tracker-avatar-production/a11569ffecab2b5564c0cbfa5e5f283a_3140620_96.png",
+          account_name: "Remarkably Client",
+          email: "test@remarkably.io",
+          role: "admin"
+        }
+      ]
     },
     {
       property_name: "Beridian SLC",
@@ -14,7 +128,8 @@ export const props = {
       address: "",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 1,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: members.slice(0, 3)
     },
     {
       property_name: "Teridian SLC",
@@ -22,7 +137,8 @@ export const props = {
       address: "1779 Nacogdoches Rd, San Antonio, TX 78209, USA",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 2,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: members.slice(1)
     },
     {
       property_name: "Deridian SLC",
@@ -30,7 +146,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 0,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: members.slice(1)
     },
     {
       property_name: "Peridian SLC",
@@ -38,7 +155,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 2,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: members.slice(1)
     },
     {
       property_name: "Leridian SLC",
@@ -46,7 +164,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 2,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: members.slice(1)
     },
     {
       property_name: "Qeridian SLC",
@@ -54,7 +173,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 1,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: members.slice(1)
     },
     {
       property_name: "Keridian SLC",
@@ -62,7 +182,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 1,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: members.slice(1)
     },
     {
       property_name: "Yeridian SLC",
@@ -70,7 +191,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 2,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: members.slice(1)
     },
     {
       property_name: "Weridian SLC",
@@ -78,7 +200,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 2,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: members.slice(1)
     }
   ],
   user: {

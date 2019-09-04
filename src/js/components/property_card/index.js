@@ -17,7 +17,7 @@ export const PropertyCard = ({
   image_url,
   performance_rating,
   url,
-  users,
+  members,
   selected,
   onSelect
 }) => {
@@ -46,7 +46,7 @@ export const PropertyCard = ({
               </a>
             </div>
             <div className="property-card__actions">
-              <UserIconList users={users} />
+              <UserIconList users={members} />
             </div>
           </div>
         </div>
@@ -69,7 +69,7 @@ PropertyCard.requiredPropTypes = {
   address: PropTypes.string.isRequired,
   image_url: PropTypes.string.isRequired,
   performance_rating: PropTypes.number.isRequired,
-  users: PropTypes.array,
+  members: PropTypes.array,
   url: PropTypes.string.isRequired
 };
 
@@ -80,7 +80,7 @@ PropertyCard.propTypes = {
 };
 
 PropertyCard.defaultProps = {
-  users: [],
+  members: [],
   selected: false,
   onSelect: () => {}
 };

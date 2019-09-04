@@ -11,7 +11,9 @@ export default class PropertyCardList extends React.PureComponent {
       PropTypes.shape(PropertyCard.requiredPropTypes)
     ).isRequired,
     onSelect: PropTypes.func,
-    selectedProperties: PropTypes.arrayOf(PropTypes.string)
+    selectedProperties: PropTypes.arrayOf(
+      PropTypes.shape(PropertyCard.requiredPropTypes)
+    )
   };
 
   static defaultProps = {
@@ -23,9 +25,12 @@ export default class PropertyCardList extends React.PureComponent {
     const { selectedProperties, onSelect } = this.props;
     let selected;
     if (value) {
-      selected = [...selectedProperties, propertyId];
+      const property = this.props.properties.find(
+        p => p.property_id === propertyId
+      );
+      selected = [...selectedProperties, property];
     } else {
-      selected = selectedProperties.filter(id => id !== propertyId);
+      selected = selectedProperties.filter(p => p.property_id !== propertyId);
     }
     onSelect(selected);
     this.setState({
@@ -49,7 +54,9 @@ export default class PropertyCardList extends React.PureComponent {
           <PropertyCard
             key={index}
             {...property}
-            selected={selectedProperties.includes(property.property_id)}
+            selected={selectedProperties.some(
+              p => p.property_id === property.property_id
+            )}
             onSelect={this.onSelect}
           />
         ))}

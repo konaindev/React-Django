@@ -3,9 +3,10 @@ export const general = {
     type: "GENERAL_SET_STATE",
     newState
   }),
-  update: {
-    type: "GENERAL_UPDATE_STATE"
-  }
+  update: newState => ({
+    type: "GENERAL_UPDATE_STATE",
+    newState
+  })
 };
 
 export const tutorial = {
@@ -48,4 +49,13 @@ export const completeAccount = {
     type: "COMPLETE_ACCOUNT_SET_STATE",
     newState
   })
+};
+
+export const inviteModal = {
+  open: {
+    type: "INVITE_MODAL_SHOW"
+  },
+  close: {
+    type: "INVITE_MODAL_HIDE"
+  }
 };

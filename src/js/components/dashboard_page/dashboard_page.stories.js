@@ -3,11 +3,13 @@ import { storiesOf } from "@storybook/react";
 import { withState } from "@dump247/storybook-state";
 import { action } from "@storybook/addon-actions";
 import { Provider } from "react-redux";
-import { DashboardPage } from "./index";
-import { props } from "./props";
-import store from "../../state/store";
-const _store = store;
 
+import store from "../../state/store";
+
+import DashboardPage from "./index";
+import { props } from "./props";
+
+const _store = store;
 document.cookie = "isLogin=true";
 
 storiesOf("DashboardPage", module)
@@ -36,7 +38,7 @@ storiesOf("DashboardPage", module)
       <DashboardPage
         {...props}
         viewType="list"
-        selectedProperties={[props.properties[0].property_id]}
+        selectedProperties={props.properties.slice(0, 1)}
       />
     </Provider>
   ));

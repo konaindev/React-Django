@@ -8,7 +8,13 @@ import { props, multiProps } from "./props";
 
 jest.mock("react-responsive-modal", () => "Modal");
 
-const _ = x => createStore(() => x);
+const _ = x =>
+  createStore(() => ({
+    inviteModal: x,
+    general: {
+      selectedProperties: x.properties
+    }
+  }));
 
 describe("InviteModal", () => {
   it("renders with single properties", () => {

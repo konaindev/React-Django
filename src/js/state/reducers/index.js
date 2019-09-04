@@ -11,6 +11,10 @@ const dashboard = (state = {}, action) => {
       newState = { ...action.newState };
       break;
     }
+    case "GENERAL_UPDATE_STATE": {
+      newState = { ...state, ...action.newState };
+      break;
+    }
     default:
       newState = { ...state };
   }
@@ -88,10 +92,29 @@ const completeAccount = (
   return newState;
 };
 
+const inviteModal = (state = {}, action) => {
+  let newState = {};
+  switch (action.type) {
+    case "INVITE_MODAL_SHOW": {
+      console.log("================>state", state);
+      newState = { ...state, isOpen: true };
+      break;
+    }
+    case "INVITE_MODAL_HIDE": {
+      newState = { ...state, isOpen: false };
+      break;
+    }
+    default:
+      newState = state;
+  }
+  return newState;
+};
+
 export default combineReducers({
   general: dashboard,
   network,
   tutorial,
   createPassword,
-  completeAccount
+  completeAccount,
+  inviteModal
 });

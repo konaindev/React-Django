@@ -16,25 +16,24 @@ import {
 } from "../select/select_components";
 import UserRow from "../user_row";
 import UserIconList from "../user_icon_list";
+import { inviteModal } from "../../state/actions";
 import { Close } from "../../icons";
 
 import "./invite_modal.scss";
 
 class InviteModal extends React.PureComponent {
   static propTypes = {
-    open: PropTypes.bool,
+    isOpen: PropTypes.bool,
     properties: PropTypes.arrayOf(
       PropTypes.shape({
         property_name: PropTypes.string.isRequired,
         members: PropTypes.array.isRequired
       })
-    ).isRequired,
-    onClose: PropTypes.func
+    ).isRequired
   };
 
   static defaultProps = {
-    open: false,
-    onClose: () => {}
+    isOpen: false
   };
 
   static roleOptions = [
@@ -84,6 +83,10 @@ class InviteModal extends React.PureComponent {
 
   closeMenuOnScroll = () => true;
 
+  closeModal = () => {
+    this.props.dispatch(inviteModal.close);
+  };
+
   renderTitle = () => {
     let propertyName;
     if (this.props.properties.length === 1) {
@@ -108,6 +111,9 @@ class InviteModal extends React.PureComponent {
   );
 
   renderMembers = members => {
+    if (!members) {
+      return null;
+    }
     return members.map(member => {
       const role = InviteModal.roleOptions.find(r => r.value === member.role);
       return (
@@ -142,6 +148,7 @@ class InviteModal extends React.PureComponent {
         isOpen={false}
         renderChild={true}
         trigger={this.renderPropertyRow(property)}
+        key={property.property_id}
       >
         <div className="invite-modal__collapsible-members">
           {this.renderMembers(property.members)}
@@ -159,7 +166,7 @@ class InviteModal extends React.PureComponent {
             {property.property_name}
           </div>
           <div className="invite-modal__users-count">
-            {property.members.length} Users
+            {property.members?.length} Users
           </div>
         </div>
       </div>
@@ -180,9 +187,13 @@ class InviteModal extends React.PureComponent {
   };
 
   render() {
-    const { open, onClose } = this.props;
+    const { isOpen } = this.props;
     return (
-      <ModalWindow className="invite-modal" open={open} onClose={onClose}>
+      <ModalWindow
+        className="invite-modal"
+        open={isOpen}
+        onClose={this.closeModal}
+      >
         <ModalWindow.Head className="invite-modal__header">
           {this.renderTitle()}
         </ModalWindow.Head>
@@ -226,7 +237,10 @@ class InviteModal extends React.PureComponent {
 }
 
 const mapState = state => {
-  return state;
+  return {
+    ...state.inviteModal,
+    properties: state.general.selectedProperties || []
+  };
 };
 
 export default connect(mapState)(InviteModal);
