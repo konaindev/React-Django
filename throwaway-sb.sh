@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-HASH=$(git rev-parse --short HEAD)
+HASH=$(git rev-parse --abbrev-ref HEAD)
 
 aws s3 mb s3://${HASH}-storybook
 
