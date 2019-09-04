@@ -45,12 +45,25 @@ export default function Select(props) {
     />
   );
 }
-Select.optionsType = PropTypes.arrayOf(
-  PropTypes.shape({
-    label: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
-  })
-);
+Select.optionsType = PropTypes.oneOfType([
+  PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+    })
+  ),
+  PropTypes.arrayOf(
+    PropTypes.shape({
+      label: PropTypes.string.isRequired,
+      options: PropTypes.arrayOf(
+        PropTypes.shape({
+          label: PropTypes.string.isRequired,
+          value: PropTypes.string.isRequired
+        })
+      ).isRequired
+    })
+  )
+]);
 Select.propTypes = {
   size: PropTypes.oneOf(["", "small"]),
   theme: PropTypes.oneOf(["", "default", "highlight", "transparent"]),
