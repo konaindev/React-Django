@@ -11,12 +11,12 @@ import PageAuth from "../page_auth";
 import PasswordOverlay from "../password_tooltip";
 import RMBTooltip from "../rmb_tooltip";
 import router from "../../router";
-import { post } from "../../utils/api";
+import { axiosPost } from "../../utils/api";
 
 import "./create_password_view.scss";
 
 const validatePassword = (url, password, hash) =>
-  post(url, { password, hash }).then(response => response.data.errors);
+  axiosPost(url, { password, hash }).then(response => response.data.errors);
 
 class CreatePasswordView extends React.PureComponent {
   static propTypes = {
@@ -112,12 +112,8 @@ class CreatePasswordView extends React.PureComponent {
                 handleBlur,
                 handleSubmit
               }) => (
-                <Form
-                  className="create-password__form"
-                  method="post"
-                  onSubmit={handleSubmit}
-                >
-                  <div className="create-password__field">
+                <Form method="post" onSubmit={handleSubmit}>
+                  <div className={AccountForm.fieldClass}>
                     <FormField label="Password">
                       <RMBTooltip
                         theme="highlight"
@@ -142,7 +138,7 @@ class CreatePasswordView extends React.PureComponent {
                       </RMBTooltip>
                     </FormField>
                   </div>
-                  <div className="create-password__field">
+                  <div className={AccountForm.fieldClass}>
                     <FormField
                       label="Confirm Password"
                       error={errors.password2}
