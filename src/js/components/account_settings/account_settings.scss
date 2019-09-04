@@ -161,7 +161,16 @@ $info-line-height: 1.75rem;
 
     .account-settings__input,
     .account-settings__input:focus {
-        border: 1px solid $error-color;
+        &:not(.select) {
+            border: 1px solid $error-color;
+        }
+        .select__control,
+        .select__menu {
+            border: 1px solid $error-color;
+        }
+        .select__menu {
+            border-top: none;
+        }
     }
 }
 
@@ -237,6 +246,10 @@ $info-line-height: 1.75rem;
     color: $label-color;
     font-size: $text-3xs;
     line-height: $text-sm;
+
+    &--error {
+        color: $error-color;
+    }
 }
 
 .account-settings__photo-text {

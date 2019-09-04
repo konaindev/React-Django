@@ -27,7 +27,7 @@ const person = {
   title: "Founder",
   phone: "",
   phone_ext: "",
-  company: "Glacier Associates",
+  company_name: "Glacier Associates",
   company_role: [
     { label: "Owner", value: "owner" },
     { label: "Asset Manager", value: "asset" },
