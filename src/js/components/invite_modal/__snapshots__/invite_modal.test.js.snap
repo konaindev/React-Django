@@ -275,7 +275,7 @@ exports[`InviteModal renders with multiple properties 1`] = `
                 </div>
                 <svg
                   aria-hidden="true"
-                  className="invite-modal__close"
+                  className="invite-modal__collapsible-close"
                   color="inherit"
                   focusable="false"
                   height="1em"
@@ -556,7 +556,7 @@ exports[`InviteModal renders with multiple properties 1`] = `
                 </div>
                 <svg
                   aria-hidden="true"
-                  className="invite-modal__close"
+                  className="invite-modal__collapsible-close"
                   color="inherit"
                   focusable="false"
                   height="1em"
@@ -1147,7 +1147,7 @@ exports[`InviteModal renders with multiple properties 1`] = `
                 </div>
                 <svg
                   aria-hidden="true"
-                  className="invite-modal__close"
+                  className="invite-modal__collapsible-close"
                   color="inherit"
                   focusable="false"
                   height="1em"
