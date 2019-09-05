@@ -50,23 +50,31 @@ class CreatePasswordView extends React.PureComponent {
     { name: "Complete Account" }
   ];
 
+  errorMessages = {
+    password_1: "Not strong enough",
+    password_2: "Passwords must match"
+  };
+
   validate = values =>
     new Promise(res => {
       clearTimeout(this.timeoutId);
       this.timeoutId = setTimeout(() => res(), 300);
     }).then(() =>
-      this.props.validate(values.password, this.props.hash).then(fieldError => {
-        let errors = {};
-        if (Object.keys(fieldError).length) {
-          errors.password = fieldError;
-        }
-        if (!values.password2 || values.password2 !== values.password) {
-          errors.password2 = "Passwords must match";
-        }
-        if (Object.keys(errors).length) {
-          throw errors;
-        }
-      })
+      this.props
+        .validate(values.password_1, this.props.hash)
+        .then(fieldError => {
+          let errors = {};
+          if (Object.keys(fieldError).length) {
+            errors.rules_validation = fieldError;
+            errors.password_1 = this.errorMessages.password_1;
+          }
+          if (!values.password_2 || values.password_2 !== values.password_1) {
+            errors.password_2 = this.errorMessages.password_2;
+          }
+          if (Object.keys(errors).length) {
+            throw errors;
+          }
+        })
     );
 
   getButtonColor = isValid => {
@@ -81,7 +89,7 @@ class CreatePasswordView extends React.PureComponent {
       type: "API_CREATE_PASSWORD",
       hash: this.props.hash,
       data: {
-        password: values.password
+        password: values.password_1
       }
     });
   };
@@ -107,26 +115,30 @@ class CreatePasswordView extends React.PureComponent {
               }) => (
                 <Form method="post" onSubmit={handleSubmit}>
                   <div className={AccountForm.fieldClass}>
-                    <FormField label="Password">
+                    <FormField
+                      label="Password"
+                      error={errors.password_1}
+                      showError={touched.password_1 && !!values.password_1}
+                    >
                       <RMBTooltip
                         theme="highlight"
                         trigger={["focus"]}
                         overlay={
                           <PasswordOverlay
                             rules={this.props.rules}
-                            password={values.password}
-                            errors={errors.password}
+                            password={values.password_1}
+                            errors={errors.rules_validation}
                             theme="highlight"
                           />
                         }
                       >
                         <Input
                           type="password"
-                          name="password"
+                          name="password_1"
                           theme="highlight"
                           onChange={handleChange}
                           onBlur={handleBlur}
-                          value={values.password}
+                          value={values.password_1}
                         />
                       </RMBTooltip>
                     </FormField>
@@ -134,16 +146,16 @@ class CreatePasswordView extends React.PureComponent {
                   <div className={AccountForm.fieldClass}>
                     <FormField
                       label="Confirm Password"
-                      error={errors.password2}
-                      showError={touched.password2 && !!values.password}
+                      error={errors.password_2}
+                      showError={touched.password_2 && !!values.password_1}
                     >
                       <Input
                         type="password"
-                        name="password2"
+                        name="password_2"
                         theme="highlight"
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={values.password2}
+                        value={values.password_2}
                       />
                     </FormField>
                   </div>
