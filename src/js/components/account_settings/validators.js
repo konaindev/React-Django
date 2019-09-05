@@ -1,7 +1,7 @@
 import Yup from "../../yup";
 
 const phoneRegex = /^\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$/;
-const invalidPhoneMessage = "${path} should match the format (xxx) xxx-xxxx";
+const invalidPhoneMessage = "${path} should match format (XXX) XXX-XXXX";
 const maxAvatarSize = 3 * 1024 * 1024; // Bytes in 3MB
 
 const selectOptionsSchema = Yup.object().shape({

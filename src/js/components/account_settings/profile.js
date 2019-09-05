@@ -1,5 +1,6 @@
 import cn from "classnames";
 import { ErrorMessage, Formik, Form } from "formik";
+import _intersection from "lodash/intersection";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -78,20 +79,15 @@ export default class Profile extends React.PureComponent {
   };
 
   getErrorMessage = (errors, touched) => {
-    let message;
-    for (let k of Object.keys(errors)) {
-      if (!touched[k]) {
-        continue;
-      }
-      if (errors[k].includes("required")) {
-        message = "Please review the missing field above.";
-      } else {
-        message = errors[k];
-      }
-      break;
-    }
-    if (!message) {
+    const errorFields = Object.keys(errors);
+    const touchedFields = Object.keys(touched);
+    const fields = _intersection(errorFields, touchedFields);
+    if (!fields.length) {
       return;
+    }
+    let message = "Please review highlighted fields above.";
+    if (fields.includes("avatar_size")) {
+      message = errors.avatar_size;
     }
     return <div className="account-settings__general-error">{message}</div>;
   };
