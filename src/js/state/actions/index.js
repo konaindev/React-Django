@@ -36,10 +36,6 @@ export const createPassword = {
   redirect: url => ({
     type: "CREATE_PASSWORD_REDIRECT",
     url
-  }),
-  set: newState => ({
-    type: "CREATE_PASSWORD_SET_STATE",
-    newState
   })
 };
 

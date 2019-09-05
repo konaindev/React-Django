@@ -40,12 +40,7 @@ class CreatePasswordView extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    this._router = router("/users")(hash =>
-      props.dispatch({
-        type: "API_CREATE_PASSWORD",
-        hash
-      })
-    );
+    this._router = router("/users")(() => {});
   }
 
   timeoutId;
