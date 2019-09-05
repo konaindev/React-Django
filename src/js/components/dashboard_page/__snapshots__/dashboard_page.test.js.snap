@@ -4175,11 +4175,17 @@ exports[`DashboardPage renders correctly 1`] = `
                     >
                       <div
                         className="user-icon user-icon-list__icon"
+                        data-index={0}
+                        email="test@remarkably.io"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="admin"
                         style={
                           Object {
-                            "backgroundColor": "#006EFF",
+                            "zIndex": 4,
                           }
                         }
+                        user_id="1234556960"
                       >
                         RC
                         <div
@@ -4275,29 +4281,41 @@ exports[`DashboardPage renders correctly 1`] = `
                     >
                       <div
                         className="user-icon user-icon-list__icon"
+                        data-index={0}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
                         style={
                           Object {
-                            "backgroundColor": "#006EFF",
+                            "zIndex": 4,
                           }
                         }
+                        user_id="peep_00001"
                       >
                         RC
                         <div
                           className="user-icon__avatar"
                           style={
                             Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                              "backgroundImage": "url(/photo.jpg)",
                             }
                           }
                         />
                       </div>
                       <div
                         className="user-icon user-icon-list__icon"
+                        data-index={1}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
                         style={
                           Object {
-                            "backgroundColor": "#6B29BE",
+                            "zIndex": 3,
                           }
                         }
+                        user_id="peep_00002"
                       >
                         RC
                         <div
@@ -4311,18 +4329,24 @@ exports[`DashboardPage renders correctly 1`] = `
                       </div>
                       <div
                         className="user-icon user-icon-list__icon"
+                        data-index={2}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="admin"
                         style={
                           Object {
-                            "backgroundColor": "#006EFF",
+                            "zIndex": 2,
                           }
                         }
+                        user_id="peep_00003"
                       >
                         RC
                         <div
                           className="user-icon__avatar"
                           style={
                             Object {
-                              "backgroundImage": "url(/photo.jpg)",
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
                             }
                           }
                         />
@@ -4410,92 +4434,18 @@ exports[`DashboardPage renders correctly 1`] = `
                       className="user-icon-list"
                     >
                       <div
-                        className="user-icon-list__count"
-                      >
-                        <span>
-                          +
-                          7
-                        </span>
-                      </div>
-                      <div
                         className="user-icon user-icon-list__icon"
+                        data-index={0}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
                         style={
                           Object {
-                            "backgroundColor": "#006EFF",
+                            "zIndex": 4,
                           }
                         }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#6B29BE",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#006EFF",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#6B29BE",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#006EFF",
-                          }
-                        }
+                        user_id="peep_00002"
                       >
                         RC
                         <div
@@ -4506,6 +4456,110 @@ exports[`DashboardPage renders correctly 1`] = `
                             }
                           }
                         />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={1}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="admin"
+                        style={
+                          Object {
+                            "zIndex": 3,
+                          }
+                        }
+                        user_id="peep_00003"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={2}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 2,
+                          }
+                        }
+                        user_id="peep_00004"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={3}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 1,
+                          }
+                        }
+                        user_id="peep_00005"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={4}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 0,
+                          }
+                        }
+                        user_id="peep_00006"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon-list__count"
+                      >
+                        <span>
+                          +
+                          7
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -4590,92 +4644,18 @@ exports[`DashboardPage renders correctly 1`] = `
                       className="user-icon-list"
                     >
                       <div
-                        className="user-icon-list__count"
-                      >
-                        <span>
-                          +
-                          7
-                        </span>
-                      </div>
-                      <div
                         className="user-icon user-icon-list__icon"
+                        data-index={0}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
                         style={
                           Object {
-                            "backgroundColor": "#006EFF",
+                            "zIndex": 4,
                           }
                         }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#6B29BE",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#006EFF",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#6B29BE",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#006EFF",
-                          }
-                        }
+                        user_id="peep_00002"
                       >
                         RC
                         <div
@@ -4686,6 +4666,110 @@ exports[`DashboardPage renders correctly 1`] = `
                             }
                           }
                         />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={1}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="admin"
+                        style={
+                          Object {
+                            "zIndex": 3,
+                          }
+                        }
+                        user_id="peep_00003"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={2}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 2,
+                          }
+                        }
+                        user_id="peep_00004"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={3}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 1,
+                          }
+                        }
+                        user_id="peep_00005"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={4}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 0,
+                          }
+                        }
+                        user_id="peep_00006"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon-list__count"
+                      >
+                        <span>
+                          +
+                          7
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -4770,92 +4854,18 @@ exports[`DashboardPage renders correctly 1`] = `
                       className="user-icon-list"
                     >
                       <div
-                        className="user-icon-list__count"
-                      >
-                        <span>
-                          +
-                          7
-                        </span>
-                      </div>
-                      <div
                         className="user-icon user-icon-list__icon"
+                        data-index={0}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
                         style={
                           Object {
-                            "backgroundColor": "#006EFF",
+                            "zIndex": 4,
                           }
                         }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#6B29BE",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#006EFF",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#6B29BE",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#006EFF",
-                          }
-                        }
+                        user_id="peep_00002"
                       >
                         RC
                         <div
@@ -4866,6 +4876,110 @@ exports[`DashboardPage renders correctly 1`] = `
                             }
                           }
                         />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={1}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="admin"
+                        style={
+                          Object {
+                            "zIndex": 3,
+                          }
+                        }
+                        user_id="peep_00003"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={2}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 2,
+                          }
+                        }
+                        user_id="peep_00004"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={3}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 1,
+                          }
+                        }
+                        user_id="peep_00005"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={4}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 0,
+                          }
+                        }
+                        user_id="peep_00006"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon-list__count"
+                      >
+                        <span>
+                          +
+                          7
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -4950,92 +5064,18 @@ exports[`DashboardPage renders correctly 1`] = `
                       className="user-icon-list"
                     >
                       <div
-                        className="user-icon-list__count"
-                      >
-                        <span>
-                          +
-                          7
-                        </span>
-                      </div>
-                      <div
                         className="user-icon user-icon-list__icon"
+                        data-index={0}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
                         style={
                           Object {
-                            "backgroundColor": "#006EFF",
+                            "zIndex": 4,
                           }
                         }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#6B29BE",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#006EFF",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#6B29BE",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#006EFF",
-                          }
-                        }
+                        user_id="peep_00002"
                       >
                         RC
                         <div
@@ -5046,6 +5086,110 @@ exports[`DashboardPage renders correctly 1`] = `
                             }
                           }
                         />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={1}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="admin"
+                        style={
+                          Object {
+                            "zIndex": 3,
+                          }
+                        }
+                        user_id="peep_00003"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={2}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 2,
+                          }
+                        }
+                        user_id="peep_00004"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={3}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 1,
+                          }
+                        }
+                        user_id="peep_00005"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={4}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 0,
+                          }
+                        }
+                        user_id="peep_00006"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon-list__count"
+                      >
+                        <span>
+                          +
+                          7
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -5130,92 +5274,18 @@ exports[`DashboardPage renders correctly 1`] = `
                       className="user-icon-list"
                     >
                       <div
-                        className="user-icon-list__count"
-                      >
-                        <span>
-                          +
-                          7
-                        </span>
-                      </div>
-                      <div
                         className="user-icon user-icon-list__icon"
+                        data-index={0}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
                         style={
                           Object {
-                            "backgroundColor": "#006EFF",
+                            "zIndex": 4,
                           }
                         }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#6B29BE",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#006EFF",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#6B29BE",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#006EFF",
-                          }
-                        }
+                        user_id="peep_00002"
                       >
                         RC
                         <div
@@ -5226,6 +5296,110 @@ exports[`DashboardPage renders correctly 1`] = `
                             }
                           }
                         />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={1}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="admin"
+                        style={
+                          Object {
+                            "zIndex": 3,
+                          }
+                        }
+                        user_id="peep_00003"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={2}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 2,
+                          }
+                        }
+                        user_id="peep_00004"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={3}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 1,
+                          }
+                        }
+                        user_id="peep_00005"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={4}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 0,
+                          }
+                        }
+                        user_id="peep_00006"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon-list__count"
+                      >
+                        <span>
+                          +
+                          7
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -5310,92 +5484,18 @@ exports[`DashboardPage renders correctly 1`] = `
                       className="user-icon-list"
                     >
                       <div
-                        className="user-icon-list__count"
-                      >
-                        <span>
-                          +
-                          7
-                        </span>
-                      </div>
-                      <div
                         className="user-icon user-icon-list__icon"
+                        data-index={0}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
                         style={
                           Object {
-                            "backgroundColor": "#006EFF",
+                            "zIndex": 4,
                           }
                         }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#6B29BE",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#006EFF",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#6B29BE",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#006EFF",
-                          }
-                        }
+                        user_id="peep_00002"
                       >
                         RC
                         <div
@@ -5406,6 +5506,110 @@ exports[`DashboardPage renders correctly 1`] = `
                             }
                           }
                         />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={1}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="admin"
+                        style={
+                          Object {
+                            "zIndex": 3,
+                          }
+                        }
+                        user_id="peep_00003"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={2}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 2,
+                          }
+                        }
+                        user_id="peep_00004"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={3}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 1,
+                          }
+                        }
+                        user_id="peep_00005"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={4}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 0,
+                          }
+                        }
+                        user_id="peep_00006"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon-list__count"
+                      >
+                        <span>
+                          +
+                          7
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -5490,92 +5694,18 @@ exports[`DashboardPage renders correctly 1`] = `
                       className="user-icon-list"
                     >
                       <div
-                        className="user-icon-list__count"
-                      >
-                        <span>
-                          +
-                          7
-                        </span>
-                      </div>
-                      <div
                         className="user-icon user-icon-list__icon"
+                        data-index={0}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
                         style={
                           Object {
-                            "backgroundColor": "#006EFF",
+                            "zIndex": 4,
                           }
                         }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#6B29BE",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#006EFF",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#6B29BE",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#006EFF",
-                          }
-                        }
+                        user_id="peep_00002"
                       >
                         RC
                         <div
@@ -5586,6 +5716,110 @@ exports[`DashboardPage renders correctly 1`] = `
                             }
                           }
                         />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={1}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="admin"
+                        style={
+                          Object {
+                            "zIndex": 3,
+                          }
+                        }
+                        user_id="peep_00003"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={2}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 2,
+                          }
+                        }
+                        user_id="peep_00004"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={3}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 1,
+                          }
+                        }
+                        user_id="peep_00005"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={4}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 0,
+                          }
+                        }
+                        user_id="peep_00006"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon-list__count"
+                      >
+                        <span>
+                          +
+                          7
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -5670,92 +5904,18 @@ exports[`DashboardPage renders correctly 1`] = `
                       className="user-icon-list"
                     >
                       <div
-                        className="user-icon-list__count"
-                      >
-                        <span>
-                          +
-                          7
-                        </span>
-                      </div>
-                      <div
                         className="user-icon user-icon-list__icon"
+                        data-index={0}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
                         style={
                           Object {
-                            "backgroundColor": "#006EFF",
+                            "zIndex": 4,
                           }
                         }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#6B29BE",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#006EFF",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#6B29BE",
-                          }
-                        }
-                      >
-                        RC
-                        <div
-                          className="user-icon__avatar"
-                          style={
-                            Object {
-                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
-                            }
-                          }
-                        />
-                      </div>
-                      <div
-                        className="user-icon user-icon-list__icon"
-                        style={
-                          Object {
-                            "backgroundColor": "#006EFF",
-                          }
-                        }
+                        user_id="peep_00002"
                       >
                         RC
                         <div
@@ -5766,6 +5926,110 @@ exports[`DashboardPage renders correctly 1`] = `
                             }
                           }
                         />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={1}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="admin"
+                        style={
+                          Object {
+                            "zIndex": 3,
+                          }
+                        }
+                        user_id="peep_00003"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={2}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 2,
+                          }
+                        }
+                        user_id="peep_00004"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={3}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 1,
+                          }
+                        }
+                        user_id="peep_00005"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon user-icon-list__icon"
+                        data-index={4}
+                        email="client@remarkably.com"
+                        onMouseEnter={[Function]}
+                        onMouseLeave={[Function]}
+                        role="member"
+                        style={
+                          Object {
+                            "zIndex": 0,
+                          }
+                        }
+                        user_id="peep_00006"
+                      >
+                        RC
+                        <div
+                          className="user-icon__avatar"
+                          style={
+                            Object {
+                              "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            }
+                          }
+                        />
+                      </div>
+                      <div
+                        className="user-icon-list__count"
+                      >
+                        <span>
+                          +
+                          7
+                        </span>
                       </div>
                     </div>
                   </div>

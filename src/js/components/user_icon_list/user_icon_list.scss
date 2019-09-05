@@ -12,8 +12,6 @@ $count-spaces: 6px;
     display: flex;
     padding-left: $icon-spacing;
     border-color: $border-color;
-    flex-direction: row-reverse;
-    justify-content: flex-end;
 }
 
 .user-icon-list__icon {
@@ -38,4 +36,23 @@ $count-spaces: 6px;
     border-radius: 50%;
     align-items: center;
     justify-content: center;
+}
+
+.user-icon-list__tooltip {
+    text-transform: capitalize;
+
+    .rc-tooltip-inner {
+        padding: $s3/2 $s3;
+        font-family: $font-sans;
+        font-size: $text-xs;
+        text-align: center;
+    }
+}
+
+.user-icon-list__name {
+    color: $content-text-primary-color;
+}
+
+.user-icon-list__role {
+    color: $content-text-secondary-color;
 }

@@ -5,5 +5,7 @@ import UserIconList from "./index";
 import { props } from "./props";
 
 storiesOf("UserIconList", module).add("default", () => (
-  <UserIconList style={{ borderColor: "#181d23" }} {...props} />
+  <div style={{ padding: "100px", background: "#262F38" }}>
+    <UserIconList style={{ borderColor: "#262F38" }} {...props} />
+  </div>
 ));

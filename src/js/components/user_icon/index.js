@@ -4,7 +4,13 @@ import React from "react";
 
 import "./user_icon.scss";
 
-const UserIcon = ({ className, color, account_name, profile_image_url }) => {
+const UserIcon = ({
+  className,
+  color,
+  account_name,
+  profile_image_url,
+  ...otherProps
+}) => {
   const classes = cn("user-icon", className);
   const initials = account_name
     .split(" ")
@@ -13,7 +19,7 @@ const UserIcon = ({ className, color, account_name, profile_image_url }) => {
   const imgStyle = { backgroundImage: `url(${profile_image_url})` };
   const style = { backgroundColor: color };
   return (
-    <div className={classes} style={style}>
+    <div className={classes} style={style} {...otherProps}>
       {initials}
       <div className="user-icon__avatar" style={imgStyle} />
     </div>
