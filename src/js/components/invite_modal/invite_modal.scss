@@ -1,7 +1,33 @@
 @import "css/base.scss";
 
+$window-width: 560px;
+$title-color: $highlight-gray-3;
+$title-color-secondary: $gray-6;
+$header-height: 20px;
+$header-spacing: 20px;
+$border-color: $gray-4;
+$container-spacing: 15px;
+$user-container-height: $s72;
+$user-container-spacing: $s5;
+$user-select-max-height: $s24;
+$user-select-min-height: $s10;
+$role-select-spacing: 5px;
+$invite-btn-with: 86px;
+$member-spacing: $s6;
+$remove-btn-height: $s5;
+$remove-btn-color: $orange-6;
+$remove-btn-border: $gray-4;
+$remove-btn-hover-color: $gray-4;
+$collapsible-background: $gray-11;
+$collapsible-hover-background: $gray-12;
+$collapsible-icon-width: 0.375rem;
+$collapsible-icon-height: 0.625rem;
+$collapsible-icon-spacing: 5px 10px 0 0;
+$collapsible-close-size: $s2;
+$collapsible-members-spacing: 1.875rem 2.125rem;
+
 .invite-modal {
-    width: 560px;
+    width: $window-width;
     padding: 0;
     font-family: $font-sans;
 
@@ -14,40 +40,37 @@
 
 .invite-modal__header {
     display: flex;
-    height: 20px;
-    padding: 20px;
+    height: $header-height;
+    padding: $header-spacing;
     margin: 0;
     box-sizing: content-box;
 }
 
 .invite-modal__title {
-    font-size: 16px;
-    line-height: 28px;
-    color: #798796;
+    font-size: $text-base;
+    line-height: $line-height-relaxed;
+    color: $title-color-secondary;
 
     &--name {
-        color: #f5faf7;
+        color: $title-color;
     }
 }
 
 .invite-modal__container {
-    padding: 15px;
-    border-top: 1px solid #2b343d;
+    padding: $container-spacing;
+    border-top: 1px solid $border-color;
 
     &--select {
         display: flex;
-        max-height: 126px;
-        min-height: 70px;
-
+        box-sizing: content-box;
         justify-content: space-between;
         align-items: center;
     }
 
     &--users {
-        height: 286px;
-        padding: 20px;
+        height: $user-container-height;
+        padding: $user-container-spacing;
         overflow: auto;
-
         @include dark-scrollbar();
     }
 
@@ -57,84 +80,90 @@
 }
 
 .invite-modal__select-users {
-    max-height: 126px;
-    min-height: 40px;
-
+    max-height: $user-select-max-height;
+    min-height: $user-select-min-height;
     flex-grow: 1;
 }
 
 .invite-modal__select-role {
     display: inline-block;
-    margin-left: 5px;
-
+    margin-top: $role-select-spacing;
+    margin-left: $role-select-spacing;
+    align-self: flex-start;
     flex-shrink: 0;
 }
 
 .invite-modal__button {
-    width: 86px;
-    font-size: 12px;
-    line-height: 20px;
-    letter-spacing: 1px;
+    width: $invite-btn-with;
+    font-size: $text-xs;
+    line-height: $s5;
+    letter-spacing: $letter-spacing-wider;
 }
 
 .invite-modal__member {
     display: flex;
-
     justify-content: space-between;
     align-items: center;
 
     & + .invite-modal__member {
-        margin-top: 24px;
+        margin-top: $member-spacing;
     }
 }
 
 .invite-modal__remove-btn {
-    height: 20px;
-    padding: 20px 38px;
-    font-size: 16px;
-    color: #ff540d;
+    height: $remove-btn-height;
+    padding: $s5 2.375rem;
+    font-size: $text-base;
+    color: $remove-btn-color;
     cursor: pointer;
-    border-top: 1px solid #2b343d;
+    border-top: 1px solid $remove-btn-border;
     box-sizing: content-box;
 
     &:hover {
-        background-color: #2b343d;
+        background-color: $remove-btn-hover-color;
     }
 }
 
 .invite-modal__collapsible {
-    background: #29343f;
-    border-radius: 4px;
+    background: $collapsible-background;
+    border-radius: $border-radius-default;
+
+    &:hover {
+        background: $collapsible-hover-background;
+    }
+
+    &.collapsible--open {
+        background: $collapsible-hover-background;
+    }
 
     + .invite-modal__collapsible {
-        margin-top: 20px;
+        margin-top: $s5;
     }
 }
 
 .invite-modal__trigger {
-    padding: 20px;
     display: flex;
+    padding: $s5;
     justify-content: space-between;
 }
 
 .invite-modal__collapsible-icon {
-    width: 6px;
-    height: 10px;
-    margin-top: 5px;
-    margin-right: 10px;
+    width: $collapsible-icon-width;
+    height: $collapsible-icon-height;
+    margin: $collapsible-icon-spacing;
     align-self: flex-start;
 }
 
 .invite-modal__property-name {
-    font-size: 14px;
-    line-height: 20px;
-    color: #f5faf7;
+    font-size: $text-sm;
+    line-height: $s5;
+    color: $content-text-primary-color;
 }
 
 .invite-modal__users-count {
-    font-size: 12px;
-    line-height: 20px;
-    color: #798796;
+    font-size: $text-xs;
+    line-height: $s5;
+    color: $content-text-secondary-color;
 }
 
 .invite-modal__collapsible-container {
@@ -142,13 +171,13 @@
     align-items: center;
 }
 
-.invite-modal__close {
-    width: 8px;
-    height: 8px;
-    margin-left: 20px;
+.invite-modal__collapsible-close {
+    width: $collapsible-close-size;
+    height: $collapsible-close-size;
+    margin-left: $s5;
 }
 
 .invite-modal__collapsible-members {
-    padding: 30px 34px;
-    background: #262F38;
+    padding: $collapsible-members-spacing;
+    background: $collapsible-background;
 }

@@ -71,6 +71,8 @@ $gray-7: #c2c6cb;
 $gray-8: #e1e3e5;
 $gray-9: #404E5C;
 $gray-10: #F4F3F3;
+$gray-11: #262F38;
+$gray-12: #29343F;
 
 $white: #ffffff;
 
@@ -298,11 +300,11 @@ $weight-black: 900;
 
 $s0: 0;
 $s1: 0.25rem;
-$s2: 0.5rem;
+$s2: 0.5rem; // 8px
 $s3: 0.75rem;
 $s4: 1rem;
-$s5: 1.25rem;
-$s6: 1.5rem;
+$s5: 1.25rem; // 20px
+$s6: 1.5rem; // 24px
 $s7: 1.75rem;
 $s8: 2rem;
 $s10: 2.5rem;
@@ -314,10 +316,11 @@ $s24: 6rem;
 $s32: 8rem;
 $s48: 12rem;
 $s64: 16rem;
+$s72: 18rem;
 
 $border-radius-none: 0;
 $border-radius-sm: 0.125rem;
-$border-radius-default: 0.25rem;
+$border-radius-default: 0.25rem; // 4px
 $border-radius-base: 0.375rem; // 6px
 $border-radius-lg: 0.5rem;
 $border-radius-full: 9999px;

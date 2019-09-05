@@ -172,7 +172,10 @@ class InviteModal extends React.PureComponent {
       </div>
       <div className="invite-modal__collapsible-container">
         <UserIconList users={property.members} />
-        <Close className="invite-modal__close" onClick={this.removeProperty} />
+        <Close
+          className="invite-modal__collapsible-close"
+          onClick={this.removeProperty}
+        />
       </div>
     </div>
   );
