@@ -125,8 +125,6 @@ class CreatePasswordView(ReactView):
 
     def get(self, request, hash):
         user = request.user
-        if not user.is_anonymous:
-            return redirect(LOGIN_REDIRECT_URL)
         try:
             user = User.objects.get(public_id=hash)
         except User.DoesNotExist:
