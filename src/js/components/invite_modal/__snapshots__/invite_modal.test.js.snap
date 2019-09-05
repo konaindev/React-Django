@@ -238,7 +238,8 @@ exports[`InviteModal renders with multiple properties 1`] = `
                     className="invite-modal__users-count"
                   >
                     1
-                     Users
+                     
+                    User
                   </div>
                 </div>
               </div>
@@ -471,7 +472,8 @@ exports[`InviteModal renders with multiple properties 1`] = `
                     className="invite-modal__users-count"
                   >
                     3
-                     Users
+                     
+                    Users
                   </div>
                 </div>
               </div>
@@ -1006,7 +1008,8 @@ exports[`InviteModal renders with multiple properties 1`] = `
                     className="invite-modal__users-count"
                   >
                     12
-                     Users
+                     
+                    Users
                   </div>
                 </div>
               </div>

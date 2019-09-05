@@ -157,28 +157,31 @@ class InviteModal extends React.PureComponent {
     ));
   };
 
-  renderPropertyRow = property => (
-    <div className="invite-modal__trigger">
-      <div className="invite-modal__collapsible-container">
-        <Collapsible.Icon className="invite-modal__collapsible-icon" />
-        <div>
-          <div className="invite-modal__property-name">
-            {property.property_name}
-          </div>
-          <div className="invite-modal__users-count">
-            {property.members?.length} Users
+  renderPropertyRow = property => {
+    const numberMembers = property.members?.length;
+    return (
+      <div className="invite-modal__trigger">
+        <div className="invite-modal__collapsible-container">
+          <Collapsible.Icon className="invite-modal__collapsible-icon" />
+          <div>
+            <div className="invite-modal__property-name">
+              {property.property_name}
+            </div>
+            <div className="invite-modal__users-count">
+              {numberMembers} {numberMembers !== 1 ? "Users" : "User"}
+            </div>
           </div>
         </div>
+        <div className="invite-modal__collapsible-container">
+          <UserIconList users={property.members} />
+          <Close
+            className="invite-modal__collapsible-close"
+            onClick={this.removeProperty}
+          />
+        </div>
       </div>
-      <div className="invite-modal__collapsible-container">
-        <UserIconList users={property.members} />
-        <Close
-          className="invite-modal__collapsible-close"
-          onClick={this.removeProperty}
-        />
-      </div>
-    </div>
-  );
+    );
+  };
 
   renderPropertyOrMembers = () => {
     if (this.props.properties.length === 1) {

@@ -96,7 +96,6 @@ const inviteModal = (state = {}, action) => {
   let newState = {};
   switch (action.type) {
     case "INVITE_MODAL_SHOW": {
-      console.log("================>state", state);
       newState = { ...state, isOpen: true };
       break;
     }
