@@ -16,8 +16,8 @@ import {
 } from "../select/select_components";
 import UserRow from "../user_row";
 import UserIconList from "../user_icon_list";
-import { inviteModal } from "../../state/actions";
 import { Close } from "../../icons";
+import { inviteModal, general } from "../../state/actions";
 
 import "./invite_modal.scss";
 
@@ -78,7 +78,11 @@ class InviteModal extends React.PureComponent {
 
   removeProperty = e => {
     e.stopPropagation();
-    // TODO: Implement removeProperty
+    const propertyId = e.target.dataset?.propertyId;
+    const selectedProperties = this.props.properties.filter(
+      p => p.property_id !== propertyId
+    );
+    this.props.dispatch(general.update({ selectedProperties }));
   };
 
   closeMenuOnScroll = () => true;
@@ -176,6 +180,7 @@ class InviteModal extends React.PureComponent {
           <UserIconList users={property.members} />
           <Close
             className="invite-modal__collapsible-close"
+            data-property-id={property.property_id}
             onClick={this.removeProperty}
           />
         </div>
