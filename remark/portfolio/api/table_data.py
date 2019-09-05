@@ -59,8 +59,8 @@ def get_table_structure(user, start, end, kpis, show_averages):
         base_targets = get_targets_for_project(project, start, end)
 
         if base_kpis is not None:
-            image_url = project.get_building_image(THUMBNAIL)
-            if image_url is None:
+            image_url = project.get_building_image()[2]
+            if image_url == "":
                 image_url = "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png"
 
             item = {

@@ -44,7 +44,7 @@ export default class ReportPageChrome extends Component {
     } = this.props;
     let image_url = DEFAULT_IMAGE_URL;
     if (project && project.building_image) {
-      image_url = project.building_image;
+      image_url = project.building_image[2];
     }
 
     const topItems = (
