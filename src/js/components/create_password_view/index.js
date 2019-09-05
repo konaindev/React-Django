@@ -15,8 +15,10 @@ import { axiosPost } from "../../utils/api";
 
 import "./create_password_view.scss";
 
-const validatePassword = (url, password, hash) =>
-  axiosPost(url, { password, hash }).then(response => response.data.errors);
+const validatePassword = (password, hash) =>
+  axiosPost("/users/validate-password", { password, hash }).then(
+    response => response.data.errors
+  );
 
 class CreatePasswordView extends React.PureComponent {
   static propTypes = {
@@ -28,13 +30,11 @@ class CreatePasswordView extends React.PureComponent {
       })
     ).isRequired,
     back_link: PropTypes.string,
-    validate: PropTypes.func,
-    validate_url: PropTypes.string
+    validate: PropTypes.func
   };
 
   static defaultProps = {
     back_link: "/",
-    validate_url: "users/validate_password",
     validate: validatePassword
   };
 
@@ -55,20 +55,18 @@ class CreatePasswordView extends React.PureComponent {
       clearTimeout(this.timeoutId);
       this.timeoutId = setTimeout(() => res(), 300);
     }).then(() =>
-      this.props
-        .validate(this.props.validate_url, values.password, this.props.hash)
-        .then(fieldError => {
-          let errors = {};
-          if (Object.keys(fieldError).length) {
-            errors.password = fieldError;
-          }
-          if (!values.password2 || values.password2 !== values.password) {
-            errors.password2 = "Passwords must match";
-          }
-          if (Object.keys(errors).length) {
-            throw errors;
-          }
-        })
+      this.props.validate(values.password, this.props.hash).then(fieldError => {
+        let errors = {};
+        if (Object.keys(fieldError).length) {
+          errors.password = fieldError;
+        }
+        if (!values.password2 || values.password2 !== values.password) {
+          errors.password2 = "Passwords must match";
+        }
+        if (Object.keys(errors).length) {
+          throw errors;
+        }
+      })
     );
 
   getButtonColor = isValid => {

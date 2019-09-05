@@ -42,11 +42,9 @@ class CreatePasswordTestCase(TestCase):
         ]
         hash = self.user.public_id
         url = reverse("create_password", kwargs={"hash": hash})
-        validate_url = reverse("validate_password")
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.context["page_props"]["hash"], hash)
-        self.assertEqual(response.context["page_props"]["validate_url"], validate_url)
         self.assertEqual(response.context["page_props"]["rules"], v_rules)
 
     def test_get_data_logged_user(self):
