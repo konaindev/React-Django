@@ -1,10 +1,10 @@
 from remark.projects.models import Project
 from django.urls import reverse
 
+from remark.projects.constants import THUMBNAIL
 from remark.lib.time_series.computed import generate_computed_kpis, generate_computed_targets
 from remark.lib.time_series.common import KPI, KPIFormat
 from .strategy import get_base_kpis_for_project, get_targets_for_project, get_base_kpis_for_group, get_targets_for_group
-
 
 def generate_computed_properties(item, kpis):
     base_kpis = item["base_kpis"]
@@ -59,7 +59,7 @@ def get_table_structure(user, start, end, kpis, show_averages):
         base_targets = get_targets_for_project(project, start, end)
 
         if base_kpis is not None:
-            image_url = project.get_building_image_variant("thumbnail")
+            image_url = project.get_building_image(THUMBNAIL)
             if image_url is None:
                 image_url = "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png"
 

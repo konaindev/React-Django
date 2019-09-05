@@ -11,6 +11,7 @@ from django.utils.crypto import get_random_string
 
 from jsonfield import JSONField
 from stdimage.models import StdImageField
+from image_cropping.utils import get_backend
 
 from remark.lib.fields import ImageRatioFieldExt
 from remark.lib.stats import health_check
@@ -23,7 +24,7 @@ from remark.lib.metrics import (
 )
 from remark.projects.spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
 from remark.projects.reports.performance import PerformanceReport
-from remark.projects.constants import PROPERTY_TYPE, BUILDING_CLASS
+from remark.projects.constants import PROPERTY_TYPE, BUILDING_CLASS, ORIGINAL, LANDSCAPE, THUMBNAIL
 
 
 def pro_public_id():
@@ -405,36 +406,43 @@ class Project(models.Model):
         else:
             return None
 
-    def get_building_image_variants(self):
+    def get_building_image(self, variant=None):
         """
-        Return building image's S3 resource urls for all variants
+        Return building image's S3 resource url(s)
         """
-        property = self.property
-        if property.building_image:
-            return [
-                property.building_image.url,
-                property.building_image.landscape.url,
-                property.building_image.regular.url,
-                property.building_image.thumbnail.url,
-            ]
-        else:
-            return None
+        image_set = dict()
+        image_set[ORIGINAL] = ""
+        image_set[LANDSCAPE] = ""
+        image_set[THUMBNAIL] = ""
 
-    def get_building_image_variant(self, variant):
-        """
-        Return building image's S3 resource url for a specific variants
-        """
         property = self.property
-        if property.building_image:
-            if variant is "landscape":
-                return property.building_image.landscape.url
-            if variant is "regular":
-                return property.building_image.regular.url
-            if variant == "thumbnail":
-                return property.building_image.thumbnail.url
-            return property.building_image.url
-        else:
-            return None
+
+        if not property.building_image:
+            return image_set
+
+        image_set[ORIGINAL] = property.building_image.url,
+        image_set[LANDSCAPE] = get_backend().get_thumbnail_url(
+            property.building_image,
+            {
+                "size": (309, 220),
+                "box": property.building_image_landscape_cropping,
+                "crop": True,
+            },
+        )
+        image_set[THUMBNAIL] = get_backend().get_thumbnail_url(
+            property.building_image,
+            {
+                "size": (180, 180),
+                "box": property.building_image_cropping,
+                "crop": True,
+            },
+        )
+
+        if variant == LANDSCAPE:
+            return image_set[LANDSCAPE]
+        if variant == THUMBNAIL:
+            return image_set[THUMBNAIL]
+        return image_set
 
     def get_baseline_url(self):
         return reverse("baseline_report", kwargs={"project_id": self.public_id})
@@ -449,7 +457,7 @@ class Project(models.Model):
             public_id=self.public_id,
             name=self.name,
             building_logo=self.get_building_logo(),
-            building_image=self.get_building_image_variants(),
+            building_image=self.get_building_image(THUMBNAIL),
             update_endpoint=update_endpoint,
         )
 

@@ -6,10 +6,10 @@ from django.http import JsonResponse
 from django.core.cache import cache
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
+from remark.projects.constants import LANDSCAPE
 from remark.projects.models import Fund, Project
 from remark.lib.cache import TIMEOUT_1_DAY
 from remark.lib.views import ReactView, RemarkView
-
 
 def has_property_in_list_of_dict(ary, prop, value):
     for item in ary:
@@ -39,15 +39,15 @@ class DashboardView(LoginRequiredMixin, ReactView):
     def get_project_details(project):
         """ cached by "project.public_id", details for project card on UI """
         cache_key = f"remark.web.views.dashboard_view.project.{project.public_id}"
-        if cache_key in cache:
-            return cache.get(cache_key)
+        # if cache_key in cache:
+        #     return cache.get(cache_key)
 
         address = project.property.geo_address
         project_details = dict(
             property_name=project.name,
             property_id=project.public_id,
             address=f"{address.city}, {address.state}",
-            image_url=project.get_building_image_variant("landscape"),
+            image_url=project.get_building_image(LANDSCAPE),
             performance_rating=project.get_performance_rating(),
             url=project.get_baseline_url(),
         )
