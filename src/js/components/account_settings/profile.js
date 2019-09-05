@@ -1,15 +1,14 @@
 import cn from "classnames";
-import { Formik, Form } from "formik";
+import { ErrorMessage, Formik, Form } from "formik";
 import PropTypes from "prop-types";
 import React from "react";
 
-import Button from "../button";
 import { Tick, Upload } from "../../icons";
+import Button from "../button";
 import Input from "../input";
 import MultiSelect from "../multi_select";
 import Select from "../select";
 import { profileSchema } from "./validators";
-import _pickBy from "lodash/pickBy";
 
 export default class Profile extends React.PureComponent {
   static propTypes = {
@@ -197,6 +196,9 @@ export default class Profile extends React.PureComponent {
                         onBlur={handleBlur}
                         onChange={handleChange}
                       />
+                      <div className="account-settings__error">
+                        <ErrorMessage name="first_name" />
+                      </div>
                     </div>
                     <div
                       className={this.getFieldClasses(
@@ -214,6 +216,9 @@ export default class Profile extends React.PureComponent {
                         onBlur={handleBlur}
                         onChange={handleChange}
                       />
+                      <div className="account-settings__error">
+                        <ErrorMessage name="last_name" />
+                      </div>
                     </div>
                     <div
                       className={this.getFieldClasses("title", errors, touched)}
@@ -229,6 +234,9 @@ export default class Profile extends React.PureComponent {
                         onBlur={handleBlur}
                         onChange={handleChange}
                       />
+                      <div className="account-settings__error">
+                        <ErrorMessage name="title" />
+                      </div>
                     </div>
                     <div
                       className={this.getFieldClasses("phone", errors, touched)}
@@ -244,6 +252,9 @@ export default class Profile extends React.PureComponent {
                         onBlur={handleBlur}
                         onChange={handleChange}
                       />
+                      <div className="account-settings__error">
+                        <ErrorMessage name="phone" />
+                      </div>
                     </div>
                     <div
                       className={this.getFieldClasses(
@@ -263,6 +274,9 @@ export default class Profile extends React.PureComponent {
                         onBlur={handleBlur}
                         onChange={handleChange}
                       />
+                      <div className="account-settings__error">
+                        <ErrorMessage name="phone_ext" />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -287,6 +301,9 @@ export default class Profile extends React.PureComponent {
                         onBlur={handleBlur}
                         onChange={handleChange}
                       />
+                      <div className="account-settings__error">
+                        <ErrorMessage name="company_name" />
+                      </div>
                     </div>
                     <div
                       className={this.getFieldClasses(
@@ -314,6 +331,9 @@ export default class Profile extends React.PureComponent {
                           setFieldValue("company_role", values)
                         }
                       />
+                      <div className="account-settings__error">
+                        <ErrorMessage name="company_role" />
+                      </div>
                     </div>
                     <div
                       className={this.getFieldClasses(
@@ -334,6 +354,9 @@ export default class Profile extends React.PureComponent {
                         onBlur={handleBlur}
                         onChange={handleChange}
                       />
+                      <div className="account-settings__error">
+                        <ErrorMessage name="office_address" />
+                      </div>
                     </div>
                     <div
                       className={this.getFieldClasses(
@@ -351,6 +374,9 @@ export default class Profile extends React.PureComponent {
                         onBlur={handleBlur}
                         onChange={handleChange}
                       />
+                      <div className="account-settings__error">
+                        <ErrorMessage name="office_name" />
+                      </div>
                     </div>
                     <div
                       className={this.getFieldClasses(
@@ -369,6 +395,9 @@ export default class Profile extends React.PureComponent {
                         onBlur={() => setFieldTouched("office_type", true)}
                         onChange={value => setFieldValue("office_type", value)}
                       />
+                      <div className="account-settings__error">
+                        <ErrorMessage name="office_type" />
+                      </div>
                     </div>
                   </div>
                 </div>

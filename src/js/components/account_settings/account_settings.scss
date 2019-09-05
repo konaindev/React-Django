@@ -6,7 +6,8 @@ $text-color: $highlight-gray-3;
 $label-color: $gray-6;
 $subtitle-line-height: 28px;
 $account-menu-width: 280px;
-$items-gap: 1.875rem;
+$columns-gap: 1.875rem;
+$rows-gap: 0.625rem;
 $menu-border: 1px solid $gray-4;
 $menu-item-background: $gray-2;
 $menu-item-background-hover: rgba(16, 20, 23, .1);
@@ -124,8 +125,9 @@ $info-line-height: 1.75rem;
 
 .account-settings__field-grid {
     display: grid;
-    grid-gap: $items-gap;
-    grid-template-columns: 1fr calc(50% - #{$items-gap / 2});
+    grid-column-gap: $columns-gap;
+    grid-row-gap: $rows-gap;
+    grid-template-columns: 1fr calc(50% - #{$columns-gap / 2});
     &--col-3 {
         grid-template-columns: 1fr 1fr 1fr;
     }
@@ -172,6 +174,13 @@ $info-line-height: 1.75rem;
             border-top: none;
         }
     }
+}
+
+.account-settings__error {
+    height: $s5;
+    margin-top: 0.625rem;
+    color: $error-color;
+    font-size: $text-xs;
 }
 
 .account-settings__success {

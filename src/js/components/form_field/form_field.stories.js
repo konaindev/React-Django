@@ -41,7 +41,7 @@ storiesOf("FormFiled", module)
   ))
   .add("error without icon", () => (
     <div style={style}>
-      <FormFiled
+      <FormField
         label="Confirm Password"
         error="Passwords must match"
         showError={true}
@@ -53,7 +53,7 @@ storiesOf("FormFiled", module)
   ))
   .add("ok without icon", () => (
     <div style={style}>
-      <FormFiled
+      <FormField
         label="Confirm Password"
         showError={true}
         Input={Input}
