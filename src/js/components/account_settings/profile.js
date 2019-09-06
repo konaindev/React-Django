@@ -245,6 +245,7 @@ export default class Profile extends React.PureComponent {
                         className="account-settings__input"
                         name="phone"
                         theme="gray"
+                        type="tel"
                         value={values.phone}
                         onBlur={handleBlur}
                         onChange={handleChange}
@@ -268,6 +269,7 @@ export default class Profile extends React.PureComponent {
                         className="account-settings__input"
                         name="phone_ext"
                         theme="gray"
+                        type="tel"
                         value={values.phone_ext}
                         onBlur={handleBlur}
                         onChange={handleChange}
