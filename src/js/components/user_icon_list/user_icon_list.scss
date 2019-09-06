@@ -12,6 +12,7 @@ $count-spaces: 6px;
     display: flex;
     padding-left: $icon-spacing;
     border-color: $border-color;
+    z-index: 0;
 }
 
 .user-icon-list__icon {
