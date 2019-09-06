@@ -10,15 +10,14 @@ import {
   MenuWithDescription,
   OptionWithDescription,
   MultiValueComponents,
-  OptionUsers,
-  menuListConstructor,
-  MenuPortal
+  OptionUsers
 } from "../select/select_components";
 import UserRow from "../user_row";
 import UserIconList from "../user_icon_list";
 import { Close } from "../../icons";
 import { inviteModal, general } from "../../state/actions";
 
+import SelectRole from "./select";
 import "./invite_modal.scss";
 
 class InviteModal extends React.PureComponent {
@@ -62,12 +61,6 @@ class InviteModal extends React.PureComponent {
     IndicatorsContainer: () => null
   };
 
-  static selectStyle = {
-    singleValue: provided => ({ ...provided, right: 10 }),
-    menuList: provided => ({ ...provided, overflow: "initial" }),
-    menuPortal: provided => ({ ...provided, zIndex: 1000, height: 0 })
-  };
-
   state = {
     removeModalIsOpen: false
   };
@@ -97,8 +90,6 @@ class InviteModal extends React.PureComponent {
     this.props.dispatch(general.update({ selectedProperties }));
   };
 
-  closeMenuOnScroll = () => true;
-
   closeModal = () => {
     this.props.dispatch(inviteModal.close);
   };
@@ -120,12 +111,6 @@ class InviteModal extends React.PureComponent {
     );
   };
 
-  renderRemoveButton = () => (
-    <div className="invite-modal__remove-btn" onClick={this.openRemoveModal}>
-      Remove
-    </div>
-  );
-
   renderMembers = members => {
     if (!members) {
       return null;
@@ -135,22 +120,12 @@ class InviteModal extends React.PureComponent {
       return (
         <div className="invite-modal__member" key={member.user_id}>
           <UserRow {...member} />
-          <Select
-            className="invite-modal__select-role"
-            theme="transparent"
-            size="small"
-            styles={InviteModal.selectStyle}
-            components={{
-              ...InviteModal.selectRoleComponents,
-              MenuList: menuListConstructor(
-                this.renderRemoveButton(member.user_id)
-              ),
-              MenuPortal
-            }}
-            options={InviteModal.roleOptions}
-            defaultValue={role}
-            menuPortalTarget={document.body}
-            closeMenuOnScroll={this.closeMenuOnScroll}
+          <SelectRole
+            member={member}
+            role={role}
+            components={InviteModal.selectRoleComponents}
+            roleOptions={InviteModal.roleOptions}
+            openRemoveModal={this.openRemoveModal}
           />
         </div>
       );
