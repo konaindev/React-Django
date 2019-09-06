@@ -1,35 +1,15 @@
 import cn from "classnames";
-import { Formik, Form } from "formik";
+import { ErrorMessage, Formik, Form } from "formik";
 import _pickBy from "lodash/pickBy";
 import PropTypes from "prop-types";
 import React from "react";
 
 import { Tick } from "../../icons";
-import Yup from "../../yup";
 import Button from "../button";
 import Input from "../input";
 import PasswordOverlay from "../password_tooltip";
 import Tooltip from "../rmb_tooltip";
-
-const schema = Yup.object().shape({
-  email: Yup.string()
-    .max(255)
-    .email(),
-  old_password: Yup.string().when("password", {
-    is: password => !!password,
-    then: Yup.string().required(),
-    otherwise: Yup.string()
-  }),
-  password: Yup.string(),
-  confirm_password: Yup.string().when("password", (password, schema) => {
-    if (password) {
-      return Yup.string()
-        .required()
-        .oneOf([Yup.ref("password"), null]);
-    }
-    return schema;
-  })
-});
+import { securitySchema } from "./validators";
 
 const initialValues = {
   email: "",
@@ -114,7 +94,7 @@ export default class AccountSecurity extends React.PureComponent {
       <div className="account-settings__tab">
         <Formik
           validate={this.props.validate}
-          validationSchema={schema}
+          validationSchema={securitySchema}
           validateOnBlur={true}
           validateOnChange={true}
           initialValues={initialValues}
@@ -139,6 +119,9 @@ export default class AccountSecurity extends React.PureComponent {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
+                    <div className="account-settings__error">
+                      <ErrorMessage name="email" />
+                    </div>
                   </div>
                 </div>
                 <div className="account-settings__tab-section">
@@ -162,6 +145,9 @@ export default class AccountSecurity extends React.PureComponent {
                         onChange={handleChange}
                         onBlur={handleBlur}
                       />
+                      <div className="account-settings__error">
+                        <ErrorMessage name="old_password" />
+                      </div>
                     </div>
                     <div
                       className={this.getFieldClasses(

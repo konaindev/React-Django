@@ -13,6 +13,31 @@ const selectOptionsSchema = Yup.object().shape({
     .max(20)
 });
 
+const securitySchema = Yup.object().shape({
+  email: Yup.string()
+    .max(255)
+    .email()
+    .label("Email"),
+  old_password: Yup.string()
+    .when("password", {
+      is: password => !!password,
+      then: Yup.string().required(),
+      otherwise: Yup.string()
+    })
+    .label("Current password"),
+  password: Yup.string().label("Password"),
+  confirm_password: Yup.string()
+    .when("password", (password, schema) => {
+      if (password) {
+        return Yup.string()
+          .required()
+          .oneOf([Yup.ref("password"), null]);
+      }
+      return schema;
+    })
+    .label("Confirm password")
+});
+
 const profileSchema = Yup.object().shape({
   avatar_size: Yup.number().max(
     maxAvatarSize,
@@ -60,4 +85,4 @@ const profileSchema = Yup.object().shape({
   office_type: selectOptionsSchema.required().label("Office type")
 });
 
-export { profileSchema };
+export { profileSchema, securitySchema };
