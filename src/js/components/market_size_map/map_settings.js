@@ -67,7 +67,7 @@ export const grayAreaTheme = {
 export const createDefaultMapOptions = maps => ({
   styles: mapNightTheme,
   draggable: false,
-  zoomControl: false,
+  zoomControl: true,
   scrollwheel: false,
   fullscreenControl: false,
   scaleControl: false
