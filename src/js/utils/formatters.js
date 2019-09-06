@@ -246,7 +246,7 @@ export const formatDateDiff = (startDateStr, endDateStr, unit = "month") => {
 export const formatPhone = value => {
   let localValue = value;
   if (_isNil(localValue)) {
-    return;
+    return localValue;
   }
   if (_isNumber(localValue)) {
     localValue = localValue.toString();

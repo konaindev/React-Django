@@ -1,3 +1,4 @@
+import { shallow, mount } from "enzyme";
 import React from "react";
 import renderer from "react-test-renderer";
 
@@ -20,9 +21,10 @@ describe("Input", () => {
     expect(tree).toMatchSnapshot();
   });
   it("render with formatted phone number", () => {
-    const tree = renderer
-      .create(<Input value="1234567890" valueFormatter={formatPhone} />)
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+    const tree = mount(<Input valueFormatter={formatPhone} />);
+    const input = tree.find("input");
+    input.instance().value = "1234567890";
+    input.simulate("change");
+    expect(input.getDOMNode().value).toEqual("(123) 456-7890");
   });
 });

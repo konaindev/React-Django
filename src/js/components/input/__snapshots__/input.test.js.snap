@@ -3,6 +3,7 @@
 exports[`Input render text input 1`] = `
 <input
   className="input"
+  onChange={[Function]}
   type="text"
 />
 `;
@@ -10,6 +11,7 @@ exports[`Input render text input 1`] = `
 exports[`Input render text input highlight 1`] = `
 <input
   className="input input--highlight"
+  onChange={[Function]}
   type="text"
 />
 `;
@@ -17,14 +19,7 @@ exports[`Input render text input highlight 1`] = `
 exports[`Input render text with gray theme 1`] = `
 <input
   className="input input--gray"
+  onChange={[Function]}
   type="text"
-/>
-`;
-
-exports[`Input render with formatted phone number 1`] = `
-<input
-  className="input"
-  type="text"
-  value="(123) 456-7890"
 />
 `;

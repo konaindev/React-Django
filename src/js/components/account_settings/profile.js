@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import { Tick, Upload } from "../../icons";
+import { formatPhone } from "../../utils/formatters";
 import Button from "../button";
 import Input from "../input";
 import MultiSelect from "../multi_select";
@@ -247,6 +248,7 @@ export default class Profile extends React.PureComponent {
                         value={values.phone}
                         onBlur={handleBlur}
                         onChange={handleChange}
+                        valueFormatter={formatPhone}
                       />
                       <div className="account-settings__error">
                         <ErrorMessage name="phone" />
@@ -269,6 +271,7 @@ export default class Profile extends React.PureComponent {
                         value={values.phone_ext}
                         onBlur={handleBlur}
                         onChange={handleChange}
+                        valueFormatter={formatPhone}
                       />
                       <div className="account-settings__error">
                         <ErrorMessage name="phone_ext" />

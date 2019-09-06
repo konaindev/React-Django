@@ -17,6 +17,7 @@ exports[`FormFiled renders correctly 1`] = `
   >
     <input
       className="input form-field__input"
+      onChange={[Function]}
       type="password"
     />
     <svg
@@ -88,6 +89,7 @@ exports[`FormFiled renders inline 1`] = `
   >
     <input
       className="input"
+      onChange={[Function]}
       type="password"
     />
     <svg
@@ -159,6 +161,7 @@ exports[`FormFiled renders ok 1`] = `
   >
     <input
       className="input form-field__input"
+      onChange={[Function]}
       type="password"
     />
     <svg
@@ -230,6 +233,7 @@ exports[`FormFiled renders ok without icon 1`] = `
   >
     <input
       className="input form-field__input"
+      onChange={[Function]}
       type="password"
     />
     <svg
@@ -303,6 +307,7 @@ exports[`FormFiled renders with error 1`] = `
   >
     <input
       className="input form-field__input"
+      onChange={[Function]}
       type="password"
     />
     <svg
@@ -376,6 +381,7 @@ exports[`FormFiled renders with error without icon 1`] = `
   >
     <input
       className="input form-field__input"
+      onChange={[Function]}
       type="password"
     />
     <svg

@@ -2,7 +2,9 @@ import { formatDateWithTokens, formatPhone } from "./formatters";
 
 describe("utils > formatters", () => {
   it("formatDateWithTokens()", () => {
-    expect(formatDateWithTokens("2018-12-17", "MMM D, YYYY")).toEqual("Dec 17, 2018");
+    expect(formatDateWithTokens("2018-12-17", "MMM D, YYYY")).toEqual(
+      "Dec 17, 2018"
+    );
   });
 
   it("formatDateWithTokens with not date value", () => {
@@ -23,5 +25,10 @@ describe("utils > formatters", () => {
 
   it("formatPhone with careless input", () => {
     expect(formatPhone("123 45 abc 67  89x0000")).toEqual("(123) 456-7890");
+  });
+
+  it("formatPhone with empty value", () => {
+    expect(formatPhone("")).toEqual("");
+    expect(formatPhone(null)).toEqual(null);
   });
 });

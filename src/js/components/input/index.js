@@ -5,31 +5,41 @@ import React from "react";
 
 import "./input.scss";
 
-export default function Input(props) {
-  const { className, theme, valueFormatter, ...otherProps } = props;
-  const classes = cn("input", className, {
-    [`input--${theme}`]: theme
-  });
-  const value = valueFormatter(otherProps.value);
-  return (
-    <input
-      className={classes}
-      type={props.type}
-      {...otherProps}
-      value={value}
-    />
-  );
+export default class Input extends React.PureComponent {
+  static propTypes = {
+    className: PropTypes.string,
+    type: PropTypes.string,
+    theme: PropTypes.oneOf(["", "highlight", "gray"]),
+    valueFormatter: PropTypes.func,
+    onChange: PropTypes.func
+  };
+
+  static defaultProps = {
+    type: "text",
+    valueFormatter: v => v,
+    onChange() {}
+  };
+
+  onChange = e => {
+    e.target.value = this.props.valueFormatter(e.target.value);
+    this.props.onChange(e);
+  };
+
+  render() {
+    const { className, theme, valueFormatter, ...otherProps } = this.props;
+    const classes = cn("input", className, {
+      [`input--${theme}`]: theme
+    });
+    return (
+      <input
+        className={classes}
+        type={this.props.type}
+        {...otherProps}
+        onChange={this.onChange}
+      />
+    );
+  }
 }
-Input.propTypes = {
-  className: PropTypes.string,
-  type: PropTypes.string,
-  theme: PropTypes.oneOf(["", "highlight", "gray"]),
-  valueFormatter: PropTypes.func
-};
-Input.defaultProps = {
-  type: "text",
-  valueFormatter: v => v
-};
 
 export function FormInput(props) {
   const { className, ...otherProps } = props;
