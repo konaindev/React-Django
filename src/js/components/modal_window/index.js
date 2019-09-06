@@ -10,6 +10,7 @@ export default class ModalWindow extends Component {
     children: PropTypes.node.isRequired,
     open: PropTypes.bool.isRequired,
     className: PropTypes.string,
+    theme: PropTypes.oneOf(["", "small"]),
     onClose: PropTypes.func
   };
   static defaultProps = {
@@ -18,9 +19,13 @@ export default class ModalWindow extends Component {
   };
 
   render() {
-    const { className, open, onClose, ...props } = this.props;
+    const { className, theme, open, onClose, ...props } = this.props;
     const classNames = {
-      modal: cn("modal-window", className),
+      modal: cn(
+        "modal-window",
+        { [`modal-window--${theme}`]: theme },
+        className
+      ),
       overlay: "modal-overlay",
       closeButton: "modal-window__close"
     };

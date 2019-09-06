@@ -68,12 +68,24 @@ class InviteModal extends React.PureComponent {
     menuPortal: provided => ({ ...provided, zIndex: 1000, height: 0 })
   };
 
+  state = {
+    removeModalIsOpen: false
+  };
+
   loadUsers = (inputValue, callback) => {
     // TODO: Implement loadUsers
   };
 
   removeUser = () => {
     // TODO: Implement removeUser
+  };
+
+  openRemoveModal = () => {
+    this.setState({ removeModalIsOpen: true });
+  };
+
+  closeRemoveModal = () => {
+    this.setState({ removeModalIsOpen: false });
   };
 
   removeProperty = e => {
@@ -109,7 +121,7 @@ class InviteModal extends React.PureComponent {
   };
 
   renderRemoveButton = () => (
-    <div className="invite-modal__remove-btn" onClick={this.removeUser}>
+    <div className="invite-modal__remove-btn" onClick={this.openRemoveModal}>
       Remove
     </div>
   );
@@ -200,49 +212,83 @@ class InviteModal extends React.PureComponent {
   render() {
     const { isOpen } = this.props;
     return (
-      <ModalWindow
-        className="invite-modal"
-        open={isOpen}
-        onClose={this.closeModal}
-      >
-        <ModalWindow.Head className="invite-modal__header">
-          {this.renderTitle()}
-        </ModalWindow.Head>
-        <ModalWindow.Body>
-          <div className="invite-modal__container invite-modal__container--select">
-            <SelectSearch
-              className="invite-modal__select-users"
-              theme="transparent"
-              size="small"
-              placeholder="Type a name or an email address"
-              isMulti={true}
-              components={InviteModal.selectUsersComponents}
-              loadOptions={this.loadUsers}
-            />
-            <Select
-              className="invite-modal__select-role"
-              theme="default"
-              size="small"
-              components={InviteModal.selectRoleComponents}
-              options={InviteModal.roleOptions}
-              defaultValue={InviteModal.roleOptions[1]}
-            />
-          </div>
-          <div className="invite-modal__container invite-modal__container--users">
-            {this.renderPropertyOrMembers()}
-          </div>
-          <div className="invite-modal__container invite-modal__container--button">
-            <Button
-              className="invite-modal__button"
-              color="primary"
-              uppercase={true}
-              disabled={true}
-            >
-              invite
-            </Button>
-          </div>
-        </ModalWindow.Body>
-      </ModalWindow>
+      <React.Fragment>
+        <ModalWindow
+          className="invite-modal"
+          theme="small"
+          open={isOpen}
+          onClose={this.closeModal}
+        >
+          <ModalWindow.Head className="invite-modal__header">
+            {this.renderTitle()}
+          </ModalWindow.Head>
+          <ModalWindow.Body>
+            <div className="invite-modal__container invite-modal__container--select">
+              <SelectSearch
+                className="invite-modal__select-users"
+                theme="transparent"
+                size="small"
+                placeholder="Type a name or an email address"
+                isMulti={true}
+                components={InviteModal.selectUsersComponents}
+                loadOptions={this.loadUsers}
+              />
+              <Select
+                className="invite-modal__select-role"
+                theme="default"
+                size="small"
+                components={InviteModal.selectRoleComponents}
+                options={InviteModal.roleOptions}
+                defaultValue={InviteModal.roleOptions[1]}
+              />
+            </div>
+            <div className="invite-modal__container invite-modal__container--users">
+              {this.renderPropertyOrMembers()}
+            </div>
+            <div className="invite-modal__container invite-modal__container--button">
+              <Button
+                className="invite-modal__button"
+                color="primary"
+                uppercase={true}
+                disabled={true}
+              >
+                invite
+              </Button>
+            </div>
+          </ModalWindow.Body>
+        </ModalWindow>
+        <ModalWindow
+          className="invite-remove-window"
+          theme="small"
+          open={this.state.removeModalIsOpen}
+          onClose={this.closeRemoveModal}
+        >
+          <ModalWindow.Head>Are you sure?</ModalWindow.Head>
+          <ModalWindow.Body className="invite-remove-window__body">
+            Removing{" "}
+            <span className="invite-remove-window__name">Jamie Luis</span> will
+            revoke their access to this property.
+            <div className="invite-remove-window__controls">
+              <Button
+                className="invite-remove-window__button"
+                color="secondary"
+                uppercase={true}
+                onClick={this.closeRemoveModal}
+              >
+                Cancel
+              </Button>
+              <Button
+                className="invite-remove-window__button"
+                color="warning"
+                uppercase={true}
+                onClick={this.removeUser}
+              >
+                Remove
+              </Button>
+            </div>
+          </ModalWindow.Body>
+        </ModalWindow>
+      </React.Fragment>
     );
   }
 }

@@ -172,6 +172,14 @@ $multi-value-close-hover-color: $gray-4;
             visibility: visible;
         }
     }
+
+    .select__option--is-focused {
+        background-color: inherit;
+    }
+
+    .select__option:hover {
+        background-color: $select-option-focused-color;
+    }
 }
 
 .select__option-title {

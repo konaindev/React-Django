@@ -127,4 +127,17 @@
         cursor: not-allowed;
         pointer-events: none;
     }
+
+    &--warning {
+        color: $button-warning-color;
+        background-color: $button-warning-bg;
+
+        &:hover, &:focus {
+            background-color: lighten($button-warning-bg, 3%);
+        }
+
+        &:active {
+            background-color: darken($button-warning-bg, 2%);
+        }
+    }
 }

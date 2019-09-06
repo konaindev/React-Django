@@ -190,6 +190,9 @@ $button-disabled-light-text-color: $gray-6;
 
 $button-disabled-text-color: $gray-5;
 
+$button-warning-bg: $orange-6;
+$button-warning-color: $highlight-gray-3;
+
 $button-group-line-color: $gray-4;
 
 // MarketSizeMap component
@@ -308,11 +311,13 @@ $s6: 1.5rem; // 24px
 $s7: 1.75rem;
 $s8: 2rem;
 $s10: 2.5rem;
+$s11: 2.75rem; // 44px
 $s12: 3rem;
 $s14: 3.5rem;
 $s16: 4rem;
 $s20: 5rem;
 $s24: 6rem;
+$s28: 7rem; // 112px
 $s32: 8rem;
 $s48: 12rem;
 $s64: 16rem;

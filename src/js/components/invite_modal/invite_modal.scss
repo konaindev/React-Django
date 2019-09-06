@@ -25,6 +25,7 @@ $collapsible-icon-height: 0.625rem;
 $collapsible-icon-spacing: 5px 10px 0 0;
 $collapsible-close-size: $s2;
 $collapsible-members-spacing: 1.875rem 2.125rem;
+$remove-modal-width: 455px;
 
 .invite-modal {
     width: $window-width;
@@ -34,7 +35,6 @@ $collapsible-members-spacing: 1.875rem 2.125rem;
     .modal-window__close {
         top: 25px;
         right: 20px;
-        background-position: 50% -14px;
     }
 }
 
@@ -48,7 +48,7 @@ $collapsible-members-spacing: 1.875rem 2.125rem;
 
 .invite-modal__title {
     font-size: $text-base;
-    line-height: $line-height-relaxed;
+    line-height: $line-height-normal;
     color: $title-color-secondary;
 
     &--name {
@@ -180,4 +180,31 @@ $collapsible-members-spacing: 1.875rem 2.125rem;
 .invite-modal__collapsible-members {
     padding: $collapsible-members-spacing;
     background: $collapsible-background;
+}
+
+
+.invite-remove-window {
+    width: $remove-modal-width;
+}
+.invite-remove-window__body {
+    font-size: $text-sm;
+    line-height: 26px;
+}
+
+.invite-remove-window__name {
+    color: $highlight-gray-3;
+}
+
+.invite-remove-window__controls {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.invite-remove-window__button {
+    width: $s28;
+    height: $s11;
+    font-size: $text-xs;
+    letter-spacing: $letter-spacing-wider;
+    text-transform: uppercase;
 }
