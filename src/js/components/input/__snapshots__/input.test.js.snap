@@ -20,3 +20,11 @@ exports[`Input render text with gray theme 1`] = `
   type="text"
 />
 `;
+
+exports[`Input render with formatted phone number 1`] = `
+<input
+  className="input"
+  type="text"
+  value="(123) 456-7890"
+/>
+`;

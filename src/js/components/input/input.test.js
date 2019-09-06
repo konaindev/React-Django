@@ -1,6 +1,7 @@
 import React from "react";
 import renderer from "react-test-renderer";
 
+import { formatPhone } from "../../utils/formatters";
 import Input from "./index";
 
 describe("Input", () => {
@@ -16,6 +17,12 @@ describe("Input", () => {
   });
   it("render text with gray theme", () => {
     const tree = renderer.create(<Input type="text" theme="gray" />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+  it("render with formatted phone number", () => {
+    const tree = renderer
+      .create(<Input value="1234567890" valueFormatter={formatPhone} />)
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

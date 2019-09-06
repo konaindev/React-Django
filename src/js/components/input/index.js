@@ -6,46 +6,30 @@ import React from "react";
 import "./input.scss";
 
 export default function Input(props) {
-  const { className, theme, ...otherProps } = props;
+  const { className, theme, valueFormatter, ...otherProps } = props;
   const classes = cn("input", className, {
     [`input--${theme}`]: theme
   });
-  return <input className={classes} type={props.type} {...otherProps} />;
+  const value = valueFormatter(otherProps.value);
+  return (
+    <input
+      className={classes}
+      type={props.type}
+      {...otherProps}
+      value={value}
+    />
+  );
 }
 Input.propTypes = {
+  className: PropTypes.string,
   type: PropTypes.string,
   theme: PropTypes.oneOf(["", "highlight", "gray"]),
-  className: PropTypes.string
+  valueFormatter: PropTypes.func
 };
 Input.defaultProps = {
-  type: "text"
+  type: "text",
+  valueFormatter: v => v
 };
-
-function PhoneInput(props) {
-  const parsePattern = /[0-9]+/g;
-  let value = props.value;
-  if (props.value) {
-    const parts = props.value.match(parsePattern);
-    if (parts) {
-      const number = parts.join("");
-      const numberParts = [
-        number.slice(0, 3),
-        number.slice(3, 6),
-        number.slice(6, 10)
-      ].filter(v => !!v);
-      if (numberParts[0]) {
-        value = `(${numberParts[0]})`;
-      }
-      if (numberParts[1]) {
-        value += ` ${numberParts[1]}`;
-      }
-      if (numberParts[2]) {
-        value += `-${numberParts[2]}`;
-      }
-    }
-  }
-  return <Input {...props} value={value} />;
-}
 
 export function FormInput(props) {
   const { className, ...otherProps } = props;
@@ -63,5 +47,3 @@ FormInput.propTypes = {
   type: PropTypes.string.isRequired,
   className: PropTypes.string
 };
-
-Input.Phone = PhoneInput;

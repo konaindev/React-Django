@@ -1,9 +1,10 @@
 import { Formik } from "formik";
-import React, { Component } from "react";
+import React from "react";
 
 import { withState } from "@dump247/storybook-state";
 import { storiesOf } from "@storybook/react";
 
+import { formatPhone } from "../../utils/formatters";
 import { default as Input, FormInput } from "./index";
 
 storiesOf("Input", module)
@@ -14,11 +15,12 @@ storiesOf("Input", module)
     </Formik>
   ))
   .add(
-    "phone input",
+    "phone number formatter",
     withState({ value: "" })(({ store }) => (
-      <Input.Phone
+      <Input
         placeholder="(xxx) xxx-xxxx"
         value={store.state.value}
+        valueFormatter={formatPhone}
         onChange={e => {
           store.set({ value: e.target.value });
         }}
