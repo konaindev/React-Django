@@ -3,7 +3,14 @@
     width: 76px !important;
   }
   .property-row-text-column {
+    width: calc(100% - 220px) !important;
+    max-width: calc(100% - 220px) !important;
+  }
+  .property-row-text-column.no-adjacent-button {
     width: calc(100% - 76px) !important;
     max-width: calc(100% - 76px) !important;
+  }
+  .property-row-button-column {
+    width: 144px !important;
   }
 </mj-style>
