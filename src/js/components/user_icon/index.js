@@ -9,6 +9,7 @@ const UserIcon = ({
   color,
   account_name,
   profile_image_url,
+  style,
   ...otherProps
 }) => {
   const classes = cn("user-icon", className);
@@ -17,9 +18,9 @@ const UserIcon = ({
     .map(s => s[0])
     .join("");
   const imgStyle = { backgroundImage: `url(${profile_image_url})` };
-  const style = { backgroundColor: color };
+  const containerStyle = { backgroundColor: color, ...style };
   return (
-    <div className={classes} style={style} {...otherProps}>
+    <div className={classes} style={containerStyle} {...otherProps}>
       {initials}
       <div className="user-icon__avatar" style={imgStyle} />
     </div>

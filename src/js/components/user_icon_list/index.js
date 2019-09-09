@@ -77,7 +77,8 @@ export default class UserIconList extends React.PureComponent {
       >
         <UserIcon
           className="user-icon-list__icon"
-          {...user}
+          account_name={user.account_name}
+          profile_image_url={user.profile_image_url}
           color={getColor(i)}
           data-index={i}
           style={{ zIndex: this.state.zIndexes[i] }}
