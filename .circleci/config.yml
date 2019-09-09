@@ -116,6 +116,18 @@ jobs:
       - run:
           name: Maintenance Mode Off
           command: heroku maintenance:off --app remarkably-staging
+      # - run:
+      #     name: Install Frontend deps
+      #     command: yarn
+      # - run:
+      #     name: Build Frontend
+      #     command: yarn run build:prod
+      # - run:
+      #     name: Deploy artifact to S3
+      #     command: yarn run deploy-frontend-staging
+      # - run:
+      #     name: Invalidate CDN for staging Frontend
+      #     command: invalidate-cdn-staging
 
   deploy-production:
     docker:
