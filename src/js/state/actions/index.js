@@ -57,5 +57,10 @@ export const inviteModal = {
   },
   close: {
     type: "INVITE_MODAL_HIDE"
-  }
+  },
+  getUsers: (value, callback) => ({
+    type: "API_INVITE_MODAL_GET_USERS",
+    data: value,
+    callback
+  })
 };

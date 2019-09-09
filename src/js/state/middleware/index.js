@@ -133,3 +133,17 @@ export const fetchCompleteAccount = store => next => action => {
     next(action);
   }
 };
+
+export const fetchInviteModal = store => next => action => {
+  if (action.type === "API_INVITE_MODAL_GET_USERS") {
+    const url = `${process.env.BASE_URL}/users/`;
+    axiosPost(url, action.data)
+      .then(response => {
+        const users = response.data?.users || [];
+        action.callback(users);
+      })
+      .catch(e => console.log("-----> ERROR", e));
+  } else {
+    next(action);
+  }
+};

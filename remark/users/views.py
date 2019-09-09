@@ -103,3 +103,8 @@ class CompleteAccountView(LoginRequiredMixin, ReactView):
         else:
             response = JsonResponse(form.errors, status=500)
         return response
+
+class UsersView(LoginRequiredMixin, RemarkView):
+    def post(self, request):
+        # TODO: Implement this
+        return JsonResponse({"users": []})

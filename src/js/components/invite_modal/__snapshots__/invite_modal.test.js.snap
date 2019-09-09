@@ -253,16 +253,14 @@ Array [
                     <div
                       className="user-icon user-icon-list__icon"
                       data-index={0}
-                      email="test@remarkably.io"
                       onMouseEnter={[Function]}
                       onMouseLeave={[Function]}
-                      role="admin"
                       style={
                         Object {
+                          "backgroundColor": "#006EFF",
                           "zIndex": 4,
                         }
                       }
-                      user_id="1234556960"
                     >
                       RC
                       <div
@@ -488,42 +486,16 @@ Array [
                     <div
                       className="user-icon user-icon-list__icon"
                       data-index={0}
-                      email="client@remarkably.com"
                       onMouseEnter={[Function]}
                       onMouseLeave={[Function]}
-                      role="member"
                       style={
                         Object {
+                          "backgroundColor": "#006EFF",
                           "zIndex": 4,
                         }
                       }
-                      user_id="peep_00001"
                     >
-                      RC
-                      <div
-                        className="user-icon__avatar"
-                        style={
-                          Object {
-                            "backgroundImage": "url(/photo.jpg)",
-                          }
-                        }
-                      />
-                    </div>
-                    <div
-                      className="user-icon user-icon-list__icon"
-                      data-index={1}
-                      email="client@remarkably.com"
-                      onMouseEnter={[Function]}
-                      onMouseLeave={[Function]}
-                      role="member"
-                      style={
-                        Object {
-                          "zIndex": 3,
-                        }
-                      }
-                      user_id="peep_00002"
-                    >
-                      RC
+                      IK
                       <div
                         className="user-icon__avatar"
                         style={
@@ -535,24 +507,44 @@ Array [
                     </div>
                     <div
                       className="user-icon user-icon-list__icon"
-                      data-index={2}
-                      email="client@remarkably.com"
+                      data-index={1}
                       onMouseEnter={[Function]}
                       onMouseLeave={[Function]}
-                      role="admin"
                       style={
                         Object {
-                          "zIndex": 2,
+                          "backgroundColor": "#6B29BE",
+                          "zIndex": 3,
                         }
                       }
-                      user_id="peep_00003"
                     >
-                      RC
+                      PN
                       <div
                         className="user-icon__avatar"
                         style={
                           Object {
-                            "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            "backgroundImage": "url(/avatar.jpg)",
+                          }
+                        }
+                      />
+                    </div>
+                    <div
+                      className="user-icon user-icon-list__icon"
+                      data-index={2}
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
+                      style={
+                        Object {
+                          "backgroundColor": "#006EFF",
+                          "zIndex": 2,
+                        }
+                      }
+                    >
+                      DC
+                      <div
+                        className="user-icon__avatar"
+                        style={
+                          Object {
+                            "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
                           }
                         }
                       />
@@ -604,7 +596,7 @@ Array [
                 <div
                   className="user-row"
                   role="member"
-                  user_id="peep_00001"
+                  user_id="usr_dy2e51yla8v"
                 >
                   <div
                     className="user-icon user-row__avatar"
@@ -614,12 +606,12 @@ Array [
                       }
                     }
                   >
-                    RC
+                    IK
                     <div
                       className="user-icon__avatar"
                       style={
                         Object {
-                          "backgroundImage": "url(/photo.jpg)",
+                          "backgroundImage": "url()",
                         }
                       }
                     />
@@ -628,12 +620,12 @@ Array [
                     <div
                       className="user-row__name"
                     >
-                      Remarkably Client
+                      Issie Kaminski
                     </div>
                     <div
                       className="user-row__email"
                     >
-                      client@remarkably.com
+                      ikaminski0@adobe.com
                     </div>
                   </div>
                 </div>
@@ -731,7 +723,7 @@ Array [
                 <div
                   className="user-row"
                   role="member"
-                  user_id="peep_00002"
+                  user_id="usr_micxlj8pt2t"
                 >
                   <div
                     className="user-icon user-row__avatar"
@@ -741,12 +733,12 @@ Array [
                       }
                     }
                   >
-                    RC
+                    PN
                     <div
                       className="user-icon__avatar"
                       style={
                         Object {
-                          "backgroundImage": "url()",
+                          "backgroundImage": "url(/avatar.jpg)",
                         }
                       }
                     />
@@ -755,12 +747,12 @@ Array [
                     <div
                       className="user-row__name"
                     >
-                      Remarkably Client
+                      Phaedra Newberry
                     </div>
                     <div
                       className="user-row__email"
                     >
-                      client@remarkably.com
+                      pnewberry1@marketwatch.com
                     </div>
                   </div>
                 </div>
@@ -857,8 +849,8 @@ Array [
               >
                 <div
                   className="user-row"
-                  role="admin"
-                  user_id="peep_00003"
+                  role="member"
+                  user_id="usr_q5qqrpnu7vs"
                 >
                   <div
                     className="user-icon user-row__avatar"
@@ -868,12 +860,12 @@ Array [
                       }
                     }
                   >
-                    RC
+                    DC
                     <div
                       className="user-icon__avatar"
                       style={
                         Object {
-                          "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                          "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
                         }
                       }
                     />
@@ -882,12 +874,12 @@ Array [
                     <div
                       className="user-row__name"
                     >
-                      Remarkably Client
+                      Dougy Calafate
                     </div>
                     <div
                       className="user-row__email"
                     >
-                      client@remarkably.com
+                      dcalafate2@dailymotion.com
                     </div>
                   </div>
                 </div>
@@ -906,7 +898,7 @@ Array [
                       <div
                         className="select__single-value css-1q05wlw-singleValue"
                       >
-                        Admin
+                        Member
                       </div>
                       <input
                         className="css-62g3xt-dummyInput"
@@ -1010,7 +1002,7 @@ Array [
                     <div
                       className="invite-modal__users-count"
                     >
-                      12
+                      14
                        
                       Users
                     </div>
@@ -1025,23 +1017,21 @@ Array [
                     <div
                       className="user-icon user-icon-list__icon"
                       data-index={0}
-                      email="client@remarkably.com"
                       onMouseEnter={[Function]}
                       onMouseLeave={[Function]}
-                      role="member"
                       style={
                         Object {
+                          "backgroundColor": "#006EFF",
                           "zIndex": 4,
                         }
                       }
-                      user_id="peep_00002"
                     >
-                      RC
+                      PN
                       <div
                         className="user-icon__avatar"
                         style={
                           Object {
-                            "backgroundImage": "url()",
+                            "backgroundImage": "url(/avatar.jpg)",
                           }
                         }
                       />
@@ -1049,23 +1039,21 @@ Array [
                     <div
                       className="user-icon user-icon-list__icon"
                       data-index={1}
-                      email="client@remarkably.com"
                       onMouseEnter={[Function]}
                       onMouseLeave={[Function]}
-                      role="admin"
                       style={
                         Object {
+                          "backgroundColor": "#6B29BE",
                           "zIndex": 3,
                         }
                       }
-                      user_id="peep_00003"
                     >
-                      RC
+                      DC
                       <div
                         className="user-icon__avatar"
                         style={
                           Object {
-                            "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
                           }
                         }
                       />
@@ -1073,23 +1061,21 @@ Array [
                     <div
                       className="user-icon user-icon-list__icon"
                       data-index={2}
-                      email="client@remarkably.com"
                       onMouseEnter={[Function]}
                       onMouseLeave={[Function]}
-                      role="member"
                       style={
                         Object {
+                          "backgroundColor": "#006EFF",
                           "zIndex": 2,
                         }
                       }
-                      user_id="peep_00004"
                     >
-                      RC
+                      UA
                       <div
                         className="user-icon__avatar"
                         style={
                           Object {
-                            "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
                           }
                         }
                       />
@@ -1097,23 +1083,21 @@ Array [
                     <div
                       className="user-icon user-icon-list__icon"
                       data-index={3}
-                      email="client@remarkably.com"
                       onMouseEnter={[Function]}
                       onMouseLeave={[Function]}
-                      role="member"
                       style={
                         Object {
+                          "backgroundColor": "#6B29BE",
                           "zIndex": 1,
                         }
                       }
-                      user_id="peep_00005"
                     >
-                      RC
+                      SC
                       <div
                         className="user-icon__avatar"
                         style={
                           Object {
-                            "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
                           }
                         }
                       />
@@ -1121,23 +1105,21 @@ Array [
                     <div
                       className="user-icon user-icon-list__icon"
                       data-index={4}
-                      email="client@remarkably.com"
                       onMouseEnter={[Function]}
                       onMouseLeave={[Function]}
-                      role="member"
                       style={
                         Object {
+                          "backgroundColor": "#006EFF",
                           "zIndex": 0,
                         }
                       }
-                      user_id="peep_00006"
                     >
-                      RC
+                      PC
                       <div
                         className="user-icon__avatar"
                         style={
                           Object {
-                            "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                            "backgroundImage": "url(https://robohash.org/sintsintcorrupti.jpg?size=50x50&set=set1&bgset=bg1)",
                           }
                         }
                       />
@@ -1147,7 +1129,7 @@ Array [
                     >
                       <span>
                         +
-                        7
+                        9
                       </span>
                     </div>
                   </div>
@@ -1197,7 +1179,7 @@ Array [
                 <div
                   className="user-row"
                   role="member"
-                  user_id="peep_00002"
+                  user_id="usr_micxlj8pt2t"
                 >
                   <div
                     className="user-icon user-row__avatar"
@@ -1207,12 +1189,12 @@ Array [
                       }
                     }
                   >
-                    RC
+                    PN
                     <div
                       className="user-icon__avatar"
                       style={
                         Object {
-                          "backgroundImage": "url()",
+                          "backgroundImage": "url(/avatar.jpg)",
                         }
                       }
                     />
@@ -1221,12 +1203,12 @@ Array [
                     <div
                       className="user-row__name"
                     >
-                      Remarkably Client
+                      Phaedra Newberry
                     </div>
                     <div
                       className="user-row__email"
                     >
-                      client@remarkably.com
+                      pnewberry1@marketwatch.com
                     </div>
                   </div>
                 </div>
@@ -1323,8 +1305,8 @@ Array [
               >
                 <div
                   className="user-row"
-                  role="admin"
-                  user_id="peep_00003"
+                  role="member"
+                  user_id="usr_q5qqrpnu7vs"
                 >
                   <div
                     className="user-icon user-row__avatar"
@@ -1334,12 +1316,12 @@ Array [
                       }
                     }
                   >
-                    RC
+                    DC
                     <div
                       className="user-icon__avatar"
                       style={
                         Object {
-                          "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                          "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
                         }
                       }
                     />
@@ -1348,12 +1330,12 @@ Array [
                     <div
                       className="user-row__name"
                     >
-                      Remarkably Client
+                      Dougy Calafate
                     </div>
                     <div
                       className="user-row__email"
                     >
-                      client@remarkably.com
+                      dcalafate2@dailymotion.com
                     </div>
                   </div>
                 </div>
@@ -1372,7 +1354,7 @@ Array [
                       <div
                         className="select__single-value css-1q05wlw-singleValue"
                       >
-                        Admin
+                        Member
                       </div>
                       <input
                         className="css-62g3xt-dummyInput"
@@ -1450,8 +1432,8 @@ Array [
               >
                 <div
                   className="user-row"
-                  role="member"
-                  user_id="peep_00004"
+                  role="admin"
+                  user_id="usr_s91qjocgq65"
                 >
                   <div
                     className="user-icon user-row__avatar"
@@ -1461,12 +1443,12 @@ Array [
                       }
                     }
                   >
-                    RC
+                    UA
                     <div
                       className="user-icon__avatar"
                       style={
                         Object {
-                          "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                          "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
                         }
                       }
                     />
@@ -1475,12 +1457,12 @@ Array [
                     <div
                       className="user-row__name"
                     >
-                      Remarkably Client
+                      Ulrick Attenbarrow
                     </div>
                     <div
                       className="user-row__email"
                     >
-                      client@remarkably.com
+                      uattenbarrow3@buzzfeed.com
                     </div>
                   </div>
                 </div>
@@ -1499,7 +1481,7 @@ Array [
                       <div
                         className="select__single-value css-1q05wlw-singleValue"
                       >
-                        Member
+                        Admin
                       </div>
                       <input
                         className="css-62g3xt-dummyInput"
@@ -1578,7 +1560,7 @@ Array [
                 <div
                   className="user-row"
                   role="member"
-                  user_id="peep_00005"
+                  user_id="usr_8mkvian6j2l"
                 >
                   <div
                     className="user-icon user-row__avatar"
@@ -1588,12 +1570,12 @@ Array [
                       }
                     }
                   >
-                    RC
+                    SC
                     <div
                       className="user-icon__avatar"
                       style={
                         Object {
-                          "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                          "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
                         }
                       }
                     />
@@ -1602,12 +1584,12 @@ Array [
                     <div
                       className="user-row__name"
                     >
-                      Remarkably Client
+                      Steffen Crumb
                     </div>
                     <div
                       className="user-row__email"
                     >
-                      client@remarkably.com
+                      scrumb4@weibo.com
                     </div>
                   </div>
                 </div>
@@ -1705,7 +1687,7 @@ Array [
                 <div
                   className="user-row"
                   role="member"
-                  user_id="peep_00006"
+                  user_id="usr_77yf9f6nm2u"
                 >
                   <div
                     className="user-icon user-row__avatar"
@@ -1715,12 +1697,12 @@ Array [
                       }
                     }
                   >
-                    RC
+                    PC
                     <div
                       className="user-icon__avatar"
                       style={
                         Object {
-                          "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                          "backgroundImage": "url(https://robohash.org/sintsintcorrupti.jpg?size=50x50&set=set1&bgset=bg1)",
                         }
                       }
                     />
@@ -1729,12 +1711,12 @@ Array [
                     <div
                       className="user-row__name"
                     >
-                      Remarkably Client
+                      Phelia Cescoti
                     </div>
                     <div
                       className="user-row__email"
                     >
-                      client@remarkably.com
+                      pcescoti5@ucoz.ru
                     </div>
                   </div>
                 </div>
@@ -1832,7 +1814,7 @@ Array [
                 <div
                   className="user-row"
                   role="member"
-                  user_id="peep_00007"
+                  user_id="usr_3c37kessdde"
                 >
                   <div
                     className="user-icon user-row__avatar"
@@ -1842,12 +1824,12 @@ Array [
                       }
                     }
                   >
-                    RC
+                    LC
                     <div
                       className="user-icon__avatar"
                       style={
                         Object {
-                          "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                          "backgroundImage": "url(https://robohash.org/numquameiusrepellendus.jpg?size=50x50&set=set1&bgset=bg1)",
                         }
                       }
                     />
@@ -1856,12 +1838,12 @@ Array [
                     <div
                       className="user-row__name"
                     >
-                      Remarkably Client
+                      Lulita Chezier
                     </div>
                     <div
                       className="user-row__email"
                     >
-                      client@remarkably.com
+                      lchezier6@adobe.com
                     </div>
                   </div>
                 </div>
@@ -1959,7 +1941,7 @@ Array [
                 <div
                   className="user-row"
                   role="member"
-                  user_id="peep_00008"
+                  user_id="usr_3uiqz5atvz8"
                 >
                   <div
                     className="user-icon user-row__avatar"
@@ -1969,12 +1951,12 @@ Array [
                       }
                     }
                   >
-                    RC
+                    MD
                     <div
                       className="user-icon__avatar"
                       style={
                         Object {
-                          "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                          "backgroundImage": "url(https://robohash.org/ducimuslaborumut.jpg?size=50x50&set=set1&bgset=bg1)",
                         }
                       }
                     />
@@ -1983,12 +1965,12 @@ Array [
                     <div
                       className="user-row__name"
                     >
-                      Remarkably Client
+                      Merci Dulanty
                     </div>
                     <div
                       className="user-row__email"
                     >
-                      client@remarkably.com
+                      mdulanty7@ebay.co.uk
                     </div>
                   </div>
                 </div>
@@ -2086,7 +2068,7 @@ Array [
                 <div
                   className="user-row"
                   role="member"
-                  user_id="peep_00009"
+                  user_id="usr_8ljm9khn7m2"
                 >
                   <div
                     className="user-icon user-row__avatar"
@@ -2096,12 +2078,12 @@ Array [
                       }
                     }
                   >
-                    RC
+                    AK
                     <div
                       className="user-icon__avatar"
                       style={
                         Object {
-                          "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                          "backgroundImage": "url(https://robohash.org/iureutdoloribus.jpg?size=50x50&set=set1&bgset=bg1)",
                         }
                       }
                     />
@@ -2110,12 +2092,12 @@ Array [
                     <div
                       className="user-row__name"
                     >
-                      Remarkably Client
+                      Amandi Karpychev
                     </div>
                     <div
                       className="user-row__email"
                     >
-                      client@remarkably.com
+                      akarpychev8@etsy.com
                     </div>
                   </div>
                 </div>
@@ -2213,7 +2195,7 @@ Array [
                 <div
                   className="user-row"
                   role="member"
-                  user_id="peep_00010"
+                  user_id="usr_j2ghyn5kw84"
                 >
                   <div
                     className="user-icon user-row__avatar"
@@ -2223,12 +2205,12 @@ Array [
                       }
                     }
                   >
-                    RC
+                    MT
                     <div
                       className="user-icon__avatar"
                       style={
                         Object {
-                          "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                          "backgroundImage": "url(https://robohash.org/veritatistemporeeum.jpg?size=50x50&set=set1&bgset=bg1)",
                         }
                       }
                     />
@@ -2237,12 +2219,12 @@ Array [
                     <div
                       className="user-row__name"
                     >
-                      Remarkably Client
+                      Melesa Treves
                     </div>
                     <div
                       className="user-row__email"
                     >
-                      client@remarkably.com
+                      mtreves9@woothemes.com
                     </div>
                   </div>
                 </div>
@@ -2340,7 +2322,7 @@ Array [
                 <div
                   className="user-row"
                   role="member"
-                  user_id="peep_00011"
+                  user_id="usr_govr1b6elp8"
                 >
                   <div
                     className="user-icon user-row__avatar"
@@ -2350,12 +2332,12 @@ Array [
                       }
                     }
                   >
-                    RC
+                    MR
                     <div
                       className="user-icon__avatar"
                       style={
                         Object {
-                          "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                          "backgroundImage": "url(https://robohash.org/numquambeataeinventore.jpg?size=50x50&set=set1&bgset=bg1)",
                         }
                       }
                     />
@@ -2364,12 +2346,12 @@ Array [
                     <div
                       className="user-row__name"
                     >
-                      Remarkably Client
+                      Myranda Ropars
                     </div>
                     <div
                       className="user-row__email"
                     >
-                      client@remarkably.com
+                      mroparsa@yolasite.com
                     </div>
                   </div>
                 </div>
@@ -2467,7 +2449,7 @@ Array [
                 <div
                   className="user-row"
                   role="member"
-                  user_id="peep_00012"
+                  user_id="usr_ifxf2qxo2p9"
                 >
                   <div
                     className="user-icon user-row__avatar"
@@ -2477,12 +2459,12 @@ Array [
                       }
                     }
                   >
-                    RC
+                    KA
                     <div
                       className="user-icon__avatar"
                       style={
                         Object {
-                          "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                          "backgroundImage": "url(https://robohash.org/quaeipsumconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
                         }
                       }
                     />
@@ -2491,12 +2473,12 @@ Array [
                     <div
                       className="user-row__name"
                     >
-                      Remarkably Client
+                      Karly Allery
                     </div>
                     <div
                       className="user-row__email"
                     >
-                      client@remarkably.com
+                      kalleryb@howstuffworks.com
                     </div>
                   </div>
                 </div>
@@ -2594,7 +2576,7 @@ Array [
                 <div
                   className="user-row"
                   role="member"
-                  user_id="peep_00013"
+                  user_id="usr_jlvusb7wey7"
                 >
                   <div
                     className="user-icon user-row__avatar"
@@ -2604,12 +2586,12 @@ Array [
                       }
                     }
                   >
-                    RC
+                    BS
                     <div
                       className="user-icon__avatar"
                       style={
                         Object {
-                          "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                          "backgroundImage": "url(https://robohash.org/harumomnismolestias.jpg?size=50x50&set=set1&bgset=bg1)",
                         }
                       }
                     />
@@ -2618,12 +2600,12 @@ Array [
                     <div
                       className="user-row__name"
                     >
-                      Remarkably Client
+                      Burch Sill
                     </div>
                     <div
                       className="user-row__email"
                     >
-                      client@remarkably.com
+                      bsillc@live.com
                     </div>
                   </div>
                 </div>
@@ -2648,6 +2630,260 @@ Array [
                         className="css-62g3xt-dummyInput"
                         disabled={false}
                         id="react-select-22-input"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onFocus={[Function]}
+                        readOnly={true}
+                        tabIndex="0"
+                        value=""
+                      />
+                    </div>
+                    <div
+                      className="select__indicators css-1wy0on6"
+                    >
+                      <span
+                        className="select__indicator-separator css-1okebmr-indicatorSeparator"
+                      />
+                      <div
+                        aria-hidden="true"
+                        className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                      >
+                        <svg
+                          aria-hidden="true"
+                          className="select__dropdown-arrow select__dropdown-arrow--down"
+                          color="inherit"
+                          focusable="false"
+                          height="1em"
+                          role="presentation"
+                          viewBox="0 0 10 5"
+                          width="1em"
+                        >
+                          <path
+                            d="M1 1.16134L4.92334 4.5"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                          />
+                          <path
+                            d="M8.82812 1.16134L5 4.5"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                          />
+                        </svg>
+                        <svg
+                          aria-hidden="true"
+                          className="select__dropdown-arrow select__dropdown-arrow--up"
+                          color="inherit"
+                          focusable="false"
+                          height="1em"
+                          role="presentation"
+                          viewBox="0 0 10 5"
+                          width="1em"
+                        >
+                          <path
+                            d="M1 3.83866L4.92334 0.5"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                          />
+                          <path
+                            d="M8.82812 3.83866L5 0.5"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="invite-modal__member"
+              >
+                <div
+                  className="user-row"
+                  role="member"
+                  user_id="usr_ugosupjqyap"
+                >
+                  <div
+                    className="user-icon user-row__avatar"
+                    style={
+                      Object {
+                        "backgroundColor": undefined,
+                      }
+                    }
+                  >
+                    JM
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/cumqueconsecteturfugiat.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div>
+                    <div
+                      className="user-row__name"
+                    >
+                      Joscelin Mont
+                    </div>
+                    <div
+                      className="user-row__email"
+                    >
+                      jmontd@netlog.com
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="select invite-modal__select-role select--small select--transparent css-2b097c-container"
+                  onKeyDown={[Function]}
+                >
+                  <div
+                    className="select__control css-yk16xz-control"
+                    onMouseDown={[Function]}
+                    onTouchEnd={[Function]}
+                  >
+                    <div
+                      className="select__value-container select__value-container--has-value css-1hwfws3"
+                    >
+                      <div
+                        className="select__single-value css-1q05wlw-singleValue"
+                      >
+                        Member
+                      </div>
+                      <input
+                        className="css-62g3xt-dummyInput"
+                        disabled={false}
+                        id="react-select-23-input"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onFocus={[Function]}
+                        readOnly={true}
+                        tabIndex="0"
+                        value=""
+                      />
+                    </div>
+                    <div
+                      className="select__indicators css-1wy0on6"
+                    >
+                      <span
+                        className="select__indicator-separator css-1okebmr-indicatorSeparator"
+                      />
+                      <div
+                        aria-hidden="true"
+                        className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                      >
+                        <svg
+                          aria-hidden="true"
+                          className="select__dropdown-arrow select__dropdown-arrow--down"
+                          color="inherit"
+                          focusable="false"
+                          height="1em"
+                          role="presentation"
+                          viewBox="0 0 10 5"
+                          width="1em"
+                        >
+                          <path
+                            d="M1 1.16134L4.92334 4.5"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                          />
+                          <path
+                            d="M8.82812 1.16134L5 4.5"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                          />
+                        </svg>
+                        <svg
+                          aria-hidden="true"
+                          className="select__dropdown-arrow select__dropdown-arrow--up"
+                          color="inherit"
+                          focusable="false"
+                          height="1em"
+                          role="presentation"
+                          viewBox="0 0 10 5"
+                          width="1em"
+                        >
+                          <path
+                            d="M1 3.83866L4.92334 0.5"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                          />
+                          <path
+                            d="M8.82812 3.83866L5 0.5"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                          />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="invite-modal__member"
+              >
+                <div
+                  className="user-row"
+                  role="member"
+                  user_id="usr_pgowrtlk8zk"
+                >
+                  <div
+                    className="user-icon user-row__avatar"
+                    style={
+                      Object {
+                        "backgroundColor": undefined,
+                      }
+                    }
+                  >
+                    KC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/quiadoloreamet.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div>
+                    <div
+                      className="user-row__name"
+                    >
+                      Karita Case
+                    </div>
+                    <div
+                      className="user-row__email"
+                    >
+                      kcasee@washington.edu
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="select invite-modal__select-role select--small select--transparent css-2b097c-container"
+                  onKeyDown={[Function]}
+                >
+                  <div
+                    className="select__control css-yk16xz-control"
+                    onMouseDown={[Function]}
+                    onTouchEnd={[Function]}
+                  >
+                    <div
+                      className="select__value-container select__value-container--has-value css-1hwfws3"
+                    >
+                      <div
+                        className="select__single-value css-1q05wlw-singleValue"
+                      >
+                        Member
+                      </div>
+                      <input
+                        className="css-62g3xt-dummyInput"
+                        disabled={false}
+                        id="react-select-24-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}

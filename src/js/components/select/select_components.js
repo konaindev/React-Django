@@ -3,7 +3,7 @@ import { components } from "react-select";
 
 import Button from "../button";
 import UserRow from "../user_row";
-import { IconDown, IconUp, TickSmall, Close } from "../../icons";
+import { AddUser, IconDown, IconUp, TickSmall, Close } from "../../icons";
 
 export function DropdownIndicator(props) {
   return (
@@ -82,11 +82,25 @@ export const MultiValueComponents = {
   MultiValueRemove
 };
 
-export const OptionUsers = props => (
-  <components.Option {...props}>
-    <UserRow {...props.data} />
-  </components.Option>
-);
+export const OptionUsers = props => {
+  if (props.data.__isNew__) {
+    return (
+      <components.Option {...props}>
+        <div className="select-add-user">
+          <div className="select-add-user__avatar">
+            <AddUser className="select-add-user__icon" />
+          </div>
+          <div className="select-add-user__title">Invite new user</div>
+        </div>
+      </components.Option>
+    );
+  }
+  return (
+    <components.Option {...props}>
+      <UserRow {...props.data} />
+    </components.Option>
+  );
+};
 
 export const menuListConstructor = component => props => (
   <components.MenuList {...props}>

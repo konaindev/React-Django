@@ -63,38 +63,14 @@ exports[`PropertyCard renders at-risk 1`] = `
               data-index={0}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
-              role="member"
               style={
                 Object {
+                  "backgroundColor": "#006EFF",
                   "zIndex": 4,
                 }
               }
-              user_id="peep_00001"
             >
-              RC
-              <div
-                className="user-icon__avatar"
-                style={
-                  Object {
-                    "backgroundImage": "url(/photo.jpg)",
-                  }
-                }
-              />
-            </div>
-            <div
-              className="user-icon user-icon-list__icon"
-              data-index={1}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-              role="member"
-              style={
-                Object {
-                  "zIndex": 3,
-                }
-              }
-              user_id="peep_00002"
-            >
-              RC
+              IK
               <div
                 className="user-icon__avatar"
                 style={
@@ -106,23 +82,44 @@ exports[`PropertyCard renders at-risk 1`] = `
             </div>
             <div
               className="user-icon user-icon-list__icon"
-              data-index={2}
+              data-index={1}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
-              role="admin"
               style={
                 Object {
-                  "zIndex": 2,
+                  "backgroundColor": "#6B29BE",
+                  "zIndex": 3,
                 }
               }
-              user_id="peep_00003"
             >
-              RC
+              PN
               <div
                 className="user-icon__avatar"
                 style={
                   Object {
-                    "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                    "backgroundImage": "url(/avatar.jpg)",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={2}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#006EFF",
+                  "zIndex": 2,
+                }
+              }
+            >
+              DC
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
                   }
                 }
               />
@@ -132,20 +129,19 @@ exports[`PropertyCard renders at-risk 1`] = `
               data-index={3}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
-              role="member"
               style={
                 Object {
+                  "backgroundColor": "#6B29BE",
                   "zIndex": 1,
                 }
               }
-              user_id="peep_00004"
             >
-              RC
+              UA
               <div
                 className="user-icon__avatar"
                 style={
                   Object {
-                    "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                    "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
                   }
                 }
               />
@@ -155,20 +151,19 @@ exports[`PropertyCard renders at-risk 1`] = `
               data-index={4}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
-              role="member"
               style={
                 Object {
+                  "backgroundColor": "#006EFF",
                   "zIndex": 0,
                 }
               }
-              user_id="peep_00005"
             >
-              RC
+              SC
               <div
                 className="user-icon__avatar"
                 style={
                   Object {
-                    "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                    "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
                   }
                 }
               />
@@ -178,7 +173,7 @@ exports[`PropertyCard renders at-risk 1`] = `
             >
               <span>
                 +
-                8
+                10
               </span>
             </div>
           </div>
@@ -271,38 +266,14 @@ exports[`PropertyCard renders off-track 1`] = `
               data-index={0}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
-              role="member"
               style={
                 Object {
+                  "backgroundColor": "#006EFF",
                   "zIndex": 4,
                 }
               }
-              user_id="peep_00001"
             >
-              RC
-              <div
-                className="user-icon__avatar"
-                style={
-                  Object {
-                    "backgroundImage": "url(/photo.jpg)",
-                  }
-                }
-              />
-            </div>
-            <div
-              className="user-icon user-icon-list__icon"
-              data-index={1}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-              role="member"
-              style={
-                Object {
-                  "zIndex": 3,
-                }
-              }
-              user_id="peep_00002"
-            >
-              RC
+              IK
               <div
                 className="user-icon__avatar"
                 style={
@@ -314,23 +285,44 @@ exports[`PropertyCard renders off-track 1`] = `
             </div>
             <div
               className="user-icon user-icon-list__icon"
-              data-index={2}
+              data-index={1}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
-              role="admin"
               style={
                 Object {
-                  "zIndex": 2,
+                  "backgroundColor": "#6B29BE",
+                  "zIndex": 3,
                 }
               }
-              user_id="peep_00003"
             >
-              RC
+              PN
               <div
                 className="user-icon__avatar"
                 style={
                   Object {
-                    "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                    "backgroundImage": "url(/avatar.jpg)",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={2}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#006EFF",
+                  "zIndex": 2,
+                }
+              }
+            >
+              DC
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
                   }
                 }
               />
@@ -340,20 +332,19 @@ exports[`PropertyCard renders off-track 1`] = `
               data-index={3}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
-              role="member"
               style={
                 Object {
+                  "backgroundColor": "#6B29BE",
                   "zIndex": 1,
                 }
               }
-              user_id="peep_00004"
             >
-              RC
+              UA
               <div
                 className="user-icon__avatar"
                 style={
                   Object {
-                    "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                    "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
                   }
                 }
               />
@@ -363,20 +354,19 @@ exports[`PropertyCard renders off-track 1`] = `
               data-index={4}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
-              role="member"
               style={
                 Object {
+                  "backgroundColor": "#006EFF",
                   "zIndex": 0,
                 }
               }
-              user_id="peep_00005"
             >
-              RC
+              SC
               <div
                 className="user-icon__avatar"
                 style={
                   Object {
-                    "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                    "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
                   }
                 }
               />
@@ -386,7 +376,7 @@ exports[`PropertyCard renders off-track 1`] = `
             >
               <span>
                 +
-                8
+                10
               </span>
             </div>
           </div>
@@ -479,38 +469,14 @@ exports[`PropertyCard renders on-track 1`] = `
               data-index={0}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
-              role="member"
               style={
                 Object {
+                  "backgroundColor": "#006EFF",
                   "zIndex": 4,
                 }
               }
-              user_id="peep_00001"
             >
-              RC
-              <div
-                className="user-icon__avatar"
-                style={
-                  Object {
-                    "backgroundImage": "url(/photo.jpg)",
-                  }
-                }
-              />
-            </div>
-            <div
-              className="user-icon user-icon-list__icon"
-              data-index={1}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-              role="member"
-              style={
-                Object {
-                  "zIndex": 3,
-                }
-              }
-              user_id="peep_00002"
-            >
-              RC
+              IK
               <div
                 className="user-icon__avatar"
                 style={
@@ -522,23 +488,44 @@ exports[`PropertyCard renders on-track 1`] = `
             </div>
             <div
               className="user-icon user-icon-list__icon"
-              data-index={2}
+              data-index={1}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
-              role="admin"
               style={
                 Object {
-                  "zIndex": 2,
+                  "backgroundColor": "#6B29BE",
+                  "zIndex": 3,
                 }
               }
-              user_id="peep_00003"
             >
-              RC
+              PN
               <div
                 className="user-icon__avatar"
                 style={
                   Object {
-                    "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                    "backgroundImage": "url(/avatar.jpg)",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={2}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#006EFF",
+                  "zIndex": 2,
+                }
+              }
+            >
+              DC
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
                   }
                 }
               />
@@ -548,20 +535,19 @@ exports[`PropertyCard renders on-track 1`] = `
               data-index={3}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
-              role="member"
               style={
                 Object {
+                  "backgroundColor": "#6B29BE",
                   "zIndex": 1,
                 }
               }
-              user_id="peep_00004"
             >
-              RC
+              UA
               <div
                 className="user-icon__avatar"
                 style={
                   Object {
-                    "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                    "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
                   }
                 }
               />
@@ -571,20 +557,19 @@ exports[`PropertyCard renders on-track 1`] = `
               data-index={4}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
-              role="member"
               style={
                 Object {
+                  "backgroundColor": "#006EFF",
                   "zIndex": 0,
                 }
               }
-              user_id="peep_00005"
             >
-              RC
+              SC
               <div
                 className="user-icon__avatar"
                 style={
                   Object {
-                    "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                    "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
                   }
                 }
               />
@@ -594,7 +579,7 @@ exports[`PropertyCard renders on-track 1`] = `
             >
               <span>
                 +
-                8
+                10
               </span>
             </div>
           </div>
@@ -687,38 +672,14 @@ exports[`PropertyCard renders selected 1`] = `
               data-index={0}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
-              role="member"
               style={
                 Object {
+                  "backgroundColor": "#006EFF",
                   "zIndex": 4,
                 }
               }
-              user_id="peep_00001"
             >
-              RC
-              <div
-                className="user-icon__avatar"
-                style={
-                  Object {
-                    "backgroundImage": "url(/photo.jpg)",
-                  }
-                }
-              />
-            </div>
-            <div
-              className="user-icon user-icon-list__icon"
-              data-index={1}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-              role="member"
-              style={
-                Object {
-                  "zIndex": 3,
-                }
-              }
-              user_id="peep_00002"
-            >
-              RC
+              IK
               <div
                 className="user-icon__avatar"
                 style={
@@ -730,23 +691,44 @@ exports[`PropertyCard renders selected 1`] = `
             </div>
             <div
               className="user-icon user-icon-list__icon"
-              data-index={2}
+              data-index={1}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
-              role="admin"
               style={
                 Object {
-                  "zIndex": 2,
+                  "backgroundColor": "#6B29BE",
+                  "zIndex": 3,
                 }
               }
-              user_id="peep_00003"
             >
-              RC
+              PN
               <div
                 className="user-icon__avatar"
                 style={
                   Object {
-                    "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                    "backgroundImage": "url(/avatar.jpg)",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={2}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#006EFF",
+                  "zIndex": 2,
+                }
+              }
+            >
+              DC
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
                   }
                 }
               />
@@ -756,20 +738,19 @@ exports[`PropertyCard renders selected 1`] = `
               data-index={3}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
-              role="member"
               style={
                 Object {
+                  "backgroundColor": "#6B29BE",
                   "zIndex": 1,
                 }
               }
-              user_id="peep_00004"
             >
-              RC
+              UA
               <div
                 className="user-icon__avatar"
                 style={
                   Object {
-                    "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                    "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
                   }
                 }
               />
@@ -779,20 +760,19 @@ exports[`PropertyCard renders selected 1`] = `
               data-index={4}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
-              role="member"
               style={
                 Object {
+                  "backgroundColor": "#006EFF",
                   "zIndex": 0,
                 }
               }
-              user_id="peep_00005"
             >
-              RC
+              SC
               <div
                 className="user-icon__avatar"
                 style={
                   Object {
-                    "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+                    "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
                   }
                 }
               />
@@ -802,7 +782,7 @@ exports[`PropertyCard renders selected 1`] = `
             >
               <span>
                 +
-                8
+                10
               </span>
             </div>
           </div>

@@ -15,6 +15,7 @@ import {
 import UserRow from "../user_row";
 import UserIconList from "../user_icon_list";
 import { Close } from "../../icons";
+import { isValidEmail } from "../../utils/validators";
 import { inviteModal, general } from "../../state/actions";
 
 import SelectRole from "./select";
@@ -65,8 +66,21 @@ class InviteModal extends React.PureComponent {
     removeModalIsOpen: false
   };
 
+  userToOptions = callback => users =>
+    callback(
+      users.map(u => ({
+        ...u,
+        value: u.user_id
+      }))
+    );
+
   loadUsers = (inputValue, callback) => {
-    // TODO: Implement loadUsers
+    clearTimeout(this.loadUsersTimeOut);
+    this.loadUsersTimeOut = setTimeout(() => {
+      this.props.dispatch(
+        inviteModal.getUsers(inputValue, this.userToOptions(callback))
+      );
+    }, 300);
   };
 
   removeUser = () => {
@@ -93,6 +107,10 @@ class InviteModal extends React.PureComponent {
   closeModal = () => {
     this.props.dispatch(inviteModal.close);
   };
+
+  formatOptionLabel = data => data.account_name || data.value;
+
+  noOptionsMessage = () => "User not found";
 
   renderTitle = () => {
     let propertyName;
@@ -204,9 +222,14 @@ class InviteModal extends React.PureComponent {
                 theme="transparent"
                 size="small"
                 placeholder="Type a name or an email address"
+                noOptionsMessage={this.noOptionsMessage}
                 isMulti={true}
                 components={InviteModal.selectUsersComponents}
                 loadOptions={this.loadUsers}
+                isCreatable={true}
+                isValidNewOption={isValidEmail}
+                formatOptionLabel={this.formatOptionLabel}
+                defaultOptions={[]}
               />
               <Select
                 className="invite-modal__select-role"
@@ -271,7 +294,7 @@ class InviteModal extends React.PureComponent {
 const mapState = state => {
   return {
     ...state.inviteModal,
-    properties: state.general.selectedProperties || []
+    properties: state.general?.selectedProperties || []
   };
 };
 
