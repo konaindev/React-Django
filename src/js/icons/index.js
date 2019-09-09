@@ -21,3 +21,4 @@ export { default as IconDown } from "./icon_down";
 export { default as Error } from "./error";
 export { default as Ok } from "./ok";
 export { default as Upload } from "./upload";
+export { default as AddUser } from "./add_user";
