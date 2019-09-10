@@ -152,6 +152,14 @@ export const fetchInviteModal = store => next => action => {
         next({ type: "GENERAL_REMOVE_MEMBER_COMPLETE", property });
       })
       .catch(e => console.log("-----> ERROR", e));
+  } else if (action.type === "API_INVITE_MODAL_ADD_MEMBER") {
+    const url = `${process.env.BASE_URL}/projects/add-members/`;
+    axiosPost(url, action.data)
+      .then(response => {
+        const properties = response.data.projects;
+        next({ type: "GENERAL_INVITE_MEMBER_COMPLETE", properties });
+      })
+      .catch(e => console.log("-----> ERROR", e));
   } else {
     next(action);
   }

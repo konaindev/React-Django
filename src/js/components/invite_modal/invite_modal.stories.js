@@ -33,6 +33,15 @@ export const apiMock = story => {
     };
     return [200, { project: newProject }];
   });
+  mock
+    .onPost(`${process.env.BASE_URL}/projects/add-members/`)
+    .reply(request => {
+      const { projects, members } = JSON.parse(request.data);
+      projects.forEach(p => {
+        p.members = [...p.members, ...members];
+      });
+      return [200, { projects }];
+    });
   return story();
 };
 

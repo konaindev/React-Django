@@ -66,6 +66,14 @@ class InviteModal extends React.PureComponent {
     IndicatorsContainer: () => null
   };
 
+  state = {
+    selectedMembers: []
+  };
+
+  get inviteIsDisabled() {
+    return !this.state.selectedMembers.length;
+  }
+
   userToOptions = callback => users =>
     callback(
       users.map(u => ({
@@ -107,6 +115,18 @@ class InviteModal extends React.PureComponent {
 
   closeModal = () => {
     this.props.dispatch(inviteModal.close);
+  };
+
+  selectMember = members => {
+    this.setState({
+      selectedMembers: members
+    });
+  };
+
+  inviteMembers = () => {
+    this.props.dispatch(
+      inviteModal.addMembers(this.props.properties, this.state.selectedMembers)
+    );
   };
 
   formatOptionLabel = data => data.account_name || data.value;
@@ -230,6 +250,7 @@ class InviteModal extends React.PureComponent {
                 isValidNewOption={isValidEmail}
                 formatOptionLabel={this.formatOptionLabel}
                 defaultOptions={[]}
+                onChange={this.selectMember}
               />
               <Select
                 className="invite-modal__select-role"
@@ -248,7 +269,8 @@ class InviteModal extends React.PureComponent {
                 className="invite-modal__button"
                 color="primary"
                 uppercase={true}
-                disabled={true}
+                disabled={this.inviteIsDisabled}
+                onClick={this.inviteMembers}
               >
                 invite
               </Button>

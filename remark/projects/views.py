@@ -291,6 +291,12 @@ class MembersView(LoginRequiredMixin, APIView):
         return JsonResponse({"members": []})
 
 
+class AddMembersView(LoginRequiredMixin, APIView):
+    def post(self, request):
+        # TODO: Implement this
+        return JsonResponse({"projects": []})
+
+
 class ProjectRemoveMemberIView(LoginRequiredMixin, APIView):
     def post(self, request, project_id):
         # TODO: Implement this

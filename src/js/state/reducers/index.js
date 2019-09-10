@@ -4,7 +4,7 @@ const initState = {
   tutorialView: {}
 };
 
-function replace(target, data, key) {
+function replaceObjectInArray(target, data, key) {
   const index = target.findIndex(t => t[key] === data[key]);
   if (index === -1) {
     return target;
@@ -25,12 +25,12 @@ const dashboard = (state = {}, action) => {
       break;
     }
     case "GENERAL_REMOVE_MEMBER_COMPLETE": {
-      const properties = replace(
+      const properties = replaceObjectInArray(
         [...state.properties],
         action.property,
         "property_id"
       );
-      const selectedProperties = replace(
+      const selectedProperties = replaceObjectInArray(
         [...state.selectedProperties],
         action.property,
         "property_id"
@@ -42,7 +42,24 @@ const dashboard = (state = {}, action) => {
       };
       break;
     }
-
+    case "GENERAL_INVITE_MEMBER_COMPLETE": {
+      const propertiesObj = {};
+      state.properties.forEach(p => {
+        propertiesObj[p.property_id] = p;
+      });
+      action.properties.forEach(p => {
+        propertiesObj[p.property_id] = p;
+      });
+      const properties = state.properties.map(
+        p => propertiesObj[p.property_id]
+      );
+      newState = {
+        ...state,
+        properties,
+        selectedProperties: []
+      };
+      break;
+    }
     default:
       newState = { ...state };
   }
@@ -153,7 +170,10 @@ const inviteModal = (state = {}, action) => {
       };
       break;
     }
-
+    case "GENERAL_INVITE_MEMBER_COMPLETE": {
+      newState = { ...state, isOpen: false };
+      break;
+    }
     default:
       newState = state;
   }

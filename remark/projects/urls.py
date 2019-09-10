@@ -9,12 +9,14 @@ from .views import (
     CampaignPlanPageView,
     ProjectUpdateAPIView,
     MembersView,
+    AddMembersView,
     ProjectRemoveMemberIView
 )
 
 
 urlpatterns = [
     path("members/", MembersView.as_view(), name="members" ),
+    path("add-members/", AddMembersView.as_view(), name="add_members" ),
     path("<project_id>/", ProjectPageView.as_view(), name="project"),
     path(
         "<project_id>/baseline/",
