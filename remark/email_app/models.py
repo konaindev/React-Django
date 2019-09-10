@@ -1,5 +1,7 @@
 from django.db import models
 from django.conf import settings
+
+from remark.lib.fields import NormalizedEmailField
 from .reports.constants import KPI_NAMES, KPI_CATEGORIES
 
 
@@ -91,3 +93,13 @@ class PerformanceEmailKPI(models.Model):
 
     name = models.TextField(choices=KPI_NAMES.items())
     category = models.TextField(choices=KPI_CATEGORIES.items())
+
+
+class ListservEmailManager(models.Manager):
+    pass
+
+
+class ListservEmail(models.Model):
+    objects = ListservEmailManager()
+
+    email = NormalizedEmailField(unique=True)
