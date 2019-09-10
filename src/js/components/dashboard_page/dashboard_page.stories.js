@@ -4,6 +4,7 @@ import { withState } from "@dump247/storybook-state";
 import { action } from "@storybook/addon-actions";
 import { Provider } from "react-redux";
 
+import { apiMock as inviteModalApiMock } from "../invite_modal/invite_modal.stories";
 import store from "../../state/store";
 
 import DashboardPage from "./index";
@@ -13,6 +14,17 @@ const _store = store;
 document.cookie = "isLogin=true";
 
 storiesOf("DashboardPage", module)
+  .addDecorator(inviteModalApiMock)
+  .addDecorator(story => {
+    _store.dispatch({
+      type: "GENERAL_UPDATE_STATE",
+      newState: { selectedProperties: [] }
+    });
+    _store.dispatch({
+      type: "INVITE_MODAL_HIDE"
+    });
+    return story();
+  })
   .add(
     "default",
     withState({ filters: {} })(({ store }) => (
