@@ -2,7 +2,7 @@ from django.contrib.auth.views import redirect_to_login
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import Http404, HttpResponse
+from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
@@ -283,3 +283,15 @@ class ProjectUpdateAPIView(LoginRequiredMixin, APIView):
             return self.render_success()
         except Exception:
             return self.render_failure_message("Failed to update")
+
+
+class MembersView(LoginRequiredMixin, APIView):
+    def post(self, request):
+        # TODO: Implement this
+        return JsonResponse({"members": []})
+
+
+class ProjectRemoveMemberIView(LoginRequiredMixin, APIView):
+    def post(self, request, project_id):
+        # TODO: Implement this
+        return JsonResponse({"project": {}})

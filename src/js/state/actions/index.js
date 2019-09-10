@@ -58,9 +58,21 @@ export const inviteModal = {
   close: {
     type: "INVITE_MODAL_HIDE"
   },
+  removeModalOpen: (property, member) => ({
+    type: "INVITE_MODAL_REMOVE_MODAL_SHOW",
+    property,
+    member
+  }),
+  removeModalClose: {
+    type: "INVITE_MODAL_REMOVE_MODAL_HIDE"
+  },
   getUsers: (value, callback) => ({
     type: "API_INVITE_MODAL_GET_USERS",
     data: value,
     callback
+  }),
+  removeMember: (project, member) => ({
+    type: "API_INVITE_MODAL_REMOVE_MEMBER",
+    data: { project, member }
   })
 };

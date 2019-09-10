@@ -17,12 +17,9 @@ storiesOf("DashboardPage", module)
   .addDecorator(inviteModalApiMock)
   .addDecorator(story => {
     _store.dispatch({
-      type: "GENERAL_UPDATE_STATE",
-      newState: { selectedProperties: [] }
-    });
-    _store.dispatch({
       type: "INVITE_MODAL_HIDE"
     });
+    store.getState().general = { ...props, selectedProperties: [] };
     return story();
   })
   .add(

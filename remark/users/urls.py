@@ -11,7 +11,6 @@ urlpatterns = [
     # XXX SECURITY Django's logout view uses GET to perform the logout action,
     # which is pretty lame -- it's trivially cross-site scriptable. Not a huge
     # issue for now, but we'll want to fix it someday. -Dave
-    path("", UsersView.as_view(), name="users"),
     path(
         "logout/",
         auth_views.LogoutView.as_view(template_name="users/logged_out.html"),

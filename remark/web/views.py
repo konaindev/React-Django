@@ -37,7 +37,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
     @staticmethod
     def get_project_details(project):
         """ cached by "project.public_id", details for project card on UI """
-        cache_key = f"remark.web.views.dashboard_view.project.{project.public_id}"
+        cache_key = f"remark.web.views.dashboard_view.project.3{project.public_id}"
         if cache_key in cache:
             return cache.get(cache_key)
 
@@ -49,6 +49,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
             image_url=project.get_building_image()[1],
             performance_rating=project.get_performance_rating(),
             url=project.get_baseline_url(),
+            # TODO: Add project members
         )
         cache.set(cache_key, project_details, TIMEOUT_1_DAY)
         return project_details

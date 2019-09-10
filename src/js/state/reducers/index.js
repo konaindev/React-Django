@@ -4,6 +4,15 @@ const initState = {
   tutorialView: {}
 };
 
+function replace(target, data, key) {
+  const index = target.findIndex(t => t[key] === data[key]);
+  if (index === -1) {
+    return target;
+  }
+  target[index] = data;
+  return target;
+}
+
 const dashboard = (state = {}, action) => {
   let newState = {};
   switch (action.type) {
@@ -15,6 +24,25 @@ const dashboard = (state = {}, action) => {
       newState = { ...state, ...action.newState };
       break;
     }
+    case "GENERAL_REMOVE_MEMBER_COMPLETE": {
+      const properties = replace(
+        [...state.properties],
+        action.property,
+        "property_id"
+      );
+      const selectedProperties = replace(
+        [...state.selectedProperties],
+        action.property,
+        "property_id"
+      );
+      newState = {
+        ...state,
+        properties,
+        selectedProperties
+      };
+      break;
+    }
+
     default:
       newState = { ...state };
   }
@@ -103,6 +131,29 @@ const inviteModal = (state = {}, action) => {
       newState = { ...state, isOpen: false };
       break;
     }
+    case "INVITE_MODAL_REMOVE_MODAL_SHOW": {
+      newState = {
+        ...state,
+        removeModalIsOpen: true,
+        remove: {
+          member: action.member,
+          property: action.property
+        }
+      };
+      break;
+    }
+    case "INVITE_MODAL_REMOVE_MODAL_HIDE": {
+      newState = { ...state, removeModalIsOpen: false };
+      break;
+    }
+    case "GENERAL_REMOVE_MEMBER_COMPLETE": {
+      newState = {
+        ...state,
+        removeModalIsOpen: false
+      };
+      break;
+    }
+
     default:
       newState = state;
   }

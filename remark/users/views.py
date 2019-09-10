@@ -1,7 +1,7 @@
 import json
 from django.contrib.auth import views as auth_views, login as auth_login
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect
 
 from remark.crm.models import Business, Office, Person
 from remark.crm.constants import OFFICE_TYPES

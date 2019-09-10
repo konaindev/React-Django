@@ -29,11 +29,15 @@ class InviteModal extends React.PureComponent {
         property_name: PropTypes.string.isRequired,
         members: PropTypes.array.isRequired
       })
-    ).isRequired
+    ).isRequired,
+    removeModalIsOpen: PropTypes.bool,
+    remove: PropTypes.object
   };
 
   static defaultProps = {
-    isOpen: false
+    isOpen: false,
+    removeModalIsOpen: false,
+    remove: {}
   };
 
   static roleOptions = [
@@ -62,10 +66,6 @@ class InviteModal extends React.PureComponent {
     IndicatorsContainer: () => null
   };
 
-  state = {
-    removeModalIsOpen: false
-  };
-
   userToOptions = callback => users =>
     callback(
       users.map(u => ({
@@ -84,15 +84,16 @@ class InviteModal extends React.PureComponent {
   };
 
   removeUser = () => {
-    // TODO: Implement removeUser
+    const { property, member } = this.props.remove;
+    this.props.dispatch(inviteModal.removeMember(property, member));
   };
 
-  openRemoveModal = () => {
-    this.setState({ removeModalIsOpen: true });
+  openRemoveModal = (property, member) => {
+    this.props.dispatch(inviteModal.removeModalOpen(property, member));
   };
 
   closeRemoveModal = () => {
-    this.setState({ removeModalIsOpen: false });
+    this.props.dispatch(inviteModal.removeModalClose);
   };
 
   removeProperty = e => {
@@ -129,11 +130,11 @@ class InviteModal extends React.PureComponent {
     );
   };
 
-  renderMembers = members => {
-    if (!members) {
+  renderMembers = property => {
+    if (!property || !property.members) {
       return null;
     }
-    return members.map(member => {
+    return property.members.map(member => {
       const role = InviteModal.roleOptions.find(r => r.value === member.role);
       return (
         <div className="invite-modal__member" key={member.user_id}>
@@ -143,7 +144,7 @@ class InviteModal extends React.PureComponent {
             role={role}
             components={InviteModal.selectRoleComponents}
             roleOptions={InviteModal.roleOptions}
-            openRemoveModal={this.openRemoveModal}
+            openRemoveModal={() => this.openRemoveModal(property, member)}
           />
         </div>
       );
@@ -160,7 +161,7 @@ class InviteModal extends React.PureComponent {
         key={property.property_id}
       >
         <div className="invite-modal__collapsible-members">
-          {this.renderMembers(property.members)}
+          {this.renderMembers(property)}
         </div>
       </Collapsible>
     ));
@@ -195,8 +196,7 @@ class InviteModal extends React.PureComponent {
 
   renderPropertyOrMembers = () => {
     if (this.props.properties.length === 1) {
-      const members = this.props.properties[0].members;
-      return this.renderMembers(members);
+      return this.renderMembers(this.props.properties[0]);
     } else {
       return this.renderProperty();
     }
@@ -258,14 +258,16 @@ class InviteModal extends React.PureComponent {
         <ModalWindow
           className="invite-remove-window"
           theme="small"
-          open={this.state.removeModalIsOpen}
+          open={this.props.removeModalIsOpen}
           onClose={this.closeRemoveModal}
         >
           <ModalWindow.Head>Are you sure?</ModalWindow.Head>
           <ModalWindow.Body className="invite-remove-window__body">
             Removing{" "}
-            <span className="invite-remove-window__name">Jamie Luis</span> will
-            revoke their access to this property.
+            <span className="invite-remove-window__name">
+              {this.props.remove?.member?.account_name}
+            </span>{" "}
+            will revoke their access to this property.
             <div className="invite-remove-window__controls">
               <Button
                 className="invite-remove-window__button"
