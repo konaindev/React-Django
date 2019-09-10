@@ -7,6 +7,7 @@ from remark.decorators import anonymous_required
 
 from .views import CompleteAccountView, UsersView
 
+
 urlpatterns = [
     # XXX SECURITY Django's logout view uses GET to perform the logout action,
     # which is pretty lame -- it's trivially cross-site scriptable. Not a huge
