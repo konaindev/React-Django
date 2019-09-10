@@ -3000,10 +3000,9 @@ Array [
        
       <span
         className="invite-remove-window__name"
-      >
-        Jamie Luis
-      </span>
-       will revoke their access to this property.
+      />
+       
+      will revoke their access to this property.
       <div
         className="invite-remove-window__controls"
       >
@@ -3408,10 +3407,9 @@ Array [
        
       <span
         className="invite-remove-window__name"
-      >
-        Jamie Luis
-      </span>
-       will revoke their access to this property.
+      />
+       
+      will revoke their access to this property.
       <div
         className="invite-remove-window__controls"
       >
