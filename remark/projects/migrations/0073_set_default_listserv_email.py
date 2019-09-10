@@ -2,13 +2,15 @@
 
 from django.db import migrations
 
+from remark.projects.constants import DEFAULT_LISTSERV_EMAIL
+
 
 def set_default_listserv_email(apps, schema_editor):
     # Set default listserv email address for all existing projects
     Project = apps.get_model("projects", "Project")
     ListservEmail = apps.get_model("email_app", "ListservEmail")
 
-    default_email = ListservEmail.objects.get(email="customersuccess@remarkably.io")
+    default_email = ListservEmail.objects.get(email=DEFAULT_LISTSERV_EMAIL)
     if default_email:
         for project in Project.objects.all():
             project.listserv_email = default_email

@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 
 from remark.lib.fields import NormalizedEmailField
+from remark.projects.models import Project
 from .reports.constants import KPI_NAMES, KPI_CATEGORIES
 
 
@@ -98,8 +99,18 @@ class PerformanceEmailKPI(models.Model):
 class ListservEmailManager(models.Manager):
     pass
 
+    def get_associated_projects(self, email_string):
+        try:
+            listserv_email = self.get(email=email_string)
+            return Project.objects.filter(listserv_email=listserv_email)
+        except self.model.DoesNotExist:
+            return []
+
 
 class ListservEmail(models.Model):
     objects = ListservEmailManager()
 
     email = NormalizedEmailField(unique=True)
+
+    def __str__(self):
+        return self.email

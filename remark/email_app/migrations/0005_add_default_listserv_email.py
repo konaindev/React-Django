@@ -2,11 +2,13 @@
 
 from django.db import migrations
 
+from remark.projects.constants import DEFAULT_LISTSERV_EMAIL
+
 
 def add_default_listserv_email(apps, schema_editor):
     # Add company's default listserv email for all existing Project's
     ListservEmail = apps.get_model("email_app", "ListservEmail")
-    ListservEmail.objects.get_or_create(email="customersuccess@remarkably.io")
+    ListservEmail.objects.get_or_create(email=DEFAULT_LISTSERV_EMAIL)
 
 
 class Migration(migrations.Migration):
