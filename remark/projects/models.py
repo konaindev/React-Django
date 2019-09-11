@@ -192,6 +192,13 @@ class Project(models.Model):
 
     custom_tags = models.ManyToManyField(Tag, blank=True)
 
+    listserv_email = models.ForeignKey(
+        "email_app.ListservEmail",
+        on_delete=models.SET_NULL,
+        related_name="projects",
+        null=True,
+    )
+
     # This is a temporary field until we have user accounts setup.
     # When that happens there should be a many to one relationship with
     # those users. We should pull email addresses from the user accounts. -TPC
@@ -203,13 +210,6 @@ class Project(models.Model):
 
     # This is for the SendGrid recipients list.
     email_list_id = models.CharField(max_length=256, null=True, default=None)
-
-    listserv_email = models.ForeignKey(
-        "email_app.ListservEmail",
-        on_delete=models.SET_NULL,
-        related_name="projects",
-        null=True,
-    )
 
     baseline_start = models.DateField(
         help_text="The first date, inclusive, for the baseline period."

@@ -64,6 +64,7 @@ class ProjectInline(admin.TabularInline):
     extra = 0
     max_num = 0
     readonly_fields = ["name", "public_id"]
+    can_delete = False
 
 
 @admin.register(ListservEmail, site=admin_site)
