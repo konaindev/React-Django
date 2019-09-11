@@ -310,7 +310,8 @@ export default class Profile extends React.PureComponent {
                       className={this.getFieldClasses(
                         "company_role",
                         errors,
-                        touched
+                        touched,
+                        ["max-width"]
                       )}
                     >
                       <div className="account-settings__label">

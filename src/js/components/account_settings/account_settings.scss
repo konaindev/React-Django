@@ -117,6 +117,28 @@ $info-line-height: 1.75rem;
 }
 
 .account-settings__field {
+    &--max-width {
+        max-width: 315px;
+    }
+    &--error {
+        .account-settings__label {
+            color: $error-color;
+        }
+
+        .account-settings__input,
+        .account-settings__input:focus {
+            &:not(.select) {
+                border: 1px solid $error-color;
+            }
+            .select__control,
+            .select__menu {
+                border: 1px solid $error-color;
+            }
+            .select__menu {
+                border-top: none;
+            }
+        }
+    }
     &--full-grid {
         grid-column-start: 1;
         grid-column-end: 3;
@@ -127,7 +149,7 @@ $info-line-height: 1.75rem;
     display: grid;
     grid-column-gap: $columns-gap;
     grid-row-gap: $rows-gap;
-    grid-template-columns: 1fr calc(50% - #{$columns-gap / 2});
+    grid-template-columns: 1fr 1fr;
     &--col-3 {
         grid-template-columns: 1fr 1fr 1fr;
     }
@@ -154,26 +176,6 @@ $info-line-height: 1.75rem;
     font-size: $text-sm;
     color: $error-color;
     line-height: $message-line-height;
-}
-
-.account-settings__field--error {
-    .account-settings__label {
-        color: $error-color;
-    }
-
-    .account-settings__input,
-    .account-settings__input:focus {
-        &:not(.select) {
-            border: 1px solid $error-color;
-        }
-        .select__control,
-        .select__menu {
-            border: 1px solid $error-color;
-        }
-        .select__menu {
-            border-top: none;
-        }
-    }
 }
 
 .account-settings__error {
