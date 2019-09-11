@@ -216,7 +216,7 @@ class ProjectForm(forms.ModelForm):
         projects_with_same_email = Project.objects.filter(listserv_email__email=cleaned_email)
         if projects_with_same_email.count() > 0:
             raise forms.ValidationError(
-                "This listserv email address is used by another project."
+                "This Listserv email address is used by another project."
             )
         return cleaned_email
 

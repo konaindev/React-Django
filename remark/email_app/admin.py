@@ -6,6 +6,7 @@ from remark.admin import admin_site, custom_titled_filter
 from remark.lib.logging import error_text
 from remark.projects.models import Project
 from .models import PerformanceEmail, PerformanceEmailKPI, ListservEmail
+from .forms import PerformanceEmailForm
 from .reports.weekly_performance import send_performance_email
 
 
@@ -18,7 +19,7 @@ class PerformanceEmailAdmin(admin.ModelAdmin):
     inlines = [PerformanceEmailKPIInline]
     fields = [
         "project",
-        "reply_to",
+        "custom_reply_to_field",
         "start",
         "campaign_health",
         "lease_rate_text",
@@ -29,15 +30,17 @@ class PerformanceEmailAdmin(admin.ModelAdmin):
         "risk_kpi_insight_text",
         "low_kpi_insight_text",
     ]
-    readonly_fields = ["reply_to"]
+    readonly_fields = ["custom_reply_to_field"]
     list_display = ("project", "start", "created_by")
     list_filter = (("project__name", custom_titled_filter("Project")),)
     ordering = ("-start",)
 
-    def reply_to(self, obj):
+    form = PerformanceEmailForm
+
+    def custom_reply_to_field(self, obj):
         return obj.project.listserv_email
 
-    reply_to.short_description = "Reply-To"
+    custom_reply_to_field.short_description = "Reply-To"
 
     def save_model(self, request, obj, form, change):
         print("email_app::admin::PerformanceEmailAdmin::save_model::top")
@@ -50,7 +53,9 @@ class PerformanceEmailAdmin(admin.ModelAdmin):
             super().save_model(request, obj, form, change)
             print("email_app::admin::PerformanceEmailAdmin::save_model::after save")
             send_performance_email.apply_async(args=(obj.id,), countdown=2)
-            print("email_app::admin::PerformanceEmailAdmin::save_model::after async task")
+            print(
+                "email_app::admin::PerformanceEmailAdmin::save_model::after async task"
+            )
         except Exception as e:
             print(error_text(e))
 
