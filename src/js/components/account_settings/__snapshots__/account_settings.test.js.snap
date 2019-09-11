@@ -762,7 +762,7 @@ exports[`AccountSettings profile tab 1`] = `
                   />
                 </div>
                 <div
-                  className="account-settings__field"
+                  className="account-settings__field account-settings__field--max-width"
                 >
                   <div
                     className="account-settings__label"
