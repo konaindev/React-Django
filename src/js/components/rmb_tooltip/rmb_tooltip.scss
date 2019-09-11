@@ -8,12 +8,12 @@ $tooltip-highlight-color: $content-text-secondary-color;
 
 .rmb-tooltip {
     font-family: $font-sans;
-    font-size: $text-xs;
-    line-height: $text-xl;
+    font-size: $text-sm;
+    line-height: 1.625rem;
     opacity: 1;
 
     .rc-tooltip-inner {
-        max-width: 360px;
+        max-width: 320px;
         padding: 10px;
         color: $tooltip-text-color;
         white-space: normal;
@@ -108,7 +108,7 @@ $tooltip-highlight-color: $content-text-secondary-color;
 .rmb-tooltip__text {
     margin: 10px;
     font-size: $text-sm;
-    line-height: 26px;
+    line-height: 1.625rem;
     text-align: center;
 }
 
