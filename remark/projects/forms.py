@@ -11,6 +11,7 @@ from remark.lib.validators import (
     validate_linebreak_separated_numbers_list,
     validate_linebreak_separated_strings_list,
 )
+from remark.email_app.models import ListservEmail
 from .models import Project, Property, CampaignModel, Spreadsheet, Spreadsheet2
 from .reports.selectors import ReportLinks
 from .spreadsheets import get_importer_for_kind, SpreadsheetKind
@@ -205,6 +206,19 @@ class ProjectForm(forms.ModelForm):
                 "Fund do not match the Account attached to the Project"
             )
         return self.cleaned_data["fund"]
+
+    def clean_listserv_email(self):
+        """
+        prevent someone from accidentally sending a reply to a listserv for another company
+        """
+        cleaned_email = self.cleaned_data["listserv_email"]
+
+        projects_with_same_email = Project.objects.filter(listserv_email__email=cleaned_email)
+        if projects_with_same_email.count() > 0:
+            raise forms.ValidationError(
+                "This listserv email address is used by another project."
+            )
+        return cleaned_email
 
     class Meta:
         model = Project
