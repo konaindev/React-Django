@@ -15,6 +15,10 @@ describe("Select", () => {
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
+  it("render gray select", () => {
+    const tree = renderer.create(<Select theme="gray" {...props} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
   it("render select search", () => {
     const tree = renderer.create(<SelectSearch {...props} />).toJSON();
     expect(tree).toMatchSnapshot();

@@ -5,21 +5,41 @@ import React from "react";
 
 import "./input.scss";
 
-export default function Input(props) {
-  const { className, theme, ...otherProps } = props;
-  const classes = cn("input", className, {
-    [`input--${theme}`]: theme
-  });
-  return <input className={classes} type={props.type} {...otherProps} />;
+export default class Input extends React.PureComponent {
+  static propTypes = {
+    className: PropTypes.string,
+    type: PropTypes.string,
+    theme: PropTypes.oneOf(["", "highlight", "gray"]),
+    valueFormatter: PropTypes.func,
+    onChange: PropTypes.func
+  };
+
+  static defaultProps = {
+    type: "text",
+    valueFormatter: v => v,
+    onChange() {}
+  };
+
+  onChange = e => {
+    e.target.value = this.props.valueFormatter(e.target.value);
+    this.props.onChange(e);
+  };
+
+  render() {
+    const { className, theme, valueFormatter, ...otherProps } = this.props;
+    const classes = cn("input", className, {
+      [`input--${theme}`]: theme
+    });
+    return (
+      <input
+        className={classes}
+        type={this.props.type}
+        {...otherProps}
+        onChange={this.onChange}
+      />
+    );
+  }
 }
-Input.propTypes = {
-  type: PropTypes.string,
-  theme: PropTypes.oneOf(["", "highlight", "gray"]),
-  className: PropTypes.string
-};
-Input.defaultProps = {
-  type: "text"
-};
 
 export function FormInput(props) {
   const { className, ...otherProps } = props;

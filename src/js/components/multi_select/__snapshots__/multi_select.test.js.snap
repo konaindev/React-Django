@@ -201,6 +201,178 @@ exports[`MultiSelect all selected 1`] = `
 </div>
 `;
 
+exports[`MultiSelect gray 1`] = `
+<div
+  className="select multi-select select--gray css-1ym6uuo-container"
+  onKeyDown={[Function]}
+>
+  <div
+    className="multi-select--has-value select__control select__control--menu-is-open css-yk16xz-control"
+    onMouseDown={[Function]}
+    onTouchEnd={[Function]}
+  >
+    <div
+      className="select__value-container select__value-container--is-multi select__value-container--has-value css-1hwfws3"
+    >
+      <div
+        className="multi-select__label"
+      >
+        Select...
+      </div>
+      <input
+        className="css-62g3xt-dummyInput"
+        disabled={false}
+        id="react-select-5-input"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        readOnly={true}
+        tabIndex="0"
+        value=""
+      />
+    </div>
+    <div
+      className="select__indicators css-1wy0on6"
+    >
+      <span
+        className="select__indicator-separator css-1okebmr-indicatorSeparator"
+      />
+      <div
+        aria-hidden="true"
+        className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+        onMouseDown={[Function]}
+        onTouchEnd={[Function]}
+      >
+        <svg
+          aria-hidden="true"
+          className="select__dropdown-arrow select__dropdown-arrow--down"
+          color="inherit"
+          focusable="false"
+          height="1em"
+          role="presentation"
+          viewBox="0 0 10 5"
+          width="1em"
+        >
+          <path
+            d="M1 1.16134L4.92334 4.5"
+            stroke="currentColor"
+            strokeLinecap="round"
+          />
+          <path
+            d="M8.82812 1.16134L5 4.5"
+            stroke="currentColor"
+            strokeLinecap="round"
+          />
+        </svg>
+        <svg
+          aria-hidden="true"
+          className="select__dropdown-arrow select__dropdown-arrow--up"
+          color="inherit"
+          focusable="false"
+          height="1em"
+          role="presentation"
+          viewBox="0 0 10 5"
+          width="1em"
+        >
+          <path
+            d="M1 3.83866L4.92334 0.5"
+            stroke="currentColor"
+            strokeLinecap="round"
+          />
+          <path
+            d="M8.82812 3.83866L5 0.5"
+            stroke="currentColor"
+            strokeLinecap="round"
+          />
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div
+    className="select__menu css-26l3qy-menu"
+    onMouseDown={[Function]}
+    onMouseMove={[Function]}
+  >
+    <div
+      className="select__menu-list select__menu-list--is-multi css-11unzgr"
+    >
+      <div
+        className="multi-select__options"
+      >
+        <div
+          className="multi-select__option select__option select__option--is-selected css-9gakcf-option"
+          id="react-select-5-option-0"
+          onClick={[Function]}
+          onMouseMove={[Function]}
+          onMouseOver={[Function]}
+          tabIndex={-1}
+        >
+          <div
+            className="checkbox multi-select__checkbox checkbox--selected"
+          />
+          <div
+            className="multi-select__option-label"
+          >
+            Option 1
+          </div>
+        </div>
+        <div
+          className="multi-select__option select__option select__option--is-selected css-9gakcf-option"
+          id="react-select-5-option-1"
+          onClick={[Function]}
+          onMouseMove={[Function]}
+          onMouseOver={[Function]}
+          tabIndex={-1}
+        >
+          <div
+            className="checkbox multi-select__checkbox checkbox--selected"
+          />
+          <div
+            className="multi-select__option-label"
+          >
+            Option 2
+          </div>
+        </div>
+        <div
+          className="multi-select__option select__option select__option--is-selected css-9gakcf-option"
+          id="react-select-5-option-2"
+          onClick={[Function]}
+          onMouseMove={[Function]}
+          onMouseOver={[Function]}
+          tabIndex={-1}
+        >
+          <div
+            className="checkbox multi-select__checkbox checkbox--selected"
+          />
+          <div
+            className="multi-select__option-label"
+          >
+            Option 3
+          </div>
+        </div>
+        <div
+          className="multi-select__option select__option select__option--is-selected css-9gakcf-option"
+          id="react-select-5-option-3"
+          onClick={[Function]}
+          onMouseMove={[Function]}
+          onMouseOver={[Function]}
+          tabIndex={-1}
+        >
+          <div
+            className="checkbox multi-select__checkbox checkbox--selected"
+          />
+          <div
+            className="multi-select__option-label"
+          >
+            Option 4
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`MultiSelect highlight 1`] = `
 <div
   className="select multi-select select--highlight css-1ym6uuo-container"
