@@ -91,6 +91,7 @@ jobs:
           name: Install Heroku Tools
           command: curl https://cli-assets.heroku.com/install.sh | sh
       - checkout
+      - aws-cli/install
       - run:
           name: Maintenance Mode On
           command: heroku maintenance:on --app remarkably-staging
@@ -121,7 +122,7 @@ jobs:
           command: yarn run deploy-frontend-staging
       - run:
           name: Invalidate CDN for staging Frontend
-          command: invalidate-cdn-staging
+          command: yarn run invalidate-cdn-staging
 
   deploy-production:
     docker:
