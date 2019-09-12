@@ -1,7 +1,6 @@
 from remark.projects.models import Project
 from django.urls import reverse
 
-from remark.projects.constants import THUMBNAIL
 from remark.lib.time_series.computed import generate_computed_kpis, generate_computed_targets
 from remark.lib.time_series.common import KPI, KPIFormat
 from .strategy import get_base_kpis_for_project, get_targets_for_project, get_base_kpis_for_group, get_targets_for_group

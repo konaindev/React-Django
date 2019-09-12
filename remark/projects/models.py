@@ -24,7 +24,7 @@ from remark.lib.metrics import (
 )
 from remark.projects.spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
 from remark.projects.reports.performance import PerformanceReport
-from remark.projects.constants import PROPERTY_TYPE, BUILDING_CLASS, LANDSCAPE, THUMBNAIL, SIZE_LANDSCAPE, SIZE_THUMBNAIL
+from remark.projects.constants import PROPERTY_TYPE, BUILDING_CLASS, SIZE_LANDSCAPE, SIZE_THUMBNAIL
 
 
 def pro_public_id():
