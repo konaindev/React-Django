@@ -82,13 +82,7 @@ jobs:
 
   deploy-staging:
     docker:
-      # specify the version you desire here
-      - image: circleci/python:3.6.4
-
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
+      - image: circleci/python:3.7.2-node
 
     working_directory: ~/repo
 
@@ -116,6 +110,18 @@ jobs:
       - run:
           name: Maintenance Mode Off
           command: heroku maintenance:off --app remarkably-staging
+      - run:
+          name: Install Frontend deps
+          command: yarn
+      - run:
+          name: Build Frontend
+          command: yarn run build:prod
+      - run:
+          name: Deploy artifact to S3
+          command: yarn run deploy-frontend-staging
+      - run:
+          name: Invalidate CDN for staging Frontend
+          command: invalidate-cdn-staging
 
   deploy-production:
     docker:
