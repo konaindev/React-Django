@@ -7,7 +7,7 @@ from django.core.cache import cache
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
 from remark.projects.models import Fund, Project
-from remark.lib.cache import remark_cache, TIMEOUT_1_WEEK
+from remark.lib.cache import TIMEOUT_1_DAY
 from remark.lib.views import ReactView, RemarkView
 
 
@@ -51,7 +51,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
             performance_rating=project.get_performance_rating(),
             url=project.get_baseline_url(),
         )
-        cache.set(cache_key, project_details, TIMEOUT_1_WEEK)
+        cache.set(cache_key, project_details, TIMEOUT_1_DAY)
         return project_details
 
     @staticmethod
@@ -122,7 +122,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
             funds=funds,
             no_projects=no_projects,
         )
-        cache.set(cache_key, user_filters, TIMEOUT_1_WEEK)
+        cache.set(cache_key, user_filters, TIMEOUT_1_DAY)
         return user_filters
 
     @classmethod

@@ -46,6 +46,40 @@ jobs:
       - run: pipenv run python manage.py migrate
       - run: pipenv run python manage.py loaddata data/dumped/latest.json
 
+  # NOTE: This can should likely be added to the PROD deployment
+  #       workflow. The idea being that if we have a single source
+  #       of truth via storybook/chromatic then we those assets should
+  #       be valid before we hit production...
+  #
+  chromatic-storybook:
+    docker:
+      - image: circleci/python:3.7.2-node
+      - image: circleci/postgres:latest
+      - image: circleci/redis:latest
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: yarn install --silent
+      - run: pipenv --bare install
+      - run: yarn build --silent
+      - run: pipenv run python manage.py collectstatic
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+
+      - run: yarn run chromatic
+
   deploy-staging:
     docker:
       # specify the version you desire here
@@ -69,7 +103,7 @@ jobs:
       - run:
           name: Deploy Staging to Heroku
           command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/remarkably-staging.git master --force
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/remarkably-staging.git staging:master --force
       - run:
           name: Reset Database
           command: heroku pg:reset --app remarkably-staging DATABASE_URL --confirm remarkably-staging
@@ -110,6 +144,7 @@ jobs:
       - run:
           name: Maintenance Mode Off
           command: heroku maintenance:off --app remarkably
+
   deploy-storybook:
     docker:
       - image: circleci/python:3.7.2-node

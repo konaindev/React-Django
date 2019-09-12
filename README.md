@@ -109,6 +109,25 @@ Want some fancy magic to reload your web page any time any front or backend asse
 
 Warning: this is fancy magic. I imagine it is fragile. -Dave
 
+### Storybook
+
+This project uses Storybook for viewing react components. The primary storybook is published at:
+
+[https://storybook.remarkably.io](https://storybook.remarkably.io)
+
+Additionally, there is a script (`throwaway-sb.sh`) that, if you have proper AWS credentials, will create
+a "throwaway" storybook deployment to a static site host s3 bucket matching the following schema:
+
+`http:://<short git hash at HEAD of branch>-storybook.s3-website-us-east-1.amazonaws.com`
+
+such as:
+
+http://c2a8b49a-storybook.s3-website-us-east-1.amazonaws.com
+
+#### note: be a good aws buddy and delete old storybook buckets _after_ you are done with them!
+
+You can envoke the script from the root project directory with `bash throwaway-sb.sh` and it will take care of the rest.
+
 ## Sharp edges
 
 ### Caching

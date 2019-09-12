@@ -14,4 +14,8 @@ describe("Input", () => {
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
+  it("render text with gray theme", () => {
+    const tree = renderer.create(<Input type="text" theme="gray" />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

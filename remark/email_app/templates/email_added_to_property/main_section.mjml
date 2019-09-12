@@ -23,15 +23,12 @@
     </mj-column>
     {% for property in properties %}
       <mj-group width="100%" css-class="property-row">
-        <mj-column padding="22px 20px" width="76px" css-class="property-row-image">
+        <mj-column padding="22px 20px" width="76px" css-class="property-row-image-column">
           <mj-image width="36px" src="{{ property.image_url }}" />
         </mj-column>
-        <mj-column padding="20px 0" css-class="property-row-description">
+        <mj-column padding="20px 0" css-class="property-row-text-column">
           <mj-text mj-class="text-sm text-white" line-height="20px">{{ property.title }}</mj-text>
           <mj-text mj-class="text-xs text-gray">{{ property.address }}</mj-text>
-        </mj-column>
-        <mj-column padding="22px 20px" width="144px" css-class="property-row-link">
-          <mj-button href="{{ property.view_link }}" mj-class="button bg-smoke text-xs p-0" text-transform="none" inner-padding="8px 10px">View Property</mj-button>
         </mj-column>
       </mj-group>
       <mj-column width="100%">
@@ -46,7 +43,7 @@
       {% if more_count > 0 %}
       <mj-text mj-class="text-xl text-white pt-0 pb-50" align="center">+{{ more_count }} more properties</mj-text>
       {% endif %}
-      <mj-button href="{{ view_button_link }}" mj-class="button bg-blue pt-0 pb-50">{{ view_button_label }}</mj-button>
+      <mj-button href="{{ main_button_link }}" mj-class="button bg-blue pt-0 pb-50">{{ main_button_label }}</mj-button>
     </mj-column>
   </mj-section>
 </mj-wrapper>
