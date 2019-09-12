@@ -11,6 +11,7 @@ from django.utils.crypto import get_random_string
 
 from jsonfield import JSONField
 from stdimage.models import StdImageField
+from image_cropping.utils import get_backend
 
 from remark.lib.fields import ImageRatioFieldExt
 from remark.lib.stats import health_check
@@ -23,7 +24,7 @@ from remark.lib.metrics import (
 )
 from remark.projects.spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
 from remark.projects.reports.performance import PerformanceReport
-from remark.projects.constants import PROPERTY_TYPE, BUILDING_CLASS
+from remark.projects.constants import PROPERTY_TYPE, BUILDING_CLASS, SIZE_LANDSCAPE, SIZE_THUMBNAIL
 
 
 def pro_public_id():
@@ -393,39 +394,47 @@ class Project(models.Model):
 
     def get_building_logo(self):
         """
-        Return building logo's S3 resource urls for all variants
+        Return building logo urls in [original, thumbnail] format
         """
+        images = ["", ""]
         property = self.property
         if property.building_logo:
-            return [
-                property.building_logo.url,
-                property.building_logo.regular.url,
-                property.building_logo.thumbnail.url,
-            ]
-        else:
-            return None
+            images[0] = property.building_logo.url
+            images[1] = get_backend().get_thumbnail_url(
+                property.building_logo,
+                {
+                    "size": SIZE_THUMBNAIL,
+                    "box": property.building_logo_cropping,
+                    "crop": True,
+                },
+            )
+        return images
 
-    def get_building_image(self):
+    def get_building_image(self, variant=None):
         """
-        Return building image's S3 resource urls for all variants
+        Return building image urls in [original, landscape, thumbnail] format
         """
+        images = ["", "", ""]
         property = self.property
         if property.building_image:
-            return [
-                property.building_image.url,
-                property.building_image.landscape.url,
-                property.building_image.regular.url,
-                property.building_image.thumbnail.url,
-            ]
-        else:
-            return None
-
-    def get_building_image_url(self):
-        property = self.property
-        if property.building_image:
-            return property.building_image.url
-
-        return None
+            images[0] = property.building_image.url
+            images[1] = get_backend().get_thumbnail_url(
+                property.building_image,
+                {
+                    "size": SIZE_LANDSCAPE,
+                    "box": property.building_image_landscape_cropping,
+                    "crop": True,
+                },
+            )
+            images[2] = get_backend().get_thumbnail_url(
+                property.building_image,
+                {
+                    "size": SIZE_THUMBNAIL,
+                    "box": property.building_image_cropping,
+                    "crop": True,
+                },
+            )
+        return images
 
     def get_baseline_url(self):
         return reverse("baseline_report", kwargs={"project_id": self.public_id})
@@ -556,7 +565,7 @@ class Property(models.Model):
         help_text="""Image of property logo<br/>Resized variants (180x180, 76x76) will also be created on Amazon S3.""",
         variations={"regular": (180, 180), "thumbnail": (76, 76)},
     )
-    building_logo_cropping = ImageRatioFieldExt("building_logo", "180x180")
+    building_logo_cropping = ImageRatioFieldExt("building_logo", "{}x{}".format(*SIZE_THUMBNAIL))
 
     building_image = StdImageField(
         blank=True,
@@ -570,8 +579,8 @@ class Property(models.Model):
             "thumbnail": (76, 76, True),
         },
     )
-    building_image_cropping = ImageRatioFieldExt("building_image", "400x400")
-    building_image_landscape_cropping = ImageRatioFieldExt("building_image", "309x220")
+    building_image_cropping = ImageRatioFieldExt("building_image", "{}x{}".format(*SIZE_THUMBNAIL))
+    building_image_landscape_cropping = ImageRatioFieldExt("building_image", "{}x{}".format(*SIZE_LANDSCAPE))
 
     property_type = models.IntegerField(choices=PROPERTY_TYPE, null=True, blank=False)
 
