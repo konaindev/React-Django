@@ -13,6 +13,7 @@ from remark.lib.validators import (
 )
 from remark.email_app.models import ListservEmail
 from .models import Project, Property, CampaignModel, Spreadsheet, Spreadsheet2
+from .constants import DEFAULT_LISTSERV_EMAIL
 from .reports.selectors import ReportLinks
 from .spreadsheets import get_importer_for_kind, SpreadsheetKind
 
@@ -122,7 +123,9 @@ class SpreadsheetForm(forms.ModelForm):
             if hasattr(importer, "find_overlapping_period"):
                 period = importer.find_overlapping_period(cleaned_data["project"])
                 if period is not None:
-                    period_path = reverse("admin:projects_period_change", args=[period.pk])
+                    period_path = reverse(
+                        "admin:projects_period_change", args=[period.pk]
+                    )
                     raise ValidationError(
                         f"Found overlapping period, please delete the existing one here. {BASE_URL}{period_path}"
                     )
@@ -208,17 +211,26 @@ class ProjectForm(forms.ModelForm):
         return self.cleaned_data["fund"]
 
     def clean_listserv_email(self):
-        """
-        prevent someone from accidentally sending a reply to a listserv for another company
-        """
-        cleaned_email = self.cleaned_data["listserv_email"]
+        cleaned_listserv = self.cleaned_data["listserv_email"]
 
-        projects_with_same_email = Project.objects.filter(listserv_email__email=cleaned_email)
-        if projects_with_same_email.count() > 0:
+        # default listserv email can be used in multiple projects
+        if cleaned_listserv.email == DEFAULT_LISTSERV_EMAIL:
+            return cleaned_listserv
+
+        # ONE listserv email should be associated to ONE project
+        projects_with_same_listserv = Project.objects.filter(
+            listserv_email=cleaned_listserv
+        )
+        # exclude the self project being edited
+        projects_with_same_listserv = projects_with_same_listserv.exclude(
+            public_id=self.instance.public_id
+        )
+
+        if projects_with_same_listserv.count() > 0:
             raise forms.ValidationError(
                 "This Listserv email address is used by another project."
             )
-        return cleaned_email
+        return cleaned_listserv
 
     class Meta:
         model = Project
@@ -297,7 +309,4 @@ class PropertyForm(forms.ModelForm):
     class Meta:
         model = Property
         fields = "__all__"
-        widgets = {
-            "building_logo": ImageCropWidget,
-            "building_image": ImageCropWidget,
-        }
+        widgets = {"building_logo": ImageCropWidget, "building_image": ImageCropWidget}
