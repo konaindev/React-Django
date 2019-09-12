@@ -76,7 +76,7 @@ const getPageClass = () => {
     return null;
   }
   const pageName = root ? root.dataset.page : null;
-  const pageClass = pageName ? pages[pageName] : Page;
+  const pageClass = pageName ? pages[pageName] : DashboardPage;
   return pageClass;
 };
 

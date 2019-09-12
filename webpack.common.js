@@ -4,6 +4,7 @@ const StyleLintPlugin = require("stylelint-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const webpack = require("webpack");
+const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV === "production";
 if (isProduction && !process.env.BASE_URL) {
@@ -72,6 +73,13 @@ module.exports = {
     new Dotenv(),
     new webpack.DefinePlugin({
       "process.env": { BASE_URL: JSON.stringify(process.env.BASE_URL) }
+    }),
+    new HtmlWebPackPlugin({
+      template: "./src/index.html",
+      filename: "./index.html"
+    }),
+    new HtmlWebPackPlugin({
+      favicon: "./src/favicon.ico"
     })
   ],
   profile: true,
