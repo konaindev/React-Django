@@ -122,7 +122,7 @@ jobs:
           command: yarn run deploy-frontend-staging
       - run:
           name: Invalidate CDN for staging Frontend
-          command: invalidate-cdn-staging
+          command: yarn run invalidate-cdn-staging
 
   deploy-production:
     docker:
