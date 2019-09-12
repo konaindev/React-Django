@@ -17,6 +17,7 @@ $target-height: 16px;
 $target-spacing: 6px;
 $link-padding: 8px 10px;
 $link-height: 20px;
+$empty-text-size: 1.75rem;
 
 .portfolio-property-row {
     display: flex;
@@ -106,6 +107,13 @@ $link-height: 20px;
     height: $value-height;
     font-size: $text-xl;
     color: $column-header-regular-color;
+
+    &:empty:before {
+        display: block;
+        height: $value-height;
+        content: '\2014';
+        font-size: $empty-text-size;
+    }
 }
 
 .portfolio-property-row__target {

@@ -13,6 +13,7 @@ $value-height: 28px;
 $value-font-size: 1.75rem;
 $target-height: 16px;
 $target-spacing: 6px;
+$empty-text-size: 1.75rem;
 
 .portfolio-property-group-row {
     height: $row-height + px;
@@ -104,6 +105,13 @@ $target-spacing: 6px;
     font-size: $value-font-size;
     line-height: $value-height;
     color: $column-header-regular-color;
+
+    &:empty:before {
+        display: block;
+        height: $value-height;
+        content: '\2014';
+        font-size: $empty-text-size;
+    }
 }
 
 .portfolio-property-group-row__target {
