@@ -4,7 +4,7 @@ export const project = {
   building_image: [
     "https://i.imgur.com/UEH4gfU.jpg",
     "https://i.imgur.com/UEH4gfU.jpg",
-    "https://i.imgur.com/UEH4gfU.jpg",
+    "https://i.imgur.com/UEH4gfU.jpg"
   ],
   health: 2,
   update_endpoint: "/projects/pro_example/update/"
