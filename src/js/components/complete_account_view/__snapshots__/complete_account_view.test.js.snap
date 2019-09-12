@@ -121,6 +121,7 @@ exports[`CompleteAccountView renders correctly 1`] = `
                   onBlur={[Function]}
                   onChange={[Function]}
                   type="text"
+                  value=""
                 />
                 <svg
                   aria-hidden="true"
@@ -192,6 +193,7 @@ exports[`CompleteAccountView renders correctly 1`] = `
                   onBlur={[Function]}
                   onChange={[Function]}
                   type="text"
+                  value=""
                 />
                 <svg
                   aria-hidden="true"
@@ -264,6 +266,7 @@ exports[`CompleteAccountView renders correctly 1`] = `
                 onBlur={[Function]}
                 onChange={[Function]}
                 type="text"
+                value=""
               />
               <svg
                 aria-hidden="true"
@@ -843,6 +846,7 @@ exports[`CompleteAccountView renders correctly 1`] = `
                 onBlur={[Function]}
                 onChange={[Function]}
                 type="text"
+                value=""
               />
               <svg
                 aria-hidden="true"
@@ -1055,13 +1059,13 @@ exports[`CompleteAccountView renders correctly 1`] = `
           >
             <div
               className="checkbox complete-account__checkbox"
-              onBlur={[Function]}
               onClick={[Function]}
             />
             <input
+              checked={false}
               hidden={true}
               name="terms"
-              onBlur={[Function]}
+              readOnly={true}
               type="checkbox"
             />
             Accept 
