@@ -3,11 +3,13 @@ import datetime
 from django.contrib import admin
 
 from remark.admin import admin_site, custom_titled_filter
-from remark.lib.logging import error_text
+from remark.lib.logging import error_text, getLogger
 from remark.projects.models import Project
 from .models import PerformanceEmail, PerformanceEmailKPI, ListservEmail
 from .forms import PerformanceEmailForm
-from .reports.weekly_performance import send_performance_email
+from .reports.weekly_performance import send_performance_email, create_sender_for_listserv
+
+logger = getLogger(__name__)
 
 
 class PerformanceEmailKPIInline(admin.TabularInline):
@@ -75,7 +77,27 @@ class ProjectInline(admin.TabularInline):
 @admin.register(ListservEmail, site=admin_site)
 class ListservEmailAdmin(admin.ModelAdmin):
     inlines = [ProjectInline]
+    list_display = ["email", "sender_id"]
 
-    def get_readonly_fields(self, request, obj=None):
-        # Email address should be read-only in edit mode
-        return ("email",) if obj is not None else ()
+    def get_formsets_with_inlines(self, request, obj=None):
+        for inline in self.get_inline_instances(request, obj):
+            # hide ProjectInline in the add view
+            if not isinstance(inline, ProjectInline) or obj is not None:
+                yield inline.get_formset(request, obj), inline
+
+    def get_fields(self, request, obj=None):
+        return ("email", "sender_id") if obj is not None else ("email",)
+
+    def save_model(self, request, obj, form, change):
+        logger.info("ListservEmail::save_model::top")
+        try:
+            super().save_model(request, obj, form, change)
+            logger.info("ListservEmail::save_model::after save")
+            if not change:
+                logger.info("ListservEmail::save_model::before sender creation")
+                create_sender_for_listserv.apply_async(args=(obj.id,), countdown=2)
+                logger.info("ListservEmail::save_model::after sender creation")
+        except Exception as e:
+            logger.error(error_text(e))
+
+        logger.info("ListservEmail::save_model::bottom")

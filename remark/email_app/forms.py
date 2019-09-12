@@ -20,6 +20,10 @@ class PerformanceEmailForm(forms.ModelForm):
                 raise forms.ValidationError(
                     "Project doesn't have Listserv email address set."
                 )
+            if listserv_email.sender_id is None:
+                raise forms.ValidationError(
+                    f"No sender on Sendgrid for {listserv_email.email}."
+                )
             return cleaned_data
         except ValidationError as e:
             raise e

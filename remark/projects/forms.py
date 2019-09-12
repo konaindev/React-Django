@@ -12,7 +12,7 @@ from remark.lib.validators import (
     validate_linebreak_separated_strings_list,
 )
 from remark.email_app.models import ListservEmail
-from remark.email_app.constants import DEFAULT_LISTSERV_EMAIL
+from remark.email_app.constants import DEFAULT_SENDER_REPLY_TO
 from .models import Project, Property, CampaignModel, Spreadsheet, Spreadsheet2
 from .reports.selectors import ReportLinks
 from .spreadsheets import get_importer_for_kind, SpreadsheetKind
@@ -214,7 +214,7 @@ class ProjectForm(forms.ModelForm):
         cleaned_listserv = self.cleaned_data["listserv_email"]
 
         # default listserv email can be used in multiple projects
-        if cleaned_listserv.email == DEFAULT_LISTSERV_EMAIL:
+        if cleaned_listserv.email == DEFAULT_SENDER_REPLY_TO:
             return cleaned_listserv
 
         # ONE listserv email should be associated to ONE project

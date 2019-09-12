@@ -1,11 +1,14 @@
+from copy import copy
 import datetime
 import time
 
 from django.template.loader import get_template
 
 from remark.lib.stats import health_check
+from remark.lib.logging import error_text, getLogger
 from remark.projects.reports.performance import PerformanceReport, InvalidReportRequest
-from remark.email_app.models import PerformanceEmail
+from remark.email_app.models import PerformanceEmail, ListservEmail
+from remark.email_app.constants import DEFAULT_SENDER_INFO
 from remark.projects.models import TargetPeriod
 
 from .constants import (
@@ -20,10 +23,12 @@ from remark.lib.sendgrid_email import (
     create_contact_if_not_exists,
     create_contact_list_if_not_exists,
     create_campaign_if_not_exists,
+    create_sender,
 )
 
 from celery import shared_task
 
+logger = getLogger(__name__)
 
 CONTACT_EMAIL = "info@remarkably.io"
 SENDER_ID = 482157
@@ -223,4 +228,22 @@ def send_performance_email(performance_email_id):
         html_content,
     )
     print("weekly_performance::send_performance_email::end")
+    return True
+
+"""
+Create a Sender object on Sendgrid, based on ListservEmail instance
+"""
+@shared_task
+def create_sender_for_listserv(listserv_email_id):
+    listserv_email = ListservEmail.objects.get(pk=listserv_email_id)
+    sender_info = copy(DEFAULT_SENDER_INFO)
+    sender_info["nickname"] = listserv_email.email
+    sender_info["reply_to"]["email"] = listserv_email.email
+
+    try:
+        listserv_email.sender_id = create_sender(sender_info)
+        listserv_email.save()
+    except Exception as e:
+        logger.error(error_text(e))
+
     return True

@@ -2,7 +2,7 @@
 
 from django.db import migrations
 
-from remark.email_app.constants import DEFAULT_LISTSERV_EMAIL
+from remark.email_app.constants import DEFAULT_SENDER_REPLY_TO
 
 
 def set_default_listserv_email(apps, schema_editor):
@@ -10,7 +10,7 @@ def set_default_listserv_email(apps, schema_editor):
     Project = apps.get_model("projects", "Project")
     ListservEmail = apps.get_model("email_app", "ListservEmail")
 
-    default_email = ListservEmail.objects.get(email=DEFAULT_LISTSERV_EMAIL)
+    default_email = ListservEmail.objects.get(email=DEFAULT_SENDER_REPLY_TO)
     if default_email:
         for project in Project.objects.all():
             project.listserv_email = default_email
