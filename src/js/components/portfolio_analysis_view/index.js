@@ -101,6 +101,22 @@ export class PortfolioAnalysisView extends React.PureComponent {
     };
   }
 
+  get totalProperties() {
+    const { table_data } = this.props;
+    let total = table_data[table_data.length - 1]?.property_count;
+    if (!total) {
+      total = 0;
+      table_data.forEach(data => {
+        if (data.type === "individual") {
+          total += 1;
+        } else {
+          total += data.properties?.length || 0;
+        }
+      });
+    }
+    return total;
+  }
+
   renderKPICards = () => {
     return this.props.highlight_kpis.map(
       ({ name, health, label, value, target }) => (
@@ -193,7 +209,7 @@ export class PortfolioAnalysisView extends React.PureComponent {
               onChange={this.onAverageClick}
             />
             <div className="portfolio-analysis__property-count">
-              {table_data.length} properties
+              {this.totalProperties} properties
             </div>
           </div>
           <div className="portfolio-analysis__kpi-cards">

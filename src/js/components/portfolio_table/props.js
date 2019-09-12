@@ -101,7 +101,7 @@ export const props = {
       address: "San Antonio, TX 78207",
       image_url:
         "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
-      health: 2,
+      health: 1,
       kpis: {
         leased_rate: 0.9,
         occupancy_rate: 0.8,
@@ -116,8 +116,10 @@ export const props = {
       }
     },
     {
-      type: "group",
+      type: "individual",
       name: "Remarkably National",
+      address: "San Antonio, TX 78207",
+      health: 2,
       image_url:
         "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
       kpis: {
@@ -138,7 +140,7 @@ export const props = {
       name: "Portfolio Average",
       image_url:
         "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
-      properties: 11,
+      property_count: 5,
       kpis: {
         leased_rate: 0.9,
         occupancy_rate: 0.8,
