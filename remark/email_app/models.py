@@ -99,18 +99,14 @@ class PerformanceEmailKPI(models.Model):
 class ListservEmailManager(models.Manager):
     pass
 
-    def get_associated_projects(self, email_string):
-        try:
-            listserv_email = self.get(email=email_string)
-            return Project.objects.filter(listserv_email=listserv_email)
-        except self.model.DoesNotExist:
-            return []
-
 
 class ListservEmail(models.Model):
     objects = ListservEmailManager()
 
     email = NormalizedEmailField(unique=True)
+
+    # SendGrid sender ID
+    sender_id = models.CharField(null=True, default=None, max_length=255)
 
     def __str__(self):
         return self.email

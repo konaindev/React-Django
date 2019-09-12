@@ -16,6 +16,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('email', remark.lib.fields.NormalizedEmailField(max_length=254, unique=True)),
+                ('sender_id', models.CharField(default=None, max_length=255, null=True)),
             ],
         ),
     ]

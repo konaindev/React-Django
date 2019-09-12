@@ -12,8 +12,8 @@ from remark.lib.validators import (
     validate_linebreak_separated_strings_list,
 )
 from remark.email_app.models import ListservEmail
+from remark.email_app.constants import DEFAULT_LISTSERV_EMAIL
 from .models import Project, Property, CampaignModel, Spreadsheet, Spreadsheet2
-from .constants import DEFAULT_LISTSERV_EMAIL
 from .reports.selectors import ReportLinks
 from .spreadsheets import get_importer_for_kind, SpreadsheetKind
 

@@ -2,7 +2,7 @@
 
 from django.db import migrations
 
-from remark.projects.constants import DEFAULT_LISTSERV_EMAIL
+from remark.email_app.constants import DEFAULT_LISTSERV_EMAIL
 
 
 def set_default_listserv_email(apps, schema_editor):
