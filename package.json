@@ -19,7 +19,7 @@
     "fetch-latest-fixtures": "aws s3 cp s3://fa22980d-b1d2-453b-8133-307ad70ccc55/latest.json data/dumped/latest.json",
     "chromatic": "./node_modules/.bin/chromatic test",
     "deploy-frontend-staging": "aws s3 sync s3://app-staging.remarkably.io dist/",
-    "invalidate-cdn-staging": "aws cloudfront create-invalidation --distribution-id ${CF_DIST_STAGING}"
+    "invalidate-cdn-staging": "aws cloudfront create-invalidation --distribution-id ${CF_DIST_STAGING} --paths /"
   },
   "storybook-deployer": {
     "gitUsername": "Storybook Deployer",
