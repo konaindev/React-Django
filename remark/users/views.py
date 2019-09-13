@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect
 
 from remark.crm.models import Business, Office, Person
 from remark.crm.constants import OFFICE_TYPES
-from remark.lib.views import ReactView
+from remark.lib.views import ReactView, RemarkView
 from remark.geo.models import Address
 from remark.geo.geocode import geocode
 
