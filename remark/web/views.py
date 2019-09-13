@@ -3,7 +3,6 @@ import json
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
-from django.core.cache import cache
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
 from remark.projects.models import Fund, Project
@@ -39,7 +38,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
         cache_key = f"remark.web.views.dashboard_view.project.{project.public_id}"
 
         """ method to generate value when request indicates to bust cache """
-        def generate_value():
+        def generate_value(cache):
             address = project.property.geo_address
             project_details = dict(
                 property_name=project.name,
@@ -72,7 +71,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
         cache_key = f"remark.web.views.dashboard_view.user_filters.{request.user.public_id}"
 
         """ method to generate value when request indicates to bust cache """
-        def generate_value():
+        def generate_value(cache):
             owned_projects = self.get_owned_projects(request.user)
 
             locations = []

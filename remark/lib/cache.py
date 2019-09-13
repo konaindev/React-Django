@@ -9,9 +9,8 @@ def access_cache(request, key, method_to_generate_value):
     if request.GET.get('cb', '') == 'true':
         cache.set(key, None)
     
-    value = cache.get(key)
     if value is None:
-        value = method_to_generate_value()
+        value = method_to_generate_value(cache)
         cache.set(key, value)
 
     return value
