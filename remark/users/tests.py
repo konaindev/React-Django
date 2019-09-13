@@ -82,7 +82,7 @@ class CreatePasswordTestCase(TestCase):
         user = User.objects.get(public_id=hash)
         self.assertTrue(user.check_password(new_password))
         response_data = response.json()
-        self.assertEqual(response_data["redirect_url"], LOGIN_URL)
+        self.assertEqual(response_data["redirect_url"], reverse("complete_account"))
 
     def test_set_password_wrong_hash(self):
         hash = crypto.get_random_string(24)
