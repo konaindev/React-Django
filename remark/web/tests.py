@@ -5,14 +5,13 @@ from django.contrib.auth.models import Group
 from django.test import TestCase
 from django.urls import reverse
 
-from unittest.mock import patch, Mock, MagicMock
+from unittest.mock import patch, Mock
 
 from remark.crm.models import Business
 from remark.geo.models import Address
 from remark.users.models import Account, User
 from remark.projects.models import Fund, Project, Property
 from remark.web.views import DashboardView
-from remark.lib.cache import access_cache
 
 import inspect, types
 
