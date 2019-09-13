@@ -75,7 +75,7 @@ urlpatterns = [
         name="password_reset_complete",
     ),
     path(
-        "complete-account/", CompleteAccountView.as_view(), name="CompleteAccountView"
+        "complete-account/", CompleteAccountView.as_view(), name="complete_account"
     ),
     path(
         "create-password/<hash>",

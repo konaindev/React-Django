@@ -124,7 +124,6 @@ class CreatePasswordView(ReactView):
     page_title = "Create Password"
 
     def get(self, request, hash):
-        user = request.user
         try:
             user = User.objects.get(public_id=hash)
         except User.DoesNotExist:
@@ -154,8 +153,11 @@ class CreatePasswordView(ReactView):
             return JsonResponse({"errors": e.messages}, status=500)
         user.set_password(password)
         user.activated = datetime.datetime.now(timezone.utc)
+        user.is_active = True
         user.save()
-        return JsonResponse({"redirect_url": LOGIN_URL}, status=200)
+        custom_login(self.request, user)
+        redirect_url = reverse("complete_account")
+        return JsonResponse({"redirect_url": redirect_url})
 
 
 class ValidatePasswordView(RemarkView):
