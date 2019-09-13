@@ -7,8 +7,7 @@ from django.core.cache import cache
 from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
 from remark.projects.models import Fund, Project
-from remark.lib.cache import TIMEOUT_1_DAY
-from remark.lib.cache import access_cache
+import remark.lib.cache as cache_lib
 from remark.lib.views import ReactView, RemarkView
 
 def has_property_in_list_of_dict(ary, prop, value):
@@ -46,14 +45,14 @@ class DashboardView(LoginRequiredMixin, ReactView):
                 property_name=project.name,
                 property_id=project.public_id,
                 address=f"{address.city}, {address.state}",
-                image_url=project.get_building_image_url(),
+                image_url=project.get_building_image()[1],
                 performance_rating=project.get_performance_rating(),
                 url=project.get_baseline_url(),
             )
-            cache.set(cache_key, project_details, TIMEOUT_1_DAY)
+            cache.set(cache_key, project_details, cache_lib.TIMEOUT_1_DAY)
             return project_details
         
-        return access_cache(request, cache_key, generate_value)
+        return cache_lib.access_cache(request, cache_key, generate_value)
 
     def get_owned_projects(self, user):
         """ return QuerySet<Project> accessible by the specified user """
@@ -122,10 +121,10 @@ class DashboardView(LoginRequiredMixin, ReactView):
                 funds=funds,
                 no_projects=no_projects,
             )
-            cache.set(cache_key, user_filters, TIMEOUT_1_DAY)
+            cache.set(cache_key, user_filters, cache_lib.TIMEOUT_1_DAY)
             return user_filters
 
-        return access_cache(request, cache_key, generate_value)
+        return cache_lib.access_cache(request, cache_key, generate_value)
 
     def prepare_filters_from_request(self, request):
         """ calc queryset filter params based on HTTP request query strings """

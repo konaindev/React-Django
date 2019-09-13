@@ -252,9 +252,7 @@ class TestDashboardView(TestCase):
     def test_calling_access_cache(self):
         with patch('remark.lib.cache.access_cache') as cache_mock:
             dashboard = DashboardView()
-            mock_project = Mock()
-            mock_project.public_id = 'test'
-            dashboard.get_project_details(mock_project, '')
+            dashboard.get_project_details(Mock(), '')
             cache_mock.assert_called_once()
             dashboard.get_user_filter_options(Mock())
             self.assertEqual(cache_mock.call_count, 2)
