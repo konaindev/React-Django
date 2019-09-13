@@ -1,5 +1,7 @@
 import React from "react";
 import dateFnformat from "date-fns/format";
+import _isNil from "lodash/isNil";
+import _isNumber from "lodash/isNumber";
 
 import { getDateDiff } from "./misc";
 
@@ -239,4 +241,31 @@ export const formatDateDiff = (startDateStr, endDateStr, unit = "month") => {
   } else {
     return value;
   }
+};
+
+export const formatPhone = value => {
+  let localValue = value;
+  if (_isNil(localValue)) {
+    return localValue;
+  }
+  if (_isNumber(localValue)) {
+    localValue = localValue.toString();
+  }
+  const parsePattern = /[0-9]+/g;
+  const parts = localValue.match(parsePattern);
+  if (!parts) {
+    return "";
+  }
+  const cleanedValue = parts.join("");
+  const phoneParts = [
+    cleanedValue.slice(0, 3),
+    cleanedValue.slice(3, 6),
+    cleanedValue.slice(6, 10)
+  ].filter(v => !!v);
+  const formattedParts = [
+    `(${phoneParts[0]}`,
+    `) ${phoneParts[1]}`,
+    `-${phoneParts[2]}`
+  ];
+  return formattedParts.slice(0, phoneParts.length).join("");
 };

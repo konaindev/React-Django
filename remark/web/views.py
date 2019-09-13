@@ -11,7 +11,6 @@ from remark.lib.cache import TIMEOUT_1_DAY
 from remark.lib.cache import access_cache
 from remark.lib.views import ReactView, RemarkView
 
-
 def has_property_in_list_of_dict(ary, prop, value):
     for item in ary:
         if item[prop] == value:
@@ -185,8 +184,8 @@ class DashboardView(LoginRequiredMixin, ReactView):
             **filter_options,
         )
 
-        data_type_requested = request.headers.get("Accept", "")
-        if "application/json" in data_type_requested:
+        accept = request.META.get('HTTP_ACCEPT')
+        if accept == "application/json":
             return JsonResponse(response_data)
         else:
             return self.render(**response_data)

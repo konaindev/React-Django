@@ -120,37 +120,44 @@ class WelcomeTestPage(ContentView):
 
 
 class AddedToPropertyTestPage(ContentView):
-
     template_name = "email_added_to_property/index.mjml"
 
     def get(self, request):
-        is_multiple = request.GET.get("portfolio") in (True, "true")
+        is_portfolio = request.GET.get("is_portfolio") in (True, "true")
+        is_new_account = request.GET.get("is_new_account") in (True, "true")
 
         single_property = {
             "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/weekly_performance_reports/ctd.png",
             "title": "Rainier Lofts",
             "address": "1234 1st Ave, Seattle, WA 98101",
+            "view_link": "https://app.remarkably.io/projects/project_id/baseline",
         }
 
         template_vars = {
             "email_title": "Added to New Property",
             "email_preview": "Added to New Property",
             "inviter_name": "William George",
-            "is_multiple": is_multiple,
+            "is_portfolio": is_portfolio,
+            "is_new_account": is_new_account,
             "property_name": "Rainier Lofts",
             "properties": [single_property],
             "more_count": None,
-            "main_button_link": "https://app.remarkably.io",
+            "main_button_link": "https://app.remarkably.io/projects/project_id/baseline",
             "main_button_label": "View Property",
         }
 
-        if is_multiple is True:
+        if is_portfolio is True:
             template_vars["more_count"] = 5
+            template_vars["main_button_link"] = "https://app.remarkably.io/dashboard"
             template_vars["main_button_label"] = "View All Properties"
 
             for i in range(1, 5):
                 each = copy(single_property)
                 each["title"] += f" {i + 1}"
                 template_vars["properties"].append(each)
+        
+        if is_new_account is True:
+            template_vars["main_button_link"] = "https://app.remarkably.io/users/create-password/user_public_id"
+            template_vars["main_button_label"] = "Create Account"
 
         return self.render(self.template_name, **template_vars)

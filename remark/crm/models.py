@@ -2,6 +2,8 @@ from django.db import models
 from remark.lib.tokens import public_id
 from stdimage.models import StdImageField
 
+from .constants import OFFICE_TYPES
+
 
 def bus_public_id():
     """Public identifier for a business."""
@@ -101,6 +103,10 @@ class Office(models.Model):
 
     business = models.ForeignKey(
         "crm.Business", on_delete=models.CASCADE, blank=False, help_text="Business"
+    )
+
+    office_type = models.IntegerField(
+        choices=OFFICE_TYPES, help_text="Office Type", blank=True, null=True
     )
 
     objects = OfficeManager()

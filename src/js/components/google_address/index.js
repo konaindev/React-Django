@@ -20,6 +20,8 @@ export default class GoogleAddress extends React.PureComponent {
     theme: PropTypes.oneOf(["", "highlight"]),
     loadOptions: PropTypes.func.isRequired,
     placeholder: PropTypes.string,
+    labelCompany: PropTypes.string,
+    labelGoogle: PropTypes.string,
     onChange: PropTypes.func
   };
 
@@ -27,6 +29,8 @@ export default class GoogleAddress extends React.PureComponent {
     className: "",
     theme: "highlight",
     placeholder: "Select office...",
+    labelCompany: "Suggested Company Addresses",
+    labelGoogle: "Suggested Google Addresses",
     onChange: () => {}
   };
 
@@ -34,7 +38,7 @@ export default class GoogleAddress extends React.PureComponent {
     this.props.loadOptions(inputValue, options => {
       callback([
         {
-          label: "Suggested Google Addresses",
+          label: this.props.labelGoogle,
           options: options
         }
       ]);
@@ -68,7 +72,7 @@ export default class GoogleAddress extends React.PureComponent {
     const classes = cn("google-address", className);
     const options = [
       {
-        label: "Suggested Company Addresses",
+        label: this.props.labelCompany,
         options: companyAddresses
       }
     ];
