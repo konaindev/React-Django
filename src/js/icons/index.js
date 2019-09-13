@@ -19,3 +19,4 @@ export { default as IconUp } from "./icon_up";
 export { default as IconDown } from "./icon_down";
 export { default as Error } from "./error";
 export { default as Ok } from "./ok";
+export { default as Upload } from "./upload";

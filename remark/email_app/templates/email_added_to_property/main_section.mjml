@@ -1,7 +1,7 @@
 <mj-wrapper full-width="full-width" mj-class="bg-gray" padding="0">
   <mj-section mj-class="py-50">
     <mj-column width="100%">
-      {% if is_multiple %}
+      {% if is_portfolio %}
         <mj-text mj-class="text-4xl text-white pt-50" align="center">You have been invited to a portfolio.</mj-text>
       {% else %}
         <mj-text mj-class="text-4xl text-white pt-50" align="center">You have been invited to a property.</mj-text>
@@ -9,7 +9,7 @@
     </mj-column>
 
     <mj-column width="440px" mj-class="container">
-      {% if is_multiple %}
+      {% if is_portfolio %}
         <mj-text mj-class="text-base text-lightgray pt-30" css-class="intro-message" align="center">{{ inviter_name }} has invited you to join a portfolio. Join the team and view property performance data.</mj-text>
       {% else %}
         <mj-text mj-class="text-base text-lightgray pt-30" css-class="intro-message" align="center">{{ inviter_name }} has invited you to join the {{ property_name }} property. Join the team and view property performance data.</mj-text>
@@ -26,10 +26,20 @@
         <mj-column padding="22px 20px" width="76px" css-class="property-row-image-column">
           <mj-image width="36px" src="{{ property.image_url }}" />
         </mj-column>
+      {% if is_new_account %}
+        <mj-column padding="20px 0" css-class="property-row-text-column no-adjacent-button">
+          <mj-text mj-class="text-sm text-white" line-height="20px">{{ property.title }}</mj-text>
+          <mj-text mj-class="text-xs text-gray">{{ property.address }}</mj-text>
+        </mj-column>
+      {% else %}
         <mj-column padding="20px 0" css-class="property-row-text-column">
           <mj-text mj-class="text-sm text-white" line-height="20px">{{ property.title }}</mj-text>
           <mj-text mj-class="text-xs text-gray">{{ property.address }}</mj-text>
         </mj-column>
+        <mj-column padding="22px 20px" width="144px" css-class="property-row-button-column">
+          <mj-button href="{{ property.view_link }}" mj-class="button bg-smoke text-xs p-0" text-transform="none" inner-padding="8px 10px">View Property</mj-button>
+        </mj-column>
+      {% endif %}
       </mj-group>
       <mj-column width="100%">
         <mj-divider mj-class="divider" />

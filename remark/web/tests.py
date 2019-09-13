@@ -133,7 +133,7 @@ class PropertyListTestCase(TestCase):
             "properties": [
                 {
                     "address": "Seattle, WA",
-                    "image_url": None,
+                    "image_url": "",
                     "performance_rating": -1,
                     "property_id": self.project2.public_id,
                     "property_name": self.project2.name,
@@ -141,7 +141,7 @@ class PropertyListTestCase(TestCase):
                 },
                 {
                     "address": "Seattle, WA",
-                    "image_url": None,
+                    "image_url": "",
                     "performance_rating": -1,
                     "property_id": self.project1.public_id,
                     "property_name": self.project1.name,
@@ -199,7 +199,7 @@ class PropertyListTestCase(TestCase):
             "properties": [
                 {
                     "address": "Seattle, WA",
-                    "image_url": None,
+                    "image_url": "",
                     "performance_rating": -1,
                     "property_id": self.project1.public_id,
                     "property_name": self.project1.name,

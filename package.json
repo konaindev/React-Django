@@ -17,7 +17,9 @@
     "update-s3-fixtures": "aws s3 cp s3://fa22980d-b1d2-453b-8133-307ad70ccc55/$(git log --pretty=format:'%h' -n 1).latest.json s3://fa22980d-b1d2-453b-8133-307ad70ccc55/latest.json",
     "fetch-s3-fixtures": "aws s3 cp s3://fa22980d-b1d2-453b-8133-307ad70ccc55/$(git log --pretty=format:'%h' -n 1).latest.json data/dumped/latest.json",
     "fetch-latest-fixtures": "aws s3 cp s3://fa22980d-b1d2-453b-8133-307ad70ccc55/latest.json data/dumped/latest.json",
-    "chromatic": "./node_modules/.bin/chromatic test"
+    "chromatic": "./node_modules/.bin/chromatic test",
+    "deploy-frontend-staging": "aws s3 sync s3://app-staging.remarkably.io dist/",
+    "invalidate-cdn-staging": "aws cloudfront create-invalidation --distribution-id ${CF_DIST_STAGING} --paths /"
   },
   "storybook-deployer": {
     "gitUsername": "Storybook Deployer",

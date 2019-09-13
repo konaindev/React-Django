@@ -305,9 +305,10 @@ export class UrlQueryLayer extends React.PureComponent {
       }
     });
 
-    const queryString = qsStringify(urlParams);
-    window.history.replaceState({}, "", `/dashboard${queryString}`);
-    this.props.dispatch(networking.fetchDashboard(queryString));
+    let queryStringForView = qsStringify(urlParams);
+    let queryStringForAjax = qsStringify({ ...urlParams, ajax: "true" });
+    window.history.replaceState({}, "", `/dashboard${queryStringForView}`);
+    this.props.dispatch(networking.fetchDashboard(queryStringForAjax));
   };
 
   render() {
