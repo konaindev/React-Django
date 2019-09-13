@@ -8,6 +8,7 @@ from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
 from remark.projects.models import Fund, Project
 from remark.lib.cache import TIMEOUT_1_DAY
+from remark.lib.cache import access_cache
 from remark.lib.views import ReactView, RemarkView
 
 
@@ -35,27 +36,27 @@ class DashboardView(LoginRequiredMixin, ReactView):
     def get_page_title(self):
         return "Dashboard"
 
-    @staticmethod
-    def get_project_details(project):
+    def get_project_details(self, project, request):
         """ cached by "project.public_id", details for project card on UI """
         cache_key = f"remark.web.views.dashboard_view.project.{project.public_id}"
-        if cache_key in cache:
-            return cache.get(cache_key)
 
-        address = project.property.geo_address
-        project_details = dict(
-            property_name=project.name,
-            property_id=project.public_id,
-            address=f"{address.city}, {address.state}",
-            image_url=project.get_building_image_url(),
-            performance_rating=project.get_performance_rating(),
-            url=project.get_baseline_url(),
-        )
-        cache.set(cache_key, project_details, TIMEOUT_1_DAY)
-        return project_details
+        """ method to generate value when request indicates to bust cache """
+        def generate_value():
+            address = project.property.geo_address
+            project_details = dict(
+                property_name=project.name,
+                property_id=project.public_id,
+                address=f"{address.city}, {address.state}",
+                image_url=project.get_building_image_url(),
+                performance_rating=project.get_performance_rating(),
+                url=project.get_baseline_url(),
+            )
+            cache.set(cache_key, project_details, TIMEOUT_1_DAY)
+            return project_details
+        
+        return access_cache(request, cache_key, generate_value)
 
-    @staticmethod
-    def get_owned_projects(user):
+    def get_owned_projects(self, user):
         """ return QuerySet<Project> accessible by the specified user """
         if user.is_superuser:
             project_query = Project.objects.all()
@@ -63,70 +64,71 @@ class DashboardView(LoginRequiredMixin, ReactView):
             project_query = Project.objects.get_all_for_user(user)
         return project_query
 
-    @classmethod
-    def get_user_filter_options(cls, user):
+    def get_user_filter_options(self, request):
         """
         cached by "user.public_id", iterates all projects accessible by the user
         dropdown options for locations | funds | asset owners | project managers
         flag reflecting user has accessible projects or not
         """
-        cache_key = f"remark.web.views.dashboard_view.user_filters.{user.public_id}"
-        if cache_key in cache:
-            return cache.get(cache_key)
 
-        owned_projects = cls.get_owned_projects(user)
+        cache_key = f"remark.web.views.dashboard_view.user_filters.{request.user.public_id}"
 
-        locations = []
-        asset_managers = []
-        property_managers = []
-        funds = []
-        no_projects = True
-        for project in owned_projects:
-            no_projects = False
-            address = project.property.geo_address
-            state = address.state
-            city = address.city
-            label = (f"{city}, {state.upper()}",)
-            if not has_property_in_list_of_dict(locations, "label", label):
-                locations.append({"city": city, "label": label, "state": state.lower()})
-            if project.asset_manager is not None and not has_property_in_list_of_dict(
-                asset_managers, "id", project.asset_manager.public_id
-            ):
-                asset_managers.append(
-                    {
-                        "id": project.asset_manager.public_id,
-                        "label": project.asset_manager.name,
-                    }
-                )
-            if (
-                project.property_manager is not None
-                and not has_property_in_list_of_dict(
-                    property_managers, "id", project.property_manager.public_id
-                )
-            ):
-                property_managers.append(
-                    {
-                        "id": project.property_manager.public_id,
-                        "label": project.property_manager.name,
-                    }
-                )
-            if project.fund is not None and not has_property_in_list_of_dict(
-                funds, "id", project.fund.public_id
-            ):
-                funds.append({"id": project.fund.public_id, "label": project.fund.name})
+        """ method to generate value when request indicates to bust cache """
+        def generate_value():
+            owned_projects = self.get_owned_projects(request.user)
 
-        user_filters = dict(
-            locations=locations,
-            asset_managers=asset_managers,
-            property_managers=property_managers,
-            funds=funds,
-            no_projects=no_projects,
-        )
-        cache.set(cache_key, user_filters, TIMEOUT_1_DAY)
-        return user_filters
+            locations = []
+            asset_managers = []
+            property_managers = []
+            funds = []
+            no_projects = True
+            for project in owned_projects:
+                no_projects = False
+                address = project.property.geo_address
+                state = address.state
+                city = address.city
+                label = (f"{city}, {state.upper()}",)
+                if not has_property_in_list_of_dict(locations, "label", label):
+                    locations.append({"city": city, "label": label, "state": state.lower()})
+                if project.asset_manager is not None and not has_property_in_list_of_dict(
+                    asset_managers, "id", project.asset_manager.public_id
+                ):
+                    asset_managers.append(
+                        {
+                            "id": project.asset_manager.public_id,
+                            "label": project.asset_manager.name,
+                        }
+                    )
+                if (
+                    project.property_manager is not None
+                    and not has_property_in_list_of_dict(
+                        property_managers, "id", project.property_manager.public_id
+                    )
+                ):
+                    property_managers.append(
+                        {
+                            "id": project.property_manager.public_id,
+                            "label": project.property_manager.name,
+                        }
+                    )
+                if project.fund is not None and not has_property_in_list_of_dict(
+                    funds, "id", project.fund.public_id
+                ):
+                    funds.append({"id": project.fund.public_id, "label": project.fund.name})
 
-    @classmethod
-    def prepare_filters_from_request(cls, request):
+            user_filters = dict(
+                locations=locations,
+                asset_managers=asset_managers,
+                property_managers=property_managers,
+                funds=funds,
+                no_projects=no_projects,
+            )
+            cache.set(cache_key, user_filters, TIMEOUT_1_DAY)
+            return user_filters
+
+        return access_cache(request, cache_key, generate_value)
+
+    def prepare_filters_from_request(self, request):
         """ calc queryset filter params based on HTTP request query strings """
         lookup_params = {}
         if request.GET.get("q"):
@@ -146,7 +148,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
             lookup_params["fund_id__in"] = request.GET.getlist("fd")
 
         sort_by = request.GET.get("s")
-        ordering = cls.sql_sort.get(sort_by) or "name"
+        ordering = self.sql_sort.get(sort_by) or "name"
         direction = request.GET.get("d") or "asc"
         if direction == "desc":
             ordering = f"-{ordering}"
@@ -158,11 +160,12 @@ class DashboardView(LoginRequiredMixin, ReactView):
         GET "/dashboard" handler
         Accept: text/html, application/json
         """
+
         owned_projects = self.get_owned_projects(request.user)
-        filter_options = self.get_user_filter_options(request.user)
+        filter_options = self.get_user_filter_options(request)
         (lookup_params, ordering) = self.prepare_filters_from_request(request)
         projects = [
-            self.get_project_details(project)
+            self.get_project_details(project, request)
             for project in owned_projects.filter(**lookup_params).order_by(ordering)
         ]
 

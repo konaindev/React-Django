@@ -5,10 +5,16 @@ from django.contrib.auth.models import Group
 from django.test import TestCase
 from django.urls import reverse
 
+from unittest.mock import patch, Mock, MagicMock
+
 from remark.crm.models import Business
 from remark.geo.models import Address
 from remark.users.models import Account, User
 from remark.projects.models import Fund, Project, Property
+from remark.web.views import DashboardView
+from remark.lib.cache import access_cache
+
+import inspect, types
 
 
 class PropertyListTestCase(TestCase):
@@ -241,3 +247,14 @@ class PropertyListTestCase(TestCase):
         )
         self.assertCountEqual(response_json["locations"], data["locations"])
         self.assertCountEqual(response_json["user"], data["user"])
+
+class TestDashboardView(TestCase):
+    def test_calling_access_cache(self):
+        with patch('remark.lib.cache.access_cache') as cache_mock:
+            dashboard = DashboardView()
+            mock_project = Mock()
+            mock_project.public_id = 'test'
+            dashboard.get_project_details(mock_project, '')
+            cache_mock.assert_called_once()
+            dashboard.get_user_filter_options(Mock())
+            self.assertEqual(cache_mock.call_count, 2)
