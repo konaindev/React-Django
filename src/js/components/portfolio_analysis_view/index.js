@@ -1,4 +1,5 @@
 import _isEqual from "lodash/isEqual";
+import _isNil from "lodash/isNil";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -6,7 +7,7 @@ import Container from "../container";
 import DateRangeSelector from "../date_range_selector";
 import PageChrome from "../page_chrome";
 import PortfolioTable from "../portfolio_table";
-import KPICard from "../kpi_card";
+import KPICard, { NoValueKPICard } from "../kpi_card";
 import Select from "../select";
 import UserMenu from "../user_menu";
 import ToggleButton from "../toggle_button";
@@ -119,16 +120,20 @@ export class PortfolioAnalysisView extends React.PureComponent {
 
   renderKPICards = () => {
     return this.props.highlight_kpis.map(
-      ({ name, health, label, value, target }) => (
-        <KPICard
-          className="portfolio-analysis__kpi-card"
-          health={health}
-          value={formatKPI(name, value)}
-          name={label}
-          target={formatKPI(name, target)}
-          key={name}
-        />
-      )
+      ({ name, health, label, value, target }) => {
+        const Component =
+          _isNil(value) || _isNil(target) ? NoValueKPICard : KPICard;
+        return (
+          <Component
+            className="portfolio-analysis__kpi-card"
+            health={health}
+            value={formatKPI(name, value)}
+            name={label}
+            target={formatKPI(name, target)}
+            key={name}
+          />
+        );
+      }
     );
   };
 

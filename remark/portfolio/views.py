@@ -204,10 +204,16 @@ class PortfolioTableView(LoginRequiredMixin, PortfolioMixin, ReactView):
 
     def get_highlight_kpis(self, group, kpis_to_include):
         result = []
-        if group is None:
-            return []
-
         for key in kpis_to_include:
+            if not group:
+                result.append({
+                    "name": key,
+                    "label": KPITitle.for_kpi(key),
+                    "target": None,
+                    "value": None,
+                    "health": None
+                })
+                continue
             if key in group["targets"]:
                 target = KPIFormat.apply(key, group["targets"][key])
             else:

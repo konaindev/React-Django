@@ -17,7 +17,7 @@ export default class PortfolioPropertyRow extends React.PureComponent {
     address: PropTypes.string.isRequired,
     health: PropTypes.oneOf([-1, 0, 1, 2]).isRequired,
     kpi_order: PropTypes.array.isRequired,
-    kpis: PropTypes.object.isRequired,
+    kpis: PropTypes.object,
     targets: PropTypes.object
   };
 

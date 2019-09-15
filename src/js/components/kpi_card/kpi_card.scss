@@ -5,12 +5,18 @@ $card-max-width: 300px;
 $card-min-width: 240px;
 $card-header-height: 6px;
 
+$no-data-padding: 0.375rem;
+$no-data-font-size: 0.6875rem;
+$no-data-height: $s5;
+$no-data-color: $gray-9;
+
 .kpi-card {
     height: $card-height;
     max-width: $card-max-width;
     min-width: $card-min-width;
     overflow: hidden;
     font-family: $font-sans;
+    text-align: center;
     background: $panel-background-color;
     border-radius: $panel-border-radius;
 
@@ -35,6 +41,16 @@ $card-header-height: 6px;
     &--on-track {
         .kpi-card__bar {
             background: $property-status-color-on-track;
+        }
+    }
+
+    &--no-data {
+        .kpi-card__bar {
+            background: $property-status-color-no-data;
+        }
+        .kpi-card__name {
+            margin-top: $s4;
+            font-size: $text-base;
         }
     }
 }
@@ -70,4 +86,36 @@ $card-header-height: 6px;
     line-height: $line-height-normal;
     color: $content-text-secondary-color;
     text-align: center;
+}
+
+.kpi-card__no-data {
+    display: inline-block;
+    margin-top: 2.125rem;
+    padding: 0 $no-data-padding;
+    color: $property-status-color-no-data;
+    font-size: $no-data-font-size;
+    letter-spacing: $letter-spacing-wide;
+    line-height: $no-data-height;
+    text-transform: uppercase;
+    border: 1px solid $property-status-color-no-data;
+}
+
+.kpi-card__alarm {
+    height: 1.875rem;
+    margin-top: 2.4375rem;
+}
+
+.kpi-card__alarm-icon-wrap {
+    display: inline-block;
+    padding-top: 0.5625rem;
+}
+
+.kpi-card__alarm-icon {
+    width: $s5;
+    height: $s5;
+    fill: none;
+}
+
+.kpi-card__alarm-text {
+    padding: 10px;
 }

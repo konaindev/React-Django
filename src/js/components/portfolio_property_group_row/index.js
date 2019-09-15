@@ -18,7 +18,7 @@ export default class PortfolioPropertyGroupRow extends React.PureComponent {
       PropTypes.number
     ]),
     kpi_order: PropTypes.array.isRequired,
-    kpis: PropTypes.object.isRequired,
+    kpis: PropTypes.object,
     targets: PropTypes.object
   };
 
