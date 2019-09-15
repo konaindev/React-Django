@@ -35,7 +35,10 @@ KPICard.propTypes = {
 };
 
 export const NoValueKPICard = ({ name, className }) => {
-  const classes = cn("kpi-card kpi-card--no-data", className);
+  const classes = cn(
+    "kpi-card kpi-card--no-data kpi-card--no-value",
+    className
+  );
   const text = (
     <div className="kpi-card__alarm-text">
       No data found for this reporting period.
@@ -57,6 +60,38 @@ export const NoValueKPICard = ({ name, className }) => {
   );
 };
 NoValueKPICard.propTypes = {
+  name: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  target: PropTypes.string.isRequired
+};
+
+export const NoTargetKPICard = ({ name, className, value }) => {
+  const classes = cn(
+    "kpi-card kpi-card--no-data kpi-card--no-target",
+    className
+  );
+  const text = (
+    <div className="kpi-card__alarm-text">
+      No targets found for this reporting period.
+    </div>
+  );
+  return (
+    <div className={classes}>
+      <div className="kpi-card__bar" />
+      <div className="kpi-card__no-data">No Data</div>
+      <div className="kpi-card__value">{value}</div>
+      <div className="kpi-card__name">{name}</div>
+      <div className="kpi-card__alarm">
+        <Tooltip placement="bottom" overlay={text}>
+          <div className="kpi-card__alarm-icon-wrap">
+            <Alarm className="kpi-card__alarm-icon" />
+          </div>
+        </Tooltip>
+      </div>
+    </div>
+  );
+};
+NoTargetKPICard.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
   target: PropTypes.string.isRequired

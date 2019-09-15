@@ -7,7 +7,7 @@ import Container from "../container";
 import DateRangeSelector from "../date_range_selector";
 import PageChrome from "../page_chrome";
 import PortfolioTable from "../portfolio_table";
-import KPICard, { NoValueKPICard } from "../kpi_card";
+import KPICard, { NoTargetKPICard, NoValueKPICard } from "../kpi_card";
 import Select from "../select";
 import UserMenu from "../user_menu";
 import ToggleButton from "../toggle_button";
@@ -121,8 +121,12 @@ export class PortfolioAnalysisView extends React.PureComponent {
   renderKPICards = () => {
     return this.props.highlight_kpis.map(
       ({ name, health, label, value, target }) => {
-        const Component =
-          _isNil(value) || _isNil(target) ? NoValueKPICard : KPICard;
+        let Component = KPICard;
+        if (_isNil(value)) {
+          Component = NoValueKPICard;
+        } else if (_isNil(target)) {
+          Component = NoTargetKPICard;
+        }
         return (
           <Component
             className="portfolio-analysis__kpi-card"

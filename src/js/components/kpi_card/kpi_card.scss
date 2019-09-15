@@ -49,8 +49,41 @@ $no-data-color: $gray-9;
             background: $property-status-color-no-data;
         }
         .kpi-card__name {
-            margin-top: $s4;
             font-size: $text-base;
+        }
+        .kpi-card__value {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 2.375rem;
+            margin-top: 2.25rem;
+            font-size: $text-4xl;
+        }
+    }
+
+    &--no-target {
+        .kpi-card__name {
+            margin-top: 0.625rem;
+        }
+        .kpi-card__alarm {
+            margin-top: 1.375rem;
+        }
+        .kpi-card__alarm-icon-wrap {
+            display: inline-block;
+        }
+    }
+
+    &--no-value {
+        .kpi-card__name {
+            margin-top: $s4;
+        }
+        .kpi-card__alarm {
+            height: 1.875rem;
+            margin-top: 2.4375rem;
+        }
+        .kpi-card__alarm-icon-wrap {
+            display: inline-block;
+            padding-top: 0.5625rem;
         }
     }
 }
@@ -100,16 +133,6 @@ $no-data-color: $gray-9;
     border: 1px solid $property-status-color-no-data;
 }
 
-.kpi-card__alarm {
-    height: 1.875rem;
-    margin-top: 2.4375rem;
-}
-
-.kpi-card__alarm-icon-wrap {
-    display: inline-block;
-    padding-top: 0.5625rem;
-}
-
 .kpi-card__alarm-icon {
     width: $s5;
     height: $s5;
@@ -118,4 +141,5 @@ $no-data-color: $gray-9;
 
 .kpi-card__alarm-text {
     padding: 10px;
+    text-align: center;
 }
