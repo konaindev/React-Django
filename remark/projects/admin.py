@@ -1,5 +1,7 @@
+import csv
 from django.contrib import admin
 from django.contrib.admin.utils import unquote
+from django.http import HttpResponse
 from django.urls import path, reverse
 from django.utils.safestring import mark_safe
 
@@ -7,7 +9,13 @@ from adminsortable2.admin import SortableInlineAdminMixin
 
 from remark.admin import admin_site, custom_titled_filter
 from remark.analytics.admin import InlineAnalyticsProviderAdmin
-from .forms import ProjectForm, PropertyForm, SpreadsheetForm, CampaignModelUploadForm
+from .forms import (
+    ProjectForm,
+    PropertyForm,
+    PeriodInlineForm,
+    SpreadsheetForm,
+    CampaignModelUploadForm,
+)
 from .models import (
     Building,
     Fund,
@@ -356,6 +364,20 @@ class PeriodInline(admin.TabularInline):
     model = Period
     show_change_link = True
 
+    form = PeriodInlineForm
+
+    def get_fields(self, request, obj):
+        fields = super().get_fields(request, obj)
+        fields.remove("is_select")
+        fields.insert(0, "is_select")
+        return fields
+
+    template = "admin/projects/period_inline.html"
+
+    @mark_safe
+    def is_select(self, period):
+        return f'<input type="checkbox" name="is_select" value="{period.id}">'
+
     def has_add_permission(self, request, obj):
         return False
 
@@ -424,12 +446,34 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
         "include_in_remarkably_averages",
         "number_of_periods",
         "baseline_start",
-        "baseline_end"
+        "baseline_end",
     ]
 
     readonly_fields = ["customer_name"]
 
     form = ProjectForm
+
+    def response_change(self, request, obj):
+        if "_export_periods" in request.POST:
+            periods_inline = request.POST.getlist("is_select")
+            periods = Period.objects.filter(
+                project_id=obj.public_id, id__in=periods_inline
+            )
+            excluded_fields = ["id", "project"]
+            fields = [
+                f.name for f in Period._meta.fields if not f.name in excluded_fields
+            ]
+            response = HttpResponse(content_type="text/csv")
+            response["Content-Disposition"] = 'attachment; filename="periods.csv"'
+            writer = csv.writer(response)
+            writer.writerow(fields)
+            for p in periods:
+                row = []
+                for f in fields:
+                    row.append(getattr(p, f))
+                writer.writerow(row)
+            return response
+        return super().response_change(request, obj)
 
     def number_of_periods(self, obj):
         return obj.periods.all().count()
@@ -449,6 +493,7 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
 @admin.register(Tag, site=admin_site)
 class TagAdmin(admin.ModelAdmin):
     pass
+
 
 @admin.register(TAMExportLog, site=admin_site)
 class TAMExportLogAdmin(admin.ModelAdmin):
@@ -476,4 +521,3 @@ class LeaseStageAdmin(admin.ModelAdmin):
 @admin.register(Building, site=admin_site)
 class BuildingAdmin(admin.ModelAdmin):
     list_display = ["building_identifier", "property"]
-

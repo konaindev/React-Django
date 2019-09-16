@@ -287,3 +287,10 @@ class PropertyForm(forms.ModelForm):
             "building_logo": ImageCropWidget,
             "building_image": ImageCropWidget,
         }
+
+
+class PeriodInlineForm(forms.ModelForm):
+    is_select = forms.BooleanField()
+
+    class Meta:
+        labels = {"is_select": " "}
