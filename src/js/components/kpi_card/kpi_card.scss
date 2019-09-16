@@ -136,10 +136,9 @@ $no-data-color: $gray-9;
 .kpi-card__alarm-icon {
     width: $s5;
     height: $s5;
-    fill: none;
 }
 
 .kpi-card__alarm-text {
-    padding: 10px;
+    padding: 0.625rem;
     text-align: center;
 }

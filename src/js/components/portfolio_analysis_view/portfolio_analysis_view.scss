@@ -30,6 +30,7 @@ $table-spacing: 100px;
 .portfolio-analysis__controls {
     display: flex;
     margin-top: $controls-spacing;
+    align-items: center;
     justify-content: space-between;
 }
 
@@ -84,4 +85,23 @@ $table-spacing: 100px;
 
 .portfolio-analysis__table {
     margin-top: $table-spacing;
+}
+
+.portfolio-analysis__alarm,
+.portfolio-analysis__alarm-icon {
+    width: $s5;
+    height: $s5;
+}
+
+.portfolio-analysis__alarm {
+    display: flex;
+    align-self: stretch;
+    align-items: center;
+    height: auto;
+    margin-left: auto;
+    margin-right: $s5;
+}
+
+.portfolio-analysis__alarm-text {
+    padding: 0.625rem;
 }
