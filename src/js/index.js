@@ -58,8 +58,8 @@ import { getGlobalData } from "./utils/globalData.js";
  */
 const renderApp = (pageClass, pageProps) => {
   const root = document.querySelector("#root");
-  const page = React.createElement(pageClass, pageProps);
-  const app = React.createElement(App, {}, page);
+  //const page = React.createElement(pageClass, pageProps);
+  const app = React.createElement(App, {}); //, page);
 
   ReactDOM.render(app, root);
 };

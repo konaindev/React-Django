@@ -18,11 +18,10 @@ import { Close, ListView, TileView } from "../../icons";
 import Loader from "../loader";
 import UserMenu from "../user_menu";
 
-import router from "../../router";
 import { qsParse, qsStringify } from "../../utils/misc";
 import TutorialView from "../tutorial_view";
 import { networking } from "../../state/actions";
-
+import { withRouter } from "react-router-dom";
 import "./dashboard_page.scss";
 
 const navLinks = {
@@ -78,16 +77,6 @@ export class DashboardPage extends React.PureComponent {
       selectedProperties: props.selectedProperties,
       isShowAddPropertyForm: false
     };
-
-    this._router = router("/dashboard")(queryString => {
-      // @TODO:
-      // uncomment in case of Django -> DashboardView renders empty props initially
-      //
-      // props.dispatch({
-      //   type: "API_DASHBOARD",
-      //   queryString
-      // });
-    });
   }
 
   selectAll = () => {
@@ -264,7 +253,7 @@ export class UrlQueryLayer extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.loadQueryString();
+    //this.loadQueryString();
   }
 
   loadQueryString = () => {
@@ -306,8 +295,8 @@ export class UrlQueryLayer extends React.PureComponent {
     });
 
     const queryString = qsStringify(urlParams);
-    window.history.replaceState({}, "", `/dashboard${queryString}`);
-    this.props.dispatch(networking.fetchDashboard(queryString));
+    //window.history.replaceState({}, "", `/dashboard${queryString}`);
+    // this.props.dispatch(networking.fetchDashboard(queryString));
   };
 
   render() {
@@ -339,4 +328,4 @@ const mapState = state => {
     ...state.network
   };
 };
-export default connect(mapState)(UrlQueryLayer);
+export default withRouter(connect(mapState)(UrlQueryLayer));
