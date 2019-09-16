@@ -8,7 +8,7 @@ from remark.lib.stats import health_check
 from remark.lib.logging import error_text, getLogger
 from remark.projects.reports.performance import PerformanceReport, InvalidReportRequest
 from remark.email_app.models import PerformanceEmail, ListservEmail
-from remark.email_app.constants import DEFAULT_SENDER_INFO
+from remark.email_app.constants import DEFAULT_SENDER_INFO, CONTACT_EMAIL_IN_TEMPLATE
 from remark.projects.models import TargetPeriod
 
 from .constants import (
@@ -29,9 +29,6 @@ from remark.lib.sendgrid_email import (
 from celery import shared_task
 
 logger = getLogger(__name__)
-
-CONTACT_EMAIL = "info@remarkably.io"
-SENDER_ID = 482157
 
 
 def none_wrapper(formatter, selector, obj):
@@ -146,7 +143,7 @@ def generate_template_vars(perf_email):
     low_kpis = perf_email.low_kpis
     risk_kpi_insight_text = perf_email.risk_kpi_insight_text
     low_kpi_insight_text = perf_email.low_kpi_insight_text
-    email = CONTACT_EMAIL
+    email = CONTACT_EMAIL_IN_TEMPLATE
 
     template_vars = {
         "report_url": f"https://app.remarkably.io/projects/{project_id}/performance/last-week/",
@@ -218,17 +215,23 @@ def send_performance_email(performance_email_id):
     title = f"{project.name} :: Performance Report :: {perf_email.start.strftime('%m/%d/%Y')}"
     subject = f"{project.name} :: Performance Report :: {perf_email.start.strftime('%m/%d/%Y')}"
 
+    if project.listserv_email:
+        sender_id = project.listserv_email.sender_id
+    else:
+        raise Exception("No Listserv email set in project")
+
     perf_email.email_campaign_id = create_campaign_if_not_exists(
         email_campaign_id,
         title,
         subject,
-        SENDER_ID,
+        sender_id,
         new_list_id,
         categories,
         html_content,
     )
     print("weekly_performance::send_performance_email::end")
     return True
+
 
 """
 Create a Sender object on Sendgrid, based on ListservEmail instance
@@ -237,7 +240,7 @@ Create a Sender object on Sendgrid, based on ListservEmail instance
 def create_sender_for_listserv(listserv_email_id):
     listserv_email = ListservEmail.objects.get(pk=listserv_email_id)
     sender_info = copy(DEFAULT_SENDER_INFO)
-    sender_info["nickname"] = listserv_email.email
+    sender_info["nickname"] = f"{listserv_email.email}-{listserv_email_id}"
     sender_info["reply_to"]["email"] = listserv_email.email
 
     try:

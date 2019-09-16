@@ -17,3 +17,5 @@ DEFAULT_SENDER_INFO = {
 
 DEFAULT_SENDER_ID = "482157"
 DEFAULT_SENDER_REPLY_TO = "customersuccess@remarkably.io"
+
+CONTACT_EMAIL_IN_TEMPLATE = "info@remarkably.io"
