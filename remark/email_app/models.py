@@ -2,8 +2,14 @@ from django.db import models
 from django.conf import settings
 
 from remark.lib.fields import NormalizedEmailField
+from remark.lib.tokens import public_id
 from remark.projects.models import Project
 from .reports.constants import KPI_NAMES, KPI_CATEGORIES
+
+
+def listserv_public_id():
+    """Public identifier for a project."""
+    return public_id("listserv")
 
 
 class PerformanceEmailManager(models.Manager):
@@ -102,6 +108,13 @@ class ListservEmailManager(models.Manager):
 
 class ListservEmail(models.Model):
     objects = ListservEmailManager()
+
+    public_id = models.CharField(
+        primary_key=True,
+        default=listserv_public_id,
+        max_length=25,
+        editable=False,
+    )
 
     email = NormalizedEmailField(unique=True)
 

@@ -9,8 +9,7 @@ def add_default_listserv_email(apps, schema_editor):
     # Add company's default listserv email for all existing Project's
     ListservEmail = apps.get_model("email_app", "ListservEmail")
     ListservEmail.objects.get_or_create(
-        email=DEFAULT_SENDER_REPLY_TO,
-        sender_id=DEFAULT_SENDER_ID
+        email=DEFAULT_SENDER_REPLY_TO, sender_id=DEFAULT_SENDER_ID
     )
 
 
@@ -18,4 +17,8 @@ class Migration(migrations.Migration):
 
     dependencies = [("email_app", "0004_create_listserv_email_table")]
 
-    operations = [migrations.RunPython(add_default_listserv_email)]
+    operations = [
+        migrations.RunPython(
+            add_default_listserv_email, reverse_code=migrations.RunPython.noop
+        )
+    ]

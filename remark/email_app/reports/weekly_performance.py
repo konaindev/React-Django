@@ -237,15 +237,15 @@ def send_performance_email(performance_email_id):
 Create a Sender object on Sendgrid, based on ListservEmail instance
 """
 @shared_task
-def create_sender_for_listserv(listserv_email_id):
-    listserv_email = ListservEmail.objects.get(pk=listserv_email_id)
-    sender_info = copy(DEFAULT_SENDER_INFO)
-    sender_info["nickname"] = f"{listserv_email.email}-{listserv_email_id}"
-    sender_info["reply_to"]["email"] = listserv_email.email
-
+def create_sender_for_listserv(listserv_id):
     try:
-        listserv_email.sender_id = create_sender(sender_info)
-        listserv_email.save()
+        listserv = ListservEmail.objects.get(pk=listserv_id)
+        sender_info = copy(DEFAULT_SENDER_INFO)
+        sender_info["nickname"] = f"{listserv.email}-{listserv.public_id}"
+        sender_info["reply_to"]["email"] = listserv.email
+
+        listserv.sender_id = create_sender(sender_info)
+        listserv.save()
     except Exception as e:
         logger.error(error_text(e))
 
