@@ -2,6 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import PortfolioAnalysisView from "../../components/portfolio_analysis_view";
 import { props } from "../../components/portfolio_analysis_view/props";
+import { withRouter } from "react-router-dom";
 
 class PortfolioContainer extends PureComponent {
   render() {
@@ -15,4 +16,4 @@ const mapState = state => ({
   ...state.network
 });
 
-export default connect(mapState)(PortfolioContainer);
+export default withRouter(connect(mapState)(PortfolioContainer));

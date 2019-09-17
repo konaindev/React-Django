@@ -323,10 +323,4 @@ export class UrlQueryLayer extends React.PureComponent {
   }
 }
 
-const mapState = state => {
-  return {
-    ...state.general,
-    ...state.network
-  };
-};
-export default withRouter(connect(mapState)(UrlQueryLayer));
+export default UrlQueryLayer;
