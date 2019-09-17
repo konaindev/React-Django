@@ -169,13 +169,13 @@ export class PortfolioAnalysisView extends React.PureComponent {
     if (emptyCount) {
       const propertyWord = emptyCount > 1 ? "properties" : "property";
       const message = (
-        <div className="portfolio-analysis__alarm-text">
+        <span>
           You have at least {emptyCount} {propertyWord} with no data in this
           selected reporting period.
-        </div>
+        </span>
       );
       return (
-        <Tooltip placement="top" overlay={message}>
+        <Tooltip placement="top" theme="light-dark" overlay={message}>
           <div className="portfolio-analysis__alarm">
             <Alarm className="portfolio-analysis__alarm-icon" />
           </div>

@@ -49,7 +49,7 @@ export const NoValueKPICard = ({ name, className }) => {
       <div className="kpi-card__bar" />
       <div className="kpi-card__no-data">No Data</div>
       <div className="kpi-card__alarm">
-        <Tooltip placement="top" overlay={text}>
+        <Tooltip placement="top" theme="light-dark" overlay={text}>
           <div className="kpi-card__alarm-icon-wrap">
             <Alarm className="kpi-card__alarm-icon" />
           </div>
@@ -82,7 +82,7 @@ export const NoTargetKPICard = ({ name, className, value }) => {
       <div className="kpi-card__value">{value}</div>
       <div className="kpi-card__name">{name}</div>
       <div className="kpi-card__alarm">
-        <Tooltip placement="bottom" overlay={text}>
+        <Tooltip placement="bottom" theme="light-dark" overlay={text}>
           <div className="kpi-card__alarm-icon-wrap">
             <Alarm className="kpi-card__alarm-icon" />
           </div>
