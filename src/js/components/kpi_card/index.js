@@ -61,8 +61,7 @@ export const NoValueKPICard = ({ name, className }) => {
 };
 NoValueKPICard.propTypes = {
   name: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
-  target: PropTypes.string.isRequired
+  className: PropTypes.string
 };
 
 export const NoTargetKPICard = ({ name, className, value }) => {
@@ -94,7 +93,7 @@ export const NoTargetKPICard = ({ name, className, value }) => {
 NoTargetKPICard.propTypes = {
   name: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  target: PropTypes.string.isRequired
+  className: PropTypes.string
 };
 
 export default React.memo(KPICard);

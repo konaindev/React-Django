@@ -47,12 +47,12 @@ const average_buttons_options = [
 function getEmptyPropertiesCount(properties) {
   return properties.reduce((acc, property) => {
     let value = acc;
-    if (_isNil(property.kpis)) {
-      if (property.type === "individual") {
+    if (property.type === "group") {
+      const props = property.properties || [];
+      value += getEmptyPropertiesCount(props);
+    } else {
+      if (_isNil(property.kpis)) {
         value += 1;
-      } else {
-        const props = property.properties || [];
-        value += getEmptyPropertiesCount(props);
       }
     }
     return value;
@@ -85,11 +85,11 @@ export class PortfolioAnalysisView extends React.PureComponent {
     }).isRequired,
     highlight_kpis: PropTypes.arrayOf(
       PropTypes.shape({
-        health: PropTypes.oneOf([-1, 0, 1, 2]).isRequired,
         name: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
-        target: PropTypes.any.isRequired,
-        value: PropTypes.any.isRequired
+        target: PropTypes.any,
+        value: PropTypes.any,
+        health: PropTypes.oneOf([-1, 0, 1, 2])
       })
     ).isRequired,
     table_data: PropTypes.arrayOf(PropTypes.object).isRequired,

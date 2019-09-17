@@ -495,3 +495,99 @@ exports[`PortfolioPropertyGroupRow renders opened 1`] = `
   </div>
 </div>
 `;
+
+exports[`PortfolioPropertyGroupRow renders without KPIs 1`] = `
+<div
+  className="portfolio-property-group-row"
+  style={Object {}}
+>
+  <div
+    className="portfolio-property-group-row__group portfolio-property-group-row__group--opening"
+    onClick={[Function]}
+  >
+    <div
+      className="portfolio-property-group-row__image"
+      style={
+        Object {
+          "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
+        }
+      }
+    />
+    <div
+      className="portfolio-property-group-row__title"
+    >
+      <div
+        className="portfolio-property-group-row__name"
+      >
+        West
+      </div>
+      <div
+        className="portfolio-property-group-row__property-count"
+      >
+        3
+         Properties
+      </div>
+    </div>
+    <div
+      className="portfolio-property-group-row__kpis"
+    >
+      <div
+        className="portfolio-property-group-row__kpi"
+      >
+        <div
+          className="portfolio-property-group-row__value"
+        >
+          
+        </div>
+        <div
+          className="portfolio-property-group-row__target"
+        >
+          
+        </div>
+      </div>
+      <div
+        className="portfolio-property-group-row__kpi"
+      >
+        <div
+          className="portfolio-property-group-row__value"
+        >
+          
+        </div>
+        <div
+          className="portfolio-property-group-row__target"
+        >
+          
+        </div>
+      </div>
+      <div
+        className="portfolio-property-group-row__kpi"
+      >
+        <div
+          className="portfolio-property-group-row__value"
+        >
+          
+        </div>
+        <div
+          className="portfolio-property-group-row__target"
+        >
+          
+        </div>
+      </div>
+      <div
+        className="portfolio-property-group-row__kpi"
+      >
+        <div
+          className="portfolio-property-group-row__value"
+        >
+          
+        </div>
+        <div
+          className="portfolio-property-group-row__target"
+        >
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -54,7 +54,7 @@ export default class PortfolioPropertyRow extends React.PureComponent {
     );
     if (this.isNoData) {
       return (
-        <Tooltip placement="top" theme="light-dark" overlay={message}>
+        <Tooltip theme="light-dark" overlay={message}>
           <div className="portfolio-property-row__alarm">
             <Alarm className="portfolio-property-row__alarm-icon" />
           </div>
