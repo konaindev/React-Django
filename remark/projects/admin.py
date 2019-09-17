@@ -1,7 +1,5 @@
-import csv
 from django.contrib import admin
 from django.contrib.admin.utils import unquote
-from django.http import HttpResponse
 from django.urls import path, reverse
 from django.utils.safestring import mark_safe
 
@@ -31,6 +29,7 @@ from .models import (
     Tag,
     LeaseStage,
 )
+from .export import export_periods_to_csv
 from .views import TAMExportView
 
 
@@ -454,25 +453,8 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
     form = ProjectForm
 
     def response_change(self, request, obj):
-        if "_export_periods" in request.POST:
-            periods_inline = request.POST.getlist("is_select")
-            periods = Period.objects.filter(
-                project_id=obj.public_id, id__in=periods_inline
-            )
-            excluded_fields = ["id", "project"]
-            fields = [
-                f.name for f in Period._meta.fields if not f.name in excluded_fields
-            ]
-            response = HttpResponse(content_type="text/csv")
-            response["Content-Disposition"] = 'attachment; filename="periods.csv"'
-            writer = csv.writer(response)
-            writer.writerow(fields)
-            for p in periods:
-                row = []
-                for f in fields:
-                    row.append(getattr(p, f))
-                writer.writerow(row)
-            return response
+        if "_export_periods_to_csv" in request.POST:
+            return export_periods_to_csv(request, obj)
         return super().response_change(request, obj)
 
     def number_of_periods(self, obj):
