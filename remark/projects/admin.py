@@ -29,7 +29,7 @@ from .models import (
     Tag,
     LeaseStage,
 )
-from .export import export_periods_to_csv
+from .export import export_periods_to_csv, export_periods_to_excel
 from .views import TAMExportView
 
 
@@ -455,6 +455,8 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
     def response_change(self, request, obj):
         if "_export_periods_to_csv" in request.POST:
             return export_periods_to_csv(request, obj)
+        if "_export_periods_to_excel" in request.POST:
+            return export_periods_to_excel(obj.public_id)
         return super().response_change(request, obj)
 
     def number_of_periods(self, obj):
