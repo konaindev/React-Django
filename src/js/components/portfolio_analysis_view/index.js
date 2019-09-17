@@ -20,12 +20,12 @@ const navLinks = {
     {
       id: "portfolio",
       name: "Portfolio",
-      url: "/dashboard"
+      url: "#/dashboard"
     },
     {
       id: "portfolio-analysis",
       name: "Portfolio Analysis",
-      url: "/portfolio/table"
+      url: "#/portfolio/table"
     }
   ],
   selected_link: "portfolio-analysis"
@@ -216,7 +216,8 @@ export default class UrlQueryLayer extends React.PureComponent {
     urlParams["s"] = params.date_selection.start_date;
     urlParams["e"] = params.date_selection.end_date;
     urlParams["a"] = params.display_average;
-    window.location.search = qsStringify(urlParams);
+    const constructedUrl = qsStringify(urlParams);
+    this.props.history.push(constructedUrl);
   };
 
   render() {

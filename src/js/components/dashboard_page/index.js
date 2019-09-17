@@ -29,12 +29,12 @@ const navLinks = {
     {
       id: "portfolio",
       name: "Portfolio",
-      url: "/dashboard"
+      url: "#/dashboard"
     },
     {
       id: "portfolio-analysis",
       name: "Portfolio Analysis",
-      url: "/portfolio/table"
+      url: "#/portfolio/table"
     }
   ],
   selected_link: "portfolio"
@@ -253,7 +253,7 @@ export class UrlQueryLayer extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    //this.loadQueryString();
+    this.loadQueryString();
   }
 
   loadQueryString = () => {
@@ -295,6 +295,7 @@ export class UrlQueryLayer extends React.PureComponent {
     });
 
     const queryString = qsStringify(urlParams);
+    this.props.history.push(queryString);
     //window.history.replaceState({}, "", `/dashboard${queryString}`);
     // this.props.dispatch(networking.fetchDashboard(queryString));
   };

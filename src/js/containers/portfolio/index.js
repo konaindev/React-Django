@@ -1,11 +1,12 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import { PortfolioAnalysisView } from "../../components/portfolio_analysis_view";
+import PortfolioAnalysisView from "../../components/portfolio_analysis_view";
+import { props } from "../../components/portfolio_analysis_view/props";
 
 class PortfolioContainer extends PureComponent {
   render() {
-    // return <PortfolioAnalysisView {...this.props} />;
-    return <div>Portfolio Container</div>;
+    console.log(props);
+    return <PortfolioAnalysisView {...props} {...this.props} />;
   }
 }
 

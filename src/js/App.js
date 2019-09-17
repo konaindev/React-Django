@@ -8,9 +8,6 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <RemarkableRouter />
-        {/* <AppRouter>
-          {/* <div className="app">{this.props.children}</div> */}
-        {/* {/* </AppRouter> */}
       </Provider>
     );
   }
