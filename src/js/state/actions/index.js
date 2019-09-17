@@ -29,8 +29,23 @@ export const networking = {
 };
 
 export const createPassword = {
+  set: newState => ({
+    type: "CREATE_PASSWORD_SET_STATE",
+    newState
+  }),
   redirect: url => ({
     type: "CREATE_PASSWORD_REDIRECT",
     url
+  })
+};
+
+export const completeAccount = {
+  redirect: url => ({
+    type: "COMPLETE_ACCOUNT_REDIRECT",
+    url
+  }),
+  set: newState => ({
+    type: "COMPLETE_ACCOUNT_SET_STATE",
+    newState
   })
 };

@@ -26,6 +26,7 @@ storiesOf("Select", module)
   .add("group", () => <Select {...propsGroup} />)
   .add("highlight", () => <Select theme="highlight" {...props} />)
   .add("highlight group", () => <Select theme="highlight" {...propsGroup} />)
+  .add("gray", () => <Select theme="gray" {...props} />)
   .add("form select", () => (
     <Formik>
       <FormSelect {...props} />

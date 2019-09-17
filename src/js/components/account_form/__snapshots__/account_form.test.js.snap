@@ -68,6 +68,7 @@ exports[`AccountForm renders correctly 1`] = `
     <input
       className="input account-form__field input--highlight"
       name="password"
+      onChange={[Function]}
       type="password"
     />
   </div>
