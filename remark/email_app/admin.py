@@ -95,7 +95,7 @@ class ListservEmailAdmin(admin.ModelAdmin):
             logger.info("ListservEmail::save_model::after save")
             if not change:
                 logger.info("ListservEmail::save_model::before sender creation")
-                create_sender_for_listserv.apply_async(args=(obj.id,), countdown=2)
+                create_sender_for_listserv.apply_async(args=(obj.public_id,), countdown=2)
                 logger.info("ListservEmail::save_model::after sender creation")
         except Exception as e:
             logger.error(error_text(e))

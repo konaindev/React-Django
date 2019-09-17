@@ -237,9 +237,9 @@ def send_performance_email(performance_email_id):
 Create a Sender object on Sendgrid, based on ListservEmail instance
 """
 @shared_task
-def create_sender_for_listserv(listserv_id):
+def create_sender_for_listserv(listserv_public_id):
     try:
-        listserv = ListservEmail.objects.get(pk=listserv_id)
+        listserv = ListservEmail.objects.get(pk=listserv_public_id)
         sender_info = copy(DEFAULT_SENDER_INFO)
         sender_info["nickname"] = f"{listserv.email}-{listserv.public_id}"
         sender_info["reply_to"]["email"] = listserv.email
