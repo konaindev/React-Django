@@ -101,6 +101,7 @@
     "react-copy-to-clipboard": "^5.0.1",
     "react-day-picker": "7.3.0",
     "react-dom": "^16",
+    "react-ga": "^2.6.0",
     "react-markdown": "^4.0.6",
     "react-redux": "^7.1.0",
     "react-responsive-modal": "^4.0.1",
