@@ -54,6 +54,8 @@ factory-boy = "*"
 django-mjml = "*"
 django-image-cropping = "*"
 easy-thumbnails = "*"
+djangorestframework = "*"
+djangorestframework-simplejwt = "*"
 
 [requires]
 python_version = "3.7"

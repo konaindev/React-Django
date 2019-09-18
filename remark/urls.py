@@ -20,6 +20,7 @@ from django.urls import path, include
 from django.views.decorators.cache import cache_page
 
 from django_js_reverse.views import urls_js
+from rest_framework_simplejwt import views as jwt_views
 
 from .admin import admin_site
 
@@ -49,4 +50,7 @@ urlpatterns = [
     path("charts/", include("remark.charts.urls")),
     path("portfolio/", include("remark.portfolio.urls")),
     path("crm/", include("remark.crm.urls")),
+
+    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
