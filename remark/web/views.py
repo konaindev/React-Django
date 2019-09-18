@@ -38,7 +38,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
         cache_key = f"remark.web.views.dashboard_view.project.{project.public_id}"
 
         """ method to generate value when request indicates to bust cache """
-        def generate_value(cache):
+        def generate_value():
             address = project.property.geo_address
             project_details = dict(
                 property_name=project.name,
@@ -48,7 +48,6 @@ class DashboardView(LoginRequiredMixin, ReactView):
                 performance_rating=project.get_performance_rating(),
                 url=project.get_baseline_url(),
             )
-            cache.set(cache_key, project_details, cache_lib.TIMEOUT_1_DAY)
             return project_details
         
         return cache_lib.access_cache(cache_key, generate_value, request=request)
@@ -71,7 +70,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
         cache_key = f"remark.web.views.dashboard_view.user_filters.{request.user.public_id}"
 
         """ method to generate value when request indicates to bust cache """
-        def generate_value(cache):
+        def generate_value():
             owned_projects = self.get_owned_projects(request.user)
 
             locations = []
@@ -120,7 +119,6 @@ class DashboardView(LoginRequiredMixin, ReactView):
                 funds=funds,
                 no_projects=no_projects,
             )
-            cache.set(cache_key, user_filters, cache_lib.TIMEOUT_1_DAY)
             return user_filters
 
         return cache_lib.access_cache(cache_key, generate_value, request=request)

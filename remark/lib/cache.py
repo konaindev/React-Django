@@ -8,13 +8,15 @@ TIMEOUT_1_WEEK = TIMEOUT_1_DAY * 7
 def access_cache(key, method_to_generate_value, **kwargs):
     if 'request' in kwargs and kwargs['request'].GET.get('cb', '') == 'true':
         cache.set(key, None)
-    
+
     value = cache.get(key)
+
     if value is None:
-        value = method_to_generate_value(cache)
+        value = method_to_generate_value()
+        cache.set(key, value, TIMEOUT_1_DAY)
 
     return value
-    
+
 
 def remark_cache(base_key, timeout=TIMEOUT_1_HOUR, version=0):
     """
