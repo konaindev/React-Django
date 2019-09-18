@@ -6,6 +6,7 @@ import {
   completeAccount
 } from "../actions";
 import { axiosGet, axiosPost } from "../../utils/api";
+import ReactGa from "react-ga";
 
 // Here we create a middleware that intercepts
 // actions representing a request for data from
@@ -131,5 +132,16 @@ export const fetchCompleteAccount = store => next => action => {
     }
   } else {
     next(action);
+  }
+};
+
+export const sendGaEvent = store => next => action => {
+  switch (action.type) {
+    case "GA_EVENT": {
+      ReactGa.event(action.event);
+      break;
+    }
+    default:
+      next(action);
   }
 };

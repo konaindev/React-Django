@@ -5,7 +5,8 @@ import {
   fetchTutorial,
   fetchCreatePassword,
   fetchCompany,
-  fetchCompleteAccount
+  fetchCompleteAccount,
+  sendGaEvent
 } from "../middleware";
 
 import { persistStore, persistReducer } from "redux-persist";
@@ -33,7 +34,8 @@ export default () => {
         fetchTutorial,
         fetchCreatePassword,
         fetchCompany,
-        fetchCompleteAccount
+        fetchCompleteAccount,
+        sendGaEvent
       )
     )
   );

@@ -56,3 +56,10 @@ export const token = {
     token: x
   })
 };
+
+export const event = {
+  ga: x => ({
+    type: "GA_EVENT",
+    event: x
+  })
+};

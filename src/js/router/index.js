@@ -1,8 +1,9 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Link } from "react-router-dom";
 import ProjectsContainer from "../containers/projects";
 import DashboardContainer from "../containers/dashboard";
 import PortfolioContainer from "../containers/portfolio";
+import { TrackedRoute as Route } from "./gaTracked";
 
 export function RemarkableRouter() {
   return (
