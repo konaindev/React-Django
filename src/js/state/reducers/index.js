@@ -1,7 +1,20 @@
 import { combineReducers } from "redux";
+import { stat } from "fs";
 
 const initState = {
   tutorialView: {}
+};
+
+const token = (state = { token: null }, action) => {
+  let newState = {};
+  switch (action.type) {
+    case "UPDATE_TOKEN": {
+      newState = { token: action.token };
+    }
+    default:
+      newState = { ...state };
+  }
+  return newState;
 };
 
 const dashboard = (state = {}, action) => {
@@ -93,5 +106,6 @@ export default combineReducers({
   network,
   tutorial,
   createPassword,
-  completeAccount
+  completeAccount,
+  token
 });
