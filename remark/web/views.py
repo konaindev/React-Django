@@ -51,7 +51,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
             cache.set(cache_key, project_details, cache_lib.TIMEOUT_1_DAY)
             return project_details
         
-        return cache_lib.access_cache(request, cache_key, generate_value)
+        return cache_lib.access_cache(cache_key, generate_value, request=request)
 
     def get_owned_projects(self, user):
         """ return QuerySet<Project> accessible by the specified user """
@@ -123,7 +123,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
             cache.set(cache_key, user_filters, cache_lib.TIMEOUT_1_DAY)
             return user_filters
 
-        return cache_lib.access_cache(request, cache_key, generate_value)
+        return cache_lib.access_cache(cache_key, generate_value, request=request)
 
     def prepare_filters_from_request(self, request):
         """ calc queryset filter params based on HTTP request query strings """

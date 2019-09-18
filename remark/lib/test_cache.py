@@ -20,35 +20,35 @@ class CacheTestCase(TestCase):
         mock_cache.set = _set
 
 
-    def test_get_cache_no_cache_bust(self):
+    def test_get_cache_with_request_no_cache_bust(self):
         with patch('remark.lib.cache.cache') as mock_cache:
             request = self.factory.get('/dashboard')
             cache = {'marco': 'polo'}
             self.setUpPatch(mock_cache, cache)
 
-            response_with_valid_key = access_cache(request, 'marco', self.mock_function_stub)
-            response_with_invalid_key = access_cache(request, 'mickey', self.mock_function_stub)
+            response_with_valid_key = access_cache('marco', self.mock_function_stub, request=request)
+            response_with_invalid_key = access_cache('mickey', self.mock_function_stub, request=request)
             self.assertEqual(response_with_valid_key, 'polo')
             self.assertEqual(response_with_invalid_key, 'busted cache!')
     
 
-    def test_get_cache_with_cache_bust(self):
+    def test_get_cache_with_request_cache_bust(self):
         with patch('remark.lib.cache.cache') as mock_cache:
             request = self.factory.get('/dashboard?cb=true')
             cache = {'marco': 'polo'}
             self.setUpPatch(mock_cache, cache)
 
-            response_with_valid_key = access_cache(request, 'marco', self.mock_function_stub)
-            response_with_invalid_key = access_cache(request, 'mickey', self.mock_function_stub)
+            response_with_valid_key = access_cache('marco', self.mock_function_stub, request=request)
+            response_with_invalid_key = access_cache('mickey', self.mock_function_stub, request=request)
             self.assertEqual(response_with_valid_key, 'busted cache!')
             self.assertEqual(response_with_invalid_key, 'busted cache!')
             
 
-    def test_get_cache_with_invalid_cache_bust_should_not_bust(self):
+    def test_get_cache_with_request_invalid_cache_bust_should_not_bust(self):
         with patch('remark.lib.cache.cache') as mock_cache:
             request = self.factory.get('/dashboard?cb=blue')
             cache = {'marco': 'polo'}
             self.setUpPatch(mock_cache, cache)
 
-            response = access_cache(request, 'marco', self.mock_function_stub)
+            response = access_cache('marco', self.mock_function_stub, request=request)
             self.assertEqual(response, 'polo')

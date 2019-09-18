@@ -2,7 +2,7 @@ import datetime
 import decimal
 
 from django.contrib.auth.models import Group
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.urls import reverse
 
 from unittest.mock import patch, Mock
@@ -251,7 +251,7 @@ class TestDashboardView(TestCase):
     def test_calling_access_cache(self):
         with patch('remark.lib.cache.access_cache') as cache_mock:
             dashboard = DashboardView()
-            dashboard.get_project_details(Mock(), '')
+            dashboard.get_project_details(Mock(), Mock())
             cache_mock.assert_called_once()
             dashboard.get_user_filter_options(Mock())
             self.assertEqual(cache_mock.call_count, 2)
