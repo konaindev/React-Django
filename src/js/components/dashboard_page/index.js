@@ -21,7 +21,6 @@ import UserMenu from "../user_menu";
 import { qsParse, qsStringify } from "../../utils/misc";
 import TutorialView from "../tutorial_view";
 import { networking } from "../../state/actions";
-import { withRouter } from "react-router-dom";
 import "./dashboard_page.scss";
 
 const navLinks = {
