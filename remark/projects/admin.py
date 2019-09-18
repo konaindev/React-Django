@@ -454,7 +454,8 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
 
     def response_change(self, request, obj):
         if "_export_periods_to_csv" in request.POST:
-            return export_periods_to_csv(request, obj)
+            periods_ids = request.POST.getlist("is_select")
+            return export_periods_to_csv(periods_ids, obj.public_id)
         if "_export_periods_to_excel" in request.POST:
             return export_periods_to_excel(obj.public_id)
         return super().response_change(request, obj)

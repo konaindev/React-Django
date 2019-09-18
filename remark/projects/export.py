@@ -10,13 +10,12 @@ from .models import Period
 
 logger = getLogger(__name__)
 
-EXPORT_FIELDS = [
+EXPORT_CSV_FIELDS = [
     "lease_stage",
     "start",
     "end",
     "includes_remarkably_effect",
     "leased_units_start",
-    "leased_units_end",
     "leases_ended",
     "lease_applications",
     "leases_executed",
@@ -26,7 +25,6 @@ EXPORT_FIELDS = [
     "lease_vacation_notices",
     "occupiable_units_start",
     "occupied_units_start",
-    "occupied_units_end",
     "move_ins",
     "move_outs",
     "acq_reputation_building",
@@ -43,16 +41,15 @@ EXPORT_FIELDS = [
 ]
 
 
-def export_periods_to_csv(request, obj):
-    periods_inline = request.POST.getlist("is_select")
-    periods = Period.objects.filter(project_id=obj.public_id, id__in=periods_inline)
+def export_periods_to_csv(periods_ids, project_id):
+    periods = Period.objects.filter(project_id=project_id, id__in=periods_ids)
     response = HttpResponse(content_type="text/csv")
     response["Content-Disposition"] = 'attachment; filename="periods.csv"'
     writer = csv.writer(response)
-    writer.writerow(EXPORT_FIELDS)
+    writer.writerow(EXPORT_CSV_FIELDS)
     for p in periods:
         row = []
-        for f in EXPORT_FIELDS:
+        for f in EXPORT_CSV_FIELDS:
             row.append(getattr(p, f))
         writer.writerow(row)
     return response
