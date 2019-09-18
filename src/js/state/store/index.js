@@ -13,7 +13,8 @@ import storage from "redux-persist/lib/storage";
 
 const cfg = {
   key: "rmb",
-  storage
+  storage,
+  whitelist: ["network"]
 };
 
 // TODO: contextually enable devtools based on prod or not
