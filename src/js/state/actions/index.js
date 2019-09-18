@@ -49,3 +49,10 @@ export const completeAccount = {
     newState
   })
 };
+
+export const token = {
+  update: x => ({
+    type: "UPDATE_TOKEN",
+    token: x
+  })
+};
