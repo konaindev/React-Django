@@ -28,11 +28,11 @@ class CompleteAccountView extends React.PureComponent {
   constructor(props) {
     super(props);
     this.formik = React.createRef();
-    this._router = router("/complete-account")(() => {
-      props.dispatch({
-        type: "API_COMPLETE_ACCOUNT"
-      });
-    });
+    // this._router = router("/complete-account")(() => {
+    //   props.dispatch({
+    //     type: "API_COMPLETE_ACCOUNT"
+    //   });
+    // });
   }
 
   initialValues = {

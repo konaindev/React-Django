@@ -29,12 +29,12 @@ const navLinks = {
     {
       id: "portfolio",
       name: "Portfolio",
-      url: "#/dashboard"
+      url: "/dashboard"
     },
     {
       id: "portfolio-analysis",
       name: "Portfolio Analysis",
-      url: "#/portfolio/table"
+      url: "/portfolio"
     }
   ],
   selected_link: "portfolio"

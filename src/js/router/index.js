@@ -1,18 +1,12 @@
 import React from "react";
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-  Link,
-  HashRouter
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import ProjectsContainer from "../containers/projects";
 import DashboardContainer from "../containers/dashboard";
 import PortfolioContainer from "../containers/portfolio";
 
 export function RemarkableRouter() {
   return (
-    <HashRouter>
+    <Router>
       <Link to="/dashboard">test</Link>
       <Switch>
         <Route path="/" exact component={DashboardContainer} />
@@ -21,6 +15,6 @@ export function RemarkableRouter() {
         <Route path="/portfolio" component={PortfolioContainer} />
         <Route component={DashboardContainer} />
       </Switch>
-    </HashRouter>
+    </Router>
   );
 }
