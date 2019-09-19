@@ -147,6 +147,21 @@ storiesOf("RMBTooltip", module)
       </Tooltip>
     </div>
   ))
+  .add("light dark", () => (
+    <div
+      style={{
+        padding: "2rem",
+        width: "50vw",
+        height: "50vh",
+        background: "#f6f6f6",
+        textAlign: "center"
+      }}
+    >
+      <Tooltip placement="bottom" theme="light-dark" text="Tooltip Text">
+        <span>Tooltip</span>
+      </Tooltip>
+    </div>
+  ))
   .add("text with link", () => (
     <div
       style={{

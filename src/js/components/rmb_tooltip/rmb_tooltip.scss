@@ -122,6 +122,18 @@ $tooltip-border-radius: 4px;
     }
 }
 
+.rmb-tooltip--light-dark {
+    .rc-tooltip-inner {
+        padding: 20px;
+        background-color: $tooltip-dark-bg;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .rc-tooltip-arrow {
+        background-image: url(images/arrow-dark.svg);
+    }
+}
+
 .rmb-tooltip__text {
     margin: 10px;
     font-size: $text-sm;

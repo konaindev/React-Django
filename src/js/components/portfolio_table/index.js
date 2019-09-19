@@ -22,7 +22,7 @@ export default class PortfolioTable extends React.PureComponent {
     individual: PortfolioPropertyRow
   };
 
-  renderRow() {
+  renderRows() {
     const kpiOrder = this.props.kpi_order.map(kpi => kpi.value);
     return this.props.properties.map((property, index) => {
       if (property && property !== null) {
@@ -49,7 +49,7 @@ export default class PortfolioTable extends React.PureComponent {
           <div className="portfolio-table__title">Group</div>
           <div className="portfolio-table__kpis">{this.renderHeaderKPIs()}</div>
         </div>
-        <div className="portfolio-table__body">{this.renderRow()}</div>
+        <div className="portfolio-table__body">{this.renderRows()}</div>
       </div>
     );
   }
