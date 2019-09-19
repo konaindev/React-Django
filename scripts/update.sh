@@ -12,6 +12,7 @@ if [ -f '/tmp/remark.sqlite' ]; then
 else
   NEW_DB=1
 fi
+python manage.py makemigrations --merge
 pipenv run ./manage.py migrate
 pipenv run ./manage.py test
 if [ "$NEW_DB" -eq '1' ]; then
