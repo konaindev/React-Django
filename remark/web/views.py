@@ -48,7 +48,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
             address=f"{address.city}, {address.state}",
             image_url=project.get_building_image()[1],
             performance_rating=project.get_performance_rating(),
-            url=project.get_baseline_url(),
+            urs=project.get_report_url(),
         )
         cache.set(cache_key, project_details, TIMEOUT_1_DAY)
         return project_details
