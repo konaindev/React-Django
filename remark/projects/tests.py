@@ -3,6 +3,8 @@ import decimal
 import os.path
 
 from django.test import TestCase
+from openpyxl import load_workbook
+from io import BytesIO
 
 from remark.crm.models import Business
 from remark.geo.models import Address
@@ -11,6 +13,7 @@ from remark.lib.metrics import BareMultiPeriod
 from .models import Fund, LeaseStage, Period, Project, Property, TargetPeriod
 from .reports.periods import ComputedPeriod
 from .reports.performance import PerformanceReport
+from .export import export_periods_to_csv, export_periods_to_excel
 
 
 class DefaultComputedPeriodTestCase(TestCase):
@@ -545,3 +548,105 @@ class PerformanceEmailSignalTestCase(TestCase):
         self.assertEqual(len(low), 2)
         self.assertEqual(low[0], "usv")
         self.assertEqual(low[1], "inq")
+
+
+class ExportTestCase(TestCase):
+    def setUp(self):
+        address = Address.objects.create(
+            street_address_1="2284 W. Commodore Way, Suite 200",
+            city="Seattle",
+            state="WA",
+            zip_code=98199,
+            country="US",
+        )
+        account = Account.objects.create(
+            company_name="test", address=address, account_type=4
+        )
+        asset_manager = Business.objects.create(
+            name="Test Asset Manager", is_asset_manager=True
+        )
+        property_manager = Business.objects.create(
+            name="Test Property Manager", is_property_manager=True
+        )
+        property_owner = Business.objects.create(
+            name="Test Property Owner", is_property_owner=True
+        )
+        fund = Fund.objects.create(account=account, name="Test Fund")
+        property = Property.objects.create(
+            name="test",
+            average_monthly_rent=decimal.Decimal("0"),
+            lowest_monthly_rent=decimal.Decimal("0"),
+            geo_address=address,
+        )
+        project = Project.objects.create(
+            name="test",
+            baseline_start=datetime.date(year=2018, month=11, day=19),
+            baseline_end=datetime.date(year=2018, month=12, day=26),
+            account=account,
+            asset_manager=asset_manager,
+            property_manager=property_manager,
+            property_owner=property_owner,
+            fund=fund,
+            property=property,
+        )
+        stage = LeaseStage.objects.get(short_name="performance")
+        raw_period = Period.objects.create(
+            project=project,
+            lease_stage=stage,
+            start=datetime.date(year=2018, month=12, day=19),
+            end=datetime.date(year=2018, month=12, day=26),
+            leased_units_start=104,
+            usvs=4086,
+            inquiries=51,
+            tours=37,
+            lease_applications=8,
+            leases_executed=6,
+            occupiable_units_start=218,
+            occupied_units_start=218,
+            leases_ended=3,
+            lease_renewal_notices=0,
+            acq_reputation_building=decimal.Decimal("28000"),
+            acq_demand_creation=decimal.Decimal("21000"),
+            acq_leasing_enablement=decimal.Decimal("11000"),
+            acq_market_intelligence=decimal.Decimal("7000.0"),
+        )
+        self.project = project
+        self.period = raw_period
+
+    def test_export_periods_to_csv(self):
+        periods_ids = [self.period.id]
+        response = export_periods_to_csv(periods_ids, self.project.public_id)
+        csv_str = response.content.decode("utf-8")
+        result = (
+            "lease_stage,start,end,includes_remarkably_effect,"
+            "leased_units_start,leases_ended,lease_applications,"
+            "leases_executed,lease_cds,lease_renewal_notices,"
+            "lease_renewals,lease_vacation_notices,"
+            "occupiable_units_start,occupied_units_start,move_ins,"
+            "move_outs,acq_reputation_building,acq_demand_creation,"
+            "acq_leasing_enablement,acq_market_intelligence,"
+            "ret_reputation_building,ret_demand_creation,"
+            "ret_leasing_enablement,ret_market_intelligence,usvs,"
+            "inquiries,tours"
+            "\r\nImprove Performance,2018-12-19,2018-12-26,True,104,"
+            "3,8,6,0,0,0,0,218,218,0,0,28000.00,21000.00,11000.00,"
+            "7000.00,0.00,0.00,0.00,0.00,4086,51,37\r\n"
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(csv_str, result)
+
+    def test_export_periods_to_excel(self):
+        response = export_periods_to_excel(self.project.public_id)
+        self.assertEqual(response.status_code, 200)
+
+        response_wb = load_workbook(BytesIO(response.content))
+        response_ws = response_wb["periods"]
+
+        wb = load_workbook(filename = "remark/projects/tests/periods.xlsx")
+        ws_periods = wb["periods"]
+        for row in range(1, response_ws.max_row + 1):
+            for col in range(1, response_ws.max_column + 1):
+                self.assertEqual(
+                    ws_periods.cell(row=row, column=col).value,
+                    response_ws.cell(row=row, column=col).value
+                )
