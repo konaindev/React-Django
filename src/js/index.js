@@ -28,6 +28,7 @@ import CampaignPlanPage from "./components/campaign_plan_page";
 import store from "./state/store";
 import { general } from "./state/actions";
 import PortfolioAnalysisView from "./components/portfolio_analysis_view";
+import CreatePasswordView from "./components/create_password_view";
 import CompleteAccountView from "./components/complete_account_view";
 
 const pages = {
@@ -42,7 +43,8 @@ const pages = {
   ReleaseNoteDetailsPage,
   CampaignPlanPage,
   PortfolioAnalysisView,
-  CompleteAccountView
+  CompleteAccountView,
+  CreatePasswordView
 };
 
 /*
