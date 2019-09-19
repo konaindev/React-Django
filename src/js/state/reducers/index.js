@@ -100,11 +100,24 @@ const completeAccount = (
   return newState;
 };
 
+const pageMeta = (state = { title: "Remarkably" }, action) => {
+  let newState = state;
+
+  switch (action.type) {
+    case "UPDATE_PAGE_TITLE": {
+      newState = { ...state, title: action.title };
+    }
+    default:
+      newState = state;
+  }
+  return newState;
+};
 export default combineReducers({
   general: dashboard,
   network,
   tutorial,
   createPassword,
   completeAccount,
-  token
+  token,
+  pageMeta
 });

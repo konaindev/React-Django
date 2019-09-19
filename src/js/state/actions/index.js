@@ -63,3 +63,10 @@ export const event = {
     event: x
   })
 };
+
+export const pageMeta = {
+  title: title => ({
+    type: "UPDATE_PAGE_TITLE",
+    title
+  })
+};
