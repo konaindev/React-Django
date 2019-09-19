@@ -126,6 +126,13 @@ class User(PermissionsMixin, AbstractBaseUser):
     )
     email = NormalizedEmailField(unique=True)
 
+    activated = models.DateTimeField(
+        default=None,
+        blank=True,
+        null=True,
+        help_text="Date when the user activated their account.",
+    )
+
     is_show_tutorial = models.BooleanField(
         default=True, help_text="Should there be tutorial showing"
     )

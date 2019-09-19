@@ -1,3 +1,5 @@
+from django.contrib.auth.password_validation import get_password_validators
+
 ACCOUNT_TYPE = (
     (1, "Property Owner"),
     (2, "Asset Manager"),
@@ -20,3 +22,46 @@ BUSINESS_TYPE = {
     "asset_manager": "is_asset_manager",
     "property_manager": "is_property_manager",
 }
+
+VALIDATION_RULES = [
+    {
+        "validator": get_password_validators(
+            [{"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"}]
+        ),
+        "label": "Be at least 8 characters",
+        "key": "password-length",
+    },
+    {
+        "validator": get_password_validators(
+            [
+                {
+                    "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"
+                }
+            ]
+        ),
+        "label": "Contain alphabetic characters",
+        "key": "characters",
+    },
+    {
+        "validator": get_password_validators(
+            [
+                {
+                    "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+                }
+            ]
+        ),
+        "label": "Not match personal information",
+        "key": "personal",
+    },
+    {
+        "validator": get_password_validators(
+            [
+                {
+                    "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"
+                }
+            ]
+        ),
+        "label": "Not be a commonly used password",
+        "key": "used",
+    },
+]

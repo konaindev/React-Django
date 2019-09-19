@@ -18,3 +18,12 @@ export const onTrack = {
   target: "6%",
   value: "5%"
 };
+
+export const NoValueCard = {
+  name: "TOU → APP"
+};
+
+export const NoTargetCard = {
+  name: "TOU → APP",
+  value: "66%"
+};

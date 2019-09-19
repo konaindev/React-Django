@@ -84,6 +84,7 @@ INSTALLED_APPS = [
     "mjml",
     "easy_thumbnails",
     "image_cropping",
+    "rest_framework",
     "remark.charts",
     "remark.sales",
     "remark.email_app",
@@ -316,3 +317,9 @@ with configure_scope() as scope:
 # Use the same storage engine for thumbnails as for files
 THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
 THUMBNAIL_PRESERVE_EXTENSIONS = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ],
+}

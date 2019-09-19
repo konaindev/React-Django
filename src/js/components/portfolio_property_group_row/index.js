@@ -18,7 +18,7 @@ export default class PortfolioPropertyGroupRow extends React.PureComponent {
       PropTypes.number
     ]),
     kpi_order: PropTypes.array.isRequired,
-    kpis: PropTypes.object.isRequired,
+    kpis: PropTypes.object,
     targets: PropTypes.object
   };
 
@@ -60,11 +60,13 @@ export default class PortfolioPropertyGroupRow extends React.PureComponent {
       if ("targets" in this.props && kpi in this.props.targets) {
         target = `Target: ${formatKPI(kpi, this.props.targets[kpi])}`;
       }
+      let value = "";
+      if (this.props.kpis?.[kpi]) {
+        value = formatKPI(kpi, this.props.kpis[kpi]);
+      }
       return (
         <div className="portfolio-property-group-row__kpi" key={index}>
-          <div className="portfolio-property-group-row__value">
-            {formatKPI(kpi, this.props.kpis[kpi])}
-          </div>
+          <div className="portfolio-property-group-row__value">{value}</div>
           <div className="portfolio-property-group-row__target">{target}</div>
         </div>
       );
