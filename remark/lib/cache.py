@@ -1,21 +1,32 @@
 from django.core.cache import cache
-
+from django.conf import settings
 
 TIMEOUT_1_HOUR = 60 * 60
 TIMEOUT_1_DAY = TIMEOUT_1_HOUR * 24
 TIMEOUT_1_WEEK = TIMEOUT_1_DAY * 7
 
-def access_cache(key, method_to_generate_value, **kwargs):
-    if 'request' in kwargs and kwargs['request'].GET.get('cb', '') == 'true':
+def access_cache(key, method_to_generate_value, cache_bust=False, ttl=TIMEOUT_1_DAY):
+    if cache_bust:
         cache.set(key, None)
 
     value = cache.get(key)
 
     if value is None:
         value = method_to_generate_value()
-        cache.set(key, value, TIMEOUT_1_DAY)
+        cache.set(key, value, ttl)
 
     return value
+
+
+def check_request_cache_bust(request):
+    """
+    Only for Dev and Staging (not for Production!)
+    User can pass a value (currently 'cb') to check if cache needs to be busted before accessing
+    """
+    if settings.ENV != settings.PROD:
+        return True if request.GET.get('cb', '') == 'true' else False
+
+    return False
 
 
 def remark_cache(base_key, timeout=TIMEOUT_1_HOUR, version=0):
