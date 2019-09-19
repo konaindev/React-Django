@@ -1,5 +1,5 @@
 import React from "react";
-import { connect } from "redux-redux";
+import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 
 class TitleGate extends React.PureComponent {
@@ -19,4 +19,4 @@ class TitleGate extends React.PureComponent {
 const mapState = state => ({
   title: state.pageMeta.title
 });
-export default withRouter(connect(x => x)(TitleGate));
+export default withRouter(connect(mapState)(TitleGate));
