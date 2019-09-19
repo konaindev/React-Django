@@ -24,6 +24,7 @@ from remark.lib.metrics import (
 )
 from remark.projects.spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
 from remark.projects.reports.performance import PerformanceReport
+from remark.projects.reports.selectors import ReportLinks
 from remark.projects.constants import PROPERTY_TYPE, BUILDING_CLASS, SIZE_LANDSCAPE, SIZE_THUMBNAIL
 
 
@@ -443,8 +444,15 @@ class Project(models.Model):
             )
         return images
 
-    def get_baseline_url(self):
-        return reverse("baseline_report", kwargs={"project_id": self.public_id})
+    def get_report_url(self):
+        report_links = ReportLinks.for_project(self)
+        if report_links.get("performance"):
+            url = report_links["performance"][0].get("url")
+        elif report_links["baseline"]:
+            url = report_links["baseline"].get("url")
+        else:
+            url = reverse("market_report", kwargs={"project_id": self.public_id})
+        return url
 
     def to_jsonable(self):
         """Return a representation that can be converted to a JSON string."""
