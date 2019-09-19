@@ -476,4 +476,3 @@ class LeaseStageAdmin(admin.ModelAdmin):
 @admin.register(Building, site=admin_site)
 class BuildingAdmin(admin.ModelAdmin):
     list_display = ["building_identifier", "property"]
-

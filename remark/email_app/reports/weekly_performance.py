@@ -1,11 +1,14 @@
+from copy import copy
 import datetime
 import time
 
 from django.template.loader import get_template
 
 from remark.lib.stats import health_check
+from remark.lib.logging import error_text, getLogger
 from remark.projects.reports.performance import PerformanceReport, InvalidReportRequest
-from remark.email_app.models import PerformanceEmail
+from remark.email_app.models import PerformanceEmail, ListservEmail
+from remark.email_app.constants import DEFAULT_SENDER_INFO, CONTACT_EMAIL_IN_TEMPLATE
 from remark.projects.models import TargetPeriod
 
 from .constants import (
@@ -20,13 +23,12 @@ from remark.lib.sendgrid_email import (
     create_contact_if_not_exists,
     create_contact_list_if_not_exists,
     create_campaign_if_not_exists,
+    create_sender,
 )
 
 from celery import shared_task
 
-
-CONTACT_EMAIL = "info@remarkably.io"
-SENDER_ID = 482157
+logger = getLogger(__name__)
 
 
 def none_wrapper(formatter, selector, obj):
@@ -141,7 +143,7 @@ def generate_template_vars(perf_email):
     low_kpis = perf_email.low_kpis
     risk_kpi_insight_text = perf_email.risk_kpi_insight_text
     low_kpi_insight_text = perf_email.low_kpi_insight_text
-    email = CONTACT_EMAIL
+    email = CONTACT_EMAIL_IN_TEMPLATE
 
     template_vars = {
         "report_url": f"https://app.remarkably.io/projects/{project_id}/performance/last-week/",
@@ -213,14 +215,38 @@ def send_performance_email(performance_email_id):
     title = f"{project.name} :: Performance Report :: {perf_email.start.strftime('%m/%d/%Y')}"
     subject = f"{project.name} :: Performance Report :: {perf_email.start.strftime('%m/%d/%Y')}"
 
+    if project.listserv_email:
+        sender_id = project.listserv_email.sender_id
+    else:
+        raise Exception("No Listserv email set in project")
+
     perf_email.email_campaign_id = create_campaign_if_not_exists(
         email_campaign_id,
         title,
         subject,
-        SENDER_ID,
+        sender_id,
         new_list_id,
         categories,
         html_content,
     )
     print("weekly_performance::send_performance_email::end")
+    return True
+
+
+"""
+Create a Sender object on Sendgrid, based on ListservEmail instance
+"""
+@shared_task
+def create_sender_for_listserv(listserv_public_id):
+    try:
+        listserv = ListservEmail.objects.get(pk=listserv_public_id)
+        sender_info = copy(DEFAULT_SENDER_INFO)
+        sender_info["nickname"] = f"{listserv.email}-{listserv.public_id}"
+        sender_info["reply_to"]["email"] = listserv.email
+
+        listserv.sender_id = create_sender(sender_info)
+        listserv.save()
+    except Exception as e:
+        logger.error(error_text(e))
+
     return True
