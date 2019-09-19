@@ -5,7 +5,6 @@ from remark.lib.time_series.computed import generate_computed_kpis, generate_com
 from remark.lib.time_series.common import KPI, KPIFormat
 from .strategy import get_base_kpis_for_project, get_targets_for_project, get_base_kpis_for_group, get_targets_for_group
 
-
 def generate_computed_properties(item, kpis):
     base_kpis = item["base_kpis"]
     item["kpis"] = generate_computed_kpis(base_kpis, outputs=kpis)
@@ -59,8 +58,8 @@ def get_table_structure(user, start, end, kpis, show_averages):
         base_targets = get_targets_for_project(project, start, end)
 
         if base_kpis is not None:
-            image_url = project.get_building_image_url()
-            if image_url is None:
+            image_url = project.get_building_image()[2]
+            if image_url == "":
                 image_url = "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png"
 
             item = {
@@ -163,7 +162,3 @@ def get_table_structure(user, start, end, kpis, show_averages):
         strip_base_data(item)
 
     return table_data, portfolio_average_group
-
-
-
-

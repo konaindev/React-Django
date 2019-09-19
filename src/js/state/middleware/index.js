@@ -1,4 +1,10 @@
-import { general, tutorial, networking, createPassword } from "../actions";
+import {
+  general,
+  tutorial,
+  networking,
+  createPassword,
+  completeAccount
+} from "../actions";
 import { axiosGet, axiosPost } from "../../utils/api";
 
 // Here we create a middleware that intercepts
@@ -54,8 +60,7 @@ export const fetchCreatePassword = store => next => action => {
       axiosPost(url, action.data)
         .then(response => {
           if (response.status === 200) {
-            const redirectUrl = "/";
-            next(createPassword.redirect(redirectUrl));
+            next(createPassword.redirect("/users/complete-account/"));
           } else {
             throw response;
           }
@@ -63,7 +68,66 @@ export const fetchCreatePassword = store => next => action => {
         .catch(e => console.log("-----> ERROR", e));
     } else {
       const url = `${process.env.BASE_URL}/create-password/${hash}"`;
-      axiosGet(url);
+      axiosGet(url)
+        .then(response => {
+          next(createPassword.set(response.data));
+        })
+        .catch(e => console.log("-----> ERROR", e));
+    }
+  } else {
+    next(action);
+  }
+};
+
+export const fetchCompany = store => next => action => {
+  switch (action.type) {
+    case "API_COMPANY_ADDRESS": {
+      const url = `${process.env.BASE_URL}/crm/office-address/`;
+      axiosPost(url, action.data)
+        .then(response => {
+          const companyAddresses = response.data?.addresses || [];
+          if (action.callback) {
+            action.callback(companyAddresses);
+          } else {
+            next(completeAccount.set({ companyAddresses }));
+          }
+        })
+        .catch(e => console.log("-----> ERROR", e));
+      break;
+    }
+    case "API_COMPANY_SEARCH": {
+      const url = `${process.env.BASE_URL}/crm/company-search/`;
+      axiosPost(url, action.data)
+        .then(response => {
+          action.callback(response.data?.company || []);
+        })
+        .catch(e => console.log("-----> ERROR", e));
+      break;
+    }
+    default:
+      next(action);
+  }
+};
+
+export const fetchCompleteAccount = store => next => action => {
+  if (action.type === "API_COMPLETE_ACCOUNT") {
+    const url = `${process.env.BASE_URL}/users/complete-account/`;
+    if (action.data) {
+      axiosPost(url, action.data)
+        .then(response => {
+          if (response.status === 200) {
+            next(completeAccount.redirect("/"));
+          } else {
+            throw response;
+          }
+        })
+        .catch(e => console.log("-----> ERROR", e));
+    } else {
+      axiosGet(url)
+        .then(response => {
+          next(completeAccount.set(response.data));
+        })
+        .catch(e => console.log("-----> ERROR", e));
     }
   } else {
     next(action);

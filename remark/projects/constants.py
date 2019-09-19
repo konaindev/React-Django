@@ -10,3 +10,5 @@ PROPERTY_TYPE = (
 
 BUILDING_CLASS = ((1, "Class A"), (2, "Class B"), (3, "Class C"))
 
+SIZE_LANDSCAPE = (309, 220)
+SIZE_THUMBNAIL = (180, 180)
