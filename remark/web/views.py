@@ -36,24 +36,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
     def get_project_details(self, project, request):
         """ cached by "project.public_id", details for project card on UI """
         cache_key = f"remark.web.views.dashboard_view.project.{project.public_id}"
-<<<<<<< HEAD
         cache_bust = cache_lib.check_request_cache_bust(request)
-=======
-        if cache_key in cache:
-            return cache.get(cache_key)
-
-        address = project.property.geo_address
-        project_details = dict(
-            property_name=project.name,
-            property_id=project.public_id,
-            address=f"{address.city}, {address.state}",
-            image_url=project.get_building_image()[1],
-            performance_rating=project.get_performance_rating(),
-            url=project.get_report_url(),
-        )
-        cache.set(cache_key, project_details, TIMEOUT_1_DAY)
-        return project_details
->>>>>>> d2d78f4366286b04b963387de5d35b4cad7c4510
 
         """ method to generate value when request indicates to bust cache """
         def generate_value():
