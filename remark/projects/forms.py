@@ -309,4 +309,14 @@ class PropertyForm(forms.ModelForm):
     class Meta:
         model = Property
         fields = "__all__"
-        widgets = {"building_logo": ImageCropWidget, "building_image": ImageCropWidget}
+        widgets = {
+            "building_logo": ImageCropWidget,
+            "building_image": ImageCropWidget,
+        }
+
+
+class PeriodInlineForm(forms.ModelForm):
+    is_select = forms.BooleanField()
+
+    class Meta:
+        labels = {"is_select": " "}
