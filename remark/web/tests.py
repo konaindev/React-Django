@@ -136,7 +136,7 @@ class PropertyListTestCase(TestCase):
                     "performance_rating": -1,
                     "property_id": self.project2.public_id,
                     "property_name": self.project2.name,
-                    "url": "/projects/{}/baseline/".format(self.project2.public_id),
+                    "url": "/projects/{}/market/".format(self.project2.public_id),
                 },
                 {
                     "address": "Seattle, WA",
@@ -144,7 +144,7 @@ class PropertyListTestCase(TestCase):
                     "performance_rating": -1,
                     "property_id": self.project1.public_id,
                     "property_name": self.project1.name,
-                    "url": "/projects/{}/baseline/".format(self.project1.public_id),
+                    "url": "/projects/{}/market/".format(self.project1.public_id),
                 },
             ],
             "property_managers": [
@@ -202,7 +202,7 @@ class PropertyListTestCase(TestCase):
                     "performance_rating": -1,
                     "property_id": self.project1.public_id,
                     "property_name": self.project1.name,
-                    "url": "/projects/{}/baseline/".format(self.project1.public_id),
+                    "url": "/projects/{}/market/".format(self.project1.public_id),
                 }
             ],
             "property_managers": [

@@ -1,4 +1,8 @@
-import { props as tableProps } from "../portfolio_table/props";
+import {
+  props as tableProps,
+  partialKPIs as tablePartialKPIs,
+  withoutKPIs as tableWithoutKPIs
+} from "../portfolio_table/props";
 import { props as userProps } from "../user_menu/props";
 
 export const props = {
@@ -61,4 +65,53 @@ export const props = {
 
   user: userProps,
   display_average: "1"
+};
+
+export const withoutKPIs = {
+  ...props,
+  table_data: tableWithoutKPIs.properties,
+
+  highlight_kpis: [
+    {
+      health: -1,
+      name: "usv_inq",
+      label: "USV → INQ"
+    },
+    {
+      health: -1,
+      name: "inq_tou",
+      label: "INQ → TOU"
+    },
+    {
+      health: -1,
+      name: "tou_app",
+      label: "TOU → APP"
+    }
+  ]
+};
+
+export const partialKPIs = {
+  ...props,
+  table_data: tablePartialKPIs.properties,
+
+  highlight_kpis: [
+    {
+      health: 0,
+      name: "usv_inq",
+      label: "USV → INQ"
+    },
+    {
+      health: 1,
+      name: "inq_tou",
+      label: "INQ → TOU",
+      target: "0.25",
+      value: "0.2"
+    },
+    {
+      health: 0,
+      name: "tou_app",
+      label: "TOU → APP",
+      value: "0.6"
+    }
+  ]
 };

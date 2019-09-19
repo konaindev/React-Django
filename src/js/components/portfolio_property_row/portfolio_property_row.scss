@@ -6,7 +6,8 @@ $row-background: #222b33;
 $row-background-hover: $gray-3;
 $border-color: $gray-4;
 $image-size: 36px;
-$image-spacing: 30px;
+$image-spacing: $s20;
+$image-spacing-with-alarm: $s4;
 $image-border-radius: 6px;
 $title-width: 200px;
 $title-spacing: 20px;
@@ -17,6 +18,8 @@ $target-height: 16px;
 $target-spacing: 6px;
 $link-padding: 8px 10px;
 $link-height: 20px;
+$empty-text-size: 1.75rem;
+$alarm-spacing: 2.75rem;
 
 .portfolio-property-row {
     display: flex;
@@ -40,6 +43,12 @@ $link-height: 20px;
 
     &--subproperty {
         padding-left: $row-indent;
+    }
+
+    &--with-alarm {
+        .portfolio-property-row__image {
+            margin-left: $image-spacing-with-alarm;
+        }
     }
 }
 
@@ -106,6 +115,13 @@ $link-height: 20px;
     height: $value-height;
     font-size: $text-xl;
     color: $column-header-regular-color;
+
+    &:empty:before {
+        display: block;
+        height: $value-height;
+        content: '\2014';
+        font-size: $empty-text-size;
+    }
 }
 
 .portfolio-property-row__target {
@@ -115,6 +131,19 @@ $link-height: 20px;
     line-height: $target-height;
     color: $column-header-medium-color;
     white-space: nowrap;
+}
+
+.portfolio-property-row__alarm {
+    margin-left: $alarm-spacing;
+}
+
+.portfolio-property-row__alarm-icon {
+    width: $s5;
+    height: $s5;
+}
+
+.portfolio-property-row__alarm-text {
+    text-align: center;
 }
 
 :export {

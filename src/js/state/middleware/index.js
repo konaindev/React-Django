@@ -54,13 +54,13 @@ export const fetchTutorial = store => next => action => {
 export const fetchCreatePassword = store => next => action => {
   if (action.type === "API_CREATE_PASSWORD") {
     const hash = action.hash;
+    const url = `${process.env.BASE_URL}/users/create-password/${hash}`;
     if (action.data) {
-      const url = `${process.env.BASE_URL}/create-password/${hash}"`;
-      const data = { password };
       axiosPost(url, action.data)
         .then(response => {
           if (response.status === 200) {
-            next(createPassword.redirect("/users/complete-account/"));
+            const redirectUrl = response.data.redirect_url || "/";
+            next(createPassword.redirect(redirectUrl));
           } else {
             throw response;
           }
