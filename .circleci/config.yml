@@ -42,7 +42,7 @@ jobs:
 
       # run tests!
       - run: yarn test-ui
-      - run: pipenv run python manage.py makemigrations --merge --noinput
+      # - run: pipenv run python manage.py makemigrations --merge --noinput
       - run: pipenv run python manage.py test
       - run: pipenv run python manage.py migrate
       - run: pipenv run python manage.py loaddata data/dumped/latest.json
