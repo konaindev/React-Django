@@ -2,6 +2,7 @@ from django.contrib.auth.views import redirect_to_login
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.edit import FormView
@@ -10,6 +11,7 @@ from django.urls import reverse
 
 from remark.lib.views import ReactView, APIView
 from remark.admin import admin_site
+from remark.users.models import User
 from .reports.selectors import (
     BaselineReportSelector,
     PerformanceReportSelector,
@@ -287,8 +289,16 @@ class ProjectUpdateAPIView(LoginRequiredMixin, APIView):
 
 class MembersView(LoginRequiredMixin, APIView):
     def post(self, request):
-        # TODO: Implement this
-        return JsonResponse({"members": []})
+        payload = self.get_data()
+        value = payload.get("value", [])
+        users = User.objects.filter(
+            Q(Q(email__icontains=value) |
+            Q(person__first_name__icontains=value) |
+            Q(person__last_name__icontains=value)) &
+            Q(account__isnull=False)
+        )
+        members = [user.get_menu_dict() for user in users]
+        return JsonResponse({"members": members})
 
 
 class AddMembersView(LoginRequiredMixin, APIView):

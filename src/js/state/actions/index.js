@@ -68,7 +68,7 @@ export const inviteModal = {
   },
   getUsers: (value, callback) => ({
     type: "API_INVITE_MODAL_GET_USERS",
-    data: value,
+    data: { value },
     callback
   }),
   removeMember: (project, member) => ({
