@@ -147,7 +147,6 @@ export const sendGaEvent = _ => next => action => {
 export const applyApiResult = _ => next => action => {
   switch (action.type) {
     case "API_RESPONSE": {
-      console.log(action);
       switch (action.branch) {
         case "dashboard": {
           next(general.update(action.response));
@@ -158,7 +157,8 @@ export const applyApiResult = _ => next => action => {
           break;
         }
         default:
-          break; // what do we do if no branch was detected?
+          next(action); // <-- pass this on if we didn't find a banch
+          break;
       }
       break;
     }
@@ -167,9 +167,10 @@ export const applyApiResult = _ => next => action => {
   }
 };
 
-export const logoutMiddleware = _ => next => action => {
+export const logoutMiddleware = store => next => action => {
   if (action.type === "LOGOUT") {
-    next(auth.persistToken({}));
+    store.dispatch(auth.persistToken({}));
+    next(action);
   } else {
     next(action);
   }
