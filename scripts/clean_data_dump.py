@@ -23,6 +23,8 @@ def command(input_file, output_file):
             elif model["model"] == "projects.property":
                 model["fields"]["building_image"] = None
                 model["fields"]["building_logo"] = None
+            elif model["model"] == "projects.project":
+                model["fields"]["listserv_email"] = None
             result.append(model)
 
     json.dump(result, output_file)
