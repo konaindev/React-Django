@@ -12,6 +12,7 @@ from django.urls import reverse
 from remark.lib.views import ReactView, APIView
 from remark.admin import admin_site
 from remark.users.models import User
+from remark.web.views import DashboardView
 from .reports.selectors import (
     BaselineReportSelector,
     PerformanceReportSelector,
@@ -302,9 +303,26 @@ class MembersView(LoginRequiredMixin, APIView):
 
 
 class AddMembersView(LoginRequiredMixin, APIView):
+
+
     def post(self, request):
-        # TODO: Implement this
-        return JsonResponse({"projects": []})
+        payload = self.get_data()
+        members = payload.get("members", [])
+
+        projects_ids = [p.get("property_id") for p in payload.get("projects", [])]
+        projects = Project.objects.filter(public_id__in=projects_ids)
+
+        users = []
+        for member in members:
+            user, _ = User.objects.get_or_create_user(member.get("value"))
+            users.append(user)
+
+        for project in projects:
+            for user in users:
+                project.view_group.user_set.add(user)
+            project.save()
+        projects_list = [DashboardView.get_project_details(p) for p in projects]
+        return JsonResponse({"projects": projects_list})
 
 
 class ProjectRemoveMemberIView(LoginRequiredMixin, APIView):
