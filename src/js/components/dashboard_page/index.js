@@ -233,7 +233,8 @@ const DashboardSelection = ({
   return (
     <div className="dashboard-selection">
       <div className="dashboard-selection__title">
-        {selectedProperties.length} Properties Selected
+        {selectedProperties.length}
+        {selectedProperties.length === 1 ? " Property" : " Properties"} Selected
       </div>
       <div className="dashboard-selection__controls">
         <Button

@@ -953,7 +953,8 @@ exports[`DashboardPage Row select 1`] = `
               className="dashboard-selection__title"
             >
               1
-               Properties Selected
+               Property
+               Selected
             </div>
             <div
               className="dashboard-selection__controls"
@@ -2509,7 +2510,8 @@ exports[`DashboardPage Row view 1`] = `
               className="dashboard-selection__title"
             >
               0
-               Properties Selected
+               Properties
+               Selected
             </div>
             <div
               className="dashboard-selection__controls"
@@ -4065,7 +4067,8 @@ exports[`DashboardPage renders correctly 1`] = `
               className="dashboard-selection__title"
             >
               0
-               Properties Selected
+               Properties
+               Selected
             </div>
             <div
               className="dashboard-selection__controls"
