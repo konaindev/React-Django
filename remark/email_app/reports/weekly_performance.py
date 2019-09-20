@@ -229,6 +229,7 @@ def send_performance_email(performance_email_id):
         categories,
         html_content,
     )
+    perf_email.save()
     print("weekly_performance::send_performance_email::end")
     return True
 
