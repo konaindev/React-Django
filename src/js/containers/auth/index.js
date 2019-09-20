@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { auth } from "../../state/actions";
 import Button from "../../components/button";
 class AuthContainer extends React.PureComponent {
   constructor(props) {
@@ -10,16 +11,12 @@ class AuthContainer extends React.PureComponent {
     };
   }
   doLogin() {
-    console.log(".......", this.props);
-    this.props.dispatch({
-      type: "FETCH_API_POST",
-      url: "http://localhost:8000/api/token/",
-      branch: "token",
-      body: {
+    this.props.dispatch(
+      auth.login({
         email: "todd@remarkably.io",
         password: "test"
-      }
-    });
+      })
+    );
   }
   componentDidMount() {}
   render() {

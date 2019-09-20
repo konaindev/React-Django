@@ -13,7 +13,7 @@ const token = (state = { token: null }, action) => {
       break;
     }
     default:
-      newState = { ...state };
+      newState = state;
   }
   return newState;
 };
@@ -26,7 +26,7 @@ const dashboard = (state = {}, action) => {
       break;
     }
     default:
-      newState = { ...state };
+      newState = state;
   }
   return newState;
 };
@@ -39,7 +39,7 @@ const tutorial = (state = initState, action) => {
       break;
     }
     default:
-      newState = { ...state };
+      newState = state;
   }
   return newState;
 };
@@ -56,7 +56,7 @@ const network = (state = { isFetching: false }, action) => {
       break;
     }
     default:
-      newState = { ...state };
+      newState = state;
   }
   return newState;
 };
@@ -73,7 +73,7 @@ const createPassword = (state = {}, action) => {
       break;
     }
     default:
-      newState = { ...state };
+      newState = state;
   }
   return newState;
 };
@@ -97,7 +97,7 @@ const completeAccount = (
       break;
     }
     default:
-      newState = { ...state };
+      newState = state;
   }
   return newState;
 };
@@ -110,7 +110,7 @@ const pageMeta = (state = { title: "Remarkably" }, action) => {
       newState = { ...state, title: action.title };
     }
     default:
-      newState = { ...state };
+      newState = state;
   }
   return newState;
 };

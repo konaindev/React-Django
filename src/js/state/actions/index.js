@@ -90,11 +90,11 @@ const URLS = {
 };
 
 export const auth = {
-  login: ({ email, pwd }) => ({
+  login: ({ email, password }) => ({
     type: "FETCH_API_POST",
-    email,
-    pwd,
-    branch: "token"
+    body: { email, password },
+    branch: "token",
+    url: `${URLS.base}${URLS.login}`
   }),
   logout: () => ({
     type: "LOGOUT"
