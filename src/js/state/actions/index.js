@@ -97,7 +97,7 @@ export const auth = {
     branch: "token"
   }),
   logout: () => ({
-    type: "LOGOUT_START"
+    type: "LOGOUT"
   }),
   persistToken: token => ({
     type: "UPDATE_TOKEN",

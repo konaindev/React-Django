@@ -8,7 +8,8 @@ import {
   fetchCompany,
   fetchCompleteAccount,
   sendGaEvent,
-  applyApiResult
+  applyApiResult,
+  logoutMiddleware
 } from "../middleware";
 import sagas from "../../utils/network";
 
@@ -18,7 +19,7 @@ import storage from "redux-persist/lib/storage";
 const cfg = {
   key: "rmb",
   storage,
-  whitelist: ["network"] // NOTE: this is where we elect what to persist
+  whitelist: ["token"] // NOTE: this is where we elect what to persist
 };
 
 // TODO: contextually enable devtools based on prod or not
@@ -40,7 +41,8 @@ export default () => {
         fetchCompleteAccount,
         sendGaEvent,
         applyApiResult,
-        sagaMiddleware
+        sagaMiddleware,
+        logoutMiddleware
       )
     )
   );

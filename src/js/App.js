@@ -5,7 +5,7 @@ import { RemarkableRouter } from "./router";
 import { PersistGate } from "redux-persist/es/integration/react";
 import GaGate from "./gates/ga";
 import TitleGate from "./gates/title";
-
+import AuthGate from "./gates/auth";
 const { store, persistor } = storeFunc();
 
 export default class App extends Component {
@@ -15,7 +15,9 @@ export default class App extends Component {
         <TitleGate>
           <GaGate>
             <PersistGate loading={null} persistor={persistor}>
-              <RemarkableRouter />
+              <AuthGate>
+                <RemarkableRouter />
+              </AuthGate>
             </PersistGate>
           </GaGate>
         </TitleGate>

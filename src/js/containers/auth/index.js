@@ -1,6 +1,6 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import Button from "../../components/button";
 class AuthContainer extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -9,7 +9,7 @@ class AuthContainer extends React.PureComponent {
       password: ""
     };
   }
-  componentDidMount() {
+  doLogin() {
     console.log(".......", this.props);
     this.props.dispatch({
       type: "FETCH_API_POST",
@@ -21,13 +21,14 @@ class AuthContainer extends React.PureComponent {
       }
     });
   }
+  componentDidMount() {}
   render() {
     return (
       <div>
-        <button color="primary" />
+        <Button color="primary" onClick={() => this.doLogin()} />
       </div>
     );
   }
 }
 
-export default withRouter(connect(x => x)(AuthContainer));
+export default connect(x => x)(AuthContainer);

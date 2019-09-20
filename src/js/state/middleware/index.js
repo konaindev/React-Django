@@ -166,3 +166,11 @@ export const applyApiResult = _ => next => action => {
       next(action);
   }
 };
+
+export const logoutMiddleware = _ => next => action => {
+  if (action.type === "LOGOUT") {
+    next(auth.persistToken({}));
+  } else {
+    next(action);
+  }
+};
