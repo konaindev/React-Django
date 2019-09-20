@@ -1,23 +1,174 @@
-<mj-wrapper full-width="full-width" mj-class="bg-black" padding="0">
-  <mj-section mj-class="py-50">
+<mj-wrapper
+  full-width="full-width"
+  background-url="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/welcome_to/welcome_hero.png"
+  background-size="auto 100%"
+  background-repeat="no-repeat"
+  mj-class="bg-black"
+  css-class="hero-container">
+  <mj-section>
     <mj-column mj-class="container">
-      <mj-image src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/logo.png" alt="Remarkably" width="174px" height="30px" mj-class="p-0" />
+      <mj-spacer height="20px" />
+      <mj-spacer height="30px" css-class="desktop-only" />
+      <mj-image
+        src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/logo.png"
+        alt="Remarkably"
+        width="174px"
+        height="30px" />
+      <mj-spacer height="20px" />
+      <mj-spacer height="30px" css-class="desktop-only" />
     </mj-column>
   </mj-section>
 
-  <mj-section mj-class="py-50">
-    <mj-column mj-class="container">
-      <mj-image src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/welcome_charts.png" alt="Welcome Charts" width="600px" mj-class="p-0" />
+  <mj-section>
+    <mj-column>
+      <mj-spacer height="320px" />
+      <mj-spacer height="245px" css-class="desktop-only" />
+      <mj-text mj-class="text-2xl text-white text-center" padding="0 60px">
+        Thank you for creating a Remarkably account.
+      </mj-text>
     </mj-column>
   </mj-section>
+</mj-wrapper>
 
-  <mj-section mj-class="py-50">
-    <mj-column mj-class="container" width="500px">
-      <mj-text mj-class="text-4xl text-white" align="center">Welcome to Remarkably</mj-text>
+<mj-section full-width="full-width" mj-class="bg-black">
+  <mj-column mj-class="container">
+    <mj-spacer height="20px" />
+    <mj-text
+      mj-class="text-base text-lightgray text-center">
+      You now have access to the most current data, insights and recommendations for the portfolio or property you’ve been invited to join. For those new to our platform, here’s a bit of information to help you get started.
+    </mj-text>
+    <mj-spacer height="140px" />
+  </mj-column>
+</mj-section>
 
-      <mj-text mj-class="text-base text-lightgray pt-30" align="center">To get started, create a customer account by clicking below. You can then access portfolio and property performance data, and invite others to have access as well.</mj-text>
+<mj-wrapper full-width="full-width" mj-class="bg-gray">
+  <mj-section mj-class="section">
+    <mj-column mj-class="container">
+      <mj-image
+        src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/welcome_to/property_cards.png"
+        alt="Property Cards"
+      />
+      <mj-spacer height="50px" />
+      <mj-text mj-class="text-2xl text-white text-center" padding="0 80px">
+        Remarkably is a portfolio performance platform.
+      </mj-text>
+      <mj-spacer height="20px" />
+      <mj-text mj-class="text-base text-white text-center">
+        Designed for multifamily owners, asset managers, and property managers, our software helps users grow revenue, optimize marketing and leasing investments, and manage risk.
+      </mj-text>
+      <mj-spacer height="150px" />
 
-      <mj-button href="{{ create_account_link }}" mj-class="button bg-blue py-50">Create Account</mj-button>
+      <mj-image
+        src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/welcome_to/abstract_pa.png"
+        alt="Analysis Charts"
+      />
+      <mj-spacer height="50px" />
+      <mj-text mj-class="text-2xl text-white text-center" padding="0 80px">
+        Campaign planning, measurement and reporting features.
+      </mj-text>
+      <mj-spacer height="20px" />
+      <mj-text mj-class="text-base text-lightgray text-center">
+        Our software helps multifamily professionals manage marketing resources to achieve leasing goals faster, more affordably, and with greater clarity and confidence.
+      </mj-text>
+      <mj-spacer height="50px" />
+    </mj-column>
+  </mj-section>
+</mj-wrapper>
+
+<mj-wrapper full-width="full-width" mj-class="bg-lightgray">
+  <mj-section mj-class="section">
+    <mj-column mj-class="container">
+      <mj-spacer height="50px" />
+      <mj-text mj-class="text-2xl text-white text-center">
+        Features Our Customers Love
+      </mj-text>
+      <mj-spacer height="55px" />
+
+      <mj-image
+        src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/welcome_to/baseline_reporting.png"
+        alt="Baseline Reporting"
+      />
+      <mj-spacer height="30px" />
+      <mj-text mj-class="text-xl text-white text-center">
+        Baseline Reporting
+      </mj-text>
+      <mj-spacer height="10px" />
+      <mj-text mj-class="text-base text-lightgray text-center">
+        Gain visibility into marketing strengths and weaknesses.
+      </mj-text>
+      <mj-spacer height="100px" />
+
+      <mj-image
+        src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/welcome_to/market_analysis.png"
+        alt="Market Analysis"
+      />
+      <mj-spacer height="30px" />
+      <mj-text mj-class="text-2xl text-white text-center">
+        Market Analysis
+      </mj-text>
+      <mj-spacer height="10px" />
+      <mj-text mj-class="text-base text-lightgray text-center">
+        Identify your most significant revenue opportunities.
+      </mj-text>
+      <mj-spacer height="100px" />
+
+      <mj-image
+        src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/welcome_to/campaign_modeling.png"
+        alt="Campaign Modeling"
+      />
+      <mj-spacer height="30px" />
+      <mj-text mj-class="text-2xl text-white text-center">
+        Campaign Modeling
+      </mj-text>
+      <mj-spacer height="10px" />
+      <mj-text mj-class="text-base text-lightgray text-center">
+        Determine a clear, viable path to your leasing goal.
+      </mj-text>
+      <mj-spacer height="100px" />
+
+      <mj-image
+        src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/welcome_to/performance_reporting.png"
+        alt="Performance Reporting"
+      />
+      <mj-spacer height="30px" />
+      <mj-text mj-class="text-2xl text-white text-center">
+        Performance Reporting
+      </mj-text>
+      <mj-spacer height="10px" />
+      <mj-text mj-class="text-base text-lightgray text-center">
+        Track your weekly progress against modeled targets.
+      </mj-text>
+      <mj-spacer height="100px" />
+
+      <mj-text mj-class="text-xl text-white text-center">
+        And we're just getting started. Stay tuned for exciting new features already in development
+      </mj-text>
+    </mj-column>
+  </mj-section>
+</mj-wrapper>
+
+<mj-wrapper full-width="full-width" mj-class="bg-gray">
+  <mj-section mj-class="section">
+    <mj-column mj-class="container" width="440px">
+      <mj-text mj-class="text-2xl text-white text-center">
+        Questions or feedback?
+      </mj-text>
+      <mj-spacer height="8px" />
+      <mj-text mj-class="text-base text-lightgray text-center">
+        Don’t hesitate to reach out.
+      </mj-text>
+      <mj-spacer height="30px" />
+      <mj-button href="mailto:{{ contact_us_email }}" mj-class="button bg-blue text-white text-xs">
+        Contact Us
+      </mj-button>
+      <mj-spacer height="50px" />
+      <mj-text mj-class="text-base text-lightgray text-center">
+        To learn more about our business and product, please visit our <a href="{{ website_link }}">website</a>.
+      </mj-text>
+      <mj-spacer height="30px" />
+      <mj-button href="mailto:{{ request_demo_email }}" mj-class="button bg-white text-blue text-xs">
+        Request A Demo
+      </mj-button>
     </mj-column>
   </mj-section>
 </mj-wrapper>

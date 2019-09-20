@@ -134,6 +134,7 @@ class WelcomeGetStartedTestPage(ContentView):
             "email_preview": "Welcome to Remarkably",
             "contact_us_email": "support@remarkably.io",
             "request_demo_email": "hello@remarkably.io",
+            "website_link": "https://remarkably.io",
         }
 
         return self.render(self.template_name, **template_vars)

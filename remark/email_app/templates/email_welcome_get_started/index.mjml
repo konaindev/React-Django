@@ -7,12 +7,14 @@
     <mj-preview>{{ email_preview }}</mj-preview>
 
     {% include "../components/global_styles.mjml" %}
+
+    {% include "./custom_styles.mjml" %}
   </mj-head>
 
   <mj-body>
     {% include "./main_section.mjml" %}
 
-    {% include "../components/footer.mjml" with bg_class="bg-gray" only %}
+    {% include "../components/footer.mjml" only %}
   </mj-body>
 </mjml>
 {% endmjml %}
