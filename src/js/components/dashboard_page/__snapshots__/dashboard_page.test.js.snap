@@ -1058,9 +1058,43 @@ exports[`DashboardPage Row select 1`] = `
                 </a>
               </div>
               <div
-                className="property-status property-status--on-track"
+                className="property-row__health"
               >
-                ON TRACK
+                <div
+                  className="property-status property-status--on-track"
+                >
+                  ON TRACK
+                </div>
+              </div>
+              <div
+                className="property-row__members"
+              >
+                <div
+                  className="user-icon-list"
+                >
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={0}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 4,
+                      }
+                    }
+                  >
+                    RC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://storage.googleapis.com/tracker-avatar-production/a11569ffecab2b5564c0cbfa5e5f283a_3140620_96.png)",
+                        }
+                      }
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1112,9 +1146,87 @@ exports[`DashboardPage Row select 1`] = `
                 </a>
               </div>
               <div
-                className="property-status property-status--at-risk"
+                className="property-row__health"
               >
-                AT RISK
+                <div
+                  className="property-status property-status--at-risk"
+                >
+                  AT RISK
+                </div>
+              </div>
+              <div
+                className="property-row__members"
+              >
+                <div
+                  className="user-icon-list"
+                >
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={0}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 4,
+                      }
+                    }
+                  >
+                    IK
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url()",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={1}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 3,
+                      }
+                    }
+                  >
+                    PN
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(/avatar.jpg)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={2}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 2,
+                      }
+                    }
+                  >
+                    DC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1166,9 +1278,139 @@ exports[`DashboardPage Row select 1`] = `
                 </a>
               </div>
               <div
-                className="property-status property-status--on-track"
+                className="property-row__health"
               >
-                ON TRACK
+                <div
+                  className="property-status property-status--on-track"
+                >
+                  ON TRACK
+                </div>
+              </div>
+              <div
+                className="property-row__members"
+              >
+                <div
+                  className="user-icon-list"
+                >
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={0}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 4,
+                      }
+                    }
+                  >
+                    PN
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(/avatar.jpg)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={1}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 3,
+                      }
+                    }
+                  >
+                    DC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={2}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 2,
+                      }
+                    }
+                  >
+                    UA
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={3}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 1,
+                      }
+                    }
+                  >
+                    SC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={4}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 0,
+                      }
+                    }
+                  >
+                    PC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/sintsintcorrupti.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon-list__count"
+                  >
+                    <span>
+                      +
+                      9
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1220,9 +1462,139 @@ exports[`DashboardPage Row select 1`] = `
                 </a>
               </div>
               <div
-                className="property-status property-status--off-track"
+                className="property-row__health"
               >
-                OFF TRACK
+                <div
+                  className="property-status property-status--off-track"
+                >
+                  OFF TRACK
+                </div>
+              </div>
+              <div
+                className="property-row__members"
+              >
+                <div
+                  className="user-icon-list"
+                >
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={0}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 4,
+                      }
+                    }
+                  >
+                    PN
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(/avatar.jpg)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={1}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 3,
+                      }
+                    }
+                  >
+                    DC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={2}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 2,
+                      }
+                    }
+                  >
+                    UA
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={3}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 1,
+                      }
+                    }
+                  >
+                    SC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={4}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 0,
+                      }
+                    }
+                  >
+                    PC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/sintsintcorrupti.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon-list__count"
+                  >
+                    <span>
+                      +
+                      9
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1274,9 +1646,139 @@ exports[`DashboardPage Row select 1`] = `
                 </a>
               </div>
               <div
-                className="property-status property-status--on-track"
+                className="property-row__health"
               >
-                ON TRACK
+                <div
+                  className="property-status property-status--on-track"
+                >
+                  ON TRACK
+                </div>
+              </div>
+              <div
+                className="property-row__members"
+              >
+                <div
+                  className="user-icon-list"
+                >
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={0}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 4,
+                      }
+                    }
+                  >
+                    PN
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(/avatar.jpg)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={1}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 3,
+                      }
+                    }
+                  >
+                    DC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={2}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 2,
+                      }
+                    }
+                  >
+                    UA
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={3}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 1,
+                      }
+                    }
+                  >
+                    SC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={4}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 0,
+                      }
+                    }
+                  >
+                    PC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/sintsintcorrupti.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon-list__count"
+                  >
+                    <span>
+                      +
+                      9
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1328,9 +1830,139 @@ exports[`DashboardPage Row select 1`] = `
                 </a>
               </div>
               <div
-                className="property-status property-status--on-track"
+                className="property-row__health"
               >
-                ON TRACK
+                <div
+                  className="property-status property-status--on-track"
+                >
+                  ON TRACK
+                </div>
+              </div>
+              <div
+                className="property-row__members"
+              >
+                <div
+                  className="user-icon-list"
+                >
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={0}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 4,
+                      }
+                    }
+                  >
+                    PN
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(/avatar.jpg)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={1}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 3,
+                      }
+                    }
+                  >
+                    DC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={2}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 2,
+                      }
+                    }
+                  >
+                    UA
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={3}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 1,
+                      }
+                    }
+                  >
+                    SC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={4}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 0,
+                      }
+                    }
+                  >
+                    PC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/sintsintcorrupti.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon-list__count"
+                  >
+                    <span>
+                      +
+                      9
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1382,9 +2014,139 @@ exports[`DashboardPage Row select 1`] = `
                 </a>
               </div>
               <div
-                className="property-status property-status--at-risk"
+                className="property-row__health"
               >
-                AT RISK
+                <div
+                  className="property-status property-status--at-risk"
+                >
+                  AT RISK
+                </div>
+              </div>
+              <div
+                className="property-row__members"
+              >
+                <div
+                  className="user-icon-list"
+                >
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={0}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 4,
+                      }
+                    }
+                  >
+                    PN
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(/avatar.jpg)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={1}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 3,
+                      }
+                    }
+                  >
+                    DC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={2}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 2,
+                      }
+                    }
+                  >
+                    UA
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={3}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 1,
+                      }
+                    }
+                  >
+                    SC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={4}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 0,
+                      }
+                    }
+                  >
+                    PC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/sintsintcorrupti.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon-list__count"
+                  >
+                    <span>
+                      +
+                      9
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1436,9 +2198,139 @@ exports[`DashboardPage Row select 1`] = `
                 </a>
               </div>
               <div
-                className="property-status property-status--at-risk"
+                className="property-row__health"
               >
-                AT RISK
+                <div
+                  className="property-status property-status--at-risk"
+                >
+                  AT RISK
+                </div>
+              </div>
+              <div
+                className="property-row__members"
+              >
+                <div
+                  className="user-icon-list"
+                >
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={0}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 4,
+                      }
+                    }
+                  >
+                    PN
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(/avatar.jpg)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={1}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 3,
+                      }
+                    }
+                  >
+                    DC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={2}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 2,
+                      }
+                    }
+                  >
+                    UA
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={3}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 1,
+                      }
+                    }
+                  >
+                    SC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={4}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 0,
+                      }
+                    }
+                  >
+                    PC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/sintsintcorrupti.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon-list__count"
+                  >
+                    <span>
+                      +
+                      9
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1490,9 +2382,139 @@ exports[`DashboardPage Row select 1`] = `
                 </a>
               </div>
               <div
-                className="property-status property-status--on-track"
+                className="property-row__health"
               >
-                ON TRACK
+                <div
+                  className="property-status property-status--on-track"
+                >
+                  ON TRACK
+                </div>
+              </div>
+              <div
+                className="property-row__members"
+              >
+                <div
+                  className="user-icon-list"
+                >
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={0}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 4,
+                      }
+                    }
+                  >
+                    PN
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(/avatar.jpg)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={1}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 3,
+                      }
+                    }
+                  >
+                    DC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={2}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 2,
+                      }
+                    }
+                  >
+                    UA
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={3}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 1,
+                      }
+                    }
+                  >
+                    SC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={4}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 0,
+                      }
+                    }
+                  >
+                    PC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/sintsintcorrupti.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon-list__count"
+                  >
+                    <span>
+                      +
+                      9
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1544,9 +2566,139 @@ exports[`DashboardPage Row select 1`] = `
                 </a>
               </div>
               <div
-                className="property-status property-status--on-track"
+                className="property-row__health"
               >
-                ON TRACK
+                <div
+                  className="property-status property-status--on-track"
+                >
+                  ON TRACK
+                </div>
+              </div>
+              <div
+                className="property-row__members"
+              >
+                <div
+                  className="user-icon-list"
+                >
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={0}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 4,
+                      }
+                    }
+                  >
+                    PN
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(/avatar.jpg)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={1}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 3,
+                      }
+                    }
+                  >
+                    DC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={2}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 2,
+                      }
+                    }
+                  >
+                    UA
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={3}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 1,
+                      }
+                    }
+                  >
+                    SC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={4}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 0,
+                      }
+                    }
+                  >
+                    PC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/sintsintcorrupti.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon-list__count"
+                  >
+                    <span>
+                      +
+                      9
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -2615,9 +3767,43 @@ exports[`DashboardPage Row view 1`] = `
                 </a>
               </div>
               <div
-                className="property-status property-status--on-track"
+                className="property-row__health"
               >
-                ON TRACK
+                <div
+                  className="property-status property-status--on-track"
+                >
+                  ON TRACK
+                </div>
+              </div>
+              <div
+                className="property-row__members"
+              >
+                <div
+                  className="user-icon-list"
+                >
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={0}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 4,
+                      }
+                    }
+                  >
+                    RC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://storage.googleapis.com/tracker-avatar-production/a11569ffecab2b5564c0cbfa5e5f283a_3140620_96.png)",
+                        }
+                      }
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -2669,9 +3855,87 @@ exports[`DashboardPage Row view 1`] = `
                 </a>
               </div>
               <div
-                className="property-status property-status--at-risk"
+                className="property-row__health"
               >
-                AT RISK
+                <div
+                  className="property-status property-status--at-risk"
+                >
+                  AT RISK
+                </div>
+              </div>
+              <div
+                className="property-row__members"
+              >
+                <div
+                  className="user-icon-list"
+                >
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={0}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 4,
+                      }
+                    }
+                  >
+                    IK
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url()",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={1}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 3,
+                      }
+                    }
+                  >
+                    PN
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(/avatar.jpg)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={2}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 2,
+                      }
+                    }
+                  >
+                    DC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -2723,9 +3987,139 @@ exports[`DashboardPage Row view 1`] = `
                 </a>
               </div>
               <div
-                className="property-status property-status--on-track"
+                className="property-row__health"
               >
-                ON TRACK
+                <div
+                  className="property-status property-status--on-track"
+                >
+                  ON TRACK
+                </div>
+              </div>
+              <div
+                className="property-row__members"
+              >
+                <div
+                  className="user-icon-list"
+                >
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={0}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 4,
+                      }
+                    }
+                  >
+                    PN
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(/avatar.jpg)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={1}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 3,
+                      }
+                    }
+                  >
+                    DC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={2}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 2,
+                      }
+                    }
+                  >
+                    UA
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={3}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 1,
+                      }
+                    }
+                  >
+                    SC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={4}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 0,
+                      }
+                    }
+                  >
+                    PC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/sintsintcorrupti.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon-list__count"
+                  >
+                    <span>
+                      +
+                      9
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -2777,9 +4171,139 @@ exports[`DashboardPage Row view 1`] = `
                 </a>
               </div>
               <div
-                className="property-status property-status--off-track"
+                className="property-row__health"
               >
-                OFF TRACK
+                <div
+                  className="property-status property-status--off-track"
+                >
+                  OFF TRACK
+                </div>
+              </div>
+              <div
+                className="property-row__members"
+              >
+                <div
+                  className="user-icon-list"
+                >
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={0}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 4,
+                      }
+                    }
+                  >
+                    PN
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(/avatar.jpg)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={1}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 3,
+                      }
+                    }
+                  >
+                    DC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={2}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 2,
+                      }
+                    }
+                  >
+                    UA
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={3}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 1,
+                      }
+                    }
+                  >
+                    SC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={4}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 0,
+                      }
+                    }
+                  >
+                    PC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/sintsintcorrupti.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon-list__count"
+                  >
+                    <span>
+                      +
+                      9
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -2831,9 +4355,139 @@ exports[`DashboardPage Row view 1`] = `
                 </a>
               </div>
               <div
-                className="property-status property-status--on-track"
+                className="property-row__health"
               >
-                ON TRACK
+                <div
+                  className="property-status property-status--on-track"
+                >
+                  ON TRACK
+                </div>
+              </div>
+              <div
+                className="property-row__members"
+              >
+                <div
+                  className="user-icon-list"
+                >
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={0}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 4,
+                      }
+                    }
+                  >
+                    PN
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(/avatar.jpg)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={1}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 3,
+                      }
+                    }
+                  >
+                    DC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={2}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 2,
+                      }
+                    }
+                  >
+                    UA
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={3}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 1,
+                      }
+                    }
+                  >
+                    SC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={4}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 0,
+                      }
+                    }
+                  >
+                    PC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/sintsintcorrupti.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon-list__count"
+                  >
+                    <span>
+                      +
+                      9
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -2885,9 +4539,139 @@ exports[`DashboardPage Row view 1`] = `
                 </a>
               </div>
               <div
-                className="property-status property-status--on-track"
+                className="property-row__health"
               >
-                ON TRACK
+                <div
+                  className="property-status property-status--on-track"
+                >
+                  ON TRACK
+                </div>
+              </div>
+              <div
+                className="property-row__members"
+              >
+                <div
+                  className="user-icon-list"
+                >
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={0}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 4,
+                      }
+                    }
+                  >
+                    PN
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(/avatar.jpg)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={1}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 3,
+                      }
+                    }
+                  >
+                    DC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={2}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 2,
+                      }
+                    }
+                  >
+                    UA
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={3}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 1,
+                      }
+                    }
+                  >
+                    SC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={4}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 0,
+                      }
+                    }
+                  >
+                    PC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/sintsintcorrupti.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon-list__count"
+                  >
+                    <span>
+                      +
+                      9
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -2939,9 +4723,139 @@ exports[`DashboardPage Row view 1`] = `
                 </a>
               </div>
               <div
-                className="property-status property-status--at-risk"
+                className="property-row__health"
               >
-                AT RISK
+                <div
+                  className="property-status property-status--at-risk"
+                >
+                  AT RISK
+                </div>
+              </div>
+              <div
+                className="property-row__members"
+              >
+                <div
+                  className="user-icon-list"
+                >
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={0}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 4,
+                      }
+                    }
+                  >
+                    PN
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(/avatar.jpg)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={1}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 3,
+                      }
+                    }
+                  >
+                    DC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={2}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 2,
+                      }
+                    }
+                  >
+                    UA
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={3}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 1,
+                      }
+                    }
+                  >
+                    SC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={4}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 0,
+                      }
+                    }
+                  >
+                    PC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/sintsintcorrupti.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon-list__count"
+                  >
+                    <span>
+                      +
+                      9
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -2993,9 +4907,139 @@ exports[`DashboardPage Row view 1`] = `
                 </a>
               </div>
               <div
-                className="property-status property-status--at-risk"
+                className="property-row__health"
               >
-                AT RISK
+                <div
+                  className="property-status property-status--at-risk"
+                >
+                  AT RISK
+                </div>
+              </div>
+              <div
+                className="property-row__members"
+              >
+                <div
+                  className="user-icon-list"
+                >
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={0}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 4,
+                      }
+                    }
+                  >
+                    PN
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(/avatar.jpg)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={1}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 3,
+                      }
+                    }
+                  >
+                    DC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={2}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 2,
+                      }
+                    }
+                  >
+                    UA
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={3}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 1,
+                      }
+                    }
+                  >
+                    SC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={4}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 0,
+                      }
+                    }
+                  >
+                    PC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/sintsintcorrupti.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon-list__count"
+                  >
+                    <span>
+                      +
+                      9
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -3047,9 +5091,139 @@ exports[`DashboardPage Row view 1`] = `
                 </a>
               </div>
               <div
-                className="property-status property-status--on-track"
+                className="property-row__health"
               >
-                ON TRACK
+                <div
+                  className="property-status property-status--on-track"
+                >
+                  ON TRACK
+                </div>
+              </div>
+              <div
+                className="property-row__members"
+              >
+                <div
+                  className="user-icon-list"
+                >
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={0}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 4,
+                      }
+                    }
+                  >
+                    PN
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(/avatar.jpg)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={1}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 3,
+                      }
+                    }
+                  >
+                    DC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={2}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 2,
+                      }
+                    }
+                  >
+                    UA
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={3}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 1,
+                      }
+                    }
+                  >
+                    SC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={4}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 0,
+                      }
+                    }
+                  >
+                    PC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/sintsintcorrupti.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon-list__count"
+                  >
+                    <span>
+                      +
+                      9
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -3101,9 +5275,139 @@ exports[`DashboardPage Row view 1`] = `
                 </a>
               </div>
               <div
-                className="property-status property-status--on-track"
+                className="property-row__health"
               >
-                ON TRACK
+                <div
+                  className="property-status property-status--on-track"
+                >
+                  ON TRACK
+                </div>
+              </div>
+              <div
+                className="property-row__members"
+              >
+                <div
+                  className="user-icon-list"
+                >
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={0}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 4,
+                      }
+                    }
+                  >
+                    PN
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(/avatar.jpg)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={1}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 3,
+                      }
+                    }
+                  >
+                    DC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={2}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 2,
+                      }
+                    }
+                  >
+                    UA
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={3}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#6B29BE",
+                        "zIndex": 1,
+                      }
+                    }
+                  >
+                    SC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon user-icon-list__icon"
+                    data-index={4}
+                    onMouseEnter={[Function]}
+                    onMouseLeave={[Function]}
+                    style={
+                      Object {
+                        "backgroundColor": "#006EFF",
+                        "zIndex": 0,
+                      }
+                    }
+                  >
+                    PC
+                    <div
+                      className="user-icon__avatar"
+                      style={
+                        Object {
+                          "backgroundImage": "url(https://robohash.org/sintsintcorrupti.jpg?size=50x50&set=set1&bgset=bg1)",
+                        }
+                      }
+                    />
+                  </div>
+                  <div
+                    className="user-icon-list__count"
+                  >
+                    <span>
+                      +
+                      9
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
