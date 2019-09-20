@@ -4,7 +4,6 @@ import { ProjectPage } from "../../components/project_page";
 
 class ProjectsContainer extends PureComponent {
   render() {
-    // return <ProjectPage {...this.props} />;
     return <div>Projects Container</div>;
   }
 }

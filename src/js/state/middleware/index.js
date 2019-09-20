@@ -8,9 +8,6 @@ import {
 import { axiosGet, axiosPost } from "../../utils/api";
 import ReactGa from "react-ga";
 
-// Here we create a middleware that intercepts
-// actions representing a request for data from
-// the api
 export const fetchDashboard = store => next => action => {
   if (action.type === "API_DASHBOARD") {
     let x = store.getState();
@@ -139,6 +136,23 @@ export const sendGaEvent = store => next => action => {
   switch (action.type) {
     case "GA_EVENT": {
       ReactGa.event(action.event);
+      break;
+    }
+    default:
+      next(action);
+  }
+};
+
+export const applyApiResult = store => next => action => {
+  switch (action.type) {
+    case "API_RESPONSE": {
+      switch (action.branch) {
+        case "dashboard": {
+          next(general.update(action.response));
+        }
+        default:
+          break; // what do we do if no branch was detected?
+      }
       break;
     }
     default:

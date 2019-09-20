@@ -25,6 +25,18 @@ export const networking = {
   fetchDashboard: (queryString = "") => ({
     type: "API_DASHBOARD",
     queryString
+  }),
+  fail: message => ({
+    type: "NETWORK_FETCH_FAIL",
+    message
+  }),
+  success: () => ({
+    type: "NETWORK_FETCH_SUCCESS"
+  }),
+  results: (response, branch = "general") => ({
+    type: "API_RESPONSE",
+    response,
+    branch
   })
 };
 

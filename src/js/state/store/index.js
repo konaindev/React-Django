@@ -1,13 +1,16 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import reducers from "../reducers";
+import createSagaMiddleware from "redux-saga";
 import {
   fetchDashboard,
   fetchTutorial,
   fetchCreatePassword,
   fetchCompany,
   fetchCompleteAccount,
-  sendGaEvent
+  sendGaEvent,
+  applyApiResult
 } from "../middleware";
+import sagas from "../../utils/network";
 
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -23,22 +26,25 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const presistedReducer = persistReducer(cfg, reducers);
 
+const sagaMiddleware = createSagaMiddleware();
+
 export default () => {
   const store = createStore(
     presistedReducer,
     composeEnhancers(
       applyMiddleware(
-        //window.__REDUX_DEVTOOLS_EXTENSION__ &&
-        //  window.__REDUX_DEVTOOLS_EXTENSION__({ trace: true, traceLimit: 25 }),
         fetchDashboard,
         fetchTutorial,
         fetchCreatePassword,
         fetchCompany,
         fetchCompleteAccount,
-        sendGaEvent
+        sendGaEvent,
+        applyApiResult,
+        sagaMiddleware
       )
     )
   );
   const persistor = persistStore(store);
+  sagas.forEach(saga => sagaMiddleware.run(saga));
   return { store, persistor };
 };
