@@ -17,7 +17,7 @@ def weighted_average_by_unit_count(items, prop):
 
     total_units = 0
     for item in items:
-        value = item[unit_property]
+        value = item.get(unit_property)
         if value is None:
             value = 0
         total_units += value
@@ -29,7 +29,7 @@ def weighted_average_by_unit_count(items, prop):
 
     result = result_type(0)
     for item in items:
-        result += item[prop] * (item[unit_property] / total_units)
+        result += item[prop] * (item.get(unit_property, 0) / total_units)
     return result
 
 
