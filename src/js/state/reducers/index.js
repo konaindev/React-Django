@@ -8,7 +8,6 @@ const token = (state = { refresh: null, access: null }, action) => {
   let newState = {};
   switch (action.type) {
     case "UPDATE_TOKEN": {
-      console.log("update token got", action);
       newState = { ...action.token };
       break;
     }
