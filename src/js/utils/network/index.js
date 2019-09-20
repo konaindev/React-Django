@@ -13,7 +13,8 @@ action.body === axios post body
 
 function* get(action) {
   try {
-    const response = yield call(Api.fetchUser, action.payload.userId);
+    const response = yield call(axiosGet, action.config);
+    response.branch = action.branch;
     yield put(networking.results(response));
     yield put(networking.success());
   } catch (e) {
@@ -36,7 +37,7 @@ function* getSaga() {
 }
 
 function* postSaga() {
-  yield takeLatest("FETCH_API_GET", post);
+  yield takeLatest("FETCH_API_POST", post);
 }
 
 export default [getSaga, postSaga];

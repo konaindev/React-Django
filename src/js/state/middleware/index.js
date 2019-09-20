@@ -3,7 +3,8 @@ import {
   tutorial,
   networking,
   createPassword,
-  completeAccount
+  completeAccount,
+  auth
 } from "../actions";
 import { axiosGet, axiosPost } from "../../utils/api";
 import ReactGa from "react-ga";
@@ -149,6 +150,11 @@ export const applyApiResult = store => next => action => {
       switch (action.branch) {
         case "dashboard": {
           next(general.update(action.response));
+          break;
+        }
+        case "token": {
+          next(auth.persistToken(action.response));
+          break;
         }
         default:
           break; // what do we do if no branch was detected?

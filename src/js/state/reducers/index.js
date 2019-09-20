@@ -101,16 +101,28 @@ const completeAccount = (
 };
 
 const pageMeta = (state = { title: "Remarkably" }, action) => {
-  let newState = state;
+  let newState = undefined;
 
   switch (action.type) {
     case "UPDATE_PAGE_TITLE": {
       newState = { ...state, title: action.title };
     }
     default:
-      newState = state;
+      newState = { ...state };
   }
   return newState;
+};
+
+const token = (state = { token: { refresh: null, access: null } }) => {
+  let newState = undefined;
+
+  switch (action.type) {
+    case "PERSIST_TOKEN": {
+      newState = { ...state, token: action.payload };
+    }
+    default:
+      newState = { ...state };
+  }
 };
 export default combineReducers({
   general: dashboard,

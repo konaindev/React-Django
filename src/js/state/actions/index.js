@@ -82,3 +82,19 @@ export const pageMeta = {
     title
   })
 };
+
+export const auth = {
+  login: ({ email, pwd }) => ({
+    type: "LOGIN_START",
+    email,
+    pwd,
+    branch: "token"
+  }),
+  logout: () => ({
+    type: "LOGOUT_START"
+  }),
+  persistToken: token => ({
+    type: "PERSIST_TOKEN",
+    token
+  })
+};
