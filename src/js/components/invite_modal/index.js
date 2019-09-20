@@ -43,8 +43,7 @@ class InviteModal extends React.PureComponent {
   static roleOptions = [
     {
       label: "Admin",
-      description:
-        "People can edit property information, start campaigns and invite members",
+      description: "People can edit property information and invite members",
       value: "admin"
     },
     {
@@ -64,6 +63,10 @@ class InviteModal extends React.PureComponent {
     ...MultiValueComponents,
     Option: OptionUsers,
     IndicatorsContainer: () => null
+  };
+
+  static searchStyle = {
+    noOptionsMessage: () => {}
   };
 
   state = {
@@ -119,7 +122,7 @@ class InviteModal extends React.PureComponent {
 
   selectMember = members => {
     this.setState({
-      selectedMembers: members
+      selectedMembers: members || []
     });
   };
 
@@ -131,7 +134,9 @@ class InviteModal extends React.PureComponent {
 
   formatOptionLabel = data => data.account_name || data.value;
 
-  noOptionsMessage = () => "User not found";
+  noOptionsMessage = () => (
+    <div className="invite-modal__user-not-found">User not found</div>
+  );
 
   renderTitle = () => {
     let propertyName;
@@ -241,8 +246,9 @@ class InviteModal extends React.PureComponent {
                 className="invite-modal__select-users"
                 theme="transparent"
                 size="small"
-                placeholder="Type a name or an email address"
+                placeholder="Name or email"
                 noOptionsMessage={this.noOptionsMessage}
+                styles={InviteModal.searchStyle}
                 isMulti={true}
                 components={InviteModal.selectUsersComponents}
                 loadOptions={this.loadUsers}

@@ -59,7 +59,7 @@ Array [
               <div
                 className="select__placeholder css-1wa3eu0-placeholder"
               >
-                Type a name or an email address
+                Name or email
               </div>
               <div>
                 <div
@@ -3083,7 +3083,7 @@ Array [
               <div
                 className="select__placeholder css-1wa3eu0-placeholder"
               >
-                Type a name or an email address
+                Name or email
               </div>
               <div>
                 <div

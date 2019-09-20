@@ -5,7 +5,7 @@ $multi-value-bg: $gray-4;
 $multi-value-color: $highlight-gray-3;
 $multi-value-border-radius: $border-radius-sm;
 $multi-value-size: $s3;
-$multi-value-close-size: 14px;
+$multi-value-close-size: 10px;
 $multi-value-close-color: $gray-6;
 $multi-value-close-hover-bg: $gray-6;
 $multi-value-close-hover-color: $gray-4;
@@ -335,11 +335,6 @@ $multi-value-close-hover-color: $gray-4;
         }
     }
 
-    .select__menu-list {
-        padding-top: 0.625rem;
-        padding-bottom: 0.625rem;
-    }
-
     .select__option {
         &:active,
         &--is-focused,
@@ -462,18 +457,25 @@ $multi-value-close-hover-color: $gray-4;
 .select-multi-value {
     display: flex;
     height: $multi-value-size;
-    padding: 9px 6px;
-    margin: 5px;
+    padding: 9px 5px 9px 9px;
+    margin: 5px 5px 5px 0;
     font-size: $text-xs;
     color: $multi-value-color;
     background: $multi-value-bg;
     border-radius: $multi-value-border-radius;
     box-sizing: content-box;
     align-items: center;
+    max-width: 200px;
+
+    .select-multi-value {
+        margin-left: 5px;
+    }
 }
 
 .select-multi-value__label {
     height: $multi-value-size;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .select-multi-value__close {
