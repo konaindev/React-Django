@@ -4,7 +4,7 @@ const initState = {
   tutorialView: {}
 };
 
-const token = (state = { token: null }, action) => {
+const token = (state = { refresh: null, access: null }, action) => {
   let newState = {};
   switch (action.type) {
     case "UPDATE_TOKEN": {
