@@ -18,6 +18,10 @@ const router = base => callback => {
   const initRouter = ({ base, route }) => {
     route.base(base || "/dashboard");
 
+    route("/create-password/*", async function(hash) {
+      await callback(hash);
+    });
+
     route("/..", async function() {
       // fire the callback
       await callback(window.location.search);

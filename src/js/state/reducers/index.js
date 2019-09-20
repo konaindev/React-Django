@@ -100,7 +100,7 @@ const createPassword = (state = {}, action) => {
   let newState = {};
   switch (action.type) {
     case "CREATE_PASSWORD_SET_STATE": {
-      newState = { ...state, tutorialView: action.newState };
+      newState = { ...state, ...action.newState };
       break;
     }
     case "CREATE_PASSWORD_REDIRECT": {
