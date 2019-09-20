@@ -83,9 +83,15 @@ export const pageMeta = {
   })
 };
 
+const URLS = {
+  base: process.env.BASE_URL || "http//localhost:8000",
+  login: "/api/token/",
+  refresh: "/api/token/refresh/"
+};
+
 export const auth = {
   login: ({ email, pwd }) => ({
-    type: "LOGIN_START",
+    type: "FETCH_API_POST",
     email,
     pwd,
     branch: "token"
@@ -94,7 +100,7 @@ export const auth = {
     type: "LOGOUT_START"
   }),
   persistToken: token => ({
-    type: "PERSIST_TOKEN",
+    type: "UPDATE_TOKEN",
     token
   })
 };

@@ -8,7 +8,9 @@ const token = (state = { token: null }, action) => {
   let newState = {};
   switch (action.type) {
     case "UPDATE_TOKEN": {
-      newState = { token: action.token };
+      console.log("update token got", action);
+      newState = { ...action.token };
+      break;
     }
     default:
       newState = { ...state };
@@ -113,17 +115,6 @@ const pageMeta = (state = { title: "Remarkably" }, action) => {
   return newState;
 };
 
-const token = (state = { token: { refresh: null, access: null } }) => {
-  let newState = undefined;
-
-  switch (action.type) {
-    case "PERSIST_TOKEN": {
-      newState = { ...state, token: action.payload };
-    }
-    default:
-      newState = { ...state };
-  }
-};
 export default combineReducers({
   general: dashboard,
   network,

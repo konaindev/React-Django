@@ -24,10 +24,12 @@ function* get(action) {
 
 function* post(action) {
   try {
-    const response = yield call(Api.fetchUser, action.payload.userId);
-    yield put(networking.results(response));
+    console.log("....saga sendiong...", action);
+    const response = yield call(axiosPost, action.url, action.body, {}, false);
+    yield put(networking.results(response.data, action.branch));
     yield put(networking.success());
   } catch (e) {
+    console.log("something was wrong!!!", e);
     yield put(networking.fail(e.message));
   }
 }

@@ -133,7 +133,7 @@ export const fetchCompleteAccount = store => next => action => {
   }
 };
 
-export const sendGaEvent = store => next => action => {
+export const sendGaEvent = _ => next => action => {
   switch (action.type) {
     case "GA_EVENT": {
       ReactGa.event(action.event);
@@ -144,9 +144,10 @@ export const sendGaEvent = store => next => action => {
   }
 };
 
-export const applyApiResult = store => next => action => {
+export const applyApiResult = _ => next => action => {
   switch (action.type) {
     case "API_RESPONSE": {
+      console.log(action);
       switch (action.branch) {
         case "dashboard": {
           next(general.update(action.response));
