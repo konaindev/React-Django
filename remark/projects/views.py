@@ -293,18 +293,18 @@ class MembersView(LoginRequiredMixin, APIView):
         payload = self.get_data()
         value = payload.get("value", [])
         users = User.objects.filter(
-            Q(Q(email__icontains=value) |
-            Q(person__first_name__icontains=value) |
-            Q(person__last_name__icontains=value)) &
-            Q(account__isnull=False)
+            Q(
+                Q(email__icontains=value)
+                | Q(person__first_name__icontains=value)
+                | Q(person__last_name__icontains=value)
+            )
+            & Q(account__isnull=False)
         )
         members = [user.get_menu_dict() for user in users]
         return JsonResponse({"members": members})
 
 
 class AddMembersView(LoginRequiredMixin, APIView):
-
-
     def post(self, request):
         payload = self.get_data()
         members = payload.get("members", [])
