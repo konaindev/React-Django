@@ -1,7 +1,7 @@
 import cn from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
-
+import { Link } from "react-router-dom";
 import "./top_navigation.scss";
 
 export default class TopNavigation extends React.PureComponent {
@@ -22,9 +22,9 @@ export default class TopNavigation extends React.PureComponent {
         "top-navigation__link--active": link.id === this.props.selected_link
       });
       return (
-        <a className={className} href={link.url} key={link.id}>
+        <Link className={className} to={link.url} key={link.id}>
           {link.name}
-        </a>
+        </Link>
       );
     });
   };

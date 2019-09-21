@@ -12,7 +12,7 @@ import UserMenu from "../user_menu";
 import ToggleButton from "../toggle_button";
 import { formatKPI } from "../../utils/kpi_formatters";
 import { qsParse, qsStringify } from "../../utils/misc";
-
+import { nav } from "../../state/actions";
 import "./portfolio_analysis_view.scss";
 
 const navLinks = {
@@ -177,49 +177,49 @@ export class PortfolioAnalysisView extends React.PureComponent {
       kpi_order,
       display_average
     } = this.props;
+
+    this.props.dispatch(nav.updateLinks(navLinks));
     return (
-      <PageChrome navLinks={navLinks} headerItems={this.renderHeaderItems()}>
-        <Container className="portfolio-analysis">
-          <div className="portfolio-analysis__header">
-            <div className="portfolio-analysis__title">Portfolio Analysis</div>
-            {/* <ShareToggle
+      <Container className="portfolio-analysis">
+        <div className="portfolio-analysis__header">
+          <div className="portfolio-analysis__title">Portfolio Analysis</div>
+          {/* <ShareToggle
               {...share_info}
               current_report_name="portfolio_analysis"
             /> */}
+        </div>
+        <div className="portfolio-analysis__controls">
+          <Select
+            className="portfolio-analysis__select-kpi"
+            theme="default"
+            options={this.kpiOptions}
+            value={this.kpiValue}
+            onChange={this.onChangeKpi}
+          />
+          <DateRangeSelector
+            start_date={date_selection.start_date}
+            end_date={date_selection.end_date}
+            preset={date_selection.preset}
+            onChange={this.onChangeDateRange}
+          />
+        </div>
+        <div className="portfolio-analysis__title-bar">
+          <ToggleButton
+            options={average_buttons_options}
+            value={display_average}
+            onChange={this.onAverageClick}
+          />
+          <div className="portfolio-analysis__property-count">
+            {this.totalProperties} properties
           </div>
-          <div className="portfolio-analysis__controls">
-            <Select
-              className="portfolio-analysis__select-kpi"
-              theme="default"
-              options={this.kpiOptions}
-              value={this.kpiValue}
-              onChange={this.onChangeKpi}
-            />
-            <DateRangeSelector
-              start_date={date_selection.start_date}
-              end_date={date_selection.end_date}
-              preset={date_selection.preset}
-              onChange={this.onChangeDateRange}
-            />
-          </div>
-          <div className="portfolio-analysis__title-bar">
-            <ToggleButton
-              options={average_buttons_options}
-              value={display_average}
-              onChange={this.onAverageClick}
-            />
-            <div className="portfolio-analysis__property-count">
-              {this.totalProperties} properties
-            </div>
-          </div>
-          <div className="portfolio-analysis__kpi-cards">
-            {this.renderKPICards()}
-          </div>
-          <div className="portfolio-analysis__table">
-            <PortfolioTable properties={table_data} kpi_order={kpi_order} />
-          </div>
-        </Container>
-      </PageChrome>
+        </div>
+        <div className="portfolio-analysis__kpi-cards">
+          {this.renderKPICards()}
+        </div>
+        <div className="portfolio-analysis__table">
+          <PortfolioTable properties={table_data} kpi_order={kpi_order} />
+        </div>
+      </Container>
     );
   }
 }
