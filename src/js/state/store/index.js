@@ -19,7 +19,7 @@ import storage from "redux-persist/lib/storage";
 const cfg = {
   key: "rmb",
   storage,
-  whitelist: ["token"] // NOTE: this is where we elect what to persist
+  whitelist: ["token", "nav"] // NOTE: this is where we elect what to persist
 };
 
 // TODO: contextually enable devtools based on prod or not

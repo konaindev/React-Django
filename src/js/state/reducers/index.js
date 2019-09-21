@@ -114,6 +114,21 @@ const pageMeta = (state = { title: "Remarkably" }, action) => {
   return newState;
 };
 
+const nav = (state = {}, action) => {
+  let newState = undefined;
+
+  switch (action.type) {
+    case "UPDATE_NAVLINKS":
+      newState = { ...state, navLinks: action.navLinks };
+      break;
+    case "UPDATE_HEADER_ITEMS":
+      newState = { ...state, headerItems: action.headerItems };
+    default:
+      newState = state;
+  }
+  return newState;
+};
+
 export default combineReducers({
   general: dashboard,
   network,

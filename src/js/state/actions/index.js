@@ -104,3 +104,14 @@ export const auth = {
     token
   })
 };
+
+export const nav = {
+  updateLinks: navLinks => ({
+    type: "UPDATE_NAVLINKS",
+    navLinks
+  }),
+  updateHeaders: headerItems => ({
+    type: "UPDATE_HEADER_ITEMS",
+    headerItems
+  })
+};
