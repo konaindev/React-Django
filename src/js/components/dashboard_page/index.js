@@ -22,7 +22,7 @@ import { qsParse, qsStringify } from "../../utils/misc";
 import TutorialView from "../tutorial_view";
 import { networking } from "../../state/actions";
 import "./dashboard_page.scss";
-
+import { nav } from "../../state/actions";
 const navLinks = {
   links: [
     {
@@ -142,9 +142,13 @@ export class DashboardPage extends React.PureComponent {
     const PropertiesListComponent = this.propertiesListComponent;
     const navLinks = this.props.navLinks;
     const { isFetching } = this.props;
+
+    this.props.dispatch(nav.updateLinks(navLinks));
+    this.props.dispatch(nav.updateHeaders(this.getHeaderItems()));
+
     // user.email.indexOf("remarkably.io") > -1 ? this.props.navLinks : null;
     return (
-      <PageChrome navLinks={navLinks} headerItems={this.getHeaderItems()}>
+      <div>
         <TutorialView />
         <div className={className}>
           <Container>
@@ -205,7 +209,7 @@ export class DashboardPage extends React.PureComponent {
             onClose={this.onHideAddPropertyForm}
           />
         </div>
-      </PageChrome>
+      </div>
     );
   }
 }
@@ -302,14 +306,12 @@ export class UrlQueryLayer extends React.PureComponent {
   render() {
     if (this.props.no_projects || !this.props.properties) {
       return (
-        <PageChrome>
-          <div className="dashboard-content">
-            <p>
-              Please contact your Account Manager to setup access to your
-              properties
-            </p>
-          </div>
-        </PageChrome>
+        <div className="dashboard-content">
+          <p>
+            Please contact your Account Manager to setup access to your
+            properties
+          </p>
+        </div>
       );
     }
     return (

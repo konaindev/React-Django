@@ -13,9 +13,11 @@ class NavGate extends React.PureComponent {
   }
 }
 
-const mapState = ({ navLinks, headerItems }) => ({
-  navLinks,
-  headerItems
-});
+const mapState = state => {
+  return {
+    navLinks: state.nav.navLinks,
+    headerItems: state.nav.headerItems
+  };
+};
 
 export default withRouter(connect(mapState)(NavGate));
