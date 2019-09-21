@@ -136,5 +136,6 @@ export default combineReducers({
   createPassword,
   completeAccount,
   token,
-  pageMeta
+  pageMeta,
+  nav
 });
