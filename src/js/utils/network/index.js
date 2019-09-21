@@ -24,7 +24,6 @@ function* get(action) {
 
 function* post(action) {
   try {
-    console.log("....saga sendiong...", action);
     const response = yield call(axiosPost, action.url, action.body, {}, false);
     yield put(networking.results(response.data, action.branch));
     yield put(networking.success());

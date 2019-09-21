@@ -6,7 +6,6 @@ import { withRouter } from "react-router-dom";
 
 class PortfolioContainer extends PureComponent {
   render() {
-    console.log(props);
     return <PortfolioAnalysisView {...props} {...this.props} />;
   }
 }
