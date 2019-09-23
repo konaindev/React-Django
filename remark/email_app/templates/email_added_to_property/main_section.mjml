@@ -37,7 +37,7 @@
           <mj-text mj-class="text-xs text-gray">{{ property.address }}</mj-text>
         </mj-column>
         <mj-column padding="22px 20px" width="144px" css-class="property-row-button-column">
-          <mj-button href="{{ property.view_link }}" mj-class="button bg-smoke text-xs p-0" text-transform="none" inner-padding="8px 10px">View Property</mj-button>
+          <mj-button href="{{ property.view_link }}" mj-class="button button-small bg-smoke p-0">View Property</mj-button>
         </mj-column>
       {% endif %}
       </mj-group>
@@ -53,7 +53,7 @@
       {% if more_count > 0 %}
       <mj-text mj-class="text-xl text-white pt-0 pb-50" align="center">+{{ more_count }} more properties</mj-text>
       {% endif %}
-      <mj-button href="{{ main_button_link }}" mj-class="button bg-blue pt-0 pb-50">{{ main_button_label }}</mj-button>
+      <mj-button href="{{ main_button_link }}" mj-class="button bg-blue pt-0 pb-50" css-class="rmb-button">{{ main_button_label }}</mj-button>
     </mj-column>
   </mj-section>
 </mj-wrapper>

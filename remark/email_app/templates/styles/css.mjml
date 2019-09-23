@@ -6,6 +6,9 @@
   .rmb-hyperlink:hover {
     text-decoration: underline !important;
   }
+  .rmb-button a {
+    letter-spacing: 1px;
+  }
 </mj-style>
 <mj-style inline="inline">
 

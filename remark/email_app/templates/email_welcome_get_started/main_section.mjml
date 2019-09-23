@@ -158,7 +158,7 @@
         Don’t hesitate to reach out.
       </mj-text>
       <mj-spacer height="30px" />
-      <mj-button href="mailto:{{ contact_us_email }}" mj-class="button bg-blue text-white text-xs">
+      <mj-button href="mailto:{{ contact_us_email }}" mj-class="button bg-blue text-white" css-class="rmb-button">
         Contact Us
       </mj-button>
       <mj-spacer height="50px" />
@@ -166,7 +166,7 @@
         To learn more about our business and product, please visit our <a href="{{ website_link }}" class="rmb-hyperlink">website</a>.
       </mj-text>
       <mj-spacer height="30px" />
-      <mj-button href="mailto:{{ request_demo_email }}" mj-class="button bg-white text-blue text-xs">
+      <mj-button href="mailto:{{ request_demo_email }}" mj-class="button bg-white text-blue" css-class="rmb-button">
         Request A Demo
       </mj-button>
     </mj-column>
