@@ -18,6 +18,7 @@ export function RemarkableRouter() {
             <Route path="/dashboard" component={DashboardContainer} />
             <Route path="/projects" component={ProjectsContainer} />
             <Route path="/portfolio" component={PortfolioContainer} />
+            <Route path="/portfolio/table" component={PortfolioContainer} />
             <Route path="/auth" component={AuthContainer} />
             <Route component={DashboardContainer} />
           </Switch>
