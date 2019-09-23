@@ -129,6 +129,84 @@ const nav = (state = {}, action) => {
   return newState;
 };
 
+const user = (state = {}, action) => {
+  let newState = undefined;
+
+  switch (action.type) {
+    case "UPDATE_USER":
+      newState = { ...action.x };
+      break;
+    default:
+      newState = state;
+  }
+  return newState;
+};
+
+const properties = (state = {}, action) => {
+  let newState = undefined;
+
+  switch (action.type) {
+    case "UPDATE_PROPERTIES":
+      newState = action.x;
+      break;
+    default:
+      newState = state;
+  }
+  return newState;
+};
+
+const funds = (state = {}, action) => {
+  let newState = undefined;
+
+  switch (action.type) {
+    case "UPDATE_FUNDS":
+      newState = action.x;
+      break;
+    default:
+      newState = state;
+  }
+  return newState;
+};
+
+const property_managers = (state = {}, action) => {
+  let newState = undefined;
+
+  switch (action.type) {
+    case "UPDATE_PROPERTY_MANAGERS":
+      newState = action.x;
+      break;
+    default:
+      newState = state;
+  }
+  return newState;
+};
+
+const portfolio = (state = {}, action) => {
+  let newState = undefined;
+
+  switch (action.type) {
+    case "UPDATE_PORTFOLIO":
+      newState = action.x;
+      break;
+    default:
+      newState = state;
+  }
+  return newState;
+};
+
+const asset_managers = (state = {}, action) => {
+  let newState = undefined;
+
+  switch (action.type) {
+    case "UPDATE_ASSET_MANAGERS":
+      newState = action.x;
+      break;
+    default:
+      newState = state;
+  }
+  return newState;
+};
+
 export default combineReducers({
   general: dashboard,
   network,
@@ -137,5 +215,11 @@ export default combineReducers({
   completeAccount,
   token,
   pageMeta,
-  nav
+  nav,
+  user,
+  properties,
+  funds,
+  property_managers,
+  portfolio,
+  asset_managers
 });

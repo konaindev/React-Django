@@ -115,3 +115,27 @@ export const nav = {
     headerItems
   })
 };
+
+export const user = {
+  set: x => ({ type: "UPDATE_USER", x })
+};
+
+export const properties = {
+  set: x => ({ type: "UPDATE_PROPERTIES", x })
+};
+
+export const funds = {
+  set: x => ({ type: "UPDATE_FUNDS", x })
+};
+
+export const property_managers = {
+  set: x => ({ type: "UPDATE_PROPERTY_MANAGERS", x })
+};
+
+export const portfolio = {
+  set: x => ({ type: "UPDATE_PORTFOLIO", x })
+};
+
+export const asset_managers = {
+  set: x => ({ type: "UPDATE_ASSET_MANAGERS", x })
+};
