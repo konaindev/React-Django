@@ -2,6 +2,9 @@
 <mj-all font-family="Formular, BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;" />
 <mj-text padding="0" />
 <mj-image padding="0" />
+<mj-wrapper padding="0" />
+<mj-section padding="0" />
+<mj-column padding="0" />
 
 <mj-class name="divider" border-width="1px" border-color="#2B343D" padding="0 "/>
 <mj-class name="divider-full" background-color="#2B343D" padding="0" padding-top="5px" />
