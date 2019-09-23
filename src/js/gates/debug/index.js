@@ -15,8 +15,6 @@ import {
 class DebugGate extends React.PureComponent {
   constructor(props) {
     super(props);
-    console.log(sbProps);
-    console.log(this.props);
     // if (process.env.LOAD_SB_PROPS === "YES") {
     const {
       user,
@@ -26,14 +24,17 @@ class DebugGate extends React.PureComponent {
       asset_managers,
       locations
     } = sbProps;
+
+    // load state from dashboard storybook props...
     this.props.dispatch(_user.set(user));
     this.props.dispatch(_properties.set(properties));
     this.props.dispatch(_funds.set(funds));
     this.props.dispatch(_pm.set(property_managers));
-    this.props.dispatch(_pf.set(portProps));
     this.props.dispatch(_am.set(asset_managers));
-    this.props.dispatch(_am.set(asset_managers));
+    this.props.dispatch(_loc.set(locations));
 
+    // load state from portfolio view sb props...
+    this.props.dispatch(_pf.set(portProps));
     // }
   }
   render() {

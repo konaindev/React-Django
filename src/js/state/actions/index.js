@@ -139,3 +139,7 @@ export const portfolio = {
 export const asset_managers = {
   set: x => ({ type: "UPDATE_ASSET_MANAGERS", x })
 };
+
+export const locations = {
+  set: x => ({ type: "UPDATE_LOCATIONS", x })
+};
