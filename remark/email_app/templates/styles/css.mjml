@@ -1,5 +1,11 @@
 <mj-style>
-
+  .rmb-hyperlink {
+    color: #006eff !important;
+    text-decoration: none !important;
+  }
+  .rmb-hyperlink:hover {
+    text-decoration: underline !important;
+  }
 </mj-style>
 <mj-style inline="inline">
 

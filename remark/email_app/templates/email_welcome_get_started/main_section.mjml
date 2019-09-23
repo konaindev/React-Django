@@ -1,6 +1,6 @@
 <mj-wrapper
   full-width="full-width"
-  background-url="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/welcome_to/welcome_hero.png"
+  background-url="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/welcome_to/welcome_hero@1x.png"
   background-size="auto 100%"
   background-repeat="no-repeat"
   mj-class="bg-black"
@@ -53,7 +53,7 @@
         Remarkably is a portfolio performance platform.
       </mj-text>
       <mj-spacer height="20px" />
-      <mj-text mj-class="text-base text-white text-center">
+      <mj-text mj-class="text-base text-lightgray text-center">
         Designed for multifamily owners, asset managers, and property managers, our software helps users grow revenue, optimize marketing and leasing investments, and manage risk.
       </mj-text>
       <mj-spacer height="150px" />
@@ -141,7 +141,7 @@
       <mj-spacer height="100px" />
 
       <mj-text mj-class="text-xl text-white text-center">
-        And we're just getting started. Stay tuned for exciting new features already in development
+        And we're just getting started. Stay tuned for exciting new features already in development.
       </mj-text>
     </mj-column>
   </mj-section>
@@ -163,7 +163,7 @@
       </mj-button>
       <mj-spacer height="50px" />
       <mj-text mj-class="text-base text-lightgray text-center">
-        To learn more about our business and product, please visit our <a href="{{ website_link }}">website</a>.
+        To learn more about our business and product, please visit our <a href="{{ website_link }}" class="rmb-hyperlink">website</a>.
       </mj-text>
       <mj-spacer height="30px" />
       <mj-button href="mailto:{{ request_demo_email }}" mj-class="button bg-white text-blue text-xs">
