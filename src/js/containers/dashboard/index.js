@@ -6,13 +6,13 @@ import { withRouter } from "react-router-dom";
 
 class DashboardContainer extends PureComponent {
   render() {
-    return <DashboardPage {...props} {...this.props} />;
+    return <DashboardPage {...this.props} />;
   }
 }
 
 const mapState = state => ({
-  ...state.general,
-  ...state.network
+  ...state.network,
+  ...state
 });
 
 export default withRouter(connect(mapState)(DashboardContainer));

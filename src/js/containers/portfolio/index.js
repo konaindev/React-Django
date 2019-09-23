@@ -6,13 +6,14 @@ import { withRouter } from "react-router-dom";
 
 class PortfolioContainer extends PureComponent {
   render() {
-    return <PortfolioAnalysisView {...props} {...this.props} />;
+    return <PortfolioAnalysisView {...this.props} />;
   }
 }
 
 const mapState = state => ({
-  ...state.general,
-  ...state.network
+  ...state.user,
+  ...state.network,
+  ...state.portfolio
 });
 
 export default withRouter(connect(mapState)(PortfolioContainer));

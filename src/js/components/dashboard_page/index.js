@@ -11,7 +11,6 @@ import { states } from "../add_property_form/states";
 import Button from "../button";
 import DashboardControls from "../dashboard_controls";
 import Container from "../container";
-import PageChrome from "../page_chrome";
 import PropertyCardList from "../property_card_list";
 import PropertyList from "../property_list";
 import { Close, ListView, TileView } from "../../icons";

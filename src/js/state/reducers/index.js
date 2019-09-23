@@ -142,7 +142,7 @@ const user = (state = {}, action) => {
   return newState;
 };
 
-const properties = (state = {}, action) => {
+const properties = (state = [], action) => {
   let newState = undefined;
 
   switch (action.type) {
@@ -155,7 +155,7 @@ const properties = (state = {}, action) => {
   return newState;
 };
 
-const funds = (state = {}, action) => {
+const funds = (state = [], action) => {
   let newState = undefined;
 
   switch (action.type) {
@@ -168,7 +168,7 @@ const funds = (state = {}, action) => {
   return newState;
 };
 
-const property_managers = (state = {}, action) => {
+const property_managers = (state = [], action) => {
   let newState = undefined;
 
   switch (action.type) {
@@ -194,11 +194,24 @@ const portfolio = (state = {}, action) => {
   return newState;
 };
 
-const asset_managers = (state = {}, action) => {
+const asset_managers = (state = [], action) => {
   let newState = undefined;
 
   switch (action.type) {
     case "UPDATE_ASSET_MANAGERS":
+      newState = action.x;
+      break;
+    default:
+      newState = state;
+  }
+  return newState;
+};
+
+const locations = (state = [], action) => {
+  let newState = undefined;
+
+  switch (action.type) {
+    case "UPDATE_LOCATIONS":
       newState = action.x;
       break;
     default:
@@ -221,5 +234,6 @@ export default combineReducers({
   funds,
   property_managers,
   portfolio,
-  asset_managers
+  asset_managers,
+  locations
 });
