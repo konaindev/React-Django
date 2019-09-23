@@ -12,7 +12,13 @@ class ProjectsContainer extends PureComponent {
   pickTab() {
     const { pathname } = this.props.location;
     const parts = pathname.split("/");
-    const tab = parts[parts.length - 2];
+
+    let tab = null;
+    if (parts.length < 6) {
+      tab = parts[parts.length - 2];
+    } else {
+      tab = parts[parts.length - 3];
+    }
     switch (tab) {
       case "baseline":
         return <BaselineReportPage {...this.props} />;
