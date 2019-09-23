@@ -34,7 +34,7 @@ export default class PortfolioPropertyRow extends React.PureComponent {
         target = `Target: ${formatKPI(kpi, this.props.targets[kpi])}`;
       }
       let value = "";
-      if (this.props.kpis?.[kpi]) {
+      if (!_isNil(this.props.kpis?.[kpi])) {
         value = formatKPI(kpi, this.props.kpis[kpi]);
       }
       return (
