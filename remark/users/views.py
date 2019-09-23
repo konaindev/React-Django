@@ -116,6 +116,11 @@ class CompleteAccountView(LoginRequiredMixin, ReactView):
             response = JsonResponse(form.errors, status=500)
         return response
 
+class UsersView(LoginRequiredMixin, RemarkView):
+    def post(self, request):
+        # TODO: Implement this
+        return JsonResponse({"users": []})
+
 
 class CreatePasswordView(ReactView):
     """Render create password page."""

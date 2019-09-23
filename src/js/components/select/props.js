@@ -15,6 +15,7 @@ const options2 = [
 ];
 
 const styles = {
+  valueContainer: provided => ({ ...provided, height: "18px" }),
   container: provided => ({ ...provided, width: 400 })
 };
 
@@ -76,3 +77,18 @@ export const propsGroup = {
   ],
   styles
 };
+
+export const descriptionOption = [
+  {
+    label: "Admin",
+    description:
+      "People can edit property information, start campaigns and invite members",
+    value: "admin"
+  },
+  {
+    label: "Member",
+    description:
+      "People can view property info and control their notification preferences",
+    value: "member"
+  }
+];

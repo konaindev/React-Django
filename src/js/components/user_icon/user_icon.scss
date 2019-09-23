@@ -1,0 +1,32 @@
+@import "css/base.scss";
+
+$user-icon-size: 32px;
+$user-icon-color: $highlight-gray-3;
+$users-icon-bg: $blue-7;
+
+
+.user-icon {
+    position: relative;
+    display: inline-flex;
+    width: $user-icon-size;
+    height: $user-icon-size;
+    font-size: $text-xs;
+    line-height: $line-height-loose;
+    color: $user-icon-color;
+    background-color: $users-icon-bg;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+}
+
+.user-icon__avatar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 50%;
+}

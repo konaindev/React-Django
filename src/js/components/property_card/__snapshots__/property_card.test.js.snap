@@ -19,20 +19,165 @@ exports[`PropertyCard renders at-risk 1`] = `
       <div
         className="property-card__overlay"
       >
-        <a
+        <div
           className="property-card__overlay-link"
-          href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
         >
-          <button
-            className="button button--outline"
+          <div
+            className="property-card__selector"
             onClick={[Function]}
           >
-            View Report
-          </button>
-        </a>
+            <svg
+              aria-hidden="true"
+              className="property-card__selector-tick"
+              color="inherit"
+              focusable="false"
+              height="1em"
+              role="presentation"
+              viewBox="0 0 13 11"
+              width="1em"
+            >
+              <path
+                d="M11.1689 1.03225C11.2971 0.904127 11.5048 0.904127 11.633 1.03225L12.4063 1.80564C12.5345 1.93379 12.5345 2.14156 12.4063 2.26968L4.20837 10.4677C4.0802 10.5958 3.87245 10.5958 3.74433 10.4677L0.0961101 6.81947C-0.0320367 6.6913 -0.0320367 6.48355 0.0961101 6.3554L0.869477 5.58203C0.997651 5.45389 1.2054 5.45389 1.33355 5.58203L3.97635 8.22484L11.1689 1.03225Z"
+              />
+            </svg>
+          </div>
+          <a
+            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+          >
+            <button
+              className="button button--outline"
+              onClick={[Function]}
+            >
+              View Report
+            </button>
+          </a>
+        </div>
         <div
           className="property-card__actions"
-        />
+        >
+          <div
+            className="user-icon-list"
+          >
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={0}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#006EFF",
+                  "zIndex": 4,
+                }
+              }
+            >
+              IK
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url()",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={1}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#6B29BE",
+                  "zIndex": 3,
+                }
+              }
+            >
+              PN
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url(/avatar.jpg)",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={2}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#006EFF",
+                  "zIndex": 2,
+                }
+              }
+            >
+              DC
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={3}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#6B29BE",
+                  "zIndex": 1,
+                }
+              }
+            >
+              UA
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={4}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#006EFF",
+                  "zIndex": 0,
+                }
+              }
+            >
+              SC
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon-list__count"
+            >
+              <span>
+                +
+                10
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div
@@ -77,20 +222,165 @@ exports[`PropertyCard renders off-track 1`] = `
       <div
         className="property-card__overlay"
       >
-        <a
+        <div
           className="property-card__overlay-link"
-          href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
         >
-          <button
-            className="button button--outline"
+          <div
+            className="property-card__selector"
             onClick={[Function]}
           >
-            View Report
-          </button>
-        </a>
+            <svg
+              aria-hidden="true"
+              className="property-card__selector-tick"
+              color="inherit"
+              focusable="false"
+              height="1em"
+              role="presentation"
+              viewBox="0 0 13 11"
+              width="1em"
+            >
+              <path
+                d="M11.1689 1.03225C11.2971 0.904127 11.5048 0.904127 11.633 1.03225L12.4063 1.80564C12.5345 1.93379 12.5345 2.14156 12.4063 2.26968L4.20837 10.4677C4.0802 10.5958 3.87245 10.5958 3.74433 10.4677L0.0961101 6.81947C-0.0320367 6.6913 -0.0320367 6.48355 0.0961101 6.3554L0.869477 5.58203C0.997651 5.45389 1.2054 5.45389 1.33355 5.58203L3.97635 8.22484L11.1689 1.03225Z"
+              />
+            </svg>
+          </div>
+          <a
+            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+          >
+            <button
+              className="button button--outline"
+              onClick={[Function]}
+            >
+              View Report
+            </button>
+          </a>
+        </div>
         <div
           className="property-card__actions"
-        />
+        >
+          <div
+            className="user-icon-list"
+          >
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={0}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#006EFF",
+                  "zIndex": 4,
+                }
+              }
+            >
+              IK
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url()",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={1}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#6B29BE",
+                  "zIndex": 3,
+                }
+              }
+            >
+              PN
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url(/avatar.jpg)",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={2}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#006EFF",
+                  "zIndex": 2,
+                }
+              }
+            >
+              DC
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={3}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#6B29BE",
+                  "zIndex": 1,
+                }
+              }
+            >
+              UA
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={4}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#006EFF",
+                  "zIndex": 0,
+                }
+              }
+            >
+              SC
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon-list__count"
+            >
+              <span>
+                +
+                10
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div
@@ -135,20 +425,368 @@ exports[`PropertyCard renders on-track 1`] = `
       <div
         className="property-card__overlay"
       >
-        <a
+        <div
           className="property-card__overlay-link"
-          href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
         >
-          <button
-            className="button button--outline"
+          <div
+            className="property-card__selector"
             onClick={[Function]}
           >
-            View Report
-          </button>
-        </a>
+            <svg
+              aria-hidden="true"
+              className="property-card__selector-tick"
+              color="inherit"
+              focusable="false"
+              height="1em"
+              role="presentation"
+              viewBox="0 0 13 11"
+              width="1em"
+            >
+              <path
+                d="M11.1689 1.03225C11.2971 0.904127 11.5048 0.904127 11.633 1.03225L12.4063 1.80564C12.5345 1.93379 12.5345 2.14156 12.4063 2.26968L4.20837 10.4677C4.0802 10.5958 3.87245 10.5958 3.74433 10.4677L0.0961101 6.81947C-0.0320367 6.6913 -0.0320367 6.48355 0.0961101 6.3554L0.869477 5.58203C0.997651 5.45389 1.2054 5.45389 1.33355 5.58203L3.97635 8.22484L11.1689 1.03225Z"
+              />
+            </svg>
+          </div>
+          <a
+            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+          >
+            <button
+              className="button button--outline"
+              onClick={[Function]}
+            >
+              View Report
+            </button>
+          </a>
+        </div>
         <div
           className="property-card__actions"
-        />
+        >
+          <div
+            className="user-icon-list"
+          >
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={0}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#006EFF",
+                  "zIndex": 4,
+                }
+              }
+            >
+              IK
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url()",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={1}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#6B29BE",
+                  "zIndex": 3,
+                }
+              }
+            >
+              PN
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url(/avatar.jpg)",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={2}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#006EFF",
+                  "zIndex": 2,
+                }
+              }
+            >
+              DC
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={3}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#6B29BE",
+                  "zIndex": 1,
+                }
+              }
+            >
+              UA
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={4}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#006EFF",
+                  "zIndex": 0,
+                }
+              }
+            >
+              SC
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon-list__count"
+            >
+              <span>
+                +
+                10
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      className="property-card__body"
+    >
+      <div
+        className="property-card__name"
+      >
+        Meridian SLC
+      </div>
+      <div
+        className="property-card__address"
+      >
+        123 4th Avenue, Seattle WA 98106
+      </div>
+      <div
+        className="property-status property-card__status property-status--on-track"
+      >
+        ON TRACK
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`PropertyCard renders selected 1`] = `
+<div
+  className="property-card property-card--selected"
+>
+  <div
+    className="panel panel--default property-card__panel"
+  >
+    <div
+      className="property-card__image"
+      style={
+        Object {
+          "backgroundImage": "url(https://i.imgur.com/UEH4gfU.jpg)",
+          "backgroundSize": "cover",
+        }
+      }
+    >
+      <div
+        className="property-card__overlay"
+      >
+        <div
+          className="property-card__overlay-link"
+        >
+          <div
+            className="property-card__selector"
+            onClick={[Function]}
+          >
+            <svg
+              aria-hidden="true"
+              className="property-card__selector-tick"
+              color="inherit"
+              focusable="false"
+              height="1em"
+              role="presentation"
+              viewBox="0 0 13 11"
+              width="1em"
+            >
+              <path
+                d="M11.1689 1.03225C11.2971 0.904127 11.5048 0.904127 11.633 1.03225L12.4063 1.80564C12.5345 1.93379 12.5345 2.14156 12.4063 2.26968L4.20837 10.4677C4.0802 10.5958 3.87245 10.5958 3.74433 10.4677L0.0961101 6.81947C-0.0320367 6.6913 -0.0320367 6.48355 0.0961101 6.3554L0.869477 5.58203C0.997651 5.45389 1.2054 5.45389 1.33355 5.58203L3.97635 8.22484L11.1689 1.03225Z"
+              />
+            </svg>
+          </div>
+          <a
+            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+          >
+            <button
+              className="button button--outline"
+              onClick={[Function]}
+            >
+              View Report
+            </button>
+          </a>
+        </div>
+        <div
+          className="property-card__actions"
+        >
+          <div
+            className="user-icon-list"
+          >
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={0}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#006EFF",
+                  "zIndex": 4,
+                }
+              }
+            >
+              IK
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url()",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={1}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#6B29BE",
+                  "zIndex": 3,
+                }
+              }
+            >
+              PN
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url(/avatar.jpg)",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={2}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#006EFF",
+                  "zIndex": 2,
+                }
+              }
+            >
+              DC
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url(https://robohash.org/architectoaccusantiumdolorem.jpg?size=50x50&set=set1&bgset=bg1)",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={3}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#6B29BE",
+                  "zIndex": 1,
+                }
+              }
+            >
+              UA
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url(https://robohash.org/estnecessitatibusporro.jpg?size=50x50&set=set1&bgset=bg1)",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon user-icon-list__icon"
+              data-index={4}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              style={
+                Object {
+                  "backgroundColor": "#006EFF",
+                  "zIndex": 0,
+                }
+              }
+            >
+              SC
+              <div
+                className="user-icon__avatar"
+                style={
+                  Object {
+                    "backgroundImage": "url(https://robohash.org/esseconsequaturconsequatur.jpg?size=50x50&set=set1&bgset=bg1)",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="user-icon-list__count"
+            >
+              <span>
+                +
+                10
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div

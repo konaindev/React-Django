@@ -49,6 +49,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
             image_url=project.get_building_image()[1],
             performance_rating=project.get_performance_rating(),
             url=project.get_report_url(),
+            # TODO: Add project members
         )
         cache.set(cache_key, project_details, TIMEOUT_1_DAY)
         return project_details

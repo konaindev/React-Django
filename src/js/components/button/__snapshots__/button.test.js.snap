@@ -71,3 +71,12 @@ exports[`Button renders transparent button correctly 1`] = `
   Transparent Button
 </button>
 `;
+
+exports[`Button renders warning button correctly 1`] = `
+<button
+  className="button button--warning"
+  onClick={[Function]}
+>
+  Warning Button
+</button>
+`;

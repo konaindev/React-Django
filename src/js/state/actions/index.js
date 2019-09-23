@@ -3,9 +3,10 @@ export const general = {
     type: "GENERAL_SET_STATE",
     newState
   }),
-  update: {
-    type: "GENERAL_UPDATE_STATE"
-  }
+  update: newState => ({
+    type: "GENERAL_UPDATE_STATE",
+    newState
+  })
 };
 
 export const tutorial = {
@@ -47,5 +48,35 @@ export const completeAccount = {
   set: newState => ({
     type: "COMPLETE_ACCOUNT_SET_STATE",
     newState
+  })
+};
+
+export const inviteModal = {
+  open: {
+    type: "INVITE_MODAL_SHOW"
+  },
+  close: {
+    type: "INVITE_MODAL_HIDE"
+  },
+  removeModalOpen: (property, member) => ({
+    type: "INVITE_MODAL_REMOVE_MODAL_SHOW",
+    property,
+    member
+  }),
+  removeModalClose: {
+    type: "INVITE_MODAL_REMOVE_MODAL_HIDE"
+  },
+  getUsers: (value, callback) => ({
+    type: "API_INVITE_MODAL_GET_USERS",
+    data: { value },
+    callback
+  }),
+  removeMember: (project, member) => ({
+    type: "API_INVITE_MODAL_REMOVE_MEMBER",
+    data: { project, member }
+  }),
+  addMembers: (projects, members) => ({
+    type: "API_INVITE_MODAL_ADD_MEMBER",
+    data: { projects, members }
   })
 };

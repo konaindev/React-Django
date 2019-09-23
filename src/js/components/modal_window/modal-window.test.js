@@ -23,4 +23,16 @@ describe("ModalWindow", () => {
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
+
+  it("render small modal window with Head, Body and Buttons correctly", () => {
+    const tree = renderer
+      .create(
+        <ModalWindow open={true} theme="small">
+          <ModalWindow.Head>Head</ModalWindow.Head>
+          <ModalWindow.Body>Test Text</ModalWindow.Body>
+        </ModalWindow>
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

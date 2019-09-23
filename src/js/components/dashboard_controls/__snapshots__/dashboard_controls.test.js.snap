@@ -73,7 +73,7 @@ exports[`DashboardControls renders correctly 1`] = `
          Properties
       </span>
       <div
-        className="select group-select dashboard-controls__field css-2b097c-container"
+        className="select group-select dashboard-controls__field select--is-multi css-2b097c-container"
         onKeyDown={[Function]}
       >
         <div
@@ -160,7 +160,7 @@ exports[`DashboardControls renders correctly 1`] = `
         </div>
       </div>
       <div
-        className="select multi-select dashboard-controls__field css-2b097c-container"
+        className="select multi-select dashboard-controls__field select--is-multi css-2b097c-container"
         onKeyDown={[Function]}
       >
         <div
@@ -253,7 +253,7 @@ exports[`DashboardControls renders correctly 1`] = `
         </div>
       </div>
       <div
-        className="select multi-select dashboard-controls__field css-2b097c-container"
+        className="select multi-select dashboard-controls__field select--is-multi css-2b097c-container"
         onKeyDown={[Function]}
       >
         <div
@@ -346,7 +346,7 @@ exports[`DashboardControls renders correctly 1`] = `
         </div>
       </div>
       <div
-        className="select multi-select dashboard-controls__field css-2b097c-container"
+        className="select multi-select dashboard-controls__field select--is-multi css-2b097c-container"
         onKeyDown={[Function]}
       >
         <div

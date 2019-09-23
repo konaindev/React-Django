@@ -5,7 +5,8 @@ import {
   fetchTutorial,
   fetchCreatePassword,
   fetchCompany,
-  fetchCompleteAccount
+  fetchCompleteAccount,
+  fetchInviteModal
 } from "../middleware";
 
 // TODO: contextually enable devtools based on prod or not
@@ -21,7 +22,8 @@ export default createStore(
       fetchTutorial,
       fetchCreatePassword,
       fetchCompany,
-      fetchCompleteAccount
+      fetchCompleteAccount,
+      fetchInviteModal
     )
   )
 );

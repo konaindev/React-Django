@@ -2,7 +2,8 @@ from django.contrib.auth.views import redirect_to_login
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import Http404, HttpResponse
+from django.db.models import Q
+from django.http import Http404, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
@@ -10,6 +11,8 @@ from django.urls import reverse
 
 from remark.lib.views import ReactView, APIView
 from remark.admin import admin_site
+from remark.users.models import User
+from remark.web.views import DashboardView
 from .reports.selectors import (
     BaselineReportSelector,
     PerformanceReportSelector,
@@ -283,3 +286,46 @@ class ProjectUpdateAPIView(LoginRequiredMixin, APIView):
             return self.render_success()
         except Exception:
             return self.render_failure_message("Failed to update")
+
+
+class MembersView(LoginRequiredMixin, APIView):
+    def post(self, request):
+        payload = self.get_data()
+        value = payload.get("value", [])
+        users = User.objects.filter(
+            Q(
+                Q(email__icontains=value)
+                | Q(person__first_name__icontains=value)
+                | Q(person__last_name__icontains=value)
+            )
+            & Q(account__isnull=False)
+        )
+        members = [user.get_menu_dict() for user in users]
+        return JsonResponse({"members": members})
+
+
+class AddMembersView(LoginRequiredMixin, APIView):
+    def post(self, request):
+        payload = self.get_data()
+        members = payload.get("members", [])
+
+        projects_ids = [p.get("property_id") for p in payload.get("projects", [])]
+        projects = Project.objects.filter(public_id__in=projects_ids)
+
+        users = []
+        for member in members:
+            user, _ = User.objects.get_or_create_user(member.get("value"))
+            users.append(user)
+
+        for project in projects:
+            for user in users:
+                project.view_group.user_set.add(user)
+            project.save()
+        projects_list = [DashboardView.get_project_details(p) for p in projects]
+        return JsonResponse({"projects": projects_list})
+
+
+class ProjectRemoveMemberIView(LoginRequiredMixin, APIView):
+    def post(self, request, project_id):
+        # TODO: Implement this
+        return JsonResponse({"project": {}})

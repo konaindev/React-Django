@@ -48,6 +48,10 @@ $link-padding: 8px 10px;
         .property-row__link-container {
             display: block;
         }
+
+        .property-row__members {
+            display: block;
+        }
     }
 }
 
@@ -123,6 +127,15 @@ $link-padding: 8px 10px;
     background-size: 13px 10px;
     opacity: 0;
     transition: opacity .1s linear;
+}
+
+.property-row__health {
+    width: $s28;
+}
+
+.property-row__members {
+    display: none;
+    margin-left: $s20;
 }
 
 .property-row--selection-mode {

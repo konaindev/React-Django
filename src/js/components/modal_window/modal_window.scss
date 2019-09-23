@@ -20,7 +20,7 @@
     right: 60px;
     width: 13px;
     height: 14px;
-    background-image: url('../../../images/close-icon.svg');
+    background-image: url("../../../images/close-icon.svg");
     background-repeat: no-repeat;
     background-position: 50% 0;
     &:focus {
@@ -38,4 +38,25 @@
 
 .modal-window__body {
     padding: 0;
+}
+
+.modal-window--small {
+    font-family: $font-sans;
+    padding: 30px;
+
+    .modal-window__close {
+        top: 30px;
+        right: 30px;
+        width: 10px;
+        height: 10px;
+        background-position: 0px -11px;
+        background-size: cover;
+    }
+
+    .modal-window__head {
+        height: $s5;
+        margin: 0;
+        font-size: $text-base;
+        line-height: $line-height-tight;
+    }
 }

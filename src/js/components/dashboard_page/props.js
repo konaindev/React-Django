@@ -1,3 +1,7 @@
+import { props as userProps } from "../user_icon_list/props";
+
+const members = userProps.users;
+
 export const props = {
   properties: [
     {
@@ -6,7 +10,17 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "",
       performance_rating: 2,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: [
+        {
+          user_id: "1234556960",
+          profile_image_url:
+            "https://storage.googleapis.com/tracker-avatar-production/a11569ffecab2b5564c0cbfa5e5f283a_3140620_96.png",
+          account_name: "Remarkably Client",
+          email: "test@remarkably.io",
+          role: "admin"
+        }
+      ]
     },
     {
       property_name: "Beridian SLC",
@@ -14,7 +28,8 @@ export const props = {
       address: "",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 1,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: members.slice(0, 3)
     },
     {
       property_name: "Teridian SLC",
@@ -22,7 +37,8 @@ export const props = {
       address: "1779 Nacogdoches Rd, San Antonio, TX 78209, USA",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 2,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: members.slice(1)
     },
     {
       property_name: "Deridian SLC",
@@ -30,7 +46,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 0,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: members.slice(1)
     },
     {
       property_name: "Peridian SLC",
@@ -38,7 +55,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 2,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: members.slice(1)
     },
     {
       property_name: "Leridian SLC",
@@ -46,7 +64,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 2,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: members.slice(1)
     },
     {
       property_name: "Qeridian SLC",
@@ -54,7 +73,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 1,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: members.slice(1)
     },
     {
       property_name: "Keridian SLC",
@@ -62,7 +82,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 1,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: members.slice(1)
     },
     {
       property_name: "Yeridian SLC",
@@ -70,7 +91,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 2,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: members.slice(1)
     },
     {
       property_name: "Weridian SLC",
@@ -78,7 +100,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 2,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: members.slice(1)
     }
   ],
   user: {
