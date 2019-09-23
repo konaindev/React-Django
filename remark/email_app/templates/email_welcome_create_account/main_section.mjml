@@ -1,0 +1,23 @@
+<mj-wrapper full-width="full-width" mj-class="bg-black" padding="0">
+  <mj-section mj-class="py-50">
+    <mj-column mj-class="container">
+      <mj-image src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/logo.png" alt="Remarkably" width="174px" height="30px" mj-class="p-0" />
+    </mj-column>
+  </mj-section>
+
+  <mj-section mj-class="py-50">
+    <mj-column mj-class="container">
+      <mj-image src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/welcome_charts.png" alt="Welcome Charts" width="600px" mj-class="p-0" />
+    </mj-column>
+  </mj-section>
+
+  <mj-section mj-class="py-50">
+    <mj-column mj-class="container" width="500px">
+      <mj-text mj-class="text-4xl text-white" align="center">Welcome to Remarkably</mj-text>
+
+      <mj-text mj-class="text-base text-lightgray pt-30" align="center">To get started, create a customer account by clicking below. You can then access portfolio and property performance data, and invite others to have access as well.</mj-text>
+
+      <mj-button href="{{ create_account_link }}" mj-class="button bg-blue py-50" css-class="rmb-button">Create Account</mj-button>
+    </mj-column>
+  </mj-section>
+</mj-wrapper>

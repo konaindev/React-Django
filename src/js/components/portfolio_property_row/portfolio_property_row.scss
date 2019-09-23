@@ -6,7 +6,8 @@ $row-background: #222b33;
 $row-background-hover: $gray-3;
 $border-color: $gray-4;
 $image-size: 36px;
-$image-spacing: $s20;
+$image-spacing: $s14;
+$subproperty-image-spacing: $s20;
 $image-spacing-with-alarm: $s4;
 $image-border-radius: 6px;
 $title-width: 200px;
@@ -19,7 +20,8 @@ $target-spacing: 6px;
 $link-padding: 8px 10px;
 $link-height: 20px;
 $empty-text-size: 1.75rem;
-$alarm-spacing: 2.75rem;
+$alarm-spacing: $s5;
+$subproperty-alarm-spacing: 2.75rem;
 
 .portfolio-property-row {
     display: flex;
@@ -42,7 +44,12 @@ $alarm-spacing: 2.75rem;
     }
 
     &--subproperty {
-        padding-left: $row-indent;
+        .portfolio-property-row__image {
+            margin-left: $subproperty-image-spacing;
+        }
+        .portfolio-property-row__alarm {
+            margin-left: $subproperty-alarm-spacing;
+        }
     }
 
     &--with-alarm {
@@ -137,6 +144,7 @@ $alarm-spacing: 2.75rem;
     margin-left: $alarm-spacing;
 }
 
+.portfolio-property-row__alarm,
 .portfolio-property-row__alarm-icon {
     width: $s5;
     height: $s5;

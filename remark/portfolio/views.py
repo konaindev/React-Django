@@ -213,8 +213,9 @@ class PortfolioTableView(LoginRequiredMixin, PortfolioMixin, ReactView):
                     "health": None
                 })
                 continue
-            if key in group["targets"]:
-                target = KPIFormat.apply(key, group["targets"][key])
+            targets = group.get("targets", {})
+            if key in targets:
+                target = KPIFormat.apply(key, targets[key])
             else:
                 target = None
 

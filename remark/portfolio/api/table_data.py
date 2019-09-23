@@ -48,7 +48,6 @@ def strip_base_data(item):
             strip_base_data(subitem)
 
 
-
 def get_table_structure(user, start, end, kpis, show_averages):
     projects = Project.objects.get_all_for_user(user)
     projects = list(projects)
