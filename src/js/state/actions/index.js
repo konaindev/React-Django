@@ -143,3 +143,8 @@ export const asset_managers = {
 export const locations = {
   set: x => ({ type: "UPDATE_LOCATIONS", x })
 };
+
+export const project = {
+  set: x => ({ type: "UPDATE_PROJECT", x }),
+  merge: x => ({ type: "MERGE_INTO_PROJECT", x })
+};

@@ -220,6 +220,21 @@ const locations = (state = [], action) => {
   return newState;
 };
 
+const project = (state = {}, action) => {
+  let newState = undefined;
+
+  switch (action.type) {
+    case "UPDATE_PROJECT":
+      newState = action.x;
+      break;
+    case "MERGE_INTO_PROJECT":
+      newState = { ...state, ...action.x };
+    default:
+      newState = state;
+  }
+  return newState;
+};
+
 export default combineReducers({
   general: dashboard,
   network,
@@ -235,5 +250,6 @@ export default combineReducers({
   property_managers,
   portfolio,
   asset_managers,
-  locations
+  locations,
+  project
 });
