@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 import ReportPageChrome from "../report_page_chrome";
 import TotalAddressableMarket from "../total_addressable_market";
-import { connect } from "react-redux";
 
 export class MarketReportPage extends Component {
   static propTypes = {
@@ -29,10 +28,4 @@ export class MarketReportPage extends Component {
   }
 }
 
-const mapState = state => {
-  return {
-    ...state.general,
-    ...state.network
-  };
-};
-export default connect(mapState)(MarketReportPage);
+export default MarketReportPage;

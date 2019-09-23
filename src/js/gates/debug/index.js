@@ -4,6 +4,7 @@ import { props as sbProps } from "../../components/dashboard_page/props";
 import { props as portProps } from "../../components/portfolio_analysis_view/props";
 import { props as projProps } from "../../components/project_page/props";
 import reportProps from "../../components/baseline_report_page/props";
+import marketProps from "../../components/market_report_page/props";
 import {
   user as _user,
   properties as _properties,
@@ -12,7 +13,8 @@ import {
   portfolio as _pf,
   asset_managers as _am,
   locations as _loc,
-  project as _proj
+  project as _proj,
+  market as _market
 } from "../../state/actions";
 
 class DebugGate extends React.PureComponent {
@@ -40,6 +42,8 @@ class DebugGate extends React.PureComponent {
 
     //load state from project page view sb props...
     this.props.dispatch(_proj.set(reportProps));
+    //load state from market page sb props...
+    this.props.dispatch(_market.set(marketProps));
     // }
   }
   render() {

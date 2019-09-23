@@ -148,3 +148,7 @@ export const project = {
   set: x => ({ type: "UPDATE_PROJECT", x }),
   merge: x => ({ type: "MERGE_INTO_PROJECT", x })
 };
+
+export const market = {
+  set: x => ({ type: "UPDATE_MARKET", x })
+};

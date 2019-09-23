@@ -235,6 +235,19 @@ const project = (state = {}, action) => {
   return newState;
 };
 
+const market = (state = {}, action) => {
+  let newState = undefined;
+
+  switch (action.type) {
+    case "UPDATE_MARKET":
+      console.log("reducer for market", action.x);
+      newState = action.x;
+      break;
+    default:
+      newState = state;
+  }
+  return newState;
+};
 export default combineReducers({
   general: dashboard,
   network,
@@ -251,5 +264,6 @@ export default combineReducers({
   portfolio,
   asset_managers,
   locations,
-  project
+  project,
+  market
 });

@@ -23,7 +23,11 @@ class ProjectsContainer extends PureComponent {
       case "campaign_plan":
         return <CampaignPlanPage {...this.props} />;
       case "market":
-        return <MarketReportPage {...this.props} />;
+        return (
+          <MarketReportPage
+            {...Object.assign({}, this.props, this.props.hell.market)}
+          />
+        );
       default:
         return <BaselineReportPage {...this.props} />;
     }
@@ -37,9 +41,13 @@ const mapState = state => {
   let newState = {
     ...state.network,
     ...state.project,
-    user: state.user
+    user: state.user,
+    hell: {
+      market: state.market
+    }
   };
   newState.project = state.project.project;
+  console.log("project CONTAINER map state", newState);
   return newState;
 };
 
