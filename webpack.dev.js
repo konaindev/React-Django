@@ -10,12 +10,14 @@ const path = require("path");
 module.exports = webpackMerge(commonConfig, {
   devServer: {
     contentBase: "staticfiles",
-    hot: true
+    hot: true,
+    historyApiFallback: true
   },
   devtool: "inline-source-map",
   mode: "development",
   plugins: [
     new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebPackPlugin({
       template: "./src/index.html",
       filename: "./index.html"
