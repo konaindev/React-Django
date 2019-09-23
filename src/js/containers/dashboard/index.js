@@ -1,7 +1,6 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import DashboardPage from "../../components/dashboard_page";
-import { props } from "../../components/dashboard_page/props";
 import { withRouter } from "react-router-dom";
 
 class DashboardContainer extends PureComponent {
@@ -12,7 +11,11 @@ class DashboardContainer extends PureComponent {
 
 const mapState = state => ({
   ...state.network,
-  ...state
+  locations: state.locations,
+  funds: state.funds,
+  properties: state.properties,
+  asset_managers: state.asset_managers,
+  property_managers: state.property_managers
 });
 
 export default withRouter(connect(mapState)(DashboardContainer));
