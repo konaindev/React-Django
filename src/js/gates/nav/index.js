@@ -21,7 +21,6 @@ class NavGate extends React.PureComponent {
 const mapState = state => {
   return {
     navLinks: state.nav.navLinks,
-    headerItems: state.nav.headerItems,
     user: state.user
   };
 };
