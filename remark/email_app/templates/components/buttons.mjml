@@ -29,11 +29,10 @@
 
 <mj-class
   name="footer-link"
-  font-size="12px"
-  font-weight="400"
   text-align="center"
-  padding="0"
-  background-color="transparent"
   color="#404E5C"
+  background-color="transparent"
   text-decoration="underline"
+  inner-padding="0"
+  padding="0"
 />
