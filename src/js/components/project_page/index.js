@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
+import { Link } from "react-router-dom";
 import ProjectPageChrome from "../project_page_chrome";
 import Container from "../container";
 import { connect } from "react-redux";
@@ -24,9 +24,9 @@ export class ProjectPage extends Component {
   renderLink(link) {
     return (
       <li key={link.url}>
-        <a href={link.url} className="project-page__report-link">
+        <Link to={link.url} className="project-page__report-link">
           {link.description}
-        </a>
+        </Link>
       </li>
     );
   }
