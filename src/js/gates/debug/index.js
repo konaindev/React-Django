@@ -27,7 +27,6 @@ class DebugGate extends React.PureComponent {
       asset_managers,
       locations
     } = sbProps;
-    console.log("DEBUG GATE CONSTRUCTOR", reportProps);
     // load state from dashboard storybook props...
     this.props.dispatch(_user.set(user));
     this.props.dispatch(_properties.set(properties));

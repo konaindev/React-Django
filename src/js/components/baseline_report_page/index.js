@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import ReportPageChrome from "../report_page_chrome";
 import ReportDateSpan from "../report_date_span";
 import CommonReport from "../common_report";
-import { connect } from "react-redux";
 import "./baseline_report_page.scss";
 
 /**
@@ -25,7 +24,6 @@ export class BaselineReportPage extends Component {
 
   render() {
     const { user, project, report, report_links, share_info } = this.props;
-
     return (
       <ReportPageChrome
         user={user}
@@ -44,4 +42,4 @@ export class BaselineReportPage extends Component {
   }
 }
 
-export default connect(x => x)(BaselineReportPage);
+export default BaselineReportPage;

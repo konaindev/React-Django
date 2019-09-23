@@ -25,18 +25,22 @@ class ProjectsContainer extends PureComponent {
       case "market":
         return <MarketReportPage {...this.props} />;
       default:
-        return <PropertyPage {...this.props} />;
+        return <BaselineReportPage {...this.props} />;
     }
   }
   render() {
-    console.log("...project container render", this.props);
     return this.pickTab();
   }
 }
 
-const mapState = state => ({
-  ...state.network,
-  ...state.project
-});
+const mapState = state => {
+  let newState = {
+    ...state.network,
+    ...state.project,
+    user: state.user
+  };
+  newState.project = state.project.project;
+  return newState;
+};
 
 export default withRouter(connect(mapState)(ProjectsContainer));
