@@ -16,10 +16,11 @@ export function RemarkableRouter() {
           <Switch>
             {/* <Route path="/" exact component={DashboardContainer} /> */}
             <Route path="/dashboard" component={DashboardContainer} />
-            <Route path="/projects" component={ProjectsContainer} />
+            <Route path="/projects/:slug/" component={ProjectsContainer} />
             <Route path="/portfolio" component={PortfolioContainer} />
             <Route path="/portfolio/table" component={PortfolioContainer} />
             <Route path="/auth" component={AuthContainer} />
+            {/* default to dashboard...since AuthGate takes care of no-auth */}
             <Route component={DashboardContainer} />
           </Switch>
         </NavGate>
