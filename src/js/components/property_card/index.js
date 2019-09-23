@@ -17,7 +17,6 @@ export const PropertyCard = ({
     imageStyle.backgroundImage = `url(${image_url})`;
     imageStyle.backgroundSize = "cover";
   }
-  console.log("property_card", url);
   return (
     <div className="property-card">
       <Panel className="property-card__panel">
