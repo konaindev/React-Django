@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import cn from "classnames";
-
+import { Link } from "react-router-dom";
 import "./report_links.scss";
 
 /**
@@ -15,10 +15,6 @@ export default class ReportLinks extends Component {
     report_links: PropTypes.object.isRequired
   };
 
-  handleClick = e => {
-    document.location = e.target.dataset.url;
-  };
-
   renderLink(report_friendly_name, report_name, optional_report_link) {
     const names = cn(
       {
@@ -27,12 +23,17 @@ export default class ReportLinks extends Component {
       optional_report_link == null ? "disabled" : "enabled"
     );
     return (
-      <li
-        className={names}
-        data-url={optional_report_link?.url || "#"}
-        onClick={this.handleClick}
-      >
-        {report_friendly_name}
+      <li className={names} data-url={optional_report_link?.url || "#"}>
+        <Link
+          style={{ color: "inherit", textDecoration: "inherit" }}
+          to={
+            optional_report_link && optional_report_link.url
+              ? optional_report_link.url
+              : "#"
+          }
+        >
+          {report_friendly_name}
+        </Link>
       </li>
     );
   }
