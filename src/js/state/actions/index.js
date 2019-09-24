@@ -110,6 +110,10 @@ export const auth = {
   persistToken: token => ({
     type: "UPDATE_TOKEN",
     token
+  }),
+  clearToken: () => ({
+    type: "UPDATE_TOKEN",
+    token: {}
   })
 };
 

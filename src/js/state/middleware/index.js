@@ -184,7 +184,7 @@ export const applyApiResult = _ => next => action => {
 
 export const logoutMiddleware = store => next => action => {
   if (action.type === "LOGOUT") {
-    store.dispatch(auth.persistToken({}));
+    store.dispatch(auth.clearToken());
     next(action);
   } else {
     next(action);
