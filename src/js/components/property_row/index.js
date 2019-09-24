@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
-
+import { Link } from "react-router-dom";
 import Panel from "../panel";
 import PropertyStatus from "../property_status";
 
@@ -54,9 +54,13 @@ const PropertyRow = ({
       <div className="property-row__name">{property_name}</div>
       <div className="property-row__address">{address}</div>
       <div className="property-row__link-container">
-        <a className="property-row__link" href={url}>
+        <Link
+          style={{ color: "inherit", textDecoration: "inherit" }}
+          className="property-row__link"
+          to={url}
+        >
           View Property
-        </a>
+        </Link>
       </div>
       <PropertyStatus performance_rating={performance_rating} />
     </Panel>

@@ -1,7 +1,7 @@
 import cn from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
-
+import { Link } from "react-router-dom";
 import PropertyStatus from "../property_status";
 
 import "./portfolio_property_row.scss";
@@ -58,9 +58,13 @@ export default class PortfolioPropertyRow extends React.PureComponent {
             className="portfolio-property-row__health"
             performance_rating={health}
           />
-          <a className="portfolio-property-row__link" href={url}>
+          <Link
+            style={{ color: "inherit", textDecoration: "inherit" }}
+            className="portfolio-property-row__link"
+            to={url}
+          >
             View Property
-          </a>
+          </Link>
         </div>
         <div className="portfolio-property-row__kpis">{this.renderKPIs()}</div>
       </div>

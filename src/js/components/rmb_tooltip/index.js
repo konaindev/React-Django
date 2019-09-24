@@ -2,7 +2,7 @@ import cn from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 import Tooltip from "rc-tooltip";
-
+import { Link } from "react-router-dom";
 import { NavLink } from "../../icons";
 import Button from "../button";
 
@@ -18,12 +18,16 @@ export const RMBTooltip = props => {
     overlay = (
       <React.Fragment>
         <div className="rmb-tooltip__text">{overlay}</div>
-        <a className="rmb-tooltip__link" href={props.link}>
+        <Link
+          style={{ color: "inherit", textDecoration: "inherit" }}
+          className="rmb-tooltip__link"
+          to={props.link}
+        >
           <Button className="rmb-tooltip__button" fullWidth={true}>
             <span className="rmb-tooltip__button-text">Learn More</span>
             <NavLink className="rmb-tooltip__button-icon" />
           </Button>
-        </a>
+        </Link>
       </React.Fragment>
     );
   }

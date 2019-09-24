@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-
+import { Link } from "react-router-dom";
 import RemarkablyLogo from "../remarkably_logo";
 
 import "./page_auth.scss";
@@ -26,9 +26,13 @@ export default class PageAuth extends React.PureComponent {
       return null;
     }
     return (
-      <a className="page-auth__back-link" href={this.props.backLink}>
+      <Link
+        style={{ color: "inherit", textDecoration: "inherit" }}
+        className="page-auth__back-link"
+        to={this.props.backLink}
+      >
         {this.props.backLinkText}
-      </a>
+      </Link>
     );
   }
 

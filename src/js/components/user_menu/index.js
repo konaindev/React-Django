@@ -6,6 +6,7 @@ import Select from "../select";
 import { LogOut } from "../../icons";
 import { connect } from "react-redux";
 import "./user_menu.scss";
+import { Link } from "react-router-dom";
 
 export class UserMenu extends React.PureComponent {
   static propTypes = {
@@ -37,10 +38,14 @@ export class UserMenu extends React.PureComponent {
   dropdownMenu = props => {
     return (
       <components.Menu {...props} className="user-menu__dropdown">
-        <a className="user-menu__dropdown-item" onClick={this.doLogout}>
+        <Link
+          style={{ color: "inherit", textDecoration: "inherit" }}
+          className="user-menu__dropdown-item"
+          onClick={this.doLogout}
+        >
           <LogOut className="user-menu__icon" />
           <div>Log Out</div>
-        </a>
+        </Link>
       </components.Menu>
     );
   };

@@ -4,7 +4,10 @@ import "./remarkably_logo.scss";
 
 export default function RemarkablyLogo(props) {
   return (
-    <Link to="/dashboard">
+    <Link
+      style={{ color: "inherit", textDecoration: "inherit" }}
+      to="/dashboard"
+    >
       <div className="remarkably-logo"> </div>
     </Link>
   );
