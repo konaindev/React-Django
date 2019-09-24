@@ -28,11 +28,6 @@ def process_response(response, msg, ignore_response=False):
         raise Exception(f"Invalid JSON Response: `{response.body}`")
     return result
 
-def create_sender(request_body):
-    response = sg.client.senders.post(request_body=request_body)
-    result = process_response(response, "Could not create sender")
-    return result["id"]
-
 def create_recipient(email):
     data = [{ "email": email }]
     response = sg.client.contactdb.recipients.post(request_body=data)
