@@ -34,7 +34,6 @@ export default () => {
     composeEnhancers(
       applyMiddleware(
         fetchDashboard,
-        fetchTutorial,
         fetchCreatePassword,
         fetchCompany,
         fetchCompleteAccount,
