@@ -86,8 +86,16 @@ export const pageMeta = {
 const URLS = {
   base: process.env.BASE_URL || "http//localhost:8000",
   login: "/api/token/",
-  refresh: "/api/token/refresh/"
+  refresh: "/api/token/refresh/",
+  portfolio: "/portfolio",
+  locations: "/locations",
+  asset_managers: "/asset_managers",
+  market: "/market",
+  kpi: "/kpi",
+  project: "/projects"
 };
+
+// api actions...
 
 export const auth = {
   login: ({ email, password }) => ({
@@ -133,26 +141,62 @@ export const property_managers = {
 };
 
 export const portfolio = {
-  set: x => ({ type: "UPDATE_PORTFOLIO", x })
+  set: x => ({ type: "UPDATE_PORTFOLIO", x }),
+  fetch: args => ({
+    type: "FETCH_API_GET",
+    branch: "portfolio",
+    url: `${URLS.base}${URLS.portfolio}`,
+    ...args
+  })
 };
 
 export const asset_managers = {
-  set: x => ({ type: "UPDATE_ASSET_MANAGERS", x })
+  set: x => ({ type: "UPDATE_ASSET_MANAGERS", x }),
+  fetch: args => ({
+    type: "FETCH_API_GET",
+    branch: "asset_managers",
+    url: `${URLS.base}${URLS.asset_managers}`,
+    ...args
+  })
 };
 
 export const locations = {
-  set: x => ({ type: "UPDATE_LOCATIONS", x })
+  set: x => ({ type: "UPDATE_LOCATIONS", x }),
+  fetch: args => ({
+    type: "FETCH_API_GET",
+    branch: "locations",
+    url: `${URLS.base}${URLS.locations}`,
+    ...args
+  })
 };
 
 export const project = {
   set: x => ({ type: "UPDATE_PROJECT", x }),
-  merge: x => ({ type: "MERGE_INTO_PROJECT", x })
+  merge: x => ({ type: "MERGE_INTO_PROJECT", x }),
+  fetch: args => ({
+    type: "FETCH_API_GET",
+    branch: "project",
+    url: `${URLS.base}${URLS.project}`,
+    ...args
+  })
 };
 
 export const market = {
-  set: x => ({ type: "UPDATE_MARKET", x })
+  set: x => ({ type: "UPDATE_MARKET", x }),
+  fetch: args => ({
+    type: "FETCH_API_GET",
+    branch: "market",
+    url: `${URLS.base}${URLS.market}`,
+    ...args
+  })
 };
 
 export const kpi = {
-  set: x => ({ type: "UPDATE_KPI", x })
+  set: x => ({ type: "UPDATE_KPI", x }),
+  fetch: args => ({
+    type: "FETCH_API_GET",
+    branch: "kpi",
+    url: `${URLS.base}${URLS.kpi}`,
+    ...args
+  })
 };

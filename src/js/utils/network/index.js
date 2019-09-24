@@ -13,11 +13,11 @@ action.body === axios post body
 
 function* get(action) {
   try {
-    const response = yield call(axiosGet, action.config);
-    response.branch = action.branch;
-    yield put(networking.results(response));
+    const response = yield call(axiosGet, ...action);
+    yield put(networking.results(response, action.branch));
     yield put(networking.success());
   } catch (e) {
+    console.log("something was wrong!!!", e);
     yield put(networking.fail(e.message));
   }
 }

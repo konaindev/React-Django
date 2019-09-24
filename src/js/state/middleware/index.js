@@ -4,7 +4,10 @@ import {
   networking,
   createPassword,
   completeAccount,
-  auth
+  auth,
+  locations,
+  market,
+  kpi
 } from "../actions";
 import { axiosGet, axiosPost } from "../../utils/api";
 import ReactGa from "react-ga";
@@ -148,6 +151,18 @@ export const applyApiResult = _ => next => action => {
   switch (action.type) {
     case "API_RESPONSE": {
       switch (action.branch) {
+        case "kpi": {
+          next(kpi.set(action.response));
+          break;
+        }
+        case "kpi": {
+          next(market.set(action.response));
+          break;
+        }
+        case "location": {
+          next(locations.set(action.response));
+          break;
+        }
         case "dashboard": {
           next(general.update(action.response));
           break;
