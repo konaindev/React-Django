@@ -41,6 +41,7 @@ export class UserMenu extends React.PureComponent {
         <Link
           style={{ color: "inherit", textDecoration: "inherit" }}
           className="user-menu__dropdown-item"
+          to="#"
           onClick={this.doLogout}
         >
           <LogOut className="user-menu__icon" />
