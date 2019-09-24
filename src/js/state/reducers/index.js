@@ -240,7 +240,19 @@ const market = (state = {}, action) => {
 
   switch (action.type) {
     case "UPDATE_MARKET":
-      console.log("reducer for market", action.x);
+      newState = action.x;
+      break;
+    default:
+      newState = state;
+  }
+  return newState;
+};
+
+const kpi = (state = {}, action) => {
+  let newState = undefined;
+
+  switch (action.type) {
+    case "UPDATE_KPI":
       newState = action.x;
       break;
     default:
@@ -265,5 +277,6 @@ export default combineReducers({
   asset_managers,
   locations,
   project,
-  market
+  market,
+  kpi
 });

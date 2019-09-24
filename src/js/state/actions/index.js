@@ -152,3 +152,7 @@ export const project = {
 export const market = {
   set: x => ({ type: "UPDATE_MARKET", x })
 };
+
+export const kpi = {
+  set: x => ({ type: "UPDATE_KPI", x })
+};

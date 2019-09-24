@@ -50,7 +50,8 @@ const mapState = state => {
     user: state.user,
     hell: {
       market: state.market
-    }
+    },
+    kpi: state.kpi
   };
   newState.project = state.project.project;
   console.log("project CONTAINER map state", newState);
