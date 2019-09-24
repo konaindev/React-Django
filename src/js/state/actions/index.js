@@ -1,3 +1,5 @@
+import { createActions } from "./helpers";
+
 export const general = {
   set: newState => ({
     type: "GENERAL_SET_STATE",
@@ -128,79 +130,12 @@ export const nav = {
   })
 };
 
-export const user = {
-  set: x => ({ type: "UPDATE_USER", x })
-};
-
-export const properties = {
-  set: x => ({ type: "UPDATE_PROPERTIES", x })
-};
-
-export const funds = {
-  set: x => ({ type: "UPDATE_FUNDS", x })
-};
-
-export const property_managers = {
-  set: x => ({ type: "UPDATE_PROPERTY_MANAGERS", x })
-};
-
-export const portfolio = {
-  set: x => ({ type: "UPDATE_PORTFOLIO", x }),
-  fetch: args => ({
-    type: "FETCH_API_GET",
-    branch: "portfolio",
-    url: `${URLS.base}${URLS.portfolio}`,
-    ...args
-  })
-};
-
-export const asset_managers = {
-  set: x => ({ type: "UPDATE_ASSET_MANAGERS", x }),
-  fetch: args => ({
-    type: "FETCH_API_GET",
-    branch: "asset_managers",
-    url: `${URLS.base}${URLS.asset_managers}`,
-    ...args
-  })
-};
-
-export const locations = {
-  set: x => ({ type: "UPDATE_LOCATIONS", x }),
-  fetch: args => ({
-    type: "FETCH_API_GET",
-    branch: "locations",
-    url: `${URLS.base}${URLS.locations}`,
-    ...args
-  })
-};
-
-export const project = {
-  set: x => ({ type: "UPDATE_PROJECT", x }),
-  merge: x => ({ type: "MERGE_INTO_PROJECT", x }),
-  fetch: args => ({
-    type: "FETCH_API_GET",
-    branch: "project",
-    url: `${URLS.base}${URLS.project}`,
-    ...args
-  })
-};
-
-export const market = {
-  set: x => ({ type: "UPDATE_MARKET", x }),
-  fetch: args => ({
-    type: "FETCH_API_GET",
-    branch: "market",
-    url: `${URLS.base}${URLS.market}`,
-    ...args
-  })
-};
-
-export const kpi = {
-  set: x => ({ type: "UPDATE_KPI", x }),
-  fetch: args => ({
-    type: "FETCH_API_GET",
-    branch: "kpi",
-    url: `${URLS.base}${URLS.kpi}`,
-    ...args
-  })
-};
+export const user = createActions("user");
+export const property_managers = createActions("portfolio");
+export const properties = createActions("properties");
+export const funds = createActions("funds");
+export const asset_managers = createActions("asset_managers");
+export const kpi = createActions("kpi");
+export const market = createActions("market");
+export const project = createActions("project");
+export const locations = createActions("locations");
