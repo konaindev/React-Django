@@ -32,27 +32,6 @@ export const fetchDashboard = store => next => action => {
   }
 };
 
-export const fetchTutorial = store => next => action => {
-  // if (action.type === "API_TUTORIAL") {
-  //   const url = `${process.env.BASE_URL}/tutorial`;
-  //   if (action.data) {
-  //     axiosPost(url, action.data)
-  //       .then(response => {
-  //         next(tutorial.set(response.data));
-  //       })
-  //       .catch(e => console.log("-----> ERROR", e));
-  //   } else {
-  //     axiosGet(url)
-  //       .then(response => {
-  //         next(tutorial.set(response.data));
-  //       })
-  //       .catch(e => console.log("-----> ERROR", e));
-  //   }
-  // } else {
-  next(action);
-  // }
-};
-
 export const fetchCreatePassword = store => next => action => {
   if (action.type === "API_CREATE_PASSWORD") {
     const hash = action.hash;
