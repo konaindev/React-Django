@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
+import { withRouter } from "react-router-dom";
 import "./performance_report_span_dropdown.scss";
 
 /**
@@ -8,7 +8,7 @@ import "./performance_report_span_dropdown.scss";
  *
  * @classname A dropdown menu that lets us change the visible performance report span.
  */
-export default class PerformanceReportSpanDropdown extends Component {
+export class PerformanceReportSpanDropdown extends Component {
   static propTypes = {
     current_report_link: PropTypes.object.isRequired,
     report_links: PropTypes.arrayOf(PropTypes.object)
@@ -16,7 +16,9 @@ export default class PerformanceReportSpanDropdown extends Component {
 
   onChange = event => {
     // TODO what should we do here?
-    document.location = event.target.value;
+    // ...
+    // ...great question lol -jc2019
+    this.props.history.push(event.target.value);
   };
 
   renderOptions() {
@@ -49,3 +51,5 @@ export default class PerformanceReportSpanDropdown extends Component {
     );
   }
 }
+
+export default withRouter(PerformanceReportSpanDropdown);

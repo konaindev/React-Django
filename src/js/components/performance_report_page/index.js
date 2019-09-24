@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import ReportPageChrome from "../report_page_chrome";
 import PerformanceReportSpanDropdown from "../performance_report_span_dropdown";
 import CommonReport from "../common_report";
-import { connect } from "react-redux";
 
 /**
  * @class PerformanceReportPage
@@ -48,10 +47,4 @@ export class PerformanceReportPage extends Component {
   }
 }
 
-const mapState = state => {
-  return {
-    ...state.general,
-    ...state.network
-  };
-};
-export default connect(mapState)(PerformanceReportPage);
+export default PerformanceReportPage;
