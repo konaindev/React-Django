@@ -1,14 +1,12 @@
 "use strict";
 const webpack = require("webpack");
 const webpackMerge = require("webpack-merge");
-
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const commonConfig = require("./webpack.common.js");
 
-const path = require("path");
-
 module.exports = webpackMerge(commonConfig, {
   devServer: {
+    writeToDisk: true,
     contentBase: "staticfiles",
     hot: true,
     historyApiFallback: true

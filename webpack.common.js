@@ -74,6 +74,11 @@ module.exports = {
     new webpack.DefinePlugin({
       "process.env": { BASE_URL: JSON.stringify(process.env.BASE_URL) }
     }),
+    new webpack.DefinePlugin({
+      "process.env": {
+        LOAD_SB_PROPS: JSON.stringify(process.env.LOAD_SB_PROPS)
+      }
+    }),
     new HtmlWebPackPlugin({
       template: "./src/index.html",
       filename: "./index.html"
@@ -94,7 +99,8 @@ module.exports = {
   },
   output: {
     filename: "index.js",
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/"
   },
   performance: { hints: false }
 };
