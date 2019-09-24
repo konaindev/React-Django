@@ -61,7 +61,7 @@ export default class PortfolioPropertyRow extends React.PureComponent {
           <Link
             style={{ color: "inherit", textDecoration: "inherit" }}
             className="portfolio-property-row__link"
-            to={url}
+            to={url || "#"}
           >
             View Property
           </Link>
