@@ -131,7 +131,8 @@ export const nav = {
 };
 
 export const user = createActions("user");
-export const property_managers = createActions("portfolio");
+export const property_managers = createActions("property_managers");
+export const portfolio = createActions("portfolio");
 export const properties = createActions("properties");
 export const funds = createActions("funds");
 export const asset_managers = createActions("asset_managers");
