@@ -1,4 +1,4 @@
-import { createActions } from "./helpers";
+import { createActions, URLS } from "./helpers";
 
 export const general = {
   set: newState => ({
@@ -14,6 +14,18 @@ export const tutorial = {
   set: newState => ({
     type: "TUTORIAL_SET_STATE",
     newState
+  }),
+  get: args => ({
+    type: "FETCH_API_GET",
+    url: `${URLS.base}${URLS.tutorial}`,
+    branch: "tutorial",
+    ...args
+  }),
+  post: args => ({
+    type: "FETCH_API_POST",
+    url: `${URLS.base}${URLS.tutorial}`,
+    branch: "tutorial",
+    ...args
   })
 };
 
@@ -83,18 +95,6 @@ export const pageMeta = {
     type: "UPDATE_PAGE_TITLE",
     title
   })
-};
-
-const URLS = {
-  base: process.env.BASE_URL || "http//localhost:8000",
-  login: "/api/token/",
-  refresh: "/api/token/refresh/",
-  portfolio: "/portfolio",
-  locations: "/locations",
-  asset_managers: "/asset_managers",
-  market: "/market",
-  kpi: "/kpi",
-  project: "/projects"
 };
 
 // api actions...

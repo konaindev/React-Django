@@ -6,7 +6,7 @@ import TutorialModal from "../tutorial_modal";
 import img_apartments from "../../../images/tutorial_images/apartments.png";
 import img_portfolio_analysis from "../../../images/tutorial_images/portfolio_analysis.png";
 import img_invite_users from "../../../images/tutorial_images/invite_users.png";
-
+import { tutorial } from "../../state/actions";
 const getTutorials = url => [
   {
     image_url: `${url}${img_apartments}`,
@@ -38,16 +38,11 @@ class TutorialView extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    props.dispatch({
-      type: "API_TUTORIAL"
-    });
+    // props.dispatch(tutorial.get({}));
   }
 
   onClose = () => {
-    this.props.dispatch({
-      type: "API_TUTORIAL",
-      data: { is_show_tutorial: false }
-    });
+    // this.props.dispatch(tutorial.post({ data: { is_show_tutorial: false } }));
   };
 
   render() {
