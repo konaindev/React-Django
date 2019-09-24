@@ -1,15 +1,7 @@
 from django.db import models
 from django.conf import settings
 
-from remark.lib.fields import NormalizedEmailField
-from remark.lib.tokens import public_id
-from remark.projects.models import Project
 from .reports.constants import KPI_NAMES, KPI_CATEGORIES
-
-
-def listserv_public_id():
-    """Public identifier for a project."""
-    return public_id("listserv")
 
 
 class PerformanceEmailManager(models.Manager):
@@ -100,26 +92,3 @@ class PerformanceEmailKPI(models.Model):
 
     name = models.TextField(choices=KPI_NAMES.items())
     category = models.TextField(choices=KPI_CATEGORIES.items())
-
-
-class ListservEmailManager(models.Manager):
-    pass
-
-
-class ListservEmail(models.Model):
-    objects = ListservEmailManager()
-
-    public_id = models.CharField(
-        primary_key=True,
-        default=listserv_public_id,
-        max_length=25,
-        editable=False,
-    )
-
-    email = NormalizedEmailField(unique=True)
-
-    # SendGrid sender ID
-    sender_id = models.CharField(null=True, default=None, max_length=255)
-
-    def __str__(self):
-        return self.email
