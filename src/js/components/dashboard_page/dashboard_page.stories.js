@@ -3,14 +3,25 @@ import { storiesOf } from "@storybook/react";
 import { withState } from "@dump247/storybook-state";
 import { action } from "@storybook/addon-actions";
 import { Provider } from "react-redux";
-import { DashboardPage } from "./index";
-import { props } from "./props";
-import { createStore } from "redux";
-document.cookie = "isLogin=true";
+
+import { apiMock as inviteModalApiMock } from "../invite_modal/invite_modal.stories";
 import store from "../../state/store";
+
+import DashboardPage from "./index";
+import { props } from "./props";
+
 const _store = store;
+document.cookie = "isLogin=true";
 
 storiesOf("DashboardPage", module)
+  .addDecorator(inviteModalApiMock)
+  .addDecorator(story => {
+    _store.dispatch({
+      type: "INVITE_MODAL_HIDE"
+    });
+    store.getState().general = { ...props, selectedProperties: [] };
+    return story();
+  })
   .add(
     "default",
     withState({ filters: {} })(({ store }) => (
@@ -36,7 +47,7 @@ storiesOf("DashboardPage", module)
       <DashboardPage
         {...props}
         viewType="list"
-        selectedProperties={[props.properties[0].property_id]}
+        selectedProperties={props.properties.slice(0, 1)}
       />
     </Provider>
   ));

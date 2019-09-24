@@ -22,20 +22,46 @@ exports[`PropertyCardList renders correctly 1`] = `
         <div
           className="property-card__overlay"
         >
-          <a
+          <div
             className="property-card__overlay-link"
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
           >
-            <button
-              className="button button--outline"
+            <div
+              className="property-card__selector"
               onClick={[Function]}
             >
-              View Report
-            </button>
-          </a>
+              <svg
+                aria-hidden="true"
+                className="property-card__selector-tick"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 13 11"
+                width="1em"
+              >
+                <path
+                  d="M11.1689 1.03225C11.2971 0.904127 11.5048 0.904127 11.633 1.03225L12.4063 1.80564C12.5345 1.93379 12.5345 2.14156 12.4063 2.26968L4.20837 10.4677C4.0802 10.5958 3.87245 10.5958 3.74433 10.4677L0.0961101 6.81947C-0.0320367 6.6913 -0.0320367 6.48355 0.0961101 6.3554L0.869477 5.58203C0.997651 5.45389 1.2054 5.45389 1.33355 5.58203L3.97635 8.22484L11.1689 1.03225Z"
+                />
+              </svg>
+            </div>
+            <a
+              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+            >
+              <button
+                className="button button--outline"
+                onClick={[Function]}
+              >
+                View Report
+              </button>
+            </a>
+          </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="user-icon-list"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -77,20 +103,46 @@ exports[`PropertyCardList renders correctly 1`] = `
         <div
           className="property-card__overlay"
         >
-          <a
+          <div
             className="property-card__overlay-link"
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
           >
-            <button
-              className="button button--outline"
+            <div
+              className="property-card__selector"
               onClick={[Function]}
             >
-              View Report
-            </button>
-          </a>
+              <svg
+                aria-hidden="true"
+                className="property-card__selector-tick"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 13 11"
+                width="1em"
+              >
+                <path
+                  d="M11.1689 1.03225C11.2971 0.904127 11.5048 0.904127 11.633 1.03225L12.4063 1.80564C12.5345 1.93379 12.5345 2.14156 12.4063 2.26968L4.20837 10.4677C4.0802 10.5958 3.87245 10.5958 3.74433 10.4677L0.0961101 6.81947C-0.0320367 6.6913 -0.0320367 6.48355 0.0961101 6.3554L0.869477 5.58203C0.997651 5.45389 1.2054 5.45389 1.33355 5.58203L3.97635 8.22484L11.1689 1.03225Z"
+                />
+              </svg>
+            </div>
+            <a
+              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+            >
+              <button
+                className="button button--outline"
+                onClick={[Function]}
+              >
+                View Report
+              </button>
+            </a>
+          </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="user-icon-list"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -132,20 +184,46 @@ exports[`PropertyCardList renders correctly 1`] = `
         <div
           className="property-card__overlay"
         >
-          <a
+          <div
             className="property-card__overlay-link"
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
           >
-            <button
-              className="button button--outline"
+            <div
+              className="property-card__selector"
               onClick={[Function]}
             >
-              View Report
-            </button>
-          </a>
+              <svg
+                aria-hidden="true"
+                className="property-card__selector-tick"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 13 11"
+                width="1em"
+              >
+                <path
+                  d="M11.1689 1.03225C11.2971 0.904127 11.5048 0.904127 11.633 1.03225L12.4063 1.80564C12.5345 1.93379 12.5345 2.14156 12.4063 2.26968L4.20837 10.4677C4.0802 10.5958 3.87245 10.5958 3.74433 10.4677L0.0961101 6.81947C-0.0320367 6.6913 -0.0320367 6.48355 0.0961101 6.3554L0.869477 5.58203C0.997651 5.45389 1.2054 5.45389 1.33355 5.58203L3.97635 8.22484L11.1689 1.03225Z"
+                />
+              </svg>
+            </div>
+            <a
+              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+            >
+              <button
+                className="button button--outline"
+                onClick={[Function]}
+              >
+                View Report
+              </button>
+            </a>
+          </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="user-icon-list"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -187,20 +265,46 @@ exports[`PropertyCardList renders correctly 1`] = `
         <div
           className="property-card__overlay"
         >
-          <a
+          <div
             className="property-card__overlay-link"
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
           >
-            <button
-              className="button button--outline"
+            <div
+              className="property-card__selector"
               onClick={[Function]}
             >
-              View Report
-            </button>
-          </a>
+              <svg
+                aria-hidden="true"
+                className="property-card__selector-tick"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 13 11"
+                width="1em"
+              >
+                <path
+                  d="M11.1689 1.03225C11.2971 0.904127 11.5048 0.904127 11.633 1.03225L12.4063 1.80564C12.5345 1.93379 12.5345 2.14156 12.4063 2.26968L4.20837 10.4677C4.0802 10.5958 3.87245 10.5958 3.74433 10.4677L0.0961101 6.81947C-0.0320367 6.6913 -0.0320367 6.48355 0.0961101 6.3554L0.869477 5.58203C0.997651 5.45389 1.2054 5.45389 1.33355 5.58203L3.97635 8.22484L11.1689 1.03225Z"
+                />
+              </svg>
+            </div>
+            <a
+              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+            >
+              <button
+                className="button button--outline"
+                onClick={[Function]}
+              >
+                View Report
+              </button>
+            </a>
+          </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="user-icon-list"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -242,20 +346,46 @@ exports[`PropertyCardList renders correctly 1`] = `
         <div
           className="property-card__overlay"
         >
-          <a
+          <div
             className="property-card__overlay-link"
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
           >
-            <button
-              className="button button--outline"
+            <div
+              className="property-card__selector"
               onClick={[Function]}
             >
-              View Report
-            </button>
-          </a>
+              <svg
+                aria-hidden="true"
+                className="property-card__selector-tick"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 13 11"
+                width="1em"
+              >
+                <path
+                  d="M11.1689 1.03225C11.2971 0.904127 11.5048 0.904127 11.633 1.03225L12.4063 1.80564C12.5345 1.93379 12.5345 2.14156 12.4063 2.26968L4.20837 10.4677C4.0802 10.5958 3.87245 10.5958 3.74433 10.4677L0.0961101 6.81947C-0.0320367 6.6913 -0.0320367 6.48355 0.0961101 6.3554L0.869477 5.58203C0.997651 5.45389 1.2054 5.45389 1.33355 5.58203L3.97635 8.22484L11.1689 1.03225Z"
+                />
+              </svg>
+            </div>
+            <a
+              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+            >
+              <button
+                className="button button--outline"
+                onClick={[Function]}
+              >
+                View Report
+              </button>
+            </a>
+          </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="user-icon-list"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -297,20 +427,46 @@ exports[`PropertyCardList renders correctly 1`] = `
         <div
           className="property-card__overlay"
         >
-          <a
+          <div
             className="property-card__overlay-link"
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
           >
-            <button
-              className="button button--outline"
+            <div
+              className="property-card__selector"
               onClick={[Function]}
             >
-              View Report
-            </button>
-          </a>
+              <svg
+                aria-hidden="true"
+                className="property-card__selector-tick"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 13 11"
+                width="1em"
+              >
+                <path
+                  d="M11.1689 1.03225C11.2971 0.904127 11.5048 0.904127 11.633 1.03225L12.4063 1.80564C12.5345 1.93379 12.5345 2.14156 12.4063 2.26968L4.20837 10.4677C4.0802 10.5958 3.87245 10.5958 3.74433 10.4677L0.0961101 6.81947C-0.0320367 6.6913 -0.0320367 6.48355 0.0961101 6.3554L0.869477 5.58203C0.997651 5.45389 1.2054 5.45389 1.33355 5.58203L3.97635 8.22484L11.1689 1.03225Z"
+                />
+              </svg>
+            </div>
+            <a
+              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+            >
+              <button
+                className="button button--outline"
+                onClick={[Function]}
+              >
+                View Report
+              </button>
+            </a>
+          </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="user-icon-list"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -352,20 +508,46 @@ exports[`PropertyCardList renders correctly 1`] = `
         <div
           className="property-card__overlay"
         >
-          <a
+          <div
             className="property-card__overlay-link"
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
           >
-            <button
-              className="button button--outline"
+            <div
+              className="property-card__selector"
               onClick={[Function]}
             >
-              View Report
-            </button>
-          </a>
+              <svg
+                aria-hidden="true"
+                className="property-card__selector-tick"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 13 11"
+                width="1em"
+              >
+                <path
+                  d="M11.1689 1.03225C11.2971 0.904127 11.5048 0.904127 11.633 1.03225L12.4063 1.80564C12.5345 1.93379 12.5345 2.14156 12.4063 2.26968L4.20837 10.4677C4.0802 10.5958 3.87245 10.5958 3.74433 10.4677L0.0961101 6.81947C-0.0320367 6.6913 -0.0320367 6.48355 0.0961101 6.3554L0.869477 5.58203C0.997651 5.45389 1.2054 5.45389 1.33355 5.58203L3.97635 8.22484L11.1689 1.03225Z"
+                />
+              </svg>
+            </div>
+            <a
+              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+            >
+              <button
+                className="button button--outline"
+                onClick={[Function]}
+              >
+                View Report
+              </button>
+            </a>
+          </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="user-icon-list"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -407,20 +589,46 @@ exports[`PropertyCardList renders correctly 1`] = `
         <div
           className="property-card__overlay"
         >
-          <a
+          <div
             className="property-card__overlay-link"
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
           >
-            <button
-              className="button button--outline"
+            <div
+              className="property-card__selector"
               onClick={[Function]}
             >
-              View Report
-            </button>
-          </a>
+              <svg
+                aria-hidden="true"
+                className="property-card__selector-tick"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 13 11"
+                width="1em"
+              >
+                <path
+                  d="M11.1689 1.03225C11.2971 0.904127 11.5048 0.904127 11.633 1.03225L12.4063 1.80564C12.5345 1.93379 12.5345 2.14156 12.4063 2.26968L4.20837 10.4677C4.0802 10.5958 3.87245 10.5958 3.74433 10.4677L0.0961101 6.81947C-0.0320367 6.6913 -0.0320367 6.48355 0.0961101 6.3554L0.869477 5.58203C0.997651 5.45389 1.2054 5.45389 1.33355 5.58203L3.97635 8.22484L11.1689 1.03225Z"
+                />
+              </svg>
+            </div>
+            <a
+              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+            >
+              <button
+                className="button button--outline"
+                onClick={[Function]}
+              >
+                View Report
+              </button>
+            </a>
+          </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="user-icon-list"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -462,20 +670,46 @@ exports[`PropertyCardList renders correctly 1`] = `
         <div
           className="property-card__overlay"
         >
-          <a
+          <div
             className="property-card__overlay-link"
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
           >
-            <button
-              className="button button--outline"
+            <div
+              className="property-card__selector"
               onClick={[Function]}
             >
-              View Report
-            </button>
-          </a>
+              <svg
+                aria-hidden="true"
+                className="property-card__selector-tick"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 13 11"
+                width="1em"
+              >
+                <path
+                  d="M11.1689 1.03225C11.2971 0.904127 11.5048 0.904127 11.633 1.03225L12.4063 1.80564C12.5345 1.93379 12.5345 2.14156 12.4063 2.26968L4.20837 10.4677C4.0802 10.5958 3.87245 10.5958 3.74433 10.4677L0.0961101 6.81947C-0.0320367 6.6913 -0.0320367 6.48355 0.0961101 6.3554L0.869477 5.58203C0.997651 5.45389 1.2054 5.45389 1.33355 5.58203L3.97635 8.22484L11.1689 1.03225Z"
+                />
+              </svg>
+            </div>
+            <a
+              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+            >
+              <button
+                className="button button--outline"
+                onClick={[Function]}
+              >
+                View Report
+              </button>
+            </a>
+          </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="user-icon-list"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -517,20 +751,46 @@ exports[`PropertyCardList renders correctly 1`] = `
         <div
           className="property-card__overlay"
         >
-          <a
+          <div
             className="property-card__overlay-link"
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
           >
-            <button
-              className="button button--outline"
+            <div
+              className="property-card__selector"
               onClick={[Function]}
             >
-              View Report
-            </button>
-          </a>
+              <svg
+                aria-hidden="true"
+                className="property-card__selector-tick"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 13 11"
+                width="1em"
+              >
+                <path
+                  d="M11.1689 1.03225C11.2971 0.904127 11.5048 0.904127 11.633 1.03225L12.4063 1.80564C12.5345 1.93379 12.5345 2.14156 12.4063 2.26968L4.20837 10.4677C4.0802 10.5958 3.87245 10.5958 3.74433 10.4677L0.0961101 6.81947C-0.0320367 6.6913 -0.0320367 6.48355 0.0961101 6.3554L0.869477 5.58203C0.997651 5.45389 1.2054 5.45389 1.33355 5.58203L3.97635 8.22484L11.1689 1.03225Z"
+                />
+              </svg>
+            </div>
+            <a
+              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+            >
+              <button
+                className="button button--outline"
+                onClick={[Function]}
+              >
+                View Report
+              </button>
+            </a>
+          </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="user-icon-list"
+            />
+          </div>
         </div>
       </div>
       <div

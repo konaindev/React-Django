@@ -5,7 +5,8 @@ from django.views.generic.base import RedirectView
 
 from remark.decorators import anonymous_required
 
-from .views import CompleteAccountView, CreatePasswordView, ValidatePasswordView
+from .views import CompleteAccountView, CreatePasswordView, ValidatePasswordView, UsersView
+
 
 urlpatterns = [
     # XXX SECURITY Django's logout view uses GET to perform the logout action,

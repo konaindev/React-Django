@@ -133,3 +133,34 @@ export const fetchCompleteAccount = store => next => action => {
     next(action);
   }
 };
+
+export const fetchInviteModal = store => next => action => {
+  if (action.type === "API_INVITE_MODAL_GET_USERS") {
+    const url = `${process.env.BASE_URL}/projects/members/`;
+    axiosPost(url, action.data)
+      .then(response => {
+        const members = response.data?.members || [];
+        action.callback(members);
+      })
+      .catch(e => console.log("-----> ERROR", e));
+  } else if (action.type === "API_INVITE_MODAL_REMOVE_MEMBER") {
+    const projectsId = action.data.project.property_id;
+    const url = `${process.env.BASE_URL}/projects/${projectsId}/remove-member/`;
+    axiosPost(url, action.data)
+      .then(response => {
+        const property = response.data.project;
+        next({ type: "GENERAL_REMOVE_MEMBER_COMPLETE", property });
+      })
+      .catch(e => console.log("-----> ERROR", e));
+  } else if (action.type === "API_INVITE_MODAL_ADD_MEMBER") {
+    const url = `${process.env.BASE_URL}/projects/add-members/`;
+    axiosPost(url, action.data)
+      .then(response => {
+        const properties = response.data.projects;
+        next({ type: "GENERAL_INVITE_MEMBER_COMPLETE", properties });
+      })
+      .catch(e => console.log("-----> ERROR", e));
+  } else {
+    next(action);
+  }
+};

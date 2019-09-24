@@ -4,6 +4,7 @@ import cx from "classnames";
 
 import Panel from "../panel";
 import PropertyStatus from "../property_status";
+import UserIconList from "../user_icon_list";
 
 import "./property_row.scss";
 
@@ -14,6 +15,7 @@ const PropertyRow = ({
   address,
   performance_rating,
   url,
+  members,
   selected,
   selection_mode,
   onSelect,
@@ -58,7 +60,12 @@ const PropertyRow = ({
           View Property
         </a>
       </div>
-      <PropertyStatus performance_rating={performance_rating} />
+      <div className="property-row__health">
+        <PropertyStatus performance_rating={performance_rating} />
+      </div>
+      <div className="property-row__members">
+        <UserIconList users={members} />
+      </div>
     </Panel>
   );
 };
@@ -70,6 +77,7 @@ PropertyRow.propTypes = {
   address: PropTypes.string.isRequired,
   performance_rating: PropTypes.number.isRequired,
   url: PropTypes.string.isRequired,
+  members: PropTypes.array,
   selection_mode: PropTypes.bool.isRequired,
   selected: PropTypes.bool.isRequired,
   onSelect: PropTypes.func,

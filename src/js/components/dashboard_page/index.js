@@ -14,6 +14,8 @@ import Container from "../container";
 import PageChrome from "../page_chrome";
 import PropertyCardList from "../property_card_list";
 import PropertyList from "../property_list";
+import ToggleButton from "../toggle_button";
+import InviteModal from "../invite_modal";
 import { Close, ListView, TileView } from "../../icons";
 import Loader from "../loader";
 import UserMenu from "../user_menu";
@@ -21,7 +23,7 @@ import UserMenu from "../user_menu";
 import router from "../../router";
 import { qsParse, qsStringify } from "../../utils/misc";
 import TutorialView from "../tutorial_view";
-import { networking } from "../../state/actions";
+import { networking, inviteModal, general } from "../../state/actions";
 
 import "./dashboard_page.scss";
 
@@ -47,7 +49,7 @@ export class DashboardPage extends React.PureComponent {
     funds: PropTypes.array.isRequired,
     asset_managers: PropTypes.array.isRequired,
     property_managers: PropTypes.array.isRequired,
-    selectedProperties: PropTypes.arrayOf(PropTypes.string),
+    selectedProperties: PropTypes.array.isRequired,
     viewType: PropTypes.string,
     filters: PropTypes.object,
     onChangeFilter: PropTypes.func
@@ -75,7 +77,6 @@ export class DashboardPage extends React.PureComponent {
     super(props);
     this.state = {
       viewType: props.viewType,
-      selectedProperties: props.selectedProperties,
       isShowAddPropertyForm: false
     };
 
@@ -91,16 +92,16 @@ export class DashboardPage extends React.PureComponent {
   }
 
   selectAll = () => {
-    const selectedProperties = this.props.properties.map(p => p.property_id);
-    this.setState({ selectedProperties });
+    const selectedProperties = this.props.properties;
+    this.props.dispatch(general.update({ selectedProperties }));
   };
 
   cancelSelect = () => {
-    this.setState({ selectedProperties: [] });
+    this.props.dispatch(general.update({ selectedProperties: [] }));
   };
 
-  changeLoader = () => {
-    // this.setState({ isShowLoader: false });
+  inviteHandler = () => {
+    this.props.dispatch(inviteModal.open);
   };
 
   get propertiesListComponent() {
@@ -116,7 +117,7 @@ export class DashboardPage extends React.PureComponent {
   toggleView = viewType => this.setState({ viewType });
 
   onSelectHandler = selectedProperties => {
-    this.setState({ selectedProperties });
+    this.props.dispatch(general.update({ selectedProperties }));
   };
 
   onShowAddPropertyForm = () => {
@@ -148,26 +149,26 @@ export class DashboardPage extends React.PureComponent {
 
   render() {
     const className = cn("dashboard-content", {
-      "dashboard-content--selection-mode": this.state.selectedProperties.length
+      "dashboard-content--selection-mode": this.props.selectedProperties.length
     });
     const { user } = this.props;
     const PropertiesListComponent = this.propertiesListComponent;
     const navLinks = this.props.navLinks;
     const { isFetching } = this.props;
-    // user.email.indexOf("remarkably.io") > -1 ? this.props.navLinks : null;
     return (
       <PageChrome navLinks={navLinks} headerItems={this.getHeaderItems()}>
         <TutorialView />
+        <InviteModal />
         <div className={className}>
           <Container>
             <div className="dashboard-content__title">
               <div className="dashboard-content__title-right">
                 <div className="dashboard-content__select-view">
-                  {/* <ToggleButton
+                  <ToggleButton
                     options={DashboardPage.buttonOptions}
                     value={this.state.viewType}
                     onChange={this.toggleView}
-                  /> */}
+                  />
                 </div>
                 <Button
                   className="dashboard-content__add-property"
@@ -196,7 +197,8 @@ export class DashboardPage extends React.PureComponent {
               </div>
               <div className="dashboard-content__selection">
                 <DashboardSelection
-                  selectedProperties={this.state.selectedProperties}
+                  selectedProperties={this.props.selectedProperties}
+                  inviteHandler={this.inviteHandler}
                   selectAll={this.selectAll}
                   cancelSelect={this.cancelSelect}
                 />
@@ -206,7 +208,7 @@ export class DashboardPage extends React.PureComponent {
               <Loader isShow={isFetching} />
               <PropertiesListComponent
                 properties={this.props.properties}
-                selectedProperties={this.state.selectedProperties}
+                selectedProperties={this.props.selectedProperties}
                 onSelect={this.onSelectHandler}
               />
             </div>
@@ -224,31 +226,37 @@ export class DashboardPage extends React.PureComponent {
 
 const DashboardSelection = ({
   selectedProperties,
+  inviteHandler,
   selectAll,
   cancelSelect
 }) => {
   return (
     <div className="dashboard-selection">
       <div className="dashboard-selection__title">
-        {selectedProperties.length} Properties Selected
+        {selectedProperties.length}
+        {selectedProperties.length === 1 ? " Property" : " Properties"} Selected
       </div>
       <div className="dashboard-selection__controls">
-        <Button className="dashboard-selection__button" color="transparent">
-          INVITE
+        <Button
+          className="dashboard-selection__button"
+          color="secondary"
+          onClick={inviteHandler}
+        >
+          invite
         </Button>
         <Button
           className="dashboard-selection__button"
-          color="transparent"
+          color="secondary"
           onClick={selectAll}
         >
-          SELECT ALL
+          select all
         </Button>
         <Button
           className="dashboard-selection__button"
-          color="transparent"
+          color="secondary"
           onClick={cancelSelect}
         >
-          CANCEL
+          cancel
           <Close className="dashboard-selection__button-icon" width={9} />
         </Button>
       </div>
@@ -257,7 +265,10 @@ const DashboardSelection = ({
 };
 
 DashboardSelection.propTypes = {
-  selectedProperties: PropTypes.array.isRequired
+  selectedProperties: PropTypes.array.isRequired,
+  inviteHandler: PropTypes.func.isRequired,
+  selectAll: PropTypes.func.isRequired,
+  cancelSelect: PropTypes.func.isRequired
 };
 
 export class UrlQueryLayer extends React.PureComponent {

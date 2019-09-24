@@ -14,7 +14,8 @@ export class SelectSearch extends React.PureComponent {
     loadOptions: PropTypes.func.isRequired,
     className: PropTypes.string,
     name: PropTypes.string,
-    theme: PropTypes.oneOf(["", "default", "highlight"]),
+    theme: PropTypes.oneOf(["", "default", "highlight", "transparent"]),
+    isMulti: PropTypes.bool,
     components: PropTypes.object,
     styles: PropTypes.object,
     cacheOptions: PropTypes.bool,
@@ -30,6 +31,7 @@ export class SelectSearch extends React.PureComponent {
     className: "",
     name: "",
     theme: "",
+    isMulti: false,
     components: {},
     styles: {},
     cacheOptions: true,
@@ -65,9 +67,11 @@ export class SelectSearch extends React.PureComponent {
       onChange,
       onCreateOption,
       value,
+      isMulti,
       ...otherProps
     } = this.props;
     const classes = cn("select-search", "select", className, {
+      "select--is-multi": isMulti,
       [`select--${theme}`]: theme
     });
     return (
@@ -79,6 +83,7 @@ export class SelectSearch extends React.PureComponent {
           ...this.components,
           ...components
         }}
+        isMulti={isMulti}
         formatCreateLabel={FormatCreateLabel}
         isValidNewOption={this.isValidNewOption}
         loadOptions={loadOptions}

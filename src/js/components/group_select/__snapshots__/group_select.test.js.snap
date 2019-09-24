@@ -2,7 +2,7 @@
 
 exports[`GroupSelect all selected 1`] = `
 <div
-  className="select group-select css-1xz6ynz-container"
+  className="select group-select select--is-multi css-1xz6ynz-container"
   onKeyDown={[Function]}
 >
   <div
@@ -415,7 +415,7 @@ exports[`GroupSelect all selected 1`] = `
 
 exports[`GroupSelect render default 1`] = `
 <div
-  className="select group-select css-1xz6ynz-container"
+  className="select group-select select--is-multi css-1xz6ynz-container"
   onKeyDown={[Function]}
 >
   <div

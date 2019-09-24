@@ -1,3 +1,5 @@
+import { props as usersProps } from "../user_icon_list/props";
+
 export const props = {
   properties: [
     {
@@ -6,7 +8,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 2,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: usersProps.users.slice(0, 3)
     },
     {
       property_name: "Beridian SLC",
@@ -14,7 +17,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 1,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: usersProps.users.slice(0, 3)
     },
     {
       property_name: "Teridian SLC",
@@ -22,7 +26,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 2,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: usersProps.users.slice(3, 4)
     },
     {
       property_name: "Deridian SLC",
@@ -30,7 +35,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 0,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      members: usersProps.users
     },
     {
       property_name: "Peridian SLC",

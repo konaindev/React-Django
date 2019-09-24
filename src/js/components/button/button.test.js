@@ -55,4 +55,11 @@ describe("Button", () => {
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
+
+  it("renders warning button correctly", () => {
+    const tree = renderer
+      .create(<Button color="warning">Warning Button</Button>)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });
