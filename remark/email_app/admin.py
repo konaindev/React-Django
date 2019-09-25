@@ -4,6 +4,7 @@ from django.contrib import admin
 
 from remark.admin import admin_site, custom_titled_filter
 from remark.lib.logging import error_text, getLogger
+from .forms import PerformanceEmailForm
 from .models import PerformanceEmail, PerformanceEmailKPI
 from .reports.weekly_performance import send_performance_email
 
@@ -32,6 +33,8 @@ class PerformanceEmailAdmin(admin.ModelAdmin):
     list_display = ("project", "start", "created_by")
     list_filter = (("project__name", custom_titled_filter("Project")),)
     ordering = ("-start",)
+
+    form = PerformanceEmailForm
 
     def save_model(self, request, obj, form, change):
         logger.info("PerformanceEmailAdmin::save_model::top")
