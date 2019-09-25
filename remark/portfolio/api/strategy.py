@@ -1,4 +1,3 @@
-from decimal import Decimal
 import datetime
 
 from remark.projects.models import Period, TargetPeriod
@@ -29,7 +28,8 @@ def weighted_average_by_unit_count(items, prop):
 
     result = result_type(0)
     for item in items:
-        result += item[prop] * (item.get(unit_property, 0) / total_units)
+        value = item.get(unit_property) or 0
+        result += item[prop] * value / total_units
     return result
 
 
