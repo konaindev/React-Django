@@ -13,7 +13,6 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-
 from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
@@ -45,12 +44,15 @@ urlpatterns = [
     path("releases/", include("remark.releases.urls")),
     # Misc. site-wide pages (about/company/privacy policy/refund policy/etc)
     path("sales/", include("remark.sales.urls")),
-    path("", include("remark.web.urls")),
+
     path("email_app/", include("remark.email_app.urls")),
     path("charts/", include("remark.charts.urls")),
     path("portfolio/", include("remark.portfolio.urls")),
     path("crm/", include("remark.crm.urls")),
 
-    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+    path("api/v1/token/", jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path("api/v1/token/refresh/", jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+
+    path("api/v1/", include("remark.web.urls", namespace="v1")),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,9 +1,11 @@
 import json
 
 from django.conf import settings
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import JsonResponse
-from django.core.cache.backends.base import DEFAULT_TIMEOUT
+
+# from rest_framework import status
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 from remark.projects.models import Fund, Project
 import remark.lib.cache as cache_lib
@@ -16,10 +18,10 @@ def has_property_in_list_of_dict(ary, prop, value):
     return False
 
 
-class DashboardView(LoginRequiredMixin, ReactView):
+class DashboardView(APIView):
     """Render dashboard page."""
 
-    page_class = "DashboardPage"
+    permission_classes = [IsAuthenticated]
 
     sql_sort = {
         "name": "name",
@@ -182,27 +184,26 @@ class DashboardView(LoginRequiredMixin, ReactView):
             **filter_options,
         )
 
-        accept = request.META.get('HTTP_ACCEPT')
-        if accept == "application/json":
-            return JsonResponse(response_data)
-        else:
-            return self.render(**response_data)
+        return Response(response_data)
 
 
-class TutorialView(LoginRequiredMixin, RemarkView):
+class TutorialView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         user = request.user
-        return JsonResponse(
-            {
-                "static_url": settings.STATIC_URL,
-                "is_show_tutorial": user.is_show_tutorial,
-            },
-            status=200,
+        response_data = dict(
+            static_url=settings.STATIC_URL,
+            is_show_tutorial=user.is_show_tutorial,
         )
+        return Response(response_data)
 
     def post(self, request):
         params = json.loads(request.body)
         user = request.user
         user.is_show_tutorial = params.get("is_show_tutorial", False)
         user.save()
-        return JsonResponse({"is_show_tutorial": user.is_show_tutorial}, status=200)
+        response_data = dict(is_show_tutorial=user.is_show_tutorial,)
+
+        return Response(response_data)
