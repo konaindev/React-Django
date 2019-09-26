@@ -115,9 +115,6 @@ class PortfolioTableView(APIView):
 
     permission_classes = [IsAuthenticated]
 
-    page_class = "PortfolioAnalysisView"
-    page_title = "Portfolio Analysis"
-
     def get(self, request):
 
         if "b" in request.GET:

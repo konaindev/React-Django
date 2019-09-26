@@ -23,8 +23,6 @@ class DashboardView(APIView):
 
     permission_classes = [IsAuthenticated]
 
-    page_class = "DashboardPage"
-
     sql_sort = {
         "name": "name",
         "propertyMgr": "property_manager__name",

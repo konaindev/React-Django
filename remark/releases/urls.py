@@ -1,14 +1,14 @@
 from django.urls import path
 
-from .views import (
-    ListReleaseNoteView,
-    ReleaseNoteDetailView,
-)
+from rest_framework import routers
 
-app_name="releases"
+from .views import ReleaseNoteViewSet
+
+app_name = "releases"
 
 
-urlpatterns = [
-    path("", ListReleaseNoteView.as_view(), name="release_notes"),
-    path('<int:pk>/', ReleaseNoteDetailView.as_view(), name="release_notes_detail"),
-]
+router = routers.DefaultRouter()
+router.register(r"", ReleaseNoteViewSet)
+
+
+urlpatterns = [] + router.urls
