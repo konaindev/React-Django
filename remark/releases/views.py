@@ -1,30 +1,38 @@
-from django.shortcuts import get_object_or_404
+from rest_framework import generics, status
+from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.response import Response
 
-from remark.lib.views import ReactView
 from .models import ReleaseNote
+from .serializers import ReleaseNoteSerializer
 
 
-class ReleaseNotesPageView(ReactView):
-    """Render a page that shows information about the overall project."""
+class ListReleaseNoteView(generics.ListAPIView):
+    """
+    GET releases/
+    """
+    permission_classes = [AllowAny]
 
-    page_class = "ReleaseNotesPage"
-
-    def get_page_title(self):
-        return f"Release Notes"
-
-    def get(self, request):
-        self.release_notes = ReleaseNote.objects.all().order_by("-version")
-        return self.render(release_notes=self.release_notes.to_jsonable())
+    queryset = ReleaseNote.objects.all()
+    serializer_class = ReleaseNoteSerializer
 
 
-class ReleaseNoteDetailsPageView(ReactView):
-    """Render a page that shows information about the overall project."""
+class ReleaseNoteDetailView(generics.RetrieveAPIView):
+    """
+    GET releases/:id/
+    """
+    permission_classes = [AllowAny]
 
-    page_class = "ReleaseNoteDetailsPage"
+    queryset = ReleaseNote.objects.all()
+    serializer_class = ReleaseNoteSerializer
 
-    def get_page_title(self):
-        return f"Release Note"
-
-    def get(self, request, release_id):
-        self.release_note = get_object_or_404(ReleaseNote, id=release_id)
-        return self.render(release_note=self.release_note.to_jsonable())
+    def get(self, request, *args, **kwargs):
+        try:
+            release = self.queryset.get(pk=kwargs["pk"])
+            return Response(ReleaseNoteSerializer(release).data)
+        except ReleaseNote.DoesNotExist:
+            return Response(
+                data={
+                    "message": "ReleaseNote with id: {} does not exist".format(kwargs["pk"])
+                },
+                status=status.HTTP_404_NOT_FOUND
+            )

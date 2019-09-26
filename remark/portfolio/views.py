@@ -1,7 +1,9 @@
 import datetime
-from django.contrib.auth.mixins import LoginRequiredMixin
 
-from remark.lib.views import ReactView
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+
 from remark.lib.logging import getLogger, error_text
 from remark.lib.time_series.common import KPI, KPITitle, KPIFormat
 from remark.portfolio.api.table_data import get_table_structure
@@ -109,7 +111,9 @@ def x_mondays_ago(x):
     return last_monday - datetime.timedelta(days=days_before)
 
 
-class PortfolioTableView(LoginRequiredMixin, PortfolioMixin, ReactView):
+class PortfolioTableView(APIView):
+
+    permission_classes = [IsAuthenticated]
 
     page_class = "PortfolioAnalysisView"
     page_title = "Portfolio Analysis"
@@ -155,7 +159,7 @@ class PortfolioTableView(LoginRequiredMixin, PortfolioMixin, ReactView):
         if table_data is None:
             raise Exception("Table data cannot be None")
 
-        result = {
+        response_data = {
             "share_info": self.share_info(),
             "kpi_bundles": self.kpi_bundle_list(),
             "selected_kpi_bundle": bundle,
@@ -166,7 +170,8 @@ class PortfolioTableView(LoginRequiredMixin, PortfolioMixin, ReactView):
             "highlight_kpis": self.get_highlight_kpis(portfolio_average, kpis_to_include),
             "display_average": "1" if show_averages else "0"
         }
-        return self.render(**result)
+
+        return Response(response_data)
 
     def get_start_and_end(self, period_group, start, end):
         '''
@@ -282,4 +287,3 @@ class PortfolioTableView(LoginRequiredMixin, PortfolioMixin, ReactView):
             "start_date": start.strftime('%Y-%m-%d'),
             "end_date": end.strftime('%Y-%m-%d')
         }
-

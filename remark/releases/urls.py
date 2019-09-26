@@ -1,16 +1,14 @@
 from django.urls import path
 
 from .views import (
-    ReleaseNotesPageView,
-    ReleaseNoteDetailsPageView,
+    ListReleaseNoteView,
+    ReleaseNoteDetailView,
 )
+
+app_name="releases"
 
 
 urlpatterns = [
-    path("", ReleaseNotesPageView.as_view(), name="release_notes"),
-    path(
-        "<release_id>/",
-        ReleaseNoteDetailsPageView.as_view(),
-        name="release_note",
-    ),
+    path("", ListReleaseNoteView.as_view(), name="release_notes"),
+    path('<int:pk>/', ReleaseNoteDetailView.as_view(), name="release_notes_detail"),
 ]

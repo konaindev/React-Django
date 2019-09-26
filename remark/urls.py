@@ -17,6 +17,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
 from django.views.decorators.cache import cache_page
+from django.views.generic import TemplateView
 
 from django_js_reverse.views import urls_js
 from rest_framework_simplejwt import views as jwt_views
@@ -37,22 +38,24 @@ urlpatterns = [
         cache_page(3600)(urls_js) if settings.CACHE_JS_REVERSE else urls_js,
         name="js_reverse",
     ),
-    # User authentication
-    path("users/", include("remark.users.urls")),
-    # Projects, for now
-    path("projects/", include("remark.projects.urls")),
-    path("releases/", include("remark.releases.urls")),
-    # Misc. site-wide pages (about/company/privacy policy/refund policy/etc)
-    path("sales/", include("remark.sales.urls")),
-
     path("email_app/", include("remark.email_app.urls")),
     path("charts/", include("remark.charts.urls")),
-    path("portfolio/", include("remark.portfolio.urls")),
-    path("crm/", include("remark.crm.urls")),
 
-    path("api/v1/token/", jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    # @TODO: API documentation
+    path('redoc/', TemplateView.as_view(
+        template_name='redoc.html',
+        extra_context={'schema_url':'openapi-schema'}
+    ), name='redoc'),
+
     path("api/v1/token/refresh/", jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+    path("api/v1/token/", jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
 
-    path("api/v1/", include("remark.web.urls", namespace="v1")),
+    path("api/v1/crm/", include("remark.crm.urls", namespace="v1_crm")),
+    path("api/v1/portfolio/", include("remark.portfolio.urls", namespace="v1_portfolio")),
+    path("api/v1/sales/", include("remark.sales.urls", namespace="v1_sales")),
+    path("api/v1/", include("remark.web.urls", namespace="v1_web")),
+    path("api/v1/releases/", include("remark.releases.urls", namespace="v1_releases")),
+    path("projects/", include("remark.projects.urls")),
+    path("users/", include("remark.users.urls")),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
