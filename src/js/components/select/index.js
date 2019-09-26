@@ -43,7 +43,7 @@ export default function Select(props) {
 Select.optionsType = PropTypes.arrayOf(
   PropTypes.shape({
     label: PropTypes.string.isRequired,
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]) //.isRequired
   })
 );
 Select.propTypes = {
