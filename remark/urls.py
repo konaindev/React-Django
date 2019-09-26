@@ -53,8 +53,8 @@ urlpatterns = [
     path("api/v1/crm/", include("remark.crm.urls", namespace="v1_crm")),
     path("api/v1/portfolio/", include("remark.portfolio.urls", namespace="v1_portfolio")),
     path("api/v1/sales/", include("remark.sales.urls", namespace="v1_sales")),
+    path("api/v1/", include("remark.releases.urls", namespace="v1_releases")),
     path("api/v1/", include("remark.web.urls", namespace="v1_web")),
-    path("api/v1/releases/", include("remark.releases.urls", namespace="v1_releases")),
     path("projects/", include("remark.projects.urls")),
     path("users/", include("remark.users.urls")),
 

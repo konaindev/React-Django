@@ -8,7 +8,7 @@ app_name = "releases"
 
 
 router = routers.DefaultRouter()
-router.register(r"", ReleaseNoteViewSet)
+router.register(r"releases", ReleaseNoteViewSet)
 
 
 urlpatterns = [] + router.urls
