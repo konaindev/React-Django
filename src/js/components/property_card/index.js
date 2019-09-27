@@ -38,9 +38,9 @@ export const PropertyCard = ({
         <div className="property-card__image" style={imageStyle}>
           <div className="property-card__overlay">
             <div className="property-card__overlay-link">
-              <div className="property-card__selector" onClick={handleToggle}>
+              {/* <div className="property-card__selector" onClick={handleToggle}>
                 <Tick className="property-card__selector-tick" />
-              </div>
+              </div> */}
               <a href={url}>
                 <Button color="outline">View Report</Button>
               </a>
