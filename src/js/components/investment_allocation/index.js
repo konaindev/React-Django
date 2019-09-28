@@ -5,7 +5,11 @@ import { VictoryPie } from "victory";
 import _isNil from "lodash/isNil";
 import BoxRow from "../box_row";
 import ReportSection from "../report_section";
-import { formatCurrencyShorthand, formatPercent } from "../../utils/formatters";
+import {
+  formatCurrencyShorthand,
+  formatPercent,
+  formatCurrencyShorthandWithDigit
+} from "../../utils/formatters";
 
 import { SmallNumberBox, SmallCurrencyShorthandBox } from "../small_box_layout";
 import scssVars from "./investment_allocation.scss";
@@ -96,8 +100,8 @@ const InvestmentAllocationChart = ({ name, expenses, total }) => {
         <div className="investment-allocation__body">
           <div className="investment-allocation__chart">
             <VictoryPie
-              width={parseInt(scssVars.investmentAllocationPieSize)}
-              height={parseInt(scssVars.investmentAllocationPieSize)}
+              width={scssVars.investmentAllocationPieSize}
+              height={scssVars.investmentAllocationPieSize}
               data={data}
               labelRadius={() => labelRadius}
               labels={getLabel}

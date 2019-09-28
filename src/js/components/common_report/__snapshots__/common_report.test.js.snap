@@ -931,7 +931,7 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                   >
                     <svg
                       aria-labelledby="victory-container-1-title victory-container-1-desc"
-                      height={NaN}
+                      height={400}
                       role="img"
                       style={
                         Object {
@@ -940,12 +940,12 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                           "width": "100%",
                         }
                       }
-                      viewBox="0 0 NaN NaN"
-                      width={NaN}
+                      viewBox="0 0 400 400"
+                      width={400}
                     >
                       <g>
                         <path
-                          d="M0,0Z"
+                          d="M1.2246467991473532e-14,-200L0,0Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -956,10 +956,10 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <path
-                          d="M0,0Z"
+                          d="M1.2246467991473532e-14,-200L0,0Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -970,10 +970,10 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <path
-                          d="M0,0Z"
+                          d="M1.2246467991473532e-14,-200A200,200,0,1,1,-192.3651286345638,54.73259801441661L0,0Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -984,10 +984,10 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <path
-                          d="M0,0Z"
+                          d="M-192.3651286345638,54.73259801441661A200,200,0,0,1,-3.6739403974420595e-14,-200L0,0Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -998,14 +998,14 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <text
                           direction="inherit"
                           dx={0}
                           dy={-2.0300000000000002}
-                          x={NaN}
-                          y={NaN}
+                          x={200}
+                          y={160}
                         >
                           <tspan
                             dx={0}
@@ -1020,7 +1020,7 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                               }
                             }
                             textAnchor="middle"
-                            x={NaN}
+                            x={200}
                           >
                             
                           </tspan>
@@ -1029,8 +1029,8 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                           direction="inherit"
                           dx={0}
                           dy={-2.0300000000000002}
-                          x={NaN}
-                          y={NaN}
+                          x={200}
+                          y={160}
                         >
                           <tspan
                             dx={0}
@@ -1045,7 +1045,7 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                               }
                             }
                             textAnchor="middle"
-                            x={NaN}
+                            x={200}
                           >
                             
                           </tspan>
@@ -1054,8 +1054,8 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                           direction="inherit"
                           dx={0}
                           dy={4.97}
-                          x={NaN}
-                          y={NaN}
+                          x={232}
+                          y={224}
                         >
                           <tspan
                             dx={0}
@@ -1070,7 +1070,7 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                               }
                             }
                             textAnchor="start"
-                            x={NaN}
+                            x={232}
                           >
                             71%
                           </tspan>
@@ -1079,8 +1079,8 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                           direction="inherit"
                           dx={0}
                           dy={4.97}
-                          x={NaN}
-                          y={NaN}
+                          x={168}
+                          y={176}
                         >
                           <tspan
                             dx={0}
@@ -1095,7 +1095,7 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                               }
                             }
                             textAnchor="end"
-                            x={NaN}
+                            x={168}
                           >
                             29%
                           </tspan>
@@ -1115,7 +1115,7 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                       }
                     >
                       <svg
-                        height={NaN}
+                        height={400}
                         style={
                           Object {
                             "height": "100%",
@@ -1123,8 +1123,8 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                             "width": "100%",
                           }
                         }
-                        viewBox="0 0 NaN NaN"
-                        width={NaN}
+                        viewBox="0 0 400 400"
+                        width={400}
                       />
                     </div>
                   </div>
@@ -1236,7 +1236,7 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                   >
                     <svg
                       aria-labelledby="victory-container-2-title victory-container-2-desc"
-                      height={NaN}
+                      height={400}
                       role="img"
                       style={
                         Object {
@@ -1245,12 +1245,12 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                           "width": "100%",
                         }
                       }
-                      viewBox="0 0 NaN NaN"
-                      width={NaN}
+                      viewBox="0 0 400 400"
+                      width={400}
                     >
                       <g>
                         <path
-                          d="M0,0Z"
+                          d="M1.2246467991473532e-14,-200L0,0Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -1261,10 +1261,10 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <path
-                          d="M0,0Z"
+                          d="M1.2246467991473532e-14,-200A200,200,0,1,1,-1.2246467991473532e-14,200A200,200,0,1,1,1.2246467991473532e-14,-200Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -1275,10 +1275,10 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <path
-                          d="M0,0Z"
+                          d="M-2.1437508791444564e-13,-200L0,0Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -1289,10 +1289,10 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <path
-                          d="M0,0Z"
+                          d="M-2.1437508791444564e-13,-200L0,0Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -1303,14 +1303,14 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <text
                           direction="inherit"
                           dx={0}
                           dy={-2.0300000000000002}
-                          x={NaN}
-                          y={NaN}
+                          x={200}
+                          y={205}
                         >
                           <tspan
                             dx={0}
@@ -1325,7 +1325,7 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                               }
                             }
                             textAnchor="middle"
-                            x={NaN}
+                            x={200}
                           >
                             
                           </tspan>
@@ -1334,8 +1334,8 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                           direction="inherit"
                           dx={0}
                           dy={11.969999999999999}
-                          x={NaN}
-                          y={NaN}
+                          x={200}
+                          y={195}
                         >
                           <tspan
                             dx={0}
@@ -1350,7 +1350,7 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                               }
                             }
                             textAnchor="middle"
-                            x={NaN}
+                            x={200}
                           >
                             100%
                           </tspan>
@@ -1359,8 +1359,8 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                           direction="inherit"
                           dx={0}
                           dy={-2.0300000000000002}
-                          x={NaN}
-                          y={NaN}
+                          x={200}
+                          y={205}
                         >
                           <tspan
                             dx={0}
@@ -1375,7 +1375,7 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                               }
                             }
                             textAnchor="middle"
-                            x={NaN}
+                            x={200}
                           >
                             
                           </tspan>
@@ -1384,8 +1384,8 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                           direction="inherit"
                           dx={0}
                           dy={-2.0300000000000002}
-                          x={NaN}
-                          y={NaN}
+                          x={200}
+                          y={205}
                         >
                           <tspan
                             dx={0}
@@ -1400,7 +1400,7 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                               }
                             }
                             textAnchor="middle"
-                            x={NaN}
+                            x={200}
                           >
                             
                           </tspan>
@@ -1420,7 +1420,7 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                       }
                     >
                       <svg
-                        height={NaN}
+                        height={400}
                         style={
                           Object {
                             "height": "100%",
@@ -1428,8 +1428,8 @@ exports[`CommonReport renders baseline report correctly 1`] = `
                             "width": "100%",
                           }
                         }
-                        viewBox="0 0 NaN NaN"
-                        width={NaN}
+                        viewBox="0 0 400 400"
+                        width={400}
                       />
                     </div>
                   </div>
@@ -12052,7 +12052,7 @@ exports[`CommonReport renders performance report correctly 1`] = `
                   >
                     <svg
                       aria-labelledby="victory-container-11-title victory-container-11-desc"
-                      height={NaN}
+                      height={400}
                       role="img"
                       style={
                         Object {
@@ -12061,12 +12061,12 @@ exports[`CommonReport renders performance report correctly 1`] = `
                           "width": "100%",
                         }
                       }
-                      viewBox="0 0 NaN NaN"
-                      width={NaN}
+                      viewBox="0 0 400 400"
+                      width={400}
                     >
                       <g>
                         <path
-                          d="M0,0Z"
+                          d="M1.2246467991473532e-14,-200A200,200,0,0,1,156.36629649360597,-124.6979603717467L0,0Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -12077,10 +12077,10 @@ exports[`CommonReport renders performance report correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <path
-                          d="M0,0Z"
+                          d="M156.36629649360597,-124.6979603717467A200,200,0,0,1,194.98558243636472,-44.50418679126288L0,0Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -12091,10 +12091,10 @@ exports[`CommonReport renders performance report correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <path
-                          d="M0,0Z"
+                          d="M194.98558243636472,-44.50418679126288A200,200,0,1,1,-86.77674782351166,-180.19377358048382L0,0Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -12105,10 +12105,10 @@ exports[`CommonReport renders performance report correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <path
-                          d="M0,0Z"
+                          d="M-86.77674782351166,-180.19377358048382A200,200,0,0,1,-3.6739403974420595e-14,-200L0,0Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -12119,14 +12119,14 @@ exports[`CommonReport renders performance report correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <text
                           direction="inherit"
                           dx={0}
                           dy={-2.0300000000000002}
-                          x={NaN}
-                          y={NaN}
+                          x={217}
+                          y={164}
                         >
                           <tspan
                             dx={0}
@@ -12141,7 +12141,7 @@ exports[`CommonReport renders performance report correctly 1`] = `
                               }
                             }
                             textAnchor="middle"
-                            x={NaN}
+                            x={217}
                           >
                             14%
                           </tspan>
@@ -12150,8 +12150,8 @@ exports[`CommonReport renders performance report correctly 1`] = `
                           direction="inherit"
                           dx={0}
                           dy={4.97}
-                          x={NaN}
-                          y={NaN}
+                          x={236}
+                          y={183}
                         >
                           <tspan
                             dx={0}
@@ -12166,7 +12166,7 @@ exports[`CommonReport renders performance report correctly 1`] = `
                               }
                             }
                             textAnchor="start"
-                            x={NaN}
+                            x={236}
                           >
                             7%
                           </tspan>
@@ -12175,8 +12175,8 @@ exports[`CommonReport renders performance report correctly 1`] = `
                           direction="inherit"
                           dx={0}
                           dy={11.969999999999999}
-                          x={NaN}
-                          y={NaN}
+                          x={183}
+                          y={236}
                         >
                           <tspan
                             dx={0}
@@ -12191,7 +12191,7 @@ exports[`CommonReport renders performance report correctly 1`] = `
                               }
                             }
                             textAnchor="middle"
-                            x={NaN}
+                            x={183}
                           >
                             71%
                           </tspan>
@@ -12200,8 +12200,8 @@ exports[`CommonReport renders performance report correctly 1`] = `
                           direction="inherit"
                           dx={0}
                           dy={-2.0300000000000002}
-                          x={NaN}
-                          y={NaN}
+                          x={191}
+                          y={161}
                         >
                           <tspan
                             dx={0}
@@ -12216,7 +12216,7 @@ exports[`CommonReport renders performance report correctly 1`] = `
                               }
                             }
                             textAnchor="middle"
-                            x={NaN}
+                            x={191}
                           >
                             7%
                           </tspan>
@@ -12236,7 +12236,7 @@ exports[`CommonReport renders performance report correctly 1`] = `
                       }
                     >
                       <svg
-                        height={NaN}
+                        height={400}
                         style={
                           Object {
                             "height": "100%",
@@ -12244,8 +12244,8 @@ exports[`CommonReport renders performance report correctly 1`] = `
                             "width": "100%",
                           }
                         }
-                        viewBox="0 0 NaN NaN"
-                        width={NaN}
+                        viewBox="0 0 400 400"
+                        width={400}
                       />
                     </div>
                   </div>
@@ -12357,7 +12357,7 @@ exports[`CommonReport renders performance report correctly 1`] = `
                   >
                     <svg
                       aria-labelledby="victory-container-12-title victory-container-12-desc"
-                      height={NaN}
+                      height={400}
                       role="img"
                       style={
                         Object {
@@ -12366,12 +12366,12 @@ exports[`CommonReport renders performance report correctly 1`] = `
                           "width": "100%",
                         }
                       }
-                      viewBox="0 0 NaN NaN"
-                      width={NaN}
+                      viewBox="0 0 400 400"
+                      width={400}
                     >
                       <g>
                         <path
-                          d="M0,0Z"
+                          d="M1.2246467991473532e-14,-200L0,0Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -12382,10 +12382,10 @@ exports[`CommonReport renders performance report correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <path
-                          d="M0,0Z"
+                          d="M1.2246467991473532e-14,-200A200,200,0,1,1,-1.2246467991473532e-14,200A200,200,0,1,1,1.2246467991473532e-14,-200Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -12396,10 +12396,10 @@ exports[`CommonReport renders performance report correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <path
-                          d="M0,0Z"
+                          d="M-3.6739403974420595e-14,-200L0,0Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -12410,10 +12410,10 @@ exports[`CommonReport renders performance report correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <path
-                          d="M0,0Z"
+                          d="M-3.6739403974420595e-14,-200L0,0Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -12424,14 +12424,14 @@ exports[`CommonReport renders performance report correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <text
                           direction="inherit"
                           dx={0}
                           dy={-2.0300000000000002}
-                          x={NaN}
-                          y={NaN}
+                          x={200}
+                          y={205}
                         >
                           <tspan
                             dx={0}
@@ -12446,7 +12446,7 @@ exports[`CommonReport renders performance report correctly 1`] = `
                               }
                             }
                             textAnchor="middle"
-                            x={NaN}
+                            x={200}
                           >
                             
                           </tspan>
@@ -12455,8 +12455,8 @@ exports[`CommonReport renders performance report correctly 1`] = `
                           direction="inherit"
                           dx={0}
                           dy={11.969999999999999}
-                          x={NaN}
-                          y={NaN}
+                          x={200}
+                          y={195}
                         >
                           <tspan
                             dx={0}
@@ -12471,7 +12471,7 @@ exports[`CommonReport renders performance report correctly 1`] = `
                               }
                             }
                             textAnchor="middle"
-                            x={NaN}
+                            x={200}
                           >
                             100%
                           </tspan>
@@ -12480,8 +12480,8 @@ exports[`CommonReport renders performance report correctly 1`] = `
                           direction="inherit"
                           dx={0}
                           dy={-2.0300000000000002}
-                          x={NaN}
-                          y={NaN}
+                          x={200}
+                          y={205}
                         >
                           <tspan
                             dx={0}
@@ -12496,7 +12496,7 @@ exports[`CommonReport renders performance report correctly 1`] = `
                               }
                             }
                             textAnchor="middle"
-                            x={NaN}
+                            x={200}
                           >
                             
                           </tspan>
@@ -12505,8 +12505,8 @@ exports[`CommonReport renders performance report correctly 1`] = `
                           direction="inherit"
                           dx={0}
                           dy={-2.0300000000000002}
-                          x={NaN}
-                          y={NaN}
+                          x={200}
+                          y={205}
                         >
                           <tspan
                             dx={0}
@@ -12521,7 +12521,7 @@ exports[`CommonReport renders performance report correctly 1`] = `
                               }
                             }
                             textAnchor="middle"
-                            x={NaN}
+                            x={200}
                           >
                             
                           </tspan>
@@ -12541,7 +12541,7 @@ exports[`CommonReport renders performance report correctly 1`] = `
                       }
                     >
                       <svg
-                        height={NaN}
+                        height={400}
                         style={
                           Object {
                             "height": "100%",
@@ -12549,8 +12549,8 @@ exports[`CommonReport renders performance report correctly 1`] = `
                             "width": "100%",
                           }
                         }
-                        viewBox="0 0 NaN NaN"
-                        width={NaN}
+                        viewBox="0 0 400 400"
+                        width={400}
                       />
                     </div>
                   </div>
@@ -16350,7 +16350,7 @@ exports[`CommonReport renders with date span correctly 1`] = `
                   >
                     <svg
                       aria-labelledby="victory-container-27-title victory-container-27-desc"
-                      height={NaN}
+                      height={400}
                       role="img"
                       style={
                         Object {
@@ -16359,12 +16359,12 @@ exports[`CommonReport renders with date span correctly 1`] = `
                           "width": "100%",
                         }
                       }
-                      viewBox="0 0 NaN NaN"
-                      width={NaN}
+                      viewBox="0 0 400 400"
+                      width={400}
                     >
                       <g>
                         <path
-                          d="M0,0Z"
+                          d="M1.2246467991473532e-14,-200A200,200,0,0,1,156.36629649360597,-124.6979603717467L0,0Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -16375,10 +16375,10 @@ exports[`CommonReport renders with date span correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <path
-                          d="M0,0Z"
+                          d="M156.36629649360597,-124.6979603717467A200,200,0,0,1,194.98558243636472,-44.50418679126288L0,0Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -16389,10 +16389,10 @@ exports[`CommonReport renders with date span correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <path
-                          d="M0,0Z"
+                          d="M194.98558243636472,-44.50418679126288A200,200,0,1,1,-86.77674782351166,-180.19377358048382L0,0Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -16403,10 +16403,10 @@ exports[`CommonReport renders with date span correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <path
-                          d="M0,0Z"
+                          d="M-86.77674782351166,-180.19377358048382A200,200,0,0,1,-3.6739403974420595e-14,-200L0,0Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -16417,14 +16417,14 @@ exports[`CommonReport renders with date span correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <text
                           direction="inherit"
                           dx={0}
                           dy={-2.0300000000000002}
-                          x={NaN}
-                          y={NaN}
+                          x={217}
+                          y={164}
                         >
                           <tspan
                             dx={0}
@@ -16439,7 +16439,7 @@ exports[`CommonReport renders with date span correctly 1`] = `
                               }
                             }
                             textAnchor="middle"
-                            x={NaN}
+                            x={217}
                           >
                             14%
                           </tspan>
@@ -16448,8 +16448,8 @@ exports[`CommonReport renders with date span correctly 1`] = `
                           direction="inherit"
                           dx={0}
                           dy={4.97}
-                          x={NaN}
-                          y={NaN}
+                          x={236}
+                          y={183}
                         >
                           <tspan
                             dx={0}
@@ -16464,7 +16464,7 @@ exports[`CommonReport renders with date span correctly 1`] = `
                               }
                             }
                             textAnchor="start"
-                            x={NaN}
+                            x={236}
                           >
                             7%
                           </tspan>
@@ -16473,8 +16473,8 @@ exports[`CommonReport renders with date span correctly 1`] = `
                           direction="inherit"
                           dx={0}
                           dy={11.969999999999999}
-                          x={NaN}
-                          y={NaN}
+                          x={183}
+                          y={236}
                         >
                           <tspan
                             dx={0}
@@ -16489,7 +16489,7 @@ exports[`CommonReport renders with date span correctly 1`] = `
                               }
                             }
                             textAnchor="middle"
-                            x={NaN}
+                            x={183}
                           >
                             71%
                           </tspan>
@@ -16498,8 +16498,8 @@ exports[`CommonReport renders with date span correctly 1`] = `
                           direction="inherit"
                           dx={0}
                           dy={-2.0300000000000002}
-                          x={NaN}
-                          y={NaN}
+                          x={191}
+                          y={161}
                         >
                           <tspan
                             dx={0}
@@ -16514,7 +16514,7 @@ exports[`CommonReport renders with date span correctly 1`] = `
                               }
                             }
                             textAnchor="middle"
-                            x={NaN}
+                            x={191}
                           >
                             7%
                           </tspan>
@@ -16534,7 +16534,7 @@ exports[`CommonReport renders with date span correctly 1`] = `
                       }
                     >
                       <svg
-                        height={NaN}
+                        height={400}
                         style={
                           Object {
                             "height": "100%",
@@ -16542,8 +16542,8 @@ exports[`CommonReport renders with date span correctly 1`] = `
                             "width": "100%",
                           }
                         }
-                        viewBox="0 0 NaN NaN"
-                        width={NaN}
+                        viewBox="0 0 400 400"
+                        width={400}
                       />
                     </div>
                   </div>
@@ -16655,7 +16655,7 @@ exports[`CommonReport renders with date span correctly 1`] = `
                   >
                     <svg
                       aria-labelledby="victory-container-28-title victory-container-28-desc"
-                      height={NaN}
+                      height={400}
                       role="img"
                       style={
                         Object {
@@ -16664,12 +16664,12 @@ exports[`CommonReport renders with date span correctly 1`] = `
                           "width": "100%",
                         }
                       }
-                      viewBox="0 0 NaN NaN"
-                      width={NaN}
+                      viewBox="0 0 400 400"
+                      width={400}
                     >
                       <g>
                         <path
-                          d="M0,0Z"
+                          d="M1.2246467991473532e-14,-200L0,0Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -16680,10 +16680,10 @@ exports[`CommonReport renders with date span correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <path
-                          d="M0,0Z"
+                          d="M1.2246467991473532e-14,-200A200,200,0,1,1,-1.2246467991473532e-14,200A200,200,0,1,1,1.2246467991473532e-14,-200Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -16694,10 +16694,10 @@ exports[`CommonReport renders with date span correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <path
-                          d="M0,0Z"
+                          d="M-3.6739403974420595e-14,-200L0,0Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -16708,10 +16708,10 @@ exports[`CommonReport renders with date span correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <path
-                          d="M0,0Z"
+                          d="M-3.6739403974420595e-14,-200L0,0Z"
                           role="presentation"
                           shapeRendering="auto"
                           style={
@@ -16722,14 +16722,14 @@ exports[`CommonReport renders with date span correctly 1`] = `
                               "strokeWidth": 1,
                             }
                           }
-                          transform="translate(NaN, NaN)"
+                          transform="translate(200, 200)"
                         />
                         <text
                           direction="inherit"
                           dx={0}
                           dy={-2.0300000000000002}
-                          x={NaN}
-                          y={NaN}
+                          x={200}
+                          y={205}
                         >
                           <tspan
                             dx={0}
@@ -16744,7 +16744,7 @@ exports[`CommonReport renders with date span correctly 1`] = `
                               }
                             }
                             textAnchor="middle"
-                            x={NaN}
+                            x={200}
                           >
                             
                           </tspan>
@@ -16753,8 +16753,8 @@ exports[`CommonReport renders with date span correctly 1`] = `
                           direction="inherit"
                           dx={0}
                           dy={11.969999999999999}
-                          x={NaN}
-                          y={NaN}
+                          x={200}
+                          y={195}
                         >
                           <tspan
                             dx={0}
@@ -16769,7 +16769,7 @@ exports[`CommonReport renders with date span correctly 1`] = `
                               }
                             }
                             textAnchor="middle"
-                            x={NaN}
+                            x={200}
                           >
                             100%
                           </tspan>
@@ -16778,8 +16778,8 @@ exports[`CommonReport renders with date span correctly 1`] = `
                           direction="inherit"
                           dx={0}
                           dy={-2.0300000000000002}
-                          x={NaN}
-                          y={NaN}
+                          x={200}
+                          y={205}
                         >
                           <tspan
                             dx={0}
@@ -16794,7 +16794,7 @@ exports[`CommonReport renders with date span correctly 1`] = `
                               }
                             }
                             textAnchor="middle"
-                            x={NaN}
+                            x={200}
                           >
                             
                           </tspan>
@@ -16803,8 +16803,8 @@ exports[`CommonReport renders with date span correctly 1`] = `
                           direction="inherit"
                           dx={0}
                           dy={-2.0300000000000002}
-                          x={NaN}
-                          y={NaN}
+                          x={200}
+                          y={205}
                         >
                           <tspan
                             dx={0}
@@ -16819,7 +16819,7 @@ exports[`CommonReport renders with date span correctly 1`] = `
                               }
                             }
                             textAnchor="middle"
-                            x={NaN}
+                            x={200}
                           >
                             
                           </tspan>
@@ -16839,7 +16839,7 @@ exports[`CommonReport renders with date span correctly 1`] = `
                       }
                     >
                       <svg
-                        height={NaN}
+                        height={400}
                         style={
                           Object {
                             "height": "100%",
@@ -16847,8 +16847,8 @@ exports[`CommonReport renders with date span correctly 1`] = `
                             "width": "100%",
                           }
                         }
-                        viewBox="0 0 NaN NaN"
-                        width={NaN}
+                        viewBox="0 0 400 400"
+                        width={400}
                       />
                     </div>
                   </div>

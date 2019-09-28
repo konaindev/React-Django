@@ -438,7 +438,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
               >
                 <svg
                   aria-labelledby="victory-container-3-title victory-container-3-desc"
-                  height={NaN}
+                  height={400}
                   role="img"
                   style={
                     Object {
@@ -447,12 +447,12 @@ exports[`SectionHeader renders 100% pie 1`] = `
                       "width": "100%",
                     }
                   }
-                  viewBox="0 0 NaN NaN"
-                  width={NaN}
+                  viewBox="0 0 400 400"
+                  width={400}
                 >
                   <g>
                     <path
-                      d="M0,0Z"
+                      d="M1.2246467991473532e-14,-200L0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -463,10 +463,10 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(NaN, NaN)"
+                      transform="translate(200, 200)"
                     />
                     <path
-                      d="M0,0Z"
+                      d="M1.2246467991473532e-14,-200L0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -477,10 +477,10 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(NaN, NaN)"
+                      transform="translate(200, 200)"
                     />
                     <path
-                      d="M0,0Z"
+                      d="M1.2246467991473532e-14,-200A200,200,0,1,1,-190.88100037590152,59.70296220033882L0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -491,10 +491,10 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(NaN, NaN)"
+                      transform="translate(200, 200)"
                     />
                     <path
-                      d="M0,0Z"
+                      d="M-190.88100037590152,59.70296220033882A200,200,0,0,1,1.4089627996560445e-13,-200L0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -505,14 +505,14 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(NaN, NaN)"
+                      transform="translate(200, 200)"
                     />
                     <text
                       direction="inherit"
                       dx={0}
                       dy={-2.0300000000000002}
-                      x={NaN}
-                      y={NaN}
+                      x={200}
+                      y={160}
                     >
                       <tspan
                         dx={0}
@@ -527,7 +527,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={NaN}
+                        x={200}
                       >
                         
                       </tspan>
@@ -536,8 +536,8 @@ exports[`SectionHeader renders 100% pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={-2.0300000000000002}
-                      x={NaN}
-                      y={NaN}
+                      x={200}
+                      y={160}
                     >
                       <tspan
                         dx={0}
@@ -552,7 +552,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={NaN}
+                        x={200}
                       >
                         
                       </tspan>
@@ -561,8 +561,8 @@ exports[`SectionHeader renders 100% pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={4.97}
-                      x={NaN}
-                      y={NaN}
+                      x={232}
+                      y={224}
                     >
                       <tspan
                         dx={0}
@@ -577,7 +577,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           }
                         }
                         textAnchor="start"
-                        x={NaN}
+                        x={232}
                       >
                         70%
                       </tspan>
@@ -586,8 +586,8 @@ exports[`SectionHeader renders 100% pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={4.97}
-                      x={NaN}
-                      y={NaN}
+                      x={168}
+                      y={176}
                     >
                       <tspan
                         dx={0}
@@ -602,7 +602,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           }
                         }
                         textAnchor="end"
-                        x={NaN}
+                        x={168}
                       >
                         30%
                       </tspan>
@@ -622,7 +622,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                   }
                 >
                   <svg
-                    height={NaN}
+                    height={400}
                     style={
                       Object {
                         "height": "100%",
@@ -630,8 +630,8 @@ exports[`SectionHeader renders 100% pie 1`] = `
                         "width": "100%",
                       }
                     }
-                    viewBox="0 0 NaN NaN"
-                    width={NaN}
+                    viewBox="0 0 400 400"
+                    width={400}
                   />
                 </div>
               </div>
@@ -743,7 +743,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
               >
                 <svg
                   aria-labelledby="victory-container-4-title victory-container-4-desc"
-                  height={NaN}
+                  height={400}
                   role="img"
                   style={
                     Object {
@@ -752,12 +752,12 @@ exports[`SectionHeader renders 100% pie 1`] = `
                       "width": "100%",
                     }
                   }
-                  viewBox="0 0 NaN NaN"
-                  width={NaN}
+                  viewBox="0 0 400 400"
+                  width={400}
                 >
                   <g>
                     <path
-                      d="M0,0Z"
+                      d="M1.2246467991473532e-14,-200L0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -768,10 +768,10 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(NaN, NaN)"
+                      transform="translate(200, 200)"
                     />
                     <path
-                      d="M0,0Z"
+                      d="M1.2246467991473532e-14,-200A200,200,0,1,1,-1.2246467991473532e-14,200A200,200,0,1,1,1.2246467991473532e-14,-200Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -782,10 +782,10 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(NaN, NaN)"
+                      transform="translate(200, 200)"
                     />
                     <path
-                      d="M0,0Z"
+                      d="M-2.1437508791444564e-13,-200L0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -796,10 +796,10 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(NaN, NaN)"
+                      transform="translate(200, 200)"
                     />
                     <path
-                      d="M0,0Z"
+                      d="M-2.1437508791444564e-13,-200L0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -810,14 +810,14 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(NaN, NaN)"
+                      transform="translate(200, 200)"
                     />
                     <text
                       direction="inherit"
                       dx={0}
                       dy={-2.0300000000000002}
-                      x={NaN}
-                      y={NaN}
+                      x={200}
+                      y={205}
                     >
                       <tspan
                         dx={0}
@@ -832,7 +832,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={NaN}
+                        x={200}
                       >
                         
                       </tspan>
@@ -841,8 +841,8 @@ exports[`SectionHeader renders 100% pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={11.969999999999999}
-                      x={NaN}
-                      y={NaN}
+                      x={200}
+                      y={195}
                     >
                       <tspan
                         dx={0}
@@ -857,7 +857,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={NaN}
+                        x={200}
                       >
                         100%
                       </tspan>
@@ -866,8 +866,8 @@ exports[`SectionHeader renders 100% pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={-2.0300000000000002}
-                      x={NaN}
-                      y={NaN}
+                      x={200}
+                      y={205}
                     >
                       <tspan
                         dx={0}
@@ -882,7 +882,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={NaN}
+                        x={200}
                       >
                         
                       </tspan>
@@ -891,8 +891,8 @@ exports[`SectionHeader renders 100% pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={-2.0300000000000002}
-                      x={NaN}
-                      y={NaN}
+                      x={200}
+                      y={205}
                     >
                       <tspan
                         dx={0}
@@ -907,7 +907,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={NaN}
+                        x={200}
                       >
                         
                       </tspan>
@@ -927,7 +927,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                   }
                 >
                   <svg
-                    height={NaN}
+                    height={400}
                     style={
                       Object {
                         "height": "100%",
@@ -935,8 +935,8 @@ exports[`SectionHeader renders 100% pie 1`] = `
                         "width": "100%",
                       }
                     }
-                    viewBox="0 0 NaN NaN"
-                    width={NaN}
+                    viewBox="0 0 400 400"
+                    width={400}
                   />
                 </div>
               </div>
@@ -1447,7 +1447,7 @@ exports[`SectionHeader renders empty pie 1`] = `
               >
                 <svg
                   aria-labelledby="victory-container-1-title victory-container-1-desc"
-                  height={NaN}
+                  height={400}
                   role="img"
                   style={
                     Object {
@@ -1456,12 +1456,12 @@ exports[`SectionHeader renders empty pie 1`] = `
                       "width": "100%",
                     }
                   }
-                  viewBox="0 0 NaN NaN"
-                  width={NaN}
+                  viewBox="0 0 400 400"
+                  width={400}
                 >
                   <g>
                     <path
-                      d="M0,0Z"
+                      d="M1.2246467991473532e-14,-200L0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -1472,10 +1472,10 @@ exports[`SectionHeader renders empty pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(NaN, NaN)"
+                      transform="translate(200, 200)"
                     />
                     <path
-                      d="M0,0Z"
+                      d="M1.2246467991473532e-14,-200L0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -1486,10 +1486,10 @@ exports[`SectionHeader renders empty pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(NaN, NaN)"
+                      transform="translate(200, 200)"
                     />
                     <path
-                      d="M0,0Z"
+                      d="M1.2246467991473532e-14,-200A200,200,0,1,1,-190.88100037590152,59.70296220033882L0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -1500,10 +1500,10 @@ exports[`SectionHeader renders empty pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(NaN, NaN)"
+                      transform="translate(200, 200)"
                     />
                     <path
-                      d="M0,0Z"
+                      d="M-190.88100037590152,59.70296220033882A200,200,0,0,1,1.4089627996560445e-13,-200L0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -1514,14 +1514,14 @@ exports[`SectionHeader renders empty pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(NaN, NaN)"
+                      transform="translate(200, 200)"
                     />
                     <text
                       direction="inherit"
                       dx={0}
                       dy={-2.0300000000000002}
-                      x={NaN}
-                      y={NaN}
+                      x={200}
+                      y={160}
                     >
                       <tspan
                         dx={0}
@@ -1536,7 +1536,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={NaN}
+                        x={200}
                       >
                         
                       </tspan>
@@ -1545,8 +1545,8 @@ exports[`SectionHeader renders empty pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={-2.0300000000000002}
-                      x={NaN}
-                      y={NaN}
+                      x={200}
+                      y={160}
                     >
                       <tspan
                         dx={0}
@@ -1561,7 +1561,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={NaN}
+                        x={200}
                       >
                         
                       </tspan>
@@ -1570,8 +1570,8 @@ exports[`SectionHeader renders empty pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={4.97}
-                      x={NaN}
-                      y={NaN}
+                      x={232}
+                      y={224}
                     >
                       <tspan
                         dx={0}
@@ -1586,7 +1586,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                           }
                         }
                         textAnchor="start"
-                        x={NaN}
+                        x={232}
                       >
                         70%
                       </tspan>
@@ -1595,8 +1595,8 @@ exports[`SectionHeader renders empty pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={4.97}
-                      x={NaN}
-                      y={NaN}
+                      x={168}
+                      y={176}
                     >
                       <tspan
                         dx={0}
@@ -1611,7 +1611,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                           }
                         }
                         textAnchor="end"
-                        x={NaN}
+                        x={168}
                       >
                         30%
                       </tspan>
@@ -1631,7 +1631,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                   }
                 >
                   <svg
-                    height={NaN}
+                    height={400}
                     style={
                       Object {
                         "height": "100%",
@@ -1639,8 +1639,8 @@ exports[`SectionHeader renders empty pie 1`] = `
                         "width": "100%",
                       }
                     }
-                    viewBox="0 0 NaN NaN"
-                    width={NaN}
+                    viewBox="0 0 400 400"
+                    width={400}
                   />
                 </div>
               </div>
@@ -1755,7 +1755,7 @@ exports[`SectionHeader renders empty pie 1`] = `
               >
                 <svg
                   aria-labelledby="victory-container-2-title victory-container-2-desc"
-                  height={NaN}
+                  height={400}
                   role="img"
                   style={
                     Object {
@@ -1764,12 +1764,12 @@ exports[`SectionHeader renders empty pie 1`] = `
                       "width": "100%",
                     }
                   }
-                  viewBox="0 0 NaN NaN"
-                  width={NaN}
+                  viewBox="0 0 400 400"
+                  width={400}
                 >
                   <g>
                     <path
-                      d="M0,0Z"
+                      d="M1.2246467991473532e-14,-200L0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -1780,10 +1780,10 @@ exports[`SectionHeader renders empty pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(NaN, NaN)"
+                      transform="translate(200, 200)"
                     />
                     <path
-                      d="M0,0Z"
+                      d="M1.2246467991473532e-14,-200L0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -1794,10 +1794,10 @@ exports[`SectionHeader renders empty pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(NaN, NaN)"
+                      transform="translate(200, 200)"
                     />
                     <path
-                      d="M0,0Z"
+                      d="M1.2246467991473532e-14,-200L0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -1808,10 +1808,10 @@ exports[`SectionHeader renders empty pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(NaN, NaN)"
+                      transform="translate(200, 200)"
                     />
                     <path
-                      d="M0,0Z"
+                      d="M1.2246467991473532e-14,-200L0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -1822,14 +1822,14 @@ exports[`SectionHeader renders empty pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(NaN, NaN)"
+                      transform="translate(200, 200)"
                     />
                     <text
                       direction="inherit"
                       dx={0}
                       dy={-2.0300000000000002}
-                      x={NaN}
-                      y={NaN}
+                      x={200}
+                      y={160}
                     >
                       <tspan
                         dx={0}
@@ -1844,7 +1844,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={NaN}
+                        x={200}
                       >
                         
                       </tspan>
@@ -1853,8 +1853,8 @@ exports[`SectionHeader renders empty pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={-2.0300000000000002}
-                      x={NaN}
-                      y={NaN}
+                      x={200}
+                      y={160}
                     >
                       <tspan
                         dx={0}
@@ -1869,7 +1869,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={NaN}
+                        x={200}
                       >
                         
                       </tspan>
@@ -1878,8 +1878,8 @@ exports[`SectionHeader renders empty pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={-2.0300000000000002}
-                      x={NaN}
-                      y={NaN}
+                      x={200}
+                      y={160}
                     >
                       <tspan
                         dx={0}
@@ -1894,7 +1894,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={NaN}
+                        x={200}
                       >
                         
                       </tspan>
@@ -1903,8 +1903,8 @@ exports[`SectionHeader renders empty pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={-2.0300000000000002}
-                      x={NaN}
-                      y={NaN}
+                      x={200}
+                      y={160}
                     >
                       <tspan
                         dx={0}
@@ -1919,7 +1919,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={NaN}
+                        x={200}
                       >
                         
                       </tspan>
@@ -1939,7 +1939,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                   }
                 >
                   <svg
-                    height={NaN}
+                    height={400}
                     style={
                       Object {
                         "height": "100%",
@@ -1947,8 +1947,8 @@ exports[`SectionHeader renders empty pie 1`] = `
                         "width": "100%",
                       }
                     }
-                    viewBox="0 0 NaN NaN"
-                    width={NaN}
+                    viewBox="0 0 400 400"
+                    width={400}
                   />
                 </div>
               </div>
