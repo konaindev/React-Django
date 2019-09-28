@@ -2,11 +2,12 @@ import cn from "classnames";
 import React from "react";
 import PropTypes from "prop-types";
 import { VictoryPie } from "victory";
-
+import _isNil from "lodash/isNil";
 import BoxRow from "../box_row";
 import ReportSection from "../report_section";
 import { formatCurrencyShorthand, formatPercent } from "../../utils/formatters";
 
+import { SmallNumberBox, SmallCurrencyShorthandBox } from "../small_box_layout";
 import scssVars from "./investment_allocation.scss";
 
 const InvestmentAllocationChart = ({ name, expenses, total }) => {
@@ -95,10 +96,10 @@ const InvestmentAllocationChart = ({ name, expenses, total }) => {
         <div className="investment-allocation__body">
           <div className="investment-allocation__chart">
             <VictoryPie
-              width={scssVars.investmentAllocationPieSize}
-              height={scssVars.investmentAllocationPieSize}
+              width={parseInt(scssVars.investmentAllocationPieSize)}
+              height={parseInt(scssVars.investmentAllocationPieSize)}
               data={data}
-              labelRadius={labelRadius}
+              labelRadius={() => labelRadius}
               labels={getLabel}
               style={pieStyle}
               padding={0}
@@ -155,12 +156,103 @@ InvestmentAllocationChart.propTypes = {
   total: PropTypes.string.isRequired
 };
 
-const InvestmentAllocation = ({ acquisition, retention }) => {
+const formatFourWeekAverages = value => {
+  if (_isNil(value)) {
+    return;
+  }
+  const curValue = formatCurrencyShorthandWithDigit(value);
+  return `4-Week Average: ${curValue}`;
+};
+const romi_tooltip = obj => {
+  const numerator = formatCurrencyShorthand(obj.estimated_revenue_gain, true);
+  const denominator = formatCurrencyShorthand(obj.total, true);
+  return `${numerator} / ${denominator}`;
+};
+/**
+ * @name CampaignInvestmentReport.AcquisitionDetails
+ * @description Component to render campaign acq_investment detail numbers
+ */
+const AcquisitionDetails = ({ report: r }) => {
   return (
-    <BoxRow>
-      <InvestmentAllocationChart name="acquisition" {...acquisition} />
-      <InvestmentAllocationChart name="retention" {...retention} />
-    </BoxRow>
+    <ReportSection name="Acquisition">
+      <SmallNumberBox
+        name="Leased Unit Change"
+        value={r.property.leasing.change}
+        target={r.targets?.property?.leasing?.change}
+        symbolType="sign"
+      />
+      <SmallCurrencyShorthandBox
+        name="Acquisition Investment"
+        value={r.investment.acquisition.total}
+        detail2={formatFourWeekAverages(
+          r.four_week_funnel_averages?.acq_investment
+        )}
+        target={r.targets?.investment?.acquisition?.total}
+        delta={r.deltas?.investment?.acquisition?.total}
+      />
+      <SmallCurrencyShorthandBox
+        name="Est. Acquired Leasing Revenue"
+        value={r.investment.acquisition.estimated_revenue_gain}
+        target={r.targets?.investment?.acquisition?.estimated_revenue_gain}
+        symbolType="sign"
+      />
+      <SmallNumberBox
+        name="Acquisition ROMI"
+        value={r.investment.acquisition.romi}
+        target={r.targets?.investment?.acquisition?.romi}
+        symbolType="multiple"
+        tooltip={romi_tooltip(r.investment.acquisition)}
+      />
+    </ReportSection>
+  );
+};
+const RetentionDetails = ({ report: r }) => {
+  return (
+    <ReportSection name="Retention">
+      <SmallNumberBox
+        name="Lease Renewals"
+        value={r.property.leasing.renewals}
+        target={r.targets?.property?.leasing?.renewals}
+        delta={r.deltas?.property?.leasing?.renewals}
+      />
+      <SmallCurrencyShorthandBox
+        name="Retention Investment"
+        value={r.investment.retention.total}
+        detail2={formatFourWeekAverages(
+          r.four_week_funnel_averages?.ret_investment
+        )}
+        target={r.targets?.investment?.retention?.total}
+        delta={r.deltas?.investment?.retention?.total}
+      />
+      <SmallCurrencyShorthandBox
+        name="Est. Retained Leasing Revenue"
+        value={r.investment.retention.estimated_revenue_gain}
+        target={r.targets?.investment?.retention?.estimated_revenue_gain}
+        symbolType="sign"
+      />
+      <SmallNumberBox
+        name="Retention ROMI"
+        value={r.investment.retention.romi}
+        target={r.targets?.investment?.retention?.romi}
+        symbolType="multiple"
+        tooltip={romi_tooltip(r.investment.retention)}
+      />
+    </ReportSection>
+  );
+};
+
+const InvestmentAllocation = ({ acquisition, retention, report }) => {
+  return (
+    <div>
+      <BoxRow>
+        <AcquisitionDetails report={report} />
+        <RetentionDetails report={report} />
+      </BoxRow>
+      <BoxRow>
+        <InvestmentAllocationChart name="acquisition" {...acquisition} />
+        <InvestmentAllocationChart name="retention" {...retention} />
+      </BoxRow>
+    </div>
   );
 };
 

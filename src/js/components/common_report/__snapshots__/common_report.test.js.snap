@@ -559,19 +559,17 @@ exports[`CommonReport renders baseline report correctly 1`] = `
         </div>
       </div>
     </div>
-    <div
-      className="box-row box-row--normal"
-    >
+    <div>
       <div
-        className="child-wrapper"
-        style={
-          Object {
-            "width": "50.00000%",
-          }
-        }
+        className="box-row box-row--normal"
       >
         <div
-          className="investment-allocation"
+          className="child-wrapper"
+          style={
+            Object {
+              "width": "50.00000%",
+            }
+          }
         >
           <div
             className="report-section"
@@ -582,589 +580,918 @@ exports[`CommonReport renders baseline report correctly 1`] = `
               <p
                 className="section-header__title"
               >
-                acquisition INVESTMENT ALLOCATIONS
+                Acquisition
               </p>
             </div>
             <div
-              className="investment-allocation__body"
+              className="panel panel--default small-box"
             >
               <div
-                className="investment-allocation__chart"
+                className="small-box__labels"
               >
-                <div
-                  className="VictoryContainer"
-                  style={
-                    Object {
-                      "height": "100%",
-                      "pointerEvents": "none",
-                      "position": "relative",
-                      "touchAction": "none",
-                      "width": "100%",
-                    }
-                  }
+                <span
+                  className="small-box__labels__name"
                 >
-                  <svg
-                    aria-labelledby="victory-container-1-title victory-container-1-desc"
-                    height={400}
-                    role="img"
-                    style={
-                      Object {
-                        "height": "100%",
-                        "pointerEvents": "all",
-                        "width": "100%",
-                      }
-                    }
-                    viewBox="0 0 400 400"
-                    width={400}
-                  >
-                    <g>
-                      <path
-                        d="M1.2246467991473532e-14,-200L0,0Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <path
-                        d="M1.2246467991473532e-14,-200L0,0Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <path
-                        d="M1.2246467991473532e-14,-200A200,200,0,1,1,-192.3651286345638,54.73259801441661L0,0Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <path
-                        d="M-192.3651286345638,54.73259801441661A200,200,0,0,1,-3.6739403974420595e-14,-200L0,0Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={-2.0300000000000002}
-                        x={200}
-                        y={160}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="middle"
-                          x={200}
-                        >
-                          
-                        </tspan>
-                      </text>
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={-2.0300000000000002}
-                        x={200}
-                        y={160}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="middle"
-                          x={200}
-                        >
-                          
-                        </tspan>
-                      </text>
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={4.97}
-                        x={232}
-                        y={224}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="start"
-                          x={232}
-                        >
-                          71%
-                        </tspan>
-                      </text>
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={4.97}
-                        x={168}
-                        y={176}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="end"
-                          x={168}
-                        >
-                          29%
-                        </tspan>
-                      </text>
-                    </g>
-                  </svg>
-                  <div
-                    style={
-                      Object {
-                        "height": "100%",
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": "100%",
-                        "zIndex": 99,
-                      }
-                    }
-                  >
-                    <svg
-                      height={400}
-                      style={
-                        Object {
-                          "height": "100%",
-                          "overflow": "visible",
-                          "width": "100%",
-                        }
-                      }
-                      viewBox="0 0 400 400"
-                      width={400}
-                    />
-                  </div>
-                </div>
+                  Leased Unit Change
+                </span>
+                
               </div>
               <div
-                className="investment-allocation__expenses"
+                className="small-box__outer-content"
               >
-                <div
-                  className="investment-allocation__row"
+                <span
+                  className="small-box__inner-content"
                 >
-                  <div
-                    className="investment-allocation__title investment-allocation__title--reputation-building"
+                  <span
+                    className="delta-layout"
                   >
-                    Reputation Building
-                  </div>
-                  <div
-                    className="investment-allocation__value"
-                  >
-                    $20k
-                  </div>
-                </div>
-                <div
-                  className="investment-allocation__row"
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      <span
+                        className="formatted-value-with-symbol__plus"
+                      >
+                        +
+                      </span>
+                      36
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div
+              className="panel panel--default small-box"
+            >
+              <div
+                className="small-box__labels"
+              >
+                <span
+                  className="small-box__labels__name"
                 >
-                  <div
-                    className="investment-allocation__title investment-allocation__title--demand-creation"
-                  >
-                    Demand Creation
-                  </div>
-                  <div
-                    className="investment-allocation__value"
-                  >
-                    $48k
-                  </div>
-                </div>
-                <div
-                  className="investment-allocation__row investment-allocation__row--empty"
+                  Acquisition Investment
+                </span>
+                
+              </div>
+              <div
+                className="small-box__outer-content"
+              >
+                <span
+                  className="small-box__inner-content"
                 >
-                  <div
-                    className="investment-allocation__title investment-allocation__title--leasing-enablement"
+                  <span
+                    className="delta-layout"
                   >
-                    Leasing Enablement
-                  </div>
-                  <div
-                    className="investment-allocation__value"
-                  >
-                    $0
-                  </div>
-                </div>
-                <div
-                  className="investment-allocation__row investment-allocation__row--empty"
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      $68k
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div
+              className="panel panel--default small-box"
+            >
+              <div
+                className="small-box__labels"
+              >
+                <span
+                  className="small-box__labels__name"
                 >
-                  <div
-                    className="investment-allocation__title investment-allocation__title--market-intelligence"
+                  Est. Acquired Leasing Revenue
+                </span>
+                
+              </div>
+              <div
+                className="small-box__outer-content"
+              >
+                <span
+                  className="small-box__inner-content"
+                >
+                  <span
+                    className="delta-layout"
                   >
-                    Market Intelligence
-                  </div>
-                  <div
-                    className="investment-allocation__value"
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      <span
+                        className="formatted-value-with-symbol__plus"
+                      >
+                        +
+                      </span>
+                      $709.2k
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div
+              className="panel panel--default small-box"
+            >
+              <div
+                className="small-box__labels"
+              >
+                <span
+                  className="small-box__labels__name"
+                >
+                  Acquisition ROMI
+                </span>
+                
+              </div>
+              <div
+                className="small-box__outer-content"
+              >
+                <span
+                  className="small-box__inner-content"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                >
+                  <span
+                    className="delta-layout"
                   >
-                    $0
-                  </div>
-                </div>
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      10
+                      <span
+                        className="formatted-value-with-symbol__times"
+                      >
+                        x
+                      </span>
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="child-wrapper"
+          style={
+            Object {
+              "width": "50.00000%",
+            }
+          }
+        >
+          <div
+            className="report-section"
+          >
+            <div
+              className="section-header"
+            >
+              <p
+                className="section-header__title"
+              >
+                Retention
+              </p>
+            </div>
+            <div
+              className="panel panel--default small-box"
+            >
+              <div
+                className="small-box__labels"
+              >
+                <span
+                  className="small-box__labels__name"
+                >
+                  Lease Renewals
+                </span>
+                
+              </div>
+              <div
+                className="small-box__outer-content"
+              >
+                <span
+                  className="small-box__inner-content"
+                >
+                  <span
+                    className="delta-layout"
+                  >
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      94
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div
+              className="panel panel--default small-box"
+            >
+              <div
+                className="small-box__labels"
+              >
+                <span
+                  className="small-box__labels__name"
+                >
+                  Retention Investment
+                </span>
+                
+              </div>
+              <div
+                className="small-box__outer-content"
+              >
+                <span
+                  className="small-box__inner-content"
+                >
+                  <span
+                    className="delta-layout"
+                  >
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      $6k
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div
+              className="panel panel--default small-box"
+            >
+              <div
+                className="small-box__labels"
+              >
+                <span
+                  className="small-box__labels__name"
+                >
+                  Est. Retained Leasing Revenue
+                </span>
+                
+              </div>
+              <div
+                className="small-box__outer-content"
+              >
+                <span
+                  className="small-box__inner-content"
+                >
+                  <span
+                    className="delta-layout"
+                  >
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      <span
+                        className="formatted-value-with-symbol__plus"
+                      >
+                        +
+                      </span>
+                      $2.1m
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div
+              className="panel panel--default small-box"
+            >
+              <div
+                className="small-box__labels"
+              >
+                <span
+                  className="small-box__labels__name"
+                >
+                  Retention ROMI
+                </span>
+                
+              </div>
+              <div
+                className="small-box__outer-content"
+              >
+                <span
+                  className="small-box__inner-content"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                >
+                  <span
+                    className="delta-layout"
+                  >
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      346
+                      <span
+                        className="formatted-value-with-symbol__times"
+                      >
+                        x
+                      </span>
+                    </span>
+                  </span>
+                </span>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div
-        className="child-wrapper"
-        style={
-          Object {
-            "width": "50.00000%",
-          }
-        }
+        className="box-row box-row--normal"
       >
         <div
-          className="investment-allocation"
+          className="child-wrapper"
+          style={
+            Object {
+              "width": "50.00000%",
+            }
+          }
         >
           <div
-            className="report-section"
+            className="investment-allocation"
           >
             <div
-              className="section-header"
-            >
-              <p
-                className="section-header__title"
-              >
-                retention INVESTMENT ALLOCATIONS
-              </p>
-            </div>
-            <div
-              className="investment-allocation__body"
+              className="report-section"
             >
               <div
-                className="investment-allocation__chart"
+                className="section-header"
+              >
+                <p
+                  className="section-header__title"
+                >
+                  acquisition INVESTMENT ALLOCATIONS
+                </p>
+              </div>
+              <div
+                className="investment-allocation__body"
               >
                 <div
-                  className="VictoryContainer"
-                  style={
-                    Object {
-                      "height": "100%",
-                      "pointerEvents": "none",
-                      "position": "relative",
-                      "touchAction": "none",
-                      "width": "100%",
-                    }
-                  }
+                  className="investment-allocation__chart"
                 >
-                  <svg
-                    aria-labelledby="victory-container-2-title victory-container-2-desc"
-                    height={400}
-                    role="img"
-                    style={
-                      Object {
-                        "height": "100%",
-                        "pointerEvents": "all",
-                        "width": "100%",
-                      }
-                    }
-                    viewBox="0 0 400 400"
-                    width={400}
-                  >
-                    <g>
-                      <path
-                        d="M1.2246467991473532e-14,-200L0,0Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <path
-                        d="M1.2246467991473532e-14,-200A200,200,0,1,1,-1.2246467991473532e-14,200A200,200,0,1,1,1.2246467991473532e-14,-200Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <path
-                        d="M-2.1437508791444564e-13,-200L0,0Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <path
-                        d="M-2.1437508791444564e-13,-200L0,0Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={-2.0300000000000002}
-                        x={200}
-                        y={205}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="middle"
-                          x={200}
-                        >
-                          
-                        </tspan>
-                      </text>
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={11.969999999999999}
-                        x={200}
-                        y={195}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="middle"
-                          x={200}
-                        >
-                          100%
-                        </tspan>
-                      </text>
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={-2.0300000000000002}
-                        x={200}
-                        y={205}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="middle"
-                          x={200}
-                        >
-                          
-                        </tspan>
-                      </text>
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={-2.0300000000000002}
-                        x={200}
-                        y={205}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="middle"
-                          x={200}
-                        >
-                          
-                        </tspan>
-                      </text>
-                    </g>
-                  </svg>
                   <div
+                    className="VictoryContainer"
                     style={
                       Object {
                         "height": "100%",
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 0,
+                        "pointerEvents": "none",
+                        "position": "relative",
+                        "touchAction": "none",
                         "width": "100%",
-                        "zIndex": 99,
                       }
                     }
                   >
                     <svg
-                      height={400}
+                      aria-labelledby="victory-container-1-title victory-container-1-desc"
+                      height={NaN}
+                      role="img"
                       style={
                         Object {
                           "height": "100%",
-                          "overflow": "visible",
+                          "pointerEvents": "all",
                           "width": "100%",
                         }
                       }
-                      viewBox="0 0 400 400"
-                      width={400}
-                    />
+                      viewBox="0 0 NaN NaN"
+                      width={NaN}
+                    >
+                      <g>
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={-2.0300000000000002}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="middle"
+                            x={NaN}
+                          >
+                            
+                          </tspan>
+                        </text>
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={-2.0300000000000002}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="middle"
+                            x={NaN}
+                          >
+                            
+                          </tspan>
+                        </text>
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={4.97}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="start"
+                            x={NaN}
+                          >
+                            71%
+                          </tspan>
+                        </text>
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={4.97}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="end"
+                            x={NaN}
+                          >
+                            29%
+                          </tspan>
+                        </text>
+                      </g>
+                    </svg>
+                    <div
+                      style={
+                        Object {
+                          "height": "100%",
+                          "left": 0,
+                          "position": "absolute",
+                          "top": 0,
+                          "width": "100%",
+                          "zIndex": 99,
+                        }
+                      }
+                    >
+                      <svg
+                        height={NaN}
+                        style={
+                          Object {
+                            "height": "100%",
+                            "overflow": "visible",
+                            "width": "100%",
+                          }
+                        }
+                        viewBox="0 0 NaN NaN"
+                        width={NaN}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="investment-allocation__expenses"
+                >
+                  <div
+                    className="investment-allocation__row"
+                  >
+                    <div
+                      className="investment-allocation__title investment-allocation__title--reputation-building"
+                    >
+                      Reputation Building
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $20k
+                    </div>
+                  </div>
+                  <div
+                    className="investment-allocation__row"
+                  >
+                    <div
+                      className="investment-allocation__title investment-allocation__title--demand-creation"
+                    >
+                      Demand Creation
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $48k
+                    </div>
+                  </div>
+                  <div
+                    className="investment-allocation__row investment-allocation__row--empty"
+                  >
+                    <div
+                      className="investment-allocation__title investment-allocation__title--leasing-enablement"
+                    >
+                      Leasing Enablement
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $0
+                    </div>
+                  </div>
+                  <div
+                    className="investment-allocation__row investment-allocation__row--empty"
+                  >
+                    <div
+                      className="investment-allocation__title investment-allocation__title--market-intelligence"
+                    >
+                      Market Intelligence
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $0
+                    </div>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="child-wrapper"
+          style={
+            Object {
+              "width": "50.00000%",
+            }
+          }
+        >
+          <div
+            className="investment-allocation"
+          >
+            <div
+              className="report-section"
+            >
               <div
-                className="investment-allocation__expenses"
+                className="section-header"
+              >
+                <p
+                  className="section-header__title"
+                >
+                  retention INVESTMENT ALLOCATIONS
+                </p>
+              </div>
+              <div
+                className="investment-allocation__body"
               >
                 <div
-                  className="investment-allocation__row investment-allocation__row--empty"
+                  className="investment-allocation__chart"
                 >
                   <div
-                    className="investment-allocation__title investment-allocation__title--reputation-building"
+                    className="VictoryContainer"
+                    style={
+                      Object {
+                        "height": "100%",
+                        "pointerEvents": "none",
+                        "position": "relative",
+                        "touchAction": "none",
+                        "width": "100%",
+                      }
+                    }
                   >
-                    Reputation Building
-                  </div>
-                  <div
-                    className="investment-allocation__value"
-                  >
-                    $0
+                    <svg
+                      aria-labelledby="victory-container-2-title victory-container-2-desc"
+                      height={NaN}
+                      role="img"
+                      style={
+                        Object {
+                          "height": "100%",
+                          "pointerEvents": "all",
+                          "width": "100%",
+                        }
+                      }
+                      viewBox="0 0 NaN NaN"
+                      width={NaN}
+                    >
+                      <g>
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={-2.0300000000000002}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="middle"
+                            x={NaN}
+                          >
+                            
+                          </tspan>
+                        </text>
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={11.969999999999999}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="middle"
+                            x={NaN}
+                          >
+                            100%
+                          </tspan>
+                        </text>
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={-2.0300000000000002}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="middle"
+                            x={NaN}
+                          >
+                            
+                          </tspan>
+                        </text>
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={-2.0300000000000002}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="middle"
+                            x={NaN}
+                          >
+                            
+                          </tspan>
+                        </text>
+                      </g>
+                    </svg>
+                    <div
+                      style={
+                        Object {
+                          "height": "100%",
+                          "left": 0,
+                          "position": "absolute",
+                          "top": 0,
+                          "width": "100%",
+                          "zIndex": 99,
+                        }
+                      }
+                    >
+                      <svg
+                        height={NaN}
+                        style={
+                          Object {
+                            "height": "100%",
+                            "overflow": "visible",
+                            "width": "100%",
+                          }
+                        }
+                        viewBox="0 0 NaN NaN"
+                        width={NaN}
+                      />
+                    </div>
                   </div>
                 </div>
                 <div
-                  className="investment-allocation__row investment-allocation__row--empty"
+                  className="investment-allocation__expenses"
                 >
                   <div
-                    className="investment-allocation__title investment-allocation__title--demand-creation"
+                    className="investment-allocation__row investment-allocation__row--empty"
                   >
-                    Demand Creation
+                    <div
+                      className="investment-allocation__title investment-allocation__title--reputation-building"
+                    >
+                      Reputation Building
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $0
+                    </div>
                   </div>
                   <div
-                    className="investment-allocation__value"
+                    className="investment-allocation__row investment-allocation__row--empty"
                   >
-                    $0
-                  </div>
-                </div>
-                <div
-                  className="investment-allocation__row"
-                >
-                  <div
-                    className="investment-allocation__title investment-allocation__title--leasing-enablement"
-                  >
-                    Leasing Enablement
-                  </div>
-                  <div
-                    className="investment-allocation__value"
-                  >
-                    $6k
-                  </div>
-                </div>
-                <div
-                  className="investment-allocation__row investment-allocation__row--empty"
-                >
-                  <div
-                    className="investment-allocation__title investment-allocation__title--market-intelligence"
-                  >
-                    Market Intelligence
+                    <div
+                      className="investment-allocation__title investment-allocation__title--demand-creation"
+                    >
+                      Demand Creation
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $0
+                    </div>
                   </div>
                   <div
-                    className="investment-allocation__value"
+                    className="investment-allocation__row"
                   >
-                    $0
+                    <div
+                      className="investment-allocation__title investment-allocation__title--leasing-enablement"
+                    >
+                      Leasing Enablement
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $6k
+                    </div>
+                  </div>
+                  <div
+                    className="investment-allocation__row investment-allocation__row--empty"
+                  >
+                    <div
+                      className="investment-allocation__title investment-allocation__title--market-intelligence"
+                    >
+                      Market Intelligence
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $0
+                    </div>
                   </div>
                 </div>
               </div>
@@ -11288,19 +11615,17 @@ exports[`CommonReport renders performance report correctly 1`] = `
         </div>
       </div>
     </div>
-    <div
-      className="box-row box-row--normal"
-    >
+    <div>
       <div
-        className="child-wrapper"
-        style={
-          Object {
-            "width": "50.00000%",
-          }
-        }
+        className="box-row box-row--normal"
       >
         <div
-          className="investment-allocation"
+          className="child-wrapper"
+          style={
+            Object {
+              "width": "50.00000%",
+            }
+          }
         >
           <div
             className="report-section"
@@ -11311,589 +11636,983 @@ exports[`CommonReport renders performance report correctly 1`] = `
               <p
                 className="section-header__title"
               >
-                acquisition INVESTMENT ALLOCATIONS
+                Acquisition
               </p>
             </div>
             <div
-              className="investment-allocation__body"
+              className="panel panel--default small-box"
             >
               <div
-                className="investment-allocation__chart"
+                className="small-box__labels"
               >
-                <div
-                  className="VictoryContainer"
-                  style={
-                    Object {
-                      "height": "100%",
-                      "pointerEvents": "none",
-                      "position": "relative",
-                      "touchAction": "none",
-                      "width": "100%",
-                    }
-                  }
+                <span
+                  className="small-box__labels__name"
                 >
-                  <svg
-                    aria-labelledby="victory-container-11-title victory-container-11-desc"
-                    height={400}
-                    role="img"
-                    style={
-                      Object {
-                        "height": "100%",
-                        "pointerEvents": "all",
-                        "width": "100%",
-                      }
-                    }
-                    viewBox="0 0 400 400"
-                    width={400}
-                  >
-                    <g>
-                      <path
-                        d="M1.2246467991473532e-14,-200A200,200,0,0,1,156.36629649360597,-124.6979603717467L0,0Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <path
-                        d="M156.36629649360597,-124.6979603717467A200,200,0,0,1,194.98558243636472,-44.50418679126288L0,0Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <path
-                        d="M194.98558243636472,-44.50418679126288A200,200,0,1,1,-86.77674782351166,-180.19377358048382L0,0Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <path
-                        d="M-86.77674782351166,-180.19377358048382A200,200,0,0,1,-3.6739403974420595e-14,-200L0,0Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={-2.0300000000000002}
-                        x={217}
-                        y={164}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="middle"
-                          x={217}
-                        >
-                          14%
-                        </tspan>
-                      </text>
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={4.97}
-                        x={236}
-                        y={183}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="start"
-                          x={236}
-                        >
-                          7%
-                        </tspan>
-                      </text>
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={11.969999999999999}
-                        x={183}
-                        y={236}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="middle"
-                          x={183}
-                        >
-                          71%
-                        </tspan>
-                      </text>
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={-2.0300000000000002}
-                        x={191}
-                        y={161}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="middle"
-                          x={191}
-                        >
-                          7%
-                        </tspan>
-                      </text>
-                    </g>
-                  </svg>
-                  <div
-                    style={
-                      Object {
-                        "height": "100%",
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": "100%",
-                        "zIndex": 99,
-                      }
-                    }
-                  >
-                    <svg
-                      height={400}
-                      style={
-                        Object {
-                          "height": "100%",
-                          "overflow": "visible",
-                          "width": "100%",
-                        }
-                      }
-                      viewBox="0 0 400 400"
-                      width={400}
-                    />
-                  </div>
-                </div>
+                  Leased Unit Change
+                </span>
+                <span
+                  className="small-box__labels__detail"
+                >
+                  Target: 11
+                </span>
               </div>
               <div
-                className="investment-allocation__expenses"
+                className="small-box__outer-content"
               >
-                <div
-                  className="investment-allocation__row"
+                <span
+                  className="small-box__inner-content"
                 >
-                  <div
-                    className="investment-allocation__title investment-allocation__title--reputation-building"
+                  <span
+                    className="delta-layout"
                   >
-                    Reputation Building
-                  </div>
-                  <div
-                    className="investment-allocation__value"
-                  >
-                    $1k
-                  </div>
-                </div>
-                <div
-                  className="investment-allocation__row"
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      <span
+                        className="formatted-value-with-symbol__plus"
+                      >
+                        +
+                      </span>
+                      9
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div
+              className="panel panel--default small-box"
+            >
+              <div
+                className="small-box__labels"
+              >
+                <span
+                  className="small-box__labels__name"
                 >
-                  <div
-                    className="investment-allocation__title investment-allocation__title--demand-creation"
-                  >
-                    Demand Creation
-                  </div>
-                  <div
-                    className="investment-allocation__value"
-                  >
-                    $10k
-                  </div>
-                </div>
-                <div
-                  className="investment-allocation__row"
+                  Acquisition Investment
+                </span>
+                <span
+                  className="small-box__labels__detail"
                 >
-                  <div
-                    className="investment-allocation__title investment-allocation__title--leasing-enablement"
-                  >
-                    Leasing Enablement
-                  </div>
-                  <div
-                    className="investment-allocation__value"
-                  >
-                    $1k
-                  </div>
-                </div>
-                <div
-                  className="investment-allocation__row"
+                  Target: $15k
+                </span>
+              </div>
+              <div
+                className="small-box__outer-content"
+              >
+                <span
+                  className="small-box__inner-content"
                 >
-                  <div
-                    className="investment-allocation__title investment-allocation__title--market-intelligence"
+                  <span
+                    className="delta-layout"
                   >
-                    Market Intelligence
-                  </div>
-                  <div
-                    className="investment-allocation__value"
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      $14k
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div
+              className="panel panel--default small-box"
+            >
+              <div
+                className="small-box__labels"
+              >
+                <span
+                  className="small-box__labels__name"
+                >
+                  Est. Acquired Leasing Revenue
+                </span>
+                <span
+                  className="small-box__labels__detail"
+                >
+                  Target: $228.5k
+                </span>
+              </div>
+              <div
+                className="small-box__outer-content"
+              >
+                <span
+                  className="small-box__inner-content"
+                >
+                  <span
+                    className="delta-layout"
                   >
-                    $2k
-                  </div>
-                </div>
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      <span
+                        className="formatted-value-with-symbol__plus"
+                      >
+                        +
+                      </span>
+                      $199k
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div
+              className="panel panel--default small-box"
+            >
+              <div
+                className="small-box__labels"
+              >
+                <span
+                  className="small-box__labels__name"
+                >
+                  Acquisition ROMI
+                </span>
+                <span
+                  className="small-box__labels__detail"
+                >
+                  Target: 7
+                </span>
+              </div>
+              <div
+                className="small-box__outer-content"
+              >
+                <span
+                  className="small-box__inner-content"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                >
+                  <span
+                    className="delta-layout"
+                  >
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      14
+                      <span
+                        className="formatted-value-with-symbol__times"
+                      >
+                        x
+                      </span>
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="child-wrapper"
+          style={
+            Object {
+              "width": "50.00000%",
+            }
+          }
+        >
+          <div
+            className="report-section"
+          >
+            <div
+              className="section-header"
+            >
+              <p
+                className="section-header__title"
+              >
+                Retention
+              </p>
+            </div>
+            <div
+              className="panel panel--default small-box"
+            >
+              <div
+                className="small-box__labels"
+              >
+                <span
+                  className="small-box__labels__name"
+                >
+                  Lease Renewals
+                </span>
+                <span
+                  className="small-box__labels__detail"
+                >
+                  Target: 10
+                </span>
+              </div>
+              <div
+                className="small-box__outer-content"
+              >
+                <span
+                  className="small-box__inner-content"
+                >
+                  <span
+                    className="delta-layout"
+                  >
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      7
+                    </span>
+                    <span
+                      className="delta-layout__section"
+                    >
+                      <div
+                        className="delta-indicator"
+                      >
+                        <span
+                          className="delta-indicator__delta"
+                        >
+                          2
+                        </span>
+                         
+                        <span
+                          className="delta-indicator__arrow delta-indicator__trend-up"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            color="inherit"
+                            focusable="false"
+                            height={5}
+                            role="presentation"
+                            viewBox="0 0 10 5"
+                            width={10}
+                          >
+                            <path
+                              d="M5 0l5 5H0z"
+                              fill="currentColor"
+                              fillRule="evenodd"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div
+              className="panel panel--default small-box"
+            >
+              <div
+                className="small-box__labels"
+              >
+                <span
+                  className="small-box__labels__name"
+                >
+                  Retention Investment
+                </span>
+                <span
+                  className="small-box__labels__detail"
+                >
+                  Target: $2k
+                </span>
+              </div>
+              <div
+                className="small-box__outer-content"
+              >
+                <span
+                  className="small-box__inner-content"
+                >
+                  <span
+                    className="delta-layout"
+                  >
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      $2k
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div
+              className="panel panel--default small-box"
+            >
+              <div
+                className="small-box__labels"
+              >
+                <span
+                  className="small-box__labels__name"
+                >
+                  Est. Retained Leasing Revenue
+                </span>
+                <span
+                  className="small-box__labels__detail"
+                >
+                  Target: $266.6k
+                </span>
+              </div>
+              <div
+                className="small-box__outer-content"
+              >
+                <span
+                  className="small-box__inner-content"
+                >
+                  <span
+                    className="delta-layout"
+                  >
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      <span
+                        className="formatted-value-with-symbol__plus"
+                      >
+                        +
+                      </span>
+                      $155.1k
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div
+              className="panel panel--default small-box"
+            >
+              <div
+                className="small-box__labels"
+              >
+                <span
+                  className="small-box__labels__name"
+                >
+                  Retention ROMI
+                </span>
+                <span
+                  className="small-box__labels__detail"
+                >
+                  Target: 142
+                </span>
+              </div>
+              <div
+                className="small-box__outer-content"
+              >
+                <span
+                  className="small-box__inner-content"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                >
+                  <span
+                    className="delta-layout"
+                  >
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      78
+                      <span
+                        className="formatted-value-with-symbol__times"
+                      >
+                        x
+                      </span>
+                    </span>
+                  </span>
+                </span>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div
-        className="child-wrapper"
-        style={
-          Object {
-            "width": "50.00000%",
-          }
-        }
+        className="box-row box-row--normal"
       >
         <div
-          className="investment-allocation"
+          className="child-wrapper"
+          style={
+            Object {
+              "width": "50.00000%",
+            }
+          }
         >
           <div
-            className="report-section"
+            className="investment-allocation"
           >
             <div
-              className="section-header"
-            >
-              <p
-                className="section-header__title"
-              >
-                retention INVESTMENT ALLOCATIONS
-              </p>
-            </div>
-            <div
-              className="investment-allocation__body"
+              className="report-section"
             >
               <div
-                className="investment-allocation__chart"
+                className="section-header"
+              >
+                <p
+                  className="section-header__title"
+                >
+                  acquisition INVESTMENT ALLOCATIONS
+                </p>
+              </div>
+              <div
+                className="investment-allocation__body"
               >
                 <div
-                  className="VictoryContainer"
-                  style={
-                    Object {
-                      "height": "100%",
-                      "pointerEvents": "none",
-                      "position": "relative",
-                      "touchAction": "none",
-                      "width": "100%",
-                    }
-                  }
+                  className="investment-allocation__chart"
                 >
-                  <svg
-                    aria-labelledby="victory-container-12-title victory-container-12-desc"
-                    height={400}
-                    role="img"
-                    style={
-                      Object {
-                        "height": "100%",
-                        "pointerEvents": "all",
-                        "width": "100%",
-                      }
-                    }
-                    viewBox="0 0 400 400"
-                    width={400}
-                  >
-                    <g>
-                      <path
-                        d="M1.2246467991473532e-14,-200L0,0Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <path
-                        d="M1.2246467991473532e-14,-200A200,200,0,1,1,-1.2246467991473532e-14,200A200,200,0,1,1,1.2246467991473532e-14,-200Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <path
-                        d="M-3.6739403974420595e-14,-200L0,0Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <path
-                        d="M-3.6739403974420595e-14,-200L0,0Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={-2.0300000000000002}
-                        x={200}
-                        y={205}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="middle"
-                          x={200}
-                        >
-                          
-                        </tspan>
-                      </text>
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={11.969999999999999}
-                        x={200}
-                        y={195}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="middle"
-                          x={200}
-                        >
-                          100%
-                        </tspan>
-                      </text>
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={-2.0300000000000002}
-                        x={200}
-                        y={205}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="middle"
-                          x={200}
-                        >
-                          
-                        </tspan>
-                      </text>
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={-2.0300000000000002}
-                        x={200}
-                        y={205}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="middle"
-                          x={200}
-                        >
-                          
-                        </tspan>
-                      </text>
-                    </g>
-                  </svg>
                   <div
+                    className="VictoryContainer"
                     style={
                       Object {
                         "height": "100%",
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 0,
+                        "pointerEvents": "none",
+                        "position": "relative",
+                        "touchAction": "none",
                         "width": "100%",
-                        "zIndex": 99,
                       }
                     }
                   >
                     <svg
-                      height={400}
+                      aria-labelledby="victory-container-11-title victory-container-11-desc"
+                      height={NaN}
+                      role="img"
                       style={
                         Object {
                           "height": "100%",
-                          "overflow": "visible",
+                          "pointerEvents": "all",
                           "width": "100%",
                         }
                       }
-                      viewBox="0 0 400 400"
-                      width={400}
-                    />
+                      viewBox="0 0 NaN NaN"
+                      width={NaN}
+                    >
+                      <g>
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={-2.0300000000000002}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="middle"
+                            x={NaN}
+                          >
+                            14%
+                          </tspan>
+                        </text>
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={4.97}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="start"
+                            x={NaN}
+                          >
+                            7%
+                          </tspan>
+                        </text>
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={11.969999999999999}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="middle"
+                            x={NaN}
+                          >
+                            71%
+                          </tspan>
+                        </text>
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={-2.0300000000000002}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="middle"
+                            x={NaN}
+                          >
+                            7%
+                          </tspan>
+                        </text>
+                      </g>
+                    </svg>
+                    <div
+                      style={
+                        Object {
+                          "height": "100%",
+                          "left": 0,
+                          "position": "absolute",
+                          "top": 0,
+                          "width": "100%",
+                          "zIndex": 99,
+                        }
+                      }
+                    >
+                      <svg
+                        height={NaN}
+                        style={
+                          Object {
+                            "height": "100%",
+                            "overflow": "visible",
+                            "width": "100%",
+                          }
+                        }
+                        viewBox="0 0 NaN NaN"
+                        width={NaN}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="investment-allocation__expenses"
+                >
+                  <div
+                    className="investment-allocation__row"
+                  >
+                    <div
+                      className="investment-allocation__title investment-allocation__title--reputation-building"
+                    >
+                      Reputation Building
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $1k
+                    </div>
+                  </div>
+                  <div
+                    className="investment-allocation__row"
+                  >
+                    <div
+                      className="investment-allocation__title investment-allocation__title--demand-creation"
+                    >
+                      Demand Creation
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $10k
+                    </div>
+                  </div>
+                  <div
+                    className="investment-allocation__row"
+                  >
+                    <div
+                      className="investment-allocation__title investment-allocation__title--leasing-enablement"
+                    >
+                      Leasing Enablement
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $1k
+                    </div>
+                  </div>
+                  <div
+                    className="investment-allocation__row"
+                  >
+                    <div
+                      className="investment-allocation__title investment-allocation__title--market-intelligence"
+                    >
+                      Market Intelligence
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $2k
+                    </div>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="child-wrapper"
+          style={
+            Object {
+              "width": "50.00000%",
+            }
+          }
+        >
+          <div
+            className="investment-allocation"
+          >
+            <div
+              className="report-section"
+            >
               <div
-                className="investment-allocation__expenses"
+                className="section-header"
+              >
+                <p
+                  className="section-header__title"
+                >
+                  retention INVESTMENT ALLOCATIONS
+                </p>
+              </div>
+              <div
+                className="investment-allocation__body"
               >
                 <div
-                  className="investment-allocation__row investment-allocation__row--empty"
+                  className="investment-allocation__chart"
                 >
                   <div
-                    className="investment-allocation__title investment-allocation__title--reputation-building"
+                    className="VictoryContainer"
+                    style={
+                      Object {
+                        "height": "100%",
+                        "pointerEvents": "none",
+                        "position": "relative",
+                        "touchAction": "none",
+                        "width": "100%",
+                      }
+                    }
                   >
-                    Reputation Building
-                  </div>
-                  <div
-                    className="investment-allocation__value"
-                  >
-                    $0
+                    <svg
+                      aria-labelledby="victory-container-12-title victory-container-12-desc"
+                      height={NaN}
+                      role="img"
+                      style={
+                        Object {
+                          "height": "100%",
+                          "pointerEvents": "all",
+                          "width": "100%",
+                        }
+                      }
+                      viewBox="0 0 NaN NaN"
+                      width={NaN}
+                    >
+                      <g>
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={-2.0300000000000002}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="middle"
+                            x={NaN}
+                          >
+                            
+                          </tspan>
+                        </text>
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={11.969999999999999}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="middle"
+                            x={NaN}
+                          >
+                            100%
+                          </tspan>
+                        </text>
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={-2.0300000000000002}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="middle"
+                            x={NaN}
+                          >
+                            
+                          </tspan>
+                        </text>
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={-2.0300000000000002}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="middle"
+                            x={NaN}
+                          >
+                            
+                          </tspan>
+                        </text>
+                      </g>
+                    </svg>
+                    <div
+                      style={
+                        Object {
+                          "height": "100%",
+                          "left": 0,
+                          "position": "absolute",
+                          "top": 0,
+                          "width": "100%",
+                          "zIndex": 99,
+                        }
+                      }
+                    >
+                      <svg
+                        height={NaN}
+                        style={
+                          Object {
+                            "height": "100%",
+                            "overflow": "visible",
+                            "width": "100%",
+                          }
+                        }
+                        viewBox="0 0 NaN NaN"
+                        width={NaN}
+                      />
+                    </div>
                   </div>
                 </div>
                 <div
-                  className="investment-allocation__row investment-allocation__row--empty"
+                  className="investment-allocation__expenses"
                 >
                   <div
-                    className="investment-allocation__title investment-allocation__title--demand-creation"
+                    className="investment-allocation__row investment-allocation__row--empty"
                   >
-                    Demand Creation
+                    <div
+                      className="investment-allocation__title investment-allocation__title--reputation-building"
+                    >
+                      Reputation Building
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $0
+                    </div>
                   </div>
                   <div
-                    className="investment-allocation__value"
+                    className="investment-allocation__row investment-allocation__row--empty"
                   >
-                    $0
-                  </div>
-                </div>
-                <div
-                  className="investment-allocation__row"
-                >
-                  <div
-                    className="investment-allocation__title investment-allocation__title--leasing-enablement"
-                  >
-                    Leasing Enablement
-                  </div>
-                  <div
-                    className="investment-allocation__value"
-                  >
-                    $2k
-                  </div>
-                </div>
-                <div
-                  className="investment-allocation__row investment-allocation__row--empty"
-                >
-                  <div
-                    className="investment-allocation__title investment-allocation__title--market-intelligence"
-                  >
-                    Market Intelligence
+                    <div
+                      className="investment-allocation__title investment-allocation__title--demand-creation"
+                    >
+                      Demand Creation
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $0
+                    </div>
                   </div>
                   <div
-                    className="investment-allocation__value"
+                    className="investment-allocation__row"
                   >
-                    $0
+                    <div
+                      className="investment-allocation__title investment-allocation__title--leasing-enablement"
+                    >
+                      Leasing Enablement
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $2k
+                    </div>
+                  </div>
+                  <div
+                    className="investment-allocation__row investment-allocation__row--empty"
+                  >
+                    <div
+                      className="investment-allocation__title investment-allocation__title--market-intelligence"
+                    >
+                      Market Intelligence
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $0
+                    </div>
                   </div>
                 </div>
               </div>
@@ -15194,19 +15913,17 @@ exports[`CommonReport renders with date span correctly 1`] = `
         </div>
       </div>
     </div>
-    <div
-      className="box-row box-row--normal"
-    >
+    <div>
       <div
-        className="child-wrapper"
-        style={
-          Object {
-            "width": "50.00000%",
-          }
-        }
+        className="box-row box-row--normal"
       >
         <div
-          className="investment-allocation"
+          className="child-wrapper"
+          style={
+            Object {
+              "width": "50.00000%",
+            }
+          }
         >
           <div
             className="report-section"
@@ -15217,589 +15934,983 @@ exports[`CommonReport renders with date span correctly 1`] = `
               <p
                 className="section-header__title"
               >
-                acquisition INVESTMENT ALLOCATIONS
+                Acquisition
               </p>
             </div>
             <div
-              className="investment-allocation__body"
+              className="panel panel--default small-box"
             >
               <div
-                className="investment-allocation__chart"
+                className="small-box__labels"
               >
-                <div
-                  className="VictoryContainer"
-                  style={
-                    Object {
-                      "height": "100%",
-                      "pointerEvents": "none",
-                      "position": "relative",
-                      "touchAction": "none",
-                      "width": "100%",
-                    }
-                  }
+                <span
+                  className="small-box__labels__name"
                 >
-                  <svg
-                    aria-labelledby="victory-container-27-title victory-container-27-desc"
-                    height={400}
-                    role="img"
-                    style={
-                      Object {
-                        "height": "100%",
-                        "pointerEvents": "all",
-                        "width": "100%",
-                      }
-                    }
-                    viewBox="0 0 400 400"
-                    width={400}
-                  >
-                    <g>
-                      <path
-                        d="M1.2246467991473532e-14,-200A200,200,0,0,1,156.36629649360597,-124.6979603717467L0,0Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <path
-                        d="M156.36629649360597,-124.6979603717467A200,200,0,0,1,194.98558243636472,-44.50418679126288L0,0Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <path
-                        d="M194.98558243636472,-44.50418679126288A200,200,0,1,1,-86.77674782351166,-180.19377358048382L0,0Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <path
-                        d="M-86.77674782351166,-180.19377358048382A200,200,0,0,1,-3.6739403974420595e-14,-200L0,0Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={-2.0300000000000002}
-                        x={217}
-                        y={164}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="middle"
-                          x={217}
-                        >
-                          14%
-                        </tspan>
-                      </text>
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={4.97}
-                        x={236}
-                        y={183}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="start"
-                          x={236}
-                        >
-                          7%
-                        </tspan>
-                      </text>
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={11.969999999999999}
-                        x={183}
-                        y={236}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="middle"
-                          x={183}
-                        >
-                          71%
-                        </tspan>
-                      </text>
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={-2.0300000000000002}
-                        x={191}
-                        y={161}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="middle"
-                          x={191}
-                        >
-                          7%
-                        </tspan>
-                      </text>
-                    </g>
-                  </svg>
-                  <div
-                    style={
-                      Object {
-                        "height": "100%",
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 0,
-                        "width": "100%",
-                        "zIndex": 99,
-                      }
-                    }
-                  >
-                    <svg
-                      height={400}
-                      style={
-                        Object {
-                          "height": "100%",
-                          "overflow": "visible",
-                          "width": "100%",
-                        }
-                      }
-                      viewBox="0 0 400 400"
-                      width={400}
-                    />
-                  </div>
-                </div>
+                  Leased Unit Change
+                </span>
+                <span
+                  className="small-box__labels__detail"
+                >
+                  Target: 11
+                </span>
               </div>
               <div
-                className="investment-allocation__expenses"
+                className="small-box__outer-content"
               >
-                <div
-                  className="investment-allocation__row"
+                <span
+                  className="small-box__inner-content"
                 >
-                  <div
-                    className="investment-allocation__title investment-allocation__title--reputation-building"
+                  <span
+                    className="delta-layout"
                   >
-                    Reputation Building
-                  </div>
-                  <div
-                    className="investment-allocation__value"
-                  >
-                    $1k
-                  </div>
-                </div>
-                <div
-                  className="investment-allocation__row"
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      <span
+                        className="formatted-value-with-symbol__plus"
+                      >
+                        +
+                      </span>
+                      9
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div
+              className="panel panel--default small-box"
+            >
+              <div
+                className="small-box__labels"
+              >
+                <span
+                  className="small-box__labels__name"
                 >
-                  <div
-                    className="investment-allocation__title investment-allocation__title--demand-creation"
-                  >
-                    Demand Creation
-                  </div>
-                  <div
-                    className="investment-allocation__value"
-                  >
-                    $10k
-                  </div>
-                </div>
-                <div
-                  className="investment-allocation__row"
+                  Acquisition Investment
+                </span>
+                <span
+                  className="small-box__labels__detail"
                 >
-                  <div
-                    className="investment-allocation__title investment-allocation__title--leasing-enablement"
-                  >
-                    Leasing Enablement
-                  </div>
-                  <div
-                    className="investment-allocation__value"
-                  >
-                    $1k
-                  </div>
-                </div>
-                <div
-                  className="investment-allocation__row"
+                  Target: $15k
+                </span>
+              </div>
+              <div
+                className="small-box__outer-content"
+              >
+                <span
+                  className="small-box__inner-content"
                 >
-                  <div
-                    className="investment-allocation__title investment-allocation__title--market-intelligence"
+                  <span
+                    className="delta-layout"
                   >
-                    Market Intelligence
-                  </div>
-                  <div
-                    className="investment-allocation__value"
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      $14k
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div
+              className="panel panel--default small-box"
+            >
+              <div
+                className="small-box__labels"
+              >
+                <span
+                  className="small-box__labels__name"
+                >
+                  Est. Acquired Leasing Revenue
+                </span>
+                <span
+                  className="small-box__labels__detail"
+                >
+                  Target: $228.5k
+                </span>
+              </div>
+              <div
+                className="small-box__outer-content"
+              >
+                <span
+                  className="small-box__inner-content"
+                >
+                  <span
+                    className="delta-layout"
                   >
-                    $2k
-                  </div>
-                </div>
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      <span
+                        className="formatted-value-with-symbol__plus"
+                      >
+                        +
+                      </span>
+                      $199k
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div
+              className="panel panel--default small-box"
+            >
+              <div
+                className="small-box__labels"
+              >
+                <span
+                  className="small-box__labels__name"
+                >
+                  Acquisition ROMI
+                </span>
+                <span
+                  className="small-box__labels__detail"
+                >
+                  Target: 7
+                </span>
+              </div>
+              <div
+                className="small-box__outer-content"
+              >
+                <span
+                  className="small-box__inner-content"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                >
+                  <span
+                    className="delta-layout"
+                  >
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      14
+                      <span
+                        className="formatted-value-with-symbol__times"
+                      >
+                        x
+                      </span>
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="child-wrapper"
+          style={
+            Object {
+              "width": "50.00000%",
+            }
+          }
+        >
+          <div
+            className="report-section"
+          >
+            <div
+              className="section-header"
+            >
+              <p
+                className="section-header__title"
+              >
+                Retention
+              </p>
+            </div>
+            <div
+              className="panel panel--default small-box"
+            >
+              <div
+                className="small-box__labels"
+              >
+                <span
+                  className="small-box__labels__name"
+                >
+                  Lease Renewals
+                </span>
+                <span
+                  className="small-box__labels__detail"
+                >
+                  Target: 10
+                </span>
+              </div>
+              <div
+                className="small-box__outer-content"
+              >
+                <span
+                  className="small-box__inner-content"
+                >
+                  <span
+                    className="delta-layout"
+                  >
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      7
+                    </span>
+                    <span
+                      className="delta-layout__section"
+                    >
+                      <div
+                        className="delta-indicator"
+                      >
+                        <span
+                          className="delta-indicator__delta"
+                        >
+                          2
+                        </span>
+                         
+                        <span
+                          className="delta-indicator__arrow delta-indicator__trend-up"
+                        >
+                          <svg
+                            aria-hidden="true"
+                            color="inherit"
+                            focusable="false"
+                            height={5}
+                            role="presentation"
+                            viewBox="0 0 10 5"
+                            width={10}
+                          >
+                            <path
+                              d="M5 0l5 5H0z"
+                              fill="currentColor"
+                              fillRule="evenodd"
+                            />
+                          </svg>
+                        </span>
+                      </div>
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div
+              className="panel panel--default small-box"
+            >
+              <div
+                className="small-box__labels"
+              >
+                <span
+                  className="small-box__labels__name"
+                >
+                  Retention Investment
+                </span>
+                <span
+                  className="small-box__labels__detail"
+                >
+                  Target: $2k
+                </span>
+              </div>
+              <div
+                className="small-box__outer-content"
+              >
+                <span
+                  className="small-box__inner-content"
+                >
+                  <span
+                    className="delta-layout"
+                  >
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      $2k
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div
+              className="panel panel--default small-box"
+            >
+              <div
+                className="small-box__labels"
+              >
+                <span
+                  className="small-box__labels__name"
+                >
+                  Est. Retained Leasing Revenue
+                </span>
+                <span
+                  className="small-box__labels__detail"
+                >
+                  Target: $266.6k
+                </span>
+              </div>
+              <div
+                className="small-box__outer-content"
+              >
+                <span
+                  className="small-box__inner-content"
+                >
+                  <span
+                    className="delta-layout"
+                  >
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      <span
+                        className="formatted-value-with-symbol__plus"
+                      >
+                        +
+                      </span>
+                      $155.1k
+                    </span>
+                  </span>
+                </span>
+              </div>
+            </div>
+            <div
+              className="panel panel--default small-box"
+            >
+              <div
+                className="small-box__labels"
+              >
+                <span
+                  className="small-box__labels__name"
+                >
+                  Retention ROMI
+                </span>
+                <span
+                  className="small-box__labels__detail"
+                >
+                  Target: 142
+                </span>
+              </div>
+              <div
+                className="small-box__outer-content"
+              >
+                <span
+                  className="small-box__inner-content"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                >
+                  <span
+                    className="delta-layout"
+                  >
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      78
+                      <span
+                        className="formatted-value-with-symbol__times"
+                      >
+                        x
+                      </span>
+                    </span>
+                  </span>
+                </span>
               </div>
             </div>
           </div>
         </div>
       </div>
       <div
-        className="child-wrapper"
-        style={
-          Object {
-            "width": "50.00000%",
-          }
-        }
+        className="box-row box-row--normal"
       >
         <div
-          className="investment-allocation"
+          className="child-wrapper"
+          style={
+            Object {
+              "width": "50.00000%",
+            }
+          }
         >
           <div
-            className="report-section"
+            className="investment-allocation"
           >
             <div
-              className="section-header"
-            >
-              <p
-                className="section-header__title"
-              >
-                retention INVESTMENT ALLOCATIONS
-              </p>
-            </div>
-            <div
-              className="investment-allocation__body"
+              className="report-section"
             >
               <div
-                className="investment-allocation__chart"
+                className="section-header"
+              >
+                <p
+                  className="section-header__title"
+                >
+                  acquisition INVESTMENT ALLOCATIONS
+                </p>
+              </div>
+              <div
+                className="investment-allocation__body"
               >
                 <div
-                  className="VictoryContainer"
-                  style={
-                    Object {
-                      "height": "100%",
-                      "pointerEvents": "none",
-                      "position": "relative",
-                      "touchAction": "none",
-                      "width": "100%",
-                    }
-                  }
+                  className="investment-allocation__chart"
                 >
-                  <svg
-                    aria-labelledby="victory-container-28-title victory-container-28-desc"
-                    height={400}
-                    role="img"
-                    style={
-                      Object {
-                        "height": "100%",
-                        "pointerEvents": "all",
-                        "width": "100%",
-                      }
-                    }
-                    viewBox="0 0 400 400"
-                    width={400}
-                  >
-                    <g>
-                      <path
-                        d="M1.2246467991473532e-14,-200L0,0Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <path
-                        d="M1.2246467991473532e-14,-200A200,200,0,1,1,-1.2246467991473532e-14,200A200,200,0,1,1,1.2246467991473532e-14,-200Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <path
-                        d="M-3.6739403974420595e-14,-200L0,0Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <path
-                        d="M-3.6739403974420595e-14,-200L0,0Z"
-                        role="presentation"
-                        shapeRendering="auto"
-                        style={
-                          Object {
-                            "fill": undefined,
-                            "padding": 10,
-                            "stroke": "transparent",
-                            "strokeWidth": 1,
-                          }
-                        }
-                        transform="translate(200, 200)"
-                      />
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={-2.0300000000000002}
-                        x={200}
-                        y={205}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="middle"
-                          x={200}
-                        >
-                          
-                        </tspan>
-                      </text>
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={11.969999999999999}
-                        x={200}
-                        y={195}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="middle"
-                          x={200}
-                        >
-                          100%
-                        </tspan>
-                      </text>
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={-2.0300000000000002}
-                        x={200}
-                        y={205}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="middle"
-                          x={200}
-                        >
-                          
-                        </tspan>
-                      </text>
-                      <text
-                        direction="inherit"
-                        dx={0}
-                        dy={-2.0300000000000002}
-                        x={200}
-                        y={205}
-                      >
-                        <tspan
-                          dx={0}
-                          style={
-                            Object {
-                              "fill": "#252525",
-                              "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
-                              "fontSize": 14,
-                              "letterSpacing": "normal",
-                              "padding": 20,
-                              "stroke": "transparent",
-                            }
-                          }
-                          textAnchor="middle"
-                          x={200}
-                        >
-                          
-                        </tspan>
-                      </text>
-                    </g>
-                  </svg>
                   <div
+                    className="VictoryContainer"
                     style={
                       Object {
                         "height": "100%",
-                        "left": 0,
-                        "position": "absolute",
-                        "top": 0,
+                        "pointerEvents": "none",
+                        "position": "relative",
+                        "touchAction": "none",
                         "width": "100%",
-                        "zIndex": 99,
                       }
                     }
                   >
                     <svg
-                      height={400}
+                      aria-labelledby="victory-container-27-title victory-container-27-desc"
+                      height={NaN}
+                      role="img"
                       style={
                         Object {
                           "height": "100%",
-                          "overflow": "visible",
+                          "pointerEvents": "all",
                           "width": "100%",
                         }
                       }
-                      viewBox="0 0 400 400"
-                      width={400}
-                    />
+                      viewBox="0 0 NaN NaN"
+                      width={NaN}
+                    >
+                      <g>
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={-2.0300000000000002}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="middle"
+                            x={NaN}
+                          >
+                            14%
+                          </tspan>
+                        </text>
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={4.97}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="start"
+                            x={NaN}
+                          >
+                            7%
+                          </tspan>
+                        </text>
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={11.969999999999999}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="middle"
+                            x={NaN}
+                          >
+                            71%
+                          </tspan>
+                        </text>
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={-2.0300000000000002}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="middle"
+                            x={NaN}
+                          >
+                            7%
+                          </tspan>
+                        </text>
+                      </g>
+                    </svg>
+                    <div
+                      style={
+                        Object {
+                          "height": "100%",
+                          "left": 0,
+                          "position": "absolute",
+                          "top": 0,
+                          "width": "100%",
+                          "zIndex": 99,
+                        }
+                      }
+                    >
+                      <svg
+                        height={NaN}
+                        style={
+                          Object {
+                            "height": "100%",
+                            "overflow": "visible",
+                            "width": "100%",
+                          }
+                        }
+                        viewBox="0 0 NaN NaN"
+                        width={NaN}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="investment-allocation__expenses"
+                >
+                  <div
+                    className="investment-allocation__row"
+                  >
+                    <div
+                      className="investment-allocation__title investment-allocation__title--reputation-building"
+                    >
+                      Reputation Building
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $1k
+                    </div>
+                  </div>
+                  <div
+                    className="investment-allocation__row"
+                  >
+                    <div
+                      className="investment-allocation__title investment-allocation__title--demand-creation"
+                    >
+                      Demand Creation
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $10k
+                    </div>
+                  </div>
+                  <div
+                    className="investment-allocation__row"
+                  >
+                    <div
+                      className="investment-allocation__title investment-allocation__title--leasing-enablement"
+                    >
+                      Leasing Enablement
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $1k
+                    </div>
+                  </div>
+                  <div
+                    className="investment-allocation__row"
+                  >
+                    <div
+                      className="investment-allocation__title investment-allocation__title--market-intelligence"
+                    >
+                      Market Intelligence
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $2k
+                    </div>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="child-wrapper"
+          style={
+            Object {
+              "width": "50.00000%",
+            }
+          }
+        >
+          <div
+            className="investment-allocation"
+          >
+            <div
+              className="report-section"
+            >
               <div
-                className="investment-allocation__expenses"
+                className="section-header"
+              >
+                <p
+                  className="section-header__title"
+                >
+                  retention INVESTMENT ALLOCATIONS
+                </p>
+              </div>
+              <div
+                className="investment-allocation__body"
               >
                 <div
-                  className="investment-allocation__row investment-allocation__row--empty"
+                  className="investment-allocation__chart"
                 >
                   <div
-                    className="investment-allocation__title investment-allocation__title--reputation-building"
+                    className="VictoryContainer"
+                    style={
+                      Object {
+                        "height": "100%",
+                        "pointerEvents": "none",
+                        "position": "relative",
+                        "touchAction": "none",
+                        "width": "100%",
+                      }
+                    }
                   >
-                    Reputation Building
-                  </div>
-                  <div
-                    className="investment-allocation__value"
-                  >
-                    $0
+                    <svg
+                      aria-labelledby="victory-container-28-title victory-container-28-desc"
+                      height={NaN}
+                      role="img"
+                      style={
+                        Object {
+                          "height": "100%",
+                          "pointerEvents": "all",
+                          "width": "100%",
+                        }
+                      }
+                      viewBox="0 0 NaN NaN"
+                      width={NaN}
+                    >
+                      <g>
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <path
+                          d="M0,0Z"
+                          role="presentation"
+                          shapeRendering="auto"
+                          style={
+                            Object {
+                              "fill": undefined,
+                              "padding": 10,
+                              "stroke": "transparent",
+                              "strokeWidth": 1,
+                            }
+                          }
+                          transform="translate(NaN, NaN)"
+                        />
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={-2.0300000000000002}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="middle"
+                            x={NaN}
+                          >
+                            
+                          </tspan>
+                        </text>
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={11.969999999999999}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="middle"
+                            x={NaN}
+                          >
+                            100%
+                          </tspan>
+                        </text>
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={-2.0300000000000002}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="middle"
+                            x={NaN}
+                          >
+                            
+                          </tspan>
+                        </text>
+                        <text
+                          direction="inherit"
+                          dx={0}
+                          dy={-2.0300000000000002}
+                          x={NaN}
+                          y={NaN}
+                        >
+                          <tspan
+                            dx={0}
+                            style={
+                              Object {
+                                "fill": "#252525",
+                                "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                "fontSize": 14,
+                                "letterSpacing": "normal",
+                                "padding": 20,
+                                "stroke": "transparent",
+                              }
+                            }
+                            textAnchor="middle"
+                            x={NaN}
+                          >
+                            
+                          </tspan>
+                        </text>
+                      </g>
+                    </svg>
+                    <div
+                      style={
+                        Object {
+                          "height": "100%",
+                          "left": 0,
+                          "position": "absolute",
+                          "top": 0,
+                          "width": "100%",
+                          "zIndex": 99,
+                        }
+                      }
+                    >
+                      <svg
+                        height={NaN}
+                        style={
+                          Object {
+                            "height": "100%",
+                            "overflow": "visible",
+                            "width": "100%",
+                          }
+                        }
+                        viewBox="0 0 NaN NaN"
+                        width={NaN}
+                      />
+                    </div>
                   </div>
                 </div>
                 <div
-                  className="investment-allocation__row investment-allocation__row--empty"
+                  className="investment-allocation__expenses"
                 >
                   <div
-                    className="investment-allocation__title investment-allocation__title--demand-creation"
+                    className="investment-allocation__row investment-allocation__row--empty"
                   >
-                    Demand Creation
+                    <div
+                      className="investment-allocation__title investment-allocation__title--reputation-building"
+                    >
+                      Reputation Building
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $0
+                    </div>
                   </div>
                   <div
-                    className="investment-allocation__value"
+                    className="investment-allocation__row investment-allocation__row--empty"
                   >
-                    $0
-                  </div>
-                </div>
-                <div
-                  className="investment-allocation__row"
-                >
-                  <div
-                    className="investment-allocation__title investment-allocation__title--leasing-enablement"
-                  >
-                    Leasing Enablement
-                  </div>
-                  <div
-                    className="investment-allocation__value"
-                  >
-                    $2k
-                  </div>
-                </div>
-                <div
-                  className="investment-allocation__row investment-allocation__row--empty"
-                >
-                  <div
-                    className="investment-allocation__title investment-allocation__title--market-intelligence"
-                  >
-                    Market Intelligence
+                    <div
+                      className="investment-allocation__title investment-allocation__title--demand-creation"
+                    >
+                      Demand Creation
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $0
+                    </div>
                   </div>
                   <div
-                    className="investment-allocation__value"
+                    className="investment-allocation__row"
                   >
-                    $0
+                    <div
+                      className="investment-allocation__title investment-allocation__title--leasing-enablement"
+                    >
+                      Leasing Enablement
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $2k
+                    </div>
+                  </div>
+                  <div
+                    className="investment-allocation__row investment-allocation__row--empty"
+                  >
+                    <div
+                      className="investment-allocation__title investment-allocation__title--market-intelligence"
+                    >
+                      Market Intelligence
+                    </div>
+                    <div
+                      className="investment-allocation__value"
+                    >
+                      $0
+                    </div>
                   </div>
                 </div>
               </div>
