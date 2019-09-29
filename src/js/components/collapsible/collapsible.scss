@@ -1,0 +1,39 @@
+
+
+.collapsible__trigger {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+}
+
+.collapsible__trigger-content {
+    flex-grow: 1;
+}
+
+.collapsible__icon {
+    display: inline-block;
+    width: 8px;
+    height: 16px;
+    background-image: url(../../../images/icon-arrow-right.svg);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    content: '';
+    transition: all .1s ease;
+}
+
+.collapsible__content {
+    transition: height 0.3s linear 0s;
+    overflow: hidden;
+}
+
+.collapsible--open {
+    .collapsible__icon {
+        transform: rotate(90deg);
+    }
+
+    .collapsible__content {
+        height: 160px;
+        display: block;
+    }
+}

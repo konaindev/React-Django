@@ -7,6 +7,7 @@
     width: $property-card-width;
     margin: $property-card-spacing;
     text-align: left;
+    border: $property-card-border solid transparent;
 
     &__panel {
         overflow: hidden;
@@ -30,7 +31,7 @@
         background-image: url("../../../images/blank_property.svg");
         background-position: center;
         background-repeat: no-repeat;
-        background-size: contain;
+        background-size: cover;
         opacity: 0.8;
     }
 
@@ -83,6 +84,10 @@
         height: 0;
         right: 0;
         bottom: 0;
+        display: flex;
+        align-items: flex-end;
+        padding: 0 20px;
+        overflow: hidden;
         background-color: $property-card-panel-hover-color;
     }
 
@@ -109,5 +114,46 @@
 
     &__status {
         margin-top: $s2;
+    }
+}
+
+.property-card__selector {
+    position: absolute;
+    top: $s5;
+    left: $s5;
+    display: flex;
+    width: $property-card-selector-size;
+    height: $property-card-selector-size;
+    cursor: pointer;
+    border: $property-card-selector-border solid $property-card-selector-color;
+    border-radius: 50%;
+    box-sizing: border-box;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.property-card__selector-tick {
+    visibility: hidden;
+    fill: $property-card-selector-color;
+}
+
+.property-card--selected {
+    border: none;
+
+    .property-card__panel {
+        border: $property-card-border solid $property-card-selector-bg;
+    }
+
+    .property-card__overlay {
+        opacity: 1;
+    }
+
+    .property-card__selector {
+        background-color: $property-card-selector-bg;
+    }
+
+    .property-card__selector-tick {
+        visibility: visible;
     }
 }

@@ -27,7 +27,7 @@ export const RMBTooltip = props => {
       </React.Fragment>
     );
   }
-  const classes = cn("rmb-tooltip", {
+  const classes = cn("rmb-tooltip", props.overlayClassName, {
     [`rmb-tooltip--${props.theme}`]: props.theme
   });
   return <Tooltip {...props} overlay={overlay} overlayClassName={classes} />;
@@ -36,7 +36,8 @@ export const RMBTooltip = props => {
 RMBTooltip.propTypes = {
   text: PropTypes.string,
   link: PropTypes.string,
-  theme: PropTypes.oneOf(["", "highlight", "dark"])
+  theme: PropTypes.oneOf(["", "highlight", "dark", "light-dark"]),
+  overlayClassName: PropTypes.string
 };
 
 export default RMBTooltip;

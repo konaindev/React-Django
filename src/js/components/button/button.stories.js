@@ -18,4 +18,5 @@ storiesOf("Button", module)
   .add("transparent", () => (
     <Button color="transparent">Transparent Button</Button>
   ))
-  .add("selected", () => <Button selected>Selected Button</Button>);
+  .add("selected", () => <Button selected>Selected Button</Button>)
+  .add("warning", () => <Button color="warning">Warning Button</Button>);

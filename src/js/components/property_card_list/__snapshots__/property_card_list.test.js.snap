@@ -22,20 +22,27 @@ exports[`PropertyCardList renders correctly 1`] = `
         <div
           className="property-card__overlay"
         >
-          <a
+          <div
             className="property-card__overlay-link"
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
           >
-            <button
-              className="button button--outline"
-              onClick={[Function]}
+            <a
+              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
             >
-              View Report
-            </button>
-          </a>
+              <button
+                className="button button--outline"
+                onClick={[Function]}
+              >
+                View Report
+              </button>
+            </a>
+          </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="user-icon-list"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -77,20 +84,27 @@ exports[`PropertyCardList renders correctly 1`] = `
         <div
           className="property-card__overlay"
         >
-          <a
+          <div
             className="property-card__overlay-link"
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
           >
-            <button
-              className="button button--outline"
-              onClick={[Function]}
+            <a
+              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
             >
-              View Report
-            </button>
-          </a>
+              <button
+                className="button button--outline"
+                onClick={[Function]}
+              >
+                View Report
+              </button>
+            </a>
+          </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="user-icon-list"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -132,20 +146,27 @@ exports[`PropertyCardList renders correctly 1`] = `
         <div
           className="property-card__overlay"
         >
-          <a
+          <div
             className="property-card__overlay-link"
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
           >
-            <button
-              className="button button--outline"
-              onClick={[Function]}
+            <a
+              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
             >
-              View Report
-            </button>
-          </a>
+              <button
+                className="button button--outline"
+                onClick={[Function]}
+              >
+                View Report
+              </button>
+            </a>
+          </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="user-icon-list"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -187,20 +208,27 @@ exports[`PropertyCardList renders correctly 1`] = `
         <div
           className="property-card__overlay"
         >
-          <a
+          <div
             className="property-card__overlay-link"
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
           >
-            <button
-              className="button button--outline"
-              onClick={[Function]}
+            <a
+              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
             >
-              View Report
-            </button>
-          </a>
+              <button
+                className="button button--outline"
+                onClick={[Function]}
+              >
+                View Report
+              </button>
+            </a>
+          </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="user-icon-list"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -242,20 +270,27 @@ exports[`PropertyCardList renders correctly 1`] = `
         <div
           className="property-card__overlay"
         >
-          <a
+          <div
             className="property-card__overlay-link"
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
           >
-            <button
-              className="button button--outline"
-              onClick={[Function]}
+            <a
+              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
             >
-              View Report
-            </button>
-          </a>
+              <button
+                className="button button--outline"
+                onClick={[Function]}
+              >
+                View Report
+              </button>
+            </a>
+          </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="user-icon-list"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -297,20 +332,27 @@ exports[`PropertyCardList renders correctly 1`] = `
         <div
           className="property-card__overlay"
         >
-          <a
+          <div
             className="property-card__overlay-link"
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
           >
-            <button
-              className="button button--outline"
-              onClick={[Function]}
+            <a
+              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
             >
-              View Report
-            </button>
-          </a>
+              <button
+                className="button button--outline"
+                onClick={[Function]}
+              >
+                View Report
+              </button>
+            </a>
+          </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="user-icon-list"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -352,20 +394,27 @@ exports[`PropertyCardList renders correctly 1`] = `
         <div
           className="property-card__overlay"
         >
-          <a
+          <div
             className="property-card__overlay-link"
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
           >
-            <button
-              className="button button--outline"
-              onClick={[Function]}
+            <a
+              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
             >
-              View Report
-            </button>
-          </a>
+              <button
+                className="button button--outline"
+                onClick={[Function]}
+              >
+                View Report
+              </button>
+            </a>
+          </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="user-icon-list"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -407,20 +456,27 @@ exports[`PropertyCardList renders correctly 1`] = `
         <div
           className="property-card__overlay"
         >
-          <a
+          <div
             className="property-card__overlay-link"
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
           >
-            <button
-              className="button button--outline"
-              onClick={[Function]}
+            <a
+              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
             >
-              View Report
-            </button>
-          </a>
+              <button
+                className="button button--outline"
+                onClick={[Function]}
+              >
+                View Report
+              </button>
+            </a>
+          </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="user-icon-list"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -462,20 +518,27 @@ exports[`PropertyCardList renders correctly 1`] = `
         <div
           className="property-card__overlay"
         >
-          <a
+          <div
             className="property-card__overlay-link"
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
           >
-            <button
-              className="button button--outline"
-              onClick={[Function]}
+            <a
+              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
             >
-              View Report
-            </button>
-          </a>
+              <button
+                className="button button--outline"
+                onClick={[Function]}
+              >
+                View Report
+              </button>
+            </a>
+          </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="user-icon-list"
+            />
+          </div>
         </div>
       </div>
       <div
@@ -517,20 +580,27 @@ exports[`PropertyCardList renders correctly 1`] = `
         <div
           className="property-card__overlay"
         >
-          <a
+          <div
             className="property-card__overlay-link"
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
           >
-            <button
-              className="button button--outline"
-              onClick={[Function]}
+            <a
+              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
             >
-              View Report
-            </button>
-          </a>
+              <button
+                className="button button--outline"
+                onClick={[Function]}
+              >
+                View Report
+              </button>
+            </a>
+          </div>
           <div
             className="property-card__actions"
-          />
+          >
+            <div
+              className="user-icon-list"
+            />
+          </div>
         </div>
       </div>
       <div

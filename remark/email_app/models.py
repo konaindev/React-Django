@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+
 from .reports.constants import KPI_NAMES, KPI_CATEGORIES
 
 

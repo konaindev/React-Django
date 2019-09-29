@@ -770,7 +770,7 @@ exports[`AccountSettings profile tab 1`] = `
                     Company Role
                   </div>
                   <div
-                    className="select multi-select account-settings__input select--gray css-2b097c-container"
+                    className="select multi-select account-settings__input select--is-multi select--gray css-2b097c-container"
                     onKeyDown={[Function]}
                   >
                     <div

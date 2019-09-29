@@ -7,11 +7,16 @@ from .views import (
     MarketReportPageView,
     ModelingReportPageView,
     CampaignPlanPageView,
-    ProjectUpdateAPIView
+    ProjectUpdateAPIView,
+    MembersView,
+    AddMembersView,
+    ProjectRemoveMemberIView
 )
 
 
 urlpatterns = [
+    path("members/", MembersView.as_view(), name="members" ),
+    path("add-members/", AddMembersView.as_view(), name="add_members" ),
     path("<project_id>/", ProjectPageView.as_view(), name="project"),
     path(
         "<project_id>/baseline/",
@@ -65,5 +70,10 @@ urlpatterns = [
         "<project_id>/update/",
         ProjectUpdateAPIView.as_view(),
         name="update_endpoint",
+    ),
+    path(
+        "<project_id>/remove-member/",
+        ProjectRemoveMemberIView.as_view(),
+        name="project_remove_user",
     ),
 ]

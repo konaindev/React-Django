@@ -1,11 +1,14 @@
+from copy import copy
 import datetime
 import time
 
 from django.template.loader import get_template
 
 from remark.lib.stats import health_check
+from remark.lib.logging import error_text, getLogger
 from remark.projects.reports.performance import PerformanceReport, InvalidReportRequest
 from remark.email_app.models import PerformanceEmail
+from remark.email_app.constants import SENDGRID_SENDER_ID, TEMPLATE_VAR_CONTACT_EMAIL
 from remark.projects.models import TargetPeriod
 
 from .constants import (
@@ -24,9 +27,7 @@ from remark.lib.sendgrid_email import (
 
 from celery import shared_task
 
-
-CONTACT_EMAIL = "info@remarkably.io"
-SENDER_ID = 482157
+logger = getLogger(__name__)
 
 
 def none_wrapper(formatter, selector, obj):
@@ -141,7 +142,7 @@ def generate_template_vars(perf_email):
     low_kpis = perf_email.low_kpis
     risk_kpi_insight_text = perf_email.risk_kpi_insight_text
     low_kpi_insight_text = perf_email.low_kpi_insight_text
-    email = CONTACT_EMAIL
+    email = TEMPLATE_VAR_CONTACT_EMAIL
 
     template_vars = {
         "report_url": f"https://app.remarkably.io/projects/{project_id}/performance/last-week/",
@@ -177,7 +178,7 @@ def create_html(template_vars):
 
 @shared_task
 def send_performance_email(performance_email_id):
-    print("weekly_performance::send_performance_email::start")
+    logger.info("send_performance_email::start")
     perf_email = PerformanceEmail.objects.get(pk=performance_email_id)
     project = perf_email.project
 
@@ -217,10 +218,11 @@ def send_performance_email(performance_email_id):
         email_campaign_id,
         title,
         subject,
-        SENDER_ID,
+        SENDGRID_SENDER_ID,
         new_list_id,
         categories,
         html_content,
     )
-    print("weekly_performance::send_performance_email::end")
+    perf_email.save()
+    logger.info("send_performance_email::end")
     return True

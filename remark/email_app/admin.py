@@ -3,9 +3,12 @@ import datetime
 from django.contrib import admin
 
 from remark.admin import admin_site, custom_titled_filter
-from remark.lib.logging import error_text
+from remark.lib.logging import error_text, getLogger
+from .forms import PerformanceEmailForm
 from .models import PerformanceEmail, PerformanceEmailKPI
 from .reports.weekly_performance import send_performance_email
+
+logger = getLogger(__name__)
 
 
 class PerformanceEmailKPIInline(admin.TabularInline):
@@ -14,9 +17,7 @@ class PerformanceEmailKPIInline(admin.TabularInline):
 
 @admin.register(PerformanceEmail, site=admin_site)
 class PerformanceEmailAdmin(admin.ModelAdmin):
-    inlines = [
-        PerformanceEmailKPIInline
-    ]
+    inlines = [PerformanceEmailKPIInline]
     fields = [
         "project",
         "start",
@@ -33,19 +34,21 @@ class PerformanceEmailAdmin(admin.ModelAdmin):
     list_filter = (("project__name", custom_titled_filter("Project")),)
     ordering = ("-start",)
 
+    form = PerformanceEmailForm
+
     def save_model(self, request, obj, form, change):
-        print("email_app::admin::PerformanceEmailAdmin::save_model::top")
+        logger.info("PerformanceEmailAdmin::save_model::top")
 
         try:
             if not change:
                 obj.created_by = request.user
             obj.end = obj.start + datetime.timedelta(days=7)
-            print("email_app::admin::PerformanceEmailAdmin::save_model::before save")
+            logger.info("PerformanceEmailAdmin::save_model::before save")
             super().save_model(request, obj, form, change)
-            print("email_app::admin::PerformanceEmailAdmin::save_model::after save")
+            logger.info("PerformanceEmailAdmin::save_model::after save")
             send_performance_email.apply_async(args=(obj.id,), countdown=2)
-            print("email_app::admin::PerformanceEmailAdmin::save_model::after async task")
+            logger.info("PerformanceEmailAdmin::save_model::after async task")
         except Exception as e:
-            print(error_text(e))
+            logger.error(error_text(e))
 
-        print("email_app::admin::PerformanceEmailAdmin::save_model::bottom")
+        logger.info("PerformanceEmailAdmin::save_model:bottom")

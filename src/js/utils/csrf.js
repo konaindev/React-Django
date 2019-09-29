@@ -5,5 +5,7 @@
  *
  * @returns {string=}
  */
-export const getCSRFToken = () =>
-  document.querySelector("[name=csrfmiddlewaretoken]").value;
+export const getCSRFToken = () => {
+  const input = document.querySelector("[name=csrfmiddlewaretoken]");
+  return input && input.value;
+};

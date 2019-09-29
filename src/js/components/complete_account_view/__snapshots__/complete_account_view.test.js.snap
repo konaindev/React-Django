@@ -484,7 +484,7 @@ exports[`CompleteAccountView renders correctly 1`] = `
               className="form-field__input-container"
             >
               <div
-                className="select multi-select select--highlight css-dyr6gj-container"
+                className="select multi-select select--is-multi select--highlight css-dyr6gj-container"
                 onKeyDown={[Function]}
               >
                 <div

@@ -4,7 +4,9 @@ from django.urls import path
 from django.views.generic.base import RedirectView
 
 from remark.decorators import anonymous_required
-from .views import CompleteAccountView
+
+from .views import CompleteAccountView, CreatePasswordView, ValidatePasswordView, UsersView
+
 
 urlpatterns = [
     # XXX SECURITY Django's logout view uses GET to perform the logout action,
@@ -74,6 +76,12 @@ urlpatterns = [
         name="password_reset_complete",
     ),
     path(
-        "complete-account/", CompleteAccountView.as_view(), name="CompleteAccountView"
+        "complete-account/", CompleteAccountView.as_view(), name="complete_account"
     ),
+    path(
+        "create-password/<hash>",
+        anonymous_required(CreatePasswordView.as_view()),
+        name="create_password",
+    ),
+    path("validate-password", ValidatePasswordView.as_view(), name="validate_password"),
 ]

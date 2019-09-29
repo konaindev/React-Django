@@ -78,21 +78,21 @@ def _merge(merge_document, ts):
         "end": ts[0]['end']
     }
     for prop in merge_document:
-            if merge_document[prop] == "first":
-                result[prop] = _merge_first(ts, prop)
-            elif merge_document[prop] == "last":
-                result[prop] = _merge_last(ts, prop)
-            elif merge_document[prop] == "sum":
-                value = _merge_sum(ts, prop)
-                result[prop] = value
-            elif merge_document[prop] == "average":
-                value = _merge_average(ts, prop)
-                result[prop] = value
-            elif callable(merge_document[prop]):
-                value = merge_document[prop](ts, prop)
-                result[prop] = value
-            else:
-                raise Exception("Invalid merge strategy supplied")
+        if merge_document[prop] == "first":
+            result[prop] = _merge_first(ts, prop)
+        elif merge_document[prop] == "last":
+            result[prop] = _merge_last(ts, prop)
+        elif merge_document[prop] == "sum":
+            value = _merge_sum(ts, prop)
+            result[prop] = value
+        elif merge_document[prop] == "average":
+            value = _merge_average(ts, prop)
+            result[prop] = value
+        elif callable(merge_document[prop]):
+            value = merge_document[prop](ts, prop)
+            result[prop] = value
+        else:
+            raise Exception("Invalid merge strategy supplied")
     return result
 
 

@@ -5,8 +5,12 @@ from remark.lib.time_series.computed import generate_computed_kpis, generate_com
 from remark.lib.time_series.common import KPI, KPIFormat
 from .strategy import get_base_kpis_for_project, get_targets_for_project, get_base_kpis_for_group, get_targets_for_group
 
+
 def generate_computed_properties(item, kpis):
     base_kpis = item["base_kpis"]
+    if base_kpis is None:
+        return
+
     item["kpis"] = generate_computed_kpis(base_kpis, outputs=kpis)
 
     base_targets = item["base_targets"]
@@ -44,7 +48,6 @@ def strip_base_data(item):
             strip_base_data(subitem)
 
 
-
 def get_table_structure(user, start, end, kpis, show_averages):
     projects = Project.objects.get_all_for_user(user)
     projects = list(projects)
@@ -57,36 +60,37 @@ def get_table_structure(user, start, end, kpis, show_averages):
         base_kpis = get_base_kpis_for_project(project, start, end)
         base_targets = get_targets_for_project(project, start, end)
 
-        if base_kpis is not None:
-            image_url = project.get_building_image()[2]
-            if image_url == "":
-                image_url = "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png"
+        image_url = project.get_building_image()[2]
+        if image_url == "":
+            image_url = "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png"
 
-            item = {
-                "id": project.public_id,
-                "type": "individual",
-                "name": project.name,
-                "address": f"{project.property.geo_address.city}, {project.property.geo_address.state}",
-                "image_url": image_url,
-                "url": reverse(
-                    "performance_report",
-                    kwargs={"project_id": project.public_id, "report_span": "last-four-weeks"}
-                ),
-                "health": project.get_performance_rating(),
-                "base_kpis": base_kpis,
-                "base_targets": base_targets
-            }
-            generate_computed_properties(item, kpis)
+        property = project.property
+        item = {
+            "id": project.public_id,
+            "type": "individual",
+            "name": project.name,
+            "address": f"{property.geo_address.city}, {property.geo_address.state}",
+            "image_url": image_url,
+            "url": reverse(
+                "performance_report",
+                kwargs={"project_id": project.public_id, "report_span": "last-four-weeks"}
+            ),
+            "health": project.get_performance_rating(),
+            "base_kpis": base_kpis,
+            "base_targets": base_targets
+        }
+        generate_computed_properties(item, kpis)
+        if item.get("kpis"):
             format_kpis(item, kpis)
-            project_flat_list.append(item)
+        project_flat_list.append(item)
 
-            # generate table structure
-            custom_tags = list(project.custom_tags.all())
-            if len(custom_tags) > 0:
-                for custom_tag in custom_tags:
-                    if custom_tag.word not in groupings:
-                        groupings[custom_tag.word] = []
-                    groupings[custom_tag.word].append(project.public_id)
+        # generate table structure
+        custom_tags = list(project.custom_tags.all())
+        if len(custom_tags) > 0:
+            for custom_tag in custom_tags:
+                if custom_tag.word not in groupings:
+                    groupings[custom_tag.word] = []
+                groupings[custom_tag.word].append(project.public_id)
 
     print(f"Project Length: {len(project_flat_list)}")
     print(f"Project data: {project_flat_list}")
@@ -102,7 +106,6 @@ def get_table_structure(user, start, end, kpis, show_averages):
             portfolio_average_targets.append(project["base_targets"])
 
     # Next we need to combine the Group properties
-    table_data = []
     if len(portfolio_average) == 0:
         portfolio_average_group = None
     else:
@@ -118,6 +121,7 @@ def get_table_structure(user, start, end, kpis, show_averages):
         format_kpis(portfolio_average_group, kpis)
 
     properties_in_groups = []
+    table_data = []
     for group in groupings:
         group_kpis = []
         group_targets = []
@@ -128,7 +132,8 @@ def get_table_structure(user, start, end, kpis, show_averages):
                 if project["id"] == project_id:
                     if project["id"] not in properties_in_groups:
                         properties_in_groups.append(project["id"])
-                    group_kpis.append(project["base_kpis"])
+                    if project["base_kpis"] is not None:
+                        group_kpis.append(project["base_kpis"])
                     if project["base_targets"] is not None:
                         group_targets.append(project["base_targets"])
                     properties.append(project)
@@ -148,14 +153,16 @@ def get_table_structure(user, start, end, kpis, show_averages):
     # Now we need to generate all the computed properties
     for item in table_data:
         generate_computed_properties(item, kpis)
-        format_kpis(item, kpis)
+        if item.get("kpis"):
+            format_kpis(item, kpis)
 
     # Now add the solo properties
     for project in project_flat_list:
         if project["id"] not in properties_in_groups:
             table_data.append(project)
 
-    table_data.append(portfolio_average_group)
+    if portfolio_average_group:
+        table_data.append(portfolio_average_group)
 
     # Remove all the base kpis & targets
     for item in table_data:

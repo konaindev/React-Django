@@ -2,13 +2,18 @@ import datetime
 import decimal
 
 from django.contrib.auth.models import Group
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.urls import reverse
+
+from unittest.mock import patch, Mock
 
 from remark.crm.models import Business
 from remark.geo.models import Address
 from remark.users.models import Account, User
 from remark.projects.models import Fund, Project, Property
+from remark.web.views import DashboardView
+
+import inspect, types
 
 
 class PropertyListTestCase(TestCase):
@@ -131,7 +136,7 @@ class PropertyListTestCase(TestCase):
                     "performance_rating": -1,
                     "property_id": self.project2.public_id,
                     "property_name": self.project2.name,
-                    "url": "/projects/{}/baseline/".format(self.project2.public_id),
+                    "url": "/projects/{}/market/".format(self.project2.public_id),
                 },
                 {
                     "address": "Seattle, WA",
@@ -139,7 +144,7 @@ class PropertyListTestCase(TestCase):
                     "performance_rating": -1,
                     "property_id": self.project1.public_id,
                     "property_name": self.project1.name,
-                    "url": "/projects/{}/baseline/".format(self.project1.public_id),
+                    "url": "/projects/{}/market/".format(self.project1.public_id),
                 },
             ],
             "property_managers": [
@@ -197,7 +202,7 @@ class PropertyListTestCase(TestCase):
                     "performance_rating": -1,
                     "property_id": self.project1.public_id,
                     "property_name": self.project1.name,
-                    "url": "/projects/{}/baseline/".format(self.project1.public_id),
+                    "url": "/projects/{}/market/".format(self.project1.public_id),
                 }
             ],
             "property_managers": [
@@ -241,3 +246,12 @@ class PropertyListTestCase(TestCase):
         )
         self.assertCountEqual(response_json["locations"], data["locations"])
         self.assertCountEqual(response_json["user"], data["user"])
+
+class TestDashboardView(TestCase):
+    def test_calling_access_cache(self):
+        with patch('remark.lib.cache.access_cache') as cache_mock:
+            dashboard = DashboardView()
+            dashboard.get_project_details(Mock(), Mock())
+            cache_mock.assert_called_once()
+            dashboard.get_user_filter_options(Mock())
+            self.assertEqual(cache_mock.call_count, 2)

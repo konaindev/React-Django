@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserRow render default 1`] = `
+<div
+  className="user-row"
+>
+  <div
+    className="user-icon user-row__avatar"
+    style={
+      Object {
+        "backgroundColor": undefined,
+      }
+    }
+  >
+    RC
+    <div
+      className="user-icon__avatar"
+      style={
+        Object {
+          "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+        }
+      }
+    />
+  </div>
+  <div>
+    <div
+      className="user-row__name"
+    >
+      Remarkably Client
+    </div>
+    <div
+      className="user-row__email"
+    >
+      email@remarkably.com
+    </div>
+  </div>
+</div>
+`;
+
+exports[`UserRow render without avatar 1`] = `
+<div
+  className="user-row"
+>
+  <div
+    className="user-icon user-row__avatar"
+    style={
+      Object {
+        "backgroundColor": undefined,
+      }
+    }
+  >
+    RC
+    <div
+      className="user-icon__avatar"
+      style={
+        Object {
+          "backgroundImage": "url()",
+        }
+      }
+    />
+  </div>
+  <div>
+    <div
+      className="user-row__name"
+    >
+      Remarkably Client
+    </div>
+    <div
+      className="user-row__email"
+    >
+      email@remarkably.com
+    </div>
+  </div>
+</div>
+`;

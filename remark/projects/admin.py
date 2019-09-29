@@ -7,7 +7,13 @@ from adminsortable2.admin import SortableInlineAdminMixin
 
 from remark.admin import admin_site, custom_titled_filter
 from remark.analytics.admin import InlineAnalyticsProviderAdmin
-from .forms import ProjectForm, PropertyForm, SpreadsheetForm, CampaignModelUploadForm
+from .forms import (
+    ProjectForm,
+    PropertyForm,
+    PeriodInlineForm,
+    SpreadsheetForm,
+    CampaignModelUploadForm,
+)
 from .models import (
     Building,
     Fund,
@@ -23,6 +29,7 @@ from .models import (
     Tag,
     LeaseStage,
 )
+from .export import export_periods_to_csv, export_periods_to_excel
 from .views import TAMExportView
 
 
@@ -356,6 +363,20 @@ class PeriodInline(admin.TabularInline):
     model = Period
     show_change_link = True
 
+    form = PeriodInlineForm
+
+    def get_fields(self, request, obj):
+        fields = super().get_fields(request, obj)
+        fields.remove("is_select")
+        fields.insert(0, "is_select")
+        return fields
+
+    template = "admin/projects/period_inline.html"
+
+    @mark_safe
+    def is_select(self, period):
+        return f'<input type="checkbox" name="is_select" value="{period.id}">'
+
     def has_add_permission(self, request, obj):
         return False
 
@@ -424,12 +445,20 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
         "include_in_remarkably_averages",
         "number_of_periods",
         "baseline_start",
-        "baseline_end"
+        "baseline_end",
     ]
 
     readonly_fields = ["customer_name"]
 
     form = ProjectForm
+
+    def response_change(self, request, obj):
+        if "_export_periods_to_csv" in request.POST:
+            periods_ids = request.POST.getlist("is_select")
+            return export_periods_to_csv(periods_ids, obj.public_id)
+        if "_export_periods_to_excel" in request.POST:
+            return export_periods_to_excel(obj.public_id)
+        return super().response_change(request, obj)
 
     def number_of_periods(self, obj):
         return obj.periods.all().count()
@@ -449,6 +478,7 @@ class ProjectAdmin(UpdateSpreadsheetAdminMixin, TAMExportMixin, admin.ModelAdmin
 @admin.register(Tag, site=admin_site)
 class TagAdmin(admin.ModelAdmin):
     pass
+
 
 @admin.register(TAMExportLog, site=admin_site)
 class TAMExportLogAdmin(admin.ModelAdmin):
@@ -476,4 +506,3 @@ class LeaseStageAdmin(admin.ModelAdmin):
 @admin.register(Building, site=admin_site)
 class BuildingAdmin(admin.ModelAdmin):
     list_display = ["building_identifier", "property"]
-

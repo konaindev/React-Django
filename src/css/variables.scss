@@ -71,6 +71,9 @@ $gray-7: #c2c6cb;
 $gray-8: #e1e3e5;
 $gray-9: #404E5C;
 $gray-10: #F4F3F3;
+$gray-11: #262F38;
+$gray-12: #29343F;
+$gray-13: #232b32;
 
 $white: #ffffff;
 
@@ -136,6 +139,10 @@ $select-border-radius: 4px;
 $select-border-color: $gray-4;
 $select-active-background: $blue-3;
 $select-option-color: $highlight-gray-3;
+$select-option-selected-color: $blue-8;
+$select-description-color: $gray-6;
+$select-tick-bg: $blue-7;
+$select-tick-color: $highlight-gray-3;
 
 $select-highlight-bg: $white;
 $select-highlight-border-color: $gray-6;
@@ -183,6 +190,9 @@ $button-disabled-light-bg: $gray-8;
 $button-disabled-light-text-color: $gray-6;
 
 $button-disabled-text-color: $gray-5;
+
+$button-warning-bg: $orange-6;
+$button-warning-color: $highlight-gray-3;
 
 $button-group-line-color: $gray-4;
 
@@ -294,26 +304,29 @@ $weight-black: 900;
 
 $s0: 0;
 $s1: 0.25rem;
-$s2: 0.5rem;
+$s2: 0.5rem; // 8px
 $s3: 0.75rem;
-$s4: 1rem;
-$s5: 1.25rem;
-$s6: 1.5rem;
+$s4: 1rem; // 16px
+$s5: 1.25rem; // 20px
+$s6: 1.5rem; // 24px
 $s7: 1.75rem;
-$s8: 2rem;
+$s8: 2rem; // 32px
 $s10: 2.5rem;
+$s11: 2.75rem; // 44px
 $s12: 3rem;
 $s14: 3.5rem;
 $s16: 4rem;
 $s20: 5rem;
 $s24: 6rem;
+$s28: 7rem; // 112px
 $s32: 8rem;
 $s48: 12rem;
 $s64: 16rem;
+$s72: 18rem;
 
 $border-radius-none: 0;
 $border-radius-sm: 0.125rem;
-$border-radius-default: 0.25rem;
+$border-radius-default: 0.25rem; // 4px
 $border-radius-base: 0.375rem; // 6px
 $border-radius-lg: 0.5rem;
 $border-radius-full: 9999px;
@@ -358,6 +371,7 @@ $anchor-color: $blue-3;
 $footer-text-color: $turquoise-5;
 
 $property-card-width: 309px;
+$property-card-border: 2px;
 $property-card-image-height: 220px;
 $property-card-actions-height: 68px;
 $property-card-panel-hover-color: $gray-4;
@@ -365,11 +379,16 @@ $property-card-panel-hover-box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.7);
 $property-card-panel-overlay-color: $gray-5;
 $property-card-spacing: 14px;
 $property-card-address-height: 24px;
+$property-card-selector-size: 32px;
+$property-card-selector-bg: $blue-3;
+$property-card-selector-color: $highlight-gray-3;
+$property-card-selector-border: 1.2px;
 
 $property-status-color-on-track: $green-3;
 $property-status-color-at-risk: $yellow-1;
 $property-status-color-off-track: $orange-2;
 $property-status-color-not-available: $gray-6;
+$property-status-color-no-data: $gray-9;
 
 $portfolio-property-kpi-width: 160px;
 

@@ -121,7 +121,9 @@ class SpreadsheetForm(forms.ModelForm):
             if hasattr(importer, "find_overlapping_period"):
                 period = importer.find_overlapping_period(cleaned_data["project"])
                 if period is not None:
-                    period_path = reverse("admin:projects_period_change", args=[period.pk])
+                    period_path = reverse(
+                        "admin:projects_period_change", args=[period.pk]
+                    )
                     raise ValidationError(
                         f"Found overlapping period, please delete the existing one here. {BASE_URL}{period_path}"
                     )
@@ -287,3 +289,10 @@ class PropertyForm(forms.ModelForm):
             "building_logo": ImageCropWidget,
             "building_image": ImageCropWidget,
         }
+
+
+class PeriodInlineForm(forms.ModelForm):
+    is_select = forms.BooleanField()
+
+    class Meta:
+        labels = {"is_select": " "}

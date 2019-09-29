@@ -1,0 +1,59 @@
+@import "css/base.scss";
+
+$icon-size: 32px;
+$icon-spacing: 10px;
+$border-color: $gray-4;
+$border-width: 2px;
+$count-color: $highlight-gray-3;
+$count-bg: $gray-9;
+$count-spaces: 6px;
+
+.user-icon-list {
+    display: flex;
+    padding-left: $icon-spacing;
+    border-color: $border-color;
+    z-index: 0;
+}
+
+.user-icon-list__icon {
+    width: $icon-size;
+    height: $icon-size;
+    margin-left: -$icon-spacing;
+    border: $border-width solid;
+    border-color: inherit;
+    box-sizing: content-box;
+}
+
+.user-icon-list__count {
+    display: flex;
+    width: $icon-size;
+    height: $icon-size;
+    margin-left: $count-spaces;
+    font-family: $font-sans;
+    font-size: $text-xs;
+    line-height: 20px;
+    color: $count-color;
+    background: $count-bg;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-icon-list__tooltip {
+    text-transform: capitalize;
+
+    .rc-tooltip-inner {
+        padding: $s3/2 $s3;
+        font-family: $font-sans;
+        font-size: $text-xs;
+        text-align: center;
+    }
+}
+
+.user-icon-list__name {
+    color: $content-text-primary-color;
+}
+
+.user-icon-list__role {
+    color: $content-text-secondary-color;
+}
