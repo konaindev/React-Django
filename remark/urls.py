@@ -55,7 +55,7 @@ urlpatterns = [
     path("api/v1/sales/", include("remark.sales.urls", namespace="v1_sales")),
     path("api/v1/", include("remark.releases.urls", namespace="v1_releases")),
     path("api/v1/", include("remark.web.urls", namespace="v1_web")),
-    path("projects/", include("remark.projects.urls")),
+    path("api/v1/", include("remark.projects.urls", namespace="v1_projects")),
     path("users/", include("remark.users.urls")),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -157,7 +157,6 @@ class PortfolioTableView(APIView):
             raise Exception("Table data cannot be None")
 
         response_data = {
-            "share_info": self.share_info(),
             "kpi_bundles": self.kpi_bundle_list(),
             "selected_kpi_bundle": bundle,
             "kpi_order": self.kpi_ordering(bundle),
@@ -246,14 +245,6 @@ class PortfolioTableView(APIView):
                 "value": item
             })
         return result
-
-    def share_info(self):
-        # TODO: Fix ME
-        return {
-            "shared": False,
-            "share_url": "http://app.remarkably.com/",
-            "update_endpoint": "/projects/pro_example/update/"
-        }
 
     def kpi_ordering(self, bundle):
         bundle_data = KPI_BUNDLES[bundle]

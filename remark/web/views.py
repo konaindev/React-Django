@@ -32,9 +32,6 @@ class DashboardView(APIView):
         "fund": "fund__name",
     }
 
-    def get_page_title(self):
-        return "Dashboard"
-
     def get_project_details(self, project, request):
         """ cached by "project.public_id", details for project card on UI """
         cache_key = f"remark.web.views.dashboard_view.project.{project.public_id}"
@@ -45,7 +42,7 @@ class DashboardView(APIView):
             address = project.property.geo_address
             project_details = dict(
                 property_name=project.name,
-                property_id=project.public_id,
+                public_id=project.public_id,
                 address=f"{address.city}, {address.state}",
                 image_url=project.get_building_image()[1],
                 performance_rating=project.get_performance_rating(),

@@ -1,6 +1,6 @@
 from django.contrib.auth.views import redirect_to_login
 from django.contrib import messages
-from django.core.exceptions import PermissionDenied
+# from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.http import Http404, HttpResponse, JsonResponse
@@ -9,7 +9,12 @@ from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
 from django.urls import reverse
 
-from remark.lib.views import ReactView, APIView
+from rest_framework import exceptions, generics, status
+from rest_framework.views import APIView
+from rest_framework.permissions import BasePermission, IsAuthenticated
+from rest_framework.response import Response
+
+from remark.lib.views import ReactView
 from remark.admin import admin_site
 from remark.users.models import User
 from remark.web.views import DashboardView
@@ -33,196 +38,144 @@ logger = getLogger(__name__)
 class Redirect(Exception):
     pass
 
-# project model field names used to control anonymous access, by report_name
-shared_fields_by_report = dict(
-    baseline="is_baseline_report_shared",
-    market="is_tam_shared",
-    performance="is_performance_report_shared",
-    modeling="is_modeling_shared",
-    campaign_plan="is_campaign_plan_shared"
-)
+
+class AllowGetMethod(BasePermission):
+    """
+    Only allow GET requets
+    """
+    def has_permission(self, request, view):
+        return request.method == "GET"
 
 
-class ProjectSingleMixin:
-    def get_project(self, request, project_id):
-        self.project = get_object_or_404(Project, public_id=project_id)
+class AllowPatchMethod(BasePermission):
+    """
+    Only allow PATCH requets
+    """
+    def has_permission(self, request, view):
+        return request.method == "PATCH"
 
+
+class ProjectCustomPermission(BasePermission):
+    """
+    - check project specified by query parameter exists
+    - check user allowed access to the project
+    - check shared status of a particular report
+    """
+    valid_report_types = ["baseline", "market", "modeling", "campaign_plan", "performance"]
+
+    def check_report_enabled(self, project, report_type):
+        field_switcher = dict(
+            baseline="is_baseline_report_public",
+            market="is_tam_public",
+            performance="is_performance_report_public",
+            modeling="is_modeling_public",
+            campaign_plan="is_campaign_plan_public"
+        )
+        enabled_field = field_switcher[report_type]
+        return getattr(project, enabled_field, False)
+    
+    def check_report_shared(self, project, report_type):
+        field_switcher = dict(
+            baseline="is_baseline_report_shared",
+            market="is_tam_shared",
+            performance="is_performance_report_shared",
+            modeling="is_modeling_shared",
+            campaign_plan="is_campaign_plan_shared"
+        )
+        shared_field = field_switcher[report_type]
+        return getattr(project, shared_field, False)
+
+    def has_permission(self, request, view):
         user = request.user
+        allow_anonymous = view.allow_anonymous
 
-        # protected views
-        if not self.is_anonymous_view:
+        project_id = view.kwargs.get('project_id', None)
+        project = get_object_or_404(Project, public_id=project_id)
+
+        # for project overall endpoint
+        if not allow_anonymous:
             if not user.is_authenticated:
-                raise Redirect
-            elif not self.project.user_can_view(user):
-                raise PermissionDenied
+                raise exceptions.NotAuthenticated
+            elif not project.user_can_view(user):
+                raise exceptions.PermissionDenied
             else:
-                return
+                return True
 
-        # public shared report views
-        try:
-            shared_field = shared_fields_by_report.get(self.report_name)
-            is_report_shared = getattr(self.project, shared_field, False)
-            if not is_report_shared and (not user.is_authenticated):
-                logger.error(f"Project ID: {project_id} || is_report_shared: {is_report_shared} || user.is_authenticated: {user.is_authenticated}")
-                raise Http404
-        except Exception:
-            raise Http404
+        report_type = request.GET.get("report_type")
+        if report_type not in self.valid_report_types:
+            raise exceptions.ParseError # HTTP_400_BAD_REQUEST
+
+        # for project (shared) reports endpoint
+        is_report_enabled = self.check_report_enabled(project, report_type)
+        is_report_shared = self.check_report_shared(project, report_type)
+
+        if not is_report_enabled:
+            raise exceptions.NotFound
+
+        if not is_report_shared and not user.is_authenticated:
+            raise exceptions.NotAuthenticated
+        elif not is_report_shared and not project.user_can_view(user):
+            raise exceptions.PermissionDenied
+        else:
+            return True
 
 
-class ProjectPageView(LoginRequiredMixin, ProjectSingleMixin, ReactView):
-    """Render a page that shows information about the overall project."""
+class ProjectOverallView(APIView):
+    """JSON data about the overall project."""
 
-    page_class = "ProjectPage"
-    is_anonymous_view = False
-    report_name = None
-
-    def get_page_title(self):
-        return f"{self.project.name} Reports"
+    permission_classes = [AllowGetMethod, ProjectCustomPermission]
+    allow_anonymous = False
 
     def get(self, request, project_id):
-        try:
-            self.get_project(request, project_id)
-        except PermissionDenied:
-            return redirect("dashboard")
-        except Redirect:
-            return redirect_to_login(self.request.get_full_path())
-        except Exception as e:
-            logger.error(error_text(e))
-            raise Http404
+        project = get_object_or_404(Project, public_id=project_id)
+        project_data = project.to_jsonable()
+        project_data["health"] = project.get_performance_rating()
 
-        return self.render(
-            user=request.user.get_menu_dict(),
-            project=self.project.to_jsonable(),
-            report_links=ReportLinks.public_for_project(self.project),
-        )
+        return JsonResponse(project_data)
 
 
-class ReportPageViewBase(ProjectSingleMixin, ReactView):
+# class ReportPageViewBase(ProjectSingleMixin, ReactView):
+class ProjectReportsView(APIView):
     """
-    Generic base class for all report views that use ReportSelectors.
+    JSON data of a specific report type
     """
 
-    selector_class = None
-    is_anonymous_view = False
-    report_name = None
+    permission_classes = [AllowGetMethod, ProjectCustomPermission]
+    allow_anonymous = True
 
-    def get_page_title(self):
-        return f"{self.project.name} {self.page_title}"
-
-    def get_competitors(self, *args, **kwargs):
-        competitors = []
-        for project in self.project.competitors:
-            if project is not None:
-                try:
-                    selector = self.selector_class(project, *args, **kwargs)
-                    competitors.append({
-                        "report": selector.get_report_data(),
-                        "project": self.project.to_jsonable(),
-                    })
-                except:
-                    pass
-        return competitors
+    selector_classes = dict(
+        baseline=BaselineReportSelector,
+        market=MarketReportSelector,
+        performance=PerformanceReportSelector,
+        modeling=ModelingReportSelector,
+        campaign_plan=CampaignPlanSelector,
+    )
 
     def get(self, request, project_id, *args, **kwargs):
-        logger.info("ReportPageViewBase::get::top")
+        logger.info("ProjectReportsView::get::top")
+        logger.info(args)
+        logger.info(kwargs)
+
+        project = get_object_or_404(Project, public_id=project_id)
+        report_type = request.GET.get("report_type")
+        report_span = request.GET.get("report_span")
 
         try:
-            self.get_project(request, project_id)
-        except PermissionDenied:
-            return redirect("dashboard")
-        except Redirect:
-            return redirect_to_login(self.request.get_full_path())
-        except Exception as e:
-            logger.error(error_text(e))
-            raise Http404
-
-        logger.info("ReportPageViewBase::get::after get_object_or_404")
-
-        try:
-            logger.info("ReportPageViewBase::get::before selector_class")
-            self.selector = self.selector_class(self.project, *args, **kwargs)
-            logger.info("ReportPageViewBase::get::after selector_class")
+            logger.info("ProjectReportsView::get::before selector_class")
+            self.selector_class = self.selector_classes.get(report_type)
+            self.selector = self.selector_class(project, report_span, *args, **kwargs)
+            logger.info("ProjectReportsView::get::after selector_class")
         except Exception:
             self.selector = None
-            raise Http404
+            raise exceptions.NotFound
 
-        logger.info("ReportPageViewBase::get::checking has_report_data")
-        if (self.selector is None) or (not self.selector.has_report_data()):
-            if self.report_name == "market":
-                raise Http404
-            return redirect("market_report", project_id=project_id)
-        logger.info("ReportPageViewBase::get::after checking has_report_data")
+        logger.info("ProjectReportsView::get::checking has_report_data")
+        if not self.selector.has_report_data():
+            raise exceptions.NotFound
+        logger.info("ProjectReportsView::get::after checking has_report_data")
 
-        user_menu = None
-        share_info = None
-
-        if self.is_anonymous_view:
-            report_links = ReportLinks.share_for_project(self.project)
-            current_report_link = self.selector.get_share_link()
-        else:
-            user_menu = request.user.get_menu_dict()
-            report_links = ReportLinks.public_for_project(self.project)
-            current_report_link = self.selector.get_link()
-            share_info = self.selector.get_share_info(self.base_url())
-
-        project = self.project.to_jsonable()
-        project["health"] = self.project.get_performance_rating()
-
-        logger.info("ReportPageViewBase::get::bottom")
-
-        return self.render(
-            user=user_menu,
-            report_links=report_links,
-            current_report_link=current_report_link,
-            project=project,
-            report=self.selector.get_report_data(),
-            share_info=share_info
-        )
-
-
-class BaselineReportPageView(ReportPageViewBase):
-    """Return a basline report page."""
-
-    selector_class = BaselineReportSelector
-    page_class = "BaselineReportPage"
-    page_title = "Baseline Report"
-    report_name = "baseline"
-
-
-class PerformanceReportPageView(ReportPageViewBase):
-    """Return a performance report page."""
-
-    selector_class = PerformanceReportSelector
-    page_class = "PerformanceReportPage"
-    page_title = "Performance Report"
-    report_name = "performance"
-
-
-class MarketReportPageView(ReportPageViewBase):
-    """Return a total addressable market (TAM) report page."""
-
-    selector_class = MarketReportSelector
-    page_class = "MarketReportPage"
-    page_title = "Market Analysis"
-    report_name = "market"
-
-
-class ModelingReportPageView(ReportPageViewBase):
-    """Return a modeling options report page."""
-
-    selector_class = ModelingReportSelector
-    page_class = "ModelingReportPage"
-    page_title = "Modeling Report"
-    report_name = "modeling"
-
-
-class CampaignPlanPageView(ReportPageViewBase):
-    """Return a campaign plan page"""
-
-    selector_class = CampaignPlanSelector
-    page_class = "CampaignPlanPage"
-    page_title = "Campaign Plan"
-    report_name = "campaign_plan"
+        logger.info("ProjectReportsView::get::bottom")
+        return JsonResponse(self.selector.get_report_data())
 
 
 class TAMExportView(FormView, SingleObjectMixin):
