@@ -86,7 +86,7 @@ class ReportSelectorBase:
         for report_selector in cls.share_selectors_for_project(project):
             yield report_selector.get_share_link()
 
-    def __init__(self, project):
+    def __init__(self, project, **kwargs):
         self.project = project
 
     def get_url(self):
@@ -278,8 +278,9 @@ class PerformanceReportSelector(ReportSelectorBase):
             result = (None, None)
         return result
 
-    def __init__(self, project, report_span):
+    def __init__(self, project, **kwargs):
         super().__init__(project)
+        report_span = kwargs.get("report_span", None)
         self.report_span = report_span
 
         # Attempt to parse the report span as a date span
@@ -382,7 +383,7 @@ class MarketReportSelector(ReportSelectorBase):
         if tam_selector.has_report_data():
             yield tam_selector
 
-    def __init__(self, project):
+    def __init__(self, project, **kwargs):
         self.project = project
 
     def get_url(self):
@@ -426,7 +427,7 @@ class ModelingReportSelector(ReportSelectorBase):
         if modeling_selector.has_report_data():
             yield modeling_selector
 
-    def __init__(self, project):
+    def __init__(self, project, **kwargs):
         self.project = project
 
     def get_url(self):

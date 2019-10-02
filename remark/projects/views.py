@@ -64,25 +64,25 @@ class ProjectCustomPermission(BasePermission):
     valid_report_types = ["baseline", "market", "modeling", "campaign_plan", "performance"]
 
     def check_report_enabled(self, project, report_type):
-        field_switcher = dict(
+        internal_fields = dict(
             baseline="is_baseline_report_public",
             market="is_tam_public",
             performance="is_performance_report_public",
             modeling="is_modeling_public",
             campaign_plan="is_campaign_plan_public"
         )
-        enabled_field = field_switcher[report_type]
+        enabled_field = internal_fields[report_type]
         return getattr(project, enabled_field, False)
-    
+
     def check_report_shared(self, project, report_type):
-        field_switcher = dict(
+        internal_fields = dict(
             baseline="is_baseline_report_shared",
             market="is_tam_shared",
             performance="is_performance_report_shared",
             modeling="is_modeling_shared",
             campaign_plan="is_campaign_plan_shared"
         )
-        shared_field = field_switcher[report_type]
+        shared_field = internal_fields[report_type]
         return getattr(project, shared_field, False)
 
     def has_permission(self, request, view):
@@ -153,8 +153,6 @@ class ProjectReportsView(APIView):
 
     def get(self, request, project_id, *args, **kwargs):
         logger.info("ProjectReportsView::get::top")
-        logger.info(args)
-        logger.info(kwargs)
 
         project = get_object_or_404(Project, public_id=project_id)
         report_type = request.GET.get("report_type")
@@ -163,16 +161,17 @@ class ProjectReportsView(APIView):
         try:
             logger.info("ProjectReportsView::get::before selector_class")
             self.selector_class = self.selector_classes.get(report_type)
-            self.selector = self.selector_class(project, report_span, *args, **kwargs)
+            kwargs["report_span"] = report_span
+            self.selector = self.selector_class(project, **kwargs)
             logger.info("ProjectReportsView::get::after selector_class")
-        except Exception:
+        except Exception as e:
+            logger.error(error_text(e))
             self.selector = None
-            raise exceptions.NotFound
+            raise exceptions.APIException
 
-        logger.info("ProjectReportsView::get::checking has_report_data")
         if not self.selector.has_report_data():
-            raise exceptions.NotFound
-        logger.info("ProjectReportsView::get::after checking has_report_data")
+            # do we need detailed response here?
+            raise exceptions.APIException(detail="No report data")
 
         logger.info("ProjectReportsView::get::bottom")
         return JsonResponse(self.selector.get_report_data())
