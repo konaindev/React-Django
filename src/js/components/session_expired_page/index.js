@@ -3,9 +3,9 @@ import React from "react";
 import Button from "../button";
 import PageAuth from "../page_auth";
 
-import "./session_expired.scss";
+import "./session_expired_page.scss";
 
-export default class SessionExpired extends React.PureComponent {
+export default class SessionExpiredPage extends React.PureComponent {
   onClickHandler = () => {
     // TODO: Add action for resend email;
   };
