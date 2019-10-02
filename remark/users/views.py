@@ -200,3 +200,9 @@ class SessionExpireView(ReactView):
         if user.activated:
             return redirect(LOGIN_URL)
         return self.render(hash=hash)
+
+
+class ResendInviteView(APIView):
+    def get(self, request, hash):
+        # TODO: Add implementation
+        return self.render_success()

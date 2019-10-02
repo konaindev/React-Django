@@ -78,6 +78,10 @@ export const inviteModal = {
   addMembers: (projects, members) => ({
     type: "API_INVITE_MODAL_ADD_MEMBER",
     data: { projects, members }
+  }),
+  resend: hash => ({
+    type: "API_INVITE_RESEND",
+    hash
   })
 };
 

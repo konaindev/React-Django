@@ -10,6 +10,7 @@ from .views import (
     CreatePasswordView,
     ValidatePasswordView,
     SessionExpireView,
+    ResendInviteView,
 )
 
 
@@ -90,6 +91,11 @@ urlpatterns = [
         "<hash>/session-expire",
         anonymous_required(SessionExpireView.as_view()),
         name="session_expire",
+    ),
+    path(
+        "<hash>/resend-invite/",
+        anonymous_required(ResendInviteView.as_view()),
+        name="resend_invite",
     ),
     path("validate-password", ValidatePasswordView.as_view(), name="validate_password"),
 ]

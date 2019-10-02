@@ -1,9 +1,12 @@
 import React from "react";
+import { Provider } from "react-redux";
 import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
 
+import _store from "../../state/store";
 import SessionExpiredPage from "./index";
 
 storiesOf("SessionExpiredPage", module).add("default", () => (
-  <SessionExpiredPage />
+  <Provider store={_store}>
+    <SessionExpiredPage />
+  </Provider>
 ));

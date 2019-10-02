@@ -1,13 +1,20 @@
+import PropTypes from "prop-types";
 import React from "react";
+import { connect } from "react-redux";
 
 import Button from "../button";
 import PageAuth from "../page_auth";
+import { inviteModal } from "../../state/actions";
 
 import "./session_expired_page.scss";
 
-export default class SessionExpiredPage extends React.PureComponent {
+class SessionExpiredPage extends React.PureComponent {
+  static propTypes = {
+    hash: PropTypes.string.isRequired
+  };
+
   onClickHandler = () => {
-    // TODO: Add action for resend email;
+    this.props.dispatch(inviteModal.resend(this.props.hash));
   };
 
   render() {
@@ -32,3 +39,5 @@ export default class SessionExpiredPage extends React.PureComponent {
     );
   }
 }
+
+export default connect(x => x)(SessionExpiredPage);
