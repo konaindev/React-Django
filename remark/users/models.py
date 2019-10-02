@@ -10,8 +10,6 @@ from remark.lib.tokens import public_id
 from remark.lib.fields import NormalizedEmailField
 from .constants import ACCOUNT_TYPE
 
-from remark.crm.models import Person
-
 
 def usr_public_id():
     return public_id("usr")
@@ -152,6 +150,31 @@ class User(PermissionsMixin, AbstractBaseUser):
             "logout_url": reverse("logout")
             # TODO: Add account_url
         }
+
+    def get_role(self):
+        person = self.person_set.first()
+        if person:
+            role = person.role
+        else:
+            role = "member"
+        return role
+
+    def get_name(self):
+        person = self.person_set.first()
+        if person:
+            name = person.full_name
+        else:
+            name = self.email
+        return name
+
+    def get_icon_dict(self):
+        return {
+            "email": self.email,
+            "user_id": self.public_id,
+            "account_name": self.get_name(),
+            "role": self.get_role(),
+        }
+
 
 
 class Account(models.Model):

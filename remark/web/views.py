@@ -48,9 +48,10 @@ class DashboardView(LoginRequiredMixin, ReactView):
                 image_url=project.get_building_image()[1],
                 performance_rating=project.get_performance_rating(),
                 url=project.get_report_url(),
+                members=project.get_members(),
             )
             return project_details
-        
+
         return cache_lib.access_cache(cache_key, generate_value, cache_bust=cache_bust)
 
     def get_owned_projects(self, user):

@@ -9,7 +9,7 @@ function replaceObjectInArray(target, data, key) {
   if (index === -1) {
     return target;
   }
-  target[index] = data;
+  target[index] = { ...target[index], ...data };
   return target;
 }
 
@@ -48,7 +48,10 @@ const dashboard = (state = {}, action) => {
         propertiesObj[p.property_id] = p;
       });
       action.properties.forEach(p => {
-        propertiesObj[p.property_id] = p;
+        propertiesObj[p.property_id] = {
+          ...propertiesObj[p.property_id],
+          ...p
+        };
       });
       const properties = state.properties.map(
         p => propertiesObj[p.property_id]

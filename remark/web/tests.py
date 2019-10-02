@@ -7,7 +7,7 @@ from django.urls import reverse
 
 from unittest.mock import patch, Mock
 
-from remark.crm.models import Business
+from remark.crm.models import Business, Person, Office
 from remark.geo.models import Address
 from remark.users.models import Account, User
 from remark.projects.models import Fund, Project, Property
@@ -54,6 +54,20 @@ class PropertyListTestCase(TestCase):
         )
         self.property_manager3 = Business.objects.create(
             name="Test Property Manager 3", is_property_manager=True
+        )
+        office = Office.objects.create(
+            office_type=1,
+            name="Office",
+            address=address,
+            business=self.asset_manager1,
+        )
+        self.person = Person.objects.create(
+            first_name="Burch",
+            last_name="Sill",
+            role="admin",
+            email="test@test.com",
+            user=self.user,
+            office=office,
         )
         property_owner = Business.objects.create(
             name="Test Property Owner", is_property_owner=True
@@ -137,6 +151,14 @@ class PropertyListTestCase(TestCase):
                     "property_id": self.project2.public_id,
                     "property_name": self.project2.name,
                     "url": "/projects/{}/market/".format(self.project2.public_id),
+                    "members": [
+                        {
+                            "email": self.user.email,
+                            "user_id": self.user.public_id,
+                            "account_name": self.person.full_name,
+                            "role": self.person.role,
+                        }
+                    ],
                 },
                 {
                     "address": "Seattle, WA",
@@ -145,6 +167,14 @@ class PropertyListTestCase(TestCase):
                     "property_id": self.project1.public_id,
                     "property_name": self.project1.name,
                     "url": "/projects/{}/market/".format(self.project1.public_id),
+                    "members": [
+                        {
+                            "email": self.user.email,
+                            "user_id": self.user.public_id,
+                            "account_name": self.person.full_name,
+                            "role": self.person.role,
+                        }
+                    ],
                 },
             ],
             "property_managers": [
@@ -157,9 +187,7 @@ class PropertyListTestCase(TestCase):
                     "label": self.property_manager2.name,
                 },
             ],
-            "locations": [
-                {"city": "Seattle", "label": ["Seattle, WA"], "state": "wa"}
-            ],
+            "locations": [{"city": "Seattle", "label": ["Seattle, WA"], "state": "wa"}],
             "user": {
                 "account_id": self.account.id,
                 "account_name": self.account.company_name,
@@ -203,6 +231,14 @@ class PropertyListTestCase(TestCase):
                     "property_id": self.project1.public_id,
                     "property_name": self.project1.name,
                     "url": "/projects/{}/market/".format(self.project1.public_id),
+                    "members": [
+                        {
+                            "email": self.user.email,
+                            "user_id": self.user.public_id,
+                            "account_name": self.person.full_name,
+                            "role": self.person.role,
+                        }
+                    ],
                 }
             ],
             "property_managers": [
@@ -215,9 +251,7 @@ class PropertyListTestCase(TestCase):
                     "label": self.property_manager2.name,
                 },
             ],
-            "locations": [
-                {"city": "Seattle", "label": ["Seattle, WA"], "state": "wa"}
-            ],
+            "locations": [{"city": "Seattle", "label": ["Seattle, WA"], "state": "wa"}],
             "user": {
                 "account_id": self.account.id,
                 "account_name": self.account.company_name,
@@ -246,6 +280,7 @@ class PropertyListTestCase(TestCase):
         )
         self.assertCountEqual(response_json["locations"], data["locations"])
         self.assertCountEqual(response_json["user"], data["user"])
+
 
 class TestDashboardView(TestCase):
     def test_calling_access_cache(self):
