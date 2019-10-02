@@ -18,7 +18,7 @@ from remark.crm.constants import OFFICE_TYPES
 from remark.geo.models import Address
 from remark.geo.geocode import geocode
 from remark.settings import LOGIN_URL
-from remark.lib.views import ReactView, RemarkView
+from remark.lib.views import ReactView, RemarkView, APIView
 
 from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES
 from .forms import AccountCompleteForm
@@ -130,6 +130,12 @@ class CreatePasswordView(ReactView):
             return redirect(LOGIN_URL)
         if user.activated:
             return redirect(LOGIN_URL)
+        if user.invited:
+            date_now = datetime.datetime.now(timezone.utc)
+            delta = date_now - user.invited
+            if delta.days > 10:
+                redirect_url = reverse("session_expire", kwargs={"hash": hash})
+                return redirect(redirect_url)
         v_rules = [{"label": v["label"], "key": v["key"]} for v in VALIDATION_RULES]
         return self.render(
             hash=hash,
@@ -180,3 +186,22 @@ class ValidatePasswordView(RemarkView):
                 errors[v["key"]] = True
 
         return JsonResponse({"errors": errors}, status=200)
+
+
+class SessionExpireView(ReactView):
+    """Render Session Expired page."""
+
+    page_class = "SessionExpiredPage"
+    page_title = "Session Expired"
+
+    def get(self, request, hash):
+        try:
+            user = User.objects.get(public_id=hash)
+        except User.DoesNotExist:
+            return redirect(LOGIN_URL)
+
+        if user.activated:
+            return redirect(LOGIN_URL)
+        return self.render(
+            hash=hash,
+        )

@@ -131,6 +131,13 @@ class User(PermissionsMixin, AbstractBaseUser):
         help_text="Date when the user activated their account.",
     )
 
+    invited = models.DateTimeField(
+        default=None,
+        blank=True,
+        null=True,
+        help_text="Date when user invited",
+    )
+
     is_show_tutorial = models.BooleanField(
         default=True, help_text="Should there be tutorial showing"
     )

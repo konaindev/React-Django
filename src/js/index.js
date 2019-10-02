@@ -30,6 +30,7 @@ import { general } from "./state/actions";
 import PortfolioAnalysisView from "./components/portfolio_analysis_view";
 import CreatePasswordView from "./components/create_password_view";
 import CompleteAccountView from "./components/complete_account_view";
+import SessionExpiredPage from "./components/session_expired_page";
 
 const { store } = storeFunc();
 
@@ -46,7 +47,8 @@ const pages = {
   CampaignPlanPage,
   PortfolioAnalysisView,
   CompleteAccountView,
-  CreatePasswordView
+  CreatePasswordView,
+  SessionExpiredPage
 };
 
 /*
