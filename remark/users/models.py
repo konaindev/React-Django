@@ -14,6 +14,7 @@ from .constants import ACCOUNT_TYPE
 def usr_public_id():
     return public_id("usr")
 
+
 # This is still here due to a migration referencing it
 def avatar_media_path(user, filename):
     """
@@ -132,10 +133,7 @@ class User(PermissionsMixin, AbstractBaseUser):
     )
 
     invited = models.DateTimeField(
-        default=None,
-        blank=True,
-        null=True,
-        help_text="Date when user invited",
+        default=None, blank=True, null=True, help_text="Date when user invited"
     )
 
     is_show_tutorial = models.BooleanField(
@@ -185,22 +183,16 @@ class User(PermissionsMixin, AbstractBaseUser):
 
 
 class Account(models.Model):
-    company_name = models.CharField(
-        max_length=250,
-        help_text="Company Name"
-    )
+    company_name = models.CharField(max_length=250, help_text="Company Name")
 
     address = models.ForeignKey(
-        'geo.Address',
+        "geo.Address",
         on_delete=models.CASCADE,
         related_name="accounts",
-        help_text="Address"
+        help_text="Address",
     )
 
-    account_type = models.IntegerField(
-        choices=ACCOUNT_TYPE,
-        help_text="Account Type",
-    )
+    account_type = models.IntegerField(choices=ACCOUNT_TYPE, help_text="Account Type")
 
     def __str__(self):
         return self.company_name

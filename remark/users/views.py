@@ -137,10 +137,7 @@ class CreatePasswordView(ReactView):
                 redirect_url = reverse("session_expire", kwargs={"hash": hash})
                 return redirect(redirect_url)
         v_rules = [{"label": v["label"], "key": v["key"]} for v in VALIDATION_RULES]
-        return self.render(
-            hash=hash,
-            rules=v_rules,
-        )
+        return self.render(hash=hash, rules=v_rules)
 
     def post(self, request, hash):
         try:
@@ -202,6 +199,4 @@ class SessionExpireView(ReactView):
 
         if user.activated:
             return redirect(LOGIN_URL)
-        return self.render(
-            hash=hash,
-        )
+        return self.render(hash=hash)

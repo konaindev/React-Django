@@ -5,7 +5,12 @@ from django.views.generic.base import RedirectView
 
 from remark.decorators import anonymous_required
 
-from .views import CompleteAccountView, CreatePasswordView, ValidatePasswordView, SessionExpireView
+from .views import (
+    CompleteAccountView,
+    CreatePasswordView,
+    ValidatePasswordView,
+    SessionExpireView,
+)
 
 
 urlpatterns = [
@@ -75,9 +80,7 @@ urlpatterns = [
         anonymous_required(RedirectView.as_view(pattern_name="home")),
         name="password_reset_complete",
     ),
-    path(
-        "complete-account/", CompleteAccountView.as_view(), name="complete_account"
-    ),
+    path("complete-account/", CompleteAccountView.as_view(), name="complete_account"),
     path(
         "create-password/<hash>",
         anonymous_required(CreatePasswordView.as_view()),

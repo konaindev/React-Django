@@ -31,8 +31,10 @@ from remark.lib.logging import getLogger, error_text
 
 logger = getLogger(__name__)
 
+
 class Redirect(Exception):
     pass
+
 
 # project model field names used to control anonymous access, by report_name
 shared_fields_by_report = dict(
@@ -40,7 +42,7 @@ shared_fields_by_report = dict(
     market="is_tam_shared",
     performance="is_performance_report_shared",
     modeling="is_modeling_shared",
-    campaign_plan="is_campaign_plan_shared"
+    campaign_plan="is_campaign_plan_shared",
 )
 
 
@@ -64,7 +66,9 @@ class ProjectSingleMixin:
             shared_field = shared_fields_by_report.get(self.report_name)
             is_report_shared = getattr(self.project, shared_field, False)
             if not is_report_shared and (not user.is_authenticated):
-                logger.error(f"Project ID: {project_id} || is_report_shared: {is_report_shared} || user.is_authenticated: {user.is_authenticated}")
+                logger.error(
+                    f"Project ID: {project_id} || is_report_shared: {is_report_shared} || user.is_authenticated: {user.is_authenticated}"
+                )
                 raise Http404
         except Exception:
             raise Http404
@@ -116,10 +120,12 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
             if project is not None:
                 try:
                     selector = self.selector_class(project, *args, **kwargs)
-                    competitors.append({
-                        "report": selector.get_report_data(),
-                        "project": self.project.to_jsonable(),
-                    })
+                    competitors.append(
+                        {
+                            "report": selector.get_report_data(),
+                            "project": self.project.to_jsonable(),
+                        }
+                    )
                 except:
                     pass
         return competitors
@@ -177,7 +183,7 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
             current_report_link=current_report_link,
             project=project,
             report=self.selector.get_report_data(),
-            share_info=share_info
+            share_info=share_info,
         )
 
 
@@ -232,7 +238,7 @@ class TAMExportView(FormView, SingleObjectMixin):
     model = Project
 
     def get_success_url(self):
-        return reverse("admin:tam_export", kwargs={ "pk": self.object.pk })
+        return reverse("admin:tam_export", kwargs={"pk": self.object.pk})
 
     def get_context_data(self, **kwargs):
         self.object = self.get_object()
@@ -250,7 +256,10 @@ class TAMExportView(FormView, SingleObjectMixin):
         if form.is_valid():
             project = self.object
             export_tam_task.delay(project.pk, request.user.pk, form.cleaned_data)
-            messages.success(request, "TAM Export started. You will be emailed with the result shortly.")
+            messages.success(
+                request,
+                "TAM Export started. You will be emailed with the result shortly.",
+            )
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
