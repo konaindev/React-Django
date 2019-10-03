@@ -165,7 +165,11 @@ export const fetchInviteModal = store => next => action => {
     const url = `${process.env.BASE_URL}/users/${action.hash}/resend-invite/`;
     axiosGet(url)
       .then(response => {
-        // TODO: Add handler
+        if (response.status === 200) {
+          action.callback(response.data);
+        } else {
+          throw response;
+        }
       })
       .catch(e => console.log("-----> ERROR", e));
   } else {

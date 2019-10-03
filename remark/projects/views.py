@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.views import redirect_to_login
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
@@ -8,6 +10,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
 from django.urls import reverse
+from django.utils import timezone
 
 from remark.lib.views import ReactView, APIView
 from remark.admin import admin_site
@@ -329,6 +332,8 @@ class AddMembersView(LoginRequiredMixin, APIView):
             if is_new:
                 email = member.get("value")
                 user, _ = User.objects.get_or_create(email=email)
+                user.invited = datetime.datetime.now(timezone.utc)
+                user.save()
             else:
                 public_id = member.get("value")
                 user = User.objects.get(public_id=public_id)
