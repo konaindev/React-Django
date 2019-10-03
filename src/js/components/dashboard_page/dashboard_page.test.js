@@ -1,16 +1,18 @@
 import renderer from "react-test-renderer";
 import { Provider } from "react-redux";
 
-import _store from "../../state/store";
+import storeFunc from "../../state/store";
 
 import DashboardPage from "./index";
 import { props } from "./props";
+
+const { store } = storeFunc();
 
 describe("DashboardPage", () => {
   it("renders correctly", () => {
     const tree = renderer
       .create(
-        <Provider store={_store}>
+        <Provider store={store}>
           <DashboardPage {...props} />
         </Provider>
       )
@@ -20,7 +22,7 @@ describe("DashboardPage", () => {
   it("Row view", () => {
     const tree = renderer
       .create(
-        <Provider store={_store}>
+        <Provider store={store}>
           <DashboardPage {...props} viewType="row" />
         </Provider>
       )
@@ -30,7 +32,7 @@ describe("DashboardPage", () => {
   it("Row select", () => {
     const tree = renderer
       .create(
-        <Provider store={_store}>
+        <Provider store={store}>
           <DashboardPage
             {...props}
             viewType="row"

@@ -3,7 +3,8 @@ import {
   tutorial,
   networking,
   createPassword,
-  completeAccount
+  completeAccount,
+  uiStrings
 } from "../actions";
 import { axiosGet, axiosPost } from "../../utils/api";
 
@@ -158,6 +159,23 @@ export const fetchInviteModal = store => next => action => {
       .then(response => {
         const properties = response.data.projects;
         next({ type: "GENERAL_INVITE_MEMBER_COMPLETE", properties });
+      })
+      .catch(e => console.log("-----> ERROR", e));
+  } else {
+    next(action);
+  }
+};
+
+export const fetchUIString = store => next => action => {
+  if (action.type === "API_UI_STRINGS") {
+    const url = `${process.env.BASE_URL}/web/strings/`;
+    axiosPost(url, action.data)
+      .then(response => {
+        if (response.status === 200) {
+          next(uiStrings.set(response.data));
+        } else {
+          throw response;
+        }
       })
       .catch(e => console.log("-----> ERROR", e));
   } else {

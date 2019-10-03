@@ -183,11 +183,35 @@ const inviteModal = (state = {}, action) => {
   return newState;
 };
 
+const uiStrings = (
+  state = {
+    strings: {},
+    language: "en_us",
+    version: {}
+  },
+  action
+) => {
+  let newState = {};
+  switch (action.type) {
+    case "UI_STRINGS_SET_STATE": {
+      newState = { ...state };
+      const { language, strings, version } = action.data;
+      newState[strings][language] = strings;
+      newState[version][language] = version;
+      break;
+    }
+    default:
+      newState = { ...state };
+  }
+  return newState;
+};
+
 export default combineReducers({
   general: dashboard,
   network,
   tutorial,
   createPassword,
   completeAccount,
-  inviteModal
+  inviteModal,
+  uiStrings
 });

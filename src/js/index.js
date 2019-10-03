@@ -25,11 +25,13 @@ import ProjectPage from "./components/project_page";
 import ReleaseNotesPage from "./components/release_notes_page";
 import ReleaseNoteDetailsPage from "./components/release_note_details_page";
 import CampaignPlanPage from "./components/campaign_plan_page";
-import store from "./state/store";
+import storeFunc from "./state/store";
 import { general } from "./state/actions";
 import PortfolioAnalysisView from "./components/portfolio_analysis_view";
 import CreatePasswordView from "./components/create_password_view";
 import CompleteAccountView from "./components/complete_account_view";
+
+const { store } = storeFunc();
 
 const pages = {
   AccountSettings,
