@@ -226,7 +226,5 @@ class ResendInviteView(APIView):
 
         projects = Project.objects.get_all_for_user(user)
         projects_ids = [p.public_id for p in projects]
-        send_invite_email.apply_async(
-            args=(user.id, projects_ids),
-            countdown=2)
+        send_invite_email.apply_async(args=(user.id, projects_ids), countdown=2)
         return self.render_success()

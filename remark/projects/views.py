@@ -342,14 +342,11 @@ class AddMembersView(LoginRequiredMixin, APIView):
         for project in projects:
             for user in users:
                 project.view_group.user_set.add(user)
-                send_invite_email.apply_async(
-                    args=(inviter_name, user.id, projects_ids),
-                    countdown=2)
+                send_invite_email.apply_async(args=(inviter_name, user.id, projects_ids), countdown=2)
             project.save()
-        projects_list = [{
-            "property_id": p.public_id,
-            "members": p.get_members(),
-        } for p in projects]
+        projects_list = [
+            {"property_id": p.public_id, "members": p.get_members()} for p in projects
+        ]
         return JsonResponse({"projects": projects_list})
 
 

@@ -145,12 +145,9 @@ class SessionExpireTestCase(TestCase):
     def setUp(self):
         invited = datetime.datetime.now(timezone.utc) - datetime.timedelta(days=11)
         self.user_expire = User.objects.create_user(
-            email="test@test.com",
-            invited=invited
+            email="test@test.com", invited=invited
         )
-        self.user = User.objects.create_user(
-            email="test2@test.com",
-        )
+        self.user = User.objects.create_user(email="test2@test.com")
 
     def test_session_expire(self):
         user_public_id = self.user_expire.public_id
@@ -177,9 +174,7 @@ class SessionExpireTestCase(TestCase):
 
 class ResendInviteTestCase(TestCase):
     def setUp(self):
-        self.user = User.objects.create_user(
-            email="test@test.com"
-        )
+        self.user = User.objects.create_user(email="test@test.com")
 
         self.user_activated = User.objects.create_user(
             email="test2@test.com",
