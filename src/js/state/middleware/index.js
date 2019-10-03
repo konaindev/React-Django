@@ -168,11 +168,13 @@ export const fetchInviteModal = store => next => action => {
 
 export const fetchUIString = store => next => action => {
   if (action.type === "API_UI_STRINGS") {
-    const url = `${process.env.BASE_URL}/web/strings/`;
+    const url = `${process.env.BASE_URL}/localization`;
     axiosPost(url, action.data)
       .then(response => {
         if (response.status === 200) {
-          next(uiStrings.set(response.data));
+          next(uiStrings.set(response.data.data));
+        } else if (response.status === 208) {
+          next(action);
         } else {
           throw response;
         }

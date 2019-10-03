@@ -1,3 +1,4 @@
+import _cloneDeep from "lodash/cloneDeep";
 import { combineReducers } from "redux";
 
 const initState = {
@@ -194,14 +195,14 @@ const uiStrings = (
   let newState = {};
   switch (action.type) {
     case "UI_STRINGS_SET_STATE": {
-      newState = { ...state };
+      newState = _cloneDeep(state);
       const { language, strings, version } = action.data;
-      newState[strings][language] = strings;
-      newState[version][language] = version;
+      newState.strings[language] = strings;
+      newState.version[language] = version;
       break;
     }
     default:
-      newState = { ...state };
+      newState = state;
   }
   return newState;
 };

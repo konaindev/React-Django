@@ -1,5 +1,6 @@
 import datetime
 import decimal
+import json
 
 from django.contrib.auth.models import Group
 from django.test import TestCase, RequestFactory
@@ -14,6 +15,8 @@ from remark.projects.models import Fund, Project, Property
 from remark.web.views import DashboardView
 
 import inspect, types
+
+from .models import Localization, LocalizationVersion
 
 
 class PropertyListTestCase(TestCase):
@@ -290,3 +293,95 @@ class TestDashboardView(TestCase):
             cache_mock.assert_called_once()
             dashboard.get_user_filter_options(Mock())
             self.assertEqual(cache_mock.call_count, 2)
+
+
+class LocalizationTestCase(TestCase):
+    def setUp(self):
+        self.localization_version = "loc_123456"
+        Localization.objects.create(
+            key="test",
+            en_us="String for test",
+        )
+        en_version = LocalizationVersion.objects.get(language="en_us")
+        en_version.version = self.localization_version
+        en_version.save()
+        LocalizationVersion.objects.create(
+            language="fr",
+            version=self.localization_version,
+        )
+
+    def test_add_string(self):
+        Localization.objects.create(key="new", en_us="New string")
+        version_en = LocalizationVersion.objects.get(language="en_us")
+        version_fr = LocalizationVersion.objects.get(language="fr")
+        self.assertNotEqual(version_en.version, self.localization_version)
+        self.assertNotEqual(version_fr.version, self.localization_version)
+
+    def test_update_string(self):
+        localization = Localization.objects.get(key="test")
+        localization.en_us = "New string"
+        localization.save()
+        version_en = LocalizationVersion.objects.get(language="en_us")
+        version_fr = LocalizationVersion.objects.get(language="fr")
+        self.assertNotEqual(version_en.version, self.localization_version)
+        self.assertEqual(version_fr.version, self.localization_version)
+
+    def test_get_localization(self):
+        url = reverse("localization")
+        data = json.dumps({
+            "version": self.localization_version,
+            "language": "en_us",
+        })
+        response = self.client.post(url, data, "json")
+        self.assertEqual(response.status_code, 208)
+        response_json = response.json()
+        self.assertEqual(response_json["ok"], True)
+        self.assertEqual(response_json["data"]["language"], "en_us")
+        self.assertEqual(response_json["data"]["version"], self.localization_version)
+        self.assertEqual(response_json["data"]["strings"], {})
+
+    def test_get_localization_without_version(self):
+        url = reverse("localization")
+        data = json.dumps({
+            "language": "en_us",
+        })
+        response = self.client.post(url, data, "json")
+        self.assertEqual(response.status_code, 200)
+        response_json = response.json()
+        self.assertEqual(response_json["ok"], True)
+        self.assertEqual(response_json["data"]["language"], "en_us")
+        self.assertEqual(response_json["data"]["version"], self.localization_version)
+        self.assertEqual(response_json["data"]["strings"]["test"], "String for test")
+
+    def test_get_localization_with_old_version(self):
+        url = reverse("localization")
+        data = json.dumps({
+            "version": "old_version",
+            "language": "en_us",
+        })
+        response = self.client.post(url, data, "json")
+        self.assertEqual(response.status_code, 200)
+        response_json = response.json()
+        self.assertEqual(response_json["ok"], True)
+        self.assertEqual(response_json["data"]["language"], "en_us")
+        self.assertEqual(response_json["data"]["version"], self.localization_version)
+        self.assertEqual(response_json["data"]["strings"]["test"], "String for test")
+
+    def test_get_localization_without_params(self):
+        url = reverse("localization")
+        data = json.dumps({})
+        response = self.client.post(url, data, "json")
+        self.assertEqual(response.status_code, 200)
+        response_json = response.json()
+        self.assertEqual(response_json["ok"], True)
+        self.assertEqual(response_json["data"]["language"], "en_us")
+        self.assertEqual(response_json["data"]["version"], self.localization_version)
+        self.assertEqual(response_json["data"]["strings"]["test"], "String for test")
+
+    def test_get_localization_wrong_language(self):
+        url = reverse("localization")
+        data = json.dumps({
+            "language": "jp",
+        })
+        response = self.client.post(url, data, "json")
+        self.assertEqual(response.status_code, 500)

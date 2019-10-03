@@ -3,11 +3,14 @@ import json
 from django.conf import settings
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import JsonResponse
-from django.core.cache.backends.base import DEFAULT_TIMEOUT
 
-from remark.projects.models import Fund, Project
+from remark.projects.models import Project
 import remark.lib.cache as cache_lib
-from remark.lib.views import ReactView, RemarkView
+from remark.lib.views import ReactView, RemarkView, APIView
+
+from .constants import DEFAULT_LANGUAGE
+from .forms import LocalizationForm
+from .models import Localization, LocalizationVersion
 
 def has_property_in_list_of_dict(ary, prop, value):
     for item in ary:
@@ -183,7 +186,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
             **filter_options,
         )
 
-        accept = request.META.get('HTTP_ACCEPT')
+        accept = request.META.get("HTTP_ACCEPT")
         if accept == "application/json":
             return JsonResponse(response_data)
         else:
@@ -207,3 +210,28 @@ class TutorialView(LoginRequiredMixin, RemarkView):
         user.is_show_tutorial = params.get("is_show_tutorial", False)
         user.save()
         return JsonResponse({"is_show_tutorial": user.is_show_tutorial}, status=200)
+
+
+class LocalizationView(APIView):
+    def post(self, request):
+        params = self.get_data()
+        localization_form = LocalizationForm(params, initial={"language": "en_us"})
+        if not localization_form.is_valid():
+            errors = localization_form.errors.get_json_data()
+            return JsonResponse(errors, status=500)
+
+        version = localization_form.data.get("version")
+        language = localization_form.data.get("language", DEFAULT_LANGUAGE)
+
+        localization_version = LocalizationVersion.objects.get(language=language)
+        current_version = localization_version.version
+        strings = {}
+        status = 208
+        if current_version != version:
+            ui_strings = Localization.objects.all()
+            for s_ui in ui_strings:
+                strings[s_ui.key] = getattr(s_ui, language)
+            status = 200
+
+        result = {"language": language, "strings": strings, "version": current_version}
+        return self.render_success(result, status=status)
