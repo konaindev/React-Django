@@ -45,23 +45,27 @@ const dashboard = (state = {}, action) => {
     }
     case "GENERAL_INVITE_MEMBER_COMPLETE": {
       const propertiesObj = {};
-      state.properties.forEach(p => {
-        propertiesObj[p.property_id] = p;
-      });
-      action.properties.forEach(p => {
-        propertiesObj[p.property_id] = {
-          ...propertiesObj[p.property_id],
-          ...p
+      if (state.properties) {
+        state.properties.forEach(p => {
+          propertiesObj[p.property_id] = p;
+        });
+        action.properties.forEach(p => {
+          propertiesObj[p.property_id] = {
+            ...propertiesObj[p.property_id],
+            ...p
+          };
+        });
+        const properties = state.properties.map(
+          p => propertiesObj[p.property_id]
+        );
+        newState = {
+          ...state,
+          properties,
+          selectedProperties: []
         };
-      });
-      const properties = state.properties.map(
-        p => propertiesObj[p.property_id]
-      );
-      newState = {
-        ...state,
-        properties,
-        selectedProperties: []
-      };
+      } else {
+        newState = { ...state };
+      }
       break;
     }
     default:
