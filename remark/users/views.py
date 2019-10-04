@@ -21,6 +21,7 @@ from remark.projects.models import Project
 from remark.settings import LOGIN_URL
 from remark.lib.views import ReactView, RemarkView, APIView
 from remark.email_app.invites.added_to_property import send_invite_email
+from remark.settings import INVITATION_EXP
 
 from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES
 from .forms import AccountCompleteForm
@@ -135,7 +136,7 @@ class CreatePasswordView(ReactView):
         if user.invited:
             date_now = datetime.datetime.now(timezone.utc)
             delta = date_now - user.invited
-            if delta.days > 10:
+            if delta.days > INVITATION_EXP:
                 redirect_url = reverse("session_expire", kwargs={"hash": hash})
                 return redirect(redirect_url)
         v_rules = [{"label": v["label"], "key": v["key"]} for v in VALIDATION_RULES]
@@ -203,7 +204,7 @@ class SessionExpireView(ReactView):
         if user.invited:
             date_now = datetime.datetime.now(timezone.utc)
             delta = date_now - user.invited
-            if delta.days <= 10:
+            if delta.days <= INVITATION_EXP:
                 redirect_url = reverse("create_password", kwargs={"hash": hash})
                 return redirect(redirect_url)
         else:
