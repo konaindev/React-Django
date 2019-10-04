@@ -176,7 +176,7 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
             share_info = self.selector.get_share_info(self.base_url())
 
         project = self.project.to_jsonable()
-        project["health"] = self.project.get_performancAddMembersViewe_rating()
+        project["health"] = self.project.get_performance_rating()
 
         logger.info("ReportPageViewBase::get::bottom")
 
