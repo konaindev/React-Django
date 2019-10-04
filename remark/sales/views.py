@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 
 from remark.lib.email import send_email
-from remark.settings import SALES_EMAIL
+from remark.email_app.constants import SALES_EMAIL
 
 from .forms import AddressForm, ProductInquiryForm
 

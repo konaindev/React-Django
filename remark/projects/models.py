@@ -475,6 +475,11 @@ class Project(models.Model):
             return -1
         return health_check(lease_rate, target_lease_rate)
 
+    def get_members(self):
+        users_q = self.view_group.user_set.all()
+        users = [user.get_icon_dict() for user in users_q]
+        return users
+
     def user_can_view(self, user):
         if user.is_superuser:
             return True

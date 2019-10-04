@@ -80,3 +80,14 @@ export const inviteModal = {
     data: { projects, members }
   })
 };
+
+export const uiStrings = {
+  fetch: (version, language) => ({
+    type: "API_UI_STRINGS",
+    data: { version, language }
+  }),
+  set: data => ({
+    type: "UI_STRINGS_SET_STATE",
+    data
+  })
+};

@@ -3,7 +3,7 @@ from django.contrib import messages
 # from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
-from django.http import Http404, HttpResponse, JsonResponse
+from django.http import Http404, JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
@@ -17,7 +17,8 @@ from rest_framework.response import Response
 from remark.lib.views import ReactView
 from remark.admin import admin_site
 from remark.users.models import User
-from remark.web.views import DashboardView
+from remark.email_app.invites.added_to_property import send_invite_email
+
 from .reports.selectors import (
     BaselineReportSelector,
     PerformanceReportSelector,
@@ -258,6 +259,7 @@ class MembersView(LoginRequiredMixin, APIView):
 
 class AddMembersView(LoginRequiredMixin, APIView):
     def post(self, request):
+        inviter_name = request.user.get_name()
         payload = self.get_data()
         members = payload.get("members", [])
 
@@ -266,18 +268,48 @@ class AddMembersView(LoginRequiredMixin, APIView):
 
         users = []
         for member in members:
-            user, _ = User.objects.get_or_create_user(member.get("value"))
+            is_new = member.get("__isNew__", False)
+            if is_new:
+                email = member.get("value")
+                user, _ = User.objects.get_or_create(email=email)
+            else:
+                public_id = member.get("value")
+                user = User.objects.get(public_id=public_id)
             users.append(user)
 
         for project in projects:
             for user in users:
                 project.view_group.user_set.add(user)
+                send_invite_email.apply_async(
+                    args=(inviter_name, user.id, projects_ids),
+                    countdown=2)
             project.save()
-        projects_list = [DashboardView.get_project_details(p) for p in projects]
+        projects_list = [{
+            "property_id": p.public_id,
+            "members": p.get_members(),
+        } for p in projects]
         return JsonResponse({"projects": projects_list})
 
 
 class ProjectRemoveMemberIView(LoginRequiredMixin, APIView):
     def post(self, request, project_id):
-        # TODO: Implement this
-        return JsonResponse({"project": {}})
+        payload = self.get_data()
+        member = payload.get("member", {})
+        user_id = member.get("user_id")
+        try:
+            user = User.objects.get(public_id=user_id)
+        except User.DoesNotExist:
+            return JsonResponse({"error": "Project not found"}, status=500)
+
+        try:
+            project = Project.objects.get(public_id=project_id)
+        except Project.DoesNotExist:
+            return JsonResponse({"error": "User not found"}, status=500)
+
+        project.view_group.user_set.remove(user)
+        project.save()
+        projects_dict = {
+            "property_id": project.public_id,
+            "members": project.get_members(),
+        }
+        return JsonResponse({"project": projects_dict})

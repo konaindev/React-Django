@@ -17,7 +17,7 @@ from remark.crm.models import Business, Office, Person
 from remark.crm.constants import OFFICE_TYPES
 from remark.geo.models import Address
 from remark.geo.geocode import geocode
-from remark.settings import LOGIN_URL, LOGIN_REDIRECT_URL
+from remark.settings import LOGIN_URL
 from remark.lib.views import ReactView, RemarkView
 
 from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES
@@ -115,11 +115,6 @@ class CompleteAccountView(LoginRequiredMixin, ReactView):
         else:
             response = JsonResponse(form.errors, status=500)
         return response
-
-class UsersView(LoginRequiredMixin, RemarkView):
-    def post(self, request):
-        # TODO: Implement this
-        return JsonResponse({"users": []})
 
 
 class CreatePasswordView(ReactView):

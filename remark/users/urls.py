@@ -5,7 +5,7 @@ from django.views.generic.base import RedirectView
 
 from remark.decorators import anonymous_required
 
-from .views import CompleteAccountView, CreatePasswordView, ValidatePasswordView, UsersView
+from .views import CompleteAccountView, CreatePasswordView, ValidatePasswordView
 
 
 urlpatterns = [

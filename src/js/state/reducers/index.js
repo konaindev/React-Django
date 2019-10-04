@@ -1,3 +1,4 @@
+import _cloneDeep from "lodash/cloneDeep";
 import { combineReducers } from "redux";
 
 const initState = {
@@ -9,7 +10,7 @@ function replaceObjectInArray(target, data, key) {
   if (index === -1) {
     return target;
   }
-  target[index] = data;
+  target[index] = { ...target[index], ...data };
   return target;
 }
 
@@ -44,20 +45,27 @@ const dashboard = (state = {}, action) => {
     }
     case "GENERAL_INVITE_MEMBER_COMPLETE": {
       const propertiesObj = {};
-      state.properties.forEach(p => {
-        propertiesObj[p.property_id] = p;
-      });
-      action.properties.forEach(p => {
-        propertiesObj[p.property_id] = p;
-      });
-      const properties = state.properties.map(
-        p => propertiesObj[p.property_id]
-      );
-      newState = {
-        ...state,
-        properties,
-        selectedProperties: []
-      };
+      if (state.properties) {
+        state.properties.forEach(p => {
+          propertiesObj[p.property_id] = p;
+        });
+        action.properties.forEach(p => {
+          propertiesObj[p.property_id] = {
+            ...propertiesObj[p.property_id],
+            ...p
+          };
+        });
+        const properties = state.properties.map(
+          p => propertiesObj[p.property_id]
+        );
+        newState = {
+          ...state,
+          properties,
+          selectedProperties: []
+        };
+      } else {
+        newState = { ...state };
+      }
       break;
     }
     default:
@@ -180,11 +188,35 @@ const inviteModal = (state = {}, action) => {
   return newState;
 };
 
+const uiStrings = (
+  state = {
+    strings: {},
+    language: "en_us",
+    version: {}
+  },
+  action
+) => {
+  let newState = {};
+  switch (action.type) {
+    case "UI_STRINGS_SET_STATE": {
+      newState = _cloneDeep(state);
+      const { language, strings, version } = action.data;
+      newState.strings[language] = strings;
+      newState.version[language] = version;
+      break;
+    }
+    default:
+      newState = state;
+  }
+  return newState;
+};
+
 export default combineReducers({
   general: dashboard,
   network,
   tutorial,
   createPassword,
   completeAccount,
-  inviteModal
+  inviteModal,
+  uiStrings
 });

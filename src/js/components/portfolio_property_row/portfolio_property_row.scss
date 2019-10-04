@@ -2,14 +2,16 @@
 
 $row-height: 110;
 $row-indent: 50px;
-$row-background: #222b33;
-$row-background-hover: $gray-3;
+$row-background: $gray-3;
+$subproperty-background: #222b33;
+$row-background-hover: $gray-4;
 $border-color: $gray-4;
 $image-size: 36px;
-$image-spacing: $s14;
-$subproperty-image-spacing: $s20;
-$image-spacing-with-alarm: $s4;
-$image-border-radius: 6px;
+$image-spacing: 3.75rem;
+$subproperty-image-spacing: 5.625rem;
+$image-spacing-with-alarm: $s5;
+$image-border-radius: 50%;
+$subproperty-image-border-radius: 6px;
 $title-width: 200px;
 $title-spacing: 20px;
 $title-height: 20px;
@@ -21,7 +23,7 @@ $link-padding: 8px 10px;
 $link-height: 20px;
 $empty-text-size: 1.75rem;
 $alarm-spacing: $s5;
-$subproperty-alarm-spacing: 2.75rem;
+$subproperty-alarm-spacing: 3.125rem;
 
 .portfolio-property-row {
     display: flex;
@@ -44,8 +46,11 @@ $subproperty-alarm-spacing: 2.75rem;
     }
 
     &--subproperty {
+        background: $subproperty-background;
+
         .portfolio-property-row__image {
             margin-left: $subproperty-image-spacing;
+            border-radius: $subproperty-image-border-radius;
         }
         .portfolio-property-row__alarm {
             margin-left: $subproperty-alarm-spacing;

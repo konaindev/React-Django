@@ -157,6 +157,7 @@ export default class CampaignInvestmentReport extends Component {
         <InvestmentAllocation
           retention={this.props.report?.investment?.retention}
           acquisition={this.props.report?.investment?.acquisition}
+          report={this.props.report}
         />
       </ReportSection>
     );

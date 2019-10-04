@@ -2,14 +2,18 @@ import json
 
 from django.conf import settings
 
-# from rest_framework import status
+from rest_framework import status as drf_status
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from remark.projects.models import Fund, Project
+from remark.projects.models import Project
 import remark.lib.cache as cache_lib
-from remark.lib.views import ReactView, RemarkView
+from remark.lib.views import ReactView, RemarkView, APIView
+
+from .constants import DEFAULT_LANGUAGE
+from .forms import LocalizationForm
+from .models import Localization, LocalizationVersion
 
 def has_property_in_list_of_dict(ary, prop, value):
     for item in ary:
@@ -47,9 +51,10 @@ class DashboardView(APIView):
                 image_url=project.get_building_image()[1],
                 performance_rating=project.get_performance_rating(),
                 url=project.get_report_url(),
+                members=project.get_members(),
             )
             return project_details
-        
+
         return cache_lib.access_cache(cache_key, generate_value, cache_bust=cache_bust)
 
     def get_owned_projects(self, user):
@@ -201,6 +206,31 @@ class TutorialView(APIView):
         user = request.user
         user.is_show_tutorial = params.get("is_show_tutorial", False)
         user.save()
-        response_data = dict(is_show_tutorial=user.is_show_tutorial,)
 
+        response_data = dict(is_show_tutorial=user.is_show_tutorial,)
         return Response(response_data)
+
+
+class LocalizationView(APIView):
+    def post(self, request):
+        params = self.get_data()
+        localization_form = LocalizationForm(params, initial={"language": "en_us"})
+        if not localization_form.is_valid():
+            errors = localization_form.errors.get_json_data()
+            return Response(errors, status=drf_status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        version = localization_form.data.get("version")
+        language = localization_form.data.get("language", DEFAULT_LANGUAGE)
+
+        localization_version = LocalizationVersion.objects.get(language=language)
+        current_version = localization_version.version
+        strings = {}
+        status = drf_status.HTTP_208_ALREADY_REPORTED
+        if current_version != version:
+            ui_strings = Localization.objects.all()
+            for s_ui in ui_strings:
+                strings[s_ui.key] = getattr(s_ui, language)
+            status = drf_status.HTTP_200_OK
+
+        response_data = {"language": language, "strings": strings, "version": current_version}
+        return Response(response_data, status=status)

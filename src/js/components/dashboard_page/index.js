@@ -73,11 +73,17 @@ export class DashboardPage extends React.PureComponent {
     }
   ];
 
+  /*
+    showLoader (called in componentDidUpdate):
+      This was a hacky fix a spinner issue (lag between when data was available and when 'isFetching' is set to false resulting in prior page displaying before re-render); 
+      showLoader represents a delayed replica of is (waits 300 ms before updating component)
+  */
   constructor(props) {
     super(props);
     this.state = {
       viewType: props.viewType,
-      isShowAddPropertyForm: false
+      isShowAddPropertyForm: false,
+      showLoader: false
     };
 
     this._router = router("/dashboard")(queryString => {
@@ -112,7 +118,20 @@ export class DashboardPage extends React.PureComponent {
     }
   }
 
-  onChangeFilter = filters => this.props.onChangeFilter(filters);
+  onChangeFilter = filters => {
+    this.props.onChangeFilter(filters);
+  };
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.isFetching && !this.props.isFetching) {
+      setTimeout(() => {
+        this.setState({ showLoader: false });
+      }, process.env.LOADER_TIMEOUT || 300);
+    }
+    if (!prevProps.isFetching && this.props.isFetching) {
+      this.setState({ showLoader: true });
+    }
+  }
 
   toggleView = viewType => this.setState({ viewType });
 
@@ -205,12 +224,15 @@ export class DashboardPage extends React.PureComponent {
               </div>
             </div>
             <div className="dashboard-content__properties">
-              <Loader isShow={isFetching} />
-              <PropertiesListComponent
-                properties={this.props.properties}
-                selectedProperties={this.props.selectedProperties}
-                onSelect={this.onSelectHandler}
-              />
+              {this.state.showLoader ? (
+                <Loader isShow={true} />
+              ) : (
+                <PropertiesListComponent
+                  properties={this.props.properties}
+                  selectedProperties={this.props.selectedProperties}
+                  onSelect={this.onSelectHandler}
+                />
+              )}
             </div>
           </Container>
           <AddPropertyModal

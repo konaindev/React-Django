@@ -2,7 +2,7 @@ import sendgrid
 import json
 import os
 
-import urllib
+from sendgrid.helpers.mail import Mail
 
 
 api_key = os.environ.get('SENDGRID_API_KEY')
@@ -138,3 +138,14 @@ def create_campaign_if_not_exists(campaign_id, title, subject, sender_id, list_i
     if campaign_id is None:
         return create_campaign(title, subject, sender_id, list_id, categories, html_content)
     return update_campaign(campaign_id, title, subject, sender_id, list_id, categories, html_content)
+
+
+def send_email(from_email, reply_to, to_emails, subject, html_content):
+    message = Mail(
+        from_email=from_email,
+        to_emails=to_emails,
+        subject=subject,
+        html_content=html_content,
+    )
+    message.reply_to = reply_to
+    sg.send(message)
