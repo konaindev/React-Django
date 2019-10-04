@@ -1,20 +1,17 @@
-from django.contrib.auth.views import redirect_to_login
 from django.contrib import messages
-# from django.core.exceptions import PermissionDenied
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
 from django.http import Http404, JsonResponse
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404
 from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
 from django.urls import reverse
 
-from rest_framework import exceptions, generics, status
+from rest_framework import exceptions, generics, mixins, status, viewsets
 from rest_framework.views import APIView
 from rest_framework.permissions import BasePermission, IsAuthenticated
 from rest_framework.response import Response
 
-from remark.lib.views import ReactView
 from remark.admin import admin_site
 from remark.users.models import User
 from remark.email_app.invites.added_to_property import send_invite_email
@@ -29,31 +26,12 @@ from .reports.selectors import (
 )
 from .models import Project
 from .forms import TAMExportForm
+from .serializers import ProjectSerializer
 from .tasks import export_tam_task
 
 from remark.lib.logging import getLogger, error_text
 
-
 logger = getLogger(__name__)
-
-class Redirect(Exception):
-    pass
-
-
-class AllowGetMethod(BasePermission):
-    """
-    Only allow GET requets
-    """
-    def has_permission(self, request, view):
-        return request.method == "GET"
-
-
-class AllowPatchMethod(BasePermission):
-    """
-    Only allow PATCH requets
-    """
-    def has_permission(self, request, view):
-        return request.method == "PATCH"
 
 
 class ProjectCustomPermission(BasePermission):
@@ -90,7 +68,7 @@ class ProjectCustomPermission(BasePermission):
         user = request.user
         allow_anonymous = view.allow_anonymous
 
-        project_id = view.kwargs.get('project_id', None)
+        project_id = view.kwargs.get("public_id", None)
         project = get_object_or_404(Project, public_id=project_id)
 
         # for project overall endpoint
@@ -121,28 +99,41 @@ class ProjectCustomPermission(BasePermission):
             return True
 
 
-class ProjectOverallView(APIView):
+class ProjectOverallView(generics.RetrieveAPIView):
     """JSON data about the overall project."""
 
-    permission_classes = [AllowGetMethod, ProjectCustomPermission]
     allow_anonymous = False
 
-    def get(self, request, project_id):
-        project = get_object_or_404(Project, public_id=project_id)
-        project_data = project.to_jsonable()
-        project_data["health"] = project.get_performance_rating()
+    permission_classes = [ProjectCustomPermission]
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+    lookup_field = "public_id"
+    lookup_url_kwarg = "public_id"
+    http_method_names = ["get"]
 
-        return JsonResponse(project_data)
+
+class ProjectPartialUpdateView(generics.UpdateAPIView):
+    """Perform a partial update"""
+
+    allow_anonymous = False
+
+    permission_classes = [ProjectCustomPermission]
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+    lookup_field = "public_id"
+    lookup_url_kwarg = "public_id"
+    http_method_names = ["patch"]
 
 
-# class ReportPageViewBase(ProjectSingleMixin, ReactView):
 class ProjectReportsView(APIView):
     """
     JSON data of a specific report type
     """
 
-    permission_classes = [AllowGetMethod, ProjectCustomPermission]
     allow_anonymous = True
+
+    permission_classes = [ProjectCustomPermission]
+    http_method_names = ["get"]
 
     selector_classes = dict(
         baseline=BaselineReportSelector,
@@ -152,18 +143,18 @@ class ProjectReportsView(APIView):
         campaign_plan=CampaignPlanSelector,
     )
 
-    def get(self, request, project_id, *args, **kwargs):
+    def get(self, request, public_id, *args, **kwargs):
         logger.info("ProjectReportsView::get::top")
 
-        project = get_object_or_404(Project, public_id=project_id)
+        project = get_object_or_404(Project, public_id=public_id)
         report_type = request.GET.get("report_type")
         report_span = request.GET.get("report_span")
 
         try:
             logger.info("ProjectReportsView::get::before selector_class")
             self.selector_class = self.selector_classes.get(report_type)
-            kwargs["report_span"] = report_span
-            self.selector = self.selector_class(project, **kwargs)
+            opt_args = (report_span,) if report_type == "performance" else ()
+            self.selector = self.selector_class(project, *opt_args, **kwargs)
             logger.info("ProjectReportsView::get::after selector_class")
         except Exception as e:
             logger.error(error_text(e))
@@ -175,7 +166,7 @@ class ProjectReportsView(APIView):
             raise exceptions.APIException(detail="No report data")
 
         logger.info("ProjectReportsView::get::bottom")
-        return JsonResponse(self.selector.get_report_data())
+        return Response(self.selector.get_report_data())
 
 
 class TAMExportView(FormView, SingleObjectMixin):
@@ -254,7 +245,7 @@ class MembersView(LoginRequiredMixin, APIView):
             & Q(account__isnull=False)
         )
         members = [user.get_menu_dict() for user in users]
-        return JsonResponse({"members": members})
+        return Response({"members": members})
 
 
 class AddMembersView(LoginRequiredMixin, APIView):

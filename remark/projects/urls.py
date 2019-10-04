@@ -13,8 +13,8 @@ app_name = "releases"
 
 
 urlpatterns = [
-    path("projects/<project_id>/overall/", ProjectOverallView.as_view(), name="project_overall"),
-    path("projects/<project_id>/reports/", ProjectReportsView.as_view(), name="project_reports"),
+    path("projects/<public_id>/overall/", ProjectOverallView.as_view(), name="project_overall"),
+    path("projects/<public_id>/reports/", ProjectReportsView.as_view(), name="project_reports"),
     # path(
     #     "<project_id>/baseline/",
     #     BaselineReportPageView.as_view(),
