@@ -199,39 +199,6 @@ class TAMExportView(FormView, SingleObjectMixin):
             return self.form_invalid(form)
 
 
-class ProjectUpdateAPIView(LoginRequiredMixin, APIView):
-    # APIView to update project details
-
-    # Doesn't need CSRF protection for this REST API endpoint
-    csrf_exempt = True
-
-    actions_supported = ["shared_reports"]
-
-    def put(self, request, project_id):
-        payload = self.get_data()
-        update_action = payload.get("update_action")
-
-        if not update_action in self.actions_supported:
-            return self.render_failure_message("Not supported")
-
-        if update_action == "shared_reports":
-            return self.update_shared_reports(project_id, payload)
-
-    def update_shared_reports(self, project_id, payload):
-        try:
-            shared = payload.get("shared")
-            report_name = payload.get("report_name")
-            shared_field = shared_fields_by_report.get(report_name)
-
-            project = Project.objects.get(public_id=project_id)
-            setattr(project, shared_field, shared)
-            project.save()
-
-            return self.render_success()
-        except Exception:
-            return self.render_failure_message("Failed to update")
-
-
 class MembersView(LoginRequiredMixin, APIView):
     def post(self, request):
         payload = self.get_data()
