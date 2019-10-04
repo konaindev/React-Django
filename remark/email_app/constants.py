@@ -1,4 +1,9 @@
-SENDGRID_SENDER_ID = "623970"
-SENDGRID_SENDER_FROM = "analytics@remarkably.io"
-SENDGRID_SENDER_REPLY_TO = "customersuccess@remarkably.io"
-TEMPLATE_VAR_CONTACT_EMAIL = "info@remarkably.io"
+DEFAULT_FROM_NAME = "Remarkably"
+
+HELLO_EMAIL = "hello@remarkably.io"
+SUPPORT_EMAIL = "support@remarkably.io"
+INFO_EMAIL = "info@remarkably.io"
+SALES_EMAIL = "sales@remarkably.io"
+
+# Sendgrid
+SG_CUSTOMER_SUCCESS_SENDER_ID = "623970" # Sender for weekly performance

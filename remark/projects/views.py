@@ -307,6 +307,7 @@ class MembersView(LoginRequiredMixin, APIView):
 
 class AddMembersView(LoginRequiredMixin, APIView):
     def post(self, request):
+        inviter_name = request.user.get_name()
         payload = self.get_data()
         members = payload.get("members", [])
 
@@ -328,7 +329,7 @@ class AddMembersView(LoginRequiredMixin, APIView):
             for user in users:
                 project.view_group.user_set.add(user)
                 send_invite_email.apply_async(
-                    args=(user.id, projects_ids),
+                    args=(inviter_name, user.id, projects_ids),
                     countdown=2)
             project.save()
         projects_list = [{

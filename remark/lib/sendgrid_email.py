@@ -140,11 +140,12 @@ def create_campaign_if_not_exists(campaign_id, title, subject, sender_id, list_i
     return update_campaign(campaign_id, title, subject, sender_id, list_id, categories, html_content)
 
 
-def send_email(from_email, to_emails, subject, html_content):
+def send_email(from_email, reply_to, to_emails, subject, html_content):
     message = Mail(
         from_email=from_email,
         to_emails=to_emails,
         subject=subject,
         html_content=html_content,
     )
+    message.reply_to = reply_to
     sg.send(message)
