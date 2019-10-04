@@ -10,7 +10,9 @@ const AccountForm = ({ className, steps, title, subtitle, children }) => {
   const classes = cn("account-form", className);
   return (
     <div className={classes}>
-      <WizardProgress className="account-form__wizard" steps={steps} />
+      {steps && (
+        <WizardProgress className="account-form__wizard" steps={steps} />
+      )}
       <div className="account-form__title">{title}</div>
       <div className="account-form__subtitle">{subtitle}</div>
       <div className="account-form__body">{children}</div>
