@@ -20,4 +20,11 @@ describe("ButtonToggle", () => {
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
+
+  it("renders toggle in medium state", () => {
+    const tree = renderer
+      .create(<ButtonToggle checked={ButtonToggle.STATE_ENUM.MEDIUM} />)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

@@ -1,0 +1,431 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchInput close works 1`] = `
+<SearchInput
+  onSearch={[Function]}
+  theme=""
+  value=""
+>
+  <div
+    className="search-input-box"
+  >
+    <Input
+      className="search-input"
+      onChange={[Function]}
+      theme=""
+      type="text"
+      value="Test"
+      valueFormatter={[Function]}
+    >
+      <input
+        className="input search-input"
+        onChange={[Function]}
+        type="text"
+        value="Test"
+      />
+    </Input>
+    <Close
+      className="search-input-close"
+      onClick={[Function]}
+    >
+      <IconBase
+        className="search-input-close"
+        color="inherit"
+        component="svg"
+        height="1em"
+        onClick={[Function]}
+        viewBox="0 0 13 14"
+        width="1em"
+      >
+        <svg
+          aria-hidden="true"
+          className="search-input-close"
+          color="inherit"
+          focusable="false"
+          height="1em"
+          onClick={[Function]}
+          role="presentation"
+          viewBox="0 0 13 14"
+          width="1em"
+        >
+          <path
+            d="M1.43532 1.92201L11.3649 12.0613"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeWidth="2"
+          />
+          <path
+            d="M11.4774 1.90854L1.83659 12.0504"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeWidth="2"
+          />
+        </svg>
+      </IconBase>
+    </Close>
+  </div>
+</SearchInput>
+`;
+
+exports[`SearchInput renders correctly 1`] = `
+<div
+  className="search-input-box"
+>
+  <input
+    className="input search-input"
+    onChange={[Function]}
+    type="text"
+    value=""
+  />
+</div>
+`;
+
+exports[`SearchWithSort renders default 1`] = `
+<div
+  className="search-with-sort"
+>
+  <div
+    className="search-input-box search-with-sort__input"
+  >
+    <input
+      className="input search-input"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+  </div>
+  <svg
+    aria-hidden="true"
+    className="search-with-sort__button search-with-sort__button--asc"
+    color="inherit"
+    focusable="false"
+    height="1em"
+    onClick={[Function]}
+    role="presentation"
+    viewBox="0 0 16 14"
+    width="1em"
+  >
+    <g
+      fill="currentColor"
+      stroke="none"
+      strokeWidth="1"
+    >
+      <g
+        transform="translate(-1383.000000, -185.000000)"
+      >
+        <g
+          transform="translate(1087.000000, 169.000000)"
+        >
+          <g
+            transform="translate(296.000000, 16.000000)"
+          >
+            <rect
+              height="1"
+              rx="0.4895163"
+              width="7.78365217"
+              x="8.01085217"
+              y="2.353442"
+            />
+            <rect
+              height="1"
+              rx="0.4895163"
+              width="5.8377113"
+              x="8.01085217"
+              y="5.290502"
+            />
+            <rect
+              height="1"
+              rx="0.4895163"
+              width="3.89181217"
+              x="8.01085217"
+              y="8.22766"
+            />
+            <rect
+              height="1"
+              rx="0.4895163"
+              width="1.94590609"
+              x="8.01085217"
+              y="11.16472"
+            />
+            <path
+              d="M2.85056,13.92804 C2.94554435,14.02394 3.09984696,14.02401 3.1949287,13.92818 L5.98018783,11.12216 C6.07507478,11.02654 6.07503304,10.87163 5.98008348,10.77608 L5.68895304,10.48313 C5.59389913,10.38751 5.43977043,10.38758 5.34480696,10.48334 L3.47919304,12.3641 L3.47919304,0.2447585 C3.47919304,0.1095822 3.37029565,-1.139453e-08 3.23595826,0 L2.80937043,3.618335e-08 C2.67503304,4.757781e-08 2.56613565,0.1095822 2.56613565,0.2447585 L2.5661287,12.3641 L0.706685218,10.48383 C0.611766261,10.38786 0.457431652,10.38765 0.36227687,10.48341 L0.0712431306,10.77629 C-0.0236404172,10.87177 -0.0237631303,11.02654 0.070968348,11.12216 L2.85056,13.92804 Z"
+            />
+          </g>
+        </g>
+      </g>
+    </g>
+  </svg>
+</div>
+`;
+
+exports[`SearchWithSort renders gray 1`] = `
+<div
+  className="search-with-sort"
+>
+  <div
+    className="search-input-box search-with-sort__input"
+  >
+    <input
+      className="input search-input input--gray"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+  </div>
+  <svg
+    aria-hidden="true"
+    className="search-with-sort__button search-with-sort__button--asc search-with-sort__button--gray"
+    color="inherit"
+    focusable="false"
+    height="1em"
+    onClick={[Function]}
+    role="presentation"
+    viewBox="0 0 16 14"
+    width="1em"
+  >
+    <g
+      fill="currentColor"
+      stroke="none"
+      strokeWidth="1"
+    >
+      <g
+        transform="translate(-1383.000000, -185.000000)"
+      >
+        <g
+          transform="translate(1087.000000, 169.000000)"
+        >
+          <g
+            transform="translate(296.000000, 16.000000)"
+          >
+            <rect
+              height="1"
+              rx="0.4895163"
+              width="7.78365217"
+              x="8.01085217"
+              y="2.353442"
+            />
+            <rect
+              height="1"
+              rx="0.4895163"
+              width="5.8377113"
+              x="8.01085217"
+              y="5.290502"
+            />
+            <rect
+              height="1"
+              rx="0.4895163"
+              width="3.89181217"
+              x="8.01085217"
+              y="8.22766"
+            />
+            <rect
+              height="1"
+              rx="0.4895163"
+              width="1.94590609"
+              x="8.01085217"
+              y="11.16472"
+            />
+            <path
+              d="M2.85056,13.92804 C2.94554435,14.02394 3.09984696,14.02401 3.1949287,13.92818 L5.98018783,11.12216 C6.07507478,11.02654 6.07503304,10.87163 5.98008348,10.77608 L5.68895304,10.48313 C5.59389913,10.38751 5.43977043,10.38758 5.34480696,10.48334 L3.47919304,12.3641 L3.47919304,0.2447585 C3.47919304,0.1095822 3.37029565,-1.139453e-08 3.23595826,0 L2.80937043,3.618335e-08 C2.67503304,4.757781e-08 2.56613565,0.1095822 2.56613565,0.2447585 L2.5661287,12.3641 L0.706685218,10.48383 C0.611766261,10.38786 0.457431652,10.38765 0.36227687,10.48341 L0.0712431306,10.77629 C-0.0236404172,10.87177 -0.0237631303,11.02654 0.070968348,11.12216 L2.85056,13.92804 Z"
+            />
+          </g>
+        </g>
+      </g>
+    </g>
+  </svg>
+</div>
+`;
+
+exports[`SearchWithSort renders highlight 1`] = `
+<div
+  className="search-with-sort"
+>
+  <div
+    className="search-input-box search-with-sort__input"
+  >
+    <input
+      className="input search-input input--highlight"
+      onChange={[Function]}
+      type="text"
+      value=""
+    />
+  </div>
+  <svg
+    aria-hidden="true"
+    className="search-with-sort__button search-with-sort__button--asc search-with-sort__button--highlight"
+    color="inherit"
+    focusable="false"
+    height="1em"
+    onClick={[Function]}
+    role="presentation"
+    viewBox="0 0 16 14"
+    width="1em"
+  >
+    <g
+      fill="currentColor"
+      stroke="none"
+      strokeWidth="1"
+    >
+      <g
+        transform="translate(-1383.000000, -185.000000)"
+      >
+        <g
+          transform="translate(1087.000000, 169.000000)"
+        >
+          <g
+            transform="translate(296.000000, 16.000000)"
+          >
+            <rect
+              height="1"
+              rx="0.4895163"
+              width="7.78365217"
+              x="8.01085217"
+              y="2.353442"
+            />
+            <rect
+              height="1"
+              rx="0.4895163"
+              width="5.8377113"
+              x="8.01085217"
+              y="5.290502"
+            />
+            <rect
+              height="1"
+              rx="0.4895163"
+              width="3.89181217"
+              x="8.01085217"
+              y="8.22766"
+            />
+            <rect
+              height="1"
+              rx="0.4895163"
+              width="1.94590609"
+              x="8.01085217"
+              y="11.16472"
+            />
+            <path
+              d="M2.85056,13.92804 C2.94554435,14.02394 3.09984696,14.02401 3.1949287,13.92818 L5.98018783,11.12216 C6.07507478,11.02654 6.07503304,10.87163 5.98008348,10.77608 L5.68895304,10.48313 C5.59389913,10.38751 5.43977043,10.38758 5.34480696,10.48334 L3.47919304,12.3641 L3.47919304,0.2447585 C3.47919304,0.1095822 3.37029565,-1.139453e-08 3.23595826,0 L2.80937043,3.618335e-08 C2.67503304,4.757781e-08 2.56613565,0.1095822 2.56613565,0.2447585 L2.5661287,12.3641 L0.706685218,10.48383 C0.611766261,10.38786 0.457431652,10.38765 0.36227687,10.48341 L0.0712431306,10.77629 C-0.0236404172,10.87177 -0.0237631303,11.02654 0.070968348,11.12216 L2.85056,13.92804 Z"
+            />
+          </g>
+        </g>
+      </g>
+    </g>
+  </svg>
+</div>
+`;
+
+exports[`SearchWithSort sort works 1`] = `
+<SearchWithSort
+  initialSort="asc"
+  onSearch={[Function]}
+  onSort={[Function]}
+  theme=""
+>
+  <div
+    className="search-with-sort"
+  >
+    <SearchInput
+      className="search-with-sort__input"
+      onSearch={[Function]}
+      theme=""
+      value=""
+    >
+      <div
+        className="search-input-box search-with-sort__input"
+      >
+        <Input
+          className="search-input"
+          onChange={[Function]}
+          theme=""
+          type="text"
+          value=""
+          valueFormatter={[Function]}
+        >
+          <input
+            className="input search-input"
+            onChange={[Function]}
+            type="text"
+            value=""
+          />
+        </Input>
+      </div>
+    </SearchInput>
+    <Sort
+      className="search-with-sort__button search-with-sort__button--desc"
+      onClick={[Function]}
+    >
+      <IconBase
+        className="search-with-sort__button search-with-sort__button--desc"
+        color="inherit"
+        component="svg"
+        height="1em"
+        onClick={[Function]}
+        viewBox="0 0 16 14"
+        width="1em"
+      >
+        <svg
+          aria-hidden="true"
+          className="search-with-sort__button search-with-sort__button--desc"
+          color="inherit"
+          focusable="false"
+          height="1em"
+          onClick={[Function]}
+          role="presentation"
+          viewBox="0 0 16 14"
+          width="1em"
+        >
+          <g
+            fill="currentColor"
+            stroke="none"
+            strokeWidth="1"
+          >
+            <g
+              transform="translate(-1383.000000, -185.000000)"
+            >
+              <g
+                transform="translate(1087.000000, 169.000000)"
+              >
+                <g
+                  transform="translate(296.000000, 16.000000)"
+                >
+                  <rect
+                    height="1"
+                    rx="0.4895163"
+                    width="7.78365217"
+                    x="8.01085217"
+                    y="2.353442"
+                  />
+                  <rect
+                    height="1"
+                    rx="0.4895163"
+                    width="5.8377113"
+                    x="8.01085217"
+                    y="5.290502"
+                  />
+                  <rect
+                    height="1"
+                    rx="0.4895163"
+                    width="3.89181217"
+                    x="8.01085217"
+                    y="8.22766"
+                  />
+                  <rect
+                    height="1"
+                    rx="0.4895163"
+                    width="1.94590609"
+                    x="8.01085217"
+                    y="11.16472"
+                  />
+                  <path
+                    d="M2.85056,13.92804 C2.94554435,14.02394 3.09984696,14.02401 3.1949287,13.92818 L5.98018783,11.12216 C6.07507478,11.02654 6.07503304,10.87163 5.98008348,10.77608 L5.68895304,10.48313 C5.59389913,10.38751 5.43977043,10.38758 5.34480696,10.48334 L3.47919304,12.3641 L3.47919304,0.2447585 C3.47919304,0.1095822 3.37029565,-1.139453e-08 3.23595826,0 L2.80937043,3.618335e-08 C2.67503304,4.757781e-08 2.56613565,0.1095822 2.56613565,0.2447585 L2.5661287,12.3641 L0.706685218,10.48383 C0.611766261,10.38786 0.457431652,10.38765 0.36227687,10.48341 L0.0712431306,10.77629 C-0.0236404172,10.87177 -0.0237631303,11.02654 0.070968348,11.12216 L2.85056,13.92804 Z"
+                  />
+                </g>
+              </g>
+            </g>
+          </g>
+        </svg>
+      </IconBase>
+    </Sort>
+  </div>
+</SearchWithSort>
+`;

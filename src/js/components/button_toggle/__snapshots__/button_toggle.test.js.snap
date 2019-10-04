@@ -1,5 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`ButtonToggle renders toggle in medium state 1`] = `
+<label
+  className="button-toggle button-toggle--unchecked button-toggle--medium"
+>
+  <input
+    checked={false}
+    className="button-toggle__input"
+    onChange={[Function]}
+    type="checkbox"
+  />
+  <span
+    className="button-toggle__track"
+  >
+    <span
+      className="button-toggle__thumb"
+    />
+    <div
+      className="button-toggle__checked"
+    >
+      <div
+        className="button-toggle__inner-label"
+      >
+        On
+      </div>
+    </div>
+    <div
+      className="button-toggle__unchecked"
+    >
+      <div
+        className="button-toggle__inner-label"
+      >
+        Off
+      </div>
+    </div>
+  </span>
+  
+</label>
+`;
+
 exports[`ButtonToggle renders toggle with custom labels correctly 1`] = `
 <label
   className="button-toggle button-toggle--unchecked"
