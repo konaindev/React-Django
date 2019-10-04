@@ -86,7 +86,7 @@ export class DashboardPage extends React.PureComponent {
       showLoader: false
     };
 
-    this._router = router("/dashboard")(queryString => {
+    this._ = router("/dashboard")(queryString => {
       // @TODO:
       // uncomment in case of Django -> DashboardView renders empty props initially
       //

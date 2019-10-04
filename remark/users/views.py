@@ -229,3 +229,12 @@ class ResendInviteView(APIView):
         projects_ids = [p.public_id for p in projects]
         send_invite_email.apply_async(args=(user.id, projects_ids), countdown=2)
         return self.render_success()
+
+
+class AccountSettingsView(ReactView):
+    page_class = "AccountSettings"
+    page_title = "Account Settings"
+
+    def get(self, request):
+        rules = [{"label": v["label"], "key": v["key"]} for v in VALIDATION_RULES]
+        return self.render(rules=rules)

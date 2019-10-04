@@ -4,13 +4,15 @@ import { components } from "react-select";
 
 import Select from "../select";
 import { LogOut } from "../../icons";
+import { Settings } from "../../icons";
 
 import "./user_menu.scss";
 
 export default class UserMenu extends React.PureComponent {
   static propTypes = {
     profile_image_url: PropTypes.string,
-    logout_url: PropTypes.string.isRequired
+    logout_url: PropTypes.string.isRequired,
+    account_settings_url: PropTypes.string.isRequired
   };
 
   static defaultProps = {
@@ -33,6 +35,13 @@ export default class UserMenu extends React.PureComponent {
   dropdownMenu = props => {
     return (
       <components.Menu {...props} className="user-menu__dropdown">
+        <a
+          className="user-menu__dropdown-item"
+          href={this.props.account_settings_url}
+        >
+          <Settings className="user-menu__icon" />
+          <div>Account Settings</div>
+        </a>
         <a className="user-menu__dropdown-item" href={this.props.logout_url}>
           <LogOut className="user-menu__icon" />
           <div>Log Out</div>

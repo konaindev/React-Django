@@ -6,6 +6,7 @@ $dropdown-width: 15.625rem;
 $dropdown-top-spacing: $image-size + 1.125rem;
 $menu-item-spacing: 14px 22px;
 $menu-item-height: 20px;
+$menu-item-border: 1px solid $gray-4;
 $icon-size: 1.25rem;
 $icon-spacing: 1rem;
 
@@ -70,6 +71,9 @@ $icon-spacing: 1rem;
 
     &:hover {
         background: $select-option-focused-color;
+    }
+    & + & {
+        border-top: $menu-item-border;
     }
 }
 
