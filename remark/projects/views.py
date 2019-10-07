@@ -1,3 +1,5 @@
+import json
+
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
@@ -175,7 +177,7 @@ class TAMExportView(FormView, SingleObjectMixin):
     model = Project
 
     def get_success_url(self):
-        return reverse("admin:tam_export", kwargs={ "pk": self.object.pk })
+        return reverse("admin:tam_export", kwargs={"pk": self.object.pk})
 
     def get_context_data(self, **kwargs):
         self.object = self.get_object()
@@ -199,9 +201,12 @@ class TAMExportView(FormView, SingleObjectMixin):
             return self.form_invalid(form)
 
 
-class MembersView(LoginRequiredMixin, APIView):
+class SearchMembersView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
-        payload = self.get_data()
+        payload = json.loads(request.body)
         value = payload.get("value", [])
         users = User.objects.filter(
             Q(
@@ -215,10 +220,13 @@ class MembersView(LoginRequiredMixin, APIView):
         return Response({"members": members})
 
 
-class AddMembersView(LoginRequiredMixin, APIView):
+class AddMembersView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
         inviter_name = request.user.get_name()
-        payload = self.get_data()
+        payload = json.loads(request.body)
         members = payload.get("members", [])
 
         projects_ids = [p.get("property_id") for p in payload.get("projects", [])]
@@ -246,23 +254,26 @@ class AddMembersView(LoginRequiredMixin, APIView):
             "property_id": p.public_id,
             "members": p.get_members(),
         } for p in projects]
-        return JsonResponse({"projects": projects_list})
+        return Response({"projects": projects_list})
 
 
-class ProjectRemoveMemberIView(LoginRequiredMixin, APIView):
-    def post(self, request, project_id):
-        payload = self.get_data()
+class ProjectRemoveMemberView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, public_id):
+        payload = json.loads(request.body)
         member = payload.get("member", {})
         user_id = member.get("user_id")
         try:
             user = User.objects.get(public_id=user_id)
         except User.DoesNotExist:
-            return JsonResponse({"error": "Project not found"}, status=500)
+            return Response({"error": "User not found"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         try:
-            project = Project.objects.get(public_id=project_id)
+            project = Project.objects.get(public_id=public_id)
         except Project.DoesNotExist:
-            return JsonResponse({"error": "User not found"}, status=500)
+            return Response({"error": "Project not found"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         project.view_group.user_set.remove(user)
         project.save()
@@ -270,4 +281,4 @@ class ProjectRemoveMemberIView(LoginRequiredMixin, APIView):
             "property_id": project.public_id,
             "members": project.get_members(),
         }
-        return JsonResponse({"project": projects_dict})
+        return Response({"project": projects_dict})

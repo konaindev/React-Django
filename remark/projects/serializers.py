@@ -30,6 +30,8 @@ class ProjectSerializer(serializers.ModelSerializer):
         read_only_fields = (
             "public_id",
             "name",
+            "building_logo",
+            "building_image",
             "health",
         )
 
