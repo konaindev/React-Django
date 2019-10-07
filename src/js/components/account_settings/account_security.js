@@ -11,13 +11,6 @@ import PasswordOverlay from "../password_tooltip";
 import Tooltip from "../rmb_tooltip";
 import { securitySchema } from "./validators";
 
-const initialValues = {
-  email: "",
-  old_password: "",
-  password: "",
-  confirm_password: ""
-};
-
 export default class AccountSecurity extends React.PureComponent {
   static propTypes = {
     rules: PropTypes.arrayOf(
@@ -26,14 +19,26 @@ export default class AccountSecurity extends React.PureComponent {
         label: PropTypes.string
       })
     ).isRequired,
+    user: PropTypes.object,
     validate: PropTypes.func
   };
 
   static defaultProps = {
-    validate: () => {}
+    validate: () => {},
+    user: {}
   };
 
   state = { fieldsSubmitted: [] };
+
+  constructor(props) {
+    super(props);
+    this.initialValues = {
+      email: props.user.email,
+      old_password: "",
+      password: "",
+      confirm_password: ""
+    };
+  }
 
   getErrorMessage = (errors, touched) => {
     let message;
@@ -97,7 +102,7 @@ export default class AccountSecurity extends React.PureComponent {
           validationSchema={securitySchema}
           validateOnBlur={true}
           validateOnChange={true}
-          initialValues={initialValues}
+          initialValues={this.initialValues}
           onSubmit={this.onSubmit}
         >
           {({ errors, touched, values, handleChange, handleBlur }) => (
