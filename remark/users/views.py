@@ -237,4 +237,4 @@ class AccountSettingsView(ReactView):
 
     def get(self, request):
         rules = [{"label": v["label"], "key": v["key"]} for v in VALIDATION_RULES]
-        return self.render(rules=rules)
+        return self.render(rules=rules, user=request.user.get_menu_dict())

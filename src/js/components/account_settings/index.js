@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import { Email, Lock, Profile } from "../../icons";
-import PageChrome from "../page_chrome";
+import ProjectPageChrome from "../project_page_chrome";
 
 import AccountSecurity from "./account_security";
 import EmailReports from "./email_reports";
@@ -69,12 +69,15 @@ MenuItems.propTypes = {
 };
 
 export default class AccountSettings extends React.PureComponent {
-  static itemsOrder = ["profile", "lock", "email"];
+  static itemsOrder = ["lock"];
+
   static propTypes = {
-    initialItem: PropTypes.oneOf(AccountSettings.itemsOrder)
+    initialItem: PropTypes.oneOf(AccountSettings.itemsOrder),
+    user: PropTypes.object
   };
+
   static defaultProps = {
-    initialItem: "profile"
+    initialItem: "lock"
   };
 
   constructor(props) {
@@ -89,7 +92,7 @@ export default class AccountSettings extends React.PureComponent {
   render() {
     const Component = menuItemsData[this.state.item].component;
     return (
-      <PageChrome navLinks={navLinks}>
+      <ProjectPageChrome navLinks={navLinks} user={this.props.user}>
         <div className="account-settings">
           <div className="account-settings__header">
             <div className="account-settings__title">Account Settings</div>
@@ -109,7 +112,7 @@ export default class AccountSettings extends React.PureComponent {
             <Component {...this.props} />
           </div>
         </div>
-      </PageChrome>
+      </ProjectPageChrome>
     );
   }
 }
