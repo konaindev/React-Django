@@ -237,4 +237,10 @@ class AccountSettingsView(ReactView):
 
     def get(self, request):
         rules = [{"label": v["label"], "key": v["key"]} for v in VALIDATION_RULES]
-        return self.render(rules=rules, user=request.user.get_menu_dict())
+        account_security_url = reverse("account_security")
+        return self.render(rules=rules, user=request.user.get_menu_dict(), account_security_url=account_security_url)
+
+
+class AccountSecurityView(RemarkView):
+    def post(self, request):
+        return JsonResponse({}, status=200)

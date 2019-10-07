@@ -195,3 +195,14 @@ export const fetchUIString = store => next => action => {
     next(action);
   }
 };
+
+export const updateAccountSecurity = store => next => action => {
+  if (action.type === "API_SECURITY_ACCOUNT") {
+    const url = `${process.env.BASE_URL}${action.account_security_url}`;
+    if (action.data) {
+      axiosPost(url, action.data).catch(e => console.log("-----> ERROR", e));
+    }
+  } else {
+    next(action);
+  }
+};
