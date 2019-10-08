@@ -200,7 +200,19 @@ export const updateAccountSecurity = store => next => action => {
   if (action.type === "API_SECURITY_ACCOUNT") {
     const url = `${process.env.BASE_URL}${action.account_security_url}`;
     if (action.data) {
-      axiosPost(url, action.data).catch(e => console.log("-----> ERROR", e));
+      axiosPost(url, action.data)
+        .then(response => {
+          if (response.status === 200) {
+            action.callback(response.data.message);
+          } else if (response.status === 500) {
+            action.onError(response.data);
+          } else {
+            throw response;
+          }
+        })
+        .catch(e => {
+          console.log(e);
+        });
     }
   } else {
     next(action);

@@ -59,16 +59,10 @@ export default class AccountSecurity extends React.PureComponent {
     return <div className="account-settings__general-error">{message}</div>;
   };
 
-  getSuccessMessage = () => {
-    const fields = this.state.fieldsSubmitted;
-    if (!fields.length) {
+  showSuccessMessage = () => {
+    const { message, errors } = this.state;
+    if (!message || errors) {
       return;
-    }
-    let message;
-    if (fields.includes("password")) {
-      message = "Password has successfully been reset.";
-    } else if (fields.includes("email")) {
-      message = "Email change successful.";
     }
     return (
       <div className="account-settings__success">
@@ -76,6 +70,11 @@ export default class AccountSecurity extends React.PureComponent {
         {message}
       </div>
     );
+  };
+
+  setSuccessMessage = setSubmitting => message => {
+    setSubmitting(false);
+    this.setState({ message });
   };
 
   getFieldClasses = (name, errors, touched) => {
@@ -95,6 +94,7 @@ export default class AccountSecurity extends React.PureComponent {
     this.props.dispatch({
       type: "API_SECURITY_ACCOUNT",
       account_security_url: this.props.account_security_url,
+      callback: this.setSuccessMessage(actions.setSubmitting),
       data
     });
   };
@@ -224,7 +224,7 @@ export default class AccountSecurity extends React.PureComponent {
                   Save
                 </Button>
                 {this.getErrorMessage(errors, touched)}
-                {this.getSuccessMessage()}
+                {this.showSuccessMessage()}
               </div>
             </Form>
           )}

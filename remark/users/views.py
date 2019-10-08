@@ -252,7 +252,9 @@ class AccountSecurityView(RemarkView):
             return JsonResponse(form.errors.get_json_data(), status=500)
         data = form.cleaned_data
         user.email = data["email"]
+        message = "Email change successful."
         if data["password"]:
             user.set_password(data["password"])
+            message = "Password has successfuly been reset."
         user.save()
-        return JsonResponse({}, status=200)
+        return JsonResponse({"message": message}, status=200)

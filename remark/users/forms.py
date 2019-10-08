@@ -99,13 +99,13 @@ class AccountSecurityForm(forms.Form):
 
     def clean(self):
         cleaned_data = super().clean()
-        msg = forms.Field.default_error_messages["required"]
-        password = cleaned_data["password"]
+        required_msg = forms.Field.default_error_messages["required"]
+        password = cleaned_data.get("password")
         if password:
             if not cleaned_data["old_password"]:
-                self.add_error("old_password", msg)
+                self.add_error("old_password", required_msg)
             if not cleaned_data["confirm_password"]:
-                self.add_error("confirm_password", msg)
+                self.add_error("confirm_password", required_msg)
             elif password != cleaned_data["confirm_password"]:
                 self.add_error("__all__", "New passwords don’t match.")
         return cleaned_data
