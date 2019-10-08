@@ -161,6 +161,17 @@ export const fetchInviteModal = store => next => action => {
         next({ type: "GENERAL_INVITE_MEMBER_COMPLETE", properties });
       })
       .catch(e => console.log("-----> ERROR", e));
+  } else if (action.type === "API_INVITE_RESEND") {
+    const url = `${process.env.BASE_URL}/users/${action.hash}/resend-invite/`;
+    axiosGet(url)
+      .then(response => {
+        if (response.status === 200) {
+          action.callback(response.data);
+        } else {
+          throw response;
+        }
+      })
+      .catch(e => console.log("-----> ERROR", e));
   } else {
     next(action);
   }

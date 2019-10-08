@@ -1,0 +1,35 @@
+@import "css/base.scss";
+
+$background-color: $white;
+$title-color: $blue-7;
+$text-color: $gray-3;
+
+.session-expired {
+    padding: 3.125rem $s20;
+    font-family: $font-sans;
+    text-align: center;
+    background: $background-color;
+    border-radius: $border-radius-default;
+}
+
+.session-expired__title {
+    font-size: $text-4xl;
+    line-height: $s11;
+    color: $title-color;
+}
+
+.session-expired__text {
+    margin-top: $s4;
+    font-size: $text-sm;
+    line-height: $s5;
+    color: $text-color;
+}
+
+.session-expired__button {
+    width: 22.5rem;
+    margin-top: 3.125rem;
+    font-size: $text-xs;
+    line-height: $s5;
+    letter-spacing: $letter-spacing-wider;
+    text-transform: uppercase;
+}
