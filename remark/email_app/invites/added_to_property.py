@@ -4,7 +4,7 @@ from celery import shared_task
 
 from remark.users.models import User
 from remark.projects.models import Project
-from remark.settings import LOGIN_REDIRECT_URL
+from remark.settings import LOGIN_REDIRECT_URL, BASE_URL
 from remark.email_app.constants import DEFAULT_FROM_NAME, HELLO_EMAIL, SUPPORT_EMAIL
 from remark.lib.sendgrid_email import send_email
 
@@ -57,7 +57,7 @@ def send_invite_email(inviter_name, user_id, projects_ids, max_count=5):
     if is_new_account:
         template_vars[
             "main_button_link"
-        ] = reverse("create_password", kwargs={"hash": user.public_id})
+        ] = f"{BASE_URL}{reverse('create_password', kwargs={'hash': user.public_id})}"
         template_vars["main_button_label"] = "Create Account"
 
     template = get_template("email_added_to_property/index.mjml")
