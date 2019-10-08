@@ -23,8 +23,8 @@ from remark.lib.views import ReactView, RemarkView, APIView
 from remark.email_app.invites.added_to_property import send_invite_email
 from remark.settings import INVITATION_EXP
 
-from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES
-from .forms import AccountCompleteForm
+from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES, VALIDATION_RULES_LIST
+from .forms import AccountCompleteForm, AccountSecurityForm
 from .models import User
 
 
@@ -236,11 +236,23 @@ class AccountSettingsView(ReactView):
     page_title = "Account Settings"
 
     def get(self, request):
-        rules = [{"label": v["label"], "key": v["key"]} for v in VALIDATION_RULES]
         account_security_url = reverse("account_security")
-        return self.render(rules=rules, user=request.user.get_menu_dict(), account_security_url=account_security_url)
+        return self.render(
+            rules=VALIDATION_RULES_LIST,
+            user=request.user.get_menu_dict(),
+            account_security_url=account_security_url)
 
 
 class AccountSecurityView(RemarkView):
     def post(self, request):
+        user = request.user
+        params = json.loads(request.body)
+        form = AccountSecurityForm(params, user=user)
+        if not form.is_valid():
+            return JsonResponse(form.errors.get_json_data(), status=500)
+        data = form.cleaned_data
+        user.email = data["email"]
+        if data["password"]:
+            user.set_password(data["password"])
+        user.save()
         return JsonResponse({}, status=200)

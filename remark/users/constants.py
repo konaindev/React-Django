@@ -65,3 +65,5 @@ VALIDATION_RULES = [
         "key": "used",
     },
 ]
+
+VALIDATION_RULES_LIST = [{"label": v["label"], "key": v["key"]} for v in VALIDATION_RULES]

@@ -1,6 +1,7 @@
 import cn from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
+import { connect } from "react-redux";
 
 import { Email, Lock, Profile } from "../../icons";
 import ProjectPageChrome from "../project_page_chrome";
@@ -68,7 +69,7 @@ MenuItems.propTypes = {
   selectItem: PropTypes.func.isRequired
 };
 
-export default class AccountSettings extends React.PureComponent {
+class AccountSettings extends React.PureComponent {
   static itemsOrder = ["lock"];
 
   static propTypes = {
@@ -116,3 +117,5 @@ export default class AccountSettings extends React.PureComponent {
     );
   }
 }
+
+export default connect()(AccountSettings);
