@@ -13,6 +13,7 @@ from jsonfield import JSONField
 from stdimage.models import StdImageField
 from image_cropping.utils import get_backend
 
+from remark.lib.cache import get_dashboard_cache_key, reset_cache
 from remark.lib.fields import ImageRatioFieldExt
 from remark.lib.stats import health_check
 from remark.lib.tokens import public_id
@@ -505,6 +506,8 @@ class Project(models.Model):
     def save(self, *args, **kwargs):
         if not self.pk:
             self.__assign_blank_groups()
+        cache_key = get_dashboard_cache_key(self.public_id)
+        reset_cache(cache_key)
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -1099,6 +1102,11 @@ class TargetPeriod(ModelPeriod, models.Model):
     class Meta:
         # Always sort TargetPeriods with the earliest period first.
         ordering = ["start"]
+
+    def save(self, *args, **kwargs):
+        cache_key = get_dashboard_cache_key(self.project.public_id)
+        reset_cache(cache_key)
+        super().save(*args, **kwargs)
 
 
 def tam_export_media_path(instance, filename):
