@@ -31,9 +31,6 @@ import PortfolioAnalysisView from "./components/portfolio_analysis_view";
 import CreatePasswordView from "./components/create_password_view";
 import CompleteAccountView from "./components/complete_account_view";
 import SessionExpiredPage from "./components/session_expired_page";
-
-const { store } = storeFunc();
-
 import LoginView from "./components/login";
 import ResetPasswordForm from "./components/reset_password_form";
 import ResetPasswordDone from "./components/reset_password_done";
