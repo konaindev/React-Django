@@ -1,0 +1,39 @@
+@import "css/base.scss";
+
+$title-color: $highlight-gray-3;
+$toggle-off-border: 1px solid $gray-4;
+
+.email-reporting-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.25rem;
+    background: $default-background-color;
+    border-radius: $border-radius-base;
+}
+
+.email-reporting-row__col {
+    &--middle {
+        display: flex;
+        align-items: center;
+    }
+}
+
+.email-reporting-row__title {
+    color: $title-color;
+    font-size: $text-base;
+    line-height: $s7;
+}
+
+.email-reporting-row__info {
+    font-size: $text-xs;
+    line-height: $s5;
+}
+
+.email-reporting-row__toggle {
+    font-weight: 600;
+
+    &.button-toggle--unchecked {
+        border: $toggle-off-border;
+        border-radius: 100px;
+    }
+}

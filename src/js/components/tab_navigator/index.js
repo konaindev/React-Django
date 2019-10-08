@@ -11,6 +11,7 @@ export const Tab = ({ label, children }) => (
 
 export class TabNavigator extends Component {
   static propTypes = {
+    className: PropTypes.string,
     children: PropTypes.node,
     onChange: PropTypes.func.isRequired,
     selectedIndex: PropTypes.number.isRequired
@@ -25,10 +26,11 @@ export class TabNavigator extends Component {
   };
 
   render() {
-    const { children, selectedIndex } = this.props;
+    const { className, children, selectedIndex } = this.props;
     const childrenArray = Array.isArray(children) ? children : [children];
+    const classes = cn("tab-navigator", className);
     return (
-      <div className="tab-navigator">
+      <div className={classes}>
         <Container className="tab-navigator__navs">
           {childrenArray.map((child, index) =>
             child.type === Tab ? (
