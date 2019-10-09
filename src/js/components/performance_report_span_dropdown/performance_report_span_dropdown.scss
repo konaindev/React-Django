@@ -1,11 +1,16 @@
 @import "css/base.scss";
 
+$select-width: 180px;
+$date-picker-width: 240px;
+$field-height: 44px;
+$field-spacing: 8px;
+$border-color: $gray-4;
 $report-span-dropdown-background: #232837;
 
-.report-span-dropdown {
+.date-range-selector {
     float: right;
     cursor: pointer;
-    display: inline-block;
+    display: flex;
     vertical-align: middle;
     margin: 0;
     padding: $s2 $s4;
@@ -13,14 +18,16 @@ $report-span-dropdown-background: #232837;
     background-color: $report-span-dropdown-background;
 }
 
-.report-span-dropdown select {
-    /* custom styled dropdown */
-    margin: 0;
-    padding: 0;
-    background: transparent;
-    color: $input-text-color;
+.date-range-selector__select {
+    display: inline-block;
+    width: $select-width;
+    height: $field-height;
+    vertical-align: top;
+}
 
-    option {
-        background-color: $select-option-background-color;
-    }
+.date-range-selector__data-picker {
+    display: inline-block;
+    width: $date-picker-width;
+    margin-left: $field-spacing;
+    vertical-align: top;
 }
