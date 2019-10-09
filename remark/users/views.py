@@ -4,6 +4,7 @@ import datetime
 from django.contrib.auth import (
     views as auth_views,
     login as auth_login,
+    forms as auth_forms,
     password_validation,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -30,41 +31,9 @@ from .forms import AccountCompleteForm
 from .models import User
 
 
-class IsAnonymousOnly(BasePermission):
-    """
-    Allow anonymous users only
-    """
-
-    def has_permission(self, request, view):
-        return request.user.is_anonymous
-
-
-# def custom_login(request, *args, **kwargs):
-#     """
-#     Login, with the addition of 'remember-me' functionality. If the
-#     remember-me checkbox is checked, the session is remembered for
-#     6 months. If unchecked, the session expires at browser close.
-
-#     - https://docs.djangoproject.com/en/2.2/topics/http/sessions/#browser-length-vs-persistent-sessions
-#     - https://docs.djangoproject.com/en/2.2/topics/http/sessions/#django.contrib.sessions.backends.base.SessionBase.set_expiry
-#     """
-#     remember_me = request.POST.get("remember", None)
-#     if request.method == "POST" and not remember_me:
-#         request.session.set_expiry(0)  # session cookie expire wat browser close
-#     else:
-#         request.session.set_expiry(6 * 30 * 24 * 60 * 60)  # 6 months, in seconds
-
-#     # uncomment these lines to check session details
-#     # print(request.session.get_expiry_age())
-#     # print(request.session.get_expire_at_browser_close())
-
-#     return auth_login(request, *args, **kwargs)
-
-
-
 class CompleteAccountView(APIView):
     """
-    complete registration after creating password
+    Complete registration after creating password
     """
     permission_classes = [IsAuthenticated]
 
@@ -123,13 +92,14 @@ class CompleteAccountView(APIView):
 
 class CreatePasswordView(APIView):
     """
-    Create Password for a new account
+    Create password for a new account
     UI should login itself after setting password successfully
     """
 
-    permission_classes = [IsAnonymousOnly]
-
     def post(self, request):
+        if not request.user.is_anonymous:
+            raise exceptions.APIException
+
         params = json.loads(request.body)
         user_id = params["user_id"]
         password = params["password"]
@@ -157,8 +127,8 @@ class CreatePasswordView(APIView):
 
 class PasswordRulesView(APIView):
     """
-    - get password validation rules
-    - validate password against rules
+    - Get password validation rules
+    - Validate password against rules
     """
 
     def get(self, request):
@@ -185,3 +155,24 @@ class PasswordRulesView(APIView):
                 errors[v["key"]] = True
 
         return Response({"errors": errors}, status=status.HTTP_200_OK)
+
+
+class ChangePasswordView(APIView):
+    """
+    Change password for an existing logged in user
+    """
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        user = request.user
+
+        params = json.loads(request.body)
+        form = auth_forms.PasswordChangeForm(request.user, params)
+        if form.is_valid():
+            user.set_password(params["new_password1"])
+            user.save()
+            response = Response({"success": True})
+        else:
+            response = Response(form.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        return response
