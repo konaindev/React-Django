@@ -1,3 +1,5 @@
+import _isObject from "lodash/isObject";
+
 import {
   general,
   tutorial,
@@ -204,14 +206,16 @@ export const updateAccountSecurity = store => next => action => {
         .then(response => {
           if (response.status === 200) {
             action.callback(response.data.message);
-          } else if (response.status === 500) {
-            action.onError(response.data);
           } else {
             throw response;
           }
         })
         .catch(e => {
-          console.log(e);
+          if (e.response.data && _isObject(e.response.data)) {
+            action.onError(e.response.data);
+          } else {
+            console.log("-----> ERROR", e);
+          }
         });
     }
   } else {

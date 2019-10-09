@@ -102,7 +102,7 @@ class AccountSecurityForm(forms.Form):
         required_msg = forms.Field.default_error_messages["required"]
         password = cleaned_data.get("password")
         if password:
-            if not cleaned_data["old_password"]:
+            if "old_password" in cleaned_data and not cleaned_data["old_password"]:
                 self.add_error("old_password", required_msg)
             if not cleaned_data["confirm_password"]:
                 self.add_error("confirm_password", required_msg)

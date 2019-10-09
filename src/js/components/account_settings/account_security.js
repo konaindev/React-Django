@@ -1,6 +1,5 @@
 import cn from "classnames";
 import { ErrorMessage, Formik, Form } from "formik";
-import _pickBy from "lodash/pickBy";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -25,11 +24,11 @@ export default class AccountSecurity extends React.PureComponent {
   };
 
   static defaultProps = {
-    validate: () => {},
+    validate: () => ({}),
     user: {}
   };
 
-  state = { fieldsSubmitted: [] };
+  state = { message: null };
 
   constructor(props) {
     super(props);
@@ -41,9 +40,21 @@ export default class AccountSecurity extends React.PureComponent {
     };
   }
 
-  getErrorMessage = (errors, touched) => {
+  unsetMessage() {
+    if (this.state.message) {
+      this.setState({ message: null });
+    }
+  }
+
+  setFormik = formik => {
+    this.formik = formik;
+  };
+
+  showErrorMessage = (errors, touched) => {
     let message;
-    if (errors.confirm_password && touched.confirm_password) {
+    if (errors.__all__) {
+      message = errors.__all__;
+    } else if (errors.confirm_password && touched.confirm_password) {
       message = "New passwords don’t match.";
     } else {
       for (let k of Object.keys(errors)) {
@@ -59,22 +70,35 @@ export default class AccountSecurity extends React.PureComponent {
     return <div className="account-settings__general-error">{message}</div>;
   };
 
-  showSuccessMessage = () => {
-    const { message, errors } = this.state;
-    if (!message || errors) {
-      return;
+  showMessage = (errors, touched) => {
+    if (this.state.message) {
+      return this.showSuccessMessage();
+    } else if (errors) {
+      return this.showErrorMessage(errors, touched);
     }
+  };
+
+  showSuccessMessage = () => {
     return (
       <div className="account-settings__success">
         <Tick className="account-settings__checked" />
-        {message}
+        {this.state.message}
       </div>
     );
   };
 
-  setSuccessMessage = setSubmitting => message => {
-    setSubmitting(false);
+  setSuccessMessage = message => {
+    this.formik.setSubmitting(false);
     this.setState({ message });
+  };
+
+  setErrorMessages = errors => {
+    this.formik.setSubmitting(false);
+    const formikErrors = {};
+    for (let k of Object.keys(errors)) {
+      formikErrors[k] = errors[k][0].message;
+    }
+    this.formik.setErrors(formikErrors);
   };
 
   getFieldClasses = (name, errors, touched) => {
@@ -84,6 +108,7 @@ export default class AccountSecurity extends React.PureComponent {
   };
 
   onSubmit = (data, actions) => {
+    this.unsetMessage();
     if (!data.email && !data.password) {
       return;
     }
@@ -94,23 +119,35 @@ export default class AccountSecurity extends React.PureComponent {
     this.props.dispatch({
       type: "API_SECURITY_ACCOUNT",
       account_security_url: this.props.account_security_url,
-      callback: this.setSuccessMessage(actions.setSubmitting),
+      callback: this.setSuccessMessage,
+      onError: this.setErrorMessages,
       data
     });
+  };
+
+  onChange = v => {
+    this.unsetMessage();
+    this.formik.handleChange(v);
+  };
+
+  onBlur = v => {
+    this.unsetMessage();
+    this.formik.handleBlur(v);
   };
 
   render() {
     return (
       <div className="account-settings__tab">
         <Formik
-          validate={this.props.validate}
+          ref={this.setFormik}
+          validate={this.validate}
           validationSchema={securitySchema}
           validateOnBlur={true}
           validateOnChange={true}
           initialValues={this.initialValues}
           onSubmit={this.onSubmit}
         >
-          {({ errors, touched, values, handleChange, handleBlur }) => (
+          {({ errors, touched, values }) => (
             <Form method="post" autoComplete="off">
               <div className="account-settings__tab-content">
                 <div className="account-settings__tab-section">
@@ -126,8 +163,8 @@ export default class AccountSecurity extends React.PureComponent {
                       name="email"
                       theme="gray"
                       value={values.email}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
+                      onChange={this.onChange}
+                      onBlur={this.onBlur}
                     />
                     <div className="account-settings__error">
                       <ErrorMessage name="email" />
@@ -152,8 +189,8 @@ export default class AccountSecurity extends React.PureComponent {
                         type="password"
                         theme="gray"
                         value={values.old_password}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
+                        onChange={this.onChange}
+                        onBlur={this.onBlur}
                       />
                       <div className="account-settings__error">
                         <ErrorMessage name="old_password" />
@@ -187,8 +224,8 @@ export default class AccountSecurity extends React.PureComponent {
                           type="password"
                           theme="gray"
                           value={values.password}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
+                          onChange={this.onChange}
+                          onBlur={this.onBlur}
                         />
                       </Tooltip>
                     </div>
@@ -208,8 +245,8 @@ export default class AccountSecurity extends React.PureComponent {
                         type="password"
                         theme="gray"
                         value={values.confirm_password}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
+                        onChange={this.onChange}
+                        onBlur={this.onBlur}
                       />
                     </div>
                   </div>
@@ -223,8 +260,7 @@ export default class AccountSecurity extends React.PureComponent {
                 >
                   Save
                 </Button>
-                {this.getErrorMessage(errors, touched)}
-                {this.showSuccessMessage()}
+                {this.showMessage(errors, touched)}
               </div>
             </Form>
           )}

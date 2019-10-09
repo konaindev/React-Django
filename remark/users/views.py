@@ -5,6 +5,7 @@ from django.contrib.auth import (
     views as auth_views,
     login as auth_login,
     password_validation,
+    update_session_auth_hash,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect, JsonResponse
@@ -19,7 +20,7 @@ from remark.geo.models import Address
 from remark.geo.geocode import geocode
 from remark.projects.models import Project
 from remark.settings import LOGIN_URL
-from remark.lib.views import ReactView, RemarkView, APIView
+from remark.lib.views import LoginRequiredReactView, ReactView, RemarkView, APIView
 from remark.email_app.invites.added_to_property import send_invite_email
 from remark.settings import INVITATION_EXP
 
@@ -231,7 +232,7 @@ class ResendInviteView(APIView):
         return self.render_success()
 
 
-class AccountSettingsView(ReactView):
+class AccountSettingsView(LoginRequiredReactView):
     page_class = "AccountSettings"
     page_title = "Account Settings"
 
@@ -243,7 +244,7 @@ class AccountSettingsView(ReactView):
             account_security_url=account_security_url)
 
 
-class AccountSecurityView(RemarkView):
+class AccountSecurityView(LoginRequiredMixin, RemarkView):
     def post(self, request):
         user = request.user
         params = json.loads(request.body)
@@ -255,6 +256,7 @@ class AccountSecurityView(RemarkView):
         message = "Email change successful."
         if data["password"]:
             user.set_password(data["password"])
+            update_session_auth_hash(request, user)
             message = "Password has successfuly been reset."
         user.save()
         return JsonResponse({"message": message}, status=200)
