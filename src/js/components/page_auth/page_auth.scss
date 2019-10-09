@@ -41,3 +41,8 @@ $copyright-color: $blue-6;
     text-align: left;
     align-self: flex-start;
 }
+
+.page-auth__body--align-top {
+    margin-top: $s32;
+    margin-bottom: auto;
+}

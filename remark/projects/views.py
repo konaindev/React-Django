@@ -1,3 +1,5 @@
+import datetime
+
 from django.contrib.auth.views import redirect_to_login
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
@@ -8,6 +10,7 @@ from django.shortcuts import get_object_or_404, redirect
 from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
 from django.urls import reverse
+from django.utils import timezone
 
 from remark.lib.views import ReactView, APIView
 from remark.admin import admin_site
@@ -31,8 +34,10 @@ from remark.lib.logging import getLogger, error_text
 
 logger = getLogger(__name__)
 
+
 class Redirect(Exception):
     pass
+
 
 # project model field names used to control anonymous access, by report_name
 shared_fields_by_report = dict(
@@ -40,7 +45,7 @@ shared_fields_by_report = dict(
     market="is_tam_shared",
     performance="is_performance_report_shared",
     modeling="is_modeling_shared",
-    campaign_plan="is_campaign_plan_shared"
+    campaign_plan="is_campaign_plan_shared",
 )
 
 
@@ -64,7 +69,9 @@ class ProjectSingleMixin:
             shared_field = shared_fields_by_report.get(self.report_name)
             is_report_shared = getattr(self.project, shared_field, False)
             if not is_report_shared and (not user.is_authenticated):
-                logger.error(f"Project ID: {project_id} || is_report_shared: {is_report_shared} || user.is_authenticated: {user.is_authenticated}")
+                logger.error(
+                    f"Project ID: {project_id} || is_report_shared: {is_report_shared} || user.is_authenticated: {user.is_authenticated}"
+                )
                 raise Http404
         except Exception:
             raise Http404
@@ -116,10 +123,12 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
             if project is not None:
                 try:
                     selector = self.selector_class(project, *args, **kwargs)
-                    competitors.append({
-                        "report": selector.get_report_data(),
-                        "project": self.project.to_jsonable(),
-                    })
+                    competitors.append(
+                        {
+                            "report": selector.get_report_data(),
+                            "project": self.project.to_jsonable(),
+                        }
+                    )
                 except:
                     pass
         return competitors
@@ -179,7 +188,7 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
             current_report_link=current_report_link,
             project=project,
             report=self.selector.get_report_data(),
-            share_info=share_info
+            share_info=share_info,
         )
 
 
@@ -234,7 +243,7 @@ class TAMExportView(FormView, SingleObjectMixin):
     model = Project
 
     def get_success_url(self):
-        return reverse("admin:tam_export", kwargs={ "pk": self.object.pk })
+        return reverse("admin:tam_export", kwargs={"pk": self.object.pk})
 
     def get_context_data(self, **kwargs):
         self.object = self.get_object()
@@ -252,7 +261,10 @@ class TAMExportView(FormView, SingleObjectMixin):
         if form.is_valid():
             project = self.object
             export_tam_task.delay(project.pk, request.user.pk, form.cleaned_data)
-            messages.success(request, "TAM Export started. You will be emailed with the result shortly.")
+            messages.success(
+                request,
+                "TAM Export started. You will be emailed with the result shortly.",
+            )
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
@@ -322,6 +334,8 @@ class AddMembersView(LoginRequiredMixin, APIView):
             if is_new:
                 email = member.get("value")
                 user, _ = User.objects.get_or_create(email=email)
+                user.invited = datetime.datetime.now(timezone.utc)
+                user.save()
             else:
                 public_id = member.get("value")
                 user = User.objects.get(public_id=public_id)
@@ -330,14 +344,11 @@ class AddMembersView(LoginRequiredMixin, APIView):
         for project in projects:
             for user in users:
                 project.view_group.user_set.add(user)
-                send_invite_email.apply_async(
-                    args=(inviter_name, user.id, projects_ids),
-                    countdown=2)
+                send_invite_email.apply_async(args=(inviter_name, user.id, projects_ids), countdown=2)
             project.save()
-        projects_list = [{
-            "property_id": p.public_id,
-            "members": p.get_members(),
-        } for p in projects]
+        projects_list = [
+            {"property_id": p.public_id, "members": p.get_members()} for p in projects
+        ]
         return JsonResponse({"projects": projects_list})
 
 
