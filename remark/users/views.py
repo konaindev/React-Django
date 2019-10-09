@@ -99,6 +99,9 @@ class CreatePasswordView(APIView):
     """
     Create password for a new account
     UI should login itself after setting password successfully
+
+    @param user_id
+    @param password
     """
 
     def post(self, request):
@@ -134,6 +137,9 @@ class PasswordRulesView(APIView):
     """
     - Get password validation rules
     - Validate password against rules
+
+    @param user_id
+    @param password
     """
 
     def get(self, request):
@@ -165,6 +171,10 @@ class PasswordRulesView(APIView):
 class ChangePasswordView(APIView):
     """
     Change password for an existing logged in user
+
+    @param old_password
+    @param new_password1
+    @param new_password2
     """
     permission_classes = [IsAuthenticated]
 
@@ -179,7 +189,6 @@ class ChangePasswordView(APIView):
             response = Response(status=status.HTTP_204_NO_CONTENT)
         else:
             response = Response(form.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
         return response
 
 
@@ -187,14 +196,14 @@ class ResetPasswordView(APIView):
     """
     Send password reset email
     Reset urls are defined in "remark/users/templates/users/emails/password_reset_email.<html|txt>"
+
+    @param email
     """
 
     def post(self, request):
         if not request.user.is_anonymous:
             raise exceptions.APIException
 
-        params = json.loads(request.body)
-        form = auth_forms.PasswordResetForm(params)
         opts = dict(
             email_template_name="users/emails/password_reset_email.txt",
             subject_template_name="users/emails/password_reset_subject.txt",
@@ -206,8 +215,53 @@ class ResetPasswordView(APIView):
                 "subject": "Set your Remarkably password",
             },
         )
-
+        params = json.loads(request.body)
+        form = auth_forms.PasswordResetForm(params)
         if form.is_valid():
             form.save(**opts)
+            response = Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            response = Response(form.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return response
 
-        return Response(status=status.HTTP_204_NO_CONTENT)
+
+class ResetPasswordConfirmView(APIView):
+    """
+    Reset password
+    @param uid
+    @param token
+    @param new_password1
+    @param new_password2
+    """
+    token_generator = default_token_generator
+
+    
+    def post(self, request):
+        if not request.user.is_anonymous:
+            raise exceptions.APIException        
+
+        params = json.loads(request.body)
+
+        self.user = self.get_user(params["uid"])
+        if self.user is None:
+            raise exceptions.APIException
+        if not self.token_generator.check_token(self.user, params["token"]):
+            raise exceptions.APIException
+
+        form_data = dict(new_password1=params["new_password1"], new_password2=params["new_password2"])
+        form = auth_forms.SetPasswordForm(self.user, data=form_data)
+        if form.is_valid():
+            form.save()
+            response = Response(status=status.HTTP_204_NO_CONTENT)
+        else:
+            response = Response(form.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        return response
+
+    def get_user(self, uidb64):
+        try:
+            # urlsafe_base64_decode() decodes to bytestring
+            uid = urlsafe_base64_decode(uidb64).decode()
+            user = User._default_manager.get(pk=uid)
+        except (TypeError, ValueError, OverflowError, User.DoesNotExist, ValidationError):
+            user = None
+        return user
