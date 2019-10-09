@@ -21,15 +21,16 @@ export class PerformanceReportPage extends Component {
   renderDateSpan() {
     return (
       <PerformanceReportSpanDropdown
-        current_report_link={this.props.current_report_link}
-        report_links={this.props.report_links.performance}
+        start_date={this.props.report.dates.start}
+        end_date={this.props.report.dates.end}
+        preset={this.props.current_report_link.description.preset}
+        project={this.props.project}
       />
     );
   }
 
   render() {
     const { user, project, report, report_links, share_info } = this.props;
-
     return (
       <ReportPageChrome
         user={user}
