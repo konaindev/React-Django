@@ -167,6 +167,8 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
             share_info = self.selector.get_share_info(self.base_url())
 
         project = self.project.to_jsonable()
+        project["campaign_start"] = self.project.get_campaign_start()
+        project["campaign_end"] = self.project.get_campaign_end()
         project["health"] = self.project.get_performance_rating()
 
         logger.info("ReportPageViewBase::get::bottom")
