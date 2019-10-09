@@ -7,12 +7,14 @@ from django.contrib.auth import (
     forms as auth_forms,
     password_validation,
 )
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.tokens import default_token_generator
 from django.http import HttpResponseRedirect, JsonResponse
 from django.core.exceptions import ValidationError
 from django.shortcuts import redirect
-from django.utils import timezone
+from django.template import loader
 from django.urls import reverse
+from django.utils import timezone
+from django.utils.http import urlsafe_base64_decode
 
 from rest_framework import exceptions, generics, mixins, status, viewsets
 from rest_framework.views import APIView
@@ -23,12 +25,15 @@ from remark.crm.models import Business, Office, Person
 from remark.crm.constants import OFFICE_TYPES
 from remark.geo.models import Address
 from remark.geo.geocode import geocode
-from remark.settings import LOGIN_URL
+from remark.settings import BASE_URL, LOGIN_URL
 from remark.lib.views import ReactView, RemarkView
 
 from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES
 from .forms import AccountCompleteForm
 from .models import User
+
+INTERNAL_RESET_URL_TOKEN = 'set-password'
+INTERNAL_RESET_SESSION_TOKEN = '_password_reset_token'
 
 
 class CompleteAccountView(APIView):
@@ -83,7 +88,7 @@ class CompleteAccountView(APIView):
                 office=office,
             )
             person.save()
-            response = Response({"success": True})
+            response = Response(status=status.HTTP_204_NO_CONTENT)
         else:
             response = Response(form.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
@@ -122,7 +127,7 @@ class CreatePasswordView(APIView):
         user.is_active = True
         user.save()
 
-        return Response({"success": True})
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class PasswordRulesView(APIView):
@@ -171,8 +176,38 @@ class ChangePasswordView(APIView):
         if form.is_valid():
             user.set_password(params["new_password1"])
             user.save()
-            response = Response({"success": True})
+            response = Response(status=status.HTTP_204_NO_CONTENT)
         else:
             response = Response(form.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         return response
+
+
+class ResetPasswordView(APIView):
+    """
+    Send password reset email
+    Reset urls are defined in "remark/users/templates/users/emails/password_reset_email.<html|txt>"
+    """
+
+    def post(self, request):
+        if not request.user.is_anonymous:
+            raise exceptions.APIException
+
+        params = json.loads(request.body)
+        form = auth_forms.PasswordResetForm(params)
+        opts = dict(
+            email_template_name="users/emails/password_reset_email.txt",
+            subject_template_name="users/emails/password_reset_subject.txt",
+            html_email_template_name="users/emails/password_reset_email.html",
+            domain_override="Remarkably",
+            extra_email_context={
+                "BASE_URL": BASE_URL,
+                "title": "Password reset",
+                "subject": "Set your Remarkably password",
+            },
+        )
+
+        if form.is_valid():
+            form.save(**opts)
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
