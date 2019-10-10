@@ -18,8 +18,8 @@ export default class PerformanceReportSpanDropdown extends Component {
     start_date: PropTypes.string.isRequired,
     end_date: PropTypes.string.isRequired,
     dateFormat: PropTypes.string,
-    project: PropTypes.object,
-    onChange: PropTypes.func
+    campaignRange: PropTypes.object,
+    onChange: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -46,19 +46,12 @@ export default class PerformanceReportSpanDropdown extends Component {
     );
   }
 
-  generateReportLink = preset => {
-    return (
-      "/projects/" + this.props.project.public_id + "/performance/" + preset
-    );
-  };
-
   onPresetChange = option => {
     const preset = option.value;
+    this.setState({ preset: preset });
     if (preset !== "custom") {
-      let window = this.generateReportLink(preset);
-      document.location = window;
+      this.props.onChange(preset);
     } else if (preset === "custom") {
-      this.setState({ preset: option.value });
       this.dayPicker.current.showDayPicker();
     }
   };
@@ -66,8 +59,8 @@ export default class PerformanceReportSpanDropdown extends Component {
   onDateChange = (start, end) => {
     const startDate = formatDateWithTokens(start, this.props.dateFormat);
     const endDate = formatDateWithTokens(end, this.props.dateFormat);
-    const preset = startDate + "," + endDate;
-    document.location = this.generateReportLink(preset);
+    const rangeString = startDate + "," + endDate;
+    this.props.onChange(this.state.preset, rangeString);
   };
 
   renderOptions() {
@@ -88,10 +81,7 @@ export default class PerformanceReportSpanDropdown extends Component {
   render() {
     const startDate = parse(this.props.start_date);
     const endDate = parse(this.props.end_date);
-    const campaignRange = {
-      start: this.props.project.campaign_start,
-      end: this.props.project.campaign_end
-    };
+    const campaignRange = this.props.campaignRange;
     return (
       <>
         <span className="date-range-selector">
