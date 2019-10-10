@@ -16,6 +16,7 @@ watchdog = "*"
 ipdb = "*"
 mock = "*"
 factory_boy = "*"
+parameterized = "*"
 
 [packages]
 django-heroku = "*"
