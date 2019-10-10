@@ -22,7 +22,6 @@ export default class AccountSecurity extends React.PureComponent {
       })
     ).isRequired,
     user: PropTypes.object,
-    account_security_url: PropTypes.string,
     validate: PropTypes.func
   };
 
@@ -126,18 +125,10 @@ export default class AccountSecurity extends React.PureComponent {
     });
   };
 
-  onSubmit = (data, actions) => {
+  onSubmit = data => {
     this.unsetMessage();
-    if (!data.email && !data.password) {
-      return;
-    }
-    if (!this.props.account_security_url) {
-      actions.setSubmitting(false);
-      return;
-    }
     this.props.dispatch({
       type: "API_SECURITY_ACCOUNT",
-      account_security_url: this.props.account_security_url,
       callback: this.setSuccessMessage,
       onError: this.setErrorMessages,
       data

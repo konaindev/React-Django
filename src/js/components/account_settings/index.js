@@ -70,15 +70,15 @@ MenuItems.propTypes = {
 };
 
 class AccountSettings extends React.PureComponent {
-  static itemsOrder = ["lock"];
-
   static propTypes = {
-    initialItem: PropTypes.oneOf(AccountSettings.itemsOrder),
-    user: PropTypes.object
+    initialItem: PropTypes.oneOf(Object.keys(menuItemsData)),
+    user: PropTypes.object,
+    itemsOrder: PropTypes.arrayOf(PropTypes.string)
   };
 
   static defaultProps = {
-    initialItem: "lock"
+    initialItem: "lock",
+    itemsOrder: ["lock"]
   };
 
   constructor(props) {
@@ -106,7 +106,7 @@ class AccountSettings extends React.PureComponent {
             <div className="account-settings__menu">
               <MenuItems
                 item={this.state.item}
-                itemsOrder={AccountSettings.itemsOrder}
+                itemsOrder={this.props.itemsOrder}
                 selectItem={this.selectItem}
               />
             </div>

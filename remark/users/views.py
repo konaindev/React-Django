@@ -237,11 +237,9 @@ class AccountSettingsView(LoginRequiredReactView):
     page_title = "Account Settings"
 
     def get(self, request):
-        account_security_url = reverse("account_security")
         return self.render(
             rules=VALIDATION_RULES_LIST,
-            user=request.user.get_menu_dict(),
-            account_security_url=account_security_url)
+            user=request.user.get_menu_dict())
 
 
 class AccountSecurityView(LoginRequiredMixin, RemarkView):
