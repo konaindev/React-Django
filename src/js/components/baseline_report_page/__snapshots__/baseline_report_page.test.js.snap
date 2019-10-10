@@ -214,13 +214,6 @@ exports[`BaselineReportPage No Competitors 1`] = `
                   Modeling
                 </li>
                 <li
-                  className="disabled"
-                  data-url="#"
-                  onClick={[Function]}
-                >
-                  Campaign Plan
-                </li>
-                <li
                   className="enabled"
                   data-url="/projects/pro_example/performance/last-week/"
                   onClick={[Function]}
@@ -7794,13 +7787,6 @@ exports[`BaselineReportPage One Competitor 1`] = `
                   onClick={[Function]}
                 >
                   Modeling
-                </li>
-                <li
-                  className="disabled"
-                  data-url="#"
-                  onClick={[Function]}
-                >
-                  Campaign Plan
                 </li>
                 <li
                   className="enabled"
@@ -17623,13 +17609,6 @@ exports[`BaselineReportPage renders correctly 1`] = `
                   onClick={[Function]}
                 >
                   Modeling
-                </li>
-                <li
-                  className="disabled"
-                  data-url="#"
-                  onClick={[Function]}
-                >
-                  Campaign Plan
                 </li>
                 <li
                   className="enabled"
