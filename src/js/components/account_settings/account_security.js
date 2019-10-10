@@ -3,12 +3,15 @@ import { ErrorMessage, Formik, Form } from "formik";
 import PropTypes from "prop-types";
 import React from "react";
 
+import { validatePassword } from "../../api/password";
 import { Tick } from "../../icons";
 import Button from "../button";
 import Input from "../input";
 import PasswordOverlay from "../password_tooltip";
 import Tooltip from "../rmb_tooltip";
 import { securitySchema } from "./validators";
+
+const TYPING_TIMEOUT = 300;
 
 export default class AccountSecurity extends React.PureComponent {
   static propTypes = {
@@ -24,7 +27,23 @@ export default class AccountSecurity extends React.PureComponent {
   };
 
   static defaultProps = {
-    validate: () => ({}),
+    validate: values => {
+      clearTimeout(this.validateTimeoutId);
+      if (!values.password) {
+        return;
+      }
+      return new Promise(resolve => {
+        this.validateTimeoutId = setTimeout(() => resolve(), TYPING_TIMEOUT);
+      })
+        .then(() => validatePassword(values.password))
+        .then(errors => {
+          if (Object.keys(errors).length) {
+            throw {
+              password: errors
+            };
+          }
+        });
+    },
     user: {}
   };
 
@@ -140,7 +159,7 @@ export default class AccountSecurity extends React.PureComponent {
       <div className="account-settings__tab">
         <Formik
           ref={this.setFormik}
-          validate={this.validate}
+          validate={this.props.validate}
           validationSchema={securitySchema}
           validateOnBlur={true}
           validateOnChange={true}

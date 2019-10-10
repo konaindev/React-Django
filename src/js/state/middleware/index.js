@@ -8,6 +8,7 @@ import {
   completeAccount,
   uiStrings
 } from "../actions";
+import { updateSecurityData } from "../../api/account_settings";
 import { axiosGet, axiosPost } from "../../utils/api";
 
 // Here we create a middleware that intercepts
@@ -200,9 +201,8 @@ export const fetchUIString = store => next => action => {
 
 export const updateAccountSecurity = store => next => action => {
   if (action.type === "API_SECURITY_ACCOUNT") {
-    const url = `${process.env.BASE_URL}${action.account_security_url}`;
     if (action.data) {
-      axiosPost(url, action.data)
+      updateSecurityData(action.data)
         .then(response => {
           if (response.status === 200) {
             action.callback(response.data.message);
