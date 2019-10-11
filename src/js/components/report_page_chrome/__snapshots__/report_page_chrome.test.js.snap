@@ -207,15 +207,15 @@ exports[`ReportPageChrome renders correctly 1`] = `
                   Market Analysis
                 </li>
                 <li
-                  className="disabled"
-                  data-url="#"
+                  className="enabled"
+                  data-url="/projects/pro_example/modeling/"
                   onClick={[Function]}
                 >
                   Modeling
                 </li>
                 <li
-                  className="disabled"
-                  data-url="#"
+                  className="enabled"
+                  data-url="/projects/pro_example/campaign_plan/"
                   onClick={[Function]}
                 >
                   Campaign Plan

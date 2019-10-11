@@ -43,8 +43,7 @@ export default class PropertyCardList extends React.PureComponent {
     if (properties.length === 0) {
       return (
         <div className="property-list">
-          All your properties have been filtered out. Remove some of the filters
-          above.
+          0 search results found. Remove some of the search terms entered above.
         </div>
       );
     }

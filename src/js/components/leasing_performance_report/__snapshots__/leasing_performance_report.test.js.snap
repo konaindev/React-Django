@@ -40,9 +40,6 @@ exports[`LeasingPerformanceReport renders baseline report correctly 1`] = `
           >
             74%
           </span>
-          <div
-            className="large-box__content-extra"
-          />
         </div>
         <span
           className="large-box__bottom-line"
@@ -90,9 +87,6 @@ exports[`LeasingPerformanceReport renders baseline report correctly 1`] = `
           >
             71%
           </span>
-          <div
-            className="large-box__content-extra"
-          />
         </div>
         <span
           className="large-box__bottom-line"
@@ -130,9 +124,6 @@ exports[`LeasingPerformanceReport renders baseline report correctly 1`] = `
           >
             71%
           </span>
-          <div
-            className="large-box__content-extra"
-          />
         </div>
         <span
           className="large-box__bottom-line"

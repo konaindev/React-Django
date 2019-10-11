@@ -1,7 +1,7 @@
 @import "css/base.scss";
 
 .large-box {
-    display: flex;
+    display: block;
     flex-direction: column;
     align-items: center;
     padding: 1.5rem;
@@ -14,14 +14,14 @@
         text-transform: uppercase;
         letter-spacing: 1px;
         line-height: 1.25rem;
-        height: 2.875rem;
+        height: 1.75rem;
         text-align: center;
-        display: flex;
-        align-items: flex-end;
+        display: block;
     }
 
     &__bottom-line {
         color: $content-text-secondary-color;
+        display: block;
         font-weight: 300;
         font-size: 0.875rem;
         line-height: 1.5rem;
@@ -30,8 +30,10 @@
 
     &__content {
         text-align: center;
+        display: flex;
         position: relative;
         margin: 0.5rem 0;
+        justify-content: center;
     }
 
     &__content-value {
@@ -40,10 +42,11 @@
         font-weight: 100;
         letter-spacing: -2px;
         line-height: 4.5rem;
+        display: inline-flex;
     }
 
     &__content-extra {
-        position: absolute;
+        display: inline-block;
         bottom: 0.5rem;
         left: 100%;
         width: 4rem;
