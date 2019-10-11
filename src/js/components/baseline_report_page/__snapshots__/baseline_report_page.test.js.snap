@@ -303,9 +303,6 @@ exports[`BaselineReportPage No Competitors 1`] = `
               >
                 74%
               </span>
-              <div
-                className="large-box__content-extra"
-              />
             </div>
             <span
               className="large-box__bottom-line"
@@ -353,9 +350,6 @@ exports[`BaselineReportPage No Competitors 1`] = `
               >
                 71%
               </span>
-              <div
-                className="large-box__content-extra"
-              />
             </div>
             <span
               className="large-box__bottom-line"
@@ -393,9 +387,6 @@ exports[`BaselineReportPage No Competitors 1`] = `
               >
                 71%
               </span>
-              <div
-                className="large-box__content-extra"
-              />
             </div>
             <span
               className="large-box__bottom-line"
@@ -704,9 +695,6 @@ exports[`BaselineReportPage No Competitors 1`] = `
               >
                 $74k
               </span>
-              <div
-                className="large-box__content-extra"
-              />
             </div>
             <span
               className="large-box__bottom-line"
@@ -1800,9 +1788,6 @@ exports[`BaselineReportPage No Competitors 1`] = `
               >
                 0.3%
               </span>
-              <div
-                className="large-box__content-extra"
-              />
             </div>
             <span
               className="large-box__bottom-line"
@@ -1838,9 +1823,6 @@ exports[`BaselineReportPage No Competitors 1`] = `
               >
                 29%
               </span>
-              <div
-                className="large-box__content-extra"
-              />
             </div>
             <span
               className="large-box__bottom-line"
@@ -1876,9 +1858,6 @@ exports[`BaselineReportPage No Competitors 1`] = `
               >
                 54%
               </span>
-              <div
-                className="large-box__content-extra"
-              />
             </div>
             <span
               className="large-box__bottom-line"
@@ -7878,9 +7857,6 @@ exports[`BaselineReportPage One Competitor 1`] = `
               >
                 74%
               </span>
-              <div
-                className="large-box__content-extra"
-              />
             </div>
             <span
               className="large-box__bottom-line"
@@ -7928,9 +7904,6 @@ exports[`BaselineReportPage One Competitor 1`] = `
               >
                 71%
               </span>
-              <div
-                className="large-box__content-extra"
-              />
             </div>
             <span
               className="large-box__bottom-line"
@@ -7968,9 +7941,6 @@ exports[`BaselineReportPage One Competitor 1`] = `
               >
                 71%
               </span>
-              <div
-                className="large-box__content-extra"
-              />
             </div>
             <span
               className="large-box__bottom-line"
@@ -8279,9 +8249,6 @@ exports[`BaselineReportPage One Competitor 1`] = `
               >
                 $74k
               </span>
-              <div
-                className="large-box__content-extra"
-              />
             </div>
             <span
               className="large-box__bottom-line"
@@ -9375,9 +9342,6 @@ exports[`BaselineReportPage One Competitor 1`] = `
               >
                 0.3%
               </span>
-              <div
-                className="large-box__content-extra"
-              />
             </div>
             <span
               className="large-box__bottom-line"
@@ -9413,9 +9377,6 @@ exports[`BaselineReportPage One Competitor 1`] = `
               >
                 29%
               </span>
-              <div
-                className="large-box__content-extra"
-              />
             </div>
             <span
               className="large-box__bottom-line"
@@ -9451,9 +9412,6 @@ exports[`BaselineReportPage One Competitor 1`] = `
               >
                 54%
               </span>
-              <div
-                className="large-box__content-extra"
-              />
             </div>
             <span
               className="large-box__bottom-line"
@@ -17764,9 +17722,6 @@ exports[`BaselineReportPage renders correctly 1`] = `
               >
                 74%
               </span>
-              <div
-                className="large-box__content-extra"
-              />
             </div>
             <span
               className="large-box__bottom-line"
@@ -17814,9 +17769,6 @@ exports[`BaselineReportPage renders correctly 1`] = `
               >
                 71%
               </span>
-              <div
-                className="large-box__content-extra"
-              />
             </div>
             <span
               className="large-box__bottom-line"
@@ -17854,9 +17806,6 @@ exports[`BaselineReportPage renders correctly 1`] = `
               >
                 71%
               </span>
-              <div
-                className="large-box__content-extra"
-              />
             </div>
             <span
               className="large-box__bottom-line"
@@ -18165,9 +18114,6 @@ exports[`BaselineReportPage renders correctly 1`] = `
               >
                 $74k
               </span>
-              <div
-                className="large-box__content-extra"
-              />
             </div>
             <span
               className="large-box__bottom-line"
@@ -19261,9 +19207,6 @@ exports[`BaselineReportPage renders correctly 1`] = `
               >
                 0.3%
               </span>
-              <div
-                className="large-box__content-extra"
-              />
             </div>
             <span
               className="large-box__bottom-line"
@@ -19299,9 +19242,6 @@ exports[`BaselineReportPage renders correctly 1`] = `
               >
                 29%
               </span>
-              <div
-                className="large-box__content-extra"
-              />
             </div>
             <span
               className="large-box__bottom-line"
@@ -19337,9 +19277,6 @@ exports[`BaselineReportPage renders correctly 1`] = `
               >
                 54%
               </span>
-              <div
-                className="large-box__content-extra"
-              />
             </div>
             <span
               className="large-box__bottom-line"
