@@ -1,3 +1,4 @@
+import datetime
 import json
 
 from django.contrib import messages
@@ -8,6 +9,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
 from django.urls import reverse
+from django.utils import timezone
 
 from rest_framework import exceptions, generics, mixins, status, viewsets
 from rest_framework.views import APIView
@@ -42,7 +44,14 @@ class ProjectCustomPermission(BasePermission):
     - check user allowed access to the project
     - check shared status of a particular report
     """
-    valid_report_types = ["baseline", "market", "modeling", "campaign_plan", "performance"]
+
+    valid_report_types = [
+        "baseline",
+        "market",
+        "modeling",
+        "campaign_plan",
+        "performance",
+    ]
 
     def check_report_enabled(self, project, report_type):
         internal_fields = dict(
@@ -50,7 +59,7 @@ class ProjectCustomPermission(BasePermission):
             market="is_tam_public",
             performance="is_performance_report_public",
             modeling="is_modeling_public",
-            campaign_plan="is_campaign_plan_public"
+            campaign_plan="is_campaign_plan_public",
         )
         enabled_field = internal_fields[report_type]
         return getattr(project, enabled_field, False)
@@ -61,7 +70,7 @@ class ProjectCustomPermission(BasePermission):
             market="is_tam_shared",
             performance="is_performance_report_shared",
             modeling="is_modeling_shared",
-            campaign_plan="is_campaign_plan_shared"
+            campaign_plan="is_campaign_plan_shared",
         )
         shared_field = internal_fields[report_type]
         return getattr(project, shared_field, False)
@@ -84,7 +93,7 @@ class ProjectCustomPermission(BasePermission):
 
         report_type = request.GET.get("report_type")
         if report_type not in self.valid_report_types:
-            raise exceptions.ParseError # HTTP_400_BAD_REQUEST
+            raise exceptions.ParseError  # HTTP_400_BAD_REQUEST
 
         # for project (shared) reports endpoint
         is_report_enabled = self.check_report_enabled(project, report_type)
@@ -195,7 +204,10 @@ class TAMExportView(FormView, SingleObjectMixin):
         if form.is_valid():
             project = self.object
             export_tam_task.delay(project.pk, request.user.pk, form.cleaned_data)
-            messages.success(request, "TAM Export started. You will be emailed with the result shortly.")
+            messages.success(
+                request,
+                "TAM Export started. You will be emailed with the result shortly.",
+            )
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
@@ -238,6 +250,8 @@ class AddMembersView(APIView):
             if is_new:
                 email = member.get("value")
                 user, _ = User.objects.get_or_create(email=email)
+                user.invited = datetime.datetime.now(timezone.utc)
+                user.save()
             else:
                 public_id = member.get("value")
                 user = User.objects.get(public_id=public_id)
@@ -247,13 +261,12 @@ class AddMembersView(APIView):
             for user in users:
                 project.view_group.user_set.add(user)
                 send_invite_email.apply_async(
-                    args=(inviter_name, user.id, projects_ids),
-                    countdown=2)
+                    args=(inviter_name, user.id, projects_ids), countdown=2
+                )
             project.save()
-        projects_list = [{
-            "property_id": p.public_id,
-            "members": p.get_members(),
-        } for p in projects]
+        projects_list = [
+            {"property_id": p.public_id, "members": p.get_members()} for p in projects
+        ]
         return Response({"projects": projects_list})
 
 
@@ -268,12 +281,18 @@ class ProjectRemoveMemberView(APIView):
         try:
             user = User.objects.get(public_id=user_id)
         except User.DoesNotExist:
-            return Response({"error": "User not found"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(
+                {"error": "User not found"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
 
         try:
             project = Project.objects.get(public_id=public_id)
         except Project.DoesNotExist:
-            return Response({"error": "Project not found"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(
+                {"error": "Project not found"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
 
         project.view_group.user_set.remove(user)
         project.save()

@@ -67,7 +67,7 @@ Select.optionsType = PropTypes.oneOfType([
 ]);
 Select.propTypes = {
   size: PropTypes.oneOf(["", "small"]),
-  theme: PropTypes.oneOf(["", "default", "highlight", "transparent"]),
+  theme: PropTypes.oneOf(["", "default", "highlight", "transparent", "gray"]),
   options: Select.optionsType,
   className: PropTypes.string,
   name: PropTypes.string,

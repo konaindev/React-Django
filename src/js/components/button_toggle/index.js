@@ -1,11 +1,18 @@
-import React from "react";
+import cn from "classnames";
 import PropTypes from "prop-types";
-import cx from "classnames";
+import React from "react";
 
 import "./button_toggle.scss";
 
+export const STATE_ENUM = {
+  UNCHECKED: false,
+  CHECKED: true,
+  MEDIUM: 2
+};
+
 export function ButtonToggle(props) {
   const {
+    className,
     onChange,
     label,
     innerLabelChecked,
@@ -17,19 +24,20 @@ export function ButtonToggle(props) {
     onChange(e.target.checked);
   };
 
-  const classes = cx(
+  const checkedVal = checked === STATE_ENUM.MEDIUM ? false : checked;
+  const classes = cn(
     "button-toggle",
-    checked ? "button-toggle--checked" : "button-toggle--unchecked"
+    checkedVal ? "button-toggle--checked" : "button-toggle--unchecked",
+    { "button-toggle--medium": checked === STATE_ENUM.MEDIUM },
+    className
   );
-
-  const buttonClass = cx("button", { "button--primary": checked });
 
   return (
     <label className={classes}>
       <input
         className="button-toggle__input"
         type="checkbox"
-        checked={checked}
+        checked={checkedVal}
         onChange={handleChange}
       />
 
@@ -50,23 +58,27 @@ export function ButtonToggle(props) {
     </label>
   );
 }
-
 ButtonToggle.propTypes = {
+  className: PropTypes.string,
   onChange: PropTypes.func,
   label: PropTypes.string,
   innerLabelChecked: PropTypes.string,
   innerLabelUnchecked: PropTypes.string,
   disabled: PropTypes.bool,
-  checked: PropTypes.bool
+  checked: PropTypes.oneOf([
+    STATE_ENUM.UNCHECKED,
+    STATE_ENUM.CHECKED,
+    STATE_ENUM.MEDIUM
+  ])
 };
-
 ButtonToggle.defaultProps = {
   onChange: () => {},
   label: "",
   innerLabelChecked: "On",
   innerLabelUnchecked: "Off",
   disabled: false,
-  checked: false
+  checked: STATE_ENUM.UNCHECKED
 };
+ButtonToggle.STATE_ENUM = STATE_ENUM;
 
 export default ButtonToggle;

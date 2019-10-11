@@ -4,6 +4,7 @@ import datetime
 from django.test import TestCase
 from django.urls import reverse
 from django.utils import timezone, crypto
+from unittest import mock
 
 from remark.geo.models import Address
 from remark.users.models import Account, User
@@ -138,3 +139,80 @@ class ValidatePasswordTestCase(TestCase):
             response_data["errors"],
             {"password-length": True, "characters": True, "used": True},
         )
+
+
+class SessionExpireTestCase(TestCase):
+    def setUp(self):
+        invited = datetime.datetime.now(timezone.utc) - datetime.timedelta(days=11)
+        self.user_expire = User.objects.create_user(
+            email="test@test.com", invited=invited
+        )
+        self.user = User.objects.create_user(email="test2@test.com")
+
+    def test_session_expire(self):
+        user_public_id = self.user_expire.public_id
+        url = reverse("session_expire", kwargs={"hash": user_public_id})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+    def test_session_not_expire(self):
+        user_public_id = self.user.public_id
+        url = reverse("session_expire", kwargs={"hash": user_public_id})
+        response = self.client.get(url)
+        redirect_url = reverse("create_password", kwargs={"hash": user_public_id})
+        self.assertRedirects(
+            response, redirect_url, status_code=302, target_status_code=200
+        )
+
+    def test_session_wrong_hash(self):
+        url = reverse("session_expire", kwargs={"hash": "DoesNotExist"})
+        response = self.client.get(url)
+        self.assertRedirects(
+            response, LOGIN_URL, status_code=302, target_status_code=200
+        )
+
+
+class ResendInviteTestCase(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(email="test@test.com")
+
+        self.user_activated = User.objects.create_user(
+            email="test2@test.com",
+            password="testpassword",
+            activated=datetime.datetime.now(timezone.utc),
+        )
+
+    @mock.patch("remark.users.views.datetime")
+    @mock.patch("remark.users.views.send_invite_email")
+    def test_resend_invite(self, mock_send_email, mock_datetime):
+        date_now = datetime.datetime.now(timezone.utc)
+        mock_datetime.datetime.now.return_value = date_now
+
+        user_public_id = self.user.public_id
+        url = reverse("resend_invite", kwargs={"hash": user_public_id})
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+        mock_send_email.apply_async.assert_called()
+        user = User.objects.get(public_id=user_public_id)
+        self.assertEqual(user.invited, date_now)
+
+    @mock.patch("remark.users.views.send_invite_email")
+    def test_resend_invite_to_active_user(self, mock_send_email):
+        user_public_id = self.user_activated.public_id
+        url = reverse("resend_invite", kwargs={"hash": user_public_id})
+        response = self.client.get(url)
+        self.assertRedirects(
+            response, LOGIN_URL, status_code=302, target_status_code=200
+        )
+        mock_send_email.apply_async.assert_not_called()
+        user = User.objects.get(public_id=user_public_id)
+        self.assertFalse(user.invited)
+
+    @mock.patch("remark.users.views.send_invite_email")
+    def test_resend_invite_wrong_hash(self, mock_send_email):
+        url = reverse("resend_invite", kwargs={"hash": "DoesNotExist"})
+        response = self.client.get(url)
+        self.assertRedirects(
+            response, LOGIN_URL, status_code=302, target_status_code=200
+        )
+        mock_send_email.apply_async.assert_not_called()

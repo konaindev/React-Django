@@ -26,7 +26,7 @@ const navLinks = {
   selected_link: ""
 };
 
-const tabsData = {
+const menuItemsData = {
   profile: {
     name: "Profile",
     iconComponent: Profile,
@@ -38,57 +38,56 @@ const tabsData = {
     component: AccountSecurity
   },
   email: {
-    name: "Email Reports",
+    name: "Email Preferences",
     iconComponent: Email,
     component: EmailReports
   }
 };
 
-function MenuItems(props) {
-  const { tab, selectTab, tabs } = props;
-  const tabsUI = tabs.map(id => {
-    const item = tabsData[id];
-    const Icon = item.iconComponent;
+function MenuItems({ item, selectItem, itemsOrder }) {
+  const tabsUI = itemsOrder.map(id => {
+    const itemData = menuItemsData[id];
+    const Icon = itemData.iconComponent;
     const itemClass = cn("account-settings__menu-item", {
-      "account-settings__menu-item--active": id === tab
+      "account-settings__menu-item--active": id === item
     });
     return (
-      <div className={itemClass} key={id} onClick={() => selectTab(id)}>
+      <div className={itemClass} key={id} onClick={() => selectItem(id)}>
         <Icon className="account-settings__menu-icon" />
-        <span className="account-settings__menu-item-text">{item.name}</span>
+        <span className="account-settings__menu-item-text">
+          {itemData.name}
+        </span>
       </div>
     );
   });
   return <>{tabsUI}</>;
 }
 MenuItems.propTypes = {
-  tab: PropTypes.string.isRequired,
-  tabs: PropTypes.arrayOf(PropTypes.string).isRequired,
-  selectTab: PropTypes.func.isRequired
+  item: PropTypes.string.isRequired,
+  itemsOrder: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selectItem: PropTypes.func.isRequired
 };
 
 export default class AccountSettings extends React.PureComponent {
+  static itemsOrder = ["profile", "lock", "email"];
   static propTypes = {
-    initialTab: PropTypes.oneOf(["profile", "lock", "email"])
+    initialItem: PropTypes.oneOf(AccountSettings.itemsOrder)
   };
-
   static defaultProps = {
-    initialTab: "profile"
+    initialItem: "profile"
   };
-
-  tabs = ["profile", "lock", "email"];
 
   constructor(props) {
     super(props);
     this.state = {
-      tab: props.initialTab
+      item: props.initialItem
     };
   }
 
-  selectTab = tab => this.setState({ tab });
+  selectItem = item => this.setState({ item });
 
   render() {
-    const Component = tabsData[this.state.tab].component;
+    const Component = menuItemsData[this.state.item].component;
     return (
       <PageChrome navLinks={navLinks}>
         <div className="account-settings">
@@ -102,9 +101,9 @@ export default class AccountSettings extends React.PureComponent {
           <div className="account-settings__panel">
             <div className="account-settings__menu">
               <MenuItems
-                tab={this.state.tab}
-                tabs={this.tabs}
-                selectTab={this.selectTab}
+                item={this.state.item}
+                itemsOrder={AccountSettings.itemsOrder}
+                selectItem={this.selectItem}
               />
             </div>
             <Component {...this.props} />

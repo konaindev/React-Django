@@ -1,6 +1,7 @@
 @import "css/base.scss";
 
 $page-width: 1000px;
+$box-spacing: 1.875rem;
 $title-height: 44px;
 $text-color: $highlight-gray-3;
 $label-color: $gray-6;
@@ -10,7 +11,7 @@ $columns-gap: 1.875rem;
 $rows-gap: 0.625rem;
 $menu-border: 1px solid $gray-4;
 $menu-item-background: $gray-2;
-$menu-item-background-hover: rgba(16, 20, 23, .1);
+$menu-item-background-hover: rgba(43, 52, 61, .5);
 $menu-item-width: 221px;
 $tab-title-line-height: 2.125rem;
 $input-label-line-height: 1.25rem;
@@ -91,11 +92,42 @@ $info-line-height: 1.75rem;
     flex-grow: 1;
 }
 
+.account-settings__tab-header {
+    margin-bottom: $box-spacing;
+}
+
 .account-settings__tab-title {
-    margin-bottom: 30px;
     color: $text-color;
     font-size: $text-xl;
     line-height: $tab-title-line-height;
+}
+
+.account-settings__tab-subtitle {
+    line-height: $subtitle-line-height;
+}
+
+.account-settings__tab-navigator {
+    .tab-navigator__navs {
+        padding: 0 $box-spacing;
+    }
+    .container:not(.tab-navigator__navs) {
+        padding: 0;
+    }
+    .tab-navigator__nav-item {
+        padding: 0 0 0.875rem 0;
+        margin: 0;
+        color: $gray-6;
+
+        &--active {
+            color: $highlight-gray-3;
+        }
+        & + .tab-navigator__nav-item {
+            margin-left: 3.75rem;
+        }
+    }
+    .tab-navigator__content {
+        padding-top: $box-spacing;
+    }
 }
 
 .account-settings__label {
@@ -109,7 +141,15 @@ $info-line-height: 1.75rem;
 }
 
 .account-settings__tab-content {
-    padding: 30px;
+    padding: $box-spacing 0;
+}
+
+.account-settings__tab-section {
+    padding: 0 $box-spacing;
+
+    &--zero-pad {
+        padding: 0;
+    }
 }
 
 .account-settings__tab-section + .account-settings__tab-section {
@@ -155,7 +195,7 @@ $info-line-height: 1.75rem;
     }
 }
 
-.account-settings__buttons-field {
+.account-settings__controls {
     display: flex;
     align-items: center;
     padding: 30px;
@@ -269,4 +309,35 @@ $info-line-height: 1.75rem;
     &--name {
         color: $text-color;
     }
+}
+
+.account-settings__search-controls {
+    display: flex;
+    align-items: center;
+    padding: 0 $box-spacing $box-spacing $box-spacing;
+    margin-bottom: $box-spacing;
+    border-bottom: $menu-border;
+}
+
+.account-settings__search {
+    flex-grow: 1;
+}
+
+.account-settings__toggle {
+    width: 56px;
+    margin: 0 $s5 0 $box-spacing;
+    box-sizing: border-box;
+
+    &.button-toggle--unchecked,
+    &.button-toggle--middle {
+        border: $input-border;
+        border-radius: 100px;
+    }
+    &.button-toggle--middle .button-toggle__track {
+        background-color: $gray-2;
+    }
+}
+
+.account-settings__reporting-table {
+    padding: 0 $box-spacing;
 }

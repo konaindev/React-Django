@@ -25,13 +25,15 @@ import ProjectPage from "./components/project_page";
 import ReleaseNotesPage from "./components/release_notes_page";
 import ReleaseNoteDetailsPage from "./components/release_note_details_page";
 import CampaignPlanPage from "./components/campaign_plan_page";
-import storeFunc from "./state/store";
+import { store } from "./App";
 import { general } from "./state/actions";
 import PortfolioAnalysisView from "./components/portfolio_analysis_view";
 import CreatePasswordView from "./components/create_password_view";
 import CompleteAccountView from "./components/complete_account_view";
-
-const { store } = storeFunc();
+import SessionExpiredPage from "./components/session_expired_page";
+import LoginView from "./components/login";
+import ResetPasswordForm from "./components/reset_password_form";
+import ResetPasswordDone from "./components/reset_password_done";
 
 const pages = {
   AccountSettings,
@@ -46,7 +48,11 @@ const pages = {
   CampaignPlanPage,
   PortfolioAnalysisView,
   CompleteAccountView,
-  CreatePasswordView
+  CreatePasswordView,
+  SessionExpiredPage,
+  LoginView,
+  ResetPasswordForm,
+  ResetPasswordDone
 };
 
 /*

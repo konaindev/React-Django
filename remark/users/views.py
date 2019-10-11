@@ -25,8 +25,11 @@ from remark.crm.models import Business, Office, Person
 from remark.crm.constants import OFFICE_TYPES
 from remark.geo.models import Address
 from remark.geo.geocode import geocode
+from remark.projects.models import Project
 from remark.settings import BASE_URL, LOGIN_URL
 from remark.lib.views import ReactView, RemarkView
+from remark.email_app.invites.added_to_property import send_invite_email
+from remark.settings import INVITATION_EXP
 
 from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES
 from .forms import AccountCompleteForm
@@ -99,7 +102,6 @@ class CreatePasswordView(APIView):
     """
     Create password for a new account
     UI should login itself after setting password successfully
-
     @param user_id
     @param password
     """
@@ -119,6 +121,11 @@ class CreatePasswordView(APIView):
 
         if user.activated:
             raise exceptions.APIException
+        if user.invited:
+            date_now = datetime.datetime.now(timezone.utc)
+            delta = date_now - user.invited
+            if delta.days > INVITATION_EXP:
+                raise exceptions.APIException(detail="Invitation Expired")
 
         try:
             password_validation.validate_password(password, user=user)
@@ -137,7 +144,6 @@ class PasswordRulesView(APIView):
     """
     - Get password validation rules
     - Validate password against rules
-
     @param user_id
     @param password
     """
@@ -171,7 +177,6 @@ class PasswordRulesView(APIView):
 class ChangePasswordView(APIView):
     """
     Change password for an existing logged in user
-
     @param old_password
     @param new_password1
     @param new_password2
@@ -196,7 +201,6 @@ class ResetPasswordView(APIView):
     """
     Send password reset email
     Reset urls are defined in "remark/users/templates/users/emails/password_reset_email.<html|txt>"
-
     @param email
     """
 
@@ -265,3 +269,22 @@ class ResetPasswordConfirmView(APIView):
         except (TypeError, ValueError, OverflowError, User.DoesNotExist, ValidationError):
             user = None
         return user
+
+
+class ResendInviteView(APIView):
+    def get(self, request, user_id):
+        try:
+            user = User.objects.get(public_id=user_id)
+        except User.DoesNotExist:
+            raise exceptions.APIException(detail="User does not exist")
+        if user.activated:
+            raise exceptions.APIException(detail="Already activated")
+        user.invited = datetime.datetime.now(timezone.utc)
+        user.save()
+
+        projects = Project.objects.get_all_for_user(user)
+        projects_ids = [p.public_id for p in projects]
+        # @FIXME: need inviter name
+        send_invite_email.apply_async(args=("", user.id, projects_ids), countdown=2)
+
+        return Response(status=status.HTTP_204_NO_CONTENT)

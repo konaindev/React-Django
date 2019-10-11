@@ -20,3 +20,5 @@ export default class App extends Component {
     );
   }
 }
+
+export { store };

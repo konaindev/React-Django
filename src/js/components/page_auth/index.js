@@ -1,3 +1,4 @@
+import cn from "classnames";
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -14,10 +15,12 @@ export default class PageAuth extends React.PureComponent {
   static propTypes = {
     backLink: PropTypes.string,
     backLinkText: PropTypes.string,
+    bodyAlign: PropTypes.oneOf(["", "top"]),
     children: PropTypes.node.isRequired
   };
 
   static defaultProps = {
+    bodyAlign: "",
     backLinkText: "← Go to Login"
   };
 
@@ -33,6 +36,9 @@ export default class PageAuth extends React.PureComponent {
   }
 
   render() {
+    const classes = cn("page-auth__body", {
+      [`page-auth__body--align-${this.props.bodyAlign}`]: this.props.bodyAlign
+    });
     return (
       <div className="page-auth">
         <div className="page-auth__header">
@@ -41,7 +47,7 @@ export default class PageAuth extends React.PureComponent {
             <RemarkablyLogo />
           </div>
         </div>
-        <div className="page-auth__body">{this.props.children}</div>
+        <div className={classes}>{this.props.children}</div>
         <div className="page-auth__footer">
           © 2019 Remarkably. All Rights Reserved
         </div>
