@@ -2,7 +2,7 @@ from django.db import models
 from remark.lib.tokens import public_id
 from stdimage.models import StdImageField
 
-from .constants import OFFICE_TYPES
+from .constants import BUSINESS_ROLES, OFFICE_TYPES
 
 
 def bus_public_id():
@@ -70,6 +70,13 @@ class Business(models.Model):
     is_developer = models.BooleanField(
         default=False, help_text="Business Type is Developer"
     )
+
+    def get_roles(self):
+        roles = []
+        for k in BUSINESS_ROLES:
+            if getattr(self, k, None):
+                roles.append(BUSINESS_ROLES[k])
+        return roles
 
     def __str__(self):
         return self.name

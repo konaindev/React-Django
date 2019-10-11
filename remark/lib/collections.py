@@ -63,3 +63,7 @@ class SortedList(SortedKeyListBase):
         """
         i = self.bisect_left(value)
         return i if i != len(self) else None
+
+
+def invert_dict(d):
+    return dict(map(reversed, d.items()))

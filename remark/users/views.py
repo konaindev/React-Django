@@ -14,7 +14,7 @@ from django.utils import timezone
 from django.urls import reverse
 
 from remark.crm.models import Business, Office, Person
-from remark.crm.constants import OFFICE_TYPES
+from remark.crm.constants import OFFICE_OPTIONS, OFFICE_TYPES
 from remark.geo.models import Address
 from remark.geo.geocode import geocode
 from remark.projects.models import Project
@@ -236,6 +236,10 @@ class AccountSettingsView(LoginRequiredReactView):
     page_title = "Account Settings"
 
     def get(self, request):
+        user = request.user
         return self.render(
             rules=VALIDATION_RULES_LIST,
+            profile=user.get_profile_data(),
+            company_roles=COMPANY_ROLES,
+            office_options=OFFICE_OPTIONS,
             user=request.user.get_menu_dict())

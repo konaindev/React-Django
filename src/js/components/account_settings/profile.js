@@ -14,7 +14,7 @@ import { profileSchema } from "./validators";
 
 export default class Profile extends React.PureComponent {
   static propTypes = {
-    person: PropTypes.shape({
+    profile: PropTypes.shape({
       avatar_url: PropTypes.string,
       first_name: PropTypes.string,
       last_name: PropTypes.string,
@@ -22,37 +22,31 @@ export default class Profile extends React.PureComponent {
       phone: PropTypes.string,
       phone_ext: PropTypes.string,
       company_name: PropTypes.string,
-      company_role: PropTypes.arrayOf(
-        PropTypes.shape({
-          label: PropTypes.string,
-          value: PropTypes.string
-        })
-      ),
+      company_roles: PropTypes.arrayOf(PropTypes.string),
       office_address: PropTypes.string,
       office_name: PropTypes.string,
-      office_type: PropTypes.object
-    })
+      office_type: PropTypes.number
+    }),
+    company_roles: MultiSelect.optionsType.isRequired,
+    office_options: Select.optionsType.isRequired
   };
-  static roleOptions = [
-    { label: "Owner", value: "owner" },
-    { label: "Developer", value: "developer" },
-    { label: "Asset Manager", value: "asset" },
-    { label: "Property Manager", value: "property" },
-    { label: "JV / Investor", value: "jv" },
-    { label: "Vendor / Consultant", value: "vendor" }
-  ];
-  static officeTypes = [
-    { label: "Global", value: "global" },
-    { label: "National", value: "national" },
-    { label: "Regional", value: "regional" },
-    { label: "Other", value: "other" }
-  ];
 
   state = { fieldsSubmitted: false };
 
   constructor(props) {
     super(props);
     this.formik = React.createRef();
+  }
+
+  get initialValues() {
+    const profile = { ...this.props.profile };
+    profile.company_roles = this.props.company_roles.filter(i =>
+      profile.company_roles.includes(i.value)
+    );
+    profile.office_type = this.props.office_options.filter(
+      i => i.value === profile.office_type
+    );
+    return profile;
   }
 
   onFileUpload = e => {
@@ -118,7 +112,7 @@ export default class Profile extends React.PureComponent {
       <div className="account-settings__tab">
         <Formik
           ref={this.formik}
-          initialValues={this.props.person}
+          initialValues={this.initialValues}
           validationSchema={profileSchema}
           validateOnBlur={true}
           validateOnChange={true}
@@ -308,7 +302,7 @@ export default class Profile extends React.PureComponent {
                     </div>
                     <div
                       className={this.getFieldClasses(
-                        "company_role",
+                        "company_roles",
                         errors,
                         touched,
                         ["max-width"]
@@ -319,22 +313,22 @@ export default class Profile extends React.PureComponent {
                       </div>
                       <MultiSelect
                         className="account-settings__input"
-                        name="company_role"
+                        name="company_roles"
                         theme="gray"
                         isShowControls={false}
                         isShowAllOption={false}
-                        options={Profile.roleOptions}
-                        value={values.company_role}
-                        label={values.company_role
+                        options={this.props.company_roles}
+                        value={values.company_roles}
+                        label={values.company_roles
                           ?.map(v => v.label)
                           .join(", ")}
-                        onBlur={() => setFieldTouched("company_role", true)}
+                        onBlur={() => setFieldTouched("company_roles", true)}
                         onChange={values =>
-                          setFieldValue("company_role", values)
+                          setFieldValue("company_roles", values)
                         }
                       />
                       <div className="account-settings__error">
-                        <ErrorMessage name="company_role" />
+                        <ErrorMessage name="company_roles" />
                       </div>
                     </div>
                     <div
@@ -392,7 +386,7 @@ export default class Profile extends React.PureComponent {
                         className="account-settings__input"
                         name="office_type"
                         theme="gray"
-                        options={Profile.officeTypes}
+                        options={this.props.office_options}
                         value={values.office_type}
                         onBlur={() => setFieldTouched("office_type", true)}
                         onChange={value => setFieldValue("office_type", value)}
