@@ -19,11 +19,11 @@ from remark.geo.models import Address
 from remark.geo.geocode import geocode
 from remark.projects.models import Project
 from remark.settings import LOGIN_URL
-from remark.lib.views import ReactView, RemarkView, APIView
+from remark.lib.views import ReactView, RemarkView, APIView, LoginRequiredReactView
 from remark.email_app.invites.added_to_property import send_invite_email
 from remark.settings import INVITATION_EXP
 
-from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES
+from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES, VALIDATION_RULES_LIST
 from .forms import AccountCompleteForm
 from .models import User
 
@@ -231,10 +231,11 @@ class ResendInviteView(APIView):
         return self.render_success()
 
 
-class AccountSettingsView(ReactView):
+class AccountSettingsView(LoginRequiredReactView):
     page_class = "AccountSettings"
     page_title = "Account Settings"
 
     def get(self, request):
-        rules = [{"label": v["label"], "key": v["key"]} for v in VALIDATION_RULES]
-        return self.render(rules=rules)
+        return self.render(
+            rules=VALIDATION_RULES_LIST,
+            user=request.user.get_menu_dict())
