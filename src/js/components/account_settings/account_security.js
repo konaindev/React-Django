@@ -107,6 +107,13 @@ export default class AccountSecurity extends React.PureComponent {
 
   setSuccessMessage = message => {
     this.formik.setSubmitting(false);
+    const { values } = this.formik.state;
+    if (values.password) {
+      values.old_password = "";
+      values.password = "";
+      values.confirm_password = "";
+    }
+    this.formik.setValues(values);
     this.setState({ message });
   };
 
