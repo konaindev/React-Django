@@ -73,8 +73,7 @@ class PropertyList extends React.PureComponent {
     if (this.props.properties.length === 0) {
       return (
         <div className="property-list">
-          All your properties have been filtered out. Remove some of the filters
-          above.
+          0 search results found. Remove some of the search terms entered above.
         </div>
       );
     }

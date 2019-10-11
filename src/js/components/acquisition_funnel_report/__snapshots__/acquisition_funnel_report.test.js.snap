@@ -40,9 +40,6 @@ exports[`AcquisitionFunnelReport renders baseline report correctly 1`] = `
           >
             0.3%
           </span>
-          <div
-            className="large-box__content-extra"
-          />
         </div>
         <span
           className="large-box__bottom-line"
@@ -78,9 +75,6 @@ exports[`AcquisitionFunnelReport renders baseline report correctly 1`] = `
           >
             29%
           </span>
-          <div
-            className="large-box__content-extra"
-          />
         </div>
         <span
           className="large-box__bottom-line"
@@ -116,9 +110,6 @@ exports[`AcquisitionFunnelReport renders baseline report correctly 1`] = `
           >
             54%
           </span>
-          <div
-            className="large-box__content-extra"
-          />
         </div>
         <span
           className="large-box__bottom-line"

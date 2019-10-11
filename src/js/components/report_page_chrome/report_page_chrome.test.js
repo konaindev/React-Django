@@ -1,6 +1,6 @@
 import renderer from "react-test-renderer";
 
-import { props as reportLinkProps } from "../report_links/report_links.stories";
+import { props as reportLinkProps } from "../report_links/props";
 import { props as user } from "../user_menu/props";
 import { project } from "../project_page/props";
 
