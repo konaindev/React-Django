@@ -35,8 +35,6 @@ import LoginView from "./components/login";
 import ResetPasswordForm from "./components/reset_password_form";
 import ResetPasswordDone from "./components/reset_password_done";
 
-const { store } = storeFunc();
-
 const pages = {
   AccountSettings,
   BaselineReportPage,

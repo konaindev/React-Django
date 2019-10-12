@@ -166,6 +166,11 @@ export const logoutMiddleware = store => next => action => {
   if (action.type === "LOGOUT") {
     store.dispatch(auth.clearToken());
     next(action);
+  } else {
+    next(action);
+  }
+};
+
 export const fetchInviteModal = store => next => action => {
   if (action.type === "API_INVITE_MODAL_GET_USERS") {
     const url = `${process.env.BASE_URL}/projects/members/`;
