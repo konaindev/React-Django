@@ -1,3 +1,4 @@
+import _cloneDeep from "lodash/cloneDeep";
 import { combineReducers } from "redux";
 
 const initState = {
@@ -16,12 +17,67 @@ const token = (state = { refresh: null, access: null }, action) => {
   }
   return newState;
 };
+function replaceObjectInArray(target, data, key) {
+  const index = target.findIndex(t => t[key] === data[key]);
+  if (index === -1) {
+    return target;
+  }
+  target[index] = { ...target[index], ...data };
+  return target;
+}
 
 const dashboard = (state = {}, action) => {
   let newState = {};
   switch (action.type) {
     case "GENERAL_SET_STATE": {
       newState = { ...action.newState };
+      break;
+    }
+    case "GENERAL_UPDATE_STATE": {
+      newState = { ...state, ...action.newState };
+      break;
+    }
+    case "GENERAL_REMOVE_MEMBER_COMPLETE": {
+      const properties = replaceObjectInArray(
+        [...state.properties],
+        action.property,
+        "property_id"
+      );
+      const selectedProperties = replaceObjectInArray(
+        [...state.selectedProperties],
+        action.property,
+        "property_id"
+      );
+      newState = {
+        ...state,
+        properties,
+        selectedProperties
+      };
+      break;
+    }
+    case "GENERAL_INVITE_MEMBER_COMPLETE": {
+      const propertiesObj = {};
+      if (state.properties) {
+        state.properties.forEach(p => {
+          propertiesObj[p.property_id] = p;
+        });
+        action.properties.forEach(p => {
+          propertiesObj[p.property_id] = {
+            ...propertiesObj[p.property_id],
+            ...p
+          };
+        });
+        const properties = state.properties.map(
+          p => propertiesObj[p.property_id]
+        );
+        newState = {
+          ...state,
+          properties,
+          selectedProperties: []
+        };
+      } else {
+        newState = { ...state };
+      }
       break;
     }
     default:
@@ -260,6 +316,72 @@ const kpi = (state = {}, action) => {
   }
   return newState;
 };
+const inviteModal = (state = {}, action) => {
+  let newState = {};
+  switch (action.type) {
+    case "INVITE_MODAL_SHOW": {
+      newState = { ...state, isOpen: true };
+      break;
+    }
+    case "INVITE_MODAL_HIDE": {
+      newState = { ...state, isOpen: false };
+      break;
+    }
+    case "INVITE_MODAL_REMOVE_MODAL_SHOW": {
+      newState = {
+        ...state,
+        removeModalIsOpen: true,
+        remove: {
+          member: action.member,
+          property: action.property
+        }
+      };
+      break;
+    }
+    case "INVITE_MODAL_REMOVE_MODAL_HIDE": {
+      newState = { ...state, removeModalIsOpen: false };
+      break;
+    }
+    case "GENERAL_REMOVE_MEMBER_COMPLETE": {
+      newState = {
+        ...state,
+        removeModalIsOpen: false
+      };
+      break;
+    }
+    case "GENERAL_INVITE_MEMBER_COMPLETE": {
+      newState = { ...state, isOpen: false };
+      break;
+    }
+    default:
+      newState = state;
+  }
+  return newState;
+};
+
+const uiStrings = (
+  state = {
+    strings: {},
+    language: "en_us",
+    version: {}
+  },
+  action
+) => {
+  let newState = {};
+  switch (action.type) {
+    case "UI_STRINGS_SET_STATE": {
+      newState = _cloneDeep(state);
+      const { language, strings, version } = action.data;
+      newState.strings[language] = strings;
+      newState.version[language] = version;
+      break;
+    }
+    default:
+      newState = state;
+  }
+  return newState;
+};
+
 export default combineReducers({
   general: dashboard,
   network,
@@ -278,5 +400,7 @@ export default combineReducers({
   locations,
   project,
   market,
-  kpi
+  kpi,
+  inviteModal,
+  uiStrings
 });

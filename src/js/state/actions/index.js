@@ -5,9 +5,10 @@ export const general = {
     type: "GENERAL_SET_STATE",
     newState
   }),
-  update: {
-    type: "GENERAL_UPDATE_STATE"
-  }
+  update: newState => ({
+    type: "GENERAL_UPDATE_STATE",
+    newState
+  })
 };
 
 export const tutorial = {
@@ -140,3 +141,49 @@ export const kpi = createActions("kpi");
 export const market = createActions("market");
 export const project = createActions("project");
 export const locations = createActions("locations");
+
+export const inviteModal = {
+  open: {
+    type: "INVITE_MODAL_SHOW"
+  },
+  close: {
+    type: "INVITE_MODAL_HIDE"
+  },
+  removeModalOpen: (property, member) => ({
+    type: "INVITE_MODAL_REMOVE_MODAL_SHOW",
+    property,
+    member
+  }),
+  removeModalClose: {
+    type: "INVITE_MODAL_REMOVE_MODAL_HIDE"
+  },
+  getUsers: (value, callback) => ({
+    type: "API_INVITE_MODAL_GET_USERS",
+    data: { value },
+    callback
+  }),
+  removeMember: (project, member) => ({
+    type: "API_INVITE_MODAL_REMOVE_MEMBER",
+    data: { project, member }
+  }),
+  addMembers: (projects, members) => ({
+    type: "API_INVITE_MODAL_ADD_MEMBER",
+    data: { projects, members }
+  }),
+  resend: (hash, callback) => ({
+    type: "API_INVITE_RESEND",
+    hash,
+    callback
+  })
+};
+
+export const uiStrings = {
+  fetch: (version, language) => ({
+    type: "API_UI_STRINGS",
+    data: { version, language }
+  }),
+  set: data => ({
+    type: "UI_STRINGS_SET_STATE",
+    data
+  })
+};

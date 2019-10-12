@@ -1,0 +1,1024 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EmailReportingTable has \`view more\` button 1`] = `
+<div
+  className="email-reporting-table"
+>
+  <div
+    className="email-reporting-table__rows"
+  >
+    <div
+      className="email-reporting-row email-reporting-table__row"
+    >
+      <div
+        className="email-reporting-row__col"
+      >
+        <div
+          className="email-reporting-row__title"
+        >
+          Adams Lane Flats
+        </div>
+      </div>
+      <div
+        className="email-reporting-row__col email-reporting-row__col--middle"
+      >
+        <label
+          className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
+        >
+          <input
+            checked={false}
+            className="button-toggle__input"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="button-toggle__track"
+          >
+            <span
+              className="button-toggle__thumb"
+            />
+            <div
+              className="button-toggle__checked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                On
+              </div>
+            </div>
+            <div
+              className="button-toggle__unchecked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                Off
+              </div>
+            </div>
+          </span>
+          
+        </label>
+      </div>
+    </div>
+    <div
+      className="email-reporting-row email-reporting-table__row"
+    >
+      <div
+        className="email-reporting-row__col"
+      >
+        <div
+          className="email-reporting-row__title"
+        >
+          Appleton Farms
+        </div>
+      </div>
+      <div
+        className="email-reporting-row__col email-reporting-row__col--middle"
+      >
+        <label
+          className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
+        >
+          <input
+            checked={false}
+            className="button-toggle__input"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="button-toggle__track"
+          >
+            <span
+              className="button-toggle__thumb"
+            />
+            <div
+              className="button-toggle__checked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                On
+              </div>
+            </div>
+            <div
+              className="button-toggle__unchecked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                Off
+              </div>
+            </div>
+          </span>
+          
+        </label>
+      </div>
+    </div>
+    <div
+      className="email-reporting-row email-reporting-table__row"
+    >
+      <div
+        className="email-reporting-row__col"
+      >
+        <div
+          className="email-reporting-row__title"
+        >
+          Cue Townhomes
+        </div>
+      </div>
+      <div
+        className="email-reporting-row__col email-reporting-row__col--middle"
+      >
+        <label
+          className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
+        >
+          <input
+            checked={false}
+            className="button-toggle__input"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="button-toggle__track"
+          >
+            <span
+              className="button-toggle__thumb"
+            />
+            <div
+              className="button-toggle__checked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                On
+              </div>
+            </div>
+            <div
+              className="button-toggle__unchecked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                Off
+              </div>
+            </div>
+          </span>
+          
+        </label>
+      </div>
+    </div>
+    <div
+      className="email-reporting-row email-reporting-table__row"
+    >
+      <div
+        className="email-reporting-row__col"
+      >
+        <div
+          className="email-reporting-row__title"
+        >
+          Over the Rhine
+        </div>
+      </div>
+      <div
+        className="email-reporting-row__col email-reporting-row__col--middle"
+      >
+        <label
+          className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
+        >
+          <input
+            checked={false}
+            className="button-toggle__input"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="button-toggle__track"
+          >
+            <span
+              className="button-toggle__thumb"
+            />
+            <div
+              className="button-toggle__checked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                On
+              </div>
+            </div>
+            <div
+              className="button-toggle__unchecked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                Off
+              </div>
+            </div>
+          </span>
+          
+        </label>
+      </div>
+    </div>
+    <div
+      className="email-reporting-row email-reporting-table__row"
+    >
+      <div
+        className="email-reporting-row__col"
+      >
+        <div
+          className="email-reporting-row__title"
+        >
+          Rainier Lofts
+        </div>
+      </div>
+      <div
+        className="email-reporting-row__col email-reporting-row__col--middle"
+      >
+        <label
+          className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
+        >
+          <input
+            checked={false}
+            className="button-toggle__input"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="button-toggle__track"
+          >
+            <span
+              className="button-toggle__thumb"
+            />
+            <div
+              className="button-toggle__checked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                On
+              </div>
+            </div>
+            <div
+              className="button-toggle__unchecked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                Off
+              </div>
+            </div>
+          </span>
+          
+        </label>
+      </div>
+    </div>
+  </div>
+  <div
+    className="email-reporting-table__loading"
+  >
+    <button
+      className="button button--secondary email-reporting-table__loading-btn"
+      onClick={[Function]}
+    >
+      View More
+    </button>
+  </div>
+</div>
+`;
+
+exports[`EmailReportingTable renders groups table 1`] = `
+<div
+  className="email-reporting-table"
+>
+  <div
+    className="email-reporting-table__rows"
+  >
+    <div
+      className="email-reporting-row email-reporting-table__row"
+    >
+      <div
+        className="email-reporting-row__col"
+      >
+        <div
+          className="email-reporting-row__title"
+        >
+          Southwestern
+        </div>
+        <div
+          className="email-reporting-row__info"
+        >
+          6 Properties
+        </div>
+      </div>
+      <div
+        className="email-reporting-row__col email-reporting-row__col--middle"
+      >
+        <label
+          className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
+        >
+          <input
+            checked={false}
+            className="button-toggle__input"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="button-toggle__track"
+          >
+            <span
+              className="button-toggle__thumb"
+            />
+            <div
+              className="button-toggle__checked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                On
+              </div>
+            </div>
+            <div
+              className="button-toggle__unchecked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                Off
+              </div>
+            </div>
+          </span>
+          
+        </label>
+      </div>
+    </div>
+    <div
+      className="email-reporting-row email-reporting-table__row"
+    >
+      <div
+        className="email-reporting-row__col"
+      >
+        <div
+          className="email-reporting-row__title"
+        >
+          Tri-City
+        </div>
+        <div
+          className="email-reporting-row__info"
+        >
+          5 Properties
+        </div>
+      </div>
+      <div
+        className="email-reporting-row__col email-reporting-row__col--middle"
+      >
+        <label
+          className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
+        >
+          <input
+            checked={false}
+            className="button-toggle__input"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="button-toggle__track"
+          >
+            <span
+              className="button-toggle__thumb"
+            />
+            <div
+              className="button-toggle__checked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                On
+              </div>
+            </div>
+            <div
+              className="button-toggle__unchecked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                Off
+              </div>
+            </div>
+          </span>
+          
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`EmailReportingTable renders portfolio table 1`] = `
+<div
+  className="email-reporting-table"
+>
+  <div
+    className="email-reporting-table__rows"
+  >
+    <div
+      className="email-reporting-row email-reporting-table__row"
+    >
+      <div
+        className="email-reporting-row__col"
+      >
+        <div
+          className="email-reporting-row__title"
+        >
+          Portfolio
+        </div>
+        <div
+          className="email-reporting-row__info"
+        >
+          2 Groups, 16 Properties
+        </div>
+      </div>
+      <div
+        className="email-reporting-row__col email-reporting-row__col--middle"
+      >
+        <label
+          className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
+        >
+          <input
+            checked={false}
+            className="button-toggle__input"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="button-toggle__track"
+          >
+            <span
+              className="button-toggle__thumb"
+            />
+            <div
+              className="button-toggle__checked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                On
+              </div>
+            </div>
+            <div
+              className="button-toggle__unchecked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                Off
+              </div>
+            </div>
+          </span>
+          
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`EmailReportingTable renders properties table 1`] = `
+<div
+  className="email-reporting-table"
+>
+  <div
+    className="email-reporting-table__rows"
+  >
+    <div
+      className="email-reporting-row email-reporting-table__row"
+    >
+      <div
+        className="email-reporting-row__col"
+      >
+        <div
+          className="email-reporting-row__title"
+        >
+          Adams Lane Flats
+        </div>
+      </div>
+      <div
+        className="email-reporting-row__col email-reporting-row__col--middle"
+      >
+        <label
+          className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
+        >
+          <input
+            checked={false}
+            className="button-toggle__input"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="button-toggle__track"
+          >
+            <span
+              className="button-toggle__thumb"
+            />
+            <div
+              className="button-toggle__checked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                On
+              </div>
+            </div>
+            <div
+              className="button-toggle__unchecked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                Off
+              </div>
+            </div>
+          </span>
+          
+        </label>
+      </div>
+    </div>
+    <div
+      className="email-reporting-row email-reporting-table__row"
+    >
+      <div
+        className="email-reporting-row__col"
+      >
+        <div
+          className="email-reporting-row__title"
+        >
+          Appleton Farms
+        </div>
+      </div>
+      <div
+        className="email-reporting-row__col email-reporting-row__col--middle"
+      >
+        <label
+          className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
+        >
+          <input
+            checked={false}
+            className="button-toggle__input"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="button-toggle__track"
+          >
+            <span
+              className="button-toggle__thumb"
+            />
+            <div
+              className="button-toggle__checked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                On
+              </div>
+            </div>
+            <div
+              className="button-toggle__unchecked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                Off
+              </div>
+            </div>
+          </span>
+          
+        </label>
+      </div>
+    </div>
+    <div
+      className="email-reporting-row email-reporting-table__row"
+    >
+      <div
+        className="email-reporting-row__col"
+      >
+        <div
+          className="email-reporting-row__title"
+        >
+          Cue Townhomes
+        </div>
+      </div>
+      <div
+        className="email-reporting-row__col email-reporting-row__col--middle"
+      >
+        <label
+          className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
+        >
+          <input
+            checked={false}
+            className="button-toggle__input"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="button-toggle__track"
+          >
+            <span
+              className="button-toggle__thumb"
+            />
+            <div
+              className="button-toggle__checked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                On
+              </div>
+            </div>
+            <div
+              className="button-toggle__unchecked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                Off
+              </div>
+            </div>
+          </span>
+          
+        </label>
+      </div>
+    </div>
+    <div
+      className="email-reporting-row email-reporting-table__row"
+    >
+      <div
+        className="email-reporting-row__col"
+      >
+        <div
+          className="email-reporting-row__title"
+        >
+          Over the Rhine
+        </div>
+      </div>
+      <div
+        className="email-reporting-row__col email-reporting-row__col--middle"
+      >
+        <label
+          className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
+        >
+          <input
+            checked={false}
+            className="button-toggle__input"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="button-toggle__track"
+          >
+            <span
+              className="button-toggle__thumb"
+            />
+            <div
+              className="button-toggle__checked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                On
+              </div>
+            </div>
+            <div
+              className="button-toggle__unchecked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                Off
+              </div>
+            </div>
+          </span>
+          
+        </label>
+      </div>
+    </div>
+    <div
+      className="email-reporting-row email-reporting-table__row"
+    >
+      <div
+        className="email-reporting-row__col"
+      >
+        <div
+          className="email-reporting-row__title"
+        >
+          Rainier Lofts
+        </div>
+      </div>
+      <div
+        className="email-reporting-row__col email-reporting-row__col--middle"
+      >
+        <label
+          className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
+        >
+          <input
+            checked={false}
+            className="button-toggle__input"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="button-toggle__track"
+          >
+            <span
+              className="button-toggle__thumb"
+            />
+            <div
+              className="button-toggle__checked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                On
+              </div>
+            </div>
+            <div
+              className="button-toggle__unchecked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                Off
+              </div>
+            </div>
+          </span>
+          
+        </label>
+      </div>
+    </div>
+    <div
+      className="email-reporting-row email-reporting-table__row"
+    >
+      <div
+        className="email-reporting-row__col"
+      >
+        <div
+          className="email-reporting-row__title"
+        >
+          Sea Breeze Lofts
+        </div>
+      </div>
+      <div
+        className="email-reporting-row__col email-reporting-row__col--middle"
+      >
+        <label
+          className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
+        >
+          <input
+            checked={false}
+            className="button-toggle__input"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="button-toggle__track"
+          >
+            <span
+              className="button-toggle__thumb"
+            />
+            <div
+              className="button-toggle__checked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                On
+              </div>
+            </div>
+            <div
+              className="button-toggle__unchecked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                Off
+              </div>
+            </div>
+          </span>
+          
+        </label>
+      </div>
+    </div>
+    <div
+      className="email-reporting-row email-reporting-table__row"
+    >
+      <div
+        className="email-reporting-row__col"
+      >
+        <div
+          className="email-reporting-row__title"
+        >
+          Sunrise Lofts
+        </div>
+      </div>
+      <div
+        className="email-reporting-row__col email-reporting-row__col--middle"
+      >
+        <label
+          className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
+        >
+          <input
+            checked={false}
+            className="button-toggle__input"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="button-toggle__track"
+          >
+            <span
+              className="button-toggle__thumb"
+            />
+            <div
+              className="button-toggle__checked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                On
+              </div>
+            </div>
+            <div
+              className="button-toggle__unchecked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                Off
+              </div>
+            </div>
+          </span>
+          
+        </label>
+      </div>
+    </div>
+    <div
+      className="email-reporting-row email-reporting-table__row"
+    >
+      <div
+        className="email-reporting-row__col"
+      >
+        <div
+          className="email-reporting-row__title"
+        >
+          Tamarand Lofts
+        </div>
+      </div>
+      <div
+        className="email-reporting-row__col email-reporting-row__col--middle"
+      >
+        <label
+          className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
+        >
+          <input
+            checked={false}
+            className="button-toggle__input"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="button-toggle__track"
+          >
+            <span
+              className="button-toggle__thumb"
+            />
+            <div
+              className="button-toggle__checked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                On
+              </div>
+            </div>
+            <div
+              className="button-toggle__unchecked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                Off
+              </div>
+            </div>
+          </span>
+          
+        </label>
+      </div>
+    </div>
+    <div
+      className="email-reporting-row email-reporting-table__row"
+    >
+      <div
+        className="email-reporting-row__col"
+      >
+        <div
+          className="email-reporting-row__title"
+        >
+          Viscoe Apartments
+        </div>
+      </div>
+      <div
+        className="email-reporting-row__col email-reporting-row__col--middle"
+      >
+        <label
+          className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
+        >
+          <input
+            checked={false}
+            className="button-toggle__input"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="button-toggle__track"
+          >
+            <span
+              className="button-toggle__thumb"
+            />
+            <div
+              className="button-toggle__checked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                On
+              </div>
+            </div>
+            <div
+              className="button-toggle__unchecked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                Off
+              </div>
+            </div>
+          </span>
+          
+        </label>
+      </div>
+    </div>
+    <div
+      className="email-reporting-row email-reporting-table__row"
+    >
+      <div
+        className="email-reporting-row__col"
+      >
+        <div
+          className="email-reporting-row__title"
+        >
+          Vue Apartments
+        </div>
+      </div>
+      <div
+        className="email-reporting-row__col email-reporting-row__col--middle"
+      >
+        <label
+          className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
+        >
+          <input
+            checked={false}
+            className="button-toggle__input"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <span
+            className="button-toggle__track"
+          >
+            <span
+              className="button-toggle__thumb"
+            />
+            <div
+              className="button-toggle__checked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                On
+              </div>
+            </div>
+            <div
+              className="button-toggle__unchecked"
+            >
+              <div
+                className="button-toggle__inner-label"
+              >
+                Off
+              </div>
+            </div>
+          </span>
+          
+        </label>
+      </div>
+    </div>
+  </div>
+</div>
+`;

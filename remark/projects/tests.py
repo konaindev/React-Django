@@ -1,16 +1,23 @@
 import datetime
 import decimal
 import os.path
+import json
 
+from django.contrib.auth.models import Group
 from django.test import TestCase
+from django.urls import reverse
+from openpyxl import load_workbook
+from io import BytesIO
+from unittest import mock
 
 from remark.crm.models import Business
 from remark.geo.models import Address
-from remark.users.models import Account
+from remark.users.models import Account, User
 from remark.lib.metrics import BareMultiPeriod
 from .models import Fund, LeaseStage, Period, Project, Property, TargetPeriod
 from .reports.periods import ComputedPeriod
 from .reports.performance import PerformanceReport
+from .export import export_periods_to_csv, export_periods_to_excel
 
 
 class DefaultComputedPeriodTestCase(TestCase):
@@ -545,3 +552,223 @@ class PerformanceEmailSignalTestCase(TestCase):
         self.assertEqual(len(low), 2)
         self.assertEqual(low[0], "usv")
         self.assertEqual(low[1], "inq")
+
+
+class ExportTestCase(TestCase):
+    def setUp(self):
+        address = Address.objects.create(
+            street_address_1="2284 W. Commodore Way, Suite 200",
+            city="Seattle",
+            state="WA",
+            zip_code=98199,
+            country="US",
+        )
+        account = Account.objects.create(
+            company_name="test", address=address, account_type=4
+        )
+        asset_manager = Business.objects.create(
+            name="Test Asset Manager", is_asset_manager=True
+        )
+        property_manager = Business.objects.create(
+            name="Test Property Manager", is_property_manager=True
+        )
+        property_owner = Business.objects.create(
+            name="Test Property Owner", is_property_owner=True
+        )
+        fund = Fund.objects.create(account=account, name="Test Fund")
+        property = Property.objects.create(
+            name="test",
+            average_monthly_rent=decimal.Decimal("0"),
+            lowest_monthly_rent=decimal.Decimal("0"),
+            geo_address=address,
+        )
+        project = Project.objects.create(
+            name="test",
+            baseline_start=datetime.date(year=2018, month=11, day=19),
+            baseline_end=datetime.date(year=2018, month=12, day=26),
+            account=account,
+            asset_manager=asset_manager,
+            property_manager=property_manager,
+            property_owner=property_owner,
+            fund=fund,
+            property=property,
+        )
+        stage = LeaseStage.objects.get(short_name="performance")
+        raw_period = Period.objects.create(
+            project=project,
+            lease_stage=stage,
+            start=datetime.date(year=2018, month=12, day=19),
+            end=datetime.date(year=2018, month=12, day=26),
+            leased_units_start=104,
+            usvs=4086,
+            inquiries=51,
+            tours=37,
+            lease_applications=8,
+            leases_executed=6,
+            occupiable_units_start=218,
+            occupied_units_start=218,
+            leases_ended=3,
+            lease_renewal_notices=0,
+            acq_reputation_building=decimal.Decimal("28000"),
+            acq_demand_creation=decimal.Decimal("21000"),
+            acq_leasing_enablement=decimal.Decimal("11000"),
+            acq_market_intelligence=decimal.Decimal("7000.0"),
+        )
+        self.project = project
+        self.period = raw_period
+
+    def test_export_periods_to_csv(self):
+        periods_ids = [self.period.id]
+        response = export_periods_to_csv(periods_ids, self.project.public_id)
+        csv_str = response.content.decode("utf-8")
+        result = (
+            "lease_stage,start,end,includes_remarkably_effect,"
+            "leased_units_start,leases_ended,lease_applications,"
+            "leases_executed,lease_cds,lease_renewal_notices,"
+            "lease_renewals,lease_vacation_notices,"
+            "occupiable_units_start,occupied_units_start,move_ins,"
+            "move_outs,acq_reputation_building,acq_demand_creation,"
+            "acq_leasing_enablement,acq_market_intelligence,"
+            "ret_reputation_building,ret_demand_creation,"
+            "ret_leasing_enablement,ret_market_intelligence,usvs,"
+            "inquiries,tours"
+            "\r\nImprove Performance,2018-12-19,2018-12-26,True,104,"
+            "3,8,6,0,0,0,0,218,218,0,0,28000.00,21000.00,11000.00,"
+            "7000.00,0.00,0.00,0.00,0.00,4086,51,37\r\n"
+        )
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(csv_str, result)
+
+    def test_export_periods_to_excel(self):
+        response = export_periods_to_excel(self.project.public_id)
+        self.assertEqual(response.status_code, 200)
+
+        response_wb = load_workbook(BytesIO(response.content))
+        response_ws = response_wb["periods"]
+
+        wb = load_workbook(filename="remark/projects/tests/periods.xlsx")
+        ws_periods = wb["periods"]
+        for row in range(1, response_ws.max_row + 1):
+            for col in range(1, response_ws.max_column + 1):
+                self.assertEqual(
+                    ws_periods.cell(row=row, column=col).value,
+                    response_ws.cell(row=row, column=col).value,
+                )
+
+
+def mocked_geocode(location):
+    mock_obj = mock.MagicMock()
+    mock_obj.formatted_address = "2284 W Commodore Way #200, Seattle, WA 98199, USA"
+    mock_obj.street_address = "2284 W Commodore Way"
+    mock_obj.city = "Seattle"
+    mock_obj.state = "WA"
+    mock_obj.zip5 = "98199"
+    mock_obj.country = "US"
+    mock_obj.geocode_json = {}
+    return mock_obj
+
+
+class OnboardingWorkflowTestCase(TestCase):
+    def setUp(self):
+        address = Address.objects.create(
+            street_address_1="2284 W. Commodore Way, Suite 200",
+            city="Seattle",
+            state="WA",
+            zip_code=98199,
+            country="US",
+        )
+        account = Account.objects.create(
+            company_name="test", address=address, account_type=4
+        )
+        user = User.objects.create_user(
+            email="admin@remarkably.io", password="adminpassword"
+        )
+        asset_manager = Business.objects.create(
+            name="Test Asset Manager", is_asset_manager=True
+        )
+        property_manager = Business.objects.create(
+            name="Test Property Manager", is_property_manager=True
+        )
+        property_owner = Business.objects.create(
+            name="Test Property Owner", is_property_owner=True
+        )
+        fund = Fund.objects.create(account=account, name="Test Fund")
+        property = Property.objects.create(
+            name="test",
+            average_monthly_rent=decimal.Decimal("0"),
+            lowest_monthly_rent=decimal.Decimal("0"),
+            geo_address=address,
+        )
+        group = Group.objects.create(name="project 1 view group")
+        project = Project.objects.create(
+            name="project 1",
+            baseline_start=datetime.date(year=2018, month=11, day=19),
+            baseline_end=datetime.date(year=2018, month=12, day=26),
+            account=account,
+            asset_manager=asset_manager,
+            property_manager=property_manager,
+            property_owner=property_owner,
+            fund=fund,
+            property=property,
+            view_group=group,
+        )
+        self.client.login(email="admin@remarkably.io", password="adminpassword")
+        self.project = project
+
+    @mock.patch("remark.users.views.geocode", side_effect=mocked_geocode)
+    @mock.patch("remark.projects.views.send_invite_email")
+    def test_invite_new_user(self, mock_send_email, _):
+        url = reverse("add_members")
+        params = {
+            "projects": [{"property_id": self.project.public_id}],
+            "members": [
+                {
+                    "label": "new.user@gmail.com",
+                    "value": "new.user@gmail.com",
+                    "__isNew__": True,
+                }
+            ],
+        }
+        response = self.client.post(url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        public_id = data["projects"][0]["members"][0]["user_id"]
+        email = data["projects"][0]["members"][0]["email"]
+        user = User.objects.get(public_id=public_id)
+        self.assertEqual(email, user.email)
+        self.assertFalse(user.password)
+        mock_send_email.apply_async.assert_called()
+
+        self.client.logout()
+        url = reverse("create_password", kwargs={"hash": public_id})
+        params = {"password": "new_user_password"}
+        response = self.client.post(url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        redirect_url = reverse("complete_account")
+        self.assertEqual(data["redirect_url"], redirect_url)
+        user = User.objects.get(public_id=public_id)
+        user.check_password(params["password"])
+        self.assertTrue(user.check_password(params["password"]))
+
+        params = {
+            "first_name": "First Name",
+            "last_name": "Last Name",
+            "title": "Title",
+            "company": "Company Name",
+            "company_role": ["owner"],
+            "office_address": "2284 W. Commodore Way, Suite 200",
+            "office_name": "Office Name",
+            "office_type": 3,
+            "terms": True,
+        }
+        response = self.client.post(redirect_url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        user = User.objects.get(public_id=public_id)
+        crm_persons = user.person_set.all()
+        self.assertTrue(len(crm_persons) == 1)
+        self.assertTrue(crm_persons[0].office.address)
+
+        project = Project.objects.get(public_id=self.project.public_id)
+        project_users = project.view_group.user_set.all()
+        self.assertEqual(project_users[0].public_id, user.public_id)

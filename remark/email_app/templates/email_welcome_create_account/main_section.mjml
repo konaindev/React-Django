@@ -17,7 +17,7 @@
 
       <mj-text mj-class="text-base text-lightgray pt-30" align="center">To get started, create a customer account by clicking below. You can then access portfolio and property performance data, and invite others to have access as well.</mj-text>
 
-      <mj-button href="{{ create_account_link }}" mj-class="button bg-blue py-50">Create Account</mj-button>
+      <mj-button href="{{ create_account_link }}" mj-class="button bg-blue py-50" css-class="rmb-button">Create Account</mj-button>
     </mj-column>
   </mj-section>
 </mj-wrapper>

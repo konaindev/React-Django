@@ -3,7 +3,7 @@ from django.http import JsonResponse
 
 from remark.lib.email import send_email
 from remark.lib.views import RemarkView
-from remark.settings import SALES_EMAIL
+from remark.email_app.constants import SALES_EMAIL
 
 from .forms import AddressForm, ProductInquiryForm
 

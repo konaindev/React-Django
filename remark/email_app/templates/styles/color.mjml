@@ -8,5 +8,7 @@
 
 <mj-class name="bg-black" background-color="#101417" />
 <mj-class name="bg-gray" background-color="#181D23" />
+<mj-class name="bg-lightgray" background-color="#1C2228" />
 <mj-class name="bg-smoke" background-color="#20272E" />
 <mj-class name="bg-blue" background-color="#006EFF" />
+<mj-class name="bg-white" background-color="#FFFFFF" />

@@ -4,7 +4,8 @@ $row-height: 150;
 $row-background: $gray-3;
 $border-color: $gray-4;
 $image-size: 50px;
-$image-spacing: 20px;
+$image-spacing: 3.75rem;
+$opening-image-spacing: $s5;
 $image-border-radius: 50%;
 $title-width: 200px;
 $title-spacing: 20px;
@@ -13,6 +14,8 @@ $value-height: 28px;
 $value-font-size: 1.75rem;
 $target-height: 16px;
 $target-spacing: 6px;
+$empty-text-size: 1.75rem;
+$opening-icon-spacing: $s8;
 
 .portfolio-property-group-row {
     height: $row-height + px;
@@ -32,7 +35,7 @@ $target-spacing: 6px;
         display: none;
         width: 8px;
         height: 16px;
-        margin-left: 30px;
+        margin-left: $opening-icon-spacing;
         background-image: url(../../../images/icon-arrow-right.svg);
         background-position: center;
         background-repeat: no-repeat;
@@ -52,6 +55,10 @@ $target-spacing: 6px;
 
         &:before {
             display: inline-block;
+        }
+
+        .portfolio-property-group-row__image {
+            margin-left: $opening-image-spacing;
         }
     }
 }
@@ -104,6 +111,13 @@ $target-spacing: 6px;
     font-size: $value-font-size;
     line-height: $value-height;
     color: $column-header-regular-color;
+
+    &:empty:before {
+        display: block;
+        height: $value-height;
+        content: '\2014';
+        font-size: $empty-text-size;
+    }
 }
 
 .portfolio-property-group-row__target {

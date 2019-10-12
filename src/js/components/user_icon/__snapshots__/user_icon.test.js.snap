@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserIcon render default 1`] = `
+<div
+  className="user-icon"
+  style={
+    Object {
+      "backgroundColor": undefined,
+    }
+  }
+>
+  RC
+  <div
+    className="user-icon__avatar"
+    style={
+      Object {
+        "backgroundImage": "url(https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg)",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`UserIcon render without avatar 1`] = `
+<div
+  className="user-icon"
+  style={
+    Object {
+      "backgroundColor": undefined,
+    }
+  }
+>
+  RC
+  <div
+    className="user-icon__avatar"
+    style={
+      Object {
+        "backgroundImage": "url()",
+      }
+    }
+  />
+</div>
+`;

@@ -1,18 +1,19 @@
 import renderer from "react-test-renderer";
+import { Provider } from "react-redux";
+
+import storeFunc from "../../state/store";
 
 import DashboardPage from "./index";
 import { props } from "./props";
-import { Provider } from "react-redux";
-import { createStore } from "redux";
 
-const _ = x => createStore(() => x);
+const { store } = storeFunc();
 
 describe("DashboardPage", () => {
   it("renders correctly", () => {
     const tree = renderer
       .create(
-        <Provider store={_(props)}>
-          <DashboardPage />
+        <Provider store={store}>
+          <DashboardPage {...props} />
         </Provider>
       )
       .toJSON();
@@ -21,8 +22,8 @@ describe("DashboardPage", () => {
   it("Row view", () => {
     const tree = renderer
       .create(
-        <Provider store={_(props)}>
-          <DashboardPage viewType="row" />
+        <Provider store={store}>
+          <DashboardPage {...props} viewType="row" />
         </Provider>
       )
       .toJSON();
@@ -31,10 +32,11 @@ describe("DashboardPage", () => {
   it("Row select", () => {
     const tree = renderer
       .create(
-        <Provider store={_(props)}>
+        <Provider store={store}>
           <DashboardPage
+            {...props}
             viewType="row"
-            selectedProperties={[props.properties[0].property_id]}
+            selectedProperties={props.properties.slice(0, 1)}
           />
         </Provider>
       )

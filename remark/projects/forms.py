@@ -11,8 +11,6 @@ from remark.lib.validators import (
     validate_linebreak_separated_numbers_list,
     validate_linebreak_separated_strings_list,
 )
-from remark.email_app.models import ListservEmail
-from remark.email_app.constants import DEFAULT_SENDER_REPLY_TO
 from .models import Project, Property, CampaignModel, Spreadsheet, Spreadsheet2
 from .reports.selectors import ReportLinks
 from .spreadsheets import get_importer_for_kind, SpreadsheetKind
@@ -210,28 +208,6 @@ class ProjectForm(forms.ModelForm):
             )
         return self.cleaned_data["fund"]
 
-    def clean_listserv_email(self):
-        cleaned_listserv = self.cleaned_data["listserv_email"]
-
-        # default listserv email can be used in multiple projects
-        if cleaned_listserv.email == DEFAULT_SENDER_REPLY_TO:
-            return cleaned_listserv
-
-        # ONE listserv email should be associated to ONE project
-        projects_with_same_listserv = Project.objects.filter(
-            listserv_email=cleaned_listserv
-        )
-        # exclude the self project being edited
-        projects_with_same_listserv = projects_with_same_listserv.exclude(
-            public_id=self.instance.public_id
-        )
-
-        if projects_with_same_listserv.count() > 0:
-            raise forms.ValidationError(
-                "This Listserv email address is used by another project."
-            )
-        return cleaned_listserv
-
     class Meta:
         model = Project
         exclude = ["email_list_id"]
@@ -309,4 +285,14 @@ class PropertyForm(forms.ModelForm):
     class Meta:
         model = Property
         fields = "__all__"
-        widgets = {"building_logo": ImageCropWidget, "building_image": ImageCropWidget}
+        widgets = {
+            "building_logo": ImageCropWidget,
+            "building_image": ImageCropWidget,
+        }
+
+
+class PeriodInlineForm(forms.ModelForm):
+    is_select = forms.BooleanField()
+
+    class Meta:
+        labels = {"is_select": " "}

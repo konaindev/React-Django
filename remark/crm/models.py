@@ -169,6 +169,10 @@ class Person(models.Model):
 
     objects = PeopleManager()
 
+    @property
+    def full_name(self):
+        return f"{self.first_name} {self.last_name}"
+
     def __str__(self):
         return "{}: {} {} ({})".format(
             self.office.business.name, self.first_name, self.last_name, self.public_id

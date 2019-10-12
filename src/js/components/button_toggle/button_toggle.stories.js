@@ -2,7 +2,6 @@ import React from "react";
 
 import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
 import { withState } from "@dump247/storybook-state";
 
 import { StorybookContainer } from "../../utils/storybook-helper.stories";
@@ -11,7 +10,7 @@ import ButtonToggle from "./index";
 storiesOf("ButtonToggle", module)
   .add(
     "default",
-    withState({ checked: true })(({ store }) => (
+    withState({ checked: ButtonToggle.STATE_ENUM.CHECKED })(({ store }) => (
       <StorybookContainer>
         <ButtonToggle
           checked={store.state.checked}
@@ -25,7 +24,7 @@ storiesOf("ButtonToggle", module)
   )
   .add(
     "with custom labels",
-    withState({ checked: false })(({ store }) => (
+    withState({ checked: ButtonToggle.STATE_ENUM.UNCHECKED })(({ store }) => (
       <StorybookContainer>
         <ButtonToggle
           checked={store.state.checked}
@@ -39,4 +38,9 @@ storiesOf("ButtonToggle", module)
         />
       </StorybookContainer>
     ))
-  );
+  )
+  .add("medium", () => (
+    <StorybookContainer>
+      <ButtonToggle checked={ButtonToggle.STATE_ENUM.MEDIUM} />
+    </StorybookContainer>
+  ));

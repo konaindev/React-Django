@@ -22,7 +22,11 @@ class ModalWithOpen extends Component {
         >
           Open Window
         </Button>
-        <ModalWindow open={this.state.isOpen} onClose={this.onClose}>
+        <ModalWindow
+          open={this.state.isOpen}
+          onClose={this.onClose}
+          {...this.props}
+        >
           <ModalWindow.Head>Title</ModalWindow.Head>
           <ModalWindow.Body>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -39,4 +43,6 @@ class ModalWithOpen extends Component {
   }
 }
 
-storiesOf("ModalWindow", module).add("default", () => <ModalWithOpen />);
+storiesOf("ModalWindow", module)
+  .add("default", () => <ModalWithOpen />)
+  .add("small", () => <ModalWithOpen theme="small" />);

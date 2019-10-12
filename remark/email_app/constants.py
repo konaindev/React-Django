@@ -1,15 +1,9 @@
-DEFAULT_SENDER_INFO = {
-    "address": "2284 W Commodore Way suite 200",
-    "city": "Seattle",
-    "country": "United States",
-    "from": {"email": "analytics@remarkably.io", "name": "Remarkably"},
-    "nickname": "Remarkably Analytics",
-    "reply_to": {"email": "customersuccess@remarkably.io"},
-    "state": "Washington",
-    "zip": "98199",
-}
+DEFAULT_FROM_NAME = "Remarkably"
 
-DEFAULT_SENDER_ID = "482157"
-DEFAULT_SENDER_REPLY_TO = "customersuccess@remarkably.io"
+HELLO_EMAIL = "hello@remarkably.io"
+SUPPORT_EMAIL = "support@remarkably.io"
+INFO_EMAIL = "info@remarkably.io"
+SALES_EMAIL = "sales@remarkably.io"
 
-CONTACT_EMAIL_IN_TEMPLATE = "info@remarkably.io"
+# Sendgrid
+SG_CUSTOMER_SUCCESS_SENDER_ID = "623970" # Sender for weekly performance

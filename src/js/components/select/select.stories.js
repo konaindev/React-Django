@@ -5,7 +5,18 @@ import { storiesOf } from "@storybook/react";
 import { action } from "@storybook/addon-actions";
 
 import { default as Select, FormSelect, SelectSearch } from "./index";
-import { geoOptions, props, propsScroll, propsGroup } from "./props";
+import {
+  MenuWithDescription,
+  OptionWithDescription,
+  MultiValueComponents
+} from "./select_components";
+import {
+  geoOptions,
+  props,
+  propsScroll,
+  propsGroup,
+  descriptionOption
+} from "./props";
 
 const style = {
   background: "#FFFFFF",
@@ -27,6 +38,21 @@ storiesOf("Select", module)
   .add("highlight", () => <Select theme="highlight" {...props} />)
   .add("highlight group", () => <Select theme="highlight" {...propsGroup} />)
   .add("gray", () => <Select theme="gray" {...props} />)
+  .add("transparent", () => <Select theme="transparent" {...props} />)
+  .add("multi value", () => (
+    <div style={{ height: "86px", width: "400px" }}>
+      <Select
+        theme="transparent"
+        options={propsScroll.options}
+        defaultValue={propsScroll.options}
+        styles={{
+          valueContainer: provided => ({ ...provided, height: "42px" })
+        }}
+        isMulti={true}
+        components={{ ...MultiValueComponents }}
+      />
+    </div>
+  ))
   .add("form select", () => (
     <Formik>
       <FormSelect {...props} />
@@ -50,6 +76,21 @@ storiesOf("Select", module)
         onChange={(option, actionName) => {
           action("onChange")(option, actionName);
         }}
+      />
+    </div>
+  ))
+  .add("With description", () => (
+    <div style={{ textAlign: "right", padding: "20px" }}>
+      <Select
+        {...props}
+        styles={{}}
+        size="small"
+        options={descriptionOption}
+        components={{
+          Menu: MenuWithDescription,
+          Option: OptionWithDescription
+        }}
+        menuIsOpen
       />
     </div>
   ));

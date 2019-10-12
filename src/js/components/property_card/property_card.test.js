@@ -19,4 +19,10 @@ describe("PropertyCard", () => {
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
+  it("renders selected", () => {
+    const tree = renderer
+      .create(<PropertyCard {...props} selected={true} />)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

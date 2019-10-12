@@ -35,6 +35,12 @@ def required_env(name):
     return result
 
 
+# App Environment: development, staging, or production
+DEV = "development"
+STAGING = "staging"
+PROD = "production"
+ENV = os.getenv("ENVIRONMENT", DEV)
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -59,7 +65,6 @@ BASE_URL = os.getenv("BASE_URL", None)
 # Email setup
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "Remarkably <hello@remarkably.io>")
 ADMINS = [("Remarkably Ops", "ops@remarkably.io")]
-SALES_EMAIL = "sales@remarkably.io"
 EMAIL_BACKEND = os.getenv(
     "EMAIL_BACKEND", "django.core.mail.backends.smtp.EmailBackend"
 )
@@ -68,6 +73,8 @@ EMAIL_PORT = _safe_int(os.getenv("EMAIL_PORT"))
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "YES") == "YES"
+
+INVITATION_EXP = int(os.getenv("INVITATION_EXP", 10))
 
 # Application definition
 INSTALLED_APPS = [

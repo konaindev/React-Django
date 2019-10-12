@@ -1,4 +1,7 @@
 import { createStore, applyMiddleware, compose } from "redux";
+import storage from "redux-persist/lib/storage";
+import { persistStore, persistReducer } from "redux-persist";
+
 import reducers from "../reducers";
 import createSagaMiddleware from "redux-saga";
 import {
@@ -8,7 +11,9 @@ import {
   fetchCompleteAccount,
   sendGaEvent,
   applyApiResult,
-  logoutMiddleware
+  logoutMiddleware,
+  fetchInviteModal,
+  fetchUIString
 } from "../middleware";
 import sagas from "../../utils/network";
 
@@ -19,6 +24,12 @@ const cfg = {
   key: "rmb",
   storage,
   whitelist: ["token", "nav"] // NOTE: this is where we elect what to persist
+};
+
+const cfg = {
+  key: "rmb",
+  storage,
+  whitelist: ["uiStrings"] // NOTE: this is where we elect what to persist
 };
 
 // TODO: contextually enable devtools based on prod or not
@@ -40,7 +51,9 @@ export default () => {
         sendGaEvent,
         applyApiResult,
         sagaMiddleware,
-        logoutMiddleware
+        logoutMiddleware,
+        fetchInviteModal,
+        fetchUIString
       )
     )
   );

@@ -1,18 +1,19 @@
-import _isEqual from "lodash/isEqual";
+import _isNil from "lodash/isNil";
 import PropTypes from "prop-types";
 import React from "react";
 
+import { Alarm } from "../../icons";
+import { qsParse, qsStringify } from "../../utils/misc";
 import Container from "../container";
 import DateRangeSelector from "../date_range_selector";
 import PageChrome from "../page_chrome";
 import PortfolioTable from "../portfolio_table";
-import KPICard from "../kpi_card";
+import KPICard, { NoTargetKPICard, NoValueKPICard } from "../kpi_card";
+import Tooltip from "../rmb_tooltip";
 import Select from "../select";
 import UserMenu from "../user_menu";
 import ToggleButton from "../toggle_button";
 import { formatKPI } from "../../utils/kpi_formatters";
-import { qsParse, qsStringify } from "../../utils/misc";
-import { nav } from "../../state/actions";
 import "./portfolio_analysis_view.scss";
 
 const navLinks = {
@@ -42,6 +43,21 @@ const average_buttons_options = [
   }
 ];
 
+function getEmptyPropertiesCount(properties) {
+  return properties.reduce((acc, property) => {
+    let value = acc;
+    if (property.type === "group") {
+      const props = property.properties || [];
+      value += getEmptyPropertiesCount(props);
+    } else {
+      if (_isNil(property.kpis)) {
+        value += 1;
+      }
+    }
+    return value;
+  }, 0);
+}
+
 export class PortfolioAnalysisView extends React.PureComponent {
   static propTypes = {
     navLinks: PropTypes.shape({
@@ -68,11 +84,11 @@ export class PortfolioAnalysisView extends React.PureComponent {
     }).isRequired,
     highlight_kpis: PropTypes.arrayOf(
       PropTypes.shape({
-        health: PropTypes.oneOf([-1, 0, 1, 2]).isRequired,
         name: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired,
-        target: PropTypes.any.isRequired,
-        value: PropTypes.any.isRequired
+        target: PropTypes.any,
+        value: PropTypes.any,
+        health: PropTypes.oneOf([-1, 0, 1, 2])
       })
     ).isRequired,
     table_data: PropTypes.arrayOf(PropTypes.object).isRequired,
@@ -119,16 +135,24 @@ export class PortfolioAnalysisView extends React.PureComponent {
 
   renderKPICards = () => {
     return this.props.highlight_kpis.map(
-      ({ name, health, label, value, target }) => (
-        <KPICard
-          className="portfolio-analysis__kpi-card"
-          health={health}
-          value={formatKPI(name, value)}
-          name={label}
-          target={formatKPI(name, target)}
-          key={name}
-        />
-      )
+      ({ name, health, label, value, target }) => {
+        let Component = KPICard;
+        if (_isNil(value)) {
+          Component = NoValueKPICard;
+        } else if (_isNil(target)) {
+          Component = NoTargetKPICard;
+        }
+        return (
+          <Component
+            className="portfolio-analysis__kpi-card"
+            health={health}
+            value={formatKPI(name, value)}
+            name={label}
+            target={formatKPI(name, target)}
+            key={name}
+          />
+        );
+      }
     );
   };
 
@@ -138,6 +162,26 @@ export class PortfolioAnalysisView extends React.PureComponent {
     }
     return null;
   }
+
+  getEmptyPropsTooltip = () => {
+    const emptyCount = getEmptyPropertiesCount(this.props.table_data);
+    if (emptyCount) {
+      const propertyWord = emptyCount > 1 ? "properties" : "property";
+      const message = (
+        <div className="portfolio-analysis__alarm-text">
+          You have at least {emptyCount} {propertyWord} with no data in this
+          selected reporting period.
+        </div>
+      );
+      return (
+        <Tooltip placement="top" theme="light-dark" overlay={message}>
+          <div className="portfolio-analysis__alarm">
+            <Alarm className="portfolio-analysis__alarm-icon" />
+          </div>
+        </Tooltip>
+      );
+    }
+  };
 
   onChangeKpi = option => {
     this.props.onChange({
@@ -160,7 +204,6 @@ export class PortfolioAnalysisView extends React.PureComponent {
   };
 
   onAverageClick = selection => {
-    console.log("average click");
     this.props.onChange({
       selected_kpi_bundle: this.props.selected_kpi_bundle,
       date_selection: this.props.date_selection,
@@ -179,6 +222,7 @@ export class PortfolioAnalysisView extends React.PureComponent {
     } = this.props;
 
     this.props.dispatch(nav.updateLinks(navLinks));
+
     return (
       <Container className="portfolio-analysis">
         <div className="portfolio-analysis__header">
@@ -212,12 +256,38 @@ export class PortfolioAnalysisView extends React.PureComponent {
           <div className="portfolio-analysis__property-count">
             {this.totalProperties} properties
           </div>
-        </div>
-        <div className="portfolio-analysis__kpi-cards">
-          {this.renderKPICards()}
-        </div>
-        <div className="portfolio-analysis__table">
-          <PortfolioTable properties={table_data} kpi_order={kpi_order} />
+          <div className="portfolio-analysis__controls">
+            <Select
+              className="portfolio-analysis__select-kpi"
+              theme="default"
+              options={this.kpiOptions}
+              value={this.kpiValue}
+              onChange={this.onChangeKpi}
+            />
+            {this.getEmptyPropsTooltip()}
+            <DateRangeSelector
+              start_date={date_selection.start_date}
+              end_date={date_selection.end_date}
+              preset={date_selection.preset}
+              onChange={this.onChangeDateRange}
+            />
+          </div>
+          <div className="portfolio-analysis__title-bar">
+            <ToggleButton
+              options={average_buttons_options}
+              value={display_average}
+              onChange={this.onAverageClick}
+            />
+            <div className="portfolio-analysis__property-count">
+              {this.totalProperties} properties
+            </div>
+          </div>
+          <div className="portfolio-analysis__kpi-cards">
+            {this.renderKPICards()}
+          </div>
+          <div className="portfolio-analysis__table">
+            <PortfolioTable properties={table_data} kpi_order={kpi_order} />
+          </div>
         </div>
       </Container>
     );

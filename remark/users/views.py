@@ -17,8 +17,11 @@ from remark.crm.models import Business, Office, Person
 from remark.crm.constants import OFFICE_TYPES
 from remark.geo.models import Address
 from remark.geo.geocode import geocode
-from remark.settings import LOGIN_URL, LOGIN_REDIRECT_URL
-from remark.lib.views import ReactView, RemarkView
+from remark.projects.models import Project
+from remark.settings import LOGIN_URL
+from remark.lib.views import ReactView, RemarkView, APIView
+from remark.email_app.invites.added_to_property import send_invite_email
+from remark.settings import INVITATION_EXP
 
 from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES
 from .forms import AccountCompleteForm
@@ -130,11 +133,14 @@ class CreatePasswordView(ReactView):
             return redirect(LOGIN_URL)
         if user.activated:
             return redirect(LOGIN_URL)
+        if user.invited:
+            date_now = datetime.datetime.now(timezone.utc)
+            delta = date_now - user.invited
+            if delta.days > INVITATION_EXP:
+                redirect_url = reverse("session_expire", kwargs={"hash": hash})
+                return redirect(redirect_url)
         v_rules = [{"label": v["label"], "key": v["key"]} for v in VALIDATION_RULES]
-        return self.render(
-            hash=hash,
-            rules=v_rules,
-        )
+        return self.render(hash=hash, rules=v_rules)
 
     def post(self, request, hash):
         try:
@@ -180,3 +186,46 @@ class ValidatePasswordView(RemarkView):
                 errors[v["key"]] = True
 
         return JsonResponse({"errors": errors}, status=200)
+
+
+class SessionExpireView(ReactView):
+    """Render Session Expired page."""
+
+    page_class = "SessionExpiredPage"
+    page_title = "Session Expired"
+
+    def get(self, request, hash):
+        try:
+            user = User.objects.get(public_id=hash)
+        except User.DoesNotExist:
+            return redirect(LOGIN_URL)
+        if user.activated:
+            return redirect(LOGIN_URL)
+        if user.invited:
+            date_now = datetime.datetime.now(timezone.utc)
+            delta = date_now - user.invited
+            if delta.days <= INVITATION_EXP:
+                redirect_url = reverse("create_password", kwargs={"hash": hash})
+                return redirect(redirect_url)
+        else:
+            redirect_url = reverse("create_password", kwargs={"hash": hash})
+            return redirect(redirect_url)
+
+        return self.render(hash=hash)
+
+
+class ResendInviteView(APIView):
+    def get(self, request, hash):
+        try:
+            user = User.objects.get(public_id=hash)
+        except User.DoesNotExist:
+            return redirect(LOGIN_URL)
+        if user.activated:
+            return redirect(LOGIN_URL)
+        user.invited = datetime.datetime.now(timezone.utc)
+        user.save()
+
+        projects = Project.objects.get_all_for_user(user)
+        projects_ids = [p.public_id for p in projects]
+        send_invite_email.apply_async(args=(user.id, projects_ids), countdown=2)
+        return self.render_success()

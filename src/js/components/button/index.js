@@ -20,7 +20,8 @@ export default class Button extends Component {
       "disabled",
       "disabled-light",
       "transparent",
-      "highlight"
+      "highlight",
+      "warning"
     ]),
     onClick: PropTypes.func
   };

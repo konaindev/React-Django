@@ -166,7 +166,6 @@ class PortfolioTableView(LoginRequiredMixin, PortfolioMixin, ReactView):
             "highlight_kpis": self.get_highlight_kpis(portfolio_average, kpis_to_include),
             "display_average": "1" if show_averages else "0"
         }
-
         return self.render(**result)
 
     def get_start_and_end(self, period_group, start, end):
@@ -204,12 +203,19 @@ class PortfolioTableView(LoginRequiredMixin, PortfolioMixin, ReactView):
 
     def get_highlight_kpis(self, group, kpis_to_include):
         result = []
-        if group is None:
-            return []
-
         for key in kpis_to_include:
-            if key in group["targets"]:
-                target = KPIFormat.apply(key, group["targets"][key])
+            if not group:
+                result.append({
+                    "name": key,
+                    "label": KPITitle.for_kpi(key),
+                    "target": None,
+                    "value": None,
+                    "health": None
+                })
+                continue
+            targets = group.get("targets", {})
+            if key in targets:
+                target = KPIFormat.apply(key, targets[key])
             else:
                 target = None
 

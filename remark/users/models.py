@@ -10,11 +10,10 @@ from remark.lib.tokens import public_id
 from remark.lib.fields import NormalizedEmailField
 from .constants import ACCOUNT_TYPE
 
-from remark.crm.models import Person
-
 
 def usr_public_id():
     return public_id("usr")
+
 
 # This is still here due to a migration referencing it
 def avatar_media_path(user, filename):
@@ -133,6 +132,10 @@ class User(PermissionsMixin, AbstractBaseUser):
         help_text="Date when the user activated their account.",
     )
 
+    invited = models.DateTimeField(
+        default=None, blank=True, null=True, help_text="Date when user invited"
+    )
+
     is_show_tutorial = models.BooleanField(
         default=True, help_text="Should there be tutorial showing"
     )
@@ -153,24 +156,43 @@ class User(PermissionsMixin, AbstractBaseUser):
             # TODO: Add account_url
         }
 
+    def get_role(self):
+        person = self.person_set.first()
+        if person:
+            role = person.role
+        else:
+            role = "member"
+        return role
+
+    def get_name(self):
+        person = self.person_set.first()
+        if person:
+            name = person.full_name
+        else:
+            name = self.email
+        return name
+
+    def get_icon_dict(self):
+        return {
+            "email": self.email,
+            "user_id": self.public_id,
+            "account_name": self.get_name(),
+            "role": self.get_role(),
+        }
+
+
 
 class Account(models.Model):
-    company_name = models.CharField(
-        max_length=250,
-        help_text="Company Name"
-    )
+    company_name = models.CharField(max_length=250, help_text="Company Name")
 
     address = models.ForeignKey(
-        'geo.Address',
+        "geo.Address",
         on_delete=models.CASCADE,
         related_name="accounts",
-        help_text="Address"
+        help_text="Address",
     )
 
-    account_type = models.IntegerField(
-        choices=ACCOUNT_TYPE,
-        help_text="Account Type",
-    )
+    account_type = models.IntegerField(choices=ACCOUNT_TYPE, help_text="Account Type")
 
     def __str__(self):
         return self.company_name

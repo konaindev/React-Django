@@ -1,0 +1,35 @@
+@import "css/base.scss";
+
+.email-reporting-table {
+    min-height: 200px;
+    background: $gray-3;
+
+    &--no-data {
+        min-height: auto;
+        color: $highlight-gray-3;
+        font-size: $text-sm;
+        line-height: 1.625rem;
+    }
+}
+
+.email-reporting-table__row {
+    margin-bottom: 0.625rem;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+}
+
+.email-reporting-table__loading {
+    margin-top: $box-space;
+    text-align: center;
+}
+
+.email-reporting-table__loading-btn {
+    padding: $s3 2.1875rem;
+    font-size: $text-xs;
+    font-weight: $weight-semibold;
+    letter-spacing: 1px;
+    line-height: $s5;
+    text-transform: uppercase;
+}

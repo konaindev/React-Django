@@ -205,7 +205,7 @@ export default class AccountSecurity extends React.PureComponent {
                   </div>
                 </div>
               </div>
-              <div className="account-settings__buttons-field">
+              <div className="account-settings__controls">
                 <Button
                   className="account-settings__button"
                   color="primary"
