@@ -39,9 +39,10 @@ const securitySchema = Yup.object().shape({
 });
 
 const profileSchema = Yup.object().shape({
-  avatar_size: Yup.number().max(
-    maxAvatarSize,
-    "Profile image size is over the 3MB limit."
+  avatar: Yup.mixed().test(
+    "maxFileSize",
+    "Profile image size is over the 3MB limit.",
+    file => !file || file.size <= maxAvatarSize
   ),
   avatar_url: Yup.string(),
   first_name: Yup.string()
@@ -67,11 +68,11 @@ const profileSchema = Yup.object().shape({
       excludeEmptyString: true
     })
     .label("Phone number"),
-  company_name: Yup.string()
+  company: Yup.string()
     .required()
     .max(255)
-    .label("Company name"),
-  company_role: Yup.array()
+    .label("Company"),
+  company_roles: Yup.array()
     .required()
     .label("Company role"),
   office_address: Yup.string()

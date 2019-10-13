@@ -1,3 +1,5 @@
+import _isObject from "lodash/isObject";
+
 import {
   general,
   tutorial,
@@ -6,6 +8,7 @@ import {
   completeAccount,
   uiStrings
 } from "../actions";
+import { updateProfileData } from "../../api/account_settings";
 import { axiosGet, axiosPost } from "../../utils/api";
 
 // Here we create a middleware that intercepts
@@ -191,6 +194,30 @@ export const fetchUIString = store => next => action => {
         }
       })
       .catch(e => console.log("-----> ERROR", e));
+  } else {
+    next(action);
+  }
+};
+
+export const updateAccountProfile = store => next => action => {
+  if (action.type === "API_ACCOUNT_PROFILE") {
+    if (action.data) {
+      updateProfileData(action.data)
+        .then(response => {
+          if (response.status === 200) {
+            action.callback(response.data.message);
+          } else {
+            throw response;
+          }
+        })
+        .catch(e => {
+          if (e.response.data && _isObject(e.response.data)) {
+            action.onError(e.response.data);
+          } else {
+            console.log("-----> ERROR", e);
+          }
+        });
+    }
   } else {
     next(action);
   }

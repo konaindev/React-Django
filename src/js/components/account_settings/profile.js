@@ -21,7 +21,7 @@ export default class Profile extends React.PureComponent {
       title: PropTypes.string,
       phone: PropTypes.string,
       phone_ext: PropTypes.string,
-      company_name: PropTypes.string,
+      company: PropTypes.string,
       company_roles: PropTypes.arrayOf(PropTypes.string),
       office_address: PropTypes.string,
       office_name: PropTypes.string,
@@ -30,6 +30,34 @@ export default class Profile extends React.PureComponent {
     company_roles: MultiSelect.optionsType.isRequired,
     office_options: Select.optionsType.isRequired
   };
+  static defaultProps = {
+    profile: {
+      avatar_url: "",
+      first_name: "",
+      last_name: "",
+      title: "",
+      phone: "",
+      phone_ext: "",
+      company: "",
+      company_roles: [],
+      office_address: "",
+      office_name: "",
+      office_type: null
+    }
+  };
+  static fieldsSubmit = [
+    "avatar",
+    "first_name",
+    "last_name",
+    "title",
+    "phone",
+    "phone_ext",
+    "company",
+    "company_roles",
+    "office_address",
+    "office_name",
+    "office_type"
+  ];
 
   state = { fieldsSubmitted: false };
 
@@ -39,25 +67,38 @@ export default class Profile extends React.PureComponent {
   }
 
   get initialValues() {
-    const profile = { ...this.props.profile };
+    let profile = { ...this.props.profile };
+    if (!Object.keys(profile).length) {
+      profile = { ...Profile.defaultProps.profile };
+    }
     profile.company_roles = this.props.company_roles.filter(i =>
       profile.company_roles.includes(i.value)
     );
     profile.office_type = this.props.office_options.filter(
       i => i.value === profile.office_type
-    );
+    )[0];
     return profile;
   }
+
+  unsetMessage() {
+    if (this.state.message) {
+      this.setState({ message: null });
+    }
+  }
+
+  setFormik = formik => {
+    this.formik = formik;
+  };
 
   onFileUpload = e => {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.onload = e => {
-      this.formik.current.setFieldValue("avatar_url", e.target.result);
+      this.formik.setFieldValue("avatar_url", e.target.result);
     };
     reader.readAsDataURL(file);
-    this.formik.current.setFieldValue("avatar_size", file.size);
-    this.formik.current.setFieldTouched("avatar_size", true);
+    this.formik.setFieldValue("avatar", file);
+    this.formik.setFieldTouched("avatar", true);
   };
 
   getFieldClasses = (name, errors, touched, modifiers = []) => {
@@ -99,19 +140,50 @@ export default class Profile extends React.PureComponent {
     );
   };
 
-  onSubmit = (values, actions) => {
-    actions.setSubmitting(false);
-    this.setState({ fieldsSubmitted: true });
-    setTimeout(() => {
-      this.setState({ fieldsSubmitted: false });
-    }, 5000);
+  setSuccessMessage = message => {
+    this.formik.setSubmitting(false);
+    this.setState({ message });
+  };
+
+  setErrorMessages = errors => {
+    this.formik.setSubmitting(false);
+    const formikErrors = {};
+    for (let k of Object.keys(errors)) {
+      formikErrors[k] = errors[k][0].message;
+    }
+    this.formik.setErrors(formikErrors);
+  };
+
+  onSubmit = values => {
+    this.unsetMessage();
+    const dataValues = { ...values };
+    dataValues.company_roles = dataValues.company_roles.map(i => i.value);
+    dataValues.office_type = dataValues.office_type.value;
+    const data = new FormData();
+    for (const k of Object.keys(dataValues)) {
+      if (Profile.fieldsSubmit.includes(k)) {
+        if (k === "company_roles") {
+          for (const r of dataValues.company_roles) {
+            data.append("company_roles[]", r);
+          }
+        } else {
+          data.append(k, dataValues[k]);
+        }
+      }
+    }
+    this.props.dispatch({
+      type: "API_ACCOUNT_PROFILE",
+      callback: this.setSuccessMessage,
+      onError: this.setErrorMessages,
+      data
+    });
   };
 
   render() {
     return (
       <div className="account-settings__tab">
         <Formik
-          ref={this.formik}
+          ref={this.setFormik}
           initialValues={this.initialValues}
           validationSchema={profileSchema}
           validateOnBlur={true}
@@ -144,7 +216,7 @@ export default class Profile extends React.PureComponent {
                         <label className="account-settings__upload">
                           <Upload className="account-settings__upload-icon" />
                           <input
-                            name="logo"
+                            name="avatar"
                             type="file"
                             accept="image/jpeg, image/png"
                             onChange={this.onFileUpload}
@@ -162,7 +234,7 @@ export default class Profile extends React.PureComponent {
                     </div>
                     <div
                       className={this.getHelpTextClasses(
-                        "avatar_size",
+                        "avatar",
                         errors,
                         touched
                       )}
@@ -282,7 +354,7 @@ export default class Profile extends React.PureComponent {
                   <div className="account-settings__field-grid">
                     <div
                       className={this.getFieldClasses(
-                        "company_name",
+                        "company",
                         errors,
                         touched
                       )}
@@ -290,14 +362,14 @@ export default class Profile extends React.PureComponent {
                       <div className="account-settings__label">Company</div>
                       <Input
                         className="account-settings__input"
-                        name="company_name"
+                        name="company"
                         theme="gray"
-                        value={values.company_name}
+                        value={values.company}
                         onBlur={handleBlur}
                         onChange={handleChange}
                       />
                       <div className="account-settings__error">
-                        <ErrorMessage name="company_name" />
+                        <ErrorMessage name="company" />
                       </div>
                     </div>
                     <div

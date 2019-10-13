@@ -71,3 +71,19 @@ class AccountCompleteForm(forms.Form):
     office_name = forms.CharField(max_length=255, required=True)
     office_type = forms.ChoiceField(choices=OFFICE_TYPES, required=True)
     terms = forms.BooleanField(required=True)
+
+
+class AccountProfileForm(forms.Form):
+    avatar = forms.ImageField(required=False)
+    first_name = forms.CharField(max_length=255, required=True)
+    last_name = forms.CharField(max_length=255, required=True)
+    title = forms.CharField(max_length=255, required=False)
+    phone = forms.CharField(max_length=20, required=False)
+    phone_ext = forms.CharField(max_length=20, required=False)
+    company = forms.CharField(max_length=255, required=True)
+    company_roles = forms.MultipleChoiceField(
+        choices=company_roles_values, required=True
+    )
+    office_address = forms.CharField(max_length=255, required=True)
+    office_name = forms.CharField(max_length=255, required=True)
+    office_type = forms.ChoiceField(choices=OFFICE_TYPES, required=True)

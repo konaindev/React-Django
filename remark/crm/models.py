@@ -1,4 +1,7 @@
+import os
+
 from django.db import models
+from django.utils.crypto import get_random_string
 from remark.lib.tokens import public_id
 from stdimage.models import StdImageField
 

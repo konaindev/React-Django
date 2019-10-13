@@ -207,7 +207,7 @@ class User(PermissionsMixin, AbstractBaseUser):
             "title": person.role,
             "phone": person.cell_phone,
             "phone_ext": person.office_phone,
-            "company_name": business.name,
+            "company": business.name,
             "company_roles": business.get_roles(),
             "office_address": office.address.formatted_address,
             "office_name": office.name,

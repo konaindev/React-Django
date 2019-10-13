@@ -24,7 +24,7 @@ from remark.email_app.invites.added_to_property import send_invite_email
 from remark.settings import INVITATION_EXP
 
 from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES, VALIDATION_RULES_LIST
-from .forms import AccountCompleteForm
+from .forms import AccountCompleteForm, AccountProfileForm
 from .models import User
 
 
@@ -243,3 +243,60 @@ class AccountSettingsView(LoginRequiredReactView):
             company_roles=COMPANY_ROLES,
             office_options=OFFICE_OPTIONS,
             user=request.user.get_menu_dict())
+
+
+class AccountProfileView(LoginRequiredMixin, RemarkView):
+    def update_profile(self, user, data):
+        office_address = geocode(data["office_address"])
+        address = Address.objects.get_or_create(
+            formatted_address=office_address.formatted_address,
+            street_address_1=office_address.street_address,
+            city=office_address.city,
+            state=office_address.state,
+            zip_code=office_address.zip5,
+            country=office_address.country,
+            geocode_json=office_address.geocode_json,
+        )[0]
+
+        try:
+            business = Business.objects.get(public_id=data["company"])
+        except Business.DoesNotExist:
+            business = Business(name=data["company"])
+        for role in data["company_roles"]:
+            setattr(business, BUSINESS_TYPE[role], True)
+        business.save()
+
+        person = user.get_person()
+        if not person:
+            person = Person(user=user, email=user.email)
+        person.first_name = data["first_name"]
+        person.last_name = data["last_name"]
+        person.role = data["title"]
+        person.cell_phone = data["phone"]
+        person.office_phone = data["phone_ext"]
+        if data["avatar"]:
+            person.avatar = data["avatar"]
+
+        try:
+            office = person.office
+        except Office.DoesNotExist:
+            office = Office()
+            person.office = office
+        office.address = address
+        office.name = data["office_name"]
+        office.office_type = data["office_type"]
+        office.business = business
+        office.save()
+        person.save()
+
+    def post(self, request):
+        post_data = request.POST.copy()
+        post_data \
+            .setlist("company_roles", request.POST.getlist("company_roles[]"))
+        del post_data["company_roles[]"]
+        form = AccountProfileForm(post_data, request.FILES)
+        if not form.is_valid():
+            return JsonResponse(form.errors.get_json_data(), status=500)
+        user = request.user
+        self.update_profile(request.user, form.cleaned_data)
+        return JsonResponse(user.get_profile_data(), status=200)
