@@ -11,22 +11,24 @@ import TabNavigator, { Tab } from "../tab_navigator";
 export default class EmailReports extends React.PureComponent {
   static propTypes = {
     initialTab: PropTypes.oneOf(["portfolio", "group", "property"]),
-    portfolioProperties: PropTypes.arrayOf(PropTypes.object).isRequired,
-    groupsProperties: PropTypes.arrayOf(PropTypes.object).isRequired,
     properties: PropTypes.arrayOf(PropTypes.object).isRequired,
+    portfolioProperties: PropTypes.arrayOf(PropTypes.object),
+    groupsProperties: PropTypes.arrayOf(PropTypes.object),
     onGroupsSort: PropTypes.func,
     onPropertiesSort: PropTypes.func,
     onGroupsSearch: PropTypes.func,
     onPropertiesSearch: PropTypes.func
   };
   static defaultProps = {
-    initialTab: "portfolio",
+    initialTab: "property",
+    portfolioProperties: [],
+    groupsProperties: [],
     onGroupsSort() {},
     onPropertiesSort() {},
     onGroupsSearch() {},
     onPropertiesSearch() {}
   };
-  static tabIndexMap = { portfolio: 0, group: 1, property: 2 };
+  static tabIndexMap = { property: 0 };
 
   constructor(props) {
     super(props);
@@ -146,41 +148,41 @@ export default class EmailReports extends React.PureComponent {
               onChange={tabIndex => this.setState({ tabIndex })}
               selectedIndex={this.state.tabIndex}
             >
-              <Tab label="Portfolio">
-                <EmailReportingTable
-                  className="account-settings__reporting-table"
-                  properties={portfolioProperties}
-                  propertiesCount={portfolioProperties.length}
-                  propertiesToggled={this.state.portfoliosToggled}
-                  onToggleRow={this.onPortfolioRowToggle}
-                />
-              </Tab>
-              <Tab label="Groups">
-                <div>
-                  <div className="account-settings__search-controls">
-                    <SearchWithSort
-                      className="account-settings__search"
-                      placeholder="Search Groups"
-                      theme="gray"
-                      initialSort="asc"
-                      onSort={this.props.onGroupsSort}
-                      onSearch={this.props.onGroupsSearch}
-                    />
-                    <ButtonToggle
-                      className="account-settings__toggle"
-                      checked={this.selectedGroupsState}
-                      onChange={this.onSelectGroups}
-                    />
-                  </div>
-                  <EmailReportingTable
-                    className="account-settings__reporting-table"
-                    properties={groupsProperties}
-                    propertiesCount={groupsProperties.length}
-                    propertiesToggled={this.state.groupsToggled}
-                    onToggleRow={this.onGroupRowToggle}
-                  />
-                </div>
-              </Tab>
+              {/*<Tab label="Portfolio">*/}
+              {/*  <EmailReportingTable*/}
+              {/*    className="account-settings__reporting-table"*/}
+              {/*    properties={portfolioProperties}*/}
+              {/*    propertiesCount={portfolioProperties.length}*/}
+              {/*    propertiesToggled={this.state.portfoliosToggled}*/}
+              {/*    onToggleRow={this.onPortfolioRowToggle}*/}
+              {/*  />*/}
+              {/*</Tab>*/}
+              {/*<Tab label="Groups">*/}
+              {/*  <div>*/}
+              {/*    <div className="account-settings__search-controls">*/}
+              {/*      <SearchWithSort*/}
+              {/*        className="account-settings__search"*/}
+              {/*        placeholder="Search Groups"*/}
+              {/*        theme="gray"*/}
+              {/*        initialSort="asc"*/}
+              {/*        onSort={this.props.onGroupsSort}*/}
+              {/*        onSearch={this.props.onGroupsSearch}*/}
+              {/*      />*/}
+              {/*      <ButtonToggle*/}
+              {/*        className="account-settings__toggle"*/}
+              {/*        checked={this.selectedGroupsState}*/}
+              {/*        onChange={this.onSelectGroups}*/}
+              {/*      />*/}
+              {/*    </div>*/}
+              {/*    <EmailReportingTable*/}
+              {/*      className="account-settings__reporting-table"*/}
+              {/*      properties={groupsProperties}*/}
+              {/*      propertiesCount={groupsProperties.length}*/}
+              {/*      propertiesToggled={this.state.groupsToggled}*/}
+              {/*      onToggleRow={this.onGroupRowToggle}*/}
+              {/*    />*/}
+              {/*  </div>*/}
+              {/*</Tab>*/}
               <Tab label="Properties">
                 <div>
                   <div className="account-settings__search-controls">

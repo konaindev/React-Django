@@ -13,7 +13,7 @@ class EmailReportingRow extends React.PureComponent {
     groupsCount: PropTypes.number,
     propertiesCount: PropTypes.number,
     checked: PropTypes.bool,
-    id: PropTypes.number,
+    id: PropTypes.string,
     onToggle: PropTypes.func
   };
   static defaultProps = {
