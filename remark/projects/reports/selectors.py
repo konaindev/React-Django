@@ -163,11 +163,13 @@ class BaselineReportSelector(ReportSelectorBase):
 
     def get_url(self):
         """Return a relative URL linking to this report."""
+        return ""
         kwargs = {"project_id": self.project.public_id}
         url = reverse("baseline_report", kwargs=kwargs)
         return url
 
     def get_share_url(self):
+        return ""
         kwargs = {"project_id": self.project.public_id}
         url = reverse("baseline_report_shared", kwargs=kwargs)
         return url
@@ -290,12 +292,14 @@ class PerformanceReportSelector(ReportSelectorBase):
             raise ValueError(f"Invalid performance report span: {self.report_span}")
 
     def get_url(self):
+        return ""
         """Return a relative URL linking to this report span for the given project."""
         kwargs = {"project_id": self.project.public_id, "report_span": self.report_span}
         url = reverse("performance_report", kwargs=kwargs)
         return url
 
     def get_share_url(self):
+        return ""
         kwargs = {"project_id": self.project.public_id, "report_span": self.report_span}
         url = reverse("performance_report_shared", kwargs=kwargs)
         return url
@@ -386,12 +390,14 @@ class MarketReportSelector(ReportSelectorBase):
         self.project = project
 
     def get_url(self):
+        return ""
         """Return a relative URL linking to this report."""
         kwargs = {"project_id": self.project.public_id}
         url = reverse("market_report", kwargs=kwargs)
         return url
 
     def get_share_url(self):
+        return ""
         kwargs = {"project_id": self.project.public_id}
         url = reverse("market_report_shared", kwargs=kwargs)
         return url
@@ -430,12 +436,14 @@ class ModelingReportSelector(ReportSelectorBase):
         self.project = project
 
     def get_url(self):
+        return ""
         """Return a relative URL linking to this report."""
         kwargs = {"project_id": self.project.public_id}
         url = reverse("modeling_report", kwargs=kwargs)
         return url
 
     def get_share_url(self):
+        return ""
         kwargs = {"project_id": self.project.public_id}
         url = reverse("modeling_report_shared", kwargs=kwargs)
         return url
@@ -475,12 +483,14 @@ class CampaignPlanSelector(ReportSelectorBase):
         return cls(project)
 
     def get_url(self):
+        return ""
         """Return a relative URL linking to this report."""
         kwargs = {"project_id": self.project.public_id}
         url = reverse("campaign_plan", kwargs=kwargs)
         return url
 
     def get_share_url(self):
+        return ""
         kwargs = {"project_id": self.project.public_id}
         url = reverse("campaign_plan_shared", kwargs=kwargs)
         return url

@@ -447,20 +447,6 @@ class Project(models.Model):
             url = reverse("market_report", kwargs={"project_id": self.public_id})
         return url
 
-    def to_jsonable(self):
-        """Return a representation that can be converted to a JSON string."""
-
-        kwargs = {"project_id": self.public_id}
-        update_endpoint = reverse("update_endpoint", kwargs=kwargs)
-
-        return dict(
-            public_id=self.public_id,
-            name=self.name,
-            building_logo=self.get_building_logo(),
-            building_image=self.get_building_image(),
-            update_endpoint=update_endpoint,
-        )
-
     def get_performance_rating(self):
         performance_report = PerformanceReport.for_campaign_to_date(self)
         if not performance_report:
