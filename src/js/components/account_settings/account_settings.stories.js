@@ -1,5 +1,7 @@
 import _sortBy from "lodash/sortBy";
 import React from "react";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 import { withState } from "@dump247/storybook-state";
 import { storiesOf } from "@storybook/react";
 
@@ -32,28 +34,37 @@ function onSearch(store, properties, propertiesName, value) {
 }
 
 storiesOf("AccountSettings", module)
-  .add("Profile", () => <AccountSettings initialItem="profile" {...props} />)
+  .add("Profile", () => (
+    <Provider store={createStore(() => ({}))}>
+      <AccountSettings initialItem="profile" {...props} />
+    </Provider>
+  ))
   .add("Account Security", () => (
-    <AccountSettings
-      initialItem="lock"
-      validate={validateSecurity}
-      {...props}
-    />
+    <Provider store={createStore(() => ({}))}>
+      <AccountSettings
+        initialItem="lock"
+        validate={validateSecurity}
+        {...props}
+      />
+    </Provider>
   ))
   .add(
     "Email Reports",
     withState({ groups, properties })(({ store }) => (
-      <AccountSettings
-        initialItem="email"
-        portfolioProperties={portfolio}
-        groupsProperties={store.state.groups}
-        properties={store.state.properties}
-        onGroupsSort={sort => onSort(store, "groups", sort)}
-        onPropertiesSort={sort => onSort(store, "properties", sort)}
-        onPropertiesSearch={value =>
-          onSearch(store, properties, "properties", value)
-        }
-        onGroupsSearch={value => onSearch(store, groups, "groups", value)}
-      />
+      <Provider store={createStore(() => ({}))}>
+        <AccountSettings
+          initialItem="email"
+          itemsOrder={props.itemsOrder}
+          portfolioProperties={portfolio}
+          groupsProperties={store.state.groups}
+          properties={store.state.properties}
+          onGroupsSort={sort => onSort(store, "groups", sort)}
+          onPropertiesSort={sort => onSort(store, "properties", sort)}
+          onPropertiesSearch={value =>
+            onSearch(store, properties, "properties", value)
+          }
+          onGroupsSearch={value => onSearch(store, groups, "groups", value)}
+        />
+      </Provider>
     ))
   );

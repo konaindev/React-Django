@@ -1,4 +1,6 @@
 import React from "react";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 import renderer from "react-test-renderer";
 
 import { properties, groups, portfolio } from "../email_reporting_table/props";

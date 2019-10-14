@@ -1,4 +1,13 @@
-import PropTypes from "prop-types";
+const user = {
+  account_id: 1,
+  account_name: "Remarkably",
+  account_settings_url: "/users/account-settings",
+  email: "test@psl.com",
+  logout_url: "/users/logout/",
+  user_id: "usr_jjzpeyfeshzpaha5"
+};
+
+const itemsOrder = ["profile", "lock", "email"];
 
 const rules = [
   {
@@ -19,7 +28,21 @@ const rules = [
   }
 ];
 
-const person = {
+const company_roles = [
+  { label: "Owner", value: "owner" },
+  { label: "Developer", value: "developer" },
+  { label: "Asset Manager", value: "asset_manager" },
+  { label: "Property Manager", value: "property_manager" }
+];
+
+const office_options = [
+  { label: "Global", value: 1 },
+  { label: "National", value: 2 },
+  { label: "Regional", value: 3 },
+  { label: "Other", value: 4 }
+];
+
+const profile = {
   avatar_url:
     "https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg",
   first_name: "Phillip",
@@ -28,14 +51,17 @@ const person = {
   phone: "",
   phone_ext: "",
   company_name: "Glacier Associates",
-  company_role: [
-    { label: "Owner", value: "owner" },
-    { label: "Asset Manager", value: "asset" },
-    { label: "Property Manager", value: "property" }
-  ],
+  company_roles: ["owner", "asset", "property"],
   office_address: "1730 Minor Avenue, Lansing, MI",
   office_name: "Michigan",
-  office_type: { label: "Regional", value: "regional" }
+  office_type: 3
 };
 
-export const props = { rules, person };
+export const props = {
+  rules,
+  profile,
+  user,
+  company_roles,
+  office_options,
+  itemsOrder
+};
