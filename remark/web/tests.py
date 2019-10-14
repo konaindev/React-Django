@@ -156,6 +156,7 @@ class PropertyListTestCase(TestCase):
                     "url": "/projects/{}/market/".format(self.project2.public_id),
                     "members": [
                         {
+                            "profile_image_url": "",
                             "email": self.user.email,
                             "user_id": self.user.public_id,
                             "account_name": self.person.full_name,
@@ -172,6 +173,7 @@ class PropertyListTestCase(TestCase):
                     "url": "/projects/{}/market/".format(self.project1.public_id),
                     "members": [
                         {
+                            "profile_image_url": "",
                             "email": self.user.email,
                             "user_id": self.user.public_id,
                             "account_name": self.person.full_name,
@@ -196,6 +198,7 @@ class PropertyListTestCase(TestCase):
                 "account_name": self.account.company_name,
                 "email": self.user.email,
                 "logout_url": "/users/logout/",
+                "account_settings_url": "/users/account-settings",
                 "user_id": self.user.public_id,
             },
         }
@@ -236,6 +239,7 @@ class PropertyListTestCase(TestCase):
                     "url": "/projects/{}/market/".format(self.project1.public_id),
                     "members": [
                         {
+                            "profile_image_url": "",
                             "email": self.user.email,
                             "user_id": self.user.public_id,
                             "account_name": self.person.full_name,
@@ -260,6 +264,7 @@ class PropertyListTestCase(TestCase):
                 "account_name": self.account.company_name,
                 "email": self.user.email,
                 "logout_url": "/users/logout/",
+                "account_settings_url": "/users/account-settings",
                 "user_id": self.user.public_id,
             },
         }
