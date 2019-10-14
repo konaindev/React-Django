@@ -23,6 +23,7 @@ export const PropertyCard = ({
   onSelect
 }) => {
   const handleToggle = () => {
+    console.log("------> handle toggle", onSelect);
     onSelect(property_id, !selected);
   };
   const imageStyle = {};
@@ -38,17 +39,17 @@ export const PropertyCard = ({
       <Panel className="property-card__panel">
         <div className="property-card__image" style={imageStyle}>
           <div className="property-card__overlay">
-            <div className="property-card__selector" onClick={handleToggle}>
-              <Tick className="property-card__selector-tick" />
+            <div className="property-card__overlay-link">
+              <div className="property-card__selector" onClick={handleToggle}>
+                <Tick className="property-card__selector-tick" />
+              </div>
+              <Link
+                className="property-card__overlay-link"
+                to={url.replace("https://app.remarkably.io", "")}
+              >
+                <Button color="outline">View Report</Button>
+              </Link>
             </div>
-            <Link
-              className="property-card__overlay-link"
-              to={url.replace("https://app.remarkably.io", "")}
-            >
-              <Button color="outline">View Report</Button>
-            </Link>
-            <div className="property-card__actions" />
-            <div className="property-card__overlay-link"></div>
             <div className="property-card__actions">
               <UserIconList users={members} />
             </div>
