@@ -51,7 +51,7 @@ const profile = {
   phone: "",
   phone_ext: "",
   company_name: "Glacier Associates",
-  company_roles: ["owner", "asset", "property"],
+  company_roles: ["owner", "asset_manager", "property_manager"],
   office_address: "1730 Minor Avenue, Lansing, MI",
   office_name: "Michigan",
   office_type: 3

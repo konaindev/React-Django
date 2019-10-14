@@ -12,26 +12,37 @@ jest.mock("rc-tooltip");
 describe("AccountSettings", () => {
   it("account security tab", () => {
     const tree = renderer
-      .create(<AccountSettings initialItem="lock" {...props} />)
+      .create(
+        <Provider store={createStore(() => ({}))}>
+          <AccountSettings initialItem="lock" {...props} />
+        </Provider>
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
   it("profile tab", () => {
     const tree = renderer
-      .create(<AccountSettings initialItem="profile" {...props} />)
+      .create(
+        <Provider store={createStore(() => ({}))}>
+          <AccountSettings initialItem="profile" {...props} />
+        </Provider>
+      )
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
   it("email reports 'Portfolio' tab", () => {
     const tree = renderer
       .create(
-        <AccountSettings
-          initialItem="email"
-          initialTab="portfolio"
-          portfolioProperties={portfolio}
-          groupsProperties={groups}
-          properties={properties}
-        />
+        <Provider store={createStore(() => ({}))}>
+          <AccountSettings
+            initialItem="email"
+            itemsOrder={props.itemsOrder}
+            initialTab="portfolio"
+            portfolioProperties={portfolio}
+            groupsProperties={groups}
+            properties={properties}
+          />
+        </Provider>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
@@ -39,13 +50,16 @@ describe("AccountSettings", () => {
   it("email reports 'Groups' tab", () => {
     const tree = renderer
       .create(
-        <AccountSettings
-          initialItem="email"
-          initialTab="group"
-          portfolioProperties={portfolio}
-          groupsProperties={groups}
-          properties={properties}
-        />
+        <Provider store={createStore(() => ({}))}>
+          <AccountSettings
+            initialItem="email"
+            itemsOrder={props.itemsOrder}
+            initialTab="group"
+            portfolioProperties={portfolio}
+            groupsProperties={groups}
+            properties={properties}
+          />
+        </Provider>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();
@@ -53,13 +67,16 @@ describe("AccountSettings", () => {
   it("email reports 'Properties' tab", () => {
     const tree = renderer
       .create(
-        <AccountSettings
-          initialItem="email"
-          initialTab="property"
-          portfolioProperties={portfolio}
-          groupsProperties={groups}
-          properties={properties.slice(0, 5)}
-        />
+        <Provider store={createStore(() => ({}))}>
+          <AccountSettings
+            initialItem="email"
+            itemsOrder={props.itemsOrder}
+            initialTab="property"
+            portfolioProperties={portfolio}
+            groupsProperties={groups}
+            properties={properties.slice(0, 5)}
+          />
+        </Provider>
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

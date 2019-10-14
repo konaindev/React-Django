@@ -298,5 +298,5 @@ class AccountProfileView(LoginRequiredMixin, RemarkView):
         if not form.is_valid():
             return JsonResponse(form.errors.get_json_data(), status=500)
         user = request.user
-        self.update_profile(request.user, form.cleaned_data)
+        self.update_profile(user, form.cleaned_data)
         return JsonResponse(user.get_profile_data(), status=200)
