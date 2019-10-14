@@ -1,31 +1,8 @@
 import React from "react";
-import { connect } from "react-redux";
-import { auth } from "../../state/actions";
-import Button from "../../components/button";
-class AuthContainer extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: "",
-      password: ""
-    };
-  }
-  doLogin() {
-    this.props.dispatch(
-      auth.login({
-        email: "todd@remarkably.io",
-        password: "test"
-      })
-    );
-  }
-  componentDidMount() {}
+import LoginView from "../../components/login";
+
+export default class AuthContainer extends React.PureComponent {
   render() {
-    return (
-      <div>
-        <Button color="primary" onClick={() => this.doLogin()} />
-      </div>
-    );
+    return <LoginView />;
   }
 }
-
-export default connect(x => x)(AuthContainer);

@@ -5,6 +5,8 @@ import Checkbox from "../checkbox";
 import Input from "../input";
 import "./login.scss";
 import Yup from "../../yup";
+import { connect } from "react-redux";
+import { auth } from "../../state/actions";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
@@ -13,7 +15,7 @@ const LoginSchema = Yup.object().shape({
   password: Yup.string().required("Password Required")
 });
 
-export default class LoginView extends React.PureComponent {
+export class LoginView extends React.PureComponent {
   constructor(props) {
     super(props);
     this.formik = React.createRef();
@@ -65,6 +67,9 @@ export default class LoginView extends React.PureComponent {
   onSubmit = (values, actions) => {
     actions.setSubmitting(false);
     // Some logic to process the values once middleware is built out
+    this.props.dispatch(
+      auth.login({ email: values.email, password: values.password })
+    );
   };
 
   render() {
@@ -165,3 +170,5 @@ export default class LoginView extends React.PureComponent {
     );
   }
 }
+
+export default connect()(LoginView);
