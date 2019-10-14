@@ -1,3 +1,4 @@
+import _pickBy from "lodash/pickBy";
 import PropTypes from "prop-types";
 import React from "react";
 
@@ -11,7 +12,7 @@ import TabNavigator, { Tab } from "../tab_navigator";
 export default class EmailReports extends React.PureComponent {
   static propTypes = {
     initialTab: PropTypes.oneOf(["portfolio", "group", "property"]),
-    properties: PropTypes.arrayOf(PropTypes.object).isRequired,
+    properties: PropTypes.arrayOf(PropTypes.object),
     portfolioProperties: PropTypes.arrayOf(PropTypes.object),
     groupsProperties: PropTypes.arrayOf(PropTypes.object),
     onGroupsSort: PropTypes.func,
@@ -23,6 +24,7 @@ export default class EmailReports extends React.PureComponent {
     initialTab: "property",
     portfolioProperties: [],
     groupsProperties: [],
+    properties: [],
     onGroupsSort() {},
     onPropertiesSort() {},
     onGroupsSearch() {},
@@ -32,12 +34,15 @@ export default class EmailReports extends React.PureComponent {
 
   constructor(props) {
     super(props);
+    const propertiesToggled = {};
+    for (let p of this.props.properties) {
+      propertiesToggled[p.id] = !!p.is_report;
+    }
     this.state = {
       tabIndex: EmailReports.tabIndexMap[props.initialTab],
       portfoliosToggled: {},
       groupsToggled: {},
-      propertiesToggled: {},
-      isSubmitted: false
+      propertiesToggled
     };
   }
 
@@ -56,13 +61,13 @@ export default class EmailReports extends React.PureComponent {
   }
 
   get successMessage() {
-    if (!this.state.isSubmitted) {
+    if (!this.state.message) {
       return;
     }
     return (
       <div className="account-settings__success">
         <Tick className="account-settings__checked" />
-        Your changes have been saved.
+        {this.state.message}
       </div>
     );
   }
@@ -120,11 +125,20 @@ export default class EmailReports extends React.PureComponent {
     this.setState({ propertiesToggled });
   };
 
+  setSuccessMessage = () => {
+    const message = "Your changes have been saved.";
+    this.setState({ message });
+  };
+
   onSubmit = () => {
-    this.setState({ isSubmitted: true });
-    setTimeout(() => {
-      this.setState({ isSubmitted: false });
-    }, 5000);
+    const data = {
+      properties: Object.keys(_pickBy(this.state.propertiesToggled))
+    };
+    this.props.dispatch({
+      type: "API_ACCOUNT_REPORTS",
+      callback: this.setSuccessMessage,
+      data
+    });
   };
 
   render() {

@@ -235,10 +235,11 @@ class AccountSettingsView(LoginRequiredReactView):
     page_class = "AccountSettings"
     page_title = "Account Settings"
 
-    def serialize_project(self, project):
+    def serialize_project(self, project, for_reports_ids):
         return {
             "id": project.public_id,
             "name": project.name,
+            "is_report": project.public_id in for_reports_ids
         }
 
     def get(self, request):
@@ -247,7 +248,8 @@ class AccountSettingsView(LoginRequiredReactView):
             projects_q = Project.objects.all()
         else:
             projects_q = Project.objects.get_all_for_user(user)
-        projects = [self.serialize_project(p) for p in projects_q]
+        for_reports_ids = [p.public_id for p in user.report_projects.all()]
+        projects = [self.serialize_project(p, for_reports_ids) for p in projects_q]
         return self.render(
             rules=VALIDATION_RULES_LIST,
             profile=user.get_profile_data(),
@@ -314,5 +316,11 @@ class AccountProfileView(LoginRequiredMixin, RemarkView):
         return JsonResponse(user.get_profile_data(), status=200)
 
 
-class EmailReportsView(LoginRequiredMixin, RemarkView):
-    pass
+class AccountReportsView(LoginRequiredMixin, RemarkView):
+    def post(self, request):
+        user = request.user
+        ids = json.loads(request.body)["properties"]
+        projects = Project.objects.filter(public_id__in=ids)
+        user.report_projects.set(projects)
+        user.save()
+        return JsonResponse({}, status=200)

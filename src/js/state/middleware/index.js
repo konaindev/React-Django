@@ -8,7 +8,10 @@ import {
   completeAccount,
   uiStrings
 } from "../actions";
-import { updateProfileData } from "../../api/account_settings";
+import {
+  updateProfileData,
+  updateReportsData
+} from "../../api/account_settings";
 import { axiosGet, axiosPost } from "../../utils/api";
 
 // Here we create a middleware that intercepts
@@ -205,7 +208,7 @@ export const updateAccountProfile = store => next => action => {
       updateProfileData(action.data)
         .then(response => {
           if (response.status === 200) {
-            action.callback(response.data.message);
+            action.callback(response.data);
           } else {
             throw response;
           }
@@ -217,6 +220,24 @@ export const updateAccountProfile = store => next => action => {
             console.log("-----> ERROR", e);
           }
         });
+    }
+  } else {
+    next(action);
+  }
+};
+
+export const updateAccountReports = store => next => action => {
+  if (action.type === "API_ACCOUNT_REPORTS") {
+    if (action.data) {
+      updateReportsData(action.data)
+        .then(response => {
+          if (response.status === 200) {
+            action.callback(response.data);
+          } else {
+            throw response;
+          }
+        })
+        .catch(e => console.log("-----> ERROR", e));
     }
   } else {
     next(action);
