@@ -107,6 +107,7 @@ export default class Profile extends React.PureComponent {
   };
 
   onFileUpload = e => {
+    this.unsetMessage();
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.onload = e => {
@@ -130,7 +131,7 @@ export default class Profile extends React.PureComponent {
     });
   };
 
-  getErrorMessage = (errors, touched) => {
+  showErrorMessage = (errors, touched) => {
     const errorFields = Object.keys(errors);
     const touchedFields = Object.keys(touched);
     const fields = _intersection(errorFields, touchedFields);
@@ -138,26 +139,35 @@ export default class Profile extends React.PureComponent {
       return;
     }
     let message = "Please review highlighted fields above.";
-    if (fields.includes("avatar_size")) {
-      message = errors.avatar_size;
+    if (fields.includes("avatar")) {
+      message = errors.avatar;
     }
     return <div className="account-settings__general-error">{message}</div>;
   };
 
-  getSuccessMessage = () => {
-    if (!this.state.fieldsSubmitted) {
+  showSuccessMessage = () => {
+    if (!this.state.message) {
       return;
     }
     return (
       <div className="account-settings__success">
         <Tick className="account-settings__checked" />
-        Your profile has been saved.
+        {this.state.message}
       </div>
     );
   };
 
-  setSuccessMessage = message => {
+  showMessage = (errors, touched) => {
+    if (this.state.message) {
+      return this.showSuccessMessage();
+    } else if (Object.keys(errors).length) {
+      return this.showErrorMessage(errors, touched);
+    }
+  };
+
+  setSuccessMessage = () => {
     this.formik.setSubmitting(false);
+    const message = "Your profile has been saved.";
     this.setState({ message });
   };
 
@@ -195,6 +205,16 @@ export default class Profile extends React.PureComponent {
     });
   };
 
+  onChange = v => {
+    this.unsetMessage();
+    this.formik.handleChange(v);
+  };
+
+  onBlur = v => {
+    this.unsetMessage();
+    this.formik.handleBlur(v);
+  };
+
   render() {
     return (
       <div className="account-settings__tab">
@@ -206,15 +226,7 @@ export default class Profile extends React.PureComponent {
           validateOnChange={true}
           onSubmit={this.onSubmit}
         >
-          {({
-            errors,
-            touched,
-            values,
-            handleChange,
-            handleBlur,
-            setFieldTouched,
-            setFieldValue
-          }) => (
+          {({ errors, touched, values, setFieldTouched, setFieldValue }) => (
             <Form method="post" autoComplete="off">
               <div className="account-settings__tab-content">
                 <div className="account-settings__tab-section">
@@ -240,7 +252,7 @@ export default class Profile extends React.PureComponent {
                           {values.first_name} {values.last_name}
                         </div>
                         <div className="account-settings__photo-text">
-                          Admin
+                          {values.title}
                         </div>
                       </div>
                     </div>
@@ -268,8 +280,8 @@ export default class Profile extends React.PureComponent {
                         name="first_name"
                         theme="gray"
                         value={values.first_name}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
+                        onBlur={this.onBlur}
+                        onChange={this.onChange}
                       />
                       <div className="account-settings__error">
                         <ErrorMessage name="first_name" />
@@ -288,8 +300,8 @@ export default class Profile extends React.PureComponent {
                         name="last_name"
                         theme="gray"
                         value={values.last_name}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
+                        onBlur={this.onBlur}
+                        onChange={this.onChange}
                       />
                       <div className="account-settings__error">
                         <ErrorMessage name="last_name" />
@@ -306,8 +318,8 @@ export default class Profile extends React.PureComponent {
                         name="title"
                         theme="gray"
                         value={values.title}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
+                        onBlur={this.onBlur}
+                        onChange={this.onChange}
                       />
                       <div className="account-settings__error">
                         <ErrorMessage name="title" />
@@ -325,8 +337,8 @@ export default class Profile extends React.PureComponent {
                         theme="gray"
                         type="tel"
                         value={values.phone}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
+                        onBlur={this.onBlur}
+                        onChange={this.onChange}
                         valueFormatter={formatPhone}
                       />
                       <div className="account-settings__error">
@@ -349,8 +361,8 @@ export default class Profile extends React.PureComponent {
                         theme="gray"
                         type="tel"
                         value={values.phone_ext}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
+                        onBlur={this.onBlur}
+                        onChange={this.onChange}
                         valueFormatter={formatPhone}
                       />
                       <div className="account-settings__error">
@@ -377,8 +389,8 @@ export default class Profile extends React.PureComponent {
                         name="company"
                         theme="gray"
                         value={values.company}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
+                        onBlur={this.onBlur}
+                        onChange={this.onChange}
                       />
                       <div className="account-settings__error">
                         <ErrorMessage name="company" />
@@ -406,10 +418,14 @@ export default class Profile extends React.PureComponent {
                         label={values.company_roles
                           ?.map(v => v.label)
                           .join(", ")}
-                        onBlur={() => setFieldTouched("company_roles", true)}
-                        onChange={values =>
-                          setFieldValue("company_roles", values)
-                        }
+                        onBlur={() => {
+                          this.unsetMessage();
+                          setFieldTouched("company_roles", true);
+                        }}
+                        onChange={values => {
+                          this.unsetMessage();
+                          setFieldValue("company_roles", values);
+                        }}
                       />
                       <div className="account-settings__error">
                         <ErrorMessage name="company_roles" />
@@ -431,8 +447,8 @@ export default class Profile extends React.PureComponent {
                         name="office_address"
                         theme="gray"
                         value={values.office_address}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
+                        onBlur={this.onBlur}
+                        onChange={this.onChange}
                       />
                       <div className="account-settings__error">
                         <ErrorMessage name="office_address" />
@@ -451,8 +467,8 @@ export default class Profile extends React.PureComponent {
                         name="office_name"
                         theme="gray"
                         value={values.office_name}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
+                        onBlur={this.onBlur}
+                        onChange={this.onChange}
                       />
                       <div className="account-settings__error">
                         <ErrorMessage name="office_name" />
@@ -472,8 +488,14 @@ export default class Profile extends React.PureComponent {
                         theme="gray"
                         options={this.props.office_options}
                         value={values.office_type}
-                        onBlur={() => setFieldTouched("office_type", true)}
-                        onChange={value => setFieldValue("office_type", value)}
+                        onBlur={() => {
+                          this.unsetMessage();
+                          setFieldTouched("office_type", true);
+                        }}
+                        onChange={value => {
+                          this.unsetMessage();
+                          setFieldValue("office_type", value);
+                        }}
                       />
                       <div className="account-settings__error">
                         <ErrorMessage name="office_type" />
@@ -490,8 +512,7 @@ export default class Profile extends React.PureComponent {
                 >
                   Save
                 </Button>
-                {this.getErrorMessage(errors, touched)}
-                {this.getSuccessMessage()}
+                {this.showMessage(errors, touched)}
               </div>
             </Form>
           )}

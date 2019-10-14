@@ -311,7 +311,9 @@ $info-line-height: 1.75rem;
 
 .account-settings__photo-text {
     font-size: $text-base;
+    text-transform: capitalize;
     line-height: $info-line-height;
+
     &--name {
         color: $text-color;
     }
