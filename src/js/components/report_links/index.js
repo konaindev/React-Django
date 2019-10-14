@@ -40,7 +40,6 @@ export default class ReportLinks extends Component {
 
   render() {
     // TODO CONSIDER: report_links should probably contain friendly names, too?
-
     return (
       <div className="project-report-links">
         <ul>
@@ -49,21 +48,23 @@ export default class ReportLinks extends Component {
             "baseline",
             this.props.report_links.baseline
           )}
-          {this.renderLink(
-            "Market Analysis",
-            "market",
-            this.props.report_links.market
-          )}
+          {this.props.report_links.market &&
+            this.renderLink(
+              "Market Analysis",
+              "market",
+              this.props.report_links.market
+            )}
           {this.renderLink(
             "Modeling",
             "modeling",
             this.props.report_links.modeling
           )}
-          {this.renderLink(
-            "Campaign Plan",
-            "campaign_plan",
-            this.props.report_links.campaign_plan
-          )}
+          {this.props.report_links.campaign_plan &&
+            this.renderLink(
+              "Campaign Plan",
+              "campaign_plan",
+              this.props.report_links.campaign_plan
+            )}
           {this.renderLink(
             "Performance",
             "performance",

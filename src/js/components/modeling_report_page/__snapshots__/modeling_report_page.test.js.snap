@@ -214,13 +214,6 @@ exports[`ModelingReportPage renders correctly 1`] = `
                   Modeling
                 </li>
                 <li
-                  className="disabled"
-                  data-url="#"
-                  onClick={[Function]}
-                >
-                  Campaign Plan
-                </li>
-                <li
                   className="enabled"
                   data-url="/projects/pro_example/performance/last-week/"
                   onClick={[Function]}
@@ -413,9 +406,6 @@ exports[`ModelingReportPage renders correctly 1`] = `
                 >
                   95%
                 </span>
-                <div
-                  className="large-box__content-extra"
-                />
               </div>
               <span
                 className="large-box__bottom-line"
@@ -463,9 +453,6 @@ exports[`ModelingReportPage renders correctly 1`] = `
                 >
                   63%
                 </span>
-                <div
-                  className="large-box__content-extra"
-                />
               </div>
               <span
                 className="large-box__bottom-line"
@@ -503,9 +490,6 @@ exports[`ModelingReportPage renders correctly 1`] = `
                 >
                   93%
                 </span>
-                <div
-                  className="large-box__content-extra"
-                />
               </div>
               <span
                 className="large-box__bottom-line"
@@ -814,9 +798,6 @@ exports[`ModelingReportPage renders correctly 1`] = `
                 >
                   $181k
                 </span>
-                <div
-                  className="large-box__content-extra"
-                />
               </div>
               <span
                 className="large-box__bottom-line"
@@ -1910,9 +1891,6 @@ exports[`ModelingReportPage renders correctly 1`] = `
                 >
                   0.7%
                 </span>
-                <div
-                  className="large-box__content-extra"
-                />
               </div>
               <span
                 className="large-box__bottom-line"
@@ -1948,9 +1926,6 @@ exports[`ModelingReportPage renders correctly 1`] = `
                 >
                   20%
                 </span>
-                <div
-                  className="large-box__content-extra"
-                />
               </div>
               <span
                 className="large-box__bottom-line"
@@ -1986,9 +1961,6 @@ exports[`ModelingReportPage renders correctly 1`] = `
                 >
                   103%
                 </span>
-                <div
-                  className="large-box__content-extra"
-                />
               </div>
               <span
                 className="large-box__bottom-line"
