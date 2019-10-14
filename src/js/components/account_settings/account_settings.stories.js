@@ -55,6 +55,8 @@ storiesOf("AccountSettings", module)
         <AccountSettings
           initialItem="email"
           itemsOrder={props.itemsOrder}
+          tabsOrder={props.tabsOrder}
+          initialTab={props.initialTab}
           portfolioProperties={portfolio}
           groupsProperties={store.state.groups}
           properties={store.state.properties}

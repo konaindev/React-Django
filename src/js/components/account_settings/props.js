@@ -57,11 +57,17 @@ const profile = {
   office_type: 3
 };
 
+const tabsOrder = ["portfolio", "group", "property"];
+
+const initialTab = "portfolio";
+
 export const props = {
   rules,
   profile,
   user,
   company_roles,
   office_options,
-  itemsOrder
+  itemsOrder,
+  tabsOrder,
+  initialTab
 };

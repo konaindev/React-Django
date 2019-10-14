@@ -12,6 +12,7 @@ import TabNavigator, { Tab } from "../tab_navigator";
 export default class EmailReports extends React.PureComponent {
   static propTypes = {
     initialTab: PropTypes.oneOf(["portfolio", "group", "property"]),
+    tabsOrder: PropTypes.array,
     properties: PropTypes.arrayOf(PropTypes.object),
     portfolioProperties: PropTypes.arrayOf(PropTypes.object),
     groupsProperties: PropTypes.arrayOf(PropTypes.object),
@@ -22,6 +23,7 @@ export default class EmailReports extends React.PureComponent {
   };
   static defaultProps = {
     initialTab: "property",
+    tabsOrder: ["property"],
     portfolioProperties: [],
     groupsProperties: [],
     properties: [],
@@ -39,7 +41,7 @@ export default class EmailReports extends React.PureComponent {
       propertiesToggled[p.id] = !!p.is_report;
     }
     this.state = {
-      tabIndex: EmailReports.tabIndexMap[props.initialTab],
+      tabIndex: this.props.tabsOrder.indexOf(props.initialTab),
       portfoliosToggled: {},
       groupsToggled: {},
       propertiesToggled
@@ -69,6 +71,85 @@ export default class EmailReports extends React.PureComponent {
         <Tick className="account-settings__checked" />
         {this.state.message}
       </div>
+    );
+  }
+
+  get portfolioTab() {
+    const { portfolioProperties } = this.props;
+    return (
+      <Tab label="Portfolio" key="portfolio">
+        <EmailReportingTable
+          className="account-settings__reporting-table"
+          properties={portfolioProperties}
+          propertiesCount={portfolioProperties.length}
+          propertiesToggled={this.state.portfoliosToggled}
+          onToggleRow={this.onPortfolioRowToggle}
+        />
+      </Tab>
+    );
+  }
+
+  get groupTab() {
+    const { groupsProperties } = this.props;
+    return (
+      <Tab label="Groups" key="group">
+        <div>
+          <div className="account-settings__search-controls">
+            <SearchWithSort
+              className="account-settings__search"
+              placeholder="Search Groups"
+              theme="gray"
+              initialSort="asc"
+              onSort={this.props.onGroupsSort}
+              onSearch={this.props.onGroupsSearch}
+            />
+            <ButtonToggle
+              className="account-settings__toggle"
+              checked={this.selectedGroupsState}
+              onChange={this.onSelectGroups}
+            />
+          </div>
+          <EmailReportingTable
+            className="account-settings__reporting-table"
+            properties={groupsProperties}
+            propertiesCount={groupsProperties.length}
+            propertiesToggled={this.state.groupsToggled}
+            onToggleRow={this.onGroupRowToggle}
+          />
+        </div>
+      </Tab>
+    );
+  }
+
+  get propertyTab() {
+    const { properties } = this.props;
+    return (
+      <Tab label="Properties" key="property">
+        <div>
+          <div className="account-settings__search-controls">
+            <SearchWithSort
+              className="account-settings__search"
+              placeholder="Search Properties"
+              theme="gray"
+              initialSort="asc"
+              onSort={this.props.onPropertiesSort}
+              onSearch={this.props.onPropertiesSearch}
+            />
+            <ButtonToggle
+              className="account-settings__toggle"
+              checked={this.selectedPropertiesState}
+              onChange={this.onSelectProperties}
+            />
+          </div>
+          <EmailReportingTable
+            className="account-settings__reporting-table"
+            properties={properties}
+            propertiesCount={properties.length}
+            propertiesToggled={this.state.propertiesToggled}
+            onToggleRow={this.onPropertyRowToggle}
+          />
+        </div>
+      </Tab>
     );
   }
 
@@ -142,7 +223,7 @@ export default class EmailReports extends React.PureComponent {
   };
 
   render() {
-    const { groupsProperties, portfolioProperties, properties } = this.props;
+    const tabs = this.props.tabsOrder.map(n => this[`${n}Tab`]);
     return (
       <div className="account-settings__tab">
         <div className="account-settings__tab-content">
@@ -162,67 +243,7 @@ export default class EmailReports extends React.PureComponent {
               onChange={tabIndex => this.setState({ tabIndex })}
               selectedIndex={this.state.tabIndex}
             >
-              {/*<Tab label="Portfolio">*/}
-              {/*  <EmailReportingTable*/}
-              {/*    className="account-settings__reporting-table"*/}
-              {/*    properties={portfolioProperties}*/}
-              {/*    propertiesCount={portfolioProperties.length}*/}
-              {/*    propertiesToggled={this.state.portfoliosToggled}*/}
-              {/*    onToggleRow={this.onPortfolioRowToggle}*/}
-              {/*  />*/}
-              {/*</Tab>*/}
-              {/*<Tab label="Groups">*/}
-              {/*  <div>*/}
-              {/*    <div className="account-settings__search-controls">*/}
-              {/*      <SearchWithSort*/}
-              {/*        className="account-settings__search"*/}
-              {/*        placeholder="Search Groups"*/}
-              {/*        theme="gray"*/}
-              {/*        initialSort="asc"*/}
-              {/*        onSort={this.props.onGroupsSort}*/}
-              {/*        onSearch={this.props.onGroupsSearch}*/}
-              {/*      />*/}
-              {/*      <ButtonToggle*/}
-              {/*        className="account-settings__toggle"*/}
-              {/*        checked={this.selectedGroupsState}*/}
-              {/*        onChange={this.onSelectGroups}*/}
-              {/*      />*/}
-              {/*    </div>*/}
-              {/*    <EmailReportingTable*/}
-              {/*      className="account-settings__reporting-table"*/}
-              {/*      properties={groupsProperties}*/}
-              {/*      propertiesCount={groupsProperties.length}*/}
-              {/*      propertiesToggled={this.state.groupsToggled}*/}
-              {/*      onToggleRow={this.onGroupRowToggle}*/}
-              {/*    />*/}
-              {/*  </div>*/}
-              {/*</Tab>*/}
-              <Tab label="Properties">
-                <div>
-                  <div className="account-settings__search-controls">
-                    <SearchWithSort
-                      className="account-settings__search"
-                      placeholder="Search Properties"
-                      theme="gray"
-                      initialSort="asc"
-                      onSort={this.props.onPropertiesSort}
-                      onSearch={this.props.onPropertiesSearch}
-                    />
-                    <ButtonToggle
-                      className="account-settings__toggle"
-                      checked={this.selectedPropertiesState}
-                      onChange={this.onSelectProperties}
-                    />
-                  </div>
-                  <EmailReportingTable
-                    className="account-settings__reporting-table"
-                    properties={properties}
-                    propertiesCount={properties.length}
-                    propertiesToggled={this.state.propertiesToggled}
-                    onToggleRow={this.onPropertyRowToggle}
-                  />
-                </div>
-              </Tab>
+              {tabs}
             </TabNavigator>
           </div>
         </div>
