@@ -293,7 +293,7 @@ class AccountProfileView(LoginRequiredMixin, RemarkView):
         post_data = request.POST.copy()
         post_data \
             .setlist("company_roles", request.POST.getlist("company_roles[]"))
-        del post_data["company_roles[]"]
+        post_data.pop("company_roles[]", None)
         form = AccountProfileForm(post_data, request.FILES)
         if not form.is_valid():
             return JsonResponse(form.errors.get_json_data(), status=500)

@@ -4,15 +4,6 @@ const phoneRegex = /^\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$/;
 const invalidPhoneMessage = "${path} should match format (XXX) XXX-XXXX";
 const maxAvatarSize = 3 * 1024 * 1024; // Bytes in 3MB
 
-const selectOptionsSchema = Yup.object().shape({
-  label: Yup.string()
-    .required()
-    .max(20),
-  value: Yup.string()
-    .required()
-    .max(20)
-});
-
 const securitySchema = Yup.object().shape({
   email: Yup.string()
     .max(255)
@@ -83,7 +74,9 @@ const profileSchema = Yup.object().shape({
     .required()
     .max(255)
     .label("Office name"),
-  office_type: selectOptionsSchema.required().label("Office type")
+  office_type: Yup.object()
+    .required()
+    .label("Office type")
 });
 
 export { profileSchema, securitySchema };

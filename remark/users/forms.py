@@ -5,7 +5,7 @@ from remark.crm.models import Person
 from remark.crm.constants import OFFICE_TYPES
 
 from .models import Account, User
-from .constants import COMPANY_ROLES
+from .constants import COMPANY_ROLES, PHONE_REGEX
 
 
 class AccountForm(forms.ModelForm):
@@ -78,8 +78,8 @@ class AccountProfileForm(forms.Form):
     first_name = forms.CharField(max_length=255, required=True)
     last_name = forms.CharField(max_length=255, required=True)
     title = forms.CharField(max_length=255, required=False)
-    phone = forms.CharField(max_length=20, required=False)
-    phone_ext = forms.CharField(max_length=20, required=False)
+    phone = forms.RegexField(PHONE_REGEX, required=False)
+    phone_ext = forms.RegexField(PHONE_REGEX, required=False)
     company = forms.CharField(max_length=255, required=True)
     company_roles = forms.MultipleChoiceField(
         choices=company_roles_values, required=True

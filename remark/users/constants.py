@@ -1,3 +1,5 @@
+import re
+
 from django.contrib.auth.password_validation import get_password_validators
 
 ACCOUNT_TYPE = (
@@ -67,3 +69,5 @@ VALIDATION_RULES = [
 ]
 
 VALIDATION_RULES_LIST = [{"label": v["label"], "key": v["key"]} for v in VALIDATION_RULES]
+
+PHONE_REGEX = re.compile(r"^\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$")
