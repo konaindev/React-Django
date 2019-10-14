@@ -251,6 +251,12 @@ $info-line-height: 1.75rem;
     width: 100%;
     height: 100%;
     border-radius: 50%;
+
+    &--default {
+        background-image: url(../../../images/default-user.svg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 }
 
 .account-settings__photo-field {

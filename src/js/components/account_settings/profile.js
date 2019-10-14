@@ -80,6 +80,22 @@ export default class Profile extends React.PureComponent {
     return profile;
   }
 
+  getAvatarImage(values) {
+    let img = (
+      <div className="account-settings__photo-img account-settings__photo-img--default" />
+    );
+    if (values.avatar_url) {
+      img = (
+        <img
+          className="account-settings__photo-img"
+          src={values.avatar_url}
+          alt="LOGO"
+        />
+      );
+    }
+    return img;
+  }
+
   unsetMessage() {
     if (this.state.message) {
       this.setState({ message: null });
@@ -157,15 +173,15 @@ export default class Profile extends React.PureComponent {
   onSubmit = values => {
     this.unsetMessage();
     const dataValues = { ...values };
-    dataValues.company_roles = dataValues.company_roles.map(i => i.value);
-    dataValues.office_type = dataValues.office_type.value;
     const data = new FormData();
     for (const k of Object.keys(dataValues)) {
       if (Profile.fieldsSubmit.includes(k)) {
         if (k === "company_roles") {
-          for (const r of dataValues.company_roles) {
-            data.append("company_roles[]", r);
+          for (const i of dataValues.company_roles) {
+            data.append("company_roles[]", i.value);
           }
+        } else if (k === "office_type") {
+          data.append("office_type", dataValues.office_type.value);
         } else {
           data.append(k, dataValues[k]);
         }
@@ -208,11 +224,7 @@ export default class Profile extends React.PureComponent {
                   <div className="account-settings__photo-field">
                     <div className="account-settings__photo-info">
                       <div className="account-settings__photo">
-                        <img
-                          className="account-settings__photo-img"
-                          src={values.avatar_url}
-                          alt="LOGO"
-                        />
+                        {this.getAvatarImage(values)}
                         <label className="account-settings__upload">
                           <Upload className="account-settings__upload-icon" />
                           <input
