@@ -259,7 +259,7 @@ class AccountProfileView(LoginRequiredMixin, RemarkView):
         )[0]
 
         try:
-            business = Business.objects.get(public_id=data["company"])
+            business = Business.objects.get(name=data["company"])
         except Business.DoesNotExist:
             business = Business(name=data["company"])
         for role in data["company_roles"]:
