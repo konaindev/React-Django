@@ -312,3 +312,7 @@ class AccountProfileView(LoginRequiredMixin, RemarkView):
         user = request.user
         self.update_profile(user, form.cleaned_data)
         return JsonResponse(user.get_profile_data(), status=200)
+
+
+class EmailReportsView(LoginRequiredMixin, RemarkView):
+    pass

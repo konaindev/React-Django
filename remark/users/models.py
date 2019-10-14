@@ -6,10 +6,10 @@ from django.contrib.auth.models import PermissionsMixin
 from django.utils.crypto import get_random_string
 from django.urls import reverse
 
-from remark.lib.collections import invert_dict
 from remark.lib.tokens import public_id
 from remark.lib.fields import NormalizedEmailField
-from .constants import ACCOUNT_TYPE, BUSINESS_TYPE
+from remark.projects.models import Project
+from .constants import ACCOUNT_TYPE
 
 
 def usr_public_id():
@@ -140,6 +140,8 @@ class User(PermissionsMixin, AbstractBaseUser):
     is_show_tutorial = models.BooleanField(
         default=True, help_text="Should there be tutorial showing"
     )
+
+    report_projects = models.ManyToManyField(Project)
 
     USERNAME_FIELD = "email"
     EMAIL_FIELD = "email"
