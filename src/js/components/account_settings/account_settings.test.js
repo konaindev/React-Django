@@ -33,7 +33,9 @@ describe("AccountSettings", () => {
   it("email reports 'Portfolio' tab", () => {
     const tree = renderer
       .create(
-        <Provider store={createStore(() => ({}))}>
+        <Provider
+          store={createStore(() => ({ accountSettings: { properties } }))}
+        >
           <AccountSettings
             initialItem="email"
             itemsOrder={props.itemsOrder}
@@ -41,7 +43,6 @@ describe("AccountSettings", () => {
             tabsOrder={props.tabsOrder}
             portfolioProperties={portfolio}
             groupsProperties={groups}
-            properties={properties}
           />
         </Provider>
       )
@@ -51,7 +52,9 @@ describe("AccountSettings", () => {
   it("email reports 'Groups' tab", () => {
     const tree = renderer
       .create(
-        <Provider store={createStore(() => ({}))}>
+        <Provider
+          store={createStore(() => ({ accountSettings: { properties } }))}
+        >
           <AccountSettings
             initialItem="email"
             itemsOrder={props.itemsOrder}
@@ -59,7 +62,6 @@ describe("AccountSettings", () => {
             tabsOrder={props.tabsOrder}
             portfolioProperties={portfolio}
             groupsProperties={groups}
-            properties={properties}
           />
         </Provider>
       )
@@ -69,7 +71,11 @@ describe("AccountSettings", () => {
   it("email reports 'Properties' tab", () => {
     const tree = renderer
       .create(
-        <Provider store={createStore(() => ({}))}>
+        <Provider
+          store={createStore(() => ({
+            accountSettings: { properties: properties.slice(0, 5) }
+          }))}
+        >
           <AccountSettings
             initialItem="email"
             itemsOrder={props.itemsOrder}
@@ -77,7 +83,6 @@ describe("AccountSettings", () => {
             tabsOrder={props.tabsOrder}
             portfolioProperties={portfolio}
             groupsProperties={groups}
-            properties={properties.slice(0, 5)}
           />
         </Provider>
       )

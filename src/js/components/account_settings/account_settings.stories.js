@@ -8,6 +8,7 @@ import { storiesOf } from "@storybook/react";
 import { properties, groups, portfolio } from "../email_reporting_table/props";
 import AccountSettings from "./index";
 import { props } from "./props";
+import accountSettings from "../../state/reducers/account_settings";
 
 function validateSecurity(values) {
   const errors = {};
@@ -50,8 +51,10 @@ storiesOf("AccountSettings", module)
   ))
   .add(
     "Email Reports",
-    withState({ groups, properties })(({ store }) => (
-      <Provider store={createStore(() => ({}))}>
+    withState({ groups })(({ store }) => (
+      <Provider
+        store={createStore(() => ({ accountSettings: { properties } }))}
+      >
         <AccountSettings
           initialItem="email"
           itemsOrder={props.itemsOrder}
@@ -59,7 +62,6 @@ storiesOf("AccountSettings", module)
           initialTab={props.initialTab}
           portfolioProperties={portfolio}
           groupsProperties={store.state.groups}
-          properties={store.state.properties}
           onGroupsSort={sort => onSort(store, "groups", sort)}
           onPropertiesSort={sort => onSort(store, "properties", sort)}
           onPropertiesSearch={value =>
