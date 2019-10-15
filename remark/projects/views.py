@@ -16,6 +16,7 @@ from django.utils import timezone
 from remark.lib.views import ReactView, APIView
 from remark.admin import admin_site
 from remark.users.models import User
+from remark.users.constants import PROJECT_ROLES
 from remark.email_app.invites.added_to_property import send_invite_email
 
 from .reports.selectors import (
@@ -336,6 +337,10 @@ class AddMembersView(LoginRequiredMixin, APIView):
         projects_ids = [p.get("property_id") for p in payload.get("projects", [])]
         projects = Project.objects.filter(public_id__in=projects_ids)
 
+        for project in projects:
+            if not project.is_admin(request.user):
+                return self.render_403()
+
         users = []
         for member in members:
             is_new = member.get("__isNew__", False)
@@ -349,11 +354,16 @@ class AddMembersView(LoginRequiredMixin, APIView):
                 user = User.objects.get(public_id=public_id)
             users.append(user)
 
+        role = payload.get("role")
         for project in projects:
             for user in users:
-                project.view_group.user_set.add(user)
-                send_invite_email.apply_async(args=(inviter_name, user.id, projects_ids), countdown=2)
+                if role == PROJECT_ROLES["admin"]:
+                    project.admin_group.user_set.add(user)
+                else:
+                    project.view_group.user_set.add(user)
             project.save()
+        for user in users:
+            send_invite_email.apply_async(args=(inviter_name, user.id, projects_ids), countdown=2)
         projects_list = [
             {"property_id": p.public_id, "members": p.get_members()} for p in projects
         ]
