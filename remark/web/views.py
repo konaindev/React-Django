@@ -9,7 +9,6 @@ from rest_framework.response import Response
 
 from remark.projects.models import Project
 import remark.lib.cache as cache_lib
-from remark.lib.views import ReactView, RemarkView, APIView
 
 from .constants import DEFAULT_LANGUAGE
 from .forms import LocalizationForm
