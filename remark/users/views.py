@@ -267,7 +267,7 @@ class AccountSecurityView(LoginRequiredMixin, RemarkView):
 
 class AccountProfileView(LoginRequiredMixin, RemarkView):
     def update_profile(self, user, data):
-        office_address = geocode(data["office_address"])
+        office_address = data["office_address"]
         address = Address.objects.get_or_create(
             formatted_address=office_address.formatted_address,
             street_address_1=office_address.street_address,
