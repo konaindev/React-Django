@@ -255,6 +255,6 @@ class AccountSecurityView(LoginRequiredMixin, RemarkView):
         if data["password"]:
             user.set_password(data["password"])
             update_session_auth_hash(request, user)
-            message = "Password has successfuly been reset."
+            message = "Password has successfully been reset."
         user.save()
         return JsonResponse({"message": message}, status=200)
