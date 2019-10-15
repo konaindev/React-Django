@@ -196,6 +196,7 @@ class PropertyListTestCase(TestCase):
                 "account_name": self.account.company_name,
                 "email": self.user.email,
                 "logout_url": "/users/logout/",
+                "account_settings_url": "/users/account-settings",
                 "user_id": self.user.public_id,
             },
         }
@@ -260,6 +261,7 @@ class PropertyListTestCase(TestCase):
                 "account_name": self.account.company_name,
                 "email": self.user.email,
                 "logout_url": "/users/logout/",
+                "account_settings_url": "/users/account-settings",
                 "user_id": self.user.public_id,
             },
         }

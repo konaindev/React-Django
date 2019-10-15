@@ -5,6 +5,7 @@ from django.contrib.auth import (
     views as auth_views,
     login as auth_login,
     password_validation,
+    update_session_auth_hash,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect, JsonResponse
@@ -19,12 +20,12 @@ from remark.geo.models import Address
 from remark.geo.geocode import geocode
 from remark.projects.models import Project
 from remark.settings import LOGIN_URL
-from remark.lib.views import ReactView, RemarkView, APIView
+from remark.lib.views import LoginRequiredReactView, ReactView, RemarkView, APIView
 from remark.email_app.invites.added_to_property import send_invite_email
 from remark.settings import INVITATION_EXP
 
-from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES
-from .forms import AccountCompleteForm
+from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES, VALIDATION_RULES_LIST
+from .forms import AccountCompleteForm, AccountSecurityForm
 from .models import User
 
 
@@ -229,3 +230,31 @@ class ResendInviteView(APIView):
         projects_ids = [p.public_id for p in projects]
         send_invite_email.apply_async(args=(user.id, projects_ids), countdown=2)
         return self.render_success()
+
+
+class AccountSettingsView(LoginRequiredReactView):
+    page_class = "AccountSettings"
+    page_title = "Account Settings"
+
+    def get(self, request):
+        return self.render(
+            rules=VALIDATION_RULES_LIST,
+            user=request.user.get_menu_dict())
+
+
+class AccountSecurityView(LoginRequiredMixin, RemarkView):
+    def post(self, request):
+        user = request.user
+        params = json.loads(request.body)
+        form = AccountSecurityForm(params, user=user)
+        if not form.is_valid():
+            return JsonResponse(form.errors.get_json_data(), status=500)
+        data = form.cleaned_data
+        user.email = data["email"]
+        message = "Email change successful."
+        if data["password"]:
+            user.set_password(data["password"])
+            update_session_auth_hash(request, user)
+            message = "Password has successfully been reset."
+        user.save()
+        return JsonResponse({"message": message}, status=200)

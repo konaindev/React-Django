@@ -1,4 +1,13 @@
-import PropTypes from "prop-types";
+const user = {
+  account_id: 1,
+  account_name: "Remarkably",
+  account_settings_url: "/users/account-settings",
+  email: "test@psl.com",
+  logout_url: "/users/logout/",
+  user_id: "usr_jjzpeyfeshzpaha5"
+};
+
+const itemsOrder = ["profile", "lock", "email"];
 
 const rules = [
   {
@@ -38,4 +47,4 @@ const person = {
   office_type: { label: "Regional", value: "regional" }
 };
 
-export const props = { rules, person };
+export const props = { rules, person, user, itemsOrder };

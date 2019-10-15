@@ -45,6 +45,124 @@ exports[`AccountSettings account security tab 1`] = `
               </a>
             </div>
           </div>
+          <nav
+            className="page-header__items-outer"
+          >
+            <ul
+              className="page-header__items-inner"
+              style={
+                Object {
+                  "gridTemplateColumns": "repeat(1, 1fr)",
+                }
+              }
+            >
+              <li
+                className="page-header__item"
+              >
+                <div
+                  className="user-menu"
+                >
+                  <div
+                    className="select user-menu__select css-2b097c-container"
+                    onKeyDown={[Function]}
+                  >
+                    <div
+                      className="select__control css-yk16xz-control"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <div
+                        className="select__value-container css-1hwfws3"
+                      >
+                        <div
+                          className="user-menu__image-container"
+                        >
+                          <div
+                            className="user-menu__image user-menu__image--default"
+                          />
+                          <div
+                            className="user-menu__image"
+                            style={
+                              Object {
+                                "backgroundImage": "url()",
+                              }
+                            }
+                          />
+                        </div>
+                        <input
+                          className="css-62g3xt-dummyInput"
+                          disabled={false}
+                          id="react-select-2-input"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          readOnly={true}
+                          tabIndex="0"
+                          value=""
+                        />
+                      </div>
+                      <div
+                        className="select__indicators css-1wy0on6"
+                      >
+                        <span
+                          className="select__indicator-separator css-1okebmr-indicatorSeparator"
+                        />
+                        <div
+                          aria-hidden="true"
+                          className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <svg
+                            aria-hidden="true"
+                            className="select__dropdown-arrow select__dropdown-arrow--down"
+                            color="inherit"
+                            focusable="false"
+                            height="1em"
+                            role="presentation"
+                            viewBox="0 0 10 5"
+                            width="1em"
+                          >
+                            <path
+                              d="M1 1.16134L4.92334 4.5"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                            />
+                            <path
+                              d="M8.82812 1.16134L5 4.5"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                          <svg
+                            aria-hidden="true"
+                            className="select__dropdown-arrow select__dropdown-arrow--up"
+                            color="inherit"
+                            focusable="false"
+                            height="1em"
+                            role="presentation"
+                            viewBox="0 0 10 5"
+                            width="1em"
+                          >
+                            <path
+                              d="M1 3.83866L4.92334 0.5"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                            />
+                            <path
+                              d="M8.82812 3.83866L5 0.5"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </div>
@@ -228,7 +346,7 @@ exports[`AccountSettings account security tab 1`] = `
                   onBlur={[Function]}
                   onChange={[Function]}
                   type="text"
-                  value=""
+                  value="test@psl.com"
                 />
                 <div
                   className="account-settings__error"
@@ -1892,6 +2010,124 @@ exports[`AccountSettings profile tab 1`] = `
               </a>
             </div>
           </div>
+          <nav
+            className="page-header__items-outer"
+          >
+            <ul
+              className="page-header__items-inner"
+              style={
+                Object {
+                  "gridTemplateColumns": "repeat(1, 1fr)",
+                }
+              }
+            >
+              <li
+                className="page-header__item"
+              >
+                <div
+                  className="user-menu"
+                >
+                  <div
+                    className="select user-menu__select css-2b097c-container"
+                    onKeyDown={[Function]}
+                  >
+                    <div
+                      className="select__control css-yk16xz-control"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <div
+                        className="select__value-container css-1hwfws3"
+                      >
+                        <div
+                          className="user-menu__image-container"
+                        >
+                          <div
+                            className="user-menu__image user-menu__image--default"
+                          />
+                          <div
+                            className="user-menu__image"
+                            style={
+                              Object {
+                                "backgroundImage": "url()",
+                              }
+                            }
+                          />
+                        </div>
+                        <input
+                          className="css-62g3xt-dummyInput"
+                          disabled={false}
+                          id="react-select-3-input"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          readOnly={true}
+                          tabIndex="0"
+                          value=""
+                        />
+                      </div>
+                      <div
+                        className="select__indicators css-1wy0on6"
+                      >
+                        <span
+                          className="select__indicator-separator css-1okebmr-indicatorSeparator"
+                        />
+                        <div
+                          aria-hidden="true"
+                          className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <svg
+                            aria-hidden="true"
+                            className="select__dropdown-arrow select__dropdown-arrow--down"
+                            color="inherit"
+                            focusable="false"
+                            height="1em"
+                            role="presentation"
+                            viewBox="0 0 10 5"
+                            width="1em"
+                          >
+                            <path
+                              d="M1 1.16134L4.92334 4.5"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                            />
+                            <path
+                              d="M8.82812 1.16134L5 4.5"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                          <svg
+                            aria-hidden="true"
+                            className="select__dropdown-arrow select__dropdown-arrow--up"
+                            color="inherit"
+                            focusable="false"
+                            height="1em"
+                            role="presentation"
+                            viewBox="0 0 10 5"
+                            width="1em"
+                          >
+                            <path
+                              d="M1 3.83866L4.92334 0.5"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                            />
+                            <path
+                              d="M8.82812 3.83866L5 0.5"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </div>
@@ -2328,7 +2564,7 @@ exports[`AccountSettings profile tab 1`] = `
                         <input
                           className="css-62g3xt-dummyInput"
                           disabled={false}
-                          id="react-select-2-input"
+                          id="react-select-4-input"
                           onBlur={[Function]}
                           onChange={[Function]}
                           onFocus={[Function]}
@@ -2484,7 +2720,7 @@ exports[`AccountSettings profile tab 1`] = `
                         <input
                           className="css-62g3xt-dummyInput"
                           disabled={false}
-                          id="react-select-3-input"
+                          id="react-select-5-input"
                           onBlur={[Function]}
                           onChange={[Function]}
                           onFocus={[Function]}
