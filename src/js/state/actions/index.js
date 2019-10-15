@@ -1,5 +1,14 @@
 import { createActions, URLS } from "./helpers";
 
+export const dashboard = {
+  update: x => ({
+    type: "FETCH_API_GET",
+    url: `${URLS.base}${URLS.ver}${URLS.dashboard}`,
+    branch: "dashboard",
+    ...x
+  })
+};
+
 export const general = {
   set: newState => ({
     type: "GENERAL_SET_STATE",
@@ -81,6 +90,10 @@ export const token = {
   update: x => ({
     type: "UPDATE_TOKEN",
     token: x
+  }),
+  refresh: () => ({
+    type: "REFRESH_TOKEN",
+    url: `${URLS.base}${URLS.ver}${URLS.refresh}`
   })
 };
 

@@ -8,7 +8,8 @@ import {
   locations,
   market,
   kpi,
-  uiStrings
+  uiStrings,
+  token as tokenActions
 } from "../actions";
 import { axiosGet, axiosPost } from "../../utils/api";
 import ReactGa from "react-ga";
@@ -135,7 +136,7 @@ export const applyApiResult = _ => next => action => {
           next(kpi.set(action.response));
           break;
         }
-        case "kpi": {
+        case "market": {
           next(market.set(action.response));
           break;
         }
@@ -144,6 +145,7 @@ export const applyApiResult = _ => next => action => {
           break;
         }
         case "dashboard": {
+          //next(locations.set(action.reponse.locations));
           next(general.update(action.response));
           break;
         }
@@ -152,7 +154,7 @@ export const applyApiResult = _ => next => action => {
           break;
         }
         default:
-          next(action); // <-- pass this on if we didn't find a banch
+          next(action); // <-- pass this on if we didn't find a branch
           break;
       }
       break;
@@ -225,6 +227,21 @@ export const fetchUIString = store => next => action => {
         } else {
           throw response;
         }
+      })
+      .catch(e => console.log("-----> ERROR", e));
+  } else {
+    next(action);
+  }
+};
+
+export const refreshToken = store => next => action => {
+  if (action.type === "REFRESH_TOKEN") {
+    const { token } = store.getState();
+    const { refresh } = token;
+    axiosPost(action.url, { refresh })
+      .then(response => {
+        console.log("refreshToken middleware,,,,,,", response);
+        next(tokenActions.update({ refresh, access: response.data.access }));
       })
       .catch(e => console.log("-----> ERROR", e));
   } else {

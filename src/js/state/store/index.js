@@ -13,7 +13,8 @@ import {
   applyApiResult,
   logoutMiddleware,
   fetchInviteModal,
-  fetchUIString
+  fetchUIString,
+  refreshToken
 } from "../middleware";
 import sagas from "../../utils/network";
 
@@ -44,7 +45,8 @@ export default () => {
         sagaMiddleware,
         logoutMiddleware,
         fetchInviteModal,
-        fetchUIString
+        fetchUIString,
+        refreshToken
       )
     )
   );

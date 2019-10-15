@@ -9,7 +9,8 @@ export const URLS = {
   market: "/market",
   kpi: "/kpi",
   project: "/projects",
-  tutorial: "/tutorial"
+  tutorial: "/tutorial",
+  dashboard: "/dashboard/"
 };
 
 export const createActions = branch => ({

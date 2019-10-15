@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { networking } from "../../state/actions";
+import { networking, token } from "../../state/actions";
 import { axiosGet, axiosPost } from "../api";
 
 /*
@@ -13,8 +13,13 @@ action.body === axios post body
 
 function* get(action) {
   try {
-    const response = yield call(axiosGet, ...action);
-    yield put(networking.results(response, action.branch));
+    const response = yield call(axiosGet, action.url);
+    // not authorized
+    if (response.status === 401) {
+      // we need to try to refresh
+      const refreshed = yield put(token.refresh());
+    }
+    yield put(networking.results(response.data, action.branch));
     yield put(networking.success());
   } catch (e) {
     console.log("something was wrong!!!", e);
@@ -29,6 +34,7 @@ function* post(action) {
     yield put(networking.success());
   } catch (e) {
     console.log("something was wrong!!!", e);
+    console.log(e);
     yield put(networking.fail(e.message));
   }
 }
