@@ -75,9 +75,9 @@ export const inviteModal = {
     type: "API_INVITE_MODAL_REMOVE_MEMBER",
     data: { project, member }
   }),
-  addMembers: (projects, members) => ({
+  addMembers: (projects, members, role) => ({
     type: "API_INVITE_MODAL_ADD_MEMBER",
-    data: { projects, members }
+    data: { projects, members, role }
   }),
   resend: (hash, callback) => ({
     type: "API_INVITE_RESEND",

@@ -959,6 +959,11 @@ exports[`DashboardPage Row select 1`] = `
             <div
               className="dashboard-selection__controls"
             >
+              <div
+                className="dashboard-selection__invite-error"
+              >
+                Some of the properties selected require admin access to invite users.
+              </div>
               <button
                 className="button button--secondary dashboard-selection__button"
                 onClick={[Function]}
@@ -3668,6 +3673,11 @@ exports[`DashboardPage Row view 1`] = `
             <div
               className="dashboard-selection__controls"
             >
+              <div
+                className="dashboard-selection__invite-error"
+              >
+                Some of the properties selected require admin access to invite users.
+              </div>
               <button
                 className="button button--secondary dashboard-selection__button"
                 onClick={[Function]}
@@ -6377,6 +6387,11 @@ exports[`DashboardPage renders correctly 1`] = `
             <div
               className="dashboard-selection__controls"
             >
+              <div
+                className="dashboard-selection__invite-error"
+              >
+                Some of the properties selected require admin access to invite users.
+              </div>
               <button
                 className="button button--secondary dashboard-selection__button"
                 onClick={[Function]}
