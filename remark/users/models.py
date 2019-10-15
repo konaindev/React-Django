@@ -150,15 +150,17 @@ class User(PermissionsMixin, AbstractBaseUser):
     objects = UserManager()
 
     def get_menu_dict(self):
-        return {
+        data = {
             "email": self.email,
             "user_id": self.public_id,
             "account_id": self.account_id,
             "account_name": self.account.company_name,
             "logout_url": reverse("logout"),
-            "account_settings_url": reverse("account_settings"),
             "profile_image_url": self.get_avatar_url(),
         }
+        if not self.is_superuser:
+            data["account_settings_url"] = reverse("account_settings")
+        return data
 
     def get_role(self):
         person = self.person_set.first()
