@@ -152,7 +152,6 @@ class User(PermissionsMixin, AbstractBaseUser):
             "user_id": self.public_id,
             "account_id": self.account_id,
             "account_name": self.account.company_name,
-            "logout_url": reverse("logout")
             # TODO: Add account_url
         }
 

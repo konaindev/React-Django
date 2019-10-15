@@ -49,7 +49,6 @@ class DashboardView(APIView):
                 address=f"{address.city}, {address.state}",
                 image_url=project.get_building_image()[1],
                 performance_rating=project.get_performance_rating(),
-                url=project.get_report_url(),
                 members=project.get_members(),
             )
             return project_details
