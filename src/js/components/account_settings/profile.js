@@ -10,7 +10,7 @@ import Button from "../button";
 import Input from "../input";
 import MultiSelect from "../multi_select";
 import Select from "../select";
-import { profileSchema } from "./validators";
+import { MAX_AVATAR_SIZE, profileSchema } from "./validators";
 
 export default class Profile extends React.PureComponent {
   static propTypes = {
@@ -61,11 +61,6 @@ export default class Profile extends React.PureComponent {
 
   state = { fieldsSubmitted: false };
 
-  constructor(props) {
-    super(props);
-    this.formik = React.createRef();
-  }
-
   get initialValues() {
     let profile = { ...this.props.profile };
     if (!Object.keys(profile).length) {
@@ -109,13 +104,15 @@ export default class Profile extends React.PureComponent {
   onFileUpload = e => {
     this.unsetMessage();
     const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onload = e => {
-      this.formik.setFieldValue("avatar_url", e.target.result);
-    };
-    reader.readAsDataURL(file);
     this.formik.setFieldValue("avatar", file);
     this.formik.setFieldTouched("avatar", true);
+    if (file.size <= MAX_AVATAR_SIZE) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        this.formik.setFieldValue("avatar_url", e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   getFieldClasses = (name, errors, touched, modifiers = []) => {
