@@ -154,8 +154,8 @@ class User(PermissionsMixin, AbstractBaseUser):
             "account_id": self.account_id,
             "account_name": self.account.company_name,
             "logout_url": reverse("logout"),
-            "account_settings_url": reverse("account_settings")
-            # TODO: Add account_url
+            "account_settings_url": reverse("account_settings"),
+            "profile_image_url": self.get_avatar_url(),
         }
 
     def get_role(self):

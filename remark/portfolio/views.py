@@ -161,7 +161,7 @@ class PortfolioTableView(LoginRequiredMixin, PortfolioMixin, ReactView):
             "selected_kpi_bundle": bundle,
             "kpi_order": self.kpi_ordering(bundle),
             "date_selection": self.get_date_selection(period_group, start, end),
-            "user": self.get_user_info(),
+            "user": request.user.get_menu_dict(),
             "table_data": table_data,
             "highlight_kpis": self.get_highlight_kpis(portfolio_average, kpis_to_include),
             "display_average": "1" if show_averages else "0"
@@ -262,17 +262,6 @@ class PortfolioTableView(LoginRequiredMixin, PortfolioMixin, ReactView):
                 "value": kpi
             })
         return result
-
-    def get_user_info(self):
-        # TODO: Fix me
-        return {
-            "email": "test@remarkably.io",
-            "user_id": "peep_12345",
-            "account_id": "acc_12345",
-            "account_name": "Remarkably",
-            "logout_url": "/users/logout",
-            "profile_image_url": None
-        }
 
     def get_date_selection(self, period_group, start, end):
         # Removing 1 day to make inclusive end date

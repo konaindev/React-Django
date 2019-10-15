@@ -1,8 +1,9 @@
 import Yup from "../../yup";
 
+export const MAX_AVATAR_SIZE = 3 * 1024 * 1024; // Bytes in 3MB
+
 const phoneRegex = /^\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$/;
 const invalidPhoneMessage = "${path} should match format (XXX) XXX-XXXX";
-const maxAvatarSize = 3 * 1024 * 1024; // Bytes in 3MB
 
 const securitySchema = Yup.object().shape({
   email: Yup.string()
@@ -33,7 +34,7 @@ const profileSchema = Yup.object().shape({
   avatar: Yup.mixed().test(
     "maxFileSize",
     "Profile image size is over the 3MB limit.",
-    file => !file || file.size <= maxAvatarSize
+    file => !file || file.size <= MAX_AVATAR_SIZE
   ),
   avatar_url: Yup.string(),
   first_name: Yup.string()
