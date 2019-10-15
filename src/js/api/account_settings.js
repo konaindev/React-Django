@@ -7,7 +7,7 @@ export const updateSecurityData = data =>
 export const updateProfileData = data =>
   axiosPost(`${process.env.BASE_URL}/users/account-profile`, data);
 
-export const updateReportsData = data =>
+export const updateReportsSettingsData = data =>
   axiosPost(`${process.env.BASE_URL}/users/account-reports`, data);
 
 export const getPropertiesData = data => {

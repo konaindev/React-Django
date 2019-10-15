@@ -12,7 +12,8 @@ import {
 import {
   getPropertiesData,
   updateProfileData,
-  updateReportsData
+  updateReportsSettingsData,
+  updateSecurityData
 } from "../../api/account_settings";
 import { axiosGet, axiosPost } from "../../utils/api";
 
@@ -204,6 +205,30 @@ export const fetchUIString = store => next => action => {
   }
 };
 
+export const updateAccountSecurity = store => next => action => {
+  if (action.type === "API_SECURITY_ACCOUNT") {
+    if (action.data) {
+      updateSecurityData(action.data)
+        .then(response => {
+          if (response.status === 200) {
+            action.callback(response.data.message);
+          } else {
+            throw response;
+          }
+        })
+        .catch(e => {
+          if (e.response.data && _isObject(e.response.data)) {
+            action.onError(e.response.data);
+          } else {
+            console.log("-----> ERROR", e);
+          }
+        });
+    }
+  } else {
+    next(action);
+  }
+};
+
 export const updateAccountProfile = store => next => action => {
   if (action.type === "API_ACCOUNT_PROFILE") {
     if (action.data) {
@@ -228,10 +253,10 @@ export const updateAccountProfile = store => next => action => {
   }
 };
 
-export const updateAccountReports = store => next => action => {
+export const updateReportsSettings = store => next => action => {
   if (action.type === "API_ACCOUNT_REPORTS") {
     if (action.data) {
-      updateReportsData(action.data)
+      updateReportsSettingsData(action.data)
         .then(response => {
           if (response.status === 200) {
             action.callback(response.data);

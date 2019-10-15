@@ -7,6 +7,7 @@ from remark.decorators import anonymous_required
 
 from .views import (
     AccountProfileView,
+    AccountSecurityView,
     AccountSettingsView,
     CompleteAccountView,
     CreatePasswordView,
@@ -103,6 +104,7 @@ urlpatterns = [
     ),
     path("validate-password", ValidatePasswordView.as_view(), name="validate_password"),
     path("account-settings", AccountSettingsView.as_view(), name="account_settings"),
+    path("account-security", AccountSecurityView.as_view(), name="account_security"),
     path("account-profile", AccountProfileView.as_view(), name="account_profile"),
     path("account-reports", AccountReportsView.as_view(), name="account_reports"),
 ]

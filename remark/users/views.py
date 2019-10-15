@@ -5,6 +5,7 @@ from django.contrib.auth import (
     views as auth_views,
     login as auth_login,
     password_validation,
+    update_session_auth_hash,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ValidationError
@@ -25,7 +26,7 @@ from remark.email_app.invites.added_to_property import send_invite_email
 from remark.settings import INVITATION_EXP
 
 from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES, VALIDATION_RULES_LIST
-from .forms import AccountCompleteForm, AccountProfileForm
+from .forms import AccountCompleteForm, AccountProfileForm, AccountSecurityForm
 from .models import User
 
 
@@ -244,6 +245,24 @@ class AccountSettingsView(LoginRequiredReactView):
             company_roles=COMPANY_ROLES,
             office_options=OFFICE_OPTIONS,
             user=request.user.get_menu_dict())
+
+
+class AccountSecurityView(LoginRequiredMixin, RemarkView):
+    def post(self, request):
+        user = request.user
+        params = json.loads(request.body)
+        form = AccountSecurityForm(params, user=user)
+        if not form.is_valid():
+            return JsonResponse(form.errors.get_json_data(), status=500)
+        data = form.cleaned_data
+        user.email = data["email"]
+        message = "Email change successful."
+        if data["password"]:
+            user.set_password(data["password"])
+            update_session_auth_hash(request, user)
+            message = "Password has successfully been reset."
+        user.save()
+        return JsonResponse({"message": message}, status=200)
 
 
 class AccountProfileView(LoginRequiredMixin, RemarkView):

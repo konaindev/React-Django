@@ -346,7 +346,7 @@ exports[`AccountSettings account security tab 1`] = `
                   onBlur={[Function]}
                   onChange={[Function]}
                   type="text"
-                  value=""
+                  value="test@psl.com"
                 />
                 <div
                   className="account-settings__error"

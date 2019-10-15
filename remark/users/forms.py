@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth import password_validation
 from django import forms
 
 from remark.crm.models import Person
@@ -71,6 +72,43 @@ class AccountCompleteForm(forms.Form):
     office_name = forms.CharField(max_length=255, required=True)
     office_type = forms.ChoiceField(choices=OFFICE_TYPES, required=True)
     terms = forms.BooleanField(required=True)
+
+
+class AccountSecurityForm(forms.Form):
+    email = forms.EmailField(max_length=254, required=True)
+
+    old_password = forms.CharField(required=False)
+    password = forms.CharField(required=False)
+    confirm_password = forms.CharField(required=False)
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop("user", None)
+        super(AccountSecurityForm, self).__init__(*args, **kwargs)
+
+    def clean_old_password(self):
+        password = self.cleaned_data["old_password"]
+        if password and not self.user.check_password(password):
+            raise forms.ValidationError("Password is not correct.")
+        return password
+
+    def clean_password(self):
+        password = self.cleaned_data["password"]
+        if password:
+            password_validation.validate_password(password, user=self.user)
+        return password
+
+    def clean(self):
+        cleaned_data = super().clean()
+        required_msg = forms.Field.default_error_messages["required"]
+        password = cleaned_data.get("password")
+        if password:
+            if "old_password" in cleaned_data and not cleaned_data["old_password"]:
+                self.add_error("old_password", required_msg)
+            if not cleaned_data["confirm_password"]:
+                self.add_error("confirm_password", required_msg)
+            elif password != cleaned_data["confirm_password"]:
+                self.add_error("__all__", "New passwords don’t match.")
+        return cleaned_data
 
 
 class AccountProfileForm(forms.Form):
