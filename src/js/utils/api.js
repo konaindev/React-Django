@@ -1,14 +1,20 @@
 import axios from "axios";
-
+import { store } from "../App";
 import { getCSRFToken } from "./csrf";
 
 export function axiosPost(url, data, headers = {}, csrfProtect = true) {
+  const { token } = store.getState();
+  const { access } = token;
+
   const config = {
     method: "post",
     headers: { ...headers },
     data,
     url
   };
+  if (access) {
+    config.headers["Authorization"] = `bearer ${access}`;
+  }
   if (data.toString() === "[object FormData]") {
     config.headers["content-type"] = "multipart/form-data";
   }
@@ -19,6 +25,8 @@ export function axiosPost(url, data, headers = {}, csrfProtect = true) {
 }
 
 export function axiosGet(url, config = {}) {
+  const { token } = store.getState();
+  const { access } = token;
   const params = {
     method: "get",
     headers: { Accept: "application/json" },
@@ -26,5 +34,8 @@ export function axiosGet(url, config = {}) {
     withCredentials: true,
     ...config
   };
+  if (access) {
+    params.headers["Authorization"] = `bearer ${access}`;
+  }
   return axios(params);
 }

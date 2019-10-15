@@ -1,7 +1,8 @@
 export const URLS = {
   base: process.env.BASE_URL || "http//localhost:8000",
-  login: "/api/token/",
-  refresh: "/api/token/refresh/",
+  ver: process.env.API_VERSION || "/api/v1",
+  login: "/token/",
+  refresh: "/token/refresh/",
   portfolio: "/portfolio",
   locations: "/locations",
   asset_managers: "/asset_managers",
@@ -17,12 +18,12 @@ export const createActions = branch => ({
     ...args,
     type: "FETCH_API_GET",
     branch,
-    url: args.url || `${URLS.base}${URLS[branch]}`
+    url: args.url || `${URLS.base}${URLS.ver}${URLS[branch]}`
   }),
   post: args => ({
     ...args,
     type: "FETCH_API_POST",
     branch,
-    url: args.url || `${URLS.base}${URLS[branch]}`
+    url: args.url || `${URLS.base}${URLS.ver}${URLS[branch]}`
   })
 });

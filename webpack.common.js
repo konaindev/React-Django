@@ -79,6 +79,9 @@ module.exports = {
         LOAD_SB_PROPS: JSON.stringify(process.env.LOAD_SB_PROPS)
       }
     }),
+    new webpack.DefinePlugin({
+      "process.env": { API_VERSION: JSON.stringify(process.env.API_VERSION) }
+    }),
     new HtmlWebPackPlugin({
       template: "./src/index.html",
       filename: "./index.html"
