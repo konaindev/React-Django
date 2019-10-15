@@ -251,7 +251,7 @@ export const fetchAccountProperties = store => next => action => {
     getPropertiesData(action.data)
       .then(response => {
         if (response.status === 200) {
-          next(accountSettings.set(response.data.properties));
+          next(accountSettings.set(response.data));
         } else {
           throw response;
         }

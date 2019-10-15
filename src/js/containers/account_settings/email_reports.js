@@ -5,6 +5,10 @@ import EmailReports from "../../components/account_settings/email_reports";
 
 const EmailReportsContainer = props => <EmailReports {...props} />;
 
-const mapState = state => ({ properties: state.accountSettings.properties });
+const mapState = state => ({
+  properties: state.accountSettings.properties,
+  pageNum: state.accountSettings.pageNum,
+  hasNextPage: state.accountSettings.hasNextPage
+});
 
 export default connect(mapState)(EmailReportsContainer);

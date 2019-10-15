@@ -102,8 +102,12 @@ export const accountSettings = {
     type: "API_ACCOUNT_REPORT_PROPERTIES",
     data
   }),
-  set: properties => ({
+  set: data => ({
     type: "SET_ACCOUNT_REPORTS_PROPERTIES",
-    properties
+    data
+  }),
+  clear: data => ({
+    type: "CLEAR_ACCOUNT_REPORTS_PROPERTIES",
+    data
   })
 };

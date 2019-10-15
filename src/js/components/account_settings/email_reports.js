@@ -1,3 +1,4 @@
+import _has from "lodash/has";
 import _isEqual from "lodash/isEqual";
 import _pickBy from "lodash/pickBy";
 import PropTypes from "prop-types";
@@ -22,6 +23,8 @@ export default class EmailReports extends React.PureComponent {
     portfolioProperties: PropTypes.arrayOf(PropTypes.object),
     groupsProperties: PropTypes.arrayOf(PropTypes.object),
     initialSort: PropTypes.oneOf(["desc", "asc"]),
+    pageNum: PropTypes.number,
+    hasNextPage: PropTypes.bool,
     onGroupsSort: PropTypes.func,
     onPropertiesSort: PropTypes.func,
     onGroupsSearch: PropTypes.func,
@@ -34,6 +37,8 @@ export default class EmailReports extends React.PureComponent {
     groupsProperties: [],
     properties: [],
     initialSort: "asc",
+    pageNum: 1,
+    hasNextPage: false,
     onGroupsSort() {},
     onPropertiesSort() {},
     onGroupsSearch() {},
@@ -62,6 +67,10 @@ export default class EmailReports extends React.PureComponent {
     this.props.dispatch(
       accountSettings.getProperties({ d: this.state.propertiesSort })
     );
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(accountSettings.clear());
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -196,9 +205,10 @@ export default class EmailReports extends React.PureComponent {
           <EmailReportingTable
             className="account-settings__reporting-table"
             properties={properties}
-            propertiesCount={properties.length}
+            showLoadBtn={this.props.hasNextPage}
             propertiesToggled={this.state.propertiesToggled}
             onToggleRow={this.onPropertyRowToggle}
+            onLoad={this.loadProperties}
           />
         </div>
       </Tab>
@@ -206,9 +216,14 @@ export default class EmailReports extends React.PureComponent {
   }
 
   _getToggledProperties = properties => {
+    const currentToggled = this.state?.propertiesToggled || {};
     const propertiesToggled = {};
     for (let p of properties) {
-      propertiesToggled[p.id] = !!p.is_report;
+      if (_has(currentToggled, p.id)) {
+        propertiesToggled[p.id] = currentToggled[p.id];
+      } else {
+        propertiesToggled[p.id] = !!p.is_report;
+      }
     }
     return propertiesToggled;
   };
@@ -271,6 +286,19 @@ export default class EmailReports extends React.PureComponent {
     this.setState({ propertiesSort });
   };
 
+  loadProperties = () => {
+    if (!this.props.hasNextPage) {
+      return;
+    }
+    this.props.dispatch(
+      accountSettings.getProperties({
+        d: this.state.propertiesSort,
+        s: this.state.propertiesSearch,
+        p: this.props.pageNum + 1
+      })
+    );
+  };
+
   onPropertiesSearch = propertiesSearch => {
     clearTimeout(this.searchTimeout);
     this.searchTimeout = setTimeout(() => {
@@ -286,7 +314,7 @@ export default class EmailReports extends React.PureComponent {
 
   onSubmit = () => {
     const data = {
-      properties: Object.keys(_pickBy(this.state.propertiesToggled))
+      properties: this.state.propertiesToggled
     };
     this.props.dispatch({
       type: "API_ACCOUNT_REPORTS",

@@ -7,8 +7,9 @@ from django.contrib.auth import (
     password_validation,
 )
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import HttpResponseRedirect, JsonResponse
 from django.core.exceptions import ValidationError
+from django.core.paginator import Paginator
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.urls import reverse
@@ -303,6 +304,8 @@ class AccountProfileView(LoginRequiredMixin, RemarkView):
 
 
 class AccountReportsView(LoginRequiredMixin, RemarkView):
+    per_page_count = 3
+
     def serialize_project(self, project, for_reports_ids):
         return {
             "id": project.public_id,
@@ -328,14 +331,29 @@ class AccountReportsView(LoginRequiredMixin, RemarkView):
             ordering = f"-{ordering}"
         projects_q = projects_q.order_by(ordering)
 
+        paginator = Paginator(projects_q, self.per_page_count)
+        page_num = int(params.get("p", 1))
+        page = paginator.get_page(page_num)
+        has_hext = page.has_next()
+        projects_q = page.object_list
+
         for_reports_ids = [p.public_id for p in user.report_projects.all()]
         projects = [self.serialize_project(p, for_reports_ids) for p in projects_q]
-        return JsonResponse({"properties": projects}, status=200)
+        return JsonResponse({
+            "properties": projects,
+            "has_next_page": has_hext,
+            "page_num": page_num
+        }, status=200)
 
     def post(self, request):
         user = request.user
-        ids = json.loads(request.body)["properties"]
+        properties_toggled = json.loads(request.body)["properties"]
+        ids = properties_toggled.keys()
         projects = Project.objects.filter(public_id__in=ids)
-        user.report_projects.set(projects)
+        for p in projects:
+            if properties_toggled[p.public_id]:
+                user.report_projects.add(p)
+            else:
+                user.report_projects.remove(p)
         user.save()
         return JsonResponse({}, status=200)
