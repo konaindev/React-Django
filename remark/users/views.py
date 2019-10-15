@@ -304,7 +304,7 @@ class AccountProfileView(LoginRequiredMixin, RemarkView):
 
 
 class AccountReportsView(LoginRequiredMixin, RemarkView):
-    per_page_count = 3
+    per_page_count = 10
 
     def serialize_project(self, project, for_reports_ids):
         return {
