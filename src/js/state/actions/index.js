@@ -98,8 +98,9 @@ export const uiStrings = {
 };
 
 export const accountSettings = {
-  getProperties: () => ({
-    type: "API_ACCOUNT_REPORT_PROPERTIES"
+  getProperties: data => ({
+    type: "API_ACCOUNT_REPORT_PROPERTIES",
+    data
   }),
   set: properties => ({
     type: "SET_ACCOUNT_REPORTS_PROPERTIES",

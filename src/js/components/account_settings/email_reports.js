@@ -19,6 +19,7 @@ export default class EmailReports extends React.PureComponent {
     properties: PropTypes.arrayOf(PropTypes.object),
     portfolioProperties: PropTypes.arrayOf(PropTypes.object),
     groupsProperties: PropTypes.arrayOf(PropTypes.object),
+    initialSort: PropTypes.oneOf(["desc", "asc"]),
     onGroupsSort: PropTypes.func,
     onPropertiesSort: PropTypes.func,
     onGroupsSearch: PropTypes.func,
@@ -30,6 +31,7 @@ export default class EmailReports extends React.PureComponent {
     portfolioProperties: [],
     groupsProperties: [],
     properties: [],
+    initialSort: "asc",
     onGroupsSort() {},
     onPropertiesSort() {},
     onGroupsSearch() {},
@@ -39,15 +41,15 @@ export default class EmailReports extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    const propertiesToggled = this._getToggledProperties(this.props.properties);
-    const groupsToggled = this._getToggledProperties(
-      this.props.groupsProperties
-    );
+    const propertiesToggled = this._getToggledProperties(props.properties);
+    const groupsToggled = this._getToggledProperties(props.groupsProperties);
     const portfoliosToggled = this._getToggledProperties(
-      this.props.portfolioProperties
+      props.portfolioProperties
     );
     this.state = {
-      tabIndex: this.props.tabsOrder.indexOf(props.initialTab),
+      tabIndex: props.tabsOrder.indexOf(props.initialTab),
+      propertiesSort: props.initialSort,
+      propertiesSearch: null,
       portfoliosToggled,
       groupsToggled,
       propertiesToggled
@@ -55,7 +57,9 @@ export default class EmailReports extends React.PureComponent {
   }
 
   componentDidMount() {
-    this.props.dispatch(accountSettings.getProperties());
+    this.props.dispatch(
+      accountSettings.getProperties({ s: this.state.propertiesSort })
+    );
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -165,8 +169,8 @@ export default class EmailReports extends React.PureComponent {
               className="account-settings__search"
               placeholder="Search Properties"
               theme="gray"
-              initialSort="asc"
-              onSort={this.props.onPropertiesSort}
+              initialSort={this.props.initialSort}
+              onSort={this.onPropertiesSort}
               onSearch={this.props.onPropertiesSearch}
             />
             <ButtonToggle
@@ -246,6 +250,12 @@ export default class EmailReports extends React.PureComponent {
       [id]: checked
     };
     this.setState({ propertiesToggled });
+  };
+
+  onPropertiesSort = propertiesSort => {
+    this.props.onPropertiesSort(propertiesSort);
+    this.props.dispatch(accountSettings.getProperties({ s: propertiesSort }));
+    this.setState({ propertiesSort });
   };
 
   setSuccessMessage = () => {

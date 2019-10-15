@@ -316,6 +316,11 @@ class AccountReportsView(LoginRequiredMixin, RemarkView):
             projects_q = Project.objects.all()
         else:
             projects_q = Project.objects.get_all_for_user(user)
+        params = request.GET
+        ordering = "name"
+        if params.get("s") == "desc":
+            ordering = "-name"
+        projects_q = projects_q.order_by(ordering)
         for_reports_ids = [p.public_id for p in user.report_projects.all()]
         projects = [self.serialize_project(p, for_reports_ids) for p in projects_q]
         return JsonResponse({"properties": projects}, status=200)

@@ -248,7 +248,7 @@ export const updateAccountReports = store => next => action => {
 
 export const fetchAccountProperties = store => next => action => {
   if (action.type === "API_ACCOUNT_REPORT_PROPERTIES") {
-    getPropertiesData()
+    getPropertiesData(action.data)
       .then(response => {
         if (response.status === 200) {
           next(accountSettings.set(response.data.properties));
