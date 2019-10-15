@@ -1,6 +1,6 @@
 import renderer from "react-test-renderer";
 import PerformanceReportSpanDropdown from "./index";
-import { props } from "./performance_report_span_dropdown.stories";
+import { props } from "./props";
 
 describe("PerformanceReportSpanDropdown", () => {
   it("renders correctly", () => {
