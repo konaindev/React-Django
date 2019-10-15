@@ -200,6 +200,7 @@ class PropertyListTestCase(TestCase):
                 "logout_url": "/users/logout/",
                 "account_settings_url": "/users/account-settings",
                 "user_id": self.user.public_id,
+                'profile_image_url': '',
             },
         }
 
@@ -266,6 +267,7 @@ class PropertyListTestCase(TestCase):
                 "logout_url": "/users/logout/",
                 "account_settings_url": "/users/account-settings",
                 "user_id": self.user.public_id,
+                'profile_image_url': '',
             },
         }
 
