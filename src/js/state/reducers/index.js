@@ -1,6 +1,8 @@
 import _cloneDeep from "lodash/cloneDeep";
 import { combineReducers } from "redux";
 
+import accountSettings from "./account_settings";
+
 const initState = {
   tutorialView: {}
 };
@@ -218,5 +220,6 @@ export default combineReducers({
   createPassword,
   completeAccount,
   inviteModal,
-  uiStrings
+  uiStrings,
+  accountSettings
 });

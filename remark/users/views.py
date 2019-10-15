@@ -235,27 +235,13 @@ class AccountSettingsView(LoginRequiredReactView):
     page_class = "AccountSettings"
     page_title = "Account Settings"
 
-    def serialize_project(self, project, for_reports_ids):
-        return {
-            "id": project.public_id,
-            "name": project.name,
-            "is_report": project.public_id in for_reports_ids
-        }
-
     def get(self, request):
         user = request.user
-        if user.is_superuser:
-            projects_q = Project.objects.all()
-        else:
-            projects_q = Project.objects.get_all_for_user(user)
-        for_reports_ids = [p.public_id for p in user.report_projects.all()]
-        projects = [self.serialize_project(p, for_reports_ids) for p in projects_q]
         return self.render(
             rules=VALIDATION_RULES_LIST,
             profile=user.get_profile_data(),
             company_roles=COMPANY_ROLES,
             office_options=OFFICE_OPTIONS,
-            properties=projects,
             user=request.user.get_menu_dict())
 
 
@@ -317,6 +303,23 @@ class AccountProfileView(LoginRequiredMixin, RemarkView):
 
 
 class AccountReportsView(LoginRequiredMixin, RemarkView):
+    def serialize_project(self, project, for_reports_ids):
+        return {
+            "id": project.public_id,
+            "name": project.name,
+            "is_report": project.public_id in for_reports_ids
+        }
+
+    def get(self, request):
+        user = request.user
+        if user.is_superuser:
+            projects_q = Project.objects.all()
+        else:
+            projects_q = Project.objects.get_all_for_user(user)
+        for_reports_ids = [p.public_id for p in user.report_projects.all()]
+        projects = [self.serialize_project(p, for_reports_ids) for p in projects_q]
+        return JsonResponse({"properties": projects}, status=200)
+
     def post(self, request):
         user = request.user
         ids = json.loads(request.body)["properties"]

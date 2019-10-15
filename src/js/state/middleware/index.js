@@ -6,9 +6,11 @@ import {
   networking,
   createPassword,
   completeAccount,
-  uiStrings
+  uiStrings,
+  accountSettings
 } from "../actions";
 import {
+  getPropertiesData,
   updateProfileData,
   updateReportsData
 } from "../../api/account_settings";
@@ -239,6 +241,22 @@ export const updateAccountReports = store => next => action => {
         })
         .catch(e => console.log("-----> ERROR", e));
     }
+  } else {
+    next(action);
+  }
+};
+
+export const fetchAccountProperties = store => next => action => {
+  if (action.type === "API_ACCOUNT_REPORT_PROPERTIES") {
+    getPropertiesData()
+      .then(response => {
+        if (response.status === 200) {
+          next(accountSettings.set(response.data.properties));
+        } else {
+          throw response;
+        }
+      })
+      .catch(e => console.log("-----> ERROR", e));
   } else {
     next(action);
   }

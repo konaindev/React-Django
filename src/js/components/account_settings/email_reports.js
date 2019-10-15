@@ -1,10 +1,13 @@
+import _isEqual from "lodash/isEqual";
 import _pickBy from "lodash/pickBy";
 import PropTypes from "prop-types";
 import React from "react";
 
+import { Tick } from "../../icons";
+import { accountSettings } from "../../state/actions";
+
 import Button from "../button";
 import ButtonToggle, { STATE_ENUM as TOGGLE_STATE } from "../button_toggle";
-import { Tick } from "../../icons";
 import EmailReportingTable from "../email_reporting_table";
 import { SearchWithSort } from "../search_input/search_with_sort";
 import TabNavigator, { Tab } from "../tab_navigator";
@@ -36,16 +39,47 @@ export default class EmailReports extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    const propertiesToggled = {};
-    for (let p of this.props.properties) {
-      propertiesToggled[p.id] = !!p.is_report;
-    }
+    const propertiesToggled = this._getToggledProperties(this.props.properties);
+    const groupsToggled = this._getToggledProperties(
+      this.props.groupsProperties
+    );
+    const portfoliosToggled = this._getToggledProperties(
+      this.props.portfolioProperties
+    );
     this.state = {
       tabIndex: this.props.tabsOrder.indexOf(props.initialTab),
-      portfoliosToggled: {},
-      groupsToggled: {},
+      portfoliosToggled,
+      groupsToggled,
       propertiesToggled
     };
+  }
+
+  componentDidMount() {
+    this.props.dispatch(accountSettings.getProperties());
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const state = {};
+    if (!_isEqual(this.props.properties, prevProps.properties)) {
+      state.propertiesToggled = this._getToggledProperties(
+        this.props.properties
+      );
+    }
+    if (!_isEqual(this.props.groupsProperties, prevProps.groupsProperties)) {
+      state.groupsToggled = this._getToggledProperties(
+        this.props.groupsProperties
+      );
+    }
+    if (
+      !_isEqual(this.props.portfolioProperties, prevProps.portfolioProperties)
+    ) {
+      state.portfoliosToggled = this._getToggledProperties(
+        this.props.portfolioProperties
+      );
+    }
+    if (Object.keys(state).length) {
+      this.setState(state);
+    }
   }
 
   get selectedGroupsState() {
@@ -152,6 +186,14 @@ export default class EmailReports extends React.PureComponent {
       </Tab>
     );
   }
+
+  _getToggledProperties = properties => {
+    const propertiesToggled = {};
+    for (let p of properties) {
+      propertiesToggled[p.id] = !!p.is_report;
+    }
+    return propertiesToggled;
+  };
 
   _getPropertiesState = (properties, toggledProperties) => {
     const keys = properties.map(i => i.id.toString());
