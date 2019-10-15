@@ -6,9 +6,10 @@ from django.contrib.auth.models import PermissionsMixin
 from django.utils.crypto import get_random_string
 from django.urls import reverse
 
+from remark.lib.collections import invert_dict
 from remark.lib.tokens import public_id
 from remark.lib.fields import NormalizedEmailField
-from .constants import ACCOUNT_TYPE
+from .constants import ACCOUNT_TYPE, BUSINESS_TYPE
 
 
 def usr_public_id():
@@ -153,8 +154,8 @@ class User(PermissionsMixin, AbstractBaseUser):
             "account_id": self.account_id,
             "account_name": self.account.company_name,
             "logout_url": reverse("logout"),
-            "account_settings_url": reverse("account_settings")
-            # TODO: Add account_url
+            "account_settings_url": reverse("account_settings"),
+            "profile_image_url": self.get_avatar_url(),
         }
 
     def get_role(self):
@@ -173,14 +174,45 @@ class User(PermissionsMixin, AbstractBaseUser):
             name = self.email
         return name
 
+    def get_person(self):
+        return self.person_set.first()
+
+    def get_avatar_url(self):
+        person = self.get_person()
+        if person and person.avatar:
+            url = person.avatar.url
+        else:
+            url = ""
+        return url
+
     def get_icon_dict(self):
         return {
             "email": self.email,
             "user_id": self.public_id,
             "account_name": self.get_name(),
             "role": self.get_role(),
+            "profile_image_url": self.get_avatar_url(),
         }
 
+    def get_profile_data(self):
+        person = self.get_person()
+        if not person:
+            return {}
+        office = person.office
+        business = office.business
+        return {
+            "avatar_url": self.get_avatar_url(),
+            "first_name": person.first_name,
+            "last_name": person.last_name,
+            "title": person.role,
+            "phone": person.cell_phone,
+            "phone_ext": person.office_phone,
+            "company": business.name,
+            "company_roles": business.get_roles(),
+            "office_address": office.address.formatted_address,
+            "office_name": office.name,
+            "office_type": office.office_type,
+        }
 
 
 class Account(models.Model):

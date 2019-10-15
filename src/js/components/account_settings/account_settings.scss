@@ -251,6 +251,12 @@ $info-line-height: 1.75rem;
     width: 100%;
     height: 100%;
     border-radius: 50%;
+
+    &--default {
+        background-image: url(../../../images/default-user.svg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
 }
 
 .account-settings__photo-field {
@@ -305,7 +311,9 @@ $info-line-height: 1.75rem;
 
 .account-settings__photo-text {
     font-size: $text-base;
+    text-transform: capitalize;
     line-height: $info-line-height;
+
     &--name {
         color: $text-color;
     }

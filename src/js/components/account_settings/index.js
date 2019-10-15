@@ -77,8 +77,8 @@ class AccountSettings extends React.PureComponent {
   };
 
   static defaultProps = {
-    initialItem: "lock",
-    itemsOrder: ["lock"]
+    initialItem: "profile",
+    itemsOrder: ["profile", "lock"]
   };
 
   constructor(props) {

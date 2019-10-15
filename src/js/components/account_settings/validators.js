@@ -1,17 +1,9 @@
 import Yup from "../../yup";
 
+export const MAX_AVATAR_SIZE = 3 * 1024 * 1024; // Bytes in 3MB
+
 const phoneRegex = /^\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$/;
 const invalidPhoneMessage = "${path} should match format (XXX) XXX-XXXX";
-const maxAvatarSize = 3 * 1024 * 1024; // Bytes in 3MB
-
-const selectOptionsSchema = Yup.object().shape({
-  label: Yup.string()
-    .required()
-    .max(20),
-  value: Yup.string()
-    .required()
-    .max(20)
-});
 
 const securitySchema = Yup.object().shape({
   email: Yup.string()
@@ -39,9 +31,10 @@ const securitySchema = Yup.object().shape({
 });
 
 const profileSchema = Yup.object().shape({
-  avatar_size: Yup.number().max(
-    maxAvatarSize,
-    "Profile image size is over the 3MB limit."
+  avatar: Yup.mixed().test(
+    "maxFileSize",
+    "Profile image size is over the 3MB limit.",
+    file => !file || file.size <= MAX_AVATAR_SIZE
   ),
   avatar_url: Yup.string(),
   first_name: Yup.string()
@@ -67,11 +60,11 @@ const profileSchema = Yup.object().shape({
       excludeEmptyString: true
     })
     .label("Phone number"),
-  company_name: Yup.string()
+  company: Yup.string()
     .required()
     .max(255)
-    .label("Company name"),
-  company_role: Yup.array()
+    .label("Company"),
+  company_roles: Yup.array()
     .required()
     .label("Company role"),
   office_address: Yup.string()
@@ -82,7 +75,9 @@ const profileSchema = Yup.object().shape({
     .required()
     .max(255)
     .label("Office name"),
-  office_type: selectOptionsSchema.required().label("Office type")
+  office_type: Yup.object()
+    .required()
+    .label("Office type")
 });
 
 export { profileSchema, securitySchema };

@@ -6,7 +6,7 @@ from remark.crm.models import Person
 from remark.crm.constants import OFFICE_TYPES
 
 from .models import Account, User
-from .constants import COMPANY_ROLES
+from .constants import COMPANY_ROLES, PHONE_REGEX
 
 
 class AccountForm(forms.ModelForm):
@@ -109,3 +109,19 @@ class AccountSecurityForm(forms.Form):
             elif password != cleaned_data["confirm_password"]:
                 self.add_error("__all__", "New passwords don’t match.")
         return cleaned_data
+
+
+class AccountProfileForm(forms.Form):
+    avatar = forms.ImageField(required=False)
+    first_name = forms.CharField(max_length=255, required=True)
+    last_name = forms.CharField(max_length=255, required=True)
+    title = forms.CharField(max_length=255, required=False)
+    phone = forms.RegexField(PHONE_REGEX, required=False)
+    phone_ext = forms.RegexField(PHONE_REGEX, required=False)
+    company = forms.CharField(max_length=255, required=True)
+    company_roles = forms.MultipleChoiceField(
+        choices=company_roles_values, required=True
+    )
+    office_address = forms.CharField(max_length=255, required=True)
+    office_name = forms.CharField(max_length=255, required=True)
+    office_type = forms.ChoiceField(choices=OFFICE_TYPES, required=True)

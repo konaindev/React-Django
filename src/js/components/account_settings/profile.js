@@ -10,60 +10,109 @@ import Button from "../button";
 import Input from "../input";
 import MultiSelect from "../multi_select";
 import Select from "../select";
-import { profileSchema } from "./validators";
+import { MAX_AVATAR_SIZE, profileSchema } from "./validators";
 
 export default class Profile extends React.PureComponent {
   static propTypes = {
-    person: PropTypes.shape({
+    profile: PropTypes.shape({
       avatar_url: PropTypes.string,
       first_name: PropTypes.string,
       last_name: PropTypes.string,
       title: PropTypes.string,
       phone: PropTypes.string,
       phone_ext: PropTypes.string,
-      company_name: PropTypes.string,
-      company_role: PropTypes.arrayOf(
-        PropTypes.shape({
-          label: PropTypes.string,
-          value: PropTypes.string
-        })
-      ),
+      company: PropTypes.string,
+      company_roles: PropTypes.arrayOf(PropTypes.string),
       office_address: PropTypes.string,
       office_name: PropTypes.string,
-      office_type: PropTypes.object
-    })
+      office_type: PropTypes.number
+    }),
+    company_roles: MultiSelect.optionsType.isRequired,
+    office_options: Select.optionsType.isRequired
   };
-  static roleOptions = [
-    { label: "Owner", value: "owner" },
-    { label: "Developer", value: "developer" },
-    { label: "Asset Manager", value: "asset" },
-    { label: "Property Manager", value: "property" },
-    { label: "JV / Investor", value: "jv" },
-    { label: "Vendor / Consultant", value: "vendor" }
-  ];
-  static officeTypes = [
-    { label: "Global", value: "global" },
-    { label: "National", value: "national" },
-    { label: "Regional", value: "regional" },
-    { label: "Other", value: "other" }
+  static defaultProps = {
+    profile: {
+      avatar_url: "",
+      first_name: "",
+      last_name: "",
+      title: "",
+      phone: "",
+      phone_ext: "",
+      company: "",
+      company_roles: [],
+      office_address: "",
+      office_name: "",
+      office_type: null
+    }
+  };
+  static fieldsSubmit = [
+    "avatar",
+    "first_name",
+    "last_name",
+    "title",
+    "phone",
+    "phone_ext",
+    "company",
+    "company_roles",
+    "office_address",
+    "office_name",
+    "office_type"
   ];
 
   state = { fieldsSubmitted: false };
 
-  constructor(props) {
-    super(props);
-    this.formik = React.createRef();
+  get initialValues() {
+    let profile = { ...this.props.profile };
+    if (!Object.keys(profile).length) {
+      profile = { ...Profile.defaultProps.profile };
+    }
+    profile.company_roles = this.props.company_roles.filter(i =>
+      profile.company_roles.includes(i.value)
+    );
+    profile.office_type = this.props.office_options.filter(
+      i => i.value === profile.office_type
+    )[0];
+    return profile;
   }
 
+  getAvatarImage(values) {
+    let img = (
+      <div className="account-settings__photo-img account-settings__photo-img--default" />
+    );
+    if (values.avatar_url) {
+      img = (
+        <img
+          className="account-settings__photo-img"
+          src={values.avatar_url}
+          alt="LOGO"
+        />
+      );
+    }
+    return img;
+  }
+
+  unsetMessage() {
+    if (this.state.message) {
+      this.setState({ message: null });
+    }
+  }
+
+  setFormik = formik => {
+    this.formik = formik;
+  };
+
   onFileUpload = e => {
+    this.unsetMessage();
     const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onload = e => {
-      this.formik.current.setFieldValue("avatar_url", e.target.result);
-    };
-    reader.readAsDataURL(file);
-    this.formik.current.setFieldValue("avatar_size", file.size);
-    this.formik.current.setFieldTouched("avatar_size", true);
+    this.formik.setFieldValue("avatar", file);
+    this.formik.setFieldTouched("avatar", true);
+    if (file.size <= MAX_AVATAR_SIZE) {
+      const reader = new FileReader();
+      reader.onload = e => {
+        this.formik.setFieldValue("avatar_url", e.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   getFieldClasses = (name, errors, touched, modifiers = []) => {
@@ -79,7 +128,7 @@ export default class Profile extends React.PureComponent {
     });
   };
 
-  getErrorMessage = (errors, touched) => {
+  showErrorMessage = (errors, touched) => {
     const errorFields = Object.keys(errors);
     const touchedFields = Object.keys(touched);
     const fields = _intersection(errorFields, touchedFields);
@@ -87,52 +136,94 @@ export default class Profile extends React.PureComponent {
       return;
     }
     let message = "Please review highlighted fields above.";
-    if (fields.includes("avatar_size")) {
-      message = errors.avatar_size;
+    if (fields.includes("avatar")) {
+      message = errors.avatar;
     }
     return <div className="account-settings__general-error">{message}</div>;
   };
 
-  getSuccessMessage = () => {
-    if (!this.state.fieldsSubmitted) {
+  showSuccessMessage = () => {
+    if (!this.state.message) {
       return;
     }
     return (
       <div className="account-settings__success">
         <Tick className="account-settings__checked" />
-        Your profile has been saved.
+        {this.state.message}
       </div>
     );
   };
 
-  onSubmit = (values, actions) => {
-    actions.setSubmitting(false);
-    this.setState({ fieldsSubmitted: true });
-    setTimeout(() => {
-      this.setState({ fieldsSubmitted: false });
-    }, 5000);
+  showMessage = (errors, touched) => {
+    if (this.state.message) {
+      return this.showSuccessMessage();
+    } else if (Object.keys(errors).length) {
+      return this.showErrorMessage(errors, touched);
+    }
+  };
+
+  setSuccessMessage = () => {
+    this.formik.setSubmitting(false);
+    const message = "Your profile has been saved.";
+    this.setState({ message });
+  };
+
+  setErrorMessages = errors => {
+    this.formik.setSubmitting(false);
+    const formikErrors = {};
+    for (let k of Object.keys(errors)) {
+      formikErrors[k] = errors[k][0].message;
+    }
+    this.formik.setErrors(formikErrors);
+  };
+
+  onSubmit = values => {
+    this.unsetMessage();
+    const dataValues = { ...values };
+    const data = new FormData();
+    for (const k of Object.keys(dataValues)) {
+      if (Profile.fieldsSubmit.includes(k)) {
+        if (k === "company_roles") {
+          for (const i of dataValues.company_roles) {
+            data.append("company_roles[]", i.value);
+          }
+        } else if (k === "office_type") {
+          data.append("office_type", dataValues.office_type.value);
+        } else {
+          data.append(k, dataValues[k]);
+        }
+      }
+    }
+    this.props.dispatch({
+      type: "API_ACCOUNT_PROFILE",
+      callback: this.setSuccessMessage,
+      onError: this.setErrorMessages,
+      data
+    });
+  };
+
+  onChange = v => {
+    this.unsetMessage();
+    this.formik.handleChange(v);
+  };
+
+  onBlur = v => {
+    this.unsetMessage();
+    this.formik.handleBlur(v);
   };
 
   render() {
     return (
       <div className="account-settings__tab">
         <Formik
-          ref={this.formik}
-          initialValues={this.props.person}
+          ref={this.setFormik}
+          initialValues={this.initialValues}
           validationSchema={profileSchema}
           validateOnBlur={true}
           validateOnChange={true}
           onSubmit={this.onSubmit}
         >
-          {({
-            errors,
-            touched,
-            values,
-            handleChange,
-            handleBlur,
-            setFieldTouched,
-            setFieldValue
-          }) => (
+          {({ errors, touched, values, setFieldTouched, setFieldValue }) => (
             <Form method="post" autoComplete="off">
               <div className="account-settings__tab-content">
                 <div className="account-settings__tab-section">
@@ -142,15 +233,11 @@ export default class Profile extends React.PureComponent {
                   <div className="account-settings__photo-field">
                     <div className="account-settings__photo-info">
                       <div className="account-settings__photo">
-                        <img
-                          className="account-settings__photo-img"
-                          src={values.avatar_url}
-                          alt="LOGO"
-                        />
+                        {this.getAvatarImage(values)}
                         <label className="account-settings__upload">
                           <Upload className="account-settings__upload-icon" />
                           <input
-                            name="logo"
+                            name="avatar"
                             type="file"
                             accept="image/jpeg, image/png"
                             onChange={this.onFileUpload}
@@ -162,13 +249,13 @@ export default class Profile extends React.PureComponent {
                           {values.first_name} {values.last_name}
                         </div>
                         <div className="account-settings__photo-text">
-                          Admin
+                          {values.title}
                         </div>
                       </div>
                     </div>
                     <div
                       className={this.getHelpTextClasses(
-                        "avatar_size",
+                        "avatar",
                         errors,
                         touched
                       )}
@@ -190,8 +277,8 @@ export default class Profile extends React.PureComponent {
                         name="first_name"
                         theme="gray"
                         value={values.first_name}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
+                        onBlur={this.onBlur}
+                        onChange={this.onChange}
                       />
                       <div className="account-settings__error">
                         <ErrorMessage name="first_name" />
@@ -210,8 +297,8 @@ export default class Profile extends React.PureComponent {
                         name="last_name"
                         theme="gray"
                         value={values.last_name}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
+                        onBlur={this.onBlur}
+                        onChange={this.onChange}
                       />
                       <div className="account-settings__error">
                         <ErrorMessage name="last_name" />
@@ -228,8 +315,8 @@ export default class Profile extends React.PureComponent {
                         name="title"
                         theme="gray"
                         value={values.title}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
+                        onBlur={this.onBlur}
+                        onChange={this.onChange}
                       />
                       <div className="account-settings__error">
                         <ErrorMessage name="title" />
@@ -247,8 +334,8 @@ export default class Profile extends React.PureComponent {
                         theme="gray"
                         type="tel"
                         value={values.phone}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
+                        onBlur={this.onBlur}
+                        onChange={this.onChange}
                         valueFormatter={formatPhone}
                       />
                       <div className="account-settings__error">
@@ -271,8 +358,8 @@ export default class Profile extends React.PureComponent {
                         theme="gray"
                         type="tel"
                         value={values.phone_ext}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
+                        onBlur={this.onBlur}
+                        onChange={this.onChange}
                         valueFormatter={formatPhone}
                       />
                       <div className="account-settings__error">
@@ -288,7 +375,7 @@ export default class Profile extends React.PureComponent {
                   <div className="account-settings__field-grid">
                     <div
                       className={this.getFieldClasses(
-                        "company_name",
+                        "company",
                         errors,
                         touched
                       )}
@@ -296,19 +383,19 @@ export default class Profile extends React.PureComponent {
                       <div className="account-settings__label">Company</div>
                       <Input
                         className="account-settings__input"
-                        name="company_name"
+                        name="company"
                         theme="gray"
-                        value={values.company_name}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
+                        value={values.company}
+                        onBlur={this.onBlur}
+                        onChange={this.onChange}
                       />
                       <div className="account-settings__error">
-                        <ErrorMessage name="company_name" />
+                        <ErrorMessage name="company" />
                       </div>
                     </div>
                     <div
                       className={this.getFieldClasses(
-                        "company_role",
+                        "company_roles",
                         errors,
                         touched,
                         ["max-width"]
@@ -319,22 +406,26 @@ export default class Profile extends React.PureComponent {
                       </div>
                       <MultiSelect
                         className="account-settings__input"
-                        name="company_role"
+                        name="company_roles"
                         theme="gray"
                         isShowControls={false}
                         isShowAllOption={false}
-                        options={Profile.roleOptions}
-                        value={values.company_role}
-                        label={values.company_role
+                        options={this.props.company_roles}
+                        value={values.company_roles}
+                        label={values.company_roles
                           ?.map(v => v.label)
                           .join(", ")}
-                        onBlur={() => setFieldTouched("company_role", true)}
-                        onChange={values =>
-                          setFieldValue("company_role", values)
-                        }
+                        onBlur={() => {
+                          this.unsetMessage();
+                          setFieldTouched("company_roles", true);
+                        }}
+                        onChange={values => {
+                          this.unsetMessage();
+                          setFieldValue("company_roles", values);
+                        }}
                       />
                       <div className="account-settings__error">
-                        <ErrorMessage name="company_role" />
+                        <ErrorMessage name="company_roles" />
                       </div>
                     </div>
                     <div
@@ -353,8 +444,8 @@ export default class Profile extends React.PureComponent {
                         name="office_address"
                         theme="gray"
                         value={values.office_address}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
+                        onBlur={this.onBlur}
+                        onChange={this.onChange}
                       />
                       <div className="account-settings__error">
                         <ErrorMessage name="office_address" />
@@ -373,8 +464,8 @@ export default class Profile extends React.PureComponent {
                         name="office_name"
                         theme="gray"
                         value={values.office_name}
-                        onBlur={handleBlur}
-                        onChange={handleChange}
+                        onBlur={this.onBlur}
+                        onChange={this.onChange}
                       />
                       <div className="account-settings__error">
                         <ErrorMessage name="office_name" />
@@ -392,10 +483,16 @@ export default class Profile extends React.PureComponent {
                         className="account-settings__input"
                         name="office_type"
                         theme="gray"
-                        options={Profile.officeTypes}
+                        options={this.props.office_options}
                         value={values.office_type}
-                        onBlur={() => setFieldTouched("office_type", true)}
-                        onChange={value => setFieldValue("office_type", value)}
+                        onBlur={() => {
+                          this.unsetMessage();
+                          setFieldTouched("office_type", true);
+                        }}
+                        onChange={value => {
+                          this.unsetMessage();
+                          setFieldValue("office_type", value);
+                        }}
                       />
                       <div className="account-settings__error">
                         <ErrorMessage name="office_type" />
@@ -412,8 +509,7 @@ export default class Profile extends React.PureComponent {
                 >
                   Save
                 </Button>
-                {this.getErrorMessage(errors, touched)}
-                {this.getSuccessMessage()}
+                {this.showMessage(errors, touched)}
               </div>
             </Form>
           )}

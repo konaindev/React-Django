@@ -15,17 +15,17 @@ from django.utils import timezone
 from django.urls import reverse
 
 from remark.crm.models import Business, Office, Person
-from remark.crm.constants import OFFICE_TYPES
+from remark.crm.constants import OFFICE_OPTIONS, OFFICE_TYPES
 from remark.geo.models import Address
 from remark.geo.geocode import geocode
 from remark.projects.models import Project
 from remark.settings import LOGIN_URL
-from remark.lib.views import LoginRequiredReactView, ReactView, RemarkView, APIView
+from remark.lib.views import ReactView, RemarkView, APIView, LoginRequiredReactView
 from remark.email_app.invites.added_to_property import send_invite_email
 from remark.settings import INVITATION_EXP
 
 from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES, VALIDATION_RULES_LIST
-from .forms import AccountCompleteForm, AccountSecurityForm
+from .forms import AccountCompleteForm, AccountProfileForm, AccountSecurityForm
 from .models import User
 
 
@@ -237,8 +237,12 @@ class AccountSettingsView(LoginRequiredReactView):
     page_title = "Account Settings"
 
     def get(self, request):
+        user = request.user
         return self.render(
             rules=VALIDATION_RULES_LIST,
+            profile=user.get_profile_data(),
+            company_roles=COMPANY_ROLES,
+            office_options=OFFICE_OPTIONS,
             user=request.user.get_menu_dict())
 
 
@@ -258,3 +262,60 @@ class AccountSecurityView(LoginRequiredMixin, RemarkView):
             message = "Password has successfully been reset."
         user.save()
         return JsonResponse({"message": message}, status=200)
+
+
+class AccountProfileView(LoginRequiredMixin, RemarkView):
+    def update_profile(self, user, data):
+        office_address = geocode(data["office_address"])
+        address = Address.objects.get_or_create(
+            formatted_address=office_address.formatted_address,
+            street_address_1=office_address.street_address,
+            city=office_address.city,
+            state=office_address.state,
+            zip_code=office_address.zip5,
+            country=office_address.country,
+            geocode_json=office_address.geocode_json,
+        )[0]
+
+        try:
+            business = Business.objects.get(name=data["company"])
+        except Business.DoesNotExist:
+            business = Business(name=data["company"])
+        for role in data["company_roles"]:
+            setattr(business, BUSINESS_TYPE[role], True)
+        business.save()
+
+        person = user.get_person()
+        if not person:
+            person = Person(user=user, email=user.email)
+        person.first_name = data["first_name"]
+        person.last_name = data["last_name"]
+        person.role = data["title"]
+        person.cell_phone = data["phone"]
+        person.office_phone = data["phone_ext"]
+        if data["avatar"]:
+            person.avatar = data["avatar"]
+
+        try:
+            office = person.office
+        except Office.DoesNotExist:
+            office = Office()
+            person.office = office
+        office.address = address
+        office.name = data["office_name"]
+        office.office_type = data["office_type"]
+        office.business = business
+        office.save()
+        person.save()
+
+    def post(self, request):
+        post_data = request.POST.copy()
+        post_data \
+            .setlist("company_roles", request.POST.getlist("company_roles[]"))
+        post_data.pop("company_roles[]", None)
+        form = AccountProfileForm(post_data, request.FILES)
+        if not form.is_valid():
+            return JsonResponse(form.errors.get_json_data(), status=500)
+        user = request.user
+        self.update_profile(user, form.cleaned_data)
+        return JsonResponse(user.get_profile_data(), status=200)

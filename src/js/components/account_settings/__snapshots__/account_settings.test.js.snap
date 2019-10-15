@@ -2371,7 +2371,7 @@ exports[`AccountSettings profile tab 1`] = `
                       </svg>
                       <input
                         accept="image/jpeg, image/png"
-                        name="logo"
+                        name="avatar"
                         onChange={[Function]}
                         type="file"
                       />
@@ -2390,7 +2390,7 @@ exports[`AccountSettings profile tab 1`] = `
                     <div
                       className="account-settings__photo-text"
                     >
-                      Admin
+                      Founder
                     </div>
                   </div>
                 </div>
@@ -2526,11 +2526,10 @@ exports[`AccountSettings profile tab 1`] = `
                   </div>
                   <input
                     className="input account-settings__input input--gray"
-                    name="company_name"
+                    name="company"
                     onBlur={[Function]}
                     onChange={[Function]}
                     type="text"
-                    value="Glacier Associates"
                   />
                   <div
                     className="account-settings__error"
@@ -2632,19 +2631,19 @@ exports[`AccountSettings profile tab 1`] = `
                     </div>
                     <div>
                       <input
-                        name="company_role"
+                        name="company_roles"
                         type="hidden"
                         value="owner"
                       />
                       <input
-                        name="company_role"
+                        name="company_roles"
                         type="hidden"
-                        value="asset"
+                        value="asset_manager"
                       />
                       <input
-                        name="company_role"
+                        name="company_roles"
                         type="hidden"
-                        value="property"
+                        value="property_manager"
                       />
                     </div>
                   </div>
@@ -2789,7 +2788,7 @@ exports[`AccountSettings profile tab 1`] = `
                     <input
                       name="office_type"
                       type="hidden"
-                      value="regional"
+                      value={3}
                     />
                   </div>
                   <div

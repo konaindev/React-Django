@@ -11,6 +11,7 @@ import {
   fetchCompleteAccount,
   fetchInviteModal,
   fetchUIString,
+  updateAccountProfile,
   updateAccountSecurity
 } from "../middleware";
 
@@ -39,7 +40,8 @@ export default () => {
         fetchCompleteAccount,
         fetchInviteModal,
         fetchUIString,
-        updateAccountSecurity
+        updateAccountSecurity,
+        updateAccountProfile
       )
     )
   );
