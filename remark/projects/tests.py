@@ -614,6 +614,10 @@ class OnboardingWorkflowTestCase(TestCase):
             email="admin@remarkably.io", password="adminpassword"
         )
         project, _ = create_project()
+        group = Group.objects.create(name="project 1 view group")
+        group.user_set.add(user)
+        project.admin_group = group
+        project.save()
         self.client.login(email="admin@remarkably.io", password="adminpassword")
         self.project = project
 
