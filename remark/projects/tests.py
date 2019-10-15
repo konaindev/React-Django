@@ -700,6 +700,8 @@ class OnboardingWorkflowTestCase(TestCase):
             geo_address=address,
         )
         group = Group.objects.create(name="project 1 view group")
+        admin_group = Group.objects.create(name="project 1 admin group")
+        admin_group.user_set.add(user)
         project = Project.objects.create(
             name="project 1",
             baseline_start=datetime.date(year=2018, month=11, day=19),
@@ -711,6 +713,7 @@ class OnboardingWorkflowTestCase(TestCase):
             fund=fund,
             property=property,
             view_group=group,
+            admin_group=admin_group
         )
         self.client.login(email="admin@remarkably.io", password="adminpassword")
         self.project = project
