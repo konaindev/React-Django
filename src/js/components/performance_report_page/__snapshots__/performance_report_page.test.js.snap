@@ -319,68 +319,119 @@ exports[`PerformanceReportPage renders correctly 1`] = `
           className="section-header__extra"
         >
           <span
-            className="report-span-dropdown"
+            className="date-range-selector"
           >
-            <select
-              defaultValue="/projects/pro_example/performance/last-four-weeks/"
-              onChange={[Function]}
+            <div
+              className="select date-range-selector__select select--default css-2b097c-container"
+              onKeyDown={[Function]}
             >
-              <option
-                value="/projects/pro_example/performance/last-week/"
+              <div
+                className="select__control css-yk16xz-control"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
               >
-                Last Week (Dec 24 2018 - Dec 31 2018)
-              </option>
-              <option
-                value="/projects/pro_example/performance/last-two-weeks/"
-              >
-                Last Two Weeks (Dec 17 2018 - Dec 31 2018)
-              </option>
-              <option
-                value="/projects/pro_example/performance/last-four-weeks/"
-              >
-                Last Four Weeks (Dec 03 2018 - Dec 31 2018)
-              </option>
-              <option
-                value="/projects/pro_example/performance/campaign/"
-              >
-                Campaign To Date (May 07 2018 - Dec 31 2018)
-              </option>
-              <option
-                value="/projects/pro_example/report/2018-05-07,2018-05-14/"
-              >
-                May 07 2018 - May 14 2018
-              </option>
-              <option
-                value="/projects/pro_example/report/2018-05-14,2018-05-21/"
-              >
-                May 14 2018 - May 21 2018
-              </option>
-              <option
-                value="/projects/pro_example/report/2018-05-21,2018-05-28/"
-              >
-                May 21 2018 - May 28 2018
-              </option>
-              <option
-                value="/projects/pro_example/report/2018-05-28,2018-06-04/"
-              >
-                May 28 2018 - Jun 04 2018
-              </option>
-              <option
-                value="/projects/pro_example/report/2018-06-04,2018-06-11/"
-              >
-                Jun 04 2018 - Jun 11 2018
-              </option>
-              <option
-                value="/projects/pro_example/report/2018-06-11,2018-06-18/"
-              >
-                Jun 11 2018 - Jun 18 2018
-              </option>
-              <option
-                value="/projects/pro_example/report/2018-06-18,2018-06-25/"
-              >
-                Jun 18 2018 - Jun 25 2018
-              </option>
-            </select>
+                <div
+                  className="select__value-container select__value-container--has-value css-1hwfws3"
+                >
+                  <div
+                    className="select__single-value css-1uccc91-singleValue"
+                  >
+                    Custom
+                  </div>
+                  <input
+                    className="css-62g3xt-dummyInput"
+                    disabled={false}
+                    id="react-select-3-input"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    readOnly={true}
+                    tabIndex="0"
+                    value=""
+                  />
+                </div>
+                <div
+                  className="select__indicators css-1wy0on6"
+                >
+                  <span
+                    className="select__indicator-separator css-1okebmr-indicatorSeparator"
+                  />
+                  <div
+                    aria-hidden="true"
+                    className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                    onMouseDown={[Function]}
+                    onTouchEnd={[Function]}
+                  >
+                    <svg
+                      aria-hidden="true"
+                      className="select__dropdown-arrow select__dropdown-arrow--down"
+                      color="inherit"
+                      focusable="false"
+                      height="1em"
+                      role="presentation"
+                      viewBox="0 0 10 5"
+                      width="1em"
+                    >
+                      <path
+                        d="M1 1.16134L4.92334 4.5"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                      />
+                      <path
+                        d="M8.82812 1.16134L5 4.5"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                    <svg
+                      aria-hidden="true"
+                      className="select__dropdown-arrow select__dropdown-arrow--up"
+                      color="inherit"
+                      focusable="false"
+                      height="1em"
+                      role="presentation"
+                      viewBox="0 0 10 5"
+                      width="1em"
+                    >
+                      <path
+                        d="M1 3.83866L4.92334 0.5"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                      />
+                      <path
+                        d="M8.82812 3.83866L5 0.5"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="date-range date-range-selector__data-picker"
+            >
+              <div>
+                <div
+                  className="date-range__input"
+                  onClick={[Function]}
+                >
+                  <span
+                    className="date-range__value"
+                  >
+                    09/24/18
+                  </span>
+                  <span>
+                    to
+                  </span>
+                  <span
+                    className="date-range__value"
+                  >
+                    10/22/18
+                  </span>
+                </div>
+              </div>
+            </div>
           </span>
         </div>
       </div>

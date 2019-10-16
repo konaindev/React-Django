@@ -11,7 +11,9 @@ $day-picker-spacing: 19px 0 0;
 $day-picker-shadow: 0 2px 20px rgba(0, 0, 0, .35);
 $day-picker-background: $gray-3;
 $nav-bar-height: 20px;
-$nav-bar-spacing: 0 22px;
+$nav-bar-spacing: 0 16px;
+$nav-button-padding: 10px;
+$nav-button-background-size: 7px 12px;
 $weekdays-spacing: 0 14px;
 $week-height: 22px;
 $days-spacing: 6px 14px 0;
@@ -75,6 +77,7 @@ $button-height: 30px;
 
 .date-range__day-picker {
     position: absolute;
+    cursor: auto;
     top: 18px;
     right: 50%;
     z-index: 1;
@@ -124,9 +127,10 @@ $button-height: 30px;
     width: 7px;
     height: 12px;
     cursor: pointer;
+    padding: $nav-button-padding;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: $nav-button-background-size;
 
     &--prev {
         background-image: url(../../../images/icon-arrow-left.svg);
