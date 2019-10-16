@@ -103,7 +103,7 @@ const tutorial = (state = initState, action) => {
   return newState;
 };
 
-const network = (state = { isFetching: false }, action) => {
+const network = (state = { isFetching: false, errors: [] }, action) => {
   let newState = {};
   switch (action.type) {
     case "NETWORK_START_FETCH": {
@@ -112,6 +112,11 @@ const network = (state = { isFetching: false }, action) => {
     }
     case "NETWORK_STOP_FETCH": {
       newState = { ...state, isFetching: false };
+      break;
+    }
+    case "NETWORK_FETCH_FAIL": {
+      newState = { ...state };
+      newState.errors.push({ message: action.message, timestamp: new Date() });
       break;
     }
     default:

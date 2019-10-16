@@ -43,25 +43,27 @@ const checkStatus = response =>
  * note:  the primary purpose is to either request a refresh token,
  *        or "logout" the user if the refresh is invalid (thus the session)
  *        is expired...
- *
+ * @param {Obj} action - redux action
  * @param {Obj} e - error object (custom)
  */
-function* handleError(e) {
-  if (e.code) {
-    switch (e.code) {
-      case "token_not_valid": {
-        yield put(auth.logout());
-        break;
+function handleError(action) {
+  return function* handleError(e) {
+    if (e.code) {
+      switch (e.code) {
+        case "token_not_valid": {
+          yield put(auth.logout());
+          break;
+        }
+        default:
+          yield put(token.refresh());
       }
-      default:
-        yield put(token.refresh());
+    } else {
+      console.log("something was wrong!!!", e);
+      const { type, url } = action;
+      yield put(networking.fail({ message: e.message, type, url }));
     }
-  } else {
-    console.log("something was wrong!!!", e);
-    yield put(networking.fail(e.message));
-  }
+  };
 }
-
 function* get(action) {
   try {
     const response = yield call(axiosGet, action.url);
@@ -69,7 +71,7 @@ function* get(action) {
     yield put(networking.results(response.data, action.branch));
     yield put(networking.success());
   } catch (e) {
-    yield handleError(e);
+    yield handleError(action)(e);
   }
 }
 
@@ -80,7 +82,7 @@ function* post(action) {
     yield put(networking.results(response.data, action.branch));
     yield put(networking.success());
   } catch (e) {
-    yield handleError(e);
+    yield handleError(action)(e);
   }
 }
 
