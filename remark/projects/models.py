@@ -481,7 +481,7 @@ class Project(models.Model):
 
     def get_members(self):
         users_q = self.view_group.user_set.all()
-        users = [user.get_icon_dict() for user in users_q]
+        users = [user.get_icon_dict() for user in users_q if not user.is_staff]
         return users
 
     def user_can_view(self, user):
