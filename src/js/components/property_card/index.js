@@ -12,7 +12,7 @@ import Tick from "../../icons/tick";
 import "./property_card.scss";
 
 export const PropertyCard = ({
-  property_id,
+  public_id,
   property_name,
   address,
   image_url,
@@ -45,7 +45,7 @@ export const PropertyCard = ({
               </div>
               <Link
                 className="property-card__overlay-link"
-                to={url ? url.replace("https://app.remarkably.io", "") : ""}
+                to={`/projects/${public_id}`}
               >
                 <Button color="outline">View Report</Button>
               </Link>
