@@ -10,7 +10,11 @@ class NavGate extends React.PureComponent {
     return (
       <PageChrome
         navLinks={navLinks}
-        headerItems={this.props.user ? <UserMenu {...this.props.user} /> : null}
+        headerItems={
+          this.props.user ? (
+            <UserMenu {...this.props.user} logout_url="" />
+          ) : null
+        }
       >
         {children}
       </PageChrome>
@@ -21,7 +25,8 @@ class NavGate extends React.PureComponent {
 const mapState = state => {
   return {
     navLinks: state.nav.navLinks,
-    user: state.user
+    // note: this is ugly and should go...
+    user: state.user || state.dashboard.user
   };
 };
 
