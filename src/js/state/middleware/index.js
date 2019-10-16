@@ -166,8 +166,7 @@ export const applyApiResult = _ => next => action => {
 
 export const logoutMiddleware = store => next => action => {
   if (action.type === "LOGOUT") {
-    store.dispatch(auth.clearToken());
-    next(action);
+    next(auth.clearToken());
   } else {
     next(action);
   }
@@ -240,10 +239,14 @@ export const refreshToken = store => next => action => {
     const { refresh } = token;
     axiosPost(action.url, { refresh })
       .then(response => {
-        console.log("refreshToken middleware,,,,,,", response);
-        next(tokenActions.update({ refresh, access: response.data.access }));
+        if (response.status === 401) {
+          console.log("EXPIRED SESSION TOKENS, LOGGING OUT...");
+          next(auth.clearToken());
+        } else {
+          next(tokenActions.update({ refresh, access: response.data.access }));
+        }
       })
-      .catch(e => console.log("-----> ERROR", e));
+      .catch(e => console.log("REFRESH TOKEN ERROR", e));
   } else {
     next(action);
   }

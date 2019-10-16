@@ -128,8 +128,7 @@ export const auth = {
     token
   }),
   clearToken: () => ({
-    type: "UPDATE_TOKEN",
-    token: {}
+    type: "CLEAR_TOKEN"
   })
 };
 

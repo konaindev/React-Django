@@ -12,6 +12,10 @@ const token = (state = { refresh: null, access: null }, action) => {
       newState = { ...action.token };
       break;
     }
+    case "CLEAR_TOKEN": {
+      newState = {};
+      break;
+    }
     default:
       newState = state;
   }

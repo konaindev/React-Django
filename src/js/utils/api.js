@@ -2,6 +2,10 @@ import axios from "axios";
 import { store } from "../App";
 import { getCSRFToken } from "./csrf";
 
+const validateStatus = status => {
+  return status >= 200 && status < 500;
+};
+
 export function axiosPost(url, data, headers = {}, csrfProtect = true) {
   const { token } = store.getState();
   const { access } = token;
@@ -10,7 +14,8 @@ export function axiosPost(url, data, headers = {}, csrfProtect = true) {
     method: "post",
     headers: { ...headers },
     data,
-    url
+    url,
+    validateStatus
   };
   if (access) {
     config.headers["Authorization"] = `bearer ${access}`;
@@ -23,9 +28,6 @@ export function axiosPost(url, data, headers = {}, csrfProtect = true) {
   // }
   return axios(config);
 }
-const validateStatus = status => {
-  return status >= 200 && status < 500;
-};
 export function axiosGet(url, config = { validateStatus }) {
   const { token } = store.getState();
   const { access } = token;

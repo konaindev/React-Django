@@ -1,41 +1,86 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { networking, token } from "../../state/actions";
+import { networking, token, auth } from "../../state/actions";
 import { axiosGet, axiosPost } from "../api";
 
-/*
+/**
+ * checkStatus
+ *
+ * note: this provides a surface for reacting to token errors (401)
+ *       and builds on the asumption that the API behavior is static
+ *       ...despite my dislike of the conventions :p
+ *
+ * @param {Obj} response - axios response object (raw)
+ */
+const checkStatus = response =>
+  new Promise((resolve, reject) => {
+    if (response.status === 401) {
+      const { code } = response.data;
+      const { messages } = response.data;
+      let isAccessToken = false;
+      for (let i = 0; i < messages.length; i++) {
+        if (messages[i].token_type === "access") {
+          isAccessToken = true;
+        }
+      }
+      switch (code) {
+        case "token_not_valid": {
+          isAccessToken
+            ? reject({ code: "access_token_invalid" })
+            : reject({ code });
+          break;
+        }
+        default:
+          resolve();
+      }
+    } else {
+      resolve();
+    }
+  });
 
-network stack api
-
-action.config === axios config
-action.body === axios post body
-
-*/
+/**
+ * handleError
+ *
+ * note:  the primary purpose is to either request a refresh token,
+ *        or "logout" the user if the refresh is invalid (thus the session)
+ *        is expired...
+ *
+ * @param {Obj} e - error object (custom)
+ */
+function* handleError(e) {
+  if (e.code) {
+    switch (e.code) {
+      case "token_not_valid": {
+        yield put(auth.logout());
+        break;
+      }
+      default:
+        yield put(token.refresh());
+    }
+  } else {
+    console.log("something was wrong!!!", e);
+    yield put(networking.fail(e.message));
+  }
+}
 
 function* get(action) {
   try {
     const response = yield call(axiosGet, action.url);
-    // not authorized
-    if (response.status === 401) {
-      // we need to try to refresh
-      const refreshed = yield put(token.refresh());
-    }
+    yield checkStatus(response);
     yield put(networking.results(response.data, action.branch));
     yield put(networking.success());
   } catch (e) {
-    console.log("something was wrong!!!", e);
-    yield put(networking.fail(e.message));
+    yield handleError(e);
   }
 }
 
 function* post(action) {
   try {
     const response = yield call(axiosPost, action.url, action.body, {}, false);
+    yield checkStatus(response);
     yield put(networking.results(response.data, action.branch));
     yield put(networking.success());
   } catch (e) {
-    console.log("something was wrong!!!", e);
-    console.log(e);
-    yield put(networking.fail(e.message));
+    yield handleError(e);
   }
 }
 
