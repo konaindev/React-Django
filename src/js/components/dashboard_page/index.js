@@ -20,7 +20,12 @@ import UserMenu from "../user_menu";
 
 import { qsParse, qsStringify } from "../../utils/misc";
 import TutorialView from "../tutorial_view";
-import { networking, inviteModal, general } from "../../state/actions";
+import {
+  networking,
+  inviteModal,
+  general,
+  dashboard
+} from "../../state/actions";
 import "./dashboard_page.scss";
 import { nav } from "../../state/actions";
 const navLinks = {
@@ -327,7 +332,8 @@ export class UrlQueryLayer extends React.PureComponent {
     let queryStringForAjax = qsStringify({ ...urlParams, ajax: "true" });
 
     this.props.history.push(queryStringForAjax);
-    // this.props.dispatch(networking.fetchDashboard(queryStringForAjax));
+    console.log("---------onChangeFilter for dashboard", queryStringForAjax);
+    this.props.dispatch(dashboard.update({ queryStringForAjax }));
   };
 
   render() {

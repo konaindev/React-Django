@@ -1,12 +1,16 @@
 import { createActions, URLS } from "./helpers";
 
 export const dashboard = {
-  update: x => ({
-    type: "FETCH_API_GET",
-    url: `${URLS.base}${URLS.ver}${URLS.dashboard}`,
-    branch: "dashboard",
-    ...x
-  })
+  update: x => {
+    console.log("dashboard action update got", x);
+    return {
+      type: "FETCH_API_GET",
+      url: `${URLS.base}${URLS.ver}${URLS.dashboard}${x.queryStringForAjax ||
+        ""}`,
+      branch: "dashboard",
+      ...x
+    };
+  }
 };
 
 export const general = {
