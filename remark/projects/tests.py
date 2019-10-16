@@ -728,3 +728,22 @@ class AutocompleteMemberTestCase(TestCase):
         data = response.json()
         users = [u.get_icon_dict() for u in self.users]
         self.assertCountEqual(data["members"], users)
+
+    def test_select_staff(self):
+        self.group.user_set.add(self.user)
+        staff_user = self.users[0]
+        staff_user.is_staff = True
+        staff_user.save()
+
+        params = {"value": staff_user.email}
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertFalse(data["members"])
+
+        params = {"value": ""}
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        users = [u.get_icon_dict() for u in self.users[1:]]
+        self.assertCountEqual(data["members"], users)
