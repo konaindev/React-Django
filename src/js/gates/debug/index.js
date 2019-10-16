@@ -30,7 +30,7 @@ class DebugGate extends React.PureComponent {
       locations
     } = sbProps;
     // load state from dashboard storybook props...
-    this.props.dispatch(_user.set(user));
+    //this.props.dispatch(_user.set(user));
     this.props.dispatch(_properties.set(properties));
     this.props.dispatch(_funds.set(funds));
     this.props.dispatch(_pm.set(property_managers));
