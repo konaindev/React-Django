@@ -11,6 +11,7 @@ import {
   uiStrings,
   token as tokenActions
 } from "../actions";
+import { URLS } from "../actions/helpers";
 import { axiosGet, axiosPost } from "../../utils/api";
 import ReactGa from "react-ga";
 
@@ -216,7 +217,7 @@ export const fetchInviteModal = store => next => action => {
 
 export const fetchUIString = store => next => action => {
   if (action.type === "API_UI_STRINGS") {
-    const url = `${process.env.BASE_URL}/localization`;
+    const url = `${URLS.base}${URLS.ver}/localization`;
     axiosPost(url, action.data)
       .then(response => {
         if (response.status === 200) {
