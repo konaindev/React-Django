@@ -45,7 +45,7 @@ export const PropertyCard = ({
               </div>
               <Link
                 className="property-card__overlay-link"
-                to={url.replace("https://app.remarkably.io", "")}
+                to={url ? url.replace("https://app.remarkably.io", "") : ""}
               >
                 <Button color="outline">View Report</Button>
               </Link>

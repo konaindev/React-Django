@@ -14,13 +14,13 @@ class DashboardContainer extends PureComponent {
   }
 }
 
-const mapState = state => ({
-  ...state.network,
-  locations: state.locations,
-  funds: state.funds,
-  properties: state.properties,
-  asset_managers: state.asset_managers,
-  property_managers: state.property_managers
-});
+const mapState = state => {
+  const newState = { ...state.general };
+
+  console.log("state----->", newState);
+  return {
+    ...state.general
+  };
+};
 
 export default withRouter(connect(mapState)(DashboardContainer));
