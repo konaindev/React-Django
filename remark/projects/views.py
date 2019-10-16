@@ -1,5 +1,6 @@
 import datetime
 
+from django.contrib.auth.models import Group
 from django.contrib.auth.views import redirect_to_login
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
@@ -306,16 +307,22 @@ class ProjectUpdateAPIView(LoginRequiredMixin, APIView):
 class MembersView(LoginRequiredMixin, APIView):
     def post(self, request):
         payload = self.get_data()
-        value = payload.get("value", [])
+        value = payload.get("value", "")
+        projects = Project.objects.get_all_for_user(request.user)
+        groups_ids = []
+        for p in projects:
+            groups_ids.append(p.view_group_id)
+            groups_ids.append(p.admin_group_id)
         users = User.objects.filter(
             Q(
                 Q(email__icontains=value)
                 | Q(person__first_name__icontains=value)
                 | Q(person__last_name__icontains=value)
             )
-            & Q(account__isnull=False)
+            & Q(groups__in=groups_ids)
+            & ~Q(id=request.user.id)
         )
-        members = [user.get_menu_dict() for user in users]
+        members = [user.get_icon_dict() for user in users]
         return JsonResponse({"members": members})
 
 
