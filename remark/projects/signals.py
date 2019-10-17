@@ -221,5 +221,7 @@ def update_performance_report(sender, instance, created, raw, **kwargs):
 @receiver(post_save, sender=Project)
 @receiver(post_save, sender=TargetPeriod)
 def reset_project_cache(sender, instance, **kwargs):
-    cache_key = get_dashboard_cache_key(instance.get_project_public_id())
-    reset_cache(cache_key)
+    project_public_id = instance.get_project_public_id()
+    if project_public_id:
+        cache_key = get_dashboard_cache_key(project_public_id)
+        reset_cache(cache_key)
