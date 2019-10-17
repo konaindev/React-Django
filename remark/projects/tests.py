@@ -576,7 +576,9 @@ class ExportTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(csv_str, result)
 
-    def test_export_periods_to_excel(self):
+    @mock.patch("remark.projects.export.datetime")
+    def test_export_periods_to_excel(self, mock_datetime):
+        mock_datetime.date.today.return_value = datetime.datetime(2019, 10, 11, 0, 0)
         response = export_periods_to_excel(self.project.public_id)
         self.assertEqual(response.status_code, 200)
 
@@ -590,6 +592,7 @@ class ExportTestCase(TestCase):
                 self.assertEqual(
                     ws_periods.cell(row=row, column=col).value,
                     response_ws.cell(row=row, column=col).value,
+                    f"row: {row}, column: {col}"
                 )
 
 
