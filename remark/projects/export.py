@@ -1,12 +1,13 @@
 import csv
+import os
+import datetime
 from django.http import HttpResponse
-from openpyxl import Workbook
-from openpyxl.styles import PatternFill
+from openpyxl import load_workbook
 from openpyxl.writer.excel import save_virtual_workbook
 
 from remark.lib.logging import getLogger
-from .models import Period
 
+from .models import Period, Project
 
 logger = getLogger(__name__)
 
@@ -56,62 +57,53 @@ def export_periods_to_csv(periods_ids, project_id):
 
 
 def export_periods_to_excel(project_id):
-    wb = Workbook()
-    ws_periods = wb.active
-    ws_periods.title = "periods"
+    project = Project.objects.get(public_id=project_id)
 
-    titles = [
-        {"label": "", "start": 1, "end": 3, "color": "FFFFFF"},
-        {"label": "LEASING", "start": 4, "end": 11, "color": "FFFF00"},
-        {"label": "OCCUPANCY", "start": 12, "end": 15, "color": "3399CC"},
-        {"label": "FUNNEL", "start": 16, "end": 18, "color": "99CC33"},
-        {"label": "ACQ INVESTMENT", "start": 19, "end": 22, "color": "FFCC00"},
-        {"label": "RET INVESTMENT", "start": 23, "end": 26, "color": "990000"},
-    ]
+    def _baseline_formatter(end_date):
+        if end_date <= project.baseline_end:
+            return "baseline"
+        else:
+            return ""
 
-    for title in titles:
-        ws_periods.merge_cells(
-            start_row=1, start_column=title["start"], end_row=1, end_column=title["end"]
-        )
-        ws_periods.cell(
-            column=title["start"], row=1, value=title["label"]
-        ).fill = PatternFill(fgColor=title["color"], fill_type="solid")
+    TEMPLATE_FILE_NAME = os.path.join(
+        os.path.abspath(os.path.dirname(__file__)),
+        "spreadsheets/templates/baseline-perf.xlsx",
+    )
+
+    wb = load_workbook(TEMPLATE_FILE_NAME)
+    ws_periods = wb.get_sheet_by_name("periods")
 
     fields = [
-        {"title": "Start Date", "name": "start"},
-        {"title": "End Date", "name": "end"},
-        {"title": "Lease Stage", "name": "lease_stage", "formatter": str},
-        {"title": "Leased units @ start (optional)", "name": "leased_units_start"},
-        {"title": "APPs", "name": "lease_applications"},
-        {"title": "EXEs", "name": "leases_executed"},
-        {"title": "Ended", "name": "leases_ended"},
-        {"title": "CDs", "name": "lease_cds"},
-        {"title": "Renewals", "name": "lease_renewals"},
-        {"title": "Notices: Renewals", "name": "lease_renewal_notices"},
-        {"title": "Notices: Vacate", "name": "lease_vacation_notices"},
-        {"title": "Occupied units @ start (opt)", "name": "occupied_units_start"},
-        {"title": "Occupiable units (opt)", "name": "occupiable_units_start"},
-        {"title": "Move Ins", "name": "move_ins"},
-        {"title": "Move Outs", "name": "move_outs"},
-        {"title": "USVs", "name": "usvs"},
-        {"title": "INQs", "name": "inquiries"},
-        {"title": "TOUs", "name": "tours"},
-        {"title": "Reputation ACQ", "name": "acq_reputation_building"},
-        {"title": "Demand ACQ", "name": "acq_demand_creation"},
-        {"title": "Leasing ACQ", "name": "acq_leasing_enablement"},
-        {"title": "Market ACQ", "name": "acq_market_intelligence"},
-        {"title": "Reputation RET", "name": "ret_reputation_building"},
-        {"title": "Demand RET", "name": "ret_demand_creation"},
-        {"title": "Leasing RET", "name": "ret_leasing_enablement"},
-        {"title": "Market RET", "name": "ret_market_intelligence"},
+        {"name": "start"},
+        {"name": "end", "formatter": _baseline_formatter},
+        {"name": "lease_stage", "formatter": str},
+        {"name": "leased_units_start"},
+        {"name": "lease_applications"},
+        {"name": "leases_executed"},
+        {"name": "leases_ended"},
+        {"name": "lease_cds"},
+        {"name": "lease_renewals"},
+        {"name": "lease_renewal_notices"},
+        {"name": "lease_vacation_notices"},
+        {"name": "occupied_units_start"},
+        {"name": "occupiable_units_start"},
+        {"name": "move_ins"},
+        {"name": "move_outs"},
+        {"name": "usvs"},
+        {"name": "inquiries"},
+        {"name": "tours"},
+        {"name": "acq_reputation_building"},
+        {"name": "acq_demand_creation"},
+        {"name": "acq_leasing_enablement"},
+        {"name": "acq_market_intelligence"},
+        {"name": "ret_reputation_building"},
+        {"name": "ret_demand_creation"},
+        {"name": "ret_leasing_enablement"},
+        {"name": "ret_market_intelligence"},
     ]
 
-    for col, field in enumerate(fields, start=1):
-        ws_periods.cell(column=col, row=2, value=field["title"]).fill = PatternFill(
-            fgColor="CCCCCC", fill_type="solid"
-        )
-
     periods = Period.objects.filter(project_id=project_id)
+    last_row = 0
     for row, period in enumerate(periods, start=3):
         for col, field in enumerate(fields, start=1):
             value = getattr(period, field["name"])
@@ -123,10 +115,13 @@ def export_periods_to_excel(project_id):
                 logger.error(
                     f"Cannot export: Project ID: {project_id} | column: {col} | row: {row} | value: {value}"
                 )
+        last_row = row
+    ws_periods.cell(column=1, row=last_row+1, value=datetime.date.today())
 
     response = HttpResponse(
         content=save_virtual_workbook(wb),
         content_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     )
+    wb.close()
     response["Content-Disposition"] = 'attachment; filename="periods.xlsx"'
     return response

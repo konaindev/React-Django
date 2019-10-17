@@ -68,6 +68,7 @@ exports[`DashboardControls renders correctly 1`] = `
     >
       <span
         className="dashboard-controls__title"
+        onClick={[Function]}
       >
         10
          Properties

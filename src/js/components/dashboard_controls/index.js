@@ -46,7 +46,8 @@ export default class DashboardControls extends React.PureComponent {
   static defaultProps = {
     filters: { ct: [], fd: [], am: [], pm: [] },
     sortOptions: DashboardControls.sortOptions,
-    isDisabled: false
+    isDisabled: false,
+    captionClicked: false
   };
 
   static multiSelectStyle = {
@@ -56,8 +57,10 @@ export default class DashboardControls extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      filters: props.filters
+      filters: props.filters,
+      captionClicked: props.captionClicked
     };
+    this.captionSearchToggle = this.captionSearchToggle.bind(this);
   }
 
   get fundsOptions() {
@@ -146,6 +149,10 @@ export default class DashboardControls extends React.PureComponent {
     });
   };
 
+  captionSearchToggle = () => {
+    this.setState({ captionClicked: !this.state.captionClicked });
+  };
+
   render() {
     const searchText = this.state.filters?.q;
     const locationsOptions = this.locationsOptions;
@@ -173,9 +180,14 @@ export default class DashboardControls extends React.PureComponent {
         className={classes}
         value={searchText}
         onSubmit={this.onSearchHandler}
+        captionClicked={this.state.captionClicked}
+        captionSearchToggle={this.captionSearchToggle}
       >
         <div className="dashboard-controls__filters">
-          <span className="dashboard-controls__title">
+          <span
+            className="dashboard-controls__title"
+            onClick={this.captionSearchToggle}
+          >
             {this.props.propertiesCount} Properties
           </span>
           <GroupSelect
