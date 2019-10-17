@@ -5,6 +5,7 @@ import ReportPageChrome from "../report_page_chrome";
 import PerformanceReportSpanDropdown from "../performance_report_span_dropdown";
 import CommonReport from "../common_report";
 import { connect } from "react-redux";
+import { ENGINE_METHOD_NONE } from "constants";
 
 /**
  * @class PerformanceReportPage
@@ -20,9 +21,13 @@ export class PerformanceReportPage extends Component {
 
   constructor(props) {
     super(props);
+    let camp_start = this.props.project
+      ? this.props.project.campaign_start
+      : null;
+    let camp_end = this.props.project ? this.props.project.campaign_end : null;
     this.campaignRange = {
-      campaign_start: this.props.project.campaign_start,
-      campaign_end: this.props.project.campaign_end
+      campaign_start: camp_start,
+      campaign_end: camp_end
     };
   }
 

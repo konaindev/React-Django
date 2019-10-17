@@ -93,18 +93,19 @@ export default class DateRange extends React.PureComponent {
   };
 
   getDisabledRange = () => {
+    const response_range = {
+      after: new Date()
+    };
     if ("disabledRange" in this.props) {
-      const start = new Date(this.props.disabledRange.start);
+      const start = new Date(this.props.disabledRange.campaign_start);
       const end =
-        "end" in this.props.disabledRange
-          ? new Date(this.props.disabledRange.end)
+        "campaign_end" in this.props.disabledRange
+          ? new Date(this.props.disabledRange.campaign_end)
           : new Date();
-      return {
-        after: end,
-        before: start
-      };
+      response_range.after = end;
+      response_range.before = start;
     }
-    return { after: new Date() };
+    return response_range;
   };
 
   handleClick = e => {
