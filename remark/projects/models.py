@@ -1100,9 +1100,10 @@ class TargetPeriod(ModelPeriod, models.Model):
     target_tours.metric = SumIntervalMetric()
 
     def get_project_public_id(self):
-        if self.project:
+        try:
             return self.project.public_id
-        return None
+        except Project.DoesNotExist:
+            return None
 
     class Meta:
         # Always sort TargetPeriods with the earliest period first.
