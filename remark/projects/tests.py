@@ -2,6 +2,8 @@ import datetime
 import decimal
 import os.path
 import json
+import random
+import string
 
 from django.contrib.auth.models import Group
 from django.test import TestCase
@@ -20,6 +22,49 @@ from .reports.performance import PerformanceReport
 from .export import export_periods_to_csv, export_periods_to_excel
 
 
+def create_project(project_name="project 1"):
+    address = Address.objects.create(
+        street_address_1="2284 W. Commodore Way, Suite 200",
+        city="Seattle",
+        state="WA",
+        zip_code=98199,
+        country="US",
+    )
+    account = Account.objects.create(
+        company_name="test", address=address, account_type=4
+    )
+    asset_manager = Business.objects.create(
+        name="Test Asset Manager", is_asset_manager=True
+    )
+    property_manager = Business.objects.create(
+        name="Test Property Manager", is_property_manager=True
+    )
+    property_owner = Business.objects.create(
+        name="Test Property Owner", is_property_owner=True
+    )
+    fund = Fund.objects.create(account=account, name="Test Fund")
+    property = Property.objects.create(
+        name="property 1",
+        average_monthly_rent=decimal.Decimal("0"),
+        lowest_monthly_rent=decimal.Decimal("0"),
+        geo_address=address,
+    )
+    group = Group.objects.create(name=f"{project_name} view group")
+    project = Project.objects.create(
+        name=project_name,
+        baseline_start=datetime.date(year=2018, month=11, day=19),
+        baseline_end=datetime.date(year=2018, month=12, day=26),
+        account=account,
+        asset_manager=asset_manager,
+        property_manager=property_manager,
+        property_owner=property_owner,
+        fund=fund,
+        property=property,
+        view_group=group,
+    )
+    return project, group
+
+
 class DefaultComputedPeriodTestCase(TestCase):
     """
     Test that all computed properties on a default Period instance
@@ -27,43 +72,7 @@ class DefaultComputedPeriodTestCase(TestCase):
     """
 
     def setUp(self):
-        address = Address.objects.create(
-            street_address_1="2284 W. Commodore Way, Suite 200",
-            city="Seattle",
-            state="WA",
-            zip_code=98199,
-            country="US",
-        )
-        account = Account.objects.create(
-            company_name="test", address=address, account_type=4
-        )
-        asset_manager = Business.objects.create(
-            name="Test Asset Manager", is_asset_manager=True
-        )
-        property_manager = Business.objects.create(
-            name="Test Property Manager", is_property_manager=True
-        )
-        property_owner = Business.objects.create(
-            name="Test Property Owner", is_property_owner=True
-        )
-        fund = Fund.objects.create(account=account, name="Test Fund")
-        property = Property.objects.create(
-            name="test",
-            average_monthly_rent=decimal.Decimal("0"),
-            lowest_monthly_rent=decimal.Decimal("0"),
-            geo_address=address,
-        )
-        project = Project.objects.create(
-            name="test",
-            baseline_start=datetime.date(year=2018, month=11, day=19),
-            baseline_end=datetime.date(year=2018, month=12, day=26),
-            account=account,
-            asset_manager=asset_manager,
-            property_manager=property_manager,
-            property_owner=property_owner,
-            fund=fund,
-            property=property,
-        )
+        project, _ = create_project()
         stage = LeaseStage.objects.get(short_name="performance")
         raw_period = Period.objects.create(
             project=project,
@@ -212,43 +221,7 @@ class DefaultComputedPeriodTestCase(TestCase):
 
 class DefaultReportTestCase(TestCase):
     def setUp(self):
-        address = Address.objects.create(
-            street_address_1="2284 W. Commodore Way, Suite 200",
-            city="Seattle",
-            state="WA",
-            zip_code=98199,
-            country="US",
-        )
-        account = Account.objects.create(
-            company_name="test", address=address, account_type=4
-        )
-        asset_manager = Business.objects.create(
-            name="Test Asset Manager", is_asset_manager=True
-        )
-        property_manager = Business.objects.create(
-            name="Test Property Manager", is_property_manager=True
-        )
-        property_owner = Business.objects.create(
-            name="Test Property Owner", is_property_owner=True
-        )
-        fund = Fund.objects.create(account=account, name="Test Fund")
-        property = Property.objects.create(
-            name="test",
-            average_monthly_rent=decimal.Decimal("0"),
-            lowest_monthly_rent=decimal.Decimal("0"),
-            geo_address=address,
-        )
-        project = Project.objects.create(
-            name="test",
-            baseline_start=datetime.date(year=2018, month=11, day=19),
-            baseline_end=datetime.date(year=2018, month=12, day=26),
-            account=account,
-            asset_manager=asset_manager,
-            property_manager=property_manager,
-            property_owner=property_owner,
-            fund=fund,
-            property=property,
-        )
+        project, _ = create_project()
         stage = LeaseStage.objects.get(short_name="performance")
         raw_period = Period.objects.create(
             project=project,
@@ -556,43 +529,7 @@ class PerformanceEmailSignalTestCase(TestCase):
 
 class ExportTestCase(TestCase):
     def setUp(self):
-        address = Address.objects.create(
-            street_address_1="2284 W. Commodore Way, Suite 200",
-            city="Seattle",
-            state="WA",
-            zip_code=98199,
-            country="US",
-        )
-        account = Account.objects.create(
-            company_name="test", address=address, account_type=4
-        )
-        asset_manager = Business.objects.create(
-            name="Test Asset Manager", is_asset_manager=True
-        )
-        property_manager = Business.objects.create(
-            name="Test Property Manager", is_property_manager=True
-        )
-        property_owner = Business.objects.create(
-            name="Test Property Owner", is_property_owner=True
-        )
-        fund = Fund.objects.create(account=account, name="Test Fund")
-        property = Property.objects.create(
-            name="test",
-            average_monthly_rent=decimal.Decimal("0"),
-            lowest_monthly_rent=decimal.Decimal("0"),
-            geo_address=address,
-        )
-        project = Project.objects.create(
-            name="test",
-            baseline_start=datetime.date(year=2018, month=11, day=19),
-            baseline_end=datetime.date(year=2018, month=12, day=26),
-            account=account,
-            asset_manager=asset_manager,
-            property_manager=property_manager,
-            property_owner=property_owner,
-            fund=fund,
-            property=property,
-        )
+        project, _ = create_project()
         stage = LeaseStage.objects.get(short_name="performance")
         raw_period = Period.objects.create(
             project=project,
@@ -639,7 +576,9 @@ class ExportTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertEqual(csv_str, result)
 
-    def test_export_periods_to_excel(self):
+    @mock.patch("remark.projects.export.datetime")
+    def test_export_periods_to_excel(self, mock_datetime):
+        mock_datetime.date.today.return_value = datetime.datetime(2019, 10, 11, 0, 0)
         response = export_periods_to_excel(self.project.public_id)
         self.assertEqual(response.status_code, 200)
 
@@ -653,6 +592,7 @@ class ExportTestCase(TestCase):
                 self.assertEqual(
                     ws_periods.cell(row=row, column=col).value,
                     response_ws.cell(row=row, column=col).value,
+                    f"row: {row}, column: {col}"
                 )
 
 
@@ -670,48 +610,10 @@ def mocked_geocode(location):
 
 class OnboardingWorkflowTestCase(TestCase):
     def setUp(self):
-        address = Address.objects.create(
-            street_address_1="2284 W. Commodore Way, Suite 200",
-            city="Seattle",
-            state="WA",
-            zip_code=98199,
-            country="US",
-        )
-        account = Account.objects.create(
-            company_name="test", address=address, account_type=4
-        )
         user = User.objects.create_user(
             email="admin@remarkably.io", password="adminpassword"
         )
-        asset_manager = Business.objects.create(
-            name="Test Asset Manager", is_asset_manager=True
-        )
-        property_manager = Business.objects.create(
-            name="Test Property Manager", is_property_manager=True
-        )
-        property_owner = Business.objects.create(
-            name="Test Property Owner", is_property_owner=True
-        )
-        fund = Fund.objects.create(account=account, name="Test Fund")
-        property = Property.objects.create(
-            name="test",
-            average_monthly_rent=decimal.Decimal("0"),
-            lowest_monthly_rent=decimal.Decimal("0"),
-            geo_address=address,
-        )
-        group = Group.objects.create(name="project 1 view group")
-        project = Project.objects.create(
-            name="project 1",
-            baseline_start=datetime.date(year=2018, month=11, day=19),
-            baseline_end=datetime.date(year=2018, month=12, day=26),
-            account=account,
-            asset_manager=asset_manager,
-            property_manager=property_manager,
-            property_owner=property_owner,
-            fund=fund,
-            property=property,
-            view_group=group,
-        )
+        project, _ = create_project()
         self.client.login(email="admin@remarkably.io", password="adminpassword")
         self.project = project
 
@@ -772,3 +674,79 @@ class OnboardingWorkflowTestCase(TestCase):
         project = Project.objects.get(public_id=self.project.public_id)
         project_users = project.view_group.user_set.all()
         self.assertEqual(project_users[0].public_id, user.public_id)
+
+
+class AutocompleteMemberTestCase(TestCase):
+    @staticmethod
+    def add_users_to_group(users, group):
+        for user in users:
+            group.user_set.add(user)
+
+    @staticmethod
+    def generate_users(start=0, end=5):
+        users = []
+        for i in range(start, end):
+            email = f"user{i}@test.local"
+            user = User.objects.create_user(email=email, password="password")
+            users.append(user)
+        return users
+
+    def setUp(self):
+        user = User.objects.create_user(
+            email="admin@remarkably.io", password="adminpassword"
+        )
+        project, group = create_project()
+        users = AutocompleteMemberTestCase.generate_users(0, 5)
+        AutocompleteMemberTestCase.add_users_to_group(users, group)
+        self.client.login(email="admin@remarkably.io", password="adminpassword")
+        self.user = user
+        self.group = group
+        self.users = users
+        self.url = reverse("members")
+
+    def test_without_projects(self):
+        params = {"value": ""}
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual(data["members"], [])
+
+    def test_with_project(self):
+        self.group.user_set.add(self.user)
+        params = {"value": ""}
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        users = [u.get_icon_dict() for u in self.users]
+        self.assertCountEqual(data["members"], users)
+
+    def test_many_projects(self):
+        self.group.user_set.add(self.user)
+        _, group = create_project("project 2")
+        users = AutocompleteMemberTestCase.generate_users(5, 10)
+        AutocompleteMemberTestCase.add_users_to_group(users, group)
+        params = {"value": ""}
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        users = [u.get_icon_dict() for u in self.users]
+        self.assertCountEqual(data["members"], users)
+
+    def test_select_staff(self):
+        self.group.user_set.add(self.user)
+        staff_user = self.users[0]
+        staff_user.is_staff = True
+        staff_user.save()
+
+        params = {"value": staff_user.email}
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertFalse(data["members"])
+
+        params = {"value": ""}
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        users = [u.get_icon_dict() for u in self.users[1:]]
+        self.assertCountEqual(data["members"], users)

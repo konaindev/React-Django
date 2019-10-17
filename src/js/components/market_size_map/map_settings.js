@@ -1,6 +1,7 @@
 import scssVars from "../../../css/variables.scss";
 
-export const GOOGLE_MAP_API_KEY = "AIzaSyBu4HU8t3rRXnfdkNjSV1_PIhzzrFFlVTs";
+export const GOOGLE_MAP_API_KEY =
+  process.env.GOOGLE_MAP_API_KEY || "FAKE_GMAP_KEY";
 export const DEFAULT_ZOOM = 9;
 
 export const mapNightTheme = [
