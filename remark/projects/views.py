@@ -337,9 +337,10 @@ class AddMembersView(LoginRequiredMixin, APIView):
         projects_ids = [p.get("property_id") for p in payload.get("projects", [])]
         projects = Project.objects.filter(public_id__in=projects_ids)
 
-        for project in projects:
-            if not project.is_admin(request.user):
-                return self.render_403()
+        if not request.user.is_superuser:
+            for project in projects:
+                if not project.is_admin(request.user):
+                    return self.render_403()
 
         users = []
         for member in members:

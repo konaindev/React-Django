@@ -614,17 +614,14 @@ class OnboardingWorkflowTestCase(TestCase):
             email="admin@remarkably.io", password="adminpassword"
         )
         project, _ = create_project()
-        group = Group.objects.create(name="project 1 view group")
-        group.user_set.add(user)
-        project.admin_group = group
-        project.save()
         self.client.login(email="admin@remarkably.io", password="adminpassword")
         self.project = project
+        self.user = user
+        self.url = reverse("add_members")
 
     @mock.patch("remark.users.views.geocode", side_effect=mocked_geocode)
     @mock.patch("remark.projects.views.send_invite_email")
     def test_invite_new_user(self, mock_send_email, _):
-        url = reverse("add_members")
         params = {
             "projects": [{"property_id": self.project.public_id}],
             "members": [
@@ -635,7 +632,11 @@ class OnboardingWorkflowTestCase(TestCase):
                 }
             ],
         }
-        response = self.client.post(url, json.dumps(params), "json")
+        group = Group.objects.create(name="project 1 admin group")
+        group.user_set.add(self.user)
+        self.project.admin_group = group
+        self.project.save()
+        response = self.client.post(self.url, json.dumps(params), "json")
         self.assertEqual(response.status_code, 200)
         data = response.json()
         public_id = data["projects"][0]["members"][0]["user_id"]
@@ -679,6 +680,19 @@ class OnboardingWorkflowTestCase(TestCase):
         project_users = project.view_group.user_set.all()
         self.assertEqual(project_users[0].public_id, user.public_id)
 
+    def test_invite_without_permissions(self):
+        params = {
+            "projects": [{"property_id": self.project.public_id}],
+            "members": [
+                {
+                    "label": "new.user@gmail.com",
+                    "value": "new.user@gmail.com",
+                    "__isNew__": True,
+                }
+            ],
+        }
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 403)
 
 class AutocompleteMemberTestCase(TestCase):
     @staticmethod
