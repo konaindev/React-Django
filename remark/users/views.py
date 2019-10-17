@@ -94,9 +94,9 @@ class CompleteAccountView(LoginRequiredMixin, ReactView):
                 business = Business.objects.get(public_id=data["company"])
             except Business.DoesNotExist:
                 business = Business(name=data["company"])
-                business.save()
             for role in data["company_role"]:
                 setattr(business, BUSINESS_TYPE[role], True)
+            business.save()
 
             office = Office(
                 office_type=data["office_type"],
