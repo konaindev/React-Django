@@ -136,12 +136,17 @@ export class DashboardPage extends React.PureComponent {
   toggleView = viewType => this.setState({ viewType });
 
   onSelectHandler = selectedProperties => {
-    const isAdmin = selectedProperties.every(property => {
-      const member = property.members.find(
-        m => m.user_id === this.props.user.user_id
-      );
-      return member?.role === "admin";
-    });
+    let isAdmin;
+    if (this.props.user.is_superuser) {
+      isAdmin = true;
+    } else {
+      isAdmin = selectedProperties.every(property => {
+        const member = property.members.find(
+          m => m.user_id === this.props.user.user_id
+        );
+        return member?.role === "admin";
+      });
+    }
     const inviteDisable = !isAdmin;
     this.props.dispatch(general.update({ selectedProperties, inviteDisable }));
   };
@@ -177,7 +182,6 @@ export class DashboardPage extends React.PureComponent {
     const className = cn("dashboard-content", {
       "dashboard-content--selection-mode": this.props.selectedProperties.length
     });
-    const { user } = this.props;
     const PropertiesListComponent = this.propertiesListComponent;
     const navLinks = this.props.navLinks;
     const { isFetching } = this.props;

@@ -18,18 +18,44 @@ export class PerformanceReportPage extends Component {
     project: PropTypes.object.isRequired
   };
 
+  constructor(props) {
+    super(props);
+    this.campaignRange = {
+      campaign_start: this.props.project.campaign_start,
+      campaign_end: this.props.project.campaign_end
+    };
+  }
+
   renderDateSpan() {
     return (
       <PerformanceReportSpanDropdown
-        current_report_link={this.props.current_report_link}
-        report_links={this.props.report_links.performance}
+        start_date={this.props.report.dates.start}
+        end_date={this.props.report.dates.end}
+        preset={this.props.current_report_link.description.preset}
+        campaignRange={this.campaignRange}
+        onChange={this.onChange}
       />
     );
   }
 
+  generateReportLink = preset => {
+    return (
+      "/projects/" + this.props.project.public_id + "/performance/" + preset
+    );
+  };
+
+  onChange = (preset, ...args) => {
+    var window;
+    if (preset !== "custom") {
+      window = this.generateReportLink(preset);
+    } else if (preset === "custom") {
+      window = this.generateReportLink(args[0]);
+    }
+    document.location = window;
+  };
+
   render() {
     const { user, project, report, report_links, share_info } = this.props;
-
     return (
       <ReportPageChrome
         user={user}

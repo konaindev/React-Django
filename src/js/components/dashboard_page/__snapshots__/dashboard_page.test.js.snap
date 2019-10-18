@@ -408,6 +408,7 @@ exports[`DashboardPage Row select 1`] = `
               >
                 <span
                   className="dashboard-controls__title"
+                  onClick={[Function]}
                 >
                   10
                    Properties
@@ -3122,6 +3123,7 @@ exports[`DashboardPage Row view 1`] = `
               >
                 <span
                   className="dashboard-controls__title"
+                  onClick={[Function]}
                 >
                   10
                    Properties
@@ -5836,6 +5838,7 @@ exports[`DashboardPage renders correctly 1`] = `
               >
                 <span
                   className="dashboard-controls__title"
+                  onClick={[Function]}
                 >
                   10
                    Properties

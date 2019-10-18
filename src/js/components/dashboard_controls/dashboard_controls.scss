@@ -1,6 +1,5 @@
 @import "css/base.scss";
 
-$filter-title-width: 200px;
 $filter-field-spacing: 8px;
 
 .dashboard-controls--disable {
@@ -19,7 +18,9 @@ $filter-field-spacing: 8px;
 
 .dashboard-controls__title {
     display: inline-block;
-    width: $filter-title-width;
+    padding-left: 16px;
+    cursor: pointer;
+    margin-right: auto;
     font-family: $font-sans;
     font-size: $text-sm;
     font-weight: $weight-medium;

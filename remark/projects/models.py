@@ -490,8 +490,8 @@ class Project(models.Model):
         users_members = self.view_group.user_set.all()
         users_admins = self.admin_group.user_set.all()
         users = [
-            user.get_icon_dict(PROJECT_ROLES["member"]) for user in users_members
-        ] + [user.get_icon_dict(PROJECT_ROLES["admin"]) for user in users_admins]
+            user.get_icon_dict(PROJECT_ROLES["member"]) for user in users_members if not user.is_staff
+        ] + [user.get_icon_dict(PROJECT_ROLES["admin"]) for user in users_admins if not user.is_staff]
         return users
 
     def is_admin(self, user):
