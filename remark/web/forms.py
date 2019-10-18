@@ -23,7 +23,7 @@ class LocalizationForm(forms.Form):
     )
 
 class CsvImportForm(forms.Form):
-    csv_file = forms.FileField(required=False, label="please select a file")
+    csv_file = forms.FileField(required=False, label="")
 
     def clean(self):
         pass
