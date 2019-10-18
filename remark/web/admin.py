@@ -37,13 +37,6 @@ class LocalizationAdmin(admin.ModelAdmin):
         return my_urls + urls
 
 
-class PageMixin(object):
-    def get_context_data(self, **kwargs):
-        context = super(PageMixin, self).get_context_data(**kwargs)
-        context["site_header"] = admin.site.site_header
-        return context
-
-
 class CsvImportFormView(FormView):
     template_name = "localization/csv_form.html"
     form_class = CsvImportForm
