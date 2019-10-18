@@ -21,3 +21,9 @@ class LocalizationForm(forms.Form):
     language = forms.ChoiceField(
         label="Language", choices=LANGUAGES, required=False
     )
+
+class CsvImportForm(forms.Form):
+    csv_file = forms.FileField(required=False, label="please select a file")
+
+    def clean(self):
+        pass
