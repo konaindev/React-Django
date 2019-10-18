@@ -201,6 +201,7 @@ class PropertyListTestCase(TestCase):
                 "email": self.user.email,
                 "logout_url": "/users/logout/",
                 "user_id": self.user.public_id,
+                "is_superuser": self.user.is_superuser,
             },
         }
 
@@ -265,6 +266,7 @@ class PropertyListTestCase(TestCase):
                 "email": self.user.email,
                 "logout_url": "/users/logout/",
                 "user_id": self.user.public_id,
+                "is_superuser":  self.user.is_superuser,
             },
         }
 
