@@ -10,7 +10,8 @@ import {
   MenuWithDescription,
   OptionWithDescription,
   MultiValueComponents,
-  OptionUsers
+  OptionUsers,
+  InputWithPlaceholder
 } from "../select/select_components";
 import UserRow from "../user_row";
 import UserIconList from "../user_icon_list";
@@ -62,6 +63,8 @@ class InviteModal extends React.PureComponent {
   static selectUsersComponents = {
     ...MultiValueComponents,
     Option: OptionUsers,
+    Input: InputWithPlaceholder,
+    Placeholder: () => null,
     IndicatorsContainer: () => null
   };
 
