@@ -51,6 +51,15 @@ class CsvImportFormView(FormView):
     def get_success_url(self):
         return reverse("admin:web_localization_changelist")
 
+    def get_context_data(self, **kwargs):    
+        context = {
+            **admin_site.each_context(self.request),
+            **super().get_context_data(**kwargs),
+            "opts": Localization._meta,
+            "has_view_permission": True,
+        }
+        return context
+
     def post(self, request, *args, **kwargs):
         form = self.get_form()
 
