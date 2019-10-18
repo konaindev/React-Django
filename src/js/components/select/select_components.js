@@ -116,3 +116,20 @@ export const MenuPortal = props => (
     <div className={props.selectProps.className}>{props.children}</div>
   </components.MenuPortal>
 );
+
+export const InputWithPlaceholder = ({ children, ...props }) => {
+  let placeholder = null;
+  if (!props.selectProps?.inputValue) {
+    placeholder = (
+      <components.Placeholder {...props}>
+        {props.selectProps?.placeholder}
+      </components.Placeholder>
+    );
+  }
+  return (
+    <div className="select__input-with-placeholder">
+      <components.Input {...props} />
+      {placeholder}
+    </div>
+  );
+};
