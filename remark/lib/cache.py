@@ -18,6 +18,13 @@ def access_cache(key, method_to_generate_value, cache_bust=False, ttl=TIMEOUT_1_
     return value
 
 
+def reset_cache(key=None):
+    if key:
+        cache.delete(key)
+    else:
+        cache.clear()
+
+
 def check_request_cache_bust(request):
     """
     Only for Dev and Staging (not for Production!)
@@ -53,3 +60,6 @@ def remark_cache(base_key, timeout=TIMEOUT_1_HOUR, version=0):
         return wrapper
     return decorator
 
+
+def get_dashboard_cache_key(public_id):
+    return f"remark.web.views.dashboard_view.project.{public_id}"
