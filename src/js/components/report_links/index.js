@@ -47,12 +47,11 @@ export default class ReportLinks extends Component {
             "baseline",
             this.props.report_links.baseline
           )}
-          {this.props.report_links.market &&
-            this.renderLink(
-              "Market Analysis",
-              "market",
-              this.props.report_links.market
-            )}
+          {this.renderLink(
+            "Market Analysis",
+            "market",
+            this.props.report_links.market
+          )}
           {this.renderLink(
             "Modeling",
             "modeling",
