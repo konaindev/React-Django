@@ -2,7 +2,8 @@ import csv
 
 from django.contrib import admin, messages
 from django.shortcuts import render
-from django.urls import path
+from django.urls import path, reverse
+from django.views.generic.edit import FormView
 
 from remark.admin import admin_site
 from remark.lib.logging import error_text, getLogger
@@ -10,6 +11,12 @@ from .models import Localization, LocalizationVersion
 from .forms import LocalizationAdminForm, LocalizationVersionAdminForm, CsvImportForm
 
 logger = getLogger(__name__)
+
+
+@admin.register(LocalizationVersion, site=admin_site)
+class LocalizationVersionAdmin(admin.ModelAdmin):
+    form = LocalizationVersionAdminForm
+    list_display = ["language", "version"]
 
 
 @admin.register(Localization, site=admin_site)
@@ -21,47 +28,58 @@ class LocalizationAdmin(admin.ModelAdmin):
     def get_urls(self):
         urls = super().get_urls()
         my_urls = [
-            path('import-csv/', self.import_csv),
+            path(
+                "csv-import/",
+                self.admin_site.admin_view(CsvImportFormView.as_view()),
+                name="web_localization_csv_import",
+            )
         ]
         return my_urls + urls
 
-    def import_csv(self, request):
-        if request.method == "GET":
-            form = CsvImportForm()
-            payload = {"form": form}
-            return render(
-                request, "localization/csv_form.html", payload
-            )
 
-        if request.method == "POST":
-            logger.info("LocalizationAdmin::import_csv::top")
+class PageMixin(object):
+    def get_context_data(self, **kwargs):
+        context = super(PageMixin, self).get_context_data(**kwargs)
+        context["site_header"] = admin.site.site_header
+        return context
+
+
+class CsvImportFormView(FormView):
+    template_name = "localization/csv_form.html"
+    form_class = CsvImportForm
+
+    def get_success_url(self):
+        return reverse("admin:web_localization_changelist")
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+
+        if form.is_valid():
+            csv_file = form.cleaned_data["csv_file"]
+            logger.info("LocalizationAdmin::csv_import::top")
             try:
-                csv_file = request.FILES["csv_file"]
                 file_data = csv_file.read().decode("utf-8")
                 lines = file_data.split("\n")
                 line_count = 0
                 localization_objects = []
                 for line in lines:
+                    fields = line.split(",")
                     line_count += 1
                     if line_count == 1:
-                        logger.info(f"Column header: {line}")
-                    else:
-                        fields = line.split(",")
-                        if len(fields) > 1:
-                            localization_objects.append(Localization(key=fields[0], en_us=fields[1]))
-                logger.info(f"Processed {len(localization_objects)} rows.")
+                        logger.info(f"LocalizationAdmin::csv_import::header {line}")
+                    elif len(fields) > 1:
+                        localization_objects.append(
+                            Localization(key=fields[0], en_us=fields[1])
+                        )
                 Localization.objects.bulk_create(localization_objects)
-                self.message_user(request, "Your csv file has been imported")
+                messages.success(
+                    request, f"Imported {len(localization_objects)} rows successfully."
+                )
+                logger.info("LocalizationAdmin::csv_import::bottom")
+                return self.form_valid(form)
             except Exception as e:
                 logger.error(error_text(e))
-                self.message_user(request, e, messages.ERROR)
-            logger.info("LocalizationAdmin::import_csv::bottom")
-            return render(
-                request, "localization/csv_form.html"
-            )
-
-
-@admin.register(LocalizationVersion, site=admin_site)
-class LocalizationVersionAdmin(admin.ModelAdmin):
-    form = LocalizationVersionAdminForm
-    list_display = ["language", "version"]
+                messages.error(request, e)
+                return self.form_invalid(form)
+        else:
+            return self.form_invalid(form)

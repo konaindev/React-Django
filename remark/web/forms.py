@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 
 from .constants import LANGUAGES
 from .models import Localization, LocalizationVersion
@@ -22,8 +23,13 @@ class LocalizationForm(forms.Form):
         label="Language", choices=LANGUAGES, required=False
     )
 
+
 class CsvImportForm(forms.Form):
     csv_file = forms.FileField(required=False, label="")
 
     def clean(self):
-        pass
+        csv_file = self.cleaned_data.get("csv_file", None)
+        if not csv_file:
+            raise ValidationError("No spreadsheet file chosen.")
+        else:
+            return self.cleaned_data
