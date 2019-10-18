@@ -1,0 +1,76 @@
+{
+    "address_components": [
+      {
+        "long_name": "98199",
+        "short_name": "98199",
+        "types": [
+          "postal_code"
+        ]
+      },
+      {
+        "long_name": "Seattle",
+        "short_name": "Seattle",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "King County",
+        "short_name": "King County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Washington",
+        "short_name": "WA",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "United States",
+        "short_name": "US",
+        "types": [
+          "country",
+          "political"
+        ]
+      }
+    ],
+    "formatted_address": "Seattle, WA 98199, USA",
+    "geometry": {
+      "bounds": {
+        "northeast": {
+          "lat": 47.678899,
+          "lng": -122.3762241
+        },
+        "southwest": {
+          "lat": 47.62397,
+          "lng": -122.4412311
+        }
+      },
+      "location": {
+        "lat": 47.6507081,
+        "lng": -122.4067862
+      },
+      "location_type": "APPROXIMATE",
+      "viewport": {
+        "northeast": {
+          "lat": 47.678899,
+          "lng": -122.3762241
+        },
+        "southwest": {
+          "lat": 47.62397,
+          "lng": -122.4412311
+        }
+      }
+    },
+    "partial_match": true,
+    "place_id": "ChIJSQQA-IsVkFQRG8P_Let0syY",
+    "types": [
+      "postal_code"
+    ]
+  }

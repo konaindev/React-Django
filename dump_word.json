@@ -1,0 +1,95 @@
+{
+    "address_components": [
+      {
+        "long_name": "1190",
+        "short_name": "1190",
+        "types": [
+          "street_number"
+        ]
+      },
+      {
+        "long_name": "Oxford Street West",
+        "short_name": "Oxford St W",
+        "types": [
+          "route"
+        ]
+      },
+      {
+        "long_name": "Oakridge",
+        "short_name": "Oakridge",
+        "types": [
+          "neighborhood",
+          "political"
+        ]
+      },
+      {
+        "long_name": "London",
+        "short_name": "London",
+        "types": [
+          "locality",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Middlesex County",
+        "short_name": "Middlesex County",
+        "types": [
+          "administrative_area_level_2",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Ontario",
+        "short_name": "ON",
+        "types": [
+          "administrative_area_level_1",
+          "political"
+        ]
+      },
+      {
+        "long_name": "Canada",
+        "short_name": "CA",
+        "types": [
+          "country",
+          "political"
+        ]
+      },
+      {
+        "long_name": "N6H 4N2",
+        "short_name": "N6H 4N2",
+        "types": [
+          "postal_code"
+        ]
+      }
+    ],
+    "formatted_address": "1190 Oxford St W, London, ON N6H 4N2, Canada",
+    "geometry": {
+      "location": {
+        "lat": 42.9744562,
+        "lng": -81.32169119999999
+      },
+      "location_type": "ROOFTOP",
+      "viewport": {
+        "northeast": {
+          "lat": 42.9758051802915,
+          "lng": -81.3203422197085
+        },
+        "southwest": {
+          "lat": 42.9731072197085,
+          "lng": -81.3230401802915
+        }
+      }
+    },
+    "place_id": "ChIJP28BamnwLogRmCb4EX25N80",
+    "plus_code": {
+      "compound_code": "XMFH+Q8 London, Ontario, Canada",
+      "global_code": "86JWXMFH+Q8"
+    },
+    "types": [
+      "establishment",
+      "food",
+      "grocery_or_supermarket",
+      "point_of_interest",
+      "store"
+    ]
+  }

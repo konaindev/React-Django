@@ -6,6 +6,7 @@ import React from "react";
 
 import { Tick, Upload } from "../../icons";
 import { formatPhone } from "../../utils/formatters";
+import { validateAddress } from "../../api/account_settings";
 import Button from "../button";
 import Input from "../input";
 import MultiSelect from "../multi_select";
@@ -23,7 +24,10 @@ export default class Profile extends React.PureComponent {
       phone_ext: PropTypes.string,
       company: PropTypes.string,
       company_roles: PropTypes.arrayOf(PropTypes.string),
-      office_address: PropTypes.string,
+      office_street: PropTypes.string,
+      office_city: PropTypes.string,
+      office_state: PropTypes.string,
+      office_zip5: PropTypes.string,
       office_name: PropTypes.string,
       office_type: PropTypes.number
     }),
@@ -40,7 +44,10 @@ export default class Profile extends React.PureComponent {
       phone_ext: "",
       company: "",
       company_roles: [],
-      office_address: "",
+      office_street: "",
+      office_city: "",
+      office_state: "",
+      office_zip: "",
       office_name: "",
       office_type: null
     }
@@ -54,7 +61,10 @@ export default class Profile extends React.PureComponent {
     "phone_ext",
     "company",
     "company_roles",
-    "office_address",
+    "office_street",
+    "office_city",
+    "office_state",
+    "office_zip",
     "office_name",
     "office_type"
   ];
@@ -194,6 +204,8 @@ export default class Profile extends React.PureComponent {
         }
       }
     }
+
+    response = validateAddress(data);
     this.props.dispatch({
       type: "API_ACCOUNT_PROFILE",
       callback: this.setSuccessMessage,
@@ -430,7 +442,7 @@ export default class Profile extends React.PureComponent {
                     </div>
                     <div
                       className={this.getFieldClasses(
-                        "office_address",
+                        "office_street",
                         errors,
                         touched,
                         ["full-grid"]
@@ -441,14 +453,70 @@ export default class Profile extends React.PureComponent {
                       </div>
                       <Input
                         className="account-settings__input"
-                        name="office_address"
+                        name="office_street"
                         theme="gray"
-                        value={values.office_address}
+                        value={values.office_street}
                         onBlur={this.onBlur}
                         onChange={this.onChange}
                       />
                       <div className="account-settings__error">
-                        <ErrorMessage name="office_address" />
+                        <ErrorMessage name="office_street" />
+                      </div>
+                    </div>
+                    <div
+                      className={this.getFieldClasses(
+                        "office_city",
+                        errors,
+                        touched,
+                        ["max-width"]
+                      )}
+                    >
+                      <div className="account-settings__label">Office City</div>
+                      <Input
+                        className="account-settings__input"
+                        name="office_city"
+                        theme="gray"
+                        value={values.office_city}
+                        onBlur={this.onBlur}
+                        onChange={this.onChange}
+                      ></Input>
+                      <div className="account-settings__error">
+                        <ErrorMessage name="office_city" />
+                      </div>
+                    </div>
+                    <div
+                      className={this.getFieldClasses(
+                        "office_state_zip",
+                        errors,
+                        touched,
+                        ["max-width"]
+                      )}
+                    >
+                      <div className="account-settings__label">
+                        Office State
+                      </div>
+                      <Input
+                        className="account-settings__input"
+                        name="office_state"
+                        theme="gray"
+                        value={values.office_state}
+                        onBlur={this.onBlur}
+                        onChange={this.onChange}
+                      ></Input>
+                      <div className="account-settings__error">
+                        <ErrorMessage name="office_state" />
+                      </div>
+                      <div className="account-settings__label">Office Zip</div>
+                      <Input
+                        className="account-settings__input"
+                        name="office_zip"
+                        theme="gray"
+                        value={values.office_zip}
+                        onBlur={this.onBlur}
+                        onChange={this.onChange}
+                      ></Input>
+                      <div className="account-settings__error">
+                        <ErrorMessage name="office_zip" />
                       </div>
                     </div>
                     <div

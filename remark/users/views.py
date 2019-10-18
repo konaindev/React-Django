@@ -306,20 +306,54 @@ class AccountProfileView(LoginRequiredMixin, RemarkView):
         office.name = data["office_name"]
         office.office_type = data["office_type"]
         office.business = business
-        office.save()
-        person.save()
+        # office.save()
+        # person.save()
+
+    def check_address(self, data):
+        query_address = f'{data["office_street"]}, {data["office_city"]}, {data["office_state"]} {data["office_zip"]}'
+        # office_address = geocode(query_address)
+        # if not office_address:
+        #     print("SUCCESS")
+        # print(office_address)
+        # print("BOOOOO")
+        return query_address
+
 
     def post(self, request):
         post_data = request.POST.copy()
         post_data \
             .setlist("company_roles", request.POST.getlist("company_roles[]"))
+        post_data.setdefault("office_address", self.check_address(post_data))
         post_data.pop("company_roles[]", None)
+        # print(self.check_address(post_data))
         form = AccountProfileForm(post_data, request.FILES)
         if not form.is_valid():
             return JsonResponse(form.errors.get_json_data(), status=500)
         user = request.user
         self.update_profile(user, form.cleaned_data)
         return JsonResponse(user.get_profile_data(), status=200)
+
+class ValidateAddressView(RemarkView):
+    def post(self, request):
+        return JsonResponse({"test":"testing"}, status=200)
+        # params = json.loads(request.body)
+        # user = request.user
+        # if user.is_anonymous and params.get("hash"):
+        #     try:
+        #         user = User.objects.get(public_id=params["hash"])
+        #     except User.DoesNotExist:
+        #         user = None
+        # errors = {}
+        # for v in VALIDATION_RULES:
+        #     try:
+        #         password = params.get("password", "")
+        #         password_validation.validate_password(
+        #             password, user=user, password_validators=v["validator"]
+        #         )
+        #     except ValidationError:
+        #         errors[v["key"]] = True
+
+        # return JsonResponse({"errors": errors}, status=200)
 
 
 class AccountReportsView(LoginRequiredMixin, RemarkView):

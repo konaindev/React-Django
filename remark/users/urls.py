@@ -15,6 +15,7 @@ from .views import (
     ValidatePasswordView,
     SessionExpireView,
     ResendInviteView,
+    ValidateAddressView,
 )
 
 
@@ -107,4 +108,5 @@ urlpatterns = [
     path("account-security", AccountSecurityView.as_view(), name="account_security"),
     path("account-profile", AccountProfileView.as_view(), name="account_profile"),
     path("account-reports", AccountReportsView.as_view(), name="account_reports"),
+    path("validate-address", ValidateAddressView.as_view(), name="validate_address")
 ]
