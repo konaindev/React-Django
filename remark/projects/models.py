@@ -494,13 +494,15 @@ class Project(models.Model):
         ] + [user.get_icon_dict(PROJECT_ROLES["admin"]) for user in users_admins if not user.is_staff]
         return users
 
+    def get_project_public_id(self):
+        return self.public_id
+
     def is_admin(self, user):
         if user.is_superuser:
             return True
         return (self.admin_group is not None) and user.groups.filter(
             pk=self.admin_group.pk
         ).exists()
-
 
     def user_can_view(self, user):
         if user.is_superuser:
@@ -1113,6 +1115,12 @@ class TargetPeriod(ModelPeriod, models.Model):
         null=True, blank=True, default=None, help_text="Target: tours"
     )
     target_tours.metric = SumIntervalMetric()
+
+    def get_project_public_id(self):
+        try:
+            return self.project.public_id
+        except Project.DoesNotExist:
+            return None
 
     class Meta:
         # Always sort TargetPeriods with the earliest period first.

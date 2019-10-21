@@ -196,8 +196,7 @@ class PropertyListTestCase(TestCase):
             ],
             "locations": [{"city": "Seattle", "label": ["Seattle, WA"], "state": "wa"}],
             "user": {
-                "account_id": self.account.id,
-                "account_name": self.account.company_name,
+                "account_name": self.user.get_name(),
                 "email": self.user.email,
                 "logout_url": "/users/logout/",
                 "user_id": self.user.public_id,
@@ -261,8 +260,7 @@ class PropertyListTestCase(TestCase):
             ],
             "locations": [{"city": "Seattle", "label": ["Seattle, WA"], "state": "wa"}],
             "user": {
-                "account_id": self.account.id,
-                "account_name": self.account.company_name,
+                "account_name": self.user.get_name(),
                 "email": self.user.email,
                 "logout_url": "/users/logout/",
                 "user_id": self.user.public_id,
