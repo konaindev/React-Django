@@ -112,7 +112,8 @@ export const props = {
     profile_image_url:
       "https://storage.googleapis.com/tracker-avatar-production/a11569ffecab2b5564c0cbfa5e5f283a_3140620_96.png",
     logout_url: "/user/logout",
-    account_url: "/user/1234556960"
+    account_url: "/user/1234556960",
+    is_superuser: false
   },
   search_url: "/dashboard",
   locations: [

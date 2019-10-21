@@ -314,9 +314,13 @@ const DashboardSelection = ({
 DashboardSelection.propTypes = {
   selectedProperties: PropTypes.array.isRequired,
   inviteHandler: PropTypes.func.isRequired,
-  inviteDisable: PropTypes.bool.isRequired,
+  inviteDisable: PropTypes.bool,
   selectAll: PropTypes.func.isRequired,
   cancelSelect: PropTypes.func.isRequired
+};
+
+DashboardSelection.defaultProps = {
+  inviteDisable: true
 };
 
 export class UrlQueryLayer extends React.PureComponent {

@@ -89,7 +89,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
                 address = project.property.geo_address
                 state = address.state
                 city = address.city
-                label = (f"{city}, {state.upper()}",)
+                label = f"{city}, {state.upper()}"
                 if not has_property_in_list_of_dict(locations, "label", label):
                     locations.append({"city": city, "label": label, "state": state.lower()})
                 if project.asset_manager is not None and not has_property_in_list_of_dict(
