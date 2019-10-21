@@ -323,7 +323,7 @@ class MembersView(LoginRequiredMixin, APIView):
             & Q(groups__in=groups_ids)
             & ~Q(id=request.user.id)
             & Q(is_staff=False)
-        )
+        ).distinct()
         members = [user.get_icon_dict() for user in users]
         return JsonResponse({"members": members})
 

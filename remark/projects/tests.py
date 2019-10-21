@@ -750,6 +750,18 @@ class AutocompleteMemberTestCase(TestCase):
         users = [u.get_icon_dict() for u in self.users]
         self.assertCountEqual(data["members"], users)
 
+    def test_many_projects_with_user(self):
+        AutocompleteMemberTestCase.add_users_to_group([self.user], self.group)
+        _, group = create_project("project 2")
+        AutocompleteMemberTestCase.add_users_to_group(self.users, group)
+        AutocompleteMemberTestCase.add_users_to_group([self.user], group)
+        params = {"value": ""}
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        users = [u.get_icon_dict() for u in self.users]
+        self.assertCountEqual(data["members"], users)
+
     def test_select_staff(self):
         self.group.user_set.add(self.user)
         staff_user = self.users[0]
