@@ -53,29 +53,66 @@ class CsvImportFormView(FormView):
         }
         return context
 
+    def get_configured_languages(self):
+        languages = LocalizationVersion.objects.all().values_list("language", flat=True)
+        return languages
+
     def post(self, request, *args, **kwargs):
         form = self.get_form()
 
         if form.is_valid():
-            csv_file = form.cleaned_data["csv_file"]
             logger.info("LocalizationAdmin::csv_import::top")
+
+            csv_file = form.cleaned_data["csv_file"]
+            allow_override = form.cleaned_data["allow_override"]
+            languages = self.get_configured_languages()
+
+            """
+            @TODO: better to use pandas or at least create a utility function to parse csv file
+            """
             try:
-                file_data = csv_file.read().decode("utf-8")
-                lines = file_data.split("\n")
-                line_count = 0
-                localization_objects = []
-                for line in lines:
-                    fields = line.split(",")
-                    line_count += 1
-                    if line_count == 1:
-                        logger.info(f"LocalizationAdmin::csv_import::header {line}")
-                    elif len(fields) > 1:
-                        localization_objects.append(
-                            Localization(key=fields[0], en_us=fields[1])
-                        )
-                Localization.objects.bulk_create(localization_objects)
+                file_data = csv_file.read().decode("utf-8-sig")
+                rows = file_data.split("\r\n")
+                column_indexes = dict() # index by column name
+                created_rows = 0
+                updated_rows = 0
+                skipped_rows = 0
+
+                for row_index, row in enumerate(rows):
+                    fields_arr = row.split(",")
+                    if row_index == 0:
+                        for field_index, field in enumerate(fields_arr):
+                            field_name= field.lower()
+                            if field_name == "key" or field_name in languages:
+                                column_indexes[field_name] = field_index
+                        logger.info(f"LocalizationAdmin::csv_import::header {column_indexes}")
+                    else:
+                        # last line is parsed as ['']
+                        if len(fields_arr) < 2:
+                            if row_index < len(rows) - 1:
+                                skipped_rows += 1
+                            continue
+                        try:
+                            data_to_save = dict()
+                            for column, index in column_indexes.items():
+                                data_to_save[column] = fields_arr[index]
+                        except IndexError:
+                            skipped_rows +=1
+                            continue
+                        try:
+                            model_obj = Localization.objects.get(key=data_to_save["key"])
+                            if allow_override:
+                                for key, value in data_to_save.items():
+                                    setattr(model_obj, key, value)
+                                model_obj.save()
+                                updated_rows += 1
+                            else:
+                                skipped_rows += 1
+                        except Localization.DoesNotExist:
+                            Localization.objects.create(**data_to_save)
+                            created_rows += 1
                 messages.success(
-                    request, f"Imported {len(localization_objects)} rows successfully."
+                    request, f"{created_rows} rows created, {updated_rows} rows updated, {skipped_rows} skipped."
                 )
                 logger.info("LocalizationAdmin::csv_import::bottom")
                 return self.form_valid(form)

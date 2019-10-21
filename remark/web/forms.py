@@ -26,6 +26,7 @@ class LocalizationForm(forms.Form):
 
 class CsvImportForm(forms.Form):
     csv_file = forms.FileField(required=False, label="")
+    allow_override = forms.BooleanField(required=False, initial=True, label="Override Strings with Duplicate Key?")
 
     def clean(self):
         csv_file = self.cleaned_data.get("csv_file", None)
