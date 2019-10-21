@@ -194,7 +194,7 @@ class PropertyListTestCase(TestCase):
                     "label": self.property_manager2.name,
                 },
             ],
-            "locations": [{"city": "Seattle", "label": ["Seattle, WA"], "state": "wa"}],
+            "locations": [{"city": "Seattle", "label": "Seattle, WA", "state": "wa"}],
             "user": {
                 "account_name": self.user.get_name(),
                 "email": self.user.email,
@@ -258,7 +258,7 @@ class PropertyListTestCase(TestCase):
                     "label": self.property_manager2.name,
                 },
             ],
-            "locations": [{"city": "Seattle", "label": ["Seattle, WA"], "state": "wa"}],
+            "locations": [{"city": "Seattle", "label": "Seattle, WA", "state": "wa"}],
             "user": {
                 "account_name": self.user.get_name(),
                 "email": self.user.email,
