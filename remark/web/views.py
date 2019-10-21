@@ -38,7 +38,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
 
     def get_project_details(self, project, request):
         """ cached by "project.public_id", details for project card on UI """
-        cache_key = f"remark.web.views.dashboard_view.project.{project.public_id}"
+        cache_key = cache_lib.get_dashboard_cache_key(project.public_id)
         cache_bust = cache_lib.check_request_cache_bust(request)
 
         """ method to generate value when request indicates to bust cache """

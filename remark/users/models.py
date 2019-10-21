@@ -150,8 +150,7 @@ class User(PermissionsMixin, AbstractBaseUser):
         return {
             "email": self.email,
             "user_id": self.public_id,
-            "account_id": self.account_id,
-            "account_name": self.account.company_name,
+            "account_name": self.get_name(),
             "logout_url": reverse("logout")
             # TODO: Add account_url
         }
