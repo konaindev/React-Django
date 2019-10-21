@@ -191,27 +191,26 @@ export default class Profile extends React.PureComponent {
     this.unsetMessage();
     const dataValues = { ...values };
     const data = new FormData();
-    for (const k of Object.keys(dataValues)) {
-      if (Profile.fieldsSubmit.includes(k)) {
-        if (k === "company_roles") {
-          for (const i of dataValues.company_roles) {
-            data.append("company_roles[]", i.value);
-          }
-        } else if (k === "office_type") {
-          data.append("office_type", dataValues.office_type.value);
-        } else {
-          data.append(k, dataValues[k]);
-        }
-      }
-    }
-
-    response = validateAddress(data);
-    this.props.dispatch({
-      type: "API_ACCOUNT_PROFILE",
-      callback: this.setSuccessMessage,
-      onError: this.setErrorMessages,
-      data
-    });
+    // for (const k of Object.keys(dataValues)) {
+    //   if (Profile.fieldsSubmit.includes(k)) {
+    //     if (k === "company_roles") {
+    //       for (const i of dataValues.company_roles) {
+    //         data.append("company_roles[]", i.value);
+    //       }
+    //     } else if (k === "office_type") {
+    //       data.append("office_type", dataValues.office_type.value);
+    //     } else {
+    //       data.append(k, dataValues[k]);
+    //     }
+    //   }
+    // }
+    validateAddress(values);
+    // this.props.dispatch({
+    //   type: "API_ACCOUNT_PROFILE",
+    //   callback: this.setSuccessMessage,
+    //   onError: this.setErrorMessages,
+    //   data
+    // });
   };
 
   onChange = v => {

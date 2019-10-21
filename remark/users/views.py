@@ -335,25 +335,28 @@ class AccountProfileView(LoginRequiredMixin, RemarkView):
 
 class ValidateAddressView(RemarkView):
     def post(self, request):
-        return JsonResponse({"test":"testing"}, status=200)
-        # params = json.loads(request.body)
-        # user = request.user
-        # if user.is_anonymous and params.get("hash"):
-        #     try:
-        #         user = User.objects.get(public_id=params["hash"])
-        #     except User.DoesNotExist:
-        #         user = None
-        # errors = {}
-        # for v in VALIDATION_RULES:
-        #     try:
-        #         password = params.get("password", "")
-        #         password_validation.validate_password(
-        #             password, user=user, password_validators=v["validator"]
-        #         )
-        #     except ValidationError:
-        #         errors[v["key"]] = True
+        params = json.loads(request.body)
+        entered_address = {
+            'office_street': params['office_street'],
+            'office_city': params['office_city'],
+            'office_state': params['office_state'],
+            'office_zip': params['office_zip']
+        }
+        
+        geocode_address = geocode(params['office_street'] + params['office_city'] + params['office_state'] + params['office_zip'])
+        
+        if not geocode_address:
+            return JsonResponse({"error": True}, status=200)
+        
+        suggested_address = {
+            'office_street': geocode_address.street_address,
+            'office_city': geocode_address.city,
+            'office_state': geocode_address.state,
+            'office_zip': geocode_address.zip5,
+            'formatted_address': geocode_address.formatted_address
+        }
 
-        # return JsonResponse({"errors": errors}, status=200)
+        return JsonResponse({"entered_address": entered_address, "suggested_address": suggested_address}, status=200)
 
 
 class AccountReportsView(LoginRequiredMixin, RemarkView):

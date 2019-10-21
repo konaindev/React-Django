@@ -73,7 +73,8 @@ class GeocodeResult:
         """Return the street, if known. (ex: 2901 NE Blakeley Street)"""
         number = self.get_short_component("street_number") or ""
         route = self.get_short_component("route") or ""
-        return f"{number} {route}".strip() or None
+        unit = self.get_short_component("subpremise") or ""
+        return f"{number} {route}, #{unit}".strip() if unit else f"{number} {route}".strip() or None
 
     @property
     def city(self):
