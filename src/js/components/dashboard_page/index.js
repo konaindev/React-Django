@@ -216,7 +216,7 @@ export class DashboardPage extends React.PureComponent {
             </div>
             <div className="dashboard-content__properties">
               {this.state.showLoader ? (
-                <Loader isShow={true} />
+                <Loader isVisible={true} />
               ) : (
                 <PropertiesListComponent
                   properties={this.props.properties}

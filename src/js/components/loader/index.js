@@ -3,8 +3,8 @@ import React from "react";
 
 import "./loader.scss";
 
-const Loader = ({ isShow }) => {
-  if (!isShow) {
+const Loader = ({ isVisible }) => {
+  if (!isVisible) {
     return null;
   }
   return (
@@ -15,10 +15,10 @@ const Loader = ({ isShow }) => {
 };
 
 Loader.propTypes = {
-  isShow: PropTypes.bool
+  isVisible: PropTypes.bool
 };
 Loader.defaultProps = {
-  isShow: false
+  isVisible: false
 };
 
 export default React.memo(Loader);
