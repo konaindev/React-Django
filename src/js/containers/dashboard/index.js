@@ -17,7 +17,7 @@ class DashboardContainer extends PureComponent {
 const mapState = state => {
   const newState = { ...state.general };
 
-  console.log("state----->", newState);
+  console.log("dashboard state----->", newState);
   return {
     ...state.general
   };

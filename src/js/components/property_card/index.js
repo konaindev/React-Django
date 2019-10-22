@@ -17,14 +17,13 @@ export const PropertyCard = ({
   address,
   image_url,
   performance_rating,
-  url,
   members,
   selected,
   onSelect
 }) => {
   const handleToggle = () => {
     console.log("------> handle toggle", onSelect);
-    onSelect(property_id, !selected);
+    onSelect(public_id, !selected);
   };
   const imageStyle = {};
   if (image_url) {
@@ -69,13 +68,12 @@ export const PropertyCard = ({
 };
 
 PropertyCard.requiredPropTypes = {
-  property_id: PropTypes.string.isRequired,
+  public_id: PropTypes.string.isRequired,
   property_name: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
   image_url: PropTypes.string.isRequired,
   performance_rating: PropTypes.number.isRequired,
-  members: PropTypes.array,
-  url: PropTypes.string.isRequired
+  members: PropTypes.array
 };
 
 PropertyCard.propTypes = {
