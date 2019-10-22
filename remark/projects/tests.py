@@ -14,6 +14,8 @@ from remark.crm.models import Business
 from remark.geo.models import Address
 from remark.users.models import Account, User
 from remark.lib.metrics import BareMultiPeriod
+from remark.email_app.invites.added_to_property import send_invite_email, get_template_vars
+
 from .models import Fund, LeaseStage, Period, Project, Property, TargetPeriod
 from .reports.periods import ComputedPeriod
 from .reports.performance import PerformanceReport
@@ -616,8 +618,10 @@ class OnboardingWorkflowTestCase(TestCase):
         self.project = project
 
     @mock.patch("remark.users.views.geocode", side_effect=mocked_geocode)
-    @mock.patch("remark.projects.views.send_invite_email")
-    def test_invite_new_user(self, mock_send_email, _):
+    @mock.patch("remark.projects.views.send_invite_email.apply_async",
+                side_effect=send_invite_email.apply)
+    @mock.patch("remark.email_app.invites.added_to_property.send_email")
+    def test_invite_new_user(self, mock_send_email, *args):
         url = reverse("add_members")
         params = {
             "projects": [{"property_id": self.project.public_id}],
@@ -637,7 +641,7 @@ class OnboardingWorkflowTestCase(TestCase):
         user = User.objects.get(public_id=public_id)
         self.assertEqual(email, user.email)
         self.assertFalse(user.password)
-        mock_send_email.apply_async.assert_called()
+        mock_send_email.assert_called()
 
         self.client.logout()
         url = reverse("create_password", kwargs={"hash": public_id})
@@ -673,8 +677,9 @@ class OnboardingWorkflowTestCase(TestCase):
         project_users = project.view_group.user_set.all()
         self.assertEqual(project_users[0].public_id, user.public_id)
 
-    @mock.patch("remark.users.views.geocode", side_effect=mocked_geocode)
-    @mock.patch("remark.projects.views.send_invite_email")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async",
+                side_effect=send_invite_email.apply)
+    @mock.patch("remark.email_app.invites.added_to_property.send_email")
     def test_invite_existing_user(self, mock_send_email, _):
         url = reverse("add_members")
         user = User.objects.create_user(
@@ -686,18 +691,133 @@ class OnboardingWorkflowTestCase(TestCase):
             "projects": [{"property_id": self.project.public_id}],
             "members": [
                 {
-                    "label": "new.user@gmail.com",
+                    "label": user.email,
                     "value": user.public_id,
                     "__isNew__": False,
                 }
             ],
         }
         response = self.client.post(url, json.dumps(params), "json")
+
         self.assertEqual(response.status_code, 200)
-        mock_send_email.apply_async.assert_called()
+        mock_send_email.assert_called()
 
         project_users = self.project.view_group.user_set.all()
         self.assertEqual(project_users[0].public_id, user.public_id)
+
+
+class GetTemplateVarsTestCase(TestCase):
+    def setUp(self):
+        project1, _ = create_project("project 1")
+        project2, _ = create_project("project 2")
+        user = User.objects.create_user(
+            email="test@remarkably.io",
+            password="testpassword",
+            activated=datetime.datetime(2019, 10, 11, 0, 0)
+        )
+        new_user = User.objects.create_user(
+            email="test_new@remarkably.io",
+            password="testpassword",
+        )
+        self.user = user
+        self.new_user = new_user
+        self.project = project1
+        self.projects = [project1, project2]
+
+    def test_for_new_user(self):
+        template_vars = get_template_vars("admin", self.new_user, [self.project], 5)
+        expected = {
+            "email_title": "Added to New Property",
+            "email_preview": "Added to New Property",
+            "inviter_name": "admin",
+            "is_portfolio": False,
+            "is_new_account": True,
+            "property_name": "project 1",
+            "properties": [{
+                "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
+                "title": "project 1",
+                "address": "Seattle, WA",
+                "view_link": f"/projects/{self.project.public_id}/market/",
+            }],
+            "more_count": None,
+            "main_button_link": f"http://localhost:8000/users/create-password/{self.new_user.public_id}",
+            "main_button_label": "Create Account",
+        }
+        self.assertEqual(expected, template_vars)
+
+    def test_for_new_user_many_projects(self):
+        template_vars = get_template_vars("admin", self.new_user, self.projects, 5)
+        expected = {
+            "email_title": "Added to New Property",
+            "email_preview": "Added to New Property",
+            "inviter_name": "admin",
+            "is_portfolio": False,
+            "is_new_account": True,
+            "property_name": "",
+            "properties": [{
+                "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
+                "title": "project 1",
+                "address": "Seattle, WA",
+                "view_link": f"/projects/{self.projects[0].public_id}/market/",
+            },{
+                "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
+                "title": "project 2",
+                "address": "Seattle, WA",
+                "view_link": f"/projects/{self.projects[1].public_id}/market/",
+            }],
+            "more_count": None,
+            "main_button_link": f"http://localhost:8000/users/create-password/{self.new_user.public_id}",
+            "main_button_label": "Create Account",
+        }
+        self.assertEqual(expected, template_vars)
+
+    def test_for_existing_user(self):
+        template_vars = get_template_vars("admin", self.user, [self.project], 5)
+        expected = {
+            "email_title": "Added to New Property",
+            "email_preview": "Added to New Property",
+            "inviter_name": "admin",
+            "is_portfolio": False,
+            "is_new_account": False,
+            "property_name": "project 1",
+            "properties": [{
+                "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
+                "title": "project 1",
+                "address": "Seattle, WA",
+                "view_link": f"/projects/{self.project.public_id}/market/",
+            }],
+            "more_count": None,
+            "main_button_link": f"/projects/{self.project.public_id}/market/",
+            "main_button_label": "View Property",
+        }
+        self.assertEqual(expected, template_vars)
+
+    def test_for_existing_user_many_projects(self):
+        template_vars = get_template_vars("admin", self.user, self.projects, 5)
+        expected = {
+            "email_title": "Added to New Property",
+            "email_preview": "Added to New Property",
+            "inviter_name": "admin",
+            "is_portfolio": False,
+            "is_new_account": False,
+            "property_name": "",
+            "properties": [{
+                "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
+                "title": "project 1",
+                "address": "Seattle, WA",
+                "view_link": f"/projects/{self.projects[0].public_id}/market/",
+            }, {
+                "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
+                "title": "project 2",
+                "address": "Seattle, WA",
+                "view_link": f"/projects/{self.projects[1].public_id}/market/",
+            }],
+            "more_count": None,
+            "main_button_link": "/dashboard",
+            "main_button_label": "View All Properties",
+        }
+        self.maxDiff = None
+        self.assertEqual(expected, template_vars)
 
 
 class AutocompleteMemberTestCase(TestCase):
