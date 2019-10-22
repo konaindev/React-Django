@@ -2,8 +2,6 @@ import datetime
 import decimal
 import os.path
 import json
-import random
-import string
 
 from django.contrib.auth.models import Group
 from django.test import TestCase
@@ -673,6 +671,32 @@ class OnboardingWorkflowTestCase(TestCase):
 
         project = Project.objects.get(public_id=self.project.public_id)
         project_users = project.view_group.user_set.all()
+        self.assertEqual(project_users[0].public_id, user.public_id)
+
+    @mock.patch("remark.users.views.geocode", side_effect=mocked_geocode)
+    @mock.patch("remark.projects.views.send_invite_email")
+    def test_invite_existing_user(self, mock_send_email, _):
+        url = reverse("add_members")
+        user = User.objects.create_user(
+            email="test@remarkably.io",
+            password="testpassword",
+            activated=datetime.datetime(2019, 10, 11, 0, 0)
+        )
+        params = {
+            "projects": [{"property_id": self.project.public_id}],
+            "members": [
+                {
+                    "label": "new.user@gmail.com",
+                    "value": user.public_id,
+                    "__isNew__": False,
+                }
+            ],
+        }
+        response = self.client.post(url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_email.apply_async.assert_called()
+
+        project_users = self.project.view_group.user_set.all()
         self.assertEqual(project_users[0].public_id, user.public_id)
 
 
