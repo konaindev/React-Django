@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Redirect, Switch } from "react-router-dom";
 import ProjectsContainer from "../containers/projects";
 import DashboardContainer from "../containers/dashboard";
 import PortfolioContainer from "../containers/portfolio";
@@ -20,7 +20,7 @@ export function RemarkableRouter() {
             <Route path="/portfolio/table" component={PortfolioContainer} />
             <Route path="/auth" component={AuthContainer} />
             {/* default to dashboard...since AuthGate takes care of no-auth */}
-            <Route component={DashboardContainer} />
+            <Redirect to="/dashboard" />
           </Switch>
         </NavGate>
       </AuthGate>
