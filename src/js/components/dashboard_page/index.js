@@ -194,15 +194,12 @@ export class DashboardPage extends React.PureComponent {
               </div>
             </div>
             <div className="dashboard-content__properties">
-              {isFetching ? (
-                <Loader isVisible={true} />
-              ) : (
-                <PropertiesListComponent
-                  properties={this.props.properties}
-                  selectedProperties={this.props.selectedProperties}
-                  onSelect={this.onSelectHandler}
-                />
-              )}
+              <Loader isVisible={isFetching} />
+              <PropertiesListComponent
+                properties={this.props.properties}
+                selectedProperties={this.props.selectedProperties}
+                onSelect={this.onSelectHandler}
+              />
             </div>
           </Container>
           <AddPropertyModal
@@ -316,7 +313,24 @@ export class UrlQueryLayer extends React.PureComponent {
   };
 
   render() {
-    if (this.props.no_projects || !this.props.properties) {
+    const { isFetching, no_projects } = this.props;
+
+    if (no_projects === false) {
+      return (
+        <DashboardPage
+          {...this.props}
+          filters={this.state}
+          onChangeFilter={this.onChangeFilter}
+        />
+      );
+    } else if (isFetching && no_projects === undefined) {
+      // first API call is in progress
+      return (
+        <div className="dashboard-content">
+          <Loader isVisible />
+        </div>
+      );
+    } else {
       return (
         <div className="dashboard-content">
           <p>
@@ -326,13 +340,6 @@ export class UrlQueryLayer extends React.PureComponent {
         </div>
       );
     }
-    return (
-      <DashboardPage
-        {...this.props}
-        filters={this.state}
-        onChangeFilter={this.onChangeFilter}
-      />
-    );
   }
 }
 

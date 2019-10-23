@@ -30,7 +30,7 @@ function replaceObjectInArray(target, data, key) {
   return target;
 }
 
-const dashboard = (state = {}, action) => {
+const dashboard = (state = { isFetching: true }, action) => {
   let newState = {};
   switch (action.type) {
     case "GENERAL_SET_STATE":
