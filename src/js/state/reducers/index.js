@@ -33,15 +33,20 @@ function replaceObjectInArray(target, data, key) {
 const dashboard = (state = {}, action) => {
   let newState = {};
   switch (action.type) {
-    case "GENERAL_SET_STATE": {
+    case "GENERAL_SET_STATE":
       newState = { ...action.newState };
       break;
-    }
-    case "GENERAL_UPDATE_STATE": {
-      newState = { ...state, ...action.newState };
+    case "GENERAL_START_FETCHING":
+      newState = { ...state, isFetching: true };
       break;
-    }
-    case "GENERAL_REMOVE_MEMBER_COMPLETE": {
+    case "GENERAL_UPDATE_STATE":
+      newState = {
+        ...state,
+        ...action.newState,
+        isFetching: false
+      };
+      break;
+    case "GENERAL_REMOVE_MEMBER_COMPLETE":
       const properties = replaceObjectInArray(
         [...state.properties],
         action.property,
@@ -58,8 +63,7 @@ const dashboard = (state = {}, action) => {
         selectedProperties
       };
       break;
-    }
-    case "GENERAL_INVITE_MEMBER_COMPLETE": {
+    case "GENERAL_INVITE_MEMBER_COMPLETE":
       const propertiesObj = {};
       if (state.properties) {
         state.properties.forEach(p => {
@@ -83,7 +87,6 @@ const dashboard = (state = {}, action) => {
         newState = { ...state };
       }
       break;
-    }
     default:
       newState = state;
   }

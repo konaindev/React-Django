@@ -129,6 +129,22 @@ export const sendGaEvent = _ => next => action => {
   }
 };
 
+export const startNetworkFetch = _ => next => action => {
+  switch (action.type) {
+    case "NETWORK_START_FETCH":
+      switch (action.branch) {
+        case "dashboard":
+          next(general.startFetching());
+          break;
+        default:
+          next(action);
+          break;
+      }
+    default:
+      next(action);
+  }
+};
+
 export const applyApiResult = _ => next => action => {
   switch (action.type) {
     case "API_RESPONSE": {

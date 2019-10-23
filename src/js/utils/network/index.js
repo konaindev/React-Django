@@ -66,6 +66,7 @@ function handleError(action) {
 }
 function* get(action) {
   try {
+    yield put(networking.startFetching(action.branch));
     const response = yield call(axiosGet, action.url);
     yield checkStatus(response);
     yield put(networking.results(response.data, action.branch));

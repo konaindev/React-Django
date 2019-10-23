@@ -18,6 +18,9 @@ export const general = {
     type: "GENERAL_SET_STATE",
     newState
   }),
+  startFetching: () => ({
+    type: "GENERAL_START_FETCHING"
+  }),
   update: newState => ({
     type: "GENERAL_UPDATE_STATE",
     newState
@@ -44,8 +47,9 @@ export const tutorial = {
 };
 
 export const networking = {
-  startFetching: () => ({
-    type: "NETWORK_START_FETCH"
+  startFetching: (branch = "general") => ({
+    type: "NETWORK_START_FETCH",
+    branch
   }),
   stopFetching: () => ({
     type: "NETWORK_STOP_FETCH"
