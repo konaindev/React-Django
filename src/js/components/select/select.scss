@@ -119,6 +119,10 @@ $multi-value-close-hover-color: $gray-4;
         &:active {
             background-color: $select-option-active-color;
         }
+        
+        &--is-disabled {
+            cursor: not-allowed;
+        }
     }
 
     .select__input {

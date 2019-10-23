@@ -68,6 +68,19 @@ const dashboard = (state = {}, action) => {
       }
       break;
     }
+    case "GENERAL_UPDATE_MEMBERS": {
+      const { property_id, members } = action.data;
+      const index = state.properties.findIndex(
+        p => p.property_id === property_id
+      );
+      const properties = [...state.properties];
+      properties[index].members = members;
+      newState = {
+        ...state,
+        properties
+      };
+      break;
+    }
     default:
       newState = { ...state };
   }

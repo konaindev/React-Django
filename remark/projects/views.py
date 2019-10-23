@@ -30,6 +30,7 @@ from .reports.selectors import (
 from .models import Project
 from .forms import TAMExportForm
 from .tasks import export_tam_task
+from .constants import USER_ROLES
 
 from remark.lib.logging import getLogger, error_text
 
@@ -364,7 +365,9 @@ class AddMembersView(LoginRequiredMixin, APIView):
                     project.view_group.user_set.add(user)
             project.save()
         for user in users:
-            send_invite_email.apply_async(args=(inviter_name, user.id, projects_ids), countdown=2)
+            send_invite_email.apply_async(
+                args=(inviter_name, user.id, projects_ids), countdown=2
+            )
         projects_list = [
             {"property_id": p.public_id, "members": p.get_members()} for p in projects
         ]
@@ -379,17 +382,60 @@ class ProjectRemoveMemberIView(LoginRequiredMixin, APIView):
         try:
             user = User.objects.get(public_id=user_id)
         except User.DoesNotExist:
-            return JsonResponse({"error": "Project not found"}, status=500)
+            return JsonResponse({"error": "User not found"}, status=500)
 
         try:
             project = Project.objects.get(public_id=project_id)
         except Project.DoesNotExist:
-            return JsonResponse({"error": "User not found"}, status=500)
+            return JsonResponse({"error": "Project not found"}, status=500)
 
-        project.view_group.user_set.remove(user)
+        if project.is_admin(user):
+            if project.admin_group.user_set.count() == 1:
+                return JsonResponse(
+                    {"error": "There should always be at least one admin for project"},
+                    status=500,
+                )
+            project.admin_group.user_set.remove(user)
+        else:
+            project.view_group.user_set.remove(user)
+
         project.save()
         projects_dict = {
             "property_id": project.public_id,
             "members": project.get_members(),
         }
         return JsonResponse({"project": projects_dict})
+
+
+class ChangeMemberRoleView(LoginRequiredMixin, APIView):
+    def post(self, request, project_id, user_id):
+        payload = self.get_data()
+        role = payload.get("role")
+
+        try:
+            project = Project.objects.get(public_id=project_id)
+        except Project.DoesNotExist:
+            return JsonResponse({"error": "Project not found"}, status=500)
+
+        if not project.user_can_edit(request.user):
+            return JsonResponse({"error": "Project not found"}, status=500)
+
+        try:
+            user = User.objects.get(public_id=user_id)
+        except User.DoesNotExist:
+            return JsonResponse({"error": "User not found"}, status=500)
+
+        if role == USER_ROLES["admin"]:
+            project.view_group.user_set.remove(user)
+            project.admin_group.user_set.add(user)
+        elif role == USER_ROLES["member"]:
+            if project.admin_group.user_set.count() == 1:
+                return JsonResponse(
+                    {"error": "There should always be at least one admin for project"},
+                    status=500,
+                )
+            project.admin_group.user_set.remove(user)
+            project.view_group.user_set.add(user)
+
+        project.save()
+        return JsonResponse({"members": project.get_members()})

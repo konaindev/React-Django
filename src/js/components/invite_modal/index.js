@@ -100,6 +100,10 @@ class InviteModal extends React.PureComponent {
     }, 300);
   };
 
+  changeRole = (role, property, member) => {
+    this.props.dispatch(inviteModal.changeRole(role, property, member));
+  };
+
   removeUser = () => {
     const { property, member } = this.props.remove;
     this.props.dispatch(inviteModal.removeMember(property, member));
@@ -170,6 +174,7 @@ class InviteModal extends React.PureComponent {
     if (!property || !property.members) {
       return null;
     }
+    const adminCount = property.members.filter(m => m.role === "admin").length;
     return property.members.map(member => {
       const role = InviteModal.roleOptions.find(r => r.value === member.role);
       return (
@@ -177,10 +182,13 @@ class InviteModal extends React.PureComponent {
           <UserRow {...member} />
           <SelectRole
             member={member}
+            property={property}
             role={role}
+            adminCount={adminCount}
             components={InviteModal.selectRoleComponents}
             roleOptions={InviteModal.roleOptions}
-            openRemoveModal={() => this.openRemoveModal(property, member)}
+            openRemoveModal={this.openRemoveModal}
+            onChangeRole={this.changeRole}
           />
         </div>
       );
