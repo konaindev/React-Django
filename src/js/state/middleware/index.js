@@ -15,26 +15,6 @@ import { URLS } from "../actions/helpers";
 import { axiosGet, axiosPost } from "../../utils/api";
 import ReactGa from "react-ga";
 
-export const fetchDashboard = store => next => action => {
-  if (action.type === "API_DASHBOARD") {
-    let x = store.getState();
-    let { isFetching } = x.network;
-
-    if (!isFetching || isFetching === false) {
-      store.dispatch(networking.startFetching());
-    }
-    axiosGet(`${process.env.BASE_URL}/dashboard${action.queryString}`)
-      .then(response => next(general.set(response.data)))
-      .then(setTimeout(() => next(networking.stopFetching()), 120))
-      .catch(e => {
-        console.log("ERROR", e);
-        next(networking.stopFetching());
-      });
-  } else {
-    next(action);
-  }
-};
-
 export const fetchCreatePassword = store => next => action => {
   if (action.type === "API_CREATE_PASSWORD") {
     const hash = action.hash;

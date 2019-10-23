@@ -16,28 +16,11 @@ import ToggleButton from "../toggle_button";
 import InviteModal from "../invite_modal";
 import { Close, ListView, TileView } from "../../icons";
 import Loader from "../loader";
-import UserMenu from "../user_menu";
 
 import { qsParse, qsStringify } from "../../utils/misc";
 import TutorialView from "../tutorial_view";
 import { inviteModal, general, dashboard } from "../../state/actions";
 import "./dashboard_page.scss";
-
-const navLinks = {
-  links: [
-    {
-      id: "portfolio",
-      name: "Portfolio",
-      url: "/dashboard"
-    },
-    {
-      id: "portfolio-analysis",
-      name: "Portfolio Analysis",
-      url: "/portfolio"
-    }
-  ],
-  selected_link: "portfolio"
-};
 
 export class DashboardPage extends React.PureComponent {
   static propTypes = {
@@ -55,8 +38,7 @@ export class DashboardPage extends React.PureComponent {
     selectedProperties: [],
     viewType: "tile",
     filters: {},
-    onChangeFilter: () => {},
-    navLinks: navLinks
+    onChangeFilter: () => {}
   };
 
   static buttonOptions = [
@@ -129,20 +111,11 @@ export class DashboardPage extends React.PureComponent {
     states
   };
 
-  getHeaderItems() {
-    if (this.props.user) {
-      return <UserMenu {...this.props.user} />;
-    }
-    return null;
-  }
-
   render() {
     const className = cn("dashboard-content", {
       "dashboard-content--selection-mode": this.props.selectedProperties.length
     });
-    const { user } = this.props;
     const PropertiesListComponent = this.propertiesListComponent;
-    const navLinks = this.props.navLinks;
     const { isFetching } = this.props;
     return (
       <div>
@@ -305,7 +278,7 @@ export class UrlQueryLayer extends React.PureComponent {
       }
     });
 
-    let queryStringForAjax = qsStringify({ ...urlParams, ajax: "true" });
+    let queryStringForAjax = qsStringify(urlParams);
 
     this.props.history.push(queryStringForAjax);
     console.log("---------onChangeFilter for dashboard", queryStringForAjax);

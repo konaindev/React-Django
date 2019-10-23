@@ -5,7 +5,6 @@ import { persistStore, persistReducer } from "redux-persist";
 import reducers from "../reducers";
 import createSagaMiddleware from "redux-saga";
 import {
-  fetchDashboard,
   fetchCreatePassword,
   fetchCompany,
   fetchCompleteAccount,
@@ -37,7 +36,6 @@ export default () => {
     presistedReducer,
     composeEnhancers(
       applyMiddleware(
-        fetchDashboard,
         fetchCreatePassword,
         fetchCompany,
         fetchCompleteAccount,

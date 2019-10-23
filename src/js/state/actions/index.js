@@ -54,10 +54,6 @@ export const networking = {
   stopFetching: () => ({
     type: "NETWORK_STOP_FETCH"
   }),
-  fetchDashboard: (queryString = "") => ({
-    type: "API_DASHBOARD",
-    queryString
-  }),
   fail: message => ({
     type: "NETWORK_FETCH_FAIL",
     message
