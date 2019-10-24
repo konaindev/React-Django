@@ -14,6 +14,7 @@ Array [
     closeOnOverlayClick={true}
     focusTrapped={false}
     onClose={[Function]}
+    onEntered={[Function]}
     open={true}
     styles={
       Object {
@@ -3042,6 +3043,7 @@ Array [
     closeOnOverlayClick={true}
     focusTrapped={false}
     onClose={[Function]}
+    onEntered={[Function]}
     open={true}
     styles={
       Object {
