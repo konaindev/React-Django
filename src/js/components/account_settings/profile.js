@@ -254,20 +254,6 @@ export default class Profile extends React.PureComponent {
     this.setState({ message });
   }
 
-  test_dispatch(data, props) {
-    props.dispatch({
-      type: "API_ACCOUNT_PROFILE",
-      // callback: this.setSuccessMessage,
-      // callback: () => {
-      //   this.formik.setSubmitting(false);
-      //   const message = "Your profile has been saved.";
-      //   this.setState({ message });
-      // },
-      onError: this.setErrorMessages,
-      data
-    });
-  }
-
   render() {
     return (
       <div className="account-settings__tab">

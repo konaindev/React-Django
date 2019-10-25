@@ -66,12 +66,10 @@ class AddressModal extends React.PureComponent {
   onSubmit = () => {
     var data = this.props.data;
     data.append("office_address", this.state.selectedAddress);
-    // this.props.onFinish(data, this.props);
-    // console.log(this.props);
     this.props.dispatch({
       type: "API_ACCOUNT_PROFILE",
       callback: this.parentCallback,
-      onError: this.props.setErrorMessages,
+      onError: this.parentOnError,
       data
     });
   };
