@@ -61,8 +61,8 @@ export class LargeBoxLayout extends Component {
             <div className="large-box__content-extra">{innerBox}</div>
           )}
         </div>
-        <span className="large-box__bottom-line">{detail}</span>
-        <span className="large-box__bottom-line">{detail2}</span>
+        <p className="large-box__bottom-line">{detail}</p>
+        <p className="large-box__bottom-line">{detail2}</p>
       </Panel>
     );
   }

@@ -15,11 +15,16 @@ const props1 = {
 };
 
 const props2 = {
-  name: "USV > EXE",
+  name: "Leased",
   value: 0.1,
   target: 0.13,
   delta: 0.03,
-  extraContent: "227 Executed Leases (Out of 260)",
+  extraContent: (
+    <>
+      <span>227 Executed Leases (Out of 260)</span>
+      <span>260 Total Units</span>
+    </>
+  ),
   series: [10, 20, 30, 15]
 };
 
