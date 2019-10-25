@@ -69,7 +69,11 @@ def get_recipients_on_list(list_id):
     params = {'page': 1, 'page_size': 1}
     response = sg.client.contactdb.lists._(list_id).recipients.get(query_params=params)
     result = process_response(response, "Could not fetch recipient list")
-    return result["recipients"]
+    previous_recipients = (page - 1) * page_size
+    if result.get("recipient_count", 0) > len(result["recipients"]) + previous_recipients:
+        recipients = get_recipients_on_list(list_id, page=page+1, page_size=page_size)
+    recipients = result["recipients"] + recipients
+    return recipients
 
 def delete_recipient_from_list(list_id, recipient_id):
     params = {'recipient_id': recipient_id, 'list_id': list_id}

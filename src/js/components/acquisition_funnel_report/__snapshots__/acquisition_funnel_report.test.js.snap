@@ -40,15 +40,18 @@ exports[`AcquisitionFunnelReport renders baseline report correctly 1`] = `
           >
             0.3%
           </span>
+          <div
+            className="large-box__content-extra"
+          />
         </div>
-        <span
+        <p
           className="large-box__bottom-line"
         />
-        <span
+        <p
           className="large-box__bottom-line"
         >
           
-        </span>
+        </p>
       </div>
     </div>
     <div
@@ -75,15 +78,18 @@ exports[`AcquisitionFunnelReport renders baseline report correctly 1`] = `
           >
             29%
           </span>
+          <div
+            className="large-box__content-extra"
+          />
         </div>
-        <span
+        <p
           className="large-box__bottom-line"
         />
-        <span
+        <p
           className="large-box__bottom-line"
         >
           
-        </span>
+        </p>
       </div>
     </div>
     <div
@@ -110,17 +116,20 @@ exports[`AcquisitionFunnelReport renders baseline report correctly 1`] = `
           >
             54%
           </span>
+          <div
+            className="large-box__content-extra"
+          />
         </div>
-        <span
+        <p
           className="large-box__bottom-line"
         >
           $1,000 / $1,847
-        </span>
-        <span
+        </p>
+        <p
           className="large-box__bottom-line"
         >
           
-        </span>
+        </p>
       </div>
     </div>
   </div>
@@ -782,14 +791,14 @@ exports[`AcquisitionFunnelReport renders performance report correctly 1`] = `
             </div>
           </div>
         </div>
-        <span
+        <p
           className="large-box__bottom-line"
         />
-        <span
+        <p
           className="large-box__bottom-line"
         >
           Target: 0.70%
-        </span>
+        </p>
       </div>
     </div>
     <div
@@ -1039,14 +1048,14 @@ exports[`AcquisitionFunnelReport renders performance report correctly 1`] = `
             </div>
           </div>
         </div>
-        <span
+        <p
           className="large-box__bottom-line"
         />
-        <span
+        <p
           className="large-box__bottom-line"
         >
           Target: 20%
-        </span>
+        </p>
       </div>
     </div>
     <div
@@ -1296,16 +1305,16 @@ exports[`AcquisitionFunnelReport renders performance report correctly 1`] = `
             </div>
           </div>
         </div>
-        <span
+        <p
           className="large-box__bottom-line"
         >
           $1,077 / $1,857
-        </span>
-        <span
+        </p>
+        <p
           className="large-box__bottom-line"
         >
           Target: 103%
-        </span>
+        </p>
       </div>
     </div>
   </div>

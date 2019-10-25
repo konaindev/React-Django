@@ -74,10 +74,14 @@ class InviteModal extends React.PureComponent {
     noOptionsMessage: () => {}
   };
 
-  state = {
-    selectedMembers: [],
-    inviteRole: InviteModal.initRole
-  };
+  constructor(props) {
+    super(props);
+    this.selectSearchRef = React.createRef();
+    this.state = {
+      selectedMembers: [],
+      inviteRole: InviteModal.initRole
+    };
+  }
 
   get inviteIsDisabled() {
     return !this.state.selectedMembers.length;
@@ -120,6 +124,10 @@ class InviteModal extends React.PureComponent {
       p => p.property_id !== propertyId
     );
     this.props.dispatch(general.update({ selectedProperties }));
+  };
+
+  openModal = () => {
+    this.selectSearchRef.current.focus();
   };
 
   closeModal = () => {
@@ -251,6 +259,7 @@ class InviteModal extends React.PureComponent {
           theme="small"
           open={isOpen}
           onClose={this.closeModal}
+          onEntered={this.openModal}
         >
           <ModalWindow.Head className="invite-modal__header">
             {this.renderTitle()}
@@ -272,6 +281,7 @@ class InviteModal extends React.PureComponent {
                 formatOptionLabel={this.formatOptionLabel}
                 defaultOptions={[]}
                 onChange={this.selectMember}
+                selectSearchRef={this.selectSearchRef}
               />
               <Select
                 className="invite-modal__select-role"

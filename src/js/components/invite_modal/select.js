@@ -1,8 +1,8 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import Select from "../select";
 import { menuListConstructor, MenuPortal } from "../select/select_components";
-import PropTypes from "prop-types";
 
 export default class SelectRole extends React.PureComponent {
   static propTypes = {
@@ -17,16 +17,6 @@ export default class SelectRole extends React.PureComponent {
     singleValue: provided => ({ ...provided, right: 10 }),
     menuList: provided => ({ ...provided, overflow: "initial" }),
     menuPortal: provided => ({ ...provided, zIndex: 1000, height: 0 })
-  };
-
-  closeMenuOnScroll = () => this.menuIsOpen;
-
-  openMenuHandler = () => {
-    this.menuIsOpen = true;
-  };
-
-  closeMenuHandler = () => {
-    this.menuIsOpen = false;
   };
 
   renderRemoveButton = () => (
@@ -56,9 +46,7 @@ export default class SelectRole extends React.PureComponent {
         options={roleOptions}
         defaultValue={role}
         menuPortalTarget={document.body}
-        closeMenuOnScroll={this.closeMenuOnScroll}
-        onMenuOpen={this.openMenuHandler}
-        onMenuClose={this.closeMenuHandler}
+        menuPosition="absolute"
       />
     );
   }
