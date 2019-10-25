@@ -43,27 +43,25 @@ exports[`CommonReport renders baseline report correctly 1`] = `
             >
               74%
             </span>
+            <div
+              className="large-box__content-extra"
+            />
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           >
-            <div>
-              192
-               Executed Leases (Out of
-               
-              260
-              )
-            </div>
-            <div>
-              201
-               Total Units
-            </div>
-          </span>
-          <span
+            <span>
+              192 Executed Leases (Out of 260)
+            </span>
+            <span>
+              201 Total Units
+            </span>
+          </p>
+          <p
             className="large-box__bottom-line"
           >
             
-          </span>
+          </p>
         </div>
       </div>
       <div
@@ -90,17 +88,20 @@ exports[`CommonReport renders baseline report correctly 1`] = `
             >
               71%
             </span>
+            <div
+              className="large-box__content-extra"
+            />
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           >
             94 Notices to Renew (Out of 132 Resident Decisions)
-          </span>
-          <span
+          </p>
+          <p
             className="large-box__bottom-line"
           >
             
-          </span>
+          </p>
         </div>
       </div>
       <div
@@ -127,26 +128,25 @@ exports[`CommonReport renders baseline report correctly 1`] = `
             >
               71%
             </span>
+            <div
+              className="large-box__content-extra"
+            />
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           >
-            <div>
-              185
-               Occupied Units (Out of 
-              260
-              )
-            </div>
-            <div>
-              201
-               Total Units
-            </div>
-          </span>
-          <span
+            <span>
+              185 Occupied Units (Out of 260)
+            </span>
+            <span>
+              201 Total Units
+            </span>
+          </p>
+          <p
             className="large-box__bottom-line"
           >
             
-          </span>
+          </p>
         </div>
       </div>
     </div>
@@ -435,15 +435,18 @@ exports[`CommonReport renders baseline report correctly 1`] = `
             >
               $74k
             </span>
+            <div
+              className="large-box__content-extra"
+            />
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           />
-          <span
+          <p
             className="large-box__bottom-line"
           >
             
-          </span>
+          </p>
         </div>
       </div>
       <div
@@ -484,12 +487,12 @@ exports[`CommonReport renders baseline report correctly 1`] = `
               </span>
             </span>
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           >
             
-          </span>
-          <span
+          </p>
+          <p
             className="large-box__bottom-line"
           />
         </div>
@@ -536,12 +539,12 @@ exports[`CommonReport renders baseline report correctly 1`] = `
               </span>
             </span>
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           >
             
-          </span>
-          <span
+          </p>
+          <p
             className="large-box__bottom-line"
           />
         </div>
@@ -1528,15 +1531,18 @@ exports[`CommonReport renders baseline report correctly 1`] = `
             >
               0.3%
             </span>
+            <div
+              className="large-box__content-extra"
+            />
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           />
-          <span
+          <p
             className="large-box__bottom-line"
           >
             
-          </span>
+          </p>
         </div>
       </div>
       <div
@@ -1563,15 +1569,18 @@ exports[`CommonReport renders baseline report correctly 1`] = `
             >
               29%
             </span>
+            <div
+              className="large-box__content-extra"
+            />
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           />
-          <span
+          <p
             className="large-box__bottom-line"
           >
             
-          </span>
+          </p>
         </div>
       </div>
       <div
@@ -1598,17 +1607,20 @@ exports[`CommonReport renders baseline report correctly 1`] = `
             >
               54%
             </span>
+            <div
+              className="large-box__content-extra"
+            />
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           >
             $1,000 / $1,847
-          </span>
-          <span
+          </p>
+          <p
             className="large-box__bottom-line"
           >
             
-          </span>
+          </p>
         </div>
       </div>
     </div>
@@ -10269,26 +10281,21 @@ exports[`CommonReport renders performance report correctly 1`] = `
               </div>
             </div>
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           >
-            <div>
-              227
-               Executed Leases (Out of
-               
-              260
-              )
-            </div>
-            <div>
-              201
-               Total Units
-            </div>
-          </span>
-          <span
+            <span>
+              227 Executed Leases (Out of 260)
+            </span>
+            <span>
+              201 Total Units
+            </span>
+          </p>
+          <p
             className="large-box__bottom-line"
           >
             Target: 95%
-          </span>
+          </p>
         </div>
       </div>
       <div
@@ -10505,16 +10512,16 @@ exports[`CommonReport renders performance report correctly 1`] = `
               </div>
             </div>
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           >
             7 Notices to Renew (Out of 11 Resident Decisions)
-          </span>
-          <span
+          </p>
+          <p
             className="large-box__bottom-line"
           >
             Target: 63%
-          </span>
+          </p>
         </div>
       </div>
       <div
@@ -10764,25 +10771,21 @@ exports[`CommonReport renders performance report correctly 1`] = `
               </div>
             </div>
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           >
-            <div>
-              220
-               Occupied Units (Out of 
-              260
-              )
-            </div>
-            <div>
-              201
-               Total Units
-            </div>
-          </span>
-          <span
+            <span>
+              220 Occupied Units (Out of 260)
+            </span>
+            <span>
+              201 Total Units
+            </span>
+          </p>
+          <p
             className="large-box__bottom-line"
           >
             Target: 93%
-          </span>
+          </p>
         </div>
       </div>
     </div>
@@ -11483,14 +11486,14 @@ exports[`CommonReport renders performance report correctly 1`] = `
               </div>
             </div>
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           />
-          <span
+          <p
             className="large-box__bottom-line"
           >
             Target: $17k
-          </span>
+          </p>
         </div>
       </div>
       <div
@@ -11531,12 +11534,12 @@ exports[`CommonReport renders performance report correctly 1`] = `
               </span>
             </span>
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           >
             Target: $495.2k
-          </span>
-          <span
+          </p>
+          <p
             className="large-box__bottom-line"
           />
         </div>
@@ -11583,12 +11586,12 @@ exports[`CommonReport renders performance report correctly 1`] = `
               </span>
             </span>
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           >
             Target: 14
-          </span>
-          <span
+          </p>
+          <p
             className="large-box__bottom-line"
           />
         </div>
@@ -12863,14 +12866,14 @@ exports[`CommonReport renders performance report correctly 1`] = `
               </div>
             </div>
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           />
-          <span
+          <p
             className="large-box__bottom-line"
           >
             Target: 0.70%
-          </span>
+          </p>
         </div>
       </div>
       <div
@@ -13120,14 +13123,14 @@ exports[`CommonReport renders performance report correctly 1`] = `
               </div>
             </div>
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           />
-          <span
+          <p
             className="large-box__bottom-line"
           >
             Target: 20%
-          </span>
+          </p>
         </div>
       </div>
       <div
@@ -13377,16 +13380,16 @@ exports[`CommonReport renders performance report correctly 1`] = `
               </div>
             </div>
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           >
             $1,077 / $1,857
-          </span>
-          <span
+          </p>
+          <p
             className="large-box__bottom-line"
           >
             Target: 103%
-          </span>
+          </p>
         </div>
       </div>
     </div>
@@ -14567,26 +14570,21 @@ exports[`CommonReport renders with date span correctly 1`] = `
               </div>
             </div>
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           >
-            <div>
-              227
-               Executed Leases (Out of
-               
-              260
-              )
-            </div>
-            <div>
-              201
-               Total Units
-            </div>
-          </span>
-          <span
+            <span>
+              227 Executed Leases (Out of 260)
+            </span>
+            <span>
+              201 Total Units
+            </span>
+          </p>
+          <p
             className="large-box__bottom-line"
           >
             Target: 95%
-          </span>
+          </p>
         </div>
       </div>
       <div
@@ -14803,16 +14801,16 @@ exports[`CommonReport renders with date span correctly 1`] = `
               </div>
             </div>
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           >
             7 Notices to Renew (Out of 11 Resident Decisions)
-          </span>
-          <span
+          </p>
+          <p
             className="large-box__bottom-line"
           >
             Target: 63%
-          </span>
+          </p>
         </div>
       </div>
       <div
@@ -15062,25 +15060,21 @@ exports[`CommonReport renders with date span correctly 1`] = `
               </div>
             </div>
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           >
-            <div>
-              220
-               Occupied Units (Out of 
-              260
-              )
-            </div>
-            <div>
-              201
-               Total Units
-            </div>
-          </span>
-          <span
+            <span>
+              220 Occupied Units (Out of 260)
+            </span>
+            <span>
+              201 Total Units
+            </span>
+          </p>
+          <p
             className="large-box__bottom-line"
           >
             Target: 93%
-          </span>
+          </p>
         </div>
       </div>
     </div>
@@ -15781,14 +15775,14 @@ exports[`CommonReport renders with date span correctly 1`] = `
               </div>
             </div>
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           />
-          <span
+          <p
             className="large-box__bottom-line"
           >
             Target: $17k
-          </span>
+          </p>
         </div>
       </div>
       <div
@@ -15829,12 +15823,12 @@ exports[`CommonReport renders with date span correctly 1`] = `
               </span>
             </span>
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           >
             Target: $495.2k
-          </span>
-          <span
+          </p>
+          <p
             className="large-box__bottom-line"
           />
         </div>
@@ -15881,12 +15875,12 @@ exports[`CommonReport renders with date span correctly 1`] = `
               </span>
             </span>
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           >
             Target: 14
-          </span>
-          <span
+          </p>
+          <p
             className="large-box__bottom-line"
           />
         </div>
@@ -17161,14 +17155,14 @@ exports[`CommonReport renders with date span correctly 1`] = `
               </div>
             </div>
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           />
-          <span
+          <p
             className="large-box__bottom-line"
           >
             Target: 0.70%
-          </span>
+          </p>
         </div>
       </div>
       <div
@@ -17418,14 +17412,14 @@ exports[`CommonReport renders with date span correctly 1`] = `
               </div>
             </div>
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           />
-          <span
+          <p
             className="large-box__bottom-line"
           >
             Target: 20%
-          </span>
+          </p>
         </div>
       </div>
       <div
@@ -17675,16 +17669,16 @@ exports[`CommonReport renders with date span correctly 1`] = `
               </div>
             </div>
           </div>
-          <span
+          <p
             className="large-box__bottom-line"
           >
             $1,077 / $1,857
-          </span>
-          <span
+          </p>
+          <p
             className="large-box__bottom-line"
           >
             Target: 103%
-          </span>
+          </p>
         </div>
       </div>
     </div>

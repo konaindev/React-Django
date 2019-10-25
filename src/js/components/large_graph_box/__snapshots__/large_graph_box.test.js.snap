@@ -240,14 +240,14 @@ exports[`LargeGraphBox renders CurrencyShorthandGraphBox correctly 1`] = `
       </div>
     </div>
   </div>
-  <span
+  <p
     className="large-box__bottom-line"
   />
-  <span
+  <p
     className="large-box__bottom-line"
   >
     Target: $32.4k
-  </span>
+  </p>
 </div>
 `;
 
@@ -491,16 +491,16 @@ exports[`LargeGraphBox renders CurrencyShorthandGraphBox with extra content corr
       </div>
     </div>
   </div>
-  <span
+  <p
     className="large-box__bottom-line"
   >
     227 Executed Leases (Out of 260)
-  </span>
-  <span
+  </p>
+  <p
     className="large-box__bottom-line"
   >
     Target: $32.3k
-  </span>
+  </p>
 </div>
 `;
 
@@ -744,14 +744,14 @@ exports[`LargeGraphBox renders PercentageGraphBox correctly 1`] = `
       </div>
     </div>
   </div>
-  <span
+  <p
     className="large-box__bottom-line"
   />
-  <span
+  <p
     className="large-box__bottom-line"
   >
     Target: 13%
-  </span>
+  </p>
 </div>
 `;
 
@@ -995,15 +995,15 @@ exports[`LargeGraphBox renders PercentageGraphBox with extra content correctly 1
       </div>
     </div>
   </div>
-  <span
+  <p
     className="large-box__bottom-line"
   >
     227 Executed Leases (Out of 260)
-  </span>
-  <span
+  </p>
+  <p
     className="large-box__bottom-line"
   >
     Target: 13%
-  </span>
+  </p>
 </div>
 `;
