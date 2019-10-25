@@ -16,8 +16,20 @@ def send_invite_email(inviter_name, user_id, projects_ids, max_count=5):
     user = User.objects.get(id=user_id)
     projects = Project.objects.filter(public_id__in=projects_ids)
 
-    is_new_account = user.activated is None
+    template = get_template("email_added_to_property/index.mjml")
+    template_vars = get_template_vars(inviter_name, user, projects, max_count)
+    html_content = template.render(template_vars)
+    send_email(
+        from_email=(HELLO_EMAIL, DEFAULT_FROM_NAME),
+        reply_to=(SUPPORT_EMAIL, DEFAULT_FROM_NAME),
+        to_emails=user.email,
+        subject="Added to New Property",
+        html_content=html_content
+    )
 
+
+def get_template_vars(inviter_name, user, projects, max_count):
+    is_new_account = user.activated is None
     properties = []
     for p in projects[:max_count]:
         address = p.property.geo_address
@@ -60,12 +72,4 @@ def send_invite_email(inviter_name, user_id, projects_ids, max_count=5):
         ] = f"{BASE_URL}{reverse('create_password', kwargs={'hash': user.public_id})}"
         template_vars["main_button_label"] = "Create Account"
 
-    template = get_template("email_added_to_property/index.mjml")
-    html_content = template.render(template_vars)
-    send_email(
-        from_email=(HELLO_EMAIL, DEFAULT_FROM_NAME),
-        reply_to=(SUPPORT_EMAIL, DEFAULT_FROM_NAME),
-        to_emails=user.email,
-        subject="Added to New Property",
-        html_content=html_content
-    )
+    return template_vars
