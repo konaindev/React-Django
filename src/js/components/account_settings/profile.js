@@ -163,6 +163,9 @@ export default class Profile extends React.PureComponent {
     if (fields.includes("avatar")) {
       message = errors.avatar;
     }
+    if (fields.includes("office_street")) {
+      message = "Invalid address";
+    }
     return <div className="account-settings__general-error">{message}</div>;
   };
 
@@ -221,21 +224,13 @@ export default class Profile extends React.PureComponent {
       }
     }
     validateAddress(values).then(response => {
-      this.setState({ addresses: response.data });
       if (response.data.error) {
         this.setErrorMessages({ office_street: "testing" });
       } else {
-        // this.setState({ data: data, addresses: response.data });
+        this.setState({ addresses: response.data });
         this.props.dispatch(addressModal.open(data, response.data));
-        // this.props.dispatch({
-        //   type: "API_ACCOUNT_PROFILE",
-        //   callback: this.setSuccessMessage,
-        //   onError: this.setErrorMessages,
-        //   data
-        // });
       }
     });
-    // .then(() => this.props.dispatch(addressModal.open));
   };
 
   onChange = v => {
@@ -537,6 +532,10 @@ export default class Profile extends React.PureComponent {
                         <ErrorMessage name="office_street" />
                       </div>
                     </div>
+                  </div>
+                </div>
+                <div className="account-settings__tab-section">
+                  <div className="account-settings__field-grid account-settings__field-grid--col-3">
                     <div
                       className={this.getFieldClasses(
                         "office_city",
@@ -560,7 +559,7 @@ export default class Profile extends React.PureComponent {
                     </div>
                     <div
                       className={this.getFieldClasses(
-                        "office_state_zip",
+                        "office_state",
                         errors,
                         touched,
                         ["max-width"]
@@ -580,6 +579,15 @@ export default class Profile extends React.PureComponent {
                       <div className="account-settings__error">
                         <ErrorMessage name="office_state" />
                       </div>
+                    </div>
+                    <div
+                      className={this.getFieldClasses(
+                        "office_zip",
+                        errors,
+                        touched,
+                        ["max-width"]
+                      )}
+                    >
                       <div className="account-settings__label">Office Zip</div>
                       <Input
                         className="account-settings__input"
@@ -593,11 +601,16 @@ export default class Profile extends React.PureComponent {
                         <ErrorMessage name="office_zip" />
                       </div>
                     </div>
+                  </div>
+                </div>
+                <div className="account-settings__tab-section">
+                  <div className="account-settings__field-grid">
                     <div
                       className={this.getFieldClasses(
                         "office_name",
                         errors,
-                        touched
+                        touched,
+                        ["max-width"]
                       )}
                     >
                       <div className="account-settings__label">Office Name</div>
