@@ -4,17 +4,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 1.5rem;
     height: 236px;
+    padding: 30px 24px 12px 24px;
 
     &__top-line {
         color: $title-small-color;
-        font-size: 0.75rem;
-        font-weight: 700;
+        font-size: 12px;
+        font-weight: $weight-bold;
         text-transform: uppercase;
         letter-spacing: 1px;
-        line-height: 1.25rem;
-        height: 2.875rem;
+        line-height: 20px;
+        height: 40px;
         text-align: center;
         display: flex;
         align-items: flex-end;
@@ -22,24 +22,24 @@
 
     &__bottom-line {
         color: $content-text-secondary-color;
-        font-weight: 300;
-        font-size: 0.875rem;
-        line-height: 1.5rem;
+        font-weight: $weight-normal;
+        font-size: 14px;
+        line-height: 21px;
         text-align: center;
     }
 
     &__content {
         text-align: center;
         position: relative;
-        margin: 0.5rem 0;
+        margin: 8px 0 8px 0;
     }
 
     &__content-value {
         color: $hero-text-color;
         font-size: $text-6xl;
-        font-weight: 100;
+        font-weight: $weight-light;
         letter-spacing: -2px;
-        line-height: 4.5rem;
+        line-height: 72px;
     }
 
     &__content-extra {
