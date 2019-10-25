@@ -76,6 +76,7 @@ class AddressModal extends React.PureComponent {
 
   render() {
     const { title, isOpen } = this.props;
+    console.log(this.props);
     return (
       <ModalWindow
         className="address-modal"
@@ -85,40 +86,33 @@ class AddressModal extends React.PureComponent {
       >
         <ModalWindow.Head>{title}</ModalWindow.Head>
         <ModalWindow.Body>
-          <form>
-            <fieldset id="address_selection">
-              <input
-                type="radio"
-                value={
-                  this.props.addresses?.suggested_address.formatted_address
-                }
-                name="suggested_address"
-                onChange={this.handleChange}
-                checked={
-                  this.state.selectedAddress ==
-                  this.props.addresses?.suggested_address.formatted_address
-                }
-              ></input>
-              Suggested Address
-              <p>
-                {this.props.addresses?.suggested_address?.office_street}
-                <p>
-                  {" "}
-                  {this.props.addresses?.suggested_address?.office_city},{" "}
-                  {this.props.addresses?.suggested_address?.office_state}{" "}
-                  {this.props.addresses?.suggested_address?.office_zip}
-                </p>
-              </p>
-              <Button
-                className="address-modal__nav-button"
-                color="highlight"
-                type="button"
-                onClick={this.onSubmit}
-              >
-                Use this Address
-              </Button>
-              <br></br>
-              <input
+          Suggested Address
+          <p>
+            {this.props.addresses?.suggested_address?.office_street}
+            <p>
+              {" "}
+              {this.props.addresses?.suggested_address?.office_city},{" "}
+              {this.props.addresses?.suggested_address?.office_state}{" "}
+              {this.props.addresses?.suggested_address?.office_zip}
+            </p>
+          </p>
+          <Button
+            className="address-modal__nav-button"
+            type="button"
+            color="highlight"
+            onClick={() => console.log("HI")}
+          >
+            Go Back
+          </Button>
+          <Button
+            className="address-modal__nav-button"
+            color="primary"
+            type="button"
+            onClick={this.onSubmit}
+          >
+            Confirm Address
+          </Button>
+          {/* <input
                 type="radio"
                 value={this.props.addresses?.entered_address.formatted_address}
                 name="entered_address"
@@ -144,84 +138,7 @@ class AddressModal extends React.PureComponent {
                 onClick={this.onSubmit}
               >
                 Use this Address
-              </Button>
-            </fieldset>
-          </form>
-          {/* <Formik ref={this.formik} onSubmit={() => console.log("HI")}>
-            {({ errors, touched, values, isValid, setTouched, setValues }) => (
-              <Form>
-                <Field component="select" name="color">
-                  <option value="red">Red</option>
-                  <option value="green">Green</option>
-                  <option value="blue">Blue</option>
-                </Field> */}
-          {/* <h2>Radio group</h2>
-                <RadioButtonGroup
-                  id="radioGroup"
-                  label="One of these please"
-                  value={values.radioGroup}
-                  error={errors.radioGroup}
-                  touched={touched.radioGroup}
-                >
-                  <Field
-                    component={RadioButton}
-                    name="radioGroup"
-                    id="radioOption1"
-                    label="Choose this option"
-                  />
-                  <Field
-                    component={RadioButton}
-                    name="radioGroup"
-                    id="radioOption2"
-                    label="Or choose this one"
-                  />
-                </RadioButtonGroup> */}
-          {/* </Form>
-            )}
-          </Formik> */}
-          {/* <div className="address-modal__container">
-            <Checkbox isSelected={true}></Checkbox>
-            <div className="address-modal__address-container">
-              <div className="address-modal__address-container--title">
-                Suggested Address
-              </div>
-              <div className="address-modal__address-container--address">
-                <span>
-                  {this.props.addresses?.suggested_address?.office_street}
-                  <p />
-                  {this.props.addresses?.suggested_address?.office_city},{" "}
-                  {this.props.addresses?.suggested_address?.office_state}{" "}
-                  {this.props.addresses?.suggested_address?.office_zip}
-                </span>
-              </div>
-              <div>
-                <Button
-                  className="address-modal__nav-button"
-                  color="highlight"
-                  onClick={this.onSubmit}
-                >
-                  Use this Address
-                </Button>
-              </div>
-            </div>
-          </div>
-          <div className="address-modal__container">
-            <Checkbox isSelected={true}></Checkbox>
-            <div className="address-modal__address-container">
-              <div className="address-modal__address-container--title">
-                Original Address
-              </div>
-            </div>
-            <div className="address-modal__address-container--address">
-              <span>
-                {this.props.addresses?.entered_address?.office_street}
-                <p />
-                {this.props.addresses?.entered_address?.office_city},{" "}
-                {this.props.addresses?.entered_address?.office_state}{" "}
-                {this.props.addresses?.entered_address?.office_zip}
-              </span>
-            </div>
-          </div> */}
+              </Button> */}
         </ModalWindow.Body>
       </ModalWindow>
     );
