@@ -18,15 +18,15 @@ exports[`LargeBoxLayout renders correctly 1`] = `
       Test content
     </span>
   </div>
-  <span
+  <p
     className="large-box__bottom-line"
   >
     This is details
-  </span>
-  <span
+  </p>
+  <p
     className="large-box__bottom-line"
   >
     This is more details
-  </span>
+  </p>
 </div>
 `;

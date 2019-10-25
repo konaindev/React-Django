@@ -230,14 +230,14 @@ exports[`CampaignInvestmentReport renders negative performance report correctly 
             </div>
           </div>
         </div>
-        <span
+        <p
           className="large-box__bottom-line"
         />
-        <span
+        <p
           className="large-box__bottom-line"
         >
           Target: $17k
-        </span>
+        </p>
       </div>
     </div>
     <div
@@ -278,12 +278,12 @@ exports[`CampaignInvestmentReport renders negative performance report correctly 
             </span>
           </span>
         </div>
-        <span
+        <p
           className="large-box__bottom-line"
         >
           Target: $495.2k
-        </span>
-        <span
+        </p>
+        <p
           className="large-box__bottom-line"
         />
       </div>
@@ -335,12 +335,12 @@ exports[`CampaignInvestmentReport renders negative performance report correctly 
             </span>
           </span>
         </div>
-        <span
+        <p
           className="large-box__bottom-line"
         >
           Target: 14
-        </span>
-        <span
+        </p>
+        <p
           className="large-box__bottom-line"
         />
       </div>

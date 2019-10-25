@@ -406,27 +406,25 @@ exports[`ModelingReportPage renders correctly 1`] = `
                 >
                   95%
                 </span>
+                <div
+                  className="large-box__content-extra"
+                />
               </div>
-              <span
+              <p
                 className="large-box__bottom-line"
               >
-                <div>
-                  247
-                   Executed Leases (Out of
-                   
-                  260
-                  )
-                </div>
-                <div>
-                  201
-                   Total Units
-                </div>
-              </span>
-              <span
+                <span>
+                  247 Executed Leases (Out of 260)
+                </span>
+                <span>
+                  201 Total Units
+                </span>
+              </p>
+              <p
                 className="large-box__bottom-line"
               >
                 
-              </span>
+              </p>
             </div>
           </div>
           <div
@@ -453,17 +451,20 @@ exports[`ModelingReportPage renders correctly 1`] = `
                 >
                   63%
                 </span>
+                <div
+                  className="large-box__content-extra"
+                />
               </div>
-              <span
+              <p
                 className="large-box__bottom-line"
               >
                 30 Notices to Renew (Out of 48 Resident Decisions)
-              </span>
-              <span
+              </p>
+              <p
                 className="large-box__bottom-line"
               >
                 
-              </span>
+              </p>
             </div>
           </div>
           <div
@@ -490,26 +491,25 @@ exports[`ModelingReportPage renders correctly 1`] = `
                 >
                   93%
                 </span>
+                <div
+                  className="large-box__content-extra"
+                />
               </div>
-              <span
+              <p
                 className="large-box__bottom-line"
               >
-                <div>
-                  242
-                   Occupied Units (Out of 
-                  260
-                  )
-                </div>
-                <div>
-                  201
-                   Total Units
-                </div>
-              </span>
-              <span
+                <span>
+                  242 Occupied Units (Out of 260)
+                </span>
+                <span>
+                  201 Total Units
+                </span>
+              </p>
+              <p
                 className="large-box__bottom-line"
               >
                 
-              </span>
+              </p>
             </div>
           </div>
         </div>
@@ -798,15 +798,18 @@ exports[`ModelingReportPage renders correctly 1`] = `
                 >
                   $181k
                 </span>
+                <div
+                  className="large-box__content-extra"
+                />
               </div>
-              <span
+              <p
                 className="large-box__bottom-line"
               />
-              <span
+              <p
                 className="large-box__bottom-line"
               >
                 
-              </span>
+              </p>
             </div>
           </div>
           <div
@@ -847,12 +850,12 @@ exports[`ModelingReportPage renders correctly 1`] = `
                   </span>
                 </span>
               </div>
-              <span
+              <p
                 className="large-box__bottom-line"
               >
                 
-              </span>
-              <span
+              </p>
+              <p
                 className="large-box__bottom-line"
               />
             </div>
@@ -899,12 +902,12 @@ exports[`ModelingReportPage renders correctly 1`] = `
                   </span>
                 </span>
               </div>
-              <span
+              <p
                 className="large-box__bottom-line"
               >
                 
-              </span>
-              <span
+              </p>
+              <p
                 className="large-box__bottom-line"
               />
             </div>
@@ -1891,15 +1894,18 @@ exports[`ModelingReportPage renders correctly 1`] = `
                 >
                   0.7%
                 </span>
+                <div
+                  className="large-box__content-extra"
+                />
               </div>
-              <span
+              <p
                 className="large-box__bottom-line"
               />
-              <span
+              <p
                 className="large-box__bottom-line"
               >
                 
-              </span>
+              </p>
             </div>
           </div>
           <div
@@ -1926,15 +1932,18 @@ exports[`ModelingReportPage renders correctly 1`] = `
                 >
                   20%
                 </span>
+                <div
+                  className="large-box__content-extra"
+                />
               </div>
-              <span
+              <p
                 className="large-box__bottom-line"
               />
-              <span
+              <p
                 className="large-box__bottom-line"
               >
                 
-              </span>
+              </p>
             </div>
           </div>
           <div
@@ -1961,17 +1970,20 @@ exports[`ModelingReportPage renders correctly 1`] = `
                 >
                   103%
                 </span>
+                <div
+                  className="large-box__content-extra"
+                />
               </div>
-              <span
+              <p
                 className="large-box__bottom-line"
               >
                 $1,909 / $1,847
-              </span>
-              <span
+              </p>
+              <p
                 className="large-box__bottom-line"
               >
                 
-              </span>
+              </p>
             </div>
           </div>
         </div>
