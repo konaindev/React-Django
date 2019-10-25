@@ -1,6 +1,8 @@
 import re
+import os
 
 from django.contrib.auth.password_validation import get_password_validators
+import json
 
 ACCOUNT_TYPE = (
     (1, "Property Owner"),
@@ -69,6 +71,22 @@ VALIDATION_RULES = [
 ]
 
 VALIDATION_RULES_LIST = [{"label": v["label"], "key": v["key"]} for v in VALIDATION_RULES]
+
+US_STATE_LIST = []
+UK_TOWNSHIP_LIST = []
+with open('./data/locations/states.json', 'r') as read_file:
+    states_list = json.load(read_file)
+    for state in states_list:
+        if state['country_id'] is 233:
+            US_STATE_LIST.append(state['name'])
+        elif state['country_id'] is 232:
+            UK_TOWNSHIP_LIST.append(state['name'])
+
+COUNTRY_LIST = [
+    {"label": "United States of America", "value": "USA"},
+    {"label": "United Kingdom", "value": "UK"}
+]
+
 
 PHONE_REGEX = re.compile(r"^\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$")
 US_STATE_REGEX = re.compile(r"/AL|Alabama|AK|Alaska|AZ|Arizona|AR|Arkansas|CA|California|CO|Colorado|CT|Connecticut|DE|Delaware|FL|Florida|GA|Georgia|HI|Hawaii|ID|Idaho|IL|Illinois|IN|Indiana|IA|Iowa|KS|Kansas|KY|Kentucky|LA|Louisiana|ME|Maine|MD|Maryland|MA|Massachusetts|MI|Michigan|MN|Minnesota|MS|Mississippi|MO|Missouri|MT|Montana|NE|Nebraska|NV|Nevada|NH|New Hampshire|NJ|New Jersey|NM|New Mexico|NY|New York|NC|North Carolina|ND|North Dakota|OH|Ohio|OK|Oklahoma|OR|Oregon|PA|Pennsylvania|RI|Rhode Island|SC|South Carolina|SD|South Dakota|TN|Tennessee|TX|Texas|UT|Utah|VT|Vermont|VA|Virginia|WA|Washington|WV|West Virginia|WI|Wisconsin|WY|Wyoming/")

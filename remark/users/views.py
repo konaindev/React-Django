@@ -25,7 +25,7 @@ from remark.lib.views import ReactView, RemarkView, APIView, LoginRequiredReactV
 from remark.email_app.invites.added_to_property import send_invite_email
 from remark.settings import INVITATION_EXP
 
-from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES, VALIDATION_RULES_LIST
+from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES, VALIDATION_RULES_LIST, US_STATE_LIST, UK_TOWNSHIP_LIST, COUNTRY_LIST
 from .forms import AccountCompleteForm, AccountProfileForm, AccountSecurityForm
 from .models import User
 
@@ -69,11 +69,11 @@ class CompleteAccountView(LoginRequiredMixin, ReactView):
         accept = request.META.get("HTTP_ACCEPT")
         if accept == "application/json":
             response = JsonResponse(
-                {"office_types": self.office_options, "company_roles": COMPANY_ROLES}
+                {"office_types": self.office_options, "company_roles": COMPANY_ROLES, "office_country": COUNTRY_LIST}
             )
         else:
             response = self.render(
-                office_types=self.office_options, company_roles=COMPANY_ROLES
+                office_types=self.office_options, company_roles=COMPANY_ROLES, office_country=COUNTRY_LIST
             )
         return response
 
@@ -239,10 +239,12 @@ class AccountSettingsView(LoginRequiredReactView):
 
     def get(self, request):
         user = request.user
+        print("ACCOUNT SETTINGS VIEW!!!!")
         return self.render(
             rules=VALIDATION_RULES_LIST,
             profile=user.get_profile_data(),
             company_roles=COMPANY_ROLES,
+            office_country=COUNTRY_LIST,
             office_options=OFFICE_OPTIONS,
             user=request.user.get_menu_dict())
 
@@ -320,32 +322,40 @@ class AccountProfileView(LoginRequiredMixin, RemarkView):
 
 
     def post(self, request):
+        print("PROFILE POST!!!!!")
         post_data = request.POST.copy()
-        post_data \
-            .setlist("company_roles", request.POST.getlist("company_roles[]"))
-        post_data.setdefault("office_address", self.check_address(post_data))
-        post_data.pop("company_roles[]", None)
-        # print(self.check_address(post_data))
-        form = AccountProfileForm(post_data, request.FILES)
-        if not form.is_valid():
-            return JsonResponse(form.errors.get_json_data(), status=500)
-        user = request.user
-        self.update_profile(user, form.cleaned_data)
-        return JsonResponse(user.get_profile_data(), status=200)
+        print(post_data)
+        # post_data \
+        #     .setlist("company_roles", request.POST.getlist("company_roles[]"))
+        # post_data.setdefault("office_address", self.check_address(post_data))
+        # post_data.pop("company_roles[]", None)
+        # # print(self.check_address(post_data))
+        # form = AccountProfileForm(post_data, request.FILES)
+        # if not form.is_valid():
+        #     return JsonResponse(form.errors.get_json_data(), status=500)
+        # user = request.user
+        # self.update_profile(user, form.cleaned_data)
+        # return JsonResponse(user.get_profile_data(), status=200)
+        return JsonResponse({"testing": "testing"}, status=200)
 
 class ValidateAddressView(RemarkView):
+    def formatAddressString(self, address_object):
+        response = f"{address_object['office_street']}, {address_object['office_city']}, {address_object['office_state']} {address_object['office_zip']}"
+        return response
+
     def post(self, request):
         params = json.loads(request.body)
         entered_address = {
             'office_street': params['office_street'],
             'office_city': params['office_city'],
             'office_state': params['office_state'],
-            'office_zip': params['office_zip']
+            'office_zip': params['office_zip'],
+            'formatted_address': self.formatAddressString(params)
         }
         
         geocode_address = geocode(params['office_street'] + params['office_city'] + params['office_state'] + params['office_zip'])
         
-        if not geocode_address:
+        if not geocode_address or not geocode_address.street_address:
             return JsonResponse({"error": True}, status=200)
         
         suggested_address = {
