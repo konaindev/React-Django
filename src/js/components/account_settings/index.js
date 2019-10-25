@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import EmailReportsContainer from "../../containers/account_settings/email_reports";
 import { Email, Lock, Profile } from "../../icons";
 import ProjectPageChrome from "../project_page_chrome";
-
+import LoaderContainer from "../../containers/account_settings/loader";
 import AccountSecurity from "./account_security";
 import ProfileTab from "./profile";
 import "./account_settings.scss";
@@ -92,6 +92,7 @@ class AccountSettings extends React.PureComponent {
 
   render() {
     const Component = menuItemsData[this.state.item].component;
+    console.log(this.props);
     return (
       <ProjectPageChrome navLinks={navLinks} user={this.props.user}>
         <div className="account-settings">
@@ -110,6 +111,7 @@ class AccountSettings extends React.PureComponent {
                 selectItem={this.selectItem}
               />
             </div>
+            <LoaderContainer />
             <Component {...this.props} />
           </div>
         </div>
@@ -118,4 +120,10 @@ class AccountSettings extends React.PureComponent {
   }
 }
 
-export default connect()(AccountSettings);
+const mapState = state => {
+  return {
+    ...state.network
+  };
+};
+
+export default connect(mapState)(AccountSettings);

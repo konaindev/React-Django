@@ -20,6 +20,15 @@ import { axiosGet, axiosPost } from "../../utils/api";
 // Here we create a middleware that intercepts
 // actions representing a request for data from
 // the api
+
+function startFetchingState(store) {
+  let x = store.getState();
+  let { isFetching } = x.network;
+  if (!isFetching || isFetching === false) {
+    store.dispatch(networking.startFetching());
+  }
+}
+
 export const fetchDashboard = store => next => action => {
   if (action.type === "API_DASHBOARD") {
     let x = store.getState();
@@ -231,22 +240,33 @@ export const updateAccountSecurity = store => next => action => {
 
 export const updateAccountProfile = store => next => action => {
   if (action.type === "API_ACCOUNT_PROFILE") {
+    console.log(action);
     if (action.data) {
-      updateProfileData(action.data)
-        .then(response => {
-          if (response.status === 200) {
-            action.callback(response.data);
-          } else {
-            throw response;
-          }
-        })
-        .catch(e => {
-          if (e.response.data && _isObject(e.response.data)) {
-            action.onError(e.response.data);
-          } else {
-            console.log("-----> ERROR", e);
-          }
-        });
+      startFetchingState(store);
+      setTimeout(
+        () =>
+          updateProfileData(action.data)
+            .then(response => {
+              if (response.status === 200) {
+                action.callback(response.data);
+                console.log(action);
+                console.log(response);
+              } else {
+                throw response;
+              }
+            })
+            .then(() => next(networking.stopFetching()))
+            .catch(e => {
+              if (e.response?.data && _isObject(e.response.data)) {
+                next(networking.stopFetching());
+                action.onError(e.response.data);
+              } else {
+                console.log("-----> ERROR", e);
+              }
+              next(networking.stopFetching());
+            }),
+        5000
+      );
     }
   } else {
     next(action);

@@ -11,9 +11,7 @@ export const updateReportsSettingsData = data =>
   axiosPost(`${process.env.BASE_URL}/users/account-reports`, data);
 
 export const validateAddress = data =>
-  axiosPost(`${process.env.BASE_URL}/users/validate-address`, data).then(
-    response => console.log(response)
-  );
+  axiosPost(`${process.env.BASE_URL}/users/validate-address`, data);
 
 export const getPropertiesData = data => {
   let q = "";

@@ -3,6 +3,7 @@ import { ErrorMessage, Formik, Form } from "formik";
 import _intersection from "lodash/intersection";
 import PropTypes from "prop-types";
 import React from "react";
+import AddressModal from "../address_modal";
 
 import { Tick, Upload } from "../../icons";
 import { formatPhone } from "../../utils/formatters";
@@ -11,6 +12,7 @@ import Button from "../button";
 import Input from "../input";
 import MultiSelect from "../multi_select";
 import Select from "../select";
+import { networking, addressModal, general } from "../../state/actions";
 import { MAX_AVATAR_SIZE, profileSchema } from "./validators";
 
 export default class Profile extends React.PureComponent {
@@ -24,6 +26,7 @@ export default class Profile extends React.PureComponent {
       phone_ext: PropTypes.string,
       company: PropTypes.string,
       company_roles: PropTypes.arrayOf(PropTypes.string),
+      office_country: PropTypes.number,
       office_street: PropTypes.string,
       office_city: PropTypes.string,
       office_state: PropTypes.string,
@@ -32,7 +35,8 @@ export default class Profile extends React.PureComponent {
       office_type: PropTypes.number
     }),
     company_roles: MultiSelect.optionsType.isRequired,
-    office_options: Select.optionsType.isRequired
+    office_options: Select.optionsType.isRequired,
+    office_country: Select.optionsType.isRequired
   };
   static defaultProps = {
     profile: {
@@ -44,6 +48,7 @@ export default class Profile extends React.PureComponent {
       phone_ext: "",
       company: "",
       company_roles: [],
+      office_country: [],
       office_street: "",
       office_city: "",
       office_state: "",
@@ -61,6 +66,7 @@ export default class Profile extends React.PureComponent {
     "phone_ext",
     "company",
     "company_roles",
+    "office_country",
     "office_street",
     "office_city",
     "office_state",
@@ -69,7 +75,15 @@ export default class Profile extends React.PureComponent {
     "office_type"
   ];
 
-  state = { fieldsSubmitted: false };
+  constructor(props) {
+    super(props);
+    this.state = {
+      fieldsSubmitted: false,
+      addresses: {},
+      data: {}
+    };
+  }
+  // state = { fieldsSubmitted: false, addresses: {}, data: {} };
 
   get initialValues() {
     let profile = { ...this.props.profile };
@@ -191,26 +205,37 @@ export default class Profile extends React.PureComponent {
     this.unsetMessage();
     const dataValues = { ...values };
     const data = new FormData();
-    // for (const k of Object.keys(dataValues)) {
-    //   if (Profile.fieldsSubmit.includes(k)) {
-    //     if (k === "company_roles") {
-    //       for (const i of dataValues.company_roles) {
-    //         data.append("company_roles[]", i.value);
-    //       }
-    //     } else if (k === "office_type") {
-    //       data.append("office_type", dataValues.office_type.value);
-    //     } else {
-    //       data.append(k, dataValues[k]);
-    //     }
-    //   }
-    // }
-    validateAddress(values);
-    // this.props.dispatch({
-    //   type: "API_ACCOUNT_PROFILE",
-    //   callback: this.setSuccessMessage,
-    //   onError: this.setErrorMessages,
-    //   data
-    // });
+    for (const k of Object.keys(dataValues)) {
+      if (Profile.fieldsSubmit.includes(k)) {
+        if (k === "company_roles") {
+          for (const i of dataValues.company_roles) {
+            data.append("company_roles[]", i.value);
+          }
+        } else if (k === "office_type") {
+          data.append("office_type", dataValues.office_type.value);
+        } else if (k === "office_country") {
+          data.append("office_country", dataValues.office_country.value);
+        } else {
+          data.append(k, dataValues[k]);
+        }
+      }
+    }
+    validateAddress(values).then(response => {
+      this.setState({ addresses: response.data });
+      if (response.data.error) {
+        this.setErrorMessages({ office_street: "testing" });
+      } else {
+        // this.setState({ data: data, addresses: response.data });
+        this.props.dispatch(addressModal.open(data, response.data));
+        // this.props.dispatch({
+        //   type: "API_ACCOUNT_PROFILE",
+        //   callback: this.setSuccessMessage,
+        //   onError: this.setErrorMessages,
+        //   data
+        // });
+      }
+    });
+    // .then(() => this.props.dispatch(addressModal.open));
   };
 
   onChange = v => {
@@ -223,9 +248,36 @@ export default class Profile extends React.PureComponent {
     this.formik.handleBlur(v);
   };
 
+  setSuccessMessageTest() {
+    this.formik.setSubmitting(false);
+    const message = "Your profile has been saved.";
+    this.setState({ message });
+  }
+
+  test_dispatch(data, props) {
+    props.dispatch({
+      type: "API_ACCOUNT_PROFILE",
+      // callback: this.setSuccessMessage,
+      // callback: () => {
+      //   this.formik.setSubmitting(false);
+      //   const message = "Your profile has been saved.";
+      //   this.setState({ message });
+      // },
+      onError: this.setErrorMessages,
+      data
+    });
+  }
+
   render() {
     return (
       <div className="account-settings__tab">
+        <AddressModal
+          title="Verify Office Address"
+          onClose={this.props.dispatch(addressModal.close)}
+          onFinish={this.test_dispatch}
+          callback={this.setSuccessMessage}
+          onError={this.setErrorMessages}
+        />
         <Formik
           ref={this.setFormik}
           initialValues={this.initialValues}
@@ -437,6 +489,43 @@ export default class Profile extends React.PureComponent {
                       />
                       <div className="account-settings__error">
                         <ErrorMessage name="company_roles" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="account-settings__tab-title">
+                    Company Info
+                  </div>
+                  <div className="account-settings__field-grid">
+                    <div
+                      className={this.getFieldClasses(
+                        "office_country",
+                        errors,
+                        touched,
+                        ["full-grid"]
+                      )}
+                    >
+                      <div className="account-settings__label">
+                        Office Country
+                      </div>
+                      <Select
+                        className="account-settings__input"
+                        name="office_country"
+                        theme="gray"
+                        isShowControls={false}
+                        isShowAllOption={false}
+                        value={values.office_country}
+                        options={this.props.office_country}
+                        onBlur={() => {
+                          this.unsetMessage();
+                          setFieldTouched("office_country", true);
+                        }}
+                        onChange={value => {
+                          this.unsetMessage();
+                          setFieldValue("office_country", value);
+                        }}
+                      />
+                      <div className="account-settings__error">
+                        <ErrorMessage name="office_country" />
                       </div>
                     </div>
                     <div

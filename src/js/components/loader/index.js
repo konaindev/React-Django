@@ -5,8 +5,10 @@ import "./loader.scss";
 
 const Loader = ({ isShow }) => {
   if (!isShow) {
+    console.log("IN LOADER not show");
     return null;
   }
+  console.log("LOADER IS SHOW");
   return (
     <div className="loader">
       <div className="loader__image" />
