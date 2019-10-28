@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import cx from "classnames";
 import _get from "lodash/get";
 
 import Button from "../button";
@@ -17,14 +18,14 @@ class AddressModal extends React.PureComponent {
     onFinish: PropTypes.func,
     callback: PropTypes.func,
     onError: PropTypes.func,
-    theme: PropTypes.string
+    theme: PropTypes.oneOf(["dark", "light"])
   };
 
   static defaultProps = {
     isOpen: false,
     onClose: () => {},
     onFinish: () => {},
-    title: "Verify Office Address",
+    title: "Confirm Office Address",
     theme: "dark"
   };
 
@@ -62,12 +63,18 @@ class AddressModal extends React.PureComponent {
   };
 
   render() {
-    const { title, isOpen } = this.props;
+    const { title, isOpen, theme } = this.props;
     const address = _get(this.props, "addresses.suggested_address");
+    const modalClass = cx("address-modal", `address-modal--theme-${theme}`);
 
+    //
+    // @TODO: if we want to support dark/light themes in all modals,
+    //           prop names should be changed a bit
+    //        <ModalWindow theme="dark | light" size="default | small" />
+    //
     return (
       <ModalWindow
-        className="address-modal"
+        className={modalClass}
         open={isOpen}
         onClose={this.closeModal}
         theme="small"
@@ -75,7 +82,7 @@ class AddressModal extends React.PureComponent {
         <ModalWindow.Head>{title}</ModalWindow.Head>
         <ModalWindow.Body>
           <div className="address-modal__body">
-            <p>Suggested Address</p>
+            <p className="address-caption">Suggested Address</p>
             <p>{address?.office_street}</p>
             <p>{`${address?.office_city}, ${address?.office_state}`}</p>
             <p>{address?.office_zip}</p>

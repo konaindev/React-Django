@@ -2,20 +2,23 @@
 
 $modal-width: 35rem;
 $modal-padding: 1.25rem;
-$border-color: $gray-4;
-$text-color: $highlight-gray-3;
-$text-line-height: 1.25rem;
+
+$dark-theme-background: $gray-3;
+$dark-theme-text-color: $highlight-gray-3;
+$dark-theme-border-color: $gray-4;
+
+$light-theme-background: $white;
+$light-theme-text-color: $gray-3;
+$light-theme-border-color: $gray-10;
 
 .address-modal {
     width: $modal-width;
     padding: 0;
     position: relative;
-    font-family: $font-sans;
-    line-height: $text-line-height;
+    line-height: 1.25rem;
 
     .modal-window__head {
-        color: $text-color;
-        border-bottom: 1px solid $border-color;
+        border-bottom: 1px solid;
         height: unset;
         padding: $modal-padding;
     }
@@ -26,21 +29,21 @@ $text-line-height: 1.25rem;
     }
 
     &__body {
-        color: $text-color;
-        border-bottom: 1px solid $border-color;
+        border-bottom: 1px solid;
         font-size: $text-sm;
         padding: $modal-padding;
 
         p {
             margin-bottom: 0.5rem;
 
-            &:first-child {
-                margin-bottom: 0.625rem;
-            }
-
             &:last-child {
                 margin-bottom: 0;
             }
+        }
+
+        .address-caption {
+            font-weight: $weight-medium;
+            margin-bottom: 1rem;
         }
     }
 
@@ -48,5 +51,25 @@ $text-line-height: 1.25rem;
         padding: $modal-padding;
         display: flex;
         justify-content: space-between;
+    }
+
+    &--theme-dark {
+        background-color: $dark-theme-background;
+
+        .modal-window__head,
+        .address-modal__body {
+            color: $dark-theme-text-color;
+            border-color: $dark-theme-border-color;
+        }
+    }
+
+    &--theme-light {
+        background-color: $light-theme-background;
+
+        .modal-window__head,
+        .address-modal__body {
+            color: $light-theme-text-color;
+            border-color: $light-theme-border-color;
+        }
     }
 }

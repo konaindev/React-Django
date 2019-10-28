@@ -24,8 +24,14 @@ const props = {
   }
 };
 
-storiesOf("AddressModal", module).add("default", () => (
-  <Provider store={createStore(() => ({}))}>
-    <AddressModal {...props} />
-  </Provider>
-));
+storiesOf("AddressModal", module)
+  .add("dark theme", () => (
+    <Provider store={createStore(() => ({}))}>
+      <AddressModal {...props} theme="dark" />
+    </Provider>
+  ))
+  .add("light theme", () => (
+    <Provider store={createStore(() => ({}))}>
+      <AddressModal {...props} theme="light" />
+    </Provider>
+  ));

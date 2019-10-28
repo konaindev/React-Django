@@ -253,7 +253,7 @@ export default class Profile extends React.PureComponent {
     return (
       <div className="account-settings__tab">
         <AddressModal
-          title="Verify Office Address"
+          title="Confirm Office Address"
           onClose={this.props.dispatch(addressModal.close)}
           onFinish={this.test_dispatch}
           callback={this.setSuccessMessage}
