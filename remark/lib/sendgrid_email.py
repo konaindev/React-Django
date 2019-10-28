@@ -103,8 +103,9 @@ def create_contact_list_if_not_exists(list_name, list_id, contact_ids):
         if recipient["id"] not in contact_ids:
             delete_recipient_from_list(list_id, recipient["id"])
 
+    recipients_ids = [r["id"] for r in recipients]
     for contact_id in contact_ids:
-        if contact_id not in recipients:
+        if contact_id not in recipients_ids:
             add_recipient_to_list(list_id, contact_id)
 
     return list_id
