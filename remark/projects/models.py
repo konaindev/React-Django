@@ -487,8 +487,16 @@ class Project(models.Model):
         return health_check(lease_rate, target_lease_rate)
 
     def get_members(self):
-        users_members = self.view_group.user_set.all()
-        users_admins = self.admin_group.user_set.all()
+        if self.view_group is None:
+            users_members = []
+        else:
+            users_members = self.view_group.user_set.all()
+
+        if self.admin_group is None:
+            users_admins = []
+        else:
+            users_admins = self.admin_group.user_set.all()
+
         users = [
             user.get_icon_dict(PROJECT_ROLES["member"]) for user in users_members if not user.is_staff
         ] + [user.get_icon_dict(PROJECT_ROLES["admin"]) for user in users_admins if not user.is_staff]
