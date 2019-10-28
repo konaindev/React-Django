@@ -67,3 +67,8 @@ VALIDATION_RULES = [
         "key": "used",
     },
 ]
+
+PROJECT_ROLES = {
+    "member": "member",
+    "admin": "admin"
+}

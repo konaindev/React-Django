@@ -38,7 +38,7 @@ def get_template_vars(inviter_name, user, projects, max_count):
             "image_url": thumbnail if thumbnail else PROPERTY_THUMB_FALLBACK,
             "title": p.name,
             "address": f"{address.city}, {address.state}",
-            "view_link": p.get_report_url(),
+            "view_link": f"{BASE_URL}{p.get_report_url()}",
         })
 
     template_vars = {
@@ -55,11 +55,11 @@ def get_template_vars(inviter_name, user, projects, max_count):
     }
 
     if len(projects) == 1:
-        template_vars["main_button_link"] = projects[0].get_report_url()
+        template_vars["main_button_link"] = f"{BASE_URL}{projects[0].get_report_url()}"
         template_vars["property_name"] = projects[0].name
         template_vars["main_button_label"] = "View Property"
     else:
-        template_vars["main_button_link"] = LOGIN_REDIRECT_URL
+        template_vars["main_button_link"] = f"{BASE_URL}{LOGIN_REDIRECT_URL}"
         template_vars["main_button_label"] = "View All Properties"
 
     if len(projects) > max_count:

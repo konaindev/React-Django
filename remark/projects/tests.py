@@ -20,7 +20,7 @@ from .models import Fund, LeaseStage, Period, Project, Property, TargetPeriod
 from .reports.periods import ComputedPeriod
 from .reports.performance import PerformanceReport
 from .export import export_periods_to_csv, export_periods_to_excel
-
+from remark.settings import BASE_URL
 
 def create_project(project_name="project 1"):
     address = Address.objects.create(
@@ -610,19 +610,25 @@ def mocked_geocode(location):
 
 class OnboardingWorkflowTestCase(TestCase):
     def setUp(self):
-        user = User.objects.create_user(
+        user = User.objects.create_superuser(
             email="admin@remarkably.io", password="adminpassword"
         )
         project, _ = create_project()
+        admin_group = Group.objects.create(name="project 1 admin group")
+        admin_group.user_set.add(user)
+        project.admin_group = admin_group
+        project.save()
+
         self.client.login(email="admin@remarkably.io", password="adminpassword")
         self.project = project
+        self.user = user
+        self.url = reverse("add_members")
 
     @mock.patch("remark.users.views.geocode", side_effect=mocked_geocode)
     @mock.patch("remark.projects.views.send_invite_email.apply_async",
                 side_effect=send_invite_email.apply)
     @mock.patch("remark.email_app.invites.added_to_property.send_email")
     def test_invite_new_user(self, mock_send_email, *args):
-        url = reverse("add_members")
         params = {
             "projects": [{"property_id": self.project.public_id}],
             "members": [
@@ -633,7 +639,7 @@ class OnboardingWorkflowTestCase(TestCase):
                 }
             ],
         }
-        response = self.client.post(url, json.dumps(params), "json")
+        response = self.client.post(self.url, json.dumps(params), "json")
         self.assertEqual(response.status_code, 200)
         data = response.json()
         public_id = data["projects"][0]["members"][0]["user_id"]
@@ -681,7 +687,6 @@ class OnboardingWorkflowTestCase(TestCase):
                 side_effect=send_invite_email.apply)
     @mock.patch("remark.email_app.invites.added_to_property.send_email")
     def test_invite_existing_user(self, mock_send_email, _):
-        url = reverse("add_members")
         user = User.objects.create_user(
             email="test@remarkably.io",
             password="testpassword",
@@ -697,7 +702,7 @@ class OnboardingWorkflowTestCase(TestCase):
                 }
             ],
         }
-        response = self.client.post(url, json.dumps(params), "json")
+        response = self.client.post(self.url, json.dumps(params), "json")
 
         self.assertEqual(response.status_code, 200)
         mock_send_email.assert_called()
@@ -737,10 +742,10 @@ class GetTemplateVarsTestCase(TestCase):
                 "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                 "title": "project 1",
                 "address": "Seattle, WA",
-                "view_link": f"/projects/{self.project.public_id}/market/",
+                "view_link": f"{BASE_URL}/projects/{self.project.public_id}/market/",
             }],
             "more_count": None,
-            "main_button_link": f"http://localhost:8000/users/create-password/{self.new_user.public_id}",
+            "main_button_link": f"{BASE_URL}/users/create-password/{self.new_user.public_id}",
             "main_button_label": "Create Account",
         }
         self.assertEqual(expected, template_vars)
@@ -758,15 +763,15 @@ class GetTemplateVarsTestCase(TestCase):
                 "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                 "title": "project 1",
                 "address": "Seattle, WA",
-                "view_link": f"/projects/{self.projects[0].public_id}/market/",
+                "view_link": f"{BASE_URL}/projects/{self.projects[0].public_id}/market/",
             },{
                 "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                 "title": "project 2",
                 "address": "Seattle, WA",
-                "view_link": f"/projects/{self.projects[1].public_id}/market/",
+                "view_link": f"{BASE_URL}/projects/{self.projects[1].public_id}/market/",
             }],
             "more_count": None,
-            "main_button_link": f"http://localhost:8000/users/create-password/{self.new_user.public_id}",
+            "main_button_link": f"{BASE_URL}/users/create-password/{self.new_user.public_id}",
             "main_button_label": "Create Account",
         }
         self.assertEqual(expected, template_vars)
@@ -784,10 +789,10 @@ class GetTemplateVarsTestCase(TestCase):
                 "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                 "title": "project 1",
                 "address": "Seattle, WA",
-                "view_link": f"/projects/{self.project.public_id}/market/",
+                "view_link": f"{BASE_URL}/projects/{self.project.public_id}/market/",
             }],
             "more_count": None,
-            "main_button_link": f"/projects/{self.project.public_id}/market/",
+            "main_button_link": f"{BASE_URL}/projects/{self.project.public_id}/market/",
             "main_button_label": "View Property",
         }
         self.assertEqual(expected, template_vars)
@@ -805,15 +810,15 @@ class GetTemplateVarsTestCase(TestCase):
                 "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                 "title": "project 1",
                 "address": "Seattle, WA",
-                "view_link": f"/projects/{self.projects[0].public_id}/market/",
+                "view_link": f"{BASE_URL}/projects/{self.projects[0].public_id}/market/",
             }, {
                 "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                 "title": "project 2",
                 "address": "Seattle, WA",
-                "view_link": f"/projects/{self.projects[1].public_id}/market/",
+                "view_link": f"{BASE_URL}/projects/{self.projects[1].public_id}/market/",
             }],
             "more_count": None,
-            "main_button_link": "/dashboard",
+            "main_button_link": f"{BASE_URL}/dashboard",
             "main_button_label": "View All Properties",
         }
         self.maxDiff = None
@@ -869,6 +874,18 @@ class AutocompleteMemberTestCase(TestCase):
         _, group = create_project("project 2")
         users = AutocompleteMemberTestCase.generate_users(5, 10)
         AutocompleteMemberTestCase.add_users_to_group(users, group)
+        params = {"value": ""}
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        users = [u.get_icon_dict() for u in self.users]
+        self.assertCountEqual(data["members"], users)
+
+    def test_many_projects_with_user(self):
+        AutocompleteMemberTestCase.add_users_to_group([self.user], self.group)
+        _, group = create_project("project 2")
+        AutocompleteMemberTestCase.add_users_to_group(self.users, group)
+        AutocompleteMemberTestCase.add_users_to_group([self.user], group)
         params = {"value": ""}
         response = self.client.post(self.url, json.dumps(params), "json")
         self.assertEqual(response.status_code, 200)

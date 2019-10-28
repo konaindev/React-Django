@@ -8,7 +8,7 @@ from django.urls import reverse
 
 from remark.lib.tokens import public_id
 from remark.lib.fields import NormalizedEmailField
-from .constants import ACCOUNT_TYPE
+from .constants import ACCOUNT_TYPE, PROJECT_ROLES
 
 
 def usr_public_id():
@@ -151,17 +151,10 @@ class User(PermissionsMixin, AbstractBaseUser):
             "email": self.email,
             "user_id": self.public_id,
             "account_name": self.get_name(),
-            "logout_url": reverse("logout")
+            "logout_url": reverse("logout"),
+            "is_superuser": self.is_superuser,
             # TODO: Add account_url
         }
-
-    def get_role(self):
-        person = self.person_set.first()
-        if person:
-            role = person.role
-        else:
-            role = "member"
-        return role
 
     def get_name(self):
         person = self.person_set.first()
@@ -171,12 +164,12 @@ class User(PermissionsMixin, AbstractBaseUser):
             name = self.email
         return name
 
-    def get_icon_dict(self):
+    def get_icon_dict(self, role=PROJECT_ROLES["member"]):
         return {
             "email": self.email,
             "user_id": self.public_id,
             "account_name": self.get_name(),
-            "role": self.get_role(),
+            "role": role,
         }
 
 
