@@ -93,6 +93,7 @@ export default class SelectRole extends React.PureComponent {
         closeMenuOnScroll={this.closeMenuOnScroll}
         onMenuOpen={this.openMenuHandler}
         onMenuClose={this.closeMenuHandler}
+        menuPosition="absolute"
       />
     );
   }
