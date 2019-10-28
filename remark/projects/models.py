@@ -519,6 +519,13 @@ class Project(models.Model):
             pk=self.view_group.pk
         ).exists()
 
+    def user_can_edit(self, user):
+        if user.is_superuser:
+            return True
+        return (self.admin_group is not None) and user.groups.filter(
+            pk=self.admin_group.pk
+        ).exists()
+
     def __assign_blank_groups(self):
         """
         Creates a new Group and assign it to view_gruop field

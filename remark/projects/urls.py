@@ -10,7 +10,8 @@ from .views import (
     ProjectUpdateAPIView,
     MembersView,
     AddMembersView,
-    ProjectRemoveMemberIView
+    ProjectRemoveMemberIView,
+    ChangeMemberRoleView
 )
 
 
@@ -70,6 +71,11 @@ urlpatterns = [
         "<project_id>/update/",
         ProjectUpdateAPIView.as_view(),
         name="update_endpoint",
+    ),
+    path(
+        "<project_id>/member/<user_id>/",
+        ChangeMemberRoleView.as_view(),
+        name="project_remove_user",
     ),
     path(
         "<project_id>/remove-member/",
