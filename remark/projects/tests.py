@@ -11,6 +11,7 @@ from io import BytesIO
 from unittest import mock
 
 from remark.crm.models import Business
+from remark.geo.mocks import mocked_geocode
 from remark.geo.models import Address
 from remark.users.models import Account, User
 from remark.lib.metrics import BareMultiPeriod
@@ -594,18 +595,6 @@ class ExportTestCase(TestCase):
                     response_ws.cell(row=row, column=col).value,
                     f"row: {row}, column: {col}"
                 )
-
-
-def mocked_geocode(location):
-    mock_obj = mock.MagicMock()
-    mock_obj.formatted_address = "2284 W Commodore Way #200, Seattle, WA 98199, USA"
-    mock_obj.street_address = "2284 W Commodore Way"
-    mock_obj.city = "Seattle"
-    mock_obj.state = "WA"
-    mock_obj.zip5 = "98199"
-    mock_obj.country = "US"
-    mock_obj.geocode_json = {}
-    return mock_obj
 
 
 class OnboardingWorkflowTestCase(TestCase):

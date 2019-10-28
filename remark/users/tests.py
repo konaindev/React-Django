@@ -7,6 +7,7 @@ from django.utils import timezone, crypto
 from unittest import mock
 
 from remark.geo.models import Address
+from remark.geo.mocks import mocked_geocode
 from remark.users.models import Account, User
 from remark.settings import LOGIN_URL, LOGIN_REDIRECT_URL
 
@@ -225,7 +226,8 @@ class CompleteAccountTestCase(TestCase):
         )
         self.client.login(email="test@test.com", password="password")
 
-    def test_complete_account(self):
+    @mock.patch("remark.users.views.geocode", side_effect=mocked_geocode)
+    def test_complete_account(self, _):
         url = reverse("complete_account")
         params = {
             "first_name": "First name",
