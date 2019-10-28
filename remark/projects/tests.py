@@ -614,6 +614,11 @@ class OnboardingWorkflowTestCase(TestCase):
             email="admin@remarkably.io", password="adminpassword"
         )
         project, _ = create_project()
+        admin_group = Group.objects.create(name="project 1 admin group")
+        admin_group.user_set.add(user)
+        project.admin_group = admin_group
+        project.save()
+
         self.client.login(email="admin@remarkably.io", password="adminpassword")
         self.project = project
         self.user = user
@@ -624,7 +629,6 @@ class OnboardingWorkflowTestCase(TestCase):
                 side_effect=send_invite_email.apply)
     @mock.patch("remark.email_app.invites.added_to_property.send_email")
     def test_invite_new_user(self, mock_send_email, *args):
-        url = reverse("add_members")
         params = {
             "projects": [{"property_id": self.project.public_id}],
             "members": [
@@ -635,10 +639,6 @@ class OnboardingWorkflowTestCase(TestCase):
                 }
             ],
         }
-        group = Group.objects.create(name="project 1 admin group")
-        group.user_set.add(self.user)
-        self.project.admin_group = group
-        self.project.save()
         response = self.client.post(self.url, json.dumps(params), "json")
         self.assertEqual(response.status_code, 200)
         data = response.json()
@@ -687,7 +687,6 @@ class OnboardingWorkflowTestCase(TestCase):
                 side_effect=send_invite_email.apply)
     @mock.patch("remark.email_app.invites.added_to_property.send_email")
     def test_invite_existing_user(self, mock_send_email, _):
-        url = reverse("add_members")
         user = User.objects.create_user(
             email="test@remarkably.io",
             password="testpassword",
@@ -703,7 +702,7 @@ class OnboardingWorkflowTestCase(TestCase):
                 }
             ],
         }
-        response = self.client.post(url, json.dumps(params), "json")
+        response = self.client.post(self.url, json.dumps(params), "json")
 
         self.assertEqual(response.status_code, 200)
         mock_send_email.assert_called()
