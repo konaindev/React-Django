@@ -675,9 +675,8 @@ class OnboardingWorkflowTestCase(TestCase):
         response = self.client.post(redirect_url, json.dumps(params), "json")
         self.assertEqual(response.status_code, 200)
         user = User.objects.get(public_id=public_id)
-        crm_persons = user.person_set.all()
-        self.assertTrue(len(crm_persons) == 1)
-        self.assertTrue(crm_persons[0].office.address)
+        self.assertTrue(user.person)
+        self.assertTrue(user.person.office.address)
 
         project = Project.objects.get(public_id=self.project.public_id)
         project_users = project.view_group.user_set.all()

@@ -216,3 +216,31 @@ class ResendInviteTestCase(TestCase):
             response, LOGIN_URL, status_code=302, target_status_code=200
         )
         mock_send_email.apply_async.assert_not_called()
+
+
+class CompleteAccountTestCase(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            email="test@test.com", password="password"
+        )
+        self.client.login(email="test@test.com", password="password")
+
+    def test_complete_account(self):
+        url = reverse("complete_account")
+        params = {
+            "first_name": "First name",
+            "last_name": "Last name",
+            "title": "Title",
+            "company": "New Company",
+            "company_role": ["owner"],
+            "office_address": "2284 W. Commodore Way, Suite 200",
+            "office_name": "Test office",
+            "office_type": 1,
+            "terms": True,
+        }
+        data = json.dumps(params)
+        self.client.post(url, data, "json")
+        user = User.objects.get(public_id=self.user.public_id)
+        self.assertEqual(user.person.first_name, params["first_name"])
+        self.assertEqual(user.person.last_name, params["last_name"])
+        self.assertEqual(user.person.email, self.user.email)
