@@ -89,7 +89,7 @@ class AddressModal extends React.PureComponent {
           </div>
           <div className="address-modal__footer">
             <Button
-              color="secondary"
+              color={theme === "dark" ? "secondary" : "outline"}
               uppercase
               onClick={() => console.log("HI")}
             >

@@ -51,6 +51,13 @@ $light-theme-border-color: $gray-10;
         padding: $modal-padding;
         display: flex;
         justify-content: space-between;
+
+        .button {
+            font-weight: $weight-bold;
+            letter-spacing: 1px;
+            font-size: 0.75rem;
+            line-height: 1.25rem;
+        }
     }
 
     &.address-modal--theme-dark {
@@ -76,6 +83,9 @@ $light-theme-border-color: $gray-10;
         }
         .modal-window__close > svg {
             fill: $light-theme-text-color;
+        }
+        .button--outline {
+            color: $light-theme-text-color;
         }
     }
 }
