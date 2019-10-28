@@ -11,7 +11,7 @@ $light-theme-background: $white;
 $light-theme-text-color: $gray-3;
 $light-theme-border-color: $gray-10;
 
-.address-modal {
+.address-modal.modal-window {
     width: $modal-width;
     padding: 0;
     position: relative;
@@ -28,7 +28,7 @@ $light-theme-border-color: $gray-10;
         right: $modal-padding;
     }
 
-    &__body {
+    .address-modal__body {
         border-bottom: 1px solid;
         font-size: $text-sm;
         padding: $modal-padding;
@@ -47,13 +47,13 @@ $light-theme-border-color: $gray-10;
         }
     }
 
-    &__footer {
+    .address-modal__footer {
         padding: $modal-padding;
         display: flex;
         justify-content: space-between;
     }
 
-    &--theme-dark {
+    &.address-modal--theme-dark {
         background-color: $dark-theme-background;
 
         .modal-window__head,
@@ -61,15 +61,21 @@ $light-theme-border-color: $gray-10;
             color: $dark-theme-text-color;
             border-color: $dark-theme-border-color;
         }
+        .modal-window__close > svg {
+            fill: $dark-theme-text-color;
+        }
     }
 
-    &--theme-light {
+    &.address-modal--theme-light {
         background-color: $light-theme-background;
 
         .modal-window__head,
         .address-modal__body {
             color: $light-theme-text-color;
             border-color: $light-theme-border-color;
+        }
+        .modal-window__close > svg {
+            fill: $light-theme-text-color;
         }
     }
 }
