@@ -1,11 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { Formik, Form, Field } from "formik";
 import _get from "lodash/get";
 
 import Button from "../button";
-import { RadioButtonGroup, RadioButton } from "../formik_controls";
 import ModalWindow from "../modal_window";
 import { addressModal } from "../../state/actions";
 
@@ -63,27 +61,10 @@ class AddressModal extends React.PureComponent {
     addressType: "entered_address"
   };
 
-  renderLabel = addressType => {
-    const address = _get(this.props.addresses, `${addressType}_address`);
-
-    return (
-      <div>
-        <p>
-          {addressType === "suggested"
-            ? "Suggested Address"
-            : "Original Address"}
-        </p>
-        <p>{address?.office_street}</p>
-        <p>
-          {`${address?.office_city},${address?.office_state} ${address?.office_zip}`}
-        </p>
-      </div>
-    );
-  };
-
   render() {
     const { title, isOpen } = this.props;
-    console.log(this.props);
+    const address = _get(this.props, "addresses.suggested_address");
+
     return (
       <ModalWindow
         className="address-modal"
@@ -93,33 +74,24 @@ class AddressModal extends React.PureComponent {
       >
         <ModalWindow.Head>{title}</ModalWindow.Head>
         <ModalWindow.Body>
-<<<<<<< HEAD
-          Suggested Address
-          <p>
-            {this.props.addresses?.suggested_address?.office_street}
-            <p>
-              {" "}
-              {this.props.addresses?.suggested_address?.office_city},{" "}
-              {this.props.addresses?.suggested_address?.office_state}{" "}
-              {this.props.addresses?.suggested_address?.office_zip}
-            </p>
-          </p>
-          <Button
-            className="address-modal__nav-button"
-            type="button"
-            color="highlight"
-            onClick={() => console.log("HI")}
-          >
-            Go Back
-          </Button>
-          <Button
-            className="address-modal__nav-button"
-            color="primary"
-            type="button"
-            onClick={this.onSubmit}
-          >
-            Confirm Address
-          </Button>
+          <div className="address-modal__body">
+            <p>Suggested Address</p>
+            <p>{address?.office_street}</p>
+            <p>{`${address?.office_city}, ${address?.office_state}`}</p>
+            <p>{address?.office_zip}</p>
+          </div>
+          <div className="address-modal__footer">
+            <Button
+              color="secondary"
+              uppercase
+              onClick={() => console.log("HI")}
+            >
+              Go Back
+            </Button>
+            <Button color="primary" uppercase onClick={this.onSubmit}>
+              Confirm Address
+            </Button>
+          </div>
           {/* <input
                 type="radio"
                 value={this.props.addresses?.entered_address.formatted_address}
@@ -147,54 +119,6 @@ class AddressModal extends React.PureComponent {
               >
                 Use this Address
               </Button> */}
-=======
-          <Formik
-            onSubmit={this.onSubmit}
-            initialValues={this.initialValues}
-            ref={this.formik}
-          >
-            {({
-              errors,
-              touched,
-              values,
-              isValid,
-              isSubmitting,
-              handleChange,
-              handleBlur
-            }) => (
-              <Form>
-                <RadioButtonGroup
-                  id="addressType"
-                  className="rmb-radio-button-group"
-                >
-                  <Field
-                    component={RadioButton}
-                    name="addressType"
-                    id="suggested_address"
-                    label={this.renderLabel("suggested")}
-                    className="rmb-radio-button"
-                  />
-                  <Field
-                    component={RadioButton}
-                    name="addressType"
-                    id="entered_address"
-                    label={this.renderLabel("entered")}
-                    className="rmb-radio-button"
-                  />
-                </RadioButtonGroup>
-
-                <Button
-                  type="submit"
-                  disabled={isSubmitting}
-                  color="primary"
-                  uppercase
-                >
-                  Confirm Address
-                </Button>
-              </Form>
-            )}
-          </Formik>
->>>>>>> 08046f1d87dbfc686596d9e90251d482c7b900f9
         </ModalWindow.Body>
       </ModalWindow>
     );

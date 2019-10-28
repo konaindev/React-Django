@@ -1,188 +1,52 @@
 @import 'css/base.scss';
 
-$window-width: 700px;
-$window-spacing: 30px;
-$image-height: 300px;
-$caption-width: 400px;
-$caption-spacing: 50px auto 0;
-$navbar-height: 104px;
-$navbar-spacing1: 30px;
-$navbar-spacing2: 46px -30px -30px;
-$navbar-bg-color: $gray-4;
-$navbar-bg-radius: 0 0 6px 6px;
-$nav-indicator-size: 8px;
-$nav-indicator-spacing: 10px;
-$nav-indicator-color: $gray-3;
-$nav-indicator-active-color: $highlight-gray-3;
-$nav-btn-width: 104px;
-$nav-btn-height: 44px;
-
-// $window-width: 560px;
-$title-color: $highlight-gray-3;
-$title-color-secondary: $gray-6;
-$header-height: 20px;
-$header-spacing: 20px;
+$modal-width: 35rem;
+$modal-padding: 1.25rem;
 $border-color: $gray-4;
-$container-spacing: 20px;
-$user-container-height: $s72;
-$user-container-spacing: $s5;
-$user-select-max-height: $s24;
-$role-select-spacing: 5px;
-$invite-btn-with: 86px;
-$member-spacing: $s6;
-$remove-btn-height: $s5;
-$remove-btn-color: $orange-6;
-$remove-btn-border: $gray-4;
-$remove-btn-hover-color: $gray-4;
-$collapsible-background: $gray-11;
-$collapsible-hover-background: $gray-12;
-$collapsible-icon-width: 0.375rem;
-$collapsible-icon-height: 0.625rem;
-$collapsible-icon-spacing: 5px 10px 0 0;
-$collapsible-close-size: $s3;
-$collapsible-members-spacing: 1.875rem 2.125rem;
-$remove-modal-width: 455px;
-$close-hover-bg: $gray-6;
-$close-hover-color: $gray-4;
+$text-color: $highlight-gray-3;
+$text-line-height: 1.25rem;
 
 .address-modal {
-    width: $window-width;
-    padding: $window-spacing;
-    font-family: $font-sans;
+    width: $modal-width;
+    padding: 0;
     position: relative;
+    font-family: $font-sans;
+    line-height: $text-line-height;
+
+    .modal-window__head {
+        color: $text-color;
+        border-bottom: 1px solid $border-color;
+        height: unset;
+        padding: $modal-padding;
+    }
 
     .modal-window__close {
-        top: $window-spacing;
-        right: $window-spacing;
+        top: $modal-padding;
+        right: $modal-padding;
     }
-}
 
-.address-modal__header {
-    margin-bottom: 0;
-    height: 30px;
-    font-size: $text-sm;
-    line-height: 28px;
-    letter-spacing: $letter-spacing-wider;
-    color: $title-large-color;
-    align-items: center;
-    // border-bottom: 1px solid #F4F3F3;
-    border: 1px solid #2B343D;
-}
+    &__body {
+        color: $text-color;
+        border-bottom: 1px solid $border-color;
+        font-size: $text-sm;
+        padding: $modal-padding;
 
-.vertical-center {
-    margin: 0;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-}
+        p {
+            margin-bottom: 0.5rem;
 
-.address-modal__container {
-    padding: $container-spacing;
-    border-top: 1px solid $border-color;
+            &:first-child {
+                margin-bottom: 0.625rem;
+            }
 
-    &--select {
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    &__footer {
+        padding: $modal-padding;
         display: flex;
-        padding-top: 10px;
-        padding-bottom: 10px;
-        box-sizing: content-box;
         justify-content: space-between;
-        align-items: center;
     }
-
-    &--users {
-        height: $user-container-height;
-        padding: $user-container-spacing;
-        overflow: auto;
-    }
-
-    &--button {
-        text-align: right;
-    }
-
-    &--title {
-        display: inline-block;
-        align-items: center;
-        color: #F5FAF7;
-        font-size: 14px;
-    }
-
-    &--address {
-        display: inline-block;
-    }
-}
-
-.address-modal__address-container{
-    display: inline-block;
-    color: #F5FAF7;
-
-    &--title {
-        padding-left: 15px;
-        align-items: center;
-    }
-
-    &--address {
-        padding: 20px;
-        font-size: 14px;
-    }
-}
-
-.address-modal__caption {
-    width: $caption-width;
-    margin: $caption-spacing;
-    font-size: $text-base;
-    line-height: $line-height-relaxed;
-    color: $content-text-primary-color;
-    text-align: center;
-
-    &--checkbox-test {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        left: 460px;
-        top: 556px;
-    }
-}
-
-.address-modal__nav {
-    display: flex;
-    height: $navbar-height;
-    padding: $navbar-spacing1;
-    margin: $navbar-spacing2;
-    background: $navbar-bg-color;
-    border-radius: $navbar-bg-radius;
-
-    justify-content: space-between;
-    align-items: center;
-}
-
-.address-modal__nav-indicator {
-    display: inline-block;
-    width: $nav-indicator-size;
-    height: $nav-indicator-size;
-    margin-left: $nav-indicator-spacing;
-    cursor: pointer;
-    background-color: $nav-indicator-color;
-    border-radius: 50%;
-
-    &:first-of-type {
-        margin-left: 0;
-    }
-
-    &--active {
-        background-color: $nav-indicator-active-color;
-    }
-}
-
-.address-modal__nav-button {
-    // width: $nav-btn-width;
-    // height: $nav-btn-height;
-    // font-size: $text-xs;
-    // font-weight: $weight-bold;
-    // letter-spacing: $letter-spacing-wider;
-    // text-transform: uppercase;
-    // position: absolute;
-    width: 170px;
-    height: 44px;
-    left: 810px;
-    top: 380px;
 }
