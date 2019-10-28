@@ -65,8 +65,9 @@ def create_list(list_name):
     result = process_response(response, "Could not create list")
     return result["id"]
 
-def get_recipients_on_list(list_id):
-    params = {'page': 1, 'page_size': 1}
+def get_recipients_on_list(list_id, page=1, page_size=10):
+    params = {'page': page, 'page_size': page_size}
+    recipients = []
     response = sg.client.contactdb.lists._(list_id).recipients.get(query_params=params)
     result = process_response(response, "Could not fetch recipient list")
     previous_recipients = (page - 1) * page_size
