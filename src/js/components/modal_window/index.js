@@ -29,16 +29,12 @@ export default class ModalWindow extends Component {
       overlay: "modal-overlay",
       closeButton: "modal-window__close"
     };
-    const styles = {
-      closeIcon: { display: "none" }
-    };
     return (
       <Modal
         classNames={classNames}
         open={open}
         closeOnOverlayClick={true}
         center={true}
-        styles={styles}
         focusTrapped={false}
         onClose={onClose}
         {...props}
