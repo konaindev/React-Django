@@ -147,11 +147,8 @@ class AccountProfileForm(forms.Form):
                 return False
         return True
 
-    def clean(self):
-        print("RAAAWWWWR")
-        office_address = geocode(self.cleaned_data["office_address"])
-        if not office_address or not self._check_address_attrs(office_address):
-            print("ERROR")
-            raise forms.ValidationError("Please enter a valid address.")
-        print("NO ERROR")
-        return office_address
+    # def clean_office_address(self):
+    #     office_address = geocode(self.cleaned_data["office_address"])
+    #     if not office_address or not self._check_address_attrs(office_address):
+    #         raise forms.ValidationError("Please enter a valid address.")
+    #     return office_address

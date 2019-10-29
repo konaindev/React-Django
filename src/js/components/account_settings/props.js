@@ -42,6 +42,11 @@ const office_options = [
   { label: "Other", value: 4 }
 ];
 
+const office_countries = [
+  { label: "United States of America", value: "USA" },
+  { label: "United Kingdom", value: "UK" }
+];
+
 const profile = {
   avatar_url:
     "https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg",
@@ -69,5 +74,6 @@ export const props = {
   office_options,
   itemsOrder,
   tabsOrder,
-  initialTab
+  initialTab,
+  office_countries
 };

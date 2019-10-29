@@ -239,12 +239,11 @@ class AccountSettingsView(LoginRequiredReactView):
 
     def get(self, request):
         user = request.user
-        print("ACCOUNT SETTINGS VIEW!!!!")
         return self.render(
             rules=VALIDATION_RULES_LIST,
             profile=user.get_profile_data(),
             company_roles=COMPANY_ROLES,
-            office_country=COUNTRY_LIST,
+            office_countries=COUNTRY_LIST,
             office_options=OFFICE_OPTIONS,
             user=request.user.get_menu_dict())
 
@@ -269,7 +268,8 @@ class AccountSecurityView(LoginRequiredMixin, RemarkView):
 
 class AccountProfileView(LoginRequiredMixin, RemarkView):
     def update_profile(self, user, data):
-        office_address = data["office_address"]
+        office_address = geocode(data["office_address"])
+        print(office_address.formatted_address)
         address = Address.objects.get_or_create(
             formatted_address=office_address.formatted_address,
             street_address_1=office_address.street_address,
@@ -286,7 +286,7 @@ class AccountProfileView(LoginRequiredMixin, RemarkView):
             business = Business(name=data["company"])
         for role in data["company_roles"]:
             setattr(business, BUSINESS_TYPE[role], True)
-        business.save()
+        # business.save()
 
         person = user.get_person()
         if not person:
@@ -322,21 +322,19 @@ class AccountProfileView(LoginRequiredMixin, RemarkView):
 
 
     def post(self, request):
-        print("PROFILE POST!!!!!")
         post_data = request.POST.copy()
         print(post_data)
-        # post_data \
-        #     .setlist("company_roles", request.POST.getlist("company_roles[]"))
-        # post_data.setdefault("office_address", self.check_address(post_data))
-        # post_data.pop("company_roles[]", None)
-        # # print(self.check_address(post_data))
-        # form = AccountProfileForm(post_data, request.FILES)
-        # if not form.is_valid():
-        #     return JsonResponse(form.errors.get_json_data(), status=500)
-        # user = request.user
-        # self.update_profile(user, form.cleaned_data)
-        # return JsonResponse(user.get_profile_data(), status=200)
-        return JsonResponse({"testing": "testing"}, status=200)
+        post_data \
+            .setlist("company_roles", request.POST.getlist("company_roles[]"))
+        post_data.setdefault("office_address", self.check_address(post_data))
+        post_data.pop("company_roles[]", None)
+        form = AccountProfileForm(post_data, request.FILES)
+        if not form.is_valid():
+            return JsonResponse(form.errors.get_json_data(), status=500)
+        user = request.user
+        self.update_profile(user, form.cleaned_data)
+        return JsonResponse(user.get_profile_data(), status=200)
+        # return JsonResponse({"testing": "testing"}, status=200)
 
 class ValidateAddressView(RemarkView):
     def formatAddressString(self, address_object):
@@ -353,7 +351,8 @@ class ValidateAddressView(RemarkView):
             'formatted_address': self.formatAddressString(params)
         }
         
-        geocode_address = geocode(params['office_street'] + params['office_city'] + params['office_state'] + params['office_zip'])
+        geocode_address = geocode(entered_address['formatted_address'])
+        print(geocode_address.formatted_address)
         
         if not geocode_address or not geocode_address.street_address:
             return JsonResponse({"error": True}, status=200)
@@ -366,7 +365,7 @@ class ValidateAddressView(RemarkView):
             'formatted_address': geocode_address.formatted_address
         }
 
-        return JsonResponse({"entered_address": entered_address, "suggested_address": suggested_address}, status=200)
+        return JsonResponse({"suggested_address": suggested_address}, status=200)
 
 
 class AccountReportsView(LoginRequiredMixin, RemarkView):

@@ -15,6 +15,19 @@ import Select from "../select";
 import { networking, addressModal, general } from "../../state/actions";
 import { MAX_AVATAR_SIZE, profileSchema } from "./validators";
 
+const address_fields = {
+  USA: {
+    city: "City",
+    state: "State",
+    zip: "Zip Code"
+  },
+  UK: {
+    city: "Locality (Optional)",
+    state: "Town",
+    zip: "Postcode"
+  }
+};
+
 export default class Profile extends React.PureComponent {
   static propTypes = {
     profile: PropTypes.shape({
@@ -26,7 +39,7 @@ export default class Profile extends React.PureComponent {
       phone_ext: PropTypes.string,
       company: PropTypes.string,
       company_roles: PropTypes.arrayOf(PropTypes.string),
-      office_country: PropTypes.number,
+      office_country: PropTypes.object,
       office_street: PropTypes.string,
       office_city: PropTypes.string,
       office_state: PropTypes.string,
@@ -36,7 +49,7 @@ export default class Profile extends React.PureComponent {
     }),
     company_roles: MultiSelect.optionsType.isRequired,
     office_options: Select.optionsType.isRequired,
-    office_country: Select.optionsType.isRequired
+    office_countries: Select.optionsType.isRequired
   };
   static defaultProps = {
     profile: {
@@ -48,7 +61,7 @@ export default class Profile extends React.PureComponent {
       phone_ext: "",
       company: "",
       company_roles: [],
-      office_country: [],
+      office_country: { label: "United States of America", value: "USA" },
       office_street: "",
       office_city: "",
       office_state: "",
@@ -78,12 +91,9 @@ export default class Profile extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      fieldsSubmitted: false,
-      addresses: {},
-      data: {}
+      fieldsSubmitted: false
     };
   }
-  // state = { fieldsSubmitted: false, addresses: {}, data: {} };
 
   get initialValues() {
     let profile = { ...this.props.profile };
@@ -495,7 +505,7 @@ export default class Profile extends React.PureComponent {
                         isShowControls={false}
                         isShowAllOption={false}
                         value={values.office_country}
-                        options={this.props.office_country}
+                        options={this.props.office_countries}
                         onBlur={() => {
                           this.unsetMessage();
                           setFieldTouched("office_country", true);
@@ -517,9 +527,7 @@ export default class Profile extends React.PureComponent {
                         ["full-grid"]
                       )}
                     >
-                      <div className="account-settings__label">
-                        Office Address
-                      </div>
+                      <div className="account-settings__label">Address</div>
                       <Input
                         className="account-settings__input"
                         name="office_street"
@@ -544,7 +552,9 @@ export default class Profile extends React.PureComponent {
                         ["max-width"]
                       )}
                     >
-                      <div className="account-settings__label">Office City</div>
+                      <div className="account-settings__label">
+                        {address_fields[values.office_country.value].city}
+                      </div>
                       <Input
                         className="account-settings__input"
                         name="office_city"
@@ -566,7 +576,7 @@ export default class Profile extends React.PureComponent {
                       )}
                     >
                       <div className="account-settings__label">
-                        Office State
+                        {address_fields[values.office_country.value].state}
                       </div>
                       <Input
                         className="account-settings__input"
@@ -588,7 +598,9 @@ export default class Profile extends React.PureComponent {
                         ["max-width"]
                       )}
                     >
-                      <div className="account-settings__label">Office Zip</div>
+                      <div className="account-settings__label">
+                        {address_fields[values.office_country.value].zip}
+                      </div>
                       <Input
                         className="account-settings__input"
                         name="office_zip"

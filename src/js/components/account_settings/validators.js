@@ -5,8 +5,10 @@ export const MAX_AVATAR_SIZE = 3 * 1024 * 1024; // Bytes in 3MB
 const phoneRegex = /^\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$/;
 const invalidPhoneMessage = "${path} should match format (XXX) XXX-XXXX";
 
-const zipRegex = /(\d{5}(-\d{4})?$)|(^(([gG][iI][rR] {0,}0[aA]{2})|((([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y]?[0-9][0-9]?)|(([a-pr-uwyzA-PR-UWYZ][0-9][a-hjkstuwA-HJKSTUW])|([a-pr-uwyzA-PR-UWYZ][a-hk-yA-HK-Y][0-9][abehmnprv-yABEHMNPRV-Y]))) {0,}[0-9][abd-hjlnp-uw-zABD-HJLNP-UW-Z]{2}))$)/;
+const zipRegex = /^\d{5}(?:[-\s]\d{4})?$/;
+const postRegex = /([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9][A-Za-z]?))))\s?[0-9][A-Za-z]{2})/;
 const invalidZipMessage = "Please enter a valid zip code";
+const invalidPostMessage = "Please enter a valid post code";
 
 const streetRegex = /^\s*\S+(?:\s+\S+){2}/;
 const invalidStreetMessage = "Please enter a valid street address";
@@ -81,20 +83,33 @@ const profileSchema = Yup.object().shape({
     })
     .label("Office address"),
   office_city: Yup.string()
-    .required()
     .max(255)
-    .label("City"),
+    .label("City")
+    .when("office_country", {
+      is: val => val.value == "USA",
+      then: Yup.string().required()
+    }),
+  office_country: Yup.object().required(),
   office_state: Yup.string()
-    .required()
     .max(255)
-    .label("State"),
+    .label("State")
+    .required(),
   office_zip: Yup.string()
     .required()
     .max(255)
-    .matches(zipRegex, {
-      message: invalidZipMessage
+    .label("Zip")
+    .when("office_country", {
+      is: val => val.value == "USA",
+      then: Yup.string().matches(zipRegex, {
+        message: invalidZipMessage
+      })
     })
-    .label("Zip"),
+    .when("office_country", {
+      is: val => val.value == "UK",
+      then: Yup.string().matches(postRegex, {
+        message: invalidPostMessage
+      })
+    }),
   office_name: Yup.string()
     .required()
     .max(255)

@@ -38,7 +38,7 @@ export default function Select(props) {
       value={value}
       placeholder={placeholder}
       onChange={onChange}
-      isSearchable={false}
+      isSearchable={props.isSearchable}
       isMulti={isMulti}
       components={{ DropdownIndicator, ...components }}
       {...otherProps}
@@ -82,7 +82,8 @@ Select.defaultProps = {
   size: "",
   theme: "",
   isMulti: false,
-  components: {}
+  components: {},
+  isSearchable: false
 };
 
 export function FormSelect(props) {
