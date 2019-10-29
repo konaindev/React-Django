@@ -145,7 +145,11 @@ class CreateContactListIfNotExistsTestCase(SimpleTestCase):
     ):
         list_id = "list_id"
         contact_ids = ["contact_id_01", "contact_id_02", "contact_id_03"]
-        mock_get_recipients_on_list.return_value = [{"id": c} for c in contact_ids]
+        mock_get_recipients_on_list.return_value = [
+            {"id": "contact_id_01"},
+            {"id": "contact_id_02"},
+            {"id": "contact_id_03"},
+        ]
 
         create_contact_list_if_not_exists("test_list", list_id, contact_ids)
 
@@ -154,3 +158,102 @@ class CreateContactListIfNotExistsTestCase(SimpleTestCase):
         mock_get_recipients_on_list.assert_called_once_with(list_id)
         mock_delete_recipient_from_list.assert_not_called()
         mock_add_recipient_to_list.assert_not_called()
+
+    @mock.patch("remark.lib.sendgrid_email.add_recipient_to_list")
+    @mock.patch("remark.lib.sendgrid_email.delete_recipient_from_list")
+    @mock.patch("remark.lib.sendgrid_email.get_recipients_on_list")
+    @mock.patch("remark.lib.sendgrid_email.create_list")
+    @mock.patch("remark.lib.sendgrid_email.find_list")
+    def test_add_to_list(
+        self,
+        mock_find_list,
+        mock_create_list,
+        mock_get_recipients_on_list,
+        mock_delete_recipient_from_list,
+        mock_add_recipient_to_list,
+    ):
+        list_id = "list_id"
+        contact_ids = [
+            "contact_id_01",
+            "contact_id_02",
+            "contact_id_03",
+            "contact_id_04",
+        ]
+        mock_get_recipients_on_list.return_value = [
+            {"id": "contact_id_01"},
+            {"id": "contact_id_02"},
+        ]
+
+        create_contact_list_if_not_exists("test_list", list_id, contact_ids)
+
+        mock_find_list.assert_not_called()
+        mock_create_list.assert_not_called()
+        mock_get_recipients_on_list.assert_called_once_with(list_id)
+        mock_delete_recipient_from_list.assert_not_called()
+        mock_add_recipient_to_list.assert_has_calls(
+            [mock.call(list_id, contact_ids[2]), mock.call(list_id, contact_ids[3])]
+        )
+
+    @mock.patch("remark.lib.sendgrid_email.add_recipient_to_list")
+    @mock.patch("remark.lib.sendgrid_email.delete_recipient_from_list")
+    @mock.patch("remark.lib.sendgrid_email.get_recipients_on_list")
+    @mock.patch("remark.lib.sendgrid_email.create_list")
+    @mock.patch("remark.lib.sendgrid_email.find_list")
+    def test_delete_from_list(
+        self,
+        mock_find_list,
+        mock_create_list,
+        mock_get_recipients_on_list,
+        mock_delete_recipient_from_list,
+        mock_add_recipient_to_list,
+    ):
+        list_id = "list_id"
+        contact_ids = ["contact_id_01", "contact_id_02"]
+        mock_get_recipients_on_list.return_value = [
+            {"id": "contact_id_01"},
+            {"id": "contact_id_02"},
+            {"id": "contact_id_03"},
+            {"id": "contact_id_04"},
+        ]
+
+        create_contact_list_if_not_exists("test_list", list_id, contact_ids)
+
+        mock_find_list.assert_not_called()
+        mock_create_list.assert_not_called()
+        mock_get_recipients_on_list.assert_called_once_with(list_id)
+        mock_delete_recipient_from_list.assert_has_calls(
+            [mock.call(list_id, "contact_id_03"), mock.call(list_id, "contact_id_04")]
+        )
+        mock_add_recipient_to_list.assert_not_called()
+
+    @mock.patch("remark.lib.sendgrid_email.add_recipient_to_list")
+    @mock.patch("remark.lib.sendgrid_email.delete_recipient_from_list")
+    @mock.patch("remark.lib.sendgrid_email.get_recipients_on_list")
+    @mock.patch("remark.lib.sendgrid_email.create_list")
+    @mock.patch("remark.lib.sendgrid_email.find_list")
+    def test_sync(
+        self,
+        mock_find_list,
+        mock_create_list,
+        mock_get_recipients_on_list,
+        mock_delete_recipient_from_list,
+        mock_add_recipient_to_list,
+    ):
+        list_id = "list_id"
+        contact_ids = ["contact_id_01", "contact_id_02", "contact_id_03"]
+        mock_get_recipients_on_list.return_value = [
+            {"id": "contact_id_03"},
+            {"id": "contact_id_04"},
+        ]
+
+        create_contact_list_if_not_exists("test_list", list_id, contact_ids)
+
+        mock_find_list.assert_not_called()
+        mock_create_list.assert_not_called()
+        mock_get_recipients_on_list.assert_called_once_with(list_id)
+        mock_delete_recipient_from_list.assert_has_calls(
+            [mock.call(list_id, "contact_id_04")]
+        )
+        mock_add_recipient_to_list.assert_has_calls(
+            [mock.call(list_id, "contact_id_01")]
+        )
