@@ -158,7 +158,7 @@ class Person(models.Model):
         help_text="Office the person works at",
     )
 
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         "users.User",
         on_delete=models.CASCADE,
         null=True,

@@ -8,6 +8,7 @@ from django.urls import reverse
 
 from remark.lib.tokens import public_id
 from remark.lib.fields import NormalizedEmailField
+from remark.crm.models import Person
 from .constants import ACCOUNT_TYPE, PROJECT_ROLES
 
 
@@ -156,11 +157,19 @@ class User(PermissionsMixin, AbstractBaseUser):
             # TODO: Add account_url
         }
 
+    def get_role(self):
+        try:
+            person = self.person
+            role = person.role
+        except Person.DoesNotExist:
+            role = "member"
+        return role
+
     def get_name(self):
-        person = self.person_set.first()
-        if person:
+        try:
+            person = self.person
             name = person.full_name
-        else:
+        except Person.DoesNotExist:
             name = self.email
         return name
 

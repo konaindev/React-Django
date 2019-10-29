@@ -11,6 +11,7 @@ from io import BytesIO
 from unittest import mock
 
 from remark.crm.models import Business
+from remark.geo.mocks import mocked_geocode
 from remark.geo.models import Address
 from remark.users.models import Account, User
 from remark.lib.metrics import BareMultiPeriod
@@ -596,18 +597,6 @@ class ExportTestCase(TestCase):
                 )
 
 
-def mocked_geocode(location):
-    mock_obj = mock.MagicMock()
-    mock_obj.formatted_address = "2284 W Commodore Way #200, Seattle, WA 98199, USA"
-    mock_obj.street_address = "2284 W Commodore Way"
-    mock_obj.city = "Seattle"
-    mock_obj.state = "WA"
-    mock_obj.zip5 = "98199"
-    mock_obj.country = "US"
-    mock_obj.geocode_json = {}
-    return mock_obj
-
-
 class OnboardingWorkflowTestCase(TestCase):
     def setUp(self):
         user = User.objects.create_superuser(
@@ -675,9 +664,8 @@ class OnboardingWorkflowTestCase(TestCase):
         response = self.client.post(redirect_url, json.dumps(params), "json")
         self.assertEqual(response.status_code, 200)
         user = User.objects.get(public_id=public_id)
-        crm_persons = user.person_set.all()
-        self.assertTrue(len(crm_persons) == 1)
-        self.assertTrue(crm_persons[0].office.address)
+        self.assertTrue(user.person)
+        self.assertTrue(user.person.office.address)
 
         project = Project.objects.get(public_id=self.project.public_id)
         project_users = project.view_group.user_set.all()
