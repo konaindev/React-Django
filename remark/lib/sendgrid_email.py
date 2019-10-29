@@ -65,8 +65,9 @@ def create_list(list_name):
     result = process_response(response, "Could not create list")
     return result["id"]
 
-def get_recipients_on_list(list_id):
-    params = {'page': 1, 'page_size': 1}
+def get_recipients_on_list(list_id, page=1, page_size=10):
+    params = {'page': page, 'page_size': page_size}
+    recipients = []
     response = sg.client.contactdb.lists._(list_id).recipients.get(query_params=params)
     result = process_response(response, "Could not fetch recipient list")
     previous_recipients = (page - 1) * page_size
@@ -102,8 +103,9 @@ def create_contact_list_if_not_exists(list_name, list_id, contact_ids):
         if recipient["id"] not in contact_ids:
             delete_recipient_from_list(list_id, recipient["id"])
 
+    recipients_ids = [r["id"] for r in recipients]
     for contact_id in contact_ids:
-        if contact_id not in recipients:
+        if contact_id not in recipients_ids:
             add_recipient_to_list(list_id, contact_id)
 
     return list_id
