@@ -28,3 +28,9 @@ export const createActions = branch => ({
     url: args.url || `${URLS.base}${URLS.ver}${URLS[branch]}`
   })
 });
+
+export const createRequestTypes = base => ({
+  REQUEST: `${base}_REQUEST`,
+  SUCCESS: `${base}_SUCCESS`,
+  FAILURE: `${base}_FAILURE`
+});

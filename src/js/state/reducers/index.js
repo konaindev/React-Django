@@ -1,5 +1,6 @@
 import _cloneDeep from "lodash/cloneDeep";
 import { combineReducers } from "redux";
+import projectReports from "./project_reports";
 
 const initState = {
   tutorialView: {}
@@ -414,5 +415,6 @@ export default combineReducers({
   market,
   kpi,
   inviteModal,
-  uiStrings
+  uiStrings,
+  projectReports
 });

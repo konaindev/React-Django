@@ -1,5 +1,7 @@
 import { createActions, URLS } from "./helpers";
 
+export * from "./project_reports";
+
 export const dashboard = {
   update: x => {
     console.log("dashboard action update got", x);

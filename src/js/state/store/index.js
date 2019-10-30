@@ -16,7 +16,7 @@ import {
   fetchUIString,
   refreshToken
 } from "../middleware";
-import sagas from "../../utils/network";
+import rootSaga from "../sagas";
 
 const cfg = {
   key: "rmb",
@@ -51,6 +51,6 @@ export default () => {
     )
   );
   const persistor = persistStore(store);
-  sagas.forEach(saga => sagaMiddleware.run(saga));
+  sagaMiddleware.run(rootSaga);
   return { store, persistor };
 };

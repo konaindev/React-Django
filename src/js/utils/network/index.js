@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from "redux-saga/effects";
+import { all, call, put, takeLatest } from "redux-saga/effects";
 import { networking, token, auth } from "../../state/actions";
 import { axiosGet, axiosPost } from "../api";
 
@@ -95,4 +95,6 @@ function* postSaga() {
   yield takeLatest("FETCH_API_POST", post);
 }
 
-export default [getSaga, postSaga];
+export default function*() {
+  yield all([getSaga(), postSaga()]);
+}
