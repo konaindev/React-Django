@@ -34,6 +34,8 @@ class OfficeAddressView(LoginRequiredMixin, RemarkView):
                 "street": o.address.street_address_1,
                 "city": o.address.city,
                 "state": o.address.state,
+                "country": o.address.country,
+                "zip": o.address.zip_code
             } for o in offices]
         except Business.DoesNotExist:
             pass
