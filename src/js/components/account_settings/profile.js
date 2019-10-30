@@ -12,16 +12,16 @@ import Button from "../button";
 import Input from "../input";
 import MultiSelect from "../multi_select";
 import Select from "../select";
-import { networking, addressModal, general } from "../../state/actions";
+import { addressModal } from "../../state/actions";
 import { MAX_AVATAR_SIZE, profileSchema } from "./validators";
 
-const address_fields = {
+export const address_fields = {
   USA: {
     city: "City",
     state: "State",
     zip: "Zip Code"
   },
-  UK: {
+  GB: {
     city: "Locality (Optional)",
     state: "Town",
     zip: "Postcode"
@@ -42,14 +42,16 @@ export default class Profile extends React.PureComponent {
       office_country: PropTypes.object,
       office_street: PropTypes.string,
       office_city: PropTypes.string,
-      office_state: PropTypes.string,
+      office_state: PropTypes.object,
       office_zip5: PropTypes.string,
       office_name: PropTypes.string,
       office_type: PropTypes.number
     }),
     company_roles: MultiSelect.optionsType.isRequired,
     office_options: Select.optionsType.isRequired,
-    office_countries: Select.optionsType.isRequired
+    office_countries: Select.optionsType.isRequired,
+    us_state_list: Select.optionsType,
+    gb_county_list: Select.optionsType
   };
   static defaultProps = {
     profile: {
@@ -64,11 +66,12 @@ export default class Profile extends React.PureComponent {
       office_country: { label: "United States of America", value: "USA" },
       office_street: "",
       office_city: "",
-      office_state: "",
+      office_state: {},
       office_zip: "",
       office_name: "",
       office_type: null
-    }
+    },
+    address_fields: address_fields
   };
   static fieldsSubmit = [
     "avatar",
@@ -93,6 +96,7 @@ export default class Profile extends React.PureComponent {
     this.state = {
       fieldsSubmitted: false
     };
+    this.selectedCountry = "USA";
   }
 
   get initialValues() {
@@ -105,6 +109,9 @@ export default class Profile extends React.PureComponent {
     );
     profile.office_type = this.props.office_options.filter(
       i => i.value === profile.office_type
+    )[0];
+    profile.office_state = this.props.us_state_list.filter(
+      i => i.value === profile.office_state
     )[0];
     return profile;
   }
@@ -173,9 +180,6 @@ export default class Profile extends React.PureComponent {
     if (fields.includes("avatar")) {
       message = errors.avatar;
     }
-    if (fields.includes("office_street")) {
-      message = "Invalid address";
-    }
     return <div className="account-settings__general-error">{message}</div>;
   };
 
@@ -228,6 +232,8 @@ export default class Profile extends React.PureComponent {
           data.append("office_type", dataValues.office_type.value);
         } else if (k === "office_country") {
           data.append("office_country", dataValues.office_country.value);
+        } else if (k === "office_state") {
+          data.append("office_state", dataValues.office_state.value);
         } else {
           data.append(k, dataValues[k]);
         }
@@ -235,9 +241,16 @@ export default class Profile extends React.PureComponent {
     }
     validateAddress(values).then(response => {
       if (response.data.error) {
-        this.setErrorMessages({ office_street: "testing" });
+        this.setState({ invalid_address: true });
+        this.formik.setErrors({
+          office_street:
+            "Unable to verify address. Please provide a valid address.",
+          office_city: "*",
+          office_state: "*",
+          office_zip: "*"
+        });
       } else {
-        this.setState({ addresses: response.data });
+        this.setState({ addresses: response.data, invalid_address: false });
         this.props.dispatch(addressModal.open(data, response.data));
       }
     });
@@ -253,21 +266,16 @@ export default class Profile extends React.PureComponent {
     this.formik.handleBlur(v);
   };
 
-  setSuccessMessageTest() {
-    this.formik.setSubmitting(false);
-    const message = "Your profile has been saved.";
-    this.setState({ message });
-  }
-
   render() {
+    const address_fields = this.props.address_fields;
     return (
       <div className="account-settings__tab">
         <AddressModal
           title="Confirm Office Address"
           onClose={this.props.dispatch(addressModal.close)}
-          onFinish={this.test_dispatch}
           callback={this.setSuccessMessage}
           onError={this.setErrorMessages}
+          dispatch_type="API_ACCOUNT_PROFILE"
         />
         <Formik
           ref={this.setFormik}
@@ -512,6 +520,7 @@ export default class Profile extends React.PureComponent {
                         }}
                         onChange={value => {
                           this.unsetMessage();
+                          this.selectedCountry = value.value;
                           setFieldValue("office_country", value);
                         }}
                       />
@@ -553,7 +562,7 @@ export default class Profile extends React.PureComponent {
                       )}
                     >
                       <div className="account-settings__label">
-                        {address_fields[values.office_country.value].city}
+                        {address_fields[this.selectedCountry].city}
                       </div>
                       <Input
                         className="account-settings__input"
@@ -576,16 +585,28 @@ export default class Profile extends React.PureComponent {
                       )}
                     >
                       <div className="account-settings__label">
-                        {address_fields[values.office_country.value].state}
+                        {address_fields[this.selectedCountry].state}
                       </div>
-                      <Input
+                      <Select
                         className="account-settings__input"
                         name="office_state"
                         theme="gray"
+                        isSearchable={true}
+                        options={
+                          this.selectedCountry == "USA"
+                            ? this.props.us_state_list
+                            : this.props.gb_county_list
+                        }
                         value={values.office_state}
-                        onBlur={this.onBlur}
-                        onChange={this.onChange}
-                      ></Input>
+                        onBlur={() => {
+                          this.unsetMessage();
+                          setFieldTouched("office_state", true);
+                        }}
+                        onChange={value => {
+                          this.unsetMessage();
+                          setFieldValue("office_state", value);
+                        }}
+                      />
                       <div className="account-settings__error">
                         <ErrorMessage name="office_state" />
                       </div>
@@ -599,7 +620,7 @@ export default class Profile extends React.PureComponent {
                       )}
                     >
                       <div className="account-settings__label">
-                        {address_fields[values.office_country.value].zip}
+                        {address_fields[this.selectedCountry].zip}
                       </div>
                       <Input
                         className="account-settings__input"

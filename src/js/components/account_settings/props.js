@@ -44,7 +44,17 @@ const office_options = [
 
 const office_countries = [
   { label: "United States of America", value: "USA" },
-  { label: "United Kingdom", value: "UK" }
+  { label: "United Kingdom", value: "GB" }
+];
+
+const us_state_list = [
+  { label: "Washington", value: "Washington" },
+  { label: "New York", value: "New York" }
+];
+
+const gb_county_list = [
+  { label: "London", value: "London" },
+  { label: "Aberdeen", value: "Aberdeen" }
 ];
 
 const profile = {
@@ -75,5 +85,7 @@ export const props = {
   itemsOrder,
   tabsOrder,
   initialTab,
-  office_countries
+  office_countries,
+  us_state_list,
+  gb_county_list
 };

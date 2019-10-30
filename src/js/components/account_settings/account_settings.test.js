@@ -9,11 +9,18 @@ import { props } from "./props";
 
 jest.mock("rc-tooltip");
 
+const _ = x =>
+  createStore(() => ({
+    network: {
+      isFetching: false
+    }
+  }));
+
 describe("AccountSettings", () => {
   it("account security tab", () => {
     const tree = renderer
       .create(
-        <Provider store={createStore(() => ({}))}>
+        <Provider store={_()}>
           <AccountSettings initialItem="lock" {...props} />
         </Provider>
       )
@@ -23,7 +30,7 @@ describe("AccountSettings", () => {
   it("profile tab", () => {
     const tree = renderer
       .create(
-        <Provider store={createStore(() => ({}))}>
+        <Provider store={_()}>
           <AccountSettings initialItem="profile" {...props} />
         </Provider>
       )
@@ -34,7 +41,10 @@ describe("AccountSettings", () => {
     const tree = renderer
       .create(
         <Provider
-          store={createStore(() => ({ accountSettings: { properties } }))}
+          store={createStore(() => ({
+            accountSettings: { properties },
+            network: { isFetching: false }
+          }))}
         >
           <AccountSettings
             initialItem="email"
@@ -53,7 +63,10 @@ describe("AccountSettings", () => {
     const tree = renderer
       .create(
         <Provider
-          store={createStore(() => ({ accountSettings: { properties } }))}
+          store={createStore(() => ({
+            accountSettings: { properties },
+            network: { isFetching: false }
+          }))}
         >
           <AccountSettings
             initialItem="email"
@@ -73,7 +86,10 @@ describe("AccountSettings", () => {
       .create(
         <Provider
           store={createStore(() => ({
-            accountSettings: { properties: properties.slice(0, 5) }
+            accountSettings: { properties: properties.slice(0, 5) },
+            network: {
+              isFetching: false
+            }
           }))}
         >
           <AccountSettings

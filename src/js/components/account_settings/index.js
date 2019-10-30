@@ -92,7 +92,6 @@ class AccountSettings extends React.PureComponent {
 
   render() {
     const Component = menuItemsData[this.state.item].component;
-    console.log(this.props);
     return (
       <ProjectPageChrome navLinks={navLinks} user={this.props.user}>
         <div className="account-settings">
