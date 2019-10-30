@@ -132,21 +132,35 @@ export const fetchCompleteAccount = store => next => action => {
   if (action.type === "API_COMPLETE_ACCOUNT") {
     const url = `${process.env.BASE_URL}/users/complete-account/`;
     if (action.data) {
+      startFetchingState(store);
       axiosPost(url, action.data)
         .then(response => {
-          if (response.status === 200) {
+          if (response.status === 200 && !response.data?.errors) {
             next(completeAccount.redirect("/"));
           } else {
             throw response;
           }
         })
-        .catch(e => console.log("-----> ERROR", e));
+        .catch(e => {
+          if (e.data?.errors && _isObject(e.data?.errors)) {
+            next(networking.stopFetching());
+            action.onError(e.data.errors);
+          } else {
+            console.log("-----> ERROR", e);
+            next(networking.stopFetching());
+          }
+        });
     } else {
+      startFetchingState(store);
       axiosGet(url)
         .then(response => {
           next(completeAccount.set(response.data));
         })
-        .catch(e => console.log("-----> ERROR", e));
+        .then(() => next(networking.stopFetching()))
+        .catch(e => {
+          console.log("-----> ERROR", e);
+          next(networking.stopFetching());
+        });
     }
   } else {
     next(action);
@@ -240,33 +254,26 @@ export const updateAccountSecurity = store => next => action => {
 
 export const updateAccountProfile = store => next => action => {
   if (action.type === "API_ACCOUNT_PROFILE") {
-    console.log(action);
     if (action.data) {
       startFetchingState(store);
-      setTimeout(
-        () =>
-          updateProfileData(action.data)
-            .then(response => {
-              if (response.status === 200) {
-                action.callback(response.data);
-                console.log(action);
-                console.log(response);
-              } else {
-                throw response;
-              }
-            })
-            .then(() => next(networking.stopFetching()))
-            .catch(e => {
-              if (e.response?.data && _isObject(e.response.data)) {
-                next(networking.stopFetching());
-                action.onError(e.response.data);
-              } else {
-                console.log("-----> ERROR", e);
-              }
-              next(networking.stopFetching());
-            }),
-        5000
-      );
+      updateProfileData(action.data)
+        .then(response => {
+          if (response.status === 200 && !response.data?.errors) {
+            action.callback(response.data);
+          } else {
+            throw response;
+          }
+        })
+        .then(() => next(networking.stopFetching()))
+        .catch(e => {
+          if (e.data?.errors && _isObject(e.data?.errors)) {
+            next(networking.stopFetching());
+            action.onError(e.data.errors);
+          } else {
+            console.log("-----> ERROR", e);
+          }
+          next(networking.stopFetching());
+        });
     }
   } else {
     next(action);
