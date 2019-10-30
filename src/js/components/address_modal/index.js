@@ -90,6 +90,7 @@ class AddressModal extends React.PureComponent {
             <p>{address?.office_street}</p>
             <p>{`${address?.office_city}, ${address?.office_state}`}</p>
             <p>{address?.office_zip}</p>
+            <p>{address?.office_country}</p>
           </div>
           <div className="address-modal__footer">
             <Button color="secondary" uppercase onClick={this.closeModal}>
