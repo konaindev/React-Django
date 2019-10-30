@@ -201,19 +201,7 @@ class User(PermissionsMixin, AbstractBaseUser):
     def get_profile_data(self):
         person = self.get_person()
         if not person:
-            return {
-                # "avatar_url": "",
-                # "first_name": "Albus",
-                # "last_name": "Dumbledore",
-                # "title": "",
-                # "phone": "(206) 555-5555",
-                # "phone_ext": "",
-                # # "company": None,
-                # # "company_roles": None,
-                # # "office_address": None,
-                # # "office_name": None,
-                # # "office_type": None,
-            }
+            return {}
         office = person.office
         business = office.business
         return {
