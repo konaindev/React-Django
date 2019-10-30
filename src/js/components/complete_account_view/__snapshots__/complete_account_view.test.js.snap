@@ -99,6 +99,11 @@ exports[`CompleteAccountView renders correctly 1`] = `
           onSubmit={[Function]}
         >
           <div
+            className="complete-account__section-label complete-account__section-label--first"
+          >
+            General Info
+          </div>
+          <div
             className="complete-account__field-set account-form__field"
           >
             <div
@@ -317,6 +322,11 @@ exports[`CompleteAccountView renders correctly 1`] = `
                 />
               </svg>
             </div>
+          </div>
+          <div
+            className="complete-account__section-label"
+          >
+            Business Info
           </div>
           <div
             className="form-field account-form__field form-field--without-icon"
@@ -627,6 +637,11 @@ exports[`CompleteAccountView renders correctly 1`] = `
             </div>
           </div>
           <div
+            className="complete-account__section-label"
+          >
+            Office Info
+          </div>
+          <div
             className="form-field account-form__field form-field--without-icon"
           >
             <div
@@ -635,7 +650,163 @@ exports[`CompleteAccountView renders correctly 1`] = `
             <div
               className="form-field__label"
             >
-              office address
+              country
+            </div>
+            <div
+              className="form-field__input-container"
+            >
+              <div
+                className="select select--highlight css-dyr6gj-container"
+                onKeyDown={[Function]}
+              >
+                <div
+                  className="select__control css-yk16xz-control"
+                  onMouseDown={[Function]}
+                  onTouchEnd={[Function]}
+                >
+                  <div
+                    className="select__value-container select__value-container--has-value css-1jn1ih4"
+                  >
+                    <div
+                      className="select__single-value css-1uccc91-singleValue"
+                    >
+                      United States of America
+                    </div>
+                    <input
+                      className="css-62g3xt-dummyInput"
+                      disabled={false}
+                      id="react-select-4-input"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      readOnly={true}
+                      tabIndex="0"
+                      value=""
+                    />
+                  </div>
+                  <div
+                    className="select__indicators css-1wy0on6"
+                  >
+                    <span
+                      className="select__indicator-separator css-1okebmr-indicatorSeparator"
+                    />
+                    <div
+                      aria-hidden="true"
+                      className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <svg
+                        aria-hidden="true"
+                        className="select__dropdown-arrow select__dropdown-arrow--down"
+                        color="inherit"
+                        focusable="false"
+                        height="1em"
+                        role="presentation"
+                        viewBox="0 0 10 5"
+                        width="1em"
+                      >
+                        <path
+                          d="M1 1.16134L4.92334 4.5"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                        />
+                        <path
+                          d="M8.82812 1.16134L5 4.5"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      <svg
+                        aria-hidden="true"
+                        className="select__dropdown-arrow select__dropdown-arrow--up"
+                        color="inherit"
+                        focusable="false"
+                        height="1em"
+                        role="presentation"
+                        viewBox="0 0 10 5"
+                        width="1em"
+                      >
+                        <path
+                          d="M1 3.83866L4.92334 0.5"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                        />
+                        <path
+                          d="M8.82812 3.83866L5 0.5"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <input
+                  name="office_country"
+                  type="hidden"
+                  value="USA"
+                />
+              </div>
+              <svg
+                aria-hidden="true"
+                className="form-field__icon form-field__icon--error"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 14 14"
+                width="1em"
+              >
+                <rect
+                  fill="white"
+                  height="6"
+                  width="6"
+                  x="4"
+                  y="4"
+                />
+                <path
+                  clipRule="evenodd"
+                  d="M0 7C0 3.13506 3.13506 0 7 0C10.8649 0 14 3.13506 14 7C14 10.8649 10.8649 14 7 14C3.13506 14 0 10.8649 0 7ZM9.42026 8.83969L8.83794 9.42027C8.73162 9.52658 8.55823 9.52658 8.45191 9.42027L6.99939 7.96799L5.54686 9.42027C5.44054 9.52658 5.26715 9.52658 5.16083 9.41864L4.57851 8.83969C4.47383 8.73174 4.47383 8.56002 4.57851 8.45208L6.03104 6.9998L4.58015 5.54915C4.47383 5.44121 4.47383 5.26785 4.58015 5.16154L5.16083 4.58096C5.26715 4.47301 5.44218 4.47301 5.5485 4.58096L6.99939 6.03161L8.45191 4.58096C8.55823 4.47301 8.73325 4.47301 8.83794 4.58096L9.42026 5.15991C9.52658 5.26785 9.52658 5.44121 9.42026 5.54915L7.96774 6.9998L9.42026 8.45208C9.52494 8.56002 9.52494 8.73174 9.42026 8.83969Z"
+                  fill="#FF540D"
+                  fillRule="evenodd"
+                />
+              </svg>
+              <svg
+                aria-hidden="true"
+                className="form-field__icon form-field__icon--ok"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 14 14"
+                width="1em"
+              >
+                <rect
+                  fill="white"
+                  height="7"
+                  width="6"
+                  x="4"
+                  y="3"
+                />
+                <path
+                  clipRule="evenodd"
+                  d="M0 7C0 3.13506 3.13506 0 7 0C10.8649 0 14 3.13506 14 7C14 10.8649 10.8649 14 7 14C3.13506 14 0 10.8649 0 7ZM9.94652 5.04456L6.87461 9.57471C6.78379 9.70919 6.63884 9.8 6.49564 9.8C6.35243 9.8 6.19526 9.72141 6.09397 9.62187C5.99268 9.52232 4.29169 7.81784 4.29169 7.81784C4.16944 7.69559 4.16944 7.49476 4.29169 7.37251L4.73702 6.92718C4.85926 6.80493 5.0601 6.80493 5.1806 6.92718L6.35418 8.09901L8.90392 4.33727C9.00172 4.19407 9.19906 4.15739 9.34226 4.25345L9.86444 4.60796C10.0059 4.70402 10.0443 4.90136 9.94652 5.04456Z"
+                  fill="currentColor"
+                  fillRule="evenodd"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            className="form-field account-form__field form-field--without-icon"
+          >
+            <div
+              className="form-field__error"
+            />
+            <div
+              className="form-field__label"
+            >
+              address
             </div>
             <div
               className="form-field__input-container"
@@ -672,7 +843,7 @@ exports[`CompleteAccountView renders correctly 1`] = `
                           autoComplete="off"
                           autoCorrect="off"
                           disabled={false}
-                          id="react-select-4-input"
+                          id="react-select-5-input"
                           onBlur={[Function]}
                           onChange={[Function]}
                           onFocus={[Function]}
@@ -771,11 +942,357 @@ exports[`CompleteAccountView renders correctly 1`] = `
                   </div>
                 </div>
                 <input
-                  name="office_address"
+                  name="office_street"
                   type="hidden"
                   value=""
                 />
               </div>
+              <svg
+                aria-hidden="true"
+                className="form-field__icon form-field__icon--error"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 14 14"
+                width="1em"
+              >
+                <rect
+                  fill="white"
+                  height="6"
+                  width="6"
+                  x="4"
+                  y="4"
+                />
+                <path
+                  clipRule="evenodd"
+                  d="M0 7C0 3.13506 3.13506 0 7 0C10.8649 0 14 3.13506 14 7C14 10.8649 10.8649 14 7 14C3.13506 14 0 10.8649 0 7ZM9.42026 8.83969L8.83794 9.42027C8.73162 9.52658 8.55823 9.52658 8.45191 9.42027L6.99939 7.96799L5.54686 9.42027C5.44054 9.52658 5.26715 9.52658 5.16083 9.41864L4.57851 8.83969C4.47383 8.73174 4.47383 8.56002 4.57851 8.45208L6.03104 6.9998L4.58015 5.54915C4.47383 5.44121 4.47383 5.26785 4.58015 5.16154L5.16083 4.58096C5.26715 4.47301 5.44218 4.47301 5.5485 4.58096L6.99939 6.03161L8.45191 4.58096C8.55823 4.47301 8.73325 4.47301 8.83794 4.58096L9.42026 5.15991C9.52658 5.26785 9.52658 5.44121 9.42026 5.54915L7.96774 6.9998L9.42026 8.45208C9.52494 8.56002 9.52494 8.73174 9.42026 8.83969Z"
+                  fill="#FF540D"
+                  fillRule="evenodd"
+                />
+              </svg>
+              <svg
+                aria-hidden="true"
+                className="form-field__icon form-field__icon--ok"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 14 14"
+                width="1em"
+              >
+                <rect
+                  fill="white"
+                  height="7"
+                  width="6"
+                  x="4"
+                  y="3"
+                />
+                <path
+                  clipRule="evenodd"
+                  d="M0 7C0 3.13506 3.13506 0 7 0C10.8649 0 14 3.13506 14 7C14 10.8649 10.8649 14 7 14C3.13506 14 0 10.8649 0 7ZM9.94652 5.04456L6.87461 9.57471C6.78379 9.70919 6.63884 9.8 6.49564 9.8C6.35243 9.8 6.19526 9.72141 6.09397 9.62187C5.99268 9.52232 4.29169 7.81784 4.29169 7.81784C4.16944 7.69559 4.16944 7.49476 4.29169 7.37251L4.73702 6.92718C4.85926 6.80493 5.0601 6.80493 5.1806 6.92718L6.35418 8.09901L8.90392 4.33727C9.00172 4.19407 9.19906 4.15739 9.34226 4.25345L9.86444 4.60796C10.0059 4.70402 10.0443 4.90136 9.94652 5.04456Z"
+                  fill="currentColor"
+                  fillRule="evenodd"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            className="form-field account-form__field form-field--without-icon"
+          >
+            <div
+              className="form-field__error"
+            />
+            <div
+              className="form-field__label"
+            >
+              City
+            </div>
+            <div
+              className="form-field__input-container"
+            >
+              <input
+                className="input input--highlight"
+                name="office_city"
+                onBlur={[Function]}
+                onChange={[Function]}
+                type="text"
+                value=""
+              />
+              <svg
+                aria-hidden="true"
+                className="form-field__icon form-field__icon--error"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 14 14"
+                width="1em"
+              >
+                <rect
+                  fill="white"
+                  height="6"
+                  width="6"
+                  x="4"
+                  y="4"
+                />
+                <path
+                  clipRule="evenodd"
+                  d="M0 7C0 3.13506 3.13506 0 7 0C10.8649 0 14 3.13506 14 7C14 10.8649 10.8649 14 7 14C3.13506 14 0 10.8649 0 7ZM9.42026 8.83969L8.83794 9.42027C8.73162 9.52658 8.55823 9.52658 8.45191 9.42027L6.99939 7.96799L5.54686 9.42027C5.44054 9.52658 5.26715 9.52658 5.16083 9.41864L4.57851 8.83969C4.47383 8.73174 4.47383 8.56002 4.57851 8.45208L6.03104 6.9998L4.58015 5.54915C4.47383 5.44121 4.47383 5.26785 4.58015 5.16154L5.16083 4.58096C5.26715 4.47301 5.44218 4.47301 5.5485 4.58096L6.99939 6.03161L8.45191 4.58096C8.55823 4.47301 8.73325 4.47301 8.83794 4.58096L9.42026 5.15991C9.52658 5.26785 9.52658 5.44121 9.42026 5.54915L7.96774 6.9998L9.42026 8.45208C9.52494 8.56002 9.52494 8.73174 9.42026 8.83969Z"
+                  fill="#FF540D"
+                  fillRule="evenodd"
+                />
+              </svg>
+              <svg
+                aria-hidden="true"
+                className="form-field__icon form-field__icon--ok"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 14 14"
+                width="1em"
+              >
+                <rect
+                  fill="white"
+                  height="7"
+                  width="6"
+                  x="4"
+                  y="3"
+                />
+                <path
+                  clipRule="evenodd"
+                  d="M0 7C0 3.13506 3.13506 0 7 0C10.8649 0 14 3.13506 14 7C14 10.8649 10.8649 14 7 14C3.13506 14 0 10.8649 0 7ZM9.94652 5.04456L6.87461 9.57471C6.78379 9.70919 6.63884 9.8 6.49564 9.8C6.35243 9.8 6.19526 9.72141 6.09397 9.62187C5.99268 9.52232 4.29169 7.81784 4.29169 7.81784C4.16944 7.69559 4.16944 7.49476 4.29169 7.37251L4.73702 6.92718C4.85926 6.80493 5.0601 6.80493 5.1806 6.92718L6.35418 8.09901L8.90392 4.33727C9.00172 4.19407 9.19906 4.15739 9.34226 4.25345L9.86444 4.60796C10.0059 4.70402 10.0443 4.90136 9.94652 5.04456Z"
+                  fill="currentColor"
+                  fillRule="evenodd"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            className="form-field account-form__field form-field--without-icon"
+          >
+            <div
+              className="form-field__error"
+            />
+            <div
+              className="form-field__label"
+            >
+              State
+            </div>
+            <div
+              className="form-field__input-container"
+            >
+              <div
+                className="select account-settings__input select--highlight css-dyr6gj-container"
+                onKeyDown={[Function]}
+              >
+                <div
+                  className="select__control css-yk16xz-control"
+                  onMouseDown={[Function]}
+                  onTouchEnd={[Function]}
+                >
+                  <div
+                    className="select__value-container css-1jn1ih4"
+                  >
+                    <div
+                      className="select__placeholder css-1wa3eu0-placeholder"
+                    >
+                      Select...
+                    </div>
+                    <div
+                      className="css-1g6gooi"
+                    >
+                      <div
+                        className="select__input"
+                        style={
+                          Object {
+                            "display": "inline-block",
+                          }
+                        }
+                      >
+                        <input
+                          aria-autocomplete="list"
+                          autoCapitalize="none"
+                          autoComplete="off"
+                          autoCorrect="off"
+                          disabled={false}
+                          id="react-select-6-input"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          spellCheck="false"
+                          style={
+                            Object {
+                              "background": 0,
+                              "border": 0,
+                              "boxSizing": "content-box",
+                              "color": "inherit",
+                              "fontSize": "inherit",
+                              "label": "input",
+                              "opacity": 1,
+                              "outline": 0,
+                              "padding": 0,
+                              "width": "1px",
+                            }
+                          }
+                          tabIndex="0"
+                          type="text"
+                          value=""
+                        />
+                        <div
+                          style={
+                            Object {
+                              "height": 0,
+                              "left": 0,
+                              "overflow": "scroll",
+                              "position": "absolute",
+                              "top": 0,
+                              "visibility": "hidden",
+                              "whiteSpace": "pre",
+                            }
+                          }
+                        >
+                          
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="select__indicators css-1wy0on6"
+                  >
+                    <span
+                      className="select__indicator-separator css-1okebmr-indicatorSeparator"
+                    />
+                    <div
+                      aria-hidden="true"
+                      className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <svg
+                        aria-hidden="true"
+                        className="select__dropdown-arrow select__dropdown-arrow--down"
+                        color="inherit"
+                        focusable="false"
+                        height="1em"
+                        role="presentation"
+                        viewBox="0 0 10 5"
+                        width="1em"
+                      >
+                        <path
+                          d="M1 1.16134L4.92334 4.5"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                        />
+                        <path
+                          d="M8.82812 1.16134L5 4.5"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                      <svg
+                        aria-hidden="true"
+                        className="select__dropdown-arrow select__dropdown-arrow--up"
+                        color="inherit"
+                        focusable="false"
+                        height="1em"
+                        role="presentation"
+                        viewBox="0 0 10 5"
+                        width="1em"
+                      >
+                        <path
+                          d="M1 3.83866L4.92334 0.5"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                        />
+                        <path
+                          d="M8.82812 3.83866L5 0.5"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <input
+                  name="office_state"
+                  type="hidden"
+                  value=""
+                />
+              </div>
+              <svg
+                aria-hidden="true"
+                className="form-field__icon form-field__icon--error"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 14 14"
+                width="1em"
+              >
+                <rect
+                  fill="white"
+                  height="6"
+                  width="6"
+                  x="4"
+                  y="4"
+                />
+                <path
+                  clipRule="evenodd"
+                  d="M0 7C0 3.13506 3.13506 0 7 0C10.8649 0 14 3.13506 14 7C14 10.8649 10.8649 14 7 14C3.13506 14 0 10.8649 0 7ZM9.42026 8.83969L8.83794 9.42027C8.73162 9.52658 8.55823 9.52658 8.45191 9.42027L6.99939 7.96799L5.54686 9.42027C5.44054 9.52658 5.26715 9.52658 5.16083 9.41864L4.57851 8.83969C4.47383 8.73174 4.47383 8.56002 4.57851 8.45208L6.03104 6.9998L4.58015 5.54915C4.47383 5.44121 4.47383 5.26785 4.58015 5.16154L5.16083 4.58096C5.26715 4.47301 5.44218 4.47301 5.5485 4.58096L6.99939 6.03161L8.45191 4.58096C8.55823 4.47301 8.73325 4.47301 8.83794 4.58096L9.42026 5.15991C9.52658 5.26785 9.52658 5.44121 9.42026 5.54915L7.96774 6.9998L9.42026 8.45208C9.52494 8.56002 9.52494 8.73174 9.42026 8.83969Z"
+                  fill="#FF540D"
+                  fillRule="evenodd"
+                />
+              </svg>
+              <svg
+                aria-hidden="true"
+                className="form-field__icon form-field__icon--ok"
+                color="inherit"
+                focusable="false"
+                height="1em"
+                role="presentation"
+                viewBox="0 0 14 14"
+                width="1em"
+              >
+                <rect
+                  fill="white"
+                  height="7"
+                  width="6"
+                  x="4"
+                  y="3"
+                />
+                <path
+                  clipRule="evenodd"
+                  d="M0 7C0 3.13506 3.13506 0 7 0C10.8649 0 14 3.13506 14 7C14 10.8649 10.8649 14 7 14C3.13506 14 0 10.8649 0 7ZM9.94652 5.04456L6.87461 9.57471C6.78379 9.70919 6.63884 9.8 6.49564 9.8C6.35243 9.8 6.19526 9.72141 6.09397 9.62187C5.99268 9.52232 4.29169 7.81784 4.29169 7.81784C4.16944 7.69559 4.16944 7.49476 4.29169 7.37251L4.73702 6.92718C4.85926 6.80493 5.0601 6.80493 5.1806 6.92718L6.35418 8.09901L8.90392 4.33727C9.00172 4.19407 9.19906 4.15739 9.34226 4.25345L9.86444 4.60796C10.0059 4.70402 10.0443 4.90136 9.94652 5.04456Z"
+                  fill="currentColor"
+                  fillRule="evenodd"
+                />
+              </svg>
+            </div>
+          </div>
+          <div
+            className="form-field account-form__field form-field--without-icon"
+          >
+            <div
+              className="form-field__error"
+            />
+            <div
+              className="form-field__label"
+            >
+              Zip Code
+            </div>
+            <div
+              className="form-field__input-container"
+            >
+              <input
+                className="input input--highlight"
+                name="office_zip"
+                onBlur={[Function]}
+                onChange={[Function]}
+                type="text"
+                value=""
+              />
               <svg
                 aria-hidden="true"
                 className="form-field__icon form-field__icon--error"
@@ -932,7 +1449,7 @@ exports[`CompleteAccountView renders correctly 1`] = `
                     <input
                       className="css-62g3xt-dummyInput"
                       disabled={false}
-                      id="react-select-5-input"
+                      id="react-select-7-input"
                       onBlur={[Function]}
                       onChange={[Function]}
                       onFocus={[Function]}
@@ -1072,6 +1589,7 @@ exports[`CompleteAccountView renders correctly 1`] = `
             <a
               className="complete-account__link"
               href="https://www.remarkably.io/terms"
+              target="_blank"
             >
               Terms and Conditions
             </a>
