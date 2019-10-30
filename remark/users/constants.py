@@ -73,18 +73,18 @@ VALIDATION_RULES = [
 VALIDATION_RULES_LIST = [{"label": v["label"], "key": v["key"]} for v in VALIDATION_RULES]
 
 US_STATE_LIST = []
-UK_TOWNSHIP_LIST = []
+GB_COUNTY_LIST = []
 with open('./data/locations/states.json', 'r') as read_file:
     states_list = json.load(read_file)
     for state in states_list:
         if state['country_id'] is 233:
-            US_STATE_LIST.append(state['name'])
+            US_STATE_LIST.append({"label": state['name'], "value": state['name']})
         elif state['country_id'] is 232:
-            UK_TOWNSHIP_LIST.append(state['name'])
+            GB_COUNTY_LIST.append({"label": state['name'], "value": state['name']})
 
 COUNTRY_LIST = [
     {"label": "United States of America", "value": "USA"},
-    {"label": "United Kingdom", "value": "UK"}
+    {"label": "United Kingdom", "value": "GB"}
 ]
 
 
