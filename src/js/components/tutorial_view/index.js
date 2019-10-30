@@ -6,7 +6,7 @@ import TutorialModal from "../tutorial_modal";
 import img_apartments from "../../../images/tutorial_images/apartments.png";
 import img_portfolio_analysis from "../../../images/tutorial_images/portfolio_analysis.png";
 import img_invite_users from "../../../images/tutorial_images/invite_users.png";
-import { tutorial } from "../../state/actions";
+import { tutorial } from "../../redux_base/actions";
 const getTutorials = url => [
   {
     image_url: `${url}${img_apartments}`,

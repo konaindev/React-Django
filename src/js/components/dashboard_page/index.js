@@ -19,7 +19,7 @@ import Loader from "../loader";
 
 import { qsParse, qsStringify } from "../../utils/misc";
 import TutorialView from "../tutorial_view";
-import { inviteModal, general, dashboard } from "../../state/actions";
+import { inviteModal, general, dashboard } from "../../redux_base/actions";
 import "./dashboard_page.scss";
 
 export class DashboardPage extends React.PureComponent {

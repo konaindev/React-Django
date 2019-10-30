@@ -5,7 +5,7 @@ import { action } from "@storybook/addon-actions";
 import { Provider } from "react-redux";
 
 import { apiMock as inviteModalApiMock } from "../invite_modal/invite_modal.stories";
-import store from "../../state/store";
+import store from "../../redux_base/store";
 
 import DashboardPage from "./index";
 import { props } from "./props";

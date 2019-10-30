@@ -6,7 +6,7 @@ import Input from "../input";
 import "./login.scss";
 import Yup from "../../yup";
 import { connect } from "react-redux";
-import { auth } from "../../state/actions";
+import { auth } from "../../redux_base/actions";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string()

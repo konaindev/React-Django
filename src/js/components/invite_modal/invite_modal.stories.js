@@ -5,7 +5,7 @@ import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 
 import { props as userProps } from "../user_icon_list/props";
-import _store from "../../state/store";
+import _store from "../../redux_base/store";
 
 import InviteModal from "./index";
 import { props, multiProps } from "./props";

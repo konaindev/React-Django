@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware, compose } from "redux";
 import storage from "redux-persist/lib/storage";
 import { persistStore, persistReducer } from "redux-persist";
-
-import reducers from "../reducers";
 import createSagaMiddleware from "redux-saga";
+
+import reducers from "./reducers";
 import {
   fetchCreatePassword,
   fetchCompany,
@@ -15,8 +15,8 @@ import {
   fetchInviteModal,
   fetchUIString,
   refreshToken
-} from "../middleware";
-import rootSaga from "../sagas";
+} from "./middleware";
+import rootSaga from "./sagas";
 
 const cfg = {
   key: "rmb",
