@@ -71,7 +71,6 @@ class AddressModal extends React.PureComponent {
     const { title, isOpen, theme } = this.props;
     const address = _get(this.props, "addresses.suggested_address");
     const modalClass = cx("address-modal", `address-modal--theme-${theme}`);
-    console.log(this.props);
     //
     // @TODO: if we want to support dark/light themes in all modals,
     //           prop names should be changed a bit
