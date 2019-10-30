@@ -74,7 +74,10 @@ class GeocodeResult:
         number = self.get_short_component("street_number") or ""
         route = self.get_short_component("route") or ""
         unit = self.get_short_component("subpremise") or ""
-        return f"{number} {route}, #{unit}".strip() if unit else f"{number} {route}".strip() or None
+        street_address = f"{number} {route}, #{unit}".strip() if unit else f"{number} {route}".strip() or None
+        if self.country == "US" and not number:
+            street_address = None
+        return street_address
 
     @property
     def city(self):
@@ -115,10 +118,11 @@ class GeocodeResult:
             self.longitude,
             self.street_address,
             self.city,
-            self.state,
             self.country,
             self.postal_code,
         ]
+        if self.country is "US":
+            components.append(self.state)
         return all([bool(component) for component in components])
 
 
