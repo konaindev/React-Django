@@ -15,7 +15,11 @@ export const props = {
     { label: "JV / Investor", value: "investor" },
     { label: "Vendor / Consultant", value: "vendor" }
   ],
-  office_address: [
+  office_countries: [
+    { label: "United States of America", value: "USA" },
+    { label: "United Kingdom", value: "GB" }
+  ],
+  office_addresses: [
     {
       value: "Columbia Tower",
       street: "111 Columbia Street",

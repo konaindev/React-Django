@@ -17,6 +17,7 @@ import { validateAddress } from "../../api/account_settings";
 import AddressModal from "../address_modal";
 import { addressModal } from "../../state/actions";
 import GoogleAddress from "../google_address";
+import LoaderContainer from "../../containers/account_settings/loader";
 import router from "../../router";
 
 import { propertySchema } from "./validators";
@@ -29,8 +30,8 @@ const address_fields = {
     zip: "Zip Code"
   },
   GB: {
-    city: "Locality (Optional)",
-    state: "Town",
+    city: "Postal Town",
+    state: "County (optional)",
     zip: "Postcode"
   }
 };
@@ -51,6 +52,7 @@ class CompleteAccountView extends React.PureComponent {
         type: "API_COMPLETE_ACCOUNT"
       });
     });
+    this.selectedCountry = "USA";
   }
 
   initialValues = {
@@ -63,7 +65,7 @@ class CompleteAccountView extends React.PureComponent {
     // office_address: "",
     office_street: "",
     office_city: "",
-    office_state: "",
+    office_state: undefined,
     office_zip: "",
     office_name: "",
     office_type: undefined,
@@ -157,6 +159,7 @@ class CompleteAccountView extends React.PureComponent {
     data.company = values.company.value;
     data.company_role = values.company_role.map(type => type.value);
     data.office_type = values.office_type.value;
+    data.office_state = values.office_state.value;
     validateAddress(values).then(response => {
       if (response.data.error) {
         this.setState({ invalid_address: true });
@@ -205,14 +208,19 @@ class CompleteAccountView extends React.PureComponent {
     if (value.street) {
       this.formik.current.setFieldValue("office_street", value.street);
       this.formik.current.setFieldValue("office_city", value.city);
-      this.formik.current.setFieldValue("office_state", value.state);
+      this.formik.current.setFieldValue("office_state", {
+        label: value.state,
+        value: value.state
+      });
       this.formik.current.setFieldValue("office_zip", value.zip);
       if (value.country == "GB") {
+        this.selectedCountry = "GB";
         this.formik.current.setFieldValue("office_country", {
           label: "United Kingdom",
           value: "GB"
         });
       } else if (value.country == "USA") {
+        this.selectedCountry = "USA";
         this.formik.current.setFieldValue("office_country", {
           label: "United States of America",
           value: "USA"
@@ -225,6 +233,19 @@ class CompleteAccountView extends React.PureComponent {
 
   onBlurOfficeAddress = () => {
     this.formik.current.setFieldTouched("office_street");
+    const formikContext = this.formik.current.getFormikContext();
+    if (formikContext.values.office_street) {
+      this.formik.current.setFieldTouched("office_street");
+    }
+    if (formikContext.values.office_city) {
+      this.formik.current.setFieldTouched("office_city");
+    }
+    if (formikContext.values.office_state) {
+      this.formik.current.setFieldTouched("office_state");
+    }
+    if (formikContext.values.office_zip) {
+      this.formik.current.setFieldTouched("office_zip");
+    }
   };
 
   onChangeOfficeType = value => {
@@ -258,6 +279,7 @@ class CompleteAccountView extends React.PureComponent {
           onError={this.setErrorMessages}
           dispatch_type="API_COMPLETE_ACCOUNT"
         />
+        <LoaderContainer />
         <AccountForm
           className="complete-account"
           steps={this.steps}
@@ -388,7 +410,7 @@ class CompleteAccountView extends React.PureComponent {
                   label="country"
                   showError={touched.office_country?.value}
                   showIcon={false}
-                  error={errors?.office_country?.value}
+                  error={errors.office_country?.value}
                 >
                   <Select
                     name="office_country"
@@ -397,8 +419,13 @@ class CompleteAccountView extends React.PureComponent {
                     options={office_countries}
                     value={values.office_country}
                     onChange={value => {
+                      this.selectedCountry = value.value;
                       setFieldValue("office_country", value);
+                      if (values.office_state) {
+                        setFieldValue("office_state", undefined);
+                      }
                     }}
+                    onBlue={handleBlur}
                   />
                 </FormFiled>
                 <FormFiled
@@ -423,7 +450,7 @@ class CompleteAccountView extends React.PureComponent {
                 </FormFiled>
                 <FormFiled
                   className={AccountForm.fieldClass}
-                  label={address_fields[values.office_country.value].city}
+                  label={address_fields[this.selectedCountry].city}
                   showError={touched.office_city}
                   showIcon={false}
                   error={errors.office_city}
@@ -439,10 +466,10 @@ class CompleteAccountView extends React.PureComponent {
                 </FormFiled>
                 <FormFiled
                   className={AccountForm.fieldClass}
-                  label={address_fields[values.office_country.value].state}
-                  showError={touched.office_state}
+                  label={address_fields[this.selectedCountry].state}
+                  showError={touched.office_state?.value}
                   showIcon={false}
-                  error={errors.office_state}
+                  error={errors.office_state?.value}
                 >
                   <Select
                     className="account-settings__input"
@@ -451,22 +478,22 @@ class CompleteAccountView extends React.PureComponent {
                     styles={this.selectStyles}
                     isSearchable={true}
                     options={
-                      values.office_country.value == "USA"
+                      this.selectedCountry == "USA"
                         ? this.props.us_state_list
-                        : this.props.gb_township_list
+                        : this.props.gb_county_list
                     }
-                    value={values.office_state?.value}
+                    value={values.office_state}
                     onBlur={() => {
                       setFieldTouched("office_state", true);
                     }}
                     onChange={value => {
-                      setFieldValue("office_state", value.value);
+                      setFieldValue("office_state", value);
                     }}
                   />
                 </FormFiled>
                 <FormFiled
                   className={AccountForm.fieldClass}
-                  label={address_fields[values.office_country.value].zip}
+                  label={address_fields[this.selectedCountry].zip}
                   showError={touched.office_zip}
                   showIcon={false}
                   error={errors.office_zip}

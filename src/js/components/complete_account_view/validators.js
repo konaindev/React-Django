@@ -51,19 +51,19 @@ export const propertySchema = Yup.object().shape({
   office_city: Yup.string()
     .max(255)
     .label("City")
+    .required(),
+  office_country: Yup.object().required(),
+  office_state: Yup.string()
+    .max(255)
+    .label(" ")
     .when("office_country", {
       is: val => val.value == "USA",
       then: Yup.string().required()
     }),
-  office_country: Yup.object().required(),
-  office_state: Yup.string()
-    .max(255)
-    .label("State")
-    .required(),
   office_zip: Yup.string()
     .required()
     .max(255)
-    .label("Zip/Post Code ")
+    .label(" ")
     .when("office_country", {
       is: val => val.value == "USA",
       then: Yup.string().matches(zipRegex, {
