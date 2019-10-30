@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import _intersection from "lodash/intersection";
 
 import AccountForm from "../account_form";
-import FormFiled from "../form_field";
+import FormField from "../form_field";
 import PageAuth from "../page_auth";
 import Input from "../input";
 import Select, { SelectSearch } from "../select";
@@ -262,6 +262,23 @@ class CompleteAccountView extends React.PureComponent {
     this.formik.current.setFieldValue("terms", !value);
   };
 
+  onChangeCountry = value => {
+    this.selectedCountry = value.value;
+    this.formik.current.setFieldValue("office_country", value);
+    const context = this.formik.current.getFormikContext();
+    if (context.values.office_state) {
+      this.formik.current.setFieldValue("office_state", undefined);
+    }
+  };
+
+  onChangeOfficeState = value => {
+    this.formik.current.setFieldValue("office_state", value);
+  };
+
+  onBlurOfficeState = () => {
+    this.formik.current.setFieldTouched("office_state");
+  };
+
   render() {
     const {
       company_roles,
@@ -298,16 +315,14 @@ class CompleteAccountView extends React.PureComponent {
               values,
               isValid,
               handleChange,
-              handleBlur,
-              setFieldValue,
-              setFieldTouched
+              handleBlur
             }) => (
               <Form>
                 <div className="complete-account__section-label complete-account__section-label--first">
                   General Info
                 </div>
                 <div className={classes}>
-                  <FormFiled
+                  <FormField
                     className="complete-account__field"
                     label="first name"
                     showError={touched.first_name}
@@ -322,8 +337,8 @@ class CompleteAccountView extends React.PureComponent {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
-                  </FormFiled>
-                  <FormFiled
+                  </FormField>
+                  <FormField
                     className="complete-account__field"
                     label="Last name"
                     showError={touched.last_name}
@@ -338,9 +353,9 @@ class CompleteAccountView extends React.PureComponent {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
-                  </FormFiled>
+                  </FormField>
                 </div>
-                <FormFiled
+                <FormField
                   className={AccountForm.fieldClass}
                   label="title (Optional)"
                   showError={touched.title}
@@ -355,16 +370,16 @@ class CompleteAccountView extends React.PureComponent {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                </FormFiled>
+                </FormField>
                 <div className="complete-account__section-label">
                   Business Info
                 </div>
-                <FormFiled
+                <FormField
                   className={AccountForm.fieldClass}
                   label="company"
-                  showError={touched.company?.value}
+                  showError={!!touched.company}
                   showIcon={false}
-                  error={errors?.company?.value}
+                  error={errors.company?.value}
                 >
                   <SelectSearch
                     name="company"
@@ -380,11 +395,11 @@ class CompleteAccountView extends React.PureComponent {
                     onChange={this.onChangeCompany}
                     onBlur={this.onBlurCompany}
                   />
-                </FormFiled>
-                <FormFiled
+                </FormField>
+                <FormField
                   label="company role"
                   className={AccountForm.fieldClass}
-                  showError={touched.company_role}
+                  showError={!!touched.company_role}
                   showIcon={false}
                   error={errors.company_role}
                 >
@@ -401,16 +416,16 @@ class CompleteAccountView extends React.PureComponent {
                     onChange={this.onChangeCompanyRole}
                     onBlur={this.onBlurCompanyRole}
                   />
-                </FormFiled>
+                </FormField>
                 <div className="complete-account__section-label">
                   Office Info
                 </div>
-                <FormFiled
+                <FormField
                   className={AccountForm.fieldClass}
                   label="country"
-                  showError={touched.office_country?.value}
+                  showError={!!touched.office_country}
                   showIcon={false}
-                  error={errors.office_country?.value}
+                  error={errors.office_country}
                 >
                   <Select
                     name="office_country"
@@ -418,22 +433,16 @@ class CompleteAccountView extends React.PureComponent {
                     styles={this.selectStyles}
                     options={office_countries}
                     value={values.office_country}
-                    onChange={value => {
-                      this.selectedCountry = value.value;
-                      setFieldValue("office_country", value);
-                      if (values.office_state) {
-                        setFieldValue("office_state", undefined);
-                      }
-                    }}
-                    onBlue={handleBlur}
+                    onChange={this.onChangeCountry}
+                    onBlur={handleBlur}
                   />
-                </FormFiled>
-                <FormFiled
+                </FormField>
+                <FormField
                   className={AccountForm.fieldClass}
                   label="address"
                   showError={touched.office_street}
                   showIcon={false}
-                  error={errors?.office_street}
+                  error={errors.office_street}
                 >
                   <GoogleAddress
                     name="office_street"
@@ -447,8 +456,8 @@ class CompleteAccountView extends React.PureComponent {
                     onChange={this.onChangeOfficeAddress}
                     onBlur={this.onBlurOfficeAddress}
                   />
-                </FormFiled>
-                <FormFiled
+                </FormField>
+                <FormField
                   className={AccountForm.fieldClass}
                   label={address_fields[this.selectedCountry].city}
                   showError={touched.office_city}
@@ -463,13 +472,13 @@ class CompleteAccountView extends React.PureComponent {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                </FormFiled>
-                <FormFiled
+                </FormField>
+                <FormField
                   className={AccountForm.fieldClass}
                   label={address_fields[this.selectedCountry].state}
-                  showError={touched.office_state?.value}
+                  showError={!!touched.office_state}
                   showIcon={false}
-                  error={errors.office_state?.value}
+                  error={errors.office_state}
                 >
                   <Select
                     className="account-settings__input"
@@ -483,15 +492,11 @@ class CompleteAccountView extends React.PureComponent {
                         : this.props.gb_county_list
                     }
                     value={values.office_state}
-                    onBlur={() => {
-                      setFieldTouched("office_state", true);
-                    }}
-                    onChange={value => {
-                      setFieldValue("office_state", value);
-                    }}
+                    onBlur={this.onBlurOfficeState}
+                    onChange={this.onChangeOfficeState}
                   />
-                </FormFiled>
-                <FormFiled
+                </FormField>
+                <FormField
                   className={AccountForm.fieldClass}
                   label={address_fields[this.selectedCountry].zip}
                   showError={touched.office_zip}
@@ -506,8 +511,8 @@ class CompleteAccountView extends React.PureComponent {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                </FormFiled>
-                <FormFiled
+                </FormField>
+                <FormField
                   className={AccountForm.fieldClass}
                   label="Office name"
                   showError={touched.office_name}
@@ -522,13 +527,13 @@ class CompleteAccountView extends React.PureComponent {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                </FormFiled>
-                <FormFiled
+                </FormField>
+                <FormField
                   className={AccountForm.fieldClass}
                   label="office type"
-                  showError={touched.office_type?.value}
+                  showError={!!touched.office_type}
                   showIcon={false}
-                  error={errors?.office_type?.value}
+                  error={errors.office_type}
                 >
                   <Select
                     name="office_type"
@@ -539,7 +544,7 @@ class CompleteAccountView extends React.PureComponent {
                     onChange={this.onChangeOfficeType}
                     onBlur={this.onBlurOfficeType}
                   />
-                </FormFiled>
+                </FormField>
                 <div className="complete-account__terms">
                   <Checkbox
                     className="complete-account__checkbox"

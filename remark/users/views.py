@@ -325,7 +325,7 @@ class AccountProfileView(LoginRequiredMixin, RemarkView):
 
 class ValidateAddressView(RemarkView):
     def formatAddressString(self, address_object):
-        response = f"{address_object['office_country']['label']}, {address_object['office_street']}, {address_object['office_city']}, {address_object['office_state']} {address_object['office_zip']}"
+        response = f"{address_object['office_country']['value']}, {address_object['office_street']}, {address_object['office_city']}, {address_object['office_state']['value']} {address_object['office_zip']}"
         return response
 
     def post(self, request):
@@ -342,6 +342,7 @@ class ValidateAddressView(RemarkView):
             'office_city': geocode_address.city,
             'office_state': geocode_address.state,
             'office_zip': geocode_address.postal_code if geocode_address.country == "GB" else geocode_address.zip5,
+            'office_country': geocode_address.get_long_component('country'),
             'formatted_address': geocode_address.formatted_address
         }
 
