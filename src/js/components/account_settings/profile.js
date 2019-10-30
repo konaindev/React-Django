@@ -264,11 +264,14 @@ export default class Profile extends React.PureComponent {
     this.formik.handleBlur(v);
   };
 
-  someMethod = () => {
-    this.formik.setFieldValue("office_state", undefined);
+  onChangeCountry = value => {
+    this.selectedCountry = value.value;
+    this.formik.setFieldValue("office_country", value);
+    this.formik.setFieldValue("office_state", {
+      label: "",
+      value: ""
+    });
     this.formik.setFieldTouched("office_state");
-    const formikStuff = this.formik.getFormikContext();
-    console.log(formikStuff);
   };
 
   render() {
@@ -532,14 +535,7 @@ export default class Profile extends React.PureComponent {
                           this.unsetMessage();
                           setFieldTouched("office_country", true);
                         }}
-                        onChange={value => {
-                          this.unsetMessage();
-                          this.selectedCountry = value.value;
-                          setFieldValue("office_country", value);
-                          if (values.office_state) {
-                            setFieldValue("office_state", undefined);
-                          }
-                        }}
+                        onChange={this.onChangeCountry}
                       />
                       <div className="account-settings__error">
                         <ErrorMessage name="office_country" />
