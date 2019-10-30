@@ -85,15 +85,15 @@ const profileSchema = Yup.object().shape({
   office_city: Yup.string()
     .max(255)
     .label("City")
-    .when("office_country", {
-      is: val => val.value == "USA",
-      then: Yup.string().required()
-    }),
+    .required(),
   office_country: Yup.object().required(),
   office_state: Yup.string()
     .max(255)
     .label("State")
-    .required(),
+    .when("office_country", {
+      is: val => val.value == "USA",
+      then: Yup.string().required()
+    }),
   office_zip: Yup.string()
     .required()
     .max(255)

@@ -5,7 +5,6 @@ from django import forms
 from remark.crm.models import Person
 from remark.crm.constants import OFFICE_TYPES
 from remark.geo.geocode import geocode
-import json
 
 from .models import Account, User
 from .constants import COMPANY_ROLES, PHONE_REGEX, ZIP_REGEX

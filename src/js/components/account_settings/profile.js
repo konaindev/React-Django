@@ -22,8 +22,8 @@ export const address_fields = {
     zip: "Zip Code"
   },
   GB: {
-    city: "Locality (Optional)",
-    state: "Town",
+    city: "Postal Town",
+    state: "County (optional)",
     zip: "Postcode"
   }
 };
@@ -110,9 +110,7 @@ export default class Profile extends React.PureComponent {
     profile.office_type = this.props.office_options.filter(
       i => i.value === profile.office_type
     )[0];
-    profile.office_state = this.props.us_state_list.filter(
-      i => i.value === profile.office_state
-    )[0];
+    profile.office_state = undefined;
     return profile;
   }
 
@@ -266,6 +264,13 @@ export default class Profile extends React.PureComponent {
     this.formik.handleBlur(v);
   };
 
+  someMethod = () => {
+    this.formik.setFieldValue("office_state", undefined);
+    this.formik.setFieldTouched("office_state");
+    const formikStuff = this.formik.getFormikContext();
+    console.log(formikStuff);
+  };
+
   render() {
     const address_fields = this.props.address_fields;
     return (
@@ -285,7 +290,16 @@ export default class Profile extends React.PureComponent {
           validateOnChange={true}
           onSubmit={this.onSubmit}
         >
-          {({ errors, touched, values, setFieldTouched, setFieldValue }) => (
+          {({
+            errors,
+            touched,
+            values,
+            isValid,
+            handleChange,
+            handleBlur,
+            setFieldTouched,
+            setFieldValue
+          }) => (
             <Form method="post" autoComplete="off">
               <div className="account-settings__tab-content">
                 <div className="account-settings__tab-section">
@@ -522,6 +536,9 @@ export default class Profile extends React.PureComponent {
                           this.unsetMessage();
                           this.selectedCountry = value.value;
                           setFieldValue("office_country", value);
+                          if (values.office_state) {
+                            setFieldValue("office_state", undefined);
+                          }
                         }}
                       />
                       <div className="account-settings__error">
