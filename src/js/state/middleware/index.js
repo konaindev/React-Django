@@ -135,16 +135,16 @@ export const fetchCompleteAccount = store => next => action => {
       startFetchingState(store);
       axiosPost(url, action.data)
         .then(response => {
-          if (response.status === 200 && !response.data?.errors) {
+          if (response.status === 200) {
             next(completeAccount.redirect("/"));
           } else {
             throw response;
           }
         })
         .catch(e => {
-          if (e.data?.errors && _isObject(e.data?.errors)) {
+          if (e.response.data?.errors && _isObject(e.response.data?.errors)) {
             next(networking.stopFetching());
-            action.onError(e.data.errors);
+            action.onError(e.response.data.errors);
           } else {
             console.log("-----> ERROR", e);
             next(networking.stopFetching());
@@ -266,9 +266,9 @@ export const updateAccountProfile = store => next => action => {
         })
         .then(() => next(networking.stopFetching()))
         .catch(e => {
-          if (e.data?.errors && _isObject(e.data?.errors)) {
+          if (e.response.data?.errors && _isObject(e.response.data?.errors)) {
             next(networking.stopFetching());
-            action.onError(e.data.errors);
+            action.onError(e.response.data.errors);
           } else {
             console.log("-----> ERROR", e);
           }
