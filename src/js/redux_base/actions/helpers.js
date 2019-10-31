@@ -13,6 +13,8 @@ export const URLS = {
   dashboard: "/dashboard/"
 };
 
+export const API_URL_PREFIX = `${URLS.base}${URLS.ver}`;
+
 export const createActions = branch => ({
   set: x => ({ type: `UPDATE_${branch.toUpperCase()}`, x }),
   get: args => ({

@@ -15,7 +15,7 @@ export function RemarkableRouter() {
         <NavGate>
           <Switch>
             <Route path="/dashboard" component={DashboardContainer} />
-            <Route path="/projects/:slug/" component={ProjectsContainer} />
+            <Route path="/projects/:publicId/" component={ProjectsContainer} />
             <Route exact path="/portfolio" component={PortfolioContainer} />
             <Route path="/portfolio/table" component={PortfolioContainer} />
             <Route path="/auth" component={AuthContainer} />
