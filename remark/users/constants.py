@@ -4,6 +4,9 @@ import os
 from django.contrib.auth.password_validation import get_password_validators
 import json
 
+US_COUNTRY_ID = 233
+GB_COUNTRY_ID = 232
+
 ACCOUNT_TYPE = (
     (1, "Property Owner"),
     (2, "Asset Manager"),
@@ -77,9 +80,9 @@ GB_COUNTY_LIST = []
 with open('./data/locations/states.json', 'r') as read_file:
     states_list = json.load(read_file)
     for state in states_list:
-        if state['country_id'] is 233:
+        if state['country_id'] is US_COUNTRY_ID:
             US_STATE_LIST.append({"label": state['name'], "value": state['name']})
-        elif state['country_id'] is 232:
+        elif state['country_id'] is GB_COUNTRY_ID:
             GB_COUNTY_LIST.append({"label": state['name'], "value": state['name']})
 
 COUNTRY_LIST = [
