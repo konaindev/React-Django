@@ -17,7 +17,7 @@ export const props = {
   ],
   office_countries: [
     { label: "United States of America", value: "USA" },
-    { label: "United Kingdom", value: "GB" }
+    { label: "United Kingdom", value: "GBR" }
   ],
   office_addresses: [
     {

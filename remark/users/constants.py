@@ -87,7 +87,7 @@ with open('./data/locations/states.json', 'r') as read_file:
 
 COUNTRY_LIST = [
     {"label": "United States of America", "value": "USA"},
-    {"label": "United Kingdom", "value": "GB"}
+    {"label": "United Kingdom", "value": "GBR"}
 ]
 
 

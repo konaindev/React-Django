@@ -22,19 +22,7 @@ import router from "../../router";
 
 import { propertySchema } from "./validators";
 import "./complete_account_view.scss";
-
-const address_fields = {
-  USA: {
-    city: "City",
-    state: "State",
-    zip: "Zip Code"
-  },
-  GB: {
-    city: "Postal Town",
-    state: "County (optional)",
-    zip: "Postcode"
-  }
-};
+import { COUNTRY_FIELDS } from "../../constants";
 
 class CompleteAccountView extends React.PureComponent {
   static propTypes = {
@@ -52,7 +40,7 @@ class CompleteAccountView extends React.PureComponent {
         type: "API_COMPLETE_ACCOUNT"
       });
     });
-    this.selectedCountry = "USA";
+    this.selectedCountry = COUNTRY_FIELDS.USA.short_name;
   }
 
   initialValues = {
@@ -61,7 +49,10 @@ class CompleteAccountView extends React.PureComponent {
     title: "",
     company: undefined,
     company_role: [],
-    office_country: { label: "United States of America", value: "USA" },
+    office_country: {
+      label: COUNTRY_FIELDS.USA.full_name,
+      value: COUNTRY_FIELDS.USA.short_name
+    },
     // office_address: "",
     office_street: "",
     office_city: "",
@@ -213,17 +204,17 @@ class CompleteAccountView extends React.PureComponent {
         value: value.state
       });
       this.formik.current.setFieldValue("office_zip", value.zip);
-      if (value.country == "GB") {
-        this.selectedCountry = "GB";
+      if (value.country == COUNTRY_FIELDS.GBR.short_name) {
+        this.selectedCountry = COUNTRY_FIELDS.GBR.short_name;
         this.formik.current.setFieldValue("office_country", {
-          label: "United Kingdom",
-          value: "GB"
+          label: COUNTRY_FIELDS.GBR.full_name,
+          value: COUNTRY_FIELDS.GBR.short_name
         });
-      } else if (value.country == "USA") {
-        this.selectedCountry = "USA";
+      } else if (value.country == COUNTRY_FIELDS.USA.short_name) {
+        this.selectedCountry = COUNTRY_FIELDS.USA.short_name;
         this.formik.current.setFieldValue("office_country", {
-          label: "United States of America",
-          value: "USA"
+          label: COUNTRY_FIELDS.USA.full_name,
+          value: COUNTRY_FIELDS.USA.short_name
         });
       }
     } else {
@@ -459,7 +450,9 @@ class CompleteAccountView extends React.PureComponent {
                 </FormField>
                 <FormField
                   className={AccountForm.fieldClass}
-                  label={address_fields[this.selectedCountry].city}
+                  label={
+                    COUNTRY_FIELDS[this.selectedCountry].address_fields.city
+                  }
                   showError={touched.office_city}
                   showIcon={false}
                   error={errors.office_city}
@@ -475,7 +468,9 @@ class CompleteAccountView extends React.PureComponent {
                 </FormField>
                 <FormField
                   className={AccountForm.fieldClass}
-                  label={address_fields[this.selectedCountry].state}
+                  label={
+                    COUNTRY_FIELDS[this.selectedCountry].address_fields.state
+                  }
                   showError={!!touched.office_state}
                   showIcon={false}
                   error={errors.office_state}
@@ -487,7 +482,7 @@ class CompleteAccountView extends React.PureComponent {
                     styles={this.selectStyles}
                     isSearchable={true}
                     options={
-                      this.selectedCountry == "USA"
+                      this.selectedCountry == COUNTRY_FIELDS.USA.short_name
                         ? this.props.us_state_list
                         : this.props.gb_county_list
                     }
@@ -498,7 +493,9 @@ class CompleteAccountView extends React.PureComponent {
                 </FormField>
                 <FormField
                   className={AccountForm.fieldClass}
-                  label={address_fields[this.selectedCountry].zip}
+                  label={
+                    COUNTRY_FIELDS[this.selectedCountry].address_fields.zip
+                  }
                   showError={touched.office_zip}
                   showIcon={false}
                   error={errors.office_zip}

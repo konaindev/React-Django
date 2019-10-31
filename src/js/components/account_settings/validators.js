@@ -105,7 +105,7 @@ const profileSchema = Yup.object().shape({
       })
     })
     .when("office_country", {
-      is: val => val.value == "GB",
+      is: val => val.value == "GBR",
       then: Yup.string().matches(postRegex, {
         message: invalidPostMessage
       })

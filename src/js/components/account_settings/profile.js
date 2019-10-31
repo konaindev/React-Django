@@ -4,6 +4,7 @@ import _intersection from "lodash/intersection";
 import PropTypes from "prop-types";
 import React from "react";
 import AddressModal from "../address_modal";
+import { COUNTRY_FIELDS } from "../../constants";
 
 import { Tick, Upload } from "../../icons";
 import { formatPhone } from "../../utils/formatters";
@@ -14,19 +15,6 @@ import MultiSelect from "../multi_select";
 import Select from "../select";
 import { addressModal } from "../../state/actions";
 import { MAX_AVATAR_SIZE, profileSchema } from "./validators";
-
-export const address_fields = {
-  USA: {
-    city: "City",
-    state: "State",
-    zip: "Zip Code"
-  },
-  GB: {
-    city: "Postal Town",
-    state: "County (optional)",
-    zip: "Postcode"
-  }
-};
 
 export default class Profile extends React.PureComponent {
   static propTypes = {
@@ -63,15 +51,17 @@ export default class Profile extends React.PureComponent {
       phone_ext: "",
       company: "",
       company_roles: [],
-      office_country: { label: "United States of America", value: "USA" },
+      office_country: {
+        label: COUNTRY_FIELDS.USA.full_name,
+        value: COUNTRY_FIELDS.USA.short_name
+      },
       office_street: "",
       office_city: "",
       office_state: {},
       office_zip: "",
       office_name: "",
       office_type: null
-    },
-    address_fields: address_fields
+    }
   };
   static fieldsSubmit = [
     "avatar",
@@ -96,7 +86,7 @@ export default class Profile extends React.PureComponent {
     this.state = {
       fieldsSubmitted: false
     };
-    this.selectedCountry = "USA";
+    this.selectedCountry = COUNTRY_FIELDS.USA.short_name;
   }
 
   get initialValues() {
@@ -275,7 +265,6 @@ export default class Profile extends React.PureComponent {
   };
 
   render() {
-    const address_fields = this.props.address_fields;
     return (
       <div className="account-settings__tab">
         <AddressModal
@@ -575,7 +564,10 @@ export default class Profile extends React.PureComponent {
                       )}
                     >
                       <div className="account-settings__label">
-                        {address_fields[this.selectedCountry].city}
+                        {
+                          COUNTRY_FIELDS[this.selectedCountry].address_fields
+                            .city
+                        }
                       </div>
                       <Input
                         className="account-settings__input"
@@ -584,7 +576,7 @@ export default class Profile extends React.PureComponent {
                         value={values.office_city}
                         onBlur={this.onBlur}
                         onChange={this.onChange}
-                      ></Input>
+                      />
                       <div className="account-settings__error">
                         <ErrorMessage name="office_city" />
                       </div>
@@ -598,7 +590,10 @@ export default class Profile extends React.PureComponent {
                       )}
                     >
                       <div className="account-settings__label">
-                        {address_fields[this.selectedCountry].state}
+                        {
+                          COUNTRY_FIELDS[this.selectedCountry].address_fields
+                            .state
+                        }
                       </div>
                       <Select
                         className="account-settings__input"
@@ -606,7 +601,7 @@ export default class Profile extends React.PureComponent {
                         theme="gray"
                         isSearchable={true}
                         options={
-                          this.selectedCountry == "USA"
+                          this.selectedCountry == COUNTRY_FIELDS.USA.short_name
                             ? this.props.us_state_list
                             : this.props.gb_county_list
                         }
@@ -633,7 +628,10 @@ export default class Profile extends React.PureComponent {
                       )}
                     >
                       <div className="account-settings__label">
-                        {address_fields[this.selectedCountry].zip}
+                        {
+                          COUNTRY_FIELDS[this.selectedCountry].address_fields
+                            .zip
+                        }
                       </div>
                       <Input
                         className="account-settings__input"

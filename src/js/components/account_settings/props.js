@@ -44,7 +44,7 @@ const office_options = [
 
 const office_countries = [
   { label: "United States of America", value: "USA" },
-  { label: "United Kingdom", value: "GB" }
+  { label: "United Kingdom", value: "GBR" }
 ];
 
 const us_state_list = [

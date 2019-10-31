@@ -117,7 +117,7 @@ class CompleteAccountView(LoginRequiredMixin, ReactView):
             person.save()
             response = JsonResponse({"success": True}, status=200)
         else:
-            response = JsonResponse({"errors": form.errors.get_json_data()}, status=200)
+            response = JsonResponse({"errors": form.errors.get_json_data()}, status=500)
         return response
 
 
@@ -318,7 +318,7 @@ class AccountProfileView(LoginRequiredMixin, RemarkView):
         post_data.pop("company_roles[]", None)
         form = AccountProfileForm(post_data, request.FILES)
         if not form.is_valid():
-            return JsonResponse({"errors": form.errors.get_json_data()}, status=200)
+            return JsonResponse({"errors": form.errors.get_json_data()}, status=500)
         user = request.user
         self.update_profile(user, form.cleaned_data)
         return JsonResponse(user.get_profile_data(), status=200)
