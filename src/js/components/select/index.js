@@ -21,12 +21,14 @@ export default function Select(props) {
     theme,
     size,
     isMulti,
+    isSearchable,
     ...otherProps
   } = props;
   const classes = cn("select", className, {
     "select--is-multi": isMulti,
     [`select--${size}`]: size,
-    [`select--${theme}`]: theme
+    [`select--${theme}`]: theme,
+    "select--is-searchable": isSearchable
   });
   return (
     <ReactSelect
@@ -76,6 +78,7 @@ Select.propTypes = {
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   isMulti: PropTypes.bool,
+  isSearchable: PropTypes.bool,
   components: PropTypes.object
 };
 Select.defaultProps = {

@@ -530,6 +530,8 @@ export default class Profile extends React.PureComponent {
                         <ErrorMessage name="office_country" />
                       </div>
                     </div>
+                  </div>
+                  <div className="account-settings__field-grid">
                     <div
                       className={this.getFieldClasses(
                         "office_street",
@@ -552,8 +554,6 @@ export default class Profile extends React.PureComponent {
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="account-settings__tab-section">
                   <div className="account-settings__field-grid account-settings__field-grid--col-3">
                     <div
                       className={this.getFieldClasses(
@@ -585,8 +585,7 @@ export default class Profile extends React.PureComponent {
                       className={this.getFieldClasses(
                         "office_state",
                         errors,
-                        touched,
-                        ["max-width"]
+                        touched
                       )}
                     >
                       <div className="account-settings__label">
@@ -646,8 +645,6 @@ export default class Profile extends React.PureComponent {
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="account-settings__tab-section">
                   <div className="account-settings__field-grid">
                     <div
                       className={this.getFieldClasses(
