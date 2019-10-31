@@ -144,7 +144,7 @@ PROPERTY_SPLIT_DOCUMENT = {
     "move_ins": "linear",
     "occupied_units_end": "linear",
     "occupied_units_start": "linear",
-    "occupiable_units_start": "linear",
+    "occupiable_units_start": "noop",
 
     # Cancellations & Denials
     "lease_cds": "linear",
