@@ -2764,6 +2764,10 @@ exports[`AccountSettings profile tab 1`] = `
                     className="account-settings__error"
                   />
                 </div>
+              </div>
+              <div
+                className="account-settings__field-grid"
+              >
                 <div
                   className="account-settings__field account-settings__field--full-grid"
                 >
@@ -2784,10 +2788,6 @@ exports[`AccountSettings profile tab 1`] = `
                   />
                 </div>
               </div>
-            </div>
-            <div
-              className="account-settings__tab-section"
-            >
               <div
                 className="account-settings__field-grid account-settings__field-grid--col-3"
               >
@@ -2797,7 +2797,7 @@ exports[`AccountSettings profile tab 1`] = `
                   <div
                     className="account-settings__label"
                   >
-                    City
+                    city
                   </div>
                   <input
                     className="input account-settings__input input--gray"
@@ -2811,15 +2811,15 @@ exports[`AccountSettings profile tab 1`] = `
                   />
                 </div>
                 <div
-                  className="account-settings__field account-settings__field--max-width"
+                  className="account-settings__field"
                 >
                   <div
                     className="account-settings__label"
                   >
-                    State
+                    state
                   </div>
                   <div
-                    className="select account-settings__input select--gray css-2b097c-container"
+                    className="select account-settings__input select--gray select--is-searchable css-2b097c-container"
                     onKeyDown={[Function]}
                   >
                     <div
@@ -2966,7 +2966,7 @@ exports[`AccountSettings profile tab 1`] = `
                   <div
                     className="account-settings__label"
                   >
-                    Zip Code
+                    zip code
                   </div>
                   <input
                     className="input account-settings__input input--gray"
@@ -2980,10 +2980,6 @@ exports[`AccountSettings profile tab 1`] = `
                   />
                 </div>
               </div>
-            </div>
-            <div
-              className="account-settings__tab-section"
-            >
               <div
                 className="account-settings__field-grid"
               >
