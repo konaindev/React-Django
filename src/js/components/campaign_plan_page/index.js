@@ -7,17 +7,15 @@ import { connect } from "react-redux";
 
 export class CampaignPlanPage extends Component {
   static propTypes = {
-    user: PropTypes.object,
     report: PropTypes.object.isRequired,
     project: PropTypes.object.isRequired
   };
 
   render() {
-    const { user, project, report, report_links, share_info } = this.props;
+    const { project, report, report_links, share_info } = this.props;
 
     return (
       <ReportPageChrome
-        user={user}
         project={project}
         current_report_name="campaign_plan"
         report_links={report_links}

@@ -16,7 +16,6 @@ export class BaselineReportPage extends Component {
   static propTypes = {
     // report: PropTypes.object,
     // project: PropTypes.object,
-    user: PropTypes.object
   };
 
   renderDateSpan() {
@@ -24,11 +23,10 @@ export class BaselineReportPage extends Component {
   }
 
   render() {
-    const { user, project, report, report_links, share_info } = this.props;
+    const { project, report, report_links, share_info } = this.props;
 
     return (
       <ReportPageChrome
-        user={user}
         project={project}
         current_report_name="baseline"
         report_links={report_links}

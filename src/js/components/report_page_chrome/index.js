@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
 import ReportLinks from "../report_links";
-import ProjectPageChrome from "../project_page_chrome";
 import ShareToggle from "../share_toggle";
 import ProjectLink from "../project_link";
 import Loader from "../loader";
@@ -22,7 +21,6 @@ const DEFAULT_IMAGE_URL =
 export class ReportPageChrome extends Component {
   static propTypes = {
     // project: PropTypes.object.isRequired,
-    user: PropTypes.object,
     current_report_name: PropTypes.string.isRequired,
     report_links: PropTypes.object.isRequired,
     share_info: PropTypes.object,
@@ -37,23 +35,21 @@ export class ReportPageChrome extends Component {
     backUrl: "/dashboard"
   };
 
-  render() {
+  renderSubheader = () => {
     const {
       project,
-      user,
       current_report_name,
       report_links,
       share_info,
-      backUrl,
-      loadingProject,
-      loadingReports
+      backUrl
     } = this.props;
+
     let image_url = DEFAULT_IMAGE_URL;
     if (project && project.building_image) {
       image_url = project.building_image[2];
     }
 
-    const topItems = !loadingProject && (
+    return (
       <section className="report-page-subheader">
         <div className="container">
           <div className="report-page__project-link">
@@ -80,12 +76,16 @@ export class ReportPageChrome extends Component {
         </div>
       </section>
     );
+  };
+
+  render() {
+    const { loadingProject, loadingReports } = this.props;
 
     return (
-      <ProjectPageChrome user={user} topItems={topItems}>
-        {loadingReports && <Loader isVisible />}
-        {!loadingReports && this.props.children}
-      </ProjectPageChrome>
+      <div>
+        {!loadingProject && this.renderSubheader()}
+        {loadingReports ? <Loader isVisible /> : this.props.children}
+      </div>
     );
   }
 }

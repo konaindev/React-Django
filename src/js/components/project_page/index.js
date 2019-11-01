@@ -1,3 +1,7 @@
+// @TOOD: rendering error for now...
+// https://staging.remarkably.io/projects/pro_fc583mab3bfo4zs5/
+// Originally it was supposed to display list of report links
+
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";

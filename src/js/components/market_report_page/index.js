@@ -8,15 +8,13 @@ export class MarketReportPage extends Component {
   static propTypes = {
     // report: PropTypes.object.isRequired,
     // project: PropTypes.object.isRequired,
-    user: PropTypes.object
   };
 
   render() {
-    const { user, project, report, report_links, share_info } = this.props;
+    const { project, report, report_links, share_info } = this.props;
 
     return (
       <ReportPageChrome
-        user={user}
         project={project}
         current_report_name="market"
         report_links={report_links}
