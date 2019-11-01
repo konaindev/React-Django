@@ -4,8 +4,6 @@ import PropTypes from "prop-types";
 import ReportPageChrome from "../report_page_chrome";
 import ReportDateSpan from "../report_date_span";
 import CommonReport from "../common_report";
-import Loader from "../loader";
-import "./baseline_report_page.scss";
 
 /**
  * @class BaselineReportPage
