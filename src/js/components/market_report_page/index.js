@@ -6,9 +6,9 @@ import TotalAddressableMarket from "../total_addressable_market";
 
 export class MarketReportPage extends Component {
   static propTypes = {
-    user: PropTypes.object,
-    report: PropTypes.object.isRequired,
-    project: PropTypes.object.isRequired
+    // report: PropTypes.object.isRequired,
+    // project: PropTypes.object.isRequired,
+    user: PropTypes.object
   };
 
   render() {

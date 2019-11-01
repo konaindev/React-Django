@@ -9,45 +9,38 @@ import MarketReportPage from "../../components/market_report_page";
 import PerformanceReportPage from "../../components/performance_report_page";
 import CampaignPlanPage from "../../components/campaign_plan_page";
 import ModelingPage from "../../components/modeling_report_page";
-import { projectOverallRequest } from "../../redux_base/actions";
+import {
+  projectOverallRequest,
+  projectReportsRequest
+} from "../../redux_base/actions";
 
 class ProjectsContainer extends PureComponent {
   componentWillMount() {
-    const publicId = _get(this.props.match, "params.publicId");
+    const { params } = this.props.match;
+    const { publicId, reportType, reportSpan } = params;
     this.props.dispatch(projectOverallRequest(publicId));
-  }
 
-  pickTab() {
-    const { pathname } = this.props.location;
-    const parts = pathname.split("/");
-
-    let tab = null;
-    if (parts.length < 6) {
-      tab = parts[parts.length - 2];
-    } else {
-      tab = parts[parts.length - 3];
-    }
-    switch (tab) {
-      case "baseline":
-        return <BaselineReportPage {...this.props} />;
-      case "performance":
-        return <PerformanceReportPage {...this.props} />;
-      case "modeling":
-        return <ModelingPage {...this.props} />;
-      case "campaign_plan":
-        return <CampaignPlanPage {...this.props} />;
-      case "market":
-        return (
-          <MarketReportPage
-            {...Object.assign({}, this.props, this.props.hell.market)}
-          />
-        );
-      default:
-        return <BaselineReportPage {...this.props} />;
+    if (reportType) {
+      this.props.dispatch(
+        projectReportsRequest(publicId, reportType, reportSpan)
+      );
     }
   }
+
   render() {
-    return this.pickTab();
+    const { params } = this.props.match;
+    const { reportType } = params;
+
+    const reportPageHub = {
+      baseline: BaselineReportPage,
+      performance: PerformanceReportPage,
+      modeling: ModelingPage,
+      campaign_plan: CampaignPlanPage,
+      market: MarketReportPage
+    };
+    const ReportPage = reportPageHub[reportType];
+
+    return <ReportPage {...this.props} />;
   }
 }
 
@@ -55,12 +48,11 @@ const mapState = state => {
   let newState = {
     ...state.network,
     ...state.project,
-    project: state.projectReports.overall,
-    user: state.user,
-    hell: {
-      market: state.market
-    },
-    kpi: state.kpi
+    project: state.projectReports.project,
+    report: state.projectReports.reports,
+    loadingProject: state.projectReports.loadingProject,
+    loadingReports: state.projectReports.loadingReports,
+    user: state.user
   };
   console.log("project CONTAINER map state", state.projectReports, newState);
   return newState;

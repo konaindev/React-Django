@@ -44,7 +44,7 @@ export const PropertyCard = ({
               </div>
               <Link
                 className="property-card__overlay-link"
-                to={`/projects/${public_id}`}
+                to={`/projects/${public_id}/baseline`}
               >
                 <Button color="outline">View Report</Button>
               </Link>

@@ -1,16 +1,10 @@
 import { PROJECT_OVERALL_GET, PROJECT_REPORTS_GET } from "../actions";
 
 const initialState = {
-  loadingOverall: false,
-  loadingReports: false,
-  overall: false,
-  reports: {
-    baseline: false,
-    tam: false,
-    modeling: false,
-    campaign_plan: false,
-    performance: false
-  }
+  loadingProject: true,
+  loadingReports: true,
+  project: false,
+  reports: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -18,19 +12,19 @@ const reducer = (state = initialState, action) => {
     case PROJECT_OVERALL_GET.REQUEST:
       return {
         ...state,
-        loadingOverall: true
+        loadingProject: true
       };
     case PROJECT_OVERALL_GET.SUCCESS:
       return {
         ...state,
-        loadingOverall: false,
-        overall: action.data
+        loadingProject: false,
+        project: action.data
       };
     case PROJECT_OVERALL_GET.FAILURE:
       return {
         ...state,
-        loadingOverall: false,
-        overall: false
+        loadingProject: false,
+        project: false
       };
     case PROJECT_REPORTS_GET.REQUEST:
       return {

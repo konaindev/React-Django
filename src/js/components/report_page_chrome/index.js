@@ -1,10 +1,12 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 import ReportLinks from "../report_links";
 import ProjectPageChrome from "../project_page_chrome";
 import ShareToggle from "../share_toggle";
 import ProjectLink from "../project_link";
+import Loader from "../loader";
 
 import "./report_page_chrome.scss";
 
@@ -17,16 +19,18 @@ const DEFAULT_IMAGE_URL =
  * @classdesc Render generic header/footer chrome for all Remarkably pages
  * that are related to a report for a specific project.
  */
-export default class ReportPageChrome extends Component {
+export class ReportPageChrome extends Component {
   static propTypes = {
-    project: PropTypes.object.isRequired,
+    // project: PropTypes.object.isRequired,
     user: PropTypes.object,
     current_report_name: PropTypes.string.isRequired,
     report_links: PropTypes.object.isRequired,
     share_info: PropTypes.object,
     topItems: PropTypes.node,
     children: PropTypes.node.isRequired,
-    backUrl: PropTypes.string
+    backUrl: PropTypes.string,
+    loadingProject: PropTypes.bool,
+    loadingReports: PropTypes.bool
   };
 
   static defaultProps = {
@@ -40,14 +44,16 @@ export default class ReportPageChrome extends Component {
       current_report_name,
       report_links,
       share_info,
-      backUrl
+      backUrl,
+      loadingProject,
+      loadingReports
     } = this.props;
     let image_url = DEFAULT_IMAGE_URL;
     if (project && project.building_image) {
       image_url = project.building_image[2];
     }
 
-    const topItems = (
+    const topItems = !loadingProject && (
       <section className="report-page-subheader">
         <div className="container">
           <div className="report-page__project-link">
@@ -77,8 +83,16 @@ export default class ReportPageChrome extends Component {
 
     return (
       <ProjectPageChrome user={user} topItems={topItems}>
-        {this.props.children}
+        {loadingReports && <Loader isVisible />}
+        {!loadingReports && this.props.children}
       </ProjectPageChrome>
     );
   }
 }
+
+const mapState = state => ({
+  loadingProject: state.projectReports.loadingProject,
+  loadingReports: state.projectReports.loadingReports
+});
+
+export default connect(mapState)(ReportPageChrome);
