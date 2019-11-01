@@ -97,7 +97,7 @@ const profileSchema = Yup.object().shape({
   office_zip: Yup.string()
     .required()
     .max(255)
-    .label("Zip")
+    .label(" ")
     .when("office_country", {
       is: val => val.value == "USA",
       then: Yup.string().matches(zipRegex, {
