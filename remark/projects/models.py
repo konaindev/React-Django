@@ -28,6 +28,7 @@ from remark.projects.reports.performance import PerformanceReport
 from remark.projects.reports.selectors import ReportLinks
 from remark.projects.constants import (
     PROPERTY_TYPE,
+    PROPERTY_STYLE,
     BUILDING_CLASS,
     SIZE_LANDSCAPE,
     SIZE_THUMBNAIL,
@@ -646,6 +647,7 @@ class Property(models.Model):
     building_image_landscape_cropping = ImageRatioFieldExt("building_image", "{}x{}".format(*SIZE_LANDSCAPE))
 
     property_type = models.IntegerField(choices=PROPERTY_TYPE, null=True, blank=False)
+    property_style = models.CharField(choices=PROPERTY_STYLE, max_length=20, null=True, blank=True)
 
     building_class = models.IntegerField(
         choices=BUILDING_CLASS, null=False, blank=False, default=1

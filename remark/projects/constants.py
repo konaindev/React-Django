@@ -9,6 +9,15 @@ PROPERTY_TYPE = (
     (7, "Active Adult"),
 )
 
+PROPERTY_STYLE = (
+    ("low-rise", "Low-Rise"),
+    ("walk-up", "Walk-Up"),
+    ("mid-rise", "Mid-Rise"),
+    ("hi-rise", "Hi-Rise"),
+    ("tower-block", "Tower-Block"),
+    ("garden", "Garden"),
+)
+
 BUILDING_CLASS = ((1, "Class A"), (2, "Class B"), (3, "Class C"))
 
 SIZE_LANDSCAPE = (309, 220)
