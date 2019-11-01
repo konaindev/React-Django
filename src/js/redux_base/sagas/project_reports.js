@@ -11,7 +11,7 @@ import { axiosGet } from "../../utils/api";
 
 function* fetchOverall({ publicId }) {
   try {
-    const url = `${API_URL_PREFIX}/projects/${publicId}/overall`;
+    const url = `${API_URL_PREFIX}/projects/${publicId}/overall/`;
     const response = yield call(axiosGet, url);
     yield put(projectOverallSuccess(response.data));
   } catch (e) {
@@ -22,7 +22,7 @@ function* fetchOverall({ publicId }) {
 
 function* fetchReports({ publicId, reportType, reportSpan }) {
   try {
-    let url = `${API_URL_PREFIX}/projects/${publicId}/reports?report_type=${reportType}`;
+    let url = `${API_URL_PREFIX}/projects/${publicId}/reports/?report_type=${reportType}`;
     if (reportSpan) {
       url += `&report_span=${reportSpan}`;
     }

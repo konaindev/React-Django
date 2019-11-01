@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import cn from "classnames";
+import cx from "classnames";
 import { Link } from "react-router-dom";
+
 import "./report_links.scss";
 
 /**
@@ -11,65 +12,85 @@ import "./report_links.scss";
  */
 export default class ReportLinks extends Component {
   static propTypes = {
-    current_report_name: PropTypes.string.isRequired,
-    report_links: PropTypes.object.isRequired
+    project: PropTypes.object.isRequired,
+    currentReportType: PropTypes.string.isRequired
   };
 
-  renderLink(report_friendly_name, report_name, optional_report_link) {
-    const names = cn(
+  reportTabs = [
+    {
+      title: "Baseline",
+      reportType: "baseline"
+    },
+    {
+      title: "Market Analysis",
+      reportType: "market"
+    },
+    {
+      title: "Modeling",
+      reportType: "modeling"
+    },
+    {
+      title: "Campaign Plan",
+      reportType: "campaign_plan"
+    },
+    {
+      title: "Performance",
+      reportType: "performance"
+    }
+  ];
+
+  isReportEnabled = reportType => {
+    const fieldMap = {
+      baseline: "is_baseline_report_public",
+      market: "is_tam_public",
+      modeling: "is_modeling_public",
+      campaign_plan: "is_campaign_plan_public",
+      performance: "is_performance_report_public"
+    };
+
+    const { project } = this.props;
+    const field = fieldMap[reportType];
+
+    return project[field] === true;
+  };
+
+  getReportUrl = reportType => {
+    if (false === this.isReportEnabled(reportType)) {
+      return "#";
+    }
+
+    const { project } = this.props;
+    if (reportType === "performance") {
+      // @FIXME
+      return `/projects/${project.public_id}/performance/report_span_0/`;
+    } else {
+      return `/projects/${project.public_id}/${reportType}/`;
+    }
+  };
+
+  renderTabItem = (reportTitle, reportType) => {
+    const reportLink = this.getReportUrl(reportType);
+    const itemClass = cx(
       {
-        selected: report_name == this.props.current_report_name
+        selected: reportType == this.props.currentReportType
       },
-      optional_report_link == null ? "disabled" : "enabled"
+      reportLink == "#" ? "disabled" : "enabled"
     );
+
     return (
-      <li className={names} data-url={optional_report_link?.url || "#"}>
-        <Link
-          style={{ color: "inherit", textDecoration: "inherit" }}
-          to={
-            optional_report_link && optional_report_link.url
-              ? optional_report_link.url
-              : "#"
-          }
-        >
-          {report_friendly_name}
-        </Link>
+      <li key={reportType} className={itemClass} data-url={reportLink}>
+        <Link to={reportLink}>{reportTitle}</Link>
       </li>
     );
-  }
+  };
 
   render() {
-    // TODO CONSIDER: report_links should probably contain friendly names, too?
     return (
       <div className="project-report-links">
         <ul>
-          {this.renderLink(
-            "Baseline",
-            "baseline",
-            this.props.report_links.baseline
-          )}
-          {this.props.report_links.market &&
-            this.renderLink(
-              "Market Analysis",
-              "market",
-              this.props.report_links.market
-            )}
-          {this.renderLink(
-            "Modeling",
-            "modeling",
-            this.props.report_links.modeling
-          )}
-          {this.props.report_links.campaign_plan &&
-            this.renderLink(
-              "Campaign Plan",
-              "campaign_plan",
-              this.props.report_links.campaign_plan
-            )}
-          {this.renderLink(
-            "Performance",
-            "performance",
-            this.props.report_links.performance?.[0]
-          )}
+          {this.reportTabs.map(tab => {
+            return this.renderTabItem(tab.title, tab.reportType);
+          })}
         </ul>
       </div>
     );

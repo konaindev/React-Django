@@ -16,7 +16,7 @@ export function RemarkableRouter() {
           <Switch>
             <Route path="/dashboard" component={DashboardContainer} />
             <Route
-              path="/projects/:publicId/:reportType/:reportSpan?"
+              path="/projects/:projectId/:reportType/:reportSpan?"
               component={ProjectsContainer}
             />
             <Route exact path="/portfolio" component={PortfolioContainer} />

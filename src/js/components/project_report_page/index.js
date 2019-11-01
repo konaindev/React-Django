@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 
+import Loader from "../loader";
 import ReportLinks from "../report_links";
 import ShareToggle from "../share_toggle";
 import ProjectLink from "../project_link";
-import Loader from "../loader";
+// date range picker
 import ReportDateSpan from "../report_date_span";
 import PerformanceReportSpanDropdown from "../performance_report_span_dropdown";
+// report content
 import CommonReport from "../common_report";
 import TotalAddressableMarket from "../total_addressable_market";
 import ModelingView from "../modeling_view";
@@ -21,11 +22,7 @@ const DEFAULT_IMAGE_URL =
 export class ProjectReportPage extends Component {
   static propTypes = {
     // project: PropTypes.object.isRequired,
-    current_report_name: PropTypes.string.isRequired,
-    report_links: PropTypes.object.isRequired,
     share_info: PropTypes.object,
-    topItems: PropTypes.node,
-    children: PropTypes.node.isRequired,
     backUrl: PropTypes.string,
     loadingProject: PropTypes.bool,
     loadingReports: PropTypes.bool
@@ -36,14 +33,7 @@ export class ProjectReportPage extends Component {
   };
 
   renderSubheader = () => {
-    const {
-      project,
-      current_report_name,
-      report_links,
-      share_info,
-      backUrl,
-      reportType
-    } = this.props;
+    const { project, share_info, backUrl, reportType } = this.props;
 
     let projectImage = DEFAULT_IMAGE_URL;
     if (project && project.building_image) {
@@ -62,14 +52,11 @@ export class ProjectReportPage extends Component {
             />
           </div>
           <div className="subheader-report-tabs">
-            <ReportLinks
-              current_report_name={current_report_name}
-              report_links={report_links}
-            />
+            <ReportLinks project={project} currentReportType={reportType} />
             {share_info != null && (
               <ShareToggle
                 {...share_info}
-                current_report_name={current_report_name}
+                current_report_name={reportType}
                 update_endpoint={project.update_endpoint}
               />
             )}
@@ -80,12 +67,7 @@ export class ProjectReportPage extends Component {
   };
 
   renderReportContent = () => {
-    const {
-      reportType,
-      report,
-      current_report_link,
-      report_links
-    } = this.props;
+    const { reportType, report, report_links } = this.props;
 
     switch (reportType) {
       case "baseline":
@@ -129,12 +111,13 @@ export class ProjectReportPage extends Component {
   };
 
   render() {
-    const { loadingProject, loadingReports } = this.props;
+    const { loadingReports, project, report } = this.props;
 
     return (
       <div className="project-report-page">
-        {!loadingProject && this.renderSubheader()}
-        {loadingReports ? <Loader isVisible /> : this.renderReportContent()}
+        {project && this.renderSubheader()}
+        {loadingReports && <Loader isVisible />}
+        {report && this.renderReportContent()}
       </div>
     );
   }
