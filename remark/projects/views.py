@@ -153,6 +153,9 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
 
         try:
             logger.info("ReportPageViewBase::get::before selector_class")
+            print(self.project)
+            print(*args)
+            print(**kwargs)
             self.selector = self.selector_class(self.project, *args, **kwargs)
             logger.info("ReportPageViewBase::get::after selector_class")
         except Exception:

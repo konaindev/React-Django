@@ -60,7 +60,7 @@ export default class PerformanceReportSpanDropdown extends Component {
     const startDate = formatDateWithTokens(start, this.props.dateFormat);
     const endDate = formatDateWithTokens(end, this.props.dateFormat);
     const rangeString = startDate + "," + endDate;
-    this.props.onChange(this.state.preset, rangeString);
+    this.props.onChange("custom", rangeString);
   };
 
   renderOptions() {
@@ -82,6 +82,7 @@ export default class PerformanceReportSpanDropdown extends Component {
     const startDate = parse(this.props.start_date);
     const endDate = parse(this.props.end_date);
     const campaignRange = this.props.campaignRange;
+    console.log(this.state);
     return (
       <>
         <span className="date-range-selector">
