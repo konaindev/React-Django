@@ -16,7 +16,6 @@ import {
 // import ModelingPage from "../../components/modeling_report_page";
 
 class ProjectsContainer extends PureComponent {
-
   componentWillMount() {
     const { params } = this.props.match;
     const { publicId, reportType, reportSpan } = params;
