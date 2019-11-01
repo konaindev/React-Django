@@ -100,15 +100,21 @@ const profileSchema = Yup.object().shape({
     .label(" ")
     .when("office_country", {
       is: val => val.value == "USA",
-      then: Yup.string().matches(zipRegex, {
-        message: invalidZipMessage
-      })
+      then: Yup.string()
+        .matches(zipRegex, {
+          message: invalidZipMessage
+        })
+        .required()
+        .label("Zip code")
     })
     .when("office_country", {
       is: val => val.value == "GBR",
-      then: Yup.string().matches(postRegex, {
-        message: invalidPostMessage
-      })
+      then: Yup.string()
+        .matches(postRegex, {
+          message: invalidPostMessage
+        })
+        .required()
+        .label("Postcode")
     }),
   office_name: Yup.string()
     .required()
