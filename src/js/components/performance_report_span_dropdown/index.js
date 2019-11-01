@@ -82,7 +82,6 @@ export default class PerformanceReportSpanDropdown extends Component {
     const startDate = parse(this.props.start_date);
     const endDate = parse(this.props.end_date);
     const campaignRange = this.props.campaignRange;
-    console.log(this.state);
     return (
       <>
         <span className="date-range-selector">
