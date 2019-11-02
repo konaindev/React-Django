@@ -246,7 +246,7 @@ class CompleteAccountTestCase(TestCase):
         response = self.client.post(url, data, "json")
         self.assertEqual(response.status_code, 200)
         user = User.objects.get(public_id=self.user.public_id)
-        mock_send_welcome_email.assert_called_once_with(args=user.email, countdown=2)
+        mock_send_welcome_email.assert_called_once_with(args=(user.email,), countdown=2)
         self.assertEqual(user.person.first_name, params["first_name"])
         self.assertEqual(user.person.last_name, params["last_name"])
         self.assertEqual(user.person.email, self.user.email)
