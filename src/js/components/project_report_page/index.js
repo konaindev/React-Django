@@ -21,10 +21,10 @@ const DEFAULT_IMAGE_URL =
 
 export class ProjectReportPage extends Component {
   static propTypes = {
-    // project: PropTypes.object.isRequired,
+    project: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+    report: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
     share_info: PropTypes.object,
     backUrl: PropTypes.string,
-    loadingProject: PropTypes.bool,
     loadingReports: PropTypes.bool
   };
 
@@ -41,7 +41,7 @@ export class ProjectReportPage extends Component {
     }
 
     return (
-      <section className="report-page-subheader">
+      <section className="project-report-page__subheader">
         <div className="container">
           <div className="subheader-project-link">
             <ProjectLink
@@ -116,8 +116,10 @@ export class ProjectReportPage extends Component {
     return (
       <div className="project-report-page">
         {project && this.renderSubheader()}
-        {loadingReports && <Loader isVisible />}
-        {report && this.renderReportContent()}
+        <section className="project-report-page__content">
+          {loadingReports && <Loader isVisible />}
+          {report && this.renderReportContent()}
+        </section>
       </div>
     );
   }

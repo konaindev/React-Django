@@ -1,6 +1,6 @@
 @import "css/base.scss";
 
-.report-page-subheader {
+.project-report-page__subheader {
     background-color: $default-background-color;
     border-bottom: solid 1px $nav-link-border-color;
 
@@ -23,4 +23,8 @@
     .share-toggle {
         margin: 1.375rem 0 0.875rem auto;
     }
+}
+
+.project-report-page__content {
+    position: relative;
 }

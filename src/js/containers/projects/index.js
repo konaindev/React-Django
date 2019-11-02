@@ -19,6 +19,15 @@ import {
 class ProjectsContainer extends PureComponent {
   state = {};
 
+  componentDidMount() {
+    this.setState({
+      reportType: null,
+      projectData: false,
+      reportData: false,
+      loadingReports: true
+    });
+  }
+
   static getDerivedStateFromProps(nextProps, prevState) {
     const { projectId, reportType, reportSpan } = nextProps.match.params;
     let newState = {};
