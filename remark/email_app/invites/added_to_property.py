@@ -24,7 +24,27 @@ def send_invite_email(inviter_name, user_id, projects_ids, max_count=5):
         reply_to=(SUPPORT_EMAIL, DEFAULT_FROM_NAME),
         to_emails=user.email,
         subject="Added to New Property",
-        html_content=html_content
+        html_content=html_content,
+    )
+
+
+@shared_task
+def send_welcome_email(user_email):
+    template_vars = {
+        "email_title": "Welcome",
+        "email_preview": "Welcome to Remarkably",
+        "contact_us_email": SUPPORT_EMAIL,
+        "request_demo_email": HELLO_EMAIL,
+        "website_link": BASE_URL,
+    }
+    template = get_template("email_welcome_get_started/index.mjml")
+    html_content = template.render(template_vars)
+    send_email(
+        from_email=(HELLO_EMAIL, DEFAULT_FROM_NAME),
+        reply_to=(SUPPORT_EMAIL, DEFAULT_FROM_NAME),
+        to_emails=user_email,
+        subject="Welcome to Remarkably",
+        html_content=html_content,
     )
 
 
