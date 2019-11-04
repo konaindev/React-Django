@@ -29,7 +29,11 @@ export default class PerformanceReportSpanDropdown extends Component {
   constructor(props) {
     super(props);
     this.dayPicker = React.createRef();
-    this.state = { preset: this.props.preset ? this.props.preset : "custom" };
+
+    const item = PerformanceReportSpanDropdown.options.find(
+      o => o.value === this.props.preset
+    );
+    this.state = { preset: item ? item.value : "custom" };
   }
 
   static options = [

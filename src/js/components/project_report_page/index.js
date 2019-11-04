@@ -25,7 +25,8 @@ export class ProjectReportPage extends Component {
     report: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
     share_info: PropTypes.object,
     backUrl: PropTypes.string,
-    loadingReports: PropTypes.bool
+    loadingReports: PropTypes.bool,
+    historyPush: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -112,8 +113,11 @@ export class ProjectReportPage extends Component {
   };
 
   handleReportSpanChange = (preset, ...args) => {
-    console.log("report span changed", preset, args);
-    // @TODO: refresh react-router path
+    const { project } = this.props;
+    const reportSpan = preset !== "custom" ? preset : args[0];
+    this.props.historyPush(
+      `/projects/${project.public_id}/performance/${reportSpan}/`
+    );
   };
 
   render() {

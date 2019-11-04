@@ -45,7 +45,10 @@ class ProjectsContainer extends PureComponent {
       newState["projectId"] = projectId;
     }
 
-    if (reportType !== prevState.reportType) {
+    if (
+      reportType !== prevState.reportType ||
+      reportSpan !== prevState.reportSpan
+    ) {
       nextProps.dispatch(
         projectReportsRequest(projectId, reportType, reportSpan)
       );
@@ -80,6 +83,7 @@ class ProjectsContainer extends PureComponent {
         reportType={reportType}
         reportSpan={reportSpan}
         loadingReports={loadingReports}
+        historyPush={this.props.history.push}
       />
     );
   }
