@@ -5,7 +5,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import ProjectPageChrome from "../project_page_chrome";
+import PageChrome from "../page_chrome";
 import Container from "../container";
 import { connect } from "react-redux";
 
@@ -62,11 +62,11 @@ export class ProjectPage extends Component {
 
   render() {
     return (
-      <ProjectPageChrome project={this.props.project} user={this.props.user}>
+      <PageChrome project={this.props.project} user={this.props.user}>
         <Container className="project-page__container">
           {this.renderGroups(this.props.report_links)}
         </Container>
-      </ProjectPageChrome>
+      </PageChrome>
     );
   }
 }

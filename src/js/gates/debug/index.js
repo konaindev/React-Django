@@ -2,9 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import { props as sbProps } from "../../components/dashboard_page/props";
 import { props as portProps } from "../../components/portfolio_analysis_view/props";
-import { props as projProps } from "../../components/project_page/props";
 import reportProps from "../../components/baseline_report_page/props";
-import marketProps from "../../components/market_report_page/props";
+import marketProps from "../../components/total_addressable_market/MarketAnalysis";
 import {
   user as _user,
   properties as _properties,

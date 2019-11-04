@@ -9,13 +9,6 @@ import {
   projectReportsRequest
 } from "../../redux_base/actions";
 
-// @TODO: delete the following components and add stories and tests to "project_report_page"
-// import BaselineReportPage from "../../components/baseline_report_page";
-// import MarketReportPage from "../../components/market_report_page";
-// import PerformanceReportPage from "../../components/performance_report_page";
-// import CampaignPlanPage from "../../components/campaign_plan_page";
-// import ModelingPage from "../../components/modeling_report_page";
-
 class ProjectsContainer extends PureComponent {
   state = {};
 
