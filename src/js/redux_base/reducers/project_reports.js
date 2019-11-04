@@ -12,7 +12,9 @@ const reducer = (state = initialState, action) => {
     case PROJECT_OVERALL_GET.REQUEST:
       return {
         ...state,
-        loadingProject: true
+        loadingProject: true,
+        project: false,
+        reports: false
       };
     case PROJECT_OVERALL_GET.SUCCESS:
       return {
@@ -23,8 +25,7 @@ const reducer = (state = initialState, action) => {
     case PROJECT_OVERALL_GET.FAILURE:
       return {
         ...state,
-        loadingProject: false,
-        project: false
+        loadingProject: false
       };
     case PROJECT_REPORTS_GET.REQUEST:
       return {
@@ -40,8 +41,7 @@ const reducer = (state = initialState, action) => {
     case PROJECT_REPORTS_GET.FAILURE:
       return {
         ...state,
-        loadingReports: false,
-        reports: false
+        loadingReports: false
       };
     default:
       return state;
