@@ -52,7 +52,10 @@ export class ProjectReportPage extends Component {
             />
           </div>
           <div className="subheader-report-tabs">
-            <ReportLinks project={project} currentReportType={reportType} />
+            <ReportLinks
+              reportLinks={project.report_links}
+              currentReportType={reportType}
+            />
             {share_info != null && (
               <ShareToggle
                 {...share_info}
@@ -81,12 +84,7 @@ export class ProjectReportPage extends Component {
       case "market":
         return <TotalAddressableMarket {...report} />;
       case "modeling":
-        return (
-          <>
-            <ModelingView {...report} />
-            {""}
-          </>
-        );
+        return <ModelingView {...report} />;
       case "campaign_plan":
         return <CampaignPlan {...report} />;
       case "performance":

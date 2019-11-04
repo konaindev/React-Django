@@ -444,7 +444,7 @@ class Project(models.Model):
         elif report_links["baseline"]:
             url = report_links["baseline"].get("url")
         else:
-            url = reverse("market_report", kwargs={"project_id": self.public_id})
+            url = f"/projects/{self.public_id}/market/"
         return url
 
     def get_performance_rating(self):

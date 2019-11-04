@@ -163,16 +163,12 @@ class BaselineReportSelector(ReportSelectorBase):
 
     def get_url(self):
         """Return a relative URL linking to this report."""
-        return ""
-        kwargs = {"project_id": self.project.public_id}
-        url = reverse("baseline_report", kwargs=kwargs)
-        return url
+        return f"/projects/{self.project.public_id}/baseline/"
 
     def get_share_url(self):
-        return ""
-        kwargs = {"project_id": self.project.public_id}
-        url = reverse("baseline_report_shared", kwargs=kwargs)
-        return url
+        # @TODO: determine for the sake of simplicity in React routing
+        return f"/projects/{self.project.public_id}/baseline/share/"
+        # return f"/projects/{self.project.public_id}/share/baseline/
 
     def get_description(self):
         """Return a human-readable description of a custom span."""
@@ -292,17 +288,11 @@ class PerformanceReportSelector(ReportSelectorBase):
             raise ValueError(f"Invalid performance report span: {self.report_span}")
 
     def get_url(self):
-        return ""
         """Return a relative URL linking to this report span for the given project."""
-        kwargs = {"project_id": self.project.public_id, "report_span": self.report_span}
-        url = reverse("performance_report", kwargs=kwargs)
-        return url
+        return f"/projects/{self.project.public_id}/performance/{self.report_span}/"
 
     def get_share_url(self):
-        return ""
-        kwargs = {"project_id": self.project.public_id, "report_span": self.report_span}
-        url = reverse("performance_report_shared", kwargs=kwargs)
-        return url
+        return f"/projects/{self.project.public_id}/performance/{self.report_span}/share/"
 
     def get_weeks(self):
         """If we're a LAST_*_WEEKS custom span, return a number of weeks."""
@@ -390,17 +380,10 @@ class MarketReportSelector(ReportSelectorBase):
         self.project = project
 
     def get_url(self):
-        return ""
-        """Return a relative URL linking to this report."""
-        kwargs = {"project_id": self.project.public_id}
-        url = reverse("market_report", kwargs=kwargs)
-        return url
+        return f"/projects/{self.project.public_id}/market/"
 
     def get_share_url(self):
-        return ""
-        kwargs = {"project_id": self.project.public_id}
-        url = reverse("market_report_shared", kwargs=kwargs)
-        return url
+        return f"/projects/{self.project.public_id}/market/share/"
 
     def get_description(self):
         """Return a human-readable description of a custom span."""
@@ -436,17 +419,10 @@ class ModelingReportSelector(ReportSelectorBase):
         self.project = project
 
     def get_url(self):
-        return ""
-        """Return a relative URL linking to this report."""
-        kwargs = {"project_id": self.project.public_id}
-        url = reverse("modeling_report", kwargs=kwargs)
-        return url
+        return f"/projects/{self.project.public_id}/modeling/"
 
     def get_share_url(self):
-        return ""
-        kwargs = {"project_id": self.project.public_id}
-        url = reverse("modeling_report_shared", kwargs=kwargs)
-        return url
+        return f"/projects/{self.project.public_id}/modeling/share/"
 
     def get_description(self):
         """Return a human-readable description of a custom span."""
@@ -483,17 +459,10 @@ class CampaignPlanSelector(ReportSelectorBase):
         return cls(project)
 
     def get_url(self):
-        return ""
-        """Return a relative URL linking to this report."""
-        kwargs = {"project_id": self.project.public_id}
-        url = reverse("campaign_plan", kwargs=kwargs)
-        return url
+        return f"/projects/{self.project.public_id}/campaign_plan/"
 
     def get_share_url(self):
-        return ""
-        kwargs = {"project_id": self.project.public_id}
-        url = reverse("campaign_plan_shared", kwargs=kwargs)
-        return url
+        return f"/projects/{self.project.public_id}/campaign_plan/share"
 
     def get_description(self):
         """Return a human-readable description of a custom span."""

@@ -12,85 +12,45 @@ import "./report_links.scss";
  */
 export default class ReportLinks extends Component {
   static propTypes = {
-    project: PropTypes.object.isRequired,
+    reportLinks: PropTypes.object.isRequired,
     currentReportType: PropTypes.string.isRequired
   };
 
-  reportTabs = [
-    {
-      title: "Baseline",
-      reportType: "baseline"
-    },
-    {
-      title: "Market Analysis",
-      reportType: "market"
-    },
-    {
-      title: "Modeling",
-      reportType: "modeling"
-    },
-    {
-      title: "Campaign Plan",
-      reportType: "campaign_plan"
-    },
-    {
-      title: "Performance",
-      reportType: "performance"
-    }
-  ];
-
-  isReportEnabled = reportType => {
-    const fieldMap = {
-      baseline: "is_baseline_report_public",
-      market: "is_tam_public",
-      modeling: "is_modeling_public",
-      campaign_plan: "is_campaign_plan_public",
-      performance: "is_performance_report_public"
-    };
-
-    const { project } = this.props;
-    const field = fieldMap[reportType];
-
-    return project[field] === true;
-  };
-
-  getReportUrl = reportType => {
-    if (false === this.isReportEnabled(reportType)) {
-      return "#";
-    }
-
-    const { project } = this.props;
-    if (reportType === "performance") {
-      // @FIXME
-      return `/projects/${project.public_id}/performance/report_span_0/`;
-    } else {
-      return `/projects/${project.public_id}/${reportType}/`;
-    }
-  };
-
-  renderTabItem = (reportTitle, reportType) => {
-    const reportLink = this.getReportUrl(reportType);
+  renderLink = (reportTitle, reportType, reportLink) => {
     const itemClass = cx(
       {
         selected: reportType == this.props.currentReportType
       },
-      reportLink == "#" ? "disabled" : "enabled"
+      reportLink == null ? "disabled" : "enabled"
     );
 
     return (
-      <li key={reportType} className={itemClass} data-url={reportLink}>
-        <Link to={reportLink}>{reportTitle}</Link>
+      <li key={reportType} className={itemClass}>
+        <Link to={reportLink?.url || "#"}>{reportTitle}</Link>
       </li>
     );
   };
 
   render() {
+    const { reportLinks } = this.props;
+
     return (
       <div className="project-report-links">
         <ul>
-          {this.reportTabs.map(tab => {
-            return this.renderTabItem(tab.title, tab.reportType);
-          })}
+          {this.renderLink("Baseline", "baseline", reportLinks.baseline)}
+          {this.renderLink("Market Analysis", "market", reportLinks.market)}
+          {this.renderLink("Modeling", "modeling", reportLinks.modeling)}
+          {reportLinks.campaign_plan &&
+            this.renderLink(
+              "Campaign Plan",
+              "campaign_plan",
+              reportLinks.campaign_plan
+            )}
+          {this.renderLink(
+            "Performance",
+            "performance",
+            reportLinks.performance?.[0]
+          )}
         </ul>
       </div>
     );

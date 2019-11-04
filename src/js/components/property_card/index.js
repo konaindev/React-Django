@@ -17,6 +17,7 @@ export const PropertyCard = ({
   address,
   image_url,
   performance_rating,
+  report_url,
   members,
   selected,
   onSelect
@@ -42,10 +43,7 @@ export const PropertyCard = ({
               <div className="property-card__selector" onClick={handleToggle}>
                 <Tick className="property-card__selector-tick" />
               </div>
-              <Link
-                className="property-card__overlay-link"
-                to={`/projects/${public_id}/baseline`}
-              >
+              <Link className="property-card__overlay-link" to={report_url}>
                 <Button color="outline">View Report</Button>
               </Link>
             </div>

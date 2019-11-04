@@ -50,6 +50,7 @@ class DashboardView(APIView):
                 image_url=project.get_building_image()[1],
                 performance_rating=project.get_performance_rating(),
                 members=project.get_members(),
+                report_url=project.get_report_url()
             )
             return project_details
 
