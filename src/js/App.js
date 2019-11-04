@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Provider } from "react-redux";
 import storeFunc from "./state/store";
 import { RemarkableRouter } from "./router";
@@ -11,7 +11,7 @@ import UIStringsGate from "./gates/ui_strings";
 
 const { store, persistor } = storeFunc();
 
-export default class App extends Component {
+export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
