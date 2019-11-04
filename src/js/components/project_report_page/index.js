@@ -70,7 +70,7 @@ export class ProjectReportPage extends Component {
   };
 
   renderReportContent = () => {
-    const { reportType, report, report_links } = this.props;
+    const { reportType, reportSpan, report, project } = this.props;
 
     switch (reportType) {
       case "baseline":
@@ -89,16 +89,19 @@ export class ProjectReportPage extends Component {
         return <CampaignPlan {...report} />;
       case "performance":
         return (
-          <CommonReport type="performance" report={report} dateSpan={null} />
-        );
-        return (
           <CommonReport
             type="performance"
             report={report}
             dateSpan={
               <PerformanceReportSpanDropdown
-                current_report_link={this.props.current_report_link}
-                report_links={report_links.performance}
+                start_date={report.dates.start}
+                end_date={report.dates.end}
+                preset={reportSpan}
+                campaignRange={{
+                  campaign_start: project.campaign_start,
+                  campaign_end: project.campaign_end
+                }}
+                onChange={this.handleReportSpanChange}
               />
             }
           />
@@ -106,6 +109,11 @@ export class ProjectReportPage extends Component {
       default:
         return null;
     }
+  };
+
+  handleReportSpanChange = (preset, ...args) => {
+    console.log("report span changed", preset, args);
+    // @TODO: refresh react-router path
   };
 
   render() {
@@ -116,7 +124,7 @@ export class ProjectReportPage extends Component {
         {project && this.renderSubheader()}
         <section className="project-report-page__content">
           {loadingReports && <Loader isVisible />}
-          {report && this.renderReportContent()}
+          {project && report && this.renderReportContent()}
         </section>
       </div>
     );

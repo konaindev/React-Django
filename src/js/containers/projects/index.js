@@ -15,6 +15,7 @@ class ProjectsContainer extends PureComponent {
   componentDidMount() {
     this.setState({
       reportType: null,
+      reportSpan: null,
       projectData: false,
       reportData: false,
       loadingReports: true
@@ -36,6 +37,7 @@ class ProjectsContainer extends PureComponent {
     if (nextProps.report !== prevState.reportData) {
       newState["reportData"] = nextProps.report;
       newState["reportType"] = reportType;
+      newState["reportSpan"] = reportSpan;
     }
 
     if (projectId !== prevState.projectId) {
@@ -62,7 +64,13 @@ class ProjectsContainer extends PureComponent {
   }
 
   render() {
-    const { reportType, projectData, reportData, loadingReports } = this.state;
+    const {
+      reportType,
+      reportSpan,
+      projectData,
+      reportData,
+      loadingReports
+    } = this.state;
 
     return (
       <ProjectReportPage
@@ -70,6 +78,7 @@ class ProjectsContainer extends PureComponent {
         project={projectData}
         report={reportData}
         reportType={reportType}
+        reportSpan={reportSpan}
         loadingReports={loadingReports}
       />
     );
