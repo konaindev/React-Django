@@ -28,7 +28,6 @@ from remark.projects.reports.performance import PerformanceReport
 from remark.projects.reports.selectors import ReportLinks
 from remark.projects.constants import (
     PROPERTY_TYPE,
-    PROPERTY_STYLE,
     BUILDING_CLASS,
     SIZE_LANDSCAPE,
     SIZE_THUMBNAIL,
@@ -647,11 +646,33 @@ class Property(models.Model):
     building_image_landscape_cropping = ImageRatioFieldExt("building_image", "{}x{}".format(*SIZE_LANDSCAPE))
 
     property_type = models.IntegerField(choices=PROPERTY_TYPE, null=True, blank=False)
-    property_style = models.CharField(choices=PROPERTY_STYLE, max_length=20, null=True, blank=True)
 
     building_class = models.IntegerField(
         choices=BUILDING_CLASS, null=False, blank=False, default=1
     )
+
+    @property
+    def property_style(self):
+        buildings = self.building_set.all()
+        if not len(buildings):
+            return None
+
+        if len(buildings) == 1:
+            build = buildings[0]
+            if 1 <= build.number_of_floors <= 4:
+                style = "Low-Rise" if build.has_elevator else "Walk-Up"
+            if 5 <= build.number_of_floors <= 9:
+                style = "Mid-Rise"
+            if build.number_of_floors >= 10:
+                style = "Hi-Rise"
+        elif len(buildings) >= 2:
+            tower_blocks = list(filter(lambda b: b.number_of_floors >= 10, buildings))
+            if len(tower_blocks):
+                style = "Tower-Block"
+            else:
+                style = "Garden"
+
+        return style
 
     def get_geo_state(self):
         return self.geo_address.state
