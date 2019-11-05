@@ -10,3 +10,5 @@ export const StorybookContainer = ({ children }) => (
     <Container>{children}</Container>
   </div>
 );
+
+export default StorybookContainer;
