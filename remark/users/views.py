@@ -294,8 +294,9 @@ class AccountProfileView(LoginRequiredMixin, RemarkView):
         person.first_name = data["first_name"]
         person.last_name = data["last_name"]
         person.role = data["title"]
-        person.cell_phone = data["phone"]
-        person.office_phone = data["phone_ext"]
+        person.office_phone_country_code = data["phone_country_code"]
+        person.office_phone = data["phone"]
+        person.office_phone_ext = data["phone_ext"]
         if data["avatar"]:
             person.avatar = data["avatar"]
 
