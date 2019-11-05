@@ -391,6 +391,35 @@ export default class Profile extends React.PureComponent {
                       </div>
                     </div>
                     <div
+                      className={this.getFieldClasses(
+                        "office_country",
+                        errors,
+                        touched,
+                        ["max-width"]
+                      )}
+                    >
+                      <div className="account-settings__label">
+                        Office Country
+                      </div>
+                      <Select
+                        className="account-settings__input"
+                        name="office_country"
+                        theme="gray"
+                        isShowControls={false}
+                        isShowAllOption={false}
+                        value={values.office_country}
+                        options={this.props.office_countries}
+                        onBlur={() => {
+                          this.unsetMessage();
+                          setFieldTouched("office_country", true);
+                        }}
+                        onChange={this.onChangeCountry}
+                      />
+                      <div className="account-settings__error">
+                        <ErrorMessage name="office_country" />
+                      </div>
+                    </div>
+                    <div
                       className={this.getFieldClasses("phone", errors, touched)}
                     >
                       <div className="account-settings__label">
@@ -499,37 +528,6 @@ export default class Profile extends React.PureComponent {
                   </div>
                   <div className="account-settings__tab-title">
                     Company Info
-                  </div>
-                  <div className="account-settings__field-grid">
-                    <div
-                      className={this.getFieldClasses(
-                        "office_country",
-                        errors,
-                        touched,
-                        ["full-grid"]
-                      )}
-                    >
-                      <div className="account-settings__label">
-                        Office Country
-                      </div>
-                      <Select
-                        className="account-settings__input"
-                        name="office_country"
-                        theme="gray"
-                        isShowControls={false}
-                        isShowAllOption={false}
-                        value={values.office_country}
-                        options={this.props.office_countries}
-                        onBlur={() => {
-                          this.unsetMessage();
-                          setFieldTouched("office_country", true);
-                        }}
-                        onChange={this.onChangeCountry}
-                      />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="office_country" />
-                      </div>
-                    </div>
                   </div>
                   <div className="account-settings__field-grid">
                     <div
