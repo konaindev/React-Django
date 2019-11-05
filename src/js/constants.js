@@ -20,3 +20,5 @@ export const COUNTRY_FIELDS = {
     phone_code: "44"
   }
 };
+
+export const COUNTRY_CODE_REGEX = /^[0-9]{1,4}$/;
