@@ -23,6 +23,8 @@ export class ProjectReportPage extends Component {
   static propTypes = {
     project: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
     report: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+    reportType: PropTypes.string,
+    reportSpan: PropTypes.string,
     share_info: PropTypes.object,
     backUrl: PropTypes.string,
     loadingReports: PropTypes.bool,
