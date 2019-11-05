@@ -4,7 +4,7 @@ import _intersection from "lodash/intersection";
 import PropTypes from "prop-types";
 import React from "react";
 import AddressModal from "../address_modal";
-import { COUNTRY_FIELDS } from "../../constants";
+import { COUNTRY_FIELDS, COUNTRY_CODE_REGEX } from "../../constants";
 
 import { Tick, Upload } from "../../icons";
 import { formatPhone } from "../../utils/formatters";
@@ -149,9 +149,14 @@ export default class Profile extends React.PureComponent {
 
   getFieldClasses = (name, errors, touched, modifiers = []) => {
     const classes = modifiers.map(m => `account-settings__field--${m}`);
-    return cn("account-settings__field", classes, {
+    let error_dict = {
       "account-settings__field--error": errors[name] && touched[name]
-    });
+    };
+    if (name == "phone") {
+      error_dict["account-settings__field--error-country-code"] =
+        errors["phone_country_code"] && touched["phone_country_code"];
+    }
+    return cn("account-settings__field", classes, error_dict);
   };
 
   getHelpTextClasses = (name, errors, touched) => {
@@ -460,7 +465,7 @@ export default class Profile extends React.PureComponent {
                           onBlur={this.onBlur}
                           onChange={this.onChange}
                           valueFormatter={
-                            values.phone_ext_country_code == "1" ||
+                            values.phone_country_code == "1" ||
                             (this.selectedCountry == "USA" &&
                               !values.phone_ext_country_code)
                               ? formatPhone
@@ -468,6 +473,11 @@ export default class Profile extends React.PureComponent {
                           }
                         />
                       </div>
+                      {errors["phone_country_code"] && (
+                        <div className="account-settings__error">
+                          <ErrorMessage name="phone_country_code" />
+                        </div>
+                      )}
                       <div className="account-settings__error">
                         <ErrorMessage name="phone" />
                       </div>
@@ -490,7 +500,6 @@ export default class Profile extends React.PureComponent {
                         value={values.phone_ext}
                         onBlur={this.onBlur}
                         onChange={this.onChange}
-                        valueFormatter={formatPhone}
                       />
                       <div className="account-settings__error">
                         <ErrorMessage name="phone_ext" />
