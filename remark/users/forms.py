@@ -7,7 +7,7 @@ from remark.crm.constants import OFFICE_TYPES
 from remark.geo.geocode import geocode
 
 from .models import Account, User
-from .constants import COMPANY_ROLES, PHONE_REGEX, ZIP_REGEX
+from .constants import COMPANY_ROLES, PHONE_REGEX, ZIP_REGEX, COUNTRY_CODE_REGEX
 
 
 class AccountForm(forms.ModelForm):
@@ -117,6 +117,7 @@ class AccountProfileForm(forms.Form):
     first_name = forms.CharField(max_length=255, required=True)
     last_name = forms.CharField(max_length=255, required=True)
     title = forms.CharField(max_length=255, required=False)
+    phone_country_code = forms.RegexField(COUNTRY_CODE_REGEX, required=False)
     phone = forms.RegexField(PHONE_REGEX, required=False)
     phone_ext = forms.RegexField(PHONE_REGEX, required=False)
     company = forms.CharField(max_length=255, required=True)
