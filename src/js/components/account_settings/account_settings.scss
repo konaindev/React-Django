@@ -179,6 +179,22 @@ $info-line-height: 1.75rem;
             }
         }
     }
+    &--error-country-code {
+
+        .account-settings__country-code,
+        .account-settings__country-code:focus {
+            &:not(.select) {
+                border: 1px solid $error-color;
+            }
+            .select__control,
+            .select__menu {
+                border: 1px solid $error-color;
+            }
+            .select__menu {
+                border-top: none;
+            }
+        }
+    }
     &--full-grid {
         grid-column-start: 1;
         grid-column-end: 3;
