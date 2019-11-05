@@ -1,8 +1,11 @@
 import Yup from "../../yup";
+import { COUNTRY_CODE_REGEX } from "../../constants";
 
 export const MAX_AVATAR_SIZE = 3 * 1024 * 1024; // Bytes in 3MB
 
-const phoneRegex = /^\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$/;
+const usPhoneRegex = /^\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$/;
+const genericPhoneRegex = /^[0-9-+ ]+$/;
+const phoneRegex = /(^\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$)|(^[0-9-+ ]+$)/;
 const invalidPhoneMessage = "${path} should match format (XXX) XXX-XXXX";
 
 export const zipRegex = /^\d{5}(?:[-\s]\d{4})?$/;
@@ -56,18 +59,26 @@ const profileSchema = Yup.object().shape({
   title: Yup.string()
     .max(255)
     .label("Title"),
+  phone_country_code: Yup.string().matches(COUNTRY_CODE_REGEX, {
+    message: "Invalid country code",
+    excludeEmptyString: true
+  }),
   phone: Yup.string()
-    .matches(phoneRegex, {
-      message: invalidPhoneMessage,
-      excludeEmptyString: true
+    .when(["phone_country_code", "office_country"], {
+      is: (phone_country_code, office_country) => {
+        phone_country_code == "1" || office_country.value == "USA";
+      },
+      then: Yup.string().matches(usPhoneRegex, {
+        message: invalidPhoneMessage,
+        excludeEmptyString: true
+      })
+      // otherwise: Yup.string().matches(genericPhoneRegex, {
+      //   message: "Invalid Phone number",
+      //   excludeEmptyString: true
+      // })
     })
     .label("Phone number"),
-  phone_ext: Yup.string()
-    .matches(phoneRegex, {
-      message: invalidPhoneMessage,
-      excludeEmptyString: true
-    })
-    .label("Phone number"),
+  phone_ext: Yup.string().label("Phone ext"),
   company: Yup.string()
     .required()
     .max(255)
