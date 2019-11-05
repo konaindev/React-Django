@@ -23,6 +23,7 @@ export default class Profile extends React.PureComponent {
       first_name: PropTypes.string,
       last_name: PropTypes.string,
       title: PropTypes.string,
+      phone_country_code: PropTypes.string,
       phone: PropTypes.string,
       phone_ext: PropTypes.string,
       company: PropTypes.string,
@@ -47,6 +48,7 @@ export default class Profile extends React.PureComponent {
       first_name: "",
       last_name: "",
       title: "",
+      phone_country_code: "",
       phone: "",
       phone_ext: "",
       company: "",
@@ -68,6 +70,7 @@ export default class Profile extends React.PureComponent {
     "first_name",
     "last_name",
     "title",
+    "phone_country_code",
     "phone",
     "phone_ext",
     "company",
@@ -222,6 +225,15 @@ export default class Profile extends React.PureComponent {
           data.append("office_country", dataValues.office_country.value);
         } else if (k === "office_state") {
           data.append("office_state", dataValues.office_state.value);
+        } else if (
+          k === "phone_country_code" &&
+          dataValues["phone"] &&
+          !dataValues["phone_country_code"]
+        ) {
+          data.append(
+            "phone_country_code",
+            COUNTRY_FIELDS[this.selectedCountry].phone_code
+          );
         } else {
           data.append(k, dataValues[k]);
         }
@@ -425,16 +437,37 @@ export default class Profile extends React.PureComponent {
                       <div className="account-settings__label">
                         Phone Number (Optional)
                       </div>
-                      <Input
-                        className="account-settings__input"
-                        name="phone"
-                        theme="gray"
-                        type="tel"
-                        value={values.phone}
-                        onBlur={this.onBlur}
-                        onChange={this.onChange}
-                        valueFormatter={formatPhone}
-                      />
+                      <div className="account-settings__plus-tag">+</div>
+                      <div className="account-settings__phone-input">
+                        <Input
+                          className="account-settings__country-code"
+                          name="phone_country_code"
+                          theme="gray"
+                          type="tel"
+                          placeholder={
+                            COUNTRY_FIELDS[this.selectedCountry].phone_code
+                          }
+                          value={values.phone_country_code}
+                          onBlur={this.onBlur}
+                          onChange={this.onChange}
+                        />
+                        <Input
+                          className="account-settings__input"
+                          name="phone"
+                          theme="gray"
+                          type="tel"
+                          value={values.phone}
+                          onBlur={this.onBlur}
+                          onChange={this.onChange}
+                          valueFormatter={
+                            values.phone_ext_country_code == "1" ||
+                            (this.selectedCountry == "USA" &&
+                              !values.phone_ext_country_code)
+                              ? formatPhone
+                              : undefined
+                          }
+                        />
+                      </div>
                       <div className="account-settings__error">
                         <ErrorMessage name="phone" />
                       </div>

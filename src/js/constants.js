@@ -6,7 +6,8 @@ export const COUNTRY_FIELDS = {
       city: "city",
       state: "state",
       zip: "zip code"
-    }
+    },
+    phone_code: "1"
   },
   GBR: {
     full_name: "United Kingdom",
@@ -15,6 +16,7 @@ export const COUNTRY_FIELDS = {
       city: "postal town",
       state: "county",
       zip: "postcode"
-    }
+    },
+    phone_code: "44"
   }
 };

@@ -185,6 +185,24 @@ $info-line-height: 1.75rem;
     }
 }
 
+.account-settings__phone-input {
+    display: inline-flex;
+}
+
+.account-settings__country-code {
+    width: 25% !important;
+    text-align: right;
+}
+
+.account-settings__plus-tag {
+    position: absolute;
+    margin: 11px;
+}
+
+.account-settings__phone {
+    padding: 1px;
+}
+
 .account-settings__input {
     height: 44px;
 }
