@@ -21,7 +21,7 @@ from remark.email_app.invites.added_to_property import (
     get_template_vars,
 )
 
-from .models import Fund, LeaseStage, Period, Project, Property, TargetPeriod
+from .models import Building, Fund, LeaseStage, Period, Project, Property, TargetPeriod
 from .reports.periods import ComputedPeriod
 from .reports.performance import PerformanceReport
 from .export import export_periods_to_csv, export_periods_to_excel
@@ -1338,3 +1338,113 @@ class AddMembersTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         mock_send_invite_email.assert_called_once()
         mock_send_create_account_email.assert_called_once()
+
+
+class PropertyStyleTestCase(TestCase):
+    def setUp(self):
+        address = Address.objects.create(
+            street_address_1="2284 W. Commodore Way, Suite 200",
+            city="Seattle",
+            state="WA",
+            zip_code=98199,
+            country="US",
+        )
+        self.property = Property.objects.create(
+            name="Test Property",
+            average_monthly_rent=decimal.Decimal("0"),
+            lowest_monthly_rent=decimal.Decimal("0"),
+            geo_address=address,
+        )
+
+    def test_empty_style(self):
+        self.assertIsNone(self.property.property_style)
+
+    def test_is_low_rise(self):
+        build = Building(
+            property=self.property,
+            building_identifier="building identifier",
+            number_of_floors=4,
+            has_elevator=True,
+            number_of_units=10,
+        )
+        build.save()
+
+        self.assertEqual("Low-Rise", self.property.property_style)
+
+    def test_is_walk_up(self):
+        build = Building(
+            property=self.property,
+            building_identifier="building identifier",
+            number_of_floors=4,
+            has_elevator=False,
+            number_of_units=10,
+        )
+        build.save()
+
+        self.assertEqual("Walk-Up", self.property.property_style)
+
+    def test_is_mid_rise(self):
+        build = Building(
+            property=self.property,
+            building_identifier="building identifier",
+            number_of_floors=9,
+            has_elevator=False,
+            number_of_units=10,
+        )
+        build.save()
+
+        self.assertEqual("Mid-Rise", self.property.property_style)
+
+    def test_is_hi_rise(self):
+        build = Building(
+            property=self.property,
+            building_identifier="building identifier",
+            number_of_floors=10,
+            has_elevator=False,
+            number_of_units=10,
+        )
+        build.save()
+
+        self.assertEqual("Hi-Rise", self.property.property_style)
+
+    def test_is_tower_block(self):
+        build_1 = Building(
+            property=self.property,
+            building_identifier="building identifier",
+            number_of_floors=10,
+            has_elevator=False,
+            number_of_units=10,
+        )
+        build_1.save()
+
+        build_2 = Building(
+            property=self.property,
+            building_identifier="building identifier",
+            number_of_floors=1,
+            has_elevator=True,
+            number_of_units=10,
+        )
+        build_2.save()
+
+        self.assertEqual("Tower-Block", self.property.property_style)
+
+    def test_is_garden(self):
+        build_1 = Building(
+            property=self.property,
+            building_identifier="building identifier",
+            number_of_floors=9,
+            has_elevator=True,
+            number_of_units=10,
+        )
+        build_1.save()
+
+        build_2 = Building(
+            property=self.property,
+            building_identifier="building identifier",
+            number_of_floors=1,
+            has_elevator=False,
+            number_of_units=10,
+        )
+        build_2.save()
+
+        self.assertEqual("Garden", self.property.property_style)
