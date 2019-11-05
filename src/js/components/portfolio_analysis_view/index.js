@@ -221,7 +221,8 @@ export class PortfolioAnalysisView extends React.PureComponent {
       display_average
     } = this.props;
 
-    this.props.dispatch(nav.updateLinks(navLinks));
+    // WTF is this line? -TPC
+    // this.props.dispatch(nav.updateLinks(navLinks));
 
     return (
       <Container className="portfolio-analysis">

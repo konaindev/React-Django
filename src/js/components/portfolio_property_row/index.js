@@ -9,6 +9,7 @@ import Alarm from "../../icons/alarm";
 import { formatKPI } from "../../utils/kpi_formatters";
 import PropertyStatus from "../property_status";
 import Tooltip from "../rmb_tooltip";
+import { Link } from "react-router-dom";
 
 export default class PortfolioPropertyRow extends React.PureComponent {
   static propTypes = {
