@@ -1,5 +1,5 @@
 from datetime import date
-from unittest import TestCase
+from unittest import TestCase, mock
 
 from .insights import Modifier, Insight, InsightManager
 
@@ -70,4 +70,100 @@ class InsightTestCase(TestCase):
             "projects_id", start=date(2019, 10, 28), end=date(2019, 11, 3)
         )
         expected = []
+        self.assertCountEqual(result, expected)
+
+    def test_produces_template(self):
+        trigger = lambda project_id, start, end: {
+            "project_id": project_id,
+            "start": start,
+            "end": end,
+        }
+        text_template = (
+            lambda data: f"USV to INQ is above target"
+            f" for Project {data['project_id']}"
+            f" date: {data['start'].strftime('%Y-%m-%d')} - {data['end'].strftime('%Y-%m-%d')}"
+        )
+        insight = Insight(
+            name="USV to INQ",
+            trigger=trigger,
+            text_template=text_template,
+            priority=1,
+            modifiers=[],
+        )
+
+        manager = InsightManager([insight])
+        result = manager.evaluate(
+            "pro_123456", start=date(2019, 10, 28), end=date(2019, 11, 3)
+        )
+        expected = [
+            (
+                "USV to INQ",
+                "USV to INQ is above target for Project pro_123456 date: 2019-10-28 - 2019-11-03",
+            )
+        ]
+        self.assertCountEqual(result, expected)
+
+    def test_modifier_changing_result(self):
+        modifier = Modifier(
+            name="INQ Volume",
+            trigger=lambda *args: {},
+            text_template=lambda *args: "USV to INQ is above target. Expect INQ volumes to be Above target.",
+        )
+        insight = Insight(
+            name="USV to INQ",
+            trigger=lambda *args: {},
+            text_template=lambda *args: "USV to INQ is above target",
+            priority=1,
+            modifiers=[modifier],
+        )
+
+        manager = InsightManager([insight])
+        result = manager.evaluate(
+            "projects_id", start=date(2019, 10, 28), end=date(2019, 11, 3)
+        )
+        expected = [
+            (
+                "USV to INQ",
+                "USV to INQ is above target. Expect INQ volumes to be Above target.",
+            )
+        ]
+        self.assertCountEqual(result, expected)
+
+    def test_modifier_called_once(self):
+        trigger_mock = mock.MagicMock(return_value={})
+        modifier = Modifier(
+            name="USV Volume",
+            trigger=trigger_mock,
+            text_template=lambda *args: "USV to INQ is above target. Expect USV volumes to be Above target.",
+        )
+        insight1 = Insight(
+            name="USV to INQ",
+            trigger=lambda *args: {},
+            text_template=lambda *args: "USV to INQ is above target",
+            priority=1,
+            modifiers=[modifier],
+        )
+        insight2 = Insight(
+            name="USV to EXE",
+            trigger=lambda *args: {},
+            text_template=lambda *args: "USV to EXE is above target",
+            priority=2,
+            modifiers=[modifier],
+        )
+
+        manager = InsightManager([insight1, insight2])
+        result = manager.evaluate(
+            "projects_id", start=date(2019, 10, 28), end=date(2019, 11, 3)
+        )
+        expected = [
+            (
+                "USV to INQ",
+                "USV to INQ is above target. Expect USV volumes to be Above target.",
+            ),
+            (
+                "USV to EXE",
+                "USV to EXE is above target"
+            )
+        ]
+        trigger_mock.assert_called_once()
         self.assertCountEqual(result, expected)
