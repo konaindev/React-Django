@@ -91,6 +91,8 @@ COUNTRY_LIST = [
 ]
 
 
-PHONE_REGEX = re.compile(r"^\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$")
+# PHONE_REGEX = re.compile(r"^\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$")
+PHONE_REGEX = re.compile(r"(^\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$)|(^[0-9-+ ]+$)")
+COUNTRY_CODE_REGEX = re.compile(r"^(\+?\d{1,3}|\d{1,4})$")
 ZIP_REGEX = re.compile(r"(\d{5}(-\d{4})?$)|(^([A-PR-UWYZ]([0-9]{1,2}|([A-HK-Y][0-9]|[A-HK-Y][0-9]([0-9]|[ABEHMNPRV-Y]))|[0-9][A-HJKS-UW])\ [0-9][ABD-HJLNP-UW-Z]{2}|(GIR\ 0AA)|(SAN\ TA1)|(BFPO\ (C\/O\ )?[0-9]{1,4})|((ASCN|BBND|[BFS]IQQ|PCRN|STHL|TDCU|TKCA)\ 1ZZ))$)")
 STREET_REGEX = re.compile(r"^\s*\S+(?:\s+\S+){2}")
