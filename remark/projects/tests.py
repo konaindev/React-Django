@@ -1410,7 +1410,7 @@ class PropertyStyleTestCase(TestCase):
     def test_is_tower_block(self):
         build_1 = Building(
             property=self.property,
-            building_identifier="building identifier",
+            building_identifier="building identifier 1",
             number_of_floors=10,
             has_elevator=False,
             number_of_units=10,
@@ -1419,7 +1419,7 @@ class PropertyStyleTestCase(TestCase):
 
         build_2 = Building(
             property=self.property,
-            building_identifier="building identifier",
+            building_identifier="building identifier 2",
             number_of_floors=1,
             has_elevator=True,
             number_of_units=10,
@@ -1431,7 +1431,7 @@ class PropertyStyleTestCase(TestCase):
     def test_is_garden(self):
         build_1 = Building(
             property=self.property,
-            building_identifier="building identifier",
+            building_identifier="building identifier 1",
             number_of_floors=9,
             has_elevator=True,
             number_of_units=10,
@@ -1440,7 +1440,7 @@ class PropertyStyleTestCase(TestCase):
 
         build_2 = Building(
             property=self.property,
-            building_identifier="building identifier",
+            building_identifier="building identifier 2",
             number_of_floors=1,
             has_elevator=False,
             number_of_units=10,
