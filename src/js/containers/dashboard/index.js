@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import DashboardPage from "../../components/dashboard_page";
 import { withRouter } from "react-router-dom";
-import { dashboard } from "../../state/actions";
+import { dashboard } from "../../redux_base/actions";
 
 class DashboardContainer extends PureComponent {
   componentWillMount() {
@@ -17,7 +17,7 @@ class DashboardContainer extends PureComponent {
 const mapState = state => {
   const newState = { ...state.general };
 
-  console.log("state----->", newState);
+  console.log("dashboard state----->", newState);
   return {
     ...state.general
   };

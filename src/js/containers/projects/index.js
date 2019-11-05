@@ -1,61 +1,99 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import { ProjectPage } from "../../components/project_page";
-import BaselineReportPage from "../../components/baseline_report_page";
-import MarketReportPage from "../../components/market_report_page";
-import PerformanceReportPage from "../../components/performance_report_page";
-import CampaignPlanPage from "../../components/campaign_plan_page";
-import ModelingPage from "../../components/modeling_report_page";
+import _get from "lodash/get";
+
+import ProjectReportPage from "../../components/project_report_page";
+import {
+  projectOverallRequest,
+  projectReportsRequest
+} from "../../redux_base/actions";
 
 class ProjectsContainer extends PureComponent {
-  pickTab() {
-    const { pathname } = this.props.location;
-    const parts = pathname.split("/");
+  state = {};
 
-    let tab = null;
-    if (parts.length < 6) {
-      tab = parts[parts.length - 2];
-    } else {
-      tab = parts[parts.length - 3];
+  componentDidMount() {
+    this.setState({
+      reportType: null,
+      reportSpan: null,
+      projectData: false,
+      reportData: false,
+      loadingReports: true
+    });
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const { projectId, reportType, reportSpan } = nextProps.match.params;
+    let newState = {};
+
+    if (!nextProps.loadingReports) {
+      newState["loadingReports"] = false;
     }
-    switch (tab) {
-      case "baseline":
-        return <BaselineReportPage {...this.props} />;
-      case "performance":
-        return <PerformanceReportPage {...this.props} />;
-      case "modeling":
-        return <ModelingPage {...this.props} />;
-      case "campaign_plan":
-        return <CampaignPlanPage {...this.props} />;
-      case "market":
-        return (
-          <MarketReportPage
-            {...Object.assign({}, this.props, this.props.hell.market)}
-          />
-        );
-      default:
-        return <BaselineReportPage {...this.props} />;
+
+    if (nextProps.project !== prevState.projectData) {
+      newState["projectData"] = nextProps.project;
+    }
+
+    if (nextProps.report !== prevState.reportData) {
+      newState["reportData"] = nextProps.report;
+      newState["reportType"] = reportType;
+      newState["reportSpan"] = reportSpan;
+    }
+
+    if (projectId !== prevState.projectId) {
+      nextProps.dispatch(projectOverallRequest(projectId));
+      newState["projectId"] = projectId;
+    }
+
+    if (
+      reportType !== prevState.reportType ||
+      reportSpan !== prevState.reportSpan
+    ) {
+      nextProps.dispatch(
+        projectReportsRequest(projectId, reportType, reportSpan)
+      );
+      newState["loadingReports"] = true;
+    }
+
+    if (Object.keys(newState).length > 0) {
+      return newState;
+    } else {
+      return null;
     }
   }
+
+  fetchProjectData(projectId) {
+    this.props.dispatch(projectOverallRequest(projectId));
+  }
+
   render() {
-    return this.pickTab();
+    const {
+      reportType,
+      reportSpan,
+      projectData,
+      reportData,
+      loadingReports
+    } = this.state;
+
+    return (
+      <ProjectReportPage
+        share_info={this.props.share_info}
+        project={projectData}
+        report={reportData}
+        reportType={reportType}
+        reportSpan={reportSpan}
+        loadingReports={loadingReports}
+        historyPush={this.props.history.push}
+      />
+    );
   }
 }
 
-const mapState = state => {
-  let newState = {
-    ...state.network,
-    ...state.project,
-    user: state.user,
-    hell: {
-      market: state.market
-    },
-    kpi: state.kpi
-  };
-  newState.project = state.project.project;
-  console.log("project CONTAINER map state", newState);
-  return newState;
-};
+const mapState = state => ({
+  project: state.projectReports.project,
+  report: state.projectReports.reports,
+  loadingProject: state.projectReports.loadingProject,
+  loadingReports: state.projectReports.loadingReports
+});
 
 export default withRouter(connect(mapState)(ProjectsContainer));

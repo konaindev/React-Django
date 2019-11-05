@@ -1,5 +1,5 @@
-import { call, put, takeLatest } from "redux-saga/effects";
-import { networking, token, auth } from "../../state/actions";
+import { all, call, put, takeLatest } from "redux-saga/effects";
+import { networking, token, auth } from "../../redux_base/actions";
 import { axiosGet, axiosPost } from "../api";
 
 /**
@@ -66,6 +66,7 @@ function handleError(action) {
 }
 function* get(action) {
   try {
+    yield put(networking.startFetching(action.branch));
     const response = yield call(axiosGet, action.url);
     yield checkStatus(response);
     yield put(networking.results(response.data, action.branch));
@@ -94,4 +95,6 @@ function* postSaga() {
   yield takeLatest("FETCH_API_POST", post);
 }
 
-export default [getSaga, postSaga];
+export default function*() {
+  yield all([getSaga(), postSaga()]);
+}

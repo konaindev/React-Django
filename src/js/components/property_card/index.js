@@ -17,14 +17,14 @@ export const PropertyCard = ({
   address,
   image_url,
   performance_rating,
-  url,
+  report_url,
   members,
   selected,
   onSelect
 }) => {
   const handleToggle = () => {
     console.log("------> handle toggle", onSelect);
-    onSelect(property_id, !selected);
+    onSelect(public_id, !selected);
   };
   const imageStyle = {};
   if (image_url) {
@@ -43,10 +43,7 @@ export const PropertyCard = ({
               <div className="property-card__selector" onClick={handleToggle}>
                 <Tick className="property-card__selector-tick" />
               </div>
-              <Link
-                className="property-card__overlay-link"
-                to={`/projects/${public_id}`}
-              >
+              <Link className="property-card__overlay-link" to={report_url}>
                 <Button color="outline">View Report</Button>
               </Link>
             </div>
@@ -69,13 +66,12 @@ export const PropertyCard = ({
 };
 
 PropertyCard.requiredPropTypes = {
-  property_id: PropTypes.string.isRequired,
+  public_id: PropTypes.string.isRequired,
   property_name: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
   image_url: PropTypes.string.isRequired,
   performance_rating: PropTypes.number.isRequired,
-  members: PropTypes.array,
-  url: PropTypes.string.isRequired
+  members: PropTypes.array
 };
 
 PropertyCard.propTypes = {

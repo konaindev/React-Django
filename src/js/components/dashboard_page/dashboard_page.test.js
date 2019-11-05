@@ -1,7 +1,7 @@
 import renderer from "react-test-renderer";
 import { Provider } from "react-redux";
 
-import storeFunc from "../../state/store";
+import storeFunc from "../../redux_base/store";
 
 import DashboardPage from "./index";
 import { props } from "./props";

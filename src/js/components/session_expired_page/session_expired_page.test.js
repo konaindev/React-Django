@@ -2,7 +2,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
 
-import storeFunc from "../../state/store";
+import storeFunc from "../../redux_base/store";
 import SessionExpired from "./index";
 
 const { store } = storeFunc();

@@ -16,36 +16,15 @@ import ToggleButton from "../toggle_button";
 import InviteModal from "../invite_modal";
 import { Close, ListView, TileView } from "../../icons";
 import Loader from "../loader";
-import UserMenu from "../user_menu";
 
 import { qsParse, qsStringify } from "../../utils/misc";
 import TutorialView from "../tutorial_view";
-import {
-  networking,
-  inviteModal,
-  general,
-  dashboard
-} from "../../state/actions";
+import { inviteModal, general, dashboard } from "../../redux_base/actions";
 import "./dashboard_page.scss";
-import { nav } from "../../state/actions";
-const navLinks = {
-  links: [
-    {
-      id: "portfolio",
-      name: "Portfolio",
-      url: "/dashboard"
-    },
-    {
-      id: "portfolio-analysis",
-      name: "Portfolio Analysis",
-      url: "/portfolio"
-    }
-  ],
-  selected_link: "portfolio"
-};
 
 export class DashboardPage extends React.PureComponent {
   static propTypes = {
+    isFetching: PropTypes.bool.isRequired,
     properties: PropTypes.array.isRequired,
     funds: PropTypes.array.isRequired,
     asset_managers: PropTypes.array.isRequired,
@@ -59,8 +38,7 @@ export class DashboardPage extends React.PureComponent {
     selectedProperties: [],
     viewType: "tile",
     filters: {},
-    onChangeFilter: () => {},
-    navLinks: navLinks
+    onChangeFilter: () => {}
   };
 
   static buttonOptions = [
@@ -74,17 +52,11 @@ export class DashboardPage extends React.PureComponent {
     }
   ];
 
-  /*
-    showLoader (called in componentDidUpdate):
-      This was a hacky fix a spinner issue (lag between when data was available and when 'isFetching' is set to false resulting in prior page displaying before re-render); 
-      showLoader represents a delayed replica of is (waits 300 ms before updating component)
-  */
   constructor(props) {
     super(props);
     this.state = {
       viewType: props.viewType,
-      isShowAddPropertyForm: false,
-      showLoader: false
+      isShowAddPropertyForm: false
     };
   }
 
@@ -113,17 +85,6 @@ export class DashboardPage extends React.PureComponent {
     this.props.onChangeFilter(filters);
   };
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.isFetching && !this.props.isFetching) {
-      setTimeout(() => {
-        this.setState({ showLoader: false });
-      }, process.env.LOADER_TIMEOUT || 300);
-    }
-    if (!prevProps.isFetching && this.props.isFetching) {
-      this.setState({ showLoader: true });
-    }
-  }
-
   toggleView = viewType => this.setState({ viewType });
 
   onSelectHandler = selectedProperties => {
@@ -150,20 +111,11 @@ export class DashboardPage extends React.PureComponent {
     states
   };
 
-  getHeaderItems() {
-    if (this.props.user) {
-      return <UserMenu {...this.props.user} />;
-    }
-    return null;
-  }
-
   render() {
     const className = cn("dashboard-content", {
       "dashboard-content--selection-mode": this.props.selectedProperties.length
     });
-    const { user } = this.props;
     const PropertiesListComponent = this.propertiesListComponent;
-    const navLinks = this.props.navLinks;
     const { isFetching } = this.props;
     return (
       <div>
@@ -215,15 +167,12 @@ export class DashboardPage extends React.PureComponent {
               </div>
             </div>
             <div className="dashboard-content__properties">
-              {this.state.showLoader ? (
-                <Loader isShow={true} />
-              ) : (
-                <PropertiesListComponent
-                  properties={this.props.properties}
-                  selectedProperties={this.props.selectedProperties}
-                  onSelect={this.onSelectHandler}
-                />
-              )}
+              <Loader isVisible={isFetching} />
+              <PropertiesListComponent
+                properties={this.props.properties}
+                selectedProperties={this.props.selectedProperties}
+                onSelect={this.onSelectHandler}
+              />
             </div>
           </Container>
           <AddPropertyModal
@@ -329,7 +278,7 @@ export class UrlQueryLayer extends React.PureComponent {
       }
     });
 
-    let queryStringForAjax = qsStringify({ ...urlParams, ajax: "true" });
+    let queryStringForAjax = qsStringify(urlParams);
 
     this.props.history.push(queryStringForAjax);
     console.log("---------onChangeFilter for dashboard", queryStringForAjax);
@@ -337,7 +286,24 @@ export class UrlQueryLayer extends React.PureComponent {
   };
 
   render() {
-    if (this.props.no_projects || !this.props.properties) {
+    const { isFetching, no_projects } = this.props;
+
+    if (no_projects === false) {
+      return (
+        <DashboardPage
+          {...this.props}
+          filters={this.state}
+          onChangeFilter={this.onChangeFilter}
+        />
+      );
+    } else if (isFetching && no_projects === undefined) {
+      // first API call is in progress
+      return (
+        <div className="dashboard-content">
+          <Loader isVisible />
+        </div>
+      );
+    } else {
       return (
         <div className="dashboard-content">
           <p>
@@ -347,13 +313,6 @@ export class UrlQueryLayer extends React.PureComponent {
         </div>
       );
     }
-    return (
-      <DashboardPage
-        {...this.props}
-        filters={this.state}
-        onChangeFilter={this.onChangeFilter}
-      />
-    );
   }
 }
 

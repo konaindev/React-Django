@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { components } from "react-select";
-import { auth } from "../../state/actions";
+import { auth } from "../../redux_base/actions";
 import Select from "../select";
 import { LogOut } from "../../icons";
 import { connect } from "react-redux";
