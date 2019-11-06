@@ -103,7 +103,6 @@ export default class Profile extends React.PureComponent {
     profile.office_type = this.props.office_options.filter(
       i => i.value === profile.office_type
     )[0];
-    profile.office_state = undefined;
     return profile;
   }
 
@@ -467,7 +466,7 @@ export default class Profile extends React.PureComponent {
                           valueFormatter={
                             values.phone_country_code == "1" ||
                             (this.selectedCountry == "USA" &&
-                              !values.phone_ext_country_code)
+                              !values.phone_country_code)
                               ? formatPhone
                               : undefined
                           }
