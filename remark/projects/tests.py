@@ -15,13 +15,17 @@ from remark.geo.mocks import mocked_geocode
 from remark.geo.models import Address
 from remark.users.models import Account, User
 from remark.lib.metrics import BareMultiPeriod
-from remark.email_app.invites.added_to_property import send_invite_email, get_template_vars
+from remark.email_app.invites.added_to_property import (
+    send_invite_email,
+    get_template_vars,
+)
 
 from .models import Fund, LeaseStage, Period, Project, Property, TargetPeriod
 from .reports.periods import ComputedPeriod
 from .reports.performance import PerformanceReport
 from .export import export_periods_to_csv, export_periods_to_excel
 from remark.settings import BASE_URL
+
 
 def create_project(project_name="project 1"):
     address = Address.objects.create(
@@ -593,7 +597,7 @@ class ExportTestCase(TestCase):
                 self.assertEqual(
                     ws_periods.cell(row=row, column=col).value,
                     response_ws.cell(row=row, column=col).value,
-                    f"row: {row}, column: {col}"
+                    f"row: {row}, column: {col}",
                 )
 
 
@@ -614,8 +618,10 @@ class OnboardingWorkflowTestCase(TestCase):
         self.url = reverse("add_members")
 
     @mock.patch("remark.users.views.geocode", side_effect=mocked_geocode)
-    @mock.patch("remark.projects.views.send_invite_email.apply_async",
-                side_effect=send_invite_email.apply)
+    @mock.patch(
+        "remark.projects.views.send_invite_email.apply_async",
+        side_effect=send_invite_email.apply,
+    )
     @mock.patch("remark.email_app.invites.added_to_property.send_email")
     def test_invite_new_user(self, mock_send_email, *args):
         params = {
@@ -671,23 +677,21 @@ class OnboardingWorkflowTestCase(TestCase):
         project_users = project.view_group.user_set.all()
         self.assertEqual(project_users[0].public_id, user.public_id)
 
-    @mock.patch("remark.projects.views.send_invite_email.apply_async",
-                side_effect=send_invite_email.apply)
+    @mock.patch(
+        "remark.projects.views.send_invite_email.apply_async",
+        side_effect=send_invite_email.apply,
+    )
     @mock.patch("remark.email_app.invites.added_to_property.send_email")
     def test_invite_existing_user(self, mock_send_email, _):
         user = User.objects.create_user(
             email="test@remarkably.io",
             password="testpassword",
-            activated=datetime.datetime(2019, 10, 11, 0, 0)
+            activated=datetime.datetime(2019, 10, 11, 0, 0),
         )
         params = {
             "projects": [{"property_id": self.project.public_id}],
             "members": [
-                {
-                    "label": user.email,
-                    "value": user.public_id,
-                    "__isNew__": False,
-                }
+                {"label": user.email, "value": user.public_id, "__isNew__": False}
             ],
         }
         response = self.client.post(self.url, json.dumps(params), "json")
@@ -706,11 +710,10 @@ class GetTemplateVarsTestCase(TestCase):
         user = User.objects.create_user(
             email="test@remarkably.io",
             password="testpassword",
-            activated=datetime.datetime(2019, 10, 11, 0, 0)
+            activated=datetime.datetime(2019, 10, 11, 0, 0),
         )
         new_user = User.objects.create_user(
-            email="test_new@remarkably.io",
-            password="testpassword",
+            email="test_new@remarkably.io", password="testpassword"
         )
         self.user = user
         self.new_user = new_user
@@ -726,12 +729,14 @@ class GetTemplateVarsTestCase(TestCase):
             "is_portfolio": False,
             "is_new_account": True,
             "property_name": "project 1",
-            "properties": [{
-                "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
-                "title": "project 1",
-                "address": "Seattle, WA",
-                "view_link": f"{BASE_URL}/projects/{self.project.public_id}/market/",
-            }],
+            "properties": [
+                {
+                    "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
+                    "title": "project 1",
+                    "address": "Seattle, WA",
+                    "view_link": f"{BASE_URL}/projects/{self.project.public_id}/market/",
+                }
+            ],
             "more_count": None,
             "main_button_link": f"{BASE_URL}/users/create-password/{self.new_user.public_id}",
             "main_button_label": "Create Account",
@@ -747,17 +752,20 @@ class GetTemplateVarsTestCase(TestCase):
             "is_portfolio": False,
             "is_new_account": True,
             "property_name": "",
-            "properties": [{
-                "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
-                "title": "project 1",
-                "address": "Seattle, WA",
-                "view_link": f"{BASE_URL}/projects/{self.projects[0].public_id}/market/",
-            },{
-                "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
-                "title": "project 2",
-                "address": "Seattle, WA",
-                "view_link": f"{BASE_URL}/projects/{self.projects[1].public_id}/market/",
-            }],
+            "properties": [
+                {
+                    "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
+                    "title": "project 1",
+                    "address": "Seattle, WA",
+                    "view_link": f"{BASE_URL}/projects/{self.projects[0].public_id}/market/",
+                },
+                {
+                    "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
+                    "title": "project 2",
+                    "address": "Seattle, WA",
+                    "view_link": f"{BASE_URL}/projects/{self.projects[1].public_id}/market/",
+                },
+            ],
             "more_count": None,
             "main_button_link": f"{BASE_URL}/users/create-password/{self.new_user.public_id}",
             "main_button_label": "Create Account",
@@ -773,12 +781,14 @@ class GetTemplateVarsTestCase(TestCase):
             "is_portfolio": False,
             "is_new_account": False,
             "property_name": "project 1",
-            "properties": [{
-                "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
-                "title": "project 1",
-                "address": "Seattle, WA",
-                "view_link": f"{BASE_URL}/projects/{self.project.public_id}/market/",
-            }],
+            "properties": [
+                {
+                    "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
+                    "title": "project 1",
+                    "address": "Seattle, WA",
+                    "view_link": f"{BASE_URL}/projects/{self.project.public_id}/market/",
+                }
+            ],
             "more_count": None,
             "main_button_link": f"{BASE_URL}/projects/{self.project.public_id}/market/",
             "main_button_label": "View Property",
@@ -794,17 +804,20 @@ class GetTemplateVarsTestCase(TestCase):
             "is_portfolio": False,
             "is_new_account": False,
             "property_name": "",
-            "properties": [{
-                "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
-                "title": "project 1",
-                "address": "Seattle, WA",
-                "view_link": f"{BASE_URL}/projects/{self.projects[0].public_id}/market/",
-            }, {
-                "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
-                "title": "project 2",
-                "address": "Seattle, WA",
-                "view_link": f"{BASE_URL}/projects/{self.projects[1].public_id}/market/",
-            }],
+            "properties": [
+                {
+                    "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
+                    "title": "project 1",
+                    "address": "Seattle, WA",
+                    "view_link": f"{BASE_URL}/projects/{self.projects[0].public_id}/market/",
+                },
+                {
+                    "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
+                    "title": "project 2",
+                    "address": "Seattle, WA",
+                    "view_link": f"{BASE_URL}/projects/{self.projects[1].public_id}/market/",
+                },
+            ],
             "more_count": None,
             "main_button_link": f"{BASE_URL}/dashboard",
             "main_button_label": "View All Properties",
