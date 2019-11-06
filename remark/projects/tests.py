@@ -609,7 +609,7 @@ class ExportTestCase(TestCase):
 
 class OnboardingWorkflowTestCase(TestCase):
     def setUp(self):
-        user = User.objects.create_superuser(
+        user = User.objects.create_user(
             email="admin@remarkably.io", password="adminpassword"
         )
         project, _ = create_project()
@@ -624,6 +624,7 @@ class OnboardingWorkflowTestCase(TestCase):
         self.url = reverse("add_members")
 
     @mock.patch("remark.users.views.geocode", side_effect=mocked_geocode)
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
     @mock.patch(
         "remark.projects.views.send_invite_email.apply_async",
         side_effect=send_invite_email.apply,
@@ -683,12 +684,13 @@ class OnboardingWorkflowTestCase(TestCase):
         project_users = project.view_group.user_set.all()
         self.assertEqual(project_users[0].public_id, user.public_id)
 
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
     @mock.patch(
         "remark.projects.views.send_invite_email.apply_async",
         side_effect=send_invite_email.apply,
     )
     @mock.patch("remark.email_app.invites.added_to_property.send_email")
-    def test_invite_existing_user(self, mock_send_email, _):
+    def test_invite_existing_user(self, mock_send_email, *args):
         user = User.objects.create_user(
             email="test@remarkably.io",
             password="testpassword",
