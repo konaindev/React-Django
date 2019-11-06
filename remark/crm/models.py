@@ -74,6 +74,13 @@ class Business(models.Model):
         default=False, help_text="Business Type is Developer"
     )
 
+    is_vendor = models.BooleanField(
+        default=False
+    )
+    is_investor = models.BooleanField(
+        default=False
+    )
+
     def get_roles(self):
         roles = []
         for k in BUSINESS_ROLES:
@@ -147,11 +154,15 @@ class Person(models.Model):
 
     email = models.CharField(max_length=255, blank=False, help_text="Email")
 
+    office_phone_country_code = models.CharField(max_length=5, blank=True, help_text="Office phone country code")
+
     office_phone = models.CharField(
         max_length=255, blank=True, help_text="Office Phone"
     )
 
-    cell_phone = models.CharField(max_length=255, blank=True, help_text="Cell Phone")
+    office_phone_ext = models.CharField(max_length=255, blank=True, help_text="Phone extension")
+
+    # cell_phone = models.CharField(max_length=255, blank=True, help_text="Cell Phone")
 
     office = models.ForeignKey(
         "crm.Office",
