@@ -2,6 +2,7 @@ export const COUNTRY_FIELDS = {
   USA: {
     full_name: "United States of America",
     short_name: "USA",
+    iso2: "US",
     address_fields: {
       city: "city",
       state: "state",
@@ -12,6 +13,7 @@ export const COUNTRY_FIELDS = {
   GBR: {
     full_name: "United Kingdom",
     short_name: "GBR",
+    iso2: "GB",
     address_fields: {
       city: "postal town",
       state: "county",
