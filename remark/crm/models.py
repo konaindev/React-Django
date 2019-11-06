@@ -73,14 +73,7 @@ class Business(models.Model):
     is_developer = models.BooleanField(
         default=False, help_text="Business Type is Developer"
     )
-
-    is_vendor = models.BooleanField(
-        default=False
-    )
-    is_investor = models.BooleanField(
-        default=False
-    )
-
+    
     def get_roles(self):
         roles = []
         for k in BUSINESS_ROLES:
