@@ -289,7 +289,11 @@ class AccountProfileView(LoginRequiredMixin, RemarkView):
             setattr(business, BUSINESS_TYPE[role], True)
         business.save()
 
-        person = user.get_person()
+        try:
+            person = user.person
+        except Person.DoesNotExist:
+            person = {}
+            
         if not person:
             person = Person(user=user, email=user.email)
         person.first_name = data["first_name"]

@@ -320,6 +320,7 @@ class AccountSecurityTestCase(TestCase):
         self.assertIsNotNone(errors["password"])
         user = User.objects.get(public_id=self.user.public_id)
         self.assertTrue(user.check_password("testpassword"))
+        
 class CompleteAccountTestCase(TestCase):
     def setUp(self):
         self.user = User.objects.create_user(

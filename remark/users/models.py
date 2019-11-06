@@ -173,14 +173,14 @@ class User(PermissionsMixin, AbstractBaseUser):
             name = self.email
         return name
 
-    def get_person(self):
-        return self.person_set.first()
-
     def get_avatar_url(self):
-        person = self.get_person()
-        if person and person.avatar:
-            url = person.avatar.url
-        else:
+        try:
+            person = self.person
+            if person and person.avatar:
+                url = person.avatar.url
+            else:
+                url = ""
+        except Person.DoesNotExist:
             url = ""
         return url
 
@@ -194,8 +194,11 @@ class User(PermissionsMixin, AbstractBaseUser):
         }
 
     def get_profile_data(self):
-        person = self.get_person()
-        if not person:
+        try:
+            person = self.person
+            if not person:
+                return {}
+        except Person.DoesNotExist:
             return {}
         office = person.office
         business = office.business

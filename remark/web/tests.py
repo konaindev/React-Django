@@ -270,11 +270,8 @@ class PropertyListTestCase(TestCase):
                 "logout_url": "/users/logout/",
                 "account_settings_url": "/users/account-settings",
                 "user_id": self.user.public_id,
-<<<<<<< HEAD
-                'profile_image_url': '',
-=======
+                "profile_image_url": "",
                 "is_superuser":  self.user.is_superuser,
->>>>>>> fd6669779bafdf97360b34ce540173ad22531220
             },
         }
 
