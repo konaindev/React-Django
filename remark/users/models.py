@@ -155,29 +155,15 @@ class User(PermissionsMixin, AbstractBaseUser):
         data = {
             "email": self.email,
             "user_id": self.public_id,
-<<<<<<< HEAD
-            "account_id": self.account_id,
-            "account_name": self.account.company_name,
             "logout_url": reverse("logout"),
             "profile_image_url": self.get_avatar_url(),
-=======
             "account_name": self.get_name(),
-            "logout_url": reverse("logout"),
             "is_superuser": self.is_superuser,
             # TODO: Add account_url
->>>>>>> fd6669779bafdf97360b34ce540173ad22531220
         }
         if not self.is_superuser:
             data["account_settings_url"] = reverse("account_settings")
         return data
-
-    def get_role(self):
-        try:
-            person = self.person
-            role = person.role
-        except Person.DoesNotExist:
-            role = "member"
-        return role
 
     def get_name(self):
         try:
@@ -187,7 +173,6 @@ class User(PermissionsMixin, AbstractBaseUser):
             name = self.email
         return name
 
-<<<<<<< HEAD
     def get_person(self):
         return self.person_set.first()
 
@@ -199,20 +184,13 @@ class User(PermissionsMixin, AbstractBaseUser):
             url = ""
         return url
 
-    def get_icon_dict(self):
-=======
     def get_icon_dict(self, role=PROJECT_ROLES["member"]):
->>>>>>> fd6669779bafdf97360b34ce540173ad22531220
         return {
             "email": self.email,
             "user_id": self.public_id,
             "account_name": self.get_name(),
-<<<<<<< HEAD
-            "role": self.get_role(),
             "profile_image_url": self.get_avatar_url(),
-=======
             "role": role,
->>>>>>> fd6669779bafdf97360b34ce540173ad22531220
         }
 
     def get_profile_data(self):
