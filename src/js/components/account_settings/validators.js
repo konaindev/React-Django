@@ -71,11 +71,11 @@ const profileSchema = Yup.object().shape({
       then: Yup.string().matches(usPhoneRegex, {
         message: invalidPhoneMessage,
         excludeEmptyString: true
+      }),
+      otherwise: Yup.string().matches(genericPhoneRegex, {
+        message: "Invalid Phone number",
+        excludeEmptyString: true
       })
-      // otherwise: Yup.string().matches(genericPhoneRegex, {
-      //   message: "Invalid Phone number",
-      //   excludeEmptyString: true
-      // })
     })
     .label("Phone number"),
   phone_ext: Yup.string().label("Phone ext"),

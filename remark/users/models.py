@@ -5,11 +5,12 @@ from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.utils.crypto import get_random_string
 from django.urls import reverse
+import json
 
 from remark.lib.tokens import public_id
 from remark.lib.fields import NormalizedEmailField
 from remark.projects.models import Project
-from .constants import ACCOUNT_TYPE
+from .constants import ACCOUNT_TYPE, US_COUNTRY_ID, GB_COUNTRY_ID, US_STATE_LIST, GB_COUNTY_LIST
 
 
 def usr_public_id():
@@ -209,15 +210,32 @@ class User(PermissionsMixin, AbstractBaseUser):
             "first_name": person.first_name,
             "last_name": person.last_name,
             "title": person.role,
+            "phone_country_code": person.office_phone_country_code,
             "phone": person.office_phone,
             "phone_ext": person.office_phone_ext,
             "company": business.name,
             "company_roles": business.get_roles(),
             "office_address": office.address.formatted_address,
+            "office_street": office.address.street_address_1,
+            "office_city": office.address.city,
+            "office_state": {"label": office.address.full_state, "value": office.address.full_state},
+            "office_zip": office.address.zip_code,
+            "office_country": self.get_country_object(office.address.country),
             "office_name": office.name,
             "office_type": office.office_type,
         }
 
+    def get_country_object(self, value):
+        with open('./data/locations/countries.json', 'r') as read_file:
+            countries = json.load(read_file)
+            for country in countries:
+                if country["iso2"] == value:
+                    country_object = {
+                        "label": country["name"],
+                        "value": country["iso3"]
+                    }
+                    return country_object
+        
 
 class Account(models.Model):
     company_name = models.CharField(max_length=250, help_text="Company Name")
