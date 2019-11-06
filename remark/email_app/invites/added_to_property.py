@@ -28,6 +28,25 @@ def send_invite_email(inviter_name, user_id, projects_ids, max_count=5):
     )
 
 
+@shared_task
+def send_create_account_email(user_id):
+    user = User.objects.get(id=user_id)
+    template = get_template("email_welcome_create_account/index.mjml")
+    template_vars = {
+        "email_title": "Welcome",
+        "email_preview": "Welcome to Remarkably",
+        "create_account_link": f"{BASE_URL}{reverse('create_password', kwargs={'hash': user.public_id})}"
+    }
+    html_content = template.render(template_vars)
+    send_email(
+        from_email=(HELLO_EMAIL, DEFAULT_FROM_NAME),
+        reply_to=(SUPPORT_EMAIL, DEFAULT_FROM_NAME),
+        to_emails=user.email,
+        subject="Welcome to Remarkably",
+        html_content=html_content
+    )
+
+
 def get_template_vars(inviter_name, user, projects, max_count):
     is_new_account = user.activated is None
     properties = []

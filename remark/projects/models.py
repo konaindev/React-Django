@@ -502,6 +502,21 @@ class Project(models.Model):
         ] + [user.get_icon_dict(PROJECT_ROLES["admin"]) for user in users_admins if not user.is_staff]
         return users
 
+    def has_members(self):
+        if self.view_group is None:
+            users_members = []
+        else:
+            users_members = self.view_group.user_set.filter(is_staff=False)
+        if self.admin_group is None:
+            users_admins = []
+        else:
+            users_admins = self.admin_group.user_set.filter(is_staff=False)
+
+        if len(users_members) == 0 and len(users_admins) == 0:
+            return False
+        else:
+            return True
+
     def get_project_public_id(self):
         return self.public_id
 
