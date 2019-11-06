@@ -4,8 +4,7 @@ import { COUNTRY_CODE_REGEX } from "../../constants";
 export const MAX_AVATAR_SIZE = 3 * 1024 * 1024; // Bytes in 3MB
 
 const usPhoneRegex = /^\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$/;
-const genericPhoneRegex = /^[0-9-+ ]+$/;
-const phoneRegex = /(^\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$)|(^[0-9-+ ]+$)/;
+const genericPhoneRegex = /^(?=.*[0-9])[- +()0-9]{8,15}$/;
 const invalidPhoneMessage = "${path} should match format (XXX) XXX-XXXX";
 
 export const zipRegex = /^\d{5}(?:[-\s]\d{4})?$/;
@@ -66,7 +65,10 @@ const profileSchema = Yup.object().shape({
   phone: Yup.string()
     .when(["phone_country_code", "office_country"], {
       is: (phone_country_code, office_country) => {
-        phone_country_code == "1" || office_country.value == "USA";
+        return (
+          phone_country_code == "1" ||
+          (office_country.value == "USA" && phone_country_code == undefined)
+        );
       },
       then: Yup.string().matches(usPhoneRegex, {
         message: invalidPhoneMessage,
