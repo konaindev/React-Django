@@ -37,21 +37,12 @@ export class LargeBoxLayout extends Component {
     tooltip: PropTypes.node
   };
 
-  checkInnerBox = innerBox => {
-    if (innerBox) {
-      return innerBox.props.children.some(item => {
-        return item != false;
-      });
-    }
-    return false;
-  };
-
   render() {
     const { name, content, innerBox, detail, detail2, tooltip } = this.props;
     const contentValue = (
       <span className="large-box__content-value">{content}</span>
     );
-    const displayInnerBox = this.checkInnerBox(innerBox);
+
     return (
       <Panel className="large-box">
         {/* Container for the content itself.
@@ -66,12 +57,12 @@ export class LargeBoxLayout extends Component {
           ) : (
             contentValue
           )}
-          {displayInnerBox && (
+          {innerBox && (
             <div className="large-box__content-extra">{innerBox}</div>
           )}
         </div>
-        <span className="large-box__bottom-line">{detail}</span>
-        <span className="large-box__bottom-line">{detail2}</span>
+        <p className="large-box__bottom-line">{detail}</p>
+        <p className="large-box__bottom-line">{detail2}</p>
       </Panel>
     );
   }

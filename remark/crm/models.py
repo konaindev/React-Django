@@ -81,6 +81,14 @@ class Business(models.Model):
                 roles.append(BUSINESS_ROLES[k])
         return roles
 
+    is_investor = models.BooleanField(
+        default=False, help_text="Business Type is JV / Investor"
+    )
+
+    is_vendor = models.BooleanField(
+        default=False, help_text="Business Type is Vendor / Consultant"
+    )
+
     def __str__(self):
         return self.name
 
@@ -164,7 +172,7 @@ class Person(models.Model):
         help_text="Office the person works at",
     )
 
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         "users.User",
         on_delete=models.CASCADE,
         null=True,

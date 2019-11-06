@@ -10,7 +10,8 @@ import json
 from remark.lib.tokens import public_id
 from remark.lib.fields import NormalizedEmailField
 from remark.projects.models import Project
-from .constants import ACCOUNT_TYPE, US_COUNTRY_ID, GB_COUNTRY_ID, US_STATE_LIST, GB_COUNTY_LIST
+from .constants import ACCOUNT_TYPE, PROJECT_ROLES, US_COUNTRY_ID, GB_COUNTRY_ID, US_STATE_LIST, GB_COUNTY_LIST
+from remark.crm.models import Person
 
 
 def usr_public_id():
@@ -154,31 +155,39 @@ class User(PermissionsMixin, AbstractBaseUser):
         data = {
             "email": self.email,
             "user_id": self.public_id,
+<<<<<<< HEAD
             "account_id": self.account_id,
             "account_name": self.account.company_name,
             "logout_url": reverse("logout"),
             "profile_image_url": self.get_avatar_url(),
+=======
+            "account_name": self.get_name(),
+            "logout_url": reverse("logout"),
+            "is_superuser": self.is_superuser,
+            # TODO: Add account_url
+>>>>>>> fd6669779bafdf97360b34ce540173ad22531220
         }
         if not self.is_superuser:
             data["account_settings_url"] = reverse("account_settings")
         return data
 
     def get_role(self):
-        person = self.person_set.first()
-        if person:
+        try:
+            person = self.person
             role = person.role
-        else:
+        except Person.DoesNotExist:
             role = "member"
         return role
 
     def get_name(self):
-        person = self.person_set.first()
-        if person:
+        try:
+            person = self.person
             name = person.full_name
-        else:
+        except Person.DoesNotExist:
             name = self.email
         return name
 
+<<<<<<< HEAD
     def get_person(self):
         return self.person_set.first()
 
@@ -191,12 +200,19 @@ class User(PermissionsMixin, AbstractBaseUser):
         return url
 
     def get_icon_dict(self):
+=======
+    def get_icon_dict(self, role=PROJECT_ROLES["member"]):
+>>>>>>> fd6669779bafdf97360b34ce540173ad22531220
         return {
             "email": self.email,
             "user_id": self.public_id,
             "account_name": self.get_name(),
+<<<<<<< HEAD
             "role": self.get_role(),
             "profile_image_url": self.get_avatar_url(),
+=======
+            "role": role,
+>>>>>>> fd6669779bafdf97360b34ce540173ad22531220
         }
 
     def get_profile_data(self):

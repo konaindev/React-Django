@@ -38,7 +38,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
 
     def get_project_details(self, project, request):
         """ cached by "project.public_id", details for project card on UI """
-        cache_key = f"remark.web.views.dashboard_view.project.{project.public_id}"
+        cache_key = cache_lib.get_dashboard_cache_key(project.public_id)
         cache_bust = cache_lib.check_request_cache_bust(request)
 
         """ method to generate value when request indicates to bust cache """
@@ -89,7 +89,7 @@ class DashboardView(LoginRequiredMixin, ReactView):
                 address = project.property.geo_address
                 state = address.state
                 city = address.city
-                label = (f"{city}, {state.upper()}",)
+                label = f"{city}, {state.upper()}"
                 if not has_property_in_list_of_dict(locations, "label", label):
                     locations.append({"city": city, "label": label, "state": state.lower()})
                 if project.asset_manager is not None and not has_property_in_list_of_dict(

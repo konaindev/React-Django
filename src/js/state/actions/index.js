@@ -86,9 +86,13 @@ export const inviteModal = {
     type: "API_INVITE_MODAL_REMOVE_MEMBER",
     data: { project, member }
   }),
-  addMembers: (projects, members) => ({
+  addMembers: (projects, members, role) => ({
     type: "API_INVITE_MODAL_ADD_MEMBER",
-    data: { projects, members }
+    data: { projects, members, role }
+  }),
+  changeRole: (role, property, member) => ({
+    type: "API_INVITE_MODAL_CHANGE_ROLE",
+    data: { role, property_id: property.property_id, member_id: member.user_id }
   }),
   resend: (hash, callback) => ({
     type: "API_INVITE_RESEND",

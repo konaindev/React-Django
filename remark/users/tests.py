@@ -8,6 +8,7 @@ from parameterized import parameterized
 from unittest import mock
 
 from remark.geo.models import Address
+from remark.geo.mocks import mocked_geocode
 from remark.users.models import Account, User
 from remark.settings import LOGIN_URL, LOGIN_REDIRECT_URL
 
@@ -319,3 +320,30 @@ class AccountSecurityTestCase(TestCase):
         self.assertIsNotNone(errors["password"])
         user = User.objects.get(public_id=self.user.public_id)
         self.assertTrue(user.check_password("testpassword"))
+class CompleteAccountTestCase(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            email="test@test.com", password="password"
+        )
+        self.client.login(email="test@test.com", password="password")
+
+    @mock.patch("remark.users.views.geocode", side_effect=mocked_geocode)
+    def test_complete_account(self, _):
+        url = reverse("complete_account")
+        params = {
+            "first_name": "First name",
+            "last_name": "Last name",
+            "title": "Title",
+            "company": "New Company",
+            "company_role": ["owner"],
+            "office_address": "2284 W. Commodore Way, Suite 200",
+            "office_name": "Test office",
+            "office_type": 1,
+            "terms": True,
+        }
+        data = json.dumps(params)
+        self.client.post(url, data, "json")
+        user = User.objects.get(public_id=self.user.public_id)
+        self.assertEqual(user.person.first_name, params["first_name"])
+        self.assertEqual(user.person.last_name, params["last_name"])
+        self.assertEqual(user.person.email, self.user.email)

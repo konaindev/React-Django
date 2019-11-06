@@ -1,15 +1,19 @@
+import cn from "classnames";
 import React from "react";
+import PropTypes from "prop-types";
 
 import Select from "../select";
 import { menuListConstructor, MenuPortal } from "../select/select_components";
-import PropTypes from "prop-types";
 
 export default class SelectRole extends React.PureComponent {
   static propTypes = {
     member: PropTypes.object.isRequired,
+    adminCount: PropTypes.number.isRequired,
+    property: PropTypes.object.isRequired,
     roleOptions: PropTypes.array.isRequired,
     components: PropTypes.object.isRequired,
     role: PropTypes.object.isRequired,
+    onChangeRole: PropTypes.func.isRequired,
     openRemoveModal: PropTypes.func.isRequired
   };
 
@@ -29,14 +33,42 @@ export default class SelectRole extends React.PureComponent {
     this.menuIsOpen = false;
   };
 
-  renderRemoveButton = () => (
-    <div
-      className="invite-modal__remove-btn"
-      onClick={this.props.openRemoveModal}
-    >
-      Remove
-    </div>
-  );
+  canRemove = () => {
+    return !(this.props.adminCount === 1 && this.props.member.role === "admin");
+  };
+
+  renderRemoveButton = () => {
+    const classes = cn("invite-modal__remove-btn", {
+      "invite-modal__remove-btn--disabled": !this.canRemove()
+    });
+    return (
+      <div className={classes} onClick={this.onRemoveHandler}>
+        Remove
+      </div>
+    );
+  };
+
+  isOptionDisabled = option => {
+    return (
+      this.props.adminCount === 1 &&
+      option.value === "member" &&
+      this.props.member.role === "admin"
+    );
+  };
+
+  onRemoveHandler = () => {
+    if (this.canRemove()) {
+      this.props.openRemoveModal(this.props.property, this.props.member);
+    }
+  };
+
+  onChangeHandler = option => {
+    this.props.onChangeRole(
+      option.value,
+      this.props.property,
+      this.props.member
+    );
+  };
 
   render() {
     const { member, components, roleOptions, role } = this.props;
@@ -54,11 +86,14 @@ export default class SelectRole extends React.PureComponent {
           MenuPortal
         }}
         options={roleOptions}
+        isOptionDisabled={this.isOptionDisabled}
         defaultValue={role}
         menuPortalTarget={document.body}
+        onChange={this.onChangeHandler}
         closeMenuOnScroll={this.closeMenuOnScroll}
         onMenuOpen={this.openMenuHandler}
         onMenuClose={this.closeMenuHandler}
+        menuPosition="absolute"
       />
     );
   }

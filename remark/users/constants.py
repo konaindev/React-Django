@@ -19,8 +19,8 @@ COMPANY_ROLES = [
     {"label": "Developer", "value": "developer"},
     {"label": "Asset Manager", "value": "asset_manager"},
     {"label": "Property Manager", "value": "property_manager"},
-    # {"label": "JV / Investor", "value": "investor"},
-    # {"label": "Vendor / Consultant", "value": "vendor"},
+    {"label": "JV / Investor", "value": "investor"},
+    {"label": "Vendor / Consultant", "value": "vendor"},
 ]
 
 BUSINESS_TYPE = {
@@ -28,6 +28,8 @@ BUSINESS_TYPE = {
     "developer": "is_developer",
     "asset_manager": "is_asset_manager",
     "property_manager": "is_property_manager",
+    "investor": "is_investor",
+    "vendor": "is_vendor",
 }
 
 VALIDATION_RULES = [
@@ -96,3 +98,7 @@ PHONE_REGEX = re.compile(r"(^\([0-9]{3}\)\s[0-9]{3}-[0-9]{4}$)|(^(?=.*[0-9])[- +
 COUNTRY_CODE_REGEX = re.compile(r"^(\+?\d{1,3}|\d{1,4})$")
 ZIP_REGEX = re.compile(r"(\d{5}(-\d{4})?$)|(^([A-PR-UWYZ]([0-9]{1,2}|([A-HK-Y][0-9]|[A-HK-Y][0-9]([0-9]|[ABEHMNPRV-Y]))|[0-9][A-HJKS-UW])\ [0-9][ABD-HJLNP-UW-Z]{2}|(GIR\ 0AA)|(SAN\ TA1)|(BFPO\ (C\/O\ )?[0-9]{1,4})|((ASCN|BBND|[BFS]IQQ|PCRN|STHL|TDCU|TKCA)\ 1ZZ))$)")
 STREET_REGEX = re.compile(r"^\s*\S+(?:\s+\S+){2}")
+PROJECT_ROLES = {
+    "member": "member",
+    "admin": "admin"
+}

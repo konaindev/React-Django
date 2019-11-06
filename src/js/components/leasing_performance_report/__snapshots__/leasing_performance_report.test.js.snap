@@ -40,27 +40,25 @@ exports[`LeasingPerformanceReport renders baseline report correctly 1`] = `
           >
             74%
           </span>
+          <div
+            className="large-box__content-extra"
+          />
         </div>
-        <span
+        <p
           className="large-box__bottom-line"
         >
-          <div>
-            192
-             Executed Leases (Out of
-             
-            260
-            )
-          </div>
-          <div>
-            201
-             Total Units
-          </div>
-        </span>
-        <span
+          <span>
+            192 Executed Leases (Out of 260)
+          </span>
+          <span>
+            201 Total Units
+          </span>
+        </p>
+        <p
           className="large-box__bottom-line"
         >
           
-        </span>
+        </p>
       </div>
     </div>
     <div
@@ -87,17 +85,20 @@ exports[`LeasingPerformanceReport renders baseline report correctly 1`] = `
           >
             71%
           </span>
+          <div
+            className="large-box__content-extra"
+          />
         </div>
-        <span
+        <p
           className="large-box__bottom-line"
         >
           94 Notices to Renew (Out of 132 Resident Decisions)
-        </span>
-        <span
+        </p>
+        <p
           className="large-box__bottom-line"
         >
           
-        </span>
+        </p>
       </div>
     </div>
     <div
@@ -124,26 +125,25 @@ exports[`LeasingPerformanceReport renders baseline report correctly 1`] = `
           >
             71%
           </span>
+          <div
+            className="large-box__content-extra"
+          />
         </div>
-        <span
+        <p
           className="large-box__bottom-line"
         >
-          <div>
-            185
-             Occupied Units (Out of 
-            260
-            )
-          </div>
-          <div>
-            201
-             Total Units
-          </div>
-        </span>
-        <span
+          <span>
+            185 Occupied Units (Out of 260)
+          </span>
+          <span>
+            201 Total Units
+          </span>
+        </p>
+        <p
           className="large-box__bottom-line"
         >
           
-        </span>
+        </p>
       </div>
     </div>
   </div>
@@ -658,26 +658,21 @@ exports[`LeasingPerformanceReport renders performance report correctly 1`] = `
             </div>
           </div>
         </div>
-        <span
+        <p
           className="large-box__bottom-line"
         >
-          <div>
-            227
-             Executed Leases (Out of
-             
-            260
-            )
-          </div>
-          <div>
-            201
-             Total Units
-          </div>
-        </span>
-        <span
+          <span>
+            227 Executed Leases (Out of 260)
+          </span>
+          <span>
+            201 Total Units
+          </span>
+        </p>
+        <p
           className="large-box__bottom-line"
         >
           Target: 95%
-        </span>
+        </p>
       </div>
     </div>
     <div
@@ -894,16 +889,16 @@ exports[`LeasingPerformanceReport renders performance report correctly 1`] = `
             </div>
           </div>
         </div>
-        <span
+        <p
           className="large-box__bottom-line"
         >
           7 Notices to Renew (Out of 11 Resident Decisions)
-        </span>
-        <span
+        </p>
+        <p
           className="large-box__bottom-line"
         >
           Target: 63%
-        </span>
+        </p>
       </div>
     </div>
     <div
@@ -1153,25 +1148,21 @@ exports[`LeasingPerformanceReport renders performance report correctly 1`] = `
             </div>
           </div>
         </div>
-        <span
+        <p
           className="large-box__bottom-line"
         >
-          <div>
-            220
-             Occupied Units (Out of 
-            260
-            )
-          </div>
-          <div>
-            201
-             Total Units
-          </div>
-        </span>
-        <span
+          <span>
+            220 Occupied Units (Out of 260)
+          </span>
+          <span>
+            201 Total Units
+          </span>
+        </p>
+        <p
           className="large-box__bottom-line"
         >
           Target: 93%
-        </span>
+        </p>
       </div>
     </div>
   </div>
@@ -1915,26 +1906,21 @@ exports[`LeasingPerformanceReport renders with section items correctly 1`] = `
             </div>
           </div>
         </div>
-        <span
+        <p
           className="large-box__bottom-line"
         >
-          <div>
-            227
-             Executed Leases (Out of
-             
-            260
-            )
-          </div>
-          <div>
-            201
-             Total Units
-          </div>
-        </span>
-        <span
+          <span>
+            227 Executed Leases (Out of 260)
+          </span>
+          <span>
+            201 Total Units
+          </span>
+        </p>
+        <p
           className="large-box__bottom-line"
         >
           Target: 95%
-        </span>
+        </p>
       </div>
     </div>
     <div
@@ -2151,16 +2137,16 @@ exports[`LeasingPerformanceReport renders with section items correctly 1`] = `
             </div>
           </div>
         </div>
-        <span
+        <p
           className="large-box__bottom-line"
         >
           7 Notices to Renew (Out of 11 Resident Decisions)
-        </span>
-        <span
+        </p>
+        <p
           className="large-box__bottom-line"
         >
           Target: 63%
-        </span>
+        </p>
       </div>
     </div>
     <div
@@ -2410,25 +2396,21 @@ exports[`LeasingPerformanceReport renders with section items correctly 1`] = `
             </div>
           </div>
         </div>
-        <span
+        <p
           className="large-box__bottom-line"
         >
-          <div>
-            220
-             Occupied Units (Out of 
-            260
-            )
-          </div>
-          <div>
-            201
-             Total Units
-          </div>
-        </span>
-        <span
+          <span>
+            220 Occupied Units (Out of 260)
+          </span>
+          <span>
+            201 Total Units
+          </span>
+        </p>
+        <p
           className="large-box__bottom-line"
         >
           Target: 93%
-        </span>
+        </p>
       </div>
     </div>
   </div>
