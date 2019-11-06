@@ -382,6 +382,14 @@ $multi-value-close-hover-color: $gray-4;
     }
 }
 
+.select--is-searchable {
+    .select__value-container * {
+        padding: 0px;
+        margin: 0px;
+    }
+
+}
+
 .select-search {
     .select__control {
         padding: 9px 16px;

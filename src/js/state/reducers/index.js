@@ -1,6 +1,8 @@
 import _cloneDeep from "lodash/cloneDeep";
 import { combineReducers } from "redux";
 
+import accountSettings from "./account_settings";
+
 const initState = {
   tutorialView: {}
 };
@@ -145,6 +147,29 @@ const completeAccount = (
   return newState;
 };
 
+const addressModal = (state = {}, action) => {
+  let newState = {};
+  switch (action.type) {
+    case "ADDRESS_MODAL_SHOW": {
+      newState = {
+        ...state,
+        isOpen: true,
+        data: action.data,
+        addresses: action.addresses
+      };
+      break;
+    }
+    case "ADDRESS_MODAL_HIDE": {
+      newState = { ...state, isOpen: false };
+      break;
+    }
+    default: {
+      newState = { ...state };
+    }
+  }
+  return newState;
+};
+
 const inviteModal = (state = {}, action) => {
   let newState = {};
   switch (action.type) {
@@ -218,5 +243,7 @@ export default combineReducers({
   createPassword,
   completeAccount,
   inviteModal,
-  uiStrings
+  uiStrings,
+  accountSettings,
+  addressModal
 });

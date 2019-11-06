@@ -8,6 +8,7 @@ import { storiesOf } from "@storybook/react";
 import { properties, groups, portfolio } from "../email_reporting_table/props";
 import AccountSettings from "./index";
 import { props } from "./props";
+import accountSettings from "../../state/reducers/account_settings";
 
 function validateSecurity(values) {
   const errors = {};
@@ -35,12 +36,20 @@ function onSearch(store, properties, propertiesName, value) {
 
 storiesOf("AccountSettings", module)
   .add("Profile", () => (
-    <Provider store={createStore(() => ({}))}>
+    <Provider
+      store={createStore(() => ({
+        network: {}
+      }))}
+    >
       <AccountSettings initialItem="profile" {...props} />
     </Provider>
   ))
   .add("Account Security", () => (
-    <Provider store={createStore(() => ({}))}>
+    <Provider
+      store={createStore(() => ({
+        network: {}
+      }))}
+    >
       <AccountSettings
         initialItem="lock"
         validate={validateSecurity}
@@ -50,14 +59,20 @@ storiesOf("AccountSettings", module)
   ))
   .add(
     "Email Reports",
-    withState({ groups, properties })(({ store }) => (
-      <Provider store={createStore(() => ({}))}>
+    withState({ groups })(({ store }) => (
+      <Provider
+        store={createStore(() => ({
+          accountSettings: { properties },
+          network: {}
+        }))}
+      >
         <AccountSettings
           initialItem="email"
           itemsOrder={props.itemsOrder}
+          tabsOrder={props.tabsOrder}
+          initialTab={props.initialTab}
           portfolioProperties={portfolio}
           groupsProperties={store.state.groups}
-          properties={store.state.properties}
           onGroupsSort={sort => onSort(store, "groups", sort)}
           onPropertiesSort={sort => onSort(store, "properties", sort)}
           onPropertiesSearch={value =>

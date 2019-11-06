@@ -211,6 +211,7 @@ exports[`UserMenu render opened 1`] = `
     >
       <a
         className="user-menu__dropdown-item"
+        href="/users/account-settings"
       >
         <svg
           aria-hidden="true"

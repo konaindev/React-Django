@@ -14,13 +14,6 @@ exports[`AddPropertyModal renders AddPropertyModal correctly 1`] = `
   focusTrapped={false}
   onClose={[Function]}
   open={true}
-  styles={
-    Object {
-      "closeIcon": Object {
-        "display": "none",
-      },
-    }
-  }
 >
   <div
     className="modal-window__head"

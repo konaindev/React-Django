@@ -12,7 +12,7 @@ export default class UserMenu extends React.PureComponent {
   static propTypes = {
     profile_image_url: PropTypes.string,
     logout_url: PropTypes.string.isRequired,
-    account_settings_url: PropTypes.string.isRequired
+    account_settings_url: PropTypes.string
   };
 
   static defaultProps = {
@@ -33,8 +33,9 @@ export default class UserMenu extends React.PureComponent {
   };
 
   dropdownMenu = props => {
-    return (
-      <components.Menu {...props} className="user-menu__dropdown">
+    let settingsItem;
+    if (this.props.account_settings_url) {
+      settingsItem = (
         <a
           className="user-menu__dropdown-item"
           href={this.props.account_settings_url}
@@ -42,6 +43,11 @@ export default class UserMenu extends React.PureComponent {
           <Settings className="user-menu__icon" />
           <div>Account Settings</div>
         </a>
+      );
+    }
+    return (
+      <components.Menu {...props} className="user-menu__dropdown">
+        {settingsItem}
         <a className="user-menu__dropdown-item" href={this.props.logout_url}>
           <LogOut className="user-menu__icon" />
           <div>Log Out</div>

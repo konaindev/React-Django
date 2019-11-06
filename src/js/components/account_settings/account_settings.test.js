@@ -9,11 +9,18 @@ import { props } from "./props";
 
 jest.mock("rc-tooltip");
 
+const _ = x =>
+  createStore(() => ({
+    network: {
+      isFetching: false
+    }
+  }));
+
 describe("AccountSettings", () => {
   it("account security tab", () => {
     const tree = renderer
       .create(
-        <Provider store={createStore(() => ({}))}>
+        <Provider store={_()}>
           <AccountSettings initialItem="lock" {...props} />
         </Provider>
       )
@@ -23,7 +30,7 @@ describe("AccountSettings", () => {
   it("profile tab", () => {
     const tree = renderer
       .create(
-        <Provider store={createStore(() => ({}))}>
+        <Provider store={_()}>
           <AccountSettings initialItem="profile" {...props} />
         </Provider>
       )
@@ -33,14 +40,19 @@ describe("AccountSettings", () => {
   it("email reports 'Portfolio' tab", () => {
     const tree = renderer
       .create(
-        <Provider store={createStore(() => ({}))}>
+        <Provider
+          store={createStore(() => ({
+            accountSettings: { properties },
+            network: { isFetching: false }
+          }))}
+        >
           <AccountSettings
             initialItem="email"
             itemsOrder={props.itemsOrder}
             initialTab="portfolio"
+            tabsOrder={props.tabsOrder}
             portfolioProperties={portfolio}
             groupsProperties={groups}
-            properties={properties}
           />
         </Provider>
       )
@@ -50,14 +62,19 @@ describe("AccountSettings", () => {
   it("email reports 'Groups' tab", () => {
     const tree = renderer
       .create(
-        <Provider store={createStore(() => ({}))}>
+        <Provider
+          store={createStore(() => ({
+            accountSettings: { properties },
+            network: { isFetching: false }
+          }))}
+        >
           <AccountSettings
             initialItem="email"
             itemsOrder={props.itemsOrder}
             initialTab="group"
+            tabsOrder={props.tabsOrder}
             portfolioProperties={portfolio}
             groupsProperties={groups}
-            properties={properties}
           />
         </Provider>
       )
@@ -67,14 +84,21 @@ describe("AccountSettings", () => {
   it("email reports 'Properties' tab", () => {
     const tree = renderer
       .create(
-        <Provider store={createStore(() => ({}))}>
+        <Provider
+          store={createStore(() => ({
+            accountSettings: { properties: properties.slice(0, 5) },
+            network: {
+              isFetching: false
+            }
+          }))}
+        >
           <AccountSettings
             initialItem="email"
             itemsOrder={props.itemsOrder}
             initialTab="property"
+            tabsOrder={props.tabsOrder}
             portfolioProperties={portfolio}
             groupsProperties={groups}
-            properties={properties.slice(0, 5)}
           />
         </Provider>
       )

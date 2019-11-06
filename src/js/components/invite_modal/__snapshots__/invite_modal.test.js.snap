@@ -15,13 +15,6 @@ Array [
     focusTrapped={false}
     onClose={[Function]}
     open={true}
-    styles={
-      Object {
-        "closeIcon": Object {
-          "display": "none",
-        },
-      }
-    }
   >
     <div
       className="modal-window__head invite-modal__header"
@@ -2980,13 +2973,6 @@ Array [
     focusTrapped={false}
     onClose={[Function]}
     open={false}
-    styles={
-      Object {
-        "closeIcon": Object {
-          "display": "none",
-        },
-      }
-    }
   >
     <div
       className="modal-window__head"
@@ -3039,13 +3025,6 @@ Array [
     focusTrapped={false}
     onClose={[Function]}
     open={true}
-    styles={
-      Object {
-        "closeIcon": Object {
-          "display": "none",
-        },
-      }
-    }
   >
     <div
       className="modal-window__head invite-modal__header"
@@ -3387,13 +3366,6 @@ Array [
     focusTrapped={false}
     onClose={[Function]}
     open={false}
-    styles={
-      Object {
-        "closeIcon": Object {
-          "display": "none",
-        },
-      }
-    }
   >
     <div
       className="modal-window__head"

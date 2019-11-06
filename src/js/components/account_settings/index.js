@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
 
+import EmailReportsContainer from "../../containers/account_settings/email_reports";
 import { Email, Lock, Profile } from "../../icons";
 import ProjectPageChrome from "../project_page_chrome";
-
+import LoaderContainer from "../../containers/account_settings/loader";
 import AccountSecurity from "./account_security";
-import EmailReports from "./email_reports";
 import ProfileTab from "./profile";
 import "./account_settings.scss";
 
@@ -41,7 +41,7 @@ const menuItemsData = {
   email: {
     name: "Email Preferences",
     iconComponent: Email,
-    component: EmailReports
+    component: EmailReportsContainer
   }
 };
 
@@ -78,7 +78,7 @@ class AccountSettings extends React.PureComponent {
 
   static defaultProps = {
     initialItem: "profile",
-    itemsOrder: ["profile", "lock"]
+    itemsOrder: ["profile", "lock", "email"]
   };
 
   constructor(props) {
@@ -110,6 +110,7 @@ class AccountSettings extends React.PureComponent {
                 selectItem={this.selectItem}
               />
             </div>
+            <LoaderContainer />
             <Component {...this.props} />
           </div>
         </div>
@@ -118,4 +119,10 @@ class AccountSettings extends React.PureComponent {
   }
 }
 
-export default connect()(AccountSettings);
+const mapState = state => {
+  return {
+    ...state.network
+  };
+};
+
+export default connect(mapState)(AccountSettings);

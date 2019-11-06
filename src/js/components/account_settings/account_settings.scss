@@ -185,6 +185,10 @@ $info-line-height: 1.75rem;
     }
 }
 
+.account-settings__input {
+    height: 44px;
+}
+
 .account-settings__field-grid {
     display: grid;
     grid-column-gap: $columns-gap;

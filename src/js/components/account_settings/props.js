@@ -42,6 +42,21 @@ const office_options = [
   { label: "Other", value: 4 }
 ];
 
+const office_countries = [
+  { label: "United States of America", value: "USA" },
+  { label: "United Kingdom", value: "GBR" }
+];
+
+const us_state_list = [
+  { label: "Washington", value: "Washington" },
+  { label: "New York", value: "New York" }
+];
+
+const gb_county_list = [
+  { label: "London", value: "London" },
+  { label: "Aberdeen", value: "Aberdeen" }
+];
+
 const profile = {
   avatar_url:
     "https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg",
@@ -57,11 +72,20 @@ const profile = {
   office_type: 3
 };
 
+const tabsOrder = ["portfolio", "group", "property"];
+
+const initialTab = "portfolio";
+
 export const props = {
   rules,
   profile,
   user,
   company_roles,
   office_options,
-  itemsOrder
+  itemsOrder,
+  tabsOrder,
+  initialTab,
+  office_countries,
+  us_state_list,
+  gb_county_list
 };

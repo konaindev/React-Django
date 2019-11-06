@@ -6,10 +6,10 @@ from django.contrib.auth.models import PermissionsMixin
 from django.utils.crypto import get_random_string
 from django.urls import reverse
 
-from remark.lib.collections import invert_dict
 from remark.lib.tokens import public_id
 from remark.lib.fields import NormalizedEmailField
-from .constants import ACCOUNT_TYPE, BUSINESS_TYPE
+from remark.projects.models import Project
+from .constants import ACCOUNT_TYPE
 
 
 def usr_public_id():
@@ -141,6 +141,8 @@ class User(PermissionsMixin, AbstractBaseUser):
         default=True, help_text="Should there be tutorial showing"
     )
 
+    report_projects = models.ManyToManyField(Project)
+
     USERNAME_FIELD = "email"
     EMAIL_FIELD = "email"
     REQUIRED_FIELDS = []
@@ -148,15 +150,17 @@ class User(PermissionsMixin, AbstractBaseUser):
     objects = UserManager()
 
     def get_menu_dict(self):
-        return {
+        data = {
             "email": self.email,
             "user_id": self.public_id,
             "account_id": self.account_id,
             "account_name": self.account.company_name,
             "logout_url": reverse("logout"),
-            "account_settings_url": reverse("account_settings"),
             "profile_image_url": self.get_avatar_url(),
         }
+        if not self.is_superuser:
+            data["account_settings_url"] = reverse("account_settings")
+        return data
 
     def get_role(self):
         person = self.person_set.first()

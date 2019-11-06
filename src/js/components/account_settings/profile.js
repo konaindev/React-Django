@@ -3,13 +3,17 @@ import { ErrorMessage, Formik, Form } from "formik";
 import _intersection from "lodash/intersection";
 import PropTypes from "prop-types";
 import React from "react";
+import AddressModal from "../address_modal";
+import { COUNTRY_FIELDS } from "../../constants";
 
 import { Tick, Upload } from "../../icons";
 import { formatPhone } from "../../utils/formatters";
+import { validateAddress } from "../../api/account_settings";
 import Button from "../button";
 import Input from "../input";
 import MultiSelect from "../multi_select";
 import Select from "../select";
+import { addressModal } from "../../state/actions";
 import { MAX_AVATAR_SIZE, profileSchema } from "./validators";
 
 export default class Profile extends React.PureComponent {
@@ -23,12 +27,19 @@ export default class Profile extends React.PureComponent {
       phone_ext: PropTypes.string,
       company: PropTypes.string,
       company_roles: PropTypes.arrayOf(PropTypes.string),
-      office_address: PropTypes.string,
+      office_country: PropTypes.object,
+      office_street: PropTypes.string,
+      office_city: PropTypes.string,
+      office_state: PropTypes.object,
+      office_zip5: PropTypes.string,
       office_name: PropTypes.string,
       office_type: PropTypes.number
     }),
     company_roles: MultiSelect.optionsType.isRequired,
-    office_options: Select.optionsType.isRequired
+    office_options: Select.optionsType.isRequired,
+    office_countries: Select.optionsType.isRequired,
+    us_state_list: Select.optionsType,
+    gb_county_list: Select.optionsType
   };
   static defaultProps = {
     profile: {
@@ -40,7 +51,14 @@ export default class Profile extends React.PureComponent {
       phone_ext: "",
       company: "",
       company_roles: [],
-      office_address: "",
+      office_country: {
+        label: COUNTRY_FIELDS.USA.full_name,
+        value: COUNTRY_FIELDS.USA.short_name
+      },
+      office_street: "",
+      office_city: "",
+      office_state: {},
+      office_zip: "",
       office_name: "",
       office_type: null
     }
@@ -54,12 +72,22 @@ export default class Profile extends React.PureComponent {
     "phone_ext",
     "company",
     "company_roles",
-    "office_address",
+    "office_country",
+    "office_street",
+    "office_city",
+    "office_state",
+    "office_zip",
     "office_name",
     "office_type"
   ];
 
-  state = { fieldsSubmitted: false };
+  constructor(props) {
+    super(props);
+    this.state = {
+      fieldsSubmitted: false
+    };
+    this.selectedCountry = COUNTRY_FIELDS.USA.short_name;
+  }
 
   get initialValues() {
     let profile = { ...this.props.profile };
@@ -72,6 +100,7 @@ export default class Profile extends React.PureComponent {
     profile.office_type = this.props.office_options.filter(
       i => i.value === profile.office_type
     )[0];
+    profile.office_state = undefined;
     return profile;
   }
 
@@ -189,16 +218,29 @@ export default class Profile extends React.PureComponent {
           }
         } else if (k === "office_type") {
           data.append("office_type", dataValues.office_type.value);
+        } else if (k === "office_country") {
+          data.append("office_country", dataValues.office_country.value);
+        } else if (k === "office_state") {
+          data.append("office_state", dataValues.office_state.value);
         } else {
           data.append(k, dataValues[k]);
         }
       }
     }
-    this.props.dispatch({
-      type: "API_ACCOUNT_PROFILE",
-      callback: this.setSuccessMessage,
-      onError: this.setErrorMessages,
-      data
+    validateAddress(values).then(response => {
+      if (response.data.error) {
+        this.setState({ invalid_address: true });
+        this.formik.setErrors({
+          office_street:
+            "Unable to verify address. Please provide a valid address.",
+          office_city: "*",
+          office_state: "*",
+          office_zip: "*"
+        });
+      } else {
+        this.setState({ addresses: response.data, invalid_address: false });
+        this.props.dispatch(addressModal.open(data, response.data));
+      }
     });
   };
 
@@ -212,9 +254,26 @@ export default class Profile extends React.PureComponent {
     this.formik.handleBlur(v);
   };
 
+  onChangeCountry = value => {
+    this.selectedCountry = value.value;
+    this.formik.setFieldValue("office_country", value);
+    this.formik.setFieldValue("office_state", {
+      label: "",
+      value: ""
+    });
+    this.formik.setFieldTouched("office_state");
+  };
+
   render() {
     return (
       <div className="account-settings__tab">
+        <AddressModal
+          title="Confirm Office Address"
+          onClose={this.props.dispatch(addressModal.close)}
+          callback={this.setSuccessMessage}
+          onError={this.setErrorMessages}
+          dispatch_type="API_ACCOUNT_PROFILE"
+        />
         <Formik
           ref={this.setFormik}
           initialValues={this.initialValues}
@@ -223,7 +282,16 @@ export default class Profile extends React.PureComponent {
           validateOnChange={true}
           onSubmit={this.onSubmit}
         >
-          {({ errors, touched, values, setFieldTouched, setFieldValue }) => (
+          {({
+            errors,
+            touched,
+            values,
+            isValid,
+            handleChange,
+            handleBlur,
+            setFieldTouched,
+            setFieldValue
+          }) => (
             <Form method="post" autoComplete="off">
               <div className="account-settings__tab-content">
                 <div className="account-settings__tab-section">
@@ -428,34 +496,162 @@ export default class Profile extends React.PureComponent {
                         <ErrorMessage name="company_roles" />
                       </div>
                     </div>
+                  </div>
+                  <div className="account-settings__tab-title">
+                    Company Info
+                  </div>
+                  <div className="account-settings__field-grid">
                     <div
                       className={this.getFieldClasses(
-                        "office_address",
+                        "office_country",
                         errors,
                         touched,
                         ["full-grid"]
                       )}
                     >
                       <div className="account-settings__label">
-                        Office Address
+                        Office Country
                       </div>
+                      <Select
+                        className="account-settings__input"
+                        name="office_country"
+                        theme="gray"
+                        isShowControls={false}
+                        isShowAllOption={false}
+                        value={values.office_country}
+                        options={this.props.office_countries}
+                        onBlur={() => {
+                          this.unsetMessage();
+                          setFieldTouched("office_country", true);
+                        }}
+                        onChange={this.onChangeCountry}
+                      />
+                      <div className="account-settings__error">
+                        <ErrorMessage name="office_country" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="account-settings__field-grid">
+                    <div
+                      className={this.getFieldClasses(
+                        "office_street",
+                        errors,
+                        touched,
+                        ["full-grid"]
+                      )}
+                    >
+                      <div className="account-settings__label">Address</div>
                       <Input
                         className="account-settings__input"
-                        name="office_address"
+                        name="office_street"
                         theme="gray"
-                        value={values.office_address}
+                        value={values.office_street}
                         onBlur={this.onBlur}
                         onChange={this.onChange}
                       />
                       <div className="account-settings__error">
-                        <ErrorMessage name="office_address" />
+                        <ErrorMessage name="office_street" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="account-settings__field-grid account-settings__field-grid--col-3">
+                    <div
+                      className={this.getFieldClasses(
+                        "office_city",
+                        errors,
+                        touched,
+                        ["max-width"]
+                      )}
+                    >
+                      <div className="account-settings__label">
+                        {
+                          COUNTRY_FIELDS[this.selectedCountry].address_fields
+                            .city
+                        }
+                      </div>
+                      <Input
+                        className="account-settings__input"
+                        name="office_city"
+                        theme="gray"
+                        value={values.office_city}
+                        onBlur={this.onBlur}
+                        onChange={this.onChange}
+                      />
+                      <div className="account-settings__error">
+                        <ErrorMessage name="office_city" />
                       </div>
                     </div>
                     <div
                       className={this.getFieldClasses(
-                        "office_name",
+                        "office_state",
                         errors,
                         touched
+                      )}
+                    >
+                      <div className="account-settings__label">
+                        {
+                          COUNTRY_FIELDS[this.selectedCountry].address_fields
+                            .state
+                        }
+                      </div>
+                      <Select
+                        className="account-settings__input"
+                        name="office_state"
+                        theme="gray"
+                        isSearchable={true}
+                        options={
+                          this.selectedCountry == COUNTRY_FIELDS.USA.short_name
+                            ? this.props.us_state_list
+                            : this.props.gb_county_list
+                        }
+                        value={values.office_state}
+                        onBlur={() => {
+                          this.unsetMessage();
+                          setFieldTouched("office_state", true);
+                        }}
+                        onChange={value => {
+                          this.unsetMessage();
+                          setFieldValue("office_state", value);
+                        }}
+                      />
+                      <div className="account-settings__error">
+                        <ErrorMessage name="office_state" />
+                      </div>
+                    </div>
+                    <div
+                      className={this.getFieldClasses(
+                        "office_zip",
+                        errors,
+                        touched,
+                        ["max-width"]
+                      )}
+                    >
+                      <div className="account-settings__label">
+                        {
+                          COUNTRY_FIELDS[this.selectedCountry].address_fields
+                            .zip
+                        }
+                      </div>
+                      <Input
+                        className="account-settings__input"
+                        name="office_zip"
+                        theme="gray"
+                        value={values.office_zip}
+                        onBlur={this.onBlur}
+                        onChange={this.onChange}
+                      ></Input>
+                      <div className="account-settings__error">
+                        <ErrorMessage name="office_zip" />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="account-settings__field-grid">
+                    <div
+                      className={this.getFieldClasses(
+                        "office_name",
+                        errors,
+                        touched,
+                        ["max-width"]
                       )}
                     >
                       <div className="account-settings__label">Office Name</div>

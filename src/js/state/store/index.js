@@ -11,8 +11,10 @@ import {
   fetchCompleteAccount,
   fetchInviteModal,
   fetchUIString,
+  fetchAccountProperties,
+  updateAccountSecurity,
   updateAccountProfile,
-  updateAccountSecurity
+  updateReportsSettings
 } from "../middleware";
 
 const cfg = {
@@ -40,8 +42,10 @@ export default () => {
         fetchCompleteAccount,
         fetchInviteModal,
         fetchUIString,
+        fetchAccountProperties,
         updateAccountSecurity,
-        updateAccountProfile
+        updateAccountProfile,
+        updateReportsSettings
       )
     )
   );

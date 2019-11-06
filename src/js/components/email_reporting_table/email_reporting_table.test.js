@@ -43,7 +43,7 @@ describe("EmailReportingTable", () => {
       .create(
         <EmailReportingTable
           properties={properties.slice(0, 5)}
-          propertiesCount={properties.length}
+          showLoadBtn={true}
         />
       )
       .toJSON();
