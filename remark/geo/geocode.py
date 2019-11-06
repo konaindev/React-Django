@@ -90,6 +90,11 @@ class GeocodeResult:
         return maybe_city or None
 
     @property
+    def full_state(self):
+        """Return the long state name, if known. (Washington)"""
+        return self.get_long_component("administrative_area_level_1")
+
+    @property
     def state(self):
         """Return the short state name, if known. (WA)"""
         return self.get_short_component("administrative_area_level_1")
