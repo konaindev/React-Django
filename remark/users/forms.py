@@ -126,7 +126,7 @@ class AccountProfileForm(forms.Form):
     )
     office_street = forms.CharField(max_length=255, required=True)
     office_city = forms.CharField(max_length=255, required=True)
-    office_state = forms.CharField(max_length=15, required=True)
+    office_state = forms.CharField(max_length=15, required=False)
     office_zip = forms.RegexField(ZIP_REGEX, required=True)
     office_name = forms.CharField(max_length=255, required=True)
     office_type = forms.ChoiceField(choices=OFFICE_TYPES, required=True)
