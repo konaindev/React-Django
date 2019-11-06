@@ -16,6 +16,17 @@ export const tutorial = {
   })
 };
 
+export const addressModal = {
+  open: (data, addresses) => ({
+    type: "ADDRESS_MODAL_SHOW",
+    data,
+    addresses
+  }),
+  close: {
+    type: "ADDRESS_MODAL_HIDE"
+  }
+};
+
 export const networking = {
   startFetching: () => ({
     type: "NETWORK_START_FETCH"

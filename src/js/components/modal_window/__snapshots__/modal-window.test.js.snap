@@ -14,13 +14,6 @@ exports[`ModalWindow render modal window with Head, Body and Buttons correctly 1
   focusTrapped={false}
   onClose={[Function]}
   open={true}
-  styles={
-    Object {
-      "closeIcon": Object {
-        "display": "none",
-      },
-    }
-  }
 >
   <div
     className="modal-window__head"
@@ -49,13 +42,6 @@ exports[`ModalWindow render modal window with defaults correctly 1`] = `
   focusTrapped={false}
   onClose={[Function]}
   open={true}
-  styles={
-    Object {
-      "closeIcon": Object {
-        "display": "none",
-      },
-    }
-  }
 >
   Test Text
 </Modal>
@@ -75,13 +61,6 @@ exports[`ModalWindow render small modal window with Head, Body and Buttons corre
   focusTrapped={false}
   onClose={[Function]}
   open={true}
-  styles={
-    Object {
-      "closeIcon": Object {
-        "display": "none",
-      },
-    }
-  }
 >
   <div
     className="modal-window__head"

@@ -25,7 +25,7 @@ from remark.lib.views import ReactView, RemarkView, APIView, LoginRequiredReactV
 from remark.email_app.invites.added_to_property import send_invite_email
 from remark.settings import INVITATION_EXP
 
-from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES, VALIDATION_RULES_LIST
+from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES, VALIDATION_RULES_LIST, US_STATE_LIST, GB_COUNTY_LIST, COUNTRY_LIST
 from .forms import AccountCompleteForm, AccountProfileForm, AccountSecurityForm
 from .models import User
 
@@ -51,7 +51,6 @@ def custom_login(request, *args, **kwargs):
 
     return auth_login(request, *args, **kwargs)
 
-
 # custom class-based view overriden on LoginView
 class CustomLoginView(auth_views.LoginView):
     def form_valid(self, form):
@@ -69,11 +68,11 @@ class CompleteAccountView(LoginRequiredMixin, ReactView):
         accept = request.META.get("HTTP_ACCEPT")
         if accept == "application/json":
             response = JsonResponse(
-                {"office_types": self.office_options, "company_roles": COMPANY_ROLES}
+                {"office_types": self.office_options, "company_roles": COMPANY_ROLES, "office_countries": COUNTRY_LIST, "us_state_list": US_STATE_LIST, "gb_county_list": GB_COUNTY_LIST}
             )
         else:
             response = self.render(
-                office_types=self.office_options, company_roles=COMPANY_ROLES
+                office_types=self.office_options, company_roles=COMPANY_ROLES, office_country=COUNTRY_LIST, us_state_list=US_STATE_LIST, gb_county_list=GB_COUNTY_LIST
             )
         return response
 
@@ -116,9 +115,9 @@ class CompleteAccountView(LoginRequiredMixin, ReactView):
                 office=office,
             )
             person.save()
-            response = JsonResponse({"success": True})
+            response = JsonResponse({"success": True}, status=200)
         else:
-            response = JsonResponse(form.errors, status=500)
+            response = JsonResponse({"errors": form.errors.get_json_data()}, status=500)
         return response
 
 
@@ -243,6 +242,9 @@ class AccountSettingsView(LoginRequiredReactView):
             rules=VALIDATION_RULES_LIST,
             profile=user.get_profile_data(),
             company_roles=COMPANY_ROLES,
+            office_countries=COUNTRY_LIST,
+            us_state_list=US_STATE_LIST,
+            gb_county_list=GB_COUNTY_LIST,
             office_options=OFFICE_OPTIONS,
             user=request.user.get_menu_dict())
 
@@ -267,7 +269,7 @@ class AccountSecurityView(LoginRequiredMixin, RemarkView):
 
 class AccountProfileView(LoginRequiredMixin, RemarkView):
     def update_profile(self, user, data):
-        office_address = data["office_address"]
+        office_address = geocode(data["office_address"])
         address = Address.objects.get_or_create(
             formatted_address=office_address.formatted_address,
             street_address_1=office_address.street_address,
@@ -316,10 +318,35 @@ class AccountProfileView(LoginRequiredMixin, RemarkView):
         post_data.pop("company_roles[]", None)
         form = AccountProfileForm(post_data, request.FILES)
         if not form.is_valid():
-            return JsonResponse(form.errors.get_json_data(), status=500)
+            return JsonResponse({"errors": form.errors.get_json_data()}, status=500)
         user = request.user
         self.update_profile(user, form.cleaned_data)
         return JsonResponse(user.get_profile_data(), status=200)
+
+class ValidateAddressView(RemarkView):
+    def formatAddressString(self, address_object):
+        response = f"{address_object['office_country']['value']}, {address_object['office_street']}, {address_object['office_city']}, {address_object['office_state']['value']} {address_object['office_zip']}"
+        return response
+
+    def post(self, request):
+        params = json.loads(request.body)
+        entered_address = self.formatAddressString(params)
+        
+        geocode_address = geocode(entered_address)
+
+        if not geocode_address or not geocode_address.street_address:
+            return JsonResponse({"error": True}, status=200)
+        
+        suggested_address = {
+            'office_street': geocode_address.street_address,
+            'office_city': geocode_address.city,
+            'office_state': geocode_address.state,
+            'office_zip': geocode_address.postal_code if geocode_address.country == "GB" else geocode_address.zip5,
+            'office_country': geocode_address.get_long_component('country'),
+            'formatted_address': geocode_address.formatted_address
+        }
+
+        return JsonResponse({"suggested_address": suggested_address}, status=200)
 
 
 class AccountReportsView(LoginRequiredMixin, RemarkView):

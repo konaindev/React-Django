@@ -20,6 +20,15 @@ import { axiosGet, axiosPost } from "../../utils/api";
 // Here we create a middleware that intercepts
 // actions representing a request for data from
 // the api
+
+function startFetchingState(store) {
+  let x = store.getState();
+  let { isFetching } = x.network;
+  if (!isFetching || isFetching === false) {
+    store.dispatch(networking.startFetching());
+  }
+}
+
 export const fetchDashboard = store => next => action => {
   if (action.type === "API_DASHBOARD") {
     let x = store.getState();
@@ -123,6 +132,7 @@ export const fetchCompleteAccount = store => next => action => {
   if (action.type === "API_COMPLETE_ACCOUNT") {
     const url = `${process.env.BASE_URL}/users/complete-account/`;
     if (action.data) {
+      startFetchingState(store);
       axiosPost(url, action.data)
         .then(response => {
           if (response.status === 200) {
@@ -131,13 +141,26 @@ export const fetchCompleteAccount = store => next => action => {
             throw response;
           }
         })
-        .catch(e => console.log("-----> ERROR", e));
+        .catch(e => {
+          if (e.response.data?.errors && _isObject(e.response.data?.errors)) {
+            next(networking.stopFetching());
+            action.onError(e.response.data.errors);
+          } else {
+            console.log("-----> ERROR", e);
+            next(networking.stopFetching());
+          }
+        });
     } else {
+      startFetchingState(store);
       axiosGet(url)
         .then(response => {
           next(completeAccount.set(response.data));
         })
-        .catch(e => console.log("-----> ERROR", e));
+        .then(() => next(networking.stopFetching()))
+        .catch(e => {
+          console.log("-----> ERROR", e);
+          next(networking.stopFetching());
+        });
     }
   } else {
     next(action);
@@ -232,20 +255,24 @@ export const updateAccountSecurity = store => next => action => {
 export const updateAccountProfile = store => next => action => {
   if (action.type === "API_ACCOUNT_PROFILE") {
     if (action.data) {
+      startFetchingState(store);
       updateProfileData(action.data)
         .then(response => {
-          if (response.status === 200) {
+          if (response.status === 200 && !response.data?.errors) {
             action.callback(response.data);
           } else {
             throw response;
           }
         })
+        .then(() => next(networking.stopFetching()))
         .catch(e => {
-          if (e.response.data && _isObject(e.response.data)) {
-            action.onError(e.response.data);
+          if (e.response.data?.errors && _isObject(e.response.data?.errors)) {
+            next(networking.stopFetching());
+            action.onError(e.response.data.errors);
           } else {
             console.log("-----> ERROR", e);
           }
+          next(networking.stopFetching());
         });
     }
   } else {

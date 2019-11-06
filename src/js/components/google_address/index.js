@@ -22,6 +22,7 @@ export default class GoogleAddress extends React.PureComponent {
     placeholder: PropTypes.string,
     labelCompany: PropTypes.string,
     labelGoogle: PropTypes.string,
+    display: PropTypes.oneOf(["full", "partial"]),
     onChange: PropTypes.func
   };
 
@@ -31,6 +32,7 @@ export default class GoogleAddress extends React.PureComponent {
     placeholder: "Select office...",
     labelCompany: "Suggested Company Addresses",
     labelGoogle: "Suggested Google Addresses",
+    display: "full",
     onChange: () => {}
   };
 
@@ -49,12 +51,18 @@ export default class GoogleAddress extends React.PureComponent {
     if (data.__isNew__) {
       return data.label;
     }
+    const full_display = this.props.display == "full";
     return (
       <div>
-        <div className="google-address__street">{data.street},</div>
-        <div className="google-address__city">
-          {data.city}, {data.state}
+        <div className="google-address__street">
+          {data.street}
+          {full_display ? "," : ""}
         </div>
+        {full_display && (
+          <div className="google-address__city">
+            {data.city}, {data.state}
+          </div>
+        )}
       </div>
     );
   };

@@ -7,7 +7,7 @@ from remark.crm.constants import OFFICE_TYPES
 from remark.geo.geocode import geocode
 
 from .models import Account, User
-from .constants import COMPANY_ROLES, PHONE_REGEX
+from .constants import COMPANY_ROLES, PHONE_REGEX, ZIP_REGEX
 
 
 class AccountForm(forms.ModelForm):
@@ -123,9 +123,13 @@ class AccountProfileForm(forms.Form):
     company_roles = forms.MultipleChoiceField(
         choices=company_roles_values, required=True
     )
-    office_address = forms.CharField(max_length=255, required=True)
+    office_street = forms.CharField(max_length=255, required=True)
+    office_city = forms.CharField(max_length=255, required=True)
+    office_state = forms.CharField(max_length=15, required=True)
+    office_zip = forms.RegexField(ZIP_REGEX, required=True)
     office_name = forms.CharField(max_length=255, required=True)
     office_type = forms.ChoiceField(choices=OFFICE_TYPES, required=True)
+    office_address = forms.CharField(max_length=255, required=False)
 
     def _check_address_attrs(self, address):
         required_attrs = [
@@ -142,8 +146,8 @@ class AccountProfileForm(forms.Form):
                 return False
         return True
 
-    def clean_office_address(self):
-        office_address = geocode(self.cleaned_data["office_address"])
-        if not office_address or not self._check_address_attrs(office_address):
-            raise forms.ValidationError("Please enter a valid address.")
-        return office_address
+    # def clean_office_address(self):
+    #     office_address = geocode(self.cleaned_data["office_address"])
+    #     if not office_address or not self._check_address_attrs(office_address):
+    #         raise forms.ValidationError("Please enter a valid address.")
+    #     return office_address
