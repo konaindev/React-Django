@@ -6,6 +6,7 @@ import json
 from django.contrib.auth.models import Group
 from django.test import TestCase
 from django.urls import reverse
+from django.utils import timezone
 from openpyxl import load_workbook
 from io import BytesIO
 from unittest import mock
@@ -15,13 +16,17 @@ from remark.geo.mocks import mocked_geocode
 from remark.geo.models import Address
 from remark.users.models import Account, User
 from remark.lib.metrics import BareMultiPeriod
-from remark.email_app.invites.added_to_property import send_invite_email, get_template_vars
+from remark.email_app.invites.added_to_property import (
+    send_invite_email,
+    get_template_vars,
+)
 
 from .models import Fund, LeaseStage, Period, Project, Property, TargetPeriod
 from .reports.periods import ComputedPeriod
 from .reports.performance import PerformanceReport
 from .export import export_periods_to_csv, export_periods_to_excel
 from remark.settings import BASE_URL
+
 
 def create_project(project_name="project 1"):
     address = Address.objects.create(
@@ -64,6 +69,11 @@ def create_project(project_name="project 1"):
         view_group=group,
     )
     return project, group
+
+
+def add_user_to_group(group, email="test@remarkably.io"):
+    user, _ = User.objects.get_or_create(email=email)
+    group.user_set.add(user)
 
 
 class DefaultComputedPeriodTestCase(TestCase):
@@ -593,13 +603,13 @@ class ExportTestCase(TestCase):
                 self.assertEqual(
                     ws_periods.cell(row=row, column=col).value,
                     response_ws.cell(row=row, column=col).value,
-                    f"row: {row}, column: {col}"
+                    f"row: {row}, column: {col}",
                 )
 
 
 class OnboardingWorkflowTestCase(TestCase):
     def setUp(self):
-        user = User.objects.create_superuser(
+        user = User.objects.create_user(
             email="admin@remarkably.io", password="adminpassword"
         )
         project, _ = create_project()
@@ -617,6 +627,7 @@ class OnboardingWorkflowTestCase(TestCase):
     @mock.patch("remark.projects.views.send_invite_email.apply_async",
                 side_effect=send_invite_email.apply)
     @mock.patch("remark.users.views.send_welcome_email.apply_async")
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
     @mock.patch("remark.email_app.invites.added_to_property.send_email")
     def test_invite_new_user(self, mock_send_email, mock_send_welcome_email, *args):
         params = {
@@ -673,23 +684,22 @@ class OnboardingWorkflowTestCase(TestCase):
         project_users = project.view_group.user_set.all()
         self.assertEqual(project_users[0].public_id, user.public_id)
 
-    @mock.patch("remark.projects.views.send_invite_email.apply_async",
-                side_effect=send_invite_email.apply)
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch(
+        "remark.projects.views.send_invite_email.apply_async",
+        side_effect=send_invite_email.apply,
+    )
     @mock.patch("remark.email_app.invites.added_to_property.send_email")
-    def test_invite_existing_user(self, mock_send_email, _):
+    def test_invite_existing_user(self, mock_send_email, *args):
         user = User.objects.create_user(
             email="test@remarkably.io",
             password="testpassword",
-            activated=datetime.datetime(2019, 10, 11, 0, 0)
+            activated=datetime.datetime(2019, 10, 11, 0, 0),
         )
         params = {
             "projects": [{"property_id": self.project.public_id}],
             "members": [
-                {
-                    "label": user.email,
-                    "value": user.public_id,
-                    "__isNew__": False,
-                }
+                {"label": user.email, "value": user.public_id, "__isNew__": False}
             ],
         }
         response = self.client.post(self.url, json.dumps(params), "json")
@@ -708,11 +718,10 @@ class GetTemplateVarsTestCase(TestCase):
         user = User.objects.create_user(
             email="test@remarkably.io",
             password="testpassword",
-            activated=datetime.datetime(2019, 10, 11, 0, 0)
+            activated=datetime.datetime(2019, 10, 11, 0, 0),
         )
         new_user = User.objects.create_user(
-            email="test_new@remarkably.io",
-            password="testpassword",
+            email="test_new@remarkably.io", password="testpassword"
         )
         self.user = user
         self.new_user = new_user
@@ -728,12 +737,14 @@ class GetTemplateVarsTestCase(TestCase):
             "is_portfolio": False,
             "is_new_account": True,
             "property_name": "project 1",
-            "properties": [{
-                "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
-                "title": "project 1",
-                "address": "Seattle, WA",
-                "view_link": f"{BASE_URL}/projects/{self.project.public_id}/market/",
-            }],
+            "properties": [
+                {
+                    "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
+                    "title": "project 1",
+                    "address": "Seattle, WA",
+                    "view_link": f"{BASE_URL}/projects/{self.project.public_id}/market/",
+                }
+            ],
             "more_count": None,
             "main_button_link": f"{BASE_URL}/users/create-password/{self.new_user.public_id}",
             "main_button_label": "Create Account",
@@ -749,17 +760,20 @@ class GetTemplateVarsTestCase(TestCase):
             "is_portfolio": False,
             "is_new_account": True,
             "property_name": "",
-            "properties": [{
-                "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
-                "title": "project 1",
-                "address": "Seattle, WA",
-                "view_link": f"{BASE_URL}/projects/{self.projects[0].public_id}/market/",
-            },{
-                "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
-                "title": "project 2",
-                "address": "Seattle, WA",
-                "view_link": f"{BASE_URL}/projects/{self.projects[1].public_id}/market/",
-            }],
+            "properties": [
+                {
+                    "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
+                    "title": "project 1",
+                    "address": "Seattle, WA",
+                    "view_link": f"{BASE_URL}/projects/{self.projects[0].public_id}/market/",
+                },
+                {
+                    "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
+                    "title": "project 2",
+                    "address": "Seattle, WA",
+                    "view_link": f"{BASE_URL}/projects/{self.projects[1].public_id}/market/",
+                },
+            ],
             "more_count": None,
             "main_button_link": f"{BASE_URL}/users/create-password/{self.new_user.public_id}",
             "main_button_label": "Create Account",
@@ -775,12 +789,14 @@ class GetTemplateVarsTestCase(TestCase):
             "is_portfolio": False,
             "is_new_account": False,
             "property_name": "project 1",
-            "properties": [{
-                "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
-                "title": "project 1",
-                "address": "Seattle, WA",
-                "view_link": f"{BASE_URL}/projects/{self.project.public_id}/market/",
-            }],
+            "properties": [
+                {
+                    "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
+                    "title": "project 1",
+                    "address": "Seattle, WA",
+                    "view_link": f"{BASE_URL}/projects/{self.project.public_id}/market/",
+                }
+            ],
             "more_count": None,
             "main_button_link": f"{BASE_URL}/projects/{self.project.public_id}/market/",
             "main_button_label": "View Property",
@@ -796,17 +812,20 @@ class GetTemplateVarsTestCase(TestCase):
             "is_portfolio": False,
             "is_new_account": False,
             "property_name": "",
-            "properties": [{
-                "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
-                "title": "project 1",
-                "address": "Seattle, WA",
-                "view_link": f"{BASE_URL}/projects/{self.projects[0].public_id}/market/",
-            }, {
-                "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
-                "title": "project 2",
-                "address": "Seattle, WA",
-                "view_link": f"{BASE_URL}/projects/{self.projects[1].public_id}/market/",
-            }],
+            "properties": [
+                {
+                    "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
+                    "title": "project 1",
+                    "address": "Seattle, WA",
+                    "view_link": f"{BASE_URL}/projects/{self.projects[0].public_id}/market/",
+                },
+                {
+                    "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
+                    "title": "project 2",
+                    "address": "Seattle, WA",
+                    "view_link": f"{BASE_URL}/projects/{self.projects[1].public_id}/market/",
+                },
+            ],
             "more_count": None,
             "main_button_link": f"{BASE_URL}/dashboard",
             "main_button_label": "View All Properties",
@@ -901,3 +920,421 @@ class AutocompleteMemberTestCase(TestCase):
         data = response.json()
         users = [u.get_icon_dict() for u in self.users[1:]]
         self.assertCountEqual(data["members"], users)
+
+
+class AddMembersTestCase(TestCase):
+    def setUp(self):
+        self.url = reverse("add_members")
+        User.objects.create_user(
+            email="admin@remarkably.io", password="adminpassword", is_superuser=True
+        )
+        self.client.login(email="admin@remarkably.io", password="adminpassword")
+
+    def get_params_for_new_users(self, projects, emails=None):
+        if emails is None:
+            emails = ["new_user@remarkably.io"]
+        return {
+            "projects": [{"property_id": p.public_id} for p in projects],
+            "members": [{"__isNew__": True, "value": email} for email in emails],
+            "role": "member",
+        }
+
+    def get_params_for_existing_users(self, projects, emails=None):
+        if emails is None:
+            emails = ["invited_user@remarkably.io"]
+        users = []
+        for email in emails:
+            user = User.objects.create(
+                email=email, activated=datetime.datetime.now(tz=timezone.utc)
+            )
+            user.save()
+            users.append(user)
+        return {
+            "projects": [{"property_id": p.public_id} for p in projects],
+            "members": [{"__isNew__": False, "value": u.public_id} for u in users],
+            "role": "member",
+        }
+
+    def get_params_for_mix_users(self, projects):
+        user = User.objects.create(
+            email="invited_user@remarkably.io",
+            activated=datetime.datetime.now(tz=timezone.utc),
+        )
+        return {
+            "projects": [{"property_id": p.public_id} for p in projects],
+            "members": [
+                {"__isNew__": False, "value": user.public_id},
+                {"__isNew__": True, "value": "new_user@remarkably.io"},
+            ],
+            "role": "member",
+        }
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_new_user_to_one_property_without_users(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project, _ = create_project()
+        params = self.get_params_for_new_users([project])
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_not_called()
+        mock_send_create_account_email.assert_called_once()
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_new_user_to_one_property_with_user(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project, group = create_project()
+        add_user_to_group(group)
+        params = self.get_params_for_new_users([project])
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_called_once()
+        mock_send_create_account_email.assert_not_called()
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_new_user_to_many_properties_without_users(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project1, _ = create_project("project 1")
+        project2, _ = create_project("project 2")
+        params = self.get_params_for_new_users([project1, project2])
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_not_called()
+        mock_send_create_account_email.assert_called_once()
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_new_user_to_many_properties_with_users(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project1, group1 = create_project("project 1")
+        add_user_to_group(group1)
+        project2, group2 = create_project("project 2")
+        add_user_to_group(group2)
+        params = self.get_params_for_new_users([project1, project2])
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_called_once()
+        mock_send_create_account_email.assert_not_called()
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_new_user_to_many_properties(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project1, _ = create_project("project 1")
+        project2, group2 = create_project("project 2")
+        add_user_to_group(group2)
+        params = self.get_params_for_new_users([project1, project2])
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_not_called()
+        mock_send_create_account_email.assert_called_once()
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_user_to_one_property_without_users(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project, _ = create_project()
+        params = self.get_params_for_existing_users([project])
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_called_once()
+        mock_send_create_account_email.assert_not_called()
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_user_to_one_property_with_user(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project, group = create_project()
+        add_user_to_group(group)
+        params = self.get_params_for_existing_users([project])
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_called_once()
+        mock_send_create_account_email.assert_not_called()
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_user_to_many_properties_without_users(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project1, _ = create_project("project 1")
+        project2, _ = create_project("project 2")
+        params = self.get_params_for_existing_users([project1, project2])
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_called_once()
+        mock_send_create_account_email.assert_not_called()
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_user_to_many_properties_with_users(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project1, group1 = create_project("project 1")
+        add_user_to_group(group1)
+        project2, group2 = create_project("project 2")
+        add_user_to_group(group2)
+        params = self.get_params_for_existing_users([project1, project2])
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_called_once()
+        mock_send_create_account_email.assert_not_called()
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_user_to_many_properties(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project1, _ = create_project("project 1")
+        project2, group2 = create_project("project 2")
+        add_user_to_group(group2)
+        params = self.get_params_for_existing_users([project1, project2])
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_called_once()
+        mock_send_create_account_email.assert_not_called()
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_new_users_to_one_property_without_users(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project, _ = create_project()
+        params = self.get_params_for_new_users(
+            [project], ["new_user1@remarkably.io", "new_user2@remarkably.io"]
+        )
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_not_called()
+        mock_send_create_account_email.assert_called()
+        self.assertEqual(mock_send_create_account_email.call_count, 2)
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_new_users_to_one_property_with_user(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project, group = create_project()
+        add_user_to_group(group)
+        params = self.get_params_for_new_users(
+            [project], ["new_user1@remarkably.io", "new_user2@remarkably.io"]
+        )
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_called()
+        self.assertEqual(mock_send_invite_email.call_count, 2)
+        mock_send_create_account_email.assert_not_called()
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_new_users_to_many_properties_without_users(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project1, _ = create_project("project 1")
+        project2, _ = create_project("project 2")
+        params = self.get_params_for_new_users(
+            [project1, project2], ["new_user1@remarkably.io", "new_user2@remarkably.io"]
+        )
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_not_called()
+        mock_send_create_account_email.assert_called()
+        self.assertEqual(mock_send_create_account_email.call_count, 2)
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_new_users_to_many_properties_with_users(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project1, group1 = create_project("project 1")
+        add_user_to_group(group1)
+        project2, group2 = create_project("project 2")
+        add_user_to_group(group2)
+        params = self.get_params_for_new_users(
+            [project1, project2], ["new_user1@remarkably.io", "new_user2@remarkably.io"]
+        )
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_called()
+        self.assertEqual(mock_send_invite_email.call_count, 2)
+        mock_send_create_account_email.assert_not_called()
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_new_users_to_many_properties(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project1, _ = create_project("project 1")
+        project2, group2 = create_project("project 2")
+        add_user_to_group(group2)
+        params = self.get_params_for_new_users(
+            [project1, project2], ["new_user1@remarkably.io", "new_user2@remarkably.io"]
+        )
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_not_called()
+        mock_send_create_account_email.assert_called()
+        self.assertEqual(mock_send_create_account_email.call_count, 2)
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_existing_users_to_one_property_without_users(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project, _ = create_project()
+        params = self.get_params_for_existing_users(
+            [project], ["invited_user1@remarkably.io", "invited_user2@remarkably.io"]
+        )
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_called()
+        self.assertEqual(mock_send_invite_email.call_count, 2)
+        mock_send_create_account_email.assert_not_called()
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_existing_users_to_one_property_with_user(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project, group = create_project()
+        add_user_to_group(group)
+        params = self.get_params_for_existing_users(
+            [project], ["invited_user1@remarkably.io", "invited_user2@remarkably.io"]
+        )
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_called()
+        self.assertEqual(mock_send_invite_email.call_count, 2)
+        mock_send_create_account_email.assert_not_called()
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_existing_users_to_many_properties_without_users(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project1, _ = create_project("project 1")
+        project2, _ = create_project("project 2")
+        params = self.get_params_for_existing_users(
+            [project1, project2],
+            ["invited_user1@remarkably.io", "invited_user2@remarkably.io"],
+        )
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_called()
+        self.assertEqual(mock_send_invite_email.call_count, 2)
+        mock_send_create_account_email.assert_not_called()
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_existing_users_to_many_properties_with_users(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project1, group1 = create_project("project 1")
+        add_user_to_group(group1)
+        project2, group2 = create_project("project 2")
+        add_user_to_group(group2)
+        params = self.get_params_for_existing_users(
+            [project1, project2],
+            ["invited_user1@remarkably.io", "invited_user2@remarkably.io"],
+        )
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_called()
+        self.assertEqual(mock_send_invite_email.call_count, 2)
+        mock_send_create_account_email.assert_not_called()
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_existing_users_to_many_properties(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project1, _ = create_project("project 1")
+        project2, group2 = create_project("project 2")
+        add_user_to_group(group2)
+        params = self.get_params_for_existing_users(
+            [project1, project2],
+            ["invited_user1@remarkably.io", "invited_user2@remarkably.io"],
+        )
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_called()
+        self.assertEqual(mock_send_invite_email.call_count, 2)
+        mock_send_create_account_email.assert_not_called()
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_users_to_one_property_without_users(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project, _ = create_project()
+        params = self.get_params_for_mix_users([project])
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_called_once()
+        mock_send_create_account_email.assert_called_once()
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_users_to_one_property_with_user(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project, group = create_project()
+        add_user_to_group(group)
+        params = self.get_params_for_mix_users([project])
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_called()
+        self.assertEqual(mock_send_invite_email.call_count, 2)
+        mock_send_create_account_email.assert_not_called()
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_users_to_many_properties_without_users(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project1, _ = create_project("project 1")
+        project2, _ = create_project("project 2")
+        params = self.get_params_for_mix_users([project1, project2])
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_called_once()
+        mock_send_create_account_email.assert_called_once()
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_users_to_many_properties_with_users(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project1, group1 = create_project("project 1")
+        add_user_to_group(group1)
+        project2, group2 = create_project("project 2")
+        add_user_to_group(group2)
+        params = self.get_params_for_mix_users([project1, project2])
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_called()
+        self.assertEqual(mock_send_invite_email.call_count, 2)
+        mock_send_create_account_email.assert_not_called()
+
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
+    @mock.patch("remark.projects.views.send_invite_email.apply_async")
+    def test_users_to_many_properties(
+        self, mock_send_invite_email, mock_send_create_account_email
+    ):
+        project1, _ = create_project("project 1")
+        project2, group2 = create_project("project 2")
+        add_user_to_group(group2)
+        params = self.get_params_for_mix_users([project1, project2])
+        response = self.client.post(self.url, json.dumps(params), "json")
+        self.assertEqual(response.status_code, 200)
+        mock_send_invite_email.assert_called_once()
+        mock_send_create_account_email.assert_called_once()

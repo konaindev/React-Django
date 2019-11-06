@@ -17,7 +17,10 @@ from remark.lib.views import ReactView, APIView
 from remark.admin import admin_site
 from remark.users.models import User
 from remark.users.constants import PROJECT_ROLES
-from remark.email_app.invites.added_to_property import send_invite_email
+from remark.email_app.invites.added_to_property import (
+    send_invite_email,
+    send_create_account_email,
+)
 
 from .reports.selectors import (
     BaselineReportSelector,
@@ -357,6 +360,9 @@ class AddMembersView(LoginRequiredMixin, APIView):
             users.append(user)
 
         role = payload.get("role")
+
+        projects_is_empty = any([not p.has_members() for p in projects])
+
         for project in projects:
             for user in users:
                 if role == PROJECT_ROLES["admin"]:
@@ -364,10 +370,16 @@ class AddMembersView(LoginRequiredMixin, APIView):
                 else:
                     project.view_group.user_set.add(user)
             project.save()
+
         for user in users:
-            send_invite_email.apply_async(
-                args=(inviter_name, user.id, projects_ids), countdown=2
-            )
+            is_new_account = user.activated is None
+            if projects_is_empty and is_new_account:
+                send_create_account_email.apply_async(args=(user.id,), countdown=2)
+            else:
+                send_invite_email.apply_async(
+                    args=(inviter_name, user.id, projects_ids), countdown=2
+                )
+
         projects_list = [
             {"property_id": p.public_id, "members": p.get_members()} for p in projects
         ]
