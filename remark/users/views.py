@@ -275,6 +275,7 @@ class AccountProfileView(LoginRequiredMixin, RemarkView):
             street_address_1=office_address.street_address,
             city=office_address.city,
             state=office_address.state,
+            full_state=office_address.full_state,
             zip_code=office_address.zip5,
             country=office_address.country,
             geocode_json=office_address.geocode_json,
