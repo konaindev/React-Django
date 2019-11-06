@@ -646,6 +646,7 @@ class Property(models.Model):
     building_image_landscape_cropping = ImageRatioFieldExt("building_image", "{}x{}".format(*SIZE_LANDSCAPE))
 
     property_type = models.IntegerField(choices=PROPERTY_TYPE, null=True, blank=False)
+    property_url = models.URLField(max_length=128, null=True, blank=True)
 
     building_class = models.IntegerField(
         choices=BUILDING_CLASS, null=False, blank=False, default=1
