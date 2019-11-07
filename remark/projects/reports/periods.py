@@ -107,7 +107,7 @@ class ComputedPeriod(ComputedValueMixin):
     @computed_value
     def target_renewal_rate(self):
         """The target number of leased units we'd like to achieve."""
-        return div_or_none(
+        return div_or_0(
             self.target_lease_renewal_notices, self.target_resident_decisions
         )
 
