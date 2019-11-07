@@ -7,6 +7,7 @@ from django.db import models
 from django.db.models import Q
 from django.conf import settings
 from django.contrib.auth.models import Group
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.urls import reverse
 from django.utils.crypto import get_random_string
 
@@ -649,6 +650,16 @@ class Property(models.Model):
 
     building_class = models.IntegerField(
         choices=BUILDING_CLASS, null=False, blank=False, default=1
+    )
+
+    year_renovated = models.PositiveSmallIntegerField(
+        null=True,
+        blank=True,
+        validators=[
+            MinValueValidator(1900),
+            MaxValueValidator(2100),
+        ],
+        help_text="YYYY (four number digit)",
     )
 
     def get_geo_state(self):
