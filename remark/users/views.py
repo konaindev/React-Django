@@ -20,7 +20,10 @@ from remark.geo.geocode import geocode
 from remark.projects.models import Project
 from remark.settings import LOGIN_URL
 from remark.lib.views import ReactView, RemarkView, APIView
-from remark.email_app.invites.added_to_property import send_invite_email
+from remark.email_app.invites.added_to_property import (
+    send_invite_email,
+    send_welcome_email,
+)
 from remark.settings import INVITATION_EXP
 
 from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES
@@ -114,6 +117,7 @@ class CompleteAccountView(LoginRequiredMixin, ReactView):
                 office=office,
             )
             person.save()
+            send_welcome_email.apply_async(args=(request.user.email,), countdown=2)
             response = JsonResponse({"success": True})
         else:
             response = JsonResponse(form.errors, status=500)
