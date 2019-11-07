@@ -5,8 +5,11 @@ import { withRouter } from "react-router-dom";
 import { dashboard } from "../../redux_base/actions";
 
 class DashboardContainer extends PureComponent {
-  componentWillMount() {
-    this.props.dispatch(dashboard.requestProperties());
+  componentDidMount() {
+    const {
+      location: { search }
+    } = this.props;
+    this.props.dispatch(dashboard.requestProperties(search));
   }
 
   render() {

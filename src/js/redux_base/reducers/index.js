@@ -327,8 +327,10 @@ const uiStrings = (
 };
 
 export default combineReducers({
-  dashboard,
   network,
+  uiStrings,
+  dashboard,
+  projectReports,
   tutorial,
   createPassword,
   completeAccount,
@@ -345,7 +347,5 @@ export default combineReducers({
   project,
   market,
   kpi,
-  inviteModal,
-  uiStrings,
-  projectReports
+  inviteModal
 });

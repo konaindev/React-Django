@@ -1,5 +1,3 @@
-import { PROJECT_OVERALL_GET, PROJECT_REPORTS_GET } from "../actions";
-
 const initialState = {
   loadingProject: true,
   loadingReports: true,
@@ -9,36 +7,36 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case PROJECT_OVERALL_GET.REQUEST:
+    case "AJAX_PROJECT_OVERALL_REQUEST":
       return {
         ...state,
         loadingProject: true,
         project: false,
         reports: false
       };
-    case PROJECT_OVERALL_GET.SUCCESS:
+    case "AJAX_PROJECT_OVERALL_SUCCESS":
       return {
         ...state,
         loadingProject: false,
-        project: action.data
+        project: action.payload
       };
-    case PROJECT_OVERALL_GET.FAILURE:
+    case "AJAX_PROJECT_OVERALL_FAILURE":
       return {
         ...state,
         loadingProject: false
       };
-    case PROJECT_REPORTS_GET.REQUEST:
+    case "AJAX_PROJECT_REPORTS_REQUEST":
       return {
         ...state,
         loadingReports: true
       };
-    case PROJECT_REPORTS_GET.SUCCESS:
+    case "AJAX_PROJECT_REPORTS_SUCCESS":
       return {
         ...state,
         loadingReports: false,
-        reports: action.data
+        reports: action.payload
       };
-    case PROJECT_REPORTS_GET.FAILURE:
+    case "AJAX_PROJECT_REPORTS_FAILURE":
       return {
         ...state,
         loadingReports: false

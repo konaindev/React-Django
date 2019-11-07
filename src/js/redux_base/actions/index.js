@@ -2,7 +2,7 @@ import { createActions, URLS } from "./helpers";
 
 export * from "./helpers";
 export { default as dashboard } from "./dashboard";
-export * from "./project_reports";
+export { default as projectReports } from "./project_reports";
 
 export const tutorial = {
   set: newState => ({

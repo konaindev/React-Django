@@ -16,7 +16,7 @@ import UserRow from "../user_row";
 import UserIconList from "../user_icon_list";
 import { Close } from "../../icons";
 import { isValidEmail } from "../../utils/validators";
-import { inviteModal, general } from "../../redux_base/actions";
+import { inviteModal, dashboard } from "../../redux_base/actions";
 
 import SelectRole from "./select";
 import "./invite_modal.scss";
@@ -113,7 +113,7 @@ class InviteModal extends React.PureComponent {
     const selectedProperties = this.props.properties.filter(
       p => p.property_id !== propertyId
     );
-    this.props.dispatch(general.update({ selectedProperties }));
+    this.props.dispatch(dashboard.updateStore({ selectedProperties }));
   };
 
   closeModal = () => {

@@ -31,30 +31,19 @@ export const createActions = branch => ({
   })
 });
 
-export const createRequestTypes = base => ({
-  REQUEST: `${base}_REQUEST`,
-  SUCCESS: `${base}_SUCCESS`,
-  FAILURE: `${base}_FAILURE`
-});
-
-export const createAjaxActions = (
+export const createAjaxAction = (
   baseActionType,
   method = "GET",
   endpoint,
-  queryFunc
+  query
 ) => params => {
-  let qString = "";
-
-  if (typeof queryFunc === "function") {
-    qString = queryFunc(params);
-  }
-
-  const isPostMethod = method.toUpperCase() === "POST";
+  let queryString = typeof query === "function" ? query(params) : query;
+  let isPostMethod = method.toUpperCase() === "POST";
 
   return {
-    ...params,
     type: isPostMethod ? "FETCH_API_POST" : "FETCH_API_GET",
-    url: `${API_URL_PREFIX}${endpoint}/${qString}`,
-    baseActionType
+    url: `${API_URL_PREFIX}${endpoint}${queryString}`,
+    baseActionType,
+    payload: params
   };
 };

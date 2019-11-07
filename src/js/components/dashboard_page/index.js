@@ -278,11 +278,11 @@ export class UrlQueryLayer extends React.PureComponent {
       }
     });
 
-    let queryStringForAjax = qsStringify(urlParams);
+    let queryString = qsStringify(urlParams);
 
-    this.props.history.push(queryStringForAjax);
-    console.log("---------onChangeFilter for dashboard", queryStringForAjax);
-    this.props.dispatch(dashboard.requestProperties({ queryStringForAjax }));
+    this.props.history.push(queryString);
+    console.log("---------onChangeFilter for dashboard", queryString);
+    this.props.dispatch(dashboard.requestProperties(queryString));
   };
 
   render() {

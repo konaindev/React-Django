@@ -1,11 +1,11 @@
-import { createAjaxActions, URLS } from "./helpers";
+import { createAjaxAction } from "./helpers";
 
 const actions = {
-  requestProperties: createAjaxActions(
+  requestProperties: createAjaxAction(
     "AJAX_DASHBOARD_PROPERTIES",
     "GET",
     "/dashboard",
-    (d = {}) => d.queryStringForAjax || ""
+    qs => qs
   ),
   updateStore: payload => ({
     type: "DASHBOARD_UPDATE_STORE",

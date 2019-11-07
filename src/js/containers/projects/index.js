@@ -4,10 +4,7 @@ import { withRouter } from "react-router-dom";
 import _get from "lodash/get";
 
 import ProjectReportPage from "../../components/project_report_page";
-import {
-  projectOverallRequest,
-  projectReportsRequest
-} from "../../redux_base/actions";
+import { projectReports } from "../../redux_base/actions";
 
 class ProjectsContainer extends PureComponent {
   state = {};
@@ -41,7 +38,7 @@ class ProjectsContainer extends PureComponent {
     }
 
     if (projectId !== prevState.projectId) {
-      nextProps.dispatch(projectOverallRequest(projectId));
+      nextProps.dispatch(projectReports.requestProject(projectId));
       newState["projectId"] = projectId;
     }
 
@@ -50,7 +47,7 @@ class ProjectsContainer extends PureComponent {
       reportSpan !== prevState.reportSpan
     ) {
       nextProps.dispatch(
-        projectReportsRequest(projectId, reportType, reportSpan)
+        projectReports.requestReports({ projectId, reportType, reportSpan })
       );
       newState["loadingReports"] = true;
     }
@@ -63,7 +60,7 @@ class ProjectsContainer extends PureComponent {
   }
 
   fetchProjectData(projectId) {
-    this.props.dispatch(projectOverallRequest(projectId));
+    this.props.dispatch(projectReports.requestProject(projectId));
   }
 
   render() {

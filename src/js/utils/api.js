@@ -6,7 +6,7 @@ const validateStatus = status => {
   return status >= 200 && status < 500;
 };
 
-export function axiosPost(url, data, headers = {}, csrfProtect = true) {
+export function axiosPost(url, data, headers = {}) {
   const { token } = store.getState();
   const { access } = token;
 

@@ -1,7 +1,4 @@
 import {
-  general,
-  tutorial,
-  networking,
   createPassword,
   completeAccount,
   auth,
@@ -113,9 +110,6 @@ export const startNetworkFetch = _ => next => action => {
   switch (action.type) {
     case "NETWORK_START_FETCH":
       switch (action.branch) {
-        case "dashboard":
-          next(general.startFetching());
-          break;
         default:
           next(action);
           break;
@@ -139,11 +133,6 @@ export const applyApiResult = _ => next => action => {
         }
         case "location": {
           next(locations.set(action.response));
-          break;
-        }
-        case "dashboard": {
-          //next(locations.set(action.reponse.locations));
-          next(general.update(action.response));
           break;
         }
         case "token": {
@@ -241,7 +230,9 @@ export const refreshToken = store => next => action => {
           next(auth.clearToken());
         } else {
           next(tokenActions.update({ refresh, access: response.data.access }));
-          next(action.failedAction);
+          // there might be mutiple simulataneous calls which resulted 401
+          // better to reload the page
+          window.location.reload();
         }
       })
       .catch(e => console.log("REFRESH TOKEN ERROR", e));

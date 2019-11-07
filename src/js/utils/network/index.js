@@ -1,4 +1,4 @@
-import { all, call, put, takeLatest } from "redux-saga/effects";
+import { all, call, put, takeEvery } from "redux-saga/effects";
 import { networking, token, auth } from "../../redux_base/actions";
 import { axiosGet, axiosPost } from "../api";
 
@@ -55,7 +55,7 @@ function handleError(action) {
           break;
         }
         default:
-          yield put(token.refresh(action));
+          yield put(token.refresh());
       }
     } else {
       console.log("something was wrong!!!", e);
@@ -85,7 +85,7 @@ function* get(action) {
 function* post(action) {
   try {
     yield put({ type: `${action.baseActionType}_REQUEST` });
-    const response = yield call(axiosPost, action.url, action.body, {}, false);
+    const response = yield call(axiosPost, action.url, action.payload);
     yield checkStatus(response);
     yield put({
       type: `${action.baseActionType}_SUCCESS`,
@@ -100,11 +100,11 @@ function* post(action) {
 }
 
 function* getSaga() {
-  yield takeLatest("FETCH_API_GET", get);
+  yield takeEvery("FETCH_API_GET", get);
 }
 
 function* postSaga() {
-  yield takeLatest("FETCH_API_POST", post);
+  yield takeEvery("FETCH_API_POST", post);
 }
 
 export default function*() {
