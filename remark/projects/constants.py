@@ -1,4 +1,3 @@
-
 PROPERTY_TYPE = (
     (1, "Multifamily - Standard"),
     (2, "Multifamily - Micro"),
@@ -17,4 +16,14 @@ SIZE_THUMBNAIL = (180, 180)
 USER_ROLES = {
     "admin": "admin",
     "member": "member"
+}
+
+PROPERTY_STYLES = {
+    "low_rise": "Low-Rise",
+    "walk_up": "Walk-Up",
+    "mid_rise": "Mid-Rise",
+    "hi_rise": "Hi-Rise",
+    "tower_block": "Tower-Block",
+    "garden": "Garden",
+    "other": "Other",
 }
