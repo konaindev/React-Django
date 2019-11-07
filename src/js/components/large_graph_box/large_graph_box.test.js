@@ -30,6 +30,17 @@ describe("LargeGraphBox", () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it("renders PercentageGraphBox correctly with undefined target value", () => {
+    const props = {
+      name: "USV > EXE",
+      value: 0.1,
+      delta: 0.03,
+      series: [10, 20, 30, 15]
+    };
+    const tree = renderer.create(<PercentageGraphBox {...props} />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+
   it("renders PercentageGraphBox with extra content correctly", () => {
     const props = {
       name: "USV > EXE",
