@@ -59,7 +59,7 @@ export default class Profile extends React.PureComponent {
       },
       office_street: "",
       office_city: "",
-      office_state: {},
+      office_state: { label: "", value: "" },
       office_zip: "",
       office_name: "",
       office_type: null
