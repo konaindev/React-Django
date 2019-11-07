@@ -242,6 +242,7 @@ export const refreshToken = store => next => action => {
           next(auth.clearToken());
         } else {
           next(tokenActions.update({ refresh, access: response.data.access }));
+          next(action.failedAction);
         }
       })
       .catch(e => console.log("REFRESH TOKEN ERROR", e));

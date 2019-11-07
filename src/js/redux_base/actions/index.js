@@ -98,9 +98,10 @@ export const token = {
     type: "UPDATE_TOKEN",
     token: x
   }),
-  refresh: () => ({
+  refresh: failedAction => ({
     type: "REFRESH_TOKEN",
-    url: `${URLS.base}${URLS.ver}${URLS.refresh}`
+    url: `${URLS.base}${URLS.ver}${URLS.refresh}`,
+    failedAction
   })
 };
 

@@ -42,11 +42,11 @@ export default () => {
         sendGaEvent,
         startNetworkFetch,
         applyApiResult,
-        sagaMiddleware,
         logoutMiddleware,
         fetchInviteModal,
         fetchUIString,
-        refreshToken
+        refreshToken,
+        sagaMiddleware
       )
     )
   );

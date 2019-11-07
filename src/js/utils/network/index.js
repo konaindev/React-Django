@@ -55,7 +55,7 @@ function handleError(action) {
           break;
         }
         default:
-          yield put(token.refresh());
+          yield put(token.refresh(action));
       }
     } else {
       console.log("something was wrong!!!", e);

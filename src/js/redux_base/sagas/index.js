@@ -1,4 +1,4 @@
-import { all, fork, take, cancel } from "redux-saga/effects";
+import { all, fork } from "redux-saga/effects";
 
 // network
 import network from "../../utils/network";
