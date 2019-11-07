@@ -624,10 +624,10 @@ class OnboardingWorkflowTestCase(TestCase):
         self.url = reverse("add_members")
 
     @mock.patch("remark.users.views.geocode", side_effect=mocked_geocode)
+    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
     @mock.patch("remark.projects.views.send_invite_email.apply_async",
                 side_effect=send_invite_email.apply)
     @mock.patch("remark.users.views.send_welcome_email.apply_async")
-    @mock.patch("remark.projects.views.send_create_account_email.apply_async")
     @mock.patch("remark.email_app.invites.added_to_property.send_email")
     def test_invite_new_user(self, mock_send_email, mock_send_welcome_email, *args):
         params = {
