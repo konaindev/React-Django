@@ -2,11 +2,13 @@ from datetime import datetime
 
 from django import forms
 from django.core.exceptions import ValidationError
+from django.core.validators import URLValidator
 from django.utils.safestring import mark_safe
 from django.urls import reverse
 from image_cropping import ImageCropWidget
 
 from remark.settings import BASE_URL
+from remark.lib.urls import check_url_is_active
 from remark.lib.validators import (
     validate_linebreak_separated_numbers_list,
     validate_linebreak_separated_strings_list,
@@ -282,6 +284,14 @@ class TAMExportForm(forms.Form):
 
 
 class PropertyForm(forms.ModelForm):
+    def clean_property_url(self):
+        url = self.cleaned_data["property_url"]
+        if url:
+            message = "Link is not active."
+            if not check_url_is_active(url):
+                raise forms.ValidationError(message)
+        return url
+
     class Meta:
         model = Property
         fields = "__all__"
