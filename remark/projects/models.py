@@ -7,6 +7,7 @@ from django.db import models
 from django.db.models import Q
 from django.conf import settings
 from django.contrib.auth.models import Group
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.urls import reverse
 from django.utils.crypto import get_random_string
 
@@ -27,6 +28,7 @@ from remark.projects.spreadsheets import SpreadsheetKind, get_activator_for_spre
 from remark.projects.reports.performance import PerformanceReport
 from remark.projects.reports.selectors import ReportLinks
 from remark.projects.constants import (
+    PROPERTY_STYLES,
     PROPERTY_TYPE,
     BUILDING_CLASS,
     SIZE_LANDSCAPE,
@@ -502,6 +504,21 @@ class Project(models.Model):
         ] + [user.get_icon_dict(PROJECT_ROLES["admin"]) for user in users_admins if not user.is_staff]
         return users
 
+    def has_members(self):
+        if self.view_group is None:
+            users_members = []
+        else:
+            users_members = self.view_group.user_set.filter(is_staff=False)
+        if self.admin_group is None:
+            users_admins = []
+        else:
+            users_admins = self.admin_group.user_set.filter(is_staff=False)
+
+        if len(users_members) == 0 and len(users_admins) == 0:
+            return False
+        else:
+            return True
+
     def get_project_public_id(self):
         return self.public_id
 
@@ -631,10 +648,43 @@ class Property(models.Model):
     building_image_landscape_cropping = ImageRatioFieldExt("building_image", "{}x{}".format(*SIZE_LANDSCAPE))
 
     property_type = models.IntegerField(choices=PROPERTY_TYPE, null=True, blank=False)
+    property_url = models.URLField(max_length=128, null=True, blank=True)
 
     building_class = models.IntegerField(
         choices=BUILDING_CLASS, null=False, blank=False, default=1
     )
+
+    year_renovated = models.PositiveSmallIntegerField(
+        null=True,
+        blank=True,
+        validators=[
+            MinValueValidator(1900),
+            MaxValueValidator(2100),
+        ],
+        help_text="YYYY (four number digit)",
+    )
+
+    @property
+    def property_style(self):
+        buildings = self.building_set.all()
+        if len(buildings) == 1:
+            build = buildings[0]
+            if build.number_of_floors < 1:
+                return PROPERTY_STYLES["other"]
+            elif 1 <= build.number_of_floors <= 4:
+                if build.has_elevator:
+                    return PROPERTY_STYLES["low_rise"]
+                return PROPERTY_STYLES["walk_up"]
+            elif 5 <= build.number_of_floors <= 9:
+                return PROPERTY_STYLES["mid_rise"]
+            elif build.number_of_floors >= 10:
+                return PROPERTY_STYLES["hi_rise"]
+        elif len(buildings) >= 2:
+            tower_blocks = list(filter(lambda b: b.number_of_floors >= 10, buildings))
+            if len(tower_blocks) > 0:
+                return PROPERTY_STYLES["tower_block"]
+            return PROPERTY_STYLES["garden"]
+        return PROPERTY_STYLES["other"]
 
     def get_geo_state(self):
         return self.geo_address.state

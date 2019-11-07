@@ -493,6 +493,8 @@ class FundAdmin(admin.ModelAdmin):
 @admin.register(Property, site=admin_site)
 class PropertyAdmin(admin.ModelAdmin):
     form = PropertyForm
+
+    readonly_fields = ["property_style"]
     inlines = (
         BuildingInline,
     )
