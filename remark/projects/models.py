@@ -655,29 +655,24 @@ class Property(models.Model):
     @property
     def property_style(self):
         buildings = self.building_set.all()
-        if not len(buildings):
-            return PROPERTY_STYLES["other"]
-        elif len(buildings) == 1:
+        if len(buildings) == 1:
             build = buildings[0]
             if build.number_of_floors < 1:
                 return PROPERTY_STYLES["other"]
-            if 1 <= build.number_of_floors <= 4:
+            elif 1 <= build.number_of_floors <= 4:
                 if build.has_elevator:
-                    style = PROPERTY_STYLES["low_rise"]
-                else:
-                    style = PROPERTY_STYLES["walk_up"]
+                    return PROPERTY_STYLES["low_rise"]
+                return PROPERTY_STYLES["walk_up"]
             elif 5 <= build.number_of_floors <= 9:
-                style = PROPERTY_STYLES["mid_rise"]
+                return PROPERTY_STYLES["mid_rise"]
             elif build.number_of_floors >= 10:
-                style = PROPERTY_STYLES["hi_rise"]
+                return PROPERTY_STYLES["hi_rise"]
         elif len(buildings) >= 2:
             tower_blocks = list(filter(lambda b: b.number_of_floors >= 10, buildings))
-            if len(tower_blocks):
-                style = PROPERTY_STYLES["tower_block"]
-            else:
-                style = PROPERTY_STYLES["garden"]
-
-        return style
+            if len(tower_blocks) > 0:
+                return PROPERTY_STYLES["tower_block"]
+            return PROPERTY_STYLES["garden"]
+        return PROPERTY_STYLES["other"]
 
     def get_geo_state(self):
         return self.geo_address.state
