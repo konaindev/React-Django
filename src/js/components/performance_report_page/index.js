@@ -20,9 +20,11 @@ export class PerformanceReportPage extends Component {
 
   constructor(props) {
     super(props);
+    let camp_start = this.props.project?.campaign_start;
+    let camp_end = this.props.project?.campaign_end;
     this.campaignRange = {
-      campaign_start: this.props.project.campaign_start,
-      campaign_end: this.props.project.campaign_end
+      campaign_start: camp_start,
+      campaign_end: camp_end
     };
   }
 

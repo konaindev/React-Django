@@ -136,7 +136,19 @@ export class DashboardPage extends React.PureComponent {
   toggleView = viewType => this.setState({ viewType });
 
   onSelectHandler = selectedProperties => {
-    this.props.dispatch(general.update({ selectedProperties }));
+    let isAdmin;
+    if (this.props.user.is_superuser) {
+      isAdmin = true;
+    } else {
+      isAdmin = selectedProperties.every(property => {
+        const member = property.members.find(
+          m => m.user_id === this.props.user.user_id
+        );
+        return member?.role === "admin";
+      });
+    }
+    const inviteDisable = !isAdmin;
+    this.props.dispatch(general.update({ selectedProperties, inviteDisable }));
   };
 
   onShowAddPropertyForm = () => {
@@ -170,7 +182,6 @@ export class DashboardPage extends React.PureComponent {
     const className = cn("dashboard-content", {
       "dashboard-content--selection-mode": this.props.selectedProperties.length
     });
-    const { user } = this.props;
     const PropertiesListComponent = this.propertiesListComponent;
     const navLinks = this.props.navLinks;
     const { isFetching } = this.props;
@@ -217,6 +228,7 @@ export class DashboardPage extends React.PureComponent {
               <div className="dashboard-content__selection">
                 <DashboardSelection
                   selectedProperties={this.props.selectedProperties}
+                  inviteDisable={this.props.inviteDisable}
                   inviteHandler={this.inviteHandler}
                   selectAll={this.selectAll}
                   cancelSelect={this.cancelSelect}
@@ -249,23 +261,36 @@ export class DashboardPage extends React.PureComponent {
 const DashboardSelection = ({
   selectedProperties,
   inviteHandler,
+  inviteDisable,
   selectAll,
   cancelSelect
 }) => {
+  const inviteColor = inviteDisable ? "disabled" : "secondary";
+  const controlsClasses = cn("dashboard-selection__controls", {
+    "dashboard-selection__controls--invite-error": inviteDisable
+  });
   return (
     <div className="dashboard-selection">
       <div className="dashboard-selection__title">
         {selectedProperties.length}
         {selectedProperties.length === 1 ? " Property" : " Properties"} Selected
       </div>
-      <div className="dashboard-selection__controls">
-        <Button
+      <div className={controlsClasses}>
+        <div className="dashboard-selection__invite-error">
+          Some of the properties selected require admin access to invite users.
+        </div>
+        <Button.DisableWrapper
           className="dashboard-selection__button"
-          color="secondary"
-          onClick={inviteHandler}
+          isDisable={inviteDisable}
         >
-          invite
-        </Button>
+          <Button
+            className="dashboard-selection__button"
+            color={inviteColor}
+            onClick={inviteHandler}
+          >
+            invite
+          </Button>
+        </Button.DisableWrapper>
         <Button
           className="dashboard-selection__button"
           color="secondary"
@@ -289,8 +314,13 @@ const DashboardSelection = ({
 DashboardSelection.propTypes = {
   selectedProperties: PropTypes.array.isRequired,
   inviteHandler: PropTypes.func.isRequired,
+  inviteDisable: PropTypes.bool,
   selectAll: PropTypes.func.isRequired,
   cancelSelect: PropTypes.func.isRequired
+};
+
+DashboardSelection.defaultProps = {
+  inviteDisable: true
 };
 
 export class UrlQueryLayer extends React.PureComponent {

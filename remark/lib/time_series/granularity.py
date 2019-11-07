@@ -1,5 +1,6 @@
 from collections import namedtuple
 from decimal import Decimal
+from statistics import median
 
 
 def merge(merge_document, split_document, ts, start, end):
@@ -88,6 +89,9 @@ def _merge(merge_document, ts):
         elif merge_document[prop] == "average":
             value = _merge_average(ts, prop)
             result[prop] = value
+        elif merge_document[prop] == "median":
+            value = _merge_median(ts, prop)
+            result[prop] = value
         elif callable(merge_document[prop]):
             value = merge_document[prop](ts, prop)
             result[prop] = value
@@ -107,6 +111,12 @@ def _merge_average(items, prop):
     result = _merge_sum(items, prop)
     return result / cast_zero_of_type(items[0][prop], len(items))
 
+def _merge_median(items, prop):
+    if len(items) == 0:
+        return None
+
+    values = [i[prop] for i in items]
+    return median(values)
 
 def _merge_sum(items, prop):
     result = cast_zero_of_type(items[0][prop])

@@ -60,7 +60,7 @@ export default class PerformanceReportSpanDropdown extends Component {
     const startDate = formatDateWithTokens(start, this.props.dateFormat);
     const endDate = formatDateWithTokens(end, this.props.dateFormat);
     const rangeString = startDate + "," + endDate;
-    this.props.onChange(this.state.preset, rangeString);
+    this.props.onChange("custom", rangeString);
   };
 
   renderOptions() {

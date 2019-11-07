@@ -43,4 +43,16 @@ describe("DashboardPage", () => {
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
+  it("renders for admin", () => {
+    const newProps = { ...props };
+    newProps.user.is_superuser = true;
+    const tree = renderer
+      .create(
+        <Provider store={store}>
+          <DashboardPage {...newProps} />
+        </Provider>
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

@@ -73,3 +73,14 @@ export default class Button extends Component {
     );
   }
 }
+
+const DisableWrapper = ({ className, isDisable, children }) => {
+  if (isDisable) {
+    const classes = cx("button-disable-wrapper", className);
+    return <div className={classes}>{children}</div>;
+  } else {
+    return children;
+  }
+};
+
+Button.DisableWrapper = DisableWrapper;

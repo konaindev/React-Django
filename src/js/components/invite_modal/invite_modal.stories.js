@@ -5,17 +5,18 @@ import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 
 import { props as userProps } from "../user_icon_list/props";
-import _store from "../../state/store";
+import storeFunc from "../../state/store";
 
 import InviteModal from "./index";
 import { props, multiProps } from "./props";
 
-const withProvider = story => <Provider store={_store}>{story()}</Provider>;
+const { store } = storeFunc();
+const withProvider = story => <Provider store={store}>{story()}</Provider>;
 
 export const apiMock = story => {
   const mock = new MockAdapter(axios);
   mock.onPost(`${process.env.BASE_URL}/projects/members/`).reply(request => {
-    const value = request.data;
+    const value = JSON.parse(request.data).value;
     const members = userProps.users
       .filter(
         m =>
@@ -49,21 +50,21 @@ storiesOf("InviteModal", module)
   .addDecorator(apiMock)
   .addDecorator(withProvider)
   .add("default", () => {
-    _store.getState().general = {
+    store.getState().general = {
       properties: props.properties,
       selectedProperties: props.properties
     };
-    _store.dispatch({
+    store.dispatch({
       type: "INVITE_MODAL_SHOW"
     });
     return <InviteModal />;
   })
   .add("Multiple properties", () => {
-    _store.getState().general = {
+    store.getState().general = {
       properties: multiProps.properties,
       selectedProperties: multiProps.properties
     };
-    _store.dispatch({
+    store.dispatch({
       type: "INVITE_MODAL_SHOW"
     });
     return <InviteModal />;

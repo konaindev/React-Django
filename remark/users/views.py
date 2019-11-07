@@ -95,9 +95,9 @@ class CompleteAccountView(LoginRequiredMixin, ReactView):
                 business = Business.objects.get(public_id=data["company"])
             except Business.DoesNotExist:
                 business = Business(name=data["company"])
-                business.save()
             for role in data["company_role"]:
                 setattr(business, BUSINESS_TYPE[role], True)
+            business.save()
 
             office = Office(
                 office_type=data["office_type"],
@@ -275,6 +275,7 @@ class AccountProfileView(LoginRequiredMixin, RemarkView):
             street_address_1=office_address.street_address,
             city=office_address.city,
             state=office_address.state,
+            full_state=office_address.full_state,
             zip_code=office_address.zip5,
             country=office_address.country,
             geocode_json=office_address.geocode_json,
@@ -288,14 +289,19 @@ class AccountProfileView(LoginRequiredMixin, RemarkView):
             setattr(business, BUSINESS_TYPE[role], True)
         business.save()
 
-        person = user.get_person()
+        try:
+            person = user.person
+        except Person.DoesNotExist:
+            person = {}
+            
         if not person:
             person = Person(user=user, email=user.email)
         person.first_name = data["first_name"]
         person.last_name = data["last_name"]
         person.role = data["title"]
-        person.cell_phone = data["phone"]
-        person.office_phone = data["phone_ext"]
+        person.office_phone_country_code = data["phone_country_code"]
+        person.office_phone = data["phone"]
+        person.office_phone_ext = data["phone_ext"]
         if data["avatar"]:
             person.avatar = data["avatar"]
 

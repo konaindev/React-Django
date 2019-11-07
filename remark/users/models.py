@@ -5,11 +5,13 @@ from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.utils.crypto import get_random_string
 from django.urls import reverse
+import json
 
 from remark.lib.tokens import public_id
 from remark.lib.fields import NormalizedEmailField
 from remark.projects.models import Project
-from .constants import ACCOUNT_TYPE
+from .constants import ACCOUNT_TYPE, PROJECT_ROLES, US_COUNTRY_ID, GB_COUNTRY_ID, US_STATE_LIST, GB_COUNTY_LIST
+from remark.crm.models import Person
 
 
 def usr_public_id():
@@ -153,54 +155,50 @@ class User(PermissionsMixin, AbstractBaseUser):
         data = {
             "email": self.email,
             "user_id": self.public_id,
-            "account_id": self.account_id,
-            "account_name": self.account.company_name,
             "logout_url": reverse("logout"),
             "profile_image_url": self.get_avatar_url(),
+            "account_name": self.get_name(),
+            "is_superuser": self.is_superuser,
+            # TODO: Add account_url
         }
         if not self.is_superuser:
             data["account_settings_url"] = reverse("account_settings")
         return data
 
-    def get_role(self):
-        person = self.person_set.first()
-        if person:
-            role = person.role
-        else:
-            role = "member"
-        return role
-
     def get_name(self):
-        person = self.person_set.first()
-        if person:
+        try:
+            person = self.person
             name = person.full_name
-        else:
+        except Person.DoesNotExist:
             name = self.email
         return name
 
-    def get_person(self):
-        return self.person_set.first()
-
     def get_avatar_url(self):
-        person = self.get_person()
-        if person and person.avatar:
-            url = person.avatar.url
-        else:
+        try:
+            person = self.person
+            if person and person.avatar:
+                url = person.avatar.url
+            else:
+                url = ""
+        except Person.DoesNotExist:
             url = ""
         return url
 
-    def get_icon_dict(self):
+    def get_icon_dict(self, role=PROJECT_ROLES["member"]):
         return {
             "email": self.email,
             "user_id": self.public_id,
             "account_name": self.get_name(),
-            "role": self.get_role(),
             "profile_image_url": self.get_avatar_url(),
+            "role": role,
         }
 
     def get_profile_data(self):
-        person = self.get_person()
-        if not person:
+        try:
+            person = self.person
+            if not person:
+                return {}
+        except Person.DoesNotExist:
             return {}
         office = person.office
         business = office.business
@@ -209,15 +207,32 @@ class User(PermissionsMixin, AbstractBaseUser):
             "first_name": person.first_name,
             "last_name": person.last_name,
             "title": person.role,
-            "phone": person.cell_phone,
-            "phone_ext": person.office_phone,
+            "phone_country_code": person.office_phone_country_code,
+            "phone": person.office_phone,
+            "phone_ext": person.office_phone_ext,
             "company": business.name,
             "company_roles": business.get_roles(),
             "office_address": office.address.formatted_address,
+            "office_street": office.address.street_address_1,
+            "office_city": office.address.city,
+            "office_state": {"label": office.address.full_state, "value": office.address.full_state},
+            "office_zip": office.address.zip_code,
+            "office_country": self.get_country_object(office.address.country),
             "office_name": office.name,
             "office_type": office.office_type,
         }
 
+    def get_country_object(self, value):
+        with open('./data/locations/countries.json', 'r') as read_file:
+            countries = json.load(read_file)
+            for country in countries:
+                if country["iso2"] == value:
+                    country_object = {
+                        "label": country["name"],
+                        "value": country["iso3"]
+                    }
+                    return country_object
+        
 
 class Account(models.Model):
     company_name = models.CharField(max_length=250, help_text="Company Name")

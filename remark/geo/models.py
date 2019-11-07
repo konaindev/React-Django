@@ -119,6 +119,8 @@ class Address(models.Model):
 
     state = models.CharField(blank=False, help_text="State / Province", max_length=128)
 
+    full_state = models.CharField(blank=True, help_text="State / Province Full name", max_length=128)
+
     zip_code = models.CharField(blank=False, max_length=32, help_text="ZIP5")
 
     country = models.CharField(blank=False, max_length=128)

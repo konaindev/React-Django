@@ -4,7 +4,7 @@ import _intersection from "lodash/intersection";
 import PropTypes from "prop-types";
 import React from "react";
 import AddressModal from "../address_modal";
-import { COUNTRY_FIELDS } from "../../constants";
+import { COUNTRY_FIELDS, COUNTRY_CODE_REGEX } from "../../constants";
 
 import { Tick, Upload } from "../../icons";
 import { formatPhone } from "../../utils/formatters";
@@ -23,6 +23,7 @@ export default class Profile extends React.PureComponent {
       first_name: PropTypes.string,
       last_name: PropTypes.string,
       title: PropTypes.string,
+      phone_country_code: PropTypes.string,
       phone: PropTypes.string,
       phone_ext: PropTypes.string,
       company: PropTypes.string,
@@ -47,6 +48,7 @@ export default class Profile extends React.PureComponent {
       first_name: "",
       last_name: "",
       title: "",
+      phone_country_code: "",
       phone: "",
       phone_ext: "",
       company: "",
@@ -68,6 +70,7 @@ export default class Profile extends React.PureComponent {
     "first_name",
     "last_name",
     "title",
+    "phone_country_code",
     "phone",
     "phone_ext",
     "company",
@@ -100,7 +103,6 @@ export default class Profile extends React.PureComponent {
     profile.office_type = this.props.office_options.filter(
       i => i.value === profile.office_type
     )[0];
-    profile.office_state = undefined;
     return profile;
   }
 
@@ -146,9 +148,14 @@ export default class Profile extends React.PureComponent {
 
   getFieldClasses = (name, errors, touched, modifiers = []) => {
     const classes = modifiers.map(m => `account-settings__field--${m}`);
-    return cn("account-settings__field", classes, {
+    let error_dict = {
       "account-settings__field--error": errors[name] && touched[name]
-    });
+    };
+    if (name == "phone") {
+      error_dict["account-settings__field--error-country-code"] =
+        errors["phone_country_code"] && touched["phone_country_code"];
+    }
+    return cn("account-settings__field", classes, error_dict);
   };
 
   getHelpTextClasses = (name, errors, touched) => {
@@ -222,6 +229,15 @@ export default class Profile extends React.PureComponent {
           data.append("office_country", dataValues.office_country.value);
         } else if (k === "office_state") {
           data.append("office_state", dataValues.office_state.value);
+        } else if (
+          k === "phone_country_code" &&
+          dataValues["phone"] &&
+          !dataValues["phone_country_code"]
+        ) {
+          data.append(
+            "phone_country_code",
+            COUNTRY_FIELDS[this.selectedCountry].phone_code
+          );
         } else {
           data.append(k, dataValues[k]);
         }
@@ -391,21 +407,76 @@ export default class Profile extends React.PureComponent {
                       </div>
                     </div>
                     <div
+                      className={this.getFieldClasses(
+                        "office_country",
+                        errors,
+                        touched,
+                        ["max-width"]
+                      )}
+                    >
+                      <div className="account-settings__label">
+                        Office Country
+                      </div>
+                      <Select
+                        className="account-settings__input"
+                        name="office_country"
+                        theme="gray"
+                        isShowControls={false}
+                        isShowAllOption={false}
+                        value={values.office_country}
+                        options={this.props.office_countries}
+                        onBlur={() => {
+                          this.unsetMessage();
+                          setFieldTouched("office_country", true);
+                        }}
+                        onChange={this.onChangeCountry}
+                      />
+                      <div className="account-settings__error">
+                        <ErrorMessage name="office_country" />
+                      </div>
+                    </div>
+                    <div
                       className={this.getFieldClasses("phone", errors, touched)}
                     >
                       <div className="account-settings__label">
                         Phone Number (Optional)
                       </div>
-                      <Input
-                        className="account-settings__input"
-                        name="phone"
-                        theme="gray"
-                        type="tel"
-                        value={values.phone}
-                        onBlur={this.onBlur}
-                        onChange={this.onChange}
-                        valueFormatter={formatPhone}
-                      />
+                      <div className="account-settings__plus-tag">+</div>
+                      <div className="account-settings__phone-input">
+                        <Input
+                          className="account-settings__country-code"
+                          name="phone_country_code"
+                          theme="gray"
+                          type="tel"
+                          placeholder={
+                            COUNTRY_FIELDS[this.selectedCountry].phone_code
+                          }
+                          value={values.phone_country_code}
+                          onBlur={this.onBlur}
+                          onChange={this.onChange}
+                        />
+                        <Input
+                          className="account-settings__input"
+                          name="phone"
+                          theme="gray"
+                          type="tel"
+                          value={values.phone}
+                          onBlur={this.onBlur}
+                          onChange={this.onChange}
+                          valueFormatter={
+                            values.phone_country_code == "1" ||
+                            (this.selectedCountry == "USA" &&
+                              !values.phone_country_code)
+                              ? formatPhone
+                              : undefined
+                          }
+                        />
+                      </div>
+                      {errors["phone_country_code"] && (
+                        <div className="account-settings__error">
+                          <ErrorMessage name="phone_country_code" />
+                        </div>
+                      )}
                       <div className="account-settings__error">
                         <ErrorMessage name="phone" />
                       </div>
@@ -428,7 +499,6 @@ export default class Profile extends React.PureComponent {
                         value={values.phone_ext}
                         onBlur={this.onBlur}
                         onChange={this.onChange}
-                        valueFormatter={formatPhone}
                       />
                       <div className="account-settings__error">
                         <ErrorMessage name="phone_ext" />
@@ -499,37 +569,6 @@ export default class Profile extends React.PureComponent {
                   </div>
                   <div className="account-settings__tab-title">
                     Company Info
-                  </div>
-                  <div className="account-settings__field-grid">
-                    <div
-                      className={this.getFieldClasses(
-                        "office_country",
-                        errors,
-                        touched,
-                        ["full-grid"]
-                      )}
-                    >
-                      <div className="account-settings__label">
-                        Office Country
-                      </div>
-                      <Select
-                        className="account-settings__input"
-                        name="office_country"
-                        theme="gray"
-                        isShowControls={false}
-                        isShowAllOption={false}
-                        value={values.office_country}
-                        options={this.props.office_countries}
-                        onBlur={() => {
-                          this.unsetMessage();
-                          setFieldTouched("office_country", true);
-                        }}
-                        onChange={this.onChangeCountry}
-                      />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="office_country" />
-                      </div>
-                    </div>
                   </div>
                   <div className="account-settings__field-grid">
                     <div

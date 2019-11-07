@@ -4,6 +4,7 @@ import os.path
 
 from datetime import datetime
 from django.db import models
+from django.db.models import Q
 from django.conf import settings
 from django.contrib.auth.models import Group
 from django.urls import reverse
@@ -25,7 +26,13 @@ from remark.lib.metrics import (
 from remark.projects.spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
 from remark.projects.reports.performance import PerformanceReport
 from remark.projects.reports.selectors import ReportLinks
-from remark.projects.constants import PROPERTY_TYPE, BUILDING_CLASS, SIZE_LANDSCAPE, SIZE_THUMBNAIL
+from remark.projects.constants import (
+    PROPERTY_TYPE,
+    BUILDING_CLASS,
+    SIZE_LANDSCAPE,
+    SIZE_THUMBNAIL,
+)
+from remark.users.constants import PROJECT_ROLES
 
 
 def pro_public_id():
@@ -113,7 +120,7 @@ class ProjectManager(models.Manager):
 
     def get_all_for_user(self, user):
         group_ids = [group.id for group in user.groups.all()]
-        return self.filter(view_group_id__in=group_ids)
+        return self.filter(Q(view_group_id__in=group_ids) | Q(admin_group_id__in=group_ids))
 
 
 class Project(models.Model):
@@ -480,15 +487,43 @@ class Project(models.Model):
         return health_check(lease_rate, target_lease_rate)
 
     def get_members(self):
-        users_q = self.view_group.user_set.all()
-        users = [user.get_icon_dict() for user in users_q if not user.is_staff]
+        if self.view_group is None:
+            users_members = []
+        else:
+            users_members = self.view_group.user_set.all()
+
+        if self.admin_group is None:
+            users_admins = []
+        else:
+            users_admins = self.admin_group.user_set.all()
+
+        users = [
+            user.get_icon_dict(PROJECT_ROLES["member"]) for user in users_members if not user.is_staff
+        ] + [user.get_icon_dict(PROJECT_ROLES["admin"]) for user in users_admins if not user.is_staff]
         return users
+
+    def get_project_public_id(self):
+        return self.public_id
+
+    def is_admin(self, user):
+        if user.is_superuser:
+            return True
+        return (self.admin_group is not None) and user.groups.filter(
+            pk=self.admin_group.pk
+        ).exists()
 
     def user_can_view(self, user):
         if user.is_superuser:
             return True
         return (self.view_group is not None) and user.groups.filter(
             pk=self.view_group.pk
+        ).exists()
+
+    def user_can_edit(self, user):
+        if user.is_superuser:
+            return True
+        return (self.admin_group is not None) and user.groups.filter(
+            pk=self.admin_group.pk
         ).exists()
 
     def __assign_blank_groups(self):
@@ -1095,6 +1130,12 @@ class TargetPeriod(ModelPeriod, models.Model):
         null=True, blank=True, default=None, help_text="Target: tours"
     )
     target_tours.metric = SumIntervalMetric()
+
+    def get_project_public_id(self):
+        try:
+            return self.project.public_id
+        except Project.DoesNotExist:
+            return None
 
     class Meta:
         # Always sort TargetPeriods with the earliest period first.

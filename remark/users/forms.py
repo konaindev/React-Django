@@ -7,7 +7,7 @@ from remark.crm.constants import OFFICE_TYPES
 from remark.geo.geocode import geocode
 
 from .models import Account, User
-from .constants import COMPANY_ROLES, PHONE_REGEX, ZIP_REGEX
+from .constants import COMPANY_ROLES, PHONE_REGEX, ZIP_REGEX, COUNTRY_CODE_REGEX
 
 
 class AccountForm(forms.ModelForm):
@@ -44,12 +44,6 @@ class UserForm(forms.ModelForm):
     class Meta:
         model = User
         fields = "__all__"
-
-    person = forms.ModelChoiceField(
-        queryset=Person.objects.all(),
-        required=False,
-        empty_label="None"
-    )
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -117,6 +111,7 @@ class AccountProfileForm(forms.Form):
     first_name = forms.CharField(max_length=255, required=True)
     last_name = forms.CharField(max_length=255, required=True)
     title = forms.CharField(max_length=255, required=False)
+    phone_country_code = forms.RegexField(COUNTRY_CODE_REGEX, required=False)
     phone = forms.RegexField(PHONE_REGEX, required=False)
     phone_ext = forms.RegexField(PHONE_REGEX, required=False)
     company = forms.CharField(max_length=255, required=True)
@@ -125,7 +120,7 @@ class AccountProfileForm(forms.Form):
     )
     office_street = forms.CharField(max_length=255, required=True)
     office_city = forms.CharField(max_length=255, required=True)
-    office_state = forms.CharField(max_length=15, required=True)
+    office_state = forms.CharField(max_length=15, required=False)
     office_zip = forms.RegexField(ZIP_REGEX, required=True)
     office_name = forms.CharField(max_length=255, required=True)
     office_type = forms.ChoiceField(choices=OFFICE_TYPES, required=True)
