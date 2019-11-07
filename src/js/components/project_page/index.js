@@ -73,7 +73,7 @@ export class ProjectPage extends Component {
 
 const mapState = state => {
   return {
-    ...state.general,
+    ...state.dashboard,
     ...state.network
   };
 };

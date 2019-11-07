@@ -6,7 +6,7 @@ import { dashboard } from "../../redux_base/actions";
 
 class DashboardContainer extends PureComponent {
   componentWillMount() {
-    this.props.dispatch(dashboard.update({}));
+    this.props.dispatch(dashboard.requestProperties());
   }
 
   render() {
@@ -14,6 +14,6 @@ class DashboardContainer extends PureComponent {
   }
 }
 
-const mapState = ({ general }) => ({ ...general });
+const mapState = ({ dashboard }) => ({ ...dashboard });
 
 export default withRouter(connect(mapState)(DashboardContainer));

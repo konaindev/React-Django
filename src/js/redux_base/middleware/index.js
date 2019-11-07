@@ -134,7 +134,6 @@ export const applyApiResult = _ => next => action => {
           break;
         }
         case "market": {
-          console.log("+++++++++++", action);
           next(market.set(action.response));
           break;
         }

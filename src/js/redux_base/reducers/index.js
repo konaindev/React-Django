@@ -1,5 +1,7 @@
 import _cloneDeep from "lodash/cloneDeep";
 import { combineReducers } from "redux";
+
+import dashboard from "./dashboard";
 import projectReports from "./project_reports";
 
 const initState = {
@@ -17,77 +19,6 @@ const token = (state = { refresh: null, access: null }, action) => {
       newState = {};
       break;
     }
-    default:
-      newState = state;
-  }
-  return newState;
-};
-function replaceObjectInArray(target, data, key) {
-  const index = target.findIndex(t => t[key] === data[key]);
-  if (index === -1) {
-    return target;
-  }
-  target[index] = { ...target[index], ...data };
-  return target;
-}
-
-const dashboard = (state = { isFetching: true }, action) => {
-  let newState = {};
-  switch (action.type) {
-    case "GENERAL_SET_STATE":
-      newState = { ...action.newState };
-      break;
-    case "GENERAL_START_FETCHING":
-      newState = { ...state, isFetching: true };
-      break;
-    case "GENERAL_UPDATE_STATE":
-      newState = {
-        ...state,
-        ...action.newState,
-        isFetching: false
-      };
-      break;
-    case "GENERAL_REMOVE_MEMBER_COMPLETE":
-      const properties = replaceObjectInArray(
-        [...state.properties],
-        action.property,
-        "property_id"
-      );
-      const selectedProperties = replaceObjectInArray(
-        [...state.selectedProperties],
-        action.property,
-        "property_id"
-      );
-      newState = {
-        ...state,
-        properties,
-        selectedProperties
-      };
-      break;
-    case "GENERAL_INVITE_MEMBER_COMPLETE":
-      const propertiesObj = {};
-      if (state.properties) {
-        state.properties.forEach(p => {
-          propertiesObj[p.property_id] = p;
-        });
-        action.properties.forEach(p => {
-          propertiesObj[p.property_id] = {
-            ...propertiesObj[p.property_id],
-            ...p
-          };
-        });
-        const properties = state.properties.map(
-          p => propertiesObj[p.property_id]
-        );
-        newState = {
-          ...state,
-          properties,
-          selectedProperties: []
-        };
-      } else {
-        newState = { ...state };
-      }
-      break;
     default:
       newState = state;
   }
@@ -396,7 +327,7 @@ const uiStrings = (
 };
 
 export default combineReducers({
-  general: dashboard,
+  dashboard,
   network,
   tutorial,
   createPassword,

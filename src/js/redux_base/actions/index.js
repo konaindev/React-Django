@@ -1,34 +1,8 @@
 import { createActions, URLS } from "./helpers";
 
 export * from "./helpers";
+export { default as dashboard } from "./dashboard";
 export * from "./project_reports";
-
-export const dashboard = {
-  update: x => {
-    console.log("dashboard action update got", x);
-    return {
-      type: "FETCH_API_GET",
-      url: `${URLS.base}${URLS.ver}${URLS.dashboard}${x.queryStringForAjax ||
-        ""}`,
-      branch: "dashboard",
-      ...x
-    };
-  }
-};
-
-export const general = {
-  set: newState => ({
-    type: "GENERAL_SET_STATE",
-    newState
-  }),
-  startFetching: () => ({
-    type: "GENERAL_START_FETCHING"
-  }),
-  update: newState => ({
-    type: "GENERAL_UPDATE_STATE",
-    newState
-  })
-};
 
 export const tutorial = {
   set: newState => ({
@@ -50,7 +24,7 @@ export const tutorial = {
 };
 
 export const networking = {
-  startFetching: (branch = "general") => ({
+  startFetching: branch => ({
     type: "NETWORK_START_FETCH",
     branch
   }),
@@ -64,7 +38,7 @@ export const networking = {
   success: () => ({
     type: "NETWORK_FETCH_SUCCESS"
   }),
-  results: (response, branch = "general") => ({
+  results: (response, branch) => ({
     type: "API_RESPONSE",
     response,
     branch

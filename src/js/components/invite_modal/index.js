@@ -324,7 +324,7 @@ class InviteModal extends React.PureComponent {
 const mapState = state => {
   return {
     ...state.inviteModal,
-    properties: state.general?.selectedProperties || []
+    properties: state.dashboard?.selectedProperties || []
   };
 };
 

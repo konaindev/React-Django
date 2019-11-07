@@ -36,3 +36,25 @@ export const createRequestTypes = base => ({
   SUCCESS: `${base}_SUCCESS`,
   FAILURE: `${base}_FAILURE`
 });
+
+export const createAjaxActions = (
+  baseActionType,
+  method = "GET",
+  endpoint,
+  queryFunc
+) => params => {
+  let qString = "";
+
+  if (typeof queryFunc === "function") {
+    qString = queryFunc(params);
+  }
+
+  const isPostMethod = method.toUpperCase() === "POST";
+
+  return {
+    ...params,
+    type: isPostMethod ? "FETCH_API_POST" : "FETCH_API_GET",
+    url: `${API_URL_PREFIX}${endpoint}/${qString}`,
+    baseActionType
+  };
+};
