@@ -27,6 +27,7 @@ from remark.projects.spreadsheets import SpreadsheetKind, get_activator_for_spre
 from remark.projects.reports.performance import PerformanceReport
 from remark.projects.reports.selectors import ReportLinks
 from remark.projects.constants import (
+    PROPERTY_STYLES,
     PROPERTY_TYPE,
     BUILDING_CLASS,
     SIZE_LANDSCAPE,
@@ -655,22 +656,26 @@ class Property(models.Model):
     def property_style(self):
         buildings = self.building_set.all()
         if not len(buildings):
-            return None
-
-        if len(buildings) == 1:
+            return PROPERTY_STYLES["other"]
+        elif len(buildings) == 1:
             build = buildings[0]
+            if build.number_of_floors < 1:
+                return PROPERTY_STYLES["other"]
             if 1 <= build.number_of_floors <= 4:
-                style = "Low-Rise" if build.has_elevator else "Walk-Up"
-            if 5 <= build.number_of_floors <= 9:
-                style = "Mid-Rise"
-            if build.number_of_floors >= 10:
-                style = "Hi-Rise"
+                if build.has_elevator:
+                    style = PROPERTY_STYLES["low_rise"]
+                else:
+                    style = PROPERTY_STYLES["walk_up"]
+            elif 5 <= build.number_of_floors <= 9:
+                style = PROPERTY_STYLES["mid_rise"]
+            elif build.number_of_floors >= 10:
+                style = PROPERTY_STYLES["hi_rise"]
         elif len(buildings) >= 2:
             tower_blocks = list(filter(lambda b: b.number_of_floors >= 10, buildings))
             if len(tower_blocks):
-                style = "Tower-Block"
+                style = PROPERTY_STYLES["tower_block"]
             else:
-                style = "Garden"
+                style = PROPERTY_STYLES["garden"]
 
         return style
 

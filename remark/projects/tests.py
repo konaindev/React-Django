@@ -1357,7 +1357,19 @@ class PropertyStyleTestCase(TestCase):
         )
 
     def test_empty_style(self):
-        self.assertIsNone(self.property.property_style)
+        self.assertEqual("Other", self.property.property_style)
+
+    def test_wrong_floor_number(self):
+        build = Building(
+            property=self.property,
+            building_identifier="building identifier",
+            number_of_floors=0,
+            has_elevator=True,
+            number_of_units=10,
+        )
+        build.save()
+
+        self.assertEqual("Other", self.property.property_style)
 
     def test_is_low_rise(self):
         build = Building(
