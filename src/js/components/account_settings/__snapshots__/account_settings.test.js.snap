@@ -2656,12 +2656,12 @@ exports[`AccountSettings profile tab 1`] = `
                       onTouchEnd={[Function]}
                     >
                       <div
-                        className="select__value-container css-1hwfws3"
+                        className="select__value-container select__value-container--has-value css-1hwfws3"
                       >
                         <div
-                          className="select__placeholder css-1wa3eu0-placeholder"
+                          className="select__single-value css-1uccc91-singleValue"
                         >
-                          
+                          Glacier Associates
                         </div>
                         <div>
                           <div
@@ -2730,7 +2730,7 @@ exports[`AccountSettings profile tab 1`] = `
                     <input
                       name="company"
                       type="hidden"
-                      value=""
+                      value="123456789"
                     />
                   </div>
                   <div
