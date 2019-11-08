@@ -18,6 +18,7 @@ class AddressModal extends React.PureComponent {
     onFinish: PropTypes.func,
     callback: PropTypes.func,
     onError: PropTypes.func,
+    updateValues: PropTypes.func,
     dispatch_type: PropTypes.string.isRequired,
     theme: PropTypes.oneOf(["dark", "light"])
   };
@@ -26,6 +27,9 @@ class AddressModal extends React.PureComponent {
     isOpen: false,
     onClose: () => {},
     onFinish: () => {},
+    updateValues: () => {},
+    callback: () => {},
+    onError: () => {},
     title: "Confirm Office Address",
     theme: "dark"
   };
@@ -38,6 +42,10 @@ class AddressModal extends React.PureComponent {
     this.props.onError(errors);
   };
 
+  parentUpdateValues = values => {
+    this.props.updateValues(values);
+  };
+
   closeModal = () => {
     this.props.dispatch(addressModal.close);
   };
@@ -48,6 +56,7 @@ class AddressModal extends React.PureComponent {
       "formatted_address"
     ]);
 
+    this.parentUpdateValues(_get(this.props.addresses, "suggested_address"));
     var data = this.props.data;
 
     // @TODO: Standardize way forms are submitted.
