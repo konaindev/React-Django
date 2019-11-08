@@ -23,6 +23,7 @@ export default class GoogleAddress extends React.PureComponent {
     labelCompany: PropTypes.string,
     labelGoogle: PropTypes.string,
     display: PropTypes.oneOf(["full", "partial"]),
+    value: PropTypes.string,
     onChange: PropTypes.func
   };
 
@@ -33,6 +34,7 @@ export default class GoogleAddress extends React.PureComponent {
     labelCompany: "Suggested Company Addresses",
     labelGoogle: "Suggested Google Addresses",
     display: "full",
+    value: "",
     onChange: () => {}
   };
 
@@ -55,10 +57,10 @@ export default class GoogleAddress extends React.PureComponent {
     return (
       <div>
         <div className="google-address__street">
-          {data.street}
-          {full_display ? "," : ""}
+          {data.street || this.props.value}
+          {full_display && data.street && data.city ? "," : ""}
         </div>
-        {full_display && (
+        {full_display && data.city && data.state && (
           <div className="google-address__city">
             {data.city}, {data.state}
           </div>
@@ -75,6 +77,7 @@ export default class GoogleAddress extends React.PureComponent {
       companyAddresses,
       loadOptions,
       onChange,
+      value,
       ...otherProps
     } = this.props;
     const classes = cn("google-address", className);
@@ -84,6 +87,7 @@ export default class GoogleAddress extends React.PureComponent {
         options: companyAddresses
       }
     ];
+    const object_value = !!value ? { label: value, value } : undefined;
     return (
       <SelectSearch
         className={classes}
@@ -94,6 +98,7 @@ export default class GoogleAddress extends React.PureComponent {
         loadOptions={this.loadOptions}
         formatOptionLabel={this.formatOptionLabel}
         onChange={onChange}
+        value={object_value}
         {...otherProps}
       />
     );
