@@ -663,6 +663,15 @@ class Property(models.Model):
         ],
         help_text="YYYY (four number digit)",
     )
+    year_built = models.PositiveSmallIntegerField(
+        null=True,
+        blank=True,
+        validators=[
+            MinValueValidator(1900),
+            MaxValueValidator(2100),
+        ],
+        help_text="YYYY (four number digit)",
+    )
 
     @property
     def property_style(self):
