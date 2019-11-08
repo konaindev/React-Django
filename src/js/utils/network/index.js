@@ -85,7 +85,7 @@ function* get(action) {
 function* post(action) {
   try {
     yield put({ type: `${action.baseActionType}_REQUEST` });
-    const response = yield call(axiosPost, action.url, action.payload);
+    const response = yield call(axiosPost, action.url, action.body);
     yield checkStatus(response);
     yield put({
       type: `${action.baseActionType}_SUCCESS`,

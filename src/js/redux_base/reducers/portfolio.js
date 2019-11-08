@@ -10,18 +10,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         ...action.payload
       };
-    case "AJAX_PORTFOLIO_GROUPS_REQUEST":
+    case "AJAX_GET_PORTFOLIO_GROUPS_REQUEST":
       return {
         ...state,
         fetching: true
       };
-    case "AJAX_PORTFOLIO_GROUPS_SUCCESS":
+    case "AJAX_GET_PORTFOLIO_GROUPS_SUCCESS":
       return {
         ...state,
         ...action.payload,
         fetching: false
       };
-    case "AJAX_PORTFOLIO_GROUPS_FAILURE":
+    case "AJAX_GET_PORTFOLIO_GROUPS_FAILURE":
       return {
         ...state,
         fetching: false

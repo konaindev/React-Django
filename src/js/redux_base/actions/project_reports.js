@@ -2,14 +2,12 @@ import { createAjaxAction } from "./helpers";
 
 const actions = {
   requestProject: createAjaxAction(
-    "AJAX_PROJECT_OVERALL",
-    "GET",
+    "AJAX_GET_PROJECT_OVERALL",
     "/projects",
     projectId => `/${projectId}/overall`
   ),
   requestReports: createAjaxAction(
-    "AJAX_PROJECT_REPORTS",
-    "GET",
+    "AJAX_GET_PROJECT_REPORTS",
     "/projects",
     ({ projectId, reportType, reportSpan }) => {
       let qs = `/${projectId}/reports/?report_type=${reportType}`;

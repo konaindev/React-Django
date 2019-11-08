@@ -2,8 +2,7 @@ import { createAjaxAction } from "./helpers";
 
 const actions = {
   requestGroups: createAjaxAction(
-    "AJAX_PORTFOLIO_GROUPS",
-    "GET",
+    "AJAX_GET_PORTFOLIO_GROUPS",
     "/portfolio/table/",
     qs => qs
   ),

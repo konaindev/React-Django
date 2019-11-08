@@ -1,36 +1,20 @@
-import _isNil from "lodash/isNil";
-import PropTypes from "prop-types";
 import React from "react";
+import PropTypes from "prop-types";
+import _isNil from "lodash/isNil";
 
 import { Alarm } from "../../icons";
 import { qsParse, qsStringify } from "../../utils/misc";
 import Container from "../container";
 import DateRangeSelector from "../date_range_selector";
-import PageChrome from "../page_chrome";
 import PortfolioTable from "../portfolio_table";
 import KPICard, { NoTargetKPICard, NoValueKPICard } from "../kpi_card";
 import Tooltip from "../rmb_tooltip";
 import Select from "../select";
 import UserMenu from "../user_menu";
 import ToggleButton from "../toggle_button";
+import Loader from "../loader";
 import { formatKPI } from "../../utils/kpi_formatters";
 import "./portfolio_analysis_view.scss";
-
-const navLinks = {
-  links: [
-    {
-      id: "portfolio",
-      name: "Portfolio",
-      url: "/dashboard"
-    },
-    {
-      id: "portfolio-analysis",
-      name: "Portfolio Analysis",
-      url: "/portfolio"
-    }
-  ],
-  selected_link: "portfolio-analysis"
-};
 
 const average_buttons_options = [
   {
@@ -60,28 +44,18 @@ function getEmptyPropertiesCount(properties) {
 
 export class PortfolioAnalysisView extends React.PureComponent {
   static propTypes = {
-    navLinks: PropTypes.shape({
-      links: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.string.isRequired,
-          name: PropTypes.string.isRequired,
-          url: PropTypes.string.isRequired
-        })
-      ),
-      selected_link: PropTypes.string.isRequired
-    }),
     kpi_bundles: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired
       })
-    ).isRequired,
-    selected_kpi_bundle: PropTypes.string.isRequired,
+    ),
+    selected_kpi_bundle: PropTypes.string,
     date_selection: PropTypes.shape({
       preset: PropTypes.string.isRequired,
       end_date: PropTypes.string.isRequired,
       start_date: PropTypes.string.isRequired
-    }).isRequired,
+    }),
     highlight_kpis: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string.isRequired,
@@ -90,14 +64,10 @@ export class PortfolioAnalysisView extends React.PureComponent {
         value: PropTypes.any,
         health: PropTypes.oneOf([-1, 0, 1, 2])
       })
-    ).isRequired,
-    table_data: PropTypes.arrayOf(PropTypes.object).isRequired,
+    ),
+    table_data: PropTypes.arrayOf(PropTypes.object),
     user: PropTypes.object,
-    display_average: PropTypes.oneOf(["1", "0"]).isRequired
-  };
-
-  static defaultProps = {
-    navLinks: navLinks
+    display_average: PropTypes.oneOf(["1", "0"])
   };
 
   get kpiOptions() {
@@ -213,16 +183,21 @@ export class PortfolioAnalysisView extends React.PureComponent {
 
   render() {
     const {
-      navLinks,
       // share_info,
       date_selection,
       table_data,
       kpi_order,
-      display_average
+      display_average,
+      fetching
     } = this.props;
 
-    // WTF is this line? -TPC
-    // this.props.dispatch(nav.updateLinks(navLinks));
+    if (fetching) {
+      return (
+        <Container className="portfolio-analysis">
+          <Loader isVisible />
+        </Container>
+      );
+    }
 
     return (
       <Container className="portfolio-analysis">

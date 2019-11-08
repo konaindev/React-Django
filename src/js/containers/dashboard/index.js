@@ -1,7 +1,8 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import DashboardPage from "../../components/dashboard_page";
 import { withRouter } from "react-router-dom";
+
+import DashboardPage from "../../components/dashboard_page";
 import { dashboard } from "../../redux_base/actions";
 
 class DashboardContainer extends PureComponent {

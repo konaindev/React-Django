@@ -19,8 +19,8 @@ export function RemarkableRouter() {
               path="/projects/:projectId/:reportType/:reportSpan?"
               component={ProjectsContainer}
             />
-            <Route exact path="/portfolio" component={PortfolioContainer} />
             <Route path="/portfolio/table" component={PortfolioContainer} />
+            <Redirect from="/portfolio" to="/portfolio/table" />
             <Route path="/auth" component={AuthContainer} />
             {/* default to dashboard...since AuthGate takes care of no-auth */}
             <Redirect to="/dashboard" />

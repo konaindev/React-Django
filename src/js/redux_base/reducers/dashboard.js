@@ -11,18 +11,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         ...action.payload
       };
-    case "AJAX_DASHBOARD_PROPERTIES_REQUEST":
+    case "AJAX_GET_DASHBOARD_PROPERTIES_REQUEST":
       return {
         ...state,
         fetchingProperties: true
       };
-    case "AJAX_DASHBOARD_PROPERTIES_SUCCESS":
+    case "AJAX_GET_DASHBOARD_PROPERTIES_SUCCESS":
       return {
         ...state,
         ...action.payload,
         fetchingProperties: false
       };
-    case "AJAX_DASHBOARD_PROPERTIES_FAILURE":
+    case "AJAX_GET_DASHBOARD_PROPERTIES_FAILURE":
       return {
         ...state,
         fetchingProperties: false

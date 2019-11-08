@@ -2,9 +2,8 @@ import { createAjaxAction } from "./helpers";
 
 const actions = {
   requestProperties: createAjaxAction(
-    "AJAX_DASHBOARD_PROPERTIES",
-    "GET",
-    "/dashboard",
+    "AJAX_GET_DASHBOARD_PROPERTIES",
+    "/dashboard/",
     qs => qs
   ),
   updateStore: payload => ({

@@ -1,6 +1,5 @@
 import axios from "axios";
 import { store } from "../App";
-import { getCSRFToken } from "./csrf";
 
 const validateStatus = status => {
   return status >= 200 && status < 500;
