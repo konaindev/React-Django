@@ -351,6 +351,7 @@ class ValidateAddressView(RemarkView):
             'office_street': geocode_address.street_address,
             'office_city': geocode_address.city,
             'office_state': geocode_address.state,
+            'full_state': geocode_address.full_state,
             'office_zip': geocode_address.postal_code if geocode_address.country == "GB" else geocode_address.zip5,
             'office_country': geocode_address.get_long_component('country'),
             'formatted_address': geocode_address.formatted_address
