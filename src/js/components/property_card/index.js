@@ -12,7 +12,7 @@ import Tick from "../../icons/tick";
 import "./property_card.scss";
 
 export const PropertyCard = ({
-  public_id,
+  property_id,
   property_name,
   address,
   image_url,
@@ -23,8 +23,7 @@ export const PropertyCard = ({
   onSelect
 }) => {
   const handleToggle = () => {
-    console.log("------> handle toggle", onSelect);
-    onSelect(public_id, !selected);
+    onSelect(property_id, !selected);
   };
   const imageStyle = {};
   if (image_url) {
@@ -66,7 +65,7 @@ export const PropertyCard = ({
 };
 
 PropertyCard.requiredPropTypes = {
-  public_id: PropTypes.string.isRequired,
+  property_id: PropTypes.string.isRequired,
   property_name: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
   image_url: PropTypes.string.isRequired,
