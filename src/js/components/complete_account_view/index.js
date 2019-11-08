@@ -443,7 +443,7 @@ class CompleteAccountView extends React.PureComponent {
                     labelCompany=""
                     labelGoogle=""
                     display="partial"
-                    value={values.office_street?.value}
+                    value={values.office_street}
                     onChange={this.onChangeOfficeAddress}
                     onBlur={this.onBlurOfficeAddress}
                   />
