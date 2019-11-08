@@ -27,7 +27,7 @@ class WeeklyInsights(models.Model):
         "projects.Project", on_delete=models.CASCADE, help_text="Project", blank=False, null=False
     )
 
-    start: models.DateField(
+    start = models.DateField(
         help_text="", blank = False, null = False
     )
 
@@ -49,7 +49,7 @@ class WeeklyInsightsItem(models.Model):
 
     insight_data = models.TextField(blank=False, null=False)
 
-    priority: models.IntegerField(blank=False, null=False)
+    priority = models.IntegerField(blank=False, null=False)
 
     @property
     def data(self):
@@ -69,7 +69,7 @@ class BaselineInsights(models.Model):
         "projects.Project", on_delete=models.CASCADE, help_text="Project", blank=False, null=False
     )
 
-    start: models.DateField(
+    start = models.DateField(
         help_text="", blank = False, null = False
     )
 
@@ -91,7 +91,7 @@ class BaselineInsightsItem(models.Model):
 
     insight_data = models.TextField(blank=False, null=False)
 
-    priority: models.IntegerField(blank=False, null=False)
+    priority = models.IntegerField(blank=False, null=False)
 
     @property
     def data(self):

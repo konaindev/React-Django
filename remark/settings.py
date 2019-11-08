@@ -108,7 +108,7 @@ INSTALLED_APPS = [
     "remark",
     "django_extensions",
     "corsheaders",
-    "remark.airflow",
+    "remark.insights",
 ]
 
 THUMBNAIL_PROCESSORS = (
