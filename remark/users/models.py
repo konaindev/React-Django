@@ -210,7 +210,7 @@ class User(PermissionsMixin, AbstractBaseUser):
             "phone_country_code": person.office_phone_country_code,
             "phone": person.office_phone,
             "phone_ext": person.office_phone_ext,
-            "company": business.name,
+            "company": { "label": business.name, "value": business.public_id},
             "company_roles": business.get_roles(),
             "office_address": office.address.formatted_address,
             "office_street": office.address.street_address_1,
