@@ -31,7 +31,11 @@ export const createActions = branch => ({
   })
 });
 
-export const createAjaxAction = (baseActionType, endpoint, query) => params => {
+export const createAjaxAction = (
+  baseActionType,
+  endpoint,
+  query = ""
+) => params => {
   let queryString = typeof query === "function" ? query(params) : query;
   let url = `${API_URL_PREFIX}${endpoint}${queryString}`;
 
