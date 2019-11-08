@@ -12,8 +12,8 @@ COMPANY_ROLES = [
     {"label": "Developer", "value": "developer"},
     {"label": "Asset Manager", "value": "asset_manager"},
     {"label": "Property Manager", "value": "property_manager"},
-    # {"label": "JV / Investor", "value": "investor"},
-    # {"label": "Vendor / Consultant", "value": "vendor"},
+    {"label": "JV / Investor", "value": "investor"},
+    {"label": "Vendor / Consultant", "value": "vendor"},
 ]
 
 BUSINESS_TYPE = {
@@ -21,6 +21,8 @@ BUSINESS_TYPE = {
     "developer": "is_developer",
     "asset_manager": "is_asset_manager",
     "property_manager": "is_property_manager",
+    "investor": "is_investor",
+    "vendor": "is_vendor",
 }
 
 VALIDATION_RULES = [
@@ -65,3 +67,8 @@ VALIDATION_RULES = [
         "key": "used",
     },
 ]
+
+PROJECT_ROLES = {
+    "member": "member",
+    "admin": "admin"
+}

@@ -1,0 +1,5098 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ModelingReportPage renders correctly 1`] = `
+<div
+  className="chrome"
+>
+  <div
+    className="page-chrome__top-chrome"
+  >
+    <div
+      className="page-chrome__top-chrome__content"
+    >
+      <div
+        className="page-header"
+      >
+        <div
+          className="container page-header__inner"
+        >
+          <a
+            href="/dashboard"
+          >
+            <div
+              className="remarkably-logo"
+            >
+               
+            </div>
+          </a>
+          <nav
+            className="page-header__items-outer"
+          >
+            <ul
+              className="page-header__items-inner"
+              style={
+                Object {
+                  "gridTemplateColumns": "repeat(1, 1fr)",
+                }
+              }
+            >
+              <li
+                className="page-header__item"
+              >
+                <div
+                  className="user-menu"
+                >
+                  <div
+                    className="select user-menu__select css-2b097c-container"
+                    onKeyDown={[Function]}
+                  >
+                    <div
+                      className="select__control css-yk16xz-control"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <div
+                        className="select__value-container css-1hwfws3"
+                      >
+                        <div
+                          className="user-menu__image-container"
+                        >
+                          <div
+                            className="user-menu__image user-menu__image--default"
+                          />
+                          <div
+                            className="user-menu__image"
+                            style={
+                              Object {
+                                "backgroundImage": "url(https://storage.googleapis.com/tracker-avatar-production/a11569ffecab2b5564c0cbfa5e5f283a_3140620_96.png)",
+                              }
+                            }
+                          />
+                        </div>
+                        <input
+                          className="css-62g3xt-dummyInput"
+                          disabled={false}
+                          id="react-select-2-input"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          readOnly={true}
+                          tabIndex="0"
+                          value=""
+                        />
+                      </div>
+                      <div
+                        className="select__indicators css-1wy0on6"
+                      >
+                        <span
+                          className="select__indicator-separator css-1okebmr-indicatorSeparator"
+                        />
+                        <div
+                          aria-hidden="true"
+                          className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <svg
+                            aria-hidden="true"
+                            className="select__dropdown-arrow select__dropdown-arrow--down"
+                            color="inherit"
+                            focusable="false"
+                            height="1em"
+                            role="presentation"
+                            viewBox="0 0 10 5"
+                            width="1em"
+                          >
+                            <path
+                              d="M1 1.16134L4.92334 4.5"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                            />
+                            <path
+                              d="M8.82812 1.16134L5 4.5"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                          <svg
+                            aria-hidden="true"
+                            className="select__dropdown-arrow select__dropdown-arrow--up"
+                            color="inherit"
+                            focusable="false"
+                            height="1em"
+                            role="presentation"
+                            viewBox="0 0 10 5"
+                            width="1em"
+                          >
+                            <path
+                              d="M1 3.83866L4.92334 0.5"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                            />
+                            <path
+                              d="M8.82812 3.83866L5 0.5"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <section
+        className="report-page-subheader"
+      >
+        <div
+          className="container"
+        >
+          <div
+            className="report-page__project-link"
+          >
+            <a
+              className="project_link"
+              href="/dashboard"
+            >
+              <div
+                className="project_link__arrow"
+              />
+              <div
+                className="project_link__image-default"
+              >
+                <div
+                  className="project_link__image"
+                  style={
+                    Object {
+                      "backgroundImage": "url(\\"https://i.imgur.com/UEH4gfU.jpg\\")",
+                    }
+                  }
+                />
+              </div>
+              <div
+                className="project_link__name"
+              >
+                Portland Multi Family
+              </div>
+              <div
+                className="property-status property-status--on-track"
+              >
+                ON TRACK
+              </div>
+            </a>
+          </div>
+          <div
+            className="subheader__inner"
+          >
+            <div
+              className="project-report-links"
+            >
+              <ul>
+                <li
+                  className="enabled"
+                  data-url="/projects/pro_example/baseline/"
+                  onClick={[Function]}
+                >
+                  Baseline
+                </li>
+                <li
+                  className="enabled"
+                  data-url="/projects/pro_example/market/"
+                  onClick={[Function]}
+                >
+                  Market Analysis
+                </li>
+                <li
+                  className="selected disabled"
+                  data-url="#"
+                  onClick={[Function]}
+                >
+                  Modeling
+                </li>
+                <li
+                  className="enabled"
+                  data-url="/projects/pro_example/performance/last-week/"
+                  onClick={[Function]}
+                >
+                  Performance
+                </li>
+              </ul>
+            </div>
+            <div
+              className="share-toggle"
+            >
+              <label
+                className="button-toggle button-toggle--unchecked"
+              >
+                <input
+                  checked={false}
+                  className="button-toggle__input"
+                  onChange={[Function]}
+                  type="checkbox"
+                />
+                <span
+                  className="button-toggle__track"
+                >
+                  <span
+                    className="button-toggle__thumb"
+                  />
+                  <div
+                    className="button-toggle__checked"
+                  >
+                    <div
+                      className="button-toggle__inner-label"
+                    >
+                      On
+                    </div>
+                  </div>
+                  <div
+                    className="button-toggle__unchecked"
+                  >
+                    <div
+                      className="button-toggle__inner-label"
+                    >
+                      Off
+                    </div>
+                  </div>
+                </span>
+                
+              </label>
+              <button
+                className="button button--disabled button--default copy-to-clipboard share-toggle__copy copy-to-clipboard--disbale"
+                onClick={[Function]}
+              >
+                <svg
+                  aria-hidden="true"
+                  className="copy-to-clipboard__icon"
+                  color="inherit"
+                  focusable="false"
+                  height="1em"
+                  role="presentation"
+                  viewBox="0 0 18 8"
+                  width="1em"
+                >
+                  <path
+                    d="M4.5 0.25C2.42925 0.25 0.75 1.92925 0.75 4C0.75 6.07075 2.42925 7.75 4.5 7.75H6.75C7.16421 7.75 7.5 7.41421 7.5 7C7.5 6.58579 7.16421 6.25 6.75 6.25H4.5C3.25725 6.25 2.25 5.24275 2.25 4C2.25 2.75725 3.25725 1.75 4.5 1.75H6.75C7.16421 1.75 7.5 1.41421 7.5 1C7.5 0.585786 7.16421 0.25 6.75 0.25H4.5ZM11.25 0.25C10.8358 0.25 10.5 0.585786 10.5 1C10.5 1.41421 10.8358 1.75 11.25 1.75H13.5C14.7428 1.75 15.75 2.75725 15.75 4C15.75 5.24275 14.7428 6.25 13.5 6.25H11.25C10.8358 6.25 10.5 6.58579 10.5 7C10.5 7.41421 10.8358 7.75 11.25 7.75H13.5C15.5708 7.75 17.25 6.07075 17.25 4C17.25 1.92925 15.5708 0.25 13.5 0.25H11.25ZM6 3.25C5.58579 3.25 5.25 3.58579 5.25 4C5.25 4.41421 5.58579 4.75 6 4.75H12C12.4142 4.75 12.75 4.41421 12.75 4C12.75 3.58579 12.4142 3.25 12 3.25H6Z"
+                  />
+                </svg>
+                <span
+                  className="copy-to-clipboard__label"
+                >
+                  Copy Link
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <div
+      className="page-chrome__top-chrome__spacing-fix"
+      style={
+        Object {
+          "height": 76,
+        }
+      }
+    >
+       
+    </div>
+  </div>
+  <div
+    className="page modeling-view"
+  >
+    <div
+      className="container"
+    >
+      <div
+        className="modeling-view__subnav"
+      >
+        <div
+          className="button-group"
+        >
+          <button
+            className="button button--selected button--default button-group__item"
+            onClick={[Function]}
+          >
+            Schedule Driven
+          </button>
+          <button
+            className="button button--default button-group__item"
+            onClick={[Function]}
+          >
+            Investment Driven
+          </button>
+          <button
+            className="button button--default button-group__item"
+            onClick={[Function]}
+          >
+            Run Rate
+          </button>
+          <button
+            className="button button--default button-group__item"
+            onClick={[Function]}
+          >
+            Compare Models
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      className="container common-report"
+    >
+      <div
+        className="report-section"
+      >
+        <div
+          className="section-header section-header--mt-sm"
+        >
+          <p
+            className="section-header__title"
+          >
+            Leasing Performance
+          </p>
+          <div
+            className="section-header__extra"
+          >
+            <div
+              className="report-date-span__content"
+            >
+              <span
+                className="report-date-span__content-name"
+              >
+                Schedule Driven
+                 (
+                21 wks.
+                )
+              </span>
+              <span
+                className="report-date-span__content-dates"
+              >
+                7/23/18
+                 -
+                 
+                12/17/18
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          className="box-row box-row--normal"
+        >
+          <div
+            className="child-wrapper"
+            style={
+              Object {
+                "width": "33.33333%",
+              }
+            }
+          >
+            <div
+              className="panel panel--default large-box"
+            >
+              <span
+                className="large-box__top-line"
+              >
+                Leased
+              </span>
+              <div
+                className="large-box__content"
+              >
+                <span
+                  className="large-box__content-value"
+                >
+                  95%
+                </span>
+                <div
+                  className="large-box__content-extra"
+                />
+              </div>
+              <p
+                className="large-box__bottom-line"
+              >
+                <span>
+                  247 Executed Leases (Out of 260)
+                </span>
+                <span>
+                  201 Total Units
+                </span>
+              </p>
+              <p
+                className="large-box__bottom-line"
+              >
+                
+              </p>
+            </div>
+          </div>
+          <div
+            className="child-wrapper"
+            style={
+              Object {
+                "width": "33.33333%",
+              }
+            }
+          >
+            <div
+              className="panel panel--default large-box"
+            >
+              <span
+                className="large-box__top-line"
+              >
+                Retention
+              </span>
+              <div
+                className="large-box__content"
+              >
+                <span
+                  className="large-box__content-value"
+                >
+                  63%
+                </span>
+                <div
+                  className="large-box__content-extra"
+                />
+              </div>
+              <p
+                className="large-box__bottom-line"
+              >
+                30 Notices to Renew (Out of 48 Resident Decisions)
+              </p>
+              <p
+                className="large-box__bottom-line"
+              >
+                
+              </p>
+            </div>
+          </div>
+          <div
+            className="child-wrapper"
+            style={
+              Object {
+                "width": "33.33333%",
+              }
+            }
+          >
+            <div
+              className="panel panel--default large-box"
+            >
+              <span
+                className="large-box__top-line"
+              >
+                Occupied
+              </span>
+              <div
+                className="large-box__content"
+              >
+                <span
+                  className="large-box__content-value"
+                >
+                  93%
+                </span>
+                <div
+                  className="large-box__content-extra"
+                />
+              </div>
+              <p
+                className="large-box__bottom-line"
+              >
+                <span>
+                  242 Occupied Units (Out of 260)
+                </span>
+                <span>
+                  201 Total Units
+                </span>
+              </p>
+              <p
+                className="large-box__bottom-line"
+              >
+                
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          className="lease-performance-report__detail-numbers"
+        >
+          <div
+            className="box-row box-row--normal"
+          >
+            <div
+              className="child-wrapper"
+              style={
+                Object {
+                  "width": "33.33333%",
+                }
+              }
+            >
+              <div
+                className="box-column__child-wrapper"
+              >
+                <div
+                  className="panel panel--default small-box"
+                >
+                  <div
+                    className="small-box__labels"
+                  >
+                    <span
+                      className="small-box__labels__name"
+                    >
+                      Lease Applications
+                    </span>
+                    
+                  </div>
+                  <div
+                    className="small-box__outer-content"
+                  >
+                    <span
+                      className="small-box__inner-content"
+                    >
+                      <span
+                        className="delta-layout"
+                      >
+                        <span
+                          className="formatted-value-with-symbol"
+                        >
+                          97
+                        </span>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="box-column__child-wrapper"
+              >
+                <div
+                  className="panel panel--default small-box"
+                >
+                  <div
+                    className="small-box__labels"
+                  >
+                    <span
+                      className="small-box__labels__name"
+                    >
+                      Cancellations and Denials
+                    </span>
+                    
+                  </div>
+                  <div
+                    className="small-box__outer-content"
+                  >
+                    <span
+                      className="small-box__inner-content"
+                    >
+                      <span
+                        className="delta-layout"
+                      >
+                        <span
+                          className="formatted-value-with-symbol"
+                        >
+                          19
+                        </span>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="child-wrapper"
+              style={
+                Object {
+                  "width": "33.33333%",
+                }
+              }
+            >
+              <div
+                className="box-column__child-wrapper"
+              >
+                <div
+                  className="panel panel--default small-box"
+                >
+                  <div
+                    className="small-box__labels"
+                  >
+                    <span
+                      className="small-box__labels__name"
+                    >
+                      Notices to Renew
+                    </span>
+                    
+                  </div>
+                  <div
+                    className="small-box__outer-content"
+                  >
+                    <span
+                      className="small-box__inner-content"
+                    >
+                      <span
+                        className="delta-layout"
+                      >
+                        <span
+                          className="formatted-value-with-symbol"
+                        >
+                          30
+                        </span>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="box-column__child-wrapper"
+              >
+                <div
+                  className="panel panel--default small-box"
+                >
+                  <div
+                    className="small-box__labels"
+                  >
+                    <span
+                      className="small-box__labels__name"
+                    >
+                      Notices to Vacate
+                    </span>
+                    
+                  </div>
+                  <div
+                    className="small-box__outer-content"
+                  >
+                    <span
+                      className="small-box__inner-content"
+                    >
+                      <span
+                        className="delta-layout"
+                      >
+                        <span
+                          className="formatted-value-with-symbol"
+                        >
+                          18
+                        </span>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="child-wrapper"
+              style={
+                Object {
+                  "width": "33.33333%",
+                }
+              }
+            >
+              <div
+                className="box-column__child-wrapper"
+              >
+                <div
+                  className="panel panel--default small-box"
+                >
+                  <div
+                    className="small-box__labels"
+                  >
+                    <span
+                      className="small-box__labels__name"
+                    >
+                      Move Ins
+                    </span>
+                    
+                  </div>
+                  <div
+                    className="small-box__outer-content"
+                  >
+                    <span
+                      className="small-box__inner-content"
+                    >
+                      <span
+                        className="delta-layout"
+                      >
+                        <span
+                          className="formatted-value-with-symbol"
+                        >
+                          80
+                        </span>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="box-column__child-wrapper"
+              >
+                <div
+                  className="panel panel--default small-box"
+                >
+                  <div
+                    className="small-box__labels"
+                  >
+                    <span
+                      className="small-box__labels__name"
+                    >
+                      Move Outs
+                    </span>
+                    
+                  </div>
+                  <div
+                    className="small-box__outer-content"
+                  >
+                    <span
+                      className="small-box__inner-content"
+                    >
+                      <span
+                        className="delta-layout"
+                      >
+                        <span
+                          className="formatted-value-with-symbol"
+                        >
+                          20
+                        </span>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="report-section"
+      >
+        <div
+          className="section-header"
+        >
+          <p
+            className="section-header__title"
+          >
+            Campaign Investment
+          </p>
+        </div>
+        <div
+          className="box-row box-row--normal"
+        >
+          <div
+            className="child-wrapper"
+            style={
+              Object {
+                "width": "33.33333%",
+              }
+            }
+          >
+            <div
+              className="panel panel--default large-box"
+            >
+              <span
+                className="large-box__top-line"
+              >
+                Campaign Investment
+              </span>
+              <div
+                className="large-box__content"
+              >
+                <span
+                  className="large-box__content-value"
+                >
+                  $181k
+                </span>
+                <div
+                  className="large-box__content-extra"
+                />
+              </div>
+              <p
+                className="large-box__bottom-line"
+              />
+              <p
+                className="large-box__bottom-line"
+              >
+                
+              </p>
+            </div>
+          </div>
+          <div
+            className="child-wrapper"
+            style={
+              Object {
+                "width": "33.33333%",
+              }
+            }
+          >
+            <div
+              className="panel panel--default large-box"
+            >
+              <span
+                className="large-box__top-line"
+              >
+                Est. Revenue Change
+              </span>
+              <div
+                className="large-box__content"
+              >
+                <span
+                  className="large-box__content-value"
+                >
+                  <span
+                    className="delta-layout"
+                  >
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      <span
+                        className="formatted-value-with-symbol__plus"
+                      >
+                        +
+                      </span>
+                      $2.6m
+                    </span>
+                  </span>
+                </span>
+              </div>
+              <p
+                className="large-box__bottom-line"
+              >
+                
+              </p>
+              <p
+                className="large-box__bottom-line"
+              />
+            </div>
+          </div>
+          <div
+            className="child-wrapper"
+            style={
+              Object {
+                "width": "33.33333%",
+              }
+            }
+          >
+            <div
+              className="panel panel--default large-box"
+            >
+              <span
+                className="large-box__top-line"
+              >
+                Campaign Return on 
+                <br />
+                Marketing Investment (ROMI)
+              </span>
+              <div
+                className="large-box__content"
+              >
+                <span
+                  className="large-box__content-value"
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
+                >
+                  <span
+                    className="delta-layout"
+                  >
+                    <span
+                      className="formatted-value-with-symbol"
+                    >
+                      14
+                      <span
+                        className="formatted-value-with-symbol__times"
+                      >
+                        x
+                      </span>
+                    </span>
+                  </span>
+                </span>
+              </div>
+              <p
+                className="large-box__bottom-line"
+              >
+                
+              </p>
+              <p
+                className="large-box__bottom-line"
+              />
+            </div>
+          </div>
+        </div>
+        <div>
+          <div
+            className="box-row box-row--normal"
+          >
+            <div
+              className="child-wrapper"
+              style={
+                Object {
+                  "width": "50.00000%",
+                }
+              }
+            >
+              <div
+                className="report-section"
+              >
+                <div
+                  className="section-header"
+                >
+                  <p
+                    className="section-header__title"
+                  >
+                    Acquisition
+                  </p>
+                </div>
+                <div
+                  className="panel panel--default small-box"
+                >
+                  <div
+                    className="small-box__labels"
+                  >
+                    <span
+                      className="small-box__labels__name"
+                    >
+                      Leased Unit Change
+                    </span>
+                    
+                  </div>
+                  <div
+                    className="small-box__outer-content"
+                  >
+                    <span
+                      className="small-box__inner-content"
+                    >
+                      <span
+                        className="delta-layout"
+                      >
+                        <span
+                          className="formatted-value-with-symbol"
+                        >
+                          <span
+                            className="formatted-value-with-symbol__plus"
+                          >
+                            +
+                          </span>
+                          55
+                        </span>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className="panel panel--default small-box"
+                >
+                  <div
+                    className="small-box__labels"
+                  >
+                    <span
+                      className="small-box__labels__name"
+                    >
+                      Acquisition Investment
+                    </span>
+                    
+                  </div>
+                  <div
+                    className="small-box__outer-content"
+                  >
+                    <span
+                      className="small-box__inner-content"
+                    >
+                      <span
+                        className="delta-layout"
+                      >
+                        <span
+                          className="formatted-value-with-symbol"
+                        >
+                          $171k
+                        </span>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className="panel panel--default small-box"
+                >
+                  <div
+                    className="small-box__labels"
+                  >
+                    <span
+                      className="small-box__labels__name"
+                    >
+                      Est. Acquired Leasing Revenue
+                    </span>
+                    
+                  </div>
+                  <div
+                    className="small-box__outer-content"
+                  >
+                    <span
+                      className="small-box__inner-content"
+                    >
+                      <span
+                        className="delta-layout"
+                      >
+                        <span
+                          className="formatted-value-with-symbol"
+                        >
+                          <span
+                            className="formatted-value-with-symbol__plus"
+                          >
+                            +
+                          </span>
+                          $1.2m
+                        </span>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className="panel panel--default small-box"
+                >
+                  <div
+                    className="small-box__labels"
+                  >
+                    <span
+                      className="small-box__labels__name"
+                    >
+                      Acquisition ROMI
+                    </span>
+                    
+                  </div>
+                  <div
+                    className="small-box__outer-content"
+                  >
+                    <span
+                      className="small-box__inner-content"
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
+                    >
+                      <span
+                        className="delta-layout"
+                      >
+                        <span
+                          className="formatted-value-with-symbol"
+                        >
+                          7
+                          <span
+                            className="formatted-value-with-symbol__times"
+                          >
+                            x
+                          </span>
+                        </span>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="child-wrapper"
+              style={
+                Object {
+                  "width": "50.00000%",
+                }
+              }
+            >
+              <div
+                className="report-section"
+              >
+                <div
+                  className="section-header"
+                >
+                  <p
+                    className="section-header__title"
+                  >
+                    Retention
+                  </p>
+                </div>
+                <div
+                  className="panel panel--default small-box"
+                >
+                  <div
+                    className="small-box__labels"
+                  >
+                    <span
+                      className="small-box__labels__name"
+                    >
+                      Lease Renewals
+                    </span>
+                    
+                  </div>
+                  <div
+                    className="small-box__outer-content"
+                  >
+                    <span
+                      className="small-box__inner-content"
+                    >
+                      <span
+                        className="delta-layout"
+                      >
+                        <span
+                          className="formatted-value-with-symbol"
+                        >
+                          64
+                        </span>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className="panel panel--default small-box"
+                >
+                  <div
+                    className="small-box__labels"
+                  >
+                    <span
+                      className="small-box__labels__name"
+                    >
+                      Retention Investment
+                    </span>
+                    
+                  </div>
+                  <div
+                    className="small-box__outer-content"
+                  >
+                    <span
+                      className="small-box__inner-content"
+                    >
+                      <span
+                        className="delta-layout"
+                      >
+                        <span
+                          className="formatted-value-with-symbol"
+                        >
+                          $10k
+                        </span>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className="panel panel--default small-box"
+                >
+                  <div
+                    className="small-box__labels"
+                  >
+                    <span
+                      className="small-box__labels__name"
+                    >
+                      Est. Retained Leasing Revenue
+                    </span>
+                    
+                  </div>
+                  <div
+                    className="small-box__outer-content"
+                  >
+                    <span
+                      className="small-box__inner-content"
+                    >
+                      <span
+                        className="delta-layout"
+                      >
+                        <span
+                          className="formatted-value-with-symbol"
+                        >
+                          <span
+                            className="formatted-value-with-symbol__plus"
+                          >
+                            +
+                          </span>
+                          $1.4m
+                        </span>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+                <div
+                  className="panel panel--default small-box"
+                >
+                  <div
+                    className="small-box__labels"
+                  >
+                    <span
+                      className="small-box__labels__name"
+                    >
+                      Retention ROMI
+                    </span>
+                    
+                  </div>
+                  <div
+                    className="small-box__outer-content"
+                  >
+                    <span
+                      className="small-box__inner-content"
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
+                    >
+                      <span
+                        className="delta-layout"
+                      >
+                        <span
+                          className="formatted-value-with-symbol"
+                        >
+                          142
+                          <span
+                            className="formatted-value-with-symbol__times"
+                          >
+                            x
+                          </span>
+                        </span>
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            className="box-row box-row--normal"
+          >
+            <div
+              className="child-wrapper"
+              style={
+                Object {
+                  "width": "50.00000%",
+                }
+              }
+            >
+              <div
+                className="investment-allocation"
+              >
+                <div
+                  className="report-section"
+                >
+                  <div
+                    className="section-header"
+                  >
+                    <p
+                      className="section-header__title"
+                    >
+                      acquisition INVESTMENT ALLOCATIONS
+                    </p>
+                  </div>
+                  <div
+                    className="investment-allocation__body"
+                  >
+                    <div
+                      className="investment-allocation__chart"
+                    >
+                      <div
+                        className="VictoryContainer"
+                        style={
+                          Object {
+                            "height": "100%",
+                            "pointerEvents": "none",
+                            "position": "relative",
+                            "touchAction": "none",
+                            "width": "100%",
+                          }
+                        }
+                      >
+                        <svg
+                          aria-labelledby="victory-container-1-title victory-container-1-desc"
+                          height={400}
+                          role="img"
+                          style={
+                            Object {
+                              "height": "100%",
+                              "pointerEvents": "all",
+                              "width": "100%",
+                            }
+                          }
+                          viewBox="0 0 400 400"
+                          width={400}
+                        >
+                          <g>
+                            <path
+                              d="M1.2246467991473532e-14,-200A200,200,0,0,1,155.04079522222597,-126.34220125065019L0,0Z"
+                              role="presentation"
+                              shapeRendering="auto"
+                              style={
+                                Object {
+                                  "fill": undefined,
+                                  "padding": 10,
+                                  "stroke": "transparent",
+                                  "strokeWidth": 1,
+                                }
+                              }
+                              transform="translate(200, 200)"
+                            />
+                            <path
+                              d="M155.04079522222597,-126.34220125065019A200,200,0,0,1,163.94809658144422,114.54702801610104L0,0Z"
+                              role="presentation"
+                              shapeRendering="auto"
+                              style={
+                                Object {
+                                  "fill": undefined,
+                                  "padding": 10,
+                                  "stroke": "transparent",
+                                  "strokeWidth": 1,
+                                }
+                              }
+                              transform="translate(200, 200)"
+                            />
+                            <path
+                              d="M163.94809658144422,114.54702801610104A200,200,0,0,1,-192.3651286345638,-54.73259801441657L0,0Z"
+                              role="presentation"
+                              shapeRendering="auto"
+                              style={
+                                Object {
+                                  "fill": undefined,
+                                  "padding": 10,
+                                  "stroke": "transparent",
+                                  "strokeWidth": 1,
+                                }
+                              }
+                              transform="translate(200, 200)"
+                            />
+                            <path
+                              d="M-192.3651286345638,-54.73259801441657A200,200,0,0,1,-3.6739403974420595e-14,-200L0,0Z"
+                              role="presentation"
+                              shapeRendering="auto"
+                              style={
+                                Object {
+                                  "fill": undefined,
+                                  "padding": 10,
+                                  "stroke": "transparent",
+                                  "strokeWidth": 1,
+                                }
+                              }
+                              transform="translate(200, 200)"
+                            />
+                            <text
+                              direction="inherit"
+                              dx={0}
+                              dy={-2.0300000000000002}
+                              x={217}
+                              y={164}
+                            >
+                              <tspan
+                                dx={0}
+                                style={
+                                  Object {
+                                    "fill": "#252525",
+                                    "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                    "fontSize": 14,
+                                    "letterSpacing": "normal",
+                                    "padding": 20,
+                                    "stroke": "transparent",
+                                  }
+                                }
+                                textAnchor="middle"
+                                x={217}
+                              >
+                                14%
+                              </tspan>
+                            </text>
+                            <text
+                              direction="inherit"
+                              dx={0}
+                              dy={4.97}
+                              x={240}
+                              y={199}
+                            >
+                              <tspan
+                                dx={0}
+                                style={
+                                  Object {
+                                    "fill": "#252525",
+                                    "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                    "fontSize": 14,
+                                    "letterSpacing": "normal",
+                                    "padding": 20,
+                                    "stroke": "transparent",
+                                  }
+                                }
+                                textAnchor="start"
+                                x={240}
+                              >
+                                20%
+                              </tspan>
+                            </text>
+                            <text
+                              direction="inherit"
+                              dx={0}
+                              dy={11.969999999999999}
+                              x={183}
+                              y={236}
+                            >
+                              <tspan
+                                dx={0}
+                                style={
+                                  Object {
+                                    "fill": "#252525",
+                                    "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                    "fontSize": 14,
+                                    "letterSpacing": "normal",
+                                    "padding": 20,
+                                    "stroke": "transparent",
+                                  }
+                                }
+                                textAnchor="middle"
+                                x={183}
+                              >
+                                44%
+                              </tspan>
+                            </text>
+                            <text
+                              direction="inherit"
+                              dx={0}
+                              dy={-2.0300000000000002}
+                              x={176}
+                              y={168}
+                            >
+                              <tspan
+                                dx={0}
+                                style={
+                                  Object {
+                                    "fill": "#252525",
+                                    "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                    "fontSize": 14,
+                                    "letterSpacing": "normal",
+                                    "padding": 20,
+                                    "stroke": "transparent",
+                                  }
+                                }
+                                textAnchor="middle"
+                                x={176}
+                              >
+                                20%
+                              </tspan>
+                            </text>
+                          </g>
+                        </svg>
+                        <div
+                          style={
+                            Object {
+                              "height": "100%",
+                              "left": 0,
+                              "position": "absolute",
+                              "top": 0,
+                              "width": "100%",
+                              "zIndex": 99,
+                            }
+                          }
+                        >
+                          <svg
+                            height={400}
+                            style={
+                              Object {
+                                "height": "100%",
+                                "overflow": "visible",
+                                "width": "100%",
+                              }
+                            }
+                            viewBox="0 0 400 400"
+                            width={400}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className="investment-allocation__expenses"
+                    >
+                      <div
+                        className="investment-allocation__row"
+                      >
+                        <div
+                          className="investment-allocation__title investment-allocation__title--reputation-building"
+                        >
+                          Reputation Building
+                        </div>
+                        <div
+                          className="investment-allocation__value"
+                        >
+                          $35k
+                        </div>
+                      </div>
+                      <div
+                        className="investment-allocation__row"
+                      >
+                        <div
+                          className="investment-allocation__title investment-allocation__title--demand-creation"
+                        >
+                          Demand Creation
+                        </div>
+                        <div
+                          className="investment-allocation__value"
+                        >
+                          $76k
+                        </div>
+                      </div>
+                      <div
+                        className="investment-allocation__row"
+                      >
+                        <div
+                          className="investment-allocation__title investment-allocation__title--leasing-enablement"
+                        >
+                          Leasing Enablement
+                        </div>
+                        <div
+                          className="investment-allocation__value"
+                        >
+                          $35k
+                        </div>
+                      </div>
+                      <div
+                        className="investment-allocation__row"
+                      >
+                        <div
+                          className="investment-allocation__title investment-allocation__title--market-intelligence"
+                        >
+                          Market Intelligence
+                        </div>
+                        <div
+                          className="investment-allocation__value"
+                        >
+                          $24k
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="child-wrapper"
+              style={
+                Object {
+                  "width": "50.00000%",
+                }
+              }
+            >
+              <div
+                className="investment-allocation"
+              >
+                <div
+                  className="report-section"
+                >
+                  <div
+                    className="section-header"
+                  >
+                    <p
+                      className="section-header__title"
+                    >
+                      retention INVESTMENT ALLOCATIONS
+                    </p>
+                  </div>
+                  <div
+                    className="investment-allocation__body"
+                  >
+                    <div
+                      className="investment-allocation__chart"
+                    >
+                      <div
+                        className="VictoryContainer"
+                        style={
+                          Object {
+                            "height": "100%",
+                            "pointerEvents": "none",
+                            "position": "relative",
+                            "touchAction": "none",
+                            "width": "100%",
+                          }
+                        }
+                      >
+                        <svg
+                          aria-labelledby="victory-container-2-title victory-container-2-desc"
+                          height={400}
+                          role="img"
+                          style={
+                            Object {
+                              "height": "100%",
+                              "pointerEvents": "all",
+                              "width": "100%",
+                            }
+                          }
+                          viewBox="0 0 400 400"
+                          width={400}
+                        >
+                          <g>
+                            <path
+                              d="M1.2246467991473532e-14,-200L0,0Z"
+                              role="presentation"
+                              shapeRendering="auto"
+                              style={
+                                Object {
+                                  "fill": undefined,
+                                  "padding": 10,
+                                  "stroke": "transparent",
+                                  "strokeWidth": 1,
+                                }
+                              }
+                              transform="translate(200, 200)"
+                            />
+                            <path
+                              d="M1.2246467991473532e-14,-200A200,200,0,1,1,-1.2246467991473532e-14,200A200,200,0,1,1,1.2246467991473532e-14,-200Z"
+                              role="presentation"
+                              shapeRendering="auto"
+                              style={
+                                Object {
+                                  "fill": undefined,
+                                  "padding": 10,
+                                  "stroke": "transparent",
+                                  "strokeWidth": 1,
+                                }
+                              }
+                              transform="translate(200, 200)"
+                            />
+                            <path
+                              d="M-3.6739403974420595e-14,-200L0,0Z"
+                              role="presentation"
+                              shapeRendering="auto"
+                              style={
+                                Object {
+                                  "fill": undefined,
+                                  "padding": 10,
+                                  "stroke": "transparent",
+                                  "strokeWidth": 1,
+                                }
+                              }
+                              transform="translate(200, 200)"
+                            />
+                            <path
+                              d="M-3.6739403974420595e-14,-200L0,0Z"
+                              role="presentation"
+                              shapeRendering="auto"
+                              style={
+                                Object {
+                                  "fill": undefined,
+                                  "padding": 10,
+                                  "stroke": "transparent",
+                                  "strokeWidth": 1,
+                                }
+                              }
+                              transform="translate(200, 200)"
+                            />
+                            <text
+                              direction="inherit"
+                              dx={0}
+                              dy={-2.0300000000000002}
+                              x={200}
+                              y={205}
+                            >
+                              <tspan
+                                dx={0}
+                                style={
+                                  Object {
+                                    "fill": "#252525",
+                                    "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                    "fontSize": 14,
+                                    "letterSpacing": "normal",
+                                    "padding": 20,
+                                    "stroke": "transparent",
+                                  }
+                                }
+                                textAnchor="middle"
+                                x={200}
+                              >
+                                
+                              </tspan>
+                            </text>
+                            <text
+                              direction="inherit"
+                              dx={0}
+                              dy={11.969999999999999}
+                              x={200}
+                              y={195}
+                            >
+                              <tspan
+                                dx={0}
+                                style={
+                                  Object {
+                                    "fill": "#252525",
+                                    "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                    "fontSize": 14,
+                                    "letterSpacing": "normal",
+                                    "padding": 20,
+                                    "stroke": "transparent",
+                                  }
+                                }
+                                textAnchor="middle"
+                                x={200}
+                              >
+                                100%
+                              </tspan>
+                            </text>
+                            <text
+                              direction="inherit"
+                              dx={0}
+                              dy={-2.0300000000000002}
+                              x={200}
+                              y={205}
+                            >
+                              <tspan
+                                dx={0}
+                                style={
+                                  Object {
+                                    "fill": "#252525",
+                                    "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                    "fontSize": 14,
+                                    "letterSpacing": "normal",
+                                    "padding": 20,
+                                    "stroke": "transparent",
+                                  }
+                                }
+                                textAnchor="middle"
+                                x={200}
+                              >
+                                
+                              </tspan>
+                            </text>
+                            <text
+                              direction="inherit"
+                              dx={0}
+                              dy={-2.0300000000000002}
+                              x={200}
+                              y={205}
+                            >
+                              <tspan
+                                dx={0}
+                                style={
+                                  Object {
+                                    "fill": "#252525",
+                                    "fontFamily": "'Gill Sans', 'Gill Sans MT', 'Seravek', 'Trebuchet MS', sans-serif",
+                                    "fontSize": 14,
+                                    "letterSpacing": "normal",
+                                    "padding": 20,
+                                    "stroke": "transparent",
+                                  }
+                                }
+                                textAnchor="middle"
+                                x={200}
+                              >
+                                
+                              </tspan>
+                            </text>
+                          </g>
+                        </svg>
+                        <div
+                          style={
+                            Object {
+                              "height": "100%",
+                              "left": 0,
+                              "position": "absolute",
+                              "top": 0,
+                              "width": "100%",
+                              "zIndex": 99,
+                            }
+                          }
+                        >
+                          <svg
+                            height={400}
+                            style={
+                              Object {
+                                "height": "100%",
+                                "overflow": "visible",
+                                "width": "100%",
+                              }
+                            }
+                            viewBox="0 0 400 400"
+                            width={400}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      className="investment-allocation__expenses"
+                    >
+                      <div
+                        className="investment-allocation__row investment-allocation__row--empty"
+                      >
+                        <div
+                          className="investment-allocation__title investment-allocation__title--reputation-building"
+                        >
+                          Reputation Building
+                        </div>
+                        <div
+                          className="investment-allocation__value"
+                        >
+                          $0
+                        </div>
+                      </div>
+                      <div
+                        className="investment-allocation__row investment-allocation__row--empty"
+                      >
+                        <div
+                          className="investment-allocation__title investment-allocation__title--demand-creation"
+                        >
+                          Demand Creation
+                        </div>
+                        <div
+                          className="investment-allocation__value"
+                        >
+                          $0
+                        </div>
+                      </div>
+                      <div
+                        className="investment-allocation__row"
+                      >
+                        <div
+                          className="investment-allocation__title investment-allocation__title--leasing-enablement"
+                        >
+                          Leasing Enablement
+                        </div>
+                        <div
+                          className="investment-allocation__value"
+                        >
+                          $10k
+                        </div>
+                      </div>
+                      <div
+                        className="investment-allocation__row investment-allocation__row--empty"
+                      >
+                        <div
+                          className="investment-allocation__title investment-allocation__title--market-intelligence"
+                        >
+                          Market Intelligence
+                        </div>
+                        <div
+                          className="investment-allocation__value"
+                        >
+                          $0
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="report-section"
+      >
+        <div
+          className="section-header"
+        >
+          <p
+            className="section-header__title"
+          >
+            Acquisition Funnel
+          </p>
+        </div>
+        <div
+          className="box-row box-row--normal"
+        >
+          <div
+            className="child-wrapper"
+            style={
+              Object {
+                "width": "33.33333%",
+              }
+            }
+          >
+            <div
+              className="panel panel--default large-box"
+            >
+              <span
+                className="large-box__top-line"
+              >
+                USV &gt; EXE
+              </span>
+              <div
+                className="large-box__content"
+              >
+                <span
+                  className="large-box__content-value"
+                >
+                  0.7%
+                </span>
+                <div
+                  className="large-box__content-extra"
+                />
+              </div>
+              <p
+                className="large-box__bottom-line"
+              />
+              <p
+                className="large-box__bottom-line"
+              >
+                
+              </p>
+            </div>
+          </div>
+          <div
+            className="child-wrapper"
+            style={
+              Object {
+                "width": "33.33333%",
+              }
+            }
+          >
+            <div
+              className="panel panel--default large-box"
+            >
+              <span
+                className="large-box__top-line"
+              >
+                Cancellation & Denial Rate
+              </span>
+              <div
+                className="large-box__content"
+              >
+                <span
+                  className="large-box__content-value"
+                >
+                  20%
+                </span>
+                <div
+                  className="large-box__content-extra"
+                />
+              </div>
+              <p
+                className="large-box__bottom-line"
+              />
+              <p
+                className="large-box__bottom-line"
+              >
+                
+              </p>
+            </div>
+          </div>
+          <div
+            className="child-wrapper"
+            style={
+              Object {
+                "width": "33.33333%",
+              }
+            }
+          >
+            <div
+              className="panel panel--default large-box"
+            >
+              <span
+                className="large-box__top-line"
+              >
+                Cost per Exe / Lowest Monthly Rent
+              </span>
+              <div
+                className="large-box__content"
+              >
+                <span
+                  className="large-box__content-value"
+                >
+                  103%
+                </span>
+                <div
+                  className="large-box__content-extra"
+                />
+              </div>
+              <p
+                className="large-box__bottom-line"
+              >
+                $1,909 / $1,847
+              </p>
+              <p
+                className="large-box__bottom-line"
+              >
+                
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          className="acquisition-funnel__table"
+        >
+          <div
+            className="acquisition-funnel__row"
+          >
+            <div
+              className="acquisition-funnel__column"
+            >
+              <div
+                className="panel panel--default acquisition-funnel__column-inner"
+              >
+                <div
+                  className="acquisition-funnel__column-header"
+                >
+                  Volume of Activity
+                </div>
+                <div
+                  className="acquisition-funnel__column-content"
+                >
+                  <div
+                    className="funnel-box-layout"
+                  >
+                    <div
+                      className="funnel-box-layout__left"
+                    >
+                      <div
+                        className="funnel-box-layout__name"
+                      >
+                        Volume of USV
+                      </div>
+                      <div
+                        className="funnel-box-layout__target"
+                      >
+                        4-Week Average: 2,136
+                      </div>
+                    </div>
+                    <div
+                      className="funnel-box-layout__right"
+                    >
+                      <div
+                        className="funnel-box-layout__value"
+                      >
+                        11,209
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout"
+                  >
+                    <div
+                      className="funnel-box-layout__left"
+                    >
+                      <div
+                        className="funnel-box-layout__name"
+                      >
+                        Volume of INQ
+                      </div>
+                      <div
+                        className="funnel-box-layout__target"
+                      >
+                        4-Week Average: 128
+                      </div>
+                    </div>
+                    <div
+                      className="funnel-box-layout__right"
+                    >
+                      <div
+                        className="funnel-box-layout__value"
+                      >
+                        673
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout"
+                  >
+                    <div
+                      className="funnel-box-layout__left"
+                    >
+                      <div
+                        className="funnel-box-layout__name"
+                      >
+                        Volume of TOU
+                      </div>
+                      <div
+                        className="funnel-box-layout__target"
+                      >
+                        4-Week Average: 52
+                      </div>
+                    </div>
+                    <div
+                      className="funnel-box-layout__right"
+                    >
+                      <div
+                        className="funnel-box-layout__value"
+                      >
+                        269
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout"
+                  >
+                    <div
+                      className="funnel-box-layout__left"
+                    >
+                      <div
+                        className="funnel-box-layout__name"
+                      >
+                        Volume of APP
+                      </div>
+                      <div
+                        className="funnel-box-layout__target"
+                      >
+                        4-Week Average: 19
+                      </div>
+                    </div>
+                    <div
+                      className="funnel-box-layout__right"
+                    >
+                      <div
+                        className="funnel-box-layout__value"
+                      >
+                        97
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout"
+                  >
+                    <div
+                      className="funnel-box-layout__left"
+                    >
+                      <div
+                        className="funnel-box-layout__name"
+                      >
+                        Volume of EXE
+                      </div>
+                      <div
+                        className="funnel-box-layout__target"
+                      >
+                        4-Week Average: 16
+                      </div>
+                    </div>
+                    <div
+                      className="funnel-box-layout__right"
+                    >
+                      <div
+                        className="funnel-box-layout__value"
+                      >
+                        77
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="acquisition-funnel__column"
+            >
+              <div
+                className="panel panel--default acquisition-funnel__column-inner"
+              >
+                <div
+                  className="acquisition-funnel__column-header"
+                >
+                  Conversion Rate
+                </div>
+                <div
+                  className="acquisition-funnel__column-content"
+                >
+                  <div
+                    className="funnel-box-layout"
+                  >
+                    <div
+                      className="funnel-box-layout__left"
+                    >
+                      <div
+                        className="funnel-box-layout__name"
+                      >
+                        USV → INQ
+                      </div>
+                    </div>
+                    <div
+                      className="funnel-box-layout__right"
+                    >
+                      <div
+                        className="funnel-box-layout__value"
+                      >
+                        6%
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout"
+                  >
+                    <div
+                      className="funnel-box-layout__left"
+                    >
+                      <div
+                        className="funnel-box-layout__name"
+                      >
+                        INQ → TOU
+                      </div>
+                    </div>
+                    <div
+                      className="funnel-box-layout__right"
+                    >
+                      <div
+                        className="funnel-box-layout__value"
+                      >
+                        40%
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout"
+                  >
+                    <div
+                      className="funnel-box-layout__left"
+                    >
+                      <div
+                        className="funnel-box-layout__name"
+                      >
+                        TOU → APP
+                      </div>
+                    </div>
+                    <div
+                      className="funnel-box-layout__right"
+                    >
+                      <div
+                        className="funnel-box-layout__value"
+                      >
+                        36%
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout"
+                  >
+                    <div
+                      className="funnel-box-layout__left"
+                    >
+                      <div
+                        className="funnel-box-layout__name"
+                      >
+                        APP → EXE
+                      </div>
+                    </div>
+                    <div
+                      className="funnel-box-layout__right"
+                    >
+                      <div
+                        className="funnel-box-layout__value"
+                      >
+                        80%
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="acquisition-funnel__column"
+            >
+              <div
+                className="panel panel--default acquisition-funnel__column-inner"
+              >
+                <div
+                  className="acquisition-funnel__column-header"
+                >
+                  Cost per Activity
+                </div>
+                <div
+                  className="acquisition-funnel__column-content"
+                >
+                  <div
+                    className="funnel-box-layout"
+                  >
+                    <div
+                      className="funnel-box-layout__left"
+                    >
+                      <div
+                        className="funnel-box-layout__name"
+                      >
+                        Cost per USV
+                      </div>
+                    </div>
+                    <div
+                      className="funnel-box-layout__right"
+                    >
+                      <div
+                        className="funnel-box-layout__value"
+                      >
+                        $10
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout"
+                  >
+                    <div
+                      className="funnel-box-layout__left"
+                    >
+                      <div
+                        className="funnel-box-layout__name"
+                      >
+                        Cost per INQ
+                      </div>
+                    </div>
+                    <div
+                      className="funnel-box-layout__right"
+                    >
+                      <div
+                        className="funnel-box-layout__value"
+                      >
+                        $165
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout"
+                  >
+                    <div
+                      className="funnel-box-layout__left"
+                    >
+                      <div
+                        className="funnel-box-layout__name"
+                      >
+                        Cost per TOU
+                      </div>
+                    </div>
+                    <div
+                      className="funnel-box-layout__right"
+                    >
+                      <div
+                        className="funnel-box-layout__value"
+                      >
+                        $413
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout"
+                  >
+                    <div
+                      className="funnel-box-layout__left"
+                    >
+                      <div
+                        className="funnel-box-layout__name"
+                      >
+                        Cost per APP
+                      </div>
+                    </div>
+                    <div
+                      className="funnel-box-layout__right"
+                    >
+                      <div
+                        className="funnel-box-layout__value"
+                      >
+                        $1,515
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="funnel-box-layout"
+                  >
+                    <div
+                      className="funnel-box-layout__left"
+                    >
+                      <div
+                        className="funnel-box-layout__name"
+                      >
+                        Cost per EXE
+                      </div>
+                    </div>
+                    <div
+                      className="funnel-box-layout__right"
+                    >
+                      <div
+                        className="funnel-box-layout__value"
+                      >
+                        $1,909
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div />
+      <div
+        className="baseline-comparison-matrix"
+      >
+        <div
+          className="section-header"
+        >
+          <p
+            className="section-header__title"
+          >
+            Baseline Comparison Matrix
+          </p>
+        </div>
+        <div
+          className="panel panel--default baseline-comparison-panel"
+        >
+          <div
+            className="ReactTable baseline-comparison-table"
+            style={Object {}}
+          >
+            <div
+              className="rt-table"
+              role="grid"
+            >
+              <div
+                className="rt-thead -header"
+                style={
+                  Object {
+                    "minWidth": "500px",
+                  }
+                }
+              >
+                <div
+                  className="rt-tr"
+                  role="row"
+                >
+                  <div
+                    className="rt-th"
+                    onClick={[Function]}
+                    role="columnheader"
+                    style={
+                      Object {
+                        "flex": "100 0 auto",
+                        "maxWidth": null,
+                        "width": "100px",
+                      }
+                    }
+                    tabIndex="-1"
+                  >
+                    <div
+                      className=""
+                    >
+                      
+                    </div>
+                  </div>
+                  <div
+                    className="rt-th text-right"
+                    onClick={[Function]}
+                    role="columnheader"
+                    style={
+                      Object {
+                        "flex": "100 0 auto",
+                        "maxWidth": null,
+                        "width": "100px",
+                      }
+                    }
+                    tabIndex="-1"
+                  >
+                    <div
+                      className=""
+                    >
+                      Portland Multi Family
+                      <br />
+                      Campaign
+                    </div>
+                  </div>
+                  <div
+                    className="rt-th text-right"
+                    onClick={[Function]}
+                    role="columnheader"
+                    style={
+                      Object {
+                        "flex": "100 0 auto",
+                        "maxWidth": null,
+                        "width": "100px",
+                      }
+                    }
+                    tabIndex="-1"
+                  >
+                    <div
+                      className=""
+                    >
+                      Anonymous 1
+                    </div>
+                  </div>
+                  <div
+                    className="rt-th text-right"
+                    onClick={[Function]}
+                    role="columnheader"
+                    style={
+                      Object {
+                        "flex": "100 0 auto",
+                        "maxWidth": null,
+                        "width": "100px",
+                      }
+                    }
+                    tabIndex="-1"
+                  >
+                    <div
+                      className=""
+                    >
+                      Anonymous 2
+                    </div>
+                  </div>
+                  <div
+                    className="rt-th text-right"
+                    onClick={[Function]}
+                    role="columnheader"
+                    style={
+                      Object {
+                        "flex": "100 0 auto",
+                        "maxWidth": null,
+                        "width": "100px",
+                      }
+                    }
+                    tabIndex="-1"
+                  >
+                    <div
+                      className=""
+                    >
+                      Cross-Sample
+                      <br />
+                      Average
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div
+                className="rt-tbody"
+                style={
+                  Object {
+                    "minWidth": "500px",
+                  }
+                }
+              >
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -odd"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Location
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Seattle, WA
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Seattle, WA
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -even"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Date
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Jul '18 - Dec '18
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Jan '17 - May '18
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Feb '19 - Mar '19
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -odd"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Baseline Duration (Months)
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      5 Months
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      16 Months
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      1 Months
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      7 Months
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -even"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Number of Units
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      201
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      200
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    />
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      134
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -odd"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Min. Monthly Rental ($)
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $1,847
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $7,278
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $1,400
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $3,508
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -even"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Max. Monthly Rental ($)
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    />
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    />
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    />
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $0
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -odd"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Avg. Cost per Sqft ($)
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $1,847
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $7,278
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $1,948
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $3,691
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -even"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Campaign Investment
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $181k
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $66k
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $5k
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $84k
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -odd"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Estimated Revenue Change
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $3m
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $2m
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $655k
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $2m
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -even"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      ROMI
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      14x
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      26x
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      120x
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      53x
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -odd"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Leased Rate
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      95%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      42%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      74%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      70%
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -even"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Retention Rate
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      63%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      0%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      0%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      21%
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -odd"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Occupancy Rate
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      93%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      0%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      73%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      55%
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -even"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Cancellation & Denial Rate
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      20%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      0%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      16%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      12%
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -odd"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Notices to Renew
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      30
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      0
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      0
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      10
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -even"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Notices to Vacate
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      18
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      0
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      2
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      7
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -odd"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Move Ins
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      80
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      0
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      31
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      37
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -even"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Move Outs
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      20
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      0
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      2
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      7
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -odd"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Unique Site Visitors (USV)
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      11,209
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      10,786
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      0
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      7,332
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -even"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Inquiries (INQ)
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      673
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      487
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      137
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      432
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -odd"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Tours (TOU)
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      269
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      269
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      35
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      191
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -even"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Lease Applications (APP)
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      97
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      30
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      37
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      55
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -odd"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Lease Executions (EXE)
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      77
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      27
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      31
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      45
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -even"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      USV &gt; EXE
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      1%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      0%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      0%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      0%
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -odd"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      INQ &gt; TOU
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      40%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      55%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      26%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      40%
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -even"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      TOU &gt; APP
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      36%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      11%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      106%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      51%
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -odd"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      APP &gt; EXE
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      80%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      90%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      84%
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      85%
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -even"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Cost Per USV
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $9.90
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $6.12
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $0.00
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $5.34
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -odd"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Cost Per INQ
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $165.00
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $135.52
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $33.94
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $111.49
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -even"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Cost Per TOU
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $413.00
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $245.35
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $132.87
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $263.74
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -odd"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Cost Per APP
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $1,515.00
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $2,200.00
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $125.68
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $1,280.23
+                    </div>
+                  </div>
+                </div>
+                <div
+                  className="rt-tr-group"
+                  role="rowgroup"
+                >
+                  <div
+                    className="rt-tr -even"
+                    role="row"
+                  >
+                    <div
+                      className="rt-td"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      Cost Per EXE
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $1,909
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $2,444
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $150
+                    </div>
+                    <div
+                      className="rt-td baseline-comparison-table__value-cell"
+                      onClick={[Function]}
+                      role="gridcell"
+                      style={
+                        Object {
+                          "flex": "100 0 auto",
+                          "maxWidth": null,
+                          "width": "100px",
+                        }
+                      }
+                    >
+                      $1,501
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="-loading"
+            >
+              <div
+                className="-loading-inner"
+              >
+                Loading...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+   
+</div>
+`;

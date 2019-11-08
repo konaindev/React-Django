@@ -7,6 +7,7 @@ from django.utils import timezone, crypto
 from unittest import mock
 
 from remark.geo.models import Address
+from remark.geo.mocks import mocked_geocode
 from remark.users.models import Account, User
 from remark.settings import LOGIN_URL, LOGIN_REDIRECT_URL
 
@@ -216,3 +217,36 @@ class ResendInviteTestCase(TestCase):
             response, LOGIN_URL, status_code=302, target_status_code=200
         )
         mock_send_email.apply_async.assert_not_called()
+
+
+class CompleteAccountTestCase(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            email="test@test.com", password="password"
+        )
+        self.client.login(email="test@test.com", password="password")
+
+    @mock.patch("remark.users.views.geocode", side_effect=mocked_geocode)
+    @mock.patch("remark.users.views.send_welcome_email.apply_async")
+    def test_complete_account(self, mock_send_welcome_email, _):
+        url = reverse("complete_account")
+
+        params = {
+            "first_name": "First name",
+            "last_name": "Last name",
+            "title": "Title",
+            "company": "New Company",
+            "company_role": ["owner"],
+            "office_address": "2284 W. Commodore Way, Suite 200",
+            "office_name": "Test office",
+            "office_type": 1,
+            "terms": True,
+        }
+        data = json.dumps(params)
+        response = self.client.post(url, data, "json")
+        self.assertEqual(response.status_code, 200)
+        user = User.objects.get(public_id=self.user.public_id)
+        mock_send_welcome_email.assert_called_once_with(args=(user.email,), countdown=2)
+        self.assertEqual(user.person.first_name, params["first_name"])
+        self.assertEqual(user.person.last_name, params["last_name"])
+        self.assertEqual(user.person.email, self.user.email)

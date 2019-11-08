@@ -18,7 +18,11 @@ from rest_framework.response import Response
 
 from remark.admin import admin_site
 from remark.users.models import User
-from remark.email_app.invites.added_to_property import send_invite_email
+from remark.users.constants import PROJECT_ROLES
+from remark.email_app.invites.added_to_property import (
+    send_invite_email,
+    send_create_account_email,
+)
 
 from .reports.selectors import (
     BaselineReportSelector,
@@ -31,6 +35,7 @@ from .models import Project
 from .forms import TAMExportForm
 from .serializers import ProjectSerializer
 from .tasks import export_tam_task
+from .constants import USER_ROLES
 
 from remark.lib.logging import getLogger, error_text
 
@@ -217,17 +222,25 @@ class SearchMembersView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        payload = json.loads(request.body)
-        value = payload.get("value", [])
+        # payload = json.loads(request.body)
+        payload = self.get_data()
+        value = payload.get("value", "")
+        projects = Project.objects.get_all_for_user(request.user)
+        groups_ids = []
+        for p in projects:
+            groups_ids.append(p.view_group_id)
+            groups_ids.append(p.admin_group_id)
         users = User.objects.filter(
             Q(
                 Q(email__icontains=value)
                 | Q(person__first_name__icontains=value)
                 | Q(person__last_name__icontains=value)
             )
-            & Q(account__isnull=False)
-        )
-        members = [user.get_menu_dict() for user in users]
+            & Q(groups__in=groups_ids)
+            & ~Q(id=request.user.id)
+            & Q(is_staff=False)
+        ).distinct()
+        members = [user.get_icon_dict() for user in users]
         return Response({"members": members})
 
 
@@ -243,6 +256,11 @@ class AddMembersView(APIView):
         projects_ids = [p.get("property_id") for p in payload.get("projects", [])]
         projects = Project.objects.filter(public_id__in=projects_ids)
 
+        if not request.user.is_superuser:
+            for project in projects:
+                if not project.is_admin(request.user):
+                    return self.render_403()
+
         users = []
         for member in members:
             is_new = member.get("__isNew__", False)
@@ -256,13 +274,27 @@ class AddMembersView(APIView):
                 user = User.objects.get(public_id=public_id)
             users.append(user)
 
+        role = payload.get("role")
+
+        projects_is_empty = any([not p.has_members() for p in projects])
+
         for project in projects:
             for user in users:
-                project.view_group.user_set.add(user)
+                if role == PROJECT_ROLES["admin"]:
+                    project.admin_group.user_set.add(user)
+                else:
+                    project.view_group.user_set.add(user)
+            project.save()
+
+        for user in users:
+            is_new_account = user.activated is None
+            if projects_is_empty and is_new_account:
+                send_create_account_email.apply_async(args=(user.id,), countdown=2)
+            else:
                 send_invite_email.apply_async(
                     args=(inviter_name, user.id, projects_ids), countdown=2
                 )
-            project.save()
+
         projects_list = [
             {"property_id": p.public_id, "members": p.get_members()} for p in projects
         ]
@@ -280,23 +312,60 @@ class ProjectRemoveMemberView(APIView):
         try:
             user = User.objects.get(public_id=user_id)
         except User.DoesNotExist:
-            return Response(
-                {"error": "User not found"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            )
+            return JsonResponse({"error": "User not found"}, status=500)
 
         try:
             project = Project.objects.get(public_id=public_id)
         except Project.DoesNotExist:
-            return Response(
-                {"error": "Project not found"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            )
+            return Response({"error": "Project not found"}, status=500)
 
-        project.view_group.user_set.remove(user)
+        if project.is_admin(user):
+            if project.admin_group.user_set.count() == 1:
+                return Response(
+                    {"error": "There should always be at least one admin for project"},
+                    status=500,
+                )
+            project.admin_group.user_set.remove(user)
+        else:
+            project.view_group.user_set.remove(user)
+
         project.save()
         projects_dict = {
             "property_id": project.public_id,
             "members": project.get_members(),
         }
         return Response({"project": projects_dict})
+
+
+class ChangeMemberRoleView(LoginRequiredMixin, APIView):
+    def post(self, request, project_id, user_id):
+        payload = self.get_data()
+        role = payload.get("role")
+
+        try:
+            project = Project.objects.get(public_id=project_id)
+        except Project.DoesNotExist:
+            return Response({"error": "Project not found"}, status=500)
+
+        if not project.user_can_edit(request.user):
+            return Response({"error": "Project not found"}, status=500)
+
+        try:
+            user = User.objects.get(public_id=user_id)
+        except User.DoesNotExist:
+            return Response({"error": "User not found"}, status=500)
+
+        if role == USER_ROLES["admin"]:
+            project.view_group.user_set.remove(user)
+            project.admin_group.user_set.add(user)
+        elif role == USER_ROLES["member"]:
+            if project.admin_group.user_set.count() == 1:
+                return Response(
+                    {"error": "There should always be at least one admin for project"},
+                    status=500,
+                )
+            project.admin_group.user_set.remove(user)
+            project.view_group.user_set.add(user)
+
+        project.save()
+        return Response({"members": project.get_members()})

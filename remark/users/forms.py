@@ -43,12 +43,6 @@ class UserForm(forms.ModelForm):
         model = User
         fields = "__all__"
 
-    person = forms.ModelChoiceField(
-        queryset=Person.objects.all(),
-        required=False,
-        empty_label="None"
-    )
-
     def save(self, commit=True):
         user = super().save(commit=False)
         if commit:
