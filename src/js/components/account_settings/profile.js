@@ -12,8 +12,9 @@ import { validateAddress } from "../../api/account_settings";
 import Button from "../button";
 import Input from "../input";
 import MultiSelect from "../multi_select";
-import Select from "../select";
+import Select, { SelectSearch } from "../select";
 import { addressModal } from "../../state/actions";
+import GoogleAddress from "../google_address";
 import { MAX_AVATAR_SIZE, profileSchema } from "./validators";
 
 export default class Profile extends React.PureComponent {
@@ -26,7 +27,7 @@ export default class Profile extends React.PureComponent {
       phone_country_code: PropTypes.string,
       phone: PropTypes.string,
       phone_ext: PropTypes.string,
-      company: PropTypes.string,
+      company: PropTypes.PropTypes.object,
       company_roles: PropTypes.arrayOf(PropTypes.string),
       office_country: PropTypes.object,
       office_street: PropTypes.string,
@@ -51,7 +52,7 @@ export default class Profile extends React.PureComponent {
       phone_country_code: "",
       phone: "",
       phone_ext: "",
-      company: "",
+      company: undefined,
       company_roles: [],
       office_country: {
         label: COUNTRY_FIELDS.USA.full_name,
@@ -164,6 +165,96 @@ export default class Profile extends React.PureComponent {
     });
   };
 
+  loadCompany = (inputValue, callback) => {
+    clearTimeout(this.loadCompanyTimeOut);
+    this.loadCompanyTimeOut = setTimeout(() => {
+      this.props.dispatch({
+        type: "API_COMPANY_SEARCH",
+        data: { company: inputValue },
+        callback
+      });
+    }, 300);
+  };
+
+  selectSearchComponents = {
+    DropdownIndicator: () => null
+  };
+
+  onCreateCompany = value => {
+    const option = { label: value, value };
+    this.formik.setFieldValue("company", option);
+  };
+
+  loadAddress = (inputValue, callback) => {
+    const data = { address: inputValue };
+    const context = this.formik?.getFormikContext();
+    const businessId = context?.values?.company?.value;
+    const businessName = context?.values?.company?.label;
+    if (businessId !== businessName) {
+      data["business_id"] = businessId;
+    }
+    clearTimeout(this.loadAddressTimeOut);
+    this.loadAddressTimeOut = setTimeout(() => {
+      this.props.dispatch({
+        type: "API_COMPANY_ADDRESS",
+        data,
+        callback
+      });
+    }, 300);
+  };
+
+  onChangeOfficeAddress = value => {
+    if (value.street) {
+      this.formik.setFieldValue("office_street", value.street);
+      this.formik.setFieldValue("office_city", value.city);
+      this.formik.setFieldValue("office_state", {
+        label: value.state,
+        value: value.state
+      });
+      this.formik.setFieldValue("office_zip", value.zip);
+      if (value.country == COUNTRY_FIELDS.GBR.short_name) {
+        this.selectedCountry = COUNTRY_FIELDS.GBR.short_name;
+        this.formik.setFieldValue("office_country", {
+          label: COUNTRY_FIELDS.GBR.full_name,
+          value: COUNTRY_FIELDS.GBR.short_name
+        });
+      } else if (value.country == COUNTRY_FIELDS.USA.short_name) {
+        this.selectedCountry = COUNTRY_FIELDS.USA.short_name;
+        this.formik.setFieldValue("office_country", {
+          label: COUNTRY_FIELDS.USA.full_name,
+          value: COUNTRY_FIELDS.USA.short_name
+        });
+      }
+    } else {
+      this.formik.setFieldValue("office_street", value.value);
+    }
+  };
+
+  onBlurOfficeAddress = () => {
+    this.formik.setFieldTouched("office_street");
+    const formikContext = this.formik.getFormikContext();
+    if (formikContext.values.office_street) {
+      this.formik.setFieldTouched("office_street");
+    }
+    if (formikContext.values.office_city) {
+      this.formik.setFieldTouched("office_city");
+    }
+    if (formikContext.values.office_state) {
+      this.formik.setFieldTouched("office_state");
+    }
+    if (formikContext.values.office_zip) {
+      this.formik.setFieldTouched("office_zip");
+    }
+  };
+
+  onChangeCompany = company => {
+    this.formik.setFieldValue("company", company);
+    this.props.dispatch({
+      type: "API_COMPANY_ADDRESS",
+      data: { address: "", business_id: company.label }
+    });
+  };
+
   showErrorMessage = (errors, touched) => {
     const errorFields = Object.keys(errors);
     const touchedFields = Object.keys(touched);
@@ -204,6 +295,16 @@ export default class Profile extends React.PureComponent {
     this.setState({ message });
   };
 
+  updateValues = values => {
+    this.formik.setFieldValue("office_street", values.office_street);
+    this.formik.setFieldValue("office_city", values.office_city);
+    this.formik.setFieldValue("office_state", {
+      label: values.full_state,
+      value: values.full_state
+    });
+    this.formik.setFieldValue("office_zip", values.office_zip);
+  };
+
   setErrorMessages = errors => {
     this.formik.setSubmitting(false);
     const formikErrors = {};
@@ -229,6 +330,8 @@ export default class Profile extends React.PureComponent {
           data.append("office_country", dataValues.office_country.value);
         } else if (k === "office_state") {
           data.append("office_state", dataValues.office_state.value);
+        } else if (k === "company") {
+          data.append("company", dataValues.company.label);
         } else if (
           k === "phone_country_code" &&
           dataValues["phone"] &&
@@ -281,15 +384,9 @@ export default class Profile extends React.PureComponent {
   };
 
   render() {
+    const { companyAddresses } = this.props;
     return (
       <div className="account-settings__tab">
-        <AddressModal
-          title="Confirm Office Address"
-          onClose={this.props.dispatch(addressModal.close)}
-          callback={this.setSuccessMessage}
-          onError={this.setErrorMessages}
-          dispatch_type="API_ACCOUNT_PROFILE"
-        />
         <Formik
           ref={this.setFormik}
           initialValues={this.initialValues}
@@ -309,6 +406,14 @@ export default class Profile extends React.PureComponent {
             setFieldValue
           }) => (
             <Form method="post" autoComplete="off">
+              <AddressModal
+                title="Confirm Office Address"
+                onClose={this.props.dispatch(addressModal.close)}
+                callback={this.setSuccessMessage}
+                onError={this.setErrorMessages}
+                dispatch_type="API_ACCOUNT_PROFILE"
+                updateValues={this.updateValues}
+              />
               <div className="account-settings__tab-content">
                 <div className="account-settings__tab-section">
                   <div className="account-settings__tab-title">
@@ -519,13 +624,19 @@ export default class Profile extends React.PureComponent {
                       )}
                     >
                       <div className="account-settings__label">Company</div>
-                      <Input
-                        className="account-settings__input"
+                      <SelectSearch
                         name="company"
-                        theme="gray"
+                        theme="default"
+                        placeholder=""
+                        components={this.selectSearchComponents}
+                        className="account-settings__input"
+                        loadOptions={this.loadCompany}
+                        defaultOptions={[]}
+                        isCreatable={true}
                         value={values.company}
+                        onCreateOption={this.onCreateCompany}
+                        onChange={this.onChangeCompany}
                         onBlur={this.onBlur}
-                        onChange={this.onChange}
                       />
                       <div className="account-settings__error">
                         <ErrorMessage name="company" />
@@ -580,14 +691,34 @@ export default class Profile extends React.PureComponent {
                       )}
                     >
                       <div className="account-settings__label">Address</div>
-                      <Input
+                      <GoogleAddress
+                        name="office_street"
+                        className="account-settings__input"
+                        loadOptions={this.loadAddress}
+                        cacheOptions={false}
+                        companyAddresses={companyAddresses}
+                        theme=""
+                        labelCompany=""
+                        labelGoogle=""
+                        display="full"
+                        // value={
+                        //   typeof values.office_street === "string"
+                        //     ? values.office_street?.value
+                        //     : values.office_street
+                        // }
+                        value={values.office_street}
+                        // value={values.office_street}
+                        onChange={this.onChangeOfficeAddress}
+                        onBlur={this.onBlurOfficeAddress}
+                      />
+                      {/* <Input
                         className="account-settings__input"
                         name="office_street"
                         theme="gray"
                         value={values.office_street}
                         onBlur={this.onBlur}
                         onChange={this.onChange}
-                      />
+                      /> */}
                       <div className="account-settings__error">
                         <ErrorMessage name="office_street" />
                       </div>
