@@ -66,7 +66,7 @@ const profile = {
   phone_country_code: "",
   phone: "",
   phone_ext: "",
-  company_name: "Glacier Associates",
+  company: { label: "Glacier Associates", value: "123456789" },
   company_roles: ["owner", "asset_manager", "property_manager"],
   office_street: "1730 Minor Avenue",
   office_city: "Lansing",

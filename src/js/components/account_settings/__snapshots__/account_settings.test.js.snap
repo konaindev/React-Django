@@ -2646,13 +2646,93 @@ exports[`AccountSettings profile tab 1`] = `
                   >
                     Company
                   </div>
-                  <input
-                    className="input account-settings__input input--gray"
-                    name="company"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    type="text"
-                  />
+                  <div
+                    className="select-search select account-settings__input select--default css-2b097c-container"
+                    onKeyDown={[Function]}
+                  >
+                    <div
+                      className="select__control css-yk16xz-control"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <div
+                        className="select__value-container css-1hwfws3"
+                      >
+                        <div
+                          className="select__placeholder css-1wa3eu0-placeholder"
+                        >
+                          
+                        </div>
+                        <div>
+                          <div
+                            className="select__input"
+                            style={
+                              Object {
+                                "display": "inline-block",
+                              }
+                            }
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              autoCapitalize="none"
+                              autoComplete="off"
+                              autoCorrect="off"
+                              disabled={false}
+                              id="react-select-5-input"
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              onFocus={[Function]}
+                              spellCheck="false"
+                              style={
+                                Object {
+                                  "background": 0,
+                                  "border": 0,
+                                  "boxSizing": "content-box",
+                                  "color": "inherit",
+                                  "fontSize": "inherit",
+                                  "label": "input",
+                                  "opacity": 1,
+                                  "outline": 0,
+                                  "padding": 0,
+                                  "width": "1px",
+                                }
+                              }
+                              tabIndex="0"
+                              type="text"
+                              value=""
+                            />
+                            <div
+                              style={
+                                Object {
+                                  "height": 0,
+                                  "left": 0,
+                                  "overflow": "scroll",
+                                  "position": "absolute",
+                                  "top": 0,
+                                  "visibility": "hidden",
+                                  "whiteSpace": "pre",
+                                }
+                              }
+                            >
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className="select__indicators css-1wy0on6"
+                      >
+                        <span
+                          className="select__indicator-separator css-1okebmr-indicatorSeparator"
+                        />
+                      </div>
+                    </div>
+                    <input
+                      name="company"
+                      type="hidden"
+                      value=""
+                    />
+                  </div>
                   <div
                     className="account-settings__error"
                   />
@@ -2685,7 +2765,7 @@ exports[`AccountSettings profile tab 1`] = `
                         <input
                           className="css-62g3xt-dummyInput"
                           disabled={false}
-                          id="react-select-5-input"
+                          id="react-select-6-input"
                           onBlur={[Function]}
                           onChange={[Function]}
                           onFocus={[Function]}
@@ -2790,14 +2870,149 @@ exports[`AccountSettings profile tab 1`] = `
                   >
                     Address
                   </div>
-                  <input
-                    className="input account-settings__input input--gray"
-                    name="office_street"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    type="text"
-                    value="1730 Minor Avenue"
-                  />
+                  <div
+                    className="select-search select google-address account-settings__input css-2b097c-container"
+                    onKeyDown={[Function]}
+                  >
+                    <div
+                      className="select__control css-yk16xz-control"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <div
+                        className="select__value-container select__value-container--has-value css-1hwfws3"
+                      >
+                        <div
+                          className="select__single-value css-1uccc91-singleValue"
+                        >
+                          <div>
+                            <div
+                              className="google-address__street"
+                            >
+                              1730 Minor Avenue
+                              
+                            </div>
+                          </div>
+                        </div>
+                        <div>
+                          <div
+                            className="select__input"
+                            style={
+                              Object {
+                                "display": "inline-block",
+                              }
+                            }
+                          >
+                            <input
+                              aria-autocomplete="list"
+                              autoCapitalize="none"
+                              autoComplete="off"
+                              autoCorrect="off"
+                              disabled={false}
+                              id="react-select-7-input"
+                              onBlur={[Function]}
+                              onChange={[Function]}
+                              onFocus={[Function]}
+                              spellCheck="false"
+                              style={
+                                Object {
+                                  "background": 0,
+                                  "border": 0,
+                                  "boxSizing": "content-box",
+                                  "color": "inherit",
+                                  "fontSize": "inherit",
+                                  "label": "input",
+                                  "opacity": 1,
+                                  "outline": 0,
+                                  "padding": 0,
+                                  "width": "1px",
+                                }
+                              }
+                              tabIndex="0"
+                              type="text"
+                              value=""
+                            />
+                            <div
+                              style={
+                                Object {
+                                  "height": 0,
+                                  "left": 0,
+                                  "overflow": "scroll",
+                                  "position": "absolute",
+                                  "top": 0,
+                                  "visibility": "hidden",
+                                  "whiteSpace": "pre",
+                                }
+                              }
+                            >
+                              
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className="select__indicators css-1wy0on6"
+                      >
+                        <span
+                          className="select__indicator-separator css-1okebmr-indicatorSeparator"
+                        />
+                        <div
+                          aria-hidden="true"
+                          className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                          onMouseDown={[Function]}
+                          onTouchEnd={[Function]}
+                        >
+                          <svg
+                            aria-hidden="true"
+                            className="select__dropdown-arrow select__dropdown-arrow--down"
+                            color="inherit"
+                            focusable="false"
+                            height="1em"
+                            role="presentation"
+                            viewBox="0 0 10 5"
+                            width="1em"
+                          >
+                            <path
+                              d="M1 1.16134L4.92334 4.5"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                            />
+                            <path
+                              d="M8.82812 1.16134L5 4.5"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                          <svg
+                            aria-hidden="true"
+                            className="select__dropdown-arrow select__dropdown-arrow--up"
+                            color="inherit"
+                            focusable="false"
+                            height="1em"
+                            role="presentation"
+                            viewBox="0 0 10 5"
+                            width="1em"
+                          >
+                            <path
+                              d="M1 3.83866L4.92334 0.5"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                            />
+                            <path
+                              d="M8.82812 3.83866L5 0.5"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                    <input
+                      name="office_street"
+                      type="hidden"
+                      value="1730 Minor Avenue"
+                    />
+                  </div>
                   <div
                     className="account-settings__error"
                   />
@@ -2868,7 +3083,7 @@ exports[`AccountSettings profile tab 1`] = `
                               autoComplete="off"
                               autoCorrect="off"
                               disabled={false}
-                              id="react-select-6-input"
+                              id="react-select-8-input"
                               onBlur={[Function]}
                               onChange={[Function]}
                               onFocus={[Function]}
@@ -3048,7 +3263,7 @@ exports[`AccountSettings profile tab 1`] = `
                         <input
                           className="css-62g3xt-dummyInput"
                           disabled={false}
-                          id="react-select-7-input"
+                          id="react-select-9-input"
                           onBlur={[Function]}
                           onChange={[Function]}
                           onFocus={[Function]}
