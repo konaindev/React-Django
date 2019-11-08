@@ -27,7 +27,7 @@ export class ProjectReportPage extends Component {
     reportSpan: PropTypes.string,
     share_info: PropTypes.object,
     backUrl: PropTypes.string,
-    loadingReports: PropTypes.bool,
+    fetchingReports: PropTypes.bool,
     historyPush: PropTypes.func.isRequired
   };
 
@@ -123,13 +123,13 @@ export class ProjectReportPage extends Component {
   };
 
   render() {
-    const { loadingReports, project, report } = this.props;
+    const { fetchingReports, project, report } = this.props;
 
     return (
       <div className="project-report-page">
         {project && this.renderSubheader()}
         <section className="project-report-page__content">
-          {loadingReports && <Loader isVisible />}
+          {fetchingReports && <Loader isVisible />}
           {project && report && this.renderReportContent()}
         </section>
       </div>

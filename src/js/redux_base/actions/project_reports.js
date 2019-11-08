@@ -4,7 +4,7 @@ const actions = {
   requestProject: createAjaxAction(
     "AJAX_GET_PROJECT_OVERALL",
     "/projects",
-    projectId => `/${projectId}/overall`
+    projectId => `/${projectId}/overall/`
   ),
   requestReports: createAjaxAction(
     "AJAX_GET_PROJECT_REPORTS",
@@ -17,10 +17,7 @@ const actions = {
       return qs;
     }
   ),
-  updateStore: payload => ({
-    type: "PROJECT_REPORTS_UPDATE_STORE",
-    payload
-  })
+  updateStore: payload => ({ type: "PROJECT_REPORTS_UPDATE_STORE", payload })
 };
 
 export default actions;

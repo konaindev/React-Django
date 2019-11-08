@@ -3,7 +3,7 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  let newState = {};
+  let properties, selectedProperties;
 
   switch (action.type) {
     case "DASHBOARD_UPDATE_STORE":
@@ -28,50 +28,46 @@ const reducer = (state = initialState, action) => {
         fetchingProperties: false
       };
     case "GENERAL_REMOVE_MEMBER_COMPLETE":
-      const properties = replaceObjectInArray(
+      properties = replaceObjectInArray(
         [...state.properties],
         action.property,
         "property_id"
       );
-      const selectedProperties = replaceObjectInArray(
+      selectedProperties = replaceObjectInArray(
         [...state.selectedProperties],
         action.property,
         "property_id"
       );
-      newState = {
+      return {
         ...state,
         properties,
         selectedProperties
       };
-      break;
     case "GENERAL_INVITE_MEMBER_COMPLETE":
-      const propertiesObj = {};
-      if (state.properties) {
-        state.properties.forEach(p => {
-          propertiesObj[p.property_id] = p;
-        });
-        action.properties.forEach(p => {
-          propertiesObj[p.property_id] = {
-            ...propertiesObj[p.property_id],
-            ...p
-          };
-        });
-        const properties = state.properties.map(
-          p => propertiesObj[p.property_id]
-        );
-        newState = {
-          ...state,
-          properties,
-          selectedProperties: []
-        };
-      } else {
-        newState = { ...state };
+      if (!state.properties) {
+        return state;
       }
-      break;
+
+      let propertiesObj = {};
+      state.properties.forEach(p => {
+        propertiesObj[p.property_id] = p;
+      });
+      action.properties.forEach(p => {
+        propertiesObj[p.property_id] = {
+          ...propertiesObj[p.property_id],
+          ...p
+        };
+      });
+      properties = state.properties.map(p => propertiesObj[p.property_id]);
+
+      return {
+        ...state,
+        properties,
+        selectedProperties: []
+      };
     default:
-      newState = state;
+      return state;
   }
-  return newState;
 };
 
 export default reducer;

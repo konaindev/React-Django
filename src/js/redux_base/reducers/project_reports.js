@@ -1,6 +1,6 @@
 const initialState = {
-  loadingProject: true,
-  loadingReports: true,
+  fetchingProject: true,
+  fetchingReports: true,
   project: false,
   reports: false
 };
@@ -8,38 +8,33 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case "AJAX_GET_PROJECT_OVERALL_REQUEST":
-      return {
-        ...state,
-        loadingProject: true,
-        project: false,
-        reports: false
-      };
+      return initialState;
     case "AJAX_GET_PROJECT_OVERALL_SUCCESS":
       return {
         ...state,
-        loadingProject: false,
+        fetchingProject: false,
         project: action.payload
       };
     case "AJAX_GET_PROJECT_OVERALL_FAILURE":
       return {
         ...state,
-        loadingProject: false
+        fetchingProject: false
       };
     case "AJAX_GET_PROJECT_REPORTS_REQUEST":
       return {
         ...state,
-        loadingReports: true
+        fetchingReports: true
       };
     case "AJAX_GET_PROJECT_REPORTS_SUCCESS":
       return {
         ...state,
-        loadingReports: false,
+        fetchingReports: false,
         reports: action.payload
       };
     case "AJAX_GET_PROJECT_REPORTS_FAILURE":
       return {
         ...state,
-        loadingReports: false
+        fetchingReports: false
       };
     default:
       return state;
