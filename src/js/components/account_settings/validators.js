@@ -81,10 +81,12 @@ const profileSchema = Yup.object().shape({
     })
     .label("Phone number"),
   phone_ext: Yup.string().label("Phone ext"),
-  company: Yup.string()
-    .required()
-    .max(255)
-    .label("Company"),
+  company: Yup.object({
+    value: Yup.string()
+      .max(255, "is too much length")
+      .required()
+      .label("Company")
+  }).label("Company"),
   company_roles: Yup.array()
     .required()
     .label("Company role"),
@@ -94,7 +96,7 @@ const profileSchema = Yup.object().shape({
     .matches(streetRegex, {
       message: invalidStreetMessage
     })
-    .label("Office address"),
+    .label("Street Address"),
   office_city: Yup.string()
     .max(255)
     .label("City")
