@@ -195,6 +195,7 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
             project=project,
             report=self.selector.get_report_data(),
             share_info=share_info,
+            members=self.project.get_members(),
         )
 
 

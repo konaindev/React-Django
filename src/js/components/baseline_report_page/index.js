@@ -24,7 +24,14 @@ export class BaselineReportPage extends Component {
   }
 
   render() {
-    const { user, project, report, report_links, share_info } = this.props;
+    const {
+      user,
+      project,
+      report,
+      report_links,
+      share_info,
+      members
+    } = this.props;
 
     return (
       <ReportPageChrome
@@ -33,6 +40,7 @@ export class BaselineReportPage extends Component {
         current_report_name="baseline"
         report_links={report_links}
         share_info={share_info}
+        members={members}
       >
         <CommonReport
           report={report}

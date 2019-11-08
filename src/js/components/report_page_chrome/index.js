@@ -1,10 +1,11 @@
-import React, { Component, Fragment } from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import ReportLinks from "../report_links";
 import ProjectPageChrome from "../project_page_chrome";
 import ShareToggle from "../share_toggle";
 import ProjectLink from "../project_link";
+import UserIconList from "../user_icon_list";
 
 import "./report_page_chrome.scss";
 
@@ -26,7 +27,15 @@ export default class ReportPageChrome extends Component {
     share_info: PropTypes.object,
     topItems: PropTypes.node,
     children: PropTypes.node.isRequired,
-    backUrl: PropTypes.string
+    backUrl: PropTypes.string,
+    members: PropTypes.arrayOf(
+      PropTypes.shape({
+        user_id: PropTypes.string.isRequired,
+        profile_image_url: PropTypes.string,
+        account_name: PropTypes.string.isRequired,
+        role: PropTypes.string.isRequired
+      })
+    )
   };
 
   static defaultProps = {
@@ -40,7 +49,8 @@ export default class ReportPageChrome extends Component {
       current_report_name,
       report_links,
       share_info,
-      backUrl
+      backUrl,
+      members
     } = this.props;
     let image_url = DEFAULT_IMAGE_URL;
     if (project && project.building_image) {
@@ -57,6 +67,9 @@ export default class ReportPageChrome extends Component {
               imageUrl={image_url}
               health={project.health}
             />
+          </div>
+          <div>
+            <UserIconList users={members} />
           </div>
           <div className="subheader__inner">
             <ReportLinks
