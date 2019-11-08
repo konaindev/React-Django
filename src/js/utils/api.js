@@ -17,7 +17,7 @@ export function axiosPost(url, data, headers = {}) {
     validateStatus
   };
   if (access) {
-    config.headers["Authorization"] = `bearer ${access}`;
+    config.headers["Authorization"] = `Bearer ${access}`;
   }
   if (data.toString() === "[object FormData]") {
     config.headers["content-type"] = "multipart/form-data";
