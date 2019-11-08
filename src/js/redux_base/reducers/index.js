@@ -2,6 +2,7 @@ import _cloneDeep from "lodash/cloneDeep";
 import { combineReducers } from "redux";
 
 import dashboard from "./dashboard";
+import portfolio from "./portfolio";
 import projectReports from "./project_reports";
 
 const initState = {
@@ -181,19 +182,6 @@ const property_managers = (state = [], action) => {
   return newState;
 };
 
-const portfolio = (state = {}, action) => {
-  let newState = undefined;
-
-  switch (action.type) {
-    case "UPDATE_PORTFOLIO":
-      newState = action.x;
-      break;
-    default:
-      newState = state;
-  }
-  return newState;
-};
-
 const asset_managers = (state = [], action) => {
   let newState = undefined;
 
@@ -331,6 +319,7 @@ export default combineReducers({
   uiStrings,
   dashboard,
   projectReports,
+  portfolio,
   tutorial,
   createPassword,
   completeAccount,
@@ -341,7 +330,6 @@ export default combineReducers({
   properties,
   funds,
   property_managers,
-  portfolio,
   asset_managers,
   locations,
   project,

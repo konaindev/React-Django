@@ -2,6 +2,7 @@ import { createActions, URLS } from "./helpers";
 
 export * from "./helpers";
 export { default as dashboard } from "./dashboard";
+export { default as portfolio } from "./portfolio";
 export { default as projectReports } from "./project_reports";
 
 export const tutorial = {
@@ -127,7 +128,6 @@ export const nav = {
 
 export const user = createActions("user");
 export const property_managers = createActions("property_managers");
-export const portfolio = createActions("portfolio");
 export const properties = createActions("properties");
 export const funds = createActions("funds");
 export const asset_managers = createActions("asset_managers");
