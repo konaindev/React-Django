@@ -139,7 +139,6 @@ const createPassword = (state = {}, action) => {
 const completeAccount = (
   state = {
     companyAddresses: [],
-    company_roles: [],
     office_types: []
   },
   action
