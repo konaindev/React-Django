@@ -33,7 +33,7 @@ class OfficeAddressView(LoginRequiredMixin, RemarkView):
                 "value": o.address.formatted_address,
                 "street": o.address.street_address_1,
                 "city": o.address.city,
-                "state": o.address.state,
+                "state": o.address.full_state,
                 "country": o.address.country,
                 "zip": o.address.zip_code
             } for o in offices]
