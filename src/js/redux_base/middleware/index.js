@@ -160,32 +160,24 @@ export const logoutMiddleware = store => next => action => {
 
 export const fetchInviteModal = store => next => action => {
   if (action.type === "API_INVITE_MODAL_GET_USERS") {
-    const url = `${process.env.BASE_URL}/projects/members/`;
+    const url = `${process.env.BASE_URL}/api/v1/search-members/`;
     axiosPost(url, action.data)
       .then(response => {
         const members = response.data?.members || [];
         action.callback(members);
       })
       .catch(e => console.log("-----> ERROR", e));
-  } else if (action.type === "API_INVITE_MODAL_REMOVE_MEMBER") {
+  } else if (action.type === "AJAX_DASHBOARD_REMOVE_MEMBER") {
     const projectsId = action.data.project.property_id;
-    const url = `${process.env.BASE_URL}/projects/${projectsId}/remove-member/`;
+    const url = `${process.env.BASE_URL}/api/v1/projects/${projectsId}/remove-member/`;
     axiosPost(url, action.data)
       .then(response => {
         const property = response.data.project;
-        next({ type: "GENERAL_REMOVE_MEMBER_COMPLETE", property });
-      })
-      .catch(e => console.log("-----> ERROR", e));
-  } else if (action.type === "API_INVITE_MODAL_ADD_MEMBER") {
-    const url = `${process.env.BASE_URL}/projects/add-members/`;
-    axiosPost(url, action.data)
-      .then(response => {
-        const properties = response.data.projects;
-        next({ type: "GENERAL_INVITE_MEMBER_COMPLETE", properties });
+        next({ type: "AJAX_DASHBOARD_REMOVE_MEMBER_SUCCESS", property });
       })
       .catch(e => console.log("-----> ERROR", e));
   } else if (action.type === "API_INVITE_RESEND") {
-    const url = `${process.env.BASE_URL}/users/${action.hash}/resend-invite/`;
+    const url = `${process.env.BASE_URL}/api/v1/users/${action.hash}/resend-invite/`;
     axiosGet(url)
       .then(response => {
         if (response.status === 200) {

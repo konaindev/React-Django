@@ -27,7 +27,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         fetchingProperties: false
       };
-    case "GENERAL_REMOVE_MEMBER_COMPLETE":
+    case "API_DASHBOARD_REMOVE_MEMBER":
       properties = replaceObjectInArray(
         [...state.properties],
         action.property,
@@ -43,7 +43,7 @@ const reducer = (state = initialState, action) => {
         properties,
         selectedProperties
       };
-    case "GENERAL_INVITE_MEMBER_COMPLETE":
+    case "AJAX_POST_INVITE_MODAL_ADD_MEMBER_SUCCESS":
       if (!state.properties) {
         return state;
       }
@@ -52,7 +52,7 @@ const reducer = (state = initialState, action) => {
       state.properties.forEach(p => {
         propertiesObj[p.property_id] = p;
       });
-      action.properties.forEach(p => {
+      action.payload.projects.forEach(p => {
         propertiesObj[p.property_id] = {
           ...propertiesObj[p.property_id],
           ...p

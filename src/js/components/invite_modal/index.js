@@ -100,11 +100,11 @@ class InviteModal extends React.PureComponent {
   };
 
   openRemoveModal = (property, member) => {
-    this.props.dispatch(inviteModal.removeModalOpen(property, member));
+    this.props.dispatch(inviteModal.openRemoveModal(property, member));
   };
 
   closeRemoveModal = () => {
-    this.props.dispatch(inviteModal.removeModalClose);
+    this.props.dispatch(inviteModal.closeRemoveModal);
   };
 
   removeProperty = e => {
@@ -128,7 +128,12 @@ class InviteModal extends React.PureComponent {
 
   inviteMembers = () => {
     this.props.dispatch(
-      inviteModal.addMembers(this.props.properties, this.state.selectedMembers)
+      inviteModal.addMembers({
+        body: {
+          projects: this.props.properties,
+          members: this.state.selectedMembers
+        }
+      })
     );
   };
 

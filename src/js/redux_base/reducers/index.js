@@ -4,6 +4,7 @@ import { combineReducers } from "redux";
 import dashboard from "./dashboard";
 import portfolio from "./portfolio";
 import projectReports from "./project_reports";
+import inviteModal from "./invite_modal";
 
 const initState = {
   tutorialView: {}
@@ -248,48 +249,6 @@ const kpi = (state = {}, action) => {
   }
   return newState;
 };
-const inviteModal = (state = {}, action) => {
-  let newState = {};
-  switch (action.type) {
-    case "INVITE_MODAL_SHOW": {
-      newState = { ...state, isOpen: true };
-      break;
-    }
-    case "INVITE_MODAL_HIDE": {
-      newState = { ...state, isOpen: false };
-      break;
-    }
-    case "INVITE_MODAL_REMOVE_MODAL_SHOW": {
-      newState = {
-        ...state,
-        removeModalIsOpen: true,
-        remove: {
-          member: action.member,
-          property: action.property
-        }
-      };
-      break;
-    }
-    case "INVITE_MODAL_REMOVE_MODAL_HIDE": {
-      newState = { ...state, removeModalIsOpen: false };
-      break;
-    }
-    case "GENERAL_REMOVE_MEMBER_COMPLETE": {
-      newState = {
-        ...state,
-        removeModalIsOpen: false
-      };
-      break;
-    }
-    case "GENERAL_INVITE_MEMBER_COMPLETE": {
-      newState = { ...state, isOpen: false };
-      break;
-    }
-    default:
-      newState = state;
-  }
-  return newState;
-};
 
 const uiStrings = (
   state = {
@@ -320,6 +279,7 @@ export default combineReducers({
   dashboard,
   projectReports,
   portfolio,
+  inviteModal,
   tutorial,
   createPassword,
   completeAccount,
@@ -334,6 +294,5 @@ export default combineReducers({
   locations,
   project,
   market,
-  kpi,
-  inviteModal
+  kpi
 });
