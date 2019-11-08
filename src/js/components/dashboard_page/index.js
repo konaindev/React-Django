@@ -19,7 +19,7 @@ import Loader from "../loader";
 
 import { qsParse, qsStringify } from "../../utils/misc";
 import TutorialView from "../tutorial_view";
-import { inviteModal, general, dashboard } from "../../redux_base/actions";
+import { inviteModal, dashboard } from "../../redux_base/actions";
 import "./dashboard_page.scss";
 
 export class DashboardPage extends React.PureComponent {
@@ -281,7 +281,6 @@ export class UrlQueryLayer extends React.PureComponent {
     let queryString = qsStringify(urlParams);
 
     this.props.history.push(queryString);
-    console.log("---------onChangeFilter for dashboard", queryString);
     this.props.dispatch(dashboard.requestProperties(queryString));
   };
 

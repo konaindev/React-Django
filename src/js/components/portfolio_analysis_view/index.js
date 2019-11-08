@@ -13,6 +13,7 @@ import Select from "../select";
 import UserMenu from "../user_menu";
 import ToggleButton from "../toggle_button";
 import Loader from "../loader";
+import { portfolio } from "../../redux_base/actions";
 import { formatKPI } from "../../utils/kpi_formatters";
 import "./portfolio_analysis_view.scss";
 
@@ -204,9 +205,9 @@ export class PortfolioAnalysisView extends React.PureComponent {
         <div className="portfolio-analysis__header">
           <div className="portfolio-analysis__title">Portfolio Analysis</div>
           {/* <ShareToggle
-              {...share_info}
-              current_report_name="portfolio_analysis"
-            /> */}
+            {...share_info}
+            current_report_name="portfolio_analysis"
+          /> */}
         </div>
         <div className="portfolio-analysis__controls">
           <Select
@@ -216,6 +217,7 @@ export class PortfolioAnalysisView extends React.PureComponent {
             value={this.kpiValue}
             onChange={this.onChangeKpi}
           />
+          {this.getEmptyPropsTooltip()}
           <DateRangeSelector
             start_date={date_selection.start_date}
             end_date={date_selection.end_date}
@@ -232,38 +234,12 @@ export class PortfolioAnalysisView extends React.PureComponent {
           <div className="portfolio-analysis__property-count">
             {this.totalProperties} properties
           </div>
-          <div className="portfolio-analysis__controls">
-            <Select
-              className="portfolio-analysis__select-kpi"
-              theme="default"
-              options={this.kpiOptions}
-              value={this.kpiValue}
-              onChange={this.onChangeKpi}
-            />
-            {this.getEmptyPropsTooltip()}
-            <DateRangeSelector
-              start_date={date_selection.start_date}
-              end_date={date_selection.end_date}
-              preset={date_selection.preset}
-              onChange={this.onChangeDateRange}
-            />
-          </div>
-          <div className="portfolio-analysis__title-bar">
-            <ToggleButton
-              options={average_buttons_options}
-              value={display_average}
-              onChange={this.onAverageClick}
-            />
-            <div className="portfolio-analysis__property-count">
-              {this.totalProperties} properties
-            </div>
-          </div>
-          <div className="portfolio-analysis__kpi-cards">
-            {this.renderKPICards()}
-          </div>
-          <div className="portfolio-analysis__table">
-            <PortfolioTable properties={table_data} kpi_order={kpi_order} />
-          </div>
+        </div>
+        <div className="portfolio-analysis__kpi-cards">
+          {this.renderKPICards()}
+        </div>
+        <div className="portfolio-analysis__table">
+          <PortfolioTable properties={table_data} kpi_order={kpi_order} />
         </div>
       </Container>
     );
@@ -278,8 +254,9 @@ export default class UrlQueryLayer extends React.PureComponent {
     urlParams["s"] = params.date_selection.start_date;
     urlParams["e"] = params.date_selection.end_date;
     urlParams["a"] = params.display_average;
-    const constructedUrl = qsStringify(urlParams);
-    this.props.history.push(constructedUrl);
+    const queryString = qsStringify(urlParams);
+    this.props.history.push(queryString);
+    this.props.dispatch(portfolio.requestGroups(queryString));
   };
 
   render() {
