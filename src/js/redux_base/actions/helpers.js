@@ -31,8 +31,20 @@ export const createActions = branch => ({
   })
 });
 
-export const createRequestTypes = base => ({
-  REQUEST: `${base}_REQUEST`,
-  SUCCESS: `${base}_SUCCESS`,
-  FAILURE: `${base}_FAILURE`
-});
+export const createAjaxAction = (
+  baseActionType,
+  endpoint,
+  query = ""
+) => params => {
+  let queryString = typeof query === "function" ? query(params) : query;
+  let url = `${API_URL_PREFIX}${endpoint}${queryString}`;
+
+  return {
+    ...(typeof params === "object" ? params : {}),
+    type: baseActionType.startsWith("AJAX_POST")
+      ? "FETCH_API_POST"
+      : "FETCH_API_GET",
+    url,
+    baseActionType
+  };
+};

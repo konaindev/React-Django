@@ -47,7 +47,7 @@ export default class PropertyCardList extends React.PureComponent {
         </div>
       );
     }
-    console.log("PropertyCardList::properties", properties);
+
     return (
       <div className="property-card-list">
         {properties.map((property, index) => (

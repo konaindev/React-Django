@@ -1,47 +1,40 @@
-import { PROJECT_OVERALL_GET, PROJECT_REPORTS_GET } from "../actions";
-
 const initialState = {
-  loadingProject: true,
-  loadingReports: true,
+  fetchingProject: true,
+  fetchingReports: true,
   project: false,
   reports: false
 };
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case PROJECT_OVERALL_GET.REQUEST:
+    case "AJAX_GET_PROJECT_OVERALL_REQUEST":
+      return initialState;
+    case "AJAX_GET_PROJECT_OVERALL_SUCCESS":
       return {
         ...state,
-        loadingProject: true,
-        project: false,
-        reports: false
+        fetchingProject: false,
+        project: action.payload
       };
-    case PROJECT_OVERALL_GET.SUCCESS:
+    case "AJAX_GET_PROJECT_OVERALL_FAILURE":
       return {
         ...state,
-        loadingProject: false,
-        project: action.data
+        fetchingProject: false
       };
-    case PROJECT_OVERALL_GET.FAILURE:
+    case "AJAX_GET_PROJECT_REPORTS_REQUEST":
       return {
         ...state,
-        loadingProject: false
+        fetchingReports: true
       };
-    case PROJECT_REPORTS_GET.REQUEST:
+    case "AJAX_GET_PROJECT_REPORTS_SUCCESS":
       return {
         ...state,
-        loadingReports: true
+        fetchingReports: false,
+        reports: action.payload
       };
-    case PROJECT_REPORTS_GET.SUCCESS:
+    case "AJAX_GET_PROJECT_REPORTS_FAILURE":
       return {
         ...state,
-        loadingReports: false,
-        reports: action.data
-      };
-    case PROJECT_REPORTS_GET.FAILURE:
-      return {
-        ...state,
-        loadingReports: false
+        fetchingReports: false
       };
     default:
       return state;

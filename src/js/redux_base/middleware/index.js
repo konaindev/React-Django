@@ -1,7 +1,4 @@
 import {
-  general,
-  tutorial,
-  networking,
   createPassword,
   completeAccount,
   auth,
@@ -113,9 +110,6 @@ export const startNetworkFetch = _ => next => action => {
   switch (action.type) {
     case "NETWORK_START_FETCH":
       switch (action.branch) {
-        case "dashboard":
-          next(general.startFetching());
-          break;
         default:
           next(action);
           break;
@@ -134,17 +128,11 @@ export const applyApiResult = _ => next => action => {
           break;
         }
         case "market": {
-          console.log("+++++++++++", action);
           next(market.set(action.response));
           break;
         }
         case "location": {
           next(locations.set(action.response));
-          break;
-        }
-        case "dashboard": {
-          //next(locations.set(action.reponse.locations));
-          next(general.update(action.response));
           break;
         }
         case "token": {
@@ -172,32 +160,24 @@ export const logoutMiddleware = store => next => action => {
 
 export const fetchInviteModal = store => next => action => {
   if (action.type === "API_INVITE_MODAL_GET_USERS") {
-    const url = `${process.env.BASE_URL}/projects/members/`;
+    const url = `${process.env.BASE_URL}/api/v1/search-members/`;
     axiosPost(url, action.data)
       .then(response => {
         const members = response.data?.members || [];
         action.callback(members);
       })
       .catch(e => console.log("-----> ERROR", e));
-  } else if (action.type === "API_INVITE_MODAL_REMOVE_MEMBER") {
+  } else if (action.type === "AJAX_DASHBOARD_REMOVE_MEMBER") {
     const projectsId = action.data.project.property_id;
-    const url = `${process.env.BASE_URL}/projects/${projectsId}/remove-member/`;
+    const url = `${process.env.BASE_URL}/api/v1/projects/${projectsId}/remove-member/`;
     axiosPost(url, action.data)
       .then(response => {
         const property = response.data.project;
-        next({ type: "GENERAL_REMOVE_MEMBER_COMPLETE", property });
-      })
-      .catch(e => console.log("-----> ERROR", e));
-  } else if (action.type === "API_INVITE_MODAL_ADD_MEMBER") {
-    const url = `${process.env.BASE_URL}/projects/add-members/`;
-    axiosPost(url, action.data)
-      .then(response => {
-        const properties = response.data.projects;
-        next({ type: "GENERAL_INVITE_MEMBER_COMPLETE", properties });
+        next({ type: "AJAX_DASHBOARD_REMOVE_MEMBER_SUCCESS", property });
       })
       .catch(e => console.log("-----> ERROR", e));
   } else if (action.type === "API_INVITE_RESEND") {
-    const url = `${process.env.BASE_URL}/users/${action.hash}/resend-invite/`;
+    const url = `${process.env.BASE_URL}/api/v1/users/${action.hash}/resend-invite/`;
     axiosGet(url)
       .then(response => {
         if (response.status === 200) {
@@ -242,6 +222,9 @@ export const refreshToken = store => next => action => {
           next(auth.clearToken());
         } else {
           next(tokenActions.update({ refresh, access: response.data.access }));
+          // there might be mutiple simulataneous calls which resulted 401
+          // better to reload the page
+          window.location.reload();
         }
       })
       .catch(e => console.log("REFRESH TOKEN ERROR", e));

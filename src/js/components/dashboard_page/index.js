@@ -19,12 +19,12 @@ import Loader from "../loader";
 
 import { qsParse, qsStringify } from "../../utils/misc";
 import TutorialView from "../tutorial_view";
-import { inviteModal, general, dashboard } from "../../redux_base/actions";
+import { inviteModal, dashboard } from "../../redux_base/actions";
 import "./dashboard_page.scss";
 
 export class DashboardPage extends React.PureComponent {
   static propTypes = {
-    isFetching: PropTypes.bool.isRequired,
+    fetchingProperties: PropTypes.bool.isRequired,
     properties: PropTypes.array.isRequired,
     funds: PropTypes.array.isRequired,
     asset_managers: PropTypes.array.isRequired,
@@ -62,11 +62,11 @@ export class DashboardPage extends React.PureComponent {
 
   selectAll = () => {
     const selectedProperties = this.props.properties;
-    this.props.dispatch(general.update({ selectedProperties }));
+    this.props.dispatch(dashboard.updateStore({ selectedProperties }));
   };
 
   cancelSelect = () => {
-    this.props.dispatch(general.update({ selectedProperties: [] }));
+    this.props.dispatch(dashboard.updateStore({ selectedProperties: [] }));
   };
 
   inviteHandler = () => {
@@ -88,7 +88,7 @@ export class DashboardPage extends React.PureComponent {
   toggleView = viewType => this.setState({ viewType });
 
   onSelectHandler = selectedProperties => {
-    this.props.dispatch(general.update({ selectedProperties }));
+    this.props.dispatch(dashboard.updateStore({ selectedProperties }));
   };
 
   onShowAddPropertyForm = () => {
@@ -116,7 +116,7 @@ export class DashboardPage extends React.PureComponent {
       "dashboard-content--selection-mode": this.props.selectedProperties.length
     });
     const PropertiesListComponent = this.propertiesListComponent;
-    const { isFetching } = this.props;
+    const { fetchingProperties } = this.props;
     return (
       <div>
         <TutorialView />
@@ -137,7 +137,7 @@ export class DashboardPage extends React.PureComponent {
                   color="primary"
                   uppercase={true}
                   onClick={this.onShowAddPropertyForm}
-                  disabled={isFetching}
+                  disabled={fetchingProperties}
                 >
                   ADD PROPERTY
                 </Button>
@@ -153,7 +153,7 @@ export class DashboardPage extends React.PureComponent {
                   locations={this.props.locations}
                   filters={this.props.filters}
                   onChange={this.onChangeFilter}
-                  isDisabled={isFetching}
+                  isDisabled={fetchingProperties}
                   dispatch={this.props.dispatch}
                 />
               </div>
@@ -167,7 +167,7 @@ export class DashboardPage extends React.PureComponent {
               </div>
             </div>
             <div className="dashboard-content__properties">
-              <Loader isVisible={isFetching} />
+              <Loader isVisible={fetchingProperties} />
               <PropertiesListComponent
                 properties={this.props.properties}
                 selectedProperties={this.props.selectedProperties}
@@ -278,15 +278,14 @@ export class UrlQueryLayer extends React.PureComponent {
       }
     });
 
-    let queryStringForAjax = qsStringify(urlParams);
+    let queryString = qsStringify(urlParams);
 
-    this.props.history.push(queryStringForAjax);
-    console.log("---------onChangeFilter for dashboard", queryStringForAjax);
-    this.props.dispatch(dashboard.update({ queryStringForAjax }));
+    this.props.history.push(queryString);
+    this.props.dispatch(dashboard.requestProperties(queryString));
   };
 
   render() {
-    const { isFetching, no_projects } = this.props;
+    const { fetchingProperties, no_projects } = this.props;
 
     if (no_projects === false) {
       return (
@@ -296,7 +295,7 @@ export class UrlQueryLayer extends React.PureComponent {
           onChangeFilter={this.onChangeFilter}
         />
       );
-    } else if (isFetching && no_projects === undefined) {
+    } else if (fetchingProperties && no_projects === undefined) {
       // first API call is in progress
       return (
         <div className="dashboard-content">

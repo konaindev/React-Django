@@ -1,6 +1,10 @@
 import _cloneDeep from "lodash/cloneDeep";
 import { combineReducers } from "redux";
+
+import dashboard from "./dashboard";
+import portfolio from "./portfolio";
 import projectReports from "./project_reports";
+import inviteModal from "./invite_modal";
 
 const initState = {
   tutorialView: {}
@@ -17,77 +21,6 @@ const token = (state = { refresh: null, access: null }, action) => {
       newState = {};
       break;
     }
-    default:
-      newState = state;
-  }
-  return newState;
-};
-function replaceObjectInArray(target, data, key) {
-  const index = target.findIndex(t => t[key] === data[key]);
-  if (index === -1) {
-    return target;
-  }
-  target[index] = { ...target[index], ...data };
-  return target;
-}
-
-const dashboard = (state = { isFetching: true }, action) => {
-  let newState = {};
-  switch (action.type) {
-    case "GENERAL_SET_STATE":
-      newState = { ...action.newState };
-      break;
-    case "GENERAL_START_FETCHING":
-      newState = { ...state, isFetching: true };
-      break;
-    case "GENERAL_UPDATE_STATE":
-      newState = {
-        ...state,
-        ...action.newState,
-        isFetching: false
-      };
-      break;
-    case "GENERAL_REMOVE_MEMBER_COMPLETE":
-      const properties = replaceObjectInArray(
-        [...state.properties],
-        action.property,
-        "property_id"
-      );
-      const selectedProperties = replaceObjectInArray(
-        [...state.selectedProperties],
-        action.property,
-        "property_id"
-      );
-      newState = {
-        ...state,
-        properties,
-        selectedProperties
-      };
-      break;
-    case "GENERAL_INVITE_MEMBER_COMPLETE":
-      const propertiesObj = {};
-      if (state.properties) {
-        state.properties.forEach(p => {
-          propertiesObj[p.property_id] = p;
-        });
-        action.properties.forEach(p => {
-          propertiesObj[p.property_id] = {
-            ...propertiesObj[p.property_id],
-            ...p
-          };
-        });
-        const properties = state.properties.map(
-          p => propertiesObj[p.property_id]
-        );
-        newState = {
-          ...state,
-          properties,
-          selectedProperties: []
-        };
-      } else {
-        newState = { ...state };
-      }
-      break;
     default:
       newState = state;
   }
@@ -250,19 +183,6 @@ const property_managers = (state = [], action) => {
   return newState;
 };
 
-const portfolio = (state = {}, action) => {
-  let newState = undefined;
-
-  switch (action.type) {
-    case "UPDATE_PORTFOLIO":
-      newState = action.x;
-      break;
-    default:
-      newState = state;
-  }
-  return newState;
-};
-
 const asset_managers = (state = [], action) => {
   let newState = undefined;
 
@@ -329,48 +249,6 @@ const kpi = (state = {}, action) => {
   }
   return newState;
 };
-const inviteModal = (state = {}, action) => {
-  let newState = {};
-  switch (action.type) {
-    case "INVITE_MODAL_SHOW": {
-      newState = { ...state, isOpen: true };
-      break;
-    }
-    case "INVITE_MODAL_HIDE": {
-      newState = { ...state, isOpen: false };
-      break;
-    }
-    case "INVITE_MODAL_REMOVE_MODAL_SHOW": {
-      newState = {
-        ...state,
-        removeModalIsOpen: true,
-        remove: {
-          member: action.member,
-          property: action.property
-        }
-      };
-      break;
-    }
-    case "INVITE_MODAL_REMOVE_MODAL_HIDE": {
-      newState = { ...state, removeModalIsOpen: false };
-      break;
-    }
-    case "GENERAL_REMOVE_MEMBER_COMPLETE": {
-      newState = {
-        ...state,
-        removeModalIsOpen: false
-      };
-      break;
-    }
-    case "GENERAL_INVITE_MEMBER_COMPLETE": {
-      newState = { ...state, isOpen: false };
-      break;
-    }
-    default:
-      newState = state;
-  }
-  return newState;
-};
 
 const uiStrings = (
   state = {
@@ -396,8 +274,12 @@ const uiStrings = (
 };
 
 export default combineReducers({
-  general: dashboard,
   network,
+  uiStrings,
+  dashboard,
+  projectReports,
+  portfolio,
+  inviteModal,
   tutorial,
   createPassword,
   completeAccount,
@@ -408,13 +290,9 @@ export default combineReducers({
   properties,
   funds,
   property_managers,
-  portfolio,
   asset_managers,
   locations,
   project,
   market,
-  kpi,
-  inviteModal,
-  uiStrings,
-  projectReports
+  kpi
 });

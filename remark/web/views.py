@@ -45,7 +45,7 @@ class DashboardView(APIView):
             address = project.property.geo_address
             project_details = dict(
                 property_name=project.name,
-                public_id=project.public_id,
+                property_id=project.public_id,
                 address=f"{address.city}, {address.state}",
                 image_url=project.get_building_image()[1],
                 performance_rating=project.get_performance_rating(),

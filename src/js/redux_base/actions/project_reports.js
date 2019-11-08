@@ -1,31 +1,23 @@
-import { createRequestTypes } from "./helpers";
+import { createAjaxAction } from "./helpers";
 
-export const PROJECT_OVERALL_GET = createRequestTypes(
-  "projectReports/PROJECT_OVERALL_GET"
-);
-export const PROJECT_REPORTS_GET = createRequestTypes(
-  "projectReports/PROJECT_REPORTS_GET"
-);
+const actions = {
+  requestProject: createAjaxAction(
+    "AJAX_GET_PROJECT_OVERALL",
+    "/projects",
+    projectId => `/${projectId}/overall/`
+  ),
+  requestReports: createAjaxAction(
+    "AJAX_GET_PROJECT_REPORTS",
+    "/projects",
+    ({ projectId, reportType, reportSpan }) => {
+      let qs = `/${projectId}/reports/?report_type=${reportType}`;
+      if (reportSpan) {
+        qs += `&report_span=${reportSpan}`;
+      }
+      return qs;
+    }
+  ),
+  updateStore: payload => ({ type: "PROJECT_REPORTS_UPDATE_STORE", payload })
+};
 
-export const projectOverallRequest = publicId => ({
-  type: PROJECT_OVERALL_GET.REQUEST,
-  publicId
-});
-
-export const projectOverallSuccess = data => ({
-  type: PROJECT_OVERALL_GET.SUCCESS,
-  data
-});
-
-export const projectReportsRequest = (publicId, reportType, reportSpan) => ({
-  type: PROJECT_REPORTS_GET.REQUEST,
-  publicId,
-  reportType,
-  reportSpan
-});
-
-export const projectReportsSuccess = (data, reportType) => ({
-  type: PROJECT_REPORTS_GET.SUCCESS,
-  data,
-  reportType
-});
+export default actions;

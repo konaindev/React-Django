@@ -1,34 +1,10 @@
 import { createActions, URLS } from "./helpers";
 
 export * from "./helpers";
-export * from "./project_reports";
-
-export const dashboard = {
-  update: x => {
-    console.log("dashboard action update got", x);
-    return {
-      type: "FETCH_API_GET",
-      url: `${URLS.base}${URLS.ver}${URLS.dashboard}${x.queryStringForAjax ||
-        ""}`,
-      branch: "dashboard",
-      ...x
-    };
-  }
-};
-
-export const general = {
-  set: newState => ({
-    type: "GENERAL_SET_STATE",
-    newState
-  }),
-  startFetching: () => ({
-    type: "GENERAL_START_FETCHING"
-  }),
-  update: newState => ({
-    type: "GENERAL_UPDATE_STATE",
-    newState
-  })
-};
+export { default as dashboard } from "./dashboard";
+export { default as portfolio } from "./portfolio";
+export { default as projectReports } from "./project_reports";
+export { default as inviteModal } from "./invite_modal";
 
 export const tutorial = {
   set: newState => ({
@@ -50,7 +26,7 @@ export const tutorial = {
 };
 
 export const networking = {
-  startFetching: (branch = "general") => ({
+  startFetching: branch => ({
     type: "NETWORK_START_FETCH",
     branch
   }),
@@ -64,7 +40,7 @@ export const networking = {
   success: () => ({
     type: "NETWORK_FETCH_SUCCESS"
   }),
-  results: (response, branch = "general") => ({
+  results: (response, branch) => ({
     type: "API_RESPONSE",
     response,
     branch
@@ -98,9 +74,10 @@ export const token = {
     type: "UPDATE_TOKEN",
     token: x
   }),
-  refresh: () => ({
+  refresh: failedAction => ({
     type: "REFRESH_TOKEN",
-    url: `${URLS.base}${URLS.ver}${URLS.refresh}`
+    url: `${URLS.base}${URLS.ver}${URLS.refresh}`,
+    failedAction
   })
 };
 
@@ -152,7 +129,6 @@ export const nav = {
 
 export const user = createActions("user");
 export const property_managers = createActions("property_managers");
-export const portfolio = createActions("portfolio");
 export const properties = createActions("properties");
 export const funds = createActions("funds");
 export const asset_managers = createActions("asset_managers");
@@ -160,41 +136,6 @@ export const kpi = createActions("kpi");
 export const market = createActions("market");
 export const project = createActions("project");
 export const locations = createActions("locations");
-
-export const inviteModal = {
-  open: {
-    type: "INVITE_MODAL_SHOW"
-  },
-  close: {
-    type: "INVITE_MODAL_HIDE"
-  },
-  removeModalOpen: (property, member) => ({
-    type: "INVITE_MODAL_REMOVE_MODAL_SHOW",
-    property,
-    member
-  }),
-  removeModalClose: {
-    type: "INVITE_MODAL_REMOVE_MODAL_HIDE"
-  },
-  getUsers: (value, callback) => ({
-    type: "API_INVITE_MODAL_GET_USERS",
-    data: { value },
-    callback
-  }),
-  removeMember: (project, member) => ({
-    type: "API_INVITE_MODAL_REMOVE_MEMBER",
-    data: { project, member }
-  }),
-  addMembers: (projects, members) => ({
-    type: "API_INVITE_MODAL_ADD_MEMBER",
-    data: { projects, members }
-  }),
-  resend: (hash, callback) => ({
-    type: "API_INVITE_RESEND",
-    hash,
-    callback
-  })
-};
 
 export const uiStrings = {
   fetch: (version, language) => ({

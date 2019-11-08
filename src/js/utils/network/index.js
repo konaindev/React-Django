@@ -1,4 +1,4 @@
-import { all, call, put, takeLatest } from "redux-saga/effects";
+import { all, call, put, takeEvery } from "redux-saga/effects";
 import { networking, token, auth } from "../../redux_base/actions";
 import { axiosGet, axiosPost } from "../api";
 
@@ -66,33 +66,45 @@ function handleError(action) {
 }
 function* get(action) {
   try {
+    yield put({ type: `${action.baseActionType}_REQUEST` });
     yield put(networking.startFetching(action.branch));
     const response = yield call(axiosGet, action.url);
     yield checkStatus(response);
+    yield put({
+      type: `${action.baseActionType}_SUCCESS`,
+      payload: response.data
+    });
     yield put(networking.results(response.data, action.branch));
     yield put(networking.success());
   } catch (e) {
+    yield put({ type: `${action.baseActionType}_ERROR`, payload: e });
     yield handleError(action)(e);
   }
 }
 
 function* post(action) {
   try {
-    const response = yield call(axiosPost, action.url, action.body, {}, false);
+    yield put({ type: `${action.baseActionType}_REQUEST` });
+    const response = yield call(axiosPost, action.url, action.body);
     yield checkStatus(response);
+    yield put({
+      type: `${action.baseActionType}_SUCCESS`,
+      payload: response.data
+    });
     yield put(networking.results(response.data, action.branch));
     yield put(networking.success());
   } catch (e) {
+    yield put({ type: `${action.baseActionType}_ERROR`, payload: e });
     yield handleError(action)(e);
   }
 }
 
 function* getSaga() {
-  yield takeLatest("FETCH_API_GET", get);
+  yield takeEvery("FETCH_API_GET", get);
 }
 
 function* postSaga() {
-  yield takeLatest("FETCH_API_POST", post);
+  yield takeEvery("FETCH_API_POST", post);
 }
 
 export default function*() {

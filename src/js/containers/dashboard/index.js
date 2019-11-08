@@ -1,12 +1,16 @@
 import React, { PureComponent } from "react";
 import { connect } from "react-redux";
-import DashboardPage from "../../components/dashboard_page";
 import { withRouter } from "react-router-dom";
+
+import DashboardPage from "../../components/dashboard_page";
 import { dashboard } from "../../redux_base/actions";
 
 class DashboardContainer extends PureComponent {
-  componentWillMount() {
-    this.props.dispatch(dashboard.update({}));
+  componentDidMount() {
+    const {
+      location: { search }
+    } = this.props;
+    this.props.dispatch(dashboard.requestProperties(search));
   }
 
   render() {
@@ -14,13 +18,6 @@ class DashboardContainer extends PureComponent {
   }
 }
 
-const mapState = state => {
-  const newState = { ...state.general };
-
-  console.log("dashboard state----->", newState);
-  return {
-    ...state.general
-  };
-};
+const mapState = ({ dashboard }) => ({ ...dashboard });
 
 export default withRouter(connect(mapState)(DashboardContainer));
