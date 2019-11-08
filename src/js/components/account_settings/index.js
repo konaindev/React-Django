@@ -121,7 +121,8 @@ class AccountSettings extends React.PureComponent {
 
 const mapState = state => {
   return {
-    ...state.network
+    ...state.network,
+    ...state.completeAccount
   };
 };
 
