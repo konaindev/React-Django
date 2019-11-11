@@ -70,7 +70,7 @@ export default class ReportPageChrome extends Component {
               />
             </div>
             <div>
-              <UserIconList users={members} />
+              <UserIconList theme="large" users={members} />
             </div>
           </div>
           <div className="subheader__inner">

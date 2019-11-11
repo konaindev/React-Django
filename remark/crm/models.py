@@ -1,6 +1,10 @@
+import os
+
 from django.db import models
-from remark.lib.tokens import public_id
+from django.utils.crypto import get_random_string
 from stdimage.models import StdImageField
+
+from remark.lib.tokens import public_id
 
 from .constants import OFFICE_TYPES
 
@@ -31,9 +35,9 @@ def avatar_media_path(person, filename):
     To overcome this known issue, append random 7-char string to end of file name.
     Though, old files will not be deleted from S3 on image replacement.
 
-    user/<public_id>/avatar_<random_str><.ext>
-    user/<public_id>/avatar_<random_str>.regular<.ext>
-    user/<public_id>/avatar_<random_str>.thumbnail<.ext>
+    person/<public_id>/avatar_<random_str><.ext>
+    person/<public_id>/avatar_<random_str>.regular<.ext>
+    person/<public_id>/avatar_<random_str>.thumbnail<.ext>
     """
     _, extension = os.path.splitext(filename)
     random_str = get_random_string(length=7)

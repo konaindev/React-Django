@@ -22,7 +22,9 @@ export default class UserIconList extends React.PureComponent {
         role: PropTypes.string.isRequired
       })
     ),
-    maxCount: PropTypes.number
+    maxCount: PropTypes.number,
+    className: PropTypes.string,
+    theme: PropTypes.oneOf(["large"])
   };
 
   static defaultProps = {
@@ -90,7 +92,7 @@ export default class UserIconList extends React.PureComponent {
   };
 
   render() {
-    const { className, users, maxCount, ...otherProps } = this.props;
+    const { className, users, maxCount, theme, ...otherProps } = this.props;
     let count = null;
     if (users.length > maxCount) {
       count = (
@@ -99,7 +101,11 @@ export default class UserIconList extends React.PureComponent {
         </div>
       );
     }
-    const classes = cn("user-icon-list", className);
+    const classes = cn(
+      "user-icon-list",
+      { [`user-icon-list--${theme}`]: theme },
+      className
+    );
     return (
       <div className={classes} {...otherProps}>
         {this.renderIcons()}

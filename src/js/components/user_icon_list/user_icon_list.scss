@@ -8,11 +8,37 @@ $count-color: $highlight-gray-3;
 $count-bg: $gray-9;
 $count-spaces: 6px;
 
+$icon-font-size: $text-sm;
+$icon-size-large: 40px;
+$icon-spacing-large: 18px;
+$border-color-large: #161b20;
+$border-width-large: 2.67px;
+$count-spaces-large: 10px;
+$count-font-size: 0.9375rem;
+
 .user-icon-list {
     display: flex;
+    align-items: center;
     padding-left: $icon-spacing;
     border-color: $border-color;
     z-index: 0;
+}
+
+.user-icon-list--large {
+    .user-icon-list__icon {
+        width: $icon-size-large;
+        height: $icon-size-large;
+        margin-left: -$icon-spacing-large;
+        font-size: $icon-font-size;
+        border: $border-width-large $border-color-large solid;
+        text-transform: uppercase;
+    }
+    .user-icon-list__count {
+        width: $icon-size-large;
+        height: $icon-size-large;
+        margin-left: $count-spaces-large;
+        font-size: $count-font-size;
+    }
 }
 
 .user-icon-list__icon {
