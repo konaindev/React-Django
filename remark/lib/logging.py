@@ -12,21 +12,24 @@ class PrintLogger:
     def __init__(self, file=None):
         self._file = file or sys.stderr
 
-    def _log(self, level, line):
+    def _log(self, level, line, *args, **kwargs):
         timestamp = now().strftime("%d/%b/%Y %H:%M:%S")
-        print("[{}] [{}] {}".format(timestamp, level, line), file=self._file)
+        print(f"[{timestamp}] [{level}] {line} {args} {kwargs}", file=self._file)
 
-    def debug(self, line):
-        self._log("DEBUG", line)
+    def debug(self, line, *args, **kwargs):
+        self._log("DEBUG", line, *args, **kwargs)
 
-    def info(self, line):
-        self._log("INFO", line)
+    def info(self, line, *args, **kwargs):
+        self._log("INFO", line, *args, **kwargs)
 
-    def warning(self, line):
-        self._log("WARNING", line)
+    def warning(self, line, *args, **kwargs):
+        self._log("WARNING", line, *args, **kwargs)
 
-    def error(self, line):
-        self._log("ERROR", line)
+    def error(self, line, *args, **kwargs):
+        self._log("ERROR", line, *args, **kwargs)
+
+    def exception(self, exception):
+        self._log("ERROR", traceback.format_exception(type(exception), exception, exception.__traceback__))
 
 
 def getLogger(name):
