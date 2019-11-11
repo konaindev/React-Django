@@ -15,6 +15,11 @@ logger = getLogger(__name__)
 
 @shared_task
 def export_tam_task(project_pk, user_pk, form_data):
+    logger.info(f"""exporting TAM params:
+     project:   {project_pk}
+     user:      {user_pk}
+     form data: {form_data}
+     """)
     try:
         project = Project.objects.get(pk=project_pk)
         user = User.objects.get(pk=user_pk)
