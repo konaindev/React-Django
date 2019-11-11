@@ -12,7 +12,14 @@ export class ModelingReportPage extends Component {
   };
 
   render() {
-    const { user, project, report, report_links, share_info } = this.props;
+    const {
+      user,
+      project,
+      report,
+      report_links,
+      share_info,
+      members
+    } = this.props;
 
     return (
       <ReportPageChrome
@@ -21,6 +28,7 @@ export class ModelingReportPage extends Component {
         current_report_name="modeling"
         report_links={report_links}
         share_info={share_info}
+        members={members}
       >
         <ModelingView {...report} />{" "}
       </ReportPageChrome>

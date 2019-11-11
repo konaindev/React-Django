@@ -60,16 +60,18 @@ export default class ReportPageChrome extends Component {
     const topItems = (
       <section className="report-page-subheader">
         <div className="container">
-          <div className="report-page__project-link">
-            <ProjectLink
-              name={project.name}
-              url={backUrl}
-              imageUrl={image_url}
-              health={project.health}
-            />
-          </div>
-          <div>
-            <UserIconList users={members} />
+          <div className="report-page__subnav">
+            <div className="report-page__project-link">
+              <ProjectLink
+                name={project.name}
+                url={backUrl}
+                imageUrl={image_url}
+                health={project.health}
+              />
+            </div>
+            <div>
+              <UserIconList users={members} />
+            </div>
           </div>
           <div className="subheader__inner">
             <ReportLinks

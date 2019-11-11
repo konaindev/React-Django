@@ -13,7 +13,14 @@ export class MarketReportPage extends Component {
   };
 
   render() {
-    const { user, project, report, report_links, share_info } = this.props;
+    const {
+      user,
+      project,
+      report,
+      report_links,
+      share_info,
+      members
+    } = this.props;
 
     return (
       <ReportPageChrome
@@ -22,6 +29,7 @@ export class MarketReportPage extends Component {
         current_report_name="market"
         report_links={report_links}
         share_info={share_info}
+        members={members}
       >
         <TotalAddressableMarket {...report} />
       </ReportPageChrome>
