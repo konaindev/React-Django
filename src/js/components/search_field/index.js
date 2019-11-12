@@ -13,6 +13,7 @@ class SearchField extends React.PureComponent {
     placeholder: PropTypes.string,
     children: PropTypes.node,
     name: PropTypes.string,
+    captionClicked: PropTypes.bool,
     onSubmit: PropTypes.func
   };
 
@@ -34,14 +35,19 @@ class SearchField extends React.PureComponent {
   }
 
   toggleActive = () => {
-    this.setState({ isActive: !this.state.isActive }, () => {
-      if (this.state.isActive) {
-        this.searchInput.value = "";
-        this.searchInput.focus();
-      } else {
-        this.props.onSubmit("");
-      }
-    });
+    if (this.props.captionClicked) {
+      this.props.captionSearchToggle();
+      this.props.onSubmit("");
+    } else {
+      this.setState({ isActive: !this.state.isActive }, () => {
+        if (this.state.isActive) {
+          this.searchInput.value = "";
+          this.searchInput.focus();
+        } else {
+          this.props.onSubmit("");
+        }
+      });
+    }
   };
 
   onSubmit = e => {
@@ -52,7 +58,7 @@ class SearchField extends React.PureComponent {
 
   render() {
     const className = cn("search-field", this.props.className, {
-      "search-field--active": this.state.isActive
+      "search-field--active": this.state.isActive || this.props.captionClicked
     });
     return (
       <div className={className}>

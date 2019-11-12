@@ -60,7 +60,7 @@ export default class AccountSecurity extends React.PureComponent {
     }
     let message;
     if (fields.includes("password")) {
-      message = "Password has successfuly been reset.";
+      message = "Password has successfully been reset.";
     } else if (fields.includes("email")) {
       message = "Email change successful.";
     }

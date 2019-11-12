@@ -200,9 +200,7 @@ export default class GroupSelect extends React.PureComponent {
 }
 
 GroupSelect.propTypes = {
-  options: PropTypes.arrayOf(
-    PropTypes.shape({ label: PropTypes.string, value: PropTypes.string })
-  ),
+  options: Select.optionsGroupType,
   className: PropTypes.string,
   defaultValue: PropTypes.array,
   value: PropTypes.array,

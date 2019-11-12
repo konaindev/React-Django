@@ -2,11 +2,10 @@ import React from "react";
 import { Provider } from "react-redux";
 import storeFunc from "./redux_base/store";
 import { RemarkableRouter } from "./router";
-import { PersistGate } from "redux-persist/es/integration/react";
+import { PersistGate } from "redux-persist/integration/react";
 import GaGate from "./gates/ga";
 import TitleGate from "./gates/title";
 import AuthGate from "./gates/auth";
-import DebugGate from "./gates/debug";
 import UIStringsGate from "./gates/ui_strings";
 
 const { store, persistor } = storeFunc();

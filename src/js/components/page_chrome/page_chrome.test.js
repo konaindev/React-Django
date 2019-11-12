@@ -1,4 +1,6 @@
 import renderer from "react-test-renderer";
+import { MemoryRouter } from "react-router-dom";
+
 import PageChrome from "./index";
 
 describe("PageChrome", () => {
@@ -9,7 +11,13 @@ describe("PageChrome", () => {
       children: <div>children</div>
     };
 
-    const tree = renderer.create(<PageChrome {...props} />).toJSON();
+    const tree = renderer
+      .create(
+        <MemoryRouter>
+          <PageChrome {...props} />
+        </MemoryRouter>
+      )
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

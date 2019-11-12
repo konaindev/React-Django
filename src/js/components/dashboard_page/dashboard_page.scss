@@ -1,5 +1,7 @@
 @import "css/base.scss";
 
+$error-color: $orange-6;
+
 .dashboard-content {
     min-width: 1440px;
     padding: $s12 0;
@@ -61,4 +63,52 @@
     padding: 0.875rem 1rem;
     font-weight: $weight-bold;
     letter-spacing: $letter-spacing-wider;
+}
+
+
+.dashboard-selection {
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard-selection__title {
+    font-family: $font-sans;
+    font-size: $text-base;
+    font-weight: $weight-normal;
+    letter-spacing: $letter-spacing-wide;
+    color: $title-large-color;
+}
+
+.dashboard-selection__button {
+    display: inline-flex;
+    width: 100px;
+    height: 36px;
+    font-size: $text-xs;
+    letter-spacing: $letter-spacing-wide;
+    text-transform: capitalize;
+    box-sizing: border-box;
+    justify-content: center;
+}
+
+.dashboard-selection__button + .dashboard-selection__button {
+    margin-left: 30px;
+}
+
+.dashboard-selection__button-icon {
+    margin-left: 8px;
+}
+
+.dashboard-selection__invite-error {
+    display: none;
+    margin-right: 20px;
+    color: $error-color;
+    font-size: $text-sm;
+}
+
+.dashboard-selection__controls--invite-error {
+    .dashboard-selection__invite-error {
+        display: inline-block;
+    }
 }

@@ -28,7 +28,10 @@ from remark.geo.geocode import geocode
 from remark.projects.models import Project
 from remark.settings import BASE_URL, LOGIN_URL
 from remark.lib.views import ReactView, RemarkView
-from remark.email_app.invites.added_to_property import send_invite_email
+from remark.email_app.invites.added_to_property import (
+    send_invite_email,
+    send_welcome_email,
+)
 from remark.settings import INVITATION_EXP
 
 from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES
@@ -71,9 +74,9 @@ class CompleteAccountView(APIView):
                 business = Business.objects.get(public_id=data["company"])
             except Business.DoesNotExist:
                 business = Business(name=data["company"])
-                business.save()
             for role in data["company_role"]:
                 setattr(business, BUSINESS_TYPE[role], True)
+            business.save()
 
             office = Office(
                 office_type=data["office_type"],
@@ -91,6 +94,7 @@ class CompleteAccountView(APIView):
                 office=office,
             )
             person.save()
+            send_welcome_email.apply_async(args=(request.user.email,), countdown=2)
             response = Response(status=status.HTTP_204_NO_CONTENT)
         else:
             response = Response(form.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

@@ -332,7 +332,11 @@ class PerformanceReportSelector(ReportSelectorBase):
         description = dates.description()
         named_description = self.NAMED_SPAN_DESCRIPTIONS.get(self.report_span)
         if named_description:
-            description = f"{named_description} ({description})"
+            # description = f"{named_description} ({description})"
+            description = {
+                "preset": self.report_span,
+                "date_range": description
+            }
         return description
 
     def has_report_data(self):

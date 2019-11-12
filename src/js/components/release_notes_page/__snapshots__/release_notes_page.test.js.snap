@@ -18,6 +18,13 @@ exports[`ReleaseNotesPage renders correctly 1`] = `
         >
           <a
             href="/dashboard"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "inherit",
+                "textDecoration": "inherit",
+              }
+            }
           >
             <div
               className="remarkably-logo"
@@ -25,6 +32,26 @@ exports[`ReleaseNotesPage renders correctly 1`] = `
                
             </div>
           </a>
+          <div
+            className="top-navigation"
+          >
+            <a
+              aria-current={null}
+              className="top-navigation__link"
+              href="/dashboard"
+              onClick={[Function]}
+            >
+              Portfolio
+            </a>
+            <a
+              aria-current={null}
+              className="top-navigation__link"
+              href="/portfolio/table"
+              onClick={[Function]}
+            >
+              Portfolio Analysis
+            </a>
+          </div>
         </div>
       </div>
     </div>

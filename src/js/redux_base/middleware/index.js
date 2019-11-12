@@ -187,6 +187,23 @@ export const fetchInviteModal = store => next => action => {
         }
       })
       .catch(e => console.log("-----> ERROR", e));
+  } else if (action.type === "API_INVITE_MODAL_CHANGE_ROLE") {
+    const { role, property_id, member_id } = action.data;
+    const data = { role };
+    const url = `${process.env.BASE_URL}/projects/${property_id}/member/${member_id}/`;
+    axiosPost(url, data).then(response => {
+      if (response.status === 200) {
+        next({
+          type: "GENERAL_UPDATE_MEMBERS",
+          data: {
+            property_id,
+            members: response.data.members
+          }
+        });
+      } else {
+        throw response;
+      }
+    });
   } else {
     next(action);
   }

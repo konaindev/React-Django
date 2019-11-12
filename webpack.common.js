@@ -72,7 +72,10 @@ module.exports = {
     new StyleLintPlugin(),
     new Dotenv(),
     new webpack.DefinePlugin({
-      "process.env": { BASE_URL: JSON.stringify(process.env.BASE_URL) }
+      "process.env": {
+        GOOGLE_MAP_API_KEY: JSON.stringify(process.env.GOOGLE_MAP_API_KEY),
+        BASE_URL: JSON.stringify(process.env.BASE_URL)
+      }
     }),
     new webpack.DefinePlugin({
       "process.env": {

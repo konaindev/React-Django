@@ -3,7 +3,7 @@ import decimal
 import json
 
 from django.contrib.auth.models import Group
-from django.test import TestCase, RequestFactory
+from django.test import TestCase
 from django.urls import reverse
 
 from unittest.mock import patch, Mock
@@ -13,8 +13,6 @@ from remark.geo.models import Address
 from remark.users.models import Account, User
 from remark.projects.models import Fund, Project, Property
 from remark.web.views import DashboardView
-
-import inspect, types
 
 from .models import Localization, LocalizationVersion
 
@@ -32,14 +30,17 @@ class PropertyListTestCase(TestCase):
         group1 = Group.objects.create(name="project 1 view group")
         group2 = Group.objects.create(name="project 2 view group")
         group3 = Group.objects.create(name="project 3 view group")
+        admin_group1 = Group.objects.create(name="project 1 admin group")
+        admin_group2 = Group.objects.create(name="project 2 admin group")
+        admin_group3 = Group.objects.create(name="project 3 admin group")
         self.account = Account.objects.create(
             company_name="test", address=address, account_type=4
         )
         self.user = User.objects.create_user(
             account=self.account, email="test@test.com", password="testpassword"
         )
-        group1.user_set.add(self.user)
-        group2.user_set.add(self.user)
+        admin_group1.user_set.add(self.user)
+        admin_group2.user_set.add(self.user)
         self.asset_manager1 = Business.objects.create(
             name="Test Asset Manager", is_asset_manager=True
         )
@@ -94,6 +95,7 @@ class PropertyListTestCase(TestCase):
             fund=self.fund1,
             property=property1,
             view_group=group1,
+            admin_group=admin_group1,
         )
         property2 = Property.objects.create(
             name="project",
@@ -112,6 +114,7 @@ class PropertyListTestCase(TestCase):
             fund=self.fund1,
             property=property2,
             view_group=group2,
+            admin_group=admin_group2,
         )
         property3 = Property.objects.create(
             name="project",
@@ -130,6 +133,7 @@ class PropertyListTestCase(TestCase):
             fund=self.fund2,
             property=property3,
             view_group=group3,
+            admin_group=admin_group3,
         )
         self.client.login(email="test@test.com", password="testpassword")
 
@@ -190,13 +194,13 @@ class PropertyListTestCase(TestCase):
                     "label": self.property_manager2.name,
                 },
             ],
-            "locations": [{"city": "Seattle", "label": ["Seattle, WA"], "state": "wa"}],
+            "locations": [{"city": "Seattle", "label": "Seattle, WA", "state": "wa"}],
             "user": {
-                "account_id": self.account.id,
-                "account_name": self.account.company_name,
+                "account_name": self.user.get_name(),
                 "email": self.user.email,
                 "logout_url": "/users/logout/",
                 "user_id": self.user.public_id,
+                "is_superuser": self.user.is_superuser,
             },
         }
 
@@ -254,13 +258,13 @@ class PropertyListTestCase(TestCase):
                     "label": self.property_manager2.name,
                 },
             ],
-            "locations": [{"city": "Seattle", "label": ["Seattle, WA"], "state": "wa"}],
+            "locations": [{"city": "Seattle", "label": "Seattle, WA", "state": "wa"}],
             "user": {
-                "account_id": self.account.id,
-                "account_name": self.account.company_name,
+                "account_name": self.user.get_name(),
                 "email": self.user.email,
                 "logout_url": "/users/logout/",
                 "user_id": self.user.public_id,
+                "is_superuser":  self.user.is_superuser,
             },
         }
 

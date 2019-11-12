@@ -10,7 +10,8 @@ import {
   MenuWithDescription,
   OptionWithDescription,
   MultiValueComponents,
-  OptionUsers
+  OptionUsers,
+  InputWithPlaceholder
 } from "../select/select_components";
 import UserRow from "../user_row";
 import UserIconList from "../user_icon_list";
@@ -54,6 +55,8 @@ class InviteModal extends React.PureComponent {
     }
   ];
 
+  static initRole = InviteModal.roleOptions[1];
+
   static selectRoleComponents = {
     Menu: MenuWithDescription,
     Option: OptionWithDescription
@@ -62,6 +65,8 @@ class InviteModal extends React.PureComponent {
   static selectUsersComponents = {
     ...MultiValueComponents,
     Option: OptionUsers,
+    Input: InputWithPlaceholder,
+    Placeholder: () => null,
     IndicatorsContainer: () => null
   };
 
@@ -69,9 +74,14 @@ class InviteModal extends React.PureComponent {
     noOptionsMessage: () => {}
   };
 
-  state = {
-    selectedMembers: []
-  };
+  constructor(props) {
+    super(props);
+    this.selectSearchRef = React.createRef();
+    this.state = {
+      selectedMembers: [],
+      inviteRole: InviteModal.initRole
+    };
+  }
 
   get inviteIsDisabled() {
     return !this.state.selectedMembers.length;
@@ -92,6 +102,10 @@ class InviteModal extends React.PureComponent {
         inviteModal.getUsers(inputValue, this.userToOptions(callback))
       );
     }, 300);
+  };
+
+  changeRole = (role, property, member) => {
+    this.props.dispatch(inviteModal.changeRole(role, property, member));
   };
 
   removeUser = () => {
@@ -116,6 +130,10 @@ class InviteModal extends React.PureComponent {
     this.props.dispatch(dashboard.updateStore({ selectedProperties }));
   };
 
+  openModal = () => {
+    this.selectSearchRef.current.focus();
+  };
+
   closeModal = () => {
     this.props.dispatch(inviteModal.close);
   };
@@ -131,10 +149,12 @@ class InviteModal extends React.PureComponent {
       inviteModal.addMembers({
         body: {
           projects: this.props.properties,
-          members: this.state.selectedMembers
+          members: this.state.selectedMembers,
+          role: this.state.inviteRole.value
         }
       })
     );
+    this.setState({ inviteRole: InviteModal.initRole });
   };
 
   formatOptionLabel = data => data.account_name || data.value;
@@ -164,6 +184,7 @@ class InviteModal extends React.PureComponent {
     if (!property || !property.members) {
       return null;
     }
+    const adminCount = property.members.filter(m => m.role === "admin").length;
     return property.members.map(member => {
       const role = InviteModal.roleOptions.find(r => r.value === member.role);
       return (
@@ -171,10 +192,13 @@ class InviteModal extends React.PureComponent {
           <UserRow {...member} />
           <SelectRole
             member={member}
+            property={property}
             role={role}
+            adminCount={adminCount}
             components={InviteModal.selectRoleComponents}
             roleOptions={InviteModal.roleOptions}
-            openRemoveModal={() => this.openRemoveModal(property, member)}
+            openRemoveModal={this.openRemoveModal}
+            onChangeRole={this.changeRole}
           />
         </div>
       );
@@ -232,6 +256,10 @@ class InviteModal extends React.PureComponent {
     }
   };
 
+  changeInviteRoleHandler = roleOption => {
+    this.setState({ inviteRole: roleOption });
+  };
+
   render() {
     const { isOpen } = this.props;
     return (
@@ -241,6 +269,7 @@ class InviteModal extends React.PureComponent {
           theme="small"
           open={isOpen}
           onClose={this.closeModal}
+          onEntered={this.openModal}
         >
           <ModalWindow.Head className="invite-modal__header">
             {this.renderTitle()}
@@ -262,6 +291,7 @@ class InviteModal extends React.PureComponent {
                 formatOptionLabel={this.formatOptionLabel}
                 defaultOptions={[]}
                 onChange={this.selectMember}
+                selectSearchRef={this.selectSearchRef}
               />
               <Select
                 className="invite-modal__select-role"
@@ -269,7 +299,8 @@ class InviteModal extends React.PureComponent {
                 size="small"
                 components={InviteModal.selectRoleComponents}
                 options={InviteModal.roleOptions}
-                defaultValue={InviteModal.roleOptions[1]}
+                value={this.state.inviteRole}
+                onChange={this.changeInviteRoleHandler}
               />
             </div>
             <div className="invite-modal__container invite-modal__container--users">

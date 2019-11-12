@@ -1,6 +1,5 @@
 @import "css/base.scss";
 
-$filter-title-width: 200px;
 $filter-field-spacing: 8px;
 
 .dashboard-controls--disable {
@@ -19,7 +18,9 @@ $filter-field-spacing: 8px;
 
 .dashboard-controls__title {
     display: inline-block;
-    width: $filter-title-width;
+    padding-left: 16px;
+    cursor: pointer;
+    margin-right: auto;
     font-family: $font-sans;
     font-size: $text-sm;
     font-weight: $weight-medium;
@@ -49,42 +50,4 @@ $filter-field-spacing: 8px;
     letter-spacing: $letter-spacing-wide;
     color: $title-small-color;
     text-transform: uppercase;
-}
-
-
-.dashboard-selection {
-    display: flex;
-    height: 100%;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.dashboard-selection__title {
-    font-family: $font-sans;
-    font-size: $text-base;
-    font-weight: $weight-normal;
-    letter-spacing: $letter-spacing-wide;
-    color: $title-large-color;
-}
-
-.dashboard-selection__button {
-    display: inline-flex;
-    width: 100px;
-    height: 36px;
-    font-family: $font-sans;
-    font-size: $text-xs;
-    font-weight: $weight-normal;
-    letter-spacing: $letter-spacing-wide;
-    color: $button-default-active-text-color;
-    text-transform: capitalize;
-    box-sizing: border-box;
-    justify-content: center;
-}
-
-.dashboard-selection__button + .dashboard-selection__button {
-    margin-left: 30px;
-}
-
-.dashboard-selection__button-icon {
-    margin-left: 8px;
 }

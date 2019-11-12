@@ -24,7 +24,7 @@ class PerformanceReport(CommonReport):
 
         # Make sure the project perf range starts *at or after* extant data.
         delta_start = end - time_delta
-        return project.get_campaign_periods().filter(start__gte=delta_start).exists()
+        return project.get_campaign_periods().filter(end__gt=delta_start).exists()
 
     @classmethod
     def for_time_delta_from_end(cls, project, time_delta, end=None):
@@ -97,11 +97,11 @@ class PerformanceReport(CommonReport):
         """
         return cls.has_time_delta_from_end(project, time_delta=end - start, end=end)
         # Should be using the above but does not always work - TPC
-        '''try:
+        """try:
             cls.for_dates(project, start, end).to_jsonable()
             return True
         except:
-            return False'''
+            return False"""
 
 
     @classmethod

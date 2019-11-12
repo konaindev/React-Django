@@ -10,6 +10,13 @@ exports[`SessionExpired renders correctly 1`] = `
     <a
       className="page-auth__back-link"
       href="/"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "inherit",
+          "textDecoration": "inherit",
+        }
+      }
     >
       ← Go to Login
     </a>
@@ -18,6 +25,13 @@ exports[`SessionExpired renders correctly 1`] = `
     >
       <a
         href="/dashboard"
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "inherit",
+            "textDecoration": "inherit",
+          }
+        }
       >
         <div
           className="remarkably-logo"

@@ -68,6 +68,7 @@ exports[`DashboardControls renders correctly 1`] = `
     >
       <span
         className="dashboard-controls__title"
+        onClick={[Function]}
       >
         10
          Properties
@@ -102,7 +103,7 @@ exports[`DashboardControls renders correctly 1`] = `
             />
           </div>
           <div
-            className="select__indicators css-1wy0on6"
+            className="select__indicators css-1g48xl4-IndicatorsContainer"
           >
             <span
               className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -189,7 +190,7 @@ exports[`DashboardControls renders correctly 1`] = `
             />
           </div>
           <div
-            className="select__indicators css-1wy0on6"
+            className="select__indicators css-1g48xl4-IndicatorsContainer"
           >
             <span
               className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -282,7 +283,7 @@ exports[`DashboardControls renders correctly 1`] = `
             />
           </div>
           <div
-            className="select__indicators css-1wy0on6"
+            className="select__indicators css-1g48xl4-IndicatorsContainer"
           >
             <span
               className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -375,7 +376,7 @@ exports[`DashboardControls renders correctly 1`] = `
             />
           </div>
           <div
-            className="select__indicators css-1wy0on6"
+            className="select__indicators css-1g48xl4-IndicatorsContainer"
           >
             <span
               className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -479,7 +480,7 @@ exports[`DashboardControls renders correctly 1`] = `
                 />
               </div>
               <div
-                className="select__indicators css-1wy0on6"
+                className="select__indicators css-1g48xl4-IndicatorsContainer"
               >
                 <span
                   className="select__indicator-separator css-1okebmr-indicatorSeparator"

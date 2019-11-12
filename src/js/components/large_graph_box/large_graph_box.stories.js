@@ -15,11 +15,16 @@ const props1 = {
 };
 
 const props2 = {
-  name: "USV > EXE",
+  name: "Leased",
   value: 0.1,
   target: 0.13,
   delta: 0.03,
-  extraContent: "227 Executed Leases (Out of 260)",
+  extraContent: (
+    <>
+      <span>227 Executed Leases (Out of 260)</span>
+      <span>260 Total Units</span>
+    </>
+  ),
   series: [10, 20, 30, 15]
 };
 
@@ -40,10 +45,37 @@ const props4 = {
   series: [10, 20, 30, 15]
 };
 
+const props5 = {
+  name: "USV > EXE",
+  value: 0.23,
+  target: null,
+  delta: 0.01,
+  extraContent: "227 Executed Leases (Out of 260)",
+  series: [10, 20, 30, 15]
+};
+
+const props6 = {
+  name: "USV > EXE",
+  value: 0.23,
+  delta: 0.01,
+  extraContent: "227 Executed Leases (Out of 260)",
+  series: [10, 20, 30, 15]
+};
+
 storiesOf("LargeGraphBox", module)
   .add("PercentageGraphBox default", () => (
     <div style={{ width: 420 }}>
       <PercentageGraphBox {...props1} />
+    </div>
+  ))
+  .add("PercentageGraphBox with null target", () => (
+    <div style={{ width: 420 }}>
+      <PercentageGraphBox {...props5} />
+    </div>
+  ))
+  .add("PercentageGraphBox with undefined target", () => (
+    <div style={{ width: 420 }}>
+      <PercentageGraphBox {...props6} />
     </div>
   ))
   .add("PercentageGraphBox with extra content", () => (

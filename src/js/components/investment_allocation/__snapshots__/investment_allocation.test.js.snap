@@ -39,7 +39,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
             <span
               className="small-box__labels__detail"
             >
-              Target: 11
+              Target: 1
             </span>
           </div>
           <div
@@ -59,7 +59,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                   >
                     +
                   </span>
-                  9
+                  7
                 </span>
               </span>
             </span>
@@ -79,7 +79,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
             <span
               className="small-box__labels__detail"
             >
-              Target: $15k
+              Target: $5.1k
             </span>
           </div>
           <div
@@ -94,7 +94,40 @@ exports[`SectionHeader renders 100% pie 1`] = `
                 <span
                   className="formatted-value-with-symbol"
                 >
-                  $14k
+                  $2.5k
+                </span>
+                <span
+                  className="delta-layout__section"
+                >
+                  <div
+                    className="delta-indicator"
+                  >
+                    <span
+                      className="delta-indicator__delta"
+                    >
+                      $0
+                    </span>
+                     
+                    <span
+                      className="delta-indicator__arrow delta-indicator__trend-flat"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        color="inherit"
+                        focusable="false"
+                        height={10}
+                        role="presentation"
+                        viewBox="0 0 5 10"
+                        width={5}
+                      >
+                        <path
+                          d="M5.5 5l-5 5V0z"
+                          fill="currentColor"
+                          fillRule="evenodd"
+                        />
+                      </svg>
+                    </span>
+                  </div>
                 </span>
               </span>
             </span>
@@ -114,7 +147,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
             <span
               className="small-box__labels__detail"
             >
-              Target: $228.5k
+              Target: $10.6k
             </span>
           </div>
           <div
@@ -134,7 +167,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                   >
                     +
                   </span>
-                  $199k
+                  $74k
                 </span>
               </span>
             </span>
@@ -154,7 +187,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
             <span
               className="small-box__labels__detail"
             >
-              Target: 7
+              Target: 2
             </span>
           </div>
           <div
@@ -171,7 +204,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                 <span
                   className="formatted-value-with-symbol"
                 >
-                  14
+                  29
                   <span
                     className="formatted-value-with-symbol__times"
                   >
@@ -218,7 +251,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
             <span
               className="small-box__labels__detail"
             >
-              Target: 10
+              Target: 8
             </span>
           </div>
           <div
@@ -233,7 +266,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                 <span
                   className="formatted-value-with-symbol"
                 >
-                  7
+                  3
                 </span>
                 <span
                   className="delta-layout__section"
@@ -244,11 +277,11 @@ exports[`SectionHeader renders 100% pie 1`] = `
                     <span
                       className="delta-indicator__delta"
                     >
-                      2
+                      -14
                     </span>
                      
                     <span
-                      className="delta-indicator__arrow delta-indicator__trend-up"
+                      className="delta-indicator__arrow delta-indicator__trend-down"
                     >
                       <svg
                         aria-hidden="true"
@@ -260,7 +293,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                         width={10}
                       >
                         <path
-                          d="M5 0l5 5H0z"
+                          d="M5 5l5-5H0z"
                           fill="currentColor"
                           fillRule="evenodd"
                         />
@@ -286,7 +319,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
             <span
               className="small-box__labels__detail"
             >
-              Target: $2k
+              Target: $150.2
             </span>
           </div>
           <div
@@ -301,7 +334,40 @@ exports[`SectionHeader renders 100% pie 1`] = `
                 <span
                   className="formatted-value-with-symbol"
                 >
-                  $2k
+                  $287.1
+                </span>
+                <span
+                  className="delta-layout__section"
+                >
+                  <div
+                    className="delta-indicator"
+                  >
+                    <span
+                      className="delta-indicator__delta"
+                    >
+                      $0
+                    </span>
+                     
+                    <span
+                      className="delta-indicator__arrow delta-indicator__trend-flat"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        color="inherit"
+                        focusable="false"
+                        height={10}
+                        role="presentation"
+                        viewBox="0 0 5 10"
+                        width={5}
+                      >
+                        <path
+                          d="M5.5 5l-5 5V0z"
+                          fill="currentColor"
+                          fillRule="evenodd"
+                        />
+                      </svg>
+                    </span>
+                  </div>
                 </span>
               </span>
             </span>
@@ -321,7 +387,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
             <span
               className="small-box__labels__detail"
             >
-              Target: $266.6k
+              Target: $84.5k
             </span>
           </div>
           <div
@@ -341,7 +407,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                   >
                     +
                   </span>
-                  $155.1k
+                  $31.7k
                 </span>
               </span>
             </span>
@@ -361,7 +427,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
             <span
               className="small-box__labels__detail"
             >
-              Target: 142
+              Target: 563
             </span>
           </div>
           <div
@@ -378,7 +444,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                 <span
                   className="formatted-value-with-symbol"
                 >
-                  78
+                  110
                   <span
                     className="formatted-value-with-symbol__times"
                   >
@@ -438,7 +504,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
               >
                 <svg
                   aria-labelledby="victory-container-3-title victory-container-3-desc"
-                  height={400}
+                  height={NaN}
                   role="img"
                   style={
                     Object {
@@ -447,12 +513,12 @@ exports[`SectionHeader renders 100% pie 1`] = `
                       "width": "100%",
                     }
                   }
-                  viewBox="0 0 400 400"
-                  width={400}
+                  viewBox="0 0 NaN NaN"
+                  width={NaN}
                 >
                   <g>
                     <path
-                      d="M1.2246467991473532e-14,-200L0,0Z"
+                      d="M0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -463,10 +529,10 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(200, 200)"
+                      transform="translate(NaN, NaN)"
                     />
                     <path
-                      d="M1.2246467991473532e-14,-200L0,0Z"
+                      d="M0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -477,10 +543,10 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(200, 200)"
+                      transform="translate(NaN, NaN)"
                     />
                     <path
-                      d="M1.2246467991473532e-14,-200A200,200,0,1,1,-190.88100037590152,59.70296220033882L0,0Z"
+                      d="M0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -491,10 +557,10 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(200, 200)"
+                      transform="translate(NaN, NaN)"
                     />
                     <path
-                      d="M-190.88100037590152,59.70296220033882A200,200,0,0,1,1.4089627996560445e-13,-200L0,0Z"
+                      d="M0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -505,14 +571,14 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(200, 200)"
+                      transform="translate(NaN, NaN)"
                     />
                     <text
                       direction="inherit"
                       dx={0}
                       dy={-2.0300000000000002}
-                      x={200}
-                      y={160}
+                      x={NaN}
+                      y={NaN}
                     >
                       <tspan
                         dx={0}
@@ -527,7 +593,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={200}
+                        x={NaN}
                       >
                         
                       </tspan>
@@ -536,8 +602,8 @@ exports[`SectionHeader renders 100% pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={-2.0300000000000002}
-                      x={200}
-                      y={160}
+                      x={NaN}
+                      y={NaN}
                     >
                       <tspan
                         dx={0}
@@ -552,7 +618,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={200}
+                        x={NaN}
                       >
                         
                       </tspan>
@@ -561,8 +627,8 @@ exports[`SectionHeader renders 100% pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={4.97}
-                      x={232}
-                      y={224}
+                      x={NaN}
+                      y={NaN}
                     >
                       <tspan
                         dx={0}
@@ -577,7 +643,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           }
                         }
                         textAnchor="start"
-                        x={232}
+                        x={NaN}
                       >
                         70%
                       </tspan>
@@ -586,8 +652,8 @@ exports[`SectionHeader renders 100% pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={4.97}
-                      x={168}
-                      y={176}
+                      x={NaN}
+                      y={NaN}
                     >
                       <tspan
                         dx={0}
@@ -602,7 +668,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           }
                         }
                         textAnchor="end"
-                        x={168}
+                        x={NaN}
                       >
                         30%
                       </tspan>
@@ -622,7 +688,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                   }
                 >
                   <svg
-                    height={400}
+                    height={NaN}
                     style={
                       Object {
                         "height": "100%",
@@ -630,8 +696,8 @@ exports[`SectionHeader renders 100% pie 1`] = `
                         "width": "100%",
                       }
                     }
-                    viewBox="0 0 400 400"
-                    width={400}
+                    viewBox="0 0 NaN NaN"
+                    width={NaN}
                   />
                 </div>
               </div>
@@ -743,7 +809,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
               >
                 <svg
                   aria-labelledby="victory-container-4-title victory-container-4-desc"
-                  height={400}
+                  height={NaN}
                   role="img"
                   style={
                     Object {
@@ -752,12 +818,12 @@ exports[`SectionHeader renders 100% pie 1`] = `
                       "width": "100%",
                     }
                   }
-                  viewBox="0 0 400 400"
-                  width={400}
+                  viewBox="0 0 NaN NaN"
+                  width={NaN}
                 >
                   <g>
                     <path
-                      d="M1.2246467991473532e-14,-200L0,0Z"
+                      d="M0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -768,10 +834,10 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(200, 200)"
+                      transform="translate(NaN, NaN)"
                     />
                     <path
-                      d="M1.2246467991473532e-14,-200A200,200,0,1,1,-1.2246467991473532e-14,200A200,200,0,1,1,1.2246467991473532e-14,-200Z"
+                      d="M0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -782,10 +848,10 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(200, 200)"
+                      transform="translate(NaN, NaN)"
                     />
                     <path
-                      d="M-2.1437508791444564e-13,-200L0,0Z"
+                      d="M0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -796,10 +862,10 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(200, 200)"
+                      transform="translate(NaN, NaN)"
                     />
                     <path
-                      d="M-2.1437508791444564e-13,-200L0,0Z"
+                      d="M0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -810,14 +876,14 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(200, 200)"
+                      transform="translate(NaN, NaN)"
                     />
                     <text
                       direction="inherit"
                       dx={0}
                       dy={-2.0300000000000002}
-                      x={200}
-                      y={205}
+                      x={NaN}
+                      y={NaN}
                     >
                       <tspan
                         dx={0}
@@ -832,7 +898,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={200}
+                        x={NaN}
                       >
                         
                       </tspan>
@@ -841,8 +907,8 @@ exports[`SectionHeader renders 100% pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={11.969999999999999}
-                      x={200}
-                      y={195}
+                      x={NaN}
+                      y={NaN}
                     >
                       <tspan
                         dx={0}
@@ -857,7 +923,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={200}
+                        x={NaN}
                       >
                         100%
                       </tspan>
@@ -866,8 +932,8 @@ exports[`SectionHeader renders 100% pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={-2.0300000000000002}
-                      x={200}
-                      y={205}
+                      x={NaN}
+                      y={NaN}
                     >
                       <tspan
                         dx={0}
@@ -882,7 +948,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={200}
+                        x={NaN}
                       >
                         
                       </tspan>
@@ -891,8 +957,8 @@ exports[`SectionHeader renders 100% pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={-2.0300000000000002}
-                      x={200}
-                      y={205}
+                      x={NaN}
+                      y={NaN}
                     >
                       <tspan
                         dx={0}
@@ -907,7 +973,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={200}
+                        x={NaN}
                       >
                         
                       </tspan>
@@ -927,7 +993,7 @@ exports[`SectionHeader renders 100% pie 1`] = `
                   }
                 >
                   <svg
-                    height={400}
+                    height={NaN}
                     style={
                       Object {
                         "height": "100%",
@@ -935,8 +1001,8 @@ exports[`SectionHeader renders 100% pie 1`] = `
                         "width": "100%",
                       }
                     }
-                    viewBox="0 0 400 400"
-                    width={400}
+                    viewBox="0 0 NaN NaN"
+                    width={NaN}
                   />
                 </div>
               </div>
@@ -1048,7 +1114,7 @@ exports[`SectionHeader renders empty pie 1`] = `
             <span
               className="small-box__labels__detail"
             >
-              Target: 11
+              Target: 1
             </span>
           </div>
           <div
@@ -1068,7 +1134,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                   >
                     +
                   </span>
-                  9
+                  7
                 </span>
               </span>
             </span>
@@ -1088,7 +1154,7 @@ exports[`SectionHeader renders empty pie 1`] = `
             <span
               className="small-box__labels__detail"
             >
-              Target: $15k
+              Target: $5.1k
             </span>
           </div>
           <div
@@ -1103,7 +1169,40 @@ exports[`SectionHeader renders empty pie 1`] = `
                 <span
                   className="formatted-value-with-symbol"
                 >
-                  $14k
+                  $2.5k
+                </span>
+                <span
+                  className="delta-layout__section"
+                >
+                  <div
+                    className="delta-indicator"
+                  >
+                    <span
+                      className="delta-indicator__delta"
+                    >
+                      $0
+                    </span>
+                     
+                    <span
+                      className="delta-indicator__arrow delta-indicator__trend-flat"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        color="inherit"
+                        focusable="false"
+                        height={10}
+                        role="presentation"
+                        viewBox="0 0 5 10"
+                        width={5}
+                      >
+                        <path
+                          d="M5.5 5l-5 5V0z"
+                          fill="currentColor"
+                          fillRule="evenodd"
+                        />
+                      </svg>
+                    </span>
+                  </div>
                 </span>
               </span>
             </span>
@@ -1123,7 +1222,7 @@ exports[`SectionHeader renders empty pie 1`] = `
             <span
               className="small-box__labels__detail"
             >
-              Target: $228.5k
+              Target: $10.6k
             </span>
           </div>
           <div
@@ -1143,7 +1242,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                   >
                     +
                   </span>
-                  $199k
+                  $74k
                 </span>
               </span>
             </span>
@@ -1163,7 +1262,7 @@ exports[`SectionHeader renders empty pie 1`] = `
             <span
               className="small-box__labels__detail"
             >
-              Target: 7
+              Target: 2
             </span>
           </div>
           <div
@@ -1180,7 +1279,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                 <span
                   className="formatted-value-with-symbol"
                 >
-                  14
+                  29
                   <span
                     className="formatted-value-with-symbol__times"
                   >
@@ -1227,7 +1326,7 @@ exports[`SectionHeader renders empty pie 1`] = `
             <span
               className="small-box__labels__detail"
             >
-              Target: 10
+              Target: 8
             </span>
           </div>
           <div
@@ -1242,7 +1341,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                 <span
                   className="formatted-value-with-symbol"
                 >
-                  7
+                  3
                 </span>
                 <span
                   className="delta-layout__section"
@@ -1253,11 +1352,11 @@ exports[`SectionHeader renders empty pie 1`] = `
                     <span
                       className="delta-indicator__delta"
                     >
-                      2
+                      -14
                     </span>
                      
                     <span
-                      className="delta-indicator__arrow delta-indicator__trend-up"
+                      className="delta-indicator__arrow delta-indicator__trend-down"
                     >
                       <svg
                         aria-hidden="true"
@@ -1269,7 +1368,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                         width={10}
                       >
                         <path
-                          d="M5 0l5 5H0z"
+                          d="M5 5l5-5H0z"
                           fill="currentColor"
                           fillRule="evenodd"
                         />
@@ -1295,7 +1394,7 @@ exports[`SectionHeader renders empty pie 1`] = `
             <span
               className="small-box__labels__detail"
             >
-              Target: $2k
+              Target: $150.2
             </span>
           </div>
           <div
@@ -1310,7 +1409,40 @@ exports[`SectionHeader renders empty pie 1`] = `
                 <span
                   className="formatted-value-with-symbol"
                 >
-                  $2k
+                  $287.1
+                </span>
+                <span
+                  className="delta-layout__section"
+                >
+                  <div
+                    className="delta-indicator"
+                  >
+                    <span
+                      className="delta-indicator__delta"
+                    >
+                      $0
+                    </span>
+                     
+                    <span
+                      className="delta-indicator__arrow delta-indicator__trend-flat"
+                    >
+                      <svg
+                        aria-hidden="true"
+                        color="inherit"
+                        focusable="false"
+                        height={10}
+                        role="presentation"
+                        viewBox="0 0 5 10"
+                        width={5}
+                      >
+                        <path
+                          d="M5.5 5l-5 5V0z"
+                          fill="currentColor"
+                          fillRule="evenodd"
+                        />
+                      </svg>
+                    </span>
+                  </div>
                 </span>
               </span>
             </span>
@@ -1330,7 +1462,7 @@ exports[`SectionHeader renders empty pie 1`] = `
             <span
               className="small-box__labels__detail"
             >
-              Target: $266.6k
+              Target: $84.5k
             </span>
           </div>
           <div
@@ -1350,7 +1482,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                   >
                     +
                   </span>
-                  $155.1k
+                  $31.7k
                 </span>
               </span>
             </span>
@@ -1370,7 +1502,7 @@ exports[`SectionHeader renders empty pie 1`] = `
             <span
               className="small-box__labels__detail"
             >
-              Target: 142
+              Target: 563
             </span>
           </div>
           <div
@@ -1387,7 +1519,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                 <span
                   className="formatted-value-with-symbol"
                 >
-                  78
+                  110
                   <span
                     className="formatted-value-with-symbol__times"
                   >
@@ -1447,7 +1579,7 @@ exports[`SectionHeader renders empty pie 1`] = `
               >
                 <svg
                   aria-labelledby="victory-container-1-title victory-container-1-desc"
-                  height={400}
+                  height={NaN}
                   role="img"
                   style={
                     Object {
@@ -1456,12 +1588,12 @@ exports[`SectionHeader renders empty pie 1`] = `
                       "width": "100%",
                     }
                   }
-                  viewBox="0 0 400 400"
-                  width={400}
+                  viewBox="0 0 NaN NaN"
+                  width={NaN}
                 >
                   <g>
                     <path
-                      d="M1.2246467991473532e-14,-200L0,0Z"
+                      d="M0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -1472,10 +1604,10 @@ exports[`SectionHeader renders empty pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(200, 200)"
+                      transform="translate(NaN, NaN)"
                     />
                     <path
-                      d="M1.2246467991473532e-14,-200L0,0Z"
+                      d="M0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -1486,10 +1618,10 @@ exports[`SectionHeader renders empty pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(200, 200)"
+                      transform="translate(NaN, NaN)"
                     />
                     <path
-                      d="M1.2246467991473532e-14,-200A200,200,0,1,1,-190.88100037590152,59.70296220033882L0,0Z"
+                      d="M0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -1500,10 +1632,10 @@ exports[`SectionHeader renders empty pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(200, 200)"
+                      transform="translate(NaN, NaN)"
                     />
                     <path
-                      d="M-190.88100037590152,59.70296220033882A200,200,0,0,1,1.4089627996560445e-13,-200L0,0Z"
+                      d="M0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -1514,14 +1646,14 @@ exports[`SectionHeader renders empty pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(200, 200)"
+                      transform="translate(NaN, NaN)"
                     />
                     <text
                       direction="inherit"
                       dx={0}
                       dy={-2.0300000000000002}
-                      x={200}
-                      y={160}
+                      x={NaN}
+                      y={NaN}
                     >
                       <tspan
                         dx={0}
@@ -1536,7 +1668,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={200}
+                        x={NaN}
                       >
                         
                       </tspan>
@@ -1545,8 +1677,8 @@ exports[`SectionHeader renders empty pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={-2.0300000000000002}
-                      x={200}
-                      y={160}
+                      x={NaN}
+                      y={NaN}
                     >
                       <tspan
                         dx={0}
@@ -1561,7 +1693,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={200}
+                        x={NaN}
                       >
                         
                       </tspan>
@@ -1570,8 +1702,8 @@ exports[`SectionHeader renders empty pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={4.97}
-                      x={232}
-                      y={224}
+                      x={NaN}
+                      y={NaN}
                     >
                       <tspan
                         dx={0}
@@ -1586,7 +1718,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                           }
                         }
                         textAnchor="start"
-                        x={232}
+                        x={NaN}
                       >
                         70%
                       </tspan>
@@ -1595,8 +1727,8 @@ exports[`SectionHeader renders empty pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={4.97}
-                      x={168}
-                      y={176}
+                      x={NaN}
+                      y={NaN}
                     >
                       <tspan
                         dx={0}
@@ -1611,7 +1743,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                           }
                         }
                         textAnchor="end"
-                        x={168}
+                        x={NaN}
                       >
                         30%
                       </tspan>
@@ -1631,7 +1763,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                   }
                 >
                   <svg
-                    height={400}
+                    height={NaN}
                     style={
                       Object {
                         "height": "100%",
@@ -1639,8 +1771,8 @@ exports[`SectionHeader renders empty pie 1`] = `
                         "width": "100%",
                       }
                     }
-                    viewBox="0 0 400 400"
-                    width={400}
+                    viewBox="0 0 NaN NaN"
+                    width={NaN}
                   />
                 </div>
               </div>
@@ -1755,7 +1887,7 @@ exports[`SectionHeader renders empty pie 1`] = `
               >
                 <svg
                   aria-labelledby="victory-container-2-title victory-container-2-desc"
-                  height={400}
+                  height={NaN}
                   role="img"
                   style={
                     Object {
@@ -1764,12 +1896,12 @@ exports[`SectionHeader renders empty pie 1`] = `
                       "width": "100%",
                     }
                   }
-                  viewBox="0 0 400 400"
-                  width={400}
+                  viewBox="0 0 NaN NaN"
+                  width={NaN}
                 >
                   <g>
                     <path
-                      d="M1.2246467991473532e-14,-200L0,0Z"
+                      d="M0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -1780,10 +1912,10 @@ exports[`SectionHeader renders empty pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(200, 200)"
+                      transform="translate(NaN, NaN)"
                     />
                     <path
-                      d="M1.2246467991473532e-14,-200L0,0Z"
+                      d="M0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -1794,10 +1926,10 @@ exports[`SectionHeader renders empty pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(200, 200)"
+                      transform="translate(NaN, NaN)"
                     />
                     <path
-                      d="M1.2246467991473532e-14,-200L0,0Z"
+                      d="M0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -1808,10 +1940,10 @@ exports[`SectionHeader renders empty pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(200, 200)"
+                      transform="translate(NaN, NaN)"
                     />
                     <path
-                      d="M1.2246467991473532e-14,-200L0,0Z"
+                      d="M0,0Z"
                       role="presentation"
                       shapeRendering="auto"
                       style={
@@ -1822,14 +1954,14 @@ exports[`SectionHeader renders empty pie 1`] = `
                           "strokeWidth": 1,
                         }
                       }
-                      transform="translate(200, 200)"
+                      transform="translate(NaN, NaN)"
                     />
                     <text
                       direction="inherit"
                       dx={0}
                       dy={-2.0300000000000002}
-                      x={200}
-                      y={160}
+                      x={NaN}
+                      y={NaN}
                     >
                       <tspan
                         dx={0}
@@ -1844,7 +1976,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={200}
+                        x={NaN}
                       >
                         
                       </tspan>
@@ -1853,8 +1985,8 @@ exports[`SectionHeader renders empty pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={-2.0300000000000002}
-                      x={200}
-                      y={160}
+                      x={NaN}
+                      y={NaN}
                     >
                       <tspan
                         dx={0}
@@ -1869,7 +2001,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={200}
+                        x={NaN}
                       >
                         
                       </tspan>
@@ -1878,8 +2010,8 @@ exports[`SectionHeader renders empty pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={-2.0300000000000002}
-                      x={200}
-                      y={160}
+                      x={NaN}
+                      y={NaN}
                     >
                       <tspan
                         dx={0}
@@ -1894,7 +2026,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={200}
+                        x={NaN}
                       >
                         
                       </tspan>
@@ -1903,8 +2035,8 @@ exports[`SectionHeader renders empty pie 1`] = `
                       direction="inherit"
                       dx={0}
                       dy={-2.0300000000000002}
-                      x={200}
-                      y={160}
+                      x={NaN}
+                      y={NaN}
                     >
                       <tspan
                         dx={0}
@@ -1919,7 +2051,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                           }
                         }
                         textAnchor="middle"
-                        x={200}
+                        x={NaN}
                       >
                         
                       </tspan>
@@ -1939,7 +2071,7 @@ exports[`SectionHeader renders empty pie 1`] = `
                   }
                 >
                   <svg
-                    height={400}
+                    height={NaN}
                     style={
                       Object {
                         "height": "100%",
@@ -1947,8 +2079,8 @@ exports[`SectionHeader renders empty pie 1`] = `
                         "width": "100%",
                       }
                     }
-                    viewBox="0 0 400 400"
-                    width={400}
+                    viewBox="0 0 NaN NaN"
+                    width={NaN}
                   />
                 </div>
               </div>

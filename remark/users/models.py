@@ -4,11 +4,11 @@ from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.utils.crypto import get_random_string
-from django.urls import reverse
 
 from remark.lib.tokens import public_id
 from remark.lib.fields import NormalizedEmailField
-from .constants import ACCOUNT_TYPE
+from remark.crm.models import Person
+from .constants import ACCOUNT_TYPE, PROJECT_ROLES
 
 
 def usr_public_id():
@@ -150,33 +150,33 @@ class User(PermissionsMixin, AbstractBaseUser):
         return {
             "email": self.email,
             "user_id": self.public_id,
-            "account_id": self.account_id,
-            "account_name": self.account.company_name,
+            "account_name": self.get_name(),
+            "is_superuser": self.is_superuser,
             # TODO: Add account_url
         }
 
     def get_role(self):
-        person = self.person_set.first()
-        if person:
+        try:
+            person = self.person
             role = person.role
-        else:
+        except Person.DoesNotExist:
             role = "member"
         return role
 
     def get_name(self):
-        person = self.person_set.first()
-        if person:
+        try:
+            person = self.person
             name = person.full_name
-        else:
+        except Person.DoesNotExist:
             name = self.email
         return name
 
-    def get_icon_dict(self):
+    def get_icon_dict(self, role=PROJECT_ROLES["member"]):
         return {
             "email": self.email,
             "user_id": self.public_id,
             "account_name": self.get_name(),
-            "role": self.get_role(),
+            "role": role,
         }
 
 
