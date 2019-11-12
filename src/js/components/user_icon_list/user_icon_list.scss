@@ -32,14 +32,16 @@ $border-color-current: $blue-7;
         height: $icon-size-large;
         margin-left: -$icon-spacing-large;
         font-size: $icon-font-size;
-        border: $border-width-large $border-color-large solid;
         text-transform: uppercase;
+        border: $border-width-large $border-color-large solid;
+        cursor: pointer;
     }
     .user-icon-list__count {
         width: $icon-size-large;
         height: $icon-size-large;
         margin-left: $count-spaces-large;
         font-size: $count-font-size;
+        cursor: pointer;
     }
     .user-icon-list__icon--current {
         border-color: $border-color-current;
