@@ -145,7 +145,7 @@ exports[`AddPropertyForm add property form 1`] = `
                 />
               </div>
               <div
-                className="select__indicators css-1wy0on6"
+                className="select__indicators css-1g48xl4-IndicatorsContainer"
               >
                 <span
                   className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -259,7 +259,7 @@ exports[`AddPropertyForm add property form 1`] = `
               />
             </div>
             <div
-              className="select__indicators css-1wy0on6"
+              className="select__indicators css-1g48xl4-IndicatorsContainer"
             >
               <span
                 className="select__indicator-separator css-1okebmr-indicatorSeparator"

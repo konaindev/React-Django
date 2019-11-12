@@ -3,6 +3,13 @@
 exports[`RemarkablyLogo renders correctly 1`] = `
 <a
   href="/dashboard"
+  onClick={[Function]}
+  style={
+    Object {
+      "color": "inherit",
+      "textDecoration": "inherit",
+    }
+  }
 >
   <div
     className="remarkably-logo"

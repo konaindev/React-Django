@@ -42,7 +42,9 @@ exports[`PropertyCard renders at-risk 1`] = `
             </svg>
           </div>
           <a
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+            className="property-card__overlay-link"
+            href=""
+            onClick={[Function]}
           >
             <button
               className="button button--outline"
@@ -245,7 +247,9 @@ exports[`PropertyCard renders off-track 1`] = `
             </svg>
           </div>
           <a
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+            className="property-card__overlay-link"
+            href=""
+            onClick={[Function]}
           >
             <button
               className="button button--outline"
@@ -448,7 +452,9 @@ exports[`PropertyCard renders on-track 1`] = `
             </svg>
           </div>
           <a
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+            className="property-card__overlay-link"
+            href=""
+            onClick={[Function]}
           >
             <button
               className="button button--outline"
@@ -651,7 +657,9 @@ exports[`PropertyCard renders selected 1`] = `
             </svg>
           </div>
           <a
-            href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+            className="property-card__overlay-link"
+            href=""
+            onClick={[Function]}
           >
             <button
               className="button button--outline"
