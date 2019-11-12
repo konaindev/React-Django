@@ -71,7 +71,12 @@ export default class ReportPageChrome extends Component {
               />
             </div>
             <div>
-              <UserIconList theme="project" users={members} />
+              <UserIconList
+                theme="project"
+                tooltipPlacement="bottom"
+                tooltipTheme="dark"
+                users={members}
+              />
             </div>
           </div>
           <div className="subheader__inner">

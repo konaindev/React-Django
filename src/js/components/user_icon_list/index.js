@@ -25,12 +25,16 @@ export default class UserIconList extends React.PureComponent {
     ),
     maxCount: PropTypes.number,
     className: PropTypes.string,
-    theme: PropTypes.oneOf(["project"])
+    theme: PropTypes.oneOf(["project"]),
+    tooltipPlacement: PropTypes.oneOf(["bottom", "top"]),
+    tooltipTheme: PropTypes.oneOf(["", "highlight", "dark", "light-dark"])
   };
 
   static defaultProps = {
     users: [],
-    maxCount: 5
+    maxCount: 5,
+    tooltipPlacement: "top",
+    tooltipTheme: ""
   };
 
   constructor(props) {
@@ -64,7 +68,12 @@ export default class UserIconList extends React.PureComponent {
 
   renderOverlay = user => (
     <div>
-      <div className="user-icon-list__name">{user.account_name}</div>
+      <div className="user-icon-list__name">
+        {user.account_name}
+        {!!user.is_current ? (
+          <span className="user-icon-list__name-sign"> (You)</span>
+        ) : null}
+      </div>
       <div className="user-icon-list__role">{user.role}</div>
     </div>
   );
@@ -78,7 +87,8 @@ export default class UserIconList extends React.PureComponent {
       return (
         <RMBTooltip
           overlayClassName="user-icon-list__tooltip"
-          placement="top"
+          placement={this.props.tooltipPlacement}
+          theme={this.props.tooltipTheme}
           overlay={this.renderOverlay(user)}
           key={user.user_id}
         >
@@ -97,15 +107,46 @@ export default class UserIconList extends React.PureComponent {
     });
   };
 
+  renderCount = () => {
+    const { users, maxCount, theme } = this.props;
+    let count = (
+      <div className="user-icon-list__count">
+        <span>+{users.slice(maxCount).length}</span>
+      </div>
+    );
+
+    if (theme === "project") {
+      const overlay = (
+        <div className="user-icon-list__name">View All Users</div>
+      );
+      count = (
+        <RMBTooltip
+          overlayClassName="user-icon-list__tooltip"
+          placement={this.props.tooltipPlacement}
+          theme={this.props.tooltipTheme}
+          overlay={overlay}
+        >
+          {count}
+        </RMBTooltip>
+      );
+    }
+
+    return count;
+  };
+
   render() {
-    const { className, users, maxCount, theme, ...otherProps } = this.props;
+    const {
+      className,
+      users,
+      maxCount,
+      theme,
+      tooltipPlacement,
+      tooltipTheme,
+      ...otherProps
+    } = this.props;
     let count = null;
     if (users.length > maxCount) {
-      count = (
-        <div className="user-icon-list__count">
-          <span>+{users.slice(maxCount).length}</span>
-        </div>
-      );
+      count = this.renderCount();
     }
     const classes = cn(
       "user-icon-list",
