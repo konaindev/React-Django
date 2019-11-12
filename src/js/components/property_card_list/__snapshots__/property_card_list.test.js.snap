@@ -45,7 +45,9 @@ exports[`PropertyCardList renders correctly 1`] = `
               </svg>
             </div>
             <a
-              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              className="property-card__overlay-link"
+              href=""
+              onClick={[Function]}
             >
               <button
                 className="button button--outline"
@@ -126,7 +128,9 @@ exports[`PropertyCardList renders correctly 1`] = `
               </svg>
             </div>
             <a
-              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              className="property-card__overlay-link"
+              href=""
+              onClick={[Function]}
             >
               <button
                 className="button button--outline"
@@ -207,7 +211,9 @@ exports[`PropertyCardList renders correctly 1`] = `
               </svg>
             </div>
             <a
-              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              className="property-card__overlay-link"
+              href=""
+              onClick={[Function]}
             >
               <button
                 className="button button--outline"
@@ -288,7 +294,9 @@ exports[`PropertyCardList renders correctly 1`] = `
               </svg>
             </div>
             <a
-              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              className="property-card__overlay-link"
+              href=""
+              onClick={[Function]}
             >
               <button
                 className="button button--outline"
@@ -369,7 +377,9 @@ exports[`PropertyCardList renders correctly 1`] = `
               </svg>
             </div>
             <a
-              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              className="property-card__overlay-link"
+              href=""
+              onClick={[Function]}
             >
               <button
                 className="button button--outline"
@@ -450,7 +460,9 @@ exports[`PropertyCardList renders correctly 1`] = `
               </svg>
             </div>
             <a
-              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              className="property-card__overlay-link"
+              href=""
+              onClick={[Function]}
             >
               <button
                 className="button button--outline"
@@ -531,7 +543,9 @@ exports[`PropertyCardList renders correctly 1`] = `
               </svg>
             </div>
             <a
-              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              className="property-card__overlay-link"
+              href=""
+              onClick={[Function]}
             >
               <button
                 className="button button--outline"
@@ -612,7 +626,9 @@ exports[`PropertyCardList renders correctly 1`] = `
               </svg>
             </div>
             <a
-              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              className="property-card__overlay-link"
+              href=""
+              onClick={[Function]}
             >
               <button
                 className="button button--outline"
@@ -693,7 +709,9 @@ exports[`PropertyCardList renders correctly 1`] = `
               </svg>
             </div>
             <a
-              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              className="property-card__overlay-link"
+              href=""
+              onClick={[Function]}
             >
               <button
                 className="button button--outline"
@@ -774,7 +792,9 @@ exports[`PropertyCardList renders correctly 1`] = `
               </svg>
             </div>
             <a
-              href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+              className="property-card__overlay-link"
+              href=""
+              onClick={[Function]}
             >
               <button
                 className="button button--outline"

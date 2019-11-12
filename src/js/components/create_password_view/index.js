@@ -19,7 +19,7 @@ const validatePassword = (password, hash) =>
     response => response.data.errors
   );
 
-class CreatePasswordView extends React.PureComponent {
+export class CreatePasswordView extends React.PureComponent {
   static propTypes = {
     hash: PropTypes.string.isRequired,
     rules: PropTypes.arrayOf(

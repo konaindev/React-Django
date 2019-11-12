@@ -18,7 +18,7 @@ import router from "../../router";
 import { propertySchema } from "./validators";
 import "./complete_account_view.scss";
 
-class CompleteAccountView extends React.PureComponent {
+export class CompleteAccountView extends React.PureComponent {
   static propTypes = {
     office_types: Select.optionsType.isRequired,
     company_roles: MultiSelect.optionsType.isRequired,

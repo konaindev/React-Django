@@ -8,7 +8,7 @@ import { inviteModal } from "../../redux_base/actions";
 
 import "./session_expired_page.scss";
 
-class SessionExpiredPage extends React.PureComponent {
+export class SessionExpiredPage extends React.PureComponent {
   static propTypes = {
     hash: PropTypes.string.isRequired
   };

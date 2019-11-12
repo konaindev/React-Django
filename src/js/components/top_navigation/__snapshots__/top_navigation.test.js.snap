@@ -5,14 +5,18 @@ exports[`TopNavigation renders correctly 1`] = `
   className="top-navigation"
 >
   <a
+    aria-current={null}
     className="top-navigation__link"
-    href="http://app.remarkably.io/dashboard"
+    href="/dashboard"
+    onClick={[Function]}
   >
     Portfolio
   </a>
   <a
-    className="top-navigation__link top-navigation__link--active"
-    href="http://app.remarkably.io/portfolio-analysis"
+    aria-current={null}
+    className="top-navigation__link"
+    href="/portfolio/table"
+    onClick={[Function]}
   >
     Portfolio Analysis
   </a>

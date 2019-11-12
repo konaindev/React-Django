@@ -18,6 +18,13 @@ exports[`ProjectPage renders correctly 1`] = `
         >
           <a
             href="/dashboard"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "inherit",
+                "textDecoration": "inherit",
+              }
+            }
           >
             <div
               className="remarkably-logo"
@@ -25,124 +32,26 @@ exports[`ProjectPage renders correctly 1`] = `
                
             </div>
           </a>
-          <nav
-            className="page-header__items-outer"
+          <div
+            className="top-navigation"
           >
-            <ul
-              className="page-header__items-inner"
-              style={
-                Object {
-                  "gridTemplateColumns": "repeat(1, 1fr)",
-                }
-              }
+            <a
+              aria-current={null}
+              className="top-navigation__link"
+              href="/dashboard"
+              onClick={[Function]}
             >
-              <li
-                className="page-header__item"
-              >
-                <div
-                  className="user-menu"
-                >
-                  <div
-                    className="select user-menu__select css-2b097c-container"
-                    onKeyDown={[Function]}
-                  >
-                    <div
-                      className="select__control css-yk16xz-control"
-                      onMouseDown={[Function]}
-                      onTouchEnd={[Function]}
-                    >
-                      <div
-                        className="select__value-container css-1hwfws3"
-                      >
-                        <div
-                          className="user-menu__image-container"
-                        >
-                          <div
-                            className="user-menu__image user-menu__image--default"
-                          />
-                          <div
-                            className="user-menu__image"
-                            style={
-                              Object {
-                                "backgroundImage": "url(https://storage.googleapis.com/tracker-avatar-production/a11569ffecab2b5564c0cbfa5e5f283a_3140620_96.png)",
-                              }
-                            }
-                          />
-                        </div>
-                        <input
-                          className="css-62g3xt-dummyInput"
-                          disabled={false}
-                          id="react-select-2-input"
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          onFocus={[Function]}
-                          readOnly={true}
-                          tabIndex="0"
-                          value=""
-                        />
-                      </div>
-                      <div
-                        className="select__indicators css-1wy0on6"
-                      >
-                        <span
-                          className="select__indicator-separator css-1okebmr-indicatorSeparator"
-                        />
-                        <div
-                          aria-hidden="true"
-                          className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
-                          onMouseDown={[Function]}
-                          onTouchEnd={[Function]}
-                        >
-                          <svg
-                            aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--down"
-                            color="inherit"
-                            focusable="false"
-                            height="1em"
-                            role="presentation"
-                            viewBox="0 0 10 5"
-                            width="1em"
-                          >
-                            <path
-                              d="M1 1.16134L4.92334 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 1.16134L5 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                          <svg
-                            aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--up"
-                            color="inherit"
-                            focusable="false"
-                            height="1em"
-                            role="presentation"
-                            viewBox="0 0 10 5"
-                            width="1em"
-                          >
-                            <path
-                              d="M1 3.83866L4.92334 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 3.83866L5 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </nav>
+              Portfolio
+            </a>
+            <a
+              aria-current={null}
+              className="top-navigation__link"
+              href="/portfolio/table"
+              onClick={[Function]}
+            >
+              Portfolio Analysis
+            </a>
+          </div>
         </div>
       </div>
     </div>
@@ -171,6 +80,7 @@ exports[`ProjectPage renders correctly 1`] = `
           <a
             className="project-page__report-link"
             href="/projects/pro_example/baseline/"
+            onClick={[Function]}
           >
             Baseline Period (Jan 01 2017 - May 07 2018)
           </a>
@@ -188,6 +98,7 @@ exports[`ProjectPage renders correctly 1`] = `
           <a
             className="project-page__report-link"
             href="/projects/pro_example/market/"
+            onClick={[Function]}
           >
             Total Addressable Market
           </a>
@@ -229,6 +140,7 @@ exports[`ProjectPage renders correctly 1`] = `
           <a
             className="project-page__report-link"
             href="/projects/pro_example/performance/last-week/"
+            onClick={[Function]}
           >
             Last Week (Dec 24 2018 - Dec 31 2018)
           </a>
@@ -237,6 +149,7 @@ exports[`ProjectPage renders correctly 1`] = `
           <a
             className="project-page__report-link"
             href="/projects/pro_example/performance/last-two-weeks/"
+            onClick={[Function]}
           >
             Last Two Weeks (Dec 17 2018 - Dec 31 2018)
           </a>
@@ -245,6 +158,7 @@ exports[`ProjectPage renders correctly 1`] = `
           <a
             className="project-page__report-link"
             href="/projects/pro_example/performance/last-four-weeks/"
+            onClick={[Function]}
           >
             Last Four Weeks (Dec 03 2018 - Dec 31 2018)
           </a>
@@ -253,6 +167,7 @@ exports[`ProjectPage renders correctly 1`] = `
           <a
             className="project-page__report-link"
             href="/projects/pro_example/performance/campaign/"
+            onClick={[Function]}
           >
             Campaign To Date (May 07 2018 - Dec 31 2018)
           </a>
@@ -261,6 +176,7 @@ exports[`ProjectPage renders correctly 1`] = `
           <a
             className="project-page__report-link"
             href="/projects/pro_example/report/2018-05-07,2018-05-14/"
+            onClick={[Function]}
           >
             May 07 2018 - May 14 2018
           </a>
@@ -269,6 +185,7 @@ exports[`ProjectPage renders correctly 1`] = `
           <a
             className="project-page__report-link"
             href="/projects/pro_example/report/2018-05-14,2018-05-21/"
+            onClick={[Function]}
           >
             May 14 2018 - May 21 2018
           </a>
@@ -277,6 +194,7 @@ exports[`ProjectPage renders correctly 1`] = `
           <a
             className="project-page__report-link"
             href="/projects/pro_example/report/2018-05-21,2018-05-28/"
+            onClick={[Function]}
           >
             May 21 2018 - May 28 2018
           </a>
@@ -285,6 +203,7 @@ exports[`ProjectPage renders correctly 1`] = `
           <a
             className="project-page__report-link"
             href="/projects/pro_example/report/2018-05-28,2018-06-04/"
+            onClick={[Function]}
           >
             May 28 2018 - Jun 04 2018
           </a>
@@ -293,6 +212,7 @@ exports[`ProjectPage renders correctly 1`] = `
           <a
             className="project-page__report-link"
             href="/projects/pro_example/report/2018-06-04,2018-06-11/"
+            onClick={[Function]}
           >
             Jun 04 2018 - Jun 11 2018
           </a>
@@ -301,6 +221,7 @@ exports[`ProjectPage renders correctly 1`] = `
           <a
             className="project-page__report-link"
             href="/projects/pro_example/report/2018-06-11,2018-06-18/"
+            onClick={[Function]}
           >
             Jun 11 2018 - Jun 18 2018
           </a>
@@ -309,6 +230,7 @@ exports[`ProjectPage renders correctly 1`] = `
           <a
             className="project-page__report-link"
             href="/projects/pro_example/report/2018-06-18,2018-06-25/"
+            onClick={[Function]}
           >
             Jun 18 2018 - Jun 25 2018
           </a>

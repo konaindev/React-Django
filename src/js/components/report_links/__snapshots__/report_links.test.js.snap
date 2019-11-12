@@ -7,38 +7,53 @@ exports[`ReportLinks renders correctly 1`] = `
   <ul>
     <li
       className="selected enabled"
-      data-url="/projects/pro_example/baseline/"
-      onClick={[Function]}
     >
-      Baseline
+      <a
+        href="/projects/pro_example/baseline/"
+        onClick={[Function]}
+      >
+        Baseline
+      </a>
     </li>
     <li
       className="enabled"
-      data-url="/projects/pro_example/market/"
-      onClick={[Function]}
     >
-      Market Analysis
+      <a
+        href="/projects/pro_example/market/"
+        onClick={[Function]}
+      >
+        Market Analysis
+      </a>
     </li>
     <li
       className="enabled"
-      data-url="/projects/pro_example/modeling/"
-      onClick={[Function]}
     >
-      Modeling
+      <a
+        href="/projects/pro_example/modeling/"
+        onClick={[Function]}
+      >
+        Modeling
+      </a>
     </li>
     <li
       className="enabled"
-      data-url="/projects/pro_example/campaign_plan/"
-      onClick={[Function]}
     >
-      Campaign Plan
+      <a
+        href="/projects/pro_example/campaign_plan/"
+        onClick={[Function]}
+      >
+        Campaign Plan
+      </a>
     </li>
     <li
       className="enabled"
-      data-url="/projects/pro_example/performance/last-week/"
-      onClick={[Function]}
     >
-      Performance
+      <a
+        href="/projects/pro_example/performance/last-week/"
+        onClick={[Function]}
+      >
+        Performance
+      </a>
     </li>
   </ul>
 </div>
