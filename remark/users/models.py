@@ -194,7 +194,6 @@ class User(PermissionsMixin, AbstractBaseUser):
         }
 
 
-
 class Account(models.Model):
     company_name = models.CharField(max_length=250, help_text="Company Name")
 

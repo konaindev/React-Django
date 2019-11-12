@@ -1,6 +1,5 @@
 import datetime
 
-from django.contrib.auth.models import Group
 from django.contrib.auth.views import redirect_to_login
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
@@ -139,6 +138,17 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
                     pass
         return competitors
 
+    def get_members(self, current_user):
+        members = self.project.get_members()
+        result = []
+        user_dict = current_user.get_icon_dict(PROJECT_ROLES["staff"])
+        for m in members:
+            if m["user_id"] == user_dict["user_id"]:
+                user_dict = m
+            else:
+                result.append(m)
+        return [user_dict] + result
+
     def get(self, request, project_id, *args, **kwargs):
         logger.info("ReportPageViewBase::get::top")
 
@@ -195,7 +205,7 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
             project=project,
             report=self.selector.get_report_data(),
             share_info=share_info,
-            members=self.project.get_members(),
+            members=self.get_members(request.user),
         )
 
 
