@@ -16,6 +16,8 @@ $border-width-large: 2.67px;
 $count-spaces-large: 10px;
 $count-font-size: 0.9375rem;
 
+$border-color-current: $blue-7;
+
 .user-icon-list {
     display: flex;
     align-items: center;
@@ -24,7 +26,7 @@ $count-font-size: 0.9375rem;
     z-index: 0;
 }
 
-.user-icon-list--large {
+.user-icon-list--project {
     .user-icon-list__icon {
         width: $icon-size-large;
         height: $icon-size-large;
@@ -39,6 +41,9 @@ $count-font-size: 0.9375rem;
         margin-left: $count-spaces-large;
         font-size: $count-font-size;
     }
+    .user-icon-list__icon--current {
+        border-color: $border-color-current;
+    }
 }
 
 .user-icon-list__icon {
@@ -48,6 +53,9 @@ $count-font-size: 0.9375rem;
     border: $border-width solid;
     border-color: inherit;
     box-sizing: content-box;
+    &--current {
+        border-color: $border-color-current;
+    }
 }
 
 .user-icon-list__count {

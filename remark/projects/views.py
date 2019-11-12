@@ -147,6 +147,7 @@ class ReportPageViewBase(ProjectSingleMixin, ReactView):
                 user_dict = m
             else:
                 result.append(m)
+        user_dict["is_current"] = True
         return [user_dict] + result
 
     def get(self, request, project_id, *args, **kwargs):

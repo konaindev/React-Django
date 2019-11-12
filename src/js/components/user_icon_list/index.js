@@ -19,12 +19,13 @@ export default class UserIconList extends React.PureComponent {
         user_id: PropTypes.string.isRequired,
         profile_image_url: PropTypes.string,
         account_name: PropTypes.string.isRequired,
-        role: PropTypes.string.isRequired
+        role: PropTypes.string.isRequired,
+        is_current: PropTypes.bool
       })
     ),
     maxCount: PropTypes.number,
     className: PropTypes.string,
-    theme: PropTypes.oneOf(["large"])
+    theme: PropTypes.oneOf(["project"])
   };
 
   static defaultProps = {
@@ -70,25 +71,30 @@ export default class UserIconList extends React.PureComponent {
 
   renderIcons = () => {
     const { users, maxCount } = this.props;
-    return users.slice(0, maxCount).map((user, i) => (
-      <RMBTooltip
-        overlayClassName="user-icon-list__tooltip"
-        placement="top"
-        overlay={this.renderOverlay(user)}
-        key={user.user_id}
-      >
-        <UserIcon
-          className="user-icon-list__icon"
-          account_name={user.account_name}
-          profile_image_url={user.profile_image_url}
-          color={getColor(i)}
-          data-index={i}
-          style={{ zIndex: this.state.zIndexes[i] }}
-          onMouseEnter={this.onMouseEnterHandler}
-          onMouseLeave={this.onMouseLeaveHandler}
-        />
-      </RMBTooltip>
-    ));
+    return users.slice(0, maxCount).map((user, i) => {
+      const classes = cn("user-icon-list__icon", {
+        "user-icon-list__icon--current": !!user.is_current
+      });
+      return (
+        <RMBTooltip
+          overlayClassName="user-icon-list__tooltip"
+          placement="top"
+          overlay={this.renderOverlay(user)}
+          key={user.user_id}
+        >
+          <UserIcon
+            className={classes}
+            account_name={user.account_name}
+            profile_image_url={user.profile_image_url}
+            color={getColor(i)}
+            data-index={i}
+            style={{ zIndex: this.state.zIndexes[i] }}
+            onMouseEnter={this.onMouseEnterHandler}
+            onMouseLeave={this.onMouseLeaveHandler}
+          />
+        </RMBTooltip>
+      );
+    });
   };
 
   render() {

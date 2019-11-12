@@ -33,7 +33,8 @@ export default class ReportPageChrome extends Component {
         user_id: PropTypes.string.isRequired,
         profile_image_url: PropTypes.string,
         account_name: PropTypes.string.isRequired,
-        role: PropTypes.string.isRequired
+        role: PropTypes.string.isRequired,
+        is_current: PropTypes.bool
       })
     )
   };
@@ -70,7 +71,7 @@ export default class ReportPageChrome extends Component {
               />
             </div>
             <div>
-              <UserIconList theme="large" users={members} />
+              <UserIconList theme="project" users={members} />
             </div>
           </div>
           <div className="subheader__inner">
