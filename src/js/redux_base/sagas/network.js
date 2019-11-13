@@ -1,6 +1,6 @@
 import { all, call, put, takeEvery } from "redux-saga/effects";
 import { networking, token, auth } from "../../redux_base/actions";
-import { axiosGet, axiosPost } from "../api";
+import { axiosGet, axiosPost } from "../../utils/api";
 
 /**
  * checkStatus
