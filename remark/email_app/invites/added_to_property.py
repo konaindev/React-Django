@@ -108,7 +108,7 @@ def get_template_vars(inviter_name, user, projects, max_count):
     if is_new_account:
         template_vars[
             "main_button_link"
-        ] = f"{BASE_URL}{reverse('create_password', kwargs={'hash': user.public_id})}"
+        ] = f"{BASE_URL}/users/create-password/{user.public_id}"
         template_vars["main_button_label"] = "Create Account"
 
     return template_vars
