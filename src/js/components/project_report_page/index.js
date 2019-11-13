@@ -14,6 +14,7 @@ import TotalAddressableMarket from "../total_addressable_market";
 import ModelingView from "../modeling_view";
 import CampaignPlan from "../campaign_plan";
 import UserIconList from "../user_icon_list";
+import ViewMembersModal from "../invite_modal/view_members";
 
 import "./project_report_page.scss";
 
@@ -36,6 +37,13 @@ export class ProjectReportPage extends Component {
     backUrl: "/dashboard"
   };
 
+  state = { isMembersViewOpen: false };
+
+  getProperty = () => ({
+    property_name: this.props.project.name,
+    members: this.props.project.members
+  });
+
   renderSubheader = () => {
     const { project, share_info, backUrl, reportType } = this.props;
 
@@ -44,6 +52,7 @@ export class ProjectReportPage extends Component {
       projectImage = project.building_image[2];
     }
 
+    const property = this.getProperty();
     return (
       <section className="project-report-page__subheader">
         <div className="container">
@@ -57,11 +66,17 @@ export class ProjectReportPage extends Component {
               />
             </div>
             <div>
+              <ViewMembersModal
+                property={property}
+                isOpen={this.state.isMembersViewOpen}
+                onClose={this.onCloseMembersView}
+              />
               <UserIconList
                 theme="project"
                 tooltipPlacement="bottom"
                 tooltipTheme="dark"
                 users={project.members}
+                onClick={this.onOpenMembersView}
               />
             </div>
           </div>
@@ -132,6 +147,10 @@ export class ProjectReportPage extends Component {
       `/projects/${project.public_id}/performance/${reportSpan}/`
     );
   };
+
+  onOpenMembersView = () => this.setState({ isMembersViewOpen: true });
+
+  onCloseMembersView = () => this.setState({ isMembersViewOpen: false });
 
   render() {
     const { fetchingReports, project, report } = this.props;

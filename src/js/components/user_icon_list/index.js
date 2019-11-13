@@ -27,14 +27,16 @@ export default class UserIconList extends React.PureComponent {
     className: PropTypes.string,
     theme: PropTypes.oneOf(["project"]),
     tooltipPlacement: PropTypes.oneOf(["bottom", "top"]),
-    tooltipTheme: PropTypes.oneOf(["", "highlight", "dark", "light-dark"])
+    tooltipTheme: PropTypes.oneOf(["", "highlight", "dark", "light-dark"]),
+    onClick: PropTypes.func
   };
 
   static defaultProps = {
     users: [],
     maxCount: 5,
     tooltipPlacement: "top",
-    tooltipTheme: ""
+    tooltipTheme: "",
+    onClick() {}
   };
 
   constructor(props) {
@@ -142,6 +144,7 @@ export default class UserIconList extends React.PureComponent {
       theme,
       tooltipPlacement,
       tooltipTheme,
+      onClick,
       ...otherProps
     } = this.props;
     let count = null;
@@ -154,7 +157,7 @@ export default class UserIconList extends React.PureComponent {
       className
     );
     return (
-      <div className={classes} {...otherProps}>
+      <div className={classes} onClick={onClick} {...otherProps}>
         {this.renderIcons()}
         {count}
       </div>
