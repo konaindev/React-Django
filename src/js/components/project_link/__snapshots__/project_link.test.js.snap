@@ -4,6 +4,7 @@ exports[`ProjectLink renders correctly 1`] = `
 <a
   className="project_link"
   href="/"
+  onClick={[Function]}
 >
   <div
     className="project_link__arrow"

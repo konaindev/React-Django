@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 import cn from "classnames";
 import _isArray from "lodash/isArray";
 import _isEmpty from "lodash/isEmpty";
@@ -11,40 +10,21 @@ import { states } from "../add_property_form/states";
 import Button from "../button";
 import DashboardControls from "../dashboard_controls";
 import Container from "../container";
-import PageChrome from "../page_chrome";
 import PropertyCardList from "../property_card_list";
 import PropertyList from "../property_list";
 import ToggleButton from "../toggle_button";
 import InviteModal from "../invite_modal";
 import { Close, ListView, TileView } from "../../icons";
 import Loader from "../loader";
-import UserMenu from "../user_menu";
 
-import router from "../../router";
 import { qsParse, qsStringify } from "../../utils/misc";
 import TutorialView from "../tutorial_view";
-import { networking, inviteModal, general } from "../../state/actions";
-
+import { inviteModal, dashboard } from "../../redux_base/actions";
 import "./dashboard_page.scss";
-
-const navLinks = {
-  links: [
-    {
-      id: "portfolio",
-      name: "Portfolio",
-      url: "/dashboard"
-    },
-    {
-      id: "portfolio-analysis",
-      name: "Portfolio Analysis",
-      url: "/portfolio/table"
-    }
-  ],
-  selected_link: "portfolio"
-};
 
 export class DashboardPage extends React.PureComponent {
   static propTypes = {
+    fetchingProperties: PropTypes.bool.isRequired,
     properties: PropTypes.array.isRequired,
     funds: PropTypes.array.isRequired,
     asset_managers: PropTypes.array.isRequired,
@@ -58,8 +38,7 @@ export class DashboardPage extends React.PureComponent {
     selectedProperties: [],
     viewType: "tile",
     filters: {},
-    onChangeFilter: () => {},
-    navLinks: navLinks
+    onChangeFilter: () => {}
   };
 
   static buttonOptions = [
@@ -73,37 +52,21 @@ export class DashboardPage extends React.PureComponent {
     }
   ];
 
-  /*
-    showLoader (called in componentDidUpdate):
-      This was a hacky fix a spinner issue (lag between when data was available and when 'isFetching' is set to false resulting in prior page displaying before re-render); 
-      showLoader represents a delayed replica of is (waits 300 ms before updating component)
-  */
   constructor(props) {
     super(props);
     this.state = {
       viewType: props.viewType,
-      isShowAddPropertyForm: false,
-      showLoader: false
+      isShowAddPropertyForm: false
     };
-
-    this._router = router("/dashboard")(queryString => {
-      // @TODO:
-      // uncomment in case of Django -> DashboardView renders empty props initially
-      //
-      // props.dispatch({
-      //   type: "API_DASHBOARD",
-      //   queryString
-      // });
-    });
   }
 
   selectAll = () => {
     const selectedProperties = this.props.properties;
-    this.props.dispatch(general.update({ selectedProperties }));
+    this.props.dispatch(dashboard.updateStore({ selectedProperties }));
   };
 
   cancelSelect = () => {
-    this.props.dispatch(general.update({ selectedProperties: [] }));
+    this.props.dispatch(dashboard.updateStore({ selectedProperties: [] }));
   };
 
   inviteHandler = () => {
@@ -122,17 +85,6 @@ export class DashboardPage extends React.PureComponent {
     this.props.onChangeFilter(filters);
   };
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.isFetching && !this.props.isFetching) {
-      setTimeout(() => {
-        this.setState({ showLoader: false });
-      }, process.env.LOADER_TIMEOUT || 300);
-    }
-    if (!prevProps.isFetching && this.props.isFetching) {
-      this.setState({ showLoader: true });
-    }
-  }
-
   toggleView = viewType => this.setState({ viewType });
 
   onSelectHandler = selectedProperties => {
@@ -148,7 +100,9 @@ export class DashboardPage extends React.PureComponent {
       });
     }
     const inviteDisable = !isAdmin;
-    this.props.dispatch(general.update({ selectedProperties, inviteDisable }));
+    this.props.dispatch(
+      dashboard.updateStore({ selectedProperties, inviteDisable })
+    );
   };
 
   onShowAddPropertyForm = () => {
@@ -171,22 +125,14 @@ export class DashboardPage extends React.PureComponent {
     states
   };
 
-  getHeaderItems() {
-    if (this.props.user) {
-      return <UserMenu {...this.props.user} />;
-    }
-    return null;
-  }
-
   render() {
     const className = cn("dashboard-content", {
       "dashboard-content--selection-mode": this.props.selectedProperties.length
     });
     const PropertiesListComponent = this.propertiesListComponent;
-    const navLinks = this.props.navLinks;
-    const { isFetching } = this.props;
+    const { fetchingProperties } = this.props;
     return (
-      <PageChrome navLinks={navLinks} headerItems={this.getHeaderItems()}>
+      <div>
         <TutorialView />
         <InviteModal />
         <div className={className}>
@@ -205,7 +151,7 @@ export class DashboardPage extends React.PureComponent {
                   color="primary"
                   uppercase={true}
                   onClick={this.onShowAddPropertyForm}
-                  disabled={isFetching}
+                  disabled={fetchingProperties}
                 >
                   ADD PROPERTY
                 </Button>
@@ -221,7 +167,7 @@ export class DashboardPage extends React.PureComponent {
                   locations={this.props.locations}
                   filters={this.props.filters}
                   onChange={this.onChangeFilter}
-                  isDisabled={isFetching}
+                  isDisabled={fetchingProperties}
                   dispatch={this.props.dispatch}
                 />
               </div>
@@ -236,15 +182,12 @@ export class DashboardPage extends React.PureComponent {
               </div>
             </div>
             <div className="dashboard-content__properties">
-              {this.state.showLoader ? (
-                <Loader isShow={true} />
-              ) : (
-                <PropertiesListComponent
-                  properties={this.props.properties}
-                  selectedProperties={this.props.selectedProperties}
-                  onSelect={this.onSelectHandler}
-                />
-              )}
+              <Loader isVisible={fetchingProperties} />
+              <PropertiesListComponent
+                properties={this.props.properties}
+                selectedProperties={this.props.selectedProperties}
+                onSelect={this.onSelectHandler}
+              />
             </div>
           </Container>
           <AddPropertyModal
@@ -253,7 +196,7 @@ export class DashboardPage extends React.PureComponent {
             onClose={this.onHideAddPropertyForm}
           />
         </div>
-      </PageChrome>
+      </div>
     );
   }
 }
@@ -368,39 +311,41 @@ export class UrlQueryLayer extends React.PureComponent {
       }
     });
 
-    let queryStringForView = qsStringify(urlParams);
-    let queryStringForAjax = qsStringify({ ...urlParams, ajax: "true" });
-    window.history.replaceState({}, "", `/dashboard${queryStringForView}`);
-    this.props.dispatch(networking.fetchDashboard(queryStringForAjax));
+    let queryString = qsStringify(urlParams);
+
+    this.props.history.push(queryString);
+    this.props.dispatch(dashboard.requestProperties(queryString));
   };
 
   render() {
-    if (this.props.no_projects || !this.props.properties) {
+    const { fetchingProperties, no_projects } = this.props;
+
+    if (no_projects === false) {
       return (
-        <PageChrome>
-          <div className="dashboard-content">
-            <p>
-              Please contact your Account Manager to setup access to your
-              properties
-            </p>
-          </div>
-        </PageChrome>
+        <DashboardPage
+          {...this.props}
+          filters={this.state}
+          onChangeFilter={this.onChangeFilter}
+        />
+      );
+    } else if (fetchingProperties && no_projects === undefined) {
+      // first API call is in progress
+      return (
+        <div className="dashboard-content">
+          <Loader isVisible />
+        </div>
+      );
+    } else {
+      return (
+        <div className="dashboard-content">
+          <p>
+            Please contact your Account Manager to setup access to your
+            properties
+          </p>
+        </div>
       );
     }
-    return (
-      <DashboardPage
-        {...this.props}
-        filters={this.state}
-        onChangeFilter={this.onChangeFilter}
-      />
-    );
   }
 }
 
-const mapState = state => {
-  return {
-    ...state.general,
-    ...state.network
-  };
-};
-export default connect(mapState)(UrlQueryLayer);
+export default UrlQueryLayer;

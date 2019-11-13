@@ -1,45 +1,32 @@
-import route from "riot-route";
-// NOTE: this has a LOT of kruft to remove...
-const router = base => callback => {
-  let active = false;
+import React from "react";
+import { BrowserRouter as Router, Redirect, Switch } from "react-router-dom";
+import ProjectReportsContainer from "../containers/project_reports";
+import DashboardContainer from "../containers/dashboard";
+import PortfolioContainer from "../containers/portfolio";
+import AuthContainer from "../containers/auth";
+import { TrackedRoute as Route } from "./gaTracked";
+import AuthGate from "../gates/auth";
+import NavGate from "../gates/nav";
 
-  const start = () => {
-    route.start();
-    active = true;
-    return { active };
-  };
-
-  const stop = () => {
-    route.stop();
-    active = false;
-    return { active };
-  };
-
-  const initRouter = ({ base, route }) => {
-    route.base(base || "/dashboard");
-
-    route("/create-password/*", async function(hash) {
-      await callback(hash);
-    });
-
-    route("/..", async function() {
-      // fire the callback
-      await callback(window.location.search);
-    });
-    // start the router and autoprocess the current url
-    route.start(true);
-    return route;
-  };
-
-  return {
-    isActive: active,
-    start,
-    stop,
-    route: initRouter({
-      base,
-      route
-    })
-  };
-};
-
-export default router;
+export function RemarkableRouter() {
+  return (
+    <Router>
+      <AuthGate>
+        <NavGate>
+          <Switch>
+            <Route path="/dashboard" component={DashboardContainer} />
+            <Route
+              path="/projects/:projectId/:reportType/:reportSpan?"
+              component={ProjectReportsContainer}
+            />
+            <Route path="/portfolio/table" component={PortfolioContainer} />
+            <Redirect from="/portfolio" to="/portfolio/table" />
+            <Route path="/auth" component={AuthContainer} />
+            {/* default to dashboard...since AuthGate takes care of no-auth */}
+            <Redirect to="/dashboard" />
+          </Switch>
+        </NavGate>
+      </AuthGate>
+    </Router>
+  );
+}

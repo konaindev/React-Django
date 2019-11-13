@@ -3,7 +3,7 @@ import { storiesOf } from "@storybook/react";
 import { Provider } from "react-redux";
 
 import { apiMock as inviteModalApiMock } from "../invite_modal/invite_modal.stories";
-import storeFunc from "../../state/store";
+import storeFunc from "../../redux_base/store";
 
 import DashboardPage from "./index";
 import { props } from "./props";

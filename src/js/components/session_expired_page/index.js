@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 
 import Button from "../button";
 import PageAuth from "../page_auth";
-import { inviteModal } from "../../state/actions";
+import { inviteModal } from "../../redux_base/actions";
 
 import "./session_expired_page.scss";
 
-class SessionExpiredPage extends React.PureComponent {
+export class SessionExpiredPage extends React.PureComponent {
   static propTypes = {
     hash: PropTypes.string.isRequired
   };

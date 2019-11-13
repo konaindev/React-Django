@@ -31,7 +31,7 @@ exports[`MultiSelect all selected 1`] = `
       />
     </div>
     <div
-      className="select__indicators css-1wy0on6"
+      className="select__indicators css-1g48xl4-IndicatorsContainer"
     >
       <span
         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -93,7 +93,7 @@ exports[`MultiSelect all selected 1`] = `
     onMouseMove={[Function]}
   >
     <div
-      className="select__menu-list select__menu-list--is-multi css-11unzgr"
+      className="select__menu-list select__menu-list--is-multi css-1ml51p6-MenuList"
     >
       <div
         className="multi-select__options"
@@ -232,7 +232,7 @@ exports[`MultiSelect gray 1`] = `
       />
     </div>
     <div
-      className="select__indicators css-1wy0on6"
+      className="select__indicators css-1g48xl4-IndicatorsContainer"
     >
       <span
         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -294,7 +294,7 @@ exports[`MultiSelect gray 1`] = `
     onMouseMove={[Function]}
   >
     <div
-      className="select__menu-list select__menu-list--is-multi css-11unzgr"
+      className="select__menu-list select__menu-list--is-multi css-1ml51p6-MenuList"
     >
       <div
         className="multi-select__options"
@@ -404,7 +404,7 @@ exports[`MultiSelect highlight 1`] = `
       />
     </div>
     <div
-      className="select__indicators css-1wy0on6"
+      className="select__indicators css-1g48xl4-IndicatorsContainer"
     >
       <span
         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -466,7 +466,7 @@ exports[`MultiSelect highlight 1`] = `
     onMouseMove={[Function]}
   >
     <div
-      className="select__menu-list select__menu-list--is-multi css-11unzgr"
+      className="select__menu-list select__menu-list--is-multi css-1ml51p6-MenuList"
     >
       <div
         className="multi-select__options"
@@ -576,7 +576,7 @@ exports[`MultiSelect render select 1`] = `
       />
     </div>
     <div
-      className="select__indicators css-1wy0on6"
+      className="select__indicators css-1g48xl4-IndicatorsContainer"
     >
       <span
         className="select__indicator-separator css-1okebmr-indicatorSeparator"

@@ -29,7 +29,11 @@ export default class PerformanceReportSpanDropdown extends Component {
   constructor(props) {
     super(props);
     this.dayPicker = React.createRef();
-    this.state = { preset: this.props.preset ? this.props.preset : "custom" };
+
+    const item = PerformanceReportSpanDropdown.options.find(
+      o => o.value === this.props.preset
+    );
+    this.state = { preset: item ? item.value : "custom" };
   }
 
   static options = [
@@ -62,21 +66,6 @@ export default class PerformanceReportSpanDropdown extends Component {
     const rangeString = startDate + "," + endDate;
     this.props.onChange("custom", rangeString);
   };
-
-  renderOptions() {
-    // handle the case where there are no public report links
-    const links = this.props.report_links || [this.props.current_report_link];
-
-    let options = [];
-    for (let link of links) {
-      options.push(
-        <option key={link.url} value={link.url}>
-          {link.description}
-        </option>
-      );
-    }
-    return options;
-  }
 
   render() {
     const startDate = parse(this.props.start_date);

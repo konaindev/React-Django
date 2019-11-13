@@ -1,0 +1,32 @@
+@import "css/base.scss";
+
+.project-report-page__subheader {
+    background-color: $default-background-color;
+    border-bottom: solid 1px $nav-link-border-color;
+
+    .subheader-report-tabs {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .project-report-links {
+        padding-top: 1.75rem;
+    }
+
+    .share-toggle {
+        margin: 1.375rem 0 0.875rem auto;
+    }
+}
+
+.project-report-page__content {
+    position: relative;
+}
+
+.project-report-page__subnav {
+    display: flex;
+    padding-top: 1.5rem;
+    align-items: center;
+    justify-content: space-between;
+}

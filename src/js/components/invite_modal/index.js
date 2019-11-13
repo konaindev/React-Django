@@ -17,7 +17,7 @@ import UserRow from "../user_row";
 import UserIconList from "../user_icon_list";
 import { Close } from "../../icons";
 import { isValidEmail } from "../../utils/validators";
-import { inviteModal, general } from "../../state/actions";
+import { inviteModal, dashboard } from "../../redux_base/actions";
 
 import SelectRole from "./select";
 import "./invite_modal.scss";
@@ -114,11 +114,11 @@ class InviteModal extends React.PureComponent {
   };
 
   openRemoveModal = (property, member) => {
-    this.props.dispatch(inviteModal.removeModalOpen(property, member));
+    this.props.dispatch(inviteModal.openRemoveModal(property, member));
   };
 
   closeRemoveModal = () => {
-    this.props.dispatch(inviteModal.removeModalClose);
+    this.props.dispatch(inviteModal.closeRemoveModal);
   };
 
   removeProperty = e => {
@@ -127,7 +127,7 @@ class InviteModal extends React.PureComponent {
     const selectedProperties = this.props.properties.filter(
       p => p.property_id !== propertyId
     );
-    this.props.dispatch(general.update({ selectedProperties }));
+    this.props.dispatch(dashboard.updateStore({ selectedProperties }));
   };
 
   openModal = () => {
@@ -146,11 +146,13 @@ class InviteModal extends React.PureComponent {
 
   inviteMembers = () => {
     this.props.dispatch(
-      inviteModal.addMembers(
-        this.props.properties,
-        this.state.selectedMembers,
-        this.state.inviteRole.value
-      )
+      inviteModal.addMembers({
+        body: {
+          projects: this.props.properties,
+          members: this.state.selectedMembers,
+          role: this.state.inviteRole.value
+        }
+      })
     );
     this.setState({ inviteRole: InviteModal.initRole });
   };
@@ -358,7 +360,7 @@ class InviteModal extends React.PureComponent {
 const mapState = state => {
   return {
     ...state.inviteModal,
-    properties: state.general?.selectedProperties || []
+    properties: state.dashboard?.selectedProperties || []
   };
 };
 
