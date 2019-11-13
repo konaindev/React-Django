@@ -36,6 +36,14 @@ exports[`PortfolioPropertyRow renders at-risk 1`] = `
     </div>
     <a
       className="portfolio-property-row__link"
+      href="/"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "inherit",
+          "textDecoration": "inherit",
+        }
+      }
     >
       View Property
     </a>
@@ -139,6 +147,14 @@ exports[`PortfolioPropertyRow renders off-track 1`] = `
     </div>
     <a
       className="portfolio-property-row__link"
+      href="/"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "inherit",
+          "textDecoration": "inherit",
+        }
+      }
     >
       View Property
     </a>
@@ -242,6 +258,14 @@ exports[`PortfolioPropertyRow renders on-track 1`] = `
     </div>
     <a
       className="portfolio-property-row__link"
+      href="/"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "inherit",
+          "textDecoration": "inherit",
+        }
+      }
     >
       View Property
     </a>
@@ -373,6 +397,14 @@ exports[`PortfolioPropertyRow renders withoutKPIs 1`] = `
     </div>
     <a
       className="portfolio-property-row__link"
+      href="/"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "inherit",
+          "textDecoration": "inherit",
+        }
+      }
     >
       View Property
     </a>

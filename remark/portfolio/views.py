@@ -1,7 +1,9 @@
 import datetime
-from django.contrib.auth.mixins import LoginRequiredMixin
 
-from remark.lib.views import ReactView
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+
 from remark.lib.logging import getLogger, error_text
 from remark.lib.time_series.common import KPI, KPITitle, KPIFormat
 from remark.portfolio.api.table_data import get_table_structure
@@ -109,10 +111,9 @@ def x_mondays_ago(x):
     return last_monday - datetime.timedelta(days=days_before)
 
 
-class PortfolioTableView(LoginRequiredMixin, PortfolioMixin, ReactView):
+class PortfolioTableView(APIView):
 
-    page_class = "PortfolioAnalysisView"
-    page_title = "Portfolio Analysis"
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
 
@@ -155,18 +156,17 @@ class PortfolioTableView(LoginRequiredMixin, PortfolioMixin, ReactView):
         if table_data is None:
             raise Exception("Table data cannot be None")
 
-        result = {
-            "share_info": self.share_info(),
+        response_data = {
             "kpi_bundles": self.kpi_bundle_list(),
             "selected_kpi_bundle": bundle,
             "kpi_order": self.kpi_ordering(bundle),
             "date_selection": self.get_date_selection(period_group, start, end),
-            "user": self.get_user_info(),
             "table_data": table_data,
             "highlight_kpis": self.get_highlight_kpis(portfolio_average, kpis_to_include),
             "display_average": "1" if show_averages else "0"
         }
-        return self.render(**result)
+
+        return Response(response_data)
 
     def get_start_and_end(self, period_group, start, end):
         '''
@@ -245,14 +245,6 @@ class PortfolioTableView(LoginRequiredMixin, PortfolioMixin, ReactView):
             })
         return result
 
-    def share_info(self):
-        # TODO: Fix ME
-        return {
-            "shared": False,
-            "share_url": "http://app.remarkably.com/",
-            "update_endpoint": "/projects/pro_example/update/"
-        }
-
     def kpi_ordering(self, bundle):
         bundle_data = KPI_BUNDLES[bundle]
         result = []
@@ -263,17 +255,6 @@ class PortfolioTableView(LoginRequiredMixin, PortfolioMixin, ReactView):
             })
         return result
 
-    def get_user_info(self):
-        # TODO: Fix me
-        return {
-            "email": "test@remarkably.io",
-            "user_id": "peep_12345",
-            "account_id": "acc_12345",
-            "account_name": "Remarkably",
-            "logout_url": "/users/logout",
-            "profile_image_url": None
-        }
-
     def get_date_selection(self, period_group, start, end):
         # Removing 1 day to make inclusive end date
         end = end - datetime.timedelta(days=1)
@@ -282,4 +263,3 @@ class PortfolioTableView(LoginRequiredMixin, PortfolioMixin, ReactView):
             "start_date": start.strftime('%Y-%m-%d'),
             "end_date": end.strftime('%Y-%m-%d')
         }
-

@@ -1,11 +1,20 @@
+import "storybook-chromatic";
 import React from "react";
 import { configure, addDecorator } from "@storybook/react";
-import "storybook-chromatic";
+import { MemoryRouter } from "react-router-dom";
 
 import StorybookContainer from "../src/js/utils/storybook_helper";
 
-// global decorator which centers every story in the storybook
-addDecorator(storyFn => <StorybookContainer>{storyFn()}</StorybookContainer>);
+// global decorators
+// - wrap Link in react-router
+// - wrap every story in the app container
+addDecorator(storyFn => (
+  <MemoryRouter initialEntries={["/"]}>
+    <StorybookContainer>
+      {storyFn()}
+    </StorybookContainer>
+  </MemoryRouter>
+));
 
 // automatically import all files ending in *.stories.js
 const req = require.context("../src/js", true, /.stories.js$/);

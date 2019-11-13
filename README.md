@@ -110,6 +110,10 @@ Want some fancy magic to reload your web page any time any front or backend asse
 
 Warning: this is fancy magic. I imagine it is fragile. -Dave
 
+### Running the Frontend React Application
+
+`$ npm run-build-ui` will start the `webpack-dev-server`, with the `development` environment and `webpack.dev.js` config file.
+
 ### Storybook
 
 This project uses Storybook for viewing react components. The primary storybook is published at:

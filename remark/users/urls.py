@@ -6,66 +6,19 @@ from django.views.generic.base import RedirectView
 from remark.decorators import anonymous_required
 
 from .views import (
-    CompleteAccountView,
+    ChangePasswordView,
+    ResetPasswordView,
+    ResetPasswordConfirmView,
     CreatePasswordView,
-    ValidatePasswordView,
-    SessionExpireView,
+    PasswordRulesView,
+    CompleteAccountView,
     ResendInviteView,
 )
 
+app_name = "users"
+
 
 urlpatterns = [
-    # XXX SECURITY Django's logout view uses GET to perform the logout action,
-    # which is pretty lame -- it's trivially cross-site scriptable. Not a huge
-    # issue for now, but we'll want to fix it someday. -Dave
-    path(
-        "logout/",
-        auth_views.LogoutView.as_view(template_name="users/logged_out.html"),
-        name="logout",
-    ),
-    # The "logged in, change my password" case
-    path(
-        "password-change/",
-        auth_views.PasswordChangeView.as_view(
-            template_name="users/password_change_form.html"
-        ),
-        name="password_change",
-    ),
-    path(
-        "password-change/done/",
-        auth_views.PasswordChangeDoneView.as_view(
-            template_name="users/password_change_done.html"
-        ),
-        name="password_change_done",
-    ),
-    # The "not logged in, I forgot my password" case
-    path(
-        "password-reset/",
-        anonymous_required(
-            auth_views.PasswordResetView.as_view(
-                template_name="users/password_reset_form.html",
-                subject_template_name="users/emails/password_reset_subject.txt",
-                email_template_name="users/emails/password_reset_email.txt",
-                html_email_template_name="users/emails/password_reset_email.html",
-                extra_email_context={
-                    "BASE_URL": settings.BASE_URL,
-                    "subject": "Set your Remarkably password",
-                },
-            )
-        ),
-        name="password_reset",
-    ),
-    # We've *sent* the reset link
-    path(
-        "password-reset/done/",
-        anonymous_required(
-            auth_views.PasswordResetDoneView.as_view(
-                template_name="users/password_reset_done.html"
-            )
-        ),
-        name="password_reset_done",
-    ),
-    # The reset link itself
     path(
         "reset/<uidb64>/<token>/",
         anonymous_required(
@@ -75,27 +28,39 @@ urlpatterns = [
         ),
         name="password_reset_confirm",
     ),
-    # Done with reset link!
     path(
-        "reset/done/",
-        anonymous_required(RedirectView.as_view(pattern_name="home")),
-        name="password_reset_complete",
-    ),
-    path("complete-account/", CompleteAccountView.as_view(), name="complete_account"),
-    path(
-        "create-password/<hash>",
-        anonymous_required(CreatePasswordView.as_view()),
-        name="create_password",
+        "users/password-rules/",
+        PasswordRulesView.as_view(),
+        name="users_password_rules",
     ),
     path(
-        "<hash>/session-expire",
-        anonymous_required(SessionExpireView.as_view()),
-        name="session_expire",
+        "users/change-password/",
+        ChangePasswordView.as_view(),
+        name="users_change_password",
     ),
     path(
-        "<hash>/resend-invite/",
+        "users/reset-password/",
+        ResetPasswordView.as_view(),
+        name="users_reset_password",
+    ),
+    path(
+        "users/reset-password-confirm/",
+        ResetPasswordConfirmView.as_view(),
+        name="users_reset_password_confirm",
+    ),
+    path(
+        "users/create-password/",
+        CreatePasswordView.as_view(),
+        name="users_create_password",
+    ),
+    path(
+        "users/complete-account/",
+        CompleteAccountView.as_view(),
+        name="users_complete_account",
+    ),
+    path(
+        "users/<user_id>/resend-invite/",
         anonymous_required(ResendInviteView.as_view()),
-        name="resend_invite",
+        name="users_resend_invite",
     ),
-    path("validate-password", ValidatePasswordView.as_view(), name="validate_password"),
 ]

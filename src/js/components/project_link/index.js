@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 import "./project_link.scss";
 import PropTypes from "prop-types";
 
@@ -11,14 +11,14 @@ const ProjectLink = ({ imageUrl, name, health, url }) => {
   };
 
   return (
-    <a className="project_link" href={url}>
+    <Link className="project_link" to={url}>
       <div className="project_link__arrow" />
       <div className="project_link__image-default">
         <div style={imageStyle} className="project_link__image" />
       </div>
       <div className="project_link__name">{name}</div>
       <PropertyStatus performance_rating={health} />
-    </a>
+    </Link>
   );
 };
 

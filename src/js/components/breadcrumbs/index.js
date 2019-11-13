@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
+import { Link } from "react-router-dom";
 import "./breadcrumbs.scss";
 
 export class Breadcrumbs extends Component {
@@ -20,7 +20,16 @@ export class Breadcrumbs extends Component {
       <div className="breadcrumbs">
         {breadcrumbs.map((item, index) => (
           <span className="breadcrumbs__item" key={index}>
-            {item.link ? <a href={item.link}>{item.text}</a> : item.text}
+            {item.link ? (
+              <Link
+                style={{ color: "inherit", textDecoration: "inherit" }}
+                to={item.link}
+              >
+                {item.text}
+              </Link>
+            ) : (
+              item.text
+            )}
           </span>
         ))}
       </div>

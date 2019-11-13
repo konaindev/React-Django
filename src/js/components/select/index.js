@@ -61,7 +61,6 @@ Select.optionsType = PropTypes.oneOfType([
     PropTypes.shape({
       label: PropTypes.string.isRequired,
       value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-        .isRequired
     })
   ),
   Select.optionsGroupType

@@ -1,5 +1,4 @@
 from remark.projects.models import Project
-from django.urls import reverse
 
 from remark.lib.time_series.computed import generate_computed_kpis, generate_computed_targets
 from remark.lib.time_series.common import KPI, KPIFormat
@@ -71,10 +70,7 @@ def get_table_structure(user, start, end, kpis, show_averages):
             "name": project.name,
             "address": f"{property.geo_address.city}, {property.geo_address.state}",
             "image_url": image_url,
-            "url": reverse(
-                "performance_report",
-                kwargs={"project_id": project.public_id, "report_span": "last-four-weeks"}
-            ),
+            "url": f"/projects/{project.public_id}/performance/last-four-weeks",
             "health": project.get_performance_rating(),
             "base_kpis": base_kpis,
             "base_targets": base_targets

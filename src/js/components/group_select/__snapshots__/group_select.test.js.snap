@@ -31,7 +31,7 @@ exports[`GroupSelect all selected 1`] = `
       />
     </div>
     <div
-      className="select__indicators css-1wy0on6"
+      className="select__indicators css-1g48xl4-IndicatorsContainer"
     >
       <span
         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -93,7 +93,7 @@ exports[`GroupSelect all selected 1`] = `
     onMouseMove={[Function]}
   >
     <div
-      className="select__menu-list select__menu-list--is-multi css-11unzgr"
+      className="select__menu-list select__menu-list--is-multi css-1ml51p6-MenuList"
     >
       <div
         className="group-select__options"
@@ -115,7 +115,7 @@ exports[`GroupSelect all selected 1`] = `
           className="group-select__groups"
         >
           <div
-            className="select__group css-1s9izoc"
+            className="select__group css-1veuksg-Group"
           >
             <div
               className="select__group-heading css-18ng2q5-group"
@@ -207,7 +207,7 @@ exports[`GroupSelect all selected 1`] = `
             </div>
           </div>
           <div
-            className="select__group css-1s9izoc"
+            className="select__group css-1veuksg-Group"
           >
             <div
               className="select__group-heading css-18ng2q5-group"
@@ -299,7 +299,7 @@ exports[`GroupSelect all selected 1`] = `
             </div>
           </div>
           <div
-            className="select__group css-1s9izoc"
+            className="select__group css-1veuksg-Group"
           >
             <div
               className="select__group-heading css-18ng2q5-group"
@@ -444,7 +444,7 @@ exports[`GroupSelect render default 1`] = `
       />
     </div>
     <div
-      className="select__indicators css-1wy0on6"
+      className="select__indicators css-1g48xl4-IndicatorsContainer"
     >
       <span
         className="select__indicator-separator css-1okebmr-indicatorSeparator"

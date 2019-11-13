@@ -1,4 +1,4 @@
-import { competitors } from "../baseline_report_page/props";
+import { competitors } from "../common_report/props";
 
 export const props = {
   property_name: "Portland Multi Family",

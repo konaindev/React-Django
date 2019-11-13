@@ -1,30 +1,43 @@
 import axios from "axios";
+import { store } from "../App";
 
-import { getCSRFToken } from "./csrf";
+const validateStatus = status => {
+  return status >= 200 && status < 500;
+};
 
-export function axiosPost(url, data, headers = {}, csrfProtect = true) {
+export function axiosPost(url, data, headers = {}) {
+  const { token } = store.getState();
+  const { access } = token;
+
   const config = {
     method: "post",
     headers: { ...headers },
     data,
-    url
+    url,
+    validateStatus
   };
+  if (access) {
+    config.headers["Authorization"] = `Bearer ${access}`;
+  }
   if (data.toString() === "[object FormData]") {
     config.headers["content-type"] = "multipart/form-data";
   }
-  if (csrfProtect) {
-    config.headers["X-CSRFToken"] = getCSRFToken();
-  }
+  // if (csrfProtect) {
+  //   config.headers["X-CSRFToken"] = getCSRFToken();
+  // }
   return axios(config);
 }
-
-export function axiosGet(url, config = {}) {
+export function axiosGet(url, config = { validateStatus }) {
+  const { token } = store.getState();
+  const { access } = token;
   const params = {
     method: "get",
     headers: { Accept: "application/json" },
     url,
-    withCredentials: true,
     ...config
   };
+  if (access) {
+    params.headers["Authorization"] = `Bearer ${access}`;
+  }
   return axios(params);
 }

@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
 
-import { uiStrings } from "../../state/actions";
+import { uiStrings } from "../../redux_base/actions";
 
 class UIStringsGate extends React.PureComponent {
   static propTypes = {

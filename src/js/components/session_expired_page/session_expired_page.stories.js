@@ -4,7 +4,7 @@ import { storiesOf } from "@storybook/react";
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 
-import storeFunc from "../../state/store";
+import storeFunc from "../../redux_base/store";
 import SessionExpiredPage from "./index";
 
 const { store } = storeFunc();
