@@ -90,6 +90,21 @@ def op(name, needs, fun):
     return operation(name=f"{name}_op", needs=needs, provides=[name])(fun)
 
 
+leased_rate_graph = compose(name="leased_rate_graph")(
+    op(KPI.delta_leases, [KPI.leases_executed, KPI.leases_ended], sub),
+    op(KPI.occupiable_units, [KPI.occupiable_units_start], identity),
+    op(
+        KPI.leased_units,
+        [KPI.leased_units_end, KPI.leased_units_start, KPI.delta_leases],
+        leased_units_calc,
+    ),
+    op(
+        KPI.leased_rate,
+        [KPI.leased_units, KPI.occupiable_units],
+        trace_calc(KPI.leased_rate, div_or_0),
+    ),
+)
+
 kpi_graph = compose(name="kpi_graph")(
 
     # Leasing
@@ -255,4 +270,3 @@ def generate_computed_targets(base_targets, outputs=None):
     for field in copy_fields:
         result[field] = base_targets[field]
     return result
-
