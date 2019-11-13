@@ -1,182 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DashboardPage Row select 1`] = `
-<div
-  className="chrome"
->
-  <div
-    className="page-chrome__top-chrome"
-  >
-    <div
-      className="page-chrome__top-chrome__content"
-    >
-      <div
-        className="page-header"
-      >
-        <div
-          className="container page-header__inner"
-        >
-          <a
-            href="/dashboard"
-          >
-            <div
-              className="remarkably-logo"
-            >
-               
-            </div>
-          </a>
-          <div
-            className="page-header__nav"
-          >
-            <div
-              className="top-navigation"
-            >
-              <a
-                className="top-navigation__link top-navigation__link--active"
-                href="/dashboard"
-              >
-                Portfolio
-              </a>
-              <a
-                className="top-navigation__link"
-                href="/portfolio/table"
-              >
-                Portfolio Analysis
-              </a>
-            </div>
-          </div>
-          <nav
-            className="page-header__items-outer"
-          >
-            <ul
-              className="page-header__items-inner"
-              style={
-                Object {
-                  "gridTemplateColumns": "repeat(1, 1fr)",
-                }
-              }
-            >
-              <li
-                className="page-header__item"
-              >
-                <div
-                  className="user-menu"
-                >
-                  <div
-                    className="select user-menu__select css-2b097c-container"
-                    onKeyDown={[Function]}
-                  >
-                    <div
-                      className="select__control css-yk16xz-control"
-                      onMouseDown={[Function]}
-                      onTouchEnd={[Function]}
-                    >
-                      <div
-                        className="select__value-container css-1hwfws3"
-                      >
-                        <div
-                          className="user-menu__image-container"
-                        >
-                          <div
-                            className="user-menu__image user-menu__image--default"
-                          />
-                          <div
-                            className="user-menu__image"
-                            style={
-                              Object {
-                                "backgroundImage": "url(https://storage.googleapis.com/tracker-avatar-production/a11569ffecab2b5564c0cbfa5e5f283a_3140620_96.png)",
-                              }
-                            }
-                          />
-                        </div>
-                        <input
-                          className="css-62g3xt-dummyInput"
-                          disabled={false}
-                          id="react-select-14-input"
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          onFocus={[Function]}
-                          readOnly={true}
-                          tabIndex="0"
-                          value=""
-                        />
-                      </div>
-                      <div
-                        className="select__indicators css-1wy0on6"
-                      >
-                        <span
-                          className="select__indicator-separator css-1okebmr-indicatorSeparator"
-                        />
-                        <div
-                          aria-hidden="true"
-                          className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
-                          onMouseDown={[Function]}
-                          onTouchEnd={[Function]}
-                        >
-                          <svg
-                            aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--down"
-                            color="inherit"
-                            focusable="false"
-                            height="1em"
-                            role="presentation"
-                            viewBox="0 0 10 5"
-                            width="1em"
-                          >
-                            <path
-                              d="M1 1.16134L4.92334 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 1.16134L5 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                          <svg
-                            aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--up"
-                            color="inherit"
-                            focusable="false"
-                            height="1em"
-                            role="presentation"
-                            viewBox="0 0 10 5"
-                            width="1em"
-                          >
-                            <path
-                              d="M1 3.83866L4.92334 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 3.83866L5 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-    <div
-      className="page-chrome__top-chrome__spacing-fix"
-      style={
-        Object {
-          "height": 76,
-        }
-      }
-    >
-       
-    </div>
-  </div>
+<div>
   <div
     className="dashboard-content dashboard-content--selection-mode"
   >
@@ -433,7 +258,7 @@ exports[`DashboardPage Row select 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-15-input"
+                        id="react-select-12-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -443,7 +268,7 @@ exports[`DashboardPage Row select 1`] = `
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -520,7 +345,7 @@ exports[`DashboardPage Row select 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-16-input"
+                        id="react-select-13-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -530,7 +355,7 @@ exports[`DashboardPage Row select 1`] = `
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -613,7 +438,7 @@ exports[`DashboardPage Row select 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-17-input"
+                        id="react-select-14-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -623,7 +448,7 @@ exports[`DashboardPage Row select 1`] = `
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -706,7 +531,7 @@ exports[`DashboardPage Row select 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-18-input"
+                        id="react-select-15-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -716,7 +541,7 @@ exports[`DashboardPage Row select 1`] = `
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -810,7 +635,7 @@ exports[`DashboardPage Row select 1`] = `
                           <input
                             className="css-62g3xt-dummyInput"
                             disabled={false}
-                            id="react-select-19-input"
+                            id="react-select-16-input"
                             onBlur={[Function]}
                             onChange={[Function]}
                             onFocus={[Function]}
@@ -820,7 +645,7 @@ exports[`DashboardPage Row select 1`] = `
                           />
                         </div>
                         <div
-                          className="select__indicators css-1wy0on6"
+                          className="select__indicators css-1g48xl4-IndicatorsContainer"
                         >
                           <span
                             className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -1062,7 +887,14 @@ exports[`DashboardPage Row select 1`] = `
               >
                 <a
                   className="property-row__link"
-                  href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "color": "inherit",
+                      "textDecoration": "inherit",
+                    }
+                  }
                 >
                   View Property
                 </a>
@@ -1150,7 +982,14 @@ exports[`DashboardPage Row select 1`] = `
               >
                 <a
                   className="property-row__link"
-                  href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "color": "inherit",
+                      "textDecoration": "inherit",
+                    }
+                  }
                 >
                   View Property
                 </a>
@@ -1282,7 +1121,14 @@ exports[`DashboardPage Row select 1`] = `
               >
                 <a
                   className="property-row__link"
-                  href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "color": "inherit",
+                      "textDecoration": "inherit",
+                    }
+                  }
                 >
                   View Property
                 </a>
@@ -1466,7 +1312,14 @@ exports[`DashboardPage Row select 1`] = `
               >
                 <a
                   className="property-row__link"
-                  href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "color": "inherit",
+                      "textDecoration": "inherit",
+                    }
+                  }
                 >
                   View Property
                 </a>
@@ -1650,7 +1503,14 @@ exports[`DashboardPage Row select 1`] = `
               >
                 <a
                   className="property-row__link"
-                  href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "color": "inherit",
+                      "textDecoration": "inherit",
+                    }
+                  }
                 >
                   View Property
                 </a>
@@ -1834,7 +1694,14 @@ exports[`DashboardPage Row select 1`] = `
               >
                 <a
                   className="property-row__link"
-                  href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "color": "inherit",
+                      "textDecoration": "inherit",
+                    }
+                  }
                 >
                   View Property
                 </a>
@@ -2018,7 +1885,14 @@ exports[`DashboardPage Row select 1`] = `
               >
                 <a
                   className="property-row__link"
-                  href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "color": "inherit",
+                      "textDecoration": "inherit",
+                    }
+                  }
                 >
                   View Property
                 </a>
@@ -2202,7 +2076,14 @@ exports[`DashboardPage Row select 1`] = `
               >
                 <a
                   className="property-row__link"
-                  href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "color": "inherit",
+                      "textDecoration": "inherit",
+                    }
+                  }
                 >
                   View Property
                 </a>
@@ -2386,7 +2267,14 @@ exports[`DashboardPage Row select 1`] = `
               >
                 <a
                   className="property-row__link"
-                  href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "color": "inherit",
+                      "textDecoration": "inherit",
+                    }
+                  }
                 >
                   View Property
                 </a>
@@ -2570,7 +2458,14 @@ exports[`DashboardPage Row select 1`] = `
               >
                 <a
                   className="property-row__link"
-                  href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "color": "inherit",
+                      "textDecoration": "inherit",
+                    }
+                  }
                 >
                   View Property
                 </a>
@@ -2720,182 +2615,7 @@ exports[`DashboardPage Row select 1`] = `
 `;
 
 exports[`DashboardPage Row view 1`] = `
-<div
-  className="chrome"
->
-  <div
-    className="page-chrome__top-chrome"
-  >
-    <div
-      className="page-chrome__top-chrome__content"
-    >
-      <div
-        className="page-header"
-      >
-        <div
-          className="container page-header__inner"
-        >
-          <a
-            href="/dashboard"
-          >
-            <div
-              className="remarkably-logo"
-            >
-               
-            </div>
-          </a>
-          <div
-            className="page-header__nav"
-          >
-            <div
-              className="top-navigation"
-            >
-              <a
-                className="top-navigation__link top-navigation__link--active"
-                href="/dashboard"
-              >
-                Portfolio
-              </a>
-              <a
-                className="top-navigation__link"
-                href="/portfolio/table"
-              >
-                Portfolio Analysis
-              </a>
-            </div>
-          </div>
-          <nav
-            className="page-header__items-outer"
-          >
-            <ul
-              className="page-header__items-inner"
-              style={
-                Object {
-                  "gridTemplateColumns": "repeat(1, 1fr)",
-                }
-              }
-            >
-              <li
-                className="page-header__item"
-              >
-                <div
-                  className="user-menu"
-                >
-                  <div
-                    className="select user-menu__select css-2b097c-container"
-                    onKeyDown={[Function]}
-                  >
-                    <div
-                      className="select__control css-yk16xz-control"
-                      onMouseDown={[Function]}
-                      onTouchEnd={[Function]}
-                    >
-                      <div
-                        className="select__value-container css-1hwfws3"
-                      >
-                        <div
-                          className="user-menu__image-container"
-                        >
-                          <div
-                            className="user-menu__image user-menu__image--default"
-                          />
-                          <div
-                            className="user-menu__image"
-                            style={
-                              Object {
-                                "backgroundImage": "url(https://storage.googleapis.com/tracker-avatar-production/a11569ffecab2b5564c0cbfa5e5f283a_3140620_96.png)",
-                              }
-                            }
-                          />
-                        </div>
-                        <input
-                          className="css-62g3xt-dummyInput"
-                          disabled={false}
-                          id="react-select-8-input"
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          onFocus={[Function]}
-                          readOnly={true}
-                          tabIndex="0"
-                          value=""
-                        />
-                      </div>
-                      <div
-                        className="select__indicators css-1wy0on6"
-                      >
-                        <span
-                          className="select__indicator-separator css-1okebmr-indicatorSeparator"
-                        />
-                        <div
-                          aria-hidden="true"
-                          className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
-                          onMouseDown={[Function]}
-                          onTouchEnd={[Function]}
-                        >
-                          <svg
-                            aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--down"
-                            color="inherit"
-                            focusable="false"
-                            height="1em"
-                            role="presentation"
-                            viewBox="0 0 10 5"
-                            width="1em"
-                          >
-                            <path
-                              d="M1 1.16134L4.92334 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 1.16134L5 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                          <svg
-                            aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--up"
-                            color="inherit"
-                            focusable="false"
-                            height="1em"
-                            role="presentation"
-                            viewBox="0 0 10 5"
-                            width="1em"
-                          >
-                            <path
-                              d="M1 3.83866L4.92334 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 3.83866L5 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-    <div
-      className="page-chrome__top-chrome__spacing-fix"
-      style={
-        Object {
-          "height": 76,
-        }
-      }
-    >
-       
-    </div>
-  </div>
+<div>
   <div
     className="dashboard-content"
   >
@@ -3152,7 +2872,7 @@ exports[`DashboardPage Row view 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-9-input"
+                        id="react-select-7-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -3162,7 +2882,7 @@ exports[`DashboardPage Row view 1`] = `
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -3239,7 +2959,7 @@ exports[`DashboardPage Row view 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-10-input"
+                        id="react-select-8-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -3249,7 +2969,7 @@ exports[`DashboardPage Row view 1`] = `
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -3332,7 +3052,7 @@ exports[`DashboardPage Row view 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-11-input"
+                        id="react-select-9-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -3342,7 +3062,7 @@ exports[`DashboardPage Row view 1`] = `
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -3425,7 +3145,7 @@ exports[`DashboardPage Row view 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-12-input"
+                        id="react-select-10-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -3435,7 +3155,7 @@ exports[`DashboardPage Row view 1`] = `
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -3529,7 +3249,7 @@ exports[`DashboardPage Row view 1`] = `
                           <input
                             className="css-62g3xt-dummyInput"
                             disabled={false}
-                            id="react-select-13-input"
+                            id="react-select-11-input"
                             onBlur={[Function]}
                             onChange={[Function]}
                             onFocus={[Function]}
@@ -3539,7 +3259,7 @@ exports[`DashboardPage Row view 1`] = `
                           />
                         </div>
                         <div
-                          className="select__indicators css-1wy0on6"
+                          className="select__indicators css-1g48xl4-IndicatorsContainer"
                         >
                           <span
                             className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -3781,7 +3501,14 @@ exports[`DashboardPage Row view 1`] = `
               >
                 <a
                   className="property-row__link"
-                  href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "color": "inherit",
+                      "textDecoration": "inherit",
+                    }
+                  }
                 >
                   View Property
                 </a>
@@ -3869,7 +3596,14 @@ exports[`DashboardPage Row view 1`] = `
               >
                 <a
                   className="property-row__link"
-                  href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "color": "inherit",
+                      "textDecoration": "inherit",
+                    }
+                  }
                 >
                   View Property
                 </a>
@@ -4001,7 +3735,14 @@ exports[`DashboardPage Row view 1`] = `
               >
                 <a
                   className="property-row__link"
-                  href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "color": "inherit",
+                      "textDecoration": "inherit",
+                    }
+                  }
                 >
                   View Property
                 </a>
@@ -4185,7 +3926,14 @@ exports[`DashboardPage Row view 1`] = `
               >
                 <a
                   className="property-row__link"
-                  href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "color": "inherit",
+                      "textDecoration": "inherit",
+                    }
+                  }
                 >
                   View Property
                 </a>
@@ -4369,7 +4117,14 @@ exports[`DashboardPage Row view 1`] = `
               >
                 <a
                   className="property-row__link"
-                  href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "color": "inherit",
+                      "textDecoration": "inherit",
+                    }
+                  }
                 >
                   View Property
                 </a>
@@ -4553,7 +4308,14 @@ exports[`DashboardPage Row view 1`] = `
               >
                 <a
                   className="property-row__link"
-                  href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "color": "inherit",
+                      "textDecoration": "inherit",
+                    }
+                  }
                 >
                   View Property
                 </a>
@@ -4737,7 +4499,14 @@ exports[`DashboardPage Row view 1`] = `
               >
                 <a
                   className="property-row__link"
-                  href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "color": "inherit",
+                      "textDecoration": "inherit",
+                    }
+                  }
                 >
                   View Property
                 </a>
@@ -4921,7 +4690,14 @@ exports[`DashboardPage Row view 1`] = `
               >
                 <a
                   className="property-row__link"
-                  href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "color": "inherit",
+                      "textDecoration": "inherit",
+                    }
+                  }
                 >
                   View Property
                 </a>
@@ -5105,7 +4881,14 @@ exports[`DashboardPage Row view 1`] = `
               >
                 <a
                   className="property-row__link"
-                  href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "color": "inherit",
+                      "textDecoration": "inherit",
+                    }
+                  }
                 >
                   View Property
                 </a>
@@ -5289,7 +5072,14 @@ exports[`DashboardPage Row view 1`] = `
               >
                 <a
                   className="property-row__link"
-                  href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                  onClick={[Function]}
+                  style={
+                    Object {
+                      "color": "inherit",
+                      "textDecoration": "inherit",
+                    }
+                  }
                 >
                   View Property
                 </a>
@@ -5439,182 +5229,7 @@ exports[`DashboardPage Row view 1`] = `
 `;
 
 exports[`DashboardPage renders correctly 1`] = `
-<div
-  className="chrome"
->
-  <div
-    className="page-chrome__top-chrome"
-  >
-    <div
-      className="page-chrome__top-chrome__content"
-    >
-      <div
-        className="page-header"
-      >
-        <div
-          className="container page-header__inner"
-        >
-          <a
-            href="/dashboard"
-          >
-            <div
-              className="remarkably-logo"
-            >
-               
-            </div>
-          </a>
-          <div
-            className="page-header__nav"
-          >
-            <div
-              className="top-navigation"
-            >
-              <a
-                className="top-navigation__link top-navigation__link--active"
-                href="/dashboard"
-              >
-                Portfolio
-              </a>
-              <a
-                className="top-navigation__link"
-                href="/portfolio/table"
-              >
-                Portfolio Analysis
-              </a>
-            </div>
-          </div>
-          <nav
-            className="page-header__items-outer"
-          >
-            <ul
-              className="page-header__items-inner"
-              style={
-                Object {
-                  "gridTemplateColumns": "repeat(1, 1fr)",
-                }
-              }
-            >
-              <li
-                className="page-header__item"
-              >
-                <div
-                  className="user-menu"
-                >
-                  <div
-                    className="select user-menu__select css-2b097c-container"
-                    onKeyDown={[Function]}
-                  >
-                    <div
-                      className="select__control css-yk16xz-control"
-                      onMouseDown={[Function]}
-                      onTouchEnd={[Function]}
-                    >
-                      <div
-                        className="select__value-container css-1hwfws3"
-                      >
-                        <div
-                          className="user-menu__image-container"
-                        >
-                          <div
-                            className="user-menu__image user-menu__image--default"
-                          />
-                          <div
-                            className="user-menu__image"
-                            style={
-                              Object {
-                                "backgroundImage": "url(https://storage.googleapis.com/tracker-avatar-production/a11569ffecab2b5564c0cbfa5e5f283a_3140620_96.png)",
-                              }
-                            }
-                          />
-                        </div>
-                        <input
-                          className="css-62g3xt-dummyInput"
-                          disabled={false}
-                          id="react-select-2-input"
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          onFocus={[Function]}
-                          readOnly={true}
-                          tabIndex="0"
-                          value=""
-                        />
-                      </div>
-                      <div
-                        className="select__indicators css-1wy0on6"
-                      >
-                        <span
-                          className="select__indicator-separator css-1okebmr-indicatorSeparator"
-                        />
-                        <div
-                          aria-hidden="true"
-                          className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
-                          onMouseDown={[Function]}
-                          onTouchEnd={[Function]}
-                        >
-                          <svg
-                            aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--down"
-                            color="inherit"
-                            focusable="false"
-                            height="1em"
-                            role="presentation"
-                            viewBox="0 0 10 5"
-                            width="1em"
-                          >
-                            <path
-                              d="M1 1.16134L4.92334 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 1.16134L5 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                          <svg
-                            aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--up"
-                            color="inherit"
-                            focusable="false"
-                            height="1em"
-                            role="presentation"
-                            viewBox="0 0 10 5"
-                            width="1em"
-                          >
-                            <path
-                              d="M1 3.83866L4.92334 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 3.83866L5 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-    <div
-      className="page-chrome__top-chrome__spacing-fix"
-      style={
-        Object {
-          "height": 76,
-        }
-      }
-    >
-       
-    </div>
-  </div>
+<div>
   <div
     className="dashboard-content"
   >
@@ -5871,7 +5486,7 @@ exports[`DashboardPage renders correctly 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-3-input"
+                        id="react-select-2-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -5881,7 +5496,7 @@ exports[`DashboardPage renders correctly 1`] = `
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -5958,7 +5573,7 @@ exports[`DashboardPage renders correctly 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-4-input"
+                        id="react-select-3-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -5968,7 +5583,7 @@ exports[`DashboardPage renders correctly 1`] = `
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -6051,7 +5666,7 @@ exports[`DashboardPage renders correctly 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-5-input"
+                        id="react-select-4-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -6061,7 +5676,7 @@ exports[`DashboardPage renders correctly 1`] = `
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -6144,7 +5759,7 @@ exports[`DashboardPage renders correctly 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-6-input"
+                        id="react-select-5-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -6154,7 +5769,7 @@ exports[`DashboardPage renders correctly 1`] = `
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -6248,7 +5863,7 @@ exports[`DashboardPage renders correctly 1`] = `
                           <input
                             className="css-62g3xt-dummyInput"
                             disabled={false}
-                            id="react-select-7-input"
+                            id="react-select-6-input"
                             onBlur={[Function]}
                             onChange={[Function]}
                             onFocus={[Function]}
@@ -6258,7 +5873,7 @@ exports[`DashboardPage renders correctly 1`] = `
                           />
                         </div>
                         <div
-                          className="select__indicators css-1wy0on6"
+                          className="select__indicators css-1g48xl4-IndicatorsContainer"
                         >
                           <span
                             className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -6494,7 +6109,9 @@ exports[`DashboardPage renders correctly 1`] = `
                       </svg>
                     </div>
                     <a
-                      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                      className="property-card__overlay-link"
+                      href=""
+                      onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
@@ -6598,7 +6215,9 @@ exports[`DashboardPage renders correctly 1`] = `
                       </svg>
                     </div>
                     <a
-                      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                      className="property-card__overlay-link"
+                      href=""
+                      onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
@@ -6746,7 +6365,9 @@ exports[`DashboardPage renders correctly 1`] = `
                       </svg>
                     </div>
                     <a
-                      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                      className="property-card__overlay-link"
+                      href=""
+                      onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
@@ -6946,7 +6567,9 @@ exports[`DashboardPage renders correctly 1`] = `
                       </svg>
                     </div>
                     <a
-                      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                      className="property-card__overlay-link"
+                      href=""
+                      onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
@@ -7146,7 +6769,9 @@ exports[`DashboardPage renders correctly 1`] = `
                       </svg>
                     </div>
                     <a
-                      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                      className="property-card__overlay-link"
+                      href=""
+                      onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
@@ -7346,7 +6971,9 @@ exports[`DashboardPage renders correctly 1`] = `
                       </svg>
                     </div>
                     <a
-                      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                      className="property-card__overlay-link"
+                      href=""
+                      onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
@@ -7546,7 +7173,9 @@ exports[`DashboardPage renders correctly 1`] = `
                       </svg>
                     </div>
                     <a
-                      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                      className="property-card__overlay-link"
+                      href=""
+                      onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
@@ -7746,7 +7375,9 @@ exports[`DashboardPage renders correctly 1`] = `
                       </svg>
                     </div>
                     <a
-                      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                      className="property-card__overlay-link"
+                      href=""
+                      onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
@@ -7946,7 +7577,9 @@ exports[`DashboardPage renders correctly 1`] = `
                       </svg>
                     </div>
                     <a
-                      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                      className="property-card__overlay-link"
+                      href=""
+                      onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
@@ -8146,7 +7779,9 @@ exports[`DashboardPage renders correctly 1`] = `
                       </svg>
                     </div>
                     <a
-                      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                      className="property-card__overlay-link"
+                      href=""
+                      onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
@@ -8313,182 +7948,7 @@ exports[`DashboardPage renders correctly 1`] = `
 `;
 
 exports[`DashboardPage renders for admin 1`] = `
-<div
-  className="chrome"
->
-  <div
-    className="page-chrome__top-chrome"
-  >
-    <div
-      className="page-chrome__top-chrome__content"
-    >
-      <div
-        className="page-header"
-      >
-        <div
-          className="container page-header__inner"
-        >
-          <a
-            href="/dashboard"
-          >
-            <div
-              className="remarkably-logo"
-            >
-               
-            </div>
-          </a>
-          <div
-            className="page-header__nav"
-          >
-            <div
-              className="top-navigation"
-            >
-              <a
-                className="top-navigation__link top-navigation__link--active"
-                href="/dashboard"
-              >
-                Portfolio
-              </a>
-              <a
-                className="top-navigation__link"
-                href="/portfolio/table"
-              >
-                Portfolio Analysis
-              </a>
-            </div>
-          </div>
-          <nav
-            className="page-header__items-outer"
-          >
-            <ul
-              className="page-header__items-inner"
-              style={
-                Object {
-                  "gridTemplateColumns": "repeat(1, 1fr)",
-                }
-              }
-            >
-              <li
-                className="page-header__item"
-              >
-                <div
-                  className="user-menu"
-                >
-                  <div
-                    className="select user-menu__select css-2b097c-container"
-                    onKeyDown={[Function]}
-                  >
-                    <div
-                      className="select__control css-yk16xz-control"
-                      onMouseDown={[Function]}
-                      onTouchEnd={[Function]}
-                    >
-                      <div
-                        className="select__value-container css-1hwfws3"
-                      >
-                        <div
-                          className="user-menu__image-container"
-                        >
-                          <div
-                            className="user-menu__image user-menu__image--default"
-                          />
-                          <div
-                            className="user-menu__image"
-                            style={
-                              Object {
-                                "backgroundImage": "url(https://storage.googleapis.com/tracker-avatar-production/a11569ffecab2b5564c0cbfa5e5f283a_3140620_96.png)",
-                              }
-                            }
-                          />
-                        </div>
-                        <input
-                          className="css-62g3xt-dummyInput"
-                          disabled={false}
-                          id="react-select-20-input"
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          onFocus={[Function]}
-                          readOnly={true}
-                          tabIndex="0"
-                          value=""
-                        />
-                      </div>
-                      <div
-                        className="select__indicators css-1wy0on6"
-                      >
-                        <span
-                          className="select__indicator-separator css-1okebmr-indicatorSeparator"
-                        />
-                        <div
-                          aria-hidden="true"
-                          className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
-                          onMouseDown={[Function]}
-                          onTouchEnd={[Function]}
-                        >
-                          <svg
-                            aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--down"
-                            color="inherit"
-                            focusable="false"
-                            height="1em"
-                            role="presentation"
-                            viewBox="0 0 10 5"
-                            width="1em"
-                          >
-                            <path
-                              d="M1 1.16134L4.92334 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 1.16134L5 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                          <svg
-                            aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--up"
-                            color="inherit"
-                            focusable="false"
-                            height="1em"
-                            role="presentation"
-                            viewBox="0 0 10 5"
-                            width="1em"
-                          >
-                            <path
-                              d="M1 3.83866L4.92334 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 3.83866L5 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-    <div
-      className="page-chrome__top-chrome__spacing-fix"
-      style={
-        Object {
-          "height": 76,
-        }
-      }
-    >
-       
-    </div>
-  </div>
+<div>
   <div
     className="dashboard-content"
   >
@@ -8745,7 +8205,7 @@ exports[`DashboardPage renders for admin 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-21-input"
+                        id="react-select-17-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -8755,7 +8215,7 @@ exports[`DashboardPage renders for admin 1`] = `
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -8832,7 +8292,7 @@ exports[`DashboardPage renders for admin 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-22-input"
+                        id="react-select-18-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -8842,7 +8302,7 @@ exports[`DashboardPage renders for admin 1`] = `
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -8925,7 +8385,7 @@ exports[`DashboardPage renders for admin 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-23-input"
+                        id="react-select-19-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -8935,7 +8395,7 @@ exports[`DashboardPage renders for admin 1`] = `
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -9018,7 +8478,7 @@ exports[`DashboardPage renders for admin 1`] = `
                       <input
                         className="css-62g3xt-dummyInput"
                         disabled={false}
-                        id="react-select-24-input"
+                        id="react-select-20-input"
                         onBlur={[Function]}
                         onChange={[Function]}
                         onFocus={[Function]}
@@ -9028,7 +8488,7 @@ exports[`DashboardPage renders for admin 1`] = `
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -9122,7 +8582,7 @@ exports[`DashboardPage renders for admin 1`] = `
                           <input
                             className="css-62g3xt-dummyInput"
                             disabled={false}
-                            id="react-select-25-input"
+                            id="react-select-21-input"
                             onBlur={[Function]}
                             onChange={[Function]}
                             onFocus={[Function]}
@@ -9132,7 +8592,7 @@ exports[`DashboardPage renders for admin 1`] = `
                           />
                         </div>
                         <div
-                          className="select__indicators css-1wy0on6"
+                          className="select__indicators css-1g48xl4-IndicatorsContainer"
                         >
                           <span
                             className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -9368,7 +8828,9 @@ exports[`DashboardPage renders for admin 1`] = `
                       </svg>
                     </div>
                     <a
-                      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                      className="property-card__overlay-link"
+                      href=""
+                      onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
@@ -9472,7 +8934,9 @@ exports[`DashboardPage renders for admin 1`] = `
                       </svg>
                     </div>
                     <a
-                      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                      className="property-card__overlay-link"
+                      href=""
+                      onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
@@ -9620,7 +9084,9 @@ exports[`DashboardPage renders for admin 1`] = `
                       </svg>
                     </div>
                     <a
-                      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                      className="property-card__overlay-link"
+                      href=""
+                      onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
@@ -9820,7 +9286,9 @@ exports[`DashboardPage renders for admin 1`] = `
                       </svg>
                     </div>
                     <a
-                      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                      className="property-card__overlay-link"
+                      href=""
+                      onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
@@ -10020,7 +9488,9 @@ exports[`DashboardPage renders for admin 1`] = `
                       </svg>
                     </div>
                     <a
-                      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                      className="property-card__overlay-link"
+                      href=""
+                      onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
@@ -10220,7 +9690,9 @@ exports[`DashboardPage renders for admin 1`] = `
                       </svg>
                     </div>
                     <a
-                      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                      className="property-card__overlay-link"
+                      href=""
+                      onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
@@ -10420,7 +9892,9 @@ exports[`DashboardPage renders for admin 1`] = `
                       </svg>
                     </div>
                     <a
-                      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                      className="property-card__overlay-link"
+                      href=""
+                      onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
@@ -10620,7 +10094,9 @@ exports[`DashboardPage renders for admin 1`] = `
                       </svg>
                     </div>
                     <a
-                      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                      className="property-card__overlay-link"
+                      href=""
+                      onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
@@ -10820,7 +10296,9 @@ exports[`DashboardPage renders for admin 1`] = `
                       </svg>
                     </div>
                     <a
-                      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                      className="property-card__overlay-link"
+                      href=""
+                      onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
@@ -11020,7 +10498,9 @@ exports[`DashboardPage renders for admin 1`] = `
                       </svg>
                     </div>
                     <a
-                      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+                      className="property-card__overlay-link"
+                      href=""
+                      onClick={[Function]}
                     >
                       <button
                         className="button button--outline"

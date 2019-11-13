@@ -1,21 +1,30 @@
-import React, { Component } from "react";
+import React from "react";
 import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/es/integration/react";
-
+import storeFunc from "./redux_base/store";
+import { RemarkableRouter } from "./router";
+import { PersistGate } from "redux-persist/integration/react";
+import GaGate from "./gates/ga";
+import TitleGate from "./gates/title";
+import AuthGate from "./gates/auth";
 import UIStringsGate from "./gates/ui_strings";
-import storeFunc from "./state/store";
 
 const { store, persistor } = storeFunc();
 
-export default class App extends Component {
+export default class App extends React.Component {
   render() {
     return (
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor}>
-          <UIStringsGate>
-            <div className="app">{this.props.children}</div>
-          </UIStringsGate>
-        </PersistGate>
+        <TitleGate>
+          <GaGate>
+            <PersistGate loading={null} persistor={persistor}>
+              <UIStringsGate>
+                <AuthGate>
+                  <RemarkableRouter />
+                </AuthGate>
+              </UIStringsGate>
+            </PersistGate>
+          </GaGate>
+        </TitleGate>
       </Provider>
     );
   }

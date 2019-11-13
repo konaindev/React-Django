@@ -37,3 +37,8 @@ $link-v-spacing: 0.875rem; // 14px
 .project-report-links li.enabled:hover {
     color: $nav-link-hover-color;
 }
+
+.project-report-links li > a {
+    color: inherit;
+    text-decoration: inherit;
+}

@@ -10,22 +10,6 @@ import EmailReports from "./email_reports";
 import ProfileTab from "./profile";
 import "./account_settings.scss";
 
-const navLinks = {
-  links: [
-    {
-      id: "portfolio",
-      name: "Portfolio",
-      url: "/dashboard"
-    },
-    {
-      id: "portfolio-analysis",
-      name: "Portfolio Analysis",
-      url: "/portfolio/table"
-    }
-  ],
-  selected_link: ""
-};
-
 const menuItemsData = {
   profile: {
     name: "Profile",
@@ -89,7 +73,7 @@ export default class AccountSettings extends React.PureComponent {
   render() {
     const Component = menuItemsData[this.state.item].component;
     return (
-      <PageChrome navLinks={navLinks}>
+      <PageChrome>
         <div className="account-settings">
           <div className="account-settings__header">
             <div className="account-settings__title">Account Settings</div>

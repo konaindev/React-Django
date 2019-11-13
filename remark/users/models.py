@@ -4,7 +4,6 @@ from django.db import models
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.utils.crypto import get_random_string
-from django.urls import reverse
 
 from remark.lib.tokens import public_id
 from remark.lib.fields import NormalizedEmailField
@@ -152,7 +151,6 @@ class User(PermissionsMixin, AbstractBaseUser):
             "email": self.email,
             "user_id": self.public_id,
             "account_name": self.get_name(),
-            "logout_url": reverse("logout"),
             "is_superuser": self.is_superuser,
             # TODO: Add account_url
         }

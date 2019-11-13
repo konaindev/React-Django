@@ -141,7 +141,7 @@ exports[`BaselineComparisonMatrix No Competitors 1`] = `
                   }
                 }
               >
-                Seattle, WA
+                
               </div>
               <div
                 className="rt-td baseline-comparison-table__value-cell"
@@ -1945,7 +1945,7 @@ exports[`BaselineComparisonMatrix One Competitor 1`] = `
                   }
                 }
               >
-                Seattle, WA
+                
               </div>
               <div
                 className="rt-td baseline-comparison-table__value-cell"
@@ -4214,7 +4214,7 @@ exports[`BaselineComparisonMatrix renders correctly 1`] = `
                   }
                 }
               >
-                Seattle, WA
+                
               </div>
               <div
                 className="rt-td baseline-comparison-table__value-cell"

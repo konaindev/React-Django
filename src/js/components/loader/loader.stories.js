@@ -15,7 +15,7 @@ const style = {
 storiesOf("Loader", module).add("default", () => (
   <div style={style}>
     <div style={{ position: "relative", height: "400px" }}>
-      <Loader isShow={true} />
+      <Loader isVisible={true} />
     </div>
   </div>
 ));

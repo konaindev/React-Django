@@ -1,20 +1,31 @@
 import React from "react";
 
 import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
 
 import CommonReport from "./index";
-import { props_baseline, props_performance, props_date_span } from "./props";
+import {
+  propsForBaselineReport,
+  propsForPerformanceReport,
+  propsForPeformanceReportWithDateSpan
+} from "./props";
 
-storiesOf("CommonReport", module).add("baseline", () => (
-  <CommonReport {...props_baseline} />
+const propsForBaselineReportWithoutCompetitors = {
+  ...propsForBaselineReport,
+  competitors: []
+};
+
+storiesOf("CommonReport", module).add("baseline with competitors", () => (
+  <CommonReport {...propsForBaselineReport} />
+));
+
+storiesOf("CommonReport", module).add("baseline without competitors", () => (
+  <CommonReport {...propsForBaselineReportWithoutCompetitors} />
 ));
 
 storiesOf("CommonReport", module).add("performance", () => (
-  <CommonReport {...props_performance} />
+  <CommonReport {...propsForPerformanceReport} />
 ));
 
 storiesOf("CommonReport", module).add("with date span", () => (
-  <CommonReport {...props_date_span} />
+  <CommonReport {...propsForPeformanceReportWithDateSpan} />
 ));

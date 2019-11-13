@@ -5,11 +5,11 @@ import Loader from "./index";
 
 describe("Loader", () => {
   it("renders correctly", () => {
-    const tree = renderer.create(<Loader isShow={true} />).toJSON();
+    const tree = renderer.create(<Loader isVisible={true} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
   it("hidden", () => {
-    const tree = renderer.create(<Loader isShow={false} />).toJSON();
+    const tree = renderer.create(<Loader isVisible={false} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
 });
