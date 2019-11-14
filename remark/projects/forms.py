@@ -219,7 +219,7 @@ class ProjectForm(forms.ModelForm):
 
 
 def multiline_text_to_str_array(text, min_elements=0, max_elements=None):
-    items = [str(item) for item in text.replace("\r", "").split("\n")]
+    items = [str(item) for item in text.replace("\r", "").split("\n") if item]
     count = len(items)
 
     if count < min_elements:
