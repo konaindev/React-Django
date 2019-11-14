@@ -63,11 +63,12 @@ class ProjectSerializer(serializers.ModelSerializer):
         members = obj.get_members()
         result = []
         current_user = self.context["request"].user
-        user_dict = current_user.get_icon_dict(PROJECT_ROLES["staff"])
+        user_item = []
         for m in members:
-            if m["user_id"] == user_dict["user_id"]:
-                user_dict = m
+            if m["user_id"] == current_user.public_id:
+                user_item = [m]
             else:
                 result.append(m)
-        user_dict["is_current"] = True
-        return [user_dict] + result
+        for u in user_item:
+            u["is_current"] = True
+        return user_item + result
