@@ -1,4 +1,9 @@
+"""The functions in this module scrape statisticatlas.com for population demographics by zip code, and
+stores those values in the database when they're found. Census data does not vary frequently."""
+
+from enum import Enum
 import requests
+from typing import Any
 
 
 from bs4 import BeautifulSoup
@@ -18,6 +23,13 @@ STAT_ATLAS_HOUSEHOLD_INCOME_URL = "https://statisticalatlas.com/zip/{}/Household
 STAT_ATLAS_REFER = "https://statisticalatlas.com/United-States/Overview"
 
 USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36"
+
+
+class CensusArea(Enum):
+    """Defines areas for CensusDataForArea"""
+    US_ZIPCODE = 'zipcode'
+    RADIUS = 'radius'
+    COLLECTION = 'collection'
 
 
 logger = getLogger(__name__)
@@ -79,20 +91,29 @@ def find_households(el):
 def get(url):
     headers = {"user-agent": USER_AGENT, "referer": STAT_ATLAS_REFER}
     response = requests.get(url, headers=headers)
-    if not response.ok:
+    try:
+        response.raise_for_status()
+    except requests.HTTPError as exc:
+        logger.error("usa_census::get::error::HTTPError", url)
+        logger.error("usa_census::get::error::HTTPError", response.reason, response.text)
+        raise exc
+    except Exception as exc:
+        logger.error("usa_census::get::error", url)
         logger.error("usa_census::get::error", response.reason, response.text)
-        raise Exception("usa_census::get::error response", url)
+        raise exc
+
     return response
 
 
-"""
-Check HTTP status code of Atlas Overview page for a given zipcode
-- 404 status code implies that zipcode is invalid or dead(no population)
-"""
 def check_overview_page_status_code(zipcode):
+    """
+    Check HTTP status code of Atlas Overview page for a given zipcode
+    - 404 status code implies that zipcode is invalid or dead(no population)
+    """
     headers = {"user-agent": USER_AGENT, "referer": STAT_ATLAS_REFER}
     url = STAT_ATLAS_OVERVIEW_URL.format(zipcode)
     response = requests.get(url, headers=headers)
+    logger.info(f"Checking for active page at {url} - response code {response.status_code}")
     return response.status_code
 
 
@@ -102,16 +123,17 @@ def fetch_population(zipcode):
     url = STAT_ATLAS_AGE_URL.format(zipcode)
     response = get(url)
     soup = BeautifulSoup(response.text, features="html.parser")
+
     pop_th = soup.find_all(find_population)[0]
     td_value = str(pop_th.td.text)
     population = int(td_value.replace(",", ""))
+
     house_th = soup.find_all(find_households)[0]
     td_value = str(house_th.td.text)
     households = int(td_value.replace(",", ""))
-    result = (population, households)
 
     logger.info(f"usa_census::fetch_population::end")
-    return result
+    return population, households
 
 
 def fetch_svg(base_url, zipcode, figure_id):
@@ -197,19 +219,21 @@ def fetch_household_income_distribution(zipcode):
             txt = gs[x].title.text
             value = float(txt.replace("%", ""))
             result.append(value / 100.0)
-    logger.info(f"usa_census::fetch_household_income_distribution::end")
+    logger.info(f"usa_census::fetch_household_income_distribution::end::{zipcode}")
     return result
 
 
 def get_usa_census_population(zipcode):
     usa_census_zip = USACensusZip.objects.filter(zipcode=zipcode).first()
     if usa_census_zip is None:
-        population = fetch_population(zipcode)
-        usa_census_zip = USACensusZip.objects.create(
-            total_population=population[0],
-            number_of_households=population[1],
-            zipcode=zipcode,
-        )
+        if check_overview_page_status_code(zipcode) == 200:
+            pop, houses = fetch_population(zipcode)
+            usa_census_zip = USACensusZip.objects.create(
+                total_population=pop,
+                number_of_households=houses,
+                zipcode=zipcode,
+            )
+
     return usa_census_zip
 
 
@@ -267,11 +291,70 @@ def get_usa_census_income_distributions(usa_census_zip):
     return [item.income_distribution_percentage for item in income_distributions]
 
 
-def get_usa_census_data(zipcode):
-    usa_census_zip = get_usa_census_population(zipcode)
-    age_segments = get_usa_census_age_segments(usa_census_zip)
-    households = get_usa_census_households(usa_census_zip)
-    income_distributions = get_usa_census_income_distributions(usa_census_zip)
+class CensusDataForArea:
+    """
+    This class is a Facade pattern that encapsulates the logic needed to get census data for a zip code
+    The intention is to provide a stable interface and allow implementation to vary.
+    """
+    def __init__(self, area_type: CensusArea, area_identifier: Any):
+        """
+        This class is a Facade pattern that encapsulates the logic needed to get census data for a zip code
+        :param area_type: CensusAreas: The type of area this instance describes
+        :param area_identifier: an identifier for the area, such as a zip code or lat long radius
+        :raises TypeError
+        """
+        if area_type not in CensusArea:
+            raise TypeError(f"Invalid census area type: {area_type}")
+        self.area_type = area_type
+        self.area_identifier = area_identifier
 
-    population = [usa_census_zip.total_population, usa_census_zip.number_of_households]
-    return population, age_segments, households, income_distributions
+        self.population = 0
+        self.number_of_households = 0
+        self.age_segments = []
+        self.households_by_type = []
+        self.income_distributions = []
+        self.has_data = False
+
+        self.populate()
+
+    def populate(self):
+        """
+        Dispatch to the correct method to capture population for the CensusArea
+        :return:
+        """
+        if self.area_type == CensusArea.US_ZIPCODE:
+            self._populate_from_zip()
+
+    def _populate_from_zip(self):
+        """
+        use module functions to fulfill data retrieval
+        :return: None
+        :raises: TypeError
+        """
+        if self.area_type == CensusArea.US_ZIPCODE:
+            usa_census_zip = get_usa_census_population(self.area_identifier)
+            if usa_census_zip is not None:
+                self.age_segments = get_usa_census_age_segments(usa_census_zip)
+                self.households_by_type = get_usa_census_households(usa_census_zip)
+                self.income_distributions = get_usa_census_income_distributions(usa_census_zip)
+
+                self.population = usa_census_zip.total_population
+                self.number_of_households = usa_census_zip.number_of_households
+                self.has_data = True
+        else:
+            raise TypeError("Attempted to populate census data from a zip code without a zip code type")
+
+    def __str__(self):
+        out = f"Area Type: {self.area_type} Area Identifier: {self.area_identifier}"
+        out += f" Has data?: {self.has_data} Population: {self.population}"
+        return out
+
+
+def get_usa_census_data(zipcode: str):
+    """
+    See if we can get census info from a zip code. If not, return something that tells our caller we don't have any
+    :param zipcode: str: a 5-digit US zip code
+    :return: an instance of CensusDataForArea
+    """
+
+    return CensusDataForArea(CensusArea.US_ZIPCODE, zipcode)
