@@ -252,7 +252,7 @@ class USACensusZip(models.Model):
     zipcode = models.CharField(max_length=20, unique=True)
 
     def __str__(self):
-        return self.zipcode
+        return f"Found population {self.total_population} and households {self.number_of_households} in zipcode {self.zipcode}"
 
 
 class USACensusPopulationByAge(models.Model):
