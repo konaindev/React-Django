@@ -95,7 +95,84 @@ class PortfolioTestCase(TestCase):
         print(result)
 
 
-class TableDataTestCase(TestCase):
+class GetTableStructureTestCase(TestCase):
+    def create_project(self, name):
+        group = Group.objects.create(name=f"{name} view group")
+        group.user_set.add(self.user)
+        project_property = Property.objects.create(
+            name="property 1",
+            average_monthly_rent=decimal.Decimal("1948"),
+            lowest_monthly_rent=decimal.Decimal("1400"),
+            geo_address=self.address,
+        )
+        project = Project.objects.create(
+            name=name,
+            baseline_start=date(year=2019, month=2, day=12),
+            baseline_end=date(year=2019, month=4, day=16),
+            account=self.account,
+            asset_manager=self.asset_manager,
+            property_manager=self.property_manager,
+            property_owner=self.property_owner,
+            fund=self.fund,
+            property=project_property,
+            view_group=group,
+        )
+        return project
+
+    def create_target_period(self, project, **data):
+        default_data = {
+            "project": project,
+            "start": date(year=2019, month=6, day=11),
+            "end": date(year=2019, month=6, day=18),
+            "target_leased_rate": decimal.Decimal("0.940"),
+            "target_occupied_units": 190,
+            "target_move_ins": 6,
+            "target_move_outs": 2,
+            "target_lease_applications": 7,
+            "target_leases_executed": 6,
+            "target_lease_renewal_notices": 3,
+            "target_lease_renewals": 0,
+            "target_lease_vacation_notices": 2,
+            "target_lease_cds": 1,
+            "target_delta_leases": 4,
+            "target_acq_investment": decimal.Decimal("1998.43"),
+            "target_ret_investment": decimal.Decimal("790.00"),
+            "target_usvs": 480,
+            "target_inquiries": 35,
+            "target_tours": 13,
+        }
+        params = {**default_data, **data}
+        target_period = TargetPeriod.objects.create(**params)
+        return target_period
+
+    def create_period(self, project, **data):
+        default_data = {
+            "project": project,
+            "lease_stage": self.stage,
+            "start": date(year=2019, month=6, day=11),
+            "end": date(year=2019, month=6, day=18),
+            "leased_units_start": 172,
+            "leases_ended": 0,
+            "leases_executed": 4,
+            "occupiable_units_start": 199,
+            "occupied_units_start": 164,
+            "move_ins": 5,
+            "move_outs": 0,
+            "lease_applications": 5,
+            "lease_renewal_notices": 1,
+            "lease_renewals": 0,
+            "lease_vacation_notices": 5,
+            "lease_cds": 1,
+            "usvs": 414,
+            "inquiries": 36,
+            "tours": 14,
+            "leased_units_end": 179,
+            "occupied_units_end": 169,
+        }
+        params = {**default_data, **data}
+        period = Period.objects.create(**params)
+        return period
+
     def setUp(self):
         user = User.objects.create_user(
             email="admin@remarkably.io", password="adminpassword"
@@ -120,125 +197,36 @@ class TableDataTestCase(TestCase):
             name="Test Property Owner", is_property_owner=True
         )
         fund = Fund.objects.create(account=account, name="Test Fund")
-        property = Property.objects.create(
-            name="property 1",
-            average_monthly_rent=decimal.Decimal("1948"),
-            lowest_monthly_rent=decimal.Decimal("1400"),
-            geo_address=address,
-        )
-        group = Group.objects.create(name="project 1 view group")
-        group.user_set.add(user)
-        project = Project.objects.create(
-            name="project 1",
-            baseline_start=date(year=2019, month=2, day=12),
-            baseline_end=date(year=2019, month=4, day=16),
-            account=account,
-            asset_manager=asset_manager,
-            property_manager=property_manager,
-            property_owner=property_owner,
-            fund=fund,
-            property=property,
-            view_group=group,
-        )
         stage = LeaseStage.objects.get(short_name="performance")
 
-        TargetPeriod.objects.create(
-            project=project,
-            start=date(year=2019, month=6, day=11),
-            end=date(year=2019, month=6, day=18),
-            target_leased_rate=decimal.Decimal("0.940"),
-            target_occupied_units=190,
-            target_move_ins=6,
-            target_move_outs=2,
-            target_lease_applications=7,
-            target_leases_executed=6,
-            target_lease_renewal_notices=3,
-            target_lease_renewals=0,
-            target_lease_vacation_notices=2,
-            target_lease_cds=1,
-            target_delta_leases=4,
-            target_acq_investment=decimal.Decimal("1998.43"),
-            target_ret_investment=decimal.Decimal("790.00"),
-            target_usvs=480,
-            target_inquiries=35,
-            target_tours=13,
-        )
-        TargetPeriod.objects.create(
-            project=project,
+        self.account = account
+        self.asset_manager = asset_manager
+        self.property_manager = property_manager
+        self.property_owner = property_owner
+        self.fund = fund
+        self.address = address
+        self.stage = stage
+
+        self.user = user
+        self.project = self.create_project("project 1")
+        self.create_target_period(self.project)
+        self.create_target_period(
+            self.project,
             start=date(year=2019, month=6, day=18),
             end=date(year=2019, month=6, day=25),
             target_leased_rate=decimal.Decimal("0.955"),
-            target_occupied_units=193,
-            target_move_ins=6,
-            target_move_outs=3,
-            target_lease_applications=7,
-            target_leases_executed=6,
-            target_lease_renewal_notices=0,
-            target_lease_renewals=3,
-            target_lease_vacation_notices=2,
-            target_lease_cds=1,
-            target_delta_leases=3,
-            target_acq_investment=decimal.Decimal("1998.43"),
-            target_ret_investment=decimal.Decimal("790.00"),
-            target_usvs=480,
-            target_inquiries=35,
-            target_tours=13,
         )
-
-        Period.objects.create(
-            project=project,
-            lease_stage=stage,
+        self.create_period(self.project)
+        self.create_period(
+            self.project,
             start=date(year=2019, month=6, day=4),
             end=date(year=2019, month=6, day=11),
-            leased_units_start=172,
-            leases_ended=0,
-            leases_executed=4,
-            occupiable_units_start=199,
-            occupied_units_start=164,
-            move_ins=5,
-            move_outs=0,
-            lease_applications=5,
-            lease_renewal_notices=1,
-            lease_renewals=0,
-            lease_vacation_notices=5,
-            lease_cds=1,
-            usvs=414,
-            inquiries=36,
-            tours=14,
-            leased_units_end=0,
-            occupied_units_end=169,
-        )
-        Period.objects.create(
-            project=project,
-            lease_stage=stage,
-            start=date(year=2019, month=6, day=11),
-            end=date(year=2019, month=6, day=18),
-            leased_units_start=176,
-            leases_ended=1,
-            leases_executed=8,
-            occupiable_units_start=199,
-            occupied_units_start=169,
-            move_ins=8,
-            move_outs=1,
-            lease_applications=8,
-            lease_renewal_notices=3,
-            lease_renewals=3,
-            lease_vacation_notices=8,
-            lease_cds=0,
-            usvs=381,
-            inquiries=34,
-            tours=23,
-            leased_units_end=1,
             occupied_units_end=176,
         )
-
-        self.user = user
-        self.project = project
-        self.property = property
         self.start = date(year=2019, month=6, day=11)
         self.end = date(year=2019, month=6, day=17)
 
-    def test_get_table_structure(self):
+    def test_one_project(self):
         kpis = [KPI.leased_rate, KPI.renewal_rate, KPI.occupancy_rate]
 
         table_data, portfolio_average = get_table_structure(
@@ -246,6 +234,41 @@ class TableDataTestCase(TestCase):
         )
         # TODO: Add more metrics
         self.assertTrue(table_data[0]["targets"]["occupancy_rate"] <= 1)
+
+    def test_multiple_projects(self):
+        project2 = self.create_project("project 2")
+        self.create_target_period(
+            project2,
+            target_occupied_units=170
+        )
+        self.create_period(
+            project2,
+            occupiable_units_start=180
+        )
+
+        project3 = self.create_project("project 3")
+        self.create_target_period(
+            project3,
+            start=date(year=2019, month=6, day=4),
+            end=date(year=2019, month=6, day=11),
+            target_occupied_units=70
+        )
+        self.create_period(
+            project3,
+            start=date(year=2019, month=6, day=4),
+            end=date(year=2019, month=6, day=18),
+            occupiable_units_start=80
+        )
+
+        kpis = [KPI.leased_rate, KPI.renewal_rate, KPI.occupancy_rate]
+        table_data, portfolio_average = get_table_structure(
+            self.user, self.start, self.end, kpis, True
+        )
+
+        # TODO: Add more metrics
+        self.assertAlmostEqual(table_data[0]["targets"]["occupancy_rate"], 0.94, places=2)
+        self.assertAlmostEqual(table_data[1]["targets"]["occupancy_rate"], 0.93, places=2)
+        self.assertAlmostEqual(table_data[-1]["targets"]["occupancy_rate"], 0.93, places=2)
 
     # TODO: move to remark/projects/reports
     def test_get_report_data(self):

@@ -24,8 +24,9 @@ def generate_computed_properties(item, kpis):
         KPI.leased_units_end,
         KPI.leased_units_start
     )
+    base_kpis_for_target = item.get("base_kpis_for_target", base_kpis)
     for field in fields_to_copy:
-        item["base_targets"][field] = base_kpis[field]
+        item["base_targets"][field] = base_kpis_for_target[field]
     
     item["targets"] = generate_computed_targets(base_targets, outputs=kpis)
 
@@ -94,12 +95,15 @@ def get_table_structure(user, start, end, kpis, show_averages):
     # First combine all the stats for the Portfolio Average
     portfolio_average = []
     portfolio_average_targets = []
+    portfolio_average_for_targets = []
     for project in project_flat_list:
         print(f"Project: {project['base_kpis']}")
         if project["base_kpis"] is not None:
             portfolio_average.append(project["base_kpis"])
         if project["base_targets"] is not None:
             portfolio_average_targets.append(project["base_targets"])
+        if project["base_kpis"] is not None and project["base_targets"] is not None:
+            portfolio_average_for_targets.append(project["base_kpis"])
 
     # Next we need to combine the Group properties
     if len(portfolio_average) == 0:
@@ -111,6 +115,7 @@ def get_table_structure(user, start, end, kpis, show_averages):
             "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/portfolio/all_my_properties.png",
             "property_count": len(project_flat_list),
             "base_kpis": get_base_kpis_for_group(portfolio_average, start, end, show_averages),
+            "base_kpis_for_target": get_base_kpis_for_group(portfolio_average_for_targets, start, end, show_averages),
             "base_targets": get_targets_for_group(portfolio_average_targets, start, end, show_averages)
         }
         generate_computed_properties(portfolio_average_group, kpis)
