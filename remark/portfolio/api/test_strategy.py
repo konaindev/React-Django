@@ -135,8 +135,10 @@ class GroupKPIAverageTestCase(TestCase):
         self.assertIsNotNone(self.result)
 
     def testOccupiableUnitsStart(self):
-        expected = P3[KPI.occupiable_units_start]
-        self.assertEqual(self.result[KPI.occupiable_units_start], expected)
+        expected = 246.33
+        self.assertAlmostEqual(
+            self.result[KPI.occupiable_units_start], expected, places=2
+        )
 
 
 class PropertyKPITestCase(TestCase):
