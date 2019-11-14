@@ -112,7 +112,7 @@ Warning: this is fancy magic. I imagine it is fragile. -Dave
 
 ### Running the Frontend React Application
 
-`$ npm run-build-ui` will start the `webpack-dev-server`, with the `development` environment and `webpack.dev.js` config file.
+`$ yarn run-build-ui` will start the `webpack-dev-server`, with the `development` environment and `webpack.dev.js` config file.
 
 ### Storybook
 
