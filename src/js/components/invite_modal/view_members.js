@@ -3,8 +3,11 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { Close } from "../../icons";
+import Button from "../button";
 import ModalWindow from "../modal_window";
 import UserRow from "../user_row";
+
+import InviteModal from "./index";
 
 import "./invite_modal.scss";
 
@@ -21,6 +24,26 @@ class ViewMembersModal extends React.PureComponent {
   static defaultProps = {
     isOpen: false,
     onClose() {}
+  };
+
+  renderMembers = () => {
+    const property = this.props.property;
+    if (!property || !property.members) {
+      return null;
+    }
+    return property.members.map(member => {
+      let roleLabel;
+      const role = InviteModal.roleOptions.find(r => r.value === member.role);
+      if (role) {
+        roleLabel = role.label;
+      }
+      return (
+        <div className="invite-modal__member" key={member.user_id}>
+          <UserRow {...member} />
+          <div className="invite-modal__role">{roleLabel}</div>
+        </div>
+      );
+    });
   };
 
   render() {
@@ -41,6 +64,21 @@ class ViewMembersModal extends React.PureComponent {
               </div>
             </React.Fragment>
           </ModalWindow.Head>
+          <ModalWindow.Body>
+            <div className="invite-modal__container invite-modal__container--users">
+              {this.renderMembers()}
+            </div>
+            <div className="invite-modal__container invite-modal__container--button">
+              <Button
+                className="invite-modal__button"
+                color="primary"
+                uppercase={true}
+                onClick={this.props.onClose}
+              >
+                okay
+              </Button>
+            </div>
+          </ModalWindow.Body>
         </ModalWindow>
       </>
     );
