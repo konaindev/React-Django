@@ -14,7 +14,7 @@ class PrintLogger:
 
     def _log(self, level, line, *args, **kwargs):
         timestamp = now().strftime("%d/%b/%Y %H:%M:%S")
-        print(f"[{timestamp}] [{level}] {line} {args} {kwargs}", file=self._file)
+        print(f"[{timestamp}] [{level}] {line} {args if args else ''} {kwargs if kwargs else ''}", file=self._file)
 
     def debug(self, line, *args, **kwargs):
         self._log("DEBUG", line, *args, **kwargs)
