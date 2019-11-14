@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import { Add } from "../../icons";
+import { inviteModal as inviteModalActions } from "../../redux_base/actions";
+
 import Loader from "../loader";
 import ReportLinks from "../report_links";
 import ShareToggle from "../share_toggle";
@@ -14,6 +17,7 @@ import TotalAddressableMarket from "../total_addressable_market";
 import ModelingView from "../modeling_view";
 import CampaignPlan from "../campaign_plan";
 import UserIconList from "../user_icon_list";
+import InviteModal from "../invite_modal";
 import ViewMembersModal from "../invite_modal/view_members";
 
 import "./project_report_page.scss";
@@ -30,7 +34,8 @@ export class ProjectReportPage extends Component {
     share_info: PropTypes.object,
     backUrl: PropTypes.string,
     fetchingReports: PropTypes.bool,
-    historyPush: PropTypes.func.isRequired
+    historyPush: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -65,11 +70,16 @@ export class ProjectReportPage extends Component {
                 health={project.health}
               />
             </div>
-            <div>
+            <div className="project-report-page__members">
+              <InviteModal />
               <ViewMembersModal
                 property={property}
                 isOpen={this.state.isMembersViewOpen}
                 onClose={this.onCloseMembersView}
+              />
+              <Add
+                className="project-report-page__add-member"
+                onClick={this.onOpenInviteModal}
               />
               <UserIconList
                 theme="project"
@@ -147,6 +157,8 @@ export class ProjectReportPage extends Component {
       `/projects/${project.public_id}/performance/${reportSpan}/`
     );
   };
+
+  onOpenInviteModal = () => this.props.dispatch(inviteModalActions.open);
 
   onOpenMembersView = () => this.setState({ isMembersViewOpen: true });
 

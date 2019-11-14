@@ -1,5 +1,8 @@
 @import "css/base.scss";
 
+$add-member-size: 40px;
+$add-member-spacing: 28px;
+
 .project-report-page__subheader {
     background-color: $default-background-color;
     border-bottom: solid 1px $nav-link-border-color;
@@ -29,4 +32,17 @@
     padding-top: 1.5rem;
     align-items: center;
     justify-content: space-between;
+}
+
+.project-report-page__members {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.project-report-page__add-member {
+    width: $add-member-size;
+    height: $add-member-size;
+    margin-right: $add-member-spacing;
+    cursor: pointer;
 }
