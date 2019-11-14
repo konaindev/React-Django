@@ -70,6 +70,9 @@ def export_tam_task(project_pk, user_pk, form_data):
                     }
                 ],
             )
+        else:
+            send_email_to_user(user, "email/tam_export_failed")
 
     except Exception as e:
         logger.exception(e)
+        send_email_to_user(user, "email/tam_export_failed")
