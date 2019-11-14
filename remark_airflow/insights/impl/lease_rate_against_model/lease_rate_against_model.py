@@ -24,6 +24,9 @@ def trigger(project_id, start, end):
     base_kpis = get_base_kpis_for_project(project, start, end)
     base_targets = get_targets_for_project(project, start, end)
 
+    if not base_kpis or not base_targets:
+        return None
+
     kpi = leased_rate_graph(base_kpis)
     leased_rate = kpi["leased_rate"]
     target_leased_rate = base_targets["leased_rate"]
