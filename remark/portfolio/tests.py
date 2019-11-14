@@ -23,7 +23,12 @@ from .api.table_data import get_table_structure
 
 
 def query_for_periods(project, start, end):
-    p1 = Period.objects.filter(project=project).filter(start__lte=start).order_by("start").first()
+    p1 = (
+        Period.objects.filter(project=project)
+        .filter(start__lte=start)
+        .order_by("start")
+        .first()
+    )
     print(p1)
     return p1
 
@@ -237,27 +242,21 @@ class GetTableStructureTestCase(TestCase):
 
     def test_multiple_projects(self):
         project2 = self.create_project("project 2")
-        self.create_target_period(
-            project2,
-            target_occupied_units=170
-        )
-        self.create_period(
-            project2,
-            occupiable_units_start=180
-        )
+        self.create_target_period(project2, target_occupied_units=170)
+        self.create_period(project2, occupiable_units_start=180)
 
         project3 = self.create_project("project 3")
         self.create_target_period(
             project3,
             start=date(year=2019, month=6, day=4),
             end=date(year=2019, month=6, day=11),
-            target_occupied_units=70
+            target_occupied_units=70,
         )
         self.create_period(
             project3,
             start=date(year=2019, month=6, day=4),
             end=date(year=2019, month=6, day=18),
-            occupiable_units_start=80
+            occupiable_units_start=80,
         )
 
         kpis = [KPI.leased_rate, KPI.renewal_rate, KPI.occupancy_rate]
@@ -266,9 +265,15 @@ class GetTableStructureTestCase(TestCase):
         )
 
         # TODO: Add more metrics
-        self.assertAlmostEqual(table_data[0]["targets"]["occupancy_rate"], 0.94, places=2)
-        self.assertAlmostEqual(table_data[1]["targets"]["occupancy_rate"], 0.93, places=2)
-        self.assertAlmostEqual(table_data[-1]["targets"]["occupancy_rate"], 0.93, places=2)
+        self.assertAlmostEqual(
+            table_data[0]["targets"]["occupancy_rate"], 0.94, places=2
+        )
+        self.assertAlmostEqual(
+            table_data[1]["targets"]["occupancy_rate"], 0.93, places=2
+        )
+        self.assertAlmostEqual(
+            table_data[-1]["targets"]["occupancy_rate"], 0.93, places=2
+        )
 
     # TODO: move to remark/projects/reports
     def test_get_report_data(self):
