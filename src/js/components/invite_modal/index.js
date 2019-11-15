@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { connect } from "react-redux";
 
 import Button from "../button";
 import Collapsible from "../collapsible";
@@ -22,7 +21,7 @@ import { inviteModal, dashboard } from "../../redux_base/actions";
 import SelectRole from "./select";
 import "./invite_modal.scss";
 
-class InviteModal extends React.PureComponent {
+export default class InviteModal extends React.PureComponent {
   static propTypes = {
     isOpen: PropTypes.bool,
     properties: PropTypes.arrayOf(
@@ -356,12 +355,3 @@ class InviteModal extends React.PureComponent {
     );
   }
 }
-
-const mapState = state => {
-  return {
-    ...state.inviteModal,
-    properties: state.dashboard?.selectedProperties || []
-  };
-};
-
-export default connect(mapState)(InviteModal);

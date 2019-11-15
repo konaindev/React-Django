@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import InviteModal from "../../containers/invite_modal/report";
 import { Add } from "../../icons";
 import { inviteModal as inviteModalActions } from "../../redux_base/actions";
 
@@ -17,7 +18,6 @@ import TotalAddressableMarket from "../total_addressable_market";
 import ModelingView from "../modeling_view";
 import CampaignPlan from "../campaign_plan";
 import UserIconList from "../user_icon_list";
-import InviteModal from "../invite_modal";
 import ViewMembersModal from "../invite_modal/view_members";
 
 import "./project_report_page.scss";

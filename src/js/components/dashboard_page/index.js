@@ -13,7 +13,7 @@ import Container from "../container";
 import PropertyCardList from "../property_card_list";
 import PropertyList from "../property_list";
 import ToggleButton from "../toggle_button";
-import InviteModal from "../invite_modal";
+import InviteModal from "../../containers/invite_modal/properties";
 import { Close, ListView, TileView } from "../../icons";
 import Loader from "../loader";
 
