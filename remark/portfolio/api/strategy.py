@@ -226,7 +226,7 @@ GROUP_AVERAGE_MERGE_DOC = {
     "move_ins": "average",
     "occupied_units_end": "average",
     "occupied_units_start": "average",
-    "occupiable_units_start": "median",
+    "occupiable_units_start": "average",
 
     # Cancellations & Denials
     "lease_cds": "average",
@@ -325,7 +325,7 @@ GROUP_AVERAGE_TARGET_MERGE_DOC = {
     'delta_leases': "average",
     'move_ins': "average",
     'move_outs': "average",
-    'occupied_units': "median",
+    'occupied_units': "average",
     'acq_investment': "average",
     'ret_investment': "average",
     'usvs': "average",
