@@ -223,8 +223,7 @@ class SearchMembersView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        # payload = json.loads(request.body)
-        payload = self.get_data()
+        payload = json.loads(request.body)
         value = payload.get("value", "")
         projects = Project.objects.get_all_for_user(request.user)
         groups_ids = []
