@@ -337,9 +337,12 @@ class ProjectRemoveMemberView(APIView):
         return Response({"project": projects_dict})
 
 
-class ChangeMemberRoleView(LoginRequiredMixin, APIView):
+class ChangeMemberRoleView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
     def post(self, request, project_id, user_id):
-        payload = self.get_data()
+        payload = json.loads(request.body)
         role = payload.get("role")
 
         try:

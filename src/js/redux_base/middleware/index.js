@@ -190,7 +190,7 @@ export const fetchInviteModal = store => next => action => {
   } else if (action.type === "API_INVITE_MODAL_CHANGE_ROLE") {
     const { role, property_id, member_id } = action.data;
     const data = { role };
-    const url = `${process.env.BASE_URL}/projects/${property_id}/member/${member_id}/`;
+    const url = `${process.env.BASE_URL}${URLS.ver}/projects/${property_id}/member/${member_id}/`;
     axiosPost(url, data).then(response => {
       if (response.status === 200) {
         next({
