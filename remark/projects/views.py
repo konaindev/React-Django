@@ -296,7 +296,11 @@ class AddMembersView(APIView):
                 )
 
         projects_list = [
-            {"property_id": p.public_id, "members": p.get_members()} for p in projects
+            {
+                "property_id": p.public_id,
+                "property_name": p.name,
+                "members": p.get_members(),
+            } for p in projects
         ]
         return Response({"projects": projects_list})
 
@@ -332,6 +336,7 @@ class ProjectRemoveMemberView(APIView):
         project.save()
         projects_dict = {
             "property_id": project.public_id,
+            "property_name": project.name,
             "members": project.get_members(),
         }
         return Response({"project": projects_dict})
