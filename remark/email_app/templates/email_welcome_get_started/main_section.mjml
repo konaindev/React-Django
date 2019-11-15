@@ -89,26 +89,12 @@
         alt="Baseline Reporting"
       />
       <mj-spacer height="30px" />
-      <mj-text mj-class="text-xl text-white text-center">
+      <mj-text mj-class="text-2xl text-white text-center">
         Baseline Reporting
       </mj-text>
       <mj-spacer height="10px" />
       <mj-text mj-class="text-base text-lightgray text-center">
         Gain visibility into marketing strengths and weaknesses.
-      </mj-text>
-      <mj-spacer height="100px" />
-
-      <mj-image
-        src="https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/welcome_to/market_analysis.png"
-        alt="Market Analysis"
-      />
-      <mj-spacer height="30px" />
-      <mj-text mj-class="text-2xl text-white text-center">
-        Market Analysis
-      </mj-text>
-      <mj-spacer height="10px" />
-      <mj-text mj-class="text-base text-lightgray text-center">
-        Identify your most significant revenue opportunities.
       </mj-text>
       <mj-spacer height="100px" />
 
