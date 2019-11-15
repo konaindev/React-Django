@@ -9,6 +9,7 @@ class InviteModal extends React.PureComponent {
     let properties = [];
     if (project) {
       const p = {
+        property_id: project.public_id,
         property_name: project.name,
         members: project.members
       };

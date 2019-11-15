@@ -26,6 +26,7 @@ export default class InviteModal extends React.PureComponent {
     isOpen: PropTypes.bool,
     properties: PropTypes.arrayOf(
       PropTypes.shape({
+        property_id: PropTypes.string.isRequired,
         property_name: PropTypes.string.isRequired,
         members: PropTypes.array.isRequired
       })
