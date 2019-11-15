@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Container from "../../components/container";
 import { qsParse } from "../../utils/misc";
 
-class ErrorContainer extends PureComponent {
+export class ErrorContainer extends PureComponent {
   render() {
     const { search } = this.props.location;
     const { code = "", title = "", description = "" } = qsParse(search);
@@ -22,6 +22,6 @@ class ErrorContainer extends PureComponent {
   }
 }
 
-const mapState = ({}) => ({});
+const mapState = () => ({});
 
 export default connect(mapState)(ErrorContainer);
