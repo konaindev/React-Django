@@ -1,7 +1,7 @@
 from datetime import date
 from unittest import TestCase, mock
 
-from .insights import Modifier, Insight, InsightManager
+from .core import Modifier, Insight, InsightManager
 
 
 class InsightTestCase(TestCase):
