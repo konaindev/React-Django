@@ -1,4 +1,6 @@
 const initialState = {
+  properties: [],
+  selectedProperties: [],
   fetchingProperties: true
 };
 
@@ -46,7 +48,7 @@ const reducer = (state = initialState, action) => {
       };
     case "AJAX_POST_DASHBOARD_ADD_MEMBER_SUCCESS":
     case "AJAX_POST_INVITE_MODAL_ADD_MEMBER_SUCCESS":
-      if (!state.properties) {
+      if (!state.properties.length) {
         return state;
       }
 
@@ -68,6 +70,9 @@ const reducer = (state = initialState, action) => {
         selectedProperties: []
       };
     case "AJAX_DASHBOARD_UPDATE_MEMBER_SUCCESS":
+      if (!state.properties.length) {
+        return state;
+      }
       const { property_id, members } = action.data;
       const index = state.properties.findIndex(
         p => p.property_id === property_id
