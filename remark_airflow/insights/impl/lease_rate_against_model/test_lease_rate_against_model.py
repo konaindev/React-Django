@@ -1,6 +1,7 @@
 import datetime
 import decimal
-import unittest
+
+from django.test import TestCase
 
 from remark.crm.models import Business
 from remark.geo.models import Address
@@ -17,7 +18,7 @@ from remark.users.models import Account
 from .lease_rate_against_model import LeaseRateAgainstModel
 
 
-class LeaseRateAgainstModelTestCase(unittest.TestCase):
+class LeaseRateAgainstModelTestCase(TestCase):
     def setUp(self):
         address = Address.objects.create(
             street_address_1="2284 W. Commodore Way, Suite 200",
