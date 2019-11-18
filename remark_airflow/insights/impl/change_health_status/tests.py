@@ -1,0 +1,88 @@
+import datetime
+
+from django.test import TestCase
+
+from remark.factories.projects import create_project
+from remark.factories.periods import create_periods
+
+from .change_health_status import ChangeHealthStatus
+
+
+class ChangeHealthStatusTestCase(TestCase):
+    def setUp(self):
+        project = create_project()
+        create_periods(
+            project,
+            start=datetime.date(year=2019, month=5, day=31),
+            end=datetime.date(year=2019, month=6, day=7),
+        )
+        create_periods(
+            project,
+            start=datetime.date(year=2019, month=6, day=7),
+            end=datetime.date(year=2019, month=6, day=14),
+        )
+        create_periods(
+            project,
+            start=datetime.date(year=2019, month=6, day=14),
+            end=datetime.date(year=2019, month=6, day=21),
+            period_params={"leased_units_end": 160},
+        )
+        self.project = project
+
+    def test_dont_have_period(self):
+        start = datetime.date(year=2019, month=5, day=19)
+        end = datetime.date(year=2019, month=5, day=26)
+        insights = ChangeHealthStatus(1)
+        result = insights.evaluate(self.project.public_id, start, end)
+        self.assertIsNone(result)
+
+    def test_first_period(self):
+        start = datetime.date(year=2019, month=5, day=31)
+        end = datetime.date(year=2019, month=6, day=7)
+        insights = ChangeHealthStatus(1)
+        result = insights.evaluate(self.project.public_id, start, end)
+        self.assertIsNone(result)
+
+    def test_last_period(self):
+        start = datetime.date(year=2019, month=6, day=14)
+        end = datetime.date(year=2019, month=6, day=21)
+        insights = ChangeHealthStatus(1)
+        result = insights.evaluate(self.project.public_id, start, end)
+        self.assertIsInstance(result, tuple)
+        name, text = result
+        expected_name = ["Change Health Status"]
+        expected_text = (
+            f"Campaign health has changed from On Track "
+            f"to At Risk during this period."
+        )
+        self.assertCountEqual(name, expected_name)
+        self.assertEqual(text, expected_text)
+
+    def test_after_period(self):
+        start = datetime.date(year=2019, month=6, day=21)
+        end = datetime.date(year=2019, month=6, day=28)
+        insights = ChangeHealthStatus(1)
+        result = insights.evaluate(self.project.public_id, start, end)
+        self.assertIsNone(result)
+
+    def test_health_not_changes(self):
+        start = datetime.date(year=2019, month=6, day=7)
+        end = datetime.date(year=2019, month=6, day=14)
+        insights = ChangeHealthStatus(1)
+        result = insights.evaluate(self.project.public_id, start, end)
+        self.assertIsNone(result)
+
+    def test_multiple_period(self):
+        start = datetime.date(year=2019, month=6, day=7)
+        end = datetime.date(year=2019, month=6, day=21)
+        insights = ChangeHealthStatus(1)
+        result = insights.evaluate(self.project.public_id, start, end)
+        self.assertIsInstance(result, tuple)
+        name, text = result
+        expected_name = ["Change Health Status"]
+        expected_text = (
+            f"Campaign health has changed from On Track "
+            f"to At Risk during this period."
+        )
+        self.assertCountEqual(name, expected_name)
+        self.assertEqual(text, expected_text)
