@@ -3,6 +3,7 @@
 exports[`UserIconList render default 1`] = `
 <div
   className="user-icon-list"
+  onClick={[Function]}
 >
   <div
     className="user-icon user-icon-list__icon"

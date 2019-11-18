@@ -8,20 +8,14 @@ import { props, multiProps } from "./props";
 
 jest.mock("react-responsive-modal", () => "Modal");
 
-const _ = x =>
-  createStore(() => ({
-    inviteModal: x,
-    general: {
-      selectedProperties: x.properties
-    }
-  }));
+const store = createStore(() => ({}));
 
 describe("InviteModal", () => {
   it("renders with single properties", () => {
     const tree = renderer
       .create(
-        <Provider store={_(props)}>
-          <InviteModal />
+        <Provider store={store}>
+          <InviteModal {...props} />
         </Provider>
       )
       .toJSON();
@@ -30,8 +24,8 @@ describe("InviteModal", () => {
   it("renders with multiple properties", () => {
     const tree = renderer
       .create(
-        <Provider store={_(multiProps)}>
-          <InviteModal />
+        <Provider store={store}>
+          <InviteModal {...multiProps} />
         </Provider>
       )
       .toJSON();

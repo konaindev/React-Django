@@ -62,6 +62,7 @@ exports[`PropertyCardList renders correctly 1`] = `
           >
             <div
               className="user-icon-list"
+              onClick={[Function]}
             />
           </div>
         </div>
@@ -145,6 +146,7 @@ exports[`PropertyCardList renders correctly 1`] = `
           >
             <div
               className="user-icon-list"
+              onClick={[Function]}
             />
           </div>
         </div>
@@ -228,6 +230,7 @@ exports[`PropertyCardList renders correctly 1`] = `
           >
             <div
               className="user-icon-list"
+              onClick={[Function]}
             />
           </div>
         </div>
@@ -311,6 +314,7 @@ exports[`PropertyCardList renders correctly 1`] = `
           >
             <div
               className="user-icon-list"
+              onClick={[Function]}
             />
           </div>
         </div>
@@ -394,6 +398,7 @@ exports[`PropertyCardList renders correctly 1`] = `
           >
             <div
               className="user-icon-list"
+              onClick={[Function]}
             />
           </div>
         </div>
@@ -477,6 +482,7 @@ exports[`PropertyCardList renders correctly 1`] = `
           >
             <div
               className="user-icon-list"
+              onClick={[Function]}
             />
           </div>
         </div>
@@ -560,6 +566,7 @@ exports[`PropertyCardList renders correctly 1`] = `
           >
             <div
               className="user-icon-list"
+              onClick={[Function]}
             />
           </div>
         </div>
@@ -643,6 +650,7 @@ exports[`PropertyCardList renders correctly 1`] = `
           >
             <div
               className="user-icon-list"
+              onClick={[Function]}
             />
           </div>
         </div>
@@ -726,6 +734,7 @@ exports[`PropertyCardList renders correctly 1`] = `
           >
             <div
               className="user-icon-list"
+              onClick={[Function]}
             />
           </div>
         </div>
@@ -809,6 +818,7 @@ exports[`PropertyCardList renders correctly 1`] = `
           >
             <div
               className="user-icon-list"
+              onClick={[Function]}
             />
           </div>
         </div>
