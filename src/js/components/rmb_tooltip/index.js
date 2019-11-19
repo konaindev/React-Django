@@ -45,3 +45,5 @@ RMBTooltip.propTypes = {
 };
 
 export default RMBTooltip;
+
+export { default as TooltipAnchor } from "./rmb_tooltip_anchor";
