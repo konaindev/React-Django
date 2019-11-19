@@ -67,6 +67,7 @@ export default class CampaignInvestmentReport extends Component {
         />
         <LargeCurrencyShorthandBox
           name="Est. Revenue Change"
+          infoTooltip="est_revenue_change"
           value={r.investment.total.estimated_revenue_gain}
           target={r.targets?.investment?.total?.estimated_revenue_gain}
           symbolType="sign"
@@ -78,6 +79,7 @@ export default class CampaignInvestmentReport extends Component {
               Marketing Investment (ROMI)
             </>
           }
+          infoTooltip="campaign_return_on_marketing_investment"
           value={r.investment.total.romi}
           target={r.targets?.investment?.total?.romi}
           symbolType="multiple"

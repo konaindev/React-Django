@@ -5,6 +5,7 @@ import FormattedMultiple from "../formatted_multiple";
 import Panel from "../panel";
 import Tooltip from "../rmb_tooltip";
 import withFormatters from "../with_formatters";
+import withInfoTooltip from "../with_info_tooltip";
 import {
   formatMultiple,
   formatPercent,
@@ -26,9 +27,10 @@ import "./small_box_layout.scss";
  *
  * @note This provides layout; it shouldn't concern itself with value semantics.
  */
-class SmallBoxLayout extends Component {
+class SmallBoxLayoutBase extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
+    renderInfoTooltip: PropTypes.func.isRequired,
     content: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
       .isRequired,
     detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
@@ -36,7 +38,14 @@ class SmallBoxLayout extends Component {
   };
 
   render() {
-    const { content, detail, detail2, name, tooltip } = this.props;
+    const {
+      content,
+      detail,
+      detail2,
+      name,
+      tooltip,
+      renderInfoTooltip
+    } = this.props;
     const contentValue = (
       <span className="small-box__inner-content">{content}</span>
     );
@@ -63,10 +72,13 @@ class SmallBoxLayout extends Component {
             contentValue
           )}
         </div>
+        {renderInfoTooltip()}
       </Panel>
     );
   }
 }
+
+const SmallBoxLayout = withInfoTooltip(SmallBoxLayoutBase);
 
 // Define SmallBoxLayouts that take values and targets of various types.
 

@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import _get from "lodash/get";
 
 import FormattedMultiple from "../formatted_multiple";
 import Panel from "../panel";
-import Tooltip, { TooltipAnchor } from "../rmb_tooltip";
+import Tooltip from "../rmb_tooltip";
 import withFormatters from "../with_formatters";
+import withInfoTooltip from "../with_info_tooltip";
 import {
   formatMultiple,
   formatPercent,
@@ -31,7 +30,7 @@ import "./large_box_layout.scss";
 export class LargeBoxLayoutBase extends Component {
   static propTypes = {
     name: PropTypes.node.isRequired,
-    infoTooltip: PropTypes.string,
+    renderInfoTooltip: PropTypes.func.isRequired,
     content: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
       .isRequired,
     detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
@@ -48,7 +47,7 @@ export class LargeBoxLayoutBase extends Component {
       detail,
       detail2,
       tooltip,
-      infoTooltipContent
+      renderInfoTooltip
     } = this.props;
     const contentValue = (
       <span className="large-box__content-value">{content}</span>
@@ -74,28 +73,13 @@ export class LargeBoxLayoutBase extends Component {
         </div>
         <p className="large-box__bottom-line">{detail}</p>
         <p className="large-box__bottom-line">{detail2}</p>
-        {infoTooltipContent && (
-          <Tooltip text={infoTooltipContent} placement="top" theme="light-dark">
-            <TooltipAnchor />
-          </Tooltip>
-        )}
+        {renderInfoTooltip()}
       </Panel>
     );
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const language = _get(state, "uiStrings.language");
-  const texts = _get(state, `uiStrings.strings.${language}`, {});
-  const infoTooltipKey = ownProps.infoTooltip;
-  const infoTooltipContent = texts[`${infoTooltipKey}.tooltip`];
-
-  return {
-    infoTooltipContent
-  };
-};
-
-export const LargeBoxLayout = connect(mapStateToProps)(LargeBoxLayoutBase);
+export const LargeBoxLayout = withInfoTooltip(LargeBoxLayoutBase);
 
 // Define LargeBoxLayouts that take values and targets of various types.
 

@@ -204,6 +204,7 @@ const AcquisitionDetails = ({ report: r }) => {
       />
       <SmallNumberBox
         name="Acquisition ROMI"
+        infoTooltip="acquisition_romi"
         value={r.investment.acquisition.romi}
         target={r.targets?.investment?.acquisition?.romi}
         symbolType="multiple"
@@ -238,6 +239,7 @@ const RetentionDetails = ({ report: r }) => {
       />
       <SmallNumberBox
         name="Retention ROMI"
+        infoTooltip="retention_romi"
         value={r.investment.retention.romi}
         target={r.targets?.investment?.retention?.romi}
         symbolType="multiple"
