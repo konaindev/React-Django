@@ -72,6 +72,7 @@ exports[`PropertyList renders correctly 1`] = `
       >
         <div
           className="user-icon-list"
+          onClick={[Function]}
         >
           <div
             className="user-icon user-icon-list__icon"
@@ -211,6 +212,7 @@ exports[`PropertyList renders correctly 1`] = `
       >
         <div
           className="user-icon-list"
+          onClick={[Function]}
         >
           <div
             className="user-icon user-icon-list__icon"
@@ -350,6 +352,7 @@ exports[`PropertyList renders correctly 1`] = `
       >
         <div
           className="user-icon-list"
+          onClick={[Function]}
         >
           <div
             className="user-icon user-icon-list__icon"
@@ -445,6 +448,7 @@ exports[`PropertyList renders correctly 1`] = `
       >
         <div
           className="user-icon-list"
+          onClick={[Function]}
         >
           <div
             className="user-icon user-icon-list__icon"
@@ -636,6 +640,7 @@ exports[`PropertyList renders correctly 1`] = `
       >
         <div
           className="user-icon-list"
+          onClick={[Function]}
         />
       </div>
     </div>
@@ -708,6 +713,7 @@ exports[`PropertyList renders correctly 1`] = `
       >
         <div
           className="user-icon-list"
+          onClick={[Function]}
         />
       </div>
     </div>
@@ -780,6 +786,7 @@ exports[`PropertyList renders correctly 1`] = `
       >
         <div
           className="user-icon-list"
+          onClick={[Function]}
         />
       </div>
     </div>
@@ -852,6 +859,7 @@ exports[`PropertyList renders correctly 1`] = `
       >
         <div
           className="user-icon-list"
+          onClick={[Function]}
         />
       </div>
     </div>
@@ -924,6 +932,7 @@ exports[`PropertyList renders correctly 1`] = `
       >
         <div
           className="user-icon-list"
+          onClick={[Function]}
         />
       </div>
     </div>
@@ -996,6 +1005,7 @@ exports[`PropertyList renders correctly 1`] = `
       >
         <div
           className="user-icon-list"
+          onClick={[Function]}
         />
       </div>
     </div>

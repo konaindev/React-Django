@@ -171,14 +171,35 @@ class User(PermissionsMixin, AbstractBaseUser):
             name = self.email
         return name
 
+    def get_avatar_url(self):
+        try:
+            person = self.person
+            if person and person.avatar:
+                url = person.avatar.url
+            else:
+                url = ""
+        except Person.DoesNotExist:
+            url = ""
+        return url
+
+    def get_business_name(self):
+        try:
+            p = self.person
+            if not p:
+                return None
+        except Person.DoesNotExist:
+            return None
+        return p.office.business.name
+
     def get_icon_dict(self, role=PROJECT_ROLES["member"]):
         return {
             "email": self.email,
             "user_id": self.public_id,
             "account_name": self.get_name(),
+            "profile_image_url": self.get_avatar_url(),
             "role": role,
+            "business_name": self.get_business_name(),
         }
-
 
 
 class Account(models.Model):

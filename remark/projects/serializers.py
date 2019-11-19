@@ -1,7 +1,10 @@
 from rest_framework import serializers
 
+from remark.users.constants import PROJECT_ROLES
+
 from .models import Project
 from .reports.selectors import ReportLinks
+
 
 class ProjectSerializer(serializers.ModelSerializer):
     building_logo = serializers.SerializerMethodField()
@@ -10,6 +13,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     campaign_start = serializers.SerializerMethodField()
     campaign_end = serializers.SerializerMethodField()
     report_links = serializers.SerializerMethodField()
+    members = serializers.SerializerMethodField()
 
     class Meta:
         model = Project
@@ -22,6 +26,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             "campaign_start",
             "campaign_end",
             "report_links",
+            "members",
             "is_baseline_report_shared",
             "is_tam_shared",
             "is_performance_report_shared",
@@ -53,3 +58,17 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     def get_report_links(self, obj):
         return ReportLinks.public_for_project(obj)
+
+    def get_members(self, obj):
+        members = obj.get_members()
+        result = []
+        current_user = self.context["request"].user
+        user_item = []
+        for m in members:
+            if m["user_id"] == current_user.public_id:
+                user_item = [m]
+            else:
+                result.append(m)
+        for u in user_item:
+            u["is_current"] = True
+        return user_item + result

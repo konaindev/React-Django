@@ -1,6 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
+import { InviteModalReport } from "../../containers/invite_modal";
+import { ViewMembersReport } from "../../containers/view_members";
+import { Add } from "../../icons";
+import {
+  inviteModal as inviteModalActions,
+  viewMembersModal as viewMembersActions
+} from "../../redux_base/actions";
+
 import Loader from "../loader";
 import ReportLinks from "../report_links";
 import ShareToggle from "../share_toggle";
@@ -13,6 +21,7 @@ import CommonReport from "../common_report";
 import TotalAddressableMarket from "../total_addressable_market";
 import ModelingView from "../modeling_view";
 import CampaignPlan from "../campaign_plan";
+import UserIconList from "../user_icon_list";
 
 import "./project_report_page.scss";
 
@@ -28,7 +37,8 @@ export class ProjectReportPage extends Component {
     share_info: PropTypes.object,
     backUrl: PropTypes.string,
     fetchingReports: PropTypes.bool,
-    historyPush: PropTypes.func.isRequired
+    historyPush: PropTypes.func.isRequired,
+    dispatch: PropTypes.func.isRequired
   };
 
   static defaultProps = {
@@ -46,13 +56,30 @@ export class ProjectReportPage extends Component {
     return (
       <section className="project-report-page__subheader">
         <div className="container">
-          <div className="subheader-project-link">
-            <ProjectLink
-              name={project.name}
-              url={backUrl}
-              imageUrl={projectImage}
-              health={project.health}
-            />
+          <div className="project-report-page__subnav">
+            <div>
+              <ProjectLink
+                name={project.name}
+                url={backUrl}
+                imageUrl={projectImage}
+                health={project.health}
+              />
+            </div>
+            <div className="project-report-page__members">
+              <InviteModalReport />
+              <ViewMembersReport />
+              <Add
+                className="project-report-page__add-member"
+                onClick={this.onOpenInviteModal}
+              />
+              <UserIconList
+                theme="project"
+                tooltipPlacement="bottom"
+                tooltipTheme="dark"
+                users={project.members}
+                onClick={this.onOpenMembersView}
+              />
+            </div>
           </div>
           <div className="subheader-report-tabs">
             <ReportLinks
@@ -121,6 +148,10 @@ export class ProjectReportPage extends Component {
       `/projects/${project.public_id}/performance/${reportSpan}/`
     );
   };
+
+  onOpenInviteModal = () => this.props.dispatch(inviteModalActions.open);
+
+  onOpenMembersView = () => this.props.dispatch(viewMembersActions.open);
 
   render() {
     const { fetchingReports, project, report } = this.props;

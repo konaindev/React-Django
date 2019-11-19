@@ -3,25 +3,19 @@ import renderer from "react-test-renderer";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 
-import InviteModal from "./index";
+import { InviteModalUI, ViewMembersModalUI } from "./index";
 import { props, multiProps } from "./props";
 
 jest.mock("react-responsive-modal", () => "Modal");
 
-const _ = x =>
-  createStore(() => ({
-    inviteModal: x,
-    general: {
-      selectedProperties: x.properties
-    }
-  }));
+const store = createStore(() => ({}));
 
-describe("InviteModal", () => {
+describe("InviteModalUI", () => {
   it("renders with single properties", () => {
     const tree = renderer
       .create(
-        <Provider store={_(props)}>
-          <InviteModal />
+        <Provider store={store}>
+          <InviteModalUI {...props} />
         </Provider>
       )
       .toJSON();
@@ -30,9 +24,20 @@ describe("InviteModal", () => {
   it("renders with multiple properties", () => {
     const tree = renderer
       .create(
-        <Provider store={_(multiProps)}>
-          <InviteModal />
+        <Provider store={store}>
+          <InviteModalUI {...multiProps} />
         </Provider>
+      )
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
+});
+
+describe("ViewMembersModalUI", () => {
+  it("renders members", () => {
+    const tree = renderer
+      .create(
+        <ViewMembersModalUI property={props.properties[0]} isOpen={true} />
       )
       .toJSON();
     expect(tree).toMatchSnapshot();

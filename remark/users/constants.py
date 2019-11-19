@@ -70,5 +70,6 @@ VALIDATION_RULES = [
 
 PROJECT_ROLES = {
     "member": "member",
-    "admin": "admin"
+    "admin": "admin",
+    "staff": "staff"
 }
