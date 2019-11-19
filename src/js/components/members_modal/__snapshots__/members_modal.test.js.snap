@@ -3447,3 +3447,106 @@ Array [
   </Modal>,
 ]
 `;
+
+exports[`ViewMembersModalUI renders members 1`] = `
+<Modal
+  center={true}
+  classNames={
+    Object {
+      "closeButton": "modal-window__close",
+      "modal": "modal-window modal-window--small invite-modal",
+      "overlay": "modal-overlay",
+    }
+  }
+  closeOnOverlayClick={true}
+  focusTrapped={false}
+  onClose={[Function]}
+  open={true}
+  styles={
+    Object {
+      "closeIcon": Object {
+        "display": "none",
+      },
+    }
+  }
+>
+  <div
+    className="modal-window__head invite-modal__header"
+  >
+    <div
+      className="invite-modal__title"
+    >
+      Members of
+    </div>
+    <div
+      className="invite-modal__title invite-modal__title--name"
+    >
+       
+      Meridian SLC
+    </div>
+  </div>
+  <div
+    className="modal-window__body"
+  >
+    <div
+      className="invite-modal__container invite-modal__container--users"
+    >
+      <div
+        className="invite-modal__member"
+      >
+        <div
+          className="user-row"
+          role="admin"
+          user_id="1234556960"
+        >
+          <div
+            className="user-icon user-row__avatar"
+            style={
+              Object {
+                "backgroundColor": undefined,
+              }
+            }
+          >
+            RC
+            <div
+              className="user-icon__avatar"
+              style={
+                Object {
+                  "backgroundImage": "url(https://storage.googleapis.com/tracker-avatar-production/a11569ffecab2b5564c0cbfa5e5f283a_3140620_96.png)",
+                }
+              }
+            />
+          </div>
+          <div>
+            <div
+              className="user-row__name"
+            >
+              Remarkably Client
+            </div>
+            <div
+              className="user-row__email"
+            >
+              test@remarkably.io
+            </div>
+          </div>
+        </div>
+        <div
+          className="invite-modal__role"
+        >
+          Admin
+        </div>
+      </div>
+    </div>
+    <div
+      className="invite-modal__container invite-modal__container--button"
+    >
+      <button
+        className="button button--uppercase button--primary invite-modal__button"
+        onClick={[Function]}
+      >
+        okay
+      </button>
+    </div>
+  </div>
+</Modal>
+`;
