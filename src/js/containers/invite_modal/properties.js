@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { default as InviteModalUI } from "../../components/invite_modal";
+import { InviteModalUI } from "../../components/members_modal";
 
 class InviteModal extends React.PureComponent {
   render() {

@@ -1,29 +1,26 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { connect } from "react-redux";
 
-import { Close } from "../../icons";
+import { viewMembersModal as actions } from "../../redux_base/actions";
+
 import Button from "../button";
 import ModalWindow from "../modal_window";
 import UserRow from "../user_row";
 
-import InviteModal from "./index";
+import InviteModal from "./invite";
+import "./members_modal.scss";
 
-import "./invite_modal.scss";
-
-class ViewMembersModal extends React.PureComponent {
+export default class ViewMembersModalUI extends React.PureComponent {
   static propTypes = {
     property: PropTypes.shape({
       property_name: PropTypes.string.isRequired,
       members: PropTypes.array.isRequired
     }).isRequired,
-    isOpen: PropTypes.bool,
-    onClose: PropTypes.func
+    isOpen: PropTypes.bool
   };
 
   static defaultProps = {
-    isOpen: false,
-    onClose() {}
+    isOpen: false
   };
 
   renderMembers = () => {
@@ -46,15 +43,17 @@ class ViewMembersModal extends React.PureComponent {
     });
   };
 
+  onClose = () => this.props.dispatch(actions.close);
+
   render() {
-    const { property, isOpen, onClose } = this.props;
+    const { property, isOpen } = this.props;
     return (
       <>
         <ModalWindow
           className="invite-modal"
           theme="small"
           open={isOpen}
-          onClose={onClose}
+          onClose={this.onClose}
         >
           <ModalWindow.Head className="invite-modal__header">
             <React.Fragment>
@@ -73,7 +72,7 @@ class ViewMembersModal extends React.PureComponent {
                 className="invite-modal__button"
                 color="primary"
                 uppercase={true}
-                onClick={this.props.onClose}
+                onClick={this.onClose}
               >
                 okay
               </Button>
@@ -84,5 +83,3 @@ class ViewMembersModal extends React.PureComponent {
     );
   }
 }
-
-export default ViewMembersModal;

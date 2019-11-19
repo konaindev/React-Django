@@ -19,9 +19,9 @@ import { isValidEmail } from "../../utils/validators";
 import { inviteModal, dashboard } from "../../redux_base/actions";
 
 import SelectRole from "./select";
-import "./invite_modal.scss";
+import "./members_modal.scss";
 
-export default class InviteModal extends React.PureComponent {
+export default class InviteModalUI extends React.PureComponent {
   static propTypes = {
     isOpen: PropTypes.bool,
     properties: PropTypes.arrayOf(
@@ -55,7 +55,7 @@ export default class InviteModal extends React.PureComponent {
     }
   ];
 
-  static initRole = InviteModal.roleOptions[1];
+  static initRole = InviteModalUI.roleOptions[1];
 
   static selectRoleComponents = {
     Menu: MenuWithDescription,
@@ -79,7 +79,7 @@ export default class InviteModal extends React.PureComponent {
     this.selectSearchRef = React.createRef();
     this.state = {
       selectedMembers: [],
-      inviteRole: InviteModal.initRole
+      inviteRole: InviteModalUI.initRole
     };
   }
 
@@ -154,7 +154,7 @@ export default class InviteModal extends React.PureComponent {
         }
       })
     );
-    this.setState({ inviteRole: InviteModal.initRole });
+    this.setState({ inviteRole: InviteModalUI.initRole });
   };
 
   formatOptionLabel = data => data.account_name || data.value;
@@ -186,7 +186,7 @@ export default class InviteModal extends React.PureComponent {
     }
     const adminCount = property.members.filter(m => m.role === "admin").length;
     return property.members.map(member => {
-      const role = InviteModal.roleOptions.find(r => r.value === member.role);
+      const role = InviteModalUI.roleOptions.find(r => r.value === member.role);
       return (
         <div className="invite-modal__member" key={member.user_id}>
           <UserRow {...member} />
@@ -195,8 +195,8 @@ export default class InviteModal extends React.PureComponent {
             property={property}
             role={role}
             adminCount={adminCount}
-            components={InviteModal.selectRoleComponents}
-            roleOptions={InviteModal.roleOptions}
+            components={InviteModalUI.selectRoleComponents}
+            roleOptions={InviteModalUI.roleOptions}
             openRemoveModal={this.openRemoveModal}
             onChangeRole={this.changeRole}
           />
@@ -282,9 +282,9 @@ export default class InviteModal extends React.PureComponent {
                 size="small"
                 placeholder="Name or email"
                 noOptionsMessage={this.noOptionsMessage}
-                styles={InviteModal.searchStyle}
+                styles={InviteModalUI.searchStyle}
                 isMulti={true}
-                components={InviteModal.selectUsersComponents}
+                components={InviteModalUI.selectUsersComponents}
                 loadOptions={this.loadUsers}
                 isCreatable={true}
                 isValidNewOption={isValidEmail}
@@ -297,8 +297,8 @@ export default class InviteModal extends React.PureComponent {
                 className="invite-modal__select-role"
                 theme="default"
                 size="small"
-                components={InviteModal.selectRoleComponents}
-                options={InviteModal.roleOptions}
+                components={InviteModalUI.selectRoleComponents}
+                options={InviteModalUI.roleOptions}
                 value={this.state.inviteRole}
                 onChange={this.changeInviteRoleHandler}
               />

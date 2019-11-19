@@ -3,19 +3,19 @@ import renderer from "react-test-renderer";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 
-import InviteModal from "./index";
+import { InviteModalUI } from "./index";
 import { props, multiProps } from "./props";
 
 jest.mock("react-responsive-modal", () => "Modal");
 
 const store = createStore(() => ({}));
 
-describe("InviteModal", () => {
+describe("InviteModalUI", () => {
   it("renders with single properties", () => {
     const tree = renderer
       .create(
         <Provider store={store}>
-          <InviteModal {...props} />
+          <InviteModalUI {...props} />
         </Provider>
       )
       .toJSON();
@@ -25,7 +25,7 @@ describe("InviteModal", () => {
     const tree = renderer
       .create(
         <Provider store={store}>
-          <InviteModal {...multiProps} />
+          <InviteModalUI {...multiProps} />
         </Provider>
       )
       .toJSON();

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`InviteModal renders with multiple properties 1`] = `
+exports[`InviteModalUI renders with multiple properties 1`] = `
 Array [
   <Modal
     center={true}
@@ -3034,7 +3034,7 @@ Array [
 ]
 `;
 
-exports[`InviteModal renders with single properties 1`] = `
+exports[`InviteModalUI renders with single properties 1`] = `
 Array [
   <Modal
     center={true}

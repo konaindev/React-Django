@@ -5,6 +5,7 @@ export { default as dashboard } from "./dashboard";
 export { default as portfolio } from "./portfolio";
 export { default as projectReports } from "./project_reports";
 export { default as inviteModal } from "./invite_modal";
+export { default as viewMembersModal } from "./view_members";
 
 export const tutorial = {
   set: newState => ({

@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import InviteModal from "../../containers/invite_modal/report";
+import { InviteModalReport } from "../../containers/invite_modal";
+import { ViewMembersReport } from "../../containers/view_members";
 import { Add } from "../../icons";
-import { inviteModal as inviteModalActions } from "../../redux_base/actions";
+import {
+  inviteModal as inviteModalActions,
+  viewMembersModal as viewMembersActions
+} from "../../redux_base/actions";
 
 import Loader from "../loader";
 import ReportLinks from "../report_links";
@@ -18,7 +22,6 @@ import TotalAddressableMarket from "../total_addressable_market";
 import ModelingView from "../modeling_view";
 import CampaignPlan from "../campaign_plan";
 import UserIconList from "../user_icon_list";
-import ViewMembersModal from "../invite_modal/view_members";
 
 import "./project_report_page.scss";
 
@@ -42,13 +45,6 @@ export class ProjectReportPage extends Component {
     backUrl: "/dashboard"
   };
 
-  state = { isMembersViewOpen: false };
-
-  getProperty = () => ({
-    property_name: this.props.project.name,
-    members: this.props.project.members
-  });
-
   renderSubheader = () => {
     const { project, share_info, backUrl, reportType } = this.props;
 
@@ -57,7 +53,6 @@ export class ProjectReportPage extends Component {
       projectImage = project.building_image[2];
     }
 
-    const property = this.getProperty();
     return (
       <section className="project-report-page__subheader">
         <div className="container">
@@ -71,12 +66,8 @@ export class ProjectReportPage extends Component {
               />
             </div>
             <div className="project-report-page__members">
-              <InviteModal />
-              <ViewMembersModal
-                property={property}
-                isOpen={this.state.isMembersViewOpen}
-                onClose={this.onCloseMembersView}
-              />
+              <InviteModalReport />
+              <ViewMembersReport />
               <Add
                 className="project-report-page__add-member"
                 onClick={this.onOpenInviteModal}
@@ -160,9 +151,7 @@ export class ProjectReportPage extends Component {
 
   onOpenInviteModal = () => this.props.dispatch(inviteModalActions.open);
 
-  onOpenMembersView = () => this.setState({ isMembersViewOpen: true });
-
-  onCloseMembersView = () => this.setState({ isMembersViewOpen: false });
+  onOpenMembersView = () => this.props.dispatch(viewMembersActions.open);
 
   render() {
     const { fetchingReports, project, report } = this.props;
