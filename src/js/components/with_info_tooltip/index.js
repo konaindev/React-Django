@@ -7,8 +7,8 @@ import Tooltip, { TooltipAnchor } from "../rmb_tooltip";
 
 /**
  * @description Wraps a component to inject info tooltip
- * accepts "infoTooltip" i18n key prop which is used to read from redux store
- * converts it into a node which is <Tooltip> component
+ * accepts "infoTooltip" prop which is used to read i18n text from redux store
+ * injects a new prop "renderInfoTooltip" which renders informational tooltip component
  */
 const withInfoToolip = WrappedComponent => {
   class ComponentToConnect extends Component {
@@ -42,8 +42,15 @@ const withInfoToolip = WrappedComponent => {
     const language = _get(state, "uiStrings.language");
     const texts = _get(state, `uiStrings.strings.${language}`, {});
 
+    let infoTooltipText, infoTooltipKey;
+    if (infoTooltip) {
+      infoTooltipKey = `${infoTooltip}.tooltip`;
+      // fallback to i18n key itself in case of missing i18n translation text
+      infoTooltipText = texts[infoTooltipKey] || infoTooltipKey;
+    }
+
     return {
-      infoTooltipText: texts[`${infoTooltip}.tooltip`]
+      infoTooltipText
     };
   };
 
