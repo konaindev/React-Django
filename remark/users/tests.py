@@ -4,6 +4,7 @@ import datetime
 from rest_framework import status
 from rest_framework.test import APITestCase
 from django.utils import timezone, crypto
+from parameterized import parameterized
 from unittest import mock
 
 from remark.geo.models import Address
@@ -397,6 +398,108 @@ class ResendInviteTestCase(APITestCase):
         )
         mock_send_email.apply_async.assert_not_called()
 
+
+class AccountSecurityTestCase(TestCase):
+    def setUp(self):
+        address = Address.objects.create(
+            street_address_1="2284 W. Commodore Way, Suite 200",
+            city="Seattle",
+            state="WA",
+            zip_code=98199,
+            country="US",
+        )
+        account = Account.objects.create(
+            company_name="test", address=address, account_type=4
+        )
+        self.user = User.objects.create_user(
+            account=account,
+            email="test@test.com",
+            password="testpassword",
+            activated=datetime.datetime.now(timezone.utc)
+        )
+        self.url = reverse("account_security")
+        self.client.login(email="test@test.com", password="testpassword")
+
+    def test_email_update(self):
+        data = {"email": "new@test.com"}
+        response = self.client.post(self.url, data, "application/json")
+        self.assertEqual(200, response.status_code)
+        user = User.objects.get(public_id=self.user.public_id)
+        self.assertEqual(data["email"], user.email)
+
+    def test_password_update(self):
+        data = {
+            "email": "test@test.com",
+            "old_password": "testpassword",
+            "password": "testtesttest",
+            "confirm_password": "testtesttest",
+        }
+        response = self.client.post(self.url, data, "application/json")
+        self.assertEqual(200, response.status_code)
+        user = User.objects.get(public_id=self.user.public_id)
+        self.assertTrue(user.check_password(data["password"]))
+
+    def test_set_wrong_email(self):
+        data = {"email": "new@test"}
+        response = self.client.post(self.url, data, "application/json")
+        self.assertEqual(500, response.status_code)
+        errors = response.json()
+        self.assertIn("email", errors)
+        self.assertIsNotNone(errors["email"])
+        user = User.objects.get(public_id=self.user.public_id)
+        self.assertEqual(self.user.email, user.email)
+
+    def test_password_not_confirmed(self):
+        data = {
+            "email": "test@test.com",
+            "old_password": "testpassword",
+            "password": "testtesttest",
+            "confirm_password": "bad",
+        }
+        response = self.client.post(self.url, data, "application/json")
+        self.assertEqual(500, response.status_code)
+        errors = response.json()
+        self.assertIn("__all__", errors)
+        self.assertEqual("New passwords don’t match.", errors["__all__"][0]["message"])
+        user = User.objects.get(public_id=self.user.public_id)
+        self.assertTrue(user.check_password(data["old_password"]))
+
+    def test_old_password_not_match(self):
+        data = {
+            "email": "test@test.com",
+            "old_password": "password",
+            "password": "testtesttest",
+            "confirm_password": "testtesttest",
+        }
+        response = self.client.post(self.url, data, "application/json")
+        self.assertEqual(500, response.status_code)
+        errors = response.json()
+        self.assertIn("old_password", errors)
+        self.assertIsNotNone(errors["old_password"])
+        user = User.objects.get(public_id=self.user.public_id)
+        self.assertTrue(user.check_password("testpassword"))
+
+    @parameterized.expand([
+        ["test"],
+        ["password"],
+        ["11111111"],
+        ["test@test.com"],
+    ])
+    def test_wrong_password(self, password):
+        data = {
+            "email": "test@test.com",
+            "old_password": "testpassword",
+            "password": password,
+            "confirm_password": password,
+        }
+        response = self.client.post(self.url, data, "application/json")
+        self.assertEqual(500, response.status_code)
+        errors = response.json()
+        self.assertIn("password", errors)
+        self.assertIsNotNone(errors["password"])
+        user = User.objects.get(public_id=self.user.public_id)
+        self.assertTrue(user.check_password("testpassword"))
+        
 
 class CompleteAccountTestCase(APITestCase):
     def setUp(self):

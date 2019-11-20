@@ -14,6 +14,10 @@ import {
   logoutMiddleware,
   fetchInviteModal,
   fetchUIString,
+  fetchAccountProperties,
+  updateAccountSecurity,
+  updateAccountProfile,
+  updateReportsSettings,
   refreshToken
 } from "./middleware";
 import rootSaga from "./sagas";
@@ -45,6 +49,10 @@ export default () => {
         logoutMiddleware,
         fetchInviteModal,
         fetchUIString,
+        fetchAccountProperties,
+        updateAccountSecurity,
+        updateAccountProfile,
+        updateReportsSettings,
         refreshToken,
         sagaMiddleware
       )

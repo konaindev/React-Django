@@ -1,42 +1,112 @@
+import _has from "lodash/has";
+import _isEqual from "lodash/isEqual";
+import _pickBy from "lodash/pickBy";
 import PropTypes from "prop-types";
 import React from "react";
 
+import { Tick } from "../../icons";
+import { accountSettings } from "../../state/actions";
+
 import Button from "../button";
 import ButtonToggle, { STATE_ENUM as TOGGLE_STATE } from "../button_toggle";
-import { Tick } from "../../icons";
 import EmailReportingTable from "../email_reporting_table";
 import { SearchWithSort } from "../search_input/search_with_sort";
 import TabNavigator, { Tab } from "../tab_navigator";
 
+const TYPING_TIMEOUT = 300;
+
 export default class EmailReports extends React.PureComponent {
   static propTypes = {
     initialTab: PropTypes.oneOf(["portfolio", "group", "property"]),
-    portfolioProperties: PropTypes.arrayOf(PropTypes.object).isRequired,
-    groupsProperties: PropTypes.arrayOf(PropTypes.object).isRequired,
-    properties: PropTypes.arrayOf(PropTypes.object).isRequired,
+    tabsOrder: PropTypes.array,
+    properties: PropTypes.arrayOf(PropTypes.object),
+    portfolioProperties: PropTypes.arrayOf(PropTypes.object),
+    groupsProperties: PropTypes.arrayOf(PropTypes.object),
+    initialSort: PropTypes.oneOf(["desc", "asc"]),
+    pageNum: PropTypes.number,
+    hasNextPage: PropTypes.bool,
     onGroupsSort: PropTypes.func,
     onPropertiesSort: PropTypes.func,
     onGroupsSearch: PropTypes.func,
     onPropertiesSearch: PropTypes.func
   };
   static defaultProps = {
-    initialTab: "portfolio",
+    initialTab: "property",
+    tabsOrder: ["property"],
+    portfolioProperties: [],
+    groupsProperties: [],
+    properties: [],
+    initialSort: "asc",
+    pageNum: 1,
+    hasNextPage: false,
     onGroupsSort() {},
     onPropertiesSort() {},
     onGroupsSearch() {},
     onPropertiesSearch() {}
   };
-  static tabIndexMap = { portfolio: 0, group: 1, property: 2 };
+  static tabIndexMap = { property: 0 };
 
   constructor(props) {
     super(props);
+    const propertiesToggled = this._getToggledProperties(props.properties);
+    const groupsToggled = this._getToggledProperties(props.groupsProperties);
+    const portfoliosToggled = this._getToggledProperties(
+      props.portfolioProperties
+    );
     this.state = {
-      tabIndex: EmailReports.tabIndexMap[props.initialTab],
-      portfoliosToggled: {},
-      groupsToggled: {},
-      propertiesToggled: {},
-      isSubmitted: false
+      tabIndex: props.tabsOrder.indexOf(props.initialTab),
+      propertiesSort: props.initialSort,
+      propertiesSearch: null,
+      portfoliosToggled,
+      groupsToggled,
+      propertiesToggled
     };
+  }
+
+  componentDidMount() {
+    this.props.dispatch(
+      accountSettings.getProperties({ d: this.state.propertiesSort })
+    );
+  }
+
+  componentWillUnmount() {
+    this.props.dispatch(accountSettings.clear());
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    const state = this.state;
+    if (
+      state.propertiesSort !== prevState.propertiesSort ||
+      state.propertiesSearch !== prevState.propertiesSearch
+    ) {
+      this.props.dispatch(
+        accountSettings.getProperties({
+          d: state.propertiesSort,
+          s: state.propertiesSearch
+        })
+      );
+    }
+    const newState = {};
+    if (!_isEqual(this.props.properties, prevProps.properties)) {
+      newState.propertiesToggled = this._getToggledProperties(
+        this.props.properties
+      );
+    }
+    if (!_isEqual(this.props.groupsProperties, prevProps.groupsProperties)) {
+      newState.groupsToggled = this._getToggledProperties(
+        this.props.groupsProperties
+      );
+    }
+    if (
+      !_isEqual(this.props.portfolioProperties, prevProps.portfolioProperties)
+    ) {
+      newState.portfoliosToggled = this._getToggledProperties(
+        this.props.portfolioProperties
+      );
+    }
+    if (Object.keys(newState).length) {
+      this.setState(newState);
+    }
   }
 
   get selectedGroupsState() {
@@ -54,16 +124,109 @@ export default class EmailReports extends React.PureComponent {
   }
 
   get successMessage() {
-    if (!this.state.isSubmitted) {
+    if (!this.state.message) {
       return;
     }
     return (
       <div className="account-settings__success">
         <Tick className="account-settings__checked" />
-        Your changes have been saved.
+        {this.state.message}
       </div>
     );
   }
+
+  get portfolioTab() {
+    const { portfolioProperties } = this.props;
+    return (
+      <Tab label="Portfolio" key="portfolio">
+        <EmailReportingTable
+          className="account-settings__reporting-table"
+          properties={portfolioProperties}
+          propertiesCount={portfolioProperties.length}
+          propertiesToggled={this.state.portfoliosToggled}
+          onToggleRow={this.onPortfolioRowToggle}
+        />
+      </Tab>
+    );
+  }
+
+  get groupTab() {
+    const { groupsProperties } = this.props;
+    return (
+      <Tab label="Groups" key="group">
+        <div>
+          <div className="account-settings__search-controls">
+            <SearchWithSort
+              className="account-settings__search"
+              placeholder="Search Groups"
+              theme="gray"
+              initialSort="asc"
+              onSort={this.props.onGroupsSort}
+              onSearch={this.props.onGroupsSearch}
+            />
+            <ButtonToggle
+              className="account-settings__toggle"
+              checked={this.selectedGroupsState}
+              onChange={this.onSelectGroups}
+            />
+          </div>
+          <EmailReportingTable
+            className="account-settings__reporting-table"
+            properties={groupsProperties}
+            propertiesCount={groupsProperties.length}
+            propertiesToggled={this.state.groupsToggled}
+            onToggleRow={this.onGroupRowToggle}
+          />
+        </div>
+      </Tab>
+    );
+  }
+
+  get propertyTab() {
+    const { properties } = this.props;
+    return (
+      <Tab label="Properties" key="property">
+        <div>
+          <div className="account-settings__search-controls">
+            <SearchWithSort
+              className="account-settings__search"
+              placeholder="Search Properties"
+              theme="gray"
+              initialSort={this.props.initialSort}
+              onSort={this.onPropertiesSort}
+              onSearch={this.onPropertiesSearch}
+            />
+            <ButtonToggle
+              className="account-settings__toggle"
+              checked={this.selectedPropertiesState}
+              onChange={this.onSelectProperties}
+            />
+          </div>
+          <EmailReportingTable
+            className="account-settings__reporting-table"
+            properties={properties}
+            showLoadBtn={this.props.hasNextPage}
+            propertiesToggled={this.state.propertiesToggled}
+            onToggleRow={this.onPropertyRowToggle}
+            onLoad={this.loadProperties}
+          />
+        </div>
+      </Tab>
+    );
+  }
+
+  _getToggledProperties = properties => {
+    const currentToggled = this.state?.propertiesToggled || {};
+    const propertiesToggled = {};
+    for (let p of properties) {
+      if (_has(currentToggled, p.id)) {
+        propertiesToggled[p.id] = currentToggled[p.id];
+      } else {
+        propertiesToggled[p.id] = !!p.is_report;
+      }
+    }
+    return propertiesToggled;
+  };
 
   _getPropertiesState = (properties, toggledProperties) => {
     const keys = properties.map(i => i.id.toString());
@@ -118,15 +281,50 @@ export default class EmailReports extends React.PureComponent {
     this.setState({ propertiesToggled });
   };
 
+  onPropertiesSort = propertiesSort => {
+    this.props.onPropertiesSort(propertiesSort);
+    this.setState({ propertiesSort });
+  };
+
+  loadProperties = () => {
+    if (!this.props.hasNextPage) {
+      return;
+    }
+    this.props.dispatch(
+      accountSettings.getProperties({
+        d: this.state.propertiesSort,
+        s: this.state.propertiesSearch,
+        p: this.props.pageNum + 1
+      })
+    );
+  };
+
+  onPropertiesSearch = propertiesSearch => {
+    clearTimeout(this.searchTimeout);
+    this.searchTimeout = setTimeout(() => {
+      this.props.onPropertiesSearch(propertiesSearch);
+      this.setState({ propertiesSearch });
+    }, TYPING_TIMEOUT);
+  };
+
+  setSuccessMessage = () => {
+    const message = "Your changes have been saved.";
+    this.setState({ message });
+  };
+
   onSubmit = () => {
-    this.setState({ isSubmitted: true });
-    setTimeout(() => {
-      this.setState({ isSubmitted: false });
-    }, 5000);
+    const data = {
+      properties: this.state.propertiesToggled
+    };
+    this.props.dispatch({
+      type: "API_ACCOUNT_REPORTS",
+      callback: this.setSuccessMessage,
+      data
+    });
   };
 
   render() {
-    const { groupsProperties, portfolioProperties, properties } = this.props;
+    const tabs = this.props.tabsOrder.map(n => this[`${n}Tab`]);
     return (
       <div className="account-settings__tab">
         <div className="account-settings__tab-content">
@@ -146,67 +344,7 @@ export default class EmailReports extends React.PureComponent {
               onChange={tabIndex => this.setState({ tabIndex })}
               selectedIndex={this.state.tabIndex}
             >
-              <Tab label="Portfolio">
-                <EmailReportingTable
-                  className="account-settings__reporting-table"
-                  properties={portfolioProperties}
-                  propertiesCount={portfolioProperties.length}
-                  propertiesToggled={this.state.portfoliosToggled}
-                  onToggleRow={this.onPortfolioRowToggle}
-                />
-              </Tab>
-              <Tab label="Groups">
-                <div>
-                  <div className="account-settings__search-controls">
-                    <SearchWithSort
-                      className="account-settings__search"
-                      placeholder="Search Groups"
-                      theme="gray"
-                      initialSort="asc"
-                      onSort={this.props.onGroupsSort}
-                      onSearch={this.props.onGroupsSearch}
-                    />
-                    <ButtonToggle
-                      className="account-settings__toggle"
-                      checked={this.selectedGroupsState}
-                      onChange={this.onSelectGroups}
-                    />
-                  </div>
-                  <EmailReportingTable
-                    className="account-settings__reporting-table"
-                    properties={groupsProperties}
-                    propertiesCount={groupsProperties.length}
-                    propertiesToggled={this.state.groupsToggled}
-                    onToggleRow={this.onGroupRowToggle}
-                  />
-                </div>
-              </Tab>
-              <Tab label="Properties">
-                <div>
-                  <div className="account-settings__search-controls">
-                    <SearchWithSort
-                      className="account-settings__search"
-                      placeholder="Search Properties"
-                      theme="gray"
-                      initialSort="asc"
-                      onSort={this.props.onPropertiesSort}
-                      onSearch={this.props.onPropertiesSearch}
-                    />
-                    <ButtonToggle
-                      className="account-settings__toggle"
-                      checked={this.selectedPropertiesState}
-                      onChange={this.onSelectProperties}
-                    />
-                  </div>
-                  <EmailReportingTable
-                    className="account-settings__reporting-table"
-                    properties={properties}
-                    propertiesCount={properties.length}
-                    propertiesToggled={this.state.propertiesToggled}
-                    onToggleRow={this.onPropertyRowToggle}
-                  />
-                </div>
-              </Tab>
+              {tabs}
             </TabNavigator>
           </div>
         </div>

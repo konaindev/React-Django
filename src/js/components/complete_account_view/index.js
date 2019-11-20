@@ -3,36 +3,39 @@ import { Formik, Form } from "formik";
 import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
+import _intersection from "lodash/intersection";
 
 import AccountForm from "../account_form";
-import FormFiled from "../form_field";
+import FormField from "../form_field";
 import PageAuth from "../page_auth";
 import Input from "../input";
 import Select, { SelectSearch } from "../select";
 import Button from "../button";
 import Checkbox from "../checkbox";
 import MultiSelect from "../multi_select";
+import { validateAddress } from "../../api/account_settings";
+import AddressModal from "../address_modal";
+import { addressModal } from "../../state/actions";
 import GoogleAddress from "../google_address";
+import LoaderContainer from "../../containers/account_settings/loader";
 import router from "../../router";
 
 import { propertySchema } from "./validators";
 import "./complete_account_view.scss";
+import { COUNTRY_FIELDS } from "../../constants";
 
 export class CompleteAccountView extends React.PureComponent {
   static propTypes = {
     office_types: Select.optionsType.isRequired,
     company_roles: MultiSelect.optionsType.isRequired,
-    office_address: PropTypes.array
+    office_address: PropTypes.string,
+    office_countries: Select.optionsType
   };
 
   constructor(props) {
     super(props);
     this.formik = React.createRef();
-    // this._router = router("/complete-account")(() => {
-    //   props.dispatch({
-    //     type: "API_COMPLETE_ACCOUNT"
-    //   });
-    // });
+    this.selectedCountry = COUNTRY_FIELDS.USA.short_name;
   }
 
   initialValues = {
@@ -41,7 +44,15 @@ export class CompleteAccountView extends React.PureComponent {
     title: "",
     company: undefined,
     company_role: [],
-    office_address: undefined,
+    office_country: {
+      label: COUNTRY_FIELDS.USA.full_name,
+      value: COUNTRY_FIELDS.USA.short_name
+    },
+    // office_address: "",
+    office_street: "",
+    office_city: "",
+    office_state: undefined,
+    office_zip: "",
     office_name: "",
     office_type: undefined,
     terms: false
@@ -99,15 +110,58 @@ export class CompleteAccountView extends React.PureComponent {
     }, 300);
   };
 
+  setErrorMessages = errors => {
+    this.formik.current.setSubmitting(false);
+    const formikErrors = {};
+    for (let k of Object.keys(errors)) {
+      formikErrors[k] = errors[k][0]?.message;
+    }
+    this.formik.current.setErrors(formikErrors);
+  };
+
+  showMessage = (errors, touched) => {
+    if (Object.keys(errors).length) {
+      return this.showErrorMessage(errors, touched);
+    }
+  };
+
+  showErrorMessage = (errors, touched) => {
+    const errorFields = Object.keys(errors);
+    const touchedFields = Object.keys(touched);
+    const fields = _intersection(errorFields, touchedFields);
+    if (!fields.length) {
+      return;
+    }
+    let message = "Please review highlighted fields above.";
+    if (this.state?.invalid_address) {
+      message =
+        "Unable to verify the address. Please try again with a valid address.";
+    }
+    return <div className="account-settings__general-error">{message}</div>;
+  };
+
   onSubmit = (values, actions) => {
     const data = { ...values };
     data.company = values.company.value;
     data.company_role = values.company_role.map(type => type.value);
     data.office_type = values.office_type.value;
-    data.office_address = values.office_address.value;
-    this.props.dispatch({
-      type: "API_COMPLETE_ACCOUNT",
-      data
+    data.office_state = values.office_state.value;
+    validateAddress(values).then(response => {
+      if (response.data.error) {
+        this.setState({ invalid_address: true });
+        this.formik.current.setErrors({
+          office_street: "see below",
+          office_city: "*",
+          office_state: "*",
+          office_zip: "*"
+        });
+      } else {
+        this.setState({
+          addresses: response.data,
+          invalid_address: false
+        });
+        this.props.dispatch(addressModal.open(data, response.data));
+      }
     });
   };
 
@@ -137,11 +191,47 @@ export class CompleteAccountView extends React.PureComponent {
   };
 
   onChangeOfficeAddress = value => {
-    this.formik.current.setFieldValue("office_address", value);
+    if (value.street) {
+      this.formik.current.setFieldValue("office_street", value.street);
+      this.formik.current.setFieldValue("office_city", value.city);
+      this.formik.current.setFieldValue("office_state", {
+        label: value.state,
+        value: value.state
+      });
+      this.formik.current.setFieldValue("office_zip", value.zip);
+      if (value.country == COUNTRY_FIELDS.GBR.short_name) {
+        this.selectedCountry = COUNTRY_FIELDS.GBR.short_name;
+        this.formik.current.setFieldValue("office_country", {
+          label: COUNTRY_FIELDS.GBR.full_name,
+          value: COUNTRY_FIELDS.GBR.short_name
+        });
+      } else if (value.country == COUNTRY_FIELDS.USA.short_name) {
+        this.selectedCountry = COUNTRY_FIELDS.USA.short_name;
+        this.formik.current.setFieldValue("office_country", {
+          label: COUNTRY_FIELDS.USA.full_name,
+          value: COUNTRY_FIELDS.USA.short_name
+        });
+      }
+    } else {
+      this.formik.current.setFieldValue("office_street", value.value);
+    }
   };
 
   onBlurOfficeAddress = () => {
-    this.formik.current.setFieldTouched("office_address");
+    this.formik.current.setFieldTouched("office_street");
+    const formikContext = this.formik.current.getFormikContext();
+    if (formikContext.values.office_street) {
+      this.formik.current.setFieldTouched("office_street");
+    }
+    if (formikContext.values.office_city) {
+      this.formik.current.setFieldTouched("office_city");
+    }
+    if (formikContext.values.office_state) {
+      this.formik.current.setFieldTouched("office_state");
+    }
+    if (formikContext.values.office_zip) {
+      this.formik.current.setFieldTouched("office_zip");
+    }
   };
 
   onChangeOfficeType = value => {
@@ -158,11 +248,45 @@ export class CompleteAccountView extends React.PureComponent {
     this.formik.current.setFieldValue("terms", !value);
   };
 
+  onChangeCountry = value => {
+    this.selectedCountry = value.value;
+    this.formik.current.setFieldValue("office_country", value);
+    const context = this.formik.current.getFormikContext();
+    if (context.values.office_state) {
+      this.formik.current.setFieldValue("office_state", undefined);
+    }
+  };
+
+  onChangeOfficeState = value => {
+    this.formik.current.setFieldValue("office_state", value);
+  };
+
+  onBlurOfficeState = () => {
+    this.formik.current.setFieldTouched("office_state");
+  };
+
+  onCloseModal = () => {
+    this.props.dispatch(addressModal.close);
+  };
+
   render() {
-    const { company_roles, office_types, companyAddresses } = this.props;
+    const {
+      company_roles,
+      office_types,
+      companyAddresses,
+      office_countries
+    } = this.props;
     const classes = cn("complete-account__field-set", AccountForm.fieldClass);
     return (
       <PageAuth backLink="/">
+        <AddressModal
+          title="Confirm Office Address"
+          onClose={this.onCloseModal}
+          theme="light"
+          onError={this.setErrorMessages}
+          dispatch_type="API_COMPLETE_ACCOUNT"
+        />
+        <LoaderContainer />
         <AccountForm
           className="complete-account"
           steps={this.steps}
@@ -184,8 +308,11 @@ export class CompleteAccountView extends React.PureComponent {
               handleBlur
             }) => (
               <Form>
+                <div className="complete-account__section-label complete-account__section-label--first">
+                  General Info
+                </div>
                 <div className={classes}>
-                  <FormFiled
+                  <FormField
                     className="complete-account__field"
                     label="first name"
                     showError={touched.first_name}
@@ -200,8 +327,8 @@ export class CompleteAccountView extends React.PureComponent {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
-                  </FormFiled>
-                  <FormFiled
+                  </FormField>
+                  <FormField
                     className="complete-account__field"
                     label="Last name"
                     showError={touched.last_name}
@@ -216,9 +343,9 @@ export class CompleteAccountView extends React.PureComponent {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     />
-                  </FormFiled>
+                  </FormField>
                 </div>
-                <FormFiled
+                <FormField
                   className={AccountForm.fieldClass}
                   label="title (Optional)"
                   showError={touched.title}
@@ -233,13 +360,16 @@ export class CompleteAccountView extends React.PureComponent {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                </FormFiled>
-                <FormFiled
+                </FormField>
+                <div className="complete-account__section-label">
+                  Business Info
+                </div>
+                <FormField
                   className={AccountForm.fieldClass}
                   label="company"
-                  showError={touched.company}
+                  showError={!!touched.company}
                   showIcon={false}
-                  error={errors?.company?.value}
+                  error={errors.company?.value}
                 >
                   <SelectSearch
                     name="company"
@@ -255,11 +385,11 @@ export class CompleteAccountView extends React.PureComponent {
                     onChange={this.onChangeCompany}
                     onBlur={this.onBlurCompany}
                   />
-                </FormFiled>
-                <FormFiled
+                </FormField>
+                <FormField
                   label="company role"
                   className={AccountForm.fieldClass}
-                  showError={touched.company_role}
+                  showError={!!touched.company_role}
                   showIcon={false}
                   error={errors.company_role}
                 >
@@ -276,27 +406,109 @@ export class CompleteAccountView extends React.PureComponent {
                     onChange={this.onChangeCompanyRole}
                     onBlur={this.onBlurCompanyRole}
                   />
-                </FormFiled>
-                <FormFiled
+                </FormField>
+                <div className="complete-account__section-label">
+                  Office Info
+                </div>
+                <FormField
                   className={AccountForm.fieldClass}
-                  label="office address"
-                  showError={touched.office_address}
+                  label="country"
+                  showError={!!touched.office_country}
                   showIcon={false}
-                  error={errors?.office_address?.value}
+                  error={errors.office_country}
+                >
+                  <Select
+                    name="office_country"
+                    theme="highlight"
+                    styles={this.selectStyles}
+                    options={office_countries}
+                    value={values.office_country}
+                    onChange={this.onChangeCountry}
+                    onBlur={handleBlur}
+                  />
+                </FormField>
+                <FormField
+                  className={AccountForm.fieldClass}
+                  label="address"
+                  showError={touched.office_street}
+                  showIcon={false}
+                  error={errors.office_street}
                 >
                   <GoogleAddress
-                    name="office_address"
+                    name="office_street"
                     loadOptions={this.loadAddress}
                     cacheOptions={false}
                     companyAddresses={companyAddresses}
                     labelCompany=""
                     labelGoogle=""
-                    value={values.office_address}
+                    display="partial"
+                    value={values.office_street}
                     onChange={this.onChangeOfficeAddress}
                     onBlur={this.onBlurOfficeAddress}
                   />
-                </FormFiled>
-                <FormFiled
+                </FormField>
+                <FormField
+                  className={AccountForm.fieldClass}
+                  label={
+                    COUNTRY_FIELDS[this.selectedCountry].address_fields.city
+                  }
+                  showError={touched.office_city}
+                  showIcon={false}
+                  error={errors.office_city}
+                >
+                  <Input
+                    type="text"
+                    name="office_city"
+                    theme="highlight"
+                    value={values.office_city}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                </FormField>
+                <FormField
+                  className={AccountForm.fieldClass}
+                  label={
+                    COUNTRY_FIELDS[this.selectedCountry].address_fields.state
+                  }
+                  showError={!!touched.office_state}
+                  showIcon={false}
+                  error={errors.office_state}
+                >
+                  <Select
+                    className="account-settings__input"
+                    name="office_state"
+                    theme="highlight"
+                    styles={this.selectStyles}
+                    isSearchable={true}
+                    options={
+                      this.selectedCountry == COUNTRY_FIELDS.USA.short_name
+                        ? this.props.us_state_list
+                        : this.props.gb_county_list
+                    }
+                    value={values.office_state}
+                    onBlur={this.onBlurOfficeState}
+                    onChange={this.onChangeOfficeState}
+                  />
+                </FormField>
+                <FormField
+                  className={AccountForm.fieldClass}
+                  label={
+                    COUNTRY_FIELDS[this.selectedCountry].address_fields.zip
+                  }
+                  showError={touched.office_zip}
+                  showIcon={false}
+                  error={errors.office_zip}
+                >
+                  <Input
+                    type="text"
+                    name="office_zip"
+                    theme="highlight"
+                    value={values.office_zip}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  />
+                </FormField>
+                <FormField
                   className={AccountForm.fieldClass}
                   label="Office name"
                   showError={touched.office_name}
@@ -311,13 +523,13 @@ export class CompleteAccountView extends React.PureComponent {
                     onChange={handleChange}
                     onBlur={handleBlur}
                   />
-                </FormFiled>
-                <FormFiled
+                </FormField>
+                <FormField
                   className={AccountForm.fieldClass}
                   label="office type"
-                  showError={touched.office_type}
+                  showError={!!touched.office_type}
                   showIcon={false}
-                  error={errors?.office_type?.value}
+                  error={errors.office_type}
                 >
                   <Select
                     name="office_type"
@@ -328,7 +540,7 @@ export class CompleteAccountView extends React.PureComponent {
                     onChange={this.onChangeOfficeType}
                     onBlur={this.onBlurOfficeType}
                   />
-                </FormFiled>
+                </FormField>
                 <div className="complete-account__terms">
                   <Checkbox
                     className="complete-account__checkbox"
@@ -346,6 +558,7 @@ export class CompleteAccountView extends React.PureComponent {
                   <a
                     className="complete-account__link"
                     href="https://www.remarkably.io/terms"
+                    target="_blank"
                   >
                     Terms and Conditions
                   </a>
@@ -359,6 +572,7 @@ export class CompleteAccountView extends React.PureComponent {
                 >
                   complete account
                 </Button>
+                {this.showMessage(errors, touched)}
               </Form>
             )}
           </Formik>
@@ -370,6 +584,7 @@ export class CompleteAccountView extends React.PureComponent {
 
 const mapState = state => {
   return {
+    ...state.network,
     ...state.completeAccount
   };
 };

@@ -11,14 +11,15 @@ class EmailReportingTable extends React.PureComponent {
     properties: PropTypes.arrayOf(PropTypes.object).isRequired,
     className: PropTypes.string,
     onLoad: PropTypes.func,
-    propertiesCount: PropTypes.number,
+    showLoadBtn: PropTypes.bool,
     propertiesToggled: PropTypes.object,
     onToggleRow: PropTypes.func
   };
   static defaultProps = {
     onLoad() {},
     propertiesToggled: {},
-    onToggleRow(id, value) {}
+    onToggleRow(id, value) {},
+    showLoadBtn: false
   };
 
   onToggleRow = (id, value) => this.props.onToggleRow(id, value);
@@ -40,7 +41,7 @@ class EmailReportingTable extends React.PureComponent {
   }
 
   renderButton() {
-    if (this.props.propertiesCount === this.props.properties.length) {
+    if (!this.props.showLoadBtn) {
       return;
     }
     return (

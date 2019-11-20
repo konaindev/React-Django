@@ -18,6 +18,16 @@ $complete-account-link-color: $gray-3;
     }
 }
 
+.complete-account__section-label {
+    padding-bottom: 30px;
+    padding-top: 50px;
+    font-size: 20px;
+
+    &--first {
+        padding-top: 16px;
+    }
+}
+
 .complete-account__field {
     min-width: $complete-account-field-min-width;
 }
