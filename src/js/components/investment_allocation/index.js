@@ -1,33 +1,36 @@
-import cn from "classnames";
 import React from "react";
 import PropTypes from "prop-types";
 import { VictoryPie } from "victory";
 import _isNil from "lodash/isNil";
+import cx from "classnames";
+
 import BoxRow from "../box_row";
 import ReportSection from "../report_section";
+import withInfoTooltip from "../with_info_tooltip";
+import { SmallNumberBox, SmallCurrencyShorthandBox } from "../small_box_layout";
 import {
   formatCurrencyShorthand,
   formatPercent,
   formatCurrencyShorthandWithDigit
 } from "../../utils/formatters";
-
-import { SmallNumberBox, SmallCurrencyShorthandBox } from "../small_box_layout";
 import scssVars from "./investment_allocation.scss";
 
 const InvestmentAllocationChart = ({ name, expenses, total }) => {
-  console.log("Investment Allocation Chart");
-  console.log(name, expenses, total);
-  const getLabel = d => {
+  const ExpenseRowBase = ({ title, value, renderInfoTooltip }) => (
+    <div className={cx("expense-row", { "expense-row--empty": !value })}>
+      <div className="expense-row__title">{title}</div>
+      <div className="expense-row__value">{formatCurrencyShorthand(value)}</div>
+      {renderInfoTooltip()}
+    </div>
+  );
+  const ExpenseRow = withInfoTooltip(ExpenseRowBase);
+
+  const getPieSliceLabel = d => {
     if (d.y === 0 || d.total === 0) {
       return "";
     }
     return formatPercent(d.y / d.total);
   };
-
-  const getClasses = value =>
-    cn("investment-allocation__row", {
-      "investment-allocation__row--empty": !value
-    });
 
   const pieStyle = {
     data: {
@@ -35,7 +38,7 @@ const InvestmentAllocationChart = ({ name, expenses, total }) => {
     },
     labels: {
       fill: d => d.textColor,
-      fontSize: scssVars.investmentAllocationLableSize,
+      fontSize: scssVars.investmentAllocationLabelSize,
       fontFamily: scssVars.fontSans
     }
   };
@@ -71,31 +74,32 @@ const InvestmentAllocationChart = ({ name, expenses, total }) => {
       x: "",
       y: marketIntelligence,
       fill: scssVars.investmentAllocationPieColor4,
-      textColor: scssVars.investmentAllocationLableColor1,
+      textColor: scssVars.investmentAllocationLabelColor1,
       total: totalNum
     },
     {
       x: "",
       y: leasingEnablement,
       fill: scssVars.investmentAllocationPieColor3,
-      textColor: scssVars.investmentAllocationLableColor1,
+      textColor: scssVars.investmentAllocationLabelColor1,
       total: totalNum
     },
     {
       x: "",
       y: demandCreation,
       fill: scssVars.investmentAllocationPieColor2,
-      textColor: scssVars.investmentAllocationLableColor1,
+      textColor: scssVars.investmentAllocationLabelColor1,
       total: totalNum
     },
     {
       x: "",
       y: reputationBuilding,
       fill: scssVars.investmentAllocationPieColor1,
-      textColor: scssVars.investmentAllocationLableColor2,
+      textColor: scssVars.investmentAllocationLabelColor2,
       total: totalNum
     }
   ];
+
   return (
     <div className="investment-allocation">
       <ReportSection name={`${name} INVESTMENT ALLOCATIONS`}>
@@ -106,44 +110,32 @@ const InvestmentAllocationChart = ({ name, expenses, total }) => {
               height={parseInt(scssVars.investmentAllocationPieSize)}
               data={data}
               labelRadius={() => labelRadius}
-              labels={getLabel}
+              labels={getPieSliceLabel}
               style={pieStyle}
               padding={0}
             />
           </div>
           <div className="investment-allocation__expenses">
-            <div className={getClasses(reputationBuilding)}>
-              <div className="investment-allocation__title investment-allocation__title--reputation-building">
-                Reputation Building
-              </div>
-              <div className="investment-allocation__value">
-                {formatCurrencyShorthand(reputationBuilding)}
-              </div>
-            </div>
-            <div className={getClasses(demandCreation)}>
-              <div className="investment-allocation__title investment-allocation__title--demand-creation">
-                Demand Creation
-              </div>
-              <div className="investment-allocation__value">
-                {formatCurrencyShorthand(demandCreation)}
-              </div>
-            </div>
-            <div className={getClasses(leasingEnablement)}>
-              <div className="investment-allocation__title investment-allocation__title--leasing-enablement">
-                Leasing Enablement
-              </div>
-              <div className="investment-allocation__value">
-                {formatCurrencyShorthand(leasingEnablement)}
-              </div>
-            </div>
-            <div className={getClasses(marketIntelligence)}>
-              <div className="investment-allocation__title investment-allocation__title--market-intelligence">
-                Market Intelligence
-              </div>
-              <div className="investment-allocation__value">
-                {formatCurrencyShorthand(marketIntelligence)}
-              </div>
-            </div>
+            <ExpenseRow
+              title="Reputation Building"
+              value={reputationBuilding}
+              infoTooltip={`${name}_reputation_building`}
+            />
+            <ExpenseRow
+              title="Demand Creation"
+              value={demandCreation}
+              infoTooltip={`${name}_demand_creation`}
+            />
+            <ExpenseRow
+              title="Leasing Enablement"
+              value={leasingEnablement}
+              infoTooltip={`${name}_leasing_enablement`}
+            />
+            <ExpenseRow
+              title="Market Intelligence"
+              value={marketIntelligence}
+              infoTooltip={`${name}_marketing_intelligence`}
+            />
           </div>
         </div>
       </ReportSection>
