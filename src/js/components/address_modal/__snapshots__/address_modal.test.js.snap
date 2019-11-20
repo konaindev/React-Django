@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddressModal renders AddressModal correctly 1`] = `
+<Modal
+  center={true}
+  classNames={
+    Object {
+      "closeButton": "modal-window__close",
+      "modal": "modal-window modal-window--small address-modal address-modal--theme-dark",
+      "overlay": "modal-overlay",
+    }
+  }
+  closeOnOverlayClick={true}
+  focusTrapped={false}
+  onClose={[Function]}
+  open={true}
+>
+  <div
+    className="modal-window__head"
+  >
+    Confirm Office Address
+  </div>
+  <div
+    className="modal-window__body"
+  >
+    <div
+      className="address-modal__body"
+    >
+      <p
+        className="address-caption"
+      >
+        Suggested Address
+      </p>
+      <p>
+        1600 Pennsylvania Ave NW
+      </p>
+      <p>
+        Washington, DC
+      </p>
+      <p>
+        20500
+      </p>
+      <p>
+        United States
+      </p>
+    </div>
+    <div
+      className="address-modal__footer"
+    >
+      <button
+        className="button button--uppercase button--secondary"
+        onClick={[Function]}
+      >
+        Go Back
+      </button>
+      <button
+        className="button button--uppercase button--primary"
+        onClick={[Function]}
+      >
+        Confirm Address
+      </button>
+    </div>
+  </div>
+</Modal>
+`;

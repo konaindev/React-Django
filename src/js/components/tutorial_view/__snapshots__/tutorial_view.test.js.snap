@@ -15,13 +15,6 @@ exports[`TutorialView render default 1`] = `
   focusTrapped={false}
   onClose={[Function]}
   open={true}
-  styles={
-    Object {
-      "closeIcon": Object {
-        "display": "none",
-      },
-    }
-  }
 >
   <div
     className="modal-window__head tutorial-modal__header"
@@ -90,13 +83,6 @@ exports[`TutorialView render hidden 1`] = `
   focusTrapped={false}
   onClose={[Function]}
   open={false}
-  styles={
-    Object {
-      "closeIcon": Object {
-        "display": "none",
-      },
-    }
-  }
 >
   <div
     className="modal-window__head tutorial-modal__header"

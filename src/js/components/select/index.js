@@ -21,12 +21,14 @@ export default function Select(props) {
     theme,
     size,
     isMulti,
+    isSearchable,
     ...otherProps
   } = props;
   const classes = cn("select", className, {
     "select--is-multi": isMulti,
     [`select--${size}`]: size,
-    [`select--${theme}`]: theme
+    [`select--${theme}`]: theme,
+    "select--is-searchable": isSearchable
   });
   return (
     <ReactSelect
@@ -38,7 +40,7 @@ export default function Select(props) {
       value={value}
       placeholder={placeholder}
       onChange={onChange}
-      isSearchable={false}
+      isSearchable={props.isSearchable}
       isMulti={isMulti}
       components={{ DropdownIndicator, ...components }}
       {...otherProps}
@@ -76,13 +78,15 @@ Select.propTypes = {
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   isMulti: PropTypes.bool,
+  isSearchable: PropTypes.bool,
   components: PropTypes.object
 };
 Select.defaultProps = {
   size: "",
   theme: "",
   isMulti: false,
-  components: {}
+  components: {},
+  isSearchable: false
 };
 
 export function FormSelect(props) {

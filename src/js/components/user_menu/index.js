@@ -4,14 +4,17 @@ import { components } from "react-select";
 import { auth } from "../../redux_base/actions";
 import Select from "../select";
 import { LogOut } from "../../icons";
+import { Settings } from "../../icons";
 import { connect } from "react-redux";
+
 import "./user_menu.scss";
 import { Link } from "react-router-dom";
 
 export class UserMenu extends React.PureComponent {
   static propTypes = {
     profile_image_url: PropTypes.string,
-    logout_url: PropTypes.string.isRequired
+    logout_url: PropTypes.string.isRequired,
+    account_settings_url: PropTypes.string
   };
 
   static defaultProps = {
@@ -36,8 +39,21 @@ export class UserMenu extends React.PureComponent {
   };
 
   dropdownMenu = props => {
+    let settingsItem;
+    if (this.props.account_settings_url) {
+      settingsItem = (
+        <a
+          className="user-menu__dropdown-item"
+          href={this.props.account_settings_url}
+        >
+          <Settings className="user-menu__icon" />
+          <div>Account Settings</div>
+        </a>
+      );
+    }
     return (
       <components.Menu {...props} className="user-menu__dropdown">
+        {settingsItem}
         <Link
           style={{ color: "inherit", textDecoration: "inherit" }}
           className="user-menu__dropdown-item"

@@ -131,25 +131,25 @@ class DashboardView(APIView):
     def prepare_filters_from_request(self, request):
         """ calc queryset filter params based on HTTP request query strings """
         lookup_params = {}
-        if request.GET.get("q"):
-            lookup_params["name__icontains"] = request.GET.get("q")
-        if request.GET.get("st"):
-            st = request.GET.getlist("st")
+        if request.query_params.get("q"):
+            lookup_params["name__icontains"] = request.query_params.get("q")
+        if request.query_params.get("st"):
+            st = request.query_params.getlist("st")
             lookup_params["property__geo_address__state__iregex"] = (
                 r"(" + "|".join(st) + ")"
             )
-        if request.GET.get("ct"):
-            lookup_params["property__geo_address__city__in"] = request.GET.getlist("ct")
-        if request.GET.get("pm"):
-            lookup_params["property_manager_id__in"] = request.GET.getlist("pm")
-        if request.GET.getlist("am"):
-            lookup_params["asset_manager_id__in"] = request.GET.getlist("am")
-        if request.GET.get("fd"):
-            lookup_params["fund_id__in"] = request.GET.getlist("fd")
+        if request.query_params.get("ct"):
+            lookup_params["property__geo_address__city__in"] = request.query_params.getlist("ct")
+        if request.query_params.get("pm"):
+            lookup_params["property_manager_id__in"] = request.query_params.getlist("pm")
+        if request.query_params.getlist("am"):
+            lookup_params["asset_manager_id__in"] = request.query_params.getlist("am")
+        if request.query_params.get("fd"):
+            lookup_params["fund_id__in"] = request.query_params.getlist("fd")
 
-        sort_by = request.GET.get("s")
+        sort_by = request.query_params.get("s")
         ordering = self.sql_sort.get(sort_by) or "name"
-        direction = request.GET.get("d") or "asc"
+        direction = request.query_params.get("d") or "asc"
         if direction == "desc":
             ordering = f"-{ordering}"
 
@@ -169,8 +169,8 @@ class DashboardView(APIView):
             for project in owned_projects.filter(**lookup_params).order_by(ordering)
         ]
 
-        sort_by = request.GET.get("s")
-        direction = request.GET.get("d") or "asc"
+        sort_by = request.query_params.get("s")
+        direction = request.query_params.get("d") or "asc"
         if sort_by == "performance":
             is_reverse = direction == "asc"
             projects = sorted(
@@ -201,9 +201,8 @@ class TutorialView(APIView):
         return Response(response_data)
 
     def post(self, request):
-        params = json.loads(request.body)
         user = request.user
-        user.is_show_tutorial = params.get("is_show_tutorial", False)
+        user.is_show_tutorial = request.data.is_show_tutorial or False
         user.save()
 
         response_data = dict(is_show_tutorial=user.is_show_tutorial,)
@@ -212,8 +211,7 @@ class TutorialView(APIView):
 
 class LocalizationView(APIView):
     def post(self, request):
-        params = self.get_data()
-        localization_form = LocalizationForm(params, initial={"language": "en_us"})
+        localization_form = LocalizationForm(request.data, initial={"language": "en_us"})
         if not localization_form.is_valid():
             errors = localization_form.errors.get_json_data()
             return Response(errors, status=drf_status.HTTP_500_INTERNAL_SERVER_ERROR)

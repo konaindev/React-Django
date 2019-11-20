@@ -5,5 +5,6 @@ export const props = {
   account_name: "Remarkably",
   logout_url: "https://app.remarkably.io/user/logout",
   profile_image_url:
-    "https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg"
+    "https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg",
+  account_settings_url: "/users/account-settings"
 };
