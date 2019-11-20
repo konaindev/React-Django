@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import chunk from "lodash/chunk";
 import sumBy from "lodash/sumBy";
 
+import { InfoTooltip } from "../rmb_tooltip";
 import AgeRangePopulationSize from "../age_range_population_size";
 import MarketSegmentPieChart, { PIE_COLORS } from "../market_segment_pie_chart";
 import Panel from "../panel";
@@ -21,7 +22,10 @@ export function EstimatedMarketSizeOverview({ market_sizes }) {
   return (
     <Panel className="estimated-market-size-overview">
       <div className="estimated-market-size-overview__heading">
-        <p>Est. Market Size Overview</p>
+        <p>
+          Est. Market Size Overview
+          <InfoTooltip transKey="est_market_size_overview" />
+        </p>
       </div>
       <div className="estimated-market-size-overview__content">
         <div className="estimated-market-size-overview__content-left">

@@ -9,6 +9,9 @@ import Button from "../button";
 import "rc-tooltip/assets/bootstrap.css";
 import "./rmb_tooltip.scss";
 
+export { default as TooltipAnchor } from "./rmb_tooltip_anchor";
+export { default as InfoTooltip } from "./rmb_info_tooltip";
+
 export const RMBTooltip = props => {
   let overlay = props.overlay;
   if (props.text) {
@@ -45,5 +48,3 @@ RMBTooltip.propTypes = {
 };
 
 export default RMBTooltip;
-
-export { default as TooltipAnchor } from "./rmb_tooltip_anchor";
