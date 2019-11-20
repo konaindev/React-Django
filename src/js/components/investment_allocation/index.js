@@ -133,7 +133,7 @@ const InvestmentAllocationChart = ({ name, expenses, total }) => {
             <ExpenseRow
               title="Market Intelligence"
               value={marketIntelligence}
-              infoTooltip={`${name}_marketing_intelligence`}
+              infoTooltip={`${name}_market_intelligence`}
             />
           </div>
         </div>
