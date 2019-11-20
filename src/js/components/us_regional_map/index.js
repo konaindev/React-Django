@@ -1,7 +1,7 @@
 import cn from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
-
+import { Link } from "react-router-dom";
 import scssVars from "../../../css/variables.scss";
 import RMBTooltip from "../rmb_tooltip";
 
@@ -67,9 +67,13 @@ class USRegionalMap extends React.Component {
             ? "Include Region"
             : "Exclude Region"}
         </div>
-        <a className="us-regional-map__button" href={link}>
+        <Link
+          style={{ color: "inherit", textDecoration: "inherit" }}
+          className="us-regional-map__button"
+          to={link}
+        >
           Expand Region
-        </a>
+        </Link>
       </div>
     );
   }

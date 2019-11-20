@@ -12,6 +12,7 @@ from remark.lib.fields import NormalizedEmailField
 from remark.projects.models import Project
 from .constants import ACCOUNT_TYPE, PROJECT_ROLES, US_COUNTRY_ID, GB_COUNTRY_ID, US_STATE_LIST, GB_COUNTY_LIST
 from remark.crm.models import Person
+from remark.settings import BASE_URL
 
 
 def usr_public_id():
@@ -155,7 +156,7 @@ class User(PermissionsMixin, AbstractBaseUser):
         data = {
             "email": self.email,
             "user_id": self.public_id,
-            "logout_url": reverse("logout"),
+            "logout_url": f"{BASE_URL}/users/logout",
             "profile_image_url": self.get_avatar_url(),
             "account_name": self.get_name(),
             "is_superuser": self.is_superuser,

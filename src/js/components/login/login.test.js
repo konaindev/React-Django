@@ -1,7 +1,6 @@
-import React from "react";
 import renderer from "react-test-renderer";
 
-import LoginView from "./index";
+import { LoginView } from "./index";
 
 describe("LoginView", () => {
   it("renders correctly", () => {

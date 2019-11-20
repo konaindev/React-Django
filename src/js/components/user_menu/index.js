@@ -1,14 +1,16 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { components } from "react-select";
-
+import { auth } from "../../redux_base/actions";
 import Select from "../select";
 import { LogOut } from "../../icons";
 import { Settings } from "../../icons";
+import { connect } from "react-redux";
 
 import "./user_menu.scss";
+import { Link } from "react-router-dom";
 
-export default class UserMenu extends React.PureComponent {
+export class UserMenu extends React.PureComponent {
   static propTypes = {
     profile_image_url: PropTypes.string,
     logout_url: PropTypes.string.isRequired,
@@ -32,6 +34,10 @@ export default class UserMenu extends React.PureComponent {
     );
   };
 
+  doLogout = () => {
+    this.props.dispatch(auth.logout());
+  };
+
   dropdownMenu = props => {
     let settingsItem;
     if (this.props.account_settings_url) {
@@ -48,10 +54,15 @@ export default class UserMenu extends React.PureComponent {
     return (
       <components.Menu {...props} className="user-menu__dropdown">
         {settingsItem}
-        <a className="user-menu__dropdown-item" href={this.props.logout_url}>
+        <Link
+          style={{ color: "inherit", textDecoration: "inherit" }}
+          className="user-menu__dropdown-item"
+          to="#"
+          onClick={this.doLogout}
+        >
           <LogOut className="user-menu__icon" />
           <div>Log Out</div>
-        </a>
+        </Link>
       </components.Menu>
     );
   };
@@ -76,3 +87,5 @@ export default class UserMenu extends React.PureComponent {
     );
   }
 }
+
+export default connect()(UserMenu);

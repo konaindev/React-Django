@@ -1,37 +1,21 @@
-import _isNil from "lodash/isNil";
-import PropTypes from "prop-types";
 import React from "react";
+import PropTypes from "prop-types";
+import _isNil from "lodash/isNil";
 
 import { Alarm } from "../../icons";
 import { qsParse, qsStringify } from "../../utils/misc";
 import Container from "../container";
 import DateRangeSelector from "../date_range_selector";
-import PageChrome from "../page_chrome";
 import PortfolioTable from "../portfolio_table";
 import KPICard, { NoTargetKPICard, NoValueKPICard } from "../kpi_card";
 import Tooltip from "../rmb_tooltip";
 import Select from "../select";
 import UserMenu from "../user_menu";
 import ToggleButton from "../toggle_button";
+import Loader from "../loader";
+import { portfolio } from "../../redux_base/actions";
 import { formatKPI } from "../../utils/kpi_formatters";
-
 import "./portfolio_analysis_view.scss";
-
-const navLinks = {
-  links: [
-    {
-      id: "portfolio",
-      name: "Portfolio",
-      url: "/dashboard"
-    },
-    {
-      id: "portfolio-analysis",
-      name: "Portfolio Analysis",
-      url: "/portfolio/table"
-    }
-  ],
-  selected_link: "portfolio-analysis"
-};
 
 const average_buttons_options = [
   {
@@ -61,28 +45,18 @@ function getEmptyPropertiesCount(properties) {
 
 export class PortfolioAnalysisView extends React.PureComponent {
   static propTypes = {
-    navLinks: PropTypes.shape({
-      links: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.string.isRequired,
-          name: PropTypes.string.isRequired,
-          url: PropTypes.string.isRequired
-        })
-      ),
-      selected_link: PropTypes.string.isRequired
-    }),
     kpi_bundles: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired
       })
-    ).isRequired,
-    selected_kpi_bundle: PropTypes.string.isRequired,
+    ),
+    selected_kpi_bundle: PropTypes.string,
     date_selection: PropTypes.shape({
       preset: PropTypes.string.isRequired,
       end_date: PropTypes.string.isRequired,
       start_date: PropTypes.string.isRequired
-    }).isRequired,
+    }),
     highlight_kpis: PropTypes.arrayOf(
       PropTypes.shape({
         name: PropTypes.string.isRequired,
@@ -91,14 +65,10 @@ export class PortfolioAnalysisView extends React.PureComponent {
         value: PropTypes.any,
         health: PropTypes.oneOf([-1, 0, 1, 2])
       })
-    ).isRequired,
-    table_data: PropTypes.arrayOf(PropTypes.object).isRequired,
+    ),
+    table_data: PropTypes.arrayOf(PropTypes.object),
     user: PropTypes.object,
-    display_average: PropTypes.oneOf(["1", "0"]).isRequired
-  };
-
-  static defaultProps = {
-    navLinks: navLinks
+    display_average: PropTypes.oneOf(["1", "0"])
   };
 
   get kpiOptions() {
@@ -214,57 +184,64 @@ export class PortfolioAnalysisView extends React.PureComponent {
 
   render() {
     const {
-      navLinks,
       // share_info,
       date_selection,
       table_data,
       kpi_order,
-      display_average
+      display_average,
+      fetching
     } = this.props;
-    return (
-      <PageChrome navLinks={navLinks} headerItems={this.renderHeaderItems()}>
+
+    if (fetching) {
+      return (
         <Container className="portfolio-analysis">
-          <div className="portfolio-analysis__header">
-            <div className="portfolio-analysis__title">Portfolio Analysis</div>
-            {/* <ShareToggle
-              {...share_info}
-              current_report_name="portfolio_analysis"
-            /> */}
-          </div>
-          <div className="portfolio-analysis__controls">
-            <Select
-              className="portfolio-analysis__select-kpi"
-              theme="default"
-              options={this.kpiOptions}
-              value={this.kpiValue}
-              onChange={this.onChangeKpi}
-            />
-            {this.getEmptyPropsTooltip()}
-            <DateRangeSelector
-              start_date={date_selection.start_date}
-              end_date={date_selection.end_date}
-              preset={date_selection.preset}
-              onChange={this.onChangeDateRange}
-            />
-          </div>
-          <div className="portfolio-analysis__title-bar">
-            <ToggleButton
-              options={average_buttons_options}
-              value={display_average}
-              onChange={this.onAverageClick}
-            />
-            <div className="portfolio-analysis__property-count">
-              {this.totalProperties} properties
-            </div>
-          </div>
-          <div className="portfolio-analysis__kpi-cards">
-            {this.renderKPICards()}
-          </div>
-          <div className="portfolio-analysis__table">
-            <PortfolioTable properties={table_data} kpi_order={kpi_order} />
-          </div>
+          <Loader isVisible />
         </Container>
-      </PageChrome>
+      );
+    }
+
+    return (
+      <Container className="portfolio-analysis">
+        <div className="portfolio-analysis__header">
+          <div className="portfolio-analysis__title">Portfolio Analysis</div>
+          {/* <ShareToggle
+            {...share_info}
+            current_report_name="portfolio_analysis"
+          /> */}
+        </div>
+        <div className="portfolio-analysis__controls">
+          <Select
+            className="portfolio-analysis__select-kpi"
+            theme="default"
+            options={this.kpiOptions}
+            value={this.kpiValue}
+            onChange={this.onChangeKpi}
+          />
+          {this.getEmptyPropsTooltip()}
+          <DateRangeSelector
+            start_date={date_selection.start_date}
+            end_date={date_selection.end_date}
+            preset={date_selection.preset}
+            onChange={this.onChangeDateRange}
+          />
+        </div>
+        <div className="portfolio-analysis__title-bar">
+          <ToggleButton
+            options={average_buttons_options}
+            value={display_average}
+            onChange={this.onAverageClick}
+          />
+          <div className="portfolio-analysis__property-count">
+            {this.totalProperties} properties
+          </div>
+        </div>
+        <div className="portfolio-analysis__kpi-cards">
+          {this.renderKPICards()}
+        </div>
+        <div className="portfolio-analysis__table">
+          <PortfolioTable properties={table_data} kpi_order={kpi_order} />
+        </div>
+      </Container>
     );
   }
 }
@@ -277,7 +254,9 @@ export default class UrlQueryLayer extends React.PureComponent {
     urlParams["s"] = params.date_selection.start_date;
     urlParams["e"] = params.date_selection.end_date;
     urlParams["a"] = params.display_average;
-    window.location.search = qsStringify(urlParams);
+    const queryString = qsStringify(urlParams);
+    this.props.history.push(queryString);
+    this.props.dispatch(portfolio.requestGroups(queryString));
   };
 
   render() {

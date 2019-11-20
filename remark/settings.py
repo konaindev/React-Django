@@ -9,6 +9,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
+from easy_thumbnails.conf import Settings as thumbnail_settings
 import os
 import sys
 import dj_database_url
@@ -105,9 +106,9 @@ INSTALLED_APPS = [
     "remark.geo",
     "remark",
     "django_extensions",
+    "corsheaders",
 ]
 
-from easy_thumbnails.conf import Settings as thumbnail_settings
 THUMBNAIL_PROCESSORS = (
     'image_cropping.thumbnail_processors.crop_corners',
 ) + thumbnail_settings.THUMBNAIL_PROCESSORS
@@ -115,6 +116,8 @@ THUMBNAIL_PROCESSORS = (
 IMAGE_CROPPING_SIZE_WARNING = True
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
     "remark.lib.middleware.exception.log_500",
     "django.middleware.security.SecurityMiddleware",
     # Handled by django_heroku.settings(...)
@@ -326,7 +329,15 @@ THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
 THUMBNAIL_PRESERVE_EXTENSIONS = True
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
+    "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.NamespaceVersioning"
 }
+
+SIMPLE_JWT = {
+    "USER_ID_FIELD": "public_id"
+}
+
+# CORS Headers plugin settings
+CORS_ORIGIN_ALLOW_ALL = True

@@ -2,6 +2,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import { createStore } from "redux";
 import renderer from "react-test-renderer";
+import { MemoryRouter } from "react-router-dom";
 
 import { properties, groups, portfolio } from "../email_reporting_table/props";
 import AccountSettings from "./index";
@@ -21,7 +22,9 @@ describe("AccountSettings", () => {
     const tree = renderer
       .create(
         <Provider store={_()}>
-          <AccountSettings initialItem="lock" {...props} />
+          <MemoryRouter>
+            <AccountSettings initialItem="lock" {...props} />
+          </MemoryRouter>
         </Provider>
       )
       .toJSON();
@@ -31,7 +34,9 @@ describe("AccountSettings", () => {
     const tree = renderer
       .create(
         <Provider store={_()}>
-          <AccountSettings initialItem="profile" {...props} />
+          <MemoryRouter>
+            <AccountSettings initialItem="profile" {...props} />
+          </MemoryRouter>
         </Provider>
       )
       .toJSON();
@@ -40,20 +45,16 @@ describe("AccountSettings", () => {
   it("email reports 'Portfolio' tab", () => {
     const tree = renderer
       .create(
-        <Provider
-          store={createStore(() => ({
-            accountSettings: { properties },
-            network: { isFetching: false }
-          }))}
-        >
-          <AccountSettings
-            initialItem="email"
-            itemsOrder={props.itemsOrder}
-            initialTab="portfolio"
-            tabsOrder={props.tabsOrder}
-            portfolioProperties={portfolio}
-            groupsProperties={groups}
-          />
+        <Provider store={_()}>
+          <MemoryRouter>
+            <AccountSettings
+              initialItem="email"
+              initialTab="portfolio"
+              portfolioProperties={portfolio}
+              groupsProperties={groups}
+              properties={properties}
+            />
+          </MemoryRouter>
         </Provider>
       )
       .toJSON();
@@ -62,20 +63,16 @@ describe("AccountSettings", () => {
   it("email reports 'Groups' tab", () => {
     const tree = renderer
       .create(
-        <Provider
-          store={createStore(() => ({
-            accountSettings: { properties },
-            network: { isFetching: false }
-          }))}
-        >
-          <AccountSettings
-            initialItem="email"
-            itemsOrder={props.itemsOrder}
-            initialTab="group"
-            tabsOrder={props.tabsOrder}
-            portfolioProperties={portfolio}
-            groupsProperties={groups}
-          />
+        <Provider store={_()}>
+          <MemoryRouter>
+            <AccountSettings
+              initialItem="email"
+              initialTab="group"
+              portfolioProperties={portfolio}
+              groupsProperties={groups}
+              properties={properties}
+            />
+          </MemoryRouter>
         </Provider>
       )
       .toJSON();
@@ -84,22 +81,16 @@ describe("AccountSettings", () => {
   it("email reports 'Properties' tab", () => {
     const tree = renderer
       .create(
-        <Provider
-          store={createStore(() => ({
-            accountSettings: { properties: properties.slice(0, 5) },
-            network: {
-              isFetching: false
-            }
-          }))}
-        >
-          <AccountSettings
-            initialItem="email"
-            itemsOrder={props.itemsOrder}
-            initialTab="property"
-            tabsOrder={props.tabsOrder}
-            portfolioProperties={portfolio}
-            groupsProperties={groups}
-          />
+        <Provider store={_()}>
+          <MemoryRouter>
+            <AccountSettings
+              initialItem="email"
+              initialTab="property"
+              portfolioProperties={portfolio}
+              groupsProperties={groups}
+              properties={properties.slice(0, 5)}
+            />
+          </MemoryRouter>
         </Provider>
       )
       .toJSON();

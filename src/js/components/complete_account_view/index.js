@@ -24,7 +24,7 @@ import { propertySchema } from "./validators";
 import "./complete_account_view.scss";
 import { COUNTRY_FIELDS } from "../../constants";
 
-class CompleteAccountView extends React.PureComponent {
+export class CompleteAccountView extends React.PureComponent {
   static propTypes = {
     office_types: Select.optionsType.isRequired,
     company_roles: MultiSelect.optionsType.isRequired,
@@ -35,11 +35,6 @@ class CompleteAccountView extends React.PureComponent {
   constructor(props) {
     super(props);
     this.formik = React.createRef();
-    this._router = router("/complete-account")(() => {
-      props.dispatch({
-        type: "API_COMPLETE_ACCOUNT"
-      });
-    });
     this.selectedCountry = COUNTRY_FIELDS.USA.short_name;
   }
 
@@ -270,6 +265,10 @@ class CompleteAccountView extends React.PureComponent {
     this.formik.current.setFieldTouched("office_state");
   };
 
+  onCloseModal = () => {
+    this.props.dispatch(addressModal.close);
+  };
+
   render() {
     const {
       company_roles,
@@ -282,7 +281,7 @@ class CompleteAccountView extends React.PureComponent {
       <PageAuth backLink="/">
         <AddressModal
           title="Confirm Office Address"
-          onClose={this.props.dispatch(addressModal.close)}
+          onClose={this.onCloseModal}
           theme="light"
           onError={this.setErrorMessages}
           dispatch_type="API_COMPLETE_ACCOUNT"

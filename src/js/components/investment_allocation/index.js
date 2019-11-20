@@ -100,8 +100,8 @@ const InvestmentAllocationChart = ({ name, expenses, total }) => {
         <div className="investment-allocation__body">
           <div className="investment-allocation__chart">
             <VictoryPie
-              width={scssVars.investmentAllocationPieSize}
-              height={scssVars.investmentAllocationPieSize}
+              width={parseInt(scssVars.investmentAllocationPieSize)}
+              height={parseInt(scssVars.investmentAllocationPieSize)}
               data={data}
               labelRadius={() => labelRadius}
               labels={getLabel}

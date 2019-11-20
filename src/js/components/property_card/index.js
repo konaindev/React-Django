@@ -5,6 +5,7 @@ import React from "react";
 import Button from "../button";
 import Panel from "../panel";
 import PropertyStatus from "../property_status";
+import { Link } from "react-router-dom";
 import UserIconList from "../user_icon_list";
 import Tick from "../../icons/tick";
 
@@ -16,7 +17,7 @@ export const PropertyCard = ({
   address,
   image_url,
   performance_rating,
-  url,
+  report_url,
   members,
   selected,
   onSelect
@@ -41,9 +42,9 @@ export const PropertyCard = ({
               <div className="property-card__selector" onClick={handleToggle}>
                 <Tick className="property-card__selector-tick" />
               </div>
-              <a href={url}>
+              <Link className="property-card__overlay-link" to={report_url}>
                 <Button color="outline">View Report</Button>
-              </a>
+              </Link>
             </div>
             <div className="property-card__actions">
               <UserIconList users={members} />
@@ -69,8 +70,7 @@ PropertyCard.requiredPropTypes = {
   address: PropTypes.string.isRequired,
   image_url: PropTypes.string.isRequired,
   performance_rating: PropTypes.number.isRequired,
-  members: PropTypes.array,
-  url: PropTypes.string.isRequired
+  members: PropTypes.array
 };
 
 PropertyCard.propTypes = {

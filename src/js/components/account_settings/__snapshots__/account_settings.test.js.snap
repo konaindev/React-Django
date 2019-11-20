@@ -18,6 +18,13 @@ exports[`AccountSettings account security tab 1`] = `
         >
           <a
             href="/dashboard"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "inherit",
+                "textDecoration": "inherit",
+              }
+            }
           >
             <div
               className="remarkably-logo"
@@ -26,24 +33,24 @@ exports[`AccountSettings account security tab 1`] = `
             </div>
           </a>
           <div
-            className="page-header__nav"
+            className="top-navigation"
           >
-            <div
-              className="top-navigation"
+            <a
+              aria-current={null}
+              className="top-navigation__link"
+              href="/dashboard"
+              onClick={[Function]}
             >
-              <a
-                className="top-navigation__link"
-                href="/dashboard"
-              >
-                Portfolio
-              </a>
-              <a
-                className="top-navigation__link"
-                href="/portfolio/table"
-              >
-                Portfolio Analysis
-              </a>
-            </div>
+              Portfolio
+            </a>
+            <a
+              aria-current={null}
+              className="top-navigation__link"
+              href="/portfolio/table"
+              onClick={[Function]}
+            >
+              Portfolio Analysis
+            </a>
           </div>
           <nav
             className="page-header__items-outer"
@@ -444,6 +451,13 @@ exports[`AccountSettings email reports 'Groups' tab 1`] = `
         >
           <a
             href="/dashboard"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "inherit",
+                "textDecoration": "inherit",
+              }
+            }
           >
             <div
               className="remarkably-logo"
@@ -452,24 +466,24 @@ exports[`AccountSettings email reports 'Groups' tab 1`] = `
             </div>
           </a>
           <div
-            className="page-header__nav"
+            className="top-navigation"
           >
-            <div
-              className="top-navigation"
+            <a
+              aria-current={null}
+              className="top-navigation__link"
+              href="/dashboard"
+              onClick={[Function]}
             >
-              <a
-                className="top-navigation__link"
-                href="/dashboard"
-              >
-                Portfolio
-              </a>
-              <a
-                className="top-navigation__link"
-                href="/portfolio/table"
-              >
-                Portfolio Analysis
-              </a>
-            </div>
+              Portfolio
+            </a>
+            <a
+              aria-current={null}
+              className="top-navigation__link"
+              href="/portfolio/table"
+              onClick={[Function]}
+            >
+              Portfolio Analysis
+            </a>
           </div>
         </div>
       </div>
@@ -966,6 +980,13 @@ exports[`AccountSettings email reports 'Portfolio' tab 1`] = `
         >
           <a
             href="/dashboard"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "inherit",
+                "textDecoration": "inherit",
+              }
+            }
           >
             <div
               className="remarkably-logo"
@@ -974,24 +995,24 @@ exports[`AccountSettings email reports 'Portfolio' tab 1`] = `
             </div>
           </a>
           <div
-            className="page-header__nav"
+            className="top-navigation"
           >
-            <div
-              className="top-navigation"
+            <a
+              aria-current={null}
+              className="top-navigation__link"
+              href="/dashboard"
+              onClick={[Function]}
             >
-              <a
-                className="top-navigation__link"
-                href="/dashboard"
-              >
-                Portfolio
-              </a>
-              <a
-                className="top-navigation__link"
-                href="/portfolio/table"
-              >
-                Portfolio Analysis
-              </a>
-            </div>
+              Portfolio
+            </a>
+            <a
+              aria-current={null}
+              className="top-navigation__link"
+              href="/portfolio/table"
+              onClick={[Function]}
+            >
+              Portfolio Analysis
+            </a>
           </div>
         </div>
       </div>
@@ -1312,6 +1333,13 @@ exports[`AccountSettings email reports 'Properties' tab 1`] = `
         >
           <a
             href="/dashboard"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "inherit",
+                "textDecoration": "inherit",
+              }
+            }
           >
             <div
               className="remarkably-logo"
@@ -1320,24 +1348,24 @@ exports[`AccountSettings email reports 'Properties' tab 1`] = `
             </div>
           </a>
           <div
-            className="page-header__nav"
+            className="top-navigation"
           >
-            <div
-              className="top-navigation"
+            <a
+              aria-current={null}
+              className="top-navigation__link"
+              href="/dashboard"
+              onClick={[Function]}
             >
-              <a
-                className="top-navigation__link"
-                href="/dashboard"
-              >
-                Portfolio
-              </a>
-              <a
-                className="top-navigation__link"
-                href="/portfolio/table"
-              >
-                Portfolio Analysis
-              </a>
-            </div>
+              Portfolio
+            </a>
+            <a
+              aria-current={null}
+              className="top-navigation__link"
+              href="/portfolio/table"
+              onClick={[Function]}
+            >
+              Portfolio Analysis
+            </a>
           </div>
         </div>
       </div>
@@ -1983,6 +2011,13 @@ exports[`AccountSettings profile tab 1`] = `
         >
           <a
             href="/dashboard"
+            onClick={[Function]}
+            style={
+              Object {
+                "color": "inherit",
+                "textDecoration": "inherit",
+              }
+            }
           >
             <div
               className="remarkably-logo"
@@ -1991,24 +2026,24 @@ exports[`AccountSettings profile tab 1`] = `
             </div>
           </a>
           <div
-            className="page-header__nav"
+            className="top-navigation"
           >
-            <div
-              className="top-navigation"
+            <a
+              aria-current={null}
+              className="top-navigation__link"
+              href="/dashboard"
+              onClick={[Function]}
             >
-              <a
-                className="top-navigation__link"
-                href="/dashboard"
-              >
-                Portfolio
-              </a>
-              <a
-                className="top-navigation__link"
-                href="/portfolio/table"
-              >
-                Portfolio Analysis
-              </a>
-            </div>
+              Portfolio
+            </a>
+            <a
+              aria-current={null}
+              className="top-navigation__link"
+              href="/portfolio/table"
+              onClick={[Function]}
+            >
+              Portfolio Analysis
+            </a>
           </div>
           <nav
             className="page-header__items-outer"
@@ -2775,7 +2810,7 @@ exports[`AccountSettings profile tab 1`] = `
                         />
                       </div>
                       <div
-                        className="select__indicators css-1wy0on6"
+                        className="select__indicators css-1g48xl4-IndicatorsContainer"
                       >
                         <span
                           className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -3273,7 +3308,7 @@ exports[`AccountSettings profile tab 1`] = `
                         />
                       </div>
                       <div
-                        className="select__indicators css-1wy0on6"
+                        className="select__indicators css-1g48xl4-IndicatorsContainer"
                       >
                         <span
                           className="select__indicator-separator css-1okebmr-indicatorSeparator"

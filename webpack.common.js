@@ -4,6 +4,7 @@ const StyleLintPlugin = require("stylelint-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const webpack = require("webpack");
+const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 const isProduction = process.env.NODE_ENV === "production";
 if (isProduction && !process.env.BASE_URL) {
@@ -75,6 +76,21 @@ module.exports = {
         GOOGLE_MAP_API_KEY: JSON.stringify(process.env.GOOGLE_MAP_API_KEY),
         BASE_URL: JSON.stringify(process.env.BASE_URL)
       }
+    }),
+    new webpack.DefinePlugin({
+      "process.env": {
+        LOAD_SB_PROPS: JSON.stringify(process.env.LOAD_SB_PROPS)
+      }
+    }),
+    new webpack.DefinePlugin({
+      "process.env": { API_VERSION: JSON.stringify(process.env.API_VERSION) }
+    }),
+    new HtmlWebPackPlugin({
+      template: "./src/index.html",
+      filename: "./index.html"
+    }),
+    new HtmlWebPackPlugin({
+      favicon: "./src/favicon.ico"
     })
   ],
   profile: true,
@@ -89,7 +105,8 @@ module.exports = {
   },
   output: {
     filename: "index.js",
-    path: path.resolve(__dirname, "dist")
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/"
   },
   performance: { hints: false }
 };

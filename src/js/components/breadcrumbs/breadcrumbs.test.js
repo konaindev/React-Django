@@ -1,5 +1,7 @@
-import Breadcrumbs from "./index";
 import renderer from "react-test-renderer";
+import { MemoryRouter } from "react-router-dom";
+
+import Breadcrumbs from "./index";
 
 describe("Breadcrumbs", () => {
   it("renders correctly", () => {
@@ -14,7 +16,13 @@ describe("Breadcrumbs", () => {
         }
       ]
     };
-    const tree = renderer.create(<Breadcrumbs {...props} />).toJSON();
+    const tree = renderer
+      .create(
+        <MemoryRouter>
+          <Breadcrumbs {...props} />
+        </MemoryRouter>
+      )
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

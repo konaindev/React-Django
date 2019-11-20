@@ -40,7 +40,14 @@ exports[`PropertyRow renders at-risk 1`] = `
   >
     <a
       className="property-row__link"
-      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "inherit",
+          "textDecoration": "inherit",
+        }
+      }
     >
       View Property
     </a>
@@ -223,7 +230,14 @@ exports[`PropertyRow renders off-track 1`] = `
   >
     <a
       className="property-row__link"
-      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "inherit",
+          "textDecoration": "inherit",
+        }
+      }
     >
       View Property
     </a>
@@ -406,7 +420,14 @@ exports[`PropertyRow renders on-track 1`] = `
   >
     <a
       className="property-row__link"
-      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "inherit",
+          "textDecoration": "inherit",
+        }
+      }
     >
       View Property
     </a>
@@ -589,7 +610,14 @@ exports[`PropertyRow renders selected 1`] = `
   >
     <a
       className="property-row__link"
-      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "inherit",
+          "textDecoration": "inherit",
+        }
+      }
     >
       View Property
     </a>
@@ -772,7 +800,14 @@ exports[`PropertyRow renders selection mode 1`] = `
   >
     <a
       className="property-row__link"
-      href="https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "inherit",
+          "textDecoration": "inherit",
+        }
+      }
     >
       View Property
     </a>

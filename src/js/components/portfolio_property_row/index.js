@@ -9,6 +9,7 @@ import Alarm from "../../icons/alarm";
 import { formatKPI } from "../../utils/kpi_formatters";
 import PropertyStatus from "../property_status";
 import Tooltip from "../rmb_tooltip";
+import { Link } from "react-router-dom";
 
 export default class PortfolioPropertyRow extends React.PureComponent {
   static propTypes = {
@@ -85,9 +86,13 @@ export default class PortfolioPropertyRow extends React.PureComponent {
             className="portfolio-property-row__health"
             performance_rating={health}
           />
-          <a className="portfolio-property-row__link" href={url}>
+          <Link
+            style={{ color: "inherit", textDecoration: "inherit" }}
+            className="portfolio-property-row__link"
+            to={url || "#"}
+          >
             View Property
-          </a>
+          </Link>
         </div>
         <div className="portfolio-property-row__kpis">{this.renderKPIs()}</div>
       </div>

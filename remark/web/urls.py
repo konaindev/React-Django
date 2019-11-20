@@ -17,17 +17,12 @@ Including another URLconf
 from django.urls import path
 
 from .views import DashboardView, TutorialView, LocalizationView
-from remark.users.views import CustomLoginView
-from remark.decorators import anonymous_required
+
+app_name = "web"
 
 
 urlpatterns = [
-    path("dashboard", DashboardView.as_view(), name="dashboard"),
-    path("tutorial", TutorialView.as_view(), name="tutorial"),
+    path("dashboard/", DashboardView.as_view(), name="dashboard"),
+    path("tutorial/", TutorialView.as_view(), name="tutorial"),
     path("localization", LocalizationView.as_view(), name="localization"),
-    path(
-        "",
-        anonymous_required(CustomLoginView.as_view(template_name="users/login.html")),
-        name="login",
-    ),
 ]

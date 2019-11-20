@@ -1,12 +1,14 @@
 import json
 
 from django.conf import settings
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import JsonResponse
+
+from rest_framework import status as drf_status
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 from remark.projects.models import Project
 import remark.lib.cache as cache_lib
-from remark.lib.views import ReactView, RemarkView, APIView
 
 from .constants import DEFAULT_LANGUAGE
 from .forms import LocalizationForm
@@ -19,10 +21,10 @@ def has_property_in_list_of_dict(ary, prop, value):
     return False
 
 
-class DashboardView(LoginRequiredMixin, ReactView):
+class DashboardView(APIView):
     """Render dashboard page."""
 
-    page_class = "DashboardPage"
+    permission_classes = [IsAuthenticated]
 
     sql_sort = {
         "name": "name",
@@ -32,9 +34,6 @@ class DashboardView(LoginRequiredMixin, ReactView):
         "city": "property__geo_address__city",
         "fund": "fund__name",
     }
-
-    def get_page_title(self):
-        return "Dashboard"
 
     def get_project_details(self, project, request):
         """ cached by "project.public_id", details for project card on UI """
@@ -50,8 +49,8 @@ class DashboardView(LoginRequiredMixin, ReactView):
                 address=f"{address.city}, {address.state}",
                 image_url=project.get_building_image()[1],
                 performance_rating=project.get_performance_rating(),
-                url=project.get_report_url(),
                 members=project.get_members(),
+                report_url=project.get_report_url()
             )
             return project_details
 
@@ -132,25 +131,25 @@ class DashboardView(LoginRequiredMixin, ReactView):
     def prepare_filters_from_request(self, request):
         """ calc queryset filter params based on HTTP request query strings """
         lookup_params = {}
-        if request.GET.get("q"):
-            lookup_params["name__icontains"] = request.GET.get("q")
-        if request.GET.get("st"):
-            st = request.GET.getlist("st")
+        if request.query_params.get("q"):
+            lookup_params["name__icontains"] = request.query_params.get("q")
+        if request.query_params.get("st"):
+            st = request.query_params.getlist("st")
             lookup_params["property__geo_address__state__iregex"] = (
                 r"(" + "|".join(st) + ")"
             )
-        if request.GET.get("ct"):
-            lookup_params["property__geo_address__city__in"] = request.GET.getlist("ct")
-        if request.GET.get("pm"):
-            lookup_params["property_manager_id__in"] = request.GET.getlist("pm")
-        if request.GET.getlist("am"):
-            lookup_params["asset_manager_id__in"] = request.GET.getlist("am")
-        if request.GET.get("fd"):
-            lookup_params["fund_id__in"] = request.GET.getlist("fd")
+        if request.query_params.get("ct"):
+            lookup_params["property__geo_address__city__in"] = request.query_params.getlist("ct")
+        if request.query_params.get("pm"):
+            lookup_params["property_manager_id__in"] = request.query_params.getlist("pm")
+        if request.query_params.getlist("am"):
+            lookup_params["asset_manager_id__in"] = request.query_params.getlist("am")
+        if request.query_params.get("fd"):
+            lookup_params["fund_id__in"] = request.query_params.getlist("fd")
 
-        sort_by = request.GET.get("s")
+        sort_by = request.query_params.get("s")
         ordering = self.sql_sort.get(sort_by) or "name"
-        direction = request.GET.get("d") or "asc"
+        direction = request.query_params.get("d") or "asc"
         if direction == "desc":
             ordering = f"-{ordering}"
 
@@ -170,8 +169,8 @@ class DashboardView(LoginRequiredMixin, ReactView):
             for project in owned_projects.filter(**lookup_params).order_by(ordering)
         ]
 
-        sort_by = request.GET.get("s")
-        direction = request.GET.get("d") or "asc"
+        sort_by = request.query_params.get("s")
+        direction = request.query_params.get("d") or "asc"
         if sort_by == "performance":
             is_reverse = direction == "asc"
             projects = sorted(
@@ -186,39 +185,36 @@ class DashboardView(LoginRequiredMixin, ReactView):
             **filter_options,
         )
 
-        accept = request.META.get("HTTP_ACCEPT")
-        if accept == "application/json":
-            return JsonResponse(response_data)
-        else:
-            return self.render(**response_data)
+        return Response(response_data)
 
 
-class TutorialView(LoginRequiredMixin, RemarkView):
+class TutorialView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         user = request.user
-        return JsonResponse(
-            {
-                "static_url": settings.STATIC_URL,
-                "is_show_tutorial": user.is_show_tutorial,
-            },
-            status=200,
+        response_data = dict(
+            static_url=settings.STATIC_URL,
+            is_show_tutorial=user.is_show_tutorial,
         )
+        return Response(response_data)
 
     def post(self, request):
-        params = json.loads(request.body)
         user = request.user
-        user.is_show_tutorial = params.get("is_show_tutorial", False)
+        user.is_show_tutorial = request.data.is_show_tutorial or False
         user.save()
-        return JsonResponse({"is_show_tutorial": user.is_show_tutorial}, status=200)
+
+        response_data = dict(is_show_tutorial=user.is_show_tutorial,)
+        return Response(response_data)
 
 
 class LocalizationView(APIView):
     def post(self, request):
-        params = self.get_data()
-        localization_form = LocalizationForm(params, initial={"language": "en_us"})
+        localization_form = LocalizationForm(request.data, initial={"language": "en_us"})
         if not localization_form.is_valid():
             errors = localization_form.errors.get_json_data()
-            return JsonResponse(errors, status=500)
+            return Response(errors, status=drf_status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         version = localization_form.data.get("version")
         language = localization_form.data.get("language", DEFAULT_LANGUAGE)
@@ -226,12 +222,12 @@ class LocalizationView(APIView):
         localization_version = LocalizationVersion.objects.get(language=language)
         current_version = localization_version.version
         strings = {}
-        status = 208
+        status = drf_status.HTTP_208_ALREADY_REPORTED
         if current_version != version:
             ui_strings = Localization.objects.all()
             for s_ui in ui_strings:
                 strings[s_ui.key] = getattr(s_ui, language)
-            status = 200
+            status = drf_status.HTTP_200_OK
 
-        result = {"language": language, "strings": strings, "version": current_version}
-        return self.render_success(result, status=status)
+        response_data = {"language": language, "strings": strings, "version": current_version}
+        return Response(response_data, status=status)

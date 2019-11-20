@@ -11,10 +11,11 @@ import FormField from "../form_field";
 import PageAuth from "../page_auth";
 import PasswordOverlay from "../password_tooltip";
 import RMBTooltip from "../rmb_tooltip";
-import router from "../../router";
+import { axiosPost } from "../../utils/api";
+
 import "./create_password_view.scss";
 
-class CreatePasswordView extends React.PureComponent {
+export class CreatePasswordView extends React.PureComponent {
   static propTypes = {
     hash: PropTypes.string.isRequired,
     rules: PropTypes.arrayOf(
@@ -34,7 +35,6 @@ class CreatePasswordView extends React.PureComponent {
 
   constructor(props) {
     super(props);
-    this._router = router("/users")(() => {});
   }
 
   timeoutId;

@@ -10,6 +10,13 @@ exports[`CompleteAccountView renders correctly 1`] = `
     <a
       className="page-auth__back-link"
       href="/"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "inherit",
+          "textDecoration": "inherit",
+        }
+      }
     >
       ← Go to Login
     </a>
@@ -18,6 +25,13 @@ exports[`CompleteAccountView renders correctly 1`] = `
     >
       <a
         href="/dashboard"
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "inherit",
+            "textDecoration": "inherit",
+          }
+        }
       >
         <div
           className="remarkably-logo"
@@ -359,7 +373,9 @@ exports[`CompleteAccountView renders correctly 1`] = `
                     >
                       
                     </div>
-                    <div>
+                    <div
+                      className="css-zz0hea-Input"
+                    >
                       <div
                         className="select__input"
                         style={
@@ -416,7 +432,7 @@ exports[`CompleteAccountView renders correctly 1`] = `
                     </div>
                   </div>
                   <div
-                    className="select__indicators css-1wy0on6"
+                    className="select__indicators css-1g48xl4-IndicatorsContainer"
                   >
                     <span
                       className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -523,7 +539,7 @@ exports[`CompleteAccountView renders correctly 1`] = `
                     />
                   </div>
                   <div
-                    className="select__indicators css-1wy0on6"
+                    className="select__indicators css-1g48xl4-IndicatorsContainer"
                   >
                     <span
                       className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -828,7 +844,9 @@ exports[`CompleteAccountView renders correctly 1`] = `
                     >
                       Select office...
                     </div>
-                    <div>
+                    <div
+                      className="css-zz0hea-Input"
+                    >
                       <div
                         className="select__input"
                         style={
@@ -885,7 +903,7 @@ exports[`CompleteAccountView renders correctly 1`] = `
                     </div>
                   </div>
                   <div
-                    className="select__indicators css-1wy0on6"
+                    className="select__indicators css-1g48xl4-IndicatorsContainer"
                   >
                     <span
                       className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -1459,7 +1477,7 @@ exports[`CompleteAccountView renders correctly 1`] = `
                     />
                   </div>
                   <div
-                    className="select__indicators css-1wy0on6"
+                    className="select__indicators css-1g48xl4-IndicatorsContainer"
                   >
                     <span
                       className="select__indicator-separator css-1okebmr-indicatorSeparator"
