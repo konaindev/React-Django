@@ -100,5 +100,6 @@ ZIP_REGEX = re.compile(r"(\d{5}(-\d{4})?$)|(^([A-PR-UWYZ]([0-9]{1,2}|([A-HK-Y][0
 STREET_REGEX = re.compile(r"^\s*\S+(?:\s+\S+){2}")
 PROJECT_ROLES = {
     "member": "member",
-    "admin": "admin"
+    "admin": "admin",
+    "staff": "staff"
 }

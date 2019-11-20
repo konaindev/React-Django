@@ -185,6 +185,16 @@ class User(PermissionsMixin, AbstractBaseUser):
             url = ""
         return url
 
+
+    def get_business_name(self):
+        try:
+            p = self.person
+            if not p:
+                return None
+        except Person.DoesNotExist:
+            return None
+        return p.office.business.name
+
     def get_icon_dict(self, role=PROJECT_ROLES["member"]):
         return {
             "email": self.email,
@@ -192,6 +202,7 @@ class User(PermissionsMixin, AbstractBaseUser):
             "account_name": self.get_name(),
             "profile_image_url": self.get_avatar_url(),
             "role": role,
+            "business_name": self.get_business_name(),
         }
 
     def get_profile_data(self):
@@ -223,6 +234,7 @@ class User(PermissionsMixin, AbstractBaseUser):
             "office_type": office.office_type,
         }
 
+
     def get_country_object(self, value):
         with open('./data/locations/countries.json', 'r') as read_file:
             countries = json.load(read_file)
@@ -234,6 +246,7 @@ class User(PermissionsMixin, AbstractBaseUser):
                     }
                     return country_object
         
+
 
 class Account(models.Model):
     company_name = models.CharField(max_length=250, help_text="Company Name")

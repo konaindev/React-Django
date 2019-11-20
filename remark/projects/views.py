@@ -3,6 +3,7 @@ import json
 
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import redirect_to_login
 from django.db.models import Q
 from django.http import Http404, JsonResponse
 from django.shortcuts import get_object_or_404
@@ -222,8 +223,7 @@ class SearchMembersView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        # payload = json.loads(request.body)
-        payload = self.get_data()
+        payload = json.loads(request.body)
         value = payload.get("value", "")
         projects = Project.objects.get_all_for_user(request.user)
         groups_ids = []
@@ -296,7 +296,11 @@ class AddMembersView(APIView):
                 )
 
         projects_list = [
-            {"property_id": p.public_id, "members": p.get_members()} for p in projects
+            {
+                "property_id": p.public_id,
+                "property_name": p.name,
+                "members": p.get_members(),
+            } for p in projects
         ]
         return Response({"projects": projects_list})
 
@@ -332,14 +336,18 @@ class ProjectRemoveMemberView(APIView):
         project.save()
         projects_dict = {
             "property_id": project.public_id,
+            "property_name": project.name,
             "members": project.get_members(),
         }
         return Response({"project": projects_dict})
 
 
-class ChangeMemberRoleView(LoginRequiredMixin, APIView):
+class ChangeMemberRoleView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
     def post(self, request, project_id, user_id):
-        payload = self.get_data()
+        payload = json.loads(request.body)
         role = payload.get("role")
 
         try:

@@ -518,9 +518,14 @@ class Project(models.Model):
     def user_can_view(self, user):
         if user.is_superuser:
             return True
-        return (self.view_group is not None) and user.groups.filter(
+
+        is_member = (self.view_group is not None) and user.groups.filter(
             pk=self.view_group.pk
         ).exists()
+        is_admin = (self.admin_group is not None) and user.groups.filter(
+            pk=self.admin_group.pk
+        ).exists()
+        return is_member or is_admin
 
     def user_can_edit(self, user):
         if user.is_superuser:

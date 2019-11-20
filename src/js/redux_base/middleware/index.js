@@ -17,6 +17,7 @@ import {
   updateReportsSettingsData,
   updateSecurityData
 } from "../../api/account_settings";
+import { API_URL_PREFIX, URLS } from "../actions/helpers";
 import { axiosGet, axiosPost } from "../../utils/api";
 import { URLS } from "../actions/helpers";
 import ReactGa from "react-ga";
@@ -236,7 +237,7 @@ export const logoutMiddleware = store => next => action => {
 
 export const fetchInviteModal = store => next => action => {
   if (action.type === "API_INVITE_MODAL_GET_USERS") {
-    const url = `${process.env.BASE_URL}/api/v1/search-members/`;
+    const url = `${API_URL_PREFIX}/search-members/`;
     axiosPost(url, action.data)
       .then(response => {
         const members = response.data?.members || [];
@@ -245,7 +246,7 @@ export const fetchInviteModal = store => next => action => {
       .catch(e => console.log("-----> ERROR", e));
   } else if (action.type === "AJAX_DASHBOARD_REMOVE_MEMBER") {
     const projectsId = action.data.project.property_id;
-    const url = `${process.env.BASE_URL}/api/v1/projects/${projectsId}/remove-member/`;
+    const url = `${API_URL_PREFIX}/projects/${projectsId}/remove-member/`;
     axiosPost(url, action.data)
       .then(response => {
         const property = response.data.project;
@@ -253,7 +254,7 @@ export const fetchInviteModal = store => next => action => {
       })
       .catch(e => console.log("-----> ERROR", e));
   } else if (action.type === "API_INVITE_RESEND") {
-    const url = `${process.env.BASE_URL}/api/v1/users/${action.hash}/resend-invite/`;
+    const url = `${API_URL_PREFIX}/users/${action.hash}/resend-invite/`;
     axiosGet(url)
       .then(response => {
         if (response.status === 200) {
@@ -266,11 +267,11 @@ export const fetchInviteModal = store => next => action => {
   } else if (action.type === "API_INVITE_MODAL_CHANGE_ROLE") {
     const { role, property_id, member_id } = action.data;
     const data = { role };
-    const url = `${process.env.BASE_URL}/projects/${property_id}/member/${member_id}/`;
+    const url = `${API_URL_PREFIX}/projects/${property_id}/member/${member_id}/`;
     axiosPost(url, data).then(response => {
       if (response.status === 200) {
         next({
-          type: "GENERAL_UPDATE_MEMBERS",
+          type: "AJAX_DASHBOARD_UPDATE_MEMBER_SUCCESS",
           data: {
             property_id,
             members: response.data.members

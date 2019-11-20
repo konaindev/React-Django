@@ -24,3 +24,4 @@ export { default as Ok } from "./ok";
 export { default as Upload } from "./upload";
 export { default as AddUser } from "./add_user";
 export { default as Settings } from "./settings";
+export { default as Add } from "./add";

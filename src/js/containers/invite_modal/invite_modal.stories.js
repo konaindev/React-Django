@@ -4,11 +4,11 @@ import { storiesOf } from "@storybook/react";
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 
-import { props as userProps } from "../user_icon_list/props";
+import { props as userProps } from "../../components/user_icon_list/props";
+import { props, multiProps } from "../../components/members_modal/props";
 import storeFunc from "../../redux_base/store";
 
-import InviteModal from "./index";
-import { props, multiProps } from "./props";
+import { InviteModalProperties } from "./index";
 
 const { store } = storeFunc();
 const withProvider = story => <Provider store={store}>{story()}</Provider>;
@@ -50,22 +50,20 @@ storiesOf("InviteModal", module)
   .addDecorator(apiMock)
   .addDecorator(withProvider)
   .add("default", () => {
-    store.getState().general = {
-      properties: props.properties,
+    store.getState().dashboard = {
       selectedProperties: props.properties
     };
     store.dispatch({
       type: "INVITE_MODAL_SHOW"
     });
-    return <InviteModal />;
+    return <InviteModalProperties />;
   })
   .add("Multiple properties", () => {
-    store.getState().general = {
-      properties: multiProps.properties,
+    store.getState().dashboard = {
       selectedProperties: multiProps.properties
     };
     store.dispatch({
       type: "INVITE_MODAL_SHOW"
     });
-    return <InviteModal />;
+    return <InviteModalProperties />;
   });

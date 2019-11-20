@@ -59,6 +59,7 @@ class ProjectReportsContainer extends PureComponent {
         reportSpan={reportSpan}
         fetchingReports={fetchingReports}
         historyPush={this.props.history.push}
+        dispatch={this.props.dispatch}
       />
     );
   }

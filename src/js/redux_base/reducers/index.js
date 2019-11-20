@@ -6,6 +6,7 @@ import portfolio from "./portfolio";
 import projectReports from "./project_reports";
 import inviteModal from "./invite_modal";
 import accountSettings from "./account_settings";
+import viewMembersModal from "./view_members";
 
 const initState = {
   tutorialView: {}
@@ -296,5 +297,6 @@ export default combineReducers({
   project,
   market,
   kpi,
-  accountSettings
+  accountSettings,
+  viewMembersModal
 });

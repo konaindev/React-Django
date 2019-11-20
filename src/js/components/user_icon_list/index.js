@@ -19,15 +19,24 @@ export default class UserIconList extends React.PureComponent {
         user_id: PropTypes.string.isRequired,
         profile_image_url: PropTypes.string,
         account_name: PropTypes.string.isRequired,
-        role: PropTypes.string.isRequired
+        role: PropTypes.string.isRequired,
+        is_current: PropTypes.bool
       })
     ),
-    maxCount: PropTypes.number
+    maxCount: PropTypes.number,
+    className: PropTypes.string,
+    theme: PropTypes.oneOf(["project"]),
+    tooltipPlacement: PropTypes.oneOf(["bottom", "top"]),
+    tooltipTheme: PropTypes.oneOf(["", "highlight", "dark", "light-dark"]),
+    onClick: PropTypes.func
   };
 
   static defaultProps = {
     users: [],
-    maxCount: 5
+    maxCount: 5,
+    tooltipPlacement: "top",
+    tooltipTheme: "",
+    onClick() {}
   };
 
   constructor(props) {
@@ -61,47 +70,94 @@ export default class UserIconList extends React.PureComponent {
 
   renderOverlay = user => (
     <div>
-      <div className="user-icon-list__name">{user.account_name}</div>
+      <div className="user-icon-list__name">
+        {user.account_name}
+        {!!user.is_current ? (
+          <span className="user-icon-list__name-sign"> (You)</span>
+        ) : null}
+      </div>
       <div className="user-icon-list__role">{user.role}</div>
     </div>
   );
 
   renderIcons = () => {
     const { users, maxCount } = this.props;
-    return users.slice(0, maxCount).map((user, i) => (
-      <RMBTooltip
-        overlayClassName="user-icon-list__tooltip"
-        placement="top"
-        overlay={this.renderOverlay(user)}
-        key={user.user_id}
-      >
-        <UserIcon
-          className="user-icon-list__icon"
-          account_name={user.account_name}
-          profile_image_url={user.profile_image_url}
-          color={getColor(i)}
-          data-index={i}
-          style={{ zIndex: this.state.zIndexes[i] }}
-          onMouseEnter={this.onMouseEnterHandler}
-          onMouseLeave={this.onMouseLeaveHandler}
-        />
-      </RMBTooltip>
-    ));
+    return users.slice(0, maxCount).map((user, i) => {
+      const classes = cn("user-icon-list__icon", {
+        "user-icon-list__icon--current": !!user.is_current
+      });
+      return (
+        <RMBTooltip
+          overlayClassName="user-icon-list__tooltip"
+          placement={this.props.tooltipPlacement}
+          theme={this.props.tooltipTheme}
+          overlay={this.renderOverlay(user)}
+          key={user.user_id}
+        >
+          <UserIcon
+            className={classes}
+            account_name={user.account_name}
+            profile_image_url={user.profile_image_url}
+            color={getColor(i)}
+            data-index={i}
+            style={{ zIndex: this.state.zIndexes[i] }}
+            onMouseEnter={this.onMouseEnterHandler}
+            onMouseLeave={this.onMouseLeaveHandler}
+          />
+        </RMBTooltip>
+      );
+    });
+  };
+
+  renderCount = () => {
+    const { users, maxCount, theme } = this.props;
+    let count = (
+      <div className="user-icon-list__count">
+        <span>+{users.slice(maxCount).length}</span>
+      </div>
+    );
+
+    if (theme === "project") {
+      const overlay = (
+        <div className="user-icon-list__name">View All Users</div>
+      );
+      count = (
+        <RMBTooltip
+          overlayClassName="user-icon-list__tooltip"
+          placement={this.props.tooltipPlacement}
+          theme={this.props.tooltipTheme}
+          overlay={overlay}
+        >
+          {count}
+        </RMBTooltip>
+      );
+    }
+
+    return count;
   };
 
   render() {
-    const { className, users, maxCount, ...otherProps } = this.props;
+    const {
+      className,
+      users,
+      maxCount,
+      theme,
+      tooltipPlacement,
+      tooltipTheme,
+      onClick,
+      ...otherProps
+    } = this.props;
     let count = null;
     if (users.length > maxCount) {
-      count = (
-        <div className="user-icon-list__count">
-          <span>+{users.slice(maxCount).length}</span>
-        </div>
-      );
+      count = this.renderCount();
     }
-    const classes = cn("user-icon-list", className);
+    const classes = cn(
+      "user-icon-list",
+      { [`user-icon-list--${theme}`]: theme },
+      className
+    );
     return (
-      <div className={classes} {...otherProps}>
+      <div className={classes} onClick={onClick} {...otherProps}>
         {this.renderIcons()}
         {count}
       </div>

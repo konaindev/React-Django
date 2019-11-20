@@ -6,6 +6,7 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
+  let p, project;
   switch (action.type) {
     case "AJAX_GET_PROJECT_OVERALL_REQUEST":
       return initialState;
@@ -36,6 +37,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         fetchingReports: false
       };
+    case "AJAX_POST_DASHBOARD_ADD_MEMBER_SUCCESS":
+      p = action.payload.projects[0];
+      project = { ...state.project, members: p.members };
+      return { ...state, project };
+    case "AJAX_DASHBOARD_REMOVE_MEMBER_SUCCESS":
+      p = action.property;
+      project = { ...state.project, members: p.members };
+      return { ...state, project };
+    case "AJAX_DASHBOARD_UPDATE_MEMBER_SUCCESS":
+      const { members } = action.data;
+      project = { ...state.project, members };
+      return { ...state, project };
     default:
       return state;
   }
