@@ -211,7 +211,6 @@ exports[`UserMenu render opened 1`] = `
     >
       <a
         className="user-menu__dropdown-item"
-<<<<<<< HEAD
         href="/users/account-settings"
       >
         <svg
@@ -238,8 +237,6 @@ exports[`UserMenu render opened 1`] = `
       </a>
       <a
         className="user-menu__dropdown-item"
-        href="https://app.remarkably.io/user/logout"
-=======
         href="/"
         onClick={[Function]}
         style={
@@ -248,7 +245,6 @@ exports[`UserMenu render opened 1`] = `
             "textDecoration": "inherit",
           }
         }
->>>>>>> staging
       >
         <svg
           aria-hidden="true"

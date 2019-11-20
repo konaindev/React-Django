@@ -109,7 +109,7 @@ exports[`AccountSettings account security tab 1`] = `
                         />
                       </div>
                       <div
-                        className="select__indicators css-1wy0on6"
+                        className="select__indicators css-1g48xl4-IndicatorsContainer"
                       >
                         <span
                           className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -672,20 +672,6 @@ exports[`AccountSettings email reports 'Groups' tab 1`] = `
                   href="#"
                   onClick={[Function]}
                 >
-                  Portfolio
-                </a>
-                <a
-                  className="tab-navigator__nav-item tab-navigator__nav-item--active"
-                  href="#"
-                  onClick={[Function]}
-                >
-                  Groups
-                </a>
-                <a
-                  className="tab-navigator__nav-item"
-                  href="#"
-                  onClick={[Function]}
-                >
                   Properties
                 </a>
               </div>
@@ -694,254 +680,7 @@ exports[`AccountSettings email reports 'Groups' tab 1`] = `
               />
               <div
                 className="container"
-              >
-                <div
-                  className="tab-navigator__content"
-                >
-                  <div>
-                    <div
-                      className="account-settings__search-controls"
-                    >
-                      <div
-                        className="search-with-sort account-settings__search"
-                      >
-                        <div
-                          className="search-input-box search-with-sort__input"
-                        >
-                          <input
-                            className="input search-input input--gray"
-                            onChange={[Function]}
-                            placeholder="Search Groups"
-                            type="text"
-                            value=""
-                          />
-                        </div>
-                        <svg
-                          aria-hidden="true"
-                          className="search-with-sort__button search-with-sort__button--asc search-with-sort__button--gray"
-                          color="inherit"
-                          focusable="false"
-                          height="1em"
-                          onClick={[Function]}
-                          role="presentation"
-                          viewBox="0 0 16 14"
-                          width="1em"
-                        >
-                          <g
-                            fill="currentColor"
-                            stroke="none"
-                            strokeWidth="1"
-                          >
-                            <g
-                              transform="translate(-1383.000000, -185.000000)"
-                            >
-                              <g
-                                transform="translate(1087.000000, 169.000000)"
-                              >
-                                <g
-                                  transform="translate(296.000000, 16.000000)"
-                                >
-                                  <rect
-                                    height="1"
-                                    rx="0.4895163"
-                                    width="7.78365217"
-                                    x="8.01085217"
-                                    y="2.353442"
-                                  />
-                                  <rect
-                                    height="1"
-                                    rx="0.4895163"
-                                    width="5.8377113"
-                                    x="8.01085217"
-                                    y="5.290502"
-                                  />
-                                  <rect
-                                    height="1"
-                                    rx="0.4895163"
-                                    width="3.89181217"
-                                    x="8.01085217"
-                                    y="8.22766"
-                                  />
-                                  <rect
-                                    height="1"
-                                    rx="0.4895163"
-                                    width="1.94590609"
-                                    x="8.01085217"
-                                    y="11.16472"
-                                  />
-                                  <path
-                                    d="M2.85056,13.92804 C2.94554435,14.02394 3.09984696,14.02401 3.1949287,13.92818 L5.98018783,11.12216 C6.07507478,11.02654 6.07503304,10.87163 5.98008348,10.77608 L5.68895304,10.48313 C5.59389913,10.38751 5.43977043,10.38758 5.34480696,10.48334 L3.47919304,12.3641 L3.47919304,0.2447585 C3.47919304,0.1095822 3.37029565,-1.139453e-08 3.23595826,0 L2.80937043,3.618335e-08 C2.67503304,4.757781e-08 2.56613565,0.1095822 2.56613565,0.2447585 L2.5661287,12.3641 L0.706685218,10.48383 C0.611766261,10.38786 0.457431652,10.38765 0.36227687,10.48341 L0.0712431306,10.77629 C-0.0236404172,10.87177 -0.0237631303,11.02654 0.070968348,11.12216 L2.85056,13.92804 Z"
-                                  />
-                                </g>
-                              </g>
-                            </g>
-                          </g>
-                        </svg>
-                      </div>
-                      <label
-                        className="button-toggle button-toggle--unchecked account-settings__toggle"
-                      >
-                        <input
-                          checked={false}
-                          className="button-toggle__input"
-                          onChange={[Function]}
-                          type="checkbox"
-                        />
-                        <span
-                          className="button-toggle__track"
-                        >
-                          <span
-                            className="button-toggle__thumb"
-                          />
-                          <div
-                            className="button-toggle__checked"
-                          >
-                            <div
-                              className="button-toggle__inner-label"
-                            >
-                              On
-                            </div>
-                          </div>
-                          <div
-                            className="button-toggle__unchecked"
-                          >
-                            <div
-                              className="button-toggle__inner-label"
-                            >
-                              Off
-                            </div>
-                          </div>
-                        </span>
-                        
-                      </label>
-                    </div>
-                    <div
-                      className="email-reporting-table account-settings__reporting-table"
-                    >
-                      <div
-                        className="email-reporting-table__rows"
-                      >
-                        <div
-                          className="email-reporting-row email-reporting-table__row"
-                        >
-                          <div
-                            className="email-reporting-row__col"
-                          >
-                            <div
-                              className="email-reporting-row__title"
-                            >
-                              Southwestern
-                            </div>
-                            <div
-                              className="email-reporting-row__info"
-                            >
-                              6 Properties
-                            </div>
-                          </div>
-                          <div
-                            className="email-reporting-row__col email-reporting-row__col--middle"
-                          >
-                            <label
-                              className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
-                            >
-                              <input
-                                checked={false}
-                                className="button-toggle__input"
-                                onChange={[Function]}
-                                type="checkbox"
-                              />
-                              <span
-                                className="button-toggle__track"
-                              >
-                                <span
-                                  className="button-toggle__thumb"
-                                />
-                                <div
-                                  className="button-toggle__checked"
-                                >
-                                  <div
-                                    className="button-toggle__inner-label"
-                                  >
-                                    On
-                                  </div>
-                                </div>
-                                <div
-                                  className="button-toggle__unchecked"
-                                >
-                                  <div
-                                    className="button-toggle__inner-label"
-                                  >
-                                    Off
-                                  </div>
-                                </div>
-                              </span>
-                              
-                            </label>
-                          </div>
-                        </div>
-                        <div
-                          className="email-reporting-row email-reporting-table__row"
-                        >
-                          <div
-                            className="email-reporting-row__col"
-                          >
-                            <div
-                              className="email-reporting-row__title"
-                            >
-                              Tri-City
-                            </div>
-                            <div
-                              className="email-reporting-row__info"
-                            >
-                              5 Properties
-                            </div>
-                          </div>
-                          <div
-                            className="email-reporting-row__col email-reporting-row__col--middle"
-                          >
-                            <label
-                              className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
-                            >
-                              <input
-                                checked={false}
-                                className="button-toggle__input"
-                                onChange={[Function]}
-                                type="checkbox"
-                              />
-                              <span
-                                className="button-toggle__track"
-                              >
-                                <span
-                                  className="button-toggle__thumb"
-                                />
-                                <div
-                                  className="button-toggle__checked"
-                                >
-                                  <div
-                                    className="button-toggle__inner-label"
-                                  >
-                                    On
-                                  </div>
-                                </div>
-                                <div
-                                  className="button-toggle__unchecked"
-                                >
-                                  <div
-                                    className="button-toggle__inner-label"
-                                  >
-                                    Off
-                                  </div>
-                                </div>
-                              </span>
-                              
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              />
             </div>
           </div>
         </div>
@@ -1197,20 +936,6 @@ exports[`AccountSettings email reports 'Portfolio' tab 1`] = `
                 className="container tab-navigator__navs"
               >
                 <a
-                  className="tab-navigator__nav-item tab-navigator__nav-item--active"
-                  href="#"
-                  onClick={[Function]}
-                >
-                  Portfolio
-                </a>
-                <a
-                  className="tab-navigator__nav-item"
-                  href="#"
-                  onClick={[Function]}
-                >
-                  Groups
-                </a>
-                <a
                   className="tab-navigator__nav-item"
                   href="#"
                   onClick={[Function]}
@@ -1223,78 +948,7 @@ exports[`AccountSettings email reports 'Portfolio' tab 1`] = `
               />
               <div
                 className="container"
-              >
-                <div
-                  className="tab-navigator__content"
-                >
-                  <div
-                    className="email-reporting-table account-settings__reporting-table"
-                  >
-                    <div
-                      className="email-reporting-table__rows"
-                    >
-                      <div
-                        className="email-reporting-row email-reporting-table__row"
-                      >
-                        <div
-                          className="email-reporting-row__col"
-                        >
-                          <div
-                            className="email-reporting-row__title"
-                          >
-                            Portfolio
-                          </div>
-                          <div
-                            className="email-reporting-row__info"
-                          >
-                            2 Groups, 16 Properties
-                          </div>
-                        </div>
-                        <div
-                          className="email-reporting-row__col email-reporting-row__col--middle"
-                        >
-                          <label
-                            className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
-                          >
-                            <input
-                              checked={false}
-                              className="button-toggle__input"
-                              onChange={[Function]}
-                              type="checkbox"
-                            />
-                            <span
-                              className="button-toggle__track"
-                            >
-                              <span
-                                className="button-toggle__thumb"
-                              />
-                              <div
-                                className="button-toggle__checked"
-                              >
-                                <div
-                                  className="button-toggle__inner-label"
-                                >
-                                  On
-                                </div>
-                              </div>
-                              <div
-                                className="button-toggle__unchecked"
-                              >
-                                <div
-                                  className="button-toggle__inner-label"
-                                >
-                                  Off
-                                </div>
-                              </div>
-                            </span>
-                            
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              />
             </div>
           </div>
         </div>
@@ -1550,20 +1204,6 @@ exports[`AccountSettings email reports 'Properties' tab 1`] = `
                 className="container tab-navigator__navs"
               >
                 <a
-                  className="tab-navigator__nav-item"
-                  href="#"
-                  onClick={[Function]}
-                >
-                  Portfolio
-                </a>
-                <a
-                  className="tab-navigator__nav-item"
-                  href="#"
-                  onClick={[Function]}
-                >
-                  Groups
-                </a>
-                <a
                   className="tab-navigator__nav-item tab-navigator__nav-item--active"
                   href="#"
                   onClick={[Function]}
@@ -1698,277 +1338,9 @@ exports[`AccountSettings email reports 'Properties' tab 1`] = `
                       </label>
                     </div>
                     <div
-                      className="email-reporting-table account-settings__reporting-table"
+                      className="email-reporting-table email-reporting-table--no-data account-settings__reporting-table"
                     >
-                      <div
-                        className="email-reporting-table__rows"
-                      >
-                        <div
-                          className="email-reporting-row email-reporting-table__row"
-                        >
-                          <div
-                            className="email-reporting-row__col"
-                          >
-                            <div
-                              className="email-reporting-row__title"
-                            >
-                              Adams Lane Flats
-                            </div>
-                          </div>
-                          <div
-                            className="email-reporting-row__col email-reporting-row__col--middle"
-                          >
-                            <label
-                              className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
-                            >
-                              <input
-                                checked={false}
-                                className="button-toggle__input"
-                                onChange={[Function]}
-                                type="checkbox"
-                              />
-                              <span
-                                className="button-toggle__track"
-                              >
-                                <span
-                                  className="button-toggle__thumb"
-                                />
-                                <div
-                                  className="button-toggle__checked"
-                                >
-                                  <div
-                                    className="button-toggle__inner-label"
-                                  >
-                                    On
-                                  </div>
-                                </div>
-                                <div
-                                  className="button-toggle__unchecked"
-                                >
-                                  <div
-                                    className="button-toggle__inner-label"
-                                  >
-                                    Off
-                                  </div>
-                                </div>
-                              </span>
-                              
-                            </label>
-                          </div>
-                        </div>
-                        <div
-                          className="email-reporting-row email-reporting-table__row"
-                        >
-                          <div
-                            className="email-reporting-row__col"
-                          >
-                            <div
-                              className="email-reporting-row__title"
-                            >
-                              Appleton Farms
-                            </div>
-                          </div>
-                          <div
-                            className="email-reporting-row__col email-reporting-row__col--middle"
-                          >
-                            <label
-                              className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
-                            >
-                              <input
-                                checked={false}
-                                className="button-toggle__input"
-                                onChange={[Function]}
-                                type="checkbox"
-                              />
-                              <span
-                                className="button-toggle__track"
-                              >
-                                <span
-                                  className="button-toggle__thumb"
-                                />
-                                <div
-                                  className="button-toggle__checked"
-                                >
-                                  <div
-                                    className="button-toggle__inner-label"
-                                  >
-                                    On
-                                  </div>
-                                </div>
-                                <div
-                                  className="button-toggle__unchecked"
-                                >
-                                  <div
-                                    className="button-toggle__inner-label"
-                                  >
-                                    Off
-                                  </div>
-                                </div>
-                              </span>
-                              
-                            </label>
-                          </div>
-                        </div>
-                        <div
-                          className="email-reporting-row email-reporting-table__row"
-                        >
-                          <div
-                            className="email-reporting-row__col"
-                          >
-                            <div
-                              className="email-reporting-row__title"
-                            >
-                              Cue Townhomes
-                            </div>
-                          </div>
-                          <div
-                            className="email-reporting-row__col email-reporting-row__col--middle"
-                          >
-                            <label
-                              className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
-                            >
-                              <input
-                                checked={false}
-                                className="button-toggle__input"
-                                onChange={[Function]}
-                                type="checkbox"
-                              />
-                              <span
-                                className="button-toggle__track"
-                              >
-                                <span
-                                  className="button-toggle__thumb"
-                                />
-                                <div
-                                  className="button-toggle__checked"
-                                >
-                                  <div
-                                    className="button-toggle__inner-label"
-                                  >
-                                    On
-                                  </div>
-                                </div>
-                                <div
-                                  className="button-toggle__unchecked"
-                                >
-                                  <div
-                                    className="button-toggle__inner-label"
-                                  >
-                                    Off
-                                  </div>
-                                </div>
-                              </span>
-                              
-                            </label>
-                          </div>
-                        </div>
-                        <div
-                          className="email-reporting-row email-reporting-table__row"
-                        >
-                          <div
-                            className="email-reporting-row__col"
-                          >
-                            <div
-                              className="email-reporting-row__title"
-                            >
-                              Over the Rhine
-                            </div>
-                          </div>
-                          <div
-                            className="email-reporting-row__col email-reporting-row__col--middle"
-                          >
-                            <label
-                              className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
-                            >
-                              <input
-                                checked={false}
-                                className="button-toggle__input"
-                                onChange={[Function]}
-                                type="checkbox"
-                              />
-                              <span
-                                className="button-toggle__track"
-                              >
-                                <span
-                                  className="button-toggle__thumb"
-                                />
-                                <div
-                                  className="button-toggle__checked"
-                                >
-                                  <div
-                                    className="button-toggle__inner-label"
-                                  >
-                                    On
-                                  </div>
-                                </div>
-                                <div
-                                  className="button-toggle__unchecked"
-                                >
-                                  <div
-                                    className="button-toggle__inner-label"
-                                  >
-                                    Off
-                                  </div>
-                                </div>
-                              </span>
-                              
-                            </label>
-                          </div>
-                        </div>
-                        <div
-                          className="email-reporting-row email-reporting-table__row"
-                        >
-                          <div
-                            className="email-reporting-row__col"
-                          >
-                            <div
-                              className="email-reporting-row__title"
-                            >
-                              Rainier Lofts
-                            </div>
-                          </div>
-                          <div
-                            className="email-reporting-row__col email-reporting-row__col--middle"
-                          >
-                            <label
-                              className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
-                            >
-                              <input
-                                checked={false}
-                                className="button-toggle__input"
-                                onChange={[Function]}
-                                type="checkbox"
-                              />
-                              <span
-                                className="button-toggle__track"
-                              >
-                                <span
-                                  className="button-toggle__thumb"
-                                />
-                                <div
-                                  className="button-toggle__checked"
-                                >
-                                  <div
-                                    className="button-toggle__inner-label"
-                                  >
-                                    On
-                                  </div>
-                                </div>
-                                <div
-                                  className="button-toggle__unchecked"
-                                >
-                                  <div
-                                    className="button-toggle__inner-label"
-                                  >
-                                    Off
-                                  </div>
-                                </div>
-                              </span>
-                              
-                            </label>
-                          </div>
-                        </div>
-                      </div>
+                      No results found.
                     </div>
                   </div>
                 </div>
@@ -2102,7 +1474,7 @@ exports[`AccountSettings profile tab 1`] = `
                         />
                       </div>
                       <div
-                        className="select__indicators css-1wy0on6"
+                        className="select__indicators css-1g48xl4-IndicatorsContainer"
                       >
                         <span
                           className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -2536,7 +1908,7 @@ exports[`AccountSettings profile tab 1`] = `
                         />
                       </div>
                       <div
-                        className="select__indicators css-1wy0on6"
+                        className="select__indicators css-1g48xl4-IndicatorsContainer"
                       >
                         <span
                           className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -2698,7 +2070,9 @@ exports[`AccountSettings profile tab 1`] = `
                         >
                           Glacier Associates
                         </div>
-                        <div>
+                        <div
+                          className="css-zz0hea-Input"
+                        >
                           <div
                             className="select__input"
                             style={
@@ -2755,7 +2129,7 @@ exports[`AccountSettings profile tab 1`] = `
                         </div>
                       </div>
                       <div
-                        className="select__indicators css-1wy0on6"
+                        className="select__indicators css-1g48xl4-IndicatorsContainer"
                       >
                         <span
                           className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -2929,7 +2303,9 @@ exports[`AccountSettings profile tab 1`] = `
                             </div>
                           </div>
                         </div>
-                        <div>
+                        <div
+                          className="css-zz0hea-Input"
+                        >
                           <div
                             className="select__input"
                             style={
@@ -2986,7 +2362,7 @@ exports[`AccountSettings profile tab 1`] = `
                         </div>
                       </div>
                       <div
-                        className="select__indicators css-1wy0on6"
+                        className="select__indicators css-1g48xl4-IndicatorsContainer"
                       >
                         <span
                           className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -3102,7 +2478,7 @@ exports[`AccountSettings profile tab 1`] = `
                           Michigan
                         </div>
                         <div
-                          className="css-1g6gooi"
+                          className="css-w8afj7-Input"
                         >
                           <div
                             className="select__input"
@@ -3160,7 +2536,7 @@ exports[`AccountSettings profile tab 1`] = `
                         </div>
                       </div>
                       <div
-                        className="select__indicators css-1wy0on6"
+                        className="select__indicators css-1g48xl4-IndicatorsContainer"
                       >
                         <span
                           className="select__indicator-separator css-1okebmr-indicatorSeparator"

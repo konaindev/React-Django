@@ -701,7 +701,7 @@ exports[`CompleteAccountView renders correctly 1`] = `
                     />
                   </div>
                   <div
-                    className="select__indicators css-1wy0on6"
+                    className="select__indicators css-1g48xl4-IndicatorsContainer"
                   >
                     <span
                       className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -1119,7 +1119,7 @@ exports[`CompleteAccountView renders correctly 1`] = `
                       Select...
                     </div>
                     <div
-                      className="css-1g6gooi"
+                      className="css-w8afj7-Input"
                     >
                       <div
                         className="select__input"
@@ -1177,7 +1177,7 @@ exports[`CompleteAccountView renders correctly 1`] = `
                     </div>
                   </div>
                   <div
-                    className="select__indicators css-1wy0on6"
+                    className="select__indicators css-1g48xl4-IndicatorsContainer"
                   >
                     <span
                       className="select__indicator-separator css-1okebmr-indicatorSeparator"

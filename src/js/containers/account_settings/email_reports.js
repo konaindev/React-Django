@@ -6,7 +6,6 @@ import EmailReports from "../../components/account_settings/email_reports";
 const EmailReportsContainer = props => <EmailReports {...props} />;
 
 const mapState = state => {
-  console.log("state", state);
   return {
     properties: state.accountSettings.properties,
     pageNum: state.accountSettings.pageNum,

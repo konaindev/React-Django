@@ -14,6 +14,11 @@ const _ = x =>
   createStore(() => ({
     network: {
       isFetching: false
+    },
+    accountSettings: {
+      properties: [],
+      pageNum: 0,
+      hasNextPage: false
     }
   }));
 
