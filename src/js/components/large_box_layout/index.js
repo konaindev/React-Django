@@ -3,9 +3,8 @@ import PropTypes from "prop-types";
 
 import FormattedMultiple from "../formatted_multiple";
 import Panel from "../panel";
-import Tooltip from "../rmb_tooltip";
+import Tooltip, { InfoTooltip } from "../rmb_tooltip";
 import withFormatters from "../with_formatters";
-import withInfoTooltip from "../with_info_tooltip";
 import {
   formatMultiple,
   formatPercent,
@@ -27,10 +26,10 @@ import "./large_box_layout.scss";
  *
  * @note This provides layout; it shouldn't concern itself with value semantics.
  */
-export class LargeBoxLayoutBase extends Component {
+export class LargeBoxLayout extends Component {
   static propTypes = {
     name: PropTypes.node.isRequired,
-    renderInfoTooltip: PropTypes.func.isRequired,
+    infoTooltip: PropTypes.string,
     content: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
       .isRequired,
     detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
@@ -47,7 +46,7 @@ export class LargeBoxLayoutBase extends Component {
       detail,
       detail2,
       tooltip,
-      renderInfoTooltip
+      infoTooltip
     } = this.props;
     const contentValue = (
       <span className="large-box__content-value">{content}</span>
@@ -73,13 +72,11 @@ export class LargeBoxLayoutBase extends Component {
         </div>
         <p className="large-box__bottom-line">{detail}</p>
         <p className="large-box__bottom-line">{detail2}</p>
-        {renderInfoTooltip()}
+        <InfoTooltip transKey={infoTooltip} />
       </Panel>
     );
   }
 }
-
-export const LargeBoxLayout = withInfoTooltip(LargeBoxLayoutBase);
 
 // Define LargeBoxLayouts that take values and targets of various types.
 

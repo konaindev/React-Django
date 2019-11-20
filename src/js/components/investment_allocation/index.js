@@ -6,7 +6,7 @@ import cx from "classnames";
 
 import BoxRow from "../box_row";
 import ReportSection from "../report_section";
-import withInfoTooltip from "../with_info_tooltip";
+import { InfoTooltip } from "../rmb_tooltip";
 import { SmallNumberBox, SmallCurrencyShorthandBox } from "../small_box_layout";
 import {
   formatCurrencyShorthand,
@@ -16,14 +16,13 @@ import {
 import scssVars from "./investment_allocation.scss";
 
 const InvestmentAllocationChart = ({ name, expenses, total }) => {
-  const ExpenseRowBase = ({ title, value, renderInfoTooltip }) => (
+  const ExpenseRow = ({ title, value, infoTooltip }) => (
     <div className={cx("expense-row", { "expense-row--empty": !value })}>
       <div className="expense-row__title">{title}</div>
       <div className="expense-row__value">{formatCurrencyShorthand(value)}</div>
-      {renderInfoTooltip()}
+      <InfoTooltip transKey={infoTooltip} />
     </div>
   );
-  const ExpenseRow = withInfoTooltip(ExpenseRowBase);
 
   const getPieSliceLabel = d => {
     if (d.y === 0 || d.total === 0) {
