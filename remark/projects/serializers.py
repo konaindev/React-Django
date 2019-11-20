@@ -1,7 +1,5 @@
 from rest_framework import serializers
 
-from remark.users.constants import PROJECT_ROLES
-
 from .models import Project
 from .reports.selectors import ReportLinks
 

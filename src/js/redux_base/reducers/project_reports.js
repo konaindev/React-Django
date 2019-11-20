@@ -32,6 +32,7 @@ const reducer = (state = initialState, action) => {
         fetchingReports: false,
         reports: action.payload
       };
+    case "STOP_FETCHING_PROJECT_REPORTS":
     case "AJAX_GET_PROJECT_REPORTS_FAILURE":
       return {
         ...state,

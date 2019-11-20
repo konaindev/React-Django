@@ -530,6 +530,7 @@ class ReportLinks:
             attr = "links_for_project"
 
         links = {
+            "overview": {"url": f"/projects/{project.public_id}/overview/", "description": "Overview page"},
             "baseline": ReportLinks._1(getattr(BaselineReportSelector, attr)(project)),
             "performance": ReportLinks._many(
                 getattr(PerformanceReportSelector, attr)(project)

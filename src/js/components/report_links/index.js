@@ -37,6 +37,7 @@ export default class ReportLinks extends Component {
     return (
       <div className="project-report-links">
         <ul>
+          {this.renderLink("Overview", "overview", reportLinks.overview)}
           {this.renderLink("Baseline", "baseline", reportLinks.baseline)}
           {this.renderLink("Market Analysis", "market", reportLinks.market)}
           {this.renderLink("Modeling", "modeling", reportLinks.modeling)}
