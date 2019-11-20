@@ -19,7 +19,6 @@ import {
 } from "../../api/account_settings";
 import { API_URL_PREFIX, URLS } from "../actions/helpers";
 import { axiosGet, axiosPost } from "../../utils/api";
-import { URLS } from "../actions/helpers";
 import ReactGa from "react-ga";
 
 // Here we create a middleware that intercepts
