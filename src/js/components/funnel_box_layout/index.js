@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import DeltaIndicator from "../delta_indicator";
+import withInfoTooltip from "../with_info_tooltip";
 import {
   formatCurrency,
   formatDeltaPercent,
@@ -16,6 +17,7 @@ import "./funnel_box_layout.scss";
 class FunnelBaseBox extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
+    renderInfoTooltip: PropTypes.func.isRequired,
     value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     target: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     delta: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -33,12 +35,16 @@ class FunnelBaseBox extends Component {
       formatter,
       deltaFormatter,
       getDeltaDirection,
-      targetFormatter
+      targetFormatter,
+      renderInfoTooltip
     } = this.props;
     return (
       <div className="funnel-box-layout">
         <div className="funnel-box-layout__left">
-          <div className="funnel-box-layout__name">{name}</div>
+          <div className="funnel-box-layout__name">
+            {name}
+            {renderInfoTooltip()}
+          </div>
           {target != null && (
             <div className="funnel-box-layout__target">
               {targetFormatter(target)}
@@ -63,7 +69,7 @@ class FunnelBaseBox extends Component {
   }
 }
 
-export const FunnelNumberBox = props => (
+export const FunnelNumberBox = withInfoTooltip(props => (
   <FunnelBaseBox
     formatter={formatNumber}
     deltaFormatter={formatNumber}
@@ -71,9 +77,9 @@ export const FunnelNumberBox = props => (
     targetFormatter={formatTargetPercent}
     {...props}
   />
-);
+));
 
-export const FunnelPercentBox = props => (
+export const FunnelPercentBox = withInfoTooltip(props => (
   <FunnelBaseBox
     formatter={formatPercent}
     deltaFormatter={formatDeltaPercent}
@@ -81,9 +87,9 @@ export const FunnelPercentBox = props => (
     targetFormatter={formatTargetPercent}
     {...props}
   />
-);
+));
 
-export const FunnelCurrencyBox = props => (
+export const FunnelCurrencyBox = withInfoTooltip(props => (
   <FunnelBaseBox
     formatter={formatCurrency}
     deltaFormatter={formatCurrency}
@@ -91,4 +97,4 @@ export const FunnelCurrencyBox = props => (
     targetFormatter={formatTargetCurrency}
     {...props}
   />
-);
+));

@@ -53,6 +53,7 @@ export default class AcquisitionFunnelReport extends Component {
       <BoxRow>
         <PercentageGraphBox
           name="USV > EXE"
+          infoTooltip="usv_to_exe"
           value={r.funnel.conversions.usv_exe}
           target={r.targets?.funnel?.conversions?.usv_exe}
           delta={r.deltas?.funnel?.conversions?.usv_exe}
@@ -69,6 +70,7 @@ export default class AcquisitionFunnelReport extends Component {
         {/* we reverse the arrow here because declining percentages are *good* */}
         <PercentageGraphBox
           name="Cost per Exe / Lowest Monthly Rent"
+          infoTooltip="cost_per_exe"
           value={r.property.cost_per_exe_vs_rent}
           target={r.targets?.property?.cost_per_exe_vs_rent}
           delta={r.deltas?.property?.cost_per_exe_vs_rent}
@@ -115,6 +117,7 @@ export default class AcquisitionFunnelReport extends Component {
           <AcquisitionFunnelReport.FunnelColumnContent>
             <FunnelNumberBox
               name="Volume of USV"
+              infoTooltip="volume_of_usv"
               value={r.funnel.volumes.usv}
               target={
                 type === "performance"
@@ -126,6 +129,7 @@ export default class AcquisitionFunnelReport extends Component {
             />
             <FunnelNumberBox
               name="Volume of INQ"
+              infoTooltip="volume_of_inq"
               value={r.funnel.volumes.inq}
               target={
                 type === "performance"
@@ -137,6 +141,7 @@ export default class AcquisitionFunnelReport extends Component {
             />
             <FunnelNumberBox
               name="Volume of TOU"
+              infoTooltip="volume_of_tou"
               value={r.funnel.volumes.tou}
               target={
                 type === "performance"
@@ -148,6 +153,7 @@ export default class AcquisitionFunnelReport extends Component {
             />
             <FunnelNumberBox
               name="Volume of APP"
+              infoTooltip="volume_of_app"
               value={r.funnel.volumes.app}
               target={
                 type === "performance"
@@ -159,6 +165,7 @@ export default class AcquisitionFunnelReport extends Component {
             />
             <FunnelNumberBox
               name="Volume of EXE"
+              infoTooltip="volume_of_exe"
               value={r.funnel.volumes.exe}
               target={
                 type === "performance"
@@ -176,24 +183,28 @@ export default class AcquisitionFunnelReport extends Component {
           <AcquisitionFunnelReport.FunnelColumnContent>
             <FunnelPercentBox
               name="USV → INQ"
+              infoTooltip="usv_to_inq"
               value={r.funnel.conversions.usv_inq}
               target={r.targets?.funnel?.conversions?.usv_inq}
               delta={r.deltas?.funnel?.conversions?.usv_inq}
             />
             <FunnelPercentBox
               name="INQ → TOU"
+              infoTooltip="inq_to_tou"
               value={r.funnel.conversions.inq_tou}
               target={r.targets?.funnel?.conversions?.inq_tou}
               delta={r.deltas?.funnel?.conversions?.inq_tou}
             />
             <FunnelPercentBox
               name="TOU → APP"
+              infoTooltip="tou_to_app"
               value={r.funnel.conversions.tou_app}
               target={r.targets?.funnel?.conversions?.tou_app}
               delta={r.deltas?.funnel?.conversions?.tou_app}
             />
             <FunnelPercentBox
               name="APP → EXE"
+              infoTooltip="app_to_exe"
               value={r.funnel.conversions.app_exe}
               target={r.targets?.funnel?.conversions?.app_exe}
               delta={r.deltas?.funnel?.conversions?.app_exe}
@@ -206,30 +217,35 @@ export default class AcquisitionFunnelReport extends Component {
           <AcquisitionFunnelReport.FunnelColumnContent>
             <FunnelCurrencyBox
               name="Cost per USV"
+              infoTooltip="cost_per_usv"
               value={r.funnel.costs.usv}
               target={r.targets?.funnel?.costs?.usv}
               delta={r.deltas?.funnel?.costs?.usv}
             />
             <FunnelCurrencyBox
               name="Cost per INQ"
+              infoTooltip="cost_per_inq"
               value={r.funnel?.costs?.inq}
               target={r.targets?.funnel?.costs?.inq}
               delta={r.deltas?.funnel?.costs?.inq}
             />
             <FunnelCurrencyBox
               name="Cost per TOU"
+              infoTooltip="cost_per_tou"
               value={r.funnel.costs.tou}
               target={r.targets?.funnel?.costs?.tou}
               delta={r.deltas?.funnel?.costs?.tou}
             />
             <FunnelCurrencyBox
               name="Cost per APP"
+              infoTooltip="cost_per_app"
               value={r.funnel.costs.app}
               target={r.targets?.funnel?.costs?.app}
               delta={r.deltas?.funnel?.costs?.app}
             />
             <FunnelCurrencyBox
               name="Cost per EXE"
+              infoTooltip="cost_per_exe"
               value={r.funnel.costs.exe}
               target={r.targets?.funnel?.costs?.exe}
               delta={r.deltas?.funnel?.costs?.exe}
