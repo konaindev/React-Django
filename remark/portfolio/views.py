@@ -161,6 +161,7 @@ class PortfolioTableView(APIView):
             "selected_kpi_bundle": bundle,
             "kpi_order": self.kpi_ordering(bundle),
             "date_selection": self.get_date_selection(period_group, start, end),
+            "user": request.user.get_menu_dict(),
             "table_data": table_data,
             "highlight_kpis": self.get_highlight_kpis(portfolio_average, kpis_to_include),
             "display_average": "1" if show_averages else "0"

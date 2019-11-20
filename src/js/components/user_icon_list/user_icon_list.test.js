@@ -9,4 +9,10 @@ describe("UserIconList", () => {
     const tree = renderer.create(<UserIconList {...props} />).toJSON();
     expect(tree).toMatchSnapshot();
   });
+  it("render project theme", () => {
+    const tree = renderer
+      .create(<UserIconList theme="project" {...props} />)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

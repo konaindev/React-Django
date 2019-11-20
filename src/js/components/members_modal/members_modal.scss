@@ -27,6 +27,8 @@ $collapsible-members-spacing: 1.875rem 2.125rem;
 $remove-modal-width: 455px;
 $close-hover-bg: $gray-6;
 $close-hover-color: $gray-4;
+$role-font-size: $text-xs;
+$role-height: 14px;
 
 .invite-modal {
     width: $window-width;
@@ -97,6 +99,11 @@ $close-hover-color: $gray-4;
     margin-bottom: $role-select-spacing;
     align-self: flex-start;
     flex-shrink: 0;
+}
+
+.invite-modal__role {
+    height: $role-height;
+    font-size: $role-font-size;
 }
 
 .invite-modal__button {

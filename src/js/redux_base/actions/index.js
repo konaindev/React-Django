@@ -5,6 +5,7 @@ export { default as dashboard } from "./dashboard";
 export { default as portfolio } from "./portfolio";
 export { default as projectReports } from "./project_reports";
 export { default as inviteModal } from "./invite_modal";
+export { default as viewMembersModal } from "./view_members";
 
 export const tutorial = {
   set: newState => ({
@@ -23,6 +24,17 @@ export const tutorial = {
     branch: "tutorial",
     ...args
   })
+};
+
+export const addressModal = {
+  open: (data, addresses) => ({
+    type: "ADDRESS_MODAL_SHOW",
+    data,
+    addresses
+  }),
+  close: {
+    type: "ADDRESS_MODAL_HIDE"
+  }
 };
 
 export const networking = {
@@ -144,6 +156,21 @@ export const uiStrings = {
   }),
   set: data => ({
     type: "UI_STRINGS_SET_STATE",
+    data
+  })
+};
+
+export const accountSettings = {
+  getProperties: data => ({
+    type: "API_ACCOUNT_REPORT_PROPERTIES",
+    data
+  }),
+  set: data => ({
+    type: "SET_ACCOUNT_REPORTS_PROPERTIES",
+    data
+  }),
+  clear: data => ({
+    type: "CLEAR_ACCOUNT_REPORTS_PROPERTIES",
     data
   })
 };

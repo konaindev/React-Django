@@ -1,11 +1,14 @@
 import _sortBy from "lodash/sortBy";
 import React from "react";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 import { withState } from "@dump247/storybook-state";
 import { storiesOf } from "@storybook/react";
 
 import { properties, groups, portfolio } from "../email_reporting_table/props";
 import AccountSettings from "./index";
 import { props } from "./props";
+import accountSettings from "../../state/reducers/account_settings";
 
 function validateSecurity(values) {
   const errors = {};
@@ -32,28 +35,51 @@ function onSearch(store, properties, propertiesName, value) {
 }
 
 storiesOf("AccountSettings", module)
-  .add("Profile", () => <AccountSettings initialItem="profile" {...props} />)
+  .add("Profile", () => (
+    <Provider
+      store={createStore(() => ({
+        network: {}
+      }))}
+    >
+      <AccountSettings initialItem="profile" {...props} />
+    </Provider>
+  ))
   .add("Account Security", () => (
-    <AccountSettings
-      initialItem="lock"
-      validate={validateSecurity}
-      {...props}
-    />
+    <Provider
+      store={createStore(() => ({
+        network: {}
+      }))}
+    >
+      <AccountSettings
+        initialItem="lock"
+        validate={validateSecurity}
+        {...props}
+      />
+    </Provider>
   ))
   .add(
     "Email Reports",
-    withState({ groups, properties })(({ store }) => (
-      <AccountSettings
-        initialItem="email"
-        portfolioProperties={portfolio}
-        groupsProperties={store.state.groups}
-        properties={store.state.properties}
-        onGroupsSort={sort => onSort(store, "groups", sort)}
-        onPropertiesSort={sort => onSort(store, "properties", sort)}
-        onPropertiesSearch={value =>
-          onSearch(store, properties, "properties", value)
-        }
-        onGroupsSearch={value => onSearch(store, groups, "groups", value)}
-      />
+    withState({ groups })(({ store }) => (
+      <Provider
+        store={createStore(() => ({
+          accountSettings: { properties },
+          network: {}
+        }))}
+      >
+        <AccountSettings
+          initialItem="email"
+          itemsOrder={props.itemsOrder}
+          tabsOrder={props.tabsOrder}
+          initialTab={props.initialTab}
+          portfolioProperties={portfolio}
+          groupsProperties={store.state.groups}
+          onGroupsSort={sort => onSort(store, "groups", sort)}
+          onPropertiesSort={sort => onSort(store, "properties", sort)}
+          onPropertiesSearch={value =>
+            onSearch(store, properties, "properties", value)
+          }
+          onGroupsSearch={value => onSearch(store, groups, "groups", value)}
+        />
+      </Provider>
     ))
   );

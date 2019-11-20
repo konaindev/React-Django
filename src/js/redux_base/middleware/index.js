@@ -1,16 +1,78 @@
+import _isObject from "lodash/isObject";
+
 import {
   createPassword,
   completeAccount,
+  uiStrings,
+  accountSettings,
   auth,
   locations,
   market,
   kpi,
-  uiStrings,
   token as tokenActions
 } from "../actions";
-import { URLS } from "../actions/helpers";
+import {
+  getPropertiesData,
+  updateProfileData,
+  updateReportsSettingsData,
+  updateSecurityData
+} from "../../api/account_settings";
+import { API_URL_PREFIX, URLS } from "../actions/helpers";
 import { axiosGet, axiosPost } from "../../utils/api";
 import ReactGa from "react-ga";
+
+// Here we create a middleware that intercepts
+// actions representing a request for data from
+// the api
+
+function startFetchingState(store) {
+  let x = store.getState();
+  let { isFetching } = x.network;
+  if (!isFetching || isFetching === false) {
+    store.dispatch(networking.startFetching());
+  }
+}
+
+export const fetchDashboard = store => next => action => {
+  if (action.type === "API_DASHBOARD") {
+    let x = store.getState();
+    let { isFetching } = x.network;
+
+    if (!isFetching || isFetching === false) {
+      store.dispatch(networking.startFetching());
+    }
+    axiosGet(`${process.env.BASE_URL}/dashboard${action.queryString}`)
+      .then(response => next(general.set(response.data)))
+      .then(setTimeout(() => next(networking.stopFetching()), 120))
+      .catch(e => {
+        console.log("ERROR", e);
+        next(networking.stopFetching());
+      });
+  } else {
+    next(action);
+  }
+};
+
+export const fetchTutorial = store => next => action => {
+  if (action.type === "API_TUTORIAL") {
+    const url = `${process.env.BASE_URL}/tutorial`;
+    if (action.data) {
+      axiosPost(url, action.data)
+        .then(response => {
+          next(tutorial.set(response.data));
+        })
+        .catch(e => console.log("-----> ERROR", e));
+    } else {
+      axiosGet(url)
+        .then(response => {
+          next(tutorial.set(response.data));
+        })
+        .catch(e => console.log("-----> ERROR", e));
+    }
+  } else {
+    next(action);
+  }
+};
 
 export const fetchCreatePassword = store => next => action => {
   if (action.type === "API_CREATE_PASSWORD") {
@@ -74,6 +136,7 @@ export const fetchCompleteAccount = store => next => action => {
   if (action.type === "API_COMPLETE_ACCOUNT") {
     const url = `${process.env.BASE_URL}/users/complete-account/`;
     if (action.data) {
+      startFetchingState(store);
       axiosPost(url, action.data)
         .then(response => {
           if (response.status === 200) {
@@ -82,13 +145,26 @@ export const fetchCompleteAccount = store => next => action => {
             throw response;
           }
         })
-        .catch(e => console.log("-----> ERROR", e));
+        .catch(e => {
+          if (e.response.data?.errors && _isObject(e.response.data?.errors)) {
+            next(networking.stopFetching());
+            action.onError(e.response.data.errors);
+          } else {
+            console.log("-----> ERROR", e);
+            next(networking.stopFetching());
+          }
+        });
     } else {
+      startFetchingState(store);
       axiosGet(url)
         .then(response => {
           next(completeAccount.set(response.data));
         })
-        .catch(e => console.log("-----> ERROR", e));
+        .then(() => next(networking.stopFetching()))
+        .catch(e => {
+          console.log("-----> ERROR", e);
+          next(networking.stopFetching());
+        });
     }
   } else {
     next(action);
@@ -160,7 +236,7 @@ export const logoutMiddleware = store => next => action => {
 
 export const fetchInviteModal = store => next => action => {
   if (action.type === "API_INVITE_MODAL_GET_USERS") {
-    const url = `${process.env.BASE_URL}/api/v1/search-members/`;
+    const url = `${API_URL_PREFIX}/search-members/`;
     axiosPost(url, action.data)
       .then(response => {
         const members = response.data?.members || [];
@@ -169,7 +245,7 @@ export const fetchInviteModal = store => next => action => {
       .catch(e => console.log("-----> ERROR", e));
   } else if (action.type === "AJAX_DASHBOARD_REMOVE_MEMBER") {
     const projectsId = action.data.project.property_id;
-    const url = `${process.env.BASE_URL}/api/v1/projects/${projectsId}/remove-member/`;
+    const url = `${API_URL_PREFIX}/projects/${projectsId}/remove-member/`;
     axiosPost(url, action.data)
       .then(response => {
         const property = response.data.project;
@@ -177,7 +253,7 @@ export const fetchInviteModal = store => next => action => {
       })
       .catch(e => console.log("-----> ERROR", e));
   } else if (action.type === "API_INVITE_RESEND") {
-    const url = `${process.env.BASE_URL}/api/v1/users/${action.hash}/resend-invite/`;
+    const url = `${API_URL_PREFIX}/users/${action.hash}/resend-invite/`;
     axiosGet(url)
       .then(response => {
         if (response.status === 200) {
@@ -190,11 +266,11 @@ export const fetchInviteModal = store => next => action => {
   } else if (action.type === "API_INVITE_MODAL_CHANGE_ROLE") {
     const { role, property_id, member_id } = action.data;
     const data = { role };
-    const url = `${process.env.BASE_URL}/projects/${property_id}/member/${member_id}/`;
+    const url = `${API_URL_PREFIX}/projects/${property_id}/member/${member_id}/`;
     axiosPost(url, data).then(response => {
       if (response.status === 200) {
         next({
-          type: "GENERAL_UPDATE_MEMBERS",
+          type: "AJAX_DASHBOARD_UPDATE_MEMBER_SUCCESS",
           data: {
             property_id,
             members: response.data.members
@@ -218,6 +294,92 @@ export const fetchUIString = store => next => action => {
           next(uiStrings.set(response.data.data));
         } else if (response.status === 208) {
           next(action);
+        } else {
+          throw response;
+        }
+      })
+      .catch(e => console.log("-----> ERROR", e));
+  } else {
+    next(action);
+  }
+};
+
+export const updateAccountSecurity = store => next => action => {
+  if (action.type === "API_SECURITY_ACCOUNT") {
+    if (action.data) {
+      updateSecurityData(action.data)
+        .then(response => {
+          if (response.status === 200) {
+            action.callback(response.data.message);
+          } else {
+            throw response;
+          }
+        })
+        .catch(e => {
+          if (e.response.data && _isObject(e.response.data)) {
+            action.onError(e.response.data);
+          } else {
+            console.log("-----> ERROR", e);
+          }
+        });
+    }
+  } else {
+    next(action);
+  }
+};
+
+export const updateAccountProfile = store => next => action => {
+  if (action.type === "API_ACCOUNT_PROFILE") {
+    if (action.data) {
+      startFetchingState(store);
+      updateProfileData(action.data)
+        .then(response => {
+          if (response.status === 200 && !response.data?.errors) {
+            action.callback(response.data);
+          } else {
+            throw response;
+          }
+        })
+        .then(() => next(networking.stopFetching()))
+        .catch(e => {
+          if (e.response.data?.errors && _isObject(e.response.data?.errors)) {
+            next(networking.stopFetching());
+            action.onError(e.response.data.errors);
+          } else {
+            console.log("-----> ERROR", e);
+          }
+          next(networking.stopFetching());
+        });
+    }
+  } else {
+    next(action);
+  }
+};
+
+export const updateReportsSettings = store => next => action => {
+  if (action.type === "API_ACCOUNT_REPORTS") {
+    if (action.data) {
+      updateReportsSettingsData(action.data)
+        .then(response => {
+          if (response.status === 200) {
+            action.callback(response.data);
+          } else {
+            throw response;
+          }
+        })
+        .catch(e => console.log("-----> ERROR", e));
+    }
+  } else {
+    next(action);
+  }
+};
+
+export const fetchAccountProperties = store => next => action => {
+  if (action.type === "API_ACCOUNT_REPORT_PROPERTIES") {
+    getPropertiesData(action.data)
+      .then(response => {
+        if (response.status === 200) {
+          next(accountSettings.set(response.data));
         } else {
           throw response;
         }

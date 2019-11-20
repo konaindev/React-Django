@@ -66,6 +66,7 @@ exports[`PropertyRow renders at-risk 1`] = `
   >
     <div
       className="user-icon-list"
+      onClick={[Function]}
     >
       <div
         className="user-icon user-icon-list__icon"
@@ -256,6 +257,7 @@ exports[`PropertyRow renders off-track 1`] = `
   >
     <div
       className="user-icon-list"
+      onClick={[Function]}
     >
       <div
         className="user-icon user-icon-list__icon"
@@ -446,6 +448,7 @@ exports[`PropertyRow renders on-track 1`] = `
   >
     <div
       className="user-icon-list"
+      onClick={[Function]}
     >
       <div
         className="user-icon user-icon-list__icon"
@@ -636,6 +639,7 @@ exports[`PropertyRow renders selected 1`] = `
   >
     <div
       className="user-icon-list"
+      onClick={[Function]}
     >
       <div
         className="user-icon user-icon-list__icon"
@@ -826,6 +830,7 @@ exports[`PropertyRow renders selection mode 1`] = `
   >
     <div
       className="user-icon-list"
+      onClick={[Function]}
     >
       <div
         className="user-icon user-icon-list__icon"

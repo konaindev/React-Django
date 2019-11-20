@@ -6,6 +6,12 @@ from django.views.generic.base import RedirectView
 from remark.decorators import anonymous_required
 
 from .views import (
+    AccountProfileView,
+    AccountSecurityView,
+    AccountSettingsView,
+    CompleteAccountView,
+    CreatePasswordView,
+    AccountReportsView,
     ChangePasswordView,
     ResetPasswordView,
     ResetPasswordConfirmView,
@@ -13,9 +19,11 @@ from .views import (
     PasswordRulesView,
     CompleteAccountView,
     ResendInviteView,
+    ValidateAddressView,
 )
 
 app_name = "users"
+
 
 
 urlpatterns = [
@@ -63,4 +71,9 @@ urlpatterns = [
         anonymous_required(ResendInviteView.as_view()),
         name="users_resend_invite",
     ),
+    path("account-settings", AccountSettingsView.as_view(), name="account_settings"),
+    path("account-security", AccountSecurityView.as_view(), name="account_security"),
+    path("account-profile", AccountProfileView.as_view(), name="account_profile"),
+    path("account-reports", AccountReportsView.as_view(), name="account_reports"),
+    path("validate-address", ValidateAddressView.as_view(), name="validate_address")
 ]

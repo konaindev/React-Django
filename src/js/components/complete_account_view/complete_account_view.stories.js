@@ -6,10 +6,10 @@ import { Provider } from "react-redux";
 import CompleteAccountView from "./index";
 import { props } from "./props";
 
-const _ = x => createStore(() => ({ completeAccount: x }));
+const _ = x => createStore(() => ({ completeAccount: x, network: {} }));
 
 storiesOf("CompleteAccountView", module).add("default", () => (
   <Provider store={_(props)}>
-    <CompleteAccountView />
+    <CompleteAccountView countView />
   </Provider>
 ));

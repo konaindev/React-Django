@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
-import { Formik, Form } from "formik";
+import { Form, Formik } from "formik";
 
+import { validatePassword } from "../../api/password";
 import AccountForm from "../account_form";
 import Button from "../button";
 import Input from "../input";
@@ -13,11 +14,6 @@ import RMBTooltip from "../rmb_tooltip";
 import { axiosPost } from "../../utils/api";
 
 import "./create_password_view.scss";
-
-const validatePassword = (password, hash) =>
-  axiosPost("/users/validate-password", { password, hash }).then(
-    response => response.data.errors
-  );
 
 export class CreatePasswordView extends React.PureComponent {
   static propTypes = {

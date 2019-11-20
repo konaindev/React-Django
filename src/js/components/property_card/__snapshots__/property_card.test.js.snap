@@ -59,6 +59,7 @@ exports[`PropertyCard renders at-risk 1`] = `
         >
           <div
             className="user-icon-list"
+            onClick={[Function]}
           >
             <div
               className="user-icon user-icon-list__icon"
@@ -264,6 +265,7 @@ exports[`PropertyCard renders off-track 1`] = `
         >
           <div
             className="user-icon-list"
+            onClick={[Function]}
           >
             <div
               className="user-icon user-icon-list__icon"
@@ -469,6 +471,7 @@ exports[`PropertyCard renders on-track 1`] = `
         >
           <div
             className="user-icon-list"
+            onClick={[Function]}
           >
             <div
               className="user-icon user-icon-list__icon"
@@ -674,6 +677,7 @@ exports[`PropertyCard renders selected 1`] = `
         >
           <div
             className="user-icon-list"
+            onClick={[Function]}
           >
             <div
               className="user-icon user-icon-list__icon"
