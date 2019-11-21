@@ -458,6 +458,10 @@ class Project(models.Model):
 
         return None
 
+    def get_report_url(self):
+        report_links = ReportLinks.for_project(self)
+        return report_links["overview"]["url"]
+
     def get_performance_rating(self):
         performance_report = PerformanceReport.for_campaign_to_date(self)
         if not performance_report:
