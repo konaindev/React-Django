@@ -15,7 +15,7 @@ export const InfoTooltipBase = ({ transKey, translations }) => {
   let infoTooltipCaption = translations[infoTooltipKey] || infoTooltipKey;
 
   return (
-    <Tooltip text={infoTooltipCaption} placement="top" theme="light-dark">
+    <Tooltip text={infoTooltipCaption} placement="top" theme="information">
       <TooltipAnchor />
     </Tooltip>
   );

@@ -113,7 +113,7 @@ storiesOf("RMBTooltip", module)
         textAlign: "center"
       }}
     >
-      <Tooltip placement="top" text="Tooltip on the anchor icon">
+      <Tooltip placement="top" text="Informational Tooltip" theme="information">
         <TooltipAnchor width={20} height={20} />
       </Tooltip>
     </div>

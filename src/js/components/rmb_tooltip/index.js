@@ -43,7 +43,13 @@ export const RMBTooltip = props => {
 RMBTooltip.propTypes = {
   text: PropTypes.string,
   link: PropTypes.string,
-  theme: PropTypes.oneOf(["", "highlight", "dark", "light-dark"]),
+  theme: PropTypes.oneOf([
+    "",
+    "highlight",
+    "dark",
+    "light-dark",
+    "information"
+  ]),
   overlayClassName: PropTypes.string
 };
 
