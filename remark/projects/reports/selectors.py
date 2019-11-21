@@ -9,6 +9,10 @@ from .market import MarketReport
 from .modeling import ModelingReport
 from .campaign import CampaignPlan
 
+from remark.lib.logging import getLogger
+
+logger = getLogger(__name__)
+
 
 class DateRange:
     """
@@ -354,6 +358,8 @@ class PerformanceReportSelector(ReportSelectorBase):
         """
         Return a Report covering the requested timespan.
         """
+
+        logger.info(f"start {self.start}\treport_span: {self.report_span}\tproject: {self.project}\tweeks: {self.get_weeks()}")
         if self.start is not None:
             report = PerformanceReport.for_dates(self.project, self.start, self.end)
         elif self.report_span == self.CAMPAIGN_TO_DATE:

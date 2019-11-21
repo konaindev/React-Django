@@ -54,6 +54,9 @@ class PeriodBase:
         """
         raise NotImplementedError()
 
+    def __str__(self):
+        return f"{type(self).__name__}: {self.get_start()} - {self.get_end()}"
+
 
 class BarePeriod(PeriodBase):
     """

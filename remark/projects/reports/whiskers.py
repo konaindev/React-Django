@@ -32,7 +32,7 @@ class WhiskerSeries:
         campaign_start = project.get_campaign_start()
         whisker_mp = multiperiod
         whisker_periods = whisker_mp.get_delta_periods(
-            time_delta=datetime.timedelta(weeks=4)
+            time_delta=datetime.timedelta(weeks=1)
         )
         computed_periods = [
             ComputedPeriod(whisker_period)
