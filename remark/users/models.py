@@ -163,7 +163,7 @@ class User(PermissionsMixin, AbstractBaseUser):
             # TODO: Add account_url
         }
         if not self.is_superuser:
-            data["account_settings_url"] = reverse("account_settings")
+            data["account_settings_url"] = reverse("users:account_settings")
         return data
 
     def get_name(self):
