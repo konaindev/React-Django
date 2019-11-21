@@ -57,6 +57,9 @@ class PeriodBase:
     def __str__(self):
         return f"{type(self).__name__}: {self.get_start()} - {self.get_end()}"
 
+    def __repr__(self):
+        return f"{type(self).__name__}: {self.get_start()} - {self.get_end()}"
+
 
 class BarePeriod(PeriodBase):
     """
