@@ -23,6 +23,7 @@ from django_js_reverse.views import urls_js
 from rest_framework_simplejwt import views as jwt_views
 
 from .admin import admin_site
+from .views import PingView
 
 
 # CONSIDER davepeck: one set of URL routes; both front-end and back-end URLs. How
@@ -30,6 +31,7 @@ from .admin import admin_site
 
 
 urlpatterns = [
+    path("ping/", PingView.as_view(), name="ping"),
     path("admin/doc/", include("django.contrib.admindocs.urls")),
     path("admin/", admin_site.urls),
     # Make our URL patterns available in the javascript context.
