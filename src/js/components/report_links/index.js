@@ -38,8 +38,8 @@ export default class ReportLinks extends Component {
       <div className="project-report-links">
         <ul>
           {this.renderLink("Overview", "overview", reportLinks.overview)}
-          {this.renderLink("Baseline", "baseline", reportLinks.baseline)}
           {this.renderLink("Market Analysis", "market", reportLinks.market)}
+          {this.renderLink("Baseline", "baseline", reportLinks.baseline)}
           {this.renderLink("Modeling", "modeling", reportLinks.modeling)}
           {reportLinks.campaign_plan &&
             this.renderLink(
