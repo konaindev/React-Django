@@ -22,6 +22,7 @@ class PerformanceEmailAdmin(admin.ModelAdmin):
         "project",
         "start",
         "campaign_health",
+        "email_campaign_id",
         "lease_rate_text",
         "top_performing_kpi",
         "top_performing_insight",

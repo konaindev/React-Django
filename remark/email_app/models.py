@@ -58,7 +58,7 @@ class PerformanceEmail(models.Model):
     )
 
     # SendGrid email campaign ID
-    email_campaign_id = models.CharField(null=True, default=None, max_length=255)
+    email_campaign_id = models.CharField(null=True, blank=True, default=None, max_length=255)
 
     def filter_performance_kpis(self, category):
         print("FILTERING KPIS")
