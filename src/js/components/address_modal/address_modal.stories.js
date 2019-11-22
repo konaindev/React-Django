@@ -1,11 +1,11 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 import { createStore } from "redux";
-import _store from "../../state/store";
+import _store from "../../redux_base/store";
 import { Provider } from "react-redux";
 
 import AddressModal from "./index";
-import props from "./props";
+import { props } from "./props";
 
 storiesOf("AddressModal", module)
   .add("dark theme", () => (
