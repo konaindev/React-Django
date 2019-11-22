@@ -127,15 +127,24 @@ ZIP_DATA_SHEET_NAME = "Zip Data {}"
 
 def fill_zip_worksheet(workbook, zipcode):
     # Fetch all data first - if a Zip Code doesn't work. Ignore it.
-    population, age_segments, household_type, income_dist = get_usa_census_data(zipcode)
+    census_data = get_usa_census_data(zipcode)
 
     print_verbose("POP")
-    print_verbose(population)
+    print_verbose(census_data)
 
-    # Create speadsheet
+    # Create spreadsheet
     worksheet = workbook.create_sheet(title=ZIP_DATA_SHEET_NAME.format(zipcode))
-    write_label_item(worksheet, "Total Population", population[0], 1)
-    write_label_item(worksheet, "Number of Households", population[1], 2)
+    write_label_item(worksheet, "Total Population", census_data.population, 1)
+    write_label_item(worksheet, "Number of Households", census_data.number_of_households, 2)
+    if census_data.has_data:
+        age_segments = census_data.age_segments
+        household_type = census_data.households_by_type
+        income_dist = census_data.income_distributions
+    else:
+        age_segments = [0.0 for _ in range(len(AGE_SEGMENT_LABELS))]
+        household_type = [0.0 for _ in range(len(HOUSEHOLD_TYPE_LABELS))]
+        income_dist = [0.0 for _ in range(len(INCOME_DIST_LABELS))]
+
     write_labeled_data(
         worksheet, "Population by Age Segment", AGE_SEGMENT_LABELS, age_segments, 4
     )

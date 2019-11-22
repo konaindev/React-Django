@@ -21,6 +21,9 @@ from remark.lib.logging import error_text, getLogger
 
 logger = getLogger(__name__)
 
+MIN_RTI_RENTAL_RATES_COUNT = 4
+MIN_RTI_INCOME_GROUPS_COUNT = 4
+
 
 class CampaignModelUploadForm(forms.ModelForm):
     # Custom field to allow spreadsheet file upload
@@ -215,12 +218,26 @@ class ProjectForm(forms.ModelForm):
         exclude = ["email_list_id"]
 
 
-def multiline_text_to_str_array(text):
-    return [str(item) for item in text.replace("\r", "").split("\n")]
+def multiline_text_to_str_array(text, min_elements=0, max_elements=None):
+    items = [str(item) for item in text.replace("\r", "").split("\n") if item]
+    count = len(items)
+
+    if count < min_elements:
+        raise forms.ValidationError(f"Minimum number of values is {min_elements}.", code='invalid')
+    if max_elements and count > max_elements:
+        raise forms.ValidationError(f"Maximum number of values is {max_elements}.", code='invalid')
+    return items
 
 
-def multiline_text_to_int_array(text):
-    return [int(item) for item in text.replace("\r", "").split("\n")]
+def multiline_text_to_int_array(text, min_elements=0, max_elements=None):
+    items = [int(item) for item in text.replace("\r", "").split("\n")]
+    count = len(items)
+
+    if count < min_elements:
+        raise forms.ValidationError(f"Minimum number of values is {min_elements}.", code='invalid')
+    if max_elements and count > max_elements:
+        raise forms.ValidationError(f"Maximum number of values is {max_elements}.", code='invalid')
+    return items
 
 
 class TAMExportForm(forms.Form):
@@ -277,10 +294,12 @@ class TAMExportForm(forms.Form):
         return multiline_text_to_int_array(self.cleaned_data["income_groups"])
 
     def clean_rti_income_groups(self):
-        return multiline_text_to_int_array(self.cleaned_data["rti_income_groups"])
+        return multiline_text_to_int_array(self.cleaned_data["rti_income_groups"],
+                                           min_elements=MIN_RTI_RENTAL_RATES_COUNT)
 
     def clean_rti_rental_rates(self):
-        return multiline_text_to_int_array(self.cleaned_data["rti_rental_rates"])
+        return multiline_text_to_int_array(self.cleaned_data["rti_rental_rates"],
+                                           min_elements=MIN_RTI_INCOME_GROUPS_COUNT)
 
 
 class PropertyForm(forms.ModelForm):
