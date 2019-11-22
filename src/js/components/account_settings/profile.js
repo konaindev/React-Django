@@ -1,6 +1,7 @@
 import cn from "classnames";
 import { ErrorMessage, Formik, Form } from "formik";
 import _intersection from "lodash/intersection";
+import _isEqual from "lodash/isEqual";
 import PropTypes from "prop-types";
 import React from "react";
 import AddressModal from "../address_modal";
@@ -37,9 +38,9 @@ export default class Profile extends React.PureComponent {
       office_name: PropTypes.string,
       office_type: PropTypes.number
     }),
-    company_roles: MultiSelect.optionsType.isRequired,
-    office_options: Select.optionsType.isRequired,
-    office_countries: Select.optionsType.isRequired,
+    company_roles: MultiSelect.optionsType,
+    office_options: Select.optionsType,
+    office_countries: Select.optionsType,
     us_state_list: Select.optionsType,
     gb_county_list: Select.optionsType
   };
@@ -64,7 +65,10 @@ export default class Profile extends React.PureComponent {
       office_zip: "",
       office_name: "",
       office_type: null
-    }
+    },
+    company_roles: [],
+    office_options: [],
+    office_countries: []
   };
   static fieldsSubmit = [
     "avatar",
@@ -93,18 +97,10 @@ export default class Profile extends React.PureComponent {
     this.selectedCountry = COUNTRY_FIELDS.USA.short_name;
   }
 
-  get initialValues() {
-    let profile = { ...this.props.profile };
-    if (!Object.keys(profile).length) {
-      profile = { ...Profile.defaultProps.profile };
+  componentDidUpdate(prevProps, prevState) {
+    if (!_isEqual(this.props.profile, prevProps.profile)) {
+      this.formik.setValues(this.getProfileValues(this.props.profile));
     }
-    profile.company_roles = this.props.company_roles.filter(i =>
-      profile.company_roles.includes(i.value)
-    );
-    profile.office_type = this.props.office_options.filter(
-      i => i.value === profile.office_type
-    )[0];
-    return profile;
   }
 
   getAvatarImage(values) {
@@ -128,6 +124,20 @@ export default class Profile extends React.PureComponent {
       this.setState({ message: null });
     }
   }
+
+  getProfileValues = profile => {
+    let p = { ...profile };
+    if (!Object.keys(p).length) {
+      p = { ...Profile.defaultProps.profile };
+    }
+    p.company_roles = this.props.company_roles.filter(i =>
+      p.company_roles.includes(i.value)
+    );
+    p.office_type = this.props.office_options.filter(
+      i => i.value === p.office_type
+    )[0];
+    return p;
+  };
 
   setFormik = formik => {
     this.formik = formik;
@@ -384,12 +394,12 @@ export default class Profile extends React.PureComponent {
   };
 
   render() {
-    const { companyAddresses } = this.props;
+    const { companyAddresses, profile } = this.props;
     return (
       <div className="account-settings__tab">
         <Formik
           ref={this.setFormik}
-          initialValues={this.initialValues}
+          initialValues={this.getProfileValues(profile)}
           validationSchema={profileSchema}
           validateOnBlur={true}
           validateOnChange={true}

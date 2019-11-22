@@ -1,4 +1,10 @@
+import { createAjaxAction } from "./helpers";
+
 export default {
+  requestSettings: createAjaxAction(
+    "AJAX_GET_ACCOUNT_SETTINGS",
+    "/account-settings"
+  ),
   getProperties: data => ({
     type: "API_ACCOUNT_REPORT_PROPERTIES",
     data

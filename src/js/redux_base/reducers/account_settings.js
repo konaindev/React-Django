@@ -23,6 +23,10 @@ export default (state = intialState, action) => {
       newState = { ...state, ...intialState };
       break;
     }
+    case "AJAX_GET_ACCOUNT_SETTINGS_SUCCESS": {
+      newState = { ...state, ...action.payload };
+      break;
+    }
     default:
       newState = { ...state };
   }
