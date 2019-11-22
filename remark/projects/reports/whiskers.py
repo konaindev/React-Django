@@ -22,18 +22,16 @@ class WhiskerSeries:
     ]
 
     @classmethod
-    def build_weekly_series(cls, project, multiperiod, end):
+    def build_weekly_series(cls, multiperiod, campaign_start, end):
         """
         Return a dictionary mapping a target metric name to a time-ordered series of values
         for that target metric.
         """
         # XXX this whole WhiskerSeries class exposes totally weird API at the moment.
         # I dunno what it should *actually* look like, but this doesn't feel like it! -Dave
-        campaign_start = project.get_campaign_start()
         whisker_mp = multiperiod
-        whisker_periods = whisker_mp.get_delta_periods(
-            time_delta=datetime.timedelta(weeks=1)
-        )
+        whisker_periods = whisker_mp.get_delta_periods(time_delta=datetime.timedelta(weeks=1))
+
         computed_periods = [
             ComputedPeriod(whisker_period)
             for whisker_period in whisker_periods
