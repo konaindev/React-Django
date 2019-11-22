@@ -184,25 +184,32 @@ def send_performance_email(performance_email_id):
 
     # Sync Contacts with SendGrid Recipients
     contact_str = project.email_distribution_list
-    if len(contact_str) == 0:
-        raise Exception("No contacts provided in Property")
-
-    contacts = contact_str.split(",")
+    # after split, strip whitespaces and also filter out empty strings
+    contacts = [x.strip() for x in contact_str.split(",") if x]
     contact_ids = []
     for contact in contacts:
-        contact_id = create_contact_if_not_exists(contact)
-        contact_ids.append(contact_id)
-        time.sleep(5)
+        try:
+            contact_id = create_contact_if_not_exists(contact)
+            contact_ids.append(contact_id)
+            time.sleep(5)
+        except:
+            logger.error(f"Invalid email address: \"{contact}\"")
+
+    if len(contact_ids) == 0:
+        raise Exception("No contacts provided in email distribution list")
 
     # Sync Contact List
-    list_id = project.email_list_id
-    new_list_id = create_contact_list_if_not_exists(
-        project.public_id, list_id, contact_ids
-    )
-    time.sleep(10)
-    if list_id != new_list_id:
-        project.email_list_id = new_list_id
-        project.save()
+    try:
+        list_id = project.email_list_id
+        new_list_id = create_contact_list_if_not_exists(
+            project.public_id, list_id, contact_ids
+        )
+        time.sleep(10)
+        if list_id != new_list_id:
+            project.email_list_id = new_list_id
+            project.save()
+    except:
+        raise Exception("Failed to synchronize contact list")
 
     # Sync Campaign
     email_campaign_id = perf_email.email_campaign_id
