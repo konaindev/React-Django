@@ -1,4 +1,4 @@
-export const props = {
+export default {
   isOpen: true,
   addresses: {
     suggested_address: {

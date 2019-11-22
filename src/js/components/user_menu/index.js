@@ -40,15 +40,12 @@ export class UserMenu extends React.PureComponent {
 
   dropdownMenu = props => {
     let settingsItem;
-    if (this.props.account_settings_url) {
+    if (!this.props.is_superuser) {
       settingsItem = (
-        <a
-          className="user-menu__dropdown-item"
-          href={this.props.account_settings_url}
-        >
+        <Link className="user-menu__dropdown-item" to="/account-settings">
           <Settings className="user-menu__icon" />
           <div>Account Settings</div>
-        </a>
+        </Link>
       );
     }
     return (
