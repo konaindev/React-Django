@@ -87,9 +87,7 @@ module.exports = {
     }),
     new HtmlWebPackPlugin({
       template: "./src/index.html",
-      filename: "./index.html"
-    }),
-    new HtmlWebPackPlugin({
+      filename: "./index.html",
       favicon: "./src/favicon.ico"
     })
   ],
