@@ -1,1697 +1,402 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AccountSettings account security tab 1`] = `
-<div
-  className="chrome"
->
+<section>
   <div
-    className="page-chrome__top-chrome"
+    className="container"
   >
     <div
-      className="page-chrome__top-chrome__content"
+      className="account-settings"
     >
       <div
-        className="page-header"
+        className="account-settings__header"
       >
         <div
-          className="container page-header__inner"
+          className="account-settings__title"
         >
-          <a
-            href="/dashboard"
+          Account Settings
+        </div>
+        <div
+          className="account-settings__subtitle"
+        >
+          Manage and edit your profile, security, notifications, and billing settings.
+        </div>
+      </div>
+      <div
+        className="account-settings__panel"
+      >
+        <div
+          className="account-settings__menu"
+        >
+          <div
+            className="account-settings__menu-item"
             onClick={[Function]}
-            style={
-              Object {
-                "color": "inherit",
-                "textDecoration": "inherit",
-              }
-            }
           >
-            <div
-              className="remarkably-logo"
+            <svg
+              aria-hidden="true"
+              className="account-settings__menu-icon"
+              color="inherit"
+              focusable="false"
+              height="1em"
+              role="presentation"
+              viewBox="0 0 20 20"
+              width="1em"
             >
-               
-            </div>
-          </a>
-          <div
-            className="top-navigation"
-          >
-            <a
-              aria-current={null}
-              className="top-navigation__link"
-              href="/dashboard"
-              onClick={[Function]}
+              <path
+                d="M16.6668 17.5V15.8333C16.6668 14.9493 16.3156 14.1014 15.6905 13.4763C15.0654 12.8512 14.2176 12.5 13.3335 12.5H6.66683C5.78277 12.5 4.93493 12.8512 4.30981 13.4763C3.68469 14.1014 3.3335 14.9493 3.3335 15.8333V17.5"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M9.99984 9.16667C11.8408 9.16667 13.3332 7.67428 13.3332 5.83333C13.3332 3.99238 11.8408 2.5 9.99984 2.5C8.15889 2.5 6.6665 3.99238 6.6665 5.83333C6.6665 7.67428 8.15889 9.16667 9.99984 9.16667Z"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+            </svg>
+            <span
+              className="account-settings__menu-item-text"
             >
-              Portfolio
-            </a>
-            <a
-              aria-current={null}
-              className="top-navigation__link"
-              href="/portfolio/table"
-              onClick={[Function]}
-            >
-              Portfolio Analysis
-            </a>
+              Profile
+            </span>
           </div>
-          <nav
-            className="page-header__items-outer"
-          >
-            <ul
-              className="page-header__items-inner"
-              style={
-                Object {
-                  "gridTemplateColumns": "repeat(1, 1fr)",
-                }
-              }
-            >
-              <li
-                className="page-header__item"
-              >
-                <div
-                  className="user-menu"
-                >
-                  <div
-                    className="select user-menu__select css-2b097c-container"
-                    onKeyDown={[Function]}
-                  >
-                    <div
-                      className="select__control css-yk16xz-control"
-                      onMouseDown={[Function]}
-                      onTouchEnd={[Function]}
-                    >
-                      <div
-                        className="select__value-container css-1hwfws3"
-                      >
-                        <div
-                          className="user-menu__image-container"
-                        >
-                          <div
-                            className="user-menu__image user-menu__image--default"
-                          />
-                          <div
-                            className="user-menu__image"
-                            style={
-                              Object {
-                                "backgroundImage": "url()",
-                              }
-                            }
-                          />
-                        </div>
-                        <input
-                          className="css-62g3xt-dummyInput"
-                          disabled={false}
-                          id="react-select-2-input"
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          onFocus={[Function]}
-                          readOnly={true}
-                          tabIndex="0"
-                          value=""
-                        />
-                      </div>
-                      <div
-                        className="select__indicators css-1g48xl4-IndicatorsContainer"
-                      >
-                        <span
-                          className="select__indicator-separator css-1okebmr-indicatorSeparator"
-                        />
-                        <div
-                          aria-hidden="true"
-                          className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
-                          onMouseDown={[Function]}
-                          onTouchEnd={[Function]}
-                        >
-                          <svg
-                            aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--down"
-                            color="inherit"
-                            focusable="false"
-                            height="1em"
-                            role="presentation"
-                            viewBox="0 0 10 5"
-                            width="1em"
-                          >
-                            <path
-                              d="M1 1.16134L4.92334 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 1.16134L5 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                          <svg
-                            aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--up"
-                            color="inherit"
-                            focusable="false"
-                            height="1em"
-                            role="presentation"
-                            viewBox="0 0 10 5"
-                            width="1em"
-                          >
-                            <path
-                              d="M1 3.83866L4.92334 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 3.83866L5 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-    <div
-      className="page-chrome__top-chrome__spacing-fix"
-      style={
-        Object {
-          "height": 76,
-        }
-      }
-    >
-       
-    </div>
-  </div>
-  <div
-    className="account-settings"
-  >
-    <div
-      className="account-settings__header"
-    >
-      <div
-        className="account-settings__title"
-      >
-        Account Settings
-      </div>
-      <div
-        className="account-settings__subtitle"
-      >
-        Manage and edit your profile, security, notifications, and billing settings.
-      </div>
-    </div>
-    <div
-      className="account-settings__panel"
-    >
-      <div
-        className="account-settings__menu"
-      >
-        <div
-          className="account-settings__menu-item"
-          onClick={[Function]}
-        >
-          <svg
-            aria-hidden="true"
-            className="account-settings__menu-icon"
-            color="inherit"
-            focusable="false"
-            height="1em"
-            role="presentation"
-            viewBox="0 0 20 20"
-            width="1em"
-          >
-            <path
-              d="M16.6668 17.5V15.8333C16.6668 14.9493 16.3156 14.1014 15.6905 13.4763C15.0654 12.8512 14.2176 12.5 13.3335 12.5H6.66683C5.78277 12.5 4.93493 12.8512 4.30981 13.4763C3.68469 14.1014 3.3335 14.9493 3.3335 15.8333V17.5"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-            <path
-              d="M9.99984 9.16667C11.8408 9.16667 13.3332 7.67428 13.3332 5.83333C13.3332 3.99238 11.8408 2.5 9.99984 2.5C8.15889 2.5 6.6665 3.99238 6.6665 5.83333C6.6665 7.67428 8.15889 9.16667 9.99984 9.16667Z"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-          </svg>
-          <span
-            className="account-settings__menu-item-text"
-          >
-            Profile
-          </span>
-        </div>
-        <div
-          className="account-settings__menu-item account-settings__menu-item--active"
-          onClick={[Function]}
-        >
-          <svg
-            aria-hidden="true"
-            className="account-settings__menu-icon"
-            color="inherit"
-            focusable="false"
-            height="1em"
-            role="presentation"
-            viewBox="0 0 20 20"
-            width="1em"
-          >
-            <path
-              d="M15.8333 9.16669H4.16667C3.24619 9.16669 2.5 9.91288 2.5 10.8334V16.6667C2.5 17.5872 3.24619 18.3334 4.16667 18.3334H15.8333C16.7538 18.3334 17.5 17.5872 17.5 16.6667V10.8334C17.5 9.91288 16.7538 9.16669 15.8333 9.16669Z"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-            <path
-              d="M5.83301 9.16669V5.83335C5.83301 4.72828 6.27199 3.66848 7.0534 2.88708C7.8348 2.10567 8.89461 1.66669 9.99967 1.66669C11.1047 1.66669 12.1646 2.10567 12.946 2.88708C13.7274 3.66848 14.1663 4.72828 14.1663 5.83335V9.16669"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-          </svg>
-          <span
-            className="account-settings__menu-item-text"
-          >
-            Security
-          </span>
-        </div>
-        <div
-          className="account-settings__menu-item"
-          onClick={[Function]}
-        >
-          <svg
-            aria-hidden="true"
-            className="account-settings__menu-icon"
-            color="inherit"
-            focusable="false"
-            height="1em"
-            role="presentation"
-            viewBox="0 0 20 20"
-            width="1em"
-          >
-            <path
-              d="M3.33366 3.33331H16.667C17.5837 3.33331 18.3337 4.08331 18.3337 4.99998V15C18.3337 15.9166 17.5837 16.6666 16.667 16.6666H3.33366C2.41699 16.6666 1.66699 15.9166 1.66699 15V4.99998C1.66699 4.08331 2.41699 3.33331 3.33366 3.33331Z"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-            <path
-              d="M18.3337 5L10.0003 10.8333L1.66699 5"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-          </svg>
-          <span
-            className="account-settings__menu-item-text"
-          >
-            Email Preferences
-          </span>
-        </div>
-      </div>
-      <div
-        className="account-settings__tab"
-      >
-        <form
-          autoComplete="off"
-          method="post"
-          onReset={[Function]}
-          onSubmit={[Function]}
-        >
           <div
-            className="account-settings__tab-content"
+            className="account-settings__menu-item account-settings__menu-item--active"
+            onClick={[Function]}
+          >
+            <svg
+              aria-hidden="true"
+              className="account-settings__menu-icon"
+              color="inherit"
+              focusable="false"
+              height="1em"
+              role="presentation"
+              viewBox="0 0 20 20"
+              width="1em"
+            >
+              <path
+                d="M15.8333 9.16669H4.16667C3.24619 9.16669 2.5 9.91288 2.5 10.8334V16.6667C2.5 17.5872 3.24619 18.3334 4.16667 18.3334H15.8333C16.7538 18.3334 17.5 17.5872 17.5 16.6667V10.8334C17.5 9.91288 16.7538 9.16669 15.8333 9.16669Z"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M5.83301 9.16669V5.83335C5.83301 4.72828 6.27199 3.66848 7.0534 2.88708C7.8348 2.10567 8.89461 1.66669 9.99967 1.66669C11.1047 1.66669 12.1646 2.10567 12.946 2.88708C13.7274 3.66848 14.1663 4.72828 14.1663 5.83335V9.16669"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+            </svg>
+            <span
+              className="account-settings__menu-item-text"
+            >
+              Security
+            </span>
+          </div>
+          <div
+            className="account-settings__menu-item"
+            onClick={[Function]}
+          >
+            <svg
+              aria-hidden="true"
+              className="account-settings__menu-icon"
+              color="inherit"
+              focusable="false"
+              height="1em"
+              role="presentation"
+              viewBox="0 0 20 20"
+              width="1em"
+            >
+              <path
+                d="M3.33366 3.33331H16.667C17.5837 3.33331 18.3337 4.08331 18.3337 4.99998V15C18.3337 15.9166 17.5837 16.6666 16.667 16.6666H3.33366C2.41699 16.6666 1.66699 15.9166 1.66699 15V4.99998C1.66699 4.08331 2.41699 3.33331 3.33366 3.33331Z"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M18.3337 5L10.0003 10.8333L1.66699 5"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+            </svg>
+            <span
+              className="account-settings__menu-item-text"
+            >
+              Email Preferences
+            </span>
+          </div>
+        </div>
+        <div
+          className="account-settings__tab"
+        >
+          <form
+            autoComplete="off"
+            method="post"
+            onReset={[Function]}
+            onSubmit={[Function]}
           >
             <div
-              className="account-settings__tab-section"
+              className="account-settings__tab-content"
             >
               <div
-                className="account-settings__tab-title"
-              >
-                Account Security
-              </div>
-              <div
-                className="account-settings__field"
+                className="account-settings__tab-section"
               >
                 <div
-                  className="account-settings__label"
+                  className="account-settings__tab-title"
                 >
-                  Email Address
+                  Account Security
                 </div>
-                <input
-                  className="input account-settings__input input--gray"
-                  name="email"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  type="text"
-                  value="test@psl.com"
-                />
-                <div
-                  className="account-settings__error"
-                />
-              </div>
-            </div>
-            <div
-              className="account-settings__tab-section"
-            >
-              <div
-                className="account-settings__field-grid account-settings__field-grid--col-3"
-              >
                 <div
                   className="account-settings__field"
                 >
                   <div
                     className="account-settings__label"
                   >
-                    Current Password
+                    Email Address
                   </div>
                   <input
                     className="input account-settings__input input--gray"
-                    name="old_password"
+                    name="email"
                     onBlur={[Function]}
                     onChange={[Function]}
-                    type="password"
-                    value=""
+                    type="text"
+                    value="test@psl.com"
                   />
                   <div
                     className="account-settings__error"
                   />
                 </div>
+              </div>
+              <div
+                className="account-settings__tab-section"
+              >
                 <div
-                  className="account-settings__field"
+                  className="account-settings__field-grid account-settings__field-grid--col-3"
                 >
                   <div
-                    className="account-settings__label"
+                    className="account-settings__field"
                   >
-                    New Password
+                    <div
+                      className="account-settings__label"
+                    >
+                      Current Password
+                    </div>
+                    <input
+                      className="input account-settings__input input--gray"
+                      name="old_password"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      type="password"
+                      value=""
+                    />
+                    <div
+                      className="account-settings__error"
+                    />
                   </div>
-                </div>
-                <div
-                  className="account-settings__field"
-                >
                   <div
-                    className="account-settings__label"
+                    className="account-settings__field"
                   >
-                    Confirm Password
+                    <div
+                      className="account-settings__label"
+                    >
+                      New Password
+                    </div>
                   </div>
-                  <input
-                    className="input account-settings__input input--gray"
-                    name="confirm_password"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    type="password"
-                    value=""
-                  />
+                  <div
+                    className="account-settings__field"
+                  >
+                    <div
+                      className="account-settings__label"
+                    >
+                      Confirm Password
+                    </div>
+                    <input
+                      className="input account-settings__input input--gray"
+                      name="confirm_password"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      type="password"
+                      value=""
+                    />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div
-            className="account-settings__controls"
-          >
-            <button
-              className="button button--primary account-settings__button"
-              onClick={[Function]}
-              type="submit"
+            <div
+              className="account-settings__controls"
             >
-              Save
-            </button>
-          </div>
-        </form>
+              <button
+                className="button button--primary account-settings__button"
+                onClick={[Function]}
+                type="submit"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>
 `;
 
 exports[`AccountSettings email reports 'Groups' tab 1`] = `
-<div
-  className="chrome"
->
+<section>
   <div
-    className="page-chrome__top-chrome"
+    className="container"
   >
     <div
-      className="page-chrome__top-chrome__content"
+      className="account-settings"
     >
       <div
-        className="page-header"
+        className="account-settings__header"
       >
         <div
-          className="container page-header__inner"
+          className="account-settings__title"
         >
-          <a
-            href="/dashboard"
+          Account Settings
+        </div>
+        <div
+          className="account-settings__subtitle"
+        >
+          Manage and edit your profile, security, notifications, and billing settings.
+        </div>
+      </div>
+      <div
+        className="account-settings__panel"
+      >
+        <div
+          className="account-settings__menu"
+        >
+          <div
+            className="account-settings__menu-item"
             onClick={[Function]}
-            style={
-              Object {
-                "color": "inherit",
-                "textDecoration": "inherit",
-              }
-            }
           >
-            <div
-              className="remarkably-logo"
+            <svg
+              aria-hidden="true"
+              className="account-settings__menu-icon"
+              color="inherit"
+              focusable="false"
+              height="1em"
+              role="presentation"
+              viewBox="0 0 20 20"
+              width="1em"
             >
-               
-            </div>
-          </a>
-          <div
-            className="top-navigation"
-          >
-            <a
-              aria-current={null}
-              className="top-navigation__link"
-              href="/dashboard"
-              onClick={[Function]}
-            >
-              Portfolio
-            </a>
-            <a
-              aria-current={null}
-              className="top-navigation__link"
-              href="/portfolio/table"
-              onClick={[Function]}
-            >
-              Portfolio Analysis
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="page-chrome__top-chrome__spacing-fix"
-      style={
-        Object {
-          "height": 76,
-        }
-      }
-    >
-       
-    </div>
-  </div>
-  <div
-    className="account-settings"
-  >
-    <div
-      className="account-settings__header"
-    >
-      <div
-        className="account-settings__title"
-      >
-        Account Settings
-      </div>
-      <div
-        className="account-settings__subtitle"
-      >
-        Manage and edit your profile, security, notifications, and billing settings.
-      </div>
-    </div>
-    <div
-      className="account-settings__panel"
-    >
-      <div
-        className="account-settings__menu"
-      >
-        <div
-          className="account-settings__menu-item"
-          onClick={[Function]}
-        >
-          <svg
-            aria-hidden="true"
-            className="account-settings__menu-icon"
-            color="inherit"
-            focusable="false"
-            height="1em"
-            role="presentation"
-            viewBox="0 0 20 20"
-            width="1em"
-          >
-            <path
-              d="M16.6668 17.5V15.8333C16.6668 14.9493 16.3156 14.1014 15.6905 13.4763C15.0654 12.8512 14.2176 12.5 13.3335 12.5H6.66683C5.78277 12.5 4.93493 12.8512 4.30981 13.4763C3.68469 14.1014 3.3335 14.9493 3.3335 15.8333V17.5"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-            <path
-              d="M9.99984 9.16667C11.8408 9.16667 13.3332 7.67428 13.3332 5.83333C13.3332 3.99238 11.8408 2.5 9.99984 2.5C8.15889 2.5 6.6665 3.99238 6.6665 5.83333C6.6665 7.67428 8.15889 9.16667 9.99984 9.16667Z"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-          </svg>
-          <span
-            className="account-settings__menu-item-text"
-          >
-            Profile
-          </span>
-        </div>
-        <div
-          className="account-settings__menu-item"
-          onClick={[Function]}
-        >
-          <svg
-            aria-hidden="true"
-            className="account-settings__menu-icon"
-            color="inherit"
-            focusable="false"
-            height="1em"
-            role="presentation"
-            viewBox="0 0 20 20"
-            width="1em"
-          >
-            <path
-              d="M15.8333 9.16669H4.16667C3.24619 9.16669 2.5 9.91288 2.5 10.8334V16.6667C2.5 17.5872 3.24619 18.3334 4.16667 18.3334H15.8333C16.7538 18.3334 17.5 17.5872 17.5 16.6667V10.8334C17.5 9.91288 16.7538 9.16669 15.8333 9.16669Z"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-            <path
-              d="M5.83301 9.16669V5.83335C5.83301 4.72828 6.27199 3.66848 7.0534 2.88708C7.8348 2.10567 8.89461 1.66669 9.99967 1.66669C11.1047 1.66669 12.1646 2.10567 12.946 2.88708C13.7274 3.66848 14.1663 4.72828 14.1663 5.83335V9.16669"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-          </svg>
-          <span
-            className="account-settings__menu-item-text"
-          >
-            Security
-          </span>
-        </div>
-        <div
-          className="account-settings__menu-item account-settings__menu-item--active"
-          onClick={[Function]}
-        >
-          <svg
-            aria-hidden="true"
-            className="account-settings__menu-icon"
-            color="inherit"
-            focusable="false"
-            height="1em"
-            role="presentation"
-            viewBox="0 0 20 20"
-            width="1em"
-          >
-            <path
-              d="M3.33366 3.33331H16.667C17.5837 3.33331 18.3337 4.08331 18.3337 4.99998V15C18.3337 15.9166 17.5837 16.6666 16.667 16.6666H3.33366C2.41699 16.6666 1.66699 15.9166 1.66699 15V4.99998C1.66699 4.08331 2.41699 3.33331 3.33366 3.33331Z"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-            <path
-              d="M18.3337 5L10.0003 10.8333L1.66699 5"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-          </svg>
-          <span
-            className="account-settings__menu-item-text"
-          >
-            Email Preferences
-          </span>
-        </div>
-      </div>
-      <div
-        className="account-settings__tab"
-      >
-        <div
-          className="account-settings__tab-content"
-        >
-          <div
-            className="account-settings__tab-section"
-          >
-            <div
-              className="account-settings__tab-header"
-            >
-              <div
-                className="account-settings__tab-title"
-              >
-                Email Preferences
-              </div>
-              <div
-                className="account-settings__tab-subtitle"
-              >
-                Manage email reports and alerts across your portfolio.
-              </div>
-            </div>
-          </div>
-          <div
-            className="account-settings__tab-section account-settings__tab-section--zero-pad"
-          >
-            <div
-              className="tab-navigator account-settings__tab-navigator"
-            >
-              <div
-                className="container tab-navigator__navs"
-              >
-                <a
-                  className="tab-navigator__nav-item"
-                  href="#"
-                  onClick={[Function]}
-                >
-                  Properties
-                </a>
-              </div>
-              <div
-                className="tab-navigator__divider"
+              <path
+                d="M16.6668 17.5V15.8333C16.6668 14.9493 16.3156 14.1014 15.6905 13.4763C15.0654 12.8512 14.2176 12.5 13.3335 12.5H6.66683C5.78277 12.5 4.93493 12.8512 4.30981 13.4763C3.68469 14.1014 3.3335 14.9493 3.3335 15.8333V17.5"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
               />
-              <div
-                className="container"
+              <path
+                d="M9.99984 9.16667C11.8408 9.16667 13.3332 7.67428 13.3332 5.83333C13.3332 3.99238 11.8408 2.5 9.99984 2.5C8.15889 2.5 6.6665 3.99238 6.6665 5.83333C6.6665 7.67428 8.15889 9.16667 9.99984 9.16667Z"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
               />
-            </div>
+            </svg>
+            <span
+              className="account-settings__menu-item-text"
+            >
+              Profile
+            </span>
           </div>
-        </div>
-        <div
-          className="account-settings__controls"
-        >
-          <button
-            className="button button--primary account-settings__button"
+          <div
+            className="account-settings__menu-item"
             onClick={[Function]}
-            type="submit"
           >
-            Save
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`AccountSettings email reports 'Portfolio' tab 1`] = `
-<div
-  className="chrome"
->
-  <div
-    className="page-chrome__top-chrome"
-  >
-    <div
-      className="page-chrome__top-chrome__content"
-    >
-      <div
-        className="page-header"
-      >
-        <div
-          className="container page-header__inner"
-        >
-          <a
-            href="/dashboard"
-            onClick={[Function]}
-            style={
-              Object {
-                "color": "inherit",
-                "textDecoration": "inherit",
-              }
-            }
-          >
-            <div
-              className="remarkably-logo"
+            <svg
+              aria-hidden="true"
+              className="account-settings__menu-icon"
+              color="inherit"
+              focusable="false"
+              height="1em"
+              role="presentation"
+              viewBox="0 0 20 20"
+              width="1em"
             >
-               
-            </div>
-          </a>
-          <div
-            className="top-navigation"
-          >
-            <a
-              aria-current={null}
-              className="top-navigation__link"
-              href="/dashboard"
-              onClick={[Function]}
-            >
-              Portfolio
-            </a>
-            <a
-              aria-current={null}
-              className="top-navigation__link"
-              href="/portfolio/table"
-              onClick={[Function]}
-            >
-              Portfolio Analysis
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="page-chrome__top-chrome__spacing-fix"
-      style={
-        Object {
-          "height": 76,
-        }
-      }
-    >
-       
-    </div>
-  </div>
-  <div
-    className="account-settings"
-  >
-    <div
-      className="account-settings__header"
-    >
-      <div
-        className="account-settings__title"
-      >
-        Account Settings
-      </div>
-      <div
-        className="account-settings__subtitle"
-      >
-        Manage and edit your profile, security, notifications, and billing settings.
-      </div>
-    </div>
-    <div
-      className="account-settings__panel"
-    >
-      <div
-        className="account-settings__menu"
-      >
-        <div
-          className="account-settings__menu-item"
-          onClick={[Function]}
-        >
-          <svg
-            aria-hidden="true"
-            className="account-settings__menu-icon"
-            color="inherit"
-            focusable="false"
-            height="1em"
-            role="presentation"
-            viewBox="0 0 20 20"
-            width="1em"
-          >
-            <path
-              d="M16.6668 17.5V15.8333C16.6668 14.9493 16.3156 14.1014 15.6905 13.4763C15.0654 12.8512 14.2176 12.5 13.3335 12.5H6.66683C5.78277 12.5 4.93493 12.8512 4.30981 13.4763C3.68469 14.1014 3.3335 14.9493 3.3335 15.8333V17.5"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-            <path
-              d="M9.99984 9.16667C11.8408 9.16667 13.3332 7.67428 13.3332 5.83333C13.3332 3.99238 11.8408 2.5 9.99984 2.5C8.15889 2.5 6.6665 3.99238 6.6665 5.83333C6.6665 7.67428 8.15889 9.16667 9.99984 9.16667Z"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-          </svg>
-          <span
-            className="account-settings__menu-item-text"
-          >
-            Profile
-          </span>
-        </div>
-        <div
-          className="account-settings__menu-item"
-          onClick={[Function]}
-        >
-          <svg
-            aria-hidden="true"
-            className="account-settings__menu-icon"
-            color="inherit"
-            focusable="false"
-            height="1em"
-            role="presentation"
-            viewBox="0 0 20 20"
-            width="1em"
-          >
-            <path
-              d="M15.8333 9.16669H4.16667C3.24619 9.16669 2.5 9.91288 2.5 10.8334V16.6667C2.5 17.5872 3.24619 18.3334 4.16667 18.3334H15.8333C16.7538 18.3334 17.5 17.5872 17.5 16.6667V10.8334C17.5 9.91288 16.7538 9.16669 15.8333 9.16669Z"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-            <path
-              d="M5.83301 9.16669V5.83335C5.83301 4.72828 6.27199 3.66848 7.0534 2.88708C7.8348 2.10567 8.89461 1.66669 9.99967 1.66669C11.1047 1.66669 12.1646 2.10567 12.946 2.88708C13.7274 3.66848 14.1663 4.72828 14.1663 5.83335V9.16669"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-          </svg>
-          <span
-            className="account-settings__menu-item-text"
-          >
-            Security
-          </span>
-        </div>
-        <div
-          className="account-settings__menu-item account-settings__menu-item--active"
-          onClick={[Function]}
-        >
-          <svg
-            aria-hidden="true"
-            className="account-settings__menu-icon"
-            color="inherit"
-            focusable="false"
-            height="1em"
-            role="presentation"
-            viewBox="0 0 20 20"
-            width="1em"
-          >
-            <path
-              d="M3.33366 3.33331H16.667C17.5837 3.33331 18.3337 4.08331 18.3337 4.99998V15C18.3337 15.9166 17.5837 16.6666 16.667 16.6666H3.33366C2.41699 16.6666 1.66699 15.9166 1.66699 15V4.99998C1.66699 4.08331 2.41699 3.33331 3.33366 3.33331Z"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-            <path
-              d="M18.3337 5L10.0003 10.8333L1.66699 5"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-          </svg>
-          <span
-            className="account-settings__menu-item-text"
-          >
-            Email Preferences
-          </span>
-        </div>
-      </div>
-      <div
-        className="account-settings__tab"
-      >
-        <div
-          className="account-settings__tab-content"
-        >
-          <div
-            className="account-settings__tab-section"
-          >
-            <div
-              className="account-settings__tab-header"
-            >
-              <div
-                className="account-settings__tab-title"
-              >
-                Email Preferences
-              </div>
-              <div
-                className="account-settings__tab-subtitle"
-              >
-                Manage email reports and alerts across your portfolio.
-              </div>
-            </div>
-          </div>
-          <div
-            className="account-settings__tab-section account-settings__tab-section--zero-pad"
-          >
-            <div
-              className="tab-navigator account-settings__tab-navigator"
-            >
-              <div
-                className="container tab-navigator__navs"
-              >
-                <a
-                  className="tab-navigator__nav-item"
-                  href="#"
-                  onClick={[Function]}
-                >
-                  Properties
-                </a>
-              </div>
-              <div
-                className="tab-navigator__divider"
+              <path
+                d="M15.8333 9.16669H4.16667C3.24619 9.16669 2.5 9.91288 2.5 10.8334V16.6667C2.5 17.5872 3.24619 18.3334 4.16667 18.3334H15.8333C16.7538 18.3334 17.5 17.5872 17.5 16.6667V10.8334C17.5 9.91288 16.7538 9.16669 15.8333 9.16669Z"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
               />
-              <div
-                className="container"
+              <path
+                d="M5.83301 9.16669V5.83335C5.83301 4.72828 6.27199 3.66848 7.0534 2.88708C7.8348 2.10567 8.89461 1.66669 9.99967 1.66669C11.1047 1.66669 12.1646 2.10567 12.946 2.88708C13.7274 3.66848 14.1663 4.72828 14.1663 5.83335V9.16669"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
               />
-            </div>
+            </svg>
+            <span
+              className="account-settings__menu-item-text"
+            >
+              Security
+            </span>
           </div>
-        </div>
-        <div
-          className="account-settings__controls"
-        >
-          <button
-            className="button button--primary account-settings__button"
+          <div
+            className="account-settings__menu-item account-settings__menu-item--active"
             onClick={[Function]}
-            type="submit"
           >
-            Save
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`AccountSettings email reports 'Properties' tab 1`] = `
-<div
-  className="chrome"
->
-  <div
-    className="page-chrome__top-chrome"
-  >
-    <div
-      className="page-chrome__top-chrome__content"
-    >
-      <div
-        className="page-header"
-      >
-        <div
-          className="container page-header__inner"
-        >
-          <a
-            href="/dashboard"
-            onClick={[Function]}
-            style={
-              Object {
-                "color": "inherit",
-                "textDecoration": "inherit",
-              }
-            }
-          >
-            <div
-              className="remarkably-logo"
+            <svg
+              aria-hidden="true"
+              className="account-settings__menu-icon"
+              color="inherit"
+              focusable="false"
+              height="1em"
+              role="presentation"
+              viewBox="0 0 20 20"
+              width="1em"
             >
-               
-            </div>
-          </a>
-          <div
-            className="top-navigation"
-          >
-            <a
-              aria-current={null}
-              className="top-navigation__link"
-              href="/dashboard"
-              onClick={[Function]}
-            >
-              Portfolio
-            </a>
-            <a
-              aria-current={null}
-              className="top-navigation__link"
-              href="/portfolio/table"
-              onClick={[Function]}
-            >
-              Portfolio Analysis
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="page-chrome__top-chrome__spacing-fix"
-      style={
-        Object {
-          "height": 76,
-        }
-      }
-    >
-       
-    </div>
-  </div>
-  <div
-    className="account-settings"
-  >
-    <div
-      className="account-settings__header"
-    >
-      <div
-        className="account-settings__title"
-      >
-        Account Settings
-      </div>
-      <div
-        className="account-settings__subtitle"
-      >
-        Manage and edit your profile, security, notifications, and billing settings.
-      </div>
-    </div>
-    <div
-      className="account-settings__panel"
-    >
-      <div
-        className="account-settings__menu"
-      >
-        <div
-          className="account-settings__menu-item"
-          onClick={[Function]}
-        >
-          <svg
-            aria-hidden="true"
-            className="account-settings__menu-icon"
-            color="inherit"
-            focusable="false"
-            height="1em"
-            role="presentation"
-            viewBox="0 0 20 20"
-            width="1em"
-          >
-            <path
-              d="M16.6668 17.5V15.8333C16.6668 14.9493 16.3156 14.1014 15.6905 13.4763C15.0654 12.8512 14.2176 12.5 13.3335 12.5H6.66683C5.78277 12.5 4.93493 12.8512 4.30981 13.4763C3.68469 14.1014 3.3335 14.9493 3.3335 15.8333V17.5"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-            <path
-              d="M9.99984 9.16667C11.8408 9.16667 13.3332 7.67428 13.3332 5.83333C13.3332 3.99238 11.8408 2.5 9.99984 2.5C8.15889 2.5 6.6665 3.99238 6.6665 5.83333C6.6665 7.67428 8.15889 9.16667 9.99984 9.16667Z"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-          </svg>
-          <span
-            className="account-settings__menu-item-text"
-          >
-            Profile
-          </span>
-        </div>
-        <div
-          className="account-settings__menu-item"
-          onClick={[Function]}
-        >
-          <svg
-            aria-hidden="true"
-            className="account-settings__menu-icon"
-            color="inherit"
-            focusable="false"
-            height="1em"
-            role="presentation"
-            viewBox="0 0 20 20"
-            width="1em"
-          >
-            <path
-              d="M15.8333 9.16669H4.16667C3.24619 9.16669 2.5 9.91288 2.5 10.8334V16.6667C2.5 17.5872 3.24619 18.3334 4.16667 18.3334H15.8333C16.7538 18.3334 17.5 17.5872 17.5 16.6667V10.8334C17.5 9.91288 16.7538 9.16669 15.8333 9.16669Z"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-            <path
-              d="M5.83301 9.16669V5.83335C5.83301 4.72828 6.27199 3.66848 7.0534 2.88708C7.8348 2.10567 8.89461 1.66669 9.99967 1.66669C11.1047 1.66669 12.1646 2.10567 12.946 2.88708C13.7274 3.66848 14.1663 4.72828 14.1663 5.83335V9.16669"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-          </svg>
-          <span
-            className="account-settings__menu-item-text"
-          >
-            Security
-          </span>
-        </div>
-        <div
-          className="account-settings__menu-item account-settings__menu-item--active"
-          onClick={[Function]}
-        >
-          <svg
-            aria-hidden="true"
-            className="account-settings__menu-icon"
-            color="inherit"
-            focusable="false"
-            height="1em"
-            role="presentation"
-            viewBox="0 0 20 20"
-            width="1em"
-          >
-            <path
-              d="M3.33366 3.33331H16.667C17.5837 3.33331 18.3337 4.08331 18.3337 4.99998V15C18.3337 15.9166 17.5837 16.6666 16.667 16.6666H3.33366C2.41699 16.6666 1.66699 15.9166 1.66699 15V4.99998C1.66699 4.08331 2.41699 3.33331 3.33366 3.33331Z"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-            <path
-              d="M18.3337 5L10.0003 10.8333L1.66699 5"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-          </svg>
-          <span
-            className="account-settings__menu-item-text"
-          >
-            Email Preferences
-          </span>
-        </div>
-      </div>
-      <div
-        className="account-settings__tab"
-      >
-        <div
-          className="account-settings__tab-content"
-        >
-          <div
-            className="account-settings__tab-section"
-          >
-            <div
-              className="account-settings__tab-header"
-            >
-              <div
-                className="account-settings__tab-title"
-              >
-                Email Preferences
-              </div>
-              <div
-                className="account-settings__tab-subtitle"
-              >
-                Manage email reports and alerts across your portfolio.
-              </div>
-            </div>
-          </div>
-          <div
-            className="account-settings__tab-section account-settings__tab-section--zero-pad"
-          >
-            <div
-              className="tab-navigator account-settings__tab-navigator"
-            >
-              <div
-                className="container tab-navigator__navs"
-              >
-                <a
-                  className="tab-navigator__nav-item tab-navigator__nav-item--active"
-                  href="#"
-                  onClick={[Function]}
-                >
-                  Properties
-                </a>
-              </div>
-              <div
-                className="tab-navigator__divider"
+              <path
+                d="M3.33366 3.33331H16.667C17.5837 3.33331 18.3337 4.08331 18.3337 4.99998V15C18.3337 15.9166 17.5837 16.6666 16.667 16.6666H3.33366C2.41699 16.6666 1.66699 15.9166 1.66699 15V4.99998C1.66699 4.08331 2.41699 3.33331 3.33366 3.33331Z"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
               />
-              <div
-                className="container"
-              >
-                <div
-                  className="tab-navigator__content"
-                >
-                  <div>
-                    <div
-                      className="account-settings__search-controls"
-                    >
-                      <div
-                        className="search-with-sort account-settings__search"
-                      >
-                        <div
-                          className="search-input-box search-with-sort__input"
-                        >
-                          <input
-                            className="input search-input input--gray"
-                            onChange={[Function]}
-                            placeholder="Search Properties"
-                            type="text"
-                            value=""
-                          />
-                        </div>
-                        <svg
-                          aria-hidden="true"
-                          className="search-with-sort__button search-with-sort__button--asc search-with-sort__button--gray"
-                          color="inherit"
-                          focusable="false"
-                          height="1em"
-                          onClick={[Function]}
-                          role="presentation"
-                          viewBox="0 0 16 14"
-                          width="1em"
-                        >
-                          <g
-                            fill="currentColor"
-                            stroke="none"
-                            strokeWidth="1"
-                          >
-                            <g
-                              transform="translate(-1383.000000, -185.000000)"
-                            >
-                              <g
-                                transform="translate(1087.000000, 169.000000)"
-                              >
-                                <g
-                                  transform="translate(296.000000, 16.000000)"
-                                >
-                                  <rect
-                                    height="1"
-                                    rx="0.4895163"
-                                    width="7.78365217"
-                                    x="8.01085217"
-                                    y="2.353442"
-                                  />
-                                  <rect
-                                    height="1"
-                                    rx="0.4895163"
-                                    width="5.8377113"
-                                    x="8.01085217"
-                                    y="5.290502"
-                                  />
-                                  <rect
-                                    height="1"
-                                    rx="0.4895163"
-                                    width="3.89181217"
-                                    x="8.01085217"
-                                    y="8.22766"
-                                  />
-                                  <rect
-                                    height="1"
-                                    rx="0.4895163"
-                                    width="1.94590609"
-                                    x="8.01085217"
-                                    y="11.16472"
-                                  />
-                                  <path
-                                    d="M2.85056,13.92804 C2.94554435,14.02394 3.09984696,14.02401 3.1949287,13.92818 L5.98018783,11.12216 C6.07507478,11.02654 6.07503304,10.87163 5.98008348,10.77608 L5.68895304,10.48313 C5.59389913,10.38751 5.43977043,10.38758 5.34480696,10.48334 L3.47919304,12.3641 L3.47919304,0.2447585 C3.47919304,0.1095822 3.37029565,-1.139453e-08 3.23595826,0 L2.80937043,3.618335e-08 C2.67503304,4.757781e-08 2.56613565,0.1095822 2.56613565,0.2447585 L2.5661287,12.3641 L0.706685218,10.48383 C0.611766261,10.38786 0.457431652,10.38765 0.36227687,10.48341 L0.0712431306,10.77629 C-0.0236404172,10.87177 -0.0237631303,11.02654 0.070968348,11.12216 L2.85056,13.92804 Z"
-                                  />
-                                </g>
-                              </g>
-                            </g>
-                          </g>
-                        </svg>
-                      </div>
-                      <label
-                        className="button-toggle button-toggle--unchecked account-settings__toggle"
-                      >
-                        <input
-                          checked={false}
-                          className="button-toggle__input"
-                          onChange={[Function]}
-                          type="checkbox"
-                        />
-                        <span
-                          className="button-toggle__track"
-                        >
-                          <span
-                            className="button-toggle__thumb"
-                          />
-                          <div
-                            className="button-toggle__checked"
-                          >
-                            <div
-                              className="button-toggle__inner-label"
-                            >
-                              On
-                            </div>
-                          </div>
-                          <div
-                            className="button-toggle__unchecked"
-                          >
-                            <div
-                              className="button-toggle__inner-label"
-                            >
-                              Off
-                            </div>
-                          </div>
-                        </span>
-                        
-                      </label>
-                    </div>
-                    <div
-                      className="email-reporting-table email-reporting-table--no-data account-settings__reporting-table"
-                    >
-                      No results found.
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              <path
+                d="M18.3337 5L10.0003 10.8333L1.66699 5"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+            </svg>
+            <span
+              className="account-settings__menu-item-text"
+            >
+              Email Preferences
+            </span>
           </div>
         </div>
         <div
-          className="account-settings__controls"
-        >
-          <button
-            className="button button--primary account-settings__button"
-            onClick={[Function]}
-            type="submit"
-          >
-            Save
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`AccountSettings profile tab 1`] = `
-<div
-  className="chrome"
->
-  <div
-    className="page-chrome__top-chrome"
-  >
-    <div
-      className="page-chrome__top-chrome__content"
-    >
-      <div
-        className="page-header"
-      >
-        <div
-          className="container page-header__inner"
-        >
-          <a
-            href="/dashboard"
-            onClick={[Function]}
-            style={
-              Object {
-                "color": "inherit",
-                "textDecoration": "inherit",
-              }
-            }
-          >
-            <div
-              className="remarkably-logo"
-            >
-               
-            </div>
-          </a>
-          <div
-            className="top-navigation"
-          >
-            <a
-              aria-current={null}
-              className="top-navigation__link"
-              href="/dashboard"
-              onClick={[Function]}
-            >
-              Portfolio
-            </a>
-            <a
-              aria-current={null}
-              className="top-navigation__link"
-              href="/portfolio/table"
-              onClick={[Function]}
-            >
-              Portfolio Analysis
-            </a>
-          </div>
-          <nav
-            className="page-header__items-outer"
-          >
-            <ul
-              className="page-header__items-inner"
-              style={
-                Object {
-                  "gridTemplateColumns": "repeat(1, 1fr)",
-                }
-              }
-            >
-              <li
-                className="page-header__item"
-              >
-                <div
-                  className="user-menu"
-                >
-                  <div
-                    className="select user-menu__select css-2b097c-container"
-                    onKeyDown={[Function]}
-                  >
-                    <div
-                      className="select__control css-yk16xz-control"
-                      onMouseDown={[Function]}
-                      onTouchEnd={[Function]}
-                    >
-                      <div
-                        className="select__value-container css-1hwfws3"
-                      >
-                        <div
-                          className="user-menu__image-container"
-                        >
-                          <div
-                            className="user-menu__image user-menu__image--default"
-                          />
-                          <div
-                            className="user-menu__image"
-                            style={
-                              Object {
-                                "backgroundImage": "url()",
-                              }
-                            }
-                          />
-                        </div>
-                        <input
-                          className="css-62g3xt-dummyInput"
-                          disabled={false}
-                          id="react-select-3-input"
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          onFocus={[Function]}
-                          readOnly={true}
-                          tabIndex="0"
-                          value=""
-                        />
-                      </div>
-                      <div
-                        className="select__indicators css-1g48xl4-IndicatorsContainer"
-                      >
-                        <span
-                          className="select__indicator-separator css-1okebmr-indicatorSeparator"
-                        />
-                        <div
-                          aria-hidden="true"
-                          className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
-                          onMouseDown={[Function]}
-                          onTouchEnd={[Function]}
-                        >
-                          <svg
-                            aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--down"
-                            color="inherit"
-                            focusable="false"
-                            height="1em"
-                            role="presentation"
-                            viewBox="0 0 10 5"
-                            width="1em"
-                          >
-                            <path
-                              d="M1 1.16134L4.92334 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 1.16134L5 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                          <svg
-                            aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--up"
-                            color="inherit"
-                            focusable="false"
-                            height="1em"
-                            role="presentation"
-                            viewBox="0 0 10 5"
-                            width="1em"
-                          >
-                            <path
-                              d="M1 3.83866L4.92334 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 3.83866L5 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-    <div
-      className="page-chrome__top-chrome__spacing-fix"
-      style={
-        Object {
-          "height": 76,
-        }
-      }
-    >
-       
-    </div>
-  </div>
-  <div
-    className="account-settings"
-  >
-    <div
-      className="account-settings__header"
-    >
-      <div
-        className="account-settings__title"
-      >
-        Account Settings
-      </div>
-      <div
-        className="account-settings__subtitle"
-      >
-        Manage and edit your profile, security, notifications, and billing settings.
-      </div>
-    </div>
-    <div
-      className="account-settings__panel"
-    >
-      <div
-        className="account-settings__menu"
-      >
-        <div
-          className="account-settings__menu-item account-settings__menu-item--active"
-          onClick={[Function]}
-        >
-          <svg
-            aria-hidden="true"
-            className="account-settings__menu-icon"
-            color="inherit"
-            focusable="false"
-            height="1em"
-            role="presentation"
-            viewBox="0 0 20 20"
-            width="1em"
-          >
-            <path
-              d="M16.6668 17.5V15.8333C16.6668 14.9493 16.3156 14.1014 15.6905 13.4763C15.0654 12.8512 14.2176 12.5 13.3335 12.5H6.66683C5.78277 12.5 4.93493 12.8512 4.30981 13.4763C3.68469 14.1014 3.3335 14.9493 3.3335 15.8333V17.5"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-            <path
-              d="M9.99984 9.16667C11.8408 9.16667 13.3332 7.67428 13.3332 5.83333C13.3332 3.99238 11.8408 2.5 9.99984 2.5C8.15889 2.5 6.6665 3.99238 6.6665 5.83333C6.6665 7.67428 8.15889 9.16667 9.99984 9.16667Z"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-          </svg>
-          <span
-            className="account-settings__menu-item-text"
-          >
-            Profile
-          </span>
-        </div>
-        <div
-          className="account-settings__menu-item"
-          onClick={[Function]}
-        >
-          <svg
-            aria-hidden="true"
-            className="account-settings__menu-icon"
-            color="inherit"
-            focusable="false"
-            height="1em"
-            role="presentation"
-            viewBox="0 0 20 20"
-            width="1em"
-          >
-            <path
-              d="M15.8333 9.16669H4.16667C3.24619 9.16669 2.5 9.91288 2.5 10.8334V16.6667C2.5 17.5872 3.24619 18.3334 4.16667 18.3334H15.8333C16.7538 18.3334 17.5 17.5872 17.5 16.6667V10.8334C17.5 9.91288 16.7538 9.16669 15.8333 9.16669Z"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-            <path
-              d="M5.83301 9.16669V5.83335C5.83301 4.72828 6.27199 3.66848 7.0534 2.88708C7.8348 2.10567 8.89461 1.66669 9.99967 1.66669C11.1047 1.66669 12.1646 2.10567 12.946 2.88708C13.7274 3.66848 14.1663 4.72828 14.1663 5.83335V9.16669"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-          </svg>
-          <span
-            className="account-settings__menu-item-text"
-          >
-            Security
-          </span>
-        </div>
-        <div
-          className="account-settings__menu-item"
-          onClick={[Function]}
-        >
-          <svg
-            aria-hidden="true"
-            className="account-settings__menu-icon"
-            color="inherit"
-            focusable="false"
-            height="1em"
-            role="presentation"
-            viewBox="0 0 20 20"
-            width="1em"
-          >
-            <path
-              d="M3.33366 3.33331H16.667C17.5837 3.33331 18.3337 4.08331 18.3337 4.99998V15C18.3337 15.9166 17.5837 16.6666 16.667 16.6666H3.33366C2.41699 16.6666 1.66699 15.9166 1.66699 15V4.99998C1.66699 4.08331 2.41699 3.33331 3.33366 3.33331Z"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-            <path
-              d="M18.3337 5L10.0003 10.8333L1.66699 5"
-              fill="transparent"
-              stroke="currentColor"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="1.5"
-            />
-          </svg>
-          <span
-            className="account-settings__menu-item-text"
-          >
-            Email Preferences
-          </span>
-        </div>
-      </div>
-      <div
-        className="account-settings__tab"
-      >
-        <form
-          autoComplete="off"
-          method="post"
-          onReset={[Function]}
-          onSubmit={[Function]}
+          className="account-settings__tab"
         >
           <div
             className="account-settings__tab-content"
@@ -1700,1055 +405,586 @@ exports[`AccountSettings profile tab 1`] = `
               className="account-settings__tab-section"
             >
               <div
-                className="account-settings__tab-title"
-              >
-                General Info
-              </div>
-              <div
-                className="account-settings__photo-field"
+                className="account-settings__tab-header"
               >
                 <div
-                  className="account-settings__photo-info"
+                  className="account-settings__tab-title"
                 >
-                  <div
-                    className="account-settings__photo"
-                  >
-                    <img
-                      alt="LOGO"
-                      className="account-settings__photo-img"
-                      src="https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg"
-                    />
-                    <label
-                      className="account-settings__upload"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        className="account-settings__upload-icon"
-                        color="inherit"
-                        focusable="false"
-                        height="1em"
-                        role="presentation"
-                        viewBox="0 0 14 14"
-                        width="1em"
-                      >
-                        <g
-                          clipPath="url(#clip0)"
-                          fill="none"
-                        >
-                          <path
-                            d="M9.33366 9.33333L7.00033 7L4.66699 9.33333"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="1.16667"
-                          />
-                          <path
-                            d="M7 7V12.25"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="1.16667"
-                          />
-                          <path
-                            d="M11.894 10.7278C12.463 10.4176 12.9124 9.92679 13.1714 9.33281C13.4305 8.73882 13.4843 8.07549 13.3245 7.44751C13.1646 6.81953 12.8002 6.26266 12.2887 5.86479C11.7773 5.46691 11.1479 5.2507 10.4999 5.25028H9.76485C9.58829 4.56733 9.2592 3.9333 8.80232 3.39585C8.34545 2.85841 7.77268 2.43152 7.12708 2.1473C6.48148 1.86307 5.77984 1.7289 5.07492 1.75487C4.37 1.78085 3.68014 1.96628 3.05721 2.29725C2.43427 2.62821 1.89447 3.09609 1.47838 3.6657C1.0623 4.23531 0.780757 4.89184 0.654926 5.58592C0.529095 6.28001 0.562249 6.99358 0.751896 7.67301C0.941542 8.35244 1.28275 8.98003 1.74986 9.50861"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="1.16667"
-                          />
-                          <path
-                            d="M9.33366 9.33333L7.00033 7L4.66699 9.33333"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="1.16667"
-                          />
-                        </g>
-                        <defs>
-                          <clipPath
-                            id="clip0"
-                          >
-                            <rect
-                              fill="white"
-                              height="14"
-                              width="14"
-                            />
-                          </clipPath>
-                        </defs>
-                      </svg>
-                      <input
-                        accept="image/jpeg, image/png"
-                        name="avatar"
-                        onChange={[Function]}
-                        type="file"
-                      />
-                    </label>
-                  </div>
-                  <div
-                    className="account-settings__photo-data"
-                  >
-                    <div
-                      className="account-settings__photo-text account-settings__photo-text--name"
-                    >
-                      Phillip
-                       
-                      McPhillipson
-                    </div>
-                    <div
-                      className="account-settings__photo-text"
-                    >
-                      Founder
-                    </div>
-                  </div>
+                  Email Preferences
                 </div>
                 <div
-                  className="account-settings__help-text"
+                  className="account-settings__tab-subtitle"
                 >
-                  3MB Size Limit. PNG or JPG only.
-                </div>
-              </div>
-              <div
-                className="account-settings__field-grid"
-              >
-                <div
-                  className="account-settings__field"
-                >
-                  <div
-                    className="account-settings__label"
-                  >
-                    First Name
-                  </div>
-                  <input
-                    className="input account-settings__input input--gray"
-                    name="first_name"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    type="text"
-                    value="Phillip"
-                  />
-                  <div
-                    className="account-settings__error"
-                  />
-                </div>
-                <div
-                  className="account-settings__field"
-                >
-                  <div
-                    className="account-settings__label"
-                  >
-                    Last Name
-                  </div>
-                  <input
-                    className="input account-settings__input input--gray"
-                    name="last_name"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    type="text"
-                    value="McPhillipson"
-                  />
-                  <div
-                    className="account-settings__error"
-                  />
-                </div>
-                <div
-                  className="account-settings__field"
-                >
-                  <div
-                    className="account-settings__label"
-                  >
-                    Title (Optional)
-                  </div>
-                  <input
-                    className="input account-settings__input input--gray"
-                    name="title"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    type="text"
-                    value="Founder"
-                  />
-                  <div
-                    className="account-settings__error"
-                  />
-                </div>
-                <div
-                  className="account-settings__field account-settings__field--max-width"
-                >
-                  <div
-                    className="account-settings__label"
-                  >
-                    Office Country
-                  </div>
-                  <div
-                    className="select account-settings__input select--gray css-2b097c-container"
-                    onKeyDown={[Function]}
-                  >
-                    <div
-                      className="select__control css-yk16xz-control"
-                      onMouseDown={[Function]}
-                      onTouchEnd={[Function]}
-                    >
-                      <div
-                        className="select__value-container select__value-container--has-value css-1hwfws3"
-                      >
-                        <div
-                          className="select__single-value css-1uccc91-singleValue"
-                        >
-                          United States of America
-                        </div>
-                        <input
-                          className="css-62g3xt-dummyInput"
-                          disabled={false}
-                          id="react-select-4-input"
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          onFocus={[Function]}
-                          readOnly={true}
-                          tabIndex="0"
-                          value=""
-                        />
-                      </div>
-                      <div
-                        className="select__indicators css-1g48xl4-IndicatorsContainer"
-                      >
-                        <span
-                          className="select__indicator-separator css-1okebmr-indicatorSeparator"
-                        />
-                        <div
-                          aria-hidden="true"
-                          className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
-                          onMouseDown={[Function]}
-                          onTouchEnd={[Function]}
-                        >
-                          <svg
-                            aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--down"
-                            color="inherit"
-                            focusable="false"
-                            height="1em"
-                            role="presentation"
-                            viewBox="0 0 10 5"
-                            width="1em"
-                          >
-                            <path
-                              d="M1 1.16134L4.92334 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 1.16134L5 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                          <svg
-                            aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--up"
-                            color="inherit"
-                            focusable="false"
-                            height="1em"
-                            role="presentation"
-                            viewBox="0 0 10 5"
-                            width="1em"
-                          >
-                            <path
-                              d="M1 3.83866L4.92334 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 3.83866L5 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                    <input
-                      name="office_country"
-                      type="hidden"
-                      value="USA"
-                    />
-                  </div>
-                  <div
-                    className="account-settings__error"
-                  />
-                </div>
-                <div
-                  className="account-settings__field"
-                >
-                  <div
-                    className="account-settings__label"
-                  >
-                    Phone Number (Optional)
-                  </div>
-                  <div
-                    className="account-settings__plus-tag"
-                  >
-                    +
-                  </div>
-                  <div
-                    className="account-settings__phone-input"
-                  >
-                    <input
-                      className="input account-settings__country-code input--gray"
-                      name="phone_country_code"
-                      onBlur={[Function]}
-                      onChange={[Function]}
-                      placeholder="1"
-                      type="tel"
-                      value=""
-                    />
-                    <input
-                      className="input account-settings__input input--gray"
-                      name="phone"
-                      onBlur={[Function]}
-                      onChange={[Function]}
-                      type="tel"
-                      value=""
-                    />
-                  </div>
-                  <div
-                    className="account-settings__error"
-                  />
-                </div>
-                <div
-                  className="account-settings__field"
-                >
-                  <div
-                    className="account-settings__label"
-                  >
-                    Phone Extension (Optional)
-                  </div>
-                  <input
-                    className="input account-settings__input input--gray"
-                    name="phone_ext"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    type="tel"
-                    value=""
-                  />
-                  <div
-                    className="account-settings__error"
-                  />
+                  Manage email reports and alerts across your portfolio.
                 </div>
               </div>
             </div>
             <div
+              className="account-settings__tab-section account-settings__tab-section--zero-pad"
+            >
+              <div
+                className="tab-navigator account-settings__tab-navigator"
+              >
+                <div
+                  className="container tab-navigator__navs"
+                >
+                  <a
+                    className="tab-navigator__nav-item"
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    Properties
+                  </a>
+                </div>
+                <div
+                  className="tab-navigator__divider"
+                />
+                <div
+                  className="container"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="account-settings__controls"
+          >
+            <button
+              className="button button--primary account-settings__button"
+              onClick={[Function]}
+              type="submit"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`AccountSettings email reports 'Portfolio' tab 1`] = `
+<section>
+  <div
+    className="container"
+  >
+    <div
+      className="account-settings"
+    >
+      <div
+        className="account-settings__header"
+      >
+        <div
+          className="account-settings__title"
+        >
+          Account Settings
+        </div>
+        <div
+          className="account-settings__subtitle"
+        >
+          Manage and edit your profile, security, notifications, and billing settings.
+        </div>
+      </div>
+      <div
+        className="account-settings__panel"
+      >
+        <div
+          className="account-settings__menu"
+        >
+          <div
+            className="account-settings__menu-item"
+            onClick={[Function]}
+          >
+            <svg
+              aria-hidden="true"
+              className="account-settings__menu-icon"
+              color="inherit"
+              focusable="false"
+              height="1em"
+              role="presentation"
+              viewBox="0 0 20 20"
+              width="1em"
+            >
+              <path
+                d="M16.6668 17.5V15.8333C16.6668 14.9493 16.3156 14.1014 15.6905 13.4763C15.0654 12.8512 14.2176 12.5 13.3335 12.5H6.66683C5.78277 12.5 4.93493 12.8512 4.30981 13.4763C3.68469 14.1014 3.3335 14.9493 3.3335 15.8333V17.5"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M9.99984 9.16667C11.8408 9.16667 13.3332 7.67428 13.3332 5.83333C13.3332 3.99238 11.8408 2.5 9.99984 2.5C8.15889 2.5 6.6665 3.99238 6.6665 5.83333C6.6665 7.67428 8.15889 9.16667 9.99984 9.16667Z"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+            </svg>
+            <span
+              className="account-settings__menu-item-text"
+            >
+              Profile
+            </span>
+          </div>
+          <div
+            className="account-settings__menu-item"
+            onClick={[Function]}
+          >
+            <svg
+              aria-hidden="true"
+              className="account-settings__menu-icon"
+              color="inherit"
+              focusable="false"
+              height="1em"
+              role="presentation"
+              viewBox="0 0 20 20"
+              width="1em"
+            >
+              <path
+                d="M15.8333 9.16669H4.16667C3.24619 9.16669 2.5 9.91288 2.5 10.8334V16.6667C2.5 17.5872 3.24619 18.3334 4.16667 18.3334H15.8333C16.7538 18.3334 17.5 17.5872 17.5 16.6667V10.8334C17.5 9.91288 16.7538 9.16669 15.8333 9.16669Z"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M5.83301 9.16669V5.83335C5.83301 4.72828 6.27199 3.66848 7.0534 2.88708C7.8348 2.10567 8.89461 1.66669 9.99967 1.66669C11.1047 1.66669 12.1646 2.10567 12.946 2.88708C13.7274 3.66848 14.1663 4.72828 14.1663 5.83335V9.16669"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+            </svg>
+            <span
+              className="account-settings__menu-item-text"
+            >
+              Security
+            </span>
+          </div>
+          <div
+            className="account-settings__menu-item account-settings__menu-item--active"
+            onClick={[Function]}
+          >
+            <svg
+              aria-hidden="true"
+              className="account-settings__menu-icon"
+              color="inherit"
+              focusable="false"
+              height="1em"
+              role="presentation"
+              viewBox="0 0 20 20"
+              width="1em"
+            >
+              <path
+                d="M3.33366 3.33331H16.667C17.5837 3.33331 18.3337 4.08331 18.3337 4.99998V15C18.3337 15.9166 17.5837 16.6666 16.667 16.6666H3.33366C2.41699 16.6666 1.66699 15.9166 1.66699 15V4.99998C1.66699 4.08331 2.41699 3.33331 3.33366 3.33331Z"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M18.3337 5L10.0003 10.8333L1.66699 5"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+            </svg>
+            <span
+              className="account-settings__menu-item-text"
+            >
+              Email Preferences
+            </span>
+          </div>
+        </div>
+        <div
+          className="account-settings__tab"
+        >
+          <div
+            className="account-settings__tab-content"
+          >
+            <div
               className="account-settings__tab-section"
             >
               <div
-                className="account-settings__tab-title"
-              >
-                Business Info
-              </div>
-              <div
-                className="account-settings__field-grid"
+                className="account-settings__tab-header"
               >
                 <div
-                  className="account-settings__field"
+                  className="account-settings__tab-title"
                 >
-                  <div
-                    className="account-settings__label"
-                  >
-                    Company
-                  </div>
-                  <div
-                    className="select-search select account-settings__input select--default css-2b097c-container"
-                    onKeyDown={[Function]}
-                  >
-                    <div
-                      className="select__control css-yk16xz-control"
-                      onMouseDown={[Function]}
-                      onTouchEnd={[Function]}
-                    >
-                      <div
-                        className="select__value-container select__value-container--has-value css-1hwfws3"
-                      >
-                        <div
-                          className="select__single-value css-1uccc91-singleValue"
-                        >
-                          Glacier Associates
-                        </div>
-                        <div
-                          className="css-zz0hea-Input"
-                        >
-                          <div
-                            className="select__input"
-                            style={
-                              Object {
-                                "display": "inline-block",
-                              }
-                            }
-                          >
-                            <input
-                              aria-autocomplete="list"
-                              autoCapitalize="none"
-                              autoComplete="off"
-                              autoCorrect="off"
-                              disabled={false}
-                              id="react-select-5-input"
-                              onBlur={[Function]}
-                              onChange={[Function]}
-                              onFocus={[Function]}
-                              spellCheck="false"
-                              style={
-                                Object {
-                                  "background": 0,
-                                  "border": 0,
-                                  "boxSizing": "content-box",
-                                  "color": "inherit",
-                                  "fontSize": "inherit",
-                                  "label": "input",
-                                  "opacity": 1,
-                                  "outline": 0,
-                                  "padding": 0,
-                                  "width": "1px",
-                                }
-                              }
-                              tabIndex="0"
-                              type="text"
-                              value=""
-                            />
-                            <div
-                              style={
-                                Object {
-                                  "height": 0,
-                                  "left": 0,
-                                  "overflow": "scroll",
-                                  "position": "absolute",
-                                  "top": 0,
-                                  "visibility": "hidden",
-                                  "whiteSpace": "pre",
-                                }
-                              }
-                            >
-                              
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div
-                        className="select__indicators css-1g48xl4-IndicatorsContainer"
-                      >
-                        <span
-                          className="select__indicator-separator css-1okebmr-indicatorSeparator"
-                        />
-                      </div>
-                    </div>
-                    <input
-                      name="company"
-                      type="hidden"
-                      value="123456789"
-                    />
-                  </div>
-                  <div
-                    className="account-settings__error"
-                  />
+                  Email Preferences
                 </div>
                 <div
-                  className="account-settings__field account-settings__field--max-width"
+                  className="account-settings__tab-subtitle"
+                >
+                  Manage email reports and alerts across your portfolio.
+                </div>
+              </div>
+            </div>
+            <div
+              className="account-settings__tab-section account-settings__tab-section--zero-pad"
+            >
+              <div
+                className="tab-navigator account-settings__tab-navigator"
+              >
+                <div
+                  className="container tab-navigator__navs"
+                >
+                  <a
+                    className="tab-navigator__nav-item"
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    Properties
+                  </a>
+                </div>
+                <div
+                  className="tab-navigator__divider"
+                />
+                <div
+                  className="container"
+                />
+              </div>
+            </div>
+          </div>
+          <div
+            className="account-settings__controls"
+          >
+            <button
+              className="button button--primary account-settings__button"
+              onClick={[Function]}
+              type="submit"
+            >
+              Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+`;
+
+exports[`AccountSettings email reports 'Properties' tab 1`] = `
+<section>
+  <div
+    className="container"
+  >
+    <div
+      className="account-settings"
+    >
+      <div
+        className="account-settings__header"
+      >
+        <div
+          className="account-settings__title"
+        >
+          Account Settings
+        </div>
+        <div
+          className="account-settings__subtitle"
+        >
+          Manage and edit your profile, security, notifications, and billing settings.
+        </div>
+      </div>
+      <div
+        className="account-settings__panel"
+      >
+        <div
+          className="account-settings__menu"
+        >
+          <div
+            className="account-settings__menu-item"
+            onClick={[Function]}
+          >
+            <svg
+              aria-hidden="true"
+              className="account-settings__menu-icon"
+              color="inherit"
+              focusable="false"
+              height="1em"
+              role="presentation"
+              viewBox="0 0 20 20"
+              width="1em"
+            >
+              <path
+                d="M16.6668 17.5V15.8333C16.6668 14.9493 16.3156 14.1014 15.6905 13.4763C15.0654 12.8512 14.2176 12.5 13.3335 12.5H6.66683C5.78277 12.5 4.93493 12.8512 4.30981 13.4763C3.68469 14.1014 3.3335 14.9493 3.3335 15.8333V17.5"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M9.99984 9.16667C11.8408 9.16667 13.3332 7.67428 13.3332 5.83333C13.3332 3.99238 11.8408 2.5 9.99984 2.5C8.15889 2.5 6.6665 3.99238 6.6665 5.83333C6.6665 7.67428 8.15889 9.16667 9.99984 9.16667Z"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+            </svg>
+            <span
+              className="account-settings__menu-item-text"
+            >
+              Profile
+            </span>
+          </div>
+          <div
+            className="account-settings__menu-item"
+            onClick={[Function]}
+          >
+            <svg
+              aria-hidden="true"
+              className="account-settings__menu-icon"
+              color="inherit"
+              focusable="false"
+              height="1em"
+              role="presentation"
+              viewBox="0 0 20 20"
+              width="1em"
+            >
+              <path
+                d="M15.8333 9.16669H4.16667C3.24619 9.16669 2.5 9.91288 2.5 10.8334V16.6667C2.5 17.5872 3.24619 18.3334 4.16667 18.3334H15.8333C16.7538 18.3334 17.5 17.5872 17.5 16.6667V10.8334C17.5 9.91288 16.7538 9.16669 15.8333 9.16669Z"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M5.83301 9.16669V5.83335C5.83301 4.72828 6.27199 3.66848 7.0534 2.88708C7.8348 2.10567 8.89461 1.66669 9.99967 1.66669C11.1047 1.66669 12.1646 2.10567 12.946 2.88708C13.7274 3.66848 14.1663 4.72828 14.1663 5.83335V9.16669"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+            </svg>
+            <span
+              className="account-settings__menu-item-text"
+            >
+              Security
+            </span>
+          </div>
+          <div
+            className="account-settings__menu-item account-settings__menu-item--active"
+            onClick={[Function]}
+          >
+            <svg
+              aria-hidden="true"
+              className="account-settings__menu-icon"
+              color="inherit"
+              focusable="false"
+              height="1em"
+              role="presentation"
+              viewBox="0 0 20 20"
+              width="1em"
+            >
+              <path
+                d="M3.33366 3.33331H16.667C17.5837 3.33331 18.3337 4.08331 18.3337 4.99998V15C18.3337 15.9166 17.5837 16.6666 16.667 16.6666H3.33366C2.41699 16.6666 1.66699 15.9166 1.66699 15V4.99998C1.66699 4.08331 2.41699 3.33331 3.33366 3.33331Z"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M18.3337 5L10.0003 10.8333L1.66699 5"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+            </svg>
+            <span
+              className="account-settings__menu-item-text"
+            >
+              Email Preferences
+            </span>
+          </div>
+        </div>
+        <div
+          className="account-settings__tab"
+        >
+          <div
+            className="account-settings__tab-content"
+          >
+            <div
+              className="account-settings__tab-section"
+            >
+              <div
+                className="account-settings__tab-header"
+              >
+                <div
+                  className="account-settings__tab-title"
+                >
+                  Email Preferences
+                </div>
+                <div
+                  className="account-settings__tab-subtitle"
+                >
+                  Manage email reports and alerts across your portfolio.
+                </div>
+              </div>
+            </div>
+            <div
+              className="account-settings__tab-section account-settings__tab-section--zero-pad"
+            >
+              <div
+                className="tab-navigator account-settings__tab-navigator"
+              >
+                <div
+                  className="container tab-navigator__navs"
+                >
+                  <a
+                    className="tab-navigator__nav-item tab-navigator__nav-item--active"
+                    href="#"
+                    onClick={[Function]}
+                  >
+                    Properties
+                  </a>
+                </div>
+                <div
+                  className="tab-navigator__divider"
+                />
+                <div
+                  className="container"
                 >
                   <div
-                    className="account-settings__label"
+                    className="tab-navigator__content"
                   >
-                    Company Role
-                  </div>
-                  <div
-                    className="select multi-select account-settings__input select--is-multi select--gray css-2b097c-container"
-                    onKeyDown={[Function]}
-                  >
-                    <div
-                      className="multi-select--has-value select__control css-yk16xz-control"
-                      onMouseDown={[Function]}
-                      onTouchEnd={[Function]}
-                    >
-                      <div
-                        className="select__value-container select__value-container--is-multi select__value-container--has-value css-1hwfws3"
-                      >
-                        <div
-                          className="multi-select__label"
-                        >
-                          Owner, Asset Manager, Property Manager
-                        </div>
-                        <input
-                          className="css-62g3xt-dummyInput"
-                          disabled={false}
-                          id="react-select-6-input"
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          onFocus={[Function]}
-                          readOnly={true}
-                          tabIndex="0"
-                          value=""
-                        />
-                      </div>
-                      <div
-                        className="select__indicators css-1g48xl4-IndicatorsContainer"
-                      >
-                        <span
-                          className="select__indicator-separator css-1okebmr-indicatorSeparator"
-                        />
-                        <div
-                          aria-hidden="true"
-                          className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
-                          onMouseDown={[Function]}
-                          onTouchEnd={[Function]}
-                        >
-                          <svg
-                            aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--down"
-                            color="inherit"
-                            focusable="false"
-                            height="1em"
-                            role="presentation"
-                            viewBox="0 0 10 5"
-                            width="1em"
-                          >
-                            <path
-                              d="M1 1.16134L4.92334 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 1.16134L5 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                          <svg
-                            aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--up"
-                            color="inherit"
-                            focusable="false"
-                            height="1em"
-                            role="presentation"
-                            viewBox="0 0 10 5"
-                            width="1em"
-                          >
-                            <path
-                              d="M1 3.83866L4.92334 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 3.83866L5 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
                     <div>
-                      <input
-                        name="company_roles"
-                        type="hidden"
-                        value="owner"
-                      />
-                      <input
-                        name="company_roles"
-                        type="hidden"
-                        value="asset_manager"
-                      />
-                      <input
-                        name="company_roles"
-                        type="hidden"
-                        value="property_manager"
-                      />
-                    </div>
-                  </div>
-                  <div
-                    className="account-settings__error"
-                  />
-                </div>
-              </div>
-              <div
-                className="account-settings__tab-title"
-              >
-                Company Info
-              </div>
-              <div
-                className="account-settings__field-grid"
-              >
-                <div
-                  className="account-settings__field account-settings__field--full-grid"
-                >
-                  <div
-                    className="account-settings__label"
-                  >
-                    Address
-                  </div>
-                  <div
-                    className="select-search select google-address account-settings__input css-2b097c-container"
-                    onKeyDown={[Function]}
-                  >
-                    <div
-                      className="select__control css-yk16xz-control"
-                      onMouseDown={[Function]}
-                      onTouchEnd={[Function]}
-                    >
                       <div
-                        className="select__value-container select__value-container--has-value css-1hwfws3"
+                        className="account-settings__search-controls"
                       >
                         <div
-                          className="select__single-value css-1uccc91-singleValue"
-                        >
-                          <div>
-                            <div
-                              className="google-address__street"
-                            >
-                              1730 Minor Avenue
-                              
-                            </div>
-                          </div>
-                        </div>
-                        <div
-                          className="css-zz0hea-Input"
+                          className="search-with-sort account-settings__search"
                         >
                           <div
-                            className="select__input"
-                            style={
-                              Object {
-                                "display": "inline-block",
-                              }
-                            }
+                            className="search-input-box search-with-sort__input"
                           >
                             <input
-                              aria-autocomplete="list"
-                              autoCapitalize="none"
-                              autoComplete="off"
-                              autoCorrect="off"
-                              disabled={false}
-                              id="react-select-7-input"
-                              onBlur={[Function]}
+                              className="input search-input input--gray"
                               onChange={[Function]}
-                              onFocus={[Function]}
-                              spellCheck="false"
-                              style={
-                                Object {
-                                  "background": 0,
-                                  "border": 0,
-                                  "boxSizing": "content-box",
-                                  "color": "inherit",
-                                  "fontSize": "inherit",
-                                  "label": "input",
-                                  "opacity": 1,
-                                  "outline": 0,
-                                  "padding": 0,
-                                  "width": "1px",
-                                }
-                              }
-                              tabIndex="0"
+                              placeholder="Search Properties"
                               type="text"
                               value=""
                             />
-                            <div
-                              style={
-                                Object {
-                                  "height": 0,
-                                  "left": 0,
-                                  "overflow": "scroll",
-                                  "position": "absolute",
-                                  "top": 0,
-                                  "visibility": "hidden",
-                                  "whiteSpace": "pre",
-                                }
-                              }
-                            >
-                              
-                            </div>
                           </div>
-                        </div>
-                      </div>
-                      <div
-                        className="select__indicators css-1g48xl4-IndicatorsContainer"
-                      >
-                        <span
-                          className="select__indicator-separator css-1okebmr-indicatorSeparator"
-                        />
-                        <div
-                          aria-hidden="true"
-                          className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
-                          onMouseDown={[Function]}
-                          onTouchEnd={[Function]}
-                        >
                           <svg
                             aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--down"
+                            className="search-with-sort__button search-with-sort__button--asc search-with-sort__button--gray"
                             color="inherit"
                             focusable="false"
                             height="1em"
+                            onClick={[Function]}
                             role="presentation"
-                            viewBox="0 0 10 5"
+                            viewBox="0 0 16 14"
                             width="1em"
                           >
-                            <path
-                              d="M1 1.16134L4.92334 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 1.16134L5 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                          <svg
-                            aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--up"
-                            color="inherit"
-                            focusable="false"
-                            height="1em"
-                            role="presentation"
-                            viewBox="0 0 10 5"
-                            width="1em"
-                          >
-                            <path
-                              d="M1 3.83866L4.92334 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 3.83866L5 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
+                            <g
+                              fill="currentColor"
+                              stroke="none"
+                              strokeWidth="1"
+                            >
+                              <g
+                                transform="translate(-1383.000000, -185.000000)"
+                              >
+                                <g
+                                  transform="translate(1087.000000, 169.000000)"
+                                >
+                                  <g
+                                    transform="translate(296.000000, 16.000000)"
+                                  >
+                                    <rect
+                                      height="1"
+                                      rx="0.4895163"
+                                      width="7.78365217"
+                                      x="8.01085217"
+                                      y="2.353442"
+                                    />
+                                    <rect
+                                      height="1"
+                                      rx="0.4895163"
+                                      width="5.8377113"
+                                      x="8.01085217"
+                                      y="5.290502"
+                                    />
+                                    <rect
+                                      height="1"
+                                      rx="0.4895163"
+                                      width="3.89181217"
+                                      x="8.01085217"
+                                      y="8.22766"
+                                    />
+                                    <rect
+                                      height="1"
+                                      rx="0.4895163"
+                                      width="1.94590609"
+                                      x="8.01085217"
+                                      y="11.16472"
+                                    />
+                                    <path
+                                      d="M2.85056,13.92804 C2.94554435,14.02394 3.09984696,14.02401 3.1949287,13.92818 L5.98018783,11.12216 C6.07507478,11.02654 6.07503304,10.87163 5.98008348,10.77608 L5.68895304,10.48313 C5.59389913,10.38751 5.43977043,10.38758 5.34480696,10.48334 L3.47919304,12.3641 L3.47919304,0.2447585 C3.47919304,0.1095822 3.37029565,-1.139453e-08 3.23595826,0 L2.80937043,3.618335e-08 C2.67503304,4.757781e-08 2.56613565,0.1095822 2.56613565,0.2447585 L2.5661287,12.3641 L0.706685218,10.48383 C0.611766261,10.38786 0.457431652,10.38765 0.36227687,10.48341 L0.0712431306,10.77629 C-0.0236404172,10.87177 -0.0237631303,11.02654 0.070968348,11.12216 L2.85056,13.92804 Z"
+                                    />
+                                  </g>
+                                </g>
+                              </g>
+                            </g>
                           </svg>
                         </div>
-                      </div>
-                    </div>
-                    <input
-                      name="office_street"
-                      type="hidden"
-                      value="1730 Minor Avenue"
-                    />
-                  </div>
-                  <div
-                    className="account-settings__error"
-                  />
-                </div>
-              </div>
-              <div
-                className="account-settings__field-grid account-settings__field-grid--col-3"
-              >
-                <div
-                  className="account-settings__field account-settings__field--max-width"
-                >
-                  <div
-                    className="account-settings__label"
-                  >
-                    city
-                  </div>
-                  <input
-                    className="input account-settings__input input--gray"
-                    name="office_city"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    type="text"
-                    value="Lansing"
-                  />
-                  <div
-                    className="account-settings__error"
-                  />
-                </div>
-                <div
-                  className="account-settings__field"
-                >
-                  <div
-                    className="account-settings__label"
-                  >
-                    state
-                  </div>
-                  <div
-                    className="select account-settings__input select--gray select--is-searchable css-2b097c-container"
-                    onKeyDown={[Function]}
-                  >
-                    <div
-                      className="select__control css-yk16xz-control"
-                      onMouseDown={[Function]}
-                      onTouchEnd={[Function]}
-                    >
-                      <div
-                        className="select__value-container select__value-container--has-value css-1hwfws3"
-                      >
-                        <div
-                          className="select__single-value css-1uccc91-singleValue"
+                        <label
+                          className="button-toggle button-toggle--unchecked account-settings__toggle"
                         >
-                          Michigan
-                        </div>
-                        <div
-                          className="css-w8afj7-Input"
-                        >
-                          <div
-                            className="select__input"
-                            style={
-                              Object {
-                                "display": "inline-block",
-                              }
-                            }
+                          <input
+                            checked={false}
+                            className="button-toggle__input"
+                            onChange={[Function]}
+                            type="checkbox"
+                          />
+                          <span
+                            className="button-toggle__track"
                           >
-                            <input
-                              aria-autocomplete="list"
-                              autoCapitalize="none"
-                              autoComplete="off"
-                              autoCorrect="off"
-                              disabled={false}
-                              id="react-select-8-input"
-                              onBlur={[Function]}
-                              onChange={[Function]}
-                              onFocus={[Function]}
-                              spellCheck="false"
-                              style={
-                                Object {
-                                  "background": 0,
-                                  "border": 0,
-                                  "boxSizing": "content-box",
-                                  "color": "inherit",
-                                  "fontSize": "inherit",
-                                  "label": "input",
-                                  "opacity": 1,
-                                  "outline": 0,
-                                  "padding": 0,
-                                  "width": "1px",
-                                }
-                              }
-                              tabIndex="0"
-                              type="text"
-                              value=""
+                            <span
+                              className="button-toggle__thumb"
                             />
                             <div
-                              style={
-                                Object {
-                                  "height": 0,
-                                  "left": 0,
-                                  "overflow": "scroll",
-                                  "position": "absolute",
-                                  "top": 0,
-                                  "visibility": "hidden",
-                                  "whiteSpace": "pre",
-                                }
-                              }
+                              className="button-toggle__checked"
                             >
-                              
+                              <div
+                                className="button-toggle__inner-label"
+                              >
+                                On
+                              </div>
                             </div>
-                          </div>
-                        </div>
+                            <div
+                              className="button-toggle__unchecked"
+                            >
+                              <div
+                                className="button-toggle__inner-label"
+                              >
+                                Off
+                              </div>
+                            </div>
+                          </span>
+                          
+                        </label>
                       </div>
                       <div
-                        className="select__indicators css-1g48xl4-IndicatorsContainer"
+                        className="email-reporting-table email-reporting-table--no-data account-settings__reporting-table"
                       >
-                        <span
-                          className="select__indicator-separator css-1okebmr-indicatorSeparator"
-                        />
-                        <div
-                          aria-hidden="true"
-                          className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
-                          onMouseDown={[Function]}
-                          onTouchEnd={[Function]}
-                        >
-                          <svg
-                            aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--down"
-                            color="inherit"
-                            focusable="false"
-                            height="1em"
-                            role="presentation"
-                            viewBox="0 0 10 5"
-                            width="1em"
-                          >
-                            <path
-                              d="M1 1.16134L4.92334 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 1.16134L5 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                          <svg
-                            aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--up"
-                            color="inherit"
-                            focusable="false"
-                            height="1em"
-                            role="presentation"
-                            viewBox="0 0 10 5"
-                            width="1em"
-                          >
-                            <path
-                              d="M1 3.83866L4.92334 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 3.83866L5 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                        </div>
+                        No results found.
                       </div>
                     </div>
-                    <input
-                      name="office_state"
-                      type="hidden"
-                      value="Michigan"
-                    />
                   </div>
-                  <div
-                    className="account-settings__error"
-                  />
-                </div>
-                <div
-                  className="account-settings__field account-settings__field--max-width"
-                >
-                  <div
-                    className="account-settings__label"
-                  >
-                    zip code
-                  </div>
-                  <input
-                    className="input account-settings__input input--gray"
-                    name="office_zip"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    type="text"
-                    value="11111"
-                  />
-                  <div
-                    className="account-settings__error"
-                  />
-                </div>
-              </div>
-              <div
-                className="account-settings__field-grid"
-              >
-                <div
-                  className="account-settings__field account-settings__field--max-width"
-                >
-                  <div
-                    className="account-settings__label"
-                  >
-                    Office Name
-                  </div>
-                  <input
-                    className="input account-settings__input input--gray"
-                    name="office_name"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    type="text"
-                    value="Michigan"
-                  />
-                  <div
-                    className="account-settings__error"
-                  />
-                </div>
-                <div
-                  className="account-settings__field"
-                >
-                  <div
-                    className="account-settings__label"
-                  >
-                    Office Type
-                  </div>
-                  <div
-                    className="select account-settings__input select--gray css-2b097c-container"
-                    onKeyDown={[Function]}
-                  >
-                    <div
-                      className="select__control css-yk16xz-control"
-                      onMouseDown={[Function]}
-                      onTouchEnd={[Function]}
-                    >
-                      <div
-                        className="select__value-container select__value-container--has-value css-1hwfws3"
-                      >
-                        <div
-                          className="select__single-value css-1uccc91-singleValue"
-                        >
-                          Regional
-                        </div>
-                        <input
-                          className="css-62g3xt-dummyInput"
-                          disabled={false}
-                          id="react-select-9-input"
-                          onBlur={[Function]}
-                          onChange={[Function]}
-                          onFocus={[Function]}
-                          readOnly={true}
-                          tabIndex="0"
-                          value=""
-                        />
-                      </div>
-                      <div
-                        className="select__indicators css-1g48xl4-IndicatorsContainer"
-                      >
-                        <span
-                          className="select__indicator-separator css-1okebmr-indicatorSeparator"
-                        />
-                        <div
-                          aria-hidden="true"
-                          className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
-                          onMouseDown={[Function]}
-                          onTouchEnd={[Function]}
-                        >
-                          <svg
-                            aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--down"
-                            color="inherit"
-                            focusable="false"
-                            height="1em"
-                            role="presentation"
-                            viewBox="0 0 10 5"
-                            width="1em"
-                          >
-                            <path
-                              d="M1 1.16134L4.92334 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 1.16134L5 4.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                          <svg
-                            aria-hidden="true"
-                            className="select__dropdown-arrow select__dropdown-arrow--up"
-                            color="inherit"
-                            focusable="false"
-                            height="1em"
-                            role="presentation"
-                            viewBox="0 0 10 5"
-                            width="1em"
-                          >
-                            <path
-                              d="M1 3.83866L4.92334 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                            <path
-                              d="M8.82812 3.83866L5 0.5"
-                              stroke="currentColor"
-                              strokeLinecap="round"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
-                    <input
-                      name="office_type"
-                      type="hidden"
-                      value={3}
-                    />
-                  </div>
-                  <div
-                    className="account-settings__error"
-                  />
                 </div>
               </div>
             </div>
@@ -2764,9 +1000,1237 @@ exports[`AccountSettings profile tab 1`] = `
               Save
             </button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
+</section>
+`;
+
+exports[`AccountSettings profile tab 1`] = `
+<section>
+  <div
+    className="container"
+  >
+    <div
+      className="account-settings"
+    >
+      <div
+        className="account-settings__header"
+      >
+        <div
+          className="account-settings__title"
+        >
+          Account Settings
+        </div>
+        <div
+          className="account-settings__subtitle"
+        >
+          Manage and edit your profile, security, notifications, and billing settings.
+        </div>
+      </div>
+      <div
+        className="account-settings__panel"
+      >
+        <div
+          className="account-settings__menu"
+        >
+          <div
+            className="account-settings__menu-item account-settings__menu-item--active"
+            onClick={[Function]}
+          >
+            <svg
+              aria-hidden="true"
+              className="account-settings__menu-icon"
+              color="inherit"
+              focusable="false"
+              height="1em"
+              role="presentation"
+              viewBox="0 0 20 20"
+              width="1em"
+            >
+              <path
+                d="M16.6668 17.5V15.8333C16.6668 14.9493 16.3156 14.1014 15.6905 13.4763C15.0654 12.8512 14.2176 12.5 13.3335 12.5H6.66683C5.78277 12.5 4.93493 12.8512 4.30981 13.4763C3.68469 14.1014 3.3335 14.9493 3.3335 15.8333V17.5"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M9.99984 9.16667C11.8408 9.16667 13.3332 7.67428 13.3332 5.83333C13.3332 3.99238 11.8408 2.5 9.99984 2.5C8.15889 2.5 6.6665 3.99238 6.6665 5.83333C6.6665 7.67428 8.15889 9.16667 9.99984 9.16667Z"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+            </svg>
+            <span
+              className="account-settings__menu-item-text"
+            >
+              Profile
+            </span>
+          </div>
+          <div
+            className="account-settings__menu-item"
+            onClick={[Function]}
+          >
+            <svg
+              aria-hidden="true"
+              className="account-settings__menu-icon"
+              color="inherit"
+              focusable="false"
+              height="1em"
+              role="presentation"
+              viewBox="0 0 20 20"
+              width="1em"
+            >
+              <path
+                d="M15.8333 9.16669H4.16667C3.24619 9.16669 2.5 9.91288 2.5 10.8334V16.6667C2.5 17.5872 3.24619 18.3334 4.16667 18.3334H15.8333C16.7538 18.3334 17.5 17.5872 17.5 16.6667V10.8334C17.5 9.91288 16.7538 9.16669 15.8333 9.16669Z"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M5.83301 9.16669V5.83335C5.83301 4.72828 6.27199 3.66848 7.0534 2.88708C7.8348 2.10567 8.89461 1.66669 9.99967 1.66669C11.1047 1.66669 12.1646 2.10567 12.946 2.88708C13.7274 3.66848 14.1663 4.72828 14.1663 5.83335V9.16669"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+            </svg>
+            <span
+              className="account-settings__menu-item-text"
+            >
+              Security
+            </span>
+          </div>
+          <div
+            className="account-settings__menu-item"
+            onClick={[Function]}
+          >
+            <svg
+              aria-hidden="true"
+              className="account-settings__menu-icon"
+              color="inherit"
+              focusable="false"
+              height="1em"
+              role="presentation"
+              viewBox="0 0 20 20"
+              width="1em"
+            >
+              <path
+                d="M3.33366 3.33331H16.667C17.5837 3.33331 18.3337 4.08331 18.3337 4.99998V15C18.3337 15.9166 17.5837 16.6666 16.667 16.6666H3.33366C2.41699 16.6666 1.66699 15.9166 1.66699 15V4.99998C1.66699 4.08331 2.41699 3.33331 3.33366 3.33331Z"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M18.3337 5L10.0003 10.8333L1.66699 5"
+                fill="transparent"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+            </svg>
+            <span
+              className="account-settings__menu-item-text"
+            >
+              Email Preferences
+            </span>
+          </div>
+        </div>
+        <div
+          className="account-settings__tab"
+        >
+          <form
+            autoComplete="off"
+            method="post"
+            onReset={[Function]}
+            onSubmit={[Function]}
+          >
+            <div
+              className="account-settings__tab-content"
+            >
+              <div
+                className="account-settings__tab-section"
+              >
+                <div
+                  className="account-settings__tab-title"
+                >
+                  General Info
+                </div>
+                <div
+                  className="account-settings__photo-field"
+                >
+                  <div
+                    className="account-settings__photo-info"
+                  >
+                    <div
+                      className="account-settings__photo"
+                    >
+                      <img
+                        alt="LOGO"
+                        className="account-settings__photo-img"
+                        src="https://lh3.googleusercontent.com/-cQLcFi7r2uc/AAAAAAAAAAI/AAAAAAAAAAA/ACHi3rfoCSVbR8qVruV55uAYdSC-znVn2w.CMID/s96-c/photo.jpg"
+                      />
+                      <label
+                        className="account-settings__upload"
+                      >
+                        <svg
+                          aria-hidden="true"
+                          className="account-settings__upload-icon"
+                          color="inherit"
+                          focusable="false"
+                          height="1em"
+                          role="presentation"
+                          viewBox="0 0 14 14"
+                          width="1em"
+                        >
+                          <g
+                            clipPath="url(#clip0)"
+                            fill="none"
+                          >
+                            <path
+                              d="M9.33366 9.33333L7.00033 7L4.66699 9.33333"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="1.16667"
+                            />
+                            <path
+                              d="M7 7V12.25"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="1.16667"
+                            />
+                            <path
+                              d="M11.894 10.7278C12.463 10.4176 12.9124 9.92679 13.1714 9.33281C13.4305 8.73882 13.4843 8.07549 13.3245 7.44751C13.1646 6.81953 12.8002 6.26266 12.2887 5.86479C11.7773 5.46691 11.1479 5.2507 10.4999 5.25028H9.76485C9.58829 4.56733 9.2592 3.9333 8.80232 3.39585C8.34545 2.85841 7.77268 2.43152 7.12708 2.1473C6.48148 1.86307 5.77984 1.7289 5.07492 1.75487C4.37 1.78085 3.68014 1.96628 3.05721 2.29725C2.43427 2.62821 1.89447 3.09609 1.47838 3.6657C1.0623 4.23531 0.780757 4.89184 0.654926 5.58592C0.529095 6.28001 0.562249 6.99358 0.751896 7.67301C0.941542 8.35244 1.28275 8.98003 1.74986 9.50861"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="1.16667"
+                            />
+                            <path
+                              d="M9.33366 9.33333L7.00033 7L4.66699 9.33333"
+                              stroke="currentColor"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="1.16667"
+                            />
+                          </g>
+                          <defs>
+                            <clipPath
+                              id="clip0"
+                            >
+                              <rect
+                                fill="white"
+                                height="14"
+                                width="14"
+                              />
+                            </clipPath>
+                          </defs>
+                        </svg>
+                        <input
+                          accept="image/jpeg, image/png"
+                          name="avatar"
+                          onChange={[Function]}
+                          type="file"
+                        />
+                      </label>
+                    </div>
+                    <div
+                      className="account-settings__photo-data"
+                    >
+                      <div
+                        className="account-settings__photo-text account-settings__photo-text--name"
+                      >
+                        Phillip
+                         
+                        McPhillipson
+                      </div>
+                      <div
+                        className="account-settings__photo-text"
+                      >
+                        Founder
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="account-settings__help-text"
+                  >
+                    3MB Size Limit. PNG or JPG only.
+                  </div>
+                </div>
+                <div
+                  className="account-settings__field-grid"
+                >
+                  <div
+                    className="account-settings__field"
+                  >
+                    <div
+                      className="account-settings__label"
+                    >
+                      First Name
+                    </div>
+                    <input
+                      className="input account-settings__input input--gray"
+                      name="first_name"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      type="text"
+                      value="Phillip"
+                    />
+                    <div
+                      className="account-settings__error"
+                    />
+                  </div>
+                  <div
+                    className="account-settings__field"
+                  >
+                    <div
+                      className="account-settings__label"
+                    >
+                      Last Name
+                    </div>
+                    <input
+                      className="input account-settings__input input--gray"
+                      name="last_name"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      type="text"
+                      value="McPhillipson"
+                    />
+                    <div
+                      className="account-settings__error"
+                    />
+                  </div>
+                  <div
+                    className="account-settings__field"
+                  >
+                    <div
+                      className="account-settings__label"
+                    >
+                      Title (Optional)
+                    </div>
+                    <input
+                      className="input account-settings__input input--gray"
+                      name="title"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      type="text"
+                      value="Founder"
+                    />
+                    <div
+                      className="account-settings__error"
+                    />
+                  </div>
+                  <div
+                    className="account-settings__field account-settings__field--max-width"
+                  >
+                    <div
+                      className="account-settings__label"
+                    >
+                      Office Country
+                    </div>
+                    <div
+                      className="select account-settings__input select--gray css-2b097c-container"
+                      onKeyDown={[Function]}
+                    >
+                      <div
+                        className="select__control css-yk16xz-control"
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                      >
+                        <div
+                          className="select__value-container select__value-container--has-value css-1hwfws3"
+                        >
+                          <div
+                            className="select__single-value css-1uccc91-singleValue"
+                          >
+                            United States of America
+                          </div>
+                          <input
+                            className="css-62g3xt-dummyInput"
+                            disabled={false}
+                            id="react-select-2-input"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            readOnly={true}
+                            tabIndex="0"
+                            value=""
+                          />
+                        </div>
+                        <div
+                          className="select__indicators css-1g48xl4-IndicatorsContainer"
+                        >
+                          <span
+                            className="select__indicator-separator css-1okebmr-indicatorSeparator"
+                          />
+                          <div
+                            aria-hidden="true"
+                            className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                          >
+                            <svg
+                              aria-hidden="true"
+                              className="select__dropdown-arrow select__dropdown-arrow--down"
+                              color="inherit"
+                              focusable="false"
+                              height="1em"
+                              role="presentation"
+                              viewBox="0 0 10 5"
+                              width="1em"
+                            >
+                              <path
+                                d="M1 1.16134L4.92334 4.5"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                              />
+                              <path
+                                d="M8.82812 1.16134L5 4.5"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                              />
+                            </svg>
+                            <svg
+                              aria-hidden="true"
+                              className="select__dropdown-arrow select__dropdown-arrow--up"
+                              color="inherit"
+                              focusable="false"
+                              height="1em"
+                              role="presentation"
+                              viewBox="0 0 10 5"
+                              width="1em"
+                            >
+                              <path
+                                d="M1 3.83866L4.92334 0.5"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                              />
+                              <path
+                                d="M8.82812 3.83866L5 0.5"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <input
+                        name="office_country"
+                        type="hidden"
+                        value="USA"
+                      />
+                    </div>
+                    <div
+                      className="account-settings__error"
+                    />
+                  </div>
+                  <div
+                    className="account-settings__field"
+                  >
+                    <div
+                      className="account-settings__label"
+                    >
+                      Phone Number (Optional)
+                    </div>
+                    <div
+                      className="account-settings__plus-tag"
+                    >
+                      +
+                    </div>
+                    <div
+                      className="account-settings__phone-input"
+                    >
+                      <input
+                        className="input account-settings__country-code input--gray"
+                        name="phone_country_code"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        placeholder="1"
+                        type="tel"
+                        value=""
+                      />
+                      <input
+                        className="input account-settings__input input--gray"
+                        name="phone"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        type="tel"
+                        value=""
+                      />
+                    </div>
+                    <div
+                      className="account-settings__error"
+                    />
+                  </div>
+                  <div
+                    className="account-settings__field"
+                  >
+                    <div
+                      className="account-settings__label"
+                    >
+                      Phone Extension (Optional)
+                    </div>
+                    <input
+                      className="input account-settings__input input--gray"
+                      name="phone_ext"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      type="tel"
+                      value=""
+                    />
+                    <div
+                      className="account-settings__error"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div
+                className="account-settings__tab-section"
+              >
+                <div
+                  className="account-settings__tab-title"
+                >
+                  Business Info
+                </div>
+                <div
+                  className="account-settings__field-grid"
+                >
+                  <div
+                    className="account-settings__field"
+                  >
+                    <div
+                      className="account-settings__label"
+                    >
+                      Company
+                    </div>
+                    <div
+                      className="select-search select account-settings__input select--default css-2b097c-container"
+                      onKeyDown={[Function]}
+                    >
+                      <div
+                        className="select__control css-yk16xz-control"
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                      >
+                        <div
+                          className="select__value-container select__value-container--has-value css-1hwfws3"
+                        >
+                          <div
+                            className="select__single-value css-1uccc91-singleValue"
+                          >
+                            Glacier Associates
+                          </div>
+                          <div
+                            className="css-zz0hea-Input"
+                          >
+                            <div
+                              className="select__input"
+                              style={
+                                Object {
+                                  "display": "inline-block",
+                                }
+                              }
+                            >
+                              <input
+                                aria-autocomplete="list"
+                                autoCapitalize="none"
+                                autoComplete="off"
+                                autoCorrect="off"
+                                disabled={false}
+                                id="react-select-3-input"
+                                onBlur={[Function]}
+                                onChange={[Function]}
+                                onFocus={[Function]}
+                                spellCheck="false"
+                                style={
+                                  Object {
+                                    "background": 0,
+                                    "border": 0,
+                                    "boxSizing": "content-box",
+                                    "color": "inherit",
+                                    "fontSize": "inherit",
+                                    "label": "input",
+                                    "opacity": 1,
+                                    "outline": 0,
+                                    "padding": 0,
+                                    "width": "1px",
+                                  }
+                                }
+                                tabIndex="0"
+                                type="text"
+                                value=""
+                              />
+                              <div
+                                style={
+                                  Object {
+                                    "height": 0,
+                                    "left": 0,
+                                    "overflow": "scroll",
+                                    "position": "absolute",
+                                    "top": 0,
+                                    "visibility": "hidden",
+                                    "whiteSpace": "pre",
+                                  }
+                                }
+                              >
+                                
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          className="select__indicators css-1g48xl4-IndicatorsContainer"
+                        >
+                          <span
+                            className="select__indicator-separator css-1okebmr-indicatorSeparator"
+                          />
+                        </div>
+                      </div>
+                      <input
+                        name="company"
+                        type="hidden"
+                        value="123456789"
+                      />
+                    </div>
+                    <div
+                      className="account-settings__error"
+                    />
+                  </div>
+                  <div
+                    className="account-settings__field account-settings__field--max-width"
+                  >
+                    <div
+                      className="account-settings__label"
+                    >
+                      Company Role
+                    </div>
+                    <div
+                      className="select multi-select account-settings__input select--is-multi select--gray css-2b097c-container"
+                      onKeyDown={[Function]}
+                    >
+                      <div
+                        className="multi-select--has-value select__control css-yk16xz-control"
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                      >
+                        <div
+                          className="select__value-container select__value-container--is-multi select__value-container--has-value css-1hwfws3"
+                        >
+                          <div
+                            className="multi-select__label"
+                          >
+                            Owner, Asset Manager, Property Manager
+                          </div>
+                          <input
+                            className="css-62g3xt-dummyInput"
+                            disabled={false}
+                            id="react-select-4-input"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            readOnly={true}
+                            tabIndex="0"
+                            value=""
+                          />
+                        </div>
+                        <div
+                          className="select__indicators css-1g48xl4-IndicatorsContainer"
+                        >
+                          <span
+                            className="select__indicator-separator css-1okebmr-indicatorSeparator"
+                          />
+                          <div
+                            aria-hidden="true"
+                            className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                          >
+                            <svg
+                              aria-hidden="true"
+                              className="select__dropdown-arrow select__dropdown-arrow--down"
+                              color="inherit"
+                              focusable="false"
+                              height="1em"
+                              role="presentation"
+                              viewBox="0 0 10 5"
+                              width="1em"
+                            >
+                              <path
+                                d="M1 1.16134L4.92334 4.5"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                              />
+                              <path
+                                d="M8.82812 1.16134L5 4.5"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                              />
+                            </svg>
+                            <svg
+                              aria-hidden="true"
+                              className="select__dropdown-arrow select__dropdown-arrow--up"
+                              color="inherit"
+                              focusable="false"
+                              height="1em"
+                              role="presentation"
+                              viewBox="0 0 10 5"
+                              width="1em"
+                            >
+                              <path
+                                d="M1 3.83866L4.92334 0.5"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                              />
+                              <path
+                                d="M8.82812 3.83866L5 0.5"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <div>
+                        <input
+                          name="company_roles"
+                          type="hidden"
+                          value="owner"
+                        />
+                        <input
+                          name="company_roles"
+                          type="hidden"
+                          value="asset_manager"
+                        />
+                        <input
+                          name="company_roles"
+                          type="hidden"
+                          value="property_manager"
+                        />
+                      </div>
+                    </div>
+                    <div
+                      className="account-settings__error"
+                    />
+                  </div>
+                </div>
+                <div
+                  className="account-settings__tab-title"
+                >
+                  Company Info
+                </div>
+                <div
+                  className="account-settings__field-grid"
+                >
+                  <div
+                    className="account-settings__field account-settings__field--full-grid"
+                  >
+                    <div
+                      className="account-settings__label"
+                    >
+                      Address
+                    </div>
+                    <div
+                      className="select-search select google-address account-settings__input css-2b097c-container"
+                      onKeyDown={[Function]}
+                    >
+                      <div
+                        className="select__control css-yk16xz-control"
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                      >
+                        <div
+                          className="select__value-container select__value-container--has-value css-1hwfws3"
+                        >
+                          <div
+                            className="select__single-value css-1uccc91-singleValue"
+                          >
+                            <div>
+                              <div
+                                className="google-address__street"
+                              >
+                                1730 Minor Avenue
+                                
+                              </div>
+                            </div>
+                          </div>
+                          <div
+                            className="css-zz0hea-Input"
+                          >
+                            <div
+                              className="select__input"
+                              style={
+                                Object {
+                                  "display": "inline-block",
+                                }
+                              }
+                            >
+                              <input
+                                aria-autocomplete="list"
+                                autoCapitalize="none"
+                                autoComplete="off"
+                                autoCorrect="off"
+                                disabled={false}
+                                id="react-select-5-input"
+                                onBlur={[Function]}
+                                onChange={[Function]}
+                                onFocus={[Function]}
+                                spellCheck="false"
+                                style={
+                                  Object {
+                                    "background": 0,
+                                    "border": 0,
+                                    "boxSizing": "content-box",
+                                    "color": "inherit",
+                                    "fontSize": "inherit",
+                                    "label": "input",
+                                    "opacity": 1,
+                                    "outline": 0,
+                                    "padding": 0,
+                                    "width": "1px",
+                                  }
+                                }
+                                tabIndex="0"
+                                type="text"
+                                value=""
+                              />
+                              <div
+                                style={
+                                  Object {
+                                    "height": 0,
+                                    "left": 0,
+                                    "overflow": "scroll",
+                                    "position": "absolute",
+                                    "top": 0,
+                                    "visibility": "hidden",
+                                    "whiteSpace": "pre",
+                                  }
+                                }
+                              >
+                                
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          className="select__indicators css-1g48xl4-IndicatorsContainer"
+                        >
+                          <span
+                            className="select__indicator-separator css-1okebmr-indicatorSeparator"
+                          />
+                          <div
+                            aria-hidden="true"
+                            className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                          >
+                            <svg
+                              aria-hidden="true"
+                              className="select__dropdown-arrow select__dropdown-arrow--down"
+                              color="inherit"
+                              focusable="false"
+                              height="1em"
+                              role="presentation"
+                              viewBox="0 0 10 5"
+                              width="1em"
+                            >
+                              <path
+                                d="M1 1.16134L4.92334 4.5"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                              />
+                              <path
+                                d="M8.82812 1.16134L5 4.5"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                              />
+                            </svg>
+                            <svg
+                              aria-hidden="true"
+                              className="select__dropdown-arrow select__dropdown-arrow--up"
+                              color="inherit"
+                              focusable="false"
+                              height="1em"
+                              role="presentation"
+                              viewBox="0 0 10 5"
+                              width="1em"
+                            >
+                              <path
+                                d="M1 3.83866L4.92334 0.5"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                              />
+                              <path
+                                d="M8.82812 3.83866L5 0.5"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <input
+                        name="office_street"
+                        type="hidden"
+                        value="1730 Minor Avenue"
+                      />
+                    </div>
+                    <div
+                      className="account-settings__error"
+                    />
+                  </div>
+                </div>
+                <div
+                  className="account-settings__field-grid account-settings__field-grid--col-3"
+                >
+                  <div
+                    className="account-settings__field account-settings__field--max-width"
+                  >
+                    <div
+                      className="account-settings__label"
+                    >
+                      city
+                    </div>
+                    <input
+                      className="input account-settings__input input--gray"
+                      name="office_city"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      type="text"
+                      value="Lansing"
+                    />
+                    <div
+                      className="account-settings__error"
+                    />
+                  </div>
+                  <div
+                    className="account-settings__field"
+                  >
+                    <div
+                      className="account-settings__label"
+                    >
+                      state
+                    </div>
+                    <div
+                      className="select account-settings__input select--gray select--is-searchable css-2b097c-container"
+                      onKeyDown={[Function]}
+                    >
+                      <div
+                        className="select__control css-yk16xz-control"
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                      >
+                        <div
+                          className="select__value-container select__value-container--has-value css-1hwfws3"
+                        >
+                          <div
+                            className="select__single-value css-1uccc91-singleValue"
+                          >
+                            Michigan
+                          </div>
+                          <div
+                            className="css-w8afj7-Input"
+                          >
+                            <div
+                              className="select__input"
+                              style={
+                                Object {
+                                  "display": "inline-block",
+                                }
+                              }
+                            >
+                              <input
+                                aria-autocomplete="list"
+                                autoCapitalize="none"
+                                autoComplete="off"
+                                autoCorrect="off"
+                                disabled={false}
+                                id="react-select-6-input"
+                                onBlur={[Function]}
+                                onChange={[Function]}
+                                onFocus={[Function]}
+                                spellCheck="false"
+                                style={
+                                  Object {
+                                    "background": 0,
+                                    "border": 0,
+                                    "boxSizing": "content-box",
+                                    "color": "inherit",
+                                    "fontSize": "inherit",
+                                    "label": "input",
+                                    "opacity": 1,
+                                    "outline": 0,
+                                    "padding": 0,
+                                    "width": "1px",
+                                  }
+                                }
+                                tabIndex="0"
+                                type="text"
+                                value=""
+                              />
+                              <div
+                                style={
+                                  Object {
+                                    "height": 0,
+                                    "left": 0,
+                                    "overflow": "scroll",
+                                    "position": "absolute",
+                                    "top": 0,
+                                    "visibility": "hidden",
+                                    "whiteSpace": "pre",
+                                  }
+                                }
+                              >
+                                
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div
+                          className="select__indicators css-1g48xl4-IndicatorsContainer"
+                        >
+                          <span
+                            className="select__indicator-separator css-1okebmr-indicatorSeparator"
+                          />
+                          <div
+                            aria-hidden="true"
+                            className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                          >
+                            <svg
+                              aria-hidden="true"
+                              className="select__dropdown-arrow select__dropdown-arrow--down"
+                              color="inherit"
+                              focusable="false"
+                              height="1em"
+                              role="presentation"
+                              viewBox="0 0 10 5"
+                              width="1em"
+                            >
+                              <path
+                                d="M1 1.16134L4.92334 4.5"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                              />
+                              <path
+                                d="M8.82812 1.16134L5 4.5"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                              />
+                            </svg>
+                            <svg
+                              aria-hidden="true"
+                              className="select__dropdown-arrow select__dropdown-arrow--up"
+                              color="inherit"
+                              focusable="false"
+                              height="1em"
+                              role="presentation"
+                              viewBox="0 0 10 5"
+                              width="1em"
+                            >
+                              <path
+                                d="M1 3.83866L4.92334 0.5"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                              />
+                              <path
+                                d="M8.82812 3.83866L5 0.5"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <input
+                        name="office_state"
+                        type="hidden"
+                        value="Michigan"
+                      />
+                    </div>
+                    <div
+                      className="account-settings__error"
+                    />
+                  </div>
+                  <div
+                    className="account-settings__field account-settings__field--max-width"
+                  >
+                    <div
+                      className="account-settings__label"
+                    >
+                      zip code
+                    </div>
+                    <input
+                      className="input account-settings__input input--gray"
+                      name="office_zip"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      type="text"
+                      value="11111"
+                    />
+                    <div
+                      className="account-settings__error"
+                    />
+                  </div>
+                </div>
+                <div
+                  className="account-settings__field-grid"
+                >
+                  <div
+                    className="account-settings__field account-settings__field--max-width"
+                  >
+                    <div
+                      className="account-settings__label"
+                    >
+                      Office Name
+                    </div>
+                    <input
+                      className="input account-settings__input input--gray"
+                      name="office_name"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      type="text"
+                      value="Michigan"
+                    />
+                    <div
+                      className="account-settings__error"
+                    />
+                  </div>
+                  <div
+                    className="account-settings__field"
+                  >
+                    <div
+                      className="account-settings__label"
+                    >
+                      Office Type
+                    </div>
+                    <div
+                      className="select account-settings__input select--gray css-2b097c-container"
+                      onKeyDown={[Function]}
+                    >
+                      <div
+                        className="select__control css-yk16xz-control"
+                        onMouseDown={[Function]}
+                        onTouchEnd={[Function]}
+                      >
+                        <div
+                          className="select__value-container select__value-container--has-value css-1hwfws3"
+                        >
+                          <div
+                            className="select__single-value css-1uccc91-singleValue"
+                          >
+                            Regional
+                          </div>
+                          <input
+                            className="css-62g3xt-dummyInput"
+                            disabled={false}
+                            id="react-select-7-input"
+                            onBlur={[Function]}
+                            onChange={[Function]}
+                            onFocus={[Function]}
+                            readOnly={true}
+                            tabIndex="0"
+                            value=""
+                          />
+                        </div>
+                        <div
+                          className="select__indicators css-1g48xl4-IndicatorsContainer"
+                        >
+                          <span
+                            className="select__indicator-separator css-1okebmr-indicatorSeparator"
+                          />
+                          <div
+                            aria-hidden="true"
+                            className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
+                            onMouseDown={[Function]}
+                            onTouchEnd={[Function]}
+                          >
+                            <svg
+                              aria-hidden="true"
+                              className="select__dropdown-arrow select__dropdown-arrow--down"
+                              color="inherit"
+                              focusable="false"
+                              height="1em"
+                              role="presentation"
+                              viewBox="0 0 10 5"
+                              width="1em"
+                            >
+                              <path
+                                d="M1 1.16134L4.92334 4.5"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                              />
+                              <path
+                                d="M8.82812 1.16134L5 4.5"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                              />
+                            </svg>
+                            <svg
+                              aria-hidden="true"
+                              className="select__dropdown-arrow select__dropdown-arrow--up"
+                              color="inherit"
+                              focusable="false"
+                              height="1em"
+                              role="presentation"
+                              viewBox="0 0 10 5"
+                              width="1em"
+                            >
+                              <path
+                                d="M1 3.83866L4.92334 0.5"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                              />
+                              <path
+                                d="M8.82812 3.83866L5 0.5"
+                                stroke="currentColor"
+                                strokeLinecap="round"
+                              />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                      <input
+                        name="office_type"
+                        type="hidden"
+                        value={3}
+                      />
+                    </div>
+                    <div
+                      className="account-settings__error"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="account-settings__controls"
+            >
+              <button
+                className="button button--primary account-settings__button"
+                onClick={[Function]}
+                type="submit"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 `;
