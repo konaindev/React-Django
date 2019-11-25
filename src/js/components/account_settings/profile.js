@@ -2,19 +2,20 @@ import cn from "classnames";
 import { ErrorMessage, Formik, Form } from "formik";
 import _intersection from "lodash/intersection";
 import _isEqual from "lodash/isEqual";
+import _pick from "lodash/pick";
 import PropTypes from "prop-types";
 import React from "react";
 import AddressModal from "../address_modal";
-import { COUNTRY_FIELDS, COUNTRY_CODE_REGEX } from "../../constants";
+import { COUNTRY_FIELDS } from "../../constants";
 
 import { Tick, Upload } from "../../icons";
+import { addressModal } from "../../redux_base/actions";
 import { formatPhone } from "../../utils/formatters";
 import { validateAddress } from "../../api/account_settings";
 import Button from "../button";
 import Input from "../input";
 import MultiSelect from "../multi_select";
 import Select, { SelectSearch } from "../select";
-import { addressModal } from "../../redux_base/actions";
 import GoogleAddress from "../google_address";
 import { MAX_AVATAR_SIZE, profileSchema } from "./validators";
 
@@ -356,7 +357,14 @@ export default class Profile extends React.PureComponent {
         }
       }
     }
-    validateAddress(values).then(response => {
+    const addressValues = _pick(values, [
+      "office_country",
+      "office_street",
+      "office_city",
+      "office_state",
+      "office_zip"
+    ]);
+    validateAddress(addressValues).then(response => {
       if (response.data.error) {
         this.setState({ invalid_address: true });
         this.formik.setErrors({
@@ -418,7 +426,6 @@ export default class Profile extends React.PureComponent {
             <Form method="post" autoComplete="off">
               <AddressModal
                 title="Confirm Office Address"
-                onClose={this.props.dispatch(addressModal.close)}
                 callback={this.setSuccessMessage}
                 onError={this.setErrorMessages}
                 dispatch_type="API_ACCOUNT_PROFILE"
@@ -711,24 +718,10 @@ export default class Profile extends React.PureComponent {
                         labelCompany=""
                         labelGoogle=""
                         display="full"
-                        // value={
-                        //   typeof values.office_street === "string"
-                        //     ? values.office_street?.value
-                        //     : values.office_street
-                        // }
                         value={values.office_street}
-                        // value={values.office_street}
                         onChange={this.onChangeOfficeAddress}
                         onBlur={this.onBlurOfficeAddress}
                       />
-                      {/* <Input
-                        className="account-settings__input"
-                        name="office_street"
-                        theme="gray"
-                        value={values.office_street}
-                        onBlur={this.onBlur}
-                        onChange={this.onChange}
-                      /> */}
                       <div className="account-settings__error">
                         <ErrorMessage name="office_street" />
                       </div>
