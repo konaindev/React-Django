@@ -90,63 +90,6 @@ export default class CampaignInvestmentReport extends Component {
   };
 
   /**
-   * @name CampaignInvestmentReport.RetentionDetails
-   * @description Component to render campaign ret_investment detail numbers
-   */
-  static RetentionDetails = ({ report: r }) => {
-    return (
-      <ReportSection name="Retention">
-        <SmallNumberBox
-          name="Lease Renewals"
-          value={r.property.leasing.renewals}
-          target={r.targets?.property?.leasing?.renewals}
-          delta={r.deltas?.property?.leasing?.renewals}
-        />
-        <SmallCurrencyShorthandBox
-          name="Retention Investment"
-          value={r.investment.retention.total}
-          detail2={formatFourWeekAverages(
-            r.four_week_funnel_averages?.ret_investment
-          )}
-          target={r.targets?.investment?.retention?.total}
-          delta={r.deltas?.investment?.retention?.total}
-        />
-        <SmallCurrencyShorthandBox
-          name="Est. Retained Leasing Revenue"
-          value={r.investment.retention.estimated_revenue_gain}
-          target={r.targets?.investment?.retention?.estimated_revenue_gain}
-          symbolType="sign"
-        />
-        <SmallNumberBox
-          name="Retention ROMI"
-          value={r.investment.retention.romi}
-          target={r.targets?.investment?.retention?.romi}
-          symbolType="multiple"
-          tooltip={romi_tooltip(r.investment.retention)}
-        />
-      </ReportSection>
-    );
-  };
-
-  /**
-   * @name CampaignInvestmentReport.Retention
-   * @description Component that renders the retention report section.
-   */
-  static Retention = ({ report: r }) => {
-    const retChartData = getRetentionChartData(r);
-
-    return (
-      <BoxColumn>
-        <CampaignInvestmentReport.RetentionDetails report={r} />
-        <CampaignInvestmentReport.InvestmentChart
-          name="Retention Investment Allocations"
-          {...retChartData}
-        />
-      </BoxColumn>
-    );
-  };
-
-  /**
    * @description Render the campaign investment report section
    */
   render() {
