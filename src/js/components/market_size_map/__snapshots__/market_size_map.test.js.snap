@@ -4,7 +4,7 @@ exports[`MarketSizeMap renders circle-only mode correctly 1`] = `
 "<div className=\\"market-size-map\\">
   <GoogleMap bootstrapURLKeys={{...}} defaultCenter={{...}} defaultZoom={9} options={[Function: createDefaultMapOptions]} yesIWantToUseGoogleMapApiInternals={true} onGoogleApiLoaded={[Function]} distanceToMouse={[Function: distanceToMouse]} hoverDistance={30} debounced={true} googleMapLoader={[Function]} style={{...}} layerTypes={{...}} heatmap={{...}} heatmapLibrary={false} shouldUnregisterMapOnUnmount={true} />
   <button onClick={[Function]} className=\\"custom-control\\">
-    <Link />
+    <IconCenter width={20} height={20} />
   </button>
 </div>"
 `;
@@ -13,7 +13,7 @@ exports[`MarketSizeMap renders circle-with-zipcodes mode correctly 1`] = `
 "<div className=\\"market-size-map\\">
   <GoogleMap bootstrapURLKeys={{...}} defaultCenter={{...}} defaultZoom={9} options={[Function: createDefaultMapOptions]} yesIWantToUseGoogleMapApiInternals={true} onGoogleApiLoaded={[Function]} distanceToMouse={[Function: distanceToMouse]} hoverDistance={30} debounced={true} googleMapLoader={[Function]} style={{...}} layerTypes={{...}} heatmap={{...}} heatmapLibrary={false} shouldUnregisterMapOnUnmount={true} />
   <button onClick={[Function]} className=\\"custom-control\\">
-    <Link />
+    <IconCenter width={20} height={20} />
   </button>
 </div>"
 `;
@@ -45,7 +45,7 @@ exports[`MarketSizeMap renders polygon-with-hole map correctly 1`] = `
 "<div className=\\"market-size-map\\">
   <GoogleMap bootstrapURLKeys={{...}} defaultCenter={{...}} defaultZoom={9} options={[Function: createDefaultMapOptions]} yesIWantToUseGoogleMapApiInternals={true} onGoogleApiLoaded={[Function]} distanceToMouse={[Function: distanceToMouse]} hoverDistance={30} debounced={true} googleMapLoader={[Function]} style={{...}} layerTypes={{...}} heatmap={{...}} heatmapLibrary={false} shouldUnregisterMapOnUnmount={true} />
   <button onClick={[Function]} className=\\"custom-control\\">
-    <Link />
+    <IconCenter width={20} height={20} />
   </button>
 </div>"
 `;
@@ -65,7 +65,7 @@ exports[`MarketSizeMap renders zipcodes-only mode correctly 1`] = `
 "<div className=\\"market-size-map\\">
   <GoogleMap bootstrapURLKeys={{...}} defaultCenter={{...}} defaultZoom={9} options={[Function: createDefaultMapOptions]} yesIWantToUseGoogleMapApiInternals={true} onGoogleApiLoaded={[Function]} distanceToMouse={[Function: distanceToMouse]} hoverDistance={30} debounced={true} googleMapLoader={[Function]} style={{...}} layerTypes={{...}} heatmap={{...}} heatmapLibrary={false} shouldUnregisterMapOnUnmount={true} />
   <button onClick={[Function]} className=\\"custom-control\\">
-    <Link />
+    <IconCenter width={20} height={20} />
   </button>
 </div>"
 `;
