@@ -1,4 +1,3 @@
-import renderer from "react-test-renderer";
 import { shallow } from "enzyme";
 
 import { MarketSizeMap } from "./index";

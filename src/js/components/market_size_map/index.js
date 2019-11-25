@@ -27,7 +27,8 @@ const RadiusTextRotated = ({ radius, units }) => (
 
 export class MarketSizeMap extends Component {
   state = {
-    isGoogleMapLoaded: false
+    isGoogleMapLoaded: false,
+    initialCenter: null
   };
 
   /**
@@ -41,6 +42,10 @@ export class MarketSizeMap extends Component {
     this.setState({ isGoogleMapLoaded: true }, () => {
       this.renderCircleAndDashedPoints();
       this.renderZipcodePolygons();
+
+      this.setState({
+        initialCenter: this.google.map.getCenter()
+      });
     });
   };
 
@@ -275,7 +280,9 @@ export class MarketSizeMap extends Component {
 
   // When got too far from the center of the map by dragging, want to return to the center.
   handleReturnToCenter = () => {
-    this.google.map.panTo(this.getCenterLatLng());
+    if (this.state.initialCenter) {
+      this.google.map.panTo(this.state.initialCenter);
+    }
   };
 
   render() {
