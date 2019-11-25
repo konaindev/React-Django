@@ -4,7 +4,7 @@ import GoogleMap from "google-map-react";
 import lodashGet from "lodash/get";
 
 import { convertToMeter } from "../../utils/misc";
-import { Link as LinkIcon } from "../../icons";
+import { Link as IconLink } from "../../icons";
 import {
   GOOGLE_MAP_API_KEY,
   DEFAULT_ZOOM,
@@ -295,7 +295,7 @@ export class MarketSizeMap extends Component {
           {isGoogleMapLoaded && this.renderZipcodeMarkers()}
         </GoogleMap>
         <button onClick={this.handleReturnToCenter} className="custom-control">
-          <LinkIcon />
+          <IconLink />
         </button>
       </div>
     );
