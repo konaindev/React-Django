@@ -14,7 +14,7 @@ import {
 import { getDefaultDirection, getPercentageDirection } from "../../utils/misc";
 import "./funnel_box_layout.scss";
 
-class FunnelBaseBox extends Component {
+export class FunnelBaseBox extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     infoTooltip: PropTypes.string,

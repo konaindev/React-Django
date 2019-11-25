@@ -1,190 +1,67 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FunnelBoxLayout renders FunnelCurrencyBox correctly 1`] = `
-<div
-  className="funnel-box-layout"
->
-  <div
-    className="funnel-box-layout__left"
-  >
-    <div
-      className="funnel-box-layout__name"
-    >
+"<div className=\\"funnel-box-layout\\">
+  <div className=\\"funnel-box-layout__left\\">
+    <div className=\\"funnel-box-layout__name\\">
       Volume of EXE
+      <Connect(InfoTooltipBase) transKey={[undefined]} />
     </div>
-    <div
-      className="funnel-box-layout__target"
-    >
+    <div className=\\"funnel-box-layout__target\\">
       Target: $2,136
     </div>
   </div>
-  <div
-    className="funnel-box-layout__right"
-  >
-    <div
-      className="funnel-box-layout__value"
-    >
+  <div className=\\"funnel-box-layout__right\\">
+    <div className=\\"funnel-box-layout__value\\">
       $3,008
     </div>
-    <div
-      className="funnel-box-layout__delta"
-    >
-      <div
-        className="delta-indicator"
-      >
-        <span
-          className="delta-indicator__delta"
-        >
-          $423
-        </span>
-         
-        <span
-          className="delta-indicator__arrow delta-indicator__trend-up"
-        >
-          <svg
-            aria-hidden="true"
-            color="inherit"
-            focusable="false"
-            height={5}
-            role="presentation"
-            viewBox="0 0 10 5"
-            width={10}
-          >
-            <path
-              d="M5 0l5 5H0z"
-              fill="currentColor"
-              fillRule="evenodd"
-            />
-          </svg>
-        </span>
-      </div>
+    <div className=\\"funnel-box-layout__delta\\">
+      <DeltaIndicator delta={423} direction={1} indicatorPos=\\"right\\" formatter={[Function: formatCurrency]} />
     </div>
   </div>
-</div>
+</div>"
 `;
 
 exports[`FunnelBoxLayout renders FunnelNumberBox correctly 1`] = `
-<div
-  className="funnel-box-layout"
->
-  <div
-    className="funnel-box-layout__left"
-  >
-    <div
-      className="funnel-box-layout__name"
-    >
+"<div className=\\"funnel-box-layout\\">
+  <div className=\\"funnel-box-layout__left\\">
+    <div className=\\"funnel-box-layout__name\\">
       Volume of EXE
+      <Connect(InfoTooltipBase) transKey={[undefined]} />
     </div>
-    <div
-      className="funnel-box-layout__target"
-    >
+    <div className=\\"funnel-box-layout__target\\">
       Target: 213,600%
     </div>
   </div>
-  <div
-    className="funnel-box-layout__right"
-  >
-    <div
-      className="funnel-box-layout__value"
-    >
+  <div className=\\"funnel-box-layout__right\\">
+    <div className=\\"funnel-box-layout__value\\">
       3,008
     </div>
-    <div
-      className="funnel-box-layout__delta"
-    >
-      <div
-        className="delta-indicator"
-      >
-        <span
-          className="delta-indicator__delta"
-        >
-          423
-        </span>
-         
-        <span
-          className="delta-indicator__arrow delta-indicator__trend-up"
-        >
-          <svg
-            aria-hidden="true"
-            color="inherit"
-            focusable="false"
-            height={5}
-            role="presentation"
-            viewBox="0 0 10 5"
-            width={10}
-          >
-            <path
-              d="M5 0l5 5H0z"
-              fill="currentColor"
-              fillRule="evenodd"
-            />
-          </svg>
-        </span>
-      </div>
+    <div className=\\"funnel-box-layout__delta\\">
+      <DeltaIndicator delta={423} direction={1} indicatorPos=\\"right\\" formatter={[Function: formatNumber]} />
     </div>
   </div>
-</div>
+</div>"
 `;
 
 exports[`FunnelBoxLayout renders FunnelPercentBox correctly 1`] = `
-<div
-  className="funnel-box-layout"
->
-  <div
-    className="funnel-box-layout__left"
-  >
-    <div
-      className="funnel-box-layout__name"
-    >
+"<div className=\\"funnel-box-layout\\">
+  <div className=\\"funnel-box-layout__left\\">
+    <div className=\\"funnel-box-layout__name\\">
       USV &gt; INQ
+      <Connect(InfoTooltipBase) transKey={[undefined]} />
     </div>
-    <div
-      className="funnel-box-layout__target"
-    >
+    <div className=\\"funnel-box-layout__target\\">
       Target: 22%
     </div>
   </div>
-  <div
-    className="funnel-box-layout__right"
-  >
-    <div
-      className="funnel-box-layout__value"
-    >
+  <div className=\\"funnel-box-layout__right\\">
+    <div className=\\"funnel-box-layout__value\\">
       32%
     </div>
-    <div
-      className="funnel-box-layout__delta"
-    >
-      <div
-        className="delta-indicator"
-      >
-        <span
-          className="delta-indicator__delta"
-        >
-          2pts
-        </span>
-         
-        <span
-          className="delta-indicator__arrow delta-indicator__trend-up"
-        >
-          <svg
-            aria-hidden="true"
-            color="inherit"
-            focusable="false"
-            height={5}
-            role="presentation"
-            viewBox="0 0 10 5"
-            width={10}
-          >
-            <path
-              d="M5 0l5 5H0z"
-              fill="currentColor"
-              fillRule="evenodd"
-            />
-          </svg>
-        </span>
-      </div>
+    <div className=\\"funnel-box-layout__delta\\">
+      <DeltaIndicator delta={0.023} direction={1} indicatorPos=\\"right\\" formatter={[Function: formatDeltaPercent]} />
     </div>
   </div>
-</div>
+</div>"
 `;
