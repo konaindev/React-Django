@@ -38,8 +38,6 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: mv .env-example .env
-
       # run tests!
       - run: yarn test-ui
       - run: pipenv run python manage.py test
@@ -203,6 +201,7 @@ workflows:
   build-deploy:
     jobs:
       - build:
+          context: stage-aws
           filters:
             branches:
               only: staging
@@ -214,6 +213,7 @@ workflows:
             branches:
               only: staging
       - deploy-storybook:
+          context: stage-aws
           requires:
             - deploy-staging
           filters:
@@ -223,6 +223,7 @@ workflows:
   build-production:
     jobs:
       - build:
+          context: deploy-production
           filters:
             branches:
               only: master
