@@ -165,7 +165,6 @@ class ProjectReportsView(APIView):
         project = get_object_or_404(Project, public_id=public_id)
         report_type = request.GET.get("report_type")
         report_span = request.GET.get("report_span")
-        logger.info(f"Project ID: {public_id}\treport type: {report_type}\treport span: {report_span}")
 
         try:
             logger.info("ProjectReportsView::get::before selector_class")
