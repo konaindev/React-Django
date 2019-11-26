@@ -13,11 +13,17 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.7.2-node
-      - image: circleci/postgres:latest
       - image: circleci/redis:latest
-      # pre-built images https://circleci.com/docs/2.0/circleci-images/
+      - image: circleci/postgres:latest
+        environment:
+          POSTGRES_USER: circleci-postgres-user
+          POSTGRES_DB: circleci-test
 
     working_directory: ~/repo
+
+    environment:
+      DATABASE_URL: "postgres://circleci-postgres-user:@localhost:5434/circleci-test"
+      REDIS_URL: "redis://localhost:6379"
 
     steps:
       - checkout
