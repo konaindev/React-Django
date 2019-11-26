@@ -12,6 +12,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     campaign_end = serializers.SerializerMethodField()
     report_links = serializers.SerializerMethodField()
     members = serializers.SerializerMethodField()
+    address_str = serializers.SerializerMethodField()
 
     class Meta:
         model = Project
@@ -25,6 +26,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             "campaign_end",
             "report_links",
             "members",
+            "address_str",
             "is_baseline_report_shared",
             "is_tam_shared",
             "is_performance_report_shared",
@@ -70,3 +72,6 @@ class ProjectSerializer(serializers.ModelSerializer):
         for u in user_item:
             u["is_current"] = True
         return user_item + result
+
+    def get_address_str(self, obj):
+        return obj.get_address_str()

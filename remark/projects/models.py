@@ -480,6 +480,9 @@ class Project(models.Model):
             return -1
         return health_check(lease_rate, target_lease_rate)
 
+    def get_address_str(self):
+        return self.property.geo_address.formatted_address
+
     def get_members(self):
         if self.view_group is None:
             users_members = []

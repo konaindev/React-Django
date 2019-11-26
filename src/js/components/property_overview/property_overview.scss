@@ -1,0 +1,39 @@
+@import "css/base.scss";
+
+$panel-spacing: $box-space;
+$content-spacing: 50px 0;
+$image-width: 605px;
+$image-height: 370px;
+$info-width: 365px;
+$info-height: 370px;
+$empty-property-bg: $gray-1;
+
+.property-overview {
+    width: 1000px;
+    padding: $content-spacing;
+    margin: 0 auto;
+}
+
+.property-overview__info {
+    display: grid;
+    grid-column-gap: $panel-spacing;
+    grid-template-columns: 1fr 1fr;
+}
+
+.property-overview__info-panel {
+    width: $info-width;
+    height: $info-height;
+}
+
+.property-overview__image {
+    width: $image-width;
+    height: $image-height;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: $panel-border-radius;
+
+    &--default {
+        background-color: $empty-property-bg;
+        background-image: $blank-building-url;
+    }
+}

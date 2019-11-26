@@ -22,6 +22,7 @@ import TotalAddressableMarket from "../total_addressable_market";
 import ModelingView from "../modeling_view";
 import CampaignPlan from "../campaign_plan";
 import UserIconList from "../user_icon_list";
+import PropertyOverview from "../property_overview";
 
 import "./project_report_page.scss";
 
@@ -43,6 +44,15 @@ export class ProjectReportPage extends Component {
 
   static defaultProps = {
     backUrl: "/dashboard"
+  };
+
+  getBuildingImage = () => {
+    const { project } = this.props;
+    let projectImage = DEFAULT_IMAGE_URL;
+    if (project && project.building_image) {
+      projectImage = project.building_image[2];
+    }
+    return projectImage;
   };
 
   renderSubheader = () => {
@@ -101,6 +111,20 @@ export class ProjectReportPage extends Component {
   renderReportContent = () => {
     const { reportType, reportSpan, report, project } = this.props;
 
+    if (reportType === "overview") {
+      const buildingImageURL = this.getBuildingImage();
+      return (
+        <PropertyOverview
+          project={project}
+          buildingImageURL={buildingImageURL}
+        />
+      );
+    }
+
+    if (!report) {
+      return;
+    }
+
     switch (reportType) {
       case "baseline":
         return (
@@ -153,14 +177,14 @@ export class ProjectReportPage extends Component {
   onOpenMembersView = () => this.props.dispatch(viewMembersActions.open);
 
   render() {
-    const { fetchingReports, project, report } = this.props;
+    const { fetchingReports, project } = this.props;
 
     return (
       <div className="project-report-page">
         {project && this.renderSubheader()}
         <section className="project-report-page__content">
           {fetchingReports && <Loader isVisible />}
-          {project && report && this.renderReportContent()}
+          {project && this.renderReportContent()}
         </section>
       </div>
     );
