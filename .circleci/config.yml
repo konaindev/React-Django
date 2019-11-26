@@ -22,7 +22,7 @@ jobs:
     working_directory: ~/repo
 
     environment:
-      DATABASE_URL: "postgres://circleci-postgres-user:@localhost:5432/circleci-test"
+      DATABASE_URL: "postgres://circleci-postgres-user:@localhost:5432/circleci-test?sslmode=disable"
       REDIS_URL: "redis://localhost:6379"
 
     steps:
