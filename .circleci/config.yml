@@ -15,15 +15,8 @@ jobs:
       - image: circleci/python:3.7.2-node
       - image: circleci/redis:latest
       - image: circleci/postgres:latest
-        environment:
-          POSTGRES_USER: circleci-postgres-user
-          POSTGRES_DB: circleci-test
 
     working_directory: ~/repo
-
-    environment:
-      DATABASE_URL: "postgres://circleci-postgres-user:@localhost:5432/circleci-test?sslmode=disable"
-      REDIS_URL: "redis://localhost:6379"
 
     steps:
       - checkout
