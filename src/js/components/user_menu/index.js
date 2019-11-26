@@ -13,8 +13,7 @@ import { Link } from "react-router-dom";
 export class UserMenu extends React.PureComponent {
   static propTypes = {
     profile_image_url: PropTypes.string,
-    logout_url: PropTypes.string.isRequired,
-    account_settings_url: PropTypes.string
+    logout_url: PropTypes.string.isRequired
   };
 
   static defaultProps = {
