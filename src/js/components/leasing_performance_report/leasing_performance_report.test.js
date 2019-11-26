@@ -1,5 +1,6 @@
+import { shallow } from "enzyme";
+
 import LeasingPerformanceReport from "./index";
-import renderer from "react-test-renderer";
 import {
   props_baseline,
   props_performance,
@@ -7,28 +8,30 @@ import {
 } from "./props";
 
 describe("LeasingPerformanceReport", () => {
-  beforeEach(() => {
-    Math.random = jest.fn(() => "12345");
-  });
-
   it("renders baseline report correctly", () => {
-    const tree = renderer
-      .create(<LeasingPerformanceReport {...props_baseline} />)
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+    let tree = shallow(<LeasingPerformanceReport {...props_baseline} />);
+    expect(tree.debug()).toMatchSnapshot();
+
+    tree = shallow(<LeasingPerformanceReport.HeadlineNumbers {...props_baseline} />);
+    expect(tree.debug()).toMatchSnapshot();
+
+    tree = shallow(<LeasingPerformanceReport.DetailNumbers {...props_baseline} />);
+    expect(tree.debug()).toMatchSnapshot();
   });
 
   it("renders performance report correctly", () => {
-    const tree = renderer
-      .create(<LeasingPerformanceReport {...props_performance} />)
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+    let tree = shallow(<LeasingPerformanceReport {...props_performance} />);
+    expect(tree.debug()).toMatchSnapshot();
+
+    tree = shallow(<LeasingPerformanceReport.HeadlineNumbers {...props_performance} />);
+    expect(tree.debug()).toMatchSnapshot();
+
+    tree = shallow(<LeasingPerformanceReport.DetailNumbers {...props_performance} />);
+    expect(tree.debug()).toMatchSnapshot();
   });
 
   it("renders with section items correctly", () => {
-    const tree = renderer
-      .create(<LeasingPerformanceReport {...props_section_items} />)
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+    const tree = shallow(<LeasingPerformanceReport {...props_section_items} />);
+    expect(tree.debug()).toMatchSnapshot();
   });
 });

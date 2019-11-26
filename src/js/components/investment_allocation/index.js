@@ -15,7 +15,7 @@ import {
 } from "../../utils/formatters";
 import scssVars from "./investment_allocation.scss";
 
-const InvestmentAllocationChart = ({ name, expenses, total }) => {
+export const InvestmentAllocationChart = ({ name, expenses, total }) => {
   const ExpenseRow = ({ title, value, infoTooltip }) => (
     <div className={cx("expense-row", { "expense-row--empty": !value })}>
       <div className="expense-row__title">{title}</div>
@@ -165,11 +165,12 @@ const romi_tooltip = obj => {
   const denominator = formatCurrencyShorthand(obj.total, true);
   return `${numerator} / ${denominator}`;
 };
+
 /**
  * @name CampaignInvestmentReport.AcquisitionDetails
  * @description Component to render campaign acq_investment detail numbers
  */
-const AcquisitionDetails = ({ report: r }) => {
+export const AcquisitionDetails = ({ report: r }) => {
   return (
     <ReportSection name="Acquisition">
       <SmallNumberBox
@@ -204,7 +205,8 @@ const AcquisitionDetails = ({ report: r }) => {
     </ReportSection>
   );
 };
-const RetentionDetails = ({ report: r }) => {
+
+export const RetentionDetails = ({ report: r }) => {
   return (
     <ReportSection name="Retention">
       <SmallNumberBox
@@ -240,7 +242,7 @@ const RetentionDetails = ({ report: r }) => {
   );
 };
 
-const InvestmentAllocation = ({ acquisition, retention, report }) => {
+export const InvestmentAllocation = ({ acquisition, retention, report }) => {
   return (
     <div>
       <BoxRow>
