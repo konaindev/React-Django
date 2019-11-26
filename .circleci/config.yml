@@ -32,6 +32,7 @@ jobs:
       - run: pipenv --bare install
       - run: yarn build --silent
       - run: pipenv run python manage.py collectstatic
+      - run: printenv
       - save_cache:
           paths:
             - node_modules
