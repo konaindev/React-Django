@@ -24,7 +24,7 @@ class DonutChartTestCase(SimpleTestCase):
         # verify "/charts/donut" endpoint working fine
         with self.settings(DEBUG=True):
             resp = self.client.get(self.url, data)
-        print(resp.content)
+        # print(resp.content)
         self.assertEqual(200, resp.status_code)
         self.assertEqual("image/svg+xml", resp["Content-Type"])
 
