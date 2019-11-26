@@ -1,15 +1,16 @@
-import renderer from "react-test-renderer";
+import { shallow } from "enzyme";
+
 import RentToIncomeAnalysis from "./index";
-import { props_small, props_large } from "./rent_to_income_analysis.stories";
+import { props_large, props_small } from "./props";
 
 describe("RentToIncomeAnalysis", () => {
   it("renders in small mode correctly", () => {
-    const tree = renderer.create(<RentToIncomeAnalysis {...props_small} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const tree = shallow(<RentToIncomeAnalysis {...props_small} />);
+    expect(tree.debug()).toMatchSnapshot();
   });
 
   it("renders in large mode correctly", () => {
-    const tree = renderer.create(<RentToIncomeAnalysis {...props_large} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const tree = shallow(<RentToIncomeAnalysis {...props_large} />);
+    expect(tree.debug()).toMatchSnapshot();
   });
 });
