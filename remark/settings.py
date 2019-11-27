@@ -14,9 +14,9 @@ import os
 import sys
 import dj_database_url
 import django_heroku
-# import sentry_sdk
-# from sentry_sdk import configure_scope
-# from sentry_sdk.integrations.django import DjangoIntegration
+import sentry_sdk
+from sentry_sdk import configure_scope
+from sentry_sdk.integrations.django import DjangoIntegration
 from dotenv import load_dotenv
 
 
@@ -205,9 +205,6 @@ LOGGING = {
 }
 DEBUG_PRINT_LOGGER = True
 
-# Change 'default' database configuration with $DATABASE_URL.
-DATABASES["default"].update(dj_database_url.config(conn_max_age=500, ssl_require=False))
-
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
@@ -315,14 +312,20 @@ MJML_CHECK_CMD_ON_STARTUP = False
 
 # Activate Django-Heroku. Don't modify the DATABASES variable if we're in debug;
 # otherwise, modify it to match Heroku's needs (including forcing it to be SSL.)
+
 django_heroku.settings(locals(), staticfiles=True, databases=not DEBUG)
+
+# override DATABASE_URL set by django_heroku because it forces SSL mode locally
+ssl_require = ENV == PROD
+locals()['DATABASES']['default'] = dj_database_url.config(
+    conn_max_age=django_heroku.MAX_CONN_AGE, ssl_require=ssl_require)
 
 # Configure Sentry -jc 11-jul-19
 
-# sentry_sdk.init(dsn=os.getenv("SENTRY_URL", ""), integrations=[DjangoIntegration()])
+sentry_sdk.init(dsn=os.getenv("SENTRY_URL", ""), integrations=[DjangoIntegration()])
 
-# with configure_scope() as scope:
-#    scope.set_tag("env", os.getenv("ENV", "local"))
+with configure_scope() as scope:
+    scope.set_tag("env", os.getenv("ENV", "local"))
 
 # Use the same storage engine for thumbnails as for files
 THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
