@@ -52,13 +52,15 @@ $empty-site-color: #ccd0d6;
 .property-overview__image {
     width: $image-width;
     height: $image-height;
-    background-repeat: no-repeat;
     background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
     border-radius: $panel-border-radius;
 
     &--default {
         background-color: $empty-property-bg;
         background-image: $blank-building-url;
+        background-size: auto;
     }
 }
 
