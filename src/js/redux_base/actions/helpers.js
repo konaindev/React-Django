@@ -26,6 +26,12 @@ export const URLS = {
   dashboard: "/dashboard/"
 };
 
+try {
+  console.log("LOGGING ENV");
+  console.log("BASE_URL", process.env.BASE_URL);
+  console.log("URLS.base", URLS.base);
+} catch (e) {}
+
 export const API_URL_PREFIX = `${URLS.base}${URLS.ver}`;
 
 export const createAPIUrl = path => {
