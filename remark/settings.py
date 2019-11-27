@@ -319,7 +319,7 @@ django_heroku.settings(locals(), staticfiles=True, databases=not DEBUG)
 
 # Configure Sentry -jc 11-jul-19
 
-sentry_sdk.init(dsn=os.getenv("SENTRY_URL", ""), integrations=[DjangoIntegration()])
+# sentry_sdk.init(dsn=os.getenv("SENTRY_URL", ""), integrations=[DjangoIntegration()])
 
 with configure_scope() as scope:
     scope.set_tag("env", os.getenv("ENV", "local"))

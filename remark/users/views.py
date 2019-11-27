@@ -225,10 +225,8 @@ class ResetPasswordView(APIView):
         form = auth_forms.PasswordResetForm(params)
         if form.is_valid():
             form.save(**opts)
-            response = Response(status=status.HTTP_204_NO_CONTENT)
-        else:
-            response = Response(form.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        return response
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(form.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class ResetPasswordConfirmView(APIView):
