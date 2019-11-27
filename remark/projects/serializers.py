@@ -13,6 +13,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     report_links = serializers.SerializerMethodField()
     members = serializers.SerializerMethodField()
     address_str = serializers.SerializerMethodField()
+    url = serializers.SerializerMethodField()
 
     class Meta:
         model = Project
@@ -27,6 +28,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             "report_links",
             "members",
             "address_str",
+            "url",
             "is_baseline_report_shared",
             "is_tam_shared",
             "is_performance_report_shared",
@@ -75,3 +77,6 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     def get_address_str(self, obj):
         return obj.get_address_str()
+
+    def get_url(self, obj):
+        return obj.property.property_url

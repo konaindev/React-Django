@@ -7,6 +7,13 @@ $image-height: 370px;
 $info-width: 365px;
 $info-height: 370px;
 $empty-property-bg: $gray-1;
+$text-size: $text-sm;
+$address-height: $text-base;
+$address-spacing: 10px;
+$header-font: $s7;
+$header-height: 2.125rem;
+$header-color: $highlight-gray-3;
+$empty-site-color: #ccd0d6;
 
 .property-overview {
     width: 1000px;
@@ -20,9 +27,26 @@ $empty-property-bg: $gray-1;
     grid-template-columns: 1fr 1fr;
 }
 
-.property-overview__info-panel {
-    width: $info-width;
-    height: $info-height;
+.property-overview__panel {
+    display: flex;
+    flex-direction: column;
+    padding: $panel-spacing;
+    &--info {
+        width: $info-width;
+        height: $info-height;
+    }
+}
+
+.property-overview__section-header {
+    height: $header-height;
+    color: $header-color;
+    font-size: $header-font;
+}
+
+.property-overview__address {
+    height: $address-height;
+    margin-top: $address-spacing;
+    font-size: $text-size;
 }
 
 .property-overview__image {
@@ -36,4 +60,19 @@ $empty-property-bg: $gray-1;
         background-color: $empty-property-bg;
         background-image: $blank-building-url;
     }
+}
+
+.property-overview__site {
+    width: 100%;
+    margin-top: auto;
+}
+
+.property-overview__site-link {
+    width: 100%;
+}
+
+.property-overview__site-empty {
+    color: $empty-site-color;
+    font-size: $text-base;
+    text-align: center;
 }
