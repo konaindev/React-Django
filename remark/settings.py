@@ -14,9 +14,9 @@ import os
 import sys
 import dj_database_url
 import django_heroku
-import sentry_sdk
-from sentry_sdk import configure_scope
-from sentry_sdk.integrations.django import DjangoIntegration
+# import sentry_sdk
+# from sentry_sdk import configure_scope
+# from sentry_sdk.integrations.django import DjangoIntegration
 from dotenv import load_dotenv
 
 
@@ -321,8 +321,8 @@ django_heroku.settings(locals(), staticfiles=True, databases=not DEBUG)
 
 # sentry_sdk.init(dsn=os.getenv("SENTRY_URL", ""), integrations=[DjangoIntegration()])
 
-with configure_scope() as scope:
-    scope.set_tag("env", os.getenv("ENV", "local"))
+# with configure_scope() as scope:
+#    scope.set_tag("env", os.getenv("ENV", "local"))
 
 # Use the same storage engine for thumbnails as for files
 THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
