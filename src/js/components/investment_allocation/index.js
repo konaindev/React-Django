@@ -15,6 +15,8 @@ import { SmallNumberBox, SmallCurrencyShorthandBox } from "../small_box_layout";
 import scssVars from "./investment_allocation.scss";
 
 const InvestmentAllocationChart = ({ name, expenses, total }) => {
+  console.log("Investment Allocation Chart");
+  console.log(name, expenses, total);
   const getLabel = d => {
     if (d.y === 0 || d.total === 0) {
       return "";
@@ -152,12 +154,12 @@ const InvestmentAllocationChart = ({ name, expenses, total }) => {
 InvestmentAllocationChart.propTypes = {
   name: PropTypes.string.isRequired,
   expenses: PropTypes.shape({
-    demand_creation: PropTypes.string.isRequired,
-    leasing_enablement: PropTypes.string.isRequired,
-    market_intelligence: PropTypes.string.isRequired,
-    reputation_building: PropTypes.string.isRequired
+    demand_creation: PropTypes.number.isRequired,
+    leasing_enablement: PropTypes.number.isRequired,
+    market_intelligence: PropTypes.number.isRequired,
+    reputation_building: PropTypes.number.isRequired
   }),
-  total: PropTypes.string.isRequired
+  total: PropTypes.number.isRequired
 };
 
 const formatFourWeekAverages = value => {
