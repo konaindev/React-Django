@@ -1,6 +1,10 @@
 @import "css/base.scss";
 
 $panel-spacing: $box-space;
+$panel-header-text-size: $text-xl;
+$panel-header-color: $highlight-gray-3;
+$panel-header-height: 1.625rem;
+$section-spacing: 100px;
 $content-spacing: 50px 0;
 $image-width: 605px;
 $image-height: 370px;
@@ -35,6 +39,16 @@ $empty-site-color: #ccd0d6;
         width: $info-width;
         height: $info-height;
     }
+}
+
+.property-overview__panel-header {
+    height: $panel-header-height;
+    color: $panel-header-color;
+    font-size: $panel-header-text-size;
+}
+
+.property-overview__section {
+    margin-top: $section-spacing;
 }
 
 .property-overview__section-header {

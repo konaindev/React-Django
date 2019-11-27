@@ -54,6 +54,14 @@ export default class PropertyOverview extends React.PureComponent {
           </Panel>
           <div className={imageClass} style={imageStyle} />
         </div>
+        <div className="property-overview__section">
+          <div className="property-overview__section-header">
+            Characteristics
+          </div>
+        </div>
+        <div className="property-overview__section">
+          <div className="property-overview__section-header">Stakeholders</div>
+        </div>
       </div>
     );
   }
