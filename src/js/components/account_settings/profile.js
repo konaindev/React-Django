@@ -13,7 +13,7 @@ import Button from "../button";
 import Input from "../input";
 import MultiSelect from "../multi_select";
 import Select, { SelectSearch } from "../select";
-import { addressModal } from "../../state/actions";
+import { addressModal } from "../../redux_base/actions";
 import GoogleAddress from "../google_address";
 import { MAX_AVATAR_SIZE, profileSchema } from "./validators";
 

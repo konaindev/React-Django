@@ -1,4 +1,4 @@
-import { createActions, URLS } from "./helpers";
+import { createActions, URLS, createAPIUrl } from "./helpers";
 
 export * from "./helpers";
 export { default as dashboard } from "./dashboard";
@@ -14,13 +14,13 @@ export const tutorial = {
   }),
   get: args => ({
     type: "FETCH_API_GET",
-    url: `${URLS.base}${URLS.ver}${URLS.tutorial}`,
+    url: createAPIUrl(URLS.tutorial),
     branch: "tutorial",
     ...args
   }),
   post: args => ({
     type: "FETCH_API_POST",
-    url: `${URLS.base}${URLS.ver}${URLS.tutorial}`,
+    url: createAPIUrl(URLS.tutorial),
     branch: "tutorial",
     ...args
   })
@@ -114,7 +114,7 @@ export const auth = {
     type: "FETCH_API_POST",
     body: { email, password },
     branch: "token",
-    url: `${URLS.base}${URLS.ver}${URLS.login}`
+    url: createAPIUrl(URLS.login)
   }),
   logout: () => ({
     type: "LOGOUT"

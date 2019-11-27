@@ -15,6 +15,10 @@ export const URLS = {
 
 export const API_URL_PREFIX = `${URLS.base}${URLS.ver}`;
 
+export const createAPIUrl = path => {
+  return `${URLS.base}${URLS.ver}${path}`;
+};
+
 export const createActions = branch => ({
   set: x => ({ type: `UPDATE_${branch.toUpperCase()}`, x }),
   get: args => ({

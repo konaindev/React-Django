@@ -6,7 +6,7 @@ import _get from "lodash/get";
 
 import Button from "../button";
 import ModalWindow from "../modal_window";
-import { addressModal } from "../../state/actions";
+import { addressModal } from "../../redux_base/actions";
 
 import "./address_modal.scss";
 
