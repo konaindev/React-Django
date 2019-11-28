@@ -4,8 +4,12 @@ $panel-spacing: $box-space;
 $panel-header-text-size: $text-xl;
 $panel-header-color: $highlight-gray-3;
 $panel-header-height: 1.625rem;
+$panel-name-text-size: $text-xs;
+$panel-name-line: $line-height-normal;
 $section-spacing: 100px;
-$content-spacing: 50px 0;
+$section-empty-text-size: $text-base;
+$section-empty-line: $line-height-relaxed;
+$content-spacing: 50px 0 200px 0;
 $image-width: 605px;
 $image-height: 370px;
 $info-width: 365px;
@@ -17,7 +21,7 @@ $address-spacing: 10px;
 $header-font: $s7;
 $header-height: 2.125rem;
 $header-color: $highlight-gray-3;
-$empty-site-color: #ccd0d6;
+$empty-text-color: #ccd0d6;
 
 .property-overview {
     width: 1000px;
@@ -41,7 +45,16 @@ $empty-site-color: #ccd0d6;
     }
 }
 
-.property-overview__panel-header {
+.property-overview__panel-name {
+    height: $panel-header-height;
+    color: $gray-6;
+    font-size: $panel-name-text-size;
+    letter-spacing: 1px;
+    line-height: $panel-name-line;
+    text-transform: uppercase;
+}
+
+.property-overview__panel-value {
     height: $panel-header-height;
     color: $panel-header-color;
     font-size: $panel-header-text-size;
@@ -49,6 +62,27 @@ $empty-site-color: #ccd0d6;
 
 .property-overview__section {
     margin-top: $section-spacing;
+}
+
+.property-overview__section-empty {
+    margin-top: $panel-spacing;
+    color: $empty-text-color;
+    font-size: $section-empty-text-size;
+    line-height: $section-empty-line;
+}
+
+.property-overview__section-content {
+    display: grid;
+    grid-column-gap: $panel-spacing;
+    grid-row-gap: $panel-spacing;
+    margin-top: $panel-spacing;
+
+    &--3-cols {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    &--2-cols {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .property-overview__section-header {
@@ -88,7 +122,7 @@ $empty-site-color: #ccd0d6;
 }
 
 .property-overview__site-empty {
-    color: $empty-site-color;
+    color: $empty-text-color;
     font-size: $text-base;
     text-align: center;
 }

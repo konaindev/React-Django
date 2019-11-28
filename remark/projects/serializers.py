@@ -1,5 +1,6 @@
 from rest_framework import serializers
 
+from .constants import BUILDING_CLASS_UI
 from .models import Project
 from .reports.selectors import ReportLinks
 
@@ -14,6 +15,18 @@ class ProjectSerializer(serializers.ModelSerializer):
     members = serializers.SerializerMethodField()
     address_str = serializers.SerializerMethodField()
     url = serializers.SerializerMethodField()
+    # Characteristics
+    building_class = serializers.SerializerMethodField()
+    year_built = serializers.SerializerMethodField()
+    year_renovated = serializers.SerializerMethodField()
+    total_units = serializers.SerializerMethodField()
+    property_type = serializers.SerializerMethodField()
+    property_style = serializers.SerializerMethodField()
+    # Stakeholders
+    property_owner = serializers.SerializerMethodField()
+    asset_manager = serializers.SerializerMethodField()
+    property_manager = serializers.SerializerMethodField()
+    developer = serializers.SerializerMethodField()
 
     class Meta:
         model = Project
@@ -28,7 +41,17 @@ class ProjectSerializer(serializers.ModelSerializer):
             "report_links",
             "members",
             "address_str",
+            "building_class",
+            "year_built",
+            "year_renovated",
+            "total_units",
+            "property_type",
+            "property_style",
             "url",
+            "property_owner",
+            "asset_manager",
+            "property_manager",
+            "developer",
             "is_baseline_report_shared",
             "is_tam_shared",
             "is_performance_report_shared",
@@ -80,3 +103,33 @@ class ProjectSerializer(serializers.ModelSerializer):
 
     def get_url(self, obj):
         return obj.property.property_url
+
+    def get_building_class(self, obj):
+        return BUILDING_CLASS_UI[obj.property.building_class]
+
+    def get_year_built(self, obj):
+        return obj.property.year_built
+
+    def get_year_renovated(self, obj):
+        return obj.property.year_renovated
+
+    def get_total_units(self, obj):
+        return obj.property.total_units
+
+    def get_property_type(self, obj):
+        return obj.property.property_type
+
+    def get_property_style(self, obj):
+        return obj.property.property_style
+
+    def get_property_owner(self, obj):
+        return obj.property_owner and obj.property_owner.name
+
+    def get_asset_manager(self, obj):
+        return obj.asset_manager and obj.asset_manager.name
+
+    def get_property_manager(self, obj):
+        return obj.property_manager and obj.property_manager.name
+
+    def get_developer(self, obj):
+        return obj.developer and obj.developer.name
