@@ -15,6 +15,7 @@ class ProjectSerializer(serializers.ModelSerializer):
     members = serializers.SerializerMethodField()
     address_str = serializers.SerializerMethodField()
     url = serializers.SerializerMethodField()
+    custom_tags = serializers.StringRelatedField(many=True)
     # Characteristics
     building_class = serializers.SerializerMethodField()
     year_built = serializers.SerializerMethodField()
@@ -48,6 +49,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             "property_type",
             "property_style",
             "url",
+            "custom_tags",
             "property_owner",
             "asset_manager",
             "property_manager",
