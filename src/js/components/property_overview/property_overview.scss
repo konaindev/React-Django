@@ -26,6 +26,7 @@ $tags-border-radius: 4px;
 $tags-spacing: 20px;
 $tags-padding: 7px 10px;
 $tag-text-color: $highlight-gray-3;
+$tag-close-size: 0.5rem;
 
 .property-overview {
     width: 1000px;
@@ -96,6 +97,12 @@ $tag-text-color: $highlight-gray-3;
     color: $tag-text-color;
     font-size: $text-size;
     line-height: $panel-header-height;
+}
+
+.property-overview__tag-close {
+    width: $tag-close-size;
+    height: $tag-close-size;
+    cursor: pointer;
 }
 
 .property-overview__tiles {
