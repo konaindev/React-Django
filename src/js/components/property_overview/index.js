@@ -5,7 +5,7 @@ import React from "react";
 import ButtonLink from "../button_link";
 import Panel from "../panel";
 
-import ItemPanel from "./item_panel";
+import Tile from "./tile";
 
 import "./property_overview.scss";
 
@@ -49,10 +49,10 @@ export default class PropertyOverview extends React.PureComponent {
 
     return (
       <div
-        className={`property-overview__section-content property-overview__section-content--${colsNum}-cols`}
+        className={`property-overview__tiles property-overview__tiles--${colsNum}-cols`}
       >
         {items.map(i => (
-          <ItemPanel {...i} key={i.name} />
+          <Tile {...i} key={i.name} />
         ))}
       </div>
     );
@@ -100,7 +100,7 @@ export default class PropertyOverview extends React.PureComponent {
     return (
       <div className="property-overview">
         <div className="property-overview__section property-overview__info">
-          <Panel className="property-overview__panel property-overview__panel--info">
+          <Panel className="property-overview__tile property-overview__tile--info">
             <div className="property-overview__section-header">
               {project.name}
             </div>

@@ -35,7 +35,7 @@ $empty-text-color: #ccd0d6;
     grid-template-columns: 1fr 1fr;
 }
 
-.property-overview__panel {
+.property-overview__tile {
     display: flex;
     flex-direction: column;
     padding: $panel-spacing;
@@ -45,7 +45,7 @@ $empty-text-color: #ccd0d6;
     }
 }
 
-.property-overview__panel-name {
+.property-overview__tile-name {
     height: $panel-header-height;
     color: $gray-6;
     font-size: $panel-name-text-size;
@@ -54,7 +54,7 @@ $empty-text-color: #ccd0d6;
     text-transform: uppercase;
 }
 
-.property-overview__panel-value {
+.property-overview__tile-value {
     height: $panel-header-height;
     color: $panel-header-color;
     font-size: $panel-header-text-size;
@@ -71,7 +71,7 @@ $empty-text-color: #ccd0d6;
     line-height: $section-empty-line;
 }
 
-.property-overview__section-content {
+.property-overview__tiles {
     display: grid;
     grid-column-gap: $panel-spacing;
     grid-row-gap: $panel-spacing;
