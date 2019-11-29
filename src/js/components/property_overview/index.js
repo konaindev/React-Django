@@ -5,6 +5,7 @@ import React from "react";
 import ButtonLink from "../button_link";
 import Panel from "../panel";
 
+import Tag from "./tag";
 import Tile from "./tile";
 
 import "./property_overview.scss";
@@ -58,6 +59,24 @@ export default class PropertyOverview extends React.PureComponent {
     );
   };
 
+  renderTags = () => {
+    const { project } = this.props;
+    if (!project.custom_tags.length) {
+      return;
+    }
+    const tags = project.custom_tags.map(name => (
+      <Tag name={name} key={name} />
+    ));
+    return (
+      <div className="property-overview__section property-overview__section--top">
+        <div className="property-overview__section-text">
+          Custom property groups are made for each tag.
+        </div>
+        <div className="property-overview__tags">{tags}</div>
+      </div>
+    );
+  };
+
   renderSiteLink = () => {
     const { project } = this.props;
     if (!project.url) {
@@ -99,7 +118,8 @@ export default class PropertyOverview extends React.PureComponent {
     });
     return (
       <div className="property-overview">
-        <div className="property-overview__section property-overview__info">
+        {this.renderTags()}
+        <div className="property-overview__section property-overview__section--top property-overview__info">
           <Panel className="property-overview__tile property-overview__tile--info">
             <div className="property-overview__section-header">
               {project.name}

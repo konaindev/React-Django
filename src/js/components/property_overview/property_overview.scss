@@ -9,7 +9,7 @@ $panel-name-line: $line-height-normal;
 $section-spacing: 100px;
 $section-empty-text-size: $text-base;
 $section-empty-line: $line-height-relaxed;
-$content-spacing: 50px 0 200px 0;
+$content-spacing: 0 0 200px 0;
 $image-width: 605px;
 $image-height: 370px;
 $info-width: 365px;
@@ -22,6 +22,10 @@ $header-font: $s7;
 $header-height: 2.125rem;
 $header-color: $highlight-gray-3;
 $empty-text-color: #ccd0d6;
+$tags-border-radius: 4px;
+$tags-spacing: 20px;
+$tags-padding: 7px 10px;
+$tag-text-color: $highlight-gray-3;
 
 .property-overview {
     width: 1000px;
@@ -62,13 +66,36 @@ $empty-text-color: #ccd0d6;
 
 .property-overview__section {
     margin-top: $section-spacing;
+    &--top {
+        margin-top: $section-spacing / 2;
+    }
+}
+
+.property-overview__section-empty,
+.property-overview__section-text {
+    color: $empty-text-color;
+    font-size: $section-empty-text-size;
+    line-height: $section-empty-line;
 }
 
 .property-overview__section-empty {
     margin-top: $panel-spacing;
-    color: $empty-text-color;
-    font-size: $section-empty-text-size;
-    line-height: $section-empty-line;
+}
+
+.property-overview__tag {
+    display: inline-block;
+    padding: $tags-padding;
+    margin: $tags-spacing $tags-spacing 0 0;
+    border-radius: $tags-border-radius;
+    &:first-child {
+        margin-left: 0;
+    }
+}
+
+.property-overview__tag-name {
+    color: $tag-text-color;
+    font-size: $text-size;
+    line-height: $panel-header-height;
 }
 
 .property-overview__tiles {
