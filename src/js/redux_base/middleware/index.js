@@ -9,7 +9,8 @@ import {
   locations,
   market,
   kpi,
-  token as tokenActions
+  token as tokenActions,
+  createFEUrl
 } from "../actions";
 import {
   getPropertiesData,
@@ -77,26 +78,42 @@ export const fetchTutorial = store => next => action => {
 export const fetchCreatePassword = store => next => action => {
   if (action.type === "API_CREATE_PASSWORD") {
     const hash = action.hash;
-    const url = `${URLS.base}/users/create-password/${hash}`;
+    const url = createAPIUrl(`/users/create-password/`);
     if (action.data) {
+      action.data.user_id = hash;
       axiosPost(url, action.data)
         .then(response => {
           if (response.status === 200) {
-            const redirectUrl = response.data.redirect_url || "/";
-            next(createPassword.redirect(redirectUrl));
+            const email = response.data.email;
+            const password = action.data.password;
+            const completeAccountUrl = createFEUrl("/complete-account");
+            next(auth.login({ email, password, completeAccountUrl }));
           } else {
             throw response;
           }
         })
         .catch(e => console.log("-----> ERROR", e));
     } else {
-      const url = `${URLS.base}/create-password/${hash}"`;
+      const url = createAPIUrl(`/create-password/`);
       axiosGet(url)
         .then(response => {
           next(createPassword.set(response.data));
         })
         .catch(e => console.log("-----> ERROR", e));
     }
+  } else {
+    next(action);
+  }
+};
+
+export const fetchPasswordRules = store => next => action => {
+  if (action.type == "CREATE_PASSWORD_FETCH_RULES") {
+    axiosGet(createAPIUrl("/users/password-rules/"))
+      .then(response => {
+        const rules = response.data?.rules || [];
+        next(createPassword.set({ rules }));
+      })
+      .catch(e => console.log("-----> ERROR", e));
   } else {
     next(action);
   }
@@ -404,6 +421,29 @@ export const refreshToken = store => next => action => {
           // there might be mutiple simulataneous calls which resulted 401
           // better to reload the page
           window.location.reload();
+        }
+      })
+      .catch(e => console.log("REFRESH TOKEN ERROR", e));
+  } else {
+    next(action);
+  }
+};
+
+export const login = store => next => action => {
+  if (action.type == "LOGIN") {
+    const apiUrl = createAPIUrl(URLS.login);
+    axiosPost(apiUrl, action.body)
+      .then(response => {
+        if (response.status == 401) {
+          console.log("BAD LOGIN");
+          next(auth.clearToken());
+        } else {
+          next(tokenActions.update({ refresh, access: response.data.access }));
+          if (action.redirect_url) {
+            window.location.href = action.redirect_url;
+          } else {
+            window.location.reload();
+          }
         }
       })
       .catch(e => console.log("REFRESH TOKEN ERROR", e));

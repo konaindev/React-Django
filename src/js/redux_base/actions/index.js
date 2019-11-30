@@ -67,6 +67,10 @@ export const createPassword = {
   redirect: url => ({
     type: "CREATE_PASSWORD_REDIRECT",
     url
+  }),
+  getRules: newState => ({
+    type: "CREATE_PASSWORD_FETCH_RULES",
+    newState
   })
 };
 
@@ -110,11 +114,10 @@ export const pageMeta = {
 // api actions...
 
 export const auth = {
-  login: ({ email, password }) => ({
-    type: "FETCH_API_POST",
+  login: ({ email, password, redirect_url }) => ({
+    type: "LOGIN",
     body: { email, password },
-    branch: "token",
-    url: createAPIUrl(URLS.login)
+    redirect_url: redirect_url
   }),
   logout: () => ({
     type: "LOGOUT"

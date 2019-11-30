@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import PageChrome from "../../components/page_chrome";
 import UserMenu from "../../components/user_menu";
 
-class NavGate extends React.PureComponent {
+class NavWrapper extends React.PureComponent {
   render() {
     const { navLinks, children } = this.props;
     return (
@@ -30,4 +30,4 @@ const mapState = state => {
   };
 };
 
-export default withRouter(connect(mapState)(NavGate));
+export default withRouter(connect(mapState)(NavWrapper));

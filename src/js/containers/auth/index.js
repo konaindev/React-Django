@@ -1,8 +1,11 @@
 import React from "react";
 import LoginView from "../../components/login";
+import renderWrapper from "../shared/base_container";
 
-export default class AuthContainer extends React.PureComponent {
+class AuthContainer extends React.Component {
   render() {
-    return <LoginView />;
+    return renderWrapper(<LoginView />, false, false);
   }
 }
+
+export default AuthContainer;

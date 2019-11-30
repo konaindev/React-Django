@@ -38,6 +38,10 @@ export const createAPIUrl = path => {
   return `${URLS.base}${URLS.ver}${path}`;
 };
 
+export const createFEUrl = path => {
+  return `${window.location.origin}${path}`;
+};
+
 export const createActions = branch => ({
   set: x => ({ type: `UPDATE_${branch.toUpperCase()}`, x }),
   get: args => ({

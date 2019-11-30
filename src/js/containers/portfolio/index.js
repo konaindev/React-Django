@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 
 import PortfolioAnalysisView from "../../components/portfolio_analysis_view";
 import { portfolio } from "../../redux_base/actions";
+import renderWrapper from "../shared/base_container";
 
 class PortfolioContainer extends PureComponent {
   componentDidMount() {
@@ -14,7 +15,7 @@ class PortfolioContainer extends PureComponent {
   }
 
   render() {
-    return <PortfolioAnalysisView {...this.props} />;
+    return renderWrapper(<PortfolioAnalysisView {...this.props} />);
   }
 }
 
