@@ -5,9 +5,15 @@
     margin: $panel-spacing;
 
     &__heading {
+        line-height: $line-height-relaxed;
         color: $title-large-color;
         border-bottom: $heading-border;
-        padding: $s6 0 $s10 0;
+        padding: $s4 0 $s9 0;
+
+        .rmb-tooltip-anchor {
+            margin-left: 10px;
+            vertical-align: text-top;
+        }
     }
 
     &__content {

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import DeltaIndicator from "../delta_indicator";
+import { InfoTooltip } from "../rmb_tooltip";
 import {
   formatCurrency,
   formatDeltaPercent,
@@ -13,9 +14,10 @@ import {
 import { getDefaultDirection, getPercentageDirection } from "../../utils/misc";
 import "./funnel_box_layout.scss";
 
-class FunnelBaseBox extends Component {
+export class FunnelBaseBox extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
+    infoTooltip: PropTypes.string,
     value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
     target: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     delta: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
@@ -33,12 +35,16 @@ class FunnelBaseBox extends Component {
       formatter,
       deltaFormatter,
       getDeltaDirection,
-      targetFormatter
+      targetFormatter,
+      infoTooltip
     } = this.props;
     return (
       <div className="funnel-box-layout">
         <div className="funnel-box-layout__left">
-          <div className="funnel-box-layout__name">{name}</div>
+          <div className="funnel-box-layout__name">
+            {name}
+            <InfoTooltip transKey={infoTooltip} />
+          </div>
           {target != null && (
             <div className="funnel-box-layout__target">
               {targetFormatter(target)}

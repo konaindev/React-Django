@@ -24,5 +24,5 @@ app_name = "web"
 urlpatterns = [
     path("dashboard/", DashboardView.as_view(), name="dashboard"),
     path("tutorial/", TutorialView.as_view(), name="tutorial"),
-    path("localization", LocalizationView.as_view(), name="localization"),
+    path("localization/", LocalizationView.as_view(), name="localization"),
 ]

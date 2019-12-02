@@ -15,6 +15,10 @@ export const convertToKebabCase = (string = "") => {
   return string.replace(/\s+/g, "-").toLowerCase();
 };
 
+export const convertToSnakeCase = (string = "") => {
+  return string.replace(/\s+/g, "_").toLowerCase();
+};
+
 export const convertToMeter = (distance, unit) => {
   if (unit === "mi") {
     return distance * 1609.34;

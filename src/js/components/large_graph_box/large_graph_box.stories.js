@@ -8,6 +8,7 @@ import { CurrencyShorthandGraphBox, PercentageGraphBox } from "./index";
 
 const props1 = {
   name: "USV > EXE",
+  infoTooltip: "usv_to_exe",
   value: 0.1,
   target: 0.13,
   delta: 0.03,

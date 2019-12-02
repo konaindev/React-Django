@@ -308,7 +308,7 @@ export const fetchUIString = store => next => action => {
     axiosPost(url, action.data)
       .then(response => {
         if (response.status === 200) {
-          next(uiStrings.set(response.data.data));
+          next(uiStrings.set(response.data));
         } else if (response.status === 208) {
           next(action);
         } else {

@@ -1,5 +1,6 @@
+import { shallow } from "enzyme";
+
 import CampaignInvestmentReport from "./index";
-import renderer from "react-test-renderer";
 import {
   props_baseline,
   props_performance,
@@ -11,24 +12,27 @@ describe("CampaignInvestmentReport", () => {
     Math.random = jest.fn(() => "12345");
   });
 
-  // it("renders baseline report correctly", () => {
-  //   const tree = renderer
-  //     .create(<CampaignInvestmentReport {...props_baseline} />)
-  //     .toJSON();
-  //   expect(tree).toMatchSnapshot();
-  // });
+  it("renders baseline report correctly", () => {
+    let tree = shallow(<CampaignInvestmentReport {...props_baseline} />);
+    expect(tree.debug()).toMatchSnapshot();
 
-  // it("renders performance report correctly", () => {
-  //   const tree = renderer
-  //     .create(<CampaignInvestmentReport {...props_performance} />)
-  //     .toJSON();
-  //   expect(tree).toMatchSnapshot();
-  // });
+    tree = shallow(<CampaignInvestmentReport.HeadlineNumbers {...props_baseline} />);
+    expect(tree.debug()).toMatchSnapshot();
+  });
+
+  it("renders performance report correctly", () => {
+    let tree = shallow(<CampaignInvestmentReport {...props_performance} />);
+    expect(tree.debug()).toMatchSnapshot();
+
+    tree = shallow(<CampaignInvestmentReport.HeadlineNumbers {...props_performance} />);
+    expect(tree.debug()).toMatchSnapshot();
+  });
 
   it("renders negative performance report correctly", () => {
-    const tree = renderer
-      .create(<CampaignInvestmentReport {...props_negative_performance} />)
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+    let tree = shallow(<CampaignInvestmentReport {...props_negative_performance} />);
+    expect(tree.debug()).toMatchSnapshot();
+
+    tree = shallow(<CampaignInvestmentReport.HeadlineNumbers {...props_negative_performance} />);
+    expect(tree.debug()).toMatchSnapshot();
   });
 });

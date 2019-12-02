@@ -1,9 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import "./market_size_growth_reach.scss";
+import { InfoTooltip } from "../rmb_tooltip";
 import Panel from "../panel";
 import { formatNumber, formatPercent } from "../../utils/formatters";
+import "./market_size_growth_reach.scss";
 
 export function MarketSizeGrowthReach({
   market_sizes,
@@ -18,8 +19,14 @@ export function MarketSizeGrowthReach({
           <div className="table__row table__row--head">
             <span>Target Segment</span>
             <span>Est. Market Size</span>
-            <span>Unique Site Visitors</span>
-            <span>Est. Market Growth</span>
+            <span>
+              Unique Site Visitors
+              <InfoTooltip transKey="unique_site_visitors" />
+            </span>
+            <span>
+              Est. Market Growth
+              <InfoTooltip transKey="est_market_growth" />
+            </span>
             <span>Est. {future_year} Market Size</span>
           </div>
           {market_sizes.map((size, index) => (

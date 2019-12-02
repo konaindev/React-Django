@@ -9,6 +9,7 @@ $category-color-4:          $blue-5;
 .rent-to-income-analysis {
     $this: &;
 
+    color: $highlight-gray-3;
     margin: $panel-spacing;
     padding: 70px;
     display: flex;
@@ -45,7 +46,6 @@ $category-color-4:          $blue-5;
         margin: 10px 0;
         font-size: 14px;
         line-height: 16px;
-        color: #6d778d;
         white-space: nowrap;
 
         &-color {
@@ -89,35 +89,39 @@ $category-color-4:          $blue-5;
 
     &-chart {
         position: relative;
-        padding-left: 15px;
-        padding-bottom: 15px;
+        padding-left: 20px;
+        padding-bottom: 20px;
 
-        &__vertical-caption {
+        .chart__caption {
             font-size: 12px;
             letter-spacing: 1px;
-            line-height: 15px;
+            line-height: 20px;
             text-align: right;
             text-transform: uppercase;
-            transform: rotate(-90deg);
-            transform-origin: right top;
-            position: absolute;
-            right: 100%;
-            top: 0;
             white-space: nowrap;
-            color: #6d778d;
-        }
+            color: $gray-6;
+            position: absolute;
 
-        &__horizontal-caption {
-            font-size: 12px;
-            letter-spacing: 1px;
-            line-height: 15px;
-            text-align: right;
-            text-transform: uppercase;
-            position: absolute;
-            right: 0;
-            bottom: 0;
-            white-space: nowrap;
-            color: #6d778d;
+            .rmb-tooltip-anchor {
+                position: absolute;
+                right: -30px;
+            }
+
+            &--horizontal {
+                right: 0;
+                bottom: 0;
+            }
+
+            &--vertical {
+                transform: rotate(-90deg);
+                transform-origin: right top;
+                right: 100%;
+                top: 0;
+
+                .rmb-tooltip-anchor {
+                    transform: rotate(90deg);
+                }
+            }
         }
 
         &__body {
