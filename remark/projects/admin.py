@@ -28,6 +28,7 @@ from .models import (
     TAMExportLog,
     Tag,
     LeaseStage,
+    CountryBenchmark,
 )
 from .export import export_periods_to_csv, export_periods_to_excel
 from .views import TAMExportView
@@ -508,3 +509,26 @@ class LeaseStageAdmin(admin.ModelAdmin):
 @admin.register(Building, site=admin_site)
 class BuildingAdmin(admin.ModelAdmin):
     list_display = ["building_identifier", "property"]
+
+
+@admin.register(CountryBenchmark, site=admin_site)
+class CountryBenchmarkAdmin(admin.ModelAdmin):
+    list_display = [
+        "public_id",
+        "start",
+        "end",
+        "country_id",
+        "category",
+        "kpi",
+        "threshold_0",
+        "threshold_1",
+        "threshold_2",
+        "threshold_3",
+        "property_count_0",
+        "property_count_1",
+        "property_count_2",
+        "property_count_3",
+        "property_count_4",
+        "total_property_count",
+        "last_updated",
+    ]
