@@ -1,6 +1,8 @@
 import { all, call, put, takeEvery } from "redux-saga/effects";
+
 import { networking, token, auth } from "../../redux_base/actions";
-import { axiosGet, axiosPost } from "../api";
+import { axiosGet, axiosPost } from "../../utils/api";
+import { qsStringify } from "../../utils/misc";
 
 /**
  * checkStatus
@@ -61,6 +63,16 @@ function handleError(action) {
       console.log("something was wrong!!!", e);
       const { type, url } = action;
       yield put(networking.fail({ message: e.message, type, url }));
+
+      // The request was made but no response was received
+      if (e.request) {
+        const errorContext = {
+          code: "",
+          title: "Network Error",
+          description: "Service unavailable"
+        };
+        window.location.replace(`/error${qsStringify(errorContext)}`);
+      }
     }
   };
 }
@@ -77,8 +89,8 @@ function* get(action) {
     yield put(networking.results(response.data, action.branch));
     yield put(networking.success());
   } catch (e) {
-    yield put({ type: `${action.baseActionType}_ERROR`, payload: e });
     yield handleError(action)(e);
+    yield put({ type: `${action.baseActionType}_ERROR`, payload: e });
   }
 }
 
@@ -94,8 +106,8 @@ function* post(action) {
     yield put(networking.results(response.data, action.branch));
     yield put(networking.success());
   } catch (e) {
-    yield put({ type: `${action.baseActionType}_ERROR`, payload: e });
     yield handleError(action)(e);
+    yield put({ type: `${action.baseActionType}_ERROR`, payload: e });
   }
 }
 
