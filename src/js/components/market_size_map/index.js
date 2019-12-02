@@ -4,6 +4,7 @@ import GoogleMap from "google-map-react";
 import lodashGet from "lodash/get";
 
 import { convertToMeter } from "../../utils/misc";
+import { Center as IconCenter } from "../../icons";
 import {
   GOOGLE_MAP_API_KEY,
   DEFAULT_ZOOM,
@@ -26,7 +27,8 @@ const RadiusTextRotated = ({ radius, units }) => (
 
 export class MarketSizeMap extends Component {
   state = {
-    isGoogleMapLoaded: false
+    isGoogleMapLoaded: false,
+    initialCenter: null
   };
 
   /**
@@ -40,6 +42,10 @@ export class MarketSizeMap extends Component {
     this.setState({ isGoogleMapLoaded: true }, () => {
       this.renderCircleAndDashedPoints();
       this.renderZipcodePolygons();
+
+      this.setState({
+        initialCenter: this.google.map.getCenter()
+      });
     });
   };
 
@@ -272,6 +278,13 @@ export class MarketSizeMap extends Component {
   };
   // end of map with zipcodes
 
+  // When got too far from the center of the map by dragging, want to return to the center.
+  handleReturnToCenter = () => {
+    if (this.state.initialCenter) {
+      this.google.map.panTo(this.state.initialCenter);
+    }
+  };
+
   render() {
     const { isGoogleMapLoaded } = this.state;
 
@@ -288,6 +301,9 @@ export class MarketSizeMap extends Component {
           {isGoogleMapLoaded && this.renderRadiusMarker()}
           {isGoogleMapLoaded && this.renderZipcodeMarkers()}
         </GoogleMap>
+        <button onClick={this.handleReturnToCenter} className="custom-control">
+          <IconCenter width={20} height={20} />
+        </button>
       </div>
     );
   }
