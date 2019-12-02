@@ -65,13 +65,15 @@ export default class PropertyOverview extends React.PureComponent {
       return;
     }
     const tags = project.custom_tags.map(name => (
-      <Tag name={name} key={name} />
+      <Tag name={name} isAdmin={project.is_admin} key={name} />
     ));
+    let message = "Custom property groups are made for each tag.";
+    if (project.is_admin) {
+      message = "Create custom property groups by adding a tag.";
+    }
     return (
       <div className="property-overview__section property-overview__section--top">
-        <div className="property-overview__section-text">
-          Custom property groups are made for each tag.
-        </div>
+        <div className="property-overview__section-text">{message}</div>
         <div className="property-overview__tags">{tags}</div>
       </div>
     );

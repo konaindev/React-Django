@@ -524,6 +524,11 @@ class Project(models.Model):
             pk=self.admin_group.pk
         ).exists()
 
+    def is_member(self, user):
+        return (self.view_group is not None) and user.groups.filter(
+            pk=self.view_group.pk
+        ).exists()
+
     def user_can_view(self, user):
         if user.is_superuser:
             return True

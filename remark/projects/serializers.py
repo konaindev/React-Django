@@ -28,6 +28,9 @@ class ProjectSerializer(serializers.ModelSerializer):
     asset_manager = serializers.SerializerMethodField()
     property_manager = serializers.SerializerMethodField()
     developer = serializers.SerializerMethodField()
+    # Current user
+    is_admin = serializers.SerializerMethodField()
+    is_member = serializers.SerializerMethodField()
 
     class Meta:
         model = Project
@@ -59,6 +62,8 @@ class ProjectSerializer(serializers.ModelSerializer):
             "is_performance_report_shared",
             "is_modeling_shared",
             "is_campaign_plan_shared",
+            "is_admin",
+            "is_member",
         )
         read_only_fields = (
             "public_id",
@@ -99,6 +104,18 @@ class ProjectSerializer(serializers.ModelSerializer):
         for u in user_item:
             u["is_current"] = True
         return user_item + result
+
+    def get_is_admin(self, obj):
+        current_user = self.context["request"].user
+        if not current_user.is_authenticated:
+            return False
+        return obj.is_admin(current_user)
+
+    def get_is_member(self, obj):
+        current_user = self.context["request"].user
+        if not current_user.is_authenticated:
+            return False
+        return obj.is_member(current_user)
 
     def get_address_str(self, obj):
         return obj.get_address_str()

@@ -27,6 +27,8 @@ $tags-spacing: 20px;
 $tags-padding: 7px 10px;
 $tag-text-color: $highlight-gray-3;
 $tag-close-size: 0.5rem;
+$tag-close-spacing: 10px;
+$tag-close-region-size: 1.125rem;
 
 .property-overview {
     width: 1000px;
@@ -84,7 +86,8 @@ $tag-close-size: 0.5rem;
 }
 
 .property-overview__tag {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     padding: $tags-padding;
     margin: $tags-spacing $tags-spacing 0 0;
     border-radius: $tags-border-radius;
@@ -100,9 +103,18 @@ $tag-close-size: 0.5rem;
 }
 
 .property-overview__tag-close {
+    width: $tag-close-region-size;
+    height: $tag-close-region-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: $tag-close-spacing;
+    cursor: pointer;
+}
+
+.property-overview__tag-close-icon {
     width: $tag-close-size;
     height: $tag-close-size;
-    cursor: pointer;
 }
 
 .property-overview__tiles {

@@ -7,7 +7,11 @@ import Panel from "../panel";
 const Tag = ({ name, isAdmin }) => (
   <Panel className="property-overview__tag">
     <div className="property-overview__tag-name">{name}</div>
-    {isAdmin ? <Close className="property-overview__tag-close" /> : null}
+    {isAdmin ? (
+      <div className="property-overview__tag-close">
+        <Close className="property-overview__tag-close-icon" />
+      </div>
+    ) : null}
   </Panel>
 );
 Tag.propTypes = {
