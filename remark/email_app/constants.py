@@ -5,5 +5,10 @@ SUPPORT_EMAIL = "support@remarkably.io"
 INFO_EMAIL = "info@remarkably.io"
 SALES_EMAIL = "sales@remarkably.io"
 
-# Sendgrid
-SG_CUSTOMER_SUCCESS_SENDER_ID = "623970" # Sender for weekly performance
+"""
+Constants for Sendgrid
+"""
+# Sender for weekly performance
+SG_CUSTOMER_SUCCESS_SENDER_ID = "623970"
+# Sendgrid transforms category to lowercase
+SG_CATEGORY_PERF_REPORT = "property performance report"
