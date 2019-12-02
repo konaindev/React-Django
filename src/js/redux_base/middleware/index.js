@@ -438,7 +438,12 @@ export const login = store => next => action => {
           console.log("BAD LOGIN");
           next(auth.clearToken());
         } else {
-          next(tokenActions.update({ refresh, access: response.data.access }));
+          next(
+            tokenActions.update({
+              refresh: response.data.refresh,
+              access: response.data.access
+            })
+          );
           if (action.redirect_url) {
             window.location.href = action.redirect_url;
           } else {
