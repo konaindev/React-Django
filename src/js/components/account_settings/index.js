@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import EmailReportsContainer from "../../containers/account_settings/email_reports";
 import { Email, Lock, Profile } from "../../icons";
-import LoaderContainer from "../../containers/account_settings/loader";
+import LoaderContainer from "../../containers/loader/index";
 import { accountSettings as actions } from "../../redux_base/actions";
 import AccountSecurity from "./account_security";
 import ProfileTab from "./profile";
@@ -53,7 +53,7 @@ MenuItems.propTypes = {
   selectItem: PropTypes.func.isRequired
 };
 
-class AccountSettings extends React.PureComponent {
+export default class AccountSettings extends React.PureComponent {
   static propTypes = {
     initialItem: PropTypes.oneOf(Object.keys(menuItemsData)),
     user: PropTypes.object,
@@ -108,12 +108,3 @@ class AccountSettings extends React.PureComponent {
     );
   }
 }
-
-const mapState = state => {
-  return {
-    ...state.network,
-    ...state.accountSettings
-  };
-};
-
-export default connect(mapState)(AccountSettings);
