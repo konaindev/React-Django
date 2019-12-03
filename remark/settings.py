@@ -60,7 +60,8 @@ DEBUG_PROPAGATE_EXCEPTIONS = os.getenv("DEBUG_PROPAGATE_EXCEPTIONS", "NO") == "Y
 DEBUG_PRINT_LOGGER = os.getenv("DEBUG_PRINT_LOGGER", "NO") == "YES"
 SECURE_SSL_REDIRECT = os.getenv("SECURE_SSL_REDIRECT", "YES") == "YES"
 
-BASE_URL = os.getenv("BASE_URL", None)
+BASE_URL = required_env("BASE_URL")
+FRONTEND_URL = required_env("FRONTEND_URL")
 
 # Email setup
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "Remarkably <hello@remarkably.io>")

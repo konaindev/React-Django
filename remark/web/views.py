@@ -210,6 +210,9 @@ class TutorialView(APIView):
 
 
 class LocalizationView(APIView):
+
+    authentication_classes = []
+
     def post(self, request):
         localization_form = LocalizationForm(request.data, initial={"language": "en_us"})
         if not localization_form.is_valid():

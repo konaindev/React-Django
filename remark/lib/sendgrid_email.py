@@ -11,6 +11,7 @@ if api_key is None:
 
 sg = sendgrid.SendGridAPIClient(api_key)
 
+
 def process_response(response, msg, ignore_response=False):
     if 200 > response.status_code > 299:
         print(response.body)
@@ -28,6 +29,7 @@ def process_response(response, msg, ignore_response=False):
         raise Exception(f"Invalid JSON Response: `{response.body}`")
     return result
 
+
 def create_recipient(email):
     data = [{ "email": email }]
     response = sg.client.contactdb.recipients.post(request_body=data)
@@ -41,6 +43,7 @@ def create_recipient(email):
 
     return result["persisted_recipients"][0]
 
+
 def create_contact_if_not_exists(email):
     params = {'email': email}
     response = sg.client.contactdb.recipients.search.get(query_params=params)
@@ -51,6 +54,7 @@ def create_contact_if_not_exists(email):
     else:
         return result["recipients"][0]["id"]
 
+
 def find_list(list_name):
     response = sg.client.contactdb.lists.get()
     result = process_response(response, "Could not get lists")
@@ -59,11 +63,13 @@ def find_list(list_name):
             return item["id"]
     return None
 
+
 def create_list(list_name):
     data = { "name": list_name }
     response = sg.client.contactdb.lists.post(request_body=data)
     result = process_response(response, "Could not create list")
     return result["id"]
+
 
 def get_recipients_on_list(list_id, page=1, page_size=10):
     params = {'page': page, 'page_size': page_size}
@@ -76,11 +82,13 @@ def get_recipients_on_list(list_id, page=1, page_size=10):
     recipients = result["recipients"] + recipients
     return recipients
 
+
 def delete_recipient_from_list(list_id, recipient_id):
     params = {'recipient_id': recipient_id, 'list_id': list_id}
     response = sg.client.contactdb.lists._(list_id).recipients._(recipient_id).delete(query_params=params)
     result = process_response(response, "Could not delete recipient")
     return result
+
 
 def add_recipient_to_list(list_id, recipient_id):
     try:
@@ -90,6 +98,7 @@ def add_recipient_to_list(list_id, recipient_id):
 
     result = process_response(response, "Could not add recipient to list", ignore_response=True)
     return result
+
 
 def create_contact_list_if_not_exists(list_name, list_id, contact_ids):
     # Still need to check if the list name exists
@@ -110,6 +119,7 @@ def create_contact_list_if_not_exists(list_name, list_id, contact_ids):
 
     return list_id
 
+
 def create_campaign(title, subject, sender_id, list_id, categories, html_content):
     data = {
         "categories": categories,
@@ -124,6 +134,7 @@ def create_campaign(title, subject, sender_id, list_id, categories, html_content
     response = sg.client.campaigns.post(request_body=data)
     result = process_response(response, "Could not create campaign")
     return result["id"]
+
 
 def update_campaign(campaign_id, title, subject, sender_id, list_id, categories, html_content):
     data = {
@@ -140,6 +151,7 @@ def update_campaign(campaign_id, title, subject, sender_id, list_id, categories,
     result = process_response(response, "Could not update campaign")
     return result["id"]
 
+
 def create_campaign_if_not_exists(campaign_id, title, subject, sender_id, list_id, categories, html_content):
     if campaign_id is None:
         return create_campaign(title, subject, sender_id, list_id, categories, html_content)
@@ -147,6 +159,7 @@ def create_campaign_if_not_exists(campaign_id, title, subject, sender_id, list_i
 
 
 def send_email(from_email, reply_to, to_emails, subject, html_content):
+    print("sending message")
     message = Mail(
         from_email=from_email,
         to_emails=to_emails,
@@ -155,3 +168,4 @@ def send_email(from_email, reply_to, to_emails, subject, html_content):
     )
     message.reply_to = reply_to
     sg.send(message)
+    print("message should be sent")
