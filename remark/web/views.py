@@ -213,8 +213,8 @@ class LocalizationView(APIView):
 
     authentication_classes = []
 
-    def post(self, request):
-        params = json.loads(request.body)
+    def get(self, request):
+        params = request.query_params
         localization_form = LocalizationForm(params, initial={"language": "en_us"})
         if not localization_form.is_valid():
             errors = localization_form.errors.get_json_data()
