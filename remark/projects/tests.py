@@ -25,7 +25,7 @@ from .models import Building, Fund, LeaseStage, Period, Project, Property, Targe
 from .reports.periods import ComputedPeriod
 from .reports.performance import PerformanceReport
 from .export import export_periods_to_csv, export_periods_to_excel
-from remark.settings import BASE_URL
+from remark.settings import BASE_URL, FRONTEND_URL
 
 
 def create_project(project_name="project 1"):
@@ -744,11 +744,11 @@ class GetTemplateVarsTestCase(TestCase):
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 1",
                     "address": "Seattle, WA",
-                    "view_link": f"{BASE_URL}/projects/{self.project.public_id}/market/",
+                    "view_link": f"{FRONTEND_URL}/projects/{self.project.public_id}/market/",
                 }
             ],
             "more_count": None,
-            "main_button_link": f"{BASE_URL}/users/create-password/{self.new_user.public_id}",
+            "main_button_link": f"{FRONTEND_URL}/users/create-password/{self.new_user.public_id}",
             "main_button_label": "Create Account",
         }
         self.assertEqual(expected, template_vars)
@@ -767,17 +767,17 @@ class GetTemplateVarsTestCase(TestCase):
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 1",
                     "address": "Seattle, WA",
-                    "view_link": f"{BASE_URL}/projects/{self.projects[0].public_id}/market/",
+                    "view_link": f"{FRONTEND_URL}/projects/{self.projects[0].public_id}/market/",
                 },
                 {
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 2",
                     "address": "Seattle, WA",
-                    "view_link": f"{BASE_URL}/projects/{self.projects[1].public_id}/market/",
+                    "view_link": f"{FRONTEND_URL}/projects/{self.projects[1].public_id}/market/",
                 },
             ],
             "more_count": None,
-            "main_button_link": f"{BASE_URL}/users/create-password/{self.new_user.public_id}",
+            "main_button_link": f"{FRONTEND_URL}/users/create-password/{self.new_user.public_id}",
             "main_button_label": "Create Account",
         }
         self.assertEqual(expected, template_vars)
@@ -796,11 +796,11 @@ class GetTemplateVarsTestCase(TestCase):
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 1",
                     "address": "Seattle, WA",
-                    "view_link": f"{BASE_URL}/projects/{self.project.public_id}/market/",
+                    "view_link": f"{FRONTEND_URL}/projects/{self.project.public_id}/market/",
                 }
             ],
             "more_count": None,
-            "main_button_link": f"{BASE_URL}/projects/{self.project.public_id}/market/",
+            "main_button_link": f"{FRONTEND_URL}/projects/{self.project.public_id}/market/",
             "main_button_label": "View Property",
         }
         self.assertEqual(expected, template_vars)
@@ -819,17 +819,17 @@ class GetTemplateVarsTestCase(TestCase):
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 1",
                     "address": "Seattle, WA",
-                    "view_link": f"{BASE_URL}/projects/{self.projects[0].public_id}/market/",
+                    "view_link": f"{FRONTEND_URL}/projects/{self.projects[0].public_id}/market/",
                 },
                 {
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 2",
                     "address": "Seattle, WA",
-                    "view_link": f"{BASE_URL}/projects/{self.projects[1].public_id}/market/",
+                    "view_link": f"{FRONTEND_URL}/projects/{self.projects[1].public_id}/market/",
                 },
             ],
             "more_count": None,
-            "main_button_link": f"{BASE_URL}/dashboard",
+            "main_button_link": f"{FRONTEND_URL}/dashboard",
             "main_button_label": "View All Properties",
         }
         self.maxDiff = None
