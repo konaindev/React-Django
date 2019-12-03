@@ -1,6 +1,7 @@
-import { createActions, URLS } from "./helpers";
+import { createActions, URLS, createAPIUrl } from "./helpers";
 
 export * from "./helpers";
+export { default as accountSettings } from "./account_settings";
 export { default as dashboard } from "./dashboard";
 export { default as portfolio } from "./portfolio";
 export { default as projectReports } from "./project_reports";
@@ -14,13 +15,13 @@ export const tutorial = {
   }),
   get: args => ({
     type: "FETCH_API_GET",
-    url: `${URLS.base}${URLS.ver}${URLS.tutorial}`,
+    url: createAPIUrl(URLS.tutorial),
     branch: "tutorial",
     ...args
   }),
   post: args => ({
     type: "FETCH_API_POST",
-    url: `${URLS.base}${URLS.ver}${URLS.tutorial}`,
+    url: createAPIUrl(URLS.tutorial),
     branch: "tutorial",
     ...args
   })
@@ -67,6 +68,10 @@ export const createPassword = {
   redirect: url => ({
     type: "CREATE_PASSWORD_REDIRECT",
     url
+  }),
+  getRules: newState => ({
+    type: "CREATE_PASSWORD_FETCH_RULES",
+    newState
   })
 };
 
@@ -110,11 +115,10 @@ export const pageMeta = {
 // api actions...
 
 export const auth = {
-  login: ({ email, password }) => ({
-    type: "FETCH_API_POST",
+  login: ({ email, password, redirect_url }) => ({
+    type: "LOGIN",
     body: { email, password },
-    branch: "token",
-    url: `${URLS.base}${URLS.ver}${URLS.login}`
+    redirect_url: redirect_url
   }),
   logout: () => ({
     type: "LOGOUT"
@@ -156,21 +160,6 @@ export const uiStrings = {
   }),
   set: data => ({
     type: "UI_STRINGS_SET_STATE",
-    data
-  })
-};
-
-export const accountSettings = {
-  getProperties: data => ({
-    type: "API_ACCOUNT_REPORT_PROPERTIES",
-    data
-  }),
-  set: data => ({
-    type: "SET_ACCOUNT_REPORTS_PROPERTIES",
-    data
-  }),
-  clear: data => ({
-    type: "CLEAR_ACCOUNT_REPORTS_PROPERTIES",
     data
   })
 };

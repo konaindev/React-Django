@@ -1,27 +1,29 @@
-import AcquisitionFunnelReport from "./index";
-import renderer from "react-test-renderer";
+import { shallow } from "enzyme";
 
-import {
-  props_baseline,
-  props_performance
-} from "./props";
+import AcquisitionFunnelReport from "./index";
+
+import { props_baseline, props_performance } from "./props";
 
 describe("AcquisitionFunnelReport", () => {
-  beforeEach(() => {
-    Math.random = jest.fn(() => "12345");
-  });
-
   it("renders baseline report correctly", () => {
-    const tree = renderer
-      .create(<AcquisitionFunnelReport {...props_baseline} />)
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+    let tree = shallow(<AcquisitionFunnelReport {...props_baseline} />);
+    expect(tree.debug()).toMatchSnapshot();
+
+    tree = shallow(<AcquisitionFunnelReport.HeadlineNumbers {...props_baseline} />);
+    expect(tree.debug()).toMatchSnapshot();
+
+    tree = shallow(<AcquisitionFunnelReport.FunnelContent {...props_baseline} />);
+    expect(tree.debug()).toMatchSnapshot();
   });
 
   it("renders performance report correctly", () => {
-    const tree = renderer
-      .create(<AcquisitionFunnelReport {...props_performance} />)
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+    let tree = shallow(<AcquisitionFunnelReport {...props_performance} />);
+    expect(tree.debug()).toMatchSnapshot();
+
+    tree = shallow(<AcquisitionFunnelReport.HeadlineNumbers {...props_performance} />);
+    expect(tree.debug()).toMatchSnapshot();
+
+    tree = shallow(<AcquisitionFunnelReport.FunnelContent {...props_performance} />);
+    expect(tree.debug()).toMatchSnapshot();
   });
 });

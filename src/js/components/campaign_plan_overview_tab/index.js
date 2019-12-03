@@ -4,9 +4,11 @@ import ReactMarkdown from "react-markdown";
 import cx from "classnames";
 import _get from "lodash/get";
 
+import { InfoTooltip } from "../rmb_tooltip";
 import "./campaign_plan_overview_tab.scss";
 import Panel from "../panel";
 import { formatCurrency } from "../../utils/formatters.js";
+import { convertToSnakeCase } from "../../utils/misc.js";
 
 export function CampaignPlanOverviewTab({
   target_segments,
@@ -97,10 +99,15 @@ export default CampaignPlanOverviewTab;
 export function CampaignOverviewSegments({ segments, className }) {
   return (
     <div className={cx("target-segments", className)}>
-      {segments.map(segment => (
-        <div key={segment.ordinal} className="target-segment-item">
-          <p>{segment.ordinal}</p>
-          <p>{segment.description}</p>
+      {segments.map(({ ordinal, description }) => (
+        <div key={ordinal} className="target-segment-item">
+          <p>
+            {ordinal}
+            <InfoTooltip
+              transKey={`target_segments_${(ordinal || "").toLowerCase()}`}
+            />
+          </p>
+          <p>{description}</p>
         </div>
       ))}
     </div>
@@ -112,7 +119,12 @@ export function CampaignOverviewObjectives({ objectives, className }) {
     <div className={cx("objectives-markdown", className)}>
       {objectives.map((obj, index) => (
         <div className="objective-item" key={index}>
-          <h1>{obj.title}</h1>
+          <h1>
+            {obj.title}
+            <InfoTooltip
+              transKey={`acquisition_${convertToSnakeCase(obj.title)}`}
+            />
+          </h1>
           <ReactMarkdown
             source={obj.description}
             className="markdown-content"

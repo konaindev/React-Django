@@ -1,22 +1,23 @@
 import { axiosGet, axiosPost } from "../utils/api";
 import { qsStringify } from "../utils/misc";
+import { API_URL_PREFIX } from "../redux_base/actions/helpers";
 
 export const updateSecurityData = data =>
-  axiosPost(`${process.env.BASE_URL}/users/account-security`, data);
+  axiosPost(`${API_URL_PREFIX}/account-security`, data);
 
 export const updateProfileData = data =>
-  axiosPost(`${process.env.BASE_URL}/users/account-profile`, data);
+  axiosPost(`${API_URL_PREFIX}/account-profile`, data);
 
 export const updateReportsSettingsData = data =>
-  axiosPost(`${process.env.BASE_URL}/users/account-reports`, data);
+  axiosPost(`${API_URL_PREFIX}/account-reports`, data);
 
 export const validateAddress = data =>
-  axiosPost(`${process.env.BASE_URL}/users/validate-address`, data);
+  axiosPost(`${API_URL_PREFIX}/validate-address`, data);
 
 export const getPropertiesData = data => {
   let q = "";
   if (data) {
     q = qsStringify(data);
   }
-  return axiosGet(`${process.env.BASE_URL}/users/account-reports${q}`);
+  return axiosGet(`${API_URL_PREFIX}/account-reports${q}`);
 };

@@ -93,5 +93,6 @@ export const props = {
   initialTab,
   office_countries,
   us_state_list,
-  gb_county_list
+  gb_county_list,
+  dispatch: () => {}
 };

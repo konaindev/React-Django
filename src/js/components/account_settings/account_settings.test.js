@@ -22,6 +22,8 @@ const _ = x =>
     }
   }));
 
+function noop() {}
+
 describe("AccountSettings", () => {
   it("account security tab", () => {
     const tree = renderer
@@ -58,6 +60,7 @@ describe("AccountSettings", () => {
               portfolioProperties={portfolio}
               groupsProperties={groups}
               properties={properties}
+              dispatch={noop}
             />
           </MemoryRouter>
         </Provider>
@@ -76,6 +79,7 @@ describe("AccountSettings", () => {
               portfolioProperties={portfolio}
               groupsProperties={groups}
               properties={properties}
+              dispatch={noop}
             />
           </MemoryRouter>
         </Provider>
@@ -94,6 +98,7 @@ describe("AccountSettings", () => {
               portfolioProperties={portfolio}
               groupsProperties={groups}
               properties={properties.slice(0, 5)}
+              dispatch={noop}
             />
           </MemoryRouter>
         </Provider>

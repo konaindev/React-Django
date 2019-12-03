@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 
 import ProjectReportPage from "../../components/project_report_page";
 import { projectReports as actions } from "../../redux_base/actions";
+import renderWrapper from "../shared/base_container";
 
 class ProjectReportsContainer extends PureComponent {
   state = {
@@ -50,7 +51,7 @@ class ProjectReportsContainer extends PureComponent {
     const { reportType, reportSpan } = this.state;
     const { fetchingReports, project, report, share_info } = this.props;
 
-    return (
+    return renderWrapper(
       <ProjectReportPage
         share_info={share_info}
         project={project}

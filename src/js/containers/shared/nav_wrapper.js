@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import PageChrome from "../../components/page_chrome";
 import UserMenu from "../../components/user_menu";
 
-class NavGate extends React.PureComponent {
+class NavWrapper extends React.PureComponent {
   render() {
     const { navLinks, children } = this.props;
     return (
@@ -26,8 +26,8 @@ const mapState = state => {
   return {
     navLinks: state.nav.navLinks,
     // note: this is ugly and should go...
-    user: state.user || state.dashboard.user
+    user: state.dashboard.user || state.user
   };
 };
 
-export default withRouter(connect(mapState)(NavGate));
+export default withRouter(connect(mapState)(NavWrapper));

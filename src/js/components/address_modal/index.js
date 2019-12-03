@@ -4,9 +4,9 @@ import { connect } from "react-redux";
 import cx from "classnames";
 import _get from "lodash/get";
 
+import { addressModal } from "../../redux_base/actions";
 import Button from "../button";
 import ModalWindow from "../modal_window";
-import { addressModal } from "../../state/actions";
 
 import "./address_modal.scss";
 
@@ -14,7 +14,6 @@ class AddressModal extends React.PureComponent {
   static propTypes = {
     title: PropTypes.string,
     isOpen: PropTypes.bool,
-    onClose: PropTypes.func,
     onFinish: PropTypes.func,
     callback: PropTypes.func,
     onError: PropTypes.func,
@@ -25,7 +24,6 @@ class AddressModal extends React.PureComponent {
 
   static defaultProps = {
     isOpen: false,
-    onClose: () => {},
     onFinish: () => {},
     updateValues: () => {},
     callback: () => {},

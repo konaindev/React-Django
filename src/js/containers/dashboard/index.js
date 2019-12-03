@@ -4,6 +4,7 @@ import { withRouter } from "react-router-dom";
 
 import DashboardPage from "../../components/dashboard_page";
 import { dashboard } from "../../redux_base/actions";
+import renderWrapper from "../shared/base_container";
 
 class DashboardContainer extends PureComponent {
   componentDidMount() {
@@ -14,10 +15,9 @@ class DashboardContainer extends PureComponent {
   }
 
   render() {
-    return <DashboardPage {...this.props} />;
+    return renderWrapper(<DashboardPage {...this.props} />);
   }
 }
 
 const mapState = ({ dashboard }) => ({ ...dashboard });
-
 export default withRouter(connect(mapState)(DashboardContainer));

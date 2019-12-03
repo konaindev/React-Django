@@ -15,9 +15,9 @@ import Checkbox from "../checkbox";
 import MultiSelect from "../multi_select";
 import { validateAddress } from "../../api/account_settings";
 import AddressModal from "../address_modal";
-import { addressModal } from "../../state/actions";
+import { addressModal } from "../../redux_base/actions";
 import GoogleAddress from "../google_address";
-import LoaderContainer from "../../containers/account_settings/loader";
+import LoaderContainer from "../../containers/loader";
 import router from "../../router";
 
 import { propertySchema } from "./validators";

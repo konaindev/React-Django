@@ -22,9 +22,6 @@ export function axiosPost(url, data, headers = {}) {
   if (data.toString() === "[object FormData]") {
     config.headers["content-type"] = "multipart/form-data";
   }
-  // if (csrfProtect) {
-  //   config.headers["X-CSRFToken"] = getCSRFToken();
-  // }
   return axios(config);
 }
 export function axiosGet(url, config = { validateStatus }) {

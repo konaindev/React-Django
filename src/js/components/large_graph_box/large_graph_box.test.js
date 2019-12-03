@@ -1,4 +1,4 @@
-import renderer from "react-test-renderer";
+import { shallow } from "enzyme";
 import { CurrencyShorthandGraphBox, PercentageGraphBox } from "./index";
 
 describe("LargeGraphBox", () => {
@@ -9,13 +9,15 @@ describe("LargeGraphBox", () => {
   it("renders PercentageGraphBox correctly", () => {
     const props = {
       name: "USV > EXE",
+      infoTooltip: "usv_to_exe",
       value: 0.1,
       target: 0.13,
       delta: 0.03,
       series: [10, 20, 30, 15]
     };
-    const tree = renderer.create(<PercentageGraphBox {...props} />).toJSON();
-    expect(tree).toMatchSnapshot();
+
+    const tree = shallow(<PercentageGraphBox {...props} />);
+    expect(tree.debug()).toMatchSnapshot();
   });
 
   it("renders PercentageGraphBox correctly with null target value", () => {
@@ -26,8 +28,8 @@ describe("LargeGraphBox", () => {
       delta: 0.03,
       series: [10, 20, 30, 15]
     };
-    const tree = renderer.create(<PercentageGraphBox {...props} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const tree = shallow(<PercentageGraphBox {...props} />);
+    expect(tree.debug()).toMatchSnapshot();
   });
 
   it("renders PercentageGraphBox correctly with undefined target value", () => {
@@ -37,8 +39,8 @@ describe("LargeGraphBox", () => {
       delta: 0.03,
       series: [10, 20, 30, 15]
     };
-    const tree = renderer.create(<PercentageGraphBox {...props} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const tree = shallow(<PercentageGraphBox {...props} />);
+    expect(tree.debug()).toMatchSnapshot();
   });
 
   it("renders PercentageGraphBox with extra content correctly", () => {
@@ -50,8 +52,8 @@ describe("LargeGraphBox", () => {
       extraContent: "227 Executed Leases (Out of 260)",
       series: [10, 20, 30, 15]
     };
-    const tree = renderer.create(<PercentageGraphBox {...props} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const tree = shallow(<PercentageGraphBox {...props} />);
+    expect(tree.debug()).toMatchSnapshot();
   });
 
   it("renders CurrencyShorthandGraphBox correctly", () => {
@@ -63,8 +65,8 @@ describe("LargeGraphBox", () => {
       series: [10, 20, 30, 15]
     };
 
-    const tree = renderer.create(<CurrencyShorthandGraphBox {...props} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const tree = shallow(<CurrencyShorthandGraphBox {...props} />);
+    expect(tree.debug()).toMatchSnapshot();
   });
 
   it("renders CurrencyShorthandGraphBox with extra content correctly", () => {
@@ -76,7 +78,7 @@ describe("LargeGraphBox", () => {
       extraContent: "227 Executed Leases (Out of 260)",
       series: [10, 20, 30, 15]
     };
-    const tree = renderer.create(<CurrencyShorthandGraphBox {...props} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const tree = shallow(<CurrencyShorthandGraphBox {...props} />);
+    expect(tree.debug()).toMatchSnapshot();
   });
 });

@@ -275,6 +275,29 @@ const uiStrings = (
   return newState;
 };
 
+const addressModal = (state = {}, action) => {
+  let newState = {};
+  switch (action.type) {
+    case "ADDRESS_MODAL_SHOW": {
+      newState = {
+        ...state,
+        isOpen: true,
+        data: action.data,
+        addresses: action.addresses
+      };
+      break;
+    }
+    case "ADDRESS_MODAL_HIDE": {
+      newState = { ...state, isOpen: false };
+      break;
+    }
+    default: {
+      newState = { ...state };
+    }
+  }
+  return newState;
+};
+
 export default combineReducers({
   network,
   uiStrings,
@@ -298,5 +321,6 @@ export default combineReducers({
   market,
   kpi,
   accountSettings,
-  viewMembersModal
+  viewMembersModal,
+  addressModal
 });

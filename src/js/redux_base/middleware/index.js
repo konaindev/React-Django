@@ -9,7 +9,9 @@ import {
   locations,
   market,
   kpi,
-  token as tokenActions
+  token as tokenActions,
+  networking,
+  createFEUrl
 } from "../actions";
 import {
   getPropertiesData,
@@ -17,7 +19,7 @@ import {
   updateReportsSettingsData,
   updateSecurityData
 } from "../../api/account_settings";
-import { API_URL_PREFIX, URLS } from "../actions/helpers";
+import { API_URL_PREFIX, URLS, createAPIUrl } from "../actions/helpers";
 import { axiosGet, axiosPost } from "../../utils/api";
 import ReactGa from "react-ga";
 
@@ -41,7 +43,7 @@ export const fetchDashboard = store => next => action => {
     if (!isFetching || isFetching === false) {
       store.dispatch(networking.startFetching());
     }
-    axiosGet(`${process.env.BASE_URL}/dashboard${action.queryString}`)
+    axiosGet(`${URLS.base}/dashboard${action.queryString}`)
       .then(response => next(general.set(response.data)))
       .then(setTimeout(() => next(networking.stopFetching()), 120))
       .catch(e => {
@@ -55,7 +57,7 @@ export const fetchDashboard = store => next => action => {
 
 export const fetchTutorial = store => next => action => {
   if (action.type === "API_TUTORIAL") {
-    const url = `${process.env.BASE_URL}/tutorial`;
+    const url = `${URLS.base}/tutorial`;
     if (action.data) {
       axiosPost(url, action.data)
         .then(response => {
@@ -77,20 +79,23 @@ export const fetchTutorial = store => next => action => {
 export const fetchCreatePassword = store => next => action => {
   if (action.type === "API_CREATE_PASSWORD") {
     const hash = action.hash;
-    const url = `${process.env.BASE_URL}/users/create-password/${hash}`;
+    const url = createAPIUrl(`/users/create-password/`);
     if (action.data) {
+      action.data.user_id = hash;
       axiosPost(url, action.data)
         .then(response => {
           if (response.status === 200) {
-            const redirectUrl = response.data.redirect_url || "/";
-            next(createPassword.redirect(redirectUrl));
+            const email = response.data.email;
+            const password = action.data.password;
+            const completeAccountUrl = createFEUrl("/complete-account");
+            next(auth.login({ email, password, completeAccountUrl }));
           } else {
             throw response;
           }
         })
         .catch(e => console.log("-----> ERROR", e));
     } else {
-      const url = `${process.env.BASE_URL}/create-password/${hash}"`;
+      const url = createAPIUrl(`/create-password/`);
       axiosGet(url)
         .then(response => {
           next(createPassword.set(response.data));
@@ -102,10 +107,23 @@ export const fetchCreatePassword = store => next => action => {
   }
 };
 
+export const fetchPasswordRules = store => next => action => {
+  if (action.type == "CREATE_PASSWORD_FETCH_RULES") {
+    axiosGet(createAPIUrl("/users/password-rules/"))
+      .then(response => {
+        const rules = response.data?.rules || [];
+        next(createPassword.set({ rules }));
+      })
+      .catch(e => console.log("-----> ERROR", e));
+  } else {
+    next(action);
+  }
+};
+
 export const fetchCompany = store => next => action => {
   switch (action.type) {
     case "API_COMPANY_ADDRESS": {
-      const url = `${process.env.BASE_URL}/crm/office-address/`;
+      const url = `${API_URL_PREFIX}/crm/office-address/`;
       axiosPost(url, action.data)
         .then(response => {
           const companyAddresses = response.data?.addresses || [];
@@ -119,7 +137,7 @@ export const fetchCompany = store => next => action => {
       break;
     }
     case "API_COMPANY_SEARCH": {
-      const url = `${process.env.BASE_URL}/crm/company-search/`;
+      const url = `${API_URL_PREFIX}/crm/company-search/`;
       axiosPost(url, action.data)
         .then(response => {
           action.callback(response.data?.company || []);
@@ -134,7 +152,7 @@ export const fetchCompany = store => next => action => {
 
 export const fetchCompleteAccount = store => next => action => {
   if (action.type === "API_COMPLETE_ACCOUNT") {
-    const url = `${process.env.BASE_URL}/users/complete-account/`;
+    const url = `${URLS.base}/users/complete-account/`;
     if (action.data) {
       startFetchingState(store);
       axiosPost(url, action.data)
@@ -236,7 +254,7 @@ export const logoutMiddleware = store => next => action => {
 
 export const fetchInviteModal = store => next => action => {
   if (action.type === "API_INVITE_MODAL_GET_USERS") {
-    const url = `${API_URL_PREFIX}/search-members/`;
+    const url = createAPIUrl(`/search-members/`);
     axiosPost(url, action.data)
       .then(response => {
         const members = response.data?.members || [];
@@ -245,7 +263,7 @@ export const fetchInviteModal = store => next => action => {
       .catch(e => console.log("-----> ERROR", e));
   } else if (action.type === "AJAX_DASHBOARD_REMOVE_MEMBER") {
     const projectsId = action.data.project.property_id;
-    const url = `${API_URL_PREFIX}/projects/${projectsId}/remove-member/`;
+    const url = createAPIUrl(`/projects/${projectsId}/remove-member/`);
     axiosPost(url, action.data)
       .then(response => {
         const property = response.data.project;
@@ -253,7 +271,7 @@ export const fetchInviteModal = store => next => action => {
       })
       .catch(e => console.log("-----> ERROR", e));
   } else if (action.type === "API_INVITE_RESEND") {
-    const url = `${API_URL_PREFIX}/users/${action.hash}/resend-invite/`;
+    const url = createAPIUrl(`/users/${action.hash}/resend-invite/`);
     axiosGet(url)
       .then(response => {
         if (response.status === 200) {
@@ -266,7 +284,7 @@ export const fetchInviteModal = store => next => action => {
   } else if (action.type === "API_INVITE_MODAL_CHANGE_ROLE") {
     const { role, property_id, member_id } = action.data;
     const data = { role };
-    const url = `${API_URL_PREFIX}/projects/${property_id}/member/${member_id}/`;
+    const url = createAPIUrl(`/projects/${property_id}/member/${member_id}/`);
     axiosPost(url, data).then(response => {
       if (response.status === 200) {
         next({
@@ -287,11 +305,11 @@ export const fetchInviteModal = store => next => action => {
 
 export const fetchUIString = store => next => action => {
   if (action.type === "API_UI_STRINGS") {
-    const url = `${URLS.base}${URLS.ver}/localization`;
+    const url = createAPIUrl(`/localization`);
     axiosPost(url, action.data)
       .then(response => {
         if (response.status === 200) {
-          next(uiStrings.set(response.data.data));
+          next(uiStrings.set(response.data));
         } else if (response.status === 208) {
           next(action);
         } else {
@@ -404,6 +422,37 @@ export const refreshToken = store => next => action => {
           // there might be mutiple simulataneous calls which resulted 401
           // better to reload the page
           window.location.reload();
+        }
+      })
+      .catch(e => console.log("REFRESH TOKEN ERROR", e));
+  } else {
+    next(action);
+  }
+};
+
+export const login = store => next => action => {
+  if (action.type == "LOGIN") {
+    const apiUrl = createAPIUrl(URLS.login);
+    axiosPost(apiUrl, action.body)
+      .then(response => {
+        console.log("LOGIN RESPONSE");
+        console.log(response.status);
+        if (response.status == 401) {
+          console.log("BAD LOGIN");
+          next(auth.clearToken());
+        } else {
+          next(
+            tokenActions.update({
+              refresh: response.data.refresh,
+              access: response.data.access
+            })
+          );
+          console.log(`redirect url: ${action.redirect_url}`);
+          if (action.redirect_url) {
+            window.location.href = action.redirect_url;
+          } else {
+            window.location.reload();
+          }
         }
       })
       .catch(e => console.log("REFRESH TOKEN ERROR", e));

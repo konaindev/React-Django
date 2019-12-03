@@ -60,7 +60,8 @@ DEBUG_PROPAGATE_EXCEPTIONS = os.getenv("DEBUG_PROPAGATE_EXCEPTIONS", "NO") == "Y
 DEBUG_PRINT_LOGGER = os.getenv("DEBUG_PRINT_LOGGER", "NO") == "YES"
 SECURE_SSL_REDIRECT = os.getenv("SECURE_SSL_REDIRECT", "YES") == "YES"
 
-BASE_URL = os.getenv("BASE_URL", None)
+BASE_URL = required_env("BASE_URL")
+FRONTEND_URL = required_env("FRONTEND_URL")
 
 # Email setup
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "Remarkably <hello@remarkably.io>")
@@ -205,9 +206,6 @@ LOGGING = {
 }
 DEBUG_PRINT_LOGGER = True
 
-# Change 'default' database configuration with $DATABASE_URL.
-DATABASES["default"].update(dj_database_url.config(conn_max_age=500))
-
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
@@ -315,7 +313,13 @@ MJML_CHECK_CMD_ON_STARTUP = False
 
 # Activate Django-Heroku. Don't modify the DATABASES variable if we're in debug;
 # otherwise, modify it to match Heroku's needs (including forcing it to be SSL.)
+
 django_heroku.settings(locals(), staticfiles=True, databases=not DEBUG)
+
+# override DATABASE_URL set by django_heroku because it forces SSL mode locally
+ssl_require = ENV == PROD
+locals()['DATABASES']['default'] = dj_database_url.config(
+    conn_max_age=django_heroku.MAX_CONN_AGE, ssl_require=ssl_require)
 
 # Configure Sentry -jc 11-jul-19
 
@@ -341,3 +345,5 @@ SIMPLE_JWT = {
 
 # CORS Headers plugin settings
 CORS_ORIGIN_ALLOW_ALL = True
+
+FILE_UPLOAD_MAX_MEMORY_SIZE = 3 * 1024 * 1024  # Allow 3MB file size

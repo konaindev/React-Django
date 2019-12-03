@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import React from "react";
 
 import { Tick } from "../../icons";
-import { accountSettings } from "../../state/actions";
+import { accountSettings } from "../../redux_base/actions";
 
 import Button from "../button";
 import ButtonToggle, { STATE_ENUM as TOGGLE_STATE } from "../button_toggle";

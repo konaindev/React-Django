@@ -3,12 +3,12 @@
 // TODO FIXME use the contents of variables.scss for colors etc.
 
 .segment-overview-by-age {
-    padding: 40px 60px;
+    padding: 36px 60px 40px 60px;
     margin: $panel-spacing;
 }
 
 .segment-overview-by-age__heading {
-    padding-bottom: 40px;
+    padding-bottom: 36px;
     color: #ffffff;
     border-bottom: 1px solid #2c3646;
     display: flex;
@@ -18,10 +18,18 @@
 
 .segment-overview-by-age__heading-left {
     font-size: 1rem;
+    line-height: $line-height-relaxed;
 }
 
 .segment-overview-by-age__heading-right {
     font-size: 0.875rem;
+    line-height: $line-height-normal;
+    position: relative;
+
+    .rmb-tooltip-anchor {
+        position: absolute;
+        right: -30px;
+    }
 }
 
 .segment-overview-by-age__total-pop {

@@ -15,7 +15,7 @@ from django.utils.http import urlsafe_base64_decode
 
 from rest_framework import exceptions, generics, mixins, status, viewsets
 from rest_framework.views import APIView
-from rest_framework.permissions import BasePermission, IsAuthenticated
+from rest_framework.permissions import BasePermission, IsAuthenticated, SAFE_METHODS, AllowAny
 from rest_framework.response import Response
 
 from remark.crm.models import Business, Office, Person
@@ -36,6 +36,16 @@ from .models import User
 
 INTERNAL_RESET_URL_TOKEN = 'set-password'
 INTERNAL_RESET_SESSION_TOKEN = '_password_reset_token'
+
+
+class GetIsAnonEverythingElseAuthenticated(BasePermission):
+    def has_permission(self, request, view):
+        print("permission")
+        print("method:", request.method)
+        print("user is auth:", request.user.is_authenticated)
+        if request.method == "GET":
+            return True
+        return request.user.is_authenticated
 
 
 class CompleteAccountView(APIView):
@@ -108,7 +118,10 @@ class CreatePasswordView(APIView):
     @param password
     """
 
+    authentication_classes = []
+
     def post(self, request):
+        print("CreatePasswordView::post top")
         if not request.user.is_anonymous:
             raise exceptions.APIException
 
@@ -116,19 +129,22 @@ class CreatePasswordView(APIView):
         user_id = params["user_id"]
         password = params["password"]
 
+        print("CreatePasswordView::post 1")
         try:
             user = User.objects.get(public_id=user_id)
         except User.DoesNotExist:
             raise exceptions.APIException
 
+        print("CreatePasswordView::post 2")
         if user.activated:
-            raise exceptions.APIException
+            raise exceptions.APIException(detail="Invalid action")
         if user.invited:
             date_now = datetime.datetime.now(timezone.utc)
             delta = date_now - user.invited
             if delta.days > INVITATION_EXP:
                 raise exceptions.APIException(detail="Invitation Expired")
 
+        print("CreatePasswordView::post 3")
         try:
             password_validation.validate_password(password, user=user)
         except ValidationError as e:
@@ -139,7 +155,9 @@ class CreatePasswordView(APIView):
         user.is_active = True
         user.save()
 
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        print("CreatePasswordView::post bottom")
+
+        return Response({"email": user.email}, status=status.HTTP_204_NO_CONTENT)
 
 
 class PasswordRulesView(APIView):
@@ -149,6 +167,8 @@ class PasswordRulesView(APIView):
     @param user_id
     @param password
     """
+
+    authentication_classes = []
 
     def get(self, request):
         validation_rules = [{"label": v["label"], "key": v["key"]} for v in VALIDATION_RULES]
@@ -225,10 +245,8 @@ class ResetPasswordView(APIView):
         form = auth_forms.PasswordResetForm(params)
         if form.is_valid():
             form.save(**opts)
-            response = Response(status=status.HTTP_204_NO_CONTENT)
-        else:
-            response = Response(form.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-        return response
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        return Response(form.errors, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class ResetPasswordConfirmView(APIView):
@@ -304,7 +322,7 @@ class AccountSettingsView(APIView):
             "office_options": OFFICE_OPTIONS,
             "user": request.user.get_menu_dict()
         }
-        return self.render_success(data=data, status=status.HTTP_200_OK)
+        return Response(data, status=status.HTTP_200_OK)
 
 
 class AccountSecurityView(APIView):
@@ -313,7 +331,7 @@ class AccountSecurityView(APIView):
         params = json.loads(request.body)
         form = AccountSecurityForm(params, user=user)
         if not form.is_valid():
-            return self.render_failure(errors=form.errors.get_json_data(), status=500)
+            return Response(form.errors.get_json_data(), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         data = form.cleaned_data
         user.email = data["email"]
         message = "Email change successful."
@@ -322,7 +340,7 @@ class AccountSecurityView(APIView):
             update_session_auth_hash(request, user)
             message = "Password has successfully been reset."
         user.save()
-        return self.render_success(data={"message": message}, status=200)
+        return Response({"message": message}, status=status.HTTP_200_OK)
 
 
 class AccountProfileView(APIView):
@@ -383,10 +401,10 @@ class AccountProfileView(APIView):
         post_data.pop("company_roles[]", None)
         form = AccountProfileForm(post_data, request.FILES)
         if not form.is_valid():
-            return self.render_failure(errors=form.errors.get_json_data(), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(form.errors.get_json_data(), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         user = request.user
         self.update_profile(user, form.cleaned_data)
-        return self.render_success(data=user.get_profile_data(), status=status.HTTP_200_OK)
+        return Response(user.get_profile_data(), status=status.HTTP_200_OK)
 
 
 class ValidateAddressView(APIView):
@@ -402,7 +420,7 @@ class ValidateAddressView(APIView):
         geocode_address = geocode(entered_address)
 
         if not geocode_address or not geocode_address.street_address:
-            return self.render_success(data={"error": True})
+            return Response({"error": True})
         
         suggested_address = {
             'office_street': geocode_address.street_address,
@@ -414,7 +432,7 @@ class ValidateAddressView(APIView):
             'formatted_address': geocode_address.formatted_address
         }
 
-        return self.render_success(data={"suggested_address": suggested_address}, status=200)
+        return Response({"suggested_address": suggested_address}, status=status.HTTP_200_OK)
 
 
 class AccountReportsView(APIView):
@@ -453,11 +471,11 @@ class AccountReportsView(APIView):
 
         for_reports_ids = [p.public_id for p in user.report_projects.all()]
         projects = [self.serialize_project(p, for_reports_ids) for p in projects_q]
-        return self.render_success(data={
+        return Response({
             "properties": projects,
             "has_next_page": has_hext,
             "page_num": page_num
-        }, status=200)
+        }, status=status.HTTP_200_OK)
 
     def post(self, request):
         user = request.user
@@ -470,5 +488,4 @@ class AccountReportsView(APIView):
             else:
                 user.report_projects.remove(p)
         user.save()
-        return self.render_success(data={})
-
+        return Response({}, status=status.HTTP_200_OK)

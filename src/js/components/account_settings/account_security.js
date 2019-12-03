@@ -26,7 +26,7 @@ export default class AccountSecurity extends React.PureComponent {
   };
 
   static defaultProps = {
-    validate: values => {
+    validate: (values, userId) => {
       clearTimeout(this.validateTimeoutId);
       if (!values.password) {
         return;
@@ -34,7 +34,7 @@ export default class AccountSecurity extends React.PureComponent {
       return new Promise(resolve => {
         this.validateTimeoutId = setTimeout(() => resolve(), TYPING_TIMEOUT);
       })
-        .then(() => validatePassword(values.password))
+        .then(() => validatePassword(values.password, userId))
         .then(errors => {
           if (Object.keys(errors).length) {
             throw {
@@ -157,7 +157,9 @@ export default class AccountSecurity extends React.PureComponent {
       <div className="account-settings__tab">
         <Formik
           ref={this.setFormik}
-          validate={this.props.validate}
+          validate={values =>
+            this.props.validate(values, this.props.user.user_id)
+          }
           validationSchema={securitySchema}
           validateOnBlur={true}
           validateOnChange={true}

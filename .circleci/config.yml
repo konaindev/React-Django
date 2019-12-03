@@ -13,9 +13,13 @@ jobs:
   build:
     docker:
       - image: circleci/python:3.7.2-node
-      - image: circleci/postgres:latest
+        environment:
+          DATABASE_URL: postgresql://root@localhost/circle_test
       - image: circleci/redis:latest
-      # pre-built images https://circleci.com/docs/2.0/circleci-images/
+      - image: nimbustech/postgres-ssl:9.5
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: circle_test
 
     working_directory: ~/repo
 

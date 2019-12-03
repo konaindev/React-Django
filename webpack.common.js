@@ -74,16 +74,10 @@ module.exports = {
     new webpack.DefinePlugin({
       "process.env": {
         GOOGLE_MAP_API_KEY: JSON.stringify(process.env.GOOGLE_MAP_API_KEY),
-        BASE_URL: JSON.stringify(process.env.BASE_URL)
-      }
-    }),
-    new webpack.DefinePlugin({
-      "process.env": {
+        BASE_URL: JSON.stringify(process.env.BASE_URL),
+        API_VERSION: JSON.stringify(process.env.API_VERSION),
         LOAD_SB_PROPS: JSON.stringify(process.env.LOAD_SB_PROPS)
       }
-    }),
-    new webpack.DefinePlugin({
-      "process.env": { API_VERSION: JSON.stringify(process.env.API_VERSION) }
     }),
     new HtmlWebPackPlugin({
       template: "./src/index.html",

@@ -25,6 +25,12 @@
         text-transform: uppercase;
         border-bottom: 1px solid $table-border-color;
         padding: 44px 20px 35px 20px;
+        position: relative;
+
+        .rmb-tooltip-anchor {
+            position: absolute;
+            right: -10px;
+        }
     }
 
     .table__row--body span {

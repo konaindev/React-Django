@@ -3,7 +3,7 @@ import React from "react";
 import { storiesOf } from "@storybook/react";
 
 import Container from "../container";
-import Tooltip from "./index";
+import Tooltip, { TooltipAnchor } from "./index";
 
 const text = <span>Tooltip Text</span>;
 const styles = {
@@ -101,6 +101,21 @@ storiesOf("RMBTooltip", module)
   .add("base", () => (
     <div style={{ margin: "1rem auto" }}>
       <Container>{rcTooltipExample}</Container>
+    </div>
+  ))
+  .add("anchor", () => (
+    <div
+      style={{
+        padding: "4rem",
+        width: "50vw",
+        height: "50vh",
+        background: "#20272e",
+        textAlign: "center"
+      }}
+    >
+      <Tooltip placement="top" text="Informational Tooltip" theme="information">
+        <TooltipAnchor width={20} height={20} />
+      </Tooltip>
     </div>
   ))
   .add("text", () => (

@@ -27,8 +27,12 @@
     &__name {
         color: $content-text-primary-color;
         font-size: $text-base;
-        line-height: $line-height-tight;
-        margin-bottom: $s1;
+        line-height: $line-height-relaxed;
+
+        .rmb-tooltip-anchor {
+            vertical-align: text-top;
+            margin-left: 10px;
+        }
     }
 
     &__target {
