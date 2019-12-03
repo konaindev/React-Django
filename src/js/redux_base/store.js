@@ -19,7 +19,8 @@ import {
   updateAccountSecurity,
   updateAccountProfile,
   updateReportsSettings,
-  refreshToken
+  refreshToken,
+  login
 } from "./middleware";
 import rootSaga from "./sagas";
 
@@ -56,6 +57,7 @@ export default () => {
         updateAccountProfile,
         updateReportsSettings,
         refreshToken,
+        login,
         sagaMiddleware
       )
     )

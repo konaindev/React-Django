@@ -1,4 +1,5 @@
 import csv
+from io import StringIO
 
 from django.contrib import admin, messages
 from django.shortcuts import render
@@ -53,9 +54,9 @@ class CsvImportFormView(FormView):
         }
         return context
 
-    def get_configured_languages(self):
-        languages = LocalizationVersion.objects.all().values_list("language", flat=True)
-        return languages
+    def get_existing_locales(self):
+        locales = LocalizationVersion.objects.all().values_list("language", flat=True)
+        return list(locales)
 
     def post(self, request, *args, **kwargs):
         form = self.get_form()
@@ -63,54 +64,39 @@ class CsvImportFormView(FormView):
         if form.is_valid():
             logger.info("LocalizationAdmin::csv_import::top")
 
-            csv_file = form.cleaned_data["csv_file"]
-            allow_override = form.cleaned_data["allow_override"]
-            languages = self.get_configured_languages()
-
-            """
-            @TODO: better to use pandas or at least create a utility function to parse csv file
-            """
             try:
-                file_data = csv_file.read().decode("utf-8-sig")
-                rows = file_data.split("\r\n")
-                column_indexes = dict() # index by column name
+                locales = self.get_existing_locales()
+                allowed_fields = ["key"] + locales
+                allow_override = form.cleaned_data["allow_override"]
+                csv_file = form.cleaned_data["csv_file"]
+
+                csv_file_byte = csv_file.read().decode("utf-8-sig")
+                csv_file_text = StringIO(csv_file_byte)
+                csv.register_dialect('myDialect', delimiter = ',', quoting=csv.QUOTE_ALL, skipinitialspace=True)
+                csv_reader = csv.DictReader(csv_file_text, dialect='myDialect')
+
                 created_rows = 0
                 updated_rows = 0
                 skipped_rows = 0
 
-                for row_index, row in enumerate(rows):
-                    fields_arr = row.split(",")
-                    if row_index == 0:
-                        for field_index, field in enumerate(fields_arr):
-                            field_name= field.lower()
-                            if field_name == "key" or field_name in languages:
-                                column_indexes[field_name] = field_index
-                        logger.info(f"LocalizationAdmin::csv_import::header {column_indexes}")
-                    else:
-                        # last line is parsed as ['']
-                        if len(fields_arr) < 2:
-                            if row_index < len(rows) - 1:
-                                skipped_rows += 1
-                            continue
-                        try:
-                            data_to_save = dict()
-                            for column, index in column_indexes.items():
-                                data_to_save[column] = fields_arr[index]
-                        except IndexError:
-                            skipped_rows +=1
-                            continue
-                        try:
-                            model_obj = Localization.objects.get(key=data_to_save["key"])
-                            if allow_override:
-                                for key, value in data_to_save.items():
-                                    setattr(model_obj, key, value)
-                                model_obj.save()
-                                updated_rows += 1
-                            else:
-                                skipped_rows += 1
-                        except Localization.DoesNotExist:
-                            Localization.objects.create(**data_to_save)
-                            created_rows += 1
+                for row in csv_reader:
+                    # csv file might have more columns other than configured locales
+                    # pick "key" and locales only
+                    dict_row = { key: dict(row).get(key) for key in allowed_fields }
+
+                    try:
+                        model_obj = Localization.objects.get(key=dict_row["key"])
+                        if allow_override:
+                            for locale in locales:
+                                setattr(model_obj, locale, dict_row[locale])
+                            model_obj.save()
+                            updated_rows += 1
+                        else:
+                            skipped_rows += 1
+                    except Localization.DoesNotExist:
+                        Localization.objects.create(**dict_row)
+                        created_rows += 1
+
                 messages.success(
                     request, f"{created_rows} rows created, {updated_rows} rows updated, {skipped_rows} skipped."
                 )

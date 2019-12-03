@@ -8,7 +8,6 @@ import { storiesOf } from "@storybook/react";
 import { properties, groups, portfolio } from "../email_reporting_table/props";
 import AccountSettings from "./index";
 import { props } from "./props";
-import accountSettings from "../../state/reducers/account_settings";
 
 function validateSecurity(values) {
   const errors = {};

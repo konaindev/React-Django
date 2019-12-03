@@ -46,6 +46,7 @@ export default class LeasingPerformanceReport extends Component {
       <BoxRow>
         <PercentageGraphBox
           name="Leased"
+          infoTooltip="leased_rate"
           value={r.property.leasing.rate}
           delta={r.deltas?.property?.leasing?.rate}
           series={r.whiskers?.leased_rate}
@@ -59,6 +60,7 @@ export default class LeasingPerformanceReport extends Component {
         />
         <PercentageGraphBox
           name="Retention"
+          infoTooltip="retention_rate"
           value={r.property.leasing.renewal_rate}
           delta={r.deltas?.property?.leasing?.renewal_rate}
           series={r.whiskers?.renewal_rate}
@@ -67,6 +69,7 @@ export default class LeasingPerformanceReport extends Component {
         />
         <PercentageGraphBox
           name="Occupied"
+          infoTooltip="occupied_rate"
           value={r.property.occupancy.rate}
           delta={r.deltas?.property?.occupancy?.rate}
           series={r.whiskers?.occupancy_rate}

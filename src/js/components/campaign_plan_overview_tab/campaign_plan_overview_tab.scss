@@ -18,6 +18,11 @@
     line-height: $text-xl;
     color: $content-text-secondary-color;
 
+    .rmb-tooltip-anchor {
+        vertical-align: top;
+        margin-left: 10px;
+    }
+
     .table__row {
         display: flex;
         border-bottom: 1px solid $table-border-color;

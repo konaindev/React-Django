@@ -1,12 +1,11 @@
-import renderer from "react-test-renderer";
+import { shallow } from "enzyme";
+
 import TotalAddressableMarket from "./index";
-import props from "./MarketAnalysis.js";
+import props from "./props";
 
 describe("TotalAddressableMarket", () => {
   it("renders correctly", () => {
-    const tree = renderer
-      .create(<TotalAddressableMarket {...props} />)
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+    const tree = shallow(<TotalAddressableMarket {...props} />);
+    expect(tree.debug()).toMatchSnapshot();
   });
 });

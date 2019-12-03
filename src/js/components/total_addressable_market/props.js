@@ -1,4 +1,4 @@
-export default {
+export const marketAnalysis = {
   location: "Portland, OR",
   estimated_population: {
     center: {
@@ -439,3 +439,5 @@ export default {
     growth: 0.024
   }
 };
+
+export default marketAnalysis;

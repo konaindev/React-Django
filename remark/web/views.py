@@ -214,7 +214,8 @@ class LocalizationView(APIView):
     authentication_classes = []
 
     def post(self, request):
-        localization_form = LocalizationForm(request.data, initial={"language": "en_us"})
+        params = json.loads(request.body)
+        localization_form = LocalizationForm(params, initial={"language": "en_us"})
         if not localization_form.is_valid():
             errors = localization_form.errors.get_json_data()
             return Response(errors, status=drf_status.HTTP_500_INTERNAL_SERVER_ERROR)

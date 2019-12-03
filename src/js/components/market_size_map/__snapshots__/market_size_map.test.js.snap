@@ -1,249 +1,94 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`MarketSizeMap renders circle-only mode correctly 1`] = `
-<div
-  className="market-size-map"
->
-  <div
-    onClick={[Function]}
-    onMouseDownCapture={[Function]}
-    onMouseMove={[Function]}
-    style={
-      Object {
-        "height": "100%",
-        "margin": 0,
-        "padding": 0,
-        "position": "relative",
-        "width": "100%",
-      }
-    }
-  >
-    <div
-      style={
-        Object {
-          "height": "100%",
-          "left": 0,
-          "margin": 0,
-          "padding": 0,
-          "position": "absolute",
-          "top": 0,
-          "width": "100%",
-        }
-      }
-    />
-    <div
-      style={
-        Object {
-          "height": "50%",
-          "left": "50%",
-          "margin": 0,
-          "padding": 0,
-          "position": "absolute",
-          "top": "50%",
-          "width": "50%",
-        }
-      }
-    >
-      <div
-        style={
-          Object {
-            "height": "100%",
-            "left": 0,
-            "margin": 0,
-            "padding": 0,
-            "position": "absolute",
-            "top": 0,
-            "width": "100%",
-          }
-        }
-      />
-    </div>
-  </div>
-</div>
+"<div className=\\"market-size-map\\">
+  <GoogleMap bootstrapURLKeys={{...}} defaultCenter={{...}} defaultZoom={9} options={[Function: createDefaultMapOptions]} yesIWantToUseGoogleMapApiInternals={true} onGoogleApiLoaded={[Function]} distanceToMouse={[Function: distanceToMouse]} hoverDistance={30} debounced={true} googleMapLoader={[Function]} style={{...}} layerTypes={{...}} heatmap={{...}} heatmapLibrary={false} shouldUnregisterMapOnUnmount={true} />
+  <button onClick={[Function]} className=\\"custom-control\\">
+    <IconCenter width={20} height={20} />
+  </button>
+</div>"
 `;
 
 exports[`MarketSizeMap renders circle-with-zipcodes mode correctly 1`] = `
-<div
-  className="market-size-map"
->
-  <div
-    onClick={[Function]}
-    onMouseDownCapture={[Function]}
-    onMouseMove={[Function]}
-    style={
-      Object {
-        "height": "100%",
-        "margin": 0,
-        "padding": 0,
-        "position": "relative",
-        "width": "100%",
-      }
-    }
-  >
-    <div
-      style={
-        Object {
-          "height": "100%",
-          "left": 0,
-          "margin": 0,
-          "padding": 0,
-          "position": "absolute",
-          "top": 0,
-          "width": "100%",
-        }
-      }
-    />
-    <div
-      style={
-        Object {
-          "height": "50%",
-          "left": "50%",
-          "margin": 0,
-          "padding": 0,
-          "position": "absolute",
-          "top": "50%",
-          "width": "50%",
-        }
-      }
-    >
-      <div
-        style={
-          Object {
-            "height": "100%",
-            "left": 0,
-            "margin": 0,
-            "padding": 0,
-            "position": "absolute",
-            "top": 0,
-            "width": "100%",
-          }
-        }
-      />
-    </div>
-  </div>
-</div>
+"<div className=\\"market-size-map\\">
+  <GoogleMap bootstrapURLKeys={{...}} defaultCenter={{...}} defaultZoom={9} options={[Function: createDefaultMapOptions]} yesIWantToUseGoogleMapApiInternals={true} onGoogleApiLoaded={[Function]} distanceToMouse={[Function: distanceToMouse]} hoverDistance={30} debounced={true} googleMapLoader={[Function]} style={{...}} layerTypes={{...}} heatmap={{...}} heatmapLibrary={false} shouldUnregisterMapOnUnmount={true} />
+  <button onClick={[Function]} className=\\"custom-control\\">
+    <IconCenter width={20} height={20} />
+  </button>
+</div>"
+`;
+
+exports[`MarketSizeMap renders circle-with-zipcodes mode correctly 2`] = `
+Array [
+  <ZipcodeText
+    labelColor="#000000"
+    lat={45.49862}
+    lng={-122.692}
+    zipcode="97201"
+  />,
+  <ZipcodeText
+    labelColor="#000000"
+    lat={45.5289286}
+    lng={-122.6439272}
+    zipcode="97232"
+  />,
+  <ZipcodeText
+    labelColor="#000000"
+    lat={45.5151213}
+    lng={-122.6006274}
+    zipcode="97215"
+  />,
+]
 `;
 
 exports[`MarketSizeMap renders polygon-with-hole map correctly 1`] = `
-<div
-  className="market-size-map"
->
-  <div
-    onClick={[Function]}
-    onMouseDownCapture={[Function]}
-    onMouseMove={[Function]}
-    style={
-      Object {
-        "height": "100%",
-        "margin": 0,
-        "padding": 0,
-        "position": "relative",
-        "width": "100%",
-      }
-    }
-  >
-    <div
-      style={
-        Object {
-          "height": "100%",
-          "left": 0,
-          "margin": 0,
-          "padding": 0,
-          "position": "absolute",
-          "top": 0,
-          "width": "100%",
-        }
-      }
-    />
-    <div
-      style={
-        Object {
-          "height": "50%",
-          "left": "50%",
-          "margin": 0,
-          "padding": 0,
-          "position": "absolute",
-          "top": "50%",
-          "width": "50%",
-        }
-      }
-    >
-      <div
-        style={
-          Object {
-            "height": "100%",
-            "left": 0,
-            "margin": 0,
-            "padding": 0,
-            "position": "absolute",
-            "top": 0,
-            "width": "100%",
-          }
-        }
-      />
-    </div>
-  </div>
-</div>
+"<div className=\\"market-size-map\\">
+  <GoogleMap bootstrapURLKeys={{...}} defaultCenter={{...}} defaultZoom={9} options={[Function: createDefaultMapOptions]} yesIWantToUseGoogleMapApiInternals={true} onGoogleApiLoaded={[Function]} distanceToMouse={[Function: distanceToMouse]} hoverDistance={30} debounced={true} googleMapLoader={[Function]} style={{...}} layerTypes={{...}} heatmap={{...}} heatmapLibrary={false} shouldUnregisterMapOnUnmount={true} />
+  <button onClick={[Function]} className=\\"custom-control\\">
+    <IconCenter width={20} height={20} />
+  </button>
+</div>"
+`;
+
+exports[`MarketSizeMap renders polygon-with-hole map correctly 2`] = `
+Array [
+  <ZipcodeText
+    labelColor="#000000"
+    lat={25.3935}
+    lng={-72.4735}
+    zipcode="Bermuda Triangle"
+  />,
+]
 `;
 
 exports[`MarketSizeMap renders zipcodes-only mode correctly 1`] = `
-<div
-  className="market-size-map"
->
-  <div
-    onClick={[Function]}
-    onMouseDownCapture={[Function]}
-    onMouseMove={[Function]}
-    style={
-      Object {
-        "height": "100%",
-        "margin": 0,
-        "padding": 0,
-        "position": "relative",
-        "width": "100%",
-      }
-    }
-  >
-    <div
-      style={
-        Object {
-          "height": "100%",
-          "left": 0,
-          "margin": 0,
-          "padding": 0,
-          "position": "absolute",
-          "top": 0,
-          "width": "100%",
-        }
-      }
-    />
-    <div
-      style={
-        Object {
-          "height": "50%",
-          "left": "50%",
-          "margin": 0,
-          "padding": 0,
-          "position": "absolute",
-          "top": "50%",
-          "width": "50%",
-        }
-      }
-    >
-      <div
-        style={
-          Object {
-            "height": "100%",
-            "left": 0,
-            "margin": 0,
-            "padding": 0,
-            "position": "absolute",
-            "top": 0,
-            "width": "100%",
-          }
-        }
-      />
-    </div>
-  </div>
-</div>
+"<div className=\\"market-size-map\\">
+  <GoogleMap bootstrapURLKeys={{...}} defaultCenter={{...}} defaultZoom={9} options={[Function: createDefaultMapOptions]} yesIWantToUseGoogleMapApiInternals={true} onGoogleApiLoaded={[Function]} distanceToMouse={[Function: distanceToMouse]} hoverDistance={30} debounced={true} googleMapLoader={[Function]} style={{...}} layerTypes={{...}} heatmap={{...}} heatmapLibrary={false} shouldUnregisterMapOnUnmount={true} />
+  <button onClick={[Function]} className=\\"custom-control\\">
+    <IconCenter width={20} height={20} />
+  </button>
+</div>"
+`;
+
+exports[`MarketSizeMap renders zipcodes-only mode correctly 2`] = `
+Array [
+  <ZipcodeText
+    labelColor="#000000"
+    lat={45.49862}
+    lng={-122.692}
+    zipcode="97201"
+  />,
+  <ZipcodeText
+    labelColor="#000000"
+    lat={45.5289286}
+    lng={-122.6439272}
+    zipcode="97232"
+  />,
+  <ZipcodeText
+    labelColor="#000000"
+    lat={45.5151213}
+    lng={-122.6006274}
+    zipcode="97215"
+  />,
+]
 `;

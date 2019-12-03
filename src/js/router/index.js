@@ -5,6 +5,7 @@ import DashboardContainer from "../containers/dashboard";
 import PortfolioContainer from "../containers/portfolio";
 import AuthContainer from "../containers/auth";
 import CreatePasswordContainer from "../containers/create_password";
+import ErrorContainer from "../containers/error";
 import { TrackedRoute as Route } from "./gaTracked";
 
 export function RemarkableRouter() {
@@ -23,6 +24,7 @@ export function RemarkableRouter() {
         <Route path="/portfolio/table" component={PortfolioContainer} />
         <Redirect from="/portfolio" to="/portfolio/table" />
         <Route path="/auth" component={AuthContainer} />
+        <Route path="/error" exact component={ErrorContainer} />
         <Route path="/" component={DashboardContainer} />
         {/* default to dashboard...since AuthGate takes care of no-auth */}
         <Redirect to="/" />
