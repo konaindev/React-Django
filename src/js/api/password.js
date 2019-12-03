@@ -1,7 +1,8 @@
 import { axiosPost } from "../utils/api";
-import { URLS } from "../redux_base/actions/helpers";
+import { API_URL_PREFIX } from "../redux_base/actions/helpers";
 
-export const validatePassword = (password, hash) =>
-  axiosPost(`${URLS.base}/users/validate-password`, { password, hash }).then(
-    response => response.data.errors
-  );
+export const validatePassword = (password, user_id) =>
+  axiosPost(`${API_URL_PREFIX}/users/password-rules/`, {
+    password,
+    user_id
+  }).then(response => response.data.errors);
