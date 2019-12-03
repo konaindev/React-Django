@@ -22,6 +22,7 @@ $header-font: $s7;
 $header-height: 2.125rem;
 $header-color: $highlight-gray-3;
 $empty-text-color: #ccd0d6;
+$tags-highlight-bg: $gray-4;
 $tags-border-radius: 4px;
 $tags-spacing: 20px;
 $tags-padding: 7px 10px;
@@ -29,6 +30,8 @@ $tag-text-color: $highlight-gray-3;
 $tag-close-size: 0.5rem;
 $tag-close-spacing: 10px;
 $tag-close-region-size: 1.125rem;
+$tag-close-border-radius: 2px;
+$tag-close-hover-color: $gray-6;
 
 .property-overview {
     width: 1000px;
@@ -96,6 +99,12 @@ $tag-close-region-size: 1.125rem;
     }
 }
 
+.property-overview__tag--admin {
+    &:hover {
+        background-color: $tags-highlight-bg;
+    }
+}
+
 .property-overview__tag-name {
     color: $tag-text-color;
     font-size: $text-size;
@@ -109,7 +118,14 @@ $tag-close-region-size: 1.125rem;
     justify-content: center;
     align-items: center;
     margin-left: $tag-close-spacing;
+    color: $default-text-color;
     cursor: pointer;
+    border-radius: $tag-close-border-radius;
+
+    &:hover {
+        background-color: $tag-close-hover-color;
+        color: $gray-4;
+    }
 }
 
 .property-overview__tag-close-icon {
