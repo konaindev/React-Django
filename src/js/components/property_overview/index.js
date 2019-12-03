@@ -2,6 +2,7 @@ import cn from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
+import { project as projectActions } from "../../redux_base/actions";
 import ButtonLink from "../button_link";
 import Panel from "../panel";
 
@@ -13,7 +14,11 @@ import "./property_overview.scss";
 export default class PropertyOverview extends React.PureComponent {
   static propTypes = {
     project: PropTypes.object.isRequired,
-    buildingImageURL: PropTypes.string.isRequired
+    buildingImageURL: PropTypes.string.isRequired,
+    onRemoveTag: PropTypes.func
+  };
+  static defaultProps = {
+    onRemoveTag() {}
   };
 
   static characteristicsFields = {
@@ -60,12 +65,17 @@ export default class PropertyOverview extends React.PureComponent {
   };
 
   renderTags = () => {
-    const { project } = this.props;
+    const { project, onRemoveTag } = this.props;
     if (!project.custom_tags.length) {
       return;
     }
     const tags = project.custom_tags.map(name => (
-      <Tag name={name} isAdmin={project.is_admin} key={name} />
+      <Tag
+        name={name}
+        isAdmin={project.is_admin}
+        onRemove={onRemoveTag}
+        key={name}
+      />
     ));
     let message = "Custom property groups are made for each tag.";
     if (project.is_admin) {

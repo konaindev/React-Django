@@ -5,7 +5,7 @@ import React from "react";
 import Close from "../../icons/close";
 import Panel from "../panel";
 
-const Tag = ({ name, isAdmin }) => {
+const Tag = ({ name, isAdmin, onRemove }) => {
   const classes = cn("property-overview__tag", {
     "property-overview__tag--admin": isAdmin
   });
@@ -13,8 +13,11 @@ const Tag = ({ name, isAdmin }) => {
     <Panel className={classes}>
       <div className="property-overview__tag-name">{name}</div>
       {isAdmin ? (
-        <div className="property-overview__tag-close">
-          <Close className="property-overview__tag-close-icon" />
+        <div
+          className="property-overview__tag-remove"
+          onClick={() => onRemove(name)}
+        >
+          <Close className="property-overview__tag-remove-icon" />
         </div>
       ) : null}
     </Panel>
@@ -22,10 +25,12 @@ const Tag = ({ name, isAdmin }) => {
 };
 Tag.propTypes = {
   name: PropTypes.string.isRequired,
+  onRemove: PropTypes.func,
   isAdmin: PropTypes.bool
 };
 Tag.defaultProps = {
-  isAdmin: false
+  isAdmin: false,
+  onRemove() {}
 };
 
 export default React.memo(Tag);

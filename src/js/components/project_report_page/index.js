@@ -6,6 +6,7 @@ import { ViewMembersReport } from "../../containers/view_members";
 import { Add } from "../../icons";
 import {
   inviteModal as inviteModalActions,
+  projectActions,
   viewMembersModal as viewMembersActions
 } from "../../redux_base/actions";
 
@@ -54,6 +55,11 @@ export class ProjectReportPage extends Component {
     }
     return projectImage;
   };
+
+  removeTag = word =>
+    this.props.dispatch(
+      projectActions.removeTag(this.props.project.public_id)({ body: { word } })
+    );
 
   renderSubheader = () => {
     const { project, share_info, backUrl, reportType } = this.props;
@@ -117,6 +123,7 @@ export class ProjectReportPage extends Component {
         <PropertyOverview
           project={project}
           buildingImageURL={buildingImageURL}
+          onRemoveTag={this.removeTag}
         />
       );
     }

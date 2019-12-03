@@ -4,6 +4,7 @@ export * from "./helpers";
 export { default as accountSettings } from "./account_settings";
 export { default as dashboard } from "./dashboard";
 export { default as portfolio } from "./portfolio";
+export { default as projectActions } from "./project";
 export { default as projectReports } from "./project_reports";
 export { default as inviteModal } from "./invite_modal";
 export { default as viewMembersModal } from "./view_members";

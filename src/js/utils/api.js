@@ -24,6 +24,7 @@ export function axiosPost(url, data, headers = {}) {
   }
   return axios(config);
 }
+
 export function axiosGet(url, config = { validateStatus }) {
   const { token } = store.getState();
   const { access } = token;

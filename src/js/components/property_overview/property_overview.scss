@@ -27,11 +27,11 @@ $tags-border-radius: 4px;
 $tags-spacing: 20px;
 $tags-padding: 7px 10px;
 $tag-text-color: $highlight-gray-3;
-$tag-close-size: 0.5rem;
-$tag-close-spacing: 10px;
-$tag-close-region-size: 1.125rem;
-$tag-close-border-radius: 2px;
-$tag-close-hover-color: $gray-6;
+$tag-remove-size: 0.5rem;
+$tag-remove-spacing: 10px;
+$tag-remove-region-size: 1.125rem;
+$tag-remove-border-radius: 2px;
+$tag-remove-hover-color: $gray-6;
 
 .property-overview {
     width: 1000px;
@@ -111,26 +111,26 @@ $tag-close-hover-color: $gray-6;
     line-height: $panel-header-height;
 }
 
-.property-overview__tag-close {
-    width: $tag-close-region-size;
-    height: $tag-close-region-size;
+.property-overview__tag-remove {
+    width: $tag-remove-region-size;
+    height: $tag-remove-region-size;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: $tag-close-spacing;
+    margin-left: $tag-remove-spacing;
     color: $default-text-color;
     cursor: pointer;
-    border-radius: $tag-close-border-radius;
+    border-radius: $tag-remove-border-radius;
 
     &:hover {
-        background-color: $tag-close-hover-color;
+        background-color: $tag-remove-hover-color;
         color: $gray-4;
     }
 }
 
-.property-overview__tag-close-icon {
-    width: $tag-close-size;
-    height: $tag-close-size;
+.property-overview__tag-remove-icon {
+    width: $tag-remove-size;
+    height: $tag-remove-size;
 }
 
 .property-overview__tiles {
