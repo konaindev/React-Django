@@ -29,15 +29,15 @@ export default class WhiskerPlot extends Component {
 
   constructor(props) {
     super(props);
-    this.chartData = this.props.series.map((raw, i) => ({
-      x: i,
-      y: Number(raw)
-    }));
     // Here"s some wacky javascript for you to contemplate. :-)
     this.randomName = (((1 + Math.random()) * 0x10000) | 0).toString(16);
   }
 
   render() {
+    this.chartData = this.props.series.map((raw, i) => ({
+      x: i,
+      y: Number(raw)
+    }));
     const color =
       this.props.direction === "up"
         ? "#65FF00" // $accent-up-color

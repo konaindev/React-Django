@@ -41,11 +41,9 @@ class PerformanceReport(CommonReport):
                 f"Invalid report end={end} and delta before end={time_delta}"
             )
 
-        all_periods = project.get_periods()
-        all_target_periods = project.get_target_periods()
-        multiperiod = BareMultiPeriod.from_periods(
-            list(all_periods) + list(all_target_periods)
-        )
+        all_periods = [*project.get_periods(), *project.get_target_periods()]
+        multiperiod = BareMultiPeriod.from_periods(all_periods)
+
         # project.get_campaign_end() may not be the same as multiperiod.get_end(),
         # since targets can extend into the future; our interest here is
         # to cut future targets, and only think about data we have *now*.
@@ -62,7 +60,7 @@ class PerformanceReport(CommonReport):
             break_times = [previous_start, end - time_delta]
             previous_period = multiperiod.get_periods(*break_times)[0]
 
-        whiskers = WhiskerSeries.build_weekly_series(project, multiperiod, end)
+        whiskers = WhiskerSeries.build_weekly_series(multiperiod, previous_start, end)
 
         return cls(project, period, previous_period, whiskers)
 
@@ -103,7 +101,6 @@ class PerformanceReport(CommonReport):
         except:
             return False"""
 
-
     @classmethod
     def for_dates(cls, project, start, end):
         """
@@ -131,16 +128,14 @@ class PerformanceReport(CommonReport):
         """
         if not cls.has_campaign_to_date(project):
             return None
-        all_periods = project.get_periods()
-        all_target_periods = project.get_target_periods()
-        multiperiod = BareMultiPeriod.from_periods(
-            list(all_periods) + list(all_target_periods)
-        )
-        break_times = [project.get_campaign_start(), project.get_campaign_end()]
+
+        all_periods = [*project.get_periods(), *project.get_target_periods()]
+        multiperiod = BareMultiPeriod.from_periods(all_periods)
+
+        start = project.get_campaign_start()
+        break_times = [start, project.get_campaign_end()]
         period = multiperiod.get_periods(*break_times)[0]
-        whiskers = WhiskerSeries.build_weekly_series(
-            project, multiperiod, break_times[-1]
-        )
+        whiskers = WhiskerSeries.build_weekly_series(multiperiod, start, break_times[-1])
         return cls(project, period, previous_period=None, whiskers=whiskers)
 
     @staticmethod

@@ -5,14 +5,14 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import redirect_to_login
 from django.db.models import Q
-from django.http import Http404, JsonResponse
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
 from django.urls import reverse
 from django.utils import timezone
 
-from rest_framework import exceptions, generics, mixins, status, viewsets
+from rest_framework import exceptions, generics
 from rest_framework.views import APIView
 from rest_framework.permissions import BasePermission, IsAuthenticated
 from rest_framework.response import Response

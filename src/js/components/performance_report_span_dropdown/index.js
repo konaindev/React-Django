@@ -80,7 +80,7 @@ export default class PerformanceReportSpanDropdown extends Component {
             options={PerformanceReportSpanDropdown.options}
             value={this.presetValue}
             onChange={this.onPresetChange}
-          ></Select>
+          />
           <DateRange
             className="date-range-selector__data-picker"
             onChange={this.onDateChange}
@@ -88,7 +88,7 @@ export default class PerformanceReportSpanDropdown extends Component {
             endDate={endDate}
             ref={this.dayPicker}
             disabledRange={campaignRange}
-          ></DateRange>
+          />
         </span>
       </>
     );
