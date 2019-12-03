@@ -249,18 +249,20 @@ class AddMembersView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
+        # print("AddMemberView::post")
         inviter_name = request.user.get_name()
         payload = json.loads(request.body)
         members = payload.get("members", [])
-
+        # print("AddMemberView::post 2")
         projects_ids = [p.get("property_id") for p in payload.get("projects", [])]
         projects = Project.objects.filter(public_id__in=projects_ids)
-
+        # print("AddMemberView::post 3")
         if not request.user.is_superuser:
             for project in projects:
                 if not project.is_admin(request.user):
                     return self.render_403()
 
+        # print("AddMemberView::post 4")
         users = []
         for member in members:
             is_new = member.get("__isNew__", False)
@@ -274,6 +276,7 @@ class AddMembersView(APIView):
                 user = User.objects.get(public_id=public_id)
             users.append(user)
 
+        # print("AddMemberView::post 5")
         role = payload.get("role")
 
         projects_is_empty = any([not p.has_members() for p in projects])
@@ -286,15 +289,20 @@ class AddMembersView(APIView):
                     project.view_group.user_set.add(user)
             project.save()
 
+        # print("AddMemberView::post 6")
         for user in users:
+            # print(f"AddMemberView::post user: {user.email}")
             is_new_account = user.activated is None
             if projects_is_empty and is_new_account:
+                # print(f"AddMemberView::post send create account email")
                 send_create_account_email.apply_async(args=(user.id,), countdown=2)
             else:
+                # print(f"AddMemberView::post send invite email")
                 send_invite_email.apply_async(
                     args=(inviter_name, user.id, projects_ids), countdown=2
                 )
-
+                # print(f"AddMemberView::post send invite email after")
+        # print("AddMemberView::post 7")
         projects_list = [
             {
                 "property_id": p.public_id,
@@ -302,6 +310,7 @@ class AddMembersView(APIView):
                 "members": p.get_members(),
             } for p in projects
         ]
+        # print("AddMemberView::post bottom")
         return Response({"projects": projects_list})
 
 

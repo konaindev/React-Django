@@ -435,6 +435,8 @@ export const login = store => next => action => {
     const apiUrl = createAPIUrl(URLS.login);
     axiosPost(apiUrl, action.body)
       .then(response => {
+        console.log("LOGIN RESPONSE");
+        console.log(response.status);
         if (response.status == 401) {
           console.log("BAD LOGIN");
           next(auth.clearToken());
@@ -445,6 +447,7 @@ export const login = store => next => action => {
               access: response.data.access
             })
           );
+          console.log(`redirect url: ${action.redirect_url}`);
           if (action.redirect_url) {
             window.location.href = action.redirect_url;
           } else {

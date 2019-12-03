@@ -15,7 +15,7 @@ from django.utils.http import urlsafe_base64_decode
 
 from rest_framework import exceptions, generics, mixins, status, viewsets
 from rest_framework.views import APIView
-from rest_framework.permissions import BasePermission, IsAuthenticated
+from rest_framework.permissions import BasePermission, IsAuthenticated, SAFE_METHODS, AllowAny
 from rest_framework.response import Response
 
 from remark.crm.models import Business, Office, Person
@@ -36,6 +36,16 @@ from .models import User
 
 INTERNAL_RESET_URL_TOKEN = 'set-password'
 INTERNAL_RESET_SESSION_TOKEN = '_password_reset_token'
+
+
+class GetIsAnonEverythingElseAuthenticated(BasePermission):
+    def has_permission(self, request, view):
+        print("permission")
+        print("method:", request.method)
+        print("user is auth:", request.user.is_authenticated)
+        if request.method == "GET":
+            return True
+        return request.user.is_authenticated
 
 
 class CompleteAccountView(APIView):
@@ -108,7 +118,10 @@ class CreatePasswordView(APIView):
     @param password
     """
 
+    authentication_classes = []
+
     def post(self, request):
+        print("CreatePasswordView::post top")
         if not request.user.is_anonymous:
             raise exceptions.APIException
 
@@ -116,19 +129,22 @@ class CreatePasswordView(APIView):
         user_id = params["user_id"]
         password = params["password"]
 
+        print("CreatePasswordView::post 1")
         try:
             user = User.objects.get(public_id=user_id)
         except User.DoesNotExist:
             raise exceptions.APIException
 
+        print("CreatePasswordView::post 2")
         if user.activated:
-            raise exceptions.APIException
+            raise exceptions.APIException(detail="Invalid action")
         if user.invited:
             date_now = datetime.datetime.now(timezone.utc)
             delta = date_now - user.invited
             if delta.days > INVITATION_EXP:
                 raise exceptions.APIException(detail="Invitation Expired")
 
+        print("CreatePasswordView::post 3")
         try:
             password_validation.validate_password(password, user=user)
         except ValidationError as e:
@@ -139,7 +155,9 @@ class CreatePasswordView(APIView):
         user.is_active = True
         user.save()
 
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        print("CreatePasswordView::post bottom")
+
+        return Response({"email": user.email}, status=status.HTTP_204_NO_CONTENT)
 
 
 class PasswordRulesView(APIView):
@@ -149,6 +167,8 @@ class PasswordRulesView(APIView):
     @param user_id
     @param password
     """
+
+    authentication_classes = []
 
     def get(self, request):
         validation_rules = [{"label": v["label"], "key": v["key"]} for v in VALIDATION_RULES]
