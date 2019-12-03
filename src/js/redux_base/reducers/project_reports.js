@@ -50,6 +50,10 @@ const reducer = (state = initialState, action) => {
       const { members } = action.data;
       project = { ...state.project, members };
       return { ...state, project };
+    case "AJAX_POST_REMOVE_TAG_FROM_PROJECT_SUCCESS":
+      const { custom_tags } = action.payload;
+      project = { ...state.project, custom_tags };
+      return { ...state, project };
     default:
       return state;
   }

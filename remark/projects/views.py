@@ -32,7 +32,7 @@ from .reports.selectors import (
     ModelingReportSelector,
     CampaignPlanSelector,
 )
-from .models import Project
+from .models import Project, Tag
 from .forms import TAMExportForm
 from .serializers import ProjectSerializer
 from .tasks import export_tam_task
@@ -386,3 +386,34 @@ class ChangeMemberRoleView(APIView):
 
         project.save()
         return Response({"members": project.get_members()})
+
+
+class RemoveTagView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, public_id):
+        payload = json.loads(request.body)
+        word = payload.get("word")
+
+        try:
+            project = Project.objects.get(public_id=public_id)
+        except Project.DoesNotExist:
+            return Response({"error": "Project not found"}, status=500)
+
+        user = request.user
+        if not project.is_admin(user):
+            return Response(
+                {"error": "Only admin member or staff user can remove tag from project"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        try:
+            tag = Tag.objects.get(word=word)
+        except Tag.DoesNotExist:
+            return Response(
+                {"error": f"Tag with name `{word}` not found"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+        project.custom_tags.remove(tag)
+        project.save()
+        tags = [t.word for t in project.custom_tags.all()]
+        return Response({"custom_tags": tags})
