@@ -302,7 +302,7 @@ class AccountSettingsView(APIView):
             "office_options": OFFICE_OPTIONS,
             "user": request.user.get_menu_dict()
         }
-        return self.render_success(data=data, status=status.HTTP_200_OK)
+        return Response(data, status=status.HTTP_200_OK)
 
 
 class AccountSecurityView(APIView):
@@ -311,7 +311,7 @@ class AccountSecurityView(APIView):
         params = json.loads(request.body)
         form = AccountSecurityForm(params, user=user)
         if not form.is_valid():
-            return self.render_failure(errors=form.errors.get_json_data(), status=500)
+            return Response(form.errors.get_json_data(), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         data = form.cleaned_data
         user.email = data["email"]
         message = "Email change successful."
@@ -320,7 +320,7 @@ class AccountSecurityView(APIView):
             update_session_auth_hash(request, user)
             message = "Password has successfully been reset."
         user.save()
-        return self.render_success(data={"message": message}, status=200)
+        return Response({"message": message}, status=status.HTTP_200_OK)
 
 
 class AccountProfileView(APIView):
@@ -381,10 +381,10 @@ class AccountProfileView(APIView):
         post_data.pop("company_roles[]", None)
         form = AccountProfileForm(post_data, request.FILES)
         if not form.is_valid():
-            return self.render_failure(errors=form.errors.get_json_data(), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response(form.errors.get_json_data(), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         user = request.user
         self.update_profile(user, form.cleaned_data)
-        return self.render_success(data=user.get_profile_data(), status=status.HTTP_200_OK)
+        return Response(user.get_profile_data(), status=status.HTTP_200_OK)
 
 
 class ValidateAddressView(APIView):
@@ -400,7 +400,7 @@ class ValidateAddressView(APIView):
         geocode_address = geocode(entered_address)
 
         if not geocode_address or not geocode_address.street_address:
-            return self.render_success(data={"error": True})
+            return Response({"error": True})
         
         suggested_address = {
             'office_street': geocode_address.street_address,
@@ -412,7 +412,7 @@ class ValidateAddressView(APIView):
             'formatted_address': geocode_address.formatted_address
         }
 
-        return self.render_success(data={"suggested_address": suggested_address}, status=200)
+        return Response({"suggested_address": suggested_address}, status=status.HTTP_200_OK)
 
 
 class AccountReportsView(APIView):
@@ -451,11 +451,11 @@ class AccountReportsView(APIView):
 
         for_reports_ids = [p.public_id for p in user.report_projects.all()]
         projects = [self.serialize_project(p, for_reports_ids) for p in projects_q]
-        return self.render_success(data={
+        return Response({
             "properties": projects,
             "has_next_page": has_hext,
             "page_num": page_num
-        }, status=200)
+        }, status=status.HTTP_200_OK)
 
     def post(self, request):
         user = request.user
@@ -468,5 +468,4 @@ class AccountReportsView(APIView):
             else:
                 user.report_projects.remove(p)
         user.save()
-        return self.render_success(data={})
-
+        return Response({}, status=status.HTTP_200_OK)

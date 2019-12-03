@@ -10,6 +10,7 @@ import {
   market,
   kpi,
   token as tokenActions,
+  networking,
   createFEUrl
 } from "../actions";
 import {
@@ -18,7 +19,7 @@ import {
   updateReportsSettingsData,
   updateSecurityData
 } from "../../api/account_settings";
-import { URLS, createAPIUrl } from "../actions/helpers";
+import { API_URL_PREFIX, URLS, createAPIUrl } from "../actions/helpers";
 import { axiosGet, axiosPost } from "../../utils/api";
 import ReactGa from "react-ga";
 
@@ -122,7 +123,7 @@ export const fetchPasswordRules = store => next => action => {
 export const fetchCompany = store => next => action => {
   switch (action.type) {
     case "API_COMPANY_ADDRESS": {
-      const url = `${URLS.base}/crm/office-address/`;
+      const url = `${API_URL_PREFIX}/crm/office-address/`;
       axiosPost(url, action.data)
         .then(response => {
           const companyAddresses = response.data?.addresses || [];
@@ -136,7 +137,7 @@ export const fetchCompany = store => next => action => {
       break;
     }
     case "API_COMPANY_SEARCH": {
-      const url = `${URLS.base}/crm/company-search/`;
+      const url = `${API_URL_PREFIX}/crm/company-search/`;
       axiosPost(url, action.data)
         .then(response => {
           action.callback(response.data?.company || []);
