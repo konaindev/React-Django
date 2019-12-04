@@ -17,6 +17,7 @@ const PropertyRow = ({
   url,
   members,
   selected,
+  disableSelection,
   selection_mode,
   onSelect,
   className,
@@ -41,18 +42,26 @@ const PropertyRow = ({
     }
   };
 
+  const rowSelector = () => {
+    if (!disableSelection) {
+      return (
+        <div
+          className="property-row__selector"
+          onClick={handleToggle}
+          onMouseEnter={onMouseImgEnter}
+          onMouseLeave={onMouseImgLeave}
+        >
+          <div style={imageStyle} className="property-row__image" />
+          <div className="property-row__selector-hover" />
+          <div className="property-row__tick" />
+        </div>
+      );
+    }
+  };
+
   return (
     <Panel className={rowClass} style={style}>
-      <div
-        className="property-row__selector"
-        onClick={handleToggle}
-        onMouseEnter={onMouseImgEnter}
-        onMouseLeave={onMouseImgLeave}
-      >
-        <div style={imageStyle} className="property-row__image" />
-        <div className="property-row__selector-hover" />
-        <div className="property-row__tick" />
-      </div>
+      {rowSelector()}
       <div className="property-row__name">{property_name}</div>
       <div className="property-row__address">{address}</div>
       <div className="property-row__link-container">

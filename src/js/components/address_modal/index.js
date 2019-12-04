@@ -55,7 +55,7 @@ class AddressModal extends React.PureComponent {
     ]);
 
     this.parentUpdateValues(_get(this.props.addresses, "suggested_address"));
-    var data = this.props.data;
+    let data = this.props.data;
 
     // @TODO: Standardize way forms are submitted.
     // Profile update uses FormData while Create Account Profile uses object.

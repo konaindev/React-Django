@@ -12,21 +12,23 @@ import ProfileTab from "./profile";
 import "./account_settings.scss";
 
 const menuItemsData = {
+  /*
   profile: {
     name: "Profile",
     iconComponent: Profile,
     component: ProfileTab
-  },
+  },*/
   lock: {
     name: "Security",
     iconComponent: Lock,
     component: AccountSecurity
-  },
+  } /*,
   email: {
     name: "Email Preferences",
     iconComponent: Email,
     component: EmailReportsContainer
   }
+   */
 };
 
 function MenuItems({ item, selectItem, itemsOrder }) {
@@ -61,8 +63,8 @@ export default class AccountSettings extends React.PureComponent {
   };
 
   static defaultProps = {
-    initialItem: "profile",
-    itemsOrder: ["profile", "lock", "email"]
+    initialItem: "lock", //"profile",
+    itemsOrder: ["lock"] //["profile", "lock", "email"]
   };
 
   constructor(props) {

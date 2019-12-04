@@ -13,12 +13,14 @@ export default class PropertyCardList extends React.PureComponent {
     onSelect: PropTypes.func,
     selectedProperties: PropTypes.arrayOf(
       PropTypes.shape(PropertyCard.requiredPropTypes)
-    )
+    ),
+    disableSelection: PropTypes.bool
   };
 
   static defaultProps = {
     onSelect: () => {},
-    selectedProperties: []
+    selectedProperties: [],
+    disableSelection: false
   };
 
   onSelect = (propertyId, value) => {
@@ -58,6 +60,7 @@ export default class PropertyCardList extends React.PureComponent {
               p => p.property_id === property.property_id
             )}
             onSelect={this.onSelect}
+            disableSelection={this.props.disableSelection}
           />
         ))}
       </div>

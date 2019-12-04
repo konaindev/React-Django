@@ -18,9 +18,7 @@ export default class App extends React.Component {
           <GaGate>
             <PersistGate loading={null} persistor={persistor}>
               <UIStringsGate>
-                <AuthGate>
-                  <RemarkableRouter />
-                </AuthGate>
+                <RemarkableRouter />
               </UIStringsGate>
             </PersistGate>
           </GaGate>

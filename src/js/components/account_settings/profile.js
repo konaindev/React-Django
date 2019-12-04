@@ -9,7 +9,10 @@ import AddressModal from "../address_modal";
 import { COUNTRY_FIELDS } from "../../constants";
 
 import { Tick, Upload } from "../../icons";
-import { addressModal } from "../../redux_base/actions";
+import {
+  accountSettings as actions,
+  addressModal
+} from "../../redux_base/actions";
 import { formatPhone } from "../../utils/formatters";
 import { validateAddress } from "../../api/account_settings";
 import Button from "../button";
@@ -304,6 +307,7 @@ export default class Profile extends React.PureComponent {
     this.formik.setSubmitting(false);
     const message = "Your profile has been saved.";
     this.setState({ message });
+    this.props.dispatch(actions.requestSettings());
   };
 
   updateValues = values => {

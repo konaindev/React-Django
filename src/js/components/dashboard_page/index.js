@@ -187,6 +187,7 @@ export class DashboardPage extends React.PureComponent {
                 properties={this.props.properties}
                 selectedProperties={this.props.selectedProperties}
                 onSelect={this.onSelectHandler}
+                disableSelection={true}
               />
             </div>
           </Container>

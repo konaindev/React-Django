@@ -20,7 +20,8 @@ export const PropertyCard = ({
   report_url,
   members,
   selected,
-  onSelect
+  onSelect,
+  disableSelection
 }) => {
   const handleToggle = () => {
     onSelect(property_id, !selected);
@@ -33,15 +34,24 @@ export const PropertyCard = ({
   const classes = cn("property-card", {
     "property-card--selected": selected
   });
+
+  const renderSelector = () => {
+    if (disableSelection) {
+      return;
+    }
+    return (
+      <div className="property-card__selector" onClick={handleToggle}>
+        <Tick className="property-card__selector-tick" />
+      </div>
+    );
+  };
   return (
     <div className={classes}>
       <Panel className="property-card__panel">
         <div className="property-card__image" style={imageStyle}>
           <div className="property-card__overlay">
             <div className="property-card__overlay-link">
-              <div className="property-card__selector" onClick={handleToggle}>
-                <Tick className="property-card__selector-tick" />
-              </div>
+              {renderSelector()}
               <Link className="property-card__overlay-link" to={report_url}>
                 <Button color="outline">View Report</Button>
               </Link>
