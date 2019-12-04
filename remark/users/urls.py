@@ -1,7 +1,5 @@
-from django.conf import settings
 from django.contrib.auth import views as auth_views
 from django.urls import path
-from django.views.generic.base import RedirectView
 
 from remark.decorators import anonymous_required
 
@@ -9,8 +7,6 @@ from .views import (
     AccountProfileView,
     AccountSecurityView,
     AccountSettingsView,
-    CompleteAccountView,
-    CreatePasswordView,
     AccountReportsView,
     ChangePasswordView,
     ResetPasswordView,
