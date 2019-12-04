@@ -66,10 +66,14 @@ export default class PropertyOverview extends React.PureComponent {
 
   renderTags = () => {
     const { project, onRemoveTag } = this.props;
-    if (!project.custom_tags || !project.custom_tags.length) {
+    if (
+      !project.is_admin &&
+      (!project.custom_tags || !project.custom_tags.length)
+    ) {
       return;
     }
-    const tags = project.custom_tags.map(name => (
+    const customTags = project.custom_tags || [];
+    const tags = customTags.map(name => (
       <Tag
         name={name}
         isAdmin={project.is_admin}
