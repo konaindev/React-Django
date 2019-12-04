@@ -105,13 +105,18 @@ export class PortfolioAnalysisView extends React.PureComponent {
   }
 
   renderKPICards = () => {
+    const { display_average } = this.props;
+    const targetTooltipForAvg = display_average === "1" ? "average_target_among_active_campaigns" : null;
+
     return this.props.highlight_kpis.map(
       ({ name, health, label, value, target }) => {
-        let Component = KPICard;
+        let Component = KPICard, targetTooltip;
         if (_isNil(value)) {
           Component = NoValueKPICard;
         } else if (_isNil(target)) {
           Component = NoTargetKPICard;
+        } else {
+          targetTooltip = targetTooltipForAvg;
         }
         return (
           <Component
@@ -120,6 +125,7 @@ export class PortfolioAnalysisView extends React.PureComponent {
             value={formatKPI(name, value)}
             name={label}
             target={formatKPI(name, target)}
+            targetTooltip={targetTooltip}
             key={name}
           />
         );

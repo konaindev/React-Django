@@ -116,9 +116,18 @@ $no-data-color: $gray-9;
 .kpi-card__target {
     margin-top: 20px;
     font-size: $text-xs;
-    line-height: $line-height-normal;
+    line-height: $text-xl;
     color: $content-text-secondary-color;
     text-align: center;
+
+    & > span {
+        position: relative;
+    }
+
+    .rmb-tooltip-anchor {
+        position: absolute;
+        right: -30px;
+    }
 }
 
 .kpi-card__no-data {

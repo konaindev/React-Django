@@ -69,17 +69,14 @@ export default class PortfolioTable extends React.PureComponent {
   }
 
   renderHeaderKPIs() {
-    return this.props.kpi_order.map(kpi => {
-      const transKey = this.tooltipsByKpi[kpi.value];
-      return (
-        <div className="portfolio-table__kpi" key={kpi.value}>
-          <span>
-            {kpi.label}
-            {transKey && <InfoTooltip transKey={transKey} />}
-          </span>
-        </div>
-      );
-    });
+    return this.props.kpi_order.map(kpi => (
+      <div className="portfolio-table__kpi" key={kpi.value}>
+        <span>
+          {kpi.label}
+          <InfoTooltip transKey={this.tooltipsByKpi[kpi.value]} />
+        </span>
+      </div>
+    ));
   }
 
   render() {
