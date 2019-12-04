@@ -11,7 +11,7 @@ storiesOf("PropertyOverview", module)
     <PropertyOverview
       {...props}
       project={props.projectWithoutSite}
-      buildingImageURL={null}
+      buildingImageURL={""}
     />
   ))
   .add("without tags", () => (
