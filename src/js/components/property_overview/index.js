@@ -2,6 +2,7 @@ import cn from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
+import { AddWhite } from "../../icons";
 import ButtonLink from "../button_link";
 import Panel from "../panel";
 
@@ -79,6 +80,12 @@ export default class PropertyOverview extends React.PureComponent {
     let message = "Custom property groups are made for each tag.";
     if (project.is_admin) {
       message = "Create custom property groups by adding a tag.";
+      tags.push(
+        <div className="property-overview__add-tag">
+          <AddWhite />
+          <div className="property-overview__add-tag-text">Add Tag</div>
+        </div>
+      );
     }
     return (
       <div className="property-overview__section property-overview__section--top">
