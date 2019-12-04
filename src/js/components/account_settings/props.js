@@ -7,7 +7,7 @@ const user = {
   user_id: "usr_jjzpeyfeshzpaha5"
 };
 
-const itemsOrder = ["profile", "lock", "email"];
+const itemsOrder = ["lock"];//["profile", "lock", "email"];
 
 const rules = [
   {
