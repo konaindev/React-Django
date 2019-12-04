@@ -2,7 +2,6 @@ import cn from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 
-import { project as projectActions } from "../../redux_base/actions";
 import ButtonLink from "../button_link";
 import Panel from "../panel";
 
