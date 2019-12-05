@@ -3,7 +3,7 @@
 exports[`ButtonLink renders link correctly 1`] = `
 <a
   className="button-link"
-  href="test.com"
+  href="http://www.test.com/"
   target="_blank"
 >
   <svg

@@ -101,7 +101,7 @@ exports[`PropertyOverview renders default 1`] = `
               strokeWidth="1.5"
             />
           </svg>
-          https://www.liveatelcortez.com/
+          liveatelcortez.com
         </a>
       </div>
     </div>
@@ -384,7 +384,7 @@ exports[`PropertyOverview renders with partial characteristics 1`] = `
               strokeWidth="1.5"
             />
           </svg>
-          https://www.liveatelcortez.com/
+          liveatelcortez.com
         </a>
       </div>
     </div>
@@ -855,7 +855,7 @@ exports[`PropertyOverview renders without stakeholders and characteristics 1`] =
               strokeWidth="1.5"
             />
           </svg>
-          https://www.liveatelcortez.com/
+          liveatelcortez.com
         </a>
       </div>
     </div>
@@ -960,7 +960,7 @@ exports[`PropertyOverview renders without tags 1`] = `
               strokeWidth="1.5"
             />
           </svg>
-          https://www.liveatelcortez.com/
+          liveatelcortez.com
         </a>
       </div>
     </div>
