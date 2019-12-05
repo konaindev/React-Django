@@ -3,6 +3,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { Web } from "../../icons";
+import { stripURL } from "../../utils/misc";
 import "./button_link.scss";
 
 export default class ButtonLink extends React.PureComponent {
@@ -21,7 +22,7 @@ export default class ButtonLink extends React.PureComponent {
     return (
       <a className={classes} href={link} target={target} {...otherProps}>
         <Web className="button-link__icon" />
-        {link}
+        {stripURL(link)}
       </a>
     );
   }

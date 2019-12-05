@@ -98,3 +98,11 @@ export const qsStringify = (queryParams, appendLeadingPrefix = true) => {
     arrayFormat: "repeat" // "a=1&a=2" instead of "a[0]=1&a[1]=2"
   });
 };
+
+/*
+ * Strips protocol part and end slash from url string
+ */
+export const stripURL = url => {
+  const r = /^(\w+:\/\/)(www\.)?/i;
+  return url.replace(r, "").replace(/\/$/, "");
+};
