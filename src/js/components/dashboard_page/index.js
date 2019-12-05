@@ -13,6 +13,7 @@ import ToggleButton from "../toggle_button";
 import { InviteModalProperties } from "../../containers/invite_modal";
 import { Close, ListView, TileView } from "../../icons";
 import Loader from "../loader";
+import { qsParse, qsStringify } from "../../utils/misc";
 import TutorialView from "../tutorial_view";
 import { inviteModal, dashboard } from "../../redux_base/actions";
 import "./dashboard_page.scss";
@@ -267,7 +268,7 @@ DashboardSelection.defaultProps = {
   inviteDisable: true
 };
 
-export class UrlQueryLayer extends React.PureComponent {
+class UrlQueryLayer extends React.PureComponent {
   constructor(props) {
     super(props);
 

@@ -16,7 +16,6 @@ import { axiosPost } from "../../utils/api";
 
 import "./create_password_view.scss";
 
-
 export class CreatePasswordView extends React.PureComponent {
   static propTypes = {
     hash: PropTypes.string.isRequired,
