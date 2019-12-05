@@ -1,7 +1,6 @@
 import json
 
 from django.conf import settings
-
 from rest_framework import status as drf_status
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
@@ -53,7 +52,6 @@ class DashboardView(APIView):
                 report_url=project.get_report_url()
             )
             return project_details
-
         return cache_lib.access_cache(cache_key, generate_value, cache_bust=cache_bust)
 
     def get_owned_projects(self, user):

@@ -8,6 +8,7 @@ import {
 } from "./index";
 import { props, propsFill } from "./props";
 
+
 describe("InvestmentAllocation", () => {
   it("renders <InvestmentAllocation />", () => {
     const tree = shallow(<InvestmentAllocation {...props} />);

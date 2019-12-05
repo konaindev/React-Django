@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { VictoryPie } from "victory";
-import _isNil from "lodash/isNil";
 import cx from "classnames";
 
 import BoxRow from "../box_row";
@@ -154,7 +153,7 @@ InvestmentAllocationChart.propTypes = {
 };
 
 const formatFourWeekAverages = value => {
-  if (_isNil(value)) {
+  if (value === null || value === undefined) {
     return;
   }
   const curValue = formatCurrencyShorthandWithDigit(value);

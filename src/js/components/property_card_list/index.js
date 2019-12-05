@@ -49,7 +49,6 @@ export default class PropertyCardList extends React.PureComponent {
         </div>
       );
     }
-
     return (
       <div className="property-card-list">
         {properties.map((property, index) => (

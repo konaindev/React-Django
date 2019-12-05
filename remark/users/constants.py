@@ -1,3 +1,4 @@
+
 import re
 import os
 
@@ -103,3 +104,46 @@ PROJECT_ROLES = {
     "admin": "admin",
     "staff": "staff"
 }
+
+VALIDATION_RULES = [
+    {
+        "validator": get_password_validators(
+            [{"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"}]
+        ),
+        "label": "Be at least 8 characters",
+        "key": "password-length",
+    },
+    {
+        "validator": get_password_validators(
+            [
+                {
+                    "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"
+                }
+            ]
+        ),
+        "label": "Contain alphabetic characters",
+        "key": "characters",
+    },
+    {
+        "validator": get_password_validators(
+            [
+                {
+                    "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+                }
+            ]
+        ),
+        "label": "Not match personal information",
+        "key": "personal",
+    },
+    {
+        "validator": get_password_validators(
+            [
+                {
+                    "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"
+                }
+            ]
+        ),
+        "label": "Not be a commonly used password",
+        "key": "used",
+    },
+]

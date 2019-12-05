@@ -20,8 +20,6 @@ from .views import (
 
 app_name = "users"
 
-
-
 urlpatterns = [
     path(
         "reset/<uidb64>/<token>/",

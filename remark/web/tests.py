@@ -3,7 +3,7 @@ import decimal
 import json
 
 from django.contrib.auth.models import Group
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django.urls import reverse
 
 from unittest.mock import patch, Mock

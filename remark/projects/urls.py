@@ -27,4 +27,9 @@ urlpatterns = [
         ChangeMemberRoleView.as_view(),
         name="project_change_role",
     ),
+    path(
+        "<project_id>/remove-member/",
+        ProjectRemoveMemberIView.as_view(),
+        name="project_remove_user",
+    ),
 ]
