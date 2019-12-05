@@ -1,14 +1,13 @@
 import cn from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
-
-import { AddWhite } from "../../icons";
 import ButtonLink from "../button_link";
 import Panel from "../panel";
 
 import Tag from "./tag";
 import Tile from "./tile";
 
+import { AddButton, AddInput } from "./add";
 import "./property_overview.scss";
 
 export default class PropertyOverview extends React.PureComponent {
@@ -37,6 +36,8 @@ export default class PropertyOverview extends React.PureComponent {
     developer: "developer"
   };
 
+  state = { isAdd: false };
+
   _renderFields = (fields, colsNum, emptyMessage) => {
     const { project } = this.props;
     const items = [];
@@ -64,6 +65,9 @@ export default class PropertyOverview extends React.PureComponent {
     );
   };
 
+  onShowAddInput = () => this.setState({ isAdd: true, addingTag: "" });
+  onAddTag = e => this.setState({ addingTag: e.target.value });
+
   renderTags = () => {
     const { project, onRemoveTag } = this.props;
     if (
@@ -84,11 +88,14 @@ export default class PropertyOverview extends React.PureComponent {
     let message = "Custom property groups are made for each tag.";
     if (project.is_admin) {
       message = "Create custom property groups by adding a tag.";
+      const { isAdd } = this.state;
+      const addKey = "add-tag";
       tags.push(
-        <div className="property-overview__add-tag">
-          <AddWhite />
-          <div className="property-overview__add-tag-text">Add Tag</div>
-        </div>
+        isAdd ? (
+          <AddInput onChange={this.onAddTag} key={addKey} />
+        ) : (
+          <AddButton onClick={this.onShowAddInput} key={addKey} />
+        )
       );
     }
     return (

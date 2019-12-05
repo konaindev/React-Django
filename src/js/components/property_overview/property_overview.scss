@@ -204,6 +204,10 @@ $add-tag-text-height: 20px;
     padding: $tags-padding-top 0 $tags-padding-top 0;
     margin-top: $tags-spacing;
     cursor: pointer;
+
+    &--input {
+        cursor: default;
+    }
 }
 
 .property-overview__add-tag-text {
