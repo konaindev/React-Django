@@ -8,6 +8,7 @@
     "build:prod": "webpack --progress --colors --hide-modules --config=webpack.prod.js",
     "heroku-postbuild": "webpack --progress --config=webpack.prod.js",
     "storybook": "start-storybook -p 6006 --ci",
+    "storybook-smoke": "start-storybook -p 6006 --ci --smoke-test",
     "build-storybook": "build-storybook -o .out",
     "deploy-storybook": "rm -rf .out && build-storybook -o .out && echo 'storybook.remarkably.io' > '.out/CNAME' && storybook-to-ghpages --ci --existing-output-dir=.out --host-token-env-variable=GITHUB_TOKEN",
     "test-ui": "jest --runInBand --silent --ci",
