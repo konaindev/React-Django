@@ -27,3 +27,10 @@ PROPERTY_STYLES = {
     "garden": "Garden",
     "other": "Other",
 }
+
+HEALTH_STATUS = {
+    "PENDING": -1,
+    "OFF_TRACK": 0,
+    "AT_RISK": 1,
+    "ON_TRACK": 2
+}
