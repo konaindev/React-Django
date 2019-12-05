@@ -95,6 +95,7 @@ $tag-remove-hover-color: $gray-6;
     padding: $tags-padding;
     margin: $tags-spacing $tags-spacing 0 0;
     border-radius: $tags-border-radius;
+    box-shadow: none;
     &:first-child {
         margin-left: 0;
     }
