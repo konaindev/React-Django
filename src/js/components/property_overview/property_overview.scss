@@ -68,6 +68,7 @@ $tag-remove-hover-color: $gray-6;
     height: $panel-header-height;
     color: $panel-header-color;
     font-size: $panel-header-text-size;
+    font-weight: $weight-medium;
 }
 
 .property-overview__section {
@@ -151,6 +152,7 @@ $tag-remove-hover-color: $gray-6;
     height: $header-height;
     color: $header-color;
     font-size: $header-font;
+    font-weight: $weight-medium;
 }
 
 .property-overview__address {
