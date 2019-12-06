@@ -447,14 +447,16 @@ class Project(models.Model):
         return images
 
     def get_report_url(self):
-        report_links = ReportLinks.for_project(self)
+        report_links = ReportLinks.public_for_project(self)
+
         if report_links.get("performance"):
-            url = report_links["performance"][0].get("url")
-        elif report_links["baseline"]:
-            url = report_links["baseline"].get("url")
-        else:
-            url = f"/projects/{self.public_id}/market/"
-        return url
+            return report_links["performance"][0].get("url")
+
+        for report_type in ["baseline", "market", "modeling", "campaign_plan"]:
+            if report_links.get(report_type):
+                return report_links[report_type].get("url")
+
+        return None
 
     def get_performance_rating(self):
         performance_report = PerformanceReport.for_campaign_to_date(self)
