@@ -1,3 +1,5 @@
+#! /usr/bin/env python
+
 import os
 
 from openpyxl import Workbook
@@ -147,3 +149,4 @@ def run():
         result.append(research(projects, kpi))
 
     create_xls(kpis, result)
+
