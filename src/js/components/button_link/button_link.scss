@@ -3,19 +3,22 @@
 $bg-color: $gray-4;
 $text-color: $highlight-gray-3;
 $line-height: $line-height-tight;
-$spacing: 15px 64px;
+$padding: 15px 40px;
 $icon-size: 1.25rem;
 
 .button-link {
     position: relative;
     display: inline-block;
-    padding: $spacing;
+    padding: $padding;
     color: $text-color;
     font-size: $text-sm;
+    text-align: center;
     text-decoration: none;
+    text-overflow: ellipsis;
     background-color: $bg-color;
     border-radius: $border-radius-default;
     line-height: $line-height;
+    overflow: hidden;
 
     &:hover, &:focus {
         background-color: lighten($bg-color, 3%);
