@@ -68,8 +68,11 @@ def create_project(project_name="project 1"):
         property=property,
         view_group=group,
     )
-    project.get_report_url = mock.MagicMock(return_value="/report_url")
     return project, group
+
+
+def mock_get_report_url(self):
+    return f"/projects/{self.public_id}/market/"
 
 
 def add_user_to_group(group, email="test@remarkably.io"):
@@ -731,6 +734,7 @@ class GetTemplateVarsTestCase(TestCase):
         self.project = project1
         self.projects = [project1, project2]
 
+    @mock.patch("remark.projects.models.Project.get_report_url", new=mock_get_report_url)
     def test_for_new_user(self):
         template_vars = get_template_vars("admin", self.new_user, [self.project], 5)
         expected = {
@@ -745,7 +749,7 @@ class GetTemplateVarsTestCase(TestCase):
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 1",
                     "address": "Seattle, WA",
-                    "view_link": f"{FRONTEND_URL}/report_url",
+                    "view_link": f"{FRONTEND_URL}/projects/{self.project.public_id}/market/",
                 }
             ],
             "more_count": None,
@@ -754,6 +758,7 @@ class GetTemplateVarsTestCase(TestCase):
         }
         self.assertEqual(expected, template_vars)
 
+    @mock.patch("remark.projects.models.Project.get_report_url", new=mock_get_report_url)
     def test_for_new_user_many_projects(self):
         template_vars = get_template_vars("admin", self.new_user, self.projects, 5)
         expected = {
@@ -768,13 +773,13 @@ class GetTemplateVarsTestCase(TestCase):
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 1",
                     "address": "Seattle, WA",
-                    "view_link": f"{FRONTEND_URL}/report_url",
+                    "view_link": f"{FRONTEND_URL}/projects/{self.projects[0].public_id}/market/",
                 },
                 {
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 2",
                     "address": "Seattle, WA",
-                    "view_link": f"{FRONTEND_URL}/report_url",
+                    "view_link": f"{FRONTEND_URL}/projects/{self.projects[1].public_id}/market/",
                 },
             ],
             "more_count": None,
@@ -783,6 +788,7 @@ class GetTemplateVarsTestCase(TestCase):
         }
         self.assertEqual(expected, template_vars)
 
+    @mock.patch("remark.projects.models.Project.get_report_url", new=mock_get_report_url)
     def test_for_existing_user(self):
         template_vars = get_template_vars("admin", self.user, [self.project], 5)
         expected = {
@@ -797,15 +803,16 @@ class GetTemplateVarsTestCase(TestCase):
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 1",
                     "address": "Seattle, WA",
-                    "view_link": f"{FRONTEND_URL}/report_url",
+                    "view_link": f"{FRONTEND_URL}/projects/{self.project.public_id}/market/",
                 }
             ],
             "more_count": None,
-            "main_button_link": f"{FRONTEND_URL}/report_url",
+            "main_button_link": f"{FRONTEND_URL}/projects/{self.project.public_id}/market/",
             "main_button_label": "View Property",
         }
         self.assertEqual(expected, template_vars)
 
+    @mock.patch("remark.projects.models.Project.get_report_url", new=mock_get_report_url)
     def test_for_existing_user_many_projects(self):
         template_vars = get_template_vars("admin", self.user, self.projects, 5)
         expected = {
@@ -820,13 +827,13 @@ class GetTemplateVarsTestCase(TestCase):
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 1",
                     "address": "Seattle, WA",
-                    "view_link": f"{FRONTEND_URL}/report_url",
+                    "view_link": f"{FRONTEND_URL}/projects/{self.projects[0].public_id}/market/",
                 },
                 {
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 2",
                     "address": "Seattle, WA",
-                    "view_link": f"{FRONTEND_URL}/report_url",
+                    "view_link": f"{FRONTEND_URL}/projects/{self.projects[1].public_id}/market/",
                 },
             ],
             "more_count": None,
