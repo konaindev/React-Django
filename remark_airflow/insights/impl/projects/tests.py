@@ -26,7 +26,7 @@ mock_project_fact_generators = (
 )
 
 
-class LeaseRateAgainstModelTestCase(TestCase):
+class GetProjectFactsTestCase(TestCase):
     def setUp(self):
         self.project = Mock()
         self.start = Mock()
@@ -47,28 +47,31 @@ class LeaseRateAgainstModelTestCase(TestCase):
         }
         self.assertEqual(result, expected)
 
-    def test_get_project_insights(self):
-        project_facts = {
+
+class GetProjectInsightsTestCase(TestCase):
+    def setUp(self):
+        self.project_facts = {
             "trigger_is_active_campaign": True,
             "trigger_campaign_health_status_off_track": True,
+            "trigger_health_status_is_changed": True,
             "var_current_period_leased_rate": 0.89,
             "var_target_leased_rate": 0.94,
             "var_campaign_health_status": 2,
+            "var_prev_health_status": 0,
         }
-        result = get_project_insights(project_facts)
+
+    def test_get_project_insights(self):
+        result = get_project_insights(self.project_facts)
         expected = {
-            "lease_rate_against_target": f"Property is 0.89% Leased against period target of 0.94%, assessed as On Track."
+            "lease_rate_against_target": "Property is 0.89% Leased against period target of 0.94%, assessed as On Track.",
+            "change_health_status": "Campaign health has changed from Off Track to On Track during this period."
         }
         self.assertEqual(result, expected)
 
     def test_get_project_insights_not_trigger(self):
-        project_facts = {
-            "trigger_is_active_campaign": False,
-            "trigger_campaign_health_status_off_track": True,
-            "var_current_period_leased_rate": 0.89,
-            "var_target_leased_rate": 0.94,
-            "var_campaign_health_status": 2,
-        }
+        project_facts = self.project_facts.copy()
+        project_facts["trigger_is_active_campaign"] = False
+        project_facts["trigger_health_status_is_changed"] = False
         result = get_project_insights(project_facts)
         expected = {}
         self.assertEqual(result, expected)
