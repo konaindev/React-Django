@@ -8,6 +8,7 @@
     "build:prod": "webpack --progress --colors --hide-modules --config=webpack.prod.js",
     "heroku-postbuild": "webpack --progress --config=webpack.prod.js",
     "storybook": "start-storybook -p 6006 --ci",
+    "storybook-smoke": "start-storybook -p 6006 --ci --smoke-test",
     "build-storybook": "build-storybook -o .out",
     "deploy-storybook": "rm -rf .out && build-storybook -o .out && echo 'storybook.remarkably.io' > '.out/CNAME' && storybook-to-ghpages --ci --existing-output-dir=.out --host-token-env-variable=GITHUB_TOKEN",
     "test-ui": "jest --runInBand --silent --ci",
@@ -18,8 +19,11 @@
     "fetch-s3-fixtures": "aws s3 cp s3://fa22980d-b1d2-453b-8133-307ad70ccc55/$(git log --pretty=format:'%h' -n 1).latest.json data/dumped/latest.json",
     "fetch-latest-fixtures": "aws s3 cp s3://fa22980d-b1d2-453b-8133-307ad70ccc55/latest.json data/dumped/latest.json",
     "chromatic": "./node_modules/.bin/chromatic test",
-    "deploy-frontend-staging": "aws s3 sync s3://app-staging.remarkably.io dist/",
-    "invalidate-cdn-staging": "aws cloudfront create-invalidation --distribution-id ${CF_DIST_STAGING} --paths /"
+    "deploy-frontend-staging": "aws s3 sync dist/ s3://app-staging.remarkably.io",
+    "deploy-frontend-production": "aws s3 sync dist/ s3://app.remarkably.io",
+    "run-build-ui": "yarn build && ./node_modules/.bin/webpack-dev-server --open --mode development --config webpack.dev.js --history-api-fallback",
+    "invalidate-cdn-staging": "aws cloudfront create-invalidation --distribution-id ${CF_DIST_STAGING} --paths /*",
+    "invalidate-cdn-production": "aws cloudfront create-invalidation --distribution-id ${CF_DIST_PRODUCTION} --paths /*"
   },
   "storybook-deployer": {
     "gitUsername": "Storybook Deployer",
@@ -54,6 +58,7 @@
     "eslint-plugin-babel": "^5",
     "eslint-plugin-prettier": "^2",
     "eslint-plugin-react": "^7",
+    "express": "^4.17.1",
     "file-loader": "^3.0.1",
     "jest": "^24",
     "jest-environment-enzyme": "^7",
@@ -78,7 +83,8 @@
     "typescript-json-schema": "^0.36.0",
     "uglifyjs-webpack-plugin": "^2.1.2",
     "webpack": "^4.29.5",
-    "webpack-cli": "^3.2.3",
+    "webpack-cli": "^3.3.8",
+    "webpack-dev-server": "^3.8.0",
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
@@ -93,6 +99,7 @@
     "google-map-react": "^1.1.2",
     "lodash": "^4.17.11",
     "mjml": "^4.4.1",
+    "path-to-regexp": "^1.7.0",
     "prop-types": "^15",
     "qs": "^6.8.0",
     "rc-tooltip": "^3.7.3",
@@ -100,17 +107,22 @@
     "react-copy-to-clipboard": "^5.0.1",
     "react-day-picker": "7.3.0",
     "react-dom": "^16",
+    "react-ga": "^2.6.0",
     "react-markdown": "^4.0.6",
     "react-redux": "^7.1.0",
     "react-responsive-modal": "^4.0.1",
+    "react-router-dom": "^5.0.1",
     "react-select": "^3.0.3",
     "react-table": "^6.9.2",
     "redux": "^4.0.1",
+    "redux-persist": "^6.0.0",
+    "redux-saga": "^1.1.1",
     "regenerator-runtime": "^0.13.3",
     "riot-route": "^3.1.4",
     "sass-mq": "^5.0.0",
     "url-search-params-polyfill": "^7.0.0",
     "victory": "^31.1.0",
     "yup": "^0.27.0"
-  }
+  },
+  "engines" : { "node" : ">=10.15.3" }
 }

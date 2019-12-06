@@ -1,13 +1,16 @@
 import json
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.http import JsonResponse
 
-from remark.lib.views import RemarkView
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
 
 from .models import Business, Office
 
 
-class CompanySearchView(LoginRequiredMixin, RemarkView):
+class CompanySearchView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
         params = json.loads(request.body)
         business = Business.objects.filter(name__istartswith=params["company"])[:5]
@@ -17,10 +20,15 @@ class CompanySearchView(LoginRequiredMixin, RemarkView):
                 "value": b.public_id,
                 "label": b.name,
             })
-        return JsonResponse({"company": company})
+        return Response({
+            "company": company
+        })
 
 
-class OfficeAddressView(LoginRequiredMixin, RemarkView):
+class OfficeAddressView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
         params = json.loads(request.body)
         addresses = []
@@ -33,8 +41,12 @@ class OfficeAddressView(LoginRequiredMixin, RemarkView):
                 "value": o.address.formatted_address,
                 "street": o.address.street_address_1,
                 "city": o.address.city,
-                "state": o.address.state,
+                "state": o.address.full_state,
+                "country": o.address.country,
+                "zip": o.address.zip_code
             } for o in offices]
         except Business.DoesNotExist:
             pass
-        return JsonResponse({"addresses": addresses})
+        return Response({
+            "addresses": addresses
+        })

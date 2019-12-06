@@ -9,6 +9,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
+from easy_thumbnails.conf import Settings as thumbnail_settings
 import os
 import sys
 import dj_database_url
@@ -59,12 +60,12 @@ DEBUG_PROPAGATE_EXCEPTIONS = os.getenv("DEBUG_PROPAGATE_EXCEPTIONS", "NO") == "Y
 DEBUG_PRINT_LOGGER = os.getenv("DEBUG_PRINT_LOGGER", "NO") == "YES"
 SECURE_SSL_REDIRECT = os.getenv("SECURE_SSL_REDIRECT", "YES") == "YES"
 
-BASE_URL = os.getenv("BASE_URL", None)
+BASE_URL = required_env("BASE_URL")
+FRONTEND_URL = required_env("FRONTEND_URL")
 
 # Email setup
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", "Remarkably <hello@remarkably.io>")
 ADMINS = [("Remarkably Ops", "ops@remarkably.io")]
-SALES_EMAIL = "sales@remarkably.io"
 EMAIL_BACKEND = os.getenv(
     "EMAIL_BACKEND", "django.core.mail.backends.smtp.EmailBackend"
 )
@@ -73,6 +74,8 @@ EMAIL_PORT = _safe_int(os.getenv("EMAIL_PORT"))
 EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = os.getenv("EMAIL_USE_TLS", "YES") == "YES"
+
+INVITATION_EXP = int(os.getenv("INVITATION_EXP", 10))
 
 # Application definition
 INSTALLED_APPS = [
@@ -104,9 +107,9 @@ INSTALLED_APPS = [
     "remark.geo",
     "remark",
     "django_extensions",
+    "corsheaders",
 ]
 
-from easy_thumbnails.conf import Settings as thumbnail_settings
 THUMBNAIL_PROCESSORS = (
     'image_cropping.thumbnail_processors.crop_corners',
 ) + thumbnail_settings.THUMBNAIL_PROCESSORS
@@ -114,6 +117,8 @@ THUMBNAIL_PROCESSORS = (
 IMAGE_CROPPING_SIZE_WARNING = True
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
     "remark.lib.middleware.exception.log_500",
     "django.middleware.security.SecurityMiddleware",
     # Handled by django_heroku.settings(...)
@@ -200,9 +205,6 @@ LOGGING = {
     },
 }
 DEBUG_PRINT_LOGGER = True
-
-# Change 'default' database configuration with $DATABASE_URL.
-DATABASES["default"].update(dj_database_url.config(conn_max_age=500))
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
@@ -311,7 +313,13 @@ MJML_CHECK_CMD_ON_STARTUP = False
 
 # Activate Django-Heroku. Don't modify the DATABASES variable if we're in debug;
 # otherwise, modify it to match Heroku's needs (including forcing it to be SSL.)
+
 django_heroku.settings(locals(), staticfiles=True, databases=not DEBUG)
+
+# override DATABASE_URL set by django_heroku because it forces SSL mode locally
+ssl_require = ENV == PROD
+locals()['DATABASES']['default'] = dj_database_url.config(
+    conn_max_age=django_heroku.MAX_CONN_AGE, ssl_require=ssl_require)
 
 # Configure Sentry -jc 11-jul-19
 
@@ -325,7 +333,17 @@ THUMBNAIL_DEFAULT_STORAGE = DEFAULT_FILE_STORAGE
 THUMBNAIL_PRESERVE_EXTENSIONS = True
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
+    "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.NamespaceVersioning"
 }
+
+SIMPLE_JWT = {
+    "USER_ID_FIELD": "public_id"
+}
+
+# CORS Headers plugin settings
+CORS_ORIGIN_ALLOW_ALL = True
+
+FILE_UPLOAD_MAX_MEMORY_SIZE = 3 * 1024 * 1024  # Allow 3MB file size

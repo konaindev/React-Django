@@ -1,294 +1,120 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`CampaignPlanOverviewTab renders correctly 1`] = `
-<div
-  className="panel panel--default campaign-plan-overview-tab"
->
-  <div
-    className="campaign-plan-overview-table"
-  >
-    <div
-      className="table__row"
-    >
-      <div
-        className="row__label"
-      >
+exports[`CampaignPlanOverviewTab renders CampaignOverviewObjectives correctly 1`] = `
+"<div className=\\"objectives-markdown\\">
+  <div className=\\"objective-item\\">
+    <h1>
+      Reputation Building
+      <Connect(InfoTooltipBase) transKey=\\"acquisition_reputation_building\\" />
+    </h1>
+    <ReactMarkdown source=\\"Grow reach and shape perceptions\\\\n* Attract 11,979 USV\\\\n* Attract 1,000 social followers\\\\n* Add 1,100 contacts to property database (email list)\\" className=\\"markdown-content\\" renderers={{...}} escapeHtml={true} skipHtml={false} sourcePos={false} rawSourcePos={false} transformLinkUri={[Function: uriTransformer]} astPlugins={{...}} plugins={{...}} parserOptions={{...}} />
+  </div>
+  <div className=\\"objective-item\\">
+    <h1>
+      Demand Creation
+      <Connect(InfoTooltipBase) transKey=\\"acquisition_demand_creation\\" />
+    </h1>
+    <ReactMarkdown source=\\"Generate INQs and USVs:\\\\n* Convert 6% of USVs to INQs\\\\n* Attract 696 Inquires (calls, emails, walk-ins, chats, texts)\\\\n* Conduct 270 tours (at 40% INQ>Tour conversion rate)\\" className=\\"markdown-content\\" renderers={{...}} escapeHtml={true} skipHtml={false} sourcePos={false} rawSourcePos={false} transformLinkUri={[Function: uriTransformer]} astPlugins={{...}} plugins={{...}} parserOptions={{...}} />
+  </div>
+  <div className=\\"objective-item\\">
+    <h1>
+      Leasing Enablement
+      <Connect(InfoTooltipBase) transKey=\\"acquisition_leasing_enablement\\" />
+    </h1>
+    <ReactMarkdown source=\\"Equip leasing team with effective processes and tools that delight\\\\n* Provide highly responsive process for handling INQ and Tours\\\\n* Capture 97 signed leases\\" className=\\"markdown-content\\" renderers={{...}} escapeHtml={true} skipHtml={false} sourcePos={false} rawSourcePos={false} transformLinkUri={[Function: uriTransformer]} astPlugins={{...}} plugins={{...}} parserOptions={{...}} />
+  </div>
+  <div className=\\"objective-item\\">
+    <h1>
+      Marketing Intelligence
+      <Connect(InfoTooltipBase) transKey=\\"acquisition_marketing_intelligence\\" />
+    </h1>
+    <ReactMarkdown source=\\"Capture resident and prospect data:\\\\n* Capture prospect data on website\\\\n* Capture resident data about satisfaction and retention\\" className=\\"markdown-content\\" renderers={{...}} escapeHtml={true} skipHtml={false} sourcePos={false} rawSourcePos={false} transformLinkUri={[Function: uriTransformer]} astPlugins={{...}} plugins={{...}} parserOptions={{...}} />
+  </div>
+</div>"
+`;
+
+exports[`CampaignPlanOverviewTab renders CampaignOverviewSegments correctly 1`] = `
+"<div className=\\"target-segments\\">
+  <div className=\\"target-segment-item\\">
+    <p>
+      Primary
+      <Connect(InfoTooltipBase) transKey=\\"target_segments_primary\\" />
+    </p>
+    <p>
+      Young Professionals (25-34)
+    </p>
+  </div>
+  <div className=\\"target-segment-item\\">
+    <p>
+      Secondary
+      <Connect(InfoTooltipBase) transKey=\\"target_segments_secondary\\" />
+    </p>
+    <p>
+      Young Entrepreneurs (25-34)
+    </p>
+  </div>
+  <div className=\\"target-segment-item\\">
+    <p>
+      Tertiary
+      <Connect(InfoTooltipBase) transKey=\\"target_segments_tertiary\\" />
+    </p>
+    <p>
+      Young Couples (35-40)
+    </p>
+  </div>
+  <div className=\\"target-segment-item\\">
+    <p>
+      Quarternary
+      <Connect(InfoTooltipBase) transKey=\\"target_segments_quarternary\\" />
+    </p>
+    <p>
+      Established Singles (35-44)
+    </p>
+  </div>
+</div>"
+`;
+
+exports[`CampaignPlanOverviewTab renders CampaignPlanOverviewTab correctly 1`] = `
+"<Panel className=\\"campaign-plan-overview-tab\\" component=\\"div\\" size=\\"default\\">
+  <div className=\\"campaign-plan-overview-table\\">
+    <div className=\\"table__row\\">
+      <div className=\\"row__label\\">
         Target Segments
       </div>
-      <div
-        className="target-segments row__content"
-      >
-        <div
-          className="target-segment-item"
-        >
-          <p>
-            Primary
-          </p>
-          <p>
-            Young Professionals (25-34)
-          </p>
-        </div>
-        <div
-          className="target-segment-item"
-        >
-          <p>
-            Secondary
-          </p>
-          <p>
-            Young Entrepreneurs (25-34)
-          </p>
-        </div>
-        <div
-          className="target-segment-item"
-        >
-          <p>
-            Tertiary
-          </p>
-          <p>
-            Young Couples (35-40)
-          </p>
-        </div>
-        <div
-          className="target-segment-item"
-        >
-          <p>
-            Quarternary
-          </p>
-          <p>
-            Established Singles (35-44)
-          </p>
-        </div>
-      </div>
+      <CampaignOverviewSegments className=\\"row__content\\" segments={{...}} />
     </div>
-    <div
-      className="table__row"
-    >
-      <div
-        className="row__label"
-      >
+    <div className=\\"table__row\\">
+      <div className=\\"row__label\\">
         Goal
       </div>
-      <div
-        className="row__content"
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "Achieve 95% lease-up by 6/30/2019",
-          }
-        }
-      />
+      <div className=\\"row__content\\" dangerouslySetInnerHTML={{...}} />
     </div>
-    <div
-      className="table__row"
-    >
-      <div
-        className="row__label"
-      >
+    <div className=\\"table__row\\">
+      <div className=\\"row__label\\">
         Objectives
       </div>
-      <div
-        className="objectives-markdown row__content"
-      >
-        <div
-          className="objective-item"
-        >
-          <h1>
-            Reputation Building
-          </h1>
-          <div
-            className="markdown-content"
-          >
-            <p>
-              Grow reach and shape perceptions
-            </p>
-            <ul>
-              <li>
-                Attract 11,979 USV
-              </li>
-              <li>
-                Attract 1,000 social followers
-              </li>
-              <li>
-                Add 1,100 contacts to property database (email list)
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div
-          className="objective-item"
-        >
-          <h1>
-            Demand Creation
-          </h1>
-          <div
-            className="markdown-content"
-          >
-            <p>
-              Generate INQs and USVs:
-            </p>
-            <ul>
-              <li>
-                Convert 6% of USVs to INQs
-              </li>
-              <li>
-                Attract 696 Inquires (calls, emails, walk-ins, chats, texts)
-              </li>
-              <li>
-                Conduct 270 tours (at 40% INQ&gt;Tour conversion rate)
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div
-          className="objective-item"
-        >
-          <h1>
-            Leasing Enablement
-          </h1>
-          <div
-            className="markdown-content"
-          >
-            <p>
-              Equip leasing team with effective processes and tools that delight
-            </p>
-            <ul>
-              <li>
-                Provide highly responsive process for handling INQ and Tours
-              </li>
-              <li>
-                Capture 97 signed leases
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div
-          className="objective-item"
-        >
-          <h1>
-            Marketing Intelligence
-          </h1>
-          <div
-            className="markdown-content"
-          >
-            <p>
-              Capture resident and prospect data:
-            </p>
-            <ul>
-              <li>
-                Capture prospect data on website
-              </li>
-              <li>
-                Capture resident data about satisfaction and retention
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
+      <CampaignOverviewObjectives objectives={{...}} className=\\"row__content\\" />
     </div>
-    <div
-      className="table__row"
-    >
-      <div
-        className="row__label"
-      >
+    <div className=\\"table__row\\">
+      <div className=\\"row__label\\">
         Assumptions
       </div>
-      <div
-        className="row__content"
-      >
-        <div
-          className="markdown-content"
-        >
-          <ul>
-            <li>
-              Asset contains 260 units
-            </li>
-            <li>
-              20% C&D rate
-            </li>
-            <li>
-              Model based on predictions generated in Sept. 2018
-            </li>
-          </ul>
-        </div>
+      <div className=\\"row__content\\">
+        <ReactMarkdown source=\\"* Asset contains 260 units\\\\n* 20% C&D rate\\\\n* Model based on predictions generated in Sept. 2018\\" className=\\"markdown-content\\" renderers={{...}} escapeHtml={true} skipHtml={false} sourcePos={false} rawSourcePos={false} transformLinkUri={[Function: uriTransformer]} astPlugins={{...}} plugins={{...}} parserOptions={{...}} />
       </div>
     </div>
-    <div
-      className="table__row"
-    >
-      <div
-        className="row__label"
-      >
+    <div className=\\"table__row\\">
+      <div className=\\"row__label\\">
         Schedule
       </div>
-      <div
-        className="row__content"
-        dangerouslySetInnerHTML={
-          Object {
-            "__html": "Campaign begins in Feb. 2019 and finishes in July 2019",
-          }
-        }
-      />
+      <div className=\\"row__content\\" dangerouslySetInnerHTML={{...}} />
     </div>
-    <div
-      className="table__row table__row--last"
-    >
-      <div
-        className="row__label"
-      >
+    <div className=\\"table__row table__row--last\\">
+      <div className=\\"row__label\\">
         Est. Campaign Investment
       </div>
-      <div
-        className="est-campaign-target row__content"
-      >
-        <h1>
-          $75,500
-        </h1>
-        <p>
-          Based on Current Model
-        </p>
-        <br />
-        <div
-          className="target-investments"
-        >
-          <p>
-            <span>
-              Reputation Building
-            </span>
-            <span />
-            <span>
-              $20,000
-            </span>
-          </p>
-          <p>
-            <span>
-              Demand Creation
-            </span>
-            <span />
-            <span>
-              $15,000
-            </span>
-          </p>
-          <p>
-            <span>
-              Leasing Enablement
-            </span>
-            <span />
-            <span>
-              $20,000
-            </span>
-          </p>
-          <p>
-            <span>
-              Marketing Intelligence
-            </span>
-            <span />
-            <span>
-              $20,500
-            </span>
-          </p>
-        </div>
-      </div>
+      <CampaignOverviewEstTarget className=\\"row__content\\" reputation_building={{...}} demand_creation={{...}} leasing_enablement={{...}} market_intelligence={{...}} total={{...}} />
     </div>
   </div>
-</div>
+</Panel>"
 `;

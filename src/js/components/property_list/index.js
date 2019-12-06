@@ -20,12 +20,14 @@ class PropertyList extends React.PureComponent {
     onSelect: PropTypes.func,
     selectedProperties: PropTypes.arrayOf(
       PropTypes.shape(PropertyCard.requiredPropTypes)
-    )
+    ),
+    disableSelection: PropTypes.boolean
   };
 
   static defaultProps = {
     onSelect: () => {},
-    selectedProperties: []
+    selectedProperties: [],
+    disableSelection: false
   };
 
   state = {
@@ -57,6 +59,7 @@ class PropertyList extends React.PureComponent {
       <div key={property.property_id} className="property-list__row">
         <PropertyRow
           {...property}
+          disableSelection={this.props.disableSelection}
           selection_mode={selectionMode}
           selected={this.props.selectedProperties.some(
             p => p.property_id === property.property_id
@@ -73,8 +76,7 @@ class PropertyList extends React.PureComponent {
     if (this.props.properties.length === 0) {
       return (
         <div className="property-list">
-          All your properties have been filtered out. Remove some of the filters
-          above.
+          0 search results found. Remove some of the search terms entered above.
         </div>
       );
     }

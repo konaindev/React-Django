@@ -32,52 +32,52 @@ export default class LeasingPerformanceReport extends Component {
    * @description Component that renders the most important leasing performance numbers.
    */
   static HeadlineNumbers = ({ report: r }) => {
-    const totalUnits = r.property.total_units ? (
-      <div>{r.property.total_units} Total Units</div>
-    ) : null;
+    const leasedCount = formatNumber(r.property.leasing.units);
+    const leasedTotal = formatNumber(r.property.occupancy.occupiable);
+    const retentionCount = formatNumber(r.property.leasing.renewal_notices);
+    const retentionTotal = r.property.leasing.resident_decisions;
+    const occupiedCount = formatNumber(r.property.occupancy.units);
+    const occupiedTotal = leasedTotal;
+    const totalUnits = r.property.total_units;
+    const renderTotalUnits = () =>
+      totalUnits ? <span>{`${totalUnits} Total Units`}</span> : null;
+
     return (
       <BoxRow>
         <PercentageGraphBox
           name="Leased"
+          infoTooltip="leased_rate"
           value={r.property.leasing.rate}
           delta={r.deltas?.property?.leasing?.rate}
           series={r.whiskers?.leased_rate}
           target={r.targets?.property?.leasing?.rate}
           extraContent={
             <>
-              <div>
-                {formatNumber(r.property.leasing.units)} Executed Leases (Out of{" "}
-                {formatNumber(r.property.occupancy.occupiable)})
-              </div>
-              {totalUnits}
+              <span>{`${leasedCount} Executed Leases (Out of ${leasedTotal})`}</span>
+              {renderTotalUnits()}
             </>
           }
         />
         <PercentageGraphBox
           name="Retention"
+          infoTooltip="retention_rate"
           value={r.property.leasing.renewal_rate}
           delta={r.deltas?.property?.leasing?.renewal_rate}
           series={r.whiskers?.renewal_rate}
           target={r.targets?.property?.leasing?.renewal_rate}
-          extraContent={`${formatNumber(
-            r.property.leasing.renewal_notices
-          )} Notices to Renew (Out of ${
-            r.property.leasing.resident_decisions
-          } Resident Decisions)`}
+          extraContent={`${retentionCount} Notices to Renew (Out of ${retentionTotal} Resident Decisions)`}
         />
         <PercentageGraphBox
           name="Occupied"
+          infoTooltip="occupied_rate"
           value={r.property.occupancy.rate}
           delta={r.deltas?.property?.occupancy?.rate}
           series={r.whiskers?.occupancy_rate}
           target={r.targets?.property?.occupancy?.rate}
           extraContent={
             <>
-              <div>
-                {formatNumber(r.property.occupancy.units)} Occupied Units (Out
-                of {formatNumber(r.property.occupancy.occupiable)})
-              </div>
-              {totalUnits}
+              <span>{`${occupiedCount} Occupied Units (Out of ${occupiedTotal})`}</span>
+              {renderTotalUnits()}
             </>
           }
         />

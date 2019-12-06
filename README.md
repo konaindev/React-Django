@@ -98,6 +98,7 @@ SENTRY_URL=https://<hash>@sentry.io/<path>
 - Set up database: `./manage.py migrate`
 - Load sample data: `./manage.py loaddata data/dumped/latest.json`
 - Run the django dev server: `./manage.py runserver`.
+- Navigate to `http://localhost:8000` (navgating to `127.0.0.1:8000` could encounter CORS issues)
 
 (TODO: `heroku local` will be the way forward, eventually)
 
@@ -108,6 +109,10 @@ Want some fancy magic to reload your web page any time any front or backend asse
 `./scripts/runserver.sh`
 
 Warning: this is fancy magic. I imagine it is fragile. -Dave
+
+### Running the Frontend React Application
+
+`$ yarn run-build-ui` will start the `webpack-dev-server`, with the `development` environment and `webpack.dev.js` config file.
 
 ### Storybook
 

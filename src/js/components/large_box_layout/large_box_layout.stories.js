@@ -15,5 +15,7 @@ const props = {
 };
 
 storiesOf("LargeBoxLayout", module).add("default", () => (
-  <LargeBoxLayout {...props} />
+  <div style={{ width: 420 }}>
+    <LargeBoxLayout {...props} />
+  </div>
 ));

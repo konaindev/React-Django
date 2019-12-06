@@ -125,6 +125,22 @@ class GroupKPITestCase(TestCase):
         self.assertEqual(self.result[KPI.average_monthly_rent], expected)
 
 
+class GroupKPIAverageTestCase(TestCase):
+    def setUp(self):
+        self.start = datetime.date(2019, 1, 1)
+        self.end = datetime.date(2019, 7, 30)
+        self.result = get_base_kpis_for_group([P1, P2, P3], self.start, self.end, True)
+
+    def testResultExists(self):
+        self.assertIsNotNone(self.result)
+
+    def testOccupiableUnitsStart(self):
+        expected = 246.33
+        self.assertAlmostEqual(
+            self.result[KPI.occupiable_units_start], expected, places=2
+        )
+
+
 class PropertyKPITestCase(TestCase):
     def setUp(self):
         self.start = datetime.date(2019, 1, 1)
@@ -166,3 +182,13 @@ class PropertyTargetTestCase(TestCase):
         expected = TARGET3[KPI.occupied_units]
         self.assertEqual(self.result[KPI.occupied_units], expected)
 
+
+class GroupTargetAverageTestCase(TestCase):
+    def setUp(self):
+        self.start = datetime.date(2019, 3, 30)
+        self.end = datetime.date(2019, 4, 20)
+        self.result = get_targets_for_group([TARGET1, TARGET2, TARGET3], self.start, self.end, average=True)
+
+    def testOccupiedUnits(self):
+        expected = TARGET2[KPI.occupied_units]
+        self.assertEqual(self.result[KPI.occupied_units], expected)

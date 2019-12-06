@@ -16,35 +16,31 @@ import "css/main.scss";
  * Be sure to add your Page to the pages object.
  */
 import AccountSettings from "./components/account_settings";
-import BaselineReportPage from "./components/baseline_report_page";
 import DashboardPage from "./components/dashboard_page";
-import MarketReportPage from "./components/market_report_page";
-import ModelingReportPage from "./components/modeling_report_page";
-import PerformanceReportPage from "./components/performance_report_page";
 import ProjectPage from "./components/project_page";
 import ReleaseNotesPage from "./components/release_notes_page";
 import ReleaseNoteDetailsPage from "./components/release_note_details_page";
-import CampaignPlanPage from "./components/campaign_plan_page";
-import store from "./state/store";
-import { general } from "./state/actions";
 import PortfolioAnalysisView from "./components/portfolio_analysis_view";
 import CreatePasswordView from "./components/create_password_view";
 import CompleteAccountView from "./components/complete_account_view";
+import SessionExpiredPage from "./components/session_expired_page";
+import LoginView from "./components/login";
+import ResetPasswordForm from "./components/reset_password_form";
+import ResetPasswordDone from "./components/reset_password_done";
 
 const pages = {
   AccountSettings,
-  BaselineReportPage,
   DashboardPage,
-  MarketReportPage,
-  ModelingReportPage,
-  PerformanceReportPage,
   ProjectPage,
   ReleaseNotesPage,
   ReleaseNoteDetailsPage,
-  CampaignPlanPage,
   PortfolioAnalysisView,
   CompleteAccountView,
-  CreatePasswordView
+  CreatePasswordView,
+  SessionExpiredPage,
+  LoginView,
+  ResetPasswordForm,
+  ResetPasswordDone
 };
 
 /*
@@ -60,10 +56,9 @@ import { getGlobalData } from "./utils/globalData.js";
 /**
  * @description Render our application at the document's "root"
  */
-const renderApp = (pageClass, pageProps) => {
+const renderApp = () => {
   const root = document.querySelector("#root");
-  const page = React.createElement(pageClass, pageProps);
-  const app = React.createElement(App, {}, page);
+  const app = React.createElement(App, {});
 
   ReactDOM.render(app, root);
 };
@@ -80,7 +75,7 @@ const getPageClass = () => {
     return null;
   }
   const pageName = root ? root.dataset.page : null;
-  const pageClass = pageName ? pages[pageName] : Page;
+  const pageClass = pageName ? pages[pageName] : DashboardPage;
   return pageClass;
 };
 
@@ -115,11 +110,5 @@ ready(() => {
 
   Sentry.configureScope(x => x.setTag("env", process.env.ENV || "local"));
 
-  const pageClass = getPageClass();
-
-  /* If this is a react rooted page, spin up the app. */
-  if (pageClass) {
-    store.dispatch(general.set(getPageProps()));
-    renderApp(pageClass, getPageProps());
-  }
+  renderApp();
 });

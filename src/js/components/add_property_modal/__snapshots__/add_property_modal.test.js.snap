@@ -14,13 +14,6 @@ exports[`AddPropertyModal renders AddPropertyModal correctly 1`] = `
   focusTrapped={false}
   onClose={[Function]}
   open={true}
-  styles={
-    Object {
-      "closeIcon": Object {
-        "display": "none",
-      },
-    }
-  }
 >
   <div
     className="modal-window__head"
@@ -174,7 +167,7 @@ exports[`AddPropertyModal renders AddPropertyModal correctly 1`] = `
                     />
                   </div>
                   <div
-                    className="select__indicators css-1wy0on6"
+                    className="select__indicators css-1g48xl4-IndicatorsContainer"
                   >
                     <span
                       className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -288,7 +281,7 @@ exports[`AddPropertyModal renders AddPropertyModal correctly 1`] = `
                   />
                 </div>
                 <div
-                  className="select__indicators css-1wy0on6"
+                  className="select__indicators css-1g48xl4-IndicatorsContainer"
                 >
                   <span
                     className="select__indicator-separator css-1okebmr-indicatorSeparator"

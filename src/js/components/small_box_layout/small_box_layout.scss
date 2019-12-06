@@ -6,6 +6,13 @@
     margin: $small-box-vertical-spacing 0;
     padding: $s5 0;
     align-items: center;
+    position: relative;
+
+    .rmb-tooltip-anchor {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+    }
 }
 
 .small-box__labels {

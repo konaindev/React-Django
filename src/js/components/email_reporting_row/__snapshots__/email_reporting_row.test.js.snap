@@ -1,0 +1,235 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EmailReportingRow renders groups 1`] = `
+<div
+  className="email-reporting-row"
+>
+  <div
+    className="email-reporting-row__col"
+  >
+    <div
+      className="email-reporting-row__title"
+    >
+      Group
+    </div>
+    <div
+      className="email-reporting-row__info"
+    >
+      16 Properties
+    </div>
+  </div>
+  <div
+    className="email-reporting-row__col email-reporting-row__col--middle"
+  >
+    <label
+      className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
+    >
+      <input
+        checked={false}
+        className="button-toggle__input"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <span
+        className="button-toggle__track"
+      >
+        <span
+          className="button-toggle__thumb"
+        />
+        <div
+          className="button-toggle__checked"
+        >
+          <div
+            className="button-toggle__inner-label"
+          >
+            On
+          </div>
+        </div>
+        <div
+          className="button-toggle__unchecked"
+        >
+          <div
+            className="button-toggle__inner-label"
+          >
+            Off
+          </div>
+        </div>
+      </span>
+      
+    </label>
+  </div>
+</div>
+`;
+
+exports[`EmailReportingRow renders groups with properties 1`] = `
+<div
+  className="email-reporting-row"
+>
+  <div
+    className="email-reporting-row__col"
+  >
+    <div
+      className="email-reporting-row__title"
+    >
+      Portfolio
+    </div>
+    <div
+      className="email-reporting-row__info"
+    >
+      2 Groups, 16 Properties
+    </div>
+  </div>
+  <div
+    className="email-reporting-row__col email-reporting-row__col--middle"
+  >
+    <label
+      className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
+    >
+      <input
+        checked={false}
+        className="button-toggle__input"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <span
+        className="button-toggle__track"
+      >
+        <span
+          className="button-toggle__thumb"
+        />
+        <div
+          className="button-toggle__checked"
+        >
+          <div
+            className="button-toggle__inner-label"
+          >
+            On
+          </div>
+        </div>
+        <div
+          className="button-toggle__unchecked"
+        >
+          <div
+            className="button-toggle__inner-label"
+          >
+            Off
+          </div>
+        </div>
+      </span>
+      
+    </label>
+  </div>
+</div>
+`;
+
+exports[`EmailReportingRow renders property 1`] = `
+<div
+  className="email-reporting-row"
+>
+  <div
+    className="email-reporting-row__col"
+  >
+    <div
+      className="email-reporting-row__title"
+    >
+      Property
+    </div>
+  </div>
+  <div
+    className="email-reporting-row__col email-reporting-row__col--middle"
+  >
+    <label
+      className="button-toggle button-toggle--unchecked email-reporting-row__toggle"
+    >
+      <input
+        checked={false}
+        className="button-toggle__input"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <span
+        className="button-toggle__track"
+      >
+        <span
+          className="button-toggle__thumb"
+        />
+        <div
+          className="button-toggle__checked"
+        >
+          <div
+            className="button-toggle__inner-label"
+          >
+            On
+          </div>
+        </div>
+        <div
+          className="button-toggle__unchecked"
+        >
+          <div
+            className="button-toggle__inner-label"
+          >
+            Off
+          </div>
+        </div>
+      </span>
+      
+    </label>
+  </div>
+</div>
+`;
+
+exports[`EmailReportingRow renders property with checked button 1`] = `
+<div
+  className="email-reporting-row"
+>
+  <div
+    className="email-reporting-row__col"
+  >
+    <div
+      className="email-reporting-row__title"
+    >
+      Property
+    </div>
+  </div>
+  <div
+    className="email-reporting-row__col email-reporting-row__col--middle"
+  >
+    <label
+      className="button-toggle button-toggle--checked email-reporting-row__toggle"
+    >
+      <input
+        checked={true}
+        className="button-toggle__input"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <span
+        className="button-toggle__track"
+      >
+        <span
+          className="button-toggle__thumb"
+        />
+        <div
+          className="button-toggle__checked"
+        >
+          <div
+            className="button-toggle__inner-label"
+          >
+            On
+          </div>
+        </div>
+        <div
+          className="button-toggle__unchecked"
+        >
+          <div
+            className="button-toggle__inner-label"
+          >
+            Off
+          </div>
+        </div>
+      </span>
+      
+    </label>
+  </div>
+</div>
+`;

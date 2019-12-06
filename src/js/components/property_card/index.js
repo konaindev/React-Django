@@ -5,6 +5,7 @@ import React from "react";
 import Button from "../button";
 import Panel from "../panel";
 import PropertyStatus from "../property_status";
+import { Link } from "react-router-dom";
 import UserIconList from "../user_icon_list";
 import Tick from "../../icons/tick";
 
@@ -16,10 +17,11 @@ export const PropertyCard = ({
   address,
   image_url,
   performance_rating,
-  url,
+  report_url,
   members,
   selected,
-  onSelect
+  onSelect,
+  disableSelection
 }) => {
   const handleToggle = () => {
     onSelect(property_id, !selected);
@@ -32,18 +34,27 @@ export const PropertyCard = ({
   const classes = cn("property-card", {
     "property-card--selected": selected
   });
+
+  const renderSelector = () => {
+    if (disableSelection) {
+      return;
+    }
+    return (
+      <div className="property-card__selector" onClick={handleToggle}>
+        <Tick className="property-card__selector-tick" />
+      </div>
+    );
+  };
   return (
     <div className={classes}>
       <Panel className="property-card__panel">
         <div className="property-card__image" style={imageStyle}>
           <div className="property-card__overlay">
             <div className="property-card__overlay-link">
-              {/* <div className="property-card__selector" onClick={handleToggle}>
-                <Tick className="property-card__selector-tick" />
-              </div> */}
-              <a href={url}>
+              {renderSelector()}
+              <Link className="property-card__overlay-link" to={report_url}>
                 <Button color="outline">View Report</Button>
-              </a>
+              </Link>
             </div>
             <div className="property-card__actions">
               <UserIconList users={members} />
@@ -69,8 +80,7 @@ PropertyCard.requiredPropTypes = {
   address: PropTypes.string.isRequired,
   image_url: PropTypes.string.isRequired,
   performance_rating: PropTypes.number.isRequired,
-  members: PropTypes.array,
-  url: PropTypes.string.isRequired
+  members: PropTypes.array
 };
 
 PropertyCard.propTypes = {

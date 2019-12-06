@@ -8,11 +8,45 @@ $count-color: $highlight-gray-3;
 $count-bg: $gray-9;
 $count-spaces: 6px;
 
+$icon-font-size: $text-sm;
+$icon-size-large: 40px;
+$icon-spacing-large: 18px;
+$border-color-large: #161b20;
+$border-width-large: 2.67px;
+$count-spaces-large: 10px;
+$count-font-size: 0.9375rem;
+
+$border-color-current: $blue-7;
+
 .user-icon-list {
     display: flex;
+    align-items: center;
     padding-left: $icon-spacing;
     border-color: $border-color;
     z-index: 0;
+}
+
+
+.user-icon-list--project {
+    .user-icon-list__icon {
+        width: $icon-size-large;
+        height: $icon-size-large;
+        margin-left: -$icon-spacing-large;
+        font-size: $icon-font-size;
+        text-transform: uppercase;
+        border: $border-width-large $border-color-large solid;
+        cursor: pointer;
+    }
+    .user-icon-list__count {
+        width: $icon-size-large;
+        height: $icon-size-large;
+        margin-left: $count-spaces-large;
+        font-size: $count-font-size;
+        cursor: pointer;
+    }
+    .user-icon-list__icon--current {
+        border-color: $border-color-current;
+    }
 }
 
 .user-icon-list__icon {
@@ -22,6 +56,9 @@ $count-spaces: 6px;
     border: $border-width solid;
     border-color: inherit;
     box-sizing: content-box;
+    &--current {
+        border-color: $border-color-current;
+    }
 }
 
 .user-icon-list__count {
@@ -55,5 +92,9 @@ $count-spaces: 6px;
 }
 
 .user-icon-list__role {
+    color: $content-text-secondary-color;
+}
+
+.user-icon-list__name-sign {
     color: $content-text-secondary-color;
 }

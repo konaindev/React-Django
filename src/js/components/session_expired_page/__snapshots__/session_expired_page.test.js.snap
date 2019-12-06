@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SessionExpired renders correctly 1`] = `
+<div
+  className="page-auth"
+>
+  <div
+    className="page-auth__header"
+  >
+    <a
+      className="page-auth__back-link"
+      href="/"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "inherit",
+          "textDecoration": "inherit",
+        }
+      }
+    >
+      ← Go to Login
+    </a>
+    <div
+      className="page-auth__logo"
+    >
+      <a
+        href="/dashboard"
+        onClick={[Function]}
+        style={
+          Object {
+            "color": "inherit",
+            "textDecoration": "inherit",
+          }
+        }
+      >
+        <div
+          className="remarkably-logo"
+        >
+           
+        </div>
+      </a>
+    </div>
+  </div>
+  <div
+    className="page-auth__body page-auth__body--align-top"
+  >
+    <div
+      className="session-expired"
+    >
+      <div
+        className="session-expired__title"
+      >
+        Session Expired
+      </div>
+      <div
+        className="session-expired__text"
+      >
+        Please click below to resend account setup email.
+      </div>
+      <button
+        className="button button--block button--uppercase button--primary session-expired__button"
+        onClick={[Function]}
+      >
+        Resend Email
+      </button>
+    </div>
+  </div>
+  <div
+    className="page-auth__footer"
+  >
+    © 2019 Remarkably. All Rights Reserved
+  </div>
+</div>
+`;

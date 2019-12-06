@@ -111,8 +111,46 @@ export const menuListConstructor = component => props => (
   </components.MenuList>
 );
 
-export const MenuPortal = props => (
-  <components.MenuPortal {...props}>
-    <div className={props.selectProps.className}>{props.children}</div>
-  </components.MenuPortal>
-);
+export class MenuPortal extends React.PureComponent {
+  state = {
+    forcedRender: 0
+  };
+
+  componentDidMount() {
+    document.body.addEventListener("scroll", this.rerender, true);
+  }
+
+  componentWillUnmount() {
+    document.body.removeEventListener("scroll", this.rerender, true);
+  }
+
+  rerender = () => {
+    this.setState({ forcedRender: this.state.forcedRender + 1 });
+  };
+
+  render() {
+    const props = this.props;
+    return (
+      <components.MenuPortal {...props}>
+        <div className={props.selectProps.className}>{props.children}</div>
+      </components.MenuPortal>
+    );
+  }
+}
+
+export const InputWithPlaceholder = ({ children, ...props }) => {
+  let placeholder = null;
+  if (!props.selectProps?.inputValue) {
+    placeholder = (
+      <components.Placeholder {...props}>
+        {props.selectProps?.placeholder}
+      </components.Placeholder>
+    );
+  }
+  return (
+    <div className="select__input-with-placeholder">
+      <components.Input {...props} />
+      {placeholder}
+    </div>
+  );
+};

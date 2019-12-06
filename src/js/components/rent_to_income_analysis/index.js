@@ -1,13 +1,14 @@
 import React from "react";
-import cn from "classnames";
 import PropTypes from "prop-types";
+import cx from "classnames";
+
+import Panel from "../panel";
+import { InfoTooltip } from "../rmb_tooltip";
 import {
   formatCurrency,
   formatCurrencyShorthand,
   formatPercent
 } from "../../utils/formatters";
-
-import Panel from "../panel";
 import "./rent_to_income_analysis.scss";
 
 const THREASHOLD_COLUMNS = 10;
@@ -30,7 +31,7 @@ export const RentToIncomeAnalysis = ({
   const maxRate = categories[categories.length - 1].high;
   return (
     <Panel
-      className={cn("rent-to-income-analysis", {
+      className={cx("rent-to-income-analysis", {
         "rent-to-income-analysis--flip": flipMode
       })}
     >
@@ -42,7 +43,7 @@ export const RentToIncomeAnalysis = ({
           {categories.map((category, index) => (
             <div key={index} className="rent-to-income-analysis__category">
               <span
-                className={cn(
+                className={cx(
                   "rent-to-income-analysis__category-color",
                   `rent-to-income-analysis__category-color--${index}`
                 )}
@@ -56,11 +57,13 @@ export const RentToIncomeAnalysis = ({
       </div>
       <div className="rent-to-income-analysis__chart-wrapper">
         <div className="rent-to-income-analysis-chart">
-          <div className="rent-to-income-analysis-chart__vertical-caption">
+          <div className="chart__caption chart__caption--vertical">
             Monthly Rental (USD)
+            <InfoTooltip transKey="monthly_rental_usd" />
           </div>
-          <div className="rent-to-income-analysis-chart__horizontal-caption">
+          <div className="chart__caption chart__caption--horizontal">
             Annual Income (USD)
+            <InfoTooltip transKey="annual_income_usd" />
           </div>
           <div className="rent-to-income-analysis-chart__body">
             <div className="rent-to-income-analysis-chart__group rent-to-income-analysis-chart__group--yaxis">
@@ -85,7 +88,7 @@ export const RentToIncomeAnalysis = ({
                 {group.map((rate, rateIndex) => (
                   <div
                     key={`${groupIndex}-${rateIndex}`}
-                    className={cn(
+                    className={cx(
                       "rent-to-income-analysis-chart__cell",
                       `rent-to-income-analysis__category-color--${getCategoryIndexOfRate(
                         categories,

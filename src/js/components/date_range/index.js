@@ -15,7 +15,8 @@ export default class DateRange extends React.PureComponent {
     endDate: PropTypes.object,
     onChange: PropTypes.func.isRequired,
     dateFormat: PropTypes.string,
-    isDisabled: PropTypes.bool
+    isDisabled: PropTypes.bool,
+    disabledRange: PropTypes.object
   };
 
   static defaultProps = {
@@ -91,6 +92,21 @@ export default class DateRange extends React.PureComponent {
     return <div className={classes}>{day.getDate()}</div>;
   };
 
+  getDisabledRange = () => {
+    const response_range = {
+      after: new Date()
+    };
+    if ("disabledRange" in this.props) {
+      const start = new Date(this.props.disabledRange.campaign_start);
+      const end = this.props.disabledRange.campaign_end
+        ? new Date(this.props.disabledRange.campaign_end)
+        : new Date();
+      response_range.after = end;
+      response_range.before = start;
+    }
+    return response_range;
+  };
+
   handleClick = e => {
     if (!this.node.current.contains(e.target)) {
       this.hideDayPicker();
@@ -149,7 +165,7 @@ export default class DateRange extends React.PureComponent {
     const { className } = this.props;
     const { startDate, endDate } = this.state;
     const modifiers = { start: startDate, end: endDate };
-    const today = new Date();
+    const disabledRange = this.getDisabledRange();
     const classes = cn("date-range", className);
     return (
       <div className={classes} ref={this.node}>
@@ -161,8 +177,10 @@ export default class DateRange extends React.PureComponent {
           }}
           dayPickerProps={{
             selectedDays: [startDate, { from: startDate, to: endDate }],
-            disabledDays: { after: today },
-            toMonth: today,
+            disabledDays: disabledRange,
+            month: disabledRange.after,
+            toMonth: disabledRange.after,
+            fromMonth: disabledRange.before,
             modifiers,
             numberOfMonths: 1,
             onDayClick: this.onDayClick,

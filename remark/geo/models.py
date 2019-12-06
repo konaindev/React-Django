@@ -119,6 +119,8 @@ class Address(models.Model):
 
     state = models.CharField(blank=False, help_text="State / Province", max_length=128)
 
+    full_state = models.CharField(blank=True, help_text="State / Province Full name", max_length=128)
+
     zip_code = models.CharField(blank=False, max_length=32, help_text="ZIP5")
 
     country = models.CharField(blank=False, max_length=128)
@@ -252,7 +254,7 @@ class USACensusZip(models.Model):
     zipcode = models.CharField(max_length=20, unique=True)
 
     def __str__(self):
-        return zipcode
+        return f"Found population {self.total_population} and households {self.number_of_households} in zipcode {self.zipcode}"
 
 
 class USACensusPopulationByAge(models.Model):

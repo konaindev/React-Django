@@ -1,17 +1,21 @@
 import React from "react";
 
 import { storiesOf } from "@storybook/react";
-import { action } from "@storybook/addon-actions";
-import { linkTo } from "@storybook/addon-links";
 
-import { report_links } from "../project_page/props";
+import { currentReportType, reportLinksAll, reportLinksPartial } from "./props";
 
 import ReportLinks from "./index";
 
-const current_report_name = "baseline";
-
-export const props = { current_report_name, report_links };
-
-storiesOf("ReportLinks", module).add("default", () => (
-  <ReportLinks {...props} />
-));
+storiesOf("ReportLinks", module)
+  .add("default", () => {
+    return (
+      <ReportLinks {...{ currentReportType, reportLinks: reportLinksAll }} />
+    );
+  })
+  .add("No Campaign/Marketing", () => {
+    return (
+      <ReportLinks
+        {...{ currentReportType, reportLinks: reportLinksPartial }}
+      />
+    );
+  });

@@ -15,6 +15,10 @@ export const convertToKebabCase = (string = "") => {
   return string.replace(/\s+/g, "-").toLowerCase();
 };
 
+export const convertToSnakeCase = (string = "") => {
+  return string.replace(/\s+/g, "_").toLowerCase();
+};
+
 export const convertToMeter = (distance, unit) => {
   if (unit === "mi") {
     return distance * 1609.34;
@@ -54,7 +58,15 @@ export const getDateDiff = (startDateStr, endDateStr, unit = "month") => {
   return differ(endDate, startDate);
 };
 
-export const getDefaultDirection = value => Math.sign(Math.round(value));
+export const getDefaultDirection = value => {
+  if (value > 0) {
+    return 1;
+  }
+  if (value < 0) {
+    return -1;
+  }
+  return 0;
+};
 
 export const getPercentageDirection = value =>
   Math.sign(Math.round(value * 1000));

@@ -1,6 +1,7 @@
 @import "css/base.scss";
 
 $toggle-thumb-size: 1.625rem;
+$toggle-thumb-margin: 4px;
 $toggle-box-shadow: 0 0 6px 0 $gray-8;
 $toggle-border-radius: 100px;
 $toggle-checked-background: $blue-7;
@@ -17,6 +18,17 @@ $toggle-unchecked-color: $gray-6;
     &:focus {
         .button-toggle__thumb {
             box-shadow: $toggle-box-shadow;
+        }
+    }
+
+    &--medium {
+        .button-toggle__inner-label {
+            visibility: hidden;
+        }
+
+        .button-toggle__thumb {
+            left: calc(50% - #{$toggle-thumb-margin});
+            transform: translateX(-50%);
         }
     }
 }
@@ -61,7 +73,7 @@ $toggle-unchecked-color: $gray-6;
         background-color: $toggle-unchecked-background;
     }
 
-    .button-toggle__thumb {
+    &:not(.button-toggle--medium) .button-toggle__thumb {
         left: 0;
     }
 

@@ -1,7 +1,8 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from .models import Campaign, Spreadsheet, Period, PerformanceReport
+from .models import Campaign, Spreadsheet, Period, PerformanceReport, Project, TargetPeriod
+from remark.lib.cache import get_dashboard_cache_key, reset_cache
 from remark.lib.stats import health_check
 
 from remark.email_app.models import PerformanceEmail, PerformanceEmailKPI
@@ -215,3 +216,12 @@ def update_performance_report(sender, instance, created, raw, **kwargs):
         pek.category = "low"
         pek.performance_email = pe
         pek.save()
+
+
+@receiver(post_save, sender=Project)
+@receiver(post_save, sender=TargetPeriod)
+def reset_project_cache(sender, instance, **kwargs):
+    project_public_id = instance.get_project_public_id()
+    if project_public_id:
+        cache_key = get_dashboard_cache_key(project_public_id)
+        reset_cache(cache_key)

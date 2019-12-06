@@ -23,3 +23,6 @@ export { default as Error } from "./error";
 export { default as Ok } from "./ok";
 export { default as Upload } from "./upload";
 export { default as AddUser } from "./add_user";
+export { default as Settings } from "./settings";
+export { default as Add } from "./add";
+export { default as Center } from "./center";

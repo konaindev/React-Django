@@ -35,6 +35,12 @@ class ComputedPeriod(ComputedValueMixin):
     def __init__(self, period):
         self.period = period
 
+    def __str__(self):
+        return f"{type(self).__name__} containing {str(self.period)}"
+
+    def __repr__(self):
+        return f"{type(self).__name__} containing {str(self.period)}"
+
     # ------------------------------------------------------
     # Logical activity (lease)
     # ------------------------------------------------------
@@ -107,7 +113,7 @@ class ComputedPeriod(ComputedValueMixin):
     @computed_value
     def target_renewal_rate(self):
         """The target number of leased units we'd like to achieve."""
-        return div_or_none(
+        return div_or_0(
             self.target_lease_renewal_notices, self.target_resident_decisions
         )
 

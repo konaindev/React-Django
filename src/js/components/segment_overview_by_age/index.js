@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import cn from "classnames";
 import PropTypes from "prop-types";
 
 import { formatNumber } from "../../utils/formatters";
+import { InfoTooltip } from "../rmb_tooltip";
 import Panel from "../panel";
 import MarketSizeByIncome from "../market_size_by_income";
 import "./segment_overview_by_age.scss";
@@ -35,6 +35,7 @@ export class SegmentOverviewByAge extends Component {
             <span className="segment-overview-by-age__total-pop">
               {` / ${formatNumber(total_population)}`}
             </span>
+            <InfoTooltip transKey="est_segment_population" />
           </div>
         </div>
         <div className="segment-overview-by-age__content">

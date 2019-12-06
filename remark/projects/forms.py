@@ -2,11 +2,13 @@ from datetime import datetime
 
 from django import forms
 from django.core.exceptions import ValidationError
+from django.core.validators import URLValidator
 from django.utils.safestring import mark_safe
 from django.urls import reverse
 from image_cropping import ImageCropWidget
 
 from remark.settings import BASE_URL
+from remark.lib.urls import check_url_is_active
 from remark.lib.validators import (
     validate_linebreak_separated_numbers_list,
     validate_linebreak_separated_strings_list,
@@ -18,6 +20,9 @@ from .spreadsheets import get_importer_for_kind, SpreadsheetKind
 from remark.lib.logging import error_text, getLogger
 
 logger = getLogger(__name__)
+
+MIN_RTI_RENTAL_RATES_COUNT = 4
+MIN_RTI_INCOME_GROUPS_COUNT = 4
 
 
 class CampaignModelUploadForm(forms.ModelForm):
@@ -213,12 +218,26 @@ class ProjectForm(forms.ModelForm):
         exclude = ["email_list_id"]
 
 
-def multiline_text_to_str_array(text):
-    return [str(item) for item in text.replace("\r", "").split("\n")]
+def multiline_text_to_str_array(text, min_elements=0, max_elements=None):
+    items = [str(item) for item in text.replace("\r", "").split("\n") if item]
+    count = len(items)
+
+    if count < min_elements:
+        raise forms.ValidationError(f"Minimum number of values is {min_elements}.", code='invalid')
+    if max_elements and count > max_elements:
+        raise forms.ValidationError(f"Maximum number of values is {max_elements}.", code='invalid')
+    return items
 
 
-def multiline_text_to_int_array(text):
-    return [int(item) for item in text.replace("\r", "").split("\n")]
+def multiline_text_to_int_array(text, min_elements=0, max_elements=None):
+    items = [int(item) for item in text.replace("\r", "").split("\n")]
+    count = len(items)
+
+    if count < min_elements:
+        raise forms.ValidationError(f"Minimum number of values is {min_elements}.", code='invalid')
+    if max_elements and count > max_elements:
+        raise forms.ValidationError(f"Maximum number of values is {max_elements}.", code='invalid')
+    return items
 
 
 class TAMExportForm(forms.Form):
@@ -275,13 +294,23 @@ class TAMExportForm(forms.Form):
         return multiline_text_to_int_array(self.cleaned_data["income_groups"])
 
     def clean_rti_income_groups(self):
-        return multiline_text_to_int_array(self.cleaned_data["rti_income_groups"])
+        return multiline_text_to_int_array(self.cleaned_data["rti_income_groups"],
+                                           min_elements=MIN_RTI_RENTAL_RATES_COUNT)
 
     def clean_rti_rental_rates(self):
-        return multiline_text_to_int_array(self.cleaned_data["rti_rental_rates"])
+        return multiline_text_to_int_array(self.cleaned_data["rti_rental_rates"],
+                                           min_elements=MIN_RTI_INCOME_GROUPS_COUNT)
 
 
 class PropertyForm(forms.ModelForm):
+    def clean_property_url(self):
+        url = self.cleaned_data["property_url"]
+        if url:
+            message = "Link is not active."
+            if not check_url_is_active(url):
+                raise forms.ValidationError(message)
+        return url
+
     class Meta:
         model = Property
         fields = "__all__"

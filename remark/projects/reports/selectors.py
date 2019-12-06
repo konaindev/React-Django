@@ -3,7 +3,6 @@ Utilities for enumerating all possible report types, and generating
 valid links to the underlying views.
 """
 import datetime
-from django.urls import reverse
 from .baseline import BaselineReport
 from .performance import PerformanceReport
 from .market import MarketReport
@@ -48,7 +47,6 @@ class ReportSelectorBase:
         """
         # Derived classes must implement
         raise NotImplementedError()
-        yield
 
     @classmethod
     def public_selectors_for_project(cls, project):
@@ -163,14 +161,12 @@ class BaselineReportSelector(ReportSelectorBase):
 
     def get_url(self):
         """Return a relative URL linking to this report."""
-        kwargs = {"project_id": self.project.public_id}
-        url = reverse("baseline_report", kwargs=kwargs)
-        return url
+        return f"/projects/{self.project.public_id}/baseline/"
 
     def get_share_url(self):
-        kwargs = {"project_id": self.project.public_id}
-        url = reverse("baseline_report_shared", kwargs=kwargs)
-        return url
+        # @TODO: determine for the sake of simplicity in React routing
+        return f"/projects/{self.project.public_id}/baseline/share/"
+        # return f"/projects/{self.project.public_id}/share/baseline/
 
     def get_description(self):
         """Return a human-readable description of a custom span."""
@@ -263,27 +259,23 @@ class PerformanceReportSelector(ReportSelectorBase):
         # intended to service views that need to pass around strings.
         return cls(project, f"{start.isoformat()},{end.isoformat()}")
 
-    def parse_date_span(self, date_span):
+    @staticmethod
+    def parse_date_span(date_span):
         """Attempt to parse the report span as a date range. Raise an exception on failure."""
         splits = date_span.split(",")
         start = datetime.datetime.strptime(splits[0], "%Y-%m-%d").date()
         end = datetime.datetime.strptime(splits[1], "%Y-%m-%d").date()
-        return (start, end)
-
-    def safe_parse_date_span(self, date_span):
-        """Attempt to parse the report span as a date range. Return (None, None) on failure."""
-        try:
-            result = self.parse_date_span(date_span)
-        except Exception:
-            result = (None, None)
-        return result
+        return start, end
 
     def __init__(self, project, report_span):
         super().__init__(project)
         self.report_span = report_span
 
         # Attempt to parse the report span as a date span
-        self.start, self.end = self.safe_parse_date_span(report_span)
+        try:
+            self.start, self.end = self.parse_date_span(report_span)
+        except ValueError:
+            self.start, self.end = None, None
 
         # We must either have a valid start/end date *or* a valid named span.
         if (self.start is None) and (self.report_span not in self.NAMED_SPANS):
@@ -291,14 +283,10 @@ class PerformanceReportSelector(ReportSelectorBase):
 
     def get_url(self):
         """Return a relative URL linking to this report span for the given project."""
-        kwargs = {"project_id": self.project.public_id, "report_span": self.report_span}
-        url = reverse("performance_report", kwargs=kwargs)
-        return url
+        return f"/projects/{self.project.public_id}/performance/{self.report_span}/"
 
     def get_share_url(self):
-        kwargs = {"project_id": self.project.public_id, "report_span": self.report_span}
-        url = reverse("performance_report_shared", kwargs=kwargs)
-        return url
+        return f"/projects/{self.project.public_id}/performance/{self.report_span}/share/"
 
     def get_weeks(self):
         """If we're a LAST_*_WEEKS custom span, return a number of weeks."""
@@ -338,7 +326,11 @@ class PerformanceReportSelector(ReportSelectorBase):
         description = dates.description()
         named_description = self.NAMED_SPAN_DESCRIPTIONS.get(self.report_span)
         if named_description:
-            description = f"{named_description} ({description})"
+            # description = f"{named_description} ({description})"
+            description = {
+                "preset": self.report_span,
+                "date_range": description
+            }
         return description
 
     def has_report_data(self):
@@ -382,19 +374,11 @@ class MarketReportSelector(ReportSelectorBase):
         if tam_selector.has_report_data():
             yield tam_selector
 
-    def __init__(self, project):
-        self.project = project
-
     def get_url(self):
-        """Return a relative URL linking to this report."""
-        kwargs = {"project_id": self.project.public_id}
-        url = reverse("market_report", kwargs=kwargs)
-        return url
+        return f"/projects/{self.project.public_id}/market/"
 
     def get_share_url(self):
-        kwargs = {"project_id": self.project.public_id}
-        url = reverse("market_report_shared", kwargs=kwargs)
-        return url
+        return f"/projects/{self.project.public_id}/market/share/"
 
     def get_description(self):
         """Return a human-readable description of a custom span."""
@@ -426,19 +410,11 @@ class ModelingReportSelector(ReportSelectorBase):
         if modeling_selector.has_report_data():
             yield modeling_selector
 
-    def __init__(self, project):
-        self.project = project
-
     def get_url(self):
-        """Return a relative URL linking to this report."""
-        kwargs = {"project_id": self.project.public_id}
-        url = reverse("modeling_report", kwargs=kwargs)
-        return url
+        return f"/projects/{self.project.public_id}/modeling/"
 
     def get_share_url(self):
-        kwargs = {"project_id": self.project.public_id}
-        url = reverse("modeling_report_shared", kwargs=kwargs)
-        return url
+        return f"/projects/{self.project.public_id}/modeling/share/"
 
     def get_description(self):
         """Return a human-readable description of a custom span."""
@@ -475,15 +451,10 @@ class CampaignPlanSelector(ReportSelectorBase):
         return cls(project)
 
     def get_url(self):
-        """Return a relative URL linking to this report."""
-        kwargs = {"project_id": self.project.public_id}
-        url = reverse("campaign_plan", kwargs=kwargs)
-        return url
+        return f"/projects/{self.project.public_id}/campaign_plan/"
 
     def get_share_url(self):
-        kwargs = {"project_id": self.project.public_id}
-        url = reverse("campaign_plan_shared", kwargs=kwargs)
-        return url
+        return f"/projects/{self.project.public_id}/campaign_plan/share"
 
     def get_description(self):
         """Return a human-readable description of a custom span."""

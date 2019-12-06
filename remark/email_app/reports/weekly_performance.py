@@ -8,7 +8,7 @@ from remark.lib.stats import health_check
 from remark.lib.logging import error_text, getLogger
 from remark.projects.reports.performance import PerformanceReport, InvalidReportRequest
 from remark.email_app.models import PerformanceEmail
-from remark.email_app.constants import SENDGRID_SENDER_ID, TEMPLATE_VAR_CONTACT_EMAIL
+from remark.email_app.constants import SG_CUSTOMER_SUCCESS_SENDER_ID, INFO_EMAIL, SG_CATEGORY_PERF_REPORT
 from remark.projects.models import TargetPeriod
 
 from .constants import (
@@ -142,7 +142,7 @@ def generate_template_vars(perf_email):
     low_kpis = perf_email.low_kpis
     risk_kpi_insight_text = perf_email.risk_kpi_insight_text
     low_kpi_insight_text = perf_email.low_kpi_insight_text
-    email = TEMPLATE_VAR_CONTACT_EMAIL
+    email = INFO_EMAIL
 
     template_vars = {
         "report_url": f"https://app.remarkably.io/projects/{project_id}/performance/last-week/",
@@ -213,7 +213,7 @@ def send_performance_email(performance_email_id):
 
     # Sync Campaign
     email_campaign_id = perf_email.email_campaign_id
-    categories = [project.public_id]
+    categories = [SG_CATEGORY_PERF_REPORT, project.public_id]
 
     template_vars = generate_template_vars(perf_email)
     html_content = create_html(template_vars)
@@ -225,7 +225,7 @@ def send_performance_email(performance_email_id):
         email_campaign_id,
         title,
         subject,
-        SENDGRID_SENDER_ID,
+        SG_CUSTOMER_SUCCESS_SENDER_ID,
         new_list_id,
         categories,
         html_content,

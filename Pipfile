@@ -56,6 +56,8 @@ django-image-cropping = "*"
 easy-thumbnails = "*"
 djangorestframework = "*"
 djangorestframework-simplejwt = "*"
+django-cors-headers = "*"
+parameterized = "*"
 
 [requires]
 python_version = "3.7"

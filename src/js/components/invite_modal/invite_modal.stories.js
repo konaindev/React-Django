@@ -5,12 +5,14 @@ import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 
 import { props as userProps } from "../user_icon_list/props";
-import _store from "../../state/store";
 
 import InviteModal from "./index";
 import { props, multiProps } from "./props";
 
-const withProvider = story => <Provider store={_store}>{story()}</Provider>;
+import storeFunc from "../../redux_base/store";
+const { store } = storeFunc();
+
+const withProvider = story => <Provider store={store}>{story()}</Provider>;
 
 export const apiMock = story => {
   const mock = new MockAdapter(axios);

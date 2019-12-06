@@ -1,10 +1,11 @@
-import renderer from "react-test-renderer";
+import { shallow } from "enzyme";
+
 import SegmentOverviewByAge from "./index";
 import { props } from "./segment_overview_by_age.stories";
 
 describe("SegmentOverviewByAge", () => {
   it("renders correctly", () => {
-    const tree = renderer.create(<SegmentOverviewByAge {...props} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const tree = shallow(<SegmentOverviewByAge {...props} />);
+    expect(tree.debug()).toMatchSnapshot();
   });
 });

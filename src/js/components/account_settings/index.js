@@ -1,116 +1,112 @@
 import cn from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
+import { connect } from "react-redux";
 
+import EmailReportsContainer from "../../containers/account_settings/email_reports";
 import { Email, Lock, Profile } from "../../icons";
-import PageChrome from "../page_chrome";
-
+import LoaderContainer from "../../containers/loader/index";
+import { accountSettings as actions } from "../../redux_base/actions";
 import AccountSecurity from "./account_security";
-import EmailReports from "./email_reports";
 import ProfileTab from "./profile";
 import "./account_settings.scss";
 
-const navLinks = {
-  links: [
-    {
-      id: "portfolio",
-      name: "Portfolio",
-      url: "/dashboard"
-    },
-    {
-      id: "portfolio-analysis",
-      name: "Portfolio Analysis",
-      url: "/portfolio/table"
-    }
-  ],
-  selected_link: ""
-};
-
-const tabsData = {
+const menuItemsData = {
+  /*
   profile: {
     name: "Profile",
     iconComponent: Profile,
     component: ProfileTab
-  },
+  },*/
   lock: {
     name: "Security",
     iconComponent: Lock,
     component: AccountSecurity
-  },
+  } /*,
   email: {
-    name: "Email Reports",
+    name: "Email Preferences",
     iconComponent: Email,
-    component: EmailReports
+    component: EmailReportsContainer
   }
+   */
 };
 
-function MenuItems(props) {
-  const { tab, selectTab, tabs } = props;
-  const tabsUI = tabs.map(id => {
-    const item = tabsData[id];
-    const Icon = item.iconComponent;
+function MenuItems({ item, selectItem, itemsOrder }) {
+  const tabsUI = itemsOrder.map(id => {
+    const itemData = menuItemsData[id];
+    const Icon = itemData.iconComponent;
     const itemClass = cn("account-settings__menu-item", {
-      "account-settings__menu-item--active": id === tab
+      "account-settings__menu-item--active": id === item
     });
     return (
-      <div className={itemClass} key={id} onClick={() => selectTab(id)}>
+      <div className={itemClass} key={id} onClick={() => selectItem(id)}>
         <Icon className="account-settings__menu-icon" />
-        <span className="account-settings__menu-item-text">{item.name}</span>
+        <span className="account-settings__menu-item-text">
+          {itemData.name}
+        </span>
       </div>
     );
   });
   return <>{tabsUI}</>;
 }
 MenuItems.propTypes = {
-  tab: PropTypes.string.isRequired,
-  tabs: PropTypes.arrayOf(PropTypes.string).isRequired,
-  selectTab: PropTypes.func.isRequired
+  item: PropTypes.string.isRequired,
+  itemsOrder: PropTypes.arrayOf(PropTypes.string).isRequired,
+  selectItem: PropTypes.func.isRequired
 };
 
 export default class AccountSettings extends React.PureComponent {
   static propTypes = {
-    initialTab: PropTypes.oneOf(["profile", "lock", "email"])
+    initialItem: PropTypes.oneOf(Object.keys(menuItemsData)),
+    user: PropTypes.object,
+    itemsOrder: PropTypes.arrayOf(PropTypes.string)
   };
 
   static defaultProps = {
-    initialTab: "profile"
+    initialItem: "lock", //"profile",
+    itemsOrder: ["lock"] //["profile", "lock", "email"]
   };
-
-  tabs = ["profile", "lock", "email"];
 
   constructor(props) {
     super(props);
     this.state = {
-      tab: props.initialTab
+      item: props.initialItem
     };
   }
 
-  selectTab = tab => this.setState({ tab });
+  componentDidMount() {
+    this.props.dispatch(actions.requestSettings());
+  }
+
+  selectItem = item => this.setState({ item });
 
   render() {
-    const Component = tabsData[this.state.tab].component;
+    const Component = menuItemsData[this.state.item].component;
     return (
-      <PageChrome navLinks={navLinks}>
-        <div className="account-settings">
-          <div className="account-settings__header">
-            <div className="account-settings__title">Account Settings</div>
-            <div className="account-settings__subtitle">
-              Manage and edit your profile, security, notifications, and billing
-              settings.
+      <section>
+        <div className="container">
+          <div className="account-settings">
+            <div className="account-settings__header">
+              <div className="account-settings__title">Account Settings</div>
+              <div className="account-settings__subtitle">
+                Manage and edit your profile, security, notifications, and
+                billing settings.
+              </div>
             </div>
-          </div>
-          <div className="account-settings__panel">
-            <div className="account-settings__menu">
-              <MenuItems
-                tab={this.state.tab}
-                tabs={this.tabs}
-                selectTab={this.selectTab}
-              />
+            <div className="account-settings__panel">
+              <div className="account-settings__menu">
+                <MenuItems
+                  item={this.state.item}
+                  itemsOrder={this.props.itemsOrder}
+                  selectItem={this.selectItem}
+                />
+              </div>
+              <LoaderContainer />
+              <Component {...this.props} />
             </div>
-            <Component {...this.props} />
           </div>
         </div>
-      </PageChrome>
+      </section>
     );
   }
 }

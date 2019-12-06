@@ -1,18 +1,26 @@
 import renderer from "react-test-renderer";
-import { createStore } from "redux";
-import { Provider } from "react-redux";
+import { MemoryRouter } from "react-router-dom";
 
-import CompleteAccountView from "./index";
+import { CompleteAccountView } from "./index";
 import { props } from "./props";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
 
-const _ = x => createStore(() => ({ completeAccount: x }));
+const _ = x =>
+  createStore(() => ({
+    network: {
+      isFetching: false
+    }
+  }));
 
 describe("CompleteAccountView", () => {
   it("renders correctly", () => {
     const tree = renderer
       .create(
-        <Provider store={_(props)}>
-          <CompleteAccountView />
+        <Provider store={_()}>
+          <MemoryRouter>
+            <CompleteAccountView {...props} />
+          </MemoryRouter>
         </Provider>
       )
       .toJSON();

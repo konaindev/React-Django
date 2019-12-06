@@ -31,7 +31,7 @@ exports[`Select render gray select 1`] = `
       />
     </div>
     <div
-      className="select__indicators css-1wy0on6"
+      className="select__indicators css-1g48xl4-IndicatorsContainer"
     >
       <span
         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -126,7 +126,7 @@ exports[`Select render highlight select 1`] = `
       />
     </div>
     <div
-      className="select__indicators css-1wy0on6"
+      className="select__indicators css-1g48xl4-IndicatorsContainer"
     >
       <span
         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -208,7 +208,9 @@ exports[`Select render highlight select search 1`] = `
       >
         Select an option...
       </div>
-      <div>
+      <div
+        className="css-zz0hea-Input"
+      >
         <div
           className="select__input"
           style={
@@ -265,7 +267,7 @@ exports[`Select render highlight select search 1`] = `
       </div>
     </div>
     <div
-      className="select__indicators css-1wy0on6"
+      className="select__indicators css-1g48xl4-IndicatorsContainer"
     >
       <span
         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -735,7 +737,7 @@ exports[`Select render multi value select 1`] = `
       />
     </div>
     <div
-      className="select__indicators css-1wy0on6"
+      className="select__indicators css-1g48xl4-IndicatorsContainer"
     >
       <div
         aria-hidden="true"
@@ -745,7 +747,7 @@ exports[`Select render multi value select 1`] = `
       >
         <svg
           aria-hidden="true"
-          className="css-19bqh2r"
+          className="css-tj5bde-Svg"
           focusable="false"
           height={20}
           viewBox="0 0 20 20"
@@ -844,7 +846,7 @@ exports[`Select render select 1`] = `
       />
     </div>
     <div
-      className="select__indicators css-1wy0on6"
+      className="select__indicators css-1g48xl4-IndicatorsContainer"
     >
       <span
         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -926,7 +928,9 @@ exports[`Select render select search 1`] = `
       >
         Select an option...
       </div>
-      <div>
+      <div
+        className="css-zz0hea-Input"
+      >
         <div
           className="select__input"
           style={
@@ -983,7 +987,7 @@ exports[`Select render select search 1`] = `
       </div>
     </div>
     <div
-      className="select__indicators css-1wy0on6"
+      className="select__indicators css-1g48xl4-IndicatorsContainer"
     >
       <span
         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -1078,7 +1082,7 @@ exports[`Select render transparent select 1`] = `
       />
     </div>
     <div
-      className="select__indicators css-1wy0on6"
+      className="select__indicators css-1g48xl4-IndicatorsContainer"
     >
       <span
         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -1160,7 +1164,9 @@ exports[`Select render transparent select search 1`] = `
       >
         Select an option...
       </div>
-      <div>
+      <div
+        className="css-zz0hea-Input"
+      >
         <div
           className="select__input"
           style={
@@ -1217,7 +1223,7 @@ exports[`Select render transparent select search 1`] = `
       </div>
     </div>
     <div
-      className="select__indicators css-1wy0on6"
+      className="select__indicators css-1g48xl4-IndicatorsContainer"
     >
       <span
         className="select__indicator-separator css-1okebmr-indicatorSeparator"

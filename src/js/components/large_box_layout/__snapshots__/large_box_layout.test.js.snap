@@ -1,32 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`LargeBoxLayout renders correctly 1`] = `
-<div
-  className="panel panel--default large-box"
->
-  <span
-    className="large-box__top-line"
-  >
+"<Panel className=\\"large-box\\" component=\\"div\\" size=\\"default\\">
+  <span className=\\"large-box__top-line\\">
     Test name
   </span>
-  <div
-    className="large-box__content"
-  >
-    <span
-      className="large-box__content-value"
-    >
+  <div className=\\"large-box__content\\">
+    <span className=\\"large-box__content-value\\">
       Test content
     </span>
   </div>
-  <span
-    className="large-box__bottom-line"
-  >
+  <p className=\\"large-box__bottom-line\\">
     This is details
-  </span>
-  <span
-    className="large-box__bottom-line"
-  >
+  </p>
+  <p className=\\"large-box__bottom-line\\">
     This is more details
+  </p>
+  <Connect(InfoTooltipBase) transKey={[undefined]} />
+</Panel>"
+`;
+
+exports[`LargeBoxLayout renders with tooltip correctly 1`] = `
+"<Panel className=\\"large-box\\" component=\\"div\\" size=\\"default\\">
+  <span className=\\"large-box__top-line\\">
+    Test name
   </span>
-</div>
+  <div className=\\"large-box__content\\">
+    <span className=\\"large-box__content-value\\">
+      Test content
+    </span>
+  </div>
+  <p className=\\"large-box__bottom-line\\">
+    This is details
+  </p>
+  <p className=\\"large-box__bottom-line\\">
+    This is more details
+  </p>
+  <Connect(InfoTooltipBase) transKey=\\"i18n_key\\" />
+</Panel>"
 `;

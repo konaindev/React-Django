@@ -21,12 +21,14 @@ export default function Select(props) {
     theme,
     size,
     isMulti,
+    isSearchable,
     ...otherProps
   } = props;
   const classes = cn("select", className, {
     "select--is-multi": isMulti,
     [`select--${size}`]: size,
-    [`select--${theme}`]: theme
+    [`select--${theme}`]: theme,
+    "select--is-searchable": isSearchable
   });
   return (
     <ReactSelect
@@ -38,36 +40,38 @@ export default function Select(props) {
       value={value}
       placeholder={placeholder}
       onChange={onChange}
-      isSearchable={false}
+      isSearchable={props.isSearchable}
       isMulti={isMulti}
       components={{ DropdownIndicator, ...components }}
       {...otherProps}
     />
   );
 }
+
+Select.optionsGroupType = PropTypes.arrayOf(
+  PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    options: PropTypes.arrayOf(
+      PropTypes.shape({
+        label: PropTypes.string.isRequired,
+        value: PropTypes.string.isRequired
+      })
+    ).isRequired
+  })
+);
+
 Select.optionsType = PropTypes.oneOfType([
   PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
       value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-        .isRequired
     })
   ),
-  PropTypes.arrayOf(
-    PropTypes.shape({
-      label: PropTypes.string.isRequired,
-      options: PropTypes.arrayOf(
-        PropTypes.shape({
-          label: PropTypes.string.isRequired,
-          value: PropTypes.string.isRequired
-        })
-      ).isRequired
-    })
-  )
+  Select.optionsGroupType
 ]);
 Select.propTypes = {
   size: PropTypes.oneOf(["", "small"]),
-  theme: PropTypes.oneOf(["", "default", "highlight", "transparent"]),
+  theme: PropTypes.oneOf(["", "default", "highlight", "transparent", "gray"]),
   options: Select.optionsType,
   className: PropTypes.string,
   name: PropTypes.string,
@@ -76,13 +80,15 @@ Select.propTypes = {
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   isMulti: PropTypes.bool,
+  isSearchable: PropTypes.bool,
   components: PropTypes.object
 };
 Select.defaultProps = {
   size: "",
   theme: "",
   isMulti: false,
-  components: {}
+  components: {},
+  isSearchable: false
 };
 
 export function FormSelect(props) {

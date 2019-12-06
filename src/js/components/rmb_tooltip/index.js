@@ -2,12 +2,15 @@ import cn from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
 import Tooltip from "rc-tooltip";
-
+import { Link } from "react-router-dom";
 import { NavLink } from "../../icons";
 import Button from "../button";
 
 import "rc-tooltip/assets/bootstrap.css";
 import "./rmb_tooltip.scss";
+
+export { default as TooltipAnchor } from "./rmb_tooltip_anchor";
+export { default as InfoTooltip } from "./rmb_info_tooltip";
 
 export const RMBTooltip = props => {
   let overlay = props.overlay;
@@ -18,12 +21,16 @@ export const RMBTooltip = props => {
     overlay = (
       <React.Fragment>
         <div className="rmb-tooltip__text">{overlay}</div>
-        <a className="rmb-tooltip__link" href={props.link}>
+        <Link
+          style={{ color: "inherit", textDecoration: "inherit" }}
+          className="rmb-tooltip__link"
+          to={props.link}
+        >
           <Button className="rmb-tooltip__button" fullWidth={true}>
             <span className="rmb-tooltip__button-text">Learn More</span>
             <NavLink className="rmb-tooltip__button-icon" />
           </Button>
-        </a>
+        </Link>
       </React.Fragment>
     );
   }
@@ -36,7 +43,13 @@ export const RMBTooltip = props => {
 RMBTooltip.propTypes = {
   text: PropTypes.string,
   link: PropTypes.string,
-  theme: PropTypes.oneOf(["", "highlight", "dark", "light-dark"]),
+  theme: PropTypes.oneOf([
+    "",
+    "highlight",
+    "dark",
+    "light-dark",
+    "information"
+  ]),
   overlayClassName: PropTypes.string
 };
 

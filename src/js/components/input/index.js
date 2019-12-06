@@ -20,6 +20,10 @@ export default class Input extends React.PureComponent {
     onChange() {}
   };
 
+  setNode = node => {
+    this.node = node;
+  };
+
   onChange = e => {
     e.target.value = this.props.valueFormatter(e.target.value);
     this.props.onChange(e);
@@ -35,6 +39,7 @@ export default class Input extends React.PureComponent {
         className={classes}
         type={this.props.type}
         {...otherProps}
+        ref={this.setNode}
         onChange={this.onChange}
       />
     );

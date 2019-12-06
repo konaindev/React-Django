@@ -168,6 +168,14 @@ exports[`PortfolioTable renders correctly 1`] = `
         </div>
         <a
           className="portfolio-property-row__link"
+          href="/"
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "inherit",
+              "textDecoration": "inherit",
+            }
+          }
         >
           View Property
         </a>
@@ -268,6 +276,14 @@ exports[`PortfolioTable renders correctly 1`] = `
         </div>
         <a
           className="portfolio-property-row__link"
+          href="/"
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "inherit",
+              "textDecoration": "inherit",
+            }
+          }
         >
           View Property
         </a>
@@ -620,6 +636,14 @@ exports[`PortfolioTable renders partial KPIs 1`] = `
         </div>
         <a
           className="portfolio-property-row__link"
+          href="/"
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "inherit",
+              "textDecoration": "inherit",
+            }
+          }
         >
           View Property
         </a>
@@ -720,6 +744,14 @@ exports[`PortfolioTable renders partial KPIs 1`] = `
         </div>
         <a
           className="portfolio-property-row__link"
+          href="/"
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "inherit",
+              "textDecoration": "inherit",
+            }
+          }
         >
           View Property
         </a>
@@ -1072,6 +1104,14 @@ exports[`PortfolioTable renders without KPIs 1`] = `
         </div>
         <a
           className="portfolio-property-row__link"
+          href="/"
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "inherit",
+              "textDecoration": "inherit",
+            }
+          }
         >
           View Property
         </a>
@@ -1200,6 +1240,14 @@ exports[`PortfolioTable renders without KPIs 1`] = `
         </div>
         <a
           className="portfolio-property-row__link"
+          href="/"
+          onClick={[Function]}
+          style={
+            Object {
+              "color": "inherit",
+              "textDecoration": "inherit",
+            }
+          }
         >
           View Property
         </a>

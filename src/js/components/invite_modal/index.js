@@ -16,7 +16,6 @@ import UserRow from "../user_row";
 import UserIconList from "../user_icon_list";
 import { Close } from "../../icons";
 import { isValidEmail } from "../../utils/validators";
-import { inviteModal, general } from "../../state/actions";
 
 import SelectRole from "./select";
 import "./invite_modal.scss";

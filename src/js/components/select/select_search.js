@@ -68,6 +68,7 @@ export class SelectSearch extends React.PureComponent {
       onCreateOption,
       value,
       isMulti,
+      selectSearchRef,
       ...otherProps
     } = this.props;
     const classes = cn("select-search", "select", className, {
@@ -83,6 +84,7 @@ export class SelectSearch extends React.PureComponent {
           ...this.components,
           ...components
         }}
+        ref={selectSearchRef}
         isMulti={isMulti}
         formatCreateLabel={FormatCreateLabel}
         isValidNewOption={this.isValidNewOption}

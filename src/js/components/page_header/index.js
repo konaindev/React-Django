@@ -39,23 +39,12 @@ export default class PageHeader extends Component {
     );
   }
 
-  renderNavLink() {
-    if (!this.props.navLinks) {
-      return null;
-    }
-    return (
-      <div className="page-header__nav">
-        <TopNavigation {...this.props.navLinks} />
-      </div>
-    );
-  }
-
   render() {
     return (
       <div className="page-header">
         <Container className="page-header__inner">
           <RemarkablyLogo />
-          {this.renderNavLink()}
+          <TopNavigation />
           {this.renderChildren()}
         </Container>
       </div>

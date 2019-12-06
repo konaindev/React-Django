@@ -9,6 +9,13 @@ exports[`Breadcrumbs renders correctly 1`] = `
   >
     <a
       href="/releases"
+      onClick={[Function]}
+      style={
+        Object {
+          "color": "inherit",
+          "textDecoration": "inherit",
+        }
+      }
     >
       Releases
     </a>

@@ -15,13 +15,6 @@ Array [
     focusTrapped={false}
     onClose={[Function]}
     open={true}
-    styles={
-      Object {
-        "closeIcon": Object {
-          "display": "none",
-        },
-      }
-    }
   >
     <div
       className="modal-window__head invite-modal__header"
@@ -61,7 +54,9 @@ Array [
               >
                 Name or email
               </div>
-              <div>
+              <div
+                className="css-zz0hea-Input"
+              >
                 <div
                   className="select__input"
                   style={
@@ -149,7 +144,7 @@ Array [
               />
             </div>
             <div
-              className="select__indicators css-1wy0on6"
+              className="select__indicators css-1g48xl4-IndicatorsContainer"
             >
               <span
                 className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -249,6 +244,7 @@ Array [
                 >
                   <div
                     className="user-icon-list"
+                    onClick={[Function]}
                   >
                     <div
                       className="user-icon user-icon-list__icon"
@@ -382,7 +378,7 @@ Array [
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -482,6 +478,7 @@ Array [
                 >
                   <div
                     className="user-icon-list"
+                    onClick={[Function]}
                   >
                     <div
                       className="user-icon user-icon-list__icon"
@@ -659,7 +656,7 @@ Array [
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -786,7 +783,7 @@ Array [
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -913,7 +910,7 @@ Array [
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -1013,6 +1010,7 @@ Array [
                 >
                   <div
                     className="user-icon-list"
+                    onClick={[Function]}
                   >
                     <div
                       className="user-icon user-icon-list__icon"
@@ -1242,7 +1240,7 @@ Array [
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -1369,7 +1367,7 @@ Array [
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -1496,7 +1494,7 @@ Array [
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -1623,7 +1621,7 @@ Array [
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -1750,7 +1748,7 @@ Array [
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -1877,7 +1875,7 @@ Array [
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -2004,7 +2002,7 @@ Array [
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -2131,7 +2129,7 @@ Array [
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -2258,7 +2256,7 @@ Array [
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -2385,7 +2383,7 @@ Array [
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -2512,7 +2510,7 @@ Array [
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -2639,7 +2637,7 @@ Array [
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -2766,7 +2764,7 @@ Array [
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -2893,7 +2891,7 @@ Array [
                       />
                     </div>
                     <div
-                      className="select__indicators css-1wy0on6"
+                      className="select__indicators css-1g48xl4-IndicatorsContainer"
                     >
                       <span
                         className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -2980,13 +2978,6 @@ Array [
     focusTrapped={false}
     onClose={[Function]}
     open={false}
-    styles={
-      Object {
-        "closeIcon": Object {
-          "display": "none",
-        },
-      }
-    }
   >
     <div
       className="modal-window__head"
@@ -3039,13 +3030,6 @@ Array [
     focusTrapped={false}
     onClose={[Function]}
     open={true}
-    styles={
-      Object {
-        "closeIcon": Object {
-          "display": "none",
-        },
-      }
-    }
   >
     <div
       className="modal-window__head invite-modal__header"
@@ -3085,7 +3069,9 @@ Array [
               >
                 Name or email
               </div>
-              <div>
+              <div
+                className="css-zz0hea-Input"
+              >
                 <div
                   className="select__input"
                   style={
@@ -3173,7 +3159,7 @@ Array [
               />
             </div>
             <div
-              className="select__indicators css-1wy0on6"
+              className="select__indicators css-1g48xl4-IndicatorsContainer"
             >
               <span
                 className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -3303,7 +3289,7 @@ Array [
                 />
               </div>
               <div
-                className="select__indicators css-1wy0on6"
+                className="select__indicators css-1g48xl4-IndicatorsContainer"
               >
                 <span
                   className="select__indicator-separator css-1okebmr-indicatorSeparator"
@@ -3387,13 +3373,6 @@ Array [
     focusTrapped={false}
     onClose={[Function]}
     open={false}
-    styles={
-      Object {
-        "closeIcon": Object {
-          "display": "none",
-        },
-      }
-    }
   >
     <div
       className="modal-window__head"
