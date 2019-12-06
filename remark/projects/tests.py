@@ -68,6 +68,7 @@ def create_project(project_name="project 1"):
         property=property,
         view_group=group,
     )
+    project.get_report_url = mock.MagicMock(return_value="/report_url")
     return project, group
 
 
@@ -744,7 +745,7 @@ class GetTemplateVarsTestCase(TestCase):
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 1",
                     "address": "Seattle, WA",
-                    "view_link": f"{FRONTEND_URL}/projects/{self.project.public_id}/market/",
+                    "view_link": f"{FRONTEND_URL}/report_url",
                 }
             ],
             "more_count": None,
@@ -767,13 +768,13 @@ class GetTemplateVarsTestCase(TestCase):
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 1",
                     "address": "Seattle, WA",
-                    "view_link": f"{FRONTEND_URL}/projects/{self.projects[0].public_id}/market/",
+                    "view_link": f"{FRONTEND_URL}/report_url",
                 },
                 {
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 2",
                     "address": "Seattle, WA",
-                    "view_link": f"{FRONTEND_URL}/projects/{self.projects[1].public_id}/market/",
+                    "view_link": f"{FRONTEND_URL}/report_url",
                 },
             ],
             "more_count": None,
@@ -796,11 +797,11 @@ class GetTemplateVarsTestCase(TestCase):
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 1",
                     "address": "Seattle, WA",
-                    "view_link": f"{FRONTEND_URL}/projects/{self.project.public_id}/market/",
+                    "view_link": f"{FRONTEND_URL}/report_url",
                 }
             ],
             "more_count": None,
-            "main_button_link": f"{FRONTEND_URL}/projects/{self.project.public_id}/market/",
+            "main_button_link": f"{FRONTEND_URL}/report_url",
             "main_button_label": "View Property",
         }
         self.assertEqual(expected, template_vars)
@@ -819,13 +820,13 @@ class GetTemplateVarsTestCase(TestCase):
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 1",
                     "address": "Seattle, WA",
-                    "view_link": f"{FRONTEND_URL}/projects/{self.projects[0].public_id}/market/",
+                    "view_link": f"{FRONTEND_URL}/report_url",
                 },
                 {
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 2",
                     "address": "Seattle, WA",
-                    "view_link": f"{FRONTEND_URL}/projects/{self.projects[1].public_id}/market/",
+                    "view_link": f"{FRONTEND_URL}/report_url",
                 },
             ],
             "more_count": None,
