@@ -45,6 +45,8 @@ export const PropertyCard = ({
       </div>
     );
   };
+  console.log(arguments);
+  console.log(report_url);
   return (
     <div className={classes}>
       <Panel className="property-card__panel">
