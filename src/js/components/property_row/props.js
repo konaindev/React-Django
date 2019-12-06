@@ -6,6 +6,6 @@ export const props = {
   address: "123 4th Avenue, Seattle WA 98106",
   image_url: "https://i.imgur.com/UEH4gfU.jpg",
   performance_rating: 2,
-  url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+  report_url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
   members: usersProps.users
 };
