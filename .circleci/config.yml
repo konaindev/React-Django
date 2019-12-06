@@ -137,6 +137,7 @@ jobs:
           name: Install Heroku Tools
           command: curl https://cli-assets.heroku.com/install.sh | sh
       - checkout
+      - aws-cli/install
       - run:
           name: Install Frontend deps
           command: yarn install
