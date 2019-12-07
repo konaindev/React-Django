@@ -440,7 +440,9 @@ export const login = store => next => action => {
         console.log(response.status);
         if (response.status == 401) {
           console.log("BAD LOGIN");
-          alert("Oops! There was a problem with your login info, please try again.")
+          alert(
+            "Oops! There was a problem with your login info, please try again."
+          );
           next(auth.clearToken());
         } else {
           next(
