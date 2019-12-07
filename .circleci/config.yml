@@ -153,7 +153,7 @@ jobs:
       - run:
           name: Deploy Master to Heroku Production
           command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/remarkably.git master --force
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/remarkably.git master:master --force
       - run:
           name: Migrate Database Schema
           command: heroku run -x -a remarkably python manage.py migrate

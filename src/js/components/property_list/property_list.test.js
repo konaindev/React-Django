@@ -6,7 +6,11 @@ import { props } from "./props";
 
 describe("PropertyList", () => {
   it("renders correctly", () => {
-    const tree = renderer.create(<MemoryRouter><PropertyList {...props} /></MemoryRouter>);
+    const tree = renderer.create(
+      <MemoryRouter>
+        <PropertyList {...props} />
+      </MemoryRouter>
+    );
     expect(tree).toMatchSnapshot();
   });
 });

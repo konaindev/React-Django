@@ -21,6 +21,7 @@ import {
 } from "../../api/account_settings";
 import { API_URL_PREFIX, URLS, createAPIUrl } from "../actions/helpers";
 import { axiosGet, axiosPost } from "../../utils/api";
+import { qsStringify } from "../../utils/misc";
 import ReactGa from "react-ga";
 
 // Here we create a middleware that intercepts
@@ -305,8 +306,8 @@ export const fetchInviteModal = store => next => action => {
 
 export const fetchUIString = store => next => action => {
   if (action.type === "API_UI_STRINGS") {
-    const url = createAPIUrl(`/localization`);
-    axiosPost(url, action.data)
+    const url = createAPIUrl(`/localization/${qsStringify(action.data)}`);
+    axiosGet(url)
       .then(response => {
         if (response.status === 200) {
           next(uiStrings.set(response.data));
