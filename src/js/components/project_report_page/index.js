@@ -65,7 +65,7 @@ export class ProjectReportPage extends Component {
                 health={project.health}
               />
             </div>
-            <div className="project-report-page__members">
+            {/* <div className="project-report-page__members">
               <InviteModalReport />
               <ViewMembersReport />
               <Add
@@ -79,7 +79,7 @@ export class ProjectReportPage extends Component {
                 users={project.members}
                 onClick={this.onOpenMembersView}
               />
-            </div>
+            </div> */}
           </div>
           <div className="subheader-report-tabs">
             <ReportLinks

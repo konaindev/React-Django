@@ -167,6 +167,9 @@ class DashboardView(APIView):
             for project in owned_projects.filter(**lookup_params).order_by(ordering)
         ]
 
+        # remove projects without any report enabled public
+        projects = [p for p in projects if p.get("report_url") is not None]
+
         sort_by = request.query_params.get("s")
         direction = request.query_params.get("d") or "asc"
         if sort_by == "performance":
