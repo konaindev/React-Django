@@ -14,15 +14,8 @@ export class FunnelPerformanceAnalysis extends React.Component {
   constructor(props) {
     super(props);
 
-    const { columns, volumeRows, conversionRows } = processData(
-      props.funnel_history || []
-    );
-
     this.state = {
-      viewMode: "monthly",
-      columns,
-      volumeRows,
-      conversionRows
+      viewMode: "monthly"
     };
   }
 
@@ -31,11 +24,14 @@ export class FunnelPerformanceAnalysis extends React.Component {
   };
 
   render() {
+    const { columns, volumeRows, conversionRows } = processData(
+      this.props.funnel_history || []
+    );
+    const viewMode = this.state.viewMode;
+
     if (this.props.funnel_history == null) {
       return <div />;
     }
-
-    const { viewMode, columns, volumeRows, conversionRows } = this.state;
 
     return (
       <div className="funnel-performance-analysis">
