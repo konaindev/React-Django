@@ -19,15 +19,8 @@ class ProjectReportsContainer extends PureComponent {
     this.props.dispatch(actions.requestProject(projectId));
   }
 
-  componentDidUpdate(nextProps, state) {
-    console.log("CONTAINER NEXT PROPS", nextProps);
-    console.log("CONTAINER STATE", state);
-  }
-
   static getDerivedStateFromProps(nextProps, state) {
     const { projectId, reportType, reportSpan } = nextProps.match.params;
-    console.log("DERIVED STATE", reportType);
-    console.log("PROPS", nextProps.report);
     let newState = {};
 
     if (state.prevFetchingReports && !nextProps.fetchingReports) {
@@ -57,7 +50,6 @@ class ProjectReportsContainer extends PureComponent {
 
   render() {
     const { reportType, reportSpan } = this.state;
-    // console.log("RENDER IN PROJECT WRAPPER", this.state);
     const { fetchingReports, project, report, share_info } = this.props;
     return renderWrapper(
       <ProjectReportPage
