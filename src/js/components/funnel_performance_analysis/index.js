@@ -14,9 +14,22 @@ export class FunnelPerformanceAnalysis extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      viewMode: "monthly"
-    };
+    this.state = {};
+  }
+
+  static getDerivedStateFromProps(nextProps) {
+    let newState = {};
+    let { columns, volumeRows, conversionRows } = processData(
+      nextProps.funnel_history || []
+    );
+
+    newState["dataNotAvailable"] = nextProps.funnel_history == null;
+    newState["viewMode"] = "monthly";
+    newState["columns"] = columns;
+    newState["volumeRows"] = volumeRows;
+    newState["conversionRows"] = conversionRows;
+
+    return newState;
   }
 
   handleChangeViewMode = viewMode => {
@@ -24,14 +37,11 @@ export class FunnelPerformanceAnalysis extends React.Component {
   };
 
   render() {
-    const { columns, volumeRows, conversionRows } = processData(
-      this.props.funnel_history || []
-    );
-    const viewMode = this.state.viewMode;
-
-    if (this.props.funnel_history == null) {
+    if (this.state.dataNotAvailable) {
       return <div />;
     }
+
+    const { viewMode, columns, volumeRows, conversionRows } = this.state;
 
     return (
       <div className="funnel-performance-analysis">
