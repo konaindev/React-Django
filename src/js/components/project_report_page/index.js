@@ -45,12 +45,6 @@ export class ProjectReportPage extends Component {
     backUrl: "/dashboard"
   };
 
-  // componentDidUpdate(state) {
-  //   if (!!state.reportType && state.reportType != this.props.reportType) {
-  //     this.setState({ reportType: this.props.reportType });
-  //   }
-  // }
-
   renderSubheader = () => {
     const { project, share_info, backUrl, reportType } = this.props;
     let projectImage = DEFAULT_IMAGE_URL;
