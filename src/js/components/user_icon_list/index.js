@@ -82,7 +82,16 @@ export default class UserIconList extends React.PureComponent {
 
   renderIcons = () => {
     const { users, maxCount } = this.props;
-    return users.slice(0, maxCount).map((user, i) => {
+    // filter out users
+    let filtered_users = [];
+    let filtered_user_ids = [];
+    for (let x = 0; x < users.length; x++) {
+      if (filtered_user_ids.indexOf(users[x].user_id) == -1) {
+        filtered_users.push(users[x]);
+        filtered_user_ids.push(users[x].user_id);
+      }
+    }
+    return filtered_users.slice(0, maxCount).map((user, i) => {
       const classes = cn("user-icon-list__icon", {
         "user-icon-list__icon--current": !!user.is_current
       });
