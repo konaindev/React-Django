@@ -28,6 +28,7 @@ class ProjectReportsContainer extends PureComponent {
       // data arrived, now "state.reportType" matches to the "props.report"
       newState["reportType"] = reportType;
       newState["reportSpan"] = reportSpan;
+
       return newState;
     }
 
@@ -50,7 +51,6 @@ class ProjectReportsContainer extends PureComponent {
   render() {
     const { reportType, reportSpan } = this.state;
     const { fetchingReports, project, report, share_info } = this.props;
-
     return renderWrapper(
       <ProjectReportPage
         share_info={share_info}

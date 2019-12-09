@@ -47,7 +47,6 @@ export class ProjectReportPage extends Component {
 
   renderSubheader = () => {
     const { project, share_info, backUrl, reportType } = this.props;
-
     let projectImage = DEFAULT_IMAGE_URL;
     if (project && project.building_image) {
       projectImage = project.building_image[2];
