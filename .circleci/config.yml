@@ -44,6 +44,7 @@ jobs:
 
       # run tests!
       - run: yarn test-ui
+      - run: yarn storybook-smoke
       - run: pipenv run python manage.py test
       - run: pipenv run python manage.py migrate
       - run: pipenv run python manage.py loaddata data/dumped/latest.json
