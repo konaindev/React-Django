@@ -210,6 +210,11 @@ $add-tag-text-height: 20px;
     }
 }
 
+.property-overview__add-tag-input {
+    display: inline-flex;
+    margin-top: $tags-spacing;
+}
+
 .property-overview__add-tag-text {
     display: flex;
     align-items: center;

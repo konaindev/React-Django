@@ -1,0 +1,38 @@
+@import "css/base.scss";
+
+$input-padding: 7px;
+$panel-width: 450px;
+$suggestion-padding: 20px;
+$text-height: 1.625rem;
+$controls-border: 1px solid $gray-4;
+
+.add-tag-field {
+    position: relative;
+}
+
+.input.add-tag-field__input {
+    padding: $input-padding 0 $input-padding 0;
+}
+
+.add-tag-field__suggestion {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: $panel-width;
+}
+
+.add-tag-field__suggestion-text {
+    color: $title-section-color;
+    font-size: $text-sm;
+    line-height: $text-height;
+}
+
+.add-tag-field__suggestion-content {
+    padding: $suggestion-padding;
+}
+
+.add-tag-field__suggestion-controls {
+    padding: $suggestion-padding;
+    border-top: $controls-border;
+    box-sizing: border-box;
+}

@@ -4,10 +4,11 @@ import React from "react";
 import ButtonLink from "../button_link";
 import Panel from "../panel";
 
+import AddTagField from "../add_tag_input";
+
+import { AddButton } from "./add";
 import Tag from "./tag";
 import Tile from "./tile";
-
-import { AddButton, AddInput } from "./add";
 import "./property_overview.scss";
 
 export default class PropertyOverview extends React.PureComponent {
@@ -92,9 +93,14 @@ export default class PropertyOverview extends React.PureComponent {
       const addKey = "add-tag";
       tags.push(
         isAdd ? (
-          <AddInput onChange={this.onAddTag} key={addKey} />
+          <AddTagField
+            className="property-overview__add-tag-input"
+            onChange={this.onAddTag}
+            value={this.state.addingTag}
+            key={`${addKey}-input`}
+          />
         ) : (
-          <AddButton onClick={this.onShowAddInput} key={addKey} />
+          <AddButton onClick={this.onShowAddInput} key={`${addKey}-button`} />
         )
       );
     }
