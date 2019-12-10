@@ -5,18 +5,17 @@ const validateStatus = status => {
   return status >= 200 && status < 500;
 };
 
-const defaultHeader = {
-  Accept: "application/json",
-  "Content-Type": "application/json"
-};
-
-export function axiosPost(url, data, headers = defaultHeader) {
+export function axiosPost(url, data, headers = {}) {
   const { token } = store.getState();
   const { access } = token;
 
   const config = {
     method: "POST",
-    headers: { ...headers },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      ...headers
+    },
     data,
     url,
     validateStatus
