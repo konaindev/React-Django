@@ -96,6 +96,11 @@ jobs:
       - checkout
       - aws-cli/install
       - run:
+          name: Install Redis CLI
+          command: cd /tmp && wget http://download.redis.io/redis-stable.tar.gz |
+            && tar xvzf redis-stable.tar.gz && cd redis-stable |
+            && make && cp src/redis-cli /usr/local/bin/ && chmod 755 /usr/local/bin/redis-cli
+      - run:
           name: Install Frontend deps
           command: yarn install
       - run:
@@ -117,6 +122,9 @@ jobs:
       - run:
           name: Load fixture data
           command: heroku run -x -a remarkably-staging python manage.py loaddata data/dumped/latest.json
+      - run:
+          name: Delete Redis Cache
+          command: redis-cli -u ${heroku redis:credentials REDIS_URL} flushall
       - run:
           name: Deploy artifact to S3
           command: yarn run deploy-frontend-staging
