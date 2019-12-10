@@ -5,12 +5,17 @@ const validateStatus = status => {
   return status >= 200 && status < 500;
 };
 
-export function axiosPost(url, data, headers = {}) {
+const defaultHeader = {
+  Accept: "application/json",
+  "Content-Type": "application/json"
+};
+
+export function axiosPost(url, data, headers = defaultHeader) {
   const { token } = store.getState();
   const { access } = token;
 
   const config = {
-    method: "post",
+    method: "POST",
     headers: { ...headers },
     data,
     url,
@@ -20,15 +25,16 @@ export function axiosPost(url, data, headers = {}) {
     config.headers["Authorization"] = `Bearer ${access}`;
   }
   if (data.toString() === "[object FormData]") {
-    config.headers["content-type"] = "multipart/form-data";
+    config.headers["Content-Type"] = "multipart/form-data";
   }
   return axios(config);
 }
+
 export function axiosGet(url, config = { validateStatus }) {
   const { token } = store.getState();
   const { access } = token;
   const params = {
-    method: "get",
+    method: "GET",
     headers: { Accept: "application/json" },
     url,
     ...config
