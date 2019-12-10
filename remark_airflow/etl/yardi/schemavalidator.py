@@ -10,12 +10,12 @@ class SchemaValidator:
     This class is designed to keep instantiated for multiple pulls from multiple SOAP endpoints to use the cache."""
     __schema_locations = {
         'GetRawProperty_Login': SchemaMetadata(
-            schema_file='xmlspecs/Itf_RevenueMgmtRawDataExport.xsd',
+            schema_file='xmlschemas/Itf_RevenueMgmtRawDataExport.xsd',
             schema_name='GetRawProperty_Login',
             root_xpath='//RevenueManagementRawData',
         ),
         'GetPropertyConfigurations': SchemaMetadata(
-            schema_file='xmlspecs/Itf_PropertyConfiguration.xsd',
+            schema_file='xmlschemas/Itf_PropertyConfiguration.xsd',
             schema_name='GetPropertyConfigurations',
             root_xpath='//Properties',
         )
