@@ -33,6 +33,8 @@ from remark.projects.constants import (
     BUILDING_CLASS,
     SIZE_LANDSCAPE,
     SIZE_THUMBNAIL,
+    SIZE_PROPERTY_HOME,
+    SIZE_DASHBOARD
 )
 from remark.users.constants import PROJECT_ROLES
 
@@ -424,7 +426,7 @@ class Project(models.Model):
         """
         Return building image urls in [original, landscape, thumbnail] format
         """
-        images = ["", "", ""]
+        images = ["", "", "", ""]
         property = self.property
         if property.building_image:
             images[0] = property.building_image.url
@@ -441,6 +443,14 @@ class Project(models.Model):
                 {
                     "size": SIZE_THUMBNAIL,
                     "box": property.building_image_cropping,
+                    "crop": True,
+                },
+            )
+            images[3] = get_backend().get_thumbnail_url(
+                property.building_image,
+                {
+                    "size": SIZE_PROPERTY_HOME,
+                    "box": property.building_image_landscape_cropping,
                     "crop": True,
                 },
             )
@@ -642,12 +652,12 @@ class Property(models.Model):
         blank=True,
         default="",
         upload_to=building_image_media_path,
-        help_text="""Image of property building<br/>Resized variants (309x220, 180x180, 76x76) will also be created on Amazon S3.""",
+        help_text="""Image of property building<br/>Resized variants (605x370, 309x220, 180x180, 76x76) will also be created on Amazon S3.""",
         variations={
-            "dashboard": (400, 400, True),
-            "landscape": (309, 220, True),
-            "regular": (180, 180, True),
-            "thumbnail": (76, 76, True),
+            "property_home": (*SIZE_PROPERTY_HOME, True),
+            "dashboard": (*SIZE_DASHBOARD, True),
+            "landscape": (*SIZE_LANDSCAPE, True),
+            "thumbnail": (*SIZE_THUMBNAIL, True),
         },
     )
     building_image_cropping = ImageRatioFieldExt("building_image", "{}x{}".format(*SIZE_THUMBNAIL))

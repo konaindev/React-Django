@@ -51,7 +51,7 @@ export class ProjectReportPage extends Component {
     const { project } = this.props;
     let projectImage = DEFAULT_IMAGE_URL;
     if (project && project.building_image) {
-      projectImage = project.building_image[2];
+      projectImage = project.building_image[3];
     }
     return projectImage;
   };
