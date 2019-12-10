@@ -34,9 +34,13 @@ class YardiGetPropertiesAdapter(SoapResponseAdapter):
         for prop in element_tree:
             # I want the property 'Code' value from the document to use as a key in property_data, it is at the
             # same hierarchical level as the other property details.
+
             property_temp = {}
             for entry in prop:
                 property_temp[entry.tag] = entry.text
+
+            if property_temp['Code'] in self.processed_result:
+                raise ValueError(f'Unexpected duplicate property code {property_temp["Code"]}')
             self.processed_result[property_temp['Code']] = property_temp
 
         return self.processed_result
