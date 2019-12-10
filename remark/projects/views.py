@@ -13,9 +13,10 @@ from django.urls import reverse
 from django.utils import timezone
 
 from rest_framework import exceptions, generics
-from rest_framework.views import APIView
+from rest_framework.parsers import JSONParser
 from rest_framework.permissions import BasePermission, IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from remark.admin import admin_site
 from remark.users.models import User
@@ -32,7 +33,7 @@ from .reports.selectors import (
     ModelingReportSelector,
     CampaignPlanSelector,
 )
-from .models import Project
+from .models import Project, Tag
 from .forms import TAMExportForm
 from .serializers import ProjectSerializer
 from .tasks import export_tam_task
@@ -386,3 +387,35 @@ class ChangeMemberRoleView(APIView):
 
         project.save()
         return Response({"members": project.get_members()})
+
+
+class RemoveTagView(APIView):
+    permission_classes = [IsAuthenticated]
+    parser_classes = [JSONParser]
+
+    def post(self, request, public_id):
+        payload = request.data
+        word = payload.get("word")
+
+        try:
+            project = Project.objects.get(public_id=public_id)
+        except Project.DoesNotExist:
+            return Response({"error": "Project not found"}, status=500)
+
+        user = request.user
+        if not project.is_admin(user):
+            return Response(
+                {"error": "Only admin member or staff user can remove tag from project"},
+                status=500)
+
+        try:
+            tag = Tag.objects.get(word=word)
+        except Tag.DoesNotExist:
+            return Response(
+                {"error": f"Tag with name `{word}` not found"},
+                status=500)
+
+        project.custom_tags.remove(tag)
+        project.save()
+        tags = [t.word for t in project.custom_tags.all()]
+        return Response({"custom_tags": tags})

@@ -5698,7 +5698,7 @@ exports[`DashboardPage renders correctly 1`] = `
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -5786,7 +5786,7 @@ exports[`DashboardPage renders correctly 1`] = `
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -5918,7 +5918,7 @@ exports[`DashboardPage renders correctly 1`] = `
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -6102,7 +6102,7 @@ exports[`DashboardPage renders correctly 1`] = `
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -6286,7 +6286,7 @@ exports[`DashboardPage renders correctly 1`] = `
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -6470,7 +6470,7 @@ exports[`DashboardPage renders correctly 1`] = `
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -6654,7 +6654,7 @@ exports[`DashboardPage renders correctly 1`] = `
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -6838,7 +6838,7 @@ exports[`DashboardPage renders correctly 1`] = `
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -7022,7 +7022,7 @@ exports[`DashboardPage renders correctly 1`] = `
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -7206,7 +7206,7 @@ exports[`DashboardPage renders correctly 1`] = `
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -8237,7 +8237,7 @@ exports[`DashboardPage renders for admin 1`] = `
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -8325,7 +8325,7 @@ exports[`DashboardPage renders for admin 1`] = `
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -8457,7 +8457,7 @@ exports[`DashboardPage renders for admin 1`] = `
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -8641,7 +8641,7 @@ exports[`DashboardPage renders for admin 1`] = `
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -8825,7 +8825,7 @@ exports[`DashboardPage renders for admin 1`] = `
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -9009,7 +9009,7 @@ exports[`DashboardPage renders for admin 1`] = `
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -9193,7 +9193,7 @@ exports[`DashboardPage renders for admin 1`] = `
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -9377,7 +9377,7 @@ exports[`DashboardPage renders for admin 1`] = `
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -9561,7 +9561,7 @@ exports[`DashboardPage renders for admin 1`] = `
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -9745,7 +9745,7 @@ exports[`DashboardPage renders for admin 1`] = `
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>

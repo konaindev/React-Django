@@ -165,10 +165,8 @@ class DashboardView(APIView):
         projects = [
             self.get_project_details(project, request)
             for project in owned_projects.filter(**lookup_params).order_by(ordering)
+            if project.has_active_reports()  # Remove projects that don't have any report
         ]
-
-        # remove projects without any report enabled public
-        projects = [p for p in projects if p.get("report_url") is not None]
 
         sort_by = request.query_params.get("s")
         direction = request.query_params.get("d") or "asc"

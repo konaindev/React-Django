@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 
 import Container from "../container";
 import TopNavigation from "../top_navigation";

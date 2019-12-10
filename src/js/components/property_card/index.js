@@ -54,7 +54,7 @@ export const PropertyCard = ({
             <div className="property-card__overlay-link">
               {renderSelector()}
               <Link className="property-card__overlay-link" to={report_url}>
-                <Button color="outline">View Report</Button>
+                <Button color="outline">View Property</Button>
               </Link>
             </div>
             <div className="property-card__actions">

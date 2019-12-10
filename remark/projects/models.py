@@ -448,15 +448,20 @@ class Project(models.Model):
 
     def get_report_url(self):
         report_links = ReportLinks.public_for_project(self)
+        return report_links["overview"]["url"]
 
-        if report_links.get("performance"):
-            return report_links["performance"][0].get("url")
-
-        for report_type in ["baseline", "market", "modeling", "campaign_plan"]:
-            if report_links.get(report_type):
-                return report_links[report_type].get("url")
-
-        return None
+    def has_active_reports(self):
+        reports_fields = [
+            "is_baseline_report_public",
+            "is_tam_public",
+            "is_performance_report_public",
+            "is_modeling_public",
+            "is_campaign_plan_public",
+        ]
+        for f in reports_fields:
+            if getattr(self, f, None):
+                return True
+        return False
 
     def get_performance_rating(self):
         performance_report = PerformanceReport.for_campaign_to_date(self)
@@ -475,6 +480,9 @@ class Project(models.Model):
         if not target_lease_rate:
             return -1
         return health_check(lease_rate, target_lease_rate)
+
+    def get_address_str(self):
+        return self.property.geo_address.formatted_address
 
     def get_members(self):
         if self.view_group is None:
@@ -515,6 +523,11 @@ class Project(models.Model):
             return True
         return (self.admin_group is not None) and user.groups.filter(
             pk=self.admin_group.pk
+        ).exists()
+
+    def is_member(self, user):
+        return (self.view_group is not None) and user.groups.filter(
+            pk=self.view_group.pk
         ).exists()
 
     def user_can_view(self, user):
