@@ -448,19 +448,20 @@ class Project(models.Model):
 
     def get_report_url(self):
         report_links = ReportLinks.public_for_project(self)
-
-        if report_links.get("performance"):
-            return report_links["performance"][0].get("url")
-
-        for report_type in ["baseline", "market", "modeling", "campaign_plan"]:
-            if report_links.get(report_type):
-                return report_links[report_type].get("url")
-
-        return None
-
-    def get_report_url(self):
-        report_links = ReportLinks.for_project(self)
         return report_links["overview"]["url"]
+
+    def has_active_reports(self):
+        reports_fields = [
+            "is_baseline_report_public",
+            "is_tam_public",
+            "is_performance_report_public",
+            "is_modeling_public",
+            "is_campaign_plan_public",
+        ]
+        for f in reports_fields:
+            if getattr(self, f, None):
+                return True
+        return False
 
     def get_performance_rating(self):
         performance_report = PerformanceReport.for_campaign_to_date(self)
