@@ -71,10 +71,6 @@ def create_project(project_name="project 1"):
     return project, group
 
 
-def mock_get_report_url(self):
-    return f"/projects/{self.public_id}/market/"
-
-
 def add_user_to_group(group, email="test@remarkably.io"):
     user, _ = User.objects.get_or_create(email=email)
     group.user_set.add(user)
@@ -734,7 +730,6 @@ class GetTemplateVarsTestCase(TestCase):
         self.project = project1
         self.projects = [project1, project2]
 
-    @mock.patch("remark.projects.models.Project.get_report_url", new=mock_get_report_url)
     def test_for_new_user(self):
         template_vars = get_template_vars("admin", self.new_user, [self.project], 5)
         expected = {
@@ -758,7 +753,6 @@ class GetTemplateVarsTestCase(TestCase):
         }
         self.assertEqual(expected, template_vars)
 
-    @mock.patch("remark.projects.models.Project.get_report_url", new=mock_get_report_url)
     def test_for_new_user_many_projects(self):
         template_vars = get_template_vars("admin", self.new_user, self.projects, 5)
         expected = {
@@ -788,7 +782,6 @@ class GetTemplateVarsTestCase(TestCase):
         }
         self.assertEqual(expected, template_vars)
 
-    @mock.patch("remark.projects.models.Project.get_report_url", new=mock_get_report_url)
     def test_for_existing_user(self):
         template_vars = get_template_vars("admin", self.user, [self.project], 5)
         expected = {
@@ -812,7 +805,6 @@ class GetTemplateVarsTestCase(TestCase):
         }
         self.assertEqual(expected, template_vars)
 
-    @mock.patch("remark.projects.models.Project.get_report_url", new=mock_get_report_url)
     def test_for_existing_user_many_projects(self):
         template_vars = get_template_vars("admin", self.user, self.projects, 5)
         expected = {
