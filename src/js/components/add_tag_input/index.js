@@ -12,11 +12,13 @@ export default class AddTagField extends React.PureComponent {
   static propTypes = {
     className: PropTypes.string,
     value: PropTypes.string,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    onCreateTag: PropTypes.func
   };
   static defaultProps = {
     value: "",
-    onChange() {}
+    onChange() {},
+    onCreateTag() {}
   };
 
   inputRef = input => {
@@ -26,6 +28,8 @@ export default class AddTagField extends React.PureComponent {
   componentDidMount() {
     this.input.node.focus();
   }
+
+  createTag = () => this.props.onCreateTag(this.props.value);
 
   render() {
     const classes = cn("add-tag-field", this.props.className);
@@ -47,7 +51,9 @@ export default class AddTagField extends React.PureComponent {
               </div>
             </div>
             <div className="add-tag-field__suggestion-controls">
-              <Button color="primary">Create new tag +</Button>
+              <Button color="primary" onClick={this.createTag}>
+                Create new tag +
+              </Button>
             </div>
           </Panel>
         ) : null}

@@ -15,10 +15,12 @@ export default class PropertyOverview extends React.PureComponent {
   static propTypes = {
     project: PropTypes.object.isRequired,
     buildingImageURL: PropTypes.string.isRequired,
-    onRemoveTag: PropTypes.func
+    onRemoveTag: PropTypes.func,
+    onCreateTag: PropTypes.func
   };
   static defaultProps = {
-    onRemoveTag() {}
+    onRemoveTag() {},
+    onCreateTag() {}
   };
 
   static characteristicsFields = {
@@ -70,7 +72,7 @@ export default class PropertyOverview extends React.PureComponent {
   onAddTag = e => this.setState({ addingTag: e.target.value });
 
   renderTags = () => {
-    const { project, onRemoveTag } = this.props;
+    const { project } = this.props;
     if (
       !project.is_admin &&
       (!project.custom_tags || !project.custom_tags.length)
@@ -82,7 +84,7 @@ export default class PropertyOverview extends React.PureComponent {
       <Tag
         name={name}
         isAdmin={project.is_admin}
-        onRemove={onRemoveTag}
+        onRemove={this.props.onRemoveTag}
         key={name}
       />
     ));
@@ -95,8 +97,9 @@ export default class PropertyOverview extends React.PureComponent {
         isAdd ? (
           <AddTagField
             className="property-overview__add-tag-input"
-            onChange={this.onAddTag}
             value={this.state.addingTag}
+            onChange={this.onAddTag}
+            onCreateTag={this.props.onCreateTag}
             key={`${addKey}-input`}
           />
         ) : (
