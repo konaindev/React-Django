@@ -1,6 +1,6 @@
 from collections import namedtuple
 
-from lxml import etree
+import xmlschema
 
 SchemaMetadata = namedtuple('SchemaMetadata', ('schema_file', 'schema_name', 'root_xpath'), defaults=(None, None, None))
 
@@ -12,12 +12,12 @@ class SchemaValidator:
         'GetRawProperty_Login': SchemaMetadata(
             schema_file='xmlschemas/Itf_RevenueMgmtRawDataExport.xsd',
             schema_name='GetRawProperty_Login',
-            root_xpath='//RevenueManagementRawData',
+            root_xpath='.//RevenueManagementRawData',
         ),
         'GetPropertyConfigurations': SchemaMetadata(
             schema_file='xmlschemas/Itf_PropertyConfiguration.xsd',
             schema_name='GetPropertyConfigurations',
-            root_xpath='//Properties',
+            root_xpath='.//Properties',
         )
     }
     __loaded_schemas = {k: None for k in __schema_locations.keys()}
@@ -31,8 +31,7 @@ class SchemaValidator:
         """
 
         if self.__loaded_schemas[schema_meta.schema_name] is None:
-            schema_doc = etree.parse(schema_meta.schema_file)
-            self.__loaded_schemas[schema_meta.schema_name] = etree.XMLSchema(schema_doc)
+            self.__loaded_schemas[schema_meta.schema_name] = xmlschema.XMLSchema(schema_meta.schema_file)
 
         return self.__loaded_schemas[schema_meta.schema_name]
 
@@ -50,7 +49,7 @@ class SchemaValidator:
 
         schema_meta = self.__schema_locations[schema_name]
 
-        data_root = root.xpath(schema_meta.root_xpath)
+        data_root = root.findall(schema_meta.root_xpath)
 
         # xpath returns a list of elements with the parameter name, and we're expecting just one item
         count = len(data_root)
@@ -62,6 +61,6 @@ class SchemaValidator:
         data_root = data_root[0]
 
         validator = self.get_schema_validator(schema_meta)
-        validator.assertValid(data_root)
+        data_root = validator.to_dict(data_root)
 
         return data_root

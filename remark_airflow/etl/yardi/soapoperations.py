@@ -1,5 +1,5 @@
 import os
-from lxml import etree
+from defusedxml import ElementTree
 import requests
 
 YARDI_DATABASENAME = os.environ.get('YARDI_DATABASENAME', None)
@@ -90,7 +90,7 @@ class SoapOperation:
         self.headers = self.compose_headers(len(self.request))
         self.response = requests.post(self.endpoint, data=self.request, headers=self.headers)
         self.response.raise_for_status()
-        self.docroot = etree.fromstring(self.response.content)
+        self.docroot = ElementTree.fromstring(self.response.content)
         self.result_data = self.schemas.get_valid_data_or_die_trying(self.operation_name, self.docroot)
 
         return self.result_data
