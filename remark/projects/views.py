@@ -13,9 +13,10 @@ from django.urls import reverse
 from django.utils import timezone
 
 from rest_framework import exceptions, generics
-from rest_framework.views import APIView
+from rest_framework.parsers import JSONParser
 from rest_framework.permissions import BasePermission, IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from remark.admin import admin_site
 from remark.users.models import User
@@ -390,9 +391,10 @@ class ChangeMemberRoleView(APIView):
 
 class RemoveTagView(APIView):
     permission_classes = [IsAuthenticated]
+    parser_classes = [JSONParser]
 
     def post(self, request, public_id):
-        payload = json.loads(request.body)
+        payload = request.data
         word = payload.get("word")
 
         try:
@@ -404,14 +406,14 @@ class RemoveTagView(APIView):
         if not project.is_admin(user):
             return Response(
                 {"error": "Only admin member or staff user can remove tag from project"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                status=500)
 
         try:
             tag = Tag.objects.get(word=word)
         except Tag.DoesNotExist:
             return Response(
                 {"error": f"Tag with name `{word}` not found"},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+                status=500)
 
         project.custom_tags.remove(tag)
         project.save()
