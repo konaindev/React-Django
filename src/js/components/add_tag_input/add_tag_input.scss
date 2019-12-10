@@ -2,6 +2,7 @@
 
 $input-padding: 7px;
 $panel-width: 450px;
+$suggestion-shadow: 0px 2px 20px rgba(0, 0, 0, 0.35);
 $suggestion-padding: 20px;
 $text-height: 1.625rem;
 $controls-border: 1px solid $gray-4;
@@ -19,6 +20,7 @@ $controls-border: 1px solid $gray-4;
     top: 40px;
     left: 0;
     width: $panel-width;
+    box-shadow: $suggestion-shadow;
 }
 
 .add-tag-field__suggestion-text {

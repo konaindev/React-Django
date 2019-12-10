@@ -389,6 +389,32 @@ class ChangeMemberRoleView(APIView):
         return Response({"members": project.get_members()})
 
 
+class CreateTagView(APIView):
+    permission_classes = [IsAuthenticated]
+    parser_classes = [JSONParser]
+
+    def post(self, request, public_id):
+        payload = request.data
+        word = payload.get("word")
+
+        try:
+            project = Project.objects.get(public_id=public_id)
+        except Project.DoesNotExist:
+            return Response({"error": "Project not found"}, status=500)
+
+        user = request.user
+        if not project.is_admin(user):
+            return Response(
+                {"error": "Only admin member or staff user can remove tag from project"},
+                status=500)
+
+        tag = Tag.objects.get_or_create(word=word)
+        project.custom_tags.add(tag)
+        project.save()
+        tags = [t.word for t in project.custom_tags.all()]
+        return Response({"custom_tags": tags})
+
+
 class RemoveTagView(APIView):
     permission_classes = [IsAuthenticated]
     parser_classes = [JSONParser]
