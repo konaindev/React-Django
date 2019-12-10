@@ -39,7 +39,8 @@ class SchemaValidator:
     def get_valid_data_or_die_trying(self, schema_name, root):
         """
         This validates an xml subtree of the original request to validate against the provided XML Schema files.
-        We can't run this when we get the response because we have to grab the xsd's root element out of the soap response
+        We can't run this when we get the response because we have to grab the xsd's root element
+        out of the soap response.
         :param schema_name: string name of the SOAP operation we're validating for
         :param root: an lxml Element, expected to be the SOAP envelope, but I think lxml is more permissive than that
         :return: a valid subtree that matches the schema (.xsd) file
