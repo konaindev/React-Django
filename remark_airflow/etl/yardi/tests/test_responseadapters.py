@@ -2,6 +2,9 @@ from collections import namedtuple
 import unittest
 
 import remark_airflow.etl.yardi.responseadapters as responseadapters
+import os
+
+print(os.path.dirname(os.path.realpath(__file__)))
 
 MockYardiPropertiesNode = namedtuple('MockYardiPropertiesNode', ['tag', 'text'])
 
