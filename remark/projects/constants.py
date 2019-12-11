@@ -26,12 +26,14 @@ USER_ROLES = {
     "member": "member"
 }
 
-PROPERTY_STYLES = {
-    "low_rise": "Low-Rise",
-    "walk_up": "Walk-Up",
-    "mid_rise": "Mid-Rise",
-    "hi_rise": "Hi-Rise",
-    "tower_block": "Tower-Block",
-    "garden": "Garden",
-    "other": "Other",
-}
+PROPERTY_STYLE_AUTO = 0
+PROPERTY_STYLES = (
+    (0, "Auto"),
+    (1, "Low-Rise"),
+    (2, "Walk-Up"),
+    (3, "Mid-Rise"),
+    (4, "Hi-Rise"),
+    (5, "Tower-Block"),
+    (6, "Garden"),
+    (7, "Other"),
+)

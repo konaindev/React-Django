@@ -664,6 +664,7 @@ class Property(models.Model):
     building_image_landscape_cropping = ImageRatioFieldExt("building_image", "{}x{}".format(*SIZE_LANDSCAPE))
 
     property_type = models.IntegerField(choices=PROPERTY_TYPE, null=True, blank=False)
+    property_style = models.IntegerField(choices=PROPERTY_STYLES, null=True, blank=False, default=0)
     property_url = models.URLField(max_length=128, null=True, blank=True)
 
     building_class = models.IntegerField(
@@ -688,28 +689,6 @@ class Property(models.Model):
         ],
         help_text="YYYY (four number digit)",
     )
-
-    @property
-    def property_style(self):
-        buildings = self.building_set.all()
-        if len(buildings) == 1:
-            build = buildings[0]
-            if build.number_of_floors < 1:
-                return PROPERTY_STYLES["other"]
-            elif 1 <= build.number_of_floors <= 4:
-                if build.has_elevator:
-                    return PROPERTY_STYLES["low_rise"]
-                return PROPERTY_STYLES["walk_up"]
-            elif 5 <= build.number_of_floors <= 9:
-                return PROPERTY_STYLES["mid_rise"]
-            elif build.number_of_floors >= 10:
-                return PROPERTY_STYLES["hi_rise"]
-        elif len(buildings) >= 2:
-            tower_blocks = list(filter(lambda b: b.number_of_floors >= 10, buildings))
-            if len(tower_blocks) > 0:
-                return PROPERTY_STYLES["tower_block"]
-            return PROPERTY_STYLES["garden"]
-        return PROPERTY_STYLES["other"]
 
     def get_geo_state(self):
         return self.geo_address.state
