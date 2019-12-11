@@ -113,7 +113,7 @@ class TestYardiSoapOperation(unittest.TestCase):
         data, headers = kwargs['data'], kwargs['headers']
 
         self.assertIn(op.operation_name, data)
-        self.assertIn(op.operation_name, headers['Content-Type'])
+        self.assertIn(op.action, headers['Content-Type'])
 
         response_mock = mock_post.return_value
         response_mock.raise_for_status.assert_called_once()

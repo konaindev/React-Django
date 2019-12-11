@@ -8,7 +8,9 @@ SchemaMetadata = namedtuple('SchemaMetadata', ('schema_file', 'schema_name', 'ro
 class SchemaValidator:
     """Processes XML Schema files when they are accessed to use for validation and keeps them cached.
     This class is designed to keep instantiated for multiple pulls from multiple SOAP endpoints to use the cache."""
-    __schema_locations = {
+
+    # TODO: relative file paths for schema locations is not very flexible, fix that if needed
+    _schema_locations = {
         'GetRawProperty_Login': SchemaMetadata(
             schema_file='xmlschemas/Itf_RevenueMgmtRawDataExport.xsd',
             schema_name='GetRawProperty_Login',
@@ -20,20 +22,21 @@ class SchemaValidator:
             root_xpath='.//Properties',
         )
     }
-    __loaded_schemas = {k: None for k in __schema_locations.keys()}
+    _loaded_schemas = {k: None for k in _schema_locations.keys()}
 
     def get_schema_validator(self, schema_meta: SchemaMetadata):
         """
         Caches parsed schema from disk so multiple validations don't hit the disk each time
         :param schema_meta: The schema
-        :return: lxml etree XMLSchema instance
+        :return: xmlschema.XMLSchema instance
         :raises: KeyError if the operation name doesn't have an associated schema
+        :raises: File read errors and parsing errors if the file isn't as expected
         """
 
-        if self.__loaded_schemas[schema_meta.schema_name] is None:
-            self.__loaded_schemas[schema_meta.schema_name] = xmlschema.XMLSchema(schema_meta.schema_file)
+        if self._loaded_schemas[schema_meta.schema_name] is None:
+            self._loaded_schemas[schema_meta.schema_name] = xmlschema.XMLSchema(schema_meta.schema_file)
 
-        return self.__loaded_schemas[schema_meta.schema_name]
+        return self._loaded_schemas[schema_meta.schema_name]
 
     def get_valid_data_or_die_trying(self, schema_name, root):
         """
@@ -41,13 +44,13 @@ class SchemaValidator:
         We can't run this when we get the response because we have to grab the xsd's root element
         out of the soap response.
         :param schema_name: string name of the SOAP operation we're validating for
-        :param root: an lxml Element, expected to be the SOAP envelope, but I think lxml is more permissive than that
+        :param root: an xml Element, expected to be the SOAP envelope, but I think python's xml findall is permissive
         :return: a valid subtree that matches the schema (.xsd) file
         :raises: DocumentInvalid if the document is not valid for the operation type
         :raises: KeyError if the operation name doesn't have an associated schema
         """
 
-        schema_meta = self.__schema_locations[schema_name]
+        schema_meta = self._schema_locations[schema_name]
 
         data_root = root.findall(schema_meta.root_xpath)
 
