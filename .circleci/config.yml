@@ -129,7 +129,7 @@ jobs:
           command: heroku run -x -a remarkably-staging python manage.py loaddata data/dumped/latest.json
       - run:
           name: Delete Redis Cache
-          command: redis-cli -u ${heroku redis:credentials -a remarkably-staging REDIS_URL} flushall
+          command: redis-cli -u `heroku redis:credentials -a remarkably-staging REDIS_URL` flushall
       - run:
           name: Deploy artifact to S3
           command: yarn run deploy-frontend-staging
