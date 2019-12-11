@@ -34,8 +34,7 @@ SOAP_WRAPPER_POSTAMBLE = """
 
 
 class SoapOperation:
-    __operation_result_schema = None
-    __action_base = "http://tempuri.org/YSI.Interfaces.WebServices/ItfRevenueManagement/"
+    _action_base = "http://tempuri.org/YSI.Interfaces.WebServices/ItfRevenueManagement/"
 
     def __init__(self, endpoint, operation_name, schemas):
         """
@@ -43,7 +42,7 @@ class SoapOperation:
         :param endpoint: The URL being called to fulfill the request
         :param operation_name: The name of the SOAP operation, also used in the SOAP request body tag
         """
-        self.action = self.__action_base + operation_name
+        self.action = self._action_base + operation_name
         self.docroot = None
         self.endpoint = endpoint
         self.extra_operation_parameters = None
@@ -72,11 +71,11 @@ class SoapOperation:
         """
 
         headers = {
-            'Accept-Encoding': 'gzip,deflate',
-            'Content-Type': f'application/soap+xml;charset=UTF-8;action="{self.action}"',
-            'Content-Length': str(size),
-            'Connection': 'Keep-Alive',
             'Accept': '*/*',
+            'Accept-Encoding': 'gzip,deflate',
+            'Connection': 'Keep-Alive',
+            'Content-Length': str(size),
+            'Content-Type': f'application/soap+xml;charset=UTF-8;action="{self.action}"',
         }
         return headers
 
