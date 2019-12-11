@@ -1,4 +1,10 @@
+import jinja2
+
 from typing import Callable, Union
+
+from remark_airflow.insights.impl.utils import health_status_to_str
+
+jinja2.filters.FILTERS["health_status_to_str"] = health_status_to_str
 
 
 class Insight:
@@ -15,7 +21,8 @@ class Insight:
 
     def get_text(self, data):
         if type(self.template) is str:
-            return self.template
+            template = jinja2.Template(self.template)
+            return template.render(data)
         else:
             return self.template(data)
 

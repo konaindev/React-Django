@@ -8,7 +8,6 @@ from remark_airflow.insights.impl.vars import (
     var_current_period_leased_rate,
     var_target_leased_rate,
 )
-from remark_airflow.insights.impl.utils import health_status_to_str
 
 PROJECT_FACT_GENERATORS = (
     trigger_is_active_campaign,
@@ -32,9 +31,9 @@ def get_project_insights(project_facts):
     project_insights = [
         Insight(
             name="lease_rate_against_target",
-            template=f"Property is {project_facts['var_current_period_leased_rate']}%"
-            f" Leased against period target of {project_facts['var_target_leased_rate']}%,"
-            f" assessed as {health_status_to_str(project_facts['var_campaign_health_status'])}.",
+            template="Property is {{ var_current_period_leased_rate }}%"
+            " Leased against period target of {{ var_target_leased_rate }}%,"
+            " assessed as {{ var_campaign_health_status | health_status_to_str }}.",
             triggers=["trigger_is_active_campaign"],
         )
     ]
