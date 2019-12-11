@@ -303,13 +303,6 @@ class TAMExportForm(forms.Form):
 
 
 class PropertyForm(forms.ModelForm):
-    def clean_property_url(self):
-        url = self.cleaned_data["property_url"]
-        if url:
-            message = "Link is not active."
-            if not check_url_is_active(url):
-                raise forms.ValidationError(message)
-        return url
 
     class Meta:
         model = Property
