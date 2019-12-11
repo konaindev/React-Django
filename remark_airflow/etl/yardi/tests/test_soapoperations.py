@@ -8,6 +8,9 @@ from remark_airflow.etl.yardi import schemavalidator, soapoperations
 
 
 class MockHttpResponse:
+    """
+    This is to simulate an exception thrown when making a request.
+    """
     def __init__(self, *args, **kwargs):
         pass
 
