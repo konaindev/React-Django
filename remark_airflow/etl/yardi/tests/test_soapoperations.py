@@ -2,8 +2,18 @@ import unittest
 from unittest import mock
 
 from xmlschema.validators import exceptions as schema_exceptions
+from requests import exceptions as requests_exceptions
 
 from remark_airflow.etl.yardi import schemavalidator, soapoperations
+
+
+class MockHttpResponse:
+    def __init__(self, *args, **kwargs):
+        pass
+
+    @staticmethod
+    def raise_for_status():
+        raise requests_exceptions.HTTPError()
 
 
 class TestYardiSoapOperation(unittest.TestCase):
@@ -108,19 +118,29 @@ class TestYardiSoapOperation(unittest.TestCase):
         # tests to see if the 'content' object attribute was accessed
         self.assertTrue(hasattr(response_mock, 'content'))
 
-        xyz = 123
-
-    @mock.patch('remark_airflow.etl.yardi.soapoperations.requests.post')
-    def test_make_request_invalid_document(self, mock_object):
+    @mock.patch('remark_airflow.etl.yardi.soapoperations.ElementTree.fromstring')
+    @mock.patch('remark_airflow.etl.yardi.soapoperations.requests.post', return_value=unittest.mock.Mock())
+    def test_make_request_invalid_document(self, mock_post, mock_element_tree):
 
         class FakeSchemaValidator:
             @staticmethod
             def get_valid_data_or_die_trying(op, root):
                 raise schema_exceptions.XMLSchemaValidationError('foo', 'bar')
 
-    @mock.patch('remark_airflow.etl.yardi.soapoperations.requests.post')
-    def test_make_request_http_error(self, mock_object):
-        pass
+        endpoint = 'endpoint'
+        operation = 'operation'
+        op = soapoperations.SoapOperation(endpoint, operation, FakeSchemaValidator())
+
+        with self.assertRaises(schema_exceptions.XMLSchemaValidationError) as ex:
+            d = op.make_request()
+
+    @mock.patch('remark_airflow.etl.yardi.soapoperations.requests.post', new=MockHttpResponse)
+    def test_make_request_http_error(self):
+
+        op = soapoperations.SoapOperation('endpoint', 'operation', "I'm a schema validator!")
+
+        with self.assertRaises(requests_exceptions.HTTPError) as ex:
+            d = op.make_request()
 
 
 class TestYardiGetProperties(unittest.TestCase):
