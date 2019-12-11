@@ -11,6 +11,8 @@ $tag-color: $highlight-gray-3;
 $tag-bg: $gray-4;
 $tag-border-radius: 4px;
 $tag-line-height: 1.625rem;
+$tag-count-color: $content-text-secondary-color;
+$tag-count-spacing: 10px;
 $tags-spacing: 20px;
 
 .add-tag-field {
@@ -59,4 +61,9 @@ $tags-spacing: 20px;
     border-radius: $tag-border-radius;
     line-height: $tag-line-height;
     flex-wrap: nowrap;
+}
+
+.add-tag-field__suggestion-tag-count {
+    margin-left: $tag-count-spacing;
+    color: $tag-count-color;
 }
