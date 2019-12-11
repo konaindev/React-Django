@@ -32,6 +32,7 @@ const reducer = (state = initialState, action) => {
         fetchingReports: false,
         reports: action.payload
       };
+    case "STOP_FETCHING_PROJECT_REPORTS":
     case "AJAX_GET_PROJECT_REPORTS_FAILURE":
       return {
         ...state,
@@ -48,6 +49,10 @@ const reducer = (state = initialState, action) => {
     case "AJAX_DASHBOARD_UPDATE_MEMBER_SUCCESS":
       const { members } = action.data;
       project = { ...state.project, members };
+      return { ...state, project };
+    case "AJAX_POST_REMOVE_TAG_FROM_PROJECT_SUCCESS":
+      const { custom_tags } = action.payload;
+      project = { ...state.project, custom_tags };
       return { ...state, project };
     default:
       return state;

@@ -10,8 +10,16 @@ PROPERTY_TYPE = (
 
 BUILDING_CLASS = ((1, "Class A"), (2, "Class B"), (3, "Class C"))
 
+BUILDING_CLASS_UI = {
+    1: "A",
+    2: "B",
+    3: "C"
+}
+
 SIZE_LANDSCAPE = (309, 220)
 SIZE_THUMBNAIL = (180, 180)
+SIZE_PROPERTY_HOME = (605, 370)
+SIZE_DASHBOARD = (400, 400)
 
 USER_ROLES = {
     "admin": "admin",

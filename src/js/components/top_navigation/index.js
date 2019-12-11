@@ -1,13 +1,11 @@
-import cn from "classnames";
-import PropTypes from "prop-types";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "./top_navigation.scss";
 
 const navLinks = [
   {
-    id: "portfolio",
-    name: "Portfolio",
+    id: "properties",
+    name: "Properties",
     url: "/dashboard"
   },
   {
