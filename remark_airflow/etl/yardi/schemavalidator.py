@@ -1,7 +1,7 @@
 from collections import namedtuple
 
 import xmlschema
-
+from xml.etree.ElementTree import Element as XMLElement
 SchemaMetadata = namedtuple('SchemaMetadata', ('schema_file', 'schema_name', 'root_xpath'), defaults=(None, None, None))
 
 
@@ -38,7 +38,7 @@ class SchemaValidator:
 
         return self._loaded_schemas[schema_meta.schema_name]
 
-    def get_valid_data_or_die_trying(self, schema_name, root):
+    def get_valid_data_or_die_trying(self, schema_name: str, root: XMLElement):
         """
         This validates an xml subtree of the original request to validate against the provided XML Schema files.
         We can't run this when we get the response because we have to grab the xsd's root element
@@ -46,7 +46,7 @@ class SchemaValidator:
         :param schema_name: string name of the SOAP operation we're validating for
         :param root: an xml Element, expected to be the SOAP envelope, but I think python's xml findall is permissive
         :return: a valid subtree that matches the schema (.xsd) file
-        :raises: DocumentInvalid if the document is not valid for the operation type
+        :raises: xmlschema.validators.exceptions.XMLSchemaValidationError if the document is not valid for the operation
         :raises: KeyError if the operation name doesn't have an associated schema
         """
 

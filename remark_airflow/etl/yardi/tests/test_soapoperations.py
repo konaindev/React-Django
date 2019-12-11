@@ -118,7 +118,8 @@ class TestYardiSoapOperation(unittest.TestCase):
         response_mock = mock_post.return_value
         response_mock.raise_for_status.assert_called_once()
 
-        # tests to see if the 'content' object attribute was accessed
+        # tests to see if the 'content' object attribute was accessed, I'm not sure this functionality is
+        # actually an official part of unittest.mock.Mock()
         self.assertTrue(hasattr(response_mock, 'content'))
 
     @mock.patch('remark_airflow.etl.yardi.soapoperations.ElementTree.fromstring')
