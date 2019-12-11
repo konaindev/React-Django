@@ -83,6 +83,7 @@ class SoapOperation:
         """
         Builds and executes SOAP request.
         :raises: HTTP errors for non-successful requests
+        :raises: XML Schema validation errors
         """
 
         self.request = self.compose_request_body()

@@ -1,4 +1,7 @@
-import unittest, unittest.mock
+import unittest
+from unittest import mock
+
+from xmlschema.validators import exceptions as schema_exceptions
 
 from remark_airflow.etl.yardi import schemavalidator, soapoperations
 
@@ -72,8 +75,51 @@ class TestYardiSoapOperation(unittest.TestCase):
         self.assertIn('application/soap+xml;charset=UTF-8;action=', headers['Content-Type'])
         self.assertIn(op.action, headers['Content-Type'])
 
-    @unittest.mock.patch('remark_airflow.etl.yardi.soapoperations.requests.post')
-    def test_make_request(self, mock_obj):
+    @mock.patch('remark_airflow.etl.yardi.soapoperations.ElementTree.fromstring')
+    @mock.patch('remark_airflow.etl.yardi.soapoperations.requests.post', return_value=unittest.mock.Mock())
+    def test_make_request_happy_path(self, mock_post, mock_element_tree):
+        valid_data = "It's valid, trust me."
+
+        class FakeSchemaValidator:
+            @staticmethod
+            def get_valid_data_or_die_trying(op, root):
+                return valid_data
+
+        endpoint = 'endpoint'
+        operation = 'operation'
+        op = soapoperations.SoapOperation(endpoint, operation, FakeSchemaValidator())
+
+        d = op.make_request()
+        self.assertEqual(valid_data, d)
+
+        mock_element_tree.assert_called_once()
+        mock_post.assert_called_once()
+
+        args, kwargs = mock_post.call_args
+        self.assertEqual(args[0], endpoint)
+        data, headers = kwargs['data'], kwargs['headers']
+
+        self.assertIn(op.operation_name, data)
+        self.assertIn(op.operation_name, headers['Content-Type'])
+
+        response_mock = mock_post.return_value
+        response_mock.raise_for_status.assert_called_once()
+
+        # tests to see if the 'content' object attribute was accessed
+        self.assertTrue(hasattr(response_mock, 'content'))
+
+        xyz = 123
+
+    @mock.patch('remark_airflow.etl.yardi.soapoperations.requests.post')
+    def test_make_request_invalid_document(self, mock_object):
+
+        class FakeSchemaValidator:
+            @staticmethod
+            def get_valid_data_or_die_trying(op, root):
+                raise schema_exceptions.XMLSchemaValidationError('foo', 'bar')
+
+    @mock.patch('remark_airflow.etl.yardi.soapoperations.requests.post')
+    def test_make_request_http_error(self, mock_object):
         pass
 
 
