@@ -95,6 +95,7 @@ $add-tag-text-height: 20px;
 .property-overview__tags {
     display: flex;
     align-items: flex-start;
+    flex-wrap: wrap;
 }
 
 .property-overview__tag {
@@ -104,6 +105,7 @@ $add-tag-text-height: 20px;
     margin: $tags-spacing $tags-spacing 0 0;
     border-radius: $tags-border-radius;
     box-shadow: none;
+    white-space: nowrap;
     &:first-child {
         margin-left: 0;
     }
@@ -204,6 +206,7 @@ $add-tag-text-height: 20px;
     padding: $tags-padding-top 0 $tags-padding-top 0;
     margin-top: $tags-spacing;
     cursor: pointer;
+    white-space: nowrap;
 
     &--input {
         cursor: default;

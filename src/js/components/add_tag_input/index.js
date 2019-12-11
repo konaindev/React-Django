@@ -30,6 +30,11 @@ export default class AddTagField extends React.PureComponent {
   }
 
   createTag = () => this.props.onCreateTag(this.props.value);
+  onEnter = e => {
+    if (e.key === "Enter") {
+      this.createTag();
+    }
+  };
 
   render() {
     const classes = cn("add-tag-field", this.props.className);
@@ -40,6 +45,7 @@ export default class AddTagField extends React.PureComponent {
           placeholder="e.g. Southwestern, 2020 Fund"
           theme="simple"
           onChange={this.props.onChange}
+          onKeyUp={this.onEnter}
           value={this.props.value}
           ref={this.inputRef}
         />

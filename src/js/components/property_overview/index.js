@@ -15,6 +15,8 @@ export default class PropertyOverview extends React.PureComponent {
   static propTypes = {
     project: PropTypes.object.isRequired,
     buildingImageURL: PropTypes.string.isRequired,
+    isAddTagInput: PropTypes.bool,
+    showAddTagInput: PropTypes.func,
     onRemoveTag: PropTypes.func,
     onCreateTag: PropTypes.func
   };
@@ -39,7 +41,7 @@ export default class PropertyOverview extends React.PureComponent {
     developer: "developer"
   };
 
-  state = { isAdd: false };
+  state = { addingTag: "" };
 
   _renderFields = (fields, colsNum, emptyMessage) => {
     const { project } = this.props;
@@ -68,7 +70,10 @@ export default class PropertyOverview extends React.PureComponent {
     );
   };
 
-  onShowAddInput = () => this.setState({ isAdd: true, addingTag: "" });
+  onShowAddInput = () => {
+    this.props.showAddTagInput();
+    this.setState({ addingTag: "" });
+  };
   onAddTag = e => this.setState({ addingTag: e.target.value });
 
   renderTags = () => {
@@ -91,10 +96,10 @@ export default class PropertyOverview extends React.PureComponent {
     let message = "Custom property groups are made for each tag.";
     if (project.is_admin) {
       message = "Create custom property groups by adding a tag.";
-      const { isAdd } = this.state;
+      const isAddTag = this.props.isAddTagInput;
       const addKey = "add-tag";
       tags.push(
-        isAdd ? (
+        isAddTag ? (
           <AddTagField
             className="property-overview__add-tag-input"
             value={this.state.addingTag}

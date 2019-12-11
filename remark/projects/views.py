@@ -405,10 +405,10 @@ class CreateTagView(APIView):
         user = request.user
         if not project.is_admin(user):
             return Response(
-                {"error": "Only admin member or staff user can remove tag from project"},
+                {"error": "Only admin member or staff user can add tag"},
                 status=500)
 
-        tag = Tag.objects.get_or_create(word=word)
+        tag = Tag.objects.get_or_create(word=word)[0]
         project.custom_tags.add(tag)
         project.save()
         tags = [t.word for t in project.custom_tags.all()]

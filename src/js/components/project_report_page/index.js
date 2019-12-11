@@ -39,12 +39,14 @@ export class ProjectReportPage extends Component {
     share_info: PropTypes.object,
     backUrl: PropTypes.string,
     fetchingReports: PropTypes.bool,
+    isAddTagInput: PropTypes.bool,
     historyPush: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired
   };
 
   static defaultProps = {
-    backUrl: "/dashboard"
+    backUrl: "/dashboard",
+    isAddTagInput: false
   };
 
   getBuildingImage = () => {
@@ -65,6 +67,8 @@ export class ProjectReportPage extends Component {
     this.props.dispatch(
       projectActions.createTag(this.props.project.public_id)({ body: { word } })
     );
+
+  showAddTagInput = () => this.props.dispatch(projectActions.showAddTagInput());
 
   renderSubheader = () => {
     const { project, share_info, backUrl, reportType } = this.props;
@@ -116,7 +120,13 @@ export class ProjectReportPage extends Component {
   };
 
   renderReportContent = () => {
-    const { reportType, reportSpan, report, project } = this.props;
+    const {
+      reportType,
+      reportSpan,
+      report,
+      isAddTagInput,
+      project
+    } = this.props;
 
     if (reportType === "overview") {
       const buildingImageURL = this.getBuildingImage();
@@ -124,8 +134,10 @@ export class ProjectReportPage extends Component {
         <PropertyOverview
           project={project}
           buildingImageURL={buildingImageURL}
+          isAddTagInput={isAddTagInput}
           onCreateTag={this.createTag}
           onRemoveTag={this.removeTag}
+          showAddTagInput={this.showAddTagInput}
         />
       );
     }
