@@ -12,11 +12,13 @@ export default class AddTagField extends React.PureComponent {
   static propTypes = {
     className: PropTypes.string,
     value: PropTypes.string,
+    suggestedTags: PropTypes.array,
     onChange: PropTypes.func,
     onCreateTag: PropTypes.func
   };
   static defaultProps = {
     value: "",
+    suggestedTags: [],
     onChange() {},
     onCreateTag() {}
   };
@@ -36,8 +38,24 @@ export default class AddTagField extends React.PureComponent {
     }
   };
 
+  renderSuggestedTags = () => {
+    if (!this.props.suggestedTags.length) {
+      return;
+    }
+    const tags = this.props.suggestedTags.map(tag => (
+      <div className="add-tag-field__suggestion-tag" key={tag.name}>
+        <div className="add-tag-field__suggestion-tag-name">{tag.name}</div>
+        <div className="add-tag-field__suggestion-tag-count">{tag.count}</div>
+      </div>
+    ));
+    return <div className="add-tag-field__suggestion-tags">{tags}</div>;
+  };
+
   render() {
     const classes = cn("add-tag-field", this.props.className);
+    const text = this.props.suggestedTags.length
+      ? "Suggested Tags"
+      : "No suggestions found";
     return (
       <div className={classes}>
         <Input
@@ -52,10 +70,9 @@ export default class AddTagField extends React.PureComponent {
         {this.props.value ? (
           <Panel className="add-tag-field__suggestion">
             <div className="add-tag-field__suggestion-content">
-              <div className="add-tag-field__suggestion-text">
-                Suggested Tags
-              </div>
+              <div className="add-tag-field__suggestion-text">{text}</div>
             </div>
+            {this.renderSuggestedTags()}
             <div className="add-tag-field__suggestion-controls">
               <Button color="primary" onClick={this.createTag}>
                 Create new tag +
