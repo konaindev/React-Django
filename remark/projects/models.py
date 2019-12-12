@@ -33,6 +33,8 @@ from remark.projects.constants import (
     BUILDING_CLASS,
     SIZE_LANDSCAPE,
     SIZE_THUMBNAIL,
+    SIZE_PROPERTY_HOME,
+    SIZE_DASHBOARD
 )
 from remark.users.constants import PROJECT_ROLES
 
@@ -424,7 +426,7 @@ class Project(models.Model):
         """
         Return building image urls in [original, landscape, thumbnail] format
         """
-        images = ["", "", ""]
+        images = ["", "", "", ""]
         property = self.property
         if property.building_image:
             images[0] = property.building_image.url
@@ -444,17 +446,32 @@ class Project(models.Model):
                     "crop": True,
                 },
             )
+            images[3] = get_backend().get_thumbnail_url(
+                property.building_image,
+                {
+                    "size": SIZE_PROPERTY_HOME,
+                    "box": property.building_image_landscape_cropping,
+                    "crop": True,
+                },
+            )
         return images
 
     def get_report_url(self):
-        report_links = ReportLinks.for_project(self)
-        if report_links.get("performance"):
-            url = report_links["performance"][0].get("url")
-        elif report_links["baseline"]:
-            url = report_links["baseline"].get("url")
-        else:
-            url = f"/projects/{self.public_id}/market/"
-        return url
+        report_links = ReportLinks.public_for_project(self)
+        return report_links["overview"]["url"]
+
+    def has_active_reports(self):
+        reports_fields = [
+            "is_baseline_report_public",
+            "is_tam_public",
+            "is_performance_report_public",
+            "is_modeling_public",
+            "is_campaign_plan_public",
+        ]
+        for f in reports_fields:
+            if getattr(self, f, None):
+                return True
+        return False
 
     def get_performance_rating(self):
         performance_report = PerformanceReport.for_campaign_to_date(self)
@@ -473,6 +490,9 @@ class Project(models.Model):
         if not target_lease_rate:
             return -1
         return health_check(lease_rate, target_lease_rate)
+
+    def get_address_str(self):
+        return self.property.geo_address.formatted_address
 
     def get_members(self):
         if self.view_group is None:
@@ -513,6 +533,11 @@ class Project(models.Model):
             return True
         return (self.admin_group is not None) and user.groups.filter(
             pk=self.admin_group.pk
+        ).exists()
+
+    def is_member(self, user):
+        return (self.view_group is not None) and user.groups.filter(
+            pk=self.view_group.pk
         ).exists()
 
     def user_can_view(self, user):
@@ -627,18 +652,19 @@ class Property(models.Model):
         blank=True,
         default="",
         upload_to=building_image_media_path,
-        help_text="""Image of property building<br/>Resized variants (309x220, 180x180, 76x76) will also be created on Amazon S3.""",
+        help_text="""Image of property building<br/>Resized variants (605x370, 309x220, 180x180, 76x76) will also be created on Amazon S3.""",
         variations={
-            "dashboard": (400, 400, True),
-            "landscape": (309, 220, True),
-            "regular": (180, 180, True),
-            "thumbnail": (76, 76, True),
+            "property_home": (*SIZE_PROPERTY_HOME, True),
+            "dashboard": (*SIZE_DASHBOARD, True),
+            "landscape": (*SIZE_LANDSCAPE, True),
+            "thumbnail": (*SIZE_THUMBNAIL, True),
         },
     )
     building_image_cropping = ImageRatioFieldExt("building_image", "{}x{}".format(*SIZE_THUMBNAIL))
     building_image_landscape_cropping = ImageRatioFieldExt("building_image", "{}x{}".format(*SIZE_LANDSCAPE))
 
     property_type = models.IntegerField(choices=PROPERTY_TYPE, null=True, blank=False)
+    property_style = models.IntegerField(choices=PROPERTY_STYLES, null=True, blank=False, default=0)
     property_url = models.URLField(max_length=128, null=True, blank=True)
 
     building_class = models.IntegerField(
@@ -663,28 +689,6 @@ class Property(models.Model):
         ],
         help_text="YYYY (four number digit)",
     )
-
-    @property
-    def property_style(self):
-        buildings = self.building_set.all()
-        if len(buildings) == 1:
-            build = buildings[0]
-            if build.number_of_floors < 1:
-                return PROPERTY_STYLES["other"]
-            elif 1 <= build.number_of_floors <= 4:
-                if build.has_elevator:
-                    return PROPERTY_STYLES["low_rise"]
-                return PROPERTY_STYLES["walk_up"]
-            elif 5 <= build.number_of_floors <= 9:
-                return PROPERTY_STYLES["mid_rise"]
-            elif build.number_of_floors >= 10:
-                return PROPERTY_STYLES["hi_rise"]
-        elif len(buildings) >= 2:
-            tower_blocks = list(filter(lambda b: b.number_of_floors >= 10, buildings))
-            if len(tower_blocks) > 0:
-                return PROPERTY_STYLES["tower_block"]
-            return PROPERTY_STYLES["garden"]
-        return PROPERTY_STYLES["other"]
 
     def get_geo_state(self):
         return self.geo_address.state

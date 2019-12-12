@@ -494,7 +494,6 @@ class FundAdmin(admin.ModelAdmin):
 class PropertyAdmin(admin.ModelAdmin):
     form = PropertyForm
 
-    readonly_fields = ["property_style"]
     inlines = (
         BuildingInline,
     )

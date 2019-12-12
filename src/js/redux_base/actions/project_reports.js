@@ -17,7 +17,8 @@ const actions = {
       return qs;
     }
   ),
-  updateStore: payload => ({ type: "PROJECT_REPORTS_UPDATE_STORE", payload })
+  updateStore: payload => ({ type: "PROJECT_REPORTS_UPDATE_STORE", payload }),
+  stopFetchingReports: () => ({ type: "STOP_FETCHING_PROJECT_REPORTS" })
 };
 
 export default actions;

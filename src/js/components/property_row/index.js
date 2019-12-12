@@ -14,7 +14,7 @@ const PropertyRow = ({
   property_name,
   address,
   performance_rating,
-  url,
+  report_url,
   members,
   selected,
   disableSelection,
@@ -68,7 +68,7 @@ const PropertyRow = ({
         <Link
           style={{ color: "inherit", textDecoration: "inherit" }}
           className="property-row__link"
-          to={url}
+          to={report_url}
         >
           View Property
         </Link>

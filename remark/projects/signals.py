@@ -1,8 +1,11 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+from celery import shared_task
+
 from .models import Campaign, Spreadsheet, Period, PerformanceReport, Project, TargetPeriod
 from remark.lib.cache import get_dashboard_cache_key, reset_cache
+from remark.lib.logging import getLogger
 from remark.lib.stats import health_check
 
 from remark.email_app.models import PerformanceEmail, PerformanceEmailKPI
@@ -13,16 +16,23 @@ from remark.email_app.reports.constants import (
     KPIS_INCLUDE_IN_EMAIL
 )
 
-import datetime
-
-from remark.lib.logging import getLogger
-
 logger = getLogger(__name__)
+
+
+@receiver(post_save, sender=Project)
+@receiver(post_save, sender=TargetPeriod)
+def reset_project_cache(sender, instance, **kwargs):
+    project_public_id = instance.get_project_public_id()
+    if project_public_id:
+        cache_key = get_dashboard_cache_key(project_public_id)
+        reset_cache(cache_key)
+
 
 @receiver(post_save, sender=Spreadsheet)
 def activate_spreadsheets_if_safe(sender, instance, created, raw, **kwargs):
     if not raw:
         instance.activate()
+
 
 def model_percent(name, report):
     selector = SELECTORS[name]
@@ -113,22 +123,18 @@ def get_ctd_kpi_lists(ctd_model_percent):
     return (top_kpis, risk_kpis, low_kpis)
 
 
-@receiver(post_save, sender=Period)
-def update_performance_report(sender, instance, created, raw, **kwargs):
-    # dont run this for fixtures
-    if raw:
+@shared_task
+def update_performance_report(period_id):
+    try:
+        period = Period.objects.get(pk=period_id)
+    except:
+        logger.info(f"Period does not exists! {period_id}")
         return
 
-    project = instance.project
-    start = instance.start
-
-    if not created:
-        logger.info("No new record created for this period. Skipping.")
-        return
-
+    project = period.project
+    start = period.start
+    end = period.end
     campaign_start = project.get_campaign_start()
-    end = instance.end
-    prevstart = start - datetime.timedelta(days=7)
 
     if start < campaign_start:
         logger.info("Start date is before campaign start. Skipping.")
@@ -218,10 +224,14 @@ def update_performance_report(sender, instance, created, raw, **kwargs):
         pek.save()
 
 
-@receiver(post_save, sender=Project)
-@receiver(post_save, sender=TargetPeriod)
-def reset_project_cache(sender, instance, **kwargs):
-    project_public_id = instance.get_project_public_id()
-    if project_public_id:
-        cache_key = get_dashboard_cache_key(project_public_id)
-        reset_cache(cache_key)
+@receiver(post_save, sender=Period)
+def post_save_period(sender, instance, created, raw, **kwargs):
+    # dont run this for fixtures
+    if raw:
+        return
+
+    if not created:
+        logger.info("No new record created for this period. Skipping.")
+        return
+
+    update_performance_report.apply_async(args=(instance.id,), countdown=2)

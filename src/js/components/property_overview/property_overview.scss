@@ -1,0 +1,193 @@
+@import "css/base.scss";
+
+$panel-spacing: $box-space;
+$panel-header-text-size: $text-xl;
+$panel-header-color: $highlight-gray-3;
+$panel-header-height: 1.625rem;
+$panel-name-text-size: $text-xs;
+$panel-name-line: $line-height-normal;
+$section-spacing: 100px;
+$section-empty-text-size: $text-base;
+$section-empty-line: $line-height-relaxed;
+$content-spacing: 0 0 200px 0;
+$image-width: 605px;
+$image-height: 370px;
+$info-width: 365px;
+$info-height: 370px;
+$empty-property-bg: $gray-1;
+$text-size: $text-sm;
+$address-height: $text-base;
+$address-spacing: 10px;
+$header-font: $s7;
+$header-height: 2.125rem;
+$header-color: $highlight-gray-3;
+$empty-text-color: #ccd0d6;
+$tags-highlight-bg: $gray-4;
+$tags-border-radius: 4px;
+$tags-spacing: 20px;
+$tags-padding: 7px 10px;
+$tag-text-color: $highlight-gray-3;
+$tag-remove-size: 0.5rem;
+$tag-remove-spacing: 10px;
+$tag-remove-region-size: 1.125rem;
+$tag-remove-border-radius: 2px;
+$tag-remove-hover-color: $gray-6;
+
+.property-overview {
+    width: 1000px;
+    padding: $content-spacing;
+    margin: 0 auto;
+}
+
+.property-overview__info {
+    display: grid;
+    grid-column-gap: $panel-spacing;
+    grid-template-columns: 1fr 1fr;
+}
+
+.property-overview__tile {
+    display: flex;
+    flex-direction: column;
+    padding: $panel-spacing;
+    &--info {
+        width: $info-width;
+        height: $info-height;
+    }
+}
+
+.property-overview__tile-name {
+    height: $panel-header-height;
+    color: $gray-6;
+    font-size: $panel-name-text-size;
+    letter-spacing: 1px;
+    line-height: $panel-name-line;
+    text-transform: uppercase;
+}
+
+.property-overview__tile-value {
+    height: $panel-header-height;
+    color: $panel-header-color;
+    font-size: $panel-header-text-size;
+    font-weight: $weight-medium;
+}
+
+.property-overview__section {
+    margin-top: $section-spacing;
+    &--top {
+        margin-top: $section-spacing / 2;
+    }
+}
+
+.property-overview__section-empty,
+.property-overview__section-text {
+    color: $empty-text-color;
+    font-size: $section-empty-text-size;
+    line-height: $section-empty-line;
+}
+
+.property-overview__section-empty {
+    margin-top: $panel-spacing;
+}
+
+.property-overview__tag {
+    display: inline-flex;
+    align-items: center;
+    padding: $tags-padding;
+    margin: $tags-spacing $tags-spacing 0 0;
+    border-radius: $tags-border-radius;
+    box-shadow: none;
+    &:first-child {
+        margin-left: 0;
+    }
+}
+
+.property-overview__tag--admin {
+    &:hover {
+        background-color: $tags-highlight-bg;
+    }
+}
+
+.property-overview__tag-name {
+    color: $tag-text-color;
+    font-size: $text-size;
+    line-height: $panel-header-height;
+}
+
+.property-overview__tag-remove {
+    width: $tag-remove-region-size;
+    height: $tag-remove-region-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: $tag-remove-spacing;
+    color: $default-text-color;
+    cursor: pointer;
+    border-radius: $tag-remove-border-radius;
+
+    &:hover {
+        background-color: $tag-remove-hover-color;
+        color: $gray-4;
+    }
+}
+
+.property-overview__tag-remove-icon {
+    width: $tag-remove-size;
+    height: $tag-remove-size;
+}
+
+.property-overview__tiles {
+    display: grid;
+    grid-column-gap: $panel-spacing;
+    grid-row-gap: $panel-spacing;
+    margin-top: $panel-spacing;
+
+    &--3-cols {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    &--2-cols {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.property-overview__section-header {
+    height: $header-height;
+    color: $header-color;
+    font-size: $header-font;
+    font-weight: $weight-medium;
+}
+
+.property-overview__address {
+    height: $address-height;
+    margin-top: $address-spacing;
+    font-size: $text-size;
+}
+
+.property-overview__image {
+    width: $image-width;
+    height: $image-height;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: $panel-border-radius;
+
+    &--default {
+        background-color: $empty-property-bg;
+        background-image: $blank-building-url;
+        background-size: auto;
+    }
+}
+
+.property-overview__site {
+    width: 100%;
+    margin-top: auto;
+}
+
+.property-overview__site-link {
+    width: 100%;
+}
+
+.property-overview__site-empty {
+    color: $empty-text-color;
+    font-size: $text-base;
+    text-align: center;
+}

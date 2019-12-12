@@ -5691,14 +5691,14 @@ exports[`DashboardPage renders correctly 1`] = `
                   >
                     <a
                       className="property-card__overlay-link"
-                      href=""
+                      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
                       onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -5779,14 +5779,14 @@ exports[`DashboardPage renders correctly 1`] = `
                   >
                     <a
                       className="property-card__overlay-link"
-                      href=""
+                      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
                       onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -5911,14 +5911,14 @@ exports[`DashboardPage renders correctly 1`] = `
                   >
                     <a
                       className="property-card__overlay-link"
-                      href=""
+                      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
                       onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -6095,14 +6095,14 @@ exports[`DashboardPage renders correctly 1`] = `
                   >
                     <a
                       className="property-card__overlay-link"
-                      href=""
+                      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
                       onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -6279,14 +6279,14 @@ exports[`DashboardPage renders correctly 1`] = `
                   >
                     <a
                       className="property-card__overlay-link"
-                      href=""
+                      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
                       onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -6463,14 +6463,14 @@ exports[`DashboardPage renders correctly 1`] = `
                   >
                     <a
                       className="property-card__overlay-link"
-                      href=""
+                      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
                       onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -6647,14 +6647,14 @@ exports[`DashboardPage renders correctly 1`] = `
                   >
                     <a
                       className="property-card__overlay-link"
-                      href=""
+                      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
                       onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -6831,14 +6831,14 @@ exports[`DashboardPage renders correctly 1`] = `
                   >
                     <a
                       className="property-card__overlay-link"
-                      href=""
+                      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
                       onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -7015,14 +7015,14 @@ exports[`DashboardPage renders correctly 1`] = `
                   >
                     <a
                       className="property-card__overlay-link"
-                      href=""
+                      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
                       onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -7199,14 +7199,14 @@ exports[`DashboardPage renders correctly 1`] = `
                   >
                     <a
                       className="property-card__overlay-link"
-                      href=""
+                      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
                       onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -8230,14 +8230,14 @@ exports[`DashboardPage renders for admin 1`] = `
                   >
                     <a
                       className="property-card__overlay-link"
-                      href=""
+                      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
                       onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -8318,14 +8318,14 @@ exports[`DashboardPage renders for admin 1`] = `
                   >
                     <a
                       className="property-card__overlay-link"
-                      href=""
+                      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
                       onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -8450,14 +8450,14 @@ exports[`DashboardPage renders for admin 1`] = `
                   >
                     <a
                       className="property-card__overlay-link"
-                      href=""
+                      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
                       onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -8634,14 +8634,14 @@ exports[`DashboardPage renders for admin 1`] = `
                   >
                     <a
                       className="property-card__overlay-link"
-                      href=""
+                      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
                       onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -8818,14 +8818,14 @@ exports[`DashboardPage renders for admin 1`] = `
                   >
                     <a
                       className="property-card__overlay-link"
-                      href=""
+                      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
                       onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -9002,14 +9002,14 @@ exports[`DashboardPage renders for admin 1`] = `
                   >
                     <a
                       className="property-card__overlay-link"
-                      href=""
+                      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
                       onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -9186,14 +9186,14 @@ exports[`DashboardPage renders for admin 1`] = `
                   >
                     <a
                       className="property-card__overlay-link"
-                      href=""
+                      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
                       onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -9370,14 +9370,14 @@ exports[`DashboardPage renders for admin 1`] = `
                   >
                     <a
                       className="property-card__overlay-link"
-                      href=""
+                      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
                       onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -9554,14 +9554,14 @@ exports[`DashboardPage renders for admin 1`] = `
                   >
                     <a
                       className="property-card__overlay-link"
-                      href=""
+                      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
                       onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>
@@ -9738,14 +9738,14 @@ exports[`DashboardPage renders for admin 1`] = `
                   >
                     <a
                       className="property-card__overlay-link"
-                      href=""
+                      href="/https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/"
                       onClick={[Function]}
                     >
                       <button
                         className="button button--outline"
                         onClick={[Function]}
                       >
-                        View Report
+                        View Property
                       </button>
                     </a>
                   </div>

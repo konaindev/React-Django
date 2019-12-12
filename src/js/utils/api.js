@@ -10,8 +10,12 @@ export function axiosPost(url, data, headers = {}) {
   const { access } = token;
 
   const config = {
-    method: "post",
-    headers: { ...headers },
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      ...headers
+    },
     data,
     url,
     validateStatus
@@ -20,15 +24,16 @@ export function axiosPost(url, data, headers = {}) {
     config.headers["Authorization"] = `Bearer ${access}`;
   }
   if (data.toString() === "[object FormData]") {
-    config.headers["content-type"] = "multipart/form-data";
+    config.headers["Content-Type"] = "multipart/form-data";
   }
   return axios(config);
 }
+
 export function axiosGet(url, config = { validateStatus }) {
   const { token } = store.getState();
   const { access } = token;
   const params = {
-    method: "get",
+    method: "GET",
     headers: { Accept: "application/json" },
     url,
     ...config

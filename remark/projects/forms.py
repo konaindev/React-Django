@@ -7,7 +7,7 @@ from django.utils.safestring import mark_safe
 from django.urls import reverse
 from image_cropping import ImageCropWidget
 
-from remark.settings import BASE_URL
+from remark.settings import BASE_URL, FRONTEND_URL
 from remark.lib.urls import check_url_is_active
 from remark.lib.validators import (
     validate_linebreak_separated_numbers_list,
@@ -177,8 +177,8 @@ class ProjectForm(forms.ModelForm):
                     continue
                 self.fields[field_name].label = mark_safe(
                     self.fields[field_name].label
-                    + '&nbsp; (URL: <a target="_blank" href="{}">{}</a>)'.format(
-                        link, link
+                    + '&nbsp; (URL: <a target="_blank" href="{}{}">{}</a>)'.format(
+                        FRONTEND_URL, link, link
                     )
                 )
 
@@ -303,13 +303,6 @@ class TAMExportForm(forms.Form):
 
 
 class PropertyForm(forms.ModelForm):
-    def clean_property_url(self):
-        url = self.cleaned_data["property_url"]
-        if url:
-            message = "Link is not active."
-            if not check_url_is_active(url):
-                raise forms.ValidationError(message)
-        return url
 
     class Meta:
         model = Property
