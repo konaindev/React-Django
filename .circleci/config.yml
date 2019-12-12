@@ -101,6 +101,10 @@ jobs:
           name: Maintenance Mode On
           command: heroku maintenance:on --app remarkably-staging
       - run:
+          name: set postgres_url
+          command: echo "export DATABASE_URL=$(python3 -c 'import setup_utils; setup_utils.set_url()')" >> $BASH_ENV
+      - run: echo $DATABASE_URL
+      - run:
           name: Maintenance Mode Off
           command: heroku maintenance:off --app remarkably-staging
 
