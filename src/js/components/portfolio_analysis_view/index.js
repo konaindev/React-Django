@@ -10,7 +10,6 @@ import PortfolioTable from "../portfolio_table";
 import KPICard, { NoTargetKPICard, NoValueKPICard } from "../kpi_card";
 import Tooltip from "../rmb_tooltip";
 import Select from "../select";
-import UserMenu from "../user_menu";
 import ToggleButton from "../toggle_button";
 import Loader from "../loader";
 import { portfolio } from "../../redux_base/actions";
@@ -106,20 +105,23 @@ export class PortfolioAnalysisView extends React.PureComponent {
 
   renderKPICards = () => {
     const { display_average } = this.props;
-    const targetTooltipForAvg = display_average === "1" ? "average_target_among_active_campaigns" : null;
+    const targetTooltipForAvg =
+      display_average === "1" ? "average_target_among_active_campaigns" : null;
 
     return this.props.highlight_kpis.map(
       ({ name, health, label, value, target }) => {
-        let Component = KPICard, targetTooltip;
+        let CardComponent, targetTooltip;
         if (_isNil(value)) {
-          Component = NoValueKPICard;
+          CardComponent = NoValueKPICard;
         } else if (_isNil(target)) {
-          Component = NoTargetKPICard;
+          CardComponent = NoTargetKPICard;
         } else {
+          CardComponent = KPICard;
           targetTooltip = targetTooltipForAvg;
         }
+
         return (
-          <Component
+          <CardComponent
             className="portfolio-analysis__kpi-card"
             health={health}
             value={formatKPI(name, value)}
@@ -132,13 +134,6 @@ export class PortfolioAnalysisView extends React.PureComponent {
       }
     );
   };
-
-  renderHeaderItems() {
-    if (this.props.user) {
-      return <UserMenu {...this.props.user} />;
-    }
-    return null;
-  }
 
   getEmptyPropsTooltip = () => {
     const emptyCount = getEmptyPropertiesCount(this.props.table_data);
