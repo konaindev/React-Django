@@ -15,7 +15,9 @@ class DashboardContainer extends PureComponent {
   }
 
   render() {
-    return renderWrapper(<DashboardPage {...this.props} />);
+    return renderWrapper(
+      <DashboardPage inviteDisabled={true} {...this.props} />
+    );
   }
 }
 

@@ -53,7 +53,7 @@ exports[`PropertyCardList renders correctly 1`] = `
                 className="button button--outline"
                 onClick={[Function]}
               >
-                View Report
+                View Property
               </button>
             </a>
           </div>
@@ -137,7 +137,7 @@ exports[`PropertyCardList renders correctly 1`] = `
                 className="button button--outline"
                 onClick={[Function]}
               >
-                View Report
+                View Property
               </button>
             </a>
           </div>
@@ -221,7 +221,7 @@ exports[`PropertyCardList renders correctly 1`] = `
                 className="button button--outline"
                 onClick={[Function]}
               >
-                View Report
+                View Property
               </button>
             </a>
           </div>
@@ -305,7 +305,7 @@ exports[`PropertyCardList renders correctly 1`] = `
                 className="button button--outline"
                 onClick={[Function]}
               >
-                View Report
+                View Property
               </button>
             </a>
           </div>
@@ -389,7 +389,7 @@ exports[`PropertyCardList renders correctly 1`] = `
                 className="button button--outline"
                 onClick={[Function]}
               >
-                View Report
+                View Property
               </button>
             </a>
           </div>
@@ -473,7 +473,7 @@ exports[`PropertyCardList renders correctly 1`] = `
                 className="button button--outline"
                 onClick={[Function]}
               >
-                View Report
+                View Property
               </button>
             </a>
           </div>
@@ -557,7 +557,7 @@ exports[`PropertyCardList renders correctly 1`] = `
                 className="button button--outline"
                 onClick={[Function]}
               >
-                View Report
+                View Property
               </button>
             </a>
           </div>
@@ -641,7 +641,7 @@ exports[`PropertyCardList renders correctly 1`] = `
                 className="button button--outline"
                 onClick={[Function]}
               >
-                View Report
+                View Property
               </button>
             </a>
           </div>
@@ -725,7 +725,7 @@ exports[`PropertyCardList renders correctly 1`] = `
                 className="button button--outline"
                 onClick={[Function]}
               >
-                View Report
+                View Property
               </button>
             </a>
           </div>
@@ -809,7 +809,7 @@ exports[`PropertyCardList renders correctly 1`] = `
                 className="button button--outline"
                 onClick={[Function]}
               >
-                View Report
+                View Property
               </button>
             </a>
           </div>

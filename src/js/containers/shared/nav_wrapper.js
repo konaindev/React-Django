@@ -26,7 +26,7 @@ const mapState = state => {
   return {
     navLinks: state.nav.navLinks,
     // note: this is ugly and should go...
-    user: state.user || state.dashboard.user
+    user: state.dashboard.user || state.user
   };
 };
 

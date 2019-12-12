@@ -34,6 +34,7 @@ function onSearch(store, properties, propertiesName, value) {
 }
 
 storiesOf("AccountSettings", module)
+  /*
   .add("Profile", () => (
     <Provider
       store={createStore(() => ({
@@ -42,7 +43,7 @@ storiesOf("AccountSettings", module)
     >
       <AccountSettings initialItem="profile" {...props} />
     </Provider>
-  ))
+  ))*/
   .add("Account Security", () => (
     <Provider
       store={createStore(() => ({
@@ -55,7 +56,8 @@ storiesOf("AccountSettings", module)
         {...props}
       />
     </Provider>
-  ))
+  ));
+/*
   .add(
     "Email Reports",
     withState({ groups })(({ store }) => (
@@ -81,4 +83,4 @@ storiesOf("AccountSettings", module)
         />
       </Provider>
     ))
-  );
+  )*/

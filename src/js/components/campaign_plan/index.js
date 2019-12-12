@@ -49,7 +49,7 @@ export default class CampaignPlan extends Component {
             />
           </div>
 
-          {activeTab == "overview" && tabData != null && (
+          {isOverviewTab && tabData != null && (
             <CampaignPlanOverviewTab {...tabData} />
           )}
 

@@ -122,7 +122,9 @@ $tooltip-border-radius: 4px;
     }
 }
 
-.rmb-tooltip--light-dark {
+
+.rmb-tooltip--light-dark,
+.rmb-tooltip--information {
     .rc-tooltip-inner {
         padding: 20px;
         background-color: $tooltip-dark-bg;
@@ -131,6 +133,15 @@ $tooltip-border-radius: 4px;
 
     .rc-tooltip-arrow {
         background-image: url(images/arrow-dark.svg);
+    }
+}
+
+
+.rmb-tooltip--information {
+    .rc-tooltip-inner {
+        width: 20rem;
+        text-align: center;
+        border-radius: 6px;
     }
 }
 
@@ -171,4 +182,8 @@ $tooltip-border-radius: 4px;
     .rc-tooltip-arrow {
         background-image: url(images/arrow-highlight.svg);
     }
+}
+
+.rmb-tooltip-anchor {
+    cursor: pointer;
 }

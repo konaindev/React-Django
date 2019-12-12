@@ -14,9 +14,10 @@ const PropertyRow = ({
   property_name,
   address,
   performance_rating,
-  url,
+  report_url,
   members,
   selected,
+  disableSelection,
   selection_mode,
   onSelect,
   className,
@@ -41,25 +42,33 @@ const PropertyRow = ({
     }
   };
 
+  const rowSelector = () => {
+    if (!disableSelection) {
+      return (
+        <div
+          className="property-row__selector"
+          onClick={handleToggle}
+          onMouseEnter={onMouseImgEnter}
+          onMouseLeave={onMouseImgLeave}
+        >
+          <div style={imageStyle} className="property-row__image" />
+          <div className="property-row__selector-hover" />
+          <div className="property-row__tick" />
+        </div>
+      );
+    }
+  };
+
   return (
     <Panel className={rowClass} style={style}>
-      <div
-        className="property-row__selector"
-        onClick={handleToggle}
-        onMouseEnter={onMouseImgEnter}
-        onMouseLeave={onMouseImgLeave}
-      >
-        <div style={imageStyle} className="property-row__image" />
-        <div className="property-row__selector-hover" />
-        <div className="property-row__tick" />
-      </div>
+      {rowSelector()}
       <div className="property-row__name">{property_name}</div>
       <div className="property-row__address">{address}</div>
       <div className="property-row__link-container">
         <Link
           style={{ color: "inherit", textDecoration: "inherit" }}
           className="property-row__link"
-          to={url}
+          to={report_url}
         >
           View Property
         </Link>

@@ -7,7 +7,8 @@ from .views import (
     SearchMembersView,
     AddMembersView,
     ProjectRemoveMemberView,
-    ChangeMemberRoleView
+    ChangeMemberRoleView,
+    RemoveTagView
 )
 
 app_name = "releases"
@@ -27,4 +28,5 @@ urlpatterns = [
         ChangeMemberRoleView.as_view(),
         name="project_change_role",
     ),
+    path("projects/<public_id>/remove-tag/", RemoveTagView.as_view(), name="project_remove_tag"),
 ]

@@ -7,7 +7,7 @@ const user = {
   user_id: "usr_jjzpeyfeshzpaha5"
 };
 
-const itemsOrder = ["profile", "lock", "email"];
+const itemsOrder = ["lock"]; //["profile", "lock", "email"];
 
 const rules = [
   {
@@ -93,5 +93,6 @@ export const props = {
   initialTab,
   office_countries,
   us_state_list,
-  gb_county_list
+  gb_county_list,
+  dispatch: () => {}
 };

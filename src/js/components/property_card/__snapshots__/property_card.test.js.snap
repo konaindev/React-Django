@@ -50,7 +50,7 @@ exports[`PropertyCard renders at-risk 1`] = `
               className="button button--outline"
               onClick={[Function]}
             >
-              View Report
+              View Property
             </button>
           </a>
         </div>
@@ -256,7 +256,7 @@ exports[`PropertyCard renders off-track 1`] = `
               className="button button--outline"
               onClick={[Function]}
             >
-              View Report
+              View Property
             </button>
           </a>
         </div>
@@ -462,7 +462,7 @@ exports[`PropertyCard renders on-track 1`] = `
               className="button button--outline"
               onClick={[Function]}
             >
-              View Report
+              View Property
             </button>
           </a>
         </div>
@@ -668,7 +668,7 @@ exports[`PropertyCard renders selected 1`] = `
               className="button button--outline"
               onClick={[Function]}
             >
-              View Report
+              View Property
             </button>
           </a>
         </div>

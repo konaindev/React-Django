@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import FormattedMultiple from "../formatted_multiple";
 import Panel from "../panel";
-import Tooltip from "../rmb_tooltip";
+import Tooltip, { InfoTooltip } from "../rmb_tooltip";
 import withFormatters from "../with_formatters";
 import {
   formatMultiple,
@@ -29,6 +29,7 @@ import "./small_box_layout.scss";
 class SmallBoxLayout extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
+    infoTooltip: PropTypes.string,
     content: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
       .isRequired,
     detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
@@ -36,7 +37,7 @@ class SmallBoxLayout extends Component {
   };
 
   render() {
-    const { content, detail, detail2, name, tooltip } = this.props;
+    const { content, detail, detail2, name, tooltip, infoTooltip } = this.props;
     const contentValue = (
       <span className="small-box__inner-content">{content}</span>
     );
@@ -63,6 +64,7 @@ class SmallBoxLayout extends Component {
             contentValue
           )}
         </div>
+        <InfoTooltip transKey={infoTooltip} />
       </Panel>
     );
   }

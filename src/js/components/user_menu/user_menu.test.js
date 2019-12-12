@@ -6,11 +6,23 @@ import { props } from "./props";
 
 describe("UserMenu", () => {
   it("render default", () => {
-    const tree = renderer.create(<MemoryRouter><UserMenu {...props} /></MemoryRouter>).toJSON();
+    const tree = renderer
+      .create(
+        <MemoryRouter>
+          <UserMenu {...props} />
+        </MemoryRouter>
+      )
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
   it("render opened", () => {
-    const tree = renderer.create(<MemoryRouter><UserMenu {...props} menuIsOpen /></MemoryRouter>).toJSON();
+    const tree = renderer
+      .create(
+        <MemoryRouter>
+          <UserMenu {...props} menuIsOpen />
+        </MemoryRouter>
+      )
+      .toJSON();
     expect(tree).toMatchSnapshot();
   });
 });

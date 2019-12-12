@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 
 import DeltaLayout from "../delta_layout";
 import { targetFormatter } from "../../utils/formatters";
@@ -21,7 +20,7 @@ const withFormatters = (
   const formatterForTarget = targetFormatter(formatter);
   const formatterForDelta = deltaFormatter || formatter;
 
-  return class extends React.Component {
+  class WithFormatters extends Component {
     render() {
       let {
         value,
@@ -51,7 +50,16 @@ const withFormatters = (
         />
       );
     }
-  };
+  }
+
+  WithFormatters.displayName = `WithFormatters(${getDisplayName(
+    WrappedComponent
+  )})`;
+
+  return WithFormatters;
 };
 
 export default withFormatters;
+
+export const getDisplayName = WrappedComponent =>
+  WrappedComponent.displayName || WrappedComponent.name || "Component";

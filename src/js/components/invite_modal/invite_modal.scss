@@ -1,0 +1,233 @@
+@import "css/base.scss";
+
+$window-width: 560px;
+$title-color: $highlight-gray-3;
+$title-color-secondary: $gray-6;
+$header-height: 20px;
+$header-spacing: 20px;
+$border-color: $gray-4;
+$container-spacing: 20px;
+$user-container-height: $s72;
+$user-container-spacing: $s5;
+$user-select-max-height: $s24;
+$role-select-spacing: 5px;
+$invite-btn-with: 86px;
+$member-spacing: $s6;
+$remove-btn-height: $s5;
+$remove-btn-color: $orange-6;
+$remove-btn-border: $gray-4;
+$remove-btn-hover-color: $gray-4;
+$collapsible-background: $gray-11;
+$collapsible-hover-background: $gray-12;
+$collapsible-icon-width: 0.375rem;
+$collapsible-icon-height: 0.625rem;
+$collapsible-icon-spacing: 5px 10px 0 0;
+$collapsible-close-size: $s3;
+$collapsible-members-spacing: 1.875rem 2.125rem;
+$remove-modal-width: 455px;
+$close-hover-bg: $gray-6;
+$close-hover-color: $gray-4;
+
+.invite-modal {
+    width: $window-width;
+    padding: 0;
+    font-family: $font-sans;
+
+    .modal-window__close {
+        top: 25px;
+        right: 20px;
+    }
+}
+
+.invite-modal__header {
+    display: flex;
+    height: $header-height;
+    padding: $header-spacing;
+    margin: 0;
+    box-sizing: content-box;
+}
+
+.invite-modal__title {
+    font-size: $text-base;
+    line-height: $line-height-normal;
+    color: $title-color-secondary;
+
+    &--name {
+        color: $title-color;
+    }
+}
+
+.invite-modal__container {
+    padding: $container-spacing;
+    border-top: 1px solid $border-color;
+
+    &--select {
+        display: flex;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        box-sizing: content-box;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &--users {
+        height: $user-container-height;
+        padding: $user-container-spacing;
+        overflow: auto;
+    }
+
+    &--button {
+        text-align: right;
+    }
+}
+
+.invite-modal__select-users {
+    max-height: $user-select-max-height;
+    font-size: 0.875rem;
+    flex-grow: 1;
+
+    .select__control {
+        cursor: text;
+    }
+}
+
+.invite-modal__select-role {
+    display: inline-block;
+    margin-top: $role-select-spacing;
+    margin-bottom: $role-select-spacing;
+    align-self: flex-start;
+    flex-shrink: 0;
+}
+
+.invite-modal__button {
+    padding: 0.875rem 1rem;
+    font-size: $text-xs;
+    font-weight: 700;
+    letter-spacing: $letter-spacing-wider;
+}
+
+.invite-modal__member {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    & + .invite-modal__member {
+        margin-top: $member-spacing;
+    }
+}
+
+.invite-modal__remove-btn {
+    height: $remove-btn-height;
+    padding: $s5 2.375rem;
+    font-size: $text-base;
+    color: $remove-btn-color;
+    cursor: pointer;
+    border-top: 1px solid $remove-btn-border;
+    box-sizing: content-box;
+
+    &:hover {
+        background-color: $remove-btn-hover-color;
+    }
+}
+
+.invite-modal__collapsible {
+    background: $collapsible-background;
+    border-radius: $border-radius-default;
+
+    &:hover {
+        background: $collapsible-hover-background;
+    }
+
+    &.collapsible--open {
+        background: $collapsible-hover-background;
+    }
+
+    + .invite-modal__collapsible {
+        margin-top: $s5;
+    }
+}
+
+.invite-modal__trigger {
+    display: flex;
+    padding: $s5;
+
+    justify-content: space-between;
+}
+
+.invite-modal__collapsible-icon {
+    width: $collapsible-icon-width;
+    height: $collapsible-icon-height;
+    margin: $collapsible-icon-spacing;
+
+    align-self: flex-start;
+}
+
+.invite-modal__property-name {
+    font-size: $text-sm;
+    line-height: $s5;
+    color: $content-text-primary-color;
+}
+
+.invite-modal__users-count {
+    font-size: $text-xs;
+    line-height: $s5;
+    color: $content-text-secondary-color;
+}
+
+.invite-modal__collapsible-container {
+    display: flex;
+    align-items: center;
+}
+
+.invite-modal__collapsible-close {
+    width: $collapsible-close-size;
+    height: $collapsible-close-size;
+    padding: 3px;
+    margin-left: $s5;
+    box-sizing: content-box;
+
+    &:hover {
+        color: $close-hover-color;
+        background: $close-hover-bg;
+        border-radius: .125rem;
+    }
+}
+
+.invite-modal__collapsible-members {
+    padding: $collapsible-members-spacing;
+    background: $collapsible-background;
+}
+
+
+.invite-remove-window {
+    width: $remove-modal-width;
+}
+.invite-remove-window__body {
+    font-size: $text-sm;
+    line-height: 26px;
+}
+
+.invite-remove-window__name {
+    color: $highlight-gray-3;
+}
+
+.invite-remove-window__controls {
+    display: flex;
+    margin-top: 50px;
+    justify-content: space-between;
+}
+
+.invite-remove-window__button {
+    width: $s28;
+    height: $s11;
+    font-size: $text-xs;
+    letter-spacing: $letter-spacing-wider;
+    text-transform: uppercase;
+}
+
+.invite-modal__user-not-found {
+    padding: 10px 20px;
+    font-size: $text-xs;
+    color: $content-text-primary-color;
+    text-align: left;
+}

@@ -47,6 +47,7 @@ export default function Select(props) {
     />
   );
 }
+
 Select.optionsGroupType = PropTypes.arrayOf(
   PropTypes.shape({
     label: PropTypes.string.isRequired,
@@ -58,6 +59,7 @@ Select.optionsGroupType = PropTypes.arrayOf(
     ).isRequired
   })
 );
+
 Select.optionsType = PropTypes.oneOfType([
   PropTypes.arrayOf(
     PropTypes.shape({

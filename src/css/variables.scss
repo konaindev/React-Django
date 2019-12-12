@@ -311,6 +311,7 @@ $s5: 1.25rem; // 20px
 $s6: 1.5rem; // 24px
 $s7: 1.75rem;
 $s8: 2rem; // 32px
+$s9: 2.25rem;
 $s10: 2.5rem;
 $s11: 2.75rem; // 44px
 $s12: 3rem;
@@ -410,6 +411,8 @@ $password-form-text-color: $gray-3;
 $password-form-message-color: $orange-3;
 $password-form-nav-back-color: $highlight-gray-3;
 
+$blank-building-url: url("../../../images/blank_property_building.svg");
+
 //----------------------------------------------------------
 // Device breakpoints
 //----------------------------------------------------------
@@ -418,5 +421,5 @@ $mq-breakpoints: (
     mobile:  320px,
     tablet:  740px,
     desktop: 980px,
-    wide:    1300px
+    wide:    1366px,
 )

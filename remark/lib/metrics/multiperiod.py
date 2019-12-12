@@ -171,6 +171,9 @@ class MultiPeriodBase:
         """
         return self.get_periods(self.get_start(), self.get_end())[0]
 
+    def __str__(self):
+        return f"{type(self).__name__}: {self.get_start()} - {self.get_end()}"
+
 
 class BareMultiPeriod(MultiPeriodBase):
     """

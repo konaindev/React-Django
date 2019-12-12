@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import Loader from "../../components/loader/index";
+import Loader from "../../components/loader";
 
 const LoaderContainer = props => <Loader {...props} />;
 

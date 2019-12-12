@@ -10,7 +10,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "",
       performance_rating: 2,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      report_url:
+        "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
       members: [
         {
           user_id: "1234556960",
@@ -28,7 +29,8 @@ export const props = {
       address: "",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 1,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      report_url:
+        "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
       members: members.slice(0, 3)
     },
     {
@@ -37,7 +39,8 @@ export const props = {
       address: "1779 Nacogdoches Rd, San Antonio, TX 78209, USA",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 2,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      report_url:
+        "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
       members: members.slice(1)
     },
     {
@@ -46,7 +49,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 0,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      report_url:
+        "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
       members: members.slice(1)
     },
     {
@@ -55,7 +59,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 2,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      report_url:
+        "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
       members: members.slice(1)
     },
     {
@@ -64,7 +69,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 2,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      report_url:
+        "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
       members: members.slice(1)
     },
     {
@@ -73,7 +79,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 1,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      report_url:
+        "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
       members: members.slice(1)
     },
     {
@@ -82,7 +89,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 1,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      report_url:
+        "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
       members: members.slice(1)
     },
     {
@@ -91,7 +99,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 2,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      report_url:
+        "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
       members: members.slice(1)
     },
     {
@@ -100,7 +109,8 @@ export const props = {
       address: "123 4th Avenue, Seattle WA 98106",
       image_url: "https://i.imgur.com/UEH4gfU.jpg",
       performance_rating: 2,
-      url: "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
+      report_url:
+        "https://app.remarkably.io/projects/pro_nqcu73oiinomuvn7/baseline/",
       members: members.slice(1)
     }
   ],

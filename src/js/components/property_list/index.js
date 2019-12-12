@@ -20,12 +20,14 @@ class PropertyList extends React.PureComponent {
     onSelect: PropTypes.func,
     selectedProperties: PropTypes.arrayOf(
       PropTypes.shape(PropertyCard.requiredPropTypes)
-    )
+    ),
+    disableSelection: PropTypes.boolean
   };
 
   static defaultProps = {
     onSelect: () => {},
-    selectedProperties: []
+    selectedProperties: [],
+    disableSelection: false
   };
 
   state = {
@@ -53,20 +55,25 @@ class PropertyList extends React.PureComponent {
   get propertiesRows() {
     const selectionMode =
       this.state.selectionMode || !!this.props.selectedProperties.length;
-    return this.props.properties.map(property => (
-      <div key={property.property_id} className="property-list__row">
-        <PropertyRow
-          {...property}
-          selection_mode={selectionMode}
-          selected={this.props.selectedProperties.some(
-            p => p.property_id === property.property_id
-          )}
-          onSelect={this.onSelect}
-          onMouseImgEnter={() => this.setState({ selectionMode: true })}
-          onMouseImgLeave={() => this.setState({ selectionMode: false })}
-        />
-      </div>
-    ));
+    return this.props.properties.map(property => {
+      console.log("properties rows");
+      console.log(property);
+      return (
+        <div key={property.property_id} className="property-list__row">
+          <PropertyRow
+            {...property}
+            disableSelection={this.props.disableSelection}
+            selection_mode={selectionMode}
+            selected={this.props.selectedProperties.some(
+              p => p.property_id === property.property_id
+            )}
+            onSelect={this.onSelect}
+            onMouseImgEnter={() => this.setState({ selectionMode: true })}
+            onMouseImgLeave={() => this.setState({ selectionMode: false })}
+          />
+        </div>
+      );
+    });
   }
 
   render() {

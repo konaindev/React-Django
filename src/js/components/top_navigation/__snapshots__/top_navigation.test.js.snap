@@ -10,7 +10,7 @@ exports[`TopNavigation renders correctly 1`] = `
     href="/dashboard"
     onClick={[Function]}
   >
-    Portfolio
+    Properties
   </a>
   <a
     aria-current={null}

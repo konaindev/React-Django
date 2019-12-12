@@ -1,10 +1,14 @@
-import renderer from "react-test-renderer";
+import { shallow } from "enzyme";
+
 import ModelingView from "./index";
 import { props } from "./props";
 
 describe("ModelingView", () => {
   it("renders correctly", () => {
-    const tree = renderer.create(<ModelingView {...props} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const tree = shallow(<ModelingView {...props} />);
+    expect(tree.debug()).toMatchSnapshot();
+
+    tree.setState({ activeReportIndex: "compare" });
+    expect(tree.debug()).toMatchSnapshot();
   });
 });

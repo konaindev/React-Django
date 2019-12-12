@@ -1,7 +1,6 @@
 import json
 
 from django.conf import settings
-
 from rest_framework import status as drf_status
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
@@ -53,7 +52,6 @@ class DashboardView(APIView):
                 report_url=project.get_report_url()
             )
             return project_details
-
         return cache_lib.access_cache(cache_key, generate_value, cache_bust=cache_bust)
 
     def get_owned_projects(self, user):
@@ -167,6 +165,7 @@ class DashboardView(APIView):
         projects = [
             self.get_project_details(project, request)
             for project in owned_projects.filter(**lookup_params).order_by(ordering)
+            if project.has_active_reports()  # Remove projects that don't have any report
         ]
 
         sort_by = request.query_params.get("s")
@@ -210,8 +209,12 @@ class TutorialView(APIView):
 
 
 class LocalizationView(APIView):
-    def post(self, request):
-        localization_form = LocalizationForm(request.data, initial={"language": "en_us"})
+
+    authentication_classes = []
+
+    def get(self, request):
+        params = request.query_params
+        localization_form = LocalizationForm(params, initial={"language": "en_us"})
         if not localization_form.is_valid():
             errors = localization_form.errors.get_json_data()
             return Response(errors, status=drf_status.HTTP_500_INTERNAL_SERVER_ERROR)

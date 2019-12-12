@@ -1,7 +1,6 @@
 from rest_framework import serializers
 
-from remark.users.constants import PROJECT_ROLES
-
+from .constants import BUILDING_CLASS_UI, PROPERTY_TYPE, PROPERTY_STYLES, PROPERTY_STYLE_AUTO
 from .models import Project
 from .reports.selectors import ReportLinks
 
@@ -14,6 +13,24 @@ class ProjectSerializer(serializers.ModelSerializer):
     campaign_end = serializers.SerializerMethodField()
     report_links = serializers.SerializerMethodField()
     members = serializers.SerializerMethodField()
+    address_str = serializers.SerializerMethodField()
+    url = serializers.SerializerMethodField()
+    custom_tags = serializers.StringRelatedField(many=True)
+    # Characteristics
+    building_class = serializers.SerializerMethodField()
+    year_built = serializers.SerializerMethodField()
+    year_renovated = serializers.SerializerMethodField()
+    total_units = serializers.SerializerMethodField()
+    property_type = serializers.SerializerMethodField()
+    property_style = serializers.SerializerMethodField()
+    # Stakeholders
+    property_owner = serializers.SerializerMethodField()
+    asset_manager = serializers.SerializerMethodField()
+    property_manager = serializers.SerializerMethodField()
+    developer = serializers.SerializerMethodField()
+    # Current user
+    is_admin = serializers.SerializerMethodField()
+    is_member = serializers.SerializerMethodField()
 
     class Meta:
         model = Project
@@ -27,11 +44,26 @@ class ProjectSerializer(serializers.ModelSerializer):
             "campaign_end",
             "report_links",
             "members",
+            "address_str",
+            "building_class",
+            "year_built",
+            "year_renovated",
+            "total_units",
+            "property_type",
+            "property_style",
+            "url",
+            "custom_tags",
+            "property_owner",
+            "asset_manager",
+            "property_manager",
+            "developer",
             "is_baseline_report_shared",
             "is_tam_shared",
             "is_performance_report_shared",
             "is_modeling_shared",
             "is_campaign_plan_shared",
+            "is_admin",
+            "is_member",
         )
         read_only_fields = (
             "public_id",
@@ -72,3 +104,55 @@ class ProjectSerializer(serializers.ModelSerializer):
         for u in user_item:
             u["is_current"] = True
         return user_item + result
+
+    def get_is_admin(self, obj):
+        current_user = self.context["request"].user
+        if not current_user.is_authenticated:
+            return False
+        return obj.is_admin(current_user)
+
+    def get_is_member(self, obj):
+        current_user = self.context["request"].user
+        if not current_user.is_authenticated:
+            return False
+        return obj.is_member(current_user)
+
+    def get_address_str(self, obj):
+        return obj.get_address_str()
+
+    def get_url(self, obj):
+        return obj.property.property_url
+
+    def get_building_class(self, obj):
+        return BUILDING_CLASS_UI[obj.property.building_class]
+
+    def get_year_built(self, obj):
+        return obj.property.year_built
+
+    def get_year_renovated(self, obj):
+        return obj.property.year_renovated
+
+    def get_total_units(self, obj):
+        return obj.property.total_units
+
+    def get_property_type(self, obj):
+        ptype = obj.property.property_type
+        for property_type in PROPERTY_TYPE:
+            if property_type[0] == ptype:
+                return property_type[1]
+        return None
+
+    def get_property_style(self, obj):
+        return obj.property.calculated_property_style
+
+    def get_property_owner(self, obj):
+        return obj.property_owner and obj.property_owner.name
+
+    def get_asset_manager(self, obj):
+        return obj.asset_manager and obj.asset_manager.name
+
+    def get_property_manager(self, obj):
+        return obj.property_manager and obj.property_manager.name
+
+    def get_developer(self, obj):
+        return obj.developer and obj.developer.name

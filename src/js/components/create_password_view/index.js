@@ -11,6 +11,8 @@ import FormField from "../form_field";
 import PageAuth from "../page_auth";
 import PasswordOverlay from "../password_tooltip";
 import RMBTooltip from "../rmb_tooltip";
+import router from "../../router";
+import { axiosPost } from "../../utils/api";
 
 import "./create_password_view.scss";
 

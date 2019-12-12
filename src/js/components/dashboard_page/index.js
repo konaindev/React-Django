@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import cn from "classnames";
 import _isArray from "lodash/isArray";
 import _isEmpty from "lodash/isEmpty";
 import _isEqual from "lodash/isEqual";
+import React from "react";
+import PropTypes from "prop-types";
+import cn from "classnames";
 
 import AddPropertyModal from "../add_property_modal";
 import { states } from "../add_property_form/states";
@@ -16,7 +16,6 @@ import ToggleButton from "../toggle_button";
 import { InviteModalProperties } from "../../containers/invite_modal";
 import { Close, ListView, TileView } from "../../icons";
 import Loader from "../loader";
-
 import { qsParse, qsStringify } from "../../utils/misc";
 import TutorialView from "../tutorial_view";
 import { inviteModal, dashboard } from "../../redux_base/actions";
@@ -52,6 +51,11 @@ export class DashboardPage extends React.PureComponent {
     }
   ];
 
+  /*
+    showLoader (called in componentDidUpdate):
+      This was a hacky fix a spinner issue (lag between when data was available and when 'isFetching' is set to false resulting in prior page displaying before re-render); 
+      showLoader represents a delayed replica of is (waits 300 ms before updating component)
+  */
   constructor(props) {
     super(props);
     this.state = {
@@ -187,6 +191,7 @@ export class DashboardPage extends React.PureComponent {
                 properties={this.props.properties}
                 selectedProperties={this.props.selectedProperties}
                 onSelect={this.onSelectHandler}
+                disableSelection={true}
               />
             </div>
           </Container>
@@ -266,7 +271,7 @@ DashboardSelection.defaultProps = {
   inviteDisable: true
 };
 
-export class UrlQueryLayer extends React.PureComponent {
+class UrlQueryLayer extends React.PureComponent {
   constructor(props) {
     super(props);
 

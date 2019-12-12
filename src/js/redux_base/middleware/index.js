@@ -10,6 +10,7 @@ import {
   market,
   kpi,
   token as tokenActions,
+  networking,
   createFEUrl
 } from "../actions";
 import {
@@ -18,8 +19,9 @@ import {
   updateReportsSettingsData,
   updateSecurityData
 } from "../../api/account_settings";
-import { URLS, createAPIUrl } from "../actions/helpers";
+import { API_URL_PREFIX, URLS, createAPIUrl } from "../actions/helpers";
 import { axiosGet, axiosPost } from "../../utils/api";
+import { qsStringify } from "../../utils/misc";
 import ReactGa from "react-ga";
 
 // Here we create a middleware that intercepts
@@ -122,7 +124,7 @@ export const fetchPasswordRules = store => next => action => {
 export const fetchCompany = store => next => action => {
   switch (action.type) {
     case "API_COMPANY_ADDRESS": {
-      const url = `${URLS.base}/crm/office-address/`;
+      const url = `${API_URL_PREFIX}/crm/office-address/`;
       axiosPost(url, action.data)
         .then(response => {
           const companyAddresses = response.data?.addresses || [];
@@ -136,7 +138,7 @@ export const fetchCompany = store => next => action => {
       break;
     }
     case "API_COMPANY_SEARCH": {
-      const url = `${URLS.base}/crm/company-search/`;
+      const url = `${API_URL_PREFIX}/crm/company-search/`;
       axiosPost(url, action.data)
         .then(response => {
           action.callback(response.data?.company || []);
@@ -304,11 +306,11 @@ export const fetchInviteModal = store => next => action => {
 
 export const fetchUIString = store => next => action => {
   if (action.type === "API_UI_STRINGS") {
-    const url = createAPIUrl(`/localization`);
-    axiosPost(url, action.data)
+    const url = createAPIUrl(`/localization/${qsStringify(action.data)}`);
+    axiosGet(url)
       .then(response => {
         if (response.status === 200) {
-          next(uiStrings.set(response.data.data));
+          next(uiStrings.set(response.data));
         } else if (response.status === 208) {
           next(action);
         } else {
@@ -420,7 +422,9 @@ export const refreshToken = store => next => action => {
           next(tokenActions.update({ refresh, access: response.data.access }));
           // there might be mutiple simulataneous calls which resulted 401
           // better to reload the page
-          window.location.reload();
+          setTimeout(() => {
+            window.location.reload();
+          });
         }
       })
       .catch(e => console.log("REFRESH TOKEN ERROR", e));
@@ -434,8 +438,13 @@ export const login = store => next => action => {
     const apiUrl = createAPIUrl(URLS.login);
     axiosPost(apiUrl, action.body)
       .then(response => {
+        console.log("LOGIN RESPONSE");
+        console.log(response.status);
         if (response.status == 401) {
           console.log("BAD LOGIN");
+          alert(
+            "Oops! There was a problem with your login info, please try again."
+          );
           next(auth.clearToken());
         } else {
           next(
@@ -444,11 +453,17 @@ export const login = store => next => action => {
               access: response.data.access
             })
           );
-          if (action.redirect_url) {
-            window.location.href = action.redirect_url;
-          } else {
-            window.location.reload();
-          }
+
+          // Edge needs a break to save token to localStorage using redux-persist
+          // So that valid token is available after browser reload
+          setTimeout(() => {
+            console.log(`redirect url: ${action.redirect_url}`);
+            if (action.redirect_url) {
+              window.location.href = action.redirect_url;
+            } else {
+              window.location.reload();
+            }
+          });
         }
       })
       .catch(e => console.log("REFRESH TOKEN ERROR", e));

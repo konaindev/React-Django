@@ -1,14 +1,11 @@
-import renderer from "react-test-renderer";
+import { shallow } from "enzyme";
+
 import { SmallBoxLayout } from "./index";
+import props from "./props";
 
 describe("SmallBoxLayout", () => {
   it("renders correctly", () => {
-    const props = {
-      name: "Test name",
-      content: "Test content",
-      detail: "This is details"
-    };
-    const tree = renderer.create(<SmallBoxLayout {...props} />).toJSON();
-    expect(tree).toMatchSnapshot();
+    const tree = shallow(<SmallBoxLayout {...props} />);
+    expect(tree.debug()).toMatchSnapshot();
   });
 });

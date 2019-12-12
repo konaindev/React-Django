@@ -32,6 +32,7 @@ export class LargeGraphBox extends Component {
   render() {
     const {
       name,
+      infoTooltip,
       value,
       delta,
       target,
@@ -66,6 +67,7 @@ export class LargeGraphBox extends Component {
     return (
       <LargeBoxLayout
         name={name}
+        infoTooltip={infoTooltip}
         content={formatValue(value)}
         detail={extraContent}
         detail2={targetFormatter(formatTarget)(target)}

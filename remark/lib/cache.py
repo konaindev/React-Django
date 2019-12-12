@@ -18,6 +18,7 @@ def access_cache(key, method_to_generate_value, cache_bust=False, ttl=TIMEOUT_1_
     return value
 
 
+
 def reset_cache(key=None):
     if key:
         cache.delete(key)

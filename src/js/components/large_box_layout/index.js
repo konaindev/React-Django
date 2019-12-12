@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import FormattedMultiple from "../formatted_multiple";
 import Panel from "../panel";
-import Tooltip from "../rmb_tooltip";
+import Tooltip, { InfoTooltip } from "../rmb_tooltip";
 import withFormatters from "../with_formatters";
 import {
   formatMultiple,
@@ -29,6 +29,7 @@ import "./large_box_layout.scss";
 export class LargeBoxLayout extends Component {
   static propTypes = {
     name: PropTypes.node.isRequired,
+    infoTooltip: PropTypes.string,
     content: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
       .isRequired,
     detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
@@ -38,7 +39,15 @@ export class LargeBoxLayout extends Component {
   };
 
   render() {
-    const { name, content, innerBox, detail, detail2, tooltip } = this.props;
+    const {
+      name,
+      content,
+      innerBox,
+      detail,
+      detail2,
+      tooltip,
+      infoTooltip
+    } = this.props;
     const contentValue = (
       <span className="large-box__content-value">{content}</span>
     );
@@ -63,6 +72,7 @@ export class LargeBoxLayout extends Component {
         </div>
         <p className="large-box__bottom-line">{detail}</p>
         <p className="large-box__bottom-line">{detail2}</p>
+        <InfoTooltip transKey={infoTooltip} />
       </Panel>
     );
   }

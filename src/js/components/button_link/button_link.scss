@@ -1,0 +1,35 @@
+@import "css/base.scss";
+
+$bg-color: $gray-4;
+$text-color: $highlight-gray-3;
+$line-height: $line-height-tight;
+$padding: 15px 40px;
+$icon-size: 1.25rem;
+
+.button-link {
+    position: relative;
+    display: inline-block;
+    padding: $padding;
+    color: $text-color;
+    font-size: $text-sm;
+    text-align: center;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    background-color: $bg-color;
+    border-radius: $border-radius-default;
+    line-height: $line-height;
+    overflow: hidden;
+
+    &:hover, &:focus {
+        background-color: lighten($bg-color, 3%);
+    }
+}
+
+.button-link__icon {
+    position: absolute;
+    left: 17px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: $icon-size;
+    height: $icon-size;
+}

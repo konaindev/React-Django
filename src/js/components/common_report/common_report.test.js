@@ -11,13 +11,13 @@ const propsForBaselineReportWithoutCompetitors = {
 describe("CommonReport", () => {
   it("renders baseline report with competitors correctly", () => {
     const tree = shallow(<CommonReport {...propsForBaselineReport} />);
-    expect(tree.debug({ ignoreProps: true })).toMatchSnapshot();
+    expect(tree.debug()).toMatchSnapshot();
   });
 
   it("renders baseline report without competitor correctly", () => {
     const tree = shallow(
       <CommonReport {...propsForBaselineReportWithoutCompetitors} />
     );
-    expect(tree.debug({ ignoreProps: true })).toMatchSnapshot();
+    expect(tree.debug()).toMatchSnapshot();
   });
 });

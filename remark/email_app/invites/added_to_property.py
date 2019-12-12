@@ -4,7 +4,7 @@ from celery import shared_task
 
 from remark.users.models import User
 from remark.projects.models import Project
-from remark.settings import LOGIN_REDIRECT_URL, BASE_URL
+from remark.settings import LOGIN_REDIRECT_URL, BASE_URL, FRONTEND_URL
 from remark.email_app.constants import DEFAULT_FROM_NAME, HELLO_EMAIL, SUPPORT_EMAIL
 from remark.lib.sendgrid_email import send_email
 
@@ -35,7 +35,7 @@ def send_welcome_email(user_email):
         "email_preview": "Welcome to Remarkably",
         "contact_us_email": SUPPORT_EMAIL,
         "request_demo_email": HELLO_EMAIL,
-        "website_link": BASE_URL,
+        "website_link": FRONTEND_URL,
     }
     template = get_template("email_welcome_get_started/index.mjml")
     html_content = template.render(template_vars)
@@ -55,7 +55,7 @@ def send_create_account_email(user_id):
     template_vars = {
         "email_title": "Welcome",
         "email_preview": "Welcome to Remarkably",
-        "create_account_link": f"{BASE_URL}{reverse('create_password', kwargs={'hash': user.public_id})}"
+        "create_account_link": f"{FRONTEND_URL}/users/create-password/{user.public_id}"
     }
     html_content = template.render(template_vars)
     send_email(
@@ -77,7 +77,7 @@ def get_template_vars(inviter_name, user, projects, max_count):
             "image_url": thumbnail if thumbnail else PROPERTY_THUMB_FALLBACK,
             "title": p.name,
             "address": f"{address.city}, {address.state}",
-            "view_link": f"{BASE_URL}{p.get_report_url()}",
+            "view_link": f"{FRONTEND_URL}{p.get_report_url()}",
         })
 
     template_vars = {
@@ -94,11 +94,11 @@ def get_template_vars(inviter_name, user, projects, max_count):
     }
 
     if len(projects) == 1:
-        template_vars["main_button_link"] = f"{BASE_URL}{projects[0].get_report_url()}"
+        template_vars["main_button_link"] = f"{FRONTEND_URL}{projects[0].get_report_url()}"
         template_vars["property_name"] = projects[0].name
         template_vars["main_button_label"] = "View Property"
     else:
-        template_vars["main_button_link"] = f"{BASE_URL}{LOGIN_REDIRECT_URL}"
+        template_vars["main_button_link"] = f"{FRONTEND_URL}{LOGIN_REDIRECT_URL}"
         template_vars["main_button_label"] = "View All Properties"
 
     if len(projects) > max_count:
@@ -108,7 +108,7 @@ def get_template_vars(inviter_name, user, projects, max_count):
     if is_new_account:
         template_vars[
             "main_button_link"
-        ] = f"{BASE_URL}/users/create-password/{user.public_id}"
+        ] = f"{FRONTEND_URL}/users/create-password/{user.public_id}"
         template_vars["main_button_label"] = "Create Account"
 
     return template_vars

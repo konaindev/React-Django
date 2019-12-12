@@ -1,17 +1,46 @@
-import renderer from "react-test-renderer";
+import { shallow } from "enzyme";
 
-import InvestmentAllocation from "./index";
+import {
+  InvestmentAllocation,
+  AcquisitionDetails,
+  RetentionDetails,
+  InvestmentAllocationChart
+} from "./index";
 import { props, propsFill } from "./props";
 
-describe("SectionHeader", () => {
-  it("renders empty pie", () => {
-    const tree = renderer.create(<InvestmentAllocation {...props} />).toJSON();
-    expect(tree).toMatchSnapshot();
+
+describe("InvestmentAllocation", () => {
+  it("renders <InvestmentAllocation />", () => {
+    const tree = shallow(<InvestmentAllocation {...props} />);
+    expect(tree.debug()).toMatchSnapshot();
   });
-  it("renders 100% pie", () => {
-    const tree = renderer
-      .create(<InvestmentAllocation {...propsFill} />)
-      .toJSON();
-    expect(tree).toMatchSnapshot();
+
+  it("renders <InvestmentAllocation.AcquisitionDetails />", () => {
+    const tree = shallow(<AcquisitionDetails {...props} />);
+    expect(tree.debug()).toMatchSnapshot();
+  });
+
+  it("renders <InvestmentAllocation.RetentionDetails />", () => {
+    const tree = shallow(<RetentionDetails {...props} />);
+    expect(tree.debug()).toMatchSnapshot();
+  });
+
+  it("renders <InvestmentAllocation.InvestmentAllocationChart /> acquisition type", () => {
+    const tree = shallow(
+      <InvestmentAllocationChart name="acquisition" {...props.acquisition} />
+    );
+    expect(tree.debug()).toMatchSnapshot();
+  });
+
+  it("renders <InvestmentAllocation.InvestmentAllocationChart /> retention type", () => {
+    let tree = shallow(
+      <InvestmentAllocationChart name="retention" {...props.retention} />
+    );
+    expect(tree.debug()).toMatchSnapshot();
+
+    tree = shallow(
+      <InvestmentAllocationChart name="retention" {...propsFill.retention} />
+    );
+    expect(tree.debug()).toMatchSnapshot();
   });
 });

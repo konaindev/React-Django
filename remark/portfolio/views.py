@@ -166,7 +166,6 @@ class PortfolioTableView(APIView):
             "highlight_kpis": self.get_highlight_kpis(portfolio_average, kpis_to_include),
             "display_average": "1" if show_averages else "0"
         }
-
         return Response(response_data)
 
     def get_start_and_end(self, period_group, start, end):

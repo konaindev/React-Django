@@ -3,7 +3,7 @@ import renderer from "react-test-renderer";
 import AddressModal from "./index";
 import { createStore } from "redux";
 import { Provider } from "react-redux";
-import { props } from "./props";
+import props from "./props";
 
 jest.mock("react-responsive-modal", () => "Modal");
 

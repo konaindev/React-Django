@@ -44,6 +44,7 @@ jobs:
 
       # run tests!
       - run: yarn test-ui
+      - run: yarn storybook-smoke
       - run: pipenv run python manage.py test
       - run: pipenv run python manage.py migrate
       - run: pipenv run python manage.py loaddata data/dumped/latest.json
@@ -95,6 +96,16 @@ jobs:
       - checkout
       - aws-cli/install
       - run:
+          name: Install Redis CLI
+          command: |
+            cd /tmp
+            wget http://download.redis.io/redis-stable.tar.gz
+            tar xvzf redis-stable.tar.gz
+            cd redis-stable
+            make
+            sudo cp src/redis-cli /usr/local/bin/
+            sudo chmod 755 /usr/local/bin/redis-cli
+      - run:
           name: Install Frontend deps
           command: yarn install
       - run:
@@ -117,6 +128,9 @@ jobs:
           name: Load fixture data
           command: heroku run -x -a remarkably-staging python manage.py loaddata data/dumped/latest.json
       - run:
+          name: Delete Redis Cache
+          command: redis-cli -u `heroku redis:credentials -a remarkably-staging REDIS_URL` flushall
+      - run:
           name: Deploy artifact to S3
           command: yarn run deploy-frontend-staging
       - run:
@@ -128,7 +142,7 @@ jobs:
 
   deploy-production:
     docker:
-      - image: circleci/python:3.6.4
+      - image: circleci/python:3.7.2-node
 
     working_directory: ~/repo
 
@@ -137,6 +151,17 @@ jobs:
           name: Install Heroku Tools
           command: curl https://cli-assets.heroku.com/install.sh | sh
       - checkout
+      - aws-cli/install
+      - run:
+          name: Install Redis CLI
+          command: |
+            cd /tmp
+            wget http://download.redis.io/redis-stable.tar.gz
+            tar xvzf redis-stable.tar.gz
+            cd redis-stable
+            make
+            sudo cp src/redis-cli /usr/local/bin/
+            sudo chmod 755 /usr/local/bin/redis-cli
       - run:
           name: Install Frontend deps
           command: yarn install
@@ -152,10 +177,13 @@ jobs:
       - run:
           name: Deploy Master to Heroku Production
           command: |
-            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/remarkably.git master --force
+            git push https://heroku:$HEROKU_API_KEY@git.heroku.com/remarkably.git master:master --force
       - run:
           name: Migrate Database Schema
           command: heroku run -x -a remarkably python manage.py migrate
+      - run:
+          name: Delete Redis Cache
+          command: redis-cli -u `heroku redis:credentials -a remarkably REDIS_URL` flushall
       - run:
           name: Deploy artifact to S3
           command: yarn run deploy-frontend-production

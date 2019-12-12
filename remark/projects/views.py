@@ -5,17 +5,18 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import redirect_to_login
 from django.db.models import Q
-from django.http import Http404, JsonResponse
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic.edit import FormView
 from django.views.generic.detail import SingleObjectMixin
 from django.urls import reverse
 from django.utils import timezone
 
-from rest_framework import exceptions, generics, mixins, status, viewsets
-from rest_framework.views import APIView
+from rest_framework import exceptions, generics
+from rest_framework.parsers import JSONParser
 from rest_framework.permissions import BasePermission, IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from remark.admin import admin_site
 from remark.users.models import User
@@ -32,7 +33,7 @@ from .reports.selectors import (
     ModelingReportSelector,
     CampaignPlanSelector,
 )
-from .models import Project
+from .models import Project, Tag
 from .forms import TAMExportForm
 from .serializers import ProjectSerializer
 from .tasks import export_tam_task
@@ -249,18 +250,20 @@ class AddMembersView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
+        # print("AddMemberView::post")
         inviter_name = request.user.get_name()
         payload = json.loads(request.body)
         members = payload.get("members", [])
-
+        # print("AddMemberView::post 2")
         projects_ids = [p.get("property_id") for p in payload.get("projects", [])]
         projects = Project.objects.filter(public_id__in=projects_ids)
-
+        # print("AddMemberView::post 3")
         if not request.user.is_superuser:
             for project in projects:
                 if not project.is_admin(request.user):
                     return self.render_403()
 
+        # print("AddMemberView::post 4")
         users = []
         for member in members:
             is_new = member.get("__isNew__", False)
@@ -274,6 +277,7 @@ class AddMembersView(APIView):
                 user = User.objects.get(public_id=public_id)
             users.append(user)
 
+        # print("AddMemberView::post 5")
         role = payload.get("role")
 
         projects_is_empty = any([not p.has_members() for p in projects])
@@ -286,15 +290,20 @@ class AddMembersView(APIView):
                     project.view_group.user_set.add(user)
             project.save()
 
+        # print("AddMemberView::post 6")
         for user in users:
+            # print(f"AddMemberView::post user: {user.email}")
             is_new_account = user.activated is None
             if projects_is_empty and is_new_account:
+                # print(f"AddMemberView::post send create account email")
                 send_create_account_email.apply_async(args=(user.id,), countdown=2)
             else:
+                # print(f"AddMemberView::post send invite email")
                 send_invite_email.apply_async(
                     args=(inviter_name, user.id, projects_ids), countdown=2
                 )
-
+                # print(f"AddMemberView::post send invite email after")
+        # print("AddMemberView::post 7")
         projects_list = [
             {
                 "property_id": p.public_id,
@@ -302,6 +311,7 @@ class AddMembersView(APIView):
                 "members": p.get_members(),
             } for p in projects
         ]
+        # print("AddMemberView::post bottom")
         return Response({"projects": projects_list})
 
 
@@ -377,3 +387,35 @@ class ChangeMemberRoleView(APIView):
 
         project.save()
         return Response({"members": project.get_members()})
+
+
+class RemoveTagView(APIView):
+    permission_classes = [IsAuthenticated]
+    parser_classes = [JSONParser]
+
+    def post(self, request, public_id):
+        payload = request.data
+        word = payload.get("word")
+
+        try:
+            project = Project.objects.get(public_id=public_id)
+        except Project.DoesNotExist:
+            return Response({"error": "Project not found"}, status=500)
+
+        user = request.user
+        if not project.is_admin(user):
+            return Response(
+                {"error": "Only admin member or staff user can remove tag from project"},
+                status=500)
+
+        try:
+            tag = Tag.objects.get(word=word)
+        except Tag.DoesNotExist:
+            return Response(
+                {"error": f"Tag with name `{word}` not found"},
+                status=500)
+
+        project.custom_tags.remove(tag)
+        project.save()
+        tags = [t.word for t in project.custom_tags.all()]
+        return Response({"custom_tags": tags})

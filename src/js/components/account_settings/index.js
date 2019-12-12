@@ -5,44 +5,30 @@ import { connect } from "react-redux";
 
 import EmailReportsContainer from "../../containers/account_settings/email_reports";
 import { Email, Lock, Profile } from "../../icons";
-import ProjectPageChrome from "../project_page_chrome";
-import LoaderContainer from "../../containers/account_settings/loader";
+import LoaderContainer from "../../containers/loader/index";
+import { accountSettings as actions } from "../../redux_base/actions";
 import AccountSecurity from "./account_security";
 import ProfileTab from "./profile";
 import "./account_settings.scss";
 
-const navLinks = {
-  links: [
-    {
-      id: "portfolio",
-      name: "Portfolio",
-      url: "/dashboard"
-    },
-    {
-      id: "portfolio-analysis",
-      name: "Portfolio Analysis",
-      url: "/portfolio/table"
-    }
-  ],
-  selected_link: ""
-};
-
 const menuItemsData = {
+  /*
   profile: {
     name: "Profile",
     iconComponent: Profile,
     component: ProfileTab
-  },
+  },*/
   lock: {
     name: "Security",
     iconComponent: Lock,
     component: AccountSecurity
-  },
+  } /*,
   email: {
     name: "Email Preferences",
     iconComponent: Email,
     component: EmailReportsContainer
   }
+   */
 };
 
 function MenuItems({ item, selectItem, itemsOrder }) {
@@ -69,7 +55,7 @@ MenuItems.propTypes = {
   selectItem: PropTypes.func.isRequired
 };
 
-class AccountSettings extends React.PureComponent {
+export default class AccountSettings extends React.PureComponent {
   static propTypes = {
     initialItem: PropTypes.oneOf(Object.keys(menuItemsData)),
     user: PropTypes.object,
@@ -77,8 +63,8 @@ class AccountSettings extends React.PureComponent {
   };
 
   static defaultProps = {
-    initialItem: "profile",
-    itemsOrder: ["profile", "lock", "email"]
+    initialItem: "lock", //"profile",
+    itemsOrder: ["lock"] //["profile", "lock", "email"]
   };
 
   constructor(props) {
@@ -88,42 +74,39 @@ class AccountSettings extends React.PureComponent {
     };
   }
 
+  componentDidMount() {
+    this.props.dispatch(actions.requestSettings());
+  }
+
   selectItem = item => this.setState({ item });
 
   render() {
     const Component = menuItemsData[this.state.item].component;
     return (
-      <ProjectPageChrome navLinks={navLinks} user={this.props.user}>
-        <div className="account-settings">
-          <div className="account-settings__header">
-            <div className="account-settings__title">Account Settings</div>
-            <div className="account-settings__subtitle">
-              Manage and edit your profile, security, notifications, and billing
-              settings.
+      <section>
+        <div className="container">
+          <div className="account-settings">
+            <div className="account-settings__header">
+              <div className="account-settings__title">Account Settings</div>
+              <div className="account-settings__subtitle">
+                Manage and edit your profile, security, notifications, and
+                billing settings.
+              </div>
             </div>
-          </div>
-          <div className="account-settings__panel">
-            <div className="account-settings__menu">
-              <MenuItems
-                item={this.state.item}
-                itemsOrder={this.props.itemsOrder}
-                selectItem={this.selectItem}
-              />
+            <div className="account-settings__panel">
+              <div className="account-settings__menu">
+                <MenuItems
+                  item={this.state.item}
+                  itemsOrder={this.props.itemsOrder}
+                  selectItem={this.selectItem}
+                />
+              </div>
+              <LoaderContainer />
+              <Component {...this.props} />
             </div>
-            <LoaderContainer />
-            <Component {...this.props} />
           </div>
         </div>
-      </ProjectPageChrome>
+      </section>
     );
   }
 }
-
-const mapState = state => {
-  return {
-    ...state.network,
-    ...state.completeAccount
-  };
-};
-
-export default connect(mapState)(AccountSettings);

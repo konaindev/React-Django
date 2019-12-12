@@ -35,4 +35,10 @@ describe("PortfolioPropertyGroupRow", () => {
       .toJSON();
     expect(tree).toMatchSnapshot();
   });
+  it("renders without KPIs", () => {
+    const tree = renderer
+      .create(<PortfolioPropertyGroupRow {...withoutKPIs} />)
+      .toJSON();
+    expect(tree).toMatchSnapshot();
+  });
 });

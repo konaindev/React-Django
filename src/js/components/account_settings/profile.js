@@ -1,19 +1,24 @@
 import cn from "classnames";
 import { ErrorMessage, Formik, Form } from "formik";
 import _intersection from "lodash/intersection";
+import _isEqual from "lodash/isEqual";
+import _pick from "lodash/pick";
 import PropTypes from "prop-types";
 import React from "react";
 import AddressModal from "../address_modal";
-import { COUNTRY_FIELDS, COUNTRY_CODE_REGEX } from "../../constants";
+import { COUNTRY_FIELDS } from "../../constants";
 
 import { Tick, Upload } from "../../icons";
+import {
+  accountSettings as actions,
+  addressModal
+} from "../../redux_base/actions";
 import { formatPhone } from "../../utils/formatters";
 import { validateAddress } from "../../api/account_settings";
 import Button from "../button";
 import Input from "../input";
 import MultiSelect from "../multi_select";
 import Select, { SelectSearch } from "../select";
-import { addressModal } from "../../redux_base/actions";
 import GoogleAddress from "../google_address";
 import { MAX_AVATAR_SIZE, profileSchema } from "./validators";
 
@@ -37,9 +42,9 @@ export default class Profile extends React.PureComponent {
       office_name: PropTypes.string,
       office_type: PropTypes.number
     }),
-    company_roles: MultiSelect.optionsType.isRequired,
-    office_options: Select.optionsType.isRequired,
-    office_countries: Select.optionsType.isRequired,
+    company_roles: MultiSelect.optionsType,
+    office_options: Select.optionsType,
+    office_countries: Select.optionsType,
     us_state_list: Select.optionsType,
     gb_county_list: Select.optionsType
   };
@@ -64,7 +69,10 @@ export default class Profile extends React.PureComponent {
       office_zip: "",
       office_name: "",
       office_type: null
-    }
+    },
+    company_roles: [],
+    office_options: [],
+    office_countries: []
   };
   static fieldsSubmit = [
     "avatar",
@@ -93,18 +101,10 @@ export default class Profile extends React.PureComponent {
     this.selectedCountry = COUNTRY_FIELDS.USA.short_name;
   }
 
-  get initialValues() {
-    let profile = { ...this.props.profile };
-    if (!Object.keys(profile).length) {
-      profile = { ...Profile.defaultProps.profile };
+  componentDidUpdate(prevProps, prevState) {
+    if (!_isEqual(this.props.profile, prevProps.profile)) {
+      this.formik.setValues(this.getProfileValues(this.props.profile));
     }
-    profile.company_roles = this.props.company_roles.filter(i =>
-      profile.company_roles.includes(i.value)
-    );
-    profile.office_type = this.props.office_options.filter(
-      i => i.value === profile.office_type
-    )[0];
-    return profile;
   }
 
   getAvatarImage(values) {
@@ -128,6 +128,20 @@ export default class Profile extends React.PureComponent {
       this.setState({ message: null });
     }
   }
+
+  getProfileValues = profile => {
+    let p = { ...profile };
+    if (!Object.keys(p).length) {
+      p = { ...Profile.defaultProps.profile };
+    }
+    p.company_roles = this.props.company_roles.filter(i =>
+      p.company_roles.includes(i.value)
+    );
+    p.office_type = this.props.office_options.filter(
+      i => i.value === p.office_type
+    )[0];
+    return p;
+  };
 
   setFormik = formik => {
     this.formik = formik;
@@ -293,6 +307,7 @@ export default class Profile extends React.PureComponent {
     this.formik.setSubmitting(false);
     const message = "Your profile has been saved.";
     this.setState({ message });
+    this.props.dispatch(actions.requestSettings());
   };
 
   updateValues = values => {
@@ -346,7 +361,14 @@ export default class Profile extends React.PureComponent {
         }
       }
     }
-    validateAddress(values).then(response => {
+    const addressValues = _pick(values, [
+      "office_country",
+      "office_street",
+      "office_city",
+      "office_state",
+      "office_zip"
+    ]);
+    validateAddress(addressValues).then(response => {
       if (response.data.error) {
         this.setState({ invalid_address: true });
         this.formik.setErrors({
@@ -384,12 +406,12 @@ export default class Profile extends React.PureComponent {
   };
 
   render() {
-    const { companyAddresses } = this.props;
+    const { companyAddresses, profile } = this.props;
     return (
       <div className="account-settings__tab">
         <Formik
           ref={this.setFormik}
-          initialValues={this.initialValues}
+          initialValues={this.getProfileValues(profile)}
           validationSchema={profileSchema}
           validateOnBlur={true}
           validateOnChange={true}
@@ -408,7 +430,6 @@ export default class Profile extends React.PureComponent {
             <Form method="post" autoComplete="off">
               <AddressModal
                 title="Confirm Office Address"
-                onClose={this.props.dispatch(addressModal.close)}
                 callback={this.setSuccessMessage}
                 onError={this.setErrorMessages}
                 dispatch_type="API_ACCOUNT_PROFILE"
@@ -639,7 +660,7 @@ export default class Profile extends React.PureComponent {
                         onBlur={this.onBlur}
                       />
                       <div className="account-settings__error">
-                        <ErrorMessage name="company" />
+                        <ErrorMessage name="company.value" />
                       </div>
                     </div>
                     <div
@@ -651,7 +672,7 @@ export default class Profile extends React.PureComponent {
                       )}
                     >
                       <div className="account-settings__label">
-                        Company Role
+                        Company Type
                       </div>
                       <MultiSelect
                         className="account-settings__input"
@@ -701,24 +722,10 @@ export default class Profile extends React.PureComponent {
                         labelCompany=""
                         labelGoogle=""
                         display="full"
-                        // value={
-                        //   typeof values.office_street === "string"
-                        //     ? values.office_street?.value
-                        //     : values.office_street
-                        // }
                         value={values.office_street}
-                        // value={values.office_street}
                         onChange={this.onChangeOfficeAddress}
                         onBlur={this.onBlurOfficeAddress}
                       />
-                      {/* <Input
-                        className="account-settings__input"
-                        name="office_street"
-                        theme="gray"
-                        value={values.office_street}
-                        onBlur={this.onBlur}
-                        onChange={this.onChange}
-                      /> */}
                       <div className="account-settings__error">
                         <ErrorMessage name="office_street" />
                       </div>
