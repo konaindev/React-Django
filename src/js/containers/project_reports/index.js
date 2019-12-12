@@ -23,11 +23,20 @@ class ProjectReportsContainer extends PureComponent {
     const { projectId, reportType, reportSpan } = nextProps.match.params;
     let newState = {};
 
+    if (reportType === "overview") {
+      newState["prevFetchingReports"] = false;
+      newState["reportType"] = reportType;
+      newState["prevReportSpan"] = null;
+      nextProps.dispatch(actions.stopFetchingReports());
+      return newState;
+    }
+
     if (state.prevFetchingReports && !nextProps.fetchingReports) {
       newState["prevFetchingReports"] = false;
       // data arrived, now "state.reportType" matches to the "props.report"
       newState["reportType"] = reportType;
       newState["reportSpan"] = reportSpan;
+
       return newState;
     }
 
@@ -50,7 +59,6 @@ class ProjectReportsContainer extends PureComponent {
   render() {
     const { reportType, reportSpan } = this.state;
     const { fetchingReports, project, report, share_info } = this.props;
-
     return renderWrapper(
       <ProjectReportPage
         share_info={share_info}

@@ -6,6 +6,7 @@ import { ViewMembersReport } from "../../containers/view_members";
 import { Add } from "../../icons";
 import {
   inviteModal as inviteModalActions,
+  projectActions,
   viewMembersModal as viewMembersActions
 } from "../../redux_base/actions";
 
@@ -22,6 +23,7 @@ import TotalAddressableMarket from "../total_addressable_market";
 import ModelingView from "../modeling_view";
 import CampaignPlan from "../campaign_plan";
 import UserIconList from "../user_icon_list";
+import PropertyOverview from "../property_overview";
 
 import "./project_report_page.scss";
 
@@ -45,14 +47,23 @@ export class ProjectReportPage extends Component {
     backUrl: "/dashboard"
   };
 
-  renderSubheader = () => {
-    const { project, share_info, backUrl, reportType } = this.props;
-
+  getBuildingImage = () => {
+    const { project } = this.props;
     let projectImage = DEFAULT_IMAGE_URL;
     if (project && project.building_image) {
-      projectImage = project.building_image[2];
+      projectImage = project.building_image[3];
     }
+    return projectImage;
+  };
 
+  removeTag = word =>
+    this.props.dispatch(
+      projectActions.removeTag(this.props.project.public_id)({ body: { word } })
+    );
+
+  renderSubheader = () => {
+    const { project, share_info, backUrl, reportType } = this.props;
+    const projectImage = this.getBuildingImage();
     return (
       <section className="project-report-page__subheader">
         <div className="container">
@@ -65,7 +76,7 @@ export class ProjectReportPage extends Component {
                 health={project.health}
               />
             </div>
-            <div className="project-report-page__members">
+            {/* <div className="project-report-page__members">
               <InviteModalReport />
               <ViewMembersReport />
               <Add
@@ -79,7 +90,7 @@ export class ProjectReportPage extends Component {
                 users={project.members}
                 onClick={this.onOpenMembersView}
               />
-            </div>
+            </div> */}
           </div>
           <div className="subheader-report-tabs">
             <ReportLinks
@@ -101,6 +112,21 @@ export class ProjectReportPage extends Component {
 
   renderReportContent = () => {
     const { reportType, reportSpan, report, project } = this.props;
+
+    if (reportType === "overview") {
+      const buildingImageURL = this.getBuildingImage();
+      return (
+        <PropertyOverview
+          project={project}
+          buildingImageURL={buildingImageURL}
+          onRemoveTag={this.removeTag}
+        />
+      );
+    }
+
+    if (!report) {
+      return;
+    }
 
     switch (reportType) {
       case "baseline":
@@ -154,14 +180,14 @@ export class ProjectReportPage extends Component {
   onOpenMembersView = () => this.props.dispatch(viewMembersActions.open);
 
   render() {
-    const { fetchingReports, project, report } = this.props;
+    const { fetchingReports, project } = this.props;
 
     return (
       <div className="project-report-page">
         {project && this.renderSubheader()}
         <section className="project-report-page__content">
           {fetchingReports && <Loader isVisible />}
-          {project && report && this.renderReportContent()}
+          {project && this.renderReportContent()}
         </section>
       </div>
     );

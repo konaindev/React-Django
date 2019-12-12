@@ -744,7 +744,7 @@ class GetTemplateVarsTestCase(TestCase):
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 1",
                     "address": "Seattle, WA",
-                    "view_link": f"{FRONTEND_URL}/projects/{self.project.public_id}/market/",
+                    "view_link": f"{FRONTEND_URL}/projects/{self.project.public_id}/overview/",
                 }
             ],
             "more_count": None,
@@ -767,13 +767,13 @@ class GetTemplateVarsTestCase(TestCase):
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 1",
                     "address": "Seattle, WA",
-                    "view_link": f"{FRONTEND_URL}/projects/{self.projects[0].public_id}/market/",
+                    "view_link": f"{FRONTEND_URL}/projects/{self.projects[0].public_id}/overview/",
                 },
                 {
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 2",
                     "address": "Seattle, WA",
-                    "view_link": f"{FRONTEND_URL}/projects/{self.projects[1].public_id}/market/",
+                    "view_link": f"{FRONTEND_URL}/projects/{self.projects[1].public_id}/overview/",
                 },
             ],
             "more_count": None,
@@ -796,11 +796,11 @@ class GetTemplateVarsTestCase(TestCase):
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 1",
                     "address": "Seattle, WA",
-                    "view_link": f"{FRONTEND_URL}/projects/{self.project.public_id}/market/",
+                    "view_link": f"{FRONTEND_URL}/projects/{self.project.public_id}/overview/",
                 }
             ],
             "more_count": None,
-            "main_button_link": f"{FRONTEND_URL}/projects/{self.project.public_id}/market/",
+            "main_button_link": f"{FRONTEND_URL}/projects/{self.project.public_id}/overview/",
             "main_button_label": "View Property",
         }
         self.assertEqual(expected, template_vars)
@@ -819,13 +819,13 @@ class GetTemplateVarsTestCase(TestCase):
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 1",
                     "address": "Seattle, WA",
-                    "view_link": f"{FRONTEND_URL}/projects/{self.projects[0].public_id}/market/",
+                    "view_link": f"{FRONTEND_URL}/projects/{self.projects[0].public_id}/overview/",
                 },
                 {
                     "image_url": "https://s3.amazonaws.com/production-storage.remarkably.io/email_assets/blank_property_square.png",
                     "title": "project 2",
                     "address": "Seattle, WA",
-                    "view_link": f"{FRONTEND_URL}/projects/{self.projects[1].public_id}/market/",
+                    "view_link": f"{FRONTEND_URL}/projects/{self.projects[1].public_id}/overview/",
                 },
             ],
             "more_count": None,
@@ -1359,7 +1359,7 @@ class PropertyStyleTestCase(TestCase):
         )
 
     def test_empty_style(self):
-        self.assertEqual("Other", self.property.property_style)
+        self.assertEqual("Other", self.property.calculated_property_style)
 
     def test_wrong_floor_number(self):
         build = Building(
@@ -1371,7 +1371,7 @@ class PropertyStyleTestCase(TestCase):
         )
         build.save()
 
-        self.assertEqual("Other", self.property.property_style)
+        self.assertEqual("Other", self.property.calculated_property_style)
 
     def test_is_low_rise(self):
         build = Building(
@@ -1383,7 +1383,7 @@ class PropertyStyleTestCase(TestCase):
         )
         build.save()
 
-        self.assertEqual("Low-Rise", self.property.property_style)
+        self.assertEqual("Low-Rise", self.property.calculated_property_style)
 
     def test_is_walk_up(self):
         build = Building(
@@ -1395,7 +1395,7 @@ class PropertyStyleTestCase(TestCase):
         )
         build.save()
 
-        self.assertEqual("Walk-Up", self.property.property_style)
+        self.assertEqual("Walk-Up", self.property.calculated_property_style)
 
     def test_is_mid_rise(self):
         build = Building(
@@ -1407,7 +1407,7 @@ class PropertyStyleTestCase(TestCase):
         )
         build.save()
 
-        self.assertEqual("Mid-Rise", self.property.property_style)
+        self.assertEqual("Mid-Rise", self.property.calculated_property_style)
 
     def test_is_hi_rise(self):
         build = Building(
@@ -1419,7 +1419,7 @@ class PropertyStyleTestCase(TestCase):
         )
         build.save()
 
-        self.assertEqual("Hi-Rise", self.property.property_style)
+        self.assertEqual("Hi-Rise", self.property.calculated_property_style)
 
     def test_is_tower_block(self):
         build_1 = Building(
@@ -1440,7 +1440,7 @@ class PropertyStyleTestCase(TestCase):
         )
         build_2.save()
 
-        self.assertEqual("Tower-Block", self.property.property_style)
+        self.assertEqual("Tower-Block", self.property.calculated_property_style)
 
     def test_is_garden(self):
         build_1 = Building(
@@ -1461,4 +1461,4 @@ class PropertyStyleTestCase(TestCase):
         )
         build_2.save()
 
-        self.assertEqual("Garden", self.property.property_style)
+        self.assertEqual("Garden", self.property.calculated_property_style)

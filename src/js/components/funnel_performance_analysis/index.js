@@ -8,23 +8,35 @@ import FunnelAnalysisTable from "./funnel_analysis_table";
 
 import SectionHeader from "../section_header";
 import Panel from "../panel";
-import { formatNumber, formatPercent } from "../../utils/formatters";
 
 export class FunnelPerformanceAnalysis extends React.Component {
   constructor(props) {
     super(props);
 
-    const { columns, volumeRows, conversionRows } = processData(
-      props.funnel_history || []
-    );
-
     this.state = {
-      dataNotAvailable: props.funnel_history == null,
+      dataNotAvailable: true,
       viewMode: "monthly",
-      columns,
-      volumeRows,
-      conversionRows
+      prevFunnelHistory: null
     };
+  }
+
+  static getDerivedStateFromProps(nextProps, state) {
+    let newState = {};
+
+    // detect new prop "funnel_history", on which this component focuses mainly
+    if (nextProps.funnel_history !== state.prevFunnelHistory) {
+      newState["prevFunnelHistory"] = nextProps.funnel_history;
+      newState["dataNotAvailable"] = nextProps.funnel_history === null;
+      let { columns, volumeRows, conversionRows } = processData(
+        nextProps.funnel_history || []
+      );
+      newState["columns"] = columns;
+      newState["volumeRows"] = volumeRows;
+      newState["conversionRows"] = conversionRows;
+      return newState;
+    }
+
+    return null;
   }
 
   handleChangeViewMode = viewMode => {
@@ -32,11 +44,17 @@ export class FunnelPerformanceAnalysis extends React.Component {
   };
 
   render() {
-    if (this.state.dataNotAvailable) {
+    const {
+      dataNotAvailable,
+      viewMode,
+      columns,
+      volumeRows,
+      conversionRows
+    } = this.state;
+
+    if (dataNotAvailable) {
       return <div />;
     }
-
-    const { viewMode, columns, volumeRows, conversionRows } = this.state;
 
     return (
       <div className="funnel-performance-analysis">

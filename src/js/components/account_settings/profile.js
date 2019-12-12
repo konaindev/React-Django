@@ -660,7 +660,7 @@ export default class Profile extends React.PureComponent {
                         onBlur={this.onBlur}
                       />
                       <div className="account-settings__error">
-                        <ErrorMessage name="company" />
+                        <ErrorMessage name="company.value" />
                       </div>
                     </div>
                     <div
@@ -672,7 +672,7 @@ export default class Profile extends React.PureComponent {
                       )}
                     >
                       <div className="account-settings__label">
-                        Company Role
+                        Company Type
                       </div>
                       <MultiSelect
                         className="account-settings__input"

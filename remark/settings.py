@@ -323,7 +323,10 @@ locals()['DATABASES']['default'] = dj_database_url.config(
 
 # Configure Sentry -jc 11-jul-19
 
-sentry_sdk.init(dsn=os.getenv("SENTRY_URL", ""), integrations=[DjangoIntegration()])
+sentry_sdk.init(
+    dsn=os.getenv("SENTRY_DSN", ""),
+    integrations=[DjangoIntegration()]
+)
 
 with configure_scope() as scope:
     scope.set_tag("env", os.getenv("ENV", "local"))
