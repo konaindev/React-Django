@@ -87,7 +87,9 @@ jobs:
   deploy-airflow-staging:
     docker:
       - image: google/cloud-sdk
+
     working_directory: ~/repo/remark_airflow
+    
     steps:
       - run:
         name: Install Heroku Tools
@@ -241,14 +243,23 @@ jobs:
 workflows:
   version: 2.1
 
-  tests-only:
+  airflow-test:
     jobs:
-      - build:
+      - deploy-airflow-staging:
           filters:
             branches:
               ignore:
                 - staging
                 - master
+
+  # tests-only:
+  #   jobs:
+  #     - build:
+  #         filters:
+  #           branches:
+  #             ignore:
+  #               - staging
+  #               - master
 
   build-deploy:
     jobs:
