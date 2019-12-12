@@ -5,125 +5,110 @@ import urllib.error
 from defusedxml import ElementTree
 import xmlschema
 from xmlschema.validators import exceptions as xmlschema_exceptions
-from remark_airflow.etl.yardi.extract.schemavalidator import SchemaMetadata, SchemaValidator
-
-parent_dir = os.path.realpath(__file__).split(os.path.sep)[:-2]
-schemas_path = os.path.sep.join((*parent_dir, 'xmlschemas'))
+from remark_airflow.etl.yardi.extract.schemavalidator import SchemaMetadata, SchemaValidator, get_schemas_path
 
 
 class TestSchemaValidator(unittest.TestCase):
 
-    def setUp(self):
-        class InternalValidator(SchemaValidator):
-            _schema_locations = {
-                'GetRawProperty_Login': SchemaMetadata(
-                    schema_file=os.path.join(schemas_path, 'Itf_RevenueMgmtRawDataExport.xsd'),
-                    schema_name='GetRawProperty_Login',
-                    root_xpath='.//RevenueManagementRawData',
-                ),
-                'GetPropertyConfigurations': SchemaMetadata(
-                    schema_file=os.path.join(schemas_path, 'Itf_PropertyConfiguration.xsd'),
-                    schema_name='GetPropertyConfigurations',
-                    root_xpath='.//Properties',
-                )
-            }
-            _loaded_schemas = {k: None for k in _schema_locations.keys()}
-
-        self.validator = InternalValidator()
-
-    def test_schema_file_path_override(self):
-
-        for k, v in self.validator._schema_locations.items():
-            self.assertIn(schemas_path, v.schema_file)
-
     def test_cache(self):
-        for k, v in self.validator._schema_locations.items():
-            self.assertIsNone(self.validator._loaded_schemas[k])
-            loaded = self.validator.get_schema_validator(v)
-            my_load = xmlschema.XMLSchema(v.schema_file)
+        validator = SchemaValidator()
+        for k, v in validator._schema_locations.items():
+            self.assertIsNone(validator._loaded_schemas[k])
+            loaded = validator.get_schema_validator(v)
+            my_load = xmlschema.XMLSchema(os.path.join(get_schemas_path(), v.schema_file))
 
             # this is a very loose comparison, it doesn't walk the trees
             self.assertEqual(repr(loaded), repr(my_load))
-            self.assertIn(k, self.validator._loaded_schemas)
-            self.assertEqual(loaded, self.validator._loaded_schemas[k])
+            self.assertIn(k, validator._loaded_schemas)
+            self.assertEqual(loaded, validator._loaded_schemas[k])
 
-            cached = self.validator.get_schema_validator(v)
+            cached = validator.get_schema_validator(v)
             # see if it's the same object (not loaded from disk again)
             self.assertIs(loaded, cached)
 
     def test_get_valid_data_happy_path(self):
+        validator = SchemaValidator()
         root = ElementTree.fromstring(property_configurations_xml)
-        data = self.validator.get_valid_data_or_die_trying('GetPropertyConfigurations', root)
+        data = validator.get_valid_data_or_die_trying('GetPropertyConfigurations', root)
         self.assertIn('Property', data)
         self.assertEqual(len(data['Property']), 2)
 
     def test_get_valid_data_bad_filename(self):
+        validator = SchemaValidator()
+
         op_name = 'BadFile'
         metadata = SchemaMetadata(
             schema_file='abcdefg',
             schema_name=op_name,
             root_xpath='.//MyElement'
         )
-        self.validator._schema_locations[op_name] = metadata
-        self.validator._loaded_schemas[op_name] = None
+        validator._schema_locations[op_name] = metadata
+        validator._loaded_schemas[op_name] = None
 
         element = ElementTree.fromstring('<outer><MyElement>abcd</MyElement></outer>')
 
         with self.assertRaises(urllib.error.URLError):
-            self.validator.get_valid_data_or_die_trying(op_name, element)
+            validator.get_valid_data_or_die_trying(op_name, element)
 
     def test_get_valid_data_no_entry_in_loaded_dictionary(self):
+        validator = SchemaValidator()
         op_name = 'NoEntry'
         metadata = SchemaMetadata(
             schema_file='abcdefg',
             schema_name=op_name,
             root_xpath='blahblah'
         )
-        self.validator._schema_locations[op_name] = metadata
+        validator._schema_locations[op_name] = metadata
 
         with self.assertRaises(KeyError):
-            self.validator.get_valid_data_or_die_trying(metadata, ElementTree.fromstring('<fake/>'))
+            validator.get_valid_data_or_die_trying(metadata, ElementTree.fromstring('<fake/>'))
 
     def test_get_valid_data_bad_operation_name(self):
         op_name = "NonExistent"
+        validator = SchemaValidator()
 
         with self.assertRaises(KeyError):
-            self.validator.get_valid_data_or_die_trying(op_name, ElementTree.fromstring('<fake/>'))
+            validator.get_valid_data_or_die_trying(op_name, ElementTree.fromstring('<fake/>'))
 
     def test_get_valid_data_bad_document(self):
         op_name = 'GetPropertyConfigurations'
+        validator = SchemaValidator()
 
         element = ElementTree.fromstring('<outer><Properties><Property>text</Property></Properties></outer>')
         with self.assertRaises(xmlschema_exceptions.XMLSchemaValidationError):
-            self.validator.get_valid_data_or_die_trying(op_name, element)
+            validator.get_valid_data_or_die_trying(op_name, element)
 
     def test_get_valid_data_bad_xpath(self):
+
+        validator = SchemaValidator()
         op_name = 'BadXPath'
         metadata = SchemaMetadata(
             schema_file='abcdefg',
             schema_name=op_name,
             root_xpath='.//NotReal'
         )
-        self.validator._schema_locations[op_name] = metadata
-        self.validator._loaded_schemas[op_name] = None
+        validator._schema_locations[op_name] = metadata
+        validator._loaded_schemas[op_name] = None
 
         element = ElementTree.fromstring('<outer><MyElement>abcd</MyElement></outer>')
 
         with self.assertRaises(ValueError):
-            self.validator.get_valid_data_or_die_trying(op_name, element)
+            validator.get_valid_data_or_die_trying(op_name, element)
 
     def test_get_valid_data_bad_missing_root_element(self):
         op_name = 'GetPropertyConfigurations'
+        validator = SchemaValidator()
 
         with self.assertRaises(ValueError):
-            self.validator.get_valid_data_or_die_trying(op_name, ElementTree.fromstring('<fake/>'))
+            validator.get_valid_data_or_die_trying(op_name, ElementTree.fromstring('<fake/>'))
 
     def test_get_valid_data_bad_multiple_root_elemments(self):
         op_name = 'GetPropertyConfigurations'
 
+        validator = SchemaValidator()
         element = ElementTree.fromstring('<outer><Properties/><Properties/></outer>')
         with self.assertRaises(ValueError):
-            self.validator.get_valid_data_or_die_trying(op_name, element)
+            validator.get_valid_data_or_die_trying(op_name, element)
 
 
 property_configurations_xml = """

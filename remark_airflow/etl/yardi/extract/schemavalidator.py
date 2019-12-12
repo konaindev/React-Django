@@ -1,23 +1,28 @@
 from collections import namedtuple
+import os
 
 import xmlschema
 from xml.etree.ElementTree import Element as XMLElement
 SchemaMetadata = namedtuple('SchemaMetadata', ('schema_file', 'schema_name', 'root_xpath'), defaults=(None, None, None))
+
+def get_schemas_path():
+    parent_dir = os.path.realpath(__file__).split(os.path.sep)[:-2]
+    schemas_path = os.path.sep.join((*parent_dir, 'xmlschemas'))
+    return schemas_path
 
 
 class SchemaValidator:
     """Processes XML Schema files when they are accessed to use for validation and keeps them cached.
     This class is designed to keep instantiated for multiple pulls from multiple SOAP endpoints to use the cache."""
 
-    # TODO: relative file paths for schema locations is not very flexible, fix that if needed
     _schema_locations = {
         'GetRawProperty_Login': SchemaMetadata(
-            schema_file='xmlschemas/Itf_RevenueMgmtRawDataExport.xsd',
+            schema_file='Itf_RevenueMgmtRawDataExport.xsd',
             schema_name='GetRawProperty_Login',
             root_xpath='.//RevenueManagementRawData',
         ),
         'GetPropertyConfigurations': SchemaMetadata(
-            schema_file='xmlschemas/Itf_PropertyConfiguration.xsd',
+            schema_file='Itf_PropertyConfiguration.xsd',
             schema_name='GetPropertyConfigurations',
             root_xpath='.//Properties',
         )
@@ -34,7 +39,8 @@ class SchemaValidator:
         """
 
         if self._loaded_schemas[schema_meta.schema_name] is None:
-            self._loaded_schemas[schema_meta.schema_name] = xmlschema.XMLSchema(schema_meta.schema_file)
+            schema_file_location = os.path.join(get_schemas_path(), schema_meta.schema_file)
+            self._loaded_schemas[schema_meta.schema_name] = xmlschema.XMLSchema(schema_file_location)
 
         return self._loaded_schemas[schema_meta.schema_name]
 
