@@ -4,7 +4,7 @@ from unittest import mock
 from xmlschema.validators import exceptions as schema_exceptions
 from requests import exceptions as requests_exceptions
 
-from remark_airflow.etl.yardi import schemavalidator, soapoperations
+from remark_airflow.etl.yardi.extract import schemavalidator, soapoperations
 
 
 class MockHttpResponse:
@@ -88,8 +88,8 @@ class TestYardiSoapOperation(unittest.TestCase):
         self.assertIn('application/soap+xml;charset=UTF-8;action=', headers['Content-Type'])
         self.assertIn(op.action, headers['Content-Type'])
 
-    @mock.patch('remark_airflow.etl.yardi.soapoperations.ElementTree.fromstring')
-    @mock.patch('remark_airflow.etl.yardi.soapoperations.requests.post', return_value=unittest.mock.Mock())
+    @mock.patch('remark_airflow.etl.yardi.extract.soapoperations.ElementTree.fromstring')
+    @mock.patch('remark_airflow.etl.yardi.extract.soapoperations.requests.post', return_value=unittest.mock.Mock())
     def test_make_request_happy_path(self, mock_post, mock_element_tree):
         valid_data = "It's valid, trust me."
 
@@ -122,8 +122,8 @@ class TestYardiSoapOperation(unittest.TestCase):
         # actually an official part of unittest.mock.Mock()
         self.assertTrue(hasattr(response_mock, 'content'))
 
-    @mock.patch('remark_airflow.etl.yardi.soapoperations.ElementTree.fromstring')
-    @mock.patch('remark_airflow.etl.yardi.soapoperations.requests.post', return_value=unittest.mock.Mock())
+    @mock.patch('remark_airflow.etl.yardi.extract.soapoperations.ElementTree.fromstring')
+    @mock.patch('remark_airflow.etl.yardi.extract.soapoperations.requests.post', return_value=unittest.mock.Mock())
     def test_make_request_invalid_document(self, mock_post, mock_element_tree):
 
         class FakeSchemaValidator:
@@ -138,7 +138,7 @@ class TestYardiSoapOperation(unittest.TestCase):
         with self.assertRaises(schema_exceptions.XMLSchemaValidationError) as ex:
             d = op.make_request()
 
-    @mock.patch('remark_airflow.etl.yardi.soapoperations.requests.post', new=MockHttpResponse)
+    @mock.patch('remark_airflow.etl.yardi.extract.soapoperations.requests.post', new=MockHttpResponse)
     def test_make_request_http_error(self):
 
         op = soapoperations.SoapOperation('endpoint', 'operation', "I'm a schema validator!")

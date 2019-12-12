@@ -5,7 +5,7 @@ import urllib.error
 from defusedxml import ElementTree
 import xmlschema
 from xmlschema.validators import exceptions as xmlschema_exceptions
-from remark_airflow.etl.yardi.schemavalidator import SchemaMetadata, SchemaValidator
+from remark_airflow.etl.yardi.extract.schemavalidator import SchemaMetadata, SchemaValidator
 
 parent_dir = os.path.realpath(__file__).split(os.path.sep)[:-2]
 schemas_path = os.path.sep.join((*parent_dir, 'xmlschemas'))

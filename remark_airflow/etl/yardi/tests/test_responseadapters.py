@@ -1,8 +1,7 @@
 from collections import namedtuple
 import unittest
 
-import remark_airflow.etl.yardi.responseadapters as responseadapters
-import os
+import remark_airflow.etl.yardi.extract.responseadapters as responseadapters
 
 
 MockYardiPropertiesNode = namedtuple('MockYardiPropertiesNode', ['tag', 'text'])
