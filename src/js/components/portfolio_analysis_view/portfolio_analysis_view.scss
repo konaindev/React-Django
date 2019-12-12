@@ -4,9 +4,6 @@ $page-spacing: 100px auto 113px;
 $title-height: 44px;
 $controls-spacing: 50px;
 $select-width: 310px;
-$title-bar-height: 20px;
-$title-bar-spacing: 100px;
-$title-bar-border-spacing: 20px;
 $kpi-card-spacing: 30px;
 $kpi-cards-spacing: 50px;
 $table-spacing: 100px;
@@ -40,30 +37,19 @@ $table-spacing: 100px;
 
 .portfolio-analysis__title-bar {
     display: flex;
-    height: $title-bar-height;
-    padding-bottom: $title-bar-border-spacing;
-    margin-top: $title-bar-spacing;
-    font-size: $text-xl;
-    color: $title-small-color;
+    margin-top: $s28; // 112px
     border-bottom: $heading-border;
     box-sizing: content-box;
     justify-content: space-between;
     align-items: center;
 }
 
-.portfolio-analysis__title-bar button.toggle-button__item {
-    font-size: $text-lg;
-    width: 200px;
-}
-
-.portfolio-analysis__title-bar button.toggle-button__item--selected {
-    bottom-border: solid 1px $blue-3;
-}
-
 .portfolio-analysis__property-count {
     font-size: $text-sm;
     letter-spacing: $letter-spacing-wider;
+    line-height: $text-xl;
     color: $default-text-color;
+    padding-bottom: $s5; // 20px
     text-transform: uppercase;
 }
 

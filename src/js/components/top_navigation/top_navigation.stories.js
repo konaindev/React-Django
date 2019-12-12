@@ -5,5 +5,10 @@ import TopNavigation from "./index";
 import { props } from "./props";
 
 storiesOf("TopNavigation", module).add("default", () => (
-  <TopNavigation {...props} />
+  <>
+    <div style={{ background: "#101417" }}>
+      <TopNavigation {...props} />
+    </div>
+    <div style={{ background: "#181d23", height: "120px" }}></div>
+  </>
 ));

@@ -4,11 +4,11 @@ import React from "react";
 
 import { Alarm } from "../../icons";
 import PropertyStatus from "../property_status";
-import Tooltip from "../rmb_tooltip";
+import Tooltip, { InfoTooltip } from "../rmb_tooltip";
 
 import "./kpi_card.scss";
 
-const KPICard = ({ health, value, name, target, className }) => {
+const KPICard = ({ health, value, name, target, className, targetTooltip }) => {
   const classes = cn("kpi-card", className, {
     "kpi-card--not-available": health === -1,
     "kpi-card--off-track": health === 0,
@@ -23,7 +23,12 @@ const KPICard = ({ health, value, name, target, className }) => {
       </div>
       <div className="kpi-card__value">{value}</div>
       <div className="kpi-card__name">{name}</div>
-      <div className="kpi-card__target">Target: {target}</div>
+      <div className="kpi-card__target">
+        <span>
+          Target: {target}
+          <InfoTooltip transKey={targetTooltip} />
+        </span>
+      </div>
     </div>
   );
 };

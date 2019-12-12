@@ -139,11 +139,11 @@ class KPITitle:
     highest_monthly_rent = "Highest Monthly Rent"
 
     # Funnel Volumes
-    usvs = "Unique Site Visitors"
-    inquiries = "Inquiries"
-    tours = "Tours"
-    lease_applications = "Lease Applications"
-    leases_executed = "Lease Executions"
+    usvs = "USV"
+    inquiries = "INQ"
+    tours = "TOU"
+    lease_applications = "APP"
+    leases_executed = "EXE"
 
     ##########
     # Computed

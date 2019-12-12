@@ -9,6 +9,7 @@ $title-spacing: 50px;
     height: $header-height;
     font-family: $font-sans;
     font-size: $text-xs;
+    line-height: $text-xl; // 20px
     letter-spacing: $letter-spacing-wider;
     color: $column-header-regular-color;
     text-transform: uppercase;
@@ -24,10 +25,21 @@ $title-spacing: 50px;
 
 .portfolio-table__kpis {
     display: flex;
+    align-items: center;
     margin-left: auto;
+    margin-right: 20px;
 }
 
 .portfolio-table__kpi {
     width: $portfolio-property-kpi-width;
     text-align: center;
+
+    & > span {
+        position: relative;
+    }
+
+    .rmb-tooltip-anchor {
+        position: absolute;
+        right: -30px;
+    }
 }

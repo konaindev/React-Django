@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ReportLinks renders basic options correctly 1`] = `
+<ul
+  className="rmb-nav-links"
+>
+  <li
+    className="rmb-nav-links-item selected"
+    key="1"
+  >
+    <a
+      href=""
+      onClick={[Function]}
+    >
+      Property Averages
+    </a>
+  </li>
+  <li
+    className="rmb-nav-links-item"
+    key="0"
+  >
+    <a
+      href=""
+      onClick={[Function]}
+    >
+      Property Totals
+    </a>
+  </li>
+</ul>
+`;
+
+exports[`ReportLinks renders options with tooltips correctly 1`] = `
+<ul
+  className="rmb-nav-links"
+>
+  <li
+    className="rmb-nav-links-item selected"
+    key="1"
+  >
+    <a
+      href=""
+      onClick={[Function]}
+    >
+      Property Averages
+      <Connect(InfoTooltipBase)
+        transKey="property_averages"
+      />
+    </a>
+  </li>
+  <li
+    className="rmb-nav-links-item"
+    key="0"
+  >
+    <a
+      href=""
+      onClick={[Function]}
+    >
+      Property Totals
+      <Connect(InfoTooltipBase)
+        transKey="property_totals"
+      />
+    </a>
+  </li>
+</ul>
+`;
