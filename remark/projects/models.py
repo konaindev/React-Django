@@ -24,6 +24,7 @@ from remark.lib.metrics import (
     SumIntervalMetric,
     ModelPeriod,
 )
+from remark.lib.geo import load_country_choices_from_json
 from remark.projects.spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
 from remark.projects.reports.performance import PerformanceReport
 from remark.projects.reports.selectors import ReportLinks
@@ -33,9 +34,13 @@ from remark.projects.constants import (
     BUILDING_CLASS,
     SIZE_LANDSCAPE,
     SIZE_THUMBNAIL,
+    BENCHMARK_CATEGORIES,
+    BENCHMARK_KPIS,
     SIZE_PROPERTY_HOME,
     SIZE_DASHBOARD,
-    PROPERTY_STYLE_AUTO)
+    PROPERTY_STYLE_AUTO
+)
+
 from remark.users.constants import PROJECT_ROLES
 
 
@@ -67,6 +72,9 @@ def building_public_id():
 
 def public_property_id():
     return public_id("property")
+
+def benchmark_public_id():
+    return public_id("benchmark")
 
 
 def building_logo_media_path(property, filename):
@@ -1462,3 +1470,60 @@ class Building(models.Model):
     )
 
     objects = BuildingManager()
+
+
+class CountryBenchmarkManager(models.Manager):
+    pass
+
+
+class CountryBenchmark(models.Model):
+    public_id = models.CharField(
+        primary_key=True,
+        default=benchmark_public_id,
+        help_text="National Benchmark ID",
+        max_length=50,
+        editable=False,
+    )
+
+    start = models.DateField(help_text="Start Date")
+    end = models.DateField(help_text="End Date")
+
+    country_id = models.IntegerField(choices=load_country_choices_from_json(), default=233)
+    category = models.IntegerField(choices=BENCHMARK_CATEGORIES)
+    kpi = models.CharField(choices=BENCHMARK_KPIS, max_length=50)
+
+    threshold_0 = models.FloatField(
+        help_text="Threshold between Low Performing and Below Average"
+    )
+    threshold_1 = models.FloatField(
+        help_text="Threshold between Below Average and Average"
+    )
+    threshold_2 = models.FloatField(
+        help_text="Threshold between Average and Above Average"
+    )
+    threshold_3 = models.FloatField(
+        help_text="Threshold between Above Average and High Performing"
+    )
+
+    property_count_0 = models.IntegerField(
+        help_text="Property Count for Low Performing"
+    )
+    property_count_1 = models.IntegerField(
+        help_text="Property Count for Below Average Performing"
+    )
+    property_count_2 = models.IntegerField(
+        help_text="Property Count for Average Performing"
+    )
+    property_count_3 = models.IntegerField(
+        help_text="Property Count for Above Average Performing"
+    )
+    property_count_4 = models.IntegerField(
+        help_text="Property Count for High Performing"
+    )
+    total_property_count = models.IntegerField(
+        help_text="All the properties in this category"
+    )
+
+    last_updated = models.DateTimeField(auto_now=True)
+
+    objects = CountryBenchmarkManager()
