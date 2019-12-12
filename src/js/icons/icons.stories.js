@@ -12,7 +12,8 @@ const defaultStyle = {
 };
 
 const iconsStyles = {
-  Add: { fill: "none" }
+  Add: { fill: "none" },
+  Web: { fill: "none" }
 };
 
 const story = storiesOf("Icons", module);
