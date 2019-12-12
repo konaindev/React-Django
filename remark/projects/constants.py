@@ -26,6 +26,13 @@ USER_ROLES = {
     "member": "member"
 }
 
+HEALTH_STATUS = {
+    "PENDING": -1,
+    "OFF_TRACK": 0,
+    "AT_RISK": 1,
+    "ON_TRACK": 2
+}
+
 PROPERTY_STYLE_AUTO = 0
 PROPERTY_STYLES = (
     (0, "Auto"),
