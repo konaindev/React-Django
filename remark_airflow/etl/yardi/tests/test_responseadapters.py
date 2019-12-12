@@ -14,6 +14,8 @@ class TestYardiGetPropertiesAdapter(unittest.TestCase):
         adapter = responseadapters.YardiGetPropertiesAdapter()
         self.assertEqual(adapter.operation_name, 'GetPropertyConfigurations')
 
+        print(os.path.dirname(os.path.realpath(__file__)))
+
     def test_process_result(self):
         code1 = 'remarkably1'
         code2 = 'remarkably2'
