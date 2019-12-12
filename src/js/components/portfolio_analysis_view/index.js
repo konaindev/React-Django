@@ -10,20 +10,20 @@ import PortfolioTable from "../portfolio_table";
 import KPICard, { NoTargetKPICard, NoValueKPICard } from "../kpi_card";
 import Tooltip from "../rmb_tooltip";
 import Select from "../select";
-import ToggleButton from "../toggle_button";
+import RmbNavLinks from "../rmb_nav_links";
 import Loader from "../loader";
 import { portfolio } from "../../redux_base/actions";
 import { formatKPI } from "../../utils/kpi_formatters";
 import "./portfolio_analysis_view.scss";
 
-const average_buttons_options = [
+const tabOptions = [
   {
-    text: "Property Averages",
-    id: "1"
+    label: "Property Averages",
+    value: "1"
   },
   {
-    text: "Property Totals",
-    id: "0"
+    label: "Property Totals",
+    value: "0"
   }
 ];
 
@@ -175,7 +175,7 @@ export class PortfolioAnalysisView extends React.PureComponent {
     });
   };
 
-  onAverageClick = selection => {
+  handleTabClick = selection => {
     this.props.onChange({
       selected_kpi_bundle: this.props.selected_kpi_bundle,
       date_selection: this.props.date_selection,
@@ -227,10 +227,10 @@ export class PortfolioAnalysisView extends React.PureComponent {
           />
         </div>
         <div className="portfolio-analysis__title-bar">
-          <ToggleButton
-            options={average_buttons_options}
-            value={display_average}
-            onChange={this.onAverageClick}
+          <RmbNavLinks
+            options={tabOptions}
+            selected={display_average}
+            onChange={this.handleTabClick}
           />
           <div className="portfolio-analysis__property-count">
             {this.totalProperties} properties

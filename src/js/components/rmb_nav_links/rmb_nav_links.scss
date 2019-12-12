@@ -1,0 +1,43 @@
+@import "css/base.scss";
+
+$navlink-x-spacing: 26px;
+$navlink-y-spacing: 14px;
+$navlink-y-spacing-large: 28px;
+$navlink-color: $gray-6;
+$navlink-color-selected: $highlight-gray-3;
+$navlink-color-bordered: $blue-3;
+
+// navigation tabs
+.rmb-nav-links {
+    display: flex;
+    list-style: none;
+    font-size: $text-base;
+    letter-spacing: $letter-spacing-wide;
+    line-height: $text-xl;
+    padding: 0;
+    margin-bottom: -1px;
+    margin-left: -$navlink-x-spacing;
+    margin-right: -$navlink-x-spacing;
+
+    & > li {
+        cursor: pointer;
+        display: inline-block;
+        margin: 0 $navlink-x-spacing;
+        padding: $navlink-y-spacing 0;
+        color: $navlink-color;
+
+        &.disabled {
+            pointer-events: none;
+        }
+
+        &.selected {
+            color: $navlink-color-selected;
+            border-bottom: 1px solid $navlink-color-bordered;
+        }
+
+        & > a {
+            color: inherit;
+            text-decoration: inherit;
+        }
+    }
+}
