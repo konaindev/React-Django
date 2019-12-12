@@ -8,6 +8,7 @@ orbs:
   aws-cli: circleci/aws-cli@0.1.1
   node: circleci/node@1.1.3
   heroku: circleci/heroku@0.0.8
+  gcp-cli: circleci/gcp-cli@1.8.3
 
 jobs:
   build:
@@ -82,6 +83,24 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: yarn run chromatic
+
+  deploy-airflow-staging:
+    docker:
+      - image: google/cloud-sdk
+    
+    steps:
+      - checkout
+      - gcp-cli/initialize
+      - gcp-cli/install
+      - run:
+          name: Get Bucket Name
+          command:  |
+            get_bucket=$(gcloud composer environments describe $COMPOSER_ENV \
+            --location us-central1 \
+            --format="get(config.dagGcsPrefix)" | sed -e 's/gs:\/\///g' -e's/\/dags//g')
+            echo "export BUCKET=$get_bucket" >> $BASH_ENV
+      - run: echo $BUCKET
+      
 
   deploy-staging:
     docker:
