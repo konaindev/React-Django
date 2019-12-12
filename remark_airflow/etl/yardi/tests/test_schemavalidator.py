@@ -1,29 +1,28 @@
+import os
 import unittest
 import urllib.error
 
 from defusedxml import ElementTree
 import xmlschema
 from xmlschema.validators import exceptions as xmlschema_exceptions
-import os
 from remark_airflow.etl.yardi.schemavalidator import SchemaMetadata, SchemaValidator
 
-schemas_relpath = '../xmlschemas'
-print(os.path.dirname(os.path.realpath(__file__)))
+parent_dir = os.path.realpath(__file__).split(os.path.sep)[:-2]
+schemas_path = os.path.sep.join((*parent_dir, 'xmlschemas'))
 
 
 class TestSchemaValidator(unittest.TestCase):
-    # TODO: All of these
 
     def setUp(self):
         class InternalValidator(SchemaValidator):
             _schema_locations = {
                 'GetRawProperty_Login': SchemaMetadata(
-                    schema_file=f'{schemas_relpath}/Itf_RevenueMgmtRawDataExport.xsd',
+                    schema_file=os.path.join(schemas_path, 'Itf_RevenueMgmtRawDataExport.xsd'),
                     schema_name='GetRawProperty_Login',
                     root_xpath='.//RevenueManagementRawData',
                 ),
                 'GetPropertyConfigurations': SchemaMetadata(
-                    schema_file=f'{schemas_relpath}/Itf_PropertyConfiguration.xsd',
+                    schema_file=os.path.join(schemas_path, 'Itf_PropertyConfiguration.xsd'),
                     schema_name='GetPropertyConfigurations',
                     root_xpath='.//Properties',
                 )
@@ -33,11 +32,9 @@ class TestSchemaValidator(unittest.TestCase):
         self.validator = InternalValidator()
 
     def test_schema_file_path_override(self):
-        print(os.path.dirname(os.path.realpath(__file__)))
 
         for k, v in self.validator._schema_locations.items():
-            self.assertIn(schemas_relpath, v.schema_file)
-            print(os.path.dirname(os.path.realpath(v.schema_file)))
+            self.assertIn(schemas_path, v.schema_file)
 
     def test_cache(self):
         for k, v in self.validator._schema_locations.items():
