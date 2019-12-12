@@ -3,9 +3,9 @@
 $navlink-x-spacing: 26px;
 $navlink-y-spacing: 14px;
 $navlink-y-spacing-large: 28px;
-$navlink-color: $gray-6;
-$navlink-color-selected: $highlight-gray-3;
-$navlink-color-bordered: $blue-3;
+$navlink-disabled-color: $gray-6;
+$navlink-selected-color: $highlight-gray-3;
+$navlink-border-color: $blue-3;
 
 // navigation tabs
 .rmb-nav-links {
@@ -24,20 +24,27 @@ $navlink-color-bordered: $blue-3;
         display: inline-block;
         margin: 0 $navlink-x-spacing;
         padding: $navlink-y-spacing 0;
-        color: $navlink-color;
+        color: $navlink-disabled-color;
 
         &.disabled {
             pointer-events: none;
         }
 
         &.selected {
-            color: $navlink-color-selected;
-            border-bottom: 1px solid $navlink-color-bordered;
+            color: $navlink-selected-color;
+            border-bottom: 1px solid $navlink-border-color;
         }
 
         & > a {
             color: inherit;
             text-decoration: inherit;
+            position: relative;
+        }
+
+        .rmb-tooltip-anchor {
+            position: absolute;
+            top: -30px;
+            left: calc(50% - 10px);
         }
     }
 }

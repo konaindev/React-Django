@@ -19,11 +19,13 @@ import "./portfolio_analysis_view.scss";
 const tabOptions = [
   {
     label: "Property Averages",
-    value: "1"
+    value: "1",
+    tooltip: "property_averages"
   },
   {
     label: "Property Totals",
-    value: "0"
+    value: "0",
+    tooltip: "property_totals"
   }
 ];
 

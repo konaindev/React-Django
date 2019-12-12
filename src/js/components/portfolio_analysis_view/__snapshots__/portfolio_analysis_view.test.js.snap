@@ -58,21 +58,23 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
   <div
     className="portfolio-analysis__title-bar"
   >
-    <ToggleButton
+    <RmbNavLinks
       onChange={[Function]}
       options={
         Array [
           Object {
-            "id": "1",
-            "text": "Property Averages",
+            "label": "Property Averages",
+            "tooltip": "property_averages",
+            "value": "1",
           },
           Object {
-            "id": "0",
-            "text": "Property Totals",
+            "label": "Property Totals",
+            "tooltip": "property_totals",
+            "value": "0",
           },
         ]
       }
-      value="1"
+      selected="1"
     />
     <div
       className="portfolio-analysis__property-count"
@@ -355,21 +357,23 @@ exports[`PortfolioAnalysisView renders partial KPIs 1`] = `
   <div
     className="portfolio-analysis__title-bar"
   >
-    <ToggleButton
+    <RmbNavLinks
       onChange={[Function]}
       options={
         Array [
           Object {
-            "id": "1",
-            "text": "Property Averages",
+            "label": "Property Averages",
+            "tooltip": "property_averages",
+            "value": "1",
           },
           Object {
-            "id": "0",
-            "text": "Property Totals",
+            "label": "Property Totals",
+            "tooltip": "property_totals",
+            "value": "0",
           },
         ]
       }
-      value="1"
+      selected="1"
     />
     <div
       className="portfolio-analysis__property-count"
@@ -626,21 +630,23 @@ exports[`PortfolioAnalysisView renders without KPIs 1`] = `
   <div
     className="portfolio-analysis__title-bar"
   >
-    <ToggleButton
+    <RmbNavLinks
       onChange={[Function]}
       options={
         Array [
           Object {
-            "id": "1",
-            "text": "Property Averages",
+            "label": "Property Averages",
+            "tooltip": "property_averages",
+            "value": "1",
           },
           Object {
-            "id": "0",
-            "text": "Property Totals",
+            "label": "Property Totals",
+            "tooltip": "property_totals",
+            "value": "0",
           },
         ]
       }
-      value="1"
+      selected="1"
     />
     <div
       className="portfolio-analysis__property-count"
