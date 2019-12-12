@@ -4,7 +4,6 @@ import unittest
 import remark_airflow.etl.yardi.responseadapters as responseadapters
 import os
 
-print(os.path.dirname(os.path.realpath(__file__)))
 
 MockYardiPropertiesNode = namedtuple('MockYardiPropertiesNode', ['tag', 'text'])
 
@@ -13,8 +12,6 @@ class TestYardiGetPropertiesAdapter(unittest.TestCase):
     def test_operation_name(self):
         adapter = responseadapters.YardiGetPropertiesAdapter()
         self.assertEqual(adapter.operation_name, 'GetPropertyConfigurations')
-
-        print(os.path.dirname(os.path.realpath(__file__)))
 
     def test_process_result(self):
         code1 = 'remarkably1'

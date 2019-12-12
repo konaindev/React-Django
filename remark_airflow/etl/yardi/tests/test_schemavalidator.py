@@ -4,10 +4,11 @@ import urllib.error
 from defusedxml import ElementTree
 import xmlschema
 from xmlschema.validators import exceptions as xmlschema_exceptions
-
+import os
 from remark_airflow.etl.yardi.schemavalidator import SchemaMetadata, SchemaValidator
 
 schemas_relpath = '../xmlschemas'
+print(os.path.dirname(os.path.realpath(__file__)))
 
 
 class TestSchemaValidator(unittest.TestCase):
@@ -32,8 +33,11 @@ class TestSchemaValidator(unittest.TestCase):
         self.validator = InternalValidator()
 
     def test_schema_file_path_override(self):
+        print(os.path.dirname(os.path.realpath(__file__)))
+
         for k, v in self.validator._schema_locations.items():
             self.assertIn(schemas_relpath, v.schema_file)
+            print(os.path.dirname(os.path.realpath(v.schema_file)))
 
     def test_cache(self):
         for k, v in self.validator._schema_locations.items():
