@@ -87,20 +87,21 @@ jobs:
   deploy-airflow-staging:
     docker:
       - image: google/cloud-sdk
-    
+    working_directory: ~/repo/remark_airflow
     steps:
+      - run:
+        name: Install Heroku Tools
+        command: curl https://cli-assets.heroku.com/install.sh | sh
       - checkout
       - gcp-cli/initialize
       - gcp-cli/install
       - run:
-          name: Get Bucket Name
-          command:  |
-            get_bucket=$(gcloud composer environments describe $COMPOSER_ENV \
-            --location us-central1 \
-            --format="get(config.dagGcsPrefix)" | sed -e 's/gs:\/\///g' -e's/\/dags//g')
-            echo "export BUCKET=$get_bucket" >> $BASH_ENV
-      - run: echo $BUCKET
-      
+        name: Maintenance Mode On
+        command: heroku maintenance:on --app remarkably-staging
+      - run:
+        name: Maintenance Mode Off
+        command: heroku maintenance:off --app remarkably-staging
+
 
   deploy-staging:
     docker:
