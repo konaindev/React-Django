@@ -104,7 +104,7 @@ jobs:
       - run: ls -a
       - run:
           name: set postgres_url
-          command: echo "export DATABASE_URL=$(python3 -c 'import remark_airflow.setup_utils as setup_utils; setup_utils.set_url()')" >> $BASH_ENV
+          command: echo "export DATABASE_URL=$(python3 -c 'import remark_airflow.setup_utils as setup_utils; setup_utils.get_url()')" >> $BASH_ENV
       - run: echo $DATABASE_URL
       - run:
           name: Maintenance Mode Off
