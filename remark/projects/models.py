@@ -34,8 +34,8 @@ from remark.projects.constants import (
     SIZE_LANDSCAPE,
     SIZE_THUMBNAIL,
     SIZE_PROPERTY_HOME,
-    SIZE_DASHBOARD
-)
+    SIZE_DASHBOARD,
+    PROPERTY_STYLE_AUTO)
 from remark.users.constants import PROJECT_ROLES
 
 
@@ -689,6 +689,32 @@ class Property(models.Model):
         ],
         help_text="YYYY (four number digit)",
     )
+
+    @property
+    def calculated_property_style(self):
+        style = self.property_style
+        if style == PROPERTY_STYLE_AUTO or style is None or len(PROPERTY_STYLES) <= style:
+            buildings = self.building_set.all()
+            if len(buildings) == 1:
+                build = buildings[0]
+                if build.number_of_floors < 1:
+                    return PROPERTY_STYLES[7][1]  # Other
+                elif 1 <= build.number_of_floors <= 4:
+                    if build.has_elevator:
+                        return PROPERTY_STYLES[1][1]  # Lo-Rise
+                    return PROPERTY_STYLES[2][1]  # Walk Up
+                elif 5 <= build.number_of_floors <= 9:
+                    return PROPERTY_STYLES[3][1]  # Mid-Rise
+                elif build.number_of_floors >= 10:
+                    return PROPERTY_STYLES[4][1]  # Hi-Rise
+            elif len(buildings) >= 2:
+                tower_blocks = list(filter(lambda b: b.number_of_floors >= 10, buildings))
+                if len(tower_blocks) > 0:
+                    return PROPERTY_STYLES[5][1]  # Tower Block
+                return PROPERTY_STYLES[6][1]  # Garden
+            return PROPERTY_STYLES[7][1]  # Other
+        else:
+            return PROPERTY_STYLES[style][1]
 
     def get_geo_state(self):
         return self.geo_address.state
