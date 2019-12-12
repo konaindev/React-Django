@@ -88,7 +88,7 @@ jobs:
     docker:
       - image: google/cloud-sdk
 
-    working_directory: ~/repo/remark_airflow
+    # working_directory: ~/repo/remark_airflow
     
     steps:
       - run:
@@ -101,9 +101,10 @@ jobs:
           name: Maintenance Mode On
           command: heroku maintenance:on --app remarkably-staging
       - run: pwd
+      - run: ls -a
       - run:
           name: set postgres_url
-          command: echo "export DATABASE_URL=$(python3 -c 'import setup_utils; setup_utils.set_url()')" >> $BASH_ENV
+          command: echo "export DATABASE_URL=$(python3 -c 'import remark_airflow.setup_utils as setup_utils; setup_utils.set_url()')" >> $BASH_ENV
       - run: echo $DATABASE_URL
       - run:
           name: Maintenance Mode Off
