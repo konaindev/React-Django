@@ -816,7 +816,7 @@ export default class Profile extends React.PureComponent {
                         value={values.office_zip}
                         onBlur={this.onBlur}
                         onChange={this.onChange}
-                      ></Input>
+                      />
                       <div className="account-settings__error">
                         <ErrorMessage name="office_zip" />
                       </div>
