@@ -40,6 +40,7 @@ export class ProjectReportPage extends Component {
     backUrl: PropTypes.string,
     fetchingReports: PropTypes.bool,
     isAddTagInput: PropTypes.bool,
+    suggestedTags: PropTypes.array,
     historyPush: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired
   };
@@ -66,6 +67,11 @@ export class ProjectReportPage extends Component {
   createTag = word =>
     this.props.dispatch(
       projectActions.createTag(this.props.project.public_id)({ body: { word } })
+    );
+
+  fetchSuggestedTags = word =>
+    this.props.dispatch(
+      projectActions.fetchSuggestedTags(this.props.project.public_id)({ word })
     );
 
   showAddTagInput = () => this.props.dispatch(projectActions.showAddTagInput());
@@ -125,6 +131,7 @@ export class ProjectReportPage extends Component {
       reportSpan,
       report,
       isAddTagInput,
+      suggestedTags,
       project
     } = this.props;
 
@@ -135,9 +142,11 @@ export class ProjectReportPage extends Component {
           project={project}
           buildingImageURL={buildingImageURL}
           isAddTagInput={isAddTagInput}
+          suggestedTags={suggestedTags}
           onCreateTag={this.createTag}
           onRemoveTag={this.removeTag}
           showAddTagInput={this.showAddTagInput}
+          fetchSuggestedTags={this.fetchSuggestedTags}
         />
       );
     }

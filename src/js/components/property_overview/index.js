@@ -16,13 +16,16 @@ export default class PropertyOverview extends React.PureComponent {
     project: PropTypes.object.isRequired,
     buildingImageURL: PropTypes.string.isRequired,
     isAddTagInput: PropTypes.bool,
+    suggestedTags: PropTypes.array,
     showAddTagInput: PropTypes.func,
     onRemoveTag: PropTypes.func,
-    onCreateTag: PropTypes.func
+    onCreateTag: PropTypes.func,
+    fetchSuggestedTags: PropTypes.func
   };
   static defaultProps = {
     onRemoveTag() {},
-    onCreateTag() {}
+    onCreateTag() {},
+    fetchSuggestedTags() {}
   };
 
   static characteristicsFields = {
@@ -74,7 +77,11 @@ export default class PropertyOverview extends React.PureComponent {
     this.props.showAddTagInput();
     this.setState({ addingTag: "" });
   };
-  onAddTag = e => this.setState({ addingTag: e.target.value });
+
+  onAddTag = e => {
+    this.props.fetchSuggestedTags(e.target.value);
+    this.setState({ addingTag: e.target.value });
+  };
 
   renderTags = () => {
     const { project } = this.props;
@@ -103,6 +110,7 @@ export default class PropertyOverview extends React.PureComponent {
           <AddTagField
             className="property-overview__add-tag-input"
             value={this.state.addingTag}
+            suggestedTags={this.props.suggestedTags}
             onChange={this.onAddTag}
             onCreateTag={this.props.onCreateTag}
             key={`${addKey}-input`}

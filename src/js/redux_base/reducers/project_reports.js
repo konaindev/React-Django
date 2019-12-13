@@ -3,7 +3,8 @@ const initialState = {
   fetchingReports: true,
   project: false,
   reports: false,
-  isAddTagInput: false
+  isAddTagInput: false,
+  suggestedTags: []
 };
 
 const reducer = (state = initialState, action) => {
