@@ -21,7 +21,7 @@ class Insight:
 
     def get_text(self, data):
         if type(self.template) is str:
-            template = jinja2.Template(self.template)
+            template = jinja2.Template(self.template, optimized=False)
             return template.render(data)
         else:
             return self.template(data)

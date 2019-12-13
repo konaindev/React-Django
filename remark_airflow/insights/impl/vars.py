@@ -33,18 +33,20 @@ def var_prev_health_status(project, start, end):
     prev_period = (
         Period.objects.filter(project=project, end__lte=start).order_by("end").first()
     )
-    if not prev_period:
-        return None
-    prev_kpi = leased_rate_graph(prev_period.get_values())
-    prev_leased_rate = prev_kpi["leased_rate"]
+    if prev_period:
+        prev_kpi = leased_rate_graph(prev_period.get_values())
+        prev_leased_rate = prev_kpi["leased_rate"]
+    else:
+        prev_leased_rate = None
 
     prev_target_period = (
         TargetPeriod.objects.filter(project=project, end__lte=start)
         .order_by("end")
         .first()
     )
-    if not prev_target_period:
-        return None
-    prev_target_leased_rate = prev_target_period.target_leased_rate
+    if prev_target_period:
+        prev_target_leased_rate = prev_target_period.target_leased_rate
+    else:
+        prev_target_leased_rate = None
 
     return health_check(prev_leased_rate, prev_target_leased_rate)
