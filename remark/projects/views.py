@@ -445,3 +445,13 @@ class RemoveTagView(APIView):
         project.save()
         tags = [t.word for t in project.custom_tags.all()]
         return Response({"custom_tags": tags})
+
+
+class SearchTagView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, public_id):
+        word = request.GET.get("word")
+        if not word:
+            return Response({"tags": []})
+        return Response({"tags": []})

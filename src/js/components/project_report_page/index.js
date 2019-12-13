@@ -69,9 +69,9 @@ export class ProjectReportPage extends Component {
       projectActions.createTag(this.props.project.public_id)({ body: { word } })
     );
 
-  fetchSuggestedTags = word =>
+  searchTags = word =>
     this.props.dispatch(
-      projectActions.fetchSuggestedTags(this.props.project.public_id)({ word })
+      projectActions.searchTags(this.props.project.public_id)({ word })
     );
 
   showAddTagInput = () => this.props.dispatch(projectActions.showAddTagInput());
@@ -146,7 +146,7 @@ export class ProjectReportPage extends Component {
           onCreateTag={this.createTag}
           onRemoveTag={this.removeTag}
           showAddTagInput={this.showAddTagInput}
-          fetchSuggestedTags={this.fetchSuggestedTags}
+          searchTags={this.searchTags}
         />
       );
     }

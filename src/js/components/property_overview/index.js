@@ -20,12 +20,12 @@ export default class PropertyOverview extends React.PureComponent {
     showAddTagInput: PropTypes.func,
     onRemoveTag: PropTypes.func,
     onCreateTag: PropTypes.func,
-    fetchSuggestedTags: PropTypes.func
+    searchTags: PropTypes.func
   };
   static defaultProps = {
     onRemoveTag() {},
     onCreateTag() {},
-    fetchSuggestedTags() {}
+    searchTags() {}
   };
 
   static characteristicsFields = {
@@ -79,7 +79,7 @@ export default class PropertyOverview extends React.PureComponent {
   };
 
   onAddTag = e => {
-    this.props.fetchSuggestedTags(e.target.value);
+    this.props.searchTags(e.target.value);
     this.setState({ addingTag: e.target.value });
   };
 
