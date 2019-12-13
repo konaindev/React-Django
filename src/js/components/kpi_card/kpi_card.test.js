@@ -1,29 +1,27 @@
-import renderer from "react-test-renderer";
+import { shallow } from "enzyme";
 
 import KPICard, { NoTargetKPICard, NoValueKPICard } from "./index";
 import { offTrack, atRisk, onTrack, NoTargetCard, NoValueCard } from "./props";
 
-describe("SectionHeader", () => {
+describe("KPICard", () => {
   it("renders Off Track", () => {
-    const tree = renderer.create(<KPICard {...offTrack} />).toJSON();
+    const tree = shallow(<KPICard {...offTrack} />);
     expect(tree).toMatchSnapshot();
   });
   it("renders At Risk", () => {
-    const tree = renderer.create(<KPICard {...atRisk} />).toJSON();
+    const tree = shallow(<KPICard {...atRisk} />);
     expect(tree).toMatchSnapshot();
   });
   it("renders On Track", () => {
-    const tree = renderer.create(<KPICard {...onTrack} />).toJSON();
+    const tree = shallow(<KPICard {...onTrack} />);
     expect(tree).toMatchSnapshot();
   });
   it("renders NoTargetKPICard", () => {
-    const tree = renderer
-      .create(<NoTargetKPICard {...NoTargetCard} />)
-      .toJSON();
+    const tree = shallow(<NoTargetKPICard {...NoTargetCard} />);
     expect(tree).toMatchSnapshot();
   });
   it("renders NoValueKPICard", () => {
-    const tree = renderer.create(<NoValueKPICard {...NoValueCard} />).toJSON();
+    const tree = shallow(<NoValueKPICard {...NoValueCard} />);
     expect(tree).toMatchSnapshot();
   });
 });

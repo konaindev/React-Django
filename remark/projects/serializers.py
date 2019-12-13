@@ -143,29 +143,7 @@ class ProjectSerializer(serializers.ModelSerializer):
         return None
 
     def get_property_style(self, obj):
-        style = obj.property.property_style
-        if style == PROPERTY_STYLE_AUTO or style is None or len(PROPERTY_STYLES) <= style:
-            buildings = obj.property.building_set.all()
-            if len(buildings) == 1:
-                build = buildings[0]
-                if build.number_of_floors < 1:
-                    return PROPERTY_STYLES[7][1]  # Other
-                elif 1 <= build.number_of_floors <= 4:
-                    if build.has_elevator:
-                        return PROPERTY_STYLES[1][1]  # Lo-Rise
-                    return PROPERTY_STYLES[2][1]  # Walk Up
-                elif 5 <= build.number_of_floors <= 9:
-                    return PROPERTY_STYLES[3][1]  # Mid-Rise
-                elif build.number_of_floors >= 10:
-                    return PROPERTY_STYLES[4][1]  # Hi-Rise
-            elif len(buildings) >= 2:
-                tower_blocks = list(filter(lambda b: b.number_of_floors >= 10, buildings))
-                if len(tower_blocks) > 0:
-                    return PROPERTY_STYLES[5][1]  # Tower Block
-                return PROPERTY_STYLES[6][1]  # Garden
-            return PROPERTY_STYLES[7][1]  # Other
-        else:
-            return PROPERTY_STYLES[style][1]
+        return obj.property.calculated_property_style
 
     def get_property_owner(self, obj):
         return obj.property_owner and obj.property_owner.name

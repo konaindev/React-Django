@@ -58,6 +58,8 @@ djangorestframework = "*"
 djangorestframework-simplejwt = "*"
 django-cors-headers = "*"
 parameterized = "*"
+xmlschema = "*"
+defusedxml = "*"
 jinja2 = "*"
 
 [requires]

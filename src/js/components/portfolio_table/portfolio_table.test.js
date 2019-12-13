@@ -1,20 +1,19 @@
-import renderer from "react-test-renderer";
+import { shallow } from "enzyme";
 
 import PortfolioTable from "./index";
 import { props, withoutKPIs, partialKPIs } from "./props";
-import { BrowserRouter } from "react-router-dom";
 
 describe("PortfolioTable", () => {
   it("renders correctly", () => {
-    const tree = renderer.create(<BrowserRouter><PortfolioTable {...props} /></BrowserRouter>).toJSON();
+    const tree = shallow(<PortfolioTable {...props} />);
     expect(tree).toMatchSnapshot();
   });
   it("renders without KPIs", () => {
-    const tree = renderer.create(<BrowserRouter><PortfolioTable {...withoutKPIs} /></BrowserRouter>).toJSON();
+    const tree = shallow(<PortfolioTable {...withoutKPIs} />);
     expect(tree).toMatchSnapshot();
   });
   it("renders partial KPIs", () => {
-    const tree = renderer.create(<BrowserRouter><PortfolioTable {...partialKPIs} /></BrowserRouter>).toJSON();
+    const tree = shallow(<PortfolioTable {...partialKPIs} />);
     expect(tree).toMatchSnapshot();
   });
 });

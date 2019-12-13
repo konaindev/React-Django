@@ -16,12 +16,12 @@ ACCOUNT_TYPE = (
 )
 
 COMPANY_ROLES = [
-    {"label": "Owner", "value": "owner"},
-    {"label": "Developer", "value": "developer"},
-    {"label": "Asset Manager", "value": "asset_manager"},
-    {"label": "Property Manager", "value": "property_manager"},
-    {"label": "JV / Investor", "value": "investor"},
-    {"label": "Vendor / Consultant", "value": "vendor"},
+    {"label": "Asset Ownership", "value": "owner"},
+    {"label": "Development", "value": "developer"},
+    {"label": "Asset Management", "value": "asset_manager"},
+    {"label": "Property Management", "value": "property_manager"},
+    {"label": "JV / Investment", "value": "investor"},
+    {"label": "Vendor / Consulting", "value": "vendor"},
 ]
 
 BUSINESS_TYPE = {

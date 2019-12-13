@@ -1,0 +1,50 @@
+@import "css/base.scss";
+
+$navlink-x-spacing: 26px;
+$navlink-y-spacing: 14px;
+$navlink-y-spacing-large: 28px;
+$navlink-disabled-color: $gray-6;
+$navlink-selected-color: $highlight-gray-3;
+$navlink-border-color: $blue-3;
+
+// navigation tabs
+.rmb-nav-links {
+    display: flex;
+    list-style: none;
+    font-size: $text-base;
+    letter-spacing: $letter-spacing-wide;
+    line-height: $text-xl;
+    padding: 0;
+    margin-bottom: -1px;
+    margin-left: -$navlink-x-spacing;
+    margin-right: -$navlink-x-spacing;
+
+    & > li {
+        cursor: pointer;
+        display: inline-block;
+        margin: 0 $navlink-x-spacing;
+        padding: $navlink-y-spacing 0;
+        color: $navlink-disabled-color;
+
+        &.disabled {
+            pointer-events: none;
+        }
+
+        &.selected {
+            color: $navlink-selected-color;
+            border-bottom: 1px solid $navlink-border-color;
+        }
+
+        & > a {
+            color: inherit;
+            text-decoration: inherit;
+            position: relative;
+        }
+
+        .rmb-tooltip-anchor {
+            position: absolute;
+            top: -30px;
+            left: calc(50% - 10px);
+        }
+    }
+}

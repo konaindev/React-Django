@@ -17,425 +17,234 @@ exports[`PortfolioTable renders correctly 1`] = `
     >
       <div
         className="portfolio-table__kpi"
+        key="leased_rate"
       >
-        Lease Rate
+        <span>
+          Lease Rate
+          <Connect(InfoTooltipBase)
+            transKey="leased_rate"
+          />
+        </span>
       </div>
       <div
         className="portfolio-table__kpi"
+        key="occupancy_rate"
       >
-        Occupancy Rate
+        <span>
+          Occupancy Rate
+          <Connect(InfoTooltipBase)
+            transKey="occupied_rate"
+          />
+        </span>
       </div>
       <div
         className="portfolio-table__kpi"
+        key="lease_cd_rate"
       >
-        CD Rate
+        <span>
+          CD Rate
+          <Connect(InfoTooltipBase) />
+        </span>
       </div>
       <div
         className="portfolio-table__kpi"
+        key="renewal_rate"
       >
-        Renewal Rate
+        <span>
+          Renewal Rate
+          <Connect(InfoTooltipBase)
+            transKey="retention_rate"
+          />
+        </span>
       </div>
     </div>
   </div>
   <div
     className="portfolio-table__body"
   >
-    <div
-      className="portfolio-property-group-row"
-      style={Object {}}
-    >
-      <div
-        className="portfolio-property-group-row__group portfolio-property-group-row__group--opening"
-        onClick={[Function]}
-      >
-        <div
-          className="portfolio-property-group-row__image"
-          style={
-            Object {
-              "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
-            }
-          }
-        />
-        <div
-          className="portfolio-property-group-row__title"
-        >
-          <div
-            className="portfolio-property-group-row__name"
-          >
-            West
-          </div>
-          <div
-            className="portfolio-property-group-row__property-count"
-          >
-            3
-             Properties
-          </div>
-        </div>
-        <div
-          className="portfolio-property-group-row__kpis"
-        >
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              90%
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              Target: 90%
-            </div>
-          </div>
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              80%
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              Target: 80%
-            </div>
-          </div>
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              10%
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              Target: 10%
-            </div>
-          </div>
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              50%
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              Target: 50%
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="portfolio-property-row"
-    >
-      <div
-        className="portfolio-property-row__image"
-        style={
-          Object {
-            "backgroundImage": "url(\\"https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg\\")",
-          }
+    <PortfolioPropertyGroupRow
+      image_url="https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg"
+      key="0"
+      kpi_order={
+        Array [
+          "leased_rate",
+          "occupancy_rate",
+          "lease_cd_rate",
+          "renewal_rate",
+        ]
+      }
+      kpis={
+        Object {
+          "lease_cd_rate": 0.1,
+          "leased_rate": 0.9,
+          "occupancy_rate": 0.8,
+          "renewal_rate": 0.5,
         }
-      />
-      <div
-        className="portfolio-property-row__title"
-      >
-        <div
-          className="portfolio-property-row__name"
-        >
-          Building D
-        </div>
-        <div
-          className="portfolio-property-row__address"
-        >
-          San Antonio, TX 78207
-        </div>
-      </div>
-      <div
-        className="portfolio-property-row__info"
-      >
-        <div
-          className="property-status portfolio-property-row__health property-status--at-risk"
-        >
-          AT RISK
-        </div>
-        <a
-          className="portfolio-property-row__link"
-          href="/"
-          onClick={[Function]}
-          style={
-            Object {
-              "color": "inherit",
-              "textDecoration": "inherit",
-            }
-          }
-        >
-          View Property
-        </a>
-      </div>
-      <div
-        className="portfolio-property-row__kpis"
-      >
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            90%
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            Target: 90%
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            80%
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            Target: 80%
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            10%
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            Target: 10%
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            50%
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            Target: 50%
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="portfolio-property-row"
-    >
-      <div
-        className="portfolio-property-row__image"
-        style={
+      }
+      name="West"
+      properties={
+        Array [
           Object {
-            "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
-          }
+            "address": "San Antonio, TX 78207",
+            "health": 0,
+            "image_url": "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+            "kpis": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+            "name": "Building A",
+            "targets": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+          },
+          Object {
+            "address": "San Antonio, TX 78208",
+            "health": 1,
+            "image_url": "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+            "kpis": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+            "name": "Building B",
+            "targets": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+          },
+          Object {
+            "address": "San Antonio, TX 78209",
+            "health": 2,
+            "image_url": "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+            "kpis": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+            "name": "Building C",
+            "targets": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+          },
+        ]
+      }
+      targets={
+        Object {
+          "lease_cd_rate": 0.1,
+          "leased_rate": 0.9,
+          "occupancy_rate": 0.8,
+          "renewal_rate": 0.5,
         }
-      />
-      <div
-        className="portfolio-property-row__title"
-      >
-        <div
-          className="portfolio-property-row__name"
-        >
-          Remarkably National
-        </div>
-        <div
-          className="portfolio-property-row__address"
-        >
-          San Antonio, TX 78207
-        </div>
-      </div>
-      <div
-        className="portfolio-property-row__info"
-      >
-        <div
-          className="property-status portfolio-property-row__health property-status--on-track"
-        >
-          ON TRACK
-        </div>
-        <a
-          className="portfolio-property-row__link"
-          href="/"
-          onClick={[Function]}
-          style={
-            Object {
-              "color": "inherit",
-              "textDecoration": "inherit",
-            }
-          }
-        >
-          View Property
-        </a>
-      </div>
-      <div
-        className="portfolio-property-row__kpis"
-      >
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            90%
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            Target: 90%
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            80%
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            Target: 80%
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            10%
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            Target: 10%
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            50%
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            Target: 50%
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="portfolio-property-group-row"
-      style={Object {}}
-    >
-      <div
-        className="portfolio-property-group-row__group"
-        onClick={[Function]}
-      >
-        <div
-          className="portfolio-property-group-row__image"
-          style={
-            Object {
-              "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
-            }
-          }
-        />
-        <div
-          className="portfolio-property-group-row__title"
-        >
-          <div
-            className="portfolio-property-group-row__name"
-          >
-            Portfolio Average
-          </div>
-        </div>
-        <div
-          className="portfolio-property-group-row__kpis"
-        >
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              90%
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              Target: 90%
-            </div>
-          </div>
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              80%
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              Target: 80%
-            </div>
-          </div>
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              10%
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              Target: 10%
-            </div>
-          </div>
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              50%
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              Target: 50%
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      }
+      type="group"
+    />
+    <PortfolioPropertyRow
+      address="San Antonio, TX 78207"
+      health={1}
+      image_url="https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg"
+      key="1"
+      kpi_order={
+        Array [
+          "leased_rate",
+          "occupancy_rate",
+          "lease_cd_rate",
+          "renewal_rate",
+        ]
+      }
+      kpis={
+        Object {
+          "lease_cd_rate": 0.1,
+          "leased_rate": 0.9,
+          "occupancy_rate": 0.8,
+          "renewal_rate": 0.5,
+        }
+      }
+      name="Building D"
+      targets={
+        Object {
+          "lease_cd_rate": 0.1,
+          "leased_rate": 0.9,
+          "occupancy_rate": 0.8,
+          "renewal_rate": 0.5,
+        }
+      }
+      type="individual"
+    />
+    <PortfolioPropertyRow
+      address="San Antonio, TX 78207"
+      health={2}
+      image_url="https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg"
+      key="2"
+      kpi_order={
+        Array [
+          "leased_rate",
+          "occupancy_rate",
+          "lease_cd_rate",
+          "renewal_rate",
+        ]
+      }
+      kpis={
+        Object {
+          "lease_cd_rate": 0.1,
+          "leased_rate": 0.9,
+          "occupancy_rate": 0.8,
+          "renewal_rate": 0.5,
+        }
+      }
+      name="Remarkably National"
+      targets={
+        Object {
+          "lease_cd_rate": 0.1,
+          "leased_rate": 0.9,
+          "occupancy_rate": 0.8,
+          "renewal_rate": 0.5,
+        }
+      }
+      type="individual"
+    />
+    <PortfolioPropertyGroupRow
+      image_url="https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg"
+      key="3"
+      kpi_order={
+        Array [
+          "leased_rate",
+          "occupancy_rate",
+          "lease_cd_rate",
+          "renewal_rate",
+        ]
+      }
+      kpis={
+        Object {
+          "lease_cd_rate": 0.1,
+          "leased_rate": 0.9,
+          "occupancy_rate": 0.8,
+          "renewal_rate": 0.5,
+        }
+      }
+      name="Portfolio Average"
+      property_count={5}
+      targets={
+        Object {
+          "lease_cd_rate": 0.1,
+          "leased_rate": 0.9,
+          "occupancy_rate": 0.8,
+          "renewal_rate": 0.5,
+        }
+      }
+      type="group"
+    />
   </div>
 </div>
 `;
@@ -457,453 +266,206 @@ exports[`PortfolioTable renders partial KPIs 1`] = `
     >
       <div
         className="portfolio-table__kpi"
+        key="leased_rate"
       >
-        Lease Rate
+        <span>
+          Lease Rate
+          <Connect(InfoTooltipBase)
+            transKey="leased_rate"
+          />
+        </span>
       </div>
       <div
         className="portfolio-table__kpi"
+        key="occupancy_rate"
       >
-        Occupancy Rate
+        <span>
+          Occupancy Rate
+          <Connect(InfoTooltipBase)
+            transKey="occupied_rate"
+          />
+        </span>
       </div>
       <div
         className="portfolio-table__kpi"
+        key="lease_cd_rate"
       >
-        CD Rate
+        <span>
+          CD Rate
+          <Connect(InfoTooltipBase) />
+        </span>
       </div>
       <div
         className="portfolio-table__kpi"
+        key="renewal_rate"
       >
-        Renewal Rate
+        <span>
+          Renewal Rate
+          <Connect(InfoTooltipBase)
+            transKey="retention_rate"
+          />
+        </span>
       </div>
     </div>
   </div>
   <div
     className="portfolio-table__body"
   >
-    <div
-      className="portfolio-property-group-row"
-      style={Object {}}
-    >
-      <div
-        className="portfolio-property-group-row__group portfolio-property-group-row__group--opening"
-        onClick={[Function]}
-      >
-        <div
-          className="portfolio-property-group-row__image"
-          style={
-            Object {
-              "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
-            }
-          }
-        />
-        <div
-          className="portfolio-property-group-row__title"
-        >
-          <div
-            className="portfolio-property-group-row__name"
-          >
-            West
-          </div>
-          <div
-            className="portfolio-property-group-row__property-count"
-          >
-            3
-             Properties
-          </div>
-        </div>
-        <div
-          className="portfolio-property-group-row__kpis"
-        >
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              90%
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              Target: 90%
-            </div>
-          </div>
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              80%
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              Target: 80%
-            </div>
-          </div>
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              10%
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              Target: 10%
-            </div>
-          </div>
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              50%
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              Target: 50%
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="portfolio-property-row portfolio-property-row--with-alarm"
-    >
-      <div
-        className="portfolio-property-row__alarm"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-      >
-        <svg
-          aria-hidden="true"
-          className="portfolio-property-row__alarm-icon"
-          color="inherit"
-          fill="none"
-          focusable="false"
-          height="1em"
-          role="presentation"
-          viewBox="0 0 20 20"
-          width="1em"
-        >
-          <circle
-            cx="10"
-            cy="10"
-            r="9.5"
-            stroke="#F3F65C"
-          />
-          <path
-            d="M8.5 4.40002L8.96644 11.8667H11.0263L11.5536 4.40002H8.5ZM10.0037 13.2667C9.23695 13.2667 8.75863 13.7118 8.75863 14.437C8.75863 15.1557 9.23742 15.6 10.0037 15.6C10.7699 15.6 11.2424 15.1557 11.2424 14.437C11.2424 13.7118 10.7704 13.2667 10.0037 13.2667Z"
-            fill="#F3F65C"
-          />
-        </svg>
-      </div>
-      <div
-        className="portfolio-property-row__image"
-        style={
-          Object {
-            "backgroundImage": "url(\\"https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg\\")",
-          }
+    <PortfolioPropertyGroupRow
+      image_url="https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg"
+      key="0"
+      kpi_order={
+        Array [
+          "leased_rate",
+          "occupancy_rate",
+          "lease_cd_rate",
+          "renewal_rate",
+        ]
+      }
+      kpis={
+        Object {
+          "lease_cd_rate": 0.1,
+          "leased_rate": 0.9,
+          "occupancy_rate": 0.8,
+          "renewal_rate": 0.5,
         }
-      />
-      <div
-        className="portfolio-property-row__title"
-      >
-        <div
-          className="portfolio-property-row__name"
-        >
-          Building D
-        </div>
-        <div
-          className="portfolio-property-row__address"
-        >
-          San Antonio, TX 78207
-        </div>
-      </div>
-      <div
-        className="portfolio-property-row__info"
-      >
-        <div
-          className="property-status portfolio-property-row__health property-status--at-risk"
-        >
-          AT RISK
-        </div>
-        <a
-          className="portfolio-property-row__link"
-          href="/"
-          onClick={[Function]}
-          style={
-            Object {
-              "color": "inherit",
-              "textDecoration": "inherit",
-            }
-          }
-        >
-          View Property
-        </a>
-      </div>
-      <div
-        className="portfolio-property-row__kpis"
-      >
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="portfolio-property-row"
-    >
-      <div
-        className="portfolio-property-row__image"
-        style={
+      }
+      name="West"
+      properties={
+        Array [
           Object {
-            "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
-          }
+            "address": "San Antonio, TX 78207",
+            "health": -1,
+            "image_url": "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+            "name": "Building A",
+          },
+          Object {
+            "address": "San Antonio, TX 78208",
+            "health": 1,
+            "image_url": "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+            "kpis": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+            "name": "Building B",
+            "targets": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+          },
+          Object {
+            "address": "San Antonio, TX 78209",
+            "health": 2,
+            "image_url": "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+            "kpis": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+            "name": "Building C",
+            "targets": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+          },
+        ]
+      }
+      targets={
+        Object {
+          "lease_cd_rate": 0.1,
+          "leased_rate": 0.9,
+          "occupancy_rate": 0.8,
+          "renewal_rate": 0.5,
         }
-      />
-      <div
-        className="portfolio-property-row__title"
-      >
-        <div
-          className="portfolio-property-row__name"
-        >
-          Remarkably National
-        </div>
-        <div
-          className="portfolio-property-row__address"
-        >
-          San Antonio, TX 78207
-        </div>
-      </div>
-      <div
-        className="portfolio-property-row__info"
-      >
-        <div
-          className="property-status portfolio-property-row__health property-status--on-track"
-        >
-          ON TRACK
-        </div>
-        <a
-          className="portfolio-property-row__link"
-          href="/"
-          onClick={[Function]}
-          style={
-            Object {
-              "color": "inherit",
-              "textDecoration": "inherit",
-            }
-          }
-        >
-          View Property
-        </a>
-      </div>
-      <div
-        className="portfolio-property-row__kpis"
-      >
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            90%
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            Target: 90%
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            80%
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            Target: 80%
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            10%
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            Target: 10%
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            50%
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            Target: 50%
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="portfolio-property-group-row"
-      style={Object {}}
-    >
-      <div
-        className="portfolio-property-group-row__group"
-        onClick={[Function]}
-      >
-        <div
-          className="portfolio-property-group-row__image"
-          style={
-            Object {
-              "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
-            }
-          }
-        />
-        <div
-          className="portfolio-property-group-row__title"
-        >
-          <div
-            className="portfolio-property-group-row__name"
-          >
-            Portfolio Average
-          </div>
-        </div>
-        <div
-          className="portfolio-property-group-row__kpis"
-        >
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              90%
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              Target: 90%
-            </div>
-          </div>
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              80%
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              Target: 80%
-            </div>
-          </div>
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              10%
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              Target: 10%
-            </div>
-          </div>
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              50%
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              Target: 50%
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+      }
+      type="group"
+    />
+    <PortfolioPropertyRow
+      address="San Antonio, TX 78207"
+      health={1}
+      image_url="https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg"
+      key="1"
+      kpi_order={
+        Array [
+          "leased_rate",
+          "occupancy_rate",
+          "lease_cd_rate",
+          "renewal_rate",
+        ]
+      }
+      name="Building D"
+      type="individual"
+    />
+    <PortfolioPropertyRow
+      address="San Antonio, TX 78207"
+      health={2}
+      image_url="https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg"
+      key="2"
+      kpi_order={
+        Array [
+          "leased_rate",
+          "occupancy_rate",
+          "lease_cd_rate",
+          "renewal_rate",
+        ]
+      }
+      kpis={
+        Object {
+          "lease_cd_rate": 0.1,
+          "leased_rate": 0.9,
+          "occupancy_rate": 0.8,
+          "renewal_rate": 0.5,
+        }
+      }
+      name="Remarkably National"
+      targets={
+        Object {
+          "lease_cd_rate": 0.1,
+          "leased_rate": 0.9,
+          "occupancy_rate": 0.8,
+          "renewal_rate": 0.5,
+        }
+      }
+      type="individual"
+    />
+    <PortfolioPropertyGroupRow
+      image_url="https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg"
+      key="3"
+      kpi_order={
+        Array [
+          "leased_rate",
+          "occupancy_rate",
+          "lease_cd_rate",
+          "renewal_rate",
+        ]
+      }
+      kpis={
+        Object {
+          "lease_cd_rate": 0.1,
+          "leased_rate": 0.9,
+          "occupancy_rate": 0.8,
+          "renewal_rate": 0.5,
+        }
+      }
+      name="Portfolio Average"
+      property_count={5}
+      targets={
+        Object {
+          "lease_cd_rate": 0.1,
+          "leased_rate": 0.9,
+          "occupancy_rate": 0.8,
+          "renewal_rate": 0.5,
+        }
+      }
+      type="group"
+    />
   </div>
 </div>
 `;
@@ -925,481 +487,134 @@ exports[`PortfolioTable renders without KPIs 1`] = `
     >
       <div
         className="portfolio-table__kpi"
+        key="leased_rate"
       >
-        Lease Rate
+        <span>
+          Lease Rate
+          <Connect(InfoTooltipBase)
+            transKey="leased_rate"
+          />
+        </span>
       </div>
       <div
         className="portfolio-table__kpi"
+        key="occupancy_rate"
       >
-        Occupancy Rate
+        <span>
+          Occupancy Rate
+          <Connect(InfoTooltipBase)
+            transKey="occupied_rate"
+          />
+        </span>
       </div>
       <div
         className="portfolio-table__kpi"
+        key="lease_cd_rate"
       >
-        CD Rate
+        <span>
+          CD Rate
+          <Connect(InfoTooltipBase) />
+        </span>
       </div>
       <div
         className="portfolio-table__kpi"
+        key="renewal_rate"
       >
-        Renewal Rate
+        <span>
+          Renewal Rate
+          <Connect(InfoTooltipBase)
+            transKey="retention_rate"
+          />
+        </span>
       </div>
     </div>
   </div>
   <div
     className="portfolio-table__body"
   >
-    <div
-      className="portfolio-property-group-row"
-      style={Object {}}
-    >
-      <div
-        className="portfolio-property-group-row__group portfolio-property-group-row__group--opening"
-        onClick={[Function]}
-      >
-        <div
-          className="portfolio-property-group-row__image"
-          style={
-            Object {
-              "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
-            }
-          }
-        />
-        <div
-          className="portfolio-property-group-row__title"
-        >
-          <div
-            className="portfolio-property-group-row__name"
-          >
-            West
-          </div>
-          <div
-            className="portfolio-property-group-row__property-count"
-          >
-            3
-             Properties
-          </div>
-        </div>
-        <div
-          className="portfolio-property-group-row__kpis"
-        >
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              
-            </div>
-          </div>
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              
-            </div>
-          </div>
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              
-            </div>
-          </div>
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="portfolio-property-row portfolio-property-row--with-alarm"
-    >
-      <div
-        className="portfolio-property-row__alarm"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-      >
-        <svg
-          aria-hidden="true"
-          className="portfolio-property-row__alarm-icon"
-          color="inherit"
-          fill="none"
-          focusable="false"
-          height="1em"
-          role="presentation"
-          viewBox="0 0 20 20"
-          width="1em"
-        >
-          <circle
-            cx="10"
-            cy="10"
-            r="9.5"
-            stroke="#F3F65C"
-          />
-          <path
-            d="M8.5 4.40002L8.96644 11.8667H11.0263L11.5536 4.40002H8.5ZM10.0037 13.2667C9.23695 13.2667 8.75863 13.7118 8.75863 14.437C8.75863 15.1557 9.23742 15.6 10.0037 15.6C10.7699 15.6 11.2424 15.1557 11.2424 14.437C11.2424 13.7118 10.7704 13.2667 10.0037 13.2667Z"
-            fill="#F3F65C"
-          />
-        </svg>
-      </div>
-      <div
-        className="portfolio-property-row__image"
-        style={
+    <PortfolioPropertyGroupRow
+      image_url="https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg"
+      key="0"
+      kpi_order={
+        Array [
+          "leased_rate",
+          "occupancy_rate",
+          "lease_cd_rate",
+          "renewal_rate",
+        ]
+      }
+      name="West"
+      properties={
+        Array [
           Object {
-            "backgroundImage": "url(\\"https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg\\")",
-          }
-        }
-      />
-      <div
-        className="portfolio-property-row__title"
-      >
-        <div
-          className="portfolio-property-row__name"
-        >
-          Building D
-        </div>
-        <div
-          className="portfolio-property-row__address"
-        >
-          San Antonio, TX 78207
-        </div>
-      </div>
-      <div
-        className="portfolio-property-row__info"
-      >
-        <div
-          className="property-status portfolio-property-row__health property-status--not-available"
-        >
-          CAMPAIGN PENDING
-        </div>
-        <a
-          className="portfolio-property-row__link"
-          href="/"
-          onClick={[Function]}
-          style={
-            Object {
-              "color": "inherit",
-              "textDecoration": "inherit",
-            }
-          }
-        >
-          View Property
-        </a>
-      </div>
-      <div
-        className="portfolio-property-row__kpis"
-      >
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="portfolio-property-row portfolio-property-row--with-alarm"
-    >
-      <div
-        className="portfolio-property-row__alarm"
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-      >
-        <svg
-          aria-hidden="true"
-          className="portfolio-property-row__alarm-icon"
-          color="inherit"
-          fill="none"
-          focusable="false"
-          height="1em"
-          role="presentation"
-          viewBox="0 0 20 20"
-          width="1em"
-        >
-          <circle
-            cx="10"
-            cy="10"
-            r="9.5"
-            stroke="#F3F65C"
-          />
-          <path
-            d="M8.5 4.40002L8.96644 11.8667H11.0263L11.5536 4.40002H8.5ZM10.0037 13.2667C9.23695 13.2667 8.75863 13.7118 8.75863 14.437C8.75863 15.1557 9.23742 15.6 10.0037 15.6C10.7699 15.6 11.2424 15.1557 11.2424 14.437C11.2424 13.7118 10.7704 13.2667 10.0037 13.2667Z"
-            fill="#F3F65C"
-          />
-        </svg>
-      </div>
-      <div
-        className="portfolio-property-row__image"
-        style={
+            "address": "San Antonio, TX 78207",
+            "health": -1,
+            "image_url": "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+            "name": "Building A",
+          },
           Object {
-            "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
-          }
-        }
-      />
-      <div
-        className="portfolio-property-row__title"
-      >
-        <div
-          className="portfolio-property-row__name"
-        >
-          Remarkably National
-        </div>
-        <div
-          className="portfolio-property-row__address"
-        >
-          San Antonio, TX 78207
-        </div>
-      </div>
-      <div
-        className="portfolio-property-row__info"
-      >
-        <div
-          className="property-status portfolio-property-row__health property-status--not-available"
-        >
-          CAMPAIGN PENDING
-        </div>
-        <a
-          className="portfolio-property-row__link"
-          href="/"
-          onClick={[Function]}
-          style={
-            Object {
-              "color": "inherit",
-              "textDecoration": "inherit",
-            }
-          }
-        >
-          View Property
-        </a>
-      </div>
-      <div
-        className="portfolio-property-row__kpis"
-      >
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row__kpi"
-        >
-          <div
-            className="portfolio-property-row__value"
-          >
-            
-          </div>
-          <div
-            className="portfolio-property-row__target"
-          >
-            
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="portfolio-property-group-row"
-      style={Object {}}
-    >
-      <div
-        className="portfolio-property-group-row__group"
-        onClick={[Function]}
-      >
-        <div
-          className="portfolio-property-group-row__image"
-          style={
-            Object {
-              "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
-            }
-          }
-        />
-        <div
-          className="portfolio-property-group-row__title"
-        >
-          <div
-            className="portfolio-property-group-row__name"
-          >
-            Portfolio Average
-          </div>
-        </div>
-        <div
-          className="portfolio-property-group-row__kpis"
-        >
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              
-            </div>
-          </div>
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              
-            </div>
-          </div>
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              
-            </div>
-          </div>
-          <div
-            className="portfolio-property-group-row__kpi"
-          >
-            <div
-              className="portfolio-property-group-row__value"
-            >
-              
-            </div>
-            <div
-              className="portfolio-property-group-row__target"
-            >
-              
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            "address": "San Antonio, TX 78208",
+            "health": -1,
+            "image_url": "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+            "name": "Building B",
+          },
+          Object {
+            "address": "San Antonio, TX 78209",
+            "health": -1,
+            "image_url": "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+            "name": "Building C",
+          },
+        ]
+      }
+      type="group"
+    />
+    <PortfolioPropertyRow
+      address="San Antonio, TX 78207"
+      health={-1}
+      image_url="https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg"
+      key="1"
+      kpi_order={
+        Array [
+          "leased_rate",
+          "occupancy_rate",
+          "lease_cd_rate",
+          "renewal_rate",
+        ]
+      }
+      name="Building D"
+      type="individual"
+    />
+    <PortfolioPropertyRow
+      address="San Antonio, TX 78207"
+      health={-1}
+      image_url="https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg"
+      key="2"
+      kpi_order={
+        Array [
+          "leased_rate",
+          "occupancy_rate",
+          "lease_cd_rate",
+          "renewal_rate",
+        ]
+      }
+      name="Remarkably National"
+      type="individual"
+    />
+    <PortfolioPropertyGroupRow
+      image_url="https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg"
+      key="3"
+      kpi_order={
+        Array [
+          "leased_rate",
+          "occupancy_rate",
+          "lease_cd_rate",
+          "renewal_rate",
+        ]
+      }
+      name="Portfolio Average"
+      property_count={5}
+      type="group"
+    />
   </div>
 </div>
 `;
