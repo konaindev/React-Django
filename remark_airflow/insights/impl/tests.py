@@ -32,13 +32,13 @@ class VarPrevHealthStatusTestCase(TestCase):
         start = datetime.date(year=2019, month=5, day=19)
         end = datetime.date(year=2019, month=5, day=26)
         result = var_prev_health_status(self.project.public_id, start, end)
-        self.assertIsNone(result)
+        self.assertEqual(result, -1)
 
     def test_first_period(self):
         start = datetime.date(year=2019, month=5, day=31)
         end = datetime.date(year=2019, month=6, day=7)
         result = var_prev_health_status(self.project.public_id, start, end)
-        self.assertIsNone(result)
+        self.assertEqual(result, -1)
 
     def test_last_period(self):
         start = datetime.date(year=2019, month=6, day=14)
