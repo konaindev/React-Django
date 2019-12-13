@@ -38,13 +38,38 @@ export default class AddTagField extends React.PureComponent {
     }
   };
 
+  renderTagName = word => {
+    const { value } = this.props;
+    if (!word || !value) {
+      return word;
+    }
+    const valueRe = new RegExp(`(${value})`, "i");
+    const parts = word.split(valueRe);
+    if (parts.length <= 1) {
+      return word;
+    }
+    return parts.reduce((acc, p) => {
+      let w;
+      if (p.match(valueRe)) {
+        w = (
+          <span className="add-tag-field__suggestion-tag-name-word">{p}</span>
+        );
+      } else {
+        w = p;
+      }
+      return [...acc, w];
+    });
+  };
+
   renderSuggestedTags = () => {
     if (!this.props.suggestedTags.length) {
       return;
     }
     const tags = this.props.suggestedTags.map(tag => (
       <div className="add-tag-field__suggestion-tag" key={tag.name}>
-        <div className="add-tag-field__suggestion-tag-name">{tag.name}</div>
+        <div className="add-tag-field__suggestion-tag-name">
+          {this.renderTagName(tag.name)}
+        </div>
         <div className="add-tag-field__suggestion-tag-count">{tag.count}</div>
       </div>
     ));

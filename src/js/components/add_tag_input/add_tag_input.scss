@@ -67,3 +67,7 @@ $tags-spacing: 20px;
     margin-left: $tag-count-spacing;
     color: $tag-count-color;
 }
+
+.add-tag-field__suggestion-tag-name-word {
+    text-decoration: underline;
+}
