@@ -40,7 +40,7 @@ class WeeklyInsights(models.Model):
 
     @facts_data.setter
     def facts_data(self, value):
-        data = json.dumps(value)
+        data = json.dumps(value, default=str)
         self.facts = data
 
     @property
@@ -49,7 +49,7 @@ class WeeklyInsights(models.Model):
 
     @insights_data.setter
     def insights_data(self, value):
-        data = json.dumps(value)
+        data = json.dumps(value, default=str)
         self.insights = data
 
 
@@ -80,7 +80,7 @@ class BaselineInsights(models.Model):
 
     @facts_data.setter
     def facts_data(self, value):
-        data = json.dumps(value)
+        data = json.dumps(value, default=str)
         self.facts = data
 
     @property
@@ -89,5 +89,5 @@ class BaselineInsights(models.Model):
 
     @insights_data.setter
     def insights_data(self, value):
-        data = json.dumps(value)
+        data = json.dumps(value, default=str)
         self.insights = data
