@@ -87,8 +87,6 @@ jobs:
   deploy-airflow-staging:
     docker:
       - image: google/cloud-sdk
-
-    # working_directory: ~/repo/remark_airflow
     
     steps:
       - run:
@@ -100,12 +98,43 @@ jobs:
       - run:
           name: Maintenance Mode On
           command: heroku maintenance:on --app remarkably-staging
-      - run: pwd
-      - run: ls -a
       - run:
-          name: set postgres_url
-          command: echo "export DATABASE_URL=$(python3 -c 'import remark_airflow.setup_utils as setup_utils; setup_utils.get_url()')" >> $BASH_ENV
-      - run: echo $DATABASE_URL
+          name: Pause running dags
+          command:    |
+              python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.pause_all_dags()"
+      - run:
+          name: Compare and Update PyPi packages 
+          command: python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_pypi_packages()"
+          no_output_timeout: 30m
+      - run: 
+          name: Set Composer BUCKET
+          command:    |
+              get_bucket=$(gcloud composer environments describe $COMPOSER_ENV \
+              --location us-central1 \
+              --format="get(config.dagGcsPrefix)" | sed -e 's/gs:\/\///g' -e's/\/dags//g')
+              echo "export BUCKET=$get_bucket" >> $BASH_ENV
+
+      # NOTE: 
+      #   Postgres connection might change in heroku. 
+      #   Airflow doesn't have CLI commands to edit a connection, therefore, it will delete and set up again based on configurations from heroku
+      - run:
+          name: delete postgres connection
+          command:    |
+              gcloud composer environments run $COMPOSER_ENV \
+              --location us-central1 connections -- --delete --conn_id=postgres_default
+      - run:
+          name: setup postgres connection
+          command: python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.set_postgres_connection_airflow()"
+      - run: 
+          command:    |
+              set -e
+              echo "Syncing plugins folder..."
+              gsutil rsync -d -r ./remark_airflow/plugins gs://"$BUCKET"/plugins/
+      - run: 
+          command:    |
+              set -e
+              echo "Syncing dags folder..."
+              gsutil rsync -d -r ./remark_airflow/dags gs://"$BUCKET"/dags/
       - run:
           name: Maintenance Mode Off
           command: heroku maintenance:off --app remarkably-staging
@@ -249,23 +278,14 @@ jobs:
 workflows:
   version: 2.1
 
-  airflow-test:
+  tests-only:
     jobs:
-      - deploy-airflow-staging:
+      - build:
           filters:
             branches:
               ignore:
                 - staging
                 - master
-
-  # tests-only:
-  #   jobs:
-  #     - build:
-  #         filters:
-  #           branches:
-  #             ignore:
-  #               - staging
-  #               - master
 
   build-deploy:
     jobs:
@@ -274,10 +294,17 @@ workflows:
           filters:
             branches:
               only: staging
-      - deploy-staging:
+      - deploy-airflow-staging:
           context: stage-aws
           requires:
             - build
+          filters:
+            branches:
+              only: staging
+      - deploy-staging:
+          context: stage-aws
+          requires:
+            - deploy-airflow-staging
           filters:
             branches:
               only: staging
