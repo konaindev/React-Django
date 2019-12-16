@@ -1,5 +1,6 @@
 import json
 
+from django.contrib.postgres.fields import JSONField
 from django.db import models
 
 from remark.lib.tokens import public_id
@@ -10,7 +11,7 @@ def get_weekly_insights_id():
 
 
 def get_baseline_insights_id():
-    return public_id("baseline_ins")
+    return public_id("baseline_insights")
 
 
 class WeeklyInsights(models.Model):
@@ -30,32 +31,14 @@ class WeeklyInsights(models.Model):
 
     end = models.DateField(help_text="End date", blank=False, null=False)
 
-    facts = models.TextField(blank=False, null=False)
+    facts = JSONField(blank=False, null=False)
 
-    insights = models.TextField(blank=False, null=False)
-
-    @property
-    def facts_data(self):
-        return json.loads(self.facts)
-
-    @facts_data.setter
-    def facts_data(self, value):
-        data = json.dumps(value, default=str)
-        self.facts = data
-
-    @property
-    def insights_data(self):
-        return json.loads(self.insights)
-
-    @insights_data.setter
-    def insights_data(self, value):
-        data = json.dumps(value, default=str)
-        self.insights = data
+    insights = JSONField(blank=False, null=False)
 
 
 class BaselineInsights(models.Model):
     id = models.CharField(
-        primary_key=True, max_length=32, default=get_baseline_insights_id
+        primary_key=True, max_length=34, default=get_baseline_insights_id
     )
 
     project = models.ForeignKey(
@@ -70,24 +53,6 @@ class BaselineInsights(models.Model):
 
     end = models.DateField(help_text="End date", blank=False, null=False)
 
-    facts = models.TextField(blank=False, null=False)
+    facts = JSONField(blank=False, null=False)
 
-    insights = models.TextField(blank=False, null=False)
-
-    @property
-    def facts_data(self):
-        return json.loads(self.facts)
-
-    @facts_data.setter
-    def facts_data(self, value):
-        data = json.dumps(value, default=str)
-        self.facts = data
-
-    @property
-    def insights_data(self):
-        return json.loads(self.insights)
-
-    @insights_data.setter
-    def insights_data(self, value):
-        data = json.dumps(value, default=str)
-        self.insights = data
+    insights = JSONField(blank=False, null=False)
