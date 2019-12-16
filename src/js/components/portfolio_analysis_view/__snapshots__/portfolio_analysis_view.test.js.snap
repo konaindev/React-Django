@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`PortfolioAnalysisView renders correctly 1`] = `
-<div
-  className="container portfolio-analysis"
+<Container
+  className="portfolio-analysis"
 >
   <div
     className="portfolio-analysis__header"
@@ -16,228 +16,66 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
   <div
     className="portfolio-analysis__controls"
   >
-    <div
-      className="select portfolio-analysis__select-kpi select--default css-2b097c-container"
-      onKeyDown={[Function]}
-    >
-      <div
-        className="select__control css-yk16xz-control"
-        onMouseDown={[Function]}
-        onTouchEnd={[Function]}
-      >
-        <div
-          className="select__value-container select__value-container--has-value css-1hwfws3"
-        >
-          <div
-            className="select__single-value css-1uccc91-singleValue"
-          >
-            Leasing Performance
-          </div>
-          <input
-            className="css-62g3xt-dummyInput"
-            disabled={false}
-            id="react-select-2-input"
-            onBlur={[Function]}
-            onChange={[Function]}
-            onFocus={[Function]}
-            readOnly={true}
-            tabIndex="0"
-            value=""
-          />
-        </div>
-        <div
-          className="select__indicators css-1g48xl4-IndicatorsContainer"
-        >
-          <span
-            className="select__indicator-separator css-1okebmr-indicatorSeparator"
-          />
-          <div
-            aria-hidden="true"
-            className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
-            onMouseDown={[Function]}
-            onTouchEnd={[Function]}
-          >
-            <svg
-              aria-hidden="true"
-              className="select__dropdown-arrow select__dropdown-arrow--down"
-              color="inherit"
-              focusable="false"
-              height="1em"
-              role="presentation"
-              viewBox="0 0 10 5"
-              width="1em"
-            >
-              <path
-                d="M1 1.16134L4.92334 4.5"
-                stroke="currentColor"
-                strokeLinecap="round"
-              />
-              <path
-                d="M8.82812 1.16134L5 4.5"
-                stroke="currentColor"
-                strokeLinecap="round"
-              />
-            </svg>
-            <svg
-              aria-hidden="true"
-              className="select__dropdown-arrow select__dropdown-arrow--up"
-              color="inherit"
-              focusable="false"
-              height="1em"
-              role="presentation"
-              viewBox="0 0 10 5"
-              width="1em"
-            >
-              <path
-                d="M1 3.83866L4.92334 0.5"
-                stroke="currentColor"
-                strokeLinecap="round"
-              />
-              <path
-                d="M8.82812 3.83866L5 0.5"
-                stroke="currentColor"
-                strokeLinecap="round"
-              />
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="date-range-selector"
-    >
-      <div
-        className="select date-range-selector__select select--default css-2b097c-container"
-        onKeyDown={[Function]}
-      >
-        <div
-          className="select__control css-yk16xz-control"
-          onMouseDown={[Function]}
-          onTouchEnd={[Function]}
-        >
-          <div
-            className="select__value-container select__value-container--has-value css-1hwfws3"
-          >
-            <div
-              className="select__single-value css-1uccc91-singleValue"
-            >
-              Custom
-            </div>
-            <input
-              className="css-62g3xt-dummyInput"
-              disabled={false}
-              id="react-select-3-input"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
-              readOnly={true}
-              tabIndex="0"
-              value=""
-            />
-          </div>
-          <div
-            className="select__indicators css-1g48xl4-IndicatorsContainer"
-          >
-            <span
-              className="select__indicator-separator css-1okebmr-indicatorSeparator"
-            />
-            <div
-              aria-hidden="true"
-              className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
-              onMouseDown={[Function]}
-              onTouchEnd={[Function]}
-            >
-              <svg
-                aria-hidden="true"
-                className="select__dropdown-arrow select__dropdown-arrow--down"
-                color="inherit"
-                focusable="false"
-                height="1em"
-                role="presentation"
-                viewBox="0 0 10 5"
-                width="1em"
-              >
-                <path
-                  d="M1 1.16134L4.92334 4.5"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M8.82812 1.16134L5 4.5"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                />
-              </svg>
-              <svg
-                aria-hidden="true"
-                className="select__dropdown-arrow select__dropdown-arrow--up"
-                color="inherit"
-                focusable="false"
-                height="1em"
-                role="presentation"
-                viewBox="0 0 10 5"
-                width="1em"
-              >
-                <path
-                  d="M1 3.83866L4.92334 0.5"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M8.82812 3.83866L5 0.5"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="date-range date-range-selector__data-picker"
-      >
-        <div>
-          <div
-            className="date-range__input"
-            onClick={[Function]}
-          >
-            <span
-              className="date-range__value"
-            >
-              04/15/19
-            </span>
-            <span>
-              to
-            </span>
-            <span
-              className="date-range__value"
-            >
-              04/22/19
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+    <Select
+      className="portfolio-analysis__select-kpi"
+      components={Object {}}
+      isMulti={false}
+      isSearchable={false}
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "label": "Leasing Performance",
+            "value": "leasing_performance",
+          },
+          Object {
+            "label": "Conversion Rates",
+            "value": "conversion_rates",
+          },
+          Object {
+            "label": "Retention Performance",
+            "value": "retention_performance",
+          },
+        ]
+      }
+      size=""
+      theme="default"
+      value={
+        Object {
+          "label": "Leasing Performance",
+          "value": "leasing_performance",
+        }
+      }
+    />
+    <DateRangeSelector
+      dateFormat="YYYY-MM-DD"
+      end_date="2019-04-22"
+      onChange={[Function]}
+      preset="custom"
+      start_date="2019-04-15"
+    />
   </div>
   <div
     className="portfolio-analysis__title-bar"
   >
-    <div
-      className="toggle-button"
-    >
-      <button
-        className="toggle-button__item toggle-button__item--selected"
-        onClick={[Function]}
-      >
-        Property Averages
-      </button>
-      <button
-        className="toggle-button__item"
-        onClick={[Function]}
-      >
-        Property Totals
-      </button>
-    </div>
+    <RmbNavLinks
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "label": "Property Averages",
+            "tooltip": "property_averages",
+            "value": "1",
+          },
+          Object {
+            "label": "Property Totals",
+            "tooltip": "property_totals",
+            "value": "0",
+          },
+        ]
+      }
+      selected="1"
+    />
     <div
       className="portfolio-analysis__property-count"
     >
@@ -248,550 +86,199 @@ exports[`PortfolioAnalysisView renders correctly 1`] = `
   <div
     className="portfolio-analysis__kpi-cards"
   >
-    <div
-      className="kpi-card portfolio-analysis__kpi-card kpi-card--off-track"
-    >
-      <div
-        className="kpi-card__bar"
-      />
-      <div
-        className="kpi-card__health"
-      >
-        <div
-          className="property-status property-status--off-track"
-        >
-          OFF TRACK
-        </div>
-      </div>
-      <div
-        className="kpi-card__value"
-      >
-        5.0%
-      </div>
-      <div
-        className="kpi-card__name"
-      >
-        USV → INQ
-      </div>
-      <div
-        className="kpi-card__target"
-      >
-        Target: 
-        7.0%
-      </div>
-    </div>
-    <div
-      className="kpi-card portfolio-analysis__kpi-card kpi-card--at-risk"
-    >
-      <div
-        className="kpi-card__bar"
-      />
-      <div
-        className="kpi-card__health"
-      >
-        <div
-          className="property-status property-status--at-risk"
-        >
-          AT RISK
-        </div>
-      </div>
-      <div
-        className="kpi-card__value"
-      >
-        20%
-      </div>
-      <div
-        className="kpi-card__name"
-      >
-        INQ → TOU
-      </div>
-      <div
-        className="kpi-card__target"
-      >
-        Target: 
-        25%
-      </div>
-    </div>
-    <div
-      className="kpi-card portfolio-analysis__kpi-card kpi-card--on-track"
-    >
-      <div
-        className="kpi-card__bar"
-      />
-      <div
-        className="kpi-card__health"
-      >
-        <div
-          className="property-status property-status--on-track"
-        >
-          ON TRACK
-        </div>
-      </div>
-      <div
-        className="kpi-card__value"
-      >
-        60%
-      </div>
-      <div
-        className="kpi-card__name"
-      >
-        TOU → APP
-      </div>
-      <div
-        className="kpi-card__target"
-      >
-        Target: 
-        50%
-      </div>
-    </div>
+    <Memo(KPICard)
+      className="portfolio-analysis__kpi-card"
+      health={0}
+      key="usv_inq"
+      name="USV → INQ"
+      target="7.0%"
+      targetTooltip="average_target_among_active_campaigns"
+      value="5.0%"
+    />
+    <Memo(KPICard)
+      className="portfolio-analysis__kpi-card"
+      health={1}
+      key="inq_tou"
+      name="INQ → TOU"
+      target="25%"
+      targetTooltip="average_target_among_active_campaigns"
+      value="20%"
+    />
+    <Memo(KPICard)
+      className="portfolio-analysis__kpi-card"
+      health={2}
+      key="tou_app"
+      name="TOU → APP"
+      target="50%"
+      targetTooltip="average_target_among_active_campaigns"
+      value="60%"
+    />
   </div>
   <div
     className="portfolio-analysis__table"
   >
-    <div
-      className="portfolio-table"
-    >
-      <div
-        className="portfolio-table__header"
-      >
-        <div
-          className="portfolio-table__title"
-        >
-          Group
-        </div>
-        <div
-          className="portfolio-table__kpis"
-        >
-          <div
-            className="portfolio-table__kpi"
-          >
-            Lease Rate
-          </div>
-          <div
-            className="portfolio-table__kpi"
-          >
-            Occupancy Rate
-          </div>
-          <div
-            className="portfolio-table__kpi"
-          >
-            CD Rate
-          </div>
-          <div
-            className="portfolio-table__kpi"
-          >
-            Renewal Rate
-          </div>
-        </div>
-      </div>
-      <div
-        className="portfolio-table__body"
-      >
-        <div
-          className="portfolio-property-group-row"
-          style={Object {}}
-        >
-          <div
-            className="portfolio-property-group-row__group portfolio-property-group-row__group--opening"
-            onClick={[Function]}
-          >
-            <div
-              className="portfolio-property-group-row__image"
-              style={
-                Object {
-                  "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
-                }
-              }
-            />
-            <div
-              className="portfolio-property-group-row__title"
-            >
-              <div
-                className="portfolio-property-group-row__name"
-              >
-                West
-              </div>
-              <div
-                className="portfolio-property-group-row__property-count"
-              >
-                3
-                 Properties
-              </div>
-            </div>
-            <div
-              className="portfolio-property-group-row__kpis"
-            >
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  90%
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  Target: 90%
-                </div>
-              </div>
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  80%
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  Target: 80%
-                </div>
-              </div>
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  10%
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  Target: 10%
-                </div>
-              </div>
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  50%
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  Target: 50%
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row"
-        >
-          <div
-            className="portfolio-property-row__image"
-            style={
+    <PortfolioTable
+      kpi_order={
+        Array [
+          Object {
+            "label": "Lease Rate",
+            "value": "leased_rate",
+          },
+          Object {
+            "label": "Occupancy Rate",
+            "value": "occupancy_rate",
+          },
+          Object {
+            "label": "CD Rate",
+            "value": "lease_cd_rate",
+          },
+          Object {
+            "label": "Renewal Rate",
+            "value": "renewal_rate",
+          },
+        ]
+      }
+      properties={
+        Array [
+          Object {
+            "image_url": "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
+            "kpis": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+            "name": "West",
+            "properties": Array [
               Object {
-                "backgroundImage": "url(\\"https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg\\")",
-              }
-            }
-          />
-          <div
-            className="portfolio-property-row__title"
-          >
-            <div
-              className="portfolio-property-row__name"
-            >
-              Building D
-            </div>
-            <div
-              className="portfolio-property-row__address"
-            >
-              San Antonio, TX 78207
-            </div>
-          </div>
-          <div
-            className="portfolio-property-row__info"
-          >
-            <div
-              className="property-status portfolio-property-row__health property-status--at-risk"
-            >
-              AT RISK
-            </div>
-            <a
-              className="portfolio-property-row__link"
-              href="/"
-              onClick={[Function]}
-              style={
-                Object {
-                  "color": "inherit",
-                  "textDecoration": "inherit",
-                }
-              }
-            >
-              View Property
-            </a>
-          </div>
-          <div
-            className="portfolio-property-row__kpis"
-          >
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                90%
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                Target: 90%
-              </div>
-            </div>
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                80%
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                Target: 80%
-              </div>
-            </div>
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                10%
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                Target: 10%
-              </div>
-            </div>
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                50%
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                Target: 50%
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row"
-        >
-          <div
-            className="portfolio-property-row__image"
-            style={
+                "address": "San Antonio, TX 78207",
+                "health": 0,
+                "image_url": "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+                "kpis": Object {
+                  "lease_cd_rate": 0.1,
+                  "leased_rate": 0.9,
+                  "occupancy_rate": 0.8,
+                  "renewal_rate": 0.5,
+                },
+                "name": "Building A",
+                "targets": Object {
+                  "lease_cd_rate": 0.1,
+                  "leased_rate": 0.9,
+                  "occupancy_rate": 0.8,
+                  "renewal_rate": 0.5,
+                },
+              },
               Object {
-                "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
-              }
-            }
-          />
-          <div
-            className="portfolio-property-row__title"
-          >
-            <div
-              className="portfolio-property-row__name"
-            >
-              Remarkably National
-            </div>
-            <div
-              className="portfolio-property-row__address"
-            >
-              San Antonio, TX 78207
-            </div>
-          </div>
-          <div
-            className="portfolio-property-row__info"
-          >
-            <div
-              className="property-status portfolio-property-row__health property-status--on-track"
-            >
-              ON TRACK
-            </div>
-            <a
-              className="portfolio-property-row__link"
-              href="/"
-              onClick={[Function]}
-              style={
-                Object {
-                  "color": "inherit",
-                  "textDecoration": "inherit",
-                }
-              }
-            >
-              View Property
-            </a>
-          </div>
-          <div
-            className="portfolio-property-row__kpis"
-          >
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                90%
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                Target: 90%
-              </div>
-            </div>
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                80%
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                Target: 80%
-              </div>
-            </div>
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                10%
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                Target: 10%
-              </div>
-            </div>
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                50%
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                Target: 50%
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className="portfolio-property-group-row"
-          style={Object {}}
-        >
-          <div
-            className="portfolio-property-group-row__group"
-            onClick={[Function]}
-          >
-            <div
-              className="portfolio-property-group-row__image"
-              style={
-                Object {
-                  "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
-                }
-              }
-            />
-            <div
-              className="portfolio-property-group-row__title"
-            >
-              <div
-                className="portfolio-property-group-row__name"
-              >
-                Portfolio Average
-              </div>
-            </div>
-            <div
-              className="portfolio-property-group-row__kpis"
-            >
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  90%
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  Target: 90%
-                </div>
-              </div>
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  80%
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  Target: 80%
-                </div>
-              </div>
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  10%
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  Target: 10%
-                </div>
-              </div>
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  50%
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  Target: 50%
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+                "address": "San Antonio, TX 78208",
+                "health": 1,
+                "image_url": "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+                "kpis": Object {
+                  "lease_cd_rate": 0.1,
+                  "leased_rate": 0.9,
+                  "occupancy_rate": 0.8,
+                  "renewal_rate": 0.5,
+                },
+                "name": "Building B",
+                "targets": Object {
+                  "lease_cd_rate": 0.1,
+                  "leased_rate": 0.9,
+                  "occupancy_rate": 0.8,
+                  "renewal_rate": 0.5,
+                },
+              },
+              Object {
+                "address": "San Antonio, TX 78209",
+                "health": 2,
+                "image_url": "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+                "kpis": Object {
+                  "lease_cd_rate": 0.1,
+                  "leased_rate": 0.9,
+                  "occupancy_rate": 0.8,
+                  "renewal_rate": 0.5,
+                },
+                "name": "Building C",
+                "targets": Object {
+                  "lease_cd_rate": 0.1,
+                  "leased_rate": 0.9,
+                  "occupancy_rate": 0.8,
+                  "renewal_rate": 0.5,
+                },
+              },
+            ],
+            "targets": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+            "type": "group",
+          },
+          Object {
+            "address": "San Antonio, TX 78207",
+            "health": 1,
+            "image_url": "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+            "kpis": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+            "name": "Building D",
+            "targets": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+            "type": "individual",
+          },
+          Object {
+            "address": "San Antonio, TX 78207",
+            "health": 2,
+            "image_url": "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
+            "kpis": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+            "name": "Remarkably National",
+            "targets": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+            "type": "individual",
+          },
+          Object {
+            "image_url": "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
+            "kpis": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+            "name": "Portfolio Average",
+            "property_count": 5,
+            "targets": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+            "type": "group",
+          },
+        ]
+      }
+    />
   </div>
-</div>
+</Container>
 `;
 
 exports[`PortfolioAnalysisView renders partial KPIs 1`] = `
-<div
-  className="container portfolio-analysis"
+<Container
+  className="portfolio-analysis"
 >
   <div
     className="portfolio-analysis__header"
@@ -805,256 +292,89 @@ exports[`PortfolioAnalysisView renders partial KPIs 1`] = `
   <div
     className="portfolio-analysis__controls"
   >
-    <div
-      className="select portfolio-analysis__select-kpi select--default css-2b097c-container"
-      onKeyDown={[Function]}
+    <Select
+      className="portfolio-analysis__select-kpi"
+      components={Object {}}
+      isMulti={false}
+      isSearchable={false}
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "label": "Leasing Performance",
+            "value": "leasing_performance",
+          },
+          Object {
+            "label": "Conversion Rates",
+            "value": "conversion_rates",
+          },
+          Object {
+            "label": "Retention Performance",
+            "value": "retention_performance",
+          },
+        ]
+      }
+      size=""
+      theme="default"
+      value={
+        Object {
+          "label": "Leasing Performance",
+          "value": "leasing_performance",
+        }
+      }
+    />
+    <RMBTooltip
+      overlay={
+        <div
+          className="portfolio-analysis__alarm-text"
+        >
+          You have at least 
+          2
+           
+          properties
+           with no data in this selected reporting period.
+        </div>
+      }
+      placement="top"
+      theme="light-dark"
     >
       <div
-        className="select__control css-yk16xz-control"
-        onMouseDown={[Function]}
-        onTouchEnd={[Function]}
+        className="portfolio-analysis__alarm"
       >
-        <div
-          className="select__value-container select__value-container--has-value css-1hwfws3"
-        >
-          <div
-            className="select__single-value css-1uccc91-singleValue"
-          >
-            Leasing Performance
-          </div>
-          <input
-            className="css-62g3xt-dummyInput"
-            disabled={false}
-            id="react-select-6-input"
-            onBlur={[Function]}
-            onChange={[Function]}
-            onFocus={[Function]}
-            readOnly={true}
-            tabIndex="0"
-            value=""
-          />
-        </div>
-        <div
-          className="select__indicators css-1g48xl4-IndicatorsContainer"
-        >
-          <span
-            className="select__indicator-separator css-1okebmr-indicatorSeparator"
-          />
-          <div
-            aria-hidden="true"
-            className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
-            onMouseDown={[Function]}
-            onTouchEnd={[Function]}
-          >
-            <svg
-              aria-hidden="true"
-              className="select__dropdown-arrow select__dropdown-arrow--down"
-              color="inherit"
-              focusable="false"
-              height="1em"
-              role="presentation"
-              viewBox="0 0 10 5"
-              width="1em"
-            >
-              <path
-                d="M1 1.16134L4.92334 4.5"
-                stroke="currentColor"
-                strokeLinecap="round"
-              />
-              <path
-                d="M8.82812 1.16134L5 4.5"
-                stroke="currentColor"
-                strokeLinecap="round"
-              />
-            </svg>
-            <svg
-              aria-hidden="true"
-              className="select__dropdown-arrow select__dropdown-arrow--up"
-              color="inherit"
-              focusable="false"
-              height="1em"
-              role="presentation"
-              viewBox="0 0 10 5"
-              width="1em"
-            >
-              <path
-                d="M1 3.83866L4.92334 0.5"
-                stroke="currentColor"
-                strokeLinecap="round"
-              />
-              <path
-                d="M8.82812 3.83866L5 0.5"
-                stroke="currentColor"
-                strokeLinecap="round"
-              />
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="portfolio-analysis__alarm"
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-    >
-      <svg
-        aria-hidden="true"
-        className="portfolio-analysis__alarm-icon"
-        color="inherit"
-        fill="none"
-        focusable="false"
-        height="1em"
-        role="presentation"
-        viewBox="0 0 20 20"
-        width="1em"
-      >
-        <circle
-          cx="10"
-          cy="10"
-          r="9.5"
-          stroke="#F3F65C"
+        <Alarm
+          className="portfolio-analysis__alarm-icon"
         />
-        <path
-          d="M8.5 4.40002L8.96644 11.8667H11.0263L11.5536 4.40002H8.5ZM10.0037 13.2667C9.23695 13.2667 8.75863 13.7118 8.75863 14.437C8.75863 15.1557 9.23742 15.6 10.0037 15.6C10.7699 15.6 11.2424 15.1557 11.2424 14.437C11.2424 13.7118 10.7704 13.2667 10.0037 13.2667Z"
-          fill="#F3F65C"
-        />
-      </svg>
-    </div>
-    <div
-      className="date-range-selector"
-    >
-      <div
-        className="select date-range-selector__select select--default css-2b097c-container"
-        onKeyDown={[Function]}
-      >
-        <div
-          className="select__control css-yk16xz-control"
-          onMouseDown={[Function]}
-          onTouchEnd={[Function]}
-        >
-          <div
-            className="select__value-container select__value-container--has-value css-1hwfws3"
-          >
-            <div
-              className="select__single-value css-1uccc91-singleValue"
-            >
-              Custom
-            </div>
-            <input
-              className="css-62g3xt-dummyInput"
-              disabled={false}
-              id="react-select-7-input"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
-              readOnly={true}
-              tabIndex="0"
-              value=""
-            />
-          </div>
-          <div
-            className="select__indicators css-1g48xl4-IndicatorsContainer"
-          >
-            <span
-              className="select__indicator-separator css-1okebmr-indicatorSeparator"
-            />
-            <div
-              aria-hidden="true"
-              className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
-              onMouseDown={[Function]}
-              onTouchEnd={[Function]}
-            >
-              <svg
-                aria-hidden="true"
-                className="select__dropdown-arrow select__dropdown-arrow--down"
-                color="inherit"
-                focusable="false"
-                height="1em"
-                role="presentation"
-                viewBox="0 0 10 5"
-                width="1em"
-              >
-                <path
-                  d="M1 1.16134L4.92334 4.5"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M8.82812 1.16134L5 4.5"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                />
-              </svg>
-              <svg
-                aria-hidden="true"
-                className="select__dropdown-arrow select__dropdown-arrow--up"
-                color="inherit"
-                focusable="false"
-                height="1em"
-                role="presentation"
-                viewBox="0 0 10 5"
-                width="1em"
-              >
-                <path
-                  d="M1 3.83866L4.92334 0.5"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M8.82812 3.83866L5 0.5"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
       </div>
-      <div
-        className="date-range date-range-selector__data-picker"
-      >
-        <div>
-          <div
-            className="date-range__input"
-            onClick={[Function]}
-          >
-            <span
-              className="date-range__value"
-            >
-              04/15/19
-            </span>
-            <span>
-              to
-            </span>
-            <span
-              className="date-range__value"
-            >
-              04/22/19
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+    </RMBTooltip>
+    <DateRangeSelector
+      dateFormat="YYYY-MM-DD"
+      end_date="2019-04-22"
+      onChange={[Function]}
+      preset="custom"
+      start_date="2019-04-15"
+    />
   </div>
   <div
     className="portfolio-analysis__title-bar"
   >
-    <div
-      className="toggle-button"
-    >
-      <button
-        className="toggle-button__item toggle-button__item--selected"
-        onClick={[Function]}
-      >
-        Property Averages
-      </button>
-      <button
-        className="toggle-button__item"
-        onClick={[Function]}
-      >
-        Property Totals
-      </button>
-    </div>
+    <RmbNavLinks
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "label": "Property Averages",
+            "tooltip": "property_averages",
+            "value": "1",
+          },
+          Object {
+            "label": "Property Totals",
+            "tooltip": "property_totals",
+            "value": "0",
+          },
+        ]
+      }
+      selected="1"
+    />
     <div
       className="portfolio-analysis__property-count"
     >
@@ -1065,617 +385,173 @@ exports[`PortfolioAnalysisView renders partial KPIs 1`] = `
   <div
     className="portfolio-analysis__kpi-cards"
   >
-    <div
-      className="kpi-card kpi-card--no-data kpi-card--no-value portfolio-analysis__kpi-card"
-    >
-      <div
-        className="kpi-card__bar"
-      />
-      <div
-        className="kpi-card__no-data"
-      >
-        No Data
-      </div>
-      <div
-        className="kpi-card__alarm"
-      >
-        <div
-          className="kpi-card__alarm-icon-wrap"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <svg
-            aria-hidden="true"
-            className="kpi-card__alarm-icon"
-            color="inherit"
-            fill="none"
-            focusable="false"
-            height="1em"
-            role="presentation"
-            viewBox="0 0 20 20"
-            width="1em"
-          >
-            <circle
-              cx="10"
-              cy="10"
-              r="9.5"
-              stroke="#F3F65C"
-            />
-            <path
-              d="M8.5 4.40002L8.96644 11.8667H11.0263L11.5536 4.40002H8.5ZM10.0037 13.2667C9.23695 13.2667 8.75863 13.7118 8.75863 14.437C8.75863 15.1557 9.23742 15.6 10.0037 15.6C10.7699 15.6 11.2424 15.1557 11.2424 14.437C11.2424 13.7118 10.7704 13.2667 10.0037 13.2667Z"
-              fill="#F3F65C"
-            />
-          </svg>
-        </div>
-      </div>
-      <div
-        className="kpi-card__name"
-      >
-        USV → INQ
-      </div>
-    </div>
-    <div
-      className="kpi-card portfolio-analysis__kpi-card kpi-card--at-risk"
-    >
-      <div
-        className="kpi-card__bar"
-      />
-      <div
-        className="kpi-card__health"
-      >
-        <div
-          className="property-status property-status--at-risk"
-        >
-          AT RISK
-        </div>
-      </div>
-      <div
-        className="kpi-card__value"
-      >
-        20%
-      </div>
-      <div
-        className="kpi-card__name"
-      >
-        INQ → TOU
-      </div>
-      <div
-        className="kpi-card__target"
-      >
-        Target: 
-        25%
-      </div>
-    </div>
-    <div
-      className="kpi-card kpi-card--no-data kpi-card--no-target portfolio-analysis__kpi-card"
-    >
-      <div
-        className="kpi-card__bar"
-      />
-      <div
-        className="kpi-card__no-data"
-      >
-        No Data
-      </div>
-      <div
-        className="kpi-card__value"
-      >
-        60%
-      </div>
-      <div
-        className="kpi-card__name"
-      >
-        TOU → APP
-      </div>
-      <div
-        className="kpi-card__alarm"
-      >
-        <div
-          className="kpi-card__alarm-icon-wrap"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <svg
-            aria-hidden="true"
-            className="kpi-card__alarm-icon"
-            color="inherit"
-            fill="none"
-            focusable="false"
-            height="1em"
-            role="presentation"
-            viewBox="0 0 20 20"
-            width="1em"
-          >
-            <circle
-              cx="10"
-              cy="10"
-              r="9.5"
-              stroke="#F3F65C"
-            />
-            <path
-              d="M8.5 4.40002L8.96644 11.8667H11.0263L11.5536 4.40002H8.5ZM10.0037 13.2667C9.23695 13.2667 8.75863 13.7118 8.75863 14.437C8.75863 15.1557 9.23742 15.6 10.0037 15.6C10.7699 15.6 11.2424 15.1557 11.2424 14.437C11.2424 13.7118 10.7704 13.2667 10.0037 13.2667Z"
-              fill="#F3F65C"
-            />
-          </svg>
-        </div>
-      </div>
-    </div>
+    <NoValueKPICard
+      className="portfolio-analysis__kpi-card"
+      health={0}
+      key="usv_inq"
+      name="USV → INQ"
+      target="NaN%"
+      value="NaN%"
+    />
+    <Memo(KPICard)
+      className="portfolio-analysis__kpi-card"
+      health={1}
+      key="inq_tou"
+      name="INQ → TOU"
+      target="25%"
+      targetTooltip="average_target_among_active_campaigns"
+      value="20%"
+    />
+    <NoTargetKPICard
+      className="portfolio-analysis__kpi-card"
+      health={0}
+      key="tou_app"
+      name="TOU → APP"
+      target="NaN%"
+      value="60%"
+    />
   </div>
   <div
     className="portfolio-analysis__table"
   >
-    <div
-      className="portfolio-table"
-    >
-      <div
-        className="portfolio-table__header"
-      >
-        <div
-          className="portfolio-table__title"
-        >
-          Group
-        </div>
-        <div
-          className="portfolio-table__kpis"
-        >
-          <div
-            className="portfolio-table__kpi"
-          >
-            Lease Rate
-          </div>
-          <div
-            className="portfolio-table__kpi"
-          >
-            Occupancy Rate
-          </div>
-          <div
-            className="portfolio-table__kpi"
-          >
-            CD Rate
-          </div>
-          <div
-            className="portfolio-table__kpi"
-          >
-            Renewal Rate
-          </div>
-        </div>
-      </div>
-      <div
-        className="portfolio-table__body"
-      >
-        <div
-          className="portfolio-property-group-row"
-          style={Object {}}
-        >
-          <div
-            className="portfolio-property-group-row__group portfolio-property-group-row__group--opening"
-            onClick={[Function]}
-          >
-            <div
-              className="portfolio-property-group-row__image"
-              style={
-                Object {
-                  "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
-                }
-              }
-            />
-            <div
-              className="portfolio-property-group-row__title"
-            >
-              <div
-                className="portfolio-property-group-row__name"
-              >
-                West
-              </div>
-              <div
-                className="portfolio-property-group-row__property-count"
-              >
-                3
-                 Properties
-              </div>
-            </div>
-            <div
-              className="portfolio-property-group-row__kpis"
-            >
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  90%
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  Target: 90%
-                </div>
-              </div>
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  80%
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  Target: 80%
-                </div>
-              </div>
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  10%
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  Target: 10%
-                </div>
-              </div>
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  50%
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  Target: 50%
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row portfolio-property-row--with-alarm"
-        >
-          <div
-            className="portfolio-property-row__alarm"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-          >
-            <svg
-              aria-hidden="true"
-              className="portfolio-property-row__alarm-icon"
-              color="inherit"
-              fill="none"
-              focusable="false"
-              height="1em"
-              role="presentation"
-              viewBox="0 0 20 20"
-              width="1em"
-            >
-              <circle
-                cx="10"
-                cy="10"
-                r="9.5"
-                stroke="#F3F65C"
-              />
-              <path
-                d="M8.5 4.40002L8.96644 11.8667H11.0263L11.5536 4.40002H8.5ZM10.0037 13.2667C9.23695 13.2667 8.75863 13.7118 8.75863 14.437C8.75863 15.1557 9.23742 15.6 10.0037 15.6C10.7699 15.6 11.2424 15.1557 11.2424 14.437C11.2424 13.7118 10.7704 13.2667 10.0037 13.2667Z"
-                fill="#F3F65C"
-              />
-            </svg>
-          </div>
-          <div
-            className="portfolio-property-row__image"
-            style={
+    <PortfolioTable
+      kpi_order={
+        Array [
+          Object {
+            "label": "Lease Rate",
+            "value": "leased_rate",
+          },
+          Object {
+            "label": "Occupancy Rate",
+            "value": "occupancy_rate",
+          },
+          Object {
+            "label": "CD Rate",
+            "value": "lease_cd_rate",
+          },
+          Object {
+            "label": "Renewal Rate",
+            "value": "renewal_rate",
+          },
+        ]
+      }
+      properties={
+        Array [
+          Object {
+            "image_url": "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
+            "kpis": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+            "name": "West",
+            "properties": Array [
               Object {
-                "backgroundImage": "url(\\"https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg\\")",
-              }
-            }
-          />
-          <div
-            className="portfolio-property-row__title"
-          >
-            <div
-              className="portfolio-property-row__name"
-            >
-              Building D
-            </div>
-            <div
-              className="portfolio-property-row__address"
-            >
-              San Antonio, TX 78207
-            </div>
-          </div>
-          <div
-            className="portfolio-property-row__info"
-          >
-            <div
-              className="property-status portfolio-property-row__health property-status--at-risk"
-            >
-              AT RISK
-            </div>
-            <a
-              className="portfolio-property-row__link"
-              href="/"
-              onClick={[Function]}
-              style={
-                Object {
-                  "color": "inherit",
-                  "textDecoration": "inherit",
-                }
-              }
-            >
-              View Property
-            </a>
-          </div>
-          <div
-            className="portfolio-property-row__kpis"
-          >
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                
-              </div>
-            </div>
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                
-              </div>
-            </div>
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                
-              </div>
-            </div>
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row"
-        >
-          <div
-            className="portfolio-property-row__image"
-            style={
+                "address": "San Antonio, TX 78207",
+                "health": -1,
+                "image_url": "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+                "name": "Building A",
+              },
               Object {
-                "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
-              }
-            }
-          />
-          <div
-            className="portfolio-property-row__title"
-          >
-            <div
-              className="portfolio-property-row__name"
-            >
-              Remarkably National
-            </div>
-            <div
-              className="portfolio-property-row__address"
-            >
-              San Antonio, TX 78207
-            </div>
-          </div>
-          <div
-            className="portfolio-property-row__info"
-          >
-            <div
-              className="property-status portfolio-property-row__health property-status--on-track"
-            >
-              ON TRACK
-            </div>
-            <a
-              className="portfolio-property-row__link"
-              href="/"
-              onClick={[Function]}
-              style={
-                Object {
-                  "color": "inherit",
-                  "textDecoration": "inherit",
-                }
-              }
-            >
-              View Property
-            </a>
-          </div>
-          <div
-            className="portfolio-property-row__kpis"
-          >
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                90%
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                Target: 90%
-              </div>
-            </div>
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                80%
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                Target: 80%
-              </div>
-            </div>
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                10%
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                Target: 10%
-              </div>
-            </div>
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                50%
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                Target: 50%
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className="portfolio-property-group-row"
-          style={Object {}}
-        >
-          <div
-            className="portfolio-property-group-row__group"
-            onClick={[Function]}
-          >
-            <div
-              className="portfolio-property-group-row__image"
-              style={
-                Object {
-                  "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
-                }
-              }
-            />
-            <div
-              className="portfolio-property-group-row__title"
-            >
-              <div
-                className="portfolio-property-group-row__name"
-              >
-                Portfolio Average
-              </div>
-            </div>
-            <div
-              className="portfolio-property-group-row__kpis"
-            >
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  90%
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  Target: 90%
-                </div>
-              </div>
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  80%
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  Target: 80%
-                </div>
-              </div>
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  10%
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  Target: 10%
-                </div>
-              </div>
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  50%
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  Target: 50%
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+                "address": "San Antonio, TX 78208",
+                "health": 1,
+                "image_url": "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+                "kpis": Object {
+                  "lease_cd_rate": 0.1,
+                  "leased_rate": 0.9,
+                  "occupancy_rate": 0.8,
+                  "renewal_rate": 0.5,
+                },
+                "name": "Building B",
+                "targets": Object {
+                  "lease_cd_rate": 0.1,
+                  "leased_rate": 0.9,
+                  "occupancy_rate": 0.8,
+                  "renewal_rate": 0.5,
+                },
+              },
+              Object {
+                "address": "San Antonio, TX 78209",
+                "health": 2,
+                "image_url": "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+                "kpis": Object {
+                  "lease_cd_rate": 0.1,
+                  "leased_rate": 0.9,
+                  "occupancy_rate": 0.8,
+                  "renewal_rate": 0.5,
+                },
+                "name": "Building C",
+                "targets": Object {
+                  "lease_cd_rate": 0.1,
+                  "leased_rate": 0.9,
+                  "occupancy_rate": 0.8,
+                  "renewal_rate": 0.5,
+                },
+              },
+            ],
+            "targets": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+            "type": "group",
+          },
+          Object {
+            "address": "San Antonio, TX 78207",
+            "health": 1,
+            "image_url": "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+            "name": "Building D",
+            "type": "individual",
+          },
+          Object {
+            "address": "San Antonio, TX 78207",
+            "health": 2,
+            "image_url": "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
+            "kpis": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+            "name": "Remarkably National",
+            "targets": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+            "type": "individual",
+          },
+          Object {
+            "image_url": "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
+            "kpis": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+            "name": "Portfolio Average",
+            "property_count": 5,
+            "targets": Object {
+              "lease_cd_rate": 0.1,
+              "leased_rate": 0.9,
+              "occupancy_rate": 0.8,
+              "renewal_rate": 0.5,
+            },
+            "type": "group",
+          },
+        ]
+      }
+    />
   </div>
-</div>
+</Container>
 `;
 
 exports[`PortfolioAnalysisView renders without KPIs 1`] = `
-<div
-  className="container portfolio-analysis"
+<Container
+  className="portfolio-analysis"
 >
   <div
     className="portfolio-analysis__header"
@@ -1689,256 +565,89 @@ exports[`PortfolioAnalysisView renders without KPIs 1`] = `
   <div
     className="portfolio-analysis__controls"
   >
-    <div
-      className="select portfolio-analysis__select-kpi select--default css-2b097c-container"
-      onKeyDown={[Function]}
+    <Select
+      className="portfolio-analysis__select-kpi"
+      components={Object {}}
+      isMulti={false}
+      isSearchable={false}
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "label": "Leasing Performance",
+            "value": "leasing_performance",
+          },
+          Object {
+            "label": "Conversion Rates",
+            "value": "conversion_rates",
+          },
+          Object {
+            "label": "Retention Performance",
+            "value": "retention_performance",
+          },
+        ]
+      }
+      size=""
+      theme="default"
+      value={
+        Object {
+          "label": "Leasing Performance",
+          "value": "leasing_performance",
+        }
+      }
+    />
+    <RMBTooltip
+      overlay={
+        <div
+          className="portfolio-analysis__alarm-text"
+        >
+          You have at least 
+          5
+           
+          properties
+           with no data in this selected reporting period.
+        </div>
+      }
+      placement="top"
+      theme="light-dark"
     >
       <div
-        className="select__control css-yk16xz-control"
-        onMouseDown={[Function]}
-        onTouchEnd={[Function]}
+        className="portfolio-analysis__alarm"
       >
-        <div
-          className="select__value-container select__value-container--has-value css-1hwfws3"
-        >
-          <div
-            className="select__single-value css-1uccc91-singleValue"
-          >
-            Leasing Performance
-          </div>
-          <input
-            className="css-62g3xt-dummyInput"
-            disabled={false}
-            id="react-select-4-input"
-            onBlur={[Function]}
-            onChange={[Function]}
-            onFocus={[Function]}
-            readOnly={true}
-            tabIndex="0"
-            value=""
-          />
-        </div>
-        <div
-          className="select__indicators css-1g48xl4-IndicatorsContainer"
-        >
-          <span
-            className="select__indicator-separator css-1okebmr-indicatorSeparator"
-          />
-          <div
-            aria-hidden="true"
-            className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
-            onMouseDown={[Function]}
-            onTouchEnd={[Function]}
-          >
-            <svg
-              aria-hidden="true"
-              className="select__dropdown-arrow select__dropdown-arrow--down"
-              color="inherit"
-              focusable="false"
-              height="1em"
-              role="presentation"
-              viewBox="0 0 10 5"
-              width="1em"
-            >
-              <path
-                d="M1 1.16134L4.92334 4.5"
-                stroke="currentColor"
-                strokeLinecap="round"
-              />
-              <path
-                d="M8.82812 1.16134L5 4.5"
-                stroke="currentColor"
-                strokeLinecap="round"
-              />
-            </svg>
-            <svg
-              aria-hidden="true"
-              className="select__dropdown-arrow select__dropdown-arrow--up"
-              color="inherit"
-              focusable="false"
-              height="1em"
-              role="presentation"
-              viewBox="0 0 10 5"
-              width="1em"
-            >
-              <path
-                d="M1 3.83866L4.92334 0.5"
-                stroke="currentColor"
-                strokeLinecap="round"
-              />
-              <path
-                d="M8.82812 3.83866L5 0.5"
-                stroke="currentColor"
-                strokeLinecap="round"
-              />
-            </svg>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="portfolio-analysis__alarm"
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-    >
-      <svg
-        aria-hidden="true"
-        className="portfolio-analysis__alarm-icon"
-        color="inherit"
-        fill="none"
-        focusable="false"
-        height="1em"
-        role="presentation"
-        viewBox="0 0 20 20"
-        width="1em"
-      >
-        <circle
-          cx="10"
-          cy="10"
-          r="9.5"
-          stroke="#F3F65C"
+        <Alarm
+          className="portfolio-analysis__alarm-icon"
         />
-        <path
-          d="M8.5 4.40002L8.96644 11.8667H11.0263L11.5536 4.40002H8.5ZM10.0037 13.2667C9.23695 13.2667 8.75863 13.7118 8.75863 14.437C8.75863 15.1557 9.23742 15.6 10.0037 15.6C10.7699 15.6 11.2424 15.1557 11.2424 14.437C11.2424 13.7118 10.7704 13.2667 10.0037 13.2667Z"
-          fill="#F3F65C"
-        />
-      </svg>
-    </div>
-    <div
-      className="date-range-selector"
-    >
-      <div
-        className="select date-range-selector__select select--default css-2b097c-container"
-        onKeyDown={[Function]}
-      >
-        <div
-          className="select__control css-yk16xz-control"
-          onMouseDown={[Function]}
-          onTouchEnd={[Function]}
-        >
-          <div
-            className="select__value-container select__value-container--has-value css-1hwfws3"
-          >
-            <div
-              className="select__single-value css-1uccc91-singleValue"
-            >
-              Custom
-            </div>
-            <input
-              className="css-62g3xt-dummyInput"
-              disabled={false}
-              id="react-select-5-input"
-              onBlur={[Function]}
-              onChange={[Function]}
-              onFocus={[Function]}
-              readOnly={true}
-              tabIndex="0"
-              value=""
-            />
-          </div>
-          <div
-            className="select__indicators css-1g48xl4-IndicatorsContainer"
-          >
-            <span
-              className="select__indicator-separator css-1okebmr-indicatorSeparator"
-            />
-            <div
-              aria-hidden="true"
-              className="select__indicator select__dropdown-indicator css-tlfecz-indicatorContainer"
-              onMouseDown={[Function]}
-              onTouchEnd={[Function]}
-            >
-              <svg
-                aria-hidden="true"
-                className="select__dropdown-arrow select__dropdown-arrow--down"
-                color="inherit"
-                focusable="false"
-                height="1em"
-                role="presentation"
-                viewBox="0 0 10 5"
-                width="1em"
-              >
-                <path
-                  d="M1 1.16134L4.92334 4.5"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M8.82812 1.16134L5 4.5"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                />
-              </svg>
-              <svg
-                aria-hidden="true"
-                className="select__dropdown-arrow select__dropdown-arrow--up"
-                color="inherit"
-                focusable="false"
-                height="1em"
-                role="presentation"
-                viewBox="0 0 10 5"
-                width="1em"
-              >
-                <path
-                  d="M1 3.83866L4.92334 0.5"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                />
-                <path
-                  d="M8.82812 3.83866L5 0.5"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                />
-              </svg>
-            </div>
-          </div>
-        </div>
       </div>
-      <div
-        className="date-range date-range-selector__data-picker"
-      >
-        <div>
-          <div
-            className="date-range__input"
-            onClick={[Function]}
-          >
-            <span
-              className="date-range__value"
-            >
-              04/15/19
-            </span>
-            <span>
-              to
-            </span>
-            <span
-              className="date-range__value"
-            >
-              04/22/19
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
+    </RMBTooltip>
+    <DateRangeSelector
+      dateFormat="YYYY-MM-DD"
+      end_date="2019-04-22"
+      onChange={[Function]}
+      preset="custom"
+      start_date="2019-04-15"
+    />
   </div>
   <div
     className="portfolio-analysis__title-bar"
   >
-    <div
-      className="toggle-button"
-    >
-      <button
-        className="toggle-button__item toggle-button__item--selected"
-        onClick={[Function]}
-      >
-        Property Averages
-      </button>
-      <button
-        className="toggle-button__item"
-        onClick={[Function]}
-      >
-        Property Totals
-      </button>
-    </div>
+    <RmbNavLinks
+      onChange={[Function]}
+      options={
+        Array [
+          Object {
+            "label": "Property Averages",
+            "tooltip": "property_averages",
+            "value": "1",
+          },
+          Object {
+            "label": "Property Totals",
+            "tooltip": "property_totals",
+            "value": "0",
+          },
+        ]
+      }
+      selected="1"
+    />
     <div
       className="portfolio-analysis__property-count"
     >
@@ -1949,650 +658,105 @@ exports[`PortfolioAnalysisView renders without KPIs 1`] = `
   <div
     className="portfolio-analysis__kpi-cards"
   >
-    <div
-      className="kpi-card kpi-card--no-data kpi-card--no-value portfolio-analysis__kpi-card"
-    >
-      <div
-        className="kpi-card__bar"
-      />
-      <div
-        className="kpi-card__no-data"
-      >
-        No Data
-      </div>
-      <div
-        className="kpi-card__alarm"
-      >
-        <div
-          className="kpi-card__alarm-icon-wrap"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <svg
-            aria-hidden="true"
-            className="kpi-card__alarm-icon"
-            color="inherit"
-            fill="none"
-            focusable="false"
-            height="1em"
-            role="presentation"
-            viewBox="0 0 20 20"
-            width="1em"
-          >
-            <circle
-              cx="10"
-              cy="10"
-              r="9.5"
-              stroke="#F3F65C"
-            />
-            <path
-              d="M8.5 4.40002L8.96644 11.8667H11.0263L11.5536 4.40002H8.5ZM10.0037 13.2667C9.23695 13.2667 8.75863 13.7118 8.75863 14.437C8.75863 15.1557 9.23742 15.6 10.0037 15.6C10.7699 15.6 11.2424 15.1557 11.2424 14.437C11.2424 13.7118 10.7704 13.2667 10.0037 13.2667Z"
-              fill="#F3F65C"
-            />
-          </svg>
-        </div>
-      </div>
-      <div
-        className="kpi-card__name"
-      >
-        USV → INQ
-      </div>
-    </div>
-    <div
-      className="kpi-card kpi-card--no-data kpi-card--no-value portfolio-analysis__kpi-card"
-    >
-      <div
-        className="kpi-card__bar"
-      />
-      <div
-        className="kpi-card__no-data"
-      >
-        No Data
-      </div>
-      <div
-        className="kpi-card__alarm"
-      >
-        <div
-          className="kpi-card__alarm-icon-wrap"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <svg
-            aria-hidden="true"
-            className="kpi-card__alarm-icon"
-            color="inherit"
-            fill="none"
-            focusable="false"
-            height="1em"
-            role="presentation"
-            viewBox="0 0 20 20"
-            width="1em"
-          >
-            <circle
-              cx="10"
-              cy="10"
-              r="9.5"
-              stroke="#F3F65C"
-            />
-            <path
-              d="M8.5 4.40002L8.96644 11.8667H11.0263L11.5536 4.40002H8.5ZM10.0037 13.2667C9.23695 13.2667 8.75863 13.7118 8.75863 14.437C8.75863 15.1557 9.23742 15.6 10.0037 15.6C10.7699 15.6 11.2424 15.1557 11.2424 14.437C11.2424 13.7118 10.7704 13.2667 10.0037 13.2667Z"
-              fill="#F3F65C"
-            />
-          </svg>
-        </div>
-      </div>
-      <div
-        className="kpi-card__name"
-      >
-        INQ → TOU
-      </div>
-    </div>
-    <div
-      className="kpi-card kpi-card--no-data kpi-card--no-value portfolio-analysis__kpi-card"
-    >
-      <div
-        className="kpi-card__bar"
-      />
-      <div
-        className="kpi-card__no-data"
-      >
-        No Data
-      </div>
-      <div
-        className="kpi-card__alarm"
-      >
-        <div
-          className="kpi-card__alarm-icon-wrap"
-          onMouseEnter={[Function]}
-          onMouseLeave={[Function]}
-        >
-          <svg
-            aria-hidden="true"
-            className="kpi-card__alarm-icon"
-            color="inherit"
-            fill="none"
-            focusable="false"
-            height="1em"
-            role="presentation"
-            viewBox="0 0 20 20"
-            width="1em"
-          >
-            <circle
-              cx="10"
-              cy="10"
-              r="9.5"
-              stroke="#F3F65C"
-            />
-            <path
-              d="M8.5 4.40002L8.96644 11.8667H11.0263L11.5536 4.40002H8.5ZM10.0037 13.2667C9.23695 13.2667 8.75863 13.7118 8.75863 14.437C8.75863 15.1557 9.23742 15.6 10.0037 15.6C10.7699 15.6 11.2424 15.1557 11.2424 14.437C11.2424 13.7118 10.7704 13.2667 10.0037 13.2667Z"
-              fill="#F3F65C"
-            />
-          </svg>
-        </div>
-      </div>
-      <div
-        className="kpi-card__name"
-      >
-        TOU → APP
-      </div>
-    </div>
+    <NoValueKPICard
+      className="portfolio-analysis__kpi-card"
+      health={-1}
+      key="usv_inq"
+      name="USV → INQ"
+      target="NaN%"
+      value="NaN%"
+    />
+    <NoValueKPICard
+      className="portfolio-analysis__kpi-card"
+      health={-1}
+      key="inq_tou"
+      name="INQ → TOU"
+      target="NaN%"
+      value="NaN%"
+    />
+    <NoValueKPICard
+      className="portfolio-analysis__kpi-card"
+      health={-1}
+      key="tou_app"
+      name="TOU → APP"
+      target="NaN%"
+      value="NaN%"
+    />
   </div>
   <div
     className="portfolio-analysis__table"
   >
-    <div
-      className="portfolio-table"
-    >
-      <div
-        className="portfolio-table__header"
-      >
-        <div
-          className="portfolio-table__title"
-        >
-          Group
-        </div>
-        <div
-          className="portfolio-table__kpis"
-        >
-          <div
-            className="portfolio-table__kpi"
-          >
-            Lease Rate
-          </div>
-          <div
-            className="portfolio-table__kpi"
-          >
-            Occupancy Rate
-          </div>
-          <div
-            className="portfolio-table__kpi"
-          >
-            CD Rate
-          </div>
-          <div
-            className="portfolio-table__kpi"
-          >
-            Renewal Rate
-          </div>
-        </div>
-      </div>
-      <div
-        className="portfolio-table__body"
-      >
-        <div
-          className="portfolio-property-group-row"
-          style={Object {}}
-        >
-          <div
-            className="portfolio-property-group-row__group portfolio-property-group-row__group--opening"
-            onClick={[Function]}
-          >
-            <div
-              className="portfolio-property-group-row__image"
-              style={
-                Object {
-                  "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
-                }
-              }
-            />
-            <div
-              className="portfolio-property-group-row__title"
-            >
-              <div
-                className="portfolio-property-group-row__name"
-              >
-                West
-              </div>
-              <div
-                className="portfolio-property-group-row__property-count"
-              >
-                3
-                 Properties
-              </div>
-            </div>
-            <div
-              className="portfolio-property-group-row__kpis"
-            >
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  
-                </div>
-              </div>
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  
-                </div>
-              </div>
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  
-                </div>
-              </div>
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row portfolio-property-row--with-alarm"
-        >
-          <div
-            className="portfolio-property-row__alarm"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-          >
-            <svg
-              aria-hidden="true"
-              className="portfolio-property-row__alarm-icon"
-              color="inherit"
-              fill="none"
-              focusable="false"
-              height="1em"
-              role="presentation"
-              viewBox="0 0 20 20"
-              width="1em"
-            >
-              <circle
-                cx="10"
-                cy="10"
-                r="9.5"
-                stroke="#F3F65C"
-              />
-              <path
-                d="M8.5 4.40002L8.96644 11.8667H11.0263L11.5536 4.40002H8.5ZM10.0037 13.2667C9.23695 13.2667 8.75863 13.7118 8.75863 14.437C8.75863 15.1557 9.23742 15.6 10.0037 15.6C10.7699 15.6 11.2424 15.1557 11.2424 14.437C11.2424 13.7118 10.7704 13.2667 10.0037 13.2667Z"
-                fill="#F3F65C"
-              />
-            </svg>
-          </div>
-          <div
-            className="portfolio-property-row__image"
-            style={
+    <PortfolioTable
+      kpi_order={
+        Array [
+          Object {
+            "label": "Lease Rate",
+            "value": "leased_rate",
+          },
+          Object {
+            "label": "Occupancy Rate",
+            "value": "occupancy_rate",
+          },
+          Object {
+            "label": "CD Rate",
+            "value": "lease_cd_rate",
+          },
+          Object {
+            "label": "Renewal Rate",
+            "value": "renewal_rate",
+          },
+        ]
+      }
+      properties={
+        Array [
+          Object {
+            "image_url": "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
+            "name": "West",
+            "properties": Array [
               Object {
-                "backgroundImage": "url(\\"https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg\\")",
-              }
-            }
-          />
-          <div
-            className="portfolio-property-row__title"
-          >
-            <div
-              className="portfolio-property-row__name"
-            >
-              Building D
-            </div>
-            <div
-              className="portfolio-property-row__address"
-            >
-              San Antonio, TX 78207
-            </div>
-          </div>
-          <div
-            className="portfolio-property-row__info"
-          >
-            <div
-              className="property-status portfolio-property-row__health property-status--not-available"
-            >
-              CAMPAIGN PENDING
-            </div>
-            <a
-              className="portfolio-property-row__link"
-              href="/"
-              onClick={[Function]}
-              style={
-                Object {
-                  "color": "inherit",
-                  "textDecoration": "inherit",
-                }
-              }
-            >
-              View Property
-            </a>
-          </div>
-          <div
-            className="portfolio-property-row__kpis"
-          >
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                
-              </div>
-            </div>
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                
-              </div>
-            </div>
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                
-              </div>
-            </div>
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className="portfolio-property-row portfolio-property-row--with-alarm"
-        >
-          <div
-            className="portfolio-property-row__alarm"
-            onMouseEnter={[Function]}
-            onMouseLeave={[Function]}
-          >
-            <svg
-              aria-hidden="true"
-              className="portfolio-property-row__alarm-icon"
-              color="inherit"
-              fill="none"
-              focusable="false"
-              height="1em"
-              role="presentation"
-              viewBox="0 0 20 20"
-              width="1em"
-            >
-              <circle
-                cx="10"
-                cy="10"
-                r="9.5"
-                stroke="#F3F65C"
-              />
-              <path
-                d="M8.5 4.40002L8.96644 11.8667H11.0263L11.5536 4.40002H8.5ZM10.0037 13.2667C9.23695 13.2667 8.75863 13.7118 8.75863 14.437C8.75863 15.1557 9.23742 15.6 10.0037 15.6C10.7699 15.6 11.2424 15.1557 11.2424 14.437C11.2424 13.7118 10.7704 13.2667 10.0037 13.2667Z"
-                fill="#F3F65C"
-              />
-            </svg>
-          </div>
-          <div
-            className="portfolio-property-row__image"
-            style={
+                "address": "San Antonio, TX 78207",
+                "health": -1,
+                "image_url": "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+                "name": "Building A",
+              },
               Object {
-                "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
-              }
-            }
-          />
-          <div
-            className="portfolio-property-row__title"
-          >
-            <div
-              className="portfolio-property-row__name"
-            >
-              Remarkably National
-            </div>
-            <div
-              className="portfolio-property-row__address"
-            >
-              San Antonio, TX 78207
-            </div>
-          </div>
-          <div
-            className="portfolio-property-row__info"
-          >
-            <div
-              className="property-status portfolio-property-row__health property-status--not-available"
-            >
-              CAMPAIGN PENDING
-            </div>
-            <a
-              className="portfolio-property-row__link"
-              href="/"
-              onClick={[Function]}
-              style={
-                Object {
-                  "color": "inherit",
-                  "textDecoration": "inherit",
-                }
-              }
-            >
-              View Property
-            </a>
-          </div>
-          <div
-            className="portfolio-property-row__kpis"
-          >
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                
-              </div>
-            </div>
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                
-              </div>
-            </div>
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                
-              </div>
-            </div>
-            <div
-              className="portfolio-property-row__kpi"
-            >
-              <div
-                className="portfolio-property-row__value"
-              >
-                
-              </div>
-              <div
-                className="portfolio-property-row__target"
-              >
-                
-              </div>
-            </div>
-          </div>
-        </div>
-        <div
-          className="portfolio-property-group-row"
-          style={Object {}}
-        >
-          <div
-            className="portfolio-property-group-row__group"
-            onClick={[Function]}
-          >
-            <div
-              className="portfolio-property-group-row__image"
-              style={
-                Object {
-                  "backgroundImage": "url(\\"https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg\\")",
-                }
-              }
-            />
-            <div
-              className="portfolio-property-group-row__title"
-            >
-              <div
-                className="portfolio-property-group-row__name"
-              >
-                Portfolio Average
-              </div>
-            </div>
-            <div
-              className="portfolio-property-group-row__kpis"
-            >
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  
-                </div>
-              </div>
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  
-                </div>
-              </div>
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  
-                </div>
-              </div>
-              <div
-                className="portfolio-property-group-row__kpi"
-              >
-                <div
-                  className="portfolio-property-group-row__value"
-                >
-                  
-                </div>
-                <div
-                  className="portfolio-property-group-row__target"
-                >
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+                "address": "San Antonio, TX 78208",
+                "health": -1,
+                "image_url": "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+                "name": "Building B",
+              },
+              Object {
+                "address": "San Antonio, TX 78209",
+                "health": -1,
+                "image_url": "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+                "name": "Building C",
+              },
+            ],
+            "type": "group",
+          },
+          Object {
+            "address": "San Antonio, TX 78207",
+            "health": -1,
+            "image_url": "https://www.inquirer.com/resizer/olBwbov37jGKpl6IaoiTBYCQ-n4=/1400x932/smart/arc-anglerfish-arc2-prod-pmn.s3.amazonaws.com/public/FTMY2CQIHJEO3HSRUCOXCWDNH4.jpg",
+            "name": "Building D",
+            "type": "individual",
+          },
+          Object {
+            "address": "San Antonio, TX 78207",
+            "health": -1,
+            "image_url": "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
+            "name": "Remarkably National",
+            "type": "individual",
+          },
+          Object {
+            "image_url": "https://www.hillsdale.edu/wp-content/uploads/2016/05/Monument-Valley-800x800.jpg",
+            "name": "Portfolio Average",
+            "property_count": 5,
+            "type": "group",
+          },
+        ]
+      }
+    />
   </div>
-</div>
+</Container>
 `;

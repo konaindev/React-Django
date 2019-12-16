@@ -150,14 +150,12 @@ $tag-remove-hover-color: $gray-6;
 }
 
 .property-overview__section-header {
-    height: $header-height;
     color: $header-color;
     font-size: $header-font;
     font-weight: $weight-medium;
 }
 
 .property-overview__address {
-    height: $address-height;
     margin-top: $address-spacing;
     font-size: $text-size;
 }

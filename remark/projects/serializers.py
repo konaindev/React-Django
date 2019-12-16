@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .constants import BUILDING_CLASS_UI
+from .constants import BUILDING_CLASS_UI, PROPERTY_TYPE, PROPERTY_STYLES, PROPERTY_STYLE_AUTO
 from .models import Project
 from .reports.selectors import ReportLinks
 
@@ -136,10 +136,14 @@ class ProjectSerializer(serializers.ModelSerializer):
         return obj.property.total_units
 
     def get_property_type(self, obj):
-        return obj.property.property_type
+        ptype = obj.property.property_type
+        for property_type in PROPERTY_TYPE:
+            if property_type[0] == ptype:
+                return property_type[1]
+        return None
 
     def get_property_style(self, obj):
-        return obj.property.property_style
+        return obj.property.calculated_property_style
 
     def get_property_owner(self, obj):
         return obj.property_owner and obj.property_owner.name

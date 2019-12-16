@@ -24,6 +24,7 @@ from remark.lib.metrics import (
     SumIntervalMetric,
     ModelPeriod,
 )
+from remark.lib.geo import load_country_choices_from_json
 from remark.projects.spreadsheets import SpreadsheetKind, get_activator_for_spreadsheet
 from remark.projects.reports.performance import PerformanceReport
 from remark.projects.reports.selectors import ReportLinks
@@ -33,9 +34,13 @@ from remark.projects.constants import (
     BUILDING_CLASS,
     SIZE_LANDSCAPE,
     SIZE_THUMBNAIL,
+    BENCHMARK_CATEGORIES,
+    BENCHMARK_KPIS,
     SIZE_PROPERTY_HOME,
-    SIZE_DASHBOARD
+    SIZE_DASHBOARD,
+    PROPERTY_STYLE_AUTO
 )
+
 from remark.users.constants import PROJECT_ROLES
 
 
@@ -67,6 +72,9 @@ def building_public_id():
 
 def public_property_id():
     return public_id("property")
+
+def benchmark_public_id():
+    return public_id("benchmark")
 
 
 def building_logo_media_path(property, filename):
@@ -664,6 +672,7 @@ class Property(models.Model):
     building_image_landscape_cropping = ImageRatioFieldExt("building_image", "{}x{}".format(*SIZE_LANDSCAPE))
 
     property_type = models.IntegerField(choices=PROPERTY_TYPE, null=True, blank=False)
+    property_style = models.IntegerField(choices=PROPERTY_STYLES, null=True, blank=False, default=0)
     property_url = models.URLField(max_length=128, null=True, blank=True)
 
     building_class = models.IntegerField(
@@ -690,26 +699,30 @@ class Property(models.Model):
     )
 
     @property
-    def property_style(self):
-        buildings = self.building_set.all()
-        if len(buildings) == 1:
-            build = buildings[0]
-            if build.number_of_floors < 1:
-                return PROPERTY_STYLES["other"]
-            elif 1 <= build.number_of_floors <= 4:
-                if build.has_elevator:
-                    return PROPERTY_STYLES["low_rise"]
-                return PROPERTY_STYLES["walk_up"]
-            elif 5 <= build.number_of_floors <= 9:
-                return PROPERTY_STYLES["mid_rise"]
-            elif build.number_of_floors >= 10:
-                return PROPERTY_STYLES["hi_rise"]
-        elif len(buildings) >= 2:
-            tower_blocks = list(filter(lambda b: b.number_of_floors >= 10, buildings))
-            if len(tower_blocks) > 0:
-                return PROPERTY_STYLES["tower_block"]
-            return PROPERTY_STYLES["garden"]
-        return PROPERTY_STYLES["other"]
+    def calculated_property_style(self):
+        style = self.property_style
+        if style == PROPERTY_STYLE_AUTO or style is None or len(PROPERTY_STYLES) <= style:
+            buildings = self.building_set.all()
+            if len(buildings) == 1:
+                build = buildings[0]
+                if build.number_of_floors < 1:
+                    return PROPERTY_STYLES[7][1]  # Other
+                elif 1 <= build.number_of_floors <= 4:
+                    if build.has_elevator:
+                        return PROPERTY_STYLES[1][1]  # Lo-Rise
+                    return PROPERTY_STYLES[2][1]  # Walk Up
+                elif 5 <= build.number_of_floors <= 9:
+                    return PROPERTY_STYLES[3][1]  # Mid-Rise
+                elif build.number_of_floors >= 10:
+                    return PROPERTY_STYLES[4][1]  # Hi-Rise
+            elif len(buildings) >= 2:
+                tower_blocks = list(filter(lambda b: b.number_of_floors >= 10, buildings))
+                if len(tower_blocks) > 0:
+                    return PROPERTY_STYLES[5][1]  # Tower Block
+                return PROPERTY_STYLES[6][1]  # Garden
+            return PROPERTY_STYLES[7][1]  # Other
+        else:
+            return PROPERTY_STYLES[style][1]
 
     def get_geo_state(self):
         return self.geo_address.state
@@ -1457,3 +1470,60 @@ class Building(models.Model):
     )
 
     objects = BuildingManager()
+
+
+class CountryBenchmarkManager(models.Manager):
+    pass
+
+
+class CountryBenchmark(models.Model):
+    public_id = models.CharField(
+        primary_key=True,
+        default=benchmark_public_id,
+        help_text="National Benchmark ID",
+        max_length=50,
+        editable=False,
+    )
+
+    start = models.DateField(help_text="Start Date")
+    end = models.DateField(help_text="End Date")
+
+    country_id = models.IntegerField(choices=load_country_choices_from_json(), default=233)
+    category = models.IntegerField(choices=BENCHMARK_CATEGORIES)
+    kpi = models.CharField(choices=BENCHMARK_KPIS, max_length=50)
+
+    threshold_0 = models.FloatField(
+        help_text="Threshold between Low Performing and Below Average"
+    )
+    threshold_1 = models.FloatField(
+        help_text="Threshold between Below Average and Average"
+    )
+    threshold_2 = models.FloatField(
+        help_text="Threshold between Average and Above Average"
+    )
+    threshold_3 = models.FloatField(
+        help_text="Threshold between Above Average and High Performing"
+    )
+
+    property_count_0 = models.IntegerField(
+        help_text="Property Count for Low Performing"
+    )
+    property_count_1 = models.IntegerField(
+        help_text="Property Count for Below Average Performing"
+    )
+    property_count_2 = models.IntegerField(
+        help_text="Property Count for Average Performing"
+    )
+    property_count_3 = models.IntegerField(
+        help_text="Property Count for Above Average Performing"
+    )
+    property_count_4 = models.IntegerField(
+        help_text="Property Count for High Performing"
+    )
+    total_property_count = models.IntegerField(
+        help_text="All the properties in this category"
+    )
+
+    last_updated = models.DateTimeField(auto_now=True)
+
+    objects = CountryBenchmarkManager()
