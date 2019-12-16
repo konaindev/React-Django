@@ -472,6 +472,7 @@ class SearchTagView(APIView):
         else:
             tags = Tag.objects.filter(word__icontains=word, projects__admin_group__in=user.groups.all())
         tags = tags \
+            .exclude(projects=project) \
             .annotate(count=Count("projects")) \
             .order_by("-count")[:self.tags_limit] \
             .values("word", "count") \

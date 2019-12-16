@@ -9,6 +9,7 @@ $controls-border: 1px solid $gray-4;
 $tag-padding: 8px 10px;
 $tag-color: $highlight-gray-3;
 $tag-bg: $gray-4;
+$tag-hover-bg: #323C47;
 $tag-border-radius: 4px;
 $tag-line-height: 1.625rem;
 $tag-count-color: $content-text-secondary-color;
@@ -53,6 +54,7 @@ $tags-spacing: 20px;
 
 .add-tag-field__suggestion-tag {
     display: inline-flex;
+    flex-wrap: nowrap;
     padding: $tag-padding;
     margin: 0 $tags-spacing $tags-spacing 0;
     color: $tag-color;
@@ -60,7 +62,11 @@ $tags-spacing: 20px;
     background-color: $tag-bg;
     border-radius: $tag-border-radius;
     line-height: $tag-line-height;
-    flex-wrap: nowrap;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $tag-hover-bg;
+    }
 }
 
 .add-tag-field__suggestion-tag-count {
