@@ -31,23 +31,7 @@ def get_project_facts(project, start, end):
     return project_facts
 
 
-def get_project_insights(project_facts):
-    project_insights = [
-        Insight(
-            name="lease_rate_against_target",
-            template="Property is {{ var_current_period_leased_rate }}%"
-            " Leased against period target of {{ var_target_leased_rate }}%,"
-            " assessed as {{ var_campaign_health_status | health_status_to_str }}.",
-            triggers=["trigger_is_active_campaign"],
-        ),
-        Insight(
-            name="change_health_status",
-            template="Campaign health has changed from {{var_prev_health_status | health_status_to_str}}"
-            " to {{var_campaign_health_status | health_status_to_str }} during this period.",
-            triggers=["trigger_health_status_is_changed"],
-        ),
-    ]
-
+def get_project_insights(project_facts, project_insights):
     final_insights = {}
 
     for project_insight in project_insights:
