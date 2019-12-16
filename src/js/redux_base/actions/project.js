@@ -14,7 +14,7 @@ const actions = {
     ),
   searchTags: projectId =>
     createAjaxAction(
-      "AJAX_GET_SUGGESTION_TAGS",
+      "AJAX_GET_SEARCH_PROJECT_TAGS",
       `${URLS.project}/${projectId}/search-tags/`,
       qs => qsStringify(qs)
     ),

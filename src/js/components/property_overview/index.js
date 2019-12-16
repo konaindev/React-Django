@@ -4,6 +4,7 @@ import React from "react";
 import ButtonLink from "../button_link";
 import Panel from "../panel";
 
+import { TYPING_TIMEOUT } from "../../constants";
 import AddTagField from "../add_tag_input";
 
 import { AddButton } from "./add";
@@ -79,8 +80,15 @@ export default class PropertyOverview extends React.PureComponent {
   };
 
   onAddTag = e => {
-    this.props.searchTags(e.target.value);
-    this.setState({ addingTag: e.target.value });
+    if (this.addTagTimeout) {
+      clearTimeout(this.addTagTimeout);
+    }
+    const value = e.target.value;
+    this.addTagTimeout = setTimeout(
+      () => this.props.searchTags(value),
+      TYPING_TIMEOUT
+    );
+    this.setState({ addingTag: value });
   };
 
   renderTags = () => {

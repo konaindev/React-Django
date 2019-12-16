@@ -52,6 +52,10 @@ const reducer = (state = initialState, action) => {
       const { members } = action.data;
       project = { ...state.project, members };
       return { ...state, project };
+    case "AJAX_GET_SEARCH_PROJECT_TAGS_SUCCESS": {
+      const { tags } = action.payload;
+      return { ...state, suggestedTags: tags };
+    }
     case "AJAX_POST_CREATE_TAG_SUCCESS": {
       const { custom_tags } = action.payload;
       project = { ...state.project, custom_tags };

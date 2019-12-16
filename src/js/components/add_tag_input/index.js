@@ -66,9 +66,9 @@ export default class AddTagField extends React.PureComponent {
       return;
     }
     const tags = this.props.suggestedTags.map(tag => (
-      <div className="add-tag-field__suggestion-tag" key={tag.name}>
+      <div className="add-tag-field__suggestion-tag" key={tag.word}>
         <div className="add-tag-field__suggestion-tag-name">
-          {this.renderTagName(tag.name)}
+          {this.renderTagName(tag.word)}
         </div>
         <div className="add-tag-field__suggestion-tag-count">{tag.count}</div>
       </div>
