@@ -1,34 +1,50 @@
-from remark_airflow.insights.framework.core import Insight
 from remark_airflow.insights.impl.triggers import (
     trigger_is_active_campaign,
     trigger_campaign_health_status_off_track,
     trigger_health_status_is_changed,
 )
+from remark_airflow.insights.impl.utils import cop
 from remark_airflow.insights.impl.vars import (
     var_campaign_health_status,
     var_current_period_leased_rate,
     var_target_leased_rate,
     var_prev_health_status,
+    var_project,
 )
 
-PROJECT_FACT_GENERATORS = (
-    trigger_is_active_campaign,
-    trigger_campaign_health_status_off_track,
-    trigger_health_status_is_changed,
-    var_current_period_leased_rate,
-    var_target_leased_rate,
-    var_campaign_health_status,
-    var_prev_health_status,
-)
+from graphkit import compose
 
 
-def get_project_facts(project, start, end):
-    project_facts = {}
-    for factoid in PROJECT_FACT_GENERATORS:
-        result = factoid(project, start, end)
-        name = factoid.__name__
-        project_facts[name] = result
-    return project_facts
+def get_project_facts(project_id, start, end):
+    project_graph = compose(name="project_graph")(
+        cop(var_current_period_leased_rate, "project", "start", "end"),
+        cop(var_target_leased_rate, "project", "start", "end"),
+        cop(
+            var_campaign_health_status,
+            var_current_period_leased_rate,
+            var_target_leased_rate,
+        ),
+        cop(var_prev_health_status, "project", "start"),
+        cop(
+            trigger_is_active_campaign,
+            "project",
+            "start",
+            var_campaign_health_status,
+            var_prev_health_status,
+        ),
+        cop(trigger_campaign_health_status_off_track, var_campaign_health_status),
+        cop(
+            trigger_health_status_is_changed,
+            var_campaign_health_status,
+            var_prev_health_status,
+        ),
+    )
+    project = var_project(project_id)
+    args = {"start": start, "end": end, "project": project}
+    data = project_graph(args)
+    for k in args:
+        del data[k]
+    return data
 
 
 def get_project_insights(project_facts, project_insights):

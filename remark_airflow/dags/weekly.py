@@ -51,7 +51,7 @@ def generator():
     for p in projects:
         public_id = p.public_id
         task_id = f"weekly_insights_{public_id}"
-        op_kwargs = {"project": p, "task_id": task_id}
+        op_kwargs = {"project_id": public_id, "task_id": task_id}
         PythonOperator(
             task_id=task_id,
             provide_context=True,
