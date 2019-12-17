@@ -3,6 +3,10 @@ from remark_airflow.insights.impl.vars import var_campaign_health_status, var_pr
 
 
 def trigger_is_active_campaign(project, start, end):
+    health_status = var_campaign_health_status(project, start, end)
+    prev_health_status = var_prev_health_status(project, start, end)
+    if health_status is None or prev_health_status is None:
+        return None
     return project.baseline_end <= start
 
 
