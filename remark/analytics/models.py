@@ -38,7 +38,9 @@ class AnalyticsResponse(models.Model):
 
     project_id = models.ForeignKey(
         'projects.Project',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        blank=False,
+        help_text="Project associated with the response"
     )
 
     date = models.DateField(db_index=True, help_text="The date for the data results.")
@@ -51,7 +53,9 @@ class AnalyticsReferralSource(models.Model):
 
     response_id = models.ForeignKey(
         'analytics.AnalyticsResponse',
-        on_delete=models.CASCADE
+        on_delete=models.CASCADE,
+        blank=False,
+        help_text="analytics response associated with the referral source"
     )
 
     source_name = models.CharField(max_length=255, help_text="The source of referrals.")
