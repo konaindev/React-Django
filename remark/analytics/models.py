@@ -61,3 +61,17 @@ class AnalyticsReferralSource(models.Model):
 
     session_duration = models.CharField(max_length=255, help_text="The length (returned as a string) of a session measured in seconds and reported in second increments.")
 
+
+class AnalyticsUniqueSiteVisitors(models.Model):
+    """
+    the model for Unique Site visitors for a project
+    """
+    project_id = models.ForeignKey(
+        'projects.Project',
+        on_delete=models.CASCADE
+    )
+
+    date = models.DateField(db_index=True, help_text="The date for the USV data.")
+
+    usv_day_count = models.FloatField(help_text="The number of sessions marked as a user's first sessions by the day.")
+    usv_hourly_count = models.FloatField(help_text="The number of sessions marked as a user's first sessions by the hour within a the day.")
