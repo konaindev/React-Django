@@ -11,17 +11,16 @@ import "./add_tag_input.scss";
 export default class AddTagField extends React.PureComponent {
   static propTypes = {
     className: PropTypes.string,
-    value: PropTypes.string,
     suggestedTags: PropTypes.array,
     onChange: PropTypes.func,
     onCreateTag: PropTypes.func
   };
   static defaultProps = {
-    value: "",
     suggestedTags: [],
     onChange() {},
     onCreateTag() {}
   };
+  state = { value: "" };
 
   inputRef = input => {
     this.input = input;
@@ -31,7 +30,14 @@ export default class AddTagField extends React.PureComponent {
     this.input.node.focus();
   }
 
-  createTag = () => this.props.onCreateTag(this.props.value);
+  onChange = e => {
+    const value = e.target.value;
+    this.props.onChange(value);
+    this.setState({ value });
+  };
+
+  createTag = () => this.props.onCreateTag(this.state.value);
+
   onEnter = e => {
     if (e.key === "Enter") {
       this.createTag();
@@ -39,7 +45,7 @@ export default class AddTagField extends React.PureComponent {
   };
 
   renderTagName = word => {
-    const { value } = this.props;
+    const { value } = this.state;
     if (!word || !value) {
       return word;
     }
@@ -91,12 +97,12 @@ export default class AddTagField extends React.PureComponent {
           className="add-tag-field__input"
           placeholder="e.g. Southwestern, 2020 Fund"
           theme="simple"
-          onChange={this.props.onChange}
+          onChange={this.onChange}
           onKeyUp={this.onEnter}
-          value={this.props.value}
+          value={this.state.value}
           ref={this.inputRef}
         />
-        {this.props.value ? (
+        {this.state.value ? (
           <Panel className="add-tag-field__suggestion">
             <div className="add-tag-field__suggestion-content">
               <div className="add-tag-field__suggestion-text">{text}</div>

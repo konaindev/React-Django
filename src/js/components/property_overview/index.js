@@ -4,10 +4,8 @@ import React from "react";
 import ButtonLink from "../button_link";
 import Panel from "../panel";
 
-import { TYPING_TIMEOUT } from "../../constants";
-import AddTagField from "../add_tag_input";
+import AddTagField from "../../containers/add_tag_input";
 
-import { AddButton } from "./add";
 import Tag from "./tag";
 import Tile from "./tile";
 import "./property_overview.scss";
@@ -16,17 +14,10 @@ export default class PropertyOverview extends React.PureComponent {
   static propTypes = {
     project: PropTypes.object.isRequired,
     buildingImageURL: PropTypes.string.isRequired,
-    isAddTagInput: PropTypes.bool,
-    suggestedTags: PropTypes.array,
-    showAddTagInput: PropTypes.func,
-    onRemoveTag: PropTypes.func,
-    onCreateTag: PropTypes.func,
-    searchTags: PropTypes.func
+    onRemoveTag: PropTypes.func
   };
   static defaultProps = {
-    onRemoveTag() {},
-    onCreateTag() {},
-    searchTags() {}
+    onRemoveTag() {}
   };
 
   static characteristicsFields = {
@@ -44,8 +35,6 @@ export default class PropertyOverview extends React.PureComponent {
     property_manager: "property manager",
     developer: "developer"
   };
-
-  state = { addingTag: "" };
 
   _renderFields = (fields, colsNum, emptyMessage) => {
     const { project } = this.props;
@@ -74,23 +63,6 @@ export default class PropertyOverview extends React.PureComponent {
     );
   };
 
-  onShowAddInput = () => {
-    this.props.showAddTagInput();
-    this.setState({ addingTag: "" });
-  };
-
-  onAddTag = e => {
-    if (this.addTagTimeout) {
-      clearTimeout(this.addTagTimeout);
-    }
-    const value = e.target.value;
-    this.addTagTimeout = setTimeout(
-      () => this.props.searchTags(value),
-      TYPING_TIMEOUT
-    );
-    this.setState({ addingTag: value });
-  };
-
   renderTags = () => {
     const { project } = this.props;
     if (
@@ -111,21 +83,11 @@ export default class PropertyOverview extends React.PureComponent {
     let message = "Custom property groups are made for each tag.";
     if (project.is_admin) {
       message = "Create custom property groups by adding a tag.";
-      const isAddTag = this.props.isAddTagInput;
-      const addKey = "add-tag";
       tags.push(
-        isAddTag ? (
-          <AddTagField
-            className="property-overview__add-tag-input"
-            value={this.state.addingTag}
-            suggestedTags={this.props.suggestedTags}
-            onChange={this.onAddTag}
-            onCreateTag={this.props.onCreateTag}
-            key={`${addKey}-input`}
-          />
-        ) : (
-          <AddButton onClick={this.onShowAddInput} key={`${addKey}-button`} />
-        )
+        <AddTagField
+          className="property-overview__add-tag-input"
+          key="add-tag-input"
+        />
       );
     }
     return (

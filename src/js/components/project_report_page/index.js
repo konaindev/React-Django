@@ -39,15 +39,12 @@ export class ProjectReportPage extends Component {
     share_info: PropTypes.object,
     backUrl: PropTypes.string,
     fetchingReports: PropTypes.bool,
-    isAddTagInput: PropTypes.bool,
-    suggestedTags: PropTypes.array,
     historyPush: PropTypes.func.isRequired,
     dispatch: PropTypes.func.isRequired
   };
 
   static defaultProps = {
-    backUrl: "/dashboard",
-    isAddTagInput: false
+    backUrl: "/dashboard"
   };
 
   getBuildingImage = () => {
@@ -68,13 +65,6 @@ export class ProjectReportPage extends Component {
     this.props.dispatch(
       projectActions.createTag(this.props.project.public_id)({ body: { word } })
     );
-
-  searchTags = word =>
-    this.props.dispatch(
-      projectActions.searchTags(this.props.project.public_id)({ word })
-    );
-
-  showAddTagInput = () => this.props.dispatch(projectActions.showAddTagInput());
 
   renderSubheader = () => {
     const { project, share_info, backUrl, reportType } = this.props;
@@ -126,14 +116,7 @@ export class ProjectReportPage extends Component {
   };
 
   renderReportContent = () => {
-    const {
-      reportType,
-      reportSpan,
-      report,
-      isAddTagInput,
-      suggestedTags,
-      project
-    } = this.props;
+    const { reportType, reportSpan, report, project } = this.props;
 
     if (reportType === "overview") {
       const buildingImageURL = this.getBuildingImage();
@@ -141,12 +124,7 @@ export class ProjectReportPage extends Component {
         <PropertyOverview
           project={project}
           buildingImageURL={buildingImageURL}
-          isAddTagInput={isAddTagInput}
-          suggestedTags={suggestedTags}
-          onCreateTag={this.createTag}
           onRemoveTag={this.removeTag}
-          showAddTagInput={this.showAddTagInput}
-          searchTags={this.searchTags}
         />
       );
     }
