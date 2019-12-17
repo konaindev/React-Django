@@ -26,7 +26,7 @@ def set_postgres_connection_airflow():
     for line in bash_response:
         string_line = line.decode("utf-8")
         if "dbname" in string_line:
-            command_values = process_postgres_string(string_line.split())
+            command_values = process_postgres_string(string_line.strip())
             set_connection_command = add_postgres_connection(command_values)
             response = run_command(set_connection_command).communicate()
             print(response)
@@ -41,8 +41,8 @@ def add_postgres_connection(values):
 
 def process_postgres_string(postgres_string):
     response = {}
-    values_string = postgres_string.strip()
-    values_string = values_string.strip('\"')
+    values_string = postgres_string.strip('\"')
+    values_string = values_string.split()
     for value in values_string:
         key_value = value.split("=")
         response[key_value[0]] = key_value[1]
