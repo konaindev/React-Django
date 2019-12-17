@@ -1,20 +1,8 @@
-import datetime
-import decimal
 from unittest.mock import patch, Mock
 
 from django.test import TestCase
 
-from remark.crm.models import Business
-from remark.geo.models import Address
-from remark.projects.models import (
-    Project,
-    Fund,
-    TargetPeriod,
-    Period,
-    Property,
-    LeaseStage,
-)
-from remark.users.models import Account
+from remark_airflow.insights.framework.core import Insight
 from .projects import get_project_facts, get_project_insights
 
 mock_project_fact_generators = (
@@ -59,9 +47,24 @@ class GetProjectInsightsTestCase(TestCase):
             "var_campaign_health_status": 2,
             "var_prev_health_status": 0,
         }
+        self.project_insights = [
+            Insight(
+                name="lease_rate_against_target",
+                template="Property is {{ var_current_period_leased_rate }}%"
+                         " Leased against period target of {{ var_target_leased_rate }}%,"
+                         " assessed as {{ var_campaign_health_status | health_status_to_str }}.",
+                triggers=["trigger_is_active_campaign"],
+            ),
+            Insight(
+                name="change_health_status",
+                template="Campaign health has changed from {{var_prev_health_status | health_status_to_str}}"
+                         " to {{var_campaign_health_status | health_status_to_str }} during this period.",
+                triggers=["trigger_health_status_is_changed"],
+            ),
+        ]
 
     def test_get_project_insights(self):
-        result = get_project_insights(self.project_facts)
+        result = get_project_insights(self.project_facts, self.project_insights)
         expected = {
             "lease_rate_against_target": "Property is 0.89% Leased against period target of 0.94%, assessed as On Track.",
             "change_health_status": "Campaign health has changed from Off Track to On Track during this period."
@@ -72,6 +75,6 @@ class GetProjectInsightsTestCase(TestCase):
         project_facts = self.project_facts.copy()
         project_facts["trigger_is_active_campaign"] = False
         project_facts["trigger_health_status_is_changed"] = False
-        result = get_project_insights(project_facts)
+        result = get_project_insights(project_facts, self.project_insights)
         expected = {}
         self.assertEqual(result, expected)
