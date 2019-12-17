@@ -1,4 +1,5 @@
 from django.db import models  # noqa
+from django.contrib.postgres.fields import ArrayField
 
 
 class AnalyticsProviderManager(models.Manager):
@@ -74,4 +75,4 @@ class AnalyticsUniqueSiteVisitors(models.Model):
     date = models.DateField(db_index=True, help_text="The date for the USV data.")
 
     usv_day_count = models.FloatField(help_text="The number of sessions marked as a user's first sessions by the day.")
-    usv_hourly_count = models.FloatField(help_text="The number of sessions marked as a user's first sessions by the hour within a the day.")
+    usv_hourly_count = ArrayField(models.FloatField(help_text="The number of sessions marked as a user's first sessions by the hour within a the day."), size=24)
