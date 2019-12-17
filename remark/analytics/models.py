@@ -29,3 +29,9 @@ class AnalyticsProvider(models.Model):
         constraints = [
             models.UniqueConstraint(fields=["project", "provider"], name="unique_project_provider"),
         ]
+
+class GoogleAnalyticsResponse(models.Model):
+    """
+    the model for a google analytics response per viewId
+    """
+    
