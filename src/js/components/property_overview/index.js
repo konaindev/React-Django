@@ -4,7 +4,7 @@ import React from "react";
 import ButtonLink from "../button_link";
 import Panel from "../panel";
 
-import AddTagField from "../../containers/add_tag_input";
+import AddTagField from "../../containers/add_tag_field";
 
 import Tag from "./tag";
 import Tile from "./tile";

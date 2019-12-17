@@ -8,7 +8,7 @@ import Panel from "../panel";
 
 import "./add_tag_input.scss";
 
-export default class AddTagField extends React.PureComponent {
+export default class AddTagInput extends React.PureComponent {
   static propTypes = {
     className: PropTypes.string,
     suggestedTags: PropTypes.array,

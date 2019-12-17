@@ -2,13 +2,13 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import AddTagField from "../../components/add_tag_input";
+import AddTagInput from "../../components/add_tag_input";
 import { TYPING_TIMEOUT } from "../../constants";
 import { projectActions } from "../../redux_base/actions";
 
 import AddButton from "./add";
 
-class AddTagFieldContainer extends React.PureComponent {
+class AddTagField extends React.PureComponent {
   static propTypes = {
     className: PropTypes.string,
     project: PropTypes.object,
@@ -40,7 +40,7 @@ class AddTagFieldContainer extends React.PureComponent {
     let component;
     if (this.props.isAddTagInput) {
       component = (
-        <AddTagField
+        <AddTagInput
           className={this.props.className}
           suggestedTags={this.props.suggestedTags}
           onChange={this.onAddTag}
@@ -60,4 +60,4 @@ const mapState = state => ({
   suggestedTags: state.projectReports.suggestedTags
 });
 
-export default connect(mapState)(AddTagFieldContainer);
+export default connect(mapState)(AddTagField);
