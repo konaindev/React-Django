@@ -36,7 +36,7 @@ def set_postgres_connection_airflow():
 
 
 def add_postgres_connection(values):
-    command = f"gcloud composer environments run cicd-pipeline --location us-central1 connections -- --add --conn_id=postgres_default --conn_type=postgres --conn_host={values['host']} --conn_schema={values['dbname']} --conn_login={values['user']} --conn_password={values['password']} --conn_port={values['port']}"
+    command = f"gcloud composer environments run {os.environ.get('COMPOSER_ENV')} --location us-central1 connections -- --add --conn_id=postgres_default --conn_type=postgres --conn_host={values['host']} --conn_schema={values['dbname']} --conn_login={values['user']} --conn_password={values['password']} --conn_port={values['port']}"
     return command
 
 def process_postgres_string(postgres_string):
