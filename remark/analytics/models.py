@@ -62,7 +62,7 @@ class AnalyticsReferralSource(models.Model):
 
     # source_url = models.CharField(max_length=255, help_text="The path of the referring URL (e.g., document.referrer).")
 
-    bounces = models.FloatField(help_text="The total number of single page (or single interaction hit) sessions for the property.")
+    bounces = models.PositiveIntegerField(help_text="The total number of single page (or single interaction hit) sessions for the property.")
 
     session_duration = models.CharField(max_length=255, help_text="The length (returned as a string) of a session measured in seconds and reported in second increments.")
 
@@ -78,5 +78,5 @@ class AnalyticsUniqueSiteVisitors(models.Model):
 
     date = models.DateField(db_index=True, help_text="The date for the USV data.")
 
-    usv_day_count = models.FloatField(help_text="The number of sessions marked as a user's first sessions by the day.")
-    usv_hourly_count = ArrayField(models.FloatField(help_text="The number of sessions marked as a user's first sessions by the hour within a the day."), size=24)
+    usv_day_count = models.PositiveIntegerField(help_text="The number of sessions marked as a user's first sessions by the day.")
+    usv_hourly_count = ArrayField(models.PositiveIntegerField(help_text="The number of sessions marked as a user's first sessions by the hour within a the day."), size=24)
