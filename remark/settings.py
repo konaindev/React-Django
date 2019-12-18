@@ -290,7 +290,7 @@ CACHES = {
 #
 
 GOOGLE_GEOCODE_API_KEY = required_env("GOOGLE_GEOCODE_API_KEY")
-GOOGLE_APPLICATION_CREDENTIALS = required_env("GOOGLE_APPLICATION_CREDENTIALS")
+GOOGLE_SERVICE_ACCOUNT_KEY = required_env("GOOGLE_SERVICE_ACCOUNT_KEY")
 
 #
 # Analytics (hey, we might want these down the road).

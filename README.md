@@ -89,7 +89,7 @@ BASE_URL=http://localhost:8000
 DEBUG_PRINT_LOGGER=YES
 EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
 EMAIL_USE_TLS=NO
-GOOGLE_APPLICATION_CREDENTIALS=(*see Credentials in Airflow Deployment feature branch section*)
+GOOGLE_SERVICE_ACCOUNT_KEY=(*see Credentials in Airflow Deployment feature branch section*)
 GOOGLE_COMPOSER_PROJECT=remarkably-airflow-development
 REDIS_URL=redis://127.0.0.1:6379/
 SENTRY_URL=https://<hash>@sentry.io/<path>
@@ -129,7 +129,7 @@ Delete the Google Composer Environment for your feature branch:
 
 May need to run `gcloud auth login` if it's your first time. 
 
-*GOOGLE_APPLICATION_CREDENTIALS can be found in Remarkably's Dropbox > engineering > credentials. Copy and paste the entire json as the value for GOOGLE_APPLICATION_CREDENTIALS. 
+*GOOGLE_SERVICE_ACCOUNT_KEY can be found in Remarkably's Dropbox > engineering > credentials. Copy and paste the entire json as the value for GOOGLE_SERVICE_ACCOUNT_KEY. 
 
 ### Storybook
 
