@@ -20,6 +20,10 @@ from remark_airflow.insights.impl.projects.projects import (
     get_project_facts,
     get_project_insights,
 )
+from remark_airflow.insights.impl.projects.insights import (
+    change_health_status,
+    lease_rate_against_target,
+)
 from remark.projects.models import Project
 from remark.insights.models import WeeklyInsights
 
@@ -28,21 +32,33 @@ default_args = {"start_date": datetime(2019, 12, 22, 00, 00)}
 
 dag = DAG("weekly_insights", default_args=default_args, schedule_interval="0 0 * * 0")
 
+project_insights = [lease_rate_against_target, change_health_status]
 
-def weekly_insights(project, task_id, **kwargs):
+
+def weekly_insights(project_id, task_id, **kwargs):
     execution_date = kwargs["execution_date"]
     end = date.fromtimestamp(execution_date.timestamp())
     start = end - timedelta(weeks=1)
 
-    project_facts = get_project_facts(project, start, end)
-    insights = get_project_insights(project_facts)
+    project_facts = get_project_facts(project_id, start, end)
+    insights = get_project_insights(project_facts, project_insights)
 
-    weekly_insight, _ = WeeklyInsights.objects.get_or_create(
-        project=project, start=start, end=end
-    )
-    weekly_insight.facts_data = project_facts
-    weekly_insight.insights_data = insights
-    weekly_insight.save()
+    try:
+        weekly_ins = WeeklyInsights.objects.get(
+            project_id=project_id, start=start, end=end
+        )
+        weekly_ins.facts = project_facts
+        weekly_ins.insights = insights
+        weekly_ins.save()
+    except WeeklyInsights.DoesNotExist:
+        WeeklyInsights.objects.create(
+            project_id=project_id,
+            start=start,
+            end=end,
+            facts=project_facts,
+            insights=insights,
+        )
+
     return insights
 
 
