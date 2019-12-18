@@ -119,10 +119,12 @@ Warning: this is fancy magic. I imagine it is fragile. -Dave
 ### Airflow Deployment for feature branch
 For airflow development and testing while working on branch. The environment will have the same name as your branch within the `remarkably-airflow-development` project in Google Cloud
 
-Create a Google Composer Environment for your feature branch
+Create a Google Composer Environment for your feature branch:
+
 `./scripts/create_airflow_env.sh`
 
-Delete the Google Composer Environment for your feature branch
+Delete the Google Composer Environment for your feature branch:
+
 `./scripts/delete_airflow_env.sh`
 
 May need to run `gcloud auth login` if it's your first time. 
