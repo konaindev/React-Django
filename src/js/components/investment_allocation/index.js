@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { VictoryPie } from "victory";
+import { VictoryPie, VictoryLabel } from "victory";
 import cx from "classnames";
 
 import BoxRow from "../box_row";
@@ -13,6 +13,18 @@ import {
   formatCurrencyShorthandWithDigit
 } from "../../utils/formatters";
 import scssVars from "./investment_allocation.scss";
+
+const MAGIC = 0.449;
+
+const labelFunc = numberOfValues => (x) => {
+  let labelRadius = 40;
+  if (numberOfValues === 1) {
+    labelRadius = -5;
+  } else if (x.endAngle - x.startAngle < MAGIC) {
+    labelRadius = 70;
+  }
+  return labelRadius;
+};
 
 export const InvestmentAllocationChart = ({ name, expenses, total }) => {
   const ExpenseRow = ({ title, value, infoTooltip }) => (
@@ -54,10 +66,7 @@ export const InvestmentAllocationChart = ({ name, expenses, total }) => {
     marketIntelligence
   ].filter(x => x).length;
 
-  let labelRadius = 40;
-  if (numberOfValues === 1) {
-    labelRadius = -5;
-  }
+  let labelRadius = labelFunc(numberOfValues);
 
   if (numberOfValues === 0) {
     pieStyle.parent = {
