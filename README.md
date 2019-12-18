@@ -102,6 +102,17 @@ SENTRY_URL=https://<hash>@sentry.io/<path>
 
 (TODO: `heroku local` will be the way forward, eventually)
 
+### Airflow Deployment for feature branch
+For airflow development and testing while working on branch. The environment will have the same name as your branch within the `remarkably-airflow-development` project in Google Cloud
+
+Create a Google Composer Environment for your feature branch
+`./scripts/create_airflow_env.sh`
+
+Delete the Google Composer Environment for your feature branch
+`./scripts/delet_airflow_env.sh`
+
+May need to run `gcloud auth login`
+
 ### Running the project locally: fancy version.
 
 Want some fancy magic to reload your web page any time any front or backend asset changes?
