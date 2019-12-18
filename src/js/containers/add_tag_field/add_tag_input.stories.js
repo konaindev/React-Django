@@ -13,7 +13,11 @@ import props from "./props";
 const { store } = storeFunc();
 const withProvider = story => <Provider store={store}>{story()}</Provider>;
 
-const apiMock = story => {
+export const apiMock = story => {
+  // Init state
+  const projectReports = store.getState().projectReports;
+  projectReports.project = props.project;
+  // API mock
   const mock = new MockAdapter(axios);
   const public_id = props.project.public_id;
   const baseURL = `${API_URL_PREFIX}${URLS.project}/${public_id}`;
@@ -41,8 +45,4 @@ const apiMock = story => {
 storiesOf("AddTagField", module)
   .addDecorator(apiMock)
   .addDecorator(withProvider)
-  .add("default", () => {
-    const projectReports = store.getState().projectReports;
-    projectReports.project = props.project;
-    return <AddTagField />;
-  });
+  .add("default", () => <AddTagField />);
