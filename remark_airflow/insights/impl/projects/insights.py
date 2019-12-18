@@ -15,3 +15,11 @@ change_health_status = Insight(
     " to {{var_campaign_health_status | health_status_to_str }} during this period.",
     triggers=["trigger_health_status_is_changed"],
 )
+
+usv_exe_off_track = Insight(
+    name="usv_exe_off_track",
+    template="Your top-to-bottom, or ‘search to lease’ funnel conversion rate"
+             " has been Off Track for {{ var_weeks_usv_exe_off_track }}"
+             " your {{ var_kpi_usv_exe_off_track }} has negatively impacted it most.",
+    triggers=["trigger_usv_exe_off_track"],
+)

@@ -12,13 +12,35 @@ from .projects import get_project_facts, get_project_insights
 class GetProjectFactsTestCase(TestCase):
     def setUp(self):
         start = datetime.date(year=2019, month=12, day=2)
-        end = datetime.date(year=2019, month=12, day=8)
+        end = datetime.date(year=2019, month=12, day=9)
         project = create_project()
+        create_periods(
+            project,
+            start=datetime.date(year=2019, month=11, day=25),
+            end=datetime.date(year=2019, month=12, day=2),
+            period_params={
+                "leased_units_end": 109,
+                "occupiable_units_start": 200,
+                "leases_executed": 4,
+                "usvs": 414,
+            },
+            target_period_params={
+                "target_leased_rate": Decimal("0.940"),
+                "target_leases_executed": 6,
+                "target_usvs": 300,
+            },
+        )
         create_periods(
             project,
             start=start,
             end=end,
-            period_params={"leased_units_end": 179, "occupiable_units_start": 200},
+            period_params={
+                "leased_units_end": 179,
+                "occupiable_units_start": 200,
+                "leases_executed": 4,
+                "usvs": 400,
+            },
+            target_period_params={"target_leases_executed": 6, "target_usvs": 300},
         )
         self.project_id = project.public_id
         self.start = start
@@ -32,10 +54,21 @@ class GetProjectFactsTestCase(TestCase):
             "trigger_is_active_campaign": True,
             "var_campaign_health_status": 2,
             "var_current_period_leased_rate": 0.895,
-            "var_prev_health_status": -1,
+            "var_prev_health_status": 0,
             "var_target_leased_rate": Decimal("0.940"),
+            "var_usv_exe": 0.01,
+            "var_target_usv_exe": 0.02,
+            "var_usv_exe_health_status": 0,
+            "trigger_usv_exe_off_track": True,
+            "var_weeks_usv_exe_off_track": 2,
+            "var_kpi_usv_exe_off_track": "Volume of USV",
         }
-        self.assertEqual(result, expected)
+        self.maxDiff = None
+        del result["var_base_kpis"]
+        del result["var_base_targets"]
+        del result["var_computed_kpis"]
+        del result["var_target_computed_kpis"]
+        self.assertDictEqual(result, expected)
 
 
 class GetProjectInsightsTestCase(TestCase):

@@ -13,3 +13,7 @@ def trigger_campaign_health_status_off_track(health_status):
 
 def trigger_health_status_is_changed(health_status, prev_health_status):
     return prev_health_status != health_status
+
+
+def trigger_usv_exe_off_track(health_status):
+    return health_status == HEALTH_STATUS["OFF_TRACK"]
