@@ -62,7 +62,7 @@ class AnalyticsReferralSource(models.Model):
 
     bounces = models.PositiveIntegerField(help_text="The total number of single page (or single interaction hit) sessions for the property.")
 
-    session_duration = models.PositiveIntegerField(max_length=255, help_text="The length (originally returned as a string) of a session measured in seconds and reported in second increments.")
+    session_duration = models.PositiveIntegerField(help_text="The length (originally returned as a string) of a session measured in seconds and reported in second increments.")
 
 
 class AnalyticsUniqueSiteVisitors(models.Model):
