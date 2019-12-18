@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { VictoryPie, VictoryLabel } from "victory";
+import { VictoryPie } from "victory";
 import cx from "classnames";
 
 import BoxRow from "../box_row";
@@ -16,7 +16,7 @@ import scssVars from "./investment_allocation.scss";
 
 const MAGIC = 0.449;
 
-const labelFunc = numberOfValues => (x) => {
+const labelFunc = numberOfValues => x => {
   let labelRadius = 40;
   if (numberOfValues === 1) {
     labelRadius = -5;
