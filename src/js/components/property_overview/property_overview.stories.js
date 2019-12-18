@@ -15,6 +15,9 @@ storiesOf("PropertyOverview", module)
   .addDecorator(apiMock)
   .addDecorator(withProvider)
   .add("default", () => <PropertyOverview {...props} />)
+  .add("is member", () => (
+    <PropertyOverview {...props} project={props.projectNotAdmin} />
+  ))
   .add("without site and image", () => (
     <PropertyOverview
       {...props}
