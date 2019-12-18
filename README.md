@@ -90,8 +90,10 @@ DEBUG_PRINT_LOGGER=YES
 EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
 EMAIL_USE_TLS=NO
 GOOGLE_APPLICATION_CREDENTIALS=content_of_google_service_account_key_file
+GOOGLE_COMPOSER_PROJECT=remarkably-airflow-development
 REDIS_URL=redis://127.0.0.1:6379/
 SENTRY_URL=https://<hash>@sentry.io/<path>
+API_VER=v1
 ```
 
 - Run a build of the front-end assets: `yarn build`.
@@ -101,17 +103,6 @@ SENTRY_URL=https://<hash>@sentry.io/<path>
 - Navigate to `http://localhost:8000` (navgating to `127.0.0.1:8000` could encounter CORS issues)
 
 (TODO: `heroku local` will be the way forward, eventually)
-
-### Airflow Deployment for feature branch
-For airflow development and testing while working on branch. The environment will have the same name as your branch within the `remarkably-airflow-development` project in Google Cloud
-
-Create a Google Composer Environment for your feature branch
-`./scripts/create_airflow_env.sh`
-
-Delete the Google Composer Environment for your feature branch
-`./scripts/delet_airflow_env.sh`
-
-May need to run `gcloud auth login`
 
 ### Running the project locally: fancy version.
 
@@ -124,6 +115,17 @@ Warning: this is fancy magic. I imagine it is fragile. -Dave
 ### Running the Frontend React Application
 
 `$ yarn run-build-ui` will start the `webpack-dev-server`, with the `development` environment and `webpack.dev.js` config file.
+
+### Airflow Deployment for feature branch
+For airflow development and testing while working on branch. The environment will have the same name as your branch within the `remarkably-airflow-development` project in Google Cloud
+
+Create a Google Composer Environment for your feature branch
+`./scripts/create_airflow_env.sh`
+
+Delete the Google Composer Environment for your feature branch
+`./scripts/delete_airflow_env.sh`
+
+May need to run `gcloud auth login` if it's your first time. 
 
 ### Storybook
 
