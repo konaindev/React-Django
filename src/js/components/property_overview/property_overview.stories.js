@@ -2,7 +2,7 @@ import React from "react";
 import { Provider } from "react-redux";
 import { storiesOf } from "@storybook/react";
 
-import { apiMock } from "../../containers/add_tag_field/add_tag_input.stories";
+import { apiMock } from "../../containers/add_tag_field/add_tag_field.stories";
 import storeFunc from "../../redux_base/store";
 
 import PropertyOverview from "./index";
