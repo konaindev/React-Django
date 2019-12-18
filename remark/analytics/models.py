@@ -60,8 +60,6 @@ class AnalyticsReferralSource(models.Model):
 
     source_name = models.CharField(max_length=255, help_text="The source of referrals.")
 
-    # source_url = models.CharField(max_length=255, help_text="The path of the referring URL (e.g., document.referrer).")
-
     bounces = models.PositiveIntegerField(help_text="The total number of single page (or single interaction hit) sessions for the property.")
 
     session_duration = models.CharField(max_length=255, help_text="The length (returned as a string) of a session measured in seconds and reported in second increments.")
