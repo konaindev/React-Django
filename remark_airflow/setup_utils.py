@@ -10,7 +10,7 @@ def run_command(shell_script):
     return process
 
 def check_pypi_packages():
-    pypi_shell_command = f"gcloud composer environments update {os.environ.get('COMPOSER_ENV')} --update-pypi-packages-from-file requirements.txt --location us-central1"
+    pypi_shell_command = f"gcloud composer environments update {os.environ.get('COMPOSER_ENV')} --update-pypi-packages-from-file airflow_requirements.txt --location us-central1"
     stdout, stderr = run_command(pypi_shell_command).communicate()
     stdout, stderr = (stdout.decode("utf-8"), stderr.decode("utf-8"))
     if "INVALID_ARGUMENT: Must specify a change to PYPI_DEPENDENCIES" in stderr:
