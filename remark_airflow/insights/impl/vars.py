@@ -111,11 +111,15 @@ def var_weeks_usv_exe_off_track(project, start, end):
     return weeks
 
 def var_kpi_usv_exe_off_track(project, weeks, end):
+    if weeks == 0:
+        return None
     start = end - timedelta(weeks=weeks)
     args = {"project": project, "start": start, "end": end}
     kpis = projects_kpi_graph(args)
     computed_kpis = kpis["var_computed_kpis"]
     target_computed_kpis = kpis["var_target_computed_kpis"]
+    if computed_kpis is None or target_computed_kpis is None:
+        return None
     kpi_health = {
         "Volume of USV": health_standard(computed_kpis["usv_cost"], target_computed_kpis["usv_cost"]),
         "USV>INQ": health_standard(computed_kpis["usv_inq"], target_computed_kpis["usv_inq"]),
