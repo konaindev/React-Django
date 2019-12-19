@@ -31,11 +31,10 @@ def var_base_targets(project, start, end):
     return base_targets
 
 
-def var_current_period_leased_rate(base_kpis):
-    if not base_kpis:
+def var_current_period_leased_rate(computed_kpis):
+    if not computed_kpis:
         return None
-    kpi = leased_rate_graph(base_kpis)
-    return kpi["leased_rate"]
+    return computed_kpis["leased_rate"]
 
 
 def var_target_leased_rate(base_targets):

@@ -12,6 +12,11 @@ def health_status_to_str(health_status):
     statuses = {-1: "Campaign Pending", 0: "Off Track", 1: "At Risk", 2: "On Track"}
     return statuses[health_status]
 
+def format_percent(value):
+    if value is None:
+        return "-"
+    return f"{value:.0%}"
+
 def hash_dict(func):
     """Transform mutable dictionnary
     Into immutable

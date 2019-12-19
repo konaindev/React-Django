@@ -3,8 +3,8 @@ from remark_airflow.insights.framework.core import Insight
 
 lease_rate_against_target = Insight(
     name="lease_rate_against_target",
-    template="Property is {{ var_current_period_leased_rate }}%"
-    " Leased against period target of {{ var_target_leased_rate }}%,"
+    template="Property is {{ var_current_period_leased_rate | format_percent }}"
+    " Leased against period target of {{ var_target_leased_rate | format_percent }},"
     " assessed as {{ var_campaign_health_status | health_status_to_str }}.",
     triggers=["trigger_is_active_campaign"],
 )

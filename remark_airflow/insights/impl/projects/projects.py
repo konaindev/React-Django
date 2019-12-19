@@ -18,14 +18,14 @@ from remark_airflow.insights.impl.vars import (
     var_weeks_usv_exe_off_track,
     usv_exe_health_graph,
     var_kpi_usv_exe_off_track,
-)
+    var_computed_kpis)
 
 
 def get_project_facts(project_id, start, end):
     project_graph = compose(name="project_graph", merge=True)(
         cop(var_base_kpis, "project", "start", "end"),
         cop(var_base_targets, "project", "start", "end"),
-        cop(var_current_period_leased_rate, var_base_kpis),
+        cop(var_current_period_leased_rate, var_computed_kpis),
         cop(var_target_leased_rate, var_base_targets),
         cop(
             var_campaign_health_status,
