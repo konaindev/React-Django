@@ -4,7 +4,7 @@ import json
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import redirect_to_login
-from django.db.models import Q
+from django.db.models import Count, Q
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.views.generic.edit import FormView
@@ -389,6 +389,32 @@ class ChangeMemberRoleView(APIView):
         return Response({"members": project.get_members()})
 
 
+class CreateTagView(APIView):
+    permission_classes = [IsAuthenticated]
+    parser_classes = [JSONParser]
+
+    def post(self, request, public_id):
+        payload = request.data
+        word = payload.get("word")
+
+        try:
+            project = Project.objects.get(public_id=public_id)
+        except Project.DoesNotExist:
+            return Response({"error": "Project not found"}, status=500)
+
+        user = request.user
+        if not project.is_admin(user):
+            return Response(
+                {"error": "Only admin member or staff user can add tag"},
+                status=500)
+
+        tag = Tag.objects.get_or_create(word=word)[0]
+        project.custom_tags.add(tag)
+        project.save()
+        tags = [t.word for t in project.custom_tags.all()]
+        return Response({"custom_tags": tags})
+
+
 class RemoveTagView(APIView):
     permission_classes = [IsAuthenticated]
     parser_classes = [JSONParser]
@@ -419,3 +445,37 @@ class RemoveTagView(APIView):
         project.save()
         tags = [t.word for t in project.custom_tags.all()]
         return Response({"custom_tags": tags})
+
+
+class SearchTagView(APIView):
+    permission_classes = [IsAuthenticated]
+    tags_limit = 6
+
+    def get(self, request, public_id):
+        word = request.GET.get("word")
+        if not word:
+            return Response({"tags": []})
+
+        try:
+            project = Project.objects.get(public_id=public_id)
+        except Project.DoesNotExist:
+            return Response({"error": "Project not found"}, status=500)
+
+        user = request.user
+        if not project.is_admin(user):
+            return Response(
+                {"error": "Only admin member or staff user can edit tags"},
+                status=500)
+
+        if user.is_superuser:
+            tags = Tag.objects.filter(word__contains=word)
+        else:
+            tags = Tag.objects.filter(word__icontains=word, projects__admin_group__in=user.groups.all())
+        tags = tags \
+            .exclude(projects=project) \
+            .annotate(count=Count("projects")) \
+            .order_by("-count")[:self.tags_limit] \
+            .values("word", "count") \
+            .all()
+
+        return Response({"tags": tags})

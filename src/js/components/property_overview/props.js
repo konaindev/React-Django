@@ -20,6 +20,7 @@ const project = {
   is_member: false
 };
 
+const projectNotAdmin = { ...project, is_admin: false, is_member: true };
 const projectWithoutSite = _omit(project, ["url"]);
 const projectWithoutTags = _omit(project, ["custom_tags"]);
 const projectWithoutTiles = _omit(project, [
@@ -46,6 +47,7 @@ const buildingImageURL = "https://i.imgur.com/UEH4gfU.jpg";
 export default {
   project,
   buildingImageURL,
+  projectNotAdmin,
   projectWithoutSite,
   projectWithoutTags,
   projectWithoutTiles,

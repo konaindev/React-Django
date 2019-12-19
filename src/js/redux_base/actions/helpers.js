@@ -65,7 +65,6 @@ export const createAjaxAction = (
 ) => params => {
   let queryString = typeof query === "function" ? query(params) : query;
   let url = `${API_URL_PREFIX}${endpoint}${queryString}`;
-
   return {
     ...(typeof params === "object" ? params : {}),
     type: baseActionType.startsWith("AJAX_POST")
