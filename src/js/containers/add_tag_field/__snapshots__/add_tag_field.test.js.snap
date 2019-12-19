@@ -40,6 +40,7 @@ exports[`AddTagField renders input field 1`] = `
 >
   <input
     className="input add-tag-field__input input--simple"
+    onBlur={[Function]}
     onChange={[Function]}
     onKeyUp={[Function]}
     placeholder="e.g. Southwestern, 2020 Fund"
@@ -100,6 +101,7 @@ exports[`AddTagField renders input with suggestions 1`] = `
       }
     >
       <AddTagInput
+        onBlur={[Function]}
         onChange={[Function]}
         onCreateTag={[Function]}
         suggestedTags={
@@ -128,6 +130,7 @@ exports[`AddTagField renders input with suggestions 1`] = `
         >
           <Input
             className="add-tag-field__input"
+            onBlur={[Function]}
             onChange={[Function]}
             onKeyUp={[Function]}
             placeholder="e.g. Southwestern, 2020 Fund"
@@ -138,6 +141,7 @@ exports[`AddTagField renders input with suggestions 1`] = `
           >
             <input
               className="input add-tag-field__input input--simple"
+              onBlur={[Function]}
               onChange={[Function]}
               onKeyUp={[Function]}
               placeholder="e.g. Southwestern, 2020 Fund"
