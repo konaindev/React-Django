@@ -13,12 +13,14 @@ export default class AddTagInput extends React.PureComponent {
     className: PropTypes.string,
     suggestedTags: PropTypes.array,
     onChange: PropTypes.func,
-    onCreateTag: PropTypes.func
+    onCreateTag: PropTypes.func,
+    onBlur: PropTypes.func
   };
   static defaultProps = {
     suggestedTags: [],
     onChange() {},
-    onCreateTag() {}
+    onCreateTag() {},
+    onBlur() {}
   };
   state = { value: "" };
 
@@ -35,6 +37,8 @@ export default class AddTagInput extends React.PureComponent {
     this.props.onChange(value);
     this.setState({ value });
   };
+
+  onBlur = () => this.props.onBlur(this.state.value);
 
   createTag = () => this.props.onCreateTag(this.state.value);
 
@@ -99,6 +103,7 @@ export default class AddTagInput extends React.PureComponent {
           theme="simple"
           onChange={this.onChange}
           onKeyUp={this.onEnter}
+          onBlur={this.onBlur}
           value={this.state.value}
           ref={this.inputRef}
         />

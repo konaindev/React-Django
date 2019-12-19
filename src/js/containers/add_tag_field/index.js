@@ -36,6 +36,12 @@ class AddTagField extends React.PureComponent {
       projectActions.createTag(this.props.project.public_id)({ body: { word } })
     );
 
+  hideInput = value => {
+    if (!value) {
+      this.props.dispatch(projectActions.hideTagInput());
+    }
+  };
+
   render() {
     let component;
     if (this.props.isAddTagInput) {
@@ -45,6 +51,7 @@ class AddTagField extends React.PureComponent {
           suggestedTags={this.props.suggestedTags}
           onChange={this.onAddTag}
           onCreateTag={this.createTag}
+          onBlur={this.hideInput}
         />
       );
     } else {

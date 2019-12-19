@@ -18,7 +18,8 @@ const actions = {
       `${URLS.project}/${projectId}/search-tags/`,
       qs => qsStringify(qs)
     ),
-  showAddTagInput: () => ({ type: "SHOW_TAG_INPUT_ON_PROJECT" })
+  showAddTagInput: () => ({ type: "SHOW_TAG_INPUT_ON_PROJECT" }),
+  hideTagInput: () => ({ type: "HIDE_TAG_INPUT_ON_PROJECT" })
 };
 
 export default actions;

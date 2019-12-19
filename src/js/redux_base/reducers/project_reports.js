@@ -69,6 +69,9 @@ const reducer = (state = initialState, action) => {
     case "SHOW_TAG_INPUT_ON_PROJECT": {
       return { ...state, isAddTagInput: true };
     }
+    case "HIDE_TAG_INPUT_ON_PROJECT": {
+      return { ...state, isAddTagInput: false };
+    }
     default:
       return state;
   }
