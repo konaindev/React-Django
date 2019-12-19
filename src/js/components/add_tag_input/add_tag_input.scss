@@ -17,10 +17,12 @@ $tag-count-spacing: 10px;
 $tags-spacing: 20px;
 
 .add-tag-field {
+    min-width: 250px;
     position: relative;
 }
 
 .input.add-tag-field__input {
+    width: 100%;
     padding: $input-padding 0 $input-padding 0;
 }
 

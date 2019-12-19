@@ -215,6 +215,7 @@ $add-tag-text-height: 20px;
 
 .property-overview__add-tag-input {
     display: inline-flex;
+    flex-grow: 1;
     margin-top: $tags-spacing;
 }
 
