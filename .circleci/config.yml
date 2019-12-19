@@ -99,6 +99,9 @@ jobs:
           name: Maintenance Mode On
           command: heroku maintenance:on --app remarkably-staging
       - run:
+          name: Set Google Composer Project
+          command: gcloud config set project $COMPOSER_PROJECT
+      - run:
           name: Pause running dags
           command:    |
               python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.pause_all_dags()"
