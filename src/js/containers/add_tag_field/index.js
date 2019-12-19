@@ -31,10 +31,14 @@ class AddTagField extends React.PureComponent {
     );
   };
 
-  createTag = word =>
+  createTag = word => {
+    if (!word) {
+      return;
+    }
     this.props.dispatch(
       projectActions.createTag(this.props.project.public_id)({ body: { word } })
     );
+  };
 
   hideInput = value => {
     if (!value) {
