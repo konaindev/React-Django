@@ -8,6 +8,9 @@ import Yup from "../../yup";
 import { connect } from "react-redux";
 import { auth } from "../../redux_base/actions";
 
+const LOGIN_ERROR_MSG =
+  "Oops! There was a problem with your login info, please try again.";
+
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid Email Address")
@@ -28,11 +31,15 @@ export class LoginView extends React.PureComponent {
 
   getErrorMessages = (errors, touched) => {
     let messages = [];
+    const { loginError } = this.props;
     if (errors.email && touched.email) {
       messages.push(errors.email);
     }
     if (errors.password && touched.password) {
       messages.push(errors.password);
+    }
+    if (loginError) {
+      messages.push(LOGIN_ERROR_MSG);
     }
     return (
       <p>
@@ -171,4 +178,8 @@ export class LoginView extends React.PureComponent {
   }
 }
 
-export default connect()(LoginView);
+const mapState = state => ({
+  loginError: state.user.error
+});
+
+export default connect(mapState)(LoginView);

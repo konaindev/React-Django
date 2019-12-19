@@ -130,6 +130,9 @@ export const auth = {
   }),
   clearToken: () => ({
     type: "CLEAR_TOKEN"
+  }),
+  loginError: () => ({
+    type: "LOGIN_ERROR"
   })
 };
 
