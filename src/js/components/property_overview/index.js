@@ -1,13 +1,13 @@
 import cn from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
-
 import ButtonLink from "../button_link";
 import Panel from "../panel";
 
+import AddTagField from "../../containers/add_tag_field";
+
 import Tag from "./tag";
 import Tile from "./tile";
-
 import "./property_overview.scss";
 
 export default class PropertyOverview extends React.PureComponent {
@@ -64,22 +64,32 @@ export default class PropertyOverview extends React.PureComponent {
   };
 
   renderTags = () => {
-    const { project, onRemoveTag } = this.props;
-    if (!project.custom_tags || !project.custom_tags.length) {
+    const { project } = this.props;
+    if (
+      !project.is_admin &&
+      (!project.custom_tags || !project.custom_tags.length)
+    ) {
       return;
     }
-    const tags = project.custom_tags.map(name => (
+    const customTags = project.custom_tags || [];
+    const tags = customTags.map(name => (
       <Tag
         name={name}
-        // isAdmin={project.is_admin}
-        onRemove={onRemoveTag}
+        isAdmin={project.is_admin}
+        onRemove={this.props.onRemoveTag}
         key={name}
       />
     ));
     let message = "Custom property groups are made for each tag.";
-    // if (project.is_admin) {
-    //   message = "Create custom property groups by adding a tag.";
-    // }
+    if (project.is_admin) {
+      message = "Create custom property groups by adding a tag.";
+      tags.push(
+        <AddTagField
+          className="property-overview__add-tag-input"
+          key="add-tag-input"
+        />
+      );
+    }
     return (
       <div className="property-overview__section property-overview__section--top">
         <div className="property-overview__section-text">{message}</div>

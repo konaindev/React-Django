@@ -210,7 +210,7 @@ class Project(models.Model):
         verbose_name="Include in aggregate averages?", default=True
     )
 
-    custom_tags = models.ManyToManyField(Tag, blank=True)
+    custom_tags = models.ManyToManyField(Tag, blank=True, related_name="projects")
 
     # This is a temporary field until we have user accounts setup.
     # When that happens there should be a many to one relationship with
