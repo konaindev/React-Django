@@ -17,3 +17,7 @@ def trigger_health_status_is_changed(health_status, prev_health_status):
 
 def trigger_usv_exe_off_track(health_status):
     return health_status == HEALTH_STATUS["OFF_TRACK"]
+
+
+def trigger_usv_exe_at_risk(health_status):
+    return health_status == HEALTH_STATUS["AT_RISK"]

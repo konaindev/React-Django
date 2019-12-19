@@ -5,6 +5,7 @@ from remark_airflow.insights.impl.triggers import (
     trigger_campaign_health_status_off_track,
     trigger_health_status_is_changed,
     trigger_usv_exe_off_track,
+    trigger_usv_exe_at_risk,
 )
 from remark_airflow.insights.impl.utils import cop
 from remark_airflow.insights.impl.vars import (
@@ -18,7 +19,10 @@ from remark_airflow.insights.impl.vars import (
     var_weeks_usv_exe_off_track,
     usv_exe_health_graph,
     var_kpi_usv_exe_off_track,
-    var_computed_kpis)
+    var_computed_kpis,
+    var_weeks_usv_exe_at_risk,
+    var_kpi_usv_exe_at_risk,
+)
 
 
 def get_project_facts(project_id, start, end):
@@ -50,6 +54,9 @@ def get_project_facts(project_id, start, end):
         cop(var_weeks_usv_exe_off_track, "project", "start", "end"),
         cop(var_kpi_usv_exe_off_track, "project", var_weeks_usv_exe_off_track, "end"),
         cop(trigger_usv_exe_off_track, "var_usv_exe_health_status"),
+        cop(var_weeks_usv_exe_at_risk, "project", "start", "end"),
+        cop(var_kpi_usv_exe_at_risk, "project", var_weeks_usv_exe_at_risk, "end"),
+        cop(trigger_usv_exe_at_risk, "var_usv_exe_health_status"),
     )
     project = var_project(project_id)
     args = {"start": start, "end": end, "project": project}

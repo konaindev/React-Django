@@ -62,6 +62,9 @@ class GetProjectFactsTestCase(TestCase):
             "trigger_usv_exe_off_track": True,
             "var_weeks_usv_exe_off_track": 2,
             "var_kpi_usv_exe_off_track": "Volume of USV",
+            "var_weeks_usv_exe_at_risk": 0,
+            "var_kpi_usv_exe_at_risk": None,
+            "trigger_usv_exe_at_risk": False,
         }
         self.maxDiff = None
         del result["var_base_kpis"]

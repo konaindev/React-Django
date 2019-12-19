@@ -70,8 +70,10 @@ def var_prev_health_status(project, start):
 
     return health_check(prev_leased_rate, prev_target_leased_rate)
 
+
 def var_computed_kpis(base_kpis):
     return generate_computed_kpis(base_kpis)
+
 
 def var_target_computed_kpis(base_kpis, base_targets):
     if base_kpis is None or base_targets is None:
@@ -80,10 +82,12 @@ def var_target_computed_kpis(base_kpis, base_targets):
     kpis.update(base_targets)
     return generate_computed_targets(kpis)
 
+
 def var_usv_exe(computed_kpis):
     if computed_kpis is None:
         return None
     return computed_kpis["usv_exe"]
+
 
 def var_target_usv_exe(target_computed_kpis):
     if target_computed_kpis is None:
@@ -95,21 +99,31 @@ def var_usv_exe_health_status(usv_exe, target_usv_exe):
     health_status = health_standard(usv_exe, target_usv_exe)
     return health_status
 
+
 def var_weeks_usv_exe_off_track(project, start, end):
+    return var_weeks_usv_exe_health(project, start, end, HEALTH_STATUS["OFF_TRACK"])
+
+
+def var_weeks_usv_exe_at_risk(project, start, end):
+    return var_weeks_usv_exe_health(project, start, end, HEALTH_STATUS["AT_RISK"])
+
+
+def var_weeks_usv_exe_health(project, start, end, health_target):
     weeks = 0
     args = {"start": start, "end": end, "project": project}
-    health  = usv_exe_health_graph(args)["var_usv_exe_health_status"]
-    is_off = health == HEALTH_STATUS["OFF_TRACK"]
+    health = usv_exe_health_graph(args)["var_usv_exe_health_status"]
+    is_off = health == health_target
     while is_off:
         weeks += 1
         end = start
         start = end - timedelta(weeks=1)
         args = {"start": start, "end": end, "project": project}
         health = usv_exe_health_graph(args)["var_usv_exe_health_status"]
-        is_off = health == HEALTH_STATUS["OFF_TRACK"]
+        is_off = health == health_target
     return weeks
 
-def var_kpi_usv_exe_off_track(project, weeks, end):
+
+def var_kpi_usv_exe_lowest_health(project, weeks, end):
     if weeks == 0:
         return None
     start = end - timedelta(weeks=weeks)
@@ -120,17 +134,44 @@ def var_kpi_usv_exe_off_track(project, weeks, end):
     if computed_kpis is None or target_computed_kpis is None:
         return None
     kpi_health = {
-        "Volume of USV": health_standard(computed_kpis["usv_cost"], target_computed_kpis["usv_cost"]),
-        "USV>INQ": health_standard(computed_kpis["usv_inq"], target_computed_kpis["usv_inq"]),
-        "INQ": health_standard(computed_kpis["inq_cost"], target_computed_kpis["inq_cost"]),
-        "INQ>TOU": health_standard(computed_kpis["inq_tou"], target_computed_kpis["inq_tou"]),
-        "TOU": health_standard(computed_kpis["tou_cost"], target_computed_kpis["tou_cost"]),
-        "TOU>APP": health_standard(computed_kpis["tou_app"], target_computed_kpis["tou_app"]),
-        "APP": health_standard(computed_kpis["app_cost"], target_computed_kpis["app_cost"]),
-        "C&D Rate": health_standard(computed_kpis["lease_cd_rate"], target_computed_kpis["lease_cds"]),
-        "EXE": health_standard(computed_kpis["exe_cost"], target_computed_kpis["exe_cost"]),
+        "Volume of USV": health_standard(
+            computed_kpis["usv_cost"], target_computed_kpis["usv_cost"]
+        ),
+        "USV>INQ": health_standard(
+            computed_kpis["usv_inq"], target_computed_kpis["usv_inq"]
+        ),
+        "INQ": health_standard(
+            computed_kpis["inq_cost"], target_computed_kpis["inq_cost"]
+        ),
+        "INQ>TOU": health_standard(
+            computed_kpis["inq_tou"], target_computed_kpis["inq_tou"]
+        ),
+        "TOU": health_standard(
+            computed_kpis["tou_cost"], target_computed_kpis["tou_cost"]
+        ),
+        "TOU>APP": health_standard(
+            computed_kpis["tou_app"], target_computed_kpis["tou_app"]
+        ),
+        "APP": health_standard(
+            computed_kpis["app_cost"], target_computed_kpis["app_cost"]
+        ),
+        "C&D Rate": health_standard(
+            computed_kpis["lease_cd_rate"], target_computed_kpis["lease_cds"]
+        ),
+        "EXE": health_standard(
+            computed_kpis["exe_cost"], target_computed_kpis["exe_cost"]
+        ),
     }
     return min(kpi_health, key=kpi_health.get)
+
+
+def var_kpi_usv_exe_off_track(project, weeks, end):
+    return var_kpi_usv_exe_lowest_health(project, weeks, end)
+
+
+def var_kpi_usv_exe_at_risk(project, weeks, end):
+    return var_kpi_usv_exe_lowest_health(project, weeks, end)
+
 
 projects_kpi_graph = compose(name="projects_kpi_graph")(
     cop(var_base_kpis, "project", "start", "end"),
