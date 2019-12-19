@@ -100,7 +100,7 @@ jobs:
           command: heroku maintenance:on --app remarkably-staging
       - run:
           name: Set Google Composer Project
-          command: gcloud config set project $GOOGLE_COMPOSER_PROJECT
+          command: gcloud config set project $COMPOSER_PROJECT
       - run:
           name: Pause running dags
           command:    |
