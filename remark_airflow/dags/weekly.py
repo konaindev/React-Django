@@ -25,6 +25,7 @@ from remark_airflow.insights.impl.projects.insights import (
     lease_rate_against_target,
     usv_exe_off_track,
     usv_exe_at_risk,
+    usv_exe_on_track,
 )
 from remark.projects.models import Project
 from remark.insights.models import WeeklyInsights
@@ -39,6 +40,7 @@ project_insights = [
     change_health_status,
     usv_exe_off_track,
     usv_exe_at_risk,
+    usv_exe_on_track,
 ]
 
 

@@ -21,3 +21,7 @@ def trigger_usv_exe_off_track(health_status):
 
 def trigger_usv_exe_at_risk(health_status):
     return health_status == HEALTH_STATUS["AT_RISK"]
+
+
+def trigger_usv_exe_on_track(health_status):
+    return health_status == HEALTH_STATUS["ON_TRACK"]

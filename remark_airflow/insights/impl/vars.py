@@ -108,6 +108,10 @@ def var_weeks_usv_exe_at_risk(project, start, end):
     return var_weeks_usv_exe_health(project, start, end, HEALTH_STATUS["AT_RISK"])
 
 
+def var_weeks_usv_exe_on_track(project, start, end):
+    return var_weeks_usv_exe_health(project, start, end, HEALTH_STATUS["ON_TRACK"])
+
+
 def var_weeks_usv_exe_health(project, start, end, health_target):
     weeks = 0
     args = {"start": start, "end": end, "project": project}
@@ -123,7 +127,7 @@ def var_weeks_usv_exe_health(project, start, end, health_target):
     return weeks
 
 
-def var_kpi_usv_exe_lowest_health(project, weeks, end):
+def var_kpi_usv_exe_healths(project, weeks, end):
     if weeks == 0:
         return None
     start = end - timedelta(weeks=weeks)
@@ -162,7 +166,21 @@ def var_kpi_usv_exe_lowest_health(project, weeks, end):
             computed_kpis["exe_cost"], target_computed_kpis["exe_cost"]
         ),
     }
+    return kpi_health
+
+
+def var_kpi_usv_exe_lowest_health(project, weeks, end):
+    kpi_health = var_kpi_usv_exe_healths(project, weeks, end)
+    if kpi_health is None:
+        return None
     return min(kpi_health, key=kpi_health.get)
+
+
+def var_kpi_usv_exe_highest_health(project, weeks, end):
+    kpi_health = var_kpi_usv_exe_healths(project, weeks, end)
+    if kpi_health is None:
+        return None
+    return max(kpi_health, key=kpi_health.get)
 
 
 def var_kpi_usv_exe_off_track(project, weeks, end):
@@ -171,6 +189,10 @@ def var_kpi_usv_exe_off_track(project, weeks, end):
 
 def var_kpi_usv_exe_at_risk(project, weeks, end):
     return var_kpi_usv_exe_lowest_health(project, weeks, end)
+
+
+def var_kpi_usv_exe_on_track(project, weeks, end):
+    return var_kpi_usv_exe_highest_health(project, weeks, end)
 
 
 projects_kpi_graph = compose(name="projects_kpi_graph")(
