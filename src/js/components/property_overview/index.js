@@ -91,8 +91,8 @@ export default class PropertyOverview extends React.PureComponent {
       );
     }
     return (
-      <div className="property-overview__section property-overview__section--top">
-        <div className="property-overview__section-text">{message}</div>
+      <div className="property-overview__section">
+        <div className="property-overview__section-header">Property Tags</div>
         <div className="property-overview__tags">{tags}</div>
       </div>
     );
@@ -139,8 +139,7 @@ export default class PropertyOverview extends React.PureComponent {
     });
     return (
       <div className="property-overview">
-        {this.renderTags()}
-        <div className="property-overview__section property-overview__section--top property-overview__info">
+        <div className="property-overview__section property-overview__info">
           <Panel className="property-overview__tile property-overview__tile--info">
             <div className="property-overview__section-header">
               {project.name}
@@ -154,6 +153,7 @@ export default class PropertyOverview extends React.PureComponent {
           </Panel>
           <div className={imageClass} style={imageStyle} />
         </div>
+        {this.renderTags()}
         <div className="property-overview__section">
           <div className="property-overview__section-header">
             Characteristics
