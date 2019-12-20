@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  cache:
+    image: redis
+    ports: 
+        - "6379:6379"
+  db:
+    image: postgres
+  web:
+    environment:
+        - DOCKER_COMPOSE=true
+    build: .
+    command: >
+        bash -c "pipenv run python manage.py migrate &&
+                 pipenv run python manage.py loaddata data/dumped/latest.json &&
+                 npm rebuild node-sass && 
+                 nohup yarn run run-build-ui > out.log &
+                 pipenv run python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+      - "8080:8080"
+    depends_on:
+      - db
+      - cache
