@@ -4,6 +4,8 @@ import React from "react";
 import ButtonLink from "../button_link";
 import Panel from "../panel";
 
+import Tooltip from "../../components/rmb_tooltip";
+import TooltipAnchor from "../../components/rmb_tooltip/rmb_tooltip_anchor";
 import AddTagField from "../../containers/add_tag_field";
 
 import Tag from "./tag";
@@ -92,7 +94,12 @@ export default class PropertyOverview extends React.PureComponent {
     }
     return (
       <div className="property-overview__section">
-        <div className="property-overview__section-header">Property Tags</div>
+        <div className="property-overview__section-header">
+          Property Tags
+          <Tooltip placement="top" theme="information" text={message}>
+            <TooltipAnchor className="property-overview__tooltip-anchor" />
+          </Tooltip>
+        </div>
         <div className="property-overview__tags">{tags}</div>
       </div>
     );

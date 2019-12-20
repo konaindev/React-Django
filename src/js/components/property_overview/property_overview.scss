@@ -228,3 +228,9 @@ $add-tag-text-height: 20px;
     font-size: $text-sm;
     line-height: $panel-header-height;
 }
+
+.property-overview__tooltip-anchor {
+    position: relative;
+    top: 2px;
+    margin-left: 10px;
+}
