@@ -49,7 +49,7 @@ def weekly_insights(project_id, task_id, **kwargs):
     end = date.fromtimestamp(execution_date.timestamp())
     start = end - timedelta(weeks=1)
 
-    project_facts = get_project_facts(project_id, start, end)
+    project_facts = get_project_facts(project_insights, project_id, start, end)
     insights = get_project_insights(project_facts, project_insights)
 
     try:
