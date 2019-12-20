@@ -125,16 +125,19 @@ jobs:
       - run:
           name: setup postgres connection
           command: python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.set_postgres_connection_airflow()"
-      - run: 
-          command:    |
-              set -e
-              echo "Syncing plugins folder..."
-              gsutil rsync -d -r ./remark_airflow/plugins gs://"$BUCKET"/plugins/
-      - run: 
-          command:    |
-              set -e
-              echo "Syncing dags folder..."
-              gsutil rsync -d -r ./remark_airflow/dags gs://"$BUCKET"/dags/
+
+# Current commented out because there are no dags or plugins yet. gsutils sync will not work on empty folders.
+# Once there are plugins and dags, uncomment
+#      - run:
+#          command:    |
+#              set -e
+#              echo "Syncing plugins folder..."
+#              gsutil rsync -d -r ./remark_airflow/plugins gs://"$BUCKET"/plugins/
+#      - run:
+#          command:    |
+#              set -e
+#              echo "Syncing dags folder..."
+#              gsutil rsync -d -r ./remark_airflow/dags gs://"$BUCKET"/dags/
       - run:
           name: Maintenance Mode Off
           command: heroku maintenance:off --app remarkably-staging
