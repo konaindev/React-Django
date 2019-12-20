@@ -567,6 +567,12 @@ class Project(models.Model):
             pk=self.admin_group.pk
         ).exists()
 
+    def get_report_emails(self):
+        distribution_list = [email.strip() for email in self.email_distribution_list if email]
+        members_emails = [user.email for user in self.view_group.user_set.all()]
+        admins_emails = [user.email for user in self.admin_group.user_set.all()]
+        return set(distribution_list + members_emails + admins_emails)
+
     def __assign_blank_groups(self):
         """
         Creates a new Group and assign it to view_gruop field

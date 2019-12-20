@@ -183,9 +183,7 @@ def send_performance_email(performance_email_id):
     project = perf_email.project
 
     # Sync Contacts with SendGrid Recipients
-    contact_str = project.email_distribution_list
-    # after split, strip whitespaces and also filter out empty strings
-    contacts = [x.strip() for x in contact_str.split(",") if x]
+    contacts = project.get_report_emails()
     contact_ids = []
     for contact in contacts:
         try:
