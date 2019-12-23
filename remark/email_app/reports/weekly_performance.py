@@ -9,7 +9,7 @@ from remark.lib.logging import error_text, getLogger
 from remark.projects.reports.performance import PerformanceReport, InvalidReportRequest
 from remark.email_app.models import PerformanceEmail
 from remark.email_app.constants import SG_CUSTOMER_SUCCESS_SENDER_ID, INFO_EMAIL, SG_CATEGORY_PERF_REPORT
-from remark.projects.models import TargetPeriod
+from remark.projects.models import Project, TargetPeriod
 
 from .constants import (
     SELECTORS,
@@ -230,4 +230,37 @@ def send_performance_email(performance_email_id):
     )
     perf_email.save()
     logger.info("send_performance_email::end")
+    return True
+
+
+@shared_task
+def update_contacts_list(project_public_id):
+    project = Project.objects.get(public_id=project_public_id)
+    if not project.email_list_id:
+        logger.info("update_contacts_list::project has no subscriptions")
+        return
+
+    # Sync Contacts with SendGrid Recipients
+    contacts = project.get_report_emails()
+    contact_ids = []
+    for contact in contacts:
+        try:
+            contact_id = create_contact_if_not_exists(contact)
+            contact_ids.append(contact_id)
+            time.sleep(5)
+        except:
+            logger.error(f"Invalid email address: \"{contact}\"")
+
+    if len(contact_ids) == 0:
+        raise Exception("No contacts provided in email list")
+
+    # Sync Contact List
+    try:
+        list_id = project.email_list_id
+        create_contact_list_if_not_exists(
+            project.public_id, list_id, contact_ids
+        )
+    except:
+        raise Exception("Failed to synchronize contact list")
+
     return True
