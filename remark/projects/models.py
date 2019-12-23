@@ -569,8 +569,8 @@ class Project(models.Model):
 
     def get_report_emails(self):
         distribution_list = [email.strip() for email in self.email_distribution_list if email]
-        members_emails = [user.email for user in self.view_group.user_set.all()]
-        admins_emails = [user.email for user in self.admin_group.user_set.all()]
+        members_emails = [user.email for user in self.view_group.user_set.all() if user.is_active]
+        admins_emails = [user.email for user in self.admin_group.user_set.all() if user.is_active]
         return set(distribution_list + members_emails + admins_emails)
 
     def __assign_blank_groups(self):

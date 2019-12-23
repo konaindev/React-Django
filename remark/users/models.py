@@ -144,7 +144,7 @@ class User(PermissionsMixin, AbstractBaseUser):
         default=True, help_text="Should there be tutorial showing"
     )
 
-    report_projects = models.ManyToManyField(Project)
+    report_projects = models.ManyToManyField(Project, related_name="subscribed_users")
 
     USERNAME_FIELD = "email"
     EMAIL_FIELD = "email"
@@ -230,7 +230,6 @@ class User(PermissionsMixin, AbstractBaseUser):
             "office_name": office.name,
             "office_type": office.office_type,
         }
-
 
     def get_country_object(self, value):
         with open('./data/locations/countries.json', 'r') as read_file:
