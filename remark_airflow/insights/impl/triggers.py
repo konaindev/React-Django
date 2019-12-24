@@ -25,3 +25,10 @@ def trigger_usv_exe_at_risk(health_status):
 
 def trigger_usv_exe_on_track(health_status):
     return health_status == HEALTH_STATUS["ON_TRACK"]
+
+
+def trigger_retention_rate_health(health_status):
+    return (
+        health_status == HEALTH_STATUS["OFF_TRACK"]
+        or health_status == HEALTH_STATUS["AT_RISK"]
+    )

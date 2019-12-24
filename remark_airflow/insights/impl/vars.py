@@ -208,3 +208,92 @@ usv_exe_health_graph = compose(name="usv_exe_health", merge=True)(
     cop(var_target_usv_exe, var_target_computed_kpis),
     cop(var_usv_exe_health_status, var_usv_exe, var_target_usv_exe),
 )
+
+
+def var_retention_rate(computed_kpis):
+    if computed_kpis is None:
+        return None
+    return computed_kpis["renewal_rate"]
+
+
+def var_target_retention_rate(target_computed_kpis):
+    if target_computed_kpis is None:
+        return None
+    return target_computed_kpis["renewal_rate"]
+
+
+def var_retention_rate_health(retention_rate, target_retention_rate):
+    return health_check(retention_rate, target_retention_rate)
+
+
+def var_retention_rate_health_weeks(project, start, health_target):
+    weeks = 0
+    is_off = health_target != -1
+    while is_off:
+        weeks += 1
+        end = start
+        start = end - timedelta(weeks=1)
+        args = {
+            "start": start,
+            "end": end,
+            "project": project,
+            "kpi_name": "renewal_rate",
+        }
+        health = kpi_healths_graph(args)["var_kpi_health"]
+        is_off = health == health_target
+    return weeks
+
+
+def var_prev_retention_rate(project, start):
+    end = start
+    start = end - timedelta(weeks=1)
+    args = {"start": start, "end": end, "project": project, "kpi_name": "renewal_rate"}
+    data = kpi_graph(args)
+    return data["var_kpi"]
+
+
+def var_retention_rate_trend(retention_rate, prev_retention_rate):
+    if prev_retention_rate is None and retention_rate is None:
+        return "flat"
+    elif prev_retention_rate is None:
+        return "up"
+    elif retention_rate is None:
+        return "down"
+    elif prev_retention_rate == retention_rate:
+        return "flat"
+    elif prev_retention_rate < retention_rate:
+        return "up"
+    else:
+        return "down"
+
+
+def var_kpi(computed_kpis, kpi_name):
+    if computed_kpis is None:
+        return None
+    return computed_kpis[kpi_name]
+
+
+def var_target_kpi(computed_kpis, kpi_name):
+    return var_kpi(computed_kpis, kpi_name)
+
+
+def var_kpi_health(kpi, target_kpi):
+    return health_check(kpi, target_kpi)
+
+
+kpi_graph = compose(name="kpi_graph")(
+    cop(var_base_kpis, "project", "start", "end"),
+    cop(var_computed_kpis, var_base_kpis),
+    cop(var_kpi, var_computed_kpis, "kpi_name"),
+)
+
+target_kpi_graph = compose(name="target_kpi_graph")(
+    cop(var_base_kpis, "project", "start", "end"),
+    cop(var_base_targets, "project", "start", "end"),
+    cop(var_target_computed_kpis, var_base_kpis, var_base_targets),
+    cop(var_target_kpi, var_target_computed_kpis, "kpi_name"),
+)
+
+kpi_healths_graph = compose(name="kpi_healths_graph", merge=True)(
+    kpi_graph, target_kpi_graph, cop(var_kpi_health, var_kpi, var_target_kpi)
+)

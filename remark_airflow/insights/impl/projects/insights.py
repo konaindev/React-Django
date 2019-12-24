@@ -5,6 +5,7 @@ from remark_airflow.insights.impl.triggers import (
     trigger_usv_exe_off_track,
     trigger_usv_exe_at_risk,
     trigger_usv_exe_on_track,
+    trigger_retention_rate_health,
 )
 from remark_airflow.insights.impl.utils import cop
 from remark_airflow.insights.impl.vars import (
@@ -25,6 +26,12 @@ from remark_airflow.insights.impl.vars import (
     var_kpi_usv_exe_at_risk,
     var_weeks_usv_exe_on_track,
     var_kpi_usv_exe_on_track,
+    var_retention_rate_health,
+    var_retention_rate_health_weeks,
+    var_retention_rate_trend,
+    var_retention_rate,
+    var_target_retention_rate,
+    var_prev_retention_rate,
 )
 
 lease_rate_against_target = Insight(
@@ -137,5 +144,32 @@ usv_exe_on_track = Insight(
         cop(var_target_usv_exe, var_target_computed_kpis),
         cop(var_usv_exe_health_status, var_usv_exe, var_target_usv_exe),
         cop(trigger_usv_exe_on_track, var_usv_exe_health_status),
+    ],
+)
+
+
+retention_rate_health = Insight(
+    name="retention_rate_health",
+    template="Your Retention Rate has been {{ var_retention_rate_health | health_status_to_str }}"
+    " for {{ var_retention_rate_health_weeks }}"
+    " and is trending {{ var_retention_rate_trend }}.",
+    triggers=["trigger_retention_rate_health"],
+    graph=[
+        cop(var_base_kpis, "project", "start", "end"),
+        cop(var_base_targets, "project", "start", "end"),
+        cop(var_prev_retention_rate, "project", "start"),
+        cop(var_computed_kpis, var_base_kpis),
+        cop(var_target_computed_kpis, var_base_kpis, var_base_targets),
+        cop(var_retention_rate, var_computed_kpis),
+        cop(var_target_retention_rate, var_target_computed_kpis),
+        cop(var_retention_rate_health, var_retention_rate, var_target_retention_rate),
+        cop(
+            var_retention_rate_health_weeks,
+            "project",
+            "start",
+            var_retention_rate_health,
+        ),
+        cop(var_retention_rate_trend, var_retention_rate, var_prev_retention_rate),
+        cop(trigger_retention_rate_health, var_retention_rate_health),
     ],
 )
