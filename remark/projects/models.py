@@ -319,6 +319,15 @@ class Project(models.Model):
             target_periods = [empty_target_period]
         return target_periods
 
+    def check_email_distribution_changed(self, old_project):
+        self._email_distribution_changed = self.email_distribution_list != old_project.email_distribution_list
+
+    def is_email_distribution_changed(self):
+        return getattr(self, "_email_distribution_changed", False)
+
+    def reset_email_distribution_changed(self):
+        self._email_distribution_changed = False
+
     def get_periods(self):
         """
         Return a queryset of all periods, including the baseline.
