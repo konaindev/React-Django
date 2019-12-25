@@ -3,7 +3,6 @@ from django.dispatch import receiver
 
 from celery import shared_task
 
-from .models import Campaign, Spreadsheet, Period, PerformanceReport, Project, TargetPeriod
 from remark.lib.cache import get_dashboard_cache_key, reset_cache
 from remark.lib.logging import getLogger
 from remark.lib.stats import health_check
@@ -15,6 +14,9 @@ from remark.email_app.reports.constants import (
     KPI_POSITIVE_DIRECTION,
     KPIS_INCLUDE_IN_EMAIL
 )
+from remark.email_app.reports.weekly_performance import update_project_contacts
+
+from .models import Campaign, Spreadsheet, Period, PerformanceReport, Project, TargetPeriod
 
 logger = getLogger(__name__)
 
@@ -28,8 +30,9 @@ def check_email_distribution_list(sender, instance, **kwargs):
 
 
 @receiver(post_save, sender=Project)
-def check_email_distribution_list(sender, instance, **kwargs):
+def update_email_distribution_list(sender, instance, **kwargs):
     if instance.is_email_distribution_changed():
+        update_project_contacts.apply_async(args=(instance.get_project_public_id(),))
         instance.reset_email_distribution_changed()
 
 

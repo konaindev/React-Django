@@ -234,7 +234,7 @@ def send_performance_email(performance_email_id):
 
 
 @shared_task
-def update_contacts_list(project_public_id):
+def update_project_contacts(project_public_id):
     project = Project.objects.get(public_id=project_public_id)
     if not project.email_list_id:
         logger.info("update_contacts_list::project has no subscriptions")
