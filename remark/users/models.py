@@ -182,7 +182,6 @@ class User(PermissionsMixin, AbstractBaseUser):
             url = ""
         return url
 
-
     def get_business_name(self):
         try:
             p = self.person
@@ -241,7 +240,21 @@ class User(PermissionsMixin, AbstractBaseUser):
                         "value": country["iso3"]
                     }
                     return country_object
-        
+
+    @property
+    def is_subscription_changed(self):
+        return self._subscription_changed
+
+    def check_activation_changed(self, old_user):
+        if getattr(self, "_subscription_changed", False):
+            return
+        self._subscription_changed = self.is_active != old_user.is_active
+
+    def set_subscription_changed(self):
+        self._subscription_changed = True
+
+    def reset_subscription_changed(self):
+        self._subscription_changed = False
 
 
 class Account(models.Model):

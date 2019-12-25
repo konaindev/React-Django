@@ -328,6 +328,9 @@ class Project(models.Model):
     def reset_email_distribution_changed(self):
         self._email_distribution_changed = False
 
+    def set_subscription_changed(self):
+        self._email_distribution_changed = True
+
     def get_periods(self):
         """
         Return a queryset of all periods, including the baseline.
@@ -577,7 +580,8 @@ class Project(models.Model):
         ).exists()
 
     def get_report_emails(self):
-        distribution_list = [email.strip() for email in self.email_distribution_list if email]
+        emails_str = self.email_distribution_list
+        distribution_list = [email.strip() for email in emails_str.split(",") if email]
         members_emails = [user.email for user in self.view_group.user_set.all() if user.is_active]
         admins_emails = [user.email for user in self.admin_group.user_set.all() if user.is_active]
         return set(distribution_list + members_emails + admins_emails)
