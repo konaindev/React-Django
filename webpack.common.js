@@ -82,7 +82,8 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: "./src/index.html",
       filename: "./index.html",
-      favicon: "./src/favicon.ico"
+      favicon: "./src/favicon.ico",
+      segmentKey: process.env.SEGMENT_KEY || "NO-SEGMENT-KEY"
     })
   ],
   profile: true,

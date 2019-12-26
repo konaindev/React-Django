@@ -1,7 +1,6 @@
 "use strict";
 const webpack = require("webpack");
 const webpackMerge = require("webpack-merge");
-const HtmlWebPackPlugin = require("html-webpack-plugin");
 const commonConfig = require("./webpack.common.js");
 
 module.exports = webpackMerge(commonConfig, {
@@ -15,10 +14,6 @@ module.exports = webpackMerge(commonConfig, {
   mode: "development",
   plugins: [
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebPackPlugin({
-      template: "./src/index.html",
-      filename: "./index.html"
-    })
+    new webpack.HotModuleReplacementPlugin()
   ]
 });
