@@ -160,6 +160,10 @@ class Project(models.Model):
     def customer_name(self):
         return self.account.company_name
 
+    @property
+    def is_subscription_changed(self):
+        return self._email_distribution_list != self.email_distribution_list
+
     property = models.OneToOneField("projects.Property", on_delete=models.CASCADE, blank=False)
 
     account = models.ForeignKey(
@@ -304,6 +308,7 @@ class Project(models.Model):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self._cache_subscription_fields()
 
     def _target_periods(self, qs, start, end):
         """
@@ -318,18 +323,6 @@ class Project(models.Model):
             empty_target_period = TargetPeriod(project=self, start=start, end=end)
             target_periods = [empty_target_period]
         return target_periods
-
-    def check_email_distribution_changed(self, old_project):
-        self._email_distribution_changed = self.email_distribution_list != old_project.email_distribution_list
-
-    def is_email_distribution_changed(self):
-        return getattr(self, "_email_distribution_changed", False)
-
-    def reset_email_distribution_changed(self):
-        self._email_distribution_changed = False
-
-    def set_subscription_changed(self):
-        self._email_distribution_changed = True
 
     def get_periods(self):
         """
@@ -585,6 +578,9 @@ class Project(models.Model):
         members_emails = [user.email for user in self.view_group.user_set.all() if user.is_active]
         admins_emails = [user.email for user in self.admin_group.user_set.all() if user.is_active]
         return set(distribution_list + members_emails + admins_emails)
+
+    def _cache_subscription_fields(self):
+        self._email_distribution_list = self.email_distribution_list
 
     def __assign_blank_groups(self):
         """

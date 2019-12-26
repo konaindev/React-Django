@@ -1,4 +1,4 @@
-from django.db.models.signals import pre_save, post_save
+from django.db.models.signals import post_save
 from django.dispatch import receiver
 
 from celery import shared_task
@@ -16,24 +16,15 @@ from remark.email_app.reports.constants import (
 )
 from remark.email_app.reports.weekly_performance import update_project_contacts
 
-from .models import Campaign, Spreadsheet, Period, PerformanceReport, Project, TargetPeriod
+from .models import Spreadsheet, Period, PerformanceReport, Project, TargetPeriod
 
 logger = getLogger(__name__)
 
 
-@receiver(pre_save, sender=Project)
-def check_email_distribution_list(sender, instance, **kwargs):
-    public_id = instance.get_project_public_id()
-    if public_id:
-        old_project = Project.objects.get(public_id=public_id)
-        instance.check_email_distribution_changed(old_project)
-
-
 @receiver(post_save, sender=Project)
-def update_email_distribution_list(sender, instance, **kwargs):
-    if instance.is_email_distribution_changed():
+def update_contacts_list(sender, instance, **kwargs):
+    if instance.is_subscription_changed:
         update_project_contacts.apply_async(args=(instance.get_project_public_id(),))
-        instance.reset_email_distribution_changed()
 
 
 @receiver(post_save, sender=Project)

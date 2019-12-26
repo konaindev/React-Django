@@ -152,6 +152,10 @@ class User(PermissionsMixin, AbstractBaseUser):
 
     objects = UserManager()
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._cache_subscription_fields()
+
     def get_menu_dict(self):
         data = {
             "email": self.email,
@@ -241,20 +245,12 @@ class User(PermissionsMixin, AbstractBaseUser):
                     }
                     return country_object
 
+    def _cache_subscription_fields(self):
+        self._old_is_active = self.is_active
+
     @property
     def is_subscription_changed(self):
-        return self._subscription_changed
-
-    def check_activation_changed(self, old_user):
-        if getattr(self, "_subscription_changed", False):
-            return
-        self._subscription_changed = self.is_active != old_user.is_active
-
-    def set_subscription_changed(self):
-        self._subscription_changed = True
-
-    def reset_subscription_changed(self):
-        self._subscription_changed = False
+        return self._old_is_active != self.is_active
 
 
 class Account(models.Model):
