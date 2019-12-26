@@ -2,6 +2,7 @@
 const webpack = require("webpack");
 const webpackMerge = require("webpack-merge");
 const commonConfig = require("./webpack.common.js");
+const htmlPlugin = require("./webpack.html-plugin.js");
 
 module.exports = webpackMerge(commonConfig, {
   devServer: {
@@ -14,6 +15,7 @@ module.exports = webpackMerge(commonConfig, {
   mode: "development",
   plugins: [
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.HotModuleReplacementPlugin(),
+    htmlPlugin
   ]
 });
