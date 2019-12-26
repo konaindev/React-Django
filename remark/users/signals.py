@@ -30,7 +30,7 @@ def update_contacts_when_group_changed(sender, instance, action, **kwargs):
                     update_project_contacts.apply_async(args=(p.get_project_public_id(),))
 
 
-@receiver(m2m_changed, sender=User.report_projects.through)
+@receiver(m2m_changed, sender=User.subscribed_projects.through)
 def update_contacts_when_email_reports_changed(sender, instance, action, **kwargs):
     if action in ["post_add", "post_remove"]:
         if isinstance(instance, User):

@@ -469,7 +469,7 @@ class AccountReportsView(APIView):
         has_hext = page.has_next()
         projects_q = page.object_list
 
-        for_reports_ids = [p.public_id for p in user.report_projects.all()]
+        for_reports_ids = [p.public_id for p in user.subscribed_projects.all()]
         projects = [self.serialize_project(p, for_reports_ids) for p in projects_q]
         return Response({
             "properties": projects,
@@ -484,8 +484,8 @@ class AccountReportsView(APIView):
         projects = Project.objects.filter(public_id__in=ids)
         for p in projects:
             if properties_toggled[p.public_id]:
-                user.report_projects.add(p)
+                user.subscribed_projects.add(p)
             else:
-                user.report_projects.remove(p)
+                user.subscribed_projects.remove(p)
         user.save()
         return Response({}, status=status.HTTP_200_OK)
