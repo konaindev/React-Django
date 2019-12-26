@@ -27,6 +27,7 @@ from remark_airflow.insights.impl.projects.insights import (
     usv_exe_at_risk,
     usv_exe_on_track,
     retention_rate_health,
+    top_usv_referral,
 )
 from remark.projects.models import Project
 from remark.insights.models import WeeklyInsights
@@ -43,6 +44,7 @@ project_insights = [
     usv_exe_at_risk,
     usv_exe_on_track,
     retention_rate_health,
+    top_usv_referral,
 ]
 
 

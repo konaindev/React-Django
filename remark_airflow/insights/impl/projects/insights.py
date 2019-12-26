@@ -6,6 +6,7 @@ from remark_airflow.insights.impl.triggers import (
     trigger_usv_exe_at_risk,
     trigger_usv_exe_on_track,
     trigger_retention_rate_health,
+    trigger_has_data_google_analytics,
 )
 from remark_airflow.insights.impl.utils import cop
 from remark_airflow.insights.impl.vars import (
@@ -32,6 +33,8 @@ from remark_airflow.insights.impl.vars import (
     var_retention_rate,
     var_target_retention_rate,
     var_prev_retention_rate,
+    var_google_data,
+    var_top_usv_referral,
 )
 
 lease_rate_against_target = Insight(
@@ -171,5 +174,17 @@ retention_rate_health = Insight(
         ),
         cop(var_retention_rate_trend, var_retention_rate, var_prev_retention_rate),
         cop(trigger_retention_rate_health, var_retention_rate_health),
+    ],
+)
+
+
+top_usv_referral = Insight(
+    name="top_usv_referral",
+    template="{{ var_top_usv_referral }} is your top source of Unique Site Visitors (USV) volume, this period.",
+    triggers=["trigger_has_data_google_analytics"],
+    graph=[
+        cop(var_google_data, "project", "start", "end"),
+        cop(var_top_usv_referral, var_google_data),
+        cop(trigger_has_data_google_analytics, var_google_data),
     ],
 )

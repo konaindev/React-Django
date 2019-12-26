@@ -108,3 +108,56 @@ def get_project_usvs(project):
         except:
             pass
     return get_blank_usvs()
+
+
+def get_usv_report(analytics, site_id, start="365daysAgo", end="today"):
+    response = (
+        analytics.reports()
+        .batchGet(
+            body={
+                "reportRequests": [
+                    {
+                        "viewId": site_id,
+                        "dateRanges": [{"startDate": start, "endDate": end}],
+                        "metrics": [{"expression": "ga:sessions"}],
+                        "dimensions": [{"name": "ga:userType"}, {"name": "ga:source"}],
+                        "filtersExpression": "ga:userType==New Visitor",
+                        "orderBys": [
+                            {"fieldName": "ga:sessions", "sortOrder": "DESCENDING"}
+                        ],
+                    }
+                ]
+            }
+        )
+        .execute()
+    )
+    rows = response.get("reports", [{}])[0].get("data", {}).get("rows", [])
+    totals = (
+        response.get("reports", [{}])[0]
+        .get("data", {})
+        .get("totals", [{}])[0]
+        .get("values", [""])[0]
+    )
+    data = [
+        {
+            "source": r.get("dimensions", [None, ""])[1],
+            "visitors": int(r.get("metrics", [{}])[0].get("values", ["0"])[0]),
+        }
+        for r in rows
+    ]
+    return {"stat": data, "totals": int(totals)}
+
+
+def get_project_usv_sources(project, start, end):
+    google_provider = project.analytics_providers.google()
+    if google_provider is not None:
+        try:
+            analytics = initialize_analytics_reporting()
+            start_str = start.strftime("%Y-%m-%d")
+            end_str = end.strftime("%Y-%m-%d")
+            return get_usv_report(
+                analytics, google_provider.identifier, start_str, end_str
+            )
+        except:
+            pass
+    return {"stat": [], "totals": 0}

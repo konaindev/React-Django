@@ -32,3 +32,8 @@ def trigger_retention_rate_health(health_status):
         health_status == HEALTH_STATUS["OFF_TRACK"]
         or health_status == HEALTH_STATUS["AT_RISK"]
     )
+
+
+def trigger_has_data_google_analytics(data):
+    usvs = data.get("stat", [])
+    return len(usvs) != 0
