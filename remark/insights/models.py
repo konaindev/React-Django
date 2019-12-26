@@ -1,6 +1,7 @@
 import json
 
 from django.contrib.postgres.fields import JSONField
+from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
 
 from remark.lib.tokens import public_id
@@ -31,9 +32,9 @@ class WeeklyInsights(models.Model):
 
     end = models.DateField(help_text="End date", blank=False, null=False)
 
-    facts = JSONField(blank=False, null=False)
+    facts = JSONField(encoder=DjangoJSONEncoder, blank=False, null=False)
 
-    insights = JSONField(blank=False, null=False)
+    insights = JSONField(encoder=DjangoJSONEncoder, blank=False, null=False)
 
 
 class BaselineInsights(models.Model):
@@ -53,6 +54,6 @@ class BaselineInsights(models.Model):
 
     end = models.DateField(help_text="End date", blank=False, null=False)
 
-    facts = JSONField(blank=False, null=False)
+    facts = JSONField(encoder=DjangoJSONEncoder, blank=False, null=False)
 
-    insights = JSONField(blank=False, null=False)
+    insights = JSONField(encoder=DjangoJSONEncoder, blank=False, null=False)
