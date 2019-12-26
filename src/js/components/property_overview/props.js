@@ -22,7 +22,11 @@ const project = {
 
 const projectNotAdmin = { ...project, is_admin: false, is_member: true };
 const projectWithoutSite = _omit(project, ["url"]);
-const projectWithoutTags = _omit(project, ["custom_tags"]);
+const projectWithoutTags = {
+  ..._omit(project, ["custom_tags"]),
+  is_admin: false,
+  is_member: true
+};
 const projectWithoutTiles = _omit(project, [
   "property_owner",
   "asset_manager",

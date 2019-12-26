@@ -96,6 +96,7 @@ $add-tag-text-height: 20px;
     display: flex;
     align-items: flex-start;
     flex-wrap: wrap;
+    margin-top: 10px;
 }
 
 .property-overview__tag {
@@ -226,4 +227,10 @@ $add-tag-text-height: 20px;
     color: $tag-text-color;
     font-size: $text-sm;
     line-height: $panel-header-height;
+}
+
+.property-overview__tooltip-anchor {
+    position: relative;
+    top: 2px;
+    margin-left: 10px;
 }
