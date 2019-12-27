@@ -12,9 +12,11 @@ const TrackedRoute = props => {
     // lets track the page in segment...
     // note that we don't care if a valid
     // key was supplied to the sdk...
-    window.analytics.page(page);
+    if (props.path.includes("/projects/") == false) {
+      // only track non-projects this way due to reqs
+      window.analytics.page(page);
+    }
   }, [props.location.pathname]);
-
   return <Route {...props} />;
 };
 
