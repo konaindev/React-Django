@@ -183,7 +183,7 @@ def send_performance_email(performance_email_id):
     project = perf_email.project
 
     # Sync Contacts with SendGrid Recipients
-    contacts = project.get_report_emails()
+    contacts = project.get_subscribed_emails()
     contact_ids = []
     for contact in contacts:
         try:
@@ -241,7 +241,7 @@ def update_project_contacts(project_public_id):
         return
 
     # Sync Contacts with SendGrid Recipients
-    contacts = project.get_report_emails()
+    contacts = project.get_subscribed_emails()
     contact_ids = []
     for contact in contacts:
         try:

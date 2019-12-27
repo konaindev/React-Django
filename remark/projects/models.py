@@ -572,12 +572,13 @@ class Project(models.Model):
             pk=self.admin_group.pk
         ).exists()
 
-    def get_report_emails(self):
+    def get_subscribed_emails(self):
         emails_str = self.email_distribution_list
         distribution_list = [email.strip() for email in emails_str.split(",") if email]
         members_emails = [user.email for user in self.view_group.user_set.all() if user.is_active]
         admins_emails = [user.email for user in self.admin_group.user_set.all() if user.is_active]
-        return set(distribution_list + members_emails + admins_emails)
+        unsubscribed_emails = [u.email for u in self.unsubscribed_users]
+        return set(distribution_list + members_emails + admins_emails) - set(unsubscribed_emails)
 
     def _cache_subscription_fields(self):
         self._email_distribution_list = self.email_distribution_list

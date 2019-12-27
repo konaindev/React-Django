@@ -144,10 +144,9 @@ class User(PermissionsMixin, AbstractBaseUser):
         default=True, help_text="Should there be tutorial showing"
     )
 
-    subscribed_projects = models.ManyToManyField(
+    unsubscribed_projects = models.ManyToManyField(
         Project,
-        through="WeeklyPerformanceSubscription",
-        related_name="subscribed_users",
+        related_name="unsubscribed_users",
     )
 
     USERNAME_FIELD = "email"
@@ -255,13 +254,6 @@ class User(PermissionsMixin, AbstractBaseUser):
     @property
     def is_subscription_changed(self):
         return self._old_is_active != self.is_active
-
-
-class WeeklyPerformanceSubscription(models.Model):
-    enabled = models.BooleanField(default=True)
-
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=False)
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, blank=False)
 
 
 class Account(models.Model):
