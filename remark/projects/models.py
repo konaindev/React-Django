@@ -577,7 +577,7 @@ class Project(models.Model):
         distribution_list = [email.strip() for email in emails_str.split(",") if email]
         members_emails = [user.email for user in self.view_group.user_set.all() if user.is_active]
         admins_emails = [user.email for user in self.admin_group.user_set.all() if user.is_active]
-        unsubscribed_emails = [u.email for u in self.unsubscribed_users]
+        unsubscribed_emails = [u.email for u in self.unsubscribed_users.all()]
         return set(distribution_list + members_emails + admins_emails) - set(unsubscribed_emails)
 
     def _cache_subscription_fields(self):

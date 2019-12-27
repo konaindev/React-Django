@@ -236,10 +236,6 @@ def send_performance_email(performance_email_id):
 @shared_task
 def update_project_contacts(project_public_id):
     project = Project.objects.get(public_id=project_public_id)
-    if not project.email_list_id:
-        logger.info("update_contacts_list::project has no subscriptions")
-        return
-
     # Sync Contacts with SendGrid Recipients
     contacts = project.get_subscribed_emails()
     contact_ids = []
@@ -257,9 +253,13 @@ def update_project_contacts(project_public_id):
     # Sync Contact List
     try:
         list_id = project.email_list_id
-        create_contact_list_if_not_exists(
+        new_list_id = create_contact_list_if_not_exists(
             project.public_id, list_id, contact_ids
         )
+        time.sleep(10)
+        if list_id != new_list_id:
+            project.email_list_id = new_list_id
+            project.save()
     except:
         raise Exception("Failed to synchronize contact list")
 

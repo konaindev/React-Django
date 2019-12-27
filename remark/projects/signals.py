@@ -24,7 +24,7 @@ logger = getLogger(__name__)
 @receiver(post_save, sender=Project)
 def update_contacts_list(sender, instance, **kwargs):
     if instance.is_subscription_changed:
-        update_project_contacts.apply_async(args=(instance.get_project_public_id(),))
+        update_project_contacts.apply_async(args=(instance.get_project_public_id(),), countdown=2)
 
 
 @receiver(post_save, sender=Project)
