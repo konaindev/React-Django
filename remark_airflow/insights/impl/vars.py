@@ -300,15 +300,12 @@ kpi_healths_graph = compose(name="kpi_healths_graph", merge=True)(
 )
 
 
-def var_google_data(project, start, end):
-    return get_project_usv_sources(project, start, end)
-
-
-def var_top_usv_referral(data):
+def var_top_usv_referral(project, start, end):
+    data = get_project_usv_sources(project, start, end)
     usvs = data.get("stat", [])
     if len(usvs) != 0:
         source = usvs[0]["source"]
         if source == "(direct)":
             return "Direct transitions"
         return source
-    return ""
+    return None

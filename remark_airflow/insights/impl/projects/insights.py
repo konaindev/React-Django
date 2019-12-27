@@ -33,7 +33,6 @@ from remark_airflow.insights.impl.vars import (
     var_retention_rate,
     var_target_retention_rate,
     var_prev_retention_rate,
-    var_google_data,
     var_top_usv_referral,
 )
 
@@ -183,8 +182,7 @@ top_usv_referral = Insight(
     template="{{ var_top_usv_referral }} is your top source of Unique Site Visitors (USV) volume, this period.",
     triggers=["trigger_has_data_google_analytics"],
     graph=[
-        cop(var_google_data, "project", "start", "end"),
-        cop(var_top_usv_referral, var_google_data),
-        cop(trigger_has_data_google_analytics, var_google_data),
+        cop(var_top_usv_referral, "project", "start", "end"),
+        cop(trigger_has_data_google_analytics, var_top_usv_referral),
     ],
 )

@@ -34,6 +34,5 @@ def trigger_retention_rate_health(health_status):
     )
 
 
-def trigger_has_data_google_analytics(data):
-    usvs = data.get("stat", [])
-    return len(usvs) != 0
+def trigger_has_data_google_analytics(usv_source):
+    return usv_source is not None

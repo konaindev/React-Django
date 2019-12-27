@@ -42,7 +42,7 @@ def hash_dict(func):
 # cache_operation -> cop
 def cop(func, *needs):
     name = func.__name__
-    # func = hash_dict(functools.lru_cache()(func))
+    func = hash_dict(functools.lru_cache()(func))
     actual_needs = []
     for need in needs:
         if type(need) is str:

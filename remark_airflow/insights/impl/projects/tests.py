@@ -318,7 +318,7 @@ class TopUSVTestCase(TestCase):
 
         args = {"start": self.start, "end": self.end, "project": self.project}
         project_facts = top_usv_referral.graph(args)
-        self.assertEqual(project_facts["var_top_usv_referral"], "")
+        self.assertIsNone(project_facts["var_top_usv_referral"])
         self.assertFalse(project_facts["trigger_has_data_google_analytics"])
 
         result = top_usv_referral.evaluate(project_facts)
@@ -329,7 +329,7 @@ class TopUSVTestCase(TestCase):
         project = create_project()
         args = {"start": self.start, "end": self.end, "project": project}
         project_facts = top_usv_referral.graph(args)
-        self.assertEqual(project_facts["var_top_usv_referral"], "")
+        self.assertIsNone(project_facts["var_top_usv_referral"])
         self.assertFalse(project_facts["trigger_has_data_google_analytics"])
 
         result = top_usv_referral.evaluate(project_facts)
