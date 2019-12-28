@@ -5,7 +5,7 @@
   "license": "copyright",
   "scripts": {
     "build": "webpack --progress --colors --hide-modules --config=webpack.dev.js",
-    "build:prod": "SEGMENT_KEY=${SEGMENT_KEY} webpack --progress --colors --hide-modules --config=webpack.prod.js",
+    "build:prod": "SEGMENT_KEY=${SEGMENT_PROD} webpack --progress --colors --hide-modules --config=webpack.prod.js",
     "heroku-postbuild": "webpack --progress --config=webpack.prod.js",
     "storybook": "start-storybook -p 6006 --ci",
     "storybook-smoke": "start-storybook -p 6006 --ci --smoke-test",
