@@ -20,7 +20,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         fetchingProperties: true
       };
-    case "AJoAX_GET_DASHBOARD_PROPERTIES_SUCCESS":
+    case "AJAX_GET_DASHBOARD_PROPERTIES_SUCCESS":
       // TODO: REMOVE THIS HACK!!!!
       //       this is a super ugly, really-REALLY
       //       bad hack due to the current state of the
