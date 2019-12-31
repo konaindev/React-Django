@@ -10,6 +10,8 @@ services:
   web:
     environment:
         - DOCKER_COMPOSE=true
+        - LC_ALL=C.UTF-8
+        - LANG=C.UTF-8
     build: .
     command: >
         bash -c "pipenv run python manage.py migrate &&
