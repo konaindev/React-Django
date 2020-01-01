@@ -7,6 +7,8 @@ services:
         - "6379:6379"
   db:
     image: postgres
+    ports:
+        - "5432:5432"
   web:
     environment:
         - DOCKER_COMPOSE=true
