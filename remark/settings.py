@@ -40,6 +40,7 @@ DEV = "development"
 STAGING = "staging"
 PROD = "production"
 ENV = os.getenv("ENVIRONMENT", DEV)
+DOCKER_COMPOSE = os.getenv("DOCKER_COMPOSE")
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -212,7 +213,10 @@ SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 # Allow all host headers
 CSRF_TRUSTED_ORIGINS = ["staging.remarkably.io", "app.remarkably.io"]
+
 ALLOWED_HOSTS = ["app.remarkably.io", "staging.remarkably.io", "localhost"]
+if DOCKER_COMPOSE:
+    ALLOWED_HOSTS = ["*"]
 INTERNAL_IPS = ["127.0.0.1"]
 
 # Use our custom User class
@@ -322,6 +326,16 @@ ssl_require = ENV == PROD
 locals()['DATABASES']['default'] = dj_database_url.config(
     conn_max_age=django_heroku.MAX_CONN_AGE, ssl_require=ssl_require)
 
+if DOCKER_COMPOSE:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': 'postgres',
+            'USER': 'postgres',
+            'HOST': 'db',
+            'PORT': 5432,
+        }
+    }
 # Configure Sentry -jc 11-jul-19
 
 sentry_sdk.init(
