@@ -16,7 +16,7 @@ import {
 } from "../../utils/formatters";
 import { getDefaultDirection, getPercentageDirection } from "../../utils/misc";
 import cn from "classnames";
-
+import PropertyStatus from "../property_status";
 import "./large_box_layout.scss";
 
 /**
@@ -51,7 +51,8 @@ export class LargeBoxLayout extends Component {
       tooltip,
       infoTooltip,
       ctaText,
-      ctaCallback
+      ctaCallback,
+      performanceRating
     } = this.props;
 
     const contentValue = (
@@ -69,15 +70,12 @@ export class LargeBoxLayout extends Component {
             {ctaText || "View Details →"}
           </div>
         )}
+
+        <PropertyStatus
+          className="large-box__health-badge"
+          performance_rating={performanceRating}
+        />
         <div className="large-box__content">
-          <p
-            className={cn(
-              "large-box__bottom-line",
-              "large-box__title-container"
-            )}
-          >
-            {detail}
-          </p>
           <div className="large-box__inner-container">
             <span className="large-box__top-line">
               {name}
@@ -91,6 +89,7 @@ export class LargeBoxLayout extends Component {
               contentValue
             )}
 
+            <p className="large-box__bottom-line">{detail}</p>
             <p className="large-box__bottom-line">{detail2}</p>
           </div>
           <div className="large-box__extra-container">
