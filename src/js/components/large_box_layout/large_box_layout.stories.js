@@ -17,7 +17,10 @@ const props = {
 const propsWithBadge = { ...props, performanceRating: 1 };
 const propsWithCTA = { ...props, ctaCallback: x => x };
 const propsWithBoth = { ...propsWithBadge, ...propsWithCTA };
-
+const propsWithLongName = {
+  ...propsWithBoth,
+  name: "This is a super long name for testing."
+};
 storiesOf("LargeBoxLayout", module)
   .add("default", () => (
     <div style={{ width: WIDTH }}>
@@ -37,5 +40,10 @@ storiesOf("LargeBoxLayout", module)
   .add("with health badge and CTA", () => (
     <div style={{ width: WIDTH }}>
       <LargeBoxLayout {...propsWithBoth} />
+    </div>
+  ))
+  .add("with health badge and CTA and long name", () => (
+    <div style={{ width: WIDTH }}>
+      <LargeBoxLayout {...propsWithLongName} />
     </div>
   ));
