@@ -23,7 +23,11 @@ from remark_airflow.insights.impl.projects.projects import (
 from remark_airflow.insights.impl.projects.insights import (
     change_health_status,
     lease_rate_against_target,
-    usv_exe_off_track)
+    usv_exe_off_track,
+    usv_exe_at_risk,
+    usv_exe_on_track,
+    retention_rate_health,
+)
 from remark.projects.models import Project
 from remark.insights.models import WeeklyInsights
 
@@ -32,7 +36,14 @@ default_args = {"start_date": datetime(2019, 12, 22, 00, 00)}
 
 dag = DAG("weekly_insights", default_args=default_args, schedule_interval="0 0 * * 0")
 
-project_insights = [lease_rate_against_target, change_health_status, usv_exe_off_track]
+project_insights = [
+    lease_rate_against_target,
+    change_health_status,
+    usv_exe_off_track,
+    usv_exe_at_risk,
+    usv_exe_on_track,
+    retention_rate_health,
+]
 
 
 def weekly_insights(project_id, task_id, **kwargs):
@@ -40,7 +51,7 @@ def weekly_insights(project_id, task_id, **kwargs):
     end = date.fromtimestamp(execution_date.timestamp())
     start = end - timedelta(weeks=1)
 
-    project_facts = get_project_facts(project_id, start, end)
+    project_facts = get_project_facts(project_insights, project_id, start, end)
     insights = get_project_insights(project_facts, project_insights)
 
     try:
