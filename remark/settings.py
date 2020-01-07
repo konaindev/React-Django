@@ -228,8 +228,6 @@ LOGOUT_REDIRECT_URL = "/"
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-# disabling since we don't serve the frontend out of Django anymore. -TPC
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, "dist")]
 
 #
 # Storages for all other files
