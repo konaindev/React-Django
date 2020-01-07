@@ -58,47 +58,53 @@ export class LargeBoxLayout extends Component {
     const contentValue = (
       <span className="large-box__content-value">{content}</span>
     );
-
+    console.log("------->>>>", detail);
     return (
-      <Panel className="large-box">
-        {/* Container for the content itself.
+      <div id="large-box__wrapper" className="large-box__wrapper">
+        <Panel className="large-box">
+          {/* Container for the content itself.
             Counter-intuitively items- and text- center the rows and row content
             while justif- centers the rows vertically within the box. */}
 
-        {ctaCallback && (
-          <div className="large-box__cta-container">
-            {ctaText || "View Details →"}
-          </div>
-        )}
+          {ctaCallback && (
+            <div className="large-box__cta-container">
+              {ctaText || "View Details →"}
+            </div>
+          )}
 
-        <PropertyStatus
-          className="large-box__health-badge"
-          performance_rating={performanceRating}
-        />
-        <div className="large-box__content">
-          <div className="large-box__inner-container">
-            <span className="large-box__top-line">
-              {name}
-              <InfoTooltip transKey={infoTooltip} />
-            </span>
-            {tooltip ? (
-              <Tooltip placement="top" overlay={tooltip}>
-                {contentValue}
-              </Tooltip>
-            ) : (
-              contentValue
-            )}
-
-            <p className="large-box__bottom-line">{detail}</p>
-            <p className="large-box__bottom-line">{detail2}</p>
+          <PropertyStatus
+            className="large-box__health-badge"
+            performance_rating={performanceRating}
+          />
+          <div className="large-box__content">
+            <div className="large-box__inner-container">
+              <span className="large-box__top-line">
+                {name}
+                <InfoTooltip
+                  className="ooltip-wrapper"
+                  transKey={infoTooltip}
+                />
+              </span>
+              {tooltip ? (
+                <Tooltip placement="top" overlay={tooltip}>
+                  {contentValue}
+                </Tooltip>
+              ) : (
+                contentValue
+              )}
+              <div className="large-box__detail-wrapper">
+                <p className="large-box__bottom-line">{detail}</p>
+                <p className="large-box__bottom-line">{detail2}</p>
+              </div>
+            </div>
+            <div className="large-box__extra-container">
+              {innerBox && (
+                <div className="large-box__content-extra">{innerBox}</div>
+              )}
+            </div>
           </div>
-          <div className="large-box__extra-container">
-            {innerBox && (
-              <div className="large-box__content-extra">{innerBox}</div>
-            )}
-          </div>
-        </div>
-      </Panel>
+        </Panel>
+      </div>
     );
   }
 }

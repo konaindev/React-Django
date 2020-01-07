@@ -19,7 +19,8 @@ const propsWithCTA = { ...props, ctaCallback: x => x };
 const propsWithBoth = { ...propsWithBadge, ...propsWithCTA };
 const propsWithLongName = {
   ...propsWithBoth,
-  name: "This is a super long name for testing."
+  name: "This is a super long name and infotip for testing.",
+  infoTooltip: "This is a tooltip!"
 };
 storiesOf("LargeBoxLayout", module)
   .add("default", () => (
