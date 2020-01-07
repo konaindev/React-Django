@@ -78,11 +78,6 @@ module.exports = {
         API_VERSION: JSON.stringify(process.env.API_VERSION),
         LOAD_SB_PROPS: JSON.stringify(process.env.LOAD_SB_PROPS)
       }
-    }),
-    new HtmlWebPackPlugin({
-      template: "./src/index.html",
-      filename: "./index.html",
-      favicon: "./src/favicon.ico"
     })
   ],
   profile: true,
