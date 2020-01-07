@@ -89,9 +89,11 @@ BASE_URL=http://localhost:8000
 DEBUG_PRINT_LOGGER=YES
 EMAIL_BACKEND=django.core.mail.backends.console.EmailBackend
 EMAIL_USE_TLS=NO
-GOOGLE_APPLICATION_CREDENTIALS=content_of_google_service_account_key_file
+GCLOUD_SERVICE_KEY=(*see Credentials in Airflow Deployment feature branch section*)
+GOOGLE_PROJECT_ID=remarkably-airflow-development
 REDIS_URL=redis://127.0.0.1:6379/
 SENTRY_URL=https://<hash>@sentry.io/<path>
+API_VER=v1
 ```
 
 - Run a build of the front-end assets: `yarn build`.
@@ -113,6 +115,21 @@ Warning: this is fancy magic. I imagine it is fragile. -Dave
 ### Running the Frontend React Application
 
 `$ yarn run-build-ui` will start the `webpack-dev-server`, with the `development` environment and `webpack.dev.js` config file.
+
+### Airflow Deployment for feature branch
+For airflow development and testing while working on branch. The environment will have the same name as your branch within the `remarkably-airflow-development` project in Google Cloud
+
+Create a Google Composer Environment for your feature branch:
+
+`./scripts/create_airflow_env.sh`
+
+Delete the Google Composer Environment for your feature branch:
+
+`./scripts/delete_airflow_env.sh`
+
+May need to run `gcloud auth login` if it's your first time. 
+
+*GCLOUD_SERVICE_KEY can be found in Remarkably's Dropbox > engineering > credentials. Copy and paste the entire json as the value for GCLOUD_SERVICE_KEY. 
 
 ### Storybook
 
