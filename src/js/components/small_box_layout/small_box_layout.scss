@@ -1,6 +1,10 @@
 @import "css/base.scss";
 
 .small-box {
+    :hover {
+        // height: 138px;
+    }
+    transform-origin: 0 0;
     height: 88px;
     border-color: #2b343d;
     border-width: 1px;
@@ -18,6 +22,20 @@
     }
 }
 
+.wrapper {
+    :hover {
+        // bottom: 0px;
+        // position: absolute;
+        // margin-bottom: 20px;
+    }
+    display: flex;
+    flex-direction: row;
+    flex: auto;
+    width: 100%;
+    border-width: 1px;
+    border-color: orange;
+}
+
 .small-box__labels {
     display: flex;
     flex-direction: column;
@@ -26,6 +44,8 @@
 }
 
 .small-box__labels__name {
+    border-color: green;
+    border-width: 1px;
     color: $content-text-primary-color;
     font-size: $text-base;
     padding-left: $s10;
@@ -48,8 +68,23 @@
 }
 
 .small-box__inner-content {
+    border-color: red;
+    border-width: 1px;
     color: $hero-text-color;
     font-weight: $weight-hairline;
     text-align: right;
     padding-right: 1.875rem;
+}
+.grow { transition: all 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) }
+.grow:hover { 
+    // transform: scale(1,1.1); 
+    height: 138px;
+    background-color: #2b343d;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+.dont-grow {
+    // transform: scale(1, 0.9090909091);
+    transform-origin: 0 0;
 }

@@ -17,6 +17,7 @@ import {
 import { getDefaultDirection, getPercentageDirection } from "../../utils/misc";
 
 import "./small_box_layout.scss";
+import cn from "classnames";
 
 /**
  * @class SmallBoxLayout
@@ -43,28 +44,32 @@ class SmallBoxLayout extends Component {
     );
 
     return (
-      <Panel className="small-box">
+      <Panel className={cn("small-box", "grow")}>
         {/* Container for the label and detail text */}
-        <div className="small-box__labels">
-          <span className="small-box__labels__name">{name}</span>
-          {detail2 && (
-            <span className="small-box__labels__detail">{detail2}</span>
-          )}
-          {detail && (
-            <span className="small-box__labels__detail">{detail}</span>
-          )}
+        <div className="wrapper">
+          <div className="small-box__labels">
+            <span className={cn("small-box__labels__name", "dont-grow")}>
+              {name}
+            </span>
+            {detail2 && (
+              <span className="small-box__labels__detail">{detail2}</span>
+            )}
+            {detail && (
+              <span className="small-box__labels__detail">{detail}</span>
+            )}
+          </div>
+          {/* Container for the content itself */}
+          <div className="small-box__outer-content">
+            {tooltip ? (
+              <Tooltip placement="top" overlay={tooltip}>
+                {contentValue}
+              </Tooltip>
+            ) : (
+              contentValue
+            )}
+          </div>
+          <InfoTooltip transKey={infoTooltip} />
         </div>
-        {/* Container for the content itself */}
-        <div className="small-box__outer-content">
-          {tooltip ? (
-            <Tooltip placement="top" overlay={tooltip}>
-              {contentValue}
-            </Tooltip>
-          ) : (
-            contentValue
-          )}
-        </div>
-        <InfoTooltip transKey={infoTooltip} />
       </Panel>
     );
   }
