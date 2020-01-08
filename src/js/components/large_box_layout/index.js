@@ -79,9 +79,9 @@ export class LargeBoxLayout extends Component {
           <div className="large-box__content">
             <div className="large-box__inner-container">
               <span className="large-box__top-line">
-                {name}
+                <span className="test">{name}</span>
                 <InfoTooltip
-                  className="ooltip-wrapper"
+                  className="tooltip-wrapper"
                   transKey={infoTooltip}
                 />
               </span>

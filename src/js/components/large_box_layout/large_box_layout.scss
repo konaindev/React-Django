@@ -32,8 +32,11 @@
         height: 40px;
         display: flex;
         align-items: flex-end;
-        max-width: 250px;
+        max-width: 230px;
         margin-top: 20px;
+
+        border-color: red;
+        border-width: 1px;
     }
 
     &__bottom-line {
@@ -99,7 +102,7 @@
 
     .rmb-tooltip-anchor {
         position: relative;
-        margin-left: 10px;
+        // margin-left: 10px;
     }
 }
 
@@ -157,7 +160,7 @@
     padding-left: 30px;
     // note: this was copied/pasted from Figma
     // TODO: move to scss vars i think 
-    font-family: Formular;
+    // font-family: Formular;
     font-style: normal;
     font-weight: normal;
     font-size: 16px;
@@ -178,4 +181,9 @@
 
 .tooltip-wrapper {
     all: initial;
+}
+
+.test {
+    border-color: green;
+    border-width: 1px;
 }
