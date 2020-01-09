@@ -293,54 +293,60 @@ workflows:
 
   tests-only:
     jobs:
-      - build:
+      - deploy-airflow-staging:
           filters:
             branches:
               ignore:
                 - staging
                 - master
+#      - build:
+#          filters:
+#            branches:
+#              ignore:
+#                - staging
+#                - master
 
-  build-deploy:
-    jobs:
-      - build:
-          context: stage-aws
-          filters:
-            branches:
-              only: staging
-      - deploy-airflow-staging:
-          context: stage-aws
-          requires:
-            - build
-          filters:
-            branches:
-              only: staging
-      - deploy-staging:
-          context: stage-aws
-          requires:
-            - deploy-airflow-staging
-          filters:
-            branches:
-              only: staging
-      - deploy-storybook:
-          context: stage-aws
-          requires:
-            - deploy-staging
-          filters:
-            branches:
-              only: staging
-
-  build-production:
-    jobs:
-      - build:
-          context: deploy-production
-          filters:
-            branches:
-              only: master
-      - hold:
-          type: approval
-          requires:
-            - build
-      - deploy-production:
-          context: deploy-production
-          requires:
-            - hold
+#  build-deploy:
+#    jobs:
+#      - build:
+#          context: stage-aws
+#          filters:
+#            branches:
+#              only: staging
+#      - deploy-airflow-staging:
+#          context: stage-aws
+#          requires:
+#            - build
+#          filters:
+#            branches:
+#              only: staging
+#      - deploy-staging:
+#          context: stage-aws
+#          requires:
+#            - deploy-airflow-staging
+#          filters:
+#            branches:
+#              only: staging
+#      - deploy-storybook:
+#          context: stage-aws
+#          requires:
+#            - deploy-staging
+#          filters:
+#            branches:
+#              only: staging
+#
+#  build-production:
+#    jobs:
+#      - build:
+#          context: deploy-production
+#          filters:
+#            branches:
+#              only: master
+#      - hold:
+#          type: approval
+#          requires:
+#            - build
+#      - deploy-production:
+#          context: deploy-production
+#          requires:
+#            - hold
