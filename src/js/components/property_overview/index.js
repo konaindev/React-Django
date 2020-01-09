@@ -1,13 +1,15 @@
 import cn from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
-
 import ButtonLink from "../button_link";
 import Panel from "../panel";
 
+import Tooltip from "../../components/rmb_tooltip";
+import TooltipAnchor from "../../components/rmb_tooltip/rmb_tooltip_anchor";
+import AddTagField from "../../containers/add_tag_field";
+
 import Tag from "./tag";
 import Tile from "./tile";
-
 import "./property_overview.scss";
 
 export default class PropertyOverview extends React.PureComponent {
@@ -64,25 +66,40 @@ export default class PropertyOverview extends React.PureComponent {
   };
 
   renderTags = () => {
-    const { project, onRemoveTag } = this.props;
-    if (!project.custom_tags || !project.custom_tags.length) {
+    const { project } = this.props;
+    if (
+      !project.is_admin &&
+      (!project.custom_tags || !project.custom_tags.length)
+    ) {
       return;
     }
-    const tags = project.custom_tags.map(name => (
+    const customTags = project.custom_tags || [];
+    const tags = customTags.map(name => (
       <Tag
         name={name}
-        // isAdmin={project.is_admin}
-        onRemove={onRemoveTag}
+        isAdmin={project.is_admin}
+        onRemove={this.props.onRemoveTag}
         key={name}
       />
     ));
     let message = "Custom property groups are made for each tag.";
-    // if (project.is_admin) {
-    //   message = "Create custom property groups by adding a tag.";
-    // }
+    if (project.is_admin) {
+      message = "Create custom property groups by adding a tag.";
+      tags.push(
+        <AddTagField
+          className="property-overview__add-tag-input"
+          key="add-tag-input"
+        />
+      );
+    }
     return (
-      <div className="property-overview__section property-overview__section--top">
-        <div className="property-overview__section-text">{message}</div>
+      <div className="property-overview__section">
+        <div className="property-overview__section-header">
+          Property Tags
+          <Tooltip placement="top" theme="information" text={message}>
+            <TooltipAnchor className="property-overview__tooltip-anchor" />
+          </Tooltip>
+        </div>
         <div className="property-overview__tags">{tags}</div>
       </div>
     );
@@ -129,8 +146,7 @@ export default class PropertyOverview extends React.PureComponent {
     });
     return (
       <div className="property-overview">
-        {this.renderTags()}
-        <div className="property-overview__section property-overview__section--top property-overview__info">
+        <div className="property-overview__section property-overview__info">
           <Panel className="property-overview__tile property-overview__tile--info">
             <div className="property-overview__section-header">
               {project.name}
@@ -144,6 +160,7 @@ export default class PropertyOverview extends React.PureComponent {
           </Panel>
           <div className={imageClass} style={imageStyle} />
         </div>
+        {this.renderTags()}
         <div className="property-overview__section">
           <div className="property-overview__section-header">
             Characteristics

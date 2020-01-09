@@ -8,6 +8,7 @@ orbs:
   aws-cli: circleci/aws-cli@0.1.1
   node: circleci/node@1.1.3
   heroku: circleci/heroku@0.0.8
+  gcp-cli: circleci/gcp-cli@1.8.3
 
 jobs:
   build:
@@ -82,6 +83,64 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: yarn run chromatic
+
+  deploy-airflow-staging:
+    docker:
+      - image: google/cloud-sdk
+    
+    steps:
+      - run:
+          name: Install Heroku Tools
+          command: curl https://cli-assets.heroku.com/install.sh | sh
+      - checkout
+      - gcp-cli/initialize
+      - gcp-cli/install
+      - run:
+          name: Pause running dags
+          command:    |
+              python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.pause_all_dags()"
+      - run:
+          name: Compare and Update PyPi packages 
+          command: python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_pypi_packages()"
+          no_output_timeout: 30m
+      - run: 
+          name: Set Composer BUCKET
+          command:    |
+              get_bucket=$(gcloud composer environments describe $COMPOSER_ENV \
+              --location us-central1 \
+              --format="get(config.dagGcsPrefix)" | sed -e 's/gs:\/\///g' -e's/\/dags//g')
+              echo "export BUCKET=$get_bucket" >> $BASH_ENV
+
+      # NOTE:
+      #   Postgres connection might change in heroku. 
+      #   Airflow doesn't have CLI commands to edit a connection, therefore, it will delete and set up again based on configurations from heroku
+      - run:
+          name: delete postgres connection
+          command:    |
+              gcloud composer environments run $COMPOSER_ENV \
+              --location us-central1 connections -- --delete --conn_id=postgres_default
+      - run:
+          name: setup postgres connection
+          command: python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.set_postgres_connection_airflow()"
+      - run:
+          command:    |
+              set -e
+              echo "Syncing plugins folder..."
+              if [ "$(ls -A ./remark_airflow/plugins)" ]; then
+                gsutil rsync -d -r ./remark_airflow/plugins gs://"$BUCKET"/plugins/
+              else
+                echo "EMPTY PLUGINS FOLDER"
+              fi
+      - run:
+          command:    |
+              set -e
+              echo "Syncing dags folder..."
+              if [ "$(ls -A ./remark_airflow/dags)" ]; then
+                gsutil rsync -d -r ./remark_airflow/dags gs://"$BUCKET"/dags/
+              else
+                echo "EMPTY DAGS FOLDER"
+              fi
+
 
   deploy-staging:
     docker:
@@ -237,10 +296,17 @@ workflows:
           filters:
             branches:
               only: staging
-      - deploy-staging:
+      - deploy-airflow-staging:
           context: stage-aws
           requires:
             - build
+          filters:
+            branches:
+              only: staging
+      - deploy-staging:
+          context: stage-aws
+          requires:
+            - deploy-airflow-staging
           filters:
             branches:
               only: staging

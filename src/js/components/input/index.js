@@ -9,7 +9,7 @@ export default class Input extends React.PureComponent {
   static propTypes = {
     className: PropTypes.string,
     type: PropTypes.string,
-    theme: PropTypes.oneOf(["", "highlight", "gray"]),
+    theme: PropTypes.oneOf(["", "highlight", "gray", "simple"]),
     valueFormatter: PropTypes.func,
     onChange: PropTypes.func
   };
