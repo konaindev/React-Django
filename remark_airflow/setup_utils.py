@@ -105,6 +105,6 @@ def export_environment_variables():
     print(key_value_string)
     add_env_vars_command = f"gcloud composer environments update {os.environ.get('COMPOSER_ENV')} --location us-central1 --update-env-variables={key_value_string}"
     add_env_vars_response = run_command(add_env_vars_command).communicate()
-    add_env_vars = add_env_vars_response[0].decode("utf-8")
+    add_env_vars = add_env_vars_response[1].decode("utf-8")
     print(add_env_vars)
     return
