@@ -78,6 +78,17 @@ def pause_all_dags():
         print(pause_dag)
     return
 
+def unpause_all_dags():
+    dag_list = list_dags()
+    for dag in dag_list:
+        unpause_dag_command = f"gcloud composer environments run {os.environ.get('COMPOSER_ENV')} --location us-central1 unpause -- {dag}"
+        unpause_dag_response = run_command(unpause_dag_command).communicate()
+        unpause_dag = unpause_dag_response[1].decode("utf-8")
+        if "ERROR" in unpause_dag:
+            raise Exception(unpause_dag)
+        print(unpause_dag)
+    return
+
 
 env_vars = ["BASE_URL", "CERTBOT_ACCESS_ID", "CERTBOT_SECRET_KEY", "CERT_ARN",
             "CHROMATIC_APP_CODE", "CLOUDFRONT_DIST_ID", "COMPOSER_AIRFLOW_ENV",

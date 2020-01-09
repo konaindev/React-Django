@@ -160,6 +160,10 @@ jobs:
             set -e
             echo "Syncing xls folder into environment bucket..."
             gsutil rsync -d -r ./remark gs://"$BUCKET"/dags/xls
+      - run:
+          name: Unpause dags
+          command:    |
+            python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.unpause_all_dags()" || echo "broken dag somewhere"
 
 
   deploy-staging:
