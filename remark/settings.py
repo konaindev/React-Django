@@ -17,6 +17,9 @@ import django_heroku
 import sentry_sdk
 from sentry_sdk import configure_scope
 from sentry_sdk.integrations.django import DjangoIntegration
+from sentry_sdk.integrations.celery import CeleryIntegration
+from sentry_sdk.integrations.redis import RedisIntegration
+
 from dotenv import load_dotenv
 
 
@@ -326,7 +329,7 @@ locals()['DATABASES']['default'] = dj_database_url.config(
 
 sentry_sdk.init(
     dsn=os.getenv("SENTRY_DSN", ""),
-    integrations=[DjangoIntegration()]
+    integrations=[DjangoIntegration(), CeleryIntegration(), RedisIntegration()]
 )
 
 with configure_scope() as scope:
