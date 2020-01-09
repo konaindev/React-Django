@@ -77,3 +77,21 @@ def pause_all_dags():
             raise Exception(pause_dag)
         print(pause_dag)
     return
+
+
+env_vars = ["BASE_URL", "CERTBOT_ACCESS_ID", "CERTBOT_SECRET_KEY", "CERT_ARN",
+            "CHROMATIC_APP_CODE", "CLOUDFRONT_DIST_ID", "DATABASE_URL", "DEBUG", "DEBUG_PRINT_LOGGER",
+            "DEFAULT_FILE_STORAGE", "EMAIL_BACKEND", "FRONTEND_URL",
+            "GOOGLE_GEOCODE_API_KEY", "GOOGLE_MAP_API_KEY", "LOADER_TIMEOUT", "MEDIA_ROOT",
+            "MEDIA_URL", "REDIS_URL", "SECURE_SSL_REDIRECT", "SENDGRID_API_KEY"]
+
+def export_environment_variables():
+    key_value_list=[]
+    for env_var in env_vars:
+        key_value_list.append(f'{env_var}={os.environ.get(env_var)}')
+    key_value_string = ",".join(key_value_list)
+    add_env_vars_command = f"gcloud composer environments update {os.environ.get('COMPOSER_ENV')} --location us-central1 --update-env-variables={key_value_string}"
+    add_env_vars_response = run_command(add_env_vars_command).communicate()
+    add_env_vars = add_env_vars_response[0].decode("utf-8")
+    print(add_env_vars)
+    return
