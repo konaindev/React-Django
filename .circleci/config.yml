@@ -120,8 +120,10 @@ jobs:
       - run:
           name: Add environment variables to Composer Environment
           command: python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.export_environment_variables()"
+          no_output_timeout: 30m
 
-#      gsutil rsync sync will sync the entire folder. The ordering here matters because syncing dag folder first will wipe the existing remark, data, and xls folders before adding again later.
+      # NOTE: gsutil rsync sync will sync the entire folder.
+      #   The ordering here matters because syncing dag folder first will wipe the existing remark, data, and xls folders before adding again later.
       - run:
           command:    |
               set -e
