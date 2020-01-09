@@ -100,6 +100,10 @@ jobs:
           command:  |
             echo "export COMPOSER_ENV=remarkably-development" >> $BASH_ENV
       - run:
+          name: Set COMPOSER_AIRFLOW_ENV environment
+          command:  |
+            echo "export COMPOSER_AIRFLOW_ENV=true" >> $BASH_ENV
+      - run:
           name: Pause running dags
           command:    |
               python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.pause_all_dags()" || echo "broken dag somewhere"
