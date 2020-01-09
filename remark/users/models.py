@@ -13,6 +13,7 @@ from remark.projects.models import Project
 from .constants import ACCOUNT_TYPE, PROJECT_ROLES, US_COUNTRY_ID, GB_COUNTRY_ID, US_STATE_LIST, GB_COUNTY_LIST
 from remark.crm.models import Person
 from remark.settings import BASE_URL
+from remark.settings import PATH_REF
 
 
 def usr_public_id():
@@ -234,7 +235,7 @@ class User(PermissionsMixin, AbstractBaseUser):
 
     def get_country_object(self, value):
         # with open('./data/locations/countries.json', 'r') as read_file:
-        with open('/home/airflow/gcs/dags/data/locations/countries.json', 'r') as read_file:
+        with open(f'{PATH_REF}/data/locations/countries.json', 'r') as read_file:
             countries = json.load(read_file)
             for country in countries:
                 if country["iso2"] == value:

@@ -41,15 +41,14 @@ STAGING = "staging"
 PROD = "production"
 ENV = os.getenv("ENVIRONMENT", DEV)
 DOCKER_COMPOSE = os.getenv("DOCKER_COMPOSE")
-COMPOSER_AIRFLOW_ENV = os.getenv("COMPOSER_AIRFLOW_ENV", False)
+PATH_REF = "."
+if os.getenv("COMPOSER_AIRFLOW_ENV", False):
+    PATH_REF = "/home/airflow/gcs/dags"
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-print("BASE DIRRRRRRRRR")
-print(BASE_DIR)
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
-print("PROJECT ROOT DIRRRRRRRRR")
-print(PROJECT_ROOT)
 
 # Load dotenv, if available. Override extant environment variables.
 load_dotenv(dotenv_path=os.path.join(BASE_DIR, ".env"), override=True)

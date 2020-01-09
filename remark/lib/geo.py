@@ -1,5 +1,6 @@
 from math import radians, cos, sin, asin, sqrt
 import json
+from remark.settings import PATH_REF
 
 
 """
@@ -34,6 +35,6 @@ def convert_to_miles(distance, units):
 
 
 def load_country_choices_from_json():
-    countries_data = open('/home/airflow/gcs/dags/data/locations/countries.json')
+    countries_data = open(f'{PATH_REF}/data/locations/countries.json')
     countries_json = json.load(countries_data)
     return [(country["id"], country["name"]) for country in countries_json]
