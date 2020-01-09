@@ -52,15 +52,19 @@ export class LargeBoxLayout extends Component {
       infoTooltip,
       ctaText,
       ctaCallback,
-      performanceRating
+      performanceRating,
+      staticData
     } = this.props;
 
     const contentValue = (
       <span className="large-box__content-value">{content}</span>
     );
     console.log("------->>>>", detail);
+    const wrapperId = !staticData
+      ? "large-box__wrapper-static"
+      : "large-box__wrapper";
     return (
-      <div id="large-box__wrapper" className="large-box__wrapper">
+      <div id={wrapperId}>
         <Panel className="large-box">
           {/* Container for the content itself.
             Counter-intuitively items- and text- center the rows and row content

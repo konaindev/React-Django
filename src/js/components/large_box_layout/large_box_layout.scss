@@ -187,3 +187,12 @@
     border-color: green;
     border-width: 1px;
 }
+
+#large-box__wrapper-static > {
+    :hover {
+        border-color: #F5FAF7;
+        background-color: #2b343d;
+        box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.35);
+        // visibility: visible;
+    }
+}
