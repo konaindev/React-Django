@@ -22,7 +22,7 @@ def initialize_analytics_reporting():
     Returns:
     An authorized Analytics Reporting API V4 service object.
     """
-    # service_account_info = json.loads(GCLOUD_SERVICE_KEY)
+    # passing an empty json object for now. this code will be removed and logic will be placed in remark_airflow
     service_account_info = json.loads({})
     credentials = service_account.Credentials.from_service_account_info(service_account_info)
 

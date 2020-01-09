@@ -234,7 +234,6 @@ class User(PermissionsMixin, AbstractBaseUser):
 
 
     def get_country_object(self, value):
-        # with open('./data/locations/countries.json', 'r') as read_file:
         with open(f'{PATH_REF}/data/locations/countries.json', 'r') as read_file:
             countries = json.load(read_file)
             for country in countries:

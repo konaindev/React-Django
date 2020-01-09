@@ -1,6 +1,7 @@
 import datetime
 from airflow.operators.bash_operator import BashOperator
 from airflow.operators.python_operator import PythonOperator
+from airflow.operators.dummy_operator import DummyOperator
 import logging
 from datetime import datetime, timedelta, date
 from airflow import DAG
@@ -44,13 +45,22 @@ from remark.projects.models import Project
 
 dag = DAG("package_test", default_args=default_args, schedule_interval=timedelta(days=1))
 
-def get_projects():
-    response = Project.objects.all()
-    for p in response:
-        print(p.public_id)
+projects = Project.objects.all()
 
+def get_projects(project):
+    # response = Project.objects.all()
+    # for p in response:
+    #     print(p.public_id)
+    print(project)
 
-# django_setup = PythonOperator(task_id="show_path", python_callable=setup_django_for_airflow, dag=dag)
-test_get_project = PythonOperator(task_id="projects", python_callable=get_projects, dag=dag)
+start_task = DummyOperator(task_id='start_task', dag=dag)
+complete = DummyOperator(task_id="complete", dag=dag)
 
-test_get_project
+start_task
+
+for project in projects:
+    test_get_project = PythonOperator(task_id="projects", python_callable=get_projects, dag=dag, op_kwargs={"project": project})
+
+    start_task >> test_get_project >> complete
+
+complete
