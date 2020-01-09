@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ButtonLabel renders correctly 1`] = `
+<div
+  className="button-label"
+  onClick={[Function]}
+>
+  <div
+    className="button-label__text"
+  >
+    insights
+  </div>
+  <div
+    className="button-label__label"
+  >
+    beta
+  </div>
+</div>
+`;
