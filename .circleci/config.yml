@@ -154,12 +154,12 @@ jobs:
           command:    |
             set -e
             echo "Syncing data folder into environment bucket..."
-            gsutil rsync -d -r ./remark gs://"$BUCKET"/dags/data
+            gsutil rsync -d -r ./data gs://"$BUCKET"/dags/data
       - run:
           command:    |
             set -e
             echo "Syncing xls folder into environment bucket..."
-            gsutil rsync -d -r ./remark gs://"$BUCKET"/dags/xls
+            gsutil rsync -d -r ./xls gs://"$BUCKET"/dags/xls
       - run:
           name: Unpause dags
           command:    |

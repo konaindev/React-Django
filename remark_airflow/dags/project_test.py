@@ -32,23 +32,22 @@ default_args = {
 #
 
 
-# def setup_django_for_airflow():
-#     sys.path.append("/home/airflow/gcs/dags/dependencies")
-#     print(sys.path)
-#     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "remark.settings")
-#     django.setup()
-#
-# setup_django_for_airflow()
-#
-# from remark.projects.models import Project
+def setup_django_for_airflow():
+    sys.path.append("/home/airflow/gcs/dags/dependencies")
+    print(sys.path)
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "remark.settings")
+    django.setup()
+
+setup_django_for_airflow()
+
+from remark.projects.models import Project
 
 dag = DAG("package_test", default_args=default_args, schedule_interval=timedelta(days=1))
 
 def get_projects():
-    print(sys.path)
-    # response = Project.objects.all()
-    # for p in response:
-    #     print(p.public_id)
+    response = Project.objects.all()
+    for p in response:
+        print(p.public_id)
 
 
 # django_setup = PythonOperator(task_id="show_path", python_callable=setup_django_for_airflow, dag=dag)
