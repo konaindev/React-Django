@@ -103,6 +103,7 @@ jobs:
           name: Pause running dags
           command:    |
               python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.pause_all_dags()"
+              echo "pause running dags"
 #      - run:
 #          name: Compare and Update PyPi packages
 #          command: python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_pypi_packages()"
