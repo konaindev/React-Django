@@ -80,7 +80,8 @@ VALIDATION_RULES_LIST = [{"label": v["label"], "key": v["key"]} for v in VALIDAT
 
 US_STATE_LIST = []
 GB_COUNTY_LIST = []
-with open('./data/locations/states.json', 'r') as read_file:
+# with open('./data/locations/states.json', 'r') as read_file:
+with open('/home/airflow/gcs/dags/data/locations/states.json', 'r') as read_file:
     states_list = json.load(read_file)
     for state in states_list:
         if state['country_id'] is US_COUNTRY_ID:

@@ -233,7 +233,8 @@ class User(PermissionsMixin, AbstractBaseUser):
 
 
     def get_country_object(self, value):
-        with open('./data/locations/countries.json', 'r') as read_file:
+        # with open('./data/locations/countries.json', 'r') as read_file:
+        with open('/home/airflow/gcs/dags/data/locations/countries.json', 'r') as read_file:
             countries = json.load(read_file)
             for country in countries:
                 if country["iso2"] == value:
