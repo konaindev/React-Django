@@ -123,39 +123,39 @@ jobs:
           no_output_timeout: 30m
       # NOTE: gsutil rsync sync will sync the entire folder.
       #   The ordering here matters because syncing dag folder first will wipe the existing remark, data, and xls folders before adding again later.
-#      - run:
-#          command:    |
-#              set -e
-#              echo "Syncing plugins folder..."
-#              if [ "$(ls -A ./remark_airflow/plugins)" ]; then
-#                gsutil rsync -d -r ./remark_airflow/plugins gs://"$BUCKET"/plugins/
-#              else
-#                echo "EMPTY PLUGINS FOLDER"
-#              fi
-#      - run:
-#          command:    |
-#              set -e
-#              echo "Syncing dags folder..."
-#              if [ "$(ls -A ./remark_airflow/dags)" ]; then
-#                gsutil rsync -d -r ./remark_airflow/dags gs://"$BUCKET"/dags/
-#              else
-#                echo "EMPTY DAGS FOLDER"
-#              fi
-#      - run:
-#          command:    |
-#            set -e
-#            echo "Syncing remark app into environment bucket..."
-#            gsutil rsync -d -r ./remark gs://"$BUCKET"/dags/remark
-#      - run:
-#          command:    |
-#            set -e
-#            echo "Syncing data folder into environment bucket..."
-#            gsutil rsync -d -r ./remark gs://"$BUCKET"/dags/data
-#      - run:
-#          command:    |
-#            set -e
-#            echo "Syncing xls folder into environment bucket..."
-#            gsutil rsync -d -r ./remark gs://"$BUCKET"/dags/xls
+      - run:
+          command:    |
+              set -e
+              echo "Syncing plugins folder..."
+              if [ "$(ls -A ./remark_airflow/plugins)" ]; then
+                gsutil rsync -d -r ./remark_airflow/plugins gs://"$BUCKET"/plugins/
+              else
+                echo "EMPTY PLUGINS FOLDER"
+              fi
+      - run:
+          command:    |
+              set -e
+              echo "Syncing dags folder..."
+              if [ "$(ls -A ./remark_airflow/dags)" ]; then
+                gsutil rsync -d -r ./remark_airflow/dags gs://"$BUCKET"/dags/
+              else
+                echo "EMPTY DAGS FOLDER"
+              fi
+      - run:
+          command:    |
+            set -e
+            echo "Syncing remark app into environment bucket..."
+            gsutil rsync -d -r ./remark gs://"$BUCKET"/dags/remark
+      - run:
+          command:    |
+            set -e
+            echo "Syncing data folder into environment bucket..."
+            gsutil rsync -d -r ./remark gs://"$BUCKET"/dags/data
+      - run:
+          command:    |
+            set -e
+            echo "Syncing xls folder into environment bucket..."
+            gsutil rsync -d -r ./remark gs://"$BUCKET"/dags/xls
 
 
   deploy-staging:
