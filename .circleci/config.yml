@@ -116,7 +116,7 @@ jobs:
               echo "export BUCKET=$get_bucket" >> $BASH_ENV
       - run:
           name: Get DATABASE_URL
-          command: echo "export DATABASE_URL=$(heroku config:get DATABASE_URL -a $(HEROKU_APP_NAME)" >> $BASH_ENV
+          command: echo "export DATABASE_URL=$(heroku config:get DATABASE_URL -a $HEROKU_APP_NAME)" >> $BASH_ENV
       - run: echo $DATABASE_URL
 #      - run:
 #          name: Add environment variables to Composer Environment
