@@ -575,8 +575,10 @@ class Project(models.Model):
     def get_subscribed_emails(self):
         emails_str = self.email_distribution_list
         distribution_list = [email.strip() for email in emails_str.split(",") if email]
-        members_emails = [user.email for user in self.view_group.user_set.all() if user.is_active]
-        admins_emails = [user.email for user in self.admin_group.user_set.all() if user.is_active]
+        members = self.view_group.user_set.all() if self.view_group else []
+        members_emails = [user.email for user in members if user.is_active]
+        admins = self.admin_group.user_set.all() if self.admin_group else []
+        admins_emails = [user.email for user in admins if user.is_active]
         unsubscribed_emails = [u.email for u in self.unsubscribed_users.all()]
         return set(distribution_list + members_emails + admins_emails) - set(unsubscribed_emails)
 
