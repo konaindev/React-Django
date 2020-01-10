@@ -305,20 +305,20 @@ workflows:
 
   tests-only:
     jobs:
-#      - build:
-#          filters:
-#            branches:
-#              ignore:
-#                - staging
-#                - master
+      - build:
+          filters:
+            branches:
+              ignore:
+                - staging
+                - master
       - deploy-airflow:
           filters:
             branches:
               ignore:
                 - staging
                 - master
-#              only:
-#                - l2-staging
+              only:
+                - l2-staging
 
   build-deploy:
     jobs:
