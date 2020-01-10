@@ -84,7 +84,7 @@ jobs:
 
       - run: yarn run chromatic
 
-  deploy-airflow-preprod:
+  deploy-airflow:
     docker:
       - image: google/cloud-sdk
     
@@ -103,10 +103,10 @@ jobs:
           name: Pause running dags
           command:    |
               python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.pause_all_dags()" || echo "broken dag somewhere"
-#      - run:
-#          name: Compare and Update PyPi packages
-#          command: python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_pypi_packages()"
-#          no_output_timeout: 30m
+      - run:
+          name: Compare and Update PyPi packages
+          command: python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_pypi_packages()"
+          no_output_timeout: 30m
       - run: 
           name: Set Composer BUCKET
           command:    |
@@ -305,60 +305,59 @@ workflows:
 
   tests-only:
     jobs:
-      - deploy-airflow-preprod:
+      - build:
           filters:
             branches:
               ignore:
                 - staging
                 - master
-#      - build:
-#          filters:
-#            branches:
-#              ignore:
-#                - staging
-#                - master
+      - deploy-airflow:
+          filters:
+            branches:
+              only:
+                - l2-staging
 
-#  build-deploy:
-#    jobs:
-#      - build:
-#          context: stage-aws
-#          filters:
-#            branches:
-#              only: staging
-#      - deploy-airflow-preprod:
-#          context: stage-aws
-#          requires:
-#            - build
-#          filters:
-#            branches:
-#              only: staging
-#      - deploy-staging:
-#          context: stage-aws
-#          requires:
-#            - deploy-airflow-staging
-#          filters:
-#            branches:
-#              only: staging
-#      - deploy-storybook:
-#          context: stage-aws
-#          requires:
-#            - deploy-staging
-#          filters:
-#            branches:
-#              only: staging
-#
-#  build-production:
-#    jobs:
-#      - build:
-#          context: deploy-production
-#          filters:
-#            branches:
-#              only: master
-#      - hold:
-#          type: approval
-#          requires:
-#            - build
-#      - deploy-production:
-#          context: deploy-production
-#          requires:
-#            - hold
+  build-deploy:
+    jobs:
+      - build:
+          context: stage-aws
+          filters:
+            branches:
+              only: staging
+      - deploy-airflow:
+          context: stage-aws
+          requires:
+            - build
+          filters:
+            branches:
+              only: staging
+      - deploy-staging:
+          context: stage-aws
+          requires:
+            - deploy-airflow
+          filters:
+            branches:
+              only: staging
+      - deploy-storybook:
+          context: stage-aws
+          requires:
+            - deploy-staging
+          filters:
+            branches:
+              only: staging
+
+  build-production:
+    jobs:
+      - build:
+          context: deploy-production
+          filters:
+            branches:
+              only: master
+      - hold:
+          type: approval
+          requires:
+            - build
+      - deploy-production:
+          context: deploy-production
+          requires:
+            - hold
