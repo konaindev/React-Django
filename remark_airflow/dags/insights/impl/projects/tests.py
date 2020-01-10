@@ -6,8 +6,8 @@ from graphkit import operation
 from remark.factories.periods import create_periods
 from remark.factories.projects import create_project
 from remark.projects.constants import HEALTH_STATUS
-from remark_airflow.dags.insights import Insight
-from remark_airflow.dags.insights import retention_rate_health
+from remark_airflow.dags.insights.framework.core import Insight
+from remark_airflow.dags.insights.impl.projects.insights import retention_rate_health
 
 from .projects import get_project_facts, get_project_insights
 
