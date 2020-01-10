@@ -1,0 +1,190 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InsightsReport render default 1`] = `
+<div
+  className="container insights-rep2ort"
+>
+  <div
+    className="report-section"
+  >
+    <div
+      className="section-header section-header--mt-sm"
+    >
+      <p
+        className="section-header__title"
+      >
+        <div
+          className="insights-report__title"
+        >
+          <svg
+            aria-hidden="true"
+            className="insights-report__icon"
+            color="inherit"
+            fill="none"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 6 12"
+            width="1em"
+          >
+            <path
+              d="M3.28601 4.93702L3.29705 4.94705L3.30895 4.95606L5.66516 6.74075L1.53475 11.462L2.89083 7.70825C3.04065 7.40128 2.85612 7.13096 2.74264 7.02782L2.7316 7.01778L2.7197 7.00877L0.363485 5.22408L4.4939 0.502849L3.13782 4.25658C2.988 4.56355 3.17253 4.83387 3.28601 4.93702Z"
+              fill="currentColor"
+              strokeWidth="0.666667"
+            />
+          </svg>
+          Insights
+        </div>
+      </p>
+      <div
+        className="section-header__extra"
+      >
+        <svg
+          aria-hidden="true"
+          className="insights-report__close"
+          color="inherit"
+          focusable="false"
+          height="1em"
+          onClick={[Function]}
+          role="presentation"
+          viewBox="0 0 13 14"
+          width="1em"
+        >
+          <path
+            d="M1.43532 1.92201L11.3649 12.0613"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeWidth="2"
+          />
+          <path
+            d="M11.4774 1.90854L1.83659 12.0504"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeWidth="2"
+          />
+        </svg>
+      </div>
+    </div>
+    <div
+      className="insights-report__body"
+    >
+      <div
+        className="panel panel--default insights-panel"
+      >
+        <div
+          className="insights-panel__title"
+        >
+          08/01/19 - 08/31/19
+        </div>
+        <div
+          className="insights-panel__text"
+        >
+          Your top-to-bottom, or ‘search to lease’ funnel conversion rate has been Off Track for 4 weeks; your Number of Tours (TOU) has negatively impacted it most.
+        </div>
+      </div>
+      <div
+        className="panel panel--default insights-panel"
+      >
+        <div
+          className="insights-panel__title"
+        >
+          08/01/19 - 08/31/19
+        </div>
+        <div
+          className="insights-panel__text"
+        >
+          Your top-to-bottom, or ‘search to lease’ funnel conversion rate has been Off Track for 4 weeks; your Number of Tours (TOU) has negatively impacted it most.
+        </div>
+      </div>
+      <div
+        className="panel panel--default insights-panel"
+      >
+        <div
+          className="insights-panel__title"
+        >
+          08/01/19 - 08/31/19
+        </div>
+        <div
+          className="insights-panel__text"
+        >
+          Your top-to-bottom, or ‘search to lease’ funnel conversion rate has been Off Track for 4 weeks; your Number of Tours (TOU) has negatively impacted it most.
+        </div>
+      </div>
+      <div
+        className="panel panel--default insights-panel"
+      >
+        <div
+          className="insights-panel__title"
+        >
+          08/01/19 - 08/31/19
+        </div>
+        <div
+          className="insights-panel__text"
+        >
+          Your top-to-bottom, or ‘search to lease’ funnel conversion rate has been Off Track for 4 weeks; your Number of Tours (TOU) has negatively impacted it most.
+        </div>
+      </div>
+      <div
+        className="panel panel--default insights-panel"
+      >
+        <div
+          className="insights-panel__title"
+        >
+          08/01/19 - 08/31/19
+        </div>
+        <div
+          className="insights-panel__text"
+        >
+          Your top-to-bottom, or ‘search to lease’ funnel conversion rate has been Off Track for 4 weeks; your Number of Tours (TOU) has negatively impacted it most.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`InsightsReport render no_insights 1`] = `
+<div
+  className="container insights-rep2ort"
+>
+  <div
+    className="report-section"
+  >
+    <div
+      className="section-header section-header--mt-sm"
+    >
+      <p
+        className="section-header__title"
+      >
+        <div
+          className="insights-report__title"
+        >
+          <svg
+            aria-hidden="true"
+            className="insights-report__icon"
+            color="inherit"
+            fill="none"
+            focusable="false"
+            height="1em"
+            role="presentation"
+            viewBox="0 0 6 12"
+            width="1em"
+          >
+            <path
+              d="M3.28601 4.93702L3.29705 4.94705L3.30895 4.95606L5.66516 6.74075L1.53475 11.462L2.89083 7.70825C3.04065 7.40128 2.85612 7.13096 2.74264 7.02782L2.7316 7.01778L2.7197 7.00877L0.363485 5.22408L4.4939 0.502849L3.13782 4.25658C2.988 4.56355 3.17253 4.83387 3.28601 4.93702Z"
+              fill="currentColor"
+              strokeWidth="0.666667"
+            />
+          </svg>
+          Insights
+        </div>
+      </p>
+    </div>
+    <div
+      className="insights-panel__no_insights"
+    >
+      No insights to view.
+    </div>
+  </div>
+</div>
+`;
