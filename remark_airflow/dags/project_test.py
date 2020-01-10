@@ -10,6 +10,7 @@ from airflow import DAG
 import sys
 import django
 import os
+from django_dag import DjangoDAG
 
 default_args = {
     "owner": "airflow",
@@ -33,34 +34,36 @@ default_args = {
 #
 
 
-def setup_django_for_airflow():
-    sys.path.append("/home/airflow/gcs/dags/dependencies")
-    print(sys.path)
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "remark.settings")
-    django.setup()
+# def setup_django_for_airflow():
+#     sys.path.append("/home/airflow/gcs/dags/dependencies")
+#     print(sys.path)
+#     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "remark.settings")
+#     django.setup()
+#
+# setup_django_for_airflow()
+#
+# from remark.projects.models import Project
 
-setup_django_for_airflow()
+with DjangoDAG(dag_id="package_test", default_args=default_args, schedule_interval=timedelta(days=1)) as dag:
+    from remark.projects.models import Project
 
-from remark.projects.models import Project
+    projects = Project.objects.all()
 
-dag = DAG("package_test", default_args=default_args, schedule_interval=timedelta(days=1))
+    def get_projects(project):
+        # response = Project.objects.all()
+        # for p in response:
+        #     print(p.public_id)
+        print("WHEEEEEEEEEEEEEEEEEE")
+        print(project.public_id)
 
-projects = Project.objects.all()
+    start_task = DummyOperator(task_id='start_task', dag=dag)
+    complete = DummyOperator(task_id="complete", dag=dag)
 
-def get_projects(project):
-    # response = Project.objects.all()
-    # for p in response:
-    #     print(p.public_id)
-    print(project)
+    start_task
 
-start_task = DummyOperator(task_id='start_task', dag=dag)
-complete = DummyOperator(task_id="complete", dag=dag)
+    for project in projects:
+        test_get_project = PythonOperator(task_id="projects_" + project.public_id, python_callable=get_projects, dag=dag, op_kwargs={"project": project})
 
-start_task
+        start_task >> test_get_project >> complete
 
-for project in projects:
-    test_get_project = PythonOperator(task_id="projects", python_callable=get_projects, dag=dag, op_kwargs={"project": project})
-
-    start_task >> test_get_project >> complete
-
-complete
+    complete

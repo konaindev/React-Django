@@ -84,7 +84,7 @@ jobs:
 
       - run: yarn run chromatic
 
-  deploy-airflow-staging:
+  deploy-airflow-preprod:
     docker:
       - image: google/cloud-sdk
     
@@ -96,10 +96,6 @@ jobs:
       - gcp-cli/initialize
       - gcp-cli/install
       - run:
-          name: Set COMPOSER environment
-          command:  |
-            echo "export COMPOSER_ENV=remarkably-development" >> $BASH_ENV
-      - run:
           name: Set COMPOSER_AIRFLOW_ENV environment
           command:  |
             echo "export COMPOSER_AIRFLOW_ENV=True" >> $BASH_ENV
@@ -107,10 +103,10 @@ jobs:
           name: Pause running dags
           command:    |
               python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.pause_all_dags()" || echo "broken dag somewhere"
-#      - run:
-#          name: Compare and Update PyPi packages
-#          command: python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_pypi_packages()"
-#          no_output_timeout: 30m
+      - run:
+          name: Compare and Update PyPi packages
+          command: python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_pypi_packages()"
+          no_output_timeout: 30m
       - run: 
           name: Set Composer BUCKET
           command:    |
@@ -164,6 +160,9 @@ jobs:
           name: Unpause dags
           command:    |
             python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.unpause_all_dags()" || echo "broken dag somewhere"
+
+      # TODO
+      # Finalize if we want to run tests as part of the build job and include step
 
 
   deploy-staging:
@@ -306,7 +305,7 @@ workflows:
 
   tests-only:
     jobs:
-      - deploy-airflow-staging:
+      - deploy-airflow-preprod:
           filters:
             branches:
               ignore:
@@ -326,7 +325,7 @@ workflows:
 #          filters:
 #            branches:
 #              only: staging
-#      - deploy-airflow-staging:
+#      - deploy-airflow-preprod:
 #          context: stage-aws
 #          requires:
 #            - build
