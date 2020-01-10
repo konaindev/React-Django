@@ -99,10 +99,10 @@ jobs:
           name: Set COMPOSER_AIRFLOW_ENV environment
           command:  |
             echo "export COMPOSER_AIRFLOW_ENV=True" >> $BASH_ENV
-      - run:
-          name: Pause running dags
-          command:    |
-              python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.pause_all_dags()" || echo "broken dag somewhere"
+#      - run:
+#          name: Pause running dags
+#          command:    |
+#              python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.pause_all_dags()" || echo "broken dag somewhere"
 #      - run:
 #          name: Compare and Update PyPi packages
 #          command: python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_pypi_packages()"
@@ -116,50 +116,51 @@ jobs:
               echo "export BUCKET=$get_bucket" >> $BASH_ENV
       - run:
           name: Get DATABASE_URL
-          command: echo "export DATABASE_URL=$(heroku config:get DATABASE_URL -a remarkably-staging)" >> $BASH_ENV
-      - run:
-          name: Add environment variables to Composer Environment
-          command: python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.export_environment_variables()"
-          no_output_timeout: 30m
+          command: echo "export DATABASE_URL=$(heroku config:get DATABASE_URL -a $(HEROKU_APP_NAME)" >> $BASH_ENV
+      - run: echo $DATABASE_URL
+#      - run:
+#          name: Add environment variables to Composer Environment
+#          command: python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.export_environment_variables()"
+#          no_output_timeout: 30m
       # NOTE: gsutil rsync sync will sync the entire folder.
       #   The ordering here matters because syncing dag folder first will wipe the existing remark, data, and xls folders before adding again later.
-      - run:
-          command:    |
-              set -e
-              echo "Syncing plugins folder..."
-              if [ "$(ls -A ./remark_airflow/plugins)" ]; then
-                gsutil rsync -d -r ./remark_airflow/plugins gs://"$BUCKET"/plugins/
-              else
-                echo "EMPTY PLUGINS FOLDER"
-              fi
-      - run:
-          command:    |
-              set -e
-              echo "Syncing dags folder..."
-              if [ "$(ls -A ./remark_airflow/dags)" ]; then
-                gsutil rsync -d -r ./remark_airflow/dags gs://"$BUCKET"/dags/
-              else
-                echo "EMPTY DAGS FOLDER"
-              fi
-      - run:
-          command:    |
-            set -e
-            echo "Syncing remark app into environment bucket..."
-            gsutil rsync -d -r ./remark gs://"$BUCKET"/dags/remark
-      - run:
-          command:    |
-            set -e
-            echo "Syncing data folder into environment bucket..."
-            gsutil rsync -d -r ./data gs://"$BUCKET"/dags/data
-      - run:
-          command:    |
-            set -e
-            echo "Syncing xls folder into environment bucket..."
-            gsutil rsync -d -r ./xls gs://"$BUCKET"/dags/xls
-      - run:
-          name: Unpause dags
-          command:    |
-            python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.unpause_all_dags()" || echo "broken dag somewhere"
+#      - run:
+#          command:    |
+#              set -e
+#              echo "Syncing plugins folder..."
+#              if [ "$(ls -A ./remark_airflow/plugins)" ]; then
+#                gsutil rsync -d -r ./remark_airflow/plugins gs://"$BUCKET"/plugins/
+#              else
+#                echo "EMPTY PLUGINS FOLDER"
+#              fi
+#      - run:
+#          command:    |
+#              set -e
+#              echo "Syncing dags folder..."
+#              if [ "$(ls -A ./remark_airflow/dags)" ]; then
+#                gsutil rsync -d -r ./remark_airflow/dags gs://"$BUCKET"/dags/
+#              else
+#                echo "EMPTY DAGS FOLDER"
+#              fi
+#      - run:
+#          command:    |
+#            set -e
+#            echo "Syncing remark app into environment bucket..."
+#            gsutil rsync -d -r ./remark gs://"$BUCKET"/dags/remark
+#      - run:
+#          command:    |
+#            set -e
+#            echo "Syncing data folder into environment bucket..."
+#            gsutil rsync -d -r ./data gs://"$BUCKET"/dags/data
+#      - run:
+#          command:    |
+#            set -e
+#            echo "Syncing xls folder into environment bucket..."
+#            gsutil rsync -d -r ./xls gs://"$BUCKET"/dags/xls
+#      - run:
+#          name: Unpause dags
+#          command:    |
+#            python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.unpause_all_dags()" || echo "broken dag somewhere"
 
       # TODO
       # Finalize if we want to run tests as part of the build job and include step
@@ -305,20 +306,20 @@ workflows:
 
   tests-only:
     jobs:
-      - build:
-          filters:
-            branches:
-              ignore:
-                - staging
-                - master
+#      - build:
+#          filters:
+#            branches:
+#              ignore:
+#                - staging
+#                - master
       - deploy-airflow:
           filters:
             branches:
               ignore:
                 - staging
                 - master
-              only:
-                - l2-staging
+#              only:
+#                - l2-staging
 
   build-deploy:
     jobs:
