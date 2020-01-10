@@ -1,5 +1,5 @@
 function getEmailsFromStr(str) {
-  return str.split(",");
+  return str.split(",").map(i => i.trim());
 }
 
 function arrayDiff(arr1, arr2) {
