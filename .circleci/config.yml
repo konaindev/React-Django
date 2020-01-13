@@ -84,7 +84,7 @@ jobs:
 
       - run: yarn run chromatic
 
-  airflow-testing:
+  airflow-testing-preprod:
     docker:
       - image: google/cloud-sdk
 
@@ -106,10 +106,6 @@ jobs:
             --location us-central1 \
             --format="get(config.dagGcsPrefix)" | sed -e 's/gs:\/\///g' -e's/\/dags//g')
             echo "export BUCKET=$get_bucket" >> $BASH_ENV
-#      - run:
-#          name: Make sure no items in test folder
-#          command:  |
-#            gsutil rm gs://"$BUCKET"/data/test/**
       - run:
           name: Copy dags folder to data/test folder in composer
           command:  |
@@ -350,19 +346,21 @@ workflows:
 
   tests-only:
     jobs:
-      - airflow-testing:
-          filters:
-            branches:
-              ignore:
-                - staging
-                - master
 #      - build:
 #          filters:
 #            branches:
 #              ignore:
 #                - staging
 #                - master
+      - airflow-testing-preprod:
+          filters:
+            branches:
+              ignore:
+                - staging
+                - master
 #      - deploy-airflow:
+#          requires:
+#           - airflow-testing-preprod
 #          filters:
 #            branches:
 #              only:

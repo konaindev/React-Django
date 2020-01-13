@@ -31,7 +31,7 @@ with DjangoDAG(dag_id="analytics", default_args=default_args, schedule_interval=
 
     def save_provider():
         test_project = AnalyticsProvider.objects.get(project_id="pro_eekgau8mfkbc34iq")
-        test_project.identifier = "testing"
+        test_project.identifier = "186306389"
         # Originally 186306389
         test_project.save()
 

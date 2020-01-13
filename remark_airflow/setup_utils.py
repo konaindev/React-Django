@@ -150,8 +150,9 @@ def list_test_tasks(dag_file, dag_id):
 
 
 def check_task_errors():
-    if os.environ.get("CIRCLE_BRANCH") == "cicd_airflow_testing":
-        print("HERERERERERERERERE")
+    # Check if we're on master branch. If yes, exit the function because running tasks in test will still alter data.
+    if os.environ.get("CIRCLE_BRANCH") == "master":
+        return
     test_dags = list_test_dags()
     response_list = []
     for dag in test_dags:
