@@ -505,7 +505,7 @@ exports[`ProjectReportPage renders performance report 1`] = `
                         >
                           <defs>
                             <linearGradient
-                              id="12b31"
+                              id="11f9a"
                               x1="0%"
                               x2="0%"
                               y1="0%"
@@ -609,7 +609,7 @@ exports[`ProjectReportPage renders performance report 1`] = `
                                 shapeRendering="auto"
                                 style={
                                   Object {
-                                    "fill": "url(#12b31)",
+                                    "fill": "url(#11f9a)",
                                     "stroke": "none",
                                     "strokeWidth": "7px",
                                     "width": 4,
@@ -802,7 +802,7 @@ exports[`ProjectReportPage renders performance report 1`] = `
                         >
                           <defs>
                             <linearGradient
-                              id="1b4b8"
+                              id="11f9a"
                               x1="0%"
                               x2="0%"
                               y1="0%"
@@ -906,7 +906,7 @@ exports[`ProjectReportPage renders performance report 1`] = `
                                 shapeRendering="auto"
                                 style={
                                   Object {
-                                    "fill": "url(#1b4b8)",
+                                    "fill": "url(#11f9a)",
                                     "stroke": "none",
                                     "strokeWidth": "7px",
                                     "width": 4,
@@ -1061,7 +1061,7 @@ exports[`ProjectReportPage renders performance report 1`] = `
                         >
                           <defs>
                             <linearGradient
-                              id="1f28c"
+                              id="11f9a"
                               x1="0%"
                               x2="0%"
                               y1="0%"
@@ -1165,7 +1165,7 @@ exports[`ProjectReportPage renders performance report 1`] = `
                                 shapeRendering="auto"
                                 style={
                                   Object {
-                                    "fill": "url(#1f28c)",
+                                    "fill": "url(#11f9a)",
                                     "stroke": "none",
                                     "strokeWidth": "7px",
                                     "width": 4,
@@ -1842,7 +1842,7 @@ exports[`ProjectReportPage renders performance report 1`] = `
                         >
                           <defs>
                             <linearGradient
-                              id="1ff02"
+                              id="11f9a"
                               x1="0%"
                               x2="0%"
                               y1="0%"
@@ -1946,7 +1946,7 @@ exports[`ProjectReportPage renders performance report 1`] = `
                                 shapeRendering="auto"
                                 style={
                                   Object {
-                                    "fill": "url(#1ff02)",
+                                    "fill": "url(#11f9a)",
                                     "stroke": "none",
                                     "strokeWidth": "7px",
                                     "width": 4,
@@ -3585,7 +3585,7 @@ exports[`ProjectReportPage renders performance report 1`] = `
                         >
                           <defs>
                             <linearGradient
-                              id="183a1"
+                              id="11f9a"
                               x1="0%"
                               x2="0%"
                               y1="0%"
@@ -3689,7 +3689,7 @@ exports[`ProjectReportPage renders performance report 1`] = `
                                 shapeRendering="auto"
                                 style={
                                   Object {
-                                    "fill": "url(#183a1)",
+                                    "fill": "url(#11f9a)",
                                     "stroke": "none",
                                     "strokeWidth": "7px",
                                     "width": 4,
@@ -3875,7 +3875,7 @@ exports[`ProjectReportPage renders performance report 1`] = `
                         >
                           <defs>
                             <linearGradient
-                              id="11744"
+                              id="11f9a"
                               x1="0%"
                               x2="0%"
                               y1="0%"
@@ -3979,7 +3979,7 @@ exports[`ProjectReportPage renders performance report 1`] = `
                                 shapeRendering="auto"
                                 style={
                                   Object {
-                                    "fill": "url(#11744)",
+                                    "fill": "url(#11f9a)",
                                     "stroke": "none",
                                     "strokeWidth": "7px",
                                     "width": 4,
@@ -4132,7 +4132,7 @@ exports[`ProjectReportPage renders performance report 1`] = `
                         >
                           <defs>
                             <linearGradient
-                              id="1f387"
+                              id="11f9a"
                               x1="0%"
                               x2="0%"
                               y1="0%"
@@ -4236,7 +4236,7 @@ exports[`ProjectReportPage renders performance report 1`] = `
                                 shapeRendering="auto"
                                 style={
                                   Object {
-                                    "fill": "url(#1f387)",
+                                    "fill": "url(#11f9a)",
                                     "stroke": "none",
                                     "strokeWidth": "7px",
                                     "width": 4,

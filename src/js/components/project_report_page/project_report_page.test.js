@@ -10,6 +10,10 @@ import { performanceProps } from "./props";
 const _ = () => createStore(() => ({}));
 
 describe("ProjectReportPage", () => {
+  beforeEach(() => {
+    Math.random = jest.fn(() => 0.12345);
+  });
+
   it("renders performance report", () => {
     const tree = renderer
       .create(
