@@ -2,6 +2,9 @@ import subprocess
 import shlex
 import os
 
+list_dag_command = f"gcloud composer environments run {os.environ.get('COMPOSER_ENV')} --location us-central1 list_dags"
+list_dag_test_command = f"gcloud composer environments run {os.environ.get('COMPOSER_ENV')} --location us-central1 list_dags -- -sd /home/airflow/gcs/data/test"
+
 def run_command(shell_script):
     command = shlex.split(shell_script)
     process = subprocess.Popen(command,
@@ -59,9 +62,18 @@ def clean_dag_list_result(dag_list_string):
 			response_list.append(i)
 	return response_list
 
+def clean_task_list(task_list_string):
+    string_list = task_list_string.splitlines()
+    response_list = []
+    for i in reversed(string_list):
+        if i and (len(i.splitlines()) > 1 or "{" in i or "[" in i):
+            break
+        elif i:
+            response_list.append(i)
+    return response_list
+
 
 def list_dags():
-    list_dag_command = f"gcloud composer environments run {os.environ.get('COMPOSER_ENV')} --location us-central1 list_dags"
     stderr = run_command(list_dag_command).communicate()[1]
     dag_list = clean_dag_list_result(stderr.decode("utf-8"))
     return dag_list
@@ -108,3 +120,57 @@ def export_environment_variables():
     add_env_vars = add_env_vars_response[1].decode("utf-8")
     print(add_env_vars)
     return
+
+
+def check_dag_syntax_errors():
+    stderr = run_command(list_dag_test_command).communicate()[1]
+    response = stderr.decode("utf-8")
+    if "ERROR" in response:
+        raise Exception(response)
+    print(response)
+    return
+
+def list_test_dags():
+    stderr = run_command(list_dag_test_command).communicate()[1]
+    dag_list = clean_dag_list_result(stderr.decode("utf-8"))
+    print(dag_list)
+    return dag_list
+
+def list_test_tasks(dag_file, dag_id):
+    list_test_task_command = f"gcloud composer environments run {os.environ.get('COMPOSER_ENV')} --location us-central1 list_tasks -- -sd /home/airflow/gcs/data/test/{dag_file} {dag_id}"
+    stderr = run_command(list_test_task_command).communicate()[1]
+    stderr_string = stderr.decode("utf-8").strip()
+
+    if "ERROR" in stderr_string:
+        raise Exception("Make sure dag_id is the same as the file name", stderr_string)
+
+    task_list = clean_task_list(stderr_string)
+    print(task_list)
+    return task_list
+
+
+def check_task_errors():
+    test_dags = list_test_dags()
+    response_list = []
+    for dag in test_dags:
+        task_list = list_test_tasks(f"{dag}.py", dag)
+        for task in task_list:
+            run_test_task_command = f"gcloud composer environments run {os.environ.get('COMPOSER_ENV')} --location us-central1 test -- -sd /home/airflow/gcs/data/test {dag} {task} 2020-01-01"
+            stderr = run_command(run_test_task_command).communicate()[1]
+            stderr_string = stderr.decode("utf-8").strip()
+            if "ERROR" in stderr_string:
+                response_list.append({
+                    "dag": dag,
+                    "task": task,
+                    "message": stderr_string
+                })
+    if len(response_list) > 1:
+        raise Exception(response_list)
+    return
+
+
+
+
+# gcloud composer environments run remarkably-development --location us-central1 list_tasks -- -sd /home/airflow/gcs/data/test/weekly.py weekly_insights
+# gcloud composer environments run remarkably-development --location us-central1 test -- -sd /home/airflow/gcs/data/test weekly_insights weekly_insights_pro_ub61c1yb2wymh7na 2020-01-01
+

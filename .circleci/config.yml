@@ -84,6 +84,38 @@ jobs:
 
       - run: yarn run chromatic
 
+  airflow-testing:
+    docker:
+      - image: google/cloud-sdk
+
+    steps:
+#      - run:
+#          name: Install Heroku Tools
+#          command: curl https://cli-assets.heroku.com/install.sh | sh
+      - checkout
+      - gcp-cli/initialize
+      - gcp-cli/install
+      - run:
+          name: Set COMPOSER_AIRFLOW_ENV environment
+          command:  |
+            echo "export COMPOSER_AIRFLOW_ENV=True" >> $BASH_ENV
+      - run:
+          name: Set Composer BUCKET
+          command:    |
+            get_bucket=$(gcloud composer environments describe $COMPOSER_ENV \
+            --location us-central1 \
+            --format="get(config.dagGcsPrefix)" | sed -e 's/gs:\/\///g' -e's/\/dags//g')
+            echo "export BUCKET=$get_bucket" >> $BASH_ENV
+      - run:
+          name: Copy dags folder to data/test folder in composer
+          command:  |
+            gsutil cp *.py gs://"$BUCKET"/data/test
+      - run:
+          name: Check DAG validity
+          command:  |
+            python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_dag_syntax_errors()"
+
+
   deploy-airflow:
     docker:
       - image: google/cloud-sdk
@@ -305,59 +337,65 @@ workflows:
 
   tests-only:
     jobs:
-      - build:
+      - airflow-testing:
           filters:
             branches:
               ignore:
                 - staging
                 - master
-      - deploy-airflow:
-          filters:
-            branches:
-              only:
-                - l2-staging
+#      - build:
+#          filters:
+#            branches:
+#              ignore:
+#                - staging
+#                - master
+#      - deploy-airflow:
+#          filters:
+#            branches:
+#              only:
+#                - l2-staging
 
-  build-deploy:
-    jobs:
-      - build:
-          context: stage-aws
-          filters:
-            branches:
-              only: staging
-      - deploy-airflow:
-          context: stage-aws
-          requires:
-            - build
-          filters:
-            branches:
-              only: staging
-      - deploy-staging:
-          context: stage-aws
-          requires:
-            - deploy-airflow
-          filters:
-            branches:
-              only: staging
-      - deploy-storybook:
-          context: stage-aws
-          requires:
-            - deploy-staging
-          filters:
-            branches:
-              only: staging
-
-  build-production:
-    jobs:
-      - build:
-          context: deploy-production
-          filters:
-            branches:
-              only: master
-      - hold:
-          type: approval
-          requires:
-            - build
-      - deploy-production:
-          context: deploy-production
-          requires:
-            - hold
+#  build-deploy:
+#    jobs:
+#      - build:
+#          context: stage-aws
+#          filters:
+#            branches:
+#              only: staging
+#      - deploy-airflow:
+#          context: stage-aws
+#          requires:
+#            - build
+#          filters:
+#            branches:
+#              only: staging
+#      - deploy-staging:
+#          context: stage-aws
+#          requires:
+#            - deploy-airflow
+#          filters:
+#            branches:
+#              only: staging
+#      - deploy-storybook:
+#          context: stage-aws
+#          requires:
+#            - deploy-staging
+#          filters:
+#            branches:
+#              only: staging
+#
+#  build-production:
+#    jobs:
+#      - build:
+#          context: deploy-production
+#          filters:
+#            branches:
+#              only: master
+#      - hold:
+#          type: approval
+#          requires:
+#            - build
+#      - deploy-production:
+#          context: deploy-production
+#          requires:
+#            - hold
