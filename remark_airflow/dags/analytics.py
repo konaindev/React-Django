@@ -35,6 +35,6 @@ with DjangoDAG(dag_id="analytics", default_args=default_args, schedule_interval=
         # Originally 186306389
         test_project.save()
 
-    save_provider_task = PythonOperator(task_id="save_provider_task", python_callable="save_provider")
+    save_provider_task = PythonOperator(task_id="save_provider_task", python_callable=save_provider)
 
     save_provider
