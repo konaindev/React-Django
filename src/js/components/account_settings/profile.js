@@ -632,257 +632,101 @@ export default class Profile extends React.PureComponent {
                     </div>
                   </div>
                 </div>
-                <div className="account-settings__tab-section">
-                  <div className="account-settings__tab-title">
-                    Business Info
-                  </div>
-                  <div className="account-settings__field-grid">
-                    <div
-                      className={this.getFieldClasses(
-                        "company",
-                        errors,
-                        touched
-                      )}
-                    >
-                      <div className="account-settings__label">Company</div>
-                      <SelectSearch
-                        name="company"
-                        theme="default"
-                        placeholder=""
-                        components={this.selectSearchComponents}
-                        className="account-settings__input"
-                        loadOptions={this.loadCompany}
-                        defaultOptions={[]}
-                        isCreatable={true}
-                        value={values.company}
-                        onCreateOption={this.onCreateCompany}
-                        onChange={this.onChangeCompany}
-                        onBlur={this.onBlur}
-                      />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="company.value" />
-                      </div>
-                    </div>
-                    <div
-                      className={this.getFieldClasses(
-                        "company_roles",
-                        errors,
-                        touched,
-                        ["max-width"]
-                      )}
-                    >
-                      <div className="account-settings__label">
-                        Company Type
-                      </div>
-                      <MultiSelect
-                        className="account-settings__input"
-                        name="company_roles"
-                        theme="gray"
-                        isShowControls={false}
-                        isShowAllOption={false}
-                        options={this.props.company_roles}
-                        value={values.company_roles}
-                        label={values.company_roles
-                          ?.map(v => v.label)
-                          .join(", ")}
-                        onBlur={() => {
-                          this.unsetMessage();
-                          setFieldTouched("company_roles", true);
-                        }}
-                        onChange={values => {
-                          this.unsetMessage();
-                          setFieldValue("company_roles", values);
-                        }}
-                      />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="company_roles" />
-                      </div>
-                    </div>
-                  </div>
+                <div className="account-settings__controls account-settings__controls--noborder">
+                  <Button
+                    className="account-settings__button"
+                    color="primary"
+                    type="submit"
+                  >
+                    Save
+                  </Button>
+                  {this.showMessage(errors, touched)}
+                </div>
+                <div className="account-settings__tab-subsection">
                   <div className="account-settings__tab-title">
                     Company Info
                   </div>
-                  <div className="account-settings__field-grid">
-                    <div
-                      className={this.getFieldClasses(
-                        "office_street",
-                        errors,
-                        touched,
-                        ["full-grid"]
-                      )}
-                    >
-                      <div className="account-settings__label">Address</div>
-                      <GoogleAddress
-                        name="office_street"
-                        className="account-settings__input"
-                        loadOptions={this.loadAddress}
-                        cacheOptions={false}
-                        companyAddresses={companyAddresses}
-                        theme=""
-                        labelCompany=""
-                        labelGoogle=""
-                        display="full"
-                        value={values.office_street}
-                        onChange={this.onChangeOfficeAddress}
-                        onBlur={this.onBlurOfficeAddress}
-                      />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="office_street" />
+                  <div className="account-settings__field-grid  account-settings__field-grid--col-3">
+                    <div className="account-settings__value-field">
+                      <div className="account-settings__label">Company</div>
+                      <div className="account-settings__value">
+                        {values.company?.label}
+                      </div>
+                    </div>
+                    <div className="account-settings__value-field">
+                      <div className="account-settings__label">
+                        Company Role
+                      </div>
+                      <div className="account-settings__value">
+                        {values.company_roles?.map(v => v.label).join(", ")}
                       </div>
                     </div>
                   </div>
+                </div>
+                <div className="account-settings__tab-subsection">
+                  <div className="account-settings__tab-title">Office Info</div>
+                  <div className="account-settings__value-field">
+                    <div className="account-settings__label">Country</div>
+                    <div className="account-settings__value">
+                      {COUNTRY_FIELDS[this.selectedCountry].full_name}
+                    </div>
+                  </div>
+                  <div className="account-settings__value-field">
+                    <div className="account-settings__label">Address</div>
+                    <div className="account-settings__value">
+                      {values.office_street}
+                    </div>
+                  </div>
                   <div className="account-settings__field-grid account-settings__field-grid--col-3">
-                    <div
-                      className={this.getFieldClasses(
-                        "office_city",
-                        errors,
-                        touched,
-                        ["max-width"]
-                      )}
-                    >
+                    <div className="account-settings__value-field">
                       <div className="account-settings__label">
                         {
                           COUNTRY_FIELDS[this.selectedCountry].address_fields
                             .city
                         }
                       </div>
-                      <Input
-                        className="account-settings__input"
-                        name="office_city"
-                        theme="gray"
-                        value={values.office_city}
-                        onBlur={this.onBlur}
-                        onChange={this.onChange}
-                      />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="office_city" />
+                      <div className="account-settings__value">
+                        {values.office_city}
                       </div>
                     </div>
-                    <div
-                      className={this.getFieldClasses(
-                        "office_state",
-                        errors,
-                        touched
-                      )}
-                    >
+                    <div className="account-settings__value-field">
                       <div className="account-settings__label">
                         {
                           COUNTRY_FIELDS[this.selectedCountry].address_fields
                             .state
                         }
                       </div>
-                      <Select
-                        className="account-settings__input"
-                        name="office_state"
-                        theme="gray"
-                        isSearchable={true}
-                        options={
-                          this.selectedCountry == COUNTRY_FIELDS.USA.short_name
-                            ? this.props.us_state_list
-                            : this.props.gb_county_list
-                        }
-                        value={values.office_state}
-                        onBlur={() => {
-                          this.unsetMessage();
-                          setFieldTouched("office_state", true);
-                        }}
-                        onChange={value => {
-                          this.unsetMessage();
-                          setFieldValue("office_state", value);
-                        }}
-                      />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="office_state" />
+                      <div className="account-settings__value">
+                        {values.office_state?.value}
                       </div>
                     </div>
-                    <div
-                      className={this.getFieldClasses(
-                        "office_zip",
-                        errors,
-                        touched,
-                        ["max-width"]
-                      )}
-                    >
+                    <div className="account-settings__value-field">
                       <div className="account-settings__label">
                         {
                           COUNTRY_FIELDS[this.selectedCountry].address_fields
                             .zip
                         }
                       </div>
-                      <Input
-                        className="account-settings__input"
-                        name="office_zip"
-                        theme="gray"
-                        value={values.office_zip}
-                        onBlur={this.onBlur}
-                        onChange={this.onChange}
-                      />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="office_zip" />
+                      <div className="account-settings__value">
+                        {values.office_zip}
                       </div>
                     </div>
                   </div>
-                  <div className="account-settings__field-grid">
-                    <div
-                      className={this.getFieldClasses(
-                        "office_name",
-                        errors,
-                        touched,
-                        ["max-width"]
-                      )}
-                    >
-                      <div className="account-settings__label">Office Name</div>
-                      <Input
-                        className="account-settings__input"
-                        name="office_name"
-                        theme="gray"
-                        value={values.office_name}
-                        onBlur={this.onBlur}
-                        onChange={this.onChange}
-                      />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="office_name" />
+                  <div className="account-settings__field-grid account-settings__field-grid--col-3">
+                    <div className="account-settings__value-field">
+                      <div className="account-settings__label">Name</div>
+                      <div className="account-settings__value">
+                        {values.office_name}
                       </div>
                     </div>
-                    <div
-                      className={this.getFieldClasses(
-                        "office_type",
-                        errors,
-                        touched
-                      )}
-                    >
-                      <div className="account-settings__label">Office Type</div>
-                      <Select
-                        className="account-settings__input"
-                        name="office_type"
-                        theme="gray"
-                        options={this.props.office_options}
-                        value={values.office_type}
-                        onBlur={() => {
-                          this.unsetMessage();
-                          setFieldTouched("office_type", true);
-                        }}
-                        onChange={value => {
-                          this.unsetMessage();
-                          setFieldValue("office_type", value);
-                        }}
-                      />
-                      <div className="account-settings__error">
-                        <ErrorMessage name="office_type" />
+                    <div className="account-settings__value-field">
+                      <div className="account-settings__label">Type</div>
+                      <div className="account-settings__value">
+                        {values.office_type?.label}
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="account-settings__controls">
-                <Button
-                  className="account-settings__button"
-                  color="primary"
-                  type="submit"
-                >
-                  Save
-                </Button>
-                {this.showMessage(errors, touched)}
               </div>
             </Form>
           )}

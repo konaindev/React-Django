@@ -6,7 +6,7 @@ export const COUNTRY_FIELDS = {
     address_fields: {
       city: "city",
       state: "state",
-      zip: "zip code"
+      zip: "zipcode"
     },
     phone_code: "1"
   },

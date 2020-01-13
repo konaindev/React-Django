@@ -156,6 +156,11 @@ $info-line-height: 1.75rem;
     margin-top: 30px;
 }
 
+.account-settings__tab-subsection {
+    border-top: $menu-border;
+    padding: $box-spacing;
+}
+
 .account-settings__field {
     &--max-width {
         max-width: 315px;
@@ -201,6 +206,10 @@ $info-line-height: 1.75rem;
     }
 }
 
+.account-settings__value-field {
+    margin-top: $box-spacing;
+}
+
 .account-settings__phone-input {
     display: inline-flex;
 }
@@ -236,8 +245,13 @@ $info-line-height: 1.75rem;
 .account-settings__controls {
     display: flex;
     align-items: center;
-    padding: 30px;
+    padding: $box-spacing;
     border-top: $buttons-border;
+
+    &--noborder {
+        padding-top: 0;
+        border: none;
+    }
 }
 
 .account-settings__button {
@@ -386,4 +400,9 @@ $info-line-height: 1.75rem;
 
 .account-settings__reporting-table {
     padding: 0 $box-spacing;
+}
+
+.account-settings__value {
+    color: $text-color;
+    font-size: $text-sm;
 }
