@@ -3,19 +3,17 @@ from django.db import models  # noqa
 
 class AnalyticsProviderManager(models.Manager):
     def google(self):
-        return self.filter(provider='google').first()
+        return self.filter(provider="google").first()
 
 
 class AnalyticsProvider(models.Model):
     ANALYTICS_PROVIDER_CHOICES = [("google", "Google Analytics")]
     ANALYTICS_PROVIDER_DICT = dict(ANALYTICS_PROVIDER_CHOICES)
 
-    manager = AnalyticsProviderManager()
+    objects = AnalyticsProviderManager()
 
     project = models.ForeignKey(
-        'projects.Project',
-        related_name="analytics_providers",
-        on_delete=models.CASCADE,
+        "projects.Project", related_name="analytics_providers", on_delete=models.CASCADE
     )
 
     provider = models.CharField(max_length=255, choices=ANALYTICS_PROVIDER_CHOICES)
@@ -27,5 +25,7 @@ class AnalyticsProvider(models.Model):
 
     class Meta:
         constraints = [
-            models.UniqueConstraint(fields=["project", "provider"], name="unique_project_provider"),
+            models.UniqueConstraint(
+                fields=["project", "provider"], name="unique_project_provider"
+            )
         ]

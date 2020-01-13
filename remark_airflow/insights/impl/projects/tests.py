@@ -1,13 +1,21 @@
 import datetime
+import os
+from unittest import mock
 
 from django.test import TestCase
+from googleapiclient.discovery import build
+from googleapiclient.http import HttpMockSequence
 from graphkit import operation
 
+from remark.factories.analytics import create_google_provider
 from remark.factories.periods import create_periods
 from remark.factories.projects import create_project
 from remark.projects.constants import HEALTH_STATUS
 from remark_airflow.insights.framework.core import Insight
-from remark_airflow.insights.impl.projects.insights import retention_rate_health
+from remark_airflow.insights.impl.projects.insights import (
+    retention_rate_health,
+    top_usv_referral,
+)
 
 from .projects import get_project_facts, get_project_insights
 
@@ -249,3 +257,80 @@ class RetentionRateInsightTestCase(TestCase):
         expected_text = "Your Retention Rate has been At Risk for 1 and is trending up."
         self.assertEqual(result[0], "retention_rate_health")
         self.assertEqual(result[1], expected_text)
+
+
+class TopUSVTestCase(TestCase):
+    def setUp(self):
+        project = create_project()
+        create_google_provider(project)
+        self.start = datetime.date(year=2019, month=11, day=18)
+        self.end = datetime.date(year=2019, month=11, day=25)
+        self.project = project
+
+    def get_google_api_mock(self, file_path):
+        file_path = os.path.join(os.path.dirname(__file__), "tests", file_path)
+        google_api = os.path.join(os.path.dirname(__file__), "tests/google_api.json")
+        http = HttpMockSequence(
+            [
+                ({"status": "200"}, open(google_api, "rb").read()),
+                ({"status": "200"}, open(file_path, "rb").read()),
+            ]
+        )
+        return build("analyticsreporting", "v4", developerKey="developerKey", http=http)
+
+    @mock.patch("remark.analytics.google_analytics.initialize_analytics_reporting")
+    def test_direct_transitions(self, mock_google_api):
+        mock_google_api.return_value = self.get_google_api_mock(
+            "google_analytics_response.json"
+        )
+
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = top_usv_referral.graph(args)
+        self.assertEqual(project_facts["trigger_has_data_google_analytics"], True)
+        self.assertEqual(project_facts["var_top_usv_referral"], "Direct transitions")
+
+        result = top_usv_referral.evaluate(project_facts)
+        expected_text = "Direct transitions is your top source of Unique Site Visitors (USV) volume, this period."
+        self.assertEqual(result[0], "top_usv_referral")
+        self.assertEqual(result[1], expected_text)
+
+    @mock.patch("remark.analytics.google_analytics.initialize_analytics_reporting")
+    def test_google(self, mock_google_api):
+        mock_google_api.return_value = self.get_google_api_mock(
+            "google_analytics_response_google.json"
+        )
+
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = top_usv_referral.graph(args)
+        self.assertEqual(project_facts["trigger_has_data_google_analytics"], True)
+        self.assertEqual(project_facts["var_top_usv_referral"], "google")
+
+        result = top_usv_referral.evaluate(project_facts)
+        expected_text = "google is your top source of Unique Site Visitors (USV) volume, this period."
+        self.assertEqual(result[0], "top_usv_referral")
+        self.assertEqual(result[1], expected_text)
+
+    @mock.patch("remark.analytics.google_analytics.initialize_analytics_reporting")
+    def test_not_triggered(self, mock_google_api):
+        mock_google_api.return_value = self.get_google_api_mock(
+            "google_analytics_response_empty.json"
+        )
+
+        args = {"start": self.start, "end": self.end, "project": self.project}
+        project_facts = top_usv_referral.graph(args)
+        self.assertIsNone(project_facts["var_top_usv_referral"])
+        self.assertFalse(project_facts["trigger_has_data_google_analytics"])
+
+        result = top_usv_referral.evaluate(project_facts)
+        self.assertIsNone(result)
+
+    @mock.patch("remark.analytics.google_analytics.initialize_analytics_reporting")
+    def test_dont_have_provider(self, _):
+        project = create_project()
+        args = {"start": self.start, "end": self.end, "project": project}
+        project_facts = top_usv_referral.graph(args)
+        self.assertIsNone(project_facts["var_top_usv_referral"])
+        self.assertFalse(project_facts["trigger_has_data_google_analytics"])
+
+        result = top_usv_referral.evaluate(project_facts)
+        self.assertIsNone(result)
