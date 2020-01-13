@@ -14,6 +14,7 @@ import {
   formatCurrencyShorthandWithDigit,
   formatDate
 } from "../../utils/formatters";
+import ProperyStatus from "../property_status";
 import { getDefaultDirection, getPercentageDirection } from "../../utils/misc";
 
 import "./small_box_layout.scss";
@@ -34,48 +35,41 @@ class SmallBoxLayout extends Component {
     content: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
       .isRequired,
     detail: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-    detail2: PropTypes.oneOfType([PropTypes.string, PropTypes.element])
+    detail2: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+    ctaCallback: PropTypes.func,
+    performanceRating: PropTypes.number
   };
 
   render() {
-    const { content, detail, detail2, name, tooltip, infoTooltip } = this.props;
+    const {
+      content,
+      detail,
+      detail2,
+      name,
+      tooltip,
+      infoTooltip,
+      ctaCallback,
+      performanceRating
+    } = this.props;
     const contentValue = (
       <span className="small-box__inner-content">{content}</span>
     );
 
     return (
-      // <Panel className="small-box">
-      //   <div className="small-box__wrapper">
-      //     {/* <div className="small-box__badge">On Track</div>
-      //     <div className="small-box__cta">View Details &rarr;</div> */}
-      //     <div className="small-box__row">
-      //       <div className="small-box__labels">
-      //         <span className="small-box__labels__name">{name}</span>
-      //         {detail2 && (
-      //           <span className="small-box__labels__detail">{detail2}</span>
-      //         )}
-      //         {detail && (
-      //           <span className="small-box__labels__detail">{detail}</span>
-      //         )}
-      //       </div>
-      //     </div>
-      //     <div className="small-box__outer-content">
-      //       {tooltip ? (
-      //         <Tooltip placement="top" overlay={tooltip}>
-      //           {contentValue}
-      //         </Tooltip>
-      //       ) : (
-      //         contentValue
-      //       )}
-      //     </div>
-      //     <InfoTooltip transKey={infoTooltip} />
-      //   </div>
-      // </Panel>
-
-      <Panel className="small-box">
+      <Panel
+        className="small-box"
+        onClick={x => (ctaCallback ? ctaCallback(x) : false)}
+      >
         <div className="small-box__wrapper">
-          <div className="small-box__badge">On Track</div>
-          <div className="small-box__cta">View Details &rarr;</div>
+          {performanceRating && (
+            <ProperyStatus
+              className="small-box__badge"
+              performance_rating={performanceRating}
+            />
+          )}
+          {!ctaCallback && (
+            <div className="small-box__cta">View Details &rarr;</div>
+          )}
           <div className="small-box__row">
             <div className="small-box__labels">
               <span className="small-box__labels__name">{name}</span>
