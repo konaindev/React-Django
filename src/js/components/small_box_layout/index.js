@@ -67,7 +67,7 @@ class SmallBoxLayout extends Component {
               performance_rating={performanceRating}
             />
           )}
-          {!ctaCallback && (
+          {ctaCallback && (
             <div className="small-box__cta">View Details &rarr;</div>
           )}
           <div className="small-box__row">
