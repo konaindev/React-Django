@@ -20,11 +20,21 @@ default_args = {
 with DjangoDAG(dag_id="analytics", default_args=default_args, schedule_interval=timedelta(days=1)) as dag:
     from remark.analytics.models import AnalyticsProvider
 
-    def get_analytics_providers():
-        response = AnalyticsProvider.objects.all()
-        print(response)
-        return response
+    # def get_analytics_providers():
+    #     response = AnalyticsProvider.objects.all()
+    #     print(response)
+    #     return response
+    #
+    # analytics_providers = PythonOperator(task_id="analytics_providers", python_callable=get_analytics_providers)
+    #
+    # analytics_providers
 
-    analytics_providers = PythonOperator(task_id="analytics_providers", python_callable=get_analytics_providers)
+    def save_provider():
+        test_project = AnalyticsProvider.objects.get(project_id="pro_eekgau8mfkbc34iq")
+        test_project.identifier = "testing"
+        # Originally 186306389
+        test_project.save()
 
-    analytics_providers
+    save_provider = PythonOperator(task_id="save_provider", python_callable="save_provider")
+
+    save_provider
