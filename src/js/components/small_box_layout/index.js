@@ -44,29 +44,57 @@ class SmallBoxLayout extends Component {
     );
 
     return (
-      <Panel className={cn("small-box", "grow")}>
-        {/* Container for the label and detail text */}
-        <div className="wrapper">
-          <div className="small-box__labels">
-            <span className={cn("small-box__labels__name", "dont-grow")}>
-              {name}
-            </span>
-            {detail2 && (
-              <span className="small-box__labels__detail">{detail2}</span>
-            )}
-            {detail && (
-              <span className="small-box__labels__detail">{detail}</span>
-            )}
-          </div>
-          {/* Container for the content itself */}
-          <div className="small-box__outer-content">
-            {tooltip ? (
-              <Tooltip placement="top" overlay={tooltip}>
-                {contentValue}
-              </Tooltip>
-            ) : (
-              contentValue
-            )}
+      // <Panel className="small-box">
+      //   <div className="small-box__wrapper">
+      //     {/* <div className="small-box__badge">On Track</div>
+      //     <div className="small-box__cta">View Details &rarr;</div> */}
+      //     <div className="small-box__row">
+      //       <div className="small-box__labels">
+      //         <span className="small-box__labels__name">{name}</span>
+      //         {detail2 && (
+      //           <span className="small-box__labels__detail">{detail2}</span>
+      //         )}
+      //         {detail && (
+      //           <span className="small-box__labels__detail">{detail}</span>
+      //         )}
+      //       </div>
+      //     </div>
+      //     <div className="small-box__outer-content">
+      //       {tooltip ? (
+      //         <Tooltip placement="top" overlay={tooltip}>
+      //           {contentValue}
+      //         </Tooltip>
+      //       ) : (
+      //         contentValue
+      //       )}
+      //     </div>
+      //     <InfoTooltip transKey={infoTooltip} />
+      //   </div>
+      // </Panel>
+
+      <Panel className="small-box">
+        <div className="small-box__wrapper">
+          <div className="small-box__badge">On Track</div>
+          <div className="small-box__cta">View Details &rarr;</div>
+          <div className="small-box__row">
+            <div className="small-box__labels">
+              <span className="small-box__labels__name">{name}</span>
+              {detail2 && (
+                <span className="small-box__labels__detail">{detail2}</span>
+              )}
+              {detail && (
+                <span className="small-box__labels__detail">{detail}</span>
+              )}
+            </div>
+            <div className="small-box__outer-content">
+              {tooltip ? (
+                <Tooltip placement="top" overlay={tooltip}>
+                  {contentValue}
+                </Tooltip>
+              ) : (
+                contentValue
+              )}
+            </div>
           </div>
           <InfoTooltip transKey={infoTooltip} />
         </div>

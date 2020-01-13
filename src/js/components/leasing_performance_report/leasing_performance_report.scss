@@ -2,4 +2,8 @@
 
 .lease-performance-report__detail-numbers {
     margin-top: $box-space / 2 - $small-box-vertical-spacing;
+    .panel{ // this allows the psuedo element handle bg color
+        background-color: transparent; 
+        box-shadow: none;
+    }
 }
