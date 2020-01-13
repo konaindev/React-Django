@@ -10,18 +10,6 @@
     &:hover &__wrapper{
         z-index: 999; // hovered item is always moved to the top of the stack
     }
-
-    // transform-origin: 0 0;
-    // height: 88px;
-    // border-color: #2b343d;
-    // border-width: 1px;
-    // display: flex;
-    // flex-direction: row;
-    // margin: $small-box-vertical-spacing 0;
-    // padding: $s5 0;
-    // align-items: center;
-    // position: relative;
-
     .rmb-tooltip-anchor {
         position: absolute;
         top: 10px;
@@ -49,7 +37,7 @@
         border: 1px solid $gray-4;
         border-radius: $panel-border-radius;
         box-shadow: $panel-box-shadow;
-        transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+        transition: $transition-1;
     }
 
     &:hover{
@@ -84,7 +72,7 @@
     top: 0;
     right: 0;
     opacity: 0;
-    transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+    transition: $transition-1;
 }
 
 .small-box__badge{ // replace with dynamic code
@@ -101,7 +89,7 @@
     left: 30px;
     top: 10px;
     opacity: 0;
-    transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
+    transition: $transition-1;
 }
 
 .small-box__row{
