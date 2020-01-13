@@ -12,16 +12,19 @@ def health_status_to_str(health_status):
     statuses = {-1: "Campaign Pending", 0: "Off Track", 1: "At Risk", 2: "On Track"}
     return statuses[health_status]
 
+
 def format_percent(value):
     if value is None:
         return "-"
     return f"{value:.0%}"
+
 
 def hash_dict(func):
     """Transform mutable dictionnary
     Into immutable
     Useful to be compatible with cache
     """
+
     class HDict(dict):
         def __hash__(self):
             return hash(frozenset(self.items()))
@@ -31,7 +34,9 @@ def hash_dict(func):
         args = tuple([HDict(arg) if isinstance(arg, dict) else arg for arg in args])
         kwargs = {k: HDict(v) if isinstance(v, dict) else v for k, v in kwargs.items()}
         return func(*args, **kwargs)
+
     return wrapped
+
 
 # We want to cache the response to operations if the arguments are the same
 # cache_operation -> cop

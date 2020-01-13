@@ -7,6 +7,7 @@ try:
         trigger_usv_exe_at_risk,
         trigger_usv_exe_on_track,
         trigger_retention_rate_health,
+        trigger_has_data_google_analytics,
     )
     from insights.impl.utils import cop
     from insights.impl.vars import (
@@ -69,7 +70,9 @@ except ModuleNotFoundError:
         var_retention_rate,
         var_target_retention_rate,
         var_prev_retention_rate,
+        var_top_usv_referral,
     )
+
 
 lease_rate_against_target = Insight(
     name="lease_rate_against_target",
@@ -208,5 +211,16 @@ retention_rate_health = Insight(
         ),
         cop(var_retention_rate_trend, var_retention_rate, var_prev_retention_rate),
         cop(trigger_retention_rate_health, var_retention_rate_health),
+    ],
+)
+
+
+top_usv_referral = Insight(
+    name="top_usv_referral",
+    template="{{ var_top_usv_referral }} is your top source of Unique Site Visitors (USV) volume, this period.",
+    triggers=["trigger_has_data_google_analytics"],
+    graph=[
+        cop(var_top_usv_referral, "project", "start", "end"),
+        cop(trigger_has_data_google_analytics, var_top_usv_referral),
     ],
 )

@@ -2,6 +2,7 @@ from datetime import timedelta
 
 from graphkit import compose
 
+from remark.analytics.google_analytics import get_project_usv_sources
 from remark.lib.stats import health_check
 from remark.lib.time_series.computed import (
     leased_rate_graph,
@@ -301,3 +302,14 @@ target_kpi_graph = compose(name="target_kpi_graph")(
 kpi_healths_graph = compose(name="kpi_healths_graph", merge=True)(
     kpi_graph, target_kpi_graph, cop(var_kpi_health, var_kpi, var_target_kpi)
 )
+
+
+def var_top_usv_referral(project, start, end):
+    data = get_project_usv_sources(project, start, end)
+    usvs = data.get("stat", [])
+    if len(usvs) != 0:
+        source = usvs[0]["source"]
+        if source == "(direct)":
+            return "Direct transitions"
+        return source
+    return None
