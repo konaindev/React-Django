@@ -106,33 +106,34 @@ jobs:
             --location us-central1 \
             --format="get(config.dagGcsPrefix)" | sed -e 's/gs:\/\///g' -e's/\/dags//g')
             echo "export BUCKET=$get_bucket" >> $BASH_ENV
-#      - run:
-#          name: Copy dags folder to data/test folder in composer
-#          command:  |
-#            gsutil cp ./remark_airflow/dags/*.py gs://"$BUCKET"/data/test
-#      - run:
-#          name: Check DAG validity
-#          command:  |
-#            python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_dag_syntax_errors()"
       - run:
-          name: Branch name testing
+          name: Copy dags folder to data/test folder in composer
           command:  |
-            if [ "$CIRCLE_BRANCH" != "l2-staging" ];
+            gsutil cp ./remark_airflow/dags/*.py gs://"$BUCKET"/data/test
+      - run:
+          name: Check DAG validity
+          command:  |
+            python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_dag_syntax_errors()"
+      - run:
+          name: Check for task errors only if not master branch
+          command:  |
+            if [ "$CIRCLE_BRANCH" != "master" ];
             then
-              echo "NOT l2-staging; $CIRCLE_BRANCH"
+              python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_task_errors()"
             else
-              echo "l2-staging; $CIRCLE_BRANCH"
+              echo "do NOT run task check for master branch"
             fi
+          no_output_timeout: 30m
 #      - run:
 #          name: Check for Task Errors
 #          command:  |
 #            python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_task_errors()"
 #          no_output_timeout: 30m
-#      - run:
-#          name: Delete all items in test folder
-#          command:  |
-#            gsutil rm gs://"$BUCKET"/data/test/**
-#          when: always
+      - run:
+          name: Delete all items in test folder
+          command:  |
+            gsutil rm gs://"$BUCKET"/data/test/**
+          when: always
 
 
   deploy-airflow:
