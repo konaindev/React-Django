@@ -98,8 +98,7 @@ jobs:
       - gcp-cli/install
       - compare-url/reconstruct
       - compare-url/use:
-          attach-workspace: true
-          command:  |
+          custom-logic:  |
             for ORB in ./*/: do
               orbname=$(basename $ORB)
               echo "$(orbname)"
