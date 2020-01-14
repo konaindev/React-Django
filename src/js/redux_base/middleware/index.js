@@ -15,7 +15,7 @@ import {
 } from "../actions";
 import {
   getPropertiesData,
-  updateProfileData,
+  updateUserProfileData,
   updateReportsSettingsData,
   updateSecurityData
 } from "../../api/account_settings";
@@ -348,10 +348,10 @@ export const updateAccountSecurity = store => next => action => {
 };
 
 export const updateAccountProfile = store => next => action => {
-  if (action.type === "API_ACCOUNT_PROFILE") {
+  if (action.type === "API_ACCOUNT_PROFILE_USER") {
     if (action.data) {
       startFetchingState(store);
-      updateProfileData(action.data)
+      updateUserProfileData(action.data)
         .then(response => {
           if (response.status === 200 && !response.data?.errors) {
             action.callback(response.data);

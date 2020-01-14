@@ -40,7 +40,7 @@ const securitySchema = Yup.object().shape({
     .label("Confirm password")
 });
 
-const profileSchema = Yup.object().shape({
+const userSchema = Yup.object().shape({
   avatar: Yup.mixed().test(
     "maxFileSize",
     "Profile image size is over the 3MB limit.",
@@ -80,7 +80,10 @@ const profileSchema = Yup.object().shape({
       })
     })
     .label("Phone number"),
-  phone_ext: Yup.string().label("Phone ext"),
+  phone_ext: Yup.string().label("Phone ext")
+});
+
+const campaignSchema = Yup.object().shape({
   company: Yup.object({
     value: Yup.string()
       .max(255, "is too much length")
@@ -140,4 +143,4 @@ const profileSchema = Yup.object().shape({
     .label("Office type")
 });
 
-export { profileSchema, securitySchema };
+export { userSchema, securitySchema };

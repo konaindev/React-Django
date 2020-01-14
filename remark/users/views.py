@@ -31,7 +31,7 @@ from remark.email_app.invites.added_to_property import (
 from remark.settings import INVITATION_EXP
 
 from .constants import COMPANY_ROLES, BUSINESS_TYPE, VALIDATION_RULES, VALIDATION_RULES_LIST, US_STATE_LIST, GB_COUNTY_LIST, COUNTRY_LIST
-from .forms import AccountCompleteForm, AccountProfileForm, AccountSecurityForm
+from .forms import AccountCompleteForm, AccountProfileForm, AccountSecurityForm, UserProfileForm
 from .models import User
 
 INTERNAL_RESET_URL_TOKEN = 'set-password'
@@ -309,6 +309,7 @@ class ResendInviteView(APIView):
 
 
 class AccountSettingsView(APIView):
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         user = request.user
@@ -326,6 +327,8 @@ class AccountSettingsView(APIView):
 
 
 class AccountSecurityView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
         user = request.user
         params = json.loads(request.body)
@@ -344,6 +347,7 @@ class AccountSecurityView(APIView):
 
 
 class AccountProfileView(APIView):
+    permission_classes = [IsAuthenticated]
 
     def update_profile(self, user, data):
         office_address = geocode(data["office_address"])
@@ -369,10 +373,8 @@ class AccountProfileView(APIView):
         try:
             person = user.person
         except Person.DoesNotExist:
-            person = {}
-            
-        if not person:
             person = Person(user=user, email=user.email)
+
         person.first_name = data["first_name"]
         person.last_name = data["last_name"]
         person.role = data["title"]
@@ -404,6 +406,33 @@ class AccountProfileView(APIView):
             return Response(form.errors.get_json_data(), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         user = request.user
         self.update_profile(user, form.cleaned_data)
+        return Response(user.get_profile_data(), status=status.HTTP_200_OK)
+
+
+class UserProfileView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        form = UserProfileForm(request.POST, request.FILES)
+        if not form.is_valid():
+            return Response(form.errors.get_json_data(), status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        user = request.user
+        data = form.cleaned_data
+
+        try:
+            person = user.person
+        except Person.DoesNotExist:
+            person = Person(user=user, email=user.email)
+
+        person.first_name = data["first_name"]
+        person.last_name = data["last_name"]
+        person.role = data["title"]
+        person.office_phone_country_code = data["phone_country_code"]
+        person.office_phone = data["phone"]
+        person.office_phone_ext = data["phone_ext"]
+        if data["avatar"]:
+            person.avatar = data["avatar"]
+        person.save()
         return Response(user.get_profile_data(), status=status.HTTP_200_OK)
 
 

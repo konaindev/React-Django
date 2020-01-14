@@ -146,3 +146,13 @@ class AccountProfileForm(forms.Form):
     #     if not office_address or not self._check_address_attrs(office_address):
     #         raise forms.ValidationError("Please enter a valid address.")
     #     return office_address
+
+
+class UserProfileForm(forms.Form):
+    avatar = forms.ImageField(required=False)
+    first_name = forms.CharField(max_length=255, required=True)
+    last_name = forms.CharField(max_length=255, required=True)
+    title = forms.CharField(max_length=255, required=False)
+    phone_country_code = forms.RegexField(COUNTRY_CODE_REGEX, required=False)
+    phone = forms.RegexField(PHONE_REGEX, required=False)
+    phone_ext = forms.RegexField(PHONE_REGEX, required=False)

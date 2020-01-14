@@ -20,7 +20,7 @@ import Input from "../input";
 import MultiSelect from "../multi_select";
 import Select, { SelectSearch } from "../select";
 import GoogleAddress from "../google_address";
-import { MAX_AVATAR_SIZE, profileSchema } from "./validators";
+import { MAX_AVATAR_SIZE, userSchema } from "./validators";
 
 export default class Profile extends React.PureComponent {
   static propTypes = {
@@ -81,16 +81,7 @@ export default class Profile extends React.PureComponent {
     "title",
     "phone_country_code",
     "phone",
-    "phone_ext",
-    "company",
-    "company_roles",
-    "office_country",
-    "office_street",
-    "office_city",
-    "office_state",
-    "office_zip",
-    "office_name",
-    "office_type"
+    "phone_ext"
   ];
 
   constructor(props) {
@@ -335,19 +326,7 @@ export default class Profile extends React.PureComponent {
     const data = new FormData();
     for (const k of Object.keys(dataValues)) {
       if (Profile.fieldsSubmit.includes(k)) {
-        if (k === "company_roles") {
-          for (const i of dataValues.company_roles) {
-            data.append("company_roles[]", i.value);
-          }
-        } else if (k === "office_type") {
-          data.append("office_type", dataValues.office_type.value);
-        } else if (k === "office_country") {
-          data.append("office_country", dataValues.office_country.value);
-        } else if (k === "office_state") {
-          data.append("office_state", dataValues.office_state.value);
-        } else if (k === "company") {
-          data.append("company", dataValues.company.label);
-        } else if (
+        if (
           k === "phone_country_code" &&
           dataValues["phone"] &&
           !dataValues["phone_country_code"]
@@ -361,27 +340,11 @@ export default class Profile extends React.PureComponent {
         }
       }
     }
-    const addressValues = _pick(values, [
-      "office_country",
-      "office_street",
-      "office_city",
-      "office_state",
-      "office_zip"
-    ]);
-    validateAddress(addressValues).then(response => {
-      if (response.data.error) {
-        this.setState({ invalid_address: true });
-        this.formik.setErrors({
-          office_street:
-            "Unable to verify address. Please provide a valid address.",
-          office_city: "*",
-          office_state: "*",
-          office_zip: "*"
-        });
-      } else {
-        this.setState({ addresses: response.data, invalid_address: false });
-        this.props.dispatch(addressModal.open(data, response.data));
-      }
+    this.props.dispatch({
+      type: "API_ACCOUNT_PROFILE_USER",
+      callback: this.setSuccessMessage,
+      onError: this.setErrorMessages,
+      data
     });
   };
 
@@ -412,30 +375,21 @@ export default class Profile extends React.PureComponent {
         <Formik
           ref={this.setFormik}
           initialValues={this.getProfileValues(profile)}
-          validationSchema={profileSchema}
+          validationSchema={userSchema}
           validateOnBlur={true}
           validateOnChange={true}
           onSubmit={this.onSubmit}
         >
-          {({
-            errors,
-            touched,
-            values,
-            isValid,
-            handleChange,
-            handleBlur,
-            setFieldTouched,
-            setFieldValue
-          }) => (
-            <Form method="post" autoComplete="off">
-              <AddressModal
-                title="Confirm Office Address"
-                callback={this.setSuccessMessage}
-                onError={this.setErrorMessages}
-                dispatch_type="API_ACCOUNT_PROFILE"
-                updateValues={this.updateValues}
-              />
-              <div className="account-settings__tab-content">
+          {({ errors, touched, values, setFieldTouched }) => (
+            <div className="account-settings__tab-content">
+              <Form method="post" autoComplete="off">
+                <AddressModal
+                  title="Confirm Office Address"
+                  callback={this.setSuccessMessage}
+                  onError={this.setErrorMessages}
+                  dispatch_type="API_ACCOUNT_PROFILE"
+                  updateValues={this.updateValues}
+                />
                 <div className="account-settings__tab-section">
                   <div className="account-settings__tab-title">
                     General Info
@@ -642,111 +596,97 @@ export default class Profile extends React.PureComponent {
                   </Button>
                   {this.showMessage(errors, touched)}
                 </div>
-                <div className="account-settings__tab-subsection">
-                  <div className="account-settings__tab-title">
-                    Company Info
-                    <Button
-                      className="account-settings__edit-button"
-                      onClick={e => e.preventDefault()}
-                    >
-                      <div className="account-settings__edit-button-text">
-                        Edit Company Info
-                      </div>
-                    </Button>
-                  </div>
-                  <div className="account-settings__field-grid  account-settings__field-grid--col-3">
-                    <div className="account-settings__value-field">
-                      <div className="account-settings__label">Company</div>
-                      <div className="account-settings__value">
-                        {values.company?.label}
-                      </div>
+              </Form>
+              <div className="account-settings__tab-subsection">
+                <div className="account-settings__tab-title">
+                  Company Info
+                  <Button className="account-settings__edit-button">
+                    <div className="account-settings__edit-button-text">
+                      Edit Company Info
                     </div>
-                    <div className="account-settings__value-field">
-                      <div className="account-settings__label">
-                        Company Role
-                      </div>
-                      <div className="account-settings__value">
-                        {values.company_roles?.map(v => v.label).join(", ")}
-                      </div>
-                    </div>
-                  </div>
+                  </Button>
                 </div>
-                <div className="account-settings__tab-subsection">
-                  <div className="account-settings__tab-title">
-                    Office Info
-                    <Button
-                      className="account-settings__edit-button"
-                      onClick={e => e.preventDefault()}
-                    >
-                      <div className="account-settings__edit-button-text">
-                        Edit Office Info
-                      </div>
-                    </Button>
-                  </div>
+                <div className="account-settings__field-grid  account-settings__field-grid--col-3">
                   <div className="account-settings__value-field">
-                    <div className="account-settings__label">Country</div>
+                    <div className="account-settings__label">Company</div>
                     <div className="account-settings__value">
-                      {COUNTRY_FIELDS[this.selectedCountry].full_name}
+                      {values.company?.label}
                     </div>
                   </div>
                   <div className="account-settings__value-field">
-                    <div className="account-settings__label">Address</div>
+                    <div className="account-settings__label">Company Role</div>
                     <div className="account-settings__value">
-                      {values.office_street}
-                    </div>
-                  </div>
-                  <div className="account-settings__field-grid account-settings__field-grid--col-3">
-                    <div className="account-settings__value-field">
-                      <div className="account-settings__label">
-                        {
-                          COUNTRY_FIELDS[this.selectedCountry].address_fields
-                            .city
-                        }
-                      </div>
-                      <div className="account-settings__value">
-                        {values.office_city}
-                      </div>
-                    </div>
-                    <div className="account-settings__value-field">
-                      <div className="account-settings__label">
-                        {
-                          COUNTRY_FIELDS[this.selectedCountry].address_fields
-                            .state
-                        }
-                      </div>
-                      <div className="account-settings__value">
-                        {values.office_state?.value}
-                      </div>
-                    </div>
-                    <div className="account-settings__value-field">
-                      <div className="account-settings__label">
-                        {
-                          COUNTRY_FIELDS[this.selectedCountry].address_fields
-                            .zip
-                        }
-                      </div>
-                      <div className="account-settings__value">
-                        {values.office_zip}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="account-settings__field-grid account-settings__field-grid--col-3">
-                    <div className="account-settings__value-field">
-                      <div className="account-settings__label">Name</div>
-                      <div className="account-settings__value">
-                        {values.office_name}
-                      </div>
-                    </div>
-                    <div className="account-settings__value-field">
-                      <div className="account-settings__label">Type</div>
-                      <div className="account-settings__value">
-                        {values.office_type?.label}
-                      </div>
+                      {values.company_roles?.map(v => v.label).join(", ")}
                     </div>
                   </div>
                 </div>
               </div>
-            </Form>
+              <div className="account-settings__tab-subsection">
+                <div className="account-settings__tab-title">
+                  Office Info
+                  <Button className="account-settings__edit-button">
+                    <div className="account-settings__edit-button-text">
+                      Edit Office Info
+                    </div>
+                  </Button>
+                </div>
+                <div className="account-settings__value-field">
+                  <div className="account-settings__label">Country</div>
+                  <div className="account-settings__value">
+                    {COUNTRY_FIELDS[this.selectedCountry].full_name}
+                  </div>
+                </div>
+                <div className="account-settings__value-field">
+                  <div className="account-settings__label">Address</div>
+                  <div className="account-settings__value">
+                    {values.office_street}
+                  </div>
+                </div>
+                <div className="account-settings__field-grid account-settings__field-grid--col-3">
+                  <div className="account-settings__value-field">
+                    <div className="account-settings__label">
+                      {COUNTRY_FIELDS[this.selectedCountry].address_fields.city}
+                    </div>
+                    <div className="account-settings__value">
+                      {values.office_city}
+                    </div>
+                  </div>
+                  <div className="account-settings__value-field">
+                    <div className="account-settings__label">
+                      {
+                        COUNTRY_FIELDS[this.selectedCountry].address_fields
+                          .state
+                      }
+                    </div>
+                    <div className="account-settings__value">
+                      {values.office_state?.value}
+                    </div>
+                  </div>
+                  <div className="account-settings__value-field">
+                    <div className="account-settings__label">
+                      {COUNTRY_FIELDS[this.selectedCountry].address_fields.zip}
+                    </div>
+                    <div className="account-settings__value">
+                      {values.office_zip}
+                    </div>
+                  </div>
+                </div>
+                <div className="account-settings__field-grid account-settings__field-grid--col-3">
+                  <div className="account-settings__value-field">
+                    <div className="account-settings__label">Name</div>
+                    <div className="account-settings__value">
+                      {values.office_name}
+                    </div>
+                  </div>
+                  <div className="account-settings__value-field">
+                    <div className="account-settings__label">Type</div>
+                    <div className="account-settings__value">
+                      {values.office_type?.label}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           )}
         </Formik>
       </div>
