@@ -117,7 +117,8 @@ jobs:
       - run:
           name: Branch name testing
           command:  |
-            if [{$CIRCLE_BRANCH} != "l2-staging"];
+            echo $CIRCLE_BRANCH == "l2-staging"
+            if [$CIRCLE_BRANCH != "l2-staging"];
             then
               echo "NOT l2-staging; $CIRCLE_BRANCH"
             else
