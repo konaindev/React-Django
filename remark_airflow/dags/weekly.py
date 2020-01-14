@@ -17,6 +17,7 @@ with DjangoDAG(dag_id="weekly_insights", default_args=default_args, schedule_int
         usv_exe_at_risk,
         usv_exe_on_track,
         retention_rate_health,
+        top_usv_referral,
     )
     from remark.projects.models import Project
     from remark.insights.models import WeeklyInsights
@@ -28,6 +29,7 @@ with DjangoDAG(dag_id="weekly_insights", default_args=default_args, schedule_int
         usv_exe_at_risk,
         usv_exe_on_track,
         retention_rate_health,
+        top_usv_referral,
     ]
 
 
