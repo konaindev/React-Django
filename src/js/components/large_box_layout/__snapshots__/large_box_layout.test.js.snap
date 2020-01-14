@@ -1,14 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`LargeBoxLayout renders correctly 1`] = `
-"<div id=\\"large-box__wrapper\\" className=\\"large-box__wrapper\\">
+"<div id=\\"large-box__wrapper\\" onClick={[Function: onClick]}>
   <Panel className=\\"large-box\\" component=\\"div\\" size=\\"default\\">
     <Memo(PropertyStatus) className=\\"large-box__health-badge\\" performance_rating={[undefined]} />
     <div className=\\"large-box__content\\">
       <div className=\\"large-box__inner-container\\">
         <span className=\\"large-box__top-line\\">
-          Test name
-          <Connect(InfoTooltipBase) className=\\"ooltip-wrapper\\" transKey={[undefined]} />
+          <span className=\\"test\\">
+            Test name
+            <Connect(InfoTooltipBase) className=\\"tooltip-wrapper\\" transKey={[undefined]} />
+          </span>
         </span>
         <span className=\\"large-box__content-value\\">
           Test content
@@ -29,14 +31,16 @@ exports[`LargeBoxLayout renders correctly 1`] = `
 `;
 
 exports[`LargeBoxLayout renders with tooltip correctly 1`] = `
-"<div id=\\"large-box__wrapper\\" className=\\"large-box__wrapper\\">
+"<div id=\\"large-box__wrapper\\" onClick={[Function: onClick]}>
   <Panel className=\\"large-box\\" component=\\"div\\" size=\\"default\\">
     <Memo(PropertyStatus) className=\\"large-box__health-badge\\" performance_rating={[undefined]} />
     <div className=\\"large-box__content\\">
       <div className=\\"large-box__inner-container\\">
         <span className=\\"large-box__top-line\\">
-          Test name
-          <Connect(InfoTooltipBase) className=\\"ooltip-wrapper\\" transKey=\\"i18n_key\\" />
+          <span className=\\"test\\">
+            Test name
+            <Connect(InfoTooltipBase) className=\\"tooltip-wrapper\\" transKey=\\"i18n_key\\" />
+          </span>
         </span>
         <span className=\\"large-box__content-value\\">
           Test content
