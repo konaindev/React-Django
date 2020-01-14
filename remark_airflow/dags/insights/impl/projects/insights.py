@@ -45,6 +45,7 @@ except ModuleNotFoundError:
         trigger_usv_exe_at_risk,
         trigger_usv_exe_on_track,
         trigger_retention_rate_health,
+        trigger_has_data_google_analytics
     )
     from remark_airflow.dags.insights.impl.utils import cop
     from remark_airflow.dags.insights.impl.vars import (
