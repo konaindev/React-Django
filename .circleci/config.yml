@@ -121,7 +121,7 @@ jobs:
             then
               echo "NOT l2-staging; $CIRCLE_BRANCH"
             else
-              echo "NOT l2-staging; $CIRCLE_BRANCH"
+              echo "l2-staging; $CIRCLE_BRANCH"
             fi
 #      - run:
 #          name: Check for Task Errors
