@@ -69,9 +69,7 @@ export class LargeBoxLayout extends Component {
             Counter-intuitively items- and text- center the rows and row content
             while justif- centers the rows vertically within the box. */}
 
-          {ctaCallback && (
-            <div className="large-box__cta">"View Details →"</div>
-          )}
+          {ctaCallback && <div className="large-box__cta">View Details →</div>}
 
           <PropertyStatus
             className="large-box__health-badge"
