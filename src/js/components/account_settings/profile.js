@@ -125,9 +125,11 @@ export default class Profile extends React.PureComponent {
     if (!Object.keys(p).length) {
       p = { ...Profile.defaultProps.profile };
     }
-    p.company_roles = this.props.company_roles.filter(i =>
-      p.company_roles.includes(i.value)
-    );
+    if (p.company_roles) {
+      p.company_roles = this.props.company_roles.filter(i =>
+        p.company_roles.includes(i.value)
+      );
+    }
     p.office_type = this.props.office_options.filter(
       i => i.value === p.office_type
     )[0];

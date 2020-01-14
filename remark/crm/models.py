@@ -166,6 +166,7 @@ class Person(models.Model):
     office = models.ForeignKey(
         "crm.Office",
         on_delete=models.CASCADE,
+        null=True,
         blank=False,
         help_text="Office the person works at",
     )
