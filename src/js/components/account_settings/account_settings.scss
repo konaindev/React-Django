@@ -23,6 +23,8 @@ $button-line-height: 1.25rem;
 $message-line-height: 1.625rem;
 $error-color: $orange-6;
 $info-line-height: 1.75rem;
+$edit-button-color: $gray-4;
+$edit-button-border: 1px solid $gray-9;
 
 .account-settings {
     width: $page-width;
@@ -97,6 +99,8 @@ $info-line-height: 1.75rem;
 }
 
 .account-settings__tab-title {
+    display: flex;
+    align-items: center;
     color: $text-color;
     font-size: $text-xl;
     line-height: $tab-title-line-height;
@@ -260,6 +264,20 @@ $info-line-height: 1.75rem;
     font-weight: $weight-semibold;
     letter-spacing: 1px;
     text-transform: uppercase;
+    line-height: $button-line-height;
+}
+
+.account-settings__edit-button {
+    margin-left: auto;
+    padding: 8px 10px;
+    background: $edit-button-color;
+    border: $edit-button-border;
+    border-radius: 4px;
+}
+
+.account-settings__edit-button-text {
+    color: $text-color;
+    font-size: $text-xs;
     line-height: $button-line-height;
 }
 

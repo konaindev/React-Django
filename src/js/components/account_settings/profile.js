@@ -645,6 +645,14 @@ export default class Profile extends React.PureComponent {
                 <div className="account-settings__tab-subsection">
                   <div className="account-settings__tab-title">
                     Company Info
+                    <Button
+                      className="account-settings__edit-button"
+                      onClick={e => e.preventDefault()}
+                    >
+                      <div className="account-settings__edit-button-text">
+                        Edit Company Info
+                      </div>
+                    </Button>
                   </div>
                   <div className="account-settings__field-grid  account-settings__field-grid--col-3">
                     <div className="account-settings__value-field">
@@ -664,7 +672,17 @@ export default class Profile extends React.PureComponent {
                   </div>
                 </div>
                 <div className="account-settings__tab-subsection">
-                  <div className="account-settings__tab-title">Office Info</div>
+                  <div className="account-settings__tab-title">
+                    Office Info
+                    <Button
+                      className="account-settings__edit-button"
+                      onClick={e => e.preventDefault()}
+                    >
+                      <div className="account-settings__edit-button-text">
+                        Edit Office Info
+                      </div>
+                    </Button>
+                  </div>
                   <div className="account-settings__value-field">
                     <div className="account-settings__label">Country</div>
                     <div className="account-settings__value">
