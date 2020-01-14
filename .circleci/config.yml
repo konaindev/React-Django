@@ -9,7 +9,6 @@ orbs:
   node: circleci/node@1.1.3
   heroku: circleci/heroku@0.0.8
   gcp-cli: circleci/gcp-cli@1.8.3
-  compare-url: iynere/compare-url@1.2.0
 
 jobs:
   build:
@@ -96,67 +95,26 @@ jobs:
       - checkout
       - gcp-cli/initialize
       - gcp-cli/install
-      - compare-url/reconstruct
-      - compare-url/use:
-          custom-logic:  |
-            for ORB in remarkably/remark/*/; do
-              orbname=$(basename $ORB)
-              echo "$(orbname)"
-            done
-
-#      - run:
-#          command:  |
-#            echo $CIRCLE_COMPARE_URL
-#            CHANGE_CHECKER=./remark_airflow/changed-since-last-commit.py
-#            SUB_DIR=./remark
-#            if [[ `python3 ${CHANGE_CHECKER} ${SUB_DIR}` == "True" ]]; then
-#            # run unit tests against ${SUB_DIR}
-#              echo "CHANGES!!!!"
-#            else
-#              echo "NO CHANGE!!!"
-#            fi
-#      - run:
-#          name: Set COMPOSER_AIRFLOW_ENV environment
-#          command:  |
-#            echo "export COMPOSER_AIRFLOW_ENV=True" >> $BASH_ENV
-#      - run:
-#          name: Set Composer BUCKET
-#          command:    |
-#            get_bucket=$(gcloud composer environments describe $COMPOSER_ENV \
-#            --location us-central1 \
-#            --format="get(config.dagGcsPrefix)" | sed -e 's/gs:\/\///g' -e's/\/dags//g')
-#            echo "export BUCKET=$get_bucket" >> $BASH_ENV
+      - run:
+          name: Set COMPOSER_AIRFLOW_ENV environment
+          command:  |
+            echo "export COMPOSER_AIRFLOW_ENV=True" >> $BASH_ENV
+      - run:
+          name: Set Composer BUCKET
+          command:    |
+            get_bucket=$(gcloud composer environments describe $COMPOSER_ENV \
+            --location us-central1 \
+            --format="get(config.dagGcsPrefix)" | sed -e 's/gs:\/\///g' -e's/\/dags//g')
+            echo "export BUCKET=$get_bucket" >> $BASH_ENV
+      - run: echo $BUCKET
 #      - run:
 #          name: Copy dags folder to data/test folder in composer
 #          command:  |
 #            gsutil cp ./remark_airflow/dags/*.py gs://"$BUCKET"/data/test
-#      - run:
-#          name: Check DAG validity
-#          command:  |
-#            python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_dag_syntax_errors()"
-#      - run:
-#          name: Check for task errors only if not master branch
-#          command:  |
-#            if [ "$CIRCLE_BRANCH" != "master" ];
-#            then
-#              python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_task_errors()"
-#            else
-#              echo "do NOT run task check for master branch"
-#            fi
-#          no_output_timeout: 30m
-#      - run:
-#          name: Check for Task Errors
-#          command:  |
-#            python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_task_errors()"
-#          no_output_timeout: 30m
-#      - run:
-#          name: Delete all items in test folder
-#          command:  |
-#            gsutil rm gs://"$BUCKET"/data/test/**
-#          when: always
 
 
-  deploy-airflow:
+
+  deploy-airflow-preprod:
     docker:
       - image: google/cloud-sdk
     
@@ -204,15 +162,15 @@ jobs:
               else
                 echo "EMPTY PLUGINS FOLDER"
               fi
-      - run:
-          command:    |
-              set -e
-              echo "Syncing dags folder..."
-              if [ "$(ls -A ./remark_airflow/dags)" ]; then
-                gsutil rsync -d -r ./remark_airflow/dags gs://"$BUCKET"/dags/
-              else
-                echo "EMPTY DAGS FOLDER"
-              fi
+#      - run:
+#          command:    |
+#              set -e
+#              echo "Syncing dags folder..."
+#              if [ "$(ls -A ./remark_airflow/dags)" ]; then
+#                gsutil rsync -d -r ./remark_airflow/dags gs://"$BUCKET"/dags/
+#              else
+#                echo "EMPTY DAGS FOLDER"
+#              fi
       - run:
           command:    |
             set -e
@@ -228,14 +186,41 @@ jobs:
             set -e
             echo "Syncing xls folder into environment bucket..."
             gsutil rsync -d -r ./xls gs://"$BUCKET"/dags/xls
+
+      # Begin Testing Validity
+      - run:
+          name: Copy dags folder to data/test folder in composer
+          command:  |
+            gsutil cp ./remark_airflow/dags/*.py gs://"$BUCKET"/data/test
+      - run:
+          name: Check DAG validity
+          command:  |
+            python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_dag_syntax_errors()"
+      - run:
+          name: Check for task errors only if not master branch
+          command:  |
+            if [ "$CIRCLE_BRANCH" != "master" ];
+            then
+              python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_task_errors()"
+            else
+              echo "do NOT run task check for master branch"
+            fi
+          no_output_timeout: 30m
+      - run:
+          name: Check for Task Errors
+          command:  |
+            python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_task_errors()"
+          no_output_timeout: 30m
+      - run:
+          name: Delete all items in test folder
+          command:  |
+            gsutil rm gs://"$BUCKET"/data/test/**
+          when: always
+
       - run:
           name: Unpause dags
           command:    |
             python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.unpause_all_dags()" || echo "broken dag somewhere"
-
-      # TODO
-      # Finalize if we want to run tests as part of the build job and include step
-
 
   deploy-staging:
     docker:
