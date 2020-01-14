@@ -37,8 +37,8 @@
 #         var_top_usv_referral,
 #     )
 # except ModuleNotFoundError:
-from remark_airflow.insights import Insight
-from remark_airflow.insights import (
+from remark_airflow.insights.framework.core import Insight
+from remark_airflow.insights.impl.triggers import (
     trigger_is_active_campaign,
     trigger_health_status_is_changed,
     trigger_usv_exe_off_track,
@@ -47,8 +47,8 @@ from remark_airflow.insights import (
     trigger_retention_rate_health,
     trigger_has_data_google_analytics
 )
-from remark_airflow.insights import cop
-from remark_airflow.insights import (
+from remark_airflow.insights.impl.utils import cop
+from remark_airflow.insights.impl.vars import (
     var_campaign_health_status,
     var_prev_health_status,
     var_current_period_leased_rate,

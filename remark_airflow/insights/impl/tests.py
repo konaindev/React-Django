@@ -8,7 +8,7 @@ from remark.factories.periods import create_periods
 # try:
 #     from insights.impl.vars import var_prev_health_status
 # except ModuleNotFoundError:
-from remark_airflow.insights import var_prev_health_status
+from remark_airflow.insights.impl.vars import var_prev_health_status
 
 
 class VarPrevHealthStatusTestCase(TestCase):

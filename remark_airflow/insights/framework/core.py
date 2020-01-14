@@ -7,7 +7,7 @@ from graphkit import compose
 # try:
 #     from insights.impl.utils import health_status_to_str, format_percent
 # except ModuleNotFoundError:
-from remark_airflow.insights import health_status_to_str, format_percent
+from remark_airflow.insights.impl.utils import health_status_to_str, format_percent
 
 jinja2.filters.FILTERS["health_status_to_str"] = health_status_to_str
 jinja2.filters.FILTERS["format_percent"] = format_percent
