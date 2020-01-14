@@ -115,6 +115,7 @@ jobs:
 
 
   deploy-airflow-preprod:
+#    us-central1-remarkably-deve-0649e2d8-bucket
     docker:
       - image: google/cloud-sdk
     
@@ -151,8 +152,8 @@ jobs:
           name: Add environment variables to Composer Environment
           command: python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.export_environment_variables()"
           no_output_timeout: 30m
-      # NOTE: gsutil rsync sync will sync the entire folder.
-      #   The ordering here matters because syncing dag folder first will wipe the existing remark, data, and xls folders before adding again later.
+
+      # Copy airflow plugins, remark, data, and xls folders to gcloud bucket dags folder
       - run:
           command:    |
               set -e
@@ -162,15 +163,6 @@ jobs:
               else
                 echo "EMPTY PLUGINS FOLDER"
               fi
-#      - run:
-#          command:    |
-#              set -e
-#              echo "Syncing dags folder..."
-#              if [ "$(ls -A ./remark_airflow/dags)" ]; then
-#                gsutil rsync -d -r ./remark_airflow/dags gs://"$BUCKET"/dags/
-#              else
-#                echo "EMPTY DAGS FOLDER"
-#              fi
       - run:
           command:    |
             set -e
@@ -199,8 +191,7 @@ jobs:
       - run:
           name: Check for task errors only if not master branch
           command:  |
-            if [ "$CIRCLE_BRANCH" != "master" ];
-            then
+            if [ "$CIRCLE_BRANCH" != "master" ]; then
               python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_task_errors()"
             else
               echo "do NOT run task check for master branch"
@@ -214,9 +205,24 @@ jobs:
       - run:
           name: Delete all items in test folder
           command:  |
-            gsutil rm gs://"$BUCKET"/data/test/**
+            if [ "$(gsutil ls gs://'$BUCKET'/data/test)" ]; then
+              gsutil rm gs://"$BUCKET"/data/test/**
+            else
+              echo "Empty test folder"
+            fi
           when: always
 
+      # Add DAGs to airflow dags
+      - run:
+          command:    |
+              set -e
+              echo "Syncing dags folder..."
+              if [ "$(ls -A ./remark_airflow/dags)" ]; then
+                gsutil rm gs://"$BUCKET"/dags/*.py
+                gsutil cp ./remark_airflow/dags/*.py gs://"$BUCKET"/dags
+              else
+                echo "EMPTY DAGS FOLDER"
+              fi
       - run:
           name: Unpause dags
           command:    |
@@ -368,7 +374,7 @@ workflows:
 #              ignore:
 #                - staging
 #                - master
-      - airflow-testing-preprod:
+      - deploy-airflow-preprod:
           filters:
             branches:
               ignore:
