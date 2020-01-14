@@ -99,7 +99,7 @@ jobs:
       - compare-url/reconstruct
       - compare-url/use:
           custom-logic:  |
-            for ORB in ./*/: do
+            for ORB in ./*/; do
               orbname=$(basename $ORB)
               echo "$(orbname)"
             done
