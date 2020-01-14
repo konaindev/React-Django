@@ -50,7 +50,6 @@ export class LargeBoxLayout extends Component {
       detail2,
       tooltip,
       infoTooltip,
-      ctaText,
       ctaCallback,
       performanceRating,
       staticData
@@ -60,20 +59,18 @@ export class LargeBoxLayout extends Component {
       <span className="large-box__content-value">{content}</span>
     );
     console.log("------->>>>", detail);
-    const wrapperId = !staticData
+    const wrapperId = staticData
       ? "large-box__wrapper-static"
       : "large-box__wrapper";
     return (
-      <div id={wrapperId}>
+      <div id={wrapperId} onClick={x => ctaCallback(x)}>
         <Panel className="large-box">
           {/* Container for the content itself.
             Counter-intuitively items- and text- center the rows and row content
             while justif- centers the rows vertically within the box. */}
 
           {ctaCallback && (
-            <div className="large-box__cta-container">
-              {ctaText || "View Details →"}
-            </div>
+            <div className="large-box__cta">"View Details →"</div>
           )}
 
           <PropertyStatus
@@ -83,11 +80,13 @@ export class LargeBoxLayout extends Component {
           <div className="large-box__content">
             <div className="large-box__inner-container">
               <span className="large-box__top-line">
-                <span className="test">{name}</span>
-                <InfoTooltip
-                  className="tooltip-wrapper"
-                  transKey={infoTooltip}
-                />
+                <span className="test">
+                  {name}
+                  <InfoTooltip
+                    className="tooltip-wrapper"
+                    transKey={infoTooltip}
+                  />
+                </span>
               </span>
               {tooltip ? (
                 <Tooltip placement="top" overlay={tooltip}>

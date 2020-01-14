@@ -15,7 +15,7 @@ const props = {
 };
 
 const propsWithBadge = { ...props, performanceRating: 1 };
-const propsWithCTA = { ...props, ctaCallback: x => x };
+const propsWithCTA = { ...props, ctaCallback: () => alert("callback fired") };
 const propsWithBoth = { ...propsWithBadge, ...propsWithCTA };
 const propsWithLongName = {
   ...propsWithBoth,
