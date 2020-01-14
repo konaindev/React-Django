@@ -10,6 +10,10 @@ describe("Input", () => {
     const tree = renderer.create(<Input type="text" />).toJSON();
     expect(tree).toMatchSnapshot();
   });
+  it("render text input simple", () => {
+    const tree = renderer.create(<Input type="text" theme="simple" />).toJSON();
+    expect(tree).toMatchSnapshot();
+  });
   it("render text input highlight", () => {
     const tree = renderer
       .create(<Input type="text" theme="highlight" />)

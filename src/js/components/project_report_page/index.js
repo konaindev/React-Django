@@ -61,6 +61,11 @@ export class ProjectReportPage extends Component {
       projectActions.removeTag(this.props.project.public_id)({ body: { word } })
     );
 
+  createTag = word =>
+    this.props.dispatch(
+      projectActions.createTag(this.props.project.public_id)({ body: { word } })
+    );
+
   renderSubheader = () => {
     const { project, share_info, backUrl, reportType } = this.props;
     const projectImage = this.getBuildingImage();

@@ -41,6 +41,10 @@ STAGING = "staging"
 PROD = "production"
 ENV = os.getenv("ENVIRONMENT", DEV)
 DOCKER_COMPOSE = os.getenv("DOCKER_COMPOSE")
+PATH_REF = "."
+if os.getenv("COMPOSER_AIRFLOW_ENV", False):
+    PATH_REF = "/home/airflow/gcs/dags"
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -231,8 +235,8 @@ LOGOUT_REDIRECT_URL = "/"
 # https://warehouse.python.org/project/whitenoise/
 # STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [os.path.join(BASE_DIR, "dist")]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIRS = []
 
 #
 # Storages for all other files
@@ -294,7 +298,7 @@ CACHES = {
 #
 
 GOOGLE_GEOCODE_API_KEY = required_env("GOOGLE_GEOCODE_API_KEY")
-GOOGLE_APPLICATION_CREDENTIALS = required_env("GOOGLE_APPLICATION_CREDENTIALS")
+# GCLOUD_SERVICE_KEY = required_env("GCLOUD_SERVICE_KEY")
 
 #
 # Analytics (hey, we might want these down the road).

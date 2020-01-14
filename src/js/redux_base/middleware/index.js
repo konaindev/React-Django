@@ -442,10 +442,7 @@ export const login = store => next => action => {
         console.log(response.status);
         if (response.status == 401) {
           console.log("BAD LOGIN");
-          alert(
-            "Oops! There was a problem with your login info, please try again."
-          );
-          next(auth.clearToken());
+          next(auth.loginError());
         } else {
           next(
             tokenActions.update({
@@ -467,6 +464,8 @@ export const login = store => next => action => {
         }
       })
       .catch(e => console.log("REFRESH TOKEN ERROR", e));
+  } else if (action.type == "LOGIN_ERROR") {
+    next(auth.clearToken());
   } else {
     next(action);
   }

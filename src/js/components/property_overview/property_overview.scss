@@ -26,12 +26,15 @@ $tags-highlight-bg: $gray-4;
 $tags-border-radius: 4px;
 $tags-spacing: 20px;
 $tags-padding: 7px 10px;
+$tags-padding-top: 7px;
 $tag-text-color: $highlight-gray-3;
 $tag-remove-size: 0.5rem;
 $tag-remove-spacing: 10px;
 $tag-remove-region-size: 1.125rem;
 $tag-remove-border-radius: 2px;
 $tag-remove-hover-color: $gray-6;
+$add-tag-text-spacing: 10px;
+$add-tag-text-height: 20px;
 
 .property-overview {
     width: 1000px;
@@ -89,6 +92,13 @@ $tag-remove-hover-color: $gray-6;
     margin-top: $panel-spacing;
 }
 
+.property-overview__tags {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
 .property-overview__tag {
     display: inline-flex;
     align-items: center;
@@ -96,6 +106,7 @@ $tag-remove-hover-color: $gray-6;
     margin: $tags-spacing $tags-spacing 0 0;
     border-radius: $tags-border-radius;
     box-shadow: none;
+    white-space: nowrap;
     &:first-child {
         margin-left: 0;
     }
@@ -188,4 +199,38 @@ $tag-remove-hover-color: $gray-6;
     color: $empty-text-color;
     font-size: $text-base;
     text-align: center;
+}
+
+.property-overview__add-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: $tags-padding-top 0 $tags-padding-top 0;
+    margin-top: $tags-spacing;
+    cursor: pointer;
+    white-space: nowrap;
+
+    &--input {
+        cursor: default;
+    }
+}
+
+.property-overview__add-tag-input {
+    display: inline-flex;
+    flex-grow: 1;
+    margin-top: $tags-spacing;
+}
+
+.property-overview__add-tag-text {
+    display: flex;
+    align-items: center;
+    margin-left: $add-tag-text-spacing;
+    color: $tag-text-color;
+    font-size: $text-sm;
+    line-height: $panel-header-height;
+}
+
+.property-overview__tooltip-anchor {
+    position: relative;
+    top: 2px;
+    margin-left: 10px;
 }

@@ -17,7 +17,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path, include
 from django.views.decorators.cache import cache_page
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
 
 from django_js_reverse.views import urls_js
 from rest_framework_simplejwt import views as jwt_views
@@ -61,6 +61,9 @@ urlpatterns = [
     path("api/v1/", include("remark.users.urls", namespace="v1_users")),
 
     # used in project admin page to generate links
-    path("projects/<project_id>/", TemplateView.as_view(), name="project_detail_page")
+    path("projects/<project_id>/", TemplateView.as_view(), name="project_detail_page"),
+
+    # no home page so forward to django admin
+    path("", RedirectView.as_view(url="admin/", permanent=True))
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

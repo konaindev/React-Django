@@ -4,6 +4,8 @@ const initialState = {
   fetchingProperties: true
 };
 
+let semaphore = false;
+
 const reducer = (state = initialState, action) => {
   let properties, selectedProperties;
 
@@ -19,6 +21,29 @@ const reducer = (state = initialState, action) => {
         fetchingProperties: true
       };
     case "AJAX_GET_DASHBOARD_PROPERTIES_SUCCESS":
+      // TODO: REMOVE THIS HACK!!!!
+      //       this is a super ugly, really-REALLY
+      //       bad hack due to the current state of the
+      //       react app and api. this is causing a side-effect
+      //       within a reducer...
+      //
+      //       the fix needs to be correcting the shape of the
+      //       redux state object+cleaning up the api patterns
+      //       and payloads...
+      if (action.payload?.user?.user_id && semaphore === false) {
+        const {
+          user_id,
+          email,
+          account_name,
+          is_superuser
+        } = action.payload.user;
+        window.analytics.identify(user_id, {
+          email,
+          account_name,
+          is_superuser
+        });
+        semaphore = true;
+      }
       return {
         ...state,
         ...action.payload,

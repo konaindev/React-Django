@@ -1,40 +1,78 @@
-from remark_airflow.insights.framework.core import Insight
-from remark_airflow.insights.impl.triggers import (
-    trigger_is_active_campaign,
-    trigger_health_status_is_changed,
-    trigger_usv_exe_off_track,
-    trigger_usv_exe_at_risk,
-    trigger_usv_exe_on_track,
-    trigger_retention_rate_health,
-    trigger_has_data_google_analytics,
-)
-from remark_airflow.insights.impl.utils import cop
-from remark_airflow.insights.impl.vars import (
-    var_campaign_health_status,
-    var_prev_health_status,
-    var_current_period_leased_rate,
-    var_target_leased_rate,
-    var_computed_kpis,
-    var_base_targets,
-    var_base_kpis,
-    var_usv_exe_health_status,
-    var_usv_exe,
-    var_target_usv_exe,
-    var_target_computed_kpis,
-    var_weeks_usv_exe_off_track,
-    var_kpi_usv_exe_off_track,
-    var_weeks_usv_exe_at_risk,
-    var_kpi_usv_exe_at_risk,
-    var_weeks_usv_exe_on_track,
-    var_kpi_usv_exe_on_track,
-    var_retention_rate_health,
-    var_retention_rate_health_weeks,
-    var_retention_rate_trend,
-    var_retention_rate,
-    var_target_retention_rate,
-    var_prev_retention_rate,
-    var_top_usv_referral,
-)
+try:
+    from insights.framework.core import Insight
+    from insights.impl.triggers import (
+        trigger_is_active_campaign,
+        trigger_health_status_is_changed,
+        trigger_usv_exe_off_track,
+        trigger_usv_exe_at_risk,
+        trigger_usv_exe_on_track,
+        trigger_retention_rate_health,
+        trigger_has_data_google_analytics,
+    )
+    from insights.impl.utils import cop
+    from insights.impl.vars import (
+        var_campaign_health_status,
+        var_prev_health_status,
+        var_current_period_leased_rate,
+        var_target_leased_rate,
+        var_computed_kpis,
+        var_base_targets,
+        var_base_kpis,
+        var_usv_exe_health_status,
+        var_usv_exe,
+        var_target_usv_exe,
+        var_target_computed_kpis,
+        var_weeks_usv_exe_off_track,
+        var_kpi_usv_exe_off_track,
+        var_weeks_usv_exe_at_risk,
+        var_kpi_usv_exe_at_risk,
+        var_weeks_usv_exe_on_track,
+        var_kpi_usv_exe_on_track,
+        var_retention_rate_health,
+        var_retention_rate_health_weeks,
+        var_retention_rate_trend,
+        var_retention_rate,
+        var_target_retention_rate,
+        var_prev_retention_rate,
+    )
+except ModuleNotFoundError:
+    from remark_airflow.dags.insights.framework.core import Insight
+    from remark_airflow.dags.insights.impl.triggers import (
+        trigger_is_active_campaign,
+        trigger_health_status_is_changed,
+        trigger_usv_exe_off_track,
+        trigger_usv_exe_at_risk,
+        trigger_usv_exe_on_track,
+        trigger_retention_rate_health,
+    )
+    from remark_airflow.dags.insights.impl.utils import cop
+    from remark_airflow.dags.insights.impl.vars import (
+        var_campaign_health_status,
+        var_prev_health_status,
+        var_current_period_leased_rate,
+        var_target_leased_rate,
+        var_computed_kpis,
+        var_base_targets,
+        var_base_kpis,
+        var_usv_exe_health_status,
+        var_usv_exe,
+        var_target_usv_exe,
+        var_target_computed_kpis,
+        var_weeks_usv_exe_off_track,
+        var_kpi_usv_exe_off_track,
+        var_weeks_usv_exe_at_risk,
+        var_kpi_usv_exe_at_risk,
+        var_weeks_usv_exe_on_track,
+        var_kpi_usv_exe_on_track,
+        var_retention_rate_health,
+        var_retention_rate_health_weeks,
+        var_retention_rate_trend,
+        var_retention_rate,
+        var_target_retention_rate,
+        var_prev_retention_rate,
+        var_top_usv_referral,
+    )
+
 
 lease_rate_against_target = Insight(
     name="lease_rate_against_target",

@@ -11,11 +11,8 @@ from remark.factories.analytics import create_google_provider
 from remark.factories.periods import create_periods
 from remark.factories.projects import create_project
 from remark.projects.constants import HEALTH_STATUS
-from remark_airflow.insights.framework.core import Insight
-from remark_airflow.insights.impl.projects.insights import (
-    retention_rate_health,
-    top_usv_referral,
-)
+from remark_airflow.dags.insights.framework.core import Insight
+from remark_airflow.dags.insights.impl.projects.insights import (retention_rate_health, top_usv_referral)
 
 from .projects import get_project_facts, get_project_insights
 
