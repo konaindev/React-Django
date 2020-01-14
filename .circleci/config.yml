@@ -118,6 +118,7 @@ jobs:
           name: Check for Task Errors
           command:  |
             python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_task_errors()"
+          no_output_timeout: 30m
       - run:
           name: Delete all items in test folder
           command:  |
