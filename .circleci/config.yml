@@ -353,18 +353,18 @@ workflows:
 #              ignore:
 #                - staging
 #                - master
-      - airflow-testing-preprod:
-          filters:
-            branches:
-              ignore:
-                - staging
-                - master
-#      - deploy-airflow:
+#      - airflow-testing-preprod:
 #          filters:
 #            branches:
-#                ignore:
-#                  - staging
-#                  - master
+#              ignore:
+#                - staging
+#                - master
+      - deploy-airflow:
+          filters:
+            branches:
+                ignore:
+                  - staging
+                  - master
 ##              only:
 ##                - l2-staging
 
