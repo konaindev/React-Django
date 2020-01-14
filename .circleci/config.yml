@@ -100,8 +100,9 @@ jobs:
       - compare-url/use:
           custom-logic:  |
             for ORB in ./*/: do
-              orbname=$(basename $ORB)
-              echo "$(orbname)"
+              echo $ORB
+#              orbname=$(basename $ORB)
+#              echo "$(orbname)"
 
 #      - run:
 #          command:  |
