@@ -96,17 +96,25 @@ jobs:
       - checkout
       - gcp-cli/initialize
       - gcp-cli/install
-      - run:
+      - compare-url/reconstruct
+      - compare-url/use:
+          attach-workspace: true
           command:  |
-            echo $CIRCLE_COMPARE_URL
-            CHANGE_CHECKER=./remark_airflow/changed-since-last-commit.py
-            SUB_DIR=./remark
-            if [[ `python3 ${CHANGE_CHECKER} ${SUB_DIR}` == "True" ]]; then
-            # run unit tests against ${SUB_DIR}
-              echo "CHANGES!!!!"
-            else
-              echo "NO CHANGE!!!"
-            fi
+            for ORB in ./*/: do
+              orbname=$(basename $ORB)
+              echo "$(orbname)"
+
+#      - run:
+#          command:  |
+#            echo $CIRCLE_COMPARE_URL
+#            CHANGE_CHECKER=./remark_airflow/changed-since-last-commit.py
+#            SUB_DIR=./remark
+#            if [[ `python3 ${CHANGE_CHECKER} ${SUB_DIR}` == "True" ]]; then
+#            # run unit tests against ${SUB_DIR}
+#              echo "CHANGES!!!!"
+#            else
+#              echo "NO CHANGE!!!"
+#            fi
 #      - run:
 #          name: Set COMPOSER_AIRFLOW_ENV environment
 #          command:  |
