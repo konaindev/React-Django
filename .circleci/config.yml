@@ -99,7 +99,7 @@ jobs:
       - compare-url/reconstruct
       - compare-url/use:
           custom-logic:  |
-            for ORB in ./remark/*/; do
+            for ORB in remarkably/remark/*/; do
               orbname=$(basename $ORB)
               echo "$(orbname)"
             done
