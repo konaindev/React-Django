@@ -174,6 +174,6 @@ def check_task_errors():
 
 
 
-# gcloud composer environments run remarkably-development --location us-central1 list_tasks -- -sd /home/airflow/gcs/data/test/weekly.py weekly_insights
+# gcloud composer environments run remarkably-development --location us-central1 list_tasks -- -sd /home/airflow/gcs/data/test/weekly_insights.py weekly_insights
 # gcloud composer environments run remarkably-development --location us-central1 test -- -sd /home/airflow/gcs/data/test weekly_insights weekly_insights_pro_ub61c1yb2wymh7na 2020-01-01
 
