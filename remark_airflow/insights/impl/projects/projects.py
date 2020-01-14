@@ -1,8 +1,5 @@
 from graphkit import compose
 
-# try:
-#     from insights.impl.vars import var_project
-# except ModuleNotFoundError:
 from remark_airflow.insights.impl.vars import var_project
 
 
