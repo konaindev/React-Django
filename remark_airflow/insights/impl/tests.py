@@ -5,10 +5,10 @@ from django.test import TestCase
 from remark.factories.projects import create_project
 from remark.factories.periods import create_periods
 
-try:
-    from insights.impl.vars import var_prev_health_status
-except ModuleNotFoundError:
-    from remark_airflow.dags.insights.impl.vars import var_prev_health_status
+# try:
+#     from insights.impl.vars import var_prev_health_status
+# except ModuleNotFoundError:
+from remark_airflow.insights import var_prev_health_status
 
 
 class VarPrevHealthStatusTestCase(TestCase):

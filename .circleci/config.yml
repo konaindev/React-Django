@@ -118,37 +118,42 @@ jobs:
       - run:
           name: Get DATABASE_URL
           command: echo "export DATABASE_URL=$(heroku config:get DATABASE_URL -a $HEROKU_APP_NAME)" >> $BASH_ENV
-      - run:
-          name: Add environment variables to Composer Environment
-          command: python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.export_environment_variables()"
-          no_output_timeout: 30m
+#      - run:
+#          name: Add environment variables to Composer Environment
+#          command: python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.export_environment_variables()"
+#          no_output_timeout: 30m
 
       # Copy airflow plugins, remark, data, and xls folders to gcloud bucket dags folder
       # TODO: Add logic to check for changes so updates are only done if there's been a change in the folder
-      - run:
-          command:    |
-              set -e
-              echo "Syncing plugins folder..."
-              if [ "$(ls -A ./remark_airflow/plugins)" ]; then
-                gsutil rsync -d -r ./remark_airflow/plugins gs://"$BUCKET"/plugins/
-              else
-                echo "EMPTY PLUGINS FOLDER"
-              fi
+#      - run:
+#          command:    |
+#              set -e
+#              echo "Syncing plugins folder..."
+#              if [ "$(ls -A ./remark_airflow/plugins)" ]; then
+#                gsutil rsync -d -r ./remark_airflow/plugins gs://"$BUCKET"/plugins/
+#              else
+#                echo "EMPTY PLUGINS FOLDER"
+#              fi
+#      - run:
+#          command:    |
+#            set -e
+#            echo "Syncing remark app into environment bucket..."
+#            gsutil rsync -d -r ./remark gs://"$BUCKET"/dags/remark
+#      - run:
+#          command:    |
+#            set -e
+#            echo "Syncing data folder into environment bucket..."
+#            gsutil rsync -d -r ./data gs://"$BUCKET"/dags/data
+#      - run:
+#          command:    |
+#            set -e
+#            echo "Syncing xls folder into environment bucket..."
+#            gsutil rsync -d -r ./xls gs://"$BUCKET"/dags/xls
       - run:
           command:    |
             set -e
-            echo "Syncing remark app into environment bucket..."
-            gsutil rsync -d -r ./remark gs://"$BUCKET"/dags/remark
-      - run:
-          command:    |
-            set -e
-            echo "Syncing data folder into environment bucket..."
-            gsutil rsync -d -r ./data gs://"$BUCKET"/dags/data
-      - run:
-          command:    |
-            set -e
-            echo "Syncing xls folder into environment bucket..."
-            gsutil rsync -d -r ./xls gs://"$BUCKET"/dags/xls
+            echo "Syncing insights folder into environment bucket..."
+            gsutil rsync -d -r ./remark_airflow/insights gs://"$BUCKET"/dags/remark_airflow/insights
 
       # Begin Testing Validity
       - run:
@@ -417,15 +422,15 @@ workflows:
 
   tests-only:
     jobs:
-      - build:
-          filters:
-            branches:
-              ignore:
-                - staging
-                - master
+#      - build:
+#          filters:
+#            branches:
+#              ignore:
+#                - staging
+#                - master
       - deploy-airflow-preprod:
-          requires:
-            - build
+#          requires:
+#            - build
           filters:
             branches:
               ignore:
