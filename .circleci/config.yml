@@ -359,12 +359,13 @@ workflows:
                 - staging
                 - master
 #      - deploy-airflow:
-#          requires:
-#           - airflow-testing-preprod
 #          filters:
 #            branches:
-#              only:
-#                - l2-staging
+#                ignore:
+#                  - staging
+#                  - master
+##              only:
+##                - l2-staging
 
 #  build-deploy:
 #    jobs:
@@ -394,19 +395,3 @@ workflows:
 #          filters:
 #            branches:
 #              only: staging
-#
-#  build-production:
-#    jobs:
-#      - build:
-#          context: deploy-production
-#          filters:
-#            branches:
-#              only: master
-#      - hold:
-#          type: approval
-#          requires:
-#            - build
-#      - deploy-production:
-#          context: deploy-production
-#          requires:
-#            - hold
