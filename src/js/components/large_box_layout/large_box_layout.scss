@@ -18,6 +18,7 @@
             transform-origin: 0 50% 0;
             background: $gray-4;
             box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.35);
+            transition: $transition-1;
         }
         .large-box__cta{
             opacity: 1;
@@ -31,7 +32,6 @@
     position: relative;
     border-width: 1px;
     border-color: #2b343d;
-    transition: $transition-1;
 
     &__top-line {
         color: $title-small-color;
