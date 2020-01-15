@@ -273,6 +273,13 @@ $edit-button-border: 1px solid $gray-9;
     background: $edit-button-color;
     border: $edit-button-border;
     border-radius: 4px;
+
+    &:hover, &:focus {
+        background-color: lighten($edit-button-color, 3%);
+    }
+    &:active {
+        background-color: darken($edit-button-color, 2%);
+    }
 }
 
 .account-settings__edit-button-text {

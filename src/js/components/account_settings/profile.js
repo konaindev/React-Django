@@ -16,6 +16,7 @@ import {
 import { formatPhone } from "../../utils/formatters";
 import { validateAddress } from "../../api/account_settings";
 import Button from "../button";
+import CompanyModal from "../company_modal";
 import Input from "../input";
 import MultiSelect from "../multi_select";
 import Select, { SelectSearch } from "../select";
@@ -87,7 +88,9 @@ export default class Profile extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      fieldsSubmitted: false
+      fieldsSubmitted: false,
+      isCompanyOpen: false,
+      isOfficeOpen: false
     };
     this.selectedCountry = COUNTRY_FIELDS.USA.short_name;
   }
@@ -262,6 +265,14 @@ export default class Profile extends React.PureComponent {
     });
   };
 
+  getCompanyValues = () => {
+    const p = this.getProfileValues(this.props.profile);
+    return {
+      company: p.company,
+      company_roles: p.company_roles
+    };
+  };
+
   showErrorMessage = (errors, touched) => {
     const errorFields = Object.keys(errors);
     const touchedFields = Object.keys(touched);
@@ -370,6 +381,14 @@ export default class Profile extends React.PureComponent {
     this.formik.setFieldTouched("office_state");
   };
 
+  openCompanyModal = () => {
+    this.setState({ isCompanyOpen: true });
+  };
+
+  closeCompanyModal = () => {
+    this.setState({ isCompanyOpen: false });
+  };
+
   render() {
     const { companyAddresses, profile } = this.props;
     return (
@@ -385,13 +404,6 @@ export default class Profile extends React.PureComponent {
           {({ errors, touched, values, setFieldTouched }) => (
             <div className="account-settings__tab-content">
               <Form method="post" autoComplete="off">
-                <AddressModal
-                  title="Confirm Office Address"
-                  callback={this.setSuccessMessage}
-                  onError={this.setErrorMessages}
-                  dispatch_type="API_ACCOUNT_PROFILE"
-                  updateValues={this.updateValues}
-                />
                 <div className="account-settings__tab-section">
                   <div className="account-settings__tab-title">
                     General Info
@@ -602,11 +614,19 @@ export default class Profile extends React.PureComponent {
               <div className="account-settings__tab-subsection">
                 <div className="account-settings__tab-title">
                   Company Info
-                  <Button className="account-settings__edit-button">
+                  <Button
+                    className="account-settings__edit-button"
+                    onClick={this.openCompanyModal}
+                  >
                     <div className="account-settings__edit-button-text">
                       Edit Company Info
                     </div>
                   </Button>
+                  <CompanyModal
+                    isOpen={this.state.isCompanyOpen}
+                    data={this.getCompanyValues()}
+                    onClose={this.closeCompanyModal}
+                  />
                 </div>
                 <div className="account-settings__field-grid  account-settings__field-grid--col-3">
                   <div className="account-settings__value-field">
@@ -626,7 +646,10 @@ export default class Profile extends React.PureComponent {
               <div className="account-settings__tab-subsection">
                 <div className="account-settings__tab-title">
                   Office Info
-                  <Button className="account-settings__edit-button">
+                  <Button
+                    className="account-settings__edit-button"
+                    onClick={() => {}}
+                  >
                     <div className="account-settings__edit-button-text">
                       Edit Office Info
                     </div>

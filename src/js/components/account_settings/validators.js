@@ -83,16 +83,7 @@ const userSchema = Yup.object().shape({
   phone_ext: Yup.string().label("Phone ext")
 });
 
-const campaignSchema = Yup.object().shape({
-  company: Yup.object({
-    value: Yup.string()
-      .max(255, "is too much length")
-      .required()
-      .label("Company")
-  }).label("Company"),
-  company_roles: Yup.array()
-    .required()
-    .label("Company role"),
+const officeSchema = Yup.object().shape({
   office_street: Yup.string()
     .required()
     .max(255)
