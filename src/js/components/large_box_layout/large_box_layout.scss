@@ -34,7 +34,7 @@
     transition: $transition-1;
     &__top-line {
         color: $title-small-color;
-        font-size: 12px;
+        font-size: $text-base;
         font-weight: $weight-bold;
         text-transform: uppercase;
         letter-spacing: 1px;
@@ -65,7 +65,6 @@
 
     &__content {
         :hover {
-            background-color: #2b343d;
             box-shadow: none;
         }
         text-align: start;
@@ -127,7 +126,6 @@
 .large-box__extra-container {
     pointer-events: none;
     :hover {
-        background-color: #2b343d;
         box-shadow: none;
     }
     position: absolute;
@@ -156,6 +154,7 @@
     line-height: 26px;
     text-align: center;
     border-radius: 0px 5px 0px 6px;
+    transition: $transition-1;
 }
 
 .large-box__title-container {
