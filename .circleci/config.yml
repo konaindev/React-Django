@@ -89,76 +89,76 @@ jobs:
   airflow-setup:
     docker:
       - image: google/cloud-sdk
-  steps:
-    - run:
-        name: Install Heroku Tools
-        command: curl https://cli-assets.heroku.com/install.sh | sh
-    - checkout
-    - gcp-cli/initialize
-    - gcp-cli/install
-    - run:
-        name: Set COMPOSER_AIRFLOW_ENV environment
-        command:  |
-          echo "export COMPOSER_AIRFLOW_ENV=True" >> $BASH_ENV
-    - run:
-        name: Pause running dags
-        command:    |
-          python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.pause_all_dags()" || echo "broken dag somewhere"
-    - run:
-        name: Compare and Update PyPi packages
-        command: python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_pypi_packages()"
-        no_output_timeout: 30m
-    - run:
-        name: Set Composer BUCKET
-        command:    |
-          get_bucket=$(gcloud composer environments describe $COMPOSER_ENV \
-          --location us-central1 \
-          --format="get(config.dagGcsPrefix)" | sed -e 's/gs:\/\///g' -e's/\/dags//g')
-          echo "export BUCKET=$get_bucket" >> $BASH_ENV
-    - run:
-        name: Get DATABASE_URL
-        command: echo "export DATABASE_URL=$(heroku config:get DATABASE_URL -a $HEROKU_APP_NAME)" >> $BASH_ENV
-    - run:
-        name: Add environment variables to Composer Environment
-        command: python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.export_environment_variables()"
-        no_output_timeout: 30m
+    steps:
+      - run:
+          name: Install Heroku Tools
+          command: curl https://cli-assets.heroku.com/install.sh | sh
+      - checkout
+      - gcp-cli/initialize
+      - gcp-cli/install
+      - run:
+          name: Set COMPOSER_AIRFLOW_ENV environment
+          command:  |
+            echo "export COMPOSER_AIRFLOW_ENV=True" >> $BASH_ENV
+      - run:
+          name: Pause running dags
+          command:    |
+            python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.pause_all_dags()" || echo "broken dag somewhere"
+      - run:
+          name: Compare and Update PyPi packages
+          command: python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.check_pypi_packages()"
+          no_output_timeout: 30m
+      - run:
+          name: Set Composer BUCKET
+          command:    |
+            get_bucket=$(gcloud composer environments describe $COMPOSER_ENV \
+            --location us-central1 \
+            --format="get(config.dagGcsPrefix)" | sed -e 's/gs:\/\///g' -e's/\/dags//g')
+            echo "export BUCKET=$get_bucket" >> $BASH_ENV
+      - run:
+          name: Get DATABASE_URL
+          command: echo "export DATABASE_URL=$(heroku config:get DATABASE_URL -a $HEROKU_APP_NAME)" >> $BASH_ENV
+      - run:
+          name: Add environment variables to Composer Environment
+          command: python3 -c "import remark_airflow.setup_utils as setup_utils; setup_utils.export_environment_variables()"
+          no_output_timeout: 30m
 
-    # Copy airflow plugins, remark, data, and xls folders to gcloud bucket dags folder
-    # TODO: Add logic to check for changes so updates are only done if there's been a change in the folder
-    - run:
-        name: Syncing plugins folder
-        command:    |
-          set -e
-          echo "Syncing plugins folder..."
-          if [ "$(ls -A ./remark_airflow/plugins)" ]; then
-            gsutil rsync -d -r ./remark_airflow/plugins gs://"$BUCKET"/plugins/
-          else
-            echo "EMPTY PLUGINS FOLDER"
-          fi
-    - run:
-        name: Syncing remark app into environment bucket
-        command:    |
-          set -e
-          echo "Syncing remark folder into environment bucket..."
-          gsutil rsync -d -r ./remark gs://"$BUCKET"/dags/remark
-    - run:
-        name: Syncing data folder into environment bucket
-        command:    |
-          set -e
-          echo "Syncing data folder into environment bucket..."
-          gsutil rsync -d -r ./data gs://"$BUCKET"/dags/data
-    - run:
-        name: Syncing xls folder into environment bucket
-        command:    |
-          set -e
-          echo "Syncing xls folder into environment bucket..."
-          gsutil rsync -d -r ./xls gs://"$BUCKET"/dags/xls
-    - run:
-        name: Syncing Insights folder into environment bucket
-        command:    |
-          set -e
-          echo "Syncing insights folder into environment bucket..."
-          gsutil rsync -d -r ./remark_airflow/insights gs://"$BUCKET"/dags/remark_airflow/insights
+      # Copy airflow plugins, remark, data, and xls folders to gcloud bucket dags folder
+      # TODO: Add logic to check for changes so updates are only done if there's been a change in the folder
+      - run:
+          name: Syncing plugins folder
+          command:    |
+            set -e
+            echo "Syncing plugins folder..."
+            if [ "$(ls -A ./remark_airflow/plugins)" ]; then
+              gsutil rsync -d -r ./remark_airflow/plugins gs://"$BUCKET"/plugins/
+            else
+              echo "EMPTY PLUGINS FOLDER"
+            fi
+      - run:
+          name: Syncing remark app into environment bucket
+          command:    |
+            set -e
+            echo "Syncing remark folder into environment bucket..."
+            gsutil rsync -d -r ./remark gs://"$BUCKET"/dags/remark
+      - run:
+          name: Syncing data folder into environment bucket
+          command:    |
+            set -e
+            echo "Syncing data folder into environment bucket..."
+            gsutil rsync -d -r ./data gs://"$BUCKET"/dags/data
+      - run:
+          name: Syncing xls folder into environment bucket
+          command:    |
+            set -e
+            echo "Syncing xls folder into environment bucket..."
+            gsutil rsync -d -r ./xls gs://"$BUCKET"/dags/xls
+      - run:
+          name: Syncing Insights folder into environment bucket
+          command:    |
+            set -e
+            echo "Syncing insights folder into environment bucket..."
+            gsutil rsync -d -r ./remark_airflow/insights gs://"$BUCKET"/dags/remark_airflow/insights
 
 
   # Tests validity of dags and tasks (does NOT test logic...logic testing covered in build step)
