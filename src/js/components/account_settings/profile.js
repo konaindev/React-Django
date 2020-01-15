@@ -298,7 +298,7 @@ export default class Profile extends React.PureComponent {
 
   setSuccessMessage = () => {
     this.formik.setSubmitting(false);
-    const message = "Your profile has been saved.";
+    const message = "General info has been saved.";
     this.setState({ message });
     this.props.dispatch(actions.requestSettings());
   };
