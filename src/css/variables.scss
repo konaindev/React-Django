@@ -192,6 +192,7 @@ $button-highlight-text-color: $gray-3;
 
 $button-secondary-bg-color: $gray-4;
 $button-secondary-text-color: $highlight-gray-3;
+$button-secondary-border-color: $gray-9;
 
 $button-disabled-light-bg: $gray-8;
 $button-disabled-light-text-color: $gray-6;
@@ -312,7 +313,7 @@ $weight-black: 900;
 $s0: 0;
 $s1: 0.25rem;
 $s2: 0.5rem; // 8px
-$s3: 0.75rem;
+$s3: 0.75rem; // 12px
 $s4: 1rem; // 16px
 $s5: 1.25rem; // 20px
 $s6: 1.5rem; // 24px
@@ -334,7 +335,7 @@ $s72: 18rem;
 $s90: 22.5rem; // 360px
 
 $border-radius-none: 0;
-$border-radius-sm: 0.125rem;
+$border-radius-sm: 0.125rem; // 2px
 $border-radius-default: 0.25rem; // 4px
 $border-radius-base: 0.375rem; // 6px
 $border-radius-lg: 0.5rem;
